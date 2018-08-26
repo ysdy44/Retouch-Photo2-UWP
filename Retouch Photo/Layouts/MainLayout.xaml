@@ -1,0 +1,92 @@
+﻿<Page
+    x:Class="Retouch_Photo.Layouts.MainLayout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
+    mc:Ignorable="d">
+
+    
+    <Grid  Background="{ThemeResource AppBackground}">
+
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+
+                <!--Phone-->
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+
+                        <Setter Target="BottomBorder.HorizontalAlignment" Value="Stretch"/>
+                        <Setter Target="BottomBorder.BorderThickness" Value="0, 1, 0, 0"/>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Pad-->
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+
+                        <Setter Target="BottomBorder.HorizontalAlignment" Value="Center"/>
+                        <Setter Target="BottomBorder.BorderThickness" Value="1,1,1,0"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--PC-->
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+
+                        <Setter Target="BottomBorder.HorizontalAlignment" Value="Center"/>
+                        <Setter Target="BottomBorder.BorderThickness" Value="1,1,1,0"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Border x:Name="TopBorder" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}">
+            <!--TopBar-->
+        </Border>
+
+        <Border x:Name="CenterBorder" Grid.Row="1">
+            <!--CenterContent-->
+        </Border>
+
+
+        <Grid Grid.Row="1" Margin="12" VerticalAlignment="Bottom" HorizontalAlignment="Center"  >
+            <controls:DropShadowPanel HorizontalAlignment="Center" OffsetY="3"
+                                    Color="{ThemeResource AppBorderBrushColor}">
+                <Rectangle RadiusX="25" RadiusY="25" 
+                           Height="{Binding ElementName=BottomBorder, Path=(extensions:FrameworkElementExtensions.ActualHeight)}"
+                           Width="{Binding ElementName=BottomBorder, Path=(extensions:FrameworkElementExtensions.ActualWidth)}"
+                           Fill="{ThemeResource AppBackground}"/>
+            </controls:DropShadowPanel>
+            <Border x:Name="BottomBorder" Padding="20,0" Height="50" MinWidth="200" 
+                    extensions:FrameworkElementExtensions.EnableActualSizeBinding="True">
+                <!--BottomBar-->
+            </Border>
+        </Grid>
+
+ 
+    
+</Grid>
+</Page>

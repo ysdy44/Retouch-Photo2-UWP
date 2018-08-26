@@ -1,0 +1,83 @@
+﻿<UserControl
+    x:Class="Retouch_Photo.Pickers.ColorPicker"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Retouch_Photo.Pickers"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="270"
+    d:DesignWidth="200"
+    Loaded="UserControl_Loaded">
+    
+    
+    <UserControl.Resources>
+
+        <!--Color-->
+        <SolidColorBrush x:Name="SolidColorBrushName" x:Key="SolidColorBrushKey" Color="White"/>
+
+        <!--Flyout-->
+        <Flyout x:Name="Dialog" Placement="Full" LightDismissOverlayMode="On">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <local:AlphaPicker x:Name="AlphaPicker" ColorChange="Picker_ColorChange" />
+                <local:PalettePicker x:Name="PalettePicker" Grid.Row="1" ColorChange="Picker_ColorChange"/>
+            </Grid>
+        </Flyout>
+        
+    </UserControl.Resources>
+
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="4"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!--Head-->
+        <Grid Height="36">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Ellipse x:Name="Ellipse" Width="22" Height="22" Fill="{StaticResource SolidColorBrushKey}" />
+                <Ellipse StrokeThickness="4" Width="25" Height="25" Stroke="Gray"/>
+                <Ellipse StrokeThickness="2" Width="23" Height="23" Stroke="White"/>
+                <Border Background="Transparent" Tapped="Ellipse_Tapped"/>
+            </Grid>
+            <TextBlock Grid.Column="1" Text="Color" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <local:StrawPicker  Grid.Column="2" ColorChangeStarted="StrawPicker_ColorChangeStarted" ColorChangeDelta="StrawPicker_ColorChangeDelta" ColorChangeCompleted="StrawPicker_ColorChangeCompleted"/>
+        </Grid>
+
+        <!--Toggle-->
+        <Grid Grid.Row="1" Height="34" CornerRadius="15" BorderThickness="0,0,1,2"  BorderBrush="#44000000"  Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <ToggleButton x:Name="SwatchesButton" Grid.Column="0" Content="&#xE138;" FontFamily="Segoe UI Symbol" BorderThickness="0" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="SwatchesButton_Click"/>
+            <ToggleButton x:Name="WheelButton" Grid.Column="1" Content="&#xE2B1;" FontSize="16" FontFamily="Segoe MDL2 Assets" BorderThickness="0" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Click="WheelButton_Click"/>
+            <ToggleButton x:Name="RGBButton" Grid.Column="2" Content="RGB" FontSize="13" BorderThickness="0" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="RGBButton_Click"/>
+            <ToggleButton x:Name="HSLButton" Grid.Column="3" Content="HSL" FontSize="13" BorderThickness="0" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="HSLButton_Click"/>
+        </Grid>
+
+        <!--Body-->
+        <Grid Grid.Row="3">
+            <local:SwatchesPicker x:Name="SwatchesPicker" Visibility="Collapsed" ColorChange="Picker_ColorChange"/>
+            <local:WheelPicker x:Name="WheelPicker" Visibility="Collapsed" ColorChange="Picker_ColorChange"/>
+            <local:RGBPicker x:Name="RGBPicker" Visibility="Collapsed" ColorChange="Picker_ColorChange"/>
+            <local:HSLPicker x:Name="HSLPicker" Visibility="Collapsed" ColorChange="Picker_ColorChange"/>
+        </Grid>
+       
+        
+    </Grid>
+</UserControl>

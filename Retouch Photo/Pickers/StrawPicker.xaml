@@ -1,0 +1,43 @@
+﻿<UserControl
+    x:Class="Retouch_Photo.Pickers.StrawPicker"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Retouch_Photo.Pickers"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="50">
+
+    <UserControl.Resources>
+
+        <!--Color-->
+        <SolidColorBrush x:Name="SolidColorBrushName" x:Key="SolidColorBrushKey" Color="White"/>
+        <SolidColorBrush x:Name="SolidColorBrushNameOld" x:Key="SolidColorBrushKeyOld" Color="White"/>
+
+        <!--Popup-->
+        <Popup x:Name="_popup" Visibility="Collapsed" IsOpen="False">
+            <Grid >
+                <Ellipse Width = "100" Height="100" Stroke="Black" StrokeThickness="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Ellipse Width="90" Height="90" Stroke="{StaticResource SolidColorBrushKeyOld}" StrokeThickness="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Ellipse Width="90" Height="90" Stroke="{StaticResource SolidColorBrushKey}" StrokeThickness="8" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Ellipse.Clip>
+                        <RectangleGeometry Rect = "0,0,90,45" />
+                    </Ellipse.Clip >
+                </Ellipse >
+            </Grid >
+        </Popup>
+
+    </UserControl.Resources>
+
+    <Border Background="Transparent" 
+            PointerPressed="Border_PointerPressed" 
+            
+            ManipulationMode="All" 
+            ManipulationStarted="Border_ManipulationStarted"
+            ManipulationDelta="Border_ManipulationDelta"  
+            ManipulationCompleted="Border_ManipulationCompleted">
+        <FontIcon Glyph="&#xEF3C;" FontFamily="Segoe MDL2 Assets"/>
+    </Border>
+
+</UserControl>

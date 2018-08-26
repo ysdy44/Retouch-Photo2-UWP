@@ -1,0 +1,418 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{1353AF55-E0F3-442A-9EEF-9087FAAD6F19}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Retouch_Photo</RootNamespace>
+    <AssemblyName>Retouch Photo</AssemblyName>
+    <DefaultLanguage>zh-CN</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
+    <PackageCertificateKeyFile>Retouch Photo_TemporaryKey.pfx</PackageCertificateKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LayerControl.xaml.cs">
+      <DependentUpon>LayerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SelectionControl.xaml.cs">
+      <DependentUpon>SelectionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToolControl.xaml.cs">
+      <DependentUpon>ToolControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\AndroidDialog.xaml.cs">
+      <DependentUpon>AndroidDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\GameDialog.xaml.cs">
+      <DependentUpon>GameDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\DrawLayout.xaml.cs">
+      <DependentUpon>DrawLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\MainLayout.xaml.cs">
+      <DependentUpon>MainLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DrawPage.xaml.cs">
+      <DependentUpon>DrawPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Layer.cs" />
+    <Compile Include="Pickers\AlphaPicker.xaml.cs">
+      <DependentUpon>AlphaPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pickers\ColorPicker.xaml.cs">
+      <DependentUpon>ColorPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pickers\HSL.cs" />
+    <Compile Include="Pickers\HSLPicker.xaml.cs">
+      <DependentUpon>HSLPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pickers\NumberPicker.xaml.cs">
+      <DependentUpon>NumberPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pickers\PaletteBase.cs" />
+    <Compile Include="Pickers\PaletteHue.cs" />
+    <Compile Include="Pickers\PaletteLightness.cs" />
+    <Compile Include="Pickers\PalettePicker.xaml.cs">
+      <DependentUpon>PalettePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pickers\PaletteSaturation.cs" />
+    <Compile Include="Pickers\RGBPicker.xaml.cs">
+      <DependentUpon>RGBPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pickers\StrawPicker.xaml.cs">
+      <DependentUpon>StrawPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pickers\SwatchesPicker.xaml.cs">
+      <DependentUpon>SwatchesPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pickers\TouchSlider.xaml.cs">
+      <DependentUpon>TouchSlider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pickers\WheelPicker.xaml.cs">
+      <DependentUpon>WheelPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Dialogs\WelcomeContentDialog.xaml.cs">
+      <DependentUpon>WelcomeContentDialog.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <None Include="Retouch Photo_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\BadgeLogo.scale-100.png" />
+    <Content Include="Assets\BadgeLogo.scale-125.png" />
+    <Content Include="Assets\BadgeLogo.scale-150.png" />
+    <Content Include="Assets\BadgeLogo.scale-200.png" />
+    <Content Include="Assets\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\LargeTile.scale-100.png" />
+    <Content Include="Assets\LargeTile.scale-125.png" />
+    <Content Include="Assets\LargeTile.scale-150.png" />
+    <Content Include="Assets\LargeTile.scale-200.png" />
+    <Content Include="Assets\LargeTile.scale-400.png" />
+    <Content Include="Assets\SmallTile.scale-100.png" />
+    <Content Include="Assets\SmallTile.scale-125.png" />
+    <Content Include="Assets\SmallTile.scale-150.png" />
+    <Content Include="Assets\SmallTile.scale-200.png" />
+    <Content Include="Assets\SmallTile.scale-400.png" />
+    <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-125.png" />
+    <Content Include="Assets\SplashScreen.scale-150.png" />
+    <Content Include="Assets\SplashScreen.scale-400.png" />
+    <Content Include="Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square150x150Logo.scale-125.png" />
+    <Content Include="Assets\Square150x150Logo.scale-150.png" />
+    <Content Include="Assets\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-48.png" />
+    <Content Include="Assets\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Square44x44Logo.scale-125.png" />
+    <Content Include="Assets\Square44x44Logo.scale-150.png" />
+    <Content Include="Assets\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
+    <Content Include="Assets\StoreLogo.backup.png" />
+    <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\StoreLogo.scale-125.png" />
+    <Content Include="Assets\StoreLogo.scale-150.png" />
+    <Content Include="Assets\StoreLogo.scale-200.png" />
+    <Content Include="Assets\StoreLogo.scale-400.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-125.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-150.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="Icon\Avatar.jpg" />
+    <Content Include="Icon\Brushes\AcrylicElementBrush.png" />
+    <Content Include="Icon\Brushes\AcrylicWindowBrush.png" />
+    <Content Include="Icon\Brushes\Color.png" />
+    <Content Include="Icon\Brushes\InkToolbarBrush.png" />
+    <Content Include="Icon\Brushes\LegacyBrush.png" />
+    <Content Include="Icon\Brushes\OthersBrush.png" />
+    <Content Include="Icon\Brushes\RevealBackgroundBrush.png" />
+    <Content Include="Icon\Brushes\RevealBorderBrush.png" />
+    <Content Include="Icon\Brushes\SystemBrush.png" />
+    <Content Include="Icon\Colors\AlphaPicker.png" />
+    <Content Include="Icon\Colors\ColorPicker.png" />
+    <Content Include="Icon\Colors\HSLPicker.png" />
+    <Content Include="Icon\Colors\NumberPicker.png" />
+    <Content Include="Icon\Colors\PalettePicker.png" />
+    <Content Include="Icon\Colors\RGBPicker.png" />
+    <Content Include="Icon\Colors\StrawPicker.png" />
+    <Content Include="Icon\Colors\SwatchesPicker.png" />
+    <Content Include="Icon\Colors\TouchSlider.png" />
+    <Content Include="Icon\Colors\WheelPicker.png" />
+    <Content Include="Icon\Control\ExpandTextView.png" />
+    <Content Include="Icon\Control\PopupMenu.png" />
+    <Content Include="Icon\Control\TabButton.png" />
+    <Content Include="Icon\Helpers\FontWeight.png" />
+    <Content Include="Icon\Helpers\Stretch.png" />
+    <Content Include="Icon\Helpers\Transition.png" />
+    <Content Include="Icon\Helpers\Transition\Common.png" />
+    <Content Include="Icon\Helpers\Transition\Continuum.png" />
+    <Content Include="Icon\Helpers\Transition\DrillIn.png" />
+    <Content Include="Icon\Helpers\Transition\Entrance.png" />
+    <Content Include="Icon\Helpers\Transition\Slide.png" />
+    <Content Include="Icon\Helpers\Transition\Suppress.png" />
+    <Content Include="Icon\Helpers\Transition\Transition.png" />
+    <Content Include="Icon\HERO.jpg" />
+    <Content Include="Icon\HEROS.jpg" />
+    <Content Include="Icon\iconL.png" />
+    <Content Include="Icon\Library\DataTemplateAdaptiver.png" />
+    <Content Include="Icon\Library\DetailsView.png" />
+    <Content Include="Icon\Library\Palette.png" />
+    <Content Include="Icon\Library\ScalableGrid.png" />
+    <Content Include="Icon\Logo.png" />
+    <Content Include="Icon\LogoB.png" />
+    <Content Include="Icon\LogoD.png" />
+    <Content Include="Icon\Others\ToolKit.PNG" />
+    <Content Include="Icon\Others\Win2d.PNG" />
+    <Content Include="Icon\pexels-photo-688659.jpg" />
+    <Content Include="Icon\Photos\BisonBadlandsChillin.jpg" />
+    <Content Include="Icon\Photos\ColumbiaRiverGorge.jpg" />
+    <Content Include="Icon\Photos\GrandTetons.jpg" />
+    <Content Include="Icon\Photos\MilkyWayStHelensHikePurple.jpg" />
+    <Content Include="Icon\Photos\NorthernCascadesReflection.jpg" />
+    <Content Include="Icon\Photos\Owl.jpg" />
+    <Content Include="Icon\Photos\ShootingOnAutoOnTheDrone.jpg" />
+    <Content Include="Icon\Photos\SmithnRockDownTheRiverView.jpg" />
+    <Content Include="Icon\Photos\SnowyInterbayt.jpg" />
+    <Content Include="Icon\Photos\SpeedTripleAtristsPoint.jpg" />
+    <Content Include="Icon\Shadow.png" />
+    <Content Include="Icon\SplashScreen.png" />
+    <Content Include="Icon\Square.png" />
+    <Content Include="Icon\Styles\ButtonStyle.png" />
+    <Content Include="Icon\Styles\TextBlockStyle.png" />
+    <Content Include="Icon\Template\FloatActionButton.png" />
+    <Content Include="Icon\Template\FlyoutTemplate.png" />
+    <Content Include="Icon\Template\SplitPanel.png" />
+    <Content Include="Icon\Template\TagChip.png" />
+    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Controls\LayerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SelectionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ToolControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\AndroidDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\GameDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Layouts\DrawLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Layouts\MainLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DrawPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\AlphaPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\ColorPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\HSLPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\NumberPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\PalettePicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\RGBPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\StrawPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\SwatchesPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\TouchSlider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\WheelPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\WelcomeContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\Transition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.DeveloperTools">
+      <Version>4.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Animations">
+      <Version>3.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>3.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Win2D.uwp">
+      <Version>1.23.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Library\" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

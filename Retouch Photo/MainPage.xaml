@@ -1,0 +1,202 @@
+﻿<Page
+    x:Class="Retouch_Photo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Retouch_Photo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:con="using:Retouch_Photo.Controls"
+    xmlns:lay="using:Retouch_Photo.Layouts"
+    xmlns:models="using:Retouch_Photo.Models"
+    xmlns:dia="using:Retouch_Photo.Dialogs"
+    mc:Ignorable="d" 
+    >
+
+
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition DefaultNavigationTransitionInfo="{StaticResource AppDrillInTransition}"/>
+        </TransitionCollection>
+    </Page.Transitions>
+
+
+    <Grid  Background="{ThemeResource AppForeground}">
+
+        <lay:MainLayout x:Name="MainLayout">
+
+            <lay:MainLayout.CenterContent>
+                <Grid>
+                    
+                    <GridView IsItemClickEnabled="True" ItemClick="GridView_ItemClick">
+
+                        <GridView.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <Grid Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <Border Background="#53000000" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="22" >
+                                        <TextBlock Text="{x:Bind}"/>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="Width" Value="100"/>
+                                <Setter Property="Height" Value="100"/>
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Margin" Value="10"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Background" Value="{StaticResource AppBarBackgroundThemeBrush}"/>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+
+                        <x:String>sddfefre</x:String>
+                    </GridView>
+                    
+                    <StackPanel Opacity="0.1" VerticalAlignment="Center">
+                        <TextBlock Text="Cloning LottieUWP" FontSize="44" FontWeight="Light" HorizontalAlignment="Center"/>
+                        <ProgressBar Value="44" MaxWidth="800" Height="6" Margin="30,26,30,14"/>
+                        <TextBlock Text="Receiving objects: 8Y (281/3224), 484.01 KiBl 16.O0 KiB/s"  FontWeight="Normal" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    
+                </Grid>
+            </lay:MainLayout.CenterContent>
+
+            <lay:MainLayout.TopBar>
+                <Grid >
+                    <Button  Height="50" Width="60" Content="&#xE117;" FontSize="20" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="Button_Tapped"/>
+                    <Button x:Name="PopupButton" HorizontalAlignment="Right" Grid.Column="2" Height="50" Width="60" Content="&#xE712;" FontSize="24" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="PopupButton_Tapped"/>
+                </Grid>
+            </lay:MainLayout.TopBar>
+
+            <lay:MainLayout.BottomBar>
+                <StackPanel Orientation="Horizontal">
+                     <Button Width="60" Height="Auto" VerticalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="16"/>
+                            </Grid.RowDefinitions>
+                            <FontIcon Glyph="&#xE109;" FontSize="22" FontFamily="Segoe MDL2 Assets"  Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+                            <TextBlock Grid.Row="1" Text="Add" FontSize="12" FontWeight="Medium" FontFamily="Microsoft YaHei UI"/>
+                        </Grid>
+                    </Button>
+                    <Button Width="60" Height="Auto" VerticalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}">
+                        <StackPanel>
+                            <FontIcon Glyph="&#xEB9F;" FontSize="24" FontFamily="Segoe MDL2 Assets"  Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+                            <TextBlock Text="Pictures" FontSize="12" FontWeight="Medium" FontFamily="Microsoft YaHei UI"/>
+                        </StackPanel>
+                    </Button>
+                    
+                    <AppBarSeparator/>
+
+                    <Button Width="60" Height="Auto" VerticalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}">
+                        <StackPanel>
+                            <PathIcon Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" HorizontalAlignment="Center" Data="M3.126,9.217l-1.686,0l0,9.404l18.587,0l0,-9.404l-1.923,0l0,-1.446l3.363,0l0,12.29l-21.467,0l0,-10.844l0,-1.446l3.126,0l0,1.446Zm8.208,5.959l-1.44,0l0,-12.413l-4.239,3.998l-0.99,-1.009l5.941,-5.752l0.008,0.008l0.007,-0.008l5.961,5.752l-1.01,1.009l-4.238,-3.998l0,12.413Z"/>
+                            <TextBlock Text="Save" FontSize="12" FontWeight="Medium" FontFamily="Microsoft YaHei UI"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Width="60" Height="Auto" VerticalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}">
+                        <StackPanel>
+                            <FontIcon Glyph="&#xE72D;" FontSize="23" FontFamily="Segoe MDL2 Assets"  Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+                            <TextBlock Text="Share" FontSize="12" FontWeight="Medium" FontFamily="Microsoft YaHei UI"/>
+                        </StackPanel>
+                    </Button>
+                    
+                    <AppBarSeparator/>
+
+                    <Button Width="60" Height="Auto" VerticalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}">
+                        <StackPanel>
+                            <FontIcon Glyph="&#xE107;" FontSize="20" FontFamily="Segoe MDL2 Assets"  Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+                            <TextBlock Text="Delete" FontSize="12" FontWeight="Medium" FontFamily="Microsoft YaHei UI"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Width="60" Height="Auto" VerticalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}">
+                        <StackPanel>
+                            <FontIcon Glyph="&#xE16F;" FontSize="20" FontFamily="Segoe MDL2 Assets"  Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+                            <TextBlock Text="Copy" FontSize="12" FontWeight="Medium" FontFamily="Microsoft YaHei UI"/>
+                        </StackPanel>
+                    </Button> 
+
+                    <AppBarSeparator/>
+
+                    <Button Width="60" Height="Auto" VerticalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}">
+                        <StackPanel>
+                            <FontIcon Glyph="&#xE188;" FontSize="21" FontFamily="Segoe UI Symbol"  Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+                            <TextBlock Text="Folder" FontSize="12" FontWeight="Medium" FontFamily="Microsoft YaHei UI"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Width="60" Height="Auto" VerticalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}">
+                        <StackPanel>
+                            <FontIcon Glyph="&#xE197;" FontSize="22" FontFamily="Segoe UI Symbol"  Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+                            <TextBlock Text="Move" FontSize="12" FontWeight="Medium" FontFamily="Microsoft YaHei UI"/>
+                        </StackPanel>
+                    </Button> 
+
+                </StackPanel>
+             </lay:MainLayout.BottomBar>
+
+        </lay:MainLayout>
+
+        <!--Dialog-->
+        <dia:GameDialog x:Name="GameDialog" Tittle="Title">
+            <dia:GameDialog.CenterContent>
+
+                <Grid Padding="18">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="12"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock  Grid.Row="0" Text="Modifier" FontSize="18" FontWeight="Medium" Foreground="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Grid.Column="0" Content="Ctrl" FontWeight="Medium"/>
+                        <CheckBox Grid.Column="1" Content="Shift" FontWeight="Medium"/>
+                        <CheckBox Grid.Column="2" Content="Alt" FontWeight="Medium"/>
+                        <CheckBox Grid.Column="3" Content="Win" FontWeight="Medium"/>
+                    </Grid>
+                    <TextBlock  Grid.Row="2" Text="Key" FontSize="18" FontWeight="Medium" Foreground="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}"/>
+                    <ComboBox Grid.Row="3" FontWeight="Medium" BorderBrush="{ThemeResource InkToolbarAccentColorThemeBrush}" Background="{ThemeResource SystemControlBackgroundAltHighBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                        <ComboBox.RenderTransform>
+                            <CompositeTransform SkewX="-20"/>
+                        </ComboBox.RenderTransform>
+                        <ComboBoxItem Content="AAA"/>
+                        <ComboBoxItem Content="BBB"/>
+                        <ComboBoxItem Content="CCC"/>
+                        <ComboBoxItem Content="DDD"/>
+                        <ComboBoxItem Content="EEE"/>
+                        <ComboBoxItem Content="FFF"/>
+                        <ComboBoxItem Content="GGG"/>
+                    </ComboBox>
+                </Grid>            </dia:GameDialog.CenterContent>
+        </dia:GameDialog>
+        <!--Dialog-->
+        <dia:AndroidDialog x:Name="AndroidDialog" Tittle="the Deep Dark Fantasy">
+            <dia:AndroidDialog.CenterContent>
+                <StackPanel>
+                    <TextBlock TextWrapping="Wrap" Text="dvdfvervwefeferergwregv  "/>
+                    <TextBlock TextWrapping="Wrap" Text="dvdfvervwefeferergwregv  "/>
+                    <TextBlock TextWrapping="Wrap" Text="dvdfvervwefeferergwregv  "/>
+                    <TextBlock TextWrapping="Wrap" Text="dvdfvervwefeferergwregv  "/>
+                    <TextBlock TextWrapping="Wrap" Text="dvdfvervwefeferergwregv  "/>
+                    <TextBlock TextWrapping="Wrap" Text="dvdfvervwefeferergwregv  "/>
+                    <TextBlock TextWrapping="Wrap" Text="dvdfvervwefeferergwregv  "/>
+                </StackPanel>       
+            </dia:AndroidDialog.CenterContent>
+        </dia:AndroidDialog>
+
+    </Grid>
+
+</Page>

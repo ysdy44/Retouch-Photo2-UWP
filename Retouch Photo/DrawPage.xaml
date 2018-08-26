@@ -1,0 +1,104 @@
+﻿<Page
+    x:Class="Retouch_Photo.DrawPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:con="using:Retouch_Photo.Controls"
+    xmlns:dia="using:Retouch_Photo.Dialogs"
+    xmlns:lay="using:Retouch_Photo.Layouts"
+    xmlns:pic="using:Retouch_Photo.Pickers"
+    mc:Ignorable="d" 
+  > 
+    
+    
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition DefaultNavigationTransitionInfo="{StaticResource AppDrillInTransition}"/>
+        </TransitionCollection>
+    </Page.Transitions>
+
+
+
+    <Grid >
+
+
+
+        <lay:DrawLayout >
+
+            <lay:DrawLayout.LeftPane>
+                <con:ToolControl/>
+            </lay:DrawLayout.LeftPane>
+
+            <lay:DrawLayout.RightPane >
+                <con:LayerControl/>
+            </lay:DrawLayout.RightPane>
+
+            <lay:DrawLayout.CenterContent>
+                <Grid>
+
+                    
+
+                </Grid>
+            </lay:DrawLayout.CenterContent>
+
+            <lay:DrawLayout.BottomBar>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="50"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Text" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Slider  Grid.Column="1" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackground}" Style="{StaticResource AppOpacitySliderStyle}"/>
+
+                    <Button x:Name="OK" Grid.Column="2" FontSize="22" Content="&#xEC61;" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" />
+                    <Button x:Name="Cancel" Grid.Column="3" FontSize="22" Content="&#xEB90;" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" />
+
+                </Grid>
+            </lay:DrawLayout.BottomBar>
+
+
+            
+            <lay:DrawLayout.TopLeftPane>
+                <Button  Height="50" Width="60" Content="&#xE0D5;" FontSize="20" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="Back_Tapped"/>
+            </lay:DrawLayout.TopLeftPane>
+
+            <lay:DrawLayout.TopRightPane>
+                <Button x:Name="PopupButton" Grid.Column="2" Height="50" Width="60" Content="&#xE712;" FontSize="24" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="PopupButton_Tapped"/>
+            </lay:DrawLayout.TopRightPane>
+
+            <lay:DrawLayout.TopLeftStackBar>
+                <StackPanel Orientation="Horizontal">
+                    <Button Height="50" Width="60" Content="&#xE105;" FontSize="22" Style="{ThemeResource NavigationBackButtonNormalStyle}" Foreground="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" />
+                    <Button x:Name="UndoButton" Height="50" Width="60" Content="&#xE10E;" FontSize="20" Style="{ThemeResource NavigationBackButtonNormalStyle}" Foreground="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" />
+                    <Button x:Name="RedoButton" Height="50" Width="60" Content="&#xE10D;" FontSize="20" Style="{ThemeResource NavigationBackButtonNormalStyle}" Foreground="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" />
+                </StackPanel>
+            </lay:DrawLayout.TopLeftStackBar>
+
+            
+            
+            <lay:DrawLayout.SelectionPane>
+                <con:SelectionControl/>
+            </lay:DrawLayout.SelectionPane>
+
+            <lay:DrawLayout.EffectsPane>
+                <pic:ColorPicker Width="200" Height="270"/>
+            </lay:DrawLayout.EffectsPane>
+
+            <lay:DrawLayout.OthersPane>
+                <Grid Width="400" Height="400">
+                </Grid>
+            </lay:DrawLayout.OthersPane>
+
+        </lay:DrawLayout>
+        
+        
+        <dia:WelcomeContentDialog x:Name="WelcomeContentDialog" />
+
+        
+    </Grid>
+</Page>
