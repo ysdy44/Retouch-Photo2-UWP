@@ -20,9 +20,9 @@
             <Setter Property="Padding" Value="12,5,0,7" />
             <Setter Property="MinWidth" Value="{ThemeResource ComboBoxThemeMinWidth}" />
             <Setter Property="Foreground" Value="{ThemeResource ComboBoxForeground}" />
-            <Setter Property="Background" Value="{ThemeResource ComboBoxBackground}" />
-            <Setter Property="BorderBrush" Value="{ThemeResource ComboBoxBorderBrush}" />
-            <Setter Property="BorderThickness" Value="{ThemeResource ComboBoxBorderThemeThickness}" />
+            <Setter Property="Background" Value="{ThemeResource AppForeground}" />
+            <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
             <Setter Property="TabNavigation" Value="Once" />
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
@@ -32,11 +32,10 @@
             <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
             <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
             <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
-            <Setter Property="UseSystemFocusVisuals" Value="{ThemeResource IsApplicationFocusVisualKindReveal}" />
             <Setter Property="ItemsPanel">
                 <Setter.Value>
                     <ItemsPanelTemplate>
@@ -208,14 +207,13 @@
                                 <TextBlock x:Name="PlaceholderTextBlock" Text="{TemplateBinding PlaceholderText}" Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue={ThemeResource ComboBoxPlaceHolderForeground}}" />
                             </ContentPresenter>
                             <FontIcon x:Name="DropDownGlyph" Grid.Row="1" Grid.Column="1" IsHitTestVisible="False" Margin="0,10,10,10" Foreground="{ThemeResource ComboBoxDropDownGlyphForeground}" FontFamily="{ThemeResource SymbolThemeFontFamily}" FontSize="12" Glyph="&#xE0E5;" HorizontalAlignment="Right" VerticalAlignment="Center" AutomationProperties.AccessibilityView="Raw" />
-                            <Popup x:Name="Popup">
-                                <!--Acrylic-->
-                                <Border x:Name="PopupBorder" Background="{ThemeResource SystemControlAcrylicElementBrush}"
-                                        BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="0,-1,0,-1" HorizontalAlignment="Stretch">
-                                    <ScrollViewer x:Name="ScrollViewer" Foreground="{ThemeResource ComboBoxDropDownForeground}" MinWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.DropDownContentMinWidth}" VerticalSnapPointsType="OptionalSingle" VerticalSnapPointsAlignment="Near" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" ZoomMode="Disabled" AutomationProperties.AccessibilityView="Raw">
+                            <Popup x:Name="Popup" >
+                                <Border  x:Name="PopupBorder" Background="{ThemeResource AppBackground}"
+                                        BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"  Margin="0,-1,0,-1" HorizontalAlignment="Stretch">
+                                         <ScrollViewer Foreground="{ThemeResource ComboBoxDropDownForeground}" MinWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.DropDownContentMinWidth}" VerticalSnapPointsType="OptionalSingle" VerticalSnapPointsAlignment="Near" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" ZoomMode="Disabled" AutomationProperties.AccessibilityView="Raw">
                                         <ItemsPresenter Margin="{ThemeResource ComboBoxDropdownContentMargin}" />
                                     </ScrollViewer>
-                                </Border>
+                                 </Border>
                             </Popup>
 
                         </Grid>
@@ -241,13 +239,13 @@
                             </StackPanel>
 
                             <TextBlock Text="Name" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <TextBox Text="{x:Bind Name,Mode=TwoWay}" FontWeight="Medium" HorizontalAlignment="Stretch" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackground}"/>
+                            <TextBox Text="{x:Bind Name,Mode=TwoWay}" FontWeight="Medium" HorizontalAlignment="Stretch" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}"/>
 
                             <TextBlock Text="Opacity" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <Slider Value="{x:Bind Opacity,Mode=TwoWay}" TickFrequency="25" TickPlacement="Inline" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackground}" Style="{StaticResource AppOpacitySliderStyle}" />
+                            <Slider Value="{x:Bind Opacity,Mode=TwoWay}" TickFrequency="25" TickPlacement="Inline" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" Style="{StaticResource AppOpacitySliderStyle}" />
 
                             <TextBlock Text="BlendMode" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <ComboBox SelectedIndex="{x:Bind BlendIndex,Mode=TwoWay}" FontWeight="Medium" HorizontalAlignment="Stretch" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackground}" Style="{StaticResource AppComboBoxStyle}">
+                            <ComboBox SelectedIndex="{x:Bind BlendIndex,Mode=TwoWay}" Style="{StaticResource AppComboBoxStyle}">
                                 <!--正常-->
                                 <ComboBoxItem  Content="Normal" BorderBrush="{ThemeResource AppBorderBrush}" BorderThickness="0,0,0,2"/>
 
@@ -312,7 +310,7 @@
                             </ComboBox>
 
                             <TextBlock Text="Layer" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <Grid  Height="36" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackground}">
+                            <Grid  Height="36" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="1*"/>
@@ -357,10 +355,10 @@
                         <StackPanel  Width="190" >
 
                             <TextBlock Text="Opacity" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <Slider Value="{x:Bind Opacity,Mode=TwoWay}" TickFrequency="25" TickPlacement="Inline" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackground}" Style="{StaticResource AppOpacitySliderStyle}" />
+                            <Slider Value="{x:Bind Opacity,Mode=TwoWay}" TickFrequency="25" TickPlacement="Inline" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" Style="{StaticResource AppOpacitySliderStyle}" />
 
                             <TextBlock Text="BlendMode" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <ComboBox SelectedIndex="{x:Bind BlendIndex,Mode=TwoWay}" FontWeight="Medium" HorizontalAlignment="Stretch" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackground}" Style="{StaticResource AppComboBoxStyle}">
+                            <ComboBox SelectedIndex="{x:Bind BlendIndex,Mode=TwoWay}" Style="{StaticResource AppComboBoxStyle}">
                                 <!--正常-->
                                 <ComboBoxItem  Content="Normal" BorderBrush="{ThemeResource AppBorderBrush}" BorderThickness="0,0,0,2"/>
 
@@ -425,7 +423,7 @@
                             </ComboBox>
 
                             <TextBlock Text="Layer" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <Grid  Height="36" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackground}">
+                            <Grid  Height="36" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="1*"/>
@@ -490,7 +488,6 @@
 
             <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
             <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True"/>
-            <Setter Property="UseSystemFocusVisuals" Value="True"/>
             <Setter Property="ItemsPanel">
                 <Setter.Value>
                     <ItemsPanelTemplate>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Retouch_Photo.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,6 +19,25 @@ namespace Retouch_Photo
 {
     public sealed partial class MainPage : Page
     {
+        List<PhotoFile> list = new List<PhotoFile>
+    {
+            new PhotoFile(){Text= "sacsdcsdcsd"},
+       new PhotoFile(){Text=   "sdvcsd"},
+       new PhotoFile(){Text=   "sacsdcsdcsd"},
+       new PhotoFile(){Text=   "sacsdcsdcsd"},
+       new PhotoFile(){Text=   "scasc"},
+      new PhotoFile(){Text=    "sacsdcsdcsd"},
+      new PhotoFile(){Text=    "www"},
+       new PhotoFile(){Text=   "add"},
+       new PhotoFile(){Text=   "sacsdcsdcsd"},
+       new PhotoFile(){Text=   "sacsdcsdcsd"},
+       new PhotoFile(){Text=   "adw"},
+        new PhotoFile(){Text=  "thrh"},
+      new PhotoFile(){Text=    "sacsdcsdcsd"},
+      new PhotoFile(){Text=    "sacsdcsdcsd"},
+    };
+
+
         public MainPage()
         {
             this.InitializeComponent();

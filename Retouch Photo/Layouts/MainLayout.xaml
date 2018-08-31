@@ -62,8 +62,8 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <Border x:Name="TopBorder" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}">
+
+        <Border x:Name="TopBorder" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
             <!--TopBar-->
         </Border>
 
@@ -73,12 +73,11 @@
 
 
         <Grid Grid.Row="1" Margin="12" VerticalAlignment="Bottom" HorizontalAlignment="Center"  >
-            <controls:DropShadowPanel HorizontalAlignment="Center" OffsetY="3"
-                                    Color="{ThemeResource AppBorderBrushColor}">
+            <controls:DropShadowPanel HorizontalAlignment="Center" OffsetY="6" BlurRadius="24"  Color="{ThemeResource AppStrokeColor}">
                 <Rectangle RadiusX="25" RadiusY="25" 
                            Height="{Binding ElementName=BottomBorder, Path=(extensions:FrameworkElementExtensions.ActualHeight)}"
                            Width="{Binding ElementName=BottomBorder, Path=(extensions:FrameworkElementExtensions.ActualWidth)}"
-                           Fill="{ThemeResource AppBackground}"/>
+                           Fill="{ThemeResource AppFill}"/>
             </controls:DropShadowPanel>
             <Border x:Name="BottomBorder" Padding="20,0" Height="50" MinWidth="200" 
                     extensions:FrameworkElementExtensions.EnableActualSizeBinding="True">

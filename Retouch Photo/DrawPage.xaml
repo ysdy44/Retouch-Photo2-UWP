@@ -36,7 +36,7 @@
             </lay:DrawLayout.RightPane>
 
             <lay:DrawLayout.CenterContent>
-                <Grid>
+                <Grid >
 
                     
 

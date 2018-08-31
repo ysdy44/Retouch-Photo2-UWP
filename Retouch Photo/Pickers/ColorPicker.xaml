@@ -57,7 +57,7 @@
         </Grid>
 
         <!--Toggle-->
-        <Grid Grid.Row="1" Height="34" CornerRadius="15" BorderThickness="0,0,1,2"  BorderBrush="#44000000"  Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
+        <Grid Grid.Row="1" Height="34" CornerRadius="10" BorderThickness="0,0,1,1"  BorderBrush="{ThemeResource AppStroke}"  Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />

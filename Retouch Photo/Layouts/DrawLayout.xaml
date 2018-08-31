@@ -2,14 +2,16 @@
     x:Class="Retouch_Photo.Layouts.DrawLayout"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:apiContractNotPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,5)"
+    xmlns:apiContractPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     mc:Ignorable="d">
 
 
     <Grid Background="{ThemeResource AppBackground}">
-
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
@@ -22,41 +24,52 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
 
+                        <!--TopBorder-->
                         <Setter Target="TopBorder.(Grid.ColumnSpan)" Value="3"/>
-
                         <Setter Target="TopLeftStackPanel.Visibility" Value="Collapsed"/>
-                        
                         <Setter Target="CenterStackPanel.HorizontalAlignment" Value="Center"/>
 
+                        <!--CenterBorder-->
                         <Setter Target="CenterBorder.(Grid.Column)" Value="0"/>
                         <Setter Target="CenterBorder.(Grid.ColumnSpan)" Value="3"/>
                         <Setter Target="CenterBorder.(Grid.RowSpan)" Value="1"/>
 
-                        <Setter Target="BottomBorder.MinWidth" Value="0"/>
-                        <Setter Target="BottomBorder.HorizontalAlignment" Value="Stretch"/>
-                        <Setter Target="BottomBorder.Margin" Value="0"/>
-                        <Setter Target="BottomBorder.BorderThickness" Value="1,1,1,0"/>
+                        <!--BottomGrid-->
+                        <Setter Target="BottomGrid.(Grid.Column)" Value="0"/>
+                        <Setter Target="BottomGrid.(Grid.ColumnSpan)" Value="3"/>
+                        <Setter Target="BottomGrid.MinWidth" Value="0"/>
+                        <Setter Target="BottomGrid.HorizontalAlignment" Value="Stretch"/>
+                        <Setter Target="BottomGrid.Margin" Value="0"/>
+                        <Setter Target="BottomGrid.BorderThickness" Value="0,1,0,0"/>
 
+                        <!--Work-->
                         <Setter Target="WorkLeftBorder.Visibility" Value="Visible"/>
                         <Setter Target="WorkRightBorder.Visibility" Value="Visible"/>
                         <Setter Target="WorkDismissOverlay.Visibility" Value="Collapsed"/>
 
-                        <!--Acrylic-->
+                        <!--LeftBorder-->
                         <Setter Target="LeftBorder.(Grid.RowSpan)" Value="1"/>
                         <Setter Target="LeftBorder.VerticalAlignment" Value="Stretch"/>
                         <Setter Target="LeftBorder.BorderThickness" Value="0,0,1,0"/>
-                        <Setter Target="LeftBorder.Background" Value="{ThemeResource SystemControlAcrylicElementBrush}"/>
                         <Setter Target="LeftBorder.Visibility" Value="Collapsed"/>
                         <Setter Target="LeftBorder.Margin" Value="0"/>
+                        <Setter Target="LeftBorder.Background"
+                                apiContractNotPresent5:Value="Transparent"
+                                apiContractPresent5:Value="{ThemeResource SystemControlAcrylicElementBrush}"
+                                />
 
-                        <!--Acrylic-->
+                        <!--RightBorder-->
                         <Setter Target="RightBorder.(Grid.Row)" Value="0"/>
                         <Setter Target="RightBorder.(Grid.RowSpan)" Value="2"/>
                         <Setter Target="RightBorder.VerticalAlignment" Value="Stretch"/>
                         <Setter Target="RightBorder.BorderThickness" Value="1,0,0,0"/>
-                        <Setter Target="RightBorder.Background" Value="{ThemeResource SystemControlAcrylicElementBrush}"/>
                         <Setter Target="RightBorder.Visibility" Value="Collapsed"/>
+                        <Setter Target="RightBorder.Background"
+                                apiContractNotPresent5:Value="Transparent"
+                                apiContractPresent5:Value="{ThemeResource SystemControlAcrylicElementBrush}"
+                                />
 
+                        <!--GridLenght-->
                         <Setter Target="RightGridLenght.Width" Value="70"/>
 
                     </VisualState.Setters>
@@ -69,41 +82,52 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
 
+                        <!--TopBorder-->
                         <Setter Target="TopBorder.(Grid.ColumnSpan)" Value="3"/>
-
                         <Setter Target="TopLeftStackPanel.Visibility" Value="Visible"/>
-
                         <Setter Target="CenterStackPanel.HorizontalAlignment" Value="Right"/>
 
+                        <!--CenterBorder-->
                         <Setter Target="CenterBorder.(Grid.Column)" Value="0"/>
                         <Setter Target="CenterBorder.(Grid.ColumnSpan)" Value="3"/>
                         <Setter Target="CenterBorder.(Grid.RowSpan)" Value="2"/>
 
-                        <Setter Target="BottomBorder.MinWidth" Value="420"/>
-                        <Setter Target="BottomBorder.HorizontalAlignment" Value="Center"/>
-                        <Setter Target="BottomBorder.Margin" Value="0"/>
-                        <Setter Target="BottomBorder.BorderThickness" Value="1,1,1,0"/>
+                        <!--BottomGrid-->
+                        <Setter Target="BottomGrid.(Grid.Column)" Value="1"/>
+                        <Setter Target="BottomGrid.(Grid.ColumnSpan)" Value="1"/>
+                        <Setter Target="BottomGrid.MinWidth" Value="420"/>
+                        <Setter Target="BottomGrid.HorizontalAlignment" Value="Center"/>
+                        <Setter Target="BottomGrid.Margin" Value="0"/>
+                        <Setter Target="BottomGrid.BorderThickness" Value="1,1,1,0"/>
 
+                        <!--Work-->
                         <Setter Target="WorkLeftBorder.Visibility" Value="Collapsed"/>
                         <Setter Target="WorkRightBorder.Visibility" Value="Collapsed"/>
                         <Setter Target="WorkDismissOverlay.Visibility" Value="Collapsed"/>
 
-                        <!--Acrylic-->
+                        <!--LeftBorder-->
                         <Setter Target="LeftBorder.(Grid.RowSpan)" Value="2"/>
                         <Setter Target="LeftBorder.VerticalAlignment" Value="Center"/>
                         <Setter Target="LeftBorder.BorderThickness" Value="0,1,1,1"/>
-                        <Setter Target="LeftBorder.Background" Value="{ThemeResource SystemControlAcrylicElementBrush}"/>
                         <Setter Target="LeftBorder.Visibility" Value="Visible"/>
                         <Setter Target="LeftBorder.Margin" Value="0,20"/>
+                        <Setter Target="LeftBorder.Background"
+                                apiContractNotPresent5:Value="Transparent"
+                                apiContractPresent5:Value="{ThemeResource SystemControlAcrylicElementBrush}"
+                                />
 
-                        <!--Acrylic-->
+                        <!--RightBorder-->
                         <Setter Target="RightBorder.(Grid.Row)" Value="1"/>
                         <Setter Target="RightBorder.(Grid.RowSpan)" Value="2"/>
                         <Setter Target="RightBorder.VerticalAlignment" Value="Center"/>
                         <Setter Target="RightBorder.BorderThickness" Value="1,1,0,1"/>
-                        <Setter Target="RightBorder.Background" Value="{ThemeResource SystemControlAcrylicElementBrush}"/>
                         <Setter Target="RightBorder.Visibility" Value="Visible"/>
+                        <Setter Target="RightBorder.Background"
+                                apiContractNotPresent5:Value="Transparent"
+                                apiContractPresent5:Value="{ThemeResource SystemControlAcrylicElementBrush}"
+                                />
 
+                        <!--GridLenght-->
                         <Setter Target="RightGridLenght.Width" Value="70"/>
 
                     </VisualState.Setters>
@@ -116,41 +140,52 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
 
+                        <!--TopBorder-->
                         <Setter Target="TopBorder.(Grid.ColumnSpan)" Value="2"/>
-
                         <Setter Target="TopLeftStackPanel.Visibility" Value="Visible"/>
-
                         <Setter Target="CenterStackPanel.HorizontalAlignment" Value="Center"/>
 
+                        <!--CenterBorder-->
                         <Setter Target="CenterBorder.(Grid.Column)" Value="1"/>
                         <Setter Target="CenterBorder.(Grid.ColumnSpan)" Value="1"/>
                         <Setter Target="CenterBorder.(Grid.RowSpan)" Value="2"/>
 
-                        <Setter Target="BottomBorder.MinWidth" Value="500"/>
-                        <Setter Target="BottomBorder.HorizontalAlignment" Value="Center"/>
-                        <Setter Target="BottomBorder.Margin" Value="0,9"/>
-                        <Setter Target="BottomBorder.BorderThickness" Value="1"/>
+                        <!--BottomGrid-->
+                        <Setter Target="BottomGrid.(Grid.Column)" Value="1"/>
+                        <Setter Target="BottomGrid.(Grid.ColumnSpan)" Value="1"/>
+                        <Setter Target="BottomGrid.MinWidth" Value="500"/>
+                        <Setter Target="BottomGrid.HorizontalAlignment" Value="Center"/>
+                        <Setter Target="BottomGrid.Margin" Value="0,9"/>
+                        <Setter Target="BottomGrid.BorderThickness" Value="1"/>
 
+                        <!--WorkLeftBorder-->
                         <Setter Target="WorkLeftBorder.Visibility" Value="Collapsed"/>
                         <Setter Target="WorkRightBorder.Visibility" Value="Collapsed"/>
                         <Setter Target="WorkDismissOverlay.Visibility" Value="Collapsed"/>
 
-                        <!--Acrylic-->
+                        <!--LeftBorder-->
                         <Setter Target="LeftBorder.(Grid.RowSpan)" Value="2"/>
                         <Setter Target="LeftBorder.VerticalAlignment" Value="Stretch"/>
                         <Setter Target="LeftBorder.BorderThickness" Value="0,0,1,0"/>
-                        <Setter Target="LeftBorder.Background" Value="{ThemeResource SystemControlAcrylicWindowBrush}"/>
                         <Setter Target="LeftBorder.Visibility" Value="Visible"/>
                         <Setter Target="LeftBorder.Margin" Value="0"/>
+                        <Setter Target="LeftBorder.Background"
+                                apiContractNotPresent5:Value="Transparent"
+                                apiContractPresent5:Value="{ThemeResource SystemControlAcrylicWindowBrush}"
+                                />
 
-                        <!--Acrylic-->
+                        <!--RightBorder-->
                         <Setter Target="RightBorder.(Grid.Row)" Value="0"/>
                         <Setter Target="RightBorder.(Grid.RowSpan)" Value="3"/>
                         <Setter Target="RightBorder.VerticalAlignment" Value="Stretch"/>
                         <Setter Target="RightBorder.BorderThickness" Value="1,0,0,0"/>
-                        <Setter Target="RightBorder.Background" Value="{ThemeResource SystemControlAcrylicWindowBrush}"/>
                         <Setter Target="RightBorder.Visibility" Value="Visible"/>
+                        <Setter Target="RightBorder.Background"
+                                apiContractNotPresent5:Value="Transparent"
+                                apiContractPresent5:Value="{ThemeResource SystemControlAcrylicWindowBrush}"
+                                />
 
+                        <!--GridLenght-->
                         <Setter Target="RightGridLenght.Width" Value="190"/>
 
                     </VisualState.Setters>
@@ -172,7 +207,7 @@
         </Grid.RowDefinitions>
 
 
-        <Grid x:Name="TopBorder" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}">
+        <Grid x:Name="TopBorder" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -184,7 +219,7 @@
             </Border>
 
             <Border x:Name="TopLeftStackPanel" Grid.Column="1" HorizontalAlignment="Left" >
-          
+
                 <!--Visibility:Show-->
                 <animations:Implicit.ShowAnimations>
                     <animations:TranslationAnimation Duration="0:0:0.5" From="-50,0,0" To="0,0,0"/>
@@ -198,7 +233,7 @@
                 </animations:Implicit.HideAnimations>
 
                 <!--Left-->
-                
+
             </Border>
 
             <StackPanel x:Name="CenterStackPanel" Grid.Column="1"  Orientation="Horizontal" >
@@ -227,28 +262,36 @@
                     <PathIcon Data="M0,4.668l4.562,0l0,-4.668l1.44,0l0,4.668l13.112,0l4.362,-4.362l1.018,1.018l-4.562,4.562l0,12.912l4.562,0l0,1.44l-4.562,0l0,4.667l-1.44,0l0,-4.667l-13.93,0l0,-14.13l-4.562,0l0,-1.44Zm7.02,14.13l11.472,0l0,-11.472l-11.472,11.472Zm-1.018,-12.69l0,11.672l11.672,-11.672l-11.672,0Z"/>
                 </ToggleButton>
             </StackPanel>
-            
+
             <Border x:Name="TopRightBorder" Grid.Column="2" >
                 <!--Right-->
             </Border>
 
         </Grid>
 
-        
-        <Border x:Name="CenterBorder" Grid.Row="1">
+
+        <Border x:Name="CenterBorder" Grid.Row="1" Background="White">
             <!--CenterContent-->
         </Border>
-        <Border x:Name="BottomBorder" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" BorderThickness="1,1,1,0" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}">
-            <!--BottomBar-->
-        </Border>
+        <Grid  x:Name="BottomGrid" Grid.Row="2" BorderBrush="{ThemeResource AppStroke}" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <ToggleButton  x:Name="WorkLeftBorder" Grid.Column="0" Width="70" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0,0,1,0" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}" >
+            </ToggleButton>
+            <ToggleButton  x:Name="WorkRightBorder" Grid.Column="2" Width="70" FontSize="22" Content="&#xE81E;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="1,0,0,0" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}"/>
+            <Border x:Name="BottomBorder"  Grid.Column="1"  Background="{ThemeResource AppFill}">
+                <!--BottomBar-->
+            </Border>
+        </Grid>
 
 
-        <ToggleButton  x:Name="WorkLeftBorder" Grid.Column="0" Grid.Row="2" Width="70" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0,1,0,0" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" />
-        <ToggleButton  x:Name="WorkRightBorder" Grid.Column="2" Grid.Row="2" Width="70" FontSize="22" Content="&#xE81E;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0,1,0,0" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}"/>
         <Border x:Name="WorkDismissOverlay" Visibility="Collapsed" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="Transparent" />
 
 
-         <Border x:Name="LeftBorder" Grid.Column="0" Grid.Row="1" BorderBrush="{ThemeResource AppBorderBrush}">
+        <Border x:Name="LeftBorder" Grid.Column="0" Grid.Row="1" BorderBrush="{ThemeResource AppStroke}">
 
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>
@@ -265,7 +308,7 @@
             <!--LeftPane-->
 
         </Border>
-        <Border x:Name="RightBorder" Grid.Column="3" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource SystemControlAcrylicElementBrush}">
+        <Border x:Name="RightBorder" Grid.Column="3" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource SystemControlAcrylicElementBrush}">
 
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>
@@ -284,4 +327,5 @@
 
 
     </Grid>
+
 </UserControl>

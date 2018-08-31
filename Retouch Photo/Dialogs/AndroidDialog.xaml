@@ -26,8 +26,6 @@
             <Setter Property="FontWeight" Value="Medium" />
             <Setter Property="Height" Value="36" />
             <Setter Property="FontSize" Value="14" />
-            <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
-            <Setter Property="FocusVisualMargin" Value="-3" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">

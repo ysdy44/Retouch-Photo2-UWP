@@ -93,7 +93,7 @@ namespace Retouch_Photo.Pickers
             this.InitializeComponent();
         }
 
-        private void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e)=>   this.Collection.RemoveAt(this.GridView.SelectedIndex);
+        private void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Collection.RemoveAt(this.GridView.SelectedIndex==-1?0 :this.GridView.SelectedIndex);
         private void AddButton_Tapped(object sender, TappedRoutedEventArgs e)=>  this.Collection.Insert(0,this.Color);
         private void MultiSelectToggleButton_Checked(object sender, RoutedEventArgs e) => this.IsMultiSelect = true;
         private void MultiSelectToggleButton_Unchecked(object sender, RoutedEventArgs e) => this.IsMultiSelect = false;

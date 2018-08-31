@@ -33,8 +33,8 @@ namespace Retouch_Photo.Dialogs
                     this.TitleBar.InactiveBackgroundColor =
                     this.TitleBar.BackgroundColor =
                     value == ElementTheme.Light ?
-                    Color.FromArgb(255, 238, 238, 238) :
-                    Color.FromArgb(255, 0, 0, 0);
+                    Color.FromArgb(255, 240, 240, 240) :
+                    Color.FromArgb(255, 22, 22, 22);
             }
         }
         public ElementTheme AppRequestedTheme

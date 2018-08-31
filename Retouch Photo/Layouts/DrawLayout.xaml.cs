@@ -1,8 +1,10 @@
 ﻿using Windows.Devices.Input;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo.Layouts
 {
@@ -27,12 +29,21 @@ namespace Retouch_Photo.Layouts
 
 
 
+        //Delegate
+        public delegate void GetLeftPathIconHandler(object icon);
+        public static event GetLeftPathIconHandler GetLeftPathIcon = null;
+        public static void SetLeftPathIcon(object icon)
+        {
+                GetLeftPathIcon?.Invoke(icon);
+        }
+
+
+
         public DrawLayout()
         {
             this.InitializeComponent();
 
-
-            this.WorkLeftBorder.Tapped +=(sender,e)=> Left();
+            this.WorkLeftBorder.Tapped += (sender, e) => Left();
             this.WorkLeftBorder.PointerEntered += (sender, e) => Left();
 
             this.WorkRightBorder.Tapped += (sender, e) => Right();
@@ -45,17 +56,17 @@ namespace Retouch_Photo.Layouts
             };
 
 
-            this.SelectionToggleButton.Tapped+= (sender, e) => FlyoutBase.ShowAttachedFlyout((ToggleButton)sender);
-            this.SelectionFlyout.Opened+= (sender, e) => this.SelectionToggleButton.IsChecked = true;
-            this.SelectionFlyout.Closed+= (sender, e) => this.SelectionToggleButton.IsChecked = false;
+            this.SelectionToggleButton.Tapped += (sender, e) => FlyoutBase.ShowAttachedFlyout((ToggleButton)sender);
+            this.SelectionFlyout.Opened += (sender, e) => this.SelectionToggleButton.IsChecked = true;
+            this.SelectionFlyout.Closed += (sender, e) => this.SelectionToggleButton.IsChecked = false;
 
-            this.EffectsToggleButton.Tapped+= (sender, e) => FlyoutBase.ShowAttachedFlyout((ToggleButton)sender);
-            this.EffectsFlyout.Opened+= (sender, e) => this.EffectsToggleButton.IsChecked = true;
-            this.EffectsFlyout.Closed+= (sender, e) => this.EffectsToggleButton.IsChecked = false;
+            this.EffectsToggleButton.Tapped += (sender, e) => FlyoutBase.ShowAttachedFlyout((ToggleButton)sender);
+            this.EffectsFlyout.Opened += (sender, e) => this.EffectsToggleButton.IsChecked = true;
+            this.EffectsFlyout.Closed += (sender, e) => this.EffectsToggleButton.IsChecked = false;
 
-            this.OthersToggleButton.Tapped+= (sender, e) => FlyoutBase.ShowAttachedFlyout((ToggleButton)sender);
-            this.OthersFlyout.Opened+= (sender, e) => this.OthersToggleButton.IsChecked = true;
-            this.OthersFlyout.Closed+= (sender, e) => this.OthersToggleButton.IsChecked = false;
+            this.OthersToggleButton.Tapped += (sender, e) => FlyoutBase.ShowAttachedFlyout((ToggleButton)sender);
+            this.OthersFlyout.Opened += (sender, e) => this.OthersToggleButton.IsChecked = true;
+            this.OthersFlyout.Closed += (sender, e) => this.OthersToggleButton.IsChecked = false;
         }
 
         private void Left()
@@ -68,6 +79,6 @@ namespace Retouch_Photo.Layouts
             this.RightBorder.Visibility = this.WorkDismissOverlay.Visibility = Visibility.Visible;
             this.WorkRightBorder.IsChecked = true;
         }
-
-    }
+        
+    }         
 }

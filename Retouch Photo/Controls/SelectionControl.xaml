@@ -148,6 +148,21 @@
                 </Grid>
             </Button>
             <Button HorizontalAlignment="Stretch" Height="46" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
+                <Button.Flyout>
+                    <Flyout Placement="Bottom"  FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" >
+                        <Grid Width="160" Height="160">
+                            <Button HorizontalAlignment="Stretch" Height="46" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
+                                <Button.Flyout>
+                                    <Flyout Placement="Right"  FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" >
+                                        <Grid Width="110" Height="110">
+                                             
+                                        </Grid>
+                                    </Flyout>
+                                </Button.Flyout>
+                            </Button>
+                        </Grid>
+                    </Flyout>
+                </Button.Flyout>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="42"/>
