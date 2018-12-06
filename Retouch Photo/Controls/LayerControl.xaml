@@ -20,8 +20,8 @@
             <Setter Property="Padding" Value="12,5,0,7" />
             <Setter Property="MinWidth" Value="{ThemeResource ComboBoxThemeMinWidth}" />
             <Setter Property="Foreground" Value="{ThemeResource ComboBoxForeground}" />
-            <Setter Property="Background" Value="{ThemeResource AppForeground}" />
-            <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}" />
+            <Setter Property="Background" Value="{ThemeResource AppFill}" />
+            <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="TabNavigation" Value="Once" />
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
@@ -239,22 +239,22 @@
                             </StackPanel>
 
                             <TextBlock Text="Name" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <TextBox Text="{x:Bind Name,Mode=TwoWay}" FontWeight="Medium" HorizontalAlignment="Stretch" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}"/>
+                            <TextBox Text="{x:Bind Name,Mode=TwoWay}" FontWeight="Medium" HorizontalAlignment="Stretch" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}"/>
 
                             <TextBlock Text="Opacity" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <Slider Value="{x:Bind Opacity,Mode=TwoWay}" TickFrequency="25" TickPlacement="Inline" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" Style="{StaticResource AppOpacitySliderStyle}" />
+                            <Slider Value="{x:Bind Opacity,Mode=TwoWay}" TickFrequency="25" TickPlacement="Inline" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}" Style="{StaticResource AppOpacitySliderStyle}" ValueChanged="Slider_ValueChanged"/>
 
                             <TextBlock Text="BlendMode" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <ComboBox SelectedIndex="{x:Bind BlendIndex,Mode=TwoWay}" Style="{StaticResource AppComboBoxStyle}">
+                            <ComboBox FontWeight="Medium" SelectedIndex="{x:Bind BlendIndex,Mode=TwoWay}" Style="{StaticResource AppComboBoxStyle}" SelectionChanged="ComboBox_SelectionChanged">
                                 <!--正常-->
-                                <ComboBoxItem  Content="Normal" BorderBrush="{ThemeResource AppBorderBrush}" BorderThickness="0,0,0,2"/>
+                                <ComboBoxItem  Content="Normal" BorderBrush="{ThemeResource AppStroke}" BorderThickness="0,0,0,2"/>
 
                                 <!--正片叠底-->
                                 <ComboBoxItem  Content="Multiply"/>
                                 <!--屏幕-->
                                 <ComboBoxItem  Content="Screen"/>
                                 <!--溶解-->
-                                <ComboBoxItem  Content="Dissolve" BorderBrush="{ThemeResource AppBorderBrush}" BorderThickness="0,0,0,2"/>
+                                <ComboBoxItem  Content="Dissolve" BorderBrush="{ThemeResource AppStroke}" BorderThickness="0,0,0,2"/>
 
                                 <!--暗-->
                                 <ComboBoxItem  Content="Darken"/>
@@ -263,7 +263,7 @@
                                 <!--更暗的颜色-->
                                 <ComboBoxItem  Content="DarkerColor"/>
                                 <!--更亮的颜色-->
-                                <ComboBoxItem  Content="LighterColor" BorderBrush="{ThemeResource AppBorderBrush}" BorderThickness="0,0,0,2"/>
+                                <ComboBoxItem  Content="LighterColor" BorderBrush="{ThemeResource AppStroke}" BorderThickness="0,0,0,2"/>
 
                                 <!--颜色加深-->
                                 <ComboBoxItem  Content="ColorBurn"/>
@@ -272,7 +272,7 @@
                                 <!--线性加深-->
                                 <ComboBoxItem  Content="LinearBurn"/>
                                 <!--线性减淡-->
-                                <ComboBoxItem  Content="LinearDodge" BorderBrush="{ThemeResource AppBorderBrush}" BorderThickness="0,0,0,2"/>
+                                <ComboBoxItem  Content="LinearDodge" BorderBrush="{ThemeResource AppStroke}" BorderThickness="0,0,0,2"/>
 
                                 <!--覆盖-->
                                 <ComboBoxItem  Content="Overlay"/>
@@ -285,21 +285,21 @@
                                 <!--线性光-->
                                 <ComboBoxItem  Content="LinearLight"/>
                                 <!--射灯-->
-                                <ComboBoxItem  Content="PinLight" BorderBrush="{ThemeResource AppBorderBrush}" BorderThickness="0,0,0,2"/>
+                                <ComboBoxItem  Content="PinLight" BorderBrush="{ThemeResource AppStroke}" BorderThickness="0,0,0,2"/>
 
                                 <!--硬混-->
                                 <ComboBoxItem  Content="HardMix"/>
                                 <!--差异-->
                                 <ComboBoxItem  Content="Difference"/>
                                 <!--排除-->
-                                <ComboBoxItem  Content="Exclusion" BorderBrush="{ThemeResource AppBorderBrush}" BorderThickness="0,0,0,2"/>
+                                <ComboBoxItem  Content="Exclusion" BorderBrush="{ThemeResource AppStroke}" BorderThickness="0,0,0,2"/>
 
                                 <!--色相-->
                                 <ComboBoxItem  Content="Hue"/>
                                 <!--饱和度-->
                                 <ComboBoxItem  Content="Saturation"/>
                                 <!--颜色-->
-                                <ComboBoxItem  Content="Color" BorderBrush="{ThemeResource AppBorderBrush}" BorderThickness="0,0,0,2"/>
+                                <ComboBoxItem  Content="Color" BorderBrush="{ThemeResource AppStroke}" BorderThickness="0,0,0,2"/>
 
                                 <!--光度-->
                                 <ComboBoxItem  Content="Luminosity"/>
@@ -310,7 +310,7 @@
                             </ComboBox>
 
                             <TextBlock Text="Layer" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <Grid  Height="36" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}">
+                            <Grid  Height="36" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="1*"/>
@@ -355,10 +355,10 @@
                         <StackPanel  Width="190" >
 
                             <TextBlock Text="Opacity" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <Slider Value="{x:Bind Opacity,Mode=TwoWay}" TickFrequency="25" TickPlacement="Inline" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" Style="{StaticResource AppOpacitySliderStyle}" />
+                            <Slider Value="{x:Bind Opacity,Mode=TwoWay}" TickFrequency="25" TickPlacement="Inline" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppFill}" Style="{StaticResource AppOpacitySliderStyle}" ValueChanged="Slider_ValueChanged"/>
 
                             <TextBlock Text="BlendMode" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <ComboBox SelectedIndex="{x:Bind BlendIndex,Mode=TwoWay}" Style="{StaticResource AppComboBoxStyle}">
+                            <ComboBox  FontWeight="Medium" SelectedIndex="{x:Bind BlendIndex,Mode=TwoWay}" Style="{StaticResource AppComboBoxStyle}" SelectionChanged="ComboBox_SelectionChanged">
                                 <!--正常-->
                                 <ComboBoxItem  Content="Normal" BorderBrush="{ThemeResource AppBorderBrush}" BorderThickness="0,0,0,2"/>
 
@@ -423,7 +423,7 @@
                             </ComboBox>
 
                             <TextBlock Text="Layer" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <Grid  Height="36" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}">
+                            <Grid  Height="36" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppFill}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="1*"/>
@@ -512,13 +512,14 @@
     
     <ListView  x:Name="ListView"
                
-               ItemsSource="{x:Bind sdasdsa}"
+               ItemsSource="{x:Bind ViewModel.Layers,Mode=OneWay}"
                ItemTemplate="{StaticResource PhoneDataTemplate}"
                             
                IsItemClickEnabled="True" ItemClick="ListView_ItemClick"
                
                Style="{StaticResource AppListViewStyle}"
                ItemContainerStyle="{StaticResource AppItemContainerStyle}"
+                              
                extensions:ListViewExtensions.AlternateColor="{ThemeResource SystemControlBackgroundListLowBrush}"
 
                >
@@ -568,7 +569,7 @@
         </VisualStateManager.VisualStateGroups>
         
         <ListView.Header>
-            <Button Width="Auto" Height="44" FontWeight="Medium" Content="&#xE109;" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}" />
+            <Button x:Name="AddButton" Width="Auto" Height="44" FontWeight="Medium" Content="&#xE109;" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="AddButton_Tapped"/>
         </ListView.Header>
     </ListView>
     

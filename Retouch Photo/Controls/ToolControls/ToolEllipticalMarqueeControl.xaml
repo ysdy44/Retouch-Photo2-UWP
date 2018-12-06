@@ -1,0 +1,14 @@
+﻿<UserControl
+    x:Class="Retouch_Photo.Controls.ToolControls.ToolEllipticalMarqueeControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Retouch_Photo.Controls.ToolControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="50">
+
+    <PathIcon Data="M4.535,12.73c1.492,1.122 3.572,1.87 5.905,2.016l0,2.319c-2.936,-0.165 -5.561,-1.183 -7.444,-2.728l1.539,-1.607Zm13.49,0l1.539,1.607c-1.883,1.545 -4.508,2.563 -7.444,2.728l0,-2.319c2.333,-0.146 4.413,-0.894 5.905,-2.016Zm-16.23,-8.827l1.521,1.588c-0.736,0.9 -1.156,1.937 -1.156,3.041c0,1.104 0.42,2.142 1.156,3.042l-1.521,1.588c-1.136,-1.335 -1.795,-2.924 -1.795,-4.63c0,-1.705 0.659,-3.294 1.795,-4.629Zm18.97,0c1.136,1.335 1.795,2.924 1.795,4.629c0,1.706 -0.659,3.295 -1.795,4.63l-1.521,-1.588c0.736,-0.9 1.156,-1.938 1.156,-3.042c0,-1.104 -0.42,-2.141 -1.156,-3.041l1.521,-1.588Zm-8.645,-3.903c2.936,0.164 5.561,1.182 7.444,2.728l-1.539,1.606c-1.492,-1.121 -3.572,-1.869 -5.905,-2.015l0,-2.319Zm-1.68,0l0,2.319c-2.333,0.146 -4.413,0.894 -5.905,2.015l-1.539,-1.606c1.883,-1.546 4.508,-2.564 7.444,-2.728Z"/>
+
+</UserControl>

@@ -1,0 +1,113 @@
+﻿<Page
+    x:Class="Retouch_Photo.Pages.DrawPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:con="using:Retouch_Photo.Controls"
+    xmlns:dia="using:Retouch_Photo.Dialogs"
+    xmlns:pic="using:Retouch_Photo.Pickers"
+    xmlns:local="using:Retouch_Photo.Pages"
+    xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
+    NavigationCacheMode="Enabled"
+    Loaded="Page_Loaded"
+    mc:Ignorable="d"   >
+
+    <Grid>
+
+
+        <local:DrawLayout x:Name="DrawLayout" Tool="{x:Bind ViewModel.Tool,Mode=OneWay}">
+            
+            <local:DrawLayout.LeftPane>
+                <con:ToolControl/>
+            </local:DrawLayout.LeftPane>
+
+            <local:DrawLayout.RightPane >
+                <con:LayerControl/>
+            </local:DrawLayout.RightPane>
+                        
+            <local:DrawLayout.CenterContent>
+                <con:MainCanvasControl x:Name="MainCanvasControl"/>
+            </local:DrawLayout.CenterContent>
+            
+            <local:DrawLayout.BottomBar>
+                <con:BottombarControl Tool="{x:Bind ViewModel.Tool,Mode=OneWay}"/>
+            </local:DrawLayout.BottomBar>
+            
+            <local:DrawLayout.TopLeftPane>
+                <Button  Height="50" Width="60" Content="&#xE0D5;" FontSize="20" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="Back_Tapped"/>
+            </local:DrawLayout.TopLeftPane>
+
+            <local:DrawLayout.TopRightPane>
+                <Button x:Name="PopupButton" Grid.Column="2" Height="50" Width="60" Content="&#xE712;" FontSize="24" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="PopupButton_Tapped"/>
+            </local:DrawLayout.TopRightPane>
+
+            <local:DrawLayout.TopLeftStackBar>
+                <StackPanel Orientation="Horizontal">
+                    <Border Width="40" Height="40" CornerRadius="20" Margin="5,0" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
+                        <Button  Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE105;" FontSize="20" Foreground="Gray" FontFamily="Segoe MDL2 Assets" BorderThickness="0" Background="Transparent" />
+                    </Border>
+                    <Border Width="40" Height="40" CornerRadius="20" Margin="5,0" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
+                        <Button  Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10E;" FontSize="18" Foreground="Gray" FontFamily="Segoe MDL2 Assets" BorderThickness="0" Background="Transparent" />
+                    </Border>
+                    <Border Width="40" Height="40" CornerRadius="20" Margin="5,0" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
+                        <Button  Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10D;" FontSize="18" Foreground="Gray" FontFamily="Segoe MDL2 Assets" BorderThickness="0" Background="Transparent" />
+                    </Border>
+                </StackPanel>               
+            </local:DrawLayout.TopLeftStackBar>
+
+            
+            
+            <local:DrawLayout.SelectionPane>
+                <con:SelectionControl/>
+            </local:DrawLayout.SelectionPane>
+
+            <local:DrawLayout.EffectsPane>
+                <pic:ColorPicker Width="200" Height="270"/>
+            </local:DrawLayout.EffectsPane>
+
+            <local:DrawLayout.OthersPane>
+                <Grid Width="400" Height="400">
+                </Grid>
+            </local:DrawLayout.OthersPane>
+
+        </local:DrawLayout>
+
+
+        <!--Load-->
+        <con:LoadingControl x:Name="LoadingControl" Text="Saving..."  Visibility="Collapsed"/>
+
+
+        <!---Dialog-->
+        <dia:WelcomeContentDialog x:Name="WelcomeContentDialog" />
+        
+        <!--Tip-->
+        <Border IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Top" CornerRadius="4" Margin="60" Width="Auto" MinHeight="24" BorderThickness="1" BorderBrush="#3d9cf7" Background="#b5d4f2"   >
+            <TextBlock Text="{x:Bind ViewModel.Text, Mode=OneWay}" Margin="20,0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#0055a4"/>
+        </Border>
+
+        <StackPanel Visibility="Collapsed" IsHitTestVisible="False" Grid.ColumnSpan="3" Grid.RowSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border Width="100" Height="50" Margin="1" Background="{ThemeResource AppForeground}">
+                <TextBlock VerticalAlignment="Center" Text="AppForeground"/>
+            </Border>
+            <Border Width="100" Height="50" Margin="1" Background="{ThemeResource AppBackground}">
+                <TextBlock VerticalAlignment="Center" Text="AppBackground"/>
+            </Border>
+            <Border Width="100" Height="50" Margin="1" Background="{ThemeResource AppBorderBrush}">
+                <TextBlock VerticalAlignment="Center" Text="AppBorderBrush"/>
+            </Border>
+            <AppBarSeparator/>
+            <Border Width="100" Height="50" Margin="1" Background="{ThemeResource AppFill}">
+                <TextBlock VerticalAlignment="Center" Text="AppFill"/>
+            </Border>
+            <Border Width="100" Height="50" Margin="1" Background="{ThemeResource AppStroke}">
+                <TextBlock VerticalAlignment="Center" Text="AppStroke"/>
+            </Border>
+            <Border Width="100" Height="50" Margin="1" Background="{ThemeResource AppLinearBrush}">
+                <TextBlock VerticalAlignment="Center" Text="AppLinearBrush"/>
+            </Border>
+        </StackPanel>
+
+    </Grid>
+</Page>

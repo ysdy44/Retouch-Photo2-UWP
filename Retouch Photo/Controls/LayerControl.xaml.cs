@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo.Models;
+using Retouch_Photo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,19 +20,16 @@ namespace Retouch_Photo.Controls
     public sealed partial class LayerControl : UserControl
     {
 
-        List<Layer> sdasdsa = new List<Layer>
-        {
-            new Layer(){Name=  "Layer0",},
-            new Layer(){Name=  "Layer1",},
-            new Layer(){Name=  "Layer2",},
-            new Layer(){Name=  "Layer3",},
-        };
-
+        //ViewModel
+        public DrawViewModel ViewModel;
 
         public LayerControl()
         {
             this.InitializeComponent();
-        }
+
+            //ViewModel
+            this.ViewModel = App.ViewModel;
+        } 
 
 
 
@@ -53,8 +51,24 @@ namespace Retouch_Photo.Controls
 
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e){}
-        private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)=>e.Handled = true;
 
-      
+
+        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e) => this.ViewModel.Invalidate();
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => this.ViewModel.Invalidate();
+        private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            e.Handled = true;
+            this.ViewModel.Invalidate();
+        }
+
+
+        private void AddButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (this.ViewModel.Layers==null)
+            {
+                this.ViewModel.Text = "Layer is null";
+            }
+        }
+
     }
 }

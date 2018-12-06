@@ -95,35 +95,178 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AppbarControl.xaml.cs">
+      <DependentUpon>AppbarControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AppbarControls\AppBarControlButton.xaml.cs">
+      <DependentUpon>AppBarControlButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AppbarControls\AppBarControlSecondButton.xaml.cs">
+      <DependentUpon>AppBarControlSecondButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AppbarControls\AppbarDuplicateControl.xaml.cs">
+      <DependentUpon>AppbarDuplicateControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AppbarControls\AppbarPicturesControl.xaml.cs">
+      <DependentUpon>AppbarPicturesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AppbarControls\AppbarDeleteControl.xaml.cs">
+      <DependentUpon>AppbarDeleteControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AppbarControls\AppbarShareControl.xaml.cs">
+      <DependentUpon>AppbarShareControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AppbarControls\AppbarSaveControl.xaml.cs">
+      <DependentUpon>AppbarSaveControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BottomBarControl.xaml.cs">
+      <DependentUpon>BottomBarControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LoadingControl.xaml.cs">
+      <DependentUpon>LoadingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainCanvasControl.xaml.cs">
+      <DependentUpon>MainCanvasControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SelectionControl.xaml.cs">
       <DependentUpon>SelectionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControl.xaml.cs">
-      <DependentUpon>ToolControl.xaml</DependentUpon>
+    <Compile Include="Controls\ToolControls\ToolCursorControl.xaml.cs">
+      <DependentUpon>ToolCursorControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\AndroidDialog.xaml.cs">
-      <DependentUpon>AndroidDialog.xaml</DependentUpon>
+    <Compile Include="Controls\ToolControls\ToolEllipseControl.xaml.cs">
+      <DependentUpon>ToolEllipseControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\GameDialog.xaml.cs">
-      <DependentUpon>GameDialog.xaml</DependentUpon>
+    <Compile Include="Controls\ToolControls\ToolEllipticalMarqueeControl.xaml.cs">
+      <DependentUpon>ToolEllipticalMarqueeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Layouts\DrawLayout.xaml.cs">
+    <Compile Include="Controls\ToolControls\ToolEraseBrushControl.xaml.cs">
+      <DependentUpon>ToolEraseBrushControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToolControls\ToolFloodSetectControl.xaml.cs">
+      <DependentUpon>ToolFloodSetectControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToolControls\ToolFreeHandMarqueeControl.xaml.cs">
+      <DependentUpon>ToolFreeHandMarqueeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToolControls\ToolGeometryControl.xaml.cs">
+      <DependentUpon>ToolGeometryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToolControls\ToolPaintBrushControl.xaml.cs">
+      <DependentUpon>ToolPaintBrushControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToolControls\ToolPencilControl.xaml.cs">
+      <DependentUpon>ToolPencilControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToolControls\ToolPenControl.xaml.cs">
+      <DependentUpon>ToolPenControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToolControls\ToolPolygonMarqueeControl.xaml.cs">
+      <DependentUpon>ToolPolygonMarqueeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToolControls\ToolRectangleControl.xaml.cs">
+      <DependentUpon>ToolRectangleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToolControls\ToolRectangularMarqueeControl.xaml.cs">
+      <DependentUpon>ToolRectangularMarqueeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToolControls\ToolSelectionBrushControl.xaml.cs">
+      <DependentUpon>ToolSelectionBrushControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToolControls\ToolViewControl.xaml.cs">
+      <DependentUpon>ToolViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToolControls\ToolWatercolorPenControl.xaml.cs">
+      <DependentUpon>ToolWatercolorPenControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\AddDialog.xaml.cs">
+      <DependentUpon>AddDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FolderDialog.xaml.cs">
+      <DependentUpon>FolderDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Library\Debug.cs" />
+    <Compile Include="Library\DottedLine.cs" />
+    <Compile Include="Library\MarqueeTool.cs" />
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Pages\DrawLayout.xaml.cs">
       <DependentUpon>DrawLayout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Layouts\MainLayout.xaml.cs">
-      <DependentUpon>MainLayout.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DrawPage.xaml.cs">
+    <Compile Include="Pages\DrawPage.xaml.cs">
       <DependentUpon>DrawPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Pages\MainLayout.xaml.cs">
+      <DependentUpon>MainLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Library\CanvasOperator.cs" />
+    <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Layer.cs" />
-    <Compile Include="Models\PhotoFile.cs" />
+    <Compile Include="Models\Photo.cs" />
+    <Compile Include="Pages\PageControls\PageNumberControl.xaml.cs">
+      <DependentUpon>PageNumberControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PageControls\PageToggleControl.xaml.cs">
+      <DependentUpon>PageToggleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ToolPages\ToolCursorPage.xaml.cs">
+      <DependentUpon>ToolCursorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ToolPages\ToolEllipsePage.xaml.cs">
+      <DependentUpon>ToolEllipsePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ToolPages\ToolEllipticalMarqueePage.xaml.cs">
+      <DependentUpon>ToolEllipticalMarqueePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ToolPages\ToolEraseBrushPage.xaml.cs">
+      <DependentUpon>ToolEraseBrushPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ToolPages\ToolFloodSetectPage.xaml.cs">
+      <DependentUpon>ToolFloodSetectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ToolPages\ToolFreeHandMarqueePage.xaml.cs">
+      <DependentUpon>ToolFreeHandMarqueePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ToolPages\ToolGeometryPage.xaml.cs">
+      <DependentUpon>ToolGeometryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ToolPages\ToolMarqueePage\ToolMarqueeCompositeModeControl.xaml.cs">
+      <DependentUpon>ToolMarqueeCompositeModeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ToolPages\ToolMarqueePage\ToolMarqueeModeControl.xaml.cs">
+      <DependentUpon>ToolMarqueeModeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ToolPages\ToolPaintBrushPage.xaml.cs">
+      <DependentUpon>ToolPaintBrushPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ToolPages\ToolPencilPage.xaml.cs">
+      <DependentUpon>ToolPencilPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ToolPages\ToolPenPage.xaml.cs">
+      <DependentUpon>ToolPenPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ToolPages\ToolPolygonMarqueePage.xaml.cs">
+      <DependentUpon>ToolPolygonMarqueePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ToolPages\ToolRectanglePage.xaml.cs">
+      <DependentUpon>ToolRectanglePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ToolPages\ToolRectangularMarqueePage.xaml.cs">
+      <DependentUpon>ToolRectangularMarqueePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ToolPages\ToolSelectionBrushPage.xaml.cs">
+      <DependentUpon>ToolSelectionBrushPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ToolPages\ToolViewPage.xaml.cs">
+      <DependentUpon>ToolViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ToolPages\ToolWatercolorPenPage.xaml.cs">
+      <DependentUpon>ToolWatercolorPenPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pickers\AlphaPicker.xaml.cs">
       <DependentUpon>AlphaPicker.xaml</DependentUpon>
     </Compile>
@@ -163,11 +306,304 @@
     <Compile Include="Dialogs\WelcomeContentDialog.xaml.cs">
       <DependentUpon>WelcomeContentDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ToolControl.xaml.cs">
+      <DependentUpon>ToolControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tool.cs" />
+    <Compile Include="ViewModels\DrawViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolEllipseViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolEllipticalMarqueeViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolEraseBrushViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolFreeHandMarqueeViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolGeometryViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolPaintBrushViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolPencilViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolPenViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolPolygonMarqueeViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolRectangleViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolRectangularMarqueeViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolFloodSetectViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolSelectionBrushViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolViewViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolWatercolorPenViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="Assets\Fonts\ComicNeue.ttf" />
+    <Content Include="Assets\Fonts\Helvetica.ttf" />
+    <Content Include="Assets\Fonts\HelveticaNeue.ttf" />
+    <Content Include="Assets\Fonts\OpenSans.ttf" />
+    <Content Include="Assets\Fonts\PTSerif.ttf" />
+    <Content Include="Assets\Fonts\Roboto.ttf" />
+    <Content Include="Assets\9squares-AlBoardman.json" />
+    <Content Include="Assets\AndroidWave.json" />
+    <Content Include="Assets\bullseye.json" />
+    <Content Include="Assets\City.json" />
+    <Content Include="Assets\EmptyState.json" />
+    <Content Include="Assets\FullScreen.json" />
+    <Content Include="Assets\Gears.json" />
+    <Content Include="Assets\hamburger_arrow.json" />
+    <Content Include="Assets\Hello World.json" />
+    <Content Include="Assets\Logo\LogoSmall.json" />
+    <Content Include="Assets\lottiefiles.com - Animated Graph.json" />
+    <Content Include="Assets\lottiefiles.com - ATM.json" />
+    <Content Include="Assets\lottiefiles.com - Beating Heart.json" />
+    <Content Include="Assets\lottiefiles.com - Camera.json" />
+    <Content Include="Assets\lottiefiles.com - Countdown.json" />
+    <Content Include="Assets\lottiefiles.com - Curly Hair.json" />
+    <Content Include="Assets\lottiefiles.com - Day Night.json" />
+    <Content Include="Assets\lottiefiles.com - Emoji Shock.json" />
+    <Content Include="Assets\lottiefiles.com - Emoji Tongue.json" />
+    <Content Include="Assets\lottiefiles.com - Emoji Wink.json" />
+    <Content Include="Assets\lottiefiles.com - Favorite Star.json" />
+    <Content Include="Assets\lottiefiles.com - Gears.json" />
+    <Content Include="Assets\lottiefiles.com - Im Thirsty.json" />
+    <Content Include="Assets\lottiefiles.com - Loader 5.json" />
+    <Content Include="Assets\lottiefiles.com - Loading 1.json" />
+    <Content Include="Assets\lottiefiles.com - Loading 2.json" />
+    <Content Include="Assets\lottiefiles.com - Loading 3.json" />
+    <Content Include="Assets\lottiefiles.com - Loading 4.json" />
+    <Content Include="Assets\lottiefiles.com - Mail Sent.json" />
+    <Content Include="Assets\lottiefiles.com - Notifications.json" />
+    <Content Include="Assets\lottiefiles.com - Nudge.json" />
+    <Content Include="Assets\lottiefiles.com - Octopus.json" />
+    <Content Include="Assets\lottiefiles.com - Permission.json" />
+    <Content Include="Assets\lottiefiles.com - Play and Like It.json" />
+    <Content Include="Assets\lottiefiles.com - Postcard.json" />
+    <Content Include="Assets\lottiefiles.com - Preloader.json" />
+    <Content Include="Assets\lottiefiles.com - Progress Success.json" />
+    <Content Include="Assets\lottiefiles.com - React.json" />
+    <Content Include="Assets\lottiefiles.com - Retweet.json" />
+    <Content Include="Assets\lottiefiles.com - Star Wars Rey.json" />
+    <Content Include="Assets\lottiefiles.com - Tadah Image.json" />
+    <Content Include="Assets\lottiefiles.com - Tadah Video.json" />
+    <Content Include="Assets\lottiefiles.com - Touch ID.json" />
+    <Content Include="Assets\lottiefiles.com - Video Camera.json" />
+    <Content Include="Assets\lottiefiles.com - VR Sickness.json" />
+    <Content Include="Assets\lottiefiles.com - VR.json" />
+    <None Include="Assets\lottiefiles\100_percent.json" />
+    <None Include="Assets\lottiefiles\accept_arrows.json" />
+    <None Include="Assets\lottiefiles\android_fingerprint.json" />
+    <None Include="Assets\lottiefiles\anima.json" />
+    <None Include="Assets\lottiefiles\animated_graph.json" />
+    <None Include="Assets\lottiefiles\animated_laptop_.json" />
+    <None Include="Assets\lottiefiles\animated_logo.json" />
+    <None Include="Assets\lottiefiles\atm_link.json" />
+    <None Include="Assets\lottiefiles\autoconnect_loading.json" />
+    <None Include="Assets\lottiefiles\bell.json" />
+    <None Include="Assets\lottiefiles\birds.json" />
+    <None Include="Assets\lottiefiles\bootymovin.json" />
+    <None Include="Assets\lottiefiles\bounching_ball.json" />
+    <None Include="Assets\lottiefiles\brain__.json" />
+    <None Include="Assets\lottiefiles\camera.json" />
+    <None Include="Assets\lottiefiles\cancel_button.json" />
+    <None Include="Assets\lottiefiles\check_pop.json" />
+    <None Include="Assets\lottiefiles\chinese.json" />
+    <None Include="Assets\lottiefiles\clock.json" />
+    <None Include="Assets\lottiefiles\cloud_disconnection.json" />
+    <None Include="Assets\lottiefiles\code_invite_success.json" />
+    <None Include="Assets\lottiefiles\coding_ape.json" />
+    <None Include="Assets\lottiefiles\colorline.json" />
+    <None Include="Assets\lottiefiles\confusion.json" />
+    <None Include="Assets\lottiefiles\construction_site.json" />
+    <None Include="Assets\lottiefiles\cooking_app.json" />
+    <None Include="Assets\lottiefiles\countdown.json" />
+    <None Include="Assets\lottiefiles\cube_loader.json" />
+    <None Include="Assets\lottiefiles\curly_hair_character_loop.json" />
+    <None Include="Assets\lottiefiles\cycle_animation.json" />
+    <None Include="Assets\lottiefiles\day_night_cycle.json" />
+    <None Include="Assets\lottiefiles\done.json" />
+    <None Include="Assets\lottiefiles\download.json" />
+    <None Include="Assets\lottiefiles\drop_to_refresh.json" />
+    <None Include="Assets\lottiefiles\elephant_trunk_swing.json" />
+    <None Include="Assets\lottiefiles\emoji_shock.json" />
+    <None Include="Assets\lottiefiles\emoji_tongue.json" />
+    <None Include="Assets\lottiefiles\emoji_wink.json" />
+    <None Include="Assets\lottiefiles\empty_status.json" />
+    <None Include="Assets\lottiefiles\estimate.json" />
+    <None Include="Assets\lottiefiles\fab_animate.json" />
+    <None Include="Assets\lottiefiles\favourite_app_icon.json" />
+    <None Include="Assets\lottiefiles\finish,done.json" />
+    <None Include="Assets\lottiefiles\fish.json" />
+    <None Include="Assets\lottiefiles\flow.json" />
+    <None Include="Assets\lottiefiles\gears.json" />
+    <None Include="Assets\lottiefiles\glow_loading.json" />
+    <None Include="Assets\lottiefiles\gradient_animated_background.json" />
+    <None Include="Assets\lottiefiles\happy birthday.json" />
+    <None Include="Assets\lottiefiles\hardware.json" />
+    <None Include="Assets\lottiefiles\hint_01.json" />
+    <None Include="Assets\lottiefiles\i%27m_thirsty!.json" />
+    <None Include="Assets\lottiefiles\india.json" />
+    <None Include="Assets\lottiefiles\infinite_rainbow.json" />
+    <None Include="Assets\lottiefiles\iphone_x_loading.json" />
+    <None Include="Assets\lottiefiles\lego_loader.json" />
+    <None Include="Assets\lottiefiles\lightsaber.json" />
+    <None Include="Assets\lottiefiles\loading disc.json" />
+    <None Include="Assets\lottiefiles\loading.json" />
+    <None Include="Assets\lottiefiles\loading_semicircle.json" />
+    <None Include="Assets\lottiefiles\location.json" />
+    <None Include="Assets\lottiefiles\location_marker.json" />
+    <None Include="Assets\lottiefiles\location_pin.json" />
+    <None Include="Assets\lottiefiles\lottiepreview_qr.json" />
+    <None Include="Assets\lottiefiles\lottie_logo_1.json" />
+    <None Include="Assets\lottiefiles\mailsent.json" />
+    <None Include="Assets\lottiefiles\map_animation.json" />
+    <None Include="Assets\lottiefiles\material loading.json" />
+    <None Include="Assets\lottiefiles\material_loader.json" />
+    <None Include="Assets\lottiefiles\material_loading_2.json" />
+    <None Include="Assets\lottiefiles\material_wave_loading.json" />
+    <None Include="Assets\lottiefiles\medal.json" />
+    <None Include="Assets\lottiefiles\menuButton2.json" />
+    <None Include="Assets\lottiefiles\menu_button_alt.json" />
+    <None Include="Assets\lottiefiles\mindful.json" />
+    <None Include="Assets\lottiefiles\mnemonics.json" />
+    <None Include="Assets\lottiefiles\money.json" />
+    <None Include="Assets\lottiefiles\motorcycle.json" />
+    <None Include="Assets\lottiefiles\moving bus.json" />
+    <None Include="Assets\lottiefiles\moving_eye.json" />
+    <None Include="Assets\lottiefiles\notification_request.json" />
+    <None Include="Assets\lottiefiles\octopus.json" />
+    <None Include="Assets\lottiefiles\on_off_settings_switch.json" />
+    <None Include="Assets\lottiefiles\pagado.json" />
+    <None Include="Assets\lottiefiles\pagination.json" />
+    <None Include="Assets\lottiefiles\panel2d.json" />
+    <None Include="Assets\lottiefiles\payme.json" />
+    <None Include="Assets\lottiefiles\pencil_write.json" />
+    <None Include="Assets\lottiefiles\penguin.json" />
+    <None Include="Assets\lottiefiles\pen_tool_loop.json" />
+    <None Include="Assets\lottiefiles\permission.json" />
+    <None Include="Assets\lottiefiles\phonological.json" />
+    <None Include="Assets\lottiefiles\pink_drink_machine.json" />
+    <None Include="Assets\lottiefiles\Plane.json" />
+    <None Include="Assets\lottiefiles\plane_to_dollar.json" />
+    <None Include="Assets\lottiefiles\play,_pause.json" />
+    <None Include="Assets\lottiefiles\playing.json" />
+    <None Include="Assets\lottiefiles\play_and_like_it.json" />
+    <None Include="Assets\lottiefiles\play_button.json" />
+    <None Include="Assets\lottiefiles\poo_loader.json" />
+    <None Include="Assets\lottiefiles\preloader.json" />
+    <None Include="Assets\lottiefiles\progress_bar 2.json" />
+    <None Include="Assets\lottiefiles\progress_bar.json" />
+    <None Include="Assets\lottiefiles\rating.json" />
+    <None Include="Assets\lottiefiles\rejection.json" />
+    <None Include="Assets\lottiefiles\retweet.json" />
+    <None Include="Assets\lottiefiles\rocksauce_title_card.json" />
+    <None Include="Assets\lottiefiles\scan_qr_code_success.json" />
+    <None Include="Assets\lottiefiles\search_button.json" />
+    <None Include="Assets\lottiefiles\servishero_loading.json" />
+    <None Include="Assets\lottiefiles\simple_loader.json" />
+    <None Include="Assets\lottiefiles\socar_logo.json" />
+    <None Include="Assets\lottiefiles\soda_loader.json" />
+    <None Include="Assets\lottiefiles\spacehub.json" />
+    <None Include="Assets\lottiefiles\spinner loading.json" />
+    <None Include="Assets\lottiefiles\splashy_loader.json" />
+    <None Include="Assets\lottiefiles\square_drop_loader.json" />
+    <None Include="Assets\lottiefiles\star 2.json" />
+    <None Include="Assets\lottiefiles\StreetByMorning.json" />
+    <None Include="Assets\lottiefiles\streetby_test_loading.json" />
+    <None Include="Assets\lottiefiles\submit button.json" />
+    <None Include="Assets\lottiefiles\swiftkey-logo.json" />
+    <None Include="Assets\lottiefiles\swipe_right_indicator.json" />
+    <None Include="Assets\lottiefiles\switch_loop.json" />
+    <None Include="Assets\lottiefiles\the_final_frontier.json" />
+    <None Include="Assets\lottiefiles\timer_%283_second_loop%29.json" />
+    <None Include="Assets\lottiefiles\toggle.json" />
+    <None Include="Assets\lottiefiles\toggle_switch.json" />
+    <None Include="Assets\lottiefiles\touch_id.json" />
+    <None Include="Assets\lottiefiles\trail_loading.json" />
+    <None Include="Assets\lottiefiles\trophy.json" />
+    <None Include="Assets\lottiefiles\turbine.json" />
+    <None Include="Assets\lottiefiles\typing dot.json" />
+    <None Include="Assets\lottiefiles\uk.json" />
+    <None Include="Assets\lottiefiles\updating_map.json" />
+    <None Include="Assets\lottiefiles\us.json" />
+    <None Include="Assets\lottiefiles\video_cam.json" />
+    <None Include="Assets\lottiefiles\volume_indicator.json" />
+    <None Include="Assets\lottiefiles\volume_shake_indicator.json" />
+    <None Include="Assets\lottiefiles\vr_animation.json" />
+    <None Include="Assets\lottiefiles\vr_sickness.json" />
+    <None Include="Assets\lottiefiles\wallet recharge.json" />
+    <None Include="Assets\lottiefiles\xamarin_logo_2.json" />
+    <None Include="Assets\lottiefiles\xuanwheel_logo.json" />
+    <None Include="Assets\lottiefiles\x_pop.json" />
+    <None Include="Assets\lottiefiles\youtube_icon_reveal.json" />
+    <None Include="Assets\lottiefiles\___.json" />
+    <Content Include="Assets\LottieLogo1.json" />
+    <Content Include="Assets\LottieLogo2.json" />
+    <Content Include="Assets\lottifiles.com - QR Scan.json" />
+    <None Include="Assets\Mobilo\A.json" />
+    <None Include="Assets\Mobilo\Apostrophe.json" />
+    <None Include="Assets\Mobilo\B.json" />
+    <None Include="Assets\Mobilo\BlinkingCursor.json" />
+    <None Include="Assets\Mobilo\C.json" />
+    <None Include="Assets\Mobilo\Colon.json" />
+    <None Include="Assets\Mobilo\Comma.json" />
+    <None Include="Assets\Mobilo\D.json" />
+    <None Include="Assets\Mobilo\E.json" />
+    <None Include="Assets\Mobilo\F.json" />
+    <None Include="Assets\Mobilo\G.json" />
+    <None Include="Assets\Mobilo\H.json" />
+    <None Include="Assets\Mobilo\I.json" />
+    <None Include="Assets\Mobilo\J.json" />
+    <None Include="Assets\Mobilo\K.json" />
+    <None Include="Assets\Mobilo\L.json" />
+    <None Include="Assets\Mobilo\M.json" />
+    <None Include="Assets\Mobilo\N.json" />
+    <None Include="Assets\Mobilo\O.json" />
+    <None Include="Assets\Mobilo\P.json" />
+    <None Include="Assets\Mobilo\Q.json" />
+    <None Include="Assets\Mobilo\R.json" />
+    <None Include="Assets\Mobilo\S.json" />
+    <None Include="Assets\Mobilo\T.json" />
+    <None Include="Assets\Mobilo\U.json" />
+    <None Include="Assets\Mobilo\V.json" />
+    <None Include="Assets\Mobilo\W.json" />
+    <None Include="Assets\Mobilo\X.json" />
+    <None Include="Assets\Mobilo\Y.json" />
+    <None Include="Assets\Mobilo\Z.json" />
+    <Content Include="Assets\MotionCorpse-Jrcanest.json" />
+    <Content Include="Assets\Name.json" />
+    <Content Include="Assets\PinJump.json" />
+    <Content Include="Assets\Spider Loader.json" />
+    <None Include="Assets\Tests\CheckSwitch.json" />
+    <None Include="Assets\Tests\EllipseDirection.json" />
+    <None Include="Assets\Tests\EndFrame.json" />
+    <None Include="Assets\Tests\Fill.json" />
+    <None Include="Assets\Tests\Frame.json" />
+    <None Include="Assets\Tests\GradientFill.json" />
+    <None Include="Assets\Tests\KeyframeTypes.json" />
+    <None Include="Assets\Tests\Laugh4.json" />
+    <None Include="Assets\Tests\LoopPlayOnce.json" />
+    <None Include="Assets\Tests\MaskInv.json" />
+    <None Include="Assets\Tests\MatteTimeStretchLine.json" />
+    <None Include="Assets\Tests\MatteTimeStretchScan.json" />
+    <None Include="Assets\Tests\MiterLimit.json" />
+    <None Include="Assets\Tests\Parenting.json" />
+    <None Include="Assets\Tests\Precomps.json" />
+    <None Include="Assets\Tests\Repeater.json" />
+    <None Include="Assets\Tests\RGB.json" />
+    <None Include="Assets\Tests\Shapes.json" />
+    <None Include="Assets\Tests\ShapeTypes.json" />
+    <None Include="Assets\Tests\SolidLayerTransform.json" />
+    <None Include="Assets\Tests\SplitDimensions.json" />
+    <None Include="Assets\Tests\Squares.json" />
+    <None Include="Assets\Tests\StartEndFrame.json" />
+    <None Include="Assets\Tests\Stroke.json" />
+    <None Include="Assets\Tests\TextBaseline.json" />
+    <None Include="Assets\Tests\TimeStretch.json" />
+    <None Include="Assets\Tests\TimeStretchMask.json" />
+    <None Include="Assets\Tests\TimeStretchPrecomp.json" />
+    <None Include="Assets\Tests\TrackMattes.json" />
+    <None Include="Assets\Tests\TrimPaths.json" />
+    <None Include="Assets\Tests\WeAccept.json" />
+    <None Include="Assets\Tests\WeAcceptInlineImage.json" />
+    <Content Include="Assets\TwitterHeart.json" />
+    <Content Include="Assets\Walkthrough.json" />
+    <Content Include="Assets\WeAccept.json" />
     <None Include="Retouch Photo_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +612,7 @@
     <Content Include="Assets\BadgeLogo.scale-150.png" />
     <Content Include="Assets\BadgeLogo.scale-200.png" />
     <Content Include="Assets\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\Images\WeAccept\img_0.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />
@@ -217,71 +654,6 @@
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
-    <Content Include="Icon\Avatar.jpg" />
-    <Content Include="Icon\Brushes\AcrylicElementBrush.png" />
-    <Content Include="Icon\Brushes\AcrylicWindowBrush.png" />
-    <Content Include="Icon\Brushes\Color.png" />
-    <Content Include="Icon\Brushes\InkToolbarBrush.png" />
-    <Content Include="Icon\Brushes\LegacyBrush.png" />
-    <Content Include="Icon\Brushes\OthersBrush.png" />
-    <Content Include="Icon\Brushes\RevealBackgroundBrush.png" />
-    <Content Include="Icon\Brushes\RevealBorderBrush.png" />
-    <Content Include="Icon\Brushes\SystemBrush.png" />
-    <Content Include="Icon\Colors\AlphaPicker.png" />
-    <Content Include="Icon\Colors\ColorPicker.png" />
-    <Content Include="Icon\Colors\HSLPicker.png" />
-    <Content Include="Icon\Colors\NumberPicker.png" />
-    <Content Include="Icon\Colors\PalettePicker.png" />
-    <Content Include="Icon\Colors\RGBPicker.png" />
-    <Content Include="Icon\Colors\StrawPicker.png" />
-    <Content Include="Icon\Colors\SwatchesPicker.png" />
-    <Content Include="Icon\Colors\TouchSlider.png" />
-    <Content Include="Icon\Colors\WheelPicker.png" />
-    <Content Include="Icon\Control\ExpandTextView.png" />
-    <Content Include="Icon\Control\PopupMenu.png" />
-    <Content Include="Icon\Control\TabButton.png" />
-    <Content Include="Icon\Helpers\FontWeight.png" />
-    <Content Include="Icon\Helpers\Stretch.png" />
-    <Content Include="Icon\Helpers\Transition.png" />
-    <Content Include="Icon\Helpers\Transition\Common.png" />
-    <Content Include="Icon\Helpers\Transition\Continuum.png" />
-    <Content Include="Icon\Helpers\Transition\DrillIn.png" />
-    <Content Include="Icon\Helpers\Transition\Entrance.png" />
-    <Content Include="Icon\Helpers\Transition\Slide.png" />
-    <Content Include="Icon\Helpers\Transition\Suppress.png" />
-    <Content Include="Icon\Helpers\Transition\Transition.png" />
-    <Content Include="Icon\HERO.jpg" />
-    <Content Include="Icon\HEROS.jpg" />
-    <Content Include="Icon\iconL.png" />
-    <Content Include="Icon\Library\DataTemplateAdaptiver.png" />
-    <Content Include="Icon\Library\DetailsView.png" />
-    <Content Include="Icon\Library\Palette.png" />
-    <Content Include="Icon\Library\ScalableGrid.png" />
-    <Content Include="Icon\Logo.png" />
-    <Content Include="Icon\LogoB.png" />
-    <Content Include="Icon\LogoD.png" />
-    <Content Include="Icon\Others\ToolKit.PNG" />
-    <Content Include="Icon\Others\Win2d.PNG" />
-    <Content Include="Icon\pexels-photo-688659.jpg" />
-    <Content Include="Icon\Photos\BisonBadlandsChillin.jpg" />
-    <Content Include="Icon\Photos\ColumbiaRiverGorge.jpg" />
-    <Content Include="Icon\Photos\GrandTetons.jpg" />
-    <Content Include="Icon\Photos\MilkyWayStHelensHikePurple.jpg" />
-    <Content Include="Icon\Photos\NorthernCascadesReflection.jpg" />
-    <Content Include="Icon\Photos\Owl.jpg" />
-    <Content Include="Icon\Photos\ShootingOnAutoOnTheDrone.jpg" />
-    <Content Include="Icon\Photos\SmithnRockDownTheRiverView.jpg" />
-    <Content Include="Icon\Photos\SnowyInterbayt.jpg" />
-    <Content Include="Icon\Photos\SpeedTripleAtristsPoint.jpg" />
-    <Content Include="Icon\Shadow.png" />
-    <Content Include="Icon\SplashScreen.png" />
-    <Content Include="Icon\Square.png" />
-    <Content Include="Icon\Styles\ButtonStyle.png" />
-    <Content Include="Icon\Styles\TextBlockStyle.png" />
-    <Content Include="Icon\Template\FloatActionButton.png" />
-    <Content Include="Icon\Template\FlyoutTemplate.png" />
-    <Content Include="Icon\Template\SplitPanel.png" />
-    <Content Include="Icon\Template\TagChip.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -296,7 +668,51 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\AppbarControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AppbarControls\AppBarControlButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AppbarControls\AppBarControlSecondButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AppbarControls\AppbarDuplicateControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AppbarControls\AppbarPicturesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AppbarControls\AppbarDeleteControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AppbarControls\AppbarShareControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AppbarControls\AppbarSaveControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BottomBarControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\LayerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LoadingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MainCanvasControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -304,31 +720,171 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControl.xaml">
+    <Page Include="Controls\ToolControls\ToolCursorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dialogs\AndroidDialog.xaml">
+    <Page Include="Controls\ToolControls\ToolEllipseControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dialogs\GameDialog.xaml">
+    <Page Include="Controls\ToolControls\ToolEllipticalMarqueeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Layouts\DrawLayout.xaml">
+    <Page Include="Controls\ToolControls\ToolEraseBrushControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Layouts\MainLayout.xaml">
+    <Page Include="Controls\ToolControls\ToolFloodSetectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DrawPage.xaml">
+    <Page Include="Controls\ToolControls\ToolFreeHandMarqueeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPage.xaml">
+    <Page Include="Controls\ToolControls\ToolGeometryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ToolControls\ToolPaintBrushControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ToolControls\ToolPencilControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ToolControls\ToolPenControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ToolControls\ToolPolygonMarqueeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ToolControls\ToolRectangleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ToolControls\ToolRectangularMarqueeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ToolControls\ToolSelectionBrushControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ToolControls\ToolViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ToolControls\ToolWatercolorPenControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\AddDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\FolderDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DrawLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DrawPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PageControls\PageNumberControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PageControls\PageToggleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ToolPages\ToolCursorPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ToolPages\ToolEllipsePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ToolPages\ToolEllipticalMarqueePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ToolPages\ToolEraseBrushPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ToolPages\ToolFloodSetectPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ToolPages\ToolFreeHandMarqueePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ToolPages\ToolGeometryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ToolPages\ToolMarqueePage\ToolMarqueeCompositeModeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ToolPages\ToolMarqueePage\ToolMarqueeModeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ToolPages\ToolPaintBrushPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ToolPages\ToolPencilPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ToolPages\ToolPenPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ToolPages\ToolPolygonMarqueePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ToolPages\ToolRectanglePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ToolPages\ToolRectangularMarqueePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ToolPages\ToolSelectionBrushPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ToolPages\ToolViewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ToolPages\ToolWatercolorPenPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -384,6 +940,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\ToolControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
@@ -391,6 +951,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.DeveloperTools">
       <Version>4.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI">
+      <Version>3.0.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Animations">
       <Version>3.0.0</Version>
@@ -405,9 +968,7 @@
       <Version>1.23.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Library\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

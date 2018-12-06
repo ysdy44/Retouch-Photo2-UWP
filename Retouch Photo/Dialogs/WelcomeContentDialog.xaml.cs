@@ -28,13 +28,12 @@ namespace Retouch_Photo.Dialogs
             {
                     this.LightToggleButton.IsChecked = value == ElementTheme.Light;
                     this.DarkToggleButton.IsChecked = value == ElementTheme.Dark;
+
                     this.TitleBar.ButtonInactiveBackgroundColor =
                     this.TitleBar.ButtonBackgroundColor =
                     this.TitleBar.InactiveBackgroundColor =
                     this.TitleBar.BackgroundColor =
-                    value == ElementTheme.Light ?
-                    Color.FromArgb(255, 240, 240, 240) :
-                    Color.FromArgb(255, 22, 22, 22);
+                    value == ElementTheme.Light ? Color.FromArgb(255, 243, 243, 245) : Color.FromArgb(255, 32, 32, 33);
             }
         }
         public ElementTheme AppRequestedTheme
