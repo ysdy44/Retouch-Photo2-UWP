@@ -989,12 +989,9 @@
 
                     <Pivot.Title>
                         <Grid x:Name="Title" Height="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"      
-                          Background="{ThemeResource AppForeground}"           >
-                            <!--
-                            apiContractNotPresent5:Background="{ThemeResource AppForeground}"                            
+                              apiContractNotPresent5:Background="{ThemeResource AppForeground}"                            
                               apiContractPresent5:Background="{ThemeResource SystemControlAcrylicWindowBrush}"                              
                               >
-                            -->
                             <StackPanel VerticalAlignment="Bottom" >
                                 <TextBlock Text="Retouh Photo" FontSize="44" FontWeight="Light" HorizontalAlignment="Center"/>
                                 <TextBlock Text="2018. 11.24 Versin" Opacity="0.6" FontSize="16" HorizontalAlignment="Center"/>

@@ -232,7 +232,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="Background" Value="{ThemeResource AppBackground}" />
+        <Setter Property="Background" Value="{ThemeResource AppForeground}" />
         <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}" />
         <Setter Property="BorderThickness" Value="{ThemeResource FlyoutBorderThemeThickness}" />
         <Setter Property="Padding" Value="{ThemeResource FlyoutContentThemePadding}" />

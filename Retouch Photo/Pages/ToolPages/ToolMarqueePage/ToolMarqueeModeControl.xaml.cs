@@ -43,7 +43,7 @@ namespace Retouch_Photo.Pages.ToolPages.ToolMarqueePage
         public event ModeChangedHandler ModeChanged = null;
 
         public ToolMarqueeModeControl()
-        {
+        {           
             this.InitializeComponent(); 
         }
 

@@ -31,66 +31,62 @@ namespace Retouch_Photo.ViewModels
 {
     public class DrawViewModel : INotifyPropertyChanged
     {
-               
-        /// <summary>重新加载ViewModel</summary>
-        /// <param name="project">Project类型</param>
-        /// <param name="canvasWidth">控件宽度</param>
-        /// <param name="canvasHeight">控件高度</param>
-        public void LoadFromProject(Project project, float canvasWidth, float canvasHeight)
+
+        /// <summary>画布控件</summary>
+        public CanvasControl CanvasControl;
+        public void Invalidate(bool isRender = false)
         {
-            this.Width = project.Width;
-            this.Height = project.Height;
+            if (isRender)
+            {
+                this.DottedLine.Render(this.CanvasControl, this.MarqueeSelection, this.Transformer.Matrix);
+                this.RenderLayer.Render();
+            }
 
-            this.Scale = canvasWidth / this.Width / 8.0f * 7.0f;
-            if (this.Scale < 0.1f) this.Scale = 0.1f;
-            this.Position.X = canvasWidth / 2.0f;
-            this.Position.Y = canvasHeight / 2.0f;
+            this.CanvasControl.Invalidate();
+        }
 
-            this.Layers.Clear();
-            foreach (Layer layer in project.Layers) this.Layers.Add(layer);
-            this.Layers.CollectionChanged += (s, e) => this.Invalidate();
-                        
+
+        /// <summary>重新加载ViewModel，可以多次调用</summary>
+        /// <param name="project">Project类型</param>
+        public void LoadFromProject(Project project)
+        {
+            this.Transformer.LoadFromProject(project);
+
+            /////////////////////////////////////////////////////////////////////////////////////
+
             this.MarqueeSelection =new CanvasRenderTarget(this.CanvasControl, project.Width, project.Height);
             this.MarqueeTool.Complete += () =>
             {
                 this.MarqueeTool.Render(this.CanvasControl,  this.MarqueeSelection);
 
-                this.DottedLine.Render(this.CanvasControl, this.MarqueeSelection, this.GetMatrix());
+                this.DottedLine.Render(this.CanvasControl, this.MarqueeSelection, this.Transformer.Matrix);
             };
+            
+            this.RenderLayer.LoadFromProject(this.CanvasControl, project);
+            this.RenderLayer.Layers.CollectionChanged += (s, e) => this.Invalidate(true);
 
-
-            this.GrayWhiteGrid = this.ToGrayWhiteGrid(this.CanvasControl, project.Width, project.Height);
+            /////////////////////////////////////////////////////////////////////////////////////
 
             if (project.Tool < this.Tools.Count) this.Tool = this.Tools[project.Tool];
         }
 
 
+        /// <summary>可以返回</summary>
+        public GoBack GoBack = new GoBack();
+        
 
-        #region Canvas & Marquee
-
-
-        /// <summary>画布控件</summary>
-        public CanvasControl CanvasControl;
-        public void Invalidate(bool isRender=false)
-        {
-            if (isRender) this.DottedLine.Render(this.CanvasControl, this.MarqueeSelection, this.GetMatrix());
-
-
-            this.CanvasControl.Invalidate();
-            this.Text =
-                " X:" +
-               ((int)this.Position.X).ToString()
-               + " Y:" +
-               ((int)this.Position.Y).ToString()
-               + " Scale:" +
-                this.Scale.ToString();
-        }
+        /// <summary>变形金刚(并不</summary>
+        public Transformer Transformer = new Transformer();
+        
         /// <summary>虚线</summary>
         public DottedLine DottedLine;
 
         /// <summary>选区</summary>
         public CanvasRenderTarget MarqueeSelection;
         public MarqueeTool MarqueeTool = new MarqueeTool();
+
+        /// <summary>渲染图层</summary>
+        public RenderLayer RenderLayer = new RenderLayer();
 
         /// <summary> 初始化CanvasControl</summary>
         public void InitializeCanvasControl(CanvasControl control)
@@ -126,93 +122,7 @@ namespace Retouch_Photo.ViewModels
             this.DottedLine = new DottedLine(control);
         }
 
-
-        #endregion
-
-
-        #region GoBack
-
-
-        public string GoBackText = "给ViewModel的CanvasControl赋值，需要提前实例化DrawPage再返回，没有实际意义的字符串";
-
-        /// <summary>
-        /// 是否经过了Frame的Goback
-        /// （这个方法返回一次true后永远返回false，避免重复）
-        /// 
-        ///   private void Page_Loaded(object sender, RoutedEventArgs e)
-        ///   {
-        ///       if (this.ViewModel.IsGoBack) this.Frame.Navigate(typeof(MainPage));            
-        ///   }
-        ///</summary>
-        public bool IsGoBack
-        {
-            get
-            {
-                if (isGoBack)
-                {
-                    isGoBack = false;
-                    return true;
-                }
-                else return false;
-            }
-            set => isGoBack = value;
-        }
-        private bool isGoBack = false;
-
-
-
-        /// <summary>
-        /// 判断文字是否相同，来结束GoBack
-        /// （避免多次GoBack的判断语句）
-        ///</summary>
-        /// 
-        /// protected override void OnNavigatedTo(NavigationEventArgs e)//当前页面成为活动页面
-        /// {
-        ///      if (e.Parameter is string text)
-        ///      {
-        ///            if (this.ViewModel.HadGoBack(text)) return;
-        ///      }
-        /// }
-        /// <param name="text"></param>
-        /// <returns></returns>
-        public bool HadGoBack(string text)
-        {
-            if (text == GoBackText)
-            {
-                IsGoBack = true;
-                return true;
-            }
-            else return false;
-        }
-
-        #endregion
-
-
-        #region Scale & Position
-
-
-        /// <summary>宽度</summary>
-        public float Width = 1000.0f;
-        /// <summary>高度</summary>
-        public float Height = 1000.0f;
-
-        /// <summary>缩放</summary>
-        public float Scale = 1.0f;
-        /// <summary>位置</summary>
-        public Vector2 Position;
-
-        /// <summary>变换矩阵</summary>
-        public Matrix3x2 GetMatrix() =>
-            Matrix3x2.CreateTranslation(-this.Width / 2, -this.Height / 2) *
-            Matrix3x2.CreateScale(this.Scale) *
-            Matrix3x2.CreateTranslation(this.Position);
-        public Matrix3x2 GetInversionMatrix() =>
-            Matrix3x2.CreateTranslation(-this.Position) *
-            Matrix3x2.CreateScale(1 / this.Scale) *
-            Matrix3x2.CreateTranslation(this.Width / 2, this.Height / 2);
-
-
-        #endregion
+               
 
 
         #region Tool & 
@@ -378,73 +288,7 @@ namespace Retouch_Photo.ViewModels
 
         #endregion
 
-
-
-
-
-
-        #region Layer & Render
-
-
-        /// <summary>所有图层</summary>      
-        public ObservableCollection<Layer> Layers
-        {
-            get => layers;
-            set
-            {
-                layers = value;
-                OnPropertyChanged(nameof(Layers));
-            }
-        }
-        private ObservableCollection<Layer> layers = new ObservableCollection<Layer>();
-
-
-        /// <summary>生成渲染</summary>      
-        public ICanvasImage ToRender(ICanvasImage image)
-        {
-            for (int i = this.Layers.Count - 1; i >= 0; i--)
-            {
-                image = Layer.Render(this.Layers[i], image);
-            }
-            return image;
-        }
-
-        /// <summary>灰白网格</summary>
-        public ICanvasImage GrayWhiteGrid;
-        public ICanvasImage ToGrayWhiteGrid(ICanvasResourceCreator creator, int width, int height)
-        {
-            return new CropEffect//裁切成画布大小
-            {
-                SourceRectangle = new Rect(0, 0, Width, Height),
-                Source = new DpiCompensationEffect//根据DPI适配
-                {
-                    Source = new ScaleEffect//缩放
-                    {
-                        Scale = new Vector2(8, 8),
-                        InterpolationMode = CanvasImageInterpolation.NearestNeighbor,
-                        Source = new BorderEffect//无限延伸图片
-                        {
-                            ExtendX = CanvasEdgeBehavior.Wrap,
-                            ExtendY = CanvasEdgeBehavior.Wrap,
-                            Source = CanvasBitmap.CreateFromColors
-                            (
-                               resourceCreator: creator,
-                               widthInPixels: 2,
-                               heightInPixels: 2,
-                               colors: new Color[] //从数组创建2x2图片
-                               {
-                                   Color.FromArgb(255, 233, 233, 233),Colors.White,
-                                   Colors.White,Color.FromArgb(255, 233, 233, 233),
-                               }
-                            )
-                        }
-                    }
-                }
-            };
-        }
-
-
-        #endregion
+                                  
 
 
 
@@ -459,9 +303,7 @@ namespace Retouch_Photo.ViewModels
             }
         }
         private string text;
-
-
-
+               
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

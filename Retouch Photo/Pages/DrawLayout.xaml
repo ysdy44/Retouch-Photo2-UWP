@@ -227,7 +227,7 @@
             <StackPanel x:Name="CenterStackPanel" Grid.Column="1"  Orientation="Horizontal" >
                 <ToggleButton x:Name="SelectionToggleButton" Height="50" Width="60" BorderThickness="0" Background="Transparent" >
                     <FlyoutBase.AttachedFlyout>
-                        <Flyout x:Name="SelectionFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" >
+                        <Flyout x:Name="SelectionFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" >
                             <!--Selection-->
                         </Flyout>
                     </FlyoutBase.AttachedFlyout>
@@ -235,7 +235,7 @@
                 </ToggleButton>
                 <ToggleButton x:Name="EffectsToggleButton" Height="50" Width="60" BorderThickness="0" Background="Transparent">
                     <FlyoutBase.AttachedFlyout>
-                        <Flyout x:Name="EffectsFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" >
+                        <Flyout x:Name="EffectsFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" >
                             <!--Effects-->
                         </Flyout>
                     </FlyoutBase.AttachedFlyout>
@@ -243,7 +243,7 @@
                 </ToggleButton>
                 <ToggleButton x:Name="OthersToggleButton" Height="50" Width="60" BorderThickness="0" Background="Transparent" >
                     <FlyoutBase.AttachedFlyout>
-                        <Flyout x:Name="OthersFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" >
+                        <Flyout x:Name="OthersFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" >
                             <!--Others-->
                         </Flyout>
                     </FlyoutBase.AttachedFlyout>
@@ -276,7 +276,9 @@
             </controls:DropShadowPanel>
 
                 <!--BottomBar-->
-            <Border x:Name="BottomBorder" Grid.Column="1" MinHeight="50" MinWidth="100" Padding="20,0" HorizontalAlignment="Center" SizeChanged="BottomBorder_SizeChanged"/>
+            <Border x:Name="BottomBorder" Grid.Column="1" MinHeight="50" MinWidth="100" Padding="20,0" HorizontalAlignment="Center" SizeChanged="BottomBorder_SizeChanged">
+                <ContentPresenter x:Name="BottomBarFrame" />
+            </Border>
 
         </Grid>
 

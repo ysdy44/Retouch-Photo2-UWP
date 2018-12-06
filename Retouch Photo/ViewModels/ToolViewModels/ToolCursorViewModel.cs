@@ -18,7 +18,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         }
         public override void Delta(Vector2 point, DrawViewModel viewModel)
         {
-            viewModel.Position =  point;
+            viewModel.Transformer.Position =  point;
 
            viewModel.Invalidate(true);
         }

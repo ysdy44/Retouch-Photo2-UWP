@@ -508,11 +508,12 @@
         </Style>
 
     </UserControl.Resources>
+
     
-    
+
     <ListView  x:Name="ListView"
                
-               ItemsSource="{x:Bind ViewModel.Layers,Mode=OneWay}"
+               ItemsSource="{x:Bind ViewModel.RenderLayer.Layers}"
                ItemTemplate="{StaticResource PhoneDataTemplate}"
                             
                IsItemClickEnabled="True" ItemClick="ListView_ItemClick"

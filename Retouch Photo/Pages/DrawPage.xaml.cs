@@ -30,29 +30,27 @@ namespace Retouch_Photo.Pages
     {
         //ViewModel
         public DrawViewModel ViewModel;
-       
+
         public DrawPage()
         {
             this.InitializeComponent();
 
             //ViewModel
             this.ViewModel = App.ViewModel;
+
+            this.MainCanvasControl.SizeChanged += (s, e) => this.ViewModel.Transformer.CanvasSizeChanged(e.NewSize);
         }
 
 
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (this.ViewModel.IsGoBack)
-            {
-                //await Task.Delay(1000);
-                this.Frame.Navigate(typeof(MainPage));
-            }
+            if (this.ViewModel.GoBack.IsGoBack) this.Frame.Navigate(typeof(MainPage));
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)//当前页面成为活动页面
         {
             if (e.Parameter is string text)
             {
-                if (this.ViewModel.HadGoBack(text)) return;                
+                if (this.ViewModel.GoBack.HadGoBack(text)) return;                
             }
             
             if (e.Parameter is XDocument document)
@@ -60,7 +58,7 @@ namespace Retouch_Photo.Pages
                 this.LoadingControl.Visibility = Visibility.Visible;//Loading
                 
                 Project project = Project.CreateFromXDocument(this.ViewModel.CanvasControl, document);
-                this.ViewModel.LoadFromProject(project, (float)this.MainCanvasControl.ActualWidth, (float)this.MainCanvasControl.ActualHeight);
+                this.ViewModel.LoadFromProject(project);
 
                 this.LoadingControl.Visibility = Visibility.Collapsed;//Loading
                 return;
@@ -70,7 +68,7 @@ namespace Retouch_Photo.Pages
                 this.LoadingControl.Visibility = Visibility.Visible;//Loading
 
                 Project project = Project.CreateFromSize(this.ViewModel.CanvasControl, pixels);
-                this.ViewModel.LoadFromProject(project, (float)this.MainCanvasControl.ActualWidth, (float)this.MainCanvasControl.ActualHeight);
+                this.ViewModel.LoadFromProject(project);
 
                 this.LoadingControl.Visibility = Visibility.Collapsed;//Loading
                 return;
@@ -81,7 +79,9 @@ namespace Retouch_Photo.Pages
         }
 
 
-        private async void PopupButton_Tapped(object sender, TappedRoutedEventArgs e)  => await this.WelcomeContentDialog.ShowAsync();//ContentDialogPlacement.InPlace
+        
+
+        private async void PopupButton_Tapped(object sender, TappedRoutedEventArgs e)  => await this.WelcomeContentDialog.ShowAsync(ContentDialogPlacement.InPlace);//ContentDialogPlacement.InPlace
         private async void Back_Tapped(object sender, TappedRoutedEventArgs e)
         {
             this.LoadingControl.Visibility = Visibility.Visible;//Loading

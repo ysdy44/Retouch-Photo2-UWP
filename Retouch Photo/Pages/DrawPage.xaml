@@ -26,15 +26,11 @@
             <local:DrawLayout.RightPane >
                 <con:LayerControl/>
             </local:DrawLayout.RightPane>
-                        
+
             <local:DrawLayout.CenterContent>
-                <con:MainCanvasControl x:Name="MainCanvasControl"/>
+                <con:MainCanvasControl x:Name="MainCanvasControl" />
             </local:DrawLayout.CenterContent>
-            
-            <local:DrawLayout.BottomBar>
-                <con:BottombarControl Tool="{x:Bind ViewModel.Tool,Mode=OneWay}"/>
-            </local:DrawLayout.BottomBar>
-            
+
             <local:DrawLayout.TopLeftPane>
                 <Button  Height="50" Width="60" Content="&#xE0D5;" FontSize="20" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="Back_Tapped"/>
             </local:DrawLayout.TopLeftPane>

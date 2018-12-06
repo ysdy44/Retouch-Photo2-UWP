@@ -7,6 +7,7 @@ using Windows.Graphics.Imaging;
 
 namespace Retouch_Photo.Models
 {
+    /// <summary>项目</summary>
     public class Project
     {
        public string Name;
@@ -20,7 +21,7 @@ namespace Retouch_Photo.Models
         public IEnumerable<Layer> Layers;
 
 
-        public static Project CreateFromSize(ICanvasResourceCreatorWithDpi resourceCreator, BitmapSize pixels)
+        public static Project CreateFromSize(ICanvasResourceCreatorWithDpi creator, BitmapSize pixels)
         {
             int width = (int)pixels.Width;
             int height = (int)pixels.Height;
@@ -31,12 +32,12 @@ namespace Retouch_Photo.Models
                 Height = height,
                 Layers = new List<Layer>()
                 {
-                    Layer.CreateFromSize(resourceCreator,width,height)
+                    Layer.CreateFromSize(creator,width,height)
                 }
             };
         }
 
-        public static Project CreateFromXDocument(ICanvasResourceCreatorWithDpi resourceCreator, XDocument xdoc)
+        public static Project CreateFromXDocument(ICanvasResourceCreatorWithDpi creator, XDocument xdoc)
         {
             return new Project()
             {
@@ -46,7 +47,7 @@ namespace Retouch_Photo.Models
                 Tool = (int)xdoc.Descendants("Tool").Single(),
                 Index = (int)xdoc.Descendants("Index").Single(),
 
-                Layers = from element in xdoc.Descendants("Layer") select Layer.CreateFromXElement(resourceCreator, element)
+                Layers = from element in xdoc.Descendants("Layer") select Layer.CreateFromXElement(creator, element)
             };
         }
 

@@ -28,6 +28,7 @@ namespace Retouch_Photo.Pages
             if (e.NewValue is Tool tool)
             {
                 con.WorkLeftBorder.Content = tool.WorkIcon;
+                con.BottomBarFrame.Content = tool.Page;
             }
         }));
 
@@ -38,8 +39,6 @@ namespace Retouch_Photo.Pages
         public UIElement LeftPane { get => this.LeftBorder.Child; set => this.LeftBorder.Child = value; }
 
         public UIElement CenterContent { get => this.CenterBorder.Child; set => this.CenterBorder.Child = value; }
-        public UIElement BottomBar { get => this.BottomBorder.Child; set => this.BottomBorder.Child = value; }
-
 
         public UIElement TopLeftPane { get => this.TopLeftBorder.Child; set => this.TopLeftBorder.Child = value; }
         public UIElement TopRightPane { get => this.TopRightBorder.Child; set => this.TopRightBorder.Child = value; }

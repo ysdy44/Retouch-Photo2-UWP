@@ -10,7 +10,6 @@
 
     <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
         <StackPanel Orientation="Horizontal" Height="50" Padding="12,4">
-            <TextBlock Text="Mode : " VerticalAlignment="Center"/>
             <toolmarqueepage:ToolMarqueeCompositeModeControl x:Name="CompositModeControl" ModeChanged="CompositModeControl_ModeChanged"/>
         </StackPanel>
     </ScrollViewer>

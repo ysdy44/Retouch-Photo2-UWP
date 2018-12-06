@@ -82,13 +82,13 @@ namespace Retouch_Photo.Controls
         private void Right_Start(Vector2 point)
         {
             this.rightStartPoint = point;
-            this.rightStartPosition = this.ViewModel.Position;
+            this.rightStartPosition = this.ViewModel.Transformer.Position;
 
             this.ViewModel.Invalidate(true);
         }
         private void Right_Delta(Vector2 point)
         {
-            this.ViewModel.Position = this.rightStartPosition - this.rightStartPoint + point;
+            this.ViewModel.Transformer.Position = this.rightStartPosition - this.rightStartPoint + point;
 
             this.ViewModel.Invalidate(true);
         }
@@ -110,18 +110,18 @@ namespace Retouch_Photo.Controls
         private void Double_Start(Vector2 center, float space)
         {
             this.doubleStartCenter = center;
-            this.doubleStartPosition = this.ViewModel.Position;
+            this.doubleStartPosition = this.ViewModel.Transformer.Position;
 
             this.doubleStartSpace = space;
-            this.doubleStartScale = this.ViewModel.Scale;
+            this.doubleStartScale = this.ViewModel.Transformer.Scale;
 
             this.ViewModel.Invalidate(true);
         }
         private void Double_Delta(Vector2 center, float space)
         {
-            this.ViewModel.Position = this.doubleStartPosition - this.doubleStartCenter + center;
+            this.ViewModel.Transformer.Position = this.doubleStartPosition - this.doubleStartCenter + center;
 
-            this.ViewModel.Scale = this.doubleStartScale / this.doubleStartSpace * space;
+            this.ViewModel.Transformer.Scale = this.doubleStartScale / this.doubleStartSpace * space;
 
             this.ViewModel.Invalidate(true);
         }
@@ -140,18 +140,18 @@ namespace Retouch_Photo.Controls
         {
             if (space > 0)
             {
-                if (this.ViewModel.Scale < 10f)
+                if (this.ViewModel.Transformer.Scale < 10f)
                 {
-                    this.ViewModel.Scale *= 1.1f;
-                    this.ViewModel.Position = point + (this.ViewModel.Position - point) * 1.1f;                         
+                    this.ViewModel.Transformer.Scale *= 1.1f;
+                    this.ViewModel.Transformer.Position = point + (this.ViewModel.Transformer.Position - point) * 1.1f;                         
                 }
             }
             else
             {
-                if (this.ViewModel.Scale > 0.1f)
+                if (this.ViewModel.Transformer.Scale > 0.1f)
                 {
-                    this.ViewModel.Scale /= 1.1f;
-                    this.ViewModel.Position = point + (this.ViewModel.Position - point) / 1.1f;
+                    this.ViewModel.Transformer.Scale /= 1.1f;
+                    this.ViewModel.Transformer.Position = point + (this.ViewModel.Transformer.Position - point) / 1.1f;
                 }
             }
 
@@ -165,29 +165,12 @@ namespace Retouch_Photo.Controls
         
 
         private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
-        {
-            if (this.ViewModel.GrayWhiteGrid == null) return;
-      
-            ICanvasImage image = new Transform2DEffect
-            {
-                Source = this.ViewModel.ToRender(this.ViewModel.GrayWhiteGrid),
-                TransformMatrix = this.ViewModel.GetMatrix()
-            };
-            ICanvasImage shadow = new OpacityEffect
-            {
-                Opacity = 0.2f,
-                Source = new ShadowEffect
-                {
-                    Source = image,
-                    ShadowColor = Colors.Black,
-                }
-            };
-            args.DrawingSession.DrawImage(shadow, 5.0f, 5.0f);
-            args.DrawingSession.DrawImage(image);
+        {    
+            this.ViewModel.RenderLayer.Draw(sender, args.DrawingSession, this.ViewModel.Transformer.Matrix);
 
-            this.ViewModel.MarqueeTool.Draw(sender, args.DrawingSession, this.ViewModel.GetMatrix());
+            this.ViewModel.MarqueeTool.Draw(sender, args.DrawingSession, this.ViewModel.Transformer.Matrix);
+
             this.ViewModel.DottedLine.Update();
-
             this.ViewModel.DottedLine.Draw(sender, args.DrawingSession, new Rect(0, 0, sender.ActualWidth, sender.ActualHeight));
         }
 

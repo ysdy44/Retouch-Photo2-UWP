@@ -119,9 +119,6 @@
     <Compile Include="Controls\AppbarControls\AppbarSaveControl.xaml.cs">
       <DependentUpon>AppbarSaveControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BottomBarControl.xaml.cs">
-      <DependentUpon>BottomBarControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>
@@ -190,7 +187,10 @@
     </Compile>
     <Compile Include="Library\Debug.cs" />
     <Compile Include="Library\DottedLine.cs" />
+    <Compile Include="Library\GoBack.cs" />
     <Compile Include="Library\MarqueeTool.cs" />
+    <Compile Include="Library\RenderLayer.cs" />
+    <Compile Include="Library\Transformer.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Pages\DrawLayout.xaml.cs">
       <DependentUpon>DrawLayout.xaml</DependentUpon>
@@ -697,10 +697,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\AppbarControls\AppbarSaveControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\BottomBarControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -108,13 +108,13 @@ namespace Retouch_Photo.Pages
 
         //Appbar
         private void AppbarControl_CancelButtonTapped(object sender, TappedRoutedEventArgs e) => this.Index = 0;
-        private async void AppbarControl_AddButtonTapped(object sender, TappedRoutedEventArgs e) => await this.AddDialog.ShowAsync();//ContentDialogPlacement.InPlace
+        private async void AppbarControl_AddButtonTapped(object sender, TappedRoutedEventArgs e) => await this.AddDialog.ShowAsync(ContentDialogPlacement.InPlace);//ContentDialogPlacement.InPlace
         private void AppbarControl_PicturesButtonTapped(object sender, TappedRoutedEventArgs e) => this.Index = 2;
         private void AppbarControl_SaveButtonTapped(object sender, TappedRoutedEventArgs e) => this.Index = 3;
         private void AppbarControl_ShareButtonTapped(object sender, TappedRoutedEventArgs e) => this.Index = 4;
         private void AppbarControl_DeleteButtonTapped(object sender, TappedRoutedEventArgs e) => this.Index = 5;
         private void AppbarControl_DuplicateButtonTapped(object sender, TappedRoutedEventArgs e) => this.Index = 6;
-        private async void AppbarControl_FolderButtonTapped(object sender, TappedRoutedEventArgs e) => await this.FolderDialog.ShowAsync();//ContentDialogPlacement.InPlace
+        private async void AppbarControl_FolderButtonTapped(object sender, TappedRoutedEventArgs e) => await this.FolderDialog.ShowAsync(ContentDialogPlacement.InPlace);//ContentDialogPlacement.InPlace
 
         private async void AddDialog_AddSize(BitmapSize pixels)
         {

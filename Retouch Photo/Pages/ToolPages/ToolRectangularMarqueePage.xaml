@@ -8,36 +8,13 @@
     xmlns:pagPageControls="using:Retouch_Photo.Pages.PageControls"
     xmlns:toolmarqueepage="using:Retouch_Photo.Pages.ToolPages.ToolMarqueePage"
     NavigationCacheMode="Enabled"
-
     mc:Ignorable="d">
 
     <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
         <StackPanel Orientation="Horizontal" Height="50" Padding="12,4">
-
-            <TextBlock Text="Mode : " VerticalAlignment="Center"/>
             <toolmarqueepage:ToolMarqueeCompositeModeControl x:Name="CompositModeControl" ModeChanged="CompositModeControl_ModeChanged"/>
             <AppBarSeparator/>
             <toolmarqueepage:ToolMarqueeModeControl x:Name="ModeControl" ModeChanged="ModeControl_ModeChanged"/>
-
-
-            <!--
-            
-            <AppBarSeparator/>
-
-            <TextBlock Text="Radius:" VerticalAlignment="Center"/>
-            <pagPageControls:PageNumberControl/>
-            
-            <AppBarSeparator/>
-
-            <AppBarSeparator/>
-
-            <ToggleSwitch />
-            
-            <AppBarSeparator/>
-
-            <CheckBox  Content="aaa"/>
-            -->
-
         </StackPanel>
     </ScrollViewer>
 </Page>
