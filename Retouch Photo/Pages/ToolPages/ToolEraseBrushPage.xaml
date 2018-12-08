@@ -5,10 +5,10 @@
     xmlns:local="using:Retouch_Photo.Pages.ToolPages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
-    <Grid>
+    <StackPanel Orientation="Horizontal" Height="50" Padding="12,4">
 
-    </Grid>
+    </StackPanel>
+    
 </Page>

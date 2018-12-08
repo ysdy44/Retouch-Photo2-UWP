@@ -5,10 +5,10 @@
     xmlns:local="using:Retouch_Photo.Pages.ToolPages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
-    <Grid>
-
-    </Grid>
+    <StackPanel Orientation="Horizontal" Height="50" Padding="12,4">
+        <Slider x:Name="Slider" Minimum="-180" Maximum="180" Width="220" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackground}" Style="{StaticResource AppOpacitySliderStyle}" ValueChanged="Slider_ValueChanged"/>
+    </StackPanel>
+    
 </Page>

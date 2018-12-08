@@ -38,6 +38,9 @@ namespace Retouch_Photo.Library
         /// <summary>位置</summary>
         public Vector2 Position;
 
+        /// <summary>旋转</summary>
+        public float Radian = 0.0f;
+
 
 
         #region Matrix
@@ -51,6 +54,7 @@ namespace Retouch_Photo.Library
 
         private Matrix3x2 GetMatrix() =>
             Matrix3x2.CreateTranslation(-this.Width / 2, -this.Height / 2) *
+            Matrix3x2.CreateRotation(this.Radian) *
             Matrix3x2.CreateScale(this.Scale) *
             Matrix3x2.CreateTranslation(this.Position);
 
@@ -69,6 +73,7 @@ namespace Retouch_Photo.Library
 
         private Matrix3x2 GetInversionMatrix() =>
             Matrix3x2.CreateTranslation(-this.Position) *
+            Matrix3x2.CreateRotation(-this.Radian) *
             Matrix3x2.CreateScale(1 / this.Scale) *
             Matrix3x2.CreateTranslation(this.Width / 2, this.Height / 2);
 

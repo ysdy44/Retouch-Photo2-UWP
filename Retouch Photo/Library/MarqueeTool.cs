@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
 using System;
 using System.Collections.Generic;
@@ -62,7 +63,7 @@ namespace Retouch_Photo.Library
             {
                 case MarqueeToolType.Rectangular:
                 case MarqueeToolType.Elliptical:
-                    this.RectangularEllipticalDraw(ds, matrix);
+                    this.RectangularEllipticalDraw(ds);
                     break;
 
                 case MarqueeToolType.Polygonal:
@@ -83,22 +84,6 @@ namespace Retouch_Photo.Library
 
                 case MarqueeToolType.Elliptical:
                     this.EllipticalDrawOrRender(ds, this.start, this.end, false);
-                    break;
-            }
-        }
-        private void RectangularEllipticalDraw(CanvasDrawingSession ds, Matrix3x2 matrix)
-        {
-            Vector2 start = Vector2.Transform(this.start, matrix);
-            Vector2 end = Vector2.Transform(this.end, matrix);
-
-            switch (this.Tool)
-            {
-                case MarqueeToolType.Rectangular:
-                    this.RectangularDrawOrRender(ds, start, end, false);
-                    break;
-
-                case MarqueeToolType.Elliptical:
-                    this.EllipticalDrawOrRender(ds, start, end, false);
                     break;
             }
         }
@@ -151,13 +136,109 @@ namespace Retouch_Photo.Library
 
         /// <summary>Render the marquee.</summary>
         /// <param name="creator">CanvasControl</param>
-        /// <param name="selection">Marquee selection</param>
+        /// <param name="selection">Marquee selection</param>      
+        /// <param name="matrix">The transformation of the canvas</param>
         public void Render(ICanvasResourceCreator creator, CanvasRenderTarget selection)
+        {
+            switch (this.Tool)
+            {
+                case MarqueeToolType.Rectangular:
+                case MarqueeToolType.Elliptical:
+                    this.RectangularEllipticalRender(creator, selection);
+                    break;
+
+                case MarqueeToolType.Polygonal:
+                case MarqueeToolType.FreeHand:
+                    this.PolygonalFreeHandRender(creator, selection);
+                    break;
+            }
+        }
+        public void Render(ICanvasResourceCreator creator, CanvasRenderTarget selection, Matrix3x2 matrix)
+        {
+            switch (this.Tool)
+            {
+                case MarqueeToolType.Rectangular:
+                case MarqueeToolType.Elliptical:
+                    this.RectangularEllipticalRender(creator, selection, matrix);
+                    break;
+
+                case MarqueeToolType.Polygonal:
+                case MarqueeToolType.FreeHand:
+                    this.PolygonalFreeHandRender(creator, selection);
+                    break;
+            }
+        }
+
+
+        private void RectangularEllipticalRender(ICanvasResourceCreator creator, CanvasRenderTarget selection)
         {
             CanvasCommandList command = new CanvasCommandList(creator);
             using (CanvasDrawingSession ds = command.CreateDrawingSession())
             {
-                this.ToRender(creator,ds);
+                switch (this.Tool)
+                {
+                    case MarqueeToolType.Rectangular:
+                        this.RectangularDrawOrRender(ds, this.start, this.end, true);
+                        break;
+                    case MarqueeToolType.Elliptical:
+                        this.EllipticalDrawOrRender(ds, this.start, this.end, true);
+                        break;
+                }
+            }
+
+            using (CanvasDrawingSession ds = selection.CreateDrawingSession())
+            {
+                if (this.CompositeMode == MarqueeCompositeMode.New) ds.Clear(Color.FromArgb(0, 0, 0, 0));
+                ds.DrawImage(command, 0, 0, selection.Bounds, 1, CanvasImageInterpolation.Linear, this.GetCanvasComposite(this.CompositeMode));
+            }
+        }
+        private void RectangularEllipticalRender(ICanvasResourceCreator creator, CanvasRenderTarget selection, Matrix3x2 matrix)
+        {
+            CanvasCommandList command = new CanvasCommandList(creator);
+            using (CanvasDrawingSession ds = command.CreateDrawingSession())
+            {
+                switch (this.Tool)
+                {
+                    case MarqueeToolType.Rectangular:
+                        this.RectangularDrawOrRender(ds, this.start, this.end, true);
+                        break;
+                    case MarqueeToolType.Elliptical:
+                        this.EllipticalDrawOrRender(ds, this.start, this.end, true);
+                        break;
+                }
+            }
+
+            ICanvasEffect effect = new Transform2DEffect
+            {
+                Source = command,
+                TransformMatrix = matrix
+            };
+
+            using (CanvasDrawingSession ds = selection.CreateDrawingSession())
+            {
+                if (this.CompositeMode == MarqueeCompositeMode.New) ds.Clear(Color.FromArgb(0, 0, 0, 0));
+                ds.DrawImage(effect, 0, 0, selection.Bounds, 1, CanvasImageInterpolation.Linear, this.GetCanvasComposite(this.CompositeMode));
+            }
+        }
+
+
+        private void PolygonalFreeHandRender(ICanvasResourceCreator creator, CanvasRenderTarget selection)
+        {
+            if (this.list == null) return;
+            if (this.list.Count == 0) return;
+
+            CanvasCommandList command = new CanvasCommandList(creator);
+            using (CanvasDrawingSession ds = command.CreateDrawingSession())
+            {
+                switch (this.Tool)
+                {
+                    case MarqueeToolType.Polygonal:
+                        this.PolygonalDrawOrRender(creator, ds, this.list.ToArray(), true);
+                        break;
+                    case MarqueeToolType.FreeHand:
+                        this.FreeHandDraOrRender(creator, ds, this.list.ToArray(), true);
+                        break;
+                }
             }
 
             using (CanvasDrawingSession ds = selection.CreateDrawingSession())
@@ -167,37 +248,7 @@ namespace Retouch_Photo.Library
             }
         }
 
-
-        private void ToRender(ICanvasResourceCreator creator, CanvasDrawingSession ds)
-        {
-            switch (this.Tool)
-            {
-                case MarqueeToolType.Rectangular:
-                    this.RectangularDrawOrRender(ds, this.start, this.end, true);
-                    break;
-
-                case MarqueeToolType.Elliptical:
-                    this.EllipticalDrawOrRender(ds, this.start, this.end, true);
-                    break;
-
-                case MarqueeToolType.Polygonal:
-                    if (this.list == null) return;
-                    if (this.list.Count == 0) return;
-                    this.PolygonalDrawOrRender(creator, ds, this.list.ToArray(), true);
-                    break;
-
-                case MarqueeToolType.FreeHand:
-                    if (this.list == null) return;
-                    if (this.list.Count == 0) return;
-                    this.FreeHandDraOrRender(creator, ds, this.list.ToArray(), true);
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-
+         
         private CanvasComposite GetCanvasComposite(MarqueeCompositeMode mode)
         {
             switch (mode)
@@ -411,7 +462,8 @@ namespace Retouch_Photo.Library
 
 
         /// <summary>Call it at the starting of the operation</summary>
-        /// <param name="v">Vector2</param>
+        /// <param name="v">Vector2</param>      
+        /// <param name="inversionMatrix">The inversion transformation of the canvas</param>
         public void Operator_Start(Vector2 v)
         {
             switch (this.Tool)
@@ -433,11 +485,33 @@ namespace Retouch_Photo.Library
                     break;
             }
         }
+        public void Operator_Start(Vector2 v, Matrix3x2 inversionMatrix)
+        {
+            switch (this.Tool)
+            {
+                case MarqueeToolType.Rectangular:
+                case MarqueeToolType.Elliptical:
+                    this.start = this.end = v;
+                    break;
+
+                case MarqueeToolType.Polygonal:
+                    this.PolygonalOperator_Start(Vector2.Transform(v, inversionMatrix));
+                    break;
+
+                case MarqueeToolType.FreeHand:
+                    this.FreeHandOperator_Start(Vector2.Transform(v, inversionMatrix));
+                    break;
+
+                default:
+                    break;
+            }
+        }
 
 
 
         /// <summary>Call it at the moving of the operation</summary>
         /// <param name="v">Vector2</param>
+        /// <param name="inversionMatrix">The inversion transformation of the canvas</param>
         public void Operator_Delta(Vector2 v)
         {
             switch (this.Tool)
@@ -459,17 +533,33 @@ namespace Retouch_Photo.Library
                     break;
             }
         }
+        public void Operator_Delta(Vector2 v, Matrix3x2 inversionMatrix)
+        {
+            switch (this.Tool)
+            {
+                case MarqueeToolType.Rectangular:
+                case MarqueeToolType.Elliptical:
+                    this.end = v;
+                    break;
+
+                case MarqueeToolType.Polygonal:
+                    this.PolygonalOperator_Delta(Vector2.Transform(v, inversionMatrix));
+                    break;
+
+                case MarqueeToolType.FreeHand:
+                    this.FreeHandOperator_Delta(Vector2.Transform(v, inversionMatrix));
+                    break;
+
+                default:
+                    break;
+            }
+        }
 
 
         /// <summary>Call it at the completing of the operation</summary>
         /// <param name="v">Vector2</param>
-        /// <param name="scale">
-        /// Scale of transformation.
-        /// 
-        /// PolygonalOperator_Complete:
-        ///  if ((this.list.First() - this.list.Last()).LengthSquared() * scale * scale [less than] 100.0f)
-        /// </param>
-        public void Operator_Complete(Vector2 v, float scale = 1.0f)
+        /// <param name="inversionMatrix">The inversion transformation of the canvas</param>
+        public void Operator_Complete(Vector2 v)
         {
             switch (this.Tool)
             {
@@ -480,7 +570,7 @@ namespace Retouch_Photo.Library
                     break;
 
                 case MarqueeToolType.Polygonal:
-                    this.PolygonalOperator_Complete(v, scale);
+                    this.PolygonalOperator_Complete(v);
                     break;
 
                 case MarqueeToolType.FreeHand:
@@ -491,11 +581,32 @@ namespace Retouch_Photo.Library
                     break;
             }
         }
+        public void Operator_Complete(Vector2 v, Matrix3x2 inversionMatrix)
+        {
+            switch (this.Tool)
+            {
+                case MarqueeToolType.Rectangular:
+                case MarqueeToolType.Elliptical:
+                    this.Complete?.Invoke();//Delegate
+                    this.start = this.end = Vector2.Zero;
+                    break;
+
+                case MarqueeToolType.Polygonal:
+                    this.PolygonalOperator_Complete(Vector2.Transform(v, inversionMatrix), inversionMatrix.M11, inversionMatrix.M22);
+                    break;
+
+                case MarqueeToolType.FreeHand:
+                    this.FreeHandOperator_Complete(Vector2.Transform(v, inversionMatrix));
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+
         
 
-     
-
- 
 
         private void FreeHandOperator_Start(Vector2 v) => this.list.Add(v);
         private void FreeHandOperator_Delta(Vector2 v) => this.list.Add(v);
@@ -518,13 +629,13 @@ namespace Retouch_Photo.Library
         {
             if (this.list.Count > 1) this.list[this.list.Count - 1] = v;
         }
-        private void PolygonalOperator_Complete(Vector2 v, float scale=1.0f)
+        private void PolygonalOperator_Complete(Vector2 v, float xscale = 1.0f, float Yscale = 1.0f)
         {
             if (this.isPolygonalOperator)
             {
                 if (this.list.Count > 2)
                 {
-                    if ((this.list.First() - this.list.Last()).LengthSquared() * scale * scale < 100.0f)
+                    if ((this.list.First() - this.list.Last()).LengthSquared() < 100.0f * xscale * Yscale)
                     {
                         this.isPolygonalOperator = false;
                         this.FreeHandOperator_Complete(v);

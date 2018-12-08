@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Retouch_Photo.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,18 +14,28 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
-
 namespace Retouch_Photo.Pages.ToolPages
 {
-    /// <summary>
-    /// 可用于自身或导航至 Frame 内部的空白页。
-    /// </summary>
     public sealed partial class ToolViewPage : Page
     {
+        //ViewModel
+        public DrawViewModel ViewModel;
+
         public ToolViewPage()
         {
             this.InitializeComponent();
+
+            //ViewModel
+            this.ViewModel = App.ViewModel;
+            this.Slider.Value = this.ViewModel.Transformer.Radian*180.0/Math.PI;
+        }
+
+        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            if (this.ViewModel.CanvasControl == null) return;
+         
+            this.ViewModel.Transformer.Radian = (float)(e.NewValue/180.0*Math.PI);
+            this.ViewModel.Invalidate(true);
         }
     }
 }

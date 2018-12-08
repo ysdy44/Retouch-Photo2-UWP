@@ -7,20 +7,14 @@
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
 
-    <Grid>
+    <StackPanel Orientation="Horizontal" Height="50" Padding="12,4">
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="60"/>
-
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="50"/>
-        </Grid.ColumnDefinitions>
         <TextBlock x:Name="sssssssssss" Text="Text" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" />
         <Slider Width="160" Grid.Column="1" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackground}" Style="{StaticResource AppOpacitySliderStyle}"/>
 
         <Button x:Name="OK" Grid.Column="2" FontSize="22" Content="&#xEC61;" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" />
         <Button x:Name="Cancel" Grid.Column="3" FontSize="22" Content="&#xEB90;" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" />
 
-    </Grid>
+    </StackPanel>
+
 </Page>

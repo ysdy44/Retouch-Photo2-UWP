@@ -17,18 +17,15 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         {
             viewModel.MarqueeTool.Tool = MarqueeToolType.Elliptical;
 
-            Vector2 v = viewModel.Transformer.InversionTransform(point);
-            viewModel.MarqueeTool.Operator_Start(v);
+            viewModel.MarqueeTool.Operator_Start(point, viewModel.Transformer.InversionMatrix);
         }
         public override void Delta(Vector2 point, DrawViewModel viewModel)
         {
-            Vector2 v = viewModel.Transformer.InversionTransform(point);
-            viewModel.MarqueeTool.Operator_Delta(v);
+            viewModel.MarqueeTool.Operator_Delta(point, viewModel.Transformer.InversionMatrix);
         }
         public override void Complete(Vector2 point, DrawViewModel viewModel)
         {
-            Vector2 v = viewModel.Transformer.InversionTransform(point);
-            viewModel.MarqueeTool.Operator_Complete(v);
+            viewModel.MarqueeTool.Operator_Complete(point, viewModel.Transformer.InversionMatrix);
         }
 
 

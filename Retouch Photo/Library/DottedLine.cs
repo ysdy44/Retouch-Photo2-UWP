@@ -68,11 +68,13 @@ namespace Retouch_Photo.Library
             using (var ds = commandList.CreateDrawingSession())
             {
                 ds.Clear(Windows.UI.Colors.Transparent);
-                ds.DrawImage(new CropEffect
-                {
-                    SourceRectangle = image.GetBounds(creator),
-                    Source = image,
-                });
+
+                ds.DrawImage(image);
+                //ds.DrawImage(new CropEffect
+                //{
+                //    SourceRectangle = this.GetMatrixRect(image.GetBounds(creator), matrix),
+                //    Source = effect,
+                //});
             }
 
             //DottedLine
@@ -100,11 +102,13 @@ namespace Retouch_Photo.Library
             using (var ds = commandList.CreateDrawingSession())
             {
                 ds.Clear(Windows.UI.Colors.Transparent);
-                ds.DrawImage(new CropEffect
-                {
-                    SourceRectangle = this.GetMatrixRect(image.GetBounds(creator), matrix),
-                    Source = effect,
-                });
+
+                ds.DrawImage(effect);
+                //ds.DrawImage(new CropEffect
+                //{
+                //    SourceRectangle = this.GetMatrixRect(image.GetBounds(creator), matrix),
+                //    Source = effect,
+                //});
             }
 
             //DottedLine
@@ -120,23 +124,26 @@ namespace Retouch_Photo.Library
 
         private Rect GetMatrixRect(Rect rect, Matrix3x2 matrix)
         {
-            /*
+        
               Vector2 a = new Vector2((float)rect.Left, (float)rect.Top);
               Vector2 b = new Vector2((float)rect.Right, (float)rect.Bottom);
               Vector2 aa = Vector2.Transform(a, matrix);
               Vector2 bb = Vector2.Transform(b, matrix);
 
-              return new Rect(aa.X + 2, aa.Y + 2, bb.X - aa.X - 4, bb.Y - aa.Y - 4);
-           */
-            return new Rect
-            (
-               x: rect.X * matrix.M11 + matrix.M31,
-               y: rect.Y * matrix.M22 + matrix.M32,
-               width: rect.Width * matrix.M11,
-               height: rect.Width * matrix.M22
-            );
+            return new Rect(aa.ToPoint(),bb.ToPoint());
+            //return new Rect(aa.X + 2, aa.Y + 2, bb.X - aa.X - 4, bb.Y - aa.Y - 4);
+            /*
+         return new Rect
+         (
+            x: rect.X * matrix.M11 + matrix.M31,
+            y: rect.Y * matrix.M22 + matrix.M32,
+            width: rect.Width * matrix.M11,
+            height: rect.Width * matrix.M22
+         );
+
+*/
         }
-                
+
     }
 }
 

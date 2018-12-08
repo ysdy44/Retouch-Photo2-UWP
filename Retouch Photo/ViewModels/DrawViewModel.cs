@@ -57,7 +57,7 @@ namespace Retouch_Photo.ViewModels
             this.MarqueeSelection =new CanvasRenderTarget(this.CanvasControl, project.Width, project.Height);
             this.MarqueeTool.Complete += () =>
             {
-                this.MarqueeTool.Render(this.CanvasControl,  this.MarqueeSelection);
+                this.MarqueeTool.Render(this.CanvasControl,  this.MarqueeSelection, this.Transformer.InversionMatrix);
 
                 this.DottedLine.Render(this.CanvasControl, this.MarqueeSelection, this.Transformer.Matrix);
             };
