@@ -29,7 +29,6 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.System;
-using Windows.Foundation;
 using Retouch_Photo.ViewModels;
 
 namespace Retouch_Photo.Controls
@@ -57,17 +56,17 @@ namespace Retouch_Photo.Controls
         private void Single_Start(Vector2 point)
         {
             this.ViewModel.Tool.ViewModel.Start(point, this.ViewModel);
-            this.ViewModel.Invalidate();
+            this.ViewModel.Invalidate(isDottedLineRender: true);
         }
         private void Single_Delta(Vector2 point)
         {
             this.ViewModel.Tool.ViewModel.Delta(point, this.ViewModel);
-            this.ViewModel.Invalidate();
+            this.ViewModel.Invalidate(isDottedLineRender: true);
         }
         private void Single_Complete(Vector2 point)
         {
             this.ViewModel.Tool.ViewModel.Complete(point, this.ViewModel);
-            this.ViewModel.Invalidate();
+            this.ViewModel.Invalidate(isDottedLineRender: true);
         }
 
 
@@ -84,24 +83,24 @@ namespace Retouch_Photo.Controls
             this.rightStartPoint = point;
             this.rightStartPosition = this.ViewModel.Transformer.Position;
 
-            this.ViewModel.Invalidate(true);
+            this.ViewModel.Invalidate(isDottedLineRender: true);
         }
         private void Right_Delta(Vector2 point)
         {
             this.ViewModel.Transformer.Position = this.rightStartPosition - this.rightStartPoint + point;
 
-            this.ViewModel.Invalidate(true);
+            this.ViewModel.Invalidate(isDottedLineRender: true);
         }
         private void Right_Complete(Vector2 point)
         {
-            this.ViewModel.Invalidate(true);
+            this.ViewModel.Invalidate(isDottedLineRender: true);
         }
 
 
         #endregion
 
         #region Double
-        
+
 
         Vector2 doubleStartCenter;
         Vector2 doubleStartPosition;
@@ -115,7 +114,7 @@ namespace Retouch_Photo.Controls
             this.doubleStartSpace = space;
             this.doubleStartScale = this.ViewModel.Transformer.Scale;
 
-            this.ViewModel.Invalidate(true);
+            this.ViewModel.Invalidate(isDottedLineRender: true);
         }
         private void Double_Delta(Vector2 center, float space)
         {
@@ -123,11 +122,11 @@ namespace Retouch_Photo.Controls
 
             this.ViewModel.Transformer.Scale = this.doubleStartScale / this.doubleStartSpace * space;
 
-            this.ViewModel.Invalidate(true);
+            this.ViewModel.Invalidate(isDottedLineRender: true);
         }
         private void Double_Complete(Vector2 center, float space)
         {
-            this.ViewModel.Invalidate(true);
+            this.ViewModel.Invalidate(isDottedLineRender: true);
         }
 
         #endregion
@@ -155,17 +154,22 @@ namespace Retouch_Photo.Controls
                 }
             }
 
-            this.ViewModel.Invalidate(true);
+            this.ViewModel.Invalidate(isDottedLineRender: true);
         }
 
 
         #endregion
 
         #region CanvasControl
-        
+
 
         private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {    
+        
+
+                
+
+             
             this.ViewModel.RenderLayer.Draw(sender, args.DrawingSession, this.ViewModel.Transformer.Matrix);
 
             this.ViewModel.MarqueeTool.Draw(sender, args.DrawingSession, this.ViewModel.Transformer.Matrix);

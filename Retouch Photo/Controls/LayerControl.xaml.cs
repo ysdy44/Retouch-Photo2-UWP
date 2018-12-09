@@ -53,12 +53,12 @@ namespace Retouch_Photo.Controls
         private void ListView_ItemClick(object sender, ItemClickEventArgs e){}
 
 
-        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e) => this.ViewModel.Invalidate();
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => this.ViewModel.Invalidate();
+        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e) => this.ViewModel.Invalidate(isRenderLayerRender: true);
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => this.ViewModel.Invalidate(isRenderLayerRender: true);
         private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
             e.Handled = true;
-            this.ViewModel.Invalidate();
+            this.ViewModel.Invalidate(isRenderLayerRender: true);
         }
 
 

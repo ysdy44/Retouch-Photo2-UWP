@@ -10,7 +10,7 @@
     <StackPanel Orientation="Horizontal" Height="50" Padding="12,4">
 
         <TextBlock x:Name="sssssssssss" Text="Text" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <Slider Width="160" Grid.Column="1" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackground}" Style="{StaticResource AppOpacitySliderStyle}"/>
+        <Slider Width="160" Grid.Column="1" Style="{StaticResource AppOpacitySliderStyle}"/>
 
         <Button x:Name="OK" Grid.Column="2" FontSize="22" Content="&#xEC61;" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" />
         <Button x:Name="Cancel" Grid.Column="3" FontSize="22" Content="&#xEB90;" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" />

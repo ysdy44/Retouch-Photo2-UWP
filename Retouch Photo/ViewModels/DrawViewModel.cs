@@ -34,14 +34,13 @@ namespace Retouch_Photo.ViewModels
 
         /// <summary>画布控件</summary>
         public CanvasControl CanvasControl;
-        public void Invalidate(bool isRender = false)
+        public void Invalidate(bool isDottedLineRender = false, bool isRenderLayerRender = false)
         {
-            if (isRender)
-            {
-                this.DottedLine.Render(this.CanvasControl, this.MarqueeSelection, this.Transformer.Matrix);
-                this.RenderLayer.Render();
-            }
+            if (isDottedLineRender) this.DottedLine.Render(this.CanvasControl, this.MarqueeSelection, this.Transformer.Matrix);
 
+            if (isRenderLayerRender) this.RenderLayer.Render();
+
+            this.Text = this.Transformer.Scale.ToString();
             this.CanvasControl.Invalidate();
         }
 
@@ -63,7 +62,8 @@ namespace Retouch_Photo.ViewModels
             };
             
             this.RenderLayer.LoadFromProject(this.CanvasControl, project);
-            this.RenderLayer.Layers.CollectionChanged += (s, e) => this.Invalidate(true);
+            this.RenderLayer.Layers.CollectionChanged += (s, e) => this.Invalidate(isRenderLayerRender: true);
+
 
             /////////////////////////////////////////////////////////////////////////////////////
 

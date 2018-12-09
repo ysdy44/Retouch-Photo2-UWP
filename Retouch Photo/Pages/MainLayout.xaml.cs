@@ -13,12 +13,11 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-//https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
-
 namespace Retouch_Photo.Pages
 {
     public sealed partial class MainLayout : UserControl
     {
+
         public UIElement CenterContent { get => this.CenterBorder.Child; set => this.CenterBorder.Child = value; }
         public UIElement Appbar { get => this.AppbarGrid.Child; set => this.AppbarGrid.Child = value; }
 
@@ -27,6 +26,7 @@ namespace Retouch_Photo.Pages
             this.InitializeComponent();
         }
 
+        // Appbar
         private void AppbarGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             this.AppbarRectangleFrameWidth.Value = e.NewSize.Width;

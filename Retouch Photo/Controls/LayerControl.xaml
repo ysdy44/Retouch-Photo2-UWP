@@ -242,7 +242,7 @@
                             <TextBox Text="{x:Bind Name,Mode=TwoWay}" FontWeight="Medium" HorizontalAlignment="Stretch" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}"/>
 
                             <TextBlock Text="Opacity" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <Slider Value="{x:Bind Opacity,Mode=TwoWay}" TickFrequency="25" TickPlacement="Inline" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}" Style="{StaticResource AppOpacitySliderStyle}" ValueChanged="Slider_ValueChanged"/>
+                            <Slider Value="{x:Bind Opacity,Mode=TwoWay}" TickFrequency="25" TickPlacement="Inline" Background="{ThemeResource AppFill}" Style="{StaticResource AppOpacitySliderStyle}" ValueChanged="Slider_ValueChanged"/>
 
                             <TextBlock Text="BlendMode" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
                             <ComboBox FontWeight="Medium" SelectedIndex="{x:Bind BlendIndex,Mode=TwoWay}" Style="{StaticResource AppComboBoxStyle}" SelectionChanged="ComboBox_SelectionChanged">
@@ -355,7 +355,7 @@
                         <StackPanel  Width="190" >
 
                             <TextBlock Text="Opacity" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <Slider Value="{x:Bind Opacity,Mode=TwoWay}" TickFrequency="25" TickPlacement="Inline" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppFill}" Style="{StaticResource AppOpacitySliderStyle}" ValueChanged="Slider_ValueChanged"/>
+                            <Slider Value="{x:Bind Opacity,Mode=TwoWay}" TickFrequency="25" TickPlacement="Inline" Background="{ThemeResource AppFill}" Style="{StaticResource AppOpacitySliderStyle}" ValueChanged="Slider_ValueChanged"/>
 
                             <TextBlock Text="BlendMode" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
                             <ComboBox  FontWeight="Medium" SelectedIndex="{x:Bind BlendIndex,Mode=TwoWay}" Style="{StaticResource AppComboBoxStyle}" SelectionChanged="ComboBox_SelectionChanged">

@@ -22,7 +22,7 @@
 
     </UserControl.Resources>
 
-    <Border CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}">
+    <Border Style="{StaticResource AppRoundedBorderStyle}">
         <ContentPresenter x:Name="ContentPresenter" MinWidth="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Tapped="ContentPresenter_Tapped"/>
     </Border>
 

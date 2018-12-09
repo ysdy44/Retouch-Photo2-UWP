@@ -9,7 +9,7 @@
     d:DesignHeight="50"
     d:DesignWidth="100">
 
-    <Border MinWidth="100" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}">
+    <Border MinWidth="100" Style="{StaticResource AppRoundedBorderStyle}">
         <Grid >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -22,7 +22,7 @@
                 <FontIcon FontSize="12" Glyph="&#xE935;" FontFamily="Segoe MDL2 Assets"/>
                 <Button.Flyout>
                     <Flyout FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                        <Slider x:Name="Slider" Width="400" TickFrequency="25" TickPlacement="Inline" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" Style="{StaticResource AppOpacitySliderStyle}" ValueChanged="Slider_ValueChanged"/>
+                        <Slider x:Name="Slider" Width="400" TickFrequency="25" TickPlacement="Inline" Style="{StaticResource AppOpacitySliderStyle}" ValueChanged="Slider_ValueChanged"/>
                     </Flyout>
                 </Button.Flyout>
             </Button>

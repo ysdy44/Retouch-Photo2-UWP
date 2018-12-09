@@ -29,6 +29,12 @@ namespace Retouch_Photo.Pages
             {
                 con.WorkLeftBorder.Content = tool.WorkIcon;
                 con.BottomBarFrame.Content = tool.Page;
+
+                if (con.WorkDismissOverlay.Visibility == Visibility.Visible)                
+                    if (e.OldValue is Tool oldTool)                    
+                        if (tool.Type != oldTool.Type)                        
+                            con.WorkOverlay();
+                
             }
         }));
 
@@ -73,17 +79,13 @@ namespace Retouch_Photo.Pages
             this.InitializeComponent();
 
             //WorkLeft
-            this.WorkLeftGrid.Tapped += (sender, e) => Left(null);
-            this.WorkLeftGrid.PointerEntered += (sender, e) => Left(e);
+            this.WorkLeftGrid.Tapped += (sender, e) => this.WorkLeft(null);
+            this.WorkLeftGrid.PointerEntered += (sender, e) => this.WorkLeft(e);
             //WorkRight
-            this.WorkRightGrid.Tapped += (sender, e) => Right(null);
-            this.WorkRightGrid.PointerEntered += (sender, e) => Right(e);
+            this.WorkRightGrid.Tapped += (sender, e) => this.WorkRight(null);
+            this.WorkRightGrid.PointerEntered += (sender, e) => this.WorkRight(e);
             //DismissOverlay
-            this.WorkDismissOverlay.Tapped += (sender, e) =>
-            {
-                this.LeftBorder.Visibility = this.RightBorder.Visibility = this.WorkDismissOverlay.Visibility = Visibility.Collapsed;
-                this.WorkLeftChecked = this.WorkRightChecked = false;
-            };
+            this.WorkDismissOverlay.Tapped += (sender, e) => this.WorkOverlay();
 
             //Selection
             this.SelectionToggleButton.Tapped += (sender, e) => FlyoutBase.ShowAttachedFlyout((ToggleButton)sender);
@@ -99,7 +101,7 @@ namespace Retouch_Photo.Pages
             this.OthersFlyout.Closed += (sender, e) => this.OthersToggleButton.IsChecked = false;
         }
 
-        private void Left(PointerRoutedEventArgs e)
+        private void WorkLeft(PointerRoutedEventArgs e)
         {
             if (e != null)
                 if (e.Pointer.PointerDeviceType != PointerDeviceType.Mouse)
@@ -108,7 +110,7 @@ namespace Retouch_Photo.Pages
             this.LeftBorder.Visibility = this.WorkDismissOverlay.Visibility = Visibility.Visible;
             this.WorkLeftChecked = true;
         }
-        private void Right(PointerRoutedEventArgs e)
+        private void WorkRight(PointerRoutedEventArgs e)
         {
             if (e != null)
                 if (e.Pointer.PointerDeviceType != PointerDeviceType.Mouse)
@@ -118,12 +120,18 @@ namespace Retouch_Photo.Pages
             this.WorkRightChecked = true;
         }
         
+        private void WorkOverlay()
+        {
+            this.LeftBorder.Visibility = this.RightBorder.Visibility = this.WorkDismissOverlay.Visibility = Visibility.Collapsed;
+            this.WorkLeftChecked = this.WorkRightChecked = false;
+        }
+
+        // Appbar
         private void BottomBorder_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             this.AppbarRectangleFrameWidth.Value = e.NewSize.Width;
             this.AppbarRectangleStoryboard.Begin();
         }
-
 
     }
 }

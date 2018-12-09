@@ -11,7 +11,7 @@
     mc:Ignorable="d">
 
     <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
-        <StackPanel Orientation="Horizontal" Height="50" Padding="12,4">
+        <StackPanel Orientation="Horizontal" Height="50" Padding="4">
             <toolmarqueepage:ToolMarqueeCompositeModeControl x:Name="CompositModeControl" ModeChanged="CompositModeControl_ModeChanged"/>
             <AppBarSeparator/>
             <toolmarqueepage:ToolMarqueeModeControl x:Name="ModeControl" ModeChanged="ModeControl_ModeChanged"/>

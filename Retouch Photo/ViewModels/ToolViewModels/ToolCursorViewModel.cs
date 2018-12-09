@@ -20,7 +20,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         {
             viewModel.Transformer.Position =  point;
 
-           viewModel.Invalidate(true);
+            viewModel.Invalidate(isDottedLineRender: true);
         }
         public override void Complete(Vector2 point, DrawViewModel viewModel)
         {

@@ -18,7 +18,7 @@ namespace Retouch_Photo.Library
         {
             this.Width = project.Width;
             this.Height = project.Height;
-
+             
             float widthScale = this.CanvasWidth / this.Width / 8.0f * 7.0f;
             float heightScale = this.CanvasHeight / this.Height / 8.0f * 7.0f;
             this.Scale = Math.Min(widthScale, heightScale);

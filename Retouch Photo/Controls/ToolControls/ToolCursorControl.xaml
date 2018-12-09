@@ -8,6 +8,6 @@
     d:DesignHeight="50"
     d:DesignWidth="50">
     
-    <PathIcon Data=" M5.498,14.484l9.142,0l-14.64,-14.484l0,21.94l5.498,-7.456Z"/>
+    <PathIcon Data="M5.498,14.484l9.142,0l-14.64,-14.484l0,21.94l5.498,-7.456Z"/>
 
 </UserControl>

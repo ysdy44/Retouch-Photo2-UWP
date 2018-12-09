@@ -16,7 +16,6 @@
 
     <Grid>
 
-
         <local:DrawLayout x:Name="DrawLayout" Tool="{x:Bind ViewModel.Tool,Mode=OneWay}">
             
             <local:DrawLayout.LeftPane>
@@ -41,13 +40,15 @@
 
             <local:DrawLayout.TopLeftStackBar>
                 <StackPanel Orientation="Horizontal">
-                    <Border Width="40" Height="40" CornerRadius="20" Margin="5,0" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
+                    <Border Style="{StaticResource AppCircleBorderStyle}">
                         <Button  Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE105;" FontSize="20" Foreground="Gray" FontFamily="Segoe MDL2 Assets" BorderThickness="0" Background="Transparent" />
                     </Border>
-                    <Border Width="40" Height="40" CornerRadius="20" Margin="5,0" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
+                    <ContentControl Width="6"/>
+                    <Border Style="{StaticResource AppCircleBorderStyle}">
                         <Button  Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10E;" FontSize="18" Foreground="Gray" FontFamily="Segoe MDL2 Assets" BorderThickness="0" Background="Transparent" />
                     </Border>
-                    <Border Width="40" Height="40" CornerRadius="20" Margin="5,0" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
+                    <ContentControl Width="6"/>
+                    <Border Style="{StaticResource AppCircleBorderStyle}">
                         <Button  Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10D;" FontSize="18" Foreground="Gray" FontFamily="Segoe MDL2 Assets" BorderThickness="0" Background="Transparent" />
                     </Border>
                 </StackPanel>               
@@ -82,28 +83,6 @@
         <Border IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Top" CornerRadius="4" Margin="60" Width="Auto" MinHeight="24" BorderThickness="1" BorderBrush="#3d9cf7" Background="#b5d4f2"   >
             <TextBlock Text="{x:Bind ViewModel.Text, Mode=OneWay}" Margin="20,0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#0055a4"/>
         </Border>
-
-        <StackPanel Visibility="Collapsed" IsHitTestVisible="False" Grid.ColumnSpan="3" Grid.RowSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Border Width="100" Height="50" Margin="1" Background="{ThemeResource AppForeground}">
-                <TextBlock VerticalAlignment="Center" Text="AppForeground"/>
-            </Border>
-            <Border Width="100" Height="50" Margin="1" Background="{ThemeResource AppBackground}">
-                <TextBlock VerticalAlignment="Center" Text="AppBackground"/>
-            </Border>
-            <Border Width="100" Height="50" Margin="1" Background="{ThemeResource AppBorderBrush}">
-                <TextBlock VerticalAlignment="Center" Text="AppBorderBrush"/>
-            </Border>
-            <AppBarSeparator/>
-            <Border Width="100" Height="50" Margin="1" Background="{ThemeResource AppFill}">
-                <TextBlock VerticalAlignment="Center" Text="AppFill"/>
-            </Border>
-            <Border Width="100" Height="50" Margin="1" Background="{ThemeResource AppStroke}">
-                <TextBlock VerticalAlignment="Center" Text="AppStroke"/>
-            </Border>
-            <Border Width="100" Height="50" Margin="1" Background="{ThemeResource AppLinearBrush}">
-                <TextBlock VerticalAlignment="Center" Text="AppLinearBrush"/>
-            </Border>
-        </StackPanel>
 
     </Grid>
 </Page>
