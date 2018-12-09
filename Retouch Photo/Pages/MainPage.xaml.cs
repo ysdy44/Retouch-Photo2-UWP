@@ -123,6 +123,7 @@ namespace Retouch_Photo.Pages
             await Task.Delay(1000);
 
             this.LoadingControl.Visibility = Visibility.Collapsed;
+
             this.Frame.Navigate(typeof(DrawPage), pixels);//Navigate            
         }
 

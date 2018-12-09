@@ -40,7 +40,7 @@ namespace Retouch_Photo.ViewModels
 
             if (isRenderLayerRender) this.RenderLayer.Render();
 
-            this.Text = this.Transformer.Scale.ToString();
+            this.Text = this.Transformer.Position.X.ToString()+"  "+ this.Transformer.Position.Y.ToString();
             this.CanvasControl.Invalidate();
         }
 
@@ -68,6 +68,10 @@ namespace Retouch_Photo.ViewModels
             /////////////////////////////////////////////////////////////////////////////////////
 
             if (project.Tool < this.Tools.Count) this.Tool = this.Tools[project.Tool];
+
+            /////////////////////////////////////////////////////////////////////////////////////
+
+            this.Invalidate(true, true);
         }
 
 

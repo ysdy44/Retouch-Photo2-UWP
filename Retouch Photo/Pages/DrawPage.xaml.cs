@@ -86,10 +86,16 @@ namespace Retouch_Photo.Pages
         {
             this.LoadingControl.Visibility = Visibility.Visible;//Loading
 
-            await Task.Delay(3333);
+            await Task.Delay(333);
 
             this.LoadingControl.Visibility = Visibility.Collapsed;//Loading
             this.Frame.GoBack();
+        }
+
+        private void SaveButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.ViewModel.Transformer.Fit();
+            this.ViewModel.Invalidate(true,true);
         }
     }
 

@@ -11,14 +11,18 @@ namespace Retouch_Photo.Library
 {
     public class Transformer
     {
-        
+
         /// <summary>重新加载Transformer，可以多次调用</summary>
         /// <param name="project">Project类型</param>
         public void LoadFromProject(Project project)
         {
             this.Width = project.Width;
             this.Height = project.Height;
-             
+
+            this.Fit();
+        }
+        public void Fit()
+        {
             float widthScale = this.CanvasWidth / this.Width / 8.0f * 7.0f;
             float heightScale = this.CanvasHeight / this.Height / 8.0f * 7.0f;
             this.Scale = Math.Min(widthScale, heightScale);

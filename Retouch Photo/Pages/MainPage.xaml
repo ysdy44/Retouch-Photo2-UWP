@@ -993,7 +993,7 @@
                               apiContractPresent5:Background="{ThemeResource SystemControlAcrylicWindowBrush}"                              
                               >
                             <StackPanel VerticalAlignment="Bottom" >
-                                <TextBlock Text="Retouh Photo" FontSize="44" FontWeight="Light" HorizontalAlignment="Center"/>
+                                <TextBlock x:Name="AAAAAAAAAAA" Text="Retouh Photo" FontSize="44" FontWeight="Light" HorizontalAlignment="Center"/>
                                 <TextBlock Text="2018. 11.24 Versin" Opacity="0.6" FontSize="16" HorizontalAlignment="Center"/>
                                 <TextBlock Text="@ysdy44 All rights reserved" Opacity="0.6" FontSize="16" HorizontalAlignment="Center"/>
                             </StackPanel>

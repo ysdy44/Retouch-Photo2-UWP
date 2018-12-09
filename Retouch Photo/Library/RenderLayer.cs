@@ -20,9 +20,12 @@ namespace Retouch_Photo.Library
         {
             this.Layers.Clear();
             foreach (Layer layer in project.Layers) this.Layers.Add(layer);
-                        
+
             this.GrayWhiteGrid = new CanvasRenderTarget(creator, project.Width, project.Height);
-            this.GrayWhiteGridDraw(creator, this.GrayWhiteGrid.CreateDrawingSession());
+            using (CanvasDrawingSession ds = this.GrayWhiteGrid.CreateDrawingSession())
+            {
+                ds.DrawImage(this.GrayWhiteGridDraw(creator));
+            }
 
             this.RenderTarget = new CanvasRenderTarget(creator, project.Width, project.Height);
             this.Render();
@@ -37,9 +40,9 @@ namespace Retouch_Photo.Library
 
         /// <summary>灰白网格</summary>
         public CanvasRenderTarget GrayWhiteGrid;
-        private void GrayWhiteGridDraw(ICanvasResourceCreator creator,CanvasDrawingSession ds)
+        private ICanvasEffect GrayWhiteGridDraw(ICanvasResourceCreator creator)
         {
-            ICanvasEffect image = new DpiCompensationEffect//根据DPI适配
+            return new DpiCompensationEffect//根据DPI适配
             {
                 Source = new ScaleEffect//缩放
                 {
@@ -64,12 +67,8 @@ namespace Retouch_Photo.Library
                 }
 
             };
-
-             
-              ds.DrawImage(image);
-            
         }
-        
+
 
 
         /// <summary>生成渲染</summary>   
