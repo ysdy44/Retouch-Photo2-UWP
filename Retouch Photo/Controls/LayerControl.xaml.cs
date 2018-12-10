@@ -29,7 +29,7 @@ namespace Retouch_Photo.Controls
 
             //ViewModel
             this.ViewModel = App.ViewModel;
-        } 
+        }
 
 
 
@@ -50,15 +50,21 @@ namespace Retouch_Photo.Controls
 
 
 
-        private void ListView_ItemClick(object sender, ItemClickEventArgs e){}
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is Layer item)
+            {
+                this.ViewModel.RenderLayer.SetIndex(item);
+            }
+        }
 
 
-        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e) => this.ViewModel.Invalidate(isRenderLayerRender: true);
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => this.ViewModel.Invalidate(isRenderLayerRender: true);
+        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e) => this.ViewModel.Invalidate(isLayerRender: true);
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => this.ViewModel.Invalidate(isLayerRender: true);
         private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
             e.Handled = true;
-            this.ViewModel.Invalidate(isRenderLayerRender: true);
+            this.ViewModel.Invalidate(isLayerRender: true);
         }
 
 

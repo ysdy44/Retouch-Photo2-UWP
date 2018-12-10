@@ -9,24 +9,14 @@ using System.Threading.Tasks;
 
 namespace Retouch_Photo.ViewModels.ToolViewModels
 {
-    public class ToolViewModel
+    public abstract class ToolViewModel
     {
         public ToolType Type;
 
-        public virtual void Start(Vector2 point, DrawViewModel viewModel)
-        {
-        }
-        public virtual void Delta(Vector2 point, DrawViewModel viewModel)
-        {
-        }
-        public virtual void Complete(Vector2 point, DrawViewModel viewModel)
-        {
-        }
+        public abstract void Start(Vector2 point, DrawViewModel viewModel);
+        public abstract void Delta(Vector2 point, DrawViewModel viewModel);
+        public abstract void Complete(Vector2 point, DrawViewModel viewModel);
 
-        public bool IsRender = false;
-        public virtual void Render(CanvasDrawingSession ds, DrawViewModel viewModel)
-        {
-        }
-
+        public abstract void Draw(CanvasDrawingSession ds, DrawViewModel viewModel);
     }
 }

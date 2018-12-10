@@ -10,13 +10,13 @@ using Windows.UI.Xaml;
 using Microsoft.Graphics.Canvas.Effects;
 using System.Xml.Linq;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo.Models.Layers;
 
 namespace Retouch_Photo.Models
 {
-    public class Layer: INotifyPropertyChanged
+    public abstract class Layer: INotifyPropertyChanged
     {
-
-
+        
         private string name = string.Empty;
         public string Name
         {
@@ -61,37 +61,20 @@ namespace Retouch_Photo.Models
             }
         }
 
-
-        public CanvasRenderTarget CanvasRenderTarget { set;  get; }
-
-
-
-        public static Layer CreateFromSize(ICanvasResourceCreatorWithDpi resourceCreator, int width, int height)
-        {
-            CanvasRenderTarget renderTarget = new CanvasRenderTarget(resourceCreator, width, height);
-
-            return new Layer
-            {
-                Name = "Layer",
-                IsVisual = true,
-                Opacity = 100.0d,
-                BlendIndex = 0,
-                CanvasRenderTarget = renderTarget
-            };
-        }
+        public abstract ICanvasImage GetRender(ICanvasResourceCreator creator);
 
         public static Layer CreateFromXElement(ICanvasResourceCreatorWithDpi resourceCreator, XElement element)
         {
             int width = (int)element.Element("LayerWidth");
             int height = (int)element.Element("LayerHeight");
-            
+
             string strings = element.Element("CanvasRenderTarget").Value;
             byte[] bytes = Convert.FromBase64String(strings);
 
-            CanvasRenderTarget renderTarget = new CanvasRenderTarget(resourceCreator, width, height);
+           CanvasRenderTarget renderTarget = new CanvasRenderTarget(resourceCreator, width, height);
            renderTarget.SetPixelBytes(bytes);
 
-            return new Layer
+            return new PixelLayer
             {
                 Name = element.Element("LayerName").Value,
                 IsVisual = (bool)element.Element("LayerVisual"),
@@ -102,10 +85,10 @@ namespace Retouch_Photo.Models
         }
 
 
-        
 
 
-      
+
+
 
         /// <summary>
         /// 渲染图层
@@ -113,7 +96,7 @@ namespace Retouch_Photo.Models
         /// <param name="layer">当前图层</param>
         /// <param name="image">从当前图层上面 传下来的 图像</param>
         /// <returns>新的 向下传递的 图像</returns>
-        public static ICanvasImage Render(Layer layer, ICanvasImage image)
+        public static ICanvasImage Render(ICanvasResourceCreator creator, Layer layer, ICanvasImage image)
         {
             if (layer.IsVisual == false || layer.Opacity == 0) return image;
 
@@ -121,9 +104,9 @@ namespace Retouch_Photo.Models
             (
                foreground: image,
                blendIndex: layer.BlendIndex,
-               background: (layer.Opacity == 100) ? (ICanvasImage)layer.CanvasRenderTarget : new OpacityEffect
+               background: (layer.Opacity == 100) ? layer.GetRender(creator) : new OpacityEffect
                {
-                   Source = layer.CanvasRenderTarget,
+                   Source = layer.GetRender(creator),
                    Opacity = (float)(layer.Opacity / 100)
                }
             );

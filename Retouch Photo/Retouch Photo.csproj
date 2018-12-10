@@ -191,6 +191,9 @@
     <Compile Include="Library\MarqueeTool.cs" />
     <Compile Include="Library\RenderLayer.cs" />
     <Compile Include="Library\Transformer.cs" />
+    <Compile Include="Models\Layers\GeometryLayer.cs" />
+    <Compile Include="Models\Layers\PixelLayer.cs" />
+    <Compile Include="Models\Layers\GeometryLayers\RectangularLayer.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Pages\DrawLayout.xaml.cs">
       <DependentUpon>DrawLayout.xaml</DependentUpon>

@@ -34,13 +34,17 @@ namespace Retouch_Photo.ViewModels
 
         /// <summary>画布控件</summary>
         public CanvasControl CanvasControl;
-        public void Invalidate(bool isDottedLineRender = false, bool isRenderLayerRender = false)
+        public void Invalidate(bool isDottedLineRender = false,bool isLayerRender = false)
         {
             if (isDottedLineRender) this.DottedLine.Render(this.CanvasControl, this.MarqueeSelection, this.Transformer.Matrix);
+            if (isLayerRender) this.RenderLayer.Render(this.CanvasControl);
 
-            if (isRenderLayerRender) this.RenderLayer.Render();
-
-            this.Text = this.Transformer.Position.X.ToString()+"  "+ this.Transformer.Position.Y.ToString();
+            //this.Text = this.Transformer.Position.X.ToString()+"  "+ this.Transformer.Position.Y.ToString();
+            this.CanvasControl.Invalidate();
+        }
+        public void InvalidateWithJumpedQueueLayer(Layer jumpedQueueLayer)
+        {
+            this.RenderLayer.RenderWithJumpedQueueLayer(this.CanvasControl, jumpedQueueLayer);
             this.CanvasControl.Invalidate();
         }
 
@@ -62,8 +66,11 @@ namespace Retouch_Photo.ViewModels
             };
             
             this.RenderLayer.LoadFromProject(this.CanvasControl, project);
-            this.RenderLayer.Layers.CollectionChanged += (s, e) => this.Invalidate(isRenderLayerRender: true);
-
+            this.RenderLayer.Layers.CollectionChanged += (s, e) =>
+            {
+                this.Invalidate(isLayerRender: true);
+               this.SelectedIndex = this.RenderLayer.Index ?? -1;
+            };
 
             /////////////////////////////////////////////////////////////////////////////////////
 
@@ -92,7 +99,7 @@ namespace Retouch_Photo.ViewModels
         /// <summary>渲染图层</summary>
         public RenderLayer RenderLayer = new RenderLayer();
 
-        /// <summary> 初始化CanvasControl</summary>
+        /// <summary> 初始化CanvasControl, 也是可以绑定它的CreateResources事件</summary>
         public void InitializeCanvasControl(CanvasControl control)
         {
             if (this.CanvasControl != null) return;
@@ -126,11 +133,26 @@ namespace Retouch_Photo.ViewModels
             this.DottedLine = new DottedLine(control);
         }
 
-               
 
 
-        #region Tool & 
 
+        #region Index & Tool
+
+        
+        /// <summary>控件选定索引</summary>      
+        public int SelectedIndex
+        {
+            get=>selectedIndex;            
+            set
+            {
+                selectedIndex = value;
+                OnPropertyChanged(nameof(SelectedIndex));
+            }
+        }
+        private int selectedIndex=-1;
+
+
+        public Color Color = Color.FromArgb(255, 214, 214, 214);
 
         /// <summary>工具</summary>      
         public Tool Tool
@@ -148,6 +170,7 @@ namespace Retouch_Photo.ViewModels
             }
         }
         private Tool tool;
+        
 
         /// <summary>所有工具</summary>
         public List<Tool> Tools => new List<Tool>
@@ -268,8 +291,8 @@ namespace Retouch_Photo.ViewModels
             Type = ToolType.Rectangle,
             Icon = new ToolRectangleControl(),
             WorkIcon = new ToolRectangleControl(),
-            Page = new ToolPenPage(),
-            ViewModel = new ToolPenViewModel(),
+            Page = new ToolRectanglePage(),
+            ViewModel = new ToolRectangleViewModel(),
         },
             new Tool()
         {
@@ -292,7 +315,6 @@ namespace Retouch_Photo.ViewModels
 
         #endregion
 
-                                  
 
 
 

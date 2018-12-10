@@ -27,7 +27,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         }
 
 
-        public override void Render(CanvasDrawingSession ds, DrawViewModel viewModel)
+        public override void Draw(CanvasDrawingSession ds, DrawViewModel viewModel)
         {
         }
 

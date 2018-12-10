@@ -18,21 +18,26 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             viewModel.MarqueeTool.Tool = MarqueeToolType.Rectangular;
 
             viewModel.MarqueeTool.Operator_Start(point, viewModel.Transformer.InversionMatrix);
+            viewModel.Invalidate();
         }
         public override void Delta(Vector2 point, DrawViewModel viewModel)
         {
             viewModel.MarqueeTool.Operator_Delta(point, viewModel.Transformer.InversionMatrix);
+            viewModel.Invalidate();
         }
         public override void Complete(Vector2 point, DrawViewModel viewModel)
         {
             viewModel.MarqueeTool.Operator_Complete(point, viewModel.Transformer.InversionMatrix);
+            viewModel.Invalidate();
         }
 
 
 
-        public override void Render(CanvasDrawingSession ds, DrawViewModel viewModel)
+        public override void Draw(CanvasDrawingSession ds, DrawViewModel viewModel)
         {
+            viewModel.MarqueeTool.Draw(viewModel.CanvasControl, ds, viewModel.Transformer.Matrix);
         }
+
 
     }
 }

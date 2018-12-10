@@ -53,21 +53,9 @@ namespace Retouch_Photo.Controls
 
 
         //单指&&左键&&笔
-        private void Single_Start(Vector2 point)
-        {
-            this.ViewModel.Tool.ViewModel.Start(point, this.ViewModel);
-            this.ViewModel.Invalidate(isDottedLineRender: true);
-        }
-        private void Single_Delta(Vector2 point)
-        {
-            this.ViewModel.Tool.ViewModel.Delta(point, this.ViewModel);
-            this.ViewModel.Invalidate(isDottedLineRender: true);
-        }
-        private void Single_Complete(Vector2 point)
-        {
-            this.ViewModel.Tool.ViewModel.Complete(point, this.ViewModel);
-            this.ViewModel.Invalidate(isDottedLineRender: true);
-        }
+        private void Single_Start(Vector2 point) => this.ViewModel.Tool.ViewModel.Start(point, this.ViewModel);
+        private void Single_Delta(Vector2 point) => this.ViewModel.Tool.ViewModel.Delta(point, this.ViewModel);
+        private void Single_Complete(Vector2 point) => this.ViewModel.Tool.ViewModel.Complete(point, this.ViewModel);
 
 
         #endregion
@@ -164,15 +152,11 @@ namespace Retouch_Photo.Controls
 
 
         private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
-        {    
-        
-
-                
-
-             
+        {
             this.ViewModel.RenderLayer.Draw(sender, args.DrawingSession, this.ViewModel.Transformer.Matrix);
 
-            this.ViewModel.MarqueeTool.Draw(sender, args.DrawingSession, this.ViewModel.Transformer.Matrix);
+            this.ViewModel.Tool.ViewModel.Draw(args.DrawingSession, this.ViewModel);
+         //   this.ViewModel.MarqueeTool.Draw(sender, args.DrawingSession, this.ViewModel.Transformer.Matrix);
 
             this.ViewModel.DottedLine.Update();
             this.ViewModel.DottedLine.Draw(sender, args.DrawingSession, new Rect(0, 0, sender.ActualWidth, sender.ActualHeight));

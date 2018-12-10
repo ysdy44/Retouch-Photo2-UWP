@@ -12,7 +12,10 @@
     SecondaryButtonText="Cancel"
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
-
+<!--
+    
+    
+    
     <ContentDialog.PrimaryButtonStyle>
         <Style  TargetType="Button">
             <Setter Property="Background" Value="{ThemeResource InkToolbarAccentColorThemeBrush}" />
@@ -101,9 +104,9 @@
             <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}" />
             <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}" />
             <Setter Property="BorderThickness" Value="{ThemeResource ContentDialogBorderWidth}" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
             <Setter Property="Padding" Value="0" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="VerticalAlignment" Value="Stretch" />
             <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
             <Setter Property="FontWeight" Value="Medium" />
             <Setter Property="Height" Value="36" />
@@ -177,6 +180,8 @@
         </Style>
     </ContentDialog.SecondaryButtonStyle>
 
+    -->
+    
     <ContentDialog.Title>
         <StackPanel Orientation="Horizontal">
             <Button x:Name="ExpanedButton" VerticalAlignment="Center" Style="{ThemeResource TextBlockButtonStyle}">

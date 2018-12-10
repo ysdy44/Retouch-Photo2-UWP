@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo.Models.Layers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace Retouch_Photo.Models
                 Height = height,
                 Layers = new List<Layer>()
                 {
-                    Layer.CreateFromSize(creator,width,height)
+                   PixelLayer.CreateFromSize(creator,width,height)
                 }
             };
         }

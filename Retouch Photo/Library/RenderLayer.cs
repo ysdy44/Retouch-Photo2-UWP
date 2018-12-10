@@ -28,14 +28,36 @@ namespace Retouch_Photo.Library
             }
 
             this.RenderTarget = new CanvasRenderTarget(creator, project.Width, project.Height);
-            this.Render();
+            this.Render(creator);
         }
 
 
 
+        /// <summary>索引</summary>      
+        public int? Index { get; set; }
+        public void SetIndex(Layer layer)
+        {
+            if (this.Layers == null || this.Layers.Count == 0)
+            {
+                this.Index = null;
+                return;
+            }
+            if (this.Layers.Count == 1 || this.Layers.Contains(layer) == false)
+            {
+                this.Index = 1;
+                return;
+            }
+            this.Index = this.Layers.IndexOf(layer);
+        }
+
+
         /// <summary>所有图层</summary>      
         public ObservableCollection<Layer> Layers = new ObservableCollection<Layer>();
-        
+        public void Insert(Layer layer)
+        {
+            if (this.Index == null) this.Index = 0;
+            this.Layers.Insert(this.Index ?? 0, layer);
+        }
 
 
         /// <summary>灰白网格</summary>
@@ -73,13 +95,13 @@ namespace Retouch_Photo.Library
 
         /// <summary>生成渲染</summary>   
         private CanvasRenderTarget RenderTarget;
-        public void Render()
+        public void Render(ICanvasResourceCreator creator)
         {
             ICanvasImage image = this.GrayWhiteGrid;
 
             for (int i = this.Layers.Count - 1; i >= 0; i--)
             {
-                image = Layer.Render(this.Layers[i], image);
+                image = Layer.Render(creator, this.Layers[i], image);
             }
 
             using (CanvasDrawingSession ds = this.RenderTarget.CreateDrawingSession())
@@ -87,7 +109,24 @@ namespace Retouch_Photo.Library
                 ds.DrawImage(image);
             }
         }
+        public void RenderWithJumpedQueueLayer(ICanvasResourceCreator creator, Layer jumpedQueueLayer)
+        {
+            ICanvasImage image = this.GrayWhiteGrid;
 
+            for (int i = this.Layers.Count - 1; i >= 0; i--)
+            {
+                image = Layer.Render(creator, this.Layers[i], image);
+
+                //Layer: jumped the Queue 
+                if (i == (this.Index ?? 0)) image = Layer.Render(creator, jumpedQueueLayer, image);
+            }
+
+            using (CanvasDrawingSession ds = this.RenderTarget.CreateDrawingSession())
+            {
+                ds.DrawImage(image);
+            }
+        }
+        
 
         /// <summary>Draw</summary>   
         public void Draw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Matrix3x2 matrix)

@@ -491,7 +491,7 @@
             <Setter Property="ItemsPanel">
                 <Setter.Value>
                     <ItemsPanelTemplate>
-                        <ItemsStackPanel VerticalAlignment="Bottom" ItemsUpdatingScrollMode="KeepLastItemInView"/>
+                        <ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView" VerticalAlignment="Bottom"/>
                     </ItemsPanelTemplate>
                 </Setter.Value>
             </Setter>
@@ -509,9 +509,13 @@
 
     </UserControl.Resources>
 
-    
 
+<!--
+            
+    -->
     <ListView  x:Name="ListView"
+                
+               SelectedIndex="{x:Bind ViewModel.SelectedIndex,Mode=OneWay}"
                
                ItemsSource="{x:Bind ViewModel.RenderLayer.Layers}"
                ItemTemplate="{StaticResource PhoneDataTemplate}"
