@@ -69,9 +69,15 @@ namespace Retouch_Photo.ViewModels
             this.RenderLayer.Layers.CollectionChanged += (s, e) =>
             {
                 this.Invalidate(isLayerRender: true);
-               this.SelectedIndex = this.RenderLayer.Index ?? -1;
+                this.SelectedIndex = this.RenderLayer.Index;
             };
 
+            Layer.Remove += (Layer layer) =>
+            {
+                 this.RenderLayer.Remove(layer);
+            };
+ 
+ 
             /////////////////////////////////////////////////////////////////////////////////////
 
             if (project.Tool < this.Tools.Count) this.Tool = this.Tools[project.Tool];
@@ -332,6 +338,6 @@ namespace Retouch_Photo.ViewModels
                
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        protected void OnPropertyChanged(string name) =>this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

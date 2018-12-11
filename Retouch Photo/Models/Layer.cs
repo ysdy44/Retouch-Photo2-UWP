@@ -11,6 +11,8 @@ using Microsoft.Graphics.Canvas.Effects;
 using System.Xml.Linq;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo.Models.Layers;
+using Windows.Foundation;
+using Retouch_Photo.ViewModels;
 
 namespace Retouch_Photo.Models
 {
@@ -62,6 +64,8 @@ namespace Retouch_Photo.Models
         }
 
         public abstract ICanvasImage GetRender(ICanvasResourceCreator creator);
+        public abstract void CurrentDraw(CanvasDrawingSession ds, DrawViewModel viewModel);
+        public abstract VectorRect GetBoundRect(ICanvasResourceCreator creator);
 
         public static Layer CreateFromXElement(ICanvasResourceCreatorWithDpi resourceCreator, XElement element)
         {
@@ -90,9 +94,7 @@ namespace Retouch_Photo.Models
 
 
 
-        /// <summary>
-        /// 渲染图层
-        /// </summary>
+        /// <summary>渲染图层</summary>
         /// <param name="layer">当前图层</param>
         /// <param name="image">从当前图层上面 传下来的 图像</param>
         /// <returns>新的 向下传递的 图像</returns>
@@ -172,7 +174,18 @@ namespace Retouch_Photo.Models
 
 
 
+        //Delegate
+        public delegate void RemoveHandler(Layer layer);
+        public static event RemoveHandler Remove = null;
+        public void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            e.Handled = true;
+            Layer.Remove?.Invoke(this);
+        }
+
+
+
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        protected void OnPropertyChanged(string name) =>this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

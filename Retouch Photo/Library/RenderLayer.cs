@@ -30,33 +30,63 @@ namespace Retouch_Photo.Library
             this.RenderTarget = new CanvasRenderTarget(creator, project.Width, project.Height);
             this.Render(creator);
         }
-
-
+        
 
         /// <summary>索引</summary>      
-        public int? Index { get; set; }
+        public int Index
+        {
+            set => index = value;
+            get
+            {
+                if (this.Layers == null || this.Layers.Count == 0) return -1;
+                if (this.Layers.Count == 1 ) return 0;
+                return index;
+            }
+        }
+        private int index=-1;
+
         public void SetIndex(Layer layer)
         {
             if (this.Layers == null || this.Layers.Count == 0)
             {
-                this.Index = null;
+                this.Index = -1;
                 return;
             }
             if (this.Layers.Count == 1 || this.Layers.Contains(layer) == false)
             {
-                this.Index = 1;
+                this.Index = 0;
                 return;
             }
             this.Index = this.Layers.IndexOf(layer);
         }
 
 
-        /// <summary>所有图层</summary>      
-        public ObservableCollection<Layer> Layers = new ObservableCollection<Layer>();
+        /// <summary>所有图层</summary>  
+        public ObservableCollection<Layer> Layers = new ObservableCollection<Layer>();    
+        public Layer CurrentLayer()
+        {
+            if (this.Layers.Count == 0) return null;
+
+            if (this.Layers.Count == 1) return this.Layers.First();
+
+            if (this.Index >= 0 && this.Index < this.Layers.Count()) return this.Layers[this.Index];
+
+            return null;
+        }
         public void Insert(Layer layer)
         {
-            if (this.Index == null) this.Index = 0;
-            this.Layers.Insert(this.Index ?? 0, layer);
+            if (this.Layers.Count==0)
+            {
+                this.Layers.Add(layer);
+                return;
+            }
+
+            if (this.Index == -1) this.Index = 0;
+            this.Layers.Insert(this.Index , layer);
+        }
+        public void Remove(Layer layer)
+        {
+            this.Layers.Remove(layer);
         }
 
 
@@ -118,7 +148,7 @@ namespace Retouch_Photo.Library
                 image = Layer.Render(creator, this.Layers[i], image);
 
                 //Layer: jumped the Queue 
-                if (i == (this.Index ?? 0)) image = Layer.Render(creator, jumpedQueueLayer, image);
+                if (i == this.Index) image = Layer.Render(creator, jumpedQueueLayer, image);
             }
 
             using (CanvasDrawingSession ds = this.RenderTarget.CreateDrawingSession())

@@ -36,6 +36,7 @@ namespace Retouch_Photo.Controls
             int index = this.ListBox.SelectedIndex;
 
             this.ViewModel.Tool = this.ViewModel.Tools[index];
+            this.ViewModel.Invalidate();
         }
 
 

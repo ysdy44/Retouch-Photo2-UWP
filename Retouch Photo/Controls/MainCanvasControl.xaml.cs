@@ -156,10 +156,12 @@ namespace Retouch_Photo.Controls
             this.ViewModel.RenderLayer.Draw(sender, args.DrawingSession, this.ViewModel.Transformer.Matrix);
 
             this.ViewModel.Tool.ViewModel.Draw(args.DrawingSession, this.ViewModel);
-         //   this.ViewModel.MarqueeTool.Draw(sender, args.DrawingSession, this.ViewModel.Transformer.Matrix);
-
+ 
             this.ViewModel.DottedLine.Update();
             this.ViewModel.DottedLine.Draw(sender, args.DrawingSession, new Rect(0, 0, sender.ActualWidth, sender.ActualHeight));
+            
+            Layer layer = this.ViewModel.RenderLayer.CurrentLayer();
+            if (layer != null) layer.CurrentDraw(args.DrawingSession, this.ViewModel);
         }
 
 

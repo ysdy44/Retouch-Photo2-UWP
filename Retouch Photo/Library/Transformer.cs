@@ -25,10 +25,13 @@ namespace Retouch_Photo.Library
         {
             float widthScale = this.CanvasWidth / this.Width / 8.0f * 7.0f;
             float heightScale = this.CanvasHeight / this.Height / 8.0f * 7.0f;
+
             this.Scale = Math.Min(widthScale, heightScale);
 
             this.Position.X = this.CanvasWidth / 2.0f;
             this.Position.Y = this.CanvasHeight / 2.0f;
+
+            this.Radian = 0.0f;
         }
 
 
@@ -56,6 +59,9 @@ namespace Retouch_Photo.Library
         /// <summary>变换向量</summary>
         public Vector2 Transform(Vector2 point) => Vector2.Transform(point, this.GetMatrix());
 
+        /// <summary>变换矩形</summary>
+        public VectorRect TransformRect(VectorRect rect) => new VectorRect(Vector2.Transform(rect.End, this.Matrix), Vector2.Transform(rect.Start, this.Matrix));
+        
         private Matrix3x2 GetMatrix() =>
             Matrix3x2.CreateTranslation(-this.Width / 2, -this.Height / 2) *
             Matrix3x2.CreateRotation(this.Radian) *
@@ -74,6 +80,9 @@ namespace Retouch_Photo.Library
     
         /// <summary>反向变换向量</summary>
         public Vector2 InversionTransform(Vector2 point) => Vector2.Transform(point, this.GetInversionMatrix());
+
+        /// <summary>反向变换矩形</summary>
+        public VectorRect InversionTransformRect(VectorRect rect) => new VectorRect(Vector2.Transform(rect.End, this.InversionMatrix), Vector2.Transform(rect.Start, this.InversionMatrix));
 
         private Matrix3x2 GetInversionMatrix() =>
             Matrix3x2.CreateTranslation(-this.Position) *

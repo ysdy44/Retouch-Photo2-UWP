@@ -55,6 +55,7 @@ namespace Retouch_Photo.Controls
             if (e.ClickedItem is Layer item)
             {
                 this.ViewModel.RenderLayer.SetIndex(item);
+                this.ViewModel.Invalidate();
             }
         }
 

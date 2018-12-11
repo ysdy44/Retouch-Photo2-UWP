@@ -1,4 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo.Models;
+using Retouch_Photo.Models.Layers.GeometryLayers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +20,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         }
         public override void Delta(Vector2 point, DrawViewModel viewModel)
         {
-            viewModel.Transformer.Position =  point;
+            viewModel.Transformer.Position = point;
 
             viewModel.Invalidate(isDottedLineRender: true);
         }
@@ -30,6 +32,11 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         public override void Draw(CanvasDrawingSession ds, DrawViewModel viewModel)
         {
         }
+
+
+  
+
+
 
     }
 }

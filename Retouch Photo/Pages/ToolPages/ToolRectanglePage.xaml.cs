@@ -15,6 +15,9 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI;
 using Retouch_Photo.Library;
+using Retouch_Photo.Models;
+using Retouch_Photo.Models.Layers.GeometryLayers;
+using Microsoft.Graphics.Canvas.Brushes;
 
 namespace Retouch_Photo.Pages.ToolPages
 {
@@ -46,6 +49,17 @@ namespace Retouch_Photo.Pages.ToolPages
         {
             this.ViewModel.Color = value;
             this.ColorBrush.Color = value;
+
+            Layer layer = this.ViewModel.RenderLayer.CurrentLayer();
+
+            if (layer is RectangularLayer rectangularLayer)  
+            {
+                if (rectangularLayer.FillBrush is CanvasSolidColorBrush brush)
+                {
+                    brush.Color = value;
+                    this.ViewModel.Invalidate(isLayerRender:true);
+                }
+            }
         }
 
     }
