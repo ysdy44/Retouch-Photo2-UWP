@@ -11,11 +11,8 @@ namespace Retouch_Photo.Models.Layers
     public class ImageLayer:Layer
     {
         
-        protected ImageLayer()
-        {
-        }
-
-        public static string ID = "ImageLayer";
+        public static string Type = "ImageLayer";
+        protected ImageLayer() => base.Name = ImageLayer.Type;
 
         public CanvasBitmap Image { set; get; }
 
@@ -26,14 +23,9 @@ namespace Retouch_Photo.Models.Layers
                 Source = Image,
                 TransformMatrix = matrix
             };
-        } 
-        public override VectorRect GetBoundRect(ICanvasResourceCreator creator)
-        {
-            return VectorRect.CreateFormRect(this.Image.Bounds);
         }
+        public override VectorRect GetBoundRect(ICanvasResourceCreator creator) => new VectorRect(this.Image.Bounds);
 
-
-        
 
         public static ImageLayer CreateFromBytes(ICanvasResourceCreatorWithDpi resourceCreator, byte[] bytes, int width, int height)
         {
@@ -47,7 +39,7 @@ namespace Retouch_Photo.Models.Layers
         }
 
         public static ImageLayer CreateFromBitmap(ICanvasResourceCreatorWithDpi resourceCreator, CanvasBitmap bitmap, int width, int height)
-        { 
+        {
             return new ImageLayer
             {
                 Image = bitmap

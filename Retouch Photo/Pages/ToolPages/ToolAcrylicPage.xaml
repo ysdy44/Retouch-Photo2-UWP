@@ -1,18 +1,28 @@
 ﻿<Page
-    x:Class="Retouch_Photo.Pages.ToolPages.ToolEllipticalMarqueePage"
+    x:Class="Retouch_Photo.Pages.ToolPages.ToolAcrylicPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Retouch_Photo.Pages.ToolPages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolmarqueepage="using:Retouch_Photo.Pages.ToolPages.ToolMarqueePage"
+    xmlns:pic="using:Retouch_Photo.Pickers"
     mc:Ignorable="d">
 
     <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
         <StackPanel Orientation="Horizontal" Height="50" Padding="4">
-            <toolmarqueepage:ToolMarqueeCompositeModeControl x:Name="CompositModeControl" ModeChanged="CompositModeControl_ModeChanged"/>
-            <AppBarSeparator/>
             <toolmarqueepage:ToolMarqueeModeControl x:Name="ModeControl" ModeChanged="ModeControl_ModeChanged"/>
+            <AppBarSeparator/>
+            <Border x:Name="ColorButton" Style="{StaticResource AppCircleBorderStyle}" Tapped="ColorButton_Tapped">
+                <Border.Background>
+                    <SolidColorBrush x:Name="ColorBrush" Color="Transparent"/>
+                </Border.Background>
+                <FlyoutBase.AttachedFlyout>
+                    <Flyout x:Name="ColorFlyout">
+                        <pic:ColorPicker x:Name="ColorPicker" Width="200" Height="270" ColorChange="ColorPicker_ColorChange"/>
+                    </Flyout>
+                </FlyoutBase.AttachedFlyout>
+            </Border>
         </StackPanel>
     </ScrollViewer>
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo.Library;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,19 +15,53 @@ namespace Retouch_Photo.Models
     {
         public Vector2 Start;
         public Vector2 End;
+        
+        public VectorRect(Vector2 start, Vector2 end)
+        {
+            this.Start = start;
+            this.End = end;
+        }
+        public VectorRect(Vector2 start, Vector2 end, MarqueeMode mode)
+        {
+            this.Start = start;
+            this.End = end;
 
-        public VectorRect(Vector2 vector1, Vector2 vector2)
-        {
-            this.Start = vector1;
-            this.End = vector2;
+            switch (mode)
+            {
+                case MarqueeMode.Square:
+                    float square = (Math.Abs(start.X - end.X) + Math.Abs(start.Y - end.Y)) / 2;
+                    this.Start = start;
+                    this.End.X = start.X < end.X ? start.X + square : start.X - square;
+                    this.End.Y = start.Y < end.Y ? start.Y + square : start.Y - square;
+                    break;
+
+                case MarqueeMode.Center:
+                    this.Start = start + start - end;
+                    this.End = end;
+                    break;
+
+                case MarqueeMode.SquareAndCenter:
+                    float square2 = (Math.Abs(start.X - end.X) + Math.Abs(start.Y - end.Y)) / 2;
+                    this.Start.X = start.X - square2;
+                    this.Start.Y = start.Y - square2;
+                    this.End.X = start.X + square2;
+                    this.End.Y = start.Y + square2;
+                    break;
+
+                default:
+                    break;
+            }
+
         }
-        public VectorRect(float x1, float y1, float x2, float y2)
+
+        public VectorRect(Rect rect)
         {
-            this.Start.X = x1;
-            this.Start.Y = y1;
-            this.End.X = x2;
-            this.End.Y = y2;
+            this.Start.X = (float)rect.Left;
+            this.Start.Y = (float)rect.Top;
+            this.End.X = (float)rect.Right;
+            this.End.Y = (float)rect.Bottom;
         }
+        public Rect ToRect() => new Rect(this.X, this.Y, this.Width, this.Height);
 
         public float X => Math.Min(this.Start.X, this.End.X);
         public float Y => Math.Min(this.Start.Y, this.End.Y);
@@ -45,16 +80,7 @@ namespace Retouch_Photo.Models
 
         /// <summary>变换矩形</summary>
         public VectorRect Transform(Matrix3x2 matrix) => new VectorRect(Vector2.Transform(this.End, matrix), Vector2.Transform(this.Start, matrix));
-
-        public Rect ToRect() => new Rect(this.X, this.Y, this.Width, this.Height);
-
-        public static VectorRect CreateFormRect(Rect rect)=> new VectorRect
-        (
-            x1: (float)rect.Left, y1: (float)rect.Top,
-            x2: (float)rect.Right, y2: (float)rect.Bottom
-        );
-
-
+                
         /// <summary>Draw nodes and lines ，just like【由】</summary>
         public static void DrawNodeLine(CanvasDrawingSession ds, VectorRect rect, Matrix3x2 canvasToVirtualMatrix, bool isDrawNode=false)
         {
@@ -102,5 +128,6 @@ namespace Retouch_Photo.Models
             ds.FillCircle(vector, 8, Colors.White);
             ds.FillCircle(vector, 6, Colors.DodgerBlue);
         }
+               
     }
 }

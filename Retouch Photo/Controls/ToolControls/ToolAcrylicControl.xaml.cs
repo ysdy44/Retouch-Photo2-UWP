@@ -17,9 +17,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Retouch_Photo.Controls.ToolControls
 {
-    public sealed partial class ToolFreeHandMarqueeControl : UserControl
+    public sealed partial class ToolAcrylicControl : UserControl
     {
-        public ToolFreeHandMarqueeControl()
+        public ToolAcrylicControl()
         {
             this.InitializeComponent();
         }

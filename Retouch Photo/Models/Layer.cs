@@ -21,7 +21,7 @@ namespace Retouch_Photo.Models
 {
     public abstract class Layer: INotifyPropertyChanged
     {
-        private string name = string.Empty;
+        private string name = "Layer";
         public string Name
         {
             get => name;
@@ -31,7 +31,7 @@ namespace Retouch_Photo.Models
                 OnPropertyChanged(nameof(Name));
             }
         }
-
+        
         private double opacity = 100;
         public double Opacity
         {
@@ -65,10 +65,10 @@ namespace Retouch_Photo.Models
             }
         }
 
-  
+
 
         public abstract ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 matrix);
-         public abstract VectorRect GetBoundRect(ICanvasResourceCreator creator);
+        public abstract VectorRect GetBoundRect(ICanvasResourceCreator creator);
 
         public static Layer CreateFromXElement(ICanvasResourceCreatorWithDpi creator, XElement element)
         {
@@ -78,7 +78,7 @@ namespace Retouch_Photo.Models
             string strings = element.Element("CanvasRenderTarget").Value;
             byte[] bytes = Convert.FromBase64String(strings);
 
-            ImageLayer layer = ImageLayer.CreateFromBytes(creator,bytes, width, height);
+            ImageLayer layer = ImageLayer.CreateFromBytes(creator, bytes, width, height);
             layer.Name = element.Element("LayerName").Value;
             layer.IsVisual = (bool)element.Element("LayerVisual");
             layer.Opacity = (double)element.Element("LayerOpacity");

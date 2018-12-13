@@ -131,23 +131,20 @@
     <Compile Include="Controls\SelectionControl.xaml.cs">
       <DependentUpon>SelectionControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ToolControls\ToolAcrylicControl.xaml.cs">
+      <DependentUpon>ToolAcrylicControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ToolControls\ToolCursorControl.xaml.cs">
       <DependentUpon>ToolCursorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ToolControls\ToolEllipseControl.xaml.cs">
       <DependentUpon>ToolEllipseControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\ToolEllipticalMarqueeControl.xaml.cs">
-      <DependentUpon>ToolEllipticalMarqueeControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ToolControls\ToolEraseBrushControl.xaml.cs">
       <DependentUpon>ToolEraseBrushControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ToolControls\ToolFloodSetectControl.xaml.cs">
       <DependentUpon>ToolFloodSetectControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ToolControls\ToolFreeHandMarqueeControl.xaml.cs">
-      <DependentUpon>ToolFreeHandMarqueeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ToolControls\ToolGeometryControl.xaml.cs">
       <DependentUpon>ToolGeometryControl.xaml</DependentUpon>
@@ -161,14 +158,8 @@
     <Compile Include="Controls\ToolControls\ToolPenControl.xaml.cs">
       <DependentUpon>ToolPenControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\ToolPolygonMarqueeControl.xaml.cs">
-      <DependentUpon>ToolPolygonMarqueeControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ToolControls\ToolRectangleControl.xaml.cs">
       <DependentUpon>ToolRectangleControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ToolControls\ToolRectangularMarqueeControl.xaml.cs">
-      <DependentUpon>ToolRectangularMarqueeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ToolControls\ToolSelectionBrushControl.xaml.cs">
       <DependentUpon>ToolSelectionBrushControl.xaml</DependentUpon>
@@ -218,23 +209,20 @@
     <Compile Include="Pages\PageControls\PageToggleControl.xaml.cs">
       <DependentUpon>PageToggleControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ToolPages\ToolAcrylicPage.xaml.cs">
+      <DependentUpon>ToolAcrylicPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ToolPages\ToolCursorPage.xaml.cs">
       <DependentUpon>ToolCursorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ToolPages\ToolEllipsePage.xaml.cs">
       <DependentUpon>ToolEllipsePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\ToolEllipticalMarqueePage.xaml.cs">
-      <DependentUpon>ToolEllipticalMarqueePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\ToolPages\ToolEraseBrushPage.xaml.cs">
       <DependentUpon>ToolEraseBrushPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ToolPages\ToolFloodSetectPage.xaml.cs">
       <DependentUpon>ToolFloodSetectPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\ToolPages\ToolFreeHandMarqueePage.xaml.cs">
-      <DependentUpon>ToolFreeHandMarqueePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ToolPages\ToolGeometryPage.xaml.cs">
       <DependentUpon>ToolGeometryPage.xaml</DependentUpon>
@@ -254,14 +242,8 @@
     <Compile Include="Pages\ToolPages\ToolPenPage.xaml.cs">
       <DependentUpon>ToolPenPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\ToolPolygonMarqueePage.xaml.cs">
-      <DependentUpon>ToolPolygonMarqueePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\ToolPages\ToolRectanglePage.xaml.cs">
       <DependentUpon>ToolRectanglePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\ToolPages\ToolRectangularMarqueePage.xaml.cs">
-      <DependentUpon>ToolRectangularMarqueePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ToolPages\ToolSelectionBrushPage.xaml.cs">
       <DependentUpon>ToolSelectionBrushPage.xaml</DependentUpon>
@@ -316,17 +298,14 @@
     </Compile>
     <Compile Include="Models\Tool.cs" />
     <Compile Include="ViewModels\DrawViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolAcrylicViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolEllipseViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolEllipticalMarqueeViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolEraseBrushViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolFreeHandMarqueeViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolGeometryViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolPaintBrushViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolPencilViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolPenViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolPolygonMarqueeViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolRectangleViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolRectangularMarqueeViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolFloodSetectViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolSelectionBrushViewModel.cs" />
@@ -721,6 +700,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ToolControls\ToolAcrylicControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ToolControls\ToolCursorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -729,19 +712,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\ToolEllipticalMarqueeControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\ToolControls\ToolEraseBrushControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ToolControls\ToolFloodSetectControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ToolControls\ToolFreeHandMarqueeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -761,15 +736,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\ToolPolygonMarqueeControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\ToolControls\ToolRectangleControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ToolControls\ToolRectangularMarqueeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -817,6 +784,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ToolPages\ToolAcrylicPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ToolPages\ToolCursorPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -825,19 +796,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\ToolEllipticalMarqueePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Pages\ToolPages\ToolEraseBrushPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\ToolPages\ToolFloodSetectPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\ToolPages\ToolFreeHandMarqueePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -865,15 +828,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\ToolPolygonMarqueePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Pages\ToolPages\ToolRectanglePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\ToolPages\ToolRectangularMarqueePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

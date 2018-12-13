@@ -200,54 +200,7 @@ namespace Retouch_Photo.ViewModels
             WorkIcon = new ToolFloodSetectControl(),
             Page = new ToolFloodSetectPage(),
             ViewModel = new ToolFloodSetectViewModel(),
-        },
-            //[临时删除]
-            /*
-            new Tool()
-        {
-            Type = ToolType.SelectionBrush,
-            Icon = new ToolSelectionBrushControl(),
-            WorkIcon = new ToolSelectionBrushControl(),
-            Page = new ToolSelectionBrushPage(),
-            ViewModel = new ToolSelectionBrushViewModel(),
-        },
-
-
-            
-            new Tool()
-        {
-            Type = ToolType.RectangularMarquee,
-            Icon = new ToolRectangularMarqueeControl(),
-            WorkIcon = new ToolRectangularMarqueeControl(),
-            Page = new ToolRectangularMarqueePage(),
-            ViewModel = new ToolRectangularMarqueeViewModel(),
-        },
-            new Tool()
-        {
-            Type = ToolType.EllipticalMarquee,
-            Icon = new ToolEllipticalMarqueeControl(),
-            WorkIcon = new ToolEllipticalMarqueeControl(),
-            Page = new ToolEllipticalMarqueePage(),
-            ViewModel = new ToolEllipticalMarqueeViewModel(),
-        },
-            new Tool()
-        {
-            Type = ToolType.PolygonMarquee,
-            Icon = new ToolPolygonMarqueeControl(),
-            WorkIcon = new ToolPolygonMarqueeControl(),
-            Page = new ToolPolygonMarqueePage(),
-            ViewModel = new ToolPolygonMarqueeViewModel(),
-        },
-            new Tool()
-        {
-            Type = ToolType.FreeHandMarquee,
-            Icon = new ToolFreeHandMarqueeControl(),
-            WorkIcon = new ToolFreeHandMarqueeControl(),
-            Page = new ToolFreeHandMarqueePage(),
-            ViewModel = new ToolFreeHandMarqueeViewModel(),
-        },
-
-             */
+        }, 
     
             new Tool()
         {
@@ -314,6 +267,14 @@ namespace Retouch_Photo.ViewModels
             WorkIcon = new ToolGeometryControl(),
             Page = new ToolGeometryPage(),
             ViewModel = new ToolGeometryViewModel(),
+            },
+            new Tool()
+        {
+            Type = ToolType.Acrylic,
+            Icon = new ToolAcrylicControl(),
+            WorkIcon = new ToolAcrylicControl(),
+            Page = new ToolAcrylicPage(),
+            ViewModel = new ToolAcrylicViewModel(),
         }
             };
 

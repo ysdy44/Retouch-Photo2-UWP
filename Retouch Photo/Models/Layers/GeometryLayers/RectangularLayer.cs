@@ -17,8 +17,10 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
 {
     public class RectangularLayer:GeometryLayer
     {
-        public static string ID = "RectangularLayer";
 
+        public static string Type = "RectangularLayer";
+        protected RectangularLayer() => base.Name = RectangularLayer.Type;
+        
         public VectorRect Rect;
          
         public override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 matrix)
