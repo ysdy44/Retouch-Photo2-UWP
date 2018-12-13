@@ -36,21 +36,18 @@ namespace Retouch_Photo.ViewModels
         public CanvasControl CanvasControl;
         public void Invalidate(bool isDottedLineRender = false, bool isLayerRender = false, bool? isThumbnail = null)
         {
-            //[临时删掉]    if (isDottedLineRender) this.DottedLine.Render(this.CanvasControl, this.MarqueeSelection, this.Transformer.Matrix);
-            //耗能大户：*****
-            //[临时删掉]    if (isLayerRender) this.RenderLayer.Render(this.CanvasControl);
+            this.RenderLayer.RenderTarget= this.RenderLayer.GetRender(this.CanvasControl, this.Transformer.CanvasToVirtualMatrix);
 
-            if (isThumbnail == true) this.CanvasControl.DpiScale = 0.1f;
+            if (isThumbnail == true) this.CanvasControl.DpiScale = 0.5f;
             else if (isThumbnail == false) this.CanvasControl.DpiScale = 1.0f;
 
           this.CanvasControl.Invalidate();
         }
         public void InvalidateWithJumpedQueueLayer(Layer jumpedQueueLayer, bool? isThumbnail = null)
         {
-            //耗能大户：*****
-            //[临时删掉]      this.RenderLayer.RenderWithJumpedQueueLayer(this.CanvasControl, jumpedQueueLayer);
+            this.RenderLayer.RenderTarget = this.RenderLayer.GetRenderWithJumpedQueueLayer(this.CanvasControl, this.Transformer.CanvasToVirtualMatrix, jumpedQueueLayer);
 
-            if (isThumbnail == true) this.CanvasControl.DpiScale = 0.1f;
+            if (isThumbnail == true) this.CanvasControl.DpiScale = 0.5f;
             else if (isThumbnail == false) this.CanvasControl.DpiScale = 1.0f;
 
           this.CanvasControl.Invalidate();
@@ -91,7 +88,6 @@ namespace Retouch_Photo.ViewModels
 
 
             this.CanvasControl = control;
-            //[临时删掉]  this.DottedLine = new DottedLine(control);
         }
 
 
@@ -104,15 +100,7 @@ namespace Retouch_Photo.ViewModels
             this.Transformer.LoadFromProject(project);
 
             /////////////////////////////////////////////////////////////////////////////////////
-
-            //[临时删掉]     this.MarqueeSelection =new CanvasRenderTarget(this.CanvasControl, project.Width, project.Height);
-            //[临时删掉]     this.MarqueeTool.Complete += () =>
-            //[临时删掉]    {
-            //[临时删掉]    this.MarqueeTool.Render(this.CanvasControl,  this.MarqueeSelection, this.Transformer.InversionMatrix);
-
-            //[临时删掉]    this.DottedLine.Render(this.CanvasControl, this.MarqueeSelection, this.Transformer.Matrix);
-            //[临时删掉] };
-
+            
             this.RenderLayer.LoadFromProject(this.CanvasControl, project);
             this.RenderLayer.Layers.CollectionChanged += (s, e) =>
             {
@@ -124,7 +112,6 @@ namespace Retouch_Photo.ViewModels
             {
                  this.RenderLayer.Remove(layer);
             };
- 
  
             /////////////////////////////////////////////////////////////////////////////////////
 
@@ -138,22 +125,16 @@ namespace Retouch_Photo.ViewModels
 
         /// <summary>可以返回</summary>
         public GoBack GoBack = new GoBack();
-        
+
 
         /// <summary>变形金刚(并不</summary>
         public Transformer Transformer = new Transformer();
 
         public MarqueeMode MarqueeMode = MarqueeMode.None;
-        /// <summary>虚线</summary>
-        //[临时删掉]   public DottedLine DottedLine;
-
-        /// <summary>选区</summary>
-        //[临时删掉]   public CanvasRenderTarget MarqueeSelection;
-        //[临时删掉]  public MarqueeTool MarqueeTool = new MarqueeTool();
 
         /// <summary>渲染图层</summary>
         public RenderLayer RenderLayer = new RenderLayer();
-
+         
 
 
         #region Index & Tool

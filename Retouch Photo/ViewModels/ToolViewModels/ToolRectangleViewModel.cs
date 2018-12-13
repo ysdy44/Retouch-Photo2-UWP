@@ -27,7 +27,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         public override void Start(Vector2 point, DrawViewModel viewModel)
         {
             this.point = point;
-            this.StartPoint = viewModel.Transformer.InversionTransform(point);
+            this.StartPoint = Vector2.Transform(point, viewModel.Transformer.ControlToVirtualToCanvasMatrix);
             this.Rect.Start = this.Rect.End = this.StartPoint;
 
             if (this.Layer == null) this.Layer = RectangularLayer.CreateFromRect(viewModel.CanvasControl, this.Rect, viewModel.Color);
@@ -38,11 +38,8 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         }
         public override void Delta(Vector2 point, DrawViewModel viewModel)
         {  
-            this.EndPoint = viewModel.Transformer.InversionTransform(point);
+            this.EndPoint = Vector2.Transform(point, viewModel.Transformer.ControlToVirtualToCanvasMatrix);
 
-            //[临时删掉] 
-            
-             
             switch (viewModel.MarqueeMode)
             {
                 case MarqueeMode.None:
@@ -90,7 +87,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
         public override void Draw(CanvasDrawingSession ds, DrawViewModel viewModel)
         {
-            VectorRect.DrawNodeLine(ds, this.Rect, viewModel.Transformer.Matrix);
+            VectorRect.DrawNodeLine(ds, this.Rect, viewModel.Transformer.CanvasToVirtualToControlMatrix);
         }          
 
     }

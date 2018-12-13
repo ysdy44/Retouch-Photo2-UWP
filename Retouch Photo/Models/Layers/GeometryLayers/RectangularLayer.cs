@@ -1,6 +1,7 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Effects;
+using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -20,42 +21,20 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
 
         public VectorRect Rect;
          
-        public override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image)
+        public override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 matrix)
         {
-            CanvasCommandList command = new CanvasCommandList(creator);
+            Rect r = this.Rect.Transform(matrix).ToRect();
 
-            using (CanvasDrawingSession ds= command.CreateDrawingSession())
+            CanvasCommandList command = new CanvasCommandList(creator);
+            using (CanvasDrawingSession ds = command.CreateDrawingSession())
             {
-                if (this.IsFill) ds.FillRectangle(this.Rect.X, this.Rect.Y, this.Rect.Width, this.Rect.Height, this.FillBrush);
-                if (this.IsStroke) ds.DrawRectangle(this.Rect.X, this.Rect.Y, this.Rect.Width, this.Rect.Height, this.StrokeBrush, this.StrokeWidth);
+                if (this.IsFill) ds.FillRectangle(r, this.FillBrush);
+                if (this.IsStroke) ds.DrawRectangle(r, this.StrokeBrush, this.StrokeWidth);
             }
 
-            return new CompositeEffect
-            {
-                Sources =
-                {
-                    new CropEffect
-                    {
-                        SourceRectangle = this.Rect.ToRect(),
-                        BorderMode = EffectBorderMode.Hard,
-                        Source = new GaussianBlurEffect
-                        {
-                            BlurAmount = 20.0f,
-                            Source = image
-                        }
-                    },
-                    new OpacityEffect
-                    {
-                        Source=command,
-                        Opacity=0.3f
-                    },
-                }
-            };
+            return command;
         }
-
-        public override void CurrentDraw(CanvasDrawingSession ds, DrawViewModel viewModel)
-        {
-        }
+         
         public override VectorRect GetBoundRect(ICanvasResourceCreator creator)
         {
             return this.Rect;

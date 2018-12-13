@@ -22,9 +22,6 @@ namespace Retouch_Photo.Library
             foreach (Layer layer in project.Layers) this.Layers.Add(layer);
 
             this.GrayWhiteGrid = this.GrayWhiteGridDraw(creator, project.Width, project.Height);
-
-            this.RenderTarget = new CanvasCommandList(creator);
-            this.Render(creator);
         }
         
 
@@ -96,15 +93,6 @@ namespace Retouch_Photo.Library
             return new CropEffect
             {
                 SourceRectangle = new Windows.Foundation.Rect(0, 0, width, height),
-                Source = new ColorSourceEffect
-                {
-                    Color = Colors.White
-                }
-            };
-
-            return new CropEffect
-            {
-                SourceRectangle = new Windows.Foundation.Rect(0, 0, width, height),
                 Source = new DpiCompensationEffect//根据DPI适配
                 {
                     Source = new ScaleEffect//缩放
@@ -135,69 +123,40 @@ namespace Retouch_Photo.Library
 
 
         /// <summary>生成渲染</summary>   
-        private CanvasCommandList RenderTarget;
-        public void Render(ICanvasResourceCreator creator)
+        public ICanvasImage RenderTarget;
+        public ICanvasImage GetRender(ICanvasResourceCreator creator,Matrix3x2 canvasToVirtualMatrix)
         {
-            ICanvasImage image = this.GrayWhiteGrid;
+            ICanvasImage image = new Transform2DEffect
+            {
+                TransformMatrix = canvasToVirtualMatrix,
+                Source = this.GrayWhiteGrid
+            };
 
             for (int i = this.Layers.Count - 1; i >= 0; i--)
             {
-                image = Layer.Render(creator, this.Layers[i], image);
-            }
-
-            using (CanvasDrawingSession ds = this.RenderTarget.CreateDrawingSession())
-            {
-                ds.DrawImage(image);
-            }
-        }
-        public void RenderWithJumpedQueueLayer(ICanvasResourceCreator creator, Layer jumpedQueueLayer)
-        {
-            ICanvasImage image = this.GrayWhiteGrid;
-
-            for (int i = this.Layers.Count - 1; i >= 0; i--)
-            {
-                image = Layer.Render(creator, this.Layers[i], image);
-
-                //Layer: jumped the Queue (Index: 0~n)
-                if (this.Index == i) image = Layer.Render(creator, jumpedQueueLayer, image);
-            }
-
-            //Layer: jumped the Queue  (Index: -1)
-            if (this.Index == -1) image = Layer.Render(creator, jumpedQueueLayer, image);
-
-            using (CanvasDrawingSession ds = this.RenderTarget.CreateDrawingSession())
-            {
-                ds.DrawImage(image);
-            }
-        }
-
-        //[临时添加]
-        public ICanvasImage GetRender(ICanvasResourceCreator creator)
-        {
-            ICanvasImage image = this.GrayWhiteGrid;
-
-            for (int i = this.Layers.Count - 1; i >= 0; i--)
-            {
-                image = Layer.Render(creator, this.Layers[i], image);
+                image = Layer.Render(creator, this.Layers[i], image, canvasToVirtualMatrix);
             }
 
             return image;
         }    
-        //[临时添加]
-        public ICanvasImage GetRenderWithJumpedQueueLayer(ICanvasResourceCreator creator, Layer jumpedQueueLayer)
+        public ICanvasImage GetRenderWithJumpedQueueLayer(ICanvasResourceCreator creator, Matrix3x2 canvasToVirtualMatrix, Layer jumpedQueueLayer)
         {
-            ICanvasImage image = this.GrayWhiteGrid;
+            ICanvasImage image = new Transform2DEffect
+            {
+                TransformMatrix = canvasToVirtualMatrix,
+                Source = this.GrayWhiteGrid
+            };
 
             for (int i = this.Layers.Count - 1; i >= 0; i--)
             {
-                image = Layer.Render(creator, this.Layers[i], image);
+                image = Layer.Render(creator, this.Layers[i], image, canvasToVirtualMatrix);
 
                 //Layer: jumped the Queue (Index: 0~n)
-                if (this.Index == i) image = Layer.Render(creator, jumpedQueueLayer, image);
+                if (this.Index == i) image = Layer.Render(creator, jumpedQueueLayer, image, canvasToVirtualMatrix);
             }
 
             //Layer: jumped the Queue  (Index: -1)
-            if (this.Index == -1) image = Layer.Render(creator, jumpedQueueLayer, image);
+            if (this.Index == -1) image = Layer.Render(creator, jumpedQueueLayer, image, canvasToVirtualMatrix);
 
             return image;
         }
@@ -205,59 +164,31 @@ namespace Retouch_Photo.Library
 
 
         /// <summary>Draw</summary>   
-        public void Draw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Matrix3x2 matrix)
+        public void Draw(ICanvasImage renderImage, CanvasDrawingSession ds, Matrix3x2 virtualToControlMatrix)
         {
-            if (this.RenderTarget == null) return;
-
-            ICanvasImage image = new Transform2DEffect
-            {
-                Source = this.RenderTarget,
-                TransformMatrix = matrix
-            };
-
-
-            //耗能大户：**
-            ICanvasImage shadow = new OpacityEffect
-            {
-                Opacity = 0.2f,
-                Source = new ShadowEffect
-                {
-                    Source = image,
-                    ShadowColor = Colors.Black,
-                }
-            };
-
-            ds.DrawImage(shadow, 5.0f, 5.0f);
+            if (renderImage == null) return;
+           
+            /*
              
-            ds.DrawImage(image);
-        }
-
-        //[临时添加]     
-        public void GetDraw(ICanvasImage RenderTarget, CanvasDrawingSession ds, Matrix3x2 matrix)
-        {
-            if (RenderTarget == null) return;
-
-            ICanvasImage image = new Transform2DEffect
-            {
-                Source = RenderTarget,
-                TransformMatrix = matrix
-            };
-
-
-            //耗能大户：**
             ICanvasImage shadow = new OpacityEffect
             {
                 Opacity = 0.2f,
                 Source = new ShadowEffect
                 {
-                    Source = image,
                     ShadowColor = Colors.Black,
+                    Source = renderImage
                 }
             };
 
             ds.DrawImage(shadow, 5.0f, 5.0f);
+             */
 
-            ds.DrawImage(image);
+
+            ds.DrawImage(new Transform2DEffect
+            {
+                Source=renderImage,
+                TransformMatrix=virtualToControlMatrix
+            });
         }
 
 

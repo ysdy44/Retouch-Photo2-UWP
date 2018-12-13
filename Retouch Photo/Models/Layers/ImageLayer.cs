@@ -1,5 +1,7 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo.ViewModels;
+using System.Numerics;
 using Windows.Foundation;
 using Windows.Graphics.Effects;
 using Windows.UI;
@@ -17,14 +19,14 @@ namespace Retouch_Photo.Models.Layers
 
         public CanvasBitmap Image { set; get; }
 
-        public override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image)
+        public override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 matrix)
         {
-            return this.Image;
-        }
-        public override void CurrentDraw(CanvasDrawingSession ds, DrawViewModel viewModel)
-        {
-            VectorRect.DrawNodeLine(ds, this.GetBoundRect(viewModel.CanvasControl), viewModel.Transformer.Matrix);
-        }
+            return new Transform2DEffect
+            {
+                Source = Image,
+                TransformMatrix = matrix
+            };
+        } 
         public override VectorRect GetBoundRect(ICanvasResourceCreator creator)
         {
             return VectorRect.CreateFormRect(this.Image.Bounds);

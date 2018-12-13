@@ -12,7 +12,7 @@ namespace Retouch_Photo
     public sealed partial class App : Application
     {
         /// <summary>数据模型 </summary>
-        public static DrawViewModel ViewModel  = new DrawViewModel();
+        public static DrawViewModel ViewModel = new DrawViewModel();
 
         public App()
         {

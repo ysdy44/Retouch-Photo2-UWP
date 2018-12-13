@@ -153,19 +153,12 @@ namespace Retouch_Photo.Controls
 
         private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
-            //[临时删掉]    this.ViewModel.RenderLayer.Draw(sender, args.DrawingSession, this.ViewModel.Transformer.Matrix);
-            //[临时添加]
-            var aa = this.ViewModel.RenderLayer.GetRender(sender);
-            this.ViewModel.RenderLayer.GetDraw(aa, args.DrawingSession, this.ViewModel.Transformer.Matrix);
+            this.ViewModel.RenderLayer.Draw(this.ViewModel.RenderLayer.RenderTarget, args.DrawingSession, this.ViewModel.Transformer.VirtualToControlMatrix);
 
             this.ViewModel.Tool.ViewModel.Draw(args.DrawingSession, this.ViewModel);
-
-            //耗能大户：***
-            //[临时删掉]     this.ViewModel.DottedLine.Update();
-            //[临时删掉]     this.ViewModel.DottedLine.Draw(sender, args.DrawingSession, new Rect(0, 0, sender.ActualWidth, sender.ActualHeight));
-
+            
             Layer layer = this.ViewModel.RenderLayer.CurrentLayer();
-            if (layer != null) VectorRect.DrawNodeLine(args.DrawingSession, layer.GetBoundRect(sender), this.ViewModel.Transformer.Matrix, true);
+            if (layer != null) VectorRect.DrawNodeLine(args.DrawingSession, layer.GetBoundRect(sender), this.ViewModel.Transformer.CanvasToVirtualToControlMatrix, true);
         }
 
 

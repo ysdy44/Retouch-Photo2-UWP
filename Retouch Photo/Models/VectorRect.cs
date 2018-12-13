@@ -43,6 +43,9 @@ namespace Retouch_Photo.Models
         public Vector2 RightBottom => this.End;
         public Vector2 LeftBottom => new Vector2(this.Start.X, this.End.Y);
 
+        /// <summary>变换矩形</summary>
+        public VectorRect Transform(Matrix3x2 matrix) => new VectorRect(Vector2.Transform(this.End, matrix), Vector2.Transform(this.Start, matrix));
+
         public Rect ToRect() => new Rect(this.X, this.Y, this.Width, this.Height);
 
         public static VectorRect CreateFormRect(Rect rect)=> new VectorRect
@@ -53,12 +56,12 @@ namespace Retouch_Photo.Models
 
 
         /// <summary>Draw nodes and lines ，just like【由】</summary>
-        public static void DrawNodeLine(CanvasDrawingSession ds, VectorRect rect, Matrix3x2 matrixl, bool isDrawNode=false)
+        public static void DrawNodeLine(CanvasDrawingSession ds, VectorRect rect, Matrix3x2 canvasToVirtualMatrix, bool isDrawNode=false)
         {
-            Vector2 leftTop = Vector2.Transform(rect.LeftTop, matrixl);
-            Vector2 rightTop = Vector2.Transform(rect.RightTop, matrixl);
-            Vector2 rightBottom = Vector2.Transform(rect.RightBottom, matrixl); 
-            Vector2 leftBottom = Vector2.Transform(rect.LeftBottom, matrixl);
+            Vector2 leftTop = Vector2.Transform(rect.LeftTop, canvasToVirtualMatrix);
+            Vector2 rightTop = Vector2.Transform(rect.RightTop, canvasToVirtualMatrix);
+            Vector2 rightBottom = Vector2.Transform(rect.RightBottom, canvasToVirtualMatrix); 
+            Vector2 leftBottom = Vector2.Transform(rect.LeftBottom, canvasToVirtualMatrix);
 
             ds.DrawLine(leftTop, rightTop, Colors.DodgerBlue);
             ds.DrawLine(rightTop, rightBottom, Colors.DodgerBlue);

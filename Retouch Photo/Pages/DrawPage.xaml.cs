@@ -39,7 +39,7 @@ namespace Retouch_Photo.Pages
             //ViewModel
             this.ViewModel = App.ViewModel;
 
-            this.MainCanvasControl.SizeChanged += (s, e) => this.ViewModel.Transformer.CanvasSizeChanged(e.NewSize);
+            this.MainCanvasControl.SizeChanged += (s, e) => this.ViewModel.Transformer.ControlSizeChanged(e.NewSize);
         }
 
 
@@ -101,8 +101,6 @@ namespace Retouch_Photo.Pages
 
         private void SaveButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            this.ViewModel.Transformer.Fit();
-            this.ViewModel.Invalidate(true,true);
         }
     }
 

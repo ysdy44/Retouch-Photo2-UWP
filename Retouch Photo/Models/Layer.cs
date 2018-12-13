@@ -15,6 +15,7 @@ using Windows.Foundation;
 using Retouch_Photo.ViewModels;
 using Retouch_Photo.Models.Layers.GeometryLayers;
 using Windows.Graphics.Effects;
+using System.Numerics;
 
 namespace Retouch_Photo.Models
 {
@@ -66,9 +67,8 @@ namespace Retouch_Photo.Models
 
   
 
-        public abstract ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image);
-        public abstract void CurrentDraw(CanvasDrawingSession ds, DrawViewModel viewModel);
-        public abstract VectorRect GetBoundRect(ICanvasResourceCreator creator);
+        public abstract ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 matrix);
+         public abstract VectorRect GetBoundRect(ICanvasResourceCreator creator);
 
         public static Layer CreateFromXElement(ICanvasResourceCreatorWithDpi creator, XElement element)
         {
@@ -97,7 +97,7 @@ namespace Retouch_Photo.Models
         /// <param name="layer">当前图层</param>
         /// <param name="image">从当前图层上面 传下来的 图像</param>
         /// <returns>新的 向下传递的 图像</returns>
-        public static ICanvasImage Render(ICanvasResourceCreator creator, Layer layer, ICanvasImage image)
+        public static ICanvasImage Render(ICanvasResourceCreator creator, Layer layer, ICanvasImage image,Matrix3x2 canvasToVirtualMatrix)
         {
             if (layer.IsVisual == false || layer.Opacity == 0) return image;
            
@@ -105,9 +105,9 @@ namespace Retouch_Photo.Models
             (
                foreground: image,
                blendIndex: layer.BlendIndex,
-               background: (layer.Opacity == 100) ? layer.GetRender(creator, image) : new OpacityEffect
+               background: (layer.Opacity == 100) ? layer.GetRender(creator, image, canvasToVirtualMatrix) : new OpacityEffect
                {
-                   Source = layer.GetRender(creator, image),
+                   Source = layer.GetRender(creator, image, canvasToVirtualMatrix),
                    Opacity = (float)(layer.Opacity / 100)
                }
             );
