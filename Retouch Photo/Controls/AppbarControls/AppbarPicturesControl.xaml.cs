@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -19,8 +20,8 @@ namespace Retouch_Photo.Controls.AppbarControls
     {
 
         //Delegate
-        public event TappedEventHandler PhotoButtonTapped;
-        public event TappedEventHandler DestopButtonTapped;
+        public delegate void PicturesEventHandler(PickerLocationId location);
+        public event PicturesEventHandler PicturesPicker;
 
         public event TappedEventHandler CancelButtonTapped;
 
@@ -29,8 +30,8 @@ namespace Retouch_Photo.Controls.AppbarControls
             this.InitializeComponent();
         }
 
-        private void PhotoButton_Tapped(object sender, TappedRoutedEventArgs e) => this.PhotoButtonTapped?.Invoke(sender, e);
-        private void DestopButton_Tapped(object sender, TappedRoutedEventArgs e) => this.DestopButtonTapped?.Invoke(sender, e);
+        private void PhotoButton_Tapped(object sender, TappedRoutedEventArgs e) => this.PicturesPicker?.Invoke(PickerLocationId.PicturesLibrary);
+        private void DestopButton_Tapped(object sender, TappedRoutedEventArgs e) => this.PicturesPicker?.Invoke(PickerLocationId.Desktop);
 
         private void CancelButton_Tapped(object sender, TappedRoutedEventArgs e) => this.CancelButtonTapped?.Invoke(sender, e);
 

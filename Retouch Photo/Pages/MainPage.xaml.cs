@@ -19,6 +19,9 @@ using Windows.System;
 using System.Linq;
 using System.Xml.Linq;
 using Windows.Graphics.Imaging;
+using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
+using Microsoft.Graphics.Canvas;
 
 namespace Retouch_Photo.Pages
 {
@@ -126,6 +129,24 @@ namespace Retouch_Photo.Pages
 
             this.Frame.Navigate(typeof(DrawPage), pixels);//Navigate            
         }
+        private async void AppbarPicturesControl_PicturesPicker(PickerLocationId location)
+        {
+            FileOpenPicker openPicker = new FileOpenPicker
+            {
+                ViewMode = PickerViewMode.Thumbnail,
+                SuggestedStartLocation = location
+            };
+            openPicker.FileTypeFilter.Add(".jpg");
+            openPicker.FileTypeFilter.Add(".jpeg");
+            openPicker.FileTypeFilter.Add(".png");
+            openPicker.FileTypeFilter.Add(".bmp");
+
+            StorageFile file = await openPicker.PickSingleFileAsync();
+            if (file == null) return;
+
+            this.Frame.Navigate(typeof(DrawPage), file);//Navigate        
+        }
+
 
         private void AppbarSaveControl_OKButtonTapped(object sender, TappedRoutedEventArgs e) { }
         private void AppbarShareControl_OKButtonTapped(object sender, TappedRoutedEventArgs e) { }
@@ -151,5 +172,6 @@ namespace Retouch_Photo.Pages
 
         #endregion
 
+      
     }
 }

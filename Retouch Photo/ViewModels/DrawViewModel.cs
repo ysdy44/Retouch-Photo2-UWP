@@ -34,19 +34,67 @@ namespace Retouch_Photo.ViewModels
 
         /// <summary>画布控件</summary>
         public CanvasControl CanvasControl;
-        public void Invalidate(bool isDottedLineRender = false,bool isLayerRender = false)
+        public void Invalidate(bool isDottedLineRender = false, bool isLayerRender = false, bool? isThumbnail = null)
         {
-            if (isDottedLineRender) this.DottedLine.Render(this.CanvasControl, this.MarqueeSelection, this.Transformer.Matrix);
-            if (isLayerRender) this.RenderLayer.Render(this.CanvasControl);
+            //[临时删掉]    if (isDottedLineRender) this.DottedLine.Render(this.CanvasControl, this.MarqueeSelection, this.Transformer.Matrix);
+            //耗能大户：*****
+            //[临时删掉]    if (isLayerRender) this.RenderLayer.Render(this.CanvasControl);
 
-            //this.Text = this.Transformer.Position.X.ToString()+"  "+ this.Transformer.Position.Y.ToString();
-            this.CanvasControl.Invalidate();
+            if (isThumbnail == true) this.CanvasControl.DpiScale = 0.1f;
+            else if (isThumbnail == false) this.CanvasControl.DpiScale = 1.0f;
+
+          this.CanvasControl.Invalidate();
         }
-        public void InvalidateWithJumpedQueueLayer(Layer jumpedQueueLayer)
+        public void InvalidateWithJumpedQueueLayer(Layer jumpedQueueLayer, bool? isThumbnail = null)
         {
-            this.RenderLayer.RenderWithJumpedQueueLayer(this.CanvasControl, jumpedQueueLayer);
-            this.CanvasControl.Invalidate();
+            //耗能大户：*****
+            //[临时删掉]      this.RenderLayer.RenderWithJumpedQueueLayer(this.CanvasControl, jumpedQueueLayer);
+
+            if (isThumbnail == true) this.CanvasControl.DpiScale = 0.1f;
+            else if (isThumbnail == false) this.CanvasControl.DpiScale = 1.0f;
+
+          this.CanvasControl.Invalidate();
         }
+
+
+        /// <summary> 初始化CanvasControl, 也是可以绑定它的CreateResources事件</summary>
+        public void InitializeCanvasControl(CanvasControl control)
+        {
+            if (this.CanvasControl != null) return;
+
+            /*
+            Dpi标准为=96
+
+            我的Surface Book：
+            CanvasControl.Dpi = 240;
+            CanvasControl.DpiScale = 1;
+            CanvasControl.ConvertPixelsToDips(240) = 96;
+            CanvasControl.ConvertDipsToPixels(96, CanvasDpiRounding.Round) = 240;
+
+            修改DpiScale为=0.4后：
+            CanvasControl.Dpi = 96;
+            CanvasControl.DpiScale = 0.4;
+            CanvasControl.ConvertPixelsToDips(240) = 240;
+            CanvasControl.ConvertDipsToPixels(96, CanvasDpiRounding.Round) = 96;
+
+            可见
+            CanvasControl.DpiScale = 96 / CanvasControl.Dpi;
+            可以使DPI为标准的96，避免了位图的像素被缩放的问题
+          （比如，在高分辨率的设备上，100 * 100的位图可能占用更多比如240 * 240的像素）
+
+            在绘制之前，将DpiScale设为比1.0低的数，可以节省性能
+            （注：如果数字太小或太大会崩溃）
+            CanvasBitmap类在初始化时，它的DPI会和参数里的CanvasControl的DPI保持一致，请将它手动设为96.0f
+             */
+            //static float DefultDpi = 96.0f;
+            //control.DpiScale = 96.0f / control.Dpi; 
+
+
+            this.CanvasControl = control;
+            //[临时删掉]  this.DottedLine = new DottedLine(control);
+        }
+
+
 
 
         /// <summary>重新加载ViewModel，可以多次调用</summary>
@@ -57,14 +105,14 @@ namespace Retouch_Photo.ViewModels
 
             /////////////////////////////////////////////////////////////////////////////////////
 
-            this.MarqueeSelection =new CanvasRenderTarget(this.CanvasControl, project.Width, project.Height);
-            this.MarqueeTool.Complete += () =>
-            {
-                this.MarqueeTool.Render(this.CanvasControl,  this.MarqueeSelection, this.Transformer.InversionMatrix);
+            //[临时删掉]     this.MarqueeSelection =new CanvasRenderTarget(this.CanvasControl, project.Width, project.Height);
+            //[临时删掉]     this.MarqueeTool.Complete += () =>
+            //[临时删掉]    {
+            //[临时删掉]    this.MarqueeTool.Render(this.CanvasControl,  this.MarqueeSelection, this.Transformer.InversionMatrix);
 
-                this.DottedLine.Render(this.CanvasControl, this.MarqueeSelection, this.Transformer.Matrix);
-            };
-            
+            //[临时删掉]    this.DottedLine.Render(this.CanvasControl, this.MarqueeSelection, this.Transformer.Matrix);
+            //[临时删掉] };
+
             this.RenderLayer.LoadFromProject(this.CanvasControl, project);
             this.RenderLayer.Layers.CollectionChanged += (s, e) =>
             {
@@ -94,51 +142,17 @@ namespace Retouch_Photo.ViewModels
 
         /// <summary>变形金刚(并不</summary>
         public Transformer Transformer = new Transformer();
-        
+
+        public MarqueeMode MarqueeMode = MarqueeMode.None;
         /// <summary>虚线</summary>
-        public DottedLine DottedLine;
+        //[临时删掉]   public DottedLine DottedLine;
 
         /// <summary>选区</summary>
-        public CanvasRenderTarget MarqueeSelection;
-        public MarqueeTool MarqueeTool = new MarqueeTool();
+        //[临时删掉]   public CanvasRenderTarget MarqueeSelection;
+        //[临时删掉]  public MarqueeTool MarqueeTool = new MarqueeTool();
 
         /// <summary>渲染图层</summary>
         public RenderLayer RenderLayer = new RenderLayer();
-
-        /// <summary> 初始化CanvasControl, 也是可以绑定它的CreateResources事件</summary>
-        public void InitializeCanvasControl(CanvasControl control)
-        {
-            if (this.CanvasControl != null) return;
-
-            /*
-            Dpi标准为=96
-
-            我的Surface Book：
-            CanvasControl.Dpi = 240;
-            CanvasControl.DpiScale = 1;
-            CanvasControl.ConvertPixelsToDips(240) = 96;
-            CanvasControl.ConvertDipsToPixels(96, CanvasDpiRounding.Round) = 240;
-
-            修改DpiScale为=0.4后：
-            CanvasControl.Dpi = 96;
-            CanvasControl.DpiScale = 0.4;
-            CanvasControl.ConvertPixelsToDips(240) = 240;
-            CanvasControl.ConvertDipsToPixels(96, CanvasDpiRounding.Round) = 96;
-
-            可见
-            CanvasControl.DpiScale = 96 / CanvasControl.Dpi;
-            可以使DPI为标准的96，避免了位图的像素被缩放的问题
-          （比如，在高分辨率的设备上，100 * 100的位图可能占用更多比如240 * 240的像素）
-
-             */
-            //static float DefultDpi = 96.0f;
-            control.DpiScale = 96.0f / control.Dpi;
-
-
-            this.CanvasControl = control;
-            this.DottedLine = new DottedLine(control);
-        }
-
 
 
 
@@ -151,7 +165,8 @@ namespace Retouch_Photo.ViewModels
             get=>selectedIndex;            
             set
             {
-                selectedIndex = value;
+                selectedIndex = value < this.RenderLayer.Layers.Count ? value : this.RenderLayer.Layers.Count - 1;
+
                 OnPropertyChanged(nameof(SelectedIndex));
             }
         }
@@ -205,6 +220,8 @@ namespace Retouch_Photo.ViewModels
             Page = new ToolFloodSetectPage(),
             ViewModel = new ToolFloodSetectViewModel(),
         },
+            //[临时删除]
+            /*
             new Tool()
         {
             Type = ToolType.SelectionBrush,
@@ -249,6 +266,7 @@ namespace Retouch_Photo.ViewModels
             ViewModel = new ToolFreeHandMarqueeViewModel(),
         },
 
+             */
     
             new Tool()
         {

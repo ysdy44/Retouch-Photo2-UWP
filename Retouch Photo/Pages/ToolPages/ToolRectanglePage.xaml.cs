@@ -32,15 +32,13 @@ namespace Retouch_Photo.Pages.ToolPages
 
             //ViewModel
             this.ViewModel = App.ViewModel;
-            this.ModeControl.Mode = this.ViewModel.MarqueeTool.MarqueeMode;
+              this.ModeControl.Mode = this.ViewModel.MarqueeMode;
             this.ColorBrush.Color = this.ViewModel.Color;
             this.ColorPicker.Color = this.ViewModel.Color;
         }
 
-        private void ModeControl_ModeChanged(MarqueeMode mode)
-        {
-            this.ViewModel.MarqueeTool.MarqueeMode = this.ModeControl.Mode;
-        }
+        private void ModeControl_ModeChanged(MarqueeMode mode) => this.ViewModel.MarqueeMode = this.ModeControl.Mode;
+
         private void ColorButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             this.ColorFlyout.ShowAt(this.ColorButton);
@@ -48,7 +46,7 @@ namespace Retouch_Photo.Pages.ToolPages
         private void ColorPicker_ColorChange(object sender, Color value)
         {
             this.ViewModel.Color = value;
-            this.ColorBrush.Color = value;
+            this.ColorBrush.Color = value;                      
 
             Layer layer = this.ViewModel.RenderLayer.CurrentLayer();
 

@@ -43,6 +43,8 @@ namespace Retouch_Photo.Models
         public Vector2 RightBottom => this.End;
         public Vector2 LeftBottom => new Vector2(this.Start.X, this.End.Y);
 
+        public Rect ToRect() => new Rect(this.X, this.Y, this.Width, this.Height);
+
         public static VectorRect CreateFormRect(Rect rect)=> new VectorRect
         (
             x1: (float)rect.Left, y1: (float)rect.Top,
@@ -65,10 +67,21 @@ namespace Retouch_Photo.Models
 
             if (isDrawNode)
             {
-                VectorRect.DrawNodeVector(ds, leftTop);
-                VectorRect.DrawNodeVector(ds, rightTop);
-                VectorRect.DrawNodeVector(ds, rightBottom);
-                VectorRect.DrawNodeVector(ds, leftBottom);
+                VectorRect.DrawNodeVector2(ds, leftTop);
+                VectorRect.DrawNodeVector2(ds, rightTop);
+                VectorRect.DrawNodeVector2(ds, rightBottom);
+                VectorRect.DrawNodeVector2(ds, leftBottom);
+                
+
+                Vector2 centerLeft = (leftTop+ leftBottom) / 2;
+                Vector2 centerTop = (leftTop + rightTop) / 2;
+                Vector2 centerRight = (rightTop + rightBottom) / 2;
+                Vector2 centerBottom = (leftBottom + rightBottom) / 2;
+
+                VectorRect.DrawNodeVector2(ds, centerLeft);
+                VectorRect.DrawNodeVector2(ds, centerTop);
+                VectorRect.DrawNodeVector2(ds, centerRight);
+                VectorRect.DrawNodeVector2(ds, centerBottom);
             }
         }
 
@@ -83,8 +96,8 @@ namespace Retouch_Photo.Models
         private static void DrawNodeVector2(CanvasDrawingSession ds, Vector2 vector)
         {
             ds.FillCircle(vector, 10, Color.FromArgb(70, 127, 127, 127));
-            ds.FillCircle(vector, 8, Colors.DodgerBlue);
-            ds.FillCircle(vector, 6, Colors.Blue);
+            ds.FillCircle(vector, 8, Colors.White);
+            ds.FillCircle(vector, 6, Colors.DodgerBlue);
         }
     }
 }

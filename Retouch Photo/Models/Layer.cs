@@ -13,12 +13,13 @@ using Microsoft.Graphics.Canvas;
 using Retouch_Photo.Models.Layers;
 using Windows.Foundation;
 using Retouch_Photo.ViewModels;
+using Retouch_Photo.Models.Layers.GeometryLayers;
+using Windows.Graphics.Effects;
 
 namespace Retouch_Photo.Models
 {
     public abstract class Layer: INotifyPropertyChanged
     {
-        
         private string name = string.Empty;
         public string Name
         {
@@ -63,11 +64,13 @@ namespace Retouch_Photo.Models
             }
         }
 
-        public abstract ICanvasImage GetRender(ICanvasResourceCreator creator);
+  
+
+        public abstract ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image);
         public abstract void CurrentDraw(CanvasDrawingSession ds, DrawViewModel viewModel);
         public abstract VectorRect GetBoundRect(ICanvasResourceCreator creator);
 
-        public static Layer CreateFromXElement(ICanvasResourceCreatorWithDpi resourceCreator, XElement element)
+        public static Layer CreateFromXElement(ICanvasResourceCreatorWithDpi creator, XElement element)
         {
             int width = (int)element.Element("LayerWidth");
             int height = (int)element.Element("LayerHeight");
@@ -75,17 +78,13 @@ namespace Retouch_Photo.Models
             string strings = element.Element("CanvasRenderTarget").Value;
             byte[] bytes = Convert.FromBase64String(strings);
 
-           CanvasRenderTarget renderTarget = new CanvasRenderTarget(resourceCreator, width, height);
-           renderTarget.SetPixelBytes(bytes);
+            ImageLayer layer = ImageLayer.CreateFromBytes(creator,bytes, width, height);
+            layer.Name = element.Element("LayerName").Value;
+            layer.IsVisual = (bool)element.Element("LayerVisual");
+            layer.Opacity = (double)element.Element("LayerOpacity");
+            layer.BlendIndex = (int)element.Element("LayerBlendIndex");
 
-            return new PixelLayer
-            {
-                Name = element.Element("LayerName").Value,
-                IsVisual = (bool)element.Element("LayerVisual"),
-                Opacity = (double)element.Element("LayerOpacity"),
-                BlendIndex = (int)element.Element("LayerBlendIndex"),
-                CanvasRenderTarget=renderTarget
-            };
+            return layer;
         }
 
 
@@ -101,14 +100,14 @@ namespace Retouch_Photo.Models
         public static ICanvasImage Render(ICanvasResourceCreator creator, Layer layer, ICanvasImage image)
         {
             if (layer.IsVisual == false || layer.Opacity == 0) return image;
-
+           
             return Layer.BlendRender
             (
                foreground: image,
                blendIndex: layer.BlendIndex,
-               background: (layer.Opacity == 100) ? layer.GetRender(creator) : new OpacityEffect
+               background: (layer.Opacity == 100) ? layer.GetRender(creator, image) : new OpacityEffect
                {
-                   Source = layer.GetRender(creator),
+                   Source = layer.GetRender(creator, image),
                    Opacity = (float)(layer.Opacity / 100)
                }
             );
@@ -120,7 +119,7 @@ namespace Retouch_Photo.Models
             {
                 Sources = { foreground, background }
             };
-
+            
             return new BlendEffect
             {
                 Background = background,

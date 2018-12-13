@@ -17,6 +17,9 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
         public override void Start(Vector2 point, DrawViewModel viewModel)
         {
+            viewModel.Transformer.Position = point;
+
+            viewModel.Invalidate(isDottedLineRender: true, isThumbnail: true);
         }
         public override void Delta(Vector2 point, DrawViewModel viewModel)
         {
@@ -26,6 +29,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         }
         public override void Complete(Vector2 point, DrawViewModel viewModel)
         {
+            viewModel.Invalidate(isDottedLineRender: true, isThumbnail: false);
         }
 
 

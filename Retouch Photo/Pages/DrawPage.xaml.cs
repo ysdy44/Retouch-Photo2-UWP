@@ -23,6 +23,7 @@ using System.Threading;
 using System.Xml.Linq;
 using Retouch_Photo.ViewModels;
 using Windows.Graphics.Imaging;
+using Windows.Storage;
 
 namespace Retouch_Photo.Pages
 {
@@ -46,7 +47,7 @@ namespace Retouch_Photo.Pages
         {
             if (this.ViewModel.GoBack.IsGoBack) this.Frame.Navigate(typeof(MainPage));
         }
-        protected override void OnNavigatedTo(NavigationEventArgs e)//当前页面成为活动页面
+        protected async override void OnNavigatedTo(NavigationEventArgs e)//当前页面成为活动页面
         {
             if (e.Parameter is string text)
             {
@@ -55,24 +56,30 @@ namespace Retouch_Photo.Pages
             
             if (e.Parameter is XDocument document)
             {
-                this.LoadingControl.Visibility = Visibility.Visible;//Loading
-                
+                this.LoadingControl.Visibility = Visibility.Visible;//Loading                
                 Project project = Project.CreateFromXDocument(this.ViewModel.CanvasControl, document);
                 this.ViewModel.LoadFromProject(project);
-
                 this.LoadingControl.Visibility = Visibility.Collapsed;//Loading
                 return;
             }
+
             if (e.Parameter is BitmapSize pixels)
             {
                 this.LoadingControl.Visibility = Visibility.Visible;//Loading
-
                 Project project = Project.CreateFromSize(this.ViewModel.CanvasControl, pixels);
                 this.ViewModel.LoadFromProject(project);
-
                 this.LoadingControl.Visibility = Visibility.Collapsed;//Loading
                 return;
-            }             
+            }
+
+            if (e.Parameter is StorageFile file)
+            {
+                this.LoadingControl.Visibility = Visibility.Visible;//Loading
+                Project project =await Project.CreateFromFileAsync(this.ViewModel.CanvasControl, file);
+                this.ViewModel.LoadFromProject(project);
+                this.LoadingControl.Visibility = Visibility.Collapsed;//Loading
+                return;
+            }
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)//当前页面不再成为活动页面
         {

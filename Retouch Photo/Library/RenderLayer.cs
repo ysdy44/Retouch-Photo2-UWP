@@ -21,13 +21,9 @@ namespace Retouch_Photo.Library
             this.Layers.Clear();
             foreach (Layer layer in project.Layers) this.Layers.Add(layer);
 
-            this.GrayWhiteGrid = new CanvasRenderTarget(creator, project.Width, project.Height);
-            using (CanvasDrawingSession ds = this.GrayWhiteGrid.CreateDrawingSession())
-            {
-                ds.DrawImage(this.GrayWhiteGridDraw(creator));
-            }
+            this.GrayWhiteGrid = this.GrayWhiteGridDraw(creator, project.Width, project.Height);
 
-            this.RenderTarget = new CanvasRenderTarget(creator, project.Width, project.Height);
+            this.RenderTarget = new CanvasCommandList(creator);
             this.Render(creator);
         }
         
@@ -78,10 +74,13 @@ namespace Retouch_Photo.Library
             if (this.Layers.Count==0)
             {
                 this.Layers.Add(layer);
+                this.Index = 0;
                 return;
             }
 
             if (this.Index == -1) this.Index = 0;
+            if (this.Index >= this.Layers.Count) this.Index = this.Layers.Count - 1;
+
             this.Layers.Insert(this.Index , layer);
         }
         public void Remove(Layer layer)
@@ -91,20 +90,32 @@ namespace Retouch_Photo.Library
 
 
         /// <summary>灰白网格</summary>
-        public CanvasRenderTarget GrayWhiteGrid;
-        private ICanvasEffect GrayWhiteGridDraw(ICanvasResourceCreator creator)
+        public ICanvasImage GrayWhiteGrid;
+        private ICanvasEffect GrayWhiteGridDraw(ICanvasResourceCreator creator,int width,int height)
         {
-            return new DpiCompensationEffect//根据DPI适配
+            return new CropEffect
             {
-                Source = new ScaleEffect//缩放
+                SourceRectangle = new Windows.Foundation.Rect(0, 0, width, height),
+                Source = new ColorSourceEffect
                 {
-                    Scale = new Vector2(8, 8),
-                    InterpolationMode = CanvasImageInterpolation.NearestNeighbor,
-                    Source = new BorderEffect//无限延伸图片
+                    Color = Colors.White
+                }
+            };
+
+            return new CropEffect
+            {
+                SourceRectangle = new Windows.Foundation.Rect(0, 0, width, height),
+                Source = new DpiCompensationEffect//根据DPI适配
+                {
+                    Source = new ScaleEffect//缩放
                     {
-                        ExtendX = CanvasEdgeBehavior.Wrap,
-                        ExtendY = CanvasEdgeBehavior.Wrap,
-                        Source = CanvasBitmap.CreateFromColors
+                        Scale = new Vector2(8, 8),
+                        InterpolationMode = CanvasImageInterpolation.NearestNeighbor,
+                        Source = new BorderEffect//无限延伸图片
+                        {
+                            ExtendX = CanvasEdgeBehavior.Wrap,
+                            ExtendY = CanvasEdgeBehavior.Wrap,
+                            Source = CanvasBitmap.CreateFromColors
                              (
                                 resourceCreator: creator,
                                 widthInPixels: 2,
@@ -115,6 +126,7 @@ namespace Retouch_Photo.Library
                                    Colors.White,Color.FromArgb(255, 233, 233, 233),
                                 }
                              )
+                        }
                     }
                 }
 
@@ -122,9 +134,8 @@ namespace Retouch_Photo.Library
         }
 
 
-
         /// <summary>生成渲染</summary>   
-        private CanvasRenderTarget RenderTarget;
+        private CanvasCommandList RenderTarget;
         public void Render(ICanvasResourceCreator creator)
         {
             ICanvasImage image = this.GrayWhiteGrid;
@@ -147,16 +158,51 @@ namespace Retouch_Photo.Library
             {
                 image = Layer.Render(creator, this.Layers[i], image);
 
-                //Layer: jumped the Queue 
-                if (i == this.Index) image = Layer.Render(creator, jumpedQueueLayer, image);
+                //Layer: jumped the Queue (Index: 0~n)
+                if (this.Index == i) image = Layer.Render(creator, jumpedQueueLayer, image);
             }
+
+            //Layer: jumped the Queue  (Index: -1)
+            if (this.Index == -1) image = Layer.Render(creator, jumpedQueueLayer, image);
 
             using (CanvasDrawingSession ds = this.RenderTarget.CreateDrawingSession())
             {
                 ds.DrawImage(image);
             }
         }
-        
+
+        //[临时添加]
+        public ICanvasImage GetRender(ICanvasResourceCreator creator)
+        {
+            ICanvasImage image = this.GrayWhiteGrid;
+
+            for (int i = this.Layers.Count - 1; i >= 0; i--)
+            {
+                image = Layer.Render(creator, this.Layers[i], image);
+            }
+
+            return image;
+        }    
+        //[临时添加]
+        public ICanvasImage GetRenderWithJumpedQueueLayer(ICanvasResourceCreator creator, Layer jumpedQueueLayer)
+        {
+            ICanvasImage image = this.GrayWhiteGrid;
+
+            for (int i = this.Layers.Count - 1; i >= 0; i--)
+            {
+                image = Layer.Render(creator, this.Layers[i], image);
+
+                //Layer: jumped the Queue (Index: 0~n)
+                if (this.Index == i) image = Layer.Render(creator, jumpedQueueLayer, image);
+            }
+
+            //Layer: jumped the Queue  (Index: -1)
+            if (this.Index == -1) image = Layer.Render(creator, jumpedQueueLayer, image);
+
+            return image;
+        }
+
+
 
         /// <summary>Draw</summary>   
         public void Draw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Matrix3x2 matrix)
@@ -168,6 +214,9 @@ namespace Retouch_Photo.Library
                 Source = this.RenderTarget,
                 TransformMatrix = matrix
             };
+
+
+            //耗能大户：**
             ICanvasImage shadow = new OpacityEffect
             {
                 Opacity = 0.2f,
@@ -179,8 +228,39 @@ namespace Retouch_Photo.Library
             };
 
             ds.DrawImage(shadow, 5.0f, 5.0f);
+             
             ds.DrawImage(image);
         }
+
+        //[临时添加]     
+        public void GetDraw(ICanvasImage RenderTarget, CanvasDrawingSession ds, Matrix3x2 matrix)
+        {
+            if (RenderTarget == null) return;
+
+            ICanvasImage image = new Transform2DEffect
+            {
+                Source = RenderTarget,
+                TransformMatrix = matrix
+            };
+
+
+            //耗能大户：**
+            ICanvasImage shadow = new OpacityEffect
+            {
+                Opacity = 0.2f,
+                Source = new ShadowEffect
+                {
+                    Source = image,
+                    ShadowColor = Colors.Black,
+                }
+            };
+
+            ds.DrawImage(shadow, 5.0f, 5.0f);
+
+            ds.DrawImage(image);
+        }
+
+
 
     }
 }

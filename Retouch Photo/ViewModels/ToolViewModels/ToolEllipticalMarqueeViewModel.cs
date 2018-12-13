@@ -15,26 +15,26 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
     {
         public override void Start(Vector2 point, DrawViewModel viewModel)
         {
-            viewModel.MarqueeTool.Tool = MarqueeToolType.Elliptical;
+            //[临时删掉]      viewModel.MarqueeTool.Tool = MarqueeToolType.Elliptical;
 
-            viewModel.MarqueeTool.Operator_Start(point, viewModel.Transformer.InversionMatrix);
+            //[临时删掉]   viewModel.MarqueeTool.Operator_Start(point, viewModel.Transformer.InversionMatrix);
             viewModel.Invalidate();
         }
         public override void Delta(Vector2 point, DrawViewModel viewModel)
         {
-            viewModel.MarqueeTool.Operator_Delta(point, viewModel.Transformer.InversionMatrix);
+            //[临时删掉]     viewModel.MarqueeTool.Operator_Delta(point, viewModel.Transformer.InversionMatrix);
             viewModel.Invalidate();
         }
         public override void Complete(Vector2 point, DrawViewModel viewModel)
         {
-            viewModel.MarqueeTool.Operator_Complete(point, viewModel.Transformer.InversionMatrix);
+            //[临时删掉]     viewModel.MarqueeTool.Operator_Complete(point, viewModel.Transformer.InversionMatrix);
             viewModel.Invalidate();
         }
 
 
         public override void Draw(CanvasDrawingSession ds, DrawViewModel viewModel)
         {
-            viewModel.MarqueeTool.Draw(viewModel.CanvasControl, ds, viewModel.Transformer.Matrix);
+            //[临时删掉]     viewModel.MarqueeTool.Draw(viewModel.CanvasControl, ds, viewModel.Transformer.Matrix);
 
         }
 

@@ -71,7 +71,7 @@ namespace Retouch_Photo.Controls
             this.rightStartPoint = point;
             this.rightStartPosition = this.ViewModel.Transformer.Position;
 
-            this.ViewModel.Invalidate(isDottedLineRender: true);
+            this.ViewModel.Invalidate(isDottedLineRender: true, isThumbnail: true);
         }
         private void Right_Delta(Vector2 point)
         {
@@ -81,7 +81,7 @@ namespace Retouch_Photo.Controls
         }
         private void Right_Complete(Vector2 point)
         {
-            this.ViewModel.Invalidate(isDottedLineRender: true);
+            this.ViewModel.Invalidate(isDottedLineRender: true, isThumbnail: false);
         }
 
 
@@ -102,7 +102,7 @@ namespace Retouch_Photo.Controls
             this.doubleStartSpace = space;
             this.doubleStartScale = this.ViewModel.Transformer.Scale;
 
-            this.ViewModel.Invalidate(isDottedLineRender: true);
+            this.ViewModel.Invalidate(isDottedLineRender: true, isThumbnail: true);
         }
         private void Double_Delta(Vector2 center, float space)
         {
@@ -114,7 +114,7 @@ namespace Retouch_Photo.Controls
         }
         private void Double_Complete(Vector2 center, float space)
         {
-            this.ViewModel.Invalidate(isDottedLineRender: true);
+            this.ViewModel.Invalidate(isDottedLineRender: true, isThumbnail: false);
         }
 
         #endregion
@@ -153,15 +153,19 @@ namespace Retouch_Photo.Controls
 
         private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
-            this.ViewModel.RenderLayer.Draw(sender, args.DrawingSession, this.ViewModel.Transformer.Matrix);
+            //[临时删掉]    this.ViewModel.RenderLayer.Draw(sender, args.DrawingSession, this.ViewModel.Transformer.Matrix);
+            //[临时添加]
+            var aa = this.ViewModel.RenderLayer.GetRender(sender);
+            this.ViewModel.RenderLayer.GetDraw(aa, args.DrawingSession, this.ViewModel.Transformer.Matrix);
 
             this.ViewModel.Tool.ViewModel.Draw(args.DrawingSession, this.ViewModel);
- 
-            this.ViewModel.DottedLine.Update();
-            this.ViewModel.DottedLine.Draw(sender, args.DrawingSession, new Rect(0, 0, sender.ActualWidth, sender.ActualHeight));
-            
+
+            //耗能大户：***
+            //[临时删掉]     this.ViewModel.DottedLine.Update();
+            //[临时删掉]     this.ViewModel.DottedLine.Draw(sender, args.DrawingSession, new Rect(0, 0, sender.ActualWidth, sender.ActualHeight));
+
             Layer layer = this.ViewModel.RenderLayer.CurrentLayer();
-            if (layer != null) layer.CurrentDraw(args.DrawingSession, this.ViewModel);
+            if (layer != null) VectorRect.DrawNodeLine(args.DrawingSession, layer.GetBoundRect(sender), this.ViewModel.Transformer.Matrix, true);
         }
 
 

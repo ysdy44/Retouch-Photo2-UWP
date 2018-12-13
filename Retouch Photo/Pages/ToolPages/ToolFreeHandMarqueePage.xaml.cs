@@ -28,10 +28,10 @@ namespace Retouch_Photo.Pages.ToolPages
 
             //ViewModel
             this.ViewModel = App.ViewModel;
-            this.CompositModeControl.Mode = this.ViewModel.MarqueeTool.CompositeMode;
+            //[临时删掉]   this.CompositModeControl.Mode = this.ViewModel.MarqueeTool.CompositeMode;
         }
 
-        private void CompositModeControl_ModeChanged(MarqueeCompositeMode mode) => this.ViewModel.MarqueeTool.CompositeMode = mode;
+        private void CompositModeControl_ModeChanged(MarqueeCompositeMode mode) { }  //[临时删掉]  => this.ViewModel.MarqueeTool.CompositeMode = mode;
 
     }
 }

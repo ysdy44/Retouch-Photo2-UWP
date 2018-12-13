@@ -1,5 +1,7 @@
-﻿using Microsoft.Graphics.Canvas.Brushes;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
+using Windows.Graphics.Effects;
 using Windows.UI;
 
 namespace Retouch_Photo.Models.Layers
@@ -13,5 +15,6 @@ namespace Retouch_Photo.Models.Layers
         public float StrokeWidth = 1.0f;
         public ICanvasBrush StrokeBrush;
         public CanvasStrokeStyle StrokeStyle;
+
     }
 }
