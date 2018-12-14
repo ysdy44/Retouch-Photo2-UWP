@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Retouch_Photo.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,15 @@ namespace Retouch_Photo.Pages.ToolPages
         public ToolCursorPage()
         {
             this.InitializeComponent();
+        }
+
+        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            Layer layer = App.ViewModel.RenderLayer.CurrentLayer;
+            if (layer == null) return;
+
+            layer.LayerTransformer.Radian = (float)(e.NewValue / 180 * Math.PI);
+            App.ViewModel.Invalidate();
         }
     }
 }

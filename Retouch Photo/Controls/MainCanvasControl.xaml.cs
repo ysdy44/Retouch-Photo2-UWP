@@ -71,17 +71,17 @@ namespace Retouch_Photo.Controls
             this.rightStartPoint = point;
             this.rightStartPosition = this.ViewModel.Transformer.Position;
 
-            this.ViewModel.Invalidate(isDottedLineRender: true, isThumbnail: true);
+            this.ViewModel.Invalidate(isThumbnail: true);
         }
         private void Right_Delta(Vector2 point)
         {
             this.ViewModel.Transformer.Position = this.rightStartPosition - this.rightStartPoint + point;
 
-            this.ViewModel.Invalidate(isDottedLineRender: true);
+            this.ViewModel.Invalidate();
         }
         private void Right_Complete(Vector2 point)
         {
-            this.ViewModel.Invalidate(isDottedLineRender: true, isThumbnail: false);
+            this.ViewModel.Invalidate(isThumbnail: false);
         }
 
 
@@ -102,7 +102,7 @@ namespace Retouch_Photo.Controls
             this.doubleStartSpace = space;
             this.doubleStartScale = this.ViewModel.Transformer.Scale;
 
-            this.ViewModel.Invalidate(isDottedLineRender: true, isThumbnail: true);
+            this.ViewModel.Invalidate(isThumbnail: true);
         }
         private void Double_Delta(Vector2 center, float space)
         {
@@ -110,12 +110,13 @@ namespace Retouch_Photo.Controls
 
             this.ViewModel.Transformer.Scale = this.doubleStartScale / this.doubleStartSpace * space;
 
-            this.ViewModel.Invalidate(isDottedLineRender: true);
+            this.ViewModel.Invalidate();
         }
         private void Double_Complete(Vector2 center, float space)
         {
-            this.ViewModel.Invalidate(isDottedLineRender: true, isThumbnail: false);
+            this.ViewModel.Invalidate(isThumbnail: false);
         }
+
 
         #endregion
 
@@ -142,7 +143,7 @@ namespace Retouch_Photo.Controls
                 }
             }
 
-            this.ViewModel.Invalidate(isDottedLineRender: true);
+            this.ViewModel.Invalidate();
         }
 
 
@@ -153,12 +154,9 @@ namespace Retouch_Photo.Controls
 
         private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
-            this.ViewModel.RenderLayer.Draw(this.ViewModel.RenderLayer.RenderTarget, args.DrawingSession, this.ViewModel.Transformer.VirtualToControlMatrix);
+            this.ViewModel.RenderLayer.Draw(args.DrawingSession, this.ViewModel.Transformer.VirtualToControlMatrix);
 
             this.ViewModel.Tool.ViewModel.Draw(args.DrawingSession, this.ViewModel);
-            
-            Layer layer = this.ViewModel.RenderLayer.CurrentLayer();
-            if (layer != null) VectorRect.DrawNodeLine(args.DrawingSession, layer.GetBoundRect(sender), this.ViewModel.Transformer.CanvasToVirtualToControlMatrix, true);
         }
 
 

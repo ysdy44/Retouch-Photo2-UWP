@@ -7,14 +7,53 @@
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Horizontal" Height="50" Padding="12,4">
 
-        <TextBlock x:Name="sssssssssss" Text="Text" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <Slider Width="160" Grid.Column="1" Style="{StaticResource AppOpacitySliderStyle}"/>
+    <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
+        <StackPanel Orientation="Horizontal" Height="50" Padding="4">
+            <Slider Minimum="-180" Maximum="180" Width="222" ValueChanged="Slider_ValueChanged"/>
+            <Border CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}">
+                <StackPanel Orientation="Horizontal">
 
-        <Button x:Name="OK" Grid.Column="2" FontSize="22" Content="&#xEC61;" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" />
-        <Button x:Name="Cancel" Grid.Column="3" FontSize="22" Content="&#xEB90;" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" />
+                    <!--FlipHorizontal-->
+                    <Button x:Name="FlipHorizontalButton" Width="60" Padding="0" BorderThickness="0" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                        <Canvas Width="40" Height="40" >
+                            <Polygon Points="18,6 18,32 4,32" Fill="DodgerBlue" />
+                            <Polygon Points="22,6 22,32 36,32" Fill="Gray" />
+                        </Canvas>
+                    </Button>
+                    
+                    <!--FlipVertical-->
+                    <Button x:Name="FlipVerticalButton" Width="60" Padding="0" BorderThickness="0" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                        <Canvas Width="40" Height="40" >
+                            <Polygon Points="6,18 32,18 32,4" Fill="DodgerBlue" />
+                            <Polygon Points="6,22 32,22 32,36" Fill="Gray" />
+                        </Canvas>
+                    </Button>
 
-    </StackPanel>
+                    <AppBarSeparator/>
+                    
+                    <!--LeftTurn-->
+                    <Button x:Name="LeftTurnButton" Width="60" Padding="0" BorderThickness="0" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                        <Canvas Width="40" Height="40">
+                            <Rectangle Width="12" Height="28" Canvas.Left="6" Canvas.Top="6" Fill="DodgerBlue" />
+                            <Rectangle Width="12" Height="12" Canvas.Left="22" Canvas.Top="22" Fill="Gray" />
+                        </Canvas>
+                    </Button>
+
+                    <!--RightTurn-->
+                    <Button x:Name="RightTurnButton" Width="60" Padding="0" BorderThickness="0" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                        <Canvas Width="40" Height="40">
+                            <Rectangle Width="12" Height="28" Canvas.Left="22" Canvas.Top="8" Fill="DodgerBlue" />
+                            <Rectangle Width="12" Height="12" Canvas.Left="6" Canvas.Top="24" Fill="Gray" />
+                        </Canvas>
+                    </Button>
+
+                </StackPanel>
+            </Border>
+
+
+            
+        </StackPanel>
+    </ScrollViewer>
 
 </Page>

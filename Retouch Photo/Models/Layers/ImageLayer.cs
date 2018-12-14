@@ -16,16 +16,15 @@ namespace Retouch_Photo.Models.Layers
 
         public CanvasBitmap Image { set; get; }
 
-        public override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 matrix)
+        public override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
             return new Transform2DEffect
             {
                 Source = Image,
-                TransformMatrix = matrix
+                TransformMatrix =this.LayerTransformer.Matrix* canvasToVirtualMatrix
             };
         }
-        public override VectorRect GetBoundRect(ICanvasResourceCreator creator) => new VectorRect(this.Image.Bounds);
-
+        
 
         public static ImageLayer CreateFromBytes(ICanvasResourceCreatorWithDpi resourceCreator, byte[] bytes, int width, int height)
         {
@@ -34,6 +33,11 @@ namespace Retouch_Photo.Models.Layers
 
             return new ImageLayer
             {
+                LayerTransformer = new LayerTransformer
+                {
+                    Rect = new VectorRect(0,0,width,height),
+                    Radian = 0.0f,
+                },
                 Image = renderTarget
             };
         }
@@ -42,6 +46,11 @@ namespace Retouch_Photo.Models.Layers
         {
             return new ImageLayer
             {
+                LayerTransformer = new LayerTransformer
+                {
+                    Rect = new VectorRect(0, 0, width, height),
+                    Radian = 0.0f,
+                },
                 Image = bitmap
             };
         }

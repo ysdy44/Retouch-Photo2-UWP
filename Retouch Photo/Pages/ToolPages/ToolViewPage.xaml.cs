@@ -96,7 +96,7 @@ namespace Retouch_Photo.Pages.ToolPages
             if (this.ViewModel.CanvasControl == null) return;
 
             this.ViewModel.Transformer.Radian = this.ValueToRadian(e.NewValue);
-            this.ViewModel.Invalidate(isDottedLineRender: true);
+            this.ViewModel.Invalidate();
         }
 
         // Scale
@@ -107,7 +107,7 @@ namespace Retouch_Photo.Pages.ToolPages
             if (this.ViewModel.CanvasControl == null) return;
 
             this.ViewModel.Transformer.Scale = this.ValueToScale(e.NewValue);
-            this.ViewModel.Invalidate(isDottedLineRender: true);
+            this.ViewModel.Invalidate();
         }
                     
 

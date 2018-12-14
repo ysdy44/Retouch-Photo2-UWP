@@ -21,32 +21,36 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
         public static string Type = "RectangularLayer";
         protected RectangularLayer() => base.Name = RectangularLayer.Type;
         
-        public VectorRect Rect;
          
-        public override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 matrix)
+        public override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
-            Rect r = this.Rect.Transform(matrix).ToRect();
+            Rect rect = new Rect(0, 0, this.LayerTransformer.Rect.Width, this.LayerTransformer.Rect.Height);
 
             CanvasCommandList command = new CanvasCommandList(creator);
             using (CanvasDrawingSession ds = command.CreateDrawingSession())
             {
-                if (this.IsFill) ds.FillRectangle(r, this.FillBrush);
-                if (this.IsStroke) ds.DrawRectangle(r, this.StrokeBrush, this.StrokeWidth);
+                if (this.IsFill) ds.FillRectangle(rect, this.FillBrush);
+                if (this.IsStroke) ds.DrawRectangle(rect, this.StrokeBrush, this.StrokeWidth);
             }
 
-            return command;
+            return new Transform2DEffect
+            {
+                Source = command,
+                TransformMatrix = this.LayerTransformer.Matrix* canvasToVirtualMatrix
+            };
         }
          
-        public override VectorRect GetBoundRect(ICanvasResourceCreator creator)
-        {
-            return this.Rect;
-        }
 
-        public static RectangularLayer CreateFromRect(ICanvasResourceCreator creator, VectorRect rect, Color color)
+
+        public static RectangularLayer CreateFromRect(ICanvasResourceCreator creator,VectorRect rect, Color color)
         {
             return new RectangularLayer
             {
-                Rect = rect,
+                LayerTransformer = new LayerTransformer
+                {
+                    Rect = rect,
+                    Radian = 0.0f,
+                },
                 FillBrush = new CanvasSolidColorBrush(creator, color)
             };
         }

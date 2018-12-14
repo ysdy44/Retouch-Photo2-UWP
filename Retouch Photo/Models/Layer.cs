@@ -21,6 +21,8 @@ namespace Retouch_Photo.Models
 {
     public abstract class Layer: INotifyPropertyChanged
     {
+        //Property
+
         private string name = "Layer";
         public string Name
         {
@@ -66,10 +68,15 @@ namespace Retouch_Photo.Models
         }
 
 
+        public LayerTransformer LayerTransformer;
 
-        public abstract ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 matrix);
-        public abstract VectorRect GetBoundRect(ICanvasResourceCreator creator);
 
+        //abstract
+        public abstract ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix);
+        
+
+
+        //Create
         public static Layer CreateFromXElement(ICanvasResourceCreatorWithDpi creator, XElement element)
         {
             int width = (int)element.Element("LayerWidth");
@@ -89,11 +96,7 @@ namespace Retouch_Photo.Models
 
 
 
-
-
-
-
-        /// <summary>渲染图层</summary>
+        /// <summary>Render</summary>
         /// <param name="layer">当前图层</param>
         /// <param name="image">从当前图层上面 传下来的 图像</param>
         /// <returns>新的 向下传递的 图像</returns>
@@ -170,8 +173,7 @@ namespace Retouch_Photo.Models
             }
         }
 
-
-
+        
 
         //Delegate
         public delegate void RemoveHandler(Layer layer);

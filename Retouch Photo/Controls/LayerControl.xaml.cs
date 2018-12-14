@@ -54,18 +54,18 @@ namespace Retouch_Photo.Controls
         {
             if (e.ClickedItem is Layer item)
             {
-                this.ViewModel.RenderLayer.SetIndex(item);
+                this.ViewModel.RenderLayer.CurrentLayer = item;
                 this.ViewModel.Invalidate();
             }
         }
 
 
-        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e) => this.ViewModel.Invalidate(isLayerRender: true);
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => this.ViewModel.Invalidate(isLayerRender: true);
+        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e) => this.ViewModel.Invalidate();
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => this.ViewModel.Invalidate();
         private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
             e.Handled = true;
-            this.ViewModel.Invalidate(isLayerRender: true);
+            this.ViewModel.Invalidate();
         }
 
 

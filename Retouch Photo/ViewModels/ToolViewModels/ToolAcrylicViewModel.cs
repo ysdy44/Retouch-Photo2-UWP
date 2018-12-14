@@ -21,18 +21,17 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         Vector2 point;
         Vector2 StartPoint;
         Vector2 EndPoint;
-        bool IsStartLimit(Vector2 point) => (this.point - point).LengthSquared() > 20.0f * 20.0f;
+        VectorRect Rect => new VectorRect(this.StartPoint, this.EndPoint);
 
-        VectorRect Rect;
-        AcrylicLayer Layer;
+         AcrylicLayer Layer;
 
         public override void Start(Vector2 point, DrawViewModel viewModel)
         {
             this.point = point;
-            this.Rect.Start = this.Rect.End = this.StartPoint = Vector2.Transform(point, viewModel.Transformer.ControlToVirtualToCanvasMatrix);
- 
-            if (this.Layer == null) this.Layer = AcrylicLayer.CreateFromRect(viewModel.CanvasControl,this.Rect, viewModel.Color);
-            this.Layer.Rect = this.Rect;
+            this.StartPoint = this.EndPoint = Vector2.Transform(point, viewModel.Transformer.ControlToVirtualToCanvasMatrix);
+            
+            if (this.Layer == null) this.Layer = AcrylicLayer.CreateFromRect(viewModel.CanvasControl, this.Rect, viewModel.Color);
+            this.Layer.LayerTransformer.Rect = this.Rect;
             this.Layer.TintColor = viewModel.Color;
 
             viewModel.InvalidateWithJumpedQueueLayer(this.Layer);
@@ -41,24 +40,27 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         {
             this.EndPoint = Vector2.Transform(point, viewModel.Transformer.ControlToVirtualToCanvasMatrix);
 
-            this.Layer.Rect = this.Rect = new VectorRect(this.StartPoint, this.EndPoint, viewModel.MarqueeMode);
+            this.Layer.LayerTransformer.Rect = this.Rect;
 
             viewModel.InvalidateWithJumpedQueueLayer(this.Layer);
         }
         public override void Complete(Vector2 point, DrawViewModel viewModel)
         {
-            this.Rect = new VectorRect(this.StartPoint, this.EndPoint, viewModel.MarqueeMode);
+            this.Layer.LayerTransformer.Rect = this.Rect;
 
-            if (this.IsStartLimit(point)) viewModel.RenderLayer.Insert(AcrylicLayer.CreateFromRect(viewModel.CanvasControl, this.Rect, viewModel.Color));
-            this.Rect.Start = this.Rect.End = Vector2.Zero;
+            if (VectorRect.NodeDistanceOut(this.point, point))
+            {
+                AcrylicLayer acrylicLayer = AcrylicLayer.CreateFromRect(viewModel.CanvasControl, this.Rect, viewModel.Color);
+                viewModel.RenderLayer.Insert(acrylicLayer);
+            }
 
-            viewModel.Invalidate(isLayerRender: true);
+            viewModel.Invalidate();
         }
 
 
         public override void Draw(CanvasDrawingSession ds, DrawViewModel viewModel)
         {
-            VectorRect.DrawNodeLine(ds, this.Rect, viewModel.Transformer.CanvasToVirtualToControlMatrix);
+            VectorRect.DrawNodeLine(ds, this.Rect, Matrix3x2.CreateTranslation(this.Rect.X, this.Rect.Y) * viewModel.Transformer.CanvasToVirtualToControlMatrix);
         }
 
     }

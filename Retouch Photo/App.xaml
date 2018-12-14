@@ -58,28 +58,6 @@
 
                 </ResourceDictionary>
 
-                <ResourceDictionary x:Key="Dark2">
-
-                    <Color x:Key="AppForegroundColor" >#202021</Color>
-                    <SolidColorBrush x:Key="AppForeground" Color="{ThemeResource AppForegroundColor}" />
-                    <SolidColorBrush x:Key="AppBackground" Color="#171717" />
-                    <Color x:Key="AppBorderBrushColor" >#343434</Color>
-                    <SolidColorBrush x:Key="AppBorderBrush" Color="{ThemeResource AppBorderBrushColor}" />
-
-                    <SolidColorBrush x:Key="AppFill" Color="#292929" />
-                    <Color x:Key="AppStrokeColor" >#88000000</Color>
-                    <SolidColorBrush x:Key="AppStroke" Color="{ThemeResource AppStrokeColor}" />
-
-                    <LinearGradientBrush x:Key="AppLinearBrush" StartPoint="0.5,0" EndPoint="0.5,1">
-                        <GradientStop Color="#303030" Offset="0"/>
-                        <GradientStop Color="#2e2e2e" Offset="0.25"/>
-                        <GradientStop Color="#2d2d2d" Offset="0.5"/>
-                        <GradientStop Color="#2b2b2b" Offset="0.75"/>
-                        <GradientStop Color="#292929" Offset="1"/>
-                    </LinearGradientBrush>
-
-                </ResourceDictionary>
-
             </ResourceDictionary.ThemeDictionaries>
 
             <!--Merged-->

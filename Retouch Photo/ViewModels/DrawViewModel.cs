@@ -34,9 +34,16 @@ namespace Retouch_Photo.ViewModels
 
         /// <summary>画布控件</summary>
         public CanvasControl CanvasControl;
-        public void Invalidate(bool isDottedLineRender = false, bool isLayerRender = false, bool? isThumbnail = null)
+        public void Invalidate( bool? isThumbnail = null)
         {
-            this.RenderLayer.RenderTarget= this.RenderLayer.GetRender(this.CanvasControl, this.Transformer.CanvasToVirtualMatrix);
+            this.RenderLayer.RenderTarget = this.RenderLayer.GetRender
+            (
+                this.CanvasControl,
+                this.Transformer.CanvasToVirtualMatrix,
+                this.Transformer.Width, 
+                this.Transformer.Height, 
+                this.Transformer.Scale
+            );
 
             if (isThumbnail == true) this.CanvasControl.DpiScale = 0.5f;
             else if (isThumbnail == false) this.CanvasControl.DpiScale = 1.0f;
@@ -45,7 +52,15 @@ namespace Retouch_Photo.ViewModels
         }
         public void InvalidateWithJumpedQueueLayer(Layer jumpedQueueLayer, bool? isThumbnail = null)
         {
-            this.RenderLayer.RenderTarget = this.RenderLayer.GetRenderWithJumpedQueueLayer(this.CanvasControl, this.Transformer.CanvasToVirtualMatrix, jumpedQueueLayer);
+            this.RenderLayer.RenderTarget = this.RenderLayer.GetRenderWithJumpedQueueLayer
+            (
+                this.CanvasControl,
+                jumpedQueueLayer,
+                this.Transformer.CanvasToVirtualMatrix,
+                this.Transformer.Width,
+                this.Transformer.Height,
+                this.Transformer.Scale
+            );
 
             if (isThumbnail == true) this.CanvasControl.DpiScale = 0.5f;
             else if (isThumbnail == false) this.CanvasControl.DpiScale = 1.0f;
@@ -104,7 +119,7 @@ namespace Retouch_Photo.ViewModels
             this.RenderLayer.LoadFromProject(this.CanvasControl, project);
             this.RenderLayer.Layers.CollectionChanged += (s, e) =>
             {
-                this.Invalidate(isLayerRender: true);
+                this.Invalidate();
                 this.SelectedIndex = this.RenderLayer.Index;
             };
 
@@ -119,7 +134,7 @@ namespace Retouch_Photo.ViewModels
 
             /////////////////////////////////////////////////////////////////////////////////////
 
-            this.Invalidate(true, true);
+            this.Invalidate();
         }
 
 

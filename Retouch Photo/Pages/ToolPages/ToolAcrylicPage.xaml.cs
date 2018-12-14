@@ -18,6 +18,7 @@ using Retouch_Photo.Library;
 using Retouch_Photo.Models;
 using Retouch_Photo.Models.Layers.GeometryLayers;
 using Microsoft.Graphics.Canvas.Brushes;
+using Retouch_Photo.Models.Layers;
 
 namespace Retouch_Photo.Pages.ToolPages
 {
@@ -48,15 +49,11 @@ namespace Retouch_Photo.Pages.ToolPages
             this.ViewModel.Color = value;
             this.ColorBrush.Color = value;
 
-            Layer layer = this.ViewModel.RenderLayer.CurrentLayer();
-
-            if (layer is RectangularLayer rectangularLayer)
+            Layer layer = this.ViewModel.RenderLayer.CurrentLayer;
+            if (layer is AcrylicLayer rectangularLayer)
             {
-                if (rectangularLayer.FillBrush is CanvasSolidColorBrush brush)
-                {
-                    brush.Color = value;
-                    this.ViewModel.Invalidate(isLayerRender: true);
-                }
+                rectangularLayer.TintColor = value;
+                this.ViewModel.Invalidate();
             }
         }
          

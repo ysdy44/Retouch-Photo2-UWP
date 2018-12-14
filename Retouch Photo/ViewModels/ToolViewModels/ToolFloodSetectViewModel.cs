@@ -15,6 +15,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
         public override void Start(Vector2 point, DrawViewModel viewModel)
         {
+
         }
         public override void Delta(Vector2 point, DrawViewModel viewModel)
         {
