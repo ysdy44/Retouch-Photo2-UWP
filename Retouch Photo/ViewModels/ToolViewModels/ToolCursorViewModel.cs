@@ -34,9 +34,9 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             Layer layer = viewModel.RenderLayer.CurrentLayer;
             if (layer!=null)
             {
-                Vector2 radiansNode = VectorRect.GetRadianNode(layer.LayerTransformer.Rect, layer.LayerTransformer.Matrix*  viewModel.Transformer.CanvasToVirtualToControlMatrix);
+                Vector2 radiansNode = Transformer.GetRadianNode(layer.Transformer, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
 
-                 if (VectorRect.NodeRadiusOut(radiansNode, point) == false)
+                if (Transformer.NodeRadiusOut(radiansNode, point) == false)
                 {
                     this.Mode = CursorMode.Rotation;
                     this.RotationViewModel.Start(point, viewModel);
@@ -89,17 +89,10 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         public override void Draw(CanvasDrawingSession ds, DrawViewModel viewModel)
         {
             Layer layer = viewModel.RenderLayer.CurrentLayer;
-            if (layer != null)
-            {
-                VectorRect.DrawNodeLine
-            (
-                ds,
-                layer.LayerTransformer.Rect,
-               layer.LayerTransformer.Matrix * viewModel.Transformer.CanvasToVirtualToControlMatrix,
-                true
-            );
-            }
 
+            if (layer == null) return;
+            Transformer.DrawNodeLine(ds, layer.Transformer, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix,true);
+            
             switch (this.Mode)
             {
                 case CursorMode.None:
@@ -130,7 +123,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
         public override void Start(Vector2 point, DrawViewModel viewModel)
         {
-            this.StartPoint = Vector2.Transform(point, viewModel.Transformer.ControlToVirtualToCanvasMatrix);
+            this.StartPoint = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
             this.CurrentLayer = viewModel.RenderLayer.CurrentLayer = this.GetLayerWhichFillContainsPoint
             (
                 creator: viewModel.CanvasControl,
@@ -139,24 +132,14 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             );
 
             if (this.CurrentLayer == null) return;
-            this.LayerStartPostion.X = this.CurrentLayer.LayerTransformer.Rect.X;
-            this.LayerStartPostion.Y = this.CurrentLayer.LayerTransformer.Rect.Y;
+            this.LayerStartPostion = this.CurrentLayer.Transformer.Postion;
         }
         public override void Delta(Vector2 point, DrawViewModel viewModel)
         {
             if (this.CurrentLayer == null) return;
 
-            var nj=this.LayerStartPostion - this.StartPoint + Vector2.Transform(point, viewModel.Transformer.ControlToVirtualToCanvasMatrix);
-            this.CurrentLayer.LayerTransformer.Rect.X = nj.X;
-            this.CurrentLayer.LayerTransformer.Rect.Y = nj.Y;
-
-
-
-            viewModel.Text =
-                this.CurrentLayer.LayerTransformer.Rect.Postion.X.ToString()
-                + "   " + 
-                this.CurrentLayer.LayerTransformer.Rect.Postion.Y.ToString();
-
+            this.CurrentLayer.Transformer.Postion= this.LayerStartPostion - this.StartPoint + Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+         
             viewModel.Invalidate();
         }
         public override void Complete(Vector2 point, DrawViewModel viewModel)
@@ -173,10 +156,9 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         {
             foreach (Layer layer in layers)
             {
-                if (layer.LayerTransformer.Rect.FillContainsPoint(point))
-                {
-                    return layer;
-                }
+                if (layer.IsVisual == false || layer.Opacity == 0) continue;
+
+                if (layer.Transformer.FillContainsPoint(point)) return layer;                
             }
             return null;
         }
@@ -200,23 +182,35 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             this.CurrentLayer = viewModel.RenderLayer.CurrentLayer;
 
             if (this.CurrentLayer == null) return;
-            this.Center = Vector2.Transform(this.CurrentLayer.LayerTransformer.Rect.Center, viewModel.Transformer.CanvasToVirtualToControlMatrix);
-            viewModel.Text = this.CurrentLayer.LayerTransformer.Rect.Center.X.ToString();
 
-            this.LayerStartRadian = this.CurrentLayer.LayerTransformer.Radian;
+            this.Center = Vector2.Transform
+            (
+                new Vector2
+                (
+                    this.CurrentLayer.Transformer.Width / 2, 
+                    this.CurrentLayer.Transformer.Height / 2
+                 ) , 
+                this.CurrentLayer.Transformer.Matrix * viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix
+             );
+
+            this.LayerStartRadian = this.CurrentLayer.Transformer.Radian;
             this.StartRadian = this.VectorToRadians(point-this.Center);
+
+            viewModel.Invalidate();
         }
         public override void Delta(Vector2 point, DrawViewModel viewModel)
         {
           this.Radians = this.VectorToRadians(point - this.Center);
 
             if (this.CurrentLayer == null) return;
-            this.CurrentLayer.LayerTransformer.Radian = this.LayerStartRadian - this.StartRadian + this.Radians;
+            this.CurrentLayer.Transformer.Radian = this.LayerStartRadian - this.StartRadian + this.Radians;
 
             viewModel.Invalidate();
         }
         public override void Complete(Vector2 point, DrawViewModel viewModel)
         {
+            viewModel.Invalidate();
+
         }
 
         public override void Draw(CanvasDrawingSession ds, DrawViewModel viewModel)

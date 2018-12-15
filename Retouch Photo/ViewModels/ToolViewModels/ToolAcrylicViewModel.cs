@@ -21,34 +21,33 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         Vector2 point;
         Vector2 StartPoint;
         Vector2 EndPoint;
-        VectorRect Rect => new VectorRect(this.StartPoint, this.EndPoint);
+        Rect Rect => new Rect(this.StartPoint.ToPoint(), this.EndPoint.ToPoint());
 
          AcrylicLayer Layer;
 
         public override void Start(Vector2 point, DrawViewModel viewModel)
         {
             this.point = point;
-            this.StartPoint = this.EndPoint = Vector2.Transform(point, viewModel.Transformer.ControlToVirtualToCanvasMatrix);
+            this.StartPoint = this.EndPoint = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
             
             if (this.Layer == null) this.Layer = AcrylicLayer.CreateFromRect(viewModel.CanvasControl, this.Rect, viewModel.Color);
-            this.Layer.LayerTransformer.Rect = this.Rect;
+            this.Layer.Transformer = Transformer.CreateFromRect(this.Rect);
             this.Layer.TintColor = viewModel.Color;
 
             viewModel.InvalidateWithJumpedQueueLayer(this.Layer);
         }
         public override void Delta(Vector2 point, DrawViewModel viewModel)
         {
-            this.EndPoint = Vector2.Transform(point, viewModel.Transformer.ControlToVirtualToCanvasMatrix);
-
-            this.Layer.LayerTransformer.Rect = this.Rect;
+            this.EndPoint = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+            this.Layer.Transformer = Transformer.CreateFromRect(this.Rect);
 
             viewModel.InvalidateWithJumpedQueueLayer(this.Layer);
         }
         public override void Complete(Vector2 point, DrawViewModel viewModel)
         {
-            this.Layer.LayerTransformer.Rect = this.Rect;
+            this.Layer.Transformer = Transformer.CreateFromRect(this.Rect);
 
-            if (VectorRect.NodeDistanceOut(this.point, point))
+            if (Transformer.NodeDistanceOut(this.point, point))
             {
                 AcrylicLayer acrylicLayer = AcrylicLayer.CreateFromRect(viewModel.CanvasControl, this.Rect, viewModel.Color);
                 viewModel.RenderLayer.Insert(acrylicLayer);
@@ -60,7 +59,9 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
         public override void Draw(CanvasDrawingSession ds, DrawViewModel viewModel)
         {
-            VectorRect.DrawNodeLine(ds, this.Rect, Matrix3x2.CreateTranslation(this.Rect.X, this.Rect.Y) * viewModel.Transformer.CanvasToVirtualToControlMatrix);
+            if (this.Layer == null) return;
+
+            Transformer.DrawNodeLine(ds, this.Layer.Transformer, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
         }
 
     }

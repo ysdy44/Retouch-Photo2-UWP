@@ -21,7 +21,7 @@ namespace Retouch_Photo.Models.Layers
             return new Transform2DEffect
             {
                 Source = Image,
-                TransformMatrix =this.LayerTransformer.Matrix* canvasToVirtualMatrix
+                TransformMatrix =this.Transformer.Matrix* canvasToVirtualMatrix
             };
         }
         
@@ -33,9 +33,11 @@ namespace Retouch_Photo.Models.Layers
 
             return new ImageLayer
             {
-                LayerTransformer = new LayerTransformer
+                Transformer = new Transformer
                 {
-                    Rect = new VectorRect(0,0,width,height),
+                    Width=width,
+                    Height=height,
+                    Postion=Vector2.Zero,
                     Radian = 0.0f,
                 },
                 Image = renderTarget
@@ -46,9 +48,11 @@ namespace Retouch_Photo.Models.Layers
         {
             return new ImageLayer
             {
-                LayerTransformer = new LayerTransformer
+                Transformer = new Transformer
                 {
-                    Rect = new VectorRect(0, 0, width, height),
+                    Width=width,
+                    Height=height,
+                    Postion=Vector2.Zero,
                     Radian = 0.0f,
                 },
                 Image = bitmap

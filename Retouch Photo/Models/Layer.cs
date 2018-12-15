@@ -68,7 +68,7 @@ namespace Retouch_Photo.Models
         }
 
 
-        public LayerTransformer LayerTransformer;
+        public Transformer Transformer;
 
 
         //abstract

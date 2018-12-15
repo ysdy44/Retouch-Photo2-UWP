@@ -24,7 +24,7 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
          
         public override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
-            Rect rect = new Rect(0, 0, this.LayerTransformer.Rect.Width, this.LayerTransformer.Rect.Height);
+            Rect rect = new Rect(0, 0, this.Transformer.Width, this.Transformer.Height);
 
             CanvasCommandList command = new CanvasCommandList(creator);
             using (CanvasDrawingSession ds = command.CreateDrawingSession())
@@ -36,21 +36,17 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
             return new Transform2DEffect
             {
                 Source = command,
-                TransformMatrix = this.LayerTransformer.Matrix* canvasToVirtualMatrix
+                TransformMatrix = this.Transformer.Matrix* canvasToVirtualMatrix
             };
         }
          
 
 
-        public static RectangularLayer CreateFromRect(ICanvasResourceCreator creator,VectorRect rect, Color color)
+        public static RectangularLayer CreateFromRect(ICanvasResourceCreator creator,Rect rect, Color color)
         {
             return new RectangularLayer
             {
-                LayerTransformer = new LayerTransformer
-                {
-                    Rect = rect,
-                    Radian = 0.0f,
-                },
+                Transformer = Transformer.CreateFromRect(rect),
                 FillBrush = new CanvasSolidColorBrush(creator, color)
             };
         }

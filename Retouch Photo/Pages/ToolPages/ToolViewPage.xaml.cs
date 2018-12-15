@@ -74,14 +74,14 @@ namespace Retouch_Photo.Pages.ToolPages
 
             //Radian
             this.RadianFrame.Value = this.RadianDefult;
-            this.RadianSlider.Value = this.RadianToValue(this.ViewModel.Transformer.Radian);
+            this.RadianSlider.Value = this.RadianToValue(this.ViewModel.MatrixTransformer.Radian);
             this.RadianSlider.Maximum = this.RadianMaximum;
             this.RadianSlider.Minimum = this.RadianMinimum;
             this.RadianSlider.ValueChanged += RadianSlider_ValueChanged;
 
             // Scale
             this.ScaleFrame.Value = this.ScaleDefult;
-            this.ScaleSlider.Value = this.ScaleToValue(this.ViewModel.Transformer.Scale);
+            this.ScaleSlider.Value = this.ScaleToValue(this.ViewModel.MatrixTransformer.Scale);
             this.ScaleSlider.Maximum = this.ScaleMaximum;
             this.ScaleSlider.Minimum = this.ScaleMinimum;
             this.ScaleSlider.ValueChanged += ScaleSlider_ValueChanged;
@@ -95,7 +95,7 @@ namespace Retouch_Photo.Pages.ToolPages
             if (this.ViewModel == null) return;
             if (this.ViewModel.CanvasControl == null) return;
 
-            this.ViewModel.Transformer.Radian = this.ValueToRadian(e.NewValue);
+            this.ViewModel.MatrixTransformer.Radian = this.ValueToRadian(e.NewValue);
             this.ViewModel.Invalidate();
         }
 
@@ -106,7 +106,7 @@ namespace Retouch_Photo.Pages.ToolPages
             if (this.ViewModel == null) return;
             if (this.ViewModel.CanvasControl == null) return;
 
-            this.ViewModel.Transformer.Scale = this.ValueToScale(e.NewValue);
+            this.ViewModel.MatrixTransformer.Scale = this.ValueToScale(e.NewValue);
             this.ViewModel.Invalidate();
         }
                     

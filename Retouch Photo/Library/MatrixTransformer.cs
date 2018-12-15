@@ -23,8 +23,9 @@ namespace Retouch_Photo.Library
     /// 每个图层的GetRender方法里，需要返回自身数据源的【Canvas画布层 —Virtual虚拟层】的转化；
     /// 由CanvasControl画布控件的Draw绘制事件，来完成【Virtual虚拟层 —Control控件层】的转化。
     /// </summary>
-    public class Transformer
+    public class MatrixTransformer
     {
+        
 
         /// <summary>重新加载Transformer，可以多次调用</summary>
         /// <param name="project">Project类型</param>

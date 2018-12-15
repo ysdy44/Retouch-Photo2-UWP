@@ -10,7 +10,7 @@
 
     <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
         <StackPanel Orientation="Horizontal" Height="50" Padding="4">
-            <Slider Minimum="-180" Maximum="180" Width="222" ValueChanged="Slider_ValueChanged"/>
+            <Slider Visibility="Collapsed" Minimum="-180" Maximum="180" Width="222" ValueChanged="Slider_ValueChanged"/>
             <Border CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}">
                 <StackPanel Orientation="Horizontal">
 

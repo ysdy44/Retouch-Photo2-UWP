@@ -69,13 +69,13 @@ namespace Retouch_Photo.Controls
         private void Right_Start(Vector2 point)
         {
             this.rightStartPoint = point;
-            this.rightStartPosition = this.ViewModel.Transformer.Position;
+            this.rightStartPosition = this.ViewModel.MatrixTransformer.Position;
 
             this.ViewModel.Invalidate(isThumbnail: true);
         }
         private void Right_Delta(Vector2 point)
         {
-            this.ViewModel.Transformer.Position = this.rightStartPosition - this.rightStartPoint + point;
+            this.ViewModel.MatrixTransformer.Position = this.rightStartPosition - this.rightStartPoint + point;
 
             this.ViewModel.Invalidate();
         }
@@ -97,18 +97,18 @@ namespace Retouch_Photo.Controls
         private void Double_Start(Vector2 center, float space)
         {
             this.doubleStartCenter = center;
-            this.doubleStartPosition = this.ViewModel.Transformer.Position;
+            this.doubleStartPosition = this.ViewModel.MatrixTransformer.Position;
 
             this.doubleStartSpace = space;
-            this.doubleStartScale = this.ViewModel.Transformer.Scale;
+            this.doubleStartScale = this.ViewModel.MatrixTransformer.Scale;
 
             this.ViewModel.Invalidate(isThumbnail: true);
         }
         private void Double_Delta(Vector2 center, float space)
         {
-            this.ViewModel.Transformer.Position = this.doubleStartPosition - this.doubleStartCenter + center;
+            this.ViewModel.MatrixTransformer.Position = this.doubleStartPosition - this.doubleStartCenter + center;
 
-            this.ViewModel.Transformer.Scale = this.doubleStartScale / this.doubleStartSpace * space;
+            this.ViewModel.MatrixTransformer.Scale = this.doubleStartScale / this.doubleStartSpace * space;
 
             this.ViewModel.Invalidate();
         }
@@ -128,18 +128,18 @@ namespace Retouch_Photo.Controls
         {
             if (space > 0)
             {
-                if (this.ViewModel.Transformer.Scale < 10f)
+                if (this.ViewModel.MatrixTransformer.Scale < 10f)
                 {
-                    this.ViewModel.Transformer.Scale *= 1.1f;
-                    this.ViewModel.Transformer.Position = point + (this.ViewModel.Transformer.Position - point) * 1.1f;                         
+                    this.ViewModel.MatrixTransformer.Scale *= 1.1f;
+                    this.ViewModel.MatrixTransformer.Position = point + (this.ViewModel.MatrixTransformer.Position - point) * 1.1f;                         
                 }
             }
             else
             {
-                if (this.ViewModel.Transformer.Scale > 0.1f)
+                if (this.ViewModel.MatrixTransformer.Scale > 0.1f)
                 {
-                    this.ViewModel.Transformer.Scale /= 1.1f;
-                    this.ViewModel.Transformer.Position = point + (this.ViewModel.Transformer.Position - point) / 1.1f;
+                    this.ViewModel.MatrixTransformer.Scale /= 1.1f;
+                    this.ViewModel.MatrixTransformer.Position = point + (this.ViewModel.MatrixTransformer.Position - point) / 1.1f;
                 }
             }
 
@@ -154,7 +154,7 @@ namespace Retouch_Photo.Controls
 
         private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
-            this.ViewModel.RenderLayer.Draw(args.DrawingSession, this.ViewModel.Transformer.VirtualToControlMatrix);
+            this.ViewModel.RenderLayer.Draw(args.DrawingSession, this.ViewModel.MatrixTransformer.VirtualToControlMatrix);
 
             this.ViewModel.Tool.ViewModel.Draw(args.DrawingSession, this.ViewModel);
         }

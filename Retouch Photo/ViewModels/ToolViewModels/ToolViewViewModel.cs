@@ -19,13 +19,13 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         public override void Start(Vector2 point, DrawViewModel viewModel)
         {
             this.rightStartPoint = point;
-            this.rightStartPosition = viewModel.Transformer.Position;
+            this.rightStartPosition = viewModel.MatrixTransformer.Position;
 
             viewModel.Invalidate(isThumbnail: true);
         }
         public override void Delta(Vector2 point, DrawViewModel viewModel)
         {
-            viewModel.Transformer.Position = this.rightStartPosition - this.rightStartPoint + point;
+            viewModel.MatrixTransformer.Position = this.rightStartPosition - this.rightStartPoint + point;
 
             viewModel.Invalidate();
         }

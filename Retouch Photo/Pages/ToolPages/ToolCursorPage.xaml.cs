@@ -33,7 +33,7 @@ namespace Retouch_Photo.Pages.ToolPages
             Layer layer = App.ViewModel.RenderLayer.CurrentLayer;
             if (layer == null) return;
 
-            layer.LayerTransformer.Radian = (float)(e.NewValue / 180 * Math.PI);
+            layer.Transformer.Radian = (float)(e.NewValue / 180 * Math.PI);
             App.ViewModel.Invalidate();
         }
     }

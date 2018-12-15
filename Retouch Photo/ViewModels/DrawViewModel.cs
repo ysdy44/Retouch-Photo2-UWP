@@ -39,10 +39,10 @@ namespace Retouch_Photo.ViewModels
             this.RenderLayer.RenderTarget = this.RenderLayer.GetRender
             (
                 this.CanvasControl,
-                this.Transformer.CanvasToVirtualMatrix,
-                this.Transformer.Width, 
-                this.Transformer.Height, 
-                this.Transformer.Scale
+                this.MatrixTransformer.CanvasToVirtualMatrix,
+                this.MatrixTransformer.Width, 
+                this.MatrixTransformer.Height, 
+                this.MatrixTransformer.Scale
             );
 
             if (isThumbnail == true) this.CanvasControl.DpiScale = 0.5f;
@@ -56,10 +56,10 @@ namespace Retouch_Photo.ViewModels
             (
                 this.CanvasControl,
                 jumpedQueueLayer,
-                this.Transformer.CanvasToVirtualMatrix,
-                this.Transformer.Width,
-                this.Transformer.Height,
-                this.Transformer.Scale
+                this.MatrixTransformer.CanvasToVirtualMatrix,
+                this.MatrixTransformer.Width,
+                this.MatrixTransformer.Height,
+                this.MatrixTransformer.Scale
             );
 
             if (isThumbnail == true) this.CanvasControl.DpiScale = 0.5f;
@@ -112,7 +112,7 @@ namespace Retouch_Photo.ViewModels
         /// <param name="project">Project类型</param>
         public void LoadFromProject(Project project)
         {
-            this.Transformer.LoadFromProject(project);
+            this.MatrixTransformer.LoadFromProject(project);
 
             /////////////////////////////////////////////////////////////////////////////////////
             
@@ -142,8 +142,8 @@ namespace Retouch_Photo.ViewModels
         public GoBack GoBack = new GoBack();
 
 
-        /// <summary>变形金刚(并不</summary>
-        public Transformer Transformer = new Transformer();
+        /// <summary>矩阵变换</summary>
+        public MatrixTransformer MatrixTransformer = new MatrixTransformer();
 
         public MarqueeMode MarqueeMode = MarqueeMode.None;
 

@@ -19,37 +19,36 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         Vector2 point;
         Vector2 StartPoint;
         Vector2 EndPoint;
-        VectorRect Rect => new VectorRect(this.StartPoint,this.EndPoint);
+        Rect GetRect() => new Rect(this.StartPoint.ToPoint(),this.EndPoint.ToPoint());
 
         RectangularLayer Layer;
 
         public override void Start(Vector2 point, DrawViewModel viewModel)
         {
             this.point = point;
-            this.StartPoint = this.EndPoint = Vector2.Transform(point, viewModel.Transformer.ControlToVirtualToCanvasMatrix);
-
-      
-            if (this.Layer == null) this.Layer = RectangularLayer.CreateFromRect(viewModel.CanvasControl, this.Rect, viewModel.Color);
-            this.Layer.LayerTransformer.Rect = this.Rect;
+            this.StartPoint = this.EndPoint = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+                  
+            if (this.Layer == null) this.Layer = RectangularLayer.CreateFromRect(viewModel.CanvasControl, this.GetRect(), viewModel.Color);
+            this.Layer.Transformer = Transformer.CreateFromRect(this.GetRect());
             this.Layer.FillBrush = new CanvasSolidColorBrush(viewModel.CanvasControl, viewModel.Color);
 
             viewModel.InvalidateWithJumpedQueueLayer(this.Layer);
         }
         public override void Delta(Vector2 point, DrawViewModel viewModel)
         {  
-            this.EndPoint = Vector2.Transform(point, viewModel.Transformer.ControlToVirtualToCanvasMatrix);
+            this.EndPoint = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
 
-            this.Layer.LayerTransformer.Rect = this.Rect;
+            this.Layer.Transformer = Transformer.CreateFromRect(this.GetRect());
 
             viewModel.InvalidateWithJumpedQueueLayer(this.Layer);
         }
         public override void Complete(Vector2 point, DrawViewModel viewModel)
         {
-            this.Layer.LayerTransformer.Rect = this.Rect;
-
-            if (VectorRect.NodeDistanceOut(this.point, point))
+            this.Layer.Transformer = Transformer.CreateFromRect(this.GetRect());
+            
+            if (Transformer.NodeDistanceOut(this.point, point))
             {
-                RectangularLayer rectangularLayer = RectangularLayer.CreateFromRect(viewModel.CanvasControl, this.Rect, viewModel.Color);
+                RectangularLayer rectangularLayer = RectangularLayer.CreateFromRect(viewModel.CanvasControl, this.GetRect(), viewModel.Color);
                 viewModel.RenderLayer.Insert(rectangularLayer);
             }
 
@@ -59,7 +58,9 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
         public override void Draw(CanvasDrawingSession ds, DrawViewModel viewModel)
         {
-            VectorRect.DrawNodeLine(ds, this.Rect,Matrix3x2.CreateTranslation(this.Rect.X,this.Rect.Y)* viewModel.Transformer.CanvasToVirtualToControlMatrix);
+            if (this.Layer == null) return;
+
+            Transformer.DrawNodeLine(ds, this.Layer.Transformer, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
         }
 
     }

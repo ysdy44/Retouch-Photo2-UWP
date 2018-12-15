@@ -28,40 +28,40 @@ namespace Retouch_Photo.Models.Layers
 
         public override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
-            Rect rect = VectorRect.Transform(this.LayerTransformer.Rect, this.LayerTransformer.Matrix *canvasToVirtualMatrix).ToRect();
+            Vector2 point0 = Vector2.Transform(this.Transformer.Postion, canvasToVirtualMatrix);
+            Vector2 point1 = Vector2.Transform(new Vector2(this.Transformer.Postion.X + this.Transformer.Width, this.Transformer.Postion.Y + this.Transformer.Height), canvasToVirtualMatrix);
 
             return new CropEffect
             {
-                SourceRectangle = rect,
+                SourceRectangle = new Rect(point0.ToPoint(), point1.ToPoint()),
                 Source = new CompositeEffect
                 {
                     Sources =
-                    { 
+                    {
                         new GaussianBlurEffect
                         {
                              BlurAmount = this.BlurAmount,
                              Source = image
-                         },
+                        },
                         new OpacityEffect
                         {
                             Opacity = this.TintOpacity,
-                            Source = new ColorSourceEffect{Color = this.TintColor}
-                        }
+                            Source = new ColorSourceEffect
+                            {
+                                Color = this.TintColor
+                             }
+                         }
                     }
                 }
             };
         }
 
 
-        public static AcrylicLayer CreateFromRect(ICanvasResourceCreator creator, VectorRect rect, Color color, float opacity = 0.5f)
+        public static AcrylicLayer CreateFromRect(ICanvasResourceCreator creator, Rect rect, Color color, float opacity = 0.5f)
         {
             return new AcrylicLayer
             {
-                LayerTransformer = new LayerTransformer
-                {
-                    Rect=rect,
-                    Radian = 0.0f,
-                },
+                Transformer = Transformer.CreateFromRect(rect, disabledRadian: true),
                 TintColor = color,
                 TintOpacity = opacity
             };
