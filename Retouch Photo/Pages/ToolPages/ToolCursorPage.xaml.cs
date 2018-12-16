@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo.Models;
+using Retouch_Photo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,27 +15,38 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
-
 namespace Retouch_Photo.Pages.ToolPages
 {
-    /// <summary>
-    /// 可用于自身或导航至 Frame 内部的空白页。
-    /// </summary>
     public sealed partial class ToolCursorPage : Page
     {
+        //ViewModel
+        public DrawViewModel ViewModel;
+
         public ToolCursorPage()
         {
             this.InitializeComponent();
+
+            //ViewModel
+            this.ViewModel = App.ViewModel;
         }
 
-        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        private void StepFrequencyButton_Tapped(object sender, TappedRoutedEventArgs e) => this.ViewModel.Invalidate();
+        private void SkewButton_Tapped(object sender, TappedRoutedEventArgs e) => this.ViewModel.Invalidate();
+                     
+        private void FlipHorizontalButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Transformer((Layer layer) => layer.Transformer.FlipHorizontal = !layer.Transformer.FlipHorizontal);
+        private void FlipVerticalButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Transformer((Layer layer) => layer.Transformer.FlipVertical = !layer.Transformer.FlipVertical);
+        private void LeftTurnButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Transformer((Layer layer) => layer.Transformer.Radian += (float)Math.PI / 2);
+        private void RightTurnButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Transformer((Layer layer) => layer.Transformer.Radian -= (float)Math.PI / 2);
+        private void Transformer(Action<Layer> action)
         {
             Layer layer = App.ViewModel.RenderLayer.CurrentLayer;
             if (layer == null) return;
 
-            layer.Transformer.Radian = (float)(e.NewValue / 180 * Math.PI);
+            action(layer);
+
             App.ViewModel.Invalidate();
         }
+
+
     }
 }

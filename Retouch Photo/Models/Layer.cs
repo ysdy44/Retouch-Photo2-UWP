@@ -16,12 +16,17 @@ using Retouch_Photo.ViewModels;
 using Retouch_Photo.Models.Layers.GeometryLayers;
 using Windows.Graphics.Effects;
 using System.Numerics;
+using Microsoft.Graphics.Canvas.UI.Xaml;
+using Windows.UI;
+using Microsoft.Graphics.Canvas.UI;
 
 namespace Retouch_Photo.Models
 {
     public abstract class Layer: INotifyPropertyChanged
     {
-        //Property
+
+        #region Property
+
 
         private string name = "Layer";
         public string Name
@@ -68,12 +73,23 @@ namespace Retouch_Photo.Models
         }
 
 
+        #endregion
+
+
         public Transformer Transformer;
 
 
         //abstract
         public abstract ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix);
-        
+
+
+
+        CanvasControl sender;
+        public void CanvasControl_CreateResources(CanvasControl sender, CanvasCreateResourcesEventArgs args) => this.sender = sender;
+        public void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
+        {
+            args.DrawingSession.FillRectangle(0, 0, 10, 10, Colors.Red);
+        }
 
 
         //Create
@@ -94,6 +110,8 @@ namespace Retouch_Photo.Models
             return layer;
         }
 
+
+        #region Render
 
 
         /// <summary>Render</summary>
@@ -174,6 +192,8 @@ namespace Retouch_Photo.Models
         }
 
         
+        #endregion
+
 
         //Delegate
         public delegate void RemoveHandler(Layer layer);

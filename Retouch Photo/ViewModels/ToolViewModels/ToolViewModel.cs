@@ -11,12 +11,18 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 {
     public abstract class ToolViewModel
     {
-        public ToolType Type;
-
         public abstract void Start(Vector2 point, DrawViewModel viewModel);
         public abstract void Delta(Vector2 point, DrawViewModel viewModel);
         public abstract void Complete(Vector2 point, DrawViewModel viewModel);
 
         public abstract void Draw(CanvasDrawingSession ds, DrawViewModel viewModel);
+    }
+    public abstract class ToolViewModel2
+    {
+        public abstract void Start(Vector2 point, Layer layer, DrawViewModel viewModel);
+        public abstract void Delta(Vector2 point, Layer layer, DrawViewModel viewModel);
+        public abstract void Complete(Vector2 point, Layer layer, DrawViewModel viewModel);
+
+        public abstract void Draw(CanvasDrawingSession ds, Layer layer, DrawViewModel viewModel);
     }
 }

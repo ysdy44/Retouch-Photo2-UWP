@@ -42,7 +42,7 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
          
 
 
-        public static RectangularLayer CreateFromRect(ICanvasResourceCreator creator,Rect rect, Color color)
+        public static RectangularLayer CreateFromRect(ICanvasResourceCreator creator, VectRect rect, Color color)
         {
             return new RectangularLayer
             {

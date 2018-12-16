@@ -57,7 +57,7 @@ namespace Retouch_Photo.Models.Layers
         }
 
 
-        public static AcrylicLayer CreateFromRect(ICanvasResourceCreator creator, Rect rect, Color color, float opacity = 0.5f)
+        public static AcrylicLayer CreateFromRect(ICanvasResourceCreator creator, VectRect rect, Color color, float opacity = 0.5f)
         {
             return new AcrylicLayer
             {

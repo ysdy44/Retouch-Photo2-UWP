@@ -1,55 +1,47 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Brushes;
-using Retouch_Photo.Library;
 using Retouch_Photo.Models;
 using Retouch_Photo.Models.Layers;
-using Retouch_Photo.Models.Layers.GeometryLayers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.UI;
-
 
 namespace Retouch_Photo.ViewModels.ToolViewModels
-{ 
+{
     public class ToolAcrylicViewModel : ToolViewModel
     {
         Vector2 point;
         Vector2 StartPoint;
-        Vector2 EndPoint;
-        Rect Rect => new Rect(this.StartPoint.ToPoint(), this.EndPoint.ToPoint());
 
          AcrylicLayer Layer;
 
         public override void Start(Vector2 point, DrawViewModel viewModel)
         {
             this.point = point;
-            this.StartPoint = this.EndPoint = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
-            
-            if (this.Layer == null) this.Layer = AcrylicLayer.CreateFromRect(viewModel.CanvasControl, this.Rect, viewModel.Color);
-            this.Layer.Transformer = Transformer.CreateFromRect(this.Rect);
+            this.StartPoint = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+            VectRect rect = new VectRect(this.StartPoint, point, viewModel.MarqueeMode);
+
+            if (this.Layer == null) this.Layer = AcrylicLayer.CreateFromRect(viewModel.CanvasControl, rect, viewModel.Color);
+            this.Layer.Transformer = Transformer.CreateFromRect(rect);
             this.Layer.TintColor = viewModel.Color;
 
             viewModel.InvalidateWithJumpedQueueLayer(this.Layer);
         }
         public override void Delta(Vector2 point, DrawViewModel viewModel)
         {
-            this.EndPoint = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
-            this.Layer.Transformer = Transformer.CreateFromRect(this.Rect);
+            point = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+            VectRect rect = new VectRect(this.StartPoint, point, viewModel.MarqueeMode);
+
+            this.Layer.Transformer = Transformer.CreateFromRect(rect);
 
             viewModel.InvalidateWithJumpedQueueLayer(this.Layer);
         }
         public override void Complete(Vector2 point, DrawViewModel viewModel)
         {
-            this.Layer.Transformer = Transformer.CreateFromRect(this.Rect);
+            VectRect rect = new VectRect(this.StartPoint, point, viewModel.MarqueeMode);
 
-            if (Transformer.NodeDistanceOut(this.point, point))
+            this.Layer.Transformer = Transformer.CreateFromRect(rect);
+
+            if (Transformer.InNodeDistance(this.point, point)==false)
             {
-                AcrylicLayer acrylicLayer = AcrylicLayer.CreateFromRect(viewModel.CanvasControl, this.Rect, viewModel.Color);
+                AcrylicLayer acrylicLayer = AcrylicLayer.CreateFromRect(viewModel.CanvasControl, rect, viewModel.Color);
                 viewModel.RenderLayer.Insert(acrylicLayer);
             }
 
@@ -61,7 +53,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         {
             if (this.Layer == null) return;
 
-            Transformer.DrawNodeLine(ds, this.Layer.Transformer, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
+            Transformer.DrawBound(ds, this.Layer.Transformer, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
         }
 
     }

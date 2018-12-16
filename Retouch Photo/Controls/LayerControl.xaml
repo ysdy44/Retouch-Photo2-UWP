@@ -8,13 +8,15 @@
     xmlns:models="using:Retouch_Photo.Models"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    xmlns:conLayerControls="using:Retouch_Photo.Controls.LayerControls"
     mc:Ignorable="d"
     d:DesignHeight="800"
     d:DesignWidth="200">
 
 
     <UserControl.Resources>
-        
+
         <!--Style-->
         <Style x:Key="AppComboBoxStyle" TargetType="ComboBox">
             <Setter Property="Padding" Value="12,5,0,7" />
@@ -221,134 +223,13 @@
                 </Setter.Value>
             </Setter>
         </Style>
+               
         
-        <!--DataTemplate-->
-        <DataTemplate x:Key="PCDataTemplate" x:DataType="models:Layer">
-            <Grid Background="Transparent" Tapped="Grid_Tapped" Holding="Grid_Holding" RightTapped="Grid_RightTapped">
-
-                <FlyoutBase.AttachedFlyout>
-                    <!--Flyout-->
-                    <Flyout x:Name="Flyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle }">
-                        <StackPanel  Width="240" >
-
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                                <Border Width="32">
-                                    <FontIcon Glyph="&#xE81E;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                                </Border>
-                                <TextBlock Text="Layer" FontWeight="Medium" VerticalAlignment="Center"/>
-                            </StackPanel>
-
-                            <TextBlock Text="Name" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <TextBox PlaceholderText="{x:Bind Name,Mode=OneWay}" Text="{x:Bind Name,Mode=TwoWay}" FontWeight="Medium" HorizontalAlignment="Stretch" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}"/>
-
-                            <TextBlock Text="Opacity" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <Slider Value="{x:Bind Opacity,Mode=TwoWay}" TickFrequency="25" TickPlacement="Inline" Background="{ThemeResource AppFill}" Style="{StaticResource AppOpacitySliderStyle}" ValueChanged="Slider_ValueChanged"/>
-
-                            <TextBlock Text="BlendMode" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <ComboBox FontWeight="Medium" SelectedIndex="{x:Bind BlendIndex,Mode=TwoWay}" Style="{StaticResource AppComboBoxStyle}" SelectionChanged="ComboBox_SelectionChanged">
-                                <!--正常-->
-                                <ComboBoxItem  Content="Normal" BorderBrush="{ThemeResource AppStroke}" BorderThickness="0,0,0,2"/>
-
-                                <!--正片叠底-->
-                                <ComboBoxItem  Content="Multiply"/>
-                                <!--屏幕-->
-                                <ComboBoxItem  Content="Screen"/>
-                                <!--溶解-->
-                                <ComboBoxItem  Content="Dissolve" BorderBrush="{ThemeResource AppStroke}" BorderThickness="0,0,0,2"/>
-
-                                <!--暗-->
-                                <ComboBoxItem  Content="Darken"/>
-                                <!--亮-->
-                                <ComboBoxItem  Content="Lighten"/>
-                                <!--更暗的颜色-->
-                                <ComboBoxItem  Content="DarkerColor"/>
-                                <!--更亮的颜色-->
-                                <ComboBoxItem  Content="LighterColor" BorderBrush="{ThemeResource AppStroke}" BorderThickness="0,0,0,2"/>
-
-                                <!--颜色加深-->
-                                <ComboBoxItem  Content="ColorBurn"/>
-                                <!--颜色减淡-->
-                                <ComboBoxItem  Content="ColorDodge"/>
-                                <!--线性加深-->
-                                <ComboBoxItem  Content="LinearBurn"/>
-                                <!--线性减淡-->
-                                <ComboBoxItem  Content="LinearDodge" BorderBrush="{ThemeResource AppStroke}" BorderThickness="0,0,0,2"/>
-
-                                <!--覆盖-->
-                                <ComboBoxItem  Content="Overlay"/>
-                                <!--柔光-->
-                                <ComboBoxItem  Content="SoftLight"/>
-                                <!--硬光-->
-                                <ComboBoxItem  Content="HardLight"/>
-                                <!--艳光-->
-                                <ComboBoxItem  Content="VividLight"/>
-                                <!--线性光-->
-                                <ComboBoxItem  Content="LinearLight"/>
-                                <!--射灯-->
-                                <ComboBoxItem  Content="PinLight" BorderBrush="{ThemeResource AppStroke}" BorderThickness="0,0,0,2"/>
-
-                                <!--硬混-->
-                                <ComboBoxItem  Content="HardMix"/>
-                                <!--差异-->
-                                <ComboBoxItem  Content="Difference"/>
-                                <!--排除-->
-                                <ComboBoxItem  Content="Exclusion" BorderBrush="{ThemeResource AppStroke}" BorderThickness="0,0,0,2"/>
-
-                                <!--色相-->
-                                <ComboBoxItem  Content="Hue"/>
-                                <!--饱和度-->
-                                <ComboBoxItem  Content="Saturation"/>
-                                <!--颜色-->
-                                <ComboBoxItem  Content="Color" BorderBrush="{ThemeResource AppStroke}" BorderThickness="0,0,0,2"/>
-
-                                <!--光度-->
-                                <ComboBoxItem  Content="Luminosity"/>
-                                <!--减去-->
-                                <ComboBoxItem  Content="Subtract"/>
-                                <!--反色-->
-                                <ComboBoxItem  Content="Division"/>
-                            </ComboBox>
-
-                            <TextBlock Text="Layer" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <Grid  Height="36" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Button x:Name="RemoveButton" Grid.Column="0" Width="Auto" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent" Tapped="{x:Bind RemoveButton_Tapped}">
-                                    <PathIcon Data="M19.2,5.76l0,13.92c0,0.509 -0.202,0.998 -0.562,1.358c-0.36,0.36 -0.849,0.562 -1.358,0.562c-2.275,0 -5.76,0 -5.76,0c0,0 -3.374,0 -5.577,0c-1.038,0 -2.128,-0.825 -2.159,-1.862c-0.127,-4.186 -0.184,-13.978 -0.184,-13.978l-1.68,0l0,-1.68l5.52,0c0,0 0,-0.72 0,-1.44c0,-0.382 0.152,-0.748 0.422,-1.018c0.27,-0.27 0.636,-0.422 1.018,-0.422c1.598,0 4.162,0 5.76,0c0.382,0 0.748,0.152 1.018,0.422c0.27,0.27 0.422,0.636 0.422,1.018l0,1.44l4.8,0l0,1.68l-1.68,0Zm-4.68,3.84l0,10.56c0,0 1.325,0 2.28,0c0.255,0 0.499,-0.101 0.679,-0.281c0.18,-0.18 0.281,-0.424 0.281,-0.679l0,-13.44l-12.48,0l0,13.451c0,0.252 0.1,0.493 0.278,0.671c0.178,0.178 0.419,0.278 0.671,0.278c0.956,0 2.291,0 2.291,0l0,-10.56l1.56,0l0,10.56l2.88,0l0,-10.56l1.56,0Zm0.24,-5.52c0,0 0,-0.703 0,-1.2c0,-0.127 -0.051,-0.249 -0.141,-0.339c-0.09,-0.09 -0.212,-0.141 -0.339,-0.141c-1.124,0 -3.916,0 -5.04,0c-0.127,0 -0.249,0.051 -0.339,0.141c-0.09,0.09 -0.141,0.212 -0.141,0.339l0,1.2l6,0l0,0Z"/>
-                                </Button>
-                                <Button  Grid.Column="1" Width="Auto" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}">
-                                    <PathIcon  Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" Data="M13.858,22.08l-8.756,0c-1.359,0 -2.462,-1.103 -2.462,-2.462l0,-12.596c0,-1.359 1.103,-2.462 2.462,-2.462l8.756,0c1.359,0 2.462,1.103 2.462,2.462l0,12.596c0,1.359 -1.103,2.462 -2.462,2.462Zm-0.461,-15.84l-7.834,0c-0.682,0 -1.236,0.554 -1.236,1.237l0,11.686c0,0.683 0.554,1.237 1.236,1.237l7.834,0c0.682,0 1.236,-0.554 1.236,-1.237l0,-11.686c0,-0.683 -0.554,-1.237 -1.236,-1.237Zm-5.357,-2.4l-1.799,0c0.033,-1.33 1.123,-2.4 2.461,-2.4l8.756,0c1.359,0 2.462,1.103 2.462,2.462l0,12.596c0,1.359 -1.103,2.462 -2.462,2.462l-0.418,0l0,-1.681c0.663,-0.023 1.193,-0.568 1.193,-1.236l0,-11.686c0,-0.683 -0.554,-1.237 -1.236,-1.237l-7.834,0c-0.498,0 -0.927,0.295 -1.123,0.72Z"/>
-                                </Button>
-                                <Button  Grid.Column="2" Width="Auto" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}">
-                                    <PathIcon  Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" Data="M11.52,17.479l-7.406,-4.702l2.743,-1.936l-1.097,-1.384l-5.76,3.32l11.52,7.469l11.52,-7.469l-5.211,-3.32l-1.646,1.384l3.017,1.936l-7.68,4.702Zm1.92,-8.022l2.743,0l-4.663,4.98l-4.663,-4.98l3.017,0l0,-6.423l3.566,0l0,6.423Z"/>
-                                </Button>
-                                <Button  Grid.Column="3" Width="Auto" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}">
-                                    <PathIcon  Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" Data="M10.966,0.48l-0.504,2.062c-0.423,-0.04 -0.863,-0.06 -1.319,-0.06c-0.543,0 -0.947,0.264 -1.21,0.791c-0.264,0.528 -0.476,1.551 -0.636,3.069c0.68,0 1.375,0.064 2.565,0l-0.095,2.29c-1.159,-0.048 -2.058,-0.072 -2.697,-0.072c-0.176,2.557 -0.412,5.488 -0.708,8.793c-0.295,3.305 -1.65,5.189 -4.064,5.652l-1.847,-1.998c0.623,-0.48 2.285,-0.887 2.585,-1.838c0.299,-0.951 0.559,-2.457 0.779,-4.519c0.22,-2.062 0.413,-4.092 0.581,-6.09c-0.447,0 -1.219,0.012 -2.098,0.06l0,-2.374c0.792,0.056 1.874,0.096 2.338,0.096c0.424,-4.02 1.918,-6.03 4.483,-6.03c0.768,0 1.383,0.056 1.847,0.168Zm10.249,9.606c0,0.248 -0.346,0.353 -1.517,1.756c-1.17,1.403 -1.972,2.3 -2.403,2.691l-0.012,0.18c0.399,0.52 1.073,1.616 2.02,3.291c0.947,1.674 1.42,2.275 1.42,2.523l-3.512,0.48c0,-0.256 -0.258,-0.975 -0.773,-2.158c-0.516,-1.183 -0.832,-1.794 -1.127,-2.314c0,0 -0.658,0.827 -1.277,2.074c-0.619,1.247 -1.235,2.054 -1.235,2.278l-3.092,-0.36c0,-0.272 0.385,-0.753 1.636,-2.403c1.25,-1.651 2.148,-2.736 2.691,-3.255l0.012,-0.18c-0.344,-0.431 -0.925,-1.355 -1.744,-2.769c-0.819,-1.415 -1.229,-2.222 -1.229,-2.422l3.489,-0.132c0,0.208 0.201,0.842 0.605,1.901c0.403,1.058 0.717,1.296 0.941,1.671l0.156,0c0.264,-0.311 0.659,-0.509 1.187,-1.552c0.527,-1.043 1.031,-1.672 1.031,-1.888l2.733,0.588Z"/>
-                                </Button>
-                            </Grid>
-
-                        </StackPanel>
-
-                    </Flyout>
-                </FlyoutBase.AttachedFlyout>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <CheckBox Margin="6,0,0,0" IsChecked="{x:Bind IsVisual,Mode=TwoWay}" Tapped="CheckBox_Tapped"/>
-                <Rectangle Grid.Column="1" Margin="6" Width="50" Height="50" StrokeThickness="1" Stroke="{ThemeResource AppBorderBrush}" Fill="White"/>
-                <TextBlock Grid.Column="2" Text="{x:Bind Name,Mode=OneWay}" FontWeight="Medium" VerticalAlignment="Center"/>
-            </Grid>
-        </DataTemplate>
-        <DataTemplate x:Key="PhoneDataTemplate" x:DataType="models:Layer">
+        <!--DataTemplate--> 
+        <DataTemplate x:Key="DataTemplate" x:DataType="models:Layer">
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Tapped="Grid_Tapped" Holding="Grid_Holding" RightTapped="Grid_RightTapped">
 
+                
                 <FlyoutBase.AttachedFlyout>
                     <!--Flyout-->
                     <Flyout x:Name="Flyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle }">
@@ -423,7 +304,7 @@
                             </ComboBox>
 
                             <TextBlock Text="Layer" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
-                            <Grid  Height="36" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppFill}">
+                            <Grid Height="36" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppFill}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="1*"/>
@@ -448,21 +329,43 @@
 
                     </Flyout>
                 </FlyoutBase.AttachedFlyout>
-                 
-                <Rectangle Margin="0,12" Width="50" Height="50" StrokeThickness="1" Stroke="{ThemeResource AppBorderBrush}" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-                <CheckBox Margin="2,0" IsChecked="{x:Bind IsVisual,Mode=TwoWay}" Background="{ThemeResource AppBackground}" HorizontalAlignment="Left" VerticalAlignment="Top"  Tapped="CheckBox_Tapped">
-                    <CheckBox.Clip>
-                        <RectangleGeometry Rect="0,0,20,30"/>
-                    </CheckBox.Clip>
-                </CheckBox>
 
+                <conLayerControls:LayerLayoutControl>
+
+                    <conLayerControls:LayerLayoutControl.Frist>
+                        <CheckBox 
+                          IsChecked="{x:Bind IsVisual,Mode=TwoWay}" 
+                          Background="{ThemeResource AppBackground}" 
+                          Tapped="CheckBox_Tapped">
+                            <CheckBox.Clip>
+                                <RectangleGeometry Rect="0,0,20,30"/>
+                            </CheckBox.Clip>
+                        </CheckBox>
+                    </conLayerControls:LayerLayoutControl.Frist>
+
+                    <conLayerControls:LayerLayoutControl.Second>
+                        <canvas:CanvasControl 
+                                      ClearColor="White"         
+                                      Draw="{x:Bind CanvasControl_Draw}" CreateResources="{x:Bind CanvasControl_CreateResources}"/>
+                    </conLayerControls:LayerLayoutControl.Second>
+
+                    <conLayerControls:LayerLayoutControl.Third>
+                        <TextBlock 
+                           Text="{x:Bind Name,Mode=OneWay}" 
+                           FontWeight="Medium" />
+                    </conLayerControls:LayerLayoutControl.Third>
+
+                </conLayerControls:LayerLayoutControl>
+
+                
             </Grid>
         </DataTemplate>
 
         <!--Style-->
         <Style x:Key="AppListViewStyle" TargetType="ListView">
 
+            
             <Setter Property="AllowDrop" Value="True"/>
             <Setter Property="SelectionMode" Value="Single"/>
             <Setter Property="CanReorderItems" Value="True"/>
@@ -526,7 +429,7 @@
                SelectedIndex="{x:Bind ViewModel.SelectedIndex,Mode=OneWay}"
                
                ItemsSource="{x:Bind ViewModel.RenderLayer.Layers}"
-               ItemTemplate="{StaticResource PhoneDataTemplate}"
+               ItemTemplate="{StaticResource DataTemplate}"
                             
                IsItemClickEnabled="True" ItemClick="ListView_ItemClick"
                
@@ -534,52 +437,7 @@
                ItemContainerStyle="{StaticResource AppItemContainerStyle}"
                               
                extensions:ListViewExtensions.AlternateColor="{ThemeResource SystemControlBackgroundListLowBrush}"
-
                >
-
-        <!--VisualState-->
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-
-                <!--Phone-->
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-
-                        <Setter Target="ListView.ItemTemplate" Value="{StaticResource PhoneDataTemplate}"/>
-
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Pad-->
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="600"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-
-                        <Setter Target="ListView.ItemTemplate" Value="{StaticResource PhoneDataTemplate}"/>
-
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--PC-->
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="900"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-
-                        <Setter Target="ListView.ItemTemplate" Value="{StaticResource PCDataTemplate}"/>
-
-                    </VisualState.Setters>
-                </VisualState>
-
-
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
         
         <ListView.Header>
             <Button x:Name="AddButton" Width="Auto" Height="44" FontWeight="Medium" Content="&#xE109;" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="AddButton_Tapped"/>

@@ -71,11 +71,10 @@ namespace Retouch_Photo.Controls
 
         private void AddButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (this.ViewModel.RenderLayer.Layers==null)
-            {
-                this.ViewModel.Text = "Layer is null";
-            }
+       
+
         }
 
+     
     }
 }

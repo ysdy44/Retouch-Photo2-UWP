@@ -13,79 +13,147 @@ namespace Retouch_Photo.Models
     public struct Transformer
     {
 
-        
+        #region Transformer & Matrix
+
 
         public float Width;
         public float Height;
 
         public Vector2 Postion;
+        public float Radian;
+
+        public float RadianX;
+        public float RadianY;
 
         public bool DisabledRadian;
-        private float radian;
-        public float Radian
-        {
-            get => this.DisabledRadian ? 0 : radian;
-            set => radian = value;
-        }
+        public bool FlipHorizontal;
+        public bool FlipVertical;
 
 
-        public Matrix3x2 Matrix => this.DisabledRadian ? Matrix3x2.CreateTranslation(this.Postion) : 
-            Matrix3x2.CreateTranslation(-this.Width / 2, -this.Height / 2) * 
-            Matrix3x2.CreateRotation(this.Radian) * 
-            Matrix3x2.CreateTranslation(this.Width / 2, this.Height / 2) * 
+
+        public Matrix3x2 Matrix => this.DisabledRadian ? Matrix3x2.CreateTranslation(this.Postion) :
+            Matrix3x2.CreateTranslation(-this.Width / 2, -this.Height / 2) *
+            Matrix3x2.CreateSkew(this.RadianX, this.RadianY) *
+            Matrix3x2.CreateScale(this.FlipHorizontal ? -1 : 1, this.FlipVertical ? -1 : 1) *
+            Matrix3x2.CreateRotation(this.Radian) *
+            Matrix3x2.CreateTranslation(this.Width / 2, this.Height / 2) *
             Matrix3x2.CreateTranslation(this.Postion);
 
+        public Matrix3x2 InverseMatrix => this.DisabledRadian ? Matrix3x2.CreateTranslation(-this.Postion) :
+            Matrix3x2.CreateTranslation(-this.Postion) *
+            Matrix3x2.CreateTranslation(-this.Width / 2, -this.Height / 2) *
+            Matrix3x2.CreateRotation(-this.Radian) *
+            Matrix3x2.CreateScale(this.FlipHorizontal ? -1 : 1, this.FlipVertical ? -1 : 1) *
+            Matrix3x2.CreateSkew(-this.RadianX, -this.RadianY) *
+            Matrix3x2.CreateTranslation(this.Width / 2, this.Height / 2);
+
+        public Vector2 Center => new Vector2(this.Width / 2 + this.Postion.X, this.Height / 2 + this.Postion.Y);
 
 
 
-
-        public static Transformer CreateFromRect(Rect rect, float radian = 0.0f, bool disabledRadian=false) => new Transformer
+        public static Transformer CreateFromRect(VectRect rect, float radian = 0.0f, bool disabledRadian = false) => new Transformer
         {
-            Width = (float)rect.Width,
-            Height = (float)rect.Height,
-            Postion = new Vector2((float)rect.X, (float)rect.Y),
+            Width = rect.Width,
+            Height = rect.Height,
+            Postion = new Vector2(rect.X, rect.Y),
 
-            Radian= radian,
-            DisabledRadian =disabledRadian
+            Radian = radian,
+            DisabledRadian = disabledRadian
         };
 
 
+        #endregion
 
-        /// <summary>Returns whether the area filled by the rect contains the specified point.</summary>
-        public bool FillContainsPoint(Vector2 point)
+
+        #region In & Contains
+
+
+        /// <summary> Radius of node' . </summary>
+        public static float NodeRadius = 12.0f;
+        public static bool InNodeRadius(Vector2 node0, Vector2 node1) => (node0 - node1).LengthSquared() < 144.0f;// Transformer.NodeRadius * Transformer.NodeRadius;
+
+        /// <summary> Minimum distance between two nodes. </summary>
+        public static float NodeDistance = 20.0f;
+        public static float NodeDistanceDouble = 40.0f;
+        public static bool InNodeDistance(Vector2 node0, Vector2 node1) => (node0 - node1).LengthSquared() < 400.0f;// Transformer.NodeDistance * Transformer.NodeDistance;
+
+
+
+        /// <summary> Returns whether the area filled by the bound rect contains the specified point. </summary>
+        public static bool ContainsBound(Vector2 point, Transformer transformer)
         {
-            Matrix3x2 inverseMatrix = this.DisabledRadian ? Matrix3x2.CreateTranslation(-this.Postion) : Matrix3x2.CreateTranslation(-this.Postion) * Matrix3x2.CreateTranslation(-this.Width / 2, -this.Height / 2) * Matrix3x2.CreateRotation(-this.Radian) * Matrix3x2.CreateTranslation(this.Width / 2, this.Height / 2);
-            Vector2 v = Vector2.Transform(point, inverseMatrix);
-            return v.X > 0 && v.X < this.Height && v.Y > 0 && v.Y < this.Width;
+            Vector2 v = Vector2.Transform(point, transformer.InverseMatrix);
+            return v.X > 0 && v.X < transformer.Width && v.Y > 0 && v.Y < transformer.Height;
         }
 
-
-
-
-        /// <summary>Dstance of radius node' between centerTop node.</summary>
-        public static float NodeRadius = 12.0f;
-        public static bool NodeRadiusOut(Vector2 node0, Vector2 node1) => (node0 - node1).LengthSquared() > Transformer.NodeRadius * Transformer.NodeRadius;
-
-        /// <summary>Min distance of node between node which is not center node.</summary>
-        public static float NodeDistance = 20.0f;
-        public static bool NodeDistanceOut(Vector2 node0, Vector2 node1) => (node0 - node1).LengthSquared() > Transformer.NodeDistance * Transformer.NodeDistance;
-
-
-
-
-        /// <summary>Get radian control node.</summary>
-        public static Vector2 GetRadianNode(Transformer transformer, Matrix3x2 canvasToVirtualToControlMatrix)
+        /// <summary> Returns whether the radian area filled by the skew node contains the specified point. </summary>
+        public static CursorMode ContainsNodeMode(
+            Vector2 point,
+            Transformer transformer,
+            Matrix3x2 canvasToVirtualToControlMatrix,
+            Vector2 canvasPoint,
+            bool isCtrl = false)
         {
             Matrix3x2 matrix = transformer.Matrix * canvasToVirtualToControlMatrix;
 
-            Vector2 centerTop = (matrix.Translation + Vector2.Transform(new Vector2(transformer.Width, 0), matrix)) / 2;
-            Vector2 centerTopBottom = (Vector2.Transform(new Vector2(0, transformer.Height), matrix) + Vector2.Transform(new Vector2(transformer.Width, transformer.Height), matrix)) / 2 - centerTop;
+            //LTRB
+            Vector2 leftTop = matrix.Translation;
+            Vector2 rightTop = Vector2.Transform(new Vector2(transformer.Width, 0), matrix);
+            Vector2 rightBottom = Vector2.Transform(new Vector2(transformer.Width, transformer.Height), matrix);
+            Vector2 leftBottom = Vector2.Transform(new Vector2(0, transformer.Height), matrix);
 
-            return centerTop - centerTopBottom * 40 / centerTopBottom.Length();
+            //Center
+            Vector2 centerLeft = (leftTop + leftBottom) / 2;
+            Vector2 centerTop = (leftTop + rightTop) / 2;
+            Vector2 centerRight = (rightTop + rightBottom) / 2;
+            Vector2 centerBottom = (leftBottom + rightBottom) / 2;
+
+            if (isCtrl == false)
+            {
+                //Scale
+                if (Transformer.InNodeRadius(leftTop, point)) return CursorMode.ScaleLeftTop;
+                if (Transformer.InNodeRadius(rightTop, point)) return CursorMode.ScaleRightTop;
+                if (Transformer.InNodeRadius(rightBottom, point)) return CursorMode.ScaleRightBottom;
+                if (Transformer.InNodeRadius(leftBottom, point)) return CursorMode.ScaleLeftBottom;
+
+                //Scale
+                if (Transformer.InNodeRadius(centerLeft, point)) return CursorMode.ScaleLeft;
+                if (Transformer.InNodeRadius(centerTop, point)) return CursorMode.ScaleTop;
+                if (Transformer.InNodeRadius(centerRight, point)) return CursorMode.ScaleRight;
+                if (Transformer.InNodeRadius(centerBottom, point)) return CursorMode.ScaleBottom;
+            }
+
+            if (isCtrl == false && transformer.DisabledRadian == false)
+            {
+                //Rotation
+                Vector2 radians = centerTop - Vector2.Normalize(centerBottom - centerTop) * Transformer.NodeDistanceDouble;
+                if (Transformer.InNodeRadius(radians, point)) return CursorMode.Rotation;
+            }
+
+            if (isCtrl && transformer.DisabledRadian == false)
+            {
+                //Skew
+                if (Transformer.InNodeRadius(centerLeft, point)) return CursorMode.SkewLeft;
+                if (Transformer.InNodeRadius(centerTop, point)) return CursorMode.SkewTop;
+                if (Transformer.InNodeRadius(centerRight, point)) return CursorMode.SkewRight;
+                if (Transformer.InNodeRadius(centerBottom, point)) return CursorMode.SkewBottom;
+            }
+
+            //Transform
+            if (Transformer.ContainsBound(canvasPoint, transformer)) return CursorMode.Translation;
+
+            return CursorMode.None;
         }
 
-        /// <summary>Draw nodes and lines ，just like【由】</summary>
-        public static void DrawNodeLine(CanvasDrawingSession ds, Transformer transformer, Matrix3x2 canvasToVirtualToControlMatrix, bool isDrawNode = false)
+
+        #endregion
+
+
+        #region Draw
+
+
+        /// <summary> Draw nodes and lines on bound，just like【由】. </summary>
+        public static void DrawBound(CanvasDrawingSession ds, Transformer transformer, Matrix3x2 canvasToVirtualToControlMatrix)
         {
             Matrix3x2 matrix = transformer.Matrix * canvasToVirtualToControlMatrix;
 
@@ -99,63 +167,174 @@ namespace Retouch_Photo.Models
             ds.DrawLine(rightTop, rightBottom, Colors.DodgerBlue);
             ds.DrawLine(rightBottom, leftBottom, Colors.DodgerBlue);
             ds.DrawLine(leftBottom, leftTop, Colors.DodgerBlue);
+        }
+        public static void DrawBoundNodesWithRotation(CanvasDrawingSession ds, Transformer transformer, Matrix3x2 canvasToVirtualToControlMatrix)
+        {
+            Matrix3x2 matrix = transformer.Matrix * canvasToVirtualToControlMatrix;
 
-            if (isDrawNode)
+            //LTRB
+            Vector2 leftTop = matrix.Translation;
+            Vector2 rightTop = Vector2.Transform(new Vector2(transformer.Width, 0), matrix);
+            Vector2 rightBottom = Vector2.Transform(new Vector2(transformer.Width, transformer.Height), matrix);
+            Vector2 leftBottom = Vector2.Transform(new Vector2(0, transformer.Height), matrix);
+
+            //LTRB: Line
+            ds.DrawLine(leftTop, rightTop, Colors.DodgerBlue);
+            ds.DrawLine(rightTop, rightBottom, Colors.DodgerBlue);
+            ds.DrawLine(rightBottom, leftBottom, Colors.DodgerBlue);
+            ds.DrawLine(leftBottom, leftTop, Colors.DodgerBlue);
+
+
+            //Center: Vector2
+            Vector2 centerLeft = (leftTop + leftBottom) / 2;
+            Vector2 centerTop = (leftTop + rightTop) / 2;
+            Vector2 centerRight = (rightTop + rightBottom) / 2;
+            Vector2 centerBottom = (leftBottom + rightBottom) / 2;
+
+            float widthLength = (centerLeft - centerRight).Length();
+            float heightLength = (centerTop - centerBottom).Length();
+
+            //Center: Node
+            if (widthLength > Transformer.NodeDistanceDouble)
             {
-                //Center: Vector2
-                Vector2 centerLeft = (leftTop + leftBottom) / 2;
-                Vector2 centerTop = (leftTop + rightTop) / 2;
-                Vector2 centerRight = (rightTop + rightBottom) / 2;
-                Vector2 centerBottom = (leftBottom + rightBottom) / 2;
-
-                float widthLength = (centerLeft - centerRight).Length();
-                float heightLength = (centerTop - centerBottom).Length();
-
-                //Center: Node
-                if (widthLength > 40.0f)
-                {
-                    Transformer.DrawNodeVector2(ds, centerTop);
-                    Transformer.DrawNodeVector2(ds, centerBottom);
-                }
-                if (heightLength > 40.0f)
-                {
-                    Transformer.DrawNodeVector2(ds, centerLeft);
-                    Transformer.DrawNodeVector2(ds, centerRight);
-                }
-
-                if (transformer.DisabledRadian==false)
-                {
-                    //Radian: Vector
-                    Vector2 radian = centerTop - (centerBottom - centerTop) * 40 / heightLength;
-                    //Radian: Line
-                    ds.DrawLine(radian, centerTop, Colors.DodgerBlue);
-                    //Radian: Node
-                    Transformer.DrawNodeVector(ds, radian);
-                }
-
-                //LTRB: Node
-                Transformer.DrawNodeVector2(ds, leftTop);
-                Transformer.DrawNodeVector2(ds, rightTop);
-                Transformer.DrawNodeVector2(ds, rightBottom);
-                Transformer.DrawNodeVector2(ds, leftBottom);
+                Transformer.DrawNode2(ds, centerTop);
+                Transformer.DrawNode2(ds, centerBottom);
             }
+            if (heightLength > Transformer.NodeDistanceDouble)
+            {
+                Transformer.DrawNode2(ds, centerLeft);
+                Transformer.DrawNode2(ds, centerRight);
+            }
+
+            if (transformer.DisabledRadian == false)
+            {
+                //Radian: Vector
+                Vector2 radian = centerTop - Vector2.Normalize(centerBottom - centerTop) * Transformer.NodeDistanceDouble;
+                //Radian: Line
+                ds.DrawLine(radian, centerTop, Colors.DodgerBlue);
+                //Radian: Node
+                Transformer.DrawNode(ds, radian);
+            }
+
+            //LTRB: Node
+            Transformer.DrawNode2(ds, leftTop);
+            Transformer.DrawNode2(ds, rightTop);
+            Transformer.DrawNode2(ds, rightBottom);
+            Transformer.DrawNode2(ds, leftBottom);
+        }
+        public static void DrawBoundNodesWithSkew(CanvasDrawingSession ds, Transformer transformer, Matrix3x2 canvasToVirtualToControlMatrix)
+        {
+            Matrix3x2 matrix = transformer.Matrix * canvasToVirtualToControlMatrix;
+
+            //LTRB
+            Vector2 centerLeft = Vector2.Transform(new Vector2(0, transformer.Height / 2), matrix);
+            Vector2 centerTop = Vector2.Transform(new Vector2(transformer.Width / 2, 0), matrix);
+            Vector2 centerRight = Vector2.Transform(new Vector2(transformer.Width, transformer.Height / 2), matrix);
+            Vector2 centerBottom = Vector2.Transform(new Vector2(transformer.Width / 2, transformer.Height), matrix);
+
+            //Skew
+            ds.DrawLine(centerLeft, centerRight, Colors.DodgerBlue);
+            ds.DrawLine(centerTop, centerBottom, Colors.DodgerBlue);
+
+            //LTRB: Node
+            Transformer.DrawNode(ds, centerLeft);
+            Transformer.DrawNode(ds, centerTop);
+            Transformer.DrawNode(ds, centerRight);
+            Transformer.DrawNode(ds, centerBottom);
         }
 
-        /// <summary>draw a ⊙ </summary>
-        private static void DrawNodeVector(CanvasDrawingSession ds, Vector2 vector)
+        /// <summary> Draw a ⊙. </summary>
+        public static void DrawNode(CanvasDrawingSession ds, Vector2 vector)
         {
             ds.FillCircle(vector, 10, Color.FromArgb(70, 127, 127, 127));
             ds.FillCircle(vector, 8, Colors.DodgerBlue);
             ds.FillCircle(vector, 6, Colors.White);
         }
-        /// <summary> draw a ●</summary>
-        private static void DrawNodeVector2(CanvasDrawingSession ds, Vector2 vector)
+        /// <summary> Draw a ●. </summary>
+        public static void DrawNode2(CanvasDrawingSession ds, Vector2 vector)
         {
             ds.FillCircle(vector, 10, Color.FromArgb(70, 127, 127, 127));
             ds.FillCircle(vector, 8, Colors.White);
             ds.FillCircle(vector, 6, Colors.DodgerBlue);
         }
 
-        
+        /// <summary> Draw a —— </summary>
+        public static void DrawLine(CanvasDrawingSession ds, Vector2 vector0, Vector2 vector1)
+        {
+            ds.DrawLine(vector0, vector1, Colors.Black, 3);
+            ds.DrawLine(vector0, vector1, Colors.White);
+        }
+
+
+        #endregion
+
+
+        #region Vector2
+
+
+        public static readonly float RadiansStep = 0.2617993833333333f;//15 degress in angle system
+        public static readonly float RadiansStepHalf = 0.1308996916666667f;//7.5 degress in angle system
+        public static float RadiansStepFrequency(float radian) => ((int)((radian + RadiansStepHalf) / RadiansStep)) * RadiansStep;//Get step radians
+
+
+        public static readonly float PiHalf = 1.57079632679469655f;//Half of Math.PI
+        public static Vector2 FootPoint(Vector2 point, Vector2 lineA, Vector2 lineB)
+        {
+            Vector2 lineVector = lineA - lineB;
+            Vector2 pointA = lineA - point;
+
+            float t = -(pointA.Y * lineVector.Y + pointA.X * lineVector.X)
+                / lineVector.LengthSquared();
+
+            return lineVector * t + lineA;
+        }
+
+
+        public static float VectorToRadians(Vector2 vector)
+        {
+            float tan = (float)Math.Atan(Math.Abs(vector.Y / vector.X));
+
+            //First Quantity
+            if (vector.X > 0 && vector.Y > 0) return tan;
+            //Second Quadrant
+            else if (vector.X > 0 && vector.Y < 0) return -tan;
+            //Third Quadrant  
+            else if (vector.X < 0 && vector.Y > 0) return (float)Math.PI - tan;
+            //Fourth Quadrant  
+            else return tan - (float)Math.PI;
+        }
+        public static Vector2 RadiansToVector(float radians, Vector2 center, float distance = 40.0f)
+        {
+            return new Vector2((float)Math.Cos(radians) * distance + center.X, (float)Math.Sin(radians) * distance + center.Y);
+        }
+
+
+        #endregion
+
     }
+
+
+    public enum CursorMode
+    {
+        None,
+        Translation,
+        Rotation,
+
+        SkewLeft,
+        SkewTop,
+        SkewRight,
+        SkewBottom,
+
+        ScaleLeft,
+        ScaleTop,
+        ScaleRight,
+        ScaleBottom,
+
+        ScaleLeftTop,
+        ScaleRightTop,
+        ScaleRightBottom,
+        ScaleLeftBottom,
+    }
+
+
 }

@@ -31,7 +31,7 @@ namespace Retouch_Photo.ViewModels
 {
     public class DrawViewModel : INotifyPropertyChanged
     {
-
+        
         /// <summary>画布控件</summary>
         public CanvasControl CanvasControl;
         public void Invalidate( bool? isThumbnail = null)
@@ -299,7 +299,7 @@ namespace Retouch_Photo.ViewModels
 
 
 
-        /// <summary>文本</summary>      
+        /// <summary> 文本 </summary>      
         public string Text
         {
             get => text;
@@ -310,7 +310,34 @@ namespace Retouch_Photo.ViewModels
             }
         }
         private string text;
-               
+
+
+
+        /// <summary> 快捷键 </summary>      
+        public bool KeyShift
+        {
+            get => keyShift;
+            set
+            {
+                keyShift = value;
+                OnPropertyChanged(nameof(KeyShift));
+            }
+        }
+        private bool keyShift;
+
+       public bool KeyCtrl
+        {
+            get => keyCtrl;
+            set
+            {
+                keyCtrl = value;
+                OnPropertyChanged(nameof(KeyCtrl));
+            }
+        }
+        private bool keyCtrl;
+
+
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name) =>this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

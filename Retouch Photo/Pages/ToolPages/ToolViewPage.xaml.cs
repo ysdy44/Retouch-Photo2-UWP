@@ -17,7 +17,6 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Retouch_Photo.Pages.ToolPages
 { 
-
     public sealed partial class ToolViewPage : Page
     {
         //ViewModel

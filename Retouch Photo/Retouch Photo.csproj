@@ -122,6 +122,9 @@
     <Compile Include="Controls\LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LayerControls\LayerLayoutControl.xaml.cs">
+      <DependentUpon>LayerLayoutControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LoadingControl.xaml.cs">
       <DependentUpon>LoadingControl.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,7 @@
     <Compile Include="Models\Layers\GeometryLayers\RectangularLayer.cs" />
     <Compile Include="Models\Transformer.cs" />
     <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\VectRect.cs" />
     <Compile Include="Pages\DrawLayout.xaml.cs">
       <DependentUpon>DrawLayout.xaml</DependentUpon>
     </Compile>
@@ -299,6 +303,9 @@
     <Compile Include="Models\Tool.cs" />
     <Compile Include="ViewModels\DrawViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolAcrylicViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorRotationViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorSkewTopViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorTranslationViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolEllipseViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolEraseBrushViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolGeometryViewModel.cs" />
@@ -685,6 +692,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\LayerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LayerControls\LayerLayoutControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

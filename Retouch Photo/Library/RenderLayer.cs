@@ -44,7 +44,7 @@ namespace Retouch_Photo.Library
         {
             get
             {
-                if (this.Layers.Count == 0) return null;
+                if (this.Layers.Count == 0 || this.Layers.Count ==- 1) return null;
 
                 if (this.Layers.Count == 1) return this.Layers.First();
 
@@ -191,7 +191,6 @@ namespace Retouch_Photo.Library
             ds.DrawImage(image);
 
         }
-
 
     }
 }
