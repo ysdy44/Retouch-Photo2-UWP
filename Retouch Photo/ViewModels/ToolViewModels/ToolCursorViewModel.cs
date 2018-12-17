@@ -8,140 +8,111 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 {
     public class ToolCursorViewModel : ToolViewModel
     {
-        Vector2 LayerStartPostion;
-        Vector2 StartPoint;
 
         Layer CurrentLayer;
 
         CursorMode Mode = CursorMode.None;
+
+        #region ViewModel2
+
+
+        ToolViewModel2 ViewModel2
+        {
+            get
+            {
+                switch (this.Mode)
+                {
+                    case CursorMode.Translation: return this.TranslationViewModel;
+                    case CursorMode.Rotation: return this.RotationViewModel;
+
+                    case CursorMode.SkewLeft: return this.SkewLeftViewModel;
+                    case CursorMode.SkewTop: return this.SkewTopViewModel;
+                    case CursorMode.SkewRight: return this.SkewRightViewModel;
+                    case CursorMode.SkewBottom: return this.SkewBottomViewModel;
+
+                    default: return this.NoneViewModel;
+                }
+            }
+        }
+
+        readonly ToolCursorNoneViewModel NoneViewModel = new ToolCursorNoneViewModel();
         readonly ToolCursorTranslationViewModel TranslationViewModel = new ToolCursorTranslationViewModel();
         readonly ToolCursorRotationViewModel RotationViewModel = new ToolCursorRotationViewModel();
+
+        readonly ToolCursorSkewLeftViewModel SkewLeftViewModel = new ToolCursorSkewLeftViewModel();
         readonly ToolCursorSkewTopViewModel SkewTopViewModel = new ToolCursorSkewTopViewModel();
+        readonly ToolCursorSkewRightViewModel SkewRightViewModel = new ToolCursorSkewRightViewModel();
+        readonly ToolCursorSkewBottomViewModel SkewBottomViewModel = new ToolCursorSkewBottomViewModel();
+
+
+        #endregion
 
 
         public override void Start(Vector2 point, DrawViewModel viewModel)
         {
             this.CurrentLayer = viewModel.RenderLayer.CurrentLayer;
 
-            if (this.CurrentLayer == null)
+
+            //CursorMode
+            if (this.CurrentLayer != null)
             {
-                //Translation
-                foreach (Layer layer in viewModel.RenderLayer.Layers)
+                viewModel.Text = "this.CurrentLayer不==null";
+                this.Mode = Transformer.ContainsNodeMode(point, this.CurrentLayer.Transformer, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix, viewModel.KeyCtrl);
+
+                if (this.Mode!= CursorMode.None)
                 {
-                    if (layer.IsVisual == false || layer.Opacity == 0) continue;
-
-                    Vector2 canvasPoint = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
-                    if (Transformer.ContainsBound(canvasPoint, layer.Transformer))
-                    {
-                        this.TranslationViewModel.Start(point, layer, viewModel);
-                        return;
-                    }
+                    this.ViewModel2.Start(point, this.CurrentLayer, viewModel);
+                    return;
                 }
-                return;
             }
+            else
+            viewModel.Text = "this.CurrentLayer ==null";
 
 
-
-            this.Mode = Transformer.ContainsNodeMode
-             (
-                 point: point,
-                 transformer: this.CurrentLayer.Transformer,
-                 canvasToVirtualToControlMatrix: viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix,
-                 canvasPoint: Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix),
-                isCtrl: viewModel.KeyCtrl
-             );
-
-            switch (this.Mode)
+            //Translation
+            foreach (Layer layer in viewModel.RenderLayer.Layers)
             {
-                case CursorMode.Translation:
-                    this.TranslationViewModel.Start(point,  this.CurrentLayer, viewModel);
-                    return;
-                case CursorMode.Rotation:
-                    this.RotationViewModel.Start(point, this.CurrentLayer, viewModel);
-                    return;
+                if (layer.IsVisual == false || layer.Opacity == 0) continue;
 
-                case CursorMode.SkewTop:
-                    this.SkewTopViewModel.Start(point, this.CurrentLayer, viewModel);
+                Vector2 canvasPoint = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+                if (Transformer.ContainsBound(canvasPoint, layer.Transformer))
+                {
+                    this.CurrentLayer = viewModel.RenderLayer.CurrentLayer = layer;
+                    this.Mode = CursorMode.Translation;
+
+                    this.ViewModel2.Start(point, this.CurrentLayer, viewModel);
                     return;
-                default: break;
+                }
             }
-
-            viewModel.Invalidate();
         }
-
-
+        
         public override void Delta(Vector2 point, DrawViewModel viewModel)
         {
             if (this.CurrentLayer == null) return;
 
-            switch (this.Mode)
-            {
-                case CursorMode.Translation:
-                    this.TranslationViewModel.Delta(point, this.CurrentLayer, viewModel);
-                    break;
-                case CursorMode.Rotation:
-                    this.RotationViewModel.Delta(point, this.CurrentLayer, viewModel);
-                    break;
-                case CursorMode.SkewTop:
-                    this.SkewTopViewModel.Delta(point, this.CurrentLayer, viewModel);
-                    break;
-                default:
-                    break;
-            }
+            this.ViewModel2.Delta(point, this.CurrentLayer, viewModel);
 
             viewModel.Invalidate();
         }
-
-
+        
         public override void Complete(Vector2 point, DrawViewModel viewModel)
         {
             if (this.CurrentLayer == null) return;
 
-            switch (this.Mode)
-            {
-                case CursorMode.Translation:
-                    this.TranslationViewModel.Complete(point, this.CurrentLayer, viewModel);
-                    break;
-                case CursorMode.Rotation:
-                    this.RotationViewModel.Complete(point, this.CurrentLayer, viewModel);
-                    break;
-                case CursorMode.SkewTop:
-                    this.SkewTopViewModel.Complete(point, this.CurrentLayer, viewModel);
-                    break;
-                default:
-                    break;
-            }
-            this.Mode = CursorMode.None;
+            this.ViewModel2.Complete(point, this.CurrentLayer, viewModel);
 
+            this.Mode = CursorMode.None;
             viewModel.Invalidate();
         }
+        
 
-
-
+        
         public override void Draw(CanvasDrawingSession ds, DrawViewModel viewModel)
         {
             if (this.CurrentLayer == null) return;
 
-            switch (this.Mode)
-            {
-                case CursorMode.None:
-                    if (viewModel.KeyCtrl) Transformer.DrawBoundNodesWithSkew(ds, this.CurrentLayer.Transformer, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
-                    else Transformer.DrawBoundNodesWithRotation(ds, this.CurrentLayer.Transformer, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
-                    break;
-                case CursorMode.Translation:
-                    this.TranslationViewModel.Draw(ds, this.CurrentLayer, viewModel);
-                    break;
-                case CursorMode.Rotation:
-                    this.RotationViewModel.Draw(ds, this.CurrentLayer, viewModel);
-                    break;
-                case CursorMode.SkewTop:
-                    this.SkewTopViewModel.Draw(ds, this.CurrentLayer, viewModel);
-                    break;
-                default:
-                    break;
-            }
+            this.ViewModel2.Draw(ds, this.CurrentLayer, viewModel);
         }
-
 
     }
 }

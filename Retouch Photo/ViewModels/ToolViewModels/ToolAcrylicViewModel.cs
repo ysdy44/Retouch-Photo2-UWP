@@ -16,7 +16,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         {
             this.point = point;
             this.StartPoint = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
-            VectRect rect = new VectRect(this.StartPoint, point, viewModel.MarqueeMode);
+            VectRect rect = new VectRect(this.StartPoint, this.StartPoint, viewModel.MarqueeMode);
 
             if (this.Layer == null) this.Layer = AcrylicLayer.CreateFromRect(viewModel.CanvasControl, rect, viewModel.Color);
             this.Layer.Transformer = Transformer.CreateFromRect(rect);
@@ -26,8 +26,8 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         }
         public override void Delta(Vector2 point, DrawViewModel viewModel)
         {
-            point = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
-            VectRect rect = new VectRect(this.StartPoint, point, viewModel.MarqueeMode);
+            Vector2 endPoint = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+            VectRect rect = new VectRect(this.StartPoint, endPoint, viewModel.MarqueeMode);
 
             this.Layer.Transformer = Transformer.CreateFromRect(rect);
 
@@ -35,11 +35,10 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         }
         public override void Complete(Vector2 point, DrawViewModel viewModel)
         {
-            VectRect rect = new VectRect(this.StartPoint, point, viewModel.MarqueeMode);
+            Vector2 endPoint = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+            VectRect rect = new VectRect(this.StartPoint, endPoint, viewModel.MarqueeMode);
 
-            this.Layer.Transformer = Transformer.CreateFromRect(rect);
-
-            if (Transformer.InNodeDistance(this.point, point)==false)
+            if (Transformer.InNodeDistance(this.point, point) == false)
             {
                 AcrylicLayer acrylicLayer = AcrylicLayer.CreateFromRect(viewModel.CanvasControl, rect, viewModel.Color);
                 viewModel.RenderLayer.Insert(acrylicLayer);

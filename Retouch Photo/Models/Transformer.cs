@@ -47,7 +47,6 @@ namespace Retouch_Photo.Models
             Matrix3x2.CreateSkew(-this.RadianX, -this.RadianY) *
             Matrix3x2.CreateTranslation(this.Width / 2, this.Height / 2);
 
-        public Vector2 Center => new Vector2(this.Width / 2 + this.Postion.X, this.Height / 2 + this.Postion.Y);
 
 
 
@@ -65,7 +64,7 @@ namespace Retouch_Photo.Models
         #endregion
 
 
-        #region In & Contains
+        #region Contains & Transform
 
 
         /// <summary> Radius of node' . </summary>
@@ -77,7 +76,7 @@ namespace Retouch_Photo.Models
         public static float NodeDistanceDouble = 40.0f;
         public static bool InNodeDistance(Vector2 node0, Vector2 node1) => (node0 - node1).LengthSquared() < 400.0f;// Transformer.NodeDistance * Transformer.NodeDistance;
 
-
+         
 
         /// <summary> Returns whether the area filled by the bound rect contains the specified point. </summary>
         public static bool ContainsBound(Vector2 point, Transformer transformer)
@@ -86,21 +85,22 @@ namespace Retouch_Photo.Models
             return v.X > 0 && v.X < transformer.Width && v.Y > 0 && v.Y < transformer.Height;
         }
 
+        public Vector2 TransformLeftTop(Matrix3x2 matrix) => matrix.Translation;
+        public Vector2 TransformRightTop(Matrix3x2 matrix) => Vector2.Transform(new Vector2(this.Width, 0), matrix);
+        public Vector2 TransformRightBottom(Matrix3x2 matrix) => Vector2.Transform(new Vector2(this.Width, this.Height), matrix);
+        public Vector2 TransformLeftBottom(Matrix3x2 matrix) => Vector2.Transform(new Vector2(0, this.Height), matrix);
+        public Vector2 TransformCenter(Matrix3x2 matrix) => Vector2.Transform(new Vector2(this.Width/2, this.Height/2), matrix);
+
         /// <summary> Returns whether the radian area filled by the skew node contains the specified point. </summary>
-        public static CursorMode ContainsNodeMode(
-            Vector2 point,
-            Transformer transformer,
-            Matrix3x2 canvasToVirtualToControlMatrix,
-            Vector2 canvasPoint,
-            bool isCtrl = false)
+        public static CursorMode ContainsNodeMode(Vector2 point, Transformer transformer, Matrix3x2 canvasToVirtualToControlMatrix, bool isCtrl = false)
         {
             Matrix3x2 matrix = transformer.Matrix * canvasToVirtualToControlMatrix;
 
             //LTRB
-            Vector2 leftTop = matrix.Translation;
-            Vector2 rightTop = Vector2.Transform(new Vector2(transformer.Width, 0), matrix);
-            Vector2 rightBottom = Vector2.Transform(new Vector2(transformer.Width, transformer.Height), matrix);
-            Vector2 leftBottom = Vector2.Transform(new Vector2(0, transformer.Height), matrix);
+            Vector2 leftTop = transformer.TransformLeftTop(matrix);
+            Vector2 rightTop = transformer.TransformRightTop(matrix);
+            Vector2 rightBottom = transformer.TransformRightBottom(matrix);
+            Vector2 leftBottom = transformer.TransformLeftBottom(matrix);
 
             //Center
             Vector2 centerLeft = (leftTop + leftBottom) / 2;
@@ -138,10 +138,7 @@ namespace Retouch_Photo.Models
                 if (Transformer.InNodeRadius(centerRight, point)) return CursorMode.SkewRight;
                 if (Transformer.InNodeRadius(centerBottom, point)) return CursorMode.SkewBottom;
             }
-
-            //Transform
-            if (Transformer.ContainsBound(canvasPoint, transformer)) return CursorMode.Translation;
-
+            
             return CursorMode.None;
         }
 
@@ -274,7 +271,7 @@ namespace Retouch_Photo.Models
 
         public static readonly float RadiansStep = 0.2617993833333333f;//15 degress in angle system
         public static readonly float RadiansStepHalf = 0.1308996916666667f;//7.5 degress in angle system
-        public static float RadiansStepFrequency(float radian) => ((int)((radian + RadiansStepHalf) / RadiansStep)) * RadiansStep;//Get step radians
+        public static float RadiansStepFrequency(float radian) => ((int)((radian + Transformer.RadiansStepHalf) / Transformer.RadiansStep)) * Transformer.RadiansStep;//Get step radians
 
 
         public static readonly float PiHalf = 1.57079632679469655f;//Half of Math.PI

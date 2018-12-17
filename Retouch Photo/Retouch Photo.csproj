@@ -303,8 +303,13 @@
     <Compile Include="Models\Tool.cs" />
     <Compile Include="ViewModels\DrawViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolAcrylicViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorNoneViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorRotationViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorSkewTopViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorSkewViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorSkewViewModels\ToolCursorSkewBottomViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorSkewViewModels\ToolCursorSkewLeftViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorSkewViewModels\ToolCursorSkewRightViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorSkewViewModels\ToolCursorSkewTopViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorTranslationViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolEllipseViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolEraseBrushViewModel.cs" />

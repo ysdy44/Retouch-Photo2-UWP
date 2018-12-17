@@ -25,14 +25,19 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels
 
         public override void Start(Vector2 point, Layer layer, DrawViewModel viewModel)
         {
-            this.Center = Vector2.Transform(layer.Transformer.Center, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
+            Matrix3x2 matrix = layer.Transformer.Matrix * viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix;
+
+            this.Center = layer.Transformer.TransformCenter(matrix);
+
             this.LayerStartRadian = layer.Transformer.Radian;
             this.StartRadian = Transformer.VectorToRadians(point - this.Center);
         }
         public override void Delta(Vector2 point, Layer layer, DrawViewModel viewModel)
         {
             this.Radians = Transformer.VectorToRadians(point - this.Center);
+
             float radian = this.LayerStartRadian - this.StartRadian + this.Radians;
+
             layer.Transformer.Radian = viewModel.KeyShift ? Transformer.RadiansStepFrequency(radian) : radian;
         }
         public override void Complete(Vector2 point, Layer layer, DrawViewModel viewModel)
