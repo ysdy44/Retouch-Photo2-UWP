@@ -56,7 +56,6 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             //CursorMode
             if (this.CurrentLayer != null)
             {
-                viewModel.Text = "this.CurrentLayer不==null";
                 this.Mode = Transformer.ContainsNodeMode(point, this.CurrentLayer.Transformer, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix, viewModel.KeyCtrl);
 
                 if (this.Mode!= CursorMode.None)
@@ -65,8 +64,6 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
                     return;
                 }
             }
-            else
-            viewModel.Text = "this.CurrentLayer ==null";
 
 
             //Translation

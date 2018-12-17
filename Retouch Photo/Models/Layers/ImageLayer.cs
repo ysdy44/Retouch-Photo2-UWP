@@ -33,13 +33,7 @@ namespace Retouch_Photo.Models.Layers
 
             return new ImageLayer
             {
-                Transformer = new Transformer
-                {
-                    Width=width,
-                    Height=height,
-                    Postion=Vector2.Zero,
-                    Radian = 0.0f,
-                },
+                Transformer = Transformer.CreateFromSize(width,height),
                 Image = renderTarget
             };
         }
@@ -48,13 +42,7 @@ namespace Retouch_Photo.Models.Layers
         {
             return new ImageLayer
             {
-                Transformer = new Transformer
-                {
-                    Width=width,
-                    Height=height,
-                    Postion=Vector2.Zero,
-                    Radian = 0.0f,
-                },
+                Transformer = Transformer.CreateFromSize(width, height),
                 Image = bitmap
             };
         }

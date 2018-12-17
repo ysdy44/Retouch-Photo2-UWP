@@ -6,17 +6,17 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels
 {
     public class ToolCursorTranslationViewModel : ToolViewModel2
     {
-        Vector2 LayerStartPostion;
-        Vector2 StartPoint;
+        Vector2 StartTransformerPostion;
+        Vector2 StartPostion;
 
         public override void Start(Vector2 point, Layer layer, DrawViewModel viewModel)
         {
-            this.StartPoint = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
-            this.LayerStartPostion = layer.Transformer.Postion;
+            this.StartPostion = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+            this.StartTransformerPostion = layer.Transformer.Postion;
         }
         public override void Delta(Vector2 point, Layer layer, DrawViewModel viewModel)
         {
-            layer.Transformer.Postion =this.LayerStartPostion -this. StartPoint + Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+            layer.Transformer.Postion =this.StartTransformerPostion -this. StartPostion + Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
         }
         public override void Complete(Vector2 point, Layer layer, DrawViewModel viewModel)
         {

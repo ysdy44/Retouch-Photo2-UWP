@@ -7,7 +7,11 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
     {
         public override Vector2 GetLineA(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformLeftTop(matrix);
         public override Vector2 GetLineB(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformLeftBottom(matrix);
-        public override float GetStartRadian(Layer layer) => layer.Transformer.RadianY;
-        public override void SetRadian(Layer layer, float value) => layer.Transformer.RadianY = value;
+
+        public override void SetRadian(Layer layer, Transformer startTransformer, float skew)
+        {
+            layer.Transformer.Skew = startTransformer.Radian + skew;
+           // layer.Transformer.Radian = startTransformer.Radian + skew;
+        }
     }
 }

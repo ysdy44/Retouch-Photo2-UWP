@@ -17,11 +17,11 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels
     public class ToolCursorRotationViewModel : ToolViewModel2
     {
         Vector2 Center;
-
-        float LayerStartRadian;
+        
+        float StartTransformerRadian;
         float StartRadian;
 
-        float Radians;
+        float Radian;
 
         public override void Start(Vector2 point, Layer layer, DrawViewModel viewModel)
         {
@@ -29,14 +29,14 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels
 
             this.Center = layer.Transformer.TransformCenter(matrix);
 
-            this.LayerStartRadian = layer.Transformer.Radian;
+            this.StartTransformerRadian = layer.Transformer.Radian;
             this.StartRadian = Transformer.VectorToRadians(point - this.Center);
         }
         public override void Delta(Vector2 point, Layer layer, DrawViewModel viewModel)
         {
-            this.Radians = Transformer.VectorToRadians(point - this.Center);
+            this.Radian = Transformer.VectorToRadians(point - this.Center);
 
-            float radian = this.LayerStartRadian - this.StartRadian + this.Radians;
+            float radian = this.StartTransformerRadian - this.StartRadian + this.Radian;
 
             layer.Transformer.Radian = viewModel.KeyShift ? Transformer.RadiansStepFrequency(radian) : radian;
         }
@@ -50,7 +50,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels
             Transformer.DrawBoundNodesWithRotation(ds, layer.Transformer, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
 
             Transformer.DrawLine(ds, this.Center, Transformer.RadiansToVector(this.StartRadian, this.Center));
-            Transformer.DrawLine(ds, this.Center, Transformer.RadiansToVector(this.Radians, this.Center));
+            Transformer.DrawLine(ds, this.Center, Transformer.RadiansToVector(this.Radian, this.Center));
         }
 
     }

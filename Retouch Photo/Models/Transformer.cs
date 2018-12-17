@@ -19,22 +19,23 @@ namespace Retouch_Photo.Models
         public float Width;
         public float Height;
 
+        public float XScale;// = 1.0f;
+        public float YScale;// = 1.0f;
+
         public Vector2 Postion;
-        public float Radian;
+        public float Radian;        
+        public float Skew;
 
-        public float RadianX;
-        public float RadianY;
-
-        public bool DisabledRadian;
         public bool FlipHorizontal;
         public bool FlipVertical;
+        public bool DisabledRadian;
 
 
 
         public Matrix3x2 Matrix => this.DisabledRadian ? Matrix3x2.CreateTranslation(this.Postion) :
             Matrix3x2.CreateTranslation(-this.Width / 2, -this.Height / 2) *
-            Matrix3x2.CreateSkew(this.RadianX, this.RadianY) *
-            Matrix3x2.CreateScale(this.FlipHorizontal ? -1 : 1, this.FlipVertical ? -1 : 1) *
+            Matrix3x2.CreateScale(this.FlipHorizontal ? -this.XScale : this.XScale, this.FlipVertical ? -this.YScale : this.YScale) *
+            Matrix3x2.CreateSkew(this.Skew, 0) *
             Matrix3x2.CreateRotation(this.Radian) *
             Matrix3x2.CreateTranslation(this.Width / 2, this.Height / 2) *
             Matrix3x2.CreateTranslation(this.Postion);
@@ -43,8 +44,8 @@ namespace Retouch_Photo.Models
             Matrix3x2.CreateTranslation(-this.Postion) *
             Matrix3x2.CreateTranslation(-this.Width / 2, -this.Height / 2) *
             Matrix3x2.CreateRotation(-this.Radian) *
-            Matrix3x2.CreateScale(this.FlipHorizontal ? -1 : 1, this.FlipVertical ? -1 : 1) *
-            Matrix3x2.CreateSkew(-this.RadianX, -this.RadianY) *
+            Matrix3x2.CreateSkew(-this.Skew, 0) *
+            Matrix3x2.CreateScale(this.FlipHorizontal ? -this.XScale : this.XScale, this.FlipVertical ? -this.YScale : this.YScale) *
             Matrix3x2.CreateTranslation(this.Width / 2, this.Height / 2);
 
 
@@ -54,9 +55,32 @@ namespace Retouch_Photo.Models
         {
             Width = rect.Width,
             Height = rect.Height,
-            Postion = new Vector2(rect.X, rect.Y),
 
+            XScale = 1.0f,
+            YScale = 1.0f,
+
+            Postion = new Vector2(rect.X, rect.Y),
             Radian = radian,
+            Skew = 0,
+
+            FlipHorizontal = false,
+            FlipVertical = false,
+            DisabledRadian = disabledRadian
+        };
+        public static Transformer CreateFromSize(float width, float height, float radian = 0.0f, bool disabledRadian = false) => new Transformer
+        {
+            Width = width,
+            Height = height,
+
+            XScale = 1.0f,
+            YScale = 1.0f,
+
+            Postion = Vector2.Zero,
+            Radian = radian,
+            Skew = 0,
+
+            FlipHorizontal = false,
+            FlipVertical = false,
             DisabledRadian = disabledRadian
         };
 
@@ -235,7 +259,7 @@ namespace Retouch_Photo.Models
 
             //LTRB: Node
             Transformer.DrawNode(ds, centerLeft);
-            Transformer.DrawNode(ds, centerTop);
+            Transformer.DrawNode2(ds, centerTop);
             Transformer.DrawNode(ds, centerRight);
             Transformer.DrawNode(ds, centerBottom);
         }
@@ -275,6 +299,8 @@ namespace Retouch_Photo.Models
 
 
         public static readonly float PiHalf = 1.57079632679469655f;//Half of Math.PI
+        public static readonly float PiQuarter = 0.78539816339734827f;//Half of Math.PI
+        
         public static Vector2 FootPoint(Vector2 point, Vector2 lineA, Vector2 lineB)
         {
             Vector2 lineVector = lineA - lineB;
