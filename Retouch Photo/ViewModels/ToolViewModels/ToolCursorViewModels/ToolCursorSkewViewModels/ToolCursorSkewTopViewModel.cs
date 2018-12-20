@@ -10,7 +10,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
 
         public override void SetRadian(Layer layer, Transformer startTransformer, float skew)
         {
-             layer.Transformer.Skew = startTransformer.Radian - skew + Transformer.PiHalf;
+             layer.Transformer.Skew =startTransformer.Radian- skew + Transformer.PiHalf;
         }
     }
 }

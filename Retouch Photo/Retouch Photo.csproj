@@ -305,6 +305,17 @@
     <Compile Include="ViewModels\ToolViewModels\ToolAcrylicViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorNoneViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorRotationViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale1ViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale1ViewModels\ToolCursorScaleBottomViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale1ViewModels\ToolCursorScaleLeftViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale1ViewModels\ToolCursorScaleRightViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale1ViewModels\ToolCursorScaleTopViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale2ViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale2ViewModels\ToolCursorScaleLeftBottomViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale2ViewModels\ToolCursorScaleLeftTopViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale2ViewModels\ToolCursorScaleRightBottomViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale2ViewModels\ToolCursorScaleRightTopViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorSkewViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorSkewViewModels\ToolCursorSkewBottomViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorSkewViewModels\ToolCursorSkewLeftViewModel.cs" />
@@ -321,7 +332,7 @@
     <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolFloodSetectViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolSelectionBrushViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolViewViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolWatercolorPenViewModel.cs" />
   </ItemGroup>

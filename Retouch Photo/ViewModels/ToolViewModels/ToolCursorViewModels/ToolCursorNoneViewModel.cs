@@ -18,7 +18,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels
 
         public override void Draw(CanvasDrawingSession ds, Layer layer, DrawViewModel viewModel)
         {
-            if (viewModel.KeyCtrl) Transformer.DrawBoundNodesWithSkew(ds, layer.Transformer, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
+            if (viewModel.KeyAlt) Transformer.DrawBoundNodesWithSkew(ds, layer.Transformer, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
             else Transformer.DrawBoundNodesWithRotation(ds, layer.Transformer, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
         }
 

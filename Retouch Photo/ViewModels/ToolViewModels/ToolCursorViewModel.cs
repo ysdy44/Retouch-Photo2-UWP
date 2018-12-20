@@ -1,6 +1,8 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo.Models;
 using Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels;
+using Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCursorScaleViewModels.ToolCursorScale1ViewModels;
+using Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCursorScaleViewModels.ToolCursorScale2ViewModels;
 using Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCursorSkewViewModels;
 using System.Numerics;
 
@@ -30,6 +32,16 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
                     case CursorMode.SkewRight: return this.SkewRightViewModel;
                     case CursorMode.SkewBottom: return this.SkewBottomViewModel;
 
+                    case CursorMode.ScaleLeft: return this.ScaleLeftViewModel;
+                    case CursorMode.ScaleTop: return this.ScaleTopViewModel;
+                    case CursorMode.ScaleRight: return this.ScaleRightViewModel;
+                    case CursorMode.ScaleBottom: return this.ScaleBottomViewModel;
+                        
+                    case CursorMode.ScaleLeftTop: return this.ScaleLeftTopViewModel;
+                    case CursorMode.ScaleRightTop: return this.ScaleRightTopViewModel;
+                    case CursorMode.ScaleRightBottom: return this.ScaleRightBottomViewModel;
+                    case CursorMode.ScaleLeftBottom: return this.ScaleLeftBottomViewModel;
+
                     default: return this.NoneViewModel;
                 }
             }
@@ -44,6 +56,16 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         readonly ToolCursorSkewRightViewModel SkewRightViewModel = new ToolCursorSkewRightViewModel();
         readonly ToolCursorSkewBottomViewModel SkewBottomViewModel = new ToolCursorSkewBottomViewModel();
 
+        readonly ToolCursorScaleLeftViewModel ScaleLeftViewModel = new ToolCursorScaleLeftViewModel();
+        readonly ToolCursorScaleTopViewModel ScaleTopViewModel = new ToolCursorScaleTopViewModel();
+        readonly ToolCursorScaleRightViewModel ScaleRightViewModel = new ToolCursorScaleRightViewModel();
+        readonly ToolCursorScaleBottomViewModel ScaleBottomViewModel = new ToolCursorScaleBottomViewModel();
+
+        readonly ToolCursorScaleLeftTopViewModel ScaleLeftTopViewModel = new ToolCursorScaleLeftTopViewModel();
+        readonly ToolCursorScaleRightTopViewModel ScaleRightTopViewModel = new ToolCursorScaleRightTopViewModel();
+        readonly ToolCursorScaleRightBottomViewModel ScaleRightBottomViewModel = new ToolCursorScaleRightBottomViewModel();
+        readonly ToolCursorScaleLeftBottomViewModel ScaleLeftBottomViewModel = new ToolCursorScaleLeftBottomViewModel();
+        
 
         #endregion
 
@@ -56,7 +78,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             //CursorMode
             if (this.CurrentLayer != null)
             {
-                this.Mode = Transformer.ContainsNodeMode(point, this.CurrentLayer.Transformer, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix, viewModel.KeyCtrl);
+                this.Mode = Transformer.ContainsNodeMode(point, this.CurrentLayer.Transformer, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix, viewModel.KeyAlt);
 
                 if (this.Mode!= CursorMode.None)
                 {

@@ -50,6 +50,19 @@ namespace Retouch_Photo.Models
 
 
 
+        public void CopyWith(Transformer transformer)
+        {
+            this.XScale = transformer.XScale;
+            this.YScale = transformer.YScale;
+
+            this.Postion = transformer.Postion;
+            this.Radian = transformer.Radian;
+            this.Skew = transformer.Skew;
+
+            this.FlipHorizontal = transformer.FlipHorizontal;
+            this.FlipVertical = transformer.FlipVertical;
+        }
+
 
         public static Transformer CreateFromRect(VectRect rect, float radian = 0.0f, bool disabledRadian = false) => new Transformer
         {
@@ -108,6 +121,13 @@ namespace Retouch_Photo.Models
             Vector2 v = Vector2.Transform(point, transformer.InverseMatrix);
             return v.X > 0 && v.X < transformer.Width && v.Y > 0 && v.Y < transformer.Height;
         }
+
+
+
+        public Vector2 TransformLeft(Matrix3x2 matrix) => Vector2.Transform(new Vector2(0, this.Height / 2), matrix);
+        public Vector2 TransformTop(Matrix3x2 matrix) => Vector2.Transform(new Vector2(this.Width / 2, 0), matrix);
+        public Vector2 TransformRight(Matrix3x2 matrix) => Vector2.Transform(new Vector2(this.Width, this.Height / 2), matrix);
+        public Vector2 TransformBottom(Matrix3x2 matrix) => Vector2.Transform(new Vector2(this.Width / 2, this.Height), matrix);
 
         public Vector2 TransformLeftTop(Matrix3x2 matrix) => matrix.Translation;
         public Vector2 TransformRightTop(Matrix3x2 matrix) => Vector2.Transform(new Vector2(this.Width, 0), matrix);
@@ -178,10 +198,10 @@ namespace Retouch_Photo.Models
         {
             Matrix3x2 matrix = transformer.Matrix * canvasToVirtualToControlMatrix;
 
-            Vector2 leftTop = matrix.Translation;
-            Vector2 rightTop = Vector2.Transform(new Vector2(transformer.Width, 0), matrix);
-            Vector2 rightBottom = Vector2.Transform(new Vector2(transformer.Width, transformer.Height), matrix);
-            Vector2 leftBottom = Vector2.Transform(new Vector2(0, transformer.Height), matrix);
+            Vector2 leftTop = transformer.TransformLeftTop(matrix);
+            Vector2 rightTop = transformer.TransformRightTop(matrix);
+            Vector2 rightBottom = transformer.TransformRightBottom(matrix);
+            Vector2 leftBottom = transformer.TransformLeftBottom(matrix);
 
             //LTRB: Line
             ds.DrawLine(leftTop, rightTop, Colors.DodgerBlue);
@@ -194,10 +214,10 @@ namespace Retouch_Photo.Models
             Matrix3x2 matrix = transformer.Matrix * canvasToVirtualToControlMatrix;
 
             //LTRB
-            Vector2 leftTop = matrix.Translation;
-            Vector2 rightTop = Vector2.Transform(new Vector2(transformer.Width, 0), matrix);
-            Vector2 rightBottom = Vector2.Transform(new Vector2(transformer.Width, transformer.Height), matrix);
-            Vector2 leftBottom = Vector2.Transform(new Vector2(0, transformer.Height), matrix);
+            Vector2 leftTop = transformer.TransformLeftTop(matrix);
+            Vector2 rightTop = transformer.TransformRightTop(matrix);
+            Vector2 rightBottom = transformer.TransformRightBottom(matrix);
+            Vector2 leftBottom = transformer.TransformLeftBottom(matrix);
 
             //LTRB: Line
             ds.DrawLine(leftTop, rightTop, Colors.DodgerBlue);
@@ -248,10 +268,10 @@ namespace Retouch_Photo.Models
             Matrix3x2 matrix = transformer.Matrix * canvasToVirtualToControlMatrix;
 
             //LTRB
-            Vector2 centerLeft = Vector2.Transform(new Vector2(0, transformer.Height / 2), matrix);
-            Vector2 centerTop = Vector2.Transform(new Vector2(transformer.Width / 2, 0), matrix);
-            Vector2 centerRight = Vector2.Transform(new Vector2(transformer.Width, transformer.Height / 2), matrix);
-            Vector2 centerBottom = Vector2.Transform(new Vector2(transformer.Width / 2, transformer.Height), matrix);
+            Vector2 centerLeft = transformer.TransformLeft(matrix);
+            Vector2 centerTop = transformer.TransformTop(matrix);
+            Vector2 centerRight = transformer.TransformRight(matrix);
+            Vector2 centerBottom = transformer.TransformBottom(matrix);
 
             //Skew
             ds.DrawLine(centerLeft, centerRight, Colors.DodgerBlue);
@@ -293,20 +313,21 @@ namespace Retouch_Photo.Models
         #region Vector2
 
 
-        public static readonly float RadiansStep = 0.2617993833333333f;//15 degress in angle system
-        public static readonly float RadiansStepHalf = 0.1308996916666667f;//7.5 degress in angle system
+        public const float RadiansStep = 0.2617993833333333f;//15 degress in angle system
+        public const float RadiansStepHalf = 0.1308996916666667f;//7.5 degress in angle system
         public static float RadiansStepFrequency(float radian) => ((int)((radian + Transformer.RadiansStepHalf) / Transformer.RadiansStep)) * Transformer.RadiansStep;//Get step radians
 
 
-        public static readonly float PiHalf = 1.57079632679469655f;//Half of Math.PI
-        public static readonly float PiQuarter = 0.78539816339734827f;//Half of Math.PI
-        
+        public const float PI = 3.1415926535897931f;
+        public const float PiHalf = 1.57079632679469655f;//Half of Math.PI
+        public const float PiQuarter = 0.78539816339734827f;//Half of Math.PI
+
         public static Vector2 FootPoint(Vector2 point, Vector2 lineA, Vector2 lineB)
         {
             Vector2 lineVector = lineA - lineB;
-            Vector2 pointA = lineA - point;
+            Vector2 pointLineA = lineA - point;
 
-            float t = -(pointA.Y * lineVector.Y + pointA.X * lineVector.X)
+            float t = -(pointLineA.Y * lineVector.Y + pointLineA.X * lineVector.X)
                 / lineVector.LengthSquared();
 
             return lineVector * t + lineA;

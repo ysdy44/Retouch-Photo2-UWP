@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Retouch_Photo.ViewModels.ToolViewModels
+namespace Retouch_Photo.ViewModels
 {
     public abstract class ToolViewModel
     {

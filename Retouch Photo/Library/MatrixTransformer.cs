@@ -56,8 +56,7 @@ namespace Retouch_Photo.Library
         public int Height = 1000;
 
         /// <summary>Size</summary>
-        public float Scale = 1.0f;
-
+        public float Scale=1.0f;
 
         /// <summary>Width of CanvasControl</summary>
         public float ControlWidth = 1000.0f;
@@ -67,7 +66,7 @@ namespace Retouch_Photo.Library
         /// <summary>Translation</summary>
         public Vector2 Position;
         /// <summary>Rotation</summary>
-        public float Radian = 0.0f;
+        public float Radian = 1.0f; 
 
 
         /// <summary>SizeChanged of CanvasControl</summary>
@@ -96,7 +95,8 @@ namespace Retouch_Photo.Library
         public Matrix3x2 ControlToVirtualMatrix => Matrix3x2.CreateTranslation(-this.Position) * Matrix3x2.CreateRotation(-this.Radian);
         public Matrix3x2 VirtualToCanvasMatrix => Matrix3x2.CreateScale(1 / this.Scale) * Matrix3x2.CreateTranslation(this.Width / 2, this.Height / 2);
 
-        
+
+         
 
     }
 }

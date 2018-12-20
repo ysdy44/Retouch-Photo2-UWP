@@ -312,8 +312,16 @@ namespace Retouch_Photo.ViewModels
         private string text;
 
 
+        #region KeyBoard
 
-        /// <summary> 快捷键 </summary>      
+
+        //Rotation: 旋转的刻度15度
+        //Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCursorRotationViewModel
+
+
+        //Scale: 缩放是否等比例缩放
+        //Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCursorScaleViewModel
+
         public bool KeyShift
         {
             get => keyShift;
@@ -325,7 +333,12 @@ namespace Retouch_Photo.ViewModels
         }
         private bool keyShift;
 
-       public bool KeyCtrl
+
+
+        //Scale: 缩放是否中心缩放（或贴边缩放）
+        //Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCursorScaleViewModel
+
+        public bool KeyCtrl
         {
             get => keyCtrl;
             set
@@ -337,6 +350,24 @@ namespace Retouch_Photo.ViewModels
         private bool keyCtrl;
 
 
+
+        //Skew: 是否开启歪斜模式
+        //Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCursorSkewViewModel
+
+        public bool KeyAlt
+        {
+            get => keyAlt;
+            set
+            {
+                keyAlt = value;
+                OnPropertyChanged(nameof(KeyAlt));
+            }
+        }
+        private bool keyAlt;
+
+
+
+        #endregion 
 
 
         public event PropertyChangedEventHandler PropertyChanged;

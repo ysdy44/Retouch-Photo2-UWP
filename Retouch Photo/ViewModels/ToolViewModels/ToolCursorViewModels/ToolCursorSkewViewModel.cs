@@ -12,25 +12,24 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels
         public abstract void SetRadian(Layer layer, Transformer startTransformer, float skew);
 
 
-        Vector2 Center;
         Transformer StartTransformer;
+        Vector2 Center;
 
-        Vector2 LineA;
+        /// <summary> A点 (点的同一侧的左点) </summary>
+        Vector2 LineA;       
+        /// <summary> B点 (点的同一侧的右点) </summary>
         Vector2 LineB;
 
         public override void Start(Vector2 point, Layer layer, DrawViewModel viewModel)
         {
             Matrix3x2 matrix = layer.Transformer.Matrix * viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix;
 
-            this.Center = layer.Transformer.TransformCenter(matrix);
-            this.StartTransformer.Radian = layer.Transformer.Radian;
-            this.StartTransformer.Skew = layer.Transformer.Skew;
-            this.StartTransformer.XScale = layer.Transformer.XScale;
-            this.StartTransformer.YScale = layer.Transformer.YScale;
+            this.StartTransformer.CopyWith(layer.Transformer);
 
             this.LineA = this.GetLineA(layer, matrix);
             this.LineB = this.GetLineB(layer, matrix);
 
+            this.Center = layer.Transformer.TransformCenter(matrix);
         }
         public override void Delta(Vector2 point, Layer layer, DrawViewModel viewModel)
         {
@@ -42,7 +41,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels
         }
         public override void Complete(Vector2 point, Layer layer, DrawViewModel viewModel)
         {
-            //viewModel.KeyCtrl = false;
+            viewModel.KeyAlt = false;
         }
 
         public override void Draw(CanvasDrawingSession ds, Layer layer, DrawViewModel viewModel)

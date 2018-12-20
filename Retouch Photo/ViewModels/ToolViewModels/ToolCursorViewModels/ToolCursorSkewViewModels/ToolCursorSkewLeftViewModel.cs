@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo.Models;
+using System;
 using System.Numerics;
 
 namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCursorSkewViewModels
@@ -10,8 +11,13 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
 
         public override void SetRadian(Layer layer, Transformer startTransformer, float skew)
         {
-            layer.Transformer.Skew = startTransformer.Radian + skew;
-           // layer.Transformer.Radian = startTransformer.Radian + skew;
+            float value = skew + startTransformer.Skew - startTransformer.Radian;
+            layer.Transformer.Skew = value;
+            layer.Transformer.Radian = Transformer.PI + skew;
+
+            float cos = (float)Math.Abs(Math.Cos(value));
+            layer.Transformer.XScale = startTransformer.XScale / cos;
+            layer.Transformer.YScale = startTransformer.YScale * cos;
         }
     }
 }
