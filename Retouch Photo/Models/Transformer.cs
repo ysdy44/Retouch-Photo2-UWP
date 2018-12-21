@@ -313,14 +313,16 @@ namespace Retouch_Photo.Models
         #region Vector2
 
 
+        //Radians: 15
         public const float RadiansStep = 0.2617993833333333f;//15 degress in angle system
         public const float RadiansStepHalf = 0.1308996916666667f;//7.5 degress in angle system
         public static float RadiansStepFrequency(float radian) => ((int)((radian + Transformer.RadiansStepHalf) / Transformer.RadiansStep)) * Transformer.RadiansStep;//Get step radians
 
-
+        //Radians: PI
         public const float PI = 3.1415926535897931f;
         public const float PiHalf = 1.57079632679469655f;//Half of Math.PI
         public const float PiQuarter = 0.78539816339734827f;//Half of Math.PI
+
 
         public static Vector2 FootPoint(Vector2 point, Vector2 lineA, Vector2 lineB)
         {
@@ -332,8 +334,94 @@ namespace Retouch_Photo.Models
 
             return lineVector * t + lineA;
         }
+         
+        public static Vector2 IntersectionPoint(Vector2 line1A, Vector2 line1B, Vector2 line2A, Vector2 line2B)
+        {
+            /*
+             * L1，L2都存在斜率的情况：
+             * 直线方程L1: ( y - y1 ) / ( y2 - y1 ) = ( x - x1 ) / ( x2 - x1 )
+             * => y = [ ( y2 - y1 ) / ( x2 - x1 ) ]( x - x1 ) + y1
+             * 令 a = ( y2 - y1 ) / ( x2 - x1 )
+             * 有 y = a * x - a * x1 + y1   .........1
+             * 直线方程L2: ( y - y3 ) / ( y4 - y3 ) = ( x - x3 ) / ( x4 - x3 )
+             * 令 b = ( y4 - y3 ) / ( x4 - x3 )
+             * 有 y = b * x - b * x3 + y3 ..........2
+             *
+             * 如果 a = b，则两直线平等，否则， 联解方程 1,2，得:
+             * x = ( a * x1 - b * x3 - y1 + y3 ) / ( a - b )
+             * y = a * x - a * x1 + y1
+             *
+             * L1存在斜率, L2平行Y轴的情况：
+             * x = x3
+             * y = a * x3 - a * x1 + y1
+             *
+             * L1 平行Y轴，L2存在斜率的情况：
+             * x = x1
+             * y = b * x - b * x3 + y3
+             *
+             * L1与L2都平行Y轴的情况：
+             * 如果 x1 = x3，那么L1与L2重合，否则平等
+             *
+            */
+            float a = 0, b = 0;
+            int state = 0;
+            if (Math.Abs(line1A.X - line1B.X) > float.Epsilon)
+            {
+                a = (line1B.Y - line1A.Y) / (line1B.X - line1A.X);
+                state |= 1;
+            }
+            if (Math.Abs(line2A.X - line2B.X) > float.Epsilon)
+            {
+                b = (line2B.Y - line2A.Y) / (line2B.X - line2A.X);
+                state |= 2;
+            }
+            switch (state)
+            {
+                case 0: //L1与L2都平行Y轴
+                    {
+                        if (Math.Abs(line1A.X - line2A.X) < float.Epsilon)
+                        {
+                            //throw new Exception("两条直线互相重合，且平行于Y轴，无法计算交点。");
+                            return Vector2.Zero;
+                        }
+                        else
+                        {
+                            //throw new Exception("两条直线互相平行，且平行于Y轴，无法计算交点。");
+                            return Vector2.Zero;
+                        }
+                    }
+                case 1: //L1存在斜率, L2平行Y轴
+                    {
+                        float x = line2A.X;
+                        float y = (line1A.X - x) * (-a) + line1A.Y;
+                        return new Vector2(x, y);
+                    }
+                case 2: //L1 平行Y轴，L2存在斜率
+                    {
+                        float x = line1A.X;
+                        //网上有相似代码的，这一处是错误的。你可以对比case 1 的逻辑 进行分析
+                        //源code:lineSecondStar * x + lineSecondStar * lineSecondStar.X + p3.Y;
+                        float y = (line2A.X - x) * (-b) + line2A.Y;
+                        return new Vector2(x, y);
+                    }
+                case 3: //L1，L2都存在斜率
+                    {
+                        if (Math.Abs(a - b) < float.Epsilon)
+                        {
+                            // throw new Exception("两条直线平行或重合，无法计算交点。");
+                            return Vector2.Zero;
+                        }
+                        float x = (a * line1A.X - b * line2A.X - line1A.Y + line2A.Y) / (a - b);
+                        float y = a * x - a * line1A.X + line1A.Y;
+                        return new Vector2(x, y);
+                    }
+            }
+            // throw new Exception("不可能发生的情况");
+            return Vector2.Zero;
+        }
 
 
+        //Radians: Vector
         public static float VectorToRadians(Vector2 vector)
         {
             float tan = (float)Math.Atan(Math.Abs(vector.Y / vector.X));

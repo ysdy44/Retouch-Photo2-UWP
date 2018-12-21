@@ -67,9 +67,11 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
                 PD = Vector2.Distance(this.Point, this.Line.Diagonal),
             };
 
-            Vector2 point2 = viewModel.KeyShift ? footPoint : point;
-
-            Vector2 horizontalFootPoint = Transformer.FootPoint(point2, this.HorizontalLine.Diagonal, this.Point);
+            Vector2 horizontalLine1A = this.Point;
+            Vector2 horizontalLine1B = this.HorizontalLine.Diagonal;
+            Vector2 horizontalLine2A = point;
+            Vector2 horizontalLine2B = point + this.VerticalLine.Diagonal - this.Point;
+            Vector2 horizontalFootPoint = Transformer.IntersectionPoint(horizontalLine1A, horizontalLine1B, horizontalLine2A, horizontalLine2B);
             VectorDistance horizontalDistance = new VectorDistance
             {
                 FD = Vector2.Distance(horizontalFootPoint, this.HorizontalLine.Diagonal),
@@ -80,7 +82,11 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
                 PD = Vector2.Distance(this.Point, this.HorizontalLine.Diagonal),
             };
 
-            Vector2 verticalFootPoint = Transformer.FootPoint(point2, this.VerticalLine.Diagonal, this.Point);
+            Vector2 verticalLine1A = this.Point;
+            Vector2 verticalLine1B = this.VerticalLine.Diagonal;
+            Vector2 verticalLine2A = point;
+            Vector2 verticalLine2B = point + this.HorizontalLine.Diagonal - this.Point;
+            Vector2 verticalFootPoint = Transformer.IntersectionPoint(verticalLine1A, verticalLine1B, verticalLine2A, verticalLine2B);
             VectorDistance verticalDistance = new VectorDistance
             {
                 FD = Vector2.Distance(verticalFootPoint, this.VerticalLine.Diagonal),
