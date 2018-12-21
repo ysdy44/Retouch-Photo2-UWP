@@ -45,7 +45,7 @@ namespace Retouch_Photo.Models
             Matrix3x2.CreateTranslation(-this.Width / 2, -this.Height / 2) *
             Matrix3x2.CreateRotation(-this.Radian) *
             Matrix3x2.CreateSkew(-this.Skew, 0) *
-            Matrix3x2.CreateScale(this.FlipHorizontal ? -this.XScale : this.XScale, this.FlipVertical ? -this.YScale : this.YScale) *
+            Matrix3x2.CreateScale(this.FlipHorizontal ? -1/this.XScale : 1 / this.XScale, this.FlipVertical ? -1 / this.YScale : 1 / this.YScale) *
             Matrix3x2.CreateTranslation(this.Width / 2, this.Height / 2);
 
 

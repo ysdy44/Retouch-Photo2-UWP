@@ -10,7 +10,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 {
     public class ToolCursorViewModel : ToolViewModel
     {
-
+        Vector2 Point;
         Layer CurrentLayer;
 
         CursorMode Mode = CursorMode.None;
@@ -72,7 +72,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
         public override void Start(Vector2 point, DrawViewModel viewModel)
         {
-            this.CurrentLayer = viewModel.RenderLayer.CurrentLayer;
+              this.CurrentLayer = viewModel.RenderLayer.CurrentLayer;
 
 
             //CursorMode
@@ -88,12 +88,12 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             }
 
 
-            //Translation
+            //Translation                
+            Vector2 canvasPoint = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
             foreach (Layer layer in viewModel.RenderLayer.Layers)
             {
                 if (layer.IsVisual == false || layer.Opacity == 0) continue;
 
-                Vector2 canvasPoint = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
                 if (Transformer.ContainsBound(canvasPoint, layer.Transformer))
                 {
                     this.CurrentLayer = viewModel.RenderLayer.CurrentLayer = layer;
@@ -103,22 +103,26 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
                     return;
                 }
             }
+            this.CurrentLayer = null;
         }
         
         public override void Delta(Vector2 point, DrawViewModel viewModel)
         {
-            if (this.CurrentLayer == null) return;
-
-            this.ViewModel2.Delta(point, this.CurrentLayer, viewModel);
+            if (this.CurrentLayer != null)
+            {
+                this.ViewModel2.Delta(point, this.CurrentLayer, viewModel);
+            }
 
             viewModel.Invalidate();
         }
-        
+               
         public override void Complete(Vector2 point, DrawViewModel viewModel)
         {
-            if (this.CurrentLayer == null) return;
-
-            this.ViewModel2.Complete(point, this.CurrentLayer, viewModel);
+            if (this.CurrentLayer != null)
+            {
+                this.CurrentLayer.Invalidate();
+                this.ViewModel2.Complete(point, this.CurrentLayer, viewModel);
+            }            
 
             this.Mode = CursorMode.None;
             viewModel.Invalidate();
@@ -129,6 +133,18 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         public override void Draw(CanvasDrawingSession ds, DrawViewModel viewModel)
         {
             if (this.CurrentLayer == null) return;
+
+            /*            
+            Vector2 w = new Vector2(0, this.CurrentLayer.Transformer.Height);
+            Vector2 h = new Vector2(this.CurrentLayer.Transformer.Width, 0);
+            Vector2 wh = new Vector2(this.CurrentLayer.Transformer.Width, this.CurrentLayer.Transformer.Height);
+            ds.DrawLine(w, wh, Windows.UI.Colors.Red);
+            ds.DrawLine(h, wh, Windows.UI.Colors.Red);
+
+            Vector2 v = Vector2.Transform(this.Point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+            Vector2 v2 = Vector2.Transform(v, this.CurrentLayer.Transformer.InverseMatrix);
+            ds.FillCircle(v2, 6, Windows.UI.Colors.Red);
+          */
 
             this.ViewModel2.Draw(ds, this.CurrentLayer, viewModel);
         }

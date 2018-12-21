@@ -56,15 +56,24 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels
     public abstract class ToolCursorScaleViewModel : ToolViewModel2
     {
         protected Transformer StartTransformer;
-        protected float Cos;
-        protected float Sin;
+
+        protected float XCos;
+        protected float XSin;
+
+        protected float YCos;
+        protected float YSin;
 
         public override void Start(Vector2 point, Layer layer, DrawViewModel viewModel)
         {
             this.StartTransformer.CopyWith(layer.Transformer);
 
-            this.Cos = (float)Math.Cos(-layer.Transformer.Radian);
-            this.Sin = (float)Math.Sin(-layer.Transformer.Radian);
+            float x = -layer.Transformer.Radian;
+            this.XCos = (float)Math.Cos(x);
+            this.XSin = (float)Math.Sin(x);
+
+            float y =- layer.Transformer.Radian + layer.Transformer.Skew;
+            this.YCos = (float)Math.Cos(y);
+            this.YSin = (float)Math.Sin(y);
         }
         public override void Delta(Vector2 point, Layer layer, DrawViewModel viewModel)
         {

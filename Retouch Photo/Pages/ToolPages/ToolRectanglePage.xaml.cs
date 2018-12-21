@@ -55,6 +55,7 @@ namespace Retouch_Photo.Pages.ToolPages
                 if (geometryLayer.FillBrush is CanvasSolidColorBrush brush)
                 {
                     brush.Color = value;
+                    layer.Invalidate();
                     this.ViewModel.Invalidate();
                 }
             }

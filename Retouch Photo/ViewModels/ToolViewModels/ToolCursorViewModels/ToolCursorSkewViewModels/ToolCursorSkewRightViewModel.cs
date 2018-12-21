@@ -13,11 +13,11 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
         {
             float value = skew + startTransformer.Skew - startTransformer.Radian;
             layer.Transformer.Skew = value;
-            layer.Transformer.Radian = skew;
 
+            layer.Transformer.Radian = skew;
             float cos = (float)Math.Abs(Math.Cos(value));
             layer.Transformer.XScale = startTransformer.XScale / cos;
-            layer.Transformer.YScale =startTransformer.YScale * cos;
+            layer.Transformer.YScale = startTransformer.YScale * cos;
         }
     }
 }

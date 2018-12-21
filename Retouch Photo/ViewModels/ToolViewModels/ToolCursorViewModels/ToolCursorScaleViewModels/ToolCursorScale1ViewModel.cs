@@ -13,9 +13,12 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
         //@Override
         public abstract Vector2 GetPoint(Layer layer, Matrix3x2 matrix);
         public abstract Vector2 GetDiagonal(Layer layer, Matrix3x2 matrix);
-        public abstract void SetScale(Layer layer, float scale, bool isRatio); 
+        public abstract void SetScale(Layer layer, float scale, bool isRatio);
         public abstract void SetFlip(Layer layer, bool isFlip);
-        public abstract void SetPostion(Layer layer, Transformer startTransformer, float cos, float sin);
+        public abstract void SetPostion(
+            Layer layer, Transformer startTransformer,
+            float xCos, float xSin,
+            float yCos, float ySin);
 
 
         Vector2 Point;
@@ -23,7 +26,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
 
         public override void Start(Vector2 point, Layer layer, DrawViewModel viewModel)
         {
-            base.Start(point,layer,viewModel);
+            base.Start(point, layer, viewModel);
 
             Matrix3x2 matrix = layer.Transformer.Matrix * viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix;
             this.Point = this.GetPoint(layer, matrix);
@@ -55,7 +58,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
             {
                 //Scale
                 float scale = distance.FC / distance.PC;
-                this.SetScale(layer,scale, viewModel.KeyShift);
+                this.SetScale(layer, scale, viewModel.KeyShift);
 
                 //Flip
                 bool isFlip = distance.FD > distance.FP;
@@ -71,26 +74,26 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
 
                 //Flip
                 bool isFlip = distance.FS > distance.FP;
-                this.SetFlip(layer,isFlip);
+                this.SetFlip(layer, isFlip);
 
                 //Postion
                 float move = distance.FP / 2 / viewModel.MatrixTransformer.Scale;
-                this.SetReversePostion(layer, base.Cos * move, base.Sin * move, distance);
+                this.SetReversePostion(layer, distance, base.XCos * move, base.XSin * move, base.YCos * move, base.YSin * move);
             }
         }
- 
+
 
         //Postion: Reverse
-        public void SetReversePostion(Layer layer, float cos, float sin, VectorDistance distance)
+        public void SetReversePostion(Layer layer, VectorDistance distance, float xCos, float xSin, float yCos, float ySin)
         {
             bool reverse = distance.FD < distance.PD ? true : distance.FD < distance.FP;//F in the left of the P ?
 
             if (reverse)
-                this.SetPostion(layer, this.StartTransformer, cos, sin);
+                this.SetPostion(layer, this.StartTransformer, xCos, xSin, yCos, ySin);
             else
-                this.SetPostion(layer, this.StartTransformer, -cos, -sin);
+                this.SetPostion(layer, this.StartTransformer, -xCos, -xSin, -yCos, -ySin);
         }
-         
+
 
     }
 }

@@ -24,13 +24,13 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
          
         public override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
-            Rect rect = new Rect(0, 0, this.Transformer.Width, this.Transformer.Height);
+            Rect rect = new Rect(0, 0, base.Transformer.Width, base.Transformer.Height);
 
             CanvasCommandList command = new CanvasCommandList(creator);
             using (CanvasDrawingSession ds = command.CreateDrawingSession())
             {
-                if (this.IsFill) ds.FillRectangle(rect, this.FillBrush);
-                if (this.IsStroke) ds.DrawRectangle(rect, this.StrokeBrush, this.StrokeWidth);
+                if (this.IsFill) ds.FillRectangle(rect, base.FillBrush);
+                if (this.IsStroke) ds.DrawRectangle(rect, base.StrokeBrush, base.StrokeWidth);
             }
 
             return new Transform2DEffect
@@ -39,7 +39,14 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
                 TransformMatrix = this.Transformer.Matrix* canvasToVirtualMatrix
             };
         }
-         
+        public override void ThumbnailDraw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Size controlSize)
+        {
+            Rect rect = Layer.GetThumbnailSize(base.Transformer.Width, base.Transformer.Height, controlSize);
+
+            if (this.IsFill) ds.FillRectangle(rect, base.FillBrush);
+            if (this.IsStroke) ds.DrawRectangle(rect, base.StrokeBrush, base.StrokeWidth);
+        }
+
 
 
         public static RectangularLayer CreateFromRect(ICanvasResourceCreator creator, VectRect rect, Color color)
@@ -50,7 +57,6 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
                 FillBrush = new CanvasSolidColorBrush(creator, color)
             };
         }
-
     
 
     }

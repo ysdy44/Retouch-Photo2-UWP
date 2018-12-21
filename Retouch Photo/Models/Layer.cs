@@ -79,17 +79,57 @@ namespace Retouch_Photo.Models
         public Transformer Transformer;
 
 
-        //abstract
-        public abstract ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix);
 
+        #region Thumbnail
+
+
+        //@override
+        public abstract void ThumbnailDraw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Size controlSize);
 
 
         CanvasControl sender;
         public void CanvasControl_CreateResources(CanvasControl sender, CanvasCreateResourcesEventArgs args) => this.sender = sender;
-        public void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
+        public void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args) => this.ThumbnailDraw(sender, args.DrawingSession, sender.Size);
+        public void Invalidate()
         {
-            args.DrawingSession.FillRectangle(0, 0, 10, 10, Colors.Red);
+            if (sender == null) return;
+
+            this.sender.Invalidate();
         }
+
+
+        public static Rect GetThumbnailSize(float width, float height, Size controlSize)
+        {
+            double widthScale = controlSize.Width / width;
+            double heightScale = controlSize.Height / height;
+
+            double scale = Math.Min(widthScale, heightScale);
+            double w = width * scale;
+            double h = height * scale;
+
+            double x = (controlSize.Width - w) / 2;
+            double y = (controlSize.Height - h) / 2;
+
+            return new Rect(x, y, w, h);
+        }
+        public static Matrix3x2 GetThumbnailMatrix(float width, float height, Size controlSize)
+        {
+            double widthScale = controlSize.Width / width;
+            double heightScale = controlSize.Height / height;
+
+            double scale = Math.Min(widthScale, heightScale);
+            double w = width * scale;
+            double h = height * scale;
+
+            double x = (controlSize.Width - w) / 2;
+            double y = (controlSize.Height - h) / 2;
+
+            return Matrix3x2.CreateScale((float)scale) *
+              Matrix3x2.CreateTranslation((float)x, (float)y);
+        }
+
+
+        #endregion
 
 
         //Create
@@ -112,6 +152,10 @@ namespace Retouch_Photo.Models
 
 
         #region Render
+
+
+        //@override
+        public abstract ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix);
 
 
         /// <summary>Render</summary>

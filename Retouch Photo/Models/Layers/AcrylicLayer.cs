@@ -28,8 +28,8 @@ namespace Retouch_Photo.Models.Layers
 
         public override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
-            Vector2 point0 = Vector2.Transform(this.Transformer.Postion, canvasToVirtualMatrix);
-            Vector2 point1 = Vector2.Transform(new Vector2(this.Transformer.Postion.X + this.Transformer.Width, this.Transformer.Postion.Y + this.Transformer.Height), canvasToVirtualMatrix);
+            Vector2 point0 = Vector2.Transform(base.Transformer.Postion, canvasToVirtualMatrix);
+            Vector2 point1 = Vector2.Transform(new Vector2(base.Transformer.Postion.X + base.Transformer.Width, base.Transformer.Postion.Y + base.Transformer.Height), canvasToVirtualMatrix);
 
             return new CropEffect
             {
@@ -55,6 +55,13 @@ namespace Retouch_Photo.Models.Layers
                 }
             };
         }
+        public override void ThumbnailDraw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Size controlSize)
+        {
+            Rect rect = Layer.GetThumbnailSize(base.Transformer.Width, base.Transformer.Height, controlSize);
+
+            ds.FillRectangle(rect, this.TintColor);
+        }
+
 
 
         public static AcrylicLayer CreateFromRect(ICanvasResourceCreator creator, VectRect rect, Color color, float opacity = 0.5f)

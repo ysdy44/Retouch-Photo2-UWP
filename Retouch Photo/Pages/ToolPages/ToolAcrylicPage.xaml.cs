@@ -53,6 +53,7 @@ namespace Retouch_Photo.Pages.ToolPages
             if (layer is AcrylicLayer rectangularLayer)
             {
                 rectangularLayer.TintColor = value;
+                layer.Invalidate();
                 this.ViewModel.Invalidate();
             }
         }

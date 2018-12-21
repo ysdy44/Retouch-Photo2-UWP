@@ -346,8 +346,8 @@
 
                     <conLayerControls:LayerLayoutControl.Second>
                         <canvas:CanvasControl 
-                                      ClearColor="White"         
-                                      Draw="{x:Bind CanvasControl_Draw}" CreateResources="{x:Bind CanvasControl_CreateResources}"/>
+                            Draw="{x:Bind CanvasControl_Draw}" 
+                            CreateResources="{x:Bind CanvasControl_CreateResources}"/>
                     </conLayerControls:LayerLayoutControl.Second>
 
                     <conLayerControls:LayerLayoutControl.Third>

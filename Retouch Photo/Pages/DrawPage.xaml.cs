@@ -45,7 +45,7 @@ namespace Retouch_Photo.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (this.ViewModel.GoBack.IsGoBack) this.Frame.Navigate(typeof(MainPage));
+            if (this.ViewModel.GoBack.IsGoBack) base.Frame.Navigate(typeof(MainPage));
         }
         protected async override void OnNavigatedTo(NavigationEventArgs e)//当前页面成为活动页面
         {
@@ -76,6 +76,11 @@ namespace Retouch_Photo.Pages
             {
                 this.LoadingControl.Visibility = Visibility.Visible;//Loading
                 Project project =await Project.CreateFromFileAsync(this.ViewModel.CanvasControl, file);
+                if (project == null)
+                {
+                    base.Frame.GoBack();
+                    return;
+                }
                 this.ViewModel.LoadFromProject(project);
                 this.LoadingControl.Visibility = Visibility.Collapsed;//Loading
                 return;

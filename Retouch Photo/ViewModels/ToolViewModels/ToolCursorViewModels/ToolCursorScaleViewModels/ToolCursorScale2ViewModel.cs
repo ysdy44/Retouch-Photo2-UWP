@@ -14,9 +14,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
         public abstract Vector2 GetHorizontalDiagonal(Layer layer, Matrix3x2 matrix);
         public abstract Vector2 GetVerticalDiagonal(Layer layer, Matrix3x2 matrix);
 
-        public abstract void SetPostion(Layer layer, Transformer startTransformer, 
-            float xCos, float xSin, 
-            float yCos, float ySin);
+        public abstract void SetPostion(Layer layer, Transformer startTransformer, float xCos, float xSin, float yCos, float ySin);
 
 
         Vector2 Point;
@@ -47,7 +45,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
                 Symmetric = horizontalDiagonal + horizontalDiagonal - this.Point,
                 Center = (this.Point + horizontalDiagonal) / 2
             };
-            
+
             Vector2 verticalDiagonal = this.GetVerticalDiagonal(layer, matrix);
             this.VerticalLine = new VectorLine
             {
@@ -147,7 +145,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
                     //Scale
                     float xScale = horizontalDistance.FD / horizontalDistance.PD;
                     float yScale = verticalDistance.FD / verticalDistance.PD;
-                    this.SetScale(layer,xScale, yScale);
+                    this.SetScale(layer, xScale, yScale);
 
                     //Flip
                     bool isFlipHorizontal = horizontalDistance.FS > horizontalDistance.FP;
@@ -158,14 +156,12 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
                 //Postion
                 float xMove = horizontalDistance.FP / 2 / viewModel.MatrixTransformer.Scale;
                 float yMove = verticalDistance.FP / 2 / viewModel.MatrixTransformer.Scale;
-                this.SetReversePostion(layer,
-                    base.Cos * xMove, base.Sin * xMove,
-                    base.Cos * yMove, base.Sin * yMove,
-                    horizontalDistance, verticalDistance);
-
+                this.SetReversePostion(layer, horizontalDistance, verticalDistance,
+                    base.XCos * xMove, base.XSin * xMove,
+                    base.YCos * yMove, base.YSin * yMove);
             }
         }
-        
+
 
         //Scale
         public void SetScale(Layer layer, float xScale, float yScale)
@@ -184,10 +180,10 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
 
 
         //Postion: Reverse
-        public void SetReversePostion(Layer layer,
+        public void SetReversePostion(Layer layer, VectorDistance horizontalDistance, VectorDistance verticalDistance,
             float xCos, float xSin,
-            float yCos, float ySin,
-            VectorDistance horizontalDistance, VectorDistance verticalDistance)
+            float yCos, float ySin
+            )
         {
             bool xReverse = horizontalDistance.FD < horizontalDistance.PD ? true : horizontalDistance.FD < horizontalDistance.FP;
             bool yReverse = verticalDistance.FD < verticalDistance.PD ? true : verticalDistance.FD < verticalDistance.FP;
@@ -204,7 +200,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
 
         //Postion: Flip
         public void SetFlipPostion(Layer layer,
-            float xCos, float xSin, 
+            float xCos, float xSin,
             float yCos, float ySin)
         {
             bool flipHorizontal = this.StartTransformer.FlipHorizontal;

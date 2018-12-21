@@ -79,7 +79,16 @@ namespace Retouch_Photo.Models
         {
             using (IRandomAccessStream stream = await file.OpenReadAsync())
             {
-                CanvasBitmap bitmap = await CanvasBitmap.LoadAsync(creator, stream, 96);
+                CanvasBitmap bitmap;
+
+                try
+                {
+                    bitmap = await CanvasBitmap.LoadAsync(creator, stream, 96);
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
 
                 int width = (int)bitmap.SizeInPixels.Width;
                 int height = (int)bitmap.SizeInPixels.Height;

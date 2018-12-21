@@ -1,6 +1,7 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo.ViewModels;
+using System;
 using System.Numerics;
 using Windows.Foundation;
 using Windows.Graphics.Effects;
@@ -16,15 +17,26 @@ namespace Retouch_Photo.Models.Layers
 
         public CanvasBitmap Image { set; get; }
 
+
         public override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
             return new Transform2DEffect
             {
                 Source = Image,
-                TransformMatrix =this.Transformer.Matrix* canvasToVirtualMatrix
+                TransformMatrix = base.Transformer.Matrix* canvasToVirtualMatrix
             };
         }
-        
+        public override void ThumbnailDraw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Size controlSize)
+        {
+            Matrix3x2 matrix = Layer.GetThumbnailMatrix(base.Transformer.Width, base.Transformer.Height, controlSize);
+
+            ds.DrawImage(new Transform2DEffect
+            {
+                Source = Image,
+                TransformMatrix = base.Transformer.Matrix * matrix
+            });
+        }
+
 
         public static ImageLayer CreateFromBytes(ICanvasResourceCreatorWithDpi resourceCreator, byte[] bytes, int width, int height)
         {

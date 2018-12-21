@@ -18,17 +18,17 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
         {
             layer.Transformer.FlipHorizontal = (this.StartTransformer.FlipHorizontal == isFlip);
         }
-        public override void SetPostion(Layer layer, Transformer startTransformer, float cos, float sin)
+        public override void SetPostion(Layer layer, Transformer startTransformer, float xCos, float xSin, float yCos, float ySin)
         {
             if (this.StartTransformer.FlipHorizontal)
             {
-                layer.Transformer.Postion.X = startTransformer.Postion.X + cos;
-                layer.Transformer.Postion.Y = startTransformer.Postion.Y - sin;
+                layer.Transformer.Postion.X = startTransformer.Postion.X + xCos;
+                layer.Transformer.Postion.Y = startTransformer.Postion.Y - xSin;
             }
             else
             {
-                layer.Transformer.Postion.X = startTransformer.Postion.X - cos;
-                layer.Transformer.Postion.Y = startTransformer.Postion.Y + sin;
+                layer.Transformer.Postion.X = startTransformer.Postion.X - xCos;
+                layer.Transformer.Postion.Y = startTransformer.Postion.Y + xSin;
             }
         }
     }
