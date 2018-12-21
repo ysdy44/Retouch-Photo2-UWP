@@ -11,9 +11,10 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
     {
 
         //@Override
-        public abstract Orientation GetOrientation();
         public abstract Vector2 GetPoint(Layer layer, Matrix3x2 matrix);
         public abstract Vector2 GetDiagonal(Layer layer, Matrix3x2 matrix);
+        public abstract void SetScale(Layer layer, float scale, bool isRatio); 
+        public abstract void SetFlip(Layer layer, bool isFlip);
         public abstract void SetPostion(Layer layer, Transformer startTransformer, float cos, float sin);
 
 
@@ -77,37 +78,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
                 this.SetReversePostion(layer, base.Cos * move, base.Sin * move, distance);
             }
         }
-
-        
-
-
-        //Scale
-        public void SetScale(Layer layer,  float scale, bool isRatio)
-        {
-            if (isRatio)
-            {
-                layer.Transformer.XScale = this.StartTransformer.XScale * scale;
-                layer.Transformer.YScale = this.StartTransformer.YScale * scale;
-            }
-            else
-            {
-                if (this.GetOrientation() == Orientation.Horizontal)
-                    layer.Transformer.XScale = this.StartTransformer.XScale * scale;
-                else
-                    layer.Transformer.YScale = this.StartTransformer.YScale * scale;
-            }
-        }
-
-
-        //Flip
-        public void SetFlip(Layer layer,  bool isFlip)
-        {
-            if (this.GetOrientation() == Orientation.Horizontal)
-                layer.Transformer.FlipHorizontal = (this.StartTransformer.FlipHorizontal == isFlip);
-            else
-                layer.Transformer.FlipVertical = (this.StartTransformer.FlipVertical == isFlip);
-        }
-
+ 
 
         //Postion: Reverse
         public void SetReversePostion(Layer layer, float cos, float sin, VectorDistance distance)
@@ -115,29 +86,11 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
             bool reverse = distance.FD < distance.PD ? true : distance.FD < distance.FP;//F in the left of the P ?
 
             if (reverse)
-                this.SetOrientationPostion(layer,  cos, sin);
-            else
-                this.SetOrientationPostion(layer,  -cos, -sin);
-        }
-
-        //Postion: Orientation
-        public void SetOrientationPostion(Layer layer, float cos, float sin)
-        {
-            if (this.GetOrientation() == Orientation.Horizontal)
-                this.SetFlipPostion(layer, cos, sin, this.StartTransformer.FlipHorizontal);
-            else
-                this.SetFlipPostion(layer, -cos, -sin, this.StartTransformer.FlipHorizontal);
-        }
-
-        //Postion: Flip
-        public void SetFlipPostion(Layer layer, float cos, float sin,bool flip)
-        {
-            if (flip)
                 this.SetPostion(layer, this.StartTransformer, cos, sin);
             else
                 this.SetPostion(layer, this.StartTransformer, -cos, -sin);
-        }     
-        
+        }
+         
 
     }
 }

@@ -72,11 +72,27 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
             Vector2 point2 = viewModel.KeyShift ? footPoint : point;
 
             Vector2 horizontalFootPoint = Transformer.FootPoint(point2, this.HorizontalLine.Diagonal, this.Point);
-            VectorDistance horizontalDistance = this.GetDistance(horizontalFootPoint, this.Point, this.HorizontalLine);
+            VectorDistance horizontalDistance = new VectorDistance
+            {
+                FD = Vector2.Distance(horizontalFootPoint, this.HorizontalLine.Diagonal),
+                FP = Vector2.Distance(horizontalFootPoint, this.Point),
+                FC = Vector2.Distance(horizontalFootPoint, this.HorizontalLine.Center),
+                PC = Vector2.Distance(this.Point, this.HorizontalLine.Center),
+                FS = Vector2.Distance(horizontalFootPoint, this.HorizontalLine.Symmetric),
+                PD = Vector2.Distance(this.Point, this.HorizontalLine.Diagonal),
+            };
 
             Vector2 verticalFootPoint = Transformer.FootPoint(point2, this.VerticalLine.Diagonal, this.Point);
-            VectorDistance verticalDistance = this.GetDistance(verticalFootPoint, this.Point, this.VerticalLine);
-                                 
+            VectorDistance verticalDistance = new VectorDistance
+            {
+                FD = Vector2.Distance(verticalFootPoint, this.VerticalLine.Diagonal),
+                FP = Vector2.Distance(verticalFootPoint, this.Point),
+                FC = Vector2.Distance(verticalFootPoint, this.VerticalLine.Center),
+                PC = Vector2.Distance(this.Point, this.VerticalLine.Center),
+                FS = Vector2.Distance(verticalFootPoint, this.VerticalLine.Symmetric),
+                PD = Vector2.Distance(this.Point, this.VerticalLine.Diagonal),
+            };
+
 
             //Scale with Center
             if (viewModel.KeyCtrl)
@@ -149,20 +165,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
 
             }
         }
-
-
-        public VectorDistance GetDistance(Vector2 footPoint, Vector2 point, VectorLine line)
-        {
-            return new VectorDistance
-            {
-                FD = Vector2.Distance(footPoint, line.Diagonal),
-                FP = Vector2.Distance(footPoint, point),
-                FC = Vector2.Distance(footPoint, line.Center),
-                PC = Vector2.Distance(point, line.Center),
-                FS = Vector2.Distance(footPoint, line.Symmetric),
-                PD = Vector2.Distance(point, line.Diagonal),
-            };
-        }
+        
 
         //Scale
         public void SetScale(Layer layer, float xScale, float yScale)
