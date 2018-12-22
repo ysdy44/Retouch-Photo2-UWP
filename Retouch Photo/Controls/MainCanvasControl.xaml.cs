@@ -53,9 +53,9 @@ namespace Retouch_Photo.Controls
 
 
         //单指&&左键&&笔
-        private void Single_Start(Vector2 point) => this.ViewModel.Tool.ViewModel.Start(point, this.ViewModel);
-        private void Single_Delta(Vector2 point) => this.ViewModel.Tool.ViewModel.Delta(point, this.ViewModel);
-        private void Single_Complete(Vector2 point) => this.ViewModel.Tool.ViewModel.Complete(point, this.ViewModel);
+        private void Single_Start(Vector2 point) => this.ViewModel.Tool.ViewModel.Start(point);
+        private void Single_Delta(Vector2 point) => this.ViewModel.Tool.ViewModel.Delta(point);
+        private void Single_Complete(Vector2 point) => this.ViewModel.Tool.ViewModel.Complete(point);
 
 
         #endregion
@@ -156,7 +156,7 @@ namespace Retouch_Photo.Controls
         {
             this.ViewModel.RenderLayer.Draw(args.DrawingSession, this.ViewModel.MatrixTransformer.VirtualToControlMatrix);
 
-            this.ViewModel.Tool.ViewModel.Draw(args.DrawingSession, this.ViewModel);
+            this.ViewModel.Tool.ViewModel.Draw(args.DrawingSession);
         }
 
 

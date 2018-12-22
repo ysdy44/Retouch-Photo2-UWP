@@ -14,21 +14,22 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Retouch_Photo.Pages.ToolPages.ToolMarqueePage
+namespace Retouch_Photo.Pages.PageControls
 {
-    public sealed partial class ToolMarqueeModeControl : UserControl
+    public sealed partial class PageModeControl : UserControl
     {
 
         #region DependencyProperty
+
 
         public MarqueeMode Mode
         {
             get { return (MarqueeMode)GetValue(ModeProperty); }
             set { SetValue(ModeProperty, value); }
         }
-        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(MarqueeMode), typeof(ToolMarqueeModeControl), new PropertyMetadata(MarqueeMode.None, (sender, e) =>
+        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(MarqueeMode), typeof(PageModeControl), new PropertyMetadata(MarqueeMode.None, (sender, e) =>
         {
-            ToolMarqueeModeControl con = (ToolMarqueeModeControl)sender;
+            PageModeControl con = (PageModeControl)sender;
 
             if (e.NewValue is MarqueeMode value)
             {
@@ -36,21 +37,29 @@ namespace Retouch_Photo.Pages.ToolPages.ToolMarqueePage
             }
         }));
 
+
+
         #endregion
 
         //Delegate
         public delegate void ModeChangedHandler(MarqueeMode mode);
         public event ModeChangedHandler ModeChanged = null;
 
-        public ToolMarqueeModeControl()
-        {           
-            this.InitializeComponent(); 
+        public PageModeControl()
+        {
+            this.InitializeComponent();
         }
 
-        private void NoneSegmented_Tapped(object sender, TappedRoutedEventArgs e) => this.Mode = MarqueeMode.None;
-        private void SquareSegmented_Tapped(object sender, TappedRoutedEventArgs e) => this.Mode = MarqueeMode.Square;
-        private void CenterSegmented_Tapped(object sender, TappedRoutedEventArgs e) => this.Mode = MarqueeMode.Center;
-        private void SquareAndCenterSegmented_Tapped(object sender, TappedRoutedEventArgs e) => this.Mode = MarqueeMode.SquareAndCenter;
+        private void NoneSegmented_Tapped(object sender, TappedRoutedEventArgs e) => this.Segmented_Tapped(MarqueeMode.None);
+        private void SquareSegmented_Tapped(object sender, TappedRoutedEventArgs e) => this.Segmented_Tapped(MarqueeMode.Square);
+        private void CenterSegmented_Tapped(object sender, TappedRoutedEventArgs e) => this.Segmented_Tapped(MarqueeMode.Center);
+        private void SquareAndCenterSegmented_Tapped(object sender, TappedRoutedEventArgs e) => this.Segmented_Tapped(MarqueeMode.SquareAndCenter);
+        private void Segmented_Tapped(MarqueeMode mode)
+        {
+            this.Mode = mode;
+            this.ModeChanged?.Invoke(mode);
+        }
+
 
         private void Segmente(MarqueeMode mode)
         {
@@ -58,18 +67,11 @@ namespace Retouch_Photo.Pages.ToolPages.ToolMarqueePage
             this.SegmenteColor(this.SquareSegmented, mode == MarqueeMode.Square);
             this.SegmenteColor(this.CenterSegmented, mode == MarqueeMode.Center);
             this.SegmenteColor(this.SquareAndCenterSegmented, mode == MarqueeMode.SquareAndCenter);
-
-            this.ModeChanged?.Invoke(mode);
         }
-         
-
         private void SegmenteColor(ContentPresenter control, bool IsChecked)
         {
             control.Background = IsChecked ? this.AccentColor : this.UnAccentColor;
             control.Foreground = IsChecked ? this.CheckColor : this.UnCheckColor;
         }
-
-
-
     }
 }

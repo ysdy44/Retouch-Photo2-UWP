@@ -21,17 +21,12 @@ namespace Retouch_Photo.Controls
     {
 
         //ViewModel
-        public DrawViewModel ViewModel;
+        public DrawViewModel ViewModel => App.ViewModel;
 
         public LayerControl()
         {
             this.InitializeComponent();
-
-            //ViewModel
-            this.ViewModel = App.ViewModel;
-        }
-
-
+        }        
 
         private Grid element;
         private void Grid_Holding(object sender, HoldingRoutedEventArgs e) => FlyoutBase.ShowAttachedFlyout((Grid)sender);
@@ -48,8 +43,7 @@ namespace Retouch_Photo.Controls
             this.element = (Grid)sender;
         }
 
-
-
+        
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is Layer item)
@@ -70,11 +64,9 @@ namespace Retouch_Photo.Controls
 
 
         private void AddButton_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-       
+        {     
 
         }
-
      
     }
 }

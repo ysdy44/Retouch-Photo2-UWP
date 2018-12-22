@@ -38,7 +38,6 @@ namespace Retouch_Photo.Pages
 
             //ViewModel
             this.ViewModel = App.ViewModel;
-
             this.MainCanvasControl.SizeChanged += (s, e) => this.ViewModel.MatrixTransformer.ControlSizeChanged(e.NewSize);
         }
 

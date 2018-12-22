@@ -15,7 +15,16 @@ using Windows.UI;
 namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels
 {
     public class ToolCursorRotationViewModel : ToolViewModel2
-    {
+    {    
+        //ViewModel
+        DrawViewModel ViewModel => App.ViewModel;
+        bool IsStepFrequency
+        {
+            get => this.ViewModel.KeyShift;
+            set => this.ViewModel.KeyShift=value;
+        }
+
+
         Vector2 Center;
         
         float StartTransformerRadian;
@@ -23,36 +32,34 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels
 
         float Radian;
 
-        public override void Start(Vector2 point, Layer layer, DrawViewModel viewModel)
+        public override void Start(Vector2 point, Layer layer)
         {
-            Matrix3x2 matrix = layer.Transformer.Matrix * viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix;
+            Matrix3x2 matrix = layer.Transformer.Matrix * this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix;
 
             this.Center = layer.Transformer.TransformCenter(matrix);
 
             this.StartTransformerRadian = layer.Transformer.Radian;
             this.StartRadian = Transformer.VectorToRadians(point - this.Center);
         }
-        public override void Delta(Vector2 point, Layer layer, DrawViewModel viewModel)
+        public override void Delta(Vector2 point, Layer layer)
         {
             this.Radian = Transformer.VectorToRadians(point - this.Center);
 
             float radian = this.StartTransformerRadian - this.StartRadian + this.Radian;
 
-            layer.Transformer.Radian = viewModel.KeyShift ? Transformer.RadiansStepFrequency(radian) : radian;
+            layer.Transformer.Radian = this.IsStepFrequency ? Transformer.RadiansStepFrequency(radian) : radian;
         }
-        public override void Complete(Vector2 point, Layer layer, DrawViewModel viewModel)
+        public override void Complete(Vector2 point, Layer layer)
         {
-            viewModel.KeyShift = false;
+            this.IsStepFrequency = false;
         }
 
-        public override void Draw(CanvasDrawingSession ds, Layer layer, DrawViewModel viewModel)
+        public override void Draw(CanvasDrawingSession ds, Layer layer)
         {
-            Transformer.DrawBoundNodesWithRotation(ds, layer.Transformer, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
+            Transformer.DrawBoundNodesWithRotation(ds, layer.Transformer, this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
 
             Transformer.DrawLine(ds, this.Center, Transformer.RadiansToVector(this.StartRadian, this.Center));
             Transformer.DrawLine(ds, this.Center, Transformer.RadiansToVector(this.Radian, this.Center));
         }
-
     }
-
 }

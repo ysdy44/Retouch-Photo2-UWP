@@ -13,32 +13,33 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 {
     public class ToolViewViewModel : ToolViewModel
     {
+        //ViewModel
+        DrawViewModel ViewModel => App.ViewModel;
+
 
         Vector2 rightStartPoint;
         Vector2 rightStartPosition;
-        public override void Start(Vector2 point, DrawViewModel viewModel)
+        public override void Start(Vector2 point)
         {
             this.rightStartPoint = point;
-            this.rightStartPosition = viewModel.MatrixTransformer.Position;
+            this.rightStartPosition = this.ViewModel.MatrixTransformer.Position;
 
-            viewModel.Invalidate(isThumbnail: true);
+            this.ViewModel.Invalidate(isThumbnail: true);
         }
-        public override void Delta(Vector2 point, DrawViewModel viewModel)
+        public override void Delta(Vector2 point)
         {
-            viewModel.MatrixTransformer.Position = this.rightStartPosition - this.rightStartPoint + point;
+            this.ViewModel.MatrixTransformer.Position = this.rightStartPosition - this.rightStartPoint + point;
 
-            viewModel.Invalidate();
+            this.ViewModel.Invalidate();
         }
-        public override void Complete(Vector2 point, DrawViewModel viewModel)
+        public override void Complete(Vector2 point)
         {
-            viewModel.Invalidate(isThumbnail: false);
+            this.ViewModel.Invalidate(isThumbnail: false);
         }
-
-
-        public override void Draw(CanvasDrawingSession ds, DrawViewModel viewModel)
+        
+        public override void Draw(CanvasDrawingSession ds)
         {
         }
-
     }
 }
 

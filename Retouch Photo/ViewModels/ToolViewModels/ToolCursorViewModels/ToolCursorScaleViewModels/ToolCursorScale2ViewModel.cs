@@ -1,109 +1,84 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using Retouch_Photo.Library;
 using Retouch_Photo.Models;
-using System;
 using System.Numerics;
-using Windows.UI;
 
 namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCursorScaleViewModels
 {
     public abstract class ToolCursorScale2ViewModel : ToolCursorScaleViewModel
     {
+        //ViewModel
+        DrawViewModel ViewModel => App.ViewModel;
+        bool IsCenter => (this.ViewModel.MarqueeMode == MarqueeMode.Center) || (this.ViewModel.MarqueeMode == MarqueeMode.SquareAndCenter);
+        bool IsRatio => (this.ViewModel.MarqueeMode == MarqueeMode.Square) || (this.ViewModel.MarqueeMode == MarqueeMode.SquareAndCenter);
+
+
         //@Override
-        public abstract Vector2 GetPoint(Layer layer, Matrix3x2 matrix);
-        public abstract Vector2 GetDiagonal(Layer layer, Matrix3x2 matrix);
         public abstract Vector2 GetHorizontalDiagonal(Layer layer, Matrix3x2 matrix);
         public abstract Vector2 GetVerticalDiagonal(Layer layer, Matrix3x2 matrix);
 
-        public abstract void SetPostion(Layer layer, Transformer startTransformer, float xCos, float xSin, float yCos, float ySin);
 
-
-        Vector2 Point;
-
-        VectorLine Line;
         VectorLine HorizontalLine;
         VectorLine VerticalLine;
 
-        public override void Start(Vector2 point, Layer layer, DrawViewModel viewModel)
+        public override void Start(Vector2 point, Layer layer)
         {
-            base.Start(point, layer, viewModel);
+            base.Start(point, layer);
 
-            Matrix3x2 matrix = layer.Transformer.Matrix * viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix;
-            this.Point = this.GetPoint(layer, matrix);
+            Matrix3x2 matrix = layer.Transformer.Matrix * this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix;
+            base.Point = this.GetPoint(layer, matrix);
 
+            //Diagonal line
             Vector2 diagonal = this.GetDiagonal(layer, matrix);
             this.Line = new VectorLine
             {
                 Diagonal = diagonal,
-                Symmetric = diagonal + diagonal - this.Point,
+                Symmetric = diagonal + diagonal - base.Point,
                 Center = layer.Transformer.TransformCenter(matrix)
             };
 
+            //Horizontal line
             Vector2 horizontalDiagonal = this.GetHorizontalDiagonal(layer, matrix);
             this.HorizontalLine = new VectorLine
             {
                 Diagonal = horizontalDiagonal,
-                Symmetric = horizontalDiagonal + horizontalDiagonal - this.Point,
-                Center = (this.Point + horizontalDiagonal) / 2
+                Symmetric = horizontalDiagonal + horizontalDiagonal - base.Point,
+                Center = (base.Point + horizontalDiagonal) / 2
             };
 
+            //Vertical line
             Vector2 verticalDiagonal = this.GetVerticalDiagonal(layer, matrix);
             this.VerticalLine = new VectorLine
             {
                 Diagonal = verticalDiagonal,
-                Symmetric = verticalDiagonal + verticalDiagonal - this.Point,
-                Center = (this.Point + verticalDiagonal) / 2,
+                Symmetric = verticalDiagonal + verticalDiagonal - base.Point,
+                Center = (base.Point + verticalDiagonal) / 2,
             };
         }
-        public override void Delta(Vector2 point, Layer layer, DrawViewModel viewModel)
+
+      
+        public override void Delta(Vector2 point, Layer layer)
         {
-            Vector2 footPoint = Transformer.FootPoint(point, this.Line.Diagonal, this.Point);
-            VectorDistance distance = new VectorDistance
-            {
-                FD = Vector2.Distance(footPoint, this.Line.Diagonal),
-                FP = Vector2.Distance(footPoint, this.Point),
-                FC = Vector2.Distance(footPoint, this.Line.Center),
-                PC = Vector2.Distance(this.Point, this.Line.Center),
-                FS = Vector2.Distance(footPoint, this.Line.Symmetric),
-                PD = Vector2.Distance(this.Point, this.Line.Diagonal),
-            };
+            //Point on diagonal line
+            Vector2 footPoint = Transformer.FootPoint(point, this.Line.Diagonal, base.Point);
+            VectorDistance distance = base.GetVectorDistance(footPoint,base.Point, this.Line);
 
-            Vector2 horizontalLine1A = this.Point;
-            Vector2 horizontalLine1B = this.HorizontalLine.Diagonal;
-            Vector2 horizontalLine2A = point;
-            Vector2 horizontalLine2B = point + this.VerticalLine.Diagonal - this.Point;
-            Vector2 horizontalFootPoint = Transformer.IntersectionPoint(horizontalLine1A, horizontalLine1B, horizontalLine2A, horizontalLine2B);
-            VectorDistance horizontalDistance = new VectorDistance
-            {
-                FD = Vector2.Distance(horizontalFootPoint, this.HorizontalLine.Diagonal),
-                FP = Vector2.Distance(horizontalFootPoint, this.Point),
-                FC = Vector2.Distance(horizontalFootPoint, this.HorizontalLine.Center),
-                PC = Vector2.Distance(this.Point, this.HorizontalLine.Center),
-                FS = Vector2.Distance(horizontalFootPoint, this.HorizontalLine.Symmetric),
-                PD = Vector2.Distance(this.Point, this.HorizontalLine.Diagonal),
-            };
+            Vector2 point2 = this.IsRatio ? footPoint : point;
 
-            Vector2 verticalLine1A = this.Point;
-            Vector2 verticalLine1B = this.VerticalLine.Diagonal;
-            Vector2 verticalLine2A = point;
-            Vector2 verticalLine2B = point + this.HorizontalLine.Diagonal - this.Point;
-            Vector2 verticalFootPoint = Transformer.IntersectionPoint(verticalLine1A, verticalLine1B, verticalLine2A, verticalLine2B);
-            VectorDistance verticalDistance = new VectorDistance
-            {
-                FD = Vector2.Distance(verticalFootPoint, this.VerticalLine.Diagonal),
-                FP = Vector2.Distance(verticalFootPoint, this.Point),
-                FC = Vector2.Distance(verticalFootPoint, this.VerticalLine.Center),
-                PC = Vector2.Distance(this.Point, this.VerticalLine.Center),
-                FS = Vector2.Distance(verticalFootPoint, this.VerticalLine.Symmetric),
-                PD = Vector2.Distance(this.Point, this.VerticalLine.Diagonal),
-            };
+            //Point on horizontal line
+            Vector2 horizontalFootPoint = Transformer.IntersectionPoint(base.Point, this.HorizontalLine.Diagonal, point2, point2 + this.VerticalLine.Diagonal - base.Point);
+            VectorDistance horizontalDistance = base.GetVectorDistance(horizontalFootPoint, base.Point, this.HorizontalLine);
+
+            //Point on vertical line
+            Vector2 verticalFootPoint = Transformer.IntersectionPoint(base.Point, this.VerticalLine.Diagonal, point2, point2 + this.HorizontalLine.Diagonal - base.Point);
+            VectorDistance verticalDistance = base.GetVectorDistance(verticalFootPoint, base.Point, this.VerticalLine);
 
 
             //Scale with Center
-            if (viewModel.KeyCtrl)
+            if (this.IsCenter)
             {
 
                 //Ratio
-                if (viewModel.KeyShift)
+                if (this.IsRatio)
                 {
                     //Scale
                     float scale = distance.FC / distance.PC;
@@ -135,7 +110,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
             {
 
                 //Ratio
-                if (viewModel.KeyShift)
+                if (this.IsRatio)
                 {
                     //Scale
                     float scale = distance.FD / distance.PD;
@@ -160,11 +135,12 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCurso
                 }
 
                 //Postion
-                float xMove = horizontalDistance.FP / 2 / viewModel.MatrixTransformer.Scale;
-                float yMove = verticalDistance.FP / 2 / viewModel.MatrixTransformer.Scale;
+                float xMove = horizontalDistance.FP / 2 / this.ViewModel.MatrixTransformer.Scale;
+                float yMove = verticalDistance.FP / 2 / this.ViewModel.MatrixTransformer.Scale;
                 this.SetReversePostion(layer, horizontalDistance, verticalDistance,
                     base.XCos * xMove, base.XSin * xMove,
                     base.YCos * yMove, base.YSin * yMove);
+
             }
         }
 

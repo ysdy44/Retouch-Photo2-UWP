@@ -33,12 +33,11 @@ namespace Retouch_Photo.Pages.ToolPages
 
             //ViewModel
             this.ViewModel = App.ViewModel;
-              this.ModeControl.Mode = this.ViewModel.MarqueeMode;
             this.ColorBrush.Color = this.ViewModel.Color;
             this.ColorPicker.Color = this.ViewModel.Color;
         }
 
-        private void ModeControl_ModeChanged(MarqueeMode mode) => this.ViewModel.MarqueeMode = this.ModeControl.Mode;
+        private void ToolMarqueeModeControl_ModeChanged(MarqueeMode mode) => this.ViewModel.MarqueeMode = mode;
 
         private void ColorButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -47,10 +46,10 @@ namespace Retouch_Photo.Pages.ToolPages
         private void ColorPicker_ColorChange(object sender, Color value)
         {
             this.ViewModel.Color = value;
-            this.ColorBrush.Color = value;                      
+            this.ColorBrush.Color = value;
 
             Layer layer = this.ViewModel.RenderLayer.CurrentLayer;
-            if (layer is GeometryLayer geometryLayer)  
+            if (layer is GeometryLayer geometryLayer)
             {
                 if (geometryLayer.FillBrush is CanvasSolidColorBrush brush)
                 {
@@ -60,6 +59,5 @@ namespace Retouch_Photo.Pages.ToolPages
                 }
             }
         }
-
     }
 }

@@ -7,6 +7,10 @@ using Windows.UI;
 namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels
 {
 
+    /// <summary>
+    /// These points in a line:  
+    /// ------S[Symmetric Point]、D[Diagonal Point]、C[Center Point]、P[Point) and F[FootPoint] .
+    /// </summary>
     public struct VectorLine
     {
         /// <summary>
@@ -36,6 +40,9 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels
 
     }
 
+    /// <summary>
+    /// Distance of points on the [VectorLine]
+    /// </summary>
     public struct VectorDistance
     {
         /// <summary> Distance between [Foot Point] and [Diagonal Point] . </summary>
@@ -55,15 +62,26 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels
 
     public abstract class ToolCursorScaleViewModel : ToolViewModel2
     {
+        //ViewModel
+        DrawViewModel ViewModel => App.ViewModel;
+
+
+        //@Override
+        public abstract Vector2 GetPoint(Layer layer, Matrix3x2 matrix);
+        public abstract Vector2 GetDiagonal(Layer layer, Matrix3x2 matrix);
+        public abstract void SetPostion(Layer layer, Transformer startTransformer, float xCos, float xSin, float yCos, float ySin);
+
+
         protected Transformer StartTransformer;
 
-        protected float XCos;
-        protected float XSin;
+        protected Vector2 Point;
+        protected VectorLine Line;
 
-        protected float YCos;
-        protected float YSin;
+        protected float XCos, XSin;
+        protected float YCos,YSin;
 
-        public override void Start(Vector2 point, Layer layer, DrawViewModel viewModel)
+
+        public override void Start(Vector2 point, Layer layer)
         {
             this.StartTransformer.CopyWith(layer.Transformer);
 
@@ -75,36 +93,28 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels
             this.YCos = (float)Math.Cos(y);
             this.YSin = (float)Math.Sin(y);
         }
-        public override void Delta(Vector2 point, Layer layer, DrawViewModel viewModel)
+        public override void Delta(Vector2 point, Layer layer)
         {
         }
-        public override void Complete(Vector2 point, Layer layer, DrawViewModel viewModel)
+        public override void Complete(Vector2 point, Layer layer)
         {
         }
 
-        public override void Draw(CanvasDrawingSession ds, Layer layer, DrawViewModel viewModel)
+        public override void Draw(CanvasDrawingSession ds, Layer layer)
         {
-            Transformer.DrawBoundNodesWithRotation(ds, layer.Transformer, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
-
-            /*
-             * 
-           ds.DrawLine(this.Line.Symmetric, this.Point, Colors.Red);
-
-           ds.DrawText("S", this.Line.Symmetric,  Colors.Red);
-           ds.FillCircle(this.Line.Symmetric, 6, Colors.Red);
-
-           ds.DrawText("D", this.Line.Diagonal, Colors.Red);
-           ds.FillCircle(this.Line.Diagonal, 6, Colors.Red);
-
-           ds.DrawText("C", this.Line.Center, Colors.Red);
-           ds.FillCircle(this.Line.Center, 6, Colors.Red);
-
-           ds.DrawText("P", this.Point, Colors.Red);
-           ds.FillCircle(this.Point, 6, Colors.Red);
-
-             */
-
+            Transformer.DrawBoundNodesWithRotation(ds, layer.Transformer, this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
         }
+
+
+        public VectorDistance GetVectorDistance(Vector2 footPoint, Vector2 point, VectorLine line) => new VectorDistance
+        {
+            FD = Vector2.Distance(footPoint, line.Diagonal),
+            FP = Vector2.Distance(footPoint, point),
+            FC = Vector2.Distance(footPoint, line.Center),
+            PC = Vector2.Distance(point, line.Center),
+            FS = Vector2.Distance(footPoint, line.Symmetric),
+            PD = Vector2.Distance(point, line.Diagonal),
+        };
 
     }
 }

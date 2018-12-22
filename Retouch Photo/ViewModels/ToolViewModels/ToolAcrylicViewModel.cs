@@ -7,52 +7,56 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 {
     public class ToolAcrylicViewModel : ToolViewModel
     {
+        //ViewModel
+        DrawViewModel ViewModel => App.ViewModel;
+
+
         Vector2 point;
         Vector2 StartPoint;
 
-         AcrylicLayer Layer;
+        AcrylicLayer Layer;
 
-        public override void Start(Vector2 point, DrawViewModel viewModel)
+        public override void Start(Vector2 point)
         {
             this.point = point;
-            this.StartPoint = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
-            VectRect rect = new VectRect(this.StartPoint, this.StartPoint, viewModel.MarqueeMode);
+            this.StartPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+            VectRect rect = new VectRect(this.StartPoint, this.StartPoint, this.ViewModel.MarqueeMode);
 
-            if (this.Layer == null) this.Layer = AcrylicLayer.CreateFromRect(viewModel.CanvasControl, rect, viewModel.Color);
+            if (this.Layer == null) this.Layer = AcrylicLayer.CreateFromRect(this.ViewModel.CanvasControl, rect, this.ViewModel.Color);
             this.Layer.Transformer = Transformer.CreateFromRect(rect);
-            this.Layer.TintColor = viewModel.Color;
+            this.Layer.TintColor = this.ViewModel.Color;
 
-            viewModel.InvalidateWithJumpedQueueLayer(this.Layer);
+            this.ViewModel.InvalidateWithJumpedQueueLayer(this.Layer);
         }
-        public override void Delta(Vector2 point, DrawViewModel viewModel)
+        public override void Delta(Vector2 point)
         {
-            Vector2 endPoint = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
-            VectRect rect = new VectRect(this.StartPoint, endPoint, viewModel.MarqueeMode);
+            Vector2 endPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+            VectRect rect = new VectRect(this.StartPoint, endPoint, this.ViewModel.MarqueeMode);
 
             this.Layer.Transformer = Transformer.CreateFromRect(rect);
 
-            viewModel.InvalidateWithJumpedQueueLayer(this.Layer);
+            this.ViewModel.InvalidateWithJumpedQueueLayer(this.Layer);
         }
-        public override void Complete(Vector2 point, DrawViewModel viewModel)
+        public override void Complete(Vector2 point)
         {
-            Vector2 endPoint = Vector2.Transform(point, viewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
-            VectRect rect = new VectRect(this.StartPoint, endPoint, viewModel.MarqueeMode);
+            Vector2 endPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+            VectRect rect = new VectRect(this.StartPoint, endPoint, this.ViewModel.MarqueeMode);
 
             if (Transformer.InNodeDistance(this.point, point) == false)
             {
-                AcrylicLayer acrylicLayer = AcrylicLayer.CreateFromRect(viewModel.CanvasControl, rect, viewModel.Color);
-                viewModel.RenderLayer.Insert(acrylicLayer);
+                AcrylicLayer acrylicLayer = AcrylicLayer.CreateFromRect(this.ViewModel.CanvasControl, rect, this.ViewModel.Color);
+                this.ViewModel.RenderLayer.Insert(acrylicLayer);
             }
 
-            viewModel.Invalidate();
+            this.ViewModel.Invalidate();
         }
 
 
-        public override void Draw(CanvasDrawingSession ds, DrawViewModel viewModel)
+        public override void Draw(CanvasDrawingSession ds)
         {
             if (this.Layer == null) return;
 
-            Transformer.DrawBound(ds, this.Layer.Transformer, viewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
+            Transformer.DrawBound(ds, this.Layer.Transformer, this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
         }
 
     }

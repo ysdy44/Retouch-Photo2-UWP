@@ -26,6 +26,8 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Input;
 using Retouch_Photo.ViewModels.ToolViewModels;
 using Microsoft.Graphics.Canvas.UI;
+using Windows.System;
+using Windows.UI.Core;
 
 namespace Retouch_Photo.ViewModels
 {
@@ -34,7 +36,7 @@ namespace Retouch_Photo.ViewModels
         
         /// <summary>画布控件</summary>
         public CanvasControl CanvasControl;
-        public void Invalidate( bool? isThumbnail = null)
+        public void Invalidate(bool? isThumbnail = null)
         {
             this.RenderLayer.RenderTarget = this.RenderLayer.GetRender
             (
@@ -67,11 +69,13 @@ namespace Retouch_Photo.ViewModels
 
           this.CanvasControl.Invalidate();
         }
-
-
+         
         /// <summary> 初始化CanvasControl, 也是可以绑定它的CreateResources事件</summary>
         public void InitializeCanvasControl(CanvasControl control)
         {
+            Window.Current.CoreWindow.Dispatcher.AcceleratorKeyActivated += this.TypedEventHandler;
+
+
             if (this.CanvasControl != null) return;
 
             /*
@@ -104,8 +108,7 @@ namespace Retouch_Photo.ViewModels
 
             this.CanvasControl = control;
         }
-
-
+               
 
 
         /// <summary>重新加载ViewModel，可以多次调用</summary>
@@ -136,16 +139,12 @@ namespace Retouch_Photo.ViewModels
 
             this.Invalidate();
         }
-
-
+        
         /// <summary>可以返回</summary>
         public GoBack GoBack = new GoBack();
-
-
+        
         /// <summary>矩阵变换</summary>
         public MatrixTransformer MatrixTransformer = new MatrixTransformer();
-
-        public MarqueeMode MarqueeMode = MarqueeMode.None;
 
         /// <summary>渲染图层</summary>
         public RenderLayer RenderLayer = new RenderLayer();
@@ -297,7 +296,96 @@ namespace Retouch_Photo.ViewModels
         #endregion
 
 
+        #region KeyBoard
 
+        
+        public bool KeyShift
+        {
+            get => keyShift;
+            set
+            {
+                keyShift = value;
+                OnPropertyChanged(nameof(KeyShift));
+            }
+        }
+        private bool keyShift;
+        
+        
+        public bool KeyCtrl
+        {
+            get => keyCtrl;
+            set
+            {
+                keyCtrl = value;
+                OnPropertyChanged(nameof(KeyCtrl));
+            }
+        }
+        private bool keyCtrl;
+        
+        
+        public bool KeyAlt
+        {
+            get => keyAlt;
+            set
+            {
+                keyAlt = value;
+                OnPropertyChanged(nameof(KeyAlt));
+            }
+        }
+        private bool keyAlt;
+        
+
+        public void TypedEventHandler(CoreDispatcher core, AcceleratorKeyEventArgs args)
+        {
+            string s = args.EventType.ToString();
+
+            if (s.Contains("Down"))
+            {
+                if (Window.Current.CoreWindow.GetKeyState(VirtualKey.Control).HasFlag(CoreVirtualKeyStates.Down))
+                    this.KeyCtrl = true;
+
+                if (Window.Current.CoreWindow.GetKeyState(VirtualKey.Shift).HasFlag(CoreVirtualKeyStates.Down))
+                    this.KeyShift = true;
+            }
+
+            if (s.Contains("Up"))
+            {
+                if (Window.Current.CoreWindow.GetKeyState(VirtualKey.Control).HasFlag(CoreVirtualKeyStates.None))
+                    this.KeyCtrl = false;
+
+                if (Window.Current.CoreWindow.GetKeyState(VirtualKey.Shift).HasFlag(CoreVirtualKeyStates.None))
+                    this.KeyShift = false;
+            }
+
+
+            if (this.KeyCtrl == false && this.KeyShift == false)
+                this.MarqueeMode = MarqueeMode.None;
+            else if (this.KeyCtrl == false && this.KeyShift)
+                this.MarqueeMode = MarqueeMode.Square;
+            else if (this.KeyCtrl && this.KeyShift == false)
+                this.MarqueeMode = MarqueeMode.Center;
+            else //if (this.KeyCtrl && this.KeyShift)
+                this.MarqueeMode = MarqueeMode.SquareAndCenter;
+
+        }
+
+
+        #endregion
+        
+
+
+        /// <summary>选框模式</summary>
+        public MarqueeMode MarqueeMode
+        {
+            get => marqueeMode;
+            set
+            {
+                if (marqueeMode == value) return;
+                marqueeMode = value;
+                OnPropertyChanged(nameof(MarqueeMode));
+            }
+        }
+        private MarqueeMode marqueeMode = MarqueeMode.None;
 
         /// <summary> 文本 </summary>      
         public string Text
@@ -310,64 +398,7 @@ namespace Retouch_Photo.ViewModels
             }
         }
         private string text;
-
-
-        #region KeyBoard
-
-
-        //Rotation: 旋转的刻度15度
-        //Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCursorRotationViewModel
-
-
-        //Scale: 缩放是否等比例缩放
-        //Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCursorScaleViewModel
-
-        public bool KeyShift
-        {
-            get => keyShift;
-            set
-            {
-                keyShift = value;
-                OnPropertyChanged(nameof(KeyShift));
-            }
-        }
-        private bool keyShift;
-
-
-
-        //Scale: 缩放是否中心缩放（或贴边缩放）
-        //Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCursorScaleViewModel
-
-        public bool KeyCtrl
-        {
-            get => keyCtrl;
-            set
-            {
-                keyCtrl = value;
-                OnPropertyChanged(nameof(KeyCtrl));
-            }
-        }
-        private bool keyCtrl;
-
-
-
-        //Skew: 是否开启歪斜模式
-        //Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCursorSkewViewModel
-
-        public bool KeyAlt
-        {
-            get => keyAlt;
-            set
-            {
-                keyAlt = value;
-                OnPropertyChanged(nameof(KeyAlt));
-            }
-        }
-        private bool keyAlt;
-
-
-
-        #endregion 
+               
 
 
         public event PropertyChangedEventHandler PropertyChanged;

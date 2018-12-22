@@ -9,6 +9,19 @@
     d:DesignHeight="50"
     d:DesignWidth="50">
 
+    <ToolTipService.ToolTip>
+        <Grid  Height="32">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="32"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <TextBlock Text="Acrylic"/>
+            </ContentPresenter>
+            <TextBlock Text="Acrylic" Grid.Column="1" VerticalAlignment="Center"/>
+        </Grid>
+    </ToolTipService.ToolTip>
+
     <TextBlock Text="Acrylic"/>
     
     

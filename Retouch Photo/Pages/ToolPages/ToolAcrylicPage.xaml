@@ -7,13 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolmarqueepage="using:Retouch_Photo.Pages.ToolPages.ToolMarqueePage"
     xmlns:pic="using:Retouch_Photo.Pickers"
+    xmlns:pageControls="using:Retouch_Photo.Pages.PageControls"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400">
 
     <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
         <StackPanel Orientation="Horizontal" Height="50" Padding="4">
-            <toolmarqueepage:ToolMarqueeModeControl x:Name="ModeControl" ModeChanged="ModeControl_ModeChanged"/>
+            <pageControls:PageModeControl Mode="{x:Bind ViewModel.MarqueeMode,Mode=TwoWay}" />
             <AppBarSeparator/>
             <Border x:Name="ColorButton" Style="{StaticResource AppCircleBorderStyle}" Tapped="ColorButton_Tapped">
                 <Border.Background>

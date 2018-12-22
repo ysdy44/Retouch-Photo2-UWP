@@ -13,7 +13,7 @@ namespace Retouch_Photo.Models
     public struct Transformer
     {
 
-        #region Transformer & Matrix
+        #region Matrix
 
 
         public float Width;
@@ -101,27 +101,7 @@ namespace Retouch_Photo.Models
         #endregion
 
 
-        #region Contains & Transform
-
-
-        /// <summary> Radius of node' . </summary>
-        public static float NodeRadius = 12.0f;
-        public static bool InNodeRadius(Vector2 node0, Vector2 node1) => (node0 - node1).LengthSquared() < 144.0f;// Transformer.NodeRadius * Transformer.NodeRadius;
-
-        /// <summary> Minimum distance between two nodes. </summary>
-        public static float NodeDistance = 20.0f;
-        public static float NodeDistanceDouble = 40.0f;
-        public static bool InNodeDistance(Vector2 node0, Vector2 node1) => (node0 - node1).LengthSquared() < 400.0f;// Transformer.NodeDistance * Transformer.NodeDistance;
-
-         
-
-        /// <summary> Returns whether the area filled by the bound rect contains the specified point. </summary>
-        public static bool ContainsBound(Vector2 point, Transformer transformer)
-        {
-            Vector2 v = Vector2.Transform(point, transformer.InverseMatrix);
-            return v.X > 0 && v.X < transformer.Width && v.Y > 0 && v.Y < transformer.Height;
-        }
-
+        #region Transform
 
 
         public Vector2 TransformLeft(Matrix3x2 matrix) => Vector2.Transform(new Vector2(0, this.Height / 2), matrix);
@@ -133,57 +113,33 @@ namespace Retouch_Photo.Models
         public Vector2 TransformRightTop(Matrix3x2 matrix) => Vector2.Transform(new Vector2(this.Width, 0), matrix);
         public Vector2 TransformRightBottom(Matrix3x2 matrix) => Vector2.Transform(new Vector2(this.Width, this.Height), matrix);
         public Vector2 TransformLeftBottom(Matrix3x2 matrix) => Vector2.Transform(new Vector2(0, this.Height), matrix);
-        public Vector2 TransformCenter(Matrix3x2 matrix) => Vector2.Transform(new Vector2(this.Width/2, this.Height/2), matrix);
 
-        /// <summary> Returns whether the radian area filled by the skew node contains the specified point. </summary>
-        public static CursorMode ContainsNodeMode(Vector2 point, Transformer transformer, Matrix3x2 canvasToVirtualToControlMatrix, bool isCtrl = false)
+        public Vector2 TransformCenter(Matrix3x2 matrix) => Vector2.Transform(new Vector2(this.Width / 2, this.Height / 2), matrix);
+
+
+        #endregion
+
+
+        #region Contains
+
+
+        /// <summary> Radius of node' . </summary>
+        public static float NodeRadius = 12.0f;
+        /// <summary> Whether the distance exceeds [NodeRadius].  </summary>
+        public static bool InNodeRadius(Vector2 node0, Vector2 node1) => (node0 - node1).LengthSquared() < 144.0f;// Transformer.NodeRadius * Transformer.NodeRadius;
+
+        /// <summary> Minimum distance between two nodes. </summary>
+        public static float NodeDistance = 20.0f;
+        /// <summary> Double [NodeDistance]. </summary>
+        public static float NodeDistanceDouble = 40.0f;
+        /// <summary> Whether the distance exceeds [NodeDistance].  </summary>
+        public static bool InNodeDistance(Vector2 node0, Vector2 node1) => (node0 - node1).LengthSquared() < 400.0f;// Transformer.NodeDistance * Transformer.NodeDistance;
+
+        /// <summary> Returns whether the area filled by the bound rect contains the specified point. </summary>
+        public static bool ContainsBound(Vector2 point, Transformer transformer)
         {
-            Matrix3x2 matrix = transformer.Matrix * canvasToVirtualToControlMatrix;
-
-            //LTRB
-            Vector2 leftTop = transformer.TransformLeftTop(matrix);
-            Vector2 rightTop = transformer.TransformRightTop(matrix);
-            Vector2 rightBottom = transformer.TransformRightBottom(matrix);
-            Vector2 leftBottom = transformer.TransformLeftBottom(matrix);
-
-            //Center
-            Vector2 centerLeft = (leftTop + leftBottom) / 2;
-            Vector2 centerTop = (leftTop + rightTop) / 2;
-            Vector2 centerRight = (rightTop + rightBottom) / 2;
-            Vector2 centerBottom = (leftBottom + rightBottom) / 2;
-
-            if (isCtrl == false)
-            {
-                //Scale
-                if (Transformer.InNodeRadius(leftTop, point)) return CursorMode.ScaleLeftTop;
-                if (Transformer.InNodeRadius(rightTop, point)) return CursorMode.ScaleRightTop;
-                if (Transformer.InNodeRadius(rightBottom, point)) return CursorMode.ScaleRightBottom;
-                if (Transformer.InNodeRadius(leftBottom, point)) return CursorMode.ScaleLeftBottom;
-
-                //Scale
-                if (Transformer.InNodeRadius(centerLeft, point)) return CursorMode.ScaleLeft;
-                if (Transformer.InNodeRadius(centerTop, point)) return CursorMode.ScaleTop;
-                if (Transformer.InNodeRadius(centerRight, point)) return CursorMode.ScaleRight;
-                if (Transformer.InNodeRadius(centerBottom, point)) return CursorMode.ScaleBottom;
-            }
-
-            if (isCtrl == false && transformer.DisabledRadian == false)
-            {
-                //Rotation
-                Vector2 radians = centerTop - Vector2.Normalize(centerBottom - centerTop) * Transformer.NodeDistanceDouble;
-                if (Transformer.InNodeRadius(radians, point)) return CursorMode.Rotation;
-            }
-
-            if (isCtrl && transformer.DisabledRadian == false)
-            {
-                //Skew
-                if (Transformer.InNodeRadius(centerLeft, point)) return CursorMode.SkewLeft;
-                if (Transformer.InNodeRadius(centerTop, point)) return CursorMode.SkewTop;
-                if (Transformer.InNodeRadius(centerRight, point)) return CursorMode.SkewRight;
-                if (Transformer.InNodeRadius(centerBottom, point)) return CursorMode.SkewBottom;
-            }
-            
-            return CursorMode.None;
+            Vector2 v = Vector2.Transform(point, transformer.InverseMatrix);
+            return v.X > 0 && v.X < transformer.Width && v.Y > 0 && v.Y < transformer.Height;
         }
 
 
@@ -310,20 +266,26 @@ namespace Retouch_Photo.Models
         #endregion
 
 
-        #region Vector2
+        #region Vector
 
 
-        //Radians: 15
-        public const float RadiansStep = 0.2617993833333333f;//15 degress in angle system
-        public const float RadiansStepHalf = 0.1308996916666667f;//7.5 degress in angle system
+        /// <summary> 15 degress in angle system. </summary>
+        public const float RadiansStep = 0.2617993833333333f;
+        /// <summary> 7.5 degress in angle system. </summary>
+        public const float RadiansStepHalf = 0.1308996916666667f;
+        /// <summary> To find a multiple of the nearest 15. </summary>
         public static float RadiansStepFrequency(float radian) => ((int)((radian + Transformer.RadiansStepHalf) / Transformer.RadiansStep)) * Transformer.RadiansStep;//Get step radians
 
-        //Radians: PI
+
+        /// <summary> Math.PI </summary>
         public const float PI = 3.1415926535897931f;
-        public const float PiHalf = 1.57079632679469655f;//Half of Math.PI
-        public const float PiQuarter = 0.78539816339734827f;//Half of Math.PI
+        /// <summary> Half of Math.PI </summary>
+        public const float PiHalf = 1.57079632679469655f;
+        /// <summary> Quarter of Math.PI </summary>
+        public const float PiQuarter = 0.78539816339734827f;
 
 
+        /// <summary> Get the [Foot Point] of point and LIne. </summary>
         public static Vector2 FootPoint(Vector2 point, Vector2 lineA, Vector2 lineB)
         {
             Vector2 lineVector = lineA - lineB;
@@ -334,7 +296,7 @@ namespace Retouch_Photo.Models
 
             return lineVector * t + lineA;
         }
-         
+        /// <summary> Get the  [Intersection Point] of Line1 and LIne2. </summary>
         public static Vector2 IntersectionPoint(Vector2 line1A, Vector2 line1B, Vector2 line2A, Vector2 line2B)
         {
             /*
@@ -421,7 +383,18 @@ namespace Retouch_Photo.Models
         }
 
 
-        //Radians: Vector
+        /// <summary>
+        /// Get vector of the radians in the coordinate system. 
+        /// </summary>
+        /// <param name="radians">vector</param>
+        /// <param name="center"> The center of coordinate system.  </param>
+        /// <param name="length">The length of vector. </param>
+        /// <returns></returns>
+        public static Vector2 RadiansToVector(float radians, Vector2 center, float length = 40.0f)
+        {
+            return new Vector2((float)Math.Cos(radians) * length + center.X, (float)Math.Sin(radians) * length + center.Y);
+        }
+        /// <summary> Get radians of the vector in the coordinate system. </summary>
         public static float VectorToRadians(Vector2 vector)
         {
             float tan = (float)Math.Atan(Math.Abs(vector.Y / vector.X));
@@ -435,37 +408,10 @@ namespace Retouch_Photo.Models
             //Fourth Quadrant  
             else return tan - (float)Math.PI;
         }
-        public static Vector2 RadiansToVector(float radians, Vector2 center, float distance = 40.0f)
-        {
-            return new Vector2((float)Math.Cos(radians) * distance + center.X, (float)Math.Sin(radians) * distance + center.Y);
-        }
 
 
         #endregion
 
-    }
-
-
-    public enum CursorMode
-    {
-        None,
-        Translation,
-        Rotation,
-
-        SkewLeft,
-        SkewTop,
-        SkewRight,
-        SkewBottom,
-
-        ScaleLeft,
-        ScaleTop,
-        ScaleRight,
-        ScaleBottom,
-
-        ScaleLeftTop,
-        ScaleRightTop,
-        ScaleRightBottom,
-        ScaleLeftBottom,
     }
 
 

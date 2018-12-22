@@ -33,12 +33,9 @@ namespace Retouch_Photo.Pages.ToolPages
 
             //ViewModel
             this.ViewModel = App.ViewModel;
-            this.ModeControl.Mode = this.ViewModel.MarqueeMode;
             this.ColorBrush.Color = this.ViewModel.Color;
             this.ColorPicker.Color = this.ViewModel.Color;
         }
-
-        private void ModeControl_ModeChanged(MarqueeMode mode) => this.ViewModel.MarqueeMode = this.ModeControl.Mode;
 
         private void ColorButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -57,6 +54,6 @@ namespace Retouch_Photo.Pages.ToolPages
                 this.ViewModel.Invalidate();
             }
         }
-         
+
     }
 }

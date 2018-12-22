@@ -11,23 +11,23 @@ using Windows.UI;
 namespace Retouch_Photo.ViewModels.ToolViewModels
 {
     public class ToolEllipseViewModel : ToolViewModel
-    {
+    {       
+        //ViewModel
+        DrawViewModel ViewModel => App.ViewModel;
 
-        public override void Start(Vector2 point, DrawViewModel viewModel)
+        public override void Start(Vector2 point)
         {
         }
-        public override void Delta(Vector2 point, DrawViewModel viewModel)
+        public override void Delta(Vector2 point)
         {
         }
-        public override void Complete(Vector2 point, DrawViewModel viewModel)
+        public override void Complete(Vector2 point)
         {
         }
-
-
-        public override void Draw(CanvasDrawingSession ds, DrawViewModel viewModel)
+        
+        public override void Draw(CanvasDrawingSession ds)
         {
         }
-
     }
 }
 

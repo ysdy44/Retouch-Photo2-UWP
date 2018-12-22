@@ -9,6 +9,19 @@
     d:DesignHeight="50"
     d:DesignWidth="50">
 
+    <ToolTipService.ToolTip>
+        <Grid  Height="32">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="32"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <PathIcon Data="M10.47,3.469c2.204,-4.188 6.613,-4.188 8.817,-2.094c2.204,2.094 2.204,6.282 0,10.471c-1.543,3.141 -5.511,6.282 -8.817,8.376c-3.306,-2.094 -7.274,-5.235 -8.817,-8.376c-2.204,-4.189 -2.204,-8.377 0,-10.471c2.204,-2.094 6.613,-2.094 8.817,2.094Z"/>
+            </ContentPresenter>
+            <TextBlock Text="Geometry" Grid.Column="1" VerticalAlignment="Center"/>
+        </Grid>
+    </ToolTipService.ToolTip>
+
     <PathIcon Data="M10.47,3.469c2.204,-4.188 6.613,-4.188 8.817,-2.094c2.204,2.094 2.204,6.282 0,10.471c-1.543,3.141 -5.511,6.282 -8.817,8.376c-3.306,-2.094 -7.274,-5.235 -8.817,-8.376c-2.204,-4.189 -2.204,-8.377 0,-10.471c2.204,-2.094 6.613,-2.094 8.817,2.094Z"/>
 
 </UserControl>

@@ -207,6 +207,9 @@
     </Compile>
     <Compile Include="Models\Layer.cs" />
     <Compile Include="Models\Photo.cs" />
+    <Compile Include="Pages\PageControls\PageModeControl.xaml.cs">
+      <DependentUpon>PageModeControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PageControls\PageNumberControl.xaml.cs">
       <DependentUpon>PageNumberControl.xaml</DependentUpon>
     </Compile>
@@ -233,9 +236,6 @@
     </Compile>
     <Compile Include="Pages\ToolPages\ToolMarqueePage\ToolMarqueeCompositeModeControl.xaml.cs">
       <DependentUpon>ToolMarqueeCompositeModeControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\ToolPages\ToolMarqueePage\ToolMarqueeModeControl.xaml.cs">
-      <DependentUpon>ToolMarqueeModeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ToolPages\ToolPaintBrushPage.xaml.cs">
       <DependentUpon>ToolPaintBrushPage.xaml</DependentUpon>
@@ -803,6 +803,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\PageControls\PageModeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\PageControls\PageNumberControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -836,10 +840,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\ToolPages\ToolMarqueePage\ToolMarqueeCompositeModeControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\ToolPages\ToolMarqueePage\ToolMarqueeModeControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
