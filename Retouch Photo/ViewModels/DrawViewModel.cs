@@ -28,6 +28,7 @@ using Retouch_Photo.ViewModels.ToolViewModels;
 using Microsoft.Graphics.Canvas.UI;
 using Windows.System;
 using Windows.UI.Core;
+using Retouch_Photo.Models.Tools;
 
 namespace Retouch_Photo.ViewModels
 {
@@ -116,8 +117,6 @@ namespace Retouch_Photo.ViewModels
         public void LoadFromProject(Project project)
         {
             this.MatrixTransformer.LoadFromProject(project);
-
-            /////////////////////////////////////////////////////////////////////////////////////
             
             this.RenderLayer.LoadFromProject(this.CanvasControl, project);
             this.RenderLayer.Layers.CollectionChanged += (s, e) =>
@@ -125,17 +124,8 @@ namespace Retouch_Photo.ViewModels
                 this.Invalidate();
                 this.SelectedIndex = this.RenderLayer.Index;
             };
-
-            Layer.Remove += (Layer layer) =>
-            {
-                 this.RenderLayer.Remove(layer);
-            };
  
-            /////////////////////////////////////////////////////////////////////////////////////
-
             if (project.Tool < this.Tools.Count) this.Tool = this.Tools[project.Tool];
-
-            /////////////////////////////////////////////////////////////////////////////////////
 
             this.Invalidate();
         }
@@ -186,111 +176,27 @@ namespace Retouch_Photo.ViewModels
             }
         }
         private Tool tool;
-        
 
         /// <summary>所有工具</summary>
         public List<Tool> Tools => new List<Tool>
-        {            
-            new Tool()
         {
-            Type = ToolType.Cursor,
-            Icon = new ToolCursorControl(),
-            WorkIcon = new ToolCursorControl(),
-            Page = new ToolCursorPage(),
-            ViewModel = new ToolCursorViewModel(),
-        },
-            new Tool()
-        {
-            Type = ToolType.View,
-            Icon = new ToolViewControl(),
-            WorkIcon = new ToolViewControl(),
-            Page = new ToolViewPage(),
-            ViewModel = new ToolViewViewModel(),
-            },
-            new Tool()
-        {
-            Type = ToolType.FloodSetect,
-            Icon = new ToolFloodSetectControl(),
-            WorkIcon = new ToolFloodSetectControl(),
-            Page = new ToolFloodSetectPage(),
-            ViewModel = new ToolFloodSetectViewModel(),
-        }, 
-    
-            new Tool()
-        {
-            Type = ToolType.PaintBrush,
-            Icon = new ToolPaintBrushControl(),
-            WorkIcon = new ToolPaintBrushControl(),
-            Page = new ToolPaintBrushPage(),
-            ViewModel = new ToolPaintBrushViewModel(),
-        },
-            new Tool()
-        {
-            Type = ToolType.WatercolorPen,
-            Icon = new ToolWatercolorPenControl(),
-            WorkIcon = new ToolWatercolorPenControl(),
-            Page = new ToolWatercolorPenPage(),
-            ViewModel = new ToolWatercolorPenViewModel(),
-        },
-            new Tool()
-        {
-            Type = ToolType.Pencil,
-            Icon = new ToolPencilControl(),
-            WorkIcon = new ToolPencilControl(),
-            Page = new ToolPencilPage(),
-            ViewModel = new ToolPencilViewModel(),
-        },
-            new Tool()
-        {
-            Type = ToolType.EraseBrush,
-            Icon = new ToolEraseBrushControl(),
-            WorkIcon = new ToolEraseBrushControl(),
-            Page = new ToolEraseBrushPage(),
-            ViewModel = new ToolEraseBrushViewModel(),
-        },
+             new CursorTool(),
+             new ViewTool(),
+             new FloodSetectTool(),
+             new SelectionBrushTool(),
 
+             new PaintBrushTool(),
+             new WatercolorPenTool(),
+             new PencilTool(),
+             new EraseBrushTool(),
 
-            new Tool()
-        {
-            Type = ToolType.Pen,
-            Icon = new ToolPenControl(),
-            WorkIcon = new ToolPenControl(),
-            Page = new ToolPenPage(),
-            ViewModel = new ToolPenViewModel(),
-        },
-            new Tool()
-        {
-            Type = ToolType.Rectangle,
-            Icon = new ToolRectangleControl(),
-            WorkIcon = new ToolRectangleControl(),
-            Page = new ToolRectanglePage(),
-            ViewModel = new ToolRectangleViewModel(),
-        },
-            new Tool()
-        {
-            Type = ToolType.Ellipse,
-            Icon = new ToolEllipseControl(),
-            WorkIcon = new ToolEllipseControl(),
-            Page = new ToolEllipsePage(),
-            ViewModel = new ToolEllipseViewModel(),
-        },
-            new Tool()
-        {
-            Type = ToolType.Geometry,
-            Icon = new ToolGeometryControl(),
-            WorkIcon = new ToolGeometryControl(),
-            Page = new ToolGeometryPage(),
-            ViewModel = new ToolGeometryViewModel(),
-            },
-            new Tool()
-        {
-            Type = ToolType.Acrylic,
-            Icon = new ToolAcrylicControl(),
-            WorkIcon = new ToolAcrylicControl(),
-            Page = new ToolAcrylicPage(),
-            ViewModel = new ToolAcrylicViewModel(),
-        }
-            };
+             new PenTool(),
+             new RectangleTool(),
+             new EllipseTool(),
+             new GeometryTool(),
+
+             new AcrylicTool(),
+        };
 
 
         #endregion
@@ -298,7 +204,7 @@ namespace Retouch_Photo.ViewModels
 
         #region KeyBoard
 
-        
+
         public bool KeyShift
         {
             get => keyShift;

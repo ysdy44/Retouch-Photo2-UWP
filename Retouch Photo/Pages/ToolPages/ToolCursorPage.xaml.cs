@@ -20,14 +20,11 @@ namespace Retouch_Photo.Pages.ToolPages
     public sealed partial class ToolCursorPage : Page
     {
         //ViewModel
-        public DrawViewModel ViewModel;
+        DrawViewModel ViewModel => App.ViewModel;
 
         public ToolCursorPage()
         {
             this.InitializeComponent();
-
-            //ViewModel
-            this.ViewModel = App.ViewModel;
         }
 
         private void StepFrequencyButton_Tapped(object sender, TappedRoutedEventArgs e) => this.ViewModel.Invalidate();

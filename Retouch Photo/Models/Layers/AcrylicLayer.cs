@@ -19,7 +19,7 @@ namespace Retouch_Photo.Models.Layers
     public class AcrylicLayer : Layer
     {
          
-        public static string Type = "AcrylicLayer";
+        public static string Type = "Acrylic";
         protected AcrylicLayer() => base.Name = AcrylicLayer.Type;
 
         public float TintOpacity = 0.5f;
@@ -28,12 +28,13 @@ namespace Retouch_Photo.Models.Layers
 
         public override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
-            Vector2 point0 = Vector2.Transform(base.Transformer.Postion, canvasToVirtualMatrix);
-            Vector2 point1 = Vector2.Transform(new Vector2(base.Transformer.Postion.X + base.Transformer.Width, base.Transformer.Postion.Y + base.Transformer.Height), canvasToVirtualMatrix);
+            Matrix3x2 matrix = this.Transformer.Matrix * canvasToVirtualMatrix;
+            Vector2 leftTop = this.Transformer.TransformLeftTop(matrix);
+            Vector2 rightBottom = this.Transformer.TransformRightBottom(matrix);
 
             return new CropEffect
             {
-                SourceRectangle = new Rect(point0.ToPoint(), point1.ToPoint()),
+                SourceRectangle = new Rect(leftTop.ToPoint(), rightBottom.ToPoint()),
                 Source = new CompositeEffect
                 {
                     Sources =

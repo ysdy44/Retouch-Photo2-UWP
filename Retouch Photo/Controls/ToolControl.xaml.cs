@@ -21,14 +21,11 @@ namespace Retouch_Photo.Controls
     public sealed partial class ToolControl : UserControl
     {
         //ViewModel
-        public DrawViewModel ViewModel;
+        DrawViewModel ViewModel => App.ViewModel;
 
         public ToolControl()
         {
             this.InitializeComponent();
-
-            //ViewModel
-            this.ViewModel = App.ViewModel;
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

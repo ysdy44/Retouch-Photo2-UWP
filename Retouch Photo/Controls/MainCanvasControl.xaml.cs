@@ -37,14 +37,12 @@ namespace Retouch_Photo.Controls
     {
 
         //ViewModel
-        public DrawViewModel ViewModel; 
+        DrawViewModel ViewModel => App.ViewModel;
 
         public MainCanvasControl()
         {
             this.InitializeComponent();
-
-            //ViewModel
-            this.ViewModel = App.ViewModel;
+            
             this.CanvasControl.CreateResources += (sender, args) => this.ViewModel.InitializeCanvasControl(sender);
         }
 

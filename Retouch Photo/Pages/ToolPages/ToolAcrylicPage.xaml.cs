@@ -25,14 +25,12 @@ namespace Retouch_Photo.Pages.ToolPages
     public sealed partial class ToolAcrylicPage : Page
     {
         //ViewModel
-        public DrawViewModel ViewModel;
+        DrawViewModel ViewModel => App.ViewModel;
 
         public ToolAcrylicPage()
         {
             this.InitializeComponent();
-
-            //ViewModel
-            this.ViewModel = App.ViewModel;
+            
             this.ColorBrush.Color = this.ViewModel.Color;
             this.ColorPicker.Color = this.ViewModel.Color;
         }

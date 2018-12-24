@@ -25,9 +25,38 @@ using Microsoft.Graphics.Canvas;
 
 namespace Retouch_Photo.Pages
 {
+    enum MainMode
+    {
+        None,
+        Add,
+        Pictures,
+        Save,
+        Share,
+        Delete,
+        Duplicate,
+        Folder,
+    }
+
     public sealed partial class MainPage : Page
     {
         ObservableCollection<Photo> PhotoFileList = new ObservableCollection<Photo>() { };
+        MainMode mode;
+        MainMode Mode
+        {
+            get => mode;
+            set
+            {
+                this.AppbarControl.Visibility = (value == MainMode.None) ? Visibility.Visible : Visibility.Collapsed;
+
+                this.AppbarPicturesControl.Visibility = (value == MainMode.Pictures) ? Visibility.Visible : Visibility.Collapsed;
+                this.AppbarSaveControl.Visibility = (value == MainMode.Save) ? Visibility.Visible : Visibility.Collapsed;
+                this.AppbarShareControl.Visibility = (value == MainMode.Share) ? Visibility.Visible : Visibility.Collapsed;
+                this.AppbarDeleteControl.Visibility = (value == MainMode.Delete) ? Visibility.Visible : Visibility.Collapsed;
+                this.AppbarDuplicateControl.Visibility = (value == MainMode.Duplicate) ? Visibility.Visible : Visibility.Collapsed;
+
+                mode = value;
+            }
+        }
 
         public MainPage()
         {
@@ -58,6 +87,8 @@ namespace Retouch_Photo.Pages
 
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
+            if (this.Mode != MainMode.None) return;
+
             if (e.ClickedItem is Photo photo)
             {
                 this.LoadingControl.Visibility = Visibility.Visible;
@@ -93,30 +124,16 @@ namespace Retouch_Photo.Pages
 
 
         #region Appbar
-
-
-        private int Index
-        {
-            set
-            {
-                this.AppbarControl.Visibility = value == 0 ? Visibility.Visible : Visibility.Collapsed;
-                this.AppbarPicturesControl.Visibility = value == 2 ? Visibility.Visible : Visibility.Collapsed;
-                this.AppbarSaveControl.Visibility = value == 3 ? Visibility.Visible : Visibility.Collapsed;
-                this.AppbarShareControl.Visibility = value == 4 ? Visibility.Visible : Visibility.Collapsed;
-                this.AppbarDeleteControl.Visibility = value == 5 ? Visibility.Visible : Visibility.Collapsed;
-                this.AppbarDuplicateControl.Visibility = value == 6 ? Visibility.Visible : Visibility.Collapsed;
-
-            }
-        }
+        
 
         //Appbar
-        private void AppbarControl_CancelButtonTapped(object sender, TappedRoutedEventArgs e) => this.Index = 0;
+        private void AppbarControl_CancelButtonTapped(object sender, TappedRoutedEventArgs e) => this.Mode = MainMode.None;
         private async void AppbarControl_AddButtonTapped(object sender, TappedRoutedEventArgs e) => await this.AddDialog.ShowAsync(ContentDialogPlacement.InPlace);//ContentDialogPlacement.InPlace
-        private void AppbarControl_PicturesButtonTapped(object sender, TappedRoutedEventArgs e) => this.Index = 2;
-        private void AppbarControl_SaveButtonTapped(object sender, TappedRoutedEventArgs e) => this.Index = 3;
-        private void AppbarControl_ShareButtonTapped(object sender, TappedRoutedEventArgs e) => this.Index = 4;
-        private void AppbarControl_DeleteButtonTapped(object sender, TappedRoutedEventArgs e) => this.Index = 5;
-        private void AppbarControl_DuplicateButtonTapped(object sender, TappedRoutedEventArgs e) => this.Index = 6;
+        private void AppbarControl_PicturesButtonTapped(object sender, TappedRoutedEventArgs e) => this.Mode = MainMode.Pictures;
+        private void AppbarControl_SaveButtonTapped(object sender, TappedRoutedEventArgs e) => this.Mode = MainMode.Save;
+        private void AppbarControl_ShareButtonTapped(object sender, TappedRoutedEventArgs e) => this.Mode = MainMode.Share;
+        private void AppbarControl_DeleteButtonTapped(object sender, TappedRoutedEventArgs e) => this.Mode = MainMode.Delete;
+        private void AppbarControl_DuplicateButtonTapped(object sender, TappedRoutedEventArgs e) => this.Mode = MainMode.Duplicate;
         private async void AppbarControl_FolderButtonTapped(object sender, TappedRoutedEventArgs e) => await this.FolderDialog.ShowAsync(ContentDialogPlacement.InPlace);//ContentDialogPlacement.InPlace
 
         private async void AddDialog_AddSize(BitmapSize pixels)

@@ -19,6 +19,7 @@ using System.Numerics;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using Windows.UI;
 using Microsoft.Graphics.Canvas.UI;
+using Retouch_Photo.Models.Adjustments;
 
 namespace Retouch_Photo.Models
 {
@@ -154,15 +155,37 @@ namespace Retouch_Photo.Models
         #region Render
 
 
+        public List<Adjustment> Adjustments = new List<Adjustment>();
+        public ICanvasImage GetAdjustment(ICanvasImage image)
+        {
+            if (this.Adjustments == null) return image;
+            if (this.Adjustments.Count==0) return image;
+            if (this.Adjustments.Count == 1) return this.Adjustments.Single().GetAdjustment(image);
+
+            foreach (var item in this.Adjustments)
+            {
+                image = item.GetAdjustment(image);
+            }
+            return image;
+        }
+
+
         //@override
         public abstract ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix);
+        public ICanvasImage GetAdjustmentRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
+        {
+            return this.GetAdjustment
+            (
+                image: this.GetRender(creator, image, canvasToVirtualMatrix)
+            );
+        }
 
 
-        /// <summary>Render</summary>
+        /// <summary> LayerRender </summary>
         /// <param name="layer">当前图层</param>
         /// <param name="image">从当前图层上面 传下来的 图像</param>
         /// <returns>新的 向下传递的 图像</returns>
-        public static ICanvasImage Render(ICanvasResourceCreator creator, Layer layer, ICanvasImage image,Matrix3x2 canvasToVirtualMatrix)
+        public static ICanvasImage LayerRender(ICanvasResourceCreator creator, Layer layer, ICanvasImage image,Matrix3x2 canvasToVirtualMatrix)
         {
             if (layer.IsVisual == false || layer.Opacity == 0) return image;
            
@@ -170,9 +193,9 @@ namespace Retouch_Photo.Models
             (
                foreground: image,
                blendIndex: layer.BlendIndex,
-               background: (layer.Opacity == 100) ? layer.GetRender(creator, image, canvasToVirtualMatrix) : new OpacityEffect
+               background: (layer.Opacity == 100) ? layer.GetAdjustmentRender(creator, image, canvasToVirtualMatrix) : new OpacityEffect
                {
-                   Source = layer.GetRender(creator, image, canvasToVirtualMatrix),
+                   Source = layer.GetAdjustmentRender(creator, image, canvasToVirtualMatrix),
                    Opacity = (float)(layer.Opacity / 100)
                }
             );
@@ -238,17 +261,7 @@ namespace Retouch_Photo.Models
         
         #endregion
 
-
-        //Delegate
-        public delegate void RemoveHandler(Layer layer);
-        public static event RemoveHandler Remove = null;
-        public void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            e.Handled = true;
-            Layer.Remove?.Invoke(this);
-        }
-
-
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name) =>this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

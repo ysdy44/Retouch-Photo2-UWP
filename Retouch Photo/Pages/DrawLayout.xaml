@@ -320,7 +320,7 @@
 
         </Border>
         <!--Right-->
-        <Border x:Name="RightBorder" Grid.Column="3" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource SystemControlAcrylicElementBrush}">
+        <Border x:Name="RightBorder" Grid.Column="3" BorderBrush="{ThemeResource AppStroke}" >
 
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>

@@ -6,16 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="300">
-
-    <UserControl.Resources>
-        <Style x:Key="ButtonStyle" TargetType="Button" BasedOn="{StaticResource DateTimePickerFlyoutButtonStyle}">
-            <Setter Property="Height" Value="44"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        </Style>
-    </UserControl.Resources>
-
+    d:DesignWidth="300"> 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="130"/>
@@ -25,7 +16,7 @@
 
         <StackPanel Grid.Column="0">
 
-            <Button Style="{StaticResource ButtonStyle}">
+            <Button Height="44" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="32"/>
@@ -35,7 +26,7 @@
                     <TextBlock Text="Cut" Grid.Column="1" Margin="8,0" FontWeight="Medium" VerticalAlignment="Center"/>
                 </Grid>
             </Button>
-            <Button Style="{StaticResource ButtonStyle}">
+            <Button Height="44" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="32"/>
@@ -46,7 +37,7 @@
                     <TextBlock Text="Copy" Grid.Column="1" Margin="8,0" FontWeight="Medium" VerticalAlignment="Center"/>
                 </Grid>
             </Button>
-            <Button Style="{StaticResource ButtonStyle}">
+            <Button Height="44" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="32"/>
@@ -57,7 +48,7 @@
                     <TextBlock Text="Paste" Grid.Column="1" Margin="8,0" FontWeight="Medium" VerticalAlignment="Center"/>
                 </Grid>
             </Button>
-            <Button Style="{StaticResource ButtonStyle}">
+            <Button Height="44" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="32"/>
@@ -70,7 +61,7 @@
 
             <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
 
-            <Button Style="{StaticResource ButtonStyle}">
+            <Button Height="44" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="32"/>
@@ -81,7 +72,7 @@
                     <TextBlock Text="Extract" Grid.Column="1" Margin="8,0" FontWeight="Medium" VerticalAlignment="Center"/>
                 </Grid>
             </Button>
-            <Button Style="{StaticResource ButtonStyle}">
+            <Button Height="44" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="32"/>
@@ -98,7 +89,7 @@
 
         <StackPanel Grid.Column="2">
 
-            <Button Style="{StaticResource ButtonStyle}">
+            <Button Height="44" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="32"/>
@@ -108,7 +99,7 @@
                     <TextBlock Text="All" Grid.Column="1" Margin="8,0" FontWeight="Medium" VerticalAlignment="Center"/>
                 </Grid>
             </Button>
-            <Button Style="{StaticResource ButtonStyle}">
+            <Button Height="44" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="32"/>
@@ -119,7 +110,7 @@
                     <TextBlock Text="Deselect" Grid.Column="1" Margin="8,0" FontWeight="Medium" VerticalAlignment="Center"/>
                 </Grid>
             </Button>
-            <Button Style="{StaticResource ButtonStyle}">
+            <Button Height="44" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="32"/>
@@ -130,7 +121,7 @@
                     <TextBlock Text="Pixel" Grid.Column="1" Margin="8,0" FontWeight="Medium" VerticalAlignment="Center"/>
                 </Grid>
             </Button>
-            <Button Style="{StaticResource ButtonStyle}">
+            <Button Height="44" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="32"/>
@@ -144,7 +135,7 @@
 
             <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
 
-            <Button Style="{StaticResource ButtonStyle}">
+            <Button Height="44" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="32"/>
@@ -155,22 +146,7 @@
                     <TextBlock Text="Feather" Grid.Column="1" Margin="8,0" FontWeight="Medium" VerticalAlignment="Center"/>
                 </Grid>
             </Button>
-            <Button Style="{StaticResource ButtonStyle}">
-                <Button.Flyout>
-                    <Flyout Placement="Bottom"  FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" >
-                        <Grid Width="160" Height="160">
-                            <Button Style="{StaticResource ButtonStyle}">
-                                <Button.Flyout>
-                                    <Flyout Placement="Right"  FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" >
-                                        <Grid Width="110" Height="110">
-                                             
-                                        </Grid>
-                                    </Flyout>
-                                </Button.Flyout>
-                            </Button>
-                        </Grid>
-                    </Flyout>
-                </Button.Flyout>
+            <Button Height="44" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="32"/>

@@ -13,7 +13,10 @@ namespace Retouch_Photo.Models
     public struct Transformer
     {
 
+
         #region Matrix
+        
+
 
 
         public float Width;
@@ -32,7 +35,13 @@ namespace Retouch_Photo.Models
 
 
 
-        public Matrix3x2 Matrix => this.DisabledRadian ? Matrix3x2.CreateTranslation(this.Postion) :
+        public Matrix3x2 Matrix => this.DisabledRadian ?
+
+            Matrix3x2.CreateTranslation(-this.Width / 2, -this.Height / 2) *
+            Matrix3x2.CreateScale(this.XScale, this.YScale) *
+            Matrix3x2.CreateTranslation(this.Width / 2, this.Height / 2) *
+            Matrix3x2.CreateTranslation(this.Postion) :
+
             Matrix3x2.CreateTranslation(-this.Width / 2, -this.Height / 2) *
             Matrix3x2.CreateScale(this.FlipHorizontal ? -this.XScale : this.XScale, this.FlipVertical ? -this.YScale : this.YScale) *
             Matrix3x2.CreateSkew(this.Skew, 0) *
@@ -40,7 +49,14 @@ namespace Retouch_Photo.Models
             Matrix3x2.CreateTranslation(this.Width / 2, this.Height / 2) *
             Matrix3x2.CreateTranslation(this.Postion);
 
-        public Matrix3x2 InverseMatrix => this.DisabledRadian ? Matrix3x2.CreateTranslation(-this.Postion) :
+
+        public Matrix3x2 InverseMatrix => this.DisabledRadian ?
+
+            Matrix3x2.CreateTranslation(-this.Postion) *
+            Matrix3x2.CreateTranslation(-this.Width / 2, -this.Height / 2) *
+            Matrix3x2.CreateScale(1 / this.XScale, 1 / this.YScale) *
+            Matrix3x2.CreateTranslation(this.Width / 2, this.Height / 2) :
+
             Matrix3x2.CreateTranslation(-this.Postion) *
             Matrix3x2.CreateTranslation(-this.Width / 2, -this.Height / 2) *
             Matrix3x2.CreateRotation(-this.Radian) *

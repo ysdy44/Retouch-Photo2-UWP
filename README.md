@@ -9,9 +9,6 @@ Old version of the link
 
 Simple and free photo retouching tools,can transform,adjustment, shear,filling images,support layer,the selecti on. If you think that the PS is too complex might as well try.
 
-2018-12-6-MarqueeTool
-![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/master/ScreenShot/2018-12-6-MarqueeTool.gif)
-
 2018-12-11-Rectangle
 ![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/master/ScreenShot/2018-12-11-Rectangle.gif)
 
@@ -19,3 +16,5 @@ Simple and free photo retouching tools,can transform,adjustment, shear,filling i
 ![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/master/ScreenShot/2018-12-21-Scale.gif)
 
 
+2018-12-24-Adjustment
+![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/master/ScreenShot/2018-12-24-Adjustment.gif)

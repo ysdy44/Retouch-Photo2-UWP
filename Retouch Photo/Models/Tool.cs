@@ -1,8 +1,10 @@
-﻿using Retouch_Photo.ViewModels;
+﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo.ViewModels;
 using Retouch_Photo.ViewModels.ToolViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
@@ -10,8 +12,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo.Models
 {
-
-    public class Tool
+    public abstract class Tool
     {
         public ToolType Type;
 
@@ -19,9 +20,9 @@ namespace Retouch_Photo.Models
         public FrameworkElement WorkIcon;
 
         public FrameworkElement Page;
+
         public ToolViewModel ViewModel;
     }
-
 
     public enum ToolType
     {

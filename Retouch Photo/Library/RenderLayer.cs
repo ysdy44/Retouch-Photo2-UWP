@@ -134,7 +134,7 @@ namespace Retouch_Photo.Library
 
             for (int i = this.Layers.Count - 1; i >= 0; i--)
             {
-                image = Layer.Render(creator, this.Layers[i], image, canvasToVirtualMatrix);
+                image = Layer.LayerRender(creator, this.Layers[i], image, canvasToVirtualMatrix);
             }
 
             return new CropEffect
@@ -153,10 +153,10 @@ namespace Retouch_Photo.Library
 
             for (int i = this.Layers.Count - 1; i >= 0; i--)
             {
-                image = Layer.Render(creator, this.Layers[i], image, canvasToVirtualMatrix);
-                if (this.Index == i) image = Layer.Render(creator, jumpedQueueLayer, image, canvasToVirtualMatrix);//Layer: jumped the Queue (Index: 0~n)
+                image = Layer.LayerRender(creator, this.Layers[i], image, canvasToVirtualMatrix);
+                if (this.Index == i) image = Layer.LayerRender(creator, jumpedQueueLayer, image, canvasToVirtualMatrix);//Layer: jumped the Queue (Index: 0~n)
             }
-            if (this.Index == -1) image = Layer.Render(creator, jumpedQueueLayer, image, canvasToVirtualMatrix); //Layer: jumped the Queue  (Index: -1)
+            if (this.Index == -1) image = Layer.LayerRender(creator, jumpedQueueLayer, image, canvasToVirtualMatrix); //Layer: jumped the Queue  (Index: -1)
 
             return new CropEffect
             {

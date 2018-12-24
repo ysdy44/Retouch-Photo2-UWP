@@ -95,6 +95,33 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AdjustmentControls\AdjustmentBrightnessControl.xaml.cs">
+      <DependentUpon>AdjustmentBrightnessControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AdjustmentControls\AdjustmentContrastControl.xaml.cs">
+      <DependentUpon>AdjustmentContrastControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AdjustmentControls\AdjustmentExposureControl.xaml.cs">
+      <DependentUpon>AdjustmentExposureControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AdjustmentControls\AdjustmentGrayControl.xaml.cs">
+      <DependentUpon>AdjustmentGrayControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AdjustmentControls\AdjustmentHighlightsAndShadowsControl.xaml.cs">
+      <DependentUpon>AdjustmentHighlightsAndShadowsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AdjustmentControls\AdjustmentHueRotationControl.xaml.cs">
+      <DependentUpon>AdjustmentHueRotationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AdjustmentControls\AdjustmentInvertControl.xaml.cs">
+      <DependentUpon>AdjustmentInvertControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AdjustmentControls\AdjustmentSaturationControl.xaml.cs">
+      <DependentUpon>AdjustmentSaturationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AdjustmentControls\AdjustmentTemperatureControl.xaml.cs">
+      <DependentUpon>AdjustmentTemperatureControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AppbarControl.xaml.cs">
       <DependentUpon>AppbarControl.xaml</DependentUpon>
     </Compile>
@@ -122,8 +149,17 @@
     <Compile Include="Controls\LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LayerControls\LayerAdjustmentCandidateControl.xaml.cs">
+      <DependentUpon>LayerAdjustmentCandidateControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LayerControls\LayerAdjustmentControl.xaml.cs">
+      <DependentUpon>LayerAdjustmentControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LayerControls\LayerLayoutControl.xaml.cs">
       <DependentUpon>LayerLayoutControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LayerControls\LayerPropertyControl.xaml.cs">
+      <DependentUpon>LayerPropertyControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\LoadingControl.xaml.cs">
       <DependentUpon>LoadingControl.xaml</DependentUpon>
@@ -179,16 +215,34 @@
     <Compile Include="Dialogs\FolderDialog.xaml.cs">
       <DependentUpon>FolderDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Library\Adjustment.cs" />
     <Compile Include="Library\Debug.cs" />
     <Compile Include="Library\DottedLine.cs" />
     <Compile Include="Library\GoBack.cs" />
     <Compile Include="Library\MarqueeTool.cs" />
     <Compile Include="Library\RenderLayer.cs" />
     <Compile Include="Library\MatrixTransformer.cs" />
+    <Compile Include="Models\Adjustment.cs" />
+    <Compile Include="Models\Adjustments\ExposureAdjustment.cs" />
+    <Compile Include="Models\Adjustments\GrayAdjustment.cs" />
+    <Compile Include="Models\Adjustments\InvertAdjustment.cs" />
     <Compile Include="Models\Layers\AcrylicLayer.cs" />
     <Compile Include="Models\Layers\GeometryLayer.cs" />
     <Compile Include="Models\Layers\ImageLayer.cs" />
     <Compile Include="Models\Layers\GeometryLayers\RectangularLayer.cs" />
+    <Compile Include="Models\Tools\AcrylicTool.cs" />
+    <Compile Include="Models\Tools\CursorTool.cs" />
+    <Compile Include="Models\Tools\EllipseTool.cs" />
+    <Compile Include="Models\Tools\EraseBrushTool.cs" />
+    <Compile Include="Models\Tools\FloodSetectTool.cs" />
+    <Compile Include="Models\Tools\GeometryTool.cs" />
+    <Compile Include="Models\Tools\PaintBrushTool.cs" />
+    <Compile Include="Models\Tools\PencilTool.cs" />
+    <Compile Include="Models\Tools\PenTool.cs" />
+    <Compile Include="Models\Tools\RectangleTool.cs" />
+    <Compile Include="Models\Tools\SelectionBrushTool.cs" />
+    <Compile Include="Models\Tools\ViewTool.cs" />
+    <Compile Include="Models\Tools\WatercolorPenTool.cs" />
     <Compile Include="Models\Transformer.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\VectRect.cs" />
@@ -675,6 +729,42 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\AdjustmentControls\AdjustmentBrightnessControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AdjustmentControls\AdjustmentContrastControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AdjustmentControls\AdjustmentExposureControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AdjustmentControls\AdjustmentGrayControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AdjustmentControls\AdjustmentHighlightsAndShadowsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AdjustmentControls\AdjustmentHueRotationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AdjustmentControls\AdjustmentInvertControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AdjustmentControls\AdjustmentSaturationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AdjustmentControls\AdjustmentTemperatureControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\AppbarControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -711,7 +801,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\LayerControls\LayerAdjustmentCandidateControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LayerControls\LayerAdjustmentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\LayerControls\LayerLayoutControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LayerControls\LayerPropertyControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

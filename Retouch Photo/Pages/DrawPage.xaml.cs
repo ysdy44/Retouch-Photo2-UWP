@@ -30,14 +30,12 @@ namespace Retouch_Photo.Pages
     public sealed partial class DrawPage : Page
     {
         //ViewModel
-        public DrawViewModel ViewModel;
+        DrawViewModel ViewModel => App.ViewModel;
 
         public DrawPage()
         {
             this.InitializeComponent();
 
-            //ViewModel
-            this.ViewModel = App.ViewModel;
             this.MainCanvasControl.SizeChanged += (s, e) => this.ViewModel.MatrixTransformer.ControlSizeChanged(e.NewSize);
         }
 

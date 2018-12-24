@@ -26,24 +26,18 @@ namespace Retouch_Photo.Controls
         public LayerControl()
         {
             this.InitializeComponent();
-        }        
-
-        private Grid element;
-        private void Grid_Holding(object sender, HoldingRoutedEventArgs e) => FlyoutBase.ShowAttachedFlyout((Grid)sender);
-        private void Grid_RightTapped(object sender, RightTappedRoutedEventArgs e) => FlyoutBase.ShowAttachedFlyout((Grid)sender);
-        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (sender is Grid element)
-            {
-                if (this.element == element)
-                {
-                    FlyoutBase.ShowAttachedFlyout(element);
-                }
-            }
-            this.element = (Grid)sender;
         }
+               
+        //Flyout
+        private void LayerLayoutControl_FlyoutShow(UserControl control, Layer layer)
+        {
+            this.LayerPropertyControl.Layer = layer;
+            this.PropertyFlyout.ShowAt(control);
+        }
+               
 
-        
+        //ListView
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e) => this.ViewModel.Invalidate();
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is Layer item)
@@ -52,21 +46,16 @@ namespace Retouch_Photo.Controls
                 this.ViewModel.Invalidate();
             }
         }
+        private void AddButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+        }
+        
 
-
-        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e) => this.ViewModel.Invalidate();
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => this.ViewModel.Invalidate();
+        //Layer
         private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
             e.Handled = true;
             this.ViewModel.Invalidate();
         }
-
-
-        private void AddButton_Tapped(object sender, TappedRoutedEventArgs e)
-        {     
-
-        }
-     
     }
 }

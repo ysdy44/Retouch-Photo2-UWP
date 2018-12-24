@@ -9,7 +9,12 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid Height="60">
+    <Grid Height="60" 
+          Background="Transparent"
+          Tapped="Grid_Tapped" 
+          Holding="Grid_Holding" 
+          RightTapped="Grid_RightTapped"
+          >
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
@@ -76,7 +81,7 @@
         </Grid.ColumnDefinitions>
 
         <Border x:Name="ThirdBoder" Grid.Column="2" Margin="4" VerticalAlignment="Center" />
-        <Border x:Name="SecondBoder" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" />
+        <Border x:Name="SecondBoder" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" />
         <Border x:Name="FristBoder" Margin="2" />
 
     </Grid>
