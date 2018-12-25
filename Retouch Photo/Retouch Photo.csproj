@@ -146,14 +146,95 @@
     <Compile Include="Controls\AppbarControls\AppbarSaveControl.xaml.cs">
       <DependentUpon>AppbarSaveControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BlendControl\BlendColorBurnControl.xaml.cs">
+      <DependentUpon>BlendColorBurnControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendColorControl.xaml.cs">
+      <DependentUpon>BlendColorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendColorDodgeControl.xaml.cs">
+      <DependentUpon>BlendColorDodgeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendDarkenControl.xaml.cs">
+      <DependentUpon>BlendDarkenControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendDarkerColorControl.xaml.cs">
+      <DependentUpon>BlendDarkerColorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendDifferenceControl.xaml.cs">
+      <DependentUpon>BlendDifferenceControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendDissolveControl.xaml.cs">
+      <DependentUpon>BlendDissolveControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendDivisionControl.xaml.cs">
+      <DependentUpon>BlendDivisionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendExclusionControl.xaml.cs">
+      <DependentUpon>BlendExclusionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendHardLightControl.xaml.cs">
+      <DependentUpon>BlendHardLightControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendHardMixControl.xaml.cs">
+      <DependentUpon>BlendHardMixControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendHueControl.xaml.cs">
+      <DependentUpon>BlendHueControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendLightenControl.xaml.cs">
+      <DependentUpon>BlendLightenControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendLighterColorControl.xaml.cs">
+      <DependentUpon>BlendLighterColorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendLinearBurnControl.xaml.cs">
+      <DependentUpon>BlendLinearBurnControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendLinearDodgeControl.xaml.cs">
+      <DependentUpon>BlendLinearDodgeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendLinearLightControl.xaml.cs">
+      <DependentUpon>BlendLinearLightControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendLuminosityControl.xaml.cs">
+      <DependentUpon>BlendLuminosityControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendMultiplyControl.xaml.cs">
+      <DependentUpon>BlendMultiplyControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendNormalControl.xaml.cs">
+      <DependentUpon>BlendNormalControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendOverlayControl.xaml.cs">
+      <DependentUpon>BlendOverlayControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendPinLightControl.xaml.cs">
+      <DependentUpon>BlendPinLightControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendSaturationControl.xaml.cs">
+      <DependentUpon>BlendSaturationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendScreenControl.xaml.cs">
+      <DependentUpon>BlendScreenControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendSoftLightControl.xaml.cs">
+      <DependentUpon>BlendSoftLightControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendSubtractControl.xaml.cs">
+      <DependentUpon>BlendSubtractControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BlendControl\BlendVividLightControl.xaml.cs">
+      <DependentUpon>BlendVividLightControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\LayerControls\LayerAdjustmentCandidateControl.xaml.cs">
       <DependentUpon>LayerAdjustmentCandidateControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LayerControls\LayerAdjustmentControl.xaml.cs">
-      <DependentUpon>LayerAdjustmentControl.xaml</DependentUpon>
+    <Compile Include="Controls\LayerControls\LayerBlendControl.xaml.cs">
+      <DependentUpon>LayerBlendControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\LayerControls\LayerLayoutControl.xaml.cs">
       <DependentUpon>LayerLayoutControl.xaml</DependentUpon>
@@ -226,6 +307,34 @@
     <Compile Include="Models\Adjustments\ExposureAdjustment.cs" />
     <Compile Include="Models\Adjustments\GrayAdjustment.cs" />
     <Compile Include="Models\Adjustments\InvertAdjustment.cs" />
+    <Compile Include="Models\Blend.cs" />
+    <Compile Include="Models\Blends\ColorBlend.cs" />
+    <Compile Include="Models\Blends\ColorBurnBlend.cs" />
+    <Compile Include="Models\Blends\ColorDodgeBlend.cs" />
+    <Compile Include="Models\Blends\DarkenBlend.cs" />
+    <Compile Include="Models\Blends\DarkerColorBlend.cs" />
+    <Compile Include="Models\Blends\DifferenceBlend.cs" />
+    <Compile Include="Models\Blends\DissolveBlend.cs" />
+    <Compile Include="Models\Blends\DivisionBlend.cs" />
+    <Compile Include="Models\Blends\ExclusionBlend.cs" />
+    <Compile Include="Models\Blends\HardLightBlend.cs" />
+    <Compile Include="Models\Blends\HardMixBlend.cs" />
+    <Compile Include="Models\Blends\HueBlend.cs" />
+    <Compile Include="Models\Blends\LightenBlend.cs" />
+    <Compile Include="Models\Blends\LighterColorBlend.cs" />
+    <Compile Include="Models\Blends\LinearBurnBlend.cs" />
+    <Compile Include="Models\Blends\LinearDodgeBlend.cs" />
+    <Compile Include="Models\Blends\LinearLightBlend.cs" />
+    <Compile Include="Models\Blends\LuminosityBlend.cs" />
+    <Compile Include="Models\Blends\MultiplyBlend.cs" />
+    <Compile Include="Models\Blends\NormalBlend.cs" />
+    <Compile Include="Models\Blends\OverlayBlend.cs" />
+    <Compile Include="Models\Blends\PinLightBlend.cs" />
+    <Compile Include="Models\Blends\SaturationBlend.cs" />
+    <Compile Include="Models\Blends\ScreenBlend.cs" />
+    <Compile Include="Models\Blends\SoftLightBlend.cs" />
+    <Compile Include="Models\Blends\SubtractBlend.cs" />
+    <Compile Include="Models\Blends\VividLightBlend.cs" />
     <Compile Include="Models\Layers\AcrylicLayer.cs" />
     <Compile Include="Models\Layers\GeometryLayer.cs" />
     <Compile Include="Models\Layers\ImageLayer.cs" />
@@ -246,6 +355,9 @@
     <Compile Include="Models\Transformer.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\VectRect.cs" />
+    <Compile Include="Pages\AdjustmentPages\AdjustmentExposurePage.xaml.cs">
+      <DependentUpon>AdjustmentExposurePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DrawLayout.xaml.cs">
       <DependentUpon>DrawLayout.xaml</DependentUpon>
     </Compile>
@@ -797,6 +909,114 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\BlendControl\BlendColorBurnControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendColorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendColorDodgeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendDarkenControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendDarkerColorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendDifferenceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendDissolveControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendDivisionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendExclusionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendHardLightControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendHardMixControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendHueControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendLightenControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendLighterColorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendLinearBurnControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendLinearDodgeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendLinearLightControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendLuminosityControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendMultiplyControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendNormalControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendOverlayControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendPinLightControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendSaturationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendScreenControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendSoftLightControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendSubtractControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BlendControl\BlendVividLightControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\LayerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -805,7 +1025,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\LayerControls\LayerAdjustmentControl.xaml">
+    <Page Include="Controls\LayerControls\LayerBlendControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -886,6 +1106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\FolderDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdjustmentPages\AdjustmentExposurePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

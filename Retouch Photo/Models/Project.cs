@@ -79,29 +79,27 @@ namespace Retouch_Photo.Models
         {
             using (IRandomAccessStream stream = await file.OpenReadAsync())
             {
-                CanvasBitmap bitmap;
-
                 try
                 {
-                    bitmap = await CanvasBitmap.LoadAsync(creator, stream, 96);
+                    CanvasBitmap bitmap = await CanvasBitmap.LoadAsync(creator, stream, 96);
+
+                    int width = (int)bitmap.SizeInPixels.Width;
+                    int height = (int)bitmap.SizeInPixels.Height;
+
+                    return new Project()
+                    {
+                        Width = width,
+                        Height = height,
+                        Layers = new List<Layer>()
+                        {
+                            ImageLayer.CreateFromBitmap(creator,bitmap,width,height)
+                        }
+                    };
                 }
                 catch (Exception)
                 {
                     return null;
                 }
-
-                int width = (int)bitmap.SizeInPixels.Width;
-                int height = (int)bitmap.SizeInPixels.Height;
-
-                return new Project()
-                {
-                    Width = width,
-                    Height = height,
-                    Layers = new List<Layer>()
-                    {
-                        ImageLayer.CreateFromBitmap(creator,bitmap,width,height)
-                    }
-                };
             }
         }
 

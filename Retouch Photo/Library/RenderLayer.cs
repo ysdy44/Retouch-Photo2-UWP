@@ -9,6 +9,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation;
+using Windows.Storage.Pickers;
 using Windows.UI;
 
 namespace Retouch_Photo.Library
@@ -38,7 +39,6 @@ namespace Retouch_Photo.Library
             }
         }
         private int index=-1;
-
         /// <summary>当前图层</summary>     
         public Layer CurrentLayer
         {
@@ -67,10 +67,10 @@ namespace Retouch_Photo.Library
                 this.Index = this.Layers.IndexOf(value);
             }
         }
-
         /// <summary>所有图层</summary>  
         public ObservableCollection<Layer> Layers = new ObservableCollection<Layer>();    
     
+
         public void Insert(Layer layer)
         {
             if (this.Layers.Count==0)
@@ -192,5 +192,7 @@ namespace Retouch_Photo.Library
 
         }
 
-    }
+
+
+     }
 }

@@ -8,13 +8,14 @@
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     xmlns:lib="using:Retouch_Photo.Library"
     mc:Ignorable="d"
+    Drop="UserControl_Drop"
     d:DesignHeight="800"
     d:DesignWidth="800">
 
     <UserControl.Resources>
 
         <!--Pointer-->
-        <lib:CanvasOperator  x:Key="AAAAAAAAAAAA"
+        <lib:CanvasOperator  x:Key="CanvasOperator"
    
             DestinationControl="{Binding ElementName=CanvasControl}"
             
@@ -36,8 +37,6 @@
         
     </UserControl.Resources>
     
+        <canvas:CanvasControl x:Name="CanvasControl" Draw="CanvasControl_Draw" />
     
-        <canvas:CanvasControl x:Name="CanvasControl"
-        Draw="CanvasControl_Draw"
-        />
 </UserControl>

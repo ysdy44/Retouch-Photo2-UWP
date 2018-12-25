@@ -1,12 +1,18 @@
-﻿using Retouch_Photo.Models;
+﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo.Models;
+using Retouch_Photo.Models.Layers;
 using Retouch_Photo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -46,10 +52,31 @@ namespace Retouch_Photo.Controls
                 this.ViewModel.Invalidate();
             }
         }
-        private void AddButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void AddButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            FileOpenPicker openPicker = new FileOpenPicker
+            {
+                ViewMode = PickerViewMode.Thumbnail,
+                SuggestedStartLocation = PickerLocationId.PicturesLibrary,
+                FileTypeFilter =
+                {
+                     ".jpg",
+                     ".jpeg",
+                     ".png",
+                     ".bmp",
+                }
+            };
+
+            StorageFile file = await openPicker.PickSingleFileAsync();
+            if (file == null) return;
+            Layer layer = await ImageLayer.CreateFromFlie(this.ViewModel.CanvasControl, file);
+
+            layer.Transformer.Postion = this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasCenter - new Vector2(layer.Transformer.Width, layer.Transformer.Height) / 2;
+
+            this.ViewModel.RenderLayer.Insert(layer);
+            this.ViewModel.Invalidate();
         }
-        
+
 
         //Layer
         private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)

@@ -158,9 +158,13 @@ namespace Retouch_Photo.Controls
         }
 
 
+
+
         #endregion
 
+        private void UserControl_Drop(object sender, DragEventArgs e)
+        {
 
-
+        }
     }
 }

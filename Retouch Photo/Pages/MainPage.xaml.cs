@@ -151,16 +151,18 @@ namespace Retouch_Photo.Pages
             FileOpenPicker openPicker = new FileOpenPicker
             {
                 ViewMode = PickerViewMode.Thumbnail,
-                SuggestedStartLocation = location
+                SuggestedStartLocation =location,
+                FileTypeFilter =
+                {
+                     ".jpg",
+                     ".jpeg",
+                     ".png",
+                     ".bmp",
+                }
             };
-            openPicker.FileTypeFilter.Add(".jpg");
-            openPicker.FileTypeFilter.Add(".jpeg");
-            openPicker.FileTypeFilter.Add(".png");
-            openPicker.FileTypeFilter.Add(".bmp");
 
             StorageFile file = await openPicker.PickSingleFileAsync();
             if (file == null) return;
-
             this.Frame.Navigate(typeof(DrawPage), file);//Navigate        
         }
 

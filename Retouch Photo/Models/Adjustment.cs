@@ -20,7 +20,22 @@ namespace Retouch_Photo.Models
         public FrameworkElement Icon;
         public AdjustmentCandidate Candidate;
         
-        public abstract ICanvasImage GetAdjustment(ICanvasImage image);
+        public abstract ICanvasImage GetRender(ICanvasImage image);
+
+
+        //@static
+        public static ICanvasImage Render(List<Adjustment> adjustments, ICanvasImage image)
+        {
+            if (adjustments == null) return image;
+            if (adjustments.Count == 0) return image;
+            if (adjustments.Count == 1) return adjustments.Single().GetRender(image);
+
+            foreach (var item in adjustments)
+            {
+                image = item.GetRender(image);
+            }
+            return image;
+        }
 
 
         //Delegate

@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo.Models;
 using Retouch_Photo.Models.Adjustments;
+using Retouch_Photo.Models.Blends;
 using Retouch_Photo.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -26,41 +27,73 @@ namespace Retouch_Photo.Controls.LayerControls
 
 
         #region DependencyProperty
+        
+        public Layer Layer
+        {
+            get { return (Layer)GetValue(LayerProperty); }
+            set { SetValue(LayerProperty,value); }
+        }
+        public static readonly DependencyProperty LayerProperty =  DependencyProperty.Register(nameof(Layer),typeof(Layer),typeof(LayerPropertyControl),new PropertyMetadata(null,(sender,e)=> 
+        {
+            LayerPropertyControl con = (LayerPropertyControl)sender;
 
-        public Layer Layer{get; set ; }
-
+            if (e.NewValue is Layer layer)
+            {
+                con.Invalidate(layer.Adjustments);
+            }
+        }));
+        
         #endregion
 
 
         public LayerPropertyControl()
         {
             this.InitializeComponent();
+                       
+            Adjustment.RemoveChanged += (adjustment) =>
+            {
+                this.Remove(adjustment);
+            };
         }
         
 
-        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e) => this.ViewModel.Invalidate();
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => this.ViewModel.Invalidate();
+        private void Slider_ValueChanged(object sender,RangeBaseValueChangedEventArgs e) => this.ViewModel.Invalidate();
+        private void ComboBox_SelectionChanged(object sender,SelectionChangedEventArgs e) => this.ViewModel.Invalidate();
 
 
         private void LayerAdjustmentCandidateControl_AddChanged(Adjustment adjustment) => this.Add(adjustment);
         private void LayerAdjustmentControl_RemoveChanged(Adjustment adjustment) => this.Remove(adjustment);
-        private void EffectButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private void EffectButton_Tapped(object sender,TappedRoutedEventArgs e)
         {
         }
+
 
 
         //Adjustment
         private void Add(Adjustment adjustment)
         {
             this.Layer.Adjustments.Add(adjustment);
-            this.LayerAdjustmentControl.Invalidate();
+            this.Invalidate(this.Layer.Adjustments);
             this.ViewModel.Invalidate();
         }
         private void Remove(Adjustment adjustment)
         {
             this.Layer.Adjustments.Remove(adjustment);
-            this.LayerAdjustmentControl.Invalidate();
+            this.Invalidate(this.Layer.Adjustments);
             this.ViewModel.Invalidate();
+        }
+
+
+        public void Invalidate(List<Adjustment> adjustments)
+        {
+            if (adjustments == null) return;
+
+            this.AdjustmentsItemsControl.ItemsSource = null;
+            this.AdjustmentsItemsControl.ItemsSource = adjustments;
+
+            this.AdjustmentTextBlock.Visibility =
+            this.AdjustmentBorder.Visibility =
+                 adjustments.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
         }
 
     }

@@ -3,8 +3,11 @@ using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo.ViewModels;
 using System;
 using System.Numerics;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Graphics.Effects;
+using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI;
 
 namespace Retouch_Photo.Models.Layers
@@ -18,7 +21,7 @@ namespace Retouch_Photo.Models.Layers
         public CanvasBitmap Image { set; get; }
 
 
-        public override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
+        protected override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
             return new Transform2DEffect
             {
@@ -57,6 +60,26 @@ namespace Retouch_Photo.Models.Layers
                 Transformer = Transformer.CreateFromSize(width, height),
                 Image = bitmap
             };
+        }
+
+        public static async Task<ImageLayer> CreateFromFlie(ICanvasResourceCreatorWithDpi resourceCreator, StorageFile file)
+        {
+            try
+            {
+                using (IRandomAccessStream stream = await file.OpenReadAsync())
+                {
+                    CanvasBitmap bitmap = await CanvasBitmap.LoadAsync(resourceCreator, stream, 96);
+
+                    int width = (int)bitmap.SizeInPixels.Width;
+                    int height = (int)bitmap.SizeInPixels.Height;
+
+                    return ImageLayer.CreateFromBitmap(resourceCreator, bitmap, width, height);
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
 

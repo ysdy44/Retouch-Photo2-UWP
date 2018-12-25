@@ -95,8 +95,11 @@ namespace Retouch_Photo.Library
         public Matrix3x2 ControlToVirtualMatrix => Matrix3x2.CreateTranslation(-this.Position) * Matrix3x2.CreateRotation(-this.Radian);
         public Matrix3x2 VirtualToCanvasMatrix => Matrix3x2.CreateScale(1 / this.Scale) * Matrix3x2.CreateTranslation(this.Width / 2, this.Height / 2);
 
+        /// <summary>
+        /// The Control's center transform to Canvas
+        /// </summary>
+        public Vector2 ControlToVirtualToCanvasCenter => Vector2.Transform(new Vector2(this.ControlWidth, this.ControlHeight) / 2, this.ControlToVirtualToCanvasMatrix);
 
-         
 
     }
 }

@@ -13,7 +13,7 @@ namespace Retouch_Photo.Models.Adjustments
             base.Candidate = candidate;
         }
 
-        public override ICanvasImage GetAdjustment(ICanvasImage image)
+        public override ICanvasImage GetRender(ICanvasImage image)
         {
             return new ExposureEffect
             {
