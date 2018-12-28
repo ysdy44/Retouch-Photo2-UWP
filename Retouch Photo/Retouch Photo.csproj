@@ -307,10 +307,14 @@
     <Compile Include="Library\RenderLayer.cs" />
     <Compile Include="Library\MatrixTransformer.cs" />
     <Compile Include="Models\Adjustment.cs" />
+    <Compile Include="Models\Adjustments\ContrastAdjustment.cs" />
     <Compile Include="Models\Adjustments\ExposureAdjustment.cs" />
     <Compile Include="Models\Adjustments\GrayAdjustment.cs" />
+    <Compile Include="Models\Adjustments\HighlightsAndShadowsAdjustment.cs" />
+    <Compile Include="Models\Adjustments\HueRotationAdjustment.cs" />
     <Compile Include="Models\Adjustments\InvertAdjustment.cs" />
     <Compile Include="Models\Adjustments\SaturationAdjustment.cs" />
+    <Compile Include="Models\Adjustments\TemperatureAdjustment.cs" />
     <Compile Include="Models\Blend.cs" />
     <Compile Include="Models\Blends\ColorBlend.cs" />
     <Compile Include="Models\Blends\ColorBurnBlend.cs" />
@@ -359,11 +363,23 @@
     <Compile Include="Models\Transformer.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\VectRect.cs" />
+    <Compile Include="Pages\AdjustmentPages\AdjustmentContrastPage.xaml.cs">
+      <DependentUpon>AdjustmentContrastPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AdjustmentPages\AdjustmentExposurePage.xaml.cs">
       <DependentUpon>AdjustmentExposurePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AdjustmentPages\AdjustmentHighlightsAndShadowsPage.xaml.cs">
+      <DependentUpon>AdjustmentHighlightsAndShadowsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdjustmentPages\AdjustmentHueRotationPage.xaml.cs">
+      <DependentUpon>AdjustmentHueRotationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AdjustmentPages\AdjustmentSaturationPage.xaml.cs">
       <DependentUpon>AdjustmentSaturationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdjustmentPages\AdjustmentTemperaturePage.xaml.cs">
+      <DependentUpon>AdjustmentTemperaturePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DrawLayout.xaml.cs">
       <DependentUpon>DrawLayout.xaml</DependentUpon>
@@ -1120,11 +1136,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\AdjustmentPages\AdjustmentContrastPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AdjustmentPages\AdjustmentExposurePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\AdjustmentPages\AdjustmentHighlightsAndShadowsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdjustmentPages\AdjustmentHueRotationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AdjustmentPages\AdjustmentSaturationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdjustmentPages\AdjustmentTemperaturePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

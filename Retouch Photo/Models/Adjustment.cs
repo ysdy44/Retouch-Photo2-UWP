@@ -19,9 +19,9 @@ namespace Retouch_Photo.Models
     /// </summary>
     public abstract class Adjustment
     {
-        public AdjustmentType Type { get; protected set; }
-        public FrameworkElement Icon { get; protected set; }
-        public bool HasPage { get; protected set; }
+        public AdjustmentType Type;
+        public FrameworkElement Icon;
+        public bool HasPage;
 
         public abstract void Reset();
         public abstract ICanvasImage GetRender(ICanvasImage image);
@@ -48,9 +48,9 @@ namespace Retouch_Photo.Models
     /// </summary>
     public abstract class AdjustmentCandidate
     {
-        public AdjustmentType Type { get; protected set; }
-        public FrameworkElement Icon { get; protected set; }
-        public FrameworkElement Page { get; protected set; }
+        public AdjustmentType Type;
+        public FrameworkElement Icon;
+        public FrameworkElement Page;
         
         public abstract Adjustment GetNewAdjustment();
         public abstract void SetPage(Adjustment adjustment);
@@ -63,6 +63,10 @@ namespace Retouch_Photo.Models
             new InvertAdjustmentCandidate(),
             new ExposureAdjustmentCandidate(),
             new SaturationAdjustmentCandidate(),
+            new HueRotationAdjustmentCandidate(),
+            new ContrastAdjustmentCandidate(),
+            new TemperatureAdjustmentCandidate(),
+            new HighlightsAndShadowsAdjustmentCandidate(),
         };
     }
 
