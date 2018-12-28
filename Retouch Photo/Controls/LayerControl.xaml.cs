@@ -37,10 +37,17 @@ namespace Retouch_Photo.Controls
         //Flyout
         private void LayerLayoutControl_FlyoutShow(UserControl control, Layer layer)
         {
-            this.LayerPropertyControl.Layer = layer;
+            this.LayerFlyoutControl.Layer = layer;
             this.PropertyFlyout.ShowAt(control);
         }
                
+        //Layer
+        private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            e.Handled = true;
+            this.ViewModel.Invalidate();
+        }
+
 
         //ListView
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e) => this.ViewModel.Invalidate();
@@ -52,6 +59,8 @@ namespace Retouch_Photo.Controls
                 this.ViewModel.Invalidate();
             }
         }
+
+
         private async void AddButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             FileOpenPicker openPicker = new FileOpenPicker
@@ -78,11 +87,5 @@ namespace Retouch_Photo.Controls
         }
 
 
-        //Layer
-        private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            e.Handled = true;
-            this.ViewModel.Invalidate();
-        }
     }
 }

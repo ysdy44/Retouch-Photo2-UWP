@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo.Models;
+using Retouch_Photo.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -8,9 +9,9 @@ namespace Retouch_Photo.Controls.LayerControls
     public sealed partial class LayerLayoutControl : UserControl
     {
 
-        public UIElement Frist { get => this.FristBoder.Child; set => this.FristBoder.Child = value; }
-        public UIElement Second { get => this.SecondBoder.Child; set => this.SecondBoder.Child = value; }
-        public UIElement Third { get => this.ThirdBoder.Child; set => this.ThirdBoder.Child = value; }
+
+        //ViewModel
+        DrawViewModel ViewModel => App.ViewModel;
 
 
         #region DependencyProperty
@@ -20,7 +21,20 @@ namespace Retouch_Photo.Controls.LayerControls
             get { return (Layer)GetValue(LayerProperty); }
             set { SetValue(LayerProperty, value); }
         }
-        public static readonly DependencyProperty LayerProperty = DependencyProperty.Register(nameof(Layer), typeof(Layer), typeof(LayerLayoutControl), new PropertyMetadata(null));
+        public static readonly DependencyProperty LayerProperty = DependencyProperty.Register(nameof(Layer), typeof(Layer), typeof(LayerLayoutControl), new PropertyMetadata(null, (sender,e) =>
+        {
+            LayerLayoutControl con = (LayerLayoutControl)sender;
+
+            if (e.NewValue is Layer layer)
+            {
+                con.CheckBox.IsChecked = layer.IsVisual;
+
+                layer.CanvasControl = con.CanvasControl;
+                layer.CanvasControl .Draw+=(sender2, args) => layer.ThumbnailDraw(sender2, args.DrawingSession, sender2.Size);
+
+                con.TextBlock.Text = layer.Name;
+            }
+        }));
 
         #endregion
 
@@ -51,6 +65,18 @@ namespace Retouch_Photo.Controls.LayerControls
             this.element = (Grid)sender;
         }
 
+
+
+        private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            e.Handled = true;
+
+            if (this.Layer == null) return;
+
+            this.Layer.IsVisual = this.CheckBox.IsChecked??false;
+            this.ViewModel.Invalidate();
+        }
+        
 
     }
 }

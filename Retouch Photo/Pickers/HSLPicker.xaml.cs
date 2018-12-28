@@ -1,5 +1,4 @@
-﻿using System;
-using Windows.UI;
+﻿using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -17,7 +16,7 @@ namespace Retouch_Photo.Pickers
         #region DependencyProperty
 
 
-        private Color color = Color.FromArgb(255,255,255,255);
+        private Color color = Color.FromArgb(255, 255, 255, 255);
         public Color Color
         {
             get => color;
@@ -34,13 +33,16 @@ namespace Retouch_Photo.Pickers
             get { return (HSL)GetValue(HSLProperty); }
             set { SetValue(HSLProperty, value); }
         }
-        public static readonly DependencyProperty HSLProperty = DependencyProperty.Register(nameof(HSL), typeof(HSL), typeof(HSLPicker), new PropertyMetadata(new HSL(255,360,100, 100), new PropertyChangedCallback(HSLOnChanged)));
-        private static void HSLOnChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        public static readonly DependencyProperty HSLProperty = DependencyProperty.Register(nameof(HSL), typeof(HSL), typeof(HSLPicker), new PropertyMetadata(new HSL(255, 360, 100, 100), (sender, e) =>
         {
             HSLPicker con = (HSLPicker)sender;
 
-            if (e.NewValue is HSL NewValue) con.HSLChanged(NewValue);
-        }
+            if (e.NewValue is HSL NewValue)
+            {
+                con.HSLChanged(NewValue);
+            }
+        }));
+     
         private void HSLChanged(HSL value)
         {
             byte A = value.A;
@@ -49,7 +51,7 @@ namespace Retouch_Photo.Pickers
             double L = value.L;
 
             //H          
-           this. HSlider.Value = this.HPicker.Value = (int)H;
+            this.HSlider.Value = this.HPicker.Value = (int)H;
             this.HG.Color = this.HA.Color = HSL.HSLtoRGB(A, 0, S, L);
             this.HB.Color = HSL.HSLtoRGB(A, 60, S, L);
             this.HC.Color = HSL.HSLtoRGB(A, 120, S, L);

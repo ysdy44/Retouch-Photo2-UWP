@@ -32,13 +32,13 @@ namespace Retouch_Photo.Controls.LayerControls
             get { return (int)GetValue(BlendIndexProperty); }
             set { SetValue(BlendIndexProperty, value); }
         }
-        public static readonly DependencyProperty BlendIndexProperty = DependencyProperty.Register(nameof(BlendIndex), typeof(Layer), typeof(LayerBlendControl), new PropertyMetadata(null, (sender, e) =>
+        public static readonly DependencyProperty BlendIndexProperty = DependencyProperty.Register(nameof(BlendIndex), typeof(Layer), typeof(LayerBlendControl), new PropertyMetadata(0, (sender, e) =>
         {
             LayerBlendControl con = (LayerBlendControl)sender;
 
             if (e.NewValue is int value)
             {
-                if (value <0) return;
+                if (value < 0) return;
                 if (value >= con.ComboBox.Items.Count) return;
 
                 if (con.ComboBox.SelectedIndex == value) return;
@@ -50,6 +50,10 @@ namespace Retouch_Photo.Controls.LayerControls
         #endregion
 
 
+        //Delegate
+        public delegate void IndexChangedHandler(int index);
+        public event IndexChangedHandler IndexChanged = null;
+
 
         public LayerBlendControl()
         {
@@ -60,16 +64,14 @@ namespace Retouch_Photo.Controls.LayerControls
         {
             this.ComboBox.ItemsSource = Blend.BlendList;
 
-            this.ComboBox.SelectedIndex = 0;
+            if (this.ComboBox.SelectedIndex < 0) this.ComboBox.SelectedIndex = 0;
         }
-
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (this.BlendIndex == this.ComboBox.SelectedIndex) return;
-
-            this.BlendIndex = this.ComboBox.SelectedIndex;
-
-            this.ViewModel.Invalidate();
+            int index = this.ComboBox.SelectedIndex;
+            if (this.BlendIndex == index) return;
+            this.BlendIndex = index;
+            this.IndexChanged?.Invoke(index);
         }
 
     }

@@ -12,6 +12,12 @@
     d:DesignHeight="50"
     d:DesignWidth="400">
 
+    <Page.Resources>
+        <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <pic:ColorPicker x:Name="ColorPicker" Width="200" Height="270" ColorChange="ColorPicker_ColorChange"/>
+        </Flyout>
+    </Page.Resources>
+
     <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
         <StackPanel Orientation="Horizontal" Height="50" Padding="4">
             <pageControls:PageModeControl Mode="{x:Bind ViewModel.MarqueeMode,Mode=TwoWay}" />
@@ -20,11 +26,6 @@
                 <Border.Background>
                     <SolidColorBrush x:Name="ColorBrush" Color="Transparent"/>
                 </Border.Background>
-                <FlyoutBase.AttachedFlyout>
-                    <Flyout x:Name="ColorFlyout">
-                        <pic:ColorPicker x:Name="ColorPicker" Width="200" Height="270" ColorChange="ColorPicker_ColorChange"/>
-                    </Flyout>
-                </FlyoutBase.AttachedFlyout>
             </Border>
         </StackPanel>
     </ScrollViewer>

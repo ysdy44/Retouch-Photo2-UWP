@@ -209,7 +209,7 @@
                                 </Grid.RowDefinitions>
                                 
                                 <Rectangle x:Name="HorizontalTrackRect" Grid.Row="1" Grid.ColumnSpan="3" StrokeThickness="1" Stroke="{TemplateBinding BorderBrush}" Fill="{TemplateBinding Background}"/>
-                                <Rectangle x:Name="HorizontalDecreaseRect" Fill="{TemplateBinding Foreground}" Grid.Row="1" />
+                                <Rectangle x:Name="HorizontalDecreaseRect" StrokeThickness="1" Stroke="{TemplateBinding BorderBrush}" Fill="{TemplateBinding Foreground}" Grid.Row="1" />
 
                                 <TickBar x:Name="TopTickBar" Grid.ColumnSpan="3" Visibility="Collapsed" Fill="{TemplateBinding BorderBrush}" Height="{ThemeResource SearchBoxTextBoxThemeMinHeight}" VerticalAlignment="Bottom" Margin="0,0,0,4" />
                                 <TickBar x:Name="HorizontalInlineTickBar" Grid.Row="1" Grid.ColumnSpan="3" Visibility="Collapsed" Fill="{TemplateBinding BorderBrush}" Height="{ThemeResource SearchBoxTextBoxThemeMinHeight}" />
@@ -230,7 +230,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Rectangle x:Name="VerticalTrackRect" Grid.Column="1" Grid.RowSpan="3" StrokeThickness="1" Stroke="{TemplateBinding BorderBrush}" Fill="{TemplateBinding Background}"/>
-                                <Rectangle x:Name="VerticalDecreaseRect" Grid.Column="1" Grid.Row="2" Fill="{TemplateBinding Foreground}" />
+                                <Rectangle x:Name="VerticalDecreaseRect" Grid.Column="1" Grid.Row="2" StrokeThickness="1" Stroke="{TemplateBinding BorderBrush}" Fill="{TemplateBinding Foreground}" />
                            
                                 <TickBar x:Name="LeftTickBar" Grid.RowSpan="3" Visibility="Collapsed" Fill="{TemplateBinding BorderBrush}" Width="{ThemeResource SearchBoxTextBoxThemeMinHeight}" HorizontalAlignment="Right" Margin="0,0,4,0" />
                                 <TickBar x:Name="VerticalInlineTickBar" Grid.Column="1" Grid.RowSpan="3" Visibility="Collapsed" Fill="{ThemeResource SliderInlineTickBarFill}" Width="{ThemeResource SearchBoxTextBoxThemeMinHeight}" />

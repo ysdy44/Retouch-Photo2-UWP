@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     xmlns:lib="using:Retouch_Photo.Library"
+    xmlns:blendcontrol="using:Retouch_Photo.Controls.BlendControl"
     mc:Ignorable="d"
     Drop="UserControl_Drop"
     d:DesignHeight="800"
@@ -36,7 +37,7 @@
             />
         
     </UserControl.Resources>
-    
-        <canvas:CanvasControl x:Name="CanvasControl" Draw="CanvasControl_Draw" />
-    
+
+    <canvas:CanvasControl x:Name="CanvasControl" Draw="CanvasControl_Draw" />
+
 </UserControl>

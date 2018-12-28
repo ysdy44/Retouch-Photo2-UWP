@@ -79,7 +79,7 @@ namespace Retouch_Photo.Pickers
 
         float StrokeWidth = 8;
         float SquareRadio => (this.Radio - this.StrokeWidth) / 1.414213562373095f;
-
+         
 
         public WheelPicker()
         {

@@ -58,8 +58,8 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels
         {
             Transformer.DrawBoundNodesWithRotation(ds, layer.Transformer, this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
 
-            Transformer.DrawLine(ds, this.Center, Transformer.RadiansToVector(this.StartRadian, this.Center));
-            Transformer.DrawLine(ds, this.Center, Transformer.RadiansToVector(this.Radian, this.Center));
+            ds.DrawLine(this.Center, Transformer.RadiansToVector(this.StartRadian, this.Center), Colors.Gray);
+            ds.DrawLine(this.Center, Transformer.RadiansToVector(this.Radian, this.Center), Colors.Gray);
         }
     }
 }

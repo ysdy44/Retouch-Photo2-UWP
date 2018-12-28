@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo.Models.Adjustments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +10,21 @@ using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo.Models
 {
+
+    public delegate void AdjustmentHandler(Adjustment adjustment);
+
     /// <summary>
     /// Adjustment: 调整。
     /// 给图层提供调整。
     /// </summary>
     public abstract class Adjustment
     {
-        public AdjustmentType Type;
+        public AdjustmentType Type { get; protected set; }
+        public FrameworkElement Icon { get; protected set; }
+        public bool HasPage { get; protected set; }
 
-        public FrameworkElement Icon;
-        public AdjustmentCandidate Candidate;
-        
+        public abstract void Reset();
         public abstract ICanvasImage GetRender(ICanvasImage image);
-
 
         //@static
         public static ICanvasImage Render(List<Adjustment> adjustments, ICanvasImage image)
@@ -36,12 +39,6 @@ namespace Retouch_Photo.Models
             }
             return image;
         }
-
-
-        //Delegate
-        public delegate void RemoveChangedHandler(Adjustment adjustment);
-        public static event RemoveChangedHandler RemoveChanged = null;
-        public void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e) => Adjustment.RemoveChanged?.Invoke(this);
     }
 
     /// <summary>
@@ -51,13 +48,22 @@ namespace Retouch_Photo.Models
     /// </summary>
     public abstract class AdjustmentCandidate
     {
-        public AdjustmentType Type;
-
-        public FrameworkElement Icon;
-        public FrameworkElement Page;
-        //public AdjustmentCViewModel ViewModel;
-
+        public AdjustmentType Type { get; protected set; }
+        public FrameworkElement Icon { get; protected set; }
+        public FrameworkElement Page { get; protected set; }
+        
         public abstract Adjustment GetNewAdjustment();
+        public abstract void SetPage(Adjustment adjustment);
+
+        //@static
+        public static AdjustmentCandidate GetAdjustmentCandidate(AdjustmentType type) => AdjustmentCandidate.AdjustmentCandidateList.First(e => e.Type == type);
+        public static List<AdjustmentCandidate> AdjustmentCandidateList = new List<AdjustmentCandidate>()
+        {
+            new GrayAdjustmentCandidate(),
+            new InvertAdjustmentCandidate(),
+            new ExposureAdjustmentCandidate(),
+            new SaturationAdjustmentCandidate(),
+        };
     }
 
     public enum AdjustmentType

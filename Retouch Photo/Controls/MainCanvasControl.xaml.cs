@@ -61,7 +61,6 @@ namespace Retouch_Photo.Controls
         #region Right
 
 
-        //右键
         Vector2 rightStartPoint;
         Vector2 rightStartPosition;
         private void Right_Start(Vector2 point)
@@ -94,7 +93,7 @@ namespace Retouch_Photo.Controls
         float doubleStartSpace;
         private void Double_Start(Vector2 center, float space)
         {
-            this.doubleStartCenter = center;
+            this.doubleStartCenter = (center - this.ViewModel.MatrixTransformer.Position) / this.ViewModel.MatrixTransformer.Scale + new Vector2(this.ViewModel.MatrixTransformer.ControlWidth / 2, this.ViewModel.MatrixTransformer.ControlHeight / 2);
             this.doubleStartPosition = this.ViewModel.MatrixTransformer.Position;
 
             this.doubleStartSpace = space;
@@ -104,9 +103,9 @@ namespace Retouch_Photo.Controls
         }
         private void Double_Delta(Vector2 center, float space)
         {
-            this.ViewModel.MatrixTransformer.Position = this.doubleStartPosition - this.doubleStartCenter + center;
-
             this.ViewModel.MatrixTransformer.Scale = this.doubleStartScale / this.doubleStartSpace * space;
+
+            this.ViewModel.MatrixTransformer.Position = center - (this.doubleStartCenter - new Vector2(this.ViewModel.MatrixTransformer.ControlWidth / 2, this.ViewModel.MatrixTransformer.ControlHeight / 2)) * this.ViewModel.MatrixTransformer.Scale;
 
             this.ViewModel.Invalidate();
         }

@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Retouch_Photo.Controls.LayerControls
 {
-    public sealed partial class LayerPropertyControl : UserControl
+    public sealed partial class LayerFlyoutControl : UserControl
     {
 
         //ViewModel
@@ -33,12 +33,13 @@ namespace Retouch_Photo.Controls.LayerControls
             get { return (Layer)GetValue(LayerProperty); }
             set { SetValue(LayerProperty,value); }
         }
-        public static readonly DependencyProperty LayerProperty =  DependencyProperty.Register(nameof(Layer),typeof(Layer),typeof(LayerPropertyControl),new PropertyMetadata(null,(sender,e)=> 
+        public static readonly DependencyProperty LayerProperty =  DependencyProperty.Register(nameof(Layer),typeof(Layer),typeof(LayerFlyoutControl),new PropertyMetadata(null,(sender,e)=> 
         {
-            LayerPropertyControl con = (LayerPropertyControl)sender;
+            LayerFlyoutControl con = (LayerFlyoutControl)sender;
 
             if (e.NewValue is Layer layer)
             {
+                con.LayerAdjustmentContextControl.Visibility = Visibility.Collapsed;
                 con.Invalidate(layer.Adjustments);
             }
         }));
@@ -46,28 +47,41 @@ namespace Retouch_Photo.Controls.LayerControls
         #endregion
 
 
-        public LayerPropertyControl()
+        public LayerFlyoutControl()
         {
             this.InitializeComponent();
-                       
-            Adjustment.RemoveChanged += (adjustment) =>
-            {
-                this.Remove(adjustment);
-            };
         }
-        
 
+        //Flyout
         private void Slider_ValueChanged(object sender,RangeBaseValueChangedEventArgs e) => this.ViewModel.Invalidate();
-        private void ComboBox_SelectionChanged(object sender,SelectionChangedEventArgs e) => this.ViewModel.Invalidate();
 
-
-        private void LayerAdjustmentCandidateControl_AddChanged(Adjustment adjustment) => this.Add(adjustment);
-        private void LayerAdjustmentControl_RemoveChanged(Adjustment adjustment) => this.Remove(adjustment);
+        private void LayerBlendControl_IndexChanged(int index) => this.ViewModel.Invalidate();
+                
+        private void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e)=>  this.ViewModel.RenderLayer.Remove(this.Layer);
+        private void AdjustmentButton_Tapped(object sender, TappedRoutedEventArgs e) => this.AdjustmentCandidateFlyout.ShowAt((Button)sender);
         private void EffectButton_Tapped(object sender,TappedRoutedEventArgs e)
         {
         }
 
 
+
+        //Adjustment
+        private void LayerAdjustmentControl_AdjustmentRemove(Adjustment adjustment) => this.Remove(adjustment);
+        private void LayerAdjustmentControl_AdjustmentContext(Adjustment adjustment) => this.LayerAdjustmentContextControl.Adjustment = adjustment;
+        //AdjustmentCandidate
+        private void AdjustmentCandidateListView_Loaded(object sender, RoutedEventArgs e)=> ((ListView)sender).ItemsSource = AdjustmentCandidate.AdjustmentCandidateList;
+        private void AdjustmentCandidateListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is AdjustmentCandidate item)
+            {
+                Adjustment adjustment = item.GetNewAdjustment();
+                this.Add(adjustment);
+            }
+            this.AdjustmentCandidateFlyout.Hide();
+        }
+
+
+        #region Adjustment
 
         //Adjustment
         private void Add(Adjustment adjustment)
@@ -95,6 +109,15 @@ namespace Retouch_Photo.Controls.LayerControls
             this.AdjustmentBorder.Visibility =
                  adjustments.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
         }
+
+
+
+
+
+
+
+        #endregion
+
 
     }
 }

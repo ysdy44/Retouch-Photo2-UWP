@@ -230,8 +230,11 @@
     <Compile Include="Controls\LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LayerControls\LayerAdjustmentCandidateControl.xaml.cs">
-      <DependentUpon>LayerAdjustmentCandidateControl.xaml</DependentUpon>
+    <Compile Include="Controls\LayerControls\LayerAdjustmentControl.xaml.cs">
+      <DependentUpon>LayerAdjustmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LayerControls\LayerAdjustmentContextControl.xaml.cs">
+      <DependentUpon>LayerAdjustmentContextControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\LayerControls\LayerBlendControl.xaml.cs">
       <DependentUpon>LayerBlendControl.xaml</DependentUpon>
@@ -239,8 +242,8 @@
     <Compile Include="Controls\LayerControls\LayerLayoutControl.xaml.cs">
       <DependentUpon>LayerLayoutControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LayerControls\LayerPropertyControl.xaml.cs">
-      <DependentUpon>LayerPropertyControl.xaml</DependentUpon>
+    <Compile Include="Controls\LayerControls\LayerFlyoutControl.xaml.cs">
+      <DependentUpon>LayerFlyoutControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\LoadingControl.xaml.cs">
       <DependentUpon>LoadingControl.xaml</DependentUpon>
@@ -307,6 +310,7 @@
     <Compile Include="Models\Adjustments\ExposureAdjustment.cs" />
     <Compile Include="Models\Adjustments\GrayAdjustment.cs" />
     <Compile Include="Models\Adjustments\InvertAdjustment.cs" />
+    <Compile Include="Models\Adjustments\SaturationAdjustment.cs" />
     <Compile Include="Models\Blend.cs" />
     <Compile Include="Models\Blends\ColorBlend.cs" />
     <Compile Include="Models\Blends\ColorBurnBlend.cs" />
@@ -357,6 +361,9 @@
     <Compile Include="Models\VectRect.cs" />
     <Compile Include="Pages\AdjustmentPages\AdjustmentExposurePage.xaml.cs">
       <DependentUpon>AdjustmentExposurePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdjustmentPages\AdjustmentSaturationPage.xaml.cs">
+      <DependentUpon>AdjustmentSaturationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DrawLayout.xaml.cs">
       <DependentUpon>DrawLayout.xaml</DependentUpon>
@@ -1021,7 +1028,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\LayerControls\LayerAdjustmentCandidateControl.xaml">
+    <Page Include="Controls\LayerControls\LayerAdjustmentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LayerControls\LayerAdjustmentContextControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1033,7 +1044,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\LayerControls\LayerPropertyControl.xaml">
+    <Page Include="Controls\LayerControls\LayerFlyoutControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1110,6 +1121,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AdjustmentPages\AdjustmentExposurePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdjustmentPages\AdjustmentSaturationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

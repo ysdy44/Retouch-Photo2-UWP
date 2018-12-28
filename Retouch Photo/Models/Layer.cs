@@ -24,60 +24,22 @@ using Retouch_Photo.Models.Blends;
 
 namespace Retouch_Photo.Models
 {
-    public abstract class Layer: INotifyPropertyChanged
+    public abstract class Layer
     {
 
-        #region Property
 
-        private string name = "Layer";
-        public string Name
-        {
-            get => name;
-            set
-            {
-                name = value;
-                OnPropertyChanged(nameof(Name));
-            }
-        }
+        public string Name= "Layer";
         
-        private double opacity = 100;
-        public double Opacity
-        {
-            get => opacity;
-            set
-            {
-                opacity = value;
-                OnPropertyChanged(nameof(Opacity));
-            }
-        }
+        public double Opacity = 100;
 
-        private bool isVisual = true;
-        public bool IsVisual
-        {
-            get => isVisual;
-            set
-            {
-                isVisual = value;
-                OnPropertyChanged(nameof(IsVisual));
-            }
-        }
+        public bool IsVisual= true;
 
-        private int blendIndex;
-        public int BlendIndex
-        {
-            get => blendIndex;
-            set
-            {
-                blendIndex = value;
-                OnPropertyChanged(nameof(BlendIndex));
-            }
-        }
+        public int BlendIndex;
         
         public Transformer Transformer;
 
         public List<Adjustment> Adjustments = new List<Adjustment>();
 
-        #endregion
                      
 
         #region Thumbnail
@@ -86,15 +48,12 @@ namespace Retouch_Photo.Models
         //@override
         public abstract void ThumbnailDraw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Size controlSize);
 
-
-        CanvasControl sender;
-        public void CanvasControl_CreateResources(CanvasControl sender, CanvasCreateResourcesEventArgs args) => this.sender = sender;
-        public void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args) => this.ThumbnailDraw(sender, args.DrawingSession, sender.Size);
+        public CanvasControl CanvasControl;
         public void Invalidate()
         {
-            if (sender == null) return;
+            if (this.CanvasControl == null) return;
 
-            this.sender.Invalidate();
+            this.CanvasControl.Invalidate();
         }
 
 
@@ -181,8 +140,5 @@ namespace Retouch_Photo.Models
             );
         }
         
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string name) =>this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

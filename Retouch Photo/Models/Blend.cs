@@ -4,6 +4,7 @@ using Retouch_Photo.Models.Blends;
 using System.Linq;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
+using Retouch_Photo.Controls.BlendControl;
 
 namespace Retouch_Photo.Models
 {
@@ -11,12 +12,12 @@ namespace Retouch_Photo.Models
     {
         public BlendType Type;
         public FrameworkElement Icon => this.GetIcon();
+        protected abstract FrameworkElement GetIcon();
 
-        protected abstract FrameworkElement GetIcon( );
         protected abstract ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground);
-
-
         public static ICanvasImage Render(ICanvasImage background, ICanvasImage foreground, BlendType type) => Blend.BlendList.FirstOrDefault(e => e.Type == type).GetRender(background, foreground);
+        
+        //@static
         public static List<Blend> BlendList = new List<Blend>
         {
              new NormalBlend(),//正常

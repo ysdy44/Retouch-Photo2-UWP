@@ -5,6 +5,7 @@
     xmlns:local="using:Retouch_Photo.Controls.LayerControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
@@ -80,9 +81,21 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border x:Name="ThirdBoder" Grid.Column="2" Margin="4" VerticalAlignment="Center" />
-        <Border x:Name="SecondBoder" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" />
-        <Border x:Name="FristBoder" Margin="2" />
+        <Border x:Name="ThirdBoder" Grid.Column="2" Margin="4" VerticalAlignment="Center" >
+            <TextBlock x:Name="TextBlock" FontWeight="Medium" />
+        </Border>
+
+        <Border x:Name="SecondBoder" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" >
+            <canvas:CanvasControl x:Name="CanvasControl" />
+        </Border>
+
+        <Border x:Name="FristBoder" Margin="2" >
+            <CheckBox x:Name="CheckBox" Background="{ThemeResource AppBackground}" Tapped="CheckBox_Tapped">
+                <CheckBox.Clip>
+                    <RectangleGeometry Rect="0,0,20,30"/>
+                </CheckBox.Clip>
+            </CheckBox>
+        </Border>
 
     </Grid>
 </UserControl>

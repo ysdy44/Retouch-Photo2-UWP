@@ -17,36 +17,12 @@
 
         <!--DataTemplate-->
         <DataTemplate x:Key="DataTemplate" x:DataType="models:Layer">
-            <conLayerControls:LayerLayoutControl Layer="{x:Bind}" FlyoutShow="LayerLayoutControl_FlyoutShow">
-
-                    <conLayerControls:LayerLayoutControl.Frist>
-                        <CheckBox 
-                          IsChecked="{x:Bind IsVisual,Mode=TwoWay}" 
-                          Background="{ThemeResource AppBackground}" 
-                          Tapped="CheckBox_Tapped">
-                            <CheckBox.Clip>
-                                <RectangleGeometry Rect="0,0,20,30"/>
-                            </CheckBox.Clip>
-                        </CheckBox>
-                    </conLayerControls:LayerLayoutControl.Frist>
-
-                    <conLayerControls:LayerLayoutControl.Second>
-                        <canvas:CanvasControl 
-                            Draw="{x:Bind CanvasControl_Draw}" 
-                            CreateResources="{x:Bind CanvasControl_CreateResources}"/>
-                    </conLayerControls:LayerLayoutControl.Second>
-
-                    <conLayerControls:LayerLayoutControl.Third>
-                        <TextBlock 
-                           Text="{x:Bind Name,Mode=OneWay}" 
-                           FontWeight="Medium" />
-                    </conLayerControls:LayerLayoutControl.Third>
-
-                </conLayerControls:LayerLayoutControl>
+            <conLayerControls:LayerLayoutControl Layer="{x:Bind}" FlyoutShow="LayerLayoutControl_FlyoutShow"/>
         </DataTemplate>
+        
         <!--Flyout-->
         <Flyout x:Name="PropertyFlyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle }">
-            <conLayerControls:LayerPropertyControl x:Name="LayerPropertyControl"/>
+            <conLayerControls:LayerFlyoutControl x:Name="LayerFlyoutControl"/>
         </Flyout>
         
         <!--Style-->

@@ -6,14 +6,14 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Retouch_Photo.Pickers
 {
-    /// <summary>
-    /// Color form HSL
-    /// </summary>
+    /// <summary> Color form HSL </summary>
     public class HSL
     {
+
+        /// <summary> Alpha </summary>
         public byte A;
 
-        private double h;
+        /// <summary> Hue </summary>
         public double H
         {
             get => h;
@@ -24,8 +24,9 @@ namespace Retouch_Photo.Pickers
                 else h = value;
             }
         }
+        private double h;
 
-        private double s;
+        /// <summary> Saturation </summary>
         public double S
         {
             get => s;
@@ -36,8 +37,9 @@ namespace Retouch_Photo.Pickers
                 else s = value;
             }
         }
+        private double s;
 
-        private double l;
+        /// <summary> Lightness </summary>
         public double L
         {
             get => l;
@@ -48,48 +50,17 @@ namespace Retouch_Photo.Pickers
                 else l = value;
             }
         }
+        private double l;
+
+
 
         public HSL(byte A, double H, double S, double L) { this.A = A; this.H = H; this.S = S; this.L = L; }
 
 
 
-
-
-        /// <summary>
-        /// HSL to RGB 
-        /// </summary>
-        /// <param name="A">A(W):0~255</param>
-        /// <param name="H">H(X):0~360</param>
-        /// <param name="S">S(Y):0~100</param>
-        /// <param name="L">L(Z):0~100</param>
-        /// <returns>Color form RGB</returns>
-        public static Color HSLtoRGB(byte A, double H, double S, double L)
-        {
-            double s = S / 100.0;
-            double l = L / 100.0;
-            byte ll = (byte)(l * 255.0);
-
-            if (s == 0.0) return Color.FromArgb(A, ll, ll, ll);
-
-            double hh = H % 360.0;
-            double dhh = hh / 60.0;
-            int nhh = (int)Math.Floor(dhh);
-            double rhh = dhh - nhh;
-
-            byte rr = (byte)(l * (1.0 - s) * 255.0);
-            byte gg = (byte)(l * (1.0 - (s * rhh)) * 255.0);
-            byte bb = (byte)(l * (1.0 - (s * (1.0 - rhh))) * 255.0);
-
-            switch (nhh)
-            {
-                case 0: return Color.FromArgb(A, ll, bb, rr);
-                case 1: return Color.FromArgb(A, gg, ll, rr);
-                case 2: return Color.FromArgb(A, rr, ll, bb);
-                case 3: return Color.FromArgb(A, rr, gg, ll);
-                case 4: return Color.FromArgb(A, bb, rr, ll);
-                default: return Color.FromArgb(A, ll, rr, gg);
-            }
-        }
+        /// <summary> RGB to HSL </summary>
+        /// <param name="H"> Hue </param>
+        /// <returns> Color </returns>
         public static Color HSLtoRGB(double H)
         {
             double hh = H / 60;
@@ -103,57 +74,99 @@ namespace Retouch_Photo.Pickers
             else return Color.FromArgb(255, 255, 0, xhh);
         }
 
+        /// <summary> RGB to HSL </summary>
+        /// <param name="hsl"> HSL </param>
+        /// <returns> Color </returns>
+        public static Color HSLtoRGB(HSL hsl) => HSL.HSLtoRGB(hsl.A, hsl.H, hsl.S, hsl.L);
 
-        /// <summary>
-        /// RGB to HSL
-        /// </summary>
-        /// <param name="color">Color form RGB</param>
-        /// <returns>A(W):0~255, H(X):0~360, S(Y):0~100, L(Z):0~100</returns>
-        public static HSL RGBtoHSL(Color color)
+        /// <summary> RGB to HSL </summary>
+        /// <param name="a"> Alpha </param>
+        /// <param name="h"> Hue </param>
+        /// <param name="s"> Saturation </param>
+        /// <param name="l"> Lightness </param>
+        /// <returns> Color </returns>
+        public static Color HSLtoRGB(byte a, double h, double s, double l)
         {
-            double R = color.R / 255.0;
-            double G = color.G / 255.0;
-            double B = color.B / 255.0;
-
-            double max = Math.Max(Math.Max(R, G), B);
-            double min = Math.Min(Math.Min(R, G), B);
-
-            double S = max - min;
-            double L = (min + max) / 2.0f;
-
-            if (L <= 0.0) return new HSL(color.A, 0, 0, 0);
-
-            if (S > 0.0)
+            if (s == 0)
             {
-                if (L <= 0.5f) S /= (max + min);
-                else S /= (2.0f - max - min);
+                byte ll = (byte)(l / 100 * 255);
+                return Color.FromArgb(a, ll, ll, ll);
             }
-            else return new HSL(color.A, 0, 0, 0);
+            
+            double S = s / 100;
+            double V = l / 100;
 
-            double rr = (max - R) / S;
-            double gg = (max - G) / S;
-            double bb = (max - B) / S;
+            int H1 = (int)(h * 1.0f / 60);
+            double F = h / 60 - H1;
+            double P = V * (1.0f - S);
+            double Q = V * (1.0f - F * S);
+            double T = V * (1.0f - (1.0f - F) * S);
+            
+            double R = 0f, G = 0f, B = 0f;
+            switch (H1)
+            {
+                case 0: R = V; G = T; B = P; break;
+                case 1: R = Q; G = V; B = P; break;
+                case 2: R = P; G = V; B = T; break;
+                case 3: R = P; G = Q; B = V; break;
+                case 4: R = T; G = P; B = V; break;
+                case 5: R = V; G = P; B = Q; break;
+            }                       
 
-            double H;
-            if (R == max)
-            {
-                if (G == min) H = 5.0f + bb;
-                else H = 1.0f - gg;
-            }
-            else if (G == max)
-            {
-                if (B == min) H = 3.0 - bb;
-                else H = 3.0 - bb;
-            }
-            else// if (B == max)
-            {
-                if (R == min) H = 3.0 + gg;
-                else H = 5.0 - rr;
-            }
+            R = R * 255;
+            while (R > 255) R -= 255;
+            while (R < 0) R += 255;
 
-            return new HSL(color.A, (float)(H * 60.0), (float)(S * 100.0), (float)(L * 200.0));
+            G = G * 255;
+            while (G > 255) G -= 255;
+            while (G < 0) G += 255;
+
+            B = B * 255;
+            while (B > 255) B -= 255;
+            while (B < 0) B += 255;
+            
+            return Color.FromArgb(a, (byte)R, (byte)G, (byte)B);
         }
 
-        
+
+
+        /// <summary> RGB to HSL </summary>
+        /// <param name="color"> Color </param>
+        /// <returns> HSL </returns>
+        public static HSL RGBtoHSL(Color color) => HSL.RGBtoHSL(color.A, color.R, color.G, color.B);
+
+        /// <summary> RGB to HSL </summary>
+        /// <param name="a"> Alpha </param>
+        /// <param name="r"> Red </param>
+        /// <param name="g"> Green </param>
+        /// <param name="b"> Blue </param>
+        /// <returns> HSL </returns>
+        public static HSL RGBtoHSL(byte a, byte r, byte g, byte b)
+        {
+            double R = r * 1.0f / 255;
+            double G = g * 1.0f / 255;
+            double B = b * 1.0f / 255;
+
+            double min = Math.Min(Math.Min(R, G), B);
+            double max = Math.Max(Math.Max(R, G), B);
+                       
+            double H=0, S, V;
+ 
+            if (max == min) { H = 0; }
+
+            else if (max == R && G > B) H = 60 * (G - B) * 1.0f / (max - min) + 0;            
+            else if (max == R && G < B)H = 60 * (G - B) * 1.0f / (max - min) + 360;            
+            else if (max == G)H = H = 60 * (B - R) * 1.0f / (max - min) + 120;            
+            else if (max == B) H = H = 60 * (R - G) * 1.0f / (max - min) + 240;
+            
+            if (max == 0)  S = 0;          
+            else S = (max - min) * 1.0f / max;            
+
+            V = max;
+
+            return new HSL(a, H, (S * 100), V * 100);
+        }
+
+
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Retouch_Photo.Models.Adjustments;
+using Retouch_Photo.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,18 +15,43 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
-
 namespace Retouch_Photo.Pages.AdjustmentPages
 {
-    /// <summary>
-    /// 可用于自身或导航至 Frame 内部的空白页。
-    /// </summary>
     public sealed partial class AdjustmentExposurePage : Page
     {
+        
+        //ViewModel
+        DrawViewModel ViewModel => App.ViewModel;
+
+        #region DependencyProperty
+
+        public ExposureAdjustment ExposureAdjustment
+        {
+            get { return (ExposureAdjustment)GetValue(MyPropertyProperty); }
+            set { SetValue(MyPropertyProperty, value); }
+        }        
+        public static readonly DependencyProperty MyPropertyProperty =DependencyProperty.Register(nameof(ExposureAdjustment), typeof(ExposureAdjustment), typeof(ExposureAdjustment), new PropertyMetadata(null,(sender,e)=>
+        {
+            AdjustmentExposurePage con = (AdjustmentExposurePage)sender;
+
+            if (e.NewValue is ExposureAdjustment adjustment)
+            {
+                con.ExposureSlider.Value = adjustment.Exposure * 100;
+            }
+        }));
+        
+        #endregion
+
+
         public AdjustmentExposurePage()
         {
             this.InitializeComponent();
+        }
+         
+        private void ExposureSlider_ValueChangeDelta(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            this.ExposureAdjustment.Exposure = (float)(e.NewValue / 100);
+            this.ViewModel.Invalidate();
         }
     }
 }

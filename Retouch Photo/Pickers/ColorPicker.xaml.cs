@@ -48,15 +48,15 @@ namespace Retouch_Photo.Pickers
                     this.RGBButton.IsChecked = i == 2;
                     this.HSLButton.IsChecked = i == 3;
 
-                     if (i == 0) this.SwatchesPicker.Color = this.SolidColorBrushName.Color;
-                    if (i == 1) this.WheelPicker.Color = this.SolidColorBrushName.Color;
-                    if (i == 2) this.RGBPicker.Color = this.SolidColorBrushName.Color;
-                    if (i == 3) this.HSLPicker.Color = this.SolidColorBrushName.Color;
-
                     this.SwatchesPicker.Visibility = i == 0 ? Visibility.Visible : Visibility.Collapsed;
                     this.WheelPicker.Visibility = i == 1 ? Visibility.Visible : Visibility.Collapsed;
                     this.RGBPicker.Visibility = i == 2 ? Visibility.Visible : Visibility.Collapsed;
                     this.HSLPicker.Visibility = i == 3 ? Visibility.Visible : Visibility.Collapsed;
+
+                     if (i == 0) this.SwatchesPicker.Color = this.SolidColorBrushName.Color;
+                    if (i == 1) this.WheelPicker.Color = this.SolidColorBrushName.Color;
+                    if (i == 2) this.RGBPicker.Color = this.SolidColorBrushName.Color;
+                    if (i == 3) this.HSLPicker.Color = this.SolidColorBrushName.Color;
                 }
                 index = value;
             }
