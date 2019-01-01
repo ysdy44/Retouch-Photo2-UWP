@@ -70,7 +70,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
         public override void Start(Vector2 point)
         {
-            this.CurrentLayer = this.ViewModel.RenderLayer.CurrentLayer;
+            this.CurrentLayer = this.ViewModel.CurrentLayer;
 
 
             //CursorMode
@@ -94,7 +94,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
                 if (Transformer.ContainsBound(canvasPoint, layer.Transformer))
                 {
-                    this.CurrentLayer = this.ViewModel.RenderLayer.CurrentLayer = layer;
+                    this.CurrentLayer = this.ViewModel.CurrentLayer = layer;
                     this.Mode = CursorMode.Translation;
 
                     this.ViewModelDictionary[this.Mode].Start(point, this.CurrentLayer);
@@ -130,8 +130,8 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         
         public override void Draw(CanvasDrawingSession ds)
         {
-            if (this.CurrentLayer == null) return;
-            this.ViewModelDictionary[this.Mode].Draw(ds, this.CurrentLayer);
+            if (this.ViewModel.CurrentLayer == null) return;
+            this.ViewModelDictionary[this.Mode].Draw(ds, this.ViewModel.CurrentLayer);
         }
 
 

@@ -34,7 +34,9 @@ namespace Retouch_Photo.ViewModels
 {
     public class DrawViewModel : INotifyPropertyChanged
     {
-        
+
+        #region CanvasControl
+
         /// <summary>画布控件</summary>
         public CanvasControl CanvasControl;
         public void Invalidate(bool? isThumbnail = null)
@@ -43,15 +45,15 @@ namespace Retouch_Photo.ViewModels
             (
                 this.CanvasControl,
                 this.MatrixTransformer.CanvasToVirtualMatrix,
-                this.MatrixTransformer.Width, 
-                this.MatrixTransformer.Height, 
+                this.MatrixTransformer.Width,
+                this.MatrixTransformer.Height,
                 this.MatrixTransformer.Scale
             );
 
             if (isThumbnail == true) this.CanvasControl.DpiScale = 0.5f;
             else if (isThumbnail == false) this.CanvasControl.DpiScale = 1.0f;
 
-          this.CanvasControl.Invalidate();
+            this.CanvasControl.Invalidate();
         }
         public void InvalidateWithJumpedQueueLayer(Layer jumpedQueueLayer, bool? isThumbnail = null)
         {
@@ -68,14 +70,15 @@ namespace Retouch_Photo.ViewModels
             if (isThumbnail == true) this.CanvasControl.DpiScale = 0.5f;
             else if (isThumbnail == false) this.CanvasControl.DpiScale = 1.0f;
 
-          this.CanvasControl.Invalidate();
+            this.CanvasControl.Invalidate();
         }
-         
+
         /// <summary> 初始化CanvasControl, 也是可以绑定它的CreateResources事件</summary>
         public void InitializeCanvasControl(CanvasControl control)
         {
-            Window.Current.CoreWindow.Dispatcher.AcceleratorKeyActivated += this.TypedEventHandler;
-
+            this.ShortCutKey.KeyUp += () => this.KeyUp();
+            this.ShortCutKey.KeyDown += () => this.KeyDown();
+            this.ShortCutKey.KeyDownOrUp += () => this.KeyDownOrUp();
 
             if (this.CanvasControl != null) return;
 
@@ -109,7 +112,8 @@ namespace Retouch_Photo.ViewModels
 
             this.CanvasControl = control;
         }
-               
+
+        #endregion
 
 
         /// <summary>重新加载ViewModel，可以多次调用</summary>
@@ -117,86 +121,88 @@ namespace Retouch_Photo.ViewModels
         public void LoadFromProject(Project project)
         {
             this.MatrixTransformer.LoadFromProject(project);
-            
+
             this.RenderLayer.LoadFromProject(this.CanvasControl, project);
-            this.RenderLayer.Layers.CollectionChanged += (s, e) =>
-            {
-                this.Invalidate();
-                this.SelectedIndex = this.RenderLayer.Index;
-            };
- 
-            if (project.Tool < this.Tools.Count) this.Tool = this.Tools[project.Tool];
+            this.RenderLayer.Layers.CollectionChanged += (s, e) => this.Invalidate();
+
+            int index = (project.Tool >= Tool.ToolList.Count) || (project.Tool < 0) ? 0 : project.Tool;
+            this.Tool = Tool.ToolList[index];
+            ToolControl.SetIndex(index);
 
             this.Invalidate();
         }
-        
+
+
+        /// <summary> 快捷键· </summary>
+        public ShortCutKey ShortCutKey = new ShortCutKey();
+
         /// <summary>可以返回</summary>
         public GoBack GoBack = new GoBack();
-        
+
         /// <summary>矩阵变换</summary>
         public MatrixTransformer MatrixTransformer = new MatrixTransformer();
 
+
         /// <summary>渲染图层</summary>
         public RenderLayer RenderLayer = new RenderLayer();
-         
+        /// <summary>当前图层</summary>     
+        public Layer CurrentLayer
+        {
+            get
+            {
+                if (this.RenderLayer.Layers.Count == 0 || this.RenderLayer.Layers.Count == -1) return null;
+
+                if (this.RenderLayer.Layers.Count == 1) return this.RenderLayer.Layers.First();
+
+                if (this.SelectedIndex >= 0 && this.SelectedIndex < this.RenderLayer.Layers.Count()) return this.RenderLayer.Layers[this.SelectedIndex];
+
+                return null;
+            }
+            set
+            {
+                if (this.RenderLayer.Layers == null || this.RenderLayer.Layers.Count == 0)
+                {
+                    this.SelectedIndex = -1;
+                    return;
+                }
+                if (this.RenderLayer.Layers.Count == 1 || this.RenderLayer.Layers.Contains(value) == false)
+                {
+                    this.SelectedIndex = 0;
+                    return;
+                }
+                this.SelectedIndex = this.RenderLayer.Layers.IndexOf(value);
+            }
+        }
+        /// <summary>控件选定索引</summary>      
+        public int SelectedIndex
+        {
+            get => this.RenderLayer.Index;
+            set
+            {
+                this.RenderLayer.Index = value;
+                OnPropertyChanged(nameof(SelectedIndex));
+            }
+        }
 
 
         #region Index & Tool
 
-        
-        /// <summary>控件选定索引</summary>      
-        public int SelectedIndex
-        {
-            get=>selectedIndex;            
-            set
-            {
-                selectedIndex = value < this.RenderLayer.Layers.Count ? value : this.RenderLayer.Layers.Count - 1;
-
-                OnPropertyChanged(nameof(SelectedIndex));
-            }
-        }
-        private int selectedIndex=-1;
 
 
         public Color Color = Color.FromArgb(255, 214, 214, 214);
 
-        /// <summary>工具</summary>      
+        /// <summary>工具</summary>    
+        public Tool tool = new NullTool();
         public Tool Tool
         {
-            get
-            {
-                if (tool == null) tool = this.Tools.FirstOrDefault();
-                
-                return tool;
-            }
+            get => this.tool;
             set
             {
-                tool = value;
+                this.tool = value;
                 OnPropertyChanged(nameof(Tool));
             }
         }
-        private Tool tool;
 
-        /// <summary>所有工具</summary>
-        public List<Tool> Tools => new List<Tool>
-        {
-             new CursorTool(),
-             new ViewTool(),
-             new FloodSetectTool(),
-             new SelectionBrushTool(),
-
-             new PaintBrushTool(),
-             new WatercolorPenTool(),
-             new PencilTool(),
-             new EraseBrushTool(),
-
-             new PenTool(),
-             new RectangleTool(),
-             new EllipseTool(),
-             new GeometryTool(),
-
-             new AcrylicTool(),
-        };
 
 
         #endregion
@@ -215,8 +221,8 @@ namespace Retouch_Photo.ViewModels
             }
         }
         private bool keyShift;
-        
-        
+
+
         public bool KeyCtrl
         {
             get => keyCtrl;
@@ -227,8 +233,8 @@ namespace Retouch_Photo.ViewModels
             }
         }
         private bool keyCtrl;
-        
-        
+
+
         public bool KeyAlt
         {
             get => keyAlt;
@@ -239,31 +245,36 @@ namespace Retouch_Photo.ViewModels
             }
         }
         private bool keyAlt;
-        
 
-        public void TypedEventHandler(CoreDispatcher core, AcceleratorKeyEventArgs args)
+
+
+
+        public void KeyDown()
         {
-            string s = args.EventType.ToString();
+            if (ShortCutKey.IsKeyDown(VirtualKey.Control))
+                this.KeyCtrl = true;
 
-            if (s.Contains("Down"))
+            if (ShortCutKey.IsKeyDown(VirtualKey.Shift))
+                this.KeyShift = true;
+        }
+
+        public void KeyUp()
+        {
+            if (ShortCutKey.IsKeyUp(VirtualKey.Control))
+                this.KeyCtrl = false;
+
+            if (ShortCutKey.IsKeyUp(VirtualKey.Shift))
+                this.KeyShift = false;
+
+            if (ShortCutKey.IsKeyUp(VirtualKey.Delete))
             {
-                if (Window.Current.CoreWindow.GetKeyState(VirtualKey.Control).HasFlag(CoreVirtualKeyStates.Down))
-                    this.KeyCtrl = true;
+                 Layer layer = this.CurrentLayer;
+                if (layer != null) this.RenderLayer.Remove(layer);
+            }           
+        }
 
-                if (Window.Current.CoreWindow.GetKeyState(VirtualKey.Shift).HasFlag(CoreVirtualKeyStates.Down))
-                    this.KeyShift = true;
-            }
-
-            if (s.Contains("Up"))
-            {
-                if (Window.Current.CoreWindow.GetKeyState(VirtualKey.Control).HasFlag(CoreVirtualKeyStates.None))
-                    this.KeyCtrl = false;
-
-                if (Window.Current.CoreWindow.GetKeyState(VirtualKey.Shift).HasFlag(CoreVirtualKeyStates.None))
-                    this.KeyShift = false;
-            }
-
-
+        public void KeyDownOrUp()
+        {
             if (this.KeyCtrl == false && this.KeyShift == false)
                 this.MarqueeMode = MarqueeMode.None;
             else if (this.KeyCtrl == false && this.KeyShift)
@@ -272,12 +283,13 @@ namespace Retouch_Photo.ViewModels
                 this.MarqueeMode = MarqueeMode.Center;
             else //if (this.KeyCtrl && this.KeyShift)
                 this.MarqueeMode = MarqueeMode.SquareAndCenter;
-
         }
+        
+
 
 
         #endregion
-        
+
 
 
         /// <summary>选框模式</summary>
@@ -304,10 +316,10 @@ namespace Retouch_Photo.ViewModels
             }
         }
         private string text;
-               
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string name) =>this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        protected void OnPropertyChanged(string name) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

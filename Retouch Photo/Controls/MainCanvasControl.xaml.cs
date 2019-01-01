@@ -51,7 +51,7 @@ namespace Retouch_Photo.Controls
 
 
         //单指&&左键&&笔
-        private void Single_Start(Vector2 point) => this.ViewModel.Tool.ViewModel.Start(point);
+        private void Single_Start(Vector2 point) =>this.ViewModel.Tool.ViewModel.Start(point);
         private void Single_Delta(Vector2 point) => this.ViewModel.Tool.ViewModel.Delta(point);
         private void Single_Complete(Vector2 point) => this.ViewModel.Tool.ViewModel.Complete(point);
 

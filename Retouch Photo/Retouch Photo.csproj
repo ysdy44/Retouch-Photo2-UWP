@@ -306,6 +306,7 @@
     <Compile Include="Library\MarqueeTool.cs" />
     <Compile Include="Library\RenderLayer.cs" />
     <Compile Include="Library\MatrixTransformer.cs" />
+    <Compile Include="Library\ShortCutKey.cs" />
     <Compile Include="Models\Adjustment.cs" />
     <Compile Include="Models\Adjustments\ContrastAdjustment.cs" />
     <Compile Include="Models\Adjustments\ExposureAdjustment.cs" />
@@ -353,6 +354,7 @@
     <Compile Include="Models\Tools\EraseBrushTool.cs" />
     <Compile Include="Models\Tools\FloodSetectTool.cs" />
     <Compile Include="Models\Tools\GeometryTool.cs" />
+    <Compile Include="Models\Tools\NullTool.cs" />
     <Compile Include="Models\Tools\PaintBrushTool.cs" />
     <Compile Include="Models\Tools\PencilTool.cs" />
     <Compile Include="Models\Tools\PenTool.cs" />
@@ -514,6 +516,7 @@
     <Compile Include="ViewModels\ToolViewModels\ToolEllipseViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolEraseBrushViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolGeometryViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ToolNullViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolPaintBrushViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolPencilViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\ToolPenViewModel.cs" />

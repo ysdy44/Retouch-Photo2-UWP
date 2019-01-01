@@ -42,13 +42,13 @@ namespace Retouch_Photo.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (this.ViewModel.GoBack.IsGoBack) base.Frame.Navigate(typeof(MainPage));
+            if (App.ViewModel.GoBack.IsGoBack) base.Frame.Navigate(typeof(MainPage));
         }
         protected async override void OnNavigatedTo(NavigationEventArgs e)//当前页面成为活动页面
         {
             if (e.Parameter is string text)
             {
-                if (this.ViewModel.GoBack.HadGoBack(text)) return;                
+                if (App.ViewModel.GoBack.HadGoBack(text)) return;                
             }
             
             if (e.Parameter is XDocument document)

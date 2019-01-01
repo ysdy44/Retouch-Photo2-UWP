@@ -36,7 +36,7 @@ namespace Retouch_Photo.Pages.ToolPages
         private void RightTurnButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Transformer((Layer layer) => layer.Transformer.Radian -= (float)Math.PI / 2);
         private void Transformer(Action<Layer> action)
         {
-            Layer layer = App.ViewModel.RenderLayer.CurrentLayer;
+            Layer layer = App.ViewModel.CurrentLayer;
             if (layer == null) return;
 
             action(layer);

@@ -1,4 +1,5 @@
-﻿using Retouch_Photo.Pages;
+﻿using Retouch_Photo.Library;
+using Retouch_Photo.Pages;
 using Retouch_Photo.ViewModels;
 using System;
 using Windows.ApplicationModel;
@@ -14,6 +15,7 @@ namespace Retouch_Photo
     {
         /// <summary>数据模型 </summary>
         public static DrawViewModel ViewModel = new DrawViewModel();
+
 
         public App()
         {

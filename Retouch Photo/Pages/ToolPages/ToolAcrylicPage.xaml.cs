@@ -44,7 +44,7 @@ namespace Retouch_Photo.Pages.ToolPages
             this.ViewModel.Color = value;
             this.ColorBrush.Color = value;
 
-            Layer layer = this.ViewModel.RenderLayer.CurrentLayer;
+            Layer layer = this.ViewModel.CurrentLayer;
             if (layer is AcrylicLayer rectangularLayer)
             {
                 rectangularLayer.TintColor = value;

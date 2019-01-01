@@ -115,11 +115,10 @@
 
     <ListBox x:Name="ListBox" 
              Background="Transparent" 
-             ItemsSource="{x:Bind ViewModel.Tools,Mode=OneWay}"
              ItemContainerStyle="{StaticResource AppListBoxItemContainerStyle}"
              ScrollViewer.VerticalScrollBarVisibility="Hidden"
-             SelectionChanged="ListBox_SelectionChanged"  >
-
+             SelectionChanged="ListBox_SelectionChanged"
+             Loaded="ListBox_Loaded">
         <ListBox.ItemTemplate>
             <DataTemplate x:DataType="models:Tool">
                 <ContentControl Content="{x:Bind Icon}"/>

@@ -39,7 +39,7 @@ namespace Retouch_Photo.Controls.LayerControls
         #endregion
 
         //Delegate
-        public delegate void FlyoutShowHandler(UserControl control,Layer layer);
+        public delegate void FlyoutShowHandler(UserControl control,Layer layer,bool isShow);
         public event FlyoutShowHandler FlyoutShow = null;
 
 
@@ -50,20 +50,10 @@ namespace Retouch_Photo.Controls.LayerControls
 
 
         //Flyout
-        private Grid element;
-        private void Grid_Holding(object sender, HoldingRoutedEventArgs e) => this.FlyoutShow?.Invoke(this, this.Layer);
-        private void Grid_RightTapped(object sender, RightTappedRoutedEventArgs e) => this.FlyoutShow?.Invoke(this, this.Layer);
-        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (sender is Grid element)
-            {
-                if (this.element == element)
-                {
-                    this.FlyoutShow?.Invoke(this,this.Layer);
-                }
-            }
-            this.element = (Grid)sender;
-        }
+        private void Grid_Holding(object sender, HoldingRoutedEventArgs e) => this.FlyoutShow?.Invoke(this, this.Layer,true);
+        private void Grid_RightTapped(object sender, RightTappedRoutedEventArgs e) => this.FlyoutShow?.Invoke(this, this.Layer,true);
+        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)=> this.FlyoutShow?.Invoke(this, this.Layer,false);
+        
 
 
 

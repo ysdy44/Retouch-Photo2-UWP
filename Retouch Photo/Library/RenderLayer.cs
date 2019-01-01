@@ -1,20 +1,15 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Foundation;
-using Windows.Storage.Pickers;
 using Windows.UI;
 
 namespace Retouch_Photo.Library
 {
-   public class RenderLayer
+    public class RenderLayer
     {
         /// <summary>重新加载RenderLayer，可以多次调用</summary>
         /// <param name="project">Project类型</param>
@@ -39,34 +34,6 @@ namespace Retouch_Photo.Library
             }
         }
         private int index=-1;
-        /// <summary>当前图层</summary>     
-        public Layer CurrentLayer
-        {
-            get
-            {
-                if (this.Layers.Count == 0 || this.Layers.Count ==- 1) return null;
-
-                if (this.Layers.Count == 1) return this.Layers.First();
-
-                if (this.Index >= 0 && this.Index < this.Layers.Count()) return this.Layers[this.Index];
-
-                return null;
-            }
-            set
-            {
-                if (this.Layers == null || this.Layers.Count == 0)
-                {
-                    this.Index = -1;
-                    return;
-                }
-                if (this.Layers.Count == 1 || this.Layers.Contains(value) == false)
-                {
-                    this.Index = 0;
-                    return;
-                }
-                this.Index = this.Layers.IndexOf(value);
-            }
-        }
         /// <summary>所有图层</summary>  
         public ObservableCollection<Layer> Layers = new ObservableCollection<Layer>();    
     
@@ -88,6 +55,7 @@ namespace Retouch_Photo.Library
         public void Remove(Layer layer)
         {
             this.Layers.Remove(layer);
+            layer = null;
         }
 
 

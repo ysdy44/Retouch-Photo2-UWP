@@ -23,19 +23,30 @@ namespace Retouch_Photo.Controls
         //ViewModel
         DrawViewModel ViewModel => App.ViewModel;
 
+
+        //delegate
+        public delegate void IndexChangedHandler(int index);
+        public static event IndexChangedHandler IndexChanged = null;
+        public static void SetIndex(int index) => ToolControl.IndexChanged?.Invoke(index);
+        
         public ToolControl()
         {
             this.InitializeComponent();
+            ToolControl.IndexChanged += (int index) => this.ListBox.SelectedIndex = index;
         }
+
+        private void ListBox_Loaded(object sender, RoutedEventArgs e) => this.ListBox.ItemsSource = Tool.ToolList;
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = this.ListBox.SelectedIndex;
 
-            this.ViewModel.Tool = this.ViewModel.Tools[index];
+            App.ViewModel.Text = index.ToString();
+            if (index < 0) return;
+            if (index >= Tool.ToolList.Count) return;
+
+            this.ViewModel.Tool = Tool.ToolList[index];
             this.ViewModel.Invalidate();
         }
-
-
     }
 }

@@ -33,14 +33,19 @@ namespace Retouch_Photo.Controls
         {
             this.InitializeComponent();
         }
-               
+
         //Flyout
-        private void LayerLayoutControl_FlyoutShow(UserControl control, Layer layer)
+        UserControl control;
+        private void LayerLayoutControl_FlyoutShow(UserControl control, Layer layer, bool isShow)
         {
-            this.LayerFlyoutControl.Layer = layer;
-            this.PropertyFlyout.ShowAt(control);
+            if (this.control == control || isShow)
+            {
+                this.LayerFlyoutControl.Layer = layer;
+                this.PropertyFlyout.ShowAt(control);
+            }
+            else this.control = control;
         }
-               
+
         //Layer
         private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -55,9 +60,9 @@ namespace Retouch_Photo.Controls
         {
             if (e.ClickedItem is Layer item)
             {
-                this.ViewModel.RenderLayer.CurrentLayer = item;
-                this.ViewModel.Invalidate();
+                this.ViewModel.CurrentLayer = item;
             }
+                this.ViewModel.Invalidate();
         }
 
 

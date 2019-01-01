@@ -89,7 +89,7 @@
     
     <ListView  x:Name="ListView"
                 
-               SelectedIndex="{x:Bind ViewModel.SelectedIndex,Mode=OneWay}"
+               SelectedIndex="{x:Bind ViewModel.SelectedIndex,Mode=TwoWay}"
                SelectionChanged="ListView_SelectionChanged"
                
                ItemsSource="{x:Bind ViewModel.RenderLayer.Layers}"

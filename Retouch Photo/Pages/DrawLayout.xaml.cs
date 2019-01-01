@@ -18,10 +18,10 @@ namespace Retouch_Photo.Pages
 
         public Tool Tool
         {
-            get { return (Tool)GetValue(ToolsProperty); }
-            set { SetValue(ToolsProperty, value); }
+            get { return (Tool)GetValue(ToolProperty); }
+            set { SetValue(ToolProperty, value); }
         }
-        public static readonly DependencyProperty ToolsProperty = DependencyProperty.Register(nameof(Tool), typeof(Tool), typeof(DrawLayout), new PropertyMetadata(null, (sender, e) =>
+        public static readonly DependencyProperty ToolProperty = DependencyProperty.Register(nameof(Tool), typeof(Tool), typeof(DrawLayout), new PropertyMetadata(null, (sender, e) =>
         {
             DrawLayout con = (DrawLayout)sender;
 
@@ -30,13 +30,13 @@ namespace Retouch_Photo.Pages
                 con.WorkLeftBorder.Content = tool.WorkIcon;
                 con.BottomBarFrame.Content = tool.Page;
 
-                if (con.WorkDismissOverlay.Visibility == Visibility.Visible)                
-                    if (e.OldValue is Tool oldTool)                    
-                        if (tool.Type != oldTool.Type)                        
+                if (con.WorkDismissOverlay.Visibility == Visibility.Visible)
+                    if (e.OldValue is Tool oldIndex)
+                        if (tool.Type != oldIndex.Type)
                             con.WorkOverlay();
-                
             }
         }));
+        
 
         #endregion
 

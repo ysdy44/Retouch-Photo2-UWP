@@ -46,7 +46,7 @@
                     <ContentControl Width="6"/>
                     <Border Style="{StaticResource AppCircleBorderStyle}">
                         <Button  Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10E;" FontSize="18" Foreground="Gray" FontFamily="Segoe MDL2 Assets" BorderThickness="0" Background="Transparent" />
-                    </Border>
+                    </Border>   
                     <ContentControl Width="6"/>
                     <Border Style="{StaticResource AppCircleBorderStyle}">
                         <Button  Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10D;" FontSize="18" Foreground="Gray" FontFamily="Segoe MDL2 Assets" BorderThickness="0" Background="Transparent" />

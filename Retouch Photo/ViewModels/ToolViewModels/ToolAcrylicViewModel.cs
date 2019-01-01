@@ -22,10 +22,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             this.StartPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
             VectRect rect = new VectRect(this.StartPoint, this.StartPoint, this.ViewModel.MarqueeMode);
 
-            if (this.Layer == null) this.Layer = AcrylicLayer.CreateFromRect(this.ViewModel.CanvasControl, rect, this.ViewModel.Color);
-            this.Layer.Transformer = Transformer.CreateFromRect(rect);
-            this.Layer.TintColor = this.ViewModel.Color;
-
+            this.Layer = AcrylicLayer.CreateFromRect(this.ViewModel.CanvasControl, rect, this.ViewModel.Color);
             this.ViewModel.InvalidateWithJumpedQueueLayer(this.Layer);
         }
         public override void Delta(Vector2 point)
@@ -34,7 +31,6 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             VectRect rect = new VectRect(this.StartPoint, endPoint, this.ViewModel.MarqueeMode);
 
             this.Layer.Transformer = Transformer.CreateFromRect(rect);
-
             this.ViewModel.InvalidateWithJumpedQueueLayer(this.Layer);
         }
         public override void Complete(Vector2 point)
@@ -48,6 +44,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
                 this.ViewModel.RenderLayer.Insert(acrylicLayer);
             }
 
+            this.Layer = null;
             this.ViewModel.Invalidate();
         }
 
@@ -55,9 +52,8 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         public override void Draw(CanvasDrawingSession ds)
         {
             if (this.Layer == null) return;
-
             Transformer.DrawBound(ds, this.Layer.Transformer, this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
         }
 
     }
-}  
+}

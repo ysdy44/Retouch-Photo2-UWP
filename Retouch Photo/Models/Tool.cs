@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo.Models.Tools;
 using Retouch_Photo.ViewModels;
 using Retouch_Photo.ViewModels.ToolViewModels;
 using System;
@@ -22,6 +23,26 @@ namespace Retouch_Photo.Models
         public FrameworkElement Page;
 
         public ToolViewModel ViewModel;
+
+        public static List<Tool> ToolList = new List<Tool>
+        {
+             new CursorTool(),
+             new ViewTool(),
+             new FloodSetectTool(),
+             new SelectionBrushTool(),
+
+             new PaintBrushTool(),
+             new WatercolorPenTool(),
+             new PencilTool(),
+             new EraseBrushTool(),
+
+             new PenTool(),
+             new RectangleTool(),
+             new EllipseTool(),
+             new GeometryTool(),
+
+             new AcrylicTool(),
+        };
     }
 
     public enum ToolType
