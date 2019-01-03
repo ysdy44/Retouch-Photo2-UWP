@@ -13,7 +13,7 @@ namespace Retouch_Photo.Models.Blends
             base.Type = BlendType.Lighten;
         }
 
-        protected override FrameworkElement GetIcon() => new BlendLightenControl();
+        protected override FrameworkElement GetIcon() => new LightenControl();
         protected override ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground)
         {
             return new BlendEffect

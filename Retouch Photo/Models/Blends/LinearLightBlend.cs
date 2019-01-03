@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Blends
             base.Type = BlendType.LinearLight;
         }
 
-        protected override FrameworkElement GetIcon() => new BlendLinearLightControl();
+        protected override FrameworkElement GetIcon() => new LinearLightControl();
         protected override ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground)
         {
             return new BlendEffect

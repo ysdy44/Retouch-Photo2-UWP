@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Blends
             base.Type = BlendType.Overlay;
         }
 
-        protected override FrameworkElement GetIcon() => new BlendOverlayControl();
+        protected override FrameworkElement GetIcon() => new OverlayControl();
         protected override ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground)
         {
             return new BlendEffect

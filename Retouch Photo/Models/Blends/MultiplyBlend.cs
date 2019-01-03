@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Blends
             base.Type = BlendType.Multiply;
         }
 
-        protected override FrameworkElement GetIcon() => new BlendMultiplyControl();
+        protected override FrameworkElement GetIcon() => new MultiplyControl();
         protected override ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground)
         {
             return new BlendEffect

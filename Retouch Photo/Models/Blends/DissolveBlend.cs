@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Blends
             base.Type = BlendType.Dissolve;
         }
 
-        protected override FrameworkElement GetIcon() => new BlendDissolveControl();
+        protected override FrameworkElement GetIcon() => new DissolveControl();
         protected override ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground)
         {
             return new BlendEffect

@@ -16,7 +16,7 @@ namespace Retouch_Photo.Models.Adjustments
         public HighlightsAndShadowsAdjustment()
         {
             base.Type = AdjustmentType.HighlightsAndShadows;
-            base.Icon = new AdjustmentHighlightsAndShadowsControl();
+            base.Icon = new HighlightsAndShadowsControl();
             base.HasPage = true;
             this.Reset();
         }
@@ -46,12 +46,12 @@ namespace Retouch_Photo.Models.Adjustments
 
     public class HighlightsAndShadowsAdjustmentCandidate : AdjustmentCandidate
     {
-        public AdjustmentHighlightsAndShadowsPage page = new AdjustmentHighlightsAndShadowsPage();
+        public HighlightsAndShadowsPage page = new HighlightsAndShadowsPage();
 
         public HighlightsAndShadowsAdjustmentCandidate()
         {
             base.Type = AdjustmentType.HighlightsAndShadows;
-            base.Icon = new AdjustmentHighlightsAndShadowsControl();
+            base.Icon = new HighlightsAndShadowsControl();
             base.Page = this.page;
         }
 

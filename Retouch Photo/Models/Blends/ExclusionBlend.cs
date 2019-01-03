@@ -13,7 +13,7 @@ namespace Retouch_Photo.Models.Blends
             base.Type = BlendType.Exclusion;
         }
 
-        protected override FrameworkElement GetIcon() => new BlendExclusionControl();
+        protected override FrameworkElement GetIcon() => new ExclusionControl();
         protected override ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground)
         {
             return new BlendEffect

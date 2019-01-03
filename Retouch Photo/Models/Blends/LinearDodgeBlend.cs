@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Blends
             base.Type = BlendType.LinearDodge;
         }
 
-        protected override FrameworkElement GetIcon() => new BlendLinearDodgeControl();
+        protected override FrameworkElement GetIcon() => new LinearDodgeControl();
         protected override ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground)
         {
             return new BlendEffect

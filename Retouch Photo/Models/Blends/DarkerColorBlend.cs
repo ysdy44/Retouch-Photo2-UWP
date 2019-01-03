@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Blends
             base.Type = BlendType.DarkerColor;
         }
 
-        protected override FrameworkElement GetIcon() => new BlendDarkerColorControl();
+        protected override FrameworkElement GetIcon() => new DarkerColorControl();
         protected override ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground)
         {
             return new BlendEffect

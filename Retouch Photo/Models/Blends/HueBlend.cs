@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Blends
             base.Type = BlendType.Hue;
         }
 
-        protected override FrameworkElement GetIcon() => new BlendHueControl();
+        protected override FrameworkElement GetIcon() => new HueControl();
         protected override ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground)
         {
             return new BlendEffect

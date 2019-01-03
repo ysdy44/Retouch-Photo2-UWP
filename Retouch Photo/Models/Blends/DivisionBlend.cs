@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Blends
             base.Type = BlendType.Division;
         }
 
-        protected override FrameworkElement GetIcon() => new BlendDivisionControl();
+        protected override FrameworkElement GetIcon() => new DivisionControl();
         protected override ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground)
         {
             return new BlendEffect

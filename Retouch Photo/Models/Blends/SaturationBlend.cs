@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Blends
             base.Type = BlendType.Saturation;
         }
 
-        protected override FrameworkElement GetIcon() => new BlendSaturationControl();
+        protected override FrameworkElement GetIcon() => new SaturationControl();
         protected override ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground)
         {
             return new BlendEffect

@@ -9,10 +9,10 @@ namespace Retouch_Photo.Models.Tools
         public EllipseTool()
         {
             base.Type = ToolType.Ellipse;
-            base.Icon = new ToolEllipseControl();
-            base.WorkIcon = new ToolEllipseControl();
-            base.Page = new ToolEllipsePage();
-            base.ViewModel = new ToolEllipseViewModel();
+            base.Icon = new EllipseControl();
+            base.WorkIcon = new EllipseControl();
+            base.Page = new EllipsePage();
+            base.ViewModel = new EllipseViewModel();
         }
     }
 }

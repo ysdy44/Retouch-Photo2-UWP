@@ -10,7 +10,7 @@ namespace Retouch_Photo.Models.Adjustments
         public GrayAdjustment()
         {
             base.Type = AdjustmentType.Gray;
-            base.Icon = new AdjustmentGrayControl();
+            base.Icon = new GrayControl();
             base.HasPage = false;
             this.Reset();
         }
@@ -28,7 +28,7 @@ namespace Retouch_Photo.Models.Adjustments
         public GrayAdjustmentCandidate()
         {
             base.Type = AdjustmentType.Gray;
-            base.Icon = new AdjustmentGrayControl();
+            base.Icon = new GrayControl();
             base.Page = null;
         }
 

@@ -9,10 +9,10 @@ namespace Retouch_Photo.Models.Tools
         public GeometryTool()
         {
             base.Type = ToolType.Geometry;
-            base.Icon = new ToolGeometryControl();
-            base.WorkIcon = new ToolGeometryControl();
-            base.Page = new ToolGeometryPage();
-            base.ViewModel = new ToolGeometryViewModel();
+            base.Icon = new GeometryControl();
+            base.WorkIcon = new GeometryControl();
+            base.Page = new GeometryPage();
+            base.ViewModel = new GeometryViewModel();
         }
     }
 }

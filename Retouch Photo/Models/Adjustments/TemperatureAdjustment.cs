@@ -13,7 +13,7 @@ namespace Retouch_Photo.Models.Adjustments
         public TemperatureAdjustment()
         {
             base.Type = AdjustmentType.Temperature;
-            base.Icon = new AdjustmentTemperatureControl();
+            base.Icon = new TemperatureControl();
             base.HasPage = true;
             this.Reset();
         }
@@ -37,12 +37,12 @@ namespace Retouch_Photo.Models.Adjustments
 
     public class TemperatureAdjustmentCandidate : AdjustmentCandidate
     {
-        public AdjustmentTemperaturePage page = new AdjustmentTemperaturePage();
+        public TemperaturePage page = new TemperaturePage();
 
         public TemperatureAdjustmentCandidate()
         {
             base.Type = AdjustmentType.Temperature;
-            base.Icon = new AdjustmentTemperatureControl();
+            base.Icon = new TemperatureControl();
             base.Page = this.page;
         }
 

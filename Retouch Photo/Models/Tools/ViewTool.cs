@@ -9,10 +9,10 @@ namespace Retouch_Photo.Models.Tools
         public ViewTool()
         {
             base.Type = ToolType.View;
-            base.Icon = new ToolViewControl();
-            base.WorkIcon = new ToolViewControl();
-            base.Page = new ToolViewPage();
-            base.ViewModel = new ToolViewViewModel();
+            base.Icon = new ViewControl();
+            base.WorkIcon = new ViewControl();
+            base.Page = new ViewPage();
+            base.ViewModel = new ViewViewModel();
         }
     }
 }

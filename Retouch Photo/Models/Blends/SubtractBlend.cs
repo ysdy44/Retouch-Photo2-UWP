@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Blends
             base.Type = BlendType.Subtract;
         }
 
-        protected override FrameworkElement GetIcon() => new BlendSubtractControl();
+        protected override FrameworkElement GetIcon() => new SubtractControl();
         protected override ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground)
         {
             return new BlendEffect

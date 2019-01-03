@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Blends
             base.Type = BlendType.HardLight;
         }
 
-        protected override FrameworkElement GetIcon() => new BlendHardLightControl();
+        protected override FrameworkElement GetIcon() => new HardLightControl();
         protected override ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground)
         {
             return new BlendEffect

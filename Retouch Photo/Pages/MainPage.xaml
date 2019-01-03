@@ -1090,11 +1090,11 @@
                                        
                                        />
 
-                    <conAppbarControls:AppbarPicturesControl x:Name="AppbarPicturesControl" Visibility="Collapsed" PicturesPicker="AppbarPicturesControl_PicturesPicker" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
-                    <conAppbarControls:AppbarSaveControl x:Name="AppbarSaveControl" Visibility="Collapsed" OKButtonTapped="AppbarSaveControl_OKButtonTapped" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
-                    <conAppbarControls:AppbarShareControl x:Name="AppbarShareControl" Visibility="Collapsed" OKButtonTapped="AppbarShareControl_OKButtonTapped" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
-                    <conAppbarControls:AppbarDeleteControl x:Name="AppbarDeleteControl" Visibility="Collapsed" OKButtonTapped="AppbarDeleteControl_OKButtonTapped" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
-                    <conAppbarControls:AppbarDuplicateControl x:Name="AppbarDuplicateControl" Visibility="Collapsed" OKButtonTapped="AppbarDuplicateControl_OKButtonTapped" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
+                    <conAppbarControls:PicturesControl x:Name="AppbarPicturesControl" Visibility="Collapsed" PicturesPicker="AppbarPicturesControl_PicturesPicker" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
+                    <conAppbarControls:SaveControl x:Name="AppbarSaveControl" Visibility="Collapsed" OKButtonTapped="AppbarSaveControl_OKButtonTapped" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
+                    <conAppbarControls:ShareControl x:Name="AppbarShareControl" Visibility="Collapsed" OKButtonTapped="AppbarShareControl_OKButtonTapped" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
+                    <conAppbarControls:DeleteControl x:Name="AppbarDeleteControl" Visibility="Collapsed" OKButtonTapped="AppbarDeleteControl_OKButtonTapped" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
+                    <conAppbarControls:DuplicateControl x:Name="AppbarDuplicateControl" Visibility="Collapsed" OKButtonTapped="AppbarDuplicateControl_OKButtonTapped" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
 
                 </Grid>
             </local:MainLayout.Appbar>

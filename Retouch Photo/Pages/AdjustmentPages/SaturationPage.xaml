@@ -1,0 +1,23 @@
+﻿<Page
+    x:Class="Retouch_Photo.Pages.AdjustmentPages.SaturationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Retouch_Photo.Pages.AdjustmentPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pic="using:Retouch_Photo.Pickers"
+    mc:Ignorable="d"
+    >
+
+    <StackPanel >
+        <TextBlock Text="Saturation"/>
+        <pic:TouchSlider x:Name="SaturationSlider" Minimum="0" Maximum="200" ValueChangeDelta="SaturationSlider_ValueChangeDelta">
+            <pic:TouchSlider.SliderBackground>
+                <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
+                    <GradientStop Offset="0" Color="Gray"/>
+                    <GradientStop Offset="1" Color="DodgerBlue"/>
+                </LinearGradientBrush>
+            </pic:TouchSlider.SliderBackground>
+        </pic:TouchSlider>
+    </StackPanel>
+</Page>

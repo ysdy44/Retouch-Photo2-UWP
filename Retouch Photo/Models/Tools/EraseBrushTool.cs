@@ -9,10 +9,10 @@ namespace Retouch_Photo.Models.Tools
         public EraseBrushTool()
         {
             base.Type = ToolType.EraseBrush;
-            base.Icon = new ToolEraseBrushControl();
-            base.WorkIcon = new ToolEraseBrushControl();
-            base.Page = new ToolEraseBrushPage();
-            base.ViewModel = new ToolEraseBrushViewModel();
+            base.Icon = new EraseBrushControl();
+            base.WorkIcon = new EraseBrushControl();
+            base.Page = new EraseBrushPage();
+            base.ViewModel = new EraseBrushViewModel();
         }
     }
 }

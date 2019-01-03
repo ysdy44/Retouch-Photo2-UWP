@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Adjustments
         public SaturationAdjustment()
         {
             base.Type = AdjustmentType.Saturation;
-            base.Icon = new AdjustmentSaturationControl();
+            base.Icon = new SaturationControl();
             base.HasPage = true;
             this.Reset();
         }
@@ -34,12 +34,12 @@ namespace Retouch_Photo.Models.Adjustments
 
     public class SaturationAdjustmentCandidate : AdjustmentCandidate
     {
-        public AdjustmentSaturationPage page = new AdjustmentSaturationPage();
+        public SaturationPage page = new SaturationPage();
 
         public SaturationAdjustmentCandidate()
         {
             base.Type = AdjustmentType.Saturation;
-            base.Icon = new AdjustmentSaturationControl();
+            base.Icon = new SaturationControl();
             base.Page = this.page;
         }
 

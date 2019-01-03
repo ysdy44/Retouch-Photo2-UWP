@@ -9,10 +9,10 @@ namespace Retouch_Photo.Models.Tools
         public CursorTool()
         {
             base.Type = ToolType.Cursor;
-            base.Icon = new ToolCursorControl();
-            base.WorkIcon = new ToolCursorControl();
-            base.Page = new ToolCursorPage();
-            base.ViewModel = new ToolCursorViewModel();
+            base.Icon = new CursorControl();
+            base.WorkIcon = new CursorControl();
+            base.Page = new CursorPage();
+            base.ViewModel = new CursorViewModel();
         }
     }
 }

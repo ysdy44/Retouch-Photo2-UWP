@@ -1,0 +1,27 @@
+﻿<UserControl
+    x:Class="Retouch_Photo.Controls.ToolControls.RectangleControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Retouch_Photo.Controls.ToolControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="50">
+
+    <ToolTipService.ToolTip>
+        <Grid  Height="32">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="32"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <PathIcon Data="M17.773,0c1.1,0 1.994,0.894 1.994,1.994l0,15.319c0,1.101 -0.894,1.994 -1.994,1.994l-15.779,0c-1.1,0 -1.994,-0.893 -1.994,-1.994l0,-15.319c0,-1.1 0.894,-1.994 1.994,-1.994l15.779,0Z"/>
+            </ContentPresenter>
+            <TextBlock Text="Rectangle" Grid.Column="1" VerticalAlignment="Center"/>
+        </Grid>
+    </ToolTipService.ToolTip>
+
+    <PathIcon Data="M17.773,0c1.1,0 1.994,0.894 1.994,1.994l0,15.319c0,1.101 -0.894,1.994 -1.994,1.994l-15.779,0c-1.1,0 -1.994,-0.893 -1.994,-1.994l0,-15.319c0,-1.1 0.894,-1.994 1.994,-1.994l15.779,0Z"/>
+
+</UserControl>

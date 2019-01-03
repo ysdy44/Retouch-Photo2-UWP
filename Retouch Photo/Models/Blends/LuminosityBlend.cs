@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Blends
             base.Type = BlendType.Luminosity;
         }
 
-        protected override FrameworkElement GetIcon() => new BlendLuminosityControl();
+        protected override FrameworkElement GetIcon() => new LuminosityControl();
         protected override ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground)
         {
             return new BlendEffect

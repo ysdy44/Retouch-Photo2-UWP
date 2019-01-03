@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Adjustments
         public HueRotationAdjustment()
         {
             base.Type = AdjustmentType.HueRotation;
-            base.Icon = new AdjustmentHueRotationControl();
+            base.Icon = new HueRotationControl();
             base.HasPage = true;
             this.Reset();
         }
@@ -34,12 +34,12 @@ namespace Retouch_Photo.Models.Adjustments
 
     public class HueRotationAdjustmentCandidate : AdjustmentCandidate
     {
-        public AdjustmentHueRotationPage page = new AdjustmentHueRotationPage();
+        public HueRotationPage page = new HueRotationPage();
 
         public HueRotationAdjustmentCandidate()
         {
             base.Type = AdjustmentType.HueRotation;
-            base.Icon = new AdjustmentHueRotationControl();
+            base.Icon = new HueRotationControl();
             base.Page = this.page;
         }
 

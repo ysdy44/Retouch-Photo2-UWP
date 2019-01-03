@@ -95,32 +95,32 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdjustmentControls\AdjustmentBrightnessControl.xaml.cs">
-      <DependentUpon>AdjustmentBrightnessControl.xaml</DependentUpon>
+    <Compile Include="Controls\AdjustmentControls\BrightnessControl.xaml.cs">
+      <DependentUpon>BrightnessControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdjustmentControls\AdjustmentContrastControl.xaml.cs">
-      <DependentUpon>AdjustmentContrastControl.xaml</DependentUpon>
+    <Compile Include="Controls\AdjustmentControls\ContrastControl.xaml.cs">
+      <DependentUpon>ContrastControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdjustmentControls\AdjustmentExposureControl.xaml.cs">
-      <DependentUpon>AdjustmentExposureControl.xaml</DependentUpon>
+    <Compile Include="Controls\AdjustmentControls\ExposureControl.xaml.cs">
+      <DependentUpon>ExposureControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdjustmentControls\AdjustmentGrayControl.xaml.cs">
-      <DependentUpon>AdjustmentGrayControl.xaml</DependentUpon>
+    <Compile Include="Controls\AdjustmentControls\GrayControl.xaml.cs">
+      <DependentUpon>GrayControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdjustmentControls\AdjustmentHighlightsAndShadowsControl.xaml.cs">
-      <DependentUpon>AdjustmentHighlightsAndShadowsControl.xaml</DependentUpon>
+    <Compile Include="Controls\AdjustmentControls\HighlightsAndShadowsControl.xaml.cs">
+      <DependentUpon>HighlightsAndShadowsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdjustmentControls\AdjustmentHueRotationControl.xaml.cs">
-      <DependentUpon>AdjustmentHueRotationControl.xaml</DependentUpon>
+    <Compile Include="Controls\AdjustmentControls\HueRotationControl.xaml.cs">
+      <DependentUpon>HueRotationControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdjustmentControls\AdjustmentInvertControl.xaml.cs">
-      <DependentUpon>AdjustmentInvertControl.xaml</DependentUpon>
+    <Compile Include="Controls\AdjustmentControls\InvertControl.xaml.cs">
+      <DependentUpon>InvertControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdjustmentControls\AdjustmentSaturationControl.xaml.cs">
-      <DependentUpon>AdjustmentSaturationControl.xaml</DependentUpon>
+    <Compile Include="Controls\AdjustmentControls\SaturationControl.xaml.cs">
+      <DependentUpon>SaturationControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdjustmentControls\AdjustmentTemperatureControl.xaml.cs">
-      <DependentUpon>AdjustmentTemperatureControl.xaml</DependentUpon>
+    <Compile Include="Controls\AdjustmentControls\TemperatureControl.xaml.cs">
+      <DependentUpon>TemperatureControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\AppbarControl.xaml.cs">
       <DependentUpon>AppbarControl.xaml</DependentUpon>
@@ -131,143 +131,143 @@
     <Compile Include="Controls\AppbarControls\AppBarControlSecondButton.xaml.cs">
       <DependentUpon>AppBarControlSecondButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AppbarControls\AppbarDuplicateControl.xaml.cs">
-      <DependentUpon>AppbarDuplicateControl.xaml</DependentUpon>
+    <Compile Include="Controls\AppbarControls\DuplicateControl.xaml.cs">
+      <DependentUpon>DuplicateControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AppbarControls\AppbarPicturesControl.xaml.cs">
-      <DependentUpon>AppbarPicturesControl.xaml</DependentUpon>
+    <Compile Include="Controls\AppbarControls\PicturesControl.xaml.cs">
+      <DependentUpon>PicturesControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AppbarControls\AppbarDeleteControl.xaml.cs">
-      <DependentUpon>AppbarDeleteControl.xaml</DependentUpon>
+    <Compile Include="Controls\AppbarControls\DeleteControl.xaml.cs">
+      <DependentUpon>DeleteControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AppbarControls\AppbarShareControl.xaml.cs">
-      <DependentUpon>AppbarShareControl.xaml</DependentUpon>
+    <Compile Include="Controls\AppbarControls\ShareControl.xaml.cs">
+      <DependentUpon>ShareControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AppbarControls\AppbarSaveControl.xaml.cs">
-      <DependentUpon>AppbarSaveControl.xaml</DependentUpon>
+    <Compile Include="Controls\AppbarControls\SaveControl.xaml.cs">
+      <DependentUpon>SaveControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OperateControls\ArrangeControls\FlipHorizontalEnabledControl.xaml.cs">
+    <Compile Include="Controls\OperateControls\TransformControls\FlipHorizontalEnabledControl.xaml.cs">
       <DependentUpon>FlipHorizontalEnabledControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OperateControls\ArrangeControls\FlipHorizontalDisabledControl.xaml.cs">
+    <Compile Include="Controls\OperateControls\TransformControls\FlipHorizontalDisabledControl.xaml.cs">
       <DependentUpon>FlipHorizontalDisabledControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OperateControls\ArrangeControls\FlipVerticalDisabledControl.xaml.cs">
+    <Compile Include="Controls\OperateControls\TransformControls\FlipVerticalDisabledControl.xaml.cs">
       <DependentUpon>FlipVerticalDisabledControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OperateControls\ArrangeControls\FlipVerticalEnabledControl.xaml.cs">
+    <Compile Include="Controls\OperateControls\TransformControls\FlipVerticalEnabledControl.xaml.cs">
       <DependentUpon>FlipVerticalEnabledControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OperateControls\ArrangeControls\RotateLeftDisabledControl.xaml.cs">
+    <Compile Include="Controls\OperateControls\TransformControls\RotateLeftDisabledControl.xaml.cs">
       <DependentUpon>RotateLeftDisabledControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OperateControls\ArrangeControls\RotateLeftEnabledIControl.xaml.cs">
+    <Compile Include="Controls\OperateControls\TransformControls\RotateLeftEnabledIControl.xaml.cs">
       <DependentUpon>RotateLeftEnabledIControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OperateControls\ArrangeControls\RotateRightDisabledControl.xaml.cs">
+    <Compile Include="Controls\OperateControls\TransformControls\RotateRightDisabledControl.xaml.cs">
       <DependentUpon>RotateRightDisabledControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OperateControls\ArrangeControls\RotateRightEnabledControl.xaml.cs">
+    <Compile Include="Controls\OperateControls\TransformControls\RotateRightEnabledControl.xaml.cs">
       <DependentUpon>RotateRightEnabledControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendColorBurnControl.xaml.cs">
-      <DependentUpon>BlendColorBurnControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\ColorBurnControl.xaml.cs">
+      <DependentUpon>ColorBurnControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendColorControl.xaml.cs">
-      <DependentUpon>BlendColorControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\ColorControl.xaml.cs">
+      <DependentUpon>ColorControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendColorDodgeControl.xaml.cs">
-      <DependentUpon>BlendColorDodgeControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\ColorDodgeControl.xaml.cs">
+      <DependentUpon>ColorDodgeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendDarkenControl.xaml.cs">
-      <DependentUpon>BlendDarkenControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\DarkenControl.xaml.cs">
+      <DependentUpon>DarkenControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendDarkerColorControl.xaml.cs">
-      <DependentUpon>BlendDarkerColorControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\DarkerColorControl.xaml.cs">
+      <DependentUpon>DarkerColorControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendDifferenceControl.xaml.cs">
-      <DependentUpon>BlendDifferenceControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\DifferenceControl.xaml.cs">
+      <DependentUpon>DifferenceControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendDissolveControl.xaml.cs">
-      <DependentUpon>BlendDissolveControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\DissolveControl.xaml.cs">
+      <DependentUpon>DissolveControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendDivisionControl.xaml.cs">
-      <DependentUpon>BlendDivisionControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\DivisionControl.xaml.cs">
+      <DependentUpon>DivisionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendExclusionControl.xaml.cs">
-      <DependentUpon>BlendExclusionControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\ExclusionControl.xaml.cs">
+      <DependentUpon>ExclusionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendHardLightControl.xaml.cs">
-      <DependentUpon>BlendHardLightControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\HardLightControl.xaml.cs">
+      <DependentUpon>HardLightControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendHardMixControl.xaml.cs">
-      <DependentUpon>BlendHardMixControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\HardMixControl.xaml.cs">
+      <DependentUpon>HardMixControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendHueControl.xaml.cs">
-      <DependentUpon>BlendHueControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\HueControl.xaml.cs">
+      <DependentUpon>HueControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendLightenControl.xaml.cs">
-      <DependentUpon>BlendLightenControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\LightenControl.xaml.cs">
+      <DependentUpon>LightenControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendLighterColorControl.xaml.cs">
-      <DependentUpon>BlendLighterColorControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\LighterColorControl.xaml.cs">
+      <DependentUpon>LighterColorControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendLinearBurnControl.xaml.cs">
-      <DependentUpon>BlendLinearBurnControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\LinearBurnControl.xaml.cs">
+      <DependentUpon>LinearBurnControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendLinearDodgeControl.xaml.cs">
-      <DependentUpon>BlendLinearDodgeControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\LinearDodgeControl.xaml.cs">
+      <DependentUpon>LinearDodgeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendLinearLightControl.xaml.cs">
-      <DependentUpon>BlendLinearLightControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\LinearLightControl.xaml.cs">
+      <DependentUpon>LinearLightControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendLuminosityControl.xaml.cs">
-      <DependentUpon>BlendLuminosityControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\LuminosityControl.xaml.cs">
+      <DependentUpon>LuminosityControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendMultiplyControl.xaml.cs">
-      <DependentUpon>BlendMultiplyControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\MultiplyControl.xaml.cs">
+      <DependentUpon>MultiplyControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendNormalControl.xaml.cs">
-      <DependentUpon>BlendNormalControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\NormalControl.xaml.cs">
+      <DependentUpon>NormalControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendOverlayControl.xaml.cs">
-      <DependentUpon>BlendOverlayControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\OverlayControl.xaml.cs">
+      <DependentUpon>OverlayControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendPinLightControl.xaml.cs">
-      <DependentUpon>BlendPinLightControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\PinLightControl.xaml.cs">
+      <DependentUpon>PinLightControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendSaturationControl.xaml.cs">
-      <DependentUpon>BlendSaturationControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\SaturationControl.xaml.cs">
+      <DependentUpon>SaturationControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendScreenControl.xaml.cs">
-      <DependentUpon>BlendScreenControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\ScreenControl.xaml.cs">
+      <DependentUpon>ScreenControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendSoftLightControl.xaml.cs">
-      <DependentUpon>BlendSoftLightControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\SoftLightControl.xaml.cs">
+      <DependentUpon>SoftLightControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendSubtractControl.xaml.cs">
-      <DependentUpon>BlendSubtractControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\SubtractControl.xaml.cs">
+      <DependentUpon>SubtractControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BlendControl\BlendVividLightControl.xaml.cs">
-      <DependentUpon>BlendVividLightControl.xaml</DependentUpon>
+    <Compile Include="Controls\BlendControl\VividLightControl.xaml.cs">
+      <DependentUpon>VividLightControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LayerControls\LayerAdjustmentControl.xaml.cs">
-      <DependentUpon>LayerAdjustmentControl.xaml</DependentUpon>
+    <Compile Include="Controls\LayerControls\AdjustmentControl.xaml.cs">
+      <DependentUpon>AdjustmentControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LayerControls\LayerAdjustmentContextControl.xaml.cs">
-      <DependentUpon>LayerAdjustmentContextControl.xaml</DependentUpon>
+    <Compile Include="Controls\LayerControls\AdjustmentContextControl.xaml.cs">
+      <DependentUpon>AdjustmentContextControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LayerControls\LayerBlendControl.xaml.cs">
-      <DependentUpon>LayerBlendControl.xaml</DependentUpon>
+    <Compile Include="Controls\LayerControls\BlendControl.xaml.cs">
+      <DependentUpon>BlendControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LayerControls\LayerLayoutControl.xaml.cs">
-      <DependentUpon>LayerLayoutControl.xaml</DependentUpon>
+    <Compile Include="Controls\LayerControls\LayoutControl.xaml.cs">
+      <DependentUpon>LayoutControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LayerControls\LayerFlyoutControl.xaml.cs">
-      <DependentUpon>LayerFlyoutControl.xaml</DependentUpon>
+    <Compile Include="Controls\LayerControls\FlyoutControl.xaml.cs">
+      <DependentUpon>FlyoutControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\LoadingControl.xaml.cs">
       <DependentUpon>LoadingControl.xaml</DependentUpon>
@@ -287,44 +287,44 @@
     <Compile Include="Controls\SelectionControl.xaml.cs">
       <DependentUpon>SelectionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\ToolAcrylicControl.xaml.cs">
-      <DependentUpon>ToolAcrylicControl.xaml</DependentUpon>
+    <Compile Include="Controls\ToolControls\AcrylicControl.xaml.cs">
+      <DependentUpon>AcrylicControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\ToolCursorControl.xaml.cs">
-      <DependentUpon>ToolCursorControl.xaml</DependentUpon>
+    <Compile Include="Controls\ToolControls\CursorControl.xaml.cs">
+      <DependentUpon>CursorControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\ToolEllipseControl.xaml.cs">
-      <DependentUpon>ToolEllipseControl.xaml</DependentUpon>
+    <Compile Include="Controls\ToolControls\EllipseControl.xaml.cs">
+      <DependentUpon>EllipseControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\ToolEraseBrushControl.xaml.cs">
-      <DependentUpon>ToolEraseBrushControl.xaml</DependentUpon>
+    <Compile Include="Controls\ToolControls\EraseBrushControl.xaml.cs">
+      <DependentUpon>EraseBrushControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\ToolFloodSetectControl.xaml.cs">
-      <DependentUpon>ToolFloodSetectControl.xaml</DependentUpon>
+    <Compile Include="Controls\ToolControls\FloodSetectControl.xaml.cs">
+      <DependentUpon>FloodSetectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\ToolGeometryControl.xaml.cs">
-      <DependentUpon>ToolGeometryControl.xaml</DependentUpon>
+    <Compile Include="Controls\ToolControls\GeometryControl.xaml.cs">
+      <DependentUpon>GeometryControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\ToolPaintBrushControl.xaml.cs">
-      <DependentUpon>ToolPaintBrushControl.xaml</DependentUpon>
+    <Compile Include="Controls\ToolControls\PaintBrushControl.xaml.cs">
+      <DependentUpon>PaintBrushControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\ToolPencilControl.xaml.cs">
-      <DependentUpon>ToolPencilControl.xaml</DependentUpon>
+    <Compile Include="Controls\ToolControls\PencilControl.xaml.cs">
+      <DependentUpon>PencilControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\ToolPenControl.xaml.cs">
-      <DependentUpon>ToolPenControl.xaml</DependentUpon>
+    <Compile Include="Controls\ToolControls\PenControl.xaml.cs">
+      <DependentUpon>PenControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\ToolRectangleControl.xaml.cs">
-      <DependentUpon>ToolRectangleControl.xaml</DependentUpon>
+    <Compile Include="Controls\ToolControls\RectangleControl.xaml.cs">
+      <DependentUpon>RectangleControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\ToolSelectionBrushControl.xaml.cs">
-      <DependentUpon>ToolSelectionBrushControl.xaml</DependentUpon>
+    <Compile Include="Controls\ToolControls\SelectionBrushControl.xaml.cs">
+      <DependentUpon>SelectionBrushControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\ToolViewControl.xaml.cs">
-      <DependentUpon>ToolViewControl.xaml</DependentUpon>
+    <Compile Include="Controls\ToolControls\ViewControl.xaml.cs">
+      <DependentUpon>ViewControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\ToolWatercolorPenControl.xaml.cs">
-      <DependentUpon>ToolWatercolorPenControl.xaml</DependentUpon>
+    <Compile Include="Controls\ToolControls\WatercolorPenControl.xaml.cs">
+      <DependentUpon>WatercolorPenControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\AddDialog.xaml.cs">
       <DependentUpon>AddDialog.xaml</DependentUpon>
@@ -398,23 +398,23 @@
     <Compile Include="Models\Transformer.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\VectRect.cs" />
-    <Compile Include="Pages\AdjustmentPages\AdjustmentContrastPage.xaml.cs">
-      <DependentUpon>AdjustmentContrastPage.xaml</DependentUpon>
+    <Compile Include="Pages\AdjustmentPages\ContrastPage.xaml.cs">
+      <DependentUpon>ContrastPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AdjustmentPages\AdjustmentExposurePage.xaml.cs">
-      <DependentUpon>AdjustmentExposurePage.xaml</DependentUpon>
+    <Compile Include="Pages\AdjustmentPages\ExposurePage.xaml.cs">
+      <DependentUpon>ExposurePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AdjustmentPages\AdjustmentHighlightsAndShadowsPage.xaml.cs">
-      <DependentUpon>AdjustmentHighlightsAndShadowsPage.xaml</DependentUpon>
+    <Compile Include="Pages\AdjustmentPages\HighlightsAndShadowsPage.xaml.cs">
+      <DependentUpon>HighlightsAndShadowsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AdjustmentPages\AdjustmentHueRotationPage.xaml.cs">
-      <DependentUpon>AdjustmentHueRotationPage.xaml</DependentUpon>
+    <Compile Include="Pages\AdjustmentPages\HueRotationPage.xaml.cs">
+      <DependentUpon>HueRotationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AdjustmentPages\AdjustmentSaturationPage.xaml.cs">
-      <DependentUpon>AdjustmentSaturationPage.xaml</DependentUpon>
+    <Compile Include="Pages\AdjustmentPages\SaturationPage.xaml.cs">
+      <DependentUpon>SaturationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AdjustmentPages\AdjustmentTemperaturePage.xaml.cs">
-      <DependentUpon>AdjustmentTemperaturePage.xaml</DependentUpon>
+    <Compile Include="Pages\AdjustmentPages\TemperaturePage.xaml.cs">
+      <DependentUpon>TemperaturePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DrawLayout.xaml.cs">
       <DependentUpon>DrawLayout.xaml</DependentUpon>
@@ -431,56 +431,56 @@
     </Compile>
     <Compile Include="Models\Layer.cs" />
     <Compile Include="Models\Photo.cs" />
-    <Compile Include="Pages\PageControls\PageModeControl.xaml.cs">
-      <DependentUpon>PageModeControl.xaml</DependentUpon>
+    <Compile Include="Pages\PageControls\ModeControl.xaml.cs">
+      <DependentUpon>ModeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PageControls\PageNumberControl.xaml.cs">
-      <DependentUpon>PageNumberControl.xaml</DependentUpon>
+    <Compile Include="Pages\PageControls\NumberControl.xaml.cs">
+      <DependentUpon>NumberControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PageControls\PageToggleControl.xaml.cs">
-      <DependentUpon>PageToggleControl.xaml</DependentUpon>
+    <Compile Include="Pages\PageControls\ToggleControl.xaml.cs">
+      <DependentUpon>ToggleControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\ToolAcrylicPage.xaml.cs">
-      <DependentUpon>ToolAcrylicPage.xaml</DependentUpon>
+    <Compile Include="Pages\ToolPages\AcrylicPage.xaml.cs">
+      <DependentUpon>AcrylicPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\ToolCursorPage.xaml.cs">
-      <DependentUpon>ToolCursorPage.xaml</DependentUpon>
+    <Compile Include="Pages\ToolPages\CursorPage.xaml.cs">
+      <DependentUpon>CursorPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\ToolEllipsePage.xaml.cs">
-      <DependentUpon>ToolEllipsePage.xaml</DependentUpon>
+    <Compile Include="Pages\ToolPages\EllipsePage.xaml.cs">
+      <DependentUpon>EllipsePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\ToolEraseBrushPage.xaml.cs">
-      <DependentUpon>ToolEraseBrushPage.xaml</DependentUpon>
+    <Compile Include="Pages\ToolPages\EraseBrushPage.xaml.cs">
+      <DependentUpon>EraseBrushPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\ToolFloodSetectPage.xaml.cs">
-      <DependentUpon>ToolFloodSetectPage.xaml</DependentUpon>
+    <Compile Include="Pages\ToolPages\FloodSetectPage.xaml.cs">
+      <DependentUpon>FloodSetectPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\ToolGeometryPage.xaml.cs">
-      <DependentUpon>ToolGeometryPage.xaml</DependentUpon>
+    <Compile Include="Pages\ToolPages\GeometryPage.xaml.cs">
+      <DependentUpon>GeometryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ToolPages\ToolMarqueePage\ToolMarqueeCompositeModeControl.xaml.cs">
       <DependentUpon>ToolMarqueeCompositeModeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\ToolPaintBrushPage.xaml.cs">
-      <DependentUpon>ToolPaintBrushPage.xaml</DependentUpon>
+    <Compile Include="Pages\ToolPages\PaintBrushPage.xaml.cs">
+      <DependentUpon>PaintBrushPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\ToolPencilPage.xaml.cs">
-      <DependentUpon>ToolPencilPage.xaml</DependentUpon>
+    <Compile Include="Pages\ToolPages\PencilPage.xaml.cs">
+      <DependentUpon>PencilPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\ToolPenPage.xaml.cs">
-      <DependentUpon>ToolPenPage.xaml</DependentUpon>
+    <Compile Include="Pages\ToolPages\PenPage.xaml.cs">
+      <DependentUpon>PenPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\ToolRectanglePage.xaml.cs">
-      <DependentUpon>ToolRectanglePage.xaml</DependentUpon>
+    <Compile Include="Pages\ToolPages\RectanglePage.xaml.cs">
+      <DependentUpon>RectanglePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\ToolSelectionBrushPage.xaml.cs">
-      <DependentUpon>ToolSelectionBrushPage.xaml</DependentUpon>
+    <Compile Include="Pages\ToolPages\SelectionBrushPage.xaml.cs">
+      <DependentUpon>SelectionBrushPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\ToolViewPage.xaml.cs">
-      <DependentUpon>ToolViewPage.xaml</DependentUpon>
+    <Compile Include="Pages\ToolPages\ViewPage.xaml.cs">
+      <DependentUpon>ViewPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\ToolWatercolorPenPage.xaml.cs">
-      <DependentUpon>ToolWatercolorPenPage.xaml</DependentUpon>
+    <Compile Include="Pages\ToolPages\WatercolorPenPage.xaml.cs">
+      <DependentUpon>WatercolorPenPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pickers\AlphaPicker.xaml.cs">
       <DependentUpon>AlphaPicker.xaml</DependentUpon>
@@ -526,40 +526,40 @@
     </Compile>
     <Compile Include="Models\Tool.cs" />
     <Compile Include="ViewModels\DrawViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolAcrylicViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorNoneViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorRotationViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale1ViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale1ViewModels\ToolCursorScaleBottomViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale1ViewModels\ToolCursorScaleLeftViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale1ViewModels\ToolCursorScaleRightViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale1ViewModels\ToolCursorScaleTopViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale2ViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale2ViewModels\ToolCursorScaleLeftBottomViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale2ViewModels\ToolCursorScaleLeftTopViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale2ViewModels\ToolCursorScaleRightBottomViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorScaleViewModels\ToolCursorScale2ViewModels\ToolCursorScaleRightTopViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorSkewViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorSkewViewModels\ToolCursorSkewBottomViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorSkewViewModels\ToolCursorSkewLeftViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorSkewViewModels\ToolCursorSkewRightViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorSkewViewModels\ToolCursorSkewTopViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModels\ToolCursorTranslationViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolEllipseViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolEraseBrushViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolGeometryViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolNullViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolPaintBrushViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolPencilViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolPenViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolRectangleViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolCursorViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolFloodSetectViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolSelectionBrushViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\AcrylicViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModels\NoneViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModels\RotationViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModels\ScaleViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModels\ScaleViewModels\Scale1ViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModels\ScaleViewModels\Scale1ViewModels\BottomViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModels\ScaleViewModels\Scale1ViewModels\LeftViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModels\ScaleViewModels\Scale1ViewModels\RightViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModels\ScaleViewModels\Scale1ViewModels\TopViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModels\ScaleViewModels\Scale2ViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModels\ScaleViewModels\Scale2ViewModels\LeftBottomViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModels\ScaleViewModels\Scale2ViewModels\LeftTopViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModels\ScaleViewModels\Scale2ViewModels\RightBottomViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModels\ScaleViewModels\Scale2ViewModels\RightTopViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModels\SkewViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModels\SkewViewModels\BottomViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModels\SkewViewModels\LeftViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModels\SkewViewModels\RightViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModels\SkewViewModels\TopViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModels\TranslationViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\EllipseViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\EraseBrushViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\GeometryViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\NullViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\PaintBrushViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\PencilViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\PenViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\RectangleViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\CursorViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\FloodSetectViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\SelectionBrushViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolViewViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ToolWatercolorPenViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\ViewViewModel.cs" />
+    <Compile Include="ViewModels\ToolViewModels\WatercolorPenViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -904,39 +904,39 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\AdjustmentControls\AdjustmentBrightnessControl.xaml">
+    <Page Include="Controls\AdjustmentControls\BrightnessControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AdjustmentControls\AdjustmentContrastControl.xaml">
+    <Page Include="Controls\AdjustmentControls\ContrastControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AdjustmentControls\AdjustmentExposureControl.xaml">
+    <Page Include="Controls\AdjustmentControls\ExposureControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AdjustmentControls\AdjustmentGrayControl.xaml">
+    <Page Include="Controls\AdjustmentControls\GrayControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AdjustmentControls\AdjustmentHighlightsAndShadowsControl.xaml">
+    <Page Include="Controls\AdjustmentControls\HighlightsAndShadowsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AdjustmentControls\AdjustmentHueRotationControl.xaml">
+    <Page Include="Controls\AdjustmentControls\HueRotationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AdjustmentControls\AdjustmentInvertControl.xaml">
+    <Page Include="Controls\AdjustmentControls\InvertControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AdjustmentControls\AdjustmentSaturationControl.xaml">
+    <Page Include="Controls\AdjustmentControls\SaturationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AdjustmentControls\AdjustmentTemperatureControl.xaml">
+    <Page Include="Controls\AdjustmentControls\TemperatureControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -952,163 +952,163 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AppbarControls\AppbarDuplicateControl.xaml">
+    <Page Include="Controls\AppbarControls\DuplicateControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\AppbarControls\AppbarPicturesControl.xaml">
+    <Page Include="Controls\AppbarControls\PicturesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AppbarControls\AppbarDeleteControl.xaml">
+    <Page Include="Controls\AppbarControls\DeleteControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\AppbarControls\AppbarShareControl.xaml">
+    <Page Include="Controls\AppbarControls\ShareControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\AppbarControls\AppbarSaveControl.xaml">
+    <Page Include="Controls\AppbarControls\SaveControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\OperateControls\ArrangeControls\FlipHorizontalEnabledControl.xaml">
+    <Page Include="Controls\OperateControls\TransformControls\FlipHorizontalEnabledControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\OperateControls\ArrangeControls\FlipHorizontalDisabledControl.xaml">
+    <Page Include="Controls\OperateControls\TransformControls\FlipHorizontalDisabledControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\OperateControls\ArrangeControls\FlipVerticalDisabledControl.xaml">
+    <Page Include="Controls\OperateControls\TransformControls\FlipVerticalDisabledControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\OperateControls\ArrangeControls\FlipVerticalEnabledControl.xaml">
+    <Page Include="Controls\OperateControls\TransformControls\FlipVerticalEnabledControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\OperateControls\ArrangeControls\RotateLeftDisabledControl.xaml">
+    <Page Include="Controls\OperateControls\TransformControls\RotateLeftDisabledControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\OperateControls\ArrangeControls\RotateLeftEnabledIControl.xaml">
+    <Page Include="Controls\OperateControls\TransformControls\RotateLeftEnabledIControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\OperateControls\ArrangeControls\RotateRightDisabledControl.xaml">
+    <Page Include="Controls\OperateControls\TransformControls\RotateRightDisabledControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\OperateControls\ArrangeControls\RotateRightEnabledControl.xaml">
+    <Page Include="Controls\OperateControls\TransformControls\RotateRightEnabledControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendColorBurnControl.xaml">
+    <Page Include="Controls\BlendControl\ColorBurnControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendColorControl.xaml">
+    <Page Include="Controls\BlendControl\ColorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendColorDodgeControl.xaml">
+    <Page Include="Controls\BlendControl\ColorDodgeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendDarkenControl.xaml">
+    <Page Include="Controls\BlendControl\DarkenControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendDarkerColorControl.xaml">
+    <Page Include="Controls\BlendControl\DarkerColorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendDifferenceControl.xaml">
+    <Page Include="Controls\BlendControl\DifferenceControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendDissolveControl.xaml">
+    <Page Include="Controls\BlendControl\DissolveControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendDivisionControl.xaml">
+    <Page Include="Controls\BlendControl\DivisionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendExclusionControl.xaml">
+    <Page Include="Controls\BlendControl\ExclusionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendHardLightControl.xaml">
+    <Page Include="Controls\BlendControl\HardLightControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendHardMixControl.xaml">
+    <Page Include="Controls\BlendControl\HardMixControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendHueControl.xaml">
+    <Page Include="Controls\BlendControl\HueControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendLightenControl.xaml">
+    <Page Include="Controls\BlendControl\LightenControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendLighterColorControl.xaml">
+    <Page Include="Controls\BlendControl\LighterColorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendLinearBurnControl.xaml">
+    <Page Include="Controls\BlendControl\LinearBurnControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendLinearDodgeControl.xaml">
+    <Page Include="Controls\BlendControl\LinearDodgeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendLinearLightControl.xaml">
+    <Page Include="Controls\BlendControl\LinearLightControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendLuminosityControl.xaml">
+    <Page Include="Controls\BlendControl\LuminosityControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendMultiplyControl.xaml">
+    <Page Include="Controls\BlendControl\MultiplyControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendNormalControl.xaml">
+    <Page Include="Controls\BlendControl\NormalControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendOverlayControl.xaml">
+    <Page Include="Controls\BlendControl\OverlayControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendPinLightControl.xaml">
+    <Page Include="Controls\BlendControl\PinLightControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendSaturationControl.xaml">
+    <Page Include="Controls\BlendControl\SaturationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendScreenControl.xaml">
+    <Page Include="Controls\BlendControl\ScreenControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendSoftLightControl.xaml">
+    <Page Include="Controls\BlendControl\SoftLightControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendSubtractControl.xaml">
+    <Page Include="Controls\BlendControl\SubtractControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BlendControl\BlendVividLightControl.xaml">
+    <Page Include="Controls\BlendControl\VividLightControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1116,23 +1116,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\LayerControls\LayerAdjustmentControl.xaml">
+    <Page Include="Controls\LayerControls\AdjustmentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\LayerControls\LayerAdjustmentContextControl.xaml">
+    <Page Include="Controls\LayerControls\AdjustmentContextControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\LayerControls\LayerBlendControl.xaml">
+    <Page Include="Controls\LayerControls\BlendControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\LayerControls\LayerLayoutControl.xaml">
+    <Page Include="Controls\LayerControls\LayoutControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\LayerControls\LayerFlyoutControl.xaml">
+    <Page Include="Controls\LayerControls\FlyoutControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1160,55 +1160,55 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\ToolAcrylicControl.xaml">
+    <Page Include="Controls\ToolControls\AcrylicControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\ToolCursorControl.xaml">
+    <Page Include="Controls\ToolControls\CursorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\ToolEllipseControl.xaml">
+    <Page Include="Controls\ToolControls\EllipseControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\ToolEraseBrushControl.xaml">
+    <Page Include="Controls\ToolControls\EraseBrushControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\ToolFloodSetectControl.xaml">
+    <Page Include="Controls\ToolControls\FloodSetectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\ToolGeometryControl.xaml">
+    <Page Include="Controls\ToolControls\GeometryControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\ToolPaintBrushControl.xaml">
+    <Page Include="Controls\ToolControls\PaintBrushControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\ToolPencilControl.xaml">
+    <Page Include="Controls\ToolControls\PencilControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\ToolPenControl.xaml">
+    <Page Include="Controls\ToolControls\PenControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\ToolRectangleControl.xaml">
+    <Page Include="Controls\ToolControls\RectangleControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\ToolSelectionBrushControl.xaml">
+    <Page Include="Controls\ToolControls\SelectionBrushControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\ToolViewControl.xaml">
+    <Page Include="Controls\ToolControls\ViewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\ToolWatercolorPenControl.xaml">
+    <Page Include="Controls\ToolControls\WatercolorPenControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1220,27 +1220,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\AdjustmentPages\AdjustmentContrastPage.xaml">
+    <Page Include="Pages\AdjustmentPages\ContrastPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\AdjustmentPages\AdjustmentExposurePage.xaml">
+    <Page Include="Pages\AdjustmentPages\ExposurePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\AdjustmentPages\AdjustmentHighlightsAndShadowsPage.xaml">
+    <Page Include="Pages\AdjustmentPages\HighlightsAndShadowsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\AdjustmentPages\AdjustmentHueRotationPage.xaml">
+    <Page Include="Pages\AdjustmentPages\HueRotationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\AdjustmentPages\AdjustmentSaturationPage.xaml">
+    <Page Include="Pages\AdjustmentPages\SaturationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\AdjustmentPages\AdjustmentTemperaturePage.xaml">
+    <Page Include="Pages\AdjustmentPages\TemperaturePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1260,39 +1260,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\PageControls\PageModeControl.xaml">
+    <Page Include="Pages\PageControls\ModeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\PageControls\PageNumberControl.xaml">
+    <Page Include="Pages\PageControls\NumberControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\PageControls\PageToggleControl.xaml">
+    <Page Include="Pages\PageControls\ToggleControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\ToolPages\ToolAcrylicPage.xaml">
+    <Page Include="Pages\ToolPages\AcrylicPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\ToolPages\ToolCursorPage.xaml">
+    <Page Include="Pages\ToolPages\CursorPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\ToolEllipsePage.xaml">
+    <Page Include="Pages\ToolPages\EllipsePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\ToolEraseBrushPage.xaml">
+    <Page Include="Pages\ToolPages\EraseBrushPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\ToolFloodSetectPage.xaml">
+    <Page Include="Pages\ToolPages\FloodSetectPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\ToolGeometryPage.xaml">
+    <Page Include="Pages\ToolPages\GeometryPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1300,31 +1300,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\ToolPaintBrushPage.xaml">
+    <Page Include="Pages\ToolPages\PaintBrushPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\ToolPencilPage.xaml">
+    <Page Include="Pages\ToolPages\PencilPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\ToolPenPage.xaml">
+    <Page Include="Pages\ToolPages\PenPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\ToolRectanglePage.xaml">
+    <Page Include="Pages\ToolPages\RectanglePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\ToolSelectionBrushPage.xaml">
+    <Page Include="Pages\ToolPages\SelectionBrushPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\ToolViewPage.xaml">
+    <Page Include="Pages\ToolPages\ViewPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\ToolWatercolorPenPage.xaml">
+    <Page Include="Pages\ToolPages\WatercolorPenPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

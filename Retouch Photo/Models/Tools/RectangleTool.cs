@@ -9,10 +9,10 @@ namespace Retouch_Photo.Models.Tools
         public RectangleTool()
         {
             base.Type = ToolType.Rectangle;
-            base.Icon = new ToolRectangleControl();
-            base.WorkIcon = new ToolRectangleControl();
-            base.Page = new ToolRectanglePage();
-            base.ViewModel = new ToolRectangleViewModel();
+            base.Icon = new RectangleControl();
+            base.WorkIcon = new RectangleControl();
+            base.Page = new RectanglePage();
+            base.ViewModel = new RectangleViewModel();
         }
     }
 }

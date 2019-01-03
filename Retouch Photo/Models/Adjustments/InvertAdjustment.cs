@@ -10,7 +10,7 @@ namespace Retouch_Photo.Models.Adjustments
         public InvertAdjustment()
         {
             base.Type = AdjustmentType.Invert;
-            base.Icon = new AdjustmentInvertControl();
+            base.Icon = new InvertControl();
             base.HasPage = false;
             this.Reset();
         }
@@ -28,7 +28,7 @@ namespace Retouch_Photo.Models.Adjustments
         public InvertAdjustmentCandidate()
         {
             base.Type = AdjustmentType.Invert;
-            base.Icon = new AdjustmentInvertControl();
+            base.Icon = new InvertControl();
             base.Page = null;
         }
 

@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Adjustments
         public ContrastAdjustment()
         {
             base.Type = AdjustmentType.Contrast;
-            base.Icon = new AdjustmentContrastControl();
+            base.Icon = new ContrastControl();
             base.HasPage = true;
             this.Reset();
         }
@@ -34,12 +34,12 @@ namespace Retouch_Photo.Models.Adjustments
 
     public class ContrastAdjustmentCandidate : AdjustmentCandidate
     {
-        public AdjustmentContrastPage page = new AdjustmentContrastPage();
+        public ContrastPage page = new ContrastPage();
 
         public ContrastAdjustmentCandidate()
         {
             base.Type = AdjustmentType.Contrast;
-            base.Icon = new AdjustmentContrastControl();
+            base.Icon = new ContrastControl();
             base.Page = this.page;
         }
 

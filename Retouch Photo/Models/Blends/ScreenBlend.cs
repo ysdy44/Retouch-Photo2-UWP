@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Blends
             base.Type = BlendType.Screen;
         }
 
-        protected override FrameworkElement GetIcon() => new BlendScreenControl();
+        protected override FrameworkElement GetIcon() => new ScreenControl();
         protected override ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground)
         {
             return new BlendEffect

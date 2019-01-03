@@ -9,10 +9,10 @@ namespace Retouch_Photo.Models.Tools
         public SelectionBrushTool()
         {
             base.Type = ToolType.SelectionBrush;
-            base.Icon = new ToolSelectionBrushControl();
-            base.WorkIcon = new ToolSelectionBrushControl();
-            base.Page = new ToolSelectionBrushPage();
-            base.ViewModel = new ToolSelectionBrushViewModel();
+            base.Icon = new SelectionBrushControl();
+            base.WorkIcon = new SelectionBrushControl();
+            base.Page = new SelectionBrushPage();
+            base.ViewModel = new SelectionBrushViewModel();
         }
     }
 }

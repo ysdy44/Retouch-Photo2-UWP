@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Blends
             base.Type = BlendType.PinLight;
         }
 
-        protected override FrameworkElement GetIcon() => new BlendPinLightControl();
+        protected override FrameworkElement GetIcon() => new PinLightControl();
         protected override ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground)
         {
             return new BlendEffect

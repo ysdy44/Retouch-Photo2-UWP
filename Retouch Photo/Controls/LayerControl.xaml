@@ -17,12 +17,12 @@
 
         <!--DataTemplate-->
         <DataTemplate x:Key="DataTemplate" x:DataType="models:Layer">
-            <conLayerControls:LayerLayoutControl Layer="{x:Bind}" FlyoutShow="LayerLayoutControl_FlyoutShow"/>
+            <conLayerControls:LayoutControl Layer="{x:Bind}" FlyoutShow="LayoutControl_FlyoutShow"/>
         </DataTemplate>
         
         <!--Flyout-->
         <Flyout x:Name="PropertyFlyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle }">
-            <conLayerControls:LayerFlyoutControl x:Name="LayerFlyoutControl"/>
+            <conLayerControls:FlyoutControl x:Name="FlyoutControl"/>
         </Flyout>
         
         <!--Style-->

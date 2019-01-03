@@ -9,10 +9,10 @@ namespace Retouch_Photo.Models.Tools
         public FloodSetectTool()
         {
             base.Type = ToolType.FloodSetect;
-            base.Icon = new ToolFloodSetectControl();
-            base.WorkIcon = new ToolFloodSetectControl();
-            base.Page = new ToolFloodSetectPage();
-            base.ViewModel = new ToolFloodSetectViewModel();
+            base.Icon = new FloodSetectControl();
+            base.WorkIcon = new FloodSetectControl();
+            base.Page = new FloodSetectPage();
+            base.ViewModel = new FloodSetectViewModel();
         }
     }
 }

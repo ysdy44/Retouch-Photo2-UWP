@@ -9,10 +9,10 @@ namespace Retouch_Photo.Models.Tools
         public PenTool()
         {
             base.Type = ToolType.Pen;
-            base.Icon = new ToolPenControl();
-            base.WorkIcon = new ToolPenControl();
-            base.Page = new ToolPenPage();
-            base.ViewModel = new ToolPenViewModel();
+            base.Icon = new PenControl();
+            base.WorkIcon = new PenControl();
+            base.Page = new PenPage();
+            base.ViewModel = new PenViewModel();
         }
     }
 }

@@ -36,11 +36,11 @@ namespace Retouch_Photo.Controls
 
         //Flyout
         UserControl control;
-        private void LayerLayoutControl_FlyoutShow(UserControl control, Layer layer, bool isShow)
+        private void LayoutControl_FlyoutShow(UserControl control, Layer layer, bool isShow)
         {
             if (this.control == control || isShow)
             {
-                this.LayerFlyoutControl.Layer = layer;
+                this.FlyoutControl.Layer = layer;
                 this.PropertyFlyout.ShowAt(control);
             }
             else this.control = control;

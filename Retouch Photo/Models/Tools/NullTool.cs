@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Tools
             base.Icon = null;
             base.WorkIcon = null;
             base.Page = null;
-            base.ViewModel = new ToolNullViewModel();
+            base.ViewModel = new NullViewModel();
         }
     }
 }

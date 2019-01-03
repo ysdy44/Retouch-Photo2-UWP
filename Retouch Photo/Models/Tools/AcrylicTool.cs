@@ -9,10 +9,10 @@ namespace Retouch_Photo.Models.Tools
         public AcrylicTool()
         {
             base.Type = ToolType.Acrylic;
-            base.Icon = new ToolAcrylicControl();
-            base.WorkIcon = new ToolAcrylicControl();
-            base.Page = new ToolAcrylicPage();
-            base.ViewModel = new ToolAcrylicViewModel();
+            base.Icon = new AcrylicControl();
+            base.WorkIcon = new AcrylicControl();
+            base.Page = new AcrylicPage();
+            base.ViewModel = new AcrylicViewModel();
         }
     }
 }

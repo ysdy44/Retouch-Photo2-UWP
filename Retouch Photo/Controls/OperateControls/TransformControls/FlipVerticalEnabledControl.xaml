@@ -1,0 +1,16 @@
+﻿<UserControl
+    x:Class="Retouch_Photo.Controls.OperateControls.TransformControls.FlipVerticalEnabledControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Retouch_Photo.Controls.OperateControls.TransformControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="50">
+    
+    <Canvas Width="40" Height="40" >
+        <Polygon Points="6,18 32,18 32,4" Fill="DodgerBlue" />
+        <Polygon Points="6,22 32,22 32,36" Fill="Gray" />
+    </Canvas>
+</UserControl>

@@ -9,10 +9,10 @@ namespace Retouch_Photo.Models.Tools
         public PaintBrushTool()
         {
             base.Type = ToolType.PaintBrush;
-            base.Icon = new ToolPaintBrushControl();
-            base.WorkIcon = new ToolPaintBrushControl();
-            base.Page = new ToolPaintBrushPage();
-            base.ViewModel = new ToolPaintBrushViewModel();
+            base.Icon = new PaintBrushControl();
+            base.WorkIcon = new PaintBrushControl();
+            base.Page = new PaintBrushPage();
+            base.ViewModel = new PaintBrushViewModel();
         }
     }
 }

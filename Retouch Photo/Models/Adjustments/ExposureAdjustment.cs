@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Adjustments
         public ExposureAdjustment()
         {
             base.Type = AdjustmentType.Exposure;
-            base.Icon = new AdjustmentExposureControl();
+            base.Icon = new ExposureControl();
             base.HasPage = true;
             this.Reset();
         }
@@ -34,12 +34,12 @@ namespace Retouch_Photo.Models.Adjustments
 
     public class ExposureAdjustmentCandidate : AdjustmentCandidate
     {
-        public AdjustmentExposurePage page = new AdjustmentExposurePage();
+        public ExposurePage page = new ExposurePage();
 
         public ExposureAdjustmentCandidate()
         {
             base.Type = AdjustmentType.Exposure;
-            base.Icon = new AdjustmentExposureControl();
+            base.Icon = new ExposureControl();
             base.Page = this.page;
         }
 

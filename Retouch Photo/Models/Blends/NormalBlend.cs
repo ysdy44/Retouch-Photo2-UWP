@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Blends
             base.Type = BlendType.Normal;
         }
 
-        protected override FrameworkElement GetIcon() => new BlendNormalControl();
+        protected override FrameworkElement GetIcon() => new NormalControl();
         protected override ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground)
         {
             return new CompositeEffect

@@ -9,10 +9,10 @@ namespace Retouch_Photo.Models.Tools
         public WatercolorPenTool()
         {
             base.Type = ToolType.WatercolorPen;
-            base.Icon = new ToolWatercolorPenControl();
-            base.WorkIcon = new ToolWatercolorPenControl();
-            base.Page = new ToolWatercolorPenPage();
-            base.ViewModel = new ToolWatercolorPenViewModel();
+            base.Icon = new WatercolorPenControl();
+            base.WorkIcon = new WatercolorPenControl();
+            base.Page = new WatercolorPenPage();
+            base.ViewModel = new WatercolorPenViewModel();
         }
     }
 }

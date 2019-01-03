@@ -12,7 +12,7 @@ namespace Retouch_Photo.Models.Blends
             base.Type = BlendType.Difference;
         }
 
-        protected override FrameworkElement GetIcon() => new BlendDifferenceControl();
+        protected override FrameworkElement GetIcon() => new DifferenceControl();
         protected override ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground)
         {
             return new BlendEffect
