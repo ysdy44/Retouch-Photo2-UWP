@@ -60,9 +60,9 @@
                 <con:SelectionControl x:Name="SelectionControl"/>
             </local:DrawLayout.SelectionPane>
 
-            <local:DrawLayout.EffectsPane>
-                <con:ArrangeControl x:Name="ArrangeControl" />
-            </local:DrawLayout.EffectsPane>
+            <local:DrawLayout.OperatePane>
+                <con:OperateControl x:Name="OperateControl" />
+            </local:DrawLayout.OperatePane>
 
             <local:DrawLayout.OthersPane>
                 <con:OthersControl x:Name="OthersControl" />

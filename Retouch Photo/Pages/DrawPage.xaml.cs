@@ -38,7 +38,7 @@ namespace Retouch_Photo.Pages
 
             //S & A & O
             this.DrawLayout.SelectionButtonTapped += (sender, e) => this.SelectionControl.Initialize();
-            this.DrawLayout.ArrangeButtonTapped += (sender, e) => this.ArrangeControl.Initialize();
+            this.DrawLayout.OperateButtonTapped += (sender, e) => this.OperateControl.Initialize();
             this.DrawLayout.OthersButtonTapped += (sender, e) => this.OthersControl.Initialize();
 
             //SizeChanged

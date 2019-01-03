@@ -2,9 +2,9 @@
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
-namespace Retouch_Photo.Controls.ArrangeControls
+namespace Retouch_Photo.Controls.OperateControls
 {
-    public sealed partial class ArrangeControlButton : UserControl
+    public sealed partial class OperateControlButton : UserControl
     {
         //@Delegate
         public event TappedEventHandler ButtonTapped;
@@ -17,7 +17,7 @@ namespace Retouch_Photo.Controls.ArrangeControls
         {
             set
             {
-                 this.Button.IsEnabled = value;
+                this.Button.IsEnabled = value;
 
                 this.EnabledViewbox.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
                 this.DisabledViewbox.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
@@ -26,7 +26,7 @@ namespace Retouch_Photo.Controls.ArrangeControls
             }
         }
 
-        public ArrangeControlButton()
+        public OperateControlButton()
         {
             this.InitializeComponent();
         }

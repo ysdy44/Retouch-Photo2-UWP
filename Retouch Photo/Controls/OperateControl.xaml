@@ -1,0 +1,75 @@
+﻿<UserControl
+    x:Class="Retouch_Photo.Controls.OperateControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Retouch_Photo.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conOperate="using:Retouch_Photo.Controls.OperateControls"
+    xmlns:conOperateArrange="using:Retouch_Photo.Controls.OperateControls.ArrangeControls"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="300">
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="130"/>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="130"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0">
+
+            <TextBlock Text="Transform" Margin="8,0" Opacity="0.5"/>
+
+            <conOperate:OperateControlButton x:Name="FlipHorizontalButton" Label="FlipHorizontal" ButtonTapped="FlipHorizontalButton_Tapped">
+                <conOperate:OperateControlButton.EnabledIcon>
+                    <conOperateArrange:FlipHorizontalEnabledControl/>
+                </conOperate:OperateControlButton.EnabledIcon>
+                <conOperate:OperateControlButton.DisabledIcon>
+                    <conOperateArrange:FlipHorizontalDisabledControl/>
+                </conOperate:OperateControlButton.DisabledIcon>
+            </conOperate:OperateControlButton>
+
+            <conOperate:OperateControlButton x:Name="FlipVerticalButton" Label="FlipVertical" ButtonTapped="FlipVerticalButton_Tapped">
+                <conOperate:OperateControlButton.EnabledIcon>
+                    <conOperateArrange:FlipVerticalEnabledControl/>
+                </conOperate:OperateControlButton.EnabledIcon>
+                <conOperate:OperateControlButton.DisabledIcon>
+                    <conOperateArrange:FlipVerticalDisabledControl/>
+                </conOperate:OperateControlButton.DisabledIcon>
+            </conOperate:OperateControlButton>
+
+            <conOperate:OperateControlButton x:Name="RotateLeftButton" Label="RotateLeft" ButtonTapped="RotateLeftButton_Tapped">
+                <conOperate:OperateControlButton.EnabledIcon>
+                    <conOperateArrange:RotateLeftEnabledIControl/>
+                </conOperate:OperateControlButton.EnabledIcon>
+                <conOperate:OperateControlButton.DisabledIcon>
+                    <conOperateArrange:RotateLeftDisabledControl/>
+                </conOperate:OperateControlButton.DisabledIcon>
+            </conOperate:OperateControlButton>
+
+            <conOperate:OperateControlButton x:Name="RotateRightButton" Label="RotateRight" ButtonTapped="RotateRightButton_Tapped">
+                <conOperate:OperateControlButton.EnabledIcon>
+                    <conOperateArrange:RotateRightEnabledControl/>
+                </conOperate:OperateControlButton.EnabledIcon>
+                <conOperate:OperateControlButton.DisabledIcon>
+                    <conOperateArrange:RotateRightDisabledControl/>
+                </conOperate:OperateControlButton.DisabledIcon>
+            </conOperate:OperateControlButton>
+
+            <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
+
+        </StackPanel>
+
+        <Rectangle Grid.Column="1" Width="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
+
+        <StackPanel Grid.Column="2">
+
+            
+        </StackPanel>
+
+    </Grid>
+
+</UserControl>

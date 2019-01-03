@@ -1,6 +1,6 @@
 ﻿using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo.Controls.ArrangeControls
+namespace Retouch_Photo.Controls.OperateControls.ArrangeControls
 {
     public sealed partial class FlipHorizontalEnabledControl : UserControl
     {

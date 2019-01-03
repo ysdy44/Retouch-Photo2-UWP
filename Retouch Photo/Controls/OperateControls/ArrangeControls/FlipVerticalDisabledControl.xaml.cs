@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Retouch_Photo.Controls.ArrangeControls
+namespace Retouch_Photo.Controls.OperateControls.ArrangeControls
 {
     public sealed partial class FlipVerticalDisabledControl : UserControl
     {

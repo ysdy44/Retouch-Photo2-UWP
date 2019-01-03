@@ -16,11 +16,11 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Retouch_Photo.Controls
 {
-    public sealed partial class ArrangeControl : UserControl
+    public sealed partial class OperateControl : UserControl
     {
         Layer Layer;
 
-        public ArrangeControl()
+        public OperateControl()
         {
             this.InitializeComponent();
         }
