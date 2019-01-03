@@ -82,7 +82,7 @@
         </Grid.ColumnDefinitions>
 
         <Border x:Name="ThirdBoder" Grid.Column="2" Margin="4" VerticalAlignment="Center" >
-            <TextBlock x:Name="TextBlock" FontWeight="Medium" />
+            <TextBlock x:Name="TextBlock"  />
         </Border>
 
         <Border x:Name="SecondBoder" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" >

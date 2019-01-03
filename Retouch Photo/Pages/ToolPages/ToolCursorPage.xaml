@@ -9,7 +9,7 @@
     NavigationCacheMode="Enabled"
     mc:Ignorable="d"
     d:DesignHeight="50"
-    d:DesignWidth="400">
+    d:DesignWidth="800">
 
     <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
         <StackPanel Orientation="Horizontal" Height="50" Padding="4">
@@ -29,46 +29,6 @@
             <!--Mode-->
             <pageControls:PageModeControl Mode="{x:Bind ViewModel.MarqueeMode,Mode=TwoWay}" />
 
-            <AppBarSeparator/>
-
-            <!--Button-->
-            <Border CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}">
-                <StackPanel Orientation="Horizontal">
-
-                    <!--FlipHorizontal-->
-                    <Button x:Name="FlipHorizontalButton" ToolTipService.ToolTip="FlipHorizontal" Width="60" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="FlipHorizontalButton_Tapped">
-                        <Canvas Width="40" Height="40" >
-                            <Polygon Points="18,6 18,32 4,32" Fill="DodgerBlue" />
-                            <Polygon Points="22,6 22,32 36,32" Fill="Gray" />
-                        </Canvas>
-                    </Button>
-
-                    <!--FlipVertical-->
-                    <Button x:Name="FlipVerticalButton" ToolTipService.ToolTip="FlipVertical" Width="60" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="FlipVerticalButton_Tapped">
-                        <Canvas Width="40" Height="40" >
-                            <Polygon Points="6,18 32,18 32,4" Fill="DodgerBlue" />
-                            <Polygon Points="6,22 32,22 32,36" Fill="Gray" />
-                        </Canvas>
-                    </Button>
-
-                    <!--LeftTurn-->
-                    <Button x:Name="LeftTurnButton" ToolTipService.ToolTip="LeftTurn" Width="60" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="LeftTurnButton_Tapped">
-                        <Canvas Width="40" Height="40">
-                            <Rectangle Width="12" Height="28" Canvas.Left="6" Canvas.Top="6" Fill="DodgerBlue" />
-                            <Rectangle Width="12" Height="12" Canvas.Left="22" Canvas.Top="22" Fill="Gray" />
-                        </Canvas>
-                    </Button>
-                    
-                    <!--RightTurn-->
-                    <Button x:Name="RightTurnButton" ToolTipService.ToolTip="RightTurn" Width="60" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="RightTurnButton_Tapped">
-                        <Canvas Width="40" Height="40">
-                            <Rectangle Width="12" Height="28" Canvas.Left="22" Canvas.Top="8" Fill="DodgerBlue" />
-                            <Rectangle Width="12" Height="12" Canvas.Left="6" Canvas.Top="24" Fill="Gray" />
-                        </Canvas>
-                    </Button>
-                </StackPanel>
-            </Border>
-            
             <AppBarSeparator/>
             
             <!--Skew-->

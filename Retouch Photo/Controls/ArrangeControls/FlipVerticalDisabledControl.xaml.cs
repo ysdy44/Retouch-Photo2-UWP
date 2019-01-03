@@ -13,21 +13,13 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Retouch_Photo.Controls
+namespace Retouch_Photo.Controls.ArrangeControls
 {
-    public sealed partial class SelectionControl : UserControl
+    public sealed partial class FlipVerticalDisabledControl : UserControl
     {
-        public SelectionControl()
+        public FlipVerticalDisabledControl()
         {
             this.InitializeComponent();
         }
-
-        /// <summary>
-        /// Initialize all button
-        /// </summary>
-        public void Initialize()
-        {
-        }
-
     }
 }

@@ -13,21 +13,15 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Retouch_Photo.Controls
+//https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
+
+namespace Retouch_Photo.Controls.ArrangeControls
 {
-    public sealed partial class SelectionControl : UserControl
+    public sealed partial class FlipVerticalEnabledControl : UserControl
     {
-        public SelectionControl()
+        public FlipVerticalEnabledControl()
         {
             this.InitializeComponent();
         }
-
-        /// <summary>
-        /// Initialize all button
-        /// </summary>
-        public void Initialize()
-        {
-        }
-
     }
 }

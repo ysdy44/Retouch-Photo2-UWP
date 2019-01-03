@@ -13,6 +13,12 @@ namespace Retouch_Photo.Pages
     public sealed partial class DrawLayout : UserControl
     {
 
+        //@Delegate
+        public event TappedEventHandler SelectionButtonTapped;
+        public event TappedEventHandler ArrangeButtonTapped;
+        public event TappedEventHandler OthersButtonTapped;
+
+
         #region DependencyProperty
 
 
@@ -36,7 +42,7 @@ namespace Retouch_Photo.Pages
                             con.WorkOverlay();
             }
         }));
-        
+
 
         #endregion
 
@@ -51,9 +57,9 @@ namespace Retouch_Photo.Pages
         public UIElement TopLeftStackBar { get => this.TopLeftStackPanel.Child; set => this.TopLeftStackPanel.Child = value; }
 
         public UIElement SelectionPane { get => this.SelectionFlyout.Content; set => this.SelectionFlyout.Content = value; }
-        public UIElement EffectsPane { get => this.EffectsFlyout.Content; set => this.EffectsFlyout.Content = value; }
+        public UIElement EffectsPane { get => this.ArrangeFlyout.Content; set => this.ArrangeFlyout.Content = value; }
         public UIElement OthersPane { get => this.OthersFlyout.Content; set => this.OthersFlyout.Content = value; }
-               
+
 
         private bool WorkLeftChecked
         {
@@ -72,7 +78,7 @@ namespace Retouch_Photo.Pages
                 this.WorkRightBorder.Foreground = value ? this.CheckColor : this.UnCheckColor;
             }
         }
-        
+
 
         public DrawLayout()
         {
@@ -88,15 +94,15 @@ namespace Retouch_Photo.Pages
             this.WorkDismissOverlay.Tapped += (sender, e) => this.WorkOverlay();
 
             //Selection
-            this.SelectionToggleButton.Tapped += (sender, e) => FlyoutBase.ShowAttachedFlyout((ToggleButton)sender);
+            this.SelectionToggleButton.Tapped += (sender, e) => this.ButtonTapped(this.SelectionButtonTapped, sender, e);
             this.SelectionFlyout.Opened += (sender, e) => this.SelectionToggleButton.IsChecked = true;
             this.SelectionFlyout.Closed += (sender, e) => this.SelectionToggleButton.IsChecked = false;
-            //Effects
-            this.EffectsToggleButton.Tapped += (sender, e) => FlyoutBase.ShowAttachedFlyout((ToggleButton)sender);
-            this.EffectsFlyout.Opened += (sender, e) => this.EffectsToggleButton.IsChecked = true;
-            this.EffectsFlyout.Closed += (sender, e) => this.EffectsToggleButton.IsChecked = false;
+            //Arrange
+            this.ArrangeToggleButton.Tapped += (sender, e) => this.ButtonTapped(this.ArrangeButtonTapped, sender, e);
+            this.ArrangeFlyout.Opened += (sender, e) => this.ArrangeToggleButton.IsChecked = true;
+            this.ArrangeFlyout.Closed += (sender, e) => this.ArrangeToggleButton.IsChecked = false;
             //Others
-            this.OthersToggleButton.Tapped += (sender, e) => FlyoutBase.ShowAttachedFlyout((ToggleButton)sender);
+            this.OthersToggleButton.Tapped += (sender, e) => this.ButtonTapped(this.OthersButtonTapped, sender, e);
             this.OthersFlyout.Opened += (sender, e) => this.OthersToggleButton.IsChecked = true;
             this.OthersFlyout.Closed += (sender, e) => this.OthersToggleButton.IsChecked = false;
         }
@@ -119,12 +125,20 @@ namespace Retouch_Photo.Pages
             this.RightBorder.Visibility = this.WorkDismissOverlay.Visibility = Visibility.Visible;
             this.WorkRightChecked = true;
         }
-        
+
         private void WorkOverlay()
         {
             this.LeftBorder.Visibility = this.RightBorder.Visibility = this.WorkDismissOverlay.Visibility = Visibility.Collapsed;
             this.WorkLeftChecked = this.WorkRightChecked = false;
         }
+
+        //S & A & O
+        private void ButtonTapped(TappedEventHandler buttonTapped, object sender, TappedRoutedEventArgs e)
+        {
+            FlyoutBase.ShowAttachedFlyout((ToggleButton)sender);
+            buttonTapped?.Invoke(sender, e);
+        }
+
 
         // Appbar
         private void BottomBorder_SizeChanged(object sender, SizeChangedEventArgs e)

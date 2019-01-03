@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo.Models;
 using Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels;
 using Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCursorScaleViewModels.ToolCursorScale1ViewModels;
@@ -6,6 +7,7 @@ using Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCursorSca
 using Retouch_Photo.ViewModels.ToolViewModels.ToolCursorViewModels.ToolCursorSkewViewModels;
 using System.Collections.Generic;
 using System.Numerics;
+using Windows.UI;
 
 namespace Retouch_Photo.ViewModels.ToolViewModels
 {
@@ -66,7 +68,11 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             {CursorMode.ScaleRightBottom,  new ToolCursorScaleRightBottomViewModel()},
             {CursorMode.ScaleLeftBottom,  new ToolCursorScaleLeftBottomViewModel()},
         };
-        
+
+        bool IsCursorBox;
+        Vector2 StartPoint;
+        Vector2 EndPoint;
+
 
         public override void Start(Vector2 point)
         {
@@ -101,26 +107,52 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
                     return;
                 }
             }
+
+
+            //CursorBox
             this.CurrentLayer = null;
+            this.IsCursorBox = true;
+            this.StartPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
         }
-        
+
         public override void Delta(Vector2 point)
         {
+            if (this.IsCursorBox)
+            {
+                this.EndPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+                this.ViewModel.Invalidate();
+                return;
+            }
+
             if (this.CurrentLayer != null)
             {
                 this.ViewModelDictionary[this.Mode].Delta(point, this.CurrentLayer);
+                this.ViewModel.Invalidate();
+                return;
             }
-
-            this.ViewModel.Invalidate();
         }
                
         public override void Complete(Vector2 point)
         {
-            if (this.CurrentLayer != null)
+            if (this.IsCursorBox)
+            {
+                this.IsCursorBox = false;
+                this.EndPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+                this.CurrentLayer = null;
+                this.ViewModel.CurrentLayer = null;
+                this.ViewModel.Invalidate();
+                return;
+            }
+
+            if (this.CurrentLayer == null)
+            {
+                this.ViewModel.CurrentLayer = null;
+            }
+            else
             {
                 this.CurrentLayer.Invalidate();
                 this.ViewModelDictionary[this.Mode].Complete(point, this.CurrentLayer);
-            }            
+            }
 
             this.Mode = CursorMode.None;
             this.ViewModel.Invalidate();
@@ -130,8 +162,26 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         
         public override void Draw(CanvasDrawingSession ds)
         {
-            if (this.ViewModel.CurrentLayer == null) return;
-            this.ViewModelDictionary[this.Mode].Draw(ds, this.ViewModel.CurrentLayer);
+            if (this.IsCursorBox)
+            {
+                Vector2[] points = new Vector2[4];
+                points[0] = Vector2.Transform(this.StartPoint, this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
+                points[1] = Vector2.Transform(new Vector2(this.StartPoint.X, this.EndPoint.Y), this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
+                points[2] = Vector2.Transform(this.EndPoint, this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
+                points[3] = Vector2.Transform(new Vector2(this.EndPoint.X, this.StartPoint.Y), this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
+                CanvasGeometry geometry = CanvasGeometry.CreatePolygon(this.ViewModel.CanvasControl, points);
+
+                ds.FillGeometry(geometry, Color.FromArgb(128, 30, 144, 255));
+                ds.DrawGeometry(geometry, Colors.DodgerBlue, 1);
+
+                return;
+            }
+
+            Layer layer = this.ViewModel.CurrentLayer;
+            if (layer != null)
+            {
+                this.ViewModelDictionary[this.Mode].Draw(ds, layer);
+            }
         }
 
 

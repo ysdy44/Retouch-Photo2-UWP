@@ -104,7 +104,7 @@
                >
         
         <ListView.Header>
-            <Button x:Name="AddButton" Width="Auto" Height="44" FontWeight="Medium" Content="&#xE109;" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="AddButton_Tapped"/>
+            <Button x:Name="AddButton" Width="Auto" Height="44"  Content="&#xE109;" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="AddButton_Tapped"/>
         </ListView.Header>
     </ListView>
     

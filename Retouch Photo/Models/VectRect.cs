@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Retouch_Photo.Models
 {
-    public class VectRect
+    public struct VectRect
     {
         public float X;
         public float Y;
@@ -79,6 +79,10 @@ namespace Retouch_Photo.Models
 
 
                 default:
+                    this.X = 0.0f;
+                    this.Y = 0.0f;
+                    this.Width = 0.0f;
+                    this.Height = 0.0f;
                     break;
             }
         }

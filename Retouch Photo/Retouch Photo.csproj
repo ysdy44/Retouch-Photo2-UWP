@@ -146,6 +146,36 @@
     <Compile Include="Controls\AppbarControls\AppbarSaveControl.xaml.cs">
       <DependentUpon>AppbarSaveControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ArrangeControl.xaml.cs">
+      <DependentUpon>ArrangeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ArrangeControls\ArrangeControlButton.xaml.cs">
+      <DependentUpon>ArrangeControlButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ArrangeControls\FlipHorizontalEnabledControl.xaml.cs">
+      <DependentUpon>FlipHorizontalEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ArrangeControls\FlipHorizontalDisabledControl.xaml.cs">
+      <DependentUpon>FlipHorizontalDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ArrangeControls\FlipVerticalDisabledControl.xaml.cs">
+      <DependentUpon>FlipVerticalDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ArrangeControls\FlipVerticalEnabledControl.xaml.cs">
+      <DependentUpon>FlipVerticalEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ArrangeControls\RotateLeftDisabledControl.xaml.cs">
+      <DependentUpon>RotateLeftDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ArrangeControls\RotateLeftEnabledIControl.xaml.cs">
+      <DependentUpon>RotateLeftEnabledIControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ArrangeControls\RotateRightDisabledControl.xaml.cs">
+      <DependentUpon>RotateRightDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ArrangeControls\RotateRightEnabledControl.xaml.cs">
+      <DependentUpon>RotateRightEnabledControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BlendControl\BlendColorBurnControl.xaml.cs">
       <DependentUpon>BlendColorBurnControl.xaml</DependentUpon>
     </Compile>
@@ -250,6 +280,9 @@
     </Compile>
     <Compile Include="Controls\MainCanvasControl.xaml.cs">
       <DependentUpon>MainCanvasControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OthersControl.xaml.cs">
+      <DependentUpon>OthersControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SelectionControl.xaml.cs">
       <DependentUpon>SelectionControl.xaml</DependentUpon>
@@ -935,6 +968,46 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ArrangeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ArrangeControls\ArrangeControlButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ArrangeControls\FlipHorizontalEnabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ArrangeControls\FlipHorizontalDisabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ArrangeControls\FlipVerticalDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ArrangeControls\FlipVerticalEnabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ArrangeControls\RotateLeftDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ArrangeControls\RotateLeftEnabledIControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ArrangeControls\RotateRightDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ArrangeControls\RotateRightEnabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\BlendControl\BlendColorBurnControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1072,6 +1145,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\MainCanvasControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OthersControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

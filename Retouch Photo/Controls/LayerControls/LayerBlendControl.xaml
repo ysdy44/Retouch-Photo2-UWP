@@ -229,8 +229,7 @@
     </UserControl.Resources>
 
 
-    <ComboBox x:Name="ComboBox"
-              FontWeight="Medium"                           
+    <ComboBox x:Name="ComboBox"                                         
               Style="{StaticResource ComboBoxStyle}"               
               ItemTemplate="{StaticResource DataTemplate}"              
               Loaded="ComboBox_Loaded"

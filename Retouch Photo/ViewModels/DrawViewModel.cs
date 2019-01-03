@@ -152,15 +152,13 @@ namespace Retouch_Photo.ViewModels
             {
                 if (this.RenderLayer.Layers.Count == 0 || this.RenderLayer.Layers.Count == -1) return null;
 
-                if (this.RenderLayer.Layers.Count == 1) return this.RenderLayer.Layers.First();
-
                 if (this.SelectedIndex >= 0 && this.SelectedIndex < this.RenderLayer.Layers.Count()) return this.RenderLayer.Layers[this.SelectedIndex];
 
                 return null;
             }
             set
             {
-                if (this.RenderLayer.Layers == null || this.RenderLayer.Layers.Count == 0)
+                if (value == null || this.RenderLayer.Layers == null || this.RenderLayer.Layers.Count == 0)
                 {
                     this.SelectedIndex = -1;
                     return;
@@ -170,6 +168,7 @@ namespace Retouch_Photo.ViewModels
                     this.SelectedIndex = 0;
                     return;
                 }
+
                 this.SelectedIndex = this.RenderLayer.Layers.IndexOf(value);
             }
         }

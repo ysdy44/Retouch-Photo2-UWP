@@ -30,19 +30,6 @@ namespace Retouch_Photo.Pages.ToolPages
         private void StepFrequencyButton_Tapped(object sender, TappedRoutedEventArgs e) => this.ViewModel.Invalidate();
         private void SkewButton_Tapped(object sender, TappedRoutedEventArgs e) => this.ViewModel.Invalidate();
                      
-        private void FlipHorizontalButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Transformer((Layer layer) => layer.Transformer.FlipHorizontal = !layer.Transformer.FlipHorizontal);
-        private void FlipVerticalButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Transformer((Layer layer) => layer.Transformer.FlipVertical = !layer.Transformer.FlipVertical);
-        private void LeftTurnButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Transformer((Layer layer) => layer.Transformer.Radian += (float)Math.PI / 2);
-        private void RightTurnButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Transformer((Layer layer) => layer.Transformer.Radian -= (float)Math.PI / 2);
-        private void Transformer(Action<Layer> action)
-        {
-            Layer layer = App.ViewModel.CurrentLayer;
-            if (layer == null) return;
-
-            action(layer);
-
-            App.ViewModel.Invalidate();
-        }
 
 
     }

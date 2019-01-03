@@ -15,9 +15,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Retouch_Photo.Controls
 {
-    public sealed partial class SelectionControl : UserControl
+    public sealed partial class OthersControl : UserControl
     {
-        public SelectionControl()
+        public OthersControl()
         {
             this.InitializeComponent();
         }

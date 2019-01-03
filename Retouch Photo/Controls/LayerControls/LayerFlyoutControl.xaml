@@ -41,13 +41,13 @@
         <!--PropertyPanel-->
         <StackPanel x:Name="PropertyPanel">
 
-            <TextBlock Text="Opacity" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
+            <TextBlock Text="Opacity"  Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
             <Slider Value="{x:Bind Layer.Opacity,Mode=TwoWay}" TickFrequency="25" TickPlacement="Inline" Style="{StaticResource AppOpacitySliderStyle}" ValueChanged="Slider_ValueChanged"/>
 
-            <TextBlock Text="BlendMode" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
+            <TextBlock Text="BlendMode" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
             <local:LayerBlendControl BlendIndex="{x:Bind Layer.BlendIndex,Mode=TwoWay}"  IndexChanged="LayerBlendControl_IndexChanged"  />
 
-            <TextBlock Text="Layer" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
+            <TextBlock Text="Layer" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
             <Border Style="{StaticResource AppRoundedBorderStyle}">
                 <Grid >
                     <Grid.ColumnDefinitions>
@@ -71,7 +71,7 @@
                 </Grid>
             </Border>
 
-            <TextBlock x:Name="AdjustmentTextBlock" Text="Adjustment" FontWeight="Medium" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
+            <TextBlock x:Name="AdjustmentTextBlock" Text="Adjustment" Margin="0,6,0,4" Foreground="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
             <Border x:Name="AdjustmentBorder" Style="{StaticResource AppRoundedBorderStyle}">
                 <ItemsControl x:Name="AdjustmentsItemsControl" >
                     <ItemsControl.ItemTemplate>

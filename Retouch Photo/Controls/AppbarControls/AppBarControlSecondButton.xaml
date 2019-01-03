@@ -16,7 +16,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <FontIcon x:Name="FontIcon" FontSize="22" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource SystemControlHighlightAccentBrush}"/>
-            <TextBlock x:Name="TextBlock" Grid.Column="1" VerticalAlignment="Center" FontSize="14" FontWeight="Medium" FontFamily="Microsoft YaHei UI"/>
+            <TextBlock x:Name="TextBlock" Grid.Column="1" VerticalAlignment="Center" FontSize="14"  FontFamily="Microsoft YaHei UI"/>
         </Grid>
     </Button>
     
