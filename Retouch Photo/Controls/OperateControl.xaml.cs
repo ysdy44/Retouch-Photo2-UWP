@@ -39,6 +39,24 @@ namespace Retouch_Photo.Controls
             this.FlipVerticalButton.ButtonIsEnabled = isEnabled;
             this.RotateLeftButton.ButtonIsEnabled = isEnabled;
             this.RotateRightButton.ButtonIsEnabled = isEnabled;
+
+            //Arrange
+            this.ArrangeMoveBackButton.ButtonIsEnabled = isEnabled;
+            this.ArrangeBackOneButton.ButtonIsEnabled = isEnabled;
+            this.ArrangeForwardOneButton.ButtonIsEnabled = isEnabled;
+            this.ArrangeMoveFrontButton.ButtonIsEnabled = isEnabled;
+
+            //Align Horizontal
+            this.AlignLeftButton.ButtonIsEnabled = isEnabled;
+            this.AlignCenterButton.ButtonIsEnabled = isEnabled;
+            this.AlignRightButton.ButtonIsEnabled = isEnabled;
+            this.AlignSpaceHorizontallyButton.ButtonIsEnabled = isEnabled;
+
+            //Align Vertical
+            this.AlignTopButton.ButtonIsEnabled = isEnabled;
+            this.AlignMiddleButton.ButtonIsEnabled = isEnabled;
+            this.AlignBottomButton.ButtonIsEnabled = isEnabled;
+            this.AlignSpaceVerticallyButton.ButtonIsEnabled = isEnabled;
         }
 
         //Transform
@@ -55,6 +73,64 @@ namespace Retouch_Photo.Controls
             App.ViewModel.Invalidate();
         }
 
+        private void AlignLeftButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
+        {
 
+        }
+
+        private void AlignCenterButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void AlignRightButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void AlignSpaceHorizontallyButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void AlignTopButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void AlignMiddleButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void AlignBottomButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void AlignSpaceVerticallyButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void ArrangeMoveBackButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void ArrangeBackOneButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void ArrangeForwardOneButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void ArrangeMoveFrontButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
     }
 }

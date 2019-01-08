@@ -55,6 +55,10 @@ namespace Retouch_Photo.Library
         public void TypedEventHandler(CoreDispatcher core, AcceleratorKeyEventArgs args)
         {
             string s = args.EventType.ToString();
+            App.ViewModel.Text = s+"   "+
+
+            Window.Current.CoreWindow.GetKeyState(VirtualKey.Delete).ToString();
+            return;
             bool isDown = s.Contains("Down");
             bool isUp = s.Contains("Up");
 

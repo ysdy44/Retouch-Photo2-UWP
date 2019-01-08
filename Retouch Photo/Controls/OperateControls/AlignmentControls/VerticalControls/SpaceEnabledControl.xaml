@@ -1,0 +1,19 @@
+﻿<UserControl
+    x:Class="Retouch_Photo.Controls.OperateControls.AlignmentControls.VerticalControls.SpaceEnabledControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Retouch_Photo.Controls.OperateControls.AlignmentControls.VerticalControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="40"
+    d:DesignWidth="40">
+
+    <Canvas Width="40" Height="40" >
+        <Rectangle Canvas.Left="3" Canvas.Top="17" Width="35"  Height="2" Fill="DodgerBlue"/>
+        <Rectangle Canvas.Left="3" Canvas.Top="21" Width="35"  Height="2" Fill="DodgerBlue"/>
+        <Rectangle Canvas.Left="7" Canvas.Top="6" Width="25"  Height="8" Fill="Gray"/>
+        <Rectangle Canvas.Left="11.5" Canvas.Top="26" Width="17"  Height="8" Fill="Gray"/>
+    </Canvas>
+</UserControl>
+    

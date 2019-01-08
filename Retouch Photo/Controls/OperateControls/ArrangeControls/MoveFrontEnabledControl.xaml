@@ -1,0 +1,17 @@
+﻿<UserControl
+    x:Class="Retouch_Photo.Controls.OperateControls.ArrangeControls.MoveFrontEnabledControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Retouch_Photo.Controls.OperateControls.ArrangeControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="40"
+    d:DesignWidth="40">
+
+    <Canvas Width="40" Height="40" >
+        <Rectangle Canvas.Left="10" Canvas.Top="10" Width="20"  Height="20" Fill="#E2A747" />
+        <Polygon Points="5,5 5,17 9,17 9,9 17,9 17,5" Fill="Gray" />
+        <Polygon Points="31,31 23,31 23,35 35,35 35,23 31,23" Fill="Gray" />
+    </Canvas>
+</UserControl>

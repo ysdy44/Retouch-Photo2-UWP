@@ -22,13 +22,13 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels.ScaleViewMode
         {
             if (this.StartTransformer.FlipVertical)
             {
-                layer.Transformer.Postion.X = startTransformer.Postion.X - ySin;
-                layer.Transformer.Postion.Y = startTransformer.Postion.Y - yCos;
+                layer.Transformer.Postion.X = startTransformer.Postion.X + ySin;
+                layer.Transformer.Postion.Y = startTransformer.Postion.Y + yCos;
             }
             else
             {
-                layer.Transformer.Postion.X = startTransformer.Postion.X + ySin;
-                layer.Transformer.Postion.Y = startTransformer.Postion.Y + yCos;
+                layer.Transformer.Postion.X = startTransformer.Postion.X - ySin;
+                layer.Transformer.Postion.Y = startTransformer.Postion.Y - yCos;
             }
         }
     }

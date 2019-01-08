@@ -5,8 +5,11 @@
     xmlns:local="using:Retouch_Photo.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:conOperate="using:Retouch_Photo.Controls.OperateControls"
-    xmlns:conOperateTransform="using:Retouch_Photo.Controls.OperateControls.TransformControls"
+    xmlns:conOpe="using:Retouch_Photo.Controls.OperateControls"
+    xmlns:conOpeTra="using:Retouch_Photo.Controls.OperateControls.TransformControls"
+    xmlns:conOpeArr="using:Retouch_Photo.Controls.OperateControls.ArrangeControls"
+    xmlns:conOpeAliHor="using:Retouch_Photo.Controls.OperateControls.AlignmentControls.HorizontalControls"
+    xmlns:conOpeAliVer="using:Retouch_Photo.Controls.OperateControls.AlignmentControls.VerticalControls"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="300">
@@ -14,62 +17,201 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="130"/>
+            <ColumnDefinition Width="170"/>
             <ColumnDefinition Width="1"/>
-            <ColumnDefinition Width="130"/>
+            <ColumnDefinition Width="170"/>
         </Grid.ColumnDefinitions>
 
+                
         <StackPanel Grid.Column="0">
 
-            <TextBlock Text="Transform" Margin="8,0" Opacity="0.5"/>
+            <TextBlock Text="Transform" Margin="12,4" Opacity="0.5"/>
 
-            <conOperate:OperateControlButton x:Name="FlipHorizontalButton" Label="FlipHorizontal" ButtonTapped="FlipHorizontalButton_Tapped">
-                <conOperate:OperateControlButton.EnabledIcon>
-                    <conOperateTransform:FlipHorizontalEnabledControl/>
-                </conOperate:OperateControlButton.EnabledIcon>
-                <conOperate:OperateControlButton.DisabledIcon>
-                    <conOperateTransform:FlipHorizontalDisabledControl/>
-                </conOperate:OperateControlButton.DisabledIcon>
-            </conOperate:OperateControlButton>
+            <!--#region Transform-->
 
-            <conOperate:OperateControlButton x:Name="FlipVerticalButton" Label="FlipVertical" ButtonTapped="FlipVerticalButton_Tapped">
-                <conOperate:OperateControlButton.EnabledIcon>
-                    <conOperateTransform:FlipVerticalEnabledControl/>
-                </conOperate:OperateControlButton.EnabledIcon>
-                <conOperate:OperateControlButton.DisabledIcon>
-                    <conOperateTransform:FlipVerticalDisabledControl/>
-                </conOperate:OperateControlButton.DisabledIcon>
-            </conOperate:OperateControlButton>
+            <conOpe:OperateControlButton x:Name="FlipHorizontalButton" Label="Flip Horizontal" ButtonTapped="FlipHorizontalButton_Tapped">
+                <conOpe:OperateControlButton.EnabledIcon>
+                    <conOpeTra:FlipHorizontalEnabledControl/>
+                </conOpe:OperateControlButton.EnabledIcon>
+                <conOpe:OperateControlButton.DisabledIcon>
+                    <conOpeTra:FlipHorizontalDisabledControl/>
+                </conOpe:OperateControlButton.DisabledIcon>
+            </conOpe:OperateControlButton>
 
-            <conOperate:OperateControlButton x:Name="RotateLeftButton" Label="RotateLeft" ButtonTapped="RotateLeftButton_Tapped">
-                <conOperate:OperateControlButton.EnabledIcon>
-                    <conOperateTransform:RotateLeftEnabledIControl/>
-                </conOperate:OperateControlButton.EnabledIcon>
-                <conOperate:OperateControlButton.DisabledIcon>
-                    <conOperateTransform:RotateLeftDisabledControl/>
-                </conOperate:OperateControlButton.DisabledIcon>
-            </conOperate:OperateControlButton>
-
-            <conOperate:OperateControlButton x:Name="RotateRightButton" Label="RotateRight" ButtonTapped="RotateRightButton_Tapped">
-                <conOperate:OperateControlButton.EnabledIcon>
-                    <conOperateTransform:RotateRightEnabledControl/>
-                </conOperate:OperateControlButton.EnabledIcon>
-                <conOperate:OperateControlButton.DisabledIcon>
-                    <conOperateTransform:RotateRightDisabledControl/>
-                </conOperate:OperateControlButton.DisabledIcon>
-            </conOperate:OperateControlButton>
-
+            <conOpe:OperateControlButton x:Name="FlipVerticalButton" Label="Flip Vertical" ButtonTapped="FlipVerticalButton_Tapped">
+                <conOpe:OperateControlButton.EnabledIcon>
+                    <conOpeTra:FlipVerticalEnabledControl/>
+                </conOpe:OperateControlButton.EnabledIcon>
+                <conOpe:OperateControlButton.DisabledIcon>
+                    <conOpeTra:FlipVerticalDisabledControl/>
+                </conOpe:OperateControlButton.DisabledIcon>
+            </conOpe:OperateControlButton>
+            
             <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
+
+            <conOpe:OperateControlButton x:Name="RotateLeftButton" Label="Rotate Left" ButtonTapped="RotateLeftButton_Tapped">
+                <conOpe:OperateControlButton.EnabledIcon>
+                    <conOpeTra:RotateLeftEnabledIControl/>
+                </conOpe:OperateControlButton.EnabledIcon>
+                <conOpe:OperateControlButton.DisabledIcon>
+                    <conOpeTra:RotateLeftDisabledControl/>
+                </conOpe:OperateControlButton.DisabledIcon>
+            </conOpe:OperateControlButton>
+
+            <conOpe:OperateControlButton x:Name="RotateRightButton" Label="Rotate Right" ButtonTapped="RotateRightButton_Tapped">
+                <conOpe:OperateControlButton.EnabledIcon>
+                    <conOpeTra:RotateRightEnabledControl/>
+                </conOpe:OperateControlButton.EnabledIcon>
+                <conOpe:OperateControlButton.DisabledIcon>
+                    <conOpeTra:RotateRightDisabledControl/>
+                </conOpe:OperateControlButton.DisabledIcon>
+            </conOpe:OperateControlButton>
+            
+            <!--#endregion-->
+            
+            <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
+
+            <TextBlock Text="Arrange" Margin="12,4" Opacity="0.5"/>
+
+            <!--#region Arrange-->
+
+            <conOpe:OperateControlButton x:Name="ArrangeMoveBackButton" Label="Move To Back" ButtonTapped="ArrangeMoveBackButton_ButtonTapped">
+                <conOpe:OperateControlButton.EnabledIcon>
+                    <conOpeArr:MoveBackEnabledControl/>
+                </conOpe:OperateControlButton.EnabledIcon>
+                <conOpe:OperateControlButton.DisabledIcon>
+                    <conOpeArr:MoveBackDisabledControl/>
+                </conOpe:OperateControlButton.DisabledIcon>
+            </conOpe:OperateControlButton>
+
+            <conOpe:OperateControlButton x:Name="ArrangeBackOneButton" Label="Back One" ButtonTapped="ArrangeBackOneButton_ButtonTapped">
+                <conOpe:OperateControlButton.EnabledIcon>
+                    <conOpeArr:BackOneEnabledControl/>
+                </conOpe:OperateControlButton.EnabledIcon>
+                <conOpe:OperateControlButton.DisabledIcon>
+                    <conOpeArr:BackOneDisabledControl/>
+                </conOpe:OperateControlButton.DisabledIcon>
+            </conOpe:OperateControlButton>
+
+            <conOpe:OperateControlButton x:Name="ArrangeForwardOneButton" Label="Forward One" ButtonTapped="ArrangeForwardOneButton_ButtonTapped">
+                <conOpe:OperateControlButton.EnabledIcon>
+                    <conOpeArr:ForwardOneEnabledControl/>
+                </conOpe:OperateControlButton.EnabledIcon>
+                <conOpe:OperateControlButton.DisabledIcon>
+                    <conOpeArr:ForwardOneDisabledControl/>
+                </conOpe:OperateControlButton.DisabledIcon>
+            </conOpe:OperateControlButton>
+
+            <conOpe:OperateControlButton x:Name="ArrangeMoveFrontButton" Label="Move To Front" ButtonTapped="ArrangeMoveFrontButton_ButtonTapped">
+                <conOpe:OperateControlButton.EnabledIcon>
+                    <conOpeArr:MoveFrontEnabledControl/>
+                </conOpe:OperateControlButton.EnabledIcon>
+                <conOpe:OperateControlButton.DisabledIcon>
+                    <conOpeArr:MoveFrontDisabledControl/>
+                </conOpe:OperateControlButton.DisabledIcon>
+            </conOpe:OperateControlButton>
+            
+            <!--#endregion-->
 
         </StackPanel>
 
         <Rectangle Grid.Column="1" Width="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
 
+                
         <StackPanel Grid.Column="2">
 
+            <TextBlock Text="Align Horizontal" Margin="12,4" Opacity="0.5"/>
+
+            <!--#region Align Horizontal-->
+
+            <conOpe:OperateControlButton x:Name="AlignLeftButton" Label="Align Left" ButtonTapped="AlignLeftButton_ButtonTapped">
+                <conOpe:OperateControlButton.EnabledIcon>
+                    <conOpeAliHor:LeftEnabledControl/>
+                </conOpe:OperateControlButton.EnabledIcon>
+                <conOpe:OperateControlButton.DisabledIcon>
+                    <conOpeAliHor:LeftDisabledControl/>
+                </conOpe:OperateControlButton.DisabledIcon>
+            </conOpe:OperateControlButton>
+
+            <conOpe:OperateControlButton x:Name="AlignCenterButton" Label="Align Center" ButtonTapped="AlignCenterButton_ButtonTapped">
+                <conOpe:OperateControlButton.EnabledIcon>
+                    <conOpeAliHor:CenterEnabledControl/>
+                </conOpe:OperateControlButton.EnabledIcon>
+                <conOpe:OperateControlButton.DisabledIcon>
+                    <conOpeAliHor:CenterDisabledControl/>
+                </conOpe:OperateControlButton.DisabledIcon>
+            </conOpe:OperateControlButton>
+
+            <conOpe:OperateControlButton x:Name="AlignRightButton" Label="Align Right" ButtonTapped="AlignRightButton_ButtonTapped">
+                <conOpe:OperateControlButton.EnabledIcon>
+                    <conOpeAliHor:RightEnabledControl/>
+                </conOpe:OperateControlButton.EnabledIcon>
+                <conOpe:OperateControlButton.DisabledIcon>
+                    <conOpeAliHor:RightDisabledControl/>
+                </conOpe:OperateControlButton.DisabledIcon>
+            </conOpe:OperateControlButton>
+
+            <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
+
+            <conOpe:OperateControlButton x:Name="AlignSpaceHorizontallyButton" Label="Space Horizontally" ButtonTapped="AlignSpaceHorizontallyButton_ButtonTapped">
+                <conOpe:OperateControlButton.EnabledIcon>
+                    <conOpeAliHor:SpaceEnabledControl/>
+                </conOpe:OperateControlButton.EnabledIcon>
+                <conOpe:OperateControlButton.DisabledIcon>
+                    <conOpeAliHor:SpaceDisabledControl/>
+                </conOpe:OperateControlButton.DisabledIcon>
+            </conOpe:OperateControlButton>
+
+            <!--#endregion-->
+
+            <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
+
+            <TextBlock Text="Align Vertical" Margin="12,4" Opacity="0.5"/>
+
+            <!--#region Align Vertical-->
+
+            <conOpe:OperateControlButton x:Name="AlignTopButton" Label="Align Top" ButtonTapped="AlignTopButton_ButtonTapped">
+                <conOpe:OperateControlButton.EnabledIcon>
+                    <conOpeAliVer:TopEnabledControl/>
+                </conOpe:OperateControlButton.EnabledIcon>
+                <conOpe:OperateControlButton.DisabledIcon>
+                    <conOpeAliVer:TopDisabledControl/>
+                </conOpe:OperateControlButton.DisabledIcon>
+            </conOpe:OperateControlButton>
+
+            <conOpe:OperateControlButton x:Name="AlignMiddleButton" Label="Align Middle" ButtonTapped="AlignMiddleButton_ButtonTapped">
+                <conOpe:OperateControlButton.EnabledIcon>
+                    <conOpeAliVer:MiddleEnabledControl/>
+                </conOpe:OperateControlButton.EnabledIcon>
+                <conOpe:OperateControlButton.DisabledIcon>
+                    <conOpeAliVer:MiddleDisabledControl/>
+                </conOpe:OperateControlButton.DisabledIcon>
+            </conOpe:OperateControlButton>
+
+            <conOpe:OperateControlButton x:Name="AlignBottomButton" Label="Align Bottom" ButtonTapped="AlignBottomButton_ButtonTapped">
+                <conOpe:OperateControlButton.EnabledIcon>
+                    <conOpeAliVer:BottomEnabledControl/>
+                </conOpe:OperateControlButton.EnabledIcon>
+                <conOpe:OperateControlButton.DisabledIcon>
+                    <conOpeAliVer:BottomDisabledControl/>
+                </conOpe:OperateControlButton.DisabledIcon>
+            </conOpe:OperateControlButton>
+
+            <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
             
-        </StackPanel>
+            <conOpe:OperateControlButton x:Name="AlignSpaceVerticallyButton" Label="Space Vertically" ButtonTapped="AlignSpaceVerticallyButton_ButtonTapped">
+                <conOpe:OperateControlButton.EnabledIcon>
+                    <conOpeAliVer:SpaceEnabledControl/>
+                </conOpe:OperateControlButton.EnabledIcon>
+                <conOpe:OperateControlButton.DisabledIcon>
+                    <conOpeAliVer:SpaceDisabledControl/>
+                </conOpe:OperateControlButton.DisabledIcon>
+            </conOpe:OperateControlButton>
+
+            <!--#endregion-->
+
+        </StackPanel>        
+        
 
     </Grid>
-
 </UserControl>

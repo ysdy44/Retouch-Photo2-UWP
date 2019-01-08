@@ -146,6 +146,78 @@
     <Compile Include="Controls\AppbarControls\SaveControl.xaml.cs">
       <DependentUpon>SaveControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\OperateControls\AlignmentControls\HorizontalControls\CenterDisabledControl.xaml.cs">
+      <DependentUpon>CenterDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\AlignmentControls\HorizontalControls\CenterEnabledControl.xaml.cs">
+      <DependentUpon>CenterEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\AlignmentControls\HorizontalControls\LeftDisabledControl.xaml.cs">
+      <DependentUpon>LeftDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\AlignmentControls\HorizontalControls\LeftEnabledControl.xaml.cs">
+      <DependentUpon>LeftEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\AlignmentControls\HorizontalControls\RightDisabledControl.xaml.cs">
+      <DependentUpon>RightDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\AlignmentControls\HorizontalControls\RightEnabledControl.xaml.cs">
+      <DependentUpon>RightEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\AlignmentControls\HorizontalControls\SpaceDisabledControl.xaml.cs">
+      <DependentUpon>SpaceDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\AlignmentControls\HorizontalControls\SpaceEnabledControl.xaml.cs">
+      <DependentUpon>SpaceEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\AlignmentControls\VerticalControls\BottomDisabledControl.xaml.cs">
+      <DependentUpon>BottomDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\AlignmentControls\VerticalControls\BottomEnabledControl.xaml.cs">
+      <DependentUpon>BottomEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\AlignmentControls\VerticalControls\MiddleDisabledControl.xaml.cs">
+      <DependentUpon>MiddleDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\AlignmentControls\VerticalControls\MiddleEnabledControl.xaml.cs">
+      <DependentUpon>MiddleEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\AlignmentControls\VerticalControls\SpaceDisabledControl.xaml.cs">
+      <DependentUpon>SpaceDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\AlignmentControls\VerticalControls\SpaceEnabledControl.xaml.cs">
+      <DependentUpon>SpaceEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\AlignmentControls\VerticalControls\TopDisabledControl.xaml.cs">
+      <DependentUpon>TopDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\AlignmentControls\VerticalControls\TopEnabledControl.xaml.cs">
+      <DependentUpon>TopEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\ArrangeControls\BackOneDisabledControl.xaml.cs">
+      <DependentUpon>BackOneDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\ArrangeControls\BackOneEnabledControl.xaml.cs">
+      <DependentUpon>BackOneEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\ArrangeControls\ForwardOneDisabledControl.xaml.cs">
+      <DependentUpon>ForwardOneDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\ArrangeControls\ForwardOneEnabledControl.xaml.cs">
+      <DependentUpon>ForwardOneEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\ArrangeControls\MoveBackDisabledControl.xaml.cs">
+      <DependentUpon>MoveBackDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\ArrangeControls\MoveBackEnabledControl.xaml.cs">
+      <DependentUpon>MoveBackEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\ArrangeControls\MoveFrontDisabledControl.xaml.cs">
+      <DependentUpon>MoveFrontDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OperateControls\ArrangeControls\MoveFrontEnabledControl.xaml.cs">
+      <DependentUpon>MoveFrontEnabledControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\OperateControls\TransformControls\FlipHorizontalEnabledControl.xaml.cs">
       <DependentUpon>FlipHorizontalEnabledControl.xaml</DependentUpon>
     </Compile>
@@ -969,6 +1041,102 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\AppbarControls\SaveControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\AlignmentControls\HorizontalControls\CenterDisabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\AlignmentControls\HorizontalControls\CenterEnabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\AlignmentControls\HorizontalControls\LeftDisabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\AlignmentControls\HorizontalControls\LeftEnabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\AlignmentControls\HorizontalControls\RightDisabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\AlignmentControls\HorizontalControls\RightEnabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\AlignmentControls\HorizontalControls\SpaceDisabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\AlignmentControls\HorizontalControls\SpaceEnabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\AlignmentControls\VerticalControls\BottomDisabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\AlignmentControls\VerticalControls\BottomEnabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\AlignmentControls\VerticalControls\MiddleDisabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\AlignmentControls\VerticalControls\MiddleEnabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\AlignmentControls\VerticalControls\SpaceDisabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\AlignmentControls\VerticalControls\SpaceEnabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\AlignmentControls\VerticalControls\TopDisabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\AlignmentControls\VerticalControls\TopEnabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\ArrangeControls\BackOneDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\OperateControls\ArrangeControls\BackOneEnabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\ArrangeControls\ForwardOneDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\OperateControls\ArrangeControls\ForwardOneEnabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\ArrangeControls\MoveBackDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\OperateControls\ArrangeControls\MoveBackEnabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OperateControls\ArrangeControls\MoveFrontDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\OperateControls\ArrangeControls\MoveFrontEnabledControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -76,9 +76,8 @@ namespace Retouch_Photo.ViewModels
         /// <summary> 初始化CanvasControl, 也是可以绑定它的CreateResources事件</summary>
         public void InitializeCanvasControl(CanvasControl control)
         {
-            this.ShortCutKey.KeyUp += () => this.KeyUp();
-            this.ShortCutKey.KeyDown += () => this.KeyDown();
-            this.ShortCutKey.KeyDownOrUp += () => this.KeyDownOrUp();
+            Window.Current.CoreWindow.KeyUp += this.KeyUp;
+            Window.Current.CoreWindow.KeyDown += this.KeyDown; 
 
             if (this.CanvasControl != null) return;
 
@@ -120,6 +119,11 @@ namespace Retouch_Photo.ViewModels
         /// <param name="project">Project类型</param>
         public void LoadFromProject(Project project)
         {
+            if (project == null) return;
+            {
+
+            }
+
             this.MatrixTransformer.LoadFromProject(project);
 
             this.RenderLayer.LoadFromProject(this.CanvasControl, project);
@@ -132,10 +136,7 @@ namespace Retouch_Photo.ViewModels
             this.Invalidate();
         }
 
-
-        /// <summary> 快捷键· </summary>
-        public ShortCutKey ShortCutKey = new ShortCutKey();
-
+        
         /// <summary>可以返回</summary>
         public GoBack GoBack = new GoBack();
 
@@ -150,7 +151,7 @@ namespace Retouch_Photo.ViewModels
         {
             get
             {
-                if (this.RenderLayer.Layers.Count == 0 || this.RenderLayer.Layers.Count == -1) return null;
+                if (this.RenderLayer.Layers.Count == 0 || this.SelectedIndex == -1) return null;
 
                 if (this.SelectedIndex >= 0 && this.SelectedIndex < this.RenderLayer.Layers.Count()) return this.RenderLayer.Layers[this.SelectedIndex];
 
@@ -247,33 +248,44 @@ namespace Retouch_Photo.ViewModels
 
 
 
-
-        public void KeyDown()
+        public void KeyDown(CoreWindow sender, KeyEventArgs args)
         {
-            if (ShortCutKey.IsKeyDown(VirtualKey.Control))
-                this.KeyCtrl = true;
-
-            if (ShortCutKey.IsKeyDown(VirtualKey.Shift))
-                this.KeyShift = true;
-        }
-
-        public void KeyUp()
-        {
-            if (ShortCutKey.IsKeyUp(VirtualKey.Control))
-                this.KeyCtrl = false;
-
-            if (ShortCutKey.IsKeyUp(VirtualKey.Shift))
-                this.KeyShift = false;
-
-            if (ShortCutKey.IsKeyUp(VirtualKey.Delete))
+            switch (args.VirtualKey)
             {
-                 Layer layer = this.CurrentLayer;
-                if (layer != null) this.RenderLayer.Remove(layer);
-            }           
+                case VirtualKey.Control:
+                    this.KeyCtrl = true;
+                    break;
+
+                case VirtualKey.Shift:
+                    this.KeyShift = true;
+                    break;
+
+                case VirtualKey.Delete:
+                    Layer layer = this.CurrentLayer;
+                    if (layer != null) this.RenderLayer.Remove(layer);
+                    break;
+
+                default:
+                    break;
+            }     
         }
 
-        public void KeyDownOrUp()
+        public void KeyUp(CoreWindow sender, KeyEventArgs args)
         {
+            switch (args.VirtualKey)
+            {
+                case VirtualKey.Control:
+                    this.KeyCtrl = false;
+                    break;
+
+                case VirtualKey.Shift:
+                    this.KeyShift = false;
+                    break;
+
+                default:
+                    break;
+            }
+
             if (this.KeyCtrl == false && this.KeyShift == false)
                 this.MarqueeMode = MarqueeMode.None;
             else if (this.KeyCtrl == false && this.KeyShift)
@@ -283,8 +295,6 @@ namespace Retouch_Photo.ViewModels
             else //if (this.KeyCtrl && this.KeyShift)
                 this.MarqueeMode = MarqueeMode.SquareAndCenter;
         }
-        
-
 
 
         #endregion

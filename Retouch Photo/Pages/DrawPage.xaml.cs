@@ -54,47 +54,34 @@ namespace Retouch_Photo.Pages
         {
             if (e.Parameter is string text)
             {
-                if (App.ViewModel.GoBack.HadGoBack(text)) return;                
-            }
-            
-            if (e.Parameter is XDocument document)
-            {
-                this.LoadingControl.Visibility = Visibility.Visible;//Loading                
-                Project project = Project.CreateFromXDocument(this.ViewModel.CanvasControl, document);
-                this.ViewModel.LoadFromProject(project);
-                this.LoadingControl.Visibility = Visibility.Collapsed;//Loading
-                return;
-            }
-
-            if (e.Parameter is BitmapSize pixels)
-            {
-                this.LoadingControl.Visibility = Visibility.Visible;//Loading
-                Project project = Project.CreateFromSize(this.ViewModel.CanvasControl, pixels);
-                this.ViewModel.LoadFromProject(project);
-                this.LoadingControl.Visibility = Visibility.Collapsed;//Loading
-                return;
-            }
-
-            if (e.Parameter is StorageFile file)
-            {
-                this.LoadingControl.Visibility = Visibility.Visible;//Loading
-                Project project =await Project.CreateFromFileAsync(this.ViewModel.CanvasControl, file);
-                if (project == null)
+                if (App.ViewModel.GoBack.HadGoBack(text))
                 {
-                    base.Frame.GoBack();
                     return;
                 }
-                this.ViewModel.LoadFromProject(project);
-                this.LoadingControl.Visibility = Visibility.Collapsed;//Loading
-                return;
             }
+            
+            if (e.Parameter is XDocument document)   this.GetProject(Project.CreateFromXDocument(this.ViewModel.CanvasControl, document));
+
+            if (e.Parameter is BitmapSize pixels)   this.GetProject(Project.CreateFromSize(this.ViewModel.CanvasControl, pixels));
+            
+            if (e.Parameter is StorageFile file) this.GetProject(await Project.CreateFromFileAsync(this.ViewModel.CanvasControl, file));
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)//当前页面不再成为活动页面
         {
         }
 
+        public void GetProject(Project project)
+        {
+            this.LoadingControl.Visibility = Visibility.Visible;//Loading
+            if (project == null)
+            {
+                base.Frame.GoBack();
+                return;
+            }
+            this.ViewModel.LoadFromProject(project);
+            this.LoadingControl.Visibility = Visibility.Collapsed;//Loading
+        }
 
-        
 
         private async void PopupButton_Tapped(object sender, TappedRoutedEventArgs e)  => await this.WelcomeContentDialog.ShowAsync(ContentDialogPlacement.InPlace);//ContentDialogPlacement.InPlace
         private async void Back_Tapped(object sender, TappedRoutedEventArgs e)
