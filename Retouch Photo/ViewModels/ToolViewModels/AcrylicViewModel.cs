@@ -40,8 +40,9 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
             if (Transformer.InNodeDistance(this.point, point) == false)
             {
-                AcrylicLayer acrylicLayer = AcrylicLayer.CreateFromRect(this.ViewModel.CanvasControl, rect, this.ViewModel.Color);
-                this.ViewModel.RenderLayer.Insert(acrylicLayer);
+                AcrylicLayer layer = AcrylicLayer.CreateFromRect(this.ViewModel.CanvasControl, rect, this.ViewModel.Color);
+                this.ViewModel.RenderLayer.Insert(layer);
+                this.ViewModel.CurrentLayer = layer;
             }
 
             this.Layer = null;

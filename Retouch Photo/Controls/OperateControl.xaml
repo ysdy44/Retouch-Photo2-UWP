@@ -153,12 +153,12 @@
 
             <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
 
-            <conOpe:OperateControlButton x:Name="AlignSpaceHorizontallyButton" Label="Space Horizontally" ButtonTapped="AlignSpaceHorizontallyButton_ButtonTapped">
+            <conOpe:OperateControlButton x:Name="AlignSymmetryHorizontallyButton" Label="Symmetry Horizontally" ButtonTapped="AlignSymmetryHorizontallyButton_ButtonTapped">
                 <conOpe:OperateControlButton.EnabledIcon>
-                    <conOpeAliHor:SpaceEnabledControl/>
+                    <conOpeAliHor:SymmetryEnabledControl/>
                 </conOpe:OperateControlButton.EnabledIcon>
                 <conOpe:OperateControlButton.DisabledIcon>
-                    <conOpeAliHor:SpaceDisabledControl/>
+                    <conOpeAliHor:SymmetryDisabledControl/>
                 </conOpe:OperateControlButton.DisabledIcon>
             </conOpe:OperateControlButton>
 
@@ -198,13 +198,13 @@
             </conOpe:OperateControlButton>
 
             <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
-            
-            <conOpe:OperateControlButton x:Name="AlignSpaceVerticallyButton" Label="Space Vertically" ButtonTapped="AlignSpaceVerticallyButton_ButtonTapped">
+
+            <conOpe:OperateControlButton x:Name="AlignSymmetryVerticallyButton" Label="Symmetry Vertically" ButtonTapped="AlignSymmetryVerticallyButton_ButtonTapped">
                 <conOpe:OperateControlButton.EnabledIcon>
-                    <conOpeAliVer:SpaceEnabledControl/>
+                    <conOpeAliVer:SymmetryEnabledControl/>
                 </conOpe:OperateControlButton.EnabledIcon>
                 <conOpe:OperateControlButton.DisabledIcon>
-                    <conOpeAliVer:SpaceDisabledControl/>
+                    <conOpeAliVer:SymmetryDisabledControl/>
                 </conOpe:OperateControlButton.DisabledIcon>
             </conOpe:OperateControlButton>
 

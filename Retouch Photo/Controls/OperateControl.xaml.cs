@@ -1,8 +1,10 @@
 ﻿using Retouch_Photo.Models;
+using Retouch_Photo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -18,6 +20,9 @@ namespace Retouch_Photo.Controls
 {
     public sealed partial class OperateControl : UserControl
     {
+        //ViewModel
+        DrawViewModel ViewModel => App.ViewModel;
+
         Layer Layer;
 
         public OperateControl()
@@ -30,41 +35,31 @@ namespace Retouch_Photo.Controls
         /// </summary>
         public void Initialize()
         {
-            this.Layer = App.ViewModel.CurrentLayer;
+            this.Layer = this.ViewModel.CurrentLayer;
 
             bool isEnabled = !(this.Layer == null);
 
             //Transform
-            this.FlipHorizontalButton.ButtonIsEnabled = isEnabled;
-            this.FlipVerticalButton.ButtonIsEnabled = isEnabled;
-            this.RotateLeftButton.ButtonIsEnabled = isEnabled;
-            this.RotateRightButton.ButtonIsEnabled = isEnabled;
+            this.InitializeTransform(isEnabled);
 
             //Arrange
-            this.ArrangeMoveBackButton.ButtonIsEnabled = isEnabled;
-            this.ArrangeBackOneButton.ButtonIsEnabled = isEnabled;
-            this.ArrangeForwardOneButton.ButtonIsEnabled = isEnabled;
-            this.ArrangeMoveFrontButton.ButtonIsEnabled = isEnabled;
+            if (this.ViewModel.RenderLayer.Layers.Count < 2 || !isEnabled || this.ViewModel.SelectedIndex == -1)
+                this.InitializeArrange(false);
+            else
+                this.InitializeArrange(0, this.ViewModel.RenderLayer.Layers.Count - 1, this.ViewModel.SelectedIndex);
 
-            //Align Horizontal
-            this.AlignLeftButton.ButtonIsEnabled = isEnabled;
-            this.AlignCenterButton.ButtonIsEnabled = isEnabled;
-            this.AlignRightButton.ButtonIsEnabled = isEnabled;
-            this.AlignSpaceHorizontallyButton.ButtonIsEnabled = isEnabled;
+            //Align Horizontal            
+            this.InitializeAlignHorizontal(isEnabled);
 
-            //Align Vertical
-            this.AlignTopButton.ButtonIsEnabled = isEnabled;
-            this.AlignMiddleButton.ButtonIsEnabled = isEnabled;
-            this.AlignBottomButton.ButtonIsEnabled = isEnabled;
-            this.AlignSpaceVerticallyButton.ButtonIsEnabled = isEnabled;
+            //Align Vertical            
+            this.InitializeAlignVertical(isEnabled);
         }
 
-        //Transform
-        private void FlipHorizontalButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Transform((Layer layer) => layer.Transformer.FlipHorizontal = !layer.Transformer.FlipHorizontal);
-        private void FlipVerticalButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Transform((Layer layer) => layer.Transformer.FlipVertical = !layer.Transformer.FlipVertical);
-        private void RotateLeftButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Transform((Layer layer) => layer.Transformer.Radian += (float)Math.PI / 2);
-        private void RotateRightButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Transform((Layer layer) => layer.Transformer.Radian -= (float)Math.PI / 2);
-        private void Transform(Action<Layer> action)
+        /// <summary>
+        /// Operating on the layer
+        /// </summary>
+        /// <param name="action"> Operating </param>
+        private void Operate(Action<Layer> action)
         {
             if (this.Layer == null) return;
 
@@ -73,64 +68,174 @@ namespace Retouch_Photo.Controls
             App.ViewModel.Invalidate();
         }
 
-        private void AlignLeftButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
-        {
 
+        #region Transform
+
+
+        private void InitializeTransform(bool isEnabled)
+        {
+            this.FlipHorizontalButton.ButtonIsEnabled = isEnabled;
+            this.FlipVerticalButton.ButtonIsEnabled = isEnabled;
+            this.RotateLeftButton.ButtonIsEnabled = isEnabled;
+            this.RotateRightButton.ButtonIsEnabled = isEnabled;
         }
 
-        private void AlignCenterButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
-        {
 
+        private void FlipHorizontalButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Operate
+        (
+            (Layer layer) => layer.Transformer.FlipHorizontal = !layer.Transformer.FlipHorizontal
+        );
+        private void FlipVerticalButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Operate
+        (
+            (Layer layer) => layer.Transformer.FlipVertical = !layer.Transformer.FlipVertical
+        );
+        private void RotateLeftButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Operate
+        (
+            (Layer layer) => layer.Transformer.Radian += Transformer.PiHalf
+        );
+        private void RotateRightButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Operate
+        (
+            (Layer layer) => layer.Transformer.Radian -= Transformer.PiHalf
+        );
+
+
+        #endregion
+
+
+        #region Arrange
+
+
+        private void InitializeArrange(bool isEnabled)
+        {
+            this.ArrangeMoveBackButton.ButtonIsEnabled = isEnabled;
+            this.ArrangeBackOneButton.ButtonIsEnabled = isEnabled;
+            this.ArrangeForwardOneButton.ButtonIsEnabled = isEnabled;
+            this.ArrangeMoveFrontButton.ButtonIsEnabled = isEnabled;
+        }
+        private void InitializeArrange(int min, int max, int index)
+        {
+            this.ArrangeMoveBackButton.ButtonIsEnabled = !(index == max);
+            this.ArrangeBackOneButton.ButtonIsEnabled = (index < max);
+            this.ArrangeForwardOneButton.ButtonIsEnabled = (index > min);
+            this.ArrangeMoveFrontButton.ButtonIsEnabled = !(index == min);
         }
 
-        private void AlignRightButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
-        {
 
+        private void ArrangeMoveBackButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
+        (
+            (Layer layer) =>
+            {            
+                this.ViewModel.RenderLayer.Layers.Remove(layer);
+                this.ViewModel.RenderLayer.Layers.Add(layer);
+
+                this.ViewModel.CurrentLayer = layer;
+                this.Initialize();
+            }
+        );
+        private void ArrangeBackOneButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
+        (
+            (Layer layer) =>
+            {
+                int index = this.ViewModel.RenderLayer.Layers.IndexOf(layer);
+                this.ViewModel.RenderLayer.Layers.Remove(layer);
+                this.ViewModel.RenderLayer.Layers.Insert(index+1, layer);
+
+                this.ViewModel.CurrentLayer = layer;
+                this.Initialize();
+            }
+        );
+        private void ArrangeForwardOneButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
+        (
+            (Layer layer) =>
+            {
+                int index = this.ViewModel.RenderLayer.Layers.IndexOf(layer);
+                this.ViewModel.RenderLayer.Layers.Remove(layer);
+                this.ViewModel.RenderLayer.Layers.Insert(index - 1, layer);
+
+                this.ViewModel.CurrentLayer = layer;
+                this.Initialize();
+            }
+        );
+        private void ArrangeMoveFrontButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
+        (
+            (Layer layer) =>
+            {
+                this.ViewModel.RenderLayer.Layers.Remove(layer);
+                this.ViewModel.RenderLayer.Layers.Insert(0, layer);
+
+                this.ViewModel.CurrentLayer = layer;
+                this.Initialize();
+            }
+        );
+
+
+        #endregion
+
+
+        #region Align Horizontal
+
+        //Initialize
+        private void InitializeAlignHorizontal(bool isEnabled)
+        {
+            this.AlignLeftButton.ButtonIsEnabled = isEnabled;
+            this.AlignCenterButton.ButtonIsEnabled = isEnabled;
+            this.AlignRightButton.ButtonIsEnabled = isEnabled;
+            this.AlignSymmetryHorizontallyButton.ButtonIsEnabled = isEnabled;
         }
 
-        private void AlignSpaceHorizontallyButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
-        {
 
+        private void AlignLeftButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
+        (
+            (Layer layer) => layer.Transformer.Postion.X += -layer.Transformer.TransformMinX(layer.Transformer.Matrix)
+        );
+        private void AlignCenterButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
+        (
+            (Layer layer) => layer.Transformer.Postion.X += this.ViewModel.MatrixTransformer.Width / 2 - layer.Transformer.TransformCenter(layer.Transformer.Matrix).X
+        );
+        private void AlignRightButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
+        (
+            (Layer layer) => layer.Transformer.Postion.X += this.ViewModel.MatrixTransformer.Width - layer.Transformer.TransformMaxX(layer.Transformer.Matrix)
+        );
+        private void AlignSymmetryHorizontallyButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
+        (
+            (Layer layer) => layer.Transformer.Postion.X = -this.Layer.Transformer.Postion.X
+        );
+
+
+        #endregion
+
+
+        #region Align Vertical
+
+
+        private void InitializeAlignVertical(bool isEnabled)
+        {
+            this.AlignTopButton.ButtonIsEnabled = isEnabled;
+            this.AlignMiddleButton.ButtonIsEnabled = isEnabled;
+            this.AlignBottomButton.ButtonIsEnabled = isEnabled;
+            this.AlignSymmetryVerticallyButton.ButtonIsEnabled = isEnabled;
         }
 
-        private void AlignTopButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
-        {
 
-        }
+        private void AlignTopButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
+        (
+            (Layer layer) => layer.Transformer.Postion.Y += -layer.Transformer.TransformMinY(layer.Transformer.Matrix)
+        );
+        private void AlignMiddleButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
+        (
+            (Layer layer) => layer.Transformer.Postion.Y += this.ViewModel.MatrixTransformer.Height / 2 - layer.Transformer.TransformCenter(layer.Transformer.Matrix).Y
+        );
+        private void AlignBottomButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
+        (
+            (Layer layer) => layer.Transformer.Postion.Y += this.ViewModel.MatrixTransformer.Height - layer.Transformer.TransformMaxY(layer.Transformer.Matrix)
+        );
+        private void AlignSymmetryVerticallyButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
+        (
+            (Layer layer) => layer.Transformer.Postion.Y = -this.Layer.Transformer.Postion.Y
+        );
+        
 
-        private void AlignMiddleButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
-        {
-
-        }
-
-        private void AlignBottomButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
-        {
-
-        }
-
-        private void AlignSpaceVerticallyButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
-        {
-
-        }
-
-        private void ArrangeMoveBackButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
-        {
-
-        }
-
-        private void ArrangeBackOneButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
-        {
-
-        }
-
-        private void ArrangeForwardOneButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
-        {
-
-        }
-
-        private void ArrangeMoveFrontButton_ButtonTapped(object sender, TappedRoutedEventArgs e)
-        {
-
-        }
+        #endregion
+         
     }
 }

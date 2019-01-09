@@ -10,7 +10,7 @@
     d:DesignWidth="40">
 
     <Canvas Width="40" Height="40" >
-        <Rectangle Canvas.Left="18.5" Canvas.Top="2.5" Width="3"  Height="35" Fill="DodgerBlue"/>
+        <Rectangle Canvas.Left="18.5" Canvas.Top="2.5" Width="3"  Height="35" Fill="LimeGreen"/>
         <Rectangle Canvas.Left="13" Canvas.Top="10" Width="14"  Height="8" Fill="Gray"/>
         <Rectangle Canvas.Left="6" Canvas.Top="23" Width="28"  Height="8" Fill="Gray"/>
     </Canvas>

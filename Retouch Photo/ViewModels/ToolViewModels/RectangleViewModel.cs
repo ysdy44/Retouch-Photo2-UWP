@@ -41,8 +41,9 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
             if (Transformer.InNodeDistance(this.point, point) == false)
             {
-                RectangularLayer rectangularLayer = RectangularLayer.CreateFromRect(this.ViewModel.CanvasControl, rect, this.ViewModel.Color);
-                this.ViewModel.RenderLayer.Insert(rectangularLayer);
+                RectangularLayer layer = RectangularLayer.CreateFromRect(this.ViewModel.CanvasControl, rect, this.ViewModel.Color);
+                this.ViewModel.RenderLayer.Insert(layer);
+                this.ViewModel.CurrentLayer = layer;
             }
 
             this.Layer = null;

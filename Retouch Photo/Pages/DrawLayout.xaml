@@ -132,7 +132,7 @@
                         <!--TopBorder-->
                         <Setter Target="TopBorder.(Grid.ColumnSpan)" Value="2"/>
                         <Setter Target="TopLeftStackPanel.Visibility" Value="Visible"/>
-                        <Setter Target="CenterStackPanel.HorizontalAlignment" Value="Center"/>
+                        <Setter Target="CenterStackPanel.HorizontalAlignment" Value="Right"/>
 
                         <!--CenterBorder-->
                         <Setter Target="CenterBorder.(Grid.Column)" Value="1"/>

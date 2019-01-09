@@ -17,9 +17,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Retouch_Photo.Controls.OperateControls.AlignmentControls.VerticalControls
 {
-    public sealed partial class SpaceDisabledControl : UserControl
+    public sealed partial class SymmetryEnabledControl : UserControl
     {
-        public SpaceDisabledControl()
+        public SymmetryEnabledControl()
         {
             this.InitializeComponent();
         }

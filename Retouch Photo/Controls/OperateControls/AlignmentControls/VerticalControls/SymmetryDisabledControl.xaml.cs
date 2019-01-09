@@ -15,11 +15,11 @@ using Windows.UI.Xaml.Navigation;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
-namespace Retouch_Photo.Controls.OperateControls.AlignmentControls.HorizontalControls
+namespace Retouch_Photo.Controls.OperateControls.AlignmentControls.VerticalControls
 {
-    public sealed partial class SpaceEnabledControl : UserControl
+    public sealed partial class SymmetryDisabledControl : UserControl
     {
-        public SpaceEnabledControl()
+        public SymmetryDisabledControl()
         {
             this.InitializeComponent();
         }

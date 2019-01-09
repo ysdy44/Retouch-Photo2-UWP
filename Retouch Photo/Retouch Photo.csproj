@@ -164,11 +164,11 @@
     <Compile Include="Controls\OperateControls\AlignmentControls\HorizontalControls\RightEnabledControl.xaml.cs">
       <DependentUpon>RightEnabledControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OperateControls\AlignmentControls\HorizontalControls\SpaceDisabledControl.xaml.cs">
-      <DependentUpon>SpaceDisabledControl.xaml</DependentUpon>
+    <Compile Include="Controls\OperateControls\AlignmentControls\HorizontalControls\SymmetryDisabledControl.xaml.cs">
+      <DependentUpon>SymmetryDisabledControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OperateControls\AlignmentControls\HorizontalControls\SpaceEnabledControl.xaml.cs">
-      <DependentUpon>SpaceEnabledControl.xaml</DependentUpon>
+    <Compile Include="Controls\OperateControls\AlignmentControls\HorizontalControls\SymmetryEnabledControl.xaml.cs">
+      <DependentUpon>SymmetryEnabledControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\OperateControls\AlignmentControls\VerticalControls\BottomDisabledControl.xaml.cs">
       <DependentUpon>BottomDisabledControl.xaml</DependentUpon>
@@ -182,11 +182,11 @@
     <Compile Include="Controls\OperateControls\AlignmentControls\VerticalControls\MiddleEnabledControl.xaml.cs">
       <DependentUpon>MiddleEnabledControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OperateControls\AlignmentControls\VerticalControls\SpaceDisabledControl.xaml.cs">
-      <DependentUpon>SpaceDisabledControl.xaml</DependentUpon>
+    <Compile Include="Controls\OperateControls\AlignmentControls\VerticalControls\SymmetryDisabledControl.xaml.cs">
+      <DependentUpon>SymmetryDisabledControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OperateControls\AlignmentControls\VerticalControls\SpaceEnabledControl.xaml.cs">
-      <DependentUpon>SpaceEnabledControl.xaml</DependentUpon>
+    <Compile Include="Controls\OperateControls\AlignmentControls\VerticalControls\SymmetryEnabledControl.xaml.cs">
+      <DependentUpon>SymmetryEnabledControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\OperateControls\AlignmentControls\VerticalControls\TopDisabledControl.xaml.cs">
       <DependentUpon>TopDisabledControl.xaml</DependentUpon>
@@ -1068,11 +1068,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\OperateControls\AlignmentControls\HorizontalControls\SpaceDisabledControl.xaml">
+    <Page Include="Controls\OperateControls\AlignmentControls\HorizontalControls\SymmetryDisabledControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\OperateControls\AlignmentControls\HorizontalControls\SpaceEnabledControl.xaml">
+    <Page Include="Controls\OperateControls\AlignmentControls\HorizontalControls\SymmetryEnabledControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1092,11 +1092,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\OperateControls\AlignmentControls\VerticalControls\SpaceDisabledControl.xaml">
+    <Page Include="Controls\OperateControls\AlignmentControls\VerticalControls\SymmetryDisabledControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\OperateControls\AlignmentControls\VerticalControls\SpaceEnabledControl.xaml">
+    <Page Include="Controls\OperateControls\AlignmentControls\VerticalControls\SymmetryEnabledControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
