@@ -21,8 +21,16 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
         public static string Type = "Rectangular";
         protected RectangularLayer() => base.Name = RectangularLayer.Type;
 
-        Vector2[] points = new Vector2[4]; 
+        Vector2[] points = new Vector2[4];
 
+        //@Override     
+        public override void ColorChanged(Color value)
+        {
+            if (base.FillBrush is CanvasSolidColorBrush brush)
+            {
+                brush.Color = value;
+            }
+        }
         protected override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
             Matrix3x2 matrix = this.Transformer.Matrix * canvasToVirtualMatrix;

@@ -43,7 +43,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             {
                 RectangularLayer layer = RectangularLayer.CreateFromRect(this.ViewModel.CanvasControl, rect, this.ViewModel.Color);
                 this.ViewModel.RenderLayer.Insert(layer);
-                this.ViewModel.CurrentLayer = layer;
+                this.ViewModel.CurrentLayer=layer;
             }
 
             this.Layer = null;

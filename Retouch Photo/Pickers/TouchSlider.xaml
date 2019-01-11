@@ -71,7 +71,7 @@
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
 
-                                    <Rectangle x:Name="HorizontalTrackRect" Grid.ColumnSpan="3" Grid.Row="1" RadiusX="8" RadiusY="8" Height="16" StrokeThickness="{TemplateBinding BorderThickness}" Stroke="{TemplateBinding BorderBrush}"  Fill="{TemplateBinding Background}"/>
+                                    <Rectangle x:Name="HorizontalTrackRect" Grid.ColumnSpan="3" Grid.Row="1" RadiusX="12" RadiusY="12" Height="24" StrokeThickness="{TemplateBinding BorderThickness}" Stroke="{TemplateBinding BorderBrush}"  Fill="{TemplateBinding Background}"/>
                                     <Rectangle  x:Name="HorizontalDecreaseRect" Grid.Row="1" Height="10" Fill="{TemplateBinding Foreground}" />
                                     <Thumb x:Name="HorizontalThumb"  AutomationProperties.AccessibilityView="Raw" Background="Transparent" Grid.Column="1" DataContext="{TemplateBinding Value}" Grid.Row="1" Style="{StaticResource SliderThumbStyle}"  />
 

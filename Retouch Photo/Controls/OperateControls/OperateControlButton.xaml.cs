@@ -11,7 +11,10 @@ namespace Retouch_Photo.Controls.OperateControls
 
         public UIElement EnabledIcon { get => this.EnabledViewbox.Child; set => this.EnabledViewbox.Child = value; }
         public UIElement DisabledIcon { get => this.DisabledViewbox.Child; set => this.DisabledViewbox.Child = value; }
-        public string Label { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
+        public string Label
+        {
+            set => ToolTipService.SetToolTip(this, value);
+        }
 
         public bool ButtonIsEnabled
         {
@@ -21,8 +24,6 @@ namespace Retouch_Photo.Controls.OperateControls
 
                 this.EnabledViewbox.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
                 this.DisabledViewbox.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
-
-                this.TextBlock.Foreground = value ? this.EnabledColor : this.DisenabledColor;
             }
         }
 

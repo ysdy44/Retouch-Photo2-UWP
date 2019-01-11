@@ -73,14 +73,16 @@ namespace Retouch_Photo.ViewModels
             this.CanvasControl.Invalidate();
         }
 
-        /// <summary> 初始化CanvasControl, 也是可以绑定它的CreateResources事件</summary>
+        /// <summary> 初始化CanvasControl，只执行一次</summary>
         public void InitializeCanvasControl(CanvasControl control)
         {
-            Window.Current.CoreWindow.KeyUp += this.KeyUp;
-            Window.Current.CoreWindow.KeyDown += this.KeyDown; 
+            Window.Current.CoreWindow.KeyUp +=  this.KeyUp;
+            Window.Current.CoreWindow.KeyDown +=  this.KeyDown;
+
 
             if (this.CanvasControl != null) return;
-
+            this.CanvasControl = control;
+            
             /*
             Dpi标准为=96
 
@@ -109,7 +111,6 @@ namespace Retouch_Photo.ViewModels
             //control.DpiScale = 96.0f / control.Dpi; 
 
 
-            this.CanvasControl = control;
         }
 
         #endregion
@@ -120,10 +121,7 @@ namespace Retouch_Photo.ViewModels
         public void LoadFromProject(Project project)
         {
             if (project == null) return;
-            {
-
-            }
-
+           
             this.MatrixTransformer.LoadFromProject(project);
 
             this.RenderLayer.LoadFromProject(this.CanvasControl, project);
@@ -144,8 +142,17 @@ namespace Retouch_Photo.ViewModels
         public MatrixTransformer MatrixTransformer = new MatrixTransformer();
 
 
-        /// <summary>渲染图层</summary>
-        public RenderLayer RenderLayer = new RenderLayer();
+
+        /// <summary>控件选定索引</summary>      
+        public int SelectedIndex
+        {
+            get => this.RenderLayer.Index;
+            set
+            {
+                this.RenderLayer.Index = value;
+                OnPropertyChanged(nameof(SelectedIndex));
+            }
+        }
         /// <summary>当前图层</summary>     
         public Layer CurrentLayer
         {
@@ -159,40 +166,52 @@ namespace Retouch_Photo.ViewModels
             }
             set
             {
-                if (value == null || this.RenderLayer.Layers == null || this.RenderLayer.Layers.Count == 0)
+                if (value == null ||
+                    this.RenderLayer.Layers == null ||
+                    !this.RenderLayer.Layers.Contains(value) ||
+                    this.RenderLayer.Layers.Count == 0)
                 {
                     this.SelectedIndex = -1;
+                    OnPropertyChanged(nameof(CurrentLayer));
                     return;
                 }
-                if (this.RenderLayer.Layers.Count == 1 || this.RenderLayer.Layers.Contains(value) == false)
+
+                if (this.RenderLayer.Layers.Count == 1)
                 {
                     this.SelectedIndex = 0;
+                    OnPropertyChanged(nameof(CurrentLayer));
                     return;
                 }
 
                 this.SelectedIndex = this.RenderLayer.Layers.IndexOf(value);
+                OnPropertyChanged(nameof(CurrentLayer));
             }
         }
-        /// <summary>控件选定索引</summary>      
-        public int SelectedIndex
-        {
-            get => this.RenderLayer.Index;
-            set
-            {
-                this.RenderLayer.Index = value;
-                OnPropertyChanged(nameof(SelectedIndex));
-            }
-        }
+        /// <summary>渲染图层</summary>
+        public RenderLayer RenderLayer = new RenderLayer();
 
 
         #region Index & Tool
 
 
 
-        public Color Color = Color.FromArgb(255, 214, 214, 214);
+        
+        /// <summary>颜色</summary>    
+        private Color color = Color.FromArgb(255, 214, 214, 214);
+        public Color Color
+        {
+            get => this.color;
+            set
+            {
+                this.color = value;
+                OnPropertyChanged(nameof(Color));
+            }
+        }
+
+
 
         /// <summary>工具</summary>    
-        public Tool tool = new NullTool();
+        private Tool tool = new NullTool();
         public Tool Tool
         {
             get => this.tool;
@@ -267,7 +286,8 @@ namespace Retouch_Photo.ViewModels
 
                 default:
                     break;
-            }     
+            }
+            this.KeyUpAndDown(sender, args);
         }
 
         public void KeyUp(CoreWindow sender, KeyEventArgs args)
@@ -285,7 +305,10 @@ namespace Retouch_Photo.ViewModels
                 default:
                     break;
             }
-
+            this.KeyUpAndDown(sender, args);
+        }
+        public void KeyUpAndDown(CoreWindow sender, KeyEventArgs args)
+        {
             if (this.KeyCtrl == false && this.KeyShift == false)
                 this.MarqueeMode = MarqueeMode.None;
             else if (this.KeyCtrl == false && this.KeyShift)
@@ -295,6 +318,8 @@ namespace Retouch_Photo.ViewModels
             else //if (this.KeyCtrl && this.KeyShift)
                 this.MarqueeMode = MarqueeMode.SquareAndCenter;
         }
+
+
 
 
         #endregion

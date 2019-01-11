@@ -16,6 +16,7 @@ namespace Retouch_Photo.ViewModels
         public abstract void Complete(Vector2 point);
 
         public abstract void Draw(CanvasDrawingSession ds);
+
     }
     public abstract class ToolViewModel2
     {

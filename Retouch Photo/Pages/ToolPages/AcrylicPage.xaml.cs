@@ -1,28 +1,12 @@
-﻿using Retouch_Photo.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using Windows.UI;
-using Retouch_Photo.Library;
-using Retouch_Photo.Models;
-using Retouch_Photo.Models.Layers.GeometryLayers;
-using Microsoft.Graphics.Canvas.Brushes;
+﻿using Retouch_Photo.Models;
 using Retouch_Photo.Models.Layers;
+using Retouch_Photo.ViewModels;
+using Windows.UI;
+using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo.Pages.ToolPages
 {
-    public sealed partial class AcrylicPage : Page
+    public sealed partial class AcrylicPage : ToolPage
     {
         //ViewModel
         DrawViewModel ViewModel => App.ViewModel;
@@ -30,24 +14,31 @@ namespace Retouch_Photo.Pages.ToolPages
         public AcrylicPage()
         {
             this.InitializeComponent();
-            
-            this.ColorBrush.Color = this.ViewModel.Color;
+        }
+
+        //@Override
+        public override void ToolOnNavigatedTo()//当前页面成为活动页面
+        {
             this.ColorPicker.Color = this.ViewModel.Color;
         }
+        public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
+        {
+        }
+
 
         private void ColorButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             this.ColorFlyout.ShowAt(this.ColorButton);
+            this.ColorPicker.Color = this.ViewModel.Color;
         }
         private void ColorPicker_ColorChange(object sender, Color value)
         {
             this.ViewModel.Color = value;
-            this.ColorBrush.Color = value;
 
             Layer layer = this.ViewModel.CurrentLayer;
-            if (layer is AcrylicLayer rectangularLayer)
+            if (layer != null)
             {
-                rectangularLayer.TintColor = value;
+                layer.ColorChanged(value);
                 layer.Invalidate();
                 this.ViewModel.Invalidate();
             }

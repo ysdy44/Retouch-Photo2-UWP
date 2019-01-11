@@ -1,18 +1,14 @@
-﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo.Models;
-using Retouch_Photo.Models.Layers;
+﻿using Retouch_Photo.Models;
+using Retouch_Photo.Models.Adjustments;
+using Retouch_Photo.Models.Blends;
 using Retouch_Photo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Numerics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.Storage;
-using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,7 +23,36 @@ namespace Retouch_Photo.Controls
     {
 
         //ViewModel
-        public DrawViewModel ViewModel => App.ViewModel;
+        DrawViewModel ViewModel => App.ViewModel;
+
+
+        #region DependencyProperty
+
+        public Layer Layer
+        {
+            get { return (Layer)GetValue(LayerProperty); }
+            set { SetValue(LayerProperty, value); }
+        }
+        public static readonly DependencyProperty LayerProperty = DependencyProperty.Register(nameof(Layer), typeof(Layer), typeof(LayerControl), new PropertyMetadata(null, (sender, e) =>
+        {
+            LayerControl con = (LayerControl)sender;
+
+            if (e.NewValue is Layer layer)
+            {
+                con.IsEnabled = true;
+
+                con.AdjustmentContextControl.Visibility = Visibility.Collapsed;
+                con.Invalidate(layer.Adjustments);
+            }
+            else
+            {
+                con.IsEnabled = false;
+                con.Invalidate(null);
+            }
+        }));
+
+        #endregion
+
 
         public LayerControl()
         {
@@ -35,61 +60,80 @@ namespace Retouch_Photo.Controls
         }
 
         //Flyout
-        UserControl control;
-        private void LayoutControl_FlyoutShow(UserControl control, Layer layer, bool isShow)
+        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e) => this.ViewModel.Invalidate();
+
+        private void BlendControl_IndexChanged(int index) => this.ViewModel.Invalidate();
+
+        private void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (this.control == control || isShow)
-            {
-                this.FlyoutControl.Layer = layer;
-                this.PropertyFlyout.ShowAt(control);
-            }
-            else this.control = control;
+            this.ViewModel.RenderLayer.Remove(this.Layer);
+            this.ViewModel.CurrentLayer = null;
+            this.Layer = null;
+        }
+        private void AdjustmentButton_Tapped(object sender, TappedRoutedEventArgs e) => this.AdjustmentCandidateFlyout.ShowAt((Button)sender);
+        private void EffectButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
         }
 
-        //Layer
-        private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)
+
+
+        //Adjustment
+        private void AdjustmentControl_AdjustmentRemove(Adjustment adjustment) => this.Remove(adjustment);
+        private void AdjustmentControl_AdjustmentContext(Adjustment adjustment) => this.AdjustmentContextControl.Adjustment = adjustment;
+        //AdjustmentCandidate
+        private void AdjustmentCandidateListView_Loaded(object sender, RoutedEventArgs e) => ((ListView)sender).ItemsSource = AdjustmentCandidate.AdjustmentCandidateList;
+        private void AdjustmentCandidateListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            e.Handled = true;
+            if (e.ClickedItem is AdjustmentCandidate item)
+            {
+                Adjustment adjustment = item.GetNewAdjustment();
+                this.Add(adjustment);
+            }
+            this.AdjustmentCandidateFlyout.Hide();
+        }
+
+
+        #region Adjustment
+
+        //Adjustment
+        private void Add(Adjustment adjustment)
+        {
+            this.Layer.Adjustments.Add(adjustment);
+            this.Invalidate(this.Layer.Adjustments);
+            this.ViewModel.Invalidate();
+        }
+        private void Remove(Adjustment adjustment)
+        {
+            this.Layer.Adjustments.Remove(adjustment);
+            this.Invalidate(this.Layer.Adjustments);
             this.ViewModel.Invalidate();
         }
 
-
-        //ListView
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e) => this.ViewModel.Invalidate();
-        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        /// <summary>
+        /// 通过Adjustment列表，决定控件的初始化与可视
+        /// </summary>
+        /// <param name="adjustments">Adjustment List</param>
+        public void Invalidate(List<Adjustment> adjustments)
         {
-            if (e.ClickedItem is Layer item)
+            if (adjustments == null)
             {
-                this.ViewModel.CurrentLayer = item;
+                this.AdjustmentsItemsControl.ItemsSource = null;
+                this.AdjustmentTextBlock.Visibility = this.AdjustmentBorder.Visibility = Visibility.Collapsed;
+                return;
             }
-                this.ViewModel.Invalidate();
+
+            this.AdjustmentsItemsControl.ItemsSource = null;
+            this.AdjustmentsItemsControl.ItemsSource = adjustments;
+            this.AdjustmentTextBlock.Visibility = this.AdjustmentBorder.Visibility = adjustments.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
         }
 
 
-        private async void AddButton_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            FileOpenPicker openPicker = new FileOpenPicker
-            {
-                ViewMode = PickerViewMode.Thumbnail,
-                SuggestedStartLocation = PickerLocationId.PicturesLibrary,
-                FileTypeFilter =
-                {
-                     ".jpg",
-                     ".jpeg",
-                     ".png",
-                     ".bmp",
-                }
-            };
 
-            StorageFile file = await openPicker.PickSingleFileAsync();
-            if (file == null) return;
-            Layer layer = await ImageLayer.CreateFromFlie(this.ViewModel.CanvasControl, file);
 
-            layer.Transformer.Postion = this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasCenter - new Vector2(layer.Transformer.Width, layer.Transformer.Height) / 2;
 
-            this.ViewModel.RenderLayer.Insert(layer);
-            this.ViewModel.Invalidate();
-        }
+
+
+        #endregion
 
 
     }

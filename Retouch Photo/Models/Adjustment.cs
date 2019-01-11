@@ -21,8 +21,10 @@ namespace Retouch_Photo.Models
     {
         public AdjustmentType Type;
         public FrameworkElement Icon;
-        public bool HasPage;
+        /// <summary> 有无参数页面 </summary>
+         public bool HasPage;
 
+        /// <summary> 重置参数 </summary>
         public abstract void Reset();
         public abstract ICanvasImage GetRender(ICanvasImage image);
 
@@ -51,8 +53,10 @@ namespace Retouch_Photo.Models
         public AdjustmentType Type;
         public FrameworkElement Icon;
         public FrameworkElement Page;
-        
+
+        /// <summary> 生成一个新的Adjustment实例 </summary>
         public abstract Adjustment GetNewAdjustment();
+        /// <summary> 给当前类的页面来赋值 </summary>
         public abstract void SetPage(Adjustment adjustment);
 
         //@static

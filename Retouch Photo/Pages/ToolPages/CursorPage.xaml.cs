@@ -17,7 +17,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Retouch_Photo.Pages.ToolPages
 {
-    public sealed partial class CursorPage : Page
+    public sealed partial class CursorPage : ToolPage
     {
         //ViewModel
         DrawViewModel ViewModel => App.ViewModel;
@@ -25,6 +25,14 @@ namespace Retouch_Photo.Pages.ToolPages
         public CursorPage()
         {
             this.InitializeComponent();
+        }
+
+        //@Override
+        public override void ToolOnNavigatedTo()//当前页面成为活动页面
+        {
+        }
+        public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
+        {
         }
 
         private void StepFrequencyButton_Tapped(object sender, TappedRoutedEventArgs e) => this.ViewModel.Invalidate();

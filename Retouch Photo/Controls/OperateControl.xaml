@@ -8,28 +8,31 @@
     xmlns:conOpe="using:Retouch_Photo.Controls.OperateControls"
     xmlns:conOpeTra="using:Retouch_Photo.Controls.OperateControls.TransformControls"
     xmlns:conOpeArr="using:Retouch_Photo.Controls.OperateControls.ArrangeControls"
-    xmlns:conOpeAliHor="using:Retouch_Photo.Controls.OperateControls.AlignmentControls.HorizontalControls"
-    xmlns:conOpeAliVer="using:Retouch_Photo.Controls.OperateControls.AlignmentControls.VerticalControls"
+    xmlns:conOpeAliHor="using:Retouch_Photo.Controls.OperateControls.AlignHorizontalControls"
+    xmlns:conOpeAliVer="using:Retouch_Photo.Controls.OperateControls.AlignVerticalControls"
     mc:Ignorable="d"
+    MinWidth="200"
     d:DesignHeight="300"
     d:DesignWidth="300">
 
+    <StackPanel >
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="170"/>
-            <ColumnDefinition Width="1"/>
-            <ColumnDefinition Width="170"/>
-        </Grid.ColumnDefinitions>
+        <TextBlock Text="Transform" Style="{StaticResource AppTextBlock}"/>
 
-                
-        <StackPanel Grid.Column="0">
+        <!--#region Transform-->
 
-            <TextBlock Text="Transform" Margin="12,4" Opacity="0.5"/>
+        <Grid Height="50">
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
 
-            <!--#region Transform-->
-
-            <conOpe:OperateControlButton x:Name="FlipHorizontalButton" Label="Flip Horizontal" ButtonTapped="FlipHorizontalButton_Tapped">
+            <conOpe:OperateControlButton x:Name="FlipHorizontalButton" Grid.Column="0" Label="Flip Horizontal" ButtonTapped="FlipHorizontalButton_Tapped">
                 <conOpe:OperateControlButton.EnabledIcon>
                     <conOpeTra:FlipHorizontalEnabledControl/>
                 </conOpe:OperateControlButton.EnabledIcon>
@@ -38,7 +41,7 @@
                 </conOpe:OperateControlButton.DisabledIcon>
             </conOpe:OperateControlButton>
 
-            <conOpe:OperateControlButton x:Name="FlipVerticalButton" Label="Flip Vertical" ButtonTapped="FlipVerticalButton_Tapped">
+            <conOpe:OperateControlButton x:Name="FlipVerticalButton" Grid.Column="2" Label="Flip Vertical" ButtonTapped="FlipVerticalButton_Tapped">
                 <conOpe:OperateControlButton.EnabledIcon>
                     <conOpeTra:FlipVerticalEnabledControl/>
                 </conOpe:OperateControlButton.EnabledIcon>
@@ -46,10 +49,8 @@
                     <conOpeTra:FlipVerticalDisabledControl/>
                 </conOpe:OperateControlButton.DisabledIcon>
             </conOpe:OperateControlButton>
-            
-            <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
 
-            <conOpe:OperateControlButton x:Name="RotateLeftButton" Label="Rotate Left" ButtonTapped="RotateLeftButton_Tapped">
+            <conOpe:OperateControlButton x:Name="RotateLeftButton" Grid.Column="4" Label="Rotate Left" ButtonTapped="RotateLeftButton_Tapped">
                 <conOpe:OperateControlButton.EnabledIcon>
                     <conOpeTra:RotateLeftEnabledIControl/>
                 </conOpe:OperateControlButton.EnabledIcon>
@@ -58,7 +59,7 @@
                 </conOpe:OperateControlButton.DisabledIcon>
             </conOpe:OperateControlButton>
 
-            <conOpe:OperateControlButton x:Name="RotateRightButton" Label="Rotate Right" ButtonTapped="RotateRightButton_Tapped">
+            <conOpe:OperateControlButton x:Name="RotateRightButton" Grid.Column="6" Label="Rotate Right" ButtonTapped="RotateRightButton_Tapped">
                 <conOpe:OperateControlButton.EnabledIcon>
                     <conOpeTra:RotateRightEnabledControl/>
                 </conOpe:OperateControlButton.EnabledIcon>
@@ -66,16 +67,27 @@
                     <conOpeTra:RotateRightDisabledControl/>
                 </conOpe:OperateControlButton.DisabledIcon>
             </conOpe:OperateControlButton>
-            
-            <!--#endregion-->
-            
-            <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
 
-            <TextBlock Text="Arrange" Margin="12,4" Opacity="0.5"/>
+        </Grid>
 
-            <!--#region Arrange-->
+        <!--#endregion-->
 
-            <conOpe:OperateControlButton x:Name="ArrangeMoveBackButton" Label="Move To Back" ButtonTapped="ArrangeMoveBackButton_ButtonTapped">
+        <TextBlock Text="Arrange" Style="{StaticResource AppTextBlock}"/>
+
+        <!--#region Arrange-->
+
+        <Grid Height="50">
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <conOpe:OperateControlButton x:Name="ArrangeMoveBackButton" Grid.Column="0" Label="Move To Back" ButtonTapped="ArrangeMoveBackButton_ButtonTapped">
                 <conOpe:OperateControlButton.EnabledIcon>
                     <conOpeArr:MoveBackEnabledControl/>
                 </conOpe:OperateControlButton.EnabledIcon>
@@ -84,7 +96,7 @@
                 </conOpe:OperateControlButton.DisabledIcon>
             </conOpe:OperateControlButton>
 
-            <conOpe:OperateControlButton x:Name="ArrangeBackOneButton" Label="Back One" ButtonTapped="ArrangeBackOneButton_ButtonTapped">
+            <conOpe:OperateControlButton x:Name="ArrangeBackOneButton" Grid.Column="2" Label="Back One" ButtonTapped="ArrangeBackOneButton_ButtonTapped">
                 <conOpe:OperateControlButton.EnabledIcon>
                     <conOpeArr:BackOneEnabledControl/>
                 </conOpe:OperateControlButton.EnabledIcon>
@@ -93,7 +105,7 @@
                 </conOpe:OperateControlButton.DisabledIcon>
             </conOpe:OperateControlButton>
 
-            <conOpe:OperateControlButton x:Name="ArrangeForwardOneButton" Label="Forward One" ButtonTapped="ArrangeForwardOneButton_ButtonTapped">
+            <conOpe:OperateControlButton x:Name="ArrangeForwardOneButton" Grid.Column="4" Label="Forward One" ButtonTapped="ArrangeForwardOneButton_ButtonTapped">
                 <conOpe:OperateControlButton.EnabledIcon>
                     <conOpeArr:ForwardOneEnabledControl/>
                 </conOpe:OperateControlButton.EnabledIcon>
@@ -102,7 +114,7 @@
                 </conOpe:OperateControlButton.DisabledIcon>
             </conOpe:OperateControlButton>
 
-            <conOpe:OperateControlButton x:Name="ArrangeMoveFrontButton" Label="Move To Front" ButtonTapped="ArrangeMoveFrontButton_ButtonTapped">
+            <conOpe:OperateControlButton x:Name="ArrangeMoveFrontButton" Grid.Column="6" Label="Move To Front" ButtonTapped="ArrangeMoveFrontButton_ButtonTapped">
                 <conOpe:OperateControlButton.EnabledIcon>
                     <conOpeArr:MoveFrontEnabledControl/>
                 </conOpe:OperateControlButton.EnabledIcon>
@@ -110,21 +122,26 @@
                     <conOpeArr:MoveFrontDisabledControl/>
                 </conOpe:OperateControlButton.DisabledIcon>
             </conOpe:OperateControlButton>
-            
-            <!--#endregion-->
+        </Grid>
 
-        </StackPanel>
+        <!--#endregion-->
 
-        <Rectangle Grid.Column="1" Width="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
+        <TextBlock Text="Align Horizontal" Style="{StaticResource AppTextBlock}"/>
 
-                
-        <StackPanel Grid.Column="2">
+        <!--#region Align Horizontal-->
 
-            <TextBlock Text="Align Horizontal" Margin="12,4" Opacity="0.5"/>
+        <Grid Height="50">
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
 
-            <!--#region Align Horizontal-->
-
-            <conOpe:OperateControlButton x:Name="AlignLeftButton" Label="Align Left" ButtonTapped="AlignLeftButton_ButtonTapped">
+            <conOpe:OperateControlButton x:Name="AlignLeftButton" Grid.Column="0" Label="Align Left" ButtonTapped="AlignLeftButton_ButtonTapped">
                 <conOpe:OperateControlButton.EnabledIcon>
                     <conOpeAliHor:LeftEnabledControl/>
                 </conOpe:OperateControlButton.EnabledIcon>
@@ -133,7 +150,7 @@
                 </conOpe:OperateControlButton.DisabledIcon>
             </conOpe:OperateControlButton>
 
-            <conOpe:OperateControlButton x:Name="AlignCenterButton" Label="Align Center" ButtonTapped="AlignCenterButton_ButtonTapped">
+            <conOpe:OperateControlButton x:Name="AlignCenterButton" Grid.Column="2" Label="Align Center" ButtonTapped="AlignCenterButton_ButtonTapped">
                 <conOpe:OperateControlButton.EnabledIcon>
                     <conOpeAliHor:CenterEnabledControl/>
                 </conOpe:OperateControlButton.EnabledIcon>
@@ -142,7 +159,7 @@
                 </conOpe:OperateControlButton.DisabledIcon>
             </conOpe:OperateControlButton>
 
-            <conOpe:OperateControlButton x:Name="AlignRightButton" Label="Align Right" ButtonTapped="AlignRightButton_ButtonTapped">
+            <conOpe:OperateControlButton x:Name="AlignRightButton" Grid.Column="4" Label="Align Right" ButtonTapped="AlignRightButton_ButtonTapped">
                 <conOpe:OperateControlButton.EnabledIcon>
                     <conOpeAliHor:RightEnabledControl/>
                 </conOpe:OperateControlButton.EnabledIcon>
@@ -151,9 +168,9 @@
                 </conOpe:OperateControlButton.DisabledIcon>
             </conOpe:OperateControlButton>
 
-            <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
+            <ContentPresenter ContentTemplate="{StaticResource AppRowSeparator}"/>
 
-            <conOpe:OperateControlButton x:Name="AlignSymmetryHorizontallyButton" Label="Symmetry Horizontally" ButtonTapped="AlignSymmetryHorizontallyButton_ButtonTapped">
+            <conOpe:OperateControlButton x:Name="AlignSymmetryHorizontallyButton" Grid.Column="6" Label="Symmetry" ButtonTapped="AlignSymmetryHorizontallyButton_ButtonTapped">
                 <conOpe:OperateControlButton.EnabledIcon>
                     <conOpeAliHor:SymmetryEnabledControl/>
                 </conOpe:OperateControlButton.EnabledIcon>
@@ -162,15 +179,26 @@
                 </conOpe:OperateControlButton.DisabledIcon>
             </conOpe:OperateControlButton>
 
-            <!--#endregion-->
+        </Grid>
 
-            <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
+        <!--#endregion-->
 
-            <TextBlock Text="Align Vertical" Margin="12,4" Opacity="0.5"/>
+        <TextBlock Text="Align Vertical" Style="{StaticResource AppTextBlock}"/>
 
-            <!--#region Align Vertical-->
+        <!--#region Align Vertical-->
 
-            <conOpe:OperateControlButton x:Name="AlignTopButton" Label="Align Top" ButtonTapped="AlignTopButton_ButtonTapped">
+        <Grid Height="50">
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <conOpe:OperateControlButton x:Name="AlignTopButton" Grid.Column="0" Label="Align Top" ButtonTapped="AlignTopButton_ButtonTapped">
                 <conOpe:OperateControlButton.EnabledIcon>
                     <conOpeAliVer:TopEnabledControl/>
                 </conOpe:OperateControlButton.EnabledIcon>
@@ -179,7 +207,7 @@
                 </conOpe:OperateControlButton.DisabledIcon>
             </conOpe:OperateControlButton>
 
-            <conOpe:OperateControlButton x:Name="AlignMiddleButton" Label="Align Middle" ButtonTapped="AlignMiddleButton_ButtonTapped">
+            <conOpe:OperateControlButton x:Name="AlignMiddleButton" Grid.Column="2" Label="Align Middle" ButtonTapped="AlignMiddleButton_ButtonTapped">
                 <conOpe:OperateControlButton.EnabledIcon>
                     <conOpeAliVer:MiddleEnabledControl/>
                 </conOpe:OperateControlButton.EnabledIcon>
@@ -188,7 +216,7 @@
                 </conOpe:OperateControlButton.DisabledIcon>
             </conOpe:OperateControlButton>
 
-            <conOpe:OperateControlButton x:Name="AlignBottomButton" Label="Align Bottom" ButtonTapped="AlignBottomButton_ButtonTapped">
+            <conOpe:OperateControlButton x:Name="AlignBottomButton" Grid.Column="4" Label="Align Bottom" ButtonTapped="AlignBottomButton_ButtonTapped">
                 <conOpe:OperateControlButton.EnabledIcon>
                     <conOpeAliVer:BottomEnabledControl/>
                 </conOpe:OperateControlButton.EnabledIcon>
@@ -197,9 +225,7 @@
                 </conOpe:OperateControlButton.DisabledIcon>
             </conOpe:OperateControlButton>
 
-            <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
-
-            <conOpe:OperateControlButton x:Name="AlignSymmetryVerticallyButton" Label="Symmetry Vertically" ButtonTapped="AlignSymmetryVerticallyButton_ButtonTapped">
+            <conOpe:OperateControlButton x:Name="AlignSymmetryVerticallyButton" Grid.Column="6" Label="Symmetry" ButtonTapped="AlignSymmetryVerticallyButton_ButtonTapped">
                 <conOpe:OperateControlButton.EnabledIcon>
                     <conOpeAliVer:SymmetryEnabledControl/>
                 </conOpe:OperateControlButton.EnabledIcon>
@@ -208,10 +234,11 @@
                 </conOpe:OperateControlButton.DisabledIcon>
             </conOpe:OperateControlButton>
 
-            <!--#endregion-->
+        </Grid>
 
-        </StackPanel>        
+        <!--#endregion-->
+
+        <ContentControl Height="8"/>
         
-
-    </Grid>
+    </StackPanel>
 </UserControl>

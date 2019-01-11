@@ -40,7 +40,6 @@ namespace Retouch_Photo.Models
 
         public List<Adjustment> Adjustments = new List<Adjustment>();
 
-                     
 
         #region Thumbnail
 
@@ -111,6 +110,7 @@ namespace Retouch_Photo.Models
 
 
         //@override
+        public virtual void ColorChanged(Color value) {}
         protected abstract ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix);
     
         //@static

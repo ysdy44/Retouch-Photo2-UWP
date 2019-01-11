@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
 
         <!--R-->
-        <TextBlock Grid.Row="0" Text="R" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold"/>
+        <TextBlock Grid.Row="0" Opacity="0.5" Text="R" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold"/>
         <pic:NumberPicker x:Name="RPicker" Grid.Row="0" Minimum="0" Maximum="255" HorizontalAlignment="Right" ValueChange="RPicker_ValueChange"/>
         <pic:TouchSlider x:Name="RSlider" Grid.Row="1" Minimum="0" Maximum="255" ValueChangeDelta="RSlider_ValueChangeDelta">
             <pic:TouchSlider.SliderBackground>
@@ -32,7 +32,7 @@
         </pic:TouchSlider>
 
         <!--G-->
-        <TextBlock Grid.Row="2" Text="G" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold"/>
+        <TextBlock Grid.Row="2" Opacity="0.5" Text="G" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold"/>
         <pic:NumberPicker x:Name="GPicker" Grid.Row="2" Minimum="0" Maximum="255" HorizontalAlignment="Right" ValueChange="GPicker_ValueChange"/>
         <pic:TouchSlider x:Name="GSlider" Grid.Row="3" Minimum="0" Maximum="255" ValueChangeDelta="GSlider_ValueChangeDelta">
             <pic:TouchSlider.SliderBackground>
@@ -44,7 +44,7 @@
         </pic:TouchSlider>
 
         <!--B-->
-        <TextBlock Grid.Row="4" Text="B" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold"/>
+        <TextBlock Grid.Row="4" Opacity="0.5" Text="B" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold"/>
         <pic:NumberPicker x:Name="BPicker" Grid.Row="4" Minimum="0" Maximum="255" HorizontalAlignment="Right" ValueChange="BPicker_ValueChange"/>
         <pic:TouchSlider x:Name="BSlider" Grid.Row="5" Minimum="0" Maximum="255" ValueChangeDelta="BSlider_ValueChangeDelta">
             <pic:TouchSlider.SliderBackground>

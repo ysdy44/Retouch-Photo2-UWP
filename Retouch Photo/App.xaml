@@ -20,7 +20,7 @@
 
                 <ResourceDictionary x:Key="Default">
 
-                    <Color x:Key="AppForegroundColor" >#FAFAFA</Color>
+                    <Color x:Key="AppForegroundColor" >#F0F0F0</Color>
                     <SolidColorBrush x:Key="AppForeground" Color="{ThemeResource AppForegroundColor}" />
                     <SolidColorBrush x:Key="AppBackground" Color="#F0F0F2" />
                     <Color x:Key="AppBorderBrushColor" >#CECEDE</Color>
@@ -90,6 +90,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ms-appx:///Style/Style.xaml"/>
                 <ResourceDictionary Source="ms-appx:///Style/Transition.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Style/Template.xaml"/>
 
                 <!--Version-->
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>

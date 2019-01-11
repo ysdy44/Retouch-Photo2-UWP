@@ -26,6 +26,11 @@ namespace Retouch_Photo.Models.Layers
         public Color TintColor = Color.FromArgb(255, 255, 255, 255);
         public float BlurAmount = 12.0f;
 
+        //@Override     
+        public override void ColorChanged(Color value)
+        {
+            this.TintColor = value;
+        }
         protected override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
             Matrix3x2 matrix = this.Transformer.Matrix * canvasToVirtualMatrix;

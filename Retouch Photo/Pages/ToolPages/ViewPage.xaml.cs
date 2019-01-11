@@ -1,4 +1,5 @@
-﻿using Retouch_Photo.ViewModels;
+﻿using Retouch_Photo.Models;
+using Retouch_Photo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -62,7 +63,7 @@ namespace Retouch_Photo.Pages.ToolPages
 
     }
 
-    public sealed partial class ViewPage : Page
+    public sealed partial class ViewPage : ToolPage
     {
         //ViewModel
         public DrawViewModel ViewModel => App.ViewModel;
@@ -84,6 +85,14 @@ namespace Retouch_Photo.Pages.ToolPages
             this.ScaleSlider.Maximum = ViewConverter.ScaleMaximum;
             this.ScaleSlider.Minimum = ViewConverter.ScaleMinimum;
             this.ScaleSlider.ValueChanged += ScaleSlider_ValueChanged;
+        }
+
+        //@Override
+        public override void ToolOnNavigatedTo()//当前页面成为活动页面
+        {
+        }
+        public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
+        {
         }
 
 

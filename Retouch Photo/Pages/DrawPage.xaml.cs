@@ -35,11 +35,48 @@ namespace Retouch_Photo.Pages
         public DrawPage()
         {
             this.InitializeComponent();
+            
+            //Selection
+            this.SelectionFlyout.Opened += (sender, e) => this.SelectionToggleButton.IsChecked = true;
+            this.SelectionFlyout.Closed += (sender, e) => this.SelectionToggleButton.IsChecked = false;
+            this.SelectionToggleButton.Tapped += (sender, e) =>
+            {
+                this.SelectionFlyout.ShowAt(this.SelectionToggleButton);
+                this.SelectionControl.Initialize();
+            }; 
+           //Operate
+            this.OperateFlyout.Opened += (sender, e) => this.OperateToggleButton.IsChecked = true;
+            this.OperateFlyout.Closed += (sender, e) => this.OperateToggleButton.IsChecked = false;
+            this.OperateToggleButton.Tapped += (sender, e) =>
+            {
+                this.OperateFlyout.ShowAt(this.OperateToggleButton);
+            };             
+           //Others
+            this.OthersFlyout.Opened += (sender, e) => this.OthersToggleButton.IsChecked = true;
+            this.OthersFlyout.Closed += (sender, e) => this.OthersToggleButton.IsChecked = false;
+            this.OthersToggleButton.Tapped += (sender, e) =>
+            {
+                this.OthersFlyout.ShowAt(this.OthersToggleButton);
+                this.OthersControl.Initialize();
+            };
+            //Color
+            this.ColorPicker.ColorChange += (sender, color) =>
+            {
+                this.ViewModel.Color = color;
 
-            //S & A & O
-            this.DrawLayout.SelectionButtonTapped += (sender, e) => this.SelectionControl.Initialize();
-            this.DrawLayout.OperateButtonTapped += (sender, e) => this.OperateControl.Initialize();
-            this.DrawLayout.OthersButtonTapped += (sender, e) => this.OthersControl.Initialize();
+                Layer layer = this.ViewModel.CurrentLayer;
+                if (layer != null)
+                {
+                    layer.ColorChanged(color);
+                    layer.Invalidate();
+                    this.ViewModel.Invalidate();
+                }
+            };
+            this.ColorButton.Tapped += (sender, e) =>
+            {
+                this.ColorFlyout.ShowAt(this.ColorButton);
+                this.ColorPicker.Color = this.ViewModel.Color;
+            };
 
             //SizeChanged
             this.MainCanvasControl.SizeChanged += (s, e) => this.ViewModel.MatrixTransformer.ControlSizeChanged(e.NewSize);
@@ -96,7 +133,7 @@ namespace Retouch_Photo.Pages
 
         private void SaveButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-        }
+        } 
     }
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Retouch_Photo.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,18 +14,21 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
-
 namespace Retouch_Photo.Pages.ToolPages
 {
-    /// <summary>
-    /// 可用于自身或导航至 Frame 内部的空白页。
-    /// </summary>
-    public sealed partial class SelectionBrushPage : Page
+    public sealed partial class SelectionBrushPage : ToolPage
     {
         public SelectionBrushPage()
         {
             this.InitializeComponent();
+        }
+
+        //@Override
+        public override void ToolOnNavigatedTo()//当前页面成为活动页面
+        {
+        }
+        public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
+        {
         }
     }
 }

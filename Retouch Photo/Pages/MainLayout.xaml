@@ -7,11 +7,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
     mc:Ignorable="d"
     d:DesignHeight="800"
     d:DesignWidth="800">
 
     <Grid >
+
+        <!--hhhh-->
+        <developerTools:AlignmentGrid Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="Gray"/>
 
         <Border x:Name="CenterBorder" >
             <!--CenterContent-->

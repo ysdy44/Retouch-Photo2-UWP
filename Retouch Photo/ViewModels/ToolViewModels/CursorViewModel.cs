@@ -79,6 +79,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             this.CurrentLayer = this.ViewModel.CurrentLayer;
 
 
+
             //CursorMode
             if (this.CurrentLayer != null)
             {
@@ -100,7 +101,8 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
                 if (Transformer.ContainsBound(canvasPoint, layer.Transformer))
                 {
-                    this.CurrentLayer = this.ViewModel.CurrentLayer = layer;
+                    this.CurrentLayer = layer;
+                    this.ViewModel.CurrentLayer = layer;
                     this.Mode = CursorMode.Translation;
 
                     this.ViewModelDictionary[this.Mode].Start(point, this.CurrentLayer);

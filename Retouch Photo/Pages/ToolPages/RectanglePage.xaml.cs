@@ -1,28 +1,13 @@
-﻿using Retouch_Photo.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using Windows.UI;
-using Retouch_Photo.Library;
+﻿using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo.Models;
-using Retouch_Photo.Models.Layers.GeometryLayers;
-using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo.Models.Layers;
+using Retouch_Photo.ViewModels;
+using Windows.UI;
+using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo.Pages.ToolPages
 {
-    public sealed partial class RectanglePage : Page
+    public sealed partial class RectanglePage : ToolPage
     {
         //ViewModel
         DrawViewModel ViewModel => App.ViewModel;
@@ -30,32 +15,35 @@ namespace Retouch_Photo.Pages.ToolPages
         public RectanglePage()
         {
             this.InitializeComponent();
-            
-            this.ColorBrush.Color = this.ViewModel.Color;
-            this.ColorPicker.Color = this.ViewModel.Color;
         }
 
-        private void ToolMarqueeModeControl_ModeChanged(MarqueeMode mode) => this.ViewModel.MarqueeMode = mode;
+        //@Override
+        public override void ToolOnNavigatedTo()//当前页面成为活动页面
+        {
+            this.ColorPicker.Color = this.ViewModel.Color;
+        }
+        public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
+        {
+        }
+        
 
         private void ColorButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             this.ColorFlyout.ShowAt(this.ColorButton);
+            this.ColorPicker.Color = this.ViewModel.Color;
         }
         private void ColorPicker_ColorChange(object sender, Color value)
         {
             this.ViewModel.Color = value;
-            this.ColorBrush.Color = value;
 
             Layer layer = this.ViewModel.CurrentLayer;
-            if (layer is GeometryLayer geometryLayer)
+            if (layer != null)
             {
-                if (geometryLayer.FillBrush is CanvasSolidColorBrush brush)
-                {
-                    brush.Color = value;
-                    layer.Invalidate();
-                    this.ViewModel.Invalidate();
-                }
+                layer.ColorChanged(value);
+                layer.Invalidate();
+                this.ViewModel.Invalidate();
             }
         }
+
     }
 }

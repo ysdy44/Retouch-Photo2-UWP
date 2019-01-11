@@ -37,13 +37,15 @@ namespace Retouch_Photo.Controls.LayerControls
 
             if (e.NewValue  is Adjustment adjustment)
             {
-                AdjustmentCandidate adjustmentCandidate = AdjustmentCandidate.GetAdjustmentCandidate(adjustment.Type);
-                if (adjustmentCandidate.Page == null) return;
+                if (adjustment.HasPage)
+                {
+                    AdjustmentCandidate adjustmentCandidate = AdjustmentCandidate.GetAdjustmentCandidate(adjustment.Type);
 
-                adjustmentCandidate.SetPage(adjustment);
-                con.AdjustmentFrame.Child = adjustmentCandidate.Page;
-                 
-                con.Visibility = Visibility.Visible;
+                    adjustmentCandidate.SetPage(adjustment);
+                    con.AdjustmentFrame.Child = adjustmentCandidate.Page;
+
+                    con.Visibility = Visibility.Visible;
+                }
             }
         }));
 
@@ -58,7 +60,7 @@ namespace Retouch_Photo.Controls.LayerControls
         private void BackButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Clear();
         private void ResetButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Reset();
 
-
+        /// <summary> 重置 </summary>
         private void Reset()
         {
             if (this.Adjustment == null) return;
@@ -70,6 +72,7 @@ namespace Retouch_Photo.Controls.LayerControls
 
             this.ViewModel.Invalidate();
         }
+        /// <summary> 清空 </summary>
         private void Clear()
         {
             this.Adjustment = null;

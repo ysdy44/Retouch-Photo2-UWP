@@ -13,12 +13,6 @@ namespace Retouch_Photo.Pages
     public sealed partial class DrawLayout : UserControl
     {
 
-        //@Delegate
-        public event TappedEventHandler SelectionButtonTapped;
-        public event TappedEventHandler OperateButtonTapped;
-        public event TappedEventHandler OthersButtonTapped;
-
-
         #region DependencyProperty
 
 
@@ -31,15 +25,24 @@ namespace Retouch_Photo.Pages
         {
             DrawLayout con = (DrawLayout)sender;
 
-            if (e.NewValue is Tool tool)
+            if (e.NewValue is Tool newTool)
             {
-                con.WorkLeftBorder.Content = tool.WorkIcon;
-                con.BottomBarFrame.Content = tool.Page;
+                con.WorkLeftBorder.Content = newTool.WorkIcon;
+                con.BottomBarFrame.Content = newTool.Page;
 
-                if (con.WorkDismissOverlay.Visibility == Visibility.Visible)
-                    if (e.OldValue is Tool oldIndex)
-                        if (tool.Type != oldIndex.Type)
-                            con.WorkOverlay();
+                if (e.OldValue is Tool oldTool)
+                {
+                    if (newTool.Type != oldTool.Type)
+                    {
+                        if (con.WorkDismissOverlay.Visibility == Visibility.Visible) con.WorkOverlay();
+
+                        //当前页面不再成为活动页面
+                        oldTool.Page.ToolOnNavigatedFrom();
+
+                        //当前页面成为活动页面
+                        newTool.Page.ToolOnNavigatedTo();
+                    }
+                }
             }
         }));
 
@@ -56,11 +59,8 @@ namespace Retouch_Photo.Pages
         public UIElement TopRightPane { get => this.TopRightBorder.Child; set => this.TopRightBorder.Child = value; }
         public UIElement TopLeftStackBar { get => this.TopLeftStackPanel.Child; set => this.TopLeftStackPanel.Child = value; }
 
-        public UIElement SelectionPane { get => this.SelectionFlyout.Content; set => this.SelectionFlyout.Content = value; }
-        public UIElement OperatePane { get => this.OperateFlyout.Content; set => this.OperateFlyout.Content = value; }
-        public UIElement OthersPane { get => this.OthersFlyout.Content; set => this.OthersFlyout.Content = value; }
 
-
+        /// <summary> 左工作区选定 </summary>
         private bool WorkLeftChecked
         {
             set
@@ -69,7 +69,7 @@ namespace Retouch_Photo.Pages
                 this.WorkLeftBorder.Foreground = value ? this.CheckColor : this.UnCheckColor;
             }
         }
-
+        /// <summary> 右工作区选定 </summary>
         private bool WorkRightChecked
         {
             set
@@ -92,21 +92,9 @@ namespace Retouch_Photo.Pages
             this.WorkRightGrid.PointerEntered += (sender, e) => this.WorkRight(e);
             //DismissOverlay
             this.WorkDismissOverlay.Tapped += (sender, e) => this.WorkOverlay();
-
-            //Selection
-            this.SelectionToggleButton.Tapped += (sender, e) => this.ButtonTapped(this.SelectionButtonTapped, sender, e);
-            this.SelectionFlyout.Opened += (sender, e) => this.SelectionToggleButton.IsChecked = true;
-            this.SelectionFlyout.Closed += (sender, e) => this.SelectionToggleButton.IsChecked = false;
-            //Operate
-            this.OperateToggleButton.Tapped += (sender, e) => this.ButtonTapped(this.OperateButtonTapped, sender, e);
-            this.OperateFlyout.Opened += (sender, e) => this.OperateToggleButton.IsChecked = true;
-            this.OperateFlyout.Closed += (sender, e) => this.OperateToggleButton.IsChecked = false;
-            //Others
-            this.OthersToggleButton.Tapped += (sender, e) => this.ButtonTapped(this.OthersButtonTapped, sender, e);
-            this.OthersFlyout.Opened += (sender, e) => this.OthersToggleButton.IsChecked = true;
-            this.OthersFlyout.Closed += (sender, e) => this.OthersToggleButton.IsChecked = false;
         }
 
+        /// <summary> 左工作区出现 </summary>
         private void WorkLeft(PointerRoutedEventArgs e)
         {
             if (e != null)
@@ -116,6 +104,7 @@ namespace Retouch_Photo.Pages
             this.LeftBorder.Visibility = this.WorkDismissOverlay.Visibility = Visibility.Visible;
             this.WorkLeftChecked = true;
         }
+        /// <summary> 右工作区出现 </summary>
         private void WorkRight(PointerRoutedEventArgs e)
         {
             if (e != null)
@@ -126,19 +115,12 @@ namespace Retouch_Photo.Pages
             this.WorkRightChecked = true;
         }
 
+        /// <summary> 覆盖层消失 </summary>
         private void WorkOverlay()
         {
             this.LeftBorder.Visibility = this.RightBorder.Visibility = this.WorkDismissOverlay.Visibility = Visibility.Collapsed;
             this.WorkLeftChecked = this.WorkRightChecked = false;
         }
-
-        //S & O & O
-        private void ButtonTapped(TappedEventHandler buttonTapped, object sender, TappedRoutedEventArgs e)
-        {
-            FlyoutBase.ShowAttachedFlyout((ToggleButton)sender);
-            buttonTapped?.Invoke(sender, e);
-        }
-
 
         // Appbar
         private void BottomBorder_SizeChanged(object sender, SizeChangedEventArgs e)

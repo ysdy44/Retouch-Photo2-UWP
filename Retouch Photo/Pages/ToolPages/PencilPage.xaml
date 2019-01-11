@@ -1,4 +1,5 @@
-﻿<Page
+﻿<models:ToolPage
+    xmlns:models="using:Retouch_Photo.Models"
     x:Class="Retouch_Photo.Pages.ToolPages.PencilPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,11 +7,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="50"
-    d:DesignWidth="400">
+     
+     >
 
     <StackPanel Orientation="Horizontal" Height="50" Padding="12,4">
 
     </StackPanel>
 
-</Page>
+</models:ToolPage>

@@ -13,6 +13,15 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo.Models
 {
+    public abstract class ToolPage:Page
+    {
+        //@Override
+        /// <summary> 当前页面成为活动页面 </summary>
+        public abstract void ToolOnNavigatedTo();
+        /// <summary> 当前页面不再成为活动页面 </summary>
+        public abstract void ToolOnNavigatedFrom();
+    }
+
     public abstract class Tool
     {
         public ToolType Type;
@@ -20,7 +29,7 @@ namespace Retouch_Photo.Models
         public FrameworkElement Icon;
         public FrameworkElement WorkIcon;
 
-        public FrameworkElement Page;
+        public ToolPage Page;
 
         public ToolViewModel ViewModel;
 

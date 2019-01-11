@@ -11,7 +11,7 @@
     Visibility="Collapsed"
  >
 
-    <StackPanel    Background="{ThemeResource AppForeground}">
+    <StackPanel Background="{ThemeResource AppForeground}">
 
         <Grid>
             <Button x:Name="BackButton" Width="50" Height="40" HorizontalAlignment="Left" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Tapped="BackButton_Tapped">

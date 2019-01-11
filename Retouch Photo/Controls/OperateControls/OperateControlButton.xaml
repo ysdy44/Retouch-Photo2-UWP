@@ -9,20 +9,10 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <UserControl.Resources>
-        <SolidColorBrush x:Name="EnabledColor" Color="{ThemeResource SystemBaseHighColor}"/>
-        <SolidColorBrush x:Name="DisenabledColor" Color="Gray"/>
-    </UserControl.Resources>
-
-    <Button x:Name="Button" Height="40" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Tapped="Button_Tapped">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="32"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+    <Button x:Name="Button" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="{ThemeResource AppFill}" Tapped="Button_Tapped">
+        <Grid Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Viewbox x:Name="EnabledViewbox" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Viewbox x:Name="DisabledViewbox" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock x:Name="TextBlock" Grid.Column="1" FontSize="14"  VerticalAlignment="Center"/>
         </Grid>
     </Button>
 </UserControl>

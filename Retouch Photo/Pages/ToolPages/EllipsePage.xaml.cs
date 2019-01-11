@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Retouch_Photo.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,11 +16,19 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Retouch_Photo.Pages.ToolPages
 {
-    public sealed partial class EllipsePage : Page
+    public sealed partial class EllipsePage : ToolPage
     {
         public EllipsePage()
         {
             this.InitializeComponent();
+        }
+
+        //@Override
+        public override void ToolOnNavigatedTo()//当前页面成为活动页面
+        {
+        }
+        public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
+        {
         }
     }
 }

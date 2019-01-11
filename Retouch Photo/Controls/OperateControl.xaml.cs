@@ -23,21 +23,42 @@ namespace Retouch_Photo.Controls
         //ViewModel
         DrawViewModel ViewModel => App.ViewModel;
 
-        Layer Layer;
+        #region DependencyProperty
+
+        public Layer Layer
+        {
+            get { return (Layer)GetValue(LayerProperty); }
+            set { SetValue(LayerProperty, value); }
+        }
+        public static readonly DependencyProperty LayerProperty = DependencyProperty.Register(nameof(Layer), typeof(Layer), typeof(OperateControl), new PropertyMetadata(null, (sender, e) =>
+        {
+            OperateControl con = (OperateControl)sender;
+
+            if (e.NewValue is Layer value)
+            {
+                con.Initialize(value);
+            }
+            else
+            {
+                con.Initialize(null);
+           }
+        }));
+
+        #endregion
+
 
         public OperateControl()
         {
             this.InitializeComponent();
         }
 
+
         /// <summary>
         /// Initialize all button
         /// </summary>
-        public void Initialize()
+        public void Initialize(Layer layer)
         {
-            this.Layer = this.ViewModel.CurrentLayer;
-
-            bool isEnabled = !(this.Layer == null);
+            bool isEnabled = !(layer == null);
 
             //Transform
             this.InitializeTransform(isEnabled);
@@ -129,7 +150,7 @@ namespace Retouch_Photo.Controls
                 this.ViewModel.RenderLayer.Layers.Add(layer);
 
                 this.ViewModel.CurrentLayer = layer;
-                this.Initialize();
+                this.Initialize(layer);
             }
         );
         private void ArrangeBackOneButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
@@ -141,7 +162,7 @@ namespace Retouch_Photo.Controls
                 this.ViewModel.RenderLayer.Layers.Insert(index+1, layer);
 
                 this.ViewModel.CurrentLayer = layer;
-                this.Initialize();
+                this.Initialize(layer);
             }
         );
         private void ArrangeForwardOneButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
@@ -153,7 +174,7 @@ namespace Retouch_Photo.Controls
                 this.ViewModel.RenderLayer.Layers.Insert(index - 1, layer);
 
                 this.ViewModel.CurrentLayer = layer;
-                this.Initialize();
+                this.Initialize(layer);
             }
         );
         private void ArrangeMoveFrontButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
@@ -164,7 +185,7 @@ namespace Retouch_Photo.Controls
                 this.ViewModel.RenderLayer.Layers.Insert(0, layer);
 
                 this.ViewModel.CurrentLayer = layer;
-                this.Initialize();
+                this.Initialize(layer);
             }
         );
 
