@@ -17,9 +17,7 @@ namespace Retouch_Photo.Pickers
     {
         //Delegate
         public delegate void ColorChangeHandler(object sender, Color value);
-        public event ColorChangeHandler ColorChangeStarted = null;
-        public event ColorChangeHandler ColorChangeDelta = null;
-        public event ColorChangeHandler ColorChangeCompleted = null;
+        public event ColorChangeHandler ColorChange = null;
 
 
         private Popup popup = new Popup();
@@ -30,39 +28,26 @@ namespace Retouch_Photo.Pickers
         #region DependencyProperty
 
 
-        public Color NewColor
+        public Color Color
         {
-            get { return (Color)GetValue(NewColorProperty); }
-            set { SetValue(NewColorProperty, value); }
+            get { return (Color)GetValue(ColorProperty); }
+            set { SetValue(ColorProperty, value); }
         }
-        public static readonly DependencyProperty NewColorProperty = DependencyProperty.Register(nameof(Color), typeof(Color), typeof(StrawPicker), new PropertyMetadata(Windows.UI.Colors.White, (sender, e) =>
+        public static readonly DependencyProperty ColorProperty = DependencyProperty.Register(nameof(Color), typeof(Color), typeof(StrawPicker), new PropertyMetadata(Windows.UI.Colors.White, (sender, e) =>
         {
             StrawPicker con = (StrawPicker)sender;
 
             if (e.NewValue is Color value)
             {
-                con.ColorChangeDelta?.Invoke(con, value);
                 con.SolidColorBrushName.Color = value;
             }
         }));
 
-
-        public Color OldColor
+        private Color OldColor
         {
-            get { return (Color)GetValue(OldColorProperty); }
-            set { SetValue(OldColorProperty, value); }
+            get => this.SolidColorBrushNameOld.Color;
+            set => this.SolidColorBrushNameOld.Color=value;
         }
-        public static readonly DependencyProperty OldColorProperty = DependencyProperty.Register(nameof(Color), typeof(Color), typeof(StrawPicker), new PropertyMetadata(Windows.UI.Colors.White, (sender, e) =>
-        {
-            StrawPicker con = (StrawPicker)sender;
-
-            if (e.NewValue is Color value)
-            {
-                con.ColorChangeCompleted?.Invoke(con, value);
-                con.SolidColorBrushNameOld.Color = value;
-            }
-        }));
-
 
         #endregion
 
@@ -83,10 +68,8 @@ namespace Retouch_Photo.Pickers
         private void Border_PointerPressed(object sender, PointerRoutedEventArgs e) => v = e.GetCurrentPoint(Window.Current.Content).Position.ToVector2();
         private async void Border_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
         {
-            this.ColorChangeStarted?.Invoke(this, this.OldColor);
-
             this.bitmap = await this.GetRenderTargetBitmap(Window.Current.Content);
-            this.NewColor = this.GetColor(this.bitmap, this.v);
+            this.Color = this.GetColor(this.bitmap, this.v);
 
             //Popup
             this.popup.HorizontalOffset = v.X - 50;
@@ -96,7 +79,7 @@ namespace Retouch_Photo.Pickers
         private void Border_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             v += e.Delta.Translation.ToVector2();
-            this.NewColor = this.GetColor(this.bitmap, this.v);
+            this.Color = this.GetColor(this.bitmap, this.v);
 
             //Popup
             this.popup.HorizontalOffset = v.X - 50;
@@ -104,7 +87,8 @@ namespace Retouch_Photo.Pickers
         }
         private void Border_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
-            this.OldColor = this.GetColor(this.bitmap, this.v);
+            this.Color = this.OldColor = this.GetColor(this.bitmap, this.v);
+
             if (this.bitmap!=null)
             {
                 this.bitmap.Dispose();
@@ -143,6 +127,12 @@ namespace Retouch_Photo.Pickers
             return left;
         }
 
+
+
+        private void Ellipse_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.ColorChange?.Invoke(this, this.Color);
+        }
 
     }
 }

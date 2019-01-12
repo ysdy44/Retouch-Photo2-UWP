@@ -9,12 +9,22 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid Width="222" VerticalAlignment="Top" BorderThickness="0" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
+    <Grid Width="222" VerticalAlignment="Top" >
+
+        <Grid.Resources>
+            <Storyboard  x:Name="ContentRectangleStoryboard" >
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Height)" Storyboard.TargetName="ContentRectangle" EnableDependentAnimation ="True">
+                    <SplineDoubleKeyFrame x:Name="ContentRectangleFrameHeight" KeyTime="0:0:0.2" Value="200" KeySpline="0.5,1,1,1"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+        </Grid.Resources>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        
         <Grid x:Name="TitlePanel" Padding="12,0" Background="{ThemeResource AppFill}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -28,7 +38,15 @@
             </Button>
         </Grid>
 
-        <!--CenterContent-->
-        <Border x:Name="ContentPanel" Grid.Row="1" Margin="8,0"/>
+
+        <!--Content-->
+
+        <Rectangle x:Name="ContentRectangle" Grid.Row="1" Fill="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+
+        <Border Grid.Row="1" VerticalAlignment="Top" SizeChanged="ContentBorder_SizeChanged">
+            <Border x:Name="ContentBorderl" Padding="8,0" />
+        </Border>
+
+
     </Grid>
 </UserControl>

@@ -30,14 +30,20 @@
 
     </UserControl.Resources>
 
-    <Border Background="Transparent" 
+    <StackPanel Orientation="Horizontal">
+        <Border Background="Transparent" 
             PointerPressed="Border_PointerPressed" 
             
             ManipulationMode="All" 
             ManipulationStarted="Border_ManipulationStarted"
             ManipulationDelta="Border_ManipulationDelta"  
             ManipulationCompleted="Border_ManipulationCompleted">
-        <FontIcon Glyph="&#xEF3C;" FontFamily="Segoe MDL2 Assets"/>
-    </Border>
+            <FontIcon Glyph="&#xEF3C;" FontFamily="Segoe MDL2 Assets"/>
+        </Border>
+            
+        <Border x:Name="Ellipse"  Width="40" Background="Transparent" Tapped="Ellipse_Tapped">
+            <Ellipse Width="22" Height="22" Fill="{StaticResource SolidColorBrushKey}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Border>
 
+    </StackPanel>
 </UserControl>

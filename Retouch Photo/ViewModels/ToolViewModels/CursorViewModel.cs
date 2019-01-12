@@ -74,6 +74,18 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         Vector2 EndPoint;
 
 
+
+        //@Override
+        public override void ToolOnNavigatedTo()//当前页面成为活动页面
+        {
+            this.CurrentLayer = this.ViewModel.CurrentLayer;
+            if (this.CurrentLayer == null) return;
+            this.ViewModel.Invalidate();
+        }
+        public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
+        {
+        }
+
         public override void Start(Vector2 point)
         {
             this.CurrentLayer = this.ViewModel.CurrentLayer;
@@ -119,9 +131,10 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
         public override void Delta(Vector2 point)
         {
+            this.EndPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+
             if (this.IsCursorBox)
             {
-                this.EndPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
                 this.ViewModel.Invalidate();
                 return;
             }
@@ -136,12 +149,15 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
                
         public override void Complete(Vector2 point)
         {
+            this.EndPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+
             if (this.IsCursorBox)
             {
                 this.IsCursorBox = false;
-                this.EndPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
-                this.CurrentLayer = null;
+
                 this.ViewModel.CurrentLayer = null;
+                this.CurrentLayer = null;
+
                 this.ViewModel.Invalidate();
                 return;
             }
@@ -163,7 +179,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
         
         public override void Draw(CanvasDrawingSession ds)
-        {
+        {            
             if (this.IsCursorBox)
             {
                 Vector2[] points = new Vector2[4];
@@ -177,12 +193,11 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
                 ds.DrawGeometry(geometry, Colors.DodgerBlue, 1);
 
                 return;
-            }
+            }            
 
-            Layer layer = this.ViewModel.CurrentLayer;
-            if (layer != null)
+            if (this.CurrentLayer != null)
             {
-                this.ViewModelDictionary[this.Mode].Draw(ds, layer);
+                this.ViewModelDictionary[this.Mode].Draw(ds, this.CurrentLayer);
             }
         }
 

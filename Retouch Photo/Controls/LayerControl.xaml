@@ -8,6 +8,7 @@
     xmlns:lay="using:Retouch_Photo.Controls.LayerControls"
     xmlns:models="using:Retouch_Photo.Models"
     mc:Ignorable="d"
+    IsEnabled="False"
     d:DesignHeight="340"
     d:DesignWidth="200">
 

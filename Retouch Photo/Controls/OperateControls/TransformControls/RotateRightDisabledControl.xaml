@@ -8,9 +8,7 @@
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="50">
-
-    <Canvas Width="40" Height="40">
-        <Rectangle Width="12" Height="28" Canvas.Left="22" Canvas.Top="8" Fill="Gray" Opacity="0.5"/>
-        <Rectangle Width="12" Height="12" Canvas.Left="6" Canvas.Top="24" Fill="Gray" Opacity="0.5"/>
-    </Canvas>
+    
+    <FontIcon Glyph="&#xE149;" FontFamily="Segoe UI Symbol" Foreground="Gray" Opacity="0.5"/>
+    
 </UserControl>

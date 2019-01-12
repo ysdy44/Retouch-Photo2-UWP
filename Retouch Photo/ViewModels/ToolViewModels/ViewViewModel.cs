@@ -19,6 +19,17 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
         Vector2 rightStartPoint;
         Vector2 rightStartPosition;
+
+
+        //@Override
+        public override void ToolOnNavigatedTo()//当前页面成为活动页面
+        {
+        }
+        public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
+        {
+        }
+
+
         public override void Start(Vector2 point)
         {
             this.rightStartPoint = point;

@@ -17,6 +17,11 @@ namespace Retouch_Photo.ViewModels
 
         public abstract void Draw(CanvasDrawingSession ds);
 
+        //@Override
+        /// <summary> 当前页面成为活动页面 </summary>
+        public abstract void ToolOnNavigatedTo();
+        /// <summary> 当前页面不再成为活动页面 </summary>
+        public abstract void ToolOnNavigatedFrom();
     }
     public abstract class ToolViewModel2
     {

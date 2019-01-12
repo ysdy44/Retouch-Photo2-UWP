@@ -168,23 +168,23 @@ namespace Retouch_Photo.ViewModels
             {
                 if (value == null ||
                     this.RenderLayer.Layers == null ||
-                    !this.RenderLayer.Layers.Contains(value) ||
                     this.RenderLayer.Layers.Count == 0)
                 {
                     this.SelectedIndex = -1;
                     OnPropertyChanged(nameof(CurrentLayer));
                     return;
                 }
-
-                if (this.RenderLayer.Layers.Count == 1)
+                 
+                if (this.RenderLayer.Layers.Contains(value) )
                 {
-                    this.SelectedIndex = 0;
+                    this.SelectedIndex = this.RenderLayer.Layers.IndexOf(value);
                     OnPropertyChanged(nameof(CurrentLayer));
                     return;
                 }
 
-                this.SelectedIndex = this.RenderLayer.Layers.IndexOf(value);
+                this.SelectedIndex = -1;
                 OnPropertyChanged(nameof(CurrentLayer));
+                return;
             }
         }
         /// <summary>渲染图层</summary>
@@ -217,6 +217,9 @@ namespace Retouch_Photo.ViewModels
             get => this.tool;
             set
             {
+                this.tool.ViewModel.ToolOnNavigatedFrom();//当前页面不再成为活动页面
+                value.ViewModel.ToolOnNavigatedTo();//当前页面成为活动页面
+
                 this.tool = value;
                 OnPropertyChanged(nameof(Tool));
             }
@@ -281,7 +284,11 @@ namespace Retouch_Photo.ViewModels
 
                 case VirtualKey.Delete:
                     Layer layer = this.CurrentLayer;
-                    if (layer != null) this.RenderLayer.Remove(layer);
+                    if (layer != null)
+                    {
+                        this.RenderLayer.Remove(layer);
+                        this.Tool.ViewModel.ToolOnNavigatedTo();
+                    }
                     break;
 
                 default:

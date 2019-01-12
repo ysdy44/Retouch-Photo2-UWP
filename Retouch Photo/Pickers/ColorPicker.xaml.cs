@@ -73,9 +73,11 @@ namespace Retouch_Photo.Pickers
 
 
         //Head
-        private void StrawPicker_ColorChangeStarted(object sender, Color value){}
-        private void StrawPicker_ColorChangeDelta(object sender, Color value) => this.SolidColorBrushName.Color = value;
-        private void StrawPicker_ColorChangeCompleted(object sender, Color value) => Picker_ColorChange(sender, value);
+        private void StrawPicker_ColorChange(object sender, Color value)
+        {
+            this.ColorChange?.Invoke(this, value);
+            this.Color = value;
+        }
 
 
         //Toggle
