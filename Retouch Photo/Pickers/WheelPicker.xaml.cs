@@ -1,5 +1,4 @@
-﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Brushes;
+﻿using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using System;
 using System.Numerics;
@@ -9,7 +8,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Shapes;
 
 namespace Retouch_Photo.Pickers
 {
@@ -54,8 +52,6 @@ namespace Retouch_Photo.Pickers
 
 
 
-
-
         public SolidColorBrush Stroke
         {
             get { return (SolidColorBrush)GetValue(StrokeProperty); }
@@ -70,7 +66,7 @@ namespace Retouch_Photo.Pickers
         Vector2 Center = new Vector2(50, 50);
         float Radio = 100;
 
-        float StrokeWidth = 8;
+        readonly float StrokeWidth = 8;
         float SquareRadio => (this.Radio - this.StrokeWidth) / 1.414213562373095f;
 
 
@@ -117,28 +113,41 @@ namespace Retouch_Photo.Pickers
 
         bool IsWheel = false;
         bool IsPalette = false;
-        Vector2 v;
+        Vector2 Vector;
         private void CanvasControl_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
         {
-            v = e.Position.ToVector2() - this.Center;
+            this.Vector = e.Position.ToVector2() - this.Center;
 
-            this.IsWheel = v.Length() + this.StrokeWidth > this.Radio && v.Length() - this.StrokeWidth < this.Radio;
-            this.IsPalette = Math.Abs(v.X) < this.SquareRadio && Math.Abs(v.Y) < this.SquareRadio;
+            this.IsWheel = this.Vector.Length() + this.StrokeWidth > this.Radio && this.Vector.Length() - this.StrokeWidth < this.Radio;
+            this.IsPalette = Math.Abs(this.Vector.X) < this.SquareRadio && Math.Abs(this.Vector.Y) < this.SquareRadio;
+
+            if (this.IsWheel) this.HSL = this._HSL = this.GetWheelHSL(this.hsl, this.Vector);
+            if (this.IsPalette) this.HSL = this._HSL = this.GetPaletteHSL(this.hsl, this.Vector);
         }
         private void CanvasControl_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (this.IsWheel || this.IsPalette)
-            {
-                v += e.Delta.Translation.ToVector2();
+            this.Vector += e.Delta.Translation.ToVector2();
 
-                double H = (((Math.Atan2(v.Y, v.X)) * 180.0 / Math.PI) + 360.0) % 360.0;
-                double S = v.X * 50 / this.SquareRadio + 50;
-                double L = 50 - v.Y * 50 / this.SquareRadio;
-
-                this.HSL = this._HSL = new HSL(this.hsl.A, this.IsWheel ? H : this.hsl.H, this.IsPalette ? S : this.hsl.S, this.IsPalette ? L : this.hsl.L);
-            }
+            if (this.IsWheel) this.HSL = this._HSL = this.GetWheelHSL(this.hsl, this.Vector);
+            if (this.IsPalette) this.HSL = this._HSL = this.GetPaletteHSL(this.hsl, this.Vector);
         }
         private void CanvasControl_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e) => this.IsWheel = this.IsPalette = false;
+
+
+
+        private HSL GetWheelHSL(HSL hsl, Vector2 vector)
+        {
+            double H = (((Math.Atan2(vector.Y, vector.X)) * 180.0 / Math.PI) + 360.0) % 360.0;
+
+            return new HSL(hsl.A, H, hsl.S, hsl.L);
+        }
+        private HSL GetPaletteHSL(HSL hsl, Vector2 vector)
+        {
+            double S = vector.X * 50 / this.SquareRadio + 50;
+            double L = 50 - vector.Y * 50 / this.SquareRadio;
+
+            return new HSL(hsl.A, hsl.H, S, L);
+        }
 
 
     }

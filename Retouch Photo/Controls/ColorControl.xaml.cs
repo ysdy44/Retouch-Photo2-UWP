@@ -32,17 +32,7 @@ namespace Retouch_Photo.Controls
             get { return (Color)GetValue(ColorProperty); }
             set { SetValue(ColorProperty, value); }
         }
-        public static readonly DependencyProperty ColorProperty = DependencyProperty.Register(nameof(Color), typeof(Color), typeof(ColorControl), new PropertyMetadata(Colors.White,(sender,e)=>
-        {          
-            ColorControl con = (ColorControl)sender;
-
-            if (con.isColor) return;
-       
-            if (e.NewValue  is Color value)
-            {
-                con.ColorPicker.Color = value;
-            }
-        }));
+        public static readonly DependencyProperty ColorProperty = DependencyProperty.Register(nameof(Color), typeof(Color), typeof(ColorControl), new PropertyMetadata(Colors.White));
 
         #endregion
 
@@ -52,10 +42,9 @@ namespace Retouch_Photo.Controls
             this.InitializeComponent();
         }
 
-        bool isColor;
+
         private void ColorPicker_ColorChange(object sender, Color value)
         {
-            isColor = true;
             this.ViewModel.Color = value;
 
             Layer layer = this.ViewModel.CurrentLayer;
@@ -65,7 +54,6 @@ namespace Retouch_Photo.Controls
                 layer.Invalidate();
                 this.ViewModel.Invalidate();
             }
-            isColor = false;
         }
     }
 }

@@ -9,6 +9,6 @@
     d:DesignHeight="300"
     d:DesignWidth="200">
 
-    <con:ColorPicker x:Name="ColorPicker" ColorChange="ColorPicker_ColorChange"/>
+    <con:ColorPicker x:Name="ColorPicker" Color="{x:Bind Color,Mode=OneWay}" ColorChange="ColorPicker_ColorChange"/>
     
 </UserControl>

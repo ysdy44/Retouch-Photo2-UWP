@@ -37,11 +37,8 @@
         </Grid>
 
         <!--Toggle-->
-        <Grid Grid.Row="1" Height="38" CornerRadius="8" BorderThickness="0,0,1,1"  BorderBrush="{ThemeResource AppStroke}"  Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
-            <ComboBox x:Name="ComboBox"  ItemsSource="{x:Bind Pickers}"
-                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                      BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
-                      >
+        <Grid Grid.Row="1" >
+            <ComboBox x:Name="ComboBox"  ItemsSource="{x:Bind Pickers}" Style="{ThemeResource AppComboBoxStyle}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate x:DataType="local:Picker">
                         <TextBlock Text="{x:Bind Name}"/>
