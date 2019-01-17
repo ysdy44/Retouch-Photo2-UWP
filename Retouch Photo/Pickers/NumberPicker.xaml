@@ -6,10 +6,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Loaded="UserControl_Loaded">
-    
-    
+
+
     <UserControl.Resources>
-  
+
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="FontWeight" Value="SemiBold" />
@@ -28,7 +28,7 @@
 
     </UserControl.Resources>
 
-    
+
     <Button  x:Name="Button" Height="24" Style="{StaticResource ButtonStyle}" Click="Button_Click">
         <Button.Flyout>
             <Flyout  x:Name="Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">

@@ -23,7 +23,7 @@ namespace Retouch_Photo.Pages.AdjustmentPages
         {
             HighlightsAndShadowsPage con = (HighlightsAndShadowsPage)sender;
 
-            if (e.NewValue is HighlightsAndShadowsAdjustment adjustment)
+            if(e.NewValue is HighlightsAndShadowsAdjustment adjustment)
             {
                 con.ShadowsSlider.Value = adjustment.Shadows * 100;
                 con.HighlightsSlider.Value = adjustment.Highlights * 100;
@@ -40,24 +40,24 @@ namespace Retouch_Photo.Pages.AdjustmentPages
             this.InitializeComponent();
         } 
 
-        private void ShadowsSlider_ValueChangeDelta(object sender, RangeBaseValueChangedEventArgs e)
+        private void ShadowsSlider_ValueChange(object sender, double value)
         {
-            this.HighlightsAndShadowsAdjustment.Shadows = (float)(e.NewValue / 100);
+            this.HighlightsAndShadowsAdjustment.Shadows = (float)(value / 100);
             this.ViewModel.Invalidate();
         }
-        private void HighlightsSlider_ValueChangeDelta(object sender, RangeBaseValueChangedEventArgs e)
+        private void HighlightsSlider_ValueChange(object sender, double value)
         {
-            this.HighlightsAndShadowsAdjustment.Highlights = (float)(e.NewValue / 100);
+            this.HighlightsAndShadowsAdjustment.Highlights = (float)(value / 100);
             this.ViewModel.Invalidate();
         }
-        private void ClaritySlider_ValueChangeDelta(object sender, RangeBaseValueChangedEventArgs e)
+        private void ClaritySlider_ValueChange(object sender, double value)
         {
-            this.HighlightsAndShadowsAdjustment.Clarity = (float)(e.NewValue / 100);
+            this.HighlightsAndShadowsAdjustment.Clarity = (float)(value / 100);
             this.ViewModel.Invalidate();
         }
-        private void MaskBlurAmountSlider_ValueChangeDelta(object sender, RangeBaseValueChangedEventArgs e)
+        private void MaskBlurAmountSlider_ValueChange(object sender, double value)
         {
-            this.HighlightsAndShadowsAdjustment.MaskBlurAmount = (float)(e.NewValue / 10);
+            this.HighlightsAndShadowsAdjustment.MaskBlurAmount = (float)(value / 10);
             this.ViewModel.Invalidate();
         }
     }

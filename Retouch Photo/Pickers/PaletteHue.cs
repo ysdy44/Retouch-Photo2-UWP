@@ -9,7 +9,7 @@ namespace Retouch_Photo.Pickers
 {
     /// <summary> Palette Hue</summary>
     public class PaletteHue : PaletteBase
-    { 
+    {
         public PaletteHue()
         {
             this.Name = "Hue";
@@ -18,8 +18,8 @@ namespace Retouch_Photo.Pickers
             this.Maximum = 360;
         }
 
-        public override HSL GetHSL(HSL HSL, int value) => new HSL(HSL.A, value, HSL.S, HSL.L);
-        public override int GetValue(HSL HSL) => (int)HSL.H;
+        public override HSL GetHSL(HSL HSL, double value) => new HSL(HSL.A, value, HSL.S, HSL.L);
+        public override double GetValue(HSL HSL) => HSL.H;
 
         public override GradientStopCollection GetSliderBrush(HSL HSL)
         {
@@ -79,8 +79,7 @@ namespace Retouch_Photo.Pickers
             //Thumb 
             float px = ((float)HSL.S - 50) * SquareHalfWidth / 50 + Center.X;
             float py = (50 - (float)HSL.L) * SquareHalfHeight / 50 + Center.Y;
-            ds.DrawCircle(px, py, 8, Windows.UI.Colors.Black, 4);
-            ds.DrawCircle(px, py, 8, Windows.UI.Colors.White, 2);
+            HSL.DrawThumb(ds, px, py);
         }
         public override HSL Delta(HSL HSL, Vector2 v, float SquareHalfWidth, float SquareHalfHeight)
         {

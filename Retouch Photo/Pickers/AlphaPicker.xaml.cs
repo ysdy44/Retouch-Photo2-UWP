@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Brushes;
+using Microsoft.Graphics.Canvas.Effects;
+using Microsoft.Graphics.Canvas.UI.Xaml;
+using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -15,68 +19,97 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-
 namespace Retouch_Photo.Pickers
 {
     public sealed partial class AlphaPicker : UserControl
     {
+
         //Delegate
-        public delegate void ColorChangeHandler(object sender, Color Value);
-        public event ColorChangeHandler ColorChange = null;
+        public event AlphaChangeHandler AlphaChange;
 
         #region DependencyProperty
 
 
-        public Color Color
+        private byte alpha = 255;
+        private byte _Alpha
         {
-            get { return (Color)GetValue(ColorProperty); }
-            set { SetValue(ColorProperty, value); }
+            get => this.alpha;
+            set
+            {
+                this.AlphaChange?.Invoke(this, value);
+                CanvasControl.Invalidate();
+
+                this.alpha = value;
+            }
         }
-        public static readonly DependencyProperty ColorProperty = DependencyProperty.Register(nameof(Color), typeof(Color), typeof(HSLPicker), new PropertyMetadata(null, new PropertyChangedCallback(ColorOnChanged)));
-        private static void ColorOnChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        public byte Alpha
         {
-            AlphaPicker con = (AlphaPicker)sender;
+            get => this.alpha;
+            set
+            {
+                //A
+                this.ASlider.Value = this.APicker.Value = (int)value;
 
-            if (e.NewValue is Color NewValue) con.ColorChanged(NewValue);
-        }
-        private void ColorChanged(Color value)
-        {
-            this.Slider.Value = value.A;
-            this.Picker.Value = value.A;
-            this.Left.Color = Color.FromArgb(0, value.R, value.G, value.B);
-            this.Right.Color = Color.FromArgb(255, value.R, value.G, value.B);
-
-            this.TextBox.Text = this.ColorToString(value);
-
-            this.ColorChange?.Invoke(this, value);
+                this.alpha = value;
+            }
         }
 
 
         #endregion
-
 
         public AlphaPicker()
         {
             this.InitializeComponent();
         }
 
+        private void ASlider_ValueChange(object sender, double value) => this.Alpha = this._Alpha = (byte)value;
 
-        private void Picker_ValueChange(object sender, int value)=>  this.Color = Windows.UI.Color.FromArgb((byte)value, this.Color.R, this.Color.G, this.Color.B);
-        private void Slider_ValueChangeDelta(object sender, RangeBaseValueChangedEventArgs e) => this.Color = Windows.UI.Color.FromArgb((byte)e.NewValue, this.Color.R, this.Color.G, this.Color.B);
-
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        private void APicker_ValueChange(object sender, int value)
         {
-
+            this.Alpha = this._Alpha = (byte)value;
         }
 
 
-        private Color? StringToColor(string s)
+        private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
-            if (s.Length == 6) return Color.FromArgb(255, (byte)int.Parse(s.Substring(0, 2), NumberStyles.HexNumber), (byte)int.Parse(s.Substring(2, 2), NumberStyles.HexNumber), (byte)int.Parse(s.Substring(4, 2), NumberStyles.HexNumber));
-            else if (s.Length == 8) return Color.FromArgb((byte)int.Parse(s.Substring(0, 2), NumberStyles.HexNumber), (byte)int.Parse(s.Substring(2, 2), NumberStyles.HexNumber), (byte)int.Parse(s.Substring(4, 2), NumberStyles.HexNumber), (byte)int.Parse(s.Substring(6, 2), NumberStyles.HexNumber));
-            return null;
+            float width = (float)sender.Size.Width;
+            float height = (float)sender.Size.Height;
+
+
+            args.DrawingSession.DrawImage(new DpiCompensationEffect
+            {
+                Source = new ScaleEffect
+                {
+                    Scale = new Vector2(height / 3),
+                    InterpolationMode = CanvasImageInterpolation.NearestNeighbor,
+                    Source = new BorderEffect
+                    {
+                        ExtendX = CanvasEdgeBehavior.Wrap,
+                        ExtendY = CanvasEdgeBehavior.Wrap,
+                        Source = CanvasBitmap.CreateFromColors
+                        (
+                            resourceCreator: sender,
+                            widthInPixels: 2,
+                            heightInPixels: 2,
+                            colors: new Color[]
+                            {
+                                 Windows.UI.Colors.LightGray,
+                                 Windows.UI.Colors.White,
+                                 Windows.UI.Colors.White,
+                                 Windows.UI.Colors.LightGray
+                            }
+                         )
+                    }
+                }
+            });
+
+
+            args.DrawingSession.FillRectangle(0, 0, width, height, new CanvasLinearGradientBrush(sender, Windows.UI.Colors.Transparent, Windows.UI.Colors.DimGray)
+            {
+                StartPoint = new Vector2(0, height / 2),
+                EndPoint = new Vector2(width, height / 2)
+            });
         }
-        private string ColorToString(Color c) => (c.R.ToString("x2") + c.G.ToString("x2") + c.B.ToString("x2").ToString()).ToUpper();
 
     }
 }

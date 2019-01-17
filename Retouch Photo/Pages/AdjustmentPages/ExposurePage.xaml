@@ -10,13 +10,13 @@
 
     <StackPanel >
         <TextBlock Text="Exposure"/>
-        <pic:TouchSlider x:Name="ExposureSlider" Minimum="-200" Maximum="200" ValueChangeDelta="ExposureSlider_ValueChangeDelta">
-            <pic:TouchSlider.SliderBackground>
+        <pic:TouchSlider x:Name="ExposureSlider" Minimum="-200" Maximum="200" ValueChange="ExposureSlider_ValueChange">
+            <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
                     <GradientStop Offset="0" Color="Black"/>
                     <GradientStop Offset="1" Color="White"/>
                 </LinearGradientBrush>
-            </pic:TouchSlider.SliderBackground>
+            </pic:TouchSlider.SliderBrush>
         </pic:TouchSlider>
     </StackPanel>
 </Page>

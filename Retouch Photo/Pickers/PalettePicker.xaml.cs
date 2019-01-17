@@ -1,160 +1,121 @@
-﻿using Microsoft.Graphics.Canvas.UI.Xaml;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Numerics;
 using Windows.UI;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
+
 namespace Retouch_Photo.Pickers
 {
-    public partial class PalettePicker : UserControl
+    public class Square
+    {
+        public Vector2 Center = new Vector2(50, 50);
+        public float Width = 100;
+        public float Height = 100;
+        public float HalfWidth => this.Width / 2;
+        public float HalfHeight => this.Height / 2;
+        public float StrokePadding = 12;
+    }
+
+    public partial class PalettePicker : UserControl, IPicker
     {
         //Delegate
-        public delegate void ColorChangeHandler(object sender, Color value);
         public event ColorChangeHandler ColorChange = null;
+        public Color GetColor() => HSL.HSLtoRGB(this.HSL);
+        public void SetColor(Color value) => this.HSL = HSL.RGBtoHSL(value);
 
-        //Value
-        public Vector2 Center = new Vector2(50, 50);
-        public float SquareWidth = 100;
-        public float SquareHeight = 100;
-        public float SquareHalfWidth => this.SquareWidth / 2;
-        public float SquareHalfHeight => this.SquareHeight / 2;
-        public float StrokePadding = 12;
 
         #region DependencyProperty
 
 
-        protected Color color = Color.FromArgb(255, 255, 255, 255);
-        public Color Color
+        private HSL hsl = new HSL { A = 255, H = 0, S = 1, L = 1 };
+        private HSL _HSL
         {
-            get => color;
+            get => this.hsl;
             set
             {
-                color = value;
-                this.HSL = HSL.RGBtoHSL(value);
+                this.ColorChange?.Invoke(this, HSL.HSLtoRGB(value.A, value.H, value.S, value.L));
+
+                this.hsl = value;
             }
         }
-
-
         public HSL HSL
         {
-            get { return (HSL)GetValue(HSLProperty); }
-            set { SetValue(HSLProperty, value); }
-        }
-        public static readonly DependencyProperty HSLProperty = DependencyProperty.Register(nameof(HSL), typeof(HSL), typeof(PalettePicker), new PropertyMetadata(new HSL(255, 360, 100, 100), new PropertyChangedCallback(HSLOnChanged)));
-        private static void HSLOnChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            PalettePicker con = (PalettePicker)sender;
-
-            if (e.NewValue is HSL NewValue) con.HSLChanged(NewValue);
-        }
-        public virtual void HSLChanged(HSL value)
-        {
-            byte A = value.A;
-            double H = value.H;
-            double S = value.S;
-            double L = value.L;
-
-            if (this.PaletteBase != null)
-            {
-                this.Slider.Value = this.Picker.Value = this.PaletteBase.GetValue(value);
-                this.LinearGradientBrush.GradientStops = this.PaletteBase.GetSliderBrush(value);
-            }
-
-            this.CanvasControl.Invalidate();
-
-            this.color = HSL.HSLtoRGB(A, H, S, L);
-            this.ColorChange?.Invoke(this, this.Color);
-        }
-
-
-        #endregion
-
-        #region PaletteBase
-
-
-        private PaletteBase paletteBase;
-        public PaletteBase PaletteBase
-        {
-            get => paletteBase;
+            get => this.hsl;
             set
             {
-                if (value != null)
-                {
-                    this.Picker.Unit = value.Unit;
-                    this.Slider.Minimum = this.Picker.Minimum = value.Minimum;
-                    this.Slider.Maximum = this.Picker.Maximum = value.Maximum;
+                this.Action(value);
+                this.hsl = value;
 
-                    this.Slider.Value = this.Picker.Value = value.GetValue(this.HSL);
-                    this.LinearGradientBrush.GradientStops = value.GetSliderBrush(this.HSL);
-
-                    this.CanvasControl.Invalidate();
-
-                    this.paletteBase = value;
-                }
+                this.CanvasControl.Invalidate();
             }
         }
-        public List<PaletteBase> PaletteBases = new List<PaletteBase>
-        {
-            new PaletteHue(),
-            new PaletteSaturation(),
-            new PaletteLightness(),
-        };
+
 
         #endregion
 
-        public PalettePicker()
+
+
+        bool IsPalette = false;
+        Vector2 Vector;
+        Action<HSL> Action;
+        Square Square = new Square();
+
+
+        public PalettePicker(PaletteBase paletteBase)
         {
             this.InitializeComponent();
 
-            this.ComboBox.ItemsSource = this.PaletteBases;
-            this.ComboBox.Loaded += (s, e) => this.ComboBox.SelectedIndex = 0;
-            this.ComboBox.SelectionChanged += (s, e) => this.PaletteBase = this.PaletteBases[this.ComboBox.SelectedIndex];
-        }
+            //Picker
+            this.Slider.Minimum = paletteBase.Minimum;
+            this.Slider.Maximum = paletteBase.Maximum;
 
+            this.Slider.Value = paletteBase.GetValue(this.hsl);
+            this.LinearGradientBrush.GradientStops = paletteBase.GetSliderBrush(this.hsl);
 
-        private void Picker_ValueChange(object sender, int Value)
-        {
-            if (this.PaletteBase != null) this.HSL = this.PaletteBase.GetHSL(this.HSL, Value);
-        }
-        private void Slider_ValueChangeDelta(object sender, RangeBaseValueChangedEventArgs e)
-        {
-            if (this.PaletteBase != null) this.HSL = this.PaletteBase.GetHSL(this.HSL, (int)e.NewValue);
-        }
+            this.Slider.ValueChange += (sender, value) => this.HSL = this._HSL = paletteBase.GetHSL(this.hsl, value);
 
-
-        //Draw
-        private void CanvasControl_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            this.Center = e.NewSize.ToVector2() / 2;
-
-            this.SquareWidth = (float)e.NewSize.Width - this.StrokePadding * 2;
-            this.SquareHeight = (float)e.NewSize.Height - this.StrokePadding * 2;
-        }
-        private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args) => this.PaletteBase.Draw(this.CanvasControl, args.DrawingSession, this.HSL, this.Center, this.SquareHalfWidth, this.SquareHalfHeight);
-
-
-        //Manipulation
-        protected bool IsPalette = false;
-        protected Vector2 v;
-        private void CanvasControl_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
-        {
-            v = e.Position.ToVector2() - this.Center;
-
-            this.IsPalette = Math.Abs(v.X) < this.SquareWidth && Math.Abs(v.Y) < this.SquareHeight;
-        }
-        private void CanvasControl_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
-        {
-            if (this.IsPalette)
+            //Action
+            this.Action = (HSL hsl) =>
             {
-                v += e.Delta.Translation.ToVector2();
+                this.Slider.Value = paletteBase.GetValue(hsl);
+                this.LinearGradientBrush.GradientStops = paletteBase.GetSliderBrush(hsl);
+            };
 
-                this.HSL = this.PaletteBase.Delta(this.HSL, v, this.SquareHalfWidth, this.SquareHalfHeight);
-            }
+            //Canvas
+            this.CanvasControl.SizeChanged += (sender, e) =>
+            {
+                this.Square.Center = e.NewSize.ToVector2() / 2;
+
+                this.Square.Width = (float)e.NewSize.Width - this.Square.StrokePadding * 2;
+                this.Square.Height = (float)e.NewSize.Height - this.Square.StrokePadding * 2;
+            };
+            this.CanvasControl.Draw += (sender, args) => paletteBase.Draw(this.CanvasControl, args.DrawingSession, this.hsl, this.Square.Center, this.Square.HalfWidth, this.Square.HalfHeight);
+
+
+
+            //Manipulation
+            this.CanvasControl.ManipulationMode = ManipulationModes.All;
+            this.CanvasControl.ManipulationStarted += (sender, e) =>
+            {
+                this.Vector = e.Position.ToVector2() - this.Square.Center;
+
+                this.IsPalette = Math.Abs(Vector.X) < this.Square.Width && Math.Abs(this.Vector.Y) < this.Square.Height;
+
+                if (this.IsPalette) this.HSL = this._HSL = paletteBase.Delta(this.hsl, this.Vector, this.Square.HalfWidth, this.Square.HalfHeight);
+            };
+            this.CanvasControl.ManipulationDelta += (sender, e) =>
+            {
+                this.Vector += e.Delta.Translation.ToVector2();
+
+                if (this.IsPalette) this.HSL = this._HSL = paletteBase.Delta(this.hsl, this.Vector, this.Square.HalfWidth, this.Square.HalfHeight);
+            };
+            this.CanvasControl.ManipulationCompleted += (sender, e) => this.IsPalette = false;
+
+
+
+            this.CanvasControl.Invalidate();
         }
-        private void CanvasControl_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e) => this.IsPalette = false;
+
 
     }
 }

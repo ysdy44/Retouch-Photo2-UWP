@@ -23,7 +23,7 @@ namespace Retouch_Photo.Pages.AdjustmentPages
         {
             ContrastPage con = (ContrastPage)sender;
 
-            if (e.NewValue is ContrastAdjustment adjustment)
+            if(e.NewValue is ContrastAdjustment adjustment)
             {
                 con.ContrastSlider.Value = adjustment.Contrast * 100;
             }
@@ -37,9 +37,9 @@ namespace Retouch_Photo.Pages.AdjustmentPages
             this.InitializeComponent();
         }
 
-        private void ContrastSlider_ValueChangeDelta(object sender, RangeBaseValueChangedEventArgs e)
+        private void ContrastSlider_ValueChange(object sender, double value)
         {
-            this.ContrastAdjustment.Contrast = (float)(e.NewValue / 100);
+            this.ContrastAdjustment.Contrast = (float)(value / 100);
             this.ViewModel.Invalidate();
         }
     }

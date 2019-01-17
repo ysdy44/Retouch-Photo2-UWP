@@ -4,12 +4,41 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="using:Retouch_Photo.Pickers"
     xmlns:pic="using:Retouch_Photo.Pickers"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+     Height="170"
+    >
 
 
-    <Grid >
+    <UserControl.Resources>
+
+        <!--H-->
+        <LinearGradientBrush x:Name="HBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop x:Name="HA" Offset="0"/>
+            <GradientStop x:Name="HB" Offset="0.16666667"/>
+            <GradientStop x:Name="HC" Offset="0.33333333"/>
+            <GradientStop x:Name="HD" Offset="0.5"/>
+            <GradientStop x:Name="HE" Offset="0.66666667"/>
+            <GradientStop x:Name="HF" Offset="0.83333333"/>
+            <GradientStop x:Name="HG" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!--S-->
+        <LinearGradientBrush x:Name="SBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop x:Name="SLeft" Offset="0"/>
+            <GradientStop x:Name="SRight" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!--L-->
+        <LinearGradientBrush x:Name="LBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop x:Name="LLeft" Offset="0"/>
+            <GradientStop x:Name="LRight" Offset="1"/>
+        </LinearGradientBrush>
+
+    </UserControl.Resources>
+
+
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="1*"/>
@@ -22,43 +51,17 @@
         <!--H-->
         <TextBlock Grid.Row="0" Opacity="0.5" Text="H" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold"/>
         <pic:NumberPicker x:Name="HPicker" Grid.Row="0" Unit="º" Minimum="0" Maximum="360" HorizontalAlignment="Right" ValueChange="HPicker_ValueChange"/>
-        <pic:TouchSlider x:Name="HSlider" Grid.Row="1" Minimum="0" Maximum="360" ValueChangeDelta="HSlider_ValueChangeDelta">
-            <pic:TouchSlider.SliderBackground>
-                <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
-                    <GradientStop x:Name="HA" Offset="0"/>
-                    <GradientStop x:Name="HB" Offset="0.16666667"/>
-                    <GradientStop x:Name="HC" Offset="0.33333333"/>
-                    <GradientStop x:Name="HD" Offset="0.5"/>
-                    <GradientStop x:Name="HE" Offset="0.66666667"/>
-                    <GradientStop x:Name="HF" Offset="0.83333333"/>
-                    <GradientStop x:Name="HG" Offset="1"/>
-                </LinearGradientBrush>
-            </pic:TouchSlider.SliderBackground>
-        </pic:TouchSlider>
+        <pic:TouchSlider x:Name="HSlider" Grid.Row="1" Minimum="0" Maximum="360" SliderBrush="{StaticResource HBrush}" ValueChange="HSlider_ValueChange"/>
 
         <!--S-->
         <TextBlock Grid.Row="2" Opacity="0.5" Text="S" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold"/>
         <pic:NumberPicker x:Name="SPicker" Grid.Row="2" Unit="%" Minimum="0" Maximum="100" HorizontalAlignment="Right" ValueChange="SPicker_ValueChange"/>
-        <pic:TouchSlider x:Name="SSlider" Grid.Row="3" Minimum="0" Maximum="100" ValueChangeDelta="SSlider_ValueChangeDelta">
-            <pic:TouchSlider.SliderBackground>
-                <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
-                    <GradientStop x:Name="SLeft" Offset="0"/>
-                    <GradientStop x:Name="SRight" Offset="1"/>
-                </LinearGradientBrush>
-            </pic:TouchSlider.SliderBackground>
-        </pic:TouchSlider>
+        <pic:TouchSlider x:Name="SSlider" Grid.Row="3" Minimum="0" Maximum="100" SliderBrush="{StaticResource SBrush}" ValueChange="SSlider_ValueChange"/>
 
         <!--L-->
         <TextBlock Grid.Row="4" Opacity="0.5" Text="L" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold"/>
         <pic:NumberPicker x:Name="LPicker" Grid.Row="4" Unit="%" Minimum="0" Maximum="100" HorizontalAlignment="Right" ValueChange="LPicker_ValueChange"/>
-        <pic:TouchSlider x:Name="LSlider" Grid.Row="5" Minimum="0" Maximum="100" ValueChangeDelta="LSlider_ValueChangeDelta">
-            <pic:TouchSlider.SliderBackground>
-                <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
-                    <GradientStop x:Name="LLeft" Offset="0"/>
-                    <GradientStop x:Name="LRight" Offset="1"/>
-                </LinearGradientBrush>
-            </pic:TouchSlider.SliderBackground>
-        </pic:TouchSlider>
+        <pic:TouchSlider x:Name="LSlider" Grid.Row="5" Minimum="0" Maximum="100" SliderBrush="{StaticResource LBrush}" ValueChange="LSlider_ValueChange"/>
 
     </Grid>
 

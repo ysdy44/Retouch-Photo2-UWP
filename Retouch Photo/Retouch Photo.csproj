@@ -146,8 +146,17 @@
     <Compile Include="Controls\AppbarControls\SaveControl.xaml.cs">
       <DependentUpon>SaveControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ColorControl.xaml.cs">
+      <DependentUpon>ColorControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NavigatorControl.xaml.cs">
+      <DependentUpon>NavigatorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NavigatorControls\NavigatorControlIcon.xaml.cs">
+      <DependentUpon>NavigatorControlIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\OperateControls\AlignHorizontalControls\CenterDisabledControl.xaml.cs">
       <DependentUpon>CenterDisabledControl.xaml</DependentUpon>
@@ -355,9 +364,6 @@
     </Compile>
     <Compile Include="Controls\OperateControls\OperateControlButton.xaml.cs">
       <DependentUpon>OperateControlButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OthersControl.xaml.cs">
-      <DependentUpon>OthersControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SelectionControl.xaml.cs">
       <DependentUpon>SelectionControl.xaml</DependentUpon>
@@ -1050,7 +1056,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ColorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\LayerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NavigatorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NavigatorControls\NavigatorControlIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1327,10 +1345,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\OperateControls\OperateControlButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OthersControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

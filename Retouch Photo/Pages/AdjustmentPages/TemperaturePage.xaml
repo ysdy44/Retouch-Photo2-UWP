@@ -11,27 +11,27 @@
 
     <StackPanel >
         <TextBlock Text="Temperature"/>
-        <pic:TouchSlider x:Name="TemperatureSlider" Minimum="-100" Maximum="100" ValueChangeDelta="TemperatureSlider_ValueChangeDelta">
-            <pic:TouchSlider.SliderBackground>
+        <pic:TouchSlider x:Name="TemperatureSlider" Minimum="-100" Maximum="100" ValueChange="TemperatureSlider_ValueChange">
+            <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
                     <GradientStop Color="#3eadf5" Offset="0"/>
                     <GradientStop Color="#FFFFFF" Offset="0.5"/>
                     <GradientStop Color="#f99652" Offset="1"/>
                 </LinearGradientBrush>
-            </pic:TouchSlider.SliderBackground>
+            </pic:TouchSlider.SliderBrush>
         </pic:TouchSlider>
         
         <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
 
         <TextBlock Text="Tint"/>
-        <pic:TouchSlider x:Name="TintSlider" Minimum="-100" Maximum="100" ValueChangeDelta="TintSlider_ValueChangeDelta">
-            <pic:TouchSlider.SliderBackground>
+        <pic:TouchSlider x:Name="TintSlider" Minimum="-100" Maximum="100" ValueChange="TintSlider_ValueChange">
+            <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
                     <GradientStop Color="#9680c9" Offset="0"/>
                     <GradientStop Color="#FFFFFF" Offset="0.5"/>
                     <GradientStop Color="#80763e" Offset="1"/>
                 </LinearGradientBrush>
-            </pic:TouchSlider.SliderBackground>
+            </pic:TouchSlider.SliderBrush>
         </pic:TouchSlider>
     </StackPanel>
 </Page>

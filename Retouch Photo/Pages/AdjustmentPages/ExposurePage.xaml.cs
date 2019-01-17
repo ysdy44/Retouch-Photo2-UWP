@@ -34,7 +34,7 @@ namespace Retouch_Photo.Pages.AdjustmentPages
         {
             ExposurePage con = (ExposurePage)sender;
 
-            if (e.NewValue is ExposureAdjustment adjustment)
+            if(e.NewValue is ExposureAdjustment adjustment)
             {
                 con.ExposureSlider.Value = adjustment.Exposure * 100;
             }
@@ -48,9 +48,9 @@ namespace Retouch_Photo.Pages.AdjustmentPages
             this.InitializeComponent();
         }
          
-        private void ExposureSlider_ValueChangeDelta(object sender, RangeBaseValueChangedEventArgs e)
+        private void ExposureSlider_ValueChange(object sender, double value)
         {
-            this.ExposureAdjustment.Exposure = (float)(e.NewValue / 100);
+            this.ExposureAdjustment.Exposure = (float)(value / 100);
             this.ViewModel.Invalidate();
         }
     }

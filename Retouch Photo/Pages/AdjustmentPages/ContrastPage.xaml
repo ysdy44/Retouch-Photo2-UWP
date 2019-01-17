@@ -11,8 +11,8 @@
 
     <StackPanel >
         <TextBlock Text="Contrast"/>
-        <pic:TouchSlider x:Name="ContrastSlider" Minimum="-100" Maximum="100" ValueChangeDelta="ContrastSlider_ValueChangeDelta">
-            <pic:TouchSlider.SliderBackground>
+        <pic:TouchSlider x:Name="ContrastSlider" Minimum="-100" Maximum="100" ValueChange="ContrastSlider_ValueChange">
+            <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
                     <GradientStop Color="#888888" Offset="0"/>
 
@@ -25,7 +25,7 @@
                     <GradientStop Color="#000000" Offset="0.8"/>
                     <GradientStop Color="#FFFFFF" Offset="1"/>
                 </LinearGradientBrush>
-            </pic:TouchSlider.SliderBackground>
+            </pic:TouchSlider.SliderBrush>
         </pic:TouchSlider>
     </StackPanel>
 </Page>

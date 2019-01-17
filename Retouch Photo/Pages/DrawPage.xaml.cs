@@ -50,33 +50,9 @@ namespace Retouch_Photo.Pages
             this.OperateToggleButton.Tapped += (sender, e) =>
             {
                 this.OperateFlyout.ShowAt(this.OperateToggleButton);
-            };             
-           //Others
-            this.OthersFlyout.Opened += (sender, e) => this.OthersToggleButton.IsChecked = true;
-            this.OthersFlyout.Closed += (sender, e) => this.OthersToggleButton.IsChecked = false;
-            this.OthersToggleButton.Tapped += (sender, e) =>
-            {
-                this.OthersFlyout.ShowAt(this.OthersToggleButton);
-                this.OthersControl.Initialize();
             };
             //Color
-            this.ColorPicker.ColorChange += (sender, color) =>
-            {
-                this.ViewModel.Color = color;
-
-                Layer layer = this.ViewModel.CurrentLayer;
-                if (layer != null)
-                {
-                    layer.ColorChanged(color);
-                    layer.Invalidate();
-                    this.ViewModel.Invalidate();
-                }
-            };
-            this.ColorButton.Tapped += (sender, e) =>
-            {
-                this.ColorFlyout.ShowAt(this.ColorButton);
-                this.ColorPicker.Color = this.ViewModel.Color;
-            };
+            this.ColorButton.Tapped += (sender, e) => this.ColorFlyout.ShowAt(this.ColorButton);
 
             //SizeChanged
             this.MainCanvasControl.SizeChanged += (s, e) => this.ViewModel.MatrixTransformer.ControlSizeChanged(e.NewSize);

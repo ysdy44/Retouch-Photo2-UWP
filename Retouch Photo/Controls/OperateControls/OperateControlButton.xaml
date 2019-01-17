@@ -9,7 +9,7 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Button x:Name="Button" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="{ThemeResource AppFill}" Tapped="Button_Tapped">
+    <Button x:Name="Button" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="Transparent" Tapped="Button_Tapped">
         <Grid Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Viewbox x:Name="EnabledViewbox" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Viewbox x:Name="DisabledViewbox" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>

@@ -11,8 +11,8 @@
 
     <StackPanel >
         <TextBlock Text="HueRotation"/>
-        <pic:TouchSlider x:Name="HueRotationSlider" Minimum="0" Maximum="360" ValueChangeDelta="HueRotationSlider_ValueChangeDelta">
-            <pic:TouchSlider.SliderBackground>
+        <pic:TouchSlider x:Name="HueRotationSlider" Minimum="0" Maximum="360" ValueChange="HueRotationSlider_ValueChange">
+            <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
                     <GradientStop Color="#ffce3b" Offset="0"/>
                     <GradientStop Color="#72c075" Offset="0.125"/>
@@ -24,7 +24,7 @@
                     <GradientStop Color="#ffa827" Offset="0.875"/>
                     <GradientStop Color="#ffce3b" Offset="1"/>
                 </LinearGradientBrush>
-            </pic:TouchSlider.SliderBackground>
+            </pic:TouchSlider.SliderBrush>
         </pic:TouchSlider>
     </StackPanel>
 </Page>

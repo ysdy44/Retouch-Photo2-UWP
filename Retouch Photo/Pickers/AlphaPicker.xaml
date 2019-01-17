@@ -5,32 +5,23 @@
     xmlns:local="using:Retouch_Photo.Pickers"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignHeight="50"
+    d:DesignWidth="200">
 
-    
-    <Grid Padding="12,12,12,0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ContentControl Content="#" FontWeight="Medium" VerticalAlignment="Center"/>
-        <TextBox x:Name="TextBox" Grid.Column="1" Text="#00000000" MinWidth="120" PlaceholderText="66CCFF" FontWeight="Medium" MinHeight="0" Height="Auto" BorderThickness="1"  LostFocus="TextBox_LostFocus"/>
-
-        <local:NumberPicker x:Name="Picker" Grid.Column="3" Grid.Row="0" Width="80" Minimum="0" Maximum="255" ValueChange="Picker_ValueChange"/>
-        <local:TouchSlider x:Name="Slider" Grid.ColumnSpan="4" Grid.Row="1" Minimum="0" Maximum="255" ValueChangeDelta="Slider_ValueChangeDelta">
+        <!--A-->
+        <TextBlock Opacity="0.5" Text="A" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold"/>
+        <local:NumberPicker x:Name="APicker" Minimum="0" Maximum="255" HorizontalAlignment="Right" ValueChange="APicker_ValueChange"/>
+        <local:TouchSlider  x:Name="ASlider" Grid.Row="1" Minimum="0" Maximum="255" ValueChange="ASlider_ValueChange">
             <local:TouchSlider.SliderBackground>
-                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                    <GradientStop x:Name="Left" Color="White" Offset="0"/>
-                    <GradientStop x:Name="Right" Color="Black" Offset="1"/>
-                </LinearGradientBrush>
+                <xaml:CanvasControl x:Name="CanvasControl" Draw="CanvasControl_Draw"/>
             </local:TouchSlider.SliderBackground>
         </local:TouchSlider>
     </Grid>

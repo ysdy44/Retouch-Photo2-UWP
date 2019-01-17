@@ -1,121 +1,146 @@
-﻿using Windows.UI;
+﻿using Retouch_Photo.Pickers;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo.Pickers
 {
+
+    interface IPicker
+    {
+        event ColorChangeHandler ColorChange;
+
+        void SetColor(Color value);
+        Color GetColor();
+    }
+    class Picker
+    {
+        public string Name;
+        public IPicker Control;
+    }
+
+
     public sealed partial class ColorPicker : UserControl
     {
         //Delegate
-        public delegate void ColorChangeHandler(object sender, Color value);
-        public event ColorChangeHandler ColorChange = null;
+        public event ColorChangeHandler ColorChange;
+
+
+        Picker[] Pickers = new Picker[]
+        {
+            new Picker
+            {
+                Name="SwatchesPicker",
+                Control=new SwatchesPicker(),
+            },
+            new Picker
+            {
+                Name="WheelPicker",
+                Control=new WheelPicker(),
+            },
+            new Picker
+            {
+                Name="RGBPicker",
+                Control=new RGBPicker(),
+            },
+            new Picker
+            {
+                Name="HSLPicker",
+                Control=new HSLPicker(),
+            },
+            new Picker
+            {
+                Name="PaletteHue",
+                Control=new PalettePicker(new PaletteHue()),
+            },
+            new Picker
+            {
+                Name="PaletteSaturation",
+                Control=new PalettePicker(new PaletteSaturation()),
+            },
+            new Picker
+            {
+                Name="PaletteLightness",
+                Control=new PalettePicker(new PaletteLightness()),
+            },
+        };
+
 
         #region DependencyProperty
 
 
+        public Color _Color
+        {
+            get => this.SolidColorBrushName.Color;
+            set
+            {
+                this.SolidColorBrushName.Color = Color.FromArgb(255, value.R, value.G, value.B);
+
+                this.ColorChange?.Invoke(this, Color.FromArgb(this.AlphaPicker.Alpha, value.R, value.G, value.B));
+            }
+        }
         public Color Color
         {
             get => this.SolidColorBrushName.Color;
             set
             {
-                if (this.Index != null)
-                {
-                    int i = this.Index ?? 0;
+                this.AlphaPicker.Alpha = value.A;
 
-                     if (i == 0) this.SwatchesPicker.Color =value;
-                    if (i == 1) this.WheelPicker.Color = value;
-                    if (i == 2) this.RGBPicker.Color = value;
-                    if (i == 3) this.HSLPicker.Color = value;
-                }
+                Color color = Color.FromArgb(255, value.R, value.G, value.B);
 
-                this.SolidColorBrushName.Color = value;
+                this.Pickers[this.Index].Control.SetColor(color);
+
+                this.SolidColorBrushName.Color = color;
             }
         }
 
-        private int? index = null;
-        public int? Index
+
+        private int index;
+        public int Index
         {
             get => index;
             set
             {
-                if (value != null)
+                IPicker newControl = this.Pickers[value].Control;
+
+                if (value != this.index)
                 {
-                    int i = value ?? 0;
-
-                    this.SwatchesButton.IsChecked = i == 0;
-                    this.WheelButton.IsChecked = i == 1;
-                    this.RGBButton.IsChecked = i == 2;
-                    this.HSLButton.IsChecked = i == 3;
-
-                    this.SwatchesPicker.Visibility = i == 0 ? Visibility.Visible : Visibility.Collapsed;
-                    this.WheelPicker.Visibility = i == 1 ? Visibility.Visible : Visibility.Collapsed;
-                    this.RGBPicker.Visibility = i == 2 ? Visibility.Visible : Visibility.Collapsed;
-                    this.HSLPicker.Visibility = i == 3 ? Visibility.Visible : Visibility.Collapsed;
-
-                     if (i == 0) this.SwatchesPicker.Color = this.SolidColorBrushName.Color;
-                    if (i == 1) this.WheelPicker.Color = this.SolidColorBrushName.Color;
-                    if (i == 2) this.RGBPicker.Color = this.SolidColorBrushName.Color;
-                    if (i == 3) this.HSLPicker.Color = this.SolidColorBrushName.Color;
+                    IPicker oldControl = this.Pickers[this.index].Control;
+                    oldControl.ColorChange -= this.Picker_ColorChange;
                 }
+
+                this.ContentControl.Content = newControl;
+                newControl.SetColor(this.Color);
+
+                newControl.ColorChange += this.Picker_ColorChange;
+
                 index = value;
             }
         }
- 
+
+
         #endregion
 
         public ColorPicker()
         {
             this.InitializeComponent();
+
+            this.Loaded += (sender2, e2) =>
+            {
+                this.Index = 0;
+                this.ComboBox.SelectedIndex = 0;
+                this.AlphaPicker.Alpha = this.Color.A;
+
+                this.ComboBox.SelectionChanged += (sender, e) => this.Index = this.ComboBox.SelectedIndex;
+
+                this.AlphaPicker.AlphaChange += (sender, value) => this._Color = this._Color;
+                this.StrawPicker.ColorChange += (sender, value) => this.Color = this._Color = value;
+            };
         }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)=> this.Index = this.Index == null ? 0 : this.index;
-
-
-        //Head
-        private void StrawPicker_ColorChange(object sender, Color value)
-        {
-            this.ColorChange?.Invoke(this, value);
-            this.Color = value;
-        }
-
-
-        //Toggle
-        private void SwatchesButton_Click(object sender, RoutedEventArgs e) => this.Index = 0;
-        private void WheelButton_Click(object sender, RoutedEventArgs e) => this.Index =1;
-        private void RGBButton_Click(object sender, RoutedEventArgs e) => this.Index = 2;
-        private void HSLButton_Click(object sender, RoutedEventArgs e) => this.Index = 3;
-
-
-        //Dialog
-        private void ContentDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args) => sender.Hide();
-        private void Ellipse_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (Window.Current.Content is FrameworkElement frameworkElement) this.Dialog.ShowAt(frameworkElement);
-
-            this.AlphaPicker.Color = this.Color;
-            this.PalettePicker.Color = this.Color;
-        }
-
 
         //Body    
-        private void Picker_ColorChange(object sender, Color value)
-        {
-            if (sender is PalettePicker)
-            {
-                this.AlphaPicker.ColorChange -= Picker_ColorChange; 
-                this.AlphaPicker.Color = value;
-                this.AlphaPicker.ColorChange += Picker_ColorChange; 
-            }
-            else if (sender is AlphaPicker)
-            {
-                this.PalettePicker.ColorChange -= Picker_ColorChange; 
-                this.PalettePicker.Color = value;
-                this.PalettePicker.ColorChange += Picker_ColorChange; 
-            }
+        private void Picker_ColorChange(object sender, Color value) => this._Color = value;
 
-            this.SolidColorBrushName.Color = value;
-            this.ColorChange?.Invoke(this, value);
-        }
     }
 }

@@ -23,11 +23,11 @@ namespace Retouch_Photo.Pickers
     {
         public string Name;
         public string Unit;
-        public int Minimum;
-        public int Maximum;
+        public double Minimum;
+        public double Maximum;
 
-        public abstract HSL GetHSL(HSL HSL, int value);
-        public abstract int GetValue(HSL HSL);
+        public abstract HSL GetHSL(HSL HSL, double value);
+        public abstract double GetValue(HSL HSL);
 
         public abstract GradientStopCollection GetSliderBrush(HSL HSL);
 

@@ -50,13 +50,13 @@
 
                         <local:MenuLayout Text="Color">
                             <local:MenuLayout.CenterContent>
-                                <pic:ColorPicker Height="300" Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
+                                <con:ColorControl Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
                             </local:MenuLayout.CenterContent>
                         </local:MenuLayout>
 
-                        <local:MenuLayout Text="Color">
+                        <local:MenuLayout Text="Navigator">
                             <local:MenuLayout.CenterContent>
-                                <pic:ColorPicker Height="300" Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
+                                <con:NavigatorControl/>
                             </local:MenuLayout.CenterContent>
                         </local:MenuLayout>
 
@@ -107,16 +107,7 @@
                         <conOpe:OperateControlIcon/>
                     </ToggleButton>
 
-                    <ToggleButton x:Name="OthersToggleButton" Height="50" Width="60" BorderThickness="0" Background="Transparent" >
-                        <FlyoutBase.AttachedFlyout>
-                            <Flyout x:Name="OthersFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" >
-                                <con:OthersControl x:Name="OthersControl" />
-                            </Flyout>
-                        </FlyoutBase.AttachedFlyout>
-                        <PathIcon Data="M19.558,22.745l-2.4,0l0,-3.545l-13.667,0l0,-13.255l-3.491,0l0,-2.4l3.491,0l0,-3.545l2.4,0l0,3.545l11.558,0l3.545,-3.545l1.697,1.697l-3.133,3.133l0,11.97l3.613,0l0,2.4l-3.613,0l0,3.545Zm-11.97,-5.945l9.57,0l0,-9.57l-9.57,9.57Zm7.461,-10.855l-9.158,0l0,9.158l9.158,-9.158Z"/>
-                    </ToggleButton>
-                    
-                <Button x:Name="PopupButton" Grid.Column="2" Height="50" Width="60" Content="&#xE712;" FontSize="24" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="PopupButton_Tapped"/>
+                    <Button x:Name="PopupButton" Grid.Column="2" Height="50" Width="60" Content="&#xE712;" FontSize="24" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="PopupButton_Tapped"/>
 
                     <Border Height="50" Width="60" >
                         <Border x:Name="ColorButton" Width="34" Height="34" Style="{StaticResource AppCircleBorderStyle}" >
@@ -125,7 +116,7 @@
                             </Border.Background>
                             <FlyoutBase.AttachedFlyout>
                                 <Flyout x:Name="ColorFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" >
-                                    <pic:ColorPicker x:Name="ColorPicker" Width="200"  Height="300"/>
+                                    <con:ColorControl Height="300" Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
                                 </Flyout>
                             </FlyoutBase.AttachedFlyout>
                         </Border>

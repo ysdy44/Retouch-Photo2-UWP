@@ -17,7 +17,7 @@
 
         <!--Flyout-->
         <Flyout x:Name="AdjustmentCandidateFlyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <ListView                     
+            <ListView  Width="200"
                 SelectionMode="None"                     
                 IsItemClickEnabled="True"                     
                 ItemClick="AdjustmentCandidateListView_ItemClick"

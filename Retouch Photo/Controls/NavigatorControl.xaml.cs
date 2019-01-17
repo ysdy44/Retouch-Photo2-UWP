@@ -13,21 +13,15 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+//https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
+
 namespace Retouch_Photo.Controls
 {
-    public sealed partial class OthersControl : UserControl
+    public sealed partial class NavigatorControl : UserControl
     {
-        public OthersControl()
+        public NavigatorControl()
         {
             this.InitializeComponent();
         }
-
-        /// <summary>
-        /// Initialize all button
-        /// </summary>
-        public void Initialize()
-        {
-        }
-
     }
 }

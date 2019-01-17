@@ -13,73 +13,66 @@ using Windows.UI.Xaml.Shapes;
 
 namespace Retouch_Photo.Pickers
 {
-    public sealed partial class WheelPicker : UserControl
+    public sealed partial class WheelPicker : UserControl, IPicker
     {
 
         //Delegate
-        public delegate void ColorChangeHandler(object sender, Color value);
         public event ColorChangeHandler ColorChange = null;
+        public Color GetColor() => HSL.HSLtoRGB(this.HSL);
+        public void SetColor(Color value) => this.HSL = HSL.RGBtoHSL(value);
 
 
         #region DependencyProperty
-        
 
-        private Color color = Color.FromArgb(255, 255, 255, 255);
-        public Color Color
+
+        private HSL hsl = new HSL { A = 255, H = 0, S = 1, L = 1 };
+        private HSL _HSL
         {
-            get => color;
+            get => this.hsl;
             set
             {
-                color = value;
-                this.HSL = HSL.RGBtoHSL(value);
+                this.ColorChange?.Invoke(this, HSL.HSLtoRGB(value.A, value.H, value.S, value.L));
+
+                this.hsl = value;
+            }
+        }
+        public HSL HSL
+        {
+            get => this.hsl;
+            set
+            {
+                byte A = value.A;
+                double H = value.H;
+                double S = value.S;
+                double L = value.L;
+
+                this.CanvasControl.Invalidate();
+
+                this.hsl = value;
             }
         }
 
 
-        public HSL HSL
-        {
-            get { return (HSL)GetValue(HSLProperty); }
-            set { SetValue(HSLProperty, value); }
-        }
-        public static readonly DependencyProperty HSLProperty = DependencyProperty.Register(nameof(HSL), typeof(HSL), typeof(WheelPicker), new PropertyMetadata(new HSL(255, 360, 100, 100), new PropertyChangedCallback(HSLOnChanged)));
-        private static void HSLOnChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            WheelPicker con = (WheelPicker)sender;
 
-            if (e.NewValue is HSL NewValue) con.HSLChanged(NewValue);
-        }
-        private void HSLChanged(HSL value)
-        {
-            byte A = value.A;
-            double H = value.H;
-            double S = value.S;
-            double L = value.L;
 
-            this.color = HSL.HSLtoRGB(A, H, S, L);
-            this.ColorChange?.Invoke(this, this.color);
-
-            this.CanvasControl.Invalidate();
-        }
-
-         
 
         public SolidColorBrush Stroke
         {
             get { return (SolidColorBrush)GetValue(StrokeProperty); }
             set { SetValue(StrokeProperty, value); }
         }
-        public static readonly DependencyProperty StrokeProperty =DependencyProperty.Register(nameof(Stroke), typeof(SolidColorBrush), typeof(WheelPicker), new PropertyMetadata(new SolidColorBrush(Windows.UI.Colors.Gray)));
+        public static readonly DependencyProperty StrokeProperty = DependencyProperty.Register(nameof(Stroke), typeof(SolidColorBrush), typeof(WheelPicker), new PropertyMetadata(new SolidColorBrush(Windows.UI.Colors.Gray)));
 
 
         #endregion
 
-        
+
         Vector2 Center = new Vector2(50, 50);
         float Radio = 100;
 
         float StrokeWidth = 8;
         float SquareRadio => (this.Radio - this.StrokeWidth) / 1.414213562373095f;
-         
+
 
         public WheelPicker()
         {
@@ -96,7 +89,7 @@ namespace Retouch_Photo.Pickers
         private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             //Wheel           
-            args.DrawingSession.DrawCircle(this.Center, this.Radio , this.Stroke.Color,this.StrokeWidth*2);
+            args.DrawingSession.DrawCircle(this.Center, this.Radio, this.Stroke.Color, this.StrokeWidth * 2);
             for (float angle = 0; angle < (float)Math.PI * 2; angle += (float)(2 * Math.PI) / (int)(Math.PI * Radio * 2 / this.StrokeWidth)) args.DrawingSession.FillCircle((float)Math.Cos(angle) * this.Radio + this.Center.X, (float)Math.Sin(angle) * this.Radio + this.Center.Y, this.StrokeWidth, HSL.HSLtoRGB(((angle * 180.0 / Math.PI) + 360.0) % 360.0));
             args.DrawingSession.DrawCircle(this.Center, this.Radio - this.StrokeWidth, this.Stroke.Color);
             args.DrawingSession.DrawCircle(this.Center, this.Radio + this.StrokeWidth, this.Stroke.Color);
@@ -105,8 +98,7 @@ namespace Retouch_Photo.Pickers
             double ang = (float)(((this.HSL.H + 360.0) % 360.0) * Math.PI / 180.0);
             float wx = (float)Math.Cos(ang) * this.Radio + this.Center.X;
             float wy = (float)Math.Sin(ang) * this.Radio + this.Center.Y;
-            args.DrawingSession.DrawCircle(wx, wy, 8, Windows.UI.Colors.Black, 4);
-            args.DrawingSession.DrawCircle(wx, wy, 8, Windows.UI.Colors.White, 2);
+            HSL.DrawThumb(args.DrawingSession, wx, wy);
 
 
             //Palette
@@ -118,8 +110,7 @@ namespace Retouch_Photo.Pickers
             //Thumb 
             float px = ((float)this.HSL.S - 50) * this.SquareRadio / 50 + this.Center.X;
             float py = (50 - (float)this.HSL.L) * this.SquareRadio / 50 + this.Center.Y;
-            args.DrawingSession.DrawCircle(px, py, 8, Windows.UI.Colors.Black, 4);
-            args.DrawingSession.DrawCircle(px, py, 8, Windows.UI.Colors.White, 2);
+            HSL.DrawThumb(args.DrawingSession, px, py);
         }
 
 
@@ -136,19 +127,19 @@ namespace Retouch_Photo.Pickers
         }
         private void CanvasControl_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (this.IsWheel|| this.IsPalette)
+            if (this.IsWheel || this.IsPalette)
             {
                 v += e.Delta.Translation.ToVector2();
 
                 double H = (((Math.Atan2(v.Y, v.X)) * 180.0 / Math.PI) + 360.0) % 360.0;
-                double S = v.X  * 50 / this.SquareRadio + 50;
-                double L = 50 - v.Y   * 50 / this.SquareRadio;
+                double S = v.X * 50 / this.SquareRadio + 50;
+                double L = 50 - v.Y * 50 / this.SquareRadio;
 
-                this.HSL = new HSL(this.HSL.A,this.IsWheel ? H : this.HSL.H,this.IsPalette ? S : this.HSL.S,this.IsPalette ? L : this.HSL.L);
+                this.HSL = this._HSL = new HSL(this.hsl.A, this.IsWheel ? H : this.hsl.H, this.IsPalette ? S : this.hsl.S, this.IsPalette ? L : this.hsl.L);
             }
         }
         private void CanvasControl_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e) => this.IsWheel = this.IsPalette = false;
 
-        
+
     }
 }

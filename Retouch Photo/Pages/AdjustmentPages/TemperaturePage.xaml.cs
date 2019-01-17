@@ -23,7 +23,7 @@ namespace Retouch_Photo.Pages.AdjustmentPages
         {
             TemperaturePage con = (TemperaturePage)sender;
 
-            if (e.NewValue is TemperatureAdjustment adjustment)
+            if(e.NewValue is TemperatureAdjustment adjustment)
             {
                 con.TemperatureSlider.Value = adjustment.Temperature * 100;
                 con.TintSlider.Value = adjustment.Tint * 100;
@@ -38,15 +38,15 @@ namespace Retouch_Photo.Pages.AdjustmentPages
             this.InitializeComponent();
         }
 
-        private void TemperatureSlider_ValueChangeDelta(object sender, RangeBaseValueChangedEventArgs e)
+        private void TemperatureSlider_ValueChange(object sender, double value)
         {
-            this.TemperatureAdjustment.Temperature = (float)(e.NewValue / 100);
+            this.TemperatureAdjustment.Temperature = (float)(value / 100);
             this.ViewModel.Invalidate();
         }
 
-        private void TintSlider_ValueChangeDelta(object sender, RangeBaseValueChangedEventArgs e)
+        private void TintSlider_ValueChange(object sender, double value)
         {
-            this.TemperatureAdjustment.Tint = (float)(e.NewValue / 100);
+            this.TemperatureAdjustment.Tint = (float)(value / 100);
             this.ViewModel.Invalidate();
         }
     }

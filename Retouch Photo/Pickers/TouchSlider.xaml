@@ -5,89 +5,40 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    
     HorizontalAlignment="Stretch"
-    VerticalAlignment="Center" >
+    VerticalAlignment="Center" 
+    d:DesignHeight="22"
+    d:DesignWidth="111">
 
-    <UserControl.Resources>
-        <Style x:Key="SliderStyle" TargetType="Slider">
-            <Setter Property="Height" Value="24"/>
-            <Setter Property="Minimum" Value="0"/>
-            <Setter Property="Maximum" Value="255"/>
-            <Setter Property="Foreground" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlDisabledChromeDisabledHighBrush}"/>
-            <Setter Property="Background" Value="Gray"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Orientation" Value="Horizontal"/>
-            <Setter Property="IsThumbToolTipEnabled" Value="False"/>
-            <Setter Property="ManipulationMode" Value="None"/>
-            <Setter Property="UseSystemFocusVisuals" Value="True"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Slider">
-                        <Grid >
+    <Grid>
 
-                            <Grid.Resources>
-                                <Style x:Key="SliderThumbStyle" TargetType="Thumb">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="Thumb">
-                                                <Grid>
-                                                    <Ellipse StrokeThickness="3" Width="19" Height="19" Stroke="Black"/>
-                                                    <Ellipse StrokeThickness="2" Width="18" Height="18" Stroke="White"/>
-                                                </Grid>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </Grid.Resources>
+        <Border x:Name="Border" Padding="0" CornerRadius="12" Height="24" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}">
+            <!--Background-->
+        </Border>
 
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
+        <Canvas Height="24" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <Grid x:Name="Ellipse" Width="24" Height="24" Background="Transparent">
+                <Ellipse StrokeThickness="5" Width="24" Height="24" Stroke="Black" Opacity="0.5"/>
+                <Ellipse StrokeThickness="3" Width="22" Height="22" Stroke="White"/>
+            </Grid>
+        </Canvas>
 
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates" CurrentStateChanged="CommonStates_CurrentStateChanged">
-                                    <VisualState x:Name="Normal"/>
-                                    <VisualState x:Name="Pressed"/>
-                                    <VisualState x:Name="PointerOver"/>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
+        <Thumb x:Name="Thumb" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Thumb.Style>
+                <Style TargetType="Thumb">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Thumb">
+                                <Border Background="Transparent"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Thumb.Style>
+        </Thumb>
 
-
-
-                            <Grid x:Name="SliderContainer" Grid.Row="1">
-                                <Grid x:Name="HorizontalTemplate">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Rectangle x:Name="HorizontalTrackRect" Grid.ColumnSpan="3" Grid.Row="1" RadiusX="12" RadiusY="12" Height="24" StrokeThickness="{TemplateBinding BorderThickness}" Stroke="{TemplateBinding BorderBrush}"  Fill="{TemplateBinding Background}"/>
-                                    <Rectangle  x:Name="HorizontalDecreaseRect" Grid.Row="1" Height="10" Fill="{TemplateBinding Foreground}" />
-                                    <Thumb x:Name="HorizontalThumb"  AutomationProperties.AccessibilityView="Raw" Background="Transparent" Grid.Column="1" DataContext="{TemplateBinding Value}" Grid.Row="1" Style="{StaticResource SliderThumbStyle}"  />
-
-                                </Grid>
-
-                            </Grid>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </UserControl.Resources>
-
-    <!--Value Changed-->
-    <Slider x:Name="Slider" Style="{StaticResource SliderStyle}" ValueChanged="Slider_ValueChanged"/>
-
+    </Grid>
 </UserControl>
 
 

@@ -35,8 +35,8 @@ namespace Retouch_Photo.Pickers
             this.Maximum = 100;
         }
 
-        public override HSL GetHSL(HSL HSL, int value) => new HSL(HSL.A, HSL.H, HSL.S, value);
-        public override int GetValue(HSL HSL) => (int)HSL.L;
+        public override HSL GetHSL(HSL HSL, double value) => new HSL(HSL.A, HSL.H, HSL.S, value);
+        public override double GetValue(HSL HSL) => HSL.L;
 
         public override GradientStopCollection GetSliderBrush(HSL HSL)
         {
@@ -81,8 +81,7 @@ namespace Retouch_Photo.Pickers
             //Thumb 
             float px = ((float)HSL.H - 180) * SquareHalfWidth / 180 + Center.X;
             float py = (50 - (float)HSL.S) * SquareHalfHeight / 50 + Center.Y;
-            ds.DrawCircle(px, py, 8, Windows.UI.Colors.Black, 4);
-            ds.DrawCircle(px, py, 8, Windows.UI.Colors.White, 2);
+            HSL.DrawThumb(ds, px, py);
         }
         public override HSL Delta(HSL HSL, Vector2 v, float SquareHalfWidth, float SquareHalfHeight)
         {
