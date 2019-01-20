@@ -33,7 +33,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             this.StartPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
             VectRect rect = new VectRect(this.StartPoint, this.StartPoint, this.ViewModel.MarqueeMode);
 
-            this.Layer = RectangularLayer.CreateFromRect(this.ViewModel.CanvasControl, rect, this.ViewModel.Color);
+            this.Layer = RectangularLayer.CreateFromRect(this.ViewModel.CanvasDevice, rect, this.ViewModel.Color);
             this.ViewModel.InvalidateWithJumpedQueueLayer(this.Layer);
         }
         public override void Delta(Vector2 point)
@@ -51,7 +51,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
             if (Transformer.InNodeDistance(this.point, point) == false)
             {
-                RectangularLayer layer = RectangularLayer.CreateFromRect(this.ViewModel.CanvasControl, rect, this.ViewModel.Color);
+                RectangularLayer layer = RectangularLayer.CreateFromRect(this.ViewModel.CanvasDevice, rect, this.ViewModel.Color);
                 this.ViewModel.RenderLayer.Insert(layer);
                 this.ViewModel.CurrentLayer=layer;
             }

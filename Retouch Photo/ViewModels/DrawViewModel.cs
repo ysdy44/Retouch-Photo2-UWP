@@ -32,18 +32,55 @@ using Retouch_Photo.Models.Tools;
 
 namespace Retouch_Photo.ViewModels
 {
+
+    class CanvasControlManger
+    {
+        readonly CanvasControl CanvasControl;
+
+        public CanvasControlManger(CanvasControl sender)=>  this.CanvasControl = sender;
+
+        /// <summary> 获取或设置应用于此控件的 dpi 的缩放因子。 </summary>
+        public float DpiScale
+        {
+            get => this.CanvasControl.DpiScale;
+            set => this.CanvasControl.DpiScale=value;
+        }
+
+        /// <summary> 指示需要重新绘制载化管控制的内容。在不久之后引发的 "绘制" 事件中调用 "无效" 结果。 </summary>
+        public void Invalidate()=> this.CanvasControl.Invalidate();
+    }
+
     public class DrawViewModel : INotifyPropertyChanged
     {
+        public DrawViewModel()
+        {
+            Window.Current.CoreWindow.KeyUp += this.KeyUp;
+            Window.Current.CoreWindow.KeyDown += this.KeyDown;
+        }
 
         #region CanvasControl
 
-        /// <summary>画布控件</summary>
-        public CanvasControl CanvasControl;
+
+
+        /// <summary> 画布管理 </summary>
+        CanvasControlManger CanvasControl;
+        /// <summary> 画布设备 </summary>
+        public CanvasDevice CanvasDevice { get; } = new CanvasDevice();
+        /// <summary> 初始化 </summary>
+        public void InitializeCanvasControl(CanvasControl sender) => this.CanvasControl=new CanvasControlManger(sender);
+
+        /// <summary>
+        ///  Indicates that the contents of the CanvasControl need to be redrawn. 
+        ///  Calling Invalidate results in the Draw event being raised shortly afterward.
+        /// </summary>
+        /// <param name="isThumbnail"> draw thumbnails? </param>
         public void Invalidate(bool? isThumbnail = null)
         {
+            if (this.CanvasControl == null) return;
+
             this.RenderLayer.RenderTarget = this.RenderLayer.GetRender
             (
-                this.CanvasControl,
+                this.CanvasDevice,
                 this.MatrixTransformer.CanvasToVirtualMatrix,
                 this.MatrixTransformer.Width,
                 this.MatrixTransformer.Height,
@@ -54,12 +91,39 @@ namespace Retouch_Photo.ViewModels
             else if (isThumbnail == false) this.CanvasControl.DpiScale = 1.0f;
 
             this.CanvasControl.Invalidate();
+
+
+            /*
+                     Dpi标准为=96
+
+                     我的Surface Book：
+                     CanvasControl.Dpi = 240;
+                     CanvasControl.DpiScale = 1;
+                     CanvasControl.ConvertPixelsToDips(240) = 96;
+                     CanvasControl.ConvertDipsToPixels(96, CanvasDpiRounding.Round) = 240;
+
+                     修改DpiScale为=0.4后：
+                     CanvasControl.Dpi = 96;
+                     CanvasControl.DpiScale = 0.4;
+                     CanvasControl.ConvertPixelsToDips(240) = 240;
+                     CanvasControl.ConvertDipsToPixels(96, CanvasDpiRounding.Round) = 96;
+
+                     可见
+                     CanvasControl.DpiScale = 96 / CanvasControl.Dpi;
+                     可以使DPI为标准的96，避免了位图的像素被缩放的问题
+                   （比如，在高分辨率的设备上，100 * 100的位图可能占用更多比如240 * 240的像素）
+
+                     在绘制之前，将DpiScale设为比1.0低的数，可以节省性能
+                     （注：如果数字太小或太大会崩溃）
+                     CanvasBitmap类在初始化时，它的DPI会和参数里的CanvasControl的DPI保持一致，请将它手动设为96.0f
+                        */
         }
+
         public void InvalidateWithJumpedQueueLayer(Layer jumpedQueueLayer, bool? isThumbnail = null)
         {
             this.RenderLayer.RenderTarget = this.RenderLayer.GetRenderWithJumpedQueueLayer
             (
-                this.CanvasControl,
+                this.CanvasDevice,
                 jumpedQueueLayer,
                 this.MatrixTransformer.CanvasToVirtualMatrix,
                 this.MatrixTransformer.Width,
@@ -72,46 +136,7 @@ namespace Retouch_Photo.ViewModels
 
             this.CanvasControl.Invalidate();
         }
-
-        /// <summary> 初始化CanvasControl，只执行一次</summary>
-        public void InitializeCanvasControl(CanvasControl control)
-        {
-            Window.Current.CoreWindow.KeyUp +=  this.KeyUp;
-            Window.Current.CoreWindow.KeyDown +=  this.KeyDown;
-
-
-            if (this.CanvasControl != null) return;
-            this.CanvasControl = control;
-            
-            /*
-            Dpi标准为=96
-
-            我的Surface Book：
-            CanvasControl.Dpi = 240;
-            CanvasControl.DpiScale = 1;
-            CanvasControl.ConvertPixelsToDips(240) = 96;
-            CanvasControl.ConvertDipsToPixels(96, CanvasDpiRounding.Round) = 240;
-
-            修改DpiScale为=0.4后：
-            CanvasControl.Dpi = 96;
-            CanvasControl.DpiScale = 0.4;
-            CanvasControl.ConvertPixelsToDips(240) = 240;
-            CanvasControl.ConvertDipsToPixels(96, CanvasDpiRounding.Round) = 96;
-
-            可见
-            CanvasControl.DpiScale = 96 / CanvasControl.Dpi;
-            可以使DPI为标准的96，避免了位图的像素被缩放的问题
-          （比如，在高分辨率的设备上，100 * 100的位图可能占用更多比如240 * 240的像素）
-
-            在绘制之前，将DpiScale设为比1.0低的数，可以节省性能
-            （注：如果数字太小或太大会崩溃）
-            CanvasBitmap类在初始化时，它的DPI会和参数里的CanvasControl的DPI保持一致，请将它手动设为96.0f
-             */
-            //static float DefultDpi = 96.0f;
-            //control.DpiScale = 96.0f / control.Dpi; 
-
-
-        }
+        
 
         #endregion
 
@@ -121,10 +146,10 @@ namespace Retouch_Photo.ViewModels
         public void LoadFromProject(Project project)
         {
             if (project == null) return;
-           
+
             this.MatrixTransformer.LoadFromProject(project);
 
-            this.RenderLayer.LoadFromProject(this.CanvasControl, project);
+            this.RenderLayer.LoadFromProject(this.CanvasDevice, project);
             this.RenderLayer.Layers.CollectionChanged += (s, e) => this.Invalidate();
 
             int index = (project.Tool >= Tool.ToolList.Count) || (project.Tool < 0) ? 0 : project.Tool;
@@ -133,14 +158,10 @@ namespace Retouch_Photo.ViewModels
 
             this.Invalidate();
         }
-
-        
-        /// <summary>可以返回</summary>
-        public GoBack GoBack = new GoBack();
+               
 
         /// <summary>矩阵变换</summary>
         public MatrixTransformer MatrixTransformer = new MatrixTransformer();
-
 
 
         /// <summary>控件选定索引</summary>      
@@ -174,8 +195,8 @@ namespace Retouch_Photo.ViewModels
                     OnPropertyChanged(nameof(CurrentLayer));
                     return;
                 }
-                 
-                if (this.RenderLayer.Layers.Contains(value) )
+
+                if (this.RenderLayer.Layers.Contains(value))
                 {
                     this.SelectedIndex = this.RenderLayer.Layers.IndexOf(value);
                     OnPropertyChanged(nameof(CurrentLayer));
@@ -192,10 +213,8 @@ namespace Retouch_Photo.ViewModels
 
 
         #region Index & Tool
+               
 
-
-
-        
         /// <summary>颜色</summary>    
         private Color color = Color.FromArgb(255, 214, 214, 214);
         public Color Color
@@ -207,8 +226,7 @@ namespace Retouch_Photo.ViewModels
                 OnPropertyChanged(nameof(Color));
             }
         }
-
-
+        
 
         /// <summary>工具</summary>    
         private Tool tool = new NullTool();
@@ -224,8 +242,7 @@ namespace Retouch_Photo.ViewModels
                 OnPropertyChanged(nameof(Tool));
             }
         }
-
-
+        
 
         #endregion
 
@@ -243,8 +260,7 @@ namespace Retouch_Photo.ViewModels
             }
         }
         private bool keyShift;
-
-
+        
         public bool KeyCtrl
         {
             get => keyCtrl;
@@ -255,8 +271,7 @@ namespace Retouch_Photo.ViewModels
             }
         }
         private bool keyCtrl;
-
-
+        
         public bool KeyAlt
         {
             get => keyAlt;
@@ -267,8 +282,7 @@ namespace Retouch_Photo.ViewModels
             }
         }
         private bool keyAlt;
-
-
+        
 
         public void KeyDown(CoreWindow sender, KeyEventArgs args)
         {
@@ -314,6 +328,7 @@ namespace Retouch_Photo.ViewModels
             }
             this.KeyUpAndDown(sender, args);
         }
+
         public void KeyUpAndDown(CoreWindow sender, KeyEventArgs args)
         {
             if (this.KeyCtrl == false && this.KeyShift == false)
@@ -325,9 +340,7 @@ namespace Retouch_Photo.ViewModels
             else //if (this.KeyCtrl && this.KeyShift)
                 this.MarqueeMode = MarqueeMode.SquareAndCenter;
         }
-
-
-
+               
 
         #endregion
 

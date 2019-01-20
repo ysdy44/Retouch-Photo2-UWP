@@ -29,8 +29,8 @@ namespace Retouch_Photo.Controls.LayerControls
             {
                 con.CheckBox.IsChecked = layer.IsVisual;
 
-                layer.CanvasControl = con.CanvasControl;
-                layer.CanvasControl .Draw+=(sender2, args) => layer.ThumbnailDraw(sender2, args.DrawingSession, sender2.Size);
+                con.CanvasControl.CreateResources += (sender2, args) => layer.InitializeCanvasControl(sender2);
+                con.CanvasControl.Draw += (sender2, args) => layer.ThumbnailDraw(sender2, args.DrawingSession, sender2.Size);
 
                 con.TextBlock.Text = layer.Name;
             }
@@ -46,14 +46,13 @@ namespace Retouch_Photo.Controls.LayerControls
         public LayoutControl()
         {
             this.InitializeComponent();
+
+            //Flyout
+            this.BackgroundGrid.Holding += (sender, e) => this.FlyoutShow?.Invoke(this, this.Layer, true);
+            this.BackgroundGrid.RightTapped += (sender, e) => this.FlyoutShow?.Invoke(this, this.Layer, true);
+            this.BackgroundGrid.Tapped += (sender, e) => this.FlyoutShow?.Invoke(this, this.Layer, false);
         }
 
-
-        //Flyout
-        private void Grid_Holding(object sender, HoldingRoutedEventArgs e) => this.FlyoutShow?.Invoke(this, this.Layer,true);
-        private void Grid_RightTapped(object sender, RightTappedRoutedEventArgs e) => this.FlyoutShow?.Invoke(this, this.Layer,true);
-        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)=> this.FlyoutShow?.Invoke(this, this.Layer,false);
-        
 
 
 

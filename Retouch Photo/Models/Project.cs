@@ -48,7 +48,7 @@ namespace Retouch_Photo.Models
         public IEnumerable<Layer> Layers;
 
 
-        public static Project CreateFromXDocument(ICanvasResourceCreatorWithDpi creator, XDocument xdoc)
+        public static Project CreateFromXDocument(ICanvasResourceCreator creator, XDocument xdoc)
         {
             return new Project()
             {
@@ -62,7 +62,7 @@ namespace Retouch_Photo.Models
             };
         }
         
-        public static Project CreateFromSize(ICanvasResourceCreatorWithDpi creator, BitmapSize pixels)
+        public static Project CreateFromSize(ICanvasResourceCreator creator, BitmapSize pixels)
         {
             int width = (int)pixels.Width;
             int height = (int)pixels.Height;
@@ -75,7 +75,7 @@ namespace Retouch_Photo.Models
             };
         }
 
-        public static async Task<Project> CreateFromFileAsync(ICanvasResourceCreatorWithDpi creator, StorageFile file)
+        public static async Task<Project> CreateFromFileAsync(ICanvasResourceCreator creator, StorageFile file)
         {
             using (IRandomAccessStream stream = await file.OpenReadAsync())
             {

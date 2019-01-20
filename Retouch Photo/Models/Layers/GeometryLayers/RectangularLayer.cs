@@ -50,6 +50,8 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
         }
         public override void ThumbnailDraw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Size controlSize)
         {
+            ds.Clear(Windows.UI.Colors.Transparent);
+
             Rect rect = Layer.GetThumbnailSize(base.Transformer.Width, base.Transformer.Height, controlSize);
 
             if (this.IsFill) ds.FillRectangle(rect, base.FillBrush);

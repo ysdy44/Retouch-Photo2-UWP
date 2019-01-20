@@ -82,7 +82,7 @@ namespace Retouch_Photo.Controls
 
             StorageFile file = await openPicker.PickSingleFileAsync();
             if (file == null) return;
-            Layer layer = await ImageLayer.CreateFromFlie(this.ViewModel.CanvasControl, file);
+            Layer layer = await ImageLayer.CreateFromFlie(this.ViewModel.CanvasDevice, file);
 
             layer.Transformer.Postion = this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasCenter - new Vector2(layer.Transformer.Width, layer.Transformer.Height) / 2;
 

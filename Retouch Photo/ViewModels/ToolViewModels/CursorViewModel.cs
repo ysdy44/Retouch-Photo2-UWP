@@ -187,7 +187,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
                 points[1] = Vector2.Transform(new Vector2(this.StartPoint.X, this.EndPoint.Y), this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
                 points[2] = Vector2.Transform(this.EndPoint, this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
                 points[3] = Vector2.Transform(new Vector2(this.EndPoint.X, this.StartPoint.Y), this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
-                CanvasGeometry geometry = CanvasGeometry.CreatePolygon(this.ViewModel.CanvasControl, points);
+                CanvasGeometry geometry = CanvasGeometry.CreatePolygon(this.ViewModel.CanvasDevice, points);
 
                 ds.FillGeometry(geometry, Color.FromArgb(128, 30, 144, 255));
                 ds.DrawGeometry(geometry, Colors.DodgerBlue, 1);

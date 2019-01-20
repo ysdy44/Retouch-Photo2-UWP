@@ -27,6 +27,9 @@ namespace Retouch_Photo.Models
     public abstract class Layer
     {
 
+        //ViewModel
+        DrawViewModel ViewModel => App.ViewModel;
+
 
         public string Name= "Layer";
         
@@ -47,14 +50,20 @@ namespace Retouch_Photo.Models
         //@override
         public abstract void ThumbnailDraw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Size controlSize);
 
-        public CanvasControl CanvasControl;
+
+        /// <summary> 画布管理 </summary>
+        CanvasControlManger CanvasControl;
+        /// <summary>初始化</summary>
+        public void InitializeCanvasControl(CanvasControl sender) => this.CanvasControl = new CanvasControlManger(sender);
+
+
         public void Invalidate()
         {
             if (this.CanvasControl == null) return;
 
             this.CanvasControl.Invalidate();
         }
-
+        
 
         public static Rect GetThumbnailSize(float width, float height, Size controlSize)
         {
@@ -91,7 +100,7 @@ namespace Retouch_Photo.Models
 
 
         //Create
-        public static Layer CreateFromXElement(ICanvasResourceCreatorWithDpi creator, XElement element)
+        public static Layer CreateFromXElement(ICanvasResourceCreator creator, XElement element)
         {
             int width = (int)element.Element("LayerWidth");
             int height = (int)element.Element("LayerHeight");

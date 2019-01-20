@@ -53,31 +53,19 @@ namespace Retouch_Photo.Pages
             };
             //Color
             this.ColorButton.Tapped += (sender, e) => this.ColorFlyout.ShowAt(this.ColorButton);
-
-            //SizeChanged
-            this.MainCanvasControl.SizeChanged += (s, e) => this.ViewModel.MatrixTransformer.ControlSizeChanged(e.NewSize);
         }
 
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (App.ViewModel.GoBack.IsGoBack) base.Frame.Navigate(typeof(MainPage));
         }
         protected async override void OnNavigatedTo(NavigationEventArgs e)//当前页面成为活动页面
-        {
-            if (e.Parameter is string text)
-            {
-                if (App.ViewModel.GoBack.HadGoBack(text))
-                {
-                    return;
-                }
-            }
-            
-            if (e.Parameter is XDocument document)   this.GetProject(Project.CreateFromXDocument(this.ViewModel.CanvasControl, document));
+        {            
+            if (e.Parameter is XDocument document)   this.GetProject(Project.CreateFromXDocument(this.ViewModel.CanvasDevice, document));
 
-            if (e.Parameter is BitmapSize pixels)   this.GetProject(Project.CreateFromSize(this.ViewModel.CanvasControl, pixels));
+            if (e.Parameter is BitmapSize pixels)   this.GetProject(Project.CreateFromSize(this.ViewModel.CanvasDevice, pixels));
             
-            if (e.Parameter is StorageFile file) this.GetProject(await Project.CreateFromFileAsync(this.ViewModel.CanvasControl, file));
+            if (e.Parameter is StorageFile file) this.GetProject(await Project.CreateFromFileAsync(this.ViewModel.CanvasDevice, file));
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)//当前页面不再成为活动页面
         {

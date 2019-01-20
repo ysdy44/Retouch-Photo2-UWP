@@ -25,23 +25,33 @@ namespace Retouch_Photo.Models.Layers
         {
             return new Transform2DEffect
             {
-                Source = Image,
+                Source = this.Image,
                 TransformMatrix = base.Transformer.Matrix* canvasToVirtualMatrix
             };
         }
         public override void ThumbnailDraw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Size controlSize)
         {
-            Matrix3x2 matrix = Layer.GetThumbnailMatrix(base.Transformer.Width, base.Transformer.Height, controlSize);
-
-            ds.DrawImage(new Transform2DEffect
+            try
             {
-                Source = Image,
-                TransformMatrix = base.Transformer.Matrix * matrix
-            });
+
+                ds.Clear(Windows.UI.Colors.Transparent);
+
+                Matrix3x2 matrix = Layer.GetThumbnailMatrix(base.Transformer.Width, base.Transformer.Height, controlSize);
+
+                ds.DrawImage(new Transform2DEffect
+                {
+                    Source = this.Image,
+                    TransformMatrix = base.Transformer.Matrix * matrix
+                });
+
+            }
+            catch (Exception)
+            {
+            }         
         }
 
 
-        public static ImageLayer CreateFromBytes(ICanvasResourceCreatorWithDpi resourceCreator, byte[] bytes, int width, int height)
+        public static ImageLayer CreateFromBytes(ICanvasResourceCreator resourceCreator, byte[] bytes, int width, int height)
         {
             CanvasBitmap renderTarget = new CanvasRenderTarget(resourceCreator, width, height, 96);
             renderTarget.SetPixelBytes(bytes);
@@ -53,7 +63,7 @@ namespace Retouch_Photo.Models.Layers
             };
         }
 
-        public static ImageLayer CreateFromBitmap(ICanvasResourceCreatorWithDpi resourceCreator, CanvasBitmap bitmap, int width, int height)
+        public static ImageLayer CreateFromBitmap(ICanvasResourceCreator resourceCreator, CanvasBitmap bitmap, int width, int height)
         {
             return new ImageLayer
             {
@@ -62,7 +72,7 @@ namespace Retouch_Photo.Models.Layers
             };
         }
 
-        public static async Task<ImageLayer> CreateFromFlie(ICanvasResourceCreatorWithDpi resourceCreator, StorageFile file)
+        public static async Task<ImageLayer> CreateFromFlie(ICanvasResourceCreator resourceCreator, StorageFile file)
         {
             try
             {

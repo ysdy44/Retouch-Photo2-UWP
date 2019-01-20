@@ -75,6 +75,8 @@ namespace Retouch_Photo.Pickers
             get => this.SolidColorBrushName.Color;
             set
             {
+                if (value == this.SolidColorBrushName.Color) return;
+
                 this.SolidColorBrushName.Color = Color.FromArgb(255, value.R, value.G, value.B);
 
                 this.ColorChange?.Invoke(this, Color.FromArgb(this.AlphaPicker.Alpha, value.R, value.G, value.B));
@@ -85,6 +87,8 @@ namespace Retouch_Photo.Pickers
             get => this.SolidColorBrushName.Color;
             set
             {
+                if (value == this.SolidColorBrushName.Color) return;
+
                 this.AlphaPicker.Alpha = value.A;
 
                 Color color = Color.FromArgb(255, value.R, value.G, value.B);

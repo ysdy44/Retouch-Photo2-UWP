@@ -416,11 +416,9 @@
     <Compile Include="Library\Adjustment.cs" />
     <Compile Include="Library\Debug.cs" />
     <Compile Include="Library\DottedLine.cs" />
-    <Compile Include="Library\GoBack.cs" />
     <Compile Include="Library\MarqueeTool.cs" />
     <Compile Include="Library\RenderLayer.cs" />
     <Compile Include="Library\MatrixTransformer.cs" />
-    <Compile Include="Library\ShortCutKey.cs" />
     <Compile Include="Models\Adjustment.cs" />
     <Compile Include="Models\Adjustments\ContrastAdjustment.cs" />
     <Compile Include="Models\Adjustments\ExposureAdjustment.cs" />

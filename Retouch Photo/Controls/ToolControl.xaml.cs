@@ -29,24 +29,31 @@ namespace Retouch_Photo.Controls
         public static event IndexChangedHandler IndexChanged = null;
         public static void SetIndex(int index) => ToolControl.IndexChanged?.Invoke(index);
         
+
         public ToolControl()
         {
             this.InitializeComponent();
-            ToolControl.IndexChanged += (int index) => this.ListBox.SelectedIndex = index;
-        }
 
-        private void ListBox_Loaded(object sender, RoutedEventArgs e) => this.ListBox.ItemsSource = Tool.ToolList;
+            this.ListBox.Loaded += (sender, e) => this.ListBox.ItemsSource = Tool.ToolList;
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            int index = this.ListBox.SelectedIndex;
+            ToolControl.IndexChanged += (int index) =>
+            {
+                if (index < 0) return;
+                if (index >= this.ListBox.Items.Count) return;
 
-            App.ViewModel.Text = index.ToString();
-            if (index < 0) return;
-            if (index >= Tool.ToolList.Count) return;
+                this.ListBox.SelectedIndex = index;
+            };
 
-            this.ViewModel.Tool = Tool.ToolList[index];
-            this.ViewModel.Invalidate();
-        }
+            this.ListBox.SelectionChanged+=(sender, e)=>
+            {
+                int index = this.ListBox.SelectedIndex;
+
+                if (index < 0) return;
+                if (index >= Tool.ToolList.Count) return;
+
+                this.ViewModel.Tool = Tool.ToolList[index];
+                this.ViewModel.Invalidate();
+            };
+        }    
     }
 }

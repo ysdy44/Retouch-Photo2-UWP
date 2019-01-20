@@ -113,12 +113,7 @@
     </UserControl.Resources>
 
 
-    <ListBox x:Name="ListBox" 
-             Background="Transparent" 
-             ItemContainerStyle="{StaticResource AppListBoxItemContainerStyle}"
-             ScrollViewer.VerticalScrollBarVisibility="Hidden"
-             SelectionChanged="ListBox_SelectionChanged"
-             Loaded="ListBox_Loaded">
+    <ListBox x:Name="ListBox" Background="Transparent" ItemContainerStyle="{StaticResource AppListBoxItemContainerStyle}"             ScrollViewer.VerticalScrollBarVisibility="Hidden">
         <ListBox.ItemTemplate>
             <DataTemplate x:DataType="models:Tool">
                 <ContentControl Content="{x:Bind Icon}"/>

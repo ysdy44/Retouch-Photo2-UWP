@@ -33,7 +33,9 @@
             
             <local:DrawLayout.CenterContent>
                 <Grid>
-                    <con:MainCanvasControl x:Name="MainCanvasControl" />
+                    
+                    <con:MainCanvasControl x:Name="MainCanvasControl" />      
+
                     <Canvas>
 
                         <local:MenuLayout Text="Operate">
@@ -115,8 +117,8 @@
                                 <SolidColorBrush Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
                             </Border.Background>
                             <FlyoutBase.AttachedFlyout>
-                                <Flyout x:Name="ColorFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" >
-                                    <con:ColorControl Height="300" Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
+                                <Flyout x:Name="ColorFlyout"  Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" >
+                                    <con:ColorControl Width="200" Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
                                 </Flyout>
                             </FlyoutBase.AttachedFlyout>
                         </Border>

@@ -13,7 +13,7 @@ namespace Retouch_Photo.Library
     {
         /// <summary>重新加载RenderLayer，可以多次调用</summary>
         /// <param name="project">Project类型</param>
-        public void LoadFromProject(ICanvasResourceCreatorWithDpi creator, Project project)
+        public void LoadFromProject(ICanvasResourceCreator creator, Project project)
         {
             this.Layers.Clear();
             foreach (Layer layer in project.Layers) this.Layers.Add(layer);
@@ -142,20 +142,23 @@ namespace Retouch_Photo.Library
         public void Draw(CanvasDrawingSession ds, Matrix3x2 virtualToControlMatrix)
         {
             if (this.RenderTarget == null) return;
+            
+
+            if (this.RenderTarget == null) return;
 
             ICanvasImage image = new Transform2DEffect
             {
                 Source = this.RenderTarget,
                 TransformMatrix = virtualToControlMatrix
             };
-            ICanvasImage shadow = new ShadowEffect
-            {
-                Source = image,
-                ShadowColor=Color.FromArgb(64,0,0,0),
-                 BlurAmount=4.0f
-            };
+           // ICanvasImage shadow = new ShadowEffect
+           // {
+            //    Source = image,
+                //ShadowColor=Color.FromArgb(64,0,0,0),
+                 //BlurAmount=4.0f
+            //};
 
-            ds.DrawImage(shadow, 5.0f, 5.0f);
+            //ds.DrawImage(shadow, 5.0f, 5.0f);
             ds.DrawImage(image);
 
         }

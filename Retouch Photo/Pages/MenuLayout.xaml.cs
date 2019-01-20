@@ -45,7 +45,7 @@ namespace Retouch_Photo.Pages
         public MenuLayout()
         {
             this.InitializeComponent();
-            this.Loaded += (sender, e) => this.Label = true;
+            this.Loaded += (sender, e) => this.Label = false;
             this.SizeChanged += (sender, e) => this.ControlSize = e.NewSize;
 
             //Postion 

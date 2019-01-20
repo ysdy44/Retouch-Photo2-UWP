@@ -38,6 +38,6 @@
         
     </UserControl.Resources>
 
-    <canvas:CanvasControl x:Name="CanvasControl" Draw="CanvasControl_Draw" />
+    <canvas:CanvasControl x:Name="CanvasControl" UseSharedDevice="True" CustomDevice="{x:Bind ViewModel.CanvasDevice}"/>
 
 </UserControl>

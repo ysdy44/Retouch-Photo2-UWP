@@ -42,10 +42,23 @@ namespace Retouch_Photo.Controls
         public MainCanvasControl()
         {
             this.InitializeComponent();
-            
+
             this.CanvasControl.CreateResources += (sender, args) => this.ViewModel.InitializeCanvasControl(sender);
+
+            this.CanvasControl.Draw += (sender, args) =>
+            {
+                this.ViewModel.RenderLayer.Draw(args.DrawingSession, this.ViewModel.MatrixTransformer.VirtualToControlMatrix);
+
+                this.ViewModel.Tool.ViewModel.Draw(args.DrawingSession);
+            };
+
+            this.SizeChanged += (s, e) => this.ViewModel.MatrixTransformer.ControlSizeChanged(e.NewSize);
         }
 
+        private void UserControl_Drop(object sender, DragEventArgs e)
+        {
+
+        }
 
         #region Single
 
@@ -146,24 +159,6 @@ namespace Retouch_Photo.Controls
 
         #endregion
 
-        #region CanvasControl
 
-
-        private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
-        {
-            this.ViewModel.RenderLayer.Draw(args.DrawingSession, this.ViewModel.MatrixTransformer.VirtualToControlMatrix);
-
-            this.ViewModel.Tool.ViewModel.Draw(args.DrawingSession);
-        }
-
-
-
-
-        #endregion
-
-        private void UserControl_Drop(object sender, DragEventArgs e)
-        {
-
-        }
     }
 }
