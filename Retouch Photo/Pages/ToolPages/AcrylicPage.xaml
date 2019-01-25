@@ -13,7 +13,7 @@
 
     <models:ToolPage.Resources>
         <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <pic:ColorPicker x:Name="ColorPicker" Width="200" Height="270" ColorChange="ColorPicker_ColorChange"/>
+            <pic:ColorPicker x:Name="ColorPicker" Width="200" ColorChange="ColorPicker_ColorChange"/>
         </Flyout>
     </models:ToolPage.Resources>
 

@@ -75,7 +75,13 @@ namespace Retouch_Photo.Pickers
             get => this.SolidColorBrushName.Color;
             set
             {
-                if (value == this.SolidColorBrushName.Color) return;
+                if (
+                    value.A == this.AlphaPicker.Alpha &&
+                    value.R == this.SolidColorBrushName.Color.R &&
+                    value.G == this.SolidColorBrushName.Color.G &&
+                    value.B == this.SolidColorBrushName.Color.B
+                    )
+                    return;
 
                 this.SolidColorBrushName.Color = Color.FromArgb(255, value.R, value.G, value.B);
 
@@ -84,18 +90,24 @@ namespace Retouch_Photo.Pickers
         }
         public Color Color
         {
-            get => this.SolidColorBrushName.Color;
+            get => Color.FromArgb(this.AlphaPicker.Alpha, this.SolidColorBrushName.Color.R, this.SolidColorBrushName.Color.G, this.SolidColorBrushName.Color.B);
             set
             {
-                if (value == this.SolidColorBrushName.Color) return;
+                if (value.A != this.AlphaPicker.Alpha) this.AlphaPicker.Alpha = value.A;
 
-                this.AlphaPicker.Alpha = value.A;
+                if (
+                    value.A != this.AlphaPicker.Alpha ||
+                    value.R != this.SolidColorBrushName.Color.R ||
+                    value.G != this.SolidColorBrushName.Color.G ||
+                    value.B != this.SolidColorBrushName.Color.B
+                    )
+                {
+                    Color color = Color.FromArgb(255, value.R, value.G, value.B);
 
-                Color color = Color.FromArgb(255, value.R, value.G, value.B);
+                    this.Pickers[this.Index].Control.SetColor(color);
 
-                this.Pickers[this.Index].Control.SetColor(color);
-
-                this.SolidColorBrushName.Color = color;
+                    this.SolidColorBrushName.Color = color;
+                }
             }
         }
 
@@ -115,7 +127,7 @@ namespace Retouch_Photo.Pickers
                 }
 
                 this.ContentControl.Content = newControl;
-                newControl.SetColor(this.Color);
+                newControl.SetColor(this._Color);
 
                 newControl.ColorChange += this.Picker_ColorChange;
 
@@ -133,12 +145,13 @@ namespace Retouch_Photo.Pickers
             this.Loaded += (sender2, e2) =>
             {
                 this.Index = 0;
-                this.ComboBox.SelectedIndex = 0;
-                this.AlphaPicker.Alpha = this.Color.A;
 
+                this.ComboBox.SelectedIndex = 0;
                 this.ComboBox.SelectionChanged += (sender, e) => this.Index = this.ComboBox.SelectedIndex;
 
-                this.AlphaPicker.AlphaChange += (sender, value) => this._Color = this._Color;
+                this.AlphaPicker.Alpha = 255;
+                this.AlphaPicker.AlphaChange += (sender, value) => this.ColorChange?.Invoke(this, Color.FromArgb(value, this.SolidColorBrushName.Color.R, this.SolidColorBrushName.Color.G, this.SolidColorBrushName.Color.B));
+
                 this.StrawPicker.ColorChange += (sender, value) => this.Color = this._Color = value;
             };
         }
