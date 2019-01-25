@@ -11,6 +11,9 @@ using Windows.UI.Xaml.Input;
 namespace Retouch_Photo.Models
 {
 
+    /// <summary>
+    /// 传递Adjustment的委托。
+    /// </summary>
     public delegate void AdjustmentHandler(Adjustment adjustment);
 
     /// <summary>

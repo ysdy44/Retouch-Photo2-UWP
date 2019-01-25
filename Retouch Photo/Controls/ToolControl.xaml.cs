@@ -1,4 +1,5 @@
-﻿using Retouch_Photo.Models;
+﻿using Retouch_Photo.Controls.ToolControls;
+using Retouch_Photo.Models;
 using Retouch_Photo.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -33,11 +34,12 @@ namespace Retouch_Photo.Controls
         public ToolControl()
         {
             this.InitializeComponent();
-
-            this.ListBox.Loaded += (sender, e) => this.ListBox.ItemsSource = Tool.ToolList;
+            this.ListBox.Loaded += (sender, e) => this.ListBox.ItemsSource =  from tool in Tool.ToolList select tool.Icon;
 
             ToolControl.IndexChanged += (int index) =>
             {
+                if (this.ListBox.Items == null) return;
+             
                 if (index < 0) return;
                 if (index >= this.ListBox.Items.Count) return;
 
@@ -54,6 +56,7 @@ namespace Retouch_Photo.Controls
                 this.ViewModel.Tool = Tool.ToolList[index];
                 this.ViewModel.Invalidate();
             };
-        }    
+            
+        }
     }
 }

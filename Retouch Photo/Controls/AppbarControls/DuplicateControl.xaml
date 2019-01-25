@@ -52,7 +52,7 @@
 
         <StackPanel Margin="8" VerticalAlignment="Center">
             <TextBlock Text="Dupliate Projects" FontWeight="Bold"/>
-            <TextBlock Text="Select project(s) to be duplicated." FontSize="12" Opacity="0.8"/>
+            <TextBlock Text="Select project(s) to be duplicated." FontSize="12" Style="{ThemeResource AppTextBlock}"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

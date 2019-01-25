@@ -145,7 +145,7 @@ namespace Retouch_Photo.Pickers
 
         private static int GetLeft(int bitmapWidth, float x, double windowWidth)
         {
-            int left = (int)(bitmapWidth * x / windowWidth);
+            int left = (int)(bitmapWidth * (x / windowWidth));
 
             if (left < 0) return 0;
             else if (left >= bitmapWidth) return bitmapWidth - 1;
@@ -199,7 +199,7 @@ namespace Retouch_Photo.Pickers
         }
 
         //Canvas
-        private void CanvasControl_Draw(CanvasControl sender, Microsoft.Graphics.Canvas.UI.Xaml.CanvasDrawEventArgs args)
+        private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             if (this.Bitmap == null) return;
 

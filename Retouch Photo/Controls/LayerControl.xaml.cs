@@ -57,22 +57,32 @@ namespace Retouch_Photo.Controls
         public LayerControl()
         {
             this.InitializeComponent();
-        }
 
-        //Flyout
-        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e) => this.ViewModel.Invalidate();
+            //Control
+            this.Slider.ValueChanged += (object sender, RangeBaseValueChangedEventArgs e) => this.ViewModel.Invalidate();
+            this.BlendControl.IndexChanged += (int index) => this.ViewModel.Invalidate();
 
-        private void BlendControl_IndexChanged(int index) => this.ViewModel.Invalidate();
+            //Button
+            this.AdjustmentButton.Tapped += (sender, e) => this.AdjustmentCandidateFlyout.ShowAt((Button)sender);
+            this.EffectButton.Tapped += (sender, e) => { };
+            this.RemoveButton.Tapped += (sender, e) =>
+            {
+                this.ViewModel.RenderLayer.Remove(this.Layer);
+                this.ViewModel.CurrentLayer = null;
+                this.Layer = null;
+            };
 
-        private void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            this.ViewModel.RenderLayer.Remove(this.Layer);
-            this.ViewModel.CurrentLayer = null;
-            this.Layer = null;
-        }
-        private void AdjustmentButton_Tapped(object sender, TappedRoutedEventArgs e) => this.AdjustmentCandidateFlyout.ShowAt((Button)sender);
-        private void EffectButton_Tapped(object sender, TappedRoutedEventArgs e)
-        {
+            //AdjustmentCandidate
+            this.AdjustmentCandidateListView.Loaded += (object sender, RoutedEventArgs e) => ((ListView)sender).ItemsSource = AdjustmentCandidate.AdjustmentCandidateList;
+            this.AdjustmentCandidateListView.ItemClick += (object sender, ItemClickEventArgs e) =>
+            {
+                if (e.ClickedItem is AdjustmentCandidate item)
+                {
+                    Adjustment adjustment = item.GetNewAdjustment();
+                    this.Add(adjustment);
+                    this.AdjustmentCandidateFlyout.Hide();
+                }
+            };
         }
 
 
@@ -80,20 +90,11 @@ namespace Retouch_Photo.Controls
         //Adjustment
         private void AdjustmentControl_AdjustmentRemove(Adjustment adjustment) => this.Remove(adjustment);
         private void AdjustmentControl_AdjustmentContext(Adjustment adjustment) => this.AdjustmentContextControl.Adjustment = adjustment;
-        //AdjustmentCandidate
-        private void AdjustmentCandidateListView_Loaded(object sender, RoutedEventArgs e) => ((ListView)sender).ItemsSource = AdjustmentCandidate.AdjustmentCandidateList;
-        private void AdjustmentCandidateListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            if (e.ClickedItem is AdjustmentCandidate item)
-            {
-                Adjustment adjustment = item.GetNewAdjustment();
-                this.Add(adjustment);
-            }
-            this.AdjustmentCandidateFlyout.Hide();
-        }
+     
 
 
         #region Adjustment
+
 
         //Adjustment
         private void Add(Adjustment adjustment)
@@ -126,11 +127,6 @@ namespace Retouch_Photo.Controls
             this.AdjustmentsItemsControl.ItemsSource = adjustments;
             this.AdjustmentTextBlock.Visibility = this.AdjustmentBorder.Visibility = adjustments.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
         }
-
-
-
-
-
 
 
         #endregion

@@ -14,10 +14,10 @@
     <StackPanel Background="{ThemeResource AppForeground}">
 
         <Grid>
-            <Button x:Name="BackButton" Width="50" Height="40" HorizontalAlignment="Left" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Tapped="BackButton_Tapped">
+            <Button x:Name="BackButton" Width="50" Height="40" HorizontalAlignment="Left" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
                 <FontIcon Glyph="&#xE0A6;" FontFamily="Segoe MDL2 Assets"/>
             </Button>
-            <Button x:Name="ResetButton" Width="50" Height="40" HorizontalAlignment="Right" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}"  Tapped="ResetButton_Tapped">
+            <Button x:Name="ResetButton" Width="50" Height="40" HorizontalAlignment="Right" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" >
                 <FontIcon Glyph="&#xE149;" FontFamily="Segoe MDL2 Assets"/>
             </Button>
         </Grid>

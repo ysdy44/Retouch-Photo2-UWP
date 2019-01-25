@@ -23,8 +23,8 @@
                 </LinearGradientBrush>
             </Ellipse.Fill>
         </Ellipse>
-        
-        <TextBlock Text="Saturation" Grid.Column="1" VerticalAlignment="Center"/>
+
+        <TextBlock Text="Saturation" Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
         
     </Grid>
     

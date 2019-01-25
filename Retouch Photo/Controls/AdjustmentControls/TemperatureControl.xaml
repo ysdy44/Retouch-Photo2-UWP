@@ -24,8 +24,8 @@
                 </LinearGradientBrush>
             </Ellipse.Fill>
         </Ellipse>
-        
-        <TextBlock Text="Temperature" Grid.Column="1" VerticalAlignment="Center"/>
+
+        <TextBlock Text="Temperature" Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
         
     </Grid>
     

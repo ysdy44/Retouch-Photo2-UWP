@@ -1,4 +1,6 @@
-﻿using Retouch_Photo.Models;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Text;
+using Retouch_Photo.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

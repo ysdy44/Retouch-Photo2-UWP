@@ -1,25 +1,12 @@
-﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo.Models;
+﻿using Retouch_Photo.Models;
 using Retouch_Photo.Models.Layers;
 using Retouch_Photo.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Numerics;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 namespace Retouch_Photo.Controls
 {
@@ -28,11 +15,17 @@ namespace Retouch_Photo.Controls
 
         //ViewModel
         public DrawViewModel ViewModel => App.ViewModel;
+        
+        //Delegate
+        public delegate void FlyoutShowHandler(UserControl control);
+        public event FlyoutShowHandler FlyoutShow = null;
+
 
         public LayersControl()
         {
             this.InitializeComponent();
         }
+
 
         //Flyout
         UserControl control;
@@ -40,10 +33,11 @@ namespace Retouch_Photo.Controls
         {
             if (this.control == control || isShow)
             {
-                this.PropertyFlyout.ShowAt(control);
+                this.FlyoutShow?.Invoke(control);//Delegate
             }
             else this.control = control;
         }
+
 
         //Layer
         private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)
@@ -89,7 +83,5 @@ namespace Retouch_Photo.Controls
             this.ViewModel.RenderLayer.Insert(layer);
             this.ViewModel.Invalidate();
         }
-
-
     }
 }

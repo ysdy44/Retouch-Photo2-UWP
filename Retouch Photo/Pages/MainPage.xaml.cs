@@ -14,14 +14,13 @@ using Windows.UI.Xaml.Input;
 using System.Collections.ObjectModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Animation;
-using Windows.Foundation;
 using Windows.System;
-using System.Linq;
 using System.Xml.Linq;
 using Windows.Graphics.Imaging;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo.ViewModels;
 
 namespace Retouch_Photo.Pages
 {
@@ -39,7 +38,11 @@ namespace Retouch_Photo.Pages
 
     public sealed partial class MainPage : Page
     {
-        ObservableCollection<Photo> PhotoFileList = new ObservableCollection<Photo>() { };
+        //ViewModel
+        DrawViewModel ViewModel => App.ViewModel;
+
+        ObservableCollection<Photo> PhotoFileList = new ObservableCollection<Photo>();
+
         MainMode mode;
         MainMode Mode
         {
@@ -94,7 +97,9 @@ namespace Retouch_Photo.Pages
                 this.LoadingControl.Visibility = Visibility.Visible;
 
                 XDocument document = XDocument.Load(photo.Path);
-                this.Frame.Navigate(typeof(DrawPage), document);//Navigate     
+
+                Project project = Project.CreateFromXDocument(this.ViewModel.CanvasDevice, document);//Project
+                this.Frame.Navigate(typeof(DrawPage), project);//Navigate     
 
                 this.LoadingControl.Visibility = Visibility.Collapsed;
             }
@@ -136,18 +141,19 @@ namespace Retouch_Photo.Pages
         private void AppbarControl_DuplicateButtonTapped(object sender, TappedRoutedEventArgs e) => this.Mode = MainMode.Duplicate;
         private async void AppbarControl_FolderButtonTapped(object sender, TappedRoutedEventArgs e) => await this.FolderDialog.ShowAsync(ContentDialogPlacement.InPlace);//ContentDialogPlacement.InPlace
 
-        private async void AddDialog_AddSize(BitmapSize pixels)
+        private void AddDialog_AddSize(BitmapSize pixels)
         {
             this.LoadingControl.Visibility = Visibility.Visible;
 
-            await Task.Delay(1000);
+            Project project= Project.CreateFromSize(this.ViewModel.CanvasDevice, pixels);//Project
+            this.Frame.Navigate(typeof(DrawPage), project);//Navigate    
 
             this.LoadingControl.Visibility = Visibility.Collapsed;
-
-            this.Frame.Navigate(typeof(DrawPage), pixels);//Navigate            
         }
         private async void AppbarPicturesControl_PicturesPicker(PickerLocationId location)
         {
+            this.LoadingControl.Visibility = Visibility.Visible;
+
             FileOpenPicker openPicker = new FileOpenPicker
             {
                 ViewMode = PickerViewMode.Thumbnail,
@@ -163,7 +169,11 @@ namespace Retouch_Photo.Pages
 
             StorageFile file = await openPicker.PickSingleFileAsync();
             if (file == null) return;
-            this.Frame.Navigate(typeof(DrawPage), file);//Navigate        
+
+            Project project = await Project.CreateFromFileAsync(this.ViewModel.CanvasDevice, file);//Project
+            this.Frame.Navigate(typeof(DrawPage), project);//Navigate       
+
+            this.LoadingControl.Visibility = Visibility.Collapsed;
         }
 
 

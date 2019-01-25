@@ -10,7 +10,7 @@
     >
 
     <StackPanel >
-        <TextBlock Text="HueRotation"/>
+        <TextBlock Text="HueRotation" Style="{StaticResource AppTextBlock}"/>
         <pic:TouchSlider x:Name="HueRotationSlider" Minimum="0" Maximum="360" ValueChange="HueRotationSlider_ValueChange">
             <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">

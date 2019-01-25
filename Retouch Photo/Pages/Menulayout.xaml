@@ -9,7 +9,25 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid Width="222" VerticalAlignment="Top" >
+    
+    <UserControl.Resources>
+                
+        <Flyout x:Name="flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <StackPanel Width="222">
+                <Border x:Name="FlyoutBorderl" Padding="8,0" />
+                <Button x:Name="PutButton" Grid.Column="2" Padding="0" Width="Auto" Height="28" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent" >
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon Glyph="&#xF5ED;" FontSize="16" FontFamily="Segoe MDL2 Assets" Style="{StaticResource AppIconElement}"/>
+                        <TextBlock Text="Put it on the overlay" Style="{StaticResource AppTextBlock}"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Flyout>
+        
+    </UserControl.Resources>
+
+
+    <Grid x:Name="RootGrid" Width="222" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}">
 
         <Grid.Resources>
             <Storyboard  x:Name="ContentRectangleStoryboard" >
@@ -21,10 +39,9 @@
         
         <Grid.RowDefinitions>
             <RowDefinition Height="36"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition x:Name="RowLength" Height="*"/>
         </Grid.RowDefinitions>
 
-        
         <Grid x:Name="TitlePanel" Padding="12,0" Background="{ThemeResource AppFill}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -38,15 +55,12 @@
             </Button>
         </Grid>
 
-
         <!--Content-->
-
         <Rectangle x:Name="ContentRectangle" Grid.Row="1" Fill="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
 
-        <Border Grid.Row="1" VerticalAlignment="Top" SizeChanged="ContentBorder_SizeChanged">
-            <Border x:Name="ContentBorderl" Padding="8,0" />
+        <Border Grid.Row="1" VerticalAlignment="Top" >
+            <Border x:Name="ContentBorderl" Padding="8,0" SizeChanged="ContentBorder_SizeChanged"/>
         </Border>
-
 
     </Grid>
 </UserControl>

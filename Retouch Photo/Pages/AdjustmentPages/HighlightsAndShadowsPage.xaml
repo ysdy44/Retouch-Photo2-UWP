@@ -10,8 +10,8 @@
     >
 
     <StackPanel >
-        
-        <TextBlock Text="Shadows"/>
+
+        <TextBlock Text="Shadows" Style="{StaticResource AppTextBlock}"/>
         <pic:TouchSlider x:Name="ShadowsSlider" Minimum="-100" Maximum="100" ValueChange="ShadowsSlider_ValueChange">
             <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
@@ -21,9 +21,7 @@
             </pic:TouchSlider.SliderBrush>
         </pic:TouchSlider>
         
-        <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
-
-        <TextBlock Text="Highlights"/>
+        <TextBlock Text="Highlights" Style="{StaticResource AppTextBlock}"/>
         <pic:TouchSlider x:Name="HighlightsSlider" Minimum="-100" Maximum="100" ValueChange="HighlightsSlider_ValueChange">
             <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
@@ -33,25 +31,19 @@
             </pic:TouchSlider.SliderBrush>
         </pic:TouchSlider>
 
-        <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
-
-        <TextBlock Text="Clarity"/>
+        <TextBlock Text="Clarity" Style="{StaticResource AppTextBlock}"/>
         <pic:TouchSlider x:Name="ClaritySlider" Minimum="-100" Maximum="100" ValueChange="ClaritySlider_ValueChange">
             <pic:TouchSlider.SliderBrush>
             <SolidColorBrush Color="{ThemeResource AppBorderBrushColor}"/>
             </pic:TouchSlider.SliderBrush>
         </pic:TouchSlider>
         
-        <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
-
-        <TextBlock Text="MaskBlurAmount"/>
+        <TextBlock Text="MaskBlurAmount" Style="{StaticResource AppTextBlock}"/>
         <pic:TouchSlider x:Name="MaskBlurAmountSlider" Minimum="0" Maximum="100" ValueChange="MaskBlurAmountSlider_ValueChange">
             <pic:TouchSlider.SliderBrush>
                 <SolidColorBrush Color="{ThemeResource AppBorderBrushColor}"/>
             </pic:TouchSlider.SliderBrush>
         </pic:TouchSlider>
         
-        <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
-
     </StackPanel>
 </Page>

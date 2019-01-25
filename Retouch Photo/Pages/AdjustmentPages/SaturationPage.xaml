@@ -10,7 +10,7 @@
     >
 
     <StackPanel >
-        <TextBlock Text="Saturation"/>
+        <TextBlock Text="Saturation" Style="{StaticResource AppTextBlock}"/>
         <pic:TouchSlider x:Name="SaturationSlider" Minimum="0" Maximum="200" ValueChange="SaturationSlider_ValueChange">
             <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">

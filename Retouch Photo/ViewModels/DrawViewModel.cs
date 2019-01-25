@@ -150,13 +150,11 @@ namespace Retouch_Photo.ViewModels
             this.MatrixTransformer.LoadFromProject(project);
 
             this.RenderLayer.LoadFromProject(this.CanvasDevice, project);
-            this.RenderLayer.Layers.CollectionChanged += (s, e) => this.Invalidate();
+            this.RenderLayer.Layers.CollectionChanged += (ssender, e) => this.Invalidate();
 
             int index = (project.Tool >= Tool.ToolList.Count) || (project.Tool < 0) ? 0 : project.Tool;
             this.Tool = Tool.ToolList[index];
             ToolControl.SetIndex(index);
-
-            this.Invalidate();
         }
                
 
@@ -210,10 +208,20 @@ namespace Retouch_Photo.ViewModels
         }
         /// <summary>渲染图层</summary>
         public RenderLayer RenderLayer = new RenderLayer();
+        /// <summary>标尺线</summary>   
+        public bool IsRuler
+        {
+            get => this.RenderLayer.IsRuler;
+            set
+            {
+                this.RenderLayer.IsRuler = value;
+                OnPropertyChanged(nameof(IsRuler));
+            }
+        }
 
 
         #region Index & Tool
-               
+                
 
         /// <summary>颜色</summary>    
         private Color color = Color.FromArgb(255, 214, 214, 214);

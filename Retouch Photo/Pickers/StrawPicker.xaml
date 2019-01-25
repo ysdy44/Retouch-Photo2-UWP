@@ -25,11 +25,12 @@
             ManipulationStarted="Border_ManipulationStarted"
             ManipulationDelta="Border_ManipulationDelta"  
             ManipulationCompleted="Border_ManipulationCompleted">
-            <FontIcon Glyph="&#xEF3C;" FontFamily="Segoe MDL2 Assets"/>
+            <FontIcon Glyph="&#xEF3C;" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource AppIconElement}"/>
         </Border>
 
         <Border x:Name="Ellipse" Width="40" Background="Transparent"  >
-            <Ellipse Width="22" Height="22" Fill="{StaticResource SolidColorBrushKey}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Ellipse Width="22" Height="22" StrokeThickness="1" Stroke="Gray" Fill="{StaticResource SolidColorBrushKey}" 
+                     HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Border>
 
     </StackPanel>

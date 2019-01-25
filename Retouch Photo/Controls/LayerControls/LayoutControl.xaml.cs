@@ -52,9 +52,7 @@ namespace Retouch_Photo.Controls.LayerControls
             this.BackgroundGrid.RightTapped += (sender, e) => this.FlyoutShow?.Invoke(this, this.Layer, true);
             this.BackgroundGrid.Tapped += (sender, e) => this.FlyoutShow?.Invoke(this, this.Layer, false);
         }
-
-
-
+               
 
         private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -66,6 +64,5 @@ namespace Retouch_Photo.Controls.LayerControls
             this.ViewModel.Invalidate();
         }
         
-
     }
 }

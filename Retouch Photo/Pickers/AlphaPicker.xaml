@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
 
         <!--A-->
-        <TextBlock Opacity="0.5" Text="A" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold"/>
+        <TextBlock Text="A" Style="{ThemeResource AppTextBlock}"/>
         <local:NumberPicker x:Name="APicker" Minimum="0" Maximum="255" HorizontalAlignment="Right" ValueChange="APicker_ValueChange"/>
         <local:TouchSlider  x:Name="ASlider" Grid.Row="1" Minimum="0" Maximum="255" ValueChange="ASlider_ValueChange">
             <local:TouchSlider.SliderBackground>

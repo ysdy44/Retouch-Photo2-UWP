@@ -37,10 +37,10 @@ namespace Retouch_Photo.Pages
                         if (con.WorkDismissOverlay.Visibility == Visibility.Visible) con.WorkOverlay();
 
                         //当前页面不再成为活动页面
-                        oldTool.Page.ToolOnNavigatedFrom();
+                        if (oldTool.Page!=null) oldTool.Page.ToolOnNavigatedFrom();
 
                         //当前页面成为活动页面
-                        newTool.Page.ToolOnNavigatedTo();
+                        if (newTool.Page != null) newTool.Page.ToolOnNavigatedTo();
                     }
                 }
             }

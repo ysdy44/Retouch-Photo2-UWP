@@ -49,6 +49,8 @@ namespace Retouch_Photo.Controls
             {
                 this.ViewModel.RenderLayer.Draw(args.DrawingSession, this.ViewModel.MatrixTransformer.VirtualToControlMatrix);
 
+                this.ViewModel.RenderLayer.RulerDraw(args.DrawingSession, this.ViewModel.MatrixTransformer);
+
                 this.ViewModel.Tool.ViewModel.Draw(args.DrawingSession);
             };
 

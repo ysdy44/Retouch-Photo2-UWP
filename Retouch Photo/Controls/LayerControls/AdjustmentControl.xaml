@@ -20,11 +20,11 @@
 
         <Button Grid.Column="1" Width="30" Height="40" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Tapped="AdjustmentButton_Tapped"
                 Visibility="{x:Bind TrueToVisibilityConverter(Adjustment.HasPage)}" >
-            <FontIcon FontSize="14" Glyph="&#xEC88;" FontFamily="Segoe MDL2 Assets"/>
+            <FontIcon FontSize="14" Glyph="&#xEC88;" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource AppIconElement}"/>
         </Button>
 
         <Button Grid.Column="2" Width="30" Height="40" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Tapped="RemoveButton_Tapped">
-            <FontIcon FontSize="12" Glyph="&#xE106;" FontFamily="Segoe MDL2 Assets"/>
+            <FontIcon FontSize="12" Glyph="&#xE106;" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource AppIconElement}"/>
         </Button>
 
     </Grid>

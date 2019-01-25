@@ -12,70 +12,33 @@
     xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
     xmlns:conOpe="using:Retouch_Photo.Controls.OperateControls"
     NavigationCacheMode="Enabled"
-    Loaded="Page_Loaded"
     mc:Ignorable="d">
-
+ 
+    
     <Grid >
 
         <local:DrawLayout x:Name="DrawLayout" Tool="{x:Bind ViewModel.Tool,Mode=OneWay}">
-            
-            
-            
+
             <local:DrawLayout.LeftPane>
                 <con:ToolControl/>
             </local:DrawLayout.LeftPane>
 
             <local:DrawLayout.RightPane >
-                <con:LayersControl/>
+                <con:LayersControl x:Name="LayersControl"/>
             </local:DrawLayout.RightPane>
 
-            
-            
             <local:DrawLayout.CenterContent>
-                <Grid>
-                    
-                    <con:MainCanvasControl x:Name="MainCanvasControl" />      
-
-                    <Canvas>
-
-                        <local:MenuLayout Text="Operate">
-                            <local:MenuLayout.CenterContent>
-                                <con:OperateControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
-                            </local:MenuLayout.CenterContent>
-                        </local:MenuLayout>
-
-                        <local:MenuLayout Text="Layer">
-                            <local:MenuLayout.CenterContent>
-                                <con:LayerControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}"/>
-                            </local:MenuLayout.CenterContent>
-                        </local:MenuLayout>
-
-                        <local:MenuLayout Text="Color">
-                            <local:MenuLayout.CenterContent>
-                                <con:ColorControl Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
-                            </local:MenuLayout.CenterContent>
-                        </local:MenuLayout>
-
-                        <local:MenuLayout Text="Navigator">
-                            <local:MenuLayout.CenterContent>
-                                <con:NavigatorControl/>
-                            </local:MenuLayout.CenterContent>
-                        </local:MenuLayout>
-
-                    </Canvas>
-                </Grid>
+                <con:MainCanvasControl x:Name="MainCanvasControl" />
             </local:DrawLayout.CenterContent>
 
-            
-            
             <local:DrawLayout.TopLeftPane>
-                <Button  Height="50" Width="60" Content="&#xE0D5;" FontSize="20" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="Back_Tapped"/>
+                <Button x:Name="BackButton" Height="50" Width="60" Content="&#xE0D5;" FontSize="20" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
             </local:DrawLayout.TopLeftPane>
 
             <local:DrawLayout.TopLeftStackBar>
                 <StackPanel Orientation="Horizontal">
                     <Border Style="{StaticResource AppCircleBorderStyle}">
-                        <Button x:Name="SaveButton" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE105;" FontSize="20" Foreground="Gray" FontFamily="Segoe MDL2 Assets" BorderThickness="0" Background="Transparent" Tapped="SaveButton_Tapped"/>
+                        <Button x:Name="SaveButton" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE105;" FontSize="20" Foreground="Gray" FontFamily="Segoe MDL2 Assets" BorderThickness="0" Background="Transparent" />
                     </Border>
                     <ContentControl Width="6"/>
                     <Border Style="{StaticResource AppCircleBorderStyle}">
@@ -91,53 +54,109 @@
             <local:DrawLayout.TopRightPane>
                 <StackPanel Orientation="Horizontal">
 
+                    <!--Selection-->
                     <ToggleButton x:Name="SelectionToggleButton" Height="50" Width="60" BorderThickness="0" Background="Transparent" >
-                        <FlyoutBase.AttachedFlyout>
-                            <Flyout x:Name="SelectionFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" >
-                                <con:SelectionControl x:Name="SelectionControl"/>
-                            </Flyout>
-                        </FlyoutBase.AttachedFlyout>
-                        <PathIcon Data="M8.756,21.254c-0.256,1.312 0.085,2.724 1.048,3.792c1.625,1.802 4.408,1.946 6.211,0.321c1.802,-1.625 1.947,-4.408 0.322,-6.21c-0.76,-0.843 -1.723,-1.312 -2.771,-1.418c-0.138,-0.027 -0.24,-0.217 -0.182,-0.333c0.992,-2.939 5.813,-17.406 5.813,-17.406c0,0 -3.113,0.865 -4.572,4.122c-3.567,10.269 -5.8,16.778 -5.868,17.128l-0.002,0.005l0.001,-0.001Zm5.787,2.48c0.901,-0.812 0.973,-2.204 0.16,-3.105c-0.812,-0.901 -2.204,-0.974 -3.105,-0.161c-0.901,0.813 -0.973,2.204 -0.161,3.105c0.813,0.902 2.204,0.974 3.106,0.161Zm-5.166,-7.895l0.876,-3.445c-0.476,0.106 -0.868,0.194 -1.154,0.259c-0.122,0.045 -0.3,-0.076 -0.312,-0.216c0.003,-1.053 -0.364,-2.059 -1.124,-2.902c-1.625,-1.803 -4.408,-1.947 -6.211,-0.322c-1.802,1.625 -1.947,4.408 -0.322,6.211c0.963,1.068 2.332,1.554 3.663,1.435l0,0l0.005,-0.001c0.169,-0.015 1.785,-0.376 4.579,-1.019Zm-6.453,-4.993c0.902,-0.812 2.293,-0.74 3.106,0.161c0.812,0.902 0.74,2.293 -0.161,3.106c-0.901,0.812 -2.293,0.74 -3.105,-0.161c-0.813,-0.902 -0.741,-2.293 0.16,-3.106Zm13.057,3.459c1.943,-0.454 4.105,-0.96 6.459,-1.513c3.391,-1.116 4.573,-4.123 4.573,-4.123c0,0 -5.074,1.125 -9.9,2.198l-1.132,3.438Z"/>
+                        <PathIcon Style="{StaticResource AppIconElement}" Data="M8.756,21.254c-0.256,1.312 0.085,2.724 1.048,3.792c1.625,1.802 4.408,1.946 6.211,0.321c1.802,-1.625 1.947,-4.408 0.322,-6.21c-0.76,-0.843 -1.723,-1.312 -2.771,-1.418c-0.138,-0.027 -0.24,-0.217 -0.182,-0.333c0.992,-2.939 5.813,-17.406 5.813,-17.406c0,0 -3.113,0.865 -4.572,4.122c-3.567,10.269 -5.8,16.778 -5.868,17.128l-0.002,0.005l0.001,-0.001Zm5.787,2.48c0.901,-0.812 0.973,-2.204 0.16,-3.105c-0.812,-0.901 -2.204,-0.974 -3.105,-0.161c-0.901,0.813 -0.973,2.204 -0.161,3.105c0.813,0.902 2.204,0.974 3.106,0.161Zm-5.166,-7.895l0.876,-3.445c-0.476,0.106 -0.868,0.194 -1.154,0.259c-0.122,0.045 -0.3,-0.076 -0.312,-0.216c0.003,-1.053 -0.364,-2.059 -1.124,-2.902c-1.625,-1.803 -4.408,-1.947 -6.211,-0.322c-1.802,1.625 -1.947,4.408 -0.322,6.211c0.963,1.068 2.332,1.554 3.663,1.435l0,0l0.005,-0.001c0.169,-0.015 1.785,-0.376 4.579,-1.019Zm-6.453,-4.993c0.902,-0.812 2.293,-0.74 3.106,0.161c0.812,0.902 0.74,2.293 -0.161,3.106c-0.901,0.812 -2.293,0.74 -3.105,-0.161c-0.813,-0.902 -0.741,-2.293 0.16,-3.106Zm13.057,3.459c1.943,-0.454 4.105,-0.96 6.459,-1.513c3.391,-1.116 4.573,-4.123 4.573,-4.123c0,0 -5.074,1.125 -9.9,2.198l-1.132,3.438Z"/>
                     </ToggleButton>
 
+                    <!--Operate-->
                     <ToggleButton x:Name="OperateToggleButton" Height="50" Width="60" BorderThickness="0" Background="Transparent">
-                        <FlyoutBase.AttachedFlyout>
-                            <Flyout x:Name="OperateFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" >
-                                <con:OperateControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
-                            </Flyout>
-                        </FlyoutBase.AttachedFlyout>
-                        <conOpe:OperateControlIcon/>
+                        <PathIcon Style="{StaticResource AppIconElement}" Data="M10.109,15.47l2.391,0l0,6.242l-2.391,0l0,-6.242Zm14.891,4.298l-11.65,0l0,-2.4l11.65,0l0,2.4Zm-15.526,0l-9.474,0l0,-2.4l9.474,0l0,2.4Zm-5.248,-11.909l2.391,0l0,6.242l-2.391,0l0,-6.242Zm20.774,4.321l-17.574,0l0,-2.4l17.574,0l0,2.4Zm-21.59,0l-3.41,0l0,-2.4l3.41,0l0,2.4Zm11.579,-12.18l2.391,0l0,6.242l-2.391,0l0,-6.242Zm-14.989,1.868l14.251,0l0,2.4l-14.251,0l0,-2.4Zm18.133,0l6.867,0l0,2.4l-6.867,0l0,-2.4Z"/>
                     </ToggleButton>
 
-                    <Button x:Name="PopupButton" Grid.Column="2" Height="50" Width="60" Content="&#xE712;" FontSize="24" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="PopupButton_Tapped"/>
+                    <!--Effect-->
+                    <ToggleButton x:Name="EffectToggleButton" Height="50" Width="60" BorderThickness="0" Background="Transparent" >
+                        <FontIcon Glyph="&#xE734;" FontSize="24" FontFamily="Segoe MDL2 Assets" Style="{StaticResource AppIconElement}" />
+                    </ToggleButton>
 
+                    <!--Navigator-->
+                    <ToggleButton x:Name="NavigatorToggleButton" Height="50" Width="60" BorderThickness="0" Background="Transparent" >
+                        <FontIcon Glyph="&#xE123;" FontSize="22" FontFamily="Segoe MDL2 Assets" Style="{StaticResource AppIconElement}" />
+                    </ToggleButton>
+                    
+                    <!--Color-->
                     <Border Height="50" Width="60" >
                         <Border x:Name="ColorButton" Width="34" Height="34" Style="{StaticResource AppCircleBorderStyle}" >
                             <Border.Background>
                                 <SolidColorBrush Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
                             </Border.Background>
-                            <FlyoutBase.AttachedFlyout>
-                                <Flyout x:Name="ColorFlyout"  Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" >
-                                    <con:ColorControl Width="200" Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
-                                </Flyout>
-                            </FlyoutBase.AttachedFlyout>
                         </Border>
                     </Border>
 
                 </StackPanel>
             </local:DrawLayout.TopRightPane> 
-
-            
             
         </local:DrawLayout>
 
 
+        <Canvas>
+            
+            <!--Selection-->
+            <local:MenuLayout x:Name="SelectionLayout" Text="Selection" Placement="Bottom" Visibility="Collapsed">
+                <local:MenuLayout.CenterContent>
+                    <con:SelectionControl />
+                </local:MenuLayout.CenterContent>
+                <local:MenuLayout.FlyoutContent>
+                    <con:SelectionControl />
+                </local:MenuLayout.FlyoutContent>
+            </local:MenuLayout>
+            
+            <!--Operate-->
+            <local:MenuLayout x:Name="OperateLayout" Text="Operate" Placement="Bottom" Visibility="Collapsed">
+                <local:MenuLayout.CenterContent>
+                    <con:OperateControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
+                </local:MenuLayout.CenterContent>
+                <local:MenuLayout.FlyoutContent>
+                    <con:OperateControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
+                </local:MenuLayout.FlyoutContent>
+            </local:MenuLayout>
+
+            <!--Effect-->
+            <local:MenuLayout x:Name="EffectLayout" Text="Effect" Placement="Bottom" Visibility="Collapsed">
+                <local:MenuLayout.CenterContent>
+                    <con:EffectControl/>
+                </local:MenuLayout.CenterContent>
+                <local:MenuLayout.FlyoutContent>
+                    <con:EffectControl/>
+                </local:MenuLayout.FlyoutContent>
+            </local:MenuLayout>
+            
+            <!--Navigator-->
+            <local:MenuLayout x:Name="NavigatorLayout" Text="Navigator" Placement="Bottom" Visibility="Collapsed">
+                <local:MenuLayout.CenterContent>
+                    <con:NavigatorControl/>
+                </local:MenuLayout.CenterContent>
+                <local:MenuLayout.FlyoutContent>
+                    <con:NavigatorControl/>
+                </local:MenuLayout.FlyoutContent>
+            </local:MenuLayout>
+            
+            <!--Color-->
+            <local:MenuLayout x:Name="ColorLayout" Text="Color" Placement="Bottom" Visibility="Collapsed">
+                <local:MenuLayout.CenterContent>
+                    <con:ColorControl Width="200" Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
+                </local:MenuLayout.CenterContent>
+                <local:MenuLayout.FlyoutContent>
+                    <con:ColorControl Width="200" Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
+                </local:MenuLayout.FlyoutContent>
+            </local:MenuLayout>
+
+            <!--Layer-->
+            <local:MenuLayout x:Name="LayerLayout" Text="Layer" Placement="Left" Visibility="Collapsed">
+                <local:MenuLayout.CenterContent>
+                    <con:LayerControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}"/>
+                </local:MenuLayout.CenterContent>
+                <local:MenuLayout.FlyoutContent>
+                    <con:LayerControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}"/>
+                </local:MenuLayout.FlyoutContent>
+            </local:MenuLayout>
+
+        </Canvas>
+        
+
         <!--Load-->
         <con:LoadingControl x:Name="LoadingControl" Text="Saving..."  Visibility="Collapsed"/>
 
-
-        <!---Dialog-->
-        <dia:WelcomeContentDialog x:Name="WelcomeContentDialog" />
         
         <!--Tip-->
         <Border IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Top" CornerRadius="4" Margin="60" Width="Auto" MinHeight="24" BorderThickness="1" BorderBrush="#3d9cf7" Background="#b5d4f2"   >

@@ -149,6 +149,12 @@
     <Compile Include="Controls\ColorControl.xaml.cs">
       <DependentUpon>ColorControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\EffectControl.xaml.cs">
+      <DependentUpon>EffectControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EffectControls\GaussianBlurControl.xaml.cs">
+      <DependentUpon>GaussianBlurControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>
@@ -456,6 +462,7 @@
     <Compile Include="Models\Blends\SoftLightBlend.cs" />
     <Compile Include="Models\Blends\SubtractBlend.cs" />
     <Compile Include="Models\Blends\VividLightBlend.cs" />
+    <Compile Include="Models\Effect.cs" />
     <Compile Include="Models\Layers\AcrylicLayer.cs" />
     <Compile Include="Models\Layers\GeometryLayer.cs" />
     <Compile Include="Models\Layers\ImageLayer.cs" />
@@ -600,9 +607,6 @@
       <DependentUpon>WheelPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Dialogs\WelcomeContentDialog.xaml.cs">
-      <DependentUpon>WelcomeContentDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ToolControl.xaml.cs">
       <DependentUpon>ToolControl.xaml</DependentUpon>
     </Compile>
@@ -1055,6 +1059,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ColorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EffectControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EffectControls\GaussianBlurControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1563,10 +1575,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Style\Style.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\WelcomeContentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -49,17 +49,17 @@
         </Grid.RowDefinitions>
 
         <!--H-->
-        <TextBlock Grid.Row="0" Opacity="0.5" Text="H" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold"/>
+        <TextBlock Grid.Row="0" Text="H" Style="{ThemeResource AppTextBlock}"/>
         <pic:NumberPicker x:Name="HPicker" Grid.Row="0" Unit="º" Minimum="0" Maximum="360" HorizontalAlignment="Right" ValueChange="HPicker_ValueChange"/>
         <pic:TouchSlider x:Name="HSlider" Grid.Row="1" Minimum="0" Maximum="360" SliderBrush="{StaticResource HBrush}" ValueChange="HSlider_ValueChange"/>
 
         <!--S-->
-        <TextBlock Grid.Row="2" Opacity="0.5" Text="S" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold"/>
+        <TextBlock Grid.Row="2" Text="S" Style="{ThemeResource AppTextBlock}"/>
         <pic:NumberPicker x:Name="SPicker" Grid.Row="2" Unit="%" Minimum="0" Maximum="100" HorizontalAlignment="Right" ValueChange="SPicker_ValueChange"/>
         <pic:TouchSlider x:Name="SSlider" Grid.Row="3" Minimum="0" Maximum="100" SliderBrush="{StaticResource SBrush}" ValueChange="SSlider_ValueChange"/>
 
         <!--L-->
-        <TextBlock Grid.Row="4" Opacity="0.5" Text="L" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold"/>
+        <TextBlock Grid.Row="4" Text="L" Style="{ThemeResource AppTextBlock}"/>
         <pic:NumberPicker x:Name="LPicker" Grid.Row="4" Unit="%" Minimum="0" Maximum="100" HorizontalAlignment="Right" ValueChange="LPicker_ValueChange"/>
         <pic:TouchSlider x:Name="LSlider" Grid.Row="5" Minimum="0" Maximum="100" SliderBrush="{StaticResource LBrush}" ValueChange="LSlider_ValueChange"/>
 

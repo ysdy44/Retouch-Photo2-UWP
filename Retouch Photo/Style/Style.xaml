@@ -4,10 +4,17 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls">
 
 
+    <!--IconElement-->
+    <Style x:Key="AppIconElement" TargetType="IconElement">
+        <Setter Property="Opacity" Value="0.8"/>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
     <!--TextBlock-->
     <Style x:Key="AppTextBlock" TargetType="TextBlock">
         <Setter Property="Margin" Value="4,4"/>
         <Setter Property="Opacity" Value="0.5"/>
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
     <!--Border-->
@@ -34,6 +41,7 @@
     <Style x:Key="AppFlyoutPresenterStyle" TargetType="FlyoutPresenter">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Margin" Value="-4" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Background" Value="{ThemeResource AppForeground}" />
         <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}" />

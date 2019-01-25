@@ -37,91 +37,58 @@ namespace Retouch_Photo.Pages
             this.InitializeComponent();
             
             //Selection
-            this.SelectionFlyout.Opened += (sender, e) => this.SelectionToggleButton.IsChecked = true;
-            this.SelectionFlyout.Closed += (sender, e) => this.SelectionToggleButton.IsChecked = false;
-            this.SelectionToggleButton.Tapped += (sender, e) =>
-            {
-                this.SelectionFlyout.ShowAt(this.SelectionToggleButton);
-                this.SelectionControl.Initialize();
-            }; 
-           //Operate
-            this.OperateFlyout.Opened += (sender, e) => this.OperateToggleButton.IsChecked = true;
-            this.OperateFlyout.Closed += (sender, e) => this.OperateToggleButton.IsChecked = false;
-            this.OperateToggleButton.Tapped += (sender, e) =>
-            {
-                this.OperateFlyout.ShowAt(this.OperateToggleButton);
-            };
+            this.LayoutBinging(this.SelectionLayout, this.SelectionToggleButton);
+            //Operate
+            this.LayoutBinging(this.OperateLayout, this.OperateToggleButton);
+            //Effect
+            this.LayoutBinging(this.EffectLayout, this.EffectToggleButton);
+            //Navigator
+            this.LayoutBinging(this.NavigatorLayout, this.NavigatorToggleButton);
+          
             //Color
-            this.ColorButton.Tapped += (sender, e) => this.ColorFlyout.ShowAt(this.ColorButton);
-        }
+            this.ColorButton.Tapped += (sender, e) => this.ColorLayout.ShowAt(this.ColorButton);
 
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-        }
-        protected async override void OnNavigatedTo(NavigationEventArgs e)//当前页面成为活动页面
-        {            
-            if (e.Parameter is XDocument document)   this.GetProject(Project.CreateFromXDocument(this.ViewModel.CanvasDevice, document));
-
-            if (e.Parameter is BitmapSize pixels)   this.GetProject(Project.CreateFromSize(this.ViewModel.CanvasDevice, pixels));
+            //Layer
+            this.LayersControl.FlyoutShow += (control) => this.LayerLayout.ShowAt(control);
             
-            if (e.Parameter is StorageFile file) this.GetProject(await Project.CreateFromFileAsync(this.ViewModel.CanvasDevice, file));
+            this.BackButton.Tapped += (sender, e) => this.Frame.GoBack();
+            this.SaveButton.Tapped += (sender, e) => this.Frame.GoBack();
+        }
+
+
+        //Layout
+        private void LayoutBinging(MenuLayout layout, ToggleButton button)
+        {
+            layout.Flyout.Opened += (sender, e) => button.IsChecked = true;
+            layout.Flyout.Closed += (sender, e) => button.IsChecked = false;
+            button.Tapped += (sender, e) => layout.ShowAt(button);
+        }
+
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)//当前页面成为活动页面
+        {
+            if (e.Parameter is Project project)
+            {
+                if (project == null)
+                {
+                    base.Frame.GoBack();
+                    return;
+                }
+
+                this.Loaded += (sender, e2) =>
+                {
+
+                    this.LoadingControl.Visibility = Visibility.Visible;//Loading
+                    this.ViewModel.LoadFromProject(project);//Project
+                    this.LoadingControl.Visibility = Visibility.Collapsed;//Loading   
+
+                    this.ViewModel.Invalidate();
+                };
+            }
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)//当前页面不再成为活动页面
         {
         }
 
-        public void GetProject(Project project)
-        {
-            this.LoadingControl.Visibility = Visibility.Visible;//Loading
-            if (project == null)
-            {
-                base.Frame.GoBack();
-                return;
-            }
-            this.ViewModel.LoadFromProject(project);
-            this.LoadingControl.Visibility = Visibility.Collapsed;//Loading
-        }
-
-
-        private async void PopupButton_Tapped(object sender, TappedRoutedEventArgs e)  => await this.WelcomeContentDialog.ShowAsync(ContentDialogPlacement.InPlace);//ContentDialogPlacement.InPlace
-        private async void Back_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            this.LoadingControl.Visibility = Visibility.Visible;//Loading
-
-            await Task.Delay(333);
-
-            this.LoadingControl.Visibility = Visibility.Collapsed;//Loading
-            this.Frame.GoBack();
-        }
-
-        private void SaveButton_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-        } 
-    }
-
-
-
-
-    public class PeopleSource : IIncrementalSource<string>
-    {
-        private readonly List<string> _people = new List<string>();
-
-        public async Task<IEnumerable<string>> GetPagedItemsAsync(int pageIndex, int pageSize, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            List<string> result = new List<string>();
-            for (int i = 1; i <= 20; i++)
-            {
-                int dss = pageIndex * pageSize + i;
-                var p = "Person ：" + dss.ToString();
-                result.Add(p);
-            }
-            await Task.Delay(10000);
-            return result;
-        }
-    }
-
-
-     
-
+    } 
 } 
