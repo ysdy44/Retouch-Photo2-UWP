@@ -39,7 +39,7 @@
         
         <Grid.RowDefinitions>
             <RowDefinition Height="36"/>
-            <RowDefinition x:Name="RowLength" Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid x:Name="TitlePanel" Padding="12,0" Background="{ThemeResource AppFill}">
@@ -56,10 +56,11 @@
         </Grid>
 
         <!--Content-->
+
         <Rectangle x:Name="ContentRectangle" Grid.Row="1" Fill="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
 
-        <Border Grid.Row="1" VerticalAlignment="Top" >
-            <Border x:Name="ContentBorderl" Padding="8,0" SizeChanged="ContentBorder_SizeChanged"/>
+        <Border Grid.Row="1" VerticalAlignment="Top" SizeChanged="ContentBorder_SizeChanged">
+            <Border x:Name="ContentBorderl" Padding="8,0" />
         </Border>
 
     </Grid>
