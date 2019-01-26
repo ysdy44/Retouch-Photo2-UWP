@@ -14,7 +14,7 @@ using Windows.UI;
 
 namespace Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels
 {
-    public class RotationViewModel : ToolViewModel2
+    public class RotationViewModel : IToolViewModel
     {    
         //ViewModel
         DrawViewModel ViewModel => App.ViewModel;
@@ -24,7 +24,6 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels
             set => this.ViewModel.KeyShift=value;
         }
 
-
         Vector2 Center;
         
         float StartTransformerRadian;
@@ -32,7 +31,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels
 
         float Radian;
 
-        public override void Start(Vector2 point, Layer layer)
+        public void Start(Vector2 point, Layer layer)
         {
             Matrix3x2 matrix = layer.Transformer.Matrix * this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix;
 
@@ -41,7 +40,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels
             this.StartTransformerRadian = layer.Transformer.Radian;
             this.StartRadian = Transformer.VectorToRadians(point - this.Center);
         }
-        public override void Delta(Vector2 point, Layer layer)
+        public void Delta(Vector2 point, Layer layer)
         {
             this.Radian = Transformer.VectorToRadians(point - this.Center);
 
@@ -49,12 +48,12 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels
 
             layer.Transformer.Radian = this.IsStepFrequency ? Transformer.RadiansStepFrequency(radian) : radian;
         }
-        public override void Complete(Vector2 point, Layer layer)
+        public void Complete(Vector2 point, Layer layer)
         {
             this.IsStepFrequency = false;
         }
 
-        public override void Draw(CanvasDrawingSession ds, Layer layer)
+        public void Draw(CanvasDrawingSession ds, Layer layer)
         {
             Transformer.DrawBoundNodesWithRotation(ds, layer.Transformer, this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
 

@@ -11,30 +11,6 @@ using Windows.UI;
 
 namespace Retouch_Photo.ViewModels.ToolViewModels
 {
-    /// <summary>
-    /// The nodes mode of [CursorTool].
-    /// </summary>
-    public enum CursorMode
-    {
-        None,
-        Translation,
-        Rotation,
-
-        SkewLeft,
-        SkewTop,
-        SkewRight,
-        SkewBottom,
-
-        ScaleLeft,
-        ScaleTop,
-        ScaleRight,
-        ScaleBottom,
-
-        ScaleLeftTop,
-        ScaleRightTop,
-        ScaleRightBottom,
-        ScaleLeftBottom,
-    }
 
 
     public class CursorViewModel : ToolViewModel
@@ -47,7 +23,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         Layer CurrentLayer;
 
         CursorMode Mode = CursorMode.None;
-        readonly Dictionary<CursorMode, ToolViewModel2> ViewModelDictionary = new Dictionary<CursorMode, ToolViewModel2>
+        readonly Dictionary<CursorMode, IToolViewModel> ViewModelDictionary = new Dictionary<CursorMode, IToolViewModel>
         {
             {CursorMode.None,  new NoneViewModel()},
             {CursorMode.Translation,  new TranslationViewModel()},
@@ -63,12 +39,13 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             {CursorMode.ScaleRight,  new CursorViewModels.ScaleViewModels.Scale1ViewModels.RightViewModel()},
             {CursorMode.ScaleBottom,  new CursorViewModels.ScaleViewModels.Scale1ViewModels.BottomViewModel()},
 
-            {CursorMode.ScaleLeftTop,  new LeftTopViewModel()},
-            {CursorMode.ScaleRightTop,  new RightTopViewModel()},
-            {CursorMode.ScaleRightBottom,  new RightBottomViewModel()},
-            {CursorMode.ScaleLeftBottom,  new LeftBottomViewModel()},
+            {CursorMode.ScaleLeftTop,  new CursorViewModels.ScaleViewModels.Scale2ViewModels.LeftTopViewModel()},
+            {CursorMode.ScaleRightTop,  new CursorViewModels.ScaleViewModels.Scale2ViewModels.RightTopViewModel()},
+            {CursorMode.ScaleRightBottom,  new CursorViewModels.ScaleViewModels.Scale2ViewModels.RightBottomViewModel()},
+            {CursorMode.ScaleLeftBottom,  new CursorViewModels.ScaleViewModels.Scale2ViewModels.LeftBottomViewModel()},
         };
 
+        /// <summary> 蓝色选框 </summary>
         bool IsCursorBox;
         Vector2 StartPoint;
         Vector2 EndPoint;
@@ -95,7 +72,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             //CursorMode
             if (this.CurrentLayer != null)
             {
-                this.Mode = this.ContainsNodeMode(point, this.CurrentLayer.Transformer, this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix, this.IsSkew);
+                this.Mode = Transformer.ContainsNodeMode(point, this.CurrentLayer.Transformer, this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix, this.IsSkew);
 
                 if (this.Mode!= CursorMode.None)
                 {
@@ -201,65 +178,6 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             }
         }
 
-
-
-        /// <summary>
-        /// Returns whether the radian area filled by the skew node contains the specified point. 
-        /// </summary>
-        /// <param name="point"> Input point. </param>
-        /// <param name="transformer"> Layer's transformer. </param>
-        /// <param name="canvasToVirtualToControlMatrix"></param>
-        /// <param name="isSkew"> Skew mode? </param>
-        /// <returns></returns>
-        public CursorMode ContainsNodeMode(Vector2 point, Transformer transformer, Matrix3x2 canvasToVirtualToControlMatrix, bool isSkew = false)
-        {
-            Matrix3x2 matrix = transformer.Matrix * canvasToVirtualToControlMatrix;
-
-            //LTRB
-            Vector2 leftTop = transformer.TransformLeftTop(matrix);
-            Vector2 rightTop = transformer.TransformRightTop(matrix);
-            Vector2 rightBottom = transformer.TransformRightBottom(matrix);
-            Vector2 leftBottom = transformer.TransformLeftBottom(matrix);
-
-            //Center
-            Vector2 centerLeft = (leftTop + leftBottom) / 2;
-            Vector2 centerTop = (leftTop + rightTop) / 2;
-            Vector2 centerRight = (rightTop + rightBottom) / 2;
-            Vector2 centerBottom = (leftBottom + rightBottom) / 2;
-
-            if (isSkew == false)
-            {
-                //Scale
-                if (Transformer.InNodeRadius(leftTop, point)) return CursorMode.ScaleLeftTop;
-                if (Transformer.InNodeRadius(rightTop, point)) return CursorMode.ScaleRightTop;
-                if (Transformer.InNodeRadius(rightBottom, point)) return CursorMode.ScaleRightBottom;
-                if (Transformer.InNodeRadius(leftBottom, point)) return CursorMode.ScaleLeftBottom;
-
-                //Scale
-                if (Transformer.InNodeRadius(centerLeft, point)) return CursorMode.ScaleLeft;
-                if (Transformer.InNodeRadius(centerTop, point)) return CursorMode.ScaleTop;
-                if (Transformer.InNodeRadius(centerRight, point)) return CursorMode.ScaleRight;
-                if (Transformer.InNodeRadius(centerBottom, point)) return CursorMode.ScaleBottom;
-            }
-
-            if (isSkew == false && transformer.DisabledRadian == false)
-            {
-                //Rotation
-                Vector2 radians = centerTop - Vector2.Normalize(centerBottom - centerTop) * Transformer.NodeDistanceDouble;
-                if (Transformer.InNodeRadius(radians, point)) return CursorMode.Rotation;
-            }
-
-            if (isSkew && transformer.DisabledRadian == false)
-            {
-                //Skew
-                if (Transformer.InNodeRadius(centerLeft, point)) return CursorMode.SkewLeft;
-                if (Transformer.InNodeRadius(centerTop, point)) return CursorMode.SkewTop;
-                if (Transformer.InNodeRadius(centerRight, point)) return CursorMode.SkewRight;
-                if (Transformer.InNodeRadius(centerBottom, point)) return CursorMode.SkewBottom;
-            }
-
-            return CursorMode.None;
-        }
 
     }
 }

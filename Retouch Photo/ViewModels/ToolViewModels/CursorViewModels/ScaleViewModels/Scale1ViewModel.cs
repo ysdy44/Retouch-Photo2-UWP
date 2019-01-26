@@ -8,8 +8,8 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels.ScaleViewModels
 {
-    public abstract class Scale1ViewModel : ScaleViewModel
-    {      
+    public abstract class Scale1ViewModel : ScaleViewModel, IToolViewModel
+    {
         //ViewModel
         DrawViewModel ViewModel => App.ViewModel;
         bool IsCenter => (this.ViewModel.MarqueeMode == MarqueeMode.Center) || (this.ViewModel.MarqueeMode == MarqueeMode.SquareAndCenter);
@@ -21,7 +21,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels.ScaleViewMode
         public abstract void SetFlip(Layer layer, bool isFlip);
                
 
-        public override void Start(Vector2 point, Layer layer)
+        public new void Start(Vector2 point, Layer layer)
         {
             base.Start(point, layer);
 
@@ -38,7 +38,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels.ScaleViewMode
             };
         }
 
-        public override void Delta(Vector2 point, Layer layer)
+        public new void Delta(Vector2 point, Layer layer)
         {
             //Point on diagonal line
             Vector2 footPoint = Transformer.FootPoint(point, base.Line.Diagonal, base.Point);

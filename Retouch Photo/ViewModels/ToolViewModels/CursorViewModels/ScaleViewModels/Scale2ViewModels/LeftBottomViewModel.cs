@@ -13,16 +13,8 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels.ScaleViewMode
 
         public override void SetPostion(Layer layer, Transformer startTransformer, float xCos, float xSin, float yCos, float ySin)
         {
-            if (startTransformer.Skew == 0)
-            {
-                layer.Transformer.Postion.X = startTransformer.Postion.X - xCos + ySin;
-                layer.Transformer.Postion.Y = startTransformer.Postion.Y + xSin + yCos;
-            }
-            else
-            {
-                layer.Transformer.Postion.X = startTransformer.Postion.X - xCos - ySin;
-                layer.Transformer.Postion.Y = startTransformer.Postion.Y + xSin - yCos;
-            }
+            layer.Transformer.Postion.X = startTransformer.Postion.X - xCos + ySin;
+            layer.Transformer.Postion.Y = startTransformer.Postion.Y + xSin + yCos;
         }
     }
 }

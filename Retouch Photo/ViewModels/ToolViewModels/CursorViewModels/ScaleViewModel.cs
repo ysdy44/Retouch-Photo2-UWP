@@ -40,9 +40,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels
 
     }
 
-    /// <summary>
-    /// Distance of points on the [VectorLine]
-    /// </summary>
+    /// <summary> Distance of points on the [VectorLine]. </summary>
     public struct VectorDistance
     {
         /// <summary> Distance between [Foot Point] and [Diagonal Point] . </summary>
@@ -60,11 +58,10 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels
     }
 
 
-    public abstract class ScaleViewModel : ToolViewModel2
+    public abstract class ScaleViewModel : IToolViewModel
     {
         //ViewModel
         DrawViewModel ViewModel => App.ViewModel;
-
 
         //@Override
         public abstract Vector2 GetPoint(Layer layer, Matrix3x2 matrix);
@@ -81,7 +78,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels
         protected float YCos,YSin;
 
 
-        public override void Start(Vector2 point, Layer layer)
+        public void Start(Vector2 point, Layer layer)
         {
             this.StartTransformer.CopyWith(layer.Transformer);
 
@@ -93,14 +90,10 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels
             this.YCos = (float)Math.Cos(y);
             this.YSin = (float)Math.Sin(y);
         }
-        public override void Delta(Vector2 point, Layer layer)
-        {
-        }
-        public override void Complete(Vector2 point, Layer layer)
-        {
-        }
+        public void Delta(Vector2 point, Layer layer){}
+        public void Complete(Vector2 point, Layer layer){}
 
-        public override void Draw(CanvasDrawingSession ds, Layer layer)
+        public void Draw(CanvasDrawingSession ds, Layer layer)
         {
             Transformer.DrawBoundNodesWithRotation(ds, layer.Transformer, this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
         }

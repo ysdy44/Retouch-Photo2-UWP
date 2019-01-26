@@ -4,7 +4,7 @@ using System.Numerics;
 
 namespace Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels.ScaleViewModels
 {
-    public abstract class Scale2ViewModel : ScaleViewModel
+    public abstract class Scale2ViewModel : ScaleViewModel, IToolViewModel
     {
         //ViewModel
         DrawViewModel ViewModel => App.ViewModel;
@@ -20,7 +20,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels.ScaleViewMode
         VectorLine HorizontalLine;
         VectorLine VerticalLine;
 
-        public override void Start(Vector2 point, Layer layer)
+        public void Start(Vector2 point, Layer layer)
         {
             base.Start(point, layer);
 
@@ -56,7 +56,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels.ScaleViewMode
         }
 
       
-        public override void Delta(Vector2 point, Layer layer)
+        public void Delta(Vector2 point, Layer layer)
         {
             //Point on diagonal line
             Vector2 footPoint = Transformer.FootPoint(point, this.Line.Diagonal, base.Point);

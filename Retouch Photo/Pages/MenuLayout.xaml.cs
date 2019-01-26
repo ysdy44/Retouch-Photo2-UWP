@@ -8,6 +8,11 @@ using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo.Pages
 {
+    /// <summary>
+    /// MenuLayout:
+    /// A layout control with Flyout and Overlay Layout.
+    /// It can be moved on the screen.
+    /// </summary>
     public sealed partial class MenuLayout : UserControl
     {
         //Postion
@@ -53,16 +58,19 @@ namespace Retouch_Photo.Pages
             }
         }
 
+
         //Content
         public string Text { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
+
         public UIElement CenterContent { get => this.ContentBorderl.Child; set => this.ContentBorderl.Child = value; }
         public UIElement FlyoutContent { get => this.FlyoutBorderl.Child; set => this.FlyoutBorderl.Child = value; }
+
         public Flyout Flyout { get => this.flyout; set => this.flyout = value; }
         public FlyoutPlacementMode Placement { get => this.flyout.Placement; set => this.flyout.Placement = value; }
- 
 
-        /// <summary>  显示相对于指定元素放置的浮出控件。</summary>
-        /// <param name="placementTarget"> 要用作浮出控件位置目标的元素 </param>
+
+        /// <summary>  Displays the flyout placed relative to the specified element. </summary>
+        /// <param name="placementTarget"> The element to use as the target for the flyout location </param>
         public void ShowAt(FrameworkElement placementTarget)
         {
             this.Visibility = Visibility.Collapsed;

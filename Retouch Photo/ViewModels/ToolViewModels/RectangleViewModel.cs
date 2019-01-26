@@ -49,7 +49,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             Vector2 endPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
             VectRect rect = new VectRect(this.StartPoint, endPoint, this.ViewModel.MarqueeMode);
 
-            if (Transformer.InNodeDistance(this.point, point) == false)
+            if (Transformer.OutNodeDistance(this.point, point))
             {
                 RectangularLayer layer = RectangularLayer.CreateFromRect(this.ViewModel.CanvasDevice, rect, this.ViewModel.Color);
                 this.ViewModel.RenderLayer.Insert(layer);
