@@ -60,15 +60,12 @@ namespace Retouch_Photo.Pickers
         public AlphaPicker()
         {
             this.InitializeComponent();
+
+            //Slider
+            this.ASlider.ValueChangeDelta += (object sender, double value) => this.Alpha = this._Alpha = (byte)value;
+            //Picker
+            this.APicker.ValueChange += (object sender, int value) => this.Alpha = this._Alpha = (byte)value;
         }
-
-        private void ASlider_ValueChange(object sender, double value) => this.Alpha = this._Alpha = (byte)value;
-
-        private void APicker_ValueChange(object sender, int value)
-        {
-            this.Alpha = this._Alpha = (byte)value;
-        }
-
 
         private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {

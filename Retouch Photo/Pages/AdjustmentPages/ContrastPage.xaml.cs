@@ -37,7 +37,7 @@ namespace Retouch_Photo.Pages.AdjustmentPages
             this.InitializeComponent();
         }
 
-        private void ContrastSlider_ValueChange(object sender, double value)
+        private void ContrastSlider_ValueChangeDelta(object sender, double value)
         {
             this.ContrastAdjustment.Contrast = (float)(value / 100);
             this.ViewModel.Invalidate();

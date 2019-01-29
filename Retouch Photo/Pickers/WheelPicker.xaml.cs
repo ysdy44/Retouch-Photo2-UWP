@@ -49,6 +49,11 @@ namespace Retouch_Photo.Pickers
                 this.hsl = value;
             }
         }
+        public Color Color
+        {
+            get => this.GetColor();
+            set => this.SetColor(value);
+        }
 
 
 

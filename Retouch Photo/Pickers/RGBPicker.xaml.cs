@@ -29,7 +29,7 @@ namespace Retouch_Photo.Pickers
                 this.color = value;
             }
         }
-        private Color Color
+        public Color Color
         {
             get => this.color;
             set
@@ -63,18 +63,16 @@ namespace Retouch_Photo.Pickers
         public RGBPicker()
         {
             this.InitializeComponent();
+
+            //Slider
+            this.RSlider.ValueChangeDelta += (sender, value) => this.Color = this._Color = Color.FromArgb(this.color.A, (byte)value, this.color.G, this.color.B);
+            this.GSlider.ValueChangeDelta += (sender, value) => this.Color = this._Color = Color.FromArgb(this.color.A, this.color.R, (byte)value, this.color.B);
+            this.BSlider.ValueChangeDelta += (sender, value) => this.Color = this._Color = Color.FromArgb(this.color.A, this.color.R, this.color.G, (byte)value);
+
+            //Picker
+            this.RPicker.ValueChange += (sender, Value) => this.Color = this._Color = Color.FromArgb(this.color.A, (byte)Value, this.color.G, this.color.B);
+            this.GPicker.ValueChange += (sender, Value) => this.Color = this._Color = Color.FromArgb(this.color.A, this.color.R, (byte)Value, this.color.B);
+            this.BPicker.ValueChange += (sender, Value) => this.Color = this._Color = Color.FromArgb(this.color.A, this.color.R, this.color.G, (byte)Value);
         }
-
-
-        //Slider
-        private void RSlider_ValueChange(object sender, double value) => this.Color = this._Color = Color.FromArgb(this.color.A, (byte)value, this.color.G, this.color.B);
-        private void GSlider_ValueChange(object sender, double value) => this.Color = this._Color = Color.FromArgb(this.color.A, this.color.R, (byte)value, this.color.B);
-        private void BSlider_ValueChange(object sender, double value) => this.Color = this._Color = Color.FromArgb(this.color.A, this.color.R, this.color.G, (byte)value);
-
-        //Picker
-        private void RPicker_ValueChange(object sender, int Value) => this.Color = this._Color = Color.FromArgb(this.color.A, (byte)Value, this.color.G, this.color.B);
-        private void GPicker_ValueChange(object sender, int Value) => this.Color = this._Color = Color.FromArgb(this.color.A, this.color.R, (byte)Value, this.color.B);
-        private void BPicker_ValueChange(object sender, int Value) => this.Color = this._Color = Color.FromArgb(this.color.A, this.color.R, this.color.G, (byte)Value);
-
     }
 }

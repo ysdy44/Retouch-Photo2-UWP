@@ -49,6 +49,11 @@ namespace Retouch_Photo.Pickers
                 this.CanvasControl.Invalidate();
             }
         }
+        public Color Color
+        {
+            get => this.GetColor();
+            set => this.SetColor(value);
+        }
 
 
         #endregion
@@ -72,7 +77,7 @@ namespace Retouch_Photo.Pickers
             this.Slider.Value = paletteBase.GetValue(this.hsl);
             this.LinearGradientBrush.GradientStops = paletteBase.GetSliderBrush(this.hsl);
 
-            this.Slider.ValueChange += (sender, value) => this.HSL = this._HSL = paletteBase.GetHSL(this.hsl, value);
+            this.Slider.ValueChangeDelta += (sender, value) => this.HSL = this._HSL = paletteBase.GetHSL(this.hsl, value);
 
             //Action
             this.Action = (HSL hsl) =>

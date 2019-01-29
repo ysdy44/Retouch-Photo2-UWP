@@ -23,12 +23,7 @@ namespace Retouch_Photo.Pickers
                 if (value > this.Maximum) return this.Maximum;
                 return value;
             }
-            set
-            {
-                this.ValueChange?.Invoke(this, value);
-
-                this.value = value;
-            }
+            set =>this.value = value;
         }
         public double Value
         {
@@ -82,8 +77,9 @@ namespace Retouch_Photo.Pickers
 
         //event
         public delegate void TouchValueChangeHandler(object sender, double value);
-        public event TouchValueChangeHandler ValueChange;
-
+        public event TouchValueChangeHandler ValueChangeStarted;
+        public event TouchValueChangeHandler ValueChangeDelta;
+        public event TouchValueChangeHandler ValueChangeCompleted;
 
         public TouchSlider()
         {
@@ -93,15 +89,19 @@ namespace Retouch_Photo.Pickers
             this.Thumb.DragStarted += (sender, e) =>
             {
                 this.Offset = this.offset = e.HorizontalOffset - this.Ellipse.ActualWidth / 2;
-                this._Value = this.value = this._Value;
+                this.value = this._Value;
+                this.ValueChangeStarted?.Invoke(this, this.value);
             };
             this.Thumb.DragDelta += (sender, e) =>
             {
                 this.Offset = this.offset += e.HorizontalChange;
-                this._Value = this.value = this._Value;
+                this.value = this._Value;
+                this.ValueChangeDelta?.Invoke(this, this.value);
             };
             this.Thumb.DragCompleted += (sender, e) =>
             {
+                this.value = this._Value;
+                this.ValueChangeCompleted?.Invoke(this, this.value);
             };
 
             this.Value = this.Value;

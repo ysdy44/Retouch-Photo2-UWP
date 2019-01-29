@@ -5,7 +5,7 @@
     xmlns:local="using:Retouch_Photo.Pickers"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="200">
@@ -18,12 +18,11 @@
 
         <!--A-->
         <TextBlock Text="A" Style="{ThemeResource AppTextBlock}"/>
-        <local:NumberPicker x:Name="APicker" Minimum="0" Maximum="255" HorizontalAlignment="Right" ValueChange="APicker_ValueChange"/>
-        <local:TouchSlider  x:Name="ASlider" Grid.Row="1" Minimum="0" Maximum="255" ValueChange="ASlider_ValueChange">
+        <local:NumberPicker x:Name="APicker" Minimum="0" Maximum="255" HorizontalAlignment="Right" />
+        <local:TouchSlider  x:Name="ASlider" Grid.Row="1" Minimum="0" Maximum="255">
             <local:TouchSlider.SliderBackground>
-                <xaml:CanvasControl x:Name="CanvasControl" Draw="CanvasControl_Draw"/>
+                <canvas:CanvasControl x:Name="CanvasControl" Draw="CanvasControl_Draw"/>
             </local:TouchSlider.SliderBackground>
         </local:TouchSlider>
     </Grid>
-
 </UserControl>

@@ -18,7 +18,7 @@
 
 
     <StackPanel Orientation="Horizontal">
-        <Border Background="Transparent" 
+        <Border Width="32" Background="Transparent" 
             PointerPressed="Border_PointerPressed" 
             
             ManipulationMode="All" 

@@ -101,7 +101,7 @@ namespace Retouch_Photo.Models
             this.FlipHorizontal = transformer.FlipHorizontal;
             this.FlipVertical = transformer.FlipVertical;
         }
-        public static Transformer CreateFromRect(Rect rect, float radian = 0.0f) => new Transformer
+        public static Transformer CreateFromRect(VectRect rect, float radian = 0.0f, bool disabledRadian = false) => new Transformer
         {
             Width = (float)rect.Width,
             Height = (float)rect.Height,
@@ -115,8 +115,9 @@ namespace Retouch_Photo.Models
 
             FlipHorizontal = false,
             FlipVertical = false,
+            DisabledRadian = disabledRadian,
         };
-        public static Transformer CreateFromSize(float width, float height, float scale = 1.0f, float radian = 0.0f) => new Transformer
+        public static Transformer CreateFromSize(float width, float height, float scale = 1.0f, float radian = 0.0f, bool disabledRadian = false) => new Transformer
         {
             Width = width,
             Height = height,
@@ -130,10 +131,11 @@ namespace Retouch_Photo.Models
 
             FlipHorizontal = false,
             FlipVertical = false,
+            DisabledRadian = disabledRadian,
         };
 
 
-
+        //Transform
         public Vector2 TransformLeft(Matrix3x2 matrix) => Vector2.Transform(new Vector2(0, this.Height / 2), matrix);
         public Vector2 TransformTop(Matrix3x2 matrix) => Vector2.Transform(new Vector2(this.Width / 2, 0), matrix);
         public Vector2 TransformRight(Matrix3x2 matrix) => Vector2.Transform(new Vector2(this.Width, this.Height / 2), matrix);
@@ -146,6 +148,8 @@ namespace Retouch_Photo.Models
 
         public Vector2 TransformCenter(Matrix3x2 matrix) => Vector2.Transform(new Vector2(this.Width / 2, this.Height / 2), matrix);
 
+
+        //Operate
         public float TransformMinX(Matrix3x2 matrix) => Math.Min(Math.Min(this.TransformLeftTop(Matrix).X, this.TransformRightTop(Matrix).X), Math.Min(this.TransformRightBottom(Matrix).X, this.TransformLeftBottom(Matrix).X));
         public float TransformMaxX(Matrix3x2 matrix) => Math.Max(Math.Max(this.TransformLeftTop(Matrix).X, this.TransformRightTop(Matrix).X), Math.Max(this.TransformRightBottom(Matrix).X, this.TransformLeftBottom(Matrix).X));
         public float TransformMinY(Matrix3x2 matrix) => Math.Min(Math.Min(this.TransformLeftTop(Matrix).Y, this.TransformRightTop(Matrix).Y), Math.Min(this.TransformRightBottom(Matrix).Y, this.TransformLeftBottom(Matrix).Y));
@@ -215,15 +219,15 @@ namespace Retouch_Photo.Models
             {
                 //Scale
                 if (Transformer.InNodeRadius(leftTop, point)) return CursorMode.ScaleLeftTop;
-            if (Transformer.InNodeRadius(rightTop, point)) return CursorMode.ScaleRightTop;
-            if (Transformer.InNodeRadius(rightBottom, point)) return CursorMode.ScaleRightBottom;
-            if (Transformer.InNodeRadius(leftBottom, point)) return CursorMode.ScaleLeftBottom;
+                if (Transformer.InNodeRadius(rightTop, point)) return CursorMode.ScaleRightTop;
+                if (Transformer.InNodeRadius(rightBottom, point)) return CursorMode.ScaleRightBottom;
+                if (Transformer.InNodeRadius(leftBottom, point)) return CursorMode.ScaleLeftBottom;
 
-            //Scale
-            if (Transformer.InNodeRadius(centerLeft, point)) return CursorMode.ScaleLeft;
-            if (Transformer.InNodeRadius(centerTop, point)) return CursorMode.ScaleTop;
-            if (Transformer.InNodeRadius(centerRight, point)) return CursorMode.ScaleRight;
-            if (Transformer.InNodeRadius(centerBottom, point)) return CursorMode.ScaleBottom;
+                //Scale
+                if (Transformer.InNodeRadius(centerLeft, point)) return CursorMode.ScaleLeft;
+                if (Transformer.InNodeRadius(centerTop, point)) return CursorMode.ScaleTop;
+                if (Transformer.InNodeRadius(centerRight, point)) return CursorMode.ScaleRight;
+                if (Transformer.InNodeRadius(centerBottom, point)) return CursorMode.ScaleBottom;
             }
 
             if (isSkew == false && transformer.DisabledRadian == false)

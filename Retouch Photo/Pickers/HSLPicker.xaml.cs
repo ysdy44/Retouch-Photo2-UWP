@@ -58,7 +58,11 @@ namespace Retouch_Photo.Pickers
                 this.hsl = value;
             }
         }
-
+        public Color Color
+        {
+            get => this.GetColor();
+            set => this.SetColor(value);
+        }
 
         #endregion
 
@@ -66,16 +70,16 @@ namespace Retouch_Photo.Pickers
         public HSLPicker()
         {
             this.InitializeComponent();
+
+            //Slider
+            this.HSlider.ValueChangeDelta += (sender, value) => this.HSL = this._HSL = new HSL(this.hsl.A, value, this.hsl.S, this.hsl.L);
+            this.SSlider.ValueChangeDelta += (sender, value) => this.HSL = this._HSL = new HSL(this.hsl.A, this.hsl.H, value, this.hsl.L);
+            this.LSlider.ValueChangeDelta += (sender, value) => this.HSL = this._HSL = new HSL(this.hsl.A, this.hsl.H, this.hsl.S, value);
+
+            //Picker
+            this.HPicker.ValueChange += (sender, Value) => this.HSL = this._HSL = new HSL(this.hsl.A, Value, this.hsl.S, this.HSL.L);
+            this.SPicker.ValueChange += (sender, Value) => this.HSL = this._HSL = new HSL(this.hsl.A, this.hsl.H, Value, this.hsl.L);
+            this.LPicker.ValueChange += (sender, Value) => this.HSL = this._HSL = new HSL(this.hsl.A, this.hsl.H, this.hsl.S, Value);
         }
-
-
-        private void HSlider_ValueChange(object sender, double value) => this.HSL = this._HSL = new HSL(this.hsl.A, value, this.hsl.S, this.hsl.L);
-        private void SSlider_ValueChange(object sender, double value) => this.HSL = this._HSL = new HSL(this.hsl.A, this.hsl.H, value, this.hsl.L);
-        private void LSlider_ValueChange(object sender, double value) => this.HSL = this._HSL = new HSL(this.hsl.A, this.hsl.H, this.hsl.S, value);
-
-        private void HPicker_ValueChange(object sender, int Value) => this.HSL = this._HSL = new HSL(this.hsl.A, Value, this.hsl.S, this.HSL.L);
-        private void SPicker_ValueChange(object sender, int Value) => this.HSL = this._HSL = new HSL(this.hsl.A, this.hsl.H, Value, this.hsl.L);
-        private void LPicker_ValueChange(object sender, int Value) => this.HSL = this._HSL = new HSL(this.hsl.A, this.hsl.H, this.hsl.S, Value);
-
     }
 }

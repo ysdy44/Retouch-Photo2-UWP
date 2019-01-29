@@ -12,7 +12,7 @@
     <StackPanel >
 
         <TextBlock Text="Shadows" Style="{StaticResource AppTextBlock}"/>
-        <pic:TouchSlider x:Name="ShadowsSlider" Minimum="-100" Maximum="100" ValueChange="ShadowsSlider_ValueChange">
+        <pic:TouchSlider x:Name="ShadowsSlider" Minimum="-100" Maximum="100" ValueChangeDelta="ShadowsSlider_ValueChangeDelta">
             <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
                     <GradientStop Color="Black" Offset="0"/>
@@ -22,7 +22,7 @@
         </pic:TouchSlider>
         
         <TextBlock Text="Highlights" Style="{StaticResource AppTextBlock}"/>
-        <pic:TouchSlider x:Name="HighlightsSlider" Minimum="-100" Maximum="100" ValueChange="HighlightsSlider_ValueChange">
+        <pic:TouchSlider x:Name="HighlightsSlider" Minimum="-100" Maximum="100" ValueChangeDelta="HighlightsSlider_ValueChangeDelta">
             <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
                     <GradientStop Color="Gray" Offset="0"/>
@@ -32,14 +32,14 @@
         </pic:TouchSlider>
 
         <TextBlock Text="Clarity" Style="{StaticResource AppTextBlock}"/>
-        <pic:TouchSlider x:Name="ClaritySlider" Minimum="-100" Maximum="100" ValueChange="ClaritySlider_ValueChange">
+        <pic:TouchSlider x:Name="ClaritySlider" Minimum="-100" Maximum="100" ValueChangeDelta="ClaritySlider_ValueChangeDelta">
             <pic:TouchSlider.SliderBrush>
             <SolidColorBrush Color="{ThemeResource AppBorderBrushColor}"/>
             </pic:TouchSlider.SliderBrush>
         </pic:TouchSlider>
         
         <TextBlock Text="MaskBlurAmount" Style="{StaticResource AppTextBlock}"/>
-        <pic:TouchSlider x:Name="MaskBlurAmountSlider" Minimum="0" Maximum="100" ValueChange="MaskBlurAmountSlider_ValueChange">
+        <pic:TouchSlider x:Name="MaskBlurAmountSlider" Minimum="0" Maximum="100" ValueChangeDelta="MaskBlurAmountSlider_ValueChangeDelta">
             <pic:TouchSlider.SliderBrush>
                 <SolidColorBrush Color="{ThemeResource AppBorderBrushColor}"/>
             </pic:TouchSlider.SliderBrush>

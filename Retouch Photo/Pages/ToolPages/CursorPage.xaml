@@ -33,7 +33,6 @@
             <!--Skew-->
             <Border Style="{StaticResource AppCircleBorderStyle}">
                 <ToggleButton x:Name="SkewButton" 
-                        IsChecked="{x:Bind ViewModel.KeyAlt,Mode=TwoWay}"
                         Padding="0" BorderThickness="0" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                         Tapped="SkewButton_Tapped">
                     <PathIcon Data="M23.517,0l-18.826,0l-4.691,11.79l18.826,0l4.691,-11.79Z"/>

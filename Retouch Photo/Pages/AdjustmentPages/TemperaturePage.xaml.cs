@@ -38,13 +38,13 @@ namespace Retouch_Photo.Pages.AdjustmentPages
             this.InitializeComponent();
         }
 
-        private void TemperatureSlider_ValueChange(object sender, double value)
+        private void TemperatureSlider_ValueChangeDelta(object sender, double value)
         {
             this.TemperatureAdjustment.Temperature = (float)(value / 100);
             this.ViewModel.Invalidate();
         }
 
-        private void TintSlider_ValueChange(object sender, double value)
+        private void TintSlider_ValueChangeDelta(object sender, double value)
         {
             this.TemperatureAdjustment.Tint = (float)(value / 100);
             this.ViewModel.Invalidate();

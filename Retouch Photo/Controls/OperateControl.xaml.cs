@@ -104,11 +104,11 @@ namespace Retouch_Photo.Controls
 
         private void FlipHorizontalButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Operate
         (
-            (Layer layer) => layer.Transformer.FlipHorizontal = !layer.Transformer.FlipHorizontal
+            (Layer layer) => layer.Transformer.XScale = -layer.Transformer.XScale
         );
         private void FlipVerticalButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Operate
         (
-            (Layer layer) => layer.Transformer.FlipVertical = !layer.Transformer.FlipVertical
+            (Layer layer) => layer.Transformer.YScale =-layer.Transformer.YScale
         );
         private void RotateLeftButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Operate
         (

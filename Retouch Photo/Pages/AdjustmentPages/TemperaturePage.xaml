@@ -11,7 +11,7 @@
 
     <StackPanel >
         <TextBlock Text="Temperature" Style="{StaticResource AppTextBlock}"/>
-        <pic:TouchSlider x:Name="TemperatureSlider" Minimum="-100" Maximum="100" ValueChange="TemperatureSlider_ValueChange">
+        <pic:TouchSlider x:Name="TemperatureSlider" Minimum="-100" Maximum="100" ValueChangeDelta="TemperatureSlider_ValueChangeDelta">
             <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
                     <GradientStop Color="#3eadf5" Offset="0"/>
@@ -22,7 +22,7 @@
         </pic:TouchSlider>
 
         <TextBlock Text="Tint" Style="{StaticResource AppTextBlock}"/>
-        <pic:TouchSlider x:Name="TintSlider" Minimum="-100" Maximum="100" ValueChange="TintSlider_ValueChange">
+        <pic:TouchSlider x:Name="TintSlider" Minimum="-100" Maximum="100" ValueChangeDelta="TintSlider_ValueChangeDelta">
             <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
                     <GradientStop Color="#9680c9" Offset="0"/>
