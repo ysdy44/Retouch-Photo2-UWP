@@ -4,7 +4,7 @@
 
 
 ## Function description
-![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/master/ScreenShot/2019.1.3.PNG)
+![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/master/ScreenShot/2019.1.11.PNG)
 Simple and free photo retouching tools,can transform,adjustment, shear,filling images,support layer,the selecti on. If you think that the PS is too complex might as well try.
 
 
