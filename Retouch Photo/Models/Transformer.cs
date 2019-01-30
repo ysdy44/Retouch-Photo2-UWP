@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo.Library;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,35 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI;
+using static Retouch_Photo.Library.TransformController;
 
 namespace Retouch_Photo.Models
 {
-    /// <summary> The nodes mode of [CursorTool]. </summary>
-    public enum CursorMode
-    {
-        None,
-        Translation,
-        Rotation,
-
-        SkewLeft,
-        SkewTop,
-        SkewRight,
-        SkewBottom,
-
-        ScaleLeft,
-        ScaleTop,
-        ScaleRight,
-        ScaleBottom,
-
-        ScaleLeftTop,
-        ScaleRightTop,
-        ScaleRightBottom,
-        ScaleLeftBottom,
-    }
-
-
     /// <summary> Define Transformer. </summary>
-    public struct Transformer
+    public struct Transformer222
     {
 
 
@@ -84,12 +62,12 @@ namespace Retouch_Photo.Models
             Matrix3x2.CreateTranslation(-this.Width / 2, -this.Height / 2) *
             Matrix3x2.CreateRotation(-this.Radian) *
             Matrix3x2.CreateSkew(-this.Skew, 0) *
-            Matrix3x2.CreateScale(this.FlipHorizontal ? -1/this.XScale : 1 / this.XScale, this.FlipVertical ? -1 / this.YScale : 1 / this.YScale) *
+            Matrix3x2.CreateScale(this.FlipHorizontal ? -1 / this.XScale : 1 / this.XScale, this.FlipVertical ? -1 / this.YScale : 1 / this.YScale) *
             Matrix3x2.CreateTranslation(this.Width / 2, this.Height / 2);
 
 
 
-        public void CopyWith(Transformer transformer)
+        public void CopyWith(Transformer222 transformer)
         {
             this.XScale = transformer.XScale;
             this.YScale = transformer.YScale;
@@ -101,23 +79,7 @@ namespace Retouch_Photo.Models
             this.FlipHorizontal = transformer.FlipHorizontal;
             this.FlipVertical = transformer.FlipVertical;
         }
-        public static Transformer CreateFromRect(VectRect rect, float radian = 0.0f, bool disabledRadian = false) => new Transformer
-        {
-            Width = (float)rect.Width,
-            Height = (float)rect.Height,
-
-            XScale = 1.0f,
-            YScale = 1.0f,
-
-            Postion = new Vector2((float)rect.X, (float)rect.Y),
-            Radian = radian,
-            Skew = 0,
-
-            FlipHorizontal = false,
-            FlipVertical = false,
-            DisabledRadian = disabledRadian,
-        };
-        public static Transformer CreateFromSize(float width, float height, float scale = 1.0f, float radian = 0.0f, bool disabledRadian = false) => new Transformer
+        public static Transformer222 CreateFromSize(float width, float height,Vector2 postion, float scale = 1.0f, float radian = 0.0f, bool disabledRadian = false) => new Transformer222
         {
             Width = width,
             Height = height,
@@ -125,7 +87,7 @@ namespace Retouch_Photo.Models
             XScale = scale,
             YScale = scale,
 
-            Postion = Vector2.Zero,
+            Postion = postion,
             Radian = radian,
             Skew = 0,
 
@@ -177,37 +139,37 @@ namespace Retouch_Photo.Models
 
 
         /// <summary> Get outside node. </summary>
-        public static Vector2 OutsideNode(Vector2 nearNode, Vector2 farNode) => nearNode - Vector2.Normalize(farNode - nearNode) * Transformer.NodeDistanceDouble;
+        public static Vector2 OutsideNode(Vector2 nearNode, Vector2 farNode) => nearNode - Vector2.Normalize(farNode - nearNode) * Transformer222.NodeDistanceDouble;
 
 
         /// <summary> Returns whether the area filled by the bound rect contains the specified point. </summary>
-        public static bool ContainsBound(Vector2 point, Transformer transformer)
+        public static bool ContainsBound(Vector2 point, Transformer222 transformer)
         {
             Vector2 v = Vector2.Transform(point, transformer.InverseMatrix);
             return v.X > 0 && v.X < transformer.Width && v.Y > 0 && v.Y < transformer.Height;
         }
-
-
-
-
+                       
 
         /// <summary>
         /// Returns whether the radian area filled by the skew node contains the specified point. 
         /// </summary>
         /// <param name="point"> Input point. </param>
         /// <param name="transformer"> Layer's transformer. </param>
-        /// <param name="canvasToVirtualToControlMatrix"></param>
-        /// <param name="isSkew"> Skew mode? </param>
+        /// <param name="matrix"></param>
         /// <returns></returns>
-        public static CursorMode ContainsNodeMode(Vector2 point, Transformer transformer, Matrix3x2 canvasToVirtualToControlMatrix, bool isSkew = false)
-       {
-            Matrix3x2 matrix = transformer.Matrix * canvasToVirtualToControlMatrix;
-
+        public static TransformerMode ContainsNodeMode(Vector2 point, Transformer222 transformer, Matrix3x2 matrix)
+        {
             //LTRB
             Vector2 leftTop = transformer.TransformLeftTop(matrix);
             Vector2 rightTop = transformer.TransformRightTop(matrix);
             Vector2 rightBottom = transformer.TransformRightBottom(matrix);
             Vector2 leftBottom = transformer.TransformLeftBottom(matrix);
+
+            //Scale2
+            if (Transformer222.InNodeRadius(leftTop, point)) return TransformerMode.ScaleLeftTop;
+            if (Transformer222.InNodeRadius(rightTop, point)) return TransformerMode.ScaleRightTop;
+            if (Transformer222.InNodeRadius(rightBottom, point)) return TransformerMode.ScaleRightBottom;
+            if (Transformer222.InNodeRadius(leftBottom, point)) return TransformerMode.ScaleLeftBottom;
 
             //Center
             Vector2 centerLeft = (leftTop + leftBottom) / 2;
@@ -215,46 +177,31 @@ namespace Retouch_Photo.Models
             Vector2 centerRight = (rightTop + rightBottom) / 2;
             Vector2 centerBottom = (leftBottom + rightBottom) / 2;
 
-            if (isSkew == false)
-            {
-                //Scale
-                if (Transformer.InNodeRadius(leftTop, point)) return CursorMode.ScaleLeftTop;
-                if (Transformer.InNodeRadius(rightTop, point)) return CursorMode.ScaleRightTop;
-                if (Transformer.InNodeRadius(rightBottom, point)) return CursorMode.ScaleRightBottom;
-                if (Transformer.InNodeRadius(leftBottom, point)) return CursorMode.ScaleLeftBottom;
+            //Scale1
+            if (Transformer222.InNodeRadius(centerLeft, point)) return TransformerMode.ScaleLeft;
+            if (Transformer222.InNodeRadius(centerTop, point)) return TransformerMode.ScaleTop;
+            if (Transformer222.InNodeRadius(centerRight, point)) return TransformerMode.ScaleRight;
+            if (Transformer222.InNodeRadius(centerBottom, point)) return TransformerMode.ScaleBottom;
 
-                //Scale
-                if (Transformer.InNodeRadius(centerLeft, point)) return CursorMode.ScaleLeft;
-                if (Transformer.InNodeRadius(centerTop, point)) return CursorMode.ScaleTop;
-                if (Transformer.InNodeRadius(centerRight, point)) return CursorMode.ScaleRight;
-                if (Transformer.InNodeRadius(centerBottom, point)) return CursorMode.ScaleBottom;
-            }
+            //Outside
+            Vector2 outsideLeft = Transformer222.OutsideNode(centerLeft, centerRight);
+            Vector2 outsideTop = Transformer222.OutsideNode(centerTop, centerBottom);
+            Vector2 outsideRight = Transformer222.OutsideNode(centerRight, centerLeft);
+            Vector2 outsideBottom = Transformer222.OutsideNode(centerBottom, centerTop);
 
-            if (isSkew == false && transformer.DisabledRadian == false)
-            {
-                //Rotation
-                Vector2 radians = Transformer.OutsideNode(centerTop, centerBottom);
-                if (Transformer.InNodeRadius(radians, point)) return CursorMode.Rotation;
-            }
+            //Rotation
+            if (Transformer222.InNodeRadius(outsideTop, point)) return TransformerMode.Rotation;
 
-
-            if (isSkew && transformer.DisabledRadian == false)
-            {
-                //Skew
-                Vector2 skewLeft = Transformer.OutsideNode(centerLeft, centerRight);
-                Vector2 skewTop = Transformer.OutsideNode(centerTop, centerBottom);
-                Vector2 skewRight = Transformer.OutsideNode(centerRight, centerLeft);
-                Vector2 skewBottom = Transformer.OutsideNode(centerBottom, centerTop);
-                if (Transformer.InNodeRadius(skewLeft, point)) return CursorMode.SkewLeft;
-                if (Transformer.InNodeRadius(skewTop, point)) return CursorMode.SkewTop;
-                if (Transformer.InNodeRadius(skewRight, point)) return CursorMode.SkewRight;
-                if (Transformer.InNodeRadius(skewBottom, point)) return CursorMode.SkewBottom;
-            }
+            //Rotation
+            //if (Transformer.InNodeRadius(outsideLeft, point)) return TransformerMode.SkewLeft;
+            //if (Transformer.InNodeRadius(outsideTop, point)) return TransformerMode.SkewTop;
+            if (Transformer222.InNodeRadius(outsideRight, point)) return TransformerMode.SkewRight;
+            if (Transformer222.InNodeRadius(outsideBottom, point)) return TransformerMode.SkewBottom;
 
             //Translation
-            if (Transformer.ContainsBound(point, transformer)) return CursorMode.Translation;
+            if (Transformer222.ContainsBound(point, transformer)) return TransformerMode.Translation;
 
-            return CursorMode.None;
+            return TransformerMode.None;
         }
 
         #endregion
@@ -264,9 +211,9 @@ namespace Retouch_Photo.Models
 
 
         /// <summary> Draw nodes and lines on bound，just like【由】. </summary>
-        public static void DrawBound(CanvasDrawingSession ds, Transformer transformer, Matrix3x2 canvasToVirtualToControlMatrix)
+        public static void DrawBound(CanvasDrawingSession ds, Transformer222 transformer, Matrix3x2 canvasToVirtualToControlMatrix)
         {
-            Matrix3x2 matrix = transformer.Matrix * canvasToVirtualToControlMatrix;
+            Matrix3x2 matrix =canvasToVirtualToControlMatrix;
 
             Vector2 leftTop = transformer.TransformLeftTop(matrix);
             Vector2 rightTop = transformer.TransformRightTop(matrix);
@@ -279,97 +226,60 @@ namespace Retouch_Photo.Models
             ds.DrawLine(rightBottom, leftBottom, Colors.DodgerBlue);
             ds.DrawLine(leftBottom, leftTop, Colors.DodgerBlue);
         }
-        public static void DrawBoundNodesWithRotation(CanvasDrawingSession ds, Transformer transformer, Matrix3x2 canvasToVirtualToControlMatrix)
+        /// <summary> Draw nodes and lines on bound，just like【由】. </summary>
+        public static void DrawBoundNodes(CanvasDrawingSession ds, Transformer222 transformer, Matrix3x2 matrix)
         {
-            Matrix3x2 matrix = transformer.Matrix * canvasToVirtualToControlMatrix;
-
             //LTRB
             Vector2 leftTop = transformer.TransformLeftTop(matrix);
             Vector2 rightTop = transformer.TransformRightTop(matrix);
             Vector2 rightBottom = transformer.TransformRightBottom(matrix);
             Vector2 leftBottom = transformer.TransformLeftBottom(matrix);
 
-            //LTRB: Line
-            ds.DrawLine(leftTop, rightTop, Colors.DodgerBlue);
-            ds.DrawLine(rightTop, rightBottom, Colors.DodgerBlue);
-            ds.DrawLine(rightBottom, leftBottom, Colors.DodgerBlue);
-            ds.DrawLine(leftBottom, leftTop, Colors.DodgerBlue);
+            //Line
+            ds.DrawLine(leftTop, rightTop, Windows.UI.Colors.DodgerBlue);
+            ds.DrawLine(rightTop, rightBottom, Windows.UI.Colors.DodgerBlue);
+            ds.DrawLine(rightBottom, leftBottom, Windows.UI.Colors.DodgerBlue);
+            ds.DrawLine(leftBottom, leftTop, Windows.UI.Colors.DodgerBlue);
 
-
-            //Center: Vector2
+            //Center
             Vector2 centerLeft = (leftTop + leftBottom) / 2;
             Vector2 centerTop = (leftTop + rightTop) / 2;
             Vector2 centerRight = (rightTop + rightBottom) / 2;
             Vector2 centerBottom = (leftBottom + rightBottom) / 2;
 
+            //Scale2
+            Transformer222.DrawNode2(ds, leftTop);
+            Transformer222.DrawNode2(ds, rightTop);
+            Transformer222.DrawNode2(ds, rightBottom);
+            Transformer222.DrawNode2(ds, leftBottom);
 
-            //Center: Node
-            if (Transformer.OutNodeDistance(centerLeft, centerRight))
+            //Scale1
+            if (Transformer222.OutNodeDistance(centerLeft, centerRight))
             {
-                Transformer.DrawNode2(ds, centerTop);
-                Transformer.DrawNode2(ds, centerBottom);
+                Transformer222.DrawNode2(ds, centerTop);
+                Transformer222.DrawNode2(ds, centerBottom);
             }
-            if (Transformer.OutNodeDistance(centerTop, centerBottom))
+            if (Transformer222.OutNodeDistance(centerTop, centerBottom))
             {
-                Transformer.DrawNode2(ds, centerLeft);
-                Transformer.DrawNode2(ds, centerRight);
-            }
-
-
-            if (transformer.DisabledRadian == false)
-            {
-                //Radian: Vector
-                Vector2 radian = Transformer.OutsideNode(centerTop, centerBottom);
-                //Radian: Line
-                ds.DrawLine(radian, centerTop, Colors.DodgerBlue);
-                //Radian: Node
-                Transformer.DrawNode(ds, radian);
+                Transformer222.DrawNode2(ds, centerLeft);
+                Transformer222.DrawNode2(ds, centerRight);
             }
 
-            //LTRB: Node
-            Transformer.DrawNode2(ds, leftTop);
-            Transformer.DrawNode2(ds, rightTop);
-            Transformer.DrawNode2(ds, rightBottom);
-            Transformer.DrawNode2(ds, leftBottom);
-        }
-        public static void DrawBoundNodesWithSkew(CanvasDrawingSession ds, Transformer transformer, Matrix3x2 canvasToVirtualToControlMatrix)
-        {
-            Matrix3x2 matrix = transformer.Matrix * canvasToVirtualToControlMatrix;
+            //Outside
+            Vector2 outsideLeft = Transformer222.OutsideNode(centerLeft, centerRight);
+            Vector2 outsideTop = Transformer222.OutsideNode(centerTop, centerBottom);
+            Vector2 outsideRight = Transformer222.OutsideNode(centerRight, centerLeft);
+            Vector2 outsideBottom = Transformer222.OutsideNode(centerBottom, centerTop);
 
-            //LTRB
-            Vector2 leftTop = transformer.TransformLeftTop(matrix);
-            Vector2 rightTop = transformer.TransformRightTop(matrix);
-            Vector2 rightBottom = transformer.TransformRightBottom(matrix);
-            Vector2 leftBottom = transformer.TransformLeftBottom(matrix);
+            //Radian
+            ds.DrawLine(outsideTop, centerTop, Windows.UI.Colors.DodgerBlue);
+            Transformer222.DrawNode(ds, outsideTop);
 
-            //LTRB: Line
-            ds.DrawLine(leftTop, rightTop, Colors.DodgerBlue);
-            ds.DrawLine(rightTop, rightBottom, Colors.DodgerBlue);
-            ds.DrawLine(rightBottom, leftBottom, Colors.DodgerBlue);
-            ds.DrawLine(leftBottom, leftTop, Colors.DodgerBlue);
-
-
-            //Center: Vector2
-            Vector2 centerLeft = (leftTop + leftBottom) / 2;
-            Vector2 centerTop = (leftTop + rightTop) / 2;
-            Vector2 centerRight = (rightTop + rightBottom) / 2;
-            Vector2 centerBottom = (leftBottom + rightBottom) / 2;
-
-            //skew: Vector
-            Vector2 skewLeft = Transformer.OutsideNode(centerLeft, centerRight);
-            Vector2 skewTop = Transformer.OutsideNode(centerTop, centerBottom);
-            Vector2 skewRight = Transformer.OutsideNode(centerRight, centerLeft);
-            Vector2 skewBottom = Transformer.OutsideNode(centerBottom, centerTop);
-            //skew: Line
-            ds.DrawLine(skewLeft, centerLeft, Colors.DodgerBlue);
-            ds.DrawLine(skewTop, centerTop, Colors.DodgerBlue);
-            ds.DrawLine(skewRight, centerRight, Colors.DodgerBlue);
-            ds.DrawLine(skewBottom, centerBottom, Colors.DodgerBlue);
-            //skew: Node
-            Transformer.DrawNode2(ds, skewLeft);
-            Transformer.DrawNode2(ds, skewTop);
-            Transformer.DrawNode2(ds, skewRight);
-            Transformer.DrawNode2(ds, skewBottom);
+            //Skew:
+            //Transformer.DrawNode2(ds, outsideLeft);
+            //Transformer.DrawNode2(ds, outsideTop);
+            Transformer222.DrawNode2(ds, outsideRight);
+            Transformer222.DrawNode2(ds, outsideBottom);
         }
 
         /// <summary> Draw a ⊙. </summary>
@@ -406,7 +316,7 @@ namespace Retouch_Photo.Models
         /// <summary> 7.5 degress in angle system. </summary>
         public const float RadiansStepHalf = 0.1308996916666667f;
         /// <summary> To find a multiple of the nearest 15. </summary>
-        public static float RadiansStepFrequency(float radian) => ((int)((radian + Transformer.RadiansStepHalf) / Transformer.RadiansStep)) * Transformer.RadiansStep;//Get step radians
+        public static float RadiansStepFrequency(float radian) => ((int)((radian + Transformer222.RadiansStepHalf) / Transformer222.RadiansStep)) * Transformer222.RadiansStep;//Get step radians
 
 
         /// <summary> Math.PI </summary>
@@ -431,32 +341,6 @@ namespace Retouch_Photo.Models
         /// <summary> Get the  [Intersection Point] of Line1 and LIne2. </summary>
         public static Vector2 IntersectionPoint(Vector2 line1A, Vector2 line1B, Vector2 line2A, Vector2 line2B)
         {
-            /*
-             * L1，L2都存在斜率的情况：
-             * 直线方程L1: ( y - y1 ) / ( y2 - y1 ) = ( x - x1 ) / ( x2 - x1 )
-             * => y = [ ( y2 - y1 ) / ( x2 - x1 ) ]( x - x1 ) + y1
-             * 令 a = ( y2 - y1 ) / ( x2 - x1 )
-             * 有 y = a * x - a * x1 + y1   .........1
-             * 直线方程L2: ( y - y3 ) / ( y4 - y3 ) = ( x - x3 ) / ( x4 - x3 )
-             * 令 b = ( y4 - y3 ) / ( x4 - x3 )
-             * 有 y = b * x - b * x3 + y3 ..........2
-             *
-             * 如果 a = b，则两直线平等，否则， 联解方程 1,2，得:
-             * x = ( a * x1 - b * x3 - y1 + y3 ) / ( a - b )
-             * y = a * x - a * x1 + y1
-             *
-             * L1存在斜率, L2平行Y轴的情况：
-             * x = x3
-             * y = a * x3 - a * x1 + y1
-             *
-             * L1 平行Y轴，L2存在斜率的情况：
-             * x = x1
-             * y = b * x - b * x3 + y3
-             *
-             * L1与L2都平行Y轴的情况：
-             * 如果 x1 = x3，那么L1与L2重合，否则平等
-             *
-            */
             float a = 0, b = 0;
             int state = 0;
             if (Math.Abs(line1A.X - line1B.X) > float.Epsilon)
@@ -471,46 +355,29 @@ namespace Retouch_Photo.Models
             }
             switch (state)
             {
-                case 0: //L1与L2都平行Y轴
-                    {
-                        if (Math.Abs(line1A.X - line2A.X) < float.Epsilon)
-                        {
-                            //throw new Exception("两条直线互相重合，且平行于Y轴，无法计算交点。");
-                            return Vector2.Zero;
-                        }
-                        else
-                        {
-                            //throw new Exception("两条直线互相平行，且平行于Y轴，无法计算交点。");
-                            return Vector2.Zero;
-                        }
-                    }
-                case 1: //L1存在斜率, L2平行Y轴
+                case 0:
+                    if (Math.Abs(line1A.X - line2A.X) < float.Epsilon) return Vector2.Zero;
+                    else return Vector2.Zero;
+                case 1:
                     {
                         float x = line2A.X;
                         float y = (line1A.X - x) * (-a) + line1A.Y;
                         return new Vector2(x, y);
                     }
-                case 2: //L1 平行Y轴，L2存在斜率
+                case 2:
                     {
                         float x = line1A.X;
-                        //网上有相似代码的，这一处是错误的。你可以对比case 1 的逻辑 进行分析
-                        //源code:lineSecondStar * x + lineSecondStar * lineSecondStar.X + p3.Y;
                         float y = (line2A.X - x) * (-b) + line2A.Y;
                         return new Vector2(x, y);
                     }
-                case 3: //L1，L2都存在斜率
+                case 3:
                     {
-                        if (Math.Abs(a - b) < float.Epsilon)
-                        {
-                            // throw new Exception("两条直线平行或重合，无法计算交点。");
-                            return Vector2.Zero;
-                        }
+                        if (Math.Abs(a - b) < float.Epsilon) return Vector2.Zero;
                         float x = (a * line1A.X - b * line2A.X - line1A.Y + line2A.Y) / (a - b);
                         float y = a * x - a * line1A.X + line1A.Y;
                         return new Vector2(x, y);
                     }
             }
-            // throw new Exception("不可能发生的情况");
             return Vector2.Zero;
         }
 

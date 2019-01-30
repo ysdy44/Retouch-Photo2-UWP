@@ -1,4 +1,5 @@
-﻿using Retouch_Photo.Models;
+﻿using Retouch_Photo.Library;
+using Retouch_Photo.Models;
 using Retouch_Photo.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using static Retouch_Photo.Library.TransformController;
 
 namespace Retouch_Photo.Controls
 {

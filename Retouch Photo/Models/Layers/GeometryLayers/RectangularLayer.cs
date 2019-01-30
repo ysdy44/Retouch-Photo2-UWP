@@ -2,7 +2,7 @@
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo.ViewModels;
+using Retouch_Photo.Library;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Graphics.Effects;
 using Windows.UI;
+using static Retouch_Photo.Library.TransformController;
 
 namespace Retouch_Photo.Models.Layers.GeometryLayers
 {
@@ -64,7 +65,7 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
         {
             return new RectangularLayer
             {
-                Transformer = Transformer.CreateFromRect(rect),
+                Transformer = Transformer.CreateFromSize(rect.Width, rect.Height, rect.Center),
                 FillBrush = new CanvasSolidColorBrush(creator, color)
             };
         }

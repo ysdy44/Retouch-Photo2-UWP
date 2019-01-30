@@ -1,8 +1,10 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
+using Retouch_Photo.Library;
 using Retouch_Photo.Models;
 using Retouch_Photo.Models.Layers.GeometryLayers;
 using System.Numerics;
+using static Retouch_Photo.Library.TransformController;
 
 namespace Retouch_Photo.ViewModels.ToolViewModels
 {
@@ -41,7 +43,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             Vector2 endPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
             VectRect rect = new VectRect(this.StartPoint, endPoint, this.ViewModel.MarqueeMode);
 
-            this.Layer.Transformer = Transformer.CreateFromRect(rect);
+            this.Layer.Transformer = Transformer.CreateFromSize(rect.Width, rect.Height, rect.Center);
             this.ViewModel.InvalidateWithJumpedQueueLayer(this.Layer);
         }
         public override void Complete(Vector2 point)
@@ -64,7 +66,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         public override void Draw(CanvasDrawingSession ds)
         {
             if (this.Layer == null) return;
-            Transformer.DrawBound(ds, this.Layer.Transformer, this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
+            Transformer.DrawBound(ds, this.Layer.Transformer, this.Layer.Transformer.Matrix* this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
         }
 
     }

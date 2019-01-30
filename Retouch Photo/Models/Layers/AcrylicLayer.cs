@@ -1,6 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo.ViewModels;
+using Retouch_Photo.Library;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +13,7 @@ using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using static Retouch_Photo.Library.TransformController;
 
 namespace Retouch_Photo.Models.Layers
 {
@@ -76,7 +77,7 @@ namespace Retouch_Photo.Models.Layers
         {
             return new AcrylicLayer
             {
-                Transformer = Transformer.CreateFromRect(rect, disabledRadian: true),
+                Transformer = Transformer.CreateFromSize(rect.Width, rect.Height, rect.Center, disabledRadian: true),
                 TintColor = color,
                 TintOpacity = opacity
             };

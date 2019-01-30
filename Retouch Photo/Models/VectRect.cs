@@ -37,52 +37,58 @@ namespace Retouch_Photo.Models
             switch (mode)
             {
                 case MarqueeMode.None:
-                    this.X = Math.Min(start.X, end.X);
-                    this.Y = Math.Min(start.Y, end.Y);
-                    this.Width = Math.Abs(start.X - end.X);
-                    this.Height = Math.Abs(start.Y - end.Y);
+                    {
+                        this.X = Math.Min(start.X, end.X);
+                        this.Y = Math.Min(start.Y, end.Y);
+                        this.Width = Math.Abs(start.X - end.X);
+                        this.Height = Math.Abs(start.Y - end.Y);
+                    }
                     break;
-
 
                 case MarqueeMode.Square:
-                    float w1 = Math.Abs(start.X - end.X);
-                    float h1 = Math.Abs(start.Y - end.Y);
-                    float square = (w1 + h1) / 2;
+                    {
+                        float w = Math.Abs(start.X - end.X);
+                        float h = Math.Abs(start.Y - end.Y);
+                        float square = (w + h) / 2;
 
-                    this.X = (end.X > start.X) ? start.X : start.X - square;
-                    this.Y = (end.Y > start.Y) ? start.Y : start.Y - square;                     
-                    this.Width = square;
-                    this.Height = square;
+                        this.X = (end.X > start.X) ? start.X : start.X - square;
+                        this.Y = (end.Y > start.Y) ? start.Y : start.Y - square;
+                        this.Width = square;
+                        this.Height = square;
+                    }
                     break;
-
 
                 case MarqueeMode.Center:
-                    float w2 = Math.Abs(start.X - end.X);
-                    float h2 = Math.Abs(start.Y - end.Y);
+                    {
+                        float w = Math.Abs(start.X - end.X);
+                        float h = Math.Abs(start.Y - end.Y);
 
-                    this.X = start.X - w2;
-                    this.Y = start.Y - h2;
-                    this.Width = 2 * w2;
-                    this.Height = 2 * h2;
+                        this.X = start.X - w;
+                        this.Y = start.Y - h;
+                        this.Width = 2 * w;
+                        this.Height = 2 * h;
+                    }
                     break;
-
 
                 case MarqueeMode.SquareAndCenter:
-                    float square3 = Math.Abs(start.X - end.X) + Math.Abs(start.Y - end.Y);
-                    float squareHalf3 = square3 / 2;
+                    {
+                        float square3 = Math.Abs(start.X - end.X) + Math.Abs(start.Y - end.Y);
+                        float squareHalf3 = square3 / 2;
 
-                    this.X = start.X - squareHalf3;
-                    this.Y = start.Y - squareHalf3;
-                    this.Width = square3;
-                    this.Height = square3;
+                        this.X = start.X - squareHalf3;
+                        this.Y = start.Y - squareHalf3;
+                        this.Width = square3;
+                        this.Height = square3;
+                    }
                     break;
 
-
                 default:
-                    this.X = 0.0f;
-                    this.Y = 0.0f;
-                    this.Width = 0.0f;
-                    this.Height = 0.0f;
+                    {
+                        this.X = 0.0f;
+                        this.Y = 0.0f;
+                        this.Width = 0.0f;
+                        this.Height = 0.0f;
+                    }
                     break;
             }
         }
@@ -98,6 +104,8 @@ namespace Retouch_Photo.Models
         public Vector2 RightTop => new Vector2(this.Right, this.Top);
         public Vector2 RightBottom => new Vector2(this.Right, this.Bottom);
         public Vector2 LeftBottom => new Vector2(this.Left, this.Bottom);
-        
+
+        public Vector2 Center => new Vector2(this.X+this.Width/2, this.Y+this.Height/2);
+
     }
 }

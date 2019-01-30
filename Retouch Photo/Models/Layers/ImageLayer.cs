@@ -9,6 +9,8 @@ using Windows.Graphics.Effects;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI;
+using Retouch_Photo.Library;
+using static Retouch_Photo.Library.TransformController;
 
 namespace Retouch_Photo.Models.Layers
 {
@@ -58,7 +60,7 @@ namespace Retouch_Photo.Models.Layers
 
             return new ImageLayer
             {
-                Transformer = Transformer.CreateFromSize(width,height),
+                Transformer = Transformer.CreateFromSize(width, height, new Vector2(width / 2, height / 2)),
                 Image = renderTarget
             };
         }
@@ -67,7 +69,7 @@ namespace Retouch_Photo.Models.Layers
         {
             return new ImageLayer
             {
-                Transformer = Transformer.CreateFromSize(width, height),
+                Transformer = Transformer.CreateFromSize(width, height, new Vector2(width / 2, height / 2)),
                 Image = bitmap
             };
         }

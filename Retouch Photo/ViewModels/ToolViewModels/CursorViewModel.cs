@@ -1,13 +1,11 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
+using Retouch_Photo.Library;
 using Retouch_Photo.Models;
-using Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels;
-using Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels.ScaleViewModels.Scale1ViewModels;
-using Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels.ScaleViewModels.Scale2ViewModels;
-using Retouch_Photo.ViewModels.ToolViewModels.CursorViewModels.SkewViewModels;
 using System.Collections.Generic;
 using System.Numerics;
 using Windows.UI;
+using static Retouch_Photo.Library.TransformController;
 
 namespace Retouch_Photo.ViewModels.ToolViewModels
 {
@@ -21,35 +19,12 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
          
 
         Layer CurrentLayer;
-
-        CursorMode Mode = CursorMode.None;
-        readonly Dictionary<CursorMode, IToolViewModel> ViewModelDictionary = new Dictionary<CursorMode, IToolViewModel>
-        {
-            {CursorMode.None,  new NoneViewModel()},
-            {CursorMode.Translation,  new TranslationViewModel()},
-            {CursorMode.Rotation,  new RotationViewModel()},
-
-            {CursorMode.SkewLeft,  new CursorViewModels.SkewViewModels.LeftViewModel()},
-            {CursorMode.SkewTop,  new CursorViewModels.SkewViewModels.TopViewModel()},
-            {CursorMode.SkewRight,  new CursorViewModels.SkewViewModels.RightViewModel()},
-            {CursorMode.SkewBottom,  new CursorViewModels.SkewViewModels.BottomViewModel()},
-
-            {CursorMode.ScaleLeft,  new CursorViewModels.ScaleViewModels.Scale1ViewModels.LeftViewModel()},
-            {CursorMode.ScaleTop,  new CursorViewModels.ScaleViewModels.Scale1ViewModels.TopViewModel()},
-            {CursorMode.ScaleRight,  new CursorViewModels.ScaleViewModels.Scale1ViewModels.RightViewModel()},
-            {CursorMode.ScaleBottom,  new CursorViewModels.ScaleViewModels.Scale1ViewModels.BottomViewModel()},
-
-            {CursorMode.ScaleLeftTop,  new CursorViewModels.ScaleViewModels.Scale2ViewModels.LeftTopViewModel()},
-            {CursorMode.ScaleRightTop,  new CursorViewModels.ScaleViewModels.Scale2ViewModels.RightTopViewModel()},
-            {CursorMode.ScaleRightBottom,  new CursorViewModels.ScaleViewModels.Scale2ViewModels.RightBottomViewModel()},
-            {CursorMode.ScaleLeftBottom,  new CursorViewModels.ScaleViewModels.Scale2ViewModels.LeftBottomViewModel()},
-        };
-
+        Controller Controller = new Controller();
+      
         /// <summary> 蓝色选框 </summary>
         bool IsCursorBox;
         Vector2 StartPoint;
         Vector2 EndPoint;
-
 
 
         //@Override
@@ -66,17 +41,18 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         public override void Start(Vector2 point)
         {
             this.CurrentLayer = this.ViewModel.CurrentLayer;
+            Matrix3x2 matrix = this.CurrentLayer.Transformer.Matrix * this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix;
 
 
 
             //CursorMode
             if (this.CurrentLayer != null)
             {
-                this.Mode = Transformer.ContainsNodeMode(point, this.CurrentLayer.Transformer, this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix, this.IsSkew);
-
-                if (this.Mode!= CursorMode.None)
+                this.Controller.Mode = Transformer.ContainsNodeMode(point, this.CurrentLayer.Transformer, matrix);
+                
+                if (this.Controller.Mode!= TransformerMode.None)
                 {
-                    this.ViewModelDictionary[this.Mode].Start(point, this.CurrentLayer);
+                    this.Controller.ControllerDictionary[this.Controller.Mode].Start(point, this.CurrentLayer, matrix,this.ViewModel.MatrixTransformer.Scale);
                     return;
                 }
             }
@@ -92,9 +68,9 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
                 {
                     this.CurrentLayer = layer;
                     this.ViewModel.CurrentLayer = layer;
-                    this.Mode = CursorMode.Translation;
+                    this.Controller.Mode = TransformerMode.Translation;
 
-                    this.ViewModelDictionary[this.Mode].Start(point, this.CurrentLayer);
+                    this.Controller.ControllerDictionary[this.Controller.Mode].Start(point, this.CurrentLayer, matrix, this.ViewModel.MatrixTransformer.Scale);
                     return;
                 }
             }
@@ -109,6 +85,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         public override void Delta(Vector2 point)
         {
             this.EndPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+            Matrix3x2 matrix = this.CurrentLayer.Transformer.Matrix * this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix;
 
             if (this.IsCursorBox)
             {
@@ -118,7 +95,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
             if (this.CurrentLayer != null)
             {
-                this.ViewModelDictionary[this.Mode].Delta(point, this.CurrentLayer);
+                this.Controller.ControllerDictionary[this.Controller.Mode].Delta(point, this.CurrentLayer, matrix, this.ViewModel.MatrixTransformer.Scale);
                 this.ViewModel.Invalidate();
                 return;
             }
@@ -127,6 +104,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         public override void Complete(Vector2 point)
         {
             this.EndPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+            Matrix3x2 matrix = this.CurrentLayer.Transformer.Matrix * this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix;
 
             if (this.IsCursorBox)
             {
@@ -146,10 +124,10 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             else
             {
                 this.CurrentLayer.Invalidate();
-                this.ViewModelDictionary[this.Mode].Complete(point, this.CurrentLayer);
+                this.Controller.ControllerDictionary[this.Controller.Mode].Complete(point, this.CurrentLayer, matrix, this.ViewModel.MatrixTransformer.Scale);
             }
 
-            this.Mode = CursorMode.None;
+            this.Controller.Mode = TransformerMode.None;
             this.ViewModel.Invalidate();
         }
         
@@ -174,7 +152,8 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
             if (this.CurrentLayer != null)
             {
-                this.ViewModelDictionary[this.Mode].Draw(ds, this.CurrentLayer);
+                Transformer.DrawBoundNodes(ds, this.CurrentLayer.Transformer, this.CurrentLayer.Transformer.Matrix * this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
+               // this.Controller.ControllerDictionary[this.Controller.Mode].Draw(ds, this.CurrentLayer);
             }
         }
 

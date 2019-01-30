@@ -21,6 +21,8 @@ using Windows.UI;
 using Microsoft.Graphics.Canvas.UI;
 using Retouch_Photo.Models.Adjustments;
 using Retouch_Photo.Models.Blends;
+using Retouch_Photo.Library;
+using static Retouch_Photo.Library.TransformController;
 
 namespace Retouch_Photo.Models
 {
