@@ -494,32 +494,11 @@ namespace Retouch_Photo.Library
 
             public void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
             {
-                Vector2 vector = this.GetTransformVector(point, layer, matrix);
-
-                this.StartPostion = vector;
+                this.StartPostion = point / scale;
                 this.StartTransformerPostion = layer.Transformer.Postion;
             }
-            public void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
-            {
-                Vector2 vector = this.GetTransformVector(point, layer, matrix);
-
-                layer.Transformer.Postion = vector + (this.StartTransformerPostion - this.StartPostion);
-            }
+            public void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale) => layer.Transformer.Postion = (point / scale) + (this.StartTransformerPostion - this.StartPostion);
             public void Complete(Vector2 point, Layer layer, Matrix3x2 matrix, float scale) { }
-
-            /// <summary>
-            /// Get the transformed vector
-            /// </summary>
-            /// <param name="transformMatrix"> Transform matrix of Canvas (If there is).</param>
-            /// <returns></returns>
-            private Vector2 GetTransformVector(Vector2 point, Layer layer, Matrix3x2 transformMatrix)
-            {
-                Matrix3x2 matrix = layer.Transformer.Matrix;
-
-                if (matrix == transformMatrix) return point;
-
-                return new Vector2(point.X * matrix.M11 / matrix.M11, point.Y * matrix.M22 / matrix.M22);
-            }
         }
 
         /// <summary> Rotation </summary>
@@ -541,7 +520,6 @@ namespace Retouch_Photo.Library
             public void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
             {
                 this.Radian = Transformer.VectorToRadians(point - this.Center);
-
                 float radian = this.StartTransformerRadian - this.StartRadian + this.Radian;
 
                 layer.Transformer.Radian = TransformController.IsStepFrequency ? Transformer.RadiansStepFrequency(radian) : radian;
@@ -574,8 +552,6 @@ namespace Retouch_Photo.Library
             public void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
             {
                 this.StartTransformer.CopyWith(layer.Transformer);
-
-                //Center
                 this.Center = layer.Transformer.TransformCenter(matrix);
 
                 this.LineA = this.GetLineA(layer, matrix);
@@ -586,79 +562,99 @@ namespace Retouch_Photo.Library
         }
 
 
-        /// <summary> SkewVertical (Top Bottom) </summary>
-        protected abstract class SkewVerticalController : SkewController, IController
-        {
-            public new void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
-            {
-                Vector2 footPoint = Transformer.FootPoint(point, base.LineA, base.LineB);
-                float radians = Transformer.VectorToRadians(footPoint - this.Center);
-
-                float value = -radians + this.StartTransformer.Radian + Transformer.PiHalf;
-                layer.Transformer.Skew = value;
-            }
-        }
-        private class SkewTopController : SkewVerticalController
-        {
-            public override Vector2 GetLineA(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformLeftTop(matrix);
-            public override Vector2 GetLineB(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformRightTop(matrix);
-        }
-        private class SkewBottomController : SkewVerticalController
-        {
-            public override Vector2 GetLineA(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformLeftBottom(matrix);
-            public override Vector2 GetLineB(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformRightBottom(matrix);
-        }
-
-
         /// <summary> SkewHorizontal (Left Right)</summary>
         protected abstract class SkewHorizontalController : SkewController, IController
         {
             //@Override
-            public abstract void SetRadian(Layer layer, float skew);
+            public abstract float GetRadian(float skew);
 
-            /// <summary> Visually really Scale (For Skew, Scale is't really Scale.) </summary>
-            Vector2 RealScale;
+            /// <summary> Visually really XScale (For Skew, XScale is't really XScale.) </summary>
+            float RealXScale;
+            /// <summary> Visually really YScale (For Skew, YScale is't really YScale.) </summary>
+            float RealYScale;
+
+            bool IsFlipHorizontal;
+            bool IsFlipVertical;
 
             public new void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
             {
                 base.Start(point, layer, matrix, scale);
 
                 //RealScale
-                float value = this.StartTransformer.Skew;
-                float cos = (float)Math.Abs(Math.Cos(value));
-                this.RealScale = new Vector2(this.StartTransformer.XScale * cos, this.StartTransformer.YScale / cos);
+                float value = base.StartTransformer.Skew;
+                float cos = (float)Math.Cos(value);
+                this.RealXScale = Math.Abs(base.StartTransformer.XScale * cos);
+                this.RealYScale = Math.Abs(base.StartTransformer.YScale / cos);
+
+                //Flip
+                this.IsFlipHorizontal = base.StartTransformer.XScale < 0;
+                this.IsFlipVertical = base.StartTransformer.YScale < 0;
             }
             public new void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
             {
                 Vector2 footPoint = Transformer.FootPoint(point, base.LineA, base.LineB);
-                float radians = Transformer.VectorToRadians(footPoint - this.Center);
+                float radians = Transformer.VectorToRadians(footPoint - base.Center) % Transformer.PI;
 
                 //Radian
-                this.SetRadian(layer, radians);
+                layer.Transformer.Radian = (!this.IsFlipHorizontal) ?
+                       this.GetRadian(radians) :
+                       this.GetRadian(radians) + Transformer.PI;
 
                 //Skew
-                float value = radians + (this.StartTransformer.Skew - this.StartTransformer.Radian);
-                layer.Transformer.Skew = value;
+                float value = radians + (base.StartTransformer.Skew - base.StartTransformer.Radian);
+                layer.Transformer.Skew = value % Transformer.PI;
 
                 //Scale
-                float cos = (float)Math.Abs(Math.Cos(value));
-                layer.Transformer.XScale = this.RealScale.X / cos;
-                layer.Transformer.YScale = this.RealScale.Y * cos;
+                float cos = (float)Math.Cos(value);
+
+                layer.Transformer.XScale = (!this.IsFlipHorizontal) ?
+                    Math.Abs(this.RealXScale / cos) :
+                    -Math.Abs(this.RealXScale / cos);
+
+                layer.Transformer.YScale = (!this.IsFlipVertical) ?
+                    Math.Abs(this.RealYScale * cos) :
+                    layer.Transformer.YScale = -Math.Abs(this.RealYScale * cos);
             }
         }
+        /// <summary> SkewLeft </summary>
         private class SkewLeftController : SkewHorizontalController
         {
             public override Vector2 GetLineA(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformLeftTop(matrix);
             public override Vector2 GetLineB(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformLeftBottom(matrix);
-
-            public override void SetRadian(Layer layer, float skew) => layer.Transformer.Radian = skew + Transformer.PI;
+            public override float GetRadian(float skew) => (skew + Transformer.PI) % Transformer.PI;
         }
+        /// <summary> SkewRight </summary>
         private class SkewRightController : SkewHorizontalController
         {
             public override Vector2 GetLineA(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformRightTop(matrix);
             public override Vector2 GetLineB(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformRightBottom(matrix);
+            public override float GetRadian(float skew) => skew % Transformer.PI;
+        }
 
-            public override void SetRadian(Layer layer, float skew) => layer.Transformer.Radian = skew;
+
+        /// <summary> SkewVertical (Top Bottom) </summary>
+        protected abstract class SkewVerticalController : SkewController, IController
+        {
+            public new void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
+            {
+                Vector2 footPoint = Transformer.FootPoint(point, base.LineA, base.LineB);
+                float radians = Transformer.VectorToRadians(footPoint - base.Center);
+
+                float value = -radians + base.StartTransformer.Radian + Transformer.PiHalf;
+                layer.Transformer.Skew = value;
+            }
+        }
+        /// <summary> SkewTop </summary>
+        private class SkewTopController : SkewVerticalController
+        {
+            public override Vector2 GetLineA(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformLeftTop(matrix);
+            public override Vector2 GetLineB(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformRightTop(matrix);
+        }
+        /// <summary> SkewBottom </summary>
+        private class SkewBottomController : SkewVerticalController
+        {
+            public override Vector2 GetLineA(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformLeftBottom(matrix);
+            public override Vector2 GetLineB(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformRightBottom(matrix);
         }
 
 
@@ -689,6 +685,14 @@ namespace Retouch_Photo.Library
             //                                         2m                                           1m                          1m
             //————•————————————————•————————•————————•————
             //              S                                                          D                            C                             P
+
+
+            public VectorLine(Vector2 point, Vector2 diagonal)
+            {
+                this.Diagonal = diagonal;
+                this.Symmetric = diagonal + diagonal - point;
+                this.Center = (point + diagonal) / 2;
+            }
         }
 
         /// <summary> Distance of points on the [VectorLine]. </summary>
@@ -706,6 +710,21 @@ namespace Retouch_Photo.Library
             public float FS;
             /// <summary> Distance between [Point] and [Diagonal Point] . </summary>
             public float PD;
+
+            public static VectorDistance GetVectorDistance(Vector2 footPoint, Vector2 point, VectorLine line) => new VectorDistance
+            {
+                FD = Vector2.Distance(footPoint, line.Diagonal),
+                FP = Vector2.Distance(footPoint, point),
+                FC = Vector2.Distance(footPoint, line.Center),
+                PC = Vector2.Distance(point, line.Center),
+                FS = Vector2.Distance(footPoint, line.Symmetric),
+                PD = Vector2.Distance(point, line.Diagonal),
+            };
+
+            /// <summary> F in the left of the P ?</summary>
+            /// <param name="distance"> The distance </param>
+            /// <returns></returns>
+            public static bool IsReverse(VectorDistance distance) => (distance.FD < distance.PD) ? true : (distance.FD < distance.FP);
         }
 
         /// <summary> It has four float.:  XCos, XSin, YCos, YSin; </summary>
@@ -736,8 +755,6 @@ namespace Retouch_Photo.Library
             }
 
 
-
-
             public static VectorSinCos Reverse(VectorSinCos value, bool isReverse)
             {
                 if (isReverse) return value;
@@ -760,17 +777,19 @@ namespace Retouch_Photo.Library
         public abstract class ScaleController : IController
         {
             //@Override
-            public abstract Vector2 GetPoint(Layer layer, Matrix3x2 matrix);
-            public abstract Vector2 GetDiagonal(Layer layer, Matrix3x2 matrix);
-            public abstract void SetPostion(Layer layer, Transformer startTransformer, VectorSinCos sinCos, float scale);
+            public abstract Vector2 GetPoint(Transformer startTransformer, Matrix3x2 matrix);
+            public abstract Vector2 GetDiagonal(Transformer startTransformer, Matrix3x2 matrix);
+            public abstract Vector2 GetPostion(VectorSinCos sinCos);
 
 
             protected Transformer StartTransformer;
+            protected VectorSinCos SinCos;
 
             protected Vector2 Point;
             protected VectorLine Line;
 
-            protected VectorSinCos SinCos;
+            protected bool IsFlipHorizontal;
+            protected bool IsFlipVertical;
 
 
             public void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
@@ -784,19 +803,19 @@ namespace Retouch_Photo.Library
                 float y = -layer.Transformer.Radian + layer.Transformer.Skew;
                 this.SinCos.YCos = (float)Math.Cos(y);
                 this.SinCos.YSin = (float)Math.Sin(y);
+
+                this.IsFlipHorizontal = this.StartTransformer.XScale < 0;
+                this.IsFlipVertical = this.StartTransformer.YScale < 0;
             }
             public void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale) { }
             public void Complete(Vector2 point, Layer layer, Matrix3x2 matrix, float scale) { }
 
-            public VectorDistance GetVectorDistance(Vector2 footPoint, Vector2 point, VectorLine line) => new VectorDistance
+            protected void SetPostion(Layer layer, VectorSinCos sinCos, float scale)
             {
-                FD = Vector2.Distance(footPoint, line.Diagonal),
-                FP = Vector2.Distance(footPoint, point),
-                FC = Vector2.Distance(footPoint, line.Center),
-                PC = Vector2.Distance(point, line.Center),
-                FS = Vector2.Distance(footPoint, line.Symmetric),
-                PD = Vector2.Distance(point, line.Diagonal),
-            };
+                sinCos = VectorSinCos.Reverse(sinCos, this.IsFlipHorizontal, this.IsFlipVertical);
+                Vector2 vector = this.GetPostion(sinCos);//@Override
+                layer.Transformer.Postion = this.StartTransformer.Postion + vector / scale;
+            }
         }
 
 
@@ -809,162 +828,108 @@ namespace Retouch_Photo.Library
         /// <summary> ScaleAround (Left Top Right Bottom) </summary>
         public abstract class ScaleAroundController : ScaleController, IController
         {
-            bool IsCenter => TransformController.IsCenter;
-            bool IsRatio => TransformController.IsRatio;
-
             //@Override
-            public abstract void SetScale(Layer layer, float scale, bool isRatio);
-            public abstract void SetFlip(Layer layer, bool isFlip);
-
+            public abstract void SetScale(Layer layer, float scale, bool isFlip, bool isRatio);
 
             public new void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
             {
                 base.Start(point, layer, matrix, scale);
-                base.Point = this.GetPoint(layer, matrix);
+                base.Point = this.GetPoint(layer.Transformer, matrix);//@Override
 
                 //Diagonal line
-                Vector2 diagonal = this.GetDiagonal(layer, matrix);
-                base.Line = new VectorLine
-                {
-                    Diagonal = diagonal,
-                    Symmetric = diagonal + diagonal - base.Point,
-                    Center = layer.Transformer.TransformCenter(matrix)
-                };
+                base.Line = new VectorLine(base.Point, this.GetDiagonal(layer.Transformer, matrix));  //@Override
             }
             public new void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
             {
                 //Point on diagonal line
                 Vector2 footPoint = Transformer.FootPoint(point, base.Line.Diagonal, base.Point);
-                VectorDistance distance = base.GetVectorDistance(footPoint, base.Point, this.Line);
+                VectorDistance distance = VectorDistance.GetVectorDistance(footPoint, base.Point, base.Line);
 
-                //Scale with Center
-                if (this.IsCenter)
+                if (TransformController.IsCenter)
                 {
                     //Scale
-                    float scale1 = distance.FC / distance.PC;
-                    this.SetScale(layer, scale1, this.IsRatio);
-
-                    //Flip
+                    float xyScale = distance.FC / distance.PC;
+                    //Flip             
                     bool isFlip = distance.FD > distance.FP;
-                    this.SetFlip(layer, isFlip);
+                    //@Override
+                    this.SetScale(layer, xyScale, isFlip, TransformController.IsRatio);
                 }
-
-                //Scale with Side
                 else
                 {
                     //Scale
-                    float scale1 = distance.FD / distance.PD;
-                    this.SetScale(layer, scale1, this.IsRatio);
-
+                    float xyScale = distance.FD / distance.PD;
                     //Flip
                     bool isFlip = distance.FS > distance.FP;
-                    this.SetFlip(layer, isFlip);
+                    //@Override
+                    this.SetScale(layer, xyScale, isFlip, TransformController.IsRatio);
 
                     //Postion
                     float move = distance.FP / 2;
-                    this.SetReversePostion(layer, distance, new VectorSinCos
+                    bool isReverse = VectorDistance.IsReverse(distance);
+                    VectorSinCos sinCos = new VectorSinCos
                     (
-                            xCos: base.SinCos.XCos * move,
-                            xSin: base.SinCos.XSin * move,
-
-                            yCos: base.SinCos.YCos * move,
-                            ySin: base.SinCos.YSin * move
-                    ), scale);
+                         base.SinCos.XCos * move, base.SinCos.XSin * move,
+                         base.SinCos.YCos * move, base.SinCos.YSin * move
+                    );
+                    base.SetPostion(layer, VectorSinCos.Reverse(sinCos, isReverse), scale);//@Override
                 }
             }
+        }
 
 
-            //Postion: Reverse
-            public void SetReversePostion(Layer layer, VectorDistance distance, VectorSinCos sinCos, float scale)
+        /// <summary> ScaleHorizontal (Left Right) </summary>
+        public abstract class ScaleHorizontalController : ScaleAroundController
+        {
+            public override void SetScale(Layer layer, float scale, bool isFlip, bool isRatio)
             {
-                bool isReverse = distance.FD < distance.PD ? true : distance.FD < distance.FP;//F in the left of the P ?
+                layer.Transformer.XScale = isFlip ?
+                    base.StartTransformer.XScale * scale :
+                    base.StartTransformer.XScale * -scale;
 
-                this.SetPostion(layer, this.StartTransformer, VectorSinCos.Reverse(sinCos, isReverse), scale);
+                if (isRatio) layer.Transformer.YScale = base.StartTransformer.YScale * scale;
             }
         }
-        public class ScaleLeftController : ScaleAroundController
+        /// <summary> ScaleLeft </summary>
+        public class ScaleLeftController : ScaleHorizontalController
         {
-            public override Vector2 GetPoint(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformLeft(matrix);
-            public override Vector2 GetDiagonal(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformRight(matrix);
+            public override Vector2 GetPoint(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformLeft(matrix);
+            public override Vector2 GetDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformRight(matrix);
+            public override Vector2 GetPostion(VectorSinCos sinCos) => new Vector2(sinCos.XCos, -sinCos.XSin);
+        }
+        /// <summary> ScaleRight </summary>
+        public class ScaleRightController : ScaleHorizontalController
+        {
+            public override Vector2 GetPoint(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformRight(matrix);
+            public override Vector2 GetDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformLeft(matrix);
+            public override Vector2 GetPostion(VectorSinCos sinCos) => new Vector2(-sinCos.XCos, sinCos.XSin);
+        }
 
-            public override void SetScale(Layer layer, float scale, bool isRatio)
+
+        /// <summary> ScaleHorizontal (Left Right) </summary>
+        public abstract class ScaleVerticalController : ScaleAroundController
+        {
+            public override void SetScale(Layer layer, float scale, bool isFlip, bool isRatio)
             {
-                layer.Transformer.XScale = this.StartTransformer.XScale * scale;
-                if (isRatio) layer.Transformer.YScale = this.StartTransformer.YScale * scale;
-            }
-            public override void SetFlip(Layer layer, bool isFlip)
-            {
-                bool flip = (this.StartTransformer.XScale < 0) == isFlip;
-                layer.Transformer.XScale = flip ? -layer.Transformer.XScale : layer.Transformer.XScale;
-            }
-            public override void SetPostion(Layer layer, Transformer startTransformer, VectorSinCos sinCos, float scale)
-            {
-                layer.Transformer.Postion.X = startTransformer.Postion.X + sinCos.XCos / scale;
-                layer.Transformer.Postion.Y = startTransformer.Postion.Y - sinCos.XSin / scale;
+                layer.Transformer.YScale = isFlip ?
+                    base.StartTransformer.YScale * scale :
+                    base.StartTransformer.YScale * -scale;
+
+                if (isRatio) layer.Transformer.XScale = base.StartTransformer.XScale * scale;
             }
         }
-        public class ScaleTopController : ScaleAroundController
+        /// <summary> ScaleTop </summary>
+        public class ScaleTopController : ScaleVerticalController
         {
-            public override Vector2 GetPoint(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformTop(matrix);
-            public override Vector2 GetDiagonal(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformBottom(matrix);
-
-            public override void SetScale(Layer layer, float scale, bool isRatio)
-            {
-                if (isRatio) layer.Transformer.XScale = this.StartTransformer.XScale * scale;
-                layer.Transformer.YScale = this.StartTransformer.YScale * scale;
-            }
-            public override void SetFlip(Layer layer, bool isFlip)
-            {
-                bool flip = (this.StartTransformer.YScale < 0) == isFlip;
-                layer.Transformer.YScale = flip ? -layer.Transformer.YScale : layer.Transformer.YScale;
-            }
-            public override void SetPostion(Layer layer, Transformer startTransformer, VectorSinCos sinCos, float scale)
-            {
-                layer.Transformer.Postion.X = startTransformer.Postion.X + sinCos.YSin / scale;
-                layer.Transformer.Postion.Y = startTransformer.Postion.Y + sinCos.YCos / scale;
-            }
+            public override Vector2 GetPoint(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformTop(matrix);
+            public override Vector2 GetDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformBottom(matrix);
+            public override Vector2 GetPostion(VectorSinCos sinCos) => new Vector2(sinCos.YSin, sinCos.YCos);
         }
-        public class ScaleRightController : ScaleAroundController
+        /// <summary> ScaleBottom </summary>
+        public class ScaleBottomController : ScaleVerticalController
         {
-            public override Vector2 GetPoint(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformRight(matrix);
-            public override Vector2 GetDiagonal(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformLeft(matrix);
-
-            public override void SetScale(Layer layer, float scale, bool isRatio)
-            {
-                layer.Transformer.XScale = this.StartTransformer.XScale * scale;
-                if (isRatio) layer.Transformer.YScale = this.StartTransformer.YScale * scale;
-            }
-            public override void SetFlip(Layer layer, bool isFlip)
-            {
-                bool flip = (this.StartTransformer.XScale < 0) == isFlip;
-                layer.Transformer.XScale = flip ? -layer.Transformer.XScale : layer.Transformer.XScale;
-            }
-            public override void SetPostion(Layer layer, Transformer startTransformer, VectorSinCos sinCos, float scale)
-            {
-                layer.Transformer.Postion.X = startTransformer.Postion.X - sinCos.XCos / scale;
-                layer.Transformer.Postion.Y = startTransformer.Postion.Y + sinCos.XSin / scale;
-            }
-        }
-        public class ScaleBottomController : ScaleAroundController
-        {
-            public override Vector2 GetPoint(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformBottom(matrix);
-            public override Vector2 GetDiagonal(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformTop(matrix);
-
-            public override void SetScale(Layer layer, float scale, bool isRatio)
-            {
-                if (isRatio) layer.Transformer.XScale = this.StartTransformer.XScale * scale;
-                layer.Transformer.YScale = this.StartTransformer.YScale * scale;
-            }
-            public override void SetFlip(Layer layer, bool isFlip)
-            {
-                bool flip = (this.StartTransformer.YScale < 0) == isFlip;
-                layer.Transformer.YScale = flip ? -layer.Transformer.YScale : layer.Transformer.YScale;
-            }
-            public override void SetPostion(Layer layer, Transformer startTransformer, VectorSinCos sinCos, float scale)
-            {
-                layer.Transformer.Postion.X = startTransformer.Postion.X - sinCos.YSin / scale;
-                layer.Transformer.Postion.Y = startTransformer.Postion.Y - sinCos.YCos / scale;
-            }
+            public override Vector2 GetPoint(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformBottom(matrix);
+            public override Vector2 GetDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformTop(matrix);
+            public override Vector2 GetPostion(VectorSinCos sinCos) => new Vector2(-sinCos.YSin, -sinCos.YCos);
         }
 
 
@@ -977,12 +942,9 @@ namespace Retouch_Photo.Library
         /// <summary> ScaleCorner (LeftTop RightTop RightBottom LeftBottom)</summary>
         public abstract class ScaleCornerController : ScaleController, IController
         {
-            bool IsCenter => TransformController.IsCenter;
-            bool IsRatio => TransformController.IsRatio;
-
             //@Override
-            public abstract Vector2 GetHorizontalDiagonal(Layer layer, Matrix3x2 matrix);
-            public abstract Vector2 GetVerticalDiagonal(Layer layer, Matrix3x2 matrix);
+            public abstract Vector2 GetHorizontalDiagonal(Transformer startTransformer, Matrix3x2 matrix);
+            public abstract Vector2 GetVerticalDiagonal(Transformer startTransformer, Matrix3x2 matrix);
 
             VectorLine HorizontalLine;
             VectorLine VerticalLine;
@@ -990,215 +952,137 @@ namespace Retouch_Photo.Library
             public new void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
             {
                 base.Start(point, layer, matrix, scale);
-                base.Point = this.GetPoint(layer, matrix);
+                base.Point = this.GetPoint(layer.Transformer, matrix);//@Override
 
                 //Diagonal line
-                Vector2 diagonal = this.GetDiagonal(layer, matrix);
-                this.Line = new VectorLine
-                {
-                    Diagonal = diagonal,
-                    Symmetric = diagonal + diagonal - base.Point,
-                    Center = layer.Transformer.TransformCenter(matrix)
-                };
-
-                //Horizontal line
-                Vector2 horizontalDiagonal = this.GetHorizontalDiagonal(layer, matrix);
-                this.HorizontalLine = new VectorLine
-                {
-                    Diagonal = horizontalDiagonal,
-                    Symmetric = horizontalDiagonal + horizontalDiagonal - base.Point,
-                    Center = (base.Point + horizontalDiagonal) / 2
-                };
-
-                //Vertical line
-                Vector2 verticalDiagonal = this.GetVerticalDiagonal(layer, matrix);
-                this.VerticalLine = new VectorLine
-                {
-                    Diagonal = verticalDiagonal,
-                    Symmetric = verticalDiagonal + verticalDiagonal - base.Point,
-                    Center = (base.Point + verticalDiagonal) / 2,
-                };
+                base.Line = new VectorLine(base.Point, this.GetDiagonal(layer.Transformer, matrix));//@Override
+                this.HorizontalLine = new VectorLine(base.Point, this.GetHorizontalDiagonal(layer.Transformer, matrix));//@Override
+                this.VerticalLine = new VectorLine(base.Point, this.GetVerticalDiagonal(layer.Transformer, matrix));//@Override
             }
 
 
             public new void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
             {
                 //Point on diagonal line
-                Vector2 footPoint = Transformer.FootPoint(point, this.Line.Diagonal, base.Point);
-                VectorDistance distance = base.GetVectorDistance(footPoint, base.Point, this.Line);
+                Vector2 footPoint = Transformer.FootPoint(point, base.Line.Diagonal, base.Point);
+                VectorDistance distance = VectorDistance.GetVectorDistance(footPoint, base.Point, base.Line);
 
-                Vector2 point2 = this.IsRatio ? footPoint : point;
+                Vector2 point2 = TransformController.IsRatio ? footPoint : point;
 
                 //Point on horizontal line
                 Vector2 horizontalFootPoint = Transformer.IntersectionPoint(base.Point, this.HorizontalLine.Diagonal, point2, point2 + this.VerticalLine.Diagonal - base.Point);
-                VectorDistance horizontalDistance = base.GetVectorDistance(horizontalFootPoint, base.Point, this.HorizontalLine);
+                VectorDistance horizontalDistance = VectorDistance.GetVectorDistance(horizontalFootPoint, base.Point, this.HorizontalLine);
 
                 //Point on vertical line
                 Vector2 verticalFootPoint = Transformer.IntersectionPoint(base.Point, this.VerticalLine.Diagonal, point2, point2 + this.HorizontalLine.Diagonal - base.Point);
-                VectorDistance verticalDistance = base.GetVectorDistance(verticalFootPoint, base.Point, this.VerticalLine);
+                VectorDistance verticalDistance = VectorDistance.GetVectorDistance(verticalFootPoint, base.Point, this.VerticalLine);
 
-
-                //Scale with Center
-                if (this.IsCenter)
+                if (TransformController.IsCenter)
                 {
-
-                    //Ratio
-                    if (this.IsRatio)
+                    if (TransformController.IsRatio)
                     {
                         //Scale
                         float scale1 = distance.FC / distance.PC;
-                        this.SetScale(layer, scale1, scale1);
-
                         //Flip              
                         bool isFlip = distance.FD > distance.FP;
-                        this.SetFlip(layer, isFlip, isFlip);
+                        //@Override
+                        this.SetScale(layer, scale1, scale1, isFlip, isFlip);
                     }
-                    //Free
                     else
                     {
                         //Scale
                         float xScale = horizontalDistance.FC / horizontalDistance.PC;
                         float yScale = verticalDistance.FC / verticalDistance.PC;
-                        this.SetScale(layer, xScale, yScale);
-
                         //Flip
                         bool isFlipHorizontal = horizontalDistance.FD > horizontalDistance.FP;
                         bool isFlipVertical = verticalDistance.FD > verticalDistance.FP;
-                        this.SetFlip(layer, isFlipHorizontal, isFlipVertical);
+                        //@Override
+                        this.SetScale(layer, xScale, yScale, isFlipHorizontal, isFlipVertical);
                     }
-
                 }
-
-
-                //Scale with Side
                 else
                 {
-
-                    //Ratio
-                    if (this.IsRatio)
+                    if (TransformController.IsRatio)
                     {
                         //Scale
                         float scale1 = distance.FD / distance.PD;
-                        this.SetScale(layer, scale1, scale1);
-
                         //Flip
                         bool isFlip = distance.FS > distance.FP;
-                        this.SetFlip(layer, isFlip, isFlip);
+                        //@Override
+                        this.SetScale(layer, scale1, scale1, isFlip, isFlip);
                     }
-                    //Free
                     else
                     {
                         //Scale
                         float xScale = horizontalDistance.FD / horizontalDistance.PD;
                         float yScale = verticalDistance.FD / verticalDistance.PD;
-                        this.SetScale(layer, xScale, yScale);
-
                         //Flip
                         bool isFlipHorizontal = horizontalDistance.FS > horizontalDistance.FP;
                         bool isFlipVertical = verticalDistance.FS > verticalDistance.FP;
-                        this.SetFlip(layer, isFlipHorizontal, isFlipVertical);
+                        //@Override
+                        this.SetScale(layer, xScale, yScale, isFlipHorizontal, isFlipVertical);
                     }
 
                     //Postion
                     float xMove = horizontalDistance.FP / 2;
                     float yMove = verticalDistance.FP / 2;
+                    bool isXReverse = VectorDistance.IsReverse(horizontalDistance);
+                    bool isYReverse = VectorDistance.IsReverse(verticalDistance);
                     VectorSinCos sinCos = new VectorSinCos
                     (
-                        base.SinCos.XCos * xMove, base.SinCos.XSin * xMove,
-                        base.SinCos.YCos * yMove, base.SinCos.YSin * yMove
+                         this.SinCos.XCos * xMove, this.SinCos.XSin * xMove,
+                         this.SinCos.YCos * yMove, this.SinCos.YSin * yMove
                     );
-                    sinCos = this.GetReversePostion(horizontalDistance, verticalDistance, sinCos);
-                    sinCos = this.GetFlipPostion(sinCos);
-                    this.SetPostion(layer, this.StartTransformer, sinCos, scale);
+                    base.SetPostion(layer, VectorSinCos.Reverse(sinCos, isXReverse, isYReverse), scale);
                 }
             }
 
-
-            //Scale
-            public void SetScale(Layer layer, float xScale, float yScale)
+            public void SetScale(Layer layer, float xScale, float yScale, bool isFlipHorizontal, bool isFlipVertical)
             {
-                layer.Transformer.XScale = this.StartTransformer.XScale * xScale;
-                layer.Transformer.YScale = this.StartTransformer.YScale * yScale;
-            }
-            //Flip
-            public void SetFlip(Layer layer, bool isFlipHorizontal, bool isFlipVertical)
-            {
-                bool flipHorizontal = (this.StartTransformer.XScale < 0) == isFlipHorizontal;
-                layer.Transformer.XScale = flipHorizontal ? -layer.Transformer.XScale : layer.Transformer.XScale;
+                layer.Transformer.XScale = (!isFlipHorizontal) ?
+                    base.StartTransformer.XScale * -xScale :
+                    base.StartTransformer.XScale * xScale;
 
-                bool flipVertical = (this.StartTransformer.YScale < 0) == isFlipVertical;
-                layer.Transformer.YScale = flipVertical ? -layer.Transformer.YScale : layer.Transformer.YScale;
-            }
-
-
-            //Postion: Reverse
-            public VectorSinCos GetReversePostion(VectorDistance horizontalDistance, VectorDistance verticalDistance, VectorSinCos sinCos)
-            {
-                bool isXReverse = horizontalDistance.FD < horizontalDistance.PD ? true : horizontalDistance.FD < horizontalDistance.FP;
-                bool isYReverse = verticalDistance.FD < verticalDistance.PD ? true : verticalDistance.FD < verticalDistance.FP;
-
-                return VectorSinCos.Reverse(sinCos, isXReverse, isYReverse);
-            }
-            //Postion: Flip
-            public VectorSinCos GetFlipPostion(VectorSinCos sinCos)
-            {
-                bool isFlipHorizontal = this.StartTransformer.XScale < 0;
-                bool isFlipVertical = this.StartTransformer.YScale < 0;
-
-                return VectorSinCos.Reverse(sinCos, isFlipHorizontal, isFlipVertical);
+                layer.Transformer.YScale = (!isFlipVertical) ?
+                    base.StartTransformer.YScale * -yScale :
+                    base.StartTransformer.YScale * yScale;
             }
         }
+        /// <summary> ScaleLeftTop </summary>
         public class ScaleLeftTopController : ScaleCornerController
         {
-            public override Vector2 GetPoint(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformLeftTop(matrix);
-            public override Vector2 GetDiagonal(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformRightBottom(matrix);
-            public override Vector2 GetHorizontalDiagonal(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformRightTop(matrix);
-            public override Vector2 GetVerticalDiagonal(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformLeftBottom(matrix);
-
-            public override void SetPostion(Layer layer, Transformer startTransformer, VectorSinCos sinCos, float scale)
-            {
-                layer.Transformer.Postion.X = startTransformer.Postion.X + (-sinCos.XCos - sinCos.YSin) / scale;
-                layer.Transformer.Postion.Y = startTransformer.Postion.Y + (sinCos.XSin - sinCos.YCos) / scale;
-            }
+            public override Vector2 GetPoint(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformLeftTop(matrix);
+            public override Vector2 GetDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformRightBottom(matrix);
+            public override Vector2 GetHorizontalDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformRightTop(matrix);
+            public override Vector2 GetVerticalDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformLeftBottom(matrix);
+            public override Vector2 GetPostion(VectorSinCos sinCos) => new Vector2((-sinCos.XCos - sinCos.YSin), (sinCos.XSin - sinCos.YCos));
         }
+        /// <summary> ScaleRightTop </summary>
         public class ScaleRightTopController : ScaleCornerController
         {
-            public override Vector2 GetPoint(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformRightTop(matrix);
-            public override Vector2 GetDiagonal(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformLeftBottom(matrix);
-            public override Vector2 GetHorizontalDiagonal(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformLeftTop(matrix);
-            public override Vector2 GetVerticalDiagonal(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformRightBottom(matrix);
-
-            public override void SetPostion(Layer layer, Transformer startTransformer, VectorSinCos sinCos, float scale)
-            {
-                layer.Transformer.Postion.X = startTransformer.Postion.X + (sinCos.XCos - sinCos.YSin) / scale;
-                layer.Transformer.Postion.Y = startTransformer.Postion.Y + (-sinCos.XSin - sinCos.YCos) / scale;
-            }
+            public override Vector2 GetPoint(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformRightTop(matrix);
+            public override Vector2 GetDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformLeftBottom(matrix);
+            public override Vector2 GetHorizontalDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformLeftTop(matrix);
+            public override Vector2 GetVerticalDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformRightBottom(matrix);
+            public override Vector2 GetPostion(VectorSinCos sinCos) => new Vector2((sinCos.XCos - sinCos.YSin), (-sinCos.XSin - sinCos.YCos));
         }
+        /// <summary> ScaleRightBottom </summary>
         public class ScaleRightBottomController : ScaleCornerController
         {
-            public override Vector2 GetPoint(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformRightBottom(matrix);
-            public override Vector2 GetDiagonal(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformLeftTop(matrix);
-            public override Vector2 GetHorizontalDiagonal(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformLeftBottom(matrix);
-            public override Vector2 GetVerticalDiagonal(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformRightTop(matrix);
-
-            public override void SetPostion(Layer layer, Transformer startTransformer, VectorSinCos sinCos, float scale)
-            {
-                layer.Transformer.Postion.X = startTransformer.Postion.X + (sinCos.XCos + sinCos.YSin) / scale;
-                layer.Transformer.Postion.Y = startTransformer.Postion.Y + (-sinCos.XSin + sinCos.YCos) / scale;
-            }
+            public override Vector2 GetPoint(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformRightBottom(matrix);
+            public override Vector2 GetDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformLeftTop(matrix);
+            public override Vector2 GetHorizontalDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformLeftBottom(matrix);
+            public override Vector2 GetVerticalDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformRightTop(matrix);
+            public override Vector2 GetPostion(VectorSinCos sinCos) => new Vector2((sinCos.XCos + sinCos.YSin), (-sinCos.XSin + sinCos.YCos));
         }
+        /// <summary> ScaleLeftBottom </summary>
         public class ScaleLeftBottomController : ScaleCornerController
         {
-            public override Vector2 GetPoint(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformLeftBottom(matrix);
-            public override Vector2 GetDiagonal(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformRightTop(matrix);
-            public override Vector2 GetHorizontalDiagonal(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformRightBottom(matrix);
-            public override Vector2 GetVerticalDiagonal(Layer layer, Matrix3x2 matrix) => layer.Transformer.TransformLeftTop(matrix);
-
-            public override void SetPostion(Layer layer, Transformer startTransformer, VectorSinCos sinCos, float scale)
-            {
-                layer.Transformer.Postion.X = startTransformer.Postion.X + (-sinCos.XCos + sinCos.YSin) / scale;
-                layer.Transformer.Postion.Y = startTransformer.Postion.Y + (sinCos.XSin + sinCos.YCos) / scale;
-            }
+            public override Vector2 GetPoint(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformLeftBottom(matrix);
+            public override Vector2 GetDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformRightTop(matrix);
+            public override Vector2 GetHorizontalDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformRightBottom(matrix);
+            public override Vector2 GetVerticalDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformLeftTop(matrix);
+            public override Vector2 GetPostion(VectorSinCos sinCos) => new Vector2((-sinCos.XCos + sinCos.YSin), (sinCos.XSin + sinCos.YCos));
         }
 
 
