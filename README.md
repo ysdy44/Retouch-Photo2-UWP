@@ -4,7 +4,7 @@
 
 
 ## Function description
-![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/master/ScreenShot/2019.1.11.PNG)
+![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/Retouch_Designer/ScreenShot/2019.1.11.PNG)
 Simple and free photo retouching tools,can transform,adjustment, shear,filling images,support layer,the selecti on. If you think that the PS is too complex might as well try.
 
 
@@ -24,14 +24,14 @@ Simple and free photo retouching tools,can transform,adjustment, shear,filling i
 
 ## History Screenshot
 2018-12-11-Rectangle
-![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/master/ScreenShot/2018-12-11-Rectangle.gif)
+![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/Retouch_Designer/ScreenShot/2018-12-11-Rectangle.gif)
 
 2018-12-11-CursorTool-Scale-Transform
-![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/master/ScreenShot/2018-12-21-Scale.gif)
+![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/Retouch_Designer/ScreenShot/2018-12-21-Scale.gif)
 
 
 2018-12-24-Adjustment
-![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/master/ScreenShot/2018-12-24-Adjustment.gif)
+![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/Retouch_Designer/ScreenShot/2018-12-24-Adjustment.gif)
 
 
 ## Old version
