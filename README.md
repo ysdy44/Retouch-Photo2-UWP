@@ -1,6 +1,6 @@
 # Retouch-Photo-UWP-2
 
- In development, please look forward to......（Branch:Retouch_Desgin,not Branch:master）
+ In development, please look forward to......
 
 
 ## Function description
