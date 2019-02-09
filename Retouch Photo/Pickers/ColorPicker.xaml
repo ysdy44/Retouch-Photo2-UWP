@@ -1,20 +1,17 @@
 ﻿<UserControl
     x:Class="Retouch_Photo.Pickers.ColorPicker"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Retouch_Photo.Pickers"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:Retouch_Photo.Pickers"
     mc:Ignorable="d"
     d:DesignHeight="270"
     d:DesignWidth="200">
 
 
     <UserControl.Resources>
-
-        <!--Color-->
         <SolidColorBrush x:Name="SolidColorBrushName" x:Key="SolidColorBrushKey" Color="White"/>
-
     </UserControl.Resources>
 
 
@@ -24,28 +21,40 @@
         <Grid Height="40">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="30"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Grid>
-                <Ellipse x:Name="Ellipse" Width="22" Height="22" Fill="{StaticResource SolidColorBrushKey}" />
+            <Grid >
+                <Ellipse Width="22" Height="22" Fill="{StaticResource SolidColorBrushKey}" />
                 <Ellipse StrokeThickness="4" Width="25" Height="25" Stroke="Gray"/>
                 <Ellipse StrokeThickness="2" Width="23" Height="23" Stroke="White"/>
             </Grid>
-            <TextBlock Visibility="Collapsed" Grid.Column="1" Text="Color" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <local:StrawPicker x:Name="StrawPicker" Grid.Column="2"/>
+            <Button x:Name="HexOrStrawButton" Grid.Column="1" Width="Auto" Content="&#xECE7;" FontSize="18" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
+
+            <local:HexPicker x:Name="HexPicker" Grid.Column="2" Height="28"/>
+            <local:StrawPicker x:Name="StrawPicker" Grid.Column="2" HorizontalAlignment="Right"/>
         </Grid>
 
         <!--Toggle-->
-        <Grid Grid.Row="1" >
-            <ComboBox x:Name="ComboBox"  ItemsSource="{x:Bind Pickers}" Style="{ThemeResource AppComboBoxStyle}">
+        <Border Grid.Row="1" >
+            <ComboBox x:Name="ComboBox" ItemsSource="{x:Bind Pickers}" >
+                <ComboBox.Style>
+                    <Style TargetType="ComboBox">
+                        <Setter Property="Background" Value="{ThemeResource AppBarBackgroundThemeBrush}" />
+                        <Setter Property="BorderBrush" Value="{ThemeResource AppBarBorderThemeBrush}" />
+                        <Setter Property="BorderThickness" Value="1" />
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="VerticalAlignment" Value="Top" />
+                    </Style>
+                </ComboBox.Style>
                 <ComboBox.ItemTemplate>
                     <DataTemplate x:DataType="local:Picker">
                         <TextBlock Text="{x:Bind Name}"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-        </Grid>
+        </Border>
 
         <!--Body-->
         <ContentControl x:Name="ContentControl" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />

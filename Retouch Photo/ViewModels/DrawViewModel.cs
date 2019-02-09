@@ -29,6 +29,7 @@ using Microsoft.Graphics.Canvas.UI;
 using Windows.System;
 using Windows.UI.Core;
 using Retouch_Photo.Models.Tools;
+using static Retouch_Photo.Library.TransformController;
 
 namespace Retouch_Photo.ViewModels
 {
@@ -52,6 +53,15 @@ namespace Retouch_Photo.ViewModels
 
     public class DrawViewModel : INotifyPropertyChanged
     {
+        public Vector2 AAA;
+        public Vector2 BBB;
+        public Vector2 CCC;
+        public Vector2 DDD;
+
+        public Vector2 OOO;
+        public int XXX;
+        public int YYY;
+
         public DrawViewModel()
         {
             Window.Current.CoreWindow.KeyUp += this.KeyUp;
@@ -234,7 +244,18 @@ namespace Retouch_Photo.ViewModels
                 OnPropertyChanged(nameof(Color));
             }
         }
-        
+
+        /// <summary>变换</summary>    
+        private Transformer transformer;
+        public Transformer Transformer
+        {
+            get => this.transformer;
+            set
+            {
+                this.transformer = value;
+                OnPropertyChanged(nameof(Transformer));
+            }
+        }
 
         /// <summary>工具</summary>    
         private Tool tool = new NullTool();

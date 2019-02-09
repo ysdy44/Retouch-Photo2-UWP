@@ -1,8 +1,6 @@
-﻿using Retouch_Photo.Pickers;
-using Windows.UI;
+﻿using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo.Pickers
 {
@@ -25,6 +23,9 @@ namespace Retouch_Photo.Pickers
     {
         //Delegate
         public event ColorChangeHandler ColorChange;
+
+
+        #region Picker
 
 
         Picker[] Pickers = new Picker[]
@@ -66,52 +67,6 @@ namespace Retouch_Photo.Pickers
             },
         };
 
-
-        #region DependencyProperty
-
-
-        public Color _Color
-        {
-            get => this.SolidColorBrushName.Color;
-            set
-            {
-                if (
-                    value.A == this.AlphaPicker.Alpha &&
-                    value.R == this.SolidColorBrushName.Color.R &&
-                    value.G == this.SolidColorBrushName.Color.G &&
-                    value.B == this.SolidColorBrushName.Color.B
-                    )
-                    return;
-
-                this.SolidColorBrushName.Color = Color.FromArgb(255, value.R, value.G, value.B);
-
-                this.ColorChange?.Invoke(this, Color.FromArgb(this.AlphaPicker.Alpha, value.R, value.G, value.B));
-            }
-        }
-        public Color Color
-        {
-            get => Color.FromArgb(this.AlphaPicker.Alpha, this.SolidColorBrushName.Color.R, this.SolidColorBrushName.Color.G, this.SolidColorBrushName.Color.B);
-            set
-            {
-                if (value.A != this.AlphaPicker.Alpha) this.AlphaPicker.Alpha = value.A;
-
-                if (
-                    value.A != this.AlphaPicker.Alpha ||
-                    value.R != this.SolidColorBrushName.Color.R ||
-                    value.G != this.SolidColorBrushName.Color.G ||
-                    value.B != this.SolidColorBrushName.Color.B
-                    )
-                {
-                    Color color = Color.FromArgb(255, value.R, value.G, value.B);
-
-                    this.Pickers[this.Index].Control.SetColor(color);
-
-                    this.SolidColorBrushName.Color = color;
-                }
-            }
-        }
-
-
         private int index;
         public int Index
         {
@@ -138,26 +93,111 @@ namespace Retouch_Photo.Pickers
 
         #endregion
 
+
+        #region Color
+
+
+        /// <summary> Color of Color Picker </summary>
+        public Color Color
+        {
+            get => Color.FromArgb(this.AlphaPicker.Alpha, this.SolidColorBrushName.Color.R, this.SolidColorBrushName.Color.G, this.SolidColorBrushName.Color.B);
+            set
+            {
+                if (value.A != this.AlphaPicker.Alpha) this.AlphaPicker.Alpha = value.A;
+
+                if (value.A == this.AlphaPicker.Alpha && value.R == this.SolidColorBrushName.Color.R && value.G == this.SolidColorBrushName.Color.G && value.B == this.SolidColorBrushName.Color.B)
+                    return;
+
+                Color color = Color.FromArgb(255, value.R, value.G, value.B);
+                this.Pickers[this.Index].Control.SetColor(color);
+
+                this.SolidColorBrushName.Color = color;
+            }
+        }
+
+        private Color _Color
+        {
+            get => this.SolidColorBrushName.Color;
+            set
+            {
+                if (value.A == this.AlphaPicker.Alpha && value.R == this.SolidColorBrushName.Color.R && value.G == this.SolidColorBrushName.Color.G && value.B == this.SolidColorBrushName.Color.B)
+                    return;
+
+                this.SolidColorBrushName.Color = Color.FromArgb(255, value.R, value.G, value.B);
+                this.ColorChange?.Invoke(this, Color.FromArgb(this.AlphaPicker.Alpha, value.R, value.G, value.B));
+            }
+        }
+
+
+
+        /// <summary> Alpha of Color Picker </summary>
+        public byte Alpha
+        {
+            get => this.AlphaPicker.Alpha;
+            set => this.AlphaPicker.Alpha = value;
+        }
+
+        private byte _Alpha
+        {
+            get => this.AlphaPicker.Alpha;
+            set => this.ColorChange?.Invoke(this, Color.FromArgb(value, this.SolidColorBrushName.Color.R, this.SolidColorBrushName.Color.G, this.SolidColorBrushName.Color.B));
+        }
+
+
+        #endregion
+
+
+        //HexOrStraw
+        private bool hexOrStraw;
+        public bool HexOrStraw
+        {
+            get => hexOrStraw;
+            set
+            {
+                if (value)
+                {
+                    this.HexPicker.Visibility = Visibility.Visible;
+                    this.StrawPicker.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    this.HexPicker.Visibility = Visibility.Collapsed;
+                    this.StrawPicker.Visibility = Visibility.Visible;
+                }
+                hexOrStraw = value;
+            }
+        }
+
         public ColorPicker()
         {
             this.InitializeComponent();
 
-            this.Loaded += (sender2, e2) =>
-            {
-                this.Index = 0;
+            //Picker
+            this.Index = 0;
+            this.ComboBox.SelectedIndex = this.Index;
+            this.ComboBox.SelectionChanged += (sender, e) => this.Index = this.ComboBox.SelectedIndex;
 
-                this.ComboBox.SelectedIndex = 0;
-                this.ComboBox.SelectionChanged += (sender, e) => this.Index = this.ComboBox.SelectedIndex;
+            //Alpha
+            this.AlphaPicker.Alpha = 255;
+            this.AlphaPicker.AlphaChange += (sender, value) => this._Alpha = value;
 
-                this.AlphaPicker.Alpha = 255;
-                this.AlphaPicker.AlphaChange += (sender, value) => this.ColorChange?.Invoke(this, Color.FromArgb(value, this.SolidColorBrushName.Color.R, this.SolidColorBrushName.Color.G, this.SolidColorBrushName.Color.B));
-
-                this.StrawPicker.ColorChange += (sender, value) => this.Color = this._Color = value;
-            };
+            //HexOrStraw
+            this.HexPicker.Color = this.Color;
+            this.HexPicker.ColorChange += this.Picker_ColorChange2;
+            this.StrawPicker.ColorChange += this.Picker_ColorChange2;
+            this.HexOrStraw = false;
+            this.HexOrStrawButton.Tapped += (sender, value) => this.HexOrStraw = !this.HexOrStraw;
         }
 
-        //Body    
-        private void Picker_ColorChange(object sender, Color value) => this._Color = value;
-
+        private void Picker_ColorChange(object sender, Color value)
+        {
+            this._Color = value;
+            this.HexPicker.Color = value;
+        }
+        private void Picker_ColorChange2(object sender, Color value)
+        {
+            this._Color = value;
+            this.Pickers[this.Index].Control.SetColor(value);
+        }
     }
 }

@@ -50,6 +50,15 @@ namespace Retouch_Photo.Library
 
             this.Radian = 0.0f;
         }
+        public void Fit(float scale)
+        {
+            this.Scale = scale;
+
+            this.Position.X = this.ControlWidth / 2.0f;
+            this.Position.Y = this.ControlHeight / 2.0f;
+
+            this.Radian = 0.0f;
+        }
 
 
         /// <summary>Width</summary>

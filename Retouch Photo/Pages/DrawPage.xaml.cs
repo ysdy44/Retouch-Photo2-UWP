@@ -42,6 +42,8 @@ namespace Retouch_Photo.Pages
             this.LayoutBinging(this.OperateLayout, this.OperateToggleButton);
             //Effect
             this.LayoutBinging(this.EffectLayout, this.EffectToggleButton);
+            //Transformer
+            this.LayoutBinging(this.TransformerLayout, this.TransformerToggleButton);
             //Navigator
             this.LayoutBinging(this.NavigatorLayout, this.NavigatorToggleButton);
           

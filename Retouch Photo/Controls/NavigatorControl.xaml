@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d"
-    d:DesignHeight="800"
+    d:DesignHeight="400"
     d:DesignWidth="200">
 
     <StackPanel Background="{ThemeResource AppForeground}">
@@ -19,32 +19,28 @@
         </Border>
 
         <TextBlock Text="Scale" Style="{StaticResource AppTextBlock}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
-        <Grid Height="33">
-
-            <Grid.ColumnDefinitions >
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="2"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="2"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="2"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-
-            <Button Grid.Column="0" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="{ThemeResource AppFill}">
-                <TextBlock Text="50%" FontSize="13" Opacity="0.5"/>
-            </Button>
-            <Button Grid.Column="2" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="{ThemeResource AppFill}">
-                <TextBlock Text="100%" FontSize="13" Opacity="0.5"/>
-            </Button>
-            <Button Grid.Column="4" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="{ThemeResource AppFill}">
-                <TextBlock Text="200%" FontSize="13" Opacity="0.5"/>
-            </Button>
-            <Button Grid.Column="6" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="{ThemeResource AppFill}">
-                <TextBlock Text="Auto" FontSize="13" Opacity="0.5"/>
-            </Button>
-
-        </Grid>
+        <Border Height="33" Style="{StaticResource AppRoundedBorderStyle}">
+            <Grid Height="33">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="FiftyPercent" Grid.Column="0" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="{ThemeResource AppFill}">
+                    <TextBlock Text="50%" FontSize="13" Opacity="0.5"/>
+                </Button>
+                <Button x:Name="HundredPercent" Grid.Column="1" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="{ThemeResource AppFill}">
+                    <TextBlock Text="100%" FontSize="13" Opacity="0.5"/>
+                </Button>
+                <Button x:Name="TwoHundredPercent" Grid.Column="2" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="{ThemeResource AppFill}">
+                    <TextBlock Text="200%" FontSize="13" Opacity="0.5"/>
+                </Button>
+                <Button x:Name="AutoPercent" Grid.Column="3" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="{ThemeResource AppFill}">
+                    <TextBlock Text="Auto" FontSize="13" Opacity="0.5"/>
+                </Button>
+            </Grid>
+        </Border>        
         
         
         <ContentControl Height="8"/>

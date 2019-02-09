@@ -19,7 +19,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
          
 
         Layer CurrentLayer;
-        Controller Controller = new Controller();
+        readonly Controller Controller = new Controller();
       
         /// <summary> 蓝色选框 </summary>
         bool IsCursorBox;
@@ -41,18 +41,19 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         public override void Start(Vector2 point)
         {
             this.CurrentLayer = this.ViewModel.CurrentLayer;
-            Matrix3x2 matrix = this.CurrentLayer.Transformer.Matrix * this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix;
 
 
 
             //CursorMode
             if (this.CurrentLayer != null)
             {
+                Matrix3x2 matrix = this.CurrentLayer.Transformer.Matrix * this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix;
+
                 this.Controller.Mode = Transformer.ContainsNodeMode(point, this.CurrentLayer.Transformer, matrix);
-                
-                if (this.Controller.Mode!= TransformerMode.None)
+
+                if (!(this.Controller.Mode == TransformerMode.None || this.Controller.Mode == TransformerMode.Translation))
                 {
-                    this.Controller.ControllerDictionary[this.Controller.Mode].Start(point, this.CurrentLayer, matrix,this.ViewModel.MatrixTransformer.Scale);
+                    this.Controller.ControllerDictionary[this.Controller.Mode].Start(point, this.CurrentLayer, matrix, this.ViewModel.MatrixTransformer.Scale, this.ViewModel.MatrixTransformer.Radian);
                     return;
                 }
             }
@@ -65,12 +66,13 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
                 if (layer.IsVisual == false || layer.Opacity == 0) continue;
 
                 if (Transformer.ContainsBound(canvasPoint, layer.Transformer))
-                {
+                {                       
                     this.CurrentLayer = layer;
                     this.ViewModel.CurrentLayer = layer;
                     this.Controller.Mode = TransformerMode.Translation;
 
-                    this.Controller.ControllerDictionary[this.Controller.Mode].Start(point, this.CurrentLayer, matrix, this.ViewModel.MatrixTransformer.Scale);
+                    Matrix3x2 matrix = this.CurrentLayer.Transformer.Matrix * this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix;
+                    this.Controller.ControllerDictionary[this.Controller.Mode].Start(point, this.CurrentLayer, matrix, this.ViewModel.MatrixTransformer.Scale, this.ViewModel.MatrixTransformer.Radian);
                     return;
                 }
             }
@@ -85,7 +87,6 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         public override void Delta(Vector2 point)
         {
             this.EndPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
-            Matrix3x2 matrix = this.CurrentLayer.Transformer.Matrix * this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix;
 
             if (this.IsCursorBox)
             {
@@ -95,7 +96,10 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
             if (this.CurrentLayer != null)
             {
-                this.Controller.ControllerDictionary[this.Controller.Mode].Delta(point, this.CurrentLayer, matrix, this.ViewModel.MatrixTransformer.Scale);
+                Matrix3x2 matrix = this.CurrentLayer.Transformer.Matrix * this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix;
+                this.Controller.ControllerDictionary[this.Controller.Mode].Delta(point, this.CurrentLayer, matrix, this.ViewModel.MatrixTransformer.Scale, this.ViewModel.MatrixTransformer.Radian);
+
+                this.ViewModel.Transformer = this.CurrentLayer.Transformer;//Transformer
                 this.ViewModel.Invalidate();
                 return;
             }
@@ -104,7 +108,6 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         public override void Complete(Vector2 point)
         {
             this.EndPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
-            Matrix3x2 matrix = this.CurrentLayer.Transformer.Matrix * this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix;
 
             if (this.IsCursorBox)
             {
@@ -123,8 +126,17 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             }
             else
             {
+                Matrix3x2 matrix = this.CurrentLayer.Transformer.Matrix * this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix;
+
                 this.CurrentLayer.Invalidate();
-                this.Controller.ControllerDictionary[this.Controller.Mode].Complete(point, this.CurrentLayer, matrix, this.ViewModel.MatrixTransformer.Scale);
+                this.Controller.ControllerDictionary[this.Controller.Mode].Complete
+                (
+                    point,
+                    this.CurrentLayer,
+                    matrix,
+                    this.ViewModel.MatrixTransformer.Scale,
+                    this.ViewModel.MatrixTransformer.Radian
+                );
             }
 
             this.Controller.Mode = TransformerMode.None;
@@ -153,7 +165,6 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
             if (this.CurrentLayer != null)
             {
                 Transformer.DrawBoundNodes(ds, this.CurrentLayer.Transformer, this.CurrentLayer.Transformer.Matrix * this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
-               // this.Controller.ControllerDictionary[this.Controller.Mode].Draw(ds, this.CurrentLayer);
             }
         }
 

@@ -95,6 +95,8 @@ namespace Retouch_Photo.Library
                 this.Radian = transformer.Radian;
                 this.Skew = transformer.Skew;
             }
+            public static Transformer Zero => new Transformer();
+            public static Transformer One => new Transformer() { XScale = 1,YScale=1};
             public static Transformer CreateFromSize(float width, float height, Vector2 postion, float scale = 1.0f, float radian = 0.0f, bool disabledRadian = false) => new Transformer
             {
                 Width = width,
@@ -157,6 +159,15 @@ namespace Retouch_Photo.Library
                 Vector2 v = Vector2.Transform(point, transformer.InverseMatrix);
                 return v.X > 0 && v.X < transformer.Width && v.Y > 0 && v.Y < transformer.Height;
             }
+            public static bool ContainsBound(Vector2 point, Vector2 leftTop, Vector2 rightTop, Vector2 rightBottom, Vector2 leftBottom)
+            {
+                float a = (rightTop.X - leftTop.X) * (point.Y - leftTop.Y) - (rightTop.Y - leftTop.Y) * (point.X - leftTop.X);
+                float b = (rightBottom.X - rightTop.X) * (point.Y - rightTop.Y) - (rightBottom.Y - rightTop.Y) * (point.X - rightTop.X);
+                float c = (leftBottom.X - rightBottom.X) * (point.Y - rightBottom.Y) - (leftBottom.Y - rightBottom.Y) * (point.X - rightBottom.X);
+                float d = (leftTop.X - leftBottom.X) * (point.Y - leftBottom.Y) - (leftTop.Y - leftBottom.Y) * (point.X - leftBottom.X);
+                return (a > 0 && b > 0 && c > 0 && d > 0) || (a < 0 && b < 0 && c < 0 && d < 0);
+            }
+
 
 
             /// <summary>
@@ -208,7 +219,7 @@ namespace Retouch_Photo.Library
                 if (Transformer.InNodeRadius(outsideBottom, point)) return TransformerMode.SkewBottom;
 
                 //Translation
-                if (Transformer.ContainsBound(point, transformer)) return TransformerMode.Translation;
+                if (Transformer.ContainsBound(point, leftTop, rightTop, rightBottom, leftBottom)) return TransformerMode.Translation;
 
                 return TransformerMode.None;
             }
@@ -427,9 +438,9 @@ namespace Retouch_Photo.Library
         /// <summary> Controller interface </summary>
         public interface IController
         {
-            void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale);
-            void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale);
-            void Complete(Vector2 point, Layer layer, Matrix3x2 matrix, float scale);
+            void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale = 1, float radian = 0);
+            void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale = 1, float radian = 0);
+            void Complete(Vector2 point, Layer layer, Matrix3x2 matrix, float scale = 1, float radian = 0);
         }
 
         /// <summary> Controller </summary>
@@ -458,18 +469,18 @@ namespace Retouch_Photo.Library
                 {TransformerMode.ScaleLeftBottom,  new ScaleLeftBottomController()},
             };
 
-            public void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
+            public void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale = 1, float radian = 0)
             {
                 this.Mode = Transformer.ContainsNodeMode(point, layer.Transformer, layer.Transformer.Matrix);
-                this.ControllerDictionary[this.Mode].Start(point, layer, matrix, scale);
+                this.ControllerDictionary[this.Mode].Start(point, layer, matrix, scale, radian);
             }
-            public void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
+            public void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale = 1, float radian = 0)
             {
-                this.ControllerDictionary[this.Mode].Delta(point, layer, matrix, scale);
+                this.ControllerDictionary[this.Mode].Delta(point, layer, matrix, scale, radian);
             }
-            public void Complete(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
+            public void Complete(Vector2 point, Layer layer, Matrix3x2 matrix, float scale = 1, float radian = 0)
             {
-                this.ControllerDictionary[this.Mode].Delta(point, layer, matrix, scale);
+                this.ControllerDictionary[this.Mode].Delta(point, layer, matrix, scale, radian);
                 this.Mode = TransformerMode.None;
             }
         }
@@ -481,9 +492,9 @@ namespace Retouch_Photo.Library
         /// <summary> None </summary>
         private class NoneController : IController
         {
-            public void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale) { }
-            public void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale) { }
-            public void Complete(Vector2 point, Layer layer, Matrix3x2 matrix, float scale) { }
+            public void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian) { }
+            public void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian) { }
+            public void Complete(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian) { }
         }
 
         /// <summary> Translation </summary>
@@ -492,13 +503,27 @@ namespace Retouch_Photo.Library
             Vector2 StartTransformerPostion;
             Vector2 StartPostion;
 
-            public void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
+            public void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian)
             {
                 this.StartPostion = point / scale;
                 this.StartTransformerPostion = layer.Transformer.Postion;
             }
-            public void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale) => layer.Transformer.Postion = (point / scale) + (this.StartTransformerPostion - this.StartPostion);
-            public void Complete(Vector2 point, Layer layer, Matrix3x2 matrix, float scale) { }
+            public void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian)
+            {
+                Vector2 vector = point / scale - this.StartPostion;
+
+                layer.Transformer.Postion = this.StartTransformerPostion + this.GetRotatedVector(vector, radian);
+            }
+            public void Complete(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian) { }
+
+            private Vector2 GetRotatedVector(Vector2 vector, float radian)
+            {
+                if (radian == 0) return vector;
+
+                float cos = (float)Math.Cos(radian);
+                float sin = (float)Math.Sin(radian);
+                return new Vector2(cos * vector.X + sin * vector.Y, -sin * vector.X + cos * vector.Y);
+            }
         }
 
         /// <summary> Rotation </summary>
@@ -510,21 +535,21 @@ namespace Retouch_Photo.Library
             float StartTransformerRadian;
             float StartRadian;
 
-            public void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
+            public void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian)
             {
                 this.Center = layer.Transformer.TransformCenter(matrix);
 
                 this.StartTransformerRadian = layer.Transformer.Radian;
                 this.StartRadian = Transformer.VectorToRadians(point - this.Center);
             }
-            public void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
+            public void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian)
             {
                 this.Radian = Transformer.VectorToRadians(point - this.Center);
-                float radian = this.StartTransformerRadian - this.StartRadian + this.Radian;
+                float radian2 = this.StartTransformerRadian - this.StartRadian + this.Radian;
 
-                layer.Transformer.Radian = TransformController.IsStepFrequency ? Transformer.RadiansStepFrequency(radian) : radian;
+                layer.Transformer.Radian = TransformController.IsStepFrequency ? Transformer.RadiansStepFrequency(radian2) : radian2;
             }
-            public void Complete(Vector2 point, Layer layer, Matrix3x2 matrix, float scale) { }
+            public void Complete(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian) { }
         }
 
 
@@ -549,7 +574,7 @@ namespace Retouch_Photo.Library
             /// <summary> Point b (right point on the same side of the point) </summary>
             protected Vector2 LineB;
 
-            public void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
+            public void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian)
             {
                 this.StartTransformer.CopyWith(layer.Transformer);
                 this.Center = layer.Transformer.TransformCenter(matrix);
@@ -557,8 +582,8 @@ namespace Retouch_Photo.Library
                 this.LineA = this.GetLineA(layer, matrix);
                 this.LineB = this.GetLineB(layer, matrix);
             }
-            public void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale) { }
-            public void Complete(Vector2 point, Layer layer, Matrix3x2 matrix, float scale) { }
+            public void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian) { }
+            public void Complete(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian) { }
         }
 
 
@@ -576,9 +601,9 @@ namespace Retouch_Photo.Library
             bool IsFlipHorizontal;
             bool IsFlipVertical;
 
-            public new void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
+            public new void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian)
             {
-                base.Start(point, layer, matrix, scale);
+                base.Start(point, layer, matrix, scale, radian);
 
                 //RealScale
                 float value = base.StartTransformer.Skew;
@@ -590,7 +615,7 @@ namespace Retouch_Photo.Library
                 this.IsFlipHorizontal = base.StartTransformer.XScale < 0;
                 this.IsFlipVertical = base.StartTransformer.YScale < 0;
             }
-            public new void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
+            public new void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian)
             {
                 Vector2 footPoint = Transformer.FootPoint(point, base.LineA, base.LineB);
                 float radians = Transformer.VectorToRadians(footPoint - base.Center) % Transformer.PI;
@@ -635,7 +660,7 @@ namespace Retouch_Photo.Library
         /// <summary> SkewVertical (Top Bottom) </summary>
         protected abstract class SkewVerticalController : SkewController, IController
         {
-            public new void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
+            public new void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian)
             {
                 Vector2 footPoint = Transformer.FootPoint(point, base.LineA, base.LineB);
                 float radians = Transformer.VectorToRadians(footPoint - base.Center);
@@ -792,7 +817,7 @@ namespace Retouch_Photo.Library
             protected bool IsFlipVertical;
 
 
-            public void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
+            public void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian)
             {
                 this.StartTransformer.CopyWith(layer.Transformer);
 
@@ -807,8 +832,8 @@ namespace Retouch_Photo.Library
                 this.IsFlipHorizontal = this.StartTransformer.XScale < 0;
                 this.IsFlipVertical = this.StartTransformer.YScale < 0;
             }
-            public void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale) { }
-            public void Complete(Vector2 point, Layer layer, Matrix3x2 matrix, float scale) { }
+            public void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian) { }
+            public void Complete(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian) { }
 
             protected void SetPostion(Layer layer, VectorSinCos sinCos, float scale)
             {
@@ -831,15 +856,15 @@ namespace Retouch_Photo.Library
             //@Override
             public abstract void SetScale(Layer layer, float scale, bool isFlip, bool isRatio);
 
-            public new void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
+            public new void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian)
             {
-                base.Start(point, layer, matrix, scale);
+                base.Start(point, layer, matrix, scale, radian);
                 base.Point = this.GetPoint(layer.Transformer, matrix);//@Override
 
                 //Diagonal line
                 base.Line = new VectorLine(base.Point, this.GetDiagonal(layer.Transformer, matrix));  //@Override
             }
-            public new void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
+            public new void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian)
             {
                 //Point on diagonal line
                 Vector2 footPoint = Transformer.FootPoint(point, base.Line.Diagonal, base.Point);
@@ -949,9 +974,9 @@ namespace Retouch_Photo.Library
             VectorLine HorizontalLine;
             VectorLine VerticalLine;
 
-            public new void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
+            public new void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian)
             {
-                base.Start(point, layer, matrix, scale);
+                base.Start(point, layer, matrix, scale, radian);
                 base.Point = this.GetPoint(layer.Transformer, matrix);//@Override
 
                 //Diagonal line
@@ -961,7 +986,7 @@ namespace Retouch_Photo.Library
             }
 
 
-            public new void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale)
+            public new void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian)
             {
                 //Point on diagonal line
                 Vector2 footPoint = Transformer.FootPoint(point, base.Line.Diagonal, base.Point);
@@ -1055,7 +1080,7 @@ namespace Retouch_Photo.Library
             public override Vector2 GetDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformRightBottom(matrix);
             public override Vector2 GetHorizontalDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformRightTop(matrix);
             public override Vector2 GetVerticalDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformLeftBottom(matrix);
-            public override Vector2 GetPostion(VectorSinCos sinCos) => new Vector2((-sinCos.XCos - sinCos.YSin), (sinCos.XSin - sinCos.YCos));
+            public override Vector2 GetPostion(VectorSinCos sinCos) => new Vector2(-sinCos.XCos - sinCos.YSin, sinCos.XSin - sinCos.YCos);
         }
         /// <summary> ScaleRightTop </summary>
         public class ScaleRightTopController : ScaleCornerController
@@ -1064,7 +1089,7 @@ namespace Retouch_Photo.Library
             public override Vector2 GetDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformLeftBottom(matrix);
             public override Vector2 GetHorizontalDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformLeftTop(matrix);
             public override Vector2 GetVerticalDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformRightBottom(matrix);
-            public override Vector2 GetPostion(VectorSinCos sinCos) => new Vector2((sinCos.XCos - sinCos.YSin), (-sinCos.XSin - sinCos.YCos));
+            public override Vector2 GetPostion(VectorSinCos sinCos) => new Vector2(sinCos.XCos - sinCos.YSin, -sinCos.XSin - sinCos.YCos);
         }
         /// <summary> ScaleRightBottom </summary>
         public class ScaleRightBottomController : ScaleCornerController
@@ -1073,7 +1098,7 @@ namespace Retouch_Photo.Library
             public override Vector2 GetDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformLeftTop(matrix);
             public override Vector2 GetHorizontalDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformLeftBottom(matrix);
             public override Vector2 GetVerticalDiagonal(Transformer startTransformer, Matrix3x2 matrix) => startTransformer.TransformRightTop(matrix);
-            public override Vector2 GetPostion(VectorSinCos sinCos) => new Vector2((sinCos.XCos + sinCos.YSin), (-sinCos.XSin + sinCos.YCos));
+            public override Vector2 GetPostion(VectorSinCos sinCos) => new Vector2(sinCos.XCos + sinCos.YSin, -sinCos.XSin + sinCos.YCos);
         }
         /// <summary> ScaleLeftBottom </summary>
         public class ScaleLeftBottomController : ScaleCornerController

@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.ApplicationModel.Resources;
 using Retouch_Photo.ViewModels;
+using Retouch_Photo.Library;
 
 namespace Retouch_Photo.Controls
 {
@@ -56,6 +57,12 @@ namespace Retouch_Photo.Controls
         {
             this.InitializeComponent();
 
+            //Navigator
+            this.FiftyPercent.Tapped += (sender, e) => this.Navigator((m) => m.Fit(0.5f));
+            this.HundredPercent.Tapped += (sender, e) => this.Navigator((m) => m.Fit(1f));
+            this.TwoHundredPercent.Tapped += (sender, e) => this.Navigator((m) => m.Fit(2f));
+            this.AutoPercent.Tapped += (sender, e) => this.Navigator((m) => m.Fit());
+          
 
             //Theme
             this.ThemeSwitch.Loaded += (sender, e) =>
@@ -84,7 +91,12 @@ namespace Retouch_Photo.Controls
 
             
         }
-         
 
+        private void Navigator(Action<MatrixTransformer> action)
+        {
+            action(this.ViewModel.MatrixTransformer);
+
+            App.ViewModel.Invalidate();
+        }
     }
 }

@@ -413,6 +413,9 @@
     <Compile Include="Controls\ToolControls\WatercolorPenControl.xaml.cs">
       <DependentUpon>WatercolorPenControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TransformerControl.xaml.cs">
+      <DependentUpon>TransformerControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\AddDialog.xaml.cs">
       <DependentUpon>AddDialog.xaml</DependentUpon>
     </Compile>
@@ -576,6 +579,9 @@
     </Compile>
     <Compile Include="Pickers\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pickers\HexPicker.xaml.cs">
+      <DependentUpon>HexPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pickers\HSL.cs" />
     <Compile Include="Pickers\HSLPicker.xaml.cs">
@@ -1395,6 +1401,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\TransformerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\AddDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1522,6 +1532,10 @@
     <Page Include="Pickers\ColorPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\HexPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pickers\HSLPicker.xaml">
       <Generator>MSBuild:Compile</Generator>

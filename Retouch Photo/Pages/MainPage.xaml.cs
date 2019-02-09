@@ -143,9 +143,11 @@ namespace Retouch_Photo.Pages
 
         private void AddDialog_AddSize(BitmapSize pixels)
         {
-            this.LoadingControl.Visibility = Visibility.Visible;
+             this.AddDialog.Hide();
 
-            Project project= Project.CreateFromSize(this.ViewModel.CanvasDevice, pixels);//Project
+            this.LoadingControl.Visibility = Visibility.Visible;
+            
+            Project project = Project.CreateFromSize(this.ViewModel.CanvasDevice, pixels);//Project
             this.Frame.Navigate(typeof(DrawPage), project);//Navigate    
 
             this.LoadingControl.Visibility = Visibility.Collapsed;

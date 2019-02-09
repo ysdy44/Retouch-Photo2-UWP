@@ -4,16 +4,6 @@ using System.Numerics;
 
 namespace Retouch_Photo.ViewModels
 {
-
-    public interface IToolViewModel
-    {
-        void Start(Vector2 point, Layer layer);
-        void Delta(Vector2 point, Layer layer);
-        void Complete(Vector2 point, Layer layer);
-
-        void Draw(CanvasDrawingSession ds, Layer layer);
-    }
-
     public abstract class ToolViewModel
     {
         public abstract void Start(Vector2 point);

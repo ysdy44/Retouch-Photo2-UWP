@@ -52,6 +52,48 @@ namespace Retouch_Photo.Controls
         public OperateControl()
         {
             this.InitializeComponent();
+
+            //Transform
+            this.FlipHorizontalButton.Tapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.XScale = -layer.Transformer.XScale);
+            this.FlipVerticalButton.Tapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.YScale = -layer.Transformer.YScale);
+            this.RotateLeftButton.Tapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Radian += Transformer.PiHalf);
+            this.RotateRightButton.Tapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Radian -= Transformer.PiHalf);
+
+            //Arrange
+            this.ArrangeMoveBackButton.ButtonTapped += (sender, e) => this.OperateArrange((Layer layer) =>
+            {
+                this.ViewModel.RenderLayer.Layers.Remove(layer);
+                this.ViewModel.RenderLayer.Layers.Add(layer);
+            });
+            this.ArrangeBackOneButton.ButtonTapped += (sender, e) => this.OperateArrange((Layer layer) =>
+            {
+                int index = this.ViewModel.RenderLayer.Layers.IndexOf(layer);
+                this.ViewModel.RenderLayer.Layers.Remove(layer);
+                this.ViewModel.RenderLayer.Layers.Insert(index + 1, layer);
+            });
+            this.ArrangeForwardOneButton.ButtonTapped += (sender, e) => this.OperateArrange((Layer layer) =>
+            {
+                int index = this.ViewModel.RenderLayer.Layers.IndexOf(layer);
+                this.ViewModel.RenderLayer.Layers.Remove(layer);
+                this.ViewModel.RenderLayer.Layers.Insert(index - 1, layer);
+            });
+            this.ArrangeMoveFrontButton.ButtonTapped += (sender, e) => this.OperateArrange((Layer layer) =>
+            {
+                this.ViewModel.RenderLayer.Layers.Remove(layer);
+                this.ViewModel.RenderLayer.Layers.Insert(0, layer);
+            });
+
+            //Align Horizontal
+            this.AlignLeftButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Postion.X += -layer.Transformer.TransformMinX(layer.Transformer.Matrix));
+            this.AlignCenterButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Postion.X += this.ViewModel.MatrixTransformer.Width / 2 - layer.Transformer.TransformCenter(layer.Transformer.Matrix).X);
+            this.AlignRightButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Postion.X += this.ViewModel.MatrixTransformer.Width - layer.Transformer.TransformMaxX(layer.Transformer.Matrix));
+            this.AlignSymmetryHorizontallyButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Postion.X = -this.Layer.Transformer.Postion.X);
+
+            //Align Vertical
+            this.AlignTopButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Postion.Y += -layer.Transformer.TransformMinY(layer.Transformer.Matrix));
+            this.AlignMiddleButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Postion.Y += this.ViewModel.MatrixTransformer.Height / 2 - layer.Transformer.TransformCenter(layer.Transformer.Matrix).Y);
+            this.AlignBottomButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Postion.Y += this.ViewModel.MatrixTransformer.Height - layer.Transformer.TransformMaxY(layer.Transformer.Matrix));
+            this.AlignSymmetryVerticallyButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Postion.Y = -this.Layer.Transformer.Postion.Y);
         }
 
 
@@ -90,11 +132,17 @@ namespace Retouch_Photo.Controls
 
             App.ViewModel.Invalidate();
         }
+        private void OperateArrange(Action<Layer> action) => this.Operate((layer)=>
+        {
+            action(this.Layer);
+
+            this.ViewModel.CurrentLayer = this.Layer;
+            this.Initialize(this.Layer);
+        });
 
 
-        #region Transform
 
-
+        //Transform
         private void InitializeTransform(bool isEnabled)
         {
             this.FlipHorizontalButton.ButtonIsEnabled = isEnabled;
@@ -103,31 +151,7 @@ namespace Retouch_Photo.Controls
             this.RotateRightButton.ButtonIsEnabled = isEnabled;
         }
 
-
-        private void FlipHorizontalButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Operate
-        (
-            (Layer layer) => layer.Transformer.XScale = -layer.Transformer.XScale
-        );
-        private void FlipVerticalButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Operate
-        (
-            (Layer layer) => layer.Transformer.YScale =-layer.Transformer.YScale
-        );
-        private void RotateLeftButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Operate
-        (
-            (Layer layer) => layer.Transformer.Radian += Transformer.PiHalf
-        );
-        private void RotateRightButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Operate
-        (
-            (Layer layer) => layer.Transformer.Radian -= Transformer.PiHalf
-        );
-
-
-        #endregion
-
-
-        #region Arrange
-
-
+        //Arrange
         private void InitializeArrange(bool isEnabled)
         {
             this.ArrangeMoveBackButton.ButtonIsEnabled = isEnabled;
@@ -142,63 +166,9 @@ namespace Retouch_Photo.Controls
             this.ArrangeForwardOneButton.ButtonIsEnabled = (index > min);
             this.ArrangeMoveFrontButton.ButtonIsEnabled = !(index == min);
         }
-
-
-        private void ArrangeMoveBackButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
-        (
-            (Layer layer) =>
-            {            
-                this.ViewModel.RenderLayer.Layers.Remove(layer);
-                this.ViewModel.RenderLayer.Layers.Add(layer);
-
-                this.ViewModel.CurrentLayer = layer;
-                this.Initialize(layer);
-            }
-        );
-        private void ArrangeBackOneButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
-        (
-            (Layer layer) =>
-            {
-                int index = this.ViewModel.RenderLayer.Layers.IndexOf(layer);
-                this.ViewModel.RenderLayer.Layers.Remove(layer);
-                this.ViewModel.RenderLayer.Layers.Insert(index+1, layer);
-
-                this.ViewModel.CurrentLayer = layer;
-                this.Initialize(layer);
-            }
-        );
-        private void ArrangeForwardOneButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
-        (
-            (Layer layer) =>
-            {
-                int index = this.ViewModel.RenderLayer.Layers.IndexOf(layer);
-                this.ViewModel.RenderLayer.Layers.Remove(layer);
-                this.ViewModel.RenderLayer.Layers.Insert(index - 1, layer);
-
-                this.ViewModel.CurrentLayer = layer;
-                this.Initialize(layer);
-            }
-        );
-        private void ArrangeMoveFrontButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
-        (
-            (Layer layer) =>
-            {
-                this.ViewModel.RenderLayer.Layers.Remove(layer);
-                this.ViewModel.RenderLayer.Layers.Insert(0, layer);
-
-                this.ViewModel.CurrentLayer = layer;
-                this.Initialize(layer);
-            }
-        );
-
-
-        #endregion
-
-
-        #region Align Horizontal
-
-        //Initialize
-        private void InitializeAlignHorizontal(bool isEnabled)
+         
+       //Align Horizontal
+       private void InitializeAlignHorizontal(bool isEnabled)
         {
             this.AlignLeftButton.ButtonIsEnabled = isEnabled;
             this.AlignCenterButton.ButtonIsEnabled = isEnabled;
@@ -206,31 +176,7 @@ namespace Retouch_Photo.Controls
             this.AlignSymmetryHorizontallyButton.ButtonIsEnabled = isEnabled;
         }
 
-
-        private void AlignLeftButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
-        (
-            (Layer layer) => layer.Transformer.Postion.X += -layer.Transformer.TransformMinX(layer.Transformer.Matrix)
-        );
-        private void AlignCenterButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
-        (
-            (Layer layer) => layer.Transformer.Postion.X += this.ViewModel.MatrixTransformer.Width / 2 - layer.Transformer.TransformCenter(layer.Transformer.Matrix).X
-        );
-        private void AlignRightButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
-        (
-            (Layer layer) => layer.Transformer.Postion.X += this.ViewModel.MatrixTransformer.Width - layer.Transformer.TransformMaxX(layer.Transformer.Matrix)
-        );
-        private void AlignSymmetryHorizontallyButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
-        (
-            (Layer layer) => layer.Transformer.Postion.X = -this.Layer.Transformer.Postion.X
-        );
-
-
-        #endregion
-
-
-        #region Align Vertical
-
-
+        //Align Vertical
         private void InitializeAlignVertical(bool isEnabled)
         {
             this.AlignTopButton.ButtonIsEnabled = isEnabled;
@@ -238,27 +184,7 @@ namespace Retouch_Photo.Controls
             this.AlignBottomButton.ButtonIsEnabled = isEnabled;
             this.AlignSymmetryVerticallyButton.ButtonIsEnabled = isEnabled;
         }
-
-
-        private void AlignTopButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
-        (
-            (Layer layer) => layer.Transformer.Postion.Y += -layer.Transformer.TransformMinY(layer.Transformer.Matrix)
-        );
-        private void AlignMiddleButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
-        (
-            (Layer layer) => layer.Transformer.Postion.Y += this.ViewModel.MatrixTransformer.Height / 2 - layer.Transformer.TransformCenter(layer.Transformer.Matrix).Y
-        );
-        private void AlignBottomButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
-        (
-            (Layer layer) => layer.Transformer.Postion.Y += this.ViewModel.MatrixTransformer.Height - layer.Transformer.TransformMaxY(layer.Transformer.Matrix)
-        );
-        private void AlignSymmetryVerticallyButton_ButtonTapped(object sender, TappedRoutedEventArgs e) => this.Operate
-        (
-            (Layer layer) => layer.Transformer.Postion.Y = -this.Layer.Transformer.Postion.Y
-        );
-        
-
-        #endregion
+               
          
     }
 }

@@ -52,6 +52,11 @@ namespace Retouch_Photo.Controls
                 this.ViewModel.RenderLayer.RulerDraw(args.DrawingSession, this.ViewModel.MatrixTransformer);
 
                 this.ViewModel.Tool.ViewModel.Draw(args.DrawingSession);
+
+                Retouch_Photo.Library.TransformController.Transformer.DrawNode(args.DrawingSession, App.ViewModel.AAA);
+                Retouch_Photo.Library.TransformController.Transformer.DrawNode(args.DrawingSession, App.ViewModel.BBB);
+                Retouch_Photo.Library.TransformController.Transformer.DrawNode(args.DrawingSession, App.ViewModel.CCC);
+                Retouch_Photo.Library.TransformController.Transformer.DrawNode(args.DrawingSession, App.ViewModel.DDD);
             };
 
             this.SizeChanged += (s, e) => this.ViewModel.MatrixTransformer.ControlSizeChanged(e.NewSize);
