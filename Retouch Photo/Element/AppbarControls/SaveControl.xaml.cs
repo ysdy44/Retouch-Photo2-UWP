@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Retouch_Photo.Controls.AppbarControls
+namespace Retouch_Photo.Element.AppbarControls
 {
     public sealed partial class SaveControl : UserControl
     {

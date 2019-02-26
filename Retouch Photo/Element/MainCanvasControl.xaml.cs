@@ -31,7 +31,7 @@ using Windows.Storage;
 using Windows.System;
 using Retouch_Photo.ViewModels;
 
-namespace Retouch_Photo.Controls
+namespace Retouch_Photo.Element
 {
     public sealed partial class MainCanvasControl : UserControl
     {

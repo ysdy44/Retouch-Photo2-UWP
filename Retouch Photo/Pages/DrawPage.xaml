@@ -6,14 +6,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:con="using:Retouch_Photo.Controls"
+    xmlns:element="using:Retouch_Photo.Element"
     xmlns:dia="using:Retouch_Photo.Dialogs"
-    xmlns:pic="using:Retouch_Photo.Pickers"
+    xmlns:pic="using:Retouch_Photo.Pickers" 
+    xmlns:conEffectsControl="using:Retouch_Photo.Controls.EffectsControls"    
     xmlns:local="using:Retouch_Photo.Pages"
     xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
     xmlns:conOpe="using:Retouch_Photo.Controls.OperateControls"
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
- 
+
     
     <Grid >
 
@@ -28,7 +30,7 @@
             </local:DrawLayout.RightPane>
 
             <local:DrawLayout.CenterContent>
-                <con:MainCanvasControl x:Name="MainCanvasControl" />
+                <element:MainCanvasControl x:Name="MainCanvasControl" />
             </local:DrawLayout.CenterContent>
 
             <local:DrawLayout.TopLeftPane>
@@ -66,7 +68,7 @@
 
                     <!--Effect-->
                     <ToggleButton x:Name="EffectToggleButton" Height="50" Width="60" BorderThickness="0" Background="Transparent" >
-                        <FontIcon Glyph="&#xE734;" FontSize="24" FontFamily="Segoe MDL2 Assets" Style="{StaticResource AppIconElement}" />
+                        <conEffectsControl:EffectsControlIcon/>
                     </ToggleButton>
 
                     <!--Transformer-->
@@ -116,13 +118,13 @@
                 </local:MenuLayout.FlyoutContent>
             </local:MenuLayout>
 
-            <!--Effect-->
+            <!--Effects-->
             <local:MenuLayout x:Name="EffectLayout" Text="Effect" Placement="Bottom" Visibility="Collapsed">
                 <local:MenuLayout.CenterContent>
-                    <con:EffectControl/>
+                    <con:EffectsControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
                 </local:MenuLayout.CenterContent>
                 <local:MenuLayout.FlyoutContent>
-                    <con:EffectControl/>
+                    <con:EffectsControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
                 </local:MenuLayout.FlyoutContent>
             </local:MenuLayout>
 
@@ -170,7 +172,7 @@
         
 
         <!--Load-->
-        <con:LoadingControl x:Name="LoadingControl" Text="Saving..."  Visibility="Collapsed"/>
+        <element:LoadingControl x:Name="LoadingControl" Text="Saving..."  Visibility="Collapsed"/>
 
         
         <!--Tip-->

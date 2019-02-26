@@ -9,8 +9,8 @@
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:con="using:Retouch_Photo.Controls"
-    xmlns:conAppbarControls="using:Retouch_Photo.Controls.AppbarControls"
-    xmlns:dia="using:Retouch_Photo.Dialogs"
+    xmlns:elementAppbarControls="using:Retouch_Photo.Element.AppbarControls"
+    xmlns:element="using:Retouch_Photo.Element"
     xmlns:models="using:Retouch_Photo.Models"
     xmlns:local="using:Retouch_Photo.Pages"
     mc:Ignorable="d" 
@@ -977,9 +977,9 @@
                                 <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                     <StackPanel Width="140" Margin="-6">
 
-                                        <conAppbarControls:AppBarControlSecondButton x:Name="SearchButton"  Glyph="&#xE094;"  Text="Search" Tap="SearchButton_Tapped"/>
-                                        <conAppbarControls:AppBarControlSecondButton x:Name="LocalButton"  Glyph="&#xE10F;"  Text="Local" Tap="LocalButton_Tapped"/>
-                                        <conAppbarControls:AppBarControlSecondButton x:Name="OpensourceButton"  Glyph="&#xE13D;"  Text="Opensource" Tap="OpensourceButton_Tapped"/>
+                                        <elementAppbarControls:AppBarControlSecondButton x:Name="SearchButton"  Glyph="&#xE094;"  Text="Search" Tap="SearchButton_Tapped"/>
+                                        <elementAppbarControls:AppBarControlSecondButton x:Name="LocalButton"  Glyph="&#xE10F;"  Text="Local" Tap="LocalButton_Tapped"/>
+                                        <elementAppbarControls:AppBarControlSecondButton x:Name="OpensourceButton"  Glyph="&#xE13D;"  Text="Opensource" Tap="OpensourceButton_Tapped"/>
 
                                     </StackPanel>
                                 </Flyout>
@@ -1079,7 +1079,7 @@
             <local:MainLayout.Appbar>
                 <Grid>
 
-                    <con:AppbarControl x:Name="AppbarControl" 
+                    <element:AppbarControl x:Name="AppbarControl" 
                                        AddButtonTapped="AppbarControl_AddButtonTapped" 
                                        PicturesButtonTapped="AppbarControl_PicturesButtonTapped"
                                        SaveButtonTapped="AppbarControl_SaveButtonTapped"
@@ -1090,11 +1090,11 @@
                                        
                                        />
 
-                    <conAppbarControls:PicturesControl x:Name="AppbarPicturesControl" Visibility="Collapsed" PicturesPicker="AppbarPicturesControl_PicturesPicker" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
-                    <conAppbarControls:SaveControl x:Name="AppbarSaveControl" Visibility="Collapsed" OKButtonTapped="AppbarSaveControl_OKButtonTapped" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
-                    <conAppbarControls:ShareControl x:Name="AppbarShareControl" Visibility="Collapsed" OKButtonTapped="AppbarShareControl_OKButtonTapped" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
-                    <conAppbarControls:DeleteControl x:Name="AppbarDeleteControl" Visibility="Collapsed" OKButtonTapped="AppbarDeleteControl_OKButtonTapped" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
-                    <conAppbarControls:DuplicateControl x:Name="AppbarDuplicateControl" Visibility="Collapsed" OKButtonTapped="AppbarDuplicateControl_OKButtonTapped" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
+                    <elementAppbarControls:PicturesControl x:Name="AppbarPicturesControl" Visibility="Collapsed" PicturesPicker="AppbarPicturesControl_PicturesPicker" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
+                    <elementAppbarControls:SaveControl x:Name="AppbarSaveControl" Visibility="Collapsed" OKButtonTapped="AppbarSaveControl_OKButtonTapped" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
+                    <elementAppbarControls:ShareControl x:Name="AppbarShareControl" Visibility="Collapsed" OKButtonTapped="AppbarShareControl_OKButtonTapped" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
+                    <elementAppbarControls:DeleteControl x:Name="AppbarDeleteControl" Visibility="Collapsed" OKButtonTapped="AppbarDeleteControl_OKButtonTapped" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
+                    <elementAppbarControls:DuplicateControl x:Name="AppbarDuplicateControl" Visibility="Collapsed" OKButtonTapped="AppbarDuplicateControl_OKButtonTapped" CancelButtonTapped="AppbarControl_CancelButtonTapped"/>
 
                 </Grid>
             </local:MainLayout.Appbar>
@@ -1104,13 +1104,13 @@
 
 
         <!--Loading-->
-        <con:LoadingControl x:Name="LoadingControl" Text="Loading..." />
+        <element:LoadingControl x:Name="LoadingControl" Text="Loading..." />
 
 
 
         <!--Dialog-->
-        <dia:AddDialog x:Name="AddDialog" AddSize="AddDialog_AddSize"/>
-        <dia:FolderDialog x:Name="FolderDialog" FolderName="FolderDialog_FolderName"/>
+        <element:AddDialog x:Name="AddDialog" AddSize="AddDialog_AddSize"/>
+        <element:FolderDialog x:Name="FolderDialog" FolderName="FolderDialog_FolderName"/>
 
     </Grid>
 </Page>

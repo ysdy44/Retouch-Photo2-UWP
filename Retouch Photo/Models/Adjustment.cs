@@ -1,12 +1,8 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo.Models.Adjustments;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo.Models
 {

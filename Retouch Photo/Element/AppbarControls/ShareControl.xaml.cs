@@ -13,9 +13,10 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Retouch_Photo.Controls.AppbarControls
+namespace Retouch_Photo.Element.AppbarControls
 {
-    public sealed partial class DeleteControl : UserControl
+    
+    public sealed partial class ShareControl : UserControl
     {
 
         //Delegate
@@ -23,7 +24,7 @@ namespace Retouch_Photo.Controls.AppbarControls
         public event TappedEventHandler OKButtonTapped;
         public event TappedEventHandler CancelButtonTapped;
 
-        public DeleteControl()
+        public ShareControl()
         {
             this.InitializeComponent();
         }

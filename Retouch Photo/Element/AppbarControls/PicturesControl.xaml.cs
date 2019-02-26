@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -13,24 +14,27 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Retouch_Photo.Controls.AppbarControls
+namespace Retouch_Photo.Element.AppbarControls
 {
-    public sealed partial class DuplicateControl : UserControl
+    public sealed partial class PicturesControl : UserControl
     {
 
         //Delegate
+        public delegate void PicturesEventHandler(PickerLocationId location);
+        public event PicturesEventHandler PicturesPicker;
 
-        public event TappedEventHandler OKButtonTapped;
         public event TappedEventHandler CancelButtonTapped;
 
-        public DuplicateControl()
+        public PicturesControl()
         {
             this.InitializeComponent();
         }
 
+        private void PhotoButton_Tapped(object sender, TappedRoutedEventArgs e) => this.PicturesPicker?.Invoke(PickerLocationId.PicturesLibrary);
+        private void DestopButton_Tapped(object sender, TappedRoutedEventArgs e) => this.PicturesPicker?.Invoke(PickerLocationId.Desktop);
 
-        private void OKButton_Tapped(object sender, TappedRoutedEventArgs e) => this.OKButtonTapped?.Invoke(sender, e);
         private void CancelButton_Tapped(object sender, TappedRoutedEventArgs e) => this.CancelButtonTapped?.Invoke(sender, e);
+
 
     }
 }

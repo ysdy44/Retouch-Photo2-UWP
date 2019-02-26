@@ -122,28 +122,31 @@
     <Compile Include="Controls\AdjustmentControls\TemperatureControl.xaml.cs">
       <DependentUpon>TemperatureControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AppbarControl.xaml.cs">
+    <Compile Include="Controls\EffectsControls\EffectsControlIcon.xaml.cs">
+      <DependentUpon>EffectsControlIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Element\AppbarControl.xaml.cs">
       <DependentUpon>AppbarControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AppbarControls\AppBarControlButton.xaml.cs">
+    <Compile Include="Element\AppbarControls\AppBarControlButton.xaml.cs">
       <DependentUpon>AppBarControlButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AppbarControls\AppBarControlSecondButton.xaml.cs">
+    <Compile Include="Element\AppbarControls\AppBarControlSecondButton.xaml.cs">
       <DependentUpon>AppBarControlSecondButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AppbarControls\DuplicateControl.xaml.cs">
+    <Compile Include="Element\AppbarControls\DuplicateControl.xaml.cs">
       <DependentUpon>DuplicateControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AppbarControls\PicturesControl.xaml.cs">
+    <Compile Include="Element\AppbarControls\PicturesControl.xaml.cs">
       <DependentUpon>PicturesControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AppbarControls\DeleteControl.xaml.cs">
+    <Compile Include="Element\AppbarControls\DeleteControl.xaml.cs">
       <DependentUpon>DeleteControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AppbarControls\ShareControl.xaml.cs">
+    <Compile Include="Element\AppbarControls\ShareControl.xaml.cs">
       <DependentUpon>ShareControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AppbarControls\SaveControl.xaml.cs">
+    <Compile Include="Element\AppbarControls\SaveControl.xaml.cs">
       <DependentUpon>SaveControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ColorControl.xaml.cs">
@@ -154,6 +157,9 @@
     </Compile>
     <Compile Include="Controls\EffectControls\GaussianBlurControl.xaml.cs">
       <DependentUpon>GaussianBlurControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EffectsControl.xaml.cs">
+      <DependentUpon>EffectsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
@@ -359,10 +365,10 @@
     <Compile Include="Controls\LayerControls\LayoutControl.xaml.cs">
       <DependentUpon>LayoutControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LoadingControl.xaml.cs">
+    <Compile Include="Element\LoadingControl.xaml.cs">
       <DependentUpon>LoadingControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MainCanvasControl.xaml.cs">
+    <Compile Include="Element\MainCanvasControl.xaml.cs">
       <DependentUpon>MainCanvasControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\OperateControl.xaml.cs">
@@ -416,10 +422,10 @@
     <Compile Include="Controls\TransformerControl.xaml.cs">
       <DependentUpon>TransformerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\AddDialog.xaml.cs">
+    <Compile Include="Element\AddDialog.xaml.cs">
       <DependentUpon>AddDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\FolderDialog.xaml.cs">
+    <Compile Include="Element\FolderDialog.xaml.cs">
       <DependentUpon>FolderDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Library\Adjustment.cs" />
@@ -467,6 +473,7 @@
     <Compile Include="Models\Blends\SubtractBlend.cs" />
     <Compile Include="Models\Blends\VividLightBlend.cs" />
     <Compile Include="Models\Effect.cs" />
+    <Compile Include="Models\Effects\GaussianBlurEffect.cs" />
     <Compile Include="Models\Layers\AcrylicLayer.cs" />
     <Compile Include="Models\Layers\GeometryLayer.cs" />
     <Compile Include="Models\Layers\ImageLayer.cs" />
@@ -510,6 +517,9 @@
     </Compile>
     <Compile Include="Pages\DrawPage.xaml.cs">
       <DependentUpon>DrawPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EffectPages\GaussianBlurPage.xaml.cs">
+      <DependentUpon>GaussianBlurPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainLayout.xaml.cs">
       <DependentUpon>MainLayout.xaml</DependentUpon>
@@ -1013,35 +1023,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AppbarControl.xaml">
+    <Page Include="Controls\EffectsControls\EffectsControlIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AppbarControls\AppBarControlButton.xaml">
+    <Page Include="Element\AppbarControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AppbarControls\AppBarControlSecondButton.xaml">
+    <Page Include="Element\AppbarControls\AppBarControlButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AppbarControls\DuplicateControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\AppbarControls\PicturesControl.xaml">
+    <Page Include="Element\AppbarControls\AppBarControlSecondButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AppbarControls\DeleteControl.xaml">
+    <Page Include="Element\AppbarControls\DuplicateControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\AppbarControls\ShareControl.xaml">
+    <Page Include="Element\AppbarControls\PicturesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Element\AppbarControls\DeleteControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\AppbarControls\SaveControl.xaml">
+    <Page Include="Element\AppbarControls\ShareControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Element\AppbarControls\SaveControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1054,6 +1068,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\EffectControls\GaussianBlurControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EffectsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1329,11 +1347,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\LoadingControl.xaml">
+    <Page Include="Element\LoadingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\MainCanvasControl.xaml">
+    <Page Include="Element\MainCanvasControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1405,11 +1423,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dialogs\AddDialog.xaml">
+    <Page Include="Element\AddDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dialogs\FolderDialog.xaml">
+    <Page Include="Element\FolderDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1442,6 +1460,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\DrawPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EffectPages\GaussianBlurPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

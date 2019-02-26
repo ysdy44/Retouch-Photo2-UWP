@@ -6,31 +6,28 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:effectcontrols="using:Retouch_Photo.Controls.EffectControls"
+    xmlns:models="using:Retouch_Photo.Models"
     mc:Ignorable="d"
     d:DesignHeight="800"
     d:DesignWidth="200">
+    
+        <Grid Height="50" BorderThickness="0,1,0,0" BorderBrush="{ThemeResource AppBorderBrush}">
 
-    <ItemsControl  >
-        
-        <ItemsControl.ItemTemplate>
-            <DataTemplate x:DataType="x:Boolean">
-                <Grid Height="50" BorderThickness="0,1,0,0" BorderBrush="{ThemeResource AppBorderBrush}">
-                    <effectcontrols:GaussianBlurControl/>
-                    <Border Width="50" HorizontalAlignment="Right">
-                        <ToggleSwitch IsOn="{x:Bind}">
-                            <ToggleSwitch.Clip>
-                                <RectangleGeometry Rect="0,0,50,50"/>
-                            </ToggleSwitch.Clip>
-                        </ToggleSwitch>
-                    </Border>
-                </Grid>
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
+        <Button  x:Name="Button" Opacity="0.5"
+                 HorizontalAlignment="Stretch"
+                 HorizontalContentAlignment="Left"
+                 Content="{x:Bind Effect.Icon}"
+                 Loaded="{x:Bind Effect.Button_Loaded}"
+                 Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Tapped="Button_Tapped"/>
 
-        <x:Boolean>true</x:Boolean>
-        <x:Boolean>true</x:Boolean>
-        <x:Boolean>true</x:Boolean>
-        <x:Boolean>true</x:Boolean>
+        <Border Width="50" HorizontalAlignment="Right">
+            <ToggleSwitch IsEnabled="False" Loaded="{x:Bind Effect.ToggleSwitch_Loaded}" Toggled="ToggleSwitch_Toggled">
+                    <ToggleSwitch.Clip>
+                        <RectangleGeometry Rect="0,0,50,50"/>
+                    </ToggleSwitch.Clip>
+                </ToggleSwitch>
+            </Border>
+            
+        </Grid>
 
-    </ItemsControl>
 </UserControl>

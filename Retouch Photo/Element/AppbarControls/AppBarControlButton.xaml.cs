@@ -1,7 +1,7 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
-namespace Retouch_Photo.Controls.AppbarControls
+namespace Retouch_Photo.Element.AppbarControls
 {
     public sealed partial class AppBarControlButton : UserControl
     {         
