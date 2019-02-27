@@ -36,7 +36,9 @@ namespace Retouch_Photo.Pages.EffectPages
 
             if (e.NewValue is EffectManager effectManager)
             {
-                con.BlurAmountSlider.Value = effectManager.BlurAmount;
+                GaussianBlurEffectItem item = effectManager.GaussianBlurEffectItem;
+
+                con.BlurAmountSlider.Value = item.BlurAmount;
             }
         }));
 
@@ -47,12 +49,12 @@ namespace Retouch_Photo.Pages.EffectPages
         {
             this.InitializeComponent();
         }
-
-        private void BlurAmountSlider_ValueChangeDelta(object sender, double value)
+        
+        private void BlurAmountSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             if (this.EffectManager == null) return;
             
-            this.EffectManager.BlurAmount = (float)value;
+            this.EffectManager.GaussianBlurEffectItem.BlurAmount = (float)e.NewValue;
             this.ViewModel.Invalidate();
         }
     }

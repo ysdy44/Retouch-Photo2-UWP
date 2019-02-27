@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Effects;
+﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo.Controls.EffectControls;
 using Retouch_Photo.Pages.EffectPages;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo.Models.Effects
 {
@@ -22,28 +14,31 @@ namespace Retouch_Photo.Models.Effects
             base.Icon = new GaussianBlurControl();
             base.Page = this.page;
         }
-
-        public override void Set(EffectManager effectManager)
-        {
-            bool value = base.ToggleSwitch.IsOn;
-            base.IsOn = value;
-            effectManager.GaussianBlurEffectIsOn = value;
-        }
+        
+        public override EffectItem GetItem(EffectManager effectManager) => effectManager.GaussianBlurEffectItem;
+        public override void SetPage(EffectManager effectManager) => this.page.EffectManager = effectManager;
         public override void Reset(EffectManager effectManager)
         {
             this.page.EffectManager = null;
 
-            effectManager.BlurAmount = 0;
-
-            this.SetPage(effectManager);
+            effectManager.GaussianBlurEffectItem.BlurAmount = 0;
         }
-        public override void SetPage(EffectManager effectManager)
+
+    }
+
+
+    public class GaussianBlurEffectItem : EffectItem
+    {
+        public float BlurAmount;
+
+        public override ICanvasImage Render(ICanvasImage image)
         {
-            this.page.EffectManager = effectManager;
+            return new Microsoft.Graphics.Canvas.Effects.GaussianBlurEffect
+            {
+                Source = image,
+                BlurAmount = this.BlurAmount
+            };
         }
-
-
-
     }
 }
 

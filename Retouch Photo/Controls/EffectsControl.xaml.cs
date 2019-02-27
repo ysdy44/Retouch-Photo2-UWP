@@ -26,12 +26,36 @@ namespace Retouch_Photo.Controls
 
         //ViewModel
         DrawViewModel ViewModel => App.ViewModel;
-
-
-
+        
         Effect Effect;
+        List<Effect> Effects = new List<Effect>
+        {
+            new GaussianBlurEffect(),
+            new OuterShadowEffect(),
+        };
 
-        GaussianBlurEffect GaussianBlurEffect = new GaussianBlurEffect();
+        /// <summary>
+        /// 页面的内容：
+        ///   - null就页面不可视
+        ///   - 否则就页面可视
+        /// </summary>
+        public UIElement EffectContextFrameChild
+        {
+            set
+            {
+                if (value==null)
+                {
+                    this.EffectContextFrame.Child = null;
+                    this.EffectContextControl.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    this.EffectContextFrame.Child = value;
+                    this.EffectContextControl.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
 
         #region DependencyProperty
 
@@ -47,37 +71,52 @@ namespace Retouch_Photo.Controls
 
             if (e.NewValue is Layer layer)
             {
-                con.GaussianBlurEffect.Open(layer.EffectManager.GaussianBlurEffectIsOn);
-            }
+                if (e.OldValue is Layer oldLayer)
+                {
+                    con.EffectContextFrameChild = null;
+                }
+
+                foreach (var effect in con.Effects)
+                {
+                    effect.Open(layer.EffectManager);
+                }
+             }
             else
             {
-                con.GaussianBlurEffect.Close();
+
+                foreach (var effect in con.Effects)
+                {
+                    effect.Close();
+                }
             }
         }));
 
         #endregion
    
+
         public EffectsControl()
         {
-            this.InitializeComponent();            
+            this.InitializeComponent();
 
-            this.ItemsControl.ItemsSource = new List<Effect>
-            {
-                this.GaussianBlurEffect
-            };
+            this.ItemsControl.ItemsSource = this.Effects;
 
             this.BackButton.Tapped += (sender, e) => this.Clear();
             this.ResetButton.Tapped += (sender, e) => this.Reset();
         }
-
-
+        
 
 
         private void EffectControl_EffectToggle(Effect effect)
         {
             if (this.Layer == null) return;
 
-            effect.Set(this.Layer.EffectManager);
+
+            bool value = effect.ToggleSwitch.IsOn;
+            effect.IsOn = value;
+
+            EffectItem effectItem = effect.GetItem(this.Layer.EffectManager);
+            effectItem.IsOn  = value;
+
 
             this.ViewModel.Invalidate();
         }
@@ -88,13 +127,11 @@ namespace Retouch_Photo.Controls
             if (this.Layer == null) return;
 
             effect.SetPage(this.Layer.EffectManager);
-            this.EffectContextFrame.Child = effect.Page;
 
-            this.EffectContextControl.Visibility = Visibility.Visible;
+
+            this.EffectContextFrameChild = effect.Page;
         }
-
-
-
+               
 
 
         /// <summary> 重置 </summary>
@@ -102,7 +139,8 @@ namespace Retouch_Photo.Controls
         {
             if (this.Effect == null) return;
 
-            this.Effect.Reset(this.Layer.EffectManager); 
+            this.Effect.Reset(this.Layer.EffectManager);
+            this.Effect.SetPage(this.Layer.EffectManager);
 
             this.ViewModel.Invalidate();
         }
@@ -110,9 +148,8 @@ namespace Retouch_Photo.Controls
         private void Clear()
         {
             this.Effect = null;
-            this.EffectContextFrame.Child = null;
-            this.EffectContextControl.Visibility = Visibility.Collapsed; 
+            this.EffectContextFrameChild = null;
         }
-
+                     
     }
 }

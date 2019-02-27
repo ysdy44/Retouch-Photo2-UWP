@@ -4,7 +4,7 @@ using Retouch_Photo.Models.Blends;
 using System.Linq;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
-using Retouch_Photo.Controls.BlendControl;
+using Retouch_Photo.Controls.BlendControls;
 
 namespace Retouch_Photo.Models
 {

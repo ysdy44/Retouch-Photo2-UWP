@@ -7,7 +7,6 @@
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:con="using:Retouch_Photo.Controls"
     xmlns:element="using:Retouch_Photo.Element"
-    xmlns:dia="using:Retouch_Photo.Dialogs"
     xmlns:pic="using:Retouch_Photo.Pickers" 
     xmlns:conEffectsControl="using:Retouch_Photo.Controls.EffectsControls"    
     xmlns:local="using:Retouch_Photo.Pages"
@@ -30,7 +29,7 @@
             </local:DrawLayout.RightPane>
 
             <local:DrawLayout.CenterContent>
-                <element:MainCanvasControl x:Name="MainCanvasControl" />
+                <con:MainCanvasControl x:Name="MainCanvasControl" />
             </local:DrawLayout.CenterContent>
 
             <local:DrawLayout.TopLeftPane>

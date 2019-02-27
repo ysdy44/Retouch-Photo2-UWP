@@ -1,6 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo.Controls.BlendControl;
+using Retouch_Photo.Controls.BlendControls;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo.Models.Blends

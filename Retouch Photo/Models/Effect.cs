@@ -51,13 +51,13 @@ namespace Retouch_Photo.Models
         public EffectType Type;
         public FrameworkElement Icon;
         public FrameworkElement Page;
-
-        /// <summary> 设置参数 </summary>
-        public abstract void Set(EffectManager effectManager);
-        /// <summary> 重置参数 </summary>
-        public abstract void Reset(EffectManager effectManager);
+        
+        /// <summary> 得到相应的项 </summary>
+        public abstract EffectItem GetItem(EffectManager effectManager);
         /// <summary> 给当前类的页面来赋值 </summary>
         public abstract void SetPage(EffectManager effectManager);
+        /// <summary> 重置参数 </summary>
+        public abstract void Reset(EffectManager effectManager);      
 
         #region Control
 
@@ -67,9 +67,10 @@ namespace Retouch_Photo.Models
         public Button Button;
         public void Button_Loaded(object sender, RoutedEventArgs e) => this.Button = (Button)sender;
 
-        public void Open(bool isOn)
+        public void Open(EffectManager effectManager)
         {
-            this.IsOn = isOn;
+            EffectItem effectItem = this.GetItem(effectManager);
+            this.IsOn = effectItem.IsOn;
 
             if (this.ToggleSwitch != null)
                 this.ToggleSwitch.IsEnabled = true;
@@ -86,22 +87,27 @@ namespace Retouch_Photo.Models
 
     }
 
+
+    public abstract class EffectItem
+    {
+        public bool IsOn;
+        public abstract ICanvasImage Render(ICanvasImage image);
+    }
     public class EffectManager
     {
-        public float BlurAmount;
-        public bool GaussianBlurEffectIsOn;
+        public GaussianBlurEffectItem GaussianBlurEffectItem = new GaussianBlurEffectItem();
+        public OuterShadowEffectItem OuterShadowEffectItem = new OuterShadowEffectItem();
         
+
         public ICanvasImage Render(ICanvasImage image)
         {
-            if (this.GaussianBlurEffectIsOn) image = new Microsoft.Graphics.Canvas.Effects.GaussianBlurEffect
-            {
-                Source = image,
-                BlurAmount = this.BlurAmount
-            };
+            if (this.GaussianBlurEffectItem.IsOn) image = this.GaussianBlurEffectItem.Render(image);
+            if (this.OuterShadowEffectItem.IsOn) image = this.OuterShadowEffectItem.Render(image);
 
             return image;
         }
     }
+
 
     public enum EffectType
     {
