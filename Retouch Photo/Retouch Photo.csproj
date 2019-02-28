@@ -570,8 +570,8 @@
     <Compile Include="Pages\ToolPages\GeometryPage.xaml.cs">
       <DependentUpon>GeometryPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Element\ToolMarqueeCompositeModeControl.xaml.cs">
-      <DependentUpon>ToolMarqueeCompositeModeControl.xaml</DependentUpon>
+    <Compile Include="Element\CompositeModeControl.xaml.cs">
+      <DependentUpon>CompositeModeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ToolPages\PaintBrushPage.xaml.cs">
       <DependentUpon>PaintBrushPage.xaml</DependentUpon>
@@ -1537,7 +1537,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Element\ToolMarqueeCompositeModeControl.xaml">
+    <Page Include="Element\CompositeModeControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

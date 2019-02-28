@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="50"
-    d:DesignWidth="250">
+    d:DesignWidth="50">
 
 
     <UserControl.Resources>
@@ -22,8 +22,8 @@
 
     </UserControl.Resources>
 
-    <Border Style="{StaticResource AppRoundedBorderStyle}">
-        <ContentPresenter x:Name="ContentPresenter" MinWidth="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Tapped="ContentPresenter_Tapped"/>
+    <Border Style="{StaticResource AppCircleBorderStyle}">
+        <ContentPresenter x:Name="ContentPresenter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Tapped="ContentPresenter_Tapped"/>
     </Border>
 
 </UserControl>

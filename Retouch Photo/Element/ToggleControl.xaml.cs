@@ -66,7 +66,7 @@ namespace Retouch_Photo.Element
         private void ContentPresenter_Tapped(object sender, TappedRoutedEventArgs e) => this.IsChecked = !this.IsChecked;
 
 
-        public void Check(bool isChecked)
+        private void Check(bool isChecked)
         {
             this.ContentPresenter.Background = IsChecked ? this.AccentColor : this.UnAccentColor;
             this.ContentPresenter.Foreground = IsChecked ? this.CheckColor : this.UnCheckColor;

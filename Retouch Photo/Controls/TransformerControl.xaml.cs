@@ -1,25 +1,13 @@
 ﻿using Retouch_Photo.Models;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using static Retouch_Photo.Library.TransformController;
 
 namespace Retouch_Photo.Controls
 {
     public sealed partial class TransformerControl : UserControl
-    {
-
+    { 
 
         #region DependencyProperty
 
@@ -76,11 +64,31 @@ namespace Retouch_Photo.Controls
 
             this.WPicker.Minimum = int.MinValue;
             this.WPicker.Maximum = int.MaxValue;
-            this.WPicker.ValueChange += (sender, value) => this.Navigator((m) => m.Transformer.XScale = value / 100);
+            this.WPicker.ValueChange += (sender, value) => this.Navigator((m) =>
+            {
+                float xScale = value / 100;
+                m.Transformer.XScale = xScale;
+
+                if (this.RatioToggleControl.IsChecked)
+                {
+                    float yScale = m.Transformer.YScale * xScale;
+                    m.Transformer.YScale = yScale;
+                }
+            });
 
             this.HPicker.Minimum = int.MinValue;
             this.HPicker.Maximum = int.MaxValue;
-            this.HPicker.ValueChange += (sender, value) => this.Navigator((m) => m.Transformer.YScale = value / 100);
+            this.HPicker.ValueChange += (sender, value) => this.Navigator((m) =>
+            {
+                float yScale = value / 100;
+                m.Transformer.YScale = yScale;
+
+                if (this.RatioToggleControl.IsChecked)
+                {
+                    float xScale = m.Transformer.XScale * yScale;
+                    m.Transformer.XScale = xScale;
+                }
+            });
 
             this.XPicker.Minimum = int.MinValue;
             this.XPicker.Maximum = int.MaxValue;
@@ -90,12 +98,12 @@ namespace Retouch_Photo.Controls
             this.YPicker.Maximum = int.MaxValue;
             this.YPicker.ValueChange += (sender, value) => this.Navigator((m) => m.Transformer.Postion.Y = value);
 
-            this.RPicker.Minimum = -(int)(Transformer.PI * 180);
-            this.RPicker.Maximum = (int)(Transformer.PI * 180);
+            this.RPicker.Minimum = -(int)(Transformer.PI * 180f);
+            this.RPicker.Maximum = (int)(Transformer.PI * 180f);
             this.RPicker.ValueChange += (sender, value) => this.Navigator((m) => m.Transformer.Radian = value * Transformer.PI/ 180f );
 
-            this.SPicker.Minimum = -(int)(Transformer.PI * 180);
-            this.SPicker.Maximum = (int)(Transformer.PI * 180);
+            this.SPicker.Minimum = -(int)(Transformer.PI * 180f);
+            this.SPicker.Maximum = (int)(Transformer.PI * 180f);
             this.SPicker.ValueChange += (sender, value) => this.Navigator((m) => m.Transformer.Skew = value * Transformer.PI/ 180f );
         }
 
@@ -153,6 +161,5 @@ namespace Retouch_Photo.Controls
             this.RPicker.IsEnabled = enable;
             this.SPicker.IsEnabled = enable;
         }
-
     }
 }
