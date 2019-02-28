@@ -8,9 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"   
-    xmlns:conOpe="using:Retouch_Photo.Controls.OperateControls"
-
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d">
 
     <UserControl.Resources>

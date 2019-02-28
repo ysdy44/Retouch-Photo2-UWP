@@ -7,7 +7,7 @@
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     xmlns:local="using:Retouch_Photo.Controls"
     xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
-    xmlns:conLayersControls="using:Retouch_Photo.Controls.LayerControls"
+    xmlns:conLayersControls="using:Retouch_Photo.Controls.LayersControls"
     xmlns:models="using:Retouch_Photo.Models"
     mc:Ignorable="d"
     d:DesignHeight="800"
@@ -23,7 +23,7 @@
         
         <!--Flyout-->
         <Flyout x:Name="PropertyFlyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle }">
-            <local:LayerControl Width="222" Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}"/>
+            <conLayersControls:LayerControl Width="222" Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}"/>
         </Flyout>
         
         <!--Style-->

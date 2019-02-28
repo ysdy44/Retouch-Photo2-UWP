@@ -1,10 +1,8 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo.Models.Blends;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using Windows.UI.Xaml;
-using Retouch_Photo.Controls.BlendControls;
 
 namespace Retouch_Photo.Models
 {
@@ -20,40 +18,40 @@ namespace Retouch_Photo.Models
         //@static
         public static List<Blend> BlendList = new List<Blend>
         {
-             new NormalBlend(),//正常
+             new NormalBlend(),
             
-             new MultiplyBlend(),//正片叠底            
-             new ScreenBlend(),//屏幕            
-             new DissolveBlend(),//溶解
+             new MultiplyBlend(),
+             new ScreenBlend(),            
+             new DissolveBlend(),
             
-             new DarkenBlend(),//暗            
-             new LightenBlend(),//亮          
-             new DarkerColorBlend(),//更暗的颜色           
-             new LighterColorBlend(),//更亮的颜色
+             new DarkenBlend(),            
+             new LightenBlend(),          
+             new DarkerColorBlend(),           
+             new LighterColorBlend(),
           
-             new ColorBurnBlend(),//颜色加深            
-             new ColorDodgeBlend(),//颜色减淡          
-             new LinearBurnBlend(),//线性加深          
-             new LinearDodgeBlend(),//线性减淡
+             new ColorBurnBlend(),
+             new ColorDodgeBlend(),
+             new LinearBurnBlend(),
+             new LinearDodgeBlend(),
                      
-             new OverlayBlend(),//覆盖            
-             new SoftLightBlend(),//柔光          
-             new HardLightBlend(),//硬光      
-             new VividLightBlend(),//艳光         
-             new LinearLightBlend(),//线性光         
-             new PinLightBlend(),//射灯
+             new OverlayBlend(),            
+             new SoftLightBlend(),          
+             new HardLightBlend(),      
+             new VividLightBlend(),         
+             new LinearLightBlend(),         
+             new PinLightBlend(),
             
-             new HardMixBlend(),//硬混     
-             new DifferenceBlend(),//差异            
-             new ExclusionBlend(),//排除
+             new HardMixBlend(),     
+             new DifferenceBlend(),            
+             new ExclusionBlend(),
           
-             new HueBlend(),//色相          
-             new SaturationBlend(),//饱和度          
-             new ColorBlend(),//颜色
+             new HueBlend(),
+            new SaturationBlend(),          
+             new ColorBlend(),
            
-             new LuminosityBlend(),//光度          
-             new SubtractBlend(),//减去           
-             new DivisionBlend(),//反色
+             new LuminosityBlend(),          
+             new SubtractBlend(),           
+             new DivisionBlend(),
         };
     }
 

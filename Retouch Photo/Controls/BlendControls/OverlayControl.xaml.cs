@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Navigation;
 
 
 
-namespace Retouch_Photo.Controls.BlendControls
+namespace Retouch_Photo.Controls.BlendsControls
 {
     public sealed partial class OverlayControl : UserControl
     {

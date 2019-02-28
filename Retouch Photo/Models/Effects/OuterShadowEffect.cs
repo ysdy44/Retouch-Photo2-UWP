@@ -1,6 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo.Controls.EffectControls;
+using Retouch_Photo.Controls.EffectsControls;
 using Retouch_Photo.Pages.EffectPages;
 using System;
 using System.Numerics;
@@ -29,7 +29,7 @@ namespace Retouch_Photo.Models.Effects
             effectManager.OuterShadowEffectItem.Opacity = 0.5f;
             effectManager.OuterShadowEffectItem.Color = Colors.Black;
             effectManager.OuterShadowEffectItem.Offset = 0;
-            effectManager.OuterShadowEffectItem.Radians = 0.78539816339744830961566084581988f;// 1/4 π
+            effectManager.OuterShadowEffectItem.Angle = 0.78539816339744830961566084581988f;// 1/4 π
         }
     }
 
@@ -46,18 +46,18 @@ namespace Retouch_Photo.Models.Effects
             get => this.offset;
             set
             {
-                this.Position = new Vector2((float)Math.Cos(this.Radians), (float)Math.Sin(this.Radians)) * value; 
+                this.Position = new Vector2((float)Math.Cos(this.Angle), (float)Math.Sin(this.Angle)) * value; 
                 this.offset = value;
             }
         }
-        private float radians = 0.78539816339744830961566084581988f;// 1/4 π
-        public float Radians
+        private float angle = 0.78539816339744830961566084581988f;// 1/4 π
+        public float Angle
         {
-            get => this.radians;
+            get => this.angle;
             set
             {
                 this.Position = new Vector2((float)Math.Cos(value), (float)Math.Sin(value)) * this.Offset; 
-                this.radians = value;
+                this.angle = value; 
             }
         }
         Vector2 Position;

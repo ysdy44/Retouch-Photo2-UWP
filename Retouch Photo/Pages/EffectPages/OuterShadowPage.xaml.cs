@@ -44,7 +44,7 @@ namespace Retouch_Photo.Pages.EffectPages
                 con.RadiusSlider.Value = item.Radius;
                 con.OpacitySlider.Value = item.Opacity * 100.0;
                 con.OffsetSlider.Value = item.Offset;
-                con.RadiansPicker.Radians = item.Radians;
+                con.AnglePicker.Radians = item.Angle;
                 con.SolidColorBrush.Color = item.Color;
             }
         }));
@@ -82,11 +82,11 @@ namespace Retouch_Photo.Pages.EffectPages
             this.ViewModel.Invalidate();
         }
 
-        private void RadiansPicker_RadiansChange(float radians)
+        private void AnglePicker_AngleChange(float radians)
         {
             if (this.EffectManager == null) return;
             
-            this.EffectManager.OuterShadowEffectItem.Radians = radians;
+            this.EffectManager.OuterShadowEffectItem.Angle = radians;
             this.ViewModel.Invalidate();
         }
          

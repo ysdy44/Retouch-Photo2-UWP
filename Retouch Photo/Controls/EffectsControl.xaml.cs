@@ -1,5 +1,4 @@
-﻿using Retouch_Photo.Controls.EffectControls;
-using Retouch_Photo.Models;
+﻿using Retouch_Photo.Models;
 using Retouch_Photo.Models.Effects;
 using Retouch_Photo.Pages.EffectPages;
 using Retouch_Photo.ViewModels;
@@ -26,36 +25,43 @@ namespace Retouch_Photo.Controls
 
         //ViewModel
         DrawViewModel ViewModel => App.ViewModel;
-        
-        Effect Effect;
-        List<Effect> Effects = new List<Effect>
-        {
-            new GaussianBlurEffect(),
-            new OuterShadowEffect(),
-        };
-
-        /// <summary>
-        /// 页面的内容：
-        ///   - null就页面不可视
-        ///   - 否则就页面可视
-        /// </summary>
-        public UIElement EffectContextFrameChild
+                
+        public bool FrameVisibility
         {
             set
             {
-                if (value==null)
-                {
-                    this.EffectContextFrame.Child = null;
-                    this.EffectContextControl.Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    this.EffectContextFrame.Child = value;
-                    this.EffectContextControl.Visibility = Visibility.Visible;
-                }
+                this.BackButton.Visibility =
+                this.ResetButton.Visibility =
+                this.Frame.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
+
+                this.ItemsControl.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+        
+        private Effect effect;
+        public Effect Effect
+        {
+            get => this.effect;
+            set
+            {
+                if (value == null) return;
+                if (this.Layer == null) return;
+
+                value.SetPage(this.Layer.EffectManager);
+
+                this.Frame.Child = value.Page;
+                this.FrameVisibility = true;
+
+                this.effect = value;
             }
         }
 
+        List<Effect> Effects = new List<Effect>
+        {
+            new GaussianBlurEffect(),
+            new DirectionalBlurEffect(),
+            new OuterShadowEffect(),
+        };
 
         #region DependencyProperty
 
@@ -73,21 +79,23 @@ namespace Retouch_Photo.Controls
             {
                 if (e.OldValue is Layer oldLayer)
                 {
-                    con.EffectContextFrameChild = null;
+                    con.Frame.Child = null;
+                    con.FrameVisibility = false;
                 }
 
+                con.IsEnabled = true;
                 foreach (var effect in con.Effects)
                 {
-                    effect.Open(layer.EffectManager);
+                    EffectItem effectItem = effect.GetItem(layer.EffectManager);
+                    effect.IsOn = effectItem.IsOn;
                 }
              }
             else
             {
+                con.IsEnabled = false;
 
-                foreach (var effect in con.Effects)
-                {
-                    effect.Close();
-                }
+                con.Frame.Child = null;
+                con.FrameVisibility = false;
             }
         }));
 
@@ -98,43 +106,40 @@ namespace Retouch_Photo.Controls
         {
             this.InitializeComponent();
 
+            this.IsEnabled =
+            this.FrameVisibility = false;
             this.ItemsControl.ItemsSource = this.Effects;
 
+            //Button
             this.BackButton.Tapped += (sender, e) => this.Clear();
             this.ResetButton.Tapped += (sender, e) => this.Reset();
         }
-        
 
 
-        private void EffectControl_EffectToggle(Effect effect)
+        //Effect
+        private void EffectControl_EffectToggle(Effect effect) => this .Toggle(effect);
+        private void EffectControl_EffectTapped(Effect effect) => this.Effect = effect;
+
+
+        /// <summary> Toggle Effect's IsOn. </summary>
+        private void Toggle(Effect effect)
         {
             if (this.Layer == null) return;
 
 
-            bool value = effect.ToggleSwitch.IsOn;
+            bool value = effect.ToggleSwitchIsOn;
+
             effect.IsOn = value;
 
             EffectItem effectItem = effect.GetItem(this.Layer.EffectManager);
-            effectItem.IsOn  = value;
+            effectItem.IsOn = value;
 
 
             this.ViewModel.Invalidate();
         }
-        private void EffectControl_EffectTapped(Effect effect)
-        {
-            this.Effect = effect;
+        
 
-            if (this.Layer == null) return;
-
-            effect.SetPage(this.Layer.EffectManager);
-
-
-            this.EffectContextFrameChild = effect.Page;
-        }
-               
-
-
-        /// <summary> 重置 </summary>
+        /// <summary> Reset the Effect. </summary>
         private void Reset()
         {
             if (this.Effect == null) return;
@@ -144,12 +149,12 @@ namespace Retouch_Photo.Controls
 
             this.ViewModel.Invalidate();
         }
-        /// <summary> 清空 </summary>
+        /// <summary> Clear the Effect. </summary>
         private void Clear()
         {
             this.Effect = null;
-            this.EffectContextFrameChild = null;
-        }
-                     
+            this.Frame.Child = null;
+            this.FrameVisibility = false;
+        } 
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo.Controls.EffectControls;
+using Retouch_Photo.Controls.EffectsControls;
 using Retouch_Photo.Pages.EffectPages;
 
 namespace Retouch_Photo.Models.Effects

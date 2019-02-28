@@ -13,8 +13,8 @@
     <StackPanel Background="{ThemeResource AppForeground}">
 
 
-        <TextBlock Text="View" Style="{StaticResource AppTextBlock}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
-        <Border  MinHeight="122" Background="{ThemeResource AppFill}">
+        <TextBlock Visibility="Collapsed"  Text="View" Style="{StaticResource AppTextBlock}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
+        <Border Visibility="Collapsed" MinHeight="122" Background="{ThemeResource AppFill}">
             <xaml:CanvasControl x:Name="CanvasControl"/>
         </Border>
 

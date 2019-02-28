@@ -95,34 +95,43 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdjustmentControls\BrightnessControl.xaml.cs">
+    <Compile Include="Controls\AdjustmentsControls\BrightnessControl.xaml.cs">
       <DependentUpon>BrightnessControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdjustmentControls\ContrastControl.xaml.cs">
+    <Compile Include="Controls\AdjustmentsControls\ContrastControl.xaml.cs">
       <DependentUpon>ContrastControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdjustmentControls\ExposureControl.xaml.cs">
+    <Compile Include="Controls\AdjustmentsControls\ExposureControl.xaml.cs">
       <DependentUpon>ExposureControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdjustmentControls\GrayControl.xaml.cs">
+    <Compile Include="Controls\AdjustmentsControls\GrayControl.xaml.cs">
       <DependentUpon>GrayControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdjustmentControls\HighlightsAndShadowsControl.xaml.cs">
+    <Compile Include="Controls\AdjustmentsControls\HighlightsAndShadowsControl.xaml.cs">
       <DependentUpon>HighlightsAndShadowsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdjustmentControls\HueRotationControl.xaml.cs">
+    <Compile Include="Controls\AdjustmentsControls\HueRotationControl.xaml.cs">
       <DependentUpon>HueRotationControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdjustmentControls\InvertControl.xaml.cs">
+    <Compile Include="Controls\AdjustmentsControls\InvertControl.xaml.cs">
       <DependentUpon>InvertControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdjustmentControls\SaturationControl.xaml.cs">
+    <Compile Include="Controls\AdjustmentsControls\SaturationControl.xaml.cs">
       <DependentUpon>SaturationControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdjustmentControls\TemperatureControl.xaml.cs">
+    <Compile Include="Controls\AdjustmentsControls\TemperatureControl.xaml.cs">
       <DependentUpon>TemperatureControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\EffectControls\OuterShadowControl.xaml.cs">
+    <Compile Include="Controls\AdjustmentsControl.xaml.cs">
+      <DependentUpon>AdjustmentsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AdjustmentsControls\AdjustmentsControlIcon.xaml.cs">
+      <DependentUpon>AdjustmentsControlIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EffectsControls\DirectionalBlurControl.xaml.cs">
+      <DependentUpon>DirectionalBlurControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EffectsControls\OuterShadowControl.xaml.cs">
       <DependentUpon>OuterShadowControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\EffectsControls\EffectsControlIcon.xaml.cs">
@@ -155,16 +164,16 @@
     <Compile Include="Controls\ColorControl.xaml.cs">
       <DependentUpon>ColorControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\EffectControl.xaml.cs">
+    <Compile Include="Controls\EffectsControls\EffectControl.xaml.cs">
       <DependentUpon>EffectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\EffectControls\GaussianBlurControl.xaml.cs">
+    <Compile Include="Controls\EffectsControls\GaussianBlurControl.xaml.cs">
       <DependentUpon>GaussianBlurControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\EffectsControl.xaml.cs">
       <DependentUpon>EffectsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LayerControl.xaml.cs">
+    <Compile Include="Controls\LayersControls\LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\NavigatorControl.xaml.cs">
@@ -356,16 +365,13 @@
     <Compile Include="Controls\LayersControl.xaml.cs">
       <DependentUpon>LayersControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LayerControls\AdjustmentControl.xaml.cs">
+    <Compile Include="Controls\AdjustmentsControls\AdjustmentControl.xaml.cs">
       <DependentUpon>AdjustmentControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LayerControls\AdjustmentContextControl.xaml.cs">
-      <DependentUpon>AdjustmentContextControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\LayerControls\BlendControl.xaml.cs">
+    <Compile Include="Controls\LayersControls\BlendControl.xaml.cs">
       <DependentUpon>BlendControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LayerControls\LayoutControl.xaml.cs">
+    <Compile Include="Controls\LayersControls\LayoutControl.xaml.cs">
       <DependentUpon>LayoutControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Element\LoadingControl.xaml.cs">
@@ -479,6 +485,7 @@
     <Compile Include="Models\Blends\SubtractBlend.cs" />
     <Compile Include="Models\Blends\VividLightBlend.cs" />
     <Compile Include="Models\Effect.cs" />
+    <Compile Include="Models\Effects\DirectionalBlurEffect.cs" />
     <Compile Include="Models\Effects\GaussianBlurEffect.cs" />
     <Compile Include="Models\Effects\OuterShadowEffect.cs" />
     <Compile Include="Models\Layers\AcrylicLayer.cs" />
@@ -524,6 +531,9 @@
     </Compile>
     <Compile Include="Pages\DrawPage.xaml.cs">
       <DependentUpon>DrawPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EffectPages\DirectionalBlurPage.xaml.cs">
+      <DependentUpon>DirectionalBlurPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\EffectPages\GaussianBlurPage.xaml.cs">
       <DependentUpon>GaussianBlurPage.xaml</DependentUpon>
@@ -997,43 +1007,55 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\AdjustmentControls\BrightnessControl.xaml">
+    <Page Include="Controls\AdjustmentsControls\BrightnessControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AdjustmentControls\ContrastControl.xaml">
+    <Page Include="Controls\AdjustmentsControls\ContrastControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AdjustmentControls\ExposureControl.xaml">
+    <Page Include="Controls\AdjustmentsControls\ExposureControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AdjustmentControls\GrayControl.xaml">
+    <Page Include="Controls\AdjustmentsControls\GrayControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AdjustmentControls\HighlightsAndShadowsControl.xaml">
+    <Page Include="Controls\AdjustmentsControls\HighlightsAndShadowsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AdjustmentControls\HueRotationControl.xaml">
+    <Page Include="Controls\AdjustmentsControls\HueRotationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AdjustmentControls\InvertControl.xaml">
+    <Page Include="Controls\AdjustmentsControls\InvertControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AdjustmentControls\SaturationControl.xaml">
+    <Page Include="Controls\AdjustmentsControls\SaturationControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AdjustmentControls\TemperatureControl.xaml">
+    <Page Include="Controls\AdjustmentsControls\TemperatureControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\EffectControls\OuterShadowControl.xaml">
+    <Page Include="Controls\AdjustmentsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AdjustmentsControls\AdjustmentsControlIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EffectsControls\DirectionalBlurControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\EffectsControls\OuterShadowControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1077,11 +1099,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\EffectControl.xaml">
+    <Page Include="Controls\EffectsControls\EffectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\EffectControls\GaussianBlurControl.xaml">
+    <Page Include="Controls\EffectsControls\GaussianBlurControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1089,7 +1111,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\LayerControl.xaml">
+    <Page Include="Controls\LayersControls\LayerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1345,19 +1367,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\LayerControls\AdjustmentControl.xaml">
+    <Page Include="Controls\AdjustmentsControls\AdjustmentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\LayerControls\AdjustmentContextControl.xaml">
+    <Page Include="Controls\LayersControls\BlendControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\LayerControls\BlendControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\LayerControls\LayoutControl.xaml">
+    <Page Include="Controls\LayersControls\LayoutControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1480,6 +1498,10 @@
     <Page Include="Pages\DrawPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EffectPages\DirectionalBlurPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\EffectPages\GaussianBlurPage.xaml">
       <SubType>Designer</SubType>

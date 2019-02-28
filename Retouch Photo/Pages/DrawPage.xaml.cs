@@ -40,6 +40,8 @@ namespace Retouch_Photo.Pages
             this.LayoutBinging(this.SelectionLayout, this.SelectionToggleButton);
             //Operate
             this.LayoutBinging(this.OperateLayout, this.OperateToggleButton);
+            //Adjustment
+            this.LayoutBinging(this.AdjustmentLayout, this.AdjustmentToggleButton);
             //Effect
             this.LayoutBinging(this.EffectLayout, this.EffectToggleButton);
             //Transformer

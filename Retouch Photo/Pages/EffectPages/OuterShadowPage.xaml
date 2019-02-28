@@ -1,13 +1,14 @@
 ﻿<Page
     x:Class="Retouch_Photo.Pages.EffectPages.OuterShadowPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Retouch_Photo.Pages.EffectPages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pic="using:Retouch_Photo.Pickers"
     xmlns:element="using:Retouch_Photo.Element"
+    xmlns:pic="using:Retouch_Photo.Pickers"
     mc:Ignorable="d"
+    d:DesignHeight="400"
+    d:DesignWidth="200"
     >
 
     <Page.Resources>
@@ -36,11 +37,11 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="Radians" Style="{StaticResource AppTextBlock}"/>
-            <element:RadiansPicker x:Name="RadiansPicker" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Angle" Style="{StaticResource AppTextBlock}"/>
+            <element:RadiansPicker x:Name="AnglePicker" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"
                                BorderBrush="{ThemeResource AppBorderBrush}"
                                Background="{ThemeResource AppBackground}"
-                               RadiansChange="RadiansPicker_RadiansChange"/>
+                               RadiansChange="AnglePicker_AngleChange"/>
 
             <TextBlock Grid.Column="1" Grid.Row="0" Text="Color" Style="{StaticResource AppTextBlock}"/>
             <Border x:Name="ColorButton" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource AppCircleBorderStyle}" Tapped="ColorButton_Tapped">

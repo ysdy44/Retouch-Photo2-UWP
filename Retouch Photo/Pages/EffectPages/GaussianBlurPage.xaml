@@ -1,12 +1,12 @@
 ﻿<Page
     x:Class="Retouch_Photo.Pages.EffectPages.GaussianBlurPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Retouch_Photo.Pages.EffectPages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pic="using:Retouch_Photo.Pickers"
     mc:Ignorable="d"
+    d:DesignHeight="400"
+    d:DesignWidth="200"
     >
 
     <StackPanel >

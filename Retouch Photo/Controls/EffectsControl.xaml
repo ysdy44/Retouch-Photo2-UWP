@@ -1,48 +1,43 @@
 ﻿<UserControl
     x:Class="Retouch_Photo.Controls.EffectsControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Retouch_Photo.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conEffectsControls="using:Retouch_Photo.Controls.EffectsControls"
     xmlns:models="using:Retouch_Photo.Models"
-    xmlns:effects="using:Retouch_Photo.Models.Effects"
-    xmlns:effects1="using:Retouch_Photo.Controls.EffectControls"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    >
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*" MinHeight="165"/>
+        </Grid.RowDefinitions>
 
-        <ItemsControl x:Name="ItemsControl">
+        
+        <ItemsControl x:Name="ItemsControl" Grid.ColumnSpan="3" Grid.RowSpan="2">
             <ItemsControl.ItemTemplate>
                 <DataTemplate x:DataType="models:Effect">
-                    <local:EffectControl Effect="{x:Bind}" 
+                    <conEffectsControls:EffectControl 
+                                         Effect="{x:Bind}" 
                                          EffectTapped="EffectControl_EffectTapped"
                                          EffectToggle="EffectControl_EffectToggle"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
- 
-        
-        
-        <StackPanel x:Name="EffectContextControl" Visibility="Collapsed" Background="{ThemeResource AppForeground}">
 
-            <Grid>
-                <Button x:Name="BackButton" Width="50" Height="40" HorizontalAlignment="Left" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
-                    <FontIcon Glyph="&#xE0A6;" FontFamily="Segoe MDL2 Assets"/>
-                </Button>
-                <Button x:Name="ResetButton" Width="50" Height="40" HorizontalAlignment="Right" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" >
-                    <FontIcon Glyph="&#xE149;" FontFamily="Segoe MDL2 Assets"/>
-                </Button>
-            </Grid>
 
-            <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
+        <Button x:Name="BackButton" Grid.Column="0" Content="&#xE0A6;" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
+        <Button x:Name="ResetButton" Grid.Column="2" Content="&#xE149;" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
+        <Border x:Name="Frame" Grid.ColumnSpan="3" Grid.Row="1" Background="Transparent"/>
 
-            <Border x:Name="EffectContextFrame" Background="Transparent"/>
-
-        </StackPanel>
-        
-        
     </Grid>
 </UserControl>

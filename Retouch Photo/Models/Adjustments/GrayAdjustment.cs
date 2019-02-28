@@ -1,6 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo.Controls.AdjustmentControls;
+using Retouch_Photo.Controls.AdjustmentsControls;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo.Models.Adjustments

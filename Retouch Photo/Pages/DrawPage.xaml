@@ -12,6 +12,8 @@
     xmlns:local="using:Retouch_Photo.Pages"
     xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
     xmlns:conOpe="using:Retouch_Photo.Controls.OperateControls"
+    xmlns:conAdjustmentsControls="using:Retouch_Photo.Controls.AdjustmentsControls"
+    xmlns:conLayersControls="using:Retouch_Photo.Controls.LayersControls"
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
 
@@ -65,6 +67,11 @@
                         <PathIcon Style="{StaticResource AppIconElement}" Data="M10.109,15.47l2.391,0l0,6.242l-2.391,0l0,-6.242Zm14.891,4.298l-11.65,0l0,-2.4l11.65,0l0,2.4Zm-15.526,0l-9.474,0l0,-2.4l9.474,0l0,2.4Zm-5.248,-11.909l2.391,0l0,6.242l-2.391,0l0,-6.242Zm20.774,4.321l-17.574,0l0,-2.4l17.574,0l0,2.4Zm-21.59,0l-3.41,0l0,-2.4l3.41,0l0,2.4Zm11.579,-12.18l2.391,0l0,6.242l-2.391,0l0,-6.242Zm-14.989,1.868l14.251,0l0,2.4l-14.251,0l0,-2.4Zm18.133,0l6.867,0l0,2.4l-6.867,0l0,-2.4Z"/>
                     </ToggleButton>
 
+                    <!--Adjustment-->
+                    <ToggleButton x:Name="AdjustmentToggleButton" Height="50" Width="60" BorderThickness="0" Background="Transparent" >
+                        <conAdjustmentsControls:AdjustmentsControlIcon/>
+                    </ToggleButton>
+                    
                     <!--Effect-->
                     <ToggleButton x:Name="EffectToggleButton" Height="50" Width="60" BorderThickness="0" Background="Transparent" >
                         <conEffectsControl:EffectsControlIcon/>
@@ -117,6 +124,16 @@
                 </local:MenuLayout.FlyoutContent>
             </local:MenuLayout>
 
+            <!--Adjustment-->
+            <local:MenuLayout x:Name="AdjustmentLayout" Text="Adjustment" Placement="Bottom" Visibility="Collapsed">
+                <local:MenuLayout.CenterContent>
+                    <con:AdjustmentsControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
+                </local:MenuLayout.CenterContent>
+                <local:MenuLayout.FlyoutContent>
+                    <con:AdjustmentsControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
+                </local:MenuLayout.FlyoutContent>
+            </local:MenuLayout>
+
             <!--Effects-->
             <local:MenuLayout x:Name="EffectLayout" Text="Effect" Placement="Bottom" Visibility="Collapsed">
                 <local:MenuLayout.CenterContent>
@@ -160,10 +177,10 @@
             <!--Layer-->
             <local:MenuLayout x:Name="LayerLayout" Text="Layer" Placement="Left" Visibility="Collapsed">
                 <local:MenuLayout.CenterContent>
-                    <con:LayerControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}"/>
+                    <conLayersControls:LayerControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}"/>
                 </local:MenuLayout.CenterContent>
                 <local:MenuLayout.FlyoutContent>
-                    <con:LayerControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}"/>
+                    <conLayersControls:LayerControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}"/>
                 </local:MenuLayout.FlyoutContent>
             </local:MenuLayout>
 

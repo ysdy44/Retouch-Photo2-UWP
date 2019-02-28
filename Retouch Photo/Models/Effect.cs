@@ -37,7 +37,7 @@ namespace Retouch_Photo.Models
                 if (this.Button != null)
                 {
                     this.Button.IsEnabled = value;
-                    this.Button.Opacity = value ? 1.0 : 0.5;
+                    //this.Button.Opacity = value ? 1.0 : 0.5;
                 }
 
                 if (this.ToggleSwitch != null)
@@ -57,31 +57,16 @@ namespace Retouch_Photo.Models
         /// <summary> 给当前类的页面来赋值 </summary>
         public abstract void SetPage(EffectManager effectManager);
         /// <summary> 重置参数 </summary>
-        public abstract void Reset(EffectManager effectManager);      
+        public abstract void Reset(EffectManager effectManager);
 
         #region Control
 
-        public ToggleSwitch ToggleSwitch;
+        ToggleSwitch ToggleSwitch;
+        public bool ToggleSwitchIsOn=>this.ToggleSwitch.IsOn;
         public void ToggleSwitch_Loaded(object sender, RoutedEventArgs e) => this.ToggleSwitch = (ToggleSwitch)sender;        
 
-        public Button Button;
+        Button Button;
         public void Button_Loaded(object sender, RoutedEventArgs e) => this.Button = (Button)sender;
-
-        public void Open(EffectManager effectManager)
-        {
-            EffectItem effectItem = this.GetItem(effectManager);
-            this.IsOn = effectItem.IsOn;
-
-            if (this.ToggleSwitch != null)
-                this.ToggleSwitch.IsEnabled = true;
-        }
-        public void Close()
-        {
-            this.IsOn = false;
-
-            if (this.ToggleSwitch != null)
-                this.ToggleSwitch.IsEnabled = false;
-        }
 
         #endregion
 
@@ -95,13 +80,15 @@ namespace Retouch_Photo.Models
     }
     public class EffectManager
     {
-        public GaussianBlurEffectItem GaussianBlurEffectItem = new GaussianBlurEffectItem();
+        public GaussianBlurEffectItem GaussianBlurEffectItem = new GaussianBlurEffectItem(); 
+        public DirectionalBlurEffectItem DirectionalBlurEffectItem = new DirectionalBlurEffectItem(); 
         public OuterShadowEffectItem OuterShadowEffectItem = new OuterShadowEffectItem();
         
 
         public ICanvasImage Render(ICanvasImage image)
         {
             if (this.GaussianBlurEffectItem.IsOn) image = this.GaussianBlurEffectItem.Render(image);
+            if (this.DirectionalBlurEffectItem.IsOn) image = this.DirectionalBlurEffectItem.Render(image);
             if (this.OuterShadowEffectItem.IsOn) image = this.OuterShadowEffectItem.Render(image);
 
             return image;
@@ -113,6 +100,8 @@ namespace Retouch_Photo.Models
     {
         /// <summary> 高斯模糊 </summary>
         GaussianBlur,
+        /// <summary> 定向模糊 </summary>
+        DirectionalBlur,
 
         /// <summary> 外部投影 </summary>
         OuterShadow,
