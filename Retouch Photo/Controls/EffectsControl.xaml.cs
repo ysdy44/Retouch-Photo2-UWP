@@ -61,6 +61,11 @@ namespace Retouch_Photo.Controls
             new GaussianBlurEffect(),
             new DirectionalBlurEffect(),
             new OuterShadowEffect(),
+
+            new OutlineEffect(),
+
+            new EmbossEffect(),
+            new StraightenEffect(),
         };
 
         #region DependencyProperty
@@ -83,13 +88,14 @@ namespace Retouch_Photo.Controls
                     con.FrameVisibility = false;
                 }
 
-                con.IsEnabled = true;
                 foreach (var effect in con.Effects)
                 {
                     EffectItem effectItem = effect.GetItem(layer.EffectManager);
                     effect.IsOn = effectItem.IsOn;
                 }
-             }
+                con.IsEnabled = true;
+
+            }
             else
             {
                 con.IsEnabled = false;

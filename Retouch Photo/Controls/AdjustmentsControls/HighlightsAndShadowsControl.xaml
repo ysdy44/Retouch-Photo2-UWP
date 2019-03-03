@@ -31,7 +31,7 @@
             </Ellipse.Fill>
         </Ellipse>
         
-        <TextBlock Text="HighlightsAndShadows" Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+        <TextBlock Text="Highlights and Shadows" Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
         
     </Grid>
     

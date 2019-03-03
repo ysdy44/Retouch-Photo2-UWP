@@ -81,8 +81,13 @@ namespace Retouch_Photo.Models
     public class EffectManager
     {
         public GaussianBlurEffectItem GaussianBlurEffectItem = new GaussianBlurEffectItem(); 
-        public DirectionalBlurEffectItem DirectionalBlurEffectItem = new DirectionalBlurEffectItem(); 
+        public DirectionalBlurEffectItem DirectionalBlurEffectItem = new DirectionalBlurEffectItem();
         public OuterShadowEffectItem OuterShadowEffectItem = new OuterShadowEffectItem();
+
+        public OutlineEffectItem OutlineEffectItem = new OutlineEffectItem();
+
+        public EmbossEffectItem EmbossEffectItem = new EmbossEffectItem();
+        public StraightenEffectItem StraightenEffectItem = new StraightenEffectItem();
         
 
         public ICanvasImage Render(ICanvasImage image)
@@ -90,6 +95,11 @@ namespace Retouch_Photo.Models
             if (this.GaussianBlurEffectItem.IsOn) image = this.GaussianBlurEffectItem.Render(image);
             if (this.DirectionalBlurEffectItem.IsOn) image = this.DirectionalBlurEffectItem.Render(image);
             if (this.OuterShadowEffectItem.IsOn) image = this.OuterShadowEffectItem.Render(image);
+
+            if (this.OutlineEffectItem.IsOn) image = this.OutlineEffectItem.Render(image);
+
+            if (this.EmbossEffectItem.IsOn) image = this.EmbossEffectItem.Render(image);
+            if (this.StraightenEffectItem.IsOn) image = this.StraightenEffectItem.Render(image);
 
             return image;
         }
@@ -102,6 +112,26 @@ namespace Retouch_Photo.Models
         GaussianBlur,
         /// <summary> 定向模糊 </summary>
         DirectionalBlur,
+
+        /// <summary> 外部投影 </summary>
+        OuterShadow,
+
+        /// <summary> 轮廓 </summary>
+        Outline,
+
+        /// <summary> 浮雕 </summary>
+        Emboss,
+        /// <summary> 拉直 </summary>
+        Straighten
+    }
+
+
+    /*
+     
+    public enum EffectType
+    {
+        /// <summary> 高斯模糊 </summary>
+        GaussianBlur,
 
         /// <summary> 外部投影 </summary>
         OuterShadow,
@@ -125,5 +155,7 @@ namespace Retouch_Photo.Models
         /// <summary> 渐变覆盖 </summary>
         GradientOverlay,
     }
-    
+
+
+    */
 }

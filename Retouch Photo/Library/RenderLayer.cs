@@ -126,7 +126,8 @@ namespace Retouch_Photo.Library
             ICanvasImage image = new ScaleEffect
             {
                 Scale = new Vector2(scale),
-                Source = this.GrayWhiteGrid
+                //Source = this.GrayWhiteGrid
+                Source = new ColorSourceEffect{Color=Colors.White}
             };
 
             for (int i = this.Layers.Count - 1; i >= 0; i--)
@@ -145,7 +146,8 @@ namespace Retouch_Photo.Library
             ICanvasImage image = new ScaleEffect
             {
                 Scale = new Vector2(scale),
-                Source = this.GrayWhiteGrid
+                //Source = this.GrayWhiteGrid
+                Source = new ColorSourceEffect { Color = Colors.White }
             };
 
             for (int i = this.Layers.Count - 1; i >= 0; i--)

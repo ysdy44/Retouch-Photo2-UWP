@@ -5,34 +5,28 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo.Controls
-{
+{ 
     public sealed partial class AdjustmentsControl : UserControl
     {
         //ViewModel
         DrawViewModel ViewModel => App.ViewModel;
 
-        public bool FrameVisibility
+        public bool? ShowVisibility
         {
             set
             {
-                this.BackButton.Visibility = 
-                this.ResetButton.Visibility = 
-                this.Frame.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
+                this.BackButton.Visibility =
+                this.ResetButton.Visibility =
+                this.Frame.Visibility =
+                (value == null) ? Visibility.Visible : Visibility.Collapsed;
 
-                this.AddButton.Visibility = 
-                this.Border.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
+                this.AddButton.Visibility = (value == null) ? Visibility.Collapsed : Visibility.Visible;
+
+                this.Border.Visibility = (value == true) ? Visibility.Visible : Visibility.Collapsed;
+                this.TextBlock.Visibility = (value == false) ? Visibility.Visible : Visibility.Collapsed;
             }
         }
-
-        public bool BorderVisibility
-        {
-            set
-            {
-                this.Border.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
-
-                this.TextBlock.Visibility = value  ? Visibility.Collapsed : Visibility.Visible;
-            }
-        }
+        
 
         private Adjustment adjustment;
         public Adjustment Adjustment
@@ -47,8 +41,10 @@ namespace Retouch_Photo.Controls
 
                 adjustmentCandidate.SetPage(value);
                 this.Frame.Child = adjustmentCandidate.Page;
-                this.FrameVisibility = true;
+                this.ShowVisibility = null;
 
+                this.AddButton.IsEnabled = true;
+                
                 this.adjustment = value;
             }
         }
@@ -70,7 +66,7 @@ namespace Retouch_Photo.Controls
             {
                 con.IsEnabled = true;
 
-                con.FrameVisibility = false;
+                con.ShowVisibility = null;
                 con.Invalidate(layer.Adjustments);
             }
             else
@@ -88,12 +84,11 @@ namespace Retouch_Photo.Controls
         public AdjustmentsControl()
         {
             this.InitializeComponent();
-
-            this.FrameVisibility =
-            this.BorderVisibility = false;
+             
+            this.ShowVisibility = false;
 
             //AdjustmentCandidate
-            this.ListView.Loaded += (sender, e) => this.ListView.ItemsSource = AdjustmentCandidate.AdjustmentCandidateList;
+            this.ListView.Loaded += (sender, e) =>this.ListView.ItemsSource = AdjustmentCandidate.AdjustmentCandidateList;
             this.ListView.ItemClick += (sender, e) =>
             {
                 if (e.ClickedItem is AdjustmentCandidate item)
@@ -119,6 +114,7 @@ namespace Retouch_Photo.Controls
         /// <summary> Add a Adjustment. </summary>
         private void Add(Adjustment adjustment)
         {
+            if (this.Layer == null) return;
             this.Layer.Adjustments.Add(adjustment);
             this.Invalidate(this.Layer.Adjustments);
             this.ViewModel.Invalidate();
@@ -126,6 +122,7 @@ namespace Retouch_Photo.Controls
         /// <summary> Remove the Adjustment. </summary>
         private void Remove(Adjustment adjustment)
         {
+            if (this.Layer == null) return;
             this.Layer.Adjustments.Remove(adjustment);
             this.Invalidate(this.Layer.Adjustments);
             this.ViewModel.Invalidate();
@@ -140,11 +137,11 @@ namespace Retouch_Photo.Controls
         {
             this.ItemsControl.ItemsSource = null;
 
-            if (adjustments == null) this.BorderVisibility = false;
+            if (adjustments == null) this.ShowVisibility = false;
             else
             {
                 this.ItemsControl.ItemsSource = adjustments;
-                this.BorderVisibility = !(adjustments.Count == 0);
+                this.ShowVisibility = !(adjustments.Count == 0);
             }
         }
 
@@ -167,7 +164,7 @@ namespace Retouch_Photo.Controls
         {
             this.Adjustment = null;
             this.Frame.Child = null;
-            this.FrameVisibility = false;
+            this.ShowVisibility = true;
         }
 
     }

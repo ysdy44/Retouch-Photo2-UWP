@@ -64,6 +64,18 @@ namespace Retouch_Photo.Pages
         public MainPage()
         {
             this.InitializeComponent();
+
+            //Debug
+            /*
+            this.Loaded += (s, e) =>
+            {
+                  this.Frame.Navigate(typeof(DrawPage), Project.CreateFromSize(App.ViewModel.CanvasDevice, new BitmapSize
+                  {
+                      Width = 1024,
+                      Height = 1024
+                  }));//Navigate   
+            };
+            */
         }
 
 

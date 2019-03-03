@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:conEffectsControls="using:Retouch_Photo.Controls.EffectsControls"
     xmlns:models="using:Retouch_Photo.Models"
+    xmlns:adjustmentpages="using:Retouch_Photo.Pages.AdjustmentPages"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
@@ -37,7 +38,9 @@
 
         <Button x:Name="BackButton" Grid.Column="0" Content="&#xE0A6;" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
         <Button x:Name="ResetButton" Grid.Column="2" Content="&#xE149;" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
-        <Border x:Name="Frame" Grid.ColumnSpan="3" Grid.Row="1" Background="Transparent"/>
+        <Border x:Name="Frame" Grid.ColumnSpan="3" Grid.Row="1" Background="Transparent">
+            <!--Frame-->
+        </Border>
 
     </Grid>
 </UserControl>

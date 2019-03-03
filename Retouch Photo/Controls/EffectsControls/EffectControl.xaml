@@ -10,7 +10,7 @@
     
         <Grid Height="50" BorderThickness="0,1,0,0" BorderBrush="{ThemeResource AppBorderBrush}">
 
-        <Button  x:Name="Button"
+        <Button  x:Name="Button" IsEnabled="False"
                  HorizontalAlignment="Stretch"
                  HorizontalContentAlignment="Left"
                  Content="{x:Bind Effect.Icon}"

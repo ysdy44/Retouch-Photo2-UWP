@@ -70,6 +70,7 @@ namespace Retouch_Photo.Models
             new ContrastAdjustmentCandidate(),
             new TemperatureAdjustmentCandidate(),
             new HighlightsAndShadowsAdjustmentCandidate(),
+            new GammaTransferAdjustmentCandidate(),
         };
     }
 
@@ -95,5 +96,7 @@ namespace Retouch_Photo.Models
 
         /// <summary> 高亮/阴影 </summary>
         HighlightsAndShadows,
+        /// <summary> 伽马转移 </summary>
+        GammaTransfer
     }
 }

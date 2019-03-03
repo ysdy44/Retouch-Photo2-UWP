@@ -107,6 +107,9 @@
     <Compile Include="Controls\AdjustmentsControls\GrayControl.xaml.cs">
       <DependentUpon>GrayControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AdjustmentsControls\GammaTransferControl.xaml.cs">
+      <DependentUpon>GammaTransferControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AdjustmentsControls\HighlightsAndShadowsControl.xaml.cs">
       <DependentUpon>HighlightsAndShadowsControl.xaml</DependentUpon>
     </Compile>
@@ -128,14 +131,23 @@
     <Compile Include="Controls\AdjustmentsControls\AdjustmentsControlIcon.xaml.cs">
       <DependentUpon>AdjustmentsControlIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\EffectsControls\EmbossControl.xaml.cs">
+      <DependentUpon>EmbossControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\EffectsControls\DirectionalBlurControl.xaml.cs">
       <DependentUpon>DirectionalBlurControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EffectsControls\OutlineControl.xaml.cs">
+      <DependentUpon>OutlineControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\EffectsControls\OuterShadowControl.xaml.cs">
       <DependentUpon>OuterShadowControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\EffectsControls\EffectsControlIcon.xaml.cs">
       <DependentUpon>EffectsControlIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EffectsControls\StraightenControl.xaml.cs">
+      <DependentUpon>StraightenControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Element\AppbarControl.xaml.cs">
       <DependentUpon>AppbarControl.xaml</DependentUpon>
@@ -450,6 +462,7 @@
     <Compile Include="Models\Adjustment.cs" />
     <Compile Include="Models\Adjustments\ContrastAdjustment.cs" />
     <Compile Include="Models\Adjustments\ExposureAdjustment.cs" />
+    <Compile Include="Models\Adjustments\GammaTransferAdjustment.cs" />
     <Compile Include="Models\Adjustments\GrayAdjustment.cs" />
     <Compile Include="Models\Adjustments\HighlightsAndShadowsAdjustment.cs" />
     <Compile Include="Models\Adjustments\HueRotationAdjustment.cs" />
@@ -485,9 +498,12 @@
     <Compile Include="Models\Blends\SubtractBlend.cs" />
     <Compile Include="Models\Blends\VividLightBlend.cs" />
     <Compile Include="Models\Effect.cs" />
+    <Compile Include="Models\Effects\EmbossEffect.cs" />
     <Compile Include="Models\Effects\DirectionalBlurEffect.cs" />
     <Compile Include="Models\Effects\GaussianBlurEffect.cs" />
     <Compile Include="Models\Effects\OuterShadowEffect.cs" />
+    <Compile Include="Models\Effects\OutlineEffect.cs" />
+    <Compile Include="Models\Effects\StraightenEffect.cs" />
     <Compile Include="Models\Layers\AcrylicLayer.cs" />
     <Compile Include="Models\Layers\GeometryLayer.cs" />
     <Compile Include="Models\Layers\ImageLayer.cs" />
@@ -514,6 +530,9 @@
     <Compile Include="Pages\AdjustmentPages\ExposurePage.xaml.cs">
       <DependentUpon>ExposurePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AdjustmentPages\GammaTransferPage.xaml.cs">
+      <DependentUpon>GammaTransferPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AdjustmentPages\HighlightsAndShadowsPage.xaml.cs">
       <DependentUpon>HighlightsAndShadowsPage.xaml</DependentUpon>
     </Compile>
@@ -532,6 +551,9 @@
     <Compile Include="Pages\DrawPage.xaml.cs">
       <DependentUpon>DrawPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\EffectPages\EmbossPage.xaml.cs">
+      <DependentUpon>EmbossPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\EffectPages\DirectionalBlurPage.xaml.cs">
       <DependentUpon>DirectionalBlurPage.xaml</DependentUpon>
     </Compile>
@@ -540,6 +562,12 @@
     </Compile>
     <Compile Include="Pages\EffectPages\OuterShadowPage.xaml.cs">
       <DependentUpon>OuterShadowPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EffectPages\OutlinePage.xaml.cs">
+      <DependentUpon>OutlinePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EffectPages\StraightenPage.xaml.cs">
+      <DependentUpon>StraightenPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainLayout.xaml.cs">
       <DependentUpon>MainLayout.xaml</DependentUpon>
@@ -1023,6 +1051,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\AdjustmentsControls\GammaTransferControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\AdjustmentsControls\HighlightsAndShadowsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1051,7 +1083,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\EffectsControls\EmbossControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\EffectsControls\DirectionalBlurControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\EffectsControls\OutlineControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1062,6 +1102,10 @@
     <Page Include="Controls\EffectsControls\EffectsControlIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EffectsControls\StraightenControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Element\AppbarControl.xaml">
       <SubType>Designer</SubType>
@@ -1475,6 +1519,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\AdjustmentPages\GammaTransferPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AdjustmentPages\HighlightsAndShadowsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1499,6 +1547,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\EffectPages\EmbossPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\EffectPages\DirectionalBlurPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1510,6 +1562,14 @@
     <Page Include="Pages\EffectPages\OuterShadowPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EffectPages\OutlinePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\EffectPages\StraightenPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\MainLayout.xaml">
       <SubType>Designer</SubType>
