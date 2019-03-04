@@ -30,12 +30,12 @@ namespace Retouch_Photo.Pages
     public sealed partial class DrawPage : Page
     {
         //ViewModel
-        DrawViewModel ViewModel => App.ViewModel;
+        DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
         public DrawPage()
         {
             this.InitializeComponent();
-            
+
             //Selection
             this.LayoutBinging(this.SelectionLayout, this.SelectionToggleButton);
             //Operate
@@ -48,13 +48,13 @@ namespace Retouch_Photo.Pages
             this.LayoutBinging(this.TransformerLayout, this.TransformerToggleButton);
             //Navigator
             this.LayoutBinging(this.NavigatorLayout, this.NavigatorToggleButton);
-          
+
             //Color
             this.ColorButton.Tapped += (sender, e) => this.ColorLayout.ShowAt(this.ColorButton);
 
             //Layer
             this.LayersControl.FlyoutShow += (control) => this.LayerLayout.ShowAt(control);
-            
+
             this.BackButton.Tapped += (sender, e) => this.Frame.GoBack();
             this.SaveButton.Tapped += (sender, e) => this.Frame.GoBack();
         }
@@ -94,5 +94,5 @@ namespace Retouch_Photo.Pages
         {
         }
 
-    } 
-} 
+    }
+}

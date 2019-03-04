@@ -23,7 +23,7 @@ namespace Retouch_Photo.Controls
     public sealed partial class OperateControl : UserControl
     {
         //ViewModel
-        DrawViewModel ViewModel => App.ViewModel;
+        DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
         #region DependencyProperty
 

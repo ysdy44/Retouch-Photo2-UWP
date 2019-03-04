@@ -7,7 +7,7 @@ using Microsoft.Graphics.Canvas.Effects;
 
 namespace Retouch_Photo.Library
 {
-    public static class Adjustment
+    public static class Adjustmentaaaaaaaaaaa
     {
 
         //羽化方法

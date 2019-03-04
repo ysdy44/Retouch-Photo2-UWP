@@ -39,7 +39,7 @@ namespace Retouch_Photo.Pages
     public sealed partial class MainPage : Page
     {
         //ViewModel
-        DrawViewModel ViewModel => App.ViewModel;
+        DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
         ObservableCollection<Photo> PhotoFileList = new ObservableCollection<Photo>();
 

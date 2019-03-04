@@ -66,7 +66,7 @@ namespace Retouch_Photo.Pages.ToolPages
     public sealed partial class ViewPage : ToolPage
     {
         //ViewModel
-        public DrawViewModel ViewModel => App.ViewModel;
+        public DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
         
         public ViewPage()
         {

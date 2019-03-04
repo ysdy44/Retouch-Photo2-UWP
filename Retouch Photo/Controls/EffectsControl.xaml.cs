@@ -1,21 +1,11 @@
-﻿using Retouch_Photo.Models;
-using Retouch_Photo.Models.Effects;
-using Retouch_Photo.Pages.EffectPages;
+﻿using Microsoft.Graphics.Canvas.Effects;
+using Retouch_Photo.Effects;
+using Retouch_Photo.Effects.Models;
+using Retouch_Photo.Models;
 using Retouch_Photo.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 
 namespace Retouch_Photo.Controls
@@ -24,7 +14,7 @@ namespace Retouch_Photo.Controls
     {
 
         //ViewModel
-        DrawViewModel ViewModel => App.ViewModel;
+        DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
                 
         public bool FrameVisibility
         {
@@ -58,14 +48,14 @@ namespace Retouch_Photo.Controls
 
         List<Effect> Effects = new List<Effect>
         {
-            new GaussianBlurEffect(),
-            new DirectionalBlurEffect(),
-            new OuterShadowEffect(),
+            new Retouch_Photo.Effects.Models.GaussianBlurEffect(),
+            new Retouch_Photo.Effects.Models.DirectionalBlurEffect(),
+            new Retouch_Photo.Effects.Models.OuterShadowEffect(),
 
-            new OutlineEffect(),
+            new Retouch_Photo.Effects.Models.OutlineEffect(),
 
-            new EmbossEffect(),
-            new StraightenEffect(),
+            new Retouch_Photo.Effects.Models.EmbossEffect(),
+            new Retouch_Photo.Effects.Models.StraightenEffect(),
         };
 
         #region DependencyProperty

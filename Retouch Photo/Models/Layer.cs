@@ -1,27 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
-using System.ComponentModel;
-using Windows.UI.Xaml;
+﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using System.Xml.Linq;
-using Microsoft.Graphics.Canvas;
-using Retouch_Photo.Models.Layers;
-using Windows.Foundation;
-using Retouch_Photo.ViewModels;
-using Retouch_Photo.Models.Layers.GeometryLayers;
-using Windows.Graphics.Effects;
-using System.Numerics;
 using Microsoft.Graphics.Canvas.UI.Xaml;
+using Retouch_Photo.Adjustments;
+using Retouch_Photo.Blends;
+using Retouch_Photo.Effects;
+using Retouch_Photo.Models.Layers;
+using Retouch_Photo.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Numerics;
+using System.Xml.Linq;
+using Windows.Foundation;
+using Windows.Graphics.Effects;
 using Windows.UI;
-using Microsoft.Graphics.Canvas.UI;
-using Retouch_Photo.Models.Adjustments;
-using Retouch_Photo.Models.Blends;
-using Retouch_Photo.Library;
 using static Retouch_Photo.Library.TransformController;
 
 namespace Retouch_Photo.Models
@@ -30,7 +21,7 @@ namespace Retouch_Photo.Models
     {
 
         //ViewModel
-        DrawViewModel ViewModel => App.ViewModel;
+        DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
 
         public string Name= "Layer";

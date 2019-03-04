@@ -10,7 +10,7 @@ namespace Retouch_Photo.Pages.ToolPages
     public sealed partial class RectanglePage : ToolPage
     {
         //ViewModel
-        DrawViewModel ViewModel => App.ViewModel;
+        DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
         public RectanglePage()
         {

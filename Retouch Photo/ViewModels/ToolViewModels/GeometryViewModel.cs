@@ -13,7 +13,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
     public class GeometryViewModel : ToolViewModel
     {
         //ViewModel
-        DrawViewModel ViewModel => App.ViewModel;
+        DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
 
 

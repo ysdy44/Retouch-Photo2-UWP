@@ -4,9 +4,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:conAdjustmentsControls="using:Retouch_Photo.Controls.AdjustmentsControls"
-    xmlns:conEffectsControl="using:Retouch_Photo.Controls.EffectsControls"
+    xmlns:adjustments="using:Retouch_Photo.Adjustments"
     xmlns:local="using:Retouch_Photo.Controls.LayersControls"
+    xmlns:effects="using:Retouch_Photo.Effects"
     mc:Ignorable="d"
     IsEnabled="False"
     d:DesignHeight="340"
@@ -18,7 +18,9 @@
         <Slider x:Name="Slider" Value="{x:Bind Layer.Opacity,Mode=TwoWay}" TickFrequency="25" TickPlacement="Inline" Style="{StaticResource AppOpacitySliderStyle}" />
 
         <TextBlock Text="BlendMode" Style="{StaticResource AppTextBlock}"/>
+
         <local:BlendControl x:Name="BlendControl" BlendIndex="{x:Bind Layer.BlendIndex,Mode=TwoWay}" />
+
 
         <TextBlock Text="Layer" Style="{StaticResource AppTextBlock}"/>
         <Border Style="{StaticResource AppRoundedBorderStyle}">
@@ -36,10 +38,10 @@
                     <PathIcon Style="{ThemeResource AppIconElement}" Data="M13.858,22.08l-8.756,0c-1.359,0 -2.462,-1.103 -2.462,-2.462l0,-12.596c0,-1.359 1.103,-2.462 2.462,-2.462l8.756,0c1.359,0 2.462,1.103 2.462,2.462l0,12.596c0,1.359 -1.103,2.462 -2.462,2.462Zm-0.461,-15.84l-7.834,0c-0.682,0 -1.236,0.554 -1.236,1.237l0,11.686c0,0.683 0.554,1.237 1.236,1.237l7.834,0c0.682,0 1.236,-0.554 1.236,-1.237l0,-11.686c0,-0.683 -0.554,-1.237 -1.236,-1.237Zm-5.357,-2.4l-1.799,0c0.033,-1.33 1.123,-2.4 2.461,-2.4l8.756,0c1.359,0 2.462,1.103 2.462,2.462l0,12.596c0,1.359 -1.103,2.462 -2.462,2.462l-0.418,0l0,-1.681c0.663,-0.023 1.193,-0.568 1.193,-1.236l0,-11.686c0,-0.683 -0.554,-1.237 -1.236,-1.237l-7.834,0c-0.498,0 -0.927,0.295 -1.123,0.72Z"/>
                 </Button>
                 <Button x:Name="AdjustmentButton" Grid.Column="2" Width="Auto" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}">
-                    <conAdjustmentsControls:AdjustmentsControlIcon/>
+                    <adjustments:Icon/>
                 </Button>
                 <Button x:Name="EffectButton" Grid.Column="3" Width="Auto" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}" >
-                    <conEffectsControl:EffectsControlIcon/>
+                    <effects:Icon/>
                 </Button>
             </Grid>
         </Border>

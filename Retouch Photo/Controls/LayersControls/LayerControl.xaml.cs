@@ -10,7 +10,7 @@ namespace Retouch_Photo.Controls.LayersControls
     {
 
         //ViewModel
-        DrawViewModel ViewModel => App.ViewModel;
+        DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
 
         #region DependencyProperty
@@ -55,6 +55,6 @@ namespace Retouch_Photo.Controls.LayersControls
                 this.Layer = null;
             };
         }
-        
+
     }
 }

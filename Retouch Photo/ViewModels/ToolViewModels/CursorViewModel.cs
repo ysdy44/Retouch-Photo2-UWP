@@ -14,7 +14,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
     public class CursorViewModel : ToolViewModel
     {
         //ViewModel
-        DrawViewModel ViewModel => App.ViewModel;
+        DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
         bool IsSkew => this.ViewModel.KeyAlt;
          
 

@@ -14,7 +14,7 @@ namespace Retouch_Photo.Controls
     {
 
         //ViewModel
-        public DrawViewModel ViewModel => App.ViewModel;
+        public DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
         
         //Delegate
         public delegate void FlyoutShowHandler(UserControl control);

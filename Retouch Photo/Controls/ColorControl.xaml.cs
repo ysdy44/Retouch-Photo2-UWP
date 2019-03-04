@@ -10,7 +10,7 @@ namespace Retouch_Photo.Controls
     {
 
         //ViewModel
-        DrawViewModel ViewModel => App.ViewModel;
+        DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
 
         #region DependencyProperty

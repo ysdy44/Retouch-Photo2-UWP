@@ -5,8 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
-    xmlns:adjustmentsControls="using:Retouch_Photo.Controls.AdjustmentsControls"
     xmlns:models="using:Retouch_Photo.Models"
+    xmlns:adjustments="using:Retouch_Photo.Adjustments"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="200"
@@ -22,7 +22,7 @@
                     <TextBlock Text="Select a adjustment:" Style="{StaticResource AppTextBlock}"/>
                 </ListView.Header>
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="models:AdjustmentCandidate">
+                    <DataTemplate x:DataType="adjustments:AdjustmentCandidate">
                         <ContentPresenter Content="{x:Bind Icon}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -30,8 +30,8 @@
         </Flyout>
 
         <!--DataTemplate-->
-        <DataTemplate x:Key="DataTemplate" x:DataType="models:Adjustment">
-            <adjustmentsControls:AdjustmentControl 
+        <DataTemplate x:Key="DataTemplate" x:DataType="adjustments:Adjustment">
+            <adjustments:Control 
                 Adjustment="{x:Bind}"                                 
                 AdjustmentRemove="AdjustmentControl_AdjustmentRemove"                                 
                 AdjustmentContext="AdjustmentControl_AdjustmentContext"/>

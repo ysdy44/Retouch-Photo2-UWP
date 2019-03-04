@@ -6,7 +6,7 @@ namespace Retouch_Photo.Pages.ToolPages
     public sealed partial class CursorPage : ToolPage
     {
         //ViewModel
-        DrawViewModel ViewModel => App.ViewModel;
+        DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
         public CursorPage()
         {

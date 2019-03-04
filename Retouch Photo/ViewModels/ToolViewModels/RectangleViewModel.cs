@@ -11,7 +11,7 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
     public class RectangleViewModel : ToolViewModel
     {
         //ViewModel
-        DrawViewModel ViewModel => App.ViewModel;
+        DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
 
         Vector2 point;

@@ -1,0 +1,167 @@
+﻿<Page
+    x:Class="Retouch_Photo.Adjustments.Pages.GammaTransferPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pic="using:Retouch_Photo.Pickers"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="200"
+    >
+
+
+    <UserControl.Resources>
+
+        <!--Background-->
+        <SolidColorBrush x:Name="AccentColor"  Color="{ThemeResource AppStrokeColor}"/>
+        <SolidColorBrush x:Name="UnAccentColor" Color="#00000000"/>
+
+        <!--Alpha-->
+        <Color x:Key="AlphaLeft" >#DDDDDD</Color>
+        <Color x:Key="AlphaRight" >#222222</Color>
+        <LinearGradientBrush x:Key="AlphaTopBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="{StaticResource AlphaLeft}" Offset="0"/>
+            <GradientStop Color="{StaticResource AlphaRight}" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="AlphaLeftBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="{StaticResource AlphaLeft}" Offset="0"/>
+            <GradientStop Color="{StaticResource AlphaRight}" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="AlphaRightBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="{StaticResource AlphaRight}" Offset="0"/>
+            <GradientStop Color="{StaticResource AlphaLeft}" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="AlphaCenterBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="{StaticResource AlphaRight}" Offset="0"/>
+            <GradientStop Color="{StaticResource AlphaRight}" Offset="1"/>
+        </LinearGradientBrush>
+        
+        <!--Red-->
+        <Color x:Key="RedLeft" >#FFC67A</Color>
+        <Color x:Key="RedRight" >#FF4f00</Color>
+        <LinearGradientBrush x:Key="RedTopBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="{StaticResource RedLeft}" Offset="0"/>
+            <GradientStop Color="{StaticResource RedRight}" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="RedLeftBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="{StaticResource RedLeft}" Offset="0"/>
+            <GradientStop Color="{StaticResource RedRight}" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="RedRightBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="{StaticResource RedRight}" Offset="0"/>
+            <GradientStop Color="{StaticResource RedLeft}" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="RedCenterBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="{StaticResource RedRight}" Offset="0"/>
+            <GradientStop Color="{StaticResource RedRight}" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!--Green-->
+        <Color x:Key="GreenLeft" >#BFFFD5</Color>
+        <Color x:Key="GreenRight">#00FF79</Color>
+        <LinearGradientBrush x:Key="GreenTopBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="{StaticResource GreenLeft}" Offset="0"/>
+            <GradientStop Color="{StaticResource GreenRight}" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="GreenLeftBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="{StaticResource GreenLeft}" Offset="0"/>
+            <GradientStop Color="{StaticResource GreenRight}" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="GreenRightBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="{StaticResource GreenRight}" Offset="0"/>
+            <GradientStop Color="{StaticResource GreenLeft}" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="GreenCenterBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="{StaticResource GreenRight}" Offset="0"/>
+            <GradientStop Color="{StaticResource GreenRight}" Offset="1"/>
+        </LinearGradientBrush>
+        
+        <!--Blue-->
+        <Color x:Key="BlueLeft">#92C7F7</Color>
+        <Color x:Key="BlueRight">#1376F7</Color>
+        <LinearGradientBrush x:Key="BlueTopBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="{StaticResource BlueLeft}" Offset="0"/>
+            <GradientStop Color="{StaticResource BlueRight}" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="BlueLeftBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="{StaticResource BlueLeft}" Offset="0"/>
+            <GradientStop Color="{StaticResource BlueRight}" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="BlueRightBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="{StaticResource BlueRight}" Offset="0"/>
+            <GradientStop Color="{StaticResource BlueLeft}" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="BlueCenterBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="{StaticResource BlueRight}" Offset="0"/>
+            <GradientStop Color="{StaticResource BlueRight}" Offset="1"/>
+        </LinearGradientBrush>
+        
+    </UserControl.Resources>
+
+
+    <StackPanel >
+
+        <!--Segmented-->
+        <Grid Height="40" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppBackground}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <ContentPresenter x:Name="AlphaSegmented" Grid.Column="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Tapped="AlphaSegmented_Tapped">
+                <Ellipse Width="20" Height="20" StrokeThickness="1" Stroke="White" Fill="{ThemeResource AlphaTopBrush}"/>
+            </ContentPresenter>
+            <ContentPresenter x:Name="RedSegmented" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Tapped="RedSegmented_Tapped">
+                <Ellipse Width="20" Height="20" StrokeThickness="1" Stroke="White" Fill="{StaticResource RedTopBrush}"/>
+            </ContentPresenter>
+            <ContentPresenter x:Name="GreenSegmented" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Tapped="GreenSegmented_Tapped">
+                <Ellipse Width="20" Height="20" StrokeThickness="1" Stroke="White" Fill="{StaticResource GreenTopBrush}"/>
+            </ContentPresenter>
+            <ContentPresenter x:Name="BlueSegmented" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Tapped="BlueSegmented_Tapped">
+                <Ellipse Width="20" Height="20" StrokeThickness="1" Stroke="White" Fill="{StaticResource BlueTopBrush}"/>
+            </ContentPresenter>
+
+        </Grid>
+                
+        <!--GammaTransfer Alpha-->
+        <ToggleSwitch x:Name="AlphaCheckBox" Margin="12,0" Toggled="AlphaCheckBox_Toggled"/>
+        <TextBlock x:Name="AlphaOffsetTextBlock" Text="Offset" Style="{StaticResource AppTextBlock}"/>
+        <pic:TouchSlider x:Name="AlphaOffsetSlider" Value="0" Minimum="0" Maximum="100" SliderBrush="{StaticResource AlphaLeftBrush}" ValueChangeDelta="AlphaOffsetSlider_ValueChangeDelta"/>
+        <TextBlock x:Name="AlphaExponentTextBlock" Text="Exponent" Style="{StaticResource AppTextBlock}"/>
+        <pic:TouchSlider x:Name="AlphaExponentSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource AlphaRightBrush}" ValueChangeDelta="AlphaExponentSlider_ValueChangeDelta"/>
+        <TextBlock x:Name="AlphaAmplitudeTextBlock" Text="Amplitude" Style="{StaticResource AppTextBlock}"/>
+        <pic:TouchSlider x:Name="AlphaAmplitudeSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource AlphaCenterBrush}" ValueChangeDelta="AlphaAmplitudeSlider_ValueChangeDelta"/>
+
+        <!--GammaTransfer Red-->
+        <ToggleSwitch x:Name="RedCheckBox" Margin="12,0" Toggled="RedCheckBox_Toggled"/>
+        <TextBlock x:Name="RedOffsetTextBlock" Text="Offset" Style="{StaticResource AppTextBlock}"/>
+        <pic:TouchSlider x:Name="RedOffsetSlider" Value="0" Minimum="0" Maximum="100" SliderBrush="{StaticResource RedLeftBrush}" ValueChangeDelta="RedOffsetSlider_ValueChangeDelta"/>
+        <TextBlock x:Name="RedExponentTextBlock" Text="Exponent" Style="{StaticResource AppTextBlock}"/>
+        <pic:TouchSlider x:Name="RedExponentSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource RedRightBrush}" ValueChangeDelta="RedExponentSlider_ValueChangeDelta"/>
+        <TextBlock x:Name="RedAmplitudeTextBlock" Text="Amplitude" Style="{StaticResource AppTextBlock}"/>
+        <pic:TouchSlider x:Name="RedAmplitudeSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource RedCenterBrush}" ValueChangeDelta="RedAmplitudeSlider_ValueChangeDelta"/>
+
+        <!--GammaTransfer Green-->
+        <ToggleSwitch x:Name="GreenCheckBox" Margin="12,0" Toggled="GreenCheckBox_Toggled"/>
+        <TextBlock x:Name="GreenOffsetTextBlock" Text="Offset" Style="{StaticResource AppTextBlock}"/>
+        <pic:TouchSlider x:Name="GreenOffsetSlider" Value="0" Minimum="0" Maximum="100" SliderBrush="{StaticResource GreenLeftBrush}" ValueChangeDelta="GreenOffsetSlider_ValueChangeDelta"/>
+        <TextBlock x:Name="GreenExponentTextBlock" Text="Exponent" Style="{StaticResource AppTextBlock}"/>
+        <pic:TouchSlider x:Name="GreenExponentSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource GreenRightBrush}" ValueChangeDelta="GreenExponentSlider_ValueChangeDelta"/>
+        <TextBlock x:Name="GreenAmplitudeTextBlock" Text="Amplitude" Style="{StaticResource AppTextBlock}"/>
+        <pic:TouchSlider x:Name="GreenAmplitudeSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource GreenCenterBrush}" ValueChangeDelta="GreenAmplitudeSlider_ValueChangeDelta"/>
+
+        <!--GammaTransfer Blue-->
+        <ToggleSwitch x:Name="BlueCheckBox" Margin="12,0" Toggled="BlueCheckBox_Toggled"/>
+        <TextBlock x:Name="BlueOffsetTextBlock" Text="Offset" Style="{StaticResource AppTextBlock}"/>
+        <pic:TouchSlider x:Name="BlueOffsetSlider" Value="0" Minimum="0" Maximum="100" SliderBrush="{StaticResource BlueLeftBrush}" ValueChangeDelta="BlueOffsetSlider_ValueChangeDelta"/>
+        <TextBlock x:Name="BlueExponentTextBlock" Text="Exponent" Style="{StaticResource AppTextBlock}"/>
+        <pic:TouchSlider x:Name="BlueExponentSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource BlueRightBrush}" ValueChangeDelta="BlueExponentSlider_ValueChangeDelta"/>
+        <TextBlock x:Name="BlueAmplitudeTextBlock" Text="Amplitude" Style="{StaticResource AppTextBlock}"/>
+        <pic:TouchSlider x:Name="BlueAmplitudeSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource BlueCenterBrush}" ValueChangeDelta="BlueAmplitudeSlider_ValueChangeDelta"/>
+
+        <ContentControl Height="12"/>
+    </StackPanel>
+</Page>

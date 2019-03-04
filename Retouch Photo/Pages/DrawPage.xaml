@@ -4,16 +4,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:adjustments="using:Retouch_Photo.Adjustments"
     xmlns:con="using:Retouch_Photo.Controls"
-    xmlns:element="using:Retouch_Photo.Element"
-    xmlns:pic="using:Retouch_Photo.Pickers" 
-    xmlns:conEffectsControl="using:Retouch_Photo.Controls.EffectsControls"    
-    xmlns:local="using:Retouch_Photo.Pages"
-    xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
-    xmlns:conOpe="using:Retouch_Photo.Controls.OperateControls"
-    xmlns:conAdjustmentsControls="using:Retouch_Photo.Controls.AdjustmentsControls"
     xmlns:conLayersControls="using:Retouch_Photo.Controls.LayersControls"
+    xmlns:effects="using:Retouch_Photo.Effects"
+    xmlns:element="using:Retouch_Photo.Element"
+    xmlns:local="using:Retouch_Photo.Pages"
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
 
@@ -69,12 +65,12 @@
 
                     <!--Adjustment-->
                     <ToggleButton x:Name="AdjustmentToggleButton" Height="50" Width="60" BorderThickness="0" Background="Transparent" >
-                        <conAdjustmentsControls:AdjustmentsControlIcon/>
+                        <adjustments:Icon/>
                     </ToggleButton>
                     
                     <!--Effect-->
                     <ToggleButton x:Name="EffectToggleButton" Height="50" Width="60" BorderThickness="0" Background="Transparent" >
-                        <conEffectsControl:EffectsControlIcon/>
+                        <effects:Icon/>
                     </ToggleButton>
 
                     <!--Transformer-->

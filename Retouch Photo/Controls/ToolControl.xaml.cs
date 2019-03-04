@@ -22,7 +22,7 @@ namespace Retouch_Photo.Controls
     public sealed partial class ToolControl : UserControl
     {
         //ViewModel
-        DrawViewModel ViewModel => App.ViewModel;
+        DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
 
         //delegate

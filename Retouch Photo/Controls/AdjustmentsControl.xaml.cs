@@ -3,13 +3,14 @@ using Retouch_Photo.ViewModels;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Retouch_Photo.Adjustments;
 
 namespace Retouch_Photo.Controls
 { 
     public sealed partial class AdjustmentsControl : UserControl
     {
         //ViewModel
-        DrawViewModel ViewModel => App.ViewModel;
+        DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
         public bool? ShowVisibility
         {
@@ -84,7 +85,10 @@ namespace Retouch_Photo.Controls
         public AdjustmentsControl()
         {
             this.InitializeComponent();
-             
+
+            //Adjustment
+            Retouch_Photo.Adjustments.Adjustment.InvalidateCall += () => this.ViewModel.Invalidate();
+
             this.ShowVisibility = false;
 
             //AdjustmentCandidate
@@ -98,11 +102,20 @@ namespace Retouch_Photo.Controls
                     this.Flyout.Hide();
                 }
             };
-        
+
             //Button
-            this.AddButton.Tapped += (sender, e) => this.Flyout.ShowAt((Button)sender);
             this.BackButton.Tapped += (sender, e) => this.Clear();
             this.ResetButton.Tapped += (sender, e) => this.Reset();
+            this.AddButton.Tapped += (sender, e) =>
+            {
+                if (this.Layer==null)
+                {
+                    this.IsEnabled = false;
+                    return;
+                }
+
+                this.Flyout.ShowAt((Button)sender);
+            };
         }
 
 
