@@ -9,7 +9,8 @@
     xmlns:models="using:Retouch_Photo.Models"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="200"
+    >
 
 
     <UserControl.Resources>
@@ -54,17 +55,41 @@
         <Button x:Name="AddButton" Grid.Column="2" Style="{ThemeResource NavigationBackButtonNormalStyle}">
             <FontIcon Glyph="&#xE109;" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource AppIconElement}"/>
         </Button>
-
+        <!--
+        
+        <Border Grid.Row="1" >
+            <ComboBox x:Name="ComboBox" ItemsSource="{x:Bind Filters}" >
+                <ComboBox.Style>
+                    <Style TargetType="ComboBox">
+                        <Setter Property="Background" Value="{ThemeResource AppBarBackgroundThemeBrush}" />
+                        <Setter Property="BorderBrush" Value="{ThemeResource AppBarBorderThemeBrush}" />
+                        <Setter Property="BorderThickness" Value="1" />
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="VerticalAlignment" Value="Top" />
+                    </Style>
+                </ComboBox.Style>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate x:DataType="local:Filter">
+                        <TextBlock Text="{x:Bind Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Border>
+        
+        -->
+        
         <Border x:Name="Border" Grid.ColumnSpan="3" Grid.Row="1" Height="Auto" VerticalAlignment="Top" Style="{StaticResource AppRoundedBorderStyle}">
             <ItemsControl x:Name="ItemsControl" ItemTemplate="{StaticResource DataTemplate}"/>
         </Border>
-
         <TextBlock x:Name="TextBlock" Grid.ColumnSpan="3" Grid.Row="1" Text="No Adjustment" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlock}"/>
 
 
         <Button x:Name="BackButton" Grid.Column="0" Content="&#xE0A6;" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
         <Button x:Name="ResetButton" Grid.Column="2" Content="&#xE149;" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
-        <Border x:Name="Frame" Grid.ColumnSpan="3" Grid.Row="1" Background="Transparent"/>
+        <Border x:Name="Frame" Grid.ColumnSpan="3" Grid.Row="1" Background="Transparent">
+            <!--Frame-->
+        </Border>
 
 
     </Grid>

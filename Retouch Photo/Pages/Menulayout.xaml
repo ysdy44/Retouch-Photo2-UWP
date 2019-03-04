@@ -14,8 +14,8 @@
                 
         <Flyout x:Name="flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <StackPanel Width="222">
-                <Border x:Name="FlyoutBorderl" Padding="8,0" />
-                <Button x:Name="PutButton" Grid.Column="2" Padding="0" Width="Auto" Height="28" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent" >
+                <Border x:Name="FlyoutBorder" Padding="8,0" />
+                <Button x:Name="PutButton" Grid.Column="2" Padding="0" Width="Auto" Height="28" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent" Tapped="PutButton_Tapped">
                     <StackPanel Orientation="Horizontal">
                         <FontIcon Glyph="&#xF5ED;" FontSize="16" FontFamily="Segoe MDL2 Assets" Style="{StaticResource AppIconElement}"/>
                         <TextBlock Text="Put it on the overlay" Style="{StaticResource AppTextBlock}"/>

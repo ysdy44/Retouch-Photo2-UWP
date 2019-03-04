@@ -131,6 +131,9 @@
     <Compile Include="Controls\AdjustmentsControls\AdjustmentsControlIcon.xaml.cs">
       <DependentUpon>AdjustmentsControlIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AdjustmentsControls\VignetteControl.xaml.cs">
+      <DependentUpon>VignetteControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\EffectsControls\EmbossControl.xaml.cs">
       <DependentUpon>EmbossControl.xaml</DependentUpon>
     </Compile>
@@ -460,6 +463,8 @@
     <Compile Include="Library\MatrixTransformer.cs" />
     <Compile Include="Library\TransformController.cs" />
     <Compile Include="Models\Adjustment.cs" />
+    <Compile Include="Models\Adjustments\BrightnessAdjustment.cs" />
+    <Compile Include="Models\Adjustments\VignetteAdjustment.cs" />
     <Compile Include="Models\Adjustments\ContrastAdjustment.cs" />
     <Compile Include="Models\Adjustments\ExposureAdjustment.cs" />
     <Compile Include="Models\Adjustments\GammaTransferAdjustment.cs" />
@@ -504,6 +509,7 @@
     <Compile Include="Models\Effects\OuterShadowEffect.cs" />
     <Compile Include="Models\Effects\OutlineEffect.cs" />
     <Compile Include="Models\Effects\StraightenEffect.cs" />
+    <Compile Include="Models\Filter.cs" />
     <Compile Include="Models\Layers\AcrylicLayer.cs" />
     <Compile Include="Models\Layers\GeometryLayer.cs" />
     <Compile Include="Models\Layers\ImageLayer.cs" />
@@ -524,6 +530,9 @@
     <Compile Include="Models\Tools\WatercolorPenTool.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\VectRect.cs" />
+    <Compile Include="Pages\AdjustmentPages\BrightnessPage.xaml.cs">
+      <DependentUpon>BrightnessPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AdjustmentPages\ContrastPage.xaml.cs">
       <DependentUpon>ContrastPage.xaml</DependentUpon>
     </Compile>
@@ -544,6 +553,9 @@
     </Compile>
     <Compile Include="Pages\AdjustmentPages\TemperaturePage.xaml.cs">
       <DependentUpon>TemperaturePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdjustmentPages\VignettePage.xaml.cs">
+      <DependentUpon>VignettePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DrawLayout.xaml.cs">
       <DependentUpon>DrawLayout.xaml</DependentUpon>
@@ -1083,6 +1095,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\AdjustmentsControls\VignetteControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\EffectsControls\EmbossControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1511,6 +1527,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\AdjustmentPages\BrightnessPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AdjustmentPages\ContrastPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1536,6 +1556,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AdjustmentPages\TemperaturePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdjustmentPages\VignettePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1735,7 +1759,9 @@
       <Version>1.23.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\Filters\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

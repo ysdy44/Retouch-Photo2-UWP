@@ -2,9 +2,9 @@
 
 namespace Retouch_Photo.Controls.AdjustmentsControls
 {
-    public sealed partial class AdjustmentBrightnessControl : UserControl
+    public sealed partial class BrightnessControl : UserControl
     {
-        public AdjustmentBrightnessControl()
+        public BrightnessControl()
         {
             this.InitializeComponent();
         }

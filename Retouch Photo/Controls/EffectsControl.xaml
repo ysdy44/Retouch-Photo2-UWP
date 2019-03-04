@@ -6,7 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:conEffectsControls="using:Retouch_Photo.Controls.EffectsControls"
     xmlns:models="using:Retouch_Photo.Models"
-    xmlns:adjustmentpages="using:Retouch_Photo.Pages.AdjustmentPages"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"

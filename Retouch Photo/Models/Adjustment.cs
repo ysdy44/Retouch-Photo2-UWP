@@ -65,12 +65,14 @@ namespace Retouch_Photo.Models
             new GrayAdjustmentCandidate(),
             new InvertAdjustmentCandidate(),
             new ExposureAdjustmentCandidate(),
+            new BrightnessAdjustmentCandidate(),
             new SaturationAdjustmentCandidate(),
             new HueRotationAdjustmentCandidate(),
             new ContrastAdjustmentCandidate(),
             new TemperatureAdjustmentCandidate(),
             new HighlightsAndShadowsAdjustmentCandidate(),
             new GammaTransferAdjustmentCandidate(),
+            new VignetteAdjustmentCandidate(),
         };
     }
 
@@ -80,7 +82,7 @@ namespace Retouch_Photo.Models
         Gray,
         /// <summary> 反色 </summary>
         Invert,
-
+        
         /// <summary> 曝光 </summary>
         Exposure,
         /// <summary> 明度 </summary>
@@ -97,6 +99,8 @@ namespace Retouch_Photo.Models
         /// <summary> 高亮/阴影 </summary>
         HighlightsAndShadows,
         /// <summary> 伽马转移 </summary>
-        GammaTransfer
+        GammaTransfer,
+        /// <summary> 装饰图案 </summary>
+        Vignette
     }
 }

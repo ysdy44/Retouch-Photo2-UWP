@@ -62,8 +62,16 @@ namespace Retouch_Photo.Pages
         //Content
         public string Text { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
 
-        public UIElement CenterContent { get => this.ContentBorderl.Child; set => this.ContentBorderl.Child = value; }
-        public UIElement FlyoutContent { get => this.FlyoutBorderl.Child; set => this.FlyoutBorderl.Child = value; }
+        public UIElement flyoutContent;
+        public UIElement FlyoutContent
+        {
+            get => this.flyoutContent;
+            set
+            {
+                this.FlyoutBorder.Child = value;
+                this.flyoutContent = value;
+            }
+        }
 
         public Flyout Flyout { get => this.flyout; set => this.flyout = value; }
         public FlyoutPlacementMode Placement { get => this.flyout.Placement; set => this.flyout.Placement = value; }
@@ -73,6 +81,11 @@ namespace Retouch_Photo.Pages
         /// <param name="placementTarget"> The element to use as the target for the flyout location </param>
         public void ShowAt(FrameworkElement placementTarget)
         {
+            //UIElement
+            this.ContentBorderl.Child = null;
+            this.FlyoutBorder.Child = this.FlyoutContent;
+
+
             this.Visibility = Visibility.Collapsed;
             this.Flyout.ShowAt(placementTarget);
         }
@@ -92,19 +105,23 @@ namespace Retouch_Photo.Pages
 
             //Label
             this.LabelButton.Tapped+=(sender, e) => this.Label = !this.Label;
-
-            //Flyout
-            this.PutButton.Tapped += (sender, e) =>
-            {
-                this.Visibility = Visibility.Visible;
-                Point postion = this.FlyoutBorderl.TransformToVisual(Window.Current.Content).TransformPoint(new Point());
-                Canvas.SetLeft(this, postion.X);
-                Canvas.SetTop(this, postion.Y);
-                if (!this.Label) this.Label = true;
-                this.Flyout.Hide();
-            };
         }
-               
+
+        //Flyout
+        private void PutButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            //UIElement
+            this.FlyoutBorder.Child = null;
+            this.ContentBorderl.Child = this.FlyoutContent;
+
+
+            this.Visibility = Visibility.Visible;
+            Point postion = this.FlyoutBorder.TransformToVisual(Window.Current.Content).TransformPoint(new Point());
+            Canvas.SetLeft(this, postion.X);
+            Canvas.SetTop(this, postion.Y);
+            if (!this.Label) this.Label = true;
+            this.Flyout.Hide();
+        } 
 
         //Content
         private void ContentBorder_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -112,5 +129,6 @@ namespace Retouch_Photo.Pages
             this.ContentRectangleFrameHeight.Value = e.NewSize.Height;
             this.ContentRectangleStoryboard.Begin();
         }
+
     }
 }

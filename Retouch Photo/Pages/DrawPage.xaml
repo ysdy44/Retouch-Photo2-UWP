@@ -106,9 +106,6 @@
             
             <!--Selection-->
             <local:MenuLayout x:Name="SelectionLayout" Text="Selection" Placement="Bottom" Visibility="Collapsed">
-                <local:MenuLayout.CenterContent>
-                    <con:SelectionControl />
-                </local:MenuLayout.CenterContent>
                 <local:MenuLayout.FlyoutContent>
                     <con:SelectionControl />
                 </local:MenuLayout.FlyoutContent>
@@ -116,9 +113,6 @@
             
             <!--Operate-->
             <local:MenuLayout x:Name="OperateLayout" Text="Operate" Placement="Bottom" Visibility="Collapsed">
-                <local:MenuLayout.CenterContent>
-                    <con:OperateControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
-                </local:MenuLayout.CenterContent>
                 <local:MenuLayout.FlyoutContent>
                     <con:OperateControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
                 </local:MenuLayout.FlyoutContent>
@@ -126,9 +120,6 @@
 
             <!--Adjustment-->
             <local:MenuLayout x:Name="AdjustmentLayout" Text="Adjustment" Placement="Bottom" Visibility="Collapsed">
-                <local:MenuLayout.CenterContent>
-                    <con:AdjustmentsControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
-                </local:MenuLayout.CenterContent>
                 <local:MenuLayout.FlyoutContent>
                     <con:AdjustmentsControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
                 </local:MenuLayout.FlyoutContent>
@@ -136,9 +127,6 @@
 
             <!--Effects-->
             <local:MenuLayout x:Name="EffectLayout" Text="Effect" Placement="Bottom" Visibility="Collapsed">
-                <local:MenuLayout.CenterContent>
-                    <con:EffectsControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
-                </local:MenuLayout.CenterContent>
                 <local:MenuLayout.FlyoutContent>
                     <con:EffectsControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
                 </local:MenuLayout.FlyoutContent>
@@ -146,9 +134,6 @@
 
             <!--Transformer-->
             <local:MenuLayout x:Name="TransformerLayout" Text="Transformer" Placement="Bottom" Visibility="Collapsed">
-                <local:MenuLayout.CenterContent>
-                    <con:TransformerControl  Transformer="{x:Bind ViewModel.Transformer,Mode=OneWay}" Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
-                </local:MenuLayout.CenterContent>
                 <local:MenuLayout.FlyoutContent>
                     <con:TransformerControl  Transformer="{x:Bind ViewModel.Transformer,Mode=OneWay}" Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
                 </local:MenuLayout.FlyoutContent>
@@ -156,9 +141,6 @@
             
             <!--Navigator-->
             <local:MenuLayout x:Name="NavigatorLayout" Text="Navigator" Placement="Bottom" Visibility="Collapsed">
-                <local:MenuLayout.CenterContent>
-                    <con:NavigatorControl/>
-                </local:MenuLayout.CenterContent>
                 <local:MenuLayout.FlyoutContent>
                     <con:NavigatorControl/>
                 </local:MenuLayout.FlyoutContent>
@@ -166,9 +148,6 @@
             
             <!--Color-->
             <local:MenuLayout x:Name="ColorLayout" Text="Color" Placement="Bottom" Visibility="Collapsed">
-                <local:MenuLayout.CenterContent>
-                    <con:ColorControl Width="200" Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
-                </local:MenuLayout.CenterContent>
                 <local:MenuLayout.FlyoutContent>
                     <con:ColorControl Width="200" Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
                 </local:MenuLayout.FlyoutContent>
@@ -176,9 +155,6 @@
 
             <!--Layer-->
             <local:MenuLayout x:Name="LayerLayout" Text="Layer" Placement="Left" Visibility="Collapsed">
-                <local:MenuLayout.CenterContent>
-                    <conLayersControls:LayerControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}"/>
-                </local:MenuLayout.CenterContent>
                 <local:MenuLayout.FlyoutContent>
                     <conLayersControls:LayerControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}"/>
                 </local:MenuLayout.FlyoutContent>

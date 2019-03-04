@@ -46,6 +46,7 @@
                 <SolidColorBrush Color="{ThemeResource AppBorderBrushColor}"/>
             </pic:TouchSlider.SliderBrush>
         </pic:TouchSlider>
-        
+
+        <ContentControl Height="12"/>
     </StackPanel>
 </Page>
