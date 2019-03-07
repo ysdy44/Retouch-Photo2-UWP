@@ -8,11 +8,11 @@ namespace Retouch_Photo.Adjustments
 {
     /// 从Json形式转为可用的形式
     /// [AdjustmentItem] --> [Adjustment]
-    public class AdjustmentItem
+    public abstract class AdjustmentItem
     {
         public AdjustmentType Type;
 
-        public virtual Adjustment GetAdjustment() => new GrayAdjustment();
+        public abstract Adjustment GetAdjustment();
 
 
         //@static
@@ -35,9 +35,12 @@ namespace Retouch_Photo.Adjustments
         /// <summary> Get Item. </summary>
         public static AdjustmentItem GetItem(string json)
         {
-            AdjustmentItem adjustmentItem = JsonConvert.DeserializeObject<AdjustmentItem>(json);
+            // Josn --> Item2 --> Type
+            AdjustmentItem2 adjustmentItem2 = JsonConvert.DeserializeObject<AdjustmentItem2>(json);
+            AdjustmentType type = adjustmentItem2.Type;
 
-            switch (adjustmentItem.Type)
+            // Type --> Item
+            switch (type)
             {
                 case AdjustmentType.Gray: return JsonConvert.DeserializeObject<GrayAdjustmentItem>(json);
                 case AdjustmentType.Invert: return JsonConvert.DeserializeObject<InvertAdjustmentItem>(json);
@@ -50,8 +53,15 @@ namespace Retouch_Photo.Adjustments
                 case AdjustmentType.HighlightsAndShadows: return JsonConvert.DeserializeObject<HighlightsAndShadowsAdjustmentItem>(json);
                 case AdjustmentType.GammaTransfer: return JsonConvert.DeserializeObject<GammaTransferAdjustmentItem>(json);
                 case AdjustmentType.Vignette: return JsonConvert.DeserializeObject<VignetteAdjustmentItem>(json);
-                default: return adjustmentItem;
+                default: return new GrayAdjustmentItem();
             }
         }
     }
+
+    /// 为了得到里面的Type，不得已用而实例化它
+    /// [Item2] --> [Item]
+    public class AdjustmentItem2
+    {
+        public AdjustmentType Type;
+     }
 }

@@ -13,7 +13,7 @@ namespace Retouch_Photo.Adjustments
     public delegate void AdjustmentFilterHandler(AdjustmentFilter adjustmentFilter);
   
     /// 从Json形式转为可用的形式
-    /// [AdjustmentFilter] --> [List<AdjustmentItem>]
+    /// [Filter] --> [List<Item>]
     public class AdjustmentFilter
     {
         public string Name;
@@ -61,7 +61,7 @@ namespace Retouch_Photo.Adjustments
     }
 
     /// 为了保护里面的Items，不得已用Object临时保存
-    /// [AdjustmentFilter2] --> [AdjustmentFilter]
+    /// [Filter2] --> [Filter]
     public class AdjustmentFilter2
     {
         public string Name;

@@ -12,7 +12,7 @@ namespace Retouch_Photo.Adjustments
     /// </summary>
 
     /// 新建Adjustment的方法
-    /// [AdjustmentCandidate] --> [Adjustment]
+    /// [Candidate] --> [Adjustment]
     public abstract class AdjustmentCandidate
     {
         public AdjustmentType Type;
