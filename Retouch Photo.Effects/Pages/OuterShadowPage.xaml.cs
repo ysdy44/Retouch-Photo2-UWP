@@ -4,6 +4,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
+using Retouch_Photo.Effects.Items;
 
 namespace Retouch_Photo.Effects.Pages
 {

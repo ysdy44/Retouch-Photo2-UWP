@@ -5,12 +5,14 @@ using Windows.UI.Xaml;
 
 namespace Retouch_Photo.Adjustments
 {
-
     /// <summary>
     /// AdjustmentCandidate: 调整候选人。
     /// 用于生成Adjustment类，和Adjustment类一一对应，并给它提供帮助。
     /// 避免性能浪费，所以不会多次实例化同类型的AdjustmentCandidate
     /// </summary>
+
+    /// 新建Adjustment的方法
+    /// [AdjustmentCandidate] --> [Adjustment]
     public abstract class AdjustmentCandidate
     {
         public AdjustmentType Type;

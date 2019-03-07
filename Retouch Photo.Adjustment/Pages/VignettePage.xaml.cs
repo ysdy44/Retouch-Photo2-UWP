@@ -21,13 +21,13 @@ namespace Retouch_Photo.Adjustments.Pages
 
             if (e.NewValue is VignetteAdjustment adjustment)
             {
-                con.AmountSlider.Value = adjustment.Amount * 100;
-                con.CurveSlider.Value = adjustment.Curve * 100;
+                con.AmountSlider.Value = adjustment.VignetteAdjustmentItem.Amount * 100;
+                con.CurveSlider.Value = adjustment.VignetteAdjustmentItem.Curve * 100;
 
                 con.SolidColorBrush.Color =
                 con.AmountRight.Color =
                 con.CurveRight.Color =
-                adjustment.Color;
+                adjustment.VignetteAdjustmentItem.Color;
             }
         }));
 
@@ -41,20 +41,20 @@ namespace Retouch_Photo.Adjustments.Pages
 
         private void AmountSlider_ValueChangeDelta(object sender, double value)
         {
-            this.VignetteAdjustment.Amount = (float)(value / 100);
+            this.VignetteAdjustment.VignetteAdjustmentItem.Amount = (float)(value / 100);
             Adjustment.Invalidate();
         }
 
         private void CurveSlider_ValueChangeDelta(object sender, double value)
         {
-            this.VignetteAdjustment.Curve = (float)(value / 100);
+            this.VignetteAdjustment.VignetteAdjustmentItem.Curve = (float)(value / 100);
             Adjustment.Invalidate();
         }
 
         private void ColorButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             this.ColorFlyout.ShowAt(this.ColorButton);
-            this.ColorPicker.Color = this.VignetteAdjustment.Color;
+            this.ColorPicker.Color = this.VignetteAdjustment.VignetteAdjustmentItem.Color;
         }
         private void ColorPicker_ColorChange(object sender, Color value)
         {
@@ -64,7 +64,7 @@ namespace Retouch_Photo.Adjustments.Pages
 
             if (this.VignetteAdjustment == null) return;
 
-            this.VignetteAdjustment.Color = value;
+            this.VignetteAdjustment.VignetteAdjustmentItem.Color = value;
             Adjustment.Invalidate();
         }
         

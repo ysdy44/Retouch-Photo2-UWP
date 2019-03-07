@@ -1,5 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo.Effects.Models;
+using Retouch_Photo.Effects.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,17 +20,17 @@ namespace Retouch_Photo.Effects
         public EmbossEffectItem EmbossEffectItem = new EmbossEffectItem();
         public StraightenEffectItem StraightenEffectItem = new StraightenEffectItem();
 
-
-        public ICanvasImage Render(ICanvasImage image)
+        // @static
+        public static ICanvasImage Render(EffectManager manager, ICanvasImage image)
         {
-            if (this.GaussianBlurEffectItem.IsOn) image = this.GaussianBlurEffectItem.Render(image);
-            if (this.DirectionalBlurEffectItem.IsOn) image = this.DirectionalBlurEffectItem.Render(image);
-            if (this.OuterShadowEffectItem.IsOn) image = this.OuterShadowEffectItem.Render(image);
+            if (manager.GaussianBlurEffectItem.IsOn) image = manager.GaussianBlurEffectItem.Render(image);
+            if (manager.DirectionalBlurEffectItem.IsOn) image = manager.DirectionalBlurEffectItem.Render(image);
+            if (manager.OuterShadowEffectItem.IsOn) image = manager.OuterShadowEffectItem.Render(image);
 
-            if (this.OutlineEffectItem.IsOn) image = this.OutlineEffectItem.Render(image);
+            if (manager.OutlineEffectItem.IsOn) image = manager.OutlineEffectItem.Render(image);
 
-            if (this.EmbossEffectItem.IsOn) image = this.EmbossEffectItem.Render(image);
-            if (this.StraightenEffectItem.IsOn) image = this.StraightenEffectItem.Render(image);
+            if (manager.EmbossEffectItem.IsOn) image = manager.EmbossEffectItem.Render(image);
+            if (manager.StraightenEffectItem.IsOn) image = manager.StraightenEffectItem.Render(image);
 
             return image;
         }

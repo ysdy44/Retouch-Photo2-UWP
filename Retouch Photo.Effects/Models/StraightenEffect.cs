@@ -1,9 +1,5 @@
-﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo.Effects.Controls;
+﻿using Retouch_Photo.Effects.Controls;
 using Retouch_Photo.Effects.Pages;
-using System;
-using Windows.UI;
 
 namespace Retouch_Photo.Effects.Models
 {
@@ -24,25 +20,9 @@ namespace Retouch_Photo.Effects.Models
         {
             this.page.EffectManager = null;
 
-            effectManager.StraightenEffectItem.Angle  = 0;
+            effectManager.StraightenEffectItem.Angle = 0;
         }
 
-    }
-
-
-    public class StraightenEffectItem : EffectItem
-    {
-        public float Angle;
-
-        public override ICanvasImage Render(ICanvasImage image)
-        {
-            return new Microsoft.Graphics.Canvas.Effects.StraightenEffect
-            {
-                Angle = this.Angle,
-                MaintainSize = true,
-                Source = image,
-            };
-        }
     }
 }
 

@@ -1,5 +1,4 @@
-﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo.Effects.Controls;
+﻿using Retouch_Photo.Effects.Controls;
 using Retouch_Photo.Effects.Pages;
 
 namespace Retouch_Photo.Effects.Models
@@ -25,23 +24,6 @@ namespace Retouch_Photo.Effects.Models
             effectManager.DirectionalBlurEffectItem.Angle = 0;
         }
 
-    }
-
-
-    public class DirectionalBlurEffectItem : EffectItem
-    {
-        public float BlurAmount;
-        public float Angle;
-        
-        public override ICanvasImage Render(ICanvasImage image)
-        {
-            return new Microsoft.Graphics.Canvas.Effects.DirectionalBlurEffect
-            {
-                Source = image,
-                BlurAmount = this.BlurAmount,
-                Angle = -this.Angle,
-            };
-        }
     }
 }
 

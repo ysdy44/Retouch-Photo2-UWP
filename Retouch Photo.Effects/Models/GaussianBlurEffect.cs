@@ -25,20 +25,5 @@ namespace Retouch_Photo.Effects.Models
         }
 
     }
-
-
-    public class GaussianBlurEffectItem : EffectItem
-    {
-        public float BlurAmount;
-
-        public override ICanvasImage Render(ICanvasImage image)
-        {
-            return new Microsoft.Graphics.Canvas.Effects.GaussianBlurEffect
-            {
-                Source = image,
-                BlurAmount = this.BlurAmount
-            };
-        }
-    }
 }
 

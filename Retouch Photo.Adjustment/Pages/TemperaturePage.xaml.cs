@@ -19,8 +19,8 @@ namespace Retouch_Photo.Adjustments.Pages
 
             if(e.NewValue is TemperatureAdjustment adjustment)
             {
-                con.TemperatureSlider.Value = adjustment.Temperature * 100;
-                con.TintSlider.Value = adjustment.Tint * 100;
+                con.TemperatureSlider.Value = adjustment.TemperatureAdjustmentItem .Temperature * 100;
+                con.TintSlider.Value = adjustment.TemperatureAdjustmentItem .Tint * 100;
             }
         }));
 
@@ -34,13 +34,13 @@ namespace Retouch_Photo.Adjustments.Pages
 
         private void TemperatureSlider_ValueChangeDelta(object sender, double value)
         {
-            this.TemperatureAdjustment.Temperature = (float)(value / 100);
+            this.TemperatureAdjustment.TemperatureAdjustmentItem .Temperature = (float)(value / 100);
             Adjustment.Invalidate();
         }
 
         private void TintSlider_ValueChangeDelta(object sender, double value)
         {
-            this.TemperatureAdjustment.Tint = (float)(value / 100);
+            this.TemperatureAdjustment.TemperatureAdjustmentItem .Tint = (float)(value / 100);
             Adjustment.Invalidate();
         }
     }

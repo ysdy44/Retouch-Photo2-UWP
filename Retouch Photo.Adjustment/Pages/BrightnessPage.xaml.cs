@@ -21,10 +21,10 @@ namespace Retouch_Photo.Adjustments.Pages
 
             if (e.NewValue is BrightnessAdjustment adjustment)
             {
-                con.WhiteLightSlider.Value = adjustment.WhiteLight * 100;
-                con.WhiteDarkSlider.Value = adjustment.WhiteDark * 100;
-                con.BlackLightSlider.Value = adjustment.BlackLight * 100;
-                con.BlackDarkSlider.Value = adjustment.BlackDark * 100;
+                con.WhiteLightSlider.Value = adjustment.BrightnessAdjustmentItem.WhiteLight * 100;
+                con.WhiteDarkSlider.Value = adjustment.BrightnessAdjustmentItem.WhiteDark * 100;
+                con.BlackLightSlider.Value = adjustment.BrightnessAdjustmentItem.BlackLight * 100;
+                con.BlackDarkSlider.Value = adjustment.BrightnessAdjustmentItem.BlackDark * 100;
             }
         }));
 
@@ -39,23 +39,23 @@ namespace Retouch_Photo.Adjustments.Pages
 
         private void WhiteLightSlider_ValueChangeDelta(object sender, double value)
         {
-            this.BrightnessAdjustment.WhiteLight = (float)(value / 100);
+            this.BrightnessAdjustment.BrightnessAdjustmentItem.WhiteLight = (float)(value / 100);
             Adjustment.Invalidate();
         }
         private void WhiteDarkSlider_ValueChangeDelta(object sender, double value)
         {
-            this.BrightnessAdjustment.WhiteDark = (float)(value / 100);
+            this.BrightnessAdjustment.BrightnessAdjustmentItem.WhiteDark = (float)(value / 100);
             Adjustment.Invalidate();
         }
 
         private void BlackLightSlider_ValueChangeDelta(object sender, double value)
         {
-            this.BrightnessAdjustment.BlackLight = (float)(value / 100);
+            this.BrightnessAdjustment.BrightnessAdjustmentItem.BlackLight = (float)(value / 100);
             Adjustment.Invalidate();
         }
         private void BlackDarkSlider_ValueChangeDelta(object sender, double value)
         {
-            this.BrightnessAdjustment.BlackDark = (float)(value / 100);
+            this.BrightnessAdjustment.BrightnessAdjustmentItem.BlackDark = (float)(value / 100);
             Adjustment.Invalidate();
         }
 

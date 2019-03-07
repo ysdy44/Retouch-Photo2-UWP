@@ -20,7 +20,7 @@ namespace Retouch_Photo.Adjustments.Pages
 
             if(e.NewValue is HueRotationAdjustment adjustment)
             {
-                con.HueRotationSlider.Value = adjustment.Angle * 180/Math.PI;
+                con.HueRotationSlider.Value = adjustment.HueRotationAdjustmentitem.Angle * 180/Math.PI;
             }
         }));
 
@@ -34,7 +34,7 @@ namespace Retouch_Photo.Adjustments.Pages
 
         private void HueRotationSlider_ValueChangeDelta(object sender, double value)
         {
-            this.HueRotationAdjustment.Angle = (float)(value * Math.PI / 180);
+            this.HueRotationAdjustment.HueRotationAdjustmentitem.Angle = (float)(value * Math.PI / 180);
             Adjustment.Invalidate();
         }
     }

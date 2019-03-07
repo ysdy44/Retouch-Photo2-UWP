@@ -1,4 +1,5 @@
-﻿using Retouch_Photo.Effects.Models;
+﻿using Retouch_Photo.Effects.Items;
+using Retouch_Photo.Effects.Models;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;

@@ -108,6 +108,9 @@
   <ItemGroup>
     <Compile Include="Adjustment.cs" />
     <Compile Include="AdjustmentCandidate.cs" />
+    <Compile Include="AdjustmentFilter.cs" />
+    <Compile Include="AdjustmentItem.cs" />
+    <Compile Include="AdjustmentManager.cs" />
     <Compile Include="AdjustmentType.cs" />
     <Compile Include="Candidates\BrightnessAdjustmentCandidate.cs" />
     <Compile Include="Candidates\ContrastAdjustmentCandidate.cs" />
@@ -159,6 +162,17 @@
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Items\BrightnessAdjustmentItem.cs" />
+    <Compile Include="Items\ContrastAdjustmentItem.cs" />
+    <Compile Include="Items\ExposureAdjustmentItem.cs" />
+    <Compile Include="Items\GammaTransferAdjustmentItem.cs" />
+    <Compile Include="Items\GrayAdjustmentItem.cs" />
+    <Compile Include="Items\HighlightsAndShadowsAdjustmentItem.cs" />
+    <Compile Include="Items\HueRotationAdjustmentItem.cs" />
+    <Compile Include="Items\InvertAdjustmentItem.cs" />
+    <Compile Include="Items\SaturationAdjustmentItem.cs" />
+    <Compile Include="Items\TemperatureAdjustmentItem.cs" />
+    <Compile Include="Items\VignetteAdjustmentItem.cs" />
     <Compile Include="Models\BrightnessAdjustment.cs" />
     <Compile Include="Models\ContrastAdjustment.cs" />
     <Compile Include="Models\ExposureAdjustment.cs" />
@@ -203,6 +217,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -301,7 +318,6 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

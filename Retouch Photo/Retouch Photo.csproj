@@ -98,6 +98,9 @@
     <Compile Include="Controls\AdjustmentsControl.xaml.cs">
       <DependentUpon>AdjustmentsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FilterControl.xaml.cs">
+      <DependentUpon>FilterControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Element\AppbarControl.xaml.cs">
       <DependentUpon>AppbarControl.xaml</DependentUpon>
     </Compile>
@@ -774,6 +777,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Controls\AdjustmentsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FilterControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -19,7 +19,7 @@ namespace Retouch_Photo.Adjustments.Pages
 
             if (e.NewValue is SaturationAdjustment adjustment)
             {
-                con.SaturationSlider.Value = adjustment.Saturation * 100;
+                con.SaturationSlider.Value = adjustment.SaturationAdjustmentItem.Saturation * 100;
             }
         }));
 
@@ -33,7 +33,7 @@ namespace Retouch_Photo.Adjustments.Pages
 
         private void SaturationSlider_ValueChangeDelta(object sender, double value)
         {
-            this.SaturationAdjustment.Saturation = (float)(value / 100);
+            this.SaturationAdjustment.SaturationAdjustmentItem.Saturation = (float)(value / 100);
             Adjustment.Invalidate();
         }
     }

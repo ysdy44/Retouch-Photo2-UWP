@@ -9,7 +9,8 @@ namespace Retouch_Photo.Adjustments
     /// 传递Adjustment的委托。
     /// </summary>
     public delegate void AdjustmentHandler(Adjustment adjustment);
-
+    public delegate void AdjustmentsHandler(IEnumerable<Adjustment> adjustments);
+    
     /// <summary>
     /// Adjustment: 调整。
     /// 给图层提供调整。
@@ -24,6 +25,8 @@ namespace Retouch_Photo.Adjustments
 
         public AdjustmentType Type;
         public FrameworkElement Icon;
+
+        public AdjustmentItem Item;        
         /// <summary> 有无参数页面 </summary>
          public bool HasPage;
 

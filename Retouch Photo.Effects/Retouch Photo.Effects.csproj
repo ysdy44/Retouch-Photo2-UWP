@@ -133,6 +133,12 @@
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Items\DirectionalBlurEffectItem.cs" />
+    <Compile Include="Items\EmbossEffectItem.cs" />
+    <Compile Include="Items\GaussianBlurEffectItem.cs" />
+    <Compile Include="Items\OuterShadowEffectItem.cs" />
+    <Compile Include="Items\OutlineEffectItem.cs" />
+    <Compile Include="Items\StraightenEffectItem.cs" />
     <Compile Include="Pages\DirectionalBlurPage.xaml.cs">
       <DependentUpon>DirectionalBlurPage.xaml</DependentUpon>
     </Compile>

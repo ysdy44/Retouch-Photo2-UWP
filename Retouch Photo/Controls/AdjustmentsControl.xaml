@@ -7,7 +7,9 @@
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:models="using:Retouch_Photo.Models"
     xmlns:adjustments="using:Retouch_Photo.Adjustments"
+    xmlns:local="using:Retouch_Photo.Controls"
     mc:Ignorable="d"
+    IsEnabled="False"
     d:DesignHeight="300"
     d:DesignWidth="200"
     >
@@ -16,8 +18,8 @@
     <UserControl.Resources>
 
         <!--Flyout-->
-        <Flyout x:Name="Flyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <ListView x:Name="ListView" Width="190" SelectionMode="None" IsItemClickEnabled="True"                     >
+        <Flyout x:Name="CandidateFlyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <ListView x:Name="ListView" Width="190" SelectionMode="None" IsItemClickEnabled="True">
                 <ListView.Header>
                     <TextBlock Text="Select a adjustment:" Style="{StaticResource AppTextBlock}"/>
                 </ListView.Header>
@@ -27,6 +29,9 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+        </Flyout>
+        <Flyout x:Name="FilterFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <local:FilterControl x:Name="FilterControl"/>
         </Flyout>
 
         <!--DataTemplate-->
@@ -51,33 +56,14 @@
             <RowDefinition Height="*" MinHeight="165"/>
         </Grid.RowDefinitions>
 
+        <Button x:Name="FilterButton" Grid.Column="0" Style="{ThemeResource NavigationBackButtonNormalStyle}" >
+            <FontIcon Glyph="&#xE169;" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource AppIconElement}"/>
+        </Button>
 
         <Button x:Name="AddButton" Grid.Column="2" Style="{ThemeResource NavigationBackButtonNormalStyle}">
             <FontIcon Glyph="&#xE109;" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource AppIconElement}"/>
         </Button>
-        <!--
         
-        <Border Grid.Row="1" >
-            <ComboBox x:Name="ComboBox" ItemsSource="{x:Bind Filters}" >
-                <ComboBox.Style>
-                    <Style TargetType="ComboBox">
-                        <Setter Property="Background" Value="{ThemeResource AppBarBackgroundThemeBrush}" />
-                        <Setter Property="BorderBrush" Value="{ThemeResource AppBarBorderThemeBrush}" />
-                        <Setter Property="BorderThickness" Value="1" />
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        <Setter Property="HorizontalAlignment" Value="Stretch" />
-                        <Setter Property="VerticalAlignment" Value="Top" />
-                    </Style>
-                </ComboBox.Style>
-                <ComboBox.ItemTemplate>
-                    <DataTemplate x:DataType="local:Filter">
-                        <TextBlock Text="{x:Bind Name}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-        </Border>
-        
-        -->
         
         <Border x:Name="Border" Grid.ColumnSpan="3" Grid.Row="1" Height="Auto" VerticalAlignment="Top" Style="{StaticResource AppRoundedBorderStyle}">
             <ItemsControl x:Name="ItemsControl" ItemTemplate="{StaticResource DataTemplate}"/>

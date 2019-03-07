@@ -19,10 +19,10 @@ namespace Retouch_Photo.Adjustments.Pages
 
             if(e.NewValue is HighlightsAndShadowsAdjustment adjustment)
             {
-                con.ShadowsSlider.Value = adjustment.Shadows * 100;
-                con.HighlightsSlider.Value = adjustment.Highlights * 100;
-                con.ClaritySlider.Value = adjustment.Clarity * 100;
-                con.MaskBlurAmountSlider.Value = adjustment.MaskBlurAmount * 10;
+                con.ShadowsSlider.Value = adjustment.HighlightsAndShadowsAdjustmentItem.Shadows * 100;
+                con.HighlightsSlider.Value = adjustment.HighlightsAndShadowsAdjustmentItem.Highlights * 100;
+                con.ClaritySlider.Value = adjustment.HighlightsAndShadowsAdjustmentItem.Clarity * 100;
+                con.MaskBlurAmountSlider.Value = adjustment.HighlightsAndShadowsAdjustmentItem.MaskBlurAmount * 10;
             }
         }));
 
@@ -36,22 +36,22 @@ namespace Retouch_Photo.Adjustments.Pages
 
         private void ShadowsSlider_ValueChangeDelta(object sender, double value)
         {
-            this.HighlightsAndShadowsAdjustment.Shadows = (float)(value / 100);
+            this.HighlightsAndShadowsAdjustment.HighlightsAndShadowsAdjustmentItem.Shadows = (float)(value / 100);
             Adjustment.Invalidate();
         }
         private void HighlightsSlider_ValueChangeDelta(object sender, double value)
         {
-            this.HighlightsAndShadowsAdjustment.Highlights = (float)(value / 100);
+            this.HighlightsAndShadowsAdjustment.HighlightsAndShadowsAdjustmentItem.Highlights = (float)(value / 100);
             Adjustment.Invalidate();
         }
         private void ClaritySlider_ValueChangeDelta(object sender, double value)
         {
-            this.HighlightsAndShadowsAdjustment.Clarity = (float)(value / 100);
+            this.HighlightsAndShadowsAdjustment.HighlightsAndShadowsAdjustmentItem.Clarity = (float)(value / 100);
             Adjustment.Invalidate();
         }
         private void MaskBlurAmountSlider_ValueChangeDelta(object sender, double value)
         {
-            this.HighlightsAndShadowsAdjustment.MaskBlurAmount = (float)(value / 10);
+            this.HighlightsAndShadowsAdjustment.HighlightsAndShadowsAdjustmentItem.MaskBlurAmount = (float)(value / 10);
             Adjustment.Invalidate();
         }
     }

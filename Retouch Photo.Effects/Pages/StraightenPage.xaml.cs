@@ -1,6 +1,7 @@
 ﻿using Retouch_Photo.Effects.Models;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Retouch_Photo.Effects.Items;
 
 namespace Retouch_Photo.Effects.Pages
 {

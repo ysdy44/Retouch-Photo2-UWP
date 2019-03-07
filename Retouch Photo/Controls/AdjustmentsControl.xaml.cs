@@ -4,11 +4,22 @@ using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Retouch_Photo.Adjustments;
+using System;
+using Newtonsoft.Json;
+using System.ComponentModel;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Windows.UI.Xaml.Data;
+using Windows.Storage;
+using Windows.System;
+using Retouch_Photo.Adjustments.Models;
+using Retouch_Photo.Adjustments.Items;
 
 namespace Retouch_Photo.Controls
 { 
     public sealed partial class AdjustmentsControl : UserControl
-    {
+    {      
         //ViewModel
         DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
@@ -21,21 +32,23 @@ namespace Retouch_Photo.Controls
                 this.Frame.Visibility =
                 (value == null) ? Visibility.Visible : Visibility.Collapsed;
 
-                this.AddButton.Visibility = (value == null) ? Visibility.Collapsed : Visibility.Visible;
+                this.AddButton.Visibility =
+                this.FilterButton.Visibility =
+                (value == null) ? Visibility.Collapsed : Visibility.Visible;
 
                 this.Border.Visibility = (value == true) ? Visibility.Visible : Visibility.Collapsed;
                 this.TextBlock.Visibility = (value == false) ? Visibility.Visible : Visibility.Collapsed;
             }
         }
-        
+
 
         private Adjustment adjustment;
         public Adjustment Adjustment
         {
-           get => this.adjustment;
+            get => this.adjustment;
             set
             {
-                if (value==null) return;
+                if (value == null) return;
                 if (!value.HasPage) return;
 
                 AdjustmentCandidate adjustmentCandidate = AdjustmentCandidate.GetAdjustmentCandidate(value.Type);
@@ -45,12 +58,12 @@ namespace Retouch_Photo.Controls
                 this.ShowVisibility = null;
 
                 this.AddButton.IsEnabled = true;
-                
+
                 this.adjustment = value;
             }
         }
-       
-        
+
+
         #region DependencyProperty
 
 
@@ -68,7 +81,7 @@ namespace Retouch_Photo.Controls
                 con.IsEnabled = true;
 
                 con.ShowVisibility = null;
-                con.Invalidate(layer.Adjustments);
+                con.Invalidate(layer.AdjustmentManager.Adjustments);
             }
             else
             {
@@ -80,8 +93,8 @@ namespace Retouch_Photo.Controls
 
 
         #endregion
-        
-               
+
+
         public AdjustmentsControl()
         {
             this.InitializeComponent();
@@ -91,30 +104,41 @@ namespace Retouch_Photo.Controls
 
             this.ShowVisibility = false;
 
+
             //AdjustmentCandidate
-            this.ListView.Loaded += (sender, e) =>this.ListView.ItemsSource = AdjustmentCandidate.AdjustmentCandidateList;
+            this.ListView.Loaded += (sender, e) => this.ListView.ItemsSource = AdjustmentCandidate.AdjustmentCandidateList;
             this.ListView.ItemClick += (sender, e) =>
             {
                 if (e.ClickedItem is AdjustmentCandidate item)
                 {
                     Adjustment adjustment = item.GetNewAdjustment();
                     this.Add(adjustment);
-                    this.Flyout.Hide();
+                    this.CandidateFlyout.Hide(); 
                 }
             };
+
 
             //Button
             this.BackButton.Tapped += (sender, e) => this.Clear();
             this.ResetButton.Tapped += (sender, e) => this.Reset();
+            this.FilterButton.Tapped += (sender, e) => this.FilterFlyout.ShowAt(this.FilterButton);
             this.AddButton.Tapped += (sender, e) =>
             {
-                if (this.Layer==null)
+                if (this.Layer == null)
                 {
                     this.IsEnabled = false;
                     return;
                 }
 
-                this.Flyout.ShowAt((Button)sender);
+                this.CandidateFlyout.ShowAt((Button)sender);
+            };
+
+
+            //Filter
+            this.FilterControl.AdjustmentsClick += (adjustments) =>
+            {
+
+                this.Replace(adjustments);
             };
         }
 
@@ -128,16 +152,25 @@ namespace Retouch_Photo.Controls
         private void Add(Adjustment adjustment)
         {
             if (this.Layer == null) return;
-            this.Layer.Adjustments.Add(adjustment);
-            this.Invalidate(this.Layer.Adjustments);
+            this.Layer.AdjustmentManager.Adjustments.Add(adjustment);
+            this.Invalidate(this.Layer.AdjustmentManager.Adjustments);
             this.ViewModel.Invalidate();
         }
         /// <summary> Remove the Adjustment. </summary>
         private void Remove(Adjustment adjustment)
         {
             if (this.Layer == null) return;
-            this.Layer.Adjustments.Remove(adjustment);
-            this.Invalidate(this.Layer.Adjustments);
+            this.Layer.AdjustmentManager.Adjustments.Remove(adjustment);
+            this.Invalidate(this.Layer.AdjustmentManager.Adjustments);
+            this.ViewModel.Invalidate();
+        }
+        /// <summary> Replace the Adjustment. </summary>
+        private void Replace(IEnumerable<Adjustment> adjustments)
+        {
+            if (this.Layer == null) return;
+            this.Layer.AdjustmentManager.Adjustments.Clear();
+            this.Layer.AdjustmentManager.Adjustments.AddRange(adjustments);
+            this.Invalidate(this.Layer.AdjustmentManager.Adjustments);
             this.ViewModel.Invalidate();
         }
 
@@ -180,5 +213,6 @@ namespace Retouch_Photo.Controls
             this.ShowVisibility = true;
         }
 
+        
     }
 }

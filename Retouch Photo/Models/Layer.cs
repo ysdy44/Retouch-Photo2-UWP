@@ -34,10 +34,10 @@ namespace Retouch_Photo.Models
         
         public Transformer Transformer;
 
-        public List<Adjustment> Adjustments = new List<Adjustment>();
+        public AdjustmentManager AdjustmentManager = new AdjustmentManager();
 
         public EffectManager EffectManager = new EffectManager();
-
+        
 
         #region Thumbnail
 
@@ -126,11 +126,14 @@ namespace Retouch_Photo.Models
         {
             if (layer.IsVisual == false || layer.Opacity == 0) return image;
 
-            ICanvasImage effect = layer.EffectManager.Render(Adjustment.Render
+            ICanvasImage effect = EffectManager.Render
             (
-                adjustments: layer.Adjustments,
-                image: layer.GetRender(creator, image, canvasToVirtualMatrix)
-            ));
+                layer.EffectManager, 
+                AdjustmentManager.Render
+                (
+                    layer.AdjustmentManager, layer.GetRender(creator, image, canvasToVirtualMatrix)
+                )
+            );
 
             return Blend.Render
             (
