@@ -7,6 +7,7 @@ namespace Retouch_Photo.Adjustments.Models
 {
     public class TemperatureAdjustment : Adjustment
     {
+        public static readonly string Name = "Temperature";
         public TemperatureAdjustmentItem TemperatureAdjustmentItem =new TemperatureAdjustmentItem();
 
         public TemperatureAdjustment()

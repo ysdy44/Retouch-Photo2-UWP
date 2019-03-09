@@ -8,6 +8,7 @@ namespace Retouch_Photo.Adjustments.Models
 {
     public class ExposureAdjustment : Adjustment
     {
+        public static readonly string Name = "Exposure";
         public ExposureAdjustmentItem ExposureAdjustmentItem=new ExposureAdjustmentItem();
 
         public ExposureAdjustment()

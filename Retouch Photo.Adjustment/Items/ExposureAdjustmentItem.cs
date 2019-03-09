@@ -6,7 +6,7 @@ namespace Retouch_Photo.Adjustments.Items
     {
         public float Exposure;
 
-        public ExposureAdjustmentItem() => base.Type = AdjustmentType.Exposure;
+        public ExposureAdjustmentItem() => base.Name = ExposureAdjustment.Name;
 
         public override Adjustment GetAdjustment() => new ExposureAdjustment()
         {

@@ -8,6 +8,7 @@ namespace Retouch_Photo.Adjustments.Models
 {
     public class ContrastAdjustment : Adjustment
     {
+        public static readonly string Name = "Contrast";
         public ContrastAdjustmentItem ContrastAdjustmentItem=new ContrastAdjustmentItem();
 
         public ContrastAdjustment()

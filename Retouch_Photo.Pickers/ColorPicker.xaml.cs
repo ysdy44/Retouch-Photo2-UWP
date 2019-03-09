@@ -29,14 +29,12 @@ namespace Retouch_Photo.Pickers
 
 
         Picker[] Pickers = new Picker[]
-        {
-            /*            
+        {            
             new Picker
             {
                 Name="SwatchesPicker",
                 Control=new SwatchesPicker(),
             },
-            */
             new Picker
             {
                 Name="WheelPicker",

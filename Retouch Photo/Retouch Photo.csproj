@@ -708,6 +708,7 @@
     <Content Include="Assets\TwitterHeart.json" />
     <Content Include="Assets\Walkthrough.json" />
     <Content Include="Assets\WeAccept.json" />
+    <Content Include="Json\Filter.json" />
     <None Include="Retouch Photo_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

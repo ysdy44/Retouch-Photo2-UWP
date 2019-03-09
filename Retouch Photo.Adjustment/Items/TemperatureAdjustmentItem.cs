@@ -7,7 +7,7 @@ namespace Retouch_Photo.Adjustments.Items
         public float Temperature;
         public float Tint;
 
-        public TemperatureAdjustmentItem() => base.Type = AdjustmentType.Temperature;
+        public TemperatureAdjustmentItem() => base.Name = TemperatureAdjustment.Name;
 
         public override Adjustment GetAdjustment() => new TemperatureAdjustment()
         {

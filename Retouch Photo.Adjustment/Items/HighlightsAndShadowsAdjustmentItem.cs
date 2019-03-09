@@ -10,7 +10,7 @@ namespace Retouch_Photo.Adjustments.Items
         public float MaskBlurAmount;
         public bool SourceIsLinearGamma;
 
-        public HighlightsAndShadowsAdjustmentItem() => base.Type = AdjustmentType.HighlightsAndShadows;
+        public HighlightsAndShadowsAdjustmentItem() => base.Name = HighlightsAndShadowsAdjustment.Name;
 
         public override Adjustment GetAdjustment() => new HighlightsAndShadowsAdjustment()
         {

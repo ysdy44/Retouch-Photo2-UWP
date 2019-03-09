@@ -14,7 +14,7 @@ namespace Retouch_Photo.Adjustments.Items
         /// <summary> Interval 0.0->0.5 . </summary>
         public float BlackDark;
 
-        public BrightnessAdjustmentItem() => base.Type = AdjustmentType.Brightness;
+        public BrightnessAdjustmentItem() => base.Name = BrightnessAdjustment.Name;
 
         public override Adjustment GetAdjustment() => new BrightnessAdjustment()
         {

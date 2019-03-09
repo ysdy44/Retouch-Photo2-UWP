@@ -26,7 +26,7 @@
             <TextBlock Text="Filter:" Style="{StaticResource AppTextBlock}"/>
         </ListView.Header>
         <ListView.ItemTemplate>
-            <DataTemplate x:DataType="adjustments:AdjustmentFilter">
+            <DataTemplate x:DataType="adjustments:Filter">
                 <TextBlock Text="{x:Bind Name}"/>
             </DataTemplate>
         </ListView.ItemTemplate>

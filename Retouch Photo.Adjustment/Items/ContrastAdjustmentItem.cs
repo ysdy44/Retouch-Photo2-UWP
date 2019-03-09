@@ -6,8 +6,8 @@ namespace Retouch_Photo.Adjustments.Items
     {
         public float Contrast;
 
-        public ContrastAdjustmentItem() => base.Type = AdjustmentType.Contrast;
-
+        public ContrastAdjustmentItem() => base.Name = ContrastAdjustment.Name;
+ 
         public override Adjustment GetAdjustment() => new ContrastAdjustment()
         {
             ContrastAdjustmentItem = this

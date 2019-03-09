@@ -6,7 +6,7 @@ namespace Retouch_Photo.Adjustments.Items
     {
         public float Saturation;
 
-        public SaturationAdjustmentItem() => base.Type = AdjustmentType.Saturation;
+        public SaturationAdjustmentItem() => base.Name = SaturationAdjustment.Name;
 
         public override Adjustment GetAdjustment() => new SaturationAdjustment()
         {

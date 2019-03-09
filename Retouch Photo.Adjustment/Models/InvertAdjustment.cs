@@ -7,6 +7,7 @@ namespace Retouch_Photo.Adjustments.Models
 {
     public class InvertAdjustment : Adjustment
     {
+        public static readonly string Name = "Invert";
         public InvertAdjustmentItem InvertAdjustmentItem = new InvertAdjustmentItem();
 
         public InvertAdjustment()

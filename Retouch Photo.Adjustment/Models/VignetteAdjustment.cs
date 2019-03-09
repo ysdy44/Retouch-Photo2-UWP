@@ -9,6 +9,7 @@ namespace Retouch_Photo.Adjustments.Models
 {
     public class VignetteAdjustment : Adjustment
     {
+        public static readonly string Name = "Vignette";
         public VignetteAdjustmentItem VignetteAdjustmentItem = new VignetteAdjustmentItem();
 
         public VignetteAdjustment()

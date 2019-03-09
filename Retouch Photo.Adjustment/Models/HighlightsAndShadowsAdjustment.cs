@@ -8,6 +8,7 @@ namespace Retouch_Photo.Adjustments.Models
 {
     public class HighlightsAndShadowsAdjustment : Adjustment
     {
+        public static readonly string Name = "HighlightsAndShadows";
         public HighlightsAndShadowsAdjustmentItem HighlightsAndShadowsAdjustmentItem = new HighlightsAndShadowsAdjustmentItem();
 
         public HighlightsAndShadowsAdjustment()

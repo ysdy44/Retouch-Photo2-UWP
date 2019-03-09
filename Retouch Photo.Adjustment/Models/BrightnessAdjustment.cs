@@ -9,6 +9,7 @@ namespace Retouch_Photo.Adjustments.Models
 {
     public class BrightnessAdjustment : Adjustment
     {
+        public static readonly string Name = "Brightness";
         public BrightnessAdjustmentItem BrightnessAdjustmentItem = new BrightnessAdjustmentItem();
 
         public BrightnessAdjustment()

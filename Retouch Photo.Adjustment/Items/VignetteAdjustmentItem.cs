@@ -9,7 +9,7 @@ namespace Retouch_Photo.Adjustments.Items
         public float Curve;
         public Color Color;
 
-        public VignetteAdjustmentItem() => base.Type = AdjustmentType.Vignette;
+        public VignetteAdjustmentItem() => base.Name = VignetteAdjustment.Name;
 
         public override Adjustment GetAdjustment() => new VignetteAdjustment()
         {

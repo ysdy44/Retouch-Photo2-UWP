@@ -7,6 +7,7 @@ namespace Retouch_Photo.Adjustments.Models
 {
     public class GrayAdjustment: Adjustment
     {
+        public static readonly string Name = "Gray";
         public GrayAdjustmentItem GrayAdjustmentItem = new GrayAdjustmentItem();
 
         public GrayAdjustment()

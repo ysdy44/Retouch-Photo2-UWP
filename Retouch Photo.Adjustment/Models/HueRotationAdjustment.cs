@@ -8,6 +8,7 @@ namespace Retouch_Photo.Adjustments.Models
 {
     public class HueRotationAdjustment : Adjustment
     {
+        public static readonly string Name = "HueRotation";
         public HueRotationAdjustmentItem HueRotationAdjustmentitem=new HueRotationAdjustmentItem();
 
         public HueRotationAdjustment()

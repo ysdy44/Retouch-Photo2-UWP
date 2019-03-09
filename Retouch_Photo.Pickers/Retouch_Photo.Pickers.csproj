@@ -136,6 +136,9 @@
     <Compile Include="StrawPicker.xaml.cs">
       <DependentUpon>StrawPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SwatchesPicker.xaml.cs">
+      <DependentUpon>SwatchesPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TouchSlider.xaml.cs">
       <DependentUpon>TouchSlider.xaml</DependentUpon>
     </Compile>
@@ -184,6 +187,10 @@
     <Page Include="StrawPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SwatchesPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TouchSlider.xaml">
       <Generator>MSBuild:Compile</Generator>

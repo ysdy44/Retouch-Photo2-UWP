@@ -4,7 +4,7 @@ namespace Retouch_Photo.Adjustments.Items
 {
     public class InvertAdjustmentItem : AdjustmentItem
     {
-        public InvertAdjustmentItem() => base.Type = AdjustmentType.Invert;
+        public InvertAdjustmentItem() => base.Name = InvertAdjustment.Name;
 
         public override Adjustment GetAdjustment() => new InvertAdjustment()
         {

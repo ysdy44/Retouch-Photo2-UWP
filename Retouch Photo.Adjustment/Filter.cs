@@ -4,18 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace Retouch_Photo.Adjustments
 {
     /// <summary>
     /// 传递AdjustmentFilter的委托。
     /// </summary>
-    public delegate void AdjustmentFilterHandler(AdjustmentFilter adjustmentFilter);
+    public delegate void AdjustmentFilterHandler(Filter adjustmentFilter);
   
     /// 从Json形式转为可用的形式
     /// [Filter] --> [List<Item>]
-    public class AdjustmentFilter
-    {
+    public class Filter
+    {        
         public string Name;
 
         public IEnumerable<AdjustmentItem> AdjustmentItems;
@@ -23,33 +24,33 @@ namespace Retouch_Photo.Adjustments
 
         //@static
         /// <summary> Get List Filter. </summary> 
-        public static IEnumerable<AdjustmentFilter> GetFilters(string json)
+        public static IEnumerable<Filter> GetFiltersFromJson(string json)
         {
             // Json --> List<Object>
             IEnumerable<object> objects = JsonConvert.DeserializeObject<IEnumerable<object>>(json);
 
             // List<Object> --> List<Filter>
-            IEnumerable<AdjustmentFilter> filters =
+            IEnumerable<Filter> filters =
                 from item
                 in objects
-                select AdjustmentFilter.GetFilter(item.ToString());
+                select Filter.GetFilterFromJson(item.ToString());
 
             return filters;
         }
 
         //@static
         /// <summary> Get Filter. </summary> 
-        public static AdjustmentFilter GetFilter(string json)
+        public static Filter GetFilterFromJson(string json)
         {
             // Json --> Filter2
             AdjustmentFilter2 flter2 = JsonConvert.DeserializeObject<AdjustmentFilter2>(json);
 
             // Object --> Json -->  List<Item>
             string jsonsssss = flter2.AdjustmentItems.ToString();
-            IEnumerable<AdjustmentItem> items = AdjustmentItem.GetItems(jsonsssss);
+            IEnumerable<AdjustmentItem> items = AdjustmentItem.GetItemsFromJson(jsonsssss);
 
             // List<Item> -- > Filter
-            AdjustmentFilter filter = new AdjustmentFilter()
+            Filter filter = new Filter()
             {
                 Name = flter2.Name,
                 AdjustmentItems = items

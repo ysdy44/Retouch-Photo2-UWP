@@ -1,7 +1,10 @@
 ﻿using Microsoft.Graphics.Canvas;
 using System.Collections.Generic;
+using System;
 using System.Linq;
 using Windows.UI.Xaml;
+using Windows.Storage;
+using System.Threading.Tasks;
 
 namespace Retouch_Photo.Adjustments
 {

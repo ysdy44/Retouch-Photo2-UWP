@@ -8,6 +8,7 @@ namespace Retouch_Photo.Adjustments.Models
 {
     public class GammaTransferAdjustment : Adjustment
     {
+        public static readonly string Name = "GammaTransfer";
         public GammaTransferAdjustmentItem GammaTransferAdjustmentItem = new GammaTransferAdjustmentItem();
 
         public GammaTransferAdjustment()

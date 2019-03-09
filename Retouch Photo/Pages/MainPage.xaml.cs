@@ -1,26 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Retouch_Photo.Models;
+﻿using Retouch_Photo.Models;
+using Retouch_Photo.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Windows.Storage;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
 using System.Collections.ObjectModel;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media.Animation;
-using Windows.System;
 using System.Xml.Linq;
 using Windows.Graphics.Imaging;
+using Windows.Storage;
 using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
-using Microsoft.Graphics.Canvas;
-using Retouch_Photo.ViewModels;
+using Windows.System;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo.Pages
 {

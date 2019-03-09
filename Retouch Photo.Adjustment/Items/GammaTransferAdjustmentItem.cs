@@ -26,7 +26,7 @@ namespace Retouch_Photo.Adjustments.Items
         public float BlueExponent;
         public float BlueAmplitude;
 
-        public GammaTransferAdjustmentItem() => base.Type = AdjustmentType.GammaTransfer;
+        public GammaTransferAdjustmentItem() => base.Name = GammaTransferAdjustment.Name;
 
         public override Adjustment GetAdjustment() => new GammaTransferAdjustment()
         {

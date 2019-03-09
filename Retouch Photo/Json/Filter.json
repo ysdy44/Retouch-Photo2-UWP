@@ -1,0 +1,460 @@
+﻿[
+
+
+
+
+  {
+    "Name": "Original",
+    "AdjustmentItems": [
+
+
+      {
+        "Name": "Gray"
+      },
+      {
+        "Name": "Invert"
+      },
+
+
+
+      {
+        "Name": "Exposure",
+        "Exposure": 0.0
+      },
+      {
+        "Name": "Brightness",
+        "WhiteLight": 1.0,
+        "WhiteDark": 1.0,
+        "BlackLight": 0.0,
+        "BlackDark": 0.0
+      },
+      {
+        "Name": "Saturation",
+        "Saturation": 1.0
+      },
+      {
+        "Name": "HueRotation",
+        "Angle": 0.0
+      },
+      {
+        "Name": "Contrast",
+        "Contrast": 0.0
+      },
+      {
+        "Name": "Temperature",
+        "Temperature": 0.0,
+        "Tint": 0.0
+      },
+
+
+
+      {
+        "Name": "HighlightsAndShadows",
+        "Shadows": 0.0,
+        "Highlights": 0.0,
+        "Clarity": 0.0,
+        "MaskBlurAmount": 1.25,
+        "SourceIsLinearGamma": false
+      },
+      {
+        "Name": "GammaTransfer",
+        "ClampOutput": false,
+
+        "AlphaDisable": true,
+        "AlphaOffset": 0.0,
+        "AlphaExponent": 1.0,
+        "AlphaAmplitude": 1.0,
+
+        "RedDisable": true,
+        "RedOffset": 0.0,
+        "RedExponent": 1.0,
+        "RedAmplitude": 1.0,
+
+        "GreenDisable": true,
+        "GreenOffset": 0.0,
+        "GreenExponent": 1.0,
+        "GreenAmplitude": 1.0,
+
+        "BlueDisable": true,
+        "BlueOffset": 0.0,
+        "BlueExponent": 1.0,
+        "BlueAmplitude": 1.0
+      },
+      {
+        "Name": "Vignette",
+        "Amount": 0.0,
+        "Curve": 0.0,
+        "Color": {
+          "A": "0",
+          "R": "0",
+          "G": "0",
+          "B": "0"
+        }
+      }
+
+
+    ]
+  },
+
+
+
+
+  {
+    "Name": "Memory",
+    "AdjustmentItems": [
+
+
+      {
+        "Name": "Exposure",
+        "Exposure": 0.27
+      },
+      {
+        "Name": "Saturation",
+        "Saturation": 1.33
+      },
+      {
+        "Name": "Contrast",
+        "Contrast": 1.0
+      },
+      {
+        "Name": "Temperature",
+        "Temperature": 0.49,
+        "Tint": 0.0
+      },
+
+
+
+      {
+        "Name": "HighlightsAndShadows",
+        "Shadows": -0.375,
+        "Highlights": 0.455,
+        "Clarity": 0.0,
+        "MaskBlurAmount": 1.25,
+        "SourceIsLinearGamma": false
+      },
+      {
+        "Name": "GammaTransfer",
+        "ClampOutput": false,
+
+        "AlphaDisable": true,
+        "AlphaOffset": 0.0,
+        "AlphaExponent": 1.0,
+        "AlphaAmplitude": 1.0,
+
+        "RedDisable": true,
+        "RedOffset": 0.0,
+        "RedExponent": 1.0,
+        "RedAmplitude": 1.0,
+
+        "GreenDisable": false,
+        "GreenOffset": 0.08,
+        "GreenExponent": 1.0,
+        "GreenAmplitude": 1.0,
+
+        "BlueDisable": false,
+        "BlueOffset": 0.19,
+        "BlueExponent": 1.0,
+        "BlueAmplitude": 1.0
+      }
+
+
+    ]
+  },
+
+
+  {
+    "Name": "Old",
+    "AdjustmentItems": [
+
+      {
+        "Name": "Exposure",
+        "Exposure": 0.05
+      },
+      {
+        "Name": "Brightness",
+        "WhiteLight": 1.0,
+        "WhiteDark": 1.0,
+        "BlackLight": 0.0,
+        "BlackDark": 0.13
+      },
+      {
+        "Name": "Saturation",
+        "Saturation": 0.52
+      },
+      {
+        "Name": "HueRotation",
+        "Angle": 3.66
+      },
+      {
+        "Name": "Contrast",
+        "Contrast": 0.31
+      },
+      {
+        "Name": "Temperature",
+        "Temperature": 0.39,
+        "Tint": 0.0
+      },
+
+
+
+      {
+        "Name": "HighlightsAndShadows",
+        "Shadows": 0.015,
+        "Highlights": 0.0,
+        "Clarity": 0.0,
+        "MaskBlurAmount": 1.25,
+        "SourceIsLinearGamma": false
+      },
+      {
+        "Name": "Vignette",
+        "Amount": 0.66,
+        "Curve": 0.0,
+        "Color": {
+          "A": "0",
+          "R": "0",
+          "G": "0",
+          "B": "0"
+        }
+      }
+
+
+    ]
+  },
+
+
+  {
+    "Name": "Childhood",
+    "AdjustmentItems": [
+
+
+      {
+        "Name": "Exposure",
+        "Exposure": 0.34
+      },
+      {
+        "Name": "Brightness",
+        "WhiteLight": 0.99,
+        "WhiteDark": 1.0,
+        "BlackLight": 0.0,
+        "BlackDark": 0.0
+      },
+      {
+        "Name": "Saturation",
+        "Saturation": 1.06
+      },
+      {
+        "Name": "Contrast",
+        "Contrast": 0.75
+      },
+      {
+        "Name": "Temperature",
+        "Temperature": 0.0,
+        "Tint": 0.11
+      },
+
+
+
+      {
+        "Name": "HighlightsAndShadows",
+        "Shadows": -0.45,
+        "Highlights": 0.035,
+        "Clarity": 0.0,
+        "MaskBlurAmount": 1.25,
+        "SourceIsLinearGamma": false
+      },
+      {
+        "Name": "GammaTransfer",
+        "ClampOutput": false,
+
+        "AlphaDisable": true,
+        "AlphaOffset": 0.0,
+        "AlphaExponent": 1.0,
+        "AlphaAmplitude": 1.0,
+
+        "RedDisable": true,
+        "RedOffset": 0.32,
+        "RedExponent": 1.0,
+        "RedAmplitude": 1.0,
+
+        "GreenDisable": true,
+        "GreenOffset": 0.14,
+        "GreenExponent": 1.0,
+        "GreenAmplitude": 1.0,
+
+        "BlueDisable": true,
+        "BlueOffset": 0.17,
+        "BlueExponent": 1.0,
+        "BlueAmplitude": 1.0
+      }
+
+    ]
+  },
+
+
+  {
+    "Name": "Morning",
+    "AdjustmentItems": [
+
+
+
+      {
+        "Name": "Brightness",
+        "WhiteLight": 0.73,
+        "WhiteDark": 1.0,
+        "BlackLight": 0.0,
+        "BlackDark": 0.0
+      },
+      {
+        "Name": "Saturation",
+        "Saturation": 1.21
+      },
+      {
+        "Name": "Contrast",
+        "Contrast": 0.205
+      },
+
+
+
+      {
+        "Name": "HighlightsAndShadows",
+        "Shadows": -0.04,
+        "Highlights": 0.22,
+        "Clarity": 0.0,
+        "MaskBlurAmount": 1.25,
+        "SourceIsLinearGamma": false
+      },
+      {
+        "Name": "GammaTransfer",
+        "ClampOutput": false,
+
+        "AlphaDisable": true,
+        "AlphaOffset": 0.0,
+        "AlphaExponent": 1.0,
+        "AlphaAmplitude": 1.0,
+
+        "RedDisable": false,
+        "RedOffset": 0.12,
+        "RedExponent": 1.0,
+        "RedAmplitude": 1.0,
+
+        "GreenDisable": true,
+        "GreenOffset": 0.0,
+        "GreenExponent": 1.0,
+        "GreenAmplitude": 1.0,
+
+        "BlueDisable": false,
+        "BlueOffset": 0.05,
+        "BlueExponent": 1.0,
+        "BlueAmplitude": 1.0
+      }
+
+
+    ]
+  },
+
+
+  {
+    "Name": "Shadow",
+    "AdjustmentItems": [
+
+
+
+
+      {
+        "Name": "Exposure",
+        "Exposure": 0.25
+      },
+      {
+        "Name": "Brightness",
+        "WhiteLight": 0.97,
+        "WhiteDark": 1.0,
+        "BlackLight": 0.0,
+        "BlackDark": 0.0
+      },
+      {
+        "Name": "Saturation",
+        "Saturation": 0.44
+      },
+      {
+        "Name": "Contrast",
+        "Contrast": 0.145
+      },
+      {
+        "Name": "Temperature",
+        "Temperature": 0.08,
+        "Tint": 0.0
+      },
+
+
+
+      {
+        "Name": "HighlightsAndShadows",
+        "Shadows": -0.095,
+        "Highlights": 0.3,
+        "Clarity": 0.0,
+        "MaskBlurAmount": 1.25,
+        "SourceIsLinearGamma": false
+      },
+      {
+        "Name": "Vignette",
+        "Amount": 0.56,
+        "Curve": 0.0,
+        "Color": {
+          "A": "0",
+          "R": "0",
+          "G": "0",
+          "B": "0"
+        }
+      }
+
+
+    ]
+  },
+
+
+
+
+
+
+  {
+    "Name": "Dusk",
+    "AdjustmentItems": [
+
+      {
+        "Name": "Exposure",
+        "Exposure": -0.02
+      },
+      {
+        "Name": "Brightness",
+        "WhiteLight": 0.48,
+        "WhiteDark": 1.0,
+        "BlackLight": 0.0,
+        "BlackDark": 0.0
+      },
+      {
+        "Name": "Saturation",
+        "Saturation": 1.56
+      },
+      {
+        "Name": "Contrast",
+        "Contrast": 0.025
+      },
+      {
+        "Name": "Temperature",
+        "Temperature": 0.075,
+        "Tint": 0.0
+      }
+
+
+    ]
+  }
+
+
+
+
+
+
+
+
+
+]

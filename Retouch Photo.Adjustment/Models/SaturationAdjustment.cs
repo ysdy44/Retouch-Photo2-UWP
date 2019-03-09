@@ -8,6 +8,7 @@ namespace Retouch_Photo.Adjustments.Models
 {
     public class SaturationAdjustment : Adjustment
     {
+        public static readonly string Name = "Saturation";
         public SaturationAdjustmentItem SaturationAdjustmentItem=new SaturationAdjustmentItem();
 
         public SaturationAdjustment()
