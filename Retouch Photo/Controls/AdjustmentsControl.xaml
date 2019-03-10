@@ -31,7 +31,38 @@
             </ListView>
         </Flyout>
         <Flyout x:Name="FilterFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <local:FilterControl x:Name="FilterControl"/>
+            <Border
+    MaxWidth="220"
+    MaxHeight="330">
+
+                <GridView x:Name="GridView" SelectionMode="None" IsItemClickEnabled="True">
+                    <GridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem">
+                            <Setter Property="Background" Value="{ThemeResource AppFill}" />
+                            <Setter Property="Width" Value="94" />
+                            <Setter Property="Margin" Value="2" />
+                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Setter Property="VerticalContentAlignment" Value="Center" />
+                            <Setter Property="HorizontalAlignment" Value="Stretch" />
+                            <Setter Property="VerticalAlignment" Value="Stretch" />
+                        </Style>
+                    </GridView.ItemContainerStyle>
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="2"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                    <GridView.Header>
+                        <TextBlock Text="Filter:" Style="{StaticResource AppTextBlock}"/>
+                    </GridView.Header>
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="adjustments:Filter">
+                            <TextBlock Text="{x:Bind Name}"/>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+            </Border>
         </Flyout>
 
         <!--DataTemplate-->

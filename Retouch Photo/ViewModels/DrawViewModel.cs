@@ -62,10 +62,20 @@ namespace Retouch_Photo.ViewModels
         public int XXX;
         public int YYY;
 
+        KeyViewModel KeyViewModel = new KeyViewModel();
+
         public DrawViewModel()
         {
-            Window.Current.CoreWindow.KeyUp += this.KeyUp;
-            Window.Current.CoreWindow.KeyDown += this.KeyDown;
+            Window.Current.CoreWindow.KeyUp += (s, e) =>
+            {
+                this.KeyViewModel.KeyUp(s, e);
+                this.KeyViewModel.KeyUpAndDown(s, e);
+            };
+            Window.Current.CoreWindow.KeyDown += (s, e) =>
+            {
+                this.KeyViewModel.KeyDown(s, e);
+                this.KeyViewModel.KeyUpAndDown(s, e);
+            };
         }
 
         #region CanvasControl
@@ -271,7 +281,7 @@ namespace Retouch_Photo.ViewModels
                 OnPropertyChanged(nameof(Tool));
             }
         }
-        
+
 
         #endregion
 
@@ -279,97 +289,40 @@ namespace Retouch_Photo.ViewModels
         #region KeyBoard
 
 
+
+        private bool keyShift;
         public bool KeyShift
         {
-            get => keyShift;
+            get =>this.keyShift;
             set
             {
-                keyShift = value;
+                this.keyShift = value;
                 OnPropertyChanged(nameof(KeyShift));
             }
         }
-        private bool keyShift;
-        
+
+        private bool keyCtrl;
         public bool KeyCtrl
         {
-            get => keyCtrl;
+            get => this.keyCtrl;
             set
             {
-                keyCtrl = value;
+                this.keyCtrl = value;
                 OnPropertyChanged(nameof(KeyCtrl));
             }
         }
-        private bool keyCtrl;
-        
+
+        private bool keyAlt;
         public bool KeyAlt
         {
-            get => keyAlt;
+            get => this.keyAlt;
             set
             {
-                keyAlt = value;
+                this.keyAlt = value;
                 OnPropertyChanged(nameof(KeyAlt));
             }
-        }
-        private bool keyAlt;
+        } 
         
-
-        public void KeyDown(CoreWindow sender, KeyEventArgs args)
-        {
-            switch (args.VirtualKey)
-            {
-                case VirtualKey.Control:
-                    this.KeyCtrl = true;
-                    break;
-
-                case VirtualKey.Shift:
-                    this.KeyShift = true;
-                    break;
-
-                case VirtualKey.Delete:
-                    Layer layer = this.CurrentLayer;
-                    if (layer != null)
-                    {
-                        this.RenderLayer.Remove(layer);
-                        this.Tool.ViewModel.ToolOnNavigatedTo();
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-            this.KeyUpAndDown(sender, args);
-        }
-
-        public void KeyUp(CoreWindow sender, KeyEventArgs args)
-        {
-            switch (args.VirtualKey)
-            {
-                case VirtualKey.Control:
-                    this.KeyCtrl = false;
-                    break;
-
-                case VirtualKey.Shift:
-                    this.KeyShift = false;
-                    break;
-
-                default:
-                    break;
-            }
-            this.KeyUpAndDown(sender, args);
-        }
-
-        public void KeyUpAndDown(CoreWindow sender, KeyEventArgs args)
-        {
-            if (this.KeyCtrl == false && this.KeyShift == false)
-                this.MarqueeMode = MarqueeMode.None;
-            else if (this.KeyCtrl == false && this.KeyShift)
-                this.MarqueeMode = MarqueeMode.Square;
-            else if (this.KeyCtrl && this.KeyShift == false)
-                this.MarqueeMode = MarqueeMode.Center;
-            else //if (this.KeyCtrl && this.KeyShift)
-                this.MarqueeMode = MarqueeMode.SquareAndCenter;
-        }
-               
 
         #endregion
 

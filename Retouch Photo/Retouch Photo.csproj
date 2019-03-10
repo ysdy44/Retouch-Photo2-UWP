@@ -98,9 +98,6 @@
     <Compile Include="Controls\AdjustmentsControl.xaml.cs">
       <DependentUpon>AdjustmentsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FilterControl.xaml.cs">
-      <DependentUpon>FilterControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Element\AppbarControl.xaml.cs">
       <DependentUpon>AppbarControl.xaml</DependentUpon>
     </Compile>
@@ -321,7 +318,6 @@
     <Compile Include="Library\RenderLayer.cs" />
     <Compile Include="Library\MatrixTransformer.cs" />
     <Compile Include="Library\TransformController.cs" />
-    <Compile Include="Models\Filter.cs" />
     <Compile Include="Models\Layers\AcrylicLayer.cs" />
     <Compile Include="Models\Layers\GeometryLayer.cs" />
     <Compile Include="Models\Layers\ImageLayer.cs" />
@@ -417,6 +413,7 @@
     </Compile>
     <Compile Include="Models\Tool.cs" />
     <Compile Include="ViewModels\DrawViewModel.cs" />
+    <Compile Include="ViewModels\KeyViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\AcrylicViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\EllipseViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModels\EraseBrushViewModel.cs" />
@@ -709,6 +706,7 @@
     <Content Include="Assets\Walkthrough.json" />
     <Content Include="Assets\WeAccept.json" />
     <Content Include="Json\Filter.json" />
+    <None Include="Json\FilterOriginal.json" />
     <None Include="Retouch Photo_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -778,10 +776,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Controls\AdjustmentsControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\FilterControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -17,9 +17,9 @@ using Retouch_Photo.Adjustments.Models;
 using Retouch_Photo.Adjustments.Items;
 
 namespace Retouch_Photo.Controls
-{ 
+{
     public sealed partial class AdjustmentsControl : UserControl
-    {      
+    {
         //ViewModel
         DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
@@ -98,11 +98,18 @@ namespace Retouch_Photo.Controls
         public AdjustmentsControl()
         {
             this.InitializeComponent();
+            this.ShowVisibility = false;
+
 
             //Adjustment
             Retouch_Photo.Adjustments.Adjustment.InvalidateCall += () => this.ViewModel.Invalidate();
 
-            this.ShowVisibility = false;
+
+            //Button
+            this.BackButton.Tapped += (sender, e) => this.Clear();
+            this.ResetButton.Tapped += (sender, e) => this.Reset();
+            this.FilterButton.Tapped += (sender, e) => this.FilterFlyout.ShowAt(this.FilterButton);
+            this.AddButton.Tapped += (sender, e) => this.CandidateFlyout.ShowAt((Button)sender);
 
 
             //AdjustmentCandidate
@@ -113,39 +120,50 @@ namespace Retouch_Photo.Controls
                 {
                     Adjustment adjustment = item.GetNewAdjustment();
                     this.Add(adjustment);
-                    this.CandidateFlyout.Hide(); 
+                    this.CandidateFlyout.Hide();
                 }
             };
 
 
-            //Button
-            this.BackButton.Tapped += (sender, e) => this.Clear();
-            this.ResetButton.Tapped += (sender, e) => this.Reset();
-            this.FilterButton.Tapped += (sender, e) => this.FilterFlyout.ShowAt(this.FilterButton);
-            this.AddButton.Tapped += (sender, e) =>
+            // Filter
+            this.GridView.Loaded += async (s, e) => this.GridView.ItemsSource = (await this.GetFilterSource()).ToList();
+            this.GridView.ItemClick += (s, e) =>
             {
-                if (this.Layer == null)
+                if (e.ClickedItem is Filter filter)
                 {
-                    this.IsEnabled = false;
-                    return;
+                    // Filter -- > List<Item> -- > List<Adjustment>
+                    IEnumerable<Adjustment> adjustments =
+                       from adjustmentItem
+                       in filter.AdjustmentItems
+                       select adjustmentItem.GetAdjustment();
+
+                    this.Replace(adjustments);
                 }
-
-                this.CandidateFlyout.ShowAt((Button)sender);
             };
+        }
 
+        //Filter
+        private async Task<IEnumerable<Filter>> GetFilterSource()
+        {
+            string json = await this.ReadFromLocalFolder("Filter.json");
 
-            //Filter
-            this.FilterControl.AdjustmentsClick += (adjustments) =>
+            if (json == null)
             {
+                json = await this.ReadFromApplicationPackage("ms-appx:///Json/Filter.json");
+                this.WriteToLocalFolder(json, "ms-appx:///Json/Filter.json");
+            }
+            IEnumerable<Filter> source = Filter.GetFiltersFromJson(json);
 
-                this.Replace(adjustments);
-            };
+            return source;
         }
 
 
         //Adjustment
         private void AdjustmentControl_AdjustmentRemove(Adjustment adjustment) => this.Remove(adjustment);
         private void AdjustmentControl_AdjustmentContext(Adjustment adjustment) => this.Adjustment = adjustment;
+
+
+        #region  Adjustment
 
 
         /// <summary> Add a Adjustment. </summary>
@@ -156,6 +174,7 @@ namespace Retouch_Photo.Controls
             this.Invalidate(this.Layer.AdjustmentManager.Adjustments);
             this.ViewModel.Invalidate();
         }
+
         /// <summary> Remove the Adjustment. </summary>
         private void Remove(Adjustment adjustment)
         {
@@ -164,12 +183,15 @@ namespace Retouch_Photo.Controls
             this.Invalidate(this.Layer.AdjustmentManager.Adjustments);
             this.ViewModel.Invalidate();
         }
-        /// <summary> Replace the Adjustment. </summary>
+
+        /// <summary> Replace all Adjustments. </summary>
         private void Replace(IEnumerable<Adjustment> adjustments)
         {
             if (this.Layer == null) return;
+
             this.Layer.AdjustmentManager.Adjustments.Clear();
             this.Layer.AdjustmentManager.Adjustments.AddRange(adjustments);
+
             this.Invalidate(this.Layer.AdjustmentManager.Adjustments);
             this.ViewModel.Invalidate();
         }
@@ -192,6 +214,11 @@ namespace Retouch_Photo.Controls
         }
 
 
+        #endregion
+
+
+        #region Frame
+
 
         /// <summary> Reset the Adjustment. </summary>
         private void Reset()
@@ -205,6 +232,7 @@ namespace Retouch_Photo.Controls
 
             this.ViewModel.Invalidate();
         }
+
         /// <summary> Clear the Adjustment. </summary>
         private void Clear()
         {
@@ -213,6 +241,50 @@ namespace Retouch_Photo.Controls
             this.ShowVisibility = true;
         }
 
-        
+
+        #endregion
+
+
+        #region Filter
+
+
+        /// <summary> Read json file from Application Package. </summary> 
+        public async Task<string> ReadFromApplicationPackage(string fileName)
+        {
+            Uri uri = new Uri(fileName);
+            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(uri);
+            return await FileIO.ReadTextAsync(file);
+        }
+
+        /// <summary> Read json file from Local Folder. </summary> 
+        public async Task<string> ReadFromLocalFolder(string fileName)
+        {
+            try
+            {
+                StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync(fileName);
+                return await FileIO.ReadTextAsync(file);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary> Write json file to Local Folder. </summary> 
+        public async void WriteToLocalFolder(string json, string fileName)
+        {
+            try
+            {
+                StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteTextAsync(file, json);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+
+        #endregion
+
     }
 }
