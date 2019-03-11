@@ -19,8 +19,8 @@ namespace Retouch_Photo.Adjustments
 
 
         //Delegate
-        public event AdjustmentHandler AdjustmentContext = null;
-        public event AdjustmentHandler AdjustmentRemove = null;
+        public event AdjustmentHandler Remove = null;
+        public event AdjustmentHandler Edit = null;
 
 
         public Control()
@@ -44,8 +44,8 @@ namespace Retouch_Photo.Adjustments
 
 
         
-        private void AdjustmentButton_Tapped(object sender, TappedRoutedEventArgs e) => this.AdjustmentContext?.Invoke(this.Adjustment);
-        private void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e) => this.AdjustmentRemove?.Invoke(this.Adjustment);
+        private void AdjustmentButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Edit?.Invoke(this.Adjustment);
+        private void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Remove?.Invoke(this.Adjustment);
 
 
     }

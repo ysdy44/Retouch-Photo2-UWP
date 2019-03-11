@@ -13,6 +13,9 @@ using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo.Pages
 {
+    /// <summary> 
+    /// State of <see cref="MainPage"/>.
+    /// </summary>
     enum MainMode
     {
         None,

@@ -99,12 +99,10 @@ namespace Retouch_Photo.Controls
         {
             this.InitializeComponent();
             this.ShowVisibility = false;
-
-
+            
             //Adjustment
             Retouch_Photo.Adjustments.Adjustment.InvalidateCall += () => this.ViewModel.Invalidate();
-
-
+            
             //Button
             this.BackButton.Tapped += (sender, e) => this.Clear();
             this.ResetButton.Tapped += (sender, e) => this.Reset();
@@ -113,7 +111,6 @@ namespace Retouch_Photo.Controls
 
 
             //AdjustmentCandidate
-            this.ListView.Loaded += (sender, e) => this.ListView.ItemsSource = AdjustmentCandidate.AdjustmentCandidateList;
             this.ListView.ItemClick += (sender, e) =>
             {
                 if (e.ClickedItem is AdjustmentCandidate item)
@@ -123,10 +120,8 @@ namespace Retouch_Photo.Controls
                     this.CandidateFlyout.Hide();
                 }
             };
-
-
+            
             // Filter
-            this.GridView.Loaded += async (s, e) => this.GridView.ItemsSource = (await this.GetFilterSource()).ToList();
             this.GridView.ItemClick += (s, e) =>
             {
                 if (e.ClickedItem is Filter filter)
@@ -139,6 +134,15 @@ namespace Retouch_Photo.Controls
 
                     this.Replace(adjustments);
                 }
+            };
+            
+            this.Loaded+= async (s, e) =>
+            {
+                if (this.ListView.ItemsSource == null)                
+                    this.ListView.ItemsSource = AdjustmentCandidate.AdjustmentCandidateList;
+                
+                if (this.GridView.ItemsSource == null)                
+                    this.GridView.ItemsSource = (await this.GetFilterSource()).ToList();                
             };
         }
 
@@ -159,8 +163,8 @@ namespace Retouch_Photo.Controls
 
 
         //Adjustment
-        private void AdjustmentControl_AdjustmentRemove(Adjustment adjustment) => this.Remove(adjustment);
-        private void AdjustmentControl_AdjustmentContext(Adjustment adjustment) => this.Adjustment = adjustment;
+        private void AdjustmentControl_Remove(Adjustment adjustment) => this.Remove(adjustment);
+        private void AdjustmentControl_Edit(Adjustment adjustment) => this.Adjustment = adjustment;
 
 
         #region  Adjustment

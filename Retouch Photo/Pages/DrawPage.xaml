@@ -102,58 +102,58 @@
             
             <!--Selection-->
             <local:MenuLayout x:Name="SelectionLayout" Text="Selection" Placement="Bottom" Visibility="Collapsed">
-                <local:MenuLayout.FlyoutContent>
+                <local:MenuLayout.ContentChild>
                     <con:SelectionControl />
-                </local:MenuLayout.FlyoutContent>
+                </local:MenuLayout.ContentChild>
             </local:MenuLayout>
             
             <!--Operate-->
             <local:MenuLayout x:Name="OperateLayout" Text="Operate" Placement="Bottom" Visibility="Collapsed">
-                <local:MenuLayout.FlyoutContent>
+                <local:MenuLayout.ContentChild>
                     <con:OperateControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
-                </local:MenuLayout.FlyoutContent>
+                </local:MenuLayout.ContentChild>
             </local:MenuLayout>
 
             <!--Adjustment-->
             <local:MenuLayout x:Name="AdjustmentLayout" Text="Adjustment" Placement="Bottom" Visibility="Collapsed">
-                <local:MenuLayout.FlyoutContent>
+                <local:MenuLayout.ContentChild>
                     <con:AdjustmentsControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
-                </local:MenuLayout.FlyoutContent>
+                </local:MenuLayout.ContentChild>
             </local:MenuLayout>
 
             <!--Effects-->
             <local:MenuLayout x:Name="EffectLayout" Text="Effect" Placement="Bottom" Visibility="Collapsed">
-                <local:MenuLayout.FlyoutContent>
+                <local:MenuLayout.ContentChild>
                     <con:EffectsControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
-                </local:MenuLayout.FlyoutContent>
+                </local:MenuLayout.ContentChild>
             </local:MenuLayout>
 
             <!--Transformer-->
             <local:MenuLayout x:Name="TransformerLayout" Text="Transformer" Placement="Bottom" Visibility="Collapsed">
-                <local:MenuLayout.FlyoutContent>
+                <local:MenuLayout.ContentChild>
                     <con:TransformerControl  Transformer="{x:Bind ViewModel.Transformer,Mode=OneWay}" Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
-                </local:MenuLayout.FlyoutContent>
+                </local:MenuLayout.ContentChild>
             </local:MenuLayout>
             
             <!--Navigator-->
             <local:MenuLayout x:Name="NavigatorLayout" Text="Navigator" Placement="Bottom" Visibility="Collapsed">
-                <local:MenuLayout.FlyoutContent>
+                <local:MenuLayout.ContentChild>
                     <con:NavigatorControl/>
-                </local:MenuLayout.FlyoutContent>
+                </local:MenuLayout.ContentChild>
             </local:MenuLayout>
             
             <!--Color-->
             <local:MenuLayout x:Name="ColorLayout" Text="Color" Placement="Bottom" Visibility="Collapsed">
-                <local:MenuLayout.FlyoutContent>
+                <local:MenuLayout.ContentChild>
                     <con:ColorControl Width="200" Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
-                </local:MenuLayout.FlyoutContent>
+                </local:MenuLayout.ContentChild>
             </local:MenuLayout>
 
             <!--Layer-->
             <local:MenuLayout x:Name="LayerLayout" Text="Layer" Placement="Left" Visibility="Collapsed">
-                <local:MenuLayout.FlyoutContent>
+                <local:MenuLayout.ContentChild>
                     <conLayersControls:LayerControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}"/>
-                </local:MenuLayout.FlyoutContent>
+                </local:MenuLayout.ContentChild>
             </local:MenuLayout>
 
         </Canvas>

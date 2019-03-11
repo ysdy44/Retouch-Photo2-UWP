@@ -12,13 +12,8 @@
     <UserControl.Resources>
 
         <!--DataTemplate-->
-        <DataTemplate x:Name="DataTemplate" x:DataType="Color">
-            <Rectangle  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Rectangle.Fill>
-                    <SolidColorBrush />
-                    <!--Color="{x:Bind}"-->
-                </Rectangle.Fill>
-            </Rectangle>
+        <DataTemplate x:Name="DataTemplate" x:DataType="SolidColorBrush">
+            <Rectangle Fill="{x:Bind}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </DataTemplate>
 
         <!--Style-->

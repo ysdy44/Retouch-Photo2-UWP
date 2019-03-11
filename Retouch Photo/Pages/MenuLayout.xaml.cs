@@ -1,6 +1,5 @@
 ﻿using System.Numerics;
 using Windows.Foundation;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -8,6 +7,20 @@ using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo.Pages
 {
+    /// <summary> 
+    /// State of <see cref="MenuLayout"/>.
+    /// </summary>
+    public enum MenuLayoutState
+    {
+        /// <summary> Flyout showed. </summary>
+        Flyout,
+        /// <summary> Root expanded. </summary>
+        RootExpanded,
+        /// <summary> Root not expanded. </summary>
+        RootNotExpanded
+    }
+
+
     /// <summary>
     /// MenuLayout:
     /// A layout control with Flyout and Overlay Layout.
@@ -15,120 +28,112 @@ namespace Retouch_Photo.Pages
     /// </summary>
     public sealed partial class MenuLayout : UserControl
     {
-        //Postion
-        Size ControlSize;
-               
-        private Vector2 postion;
-        public Vector2 Postion
+        //@static
+        public static void ShowFlyoutAt(MenuLayout layout, FrameworkElement placementTarget)
         {
-            get => this.postion;
+            layout.State = MenuLayoutState.Flyout;
+            layout.Flyout.ShowAt(placementTarget);
+        }
+        public static void LayoutBinging(MenuLayout layout, ToggleButton button)
+        {
+            layout.Flyout.Opened += (s, e) => button.IsChecked = true;
+            layout.Flyout.Closed += (s, e) => button.IsChecked = false;
+            MenuLayout.TappedBinging(layout, button);
+        }
+        public static void TappedBinging(MenuLayout layout, FrameworkElement element) => element.Tapped += (s, e) => MenuLayout.ShowFlyoutAt(layout, element);
+
+        //Postion: the position of the Root on the canvas.
+        private Size ControlSize;
+        private Vector2 Postion;
+        private Vector2 GetElementVisualPostion(UIElement element) => element.TransformToVisual(Window.Current.Content).TransformPoint(new Point()).ToVector2();
+        private Vector2 GetElementCanvasPostion(UIElement element) => new Vector2((float)Canvas.GetLeft(element), (float)Canvas.GetTop(element));
+        private void SetElementCanvasPostion(UIElement element, Vector2 postion, Size size)
+        {
+            double X;
+            if (postion.X < 0) X = 0;
+            else if (size.Width > Window.Current.Bounds.Width) X = 0;
+            else if (postion.X > (Window.Current.Bounds.Width - size.Width)) X = (Window.Current.Bounds.Width - size.Width);
+            else X = postion.X;
+            Canvas.SetLeft(element, X);
+
+            double Y;
+            if (postion.Y < 0) Y = 0;
+            else if (size.Height > Window.Current.Bounds.Height) Y = 0;
+            else if (postion.Y > (Window.Current.Bounds.Height - size.Height)) Y = (Window.Current.Bounds.Height - size.Height);
+            else Y = postion.Y;
+            Canvas.SetTop(element, Y);
+        }
+
+        //State: content in the Flyout or the Root?
+        public MenuLayoutState State
+        {
+            get => state;
             set
             {
-                Canvas.SetLeft(this, this.GetLeft(value.X));
-                Canvas.SetTop(this, this.GetTop(value.Y));
+                this.StateIcon.Glyph = (value == MenuLayoutState.Flyout) ? "\uE1CB" : (value == MenuLayoutState.RootExpanded) ? "\uE141" : "\uE196";
+                this.ContentBorder.Visibility = (value == MenuLayoutState.RootNotExpanded) ? Visibility.Collapsed : Visibility.Visible;
+                this.Visibility = (value == MenuLayoutState.Flyout) ? Visibility.Collapsed : Visibility.Visible;
+
+                if (value == MenuLayoutState.Flyout) //Content in the Flyout.
+                {
+                    this.RootBorder.Child = null;
+                    this.FlyoutBorder.Child = this.ContentGrid;
+                }
+                else //Content in the Root.
+                {
+                    this.FlyoutBorder.Child = null;
+                    this.RootBorder.Child = this.ContentGrid;
+                }
+
+                state = value;
             }
         }
-        private double GetLeft(float X)
-        {
-            if (X < 0) return 0;
-            if (this.ControlSize.Width > Window.Current.Bounds.Width) return 0;
-            if (X > (Window.Current.Bounds.Width - this.ControlSize.Width)) return (Window.Current.Bounds.Width - this.ControlSize.Width);
-            return X;
-        }
-        private double GetTop(float Y)
-        {
-            if (Y < 0 ) return 0;
-            if (this.ControlSize.Height > Window.Current.Bounds.Height )return 0;
-            if (Y > (Window.Current.Bounds.Height - this.ControlSize.Height)) return (Window.Current.Bounds.Height - this.ControlSize.Height);
-            return Y;
-        }
-
-
-        //Label
-        private bool label;
-        public bool Label
-        {
-            get => label;
-            set
-            {
-                this.LabelIcon.Glyph = value ? "\uE141" : "\uE196";
-                this.ContentBorderl.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
-
-                label = value;
-            }
-        }
-
+        private MenuLayoutState state;
 
         //Content
-        public string Text { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
-
-        public UIElement flyoutContent;
-        public UIElement FlyoutContent
-        {
-            get => this.flyoutContent;
-            set
-            {
-                this.FlyoutBorder.Child = value;
-                this.flyoutContent = value;
-            }
-        }
-
-        public Flyout Flyout { get => this.flyout; set => this.flyout = value; }
-        public FlyoutPlacementMode Placement { get => this.flyout.Placement; set => this.flyout.Placement = value; }
-
-
-        /// <summary>  Displays the flyout placed relative to the specified element. </summary>
-        /// <param name="placementTarget"> The element to use as the target for the flyout location </param>
-        public void ShowAt(FrameworkElement placementTarget)
-        {
-            //UIElement
-            this.ContentBorderl.Child = null;
-            this.FlyoutBorder.Child = this.FlyoutContent;
-
-
-            this.Visibility = Visibility.Collapsed;
-            this.Flyout.ShowAt(placementTarget);
-        }
-
+        public string Text { set => this.TextBlock.Text = value; }
+        public UIElement ContentChild { set => this.ContentBorder.Child = value; get => this.ContentBorder.Child; }
+        public FlyoutPlacementMode Placement { set => this.Flyout.Placement = value; get => this.Flyout.Placement; }
 
         public MenuLayout()
         {
             this.InitializeComponent();
-            this.Loaded += (sender, e) => this.Label = true;
-            this.SizeChanged += (sender, e) => this.ControlSize = e.NewSize;
+            this.SizeChanged += (s, e) => this.ControlSize = e.NewSize;
+
+            //State
+            this.State = MenuLayoutState.Flyout;
+            this.StateButton.Tapped += (s, e) =>
+            {
+                if (this.State == MenuLayoutState.RootExpanded) this.State = MenuLayoutState.RootNotExpanded;
+                else if (this.State == MenuLayoutState.RootNotExpanded) this.State = MenuLayoutState.RootExpanded;
+                else
+                {
+                    Vector2 postion = this.GetElementVisualPostion(this.TitlePanel);
+                    this.SetElementCanvasPostion(this, postion, this.ControlSize);
+
+                    this.Flyout.Hide();
+                    this.State = MenuLayoutState.RootExpanded;
+                }
+            };
 
             //Postion 
             this.TitlePanel.ManipulationMode = ManipulationModes.All;
-            this.TitlePanel.ManipulationStarted += (sender, e) => this.postion = new Vector2((float)Canvas.GetLeft(this), (float)Canvas.GetTop(this));
-            this.TitlePanel.ManipulationDelta += (sender, e) => this.Postion = this.postion += e.Delta.Translation.ToVector2();
-            this.TitlePanel.ManipulationCompleted += (sender, e) => { };
+            this.TitlePanel.ManipulationStarted += (s, e) => this.Postion = this.GetElementCanvasPostion(this);
+            this.TitlePanel.ManipulationDelta += (s, e) =>
+            {
+                this.Postion += e.Delta.Translation.ToVector2();
+                this.SetElementCanvasPostion(this, this.Postion, this.ControlSize);
+            };
 
-            //Label
-            this.LabelButton.Tapped+=(sender, e) => this.Label = !this.Label;
+
+            //Storyboard
+            this.StoryboardBorder.SizeChanged += (s, e) =>
+            {
+                if (this.State == MenuLayoutState.Flyout) return;
+
+                this.Frame.Value = e.NewSize.Height;
+                this.Storyboard.Begin();
+            };
         }
-
-        //Flyout
-        private void PutButton_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            //UIElement
-            this.FlyoutBorder.Child = null;
-            this.ContentBorderl.Child = this.FlyoutContent;
-
-
-            this.Visibility = Visibility.Visible;
-            Point postion = this.FlyoutBorder.TransformToVisual(Window.Current.Content).TransformPoint(new Point());
-            Canvas.SetLeft(this, postion.X);
-            Canvas.SetTop(this, postion.Y);
-            if (!this.Label) this.Label = true;
-            this.Flyout.Hide();
-        } 
-
-        //Content
-        private void ContentBorder_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            this.ContentRectangleFrameHeight.Value = e.NewSize.Height;
-            this.ContentRectangleStoryboard.Begin();
-        }
-
     }
 }

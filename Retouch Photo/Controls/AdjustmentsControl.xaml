@@ -30,12 +30,13 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Flyout>
+        
         <Flyout x:Name="FilterFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <Border
-    MaxWidth="220"
-    MaxHeight="330">
-
-                <GridView x:Name="GridView" SelectionMode="None" IsItemClickEnabled="True">
+            <Border MaxWidth="330" MaxHeight="330">
+                <GridView x:Name="GridView" 
+                          ReorderMode="Enabled" CanReorderItems="True"
+                          AllowDrop="True" CanDrag="True" CanDragItems="True"
+                          SelectionMode="None" IsItemClickEnabled="True">
                     <GridView.ItemContainerStyle>
                         <Style TargetType="GridViewItem">
                             <Setter Property="Background" Value="{ThemeResource AppFill}" />
@@ -50,7 +51,7 @@
                     </GridView.ItemContainerStyle>
                     <GridView.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="2"/>
+                            <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="3"/>
                         </ItemsPanelTemplate>
                     </GridView.ItemsPanel>
                     <GridView.Header>
@@ -64,13 +65,14 @@
                 </GridView>
             </Border>
         </Flyout>
-
+         
+        
         <!--DataTemplate-->
         <DataTemplate x:Key="DataTemplate" x:DataType="adjustments:Adjustment">
             <adjustments:Control 
                 Adjustment="{x:Bind}"                                 
-                AdjustmentRemove="AdjustmentControl_AdjustmentRemove"                                 
-                AdjustmentContext="AdjustmentControl_AdjustmentContext"/>
+                Remove="AdjustmentControl_Remove"                                 
+                Edit="AdjustmentControl_Edit"/>
         </DataTemplate>
 
     </UserControl.Resources>
