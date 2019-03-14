@@ -125,7 +125,6 @@ namespace Retouch_Photo.Pages
                 this.SetElementCanvasPostion(this, this.Postion, this.ControlSize);
             };
 
-
             //Storyboard
             this.StoryboardBorder.SizeChanged += (s, e) =>
             {

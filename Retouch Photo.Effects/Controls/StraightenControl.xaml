@@ -10,11 +10,11 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="36"/>
+            <ColumnDefinition Width="40"/> 
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <PathIcon Data="M14.683,2.471c-2.886,5.483 -7.61,14.091 -7.497,17.853c0.115,3.843 3.138,7.999 8.174,8.14c4.879,0.137 8.096,-4.295 8.175,-8.14c0.078,-3.776 -4.698,-12.323 -7.537,-17.853c-0.12,-0.234 -0.33,-0.455 -0.638,-0.463c-0.293,-0.007 -0.565,0.231 -0.677,0.463Zm0.704,1.856c0,0 -6.707,12.602 -6.649,15.826c0.065,3.657 2.388,6.753 6.936,6.696c3.992,-0.05 6.3,-3.571 6.309,-6.696c0.009,-3.283 -6.596,-15.826 -6.596,-15.826Z " HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <PathIcon Data="M19.992,14.193l-14.897,0l14.897,-14.093l0,14.093Zm-19.992,-14.193l14.896,0l-14.896,14.094l0,-14.094Zm18.289,12.49l0,-8.303l-9.107,8.303l9.107,0Zm-16.586,-10.787l9.106,0l-9.106,8.304l0,-8.304Z" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
         <TextBlock Text="Straighten" Grid.Column="1" VerticalAlignment="Center" FontFamily="{ThemeResource ContentControlThemeFontFamily}"/>
 

@@ -137,105 +137,6 @@
     <Compile Include="Controls\NavigatorControls\NavigatorControlIcon.xaml.cs">
       <DependentUpon>NavigatorControlIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OperateControls\AlignHorizontalControls\CenterDisabledControl.xaml.cs">
-      <DependentUpon>CenterDisabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\AlignHorizontalControls\CenterEnabledControl.xaml.cs">
-      <DependentUpon>CenterEnabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\AlignHorizontalControls\LeftDisabledControl.xaml.cs">
-      <DependentUpon>LeftDisabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\AlignHorizontalControls\LeftEnabledControl.xaml.cs">
-      <DependentUpon>LeftEnabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\AlignHorizontalControls\RightDisabledControl.xaml.cs">
-      <DependentUpon>RightDisabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\AlignHorizontalControls\RightEnabledControl.xaml.cs">
-      <DependentUpon>RightEnabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\AlignHorizontalControls\SymmetryDisabledControl.xaml.cs">
-      <DependentUpon>SymmetryDisabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\AlignHorizontalControls\SymmetryEnabledControl.xaml.cs">
-      <DependentUpon>SymmetryEnabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\AlignVerticalControls\BottomDisabledControl.xaml.cs">
-      <DependentUpon>BottomDisabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\AlignVerticalControls\BottomEnabledControl.xaml.cs">
-      <DependentUpon>BottomEnabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\AlignVerticalControls\MiddleDisabledControl.xaml.cs">
-      <DependentUpon>MiddleDisabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\AlignVerticalControls\MiddleEnabledControl.xaml.cs">
-      <DependentUpon>MiddleEnabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\AlignVerticalControls\SymmetryDisabledControl.xaml.cs">
-      <DependentUpon>SymmetryDisabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\AlignVerticalControls\SymmetryEnabledControl.xaml.cs">
-      <DependentUpon>SymmetryEnabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\AlignVerticalControls\TopDisabledControl.xaml.cs">
-      <DependentUpon>TopDisabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\AlignVerticalControls\TopEnabledControl.xaml.cs">
-      <DependentUpon>TopEnabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\ArrangeControls\BackOneDisabledControl.xaml.cs">
-      <DependentUpon>BackOneDisabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\ArrangeControls\BackOneEnabledControl.xaml.cs">
-      <DependentUpon>BackOneEnabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\ArrangeControls\ForwardOneDisabledControl.xaml.cs">
-      <DependentUpon>ForwardOneDisabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\ArrangeControls\ForwardOneEnabledControl.xaml.cs">
-      <DependentUpon>ForwardOneEnabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\ArrangeControls\MoveBackDisabledControl.xaml.cs">
-      <DependentUpon>MoveBackDisabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\ArrangeControls\MoveBackEnabledControl.xaml.cs">
-      <DependentUpon>MoveBackEnabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\ArrangeControls\MoveFrontDisabledControl.xaml.cs">
-      <DependentUpon>MoveFrontDisabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\ArrangeControls\MoveFrontEnabledControl.xaml.cs">
-      <DependentUpon>MoveFrontEnabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\OperateControlIcon.xaml.cs">
-      <DependentUpon>OperateControlIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\TransformControls\FlipHorizontalEnabledControl.xaml.cs">
-      <DependentUpon>FlipHorizontalEnabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\TransformControls\FlipHorizontalDisabledControl.xaml.cs">
-      <DependentUpon>FlipHorizontalDisabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\TransformControls\FlipVerticalDisabledControl.xaml.cs">
-      <DependentUpon>FlipVerticalDisabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\TransformControls\FlipVerticalEnabledControl.xaml.cs">
-      <DependentUpon>FlipVerticalEnabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\TransformControls\RotateLeftDisabledControl.xaml.cs">
-      <DependentUpon>RotateLeftDisabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\TransformControls\RotateLeftEnabledIControl.xaml.cs">
-      <DependentUpon>RotateLeftEnabledIControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\TransformControls\RotateRightDisabledControl.xaml.cs">
-      <DependentUpon>RotateRightDisabledControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\TransformControls\RotateRightEnabledControl.xaml.cs">
-      <DependentUpon>RotateRightEnabledControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\LayersControl.xaml.cs">
       <DependentUpon>LayersControl.xaml</DependentUpon>
     </Compile>
@@ -253,9 +154,6 @@
     </Compile>
     <Compile Include="Controls\OperateControl.xaml.cs">
       <DependentUpon>OperateControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OperateControls\OperateControlButton.xaml.cs">
-      <DependentUpon>OperateControlButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SelectionControl.xaml.cs">
       <DependentUpon>SelectionControl.xaml</DependentUpon>
@@ -320,6 +218,7 @@
     <Compile Include="Library\TransformController.cs" />
     <Compile Include="Models\Layers\AcrylicLayer.cs" />
     <Compile Include="Models\Layers\GeometryLayer.cs" />
+    <Compile Include="Models\Layers\GeometryLayers\EllipseLayer.cs" />
     <Compile Include="Models\Layers\ImageLayer.cs" />
     <Compile Include="Models\Layers\GeometryLayers\RectangularLayer.cs" />
     <Compile Include="Models\Tools\AcrylicTool.cs" />
@@ -831,138 +730,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\OperateControls\AlignHorizontalControls\CenterDisabledControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\OperateControls\AlignHorizontalControls\CenterEnabledControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\OperateControls\AlignHorizontalControls\LeftDisabledControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\OperateControls\AlignHorizontalControls\LeftEnabledControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\OperateControls\AlignHorizontalControls\RightDisabledControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\OperateControls\AlignHorizontalControls\RightEnabledControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\OperateControls\AlignHorizontalControls\SymmetryDisabledControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\OperateControls\AlignHorizontalControls\SymmetryEnabledControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\OperateControls\AlignVerticalControls\BottomDisabledControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OperateControls\AlignVerticalControls\BottomEnabledControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OperateControls\AlignVerticalControls\MiddleDisabledControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OperateControls\AlignVerticalControls\MiddleEnabledControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OperateControls\AlignVerticalControls\SymmetryDisabledControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OperateControls\AlignVerticalControls\SymmetryEnabledControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OperateControls\AlignVerticalControls\TopDisabledControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OperateControls\AlignVerticalControls\TopEnabledControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OperateControls\ArrangeControls\BackOneDisabledControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\OperateControls\ArrangeControls\BackOneEnabledControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OperateControls\ArrangeControls\ForwardOneDisabledControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\OperateControls\ArrangeControls\ForwardOneEnabledControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OperateControls\ArrangeControls\MoveBackDisabledControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\OperateControls\ArrangeControls\MoveBackEnabledControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OperateControls\ArrangeControls\MoveFrontDisabledControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\OperateControls\ArrangeControls\MoveFrontEnabledControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OperateControls\OperateControlIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OperateControls\TransformControls\FlipHorizontalEnabledControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OperateControls\TransformControls\FlipHorizontalDisabledControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OperateControls\TransformControls\FlipVerticalDisabledControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\OperateControls\TransformControls\FlipVerticalEnabledControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OperateControls\TransformControls\RotateLeftDisabledControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\OperateControls\TransformControls\RotateLeftEnabledIControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OperateControls\TransformControls\RotateRightDisabledControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\OperateControls\TransformControls\RotateRightEnabledControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\LayersControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -984,10 +751,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\OperateControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OperateControls\OperateControlButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1205,9 +968,17 @@
       <Project>{c14d4618-e234-4d91-8ced-49cbd9f6f3c7}</Project>
       <Name>Retouch Photo.Effects</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo.Selections\Retouch Photo.Selections.csproj">
+      <Project>{448fcfb4-cb3c-4874-b157-3f0dfff044bc}</Project>
+      <Name>Retouch Photo.Selections</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Retouch_Photo.Elements\Retouch_Photo.Elements.csproj">
       <Project>{0e5ac58e-36bf-44fe-877e-830f024b7109}</Project>
       <Name>Retouch_Photo.Elements</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch_Photo.Operates\Retouch_Photo.Operates.csproj">
+      <Project>{c5a52472-53d8-4885-8488-0cf77a985794}</Project>
+      <Name>Retouch_Photo.Operates</Name>
     </ProjectReference>
     <ProjectReference Include="..\Retouch_Photo.Pickers\Retouch_Photo.Pickers.csproj">
       <Project>{0c6125aa-64a9-448a-ad15-38707d31eab6}</Project>

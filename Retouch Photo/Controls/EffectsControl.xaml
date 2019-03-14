@@ -25,7 +25,7 @@
         <ItemsControl x:Name="ItemsControl" Grid.ColumnSpan="3" Grid.RowSpan="2">
             <ItemsControl.ItemTemplate>
                 <DataTemplate x:DataType="effects:Effect">
-                    <effects:Control 
+                    <effects:Button 
                                          Effect="{x:Bind}" 
                                          EffectTapped="EffectControl_EffectTapped"
                                          EffectToggle="EffectControl_EffectToggle"/>

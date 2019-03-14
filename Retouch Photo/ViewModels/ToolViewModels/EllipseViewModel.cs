@@ -1,20 +1,21 @@
 ﻿using Microsoft.Graphics.Canvas;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Retouch_Photo.Models;
+using Retouch_Photo.Models.Layers.GeometryLayers;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.UI;
+using static Retouch_Photo.Library.TransformController;
 
 namespace Retouch_Photo.ViewModels.ToolViewModels
 {
     public class EllipseViewModel : ToolViewModel
-    {       
+    {
         //ViewModel
         DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
+
+        Vector2 point;
+        Vector2 StartPoint;
+
+        EllipseLayer Layer;
 
 
         //@Override
@@ -28,18 +29,50 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
 
         public override void Start(Vector2 point)
         {
+            this.point = point;
+            this.StartPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+            VectRect rect = new VectRect(this.StartPoint, this.StartPoint, this.ViewModel.MarqueeMode);
+
+            this.Layer = EllipseLayer.CreateFromRect(this.ViewModel.CanvasDevice, rect, this.ViewModel.Color);
+            this.ViewModel.InvalidateWithJumpedQueueLayer(this.Layer);
         }
         public override void Delta(Vector2 point)
         {
+            Vector2 endPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+            VectRect rect = new VectRect(this.StartPoint, endPoint, this.ViewModel.MarqueeMode);
+
+            this.Layer.Transformer = Transformer.CreateFromSize(rect.Width, rect.Height, rect.Center);
+            this.ViewModel.InvalidateWithJumpedQueueLayer(this.Layer);
         }
         public override void Complete(Vector2 point)
         {
+            Vector2 endPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasMatrix);
+            VectRect rect = new VectRect(this.StartPoint, endPoint, this.ViewModel.MarqueeMode);
+
+            if (Transformer.OutNodeDistance(this.point, point))
+            {
+                EllipseLayer layer = EllipseLayer.CreateFromRect(this.ViewModel.CanvasDevice, rect, this.ViewModel.Color);
+                this.ViewModel.RenderLayer.Insert(layer);
+                this.ViewModel.CurrentLayer = layer;
+            }
+
+            this.Layer = null;
+            this.ViewModel.Invalidate();
         }
-        
+
+
         public override void Draw(CanvasDrawingSession ds)
         {
+            if (this.Layer == null) return;
+            Transformer.DrawBound(ds, this.Layer.Transformer, this.Layer.Transformer.Matrix * this.ViewModel.MatrixTransformer.CanvasToVirtualToControlMatrix);
         }
+
     }
 }
+
+
+
+
+
 
 

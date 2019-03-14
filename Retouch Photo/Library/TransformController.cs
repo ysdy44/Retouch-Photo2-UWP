@@ -1,6 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo.Models;
-using Retouch_Photo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
@@ -96,7 +95,7 @@ namespace Retouch_Photo.Library
                 this.Skew = transformer.Skew;
             }
             public static Transformer Zero => new Transformer();
-            public static Transformer One => new Transformer() { XScale = 1,YScale=1};
+            public static Transformer One => new Transformer() { XScale = 1, YScale = 1 };
             public static Transformer CreateFromSize(float width, float height, Vector2 postion, float scale = 1.0f, float radian = 0.0f, bool disabledRadian = false) => new Transformer
             {
                 Width = width,

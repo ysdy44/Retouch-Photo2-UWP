@@ -20,7 +20,7 @@ namespace Retouch_Photo.Models.Layers
     public class AcrylicLayer : Layer
     {
          
-        public static string Type = "Acrylic";
+        public static readonly string Type = "Acrylic";
         protected AcrylicLayer() => base.Name = AcrylicLayer.Type;
 
         public float TintOpacity = 0.5f;

@@ -10,11 +10,11 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="36"/>
+            <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <PathIcon Data="M14.683,2.471c-2.886,5.483 -7.61,14.091 -7.497,17.853c0.115,3.843 3.138,7.999 8.174,8.14c4.879,0.137 8.096,-4.295 8.175,-8.14c0.078,-3.776 -4.698,-12.323 -7.537,-17.853c-0.12,-0.234 -0.33,-0.455 -0.638,-0.463c-0.293,-0.007 -0.565,0.231 -0.677,0.463Zm0.704,1.856c0,0 -6.707,12.602 -6.649,15.826c0.065,3.657 2.388,6.753 6.936,6.696c3.992,-0.05 6.3,-3.571 6.309,-6.696c0.009,-3.283 -6.596,-15.826 -6.596,-15.826Z " HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <PathIcon Data="M6.792,0.419c-2.614,4.966 -6.893,12.762 -6.79,16.169c0.104,3.481 2.842,7.245 7.403,7.372c4.418,0.124 7.332,-3.889 7.403,-7.372c0.071,-3.42 -4.254,-11.16 -6.825,-16.169c-0.109,-0.211 -0.299,-0.412 -0.578,-0.419c-0.266,-0.006 -0.512,0.209 -0.613,0.419l0,0Zm0.637,1.681c0,0 -6.074,11.414 -6.022,14.333c0.059,3.312 2.163,6.116 6.282,6.065c3.615,-0.046 5.706,-3.234 5.714,-6.065c0.008,-2.973 -5.974,-14.333 -5.974,-14.333l0,0Z" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
         <TextBlock Text="Gaussian Blur" Grid.Column="1" VerticalAlignment="Center" FontFamily="{ThemeResource ContentControlThemeFontFamily}"/>
 

@@ -41,5 +41,3 @@ namespace Retouch_Photo.ViewModels.ToolViewModels
         }
     }
 }
-
-

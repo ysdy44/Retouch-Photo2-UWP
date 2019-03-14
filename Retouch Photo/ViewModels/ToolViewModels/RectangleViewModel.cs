@@ -1,6 +1,4 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Brushes;
-using Retouch_Photo.Library;
 using Retouch_Photo.Models;
 using Retouch_Photo.Models.Layers.GeometryLayers;
 using System.Numerics;

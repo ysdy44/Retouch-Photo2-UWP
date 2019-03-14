@@ -106,8 +106,8 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Control.xaml.cs">
-      <DependentUpon>Control.xaml</DependentUpon>
+    <Compile Include="Button.xaml.cs">
+      <DependentUpon>Button.xaml</DependentUpon>
     </Compile>
     <Compile Include="Effect.cs" />
     <Compile Include="EffectItem.cs" />
@@ -176,7 +176,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Control.xaml">
+    <Page Include="Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

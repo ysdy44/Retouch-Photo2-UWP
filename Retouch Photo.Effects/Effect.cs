@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo.Effects
 {
+    //delegate
+    public delegate void EffectHandler(Effect effect);
+
     public abstract class Effect
     {
         //delegate
         public delegate void VoidCall();
         public static event VoidCall InvalidateCall = null;
         public static void Invalidate() => Effect.InvalidateCall?.Invoke();
+
 
         /// <summary> 是否开启 </summary>
         private bool isOn;
@@ -49,13 +48,10 @@ namespace Retouch_Photo.Effects
 
         #region Control
 
-        ToggleSwitch ToggleSwitch;
+        public Windows.UI.Xaml.Controls.Button Button { set; protected get; }
+        public ToggleSwitch ToggleSwitch { set; protected get; }
         public bool ToggleSwitchIsOn => this.ToggleSwitch.IsOn;
-        public void ToggleSwitch_Loaded(object sender, RoutedEventArgs e) => this.ToggleSwitch = (ToggleSwitch)sender;
-
-        Button Button;
-        public void Button_Loaded(object sender, RoutedEventArgs e) => this.Button = (Button)sender;
-
+        
         #endregion
 
     }

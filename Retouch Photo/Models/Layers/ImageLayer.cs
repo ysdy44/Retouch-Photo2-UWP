@@ -17,7 +17,7 @@ namespace Retouch_Photo.Models.Layers
     public class ImageLayer:Layer
     {
         
-        public static string Type = "Image";
+        public static readonly string Type = "Image";
         protected ImageLayer() => base.Name = ImageLayer.Type;
 
         public CanvasBitmap Image { set; get; }

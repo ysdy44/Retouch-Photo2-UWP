@@ -19,10 +19,8 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
     public class RectangularLayer:GeometryLayer
     {
 
-        public static string Type = "Rectangular";
+        public static readonly string Type = "Rectangular";
         protected RectangularLayer() => base.Name = RectangularLayer.Type;
-
-        Vector2[] points = new Vector2[4];
 
         //@Override     
         public override void ColorChanged(Color value)
@@ -35,11 +33,17 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
         protected override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
             Matrix3x2 matrix = this.Transformer.Matrix * canvasToVirtualMatrix;
-            this.points[0] = this.Transformer.TransformLeftTop(matrix);
-            this.points[1] = this.Transformer.TransformRightTop(matrix);
-            this.points[2] = this.Transformer.TransformRightBottom(matrix);
-            this.points[3] = this.Transformer.TransformLeftBottom(matrix);
-            CanvasGeometry geometry= CanvasGeometry.CreatePolygon(creator,this.points);
+            Vector2 leftTop = this.Transformer.TransformLeftTop(matrix);
+            Vector2 rightTop = this.Transformer.TransformRightTop(matrix);
+            Vector2 rightBottom = this.Transformer.TransformRightBottom(matrix);
+            Vector2 leftBottom = this.Transformer.TransformLeftBottom(matrix);
+            CanvasGeometry geometry = CanvasGeometry.CreatePolygon(creator, new Vector2[]
+            {
+                leftTop,
+                rightTop,
+                rightBottom,
+                leftBottom
+            });
 
             CanvasCommandList command = new CanvasCommandList(creator);
             using (CanvasDrawingSession ds = command.CreateDrawingSession())
@@ -51,7 +55,7 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
         }
         public override void ThumbnailDraw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Size controlSize)
         {
-            ds.Clear(Windows.UI.Colors.Transparent);
+            ds.Clear(Colors.Transparent);
 
             Rect rect = Layer.GetThumbnailSize(base.Transformer.Width, base.Transformer.Height, controlSize);
 
