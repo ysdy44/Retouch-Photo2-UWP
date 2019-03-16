@@ -92,11 +92,11 @@ namespace Retouch_Photo.Controls
 
             this.XPicker.Minimum = int.MinValue;
             this.XPicker.Maximum = int.MaxValue;
-            this.XPicker.ValueChange += (sender, value) => this.Navigator((m) => m.Transformer.Postion.X = value);
+            this.XPicker.ValueChange += (sender, value) => this.Navigator((m) => m.Transformer.Position.X = value);
 
             this.YPicker.Minimum = int.MinValue;
             this.YPicker.Maximum = int.MaxValue;
-            this.YPicker.ValueChange += (sender, value) => this.Navigator((m) => m.Transformer.Postion.Y = value);
+            this.YPicker.ValueChange += (sender, value) => this.Navigator((m) => m.Transformer.Position.Y = value);
 
             this.RPicker.Minimum = -(int)(Transformer.PI * 180f);
             this.RPicker.Maximum = (int)(Transformer.PI * 180f);
@@ -122,8 +122,8 @@ namespace Retouch_Photo.Controls
             this.WPicker.Value = (int)(value.XScale * 100f);
             this.HPicker.Value = (int)(value.YScale * 100f);
 
-            this.XPicker.Value = (int)(value.Postion.X);
-            this.YPicker.Value = (int)(value.Postion.Y);
+            this.XPicker.Value = (int)(value.Position.X);
+            this.YPicker.Value = (int)(value.Position.Y);
 
             this.RPicker.Value = (int)(value.Radian / Transformer.PI * 180f);
             this.SPicker.Value = (int)(value.Skew / Transformer.PI * 180f);
@@ -133,8 +133,8 @@ namespace Retouch_Photo.Controls
             if (oldValue.XScale != newValue.XScale) this.WPicker.Value = (int)(newValue.XScale * 100f);
             if (oldValue.YScale != newValue.YScale) this.HPicker.Value = (int)(newValue.YScale * 100f);
 
-            if (oldValue.Postion.X != newValue.Postion.X) this.XPicker.Value = (int)(newValue.Postion.X);
-            if (oldValue.Postion.Y != newValue.Postion.Y) this.YPicker.Value = (int)(newValue.Postion.Y);
+            if (oldValue.Position.X != newValue.Position.X) this.XPicker.Value = (int)(newValue.Position.X);
+            if (oldValue.Position.Y != newValue.Position.Y) this.YPicker.Value = (int)(newValue.Position.Y);
 
             if (oldValue.Radian != newValue.Radian) this.RPicker.Value = (int)(newValue.Radian / Transformer.PI * 180f);
             if (oldValue.Skew != newValue.Skew) this.SPicker.Value = (int)(newValue.Skew / Transformer.PI * 180f);

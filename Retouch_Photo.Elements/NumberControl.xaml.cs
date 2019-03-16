@@ -1,21 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using Microsoft.Toolkit.Extensions;
 
-
-namespace Retouch_Photo.Element
+namespace Retouch_Photo.Elements
 {
     public sealed partial class NumberControl : UserControl
     {
@@ -32,12 +18,20 @@ namespace Retouch_Photo.Element
         }
         private void ToNumber(string text)
         {
-            if (text.IsNumeric())
+            if (this.IsNumeric(text))
             {
                 this.value = double.Parse(text);
                 this.Slider.Value = this.value;
             }
         }
+
+
+        public bool IsNumeric(string str)
+        {
+            return int.TryParse(str, out int _integer);
+        }
+
+
 
         private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {

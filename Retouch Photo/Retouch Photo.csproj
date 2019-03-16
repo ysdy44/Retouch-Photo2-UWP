@@ -98,6 +98,9 @@
     <Compile Include="Controls\AdjustmentsControl.xaml.cs">
       <DependentUpon>AdjustmentsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BrushControl.xaml.cs">
+      <DependentUpon>BrushControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Element\AppbarControl.xaml.cs">
       <DependentUpon>AppbarControl.xaml</DependentUpon>
     </Compile>
@@ -206,10 +209,8 @@
     <Compile Include="Element\FolderDialog.xaml.cs">
       <DependentUpon>FolderDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Element\RadiansPicker.xaml.cs">
-      <DependentUpon>RadiansPicker.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Library\Adjustment.cs" />
+    <Compile Include="Library\CurveNodes.cs" />
     <Compile Include="Library\Debug.cs" />
     <Compile Include="Library\DottedLine.cs" />
     <Compile Include="Library\MarqueeTool.cs" />
@@ -257,12 +258,6 @@
     </Compile>
     <Compile Include="Element\ModeControl.xaml.cs">
       <DependentUpon>ModeControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Element\NumberControl.xaml.cs">
-      <DependentUpon>NumberControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Element\ToggleControl.xaml.cs">
-      <DependentUpon>ToggleControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ToolPages\AcrylicPage.xaml.cs">
       <DependentUpon>AcrylicPage.xaml</DependentUpon>
@@ -678,6 +673,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\BrushControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Element\AppbarControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -822,10 +821,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Element\RadiansPicker.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\DrawLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -847,14 +842,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Element\ModeControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Element\NumberControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Element\ToggleControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

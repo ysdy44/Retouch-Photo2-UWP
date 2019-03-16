@@ -57,7 +57,7 @@ namespace Retouch_Photo.Library
             public float XScale;// = 1.0f;
             public float YScale;// = 1.0f;
 
-            public Vector2 Postion;
+            public Vector2 Position;
             public float Radian;
             public float Skew;
             public bool DisabledRadian;
@@ -66,19 +66,19 @@ namespace Retouch_Photo.Library
             public Matrix3x2 Matrix => this.DisabledRadian ?
                 Matrix3x2.CreateTranslation(-this.Width / 2, -this.Height / 2) *
                 Matrix3x2.CreateScale(this.XScale, this.YScale) *
-                Matrix3x2.CreateTranslation(this.Postion) :
+                Matrix3x2.CreateTranslation(this.Position) :
             Matrix3x2.CreateTranslation(-this.Width / 2, -this.Height / 2) *
                 Matrix3x2.CreateScale(this.XScale, this.YScale) *
                 Matrix3x2.CreateSkew(this.Skew, 0) *
                 Matrix3x2.CreateRotation(this.Radian) *
-                Matrix3x2.CreateTranslation(this.Postion);
+                Matrix3x2.CreateTranslation(this.Position);
 
 
             public Matrix3x2 InverseMatrix => this.DisabledRadian ?
-                Matrix3x2.CreateTranslation(-this.Postion) *
+                Matrix3x2.CreateTranslation(-this.Position) *
                 Matrix3x2.CreateScale(1 / this.XScale, 1 / this.YScale) *
                 Matrix3x2.CreateTranslation(this.Width / 2, this.Height / 2) :
-            Matrix3x2.CreateTranslation(-this.Postion) *
+            Matrix3x2.CreateTranslation(-this.Position) *
                 Matrix3x2.CreateRotation(-this.Radian) *
                 Matrix3x2.CreateSkew(-this.Skew, 0) *
                 Matrix3x2.CreateScale(1 / this.XScale, 1 / this.YScale) *
@@ -90,7 +90,7 @@ namespace Retouch_Photo.Library
                 this.XScale = transformer.XScale;
                 this.YScale = transformer.YScale;
 
-                this.Postion = transformer.Postion;
+                this.Position = transformer.Position;
                 this.Radian = transformer.Radian;
                 this.Skew = transformer.Skew;
             }
@@ -104,7 +104,7 @@ namespace Retouch_Photo.Library
                 XScale = scale,
                 YScale = scale,
 
-                Postion = postion,
+                Position = postion,
                 Radian = radian,
                 Skew = 0,
                 DisabledRadian = disabledRadian
@@ -505,13 +505,13 @@ namespace Retouch_Photo.Library
             public void Start(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian)
             {
                 this.StartPostion = point / scale;
-                this.StartTransformerPostion = layer.Transformer.Postion;
+                this.StartTransformerPostion = layer.Transformer.Position;
             }
             public void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian)
             {
                 Vector2 vector = point / scale - this.StartPostion;
 
-                layer.Transformer.Postion = this.StartTransformerPostion + this.GetRotatedVector(vector, radian);
+                layer.Transformer.Position = this.StartTransformerPostion + this.GetRotatedVector(vector, radian);
             }
             public void Complete(Vector2 point, Layer layer, Matrix3x2 matrix, float scale, float radian) { }
 
@@ -838,7 +838,7 @@ namespace Retouch_Photo.Library
             {
                 sinCos = VectorSinCos.Reverse(sinCos, this.IsFlipHorizontal, this.IsFlipVertical);
                 Vector2 vector = this.GetPostion(sinCos);//@Override
-                layer.Transformer.Postion = this.StartTransformer.Postion + vector / scale;
+                layer.Transformer.Position = this.StartTransformer.Position + vector / scale;
             }
         }
 

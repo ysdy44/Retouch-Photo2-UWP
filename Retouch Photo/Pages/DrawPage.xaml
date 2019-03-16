@@ -83,7 +83,12 @@
                     <ToggleButton x:Name="NavigatorToggleButton" Height="50" Width="60" BorderThickness="0" Background="Transparent" >
                         <FontIcon Glyph="&#xE123;" FontSize="22" FontFamily="Segoe MDL2 Assets" Style="{StaticResource AppIconElement}" />
                     </ToggleButton>
-                    
+
+                    <!--Brush-->
+                    <ToggleButton x:Name="BrushToggleButton" Height="50" Width="60" BorderThickness="0" Background="Transparent" >
+                        <FontIcon Glyph="&#xE123;" FontSize="22" FontFamily="Segoe MDL2 Assets" Style="{StaticResource AppIconElement}" />
+                    </ToggleButton>
+
                     <!--Color-->
                     <Border Height="50" Width="60" >
                         <Border x:Name="ColorButton" Width="34" Height="34" Style="{StaticResource AppCircleBorderStyle}" >
@@ -142,7 +147,14 @@
                     <con:NavigatorControl/>
                 </local:MenuLayout.ContentChild>
             </local:MenuLayout>
-            
+
+            <!--Brush-->
+            <local:MenuLayout x:Name="BrushLayout" Text="Brush" Placement="Bottom" Visibility="Collapsed">
+                <local:MenuLayout.ContentChild>
+                    <con:BrushControl/>
+                </local:MenuLayout.ContentChild>
+            </local:MenuLayout>
+
             <!--Color-->
             <local:MenuLayout x:Name="ColorLayout" Text="Color" Placement="Bottom" Visibility="Collapsed">
                 <local:MenuLayout.ContentChild>

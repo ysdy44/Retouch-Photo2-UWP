@@ -22,11 +22,13 @@
 
                     <Color x:Key="AppForegroundColor" >#F0F0F0</Color>
                     <SolidColorBrush x:Key="AppForeground" Color="{ThemeResource AppForegroundColor}" />
-                    <SolidColorBrush x:Key="AppBackground" Color="#F0F0F2" />
+                    <Color x:Key="AppBackgroundColor" >#F0F0F2</Color>
+                    <SolidColorBrush x:Key="AppBackground" Color="{ThemeResource AppBackgroundColor}" />
                     <Color x:Key="AppBorderBrushColor" >#CECEDE</Color>
                     <SolidColorBrush x:Key="AppBorderBrush" Color="{ThemeResource AppBorderBrushColor}" />
 
-                    <SolidColorBrush x:Key="AppFill" Color="#FFFFFF" />
+                    <Color x:Key="AppFillColor" >#FFFFFF</Color>
+                    <SolidColorBrush x:Key="AppFill" Color="{ThemeResource AppFillColor}" />
                     <Color x:Key="AppStrokeColor" >#666b6791</Color>
                     <SolidColorBrush x:Key="AppStroke" Color="{ThemeResource AppStrokeColor}" />
 
@@ -44,11 +46,13 @@
 
                     <Color x:Key="AppForegroundColor" >#0E0E0E</Color>
                     <SolidColorBrush x:Key="AppForeground" Color="{ThemeResource AppForegroundColor}" />
-                    <SolidColorBrush x:Key="AppBackground" Color="#191919" />
+                    <Color x:Key="AppBackgroundColor" >#191919</Color>
+                    <SolidColorBrush x:Key="AppBackground" Color="{ThemeResource AppBackgroundColor}" />
                     <Color x:Key="AppBorderBrushColor" >#202020</Color>
                     <SolidColorBrush x:Key="AppBorderBrush" Color="{ThemeResource AppBorderBrushColor}" />
 
-                    <SolidColorBrush x:Key="AppFill" Color="#1C1C1C" />
+                    <Color x:Key="AppFillColor" >#1C1C1C</Color>
+                    <SolidColorBrush x:Key="AppFill" Color="{ThemeResource AppFillColor}" />
                     <Color x:Key="AppStrokeColor" >#AA000000</Color>
                     <SolidColorBrush x:Key="AppStroke" Color="{ThemeResource AppStrokeColor}" />
 

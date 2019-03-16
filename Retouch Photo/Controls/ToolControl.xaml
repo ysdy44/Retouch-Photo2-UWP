@@ -5,7 +5,6 @@
     xmlns:local="using:Retouch_Photo.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:conToolControl="using:Retouch_Photo.Controls.ToolControl"
     xmlns:models="using:Retouch_Photo.Models"
     mc:Ignorable="d"
     d:DesignHeight="800"

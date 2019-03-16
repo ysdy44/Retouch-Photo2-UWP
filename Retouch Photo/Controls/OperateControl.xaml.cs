@@ -84,16 +84,16 @@ namespace Retouch_Photo.Controls
             });
 
             //Align Horizontal
-            this.AlignLeftButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Postion.X += -layer.Transformer.TransformMinX(layer.Transformer.Matrix));
-            this.AlignCenterButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Postion.X += this.ViewModel.MatrixTransformer.Width / 2 - layer.Transformer.TransformCenter(layer.Transformer.Matrix).X);
-            this.AlignRightButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Postion.X += this.ViewModel.MatrixTransformer.Width - layer.Transformer.TransformMaxX(layer.Transformer.Matrix));
-            this.AlignSymmetryHorizontallyButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Postion.X = -this.Layer.Transformer.Postion.X);
+            this.AlignLeftButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.X += -layer.Transformer.TransformMinX(layer.Transformer.Matrix));
+            this.AlignCenterButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.X += this.ViewModel.MatrixTransformer.Width / 2 - layer.Transformer.TransformCenter(layer.Transformer.Matrix).X);
+            this.AlignRightButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.X += this.ViewModel.MatrixTransformer.Width - layer.Transformer.TransformMaxX(layer.Transformer.Matrix));
+            this.AlignSymmetryHorizontallyButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.X = -this.Layer.Transformer.Position.X);
 
             //Align Vertical
-            this.AlignTopButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Postion.Y += -layer.Transformer.TransformMinY(layer.Transformer.Matrix));
-            this.AlignMiddleButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Postion.Y += this.ViewModel.MatrixTransformer.Height / 2 - layer.Transformer.TransformCenter(layer.Transformer.Matrix).Y);
-            this.AlignBottomButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Postion.Y += this.ViewModel.MatrixTransformer.Height - layer.Transformer.TransformMaxY(layer.Transformer.Matrix));
-            this.AlignSymmetryVerticallyButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Postion.Y = -this.Layer.Transformer.Postion.Y);
+            this.AlignTopButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.Y += -layer.Transformer.TransformMinY(layer.Transformer.Matrix));
+            this.AlignMiddleButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.Y += this.ViewModel.MatrixTransformer.Height / 2 - layer.Transformer.TransformCenter(layer.Transformer.Matrix).Y);
+            this.AlignBottomButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.Y += this.ViewModel.MatrixTransformer.Height - layer.Transformer.TransformMaxY(layer.Transformer.Matrix));
+            this.AlignSymmetryVerticallyButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.Y = -this.Layer.Transformer.Position.Y);
         }
 
 

@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pickers="using:Retouch_Photo.Pickers"
-    xmlns:element="using:Retouch_Photo.Element"
+    xmlns:elements="using:Retouch_Photo.Elements"
     mc:Ignorable="d"
     d:DesignHeight="400"
     d:DesignWidth="200">
@@ -32,11 +32,11 @@
             <Ellipse Grid.Column="2" Stretch="Uniform" Stroke="{ThemeResource AppBorderBrush}"/>
             <pickers:NumberPicker x:Name="HPicker" Grid.Column="2" Height="30" Margin="4" Unit="%"/>
 
-            <element:ToggleControl x:Name="RatioToggleControl" Grid.Column="1">
-                <element:ToggleControl.CenterContent>
+            <elements:ToggleControl x:Name="RatioToggleControl" Grid.Column="1">
+                <elements:ToggleControl.CenterContent>
                     <FontIcon Glyph="&#x1F512;" FontFamily="Segoe UI Symbol" FontSize="18" />
-                </element:ToggleControl.CenterContent>
-            </element:ToggleControl>
+                </elements:ToggleControl.CenterContent>
+            </elements:ToggleControl>
 
         </Grid>
 

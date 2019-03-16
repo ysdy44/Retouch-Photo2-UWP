@@ -78,7 +78,7 @@ namespace Retouch_Photo.Controls
             if (file == null) return;
             Layer layer = await ImageLayer.CreateFromFlie(this.ViewModel.CanvasDevice, file);
 
-            layer.Transformer.Postion = this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasCenter - new Vector2(layer.Transformer.Width, layer.Transformer.Height) / 2;
+            layer.Transformer.Position = this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasCenter - new Vector2(layer.Transformer.Width, layer.Transformer.Height) / 2;
 
             this.ViewModel.RenderLayer.Insert(layer);
             this.ViewModel.Invalidate();
