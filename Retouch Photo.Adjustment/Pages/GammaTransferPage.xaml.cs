@@ -126,23 +126,23 @@ namespace Retouch_Photo.Adjustments.Pages
 
             this.AlphaDisable =
             this.GammaTransferAdjustment.GammaTransferAdjustmentItem.AlphaDisable = value;
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
 
         private void AlphaOffsetSlider_ValueChangeDelta(object sender, double value)
         {
             this.GammaTransferAdjustment.GammaTransferAdjustmentItem.AlphaOffset = (float)(value / 100.0f);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
         private void AlphaExponentSlider_ValueChangeDelta(object sender, double value)
         {
             this.GammaTransferAdjustment.GammaTransferAdjustmentItem.AlphaExponent = (float)(value / 100.0f);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
         private void AlphaAmplitudeSlider_ValueChangeDelta(object sender, double value)
         {
             this.GammaTransferAdjustment.GammaTransferAdjustmentItem.AlphaAmplitude = (float)(value / 100.0f);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
 
 
@@ -191,23 +191,23 @@ namespace Retouch_Photo.Adjustments.Pages
 
             this.RedDisable =
             this.GammaTransferAdjustment.GammaTransferAdjustmentItem.RedDisable = value;
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
 
         private void RedOffsetSlider_ValueChangeDelta(object sender, double value)
         {
             this.GammaTransferAdjustment.GammaTransferAdjustmentItem.RedOffset = (float)(value / 100.0f);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
         private void RedExponentSlider_ValueChangeDelta(object sender, double value)
         {
             this.GammaTransferAdjustment.GammaTransferAdjustmentItem.RedExponent = (float)(value / 100.0f);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
         private void RedAmplitudeSlider_ValueChangeDelta(object sender, double value)
         {
             this.GammaTransferAdjustment.GammaTransferAdjustmentItem.RedAmplitude = (float)(value / 100.0f);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
 
 
@@ -256,23 +256,23 @@ namespace Retouch_Photo.Adjustments.Pages
 
             this.GreenDisable =
             this.GammaTransferAdjustment.GammaTransferAdjustmentItem.GreenDisable = value;
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
 
         private void GreenOffsetSlider_ValueChangeDelta(object sender, double value)
         {
             this.GammaTransferAdjustment.GammaTransferAdjustmentItem.GreenOffset = (float)(value / 100.0f);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
         private void GreenExponentSlider_ValueChangeDelta(object sender, double value)
         {
             this.GammaTransferAdjustment.GammaTransferAdjustmentItem.GreenExponent = (float)(value / 100.0f);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
         private void GreenAmplitudeSlider_ValueChangeDelta(object sender, double value)
         {
             this.GammaTransferAdjustment.GammaTransferAdjustmentItem.GreenAmplitude = (float)(value / 100.0f);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
 
 
@@ -321,23 +321,23 @@ namespace Retouch_Photo.Adjustments.Pages
 
             this.BlueDisable =
             this.GammaTransferAdjustment.GammaTransferAdjustmentItem.BlueDisable = value;
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
 
         private void BlueOffsetSlider_ValueChangeDelta(object sender, double value)
         {
             this.GammaTransferAdjustment.GammaTransferAdjustmentItem.BlueOffset = (float)(value / 100.0f);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
         private void BlueExponentSlider_ValueChangeDelta(object sender, double value)
         {
             this.GammaTransferAdjustment.GammaTransferAdjustmentItem.BlueExponent = (float)(value / 100.0f);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
         private void BlueAmplitudeSlider_ValueChangeDelta(object sender, double value)
         {
             this.GammaTransferAdjustment.GammaTransferAdjustmentItem.BlueAmplitude = (float)(value / 100.0f);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
 
 

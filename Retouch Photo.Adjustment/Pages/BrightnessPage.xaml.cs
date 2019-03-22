@@ -40,23 +40,23 @@ namespace Retouch_Photo.Adjustments.Pages
         private void WhiteLightSlider_ValueChangeDelta(object sender, double value)
         {
             this.BrightnessAdjustment.BrightnessAdjustmentItem.WhiteLight = (float)(value / 100);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
         private void WhiteDarkSlider_ValueChangeDelta(object sender, double value)
         {
             this.BrightnessAdjustment.BrightnessAdjustmentItem.WhiteDark = (float)(value / 100);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
 
         private void BlackLightSlider_ValueChangeDelta(object sender, double value)
         {
             this.BrightnessAdjustment.BrightnessAdjustmentItem.BlackLight = (float)(value / 100);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
         private void BlackDarkSlider_ValueChangeDelta(object sender, double value)
         {
             this.BrightnessAdjustment.BrightnessAdjustmentItem.BlackDark = (float)(value / 100);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
 
     }

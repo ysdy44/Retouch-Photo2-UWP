@@ -99,10 +99,10 @@ namespace Retouch_Photo.Controls
         {
             this.InitializeComponent();
             this.ShowVisibility = false;
-            
+
             //Adjustment
-            Retouch_Photo.Adjustments.Adjustment.InvalidateCall += () => this.ViewModel.Invalidate();
-            
+            Retouch_Photo.Adjustments.Adjustment.Invalidate =()=> this.ViewModel.Invalidate();
+
             //Button
             this.BackButton.Tapped += (sender, e) => this.Clear();
             this.ResetButton.Tapped += (sender, e) => this.Reset();
@@ -142,19 +142,19 @@ namespace Retouch_Photo.Controls
                     this.ListView.ItemsSource = AdjustmentCandidate.AdjustmentCandidateList;
                 
                 if (this.GridView.ItemsSource == null)                
-                    this.GridView.ItemsSource = (await this.GetFilterSource()).ToList();                
+                    this.GridView.ItemsSource = (await AdjustmentsControl.GetFilterSource()).ToList();                
             };
         }
 
         //Filter
-        private async Task<IEnumerable<Filter>> GetFilterSource()
+        public static async Task<IEnumerable<Filter>> GetFilterSource()
         {
-            string json = await this.ReadFromLocalFolder("Filter.json");
+            string json = await AdjustmentsControl.ReadFromLocalFolder("Filter.json");
 
             if (json == null)
             {
-                json = await this.ReadFromApplicationPackage("ms-appx:///Json/Filter.json");
-                this.WriteToLocalFolder(json, "ms-appx:///Json/Filter.json");
+                json = await AdjustmentsControl.ReadFromApplicationPackage("ms-appx:///Json/Filter.json");
+                AdjustmentsControl.WriteToLocalFolder(json, "ms-appx:///Json/Filter.json");
             }
             IEnumerable<Filter> source = Filter.GetFiltersFromJson(json);
 
@@ -249,11 +249,11 @@ namespace Retouch_Photo.Controls
         #endregion
 
 
-        #region Filter
+        #region File
 
 
         /// <summary> Read json file from Application Package. </summary> 
-        public async Task<string> ReadFromApplicationPackage(string fileName)
+        public static async Task<string> ReadFromApplicationPackage(string fileName)
         {
             Uri uri = new Uri(fileName);
             StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(uri);
@@ -261,7 +261,7 @@ namespace Retouch_Photo.Controls
         }
 
         /// <summary> Read json file from Local Folder. </summary> 
-        public async Task<string> ReadFromLocalFolder(string fileName)
+        public static async Task<string> ReadFromLocalFolder(string fileName)
         {
             try
             {
@@ -275,7 +275,7 @@ namespace Retouch_Photo.Controls
         }
 
         /// <summary> Write json file to Local Folder. </summary> 
-        public async void WriteToLocalFolder(string json, string fileName)
+        public static async void WriteToLocalFolder(string json, string fileName)
         {
             try
             {

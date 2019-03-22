@@ -34,7 +34,7 @@ namespace Retouch_Photo.Adjustments.Pages
         private void ContrastSlider_ValueChangeDelta(object sender, double value)
         {
             this.ContrastAdjustment.ContrastAdjustmentItem.Contrast = (float)(value / 100);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
     }
 }

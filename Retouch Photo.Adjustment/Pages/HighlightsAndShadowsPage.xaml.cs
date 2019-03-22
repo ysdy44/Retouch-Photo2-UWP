@@ -37,22 +37,22 @@ namespace Retouch_Photo.Adjustments.Pages
         private void ShadowsSlider_ValueChangeDelta(object sender, double value)
         {
             this.HighlightsAndShadowsAdjustment.HighlightsAndShadowsAdjustmentItem.Shadows = (float)(value / 100);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
         private void HighlightsSlider_ValueChangeDelta(object sender, double value)
         {
             this.HighlightsAndShadowsAdjustment.HighlightsAndShadowsAdjustmentItem.Highlights = (float)(value / 100);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
         private void ClaritySlider_ValueChangeDelta(object sender, double value)
         {
             this.HighlightsAndShadowsAdjustment.HighlightsAndShadowsAdjustmentItem.Clarity = (float)(value / 100);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
         private void MaskBlurAmountSlider_ValueChangeDelta(object sender, double value)
         {
             this.HighlightsAndShadowsAdjustment.HighlightsAndShadowsAdjustmentItem.MaskBlurAmount = (float)(value / 10);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
     }
 }

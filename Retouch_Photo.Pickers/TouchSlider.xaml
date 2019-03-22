@@ -24,7 +24,7 @@
             </Grid>
         </Canvas>
 
-        <Thumb x:Name="Thumb" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Thumb x:Name="Thumb" ManipulationMode="TranslateX" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Thumb.Style>
                 <Style TargetType="Thumb">
                     <Setter Property="Template">

@@ -34,7 +34,7 @@ namespace Retouch_Photo.Adjustments.Pages
         private void SaturationSlider_ValueChangeDelta(object sender, double value)
         {
             this.SaturationAdjustment.SaturationAdjustmentItem.Saturation = (float)(value / 100);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
     }
 }

@@ -20,11 +20,8 @@ namespace Retouch_Photo.Adjustments
     /// </summary>
     public abstract class Adjustment
     {
-        //delegate
-        public delegate void VoidCall();
-        public static event VoidCall InvalidateCall = null;
-        public static void Invalidate() => Adjustment.InvalidateCall?.Invoke();
-
+        //static
+        public static Action Invalidate;
 
         public AdjustmentType Type;
         public FrameworkElement Icon;

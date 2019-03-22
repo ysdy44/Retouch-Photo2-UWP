@@ -42,13 +42,13 @@ namespace Retouch_Photo.Adjustments.Pages
         private void AmountSlider_ValueChangeDelta(object sender, double value)
         {
             this.VignetteAdjustment.VignetteAdjustmentItem.Amount = (float)(value / 100);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
 
         private void CurveSlider_ValueChangeDelta(object sender, double value)
         {
             this.VignetteAdjustment.VignetteAdjustmentItem.Curve = (float)(value / 100);
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
 
         private void ColorButton_Tapped(object sender, TappedRoutedEventArgs e)
@@ -65,7 +65,7 @@ namespace Retouch_Photo.Adjustments.Pages
             if (this.VignetteAdjustment == null) return;
 
             this.VignetteAdjustment.VignetteAdjustmentItem.Color = value;
-            Adjustment.Invalidate();
+            Adjustment.Invalidate?.Invoke();
         }
         
     }
