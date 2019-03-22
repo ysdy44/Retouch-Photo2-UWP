@@ -4,7 +4,7 @@
 
 
 ## Function description
-![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/Retouch_Designer/ScreenShot/2019.1.11.PNG)
+![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/Retouch_Designer/ScreenShot/2019-2-28.jpg)
 Vector Graphics Editing Tool, you can transform, fill graphics, support layers, graphics combination.
 
 
@@ -21,17 +21,6 @@ Vector Graphics Editing Tool, you can transform, fill graphics, support layers, 
 ## Deployment instructions
 
 > Download the whole project, run `Retouch Photo.sln`, start the project `Retouch Photo`, and try to see if it works.
-
-## History Screenshot
-2018-12-11-Rectangle
-![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/Retouch_Designer/ScreenShot/2018-12-11-Rectangle.gif)
-
-2018-12-11-CursorTool-Scale-Transform
-![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/Retouch_Designer/ScreenShot/2018-12-21-Scale.gif)
-
-
-2018-12-24-Adjustment
-![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/Retouch_Designer/ScreenShot/2018-12-24-Adjustment.gif)
 
 
 ## Old version
