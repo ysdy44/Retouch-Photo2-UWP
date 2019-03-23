@@ -1,73 +1,77 @@
-﻿using Retouch_Photo.Adjustments.Models;
-using Windows.UI;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
+﻿using Retouch_Photo.Adjustments.Controls;
+using Retouch_Photo.Adjustments.Models;
 
 namespace Retouch_Photo.Adjustments.Pages
 {
-    public sealed partial class VignettePage : Page
+    public sealed partial class VignettePage : AdjustmentPage
     {
-        #region DependencyProperty
 
-        public VignetteAdjustment VignetteAdjustment
-        {
-            get { return (VignetteAdjustment)GetValue(VignetteAdjustmentProperty); }
-            set { SetValue(VignetteAdjustmentProperty, value); }
-        }
-        public static readonly DependencyProperty VignetteAdjustmentProperty = DependencyProperty.Register(nameof(VignetteAdjustment), typeof(VignetteAdjustment), typeof(VignetteAdjustment), new PropertyMetadata(null, (sender, e) =>
-        {
-            VignettePage con = (VignettePage)sender;
-
-            if (e.NewValue is VignetteAdjustment adjustment)
-            {
-                con.AmountSlider.Value = adjustment.VignetteAdjustmentItem.Amount * 100;
-                con.CurveSlider.Value = adjustment.VignetteAdjustmentItem.Curve * 100;
-
-                con.SolidColorBrush.Color =
-                con.AmountRight.Color =
-                con.CurveRight.Color =
-                adjustment.VignetteAdjustmentItem.Color;
-            }
-        }));
-
-        #endregion
-
+        public VignetteAdjustment VignetteAdjustment;
 
         public VignettePage()
         {
+            base.Type = AdjustmentType.Vignette;
+            base.Icon = new VignetteControl();
             this.InitializeComponent();
+
+            this.AmountSlider.ValueChangeDelta += (s, value) =>
+            {
+                if (this.VignetteAdjustment == null) return;
+                this.VignetteAdjustment.VignetteAdjustmentItem.Amount = (float)(value / 100);
+                Adjustment.Invalidate?.Invoke();
+            };
+            this.CurveSlider.ValueChangeDelta += (s, value) =>
+            {
+                if (this.VignetteAdjustment == null) return;
+                this.VignetteAdjustment.VignetteAdjustmentItem.Curve = (float)(value / 100);
+                Adjustment.Invalidate?.Invoke();
+            };
+            this.ColorButton.Tapped += (s, e) =>
+            {
+                if (this.VignetteAdjustment == null) return;
+                this.ColorFlyout.ShowAt(this.ColorButton);
+                this.ColorPicker.Color = this.VignetteAdjustment.VignetteAdjustmentItem.Color;
+            };
+            this.ColorPicker.ColorChange += (s, value) =>
+            {
+                this.SolidColorBrush.Color =
+                this.AmountRight.Color =
+                this.CurveRight.Color = value;
+
+                if (this.VignetteAdjustment == null) return;
+
+                this.VignetteAdjustment.VignetteAdjustmentItem.Color = value;
+                Adjustment.Invalidate?.Invoke();
+            };
         }
 
-        private void AmountSlider_ValueChangeDelta(object sender, double value)
+        //@override
+        public override Adjustment GetNewAdjustment() => new VignetteAdjustment();
+        public override Adjustment GetAdjustment() => this.VignetteAdjustment;
+        public override void SetAdjustment(Adjustment value)
         {
-            this.VignetteAdjustment.VignetteAdjustmentItem.Amount = (float)(value / 100);
-            Adjustment.Invalidate?.Invoke();
+            if (value is VignetteAdjustment adjustment)
+            {
+                this.VignetteAdjustment = adjustment;
+                this.Invalidate(adjustment);
+            }
         }
 
-        private void CurveSlider_ValueChangeDelta(object sender, double value)
+        public override void Close() => this.VignetteAdjustment = null;
+        public override void Reset()
         {
-            this.VignetteAdjustment.VignetteAdjustmentItem.Curve = (float)(value / 100);
-            Adjustment.Invalidate?.Invoke();
-        }
-
-        private void ColorButton_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            this.ColorFlyout.ShowAt(this.ColorButton);
-            this.ColorPicker.Color = this.VignetteAdjustment.VignetteAdjustmentItem.Color;
-        }
-        private void ColorPicker_ColorChange(object sender, Color value)
-        {
-            this.SolidColorBrush.Color =
-            this.AmountRight.Color =
-            this.CurveRight.Color = value;
-
             if (this.VignetteAdjustment == null) return;
 
-            this.VignetteAdjustment.VignetteAdjustmentItem.Color = value;
-            Adjustment.Invalidate?.Invoke();
+            this.VignetteAdjustment.Reset();
+            this.Invalidate(this.VignetteAdjustment);
         }
-        
+
+        public void Invalidate(VignetteAdjustment adjustment)
+        {
+            this.AmountSlider.Value = adjustment.VignetteAdjustmentItem.Amount * 100;
+            this.CurveSlider.Value = adjustment.VignetteAdjustmentItem.Curve * 100;
+            this.SolidColorBrush.Color = this.AmountRight.Color = this.CurveRight.Color = adjustment.VignetteAdjustmentItem.Color;
+        }
     }
 }
 

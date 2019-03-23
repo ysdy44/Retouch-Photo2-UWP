@@ -107,22 +107,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Adjustment.cs" />
-    <Compile Include="AdjustmentCandidate.cs" />
+    <Compile Include="AdjustmentPage.cs" />
     <Compile Include="Filter.cs" />
     <Compile Include="AdjustmentItem.cs" />
     <Compile Include="AdjustmentManager.cs" />
     <Compile Include="AdjustmentType.cs" />
-    <Compile Include="Candidates\BrightnessAdjustmentCandidate.cs" />
-    <Compile Include="Candidates\ContrastAdjustmentCandidate.cs" />
-    <Compile Include="Candidates\ExposureAdjustmentCandidate.cs" />
-    <Compile Include="Candidates\GammaTransferAdjustmentCandidate.cs" />
-    <Compile Include="Candidates\GrayAdjustmentCandidate.cs" />
-    <Compile Include="Candidates\HighlightsAndShadowsAdjustmentCandidate.cs" />
-    <Compile Include="Candidates\HueRotationAdjustmentCandidate.cs" />
-    <Compile Include="Candidates\InvertAdjustmentCandidate.cs" />
-    <Compile Include="Candidates\SaturationAdjustmentCandidate.cs" />
-    <Compile Include="Candidates\TemperatureAdjustmentCandidate.cs" />
-    <Compile Include="Candidates\VignetteAdjustmentCandidate.cs" />
     <Compile Include="Control.xaml.cs">
       <DependentUpon>Control.xaml</DependentUpon>
     </Compile>
@@ -196,11 +185,17 @@
     <Compile Include="Pages\GammaTransferPage.xaml.cs">
       <DependentUpon>GammaTransferPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\GrayPage.xaml.cs">
+      <DependentUpon>GrayPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\HighlightsAndShadowsPage.xaml.cs">
       <DependentUpon>HighlightsAndShadowsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\HueRotationPage.xaml.cs">
       <DependentUpon>HueRotationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\InvertPage.xaml.cs">
+      <DependentUpon>InvertPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SaturationPage.xaml.cs">
       <DependentUpon>SaturationPage.xaml</DependentUpon>
@@ -297,6 +292,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\GrayPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\HighlightsAndShadowsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -304,6 +303,10 @@
     <Page Include="Pages\HueRotationPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\InvertPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SaturationPage.xaml">
       <Generator>MSBuild:Compile</Generator>

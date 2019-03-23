@@ -1,5 +1,6 @@
 ﻿namespace Retouch_Photo.Adjustments
 {
+    /// <summary> An <see cref = "Adjustment"/> corresponds to a <see cref = "AdjustmentType" /> </summary>
     public enum AdjustmentType
     {
         /// <summary> 灰度 </summary>

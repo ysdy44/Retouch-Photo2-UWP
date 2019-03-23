@@ -1,13 +1,6 @@
-﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo.Models.Tools;
+﻿using Retouch_Photo.Models.Tools;
 using Retouch_Photo.ViewModels;
-using Retouch_Photo.ViewModels.ToolViewModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

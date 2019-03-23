@@ -1,60 +1,74 @@
-﻿using Retouch_Photo.Adjustments.Models;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+﻿using Retouch_Photo.Adjustments.Controls;
+using Retouch_Photo.Adjustments.Models;
 
 namespace Retouch_Photo.Adjustments.Pages
 {
-    public sealed partial class HighlightsAndShadowsPage : Page
+    public sealed partial class HighlightsAndShadowsPage : AdjustmentPage
     {
-        #region DependencyProperty
 
-        public HighlightsAndShadowsAdjustment HighlightsAndShadowsAdjustment
-        {
-            get { return (HighlightsAndShadowsAdjustment)GetValue(HighlightsAndShadowsAdjustmentProperty); }
-            set { SetValue(HighlightsAndShadowsAdjustmentProperty, value); }
-        }
-        public static readonly DependencyProperty HighlightsAndShadowsAdjustmentProperty = DependencyProperty.Register(nameof(HighlightsAndShadowsAdjustment), typeof(HighlightsAndShadowsAdjustment), typeof(HighlightsAndShadowsAdjustment), new PropertyMetadata(null, (sender, e) =>
-        {
-            HighlightsAndShadowsPage con = (HighlightsAndShadowsPage)sender;
-
-            if(e.NewValue is HighlightsAndShadowsAdjustment adjustment)
-            {
-                con.ShadowsSlider.Value = adjustment.HighlightsAndShadowsAdjustmentItem.Shadows * 100;
-                con.HighlightsSlider.Value = adjustment.HighlightsAndShadowsAdjustmentItem.Highlights * 100;
-                con.ClaritySlider.Value = adjustment.HighlightsAndShadowsAdjustmentItem.Clarity * 100;
-                con.MaskBlurAmountSlider.Value = adjustment.HighlightsAndShadowsAdjustmentItem.MaskBlurAmount * 10;
-            }
-        }));
-
-        #endregion
-
+        public HighlightsAndShadowsAdjustment HighlightsAndShadowsAdjustment;
 
         public HighlightsAndShadowsPage()
         {
+            base.Type = AdjustmentType.HighlightsAndShadows;
+            base.Icon = new HighlightsAndShadowsControl();
             this.InitializeComponent();
-        } 
 
-        private void ShadowsSlider_ValueChangeDelta(object sender, double value)
-        {
-            this.HighlightsAndShadowsAdjustment.HighlightsAndShadowsAdjustmentItem.Shadows = (float)(value / 100);
-            Adjustment.Invalidate?.Invoke();
+            this.ShadowsSlider.ValueChangeDelta += (s, value) =>
+            {
+                if (this.HighlightsAndShadowsAdjustment == null) return;
+                this.HighlightsAndShadowsAdjustment.HighlightsAndShadowsAdjustmentItem.Shadows = (float)(value / 100);
+                Adjustment.Invalidate?.Invoke();
+            };
+            this.HighlightsSlider.ValueChangeDelta += (s, value) =>
+            {
+                if (this.HighlightsAndShadowsAdjustment == null) return;
+                this.HighlightsAndShadowsAdjustment.HighlightsAndShadowsAdjustmentItem.Highlights = (float)(value / 100);
+                Adjustment.Invalidate?.Invoke();
+            };
+            this.ClaritySlider.ValueChangeDelta += (s, value) =>
+            {
+                if (this.HighlightsAndShadowsAdjustment == null) return;
+                this.HighlightsAndShadowsAdjustment.HighlightsAndShadowsAdjustmentItem.Clarity = (float)(value / 100);
+                Adjustment.Invalidate?.Invoke();
+            };
+            this.MaskBlurAmountSlider.ValueChangeDelta += (s, value) =>
+            {
+                if (this.HighlightsAndShadowsAdjustment == null) return;
+                this.HighlightsAndShadowsAdjustment.HighlightsAndShadowsAdjustmentItem.MaskBlurAmount = (float)(value / 10);
+                Adjustment.Invalidate?.Invoke();
+            };
         }
-        private void HighlightsSlider_ValueChangeDelta(object sender, double value)
+
+        //@override
+        public override Adjustment GetNewAdjustment() => new HighlightsAndShadowsAdjustment();
+        public override Adjustment GetAdjustment() => this.HighlightsAndShadowsAdjustment;
+        public override void SetAdjustment(Adjustment value)
         {
-            this.HighlightsAndShadowsAdjustment.HighlightsAndShadowsAdjustmentItem.Highlights = (float)(value / 100);
-            Adjustment.Invalidate?.Invoke();
+            if (value is HighlightsAndShadowsAdjustment adjustment)
+            {
+                this.HighlightsAndShadowsAdjustment = adjustment;
+                this.Invalidate(adjustment);
+            }
         }
-        private void ClaritySlider_ValueChangeDelta(object sender, double value)
+
+        public override void Close() => this.HighlightsAndShadowsAdjustment = null;
+        public override void Reset()
         {
-            this.HighlightsAndShadowsAdjustment.HighlightsAndShadowsAdjustmentItem.Clarity = (float)(value / 100);
-            Adjustment.Invalidate?.Invoke();
+            if (this.HighlightsAndShadowsAdjustment == null) return;
+
+            this.HighlightsAndShadowsAdjustment.Reset();
+            this.Invalidate(this.HighlightsAndShadowsAdjustment);
         }
-        private void MaskBlurAmountSlider_ValueChangeDelta(object sender, double value)
+
+        public void Invalidate(HighlightsAndShadowsAdjustment adjustment)
         {
-            this.HighlightsAndShadowsAdjustment.HighlightsAndShadowsAdjustmentItem.MaskBlurAmount = (float)(value / 10);
-            Adjustment.Invalidate?.Invoke();
+            this.ShadowsSlider.Value = adjustment.HighlightsAndShadowsAdjustmentItem.Shadows * 100;
+            this.HighlightsSlider.Value = adjustment.HighlightsAndShadowsAdjustmentItem.Highlights * 100;
+            this.ClaritySlider.Value = adjustment.HighlightsAndShadowsAdjustmentItem.Clarity * 100;
+            this.MaskBlurAmountSlider.Value = adjustment.HighlightsAndShadowsAdjustmentItem.MaskBlurAmount * 10;
         }
     }
 }
 
- 
+

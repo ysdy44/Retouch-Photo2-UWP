@@ -1,40 +1,51 @@
-﻿using Retouch_Photo.Adjustments.Models;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+﻿using Retouch_Photo.Adjustments.Controls;
+using Retouch_Photo.Adjustments.Models;
 
 namespace Retouch_Photo.Adjustments.Pages
 {
-    public sealed partial class ContrastPage : Page
+    public sealed partial class ContrastPage : AdjustmentPage
     {
-        #region DependencyProperty
 
-        public ContrastAdjustment ContrastAdjustment
-        {
-            get { return (ContrastAdjustment)GetValue(ContrastAdjustmentProperty); }
-            set { SetValue(ContrastAdjustmentProperty, value); }
-        }
-        public static readonly DependencyProperty ContrastAdjustmentProperty = DependencyProperty.Register(nameof(ContrastAdjustment), typeof(ContrastAdjustment), typeof(ContrastAdjustment), new PropertyMetadata(null, (sender, e) =>
-        {
-            ContrastPage con = (ContrastPage)sender;
-
-            if(e.NewValue is ContrastAdjustment adjustment)
-            {
-                con.ContrastSlider.Value = adjustment.ContrastAdjustmentItem.Contrast * 100;
-            }
-        }));
-
-        #endregion
-
+        public ContrastAdjustment ContrastAdjustment;
 
         public ContrastPage()
         {
+            base.Type = AdjustmentType.Contrast;
+            base.Icon = new ContrastControl();
             this.InitializeComponent();
+
+            this.ContrastSlider.ValueChangeDelta += (s, value) =>
+            {
+                if (this.ContrastAdjustment == null) return;
+                this.ContrastAdjustment.ContrastAdjustmentItem.Contrast = (float)(value / 100);
+                Adjustment.Invalidate?.Invoke();
+            };
         }
 
-        private void ContrastSlider_ValueChangeDelta(object sender, double value)
+        //@override
+        public override Adjustment GetNewAdjustment() => new ContrastAdjustment();
+        public override Adjustment GetAdjustment() => this.ContrastAdjustment;
+        public override void SetAdjustment(Adjustment value)
         {
-            this.ContrastAdjustment.ContrastAdjustmentItem.Contrast = (float)(value / 100);
-            Adjustment.Invalidate?.Invoke();
+            if (value is ContrastAdjustment adjustment)
+            {
+                this.ContrastAdjustment = adjustment;
+                this.Invalidate(adjustment);
+            }
+        }
+
+        public override void Close() => this.ContrastAdjustment = null;
+        public override void Reset()
+        {
+            if (this.ContrastAdjustment == null) return;
+
+            this.ContrastAdjustment.Reset();
+            this.Invalidate(this.ContrastAdjustment);
+        }
+
+        public void Invalidate(ContrastAdjustment adjustment)
+        {
+            this.ContrastSlider.Value = adjustment.ContrastAdjustmentItem.Contrast * 100;
         }
     }
 }

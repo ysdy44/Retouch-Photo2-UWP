@@ -5,11 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
-    xmlns:models="using:Retouch_Photo.Models"
     xmlns:adjustments="using:Retouch_Photo.Adjustments"
-    xmlns:local="using:Retouch_Photo.Controls"
     mc:Ignorable="d"
-    IsEnabled="False"
     d:DesignHeight="300"
     d:DesignWidth="200"
     >
@@ -18,13 +15,13 @@
     <UserControl.Resources>
 
         <!--Flyout-->
-        <Flyout x:Name="CandidateFlyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="PageFlyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ListView x:Name="ListView" Width="190" SelectionMode="None" IsItemClickEnabled="True">
                 <ListView.Header>
                     <TextBlock Text="Select a adjustment:" Style="{StaticResource AppTextBlock}"/>
                 </ListView.Header>
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="adjustments:AdjustmentCandidate">
+                    <DataTemplate x:DataType="adjustments:AdjustmentPage">
                         <ContentPresenter Content="{x:Bind Icon}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -101,12 +98,19 @@
         <Border x:Name="Border" Grid.ColumnSpan="3" Grid.Row="1" Height="Auto" VerticalAlignment="Top" Style="{StaticResource AppRoundedBorderStyle}">
             <ItemsControl x:Name="ItemsControl" ItemTemplate="{StaticResource DataTemplate}"/>
         </Border>
-        <TextBlock x:Name="TextBlock" Grid.ColumnSpan="3" Grid.Row="1" Text="No Adjustment" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlock}"/>
+        <TextBlock x:Name="TextBlock" Grid.ColumnSpan="3" Grid.Row="1" Text="No Adjustment" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlock}">
+            <animations:Implicit.ShowAnimations>
+                <animations:OpacityAnimation Duration="0:0:0.6" From="0.0" To="1.0"/>
+            </animations:Implicit.ShowAnimations>
+        </TextBlock>
 
 
         <Button x:Name="BackButton" Grid.Column="0" Content="&#xE0A6;" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
         <Button x:Name="ResetButton" Grid.Column="2" Content="&#xE149;" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
         <Border x:Name="Frame" Grid.ColumnSpan="3" Grid.Row="1" Background="Transparent">
+            <animations:Implicit.ShowAnimations>
+                <animations:OpacityAnimation Duration="0:0:0.6" From="0.0" To="1.0"/>
+            </animations:Implicit.ShowAnimations>
             <!--Frame-->
         </Border>
 

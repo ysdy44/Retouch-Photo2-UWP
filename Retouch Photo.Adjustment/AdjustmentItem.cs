@@ -6,17 +6,15 @@ using System.Linq;
 
 namespace Retouch_Photo.Adjustments
 {
-    /// 从Json形式转为可用的形式
-    /// [AdjustmentItem] --> [Adjustment]
+    /// <summary> This contains all an <see cref = "Adjustment" />'s information. </summary>
     public abstract class AdjustmentItem
     {
         public string Name;
 
         public abstract Adjustment GetAdjustment();
-
-
+        
         //@static
-        /// <summary> Get List Item. </summary>
+        /// <summary> [Json] --> List [Item] </summary>
         public static IEnumerable<AdjustmentItem> GetItemsFromJson(string json)
         {
             // Json -->  List<object>
@@ -30,13 +28,15 @@ namespace Retouch_Photo.Adjustments
 
             return items;
         }
-     
+
         //@static
-        /// <summary> Get Item. </summary>
+        /// <summary> [Json] --> [Item] </summary>
         public static AdjustmentItem GetItemFromJson(string json)
         {
-            // Josn --> Item2 --> Type
+            // Json --> Item2
             AdjustmentItem2 adjustmentItem2 = JsonConvert.DeserializeObject<AdjustmentItem2>(json);
+         
+            // Item2 --> Name
             string name = adjustmentItem2.Name;
 
             // Name --> Item
@@ -56,8 +56,7 @@ namespace Retouch_Photo.Adjustments
         }
     }
 
-    /// 为了得到里面的Type，不得已用而实例化它
-    /// [Item2] --> [Item]
+    /// <summary> <see cref = "Adjustment" />'s substitute. </summary>
     public class AdjustmentItem2
     {
         public string Name;

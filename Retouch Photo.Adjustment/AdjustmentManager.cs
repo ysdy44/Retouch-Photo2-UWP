@@ -4,8 +4,7 @@ using System.Linq;
 
 namespace Retouch_Photo.Adjustments
 {
-    /// 管理图层的Adjustment
-    /// [AdjustmentManager] --> [List<Adjustment>]
+    /// <summary> <see cref = "Adjustment" />'s manager. </summary>
     public class AdjustmentManager
     {
         public List<Adjustment> Adjustments { get; set; } = new List<Adjustment>();

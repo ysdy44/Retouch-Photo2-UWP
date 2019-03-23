@@ -1,63 +1,72 @@
-﻿using Retouch_Photo.Adjustments.Models;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+﻿using Retouch_Photo.Adjustments.Controls;
+using Retouch_Photo.Adjustments.Models;
 
 namespace Retouch_Photo.Adjustments.Pages
 {
-    public sealed partial class BrightnessPage : Page
+    public sealed partial class BrightnessPage : AdjustmentPage
     {
-
-        #region DependencyProperty
-
-
-        public BrightnessAdjustment BrightnessAdjustment
-        {
-            get { return (BrightnessAdjustment)GetValue(BrightnessAdjustmentProperty); }
-            set { SetValue(BrightnessAdjustmentProperty, value); }
-        }
-        public static readonly DependencyProperty BrightnessAdjustmentProperty = DependencyProperty.Register(nameof(BrightnessAdjustment), typeof(BrightnessAdjustment), typeof(BrightnessAdjustment), new PropertyMetadata(null, (sender, e) =>
-        {
-            BrightnessPage con = (BrightnessPage)sender;
-
-            if (e.NewValue is BrightnessAdjustment adjustment)
-            {
-                con.WhiteLightSlider.Value = adjustment.BrightnessAdjustmentItem.WhiteLight * 100;
-                con.WhiteDarkSlider.Value = adjustment.BrightnessAdjustmentItem.WhiteDark * 100;
-                con.BlackLightSlider.Value = adjustment.BrightnessAdjustmentItem.BlackLight * 100;
-                con.BlackDarkSlider.Value = adjustment.BrightnessAdjustmentItem.BlackDark * 100;
-            }
-        }));
-
-
-        #endregion
-
-
+        public BrightnessAdjustment BrightnessAdjustment;
+        
         public BrightnessPage()
         {
+            base.Type = AdjustmentType.Brightness;
+            base.Icon = new BrightnessControl();
             this.InitializeComponent();
+
+            this.WhiteLightSlider.ValueChangeDelta += (s, value) =>
+            {
+                if (this.BrightnessAdjustment == null) return;
+                this.BrightnessAdjustment.BrightnessAdjustmentItem.WhiteLight = (float)(value / 100);
+                Adjustment.Invalidate?.Invoke();
+            };
+            this.WhiteDarkSlider.ValueChangeDelta += (s, value) =>
+            {
+                if (this.BrightnessAdjustment == null) return;
+                this.BrightnessAdjustment.BrightnessAdjustmentItem.WhiteDark = (float)(value / 100);
+                Adjustment.Invalidate?.Invoke();
+            };
+
+            this.BlackLightSlider.ValueChangeDelta += (s, value) =>
+            {
+                if (this.BrightnessAdjustment == null) return;
+                this.BrightnessAdjustment.BrightnessAdjustmentItem.BlackLight = (float)(value / 100);
+                Adjustment.Invalidate?.Invoke();
+            };
+            this.BlackDarkSlider.ValueChangeDelta += (s, value) =>
+            {
+                if (this.BrightnessAdjustment == null) return;
+                this.BrightnessAdjustment.BrightnessAdjustmentItem.BlackDark = (float)(value / 100);
+                Adjustment.Invalidate?.Invoke();
+            };
         }
 
-        private void WhiteLightSlider_ValueChangeDelta(object sender, double value)
+        //@override
+        public override Adjustment GetNewAdjustment() => new BrightnessAdjustment();
+        public override Adjustment GetAdjustment() => this.BrightnessAdjustment;
+        public override void SetAdjustment(Adjustment value)
         {
-            this.BrightnessAdjustment.BrightnessAdjustmentItem.WhiteLight = (float)(value / 100);
-            Adjustment.Invalidate?.Invoke();
-        }
-        private void WhiteDarkSlider_ValueChangeDelta(object sender, double value)
-        {
-            this.BrightnessAdjustment.BrightnessAdjustmentItem.WhiteDark = (float)(value / 100);
-            Adjustment.Invalidate?.Invoke();
-        }
-
-        private void BlackLightSlider_ValueChangeDelta(object sender, double value)
-        {
-            this.BrightnessAdjustment.BrightnessAdjustmentItem.BlackLight = (float)(value / 100);
-            Adjustment.Invalidate?.Invoke();
-        }
-        private void BlackDarkSlider_ValueChangeDelta(object sender, double value)
-        {
-            this.BrightnessAdjustment.BrightnessAdjustmentItem.BlackDark = (float)(value / 100);
-            Adjustment.Invalidate?.Invoke();
+            if (value is BrightnessAdjustment adjustment) 
+            {
+                this.BrightnessAdjustment = adjustment;
+                this.Invalidate(adjustment);
+            }
         }
 
+        public override void Close() => this.BrightnessAdjustment = null;
+        public override void Reset()
+        {
+            if (this.BrightnessAdjustment == null) return;
+
+            this.BrightnessAdjustment.Reset();
+            this.Invalidate(this.BrightnessAdjustment);
+        }
+
+        public void Invalidate(BrightnessAdjustment adjustment)
+        {
+            this.WhiteLightSlider.Value = adjustment.BrightnessAdjustmentItem.WhiteLight * 100;
+            this.WhiteDarkSlider.Value = adjustment.BrightnessAdjustmentItem.WhiteDark * 100;
+            this.BlackLightSlider.Value = adjustment.BrightnessAdjustmentItem.BlackLight * 100;
+            this.BlackDarkSlider.Value = adjustment.BrightnessAdjustmentItem.BlackDark * 100;
+        }
     }
 }

@@ -1,40 +1,51 @@
-﻿using Retouch_Photo.Adjustments.Models;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+﻿using Retouch_Photo.Adjustments.Controls;
+using Retouch_Photo.Adjustments.Models;
 
 namespace Retouch_Photo.Adjustments.Pages
 {
-    public sealed partial class ExposurePage : Page
+    public sealed partial class ExposurePage : AdjustmentPage
     {
-        #region DependencyProperty
 
-        public ExposureAdjustment ExposureAdjustment
-        {
-            get { return (ExposureAdjustment)GetValue(ExposureAdjustmentProperty); }
-            set { SetValue(ExposureAdjustmentProperty, value); }
-        }        
-        public static readonly DependencyProperty ExposureAdjustmentProperty =DependencyProperty.Register(nameof(ExposureAdjustment), typeof(ExposureAdjustment), typeof(ExposureAdjustment), new PropertyMetadata(null,(sender,e)=>
-        {
-            ExposurePage con = (ExposurePage)sender;
-
-            if(e.NewValue is ExposureAdjustment adjustment)
-            {
-                con.ExposureSlider.Value = adjustment.ExposureAdjustmentItem.Exposure * 100;
-            }
-        }));
-        
-        #endregion
-
+        public ExposureAdjustment ExposureAdjustment;
 
         public ExposurePage()
         {
+            base.Type = AdjustmentType.Exposure;
+            base.Icon = new ExposureControl();
             this.InitializeComponent();
+
+            this.ExposureSlider.ValueChangeDelta+=(s, value)=>
+            {
+                if (this.ExposureAdjustment == null) return;
+                this.ExposureAdjustment.ExposureAdjustmentItem.Exposure = (float)(value / 100);
+                Adjustment.Invalidate?.Invoke();
+            };
         }
-         
-        private void ExposureSlider_ValueChangeDelta(object sender, double value)
+
+        //@override
+        public override Adjustment GetNewAdjustment() => new ExposureAdjustment();
+        public override Adjustment GetAdjustment() => this.ExposureAdjustment;
+        public override void SetAdjustment(Adjustment value)
         {
-            this.ExposureAdjustment.ExposureAdjustmentItem.Exposure = (float)(value / 100);
-            Adjustment.Invalidate?.Invoke();
+            if (value is ExposureAdjustment adjustment)
+            {
+                this.ExposureAdjustment = adjustment;
+                this.Invalidate(adjustment);
+            }
+        }
+        
+        public override void Close() => this.ExposureAdjustment = null;
+        public override void Reset()
+        {
+            if (this.ExposureAdjustment == null) return;
+
+            this.ExposureAdjustment.Reset();
+            this.Invalidate(this.ExposureAdjustment);
+        }
+
+        public void Invalidate(ExposureAdjustment adjustment)
+        {
+            this.ExposureSlider.Value = adjustment.ExposureAdjustmentItem.Exposure * 100;
         }
     }
 }

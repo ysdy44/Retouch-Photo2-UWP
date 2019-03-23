@@ -1,47 +1,58 @@
-﻿using Retouch_Photo.Adjustments.Models;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+﻿using Retouch_Photo.Adjustments.Controls;
+using Retouch_Photo.Adjustments.Models;
 
 namespace Retouch_Photo.Adjustments.Pages
 {
-    public sealed partial class TemperaturePage : Page
+    public sealed partial class TemperaturePage : AdjustmentPage
     {
-        #region DependencyProperty
 
-        public TemperatureAdjustment TemperatureAdjustment
-        {
-            get { return (TemperatureAdjustment)GetValue(TemperatureAdjustmentProperty); }
-            set { SetValue(TemperatureAdjustmentProperty, value); }
-        }
-        public static readonly DependencyProperty TemperatureAdjustmentProperty = DependencyProperty.Register(nameof(TemperatureAdjustment), typeof(TemperatureAdjustment), typeof(TemperatureAdjustment), new PropertyMetadata(null, (sender, e) =>
-        {
-            TemperaturePage con = (TemperaturePage)sender;
-
-            if(e.NewValue is TemperatureAdjustment adjustment)
-            {
-                con.TemperatureSlider.Value = adjustment.TemperatureAdjustmentItem .Temperature * 100;
-                con.TintSlider.Value = adjustment.TemperatureAdjustmentItem .Tint * 100;
-            }
-        }));
-
-        #endregion
-
+        public TemperatureAdjustment TemperatureAdjustment;
 
         public TemperaturePage()
         {
+            base.Type = AdjustmentType.Temperature;
+            base.Icon = new TemperatureControl();
             this.InitializeComponent();
+
+            this.TemperatureSlider.ValueChangeDelta += (s, value) =>
+            {
+                if (this.TemperatureAdjustment == null) return;
+                this.TemperatureAdjustment.TemperatureAdjustmentItem.Temperature = (float)(value / 100);
+                Adjustment.Invalidate?.Invoke();
+            };
+            this.TintSlider.ValueChangeDelta += (s, value) =>
+            {
+                if (this.TemperatureAdjustment == null) return;
+                this.TemperatureAdjustment.TemperatureAdjustmentItem.Tint = (float)(value / 100);
+                Adjustment.Invalidate?.Invoke();
+            };
         }
 
-        private void TemperatureSlider_ValueChangeDelta(object sender, double value)
+        //@override
+        public override Adjustment GetNewAdjustment() => new TemperatureAdjustment();
+        public override Adjustment GetAdjustment() => this.TemperatureAdjustment;
+        public override void SetAdjustment(Adjustment value)
         {
-            this.TemperatureAdjustment.TemperatureAdjustmentItem .Temperature = (float)(value / 100);
-            Adjustment.Invalidate?.Invoke();
+            if (value is TemperatureAdjustment adjustment)
+            {
+                this.TemperatureAdjustment = adjustment;
+                this.Invalidate(adjustment);
+            }
         }
 
-        private void TintSlider_ValueChangeDelta(object sender, double value)
+        public override void Close() => this.TemperatureAdjustment = null;
+        public override void Reset()
         {
-            this.TemperatureAdjustment.TemperatureAdjustmentItem .Tint = (float)(value / 100);
-            Adjustment.Invalidate?.Invoke();
+            if (this.TemperatureAdjustment == null) return;
+
+            this.TemperatureAdjustment.Reset();
+            this.Invalidate(this.TemperatureAdjustment);
+        }
+
+        public void Invalidate(TemperatureAdjustment adjustment)
+        {
+            this.TemperatureSlider.Value = adjustment.TemperatureAdjustmentItem.Temperature * 100;
+            this.TintSlider.Value = adjustment.TemperatureAdjustmentItem.Tint * 100;
         }
     }
 }

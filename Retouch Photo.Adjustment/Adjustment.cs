@@ -8,16 +8,10 @@ using System.Threading.Tasks;
 
 namespace Retouch_Photo.Adjustments
 {
-    /// <summary>
-    /// 传递Adjustment的委托。
-    /// </summary>
     public delegate void AdjustmentHandler(Adjustment adjustment);
     public delegate void AdjustmentsHandler(IEnumerable<Adjustment> adjustments);
-    
-    /// <summary>
-    /// Adjustment: 调整。
-    /// 给图层提供调整。
-    /// </summary>
+
+    /// <summary> Adjust Layers. </summary>
     public abstract class Adjustment
     {
         //static
@@ -26,11 +20,9 @@ namespace Retouch_Photo.Adjustments
         public AdjustmentType Type;
         public FrameworkElement Icon;
 
-        public AdjustmentItem Item;        
-        /// <summary> 有无参数页面 </summary>
-         public bool HasPage;
+        public AdjustmentItem Item;
+        public bool HasPage;
 
-        /// <summary> 重置参数 </summary>
         public abstract void Reset();
         public abstract ICanvasImage GetRender(ICanvasImage image);
 

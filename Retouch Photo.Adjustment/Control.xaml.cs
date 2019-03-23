@@ -1,6 +1,5 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo.Adjustments
 {
@@ -26,6 +25,9 @@ namespace Retouch_Photo.Adjustments
         public Control()
         {
             this.InitializeComponent();
+
+            this.EditButton.Tapped += (s, e) => this.Edit?.Invoke(this.Adjustment);
+            this.RemoveButton.Tapped += (s, e) => this.Remove?.Invoke(this.Adjustment); 
         }
 
         //Converter
@@ -33,7 +35,7 @@ namespace Retouch_Photo.Adjustments
         {
             if (adjustment == null) return Visibility.Collapsed;
 
-            return adjustment.HasPage? Visibility.Visible: Visibility.Collapsed;
+            return adjustment.HasPage ? Visibility.Visible : Visibility.Collapsed;
         }
         public object AdjustmentNullConverter(Adjustment adjustment)
         {
@@ -43,10 +45,5 @@ namespace Retouch_Photo.Adjustments
         }
 
 
-        
-        private void AdjustmentButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Edit?.Invoke(this.Adjustment);
-        private void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e) => this.Remove?.Invoke(this.Adjustment);
-
-
-    }
+   }
 }
