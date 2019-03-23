@@ -599,6 +599,11 @@
     <Content Include="Assets\TwitterHeart.json" />
     <Content Include="Assets\Walkthrough.json" />
     <Content Include="Assets\WeAccept.json" />
+    <Content Include="Icons\2Logo-Big.png" />
+    <Content Include="Icons\2Logo-Medium.png" />
+    <Content Include="Icons\2Logo-Small.png" />
+    <Content Include="Icons\2Logo-Wide.png" />
+    <Content Include="Icons\2Logo.png" />
     <Content Include="Json\Filter.json" />
     <None Include="Json\FilterOriginal.json" />
     <None Include="Retouch Photo_TemporaryKey.pfx" />
@@ -651,11 +656,6 @@
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
-    <Content Include="Icons\Logo-Big.png" />
-    <Content Include="Icons\Logo-Medium.png" />
-    <Content Include="Icons\Logo-Small.png" />
-    <Content Include="Icons\Logo-Wide.png" />
-    <Content Include="Icons\Logo.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
