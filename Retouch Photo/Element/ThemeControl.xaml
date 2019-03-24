@@ -1,0 +1,43 @@
+﻿<UserControl
+    x:Class="配色pro.Controls.ThemeControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:配色pro.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="50">
+
+    <Grid >
+        <Grid.Resources>
+            <Storyboard  x:Name="DarkStoryboar" >
+                <DoubleAnimation Duration="0:0:0.2" From="0" To="-30" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"    Storyboard.TargetName="LightIcon" d:IsOptimized="True"/>
+                <DoubleAnimation Duration="0:0:0.2" From="1" To="0" Storyboard.TargetProperty="Opacity"    Storyboard.TargetName="LightIcon" d:IsOptimized="True"/>
+                <DoubleAnimation Duration="0:0:0.2" From="30" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"    Storyboard.TargetName="NightIcon" d:IsOptimized="True"/>
+                <DoubleAnimation Duration="0:0:0.2" From="0" To="1" Storyboard.TargetProperty="Opacity"    Storyboard.TargetName="NightIcon" d:IsOptimized="True"/>
+            </Storyboard>
+            <Storyboard  x:Name="LightStoryboard" >
+                <DoubleAnimation Duration="0:0:0.2" From="30" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"    Storyboard.TargetName="LightIcon" d:IsOptimized="True"/>
+                <DoubleAnimation Duration="0:0:0.2" From="0" To="1" Storyboard.TargetProperty="Opacity"    Storyboard.TargetName="LightIcon" d:IsOptimized="True"/>
+                <DoubleAnimation Duration="0:0:0.2" From="0" To="-30" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"    Storyboard.TargetName="NightIcon" d:IsOptimized="True"/>
+                <DoubleAnimation Duration="0:0:0.2" From="1" To="0" Storyboard.TargetProperty="Opacity"    Storyboard.TargetName="NightIcon" d:IsOptimized="True"/>
+            </Storyboard>
+        </Grid.Resources>
+
+        <FontIcon x:Name="LightIcon" Opacity="0" FontSize="22" Glyph="&#xE706;" Foreground="Black" VerticalAlignment="Center" >
+            <FontIcon.RenderTransform>
+                <CompositeTransform TranslateY="0"/>
+            </FontIcon.RenderTransform>
+        </FontIcon>
+
+        <FontIcon x:Name="NightIcon" Opacity="0" FontSize="22" Glyph="&#xEC46;" Foreground="White" VerticalAlignment="Center" >
+            <FontIcon.RenderTransform>
+                <CompositeTransform TranslateY="0"/>
+            </FontIcon.RenderTransform>
+        </FontIcon>
+
+
+        <TextBlock x:Name="uuuuu" FontFamily="{ThemeResource ContentControlThemeFontFamily}"/>
+    </Grid>
+</UserControl>

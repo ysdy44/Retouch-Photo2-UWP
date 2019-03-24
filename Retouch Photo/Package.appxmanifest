@@ -15,9 +15,9 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Retouch_Photo.App">
-      <uap:VisualElements DisplayName="Retouch Photo" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Retouch Photo" BackgroundColor="#191919">
+      <uap:VisualElements DisplayName="Retouch Photo2" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Retouch Photo2" BackgroundColor="#191919">
         <uap:LockScreen Notification="badge" BadgeLogo="Assets\BadgeLogo.png" />
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="Retouch Photo" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="Retouch Photo2" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#191919" />
       </uap:VisualElements>

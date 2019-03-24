@@ -209,6 +209,9 @@
     <Compile Include="Element\FolderDialog.xaml.cs">
       <DependentUpon>FolderDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Element\ThemeControl.xaml.cs">
+      <DependentUpon>ThemeControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Library\Adjustment.cs" />
     <Compile Include="Library\CurveNodes.cs" />
     <Compile Include="Library\Debug.cs" />
@@ -820,6 +823,10 @@
     <Page Include="Element\FolderDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Element\ThemeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\DrawLayout.xaml">
       <SubType>Designer</SubType>

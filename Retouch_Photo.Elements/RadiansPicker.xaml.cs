@@ -16,12 +16,13 @@ namespace Retouch_Photo.Elements
         /// <summary> (x , y) to α⁰ </summary>
         public static float VectorToRadians(Vector2 vector) => (float)Math.Atan2(vector.Y, vector.X);
         /// <summary> α⁰ to (x , y) </summary>
-        public static Vector2 RadiansToVector(float radians, float radius, Vector2 center)=> new Vector2((float)Math.Cos(radians), (float)Math.Sin(radians)) * radius + center;
+        public static Vector2 RadiansToVector(float radians, float radius, Vector2 center) => new Vector2((float)Math.Cos(radians), (float)Math.Sin(radians)) * radius + center;
 
 
         //Delegate   
         public delegate void RadiansChangeHandler(float radians);
         public event RadiansChangeHandler RadiansChange;
+
         private float radians;
         public float Radians
         {
@@ -39,7 +40,7 @@ namespace Retouch_Photo.Elements
             set
             {
                 this.Arrow = RadiansPicker.RadiansToVector(value, this.Radius, this.Center);
-                
+
                 if (Math.Abs(value - this.radians) > this.FiveDegrees)
                 {
                     float integer = this.FiveInteger(value);
@@ -50,7 +51,7 @@ namespace Retouch_Photo.Elements
                 }
             }
         }
-        
+
         private Vector2 arrow;
         private Vector2 Arrow
         {
@@ -76,7 +77,7 @@ namespace Retouch_Photo.Elements
                 this.center = value;
             }
         }
-        
+
         private float radius;
         private float Radius
         {
@@ -88,51 +89,42 @@ namespace Retouch_Photo.Elements
                 this.radius = value;
             }
         }
-        
+
+        //Manipulation
+        Vector2 Vector;
+        bool IsRadians = false;
 
         public RadiansPicker()
         {
             this.InitializeComponent();
 
-            this.Loaded += (s, e) => this.Arrow = RadiansPicker.RadiansToVector(this.Radians, this.Radius, this.Center); 
+            this.Loaded += (s, e) => this.Arrow = RadiansPicker.RadiansToVector(this.Radians, this.Radius, this.Center);
             this.SizeChanged += (s, e) =>
             {
-                this.Radius = (float)Math.Min(e.NewSize.Width, e.NewSize.Height) / 2 ;
+                this.Radius = (float)Math.Min(e.NewSize.Width, e.NewSize.Height) / 2;
                 this.Center = new Vector2((float)(e.NewSize.Width / 2), (float)(e.NewSize.Height / 2));
                 this.Arrow = RadiansPicker.RadiansToVector(this.Radians, this.Radius, this.Center);
             };
+
+            //Manipulation
+            this.RootGrid.ManipulationMode = ManipulationModes.All;
+            this.RootGrid.ManipulationStarted += (sender, e) =>
+            {
+                this.Vector = e.Position.ToVector2() - this.Center;
+
+                this.IsRadians = this.Vector.Length() < this.Radius;
+
+                if (!this.IsRadians) return;
+                this._Radians = RadiansPicker.VectorToRadians(this.Vector);
+            };
+            this.RootGrid.ManipulationDelta += (sender, e) =>
+            {
+                this.Vector += e.Delta.Translation.ToVector2();
+
+                if (!this.IsRadians) return;
+                this._Radians = RadiansPicker.VectorToRadians(this.Vector);
+            };
+            this.RootGrid.ManipulationCompleted += (sender, e) => { };
         }
-        
-
-
-        #region Manipulation
-        
-
-        Vector2 Vector;
-        bool IsRadians = false;
-
-        private void CanvasControl_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
-        {
-            this.Vector = e.Position.ToVector2() - this.Center;
-
-            this.IsRadians = this.Vector.Length() < this.Radius;
-
-            if (!this.IsRadians) return;
-            this._Radians = RadiansPicker.VectorToRadians(this.Vector);
-        }
-        private void CanvasControl_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
-        {
-            this.Vector += e.Delta.Translation.ToVector2();
-
-            if (!this.IsRadians) return;
-            this._Radians = RadiansPicker.VectorToRadians(this.Vector);
-        }
-        private void CanvasControl_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e){}
-
-
-        #endregion
-
-
     }
 }
-

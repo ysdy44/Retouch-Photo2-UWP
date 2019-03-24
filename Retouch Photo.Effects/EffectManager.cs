@@ -13,6 +13,7 @@ namespace Retouch_Photo.Effects
 
         public GaussianBlurEffectItem GaussianBlurEffectItem = new GaussianBlurEffectItem();
         public DirectionalBlurEffectItem DirectionalBlurEffectItem = new DirectionalBlurEffectItem();
+        public SharpenEffectItem SharpenEffectItem = new SharpenEffectItem();
         public OuterShadowEffectItem OuterShadowEffectItem = new OuterShadowEffectItem();
 
         public OutlineEffectItem OutlineEffectItem = new OutlineEffectItem();
@@ -26,6 +27,7 @@ namespace Retouch_Photo.Effects
         {
             if (manager.GaussianBlurEffectItem.IsOn) image = manager.GaussianBlurEffectItem.GetRender(image);
             if (manager.DirectionalBlurEffectItem.IsOn) image = manager.DirectionalBlurEffectItem.GetRender(image);
+            if (manager.SharpenEffectItem.IsOn) image = manager.SharpenEffectItem.GetRender(image);
             if (manager.OuterShadowEffectItem.IsOn) image = manager.OuterShadowEffectItem.GetRender(image);
 
             if (manager.OutlineEffectItem.IsOn) image = manager.OutlineEffectItem.GetRender(image);

@@ -7,7 +7,8 @@
         GaussianBlur,
         /// <summary> 定向模糊 </summary>
         DirectionalBlur,
-
+        /// <summary> 锐化ummary>
+        Sharpen,
         /// <summary> 外部投影 </summary>
         OuterShadow,
 

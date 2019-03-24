@@ -109,6 +109,9 @@
     <Compile Include="Control.xaml.cs">
       <DependentUpon>Control.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SharpenControl.xaml.cs">
+      <DependentUpon>SharpenControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EffectItem.cs" />
     <Compile Include="EffectManager.cs" />
     <Compile Include="Controls\DirectionalBlurControl.xaml.cs">
@@ -138,6 +141,7 @@
     <Compile Include="Items\GaussianBlurEffectItem.cs" />
     <Compile Include="Items\OuterShadowEffectItem.cs" />
     <Compile Include="Items\OutlineEffectItem.cs" />
+    <Compile Include="Items\SharpenEffectItem.cs" />
     <Compile Include="Items\StraightenEffectItem.cs" />
     <Compile Include="Pages\DirectionalBlurPage.xaml.cs">
       <DependentUpon>DirectionalBlurPage.xaml</DependentUpon>
@@ -153,6 +157,9 @@
     </Compile>
     <Compile Include="Pages\OutlinePage.xaml.cs">
       <DependentUpon>OutlinePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SharpenPage.xaml.cs">
+      <DependentUpon>SharpenPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\StraightenPage.xaml.cs">
       <DependentUpon>StraightenPage.xaml</DependentUpon>
@@ -194,6 +201,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\SharpenControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\StraightenControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -221,6 +232,10 @@
     <Page Include="Pages\OutlinePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\SharpenPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\StraightenPage.xaml">
       <Generator>MSBuild:Compile</Generator>

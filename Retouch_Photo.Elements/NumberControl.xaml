@@ -17,13 +17,13 @@
                 <ColumnDefinition Width="1"/>
                 <ColumnDefinition Width="1*" MinWidth="22" MaxWidth="30"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="TextBox" FontSize="14" TextWrapping="NoWrap" Width="Auto" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" TextChanged="TextBox_TextChanged"/>
+            <TextBox x:Name="TextBox" FontSize="14" TextWrapping="NoWrap" Width="Auto" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Border Grid.Column="1" Background="{ThemeResource AppBorderBrush}"/>
             <Button Grid.Column="2"  Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  BorderThickness="0" Background="Transparent">
                 <FontIcon Glyph="&#xE878;" FontSize="14" FontFamily="Segoe MDL2 Assets"/>
                 <Button.Flyout>
                     <Flyout FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                        <Slider x:Name="Slider" Width="400" TickFrequency="25" TickPlacement="Inline" Style="{StaticResource AppOpacitySliderStyle}" ValueChanged="Slider_ValueChanged"/>
+                        <Slider x:Name="Slider" Width="400" TickFrequency="25" TickPlacement="Inline" Style="{StaticResource AppOpacitySliderStyle}"/>
                     </Flyout>
                 </Button.Flyout>
             </Button>

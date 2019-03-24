@@ -5,16 +5,17 @@ namespace Retouch_Photo.Element.AppbarControls
 {
     public sealed partial class AppBarControlButton : UserControl
     {         
+        //delegate
+        public event TappedEventHandler Tap;
+
+        //Content
         public string Glyph { get => this.FontIcon.Glyph; set => this.FontIcon.Glyph = value; }
         public string Text { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
-        public event TappedEventHandler Tap;
 
         public AppBarControlButton()
         {
             this.InitializeComponent();
+            this.Button.Tapped += (sender, e) => this.Tap?.Invoke(sender, e);
         }
-
-        private void Button_Tapped(object sender, TappedRoutedEventArgs e) => this.Tap(sender, e);
-
     }
 }

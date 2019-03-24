@@ -1,42 +1,34 @@
 ﻿using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Retouch_Photo.Elements
 {
     public sealed partial class NumberControl : UserControl
-    {
-        double value;
+    { 
+      public  double Value
+        {
+            get => this.Slider.Value;
+            set => this.Slider.Value=value;
+        }
 
         public NumberControl()
         {
             this.InitializeComponent();
-        }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            this.ToNumber(this.TextBox.Text);
-        }
-        private void ToNumber(string text)
-        {
-            if (this.IsNumeric(text))
+            this.TextBox.TextChanged += (s, e) =>
             {
-                this.value = double.Parse(text);
-                this.Slider.Value = this.value;
-            }
+                double? valueNull = this.ToNumber(this.TextBox.Text);
+                if (valueNull is double value)
+                {
+                    this.Value = value;
+                }
+            };
+            this.Slider.ValueChanged += (s, e) =>
+            {
+                this.TextBox.Text = e.NewValue.ToString();
+            };
         }
 
-
-        public bool IsNumeric(string str)
-        {
-            return int.TryParse(str, out int _integer);
-        }
-
-
-
-        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-            this.value = e.NewValue;
-            this.TextBox.Text = this.value.ToString();
-        }
+        public double? ToNumber(string text) => this.IsNumeric(text) ? double.Parse(text) : (double?)null;
+        public bool IsNumeric(string str) => int.TryParse(str, out int _integer);
     }
 }

@@ -31,6 +31,7 @@ namespace Retouch_Photo.Effects
         {
             new GaussianBlurPage(),
             new DirectionalBlurPage(),
+            new SharpenPage(),
             new OuterShadowPage(),
 
             new OutlinePage(),

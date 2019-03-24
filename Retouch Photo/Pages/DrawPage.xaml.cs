@@ -67,6 +67,5 @@ namespace Retouch_Photo.Pages
         protected override void OnNavigatedFrom(NavigationEventArgs e)//当前页面不再成为活动页面
         {
         }
-
     }
 }
