@@ -1,94 +1,87 @@
-﻿using Retouch_Photo.Effects.Models;
-using Windows.UI;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Input;
+﻿using Retouch_Photo.Effects.Controls;
 using Retouch_Photo.Effects.Items;
 
 namespace Retouch_Photo.Effects.Pages
 {
-    public sealed partial class OuterShadowPage : Page
+    public sealed partial class OuterShadowPage : EffectPage
     {
-        
-        #region DependencyProperty
-
-        public EffectManager EffectManager
-        {
-            get { return (EffectManager)GetValue(EffectManagerProperty); }
-            set { SetValue(EffectManagerProperty, value); }
-        }
-        public static readonly DependencyProperty EffectManagerProperty = DependencyProperty.Register(nameof(EffectManager), typeof(EffectManager), typeof(EffectManager), new PropertyMetadata(null, (sender, e) =>
-        {
-            OuterShadowPage con = (OuterShadowPage)sender;
-
-            if (e.NewValue is EffectManager effectManager)
-            {
-                OuterShadowEffectItem item = effectManager.OuterShadowEffectItem;
-
-                con.RadiusSlider.Value = item.Radius;
-                con.OpacitySlider.Value = item.Opacity * 100.0;
-                con.OffsetSlider.Value = item.Offset;
-                con.AnglePicker.Radians = item.Angle;
-                con.SolidColorBrush.Color = item.Color;
-            }
-        }));
-
-        #endregion
-
-
         public OuterShadowPage()
         {
             this.InitializeComponent();
+            base.Type = EffectType.OuterShadow;
+            base.Control = new Control()
+            {
+                Icon = new OuterShadowControl()
+            };
+
+            this.RadiusSlider.ValueChanged += (s, e) =>
+            {
+                if (base.EffectManager == null) return;
+
+                base.EffectManager.OuterShadowEffectItem.Radius = (float)e.NewValue;
+                EffectManager.Invalidate?.Invoke();
+            };
+            this.OpacitySlider.ValueChanged += (s, e) =>
+            {
+                if (base.EffectManager == null) return;
+
+                base.EffectManager.OuterShadowEffectItem.Opacity = (float)(e.NewValue / 100.0);
+                EffectManager.Invalidate?.Invoke();
+            };
+            this.OffsetSlider.ValueChanged += (s, e) =>
+            {
+                if (base.EffectManager == null) return;
+
+                base.EffectManager.OuterShadowEffectItem.Offset = (float)e.NewValue;
+                EffectManager.Invalidate?.Invoke();
+            };
+            this.AnglePicker.RadiansChange += (radians) =>
+            {
+                if (base.EffectManager == null) return;
+
+                base.EffectManager.OuterShadowEffectItem.Angle = radians;
+                EffectManager.Invalidate?.Invoke();
+            };
+            this.ColorButton.Tapped += (s, e) =>
+            {
+                this.ColorFlyout.ShowAt(this.ColorButton);
+                this.ColorPicker.Color = base.EffectManager.OuterShadowEffectItem.Color;
+            };
+            this.ColorPicker.ColorChange += (s, value) =>
+            {
+                this.SolidColorBrush.Color = value;
+
+                if (base.EffectManager == null) return;
+
+                base.EffectManager.OuterShadowEffectItem.Color = value;
+                EffectManager.Invalidate?.Invoke();
+            };
         }
 
-        private void RadiusSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        //@override
+        public override bool GetIsOn(EffectManager manager) => manager.OuterShadowEffectItem.IsOn;
+        public override void SetIsOn(EffectManager manager, bool isOn) => manager.OuterShadowEffectItem.IsOn = isOn;
+
+        public override void SetManager(EffectManager manager)
         {
-            if (this.EffectManager == null) return;
-
-            this.EffectManager.OuterShadowEffectItem.Radius = (float)e.NewValue;
-            Effect.Invalidate();
+            base.EffectManager = manager;
+            this.Invalidate(base.EffectManager.OuterShadowEffectItem);
         }
-
-        private void OpacitySlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        public override void Reset()
         {
-            if (this.EffectManager == null) return;
+            if (base.EffectManager == null) return;
 
-            this.EffectManager.OuterShadowEffectItem.Opacity = (float)(e.NewValue / 100.0);
-            Effect.Invalidate();
+            OuterShadowEffectItem item = base.EffectManager.OuterShadowEffectItem;
+            item.Reset();
+            this.Invalidate(item);
         }
-
-
-        private void OffsetSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        public void Invalidate(OuterShadowEffectItem item)
         {
-            if (this.EffectManager == null) return;
-
-            this.EffectManager.OuterShadowEffectItem.Offset = (float)e.NewValue;
-            Effect.Invalidate();
+            this.RadiusSlider.Value = item.Radius;
+            this.OpacitySlider.Value = item.Opacity * 100.0;
+            this.OffsetSlider.Value = item.Offset;
+            this.AnglePicker.Radians = item.Angle;
+            this.SolidColorBrush.Color = item.Color;
         }
-
-        private void AnglePicker_AngleChange(float radians)
-        {
-            if (this.EffectManager == null) return;
-            
-            this.EffectManager.OuterShadowEffectItem.Angle = radians;
-            Effect.Invalidate();
-        }
-         
-        private void ColorButton_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            this.ColorFlyout.ShowAt(this.ColorButton);
-            this.ColorPicker.Color = this.EffectManager.OuterShadowEffectItem.Color;
-        }
-        private void ColorPicker_ColorChange(object sender, Color value)
-        {
-            this.SolidColorBrush.Color = value;
-
-            if (this.EffectManager == null) return;
-
-            this.EffectManager.OuterShadowEffectItem.Color = value;
-            Effect.Invalidate();
-        }
-
     }
 }

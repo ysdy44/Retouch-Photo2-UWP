@@ -16,21 +16,8 @@ namespace Retouch_Photo.Adjustments.Models
             base.Type = AdjustmentType.Contrast;
             base.Icon = new ContrastControl();
             base.Item = this.ContrastAdjustmentItem;
+            base.Item.Reset();
             base.HasPage = true;
-            this.Reset();
-        }
-
-        public override void Reset()
-        {
-            this.ContrastAdjustmentItem.Contrast = 0.0f;
-        }
-        public override ICanvasImage GetRender(ICanvasImage image)
-        {
-            return new ContrastEffect
-            {
-                Contrast = this.ContrastAdjustmentItem.Contrast,
-                Source = image
-            };
         }
     }
 }

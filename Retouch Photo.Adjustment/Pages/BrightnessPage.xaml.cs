@@ -57,7 +57,7 @@ namespace Retouch_Photo.Adjustments.Pages
         {
             if (this.BrightnessAdjustment == null) return;
 
-            this.BrightnessAdjustment.Reset();
+            this.BrightnessAdjustment.Item.Reset();
             this.Invalidate(this.BrightnessAdjustment);
         }
 

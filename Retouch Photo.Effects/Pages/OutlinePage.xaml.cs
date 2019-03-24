@@ -1,47 +1,48 @@
-﻿using Retouch_Photo.Effects.Models;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
+﻿using Retouch_Photo.Effects.Controls;
 using Retouch_Photo.Effects.Items;
 
 namespace Retouch_Photo.Effects.Pages
 {
-    public sealed partial class OutlinePage : Page
+    public sealed partial class OutlinePage : EffectPage
     {
-
-        #region DependencyProperty
-
-        public EffectManager EffectManager
-        {
-            get { return (EffectManager)GetValue(EffectManagerProperty); }
-            set { SetValue(EffectManagerProperty, value); }
-        }
-        public static readonly DependencyProperty EffectManagerProperty = DependencyProperty.Register(nameof(EffectManager), typeof(EffectManager), typeof(EffectManager), new PropertyMetadata(null, (sender, e) =>
-        {
-            OutlinePage con = (OutlinePage)sender;
-
-            if (e.NewValue is EffectManager effectManager)
-            {
-                OutlineEffectItem item = effectManager.OutlineEffectItem;
-
-                con.SizeSlider.Value = item.Size;
-            }
-        }));
-
-        #endregion
-
-
         public OutlinePage()
         {
             this.InitializeComponent();
+            base.Type = EffectType.Outline;
+            base.Control = new Control()
+            {
+                Icon = new OutlineControl()
+            };
+
+            this.SizeSlider.ValueChanged += (sender, e) =>
+            {
+                if (base.EffectManager == null) return;
+
+                base.EffectManager.OutlineEffectItem.Size = (int)e.NewValue;
+                EffectManager.Invalidate?.Invoke();
+            };
         }
 
-        private void SizeSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-            if (this.EffectManager == null) return;
+        //@override
+        public override bool GetIsOn(EffectManager manager) => manager.OutlineEffectItem.IsOn;
+        public override void SetIsOn(EffectManager manager, bool isOn) => manager.OutlineEffectItem.IsOn = isOn;
 
-            this.EffectManager.OutlineEffectItem.Size = (int)e.NewValue;
-            Effect.Invalidate();
+        public override void SetManager(EffectManager manager)
+        {
+            base.EffectManager = manager;
+            this.Invalidate(base.EffectManager.OutlineEffectItem);
+        }
+        public override void Reset()
+        {
+            if (base.EffectManager == null) return;
+
+            OutlineEffectItem item = base.EffectManager.OutlineEffectItem;
+            item.Reset();
+            this.Invalidate(item);
+        }
+        public void Invalidate(OutlineEffectItem item)
+        {
+            this.SizeSlider.Value = item.Size;
         }
     }
 }

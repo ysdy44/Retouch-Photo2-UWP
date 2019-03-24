@@ -16,21 +16,8 @@ namespace Retouch_Photo.Adjustments.Models
             base.Type = AdjustmentType.HueRotation;
             base.Icon = new HueRotationControl();
             base.Item = this.HueRotationAdjustmentitem;
+            base.Item.Reset();
             base.HasPage = true;
-            this.Reset();
-        }
-
-        public override void Reset()
-        {
-            this.HueRotationAdjustmentitem.Angle = 0.0f;
-        }
-        public override ICanvasImage GetRender(ICanvasImage image)
-        {
-            return new HueRotationEffect
-            {
-                Angle = this.HueRotationAdjustmentitem.Angle,
-                Source = image
-            };
         }
     }
 }

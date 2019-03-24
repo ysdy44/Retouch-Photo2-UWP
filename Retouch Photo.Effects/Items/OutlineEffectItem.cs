@@ -6,7 +6,7 @@ namespace Retouch_Photo.Effects.Items
 {
     public class OutlineEffectItem : EffectItem
     {
-        private int size = 1;
+        private int size;
         public int Size
         {
             get => this.size;
@@ -21,14 +21,23 @@ namespace Retouch_Photo.Effects.Items
             }
         }
 
-        /// <summary> Dilate and Erode : 扩张与侵蚀</summary>
+        /// <summary> Dilate and Erode </summary>
         MorphologyEffectMode Mode;
         int Width = 1;
         int Height = 1;
 
-        public override ICanvasImage Render(ICanvasImage image)
+        public OutlineEffectItem()
         {
-            return new Microsoft.Graphics.Canvas.Effects.MorphologyEffect
+            this.Reset();
+        }
+
+        public override void Reset()
+        {
+            this.Size = 1;
+        }
+        public override ICanvasImage GetRender(ICanvasImage image)
+        {
+            return new MorphologyEffect
             {
                 Source = image,
                 Mode = this.Mode,

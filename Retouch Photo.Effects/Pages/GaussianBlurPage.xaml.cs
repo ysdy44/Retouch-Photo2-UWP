@@ -1,47 +1,48 @@
-﻿using Retouch_Photo.Effects.Models;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
+﻿using Retouch_Photo.Effects.Controls;
 using Retouch_Photo.Effects.Items;
 
 namespace Retouch_Photo.Effects.Pages
 {
-    public sealed partial class GaussianBlurPage : Page
+    public sealed partial class GaussianBlurPage : EffectPage
     {
-
-        #region DependencyProperty
-
-        public EffectManager EffectManager
-        {
-            get { return (EffectManager)GetValue(EffectManagerProperty); }
-            set { SetValue(EffectManagerProperty, value); }
-        }
-        public static readonly DependencyProperty EffectManagerProperty = DependencyProperty.Register(nameof(EffectManager), typeof(EffectManager), typeof(EffectManager), new PropertyMetadata(null, (sender, e) =>
-        {
-            GaussianBlurPage con = (GaussianBlurPage)sender;
-
-            if (e.NewValue is EffectManager effectManager)
-            {
-                GaussianBlurEffectItem item = effectManager.GaussianBlurEffectItem;
-
-                con.BlurAmountSlider.Value = item.BlurAmount;
-            }
-        }));
-
-        #endregion
-
-
         public GaussianBlurPage()
         {
             this.InitializeComponent();
+            base.Type = EffectType.GaussianBlur;
+            base.Control = new Control()
+            {
+                Icon = new GaussianBlurControl()
+            };
+
+            this.BlurAmountSlider.ValueChanged += (s, e) =>
+            {
+                  if (base.EffectManager == null) return;
+
+                  base.EffectManager.GaussianBlurEffectItem.BlurAmount = (float)e.NewValue;
+                  EffectManager.Invalidate?.Invoke();
+            };
         }
         
-        private void BlurAmountSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        //@override
+        public override bool GetIsOn(EffectManager manager) => manager.GaussianBlurEffectItem.IsOn;
+        public override void SetIsOn(EffectManager manager, bool isOn) => manager.GaussianBlurEffectItem.IsOn = isOn;
+                 
+        public override void SetManager(EffectManager manager)
         {
-            if (this.EffectManager == null) return;
-            
-            this.EffectManager.GaussianBlurEffectItem.BlurAmount = (float)e.NewValue;
-            Effect.Invalidate();
+            base.EffectManager = manager;
+            this.Invalidate(base.EffectManager.GaussianBlurEffectItem);
+        }        
+        public override void Reset()
+        {
+            if (base.EffectManager == null) return;
+
+            GaussianBlurEffectItem item = base.EffectManager.GaussianBlurEffectItem;
+            item.Reset();
+            this.Invalidate(item);
+        }
+        public void Invalidate(GaussianBlurEffectItem item)
+        {
+            this.BlurAmountSlider.Value = item.BlurAmount;
         }
     }
 }

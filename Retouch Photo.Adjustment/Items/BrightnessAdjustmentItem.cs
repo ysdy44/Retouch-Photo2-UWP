@@ -1,4 +1,7 @@
-﻿using Retouch_Photo.Adjustments.Models;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
+using Retouch_Photo.Adjustments.Models;
+using System.Numerics;
 
 namespace Retouch_Photo.Adjustments.Items
 {
@@ -16,9 +19,34 @@ namespace Retouch_Photo.Adjustments.Items
 
         public BrightnessAdjustmentItem() => base.Name = BrightnessAdjustment.Name;
 
+        //@override
         public override Adjustment GetAdjustment() => new BrightnessAdjustment()
         {
             BrightnessAdjustmentItem = this
         };
+        public override void Reset()
+        {
+            this.WhiteLight = 1.0f;
+            this.WhiteDark = 1.0f;
+            this.BlackLight = 1.0f;
+            this.BlackDark = 1.0f;
+        }
+        public override ICanvasImage GetRender(ICanvasImage image)
+        {
+            return new BrightnessEffect
+            {
+                WhitePoint = new Vector2
+                (
+                    x: this.WhiteLight,
+                    y: this.WhiteDark
+                ),
+                BlackPoint = new Vector2
+                (
+                    x: this.BlackDark,
+                    y: this.BlackLight
+                ),
+                Source = image
+            };
+        }
     }
 }

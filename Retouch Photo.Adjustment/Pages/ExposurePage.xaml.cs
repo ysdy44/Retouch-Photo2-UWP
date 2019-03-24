@@ -39,7 +39,7 @@ namespace Retouch_Photo.Adjustments.Pages
         {
             if (this.ExposureAdjustment == null) return;
 
-            this.ExposureAdjustment.Reset();
+            this.ExposureAdjustment.Item.Reset();
             this.Invalidate(this.ExposureAdjustment);
         }
 

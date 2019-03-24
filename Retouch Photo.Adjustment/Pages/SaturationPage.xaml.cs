@@ -39,7 +39,7 @@ namespace Retouch_Photo.Adjustments.Pages
         {
             if (this.SaturationAdjustment == null) return;
 
-            this.SaturationAdjustment.Reset();
+            this.SaturationAdjustment.Item.Reset();
             this.Invalidate(this.SaturationAdjustment);
         }
 

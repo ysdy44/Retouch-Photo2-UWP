@@ -6,17 +6,17 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo.Adjustments
 {
-    /// <summary> An <see cref = "Adjustment"/> corresponds to a <see cref = "AdjustmentPage" /> </summary>
+    /// <summary> An <see cref = "Adjustment"/> corresponds to a <see cref = "AdjustmentPage" />. </summary>
     public abstract  class AdjustmentPage : Page
     {
         public AdjustmentType Type;
         public FrameworkElement Icon;
 
-        /// <summary> Return a new <see cref = "Adjustment"/></summary>
+        /// <summary> Return a new <see cref = "Adjustment"/>. </summary>
         public abstract Adjustment GetNewAdjustment();
-        /// <summary> Return the current <see cref = "Adjustment"/></summary>
+        /// <summary> Return the current <see cref = "Adjustment"/>. </summary>
         public abstract Adjustment GetAdjustment();
-        /// <summary> Assignment the current <see cref = "Adjustment"/></summary>
+        /// <summary> Assignment the current <see cref = "Adjustment"/>. </summary>
         public abstract void SetAdjustment(Adjustment adjustment);
 
         /// <summary> Call this method, when the <see cref = "AdjustmentPage" /> navigated. </summary>

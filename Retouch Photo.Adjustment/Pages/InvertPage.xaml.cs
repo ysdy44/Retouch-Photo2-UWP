@@ -32,7 +32,7 @@ namespace Retouch_Photo.Adjustments.Pages
         {
             if (this.InvertAdjustment == null) return;
 
-            this.InvertAdjustment.Reset();
+            this.InvertAdjustment.Item.Reset();
             this.Invalidate(this.InvertAdjustment);
         }
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
 
 namespace Retouch_Photo.Effects.Items
 {
@@ -7,9 +8,19 @@ namespace Retouch_Photo.Effects.Items
         public float BlurAmount;
         public float Angle;
 
-        public override ICanvasImage Render(ICanvasImage image)
+        public DirectionalBlurEffectItem()
         {
-            return new Microsoft.Graphics.Canvas.Effects.DirectionalBlurEffect
+            this.Reset();
+        }
+
+        public override void Reset()
+        {
+            this.BlurAmount = 0;
+            this.Angle = 0;
+        }
+        public override ICanvasImage GetRender(ICanvasImage image)
+        {
+            return new DirectionalBlurEffect
             {
                 Source = image,
                 BlurAmount = this.BlurAmount,

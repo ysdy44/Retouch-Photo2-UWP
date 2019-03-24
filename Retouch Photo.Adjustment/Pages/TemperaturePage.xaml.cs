@@ -45,7 +45,7 @@ namespace Retouch_Photo.Adjustments.Pages
         {
             if (this.TemperatureAdjustment == null) return;
 
-            this.TemperatureAdjustment.Reset();
+            this.TemperatureAdjustment.Item.Reset();
             this.Invalidate(this.TemperatureAdjustment);
         }
 

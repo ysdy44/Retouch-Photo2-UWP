@@ -39,7 +39,7 @@ namespace Retouch_Photo.Adjustments.Pages
         {
             if (this.ContrastAdjustment == null) return;
 
-            this.ContrastAdjustment.Reset();
+            this.ContrastAdjustment.Item.Reset();
             this.Invalidate(this.ContrastAdjustment);
         }
 

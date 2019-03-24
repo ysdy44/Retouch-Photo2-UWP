@@ -17,33 +17,8 @@ namespace Retouch_Photo.Adjustments.Models
             base.Type = AdjustmentType.Brightness;
             base.Icon = new BrightnessControl();
             base.Item = this.BrightnessAdjustmentItem;
+            base.Item.Reset();
             base.HasPage = true;
-            this.Reset();
-        }
-
-        public override void Reset()
-        {
-            this.BrightnessAdjustmentItem.WhiteLight = 1.0f;
-            this.BrightnessAdjustmentItem.WhiteDark = 1.0f;
-            this.BrightnessAdjustmentItem.BlackLight = 1.0f;
-            this.BrightnessAdjustmentItem.BlackDark = 1.0f;
-        }
-        public override ICanvasImage GetRender(ICanvasImage image)
-        {
-            return new BrightnessEffect
-            {
-                WhitePoint = new Vector2
-                (
-                    x: this.BrightnessAdjustmentItem.WhiteLight,
-                    y: this.BrightnessAdjustmentItem.WhiteDark
-                ),
-                BlackPoint = new Vector2
-                (
-                    x: this.BrightnessAdjustmentItem.BlackDark,
-                    y: this.BrightnessAdjustmentItem.BlackLight
-                ),
-                Source = image
-            };
         }
     }
 }

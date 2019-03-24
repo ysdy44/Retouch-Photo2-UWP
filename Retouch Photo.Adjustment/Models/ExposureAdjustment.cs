@@ -16,22 +16,9 @@ namespace Retouch_Photo.Adjustments.Models
             base.Type = AdjustmentType.Exposure;
             base.Icon = new ExposureControl();
             base.Item = this.ExposureAdjustmentItem;
+            base.Item.Reset();
             base.HasPage = true;
-            this.Reset();
         }
-
-        public override void Reset()
-        {
-            this.ExposureAdjustmentItem.Exposure = 0.0f;
-        }
-        public override ICanvasImage GetRender(ICanvasImage image)
-        {
-            return new ExposureEffect
-            {
-                Exposure=this.ExposureAdjustmentItem.Exposure,
-                Source = image
-            };
-        } 
     }
 }
 

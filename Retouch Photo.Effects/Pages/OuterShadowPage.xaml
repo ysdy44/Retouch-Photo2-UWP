@@ -1,31 +1,31 @@
-﻿<Page
+﻿<effects:EffectPage
     x:Class="Retouch_Photo.Effects.Pages.OuterShadowPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:element="using:Retouch_Photo.Elements"
-    xmlns:pic="using:Retouch_Photo.Pickers"
+    xmlns:pic="using:Retouch_Photo.Pickers"   
+    xmlns:effects="using:Retouch_Photo.Effects"
+
     mc:Ignorable="d"
-    d:DesignHeight="400"
-    d:DesignWidth="200"
     >
 
-    <Page.Resources>
+    <effects:EffectPage.Resources>
         <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <pic:ColorPicker x:Name="ColorPicker" Width="200" ColorChange="ColorPicker_ColorChange"/>
+            <pic:ColorPicker x:Name="ColorPicker" Width="200"/>
         </Flyout>
-    </Page.Resources>
+    </effects:EffectPage.Resources>
 
     <StackPanel >
         <TextBlock Text="Radius" Style="{StaticResource AppTextBlock}"/>
-        <Slider x:Name="RadiusSlider" Minimum="0" Maximum="100" ValueChanged="RadiusSlider_ValueChanged" Style="{ThemeResource AppOpacitySliderStyle}"/>
+        <Slider x:Name="RadiusSlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
 
         <TextBlock Text="Opacity" Style="{StaticResource AppTextBlock}"/>
-        <Slider x:Name="OpacitySlider" Minimum="0" Maximum="100" ValueChanged="OpacitySlider_ValueChanged" Style="{ThemeResource AppOpacitySliderStyle}"/>
+        <Slider x:Name="OpacitySlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
 
         <TextBlock Text="Offset" Style="{StaticResource AppTextBlock}"/>
-        <Slider x:Name="OffsetSlider" Minimum="0" Maximum="100" ValueChanged="OffsetSlider_ValueChanged" Style="{ThemeResource AppOpacitySliderStyle}"/>
+        <Slider x:Name="OffsetSlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -41,10 +41,10 @@
             <element:RadiansPicker x:Name="AnglePicker" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"
                                BorderBrush="{ThemeResource AppBorderBrush}"
                                Background="{ThemeResource AppBackground}"
-                               RadiansChange="AnglePicker_AngleChange"/>
+                               />
 
             <TextBlock Grid.Column="1" Grid.Row="0" Text="Color" Style="{StaticResource AppTextBlock}"/>
-            <Border x:Name="ColorButton" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource AppCircleBorderStyle}" Tapped="ColorButton_Tapped">
+            <Border x:Name="ColorButton" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource AppCircleBorderStyle}">
                 <Border.Background>
                     <SolidColorBrush  x:Name="SolidColorBrush"/>
                 </Border.Background>
@@ -53,4 +53,4 @@
         </Grid>
         
     </StackPanel>
-</Page>
+</effects:EffectPage>

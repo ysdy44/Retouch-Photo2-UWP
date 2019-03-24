@@ -248,7 +248,7 @@ namespace Retouch_Photo.Adjustments.Pages
         {
             if (this.GammaTransferAdjustment == null) return;
 
-            this.GammaTransferAdjustment.Reset();
+            this.GammaTransferAdjustment.Item.Reset();
             this.Invalidate(this.GammaTransferAdjustment);
         }
 

@@ -1,62 +1,61 @@
-﻿using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo.Effects;
-using Retouch_Photo.Effects.Models;
+﻿using Retouch_Photo.Effects;
 using Retouch_Photo.Models;
 using Retouch_Photo.ViewModels;
-using System.Collections.Generic;
+using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-
 namespace Retouch_Photo.Controls
 {
+    public enum EffectsControlState
+    {
+        None,
+        Disable,
+        Effects,
+        Edit
+    }
+
     public sealed partial class EffectsControl : UserControl
     {
 
         //ViewModel
         DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
-                
-        public bool FrameVisibility
+
+        private EffectsControlState state;
+        public EffectsControlState State
         {
+            get => this.state;
             set
             {
-                this.BackButton.Visibility =
-                this.ResetButton.Visibility =
-                this.Frame.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
+                this.ItemsControl.Visibility = (value == EffectsControlState.Edit) ? Visibility.Collapsed : Visibility.Visible;
+                this.BackButton.Visibility = this.ResetButton.Visibility = this.Frame.Visibility = (value == EffectsControlState.Edit) ? Visibility.Visible : Visibility.Collapsed;
 
-                this.ItemsControl.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
-            }
-        }
-        
-        private Effect effect;
-        public Effect Effect
-        {
-            get => this.effect;
-            set
-            {
-                if (value == null) return;
-                if (this.Layer == null) return;
+                if (value == EffectsControlState.Disable)
+                {
+                    //Controls foreach
+                    foreach (var page in EffectPage.PageList)
+                    {
+                        page.Control.Button.IsEnabled =
+                        page.Control.ToggleSwitch.IsEnabled = false;
+                    }
+                }
 
-                value.SetPage(this.Layer.EffectManager);
-
-                this.Frame.Child = value.Page;
-                this.FrameVisibility = true;
-
-                this.effect = value;
+                this.state = value;
             }
         }
 
-        List<Effect> Effects = new List<Effect>
+        private EffectPage page;
+        public EffectPage Page
         {
-            new Retouch_Photo.Effects.Models.GaussianBlurEffect(),
-            new Retouch_Photo.Effects.Models.DirectionalBlurEffect(),
-            new Retouch_Photo.Effects.Models.OuterShadowEffect(),
+            get => this.page;
+            set
+            {
+                this.Frame.Child = value;
 
-            new Retouch_Photo.Effects.Models.OutlineEffect(),
+                this.page = value;
+            }
+        }
 
-            new Retouch_Photo.Effects.Models.EmbossEffect(),
-            new Retouch_Photo.Effects.Models.StraightenEffect(),
-        };
 
         #region DependencyProperty
 
@@ -72,85 +71,95 @@ namespace Retouch_Photo.Controls
 
             if (e.NewValue is Layer layer)
             {
-                if (e.OldValue is Layer oldLayer)
-                {
-                    con.Frame.Child = null;
-                    con.FrameVisibility = false;
-                }
-
-                foreach (var effect in con.Effects)
-                {
-                    EffectItem effectItem = effect.GetItem(layer.EffectManager);
-                    effect.IsOn = effectItem.IsOn;
-                }
-                con.IsEnabled = true;
-
+                con.Invalidate(layer.EffectManager);
             }
             else
             {
-                con.IsEnabled = false;
-
-                con.Frame.Child = null;
-                con.FrameVisibility = false;
+                con.State = EffectsControlState.Disable;
             }
         }));
 
         #endregion
-   
+
 
         public EffectsControl()
         {
             this.InitializeComponent();
+            this.State = EffectsControlState.Disable;
+            this.ItemsControl.ItemsSource = from item in EffectPage.PageList select item.Control;
 
-            this.IsEnabled =
-            this.FrameVisibility = false;
-            this.ItemsControl.ItemsSource = this.Effects;
+            //Effect
+            Retouch_Photo.Effects.EffectManager.Invalidate = () => this.ViewModel.Invalidate();
 
             //Button
-            this.BackButton.Tapped += (sender, e) => this.Clear();
+            this.BackButton.Tapped += (sender, e) => this.Close();
             this.ResetButton.Tapped += (sender, e) => this.Reset();
+
+            //Controls foreach
+            foreach (var page in EffectPage.PageList)
+            {
+                page.Control.Button.Tapped += (s, e) => this.Edit(page);
+                page.Control.ToggleSwitch.Toggled += (s, e) => this.Togge(page);
+            }
         }
 
 
-        //Effect
-        private void EffectControl_EffectToggle(Effect effect) => this .Toggle(effect);
-        private void EffectControl_EffectTapped(Effect effect) => this.Effect = effect;
-
-
-        /// <summary> Toggle Effect's IsOn. </summary>
-        private void Toggle(Effect effect)
+        /// <summary> Togge the Effect. </summary>
+        public void Togge(EffectPage page)
         {
             if (this.Layer == null) return;
+            if (this.Layer.EffectManager == null) return;
 
-
-            bool value = effect.ToggleSwitchIsOn;
-
-            effect.IsOn = value;
-
-            EffectItem effectItem = effect.GetItem(this.Layer.EffectManager);
-            effectItem.IsOn = value;
-
+            bool isOn = page.Control.ToggleSwitch.IsOn;
+            page.Control.Button.IsEnabled = isOn;
+            page.SetIsOn(this.Layer.EffectManager, isOn);
 
             this.ViewModel.Invalidate();
         }
-        
+        /// <summary> Edit the Effect. </summary>
+        public void Edit(EffectPage page)
+        {
+            if (page == null) return;
+            if (this.Layer == null) return;
+            if (this.Layer.EffectManager == null) return;
 
+            this.Page = page;
+            this.Page.SetManager(this.Layer.EffectManager);
+
+            this.State = EffectsControlState.Edit;
+        }
+        /// <summary> Clear the Effect. </summary>
+        private void Close()
+        {
+            if (this.Page == null) return;
+
+            this.Page.Close();
+            this.Page = null;
+
+            this.State = EffectsControlState.Effects;
+        }
         /// <summary> Reset the Effect. </summary>
         private void Reset()
         {
-            if (this.Effect == null) return;
+            if (this.Page == null) return;
 
-            this.Effect.Reset(this.Layer.EffectManager);
-            this.Effect.SetPage(this.Layer.EffectManager);
+            this.Page.Reset();
 
             this.ViewModel.Invalidate();
         }
-        /// <summary> Clear the Effect. </summary>
-        private void Clear()
+
+        /// <summary> Invalidate Effect ItemsControl. </summary>
+        public void Invalidate(EffectManager manager)
         {
-            this.Effect = null;
-            this.Frame.Child = null;
-            this.FrameVisibility = false;
-        } 
+            if (manager == null) return;
+
+            //Controls foreach
+            foreach (var page in EffectPage.PageList)
+            {
+                page.Control.ToggleSwitch.IsEnabled = true;
+                page.Control.ToggleSwitch.IsOn = page.GetIsOn(manager);
+            }
+            this.State = EffectsControlState.Effects;
+        }
     }
 }

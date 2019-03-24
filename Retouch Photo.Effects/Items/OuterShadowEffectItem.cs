@@ -3,14 +3,15 @@ using Microsoft.Graphics.Canvas.Effects;
 using System;
 using System.Numerics;
 using Windows.UI;
+using Microsoft.Graphics.Canvas.Effects;
 
 namespace Retouch_Photo.Effects.Items
 {
     public class OuterShadowEffectItem : EffectItem
     {
         public float Radius;
-        public float Opacity = 0.5f;
-        public Color Color = Colors.Black;
+        public float Opacity;
+        public Color Color;
 
         private float offset;
         public float Offset
@@ -22,7 +23,7 @@ namespace Retouch_Photo.Effects.Items
                 this.offset = value;
             }
         }
-        private float angle = 0.78539816339744830961566084581988f;// 1/4 π
+        private float angle;
         public float Angle
         {
             get => this.angle;
@@ -34,7 +35,20 @@ namespace Retouch_Photo.Effects.Items
         }
         Vector2 Position;
 
-        public override ICanvasImage Render(ICanvasImage image)
+        public OuterShadowEffectItem()
+        {
+            this.Reset();
+        }
+
+        public override void Reset()
+        {
+            this.Radius = 0;
+            this.Opacity = 0.5f;
+            this.Color = Colors.Black;
+            this.Offset = 0;
+            this.Angle = 0.78539816339744830961566084581988f;// 1/4 π
+        }
+        public override ICanvasImage GetRender(ICanvasImage image)
         {
             return new CompositeEffect
             {
@@ -59,5 +73,4 @@ namespace Retouch_Photo.Effects.Items
             };
         }
     }
-
 }

@@ -15,14 +15,8 @@ namespace Retouch_Photo.Adjustments.Models
             base.Type = AdjustmentType.Gray;
             base.Icon = new GrayControl();
             base.Item = this.GrayAdjustmentItem;
+            base.Item.Reset();
             base.HasPage = false;
-            this.Reset();
-        }
-
-        public override void Reset() { }
-        public override ICanvasImage GetRender(ICanvasImage image)
-        {
-            return new GrayscaleEffect { Source = image };
         }
     }
 }

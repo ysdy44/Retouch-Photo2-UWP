@@ -1,46 +1,48 @@
-﻿using Retouch_Photo.Effects.Models;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+﻿using Retouch_Photo.Effects.Controls;
 using Retouch_Photo.Effects.Items;
 
 namespace Retouch_Photo.Effects.Pages
 {
-    public sealed partial class StraightenPage : Page
+    public sealed partial class StraightenPage : EffectPage
     {
-
-        #region DependencyProperty
-
-        public EffectManager EffectManager
-        {
-            get { return (EffectManager)GetValue(EffectManagerProperty); }
-            set { SetValue(EffectManagerProperty, value); }
-        }
-        public static readonly DependencyProperty EffectManagerProperty = DependencyProperty.Register(nameof(EffectManager), typeof(EffectManager), typeof(EffectManager), new PropertyMetadata(null, (sender, e) =>
-        {
-            StraightenPage con = (StraightenPage)sender;
-
-            if (e.NewValue is EffectManager effectManager)
-            {
-                StraightenEffectItem item = effectManager.StraightenEffectItem;
-
-                con.AnglePicker.Radians = item.Angle * 4.0f;
-            }
-        }));
-
-        #endregion
-
-
         public StraightenPage()
         {
             this.InitializeComponent();
+            base.Type = EffectType.Straighten;
+            base.Control = new Control()
+            {
+                Icon = new StraightenControl()
+            };
+
+            this.AnglePicker.RadiansChange += (radians) =>
+            {
+                if (base.EffectManager == null) return;
+
+                base.EffectManager.StraightenEffectItem.Angle = radians / 4.0f;
+                EffectManager.Invalidate?.Invoke();
+            };
         }
 
-        private void AnglePicker_AngleChange(float radians)
-        {
-            if (this.EffectManager == null) return;
+        //@override
+        public override bool GetIsOn(EffectManager manager) => manager.StraightenEffectItem.IsOn;
+        public override void SetIsOn(EffectManager manager, bool isOn) => manager.StraightenEffectItem.IsOn = isOn;
 
-            this.EffectManager.StraightenEffectItem.Angle = radians / 4.0f;
-            Effect.Invalidate();
+        public override void SetManager(EffectManager manager)
+        {
+            base.EffectManager = manager;
+            this.Invalidate(base.EffectManager.StraightenEffectItem);
+        }
+        public override void Reset()
+        {
+            if (base.EffectManager == null) return;
+
+            StraightenEffectItem item = base.EffectManager.StraightenEffectItem;
+            item.Reset();
+            this.Invalidate(item);
+        }
+        public void Invalidate(StraightenEffectItem item)
+        {
+            this.AnglePicker.Radians = item.Angle * 4.0f;
         }
     }
 }

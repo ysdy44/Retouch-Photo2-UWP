@@ -62,7 +62,7 @@ namespace Retouch_Photo.Adjustments.Pages
         {
             if (this.VignetteAdjustment == null) return;
 
-            this.VignetteAdjustment.Reset();
+            this.VignetteAdjustment.Item.Reset();
             this.Invalidate(this.VignetteAdjustment);
         }
 

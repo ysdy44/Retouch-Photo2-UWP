@@ -16,21 +16,8 @@ namespace Retouch_Photo.Adjustments.Models
             base.Type = AdjustmentType.Saturation;
             base.Icon = new SaturationControl();
             base.Item = this.SaturationAdjustmentItem;
+            base.Item.Reset();
             base.HasPage = true;
-            this.Reset();
-        }
-
-        public override void Reset()
-        {
-            this.SaturationAdjustmentItem.Saturation = 1.0f;
-        }
-        public override ICanvasImage GetRender(ICanvasImage image)
-        {
-            return new SaturationEffect
-            {
-                Saturation = this.SaturationAdjustmentItem.Saturation,
-                Source = image
-            };
         }
     }
 }

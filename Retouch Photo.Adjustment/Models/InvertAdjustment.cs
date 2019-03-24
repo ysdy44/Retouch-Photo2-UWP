@@ -15,14 +15,8 @@ namespace Retouch_Photo.Adjustments.Models
             base.Type = AdjustmentType.Invert;
             base.Icon = new InvertControl();
             base.Item = this.InvertAdjustmentItem;
+            base.Item.Reset();
             base.HasPage = false;
-            this.Reset();
-        }
-
-        public override void Reset() { }
-        public override ICanvasImage GetRender(ICanvasImage image)
-        {
-            return new InvertEffect { Source = image };
         }
     }
 }

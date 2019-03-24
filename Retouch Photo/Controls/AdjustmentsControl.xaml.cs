@@ -196,12 +196,8 @@ namespace Retouch_Photo.Controls
         private void Reset()
         {
             if (this.Page == null) return;
-
-            Adjustment adjustment = this.Page.GetAdjustment();
-            if (adjustment == null) return;
-
-            adjustment.Reset();
-            page.Reset();
+            
+            this.Page.Reset();
             this.ViewModel.Invalidate();
         }
                           

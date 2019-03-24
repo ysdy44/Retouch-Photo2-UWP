@@ -106,10 +106,9 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Button.xaml.cs">
-      <DependentUpon>Button.xaml</DependentUpon>
+    <Compile Include="Control.xaml.cs">
+      <DependentUpon>Control.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Effect.cs" />
     <Compile Include="EffectItem.cs" />
     <Compile Include="EffectManager.cs" />
     <Compile Include="Controls\DirectionalBlurControl.xaml.cs">
@@ -130,6 +129,7 @@
     <Compile Include="Controls\StraightenControl.xaml.cs">
       <DependentUpon>StraightenControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EffectPage.cs" />
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
@@ -157,12 +157,6 @@
     <Compile Include="Pages\StraightenPage.xaml.cs">
       <DependentUpon>StraightenPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\DirectionalBlurEffect.cs" />
-    <Compile Include="Models\EmbossEffect.cs" />
-    <Compile Include="Models\GaussianBlurEffect.cs" />
-    <Compile Include="Models\OuterShadowEffect.cs" />
-    <Compile Include="Models\OutlineEffect.cs" />
-    <Compile Include="Models\StraightenEffect.cs" />
     <Compile Include="EffectType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo.Effects.rd.xml" />
@@ -176,7 +170,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Button.xaml">
+    <Page Include="Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -209,8 +203,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\DirectionalBlurPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\EmbossPage.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -17,25 +17,8 @@ namespace Retouch_Photo.Adjustments.Models
             base.Type = AdjustmentType.Vignette;
             base.Icon = new VignetteControl();
             base.Item = this.VignetteAdjustmentItem;
+            base.Item.Reset();
             base.HasPage = true;
-            this.Reset();
-        }
-
-        public override void Reset()
-        {
-            this.VignetteAdjustmentItem.Amount = 0.0f;
-            this.VignetteAdjustmentItem.Curve = 0.0f;
-            this.VignetteAdjustmentItem.Color = Colors.Black;
-        }
-        public override ICanvasImage GetRender(ICanvasImage image)
-        {
-            return new VignetteEffect
-            {
-                Amount = this.VignetteAdjustmentItem.Amount,
-                Curve = this.VignetteAdjustmentItem.Curve,
-                Color = this.VignetteAdjustmentItem.Color,
-                Source = image
-            };
         }
     }
 }

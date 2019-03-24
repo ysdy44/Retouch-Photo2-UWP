@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
 
 namespace Retouch_Photo.Effects.Items
 {
@@ -6,14 +7,22 @@ namespace Retouch_Photo.Effects.Items
     {
         public float BlurAmount;
 
-        public override ICanvasImage Render(ICanvasImage image)
+        public GaussianBlurEffectItem()
         {
-            return new Microsoft.Graphics.Canvas.Effects.GaussianBlurEffect
+            this.Reset();
+        }
+
+        public override void Reset()
+        {
+            this.BlurAmount = 0;
+        }
+        public override ICanvasImage GetRender(ICanvasImage image)
+        {
+            return new GaussianBlurEffect
             {
                 Source = image,
                 BlurAmount = this.BlurAmount
             };
         }
     }
-
 }

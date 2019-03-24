@@ -1,15 +1,26 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
 
 namespace Retouch_Photo.Effects.Items
 {
     public class EmbossEffectItem : EffectItem
     {
-        public float Amount = 1;
+        public float Amount;
         public float Angle;
 
-        public override ICanvasImage Render(ICanvasImage image)
+        public EmbossEffectItem()
         {
-            return new Microsoft.Graphics.Canvas.Effects.EmbossEffect
+            this.Reset();
+        }
+
+        public override void Reset()
+        {
+            this.Amount = 1;
+            this.Angle = 0;
+        }
+        public override ICanvasImage GetRender(ICanvasImage image)
+        {
+            return new EmbossEffect
             {
                 Source = image,
                 Amount = this.Amount,

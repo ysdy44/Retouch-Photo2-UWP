@@ -32,7 +32,7 @@ namespace Retouch_Photo.Adjustments.Pages
         {
             if (this.GrayAdjustment == null) return;
 
-            this.GrayAdjustment.Reset();
+            this.GrayAdjustment.Item.Reset();
             this.Invalidate(this.GrayAdjustment);
         }
 

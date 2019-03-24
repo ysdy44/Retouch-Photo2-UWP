@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Graphics.Canvas;
+using Newtonsoft.Json;
 using Retouch_Photo.Adjustments.Items;
 using Retouch_Photo.Adjustments.Models;
 using System.Collections.Generic;
@@ -12,7 +13,9 @@ namespace Retouch_Photo.Adjustments
         public string Name;
 
         public abstract Adjustment GetAdjustment();
-        
+        public abstract void Reset();
+        public abstract ICanvasImage GetRender(ICanvasImage image);
+
         //@static
         /// <summary> [Json] --> List [Item] </summary>
         public static IEnumerable<AdjustmentItem> GetItemsFromJson(string json)

@@ -40,7 +40,7 @@ namespace Retouch_Photo.Adjustments.Pages
         {
             if (this.HueRotationAdjustment == null) return;
 
-            this.HueRotationAdjustment.Reset();
+            this.HueRotationAdjustment.Item.Reset();
             this.Invalidate(this.HueRotationAdjustment);
         }
 

@@ -15,23 +15,8 @@ namespace Retouch_Photo.Adjustments.Models
             base.Type = AdjustmentType.Temperature;
             base.Icon = new TemperatureControl();
             base.Item = this.TemperatureAdjustmentItem;
+            base.Item.Reset();
             base.HasPage = true;
-            this.Reset();
-        }
-
-        public override void Reset()
-        {
-            this.TemperatureAdjustmentItem .Temperature = 0.0f;
-            this.TemperatureAdjustmentItem .Tint = 0.0f;
-        }
-        public override ICanvasImage GetRender(ICanvasImage image)
-        {
-            return new TemperatureAndTintEffect
-            {
-                Temperature = this.TemperatureAdjustmentItem .Temperature,
-                Tint = this.TemperatureAdjustmentItem .Tint,
-                Source = image
-            };
         }
     }
 }

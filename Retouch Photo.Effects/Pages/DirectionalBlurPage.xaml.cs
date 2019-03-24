@@ -1,55 +1,56 @@
-﻿using Retouch_Photo.Effects.Items;
-using Retouch_Photo.Effects.Models;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
+﻿using Retouch_Photo.Effects.Controls;
+using Retouch_Photo.Effects.Items;
 
 namespace Retouch_Photo.Effects.Pages
 {
-    public sealed partial class DirectionalBlurPage : Page
-    {
-        #region DependencyProperty
-
-        public EffectManager EffectManager
-        {
-            get { return (EffectManager)GetValue(EffectManagerProperty); }
-            set { SetValue(EffectManagerProperty, value); }
-        }
-        public static readonly DependencyProperty EffectManagerProperty = DependencyProperty.Register(nameof(EffectManager), typeof(EffectManager), typeof(EffectManager), new PropertyMetadata(null, (sender, e) =>
-        {
-            DirectionalBlurPage con = (DirectionalBlurPage)sender;
-
-            if (e.NewValue is EffectManager effectManager)
-            {
-                DirectionalBlurEffectItem item = effectManager.DirectionalBlurEffectItem;
-
-                con.BlurAmountSlider.Value = item.BlurAmount;
-                con.AnglePicker.Radians = item.Angle;
-            }
-        }));
-
-        #endregion
-
-
+    public sealed partial class DirectionalBlurPage : EffectPage
+    {     
         public DirectionalBlurPage()
         {
             this.InitializeComponent();
-        }
-        
-        private void BlurAmountSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-            if (this.EffectManager == null) return;
-            
-            this.EffectManager.DirectionalBlurEffectItem.BlurAmount = (float)e.NewValue;
-            Effect.Invalidate();
+            base.Type = EffectType.DirectionalBlur;
+            base.Control = new Control()
+            {
+                Icon = new DirectionalBlurControl()
+            };
+
+            this.BlurAmountSlider.ValueChanged += (s, e) =>
+            {
+                  if (base.EffectManager == null) return;
+
+                  base.EffectManager.DirectionalBlurEffectItem.BlurAmount = (float)e.NewValue;
+                  EffectManager.Invalidate?.Invoke();
+            };
+            this.AnglePicker.RadiansChange += (radians) =>
+            {
+                  if (base.EffectManager == null) return;
+
+                  base.EffectManager.DirectionalBlurEffectItem.Angle = radians;
+                  EffectManager.Invalidate?.Invoke();
+            };
         }
 
-        private void AnglePicker_AngleChange(float radians)
+        //@override
+        public override bool GetIsOn(EffectManager manager) => manager.DirectionalBlurEffectItem.IsOn;
+        public override void SetIsOn(EffectManager manager, bool isOn) => manager.DirectionalBlurEffectItem.IsOn= isOn;
+                 
+        public override void SetManager(EffectManager manager)
         {
-            if (this.EffectManager == null) return;
+            base.EffectManager = manager;
+            this.Invalidate(base.EffectManager.DirectionalBlurEffectItem);
+        }                 
+        public override void Reset()
+        {
+            if (base.EffectManager == null) return;
 
-            this.EffectManager.DirectionalBlurEffectItem.Angle = radians;
-            Effect.Invalidate();
+            DirectionalBlurEffectItem item = base.EffectManager.DirectionalBlurEffectItem;
+            item.Reset();
+            this.Invalidate(item);
+        }
+        public void Invalidate(DirectionalBlurEffectItem item)
+        {
+            this.BlurAmountSlider.Value = item.BlurAmount;
+            this.AnglePicker.Radians = item.Angle;
         }
     }
 }

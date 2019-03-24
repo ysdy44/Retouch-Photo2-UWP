@@ -57,7 +57,7 @@ namespace Retouch_Photo.Adjustments.Pages
         {
             if (this.HighlightsAndShadowsAdjustment == null) return;
 
-            this.HighlightsAndShadowsAdjustment.Reset();
+            this.HighlightsAndShadowsAdjustment.Item.Reset();
             this.Invalidate(this.HighlightsAndShadowsAdjustment);
         }
 
