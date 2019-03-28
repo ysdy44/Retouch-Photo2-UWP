@@ -39,8 +39,13 @@
         </Border>
 
         <Border x:Name="ColorBorder" Grid.Row="2" BorderThickness="1,0,1,1" BorderBrush="{ThemeResource AppStroke}"  Background="{ThemeResource AppFill}">
-            <ContentPresenter Height="120" Content="Color" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        </Border>
+            <StackPanel>
+                <Button x:Name="Button1" Content="Button"/>
+                <Button x:Name="Button2" Content="Button"/>
+                <Button x:Name="Button3" Content="Button"/>
+                <Button x:Name="Button4" Content="Button"/>
+            </StackPanel>
+         </Border>
 
         <Border x:Name="GradientBorder" Grid.Row="2" BorderThickness="1,0,1,1" BorderBrush="{ThemeResource AppStroke}"  Background="{ThemeResource AppFill}">
             <StackPanel Margin="4,12">

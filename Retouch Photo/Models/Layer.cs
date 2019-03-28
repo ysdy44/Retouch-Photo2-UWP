@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using Retouch_Photo.Adjustments;
@@ -22,20 +23,13 @@ namespace Retouch_Photo.Models
 
         //ViewModel
         DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
-
-
-        public string Name= "Layer";
         
+        public string Name= "Layer";        
         public double Opacity = 100;
-
         public bool IsVisual= true;
-
-        public int BlendIndex;
-        
+        public int BlendIndex;        
         public Transformer Transformer;
-
         public AdjustmentManager AdjustmentManager = new AdjustmentManager();
-
         public EffectManager EffectManager = new EffectManager();
         
 
@@ -114,7 +108,9 @@ namespace Retouch_Photo.Models
 
 
         //@override
-        public virtual void ColorChanged(Color value) {}
+        public virtual void ColorChanged(Color value) { }
+        public virtual void BrushChanged(ICanvasBrush brush) { }
+ 
         protected abstract ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix);
     
         //@static

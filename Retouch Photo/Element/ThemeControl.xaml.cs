@@ -48,14 +48,20 @@ namespace 配色pro.Controls
                     frameworkElement.RequestedTheme = value;
                 }
 
-                if (value == ElementTheme.Dark)
-                {
-                    this.DarkStoryboar.Begin();//Storyboard
-                }
-                else
-                {
-                    this.LightStoryboard.Begin();//Storyboard
-                }
+                this._Theme = value;
+                this.theme = value;
+            }
+        }
+
+        private ElementTheme _Theme
+        {
+            get => this.theme;
+            set
+            {
+                if (value == ElementTheme.Dark)                
+                    this.DarkStoryboar.Begin();//Storyboard                
+                else                
+                    this.LightStoryboard.Begin();//Storyboard                
 
                 this.theme = value;
             }
@@ -67,7 +73,7 @@ namespace 配色pro.Controls
         public ThemeControl()
         {
             this.InitializeComponent();
-            this.Loaded += (s, e) => this.Theme = (App.Current.RequestedTheme == ApplicationTheme.Dark) ? ElementTheme.Dark : ElementTheme.Light;
+            this.Loaded += (s, e) => this._Theme = (App.Current.RequestedTheme == ApplicationTheme.Dark) ? ElementTheme.Dark : ElementTheme.Light;
         }
     }
 }

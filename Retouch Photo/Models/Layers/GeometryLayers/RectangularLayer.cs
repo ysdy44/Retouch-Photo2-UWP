@@ -30,6 +30,11 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
                 brush.Color = value;
             }
         }
+        public override void BrushChanged(ICanvasBrush brush)
+        {
+            base.FillBrush = brush;
+        }
+
         protected override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
             Matrix3x2 matrix = this.Transformer.Matrix * canvasToVirtualMatrix;
