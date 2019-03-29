@@ -38,6 +38,28 @@ namespace Retouch_Photo.Controls
 
         //ViewModel
         DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
+     
+        #region DependencyProperty
+
+        /// <summary>
+        /// Brush of <see cref="Shadow"/>.
+        /// </summary>
+        public SolidColorBrush Brush
+        {
+            get { return (SolidColorBrush)GetValue(ColorProperty); }
+            set { SetValue(ColorProperty, value); }
+        }
+        public static readonly DependencyProperty ColorProperty = DependencyProperty.Register(nameof(Brush), typeof(SolidColorBrush), typeof(MainCanvasControl), new PropertyMetadata(new SolidColorBrush(Colors.Black), (sender, e) =>
+        {
+            MainCanvasControl con = (MainCanvasControl)sender;
+
+            if (e.NewValue is SolidColorBrush value)
+            {
+                con.CanvasControl.Invalidate();
+            }
+        }));
+
+        #endregion
 
         public MainCanvasControl()
         {
@@ -47,16 +69,16 @@ namespace Retouch_Photo.Controls
 
             this.CanvasControl.Draw += (sender, args) =>
             {
-                this.ViewModel.RenderLayer.Draw(args.DrawingSession, this.ViewModel.MatrixTransformer.VirtualToControlMatrix);
+                this.ViewModel.RenderLayer.Draw(args.DrawingSession, this.ViewModel.MatrixTransformer.VirtualToControlMatrix, this.Brush.Color);
 
                 this.ViewModel.RenderLayer.RulerDraw(args.DrawingSession, this.ViewModel.MatrixTransformer);
 
                 this.ViewModel.Tool.ViewModel.Draw(args.DrawingSession);
 
-                Retouch_Photo.Library.TransformController.Transformer.DrawNode(args.DrawingSession, App.ViewModel.AAA);
-                Retouch_Photo.Library.TransformController.Transformer.DrawNode(args.DrawingSession, App.ViewModel.BBB);
-                Retouch_Photo.Library.TransformController.Transformer.DrawNode(args.DrawingSession, App.ViewModel.CCC);
-                Retouch_Photo.Library.TransformController.Transformer.DrawNode(args.DrawingSession, App.ViewModel.DDD);
+                Retouch_Photo.Library.HomographyController.Transformer.DrawNode(args.DrawingSession, App.ViewModel.AAA);
+                Retouch_Photo.Library.HomographyController.Transformer.DrawNode(args.DrawingSession, App.ViewModel.BBB);
+                Retouch_Photo.Library.HomographyController.Transformer.DrawNode(args.DrawingSession, App.ViewModel.CCC);
+                Retouch_Photo.Library.HomographyController.Transformer.DrawNode(args.DrawingSession, App.ViewModel.DDD);
             };
 
             this.SizeChanged += (s, e) => this.ViewModel.MatrixTransformer.ControlSizeChanged(e.NewSize);

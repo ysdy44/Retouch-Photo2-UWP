@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Graphics.Effects;
 using Windows.UI;
-using static Retouch_Photo.Library.TransformController;
+using static Retouch_Photo.Library.HomographyController;
 
 namespace Retouch_Photo.Models.Layers.GeometryLayers
 {
@@ -36,12 +36,12 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
         }
 
         protected override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
-        {
-            Matrix3x2 matrix = this.Transformer.Matrix * canvasToVirtualMatrix;
-            Vector2 leftTop = this.Transformer.TransformLeftTop(matrix);
-            Vector2 rightTop = this.Transformer.TransformRightTop(matrix);
-            Vector2 rightBottom = this.Transformer.TransformRightBottom(matrix);
-            Vector2 leftBottom = this.Transformer.TransformLeftBottom(matrix);
+        {            
+            Vector2 leftTop = Vector2.Transform(this.Transformer.DstLeftTop, canvasToVirtualMatrix);
+            Vector2 rightTop = Vector2.Transform(this.Transformer.DstRightTop, canvasToVirtualMatrix);
+            Vector2 rightBottom = Vector2.Transform(this.Transformer.DstRightBottom, canvasToVirtualMatrix);
+            Vector2 leftBottom = Vector2.Transform(this.Transformer.DstLeftBottom, canvasToVirtualMatrix);
+
             CanvasGeometry geometry = CanvasGeometry.CreatePolygon(creator, new Vector2[]
             {
                 leftTop,
@@ -60,12 +60,14 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
         }
         public override void ThumbnailDraw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Size controlSize)
         {
-            ds.Clear(Colors.Transparent);
+            /*
+             ds.Clear(Colors.Transparent);
 
             Rect rect = Layer.GetThumbnailSize(base.Transformer.Width, base.Transformer.Height, controlSize);
 
             if (this.IsFill) ds.FillRectangle(rect, base.FillBrush);
             if (this.IsStroke) ds.DrawRectangle(rect, base.StrokeBrush, base.StrokeWidth);
+             */
         }
 
 
@@ -74,7 +76,7 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
         {
             return new RectangularLayer
             {
-                Transformer = Transformer.CreateFromSize(rect.Width, rect.Height, rect.Center),
+                Transformer = Transformer.CreateFromSize(rect.Width, rect.Height, new Vector2(rect.X, rect.Y)),
                 FillBrush = new CanvasSolidColorBrush(creator, color)
             };
         }

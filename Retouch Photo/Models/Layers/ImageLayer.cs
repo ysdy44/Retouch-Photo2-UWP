@@ -1,6 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo.ViewModels;
 using System;
 using System.Numerics;
 using System.Threading.Tasks;
@@ -8,9 +7,7 @@ using Windows.Foundation;
 using Windows.Graphics.Effects;
 using Windows.Storage;
 using Windows.Storage.Streams;
-using Windows.UI;
-using Retouch_Photo.Library;
-using static Retouch_Photo.Library.TransformController;
+using static Retouch_Photo.Library.HomographyController;
 
 namespace Retouch_Photo.Models.Layers
 {
@@ -32,7 +29,8 @@ namespace Retouch_Photo.Models.Layers
             };
         }
         public override void ThumbnailDraw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Size controlSize)
-        {
+        {/*
+            
             try
             {
 
@@ -50,6 +48,7 @@ namespace Retouch_Photo.Models.Layers
             catch (Exception)
             {
             }         
+            */
         }
 
 
@@ -60,21 +59,40 @@ namespace Retouch_Photo.Models.Layers
 
             return new ImageLayer
             {
-                Transformer = Transformer.CreateFromSize(width, height, new Vector2(width / 2, height / 2)),
+                Transformer = Transformer.CreateFromSize(width, height, Vector2.Zero),
+                Image = renderTarget
+            };
+        }
+        public static ImageLayer CreateFromBytes(ICanvasResourceCreator resourceCreator, byte[] bytes, int width, int height, Vector2 center)
+        {
+            CanvasBitmap renderTarget = new CanvasRenderTarget(resourceCreator, width, height, 96);
+            renderTarget.SetPixelBytes(bytes);
+
+            return new ImageLayer
+            {
+                Transformer = Transformer.CreateFromSize(width, height, new Vector2(center.X - width / 2, center.Y - height)),
                 Image = renderTarget
             };
         }
 
-        public static ImageLayer CreateFromBitmap(ICanvasResourceCreator resourceCreator, CanvasBitmap bitmap, int width, int height)
+        public static ImageLayer CreateFromBitmap(CanvasBitmap bitmap, Transformer transformer)=> new ImageLayer
         {
+            Transformer = transformer,
+            Image = bitmap
+        };
+        public static ImageLayer CreateFromBitmap(CanvasBitmap bitmap, Vector2 center)
+        {
+            int width = (int)bitmap.SizeInPixels.Width;
+            int height = (int)bitmap.SizeInPixels.Height;
+
             return new ImageLayer
             {
-                Transformer = Transformer.CreateFromSize(width, height, new Vector2(width / 2, height / 2)),
+                Transformer = Transformer.CreateFromSize(width, height, new Vector2(center.X - width / 2, center.Y - height/2)),
                 Image = bitmap
             };
         }
 
-        public static async Task<ImageLayer> CreateFromFlie(ICanvasResourceCreator resourceCreator, StorageFile file)
+        public static async Task<ImageLayer> CreateFromFlie(ICanvasResourceCreator resourceCreator, StorageFile file, Vector2 center)
         {
             try
             {
@@ -82,16 +100,10 @@ namespace Retouch_Photo.Models.Layers
                 {
                     CanvasBitmap bitmap = await CanvasBitmap.LoadAsync(resourceCreator, stream, 96);
 
-                    int width = (int)bitmap.SizeInPixels.Width;
-                    int height = (int)bitmap.SizeInPixels.Height;
-
-                    return ImageLayer.CreateFromBitmap(resourceCreator, bitmap, width, height);
+                    return ImageLayer.CreateFromBitmap( bitmap, center);
                 }
             }
-            catch (Exception)
-            {
-                return null;
-            }
+            catch (Exception){return null;}
         }
 
 

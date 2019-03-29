@@ -14,7 +14,7 @@ using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
-using static Retouch_Photo.Library.TransformController;
+using static Retouch_Photo.Library.HomographyController;
 
 namespace Retouch_Photo.Models.Layers
 {
@@ -35,9 +35,8 @@ namespace Retouch_Photo.Models.Layers
         }
         protected override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
-            Matrix3x2 matrix = this.Transformer.Matrix * canvasToVirtualMatrix;
-            Vector2 leftTop = this.Transformer.TransformLeftTop(matrix);
-            Vector2 rightBottom = this.Transformer.TransformRightBottom(matrix);
+            Vector2 leftTop = Vector2.Transform(this.Transformer.DstLeftTop, canvasToVirtualMatrix);
+            Vector2 rightBottom = Vector2.Transform(this.Transformer.DstRightBottom, canvasToVirtualMatrix);
 
             return new CropEffect
             {
@@ -62,14 +61,18 @@ namespace Retouch_Photo.Models.Layers
                     }
                 }
             };
+
+            
+
         }
         public override void ThumbnailDraw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Size controlSize)
-        {
+        {/*
             ds.Clear(Windows.UI.Colors.Transparent);
 
             Rect rect = Layer.GetThumbnailSize(base.Transformer.Width, base.Transformer.Height, controlSize);
 
             ds.FillRectangle(rect, this.TintColor);
+            */
         }
 
 
@@ -78,7 +81,7 @@ namespace Retouch_Photo.Models.Layers
         {
             return new AcrylicLayer
             {
-                Transformer = Transformer.CreateFromSize(rect.Width, rect.Height, rect.Center, disabledRadian: true),
+                Transformer = Transformer.CreateFromSize(rect.Width, rect.Height, new Vector2(rect.X, rect.Y), disabledRadian: true),
                 TintColor = color,
                 TintOpacity = opacity
             };

@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using static Retouch_Photo.Library.TransformController;
+using static Retouch_Photo.Library.HomographyController;
 
 namespace Retouch_Photo.Controls
 {
@@ -52,48 +52,51 @@ namespace Retouch_Photo.Controls
         public OperateControl()
         {
             this.InitializeComponent();
+            /*
 
-            //Transform
-            this.FlipHorizontalButton.Tapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.XScale = -layer.Transformer.XScale);
-            this.FlipVerticalButton.Tapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.YScale = -layer.Transformer.YScale);
-            this.RotateLeftButton.Tapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Radian += Transformer.PiHalf);
-            this.RotateRightButton.Tapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Radian -= Transformer.PiHalf);
+                        //Transform
+                        this.FlipHorizontalButton.Tapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.XScale = -layer.Transformer.XScale);
+                        this.FlipVerticalButton.Tapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.YScale = -layer.Transformer.YScale);
+                        this.RotateLeftButton.Tapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Radian += Transformer.PiHalf);
+                        this.RotateRightButton.Tapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Radian -= Transformer.PiHalf);
 
-            //Arrange
-            this.ArrangeMoveBackButton.ButtonTapped += (sender, e) => this.OperateArrange((Layer layer) =>
-            {
-                this.ViewModel.RenderLayer.Layers.Remove(layer);
-                this.ViewModel.RenderLayer.Layers.Add(layer);
-            });
-            this.ArrangeBackOneButton.ButtonTapped += (sender, e) => this.OperateArrange((Layer layer) =>
-            {
-                int index = this.ViewModel.RenderLayer.Layers.IndexOf(layer);
-                this.ViewModel.RenderLayer.Layers.Remove(layer);
-                this.ViewModel.RenderLayer.Layers.Insert(index + 1, layer);
-            });
-            this.ArrangeForwardOneButton.ButtonTapped += (sender, e) => this.OperateArrange((Layer layer) =>
-            {
-                int index = this.ViewModel.RenderLayer.Layers.IndexOf(layer);
-                this.ViewModel.RenderLayer.Layers.Remove(layer);
-                this.ViewModel.RenderLayer.Layers.Insert(index - 1, layer);
-            });
-            this.ArrangeMoveFrontButton.ButtonTapped += (sender, e) => this.OperateArrange((Layer layer) =>
-            {
-                this.ViewModel.RenderLayer.Layers.Remove(layer);
-                this.ViewModel.RenderLayer.Layers.Insert(0, layer);
-            });
+                        //Arrange
+                        this.ArrangeMoveBackButton.ButtonTapped += (sender, e) => this.OperateArrange((Layer layer) =>
+                        {
+                            this.ViewModel.RenderLayer.Layers.Remove(layer);
+                            this.ViewModel.RenderLayer.Layers.Add(layer);
+                        });
+                        this.ArrangeBackOneButton.ButtonTapped += (sender, e) => this.OperateArrange((Layer layer) =>
+                        {
+                            int index = this.ViewModel.RenderLayer.Layers.IndexOf(layer);
+                            this.ViewModel.RenderLayer.Layers.Remove(layer);
+                            this.ViewModel.RenderLayer.Layers.Insert(index + 1, layer);
+                        });
+                        this.ArrangeForwardOneButton.ButtonTapped += (sender, e) => this.OperateArrange((Layer layer) =>
+                        {
+                            int index = this.ViewModel.RenderLayer.Layers.IndexOf(layer);
+                            this.ViewModel.RenderLayer.Layers.Remove(layer);
+                            this.ViewModel.RenderLayer.Layers.Insert(index - 1, layer);
+                        });
+                        this.ArrangeMoveFrontButton.ButtonTapped += (sender, e) => this.OperateArrange((Layer layer) =>
+                        {
+                            this.ViewModel.RenderLayer.Layers.Remove(layer);
+                            this.ViewModel.RenderLayer.Layers.Insert(0, layer);
+                        });
 
-            //Align Horizontal
-            this.AlignLeftButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.X += -layer.Transformer.TransformMinX(layer.Transformer.Matrix));
-            this.AlignCenterButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.X += this.ViewModel.MatrixTransformer.Width / 2 - layer.Transformer.TransformCenter(layer.Transformer.Matrix).X);
-            this.AlignRightButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.X += this.ViewModel.MatrixTransformer.Width - layer.Transformer.TransformMaxX(layer.Transformer.Matrix));
-            this.AlignSymmetryHorizontallyButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.X = -this.Layer.Transformer.Position.X);
+                        //Align Horizontal
+                        this.AlignLeftButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.X += -layer.Transformer.TransformMinX(layer.Transformer.Matrix));
+                        this.AlignCenterButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.X += this.ViewModel.MatrixTransformer.Width / 2 - layer.Transformer.TransformCenter(layer.Transformer.Matrix).X);
+                        this.AlignRightButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.X += this.ViewModel.MatrixTransformer.Width - layer.Transformer.TransformMaxX(layer.Transformer.Matrix));
+                        this.AlignSymmetryHorizontallyButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.X = -this.Layer.Transformer.Position.X);
 
-            //Align Vertical
-            this.AlignTopButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.Y += -layer.Transformer.TransformMinY(layer.Transformer.Matrix));
-            this.AlignMiddleButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.Y += this.ViewModel.MatrixTransformer.Height / 2 - layer.Transformer.TransformCenter(layer.Transformer.Matrix).Y);
-            this.AlignBottomButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.Y += this.ViewModel.MatrixTransformer.Height - layer.Transformer.TransformMaxY(layer.Transformer.Matrix));
-            this.AlignSymmetryVerticallyButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.Y = -this.Layer.Transformer.Position.Y);
+                        //Align Vertical
+                        this.AlignTopButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.Y += -layer.Transformer.TransformMinY(layer.Transformer.Matrix));
+                        this.AlignMiddleButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.Y += this.ViewModel.MatrixTransformer.Height / 2 - layer.Transformer.TransformCenter(layer.Transformer.Matrix).Y);
+                        this.AlignBottomButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.Y += this.ViewModel.MatrixTransformer.Height - layer.Transformer.TransformMaxY(layer.Transformer.Matrix));
+                        this.AlignSymmetryVerticallyButton.ButtonTapped += (sender, e) => this.Operate((Layer layer) => layer.Transformer.Position.Y = -this.Layer.Transformer.Position.Y);
+
+                         */
         }
 
 

@@ -62,13 +62,14 @@ namespace Retouch_Photo.Pages
             this.Loaded += (s, e) =>
             {
                 this.Refresh();
-                /*
-                this.Frame.Navigate(typeof(DrawPage), Project.CreateFromSize(App.ViewModel.CanvasDevice, new BitmapSize
-                  {
+
+               // return;
+                this.Frame.Navigate(typeof(DrawPage), Project.CreateFromSize(App.ViewModel.CanvasDevice, new Windows.Graphics.Imaging.BitmapSize
+                {
                       Width = 1024,
                       Height = 1024
                   }));//Navigate  
-                 */
+
             };
             this.PopupButton.Tapped += (s, e) => { };
             this.ThemeButton.Tapped += (s, e) => this.ThemeControl.Theme = (this.ThemeControl.Theme == ElementTheme.Dark) ? ElementTheme.Light : ElementTheme.Dark;

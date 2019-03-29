@@ -3,18 +3,20 @@ using Retouch_Photo.Models.Layers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Streams;
+using static Retouch_Photo.Library.HomographyController;
 
 namespace Retouch_Photo.Models
 {
-    /// <summary>项目</summary>
+    /// <summary> 项目 </summary>
     public class Project
     {
-       public string Name;
+        public string Name;
 
         public int Width;
         public int Height;
@@ -38,7 +40,7 @@ namespace Retouch_Photo.Models
                 Layers = from element in xdoc.Descendants("Layer") select Layer.CreateFromXElement(creator, element)
             };
         }
-        
+
         public static Project CreateFromSize(ICanvasResourceCreator creator, BitmapSize pixels)
         {
             int width = (int)pixels.Width;
@@ -62,6 +64,7 @@ namespace Retouch_Photo.Models
 
                     int width = (int)bitmap.SizeInPixels.Width;
                     int height = (int)bitmap.SizeInPixels.Height;
+                    Transformer transformer = Transformer.CreateFromSize(width, height, Vector2.Zero);
 
                     return new Project()
                     {
@@ -69,16 +72,15 @@ namespace Retouch_Photo.Models
                         Height = height,
                         Layers = new List<Layer>()
                         {
-                            ImageLayer.CreateFromBitmap(creator,bitmap,width,height)
+                            ImageLayer.CreateFromBitmap(bitmap,transformer)
                         }
                     };
                 }
-                catch (Exception)
-                {
-                    return null;
-                }
+                catch (Exception){return null;}
             }
         }
+
+
 
     }
 }

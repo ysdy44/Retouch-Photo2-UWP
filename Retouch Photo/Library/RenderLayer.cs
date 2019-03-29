@@ -119,58 +119,70 @@ namespace Retouch_Photo.Library
         }
 
 
-        /// <summary>生成渲染</summary>   
+        /// <summary> 
+        /// Get Render :
+        ///   [Canvas] To [Virtual] on MatrixTransformer
+        /// </summary>   
         public ICanvasImage RenderTarget;
         public ICanvasImage GetRender(ICanvasResourceCreator creator, Matrix3x2 canvasToVirtualMatrix, int width, int height, float scale)
         {
-            ICanvasImage image = new ScaleEffect
-            {
-                Scale = new Vector2(scale),
-                //Source = this.GrayWhiteGrid
-                Source = new ColorSourceEffect{Color=Colors.White}
-            };
+            ICanvasImage image = new ColorSourceEffect { Color = Colors.White };
 
             for (int i = this.Layers.Count - 1; i >= 0; i--)
             {
                 image = Layer.LayerRender(creator, this.Layers[i], image, canvasToVirtualMatrix);
             }
 
+
+            Vector2 rightBottom = new Vector2(width, height) * scale / 2;
+            Vector2 leftTop = -rightBottom;
+
             return new CropEffect
             {
                 Source = image,
-                SourceRectangle = new Rect(-width / 2 * scale, -height / 2 * scale, width * scale, height * scale),
+                SourceRectangle = new Rect(leftTop.ToPoint(), rightBottom.ToPoint()),
             };
         }    
         public ICanvasImage GetRenderWithJumpedQueueLayer(ICanvasResourceCreator creator, Layer jumpedQueueLayer, Matrix3x2 canvasToVirtualMatrix, int width, int height, float scale)
         {
-            ICanvasImage image = new ScaleEffect
-            {
-                Scale = new Vector2(scale),
-                //Source = this.GrayWhiteGrid
-                Source = new ColorSourceEffect { Color = Colors.White }
-            };
+            ICanvasImage image = new ColorSourceEffect { Color = Colors.White };
 
             for (int i = this.Layers.Count - 1; i >= 0; i--)
             {
                 image = Layer.LayerRender(creator, this.Layers[i], image, canvasToVirtualMatrix);
-                if (this.Index == i) image = Layer.LayerRender(creator, jumpedQueueLayer, image, canvasToVirtualMatrix);//Layer: jumped the Queue (Index: 0~n)
+
+                /// Layer: 
+                ///    jumped the Queue (Index: 0~n)     
+                if (this.Index == i)
+                {
+                    image = Layer.LayerRender(creator, jumpedQueueLayer, image, canvasToVirtualMatrix);
+                }
             }
-            if (this.Index == -1) image = Layer.LayerRender(creator, jumpedQueueLayer, image, canvasToVirtualMatrix); //Layer: jumped the Queue  (Index: -1)
+
+            /// Layer: 
+            ///    jumped the Queue  (Index: -1)
+            if (this.Index == -1)
+            {
+                image = Layer.LayerRender(creator, jumpedQueueLayer, image, canvasToVirtualMatrix); 
+            }
+
+
+            Vector2 rightBottom = new Vector2(width, height) * scale / 2;
+            Vector2 leftTop = -rightBottom;
 
             return new CropEffect
             {
                 Source = image,
-                SourceRectangle = new Rect(-width / 2 * scale, -height / 2 * scale, width * scale, height * scale),
+                SourceRectangle = new Rect(leftTop.ToPoint(), rightBottom.ToPoint()),
             };
         }
 
 
-        /// <summary>
-        /// Draw.
+        /// <summary> 
+        /// Draw
+        ///   [Virtual] To [Control] on MatrixTransformer
         /// </summary>
-        /// <param name="ds"></param>
-        /// <param name="virtualToControlMatrix"></param>
-        public void Draw(CanvasDrawingSession ds, Matrix3x2 virtualToControlMatrix)
+        public void Draw(CanvasDrawingSession ds, Matrix3x2 virtualToControlMatrix,Color ShadowColor)
         {
             if (this.RenderTarget == null) return;
 
@@ -182,7 +194,7 @@ namespace Retouch_Photo.Library
             ICanvasImage shadow = new ShadowEffect
             {
                 Source = image,
-                ShadowColor = Color.FromArgb(64, 0, 0, 0),
+                ShadowColor = ShadowColor,
                 BlurAmount = 4.0f
             };
 

@@ -7,6 +7,7 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using static Retouch_Photo.Library.HomographyController;
 
 namespace Retouch_Photo.Controls
 {
@@ -76,11 +77,12 @@ namespace Retouch_Photo.Controls
 
             StorageFile file = await openPicker.PickSingleFileAsync();
             if (file == null) return;
-            Layer layer = await ImageLayer.CreateFromFlie(this.ViewModel.CanvasDevice, file);
 
-            layer.Transformer.Position = this.ViewModel.MatrixTransformer.ControlToVirtualToCanvasCenter - new Vector2(layer.Transformer.Width, layer.Transformer.Height) / 2;
+            Vector2 center = this.ViewModel.MatrixTransformer.Center;
+            Layer layer = await ImageLayer.CreateFromFlie(this.ViewModel.CanvasDevice, file, center);
 
             this.ViewModel.RenderLayer.Insert(layer);
+            this.ViewModel.CurrentLayer = layer;
             this.ViewModel.Invalidate();
         }
     }

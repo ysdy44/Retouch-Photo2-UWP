@@ -2,7 +2,7 @@
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using static Retouch_Photo.Library.TransformController;
+using static Retouch_Photo.Library.HomographyController;
 
 namespace Retouch_Photo.Controls
 {
@@ -61,7 +61,8 @@ namespace Retouch_Photo.Controls
         public TransformerControl()
         {
             this.InitializeComponent();
-
+            /*
+             
             this.WPicker.Minimum = int.MinValue;
             this.WPicker.Maximum = int.MaxValue;
             this.WPicker.ValueChange += (sender, value) => this.Navigator((m) =>
@@ -105,6 +106,7 @@ namespace Retouch_Photo.Controls
             this.SPicker.Minimum = -(int)(Transformer.PI * 180f);
             this.SPicker.Maximum = (int)(Transformer.PI * 180f);
             this.SPicker.ValueChange += (sender, value) => this.Navigator((m) => m.Transformer.Skew = value * Transformer.PI/ 180f );
+             */
         }
 
         private void Navigator(Action<Layer> action)
@@ -116,28 +118,31 @@ namespace Retouch_Photo.Controls
             App.ViewModel.Invalidate();
         }
 
-
         private void NavigatorSet(Transformer value)
         {
-            this.WPicker.Value = (int)(value.XScale * 100f);
-            this.HPicker.Value = (int)(value.YScale * 100f);
+            /*
+                this.WPicker.Value = (int)(value.XScale * 100f);
+                this.HPicker.Value = (int)(value.YScale * 100f);
 
-            this.XPicker.Value = (int)(value.Position.X);
-            this.YPicker.Value = (int)(value.Position.Y);
+                this.XPicker.Value = (int)(value.Position.X);
+                this.YPicker.Value = (int)(value.Position.Y);
 
-            this.RPicker.Value = (int)(value.Radian / Transformer.PI * 180f);
-            this.SPicker.Value = (int)(value.Skew / Transformer.PI * 180f);
+                this.RPicker.Value = (int)(value.Radian / Transformer.PI * 180f);
+                this.SPicker.Value = (int)(value.Skew / Transformer.PI * 180f);
+             */
         }
         private void NavigatorSet(Transformer newValue, Transformer oldValue)
         {
-            if (oldValue.XScale != newValue.XScale) this.WPicker.Value = (int)(newValue.XScale * 100f);
-            if (oldValue.YScale != newValue.YScale) this.HPicker.Value = (int)(newValue.YScale * 100f);
+            /*
+                if (oldValue.XScale != newValue.XScale) this.WPicker.Value = (int)(newValue.XScale * 100f);
+                if (oldValue.YScale != newValue.YScale) this.HPicker.Value = (int)(newValue.YScale * 100f);
 
-            if (oldValue.Position.X != newValue.Position.X) this.XPicker.Value = (int)(newValue.Position.X);
-            if (oldValue.Position.Y != newValue.Position.Y) this.YPicker.Value = (int)(newValue.Position.Y);
+                if (oldValue.Position.X != newValue.Position.X) this.XPicker.Value = (int)(newValue.Position.X);
+                if (oldValue.Position.Y != newValue.Position.Y) this.YPicker.Value = (int)(newValue.Position.Y);
 
-            if (oldValue.Radian != newValue.Radian) this.RPicker.Value = (int)(newValue.Radian / Transformer.PI * 180f);
-            if (oldValue.Skew != newValue.Skew) this.SPicker.Value = (int)(newValue.Skew / Transformer.PI * 180f);
+                if (oldValue.Radian != newValue.Radian) this.RPicker.Value = (int)(newValue.Radian / Transformer.PI * 180f);
+                if (oldValue.Skew != newValue.Skew) this.SPicker.Value = (int)(newValue.Skew / Transformer.PI * 180f);
+            */
         }
         private void NavigatorClear()
         {
