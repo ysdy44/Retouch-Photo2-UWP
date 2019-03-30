@@ -79,6 +79,7 @@
             <pickers:NumberPicker x:Name="SPicker" Grid.Column="2" Height="30" Margin="4" Unit="º" />
 
         </Grid>
-
+        
+        
     </StackPanel>
 </UserControl>

@@ -15,7 +15,7 @@
 
         <!--Background-->
         <SolidColorBrush x:Name="AccentColor"  Color="{ThemeResource SystemAccentColor}"/>
-        <SolidColorBrush x:Name="UnAccentColor" Color="{ThemeResource AppForegroundColor}"/>
+        <SolidColorBrush x:Name="UnAccentColor" Color="{ThemeResource AppBackgroundColor}"/>
 
         <!--Foreground-->
         <SolidColorBrush x:Name="CheckColor" Color="White"/>
@@ -24,7 +24,7 @@
     </UserControl.Resources>
 
 
-    <Grid  Background="{ThemeResource AppBackground}">
+    <Grid  Background="{ThemeResource AppForeground}">
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
@@ -57,7 +57,7 @@
                         <Setter Target="LeftBorder.BorderThickness" Value="0,1,1,1"/>
                         <Setter Target="LeftBorder.Visibility" Value="Collapsed"/>
                         <Setter Target="LeftBorder.Margin" Value="0"/>
-                        <Setter Target="LeftBorder.Background" Value="{ThemeResource AppForeground}"/>
+                        <Setter Target="LeftBorder.Background" Value="{ThemeResource AppBackground}"/>
 
 
                         <!--RightBorder-->
@@ -67,7 +67,7 @@
                         <Setter Target="RightBorder.VerticalAlignment" Value="Center"/>
                         <Setter Target="RightBorder.BorderThickness" Value="1,1,0,1"/>
                         <Setter Target="RightBorder.Visibility" Value="Collapsed"/>
-                        <Setter Target="RightBorder.Background" Value="{ThemeResource AppForeground}"/>
+                        <Setter Target="RightBorder.Background" Value="{ThemeResource AppBackground}"/>
 
                         <!--GridLenght-->
                         <Setter Target="RightGridLenght.Width" Value="70"/>
@@ -102,7 +102,7 @@
                         <Setter Target="LeftBorder.BorderThickness" Value="0,1,1,1"/>
                         <Setter Target="LeftBorder.Visibility" Value="Visible"/>
                         <Setter Target="LeftBorder.Margin" Value="0,20"/>
-                        <Setter Target="LeftBorder.Background" Value="{ThemeResource AppForeground}"/>
+                        <Setter Target="LeftBorder.Background" Value="{ThemeResource AppBackground}"/>
 
                         <!--RightBorder-->
                         <Setter Target="RightBorder.(Grid.Row)" Value="1"/>
@@ -111,7 +111,7 @@
                         <Setter Target="RightBorder.VerticalAlignment" Value="Center"/>
                         <Setter Target="RightBorder.BorderThickness" Value="1,1,0,1"/>
                         <Setter Target="RightBorder.Visibility" Value="Visible"/>
-                        <Setter Target="RightBorder.Background" Value="{ThemeResource AppForeground}"/> 
+                        <Setter Target="RightBorder.Background" Value="{ThemeResource AppBackground}"/> 
                                 
 
                         <!--GridLenght-->
@@ -149,7 +149,7 @@
                         <Setter Target="LeftBorder.Visibility" Value="Visible"/>
                         <Setter Target="LeftBorder.Margin" Value="0"/>
                         <Setter Target="LeftBorder.Background"
-                                apiContractNotPresent5:Value="{ThemeResource AppBackground}"
+                                apiContractNotPresent5:Value="{ThemeResource AppForeground}"
                                 apiContractPresent5:Value="{ThemeResource SystemControlAcrylicWindowBrush}"
                                 />             
 
@@ -162,7 +162,7 @@
                         <Setter Target="RightBorder.BorderThickness" Value="1,0,0,0"/>
                         <Setter Target="RightBorder.Visibility" Value="Visible"/>
                         <Setter Target="RightBorder.Background"
-                                apiContractNotPresent5:Value="{ThemeResource AppBackground}"
+                                apiContractNotPresent5:Value="{ThemeResource AppForeground}"
                                 apiContractPresent5:Value="{ThemeResource SystemControlAcrylicWindowBrush}"
                                 />
 
@@ -242,7 +242,7 @@
             </Grid.Resources>
 
             <controls:DropShadowPanel Grid.Column="1" HorizontalAlignment="Center" OffsetY="4" BlurRadius="20" ShadowOpacity="0.8" Color="{ThemeResource AppStrokeColor}">
-                <Rectangle x:Name="AppbarRectangle"  RadiusX="25" RadiusY="25"  MinHeight="50" MinWidth="100" Fill="{ThemeResource AppForeground}"/>
+                <Rectangle x:Name="AppbarRectangle"  RadiusX="25" RadiusY="25"  MinHeight="50" MinWidth="100" Fill="{ThemeResource AppBackground}"/>
             </controls:DropShadowPanel>
 
                 <!--BottomBar-->
@@ -260,14 +260,14 @@
         <!--WorkLeft-->
         <Grid x:Name="WorkLeftGrid" Margin="8" Grid.Column="0" Grid.Row="2" >
             <controls:DropShadowPanel Grid.Column="1" HorizontalAlignment="Center" OffsetY="4" BlurRadius="20" ShadowOpacity="0.8" Color="{ThemeResource AppStrokeColor}">
-                <Rectangle x:Name="WorkLeftRectangle" RadiusX="25" RadiusY="25" Height="50" Width="50" Fill="{ThemeResource AppForeground}"/>
+                <Rectangle x:Name="WorkLeftRectangle" RadiusX="25" RadiusY="25" Height="50" Width="50" Fill="{ThemeResource AppBackground}"/>
             </controls:DropShadowPanel>
             <ContentPresenter x:Name="WorkLeftBorder" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
         <!--WorkRight-->
         <Grid x:Name="WorkRightGrid" Margin="8" Grid.Column="2" Grid.Row="2" >
             <controls:DropShadowPanel Grid.Column="1" HorizontalAlignment="Center" OffsetY="4" BlurRadius="20" ShadowOpacity="0.8" Color="{ThemeResource AppStrokeColor}">
-                <Rectangle  x:Name="WorkRightRectangle"  RadiusX="25" RadiusY="25" Height="50" Width="50" Fill="{ThemeResource AppForeground}"/>
+                <Rectangle  x:Name="WorkRightRectangle"  RadiusX="25" RadiusY="25" Height="50" Width="50" Fill="{ThemeResource AppBackground}"/>
             </controls:DropShadowPanel>
             <PathIcon x:Name="WorkRightBorder" HorizontalAlignment="Center" VerticalAlignment="Center"  Data="M11.839,19.464l9.279,-5.4l2.56,1.38l-11.839,6.519l-11.839,-6.519l2.278,-1.38l9.561,5.4Zm0,-4.33l-9.561,-5.471l-2.278,1.319l11.839,6.531l11.839,-6.531l-2.132,-1.319l-9.707,5.471Zm0,-2.069l-11.839,-6.494l11.839,-6.571l11.839,6.571l-11.839,6.494Z"/>
         </Grid>

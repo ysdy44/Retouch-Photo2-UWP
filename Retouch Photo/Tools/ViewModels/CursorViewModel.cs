@@ -141,7 +141,6 @@ namespace Retouch_Photo.Tools.ViewModels
             }
             else
             {
-                this.CurrentLayer.Invalidate();
                 this.Controller.ControllerDictionary[this.Controller.Mode].Complete
                 (
                     point,

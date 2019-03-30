@@ -40,7 +40,7 @@
             <TextBlock Grid.Column="0" Grid.Row="0" Text="Angle" Style="{StaticResource AppTextBlock}"/>
             <element:RadiansPicker x:Name="AnglePicker" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"
                                BorderBrush="{ThemeResource AppBorderBrush}"
-                               Background="{ThemeResource AppBackground}"
+                               Background="{ThemeResource AppForeground}"
                                />
 
             <TextBlock Grid.Column="1" Grid.Row="0" Text="Color" Style="{StaticResource AppTextBlock}"/>

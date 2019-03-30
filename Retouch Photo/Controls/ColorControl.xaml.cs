@@ -39,7 +39,6 @@ namespace Retouch_Photo.Controls
             if (layer != null)
             {
                 layer.ColorChanged(value);
-                layer.Invalidate();
                 this.ViewModel.Invalidate();
             }
         }

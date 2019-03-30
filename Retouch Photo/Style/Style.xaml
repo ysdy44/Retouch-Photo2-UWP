@@ -4,16 +4,10 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls">
 
 
-    <!--IconElement-->
-    <Style x:Key="AppIconElement" TargetType="IconElement">
-        <Setter Property="Opacity" Value="0.8"/>
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-    </Style>
     <!--TextBlock-->
     <Style x:Key="AppTextBlock" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{ThemeResource AppText}" />
         <Setter Property="Margin" Value="4,4"/>
-        <Setter Property="Opacity" Value="0.5"/>
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
@@ -21,19 +15,18 @@
     <Style x:Key="AppRoundedBorderStyle" TargetType="Border">
         <Setter Property="CornerRadius" Value="4"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}" />
-        <Setter Property="Background" Value="{ThemeResource AppFill}" />
+        <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}" />
+        <Setter Property="Background" Value="{ThemeResource AppForeground}" />
         <Setter Property="MinWidth" Value="40" />
         <Setter Property="MinHeight" Value="40" />
-        <Setter Property="Height" Value="46" />
     </Style>
     <Style x:Key="AppCircleBorderStyle" TargetType="Border">
         <Setter Property="Width" Value="40" />
         <Setter Property="Height" Value="40" />
         <Setter Property="CornerRadius" Value="20"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}" />
-        <Setter Property="Background" Value="{ThemeResource AppFill}" />
+        <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}" />
+        <Setter Property="Background" Value="{ThemeResource AppForeground}" />
     </Style>
     
 
@@ -43,7 +36,7 @@
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="Margin" Value="-4" />
         <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="Background" Value="{ThemeResource AppForeground}" />
+        <Setter Property="Background" Value="{ThemeResource AppBackground}" />
         <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}" />
         <Setter Property="BorderThickness" Value="{ThemeResource FlyoutBorderThemeThickness}" />
         <Setter Property="Padding" Value="{ThemeResource FlyoutContentThemePadding}" />
@@ -86,9 +79,9 @@
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}" />
+        <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}" />
         <Setter Property="Background" Value="{ThemeResource AppStroke}" />
-        <Setter Property="Foreground" Value="{ThemeResource AppFill}" />
+        <Setter Property="Foreground" Value="{ThemeResource AppForeground}" />
         <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
         <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
         <Setter Property="ManipulationMode" Value="None" />
@@ -258,8 +251,8 @@
         <Setter Property="Padding" Value="12,5,0,7" />
         <Setter Property="MinWidth" Value="{ThemeResource ComboBoxThemeMinWidth}" />
         <Setter Property="Foreground" Value="{ThemeResource ComboBoxForeground}" />
-        <Setter Property="Background" Value="{ThemeResource AppFill}" />
-        <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}" />
+        <Setter Property="Background" Value="{ThemeResource AppForeground}" />
+        <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="TabNavigation" Value="Once" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
@@ -437,7 +430,7 @@
                         </ContentPresenter>
                         <FontIcon x:Name="DropDownGlyph" Grid.Row="1" Grid.Column="1" IsHitTestVisible="False" Margin="0,10,10,10" Foreground="{ThemeResource ComboBoxDropDownGlyphForeground}" FontFamily="{ThemeResource SymbolThemeFontFamily}" FontSize="12" Glyph="&#xE0E5;" HorizontalAlignment="Right" VerticalAlignment="Center" AutomationProperties.AccessibilityView="Raw" />
                         <Popup x:Name="Popup" >
-                            <Border  x:Name="PopupBorder" Background="{ThemeResource AppBackground}"
+                            <Border  x:Name="PopupBorder" Background="{ThemeResource AppForeground}"
                                         BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"  Margin="0,-1,0,-1" HorizontalAlignment="Stretch">
                                 <ScrollViewer Foreground="{ThemeResource ComboBoxDropDownForeground}" MinWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.DropDownContentMinWidth}" VerticalSnapPointsType="OptionalSingle" VerticalSnapPointsAlignment="Near" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" ZoomMode="Disabled" AutomationProperties.AccessibilityView="Raw">
                                     <ItemsPresenter Margin="{ThemeResource ComboBoxDropdownContentMargin}" />

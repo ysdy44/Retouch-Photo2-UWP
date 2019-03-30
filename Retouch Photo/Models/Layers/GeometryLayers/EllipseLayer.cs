@@ -1,9 +1,8 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo.Tools.Controls;
+using Retouch_Photo.Controls.LayerControls.GeometryControls;
 using System.Numerics;
-using Windows.Foundation;
 using Windows.Graphics.Effects;
 using Windows.UI;
 using static Retouch_Photo.Library.HomographyController;
@@ -19,20 +18,7 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
             base.Name = EllipseLayer.Type;
             base.Icon = new EllipseControl();
         }
-
-        //@Override     
-        public override void ColorChanged(Color value)
-        {
-            if (base.FillBrush is CanvasSolidColorBrush brush)
-            {
-                brush.Color = value;
-            }
-        }
-        public override void BrushChanged(ICanvasBrush brush)
-        {
-            base.FillBrush = brush;
-        }
-
+        
         protected override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
             /// <summary>
@@ -78,20 +64,7 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
             }
             return command;
         }
-        public override void ThumbnailDraw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Size controlSize)
-        {
-            /*
-            ds.Clear(Colors.Transparent);
-
-            Rect rect = Layer.GetThumbnailSize(base.Transformer.Width, base.Transformer.Height, controlSize);
-
-            if (this.IsFill) ds.FillRectangle(rect, base.FillBrush);
-            if (this.IsStroke) ds.DrawRectangle(rect, base.StrokeBrush, base.StrokeWidth);
-            */
-        }
-
-
-
+    
         public static EllipseLayer CreateFromRect(ICanvasResourceCreator creator, VectRect rect, Color color)
         {
             return new EllipseLayer
@@ -100,7 +73,5 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
                 FillBrush = new CanvasSolidColorBrush(creator, color)
             };
         }
-
-
     }
 }

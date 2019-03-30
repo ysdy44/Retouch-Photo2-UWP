@@ -1,22 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using Retouch_Photo.Element;
+using Retouch_Photo.Library;
+using Retouch_Photo.ViewModels;
+using System;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.ViewManagement;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using Windows.ApplicationModel.Resources;
-using Retouch_Photo.ViewModels;
-using Retouch_Photo.Library;
 
 namespace Retouch_Photo.Controls
 {
@@ -27,31 +16,27 @@ namespace Retouch_Photo.Controls
         DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
 
-        private ApplicationViewTitleBar TitleBar = ApplicationView.GetForCurrentView().TitleBar;
-        public ElementTheme TitleRequestedTheme
-        {
-            set
-            {
-                this.ThemeIcon.Glyph = value == ElementTheme.Light ? "\uE706" : "\uEC46";
-   
-                this.TitleBar.ButtonInactiveBackgroundColor =
-                this.TitleBar.ButtonBackgroundColor =
-                this.TitleBar.InactiveBackgroundColor =
-                this.TitleBar.BackgroundColor =
-                value == ElementTheme.Light ? Color.FromArgb(255, 243, 243, 245) : Color.FromArgb(255, 32, 32, 33);
-            }
-        }
-        public ElementTheme AppRequestedTheme
-        {
-            set
-            {
-                if (Window.Current.Content is FrameworkElement frameworkElement)
-                {
-                    frameworkElement.RequestedTheme = value;
-                }
-            }
-        }
+        #region DependencyProperty
 
+        /// <summary>
+        /// Brush of <see cref="ApplicationViewTitleBar"/>.
+        /// </summary>
+        public SolidColorBrush Brush
+        {
+            get { return (SolidColorBrush)GetValue(ColorProperty); }
+            set { SetValue(ColorProperty, value); }
+        }
+        public static readonly DependencyProperty ColorProperty = DependencyProperty.Register(nameof(Brush), typeof(SolidColorBrush), typeof(NavigatorControl), new PropertyMetadata(new SolidColorBrush(Colors.White), (sender, e) =>
+        {
+            NavigatorControl con = (NavigatorControl)sender;
+
+            if (e.NewValue is SolidColorBrush value)
+            {
+                ThemeControl.TitleBarColor = value.Color;
+            }
+        }));
+
+        #endregion
 
         public NavigatorControl()
         {
@@ -62,23 +47,16 @@ namespace Retouch_Photo.Controls
             this.HundredPercent.Tapped += (sender, e) => this.Navigator((m) => m.Fit(1f));
             this.TwoHundredPercent.Tapped += (sender, e) => this.Navigator((m) => m.Fit(2f));
             this.AutoPercent.Tapped += (sender, e) => this.Navigator((m) => m.Fit());
-          
+
 
             //Theme
+            this.ThemeSwitch.Toggled += (sender, e) => ThemeControl.Theme = (this.ThemeSwitch.IsOn ? ElementTheme.Dark : ElementTheme.Light);
             this.ThemeSwitch.Loaded += (sender, e) =>
             {
                 if (Window.Current.Content is FrameworkElement frameworkElement)
                 {
                     this.ThemeSwitch.IsOn = (frameworkElement.RequestedTheme != ElementTheme.Light);
-                    this.TitleRequestedTheme = frameworkElement.RequestedTheme;
                 }
-            };
-
-            this.ThemeSwitch.Toggled += (sender, e) =>
-            {
-                this.TitleRequestedTheme =
-                this.AppRequestedTheme =
-                (this.ThemeSwitch.IsOn ? ElementTheme.Dark : ElementTheme.Light);
             };
 
 

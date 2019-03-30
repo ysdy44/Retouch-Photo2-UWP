@@ -42,18 +42,19 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Grid x:Name="TitlePanel" Padding="12,0" Background="{ThemeResource AppFill}">
+            <Grid x:Name="TitlePanel" Padding="12,0" Background="{ThemeResource AppForeground}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="TextBlock" Opacity="0.4" VerticalAlignment="Center"/>
+                <TextBlock x:Name="TextBlock" VerticalAlignment="Center" Foreground="{ThemeResource AppText}"/>
                 <Button x:Name="StateButton" Grid.Column="2" Padding="0" Width="28" Height="28" BorderThickness="1" BorderBrush="{ThemeResource SystemControlBackgroundBaseHighBrush}" Background="Transparent" >
                     <FontIcon x:Name="StateIcon" FontSize="14" FontFamily="Segoe UI Symbol"/>
                 </Button>
             </Grid>
-            <Rectangle x:Name="StoryboardRectangle" Grid.Row="1" Fill="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+
+            <Rectangle x:Name="StoryboardRectangle" Grid.Row="1" Fill="{ThemeResource AppBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
 
             <Border x:Name="StoryboardBorder" Grid.Row="1" VerticalAlignment="Top">
                 <Border x:Name="ContentBorder" Padding="8,0" >

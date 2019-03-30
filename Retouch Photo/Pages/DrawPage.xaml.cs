@@ -15,6 +15,8 @@ namespace Retouch_Photo.Pages
         {
             this.InitializeComponent();
 
+            //Debuug
+            MenuLayout.LayoutBinging(this.DebugLayout, this.DebugToggleButton);
             //Selection
             MenuLayout.LayoutBinging(this.SelectionLayout, this.SelectionToggleButton);
             //Operate

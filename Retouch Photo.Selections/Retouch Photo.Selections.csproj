@@ -145,6 +145,9 @@
     <Compile Include="EditControls\PasteEnabledControl.xaml.cs">
       <DependentUpon>PasteEnabledControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Icon.xaml.cs">
+      <DependentUpon>Icon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Select2Controls\FeatherDisabledControl.xaml.cs">
       <DependentUpon>FeatherDisabledControl.xaml</DependentUpon>
@@ -239,6 +242,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditControls\PasteEnabledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Icon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -29,7 +29,7 @@
             ManipulationStarted="Border_ManipulationStarted"
             ManipulationDelta="Border_ManipulationDelta"  
             ManipulationCompleted="Border_ManipulationCompleted">
-            <FontIcon Glyph="&#xEF3C;" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource AppIconElement}"/>
+            <FontIcon Glyph="&#xEF3C;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
         </Border>
 
         <Border x:Name="Ellipse" Grid.Column="1" Background="Transparent"  >

@@ -38,7 +38,6 @@ namespace Retouch_Photo.Tools.Pages
             if (layer != null)
             {
                 layer.ColorChanged(value);
-                layer.Invalidate();
                 this.ViewModel.Invalidate();
             }
         }

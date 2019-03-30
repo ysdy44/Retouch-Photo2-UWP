@@ -101,7 +101,7 @@
 
     <ContentDialog.SecondaryButtonStyle>
         <Style  TargetType="Button">
-            <Setter Property="Background" Value="{ThemeResource AppForeground}" />
+            <Setter Property="Background" Value="{ThemeResource AppBackground}" />
             <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}" />
             <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}" />
             <Setter Property="BorderThickness" Value="{ThemeResource ContentDialogBorderWidth}" />
@@ -193,7 +193,7 @@
 
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  >
     
-        <Border Height="32" CornerRadius="2" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}">
+        <Border Height="32" CornerRadius="2" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackground}">
             <TextBox x:Name="TextBox" BorderThickness="0" TextChanged="TextBox_TextChanged"/>
         </Border>
 

@@ -14,15 +14,15 @@
 
         <!--Background-->
         <SolidColorBrush x:Name="AccentColor"  Color="{ThemeResource SystemAccentColor}"/>
-        <SolidColorBrush x:Name="UnAccentColor" Color="#00000000"/>
+        <SolidColorBrush x:Name="UnAccentColor" Color="Transparent"/>
 
         <!--Foreground-->
         <SolidColorBrush x:Name="CheckColor" Color="White"/>
-        <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource SystemBaseHighColor}"/>
+        <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource AppTextColor}"/>
 
     </UserControl.Resources>
 
-    <Border CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}">
+    <Border Style="{StaticResource AppRoundedBorderStyle}">
         <StackPanel Orientation="Horizontal">
 
             <ContentPresenter x:Name="NoneSegmented" ToolTipService.ToolTip="None" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Tapped="NoneSegmented_Tapped">

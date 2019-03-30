@@ -12,9 +12,7 @@
     xmlns:elementAppbarControls="using:Retouch_Photo.Element.AppbarControls"
     xmlns:models="using:Retouch_Photo.Models"
     xmlns:local="using:Retouch_Photo.Pages"
-    xmlns:control="using:配色pro.Controls"
     mc:Ignorable="d" 
-    NavigationCacheMode="Enabled"
     >
 
     <Page.Resources>
@@ -39,7 +37,7 @@
                           BorderThickness="1"                         
                           apiContractNotPresent5:BorderBrush="{ThemeResource SystemControlBackgroundBaseLowBrush}"                         
                           apiContractPresent5:BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"                              
-                          Background="{ThemeResource AppBackground}"
+                          Background="{ThemeResource AppForeground}"
                           
                           PointerEntered="{x:Bind Entered}"             
                           PointerExited="{x:Bind Exited}"                
@@ -593,7 +591,7 @@
     </Page.Resources>
 
      
-    <Grid  Background="{ThemeResource AppBackground}">
+    <Grid>
         <local:MainLayout >
 
             <local:MainLayout.Head>
@@ -606,7 +604,7 @@
                     <!-- -->
                     <Button x:Name="RefreshButton" Visibility="Collapsed" Height="50" Width="60" Content="&#xE117;" FontSize="20" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
                     <Button x:Name="ThemeButton" Height="50" Width="60" Style="{ThemeResource NavigationBackButtonNormalStyle}">
-                            <control:ThemeControl x:Name="ThemeControl" Brush="{ThemeResource AppFill}"/>
+                        <element:ThemeControl x:Name="ThemeControl" Brush="{ThemeResource AppForeground}"/>
                     </Button>
                 
                     <TextBlock Grid.Column="1" Text="Retouh Photo2" FontSize="32" FontWeight="Light" HorizontalAlignment="Center"/>

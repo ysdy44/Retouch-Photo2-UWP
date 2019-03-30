@@ -36,7 +36,7 @@
                           SelectionMode="None" IsItemClickEnabled="True">
                     <GridView.ItemContainerStyle>
                         <Style TargetType="GridViewItem">
-                            <Setter Property="Background" Value="{ThemeResource AppFill}" />
+                            <Setter Property="Background" Value="{ThemeResource AppForeground}" />
                             <Setter Property="Width" Value="94" />
                             <Setter Property="Margin" Value="2" />
                             <Setter Property="Padding" Value="0" />
@@ -87,11 +87,11 @@
         </Grid.RowDefinitions>
 
         <Button x:Name="FilterButton" Grid.Column="0" Style="{ThemeResource NavigationBackButtonNormalStyle}" >
-            <FontIcon Glyph="&#xE169;" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource AppIconElement}"/>
+            <FontIcon Glyph="&#xE169;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
         </Button>
 
         <Button x:Name="AddButton" Grid.Column="2" Style="{ThemeResource NavigationBackButtonNormalStyle}">
-            <FontIcon Glyph="&#xE109;" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource AppIconElement}"/>
+            <FontIcon Glyph="&#xE109;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
         </Button>
         
         

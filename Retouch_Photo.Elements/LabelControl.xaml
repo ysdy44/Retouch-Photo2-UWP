@@ -11,7 +11,7 @@
     <UserControl.Resources>
 
         <!--Background-->
-        <SolidColorBrush x:Name="AccentColor"  Color="{ThemeResource AppFillColor}"/>
+        <SolidColorBrush x:Name="AccentColor"  Color="{ThemeResource AppForegroundColor}"/>
         <SolidColorBrush x:Name="UnAccentColor"   Color="Transparent"/>
 
         <!--Foreground-->
@@ -20,6 +20,6 @@
 
     </UserControl.Resources>
 
-    <ContentPresenter x:Name="ContentPresenter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="{ThemeResource AppStroke}"/>
+    <ContentPresenter x:Name="ContentPresenter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="{ThemeResource AppBorderBrush}"/>
 
 </UserControl>

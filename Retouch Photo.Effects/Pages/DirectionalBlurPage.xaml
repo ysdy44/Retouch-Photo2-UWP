@@ -17,7 +17,7 @@
         <TextBlock Text="Angle" Style="{StaticResource AppTextBlock}"/>
         <element:RadiansPicker x:Name="AnglePicker" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"
                                BorderBrush="{ThemeResource AppBorderBrush}"
-                               Background="{ThemeResource AppBackground}"
+                               Background="{ThemeResource AppForeground}"
                                />
     </StackPanel>
 </effects:EffectPage>

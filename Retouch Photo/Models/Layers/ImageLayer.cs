@@ -1,12 +1,13 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
+using Retouch_Photo.Controls.LayerControls;
 using System;
 using System.Numerics;
 using System.Threading.Tasks;
-using Windows.Foundation;
 using Windows.Graphics.Effects;
 using Windows.Storage;
 using Windows.Storage.Streams;
+using Windows.UI.Xaml;
 using static Retouch_Photo.Library.HomographyController;
 
 namespace Retouch_Photo.Models.Layers
@@ -15,10 +16,20 @@ namespace Retouch_Photo.Models.Layers
     {
         
         public static readonly string Type = "Image";
-        protected ImageLayer() => base.Name = ImageLayer.Type;
 
         public CanvasBitmap Image { set; get; }
+        
 
+        protected ImageLayer()
+        {
+            base.Name = ImageLayer.Type;
+            base.Icon = new ImageControl();
+        }
+
+        private UIElement ImageControl()
+        {
+            throw new NotImplementedException();
+        }
 
         protected override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -27,28 +38,6 @@ namespace Retouch_Photo.Models.Layers
                 Source = this.Image,
                 TransformMatrix = base.Transformer.Matrix* canvasToVirtualMatrix
             };
-        }
-        public override void ThumbnailDraw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Size controlSize)
-        {/*
-            
-            try
-            {
-
-                ds.Clear(Windows.UI.Colors.Transparent);
-
-                Matrix3x2 matrix = Layer.GetThumbnailMatrix(base.Transformer.Width, base.Transformer.Height, controlSize);
-
-                ds.DrawImage(new Transform2DEffect
-                {
-                    Source = this.Image,
-                    TransformMatrix = base.Transformer.Matrix * matrix
-                });
-
-            }
-            catch (Exception)
-            {
-            }         
-            */
         }
 
 

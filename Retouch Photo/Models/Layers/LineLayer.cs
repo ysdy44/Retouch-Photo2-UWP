@@ -1,10 +1,10 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo.Tools.Controls;
+using Microsoft.Graphics.Canvas.Brushes;
 using System.Numerics;
-using Windows.Foundation;
 using Windows.Graphics.Effects;
 using Windows.UI;
 using static Retouch_Photo.Library.HomographyController;
+using Retouch_Photo.Controls.LayerControls;
 
 namespace Retouch_Photo.Models.Layers
 {
@@ -12,20 +12,23 @@ namespace Retouch_Photo.Models.Layers
     {
 
         public static readonly string Type = "Line";
+
+        public Color Stroke = Color.FromArgb(255, 255, 255, 255);
+        public float StrokeWidth = 1.0f;
+
         protected LineLayer()
         {
             base.Name = LineLayer.Type;
             base.Icon = new LineControl();
         }
 
-        public Color Stroke = Color.FromArgb(255, 255, 255, 255);
-        public float StrokeWidth = 1.0f;
 
-        //@Override     
-        public override void ColorChanged(Color value)
+        public override void ColorChanged(Color color, bool fillOrStroke)
         {
-            this.Stroke = value;
+            this.Stroke = color;
         }
+
+
         protected override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
             Vector2 leftTop = Vector2.Transform(this.Transformer.DstLeftTop, canvasToVirtualMatrix);
@@ -38,16 +41,6 @@ namespace Retouch_Photo.Models.Layers
             }
             return command;
         }
-        public override void ThumbnailDraw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Size controlSize)
-        {/*
-            ds.Clear(Windows.UI.Colors.Transparent);
-
-            Rect rect = Layer.GetThumbnailSize(base.Transformer.Width, base.Transformer.Height, controlSize);
-
-            ds.FillRectangle(rect, this.TintColor);
-            */
-        }
-
 
 
         public static LineLayer CreateFromRect(ICanvasResourceCreator creator, Vector2 leftTop, Vector2 rightBottom, Color stroke, float strokeWidth = 1f)

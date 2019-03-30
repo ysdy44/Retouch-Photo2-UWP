@@ -5,7 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace 配色pro.Controls
+namespace Retouch_Photo.Element
 {
     /// <summary> Click the button to toggle sensitive themes for your application. </summary>
     public sealed partial class ThemeControl : UserControl
@@ -26,10 +26,7 @@ namespace 配色pro.Controls
 
             if (e.NewValue is SolidColorBrush value)
             {
-                con.TitleBar.BackgroundColor =
-                con.TitleBar.InactiveBackgroundColor =
-                con.TitleBar.ButtonBackgroundColor =
-                con.TitleBar.ButtonInactiveBackgroundColor = value.Color;
+                ThemeControl.TitleBarColor = value.Color;
             }
         }));
 
@@ -38,9 +35,9 @@ namespace 配色pro.Controls
         /// <summary>
         /// Theme of current <see cref="Window"/>.
         /// </summary>
-        public ElementTheme Theme
+        public static ElementTheme Theme
         {
-            get => this.theme;
+            get => ThemeControl.theme;
             set
             {
                 if (Window.Current.Content is FrameworkElement frameworkElement)
@@ -48,14 +45,14 @@ namespace 配色pro.Controls
                     frameworkElement.RequestedTheme = value;
                 }
 
-                this._Theme = value;
-                this.theme = value;
+                ThemeControl.theme = value;
             }
         }
+        private static ElementTheme theme;
 
-        private ElementTheme _Theme
+        public ElementTheme _Theme
         {
-            get => this.theme;
+            get => ThemeControl.theme;
             set
             {
                 if (value == ElementTheme.Dark)                
@@ -63,12 +60,21 @@ namespace 配色pro.Controls
                 else                
                     this.LightStoryboard.Begin();//Storyboard                
 
-                this.theme = value;
+                ThemeControl.theme = value;
             }
         }
-        private ElementTheme theme;
-
-        ApplicationViewTitleBar TitleBar = ApplicationView.GetForCurrentView().TitleBar;
+               
+        private static ApplicationViewTitleBar TitleBar = ApplicationView.GetForCurrentView().TitleBar;
+        public static Color TitleBarColor
+        {
+            set
+            {
+                ThemeControl.TitleBar.BackgroundColor =
+                ThemeControl.TitleBar.InactiveBackgroundColor =
+                ThemeControl.TitleBar.ButtonBackgroundColor =
+                ThemeControl.TitleBar.ButtonInactiveBackgroundColor = value;
+            }
+        }
 
         public ThemeControl()
         {

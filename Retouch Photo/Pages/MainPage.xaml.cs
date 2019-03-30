@@ -8,6 +8,7 @@ using Windows.Storage.Pickers;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Retouch_Photo.Element;
 
 namespace Retouch_Photo.Pages
 {
@@ -63,7 +64,7 @@ namespace Retouch_Photo.Pages
             {
                 this.Refresh();
 
-               // return;
+                return;
                 this.Frame.Navigate(typeof(DrawPage), Project.CreateFromSize(App.ViewModel.CanvasDevice, new Windows.Graphics.Imaging.BitmapSize
                 {
                       Width = 1024,
@@ -72,7 +73,7 @@ namespace Retouch_Photo.Pages
 
             };
             this.PopupButton.Tapped += (s, e) => { };
-            this.ThemeButton.Tapped += (s, e) => this.ThemeControl.Theme = (this.ThemeControl.Theme == ElementTheme.Dark) ? ElementTheme.Light : ElementTheme.Dark;
+            this.ThemeButton.Tapped += (s, e) => this.ThemeControl._Theme = ThemeControl.Theme = (ThemeControl.Theme == ElementTheme.Dark) ? ElementTheme.Light : ElementTheme.Dark;
 
             this.GridView.ItemClick += (s, e) =>
             {
@@ -93,7 +94,7 @@ namespace Retouch_Photo.Pages
 
             //Appbar
             // this.AppbarControl.CancelButtonTapped+=(s,e)=>this.Mode = MainMode.None;
-            this.AppbarControl.AddButtonTapped += async (s, e) => await this.AddDialog.ShowAsync(ContentDialogPlacement.InPlace);//ContentDialogPlacement.InPlace
+            this.AppbarControl.AddButtonTapped += async (s, e) =>await this.AddDialog.ShowAsync(ContentDialogPlacement.InPlace);
             this.AppbarControl.PicturesButtonTapped += (s, e) => this.State = MainPageState.Pictures;
             this.AppbarControl.SaveButtonTapped += (s, e) => this.State = MainPageState.Save;
             this.AppbarControl.ShareButtonTapped += (s, e) => this.State = MainPageState.Share;

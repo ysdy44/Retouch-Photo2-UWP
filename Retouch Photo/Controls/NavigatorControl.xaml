@@ -10,34 +10,34 @@
     d:DesignHeight="400"
     d:DesignWidth="200">
 
-    <StackPanel Background="{ThemeResource AppForeground}">
+    <StackPanel Background="{ThemeResource AppBackground}">
 
 
-        <TextBlock Visibility="Collapsed"  Text="View" Style="{StaticResource AppTextBlock}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
-        <Border Visibility="Collapsed" MinHeight="122" Background="{ThemeResource AppFill}">
+        <TextBlock Visibility="Collapsed"  Text="View"  VerticalAlignment="Center"/>
+        <Border Visibility="Collapsed" MinHeight="122" Background="{ThemeResource AppForeground}">
             <xaml:CanvasControl x:Name="CanvasControl"/>
         </Border>
 
-        <TextBlock Text="Scale" Style="{StaticResource AppTextBlock}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
+        <TextBlock Text="Scale"  Style="{StaticResource AppTextBlock}"/>
         <Border Height="33" Style="{StaticResource AppRoundedBorderStyle}">
-            <Grid Height="33">
+            <Grid>
                 <Grid.ColumnDefinitions >
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="FiftyPercent" Grid.Column="0" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="{ThemeResource AppFill}">
-                    <TextBlock Text="50%" FontSize="13" Opacity="0.5"/>
+                <Button x:Name="FiftyPercent" Grid.Column="0" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="{ThemeResource AppForeground}">
+                    <TextBlock Text="50%" FontSize="13"/>
                 </Button>
-                <Button x:Name="HundredPercent" Grid.Column="1" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="{ThemeResource AppFill}">
-                    <TextBlock Text="100%" FontSize="13" Opacity="0.5"/>
+                <Button x:Name="HundredPercent" Grid.Column="1" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="{ThemeResource AppForeground}">
+                    <TextBlock Text="100%" FontSize="13"/>
                 </Button>
-                <Button x:Name="TwoHundredPercent" Grid.Column="2" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="{ThemeResource AppFill}">
-                    <TextBlock Text="200%" FontSize="13" Opacity="0.5"/>
+                <Button x:Name="TwoHundredPercent" Grid.Column="2" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="{ThemeResource AppForeground}">
+                    <TextBlock Text="200%" FontSize="13"/>
                 </Button>
-                <Button x:Name="AutoPercent" Grid.Column="3" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="{ThemeResource AppFill}">
-                    <TextBlock Text="Auto" FontSize="13" Opacity="0.5"/>
+                <Button x:Name="AutoPercent" Grid.Column="3" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="{ThemeResource AppForeground}">
+                    <TextBlock Text="Auto" FontSize="13"/>
                 </Button>
             </Grid>
         </Border>        
@@ -53,8 +53,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
-            <FontIcon x:Name="ThemeIcon" FontSize="24" FontFamily="Segoe MDL2 Assets" Style="{StaticResource AppIconElement}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" />
-            <TextBlock Grid.Column="1" Text="Dark Theme" Style="{StaticResource AppTextBlock}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" />
+            <FontIcon Glyph="&#xEC46;" FontSize="24" FontFamily="Segoe MDL2 Assets" />
+            <TextBlock Grid.Column="1" Text="Dark Theme" VerticalAlignment="Center"/>
             <ToggleSwitch x:Name="ThemeSwitch" Grid.Column="2"/>
         </Grid>
 
@@ -65,8 +65,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
-            <FontIcon Glyph="&#x2756;" FontSize="28" FontFamily="Segoe UI Symbol" Style="{StaticResource AppIconElement}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
-            <TextBlock Grid.Column="1" Text="显示选区" Style="{StaticResource AppTextBlock}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
+            <FontIcon Glyph="&#x2756;" FontSize="28" FontFamily="Segoe UI Symbol" Foreground="{StaticResource AppText}"/>
+            <TextBlock Grid.Column="1" Text="显示选区"  VerticalAlignment="Center"/>
             <ToggleSwitch Grid.Column="2"/>
         </Grid>
 
@@ -77,8 +77,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
-            <FontIcon Glyph="&#xE80A;" FontSize="20" FontFamily="Segoe MDL2 Assets" Style="{StaticResource AppIconElement}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
-            <TextBlock Grid.Column="1" Text="Show Rulers" Style="{StaticResource AppTextBlock}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
+            <FontIcon Glyph="&#xE80A;" FontSize="20" FontFamily="Segoe MDL2 Assets"/>
+            <TextBlock Grid.Column="1" Text="Show Rulers"  VerticalAlignment="Center"/>
             <ToggleSwitch x:Name="RulerSwitch" Grid.Column="2" />
         </Grid>
 
@@ -89,9 +89,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
-            <FontIcon Glyph="&#xF0E2;" FontSize="22" FontFamily="Segoe MDL2 Assets" Style="{StaticResource AppIconElement}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
-            <TextBlock Grid.Column="1" Text="Bitmap" Style="{StaticResource AppTextBlock}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
-            <FontIcon Grid.Column="2" Glyph="&#xE017;" FontFamily="Segoe MDL2 Assets" Style="{StaticResource AppIconElement}"/>
+            <FontIcon Glyph="&#xF0E2;" FontSize="22" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource AppText}" />
+            <TextBlock Grid.Column="1" Text="Bitmap"  VerticalAlignment="Center"/>
+            <FontIcon Grid.Column="2" Glyph="&#xE017;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource AppText}"/>
         </Grid>
 
         <Rectangle Visibility="Collapsed"  Height="1" Fill="{ThemeResource AppBorderBrush}"/>
@@ -101,9 +101,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
-            <FontIcon Glyph="&#xEB91;" FontSize="22" FontFamily="Segoe MDL2 Assets" Style="{StaticResource AppIconElement}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
-            <TextBlock Grid.Column="1" Text="Adjustment" Style="{StaticResource AppTextBlock}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
-            <FontIcon Grid.Column="2" Glyph="&#xE017;" FontFamily="Segoe MDL2 Assets" Style="{StaticResource AppIconElement}"/>
+            <FontIcon Glyph="&#xEB91;" FontSize="22" FontFamily="Segoe MDL2 Assets"/>
+            <TextBlock Grid.Column="1" Text="Adjustment"  VerticalAlignment="Center"/>
+            <FontIcon Grid.Column="2" Glyph="&#xE017;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource AppText}"/>
         </Grid>
 
         <Rectangle Visibility="Collapsed"  Height="1" Fill="{ThemeResource AppBorderBrush}"/>
@@ -113,9 +113,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
-            <FontIcon Glyph="&#xE790;" FontSize="22" FontFamily="Segoe MDL2 Assets" Style="{StaticResource AppIconElement}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
-            <TextBlock Grid.Column="1" Text="Painting" Style="{StaticResource AppTextBlock}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
-            <FontIcon Grid.Column="2" Glyph="&#xE017;" FontFamily="Segoe MDL2 Assets" Style="{StaticResource AppIconElement}"/>
+            <FontIcon Glyph="&#xE790;" FontSize="22" FontFamily="Segoe MDL2 Assets" />
+            <TextBlock Grid.Column="1" Text="Painting"  VerticalAlignment="Center"/>
+            <FontIcon Grid.Column="2" Glyph="&#xE017;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource AppText}"/>
         </Grid>
 
         <Rectangle Visibility="Collapsed"  Height="1" Fill="{ThemeResource AppBorderBrush}"/>
@@ -125,9 +125,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
-            <FontIcon Glyph="&#xEB3C;" FontSize="20" FontFamily="Segoe MDL2 Assets" Style="{StaticResource AppIconElement}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
-            <TextBlock Grid.Column="1" Text="Geometric" Style="{StaticResource AppTextBlock}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
-            <FontIcon Grid.Column="2" Glyph="&#xE017;" FontFamily="Segoe MDL2 Assets" Style="{StaticResource AppIconElement}"/>
+            <FontIcon Glyph="&#xEB3C;" FontSize="20" FontFamily="Segoe MDL2 Assets" />
+            <TextBlock Grid.Column="1" Text="Geometric"  VerticalAlignment="Center"/>
+            <FontIcon Grid.Column="2" Glyph="&#xE017;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource AppText}"/>
         </Grid>
 
 

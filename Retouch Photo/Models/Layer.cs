@@ -35,62 +35,7 @@ namespace Retouch_Photo.Models
         public Transformer Transformer;
         public AdjustmentManager AdjustmentManager = new AdjustmentManager();
         public EffectManager EffectManager = new EffectManager();
-        
-
-        #region Thumbnail
-
-
-        //@override
-        public abstract void ThumbnailDraw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Size controlSize);
-
-
-        /// <summary> 画布管理 </summary>
-        CanvasControlManger CanvasControl;
-        /// <summary>初始化</summary>
-        public void InitializeCanvasControl(CanvasControl sender) => this.CanvasControl = new CanvasControlManger(sender);
-
-
-        public void Invalidate()
-        {
-            if (this.CanvasControl == null) return;
-
-            this.CanvasControl.Invalidate();
-        }
-        
-
-        public static Rect GetThumbnailSize(float width, float height, Size controlSize)
-        {
-            double widthScale = controlSize.Width / width;
-            double heightScale = controlSize.Height / height;
-
-            double scale = Math.Min(widthScale, heightScale);
-            double w = width * scale;
-            double h = height * scale;
-
-            double x = (controlSize.Width - w) / 2;
-            double y = (controlSize.Height - h) / 2;
-
-            return new Rect(x, y, w, h);
-        }
-        public static Matrix3x2 GetThumbnailMatrix(float width, float height, Size controlSize)
-        {
-            double widthScale = controlSize.Width / width;
-            double heightScale = controlSize.Height / height;
-
-            double scale = Math.Min(widthScale, heightScale);
-            double w = width * scale;
-            double h = height * scale;
-
-            double x = (controlSize.Width - w) / 2;
-            double y = (controlSize.Height - h) / 2;
-
-            return Matrix3x2.CreateScale((float)scale) *
-              Matrix3x2.CreateTranslation((float)x, (float)y);
-        }
-
-
-        #endregion
-
+               
 
         //Create
         public static Layer CreateFromXElement(ICanvasResourceCreator creator, XElement element)
@@ -112,10 +57,10 @@ namespace Retouch_Photo.Models
 
 
         //@override
-        public virtual void ColorChanged(Color value) { }
-        public virtual void BrushChanged(ICanvasBrush brush) { }
- 
+        public virtual void ColorChanged(Color color, bool fillOrStroke = true) { }
+        public virtual void BrushChanged(ICanvasBrush brush, bool fillOrStroke=true) { } 
         protected abstract ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix); 
+
 
         //@static
         /// <summary> LayerRender </summary>
