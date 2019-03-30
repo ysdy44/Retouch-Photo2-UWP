@@ -28,10 +28,7 @@ namespace Retouch_Photo.Controls.LayersControls
             if (e.NewValue is Layer layer)
             {
                 con.CheckBox.IsChecked = layer.IsVisual;
-
-                con.CanvasControl.CreateResources += (sender2, args) => layer.InitializeCanvasControl(sender2);
-                con.CanvasControl.Draw += (sender2, args) => layer.ThumbnailDraw(sender2, args.DrawingSession, sender2.Size);
-
+                con.SecondBorder.Child = layer.Icon;                
                 con.TextBlock.Text = layer.Name;
             }
         }));

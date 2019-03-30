@@ -1,0 +1,27 @@
+﻿<UserControl
+    x:Class="Retouch_Photo.Tools.Controls.AcrylicControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="50">
+
+    <ToolTipService.ToolTip>
+        <Grid  Height="32">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="32"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <TextBlock Text="Acrylic"/>
+            </ContentPresenter>
+            <TextBlock Text="Acrylic" Grid.Column="1" VerticalAlignment="Center"/>
+        </Grid>
+    </ToolTipService.ToolTip>
+
+    <TextBlock Text="Acrylic"/>
+    
+    
+</UserControl>

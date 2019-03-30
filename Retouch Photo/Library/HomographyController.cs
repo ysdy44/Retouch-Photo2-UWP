@@ -70,6 +70,19 @@ namespace Retouch_Photo.Library
             public Matrix3x2 Matrix => Transformer.FindHomography(this.SrcLeftTop, this.SrcRightTop, this.SrcRightBottom, this.SrcLeftBottom, this.DstLeftTop, this.DstRightTop, this.DstRightBottom, this.DstLeftBottom);
             public Matrix3x2 InverseMatrix => Transformer.FindHomography(this.DstLeftTop, this.DstRightTop, this.DstRightBottom, this.DstLeftBottom, this.SrcLeftTop, this.SrcRightTop, this.SrcRightBottom, this.SrcLeftBottom);
 
+            public static Transformer CreateFromVector(Vector2 leftTop, Vector2 rightBottom) => new Transformer
+            {
+                //Source
+                SrcLeftTop = leftTop,
+                SrcRightTop = new Vector2(rightBottom.X, leftTop.Y),
+                SrcRightBottom = rightBottom,
+                SrcLeftBottom = new Vector2(leftTop.X, rightBottom.Y),
+                //Destination
+                DstLeftTop = leftTop,
+                DstRightTop = new Vector2(rightBottom.X, leftTop.Y),
+                DstRightBottom = rightBottom,
+                DstLeftBottom = new Vector2(leftTop.X, rightBottom.Y),
+              };
             public static Transformer CreateFromSize(float width, float height, Vector2 postion, float scale = 1, bool disabledRadian = false) => new Transformer
             {
                 //Source

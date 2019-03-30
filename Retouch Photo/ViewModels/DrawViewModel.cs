@@ -14,8 +14,6 @@ using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo.Library;
 using Retouch_Photo.Models;
 using Retouch_Photo.Controls;
-using Retouch_Photo.Pages.ToolPages;
-using Retouch_Photo.Controls.ToolControls;
 using Microsoft.Graphics.Canvas.Effects;
 using Newtonsoft.Json;
 using System;
@@ -24,12 +22,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Input;
-using Retouch_Photo.ViewModels.ToolViewModels;
 using Microsoft.Graphics.Canvas.UI;
 using Windows.System;
 using Windows.UI.Core;
-using Retouch_Photo.Models.Tools;
 using static Retouch_Photo.Library.HomographyController;
+using Retouch_Photo.Tools.Models;
+using Retouch_Photo.Tools;
 
 namespace Retouch_Photo.ViewModels
 {

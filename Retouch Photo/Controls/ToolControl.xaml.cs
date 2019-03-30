@@ -1,5 +1,5 @@
-﻿using Retouch_Photo.Controls.ToolControls;
-using Retouch_Photo.Models;
+﻿using Retouch_Photo.Models;
+using Retouch_Photo.Tools;
 using Retouch_Photo.ViewModels;
 using System;
 using System.Collections.Generic;

@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo.Library;
+using Retouch_Photo.Tools.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,11 @@ namespace Retouch_Photo.Models.Layers
     {
          
         public static readonly string Type = "Acrylic";
-        protected AcrylicLayer() => base.Name = AcrylicLayer.Type;
+        protected AcrylicLayer()
+        {
+            base.Name = AcrylicLayer.Type;
+            base.Icon = new AcrylicControl();
+        }
 
         public float TintOpacity = 0.5f;
         public Color TintColor = Color.FromArgb(255, 255, 255, 255);

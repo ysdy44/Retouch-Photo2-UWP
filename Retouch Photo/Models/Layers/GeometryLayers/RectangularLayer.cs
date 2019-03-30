@@ -1,14 +1,8 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
-using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo.Library;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Retouch_Photo.Tools.Controls;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Graphics.Effects;
 using Windows.UI;
@@ -20,7 +14,11 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
     {
 
         public static readonly string Type = "Rectangular";
-        protected RectangularLayer() => base.Name = RectangularLayer.Type;
+        protected RectangularLayer()
+        {
+            base.Name = RectangularLayer.Type;
+            base.Icon = new RectangleControl();
+        }
 
         //@Override     
         public override void ColorChanged(Color value)

@@ -101,6 +101,9 @@
     <Compile Include="Controls\BrushControl.xaml.cs">
       <DependentUpon>BrushControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\Controls\LineControl.xaml.cs">
+      <DependentUpon>LineControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Element\AppbarControl.xaml.cs">
       <DependentUpon>AppbarControl.xaml</DependentUpon>
     </Compile>
@@ -161,43 +164,43 @@
     <Compile Include="Controls\SelectionControl.xaml.cs">
       <DependentUpon>SelectionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\AcrylicControl.xaml.cs">
+    <Compile Include="Tools\Controls\AcrylicControl.xaml.cs">
       <DependentUpon>AcrylicControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\CursorControl.xaml.cs">
+    <Compile Include="Tools\Controls\CursorControl.xaml.cs">
       <DependentUpon>CursorControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\EllipseControl.xaml.cs">
+    <Compile Include="Tools\Controls\EllipseControl.xaml.cs">
       <DependentUpon>EllipseControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\EraseBrushControl.xaml.cs">
+    <Compile Include="Tools\Controls\EraseBrushControl.xaml.cs">
       <DependentUpon>EraseBrushControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\FloodSetectControl.xaml.cs">
+    <Compile Include="Tools\Controls\FloodSetectControl.xaml.cs">
       <DependentUpon>FloodSetectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\GeometryControl.xaml.cs">
+    <Compile Include="Tools\Controls\GeometryControl.xaml.cs">
       <DependentUpon>GeometryControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\PaintBrushControl.xaml.cs">
+    <Compile Include="Tools\Controls\PaintBrushControl.xaml.cs">
       <DependentUpon>PaintBrushControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\PencilControl.xaml.cs">
+    <Compile Include="Tools\Controls\PencilControl.xaml.cs">
       <DependentUpon>PencilControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\PenControl.xaml.cs">
+    <Compile Include="Tools\Controls\PenControl.xaml.cs">
       <DependentUpon>PenControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\RectangleControl.xaml.cs">
+    <Compile Include="Tools\Controls\RectangleControl.xaml.cs">
       <DependentUpon>RectangleControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\SelectionBrushControl.xaml.cs">
+    <Compile Include="Tools\Controls\SelectionBrushControl.xaml.cs">
       <DependentUpon>SelectionBrushControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\ViewControl.xaml.cs">
+    <Compile Include="Tools\Controls\ViewControl.xaml.cs">
       <DependentUpon>ViewControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControls\WatercolorPenControl.xaml.cs">
+    <Compile Include="Tools\Controls\WatercolorPenControl.xaml.cs">
       <DependentUpon>WatercolorPenControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TransformerControl.xaml.cs">
@@ -225,20 +228,22 @@
     <Compile Include="Models\Layers\GeometryLayers\EllipseLayer.cs" />
     <Compile Include="Models\Layers\ImageLayer.cs" />
     <Compile Include="Models\Layers\GeometryLayers\RectangularLayer.cs" />
-    <Compile Include="Models\Tools\AcrylicTool.cs" />
-    <Compile Include="Models\Tools\CursorTool.cs" />
-    <Compile Include="Models\Tools\EllipseTool.cs" />
-    <Compile Include="Models\Tools\EraseBrushTool.cs" />
-    <Compile Include="Models\Tools\FloodSetectTool.cs" />
-    <Compile Include="Models\Tools\GeometryTool.cs" />
-    <Compile Include="Models\Tools\NullTool.cs" />
-    <Compile Include="Models\Tools\PaintBrushTool.cs" />
-    <Compile Include="Models\Tools\PencilTool.cs" />
-    <Compile Include="Models\Tools\PenTool.cs" />
-    <Compile Include="Models\Tools\RectangleTool.cs" />
-    <Compile Include="Models\Tools\SelectionBrushTool.cs" />
-    <Compile Include="Models\Tools\ViewTool.cs" />
-    <Compile Include="Models\Tools\WatercolorPenTool.cs" />
+    <Compile Include="Models\Layers\LineLayer.cs" />
+    <Compile Include="Tools\Models\AcrylicTool.cs" />
+    <Compile Include="Tools\Models\CursorTool.cs" />
+    <Compile Include="Tools\Models\EllipseTool.cs" />
+    <Compile Include="Tools\Models\EraseBrushTool.cs" />
+    <Compile Include="Tools\Models\FloodSetectTool.cs" />
+    <Compile Include="Tools\Models\GeometryTool.cs" />
+    <Compile Include="Tools\Models\LineTool.cs" />
+    <Compile Include="Tools\Models\NullTool.cs" />
+    <Compile Include="Tools\Models\PaintBrushTool.cs" />
+    <Compile Include="Tools\Models\PencilTool.cs" />
+    <Compile Include="Tools\Models\PenTool.cs" />
+    <Compile Include="Tools\Models\RectangleTool.cs" />
+    <Compile Include="Tools\Models\SelectionBrushTool.cs" />
+    <Compile Include="Tools\Models\ViewTool.cs" />
+    <Compile Include="Tools\Models\WatercolorPenTool.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\VectRect.cs" />
     <Compile Include="Pages\DrawLayout.xaml.cs">
@@ -262,70 +267,76 @@
     <Compile Include="Element\ModeControl.xaml.cs">
       <DependentUpon>ModeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\AcrylicPage.xaml.cs">
+    <Compile Include="Tools\Pages\AcrylicPage.xaml.cs">
       <DependentUpon>AcrylicPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\CursorPage.xaml.cs">
+    <Compile Include="Tools\Pages\CursorPage.xaml.cs">
       <DependentUpon>CursorPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\EllipsePage.xaml.cs">
+    <Compile Include="Tools\Pages\EllipsePage.xaml.cs">
       <DependentUpon>EllipsePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\EraseBrushPage.xaml.cs">
+    <Compile Include="Tools\Pages\EraseBrushPage.xaml.cs">
       <DependentUpon>EraseBrushPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\FloodSetectPage.xaml.cs">
+    <Compile Include="Tools\Pages\FloodSetectPage.xaml.cs">
       <DependentUpon>FloodSetectPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\GeometryPage.xaml.cs">
+    <Compile Include="Tools\Pages\GeometryPage.xaml.cs">
       <DependentUpon>GeometryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Element\CompositeModeControl.xaml.cs">
       <DependentUpon>CompositeModeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\PaintBrushPage.xaml.cs">
+    <Compile Include="Tools\Pages\LinePage.xaml.cs">
+      <DependentUpon>LinePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\Pages\PaintBrushPage.xaml.cs">
       <DependentUpon>PaintBrushPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\PencilPage.xaml.cs">
+    <Compile Include="Tools\Pages\PencilPage.xaml.cs">
       <DependentUpon>PencilPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\PenPage.xaml.cs">
+    <Compile Include="Tools\Pages\PenPage.xaml.cs">
       <DependentUpon>PenPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\RectanglePage.xaml.cs">
+    <Compile Include="Tools\Pages\RectanglePage.xaml.cs">
       <DependentUpon>RectanglePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\SelectionBrushPage.xaml.cs">
+    <Compile Include="Tools\Pages\SelectionBrushPage.xaml.cs">
       <DependentUpon>SelectionBrushPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\ViewPage.xaml.cs">
+    <Compile Include="Tools\Pages\ViewPage.xaml.cs">
       <DependentUpon>ViewPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ToolPages\WatercolorPenPage.xaml.cs">
+    <Compile Include="Tools\Pages\WatercolorPenPage.xaml.cs">
       <DependentUpon>WatercolorPenPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controls\ToolControl.xaml.cs">
       <DependentUpon>ToolControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Tool.cs" />
+    <Compile Include="Tools\Tool.cs" />
+    <Compile Include="Tools\ToolPage.cs" />
+    <Compile Include="Tools\ToolType.cs" />
     <Compile Include="ViewModels\DrawViewModel.cs" />
     <Compile Include="ViewModels\KeyViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\AcrylicViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\EllipseViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\EraseBrushViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\GeometryViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\NullViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\PaintBrushViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\PencilViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\PenViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\RectangleViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\CursorViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\FloodSetectViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\SelectionBrushViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\ViewViewModel.cs" />
-    <Compile Include="ViewModels\ToolViewModels\WatercolorPenViewModel.cs" />
+    <Compile Include="Tools\ViewModels\AcrylicViewModel.cs" />
+    <Compile Include="Tools\ViewModels\EllipseViewModel.cs" />
+    <Compile Include="Tools\ViewModels\EraseBrushViewModel.cs" />
+    <Compile Include="Tools\ViewModels\GeometryViewModel.cs" />
+    <Compile Include="Tools\ViewModels\LineViewModel.cs" />
+    <Compile Include="Tools\ViewModels\NullViewModel.cs" />
+    <Compile Include="Tools\ViewModels\PaintBrushViewModel.cs" />
+    <Compile Include="Tools\ViewModels\PencilViewModel.cs" />
+    <Compile Include="Tools\ViewModels\PenViewModel.cs" />
+    <Compile Include="Tools\ViewModels\RectangleViewModel.cs" />
+    <Compile Include="Tools\ViewModels\CursorViewModel.cs" />
+    <Compile Include="Tools\ViewModels\FloodSetectViewModel.cs" />
+    <Compile Include="Tools\ViewModels\SelectionBrushViewModel.cs" />
+    <Compile Include="Tools\ToolViewModel.cs" />
+    <Compile Include="Tools\ViewModels\ViewViewModel.cs" />
+    <Compile Include="Tools\ViewModels\WatercolorPenViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -680,6 +691,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Tools\Controls\LineControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Element\AppbarControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -760,55 +775,55 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\AcrylicControl.xaml">
+    <Page Include="Tools\Controls\AcrylicControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\CursorControl.xaml">
+    <Page Include="Tools\Controls\CursorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\EllipseControl.xaml">
+    <Page Include="Tools\Controls\EllipseControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\EraseBrushControl.xaml">
+    <Page Include="Tools\Controls\EraseBrushControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\FloodSetectControl.xaml">
+    <Page Include="Tools\Controls\FloodSetectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\GeometryControl.xaml">
+    <Page Include="Tools\Controls\GeometryControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\PaintBrushControl.xaml">
+    <Page Include="Tools\Controls\PaintBrushControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\PencilControl.xaml">
+    <Page Include="Tools\Controls\PencilControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\PenControl.xaml">
+    <Page Include="Tools\Controls\PenControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\RectangleControl.xaml">
+    <Page Include="Tools\Controls\RectangleControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\SelectionBrushControl.xaml">
+    <Page Include="Tools\Controls\SelectionBrushControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\ViewControl.xaml">
+    <Page Include="Tools\Controls\ViewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolControls\WatercolorPenControl.xaml">
+    <Page Include="Tools\Controls\WatercolorPenControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -852,27 +867,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\ToolPages\AcrylicPage.xaml">
+    <Page Include="Tools\Pages\AcrylicPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\ToolPages\CursorPage.xaml">
+    <Page Include="Tools\Pages\CursorPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\EllipsePage.xaml">
+    <Page Include="Tools\Pages\EllipsePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\EraseBrushPage.xaml">
+    <Page Include="Tools\Pages\EraseBrushPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\FloodSetectPage.xaml">
+    <Page Include="Tools\Pages\FloodSetectPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\GeometryPage.xaml">
+    <Page Include="Tools\Pages\GeometryPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -880,31 +895,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\PaintBrushPage.xaml">
+    <Page Include="Tools\Pages\LinePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\Pages\PaintBrushPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\PencilPage.xaml">
+    <Page Include="Tools\Pages\PencilPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\PenPage.xaml">
+    <Page Include="Tools\Pages\PenPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\RectanglePage.xaml">
+    <Page Include="Tools\Pages\RectanglePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\SelectionBrushPage.xaml">
+    <Page Include="Tools\Pages\SelectionBrushPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\ViewPage.xaml">
+    <Page Include="Tools\Pages\ViewPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\ToolPages\WatercolorPenPage.xaml">
+    <Page Include="Tools\Pages\WatercolorPenPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -951,7 +970,9 @@
       <Version>1.23.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controls\LayerControls\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Retouch Photo.Adjustment\Retouch Photo.Adjustments.csproj">
       <Project>{7256c005-0e5d-4c38-9115-e4eef9978233}</Project>

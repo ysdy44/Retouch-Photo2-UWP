@@ -14,6 +14,8 @@ using System.Xml.Linq;
 using Windows.Foundation;
 using Windows.Graphics.Effects;
 using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using static Retouch_Photo.Library.HomographyController;
 
 namespace Retouch_Photo.Models
@@ -23,11 +25,13 @@ namespace Retouch_Photo.Models
 
         //ViewModel
         DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
-        
+
         public string Name= "Layer";        
+        public UIElement Icon;
+
         public double Opacity = 100;
         public bool IsVisual= true;
-        public int BlendIndex;        
+        public int BlendIndex;
         public Transformer Transformer;
         public AdjustmentManager AdjustmentManager = new AdjustmentManager();
         public EffectManager EffectManager = new EffectManager();
