@@ -29,6 +29,7 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.System;
 using Retouch_Photo.ViewModels;
+using Retouch_Photo.Models.Layers;
 
 namespace Retouch_Photo.Controls
 {
@@ -75,6 +76,30 @@ namespace Retouch_Photo.Controls
         CanvasGradientStop[] gradientStops = new CanvasGradientStop[] 
         {
         };
+
+        #region DependencyProperty
+
+        public Layer Layer
+        {
+            get { return (Layer)GetValue(LayerProperty); }
+            set { SetValue(LayerProperty, value); }
+        }
+        public static readonly DependencyProperty LayerProperty = DependencyProperty.Register(nameof(Layer), typeof(Layer), typeof(BrushControl), new PropertyMetadata(null, (sender, e) =>
+        {
+            BrushControl con = (BrushControl)sender;
+
+            if (e.NewValue is Layer value)
+            {
+                if (value is GeometryLayer geometryLayer)
+                {
+
+                    
+
+                }
+            }
+        }));
+
+        #endregion
 
         public BrushControl()
         {
@@ -123,9 +148,14 @@ namespace Retouch_Photo.Controls
                 this.ViewModel.CurrentLayer.BrushChanged(brush);
                 this.ViewModel.Invalidate();
             };
+
+
+            
+                this.ColorColorPicker.ColorChange += (s, color) =>
+                {
+
+                };
         }
-
-
 
     }
 }

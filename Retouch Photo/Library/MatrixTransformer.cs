@@ -1,4 +1,6 @@
-﻿using Retouch_Photo.Models;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Text;
+using Retouch_Photo.Models;
 using System;
 using System.Numerics;
 using Windows.Foundation;
@@ -119,5 +121,64 @@ namespace Retouch_Photo.Library
         /// </summary>
         public Vector2 Center  => Vector2.Transform(new Vector2(this.ControlWidth, this.ControlHeight) / 2, this.InverseMatrix);
 
+
+
+
+
+        #region Ruler & Text
+
+
+        /// <summary>  Draw rulers line or no. </summary>
+        public bool IsRuler;
+
+
+        readonly CanvasTextFormat RulerTextFormat = new CanvasTextFormat() { FontSize = 12, HorizontalAlignment = CanvasHorizontalAlignment.Center, VerticalAlignment = CanvasVerticalAlignment.Center, };
+        readonly float RulerSpace = 20;
+
+        /// <summary>
+        /// Draw rulers line.
+        /// </summary>
+        /// <param name="ds"> Drawing sessions are used to issue graphics drawing commands. This is the main way to draw things onto a canvas. </param>
+        public void RulerDraw(CanvasDrawingSession ds)
+        {
+            if (this.IsRuler == false) return;
+
+
+            //line
+            ds.FillRectangle(0, 0, this.ControlWidth, this.RulerSpace, Windows.UI.Color.FromArgb(64, 127, 127, 127));//Horizontal
+            ds.FillRectangle(0, 0, this.RulerSpace, this.ControlHeight, Windows.UI.Color.FromArgb(64, 127, 127, 127));//Vertical
+            ds.DrawLine(0, this.RulerSpace, this.ControlWidth, this.RulerSpace, Windows.UI.Colors.Gray);//Horizontal
+            ds.DrawLine(this.RulerSpace, 0, this.RulerSpace, this.ControlHeight, Windows.UI.Colors.Gray);//Vertical
+
+            //space
+            float space = (10 * this.Scale);
+            while (space < 10) space *= 5;
+            while (space > 100) space /= 5;
+            float spaceFive = space * 5;
+
+            //Horizontal
+            for (float X = (float)this.Position.X; X < this.ControlWidth; X += space) ds.DrawLine(X, 10, X, this.RulerSpace, Windows.UI.Colors.Gray);
+            for (float X = (float)this.Position.X; X > this.RulerSpace; X -= space) ds.DrawLine(X, 10, X, this.RulerSpace, Windows.UI.Colors.Gray);
+            //Vertical
+            for (float Y = (float)this.Position.Y; Y < this.ControlHeight; Y += space) ds.DrawLine(10, Y, this.RulerSpace, Y, Windows.UI.Colors.Gray);
+            for (float Y = (float)this.Position.Y; Y > this.RulerSpace; Y -= space) ds.DrawLine(10, Y, this.RulerSpace, Y, Windows.UI.Colors.Gray);
+
+            //Horizontal
+            for (float X = (float)this.Position.X; X < this.ControlWidth; X += spaceFive) ds.DrawLine(X, 10, X, this.RulerSpace, Windows.UI.Colors.Gray);
+            for (float X = (float)this.Position.X; X > this.RulerSpace; X -= spaceFive) ds.DrawLine(X, 10, X, this.RulerSpace, Windows.UI.Colors.Gray);
+            //Vertical
+            for (float Y = (float)this.Position.Y; Y < this.ControlHeight; Y += spaceFive) ds.DrawLine(10, Y, this.RulerSpace, Y, Windows.UI.Colors.Gray);
+            for (float Y = (float)this.Position.Y; Y > this.RulerSpace; Y -= spaceFive) ds.DrawLine(10, Y, this.RulerSpace, Y, Windows.UI.Colors.Gray);
+
+            //Horizontal
+            for (float X = (float)this.Position.X; X < this.ControlWidth; X += spaceFive) ds.DrawText(((int)(Math.Round((X - this.Position.X) / this.Scale))).ToString(), X, 10, Windows.UI.Colors.Gray, RulerTextFormat);
+            for (float X = (float)this.Position.X; X > this.RulerSpace; X -= spaceFive) ds.DrawText(((int)(Math.Round((X - this.Position.X) / this.Scale))).ToString(), X, 10, Windows.UI.Colors.Gray, RulerTextFormat);
+            //Vertical
+            for (float Y = (float)this.Position.Y; Y < this.ControlHeight; Y += spaceFive) ds.DrawText(((int)(Math.Round((Y - this.Position.Y) / this.Scale))).ToString(), 10, Y, Windows.UI.Colors.Gray, RulerTextFormat);
+            for (float Y = (float)this.Position.Y; Y > this.RulerSpace; Y -= spaceFive) ds.DrawText(((int)(Math.Round((Y - this.Position.Y) / this.Scale))).ToString(), 10, Y, Windows.UI.Colors.Gray, RulerTextFormat);
+        }
+
+
+        #endregion
     }
 }

@@ -548,7 +548,7 @@ namespace Retouch_Photo.Library
         }
 
         /// <summary> Rotation </summary>
-        private class RotationController : NoneController, IController
+        public class RotationController : NoneController, IController
         {
             float StartRadian;
 
@@ -593,7 +593,7 @@ namespace Retouch_Photo.Library
 
 
         /// <summary> Skew </summary>
-        protected abstract class SkewController : NoneController, IController
+        public abstract class SkewController : NoneController, IController
         {
             //@Override
             public abstract Vector2 GetLineA();
@@ -616,7 +616,7 @@ namespace Retouch_Photo.Library
             }
         }
         /// <summary> SkewLeft </summary>
-        protected class SkewLeftController : SkewController, IController
+        public class SkewLeftController : SkewController, IController
         {
             public override Vector2 GetLineA() => base.StartTransformer.DstLeftTop;
             public override Vector2 GetLineB() => base.StartTransformer.DstLeftBottom;
@@ -633,7 +633,7 @@ namespace Retouch_Photo.Library
             }
         }
         /// <summary> SkewTop </summary>
-        protected class SkewTopController : SkewController, IController
+        public class SkewTopController : SkewController, IController
         {
             public override Vector2 GetLineA() => base.StartTransformer.DstLeftTop;
             public override Vector2 GetLineB() => base.StartTransformer.DstRightTop;
@@ -650,7 +650,7 @@ namespace Retouch_Photo.Library
             }
         }
         /// <summary> SkewRight </summary>
-        protected class SkewRightController : SkewController, IController
+        public class SkewRightController : SkewController, IController
         {
             public override Vector2 GetLineA() => base.StartTransformer.DstRightTop;
             public override Vector2 GetLineB() => base.StartTransformer.DstRightBottom;
@@ -667,7 +667,7 @@ namespace Retouch_Photo.Library
             }
         }
         /// <summary> SkewBottom </summary>
-        protected class SkewBottomController : SkewController, IController
+        public class SkewBottomController : SkewController, IController
         {
             public override Vector2 GetLineA() => base.StartTransformer.DstLeftBottom;
             public override Vector2 GetLineB() => base.StartTransformer.DstRightBottom;
@@ -736,7 +736,7 @@ namespace Retouch_Photo.Library
 
 
         /// <summary> Scale </summary>
-        protected abstract class ScaleController : NoneController, IController
+        public abstract class ScaleController : NoneController, IController
         {
             //@Override
             public abstract Vector2 GetPoint();
@@ -751,7 +751,7 @@ namespace Retouch_Photo.Library
 
 
         /// <summary> ScaleAround (Left Top Right Bottom) </summary>
-        protected abstract class ScaleAroundController : ScaleController, IController
+        public abstract class ScaleAroundController : ScaleController, IController
         {
             //@Override
             public abstract void SetTransformer(Layer layer, Vector2 vector);
@@ -784,7 +784,7 @@ namespace Retouch_Photo.Library
             }
         }
         /// <summary> ScaleLeft </summary>
-        protected class ScaleLeftController : ScaleAroundController
+        public class ScaleLeftController : ScaleAroundController
         {
             public override Vector2 GetPoint() => base.StartTransformer.DstLeft;
             public override Vector2 GetDiagonalPoint() => base.StartTransformer.DstRight;
@@ -801,7 +801,7 @@ namespace Retouch_Photo.Library
             }
         }
         /// <summary> ScaleTop </summary>
-        protected class ScaleTopController : ScaleAroundController
+        public class ScaleTopController : ScaleAroundController
         {
             public override Vector2 GetPoint() => base.StartTransformer.DstTop;
             public override Vector2 GetDiagonalPoint() => base.StartTransformer.DstBottom;
@@ -818,7 +818,7 @@ namespace Retouch_Photo.Library
             }
         }
         /// <summary> ScaleRight </summary>
-        protected class ScaleRightController : ScaleAroundController
+        public class ScaleRightController : ScaleAroundController
         {
             public override Vector2 GetPoint() => base.StartTransformer.DstRight;
             public override Vector2 GetDiagonalPoint() => base.StartTransformer.DstLeft;
@@ -835,7 +835,7 @@ namespace Retouch_Photo.Library
             }
         }
         /// <summary> ScaleBottom </summary>
-        protected class ScaleBottomController : ScaleAroundController
+        public class ScaleBottomController : ScaleAroundController
         {
             public override Vector2 GetPoint() => base.StartTransformer.DstBottom;
             public override Vector2 GetDiagonalPoint() => base.StartTransformer.DstTop;
@@ -860,7 +860,7 @@ namespace Retouch_Photo.Library
 
 
         /// <summary> ScaleCorner (LeftTop RightTop RightBottom LeftBottom) </summary>
-        protected abstract class ScaleCornerController : ScaleController, IController
+        public abstract class ScaleCornerController : ScaleController, IController
         {
             //@Override
             public abstract void SetPoint(Layer layer, Vector2 point);
@@ -921,7 +921,7 @@ namespace Retouch_Photo.Library
             }
         }
         /// <summary> ScaleLeftTop </summary>
-        protected class ScaleLeftTopController : ScaleCornerController
+        public class ScaleLeftTopController : ScaleCornerController
         {
             public override Vector2 GetPoint() => base.StartTransformer.DstLeftTop;
             public override Vector2 GetDiagonalPoint() => base.StartTransformer.DstRightBottom;
@@ -931,7 +931,7 @@ namespace Retouch_Photo.Library
             public override void SetVerticalPoint(Layer layer, Vector2 point) => layer.Transformer.DstLeftBottom = point;
         }
         /// <summary> ScaleRightTop </summary>
-        protected class ScaleRightTopController : ScaleCornerController
+        public class ScaleRightTopController : ScaleCornerController
         {
             public override Vector2 GetPoint() => base.StartTransformer.DstRightTop;
             public override Vector2 GetDiagonalPoint() => base.StartTransformer.DstLeftBottom;
@@ -941,7 +941,7 @@ namespace Retouch_Photo.Library
             public override void SetVerticalPoint(Layer layer, Vector2 point) => layer.Transformer.DstRightBottom = point;
         }
         /// <summary> ScaleRightBottom </summary>
-        protected class ScaleRightBottomController : ScaleCornerController
+        public class ScaleRightBottomController : ScaleCornerController
         {
             public override Vector2 GetPoint() => base.StartTransformer.DstRightBottom;
             public override Vector2 GetDiagonalPoint() => base.StartTransformer.DstLeftTop;
@@ -951,7 +951,7 @@ namespace Retouch_Photo.Library
             public override void SetVerticalPoint(Layer layer, Vector2 point) => layer.Transformer.DstRightTop = point;
         }
         /// <summary> ScaleLeftBottom </summary>
-        protected class ScaleLeftBottomController : ScaleCornerController
+        public class ScaleLeftBottomController : ScaleCornerController
         {
             public override Vector2 GetPoint() => base.StartTransformer.DstLeftBottom;
             public override Vector2 GetDiagonalPoint() => base.StartTransformer.DstRightTop;

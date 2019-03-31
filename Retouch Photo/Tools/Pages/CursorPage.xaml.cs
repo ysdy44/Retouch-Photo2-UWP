@@ -1,6 +1,5 @@
 ﻿using Retouch_Photo.ViewModels;
 
-
 namespace Retouch_Photo.Tools.Pages
 {
     public sealed partial class CursorPage : ToolPage
@@ -11,8 +10,7 @@ namespace Retouch_Photo.Tools.Pages
         public CursorPage()
         {
             this.InitializeComponent();
-            this.StepFrequencyToggleControl.CheckedChanged += (c) => this.ViewModel.Invalidate();
-            this.SkewToggleControl.CheckedChanged += (c) => this.ViewModel.Invalidate();
+            this.MoreButton.Tapped += (s,e) => this.MoreFlyout.ShowAt(this.MoreButton);
         }
 
         //@Override

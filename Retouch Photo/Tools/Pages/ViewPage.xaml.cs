@@ -1,7 +1,5 @@
 ﻿using Retouch_Photo.ViewModels;
 using System;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo.Tools.Pages
 {
@@ -64,14 +62,28 @@ namespace Retouch_Photo.Tools.Pages
             this.RadianSlider.Value = ViewConverter.RadianToValue(this.ViewModel.MatrixTransformer.Radian);
             this.RadianSlider.Maximum = ViewConverter.RadianMaximum;
             this.RadianSlider.Minimum = ViewConverter.RadianMinimum;
-            this.RadianSlider.ValueChanged += RadianSlider_ValueChanged;
+            this.RadianSlider.ValueChanged += (s, e) =>
+            {
+                this.ViewModel.MatrixTransformer.Radian = ViewConverter.ValueToRadian(e.NewValue);
+                this.ViewModel.Invalidate();
+            };
+
+            //Radian
+            this.RadianButton.Tapped += (s, e) => this.RadianStoryboard.Begin();
 
             // Scale
             this.ScaleFrame.Value = ViewConverter.ScaleDefult;
             this.ScaleSlider.Value = ViewConverter.ScaleToValue(this.ViewModel.MatrixTransformer.Scale);
             this.ScaleSlider.Maximum = ViewConverter.ScaleMaximum;
             this.ScaleSlider.Minimum = ViewConverter.ScaleMinimum;
-            this.ScaleSlider.ValueChanged += ScaleSlider_ValueChanged;
+            this.ScaleSlider.ValueChanged += (s, e) =>
+            {
+                this.ViewModel.MatrixTransformer.Scale = ViewConverter.ValueToScale(e.NewValue);
+                this.ViewModel.Invalidate();
+            };          
+
+            // Scale
+            this.ScaleButton.Tapped += (s, e) => this.ScaleStoryboard.Begin();
         }
 
         //@Override
@@ -81,24 +93,5 @@ namespace Retouch_Photo.Tools.Pages
         public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
         {
         }
-
-
-        //Radian
-        private void RadianButton_Tapped(object sender, TappedRoutedEventArgs e)=> this.RadianStoryboard.Begin();
-        private void RadianSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-            this.ViewModel.MatrixTransformer.Radian = ViewConverter.ValueToRadian(e.NewValue);
-            this.ViewModel.Invalidate();
-        }
-
-        // Scale
-        private void ScaleButton_Tapped(object sender, TappedRoutedEventArgs e)=>  this.ScaleStoryboard.Begin();
-        private void ScaleSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-            this.ViewModel.MatrixTransformer.Scale = ViewConverter.ValueToScale(e.NewValue);
-            this.ViewModel.Invalidate();
-        }
-                    
-
     }
 }

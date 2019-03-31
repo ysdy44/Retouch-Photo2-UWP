@@ -1,7 +1,5 @@
 ﻿using Retouch_Photo.Models;
 using Retouch_Photo.ViewModels;
-using Windows.UI;
-using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo.Tools.Pages
 {
@@ -13,6 +11,23 @@ namespace Retouch_Photo.Tools.Pages
         public RectanglePage()
         {
             this.InitializeComponent();
+
+            this.ColorButton.Tapped += (s, e) =>
+            {
+                this.ColorFlyout.ShowAt(this.ColorButton);
+                this.ColorPicker.Color = this.ViewModel.Color;
+            };
+            this.ColorPicker.ColorChange += (s, value) => 
+            {
+                this.ViewModel.Color = value;
+
+                Layer layer = this.ViewModel.CurrentLayer;
+                if (layer != null)
+                {
+                    layer.ColorChanged(value);
+                    this.ViewModel.Invalidate();
+                }
+            };
         }
 
         //@Override
@@ -23,24 +38,5 @@ namespace Retouch_Photo.Tools.Pages
         public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
         {
         }
-        
-
-        private void ColorButton_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            this.ColorFlyout.ShowAt(this.ColorButton);
-            this.ColorPicker.Color = this.ViewModel.Color;
-        }
-        private void ColorPicker_ColorChange(object sender, Color value)
-        {
-            this.ViewModel.Color = value;
-
-            Layer layer = this.ViewModel.CurrentLayer;
-            if (layer != null)
-            {
-                layer.ColorChanged(value);
-                this.ViewModel.Invalidate();
-            }
-        }
-
     }
 }

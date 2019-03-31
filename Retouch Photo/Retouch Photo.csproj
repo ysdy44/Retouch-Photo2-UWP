@@ -345,22 +345,6 @@
     <Compile Include="Tools\ToolType.cs" />
     <Compile Include="ViewModels\DrawViewModel.cs" />
     <Compile Include="ViewModels\KeyViewModel.cs" />
-    <Compile Include="Tools\ViewModels\AcrylicViewModel.cs" />
-    <Compile Include="Tools\ViewModels\EllipseViewModel.cs" />
-    <Compile Include="Tools\ViewModels\EraseBrushViewModel.cs" />
-    <Compile Include="Tools\ViewModels\GeometryViewModel.cs" />
-    <Compile Include="Tools\ViewModels\LineViewModel.cs" />
-    <Compile Include="Tools\ViewModels\NullViewModel.cs" />
-    <Compile Include="Tools\ViewModels\PaintBrushViewModel.cs" />
-    <Compile Include="Tools\ViewModels\PencilViewModel.cs" />
-    <Compile Include="Tools\ViewModels\PenViewModel.cs" />
-    <Compile Include="Tools\ViewModels\RectangleViewModel.cs" />
-    <Compile Include="Tools\ViewModels\CursorViewModel.cs" />
-    <Compile Include="Tools\ViewModels\FloodSetectViewModel.cs" />
-    <Compile Include="Tools\ViewModels\SelectionBrushViewModel.cs" />
-    <Compile Include="Tools\ToolViewModel.cs" />
-    <Compile Include="Tools\ViewModels\ViewViewModel.cs" />
-    <Compile Include="Tools\ViewModels\WatercolorPenViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

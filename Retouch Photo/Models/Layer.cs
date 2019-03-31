@@ -59,7 +59,8 @@ namespace Retouch_Photo.Models
         //@override
         public virtual void ColorChanged(Color color, bool fillOrStroke = true) { }
         public virtual void BrushChanged(ICanvasBrush brush, bool fillOrStroke=true) { } 
-        protected abstract ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix); 
+        public virtual void Draw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Matrix3x2 canvasToVirtualMatrix) { }
+        protected abstract ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix);
 
 
         //@static

@@ -4,12 +4,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:tool="using:Retouch_Photo.Tools"
-    xmlns:elements="using:Retouch_Photo.Elements"
     xmlns:element="using:Retouch_Photo.Element"
+    xmlns:elements="using:Retouch_Photo.Elements"
+    xmlns:tool="using:Retouch_Photo.Tools"
     NavigationCacheMode="Enabled"
-    mc:Ignorable="d">
-    
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="400">
+
+
+    <tool:ToolPage.Resources>
+        <Flyout x:Name="MoreFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <Grid Width="200" Height="200">
+                
+            </Grid>
+        </Flyout>
+    </tool:ToolPage.Resources>
+
+
     <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
         <StackPanel Orientation="Horizontal" Height="50" Padding="4">
 
@@ -26,14 +38,14 @@
             <element:ModeControl Mode="{x:Bind ViewModel.MarqueeMode,Mode=TwoWay}" />
 
             <AppBarSeparator/>
-            
+
             <!--Skew-->
-            <elements:ToggleControl x:Name="SkewToggleControl" >
-                <elements:ToggleControl.CenterContent>
-                    <PathIcon Data="M23.517,0l-18.826,0l-4.691,11.79l18.826,0l4.691,-11.79Z"/>
-                </elements:ToggleControl.CenterContent>
-            </elements:ToggleControl>
-            
+            <Border Style="{StaticResource AppCircleBorderStyle}">
+                <Button x:Name="MoreButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
+                    <FontIcon Glyph="&#xE10C;" FontFamily="Segoe MDL2 Assets"/>
+                </Button>
+            </Border>
+
         </StackPanel>
     </ScrollViewer>
 

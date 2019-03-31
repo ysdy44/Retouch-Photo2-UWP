@@ -1,5 +1,7 @@
-﻿using Retouch_Photo.Tools.Models;
+﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo.Tools.Models;
 using System.Collections.Generic;
+using System.Numerics;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo.Tools
@@ -7,33 +9,63 @@ namespace Retouch_Photo.Tools
     public abstract class Tool
     {
         public ToolType Type;
-
         public FrameworkElement Icon;
         public FrameworkElement WorkIcon;
-
         public ToolPage Page;
+        
 
-        public ToolViewModel ViewModel;
+        //Operator
+        public abstract void Start(Vector2 point);
+        public abstract void Delta(Vector2 point);
+        public abstract void Complete(Vector2 point);
 
+        public abstract void Draw(CanvasDrawingSession ds);
+        
+
+        //@Override
+        /// <summary> 当前页面成为活动页面 </summary>
+        public abstract void ToolOnNavigatedTo();
+        /// <summary> 当前页面不再成为活动页面 </summary>
+        public abstract void ToolOnNavigatedFrom();
+               
+
+        //ToolList
         public static List<Tool> ToolList = new List<Tool>
         {
-             new CursorTool(),
-             new ViewTool(),
-             new FloodSetectTool(),
-             new SelectionBrushTool(),
+            Tool.CursorTool,
+             Tool.ViewTool,
+             Tool.FloodSetectTool,
+             Tool.SelectionBrushTool,
 
-             new PaintBrushTool(),
-             new WatercolorPenTool(),
-             new PencilTool(),
-             new EraseBrushTool(),
+             Tool.PaintBrushTool,
+             Tool.WatercolorPenTool,
+             Tool.PencilTool,
+             Tool.EraseBrushTool,
 
-             new PenTool(),
-             new RectangleTool(),
-             new EllipseTool(),
-             new GeometryTool(),
+             Tool.PenTool,
+             Tool.RectangleTool,
+             Tool.EllipseTool,
+             Tool.GeometryTool,
 
-             new AcrylicTool(),
-             new LineTool(),
+             Tool.AcrylicTool,
+             Tool.LineTool,
         };
+        public static CursorTool CursorTool = new CursorTool();
+        public static ViewTool ViewTool = new ViewTool();
+        public static FloodSetectTool FloodSetectTool = new FloodSetectTool();
+        public static SelectionBrushTool SelectionBrushTool = new SelectionBrushTool();
+
+        public static PaintBrushTool PaintBrushTool = new PaintBrushTool();
+        public static WatercolorPenTool WatercolorPenTool = new WatercolorPenTool();
+        public static PencilTool PencilTool = new PencilTool();
+        public static EraseBrushTool EraseBrushTool = new EraseBrushTool();
+
+        public static PenTool PenTool = new PenTool();
+        public static RectangleTool RectangleTool = new RectangleTool();
+        public static EllipseTool EllipseTool = new EllipseTool();
+        public static GeometryTool GeometryTool = new GeometryTool();
+
+        public static AcrylicTool AcrylicTool = new AcrylicTool();
+        public static LineTool LineTool = new LineTool();
     }
 }

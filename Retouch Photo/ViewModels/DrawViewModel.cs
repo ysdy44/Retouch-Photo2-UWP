@@ -32,7 +32,7 @@ using Retouch_Photo.Tools;
 namespace Retouch_Photo.ViewModels
 {
 
-    class CanvasControlManger
+    public class CanvasControlManger
     {
         readonly CanvasControl CanvasControl;
 
@@ -51,15 +51,6 @@ namespace Retouch_Photo.ViewModels
 
     public class DrawViewModel : INotifyPropertyChanged
     {
-        public Vector2 AAA;
-        public Vector2 BBB;
-        public Vector2 CCC;
-        public Vector2 DDD;
-
-        public Vector2 OOO;
-        public int XXX;
-        public int YYY;
-
         KeyViewModel KeyViewModel = new KeyViewModel();
 
         public DrawViewModel()
@@ -78,15 +69,12 @@ namespace Retouch_Photo.ViewModels
 
         #region CanvasControl
 
-
-
+        
         /// <summary> 画布管理 </summary>
-        CanvasControlManger CanvasControl;
+        public CanvasControlManger CanvasManger;
         /// <summary> 画布设备 </summary>
         public CanvasDevice CanvasDevice { get; } = new CanvasDevice();
-        /// <summary> 初始化 </summary>
-        public void InitializeCanvasControl(CanvasControl sender) => this.CanvasControl=new CanvasControlManger(sender);
-
+        
         /// <summary>
         ///  Indicates that the contents of the CanvasControl need to be redrawn. 
         ///  Calling Invalidate results in the Draw event being raised shortly afterward.
@@ -94,7 +82,7 @@ namespace Retouch_Photo.ViewModels
         /// <param name="isThumbnail"> draw thumbnails? </param>
         public void Invalidate(bool? isThumbnail = null)
         {
-            if (this.CanvasControl == null) return;
+            if (this.CanvasManger == null) return;
 
             this.RenderLayer.RenderTarget = this.RenderLayer.GetRender
             (
@@ -105,10 +93,10 @@ namespace Retouch_Photo.ViewModels
                 this.MatrixTransformer.Scale
             );
 
-            if (isThumbnail == true) this.CanvasControl.DpiScale = 0.5f;
-            else if (isThumbnail == false) this.CanvasControl.DpiScale = 1.0f;
+            if (isThumbnail == true) this.CanvasManger.DpiScale = 0.5f;
+            else if (isThumbnail == false) this.CanvasManger.DpiScale = 1.0f;
 
-            this.CanvasControl.Invalidate();
+            this.CanvasManger.Invalidate();
 
 
             /*
@@ -149,10 +137,10 @@ namespace Retouch_Photo.ViewModels
                 this.MatrixTransformer.Scale
             );
 
-            if (isThumbnail == true) this.CanvasControl.DpiScale = 0.5f;
-            else if (isThumbnail == false) this.CanvasControl.DpiScale = 1.0f;
+            if (isThumbnail == true) this.CanvasManger.DpiScale = 0.5f;
+            else if (isThumbnail == false) this.CanvasManger.DpiScale = 1.0f;
 
-            this.CanvasControl.Invalidate();
+            this.CanvasManger.Invalidate();
         }
         
 
@@ -229,10 +217,10 @@ namespace Retouch_Photo.ViewModels
         /// <summary>标尺线</summary>   
         public bool IsRuler
         {
-            get => this.RenderLayer.IsRuler;
+            get => this.MatrixTransformer.IsRuler;
             set
             {
-                this.RenderLayer.IsRuler = value;
+                this.MatrixTransformer.IsRuler = value;
                 OnPropertyChanged(nameof(IsRuler));
             }
         }
@@ -272,8 +260,8 @@ namespace Retouch_Photo.ViewModels
             get => this.tool;
             set
             {
-                this.tool.ViewModel.ToolOnNavigatedFrom();//当前页面不再成为活动页面
-                value.ViewModel.ToolOnNavigatedTo();//当前页面成为活动页面
+                this.tool.ToolOnNavigatedFrom();//当前页面不再成为活动页面
+                value.ToolOnNavigatedTo();//当前页面成为活动页面
 
                 this.tool = value;
                 OnPropertyChanged(nameof(Tool));
