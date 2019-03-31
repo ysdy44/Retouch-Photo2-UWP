@@ -58,9 +58,9 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
             return geometry;
         }
 
-        public override void Draw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Matrix3x2 canvasToVirtualMatrix)
+        public override void Draw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Matrix3x2 matrix)
         {
-            CanvasGeometry geometry = this.GetGeometry(creator, canvasToVirtualMatrix);
+            CanvasGeometry geometry = this.GetGeometry(creator, matrix);
 
             ds.DrawGeometry(geometry, Windows.UI.Colors.DodgerBlue);
         }

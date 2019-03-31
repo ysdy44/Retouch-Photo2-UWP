@@ -34,7 +34,7 @@ namespace Retouch_Photo.ViewModels
                     if (layer != null)
                     {
                         this.ViewModel.RenderLayer.Remove(layer);
-                        this.ViewModel.Tool.ViewModel.ToolOnNavigatedTo();
+                        this.ViewModel.Tool.ToolOnNavigatedTo();
                     }
                     this.ViewModel.CurrentLayer = null;
                     break;

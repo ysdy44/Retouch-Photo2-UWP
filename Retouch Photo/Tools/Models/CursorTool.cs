@@ -40,32 +40,7 @@ namespace Retouch_Photo.Tools.Models
         DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
 
-        Layer CurrentLayer;
-
         readonly CursorBox Box = new CursorBox();
-
-        TransformerMode Mode = TransformerMode.None;
-        readonly Dictionary<TransformerMode, IController> Dictionary = new Dictionary<TransformerMode, IController>
-            {
-                {TransformerMode.None,  new NoneController()},
-                {TransformerMode.Translation,  new TranslationController()},
-                {TransformerMode.Rotation,  new RotationController()},
-
-                {TransformerMode.SkewLeft,  new SkewLeftController()},
-                {TransformerMode.SkewTop,  new SkewTopController()},
-                {TransformerMode.SkewRight,  new SkewRightController()},
-                {TransformerMode.SkewBottom,  new SkewBottomController()},
-
-                {TransformerMode.ScaleLeft,  new ScaleLeftController()},
-                {TransformerMode.ScaleTop,  new ScaleTopController()},
-                {TransformerMode.ScaleRight,  new ScaleRightController()},
-                {TransformerMode.ScaleBottom,  new ScaleBottomController()},
-
-                {TransformerMode.ScaleLeftTop,  new ScaleLeftTopController()},
-                {TransformerMode.ScaleRightTop,  new ScaleRightTopController()},
-                {TransformerMode.ScaleRightBottom,  new ScaleRightBottomController()},
-                {TransformerMode.ScaleLeftBottom,  new ScaleLeftBottomController()},
-            };
 
 
         public CursorTool()
@@ -80,21 +55,12 @@ namespace Retouch_Photo.Tools.Models
         //@Override
         public override void ToolOnNavigatedTo()//当前页面成为活动页面
         {
-            this.CurrentLayer = this.ViewModel.CurrentLayer;
-            if (this.CurrentLayer == null) return;
-            this.ViewModel.Invalidate();
         }
         public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
         {
         }
 
 
-        public bool IsTransformer(TransformerMode mode)
-        {
-            if (mode == TransformerMode.None) return false;
-            if (mode == TransformerMode.Translation) return false;
-            return true;
-        }
         public Layer GetTranslationLayer(Vector2 point, Matrix3x2 inverseMatrix)
         {
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
@@ -117,28 +83,21 @@ namespace Retouch_Photo.Tools.Models
         {
             Matrix3x2 matrix = this.ViewModel.MatrixTransformer.Matrix;
             Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.InverseMatrix;
-            this.CurrentLayer = this.ViewModel.CurrentLayer;
+
 
             // Transformer
-            if (this.CurrentLayer != null)
-            {
-                TransformerMode mode = Transformer.ContainsNodeMode(point, this.CurrentLayer.Transformer, matrix);
-                if (this.IsTransformer(mode))
-                {
-                    this.Mode = mode;
-                    this.Dictionary[mode].Start(point, this.CurrentLayer, matrix, inverseMatrix);
-                    return;
-                }
-            }
+            if (this.ViewModel.TransformerStart(point)) return;
+
 
             //Translation 
-            this.CurrentLayer = this.GetTranslationLayer(point, inverseMatrix);
-            if (this.CurrentLayer != null)
+            Layer layer2 = this.GetTranslationLayer(point, inverseMatrix);
+            if (layer2 != null)
             {
-                this.ViewModel.CurrentLayer = this.CurrentLayer;
+                this.ViewModel.CurrentLayer = layer2;
 
-                this.Mode = TransformerMode.Translation;
-                this.Dictionary[this.Mode].Start(point, this.CurrentLayer, matrix, inverseMatrix);
+                TransformerMode mode = TransformerMode.Translation;
+                this.ViewModel.TransformerMode = mode;
+                this.ViewModel.TransformerDictionary[mode].Start(point, layer2, matrix, inverseMatrix);
                 return;
             }
 
@@ -149,7 +108,6 @@ namespace Retouch_Photo.Tools.Models
 
         public override void Delta(Vector2 point)
         {
-            Matrix3x2 matrix = this.ViewModel.MatrixTransformer.Matrix;
             Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.InverseMatrix;
 
             //CursorBox
@@ -161,20 +119,11 @@ namespace Retouch_Photo.Tools.Models
             }
 
             // Transformer
-            if (this.CurrentLayer != null)
-            {
-                TransformerMode mode = this.Mode;
-                this.Dictionary[mode].Delta(point, this.CurrentLayer, matrix, inverseMatrix);
-
-                this.ViewModel.Transformer = this.CurrentLayer.Transformer;//Transformer
-                this.ViewModel.Invalidate();
-                return;
-            }
+            if (this.ViewModel.TransformerDelta(point)) return;
         }
 
         public override void Complete(Vector2 point)
         {
-            Matrix3x2 matrix = this.ViewModel.MatrixTransformer.Matrix;
             Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.InverseMatrix;
 
             //CursorBox
@@ -184,33 +133,18 @@ namespace Retouch_Photo.Tools.Models
                 this.Box.IsCursorBox = false;
 
                 this.ViewModel.CurrentLayer = null;
-                this.CurrentLayer = null;
-
                 this.ViewModel.Invalidate();
                 return;
             }
 
             // Transformer
-            if (this.CurrentLayer != null)
-            {
-                TransformerMode mode = this.Mode;
-                this.Dictionary[mode].Complete(point, this.CurrentLayer, matrix, inverseMatrix);
-
-                this.Mode = TransformerMode.None;
-                this.ViewModel.Invalidate();
-                return;
-            }
-
-            this.ViewModel.CurrentLayer = null;
-            this.Mode = TransformerMode.None;
-            this.ViewModel.Invalidate();
+            if (this.ViewModel.TransformerComplete(point)) return;
         }
-        
+
 
         public override void Draw(CanvasDrawingSession ds)
         {
             Matrix3x2 matrix = this.ViewModel.MatrixTransformer.Matrix;
-            Matrix3x2 canvasToVirtualMatrix = this.ViewModel.MatrixTransformer.CanvasToVirtualMatrix;
 
             //CursorBox
             if (this.Box.IsCursorBox)
@@ -219,12 +153,8 @@ namespace Retouch_Photo.Tools.Models
                 return;
             }
 
-            //Transformer
-            if (this.CurrentLayer != null)
-            {
-                Transformer.DrawBoundNodes(ds, this.CurrentLayer.Transformer, matrix);
-                this.CurrentLayer.Draw(this.ViewModel.CanvasDevice, ds, canvasToVirtualMatrix);
-            }
+            //Transformer      
+            if (this.ViewModel.TransformerDraw(ds)) return;
         }
     }
 }

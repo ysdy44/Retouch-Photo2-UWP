@@ -54,7 +54,8 @@ namespace Retouch_Photo.Controls
         {
             if (e.ClickedItem is Layer item)
             {
-                this.ViewModel.CurrentLayer=item;
+                this.ViewModel.CurrentLayer = item;
+                this.ViewModel.Transformer = item.Transformer;
             }
             this.ViewModel.Invalidate();
         }

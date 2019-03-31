@@ -63,7 +63,7 @@ namespace Retouch_Photo.Controls
             //Ruler
             this.RulerSwitch.Toggled += (sender, e) =>
             {
-                this.ViewModel.RenderLayer.IsRuler = this.RulerSwitch.IsOn;
+                this.ViewModel.MatrixTransformer.IsRuler = this.RulerSwitch.IsOn;
                 this.ViewModel.Invalidate();
             };
 

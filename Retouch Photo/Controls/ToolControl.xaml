@@ -10,8 +10,7 @@
 
 
     <UserControl.Resources>
-        
-        <!--Style-->
+         <!--Style-->
         <Style x:Key="ListBoxItemContainerStyle" TargetType="ListBoxItem">
             <Setter Property="Foreground" Value="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -107,8 +106,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-    </UserControl.Resources>
+     </UserControl.Resources>
 
 
     <ListBox 
@@ -116,23 +114,7 @@
         Background="Transparent"                   
         ScrollViewer.VerticalScrollBarVisibility="Hidden"
         ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}"
-        >
-        
-        <!--
-           Content="{x:Bind Icon}"
-        <ListBox.ItemContainerStyle>
-            <Style TargetType="ListBoxItem">
-                
-            </Style>
-        </ListBox.ItemContainerStyle>
-        <ListBox.ItemTemplate>
-            <DataTemplate x:DataType="models:Tool">
-                <ContentControl  />
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-        -->
-        
-    </ListBox>
+        />
 </UserControl>
 
 

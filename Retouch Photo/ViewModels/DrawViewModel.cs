@@ -159,7 +159,7 @@ namespace Retouch_Photo.ViewModels
             this.RenderLayer.Layers.CollectionChanged += (ssender, e) => this.Invalidate();
 
             int index = (project.Tool >= Tool.ToolList.Count) || (project.Tool < 0) ? 0 : project.Tool;
-            this.Tool = Tool.ToolList[index];
+            this.Tool = Tool.ToolList[(ToolType)index];
             ToolControl.SetIndex(index);
         }
                
@@ -307,11 +307,134 @@ namespace Retouch_Photo.ViewModels
                 this.keyAlt = value;
                 OnPropertyChanged(nameof(KeyAlt));
             }
-        } 
-        
+        }
+
 
         #endregion
 
+
+        #region Transformer
+
+
+        public TransformerMode TransformerMode = TransformerMode.None;
+        public readonly Dictionary<TransformerMode, IController> TransformerDictionary = new Dictionary<TransformerMode, IController>
+            {
+                {TransformerMode.None,  new NoneController()},
+                {TransformerMode.Translation,  new TranslationController()},
+                {TransformerMode.Rotation,  new RotationController()},
+
+                {TransformerMode.SkewLeft,  new SkewLeftController()},
+                {TransformerMode.SkewTop,  new SkewTopController()},
+                {TransformerMode.SkewRight,  new SkewRightController()},
+                {TransformerMode.SkewBottom,  new SkewBottomController()},
+
+                {TransformerMode.ScaleLeft,  new ScaleLeftController()},
+                {TransformerMode.ScaleTop,  new ScaleTopController()},
+                {TransformerMode.ScaleRight,  new ScaleRightController()},
+                {TransformerMode.ScaleBottom,  new ScaleBottomController()},
+
+                {TransformerMode.ScaleLeftTop,  new ScaleLeftTopController()},
+                {TransformerMode.ScaleRightTop,  new ScaleRightTopController()},
+                {TransformerMode.ScaleRightBottom,  new ScaleRightBottomController()},
+                {TransformerMode.ScaleLeftBottom,  new ScaleLeftBottomController()},
+            };
+
+
+        public bool IsTransformer(TransformerMode mode)
+        {
+            if (mode == TransformerMode.None) return false;
+            if (mode == TransformerMode.Translation) return false;
+            return true;
+        }
+
+
+        public bool TransformerStart(Vector2 point)
+        {
+            Matrix3x2 matrix = this.MatrixTransformer.Matrix;
+            Matrix3x2 inverseMatrix = this.MatrixTransformer.InverseMatrix;
+
+            // Transformer
+            Layer layer = this.CurrentLayer;
+            if (layer != null)
+            {
+                TransformerMode mode = Transformer.ContainsNodeMode(point, layer.Transformer, matrix);
+                if (this.IsTransformer(mode))
+                {
+                    this.TransformerMode = mode;
+                    this.TransformerDictionary[mode].Start(point, layer, matrix, inverseMatrix);
+                    return true;
+                }
+            }
+
+            this.TransformerMode = TransformerMode.None;
+            return false;
+        }
+
+        public bool TransformerDelta(Vector2 point)
+        {
+            if (this.TransformerMode==TransformerMode.None) return false;
+            Matrix3x2 matrix = this.MatrixTransformer.Matrix;
+            Matrix3x2 inverseMatrix = this.MatrixTransformer.InverseMatrix;
+            
+            // Transformer
+            Layer layer = this.CurrentLayer;
+            if (layer != null)
+            {
+                TransformerMode mode = this.TransformerMode;
+                this.TransformerDictionary[mode].Delta(point, layer, matrix, inverseMatrix);
+
+                this.Transformer = layer.Transformer;//Transformer
+                this.Invalidate();
+                 return true;
+            }
+
+            return false;
+        }
+
+        public bool TransformerComplete(Vector2 point)
+        {
+            if (this.TransformerMode==TransformerMode.None) return false;
+            Matrix3x2 matrix = this.MatrixTransformer.Matrix;
+            Matrix3x2 inverseMatrix = this.MatrixTransformer.InverseMatrix;
+            
+            // Transformer
+            Layer layer = this.CurrentLayer;
+            if (layer != null)
+            {
+                TransformerMode mode = this.TransformerMode;
+                this.TransformerDictionary[mode].Complete(point, layer, matrix, inverseMatrix);
+
+                this.TransformerMode = TransformerMode.None;
+                this.Invalidate();
+                return true;
+            }
+
+            this.CurrentLayer = null;
+
+            this.TransformerMode = TransformerMode.None;
+            this.Invalidate();
+            return false;
+        }
+
+
+        public bool TransformerDraw(CanvasDrawingSession ds)
+        {
+            Matrix3x2 matrix = this.MatrixTransformer.Matrix;
+            
+            //Transformer      
+            Layer layer = this.CurrentLayer;
+            if (layer != null)
+            {
+                layer.Draw(this.CanvasDevice, ds, matrix);
+                Transformer.DrawBoundNodes(ds, layer.Transformer, matrix);
+                return true;
+            }
+
+            return false;
+        }
+
+
+        #endregion
 
 
         /// <summary>选框模式</summary>

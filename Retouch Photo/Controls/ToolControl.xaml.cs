@@ -34,7 +34,7 @@ namespace Retouch_Photo.Controls
         public ToolControl()
         {
             this.InitializeComponent();
-            this.ListBox.Loaded += (sender, e) => this.ListBox.ItemsSource =  from tool in Tool.ToolList select tool.Icon;
+            this.ListBox.Loaded += (sender, e) => this.ListBox.ItemsSource =from tool in Tool.ToolList.Values select tool.Icon; 
 
             ToolControl.IndexChanged += (int index) =>
             {
@@ -53,7 +53,7 @@ namespace Retouch_Photo.Controls
                 if (index < 0) return;
                 if (index >= Tool.ToolList.Count) return;
 
-                this.ViewModel.Tool = Tool.ToolList[index];
+                this.ViewModel.Tool = Tool.ToolList[(ToolType)index];
                 this.ViewModel.Invalidate();
             };
             

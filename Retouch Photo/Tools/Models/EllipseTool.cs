@@ -18,7 +18,7 @@ namespace Retouch_Photo.Tools.Models
         Vector2 point;
         Vector2 StartPoint;
 
-        EllipseLayer Layer;
+        EllipseLayer EllipseLayer;
 
 
         public EllipseTool()
@@ -27,6 +27,13 @@ namespace Retouch_Photo.Tools.Models
             base.Icon = new EllipseControl();
             base.WorkIcon = new EllipseControl();
             base.Page = new EllipsePage();
+        }
+
+        public bool IsTransformer(TransformerMode mode)
+        {
+            if (mode == TransformerMode.None) return false;
+            if (mode == TransformerMode.Translation) return false;
+            return true;
         }
 
 
@@ -41,43 +48,72 @@ namespace Retouch_Photo.Tools.Models
 
         public override void Start(Vector2 point)
         {
+            Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.InverseMatrix;
+
+
+            // Transformer
+            if (this.ViewModel.TransformerStart(point)) return;
+
+
             this.point = point;
-            this.StartPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.InverseMatrix);
+            this.StartPoint = Vector2.Transform(point, inverseMatrix);
             VectRect rect = new VectRect(this.StartPoint, this.StartPoint, this.ViewModel.MarqueeMode);
 
-            this.Layer = EllipseLayer.CreateFromRect(this.ViewModel.CanvasDevice, rect, this.ViewModel.Color);
-            this.ViewModel.InvalidateWithJumpedQueueLayer(this.Layer);
+            this.EllipseLayer = EllipseLayer.CreateFromRect(this.ViewModel.CanvasDevice, rect, this.ViewModel.Color);
+            this.ViewModel.InvalidateWithJumpedQueueLayer(this.EllipseLayer);
         }
         public override void Delta(Vector2 point)
         {
-            Vector2 endPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.InverseMatrix);
+            Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.InverseMatrix;
+
+
+            // Transformer
+            if (this.ViewModel.TransformerDelta(point)) return;
+
+
+            Vector2 endPoint = Vector2.Transform(point, inverseMatrix);
             VectRect rect = new VectRect(this.StartPoint, endPoint, this.ViewModel.MarqueeMode);
 
-            this.Layer.Transformer = Transformer.CreateFromSize(rect.Width, rect.Height, new Vector2(rect.X, rect.Y));
-            this.ViewModel.InvalidateWithJumpedQueueLayer(this.Layer);
+            this.EllipseLayer.Transformer = Transformer.CreateFromSize(rect.Width, rect.Height, new Vector2(rect.X, rect.Y));
+            this.ViewModel.InvalidateWithJumpedQueueLayer(this.EllipseLayer);
         }
         public override void Complete(Vector2 point)
         {
-            Vector2 endPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.InverseMatrix);
+            Matrix3x2 matrix = this.ViewModel.MatrixTransformer.Matrix;
+            Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.InverseMatrix;
+
+
+            // Transformer
+           if (this.ViewModel.TransformerComplete(point)) return;
+
+
+            Vector2 endPoint = Vector2.Transform(point, inverseMatrix);
             VectRect rect = new VectRect(this.StartPoint, endPoint, this.ViewModel.MarqueeMode);
 
             if (Transformer.OutNodeDistance(this.point, point))
             {
-                EllipseLayer layer = EllipseLayer.CreateFromRect(this.ViewModel.CanvasDevice, rect, this.ViewModel.Color);
-                this.ViewModel.RenderLayer.Insert(layer);
-                this.ViewModel.CurrentLayer = layer;
+                EllipseLayer ellipseLayer = EllipseLayer.CreateFromRect(this.ViewModel.CanvasDevice, rect, this.ViewModel.Color);
+                this.ViewModel.RenderLayer.Insert(ellipseLayer);
+                this.ViewModel.CurrentLayer = ellipseLayer;
             }
 
-            this.Layer = null;
+            this.EllipseLayer = null;
             this.ViewModel.Invalidate();
         }
 
 
         public override void Draw(CanvasDrawingSession ds)
         {
-            if (this.Layer == null) return;
-            Transformer.DrawBound(ds, this.Layer.Transformer, this.ViewModel.MatrixTransformer.Matrix);
-        }
+            Matrix3x2 matrix = this.ViewModel.MatrixTransformer.Matrix;
 
+            if (this.EllipseLayer != null)
+            {
+                this.EllipseLayer.Draw(this.ViewModel.CanvasDevice, ds, matrix);
+                return;
+            }
+
+            //Transformer      
+            if (this.ViewModel.TransformerDraw(ds)) return;
+        }
     }
 }
