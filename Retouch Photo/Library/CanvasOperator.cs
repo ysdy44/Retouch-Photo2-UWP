@@ -247,7 +247,7 @@ namespace Retouch_Photo.Library
             Vector2 point = this.Pointer_Position(e);
             float space = this.Pointer_WheelDelta(e);
 
-            this.Wheel_Changed(point, space);//Delegate
+            this.Wheel_Changed?.Invoke(point, space);//Delegate
         }
 
 

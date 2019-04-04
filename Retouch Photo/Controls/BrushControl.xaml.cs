@@ -1,81 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using Retouch_Photo.Models;
+using Retouch_Photo.Models.Layers;
+using Retouch_Photo.ViewModels;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation; 
-using System.Numerics;
-using Windows.UI;
-using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Text;
-using Microsoft.Graphics.Canvas.Effects;
-using Microsoft.Graphics.Canvas.Brushes;
-using Microsoft.Graphics.Canvas.Geometry;
-using Windows.UI.Text;
-using Windows.Foundation.Metadata;
-using System.Globalization;
-using Microsoft.Graphics.Canvas.UI.Xaml;
-using Retouch_Photo.Models;
-using Newtonsoft.Json;
-using System.Threading.Tasks;
-using Windows.Storage;
-using Windows.System;
-using Retouch_Photo.ViewModels;
-using Retouch_Photo.Models.Layers;
 
 namespace Retouch_Photo.Controls
 {
-    public enum BrushControlState
-    {
-        None,
-        Color,
-        Gradient,
-        Image,
-    }
-
-    //Delegate
-    public delegate void CanvasBrushHandler(ICanvasBrush brush);
 
     public sealed partial class BrushControl : UserControl
     {
         //ViewModel
         public DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
-        public event CanvasBrushHandler hh;
-
-        private BrushControlState state;
-        public BrushControlState State
-        {
-            get => this.state;
-            set
-            {
-                this.NoneSegmented.IsChecked = (value == BrushControlState.None);
-                this.ColorSegmented.IsChecked = (value == BrushControlState.Color);
-                this.GradientSegmented.IsChecked = (value == BrushControlState.Gradient);
-                this.ImageSegmented.IsChecked = (value == BrushControlState.Image);
-
-                this.NoneBorder.Visibility = (value == BrushControlState.None) ? Visibility.Visible : Visibility.Collapsed;
-                this.ColorBorder.Visibility = (value == BrushControlState.Color) ? Visibility.Visible : Visibility.Collapsed;
-                this.GradientBorder.Visibility = (value == BrushControlState.Gradient) ? Visibility.Visible : Visibility.Collapsed;
-                this.ImageBorder.Visibility = (value == BrushControlState.Image) ? Visibility.Visible : Visibility.Collapsed;
-
-                this.state = value;
-            }
-        }
-         
-
-
-        CanvasGradientStop[] gradientStops = new CanvasGradientStop[] 
-        {
-        };
 
         #region DependencyProperty
 
@@ -93,7 +30,7 @@ namespace Retouch_Photo.Controls
                 if (value is GeometryLayer geometryLayer)
                 {
 
-                    
+
 
                 }
             }
@@ -101,61 +38,45 @@ namespace Retouch_Photo.Controls
 
         #endregion
 
+
         public BrushControl()
         {
             this.InitializeComponent();
-            this.State = BrushControlState.None;
-
-            this.NoneSegmented.Tapped += (s, e) => this.State = BrushControlState.None;
-            this.ColorSegmented.Tapped += (s, e) => this.State = BrushControlState.Color;
-            this.GradientSegmented.Tapped += (s, e) => this.State = BrushControlState.Gradient;
-            this.ImageSegmented.Tapped += (s, e) => this.State = BrushControlState.Image;
-
-            // Matrix
-            this.Button1.Tapped += (s, e) =>
+            this.ReserveButton.Tapped += (s, e) =>  this.OperatorControl.Reserve();
+            this.RemoveButton.Tapped += (s, e) =>
             {
-                CanvasLinearGradientBrush brush = new CanvasLinearGradientBrush(this.ViewModel.CanvasDevice, Colors.Gray, Colors.White)
-                {
-                    StartPoint = Vector2.Zero,
-                    EndPoint = Vector2.One * 100
-                };
-                this.ViewModel.CurrentLayer.BrushChanged(brush);
-                this.ViewModel.Invalidate();
-            };
-            this.Button2.Tapped += (s, e) =>
-            {
-                CanvasLinearGradientBrush brush = new CanvasLinearGradientBrush(this.ViewModel.CanvasDevice, Colors.Gray, Colors.Black)
-                {
-                    StartPoint = Vector2.Zero,
-                    EndPoint = Vector2.One * 100
-                };
-                this.ViewModel.CurrentLayer.BrushChanged(brush);
-                this.ViewModel.Invalidate();
-            };
-            this.Button3.Tapped += (s, e) =>
-            {
-                CanvasLinearGradientBrush brush = CanvasLinearGradientBrush.CreateRainbow(this.ViewModel.CanvasDevice, 0);
-                brush.StartPoint = Vector2.Zero;
-                brush.EndPoint = Vector2.One * 100;
-                this.ViewModel.CurrentLayer.BrushChanged(brush);
-                this.ViewModel.Invalidate();
-            };
-            this.Button4.Tapped += (s, e) =>
-            {
-                CanvasLinearGradientBrush brush = CanvasLinearGradientBrush.CreateRainbow(this.ViewModel.CanvasDevice, 1);
-                brush.StartPoint = Vector2.Zero;
-                brush.EndPoint = Vector2.One * 100;
-                this.ViewModel.CurrentLayer.BrushChanged(brush);
-                this.ViewModel.Invalidate();
+                this.SetControl(Colors.Transparent, 0, false);
+                this.OperatorControl.Remove();
             };
 
+            //Delegate
+            this.OperatorControl.OffsetChanged += (offset) => this.NumberControl.Value = (int)(offset * 100);
+            this.OperatorControl.StopChanged += (stop, isEnabled) => this.SetControl(stop.Color, (int)(stop.Position * 100), isEnabled);
 
-            
-                this.ColorColorPicker.ColorChange += (s, color) =>
-                {
+            //Color            
+            this.ColorPicker.ColorChange += (s, color) => this.SetColor(color);
+            this.StrawPicker.ColorChange += (s, color) => this.SetColor(color);
+            this.ColorButton.Tapped += (s, e) =>
+            {
+                this.ColorFlyout.ShowAt(this.ColorButton);
+                this.ColorPicker.Color = this.SolidColorBrush.Color;
+            };
 
-                };
+            //Offset            
+            this.NumberControl.ValueChange += (s, value) =>this.OperatorControl.SetOffset((float)value / 100.0f);
         }
 
+
+        private void SetColor(Color color)
+        {
+            this.SolidColorBrush.Color = color;
+            this.OperatorControl.SetColor(color);
+        }
+        private void SetControl(Color color, int offset, bool isEnabled)
+        {
+            this.SolidColorBrush.Color = color;
+            this.NumberControl.Value = offset;
+            this.RemoveButton.IsEnabled = this.NumberControl.IsEnabled = isEnabled;
+        }
     }
 }

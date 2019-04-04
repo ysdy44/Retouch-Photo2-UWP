@@ -23,17 +23,17 @@
 
     <Border CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}">
         <StackPanel Orientation="Horizontal">
-        
-            <ContentPresenter x:Name="NewSegmented" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Tapped="NewSegmented_Tapped">
+
+            <ContentPresenter x:Name="NewSegmented" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <FontIcon Glyph="&#xE002;" FontFamily="Segoe MDL2 Assets"/>
             </ContentPresenter>
-            <ContentPresenter x:Name="AddSegmented" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Tapped="AddSegmented_Tapped">
+            <ContentPresenter x:Name="AddSegmented" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <PathIcon Data="M1.235,1.359l14.463,0l0,7.664c0.158,-0.011 0.317,-0.016 0.477,-0.016c4.028,0 7.298,3.271 7.298,7.299c0,4.028 -3.27,7.299 -7.298,7.299c-4.029,0 -7.299,-3.271 -7.299,-7.299c0,-0.162 0.005,-0.322 0.015,-0.482l-7.656,0l0,-14.465Zm15.518,11.792l-1.051,0l0,2.678l-2.666,0l0,1.007l2.666,0l0,2.575l1.051,0l0,-2.575l2.544,0l0,-1.007l-2.544,0l0,-2.678Z"/>
             </ContentPresenter>
-            <ContentPresenter x:Name="SubtractSegmented" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Tapped="SubtractSegmented_Tapped">
+            <ContentPresenter x:Name="SubtractSegmented" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <PathIcon HorizontalAlignment="Center" VerticalAlignment="Center" Data="M16.175,9.007c4.028,0 7.298,3.271 7.298,7.299c0,4.028 -3.27,7.299 -7.298,7.299c-4.029,0 -7.299,-3.271 -7.299,-7.299c0,-4.028 3.27,-7.299 7.299,-7.299Zm3.499,6.759l-7.016,0l0,1.128l7.016,0l0,-1.128Zm-11.955,0.416l-6.484,0l0,-14.823l14.333,0l0,6.512c-4.344,0.309 -7.785,3.904 -7.849,8.311Z"/>
             </ContentPresenter>
-            <ContentPresenter x:Name="IntersectSegmented" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Tapped="IntersectSegmented_Tapped">
+            <ContentPresenter x:Name="IntersectSegmented" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <PathIcon Data="M16.478,9.014c3.888,0.159 6.995,3.365 6.995,7.292c0,4.028 -3.27,7.299 -7.298,7.299c-3.753,0 -6.847,-2.838 -7.254,-6.482l7.557,0l0,-8.109Zm-8.678,7.168l-6.565,0l0,-14.823l14.333,0l0,6.594c-4.299,0.308 -7.704,3.867 -7.768,8.229Zm7.768,0l-6.691,0c0.063,-3.768 2.987,-6.845 6.691,-7.15l0,7.15Z"/>
             </ContentPresenter>        
             

@@ -42,7 +42,7 @@ namespace Retouch_Photo.Controls.LayersControls
             this.InitializeComponent();
 
             //Control
-            this.Slider.ValueChanged += (object sender, RangeBaseValueChangedEventArgs e) => this.ViewModel.Invalidate();
+            this.Slider.ValueChanged += (sender, e) => this.ViewModel.Invalidate();
             this.BlendControl.IndexChanged += (int index) => this.ViewModel.Invalidate();
 
             //Button

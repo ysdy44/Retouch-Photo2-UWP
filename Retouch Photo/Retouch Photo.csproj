@@ -101,9 +101,14 @@
     <Compile Include="Controls\BrushControl.xaml.cs">
       <DependentUpon>BrushControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BrushControls\CanvasOperatorControl.xaml.cs">
+      <DependentUpon>CanvasOperatorControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BrushControls\Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BrushControls\StopsManager.cs" />
+    <Compile Include="Controls\BrushControls\StopsSize.cs" />
     <Compile Include="Controls\DebugControl.xaml.cs">
       <DependentUpon>DebugControl.xaml</DependentUpon>
     </Compile>
@@ -696,6 +701,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\BrushControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BrushControls\CanvasOperatorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

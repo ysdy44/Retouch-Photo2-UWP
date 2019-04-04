@@ -85,7 +85,7 @@
         </Border>
 
         <Border x:Name="FristBorder" Margin="2" >
-            <CheckBox x:Name="CheckBox" Background="{ThemeResource AppForeground}" Tapped="CheckBox_Tapped">
+            <CheckBox x:Name="CheckBox" Background="{ThemeResource AppForeground}">
                 <!--IsVisual-->
                 <CheckBox.Clip>
                     <RectangleGeometry Rect="0,0,20,30"/>

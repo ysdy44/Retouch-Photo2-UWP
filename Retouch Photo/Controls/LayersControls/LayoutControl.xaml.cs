@@ -2,18 +2,14 @@
 using Retouch_Photo.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo.Controls.LayersControls
 {
     public sealed partial class LayoutControl : UserControl
     {
-
-
         //ViewModel
         DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
-
-
+        
         #region DependencyProperty
 
         public  Layer Layer
@@ -38,8 +34,7 @@ namespace Retouch_Photo.Controls.LayersControls
         //Delegate
         public delegate void FlyoutShowHandler(UserControl control,Layer layer,bool isShow);
         public event FlyoutShowHandler FlyoutShow = null;
-
-
+        
         public LayoutControl()
         {
             this.InitializeComponent();
@@ -48,18 +43,16 @@ namespace Retouch_Photo.Controls.LayersControls
             this.BackgroundGrid.Holding += (sender, e) => this.FlyoutShow?.Invoke(this, this.Layer, true);
             this.BackgroundGrid.RightTapped += (sender, e) => this.FlyoutShow?.Invoke(this, this.Layer, true);
             this.BackgroundGrid.Tapped += (sender, e) => this.FlyoutShow?.Invoke(this, this.Layer, false);
-        }
-               
+         
+            //CheckBox
+            this.CheckBox.Tapped += (sender, e) =>
+            {
+                e.Handled = true;
+                if (this.Layer == null) return;
 
-        private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            e.Handled = true;
-
-            if (this.Layer == null) return;
-
-            this.Layer.IsVisual = this.CheckBox.IsChecked??false;
-            this.ViewModel.Invalidate();
-        }
-        
+                this.Layer.IsVisual = this.CheckBox.IsChecked ?? false;
+                this.ViewModel.Invalidate();
+            };
+        }             
     }
 }

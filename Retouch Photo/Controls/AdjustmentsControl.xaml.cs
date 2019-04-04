@@ -1,20 +1,13 @@
-﻿using Retouch_Photo.Models;
+﻿using Retouch_Photo.Adjustments;
+using Retouch_Photo.Models;
 using Retouch_Photo.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Retouch_Photo.Adjustments;
-using System;
-using Newtonsoft.Json;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Data;
-using Windows.Storage;
-using Windows.System;
-using Retouch_Photo.Adjustments.Models;
-using Retouch_Photo.Adjustments.Items;
 
 namespace Retouch_Photo.Controls
 {

@@ -247,17 +247,17 @@
         <!--#region Primry Buttons-->
 
 
-        <conAppbarControls:AppBarControlButton x:Name="AddButton"  Glyph="&#xE109;"  Text="Add" Tap="AddButton_Tapped"/>
-        <conAppbarControls:AppBarControlButton x:Name="PicturesButton" Glyph="&#xEB9F;"  Text="Pictures" Tap="PicturesButton_Tapped"/>
+        <conAppbarControls:AppBarControlButton x:Name="AddButton"  Glyph="&#xE109;" Text="Add"/>
+        <conAppbarControls:AppBarControlButton x:Name="PicturesButton" Glyph="&#xEB9F;" Text="Pictures"/>
         <AppBarSeparator x:Name="AppBarSeparator0"/>
-        <conAppbarControls:AppBarControlButton  x:Name="SaveButton" Glyph="&#xE105;"  Text="Save" Tap="SaveButton_Tapped"/>
-        <conAppbarControls:AppBarControlButton x:Name="ShareButton"  Glyph="&#xE72D;"  Text="Share" Tap="ShareButton_Tapped"/>
+        <conAppbarControls:AppBarControlButton  x:Name="SaveButton" Glyph="&#xE105;" Text="Save"/>
+        <conAppbarControls:AppBarControlButton x:Name="ShareButton"  Glyph="&#xE72D;" Text="Share"/>
         <AppBarSeparator x:Name="AppBarSeparator1"/>
-        <conAppbarControls:AppBarControlButton x:Name="DeleteButton"  Glyph="&#xE107;"  Text="Delete" Tap="DeleteButton_Tapped"/>
-        <conAppbarControls:AppBarControlButton x:Name="DuplicateButton"  Glyph="&#xE16F;"  Text="Duplicate" Tap="DuplicateButton_Tapped"/>
+        <conAppbarControls:AppBarControlButton x:Name="DeleteButton"  Glyph="&#xE107;" Text="Delete"/>
+        <conAppbarControls:AppBarControlButton x:Name="DuplicateButton"  Glyph="&#xE16F;" Text="Duplicate"/>
         <AppBarSeparator x:Name="AppBarSeparator2"/>
-        <conAppbarControls:AppBarControlButton x:Name="FolderButton"  Glyph="&#xE188;"  Text="Folder" Tap="FolderButton_Tapped"/>
-        <conAppbarControls:AppBarControlButton x:Name="MoveButton"  Glyph="&#xE197;"  Text="Move" Tap="MoveButton_Tapped"/>
+        <conAppbarControls:AppBarControlButton x:Name="FolderButton"  Glyph="&#xE188;" Text="Folder"/>
+        <conAppbarControls:AppBarControlButton x:Name="MoveButton"  Glyph="&#xE197;" Text="Move"/>
 
 
         <!--#endregion -->
@@ -267,21 +267,21 @@
 
 
 
-        <conAppbarControls:AppBarControlButton x:Name="MoreButton"  Glyph="&#xE712;"  Text="More" Tap="MoreButton_Tapped">
+        <conAppbarControls:AppBarControlButton x:Name="MoreButton"  Glyph="&#xE712;" Text="More">
             <conAppbarControls:AppBarControlButton.ContextFlyout>
                 <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                     <StackPanel Width="140" Margin="-6">
 
                         <!--#region Second Buttons-->
 
-                        <conAppbarControls:AppBarControlSecondButton x:Name="SecondAddButton"  Glyph="&#xE109;"  Text="Add" Tap="SecondAddButton_Tapped"/>
-                        <conAppbarControls:AppBarControlSecondButton  x:Name="SecondPicturesButton" Glyph="&#xEB9F;"  Text="Pictures" Tap="SecondPicturesButton_Tapped"/>
-                        <conAppbarControls:AppBarControlSecondButton x:Name="SecondSaveButton" Glyph="&#xE105;"  Text="Save" Tap="SecondSaveButton_Tapped"/>
-                        <conAppbarControls:AppBarControlSecondButton  x:Name="SecondShareButton" Glyph="&#xE72D;"  Text="Share" Tap="SecondShareButton_Tapped"/>
-                        <conAppbarControls:AppBarControlSecondButton  x:Name="SecondDeleteButton" Glyph="&#xE107;"  Text="Delete" Tap="SecondDeleteButton_Tapped"/>
-                        <conAppbarControls:AppBarControlSecondButton x:Name="SecondDuplicateButton" Glyph="&#xE16F;"  Text="Duplicate" Tap="SecondDuplicateButton_Tapped"/>
-                        <conAppbarControls:AppBarControlSecondButton x:Name="SecondFolderButton" Glyph="&#xE188;"  Text="Folder" Tap="SecondFolderButton_Tapped"/>
-                        <conAppbarControls:AppBarControlSecondButton  x:Name="SecondMoveButton" Glyph="&#xE197;"  Text="Move" Tap="SecondMoveButton_Tapped"/>
+                        <conAppbarControls:AppBarControlSecondButton x:Name="SecondAddButton"  Glyph="&#xE109;" Text="Add"/>
+                        <conAppbarControls:AppBarControlSecondButton  x:Name="SecondPicturesButton" Glyph="&#xEB9F;" Text="Pictures"/>
+                        <conAppbarControls:AppBarControlSecondButton x:Name="SecondSaveButton" Glyph="&#xE105;" Text="Save"/>
+                        <conAppbarControls:AppBarControlSecondButton  x:Name="SecondShareButton" Glyph="&#xE72D;" Text="Share"/>
+                        <conAppbarControls:AppBarControlSecondButton  x:Name="SecondDeleteButton" Glyph="&#xE107;" Text="Delete"/>
+                        <conAppbarControls:AppBarControlSecondButton x:Name="SecondDuplicateButton" Glyph="&#xE16F;" Text="Duplicate"/>
+                        <conAppbarControls:AppBarControlSecondButton x:Name="SecondFolderButton" Glyph="&#xE188;" Text="Folder"/>
+                        <conAppbarControls:AppBarControlSecondButton  x:Name="SecondMoveButton" Glyph="&#xE197;" Text="Move"/>
 
                         <!--#endregion -->
 
@@ -289,11 +289,7 @@
                 </Flyout>
             </conAppbarControls:AppBarControlButton.ContextFlyout>
 
-        </conAppbarControls:AppBarControlButton>
-
-
-        
-         
+        </conAppbarControls:AppBarControlButton>     
 
 
     </StackPanel>

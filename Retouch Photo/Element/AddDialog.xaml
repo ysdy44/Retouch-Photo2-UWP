@@ -10,8 +10,7 @@
     Background="{ThemeResource AppFill}"                                
     PrimaryButtonText="OK"
     SecondaryButtonText="Cancel"
-    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
-    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+    >
 <!--
     
     

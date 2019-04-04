@@ -10,6 +10,11 @@ namespace Retouch_Photo.Elements
             set => this.Slider.Value=value;
         }
 
+        //delegate
+        public delegate void NumberChangeHandler(object sender, double value);
+        public event NumberChangeHandler ValueChange;
+
+
         public NumberControl()
         {
             this.InitializeComponent();
@@ -25,6 +30,8 @@ namespace Retouch_Photo.Elements
             this.Slider.ValueChanged += (s, e) =>
             {
                 this.TextBox.Text = e.NewValue.ToString();
+
+                this.ValueChange?.Invoke(this, e.NewValue); //delegate
             };
         }
 

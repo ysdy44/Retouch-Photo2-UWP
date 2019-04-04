@@ -8,10 +8,12 @@ namespace Retouch_Photo.Controls.LayersControls
 {
     public sealed partial class BlendControl : UserControl
     {
-
         //ViewModel
         DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
+        //Delegate
+        public delegate void IndexChangedHandler(int index);
+        public event IndexChangedHandler IndexChanged = null;
 
         #region DependencyProperty
 
@@ -29,38 +31,39 @@ namespace Retouch_Photo.Controls.LayersControls
                 if (value < 0) return;
                 if (value >= con.ComboBox.Items.Count) return;
 
-                if (con.ComboBox.SelectedIndex == value) return;
+                if (con.SelectedIndex == value) return;
 
-                con.ComboBox.SelectedIndex = value;
+                con.SelectedIndex = value;
             }
         }));
 
         #endregion
 
-
-        //Delegate
-        public delegate void IndexChangedHandler(int index);
-        public event IndexChangedHandler IndexChanged = null;
-
+        public int SelectedIndex
+        {
+            get=>this.ComboBox.SelectedIndex;
+            set=>this.ComboBox.SelectedIndex=value;
+        }
 
         public BlendControl()
         {
             this.InitializeComponent();
-        }
 
-        private void ComboBox_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.ComboBox.ItemsSource = Blend.BlendList;
+            this.ComboBox.Loaded += (sender, e) =>
+            {
+                this.ComboBox.ItemsSource = Blend.BlendList;
 
-            if (this.ComboBox.SelectedIndex < 0) this.ComboBox.SelectedIndex = 0;
-        }
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            int index = this.ComboBox.SelectedIndex;
-            if (this.BlendIndex == index) return;
-            this.BlendIndex = index;
-            this.IndexChanged?.Invoke(index);
-        }
+                if (this.SelectedIndex < 0) this.SelectedIndex = 0;
+            };
 
+            this.ComboBox.SelectionChanged += (sender, e) =>
+            {
+                int index = this.SelectedIndex;
+                if (this.BlendIndex == index) return;
+
+                this.BlendIndex = index;
+                this.IndexChanged?.Invoke(index); //Delegate
+            };
+        }
     }
 }
