@@ -6,6 +6,7 @@ using System.Numerics;
 using Windows.Graphics.Effects;
 using Windows.UI;
 using static Retouch_Photo.Library.HomographyController;
+using Retouch_Photo.Brushs;
 
 namespace Retouch_Photo.Models.Layers.GeometryLayers
 {
@@ -18,6 +19,7 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
             base.Name = EllipseLayer.Type;
             base.Icon = new EllipseControl();
         }
+
 
         private CanvasGeometry GetGeometry(ICanvasResourceCreator creator, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -71,20 +73,23 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
             {
                 CanvasGeometry geometry = this.GetGeometry(creator, canvasToVirtualMatrix);
 
-                if (this.IsFill) ds.FillGeometry(geometry, base.FillBrush);
-                if (this.IsStroke) ds.DrawGeometry(geometry, base.StrokeBrush, base.StrokeWidth);
+             //   if (this.IsFill) ds.FillGeometry(geometry, base.FillBrush);
+            //    if (this.IsStroke) ds.DrawGeometry(geometry, base.StrokeBrush, base.StrokeWidth);
             }
             return command;
         }
-
-
+               
 
         public static EllipseLayer CreateFromRect(ICanvasResourceCreator creator, VectRect rect, Color color)
         {
             return new EllipseLayer
             {
                 Transformer = Transformer.CreateFromSize(rect.Width, rect.Height, new Vector2(rect.X, rect.Y)),
-                FillBrush = new CanvasSolidColorBrush(creator, color)
+                FillBrush = new Brush
+                {
+                    Type = BrushType.Color,
+                    Color = color
+                }
             };
         }
     }

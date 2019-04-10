@@ -4,7 +4,6 @@ using Retouch_Photo.Models;
 using Retouch_Photo.Tools.Controls;
 using Retouch_Photo.Tools.Pages;
 using Retouch_Photo.ViewModels;
-using System.Collections.Generic;
 using System.Numerics;
 using Windows.UI;
 using static Retouch_Photo.Library.HomographyController;
@@ -34,15 +33,13 @@ namespace Retouch_Photo.Tools.Models
     }
 
 
-    public class CursorTool : Tool
+    public class CursorTool : ICursorTool
     {
         //ViewModel
         DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
-
-
+        
         readonly CursorBox Box = new CursorBox();
-
-
+        
         public CursorTool()
         {
             base.Type = ToolType.Cursor;
@@ -58,6 +55,63 @@ namespace Retouch_Photo.Tools.Models
         }
         public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
         {
+        }
+                
+
+        public override bool OperatorStart(Vector2 point)
+        {
+            //Translation 
+            Layer layer = this.GetTranslationLayer(point, this.ViewModel.MatrixTransformer.InverseMatrix);
+            if (layer != null)
+            {
+                this.ViewModel.CurrentLayer = layer;
+
+                TransformerMode mode = TransformerMode.Translation;
+                this.ViewModel.TransformerMode = mode;
+                this.ViewModel.TransformerDictionary[mode].Start(point, layer, this.ViewModel.MatrixTransformer.Matrix, this.ViewModel.MatrixTransformer.InverseMatrix);
+                return true;
+            }
+
+            //CursorBox
+            this.Box.IsCursorBox = true;
+            this.Box.StartPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.InverseMatrix);
+            return true;
+        }
+        public override bool OperatorDelta(Vector2 point)
+        {
+            //CursorBox
+            if (this.Box.IsCursorBox)
+            {
+                this.Box.EndPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.InverseMatrix);
+                this.ViewModel.Invalidate();
+                return true;
+            }
+            return false;
+        }
+        public override bool OperatorComplete(Vector2 point)
+        {
+            //CursorBox
+            if (this.Box.IsCursorBox)
+            {
+                this.Box.EndPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.InverseMatrix);
+                this.Box.IsCursorBox = false;
+
+                this.ViewModel.CurrentLayer = null;
+                this.ViewModel.Invalidate();
+                return true;
+            }
+            return false;
+        }
+        
+        public override bool OperatorDraw(CanvasDrawingSession ds)
+        {    
+            //CursorBox
+            if (this.Box.IsCursorBox)
+            {
+                this.Box.Draw(this.ViewModel.CanvasDevice, ds, this.ViewModel.MatrixTransformer.Matrix);
+                return true;
+            }
+            return false;
         }
 
 
@@ -76,85 +130,6 @@ namespace Retouch_Photo.Tools.Models
             }
 
             return null;
-        }
-
-
-        public override void Start(Vector2 point)
-        {
-            Matrix3x2 matrix = this.ViewModel.MatrixTransformer.Matrix;
-            Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.InverseMatrix;
-
-
-            // Transformer
-            if (this.ViewModel.TransformerStart(point)) return;
-
-
-            //Translation 
-            Layer layer2 = this.GetTranslationLayer(point, inverseMatrix);
-            if (layer2 != null)
-            {
-                this.ViewModel.CurrentLayer = layer2;
-
-                TransformerMode mode = TransformerMode.Translation;
-                this.ViewModel.TransformerMode = mode;
-                this.ViewModel.TransformerDictionary[mode].Start(point, layer2, matrix, inverseMatrix);
-                return;
-            }
-
-            //CursorBox
-            this.Box.IsCursorBox = true;
-            this.Box.StartPoint = Vector2.Transform(point, inverseMatrix);
-        }
-
-        public override void Delta(Vector2 point)
-        {
-            Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.InverseMatrix;
-
-            //CursorBox
-            if (this.Box.IsCursorBox)
-            {
-                this.Box.EndPoint = Vector2.Transform(point, inverseMatrix);
-                this.ViewModel.Invalidate();
-                return;
-            }
-
-            // Transformer
-            if (this.ViewModel.TransformerDelta(point)) return;
-        }
-
-        public override void Complete(Vector2 point)
-        {
-            Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.InverseMatrix;
-
-            //CursorBox
-            if (this.Box.IsCursorBox)
-            {
-                this.Box.EndPoint = Vector2.Transform(point, inverseMatrix);
-                this.Box.IsCursorBox = false;
-
-                this.ViewModel.CurrentLayer = null;
-                this.ViewModel.Invalidate();
-                return;
-            }
-
-            // Transformer
-            if (this.ViewModel.TransformerComplete(point)) return;
-        }
-
-
-        public override void Draw(CanvasDrawingSession ds)
-        {
-            Matrix3x2 matrix = this.ViewModel.MatrixTransformer.Matrix;
-
-            //CursorBox
-            if (this.Box.IsCursorBox)
-            {
-                this.Box.Draw(this.ViewModel.CanvasDevice, ds, matrix);
-                return;
-            }
-
-            //Transformer      
-            if (this.ViewModel.TransformerDraw(ds)) return;
         }
     }
 }

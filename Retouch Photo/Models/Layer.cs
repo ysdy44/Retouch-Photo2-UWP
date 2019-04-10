@@ -35,7 +35,7 @@ namespace Retouch_Photo.Models
         public Transformer Transformer;
         public AdjustmentManager AdjustmentManager = new AdjustmentManager();
         public EffectManager EffectManager = new EffectManager();
-               
+        
 
         //Create
         public static Layer CreateFromXElement(ICanvasResourceCreator creator, XElement element)

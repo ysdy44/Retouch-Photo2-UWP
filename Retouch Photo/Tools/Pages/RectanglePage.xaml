@@ -21,12 +21,15 @@
             <!--Mode-->
             <element:ModeControl Mode="{x:Bind ViewModel.MarqueeMode,Mode=TwoWay}" />
 
+            
             <AppBarSeparator/>
             <Border x:Name="ColorButton" Style="{StaticResource AppCircleBorderStyle}">
                 <Border.Background>
                     <SolidColorBrush Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
                 </Border.Background>
             </Border>
+            
+            
         </StackPanel>
     </ScrollViewer>
 

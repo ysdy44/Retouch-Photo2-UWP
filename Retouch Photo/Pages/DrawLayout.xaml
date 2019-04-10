@@ -186,11 +186,11 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto" MinHeight="50"/>
         </Grid.RowDefinitions>
-        
 
-        <!--hhhh-->
+
+        <!--AlignmentGrid-->
         <developerTools:AlignmentGrid Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="Gray"/>
-        
+
 
         <Grid x:Name="TopBorder" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" 
               Background="{ThemeResource AppLinearBrush}">

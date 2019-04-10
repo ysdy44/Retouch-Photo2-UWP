@@ -49,9 +49,9 @@ namespace Retouch_Photo.Element
         {
             this.InitializeComponent();
 
-            this.NoneSegmented.Tapped += (sender, e) => this._Mode = MarqueeMode.None;
-            this.SquareSegmented.Tapped += (sender, e) => this._Mode = MarqueeMode.Square;
-            this.CenterSegmented.Tapped += (sender, e) => this._Mode = MarqueeMode.Center;
+            this.NoneSegmented.Tapped += (sender, e) => this.Mode = MarqueeMode.None;
+            this.SquareSegmented.Tapped += (sender, e) => this.Mode = MarqueeMode.Square;
+            this.CenterSegmented.Tapped += (sender, e) => this.Mode = MarqueeMode.Center;
             this.SquareAndCenterSegmented.Tapped += (sender, e) => this._Mode = MarqueeMode.SquareAndCenter;
         }
 

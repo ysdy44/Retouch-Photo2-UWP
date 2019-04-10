@@ -1,4 +1,6 @@
-﻿using Retouch_Photo.Tools;
+﻿using Retouch_Photo.Brushs;
+using Retouch_Photo.Tools;
+using Retouch_Photo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,6 +20,10 @@ namespace Retouch_Photo.Tools.Pages
 {
     public sealed partial class PaintBrushPage : ToolPage
     {
+        //ViewModel
+        public DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
+
+
         public PaintBrushPage()
         {
             this.InitializeComponent();
@@ -30,5 +36,8 @@ namespace Retouch_Photo.Tools.Pages
         public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
         {
         }
+
+        //Communication
+        public override void Communication(int magicNumbers) => this.BrushControl.ChangeSelectedIndex(magicNumbers);
     }
 }

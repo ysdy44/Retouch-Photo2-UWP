@@ -34,8 +34,11 @@
 
             <AppBarSeparator/>
 
-            <!--Mode-->
-            <element:ModeControl Mode="{x:Bind ViewModel.MarqueeMode,Mode=TwoWay}" />
+            <elements:OnOffSwitch OnContent="None" OffCOfftent="Ratio" IsOn="{x:Bind ViewModel.KeyShift,Mode=TwoWay}"/>
+          
+            <AppBarSeparator/>
+
+            <elements:OnOffSwitch OnContent="None" OffCOfftent="Center" IsOn="{x:Bind ViewModel.KeyCtrl,Mode=TwoWay}"/>
 
             <AppBarSeparator/>
 

@@ -1,82 +1,184 @@
-﻿using Retouch_Photo.Models;
+﻿using Microsoft.Graphics.Canvas.Brushes;
+using Retouch_Photo.Brushs;
 using Retouch_Photo.Models.Layers;
 using Retouch_Photo.ViewModels;
+using System.Collections.Generic;
+using System.Numerics;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo.Controls
 {
-
     public sealed partial class BrushControl : UserControl
     {
         //ViewModel
         public DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
-
+        float CanvasWidth, CanvasHieght;
+        Vector2 CanvasCenter;
+        
         #region DependencyProperty
 
-        public Layer Layer
+        public GeometryLayer GeometryLayer
         {
-            get { return (Layer)GetValue(LayerProperty); }
-            set { SetValue(LayerProperty, value); }
+            get { return (GeometryLayer)GetValue(GeometryLayerProperty); }
+            set { SetValue(GeometryLayerProperty, value); }
         }
-        public static readonly DependencyProperty LayerProperty = DependencyProperty.Register(nameof(Layer), typeof(Layer), typeof(BrushControl), new PropertyMetadata(null, (sender, e) =>
+        public static readonly DependencyProperty GeometryLayerProperty = DependencyProperty.Register(nameof(GeometryLayer), typeof(GeometryLayer), typeof(BrushControl), new PropertyMetadata(null, (sender, e) =>
         {
             BrushControl con = (BrushControl)sender;
 
-            if (e.NewValue is Layer value)
+            if (e.NewValue is GeometryLayer value)
             {
-                if (value is GeometryLayer geometryLayer)
-                {
-
-
-
-                }
+                con.ComboBox.IsEnabled = true;
+                con.ComboBox.SelectedIndex = (int)value.FillBrush.Type;
+                con.Border.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                con.ComboBox.IsEnabled = false;
+                con.ComboBox.SelectedIndex = 0;
+                con.Border.Visibility = Visibility.Collapsed;
             }
         }));
 
         #endregion
 
-
         public BrushControl()
         {
             this.InitializeComponent();
-            this.ReserveButton.Tapped += (s, e) =>  this.OperatorControl.Reserve();
-            this.RemoveButton.Tapped += (s, e) =>
+            this.ColorPicker.ColorChange += (s,color) =>
             {
-                this.SetControl(Colors.Transparent, 0, false);
-                this.OperatorControl.Remove();
+                this.GeometryLayer.FillBrush.Color = color;
+
+                this.CanvasControl.Invalidate();
+                this.ViewModel.Invalidate();
+            };
+            this.PickerPicker.StopsChange += () =>
+            {
+                this.CanvasControl.Invalidate();
+                this.ViewModel.Invalidate();
             };
 
-            //Delegate
-            this.OperatorControl.OffsetChanged += (offset) => this.NumberControl.Value = (int)(offset * 100);
-            this.OperatorControl.StopChanged += (stop, isEnabled) => this.SetControl(stop.Color, (int)(stop.Position * 100), isEnabled);
+            this.ComboBox.ItemsSource = new List<BrushType> { BrushType.None, BrushType.Color, BrushType.LinearGradient, BrushType.RadialGradient, BrushType.Image };
+            this.ComboBox.SelectionChanged += this.SelectionChanged;
 
-            //Color            
-            this.ColorPicker.ColorChange += (s, color) => this.SetColor(color);
-            this.StrawPicker.ColorChange += (s, color) => this.SetColor(color);
-            this.ColorButton.Tapped += (s, e) =>
+            this.Border.Tapped += (s, e) =>
             {
-                this.ColorFlyout.ShowAt(this.ColorButton);
-                this.ColorPicker.Color = this.SolidColorBrush.Color;
+                if (this.GeometryLayer == null) return;
+
+                switch (this.GeometryLayer.FillBrush.Type)
+                {
+                    case BrushType.None:
+                        break;
+
+                    case BrushType.Color:
+                        this.ColorPicker.Color = this.GeometryLayer.FillBrush.Color;
+                        this.ColorFlyout.ShowAt(this.Border);
+                        break;
+
+                    case BrushType.LinearGradient:
+                        this.PickerPicker.Brush = this.GeometryLayer.FillBrush;
+                        this.PickerFlyout.ShowAt(this.Border);
+                        break;
+
+                    case BrushType.RadialGradient:
+                        this.PickerPicker.Brush = this.GeometryLayer.FillBrush;
+                        this.PickerFlyout.ShowAt(this.Border);
+                        break;
+
+                    case BrushType.Image:
+                        break;
+
+                    default:
+                        break;
+                }
             };
 
-            //Offset            
-            this.NumberControl.ValueChange += (s, value) =>this.OperatorControl.SetOffset((float)value / 100.0f);
+            this.CanvasControl.SizeChanged += (s, e) =>
+            {
+                if (e.NewSize == e.PreviousSize) return;
+                float width = (float)e.NewSize.Width;
+                float height = (float)e.NewSize.Height;
+
+                this.CanvasWidth = width;
+                this.CanvasHieght = height;
+                this.CanvasCenter = new Vector2(width/2,height/2);
+            };
+            this.CanvasControl.Draw += (s, arges) =>
+            {
+                if (this.GeometryLayer == null) return;
+
+                switch (this.GeometryLayer.FillBrush.Type)
+                {
+                    case BrushType.None:
+                        arges.DrawingSession.Clear(Colors.White);
+                        arges.DrawingSession.DrawLine(0, 0, this.CanvasWidth, this.CanvasHieght, Colors.DodgerBlue);
+                        arges.DrawingSession.DrawLine(0, this.CanvasHieght, this.CanvasWidth, 0, Colors.DodgerBlue);
+                        break;
+
+                    case BrushType.Color:
+                        arges.DrawingSession.Clear(this.GeometryLayer.FillBrush.Color);
+                        break;
+
+                    case BrushType.LinearGradient:
+                        arges.DrawingSession.FillRectangle(0, 0, this.CanvasWidth, this.CanvasHieght, new CanvasLinearGradientBrush(this.CanvasControl, this.GeometryLayer.FillBrush.Array)
+                        {
+                            StartPoint = new Vector2(0, this.CanvasCenter.Y),
+                            EndPoint = new Vector2(this.CanvasWidth, this.CanvasCenter.Y)
+                        });
+                        break;
+
+                    case BrushType.RadialGradient:
+                        arges.DrawingSession.FillRectangle(0, 0, this.CanvasWidth, this.CanvasHieght, new CanvasRadialGradientBrush(this.CanvasControl, this.GeometryLayer.FillBrush.Array)
+                        {
+                            Center = this.CanvasCenter,
+                            RadiusX = this.CanvasWidth / 2,
+                            RadiusY = this.CanvasHieght / 2
+                        });
+                        break;
+
+                    case BrushType.Image:
+                        break;
+
+                    default:
+                        break;
+                }
+
+            };
         }
 
 
-        private void SetColor(Color color)
+
+        public void ChangeSelectedIndex(int index)
         {
-            this.SolidColorBrush.Color = color;
-            this.OperatorControl.SetColor(color);
+            this.ComboBox.SelectionChanged -= this.SelectionChanged;
+            this.ComboBox.SelectedIndex = index;
+            this.ComboBox.SelectionChanged += this.SelectionChanged;
         }
-        private void SetControl(Color color, int offset, bool isEnabled)
+        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.SolidColorBrush.Color = color;
-            this.NumberControl.Value = offset;
-            this.RemoveButton.IsEnabled = this.NumberControl.IsEnabled = isEnabled;
+            if (this.GeometryLayer == null) return;
+            BrushType type = (BrushType)this.ComboBox.SelectedIndex;
+
+            BrushType oldType = this.GeometryLayer.FillBrush.Type;
+
+            //Initialize
+            if (type == BrushType.LinearGradient)
+            {
+                if (oldType == BrushType.None || oldType == BrushType.Color)
+                {
+                    this.GeometryLayer.FillBrush.Type = BrushType.LinearGradient;
+                    this.GeometryLayer.FillBrush.LinearGradientManager.StartPoint = this.GeometryLayer.Transformer.SrcLeftTop;
+                    this.GeometryLayer.FillBrush.LinearGradientManager.EndPoint = this.GeometryLayer.Transformer.SrcRightBottom;
+                }
+            }
+
+            this.GeometryLayer.FillBrush.Type = type;
+            this.CanvasControl.Invalidate();
+            this.ViewModel.Invalidate();
         }
+
     }
 }

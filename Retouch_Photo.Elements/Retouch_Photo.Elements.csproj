@@ -106,6 +106,9 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="OnOffSwitch.xaml.cs">
+      <DependentUpon>OnOffSwitch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LabelControl.xaml.cs">
       <DependentUpon>LabelControl.xaml</DependentUpon>
     </Compile>
@@ -127,6 +130,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="OnOffSwitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LabelControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

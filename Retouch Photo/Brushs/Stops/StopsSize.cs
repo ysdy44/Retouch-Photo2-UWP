@@ -3,7 +3,7 @@ using Microsoft.Graphics.Canvas.Brushes;
 using System.Numerics;
 using Windows.UI;
 
-namespace Retouch_Photo.Controls.BrushControls
+namespace Retouch_Photo.Brushs.Stops
 {
     /// <summary> Size </summary>
     public class StopsSize

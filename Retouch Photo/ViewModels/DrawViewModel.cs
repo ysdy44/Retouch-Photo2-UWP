@@ -28,6 +28,7 @@ using Windows.UI.Core;
 using static Retouch_Photo.Library.HomographyController;
 using Retouch_Photo.Tools.Models;
 using Retouch_Photo.Tools;
+using Retouch_Photo.Models.Layers;
 
 namespace Retouch_Photo.ViewModels
 {
@@ -195,6 +196,9 @@ namespace Retouch_Photo.ViewModels
                     this.RenderLayer.Layers == null ||
                     this.RenderLayer.Layers.Count == 0)
                 {
+                    //Geometry
+                    if (value is GeometryLayer geometryLayer) this.CurrentGeometryLayer = null;
+
                     this.SelectedIndex = -1;
                     OnPropertyChanged(nameof(CurrentLayer));
                     return;
@@ -203,6 +207,10 @@ namespace Retouch_Photo.ViewModels
                 if (this.RenderLayer.Layers.Contains(value))
                 {
                     this.SelectedIndex = this.RenderLayer.Layers.IndexOf(value);
+
+                    //Geometry
+                    if (value is GeometryLayer geometryLayer) this.CurrentGeometryLayer = geometryLayer;
+                   
                     OnPropertyChanged(nameof(CurrentLayer));
                     return;
                 }
@@ -225,9 +233,21 @@ namespace Retouch_Photo.ViewModels
             }
         }
 
+        /// <summary>当前几何图层</summary>     
+        public GeometryLayer CurrentGeometryLayer//Geometry
+        {
+            get => this.currentGeometryLayer;
+            set
+            {
+                this.currentGeometryLayer = value;
+                OnPropertyChanged(nameof(CurrentGeometryLayer));
+            }
+        }
+        private GeometryLayer currentGeometryLayer;
+
 
         #region Index & Tool
-                
+
 
         /// <summary>颜色</summary>    
         private Color color = Color.FromArgb(255, 214, 214, 214);
@@ -350,18 +370,15 @@ namespace Retouch_Photo.ViewModels
 
         public bool TransformerStart(Vector2 point)
         {
-            Matrix3x2 matrix = this.MatrixTransformer.Matrix;
-            Matrix3x2 inverseMatrix = this.MatrixTransformer.InverseMatrix;
-
             // Transformer
             Layer layer = this.CurrentLayer;
             if (layer != null)
             {
-                TransformerMode mode = Transformer.ContainsNodeMode(point, layer.Transformer, matrix);
+                TransformerMode mode = Transformer.ContainsNodeMode(point, layer.Transformer,  this.MatrixTransformer.Matrix);
                 if (this.IsTransformer(mode))
                 {
                     this.TransformerMode = mode;
-                    this.TransformerDictionary[mode].Start(point, layer, matrix, inverseMatrix);
+                    this.TransformerDictionary[mode].Start(point, layer, this.MatrixTransformer.Matrix, this.MatrixTransformer.InverseMatrix);
                     return true;
                 }
             }
@@ -373,15 +390,13 @@ namespace Retouch_Photo.ViewModels
         public bool TransformerDelta(Vector2 point)
         {
             if (this.TransformerMode==TransformerMode.None) return false;
-            Matrix3x2 matrix = this.MatrixTransformer.Matrix;
-            Matrix3x2 inverseMatrix = this.MatrixTransformer.InverseMatrix;
             
             // Transformer
             Layer layer = this.CurrentLayer;
             if (layer != null)
             {
                 TransformerMode mode = this.TransformerMode;
-                this.TransformerDictionary[mode].Delta(point, layer, matrix, inverseMatrix);
+                this.TransformerDictionary[mode].Delta(point, layer, this.MatrixTransformer.Matrix, this.MatrixTransformer.InverseMatrix);
 
                 this.Transformer = layer.Transformer;//Transformer
                 this.Invalidate();
@@ -394,15 +409,13 @@ namespace Retouch_Photo.ViewModels
         public bool TransformerComplete(Vector2 point)
         {
             if (this.TransformerMode==TransformerMode.None) return false;
-            Matrix3x2 matrix = this.MatrixTransformer.Matrix;
-            Matrix3x2 inverseMatrix = this.MatrixTransformer.InverseMatrix;
-            
+             
             // Transformer
             Layer layer = this.CurrentLayer;
             if (layer != null)
             {
                 TransformerMode mode = this.TransformerMode;
-                this.TransformerDictionary[mode].Complete(point, layer, matrix, inverseMatrix);
+                this.TransformerDictionary[mode].Complete(point, layer, this.MatrixTransformer.Matrix, this.MatrixTransformer.InverseMatrix);
 
                 this.TransformerMode = TransformerMode.None;
                 this.Invalidate();

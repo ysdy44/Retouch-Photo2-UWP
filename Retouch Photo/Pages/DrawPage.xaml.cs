@@ -14,6 +14,7 @@ namespace Retouch_Photo.Pages
         public DrawPage()
         {
             this.InitializeComponent();
+            this.Loaded += (s, e) => this.ViewModel.Invalidate();
 
             //Debuug
             MenuLayout.LayoutBinging(this.DebugLayout, this.DebugToggleButton);
@@ -29,8 +30,6 @@ namespace Retouch_Photo.Pages
             MenuLayout.LayoutBinging(this.TransformerLayout, this.TransformerToggleButton);
             //Navigator
             MenuLayout.LayoutBinging(this.NavigatorLayout, this.NavigatorToggleButton);
-            //Brush
-            MenuLayout.LayoutBinging(this.BrushLayout, this.BrushToggleButton);
 
             //Color
             MenuLayout.TappedBinging(this.ColorLayout, this.ColorButton);

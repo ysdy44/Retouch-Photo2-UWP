@@ -14,7 +14,7 @@
 
     xmlns:con="using:Retouch_Photo.Controls"
     xmlns:navigatorControls="using:Retouch_Photo.Controls.NavigatorControls"
-    xmlns:brushControls="using:Retouch_Photo.Controls.BrushControls"
+    xmlns:brushControls="using:Retouch_Photo.Brushs"
     xmlns:layersControls="using:Retouch_Photo.Controls.LayersControls"
     xmlns:transformerControls="using:Retouch_Photo.Controls.TransformerControls"
     
@@ -96,11 +96,6 @@
                         <navigatorControls:Icon/>
                     </ToggleButton>
 
-                    <!--Brush-->
-                    <ToggleButton x:Name="BrushToggleButton" Height="50" Width="60" BorderThickness="0" Background="Transparent" Foreground="{ThemeResource AppText}">
-                        <brushControls:Icon/>
-                    </ToggleButton>
-
                     <!--Color-->
                     <Border Height="50" Width="60" >
                         <Border x:Name="ColorButton" Width="34" Height="34" Style="{StaticResource AppCircleBorderStyle}" >
@@ -156,7 +151,7 @@
             <!--Transformer-->
             <local:MenuLayout x:Name="TransformerLayout" Text="Transformer" Placement="Bottom" Visibility="Collapsed">
                 <local:MenuLayout.ContentChild>
-                    <con:TransformerControl  Transformer="{x:Bind ViewModel.Transformer,Mode=OneWay}" Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
+                    <con:TransformerControl Transformer="{x:Bind ViewModel.Transformer,Mode=OneWay}" Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
                 </local:MenuLayout.ContentChild>
             </local:MenuLayout>
             
@@ -164,13 +159,6 @@
             <local:MenuLayout x:Name="NavigatorLayout" Text="Navigator" Placement="Bottom" Visibility="Collapsed">
                 <local:MenuLayout.ContentChild>
                     <con:NavigatorControl Brush="{ThemeResource AppForeground}"/>
-                </local:MenuLayout.ContentChild>
-            </local:MenuLayout>
-
-            <!--Brush-->
-            <local:MenuLayout x:Name="BrushLayout" Text="Brush" Placement="Bottom" Visibility="Collapsed">
-                <local:MenuLayout.ContentChild>
-                    <con:BrushControl/>
                 </local:MenuLayout.ContentChild>
             </local:MenuLayout>
 

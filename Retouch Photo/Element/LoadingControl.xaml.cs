@@ -21,7 +21,7 @@ namespace Retouch_Photo.Element
 
         public LoadingControl()
         {
-            this.InitializeComponent();
+            this.InitializeComponent(); 
         }
     }
 }

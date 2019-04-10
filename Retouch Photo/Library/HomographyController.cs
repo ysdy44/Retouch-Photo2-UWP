@@ -12,9 +12,9 @@ namespace Retouch_Photo.Library
     {
 
         /// <summary> Scaling around the center. </summary>
-        public static bool IsCenter => (App.ViewModel.MarqueeMode == MarqueeMode.Center) || (App.ViewModel.MarqueeMode == MarqueeMode.SquareAndCenter);
+        public static bool IsCenter => App.ViewModel.KeyCtrl;
         /// <summary> Maintain a ratio when scaling. </summary>
-        public static bool IsRatio => (App.ViewModel.MarqueeMode == MarqueeMode.Square) || (App.ViewModel.MarqueeMode == MarqueeMode.SquareAndCenter);
+        public static bool IsRatio => App.ViewModel.KeyShift;
         /// <summary> Step Frequency when spinning. </summary>
         public static bool IsStepFrequency => App.ViewModel.KeyShift;
 
@@ -82,7 +82,7 @@ namespace Retouch_Photo.Library
                 DstRightTop = new Vector2(rightBottom.X, leftTop.Y),
                 DstRightBottom = rightBottom,
                 DstLeftBottom = new Vector2(leftTop.X, rightBottom.Y),
-              };
+            };
             public static Transformer CreateFromSize(float width, float height, Vector2 postion, float scale = 1, bool disabledRadian = false) => new Transformer
             {
                 //Source
@@ -530,13 +530,13 @@ namespace Retouch_Photo.Library
             public new void Start(Vector2 point, Layer layer, Matrix3x2 matrix, Matrix3x2 inverseMatrix)
             {
                 base.Start(point, layer, matrix, inverseMatrix);
-                Vector2 DstPoint = Vector2.Transform(point, inverseMatrix);
-                this.StartPostion = DstPoint;
+                Vector2 dstPoint = Vector2.Transform(point, inverseMatrix);
+                this.StartPostion = dstPoint;
             }
             public new void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, Matrix3x2 inverseMatrix)
             {
-                Vector2 DstPoint = Vector2.Transform(point, inverseMatrix);
-                Vector2 vector = DstPoint - this.StartPostion;
+                Vector2 dstPoint = Vector2.Transform(point, inverseMatrix);
+                Vector2 vector = dstPoint - this.StartPostion;
 
                 Transformer.Add
                 (
@@ -555,13 +555,14 @@ namespace Retouch_Photo.Library
             public new void Start(Vector2 point, Layer layer, Matrix3x2 matrix, Matrix3x2 inverseMatrix)
             {
                 base.Start(point, layer, matrix, inverseMatrix);
-                this.StartRadian = this.GetRadian(layer.Transformer.DstRight, layer.Transformer.DstLeft);
+                Vector2 dstPoint = Vector2.Transform(point, inverseMatrix);
+                this.StartRadian = Transformer.VectorToRadians(dstPoint - base.StartTransformer.DstCenter);
             }
             public new void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, Matrix3x2 inverseMatrix)
             {
-                Vector2 DstPoint = Vector2.Transform(point, inverseMatrix);
-                float radian2 = Transformer.PiHalf - this.StartRadian + Transformer.VectorToRadians(DstPoint - base.StartTransformer.DstCenter);
-                float radiansStepFrequency = HomographyController.IsStepFrequency ? Transformer.RadiansStepFrequency(radian2) : radian2;
+                Vector2 dstPoint = Vector2.Transform(point, inverseMatrix);
+                float radian = -this.StartRadian + Transformer.VectorToRadians(dstPoint - base.StartTransformer.DstCenter);
+                float radiansStepFrequency = HomographyController.IsStepFrequency ? Transformer.RadiansStepFrequency(radian) : radian;
                 Matrix3x2 matrix2 = Matrix3x2.CreateRotation(radiansStepFrequency, base.StartTransformer.DstCenter);
 
                 Transformer.Multiplies
@@ -570,18 +571,6 @@ namespace Retouch_Photo.Library
                     startTransformer: base.StartTransformer,
                     matrix: matrix2
                 );
-            }
-
-            public float GetRadian(Vector2 DstRight, Vector2 DstLeft)
-            {
-                if (DstRight.Y == DstLeft.Y)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return Transformer.VectorToRadians(DstRight - DstLeft);
-                }
             }
         }
 
@@ -758,8 +747,8 @@ namespace Retouch_Photo.Library
 
             public new void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, Matrix3x2 inverseMatrix)
             {
-                Vector2 DstPoint = Vector2.Transform(point, inverseMatrix);
-                Vector2 footPoint = Transformer.FootPoint(DstPoint, this.GetPoint(), this.GetDiagonalPoint());
+                Vector2 dstPoint = Vector2.Transform(point, inverseMatrix);
+                Vector2 footPoint = Transformer.FootPoint(dstPoint, this.GetPoint(), this.GetDiagonalPoint());
 
                 if (HomographyController.IsRatio)
                 {
@@ -879,12 +868,12 @@ namespace Retouch_Photo.Library
             }
             public new void Delta(Vector2 point, Layer layer, Matrix3x2 matrix, Matrix3x2 inverseMatrix)
             {
-                Vector2 DstPoint = Vector2.Transform(point, inverseMatrix);
+                Vector2 dstPoint = Vector2.Transform(point, inverseMatrix);
 
                 if (HomographyController.IsRatio)
                 {
                     Vector2 center = HomographyController.IsCenter ? base.StartTransformer.DstCenter : this.GetDiagonalPoint();
-                    Vector2 footPoint = Transformer.FootPoint(DstPoint, this.GetPoint(), center);
+                    Vector2 footPoint = Transformer.FootPoint(dstPoint, this.GetPoint(), center);
                     LineDistance distance = new LineDistance(footPoint, this.GetPoint(), center);
                     Matrix3x2 matrix2 = Matrix3x2.CreateScale(LineDistance.Scale(distance), center);
 
@@ -898,22 +887,22 @@ namespace Retouch_Photo.Library
                 else
                 {
                     Vector2 center = (HomographyController.IsCenter) ?
-                        base.StartTransformer.DstCenter + base.StartTransformer.DstCenter - DstPoint :
+                        base.StartTransformer.DstCenter + base.StartTransformer.DstCenter - dstPoint :
                         this.GetDiagonalPoint();
 
-                    this.SetPoint(layer, DstPoint);
+                    this.SetPoint(layer, dstPoint);
                     this.SetDiagonalPoint(layer, center);
                     this.SetHorizontalPoint(layer, Transformer.IntersectionPoint
                     (
-                       DstPoint,
-                       DstPoint - this.StartHorizontal,
+                       dstPoint,
+                       dstPoint - this.StartHorizontal,
                        center + this.StartVertical,
                        center
                     ));
                     this.SetVerticalPoint(layer, Transformer.IntersectionPoint
                     (
-                        line1A: DstPoint,
-                        line1B: DstPoint - this.StartVertical,
+                        line1A: dstPoint,
+                        line1B: dstPoint - this.StartVertical,
                         line2A: center + this.StartHorizontal,
                         line2B: center
                     ));
@@ -965,5 +954,4 @@ namespace Retouch_Photo.Library
         #endregion
 
     }
-
 }

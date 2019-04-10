@@ -48,10 +48,10 @@ namespace Retouch_Photo.Element
         {
             this.InitializeComponent();
 
-            this.NewSegmented.Tapped += (sender, e) => this._Mode = MarqueeCompositeMode.New;
-            this.AddSegmented.Tapped += (sender, e) => this._Mode = MarqueeCompositeMode.Add;
-            this.SubtractSegmented.Tapped += (sender, e) => this._Mode = MarqueeCompositeMode.Subtract;
-            this.IntersectSegmented.Tapped += (sender, e) => this._Mode = MarqueeCompositeMode.Intersect;
+            this.NewSegmented.Tapped += (sender, e) => this.Mode = MarqueeCompositeMode.New;
+            this.AddSegmented.Tapped += (sender, e) => this.Mode = MarqueeCompositeMode.Add;
+            this.SubtractSegmented.Tapped += (sender, e) => this.Mode = MarqueeCompositeMode.Subtract;
+            this.IntersectSegmented.Tapped += (sender, e) => this.Mode = MarqueeCompositeMode.Intersect;
         }
 
         private void SegmenteColor(ContentPresenter control, bool IsChecked)

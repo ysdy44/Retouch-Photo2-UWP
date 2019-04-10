@@ -34,13 +34,9 @@ namespace Retouch_Photo.Tools
         {
              {ToolType.Cursor, new CursorTool()},
              {ToolType.View, new ViewTool()},
-             {ToolType.FloodSetect, new FloodSetectTool()},
-             {ToolType.SelectionBrush, new SelectionBrushTool()},
 
              {ToolType.PaintBrush, new PaintBrushTool()},
-             {ToolType.WatercolorPen, new WatercolorPenTool()},
              {ToolType.Pencil, new PencilTool()},
-             {ToolType.EraseBrush, new EraseBrushTool()},
 
              {ToolType.Pen, new PenTool()},
              {ToolType.Rectangle, new RectangleTool()},
