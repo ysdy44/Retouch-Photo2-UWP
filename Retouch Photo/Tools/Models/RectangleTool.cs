@@ -6,7 +6,7 @@ using Retouch_Photo.ViewModels;
 
 namespace Retouch_Photo.Tools.Models
 {
-    public class RectangleTool : IRectangleTool
+    public class RectangleTool : LayerTool
     {
         //ViewModel
         DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
@@ -27,6 +27,6 @@ namespace Retouch_Photo.Tools.Models
         {
         }
 
-        public override Layer GetLayer(VectRect rect)=> RectangularLayer.CreateFromRect(this.ViewModel.CanvasDevice, rect, this.ViewModel.Color);
+        public override Layer GetLayer(VectRect rect) => RectangularLayer.CreateFromRect(this.ViewModel.CanvasDevice, rect, this.ViewModel.Color);
     }
 }

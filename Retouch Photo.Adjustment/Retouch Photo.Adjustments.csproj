@@ -218,9 +218,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Retouch_Photo.Pickers\Retouch_Photo.Pickers.csproj">
+    <ProjectReference Include="..\Retouch_Photo.Pickers\Retouch Photo.Pickers.csproj">
       <Project>{0c6125aa-64a9-448a-ad15-38707d31eab6}</Project>
-      <Name>Retouch_Photo.Pickers</Name>
+      <Name>Retouch Photo.Pickers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

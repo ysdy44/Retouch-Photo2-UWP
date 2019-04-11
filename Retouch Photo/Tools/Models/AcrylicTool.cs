@@ -6,7 +6,7 @@ using Retouch_Photo.ViewModels;
 
 namespace Retouch_Photo.Tools.Models
 {
-    public class AcrylicTool : IRectangleTool
+    public class AcrylicTool : LayerTool
     {
         //ViewModel
         DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
@@ -18,7 +18,7 @@ namespace Retouch_Photo.Tools.Models
             base.WorkIcon = new AcrylicControl();
             base.Page = new AcrylicPage();
         }
-        
+
         //@Override
         public override void ToolOnNavigatedTo()//当前页面成为活动页面
         {
@@ -26,7 +26,7 @@ namespace Retouch_Photo.Tools.Models
         public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
         {
         }
-
-        public override Layer GetLayer(VectRect rect) => AcrylicLayer.CreateFromRect(this.ViewModel.CanvasDevice, rect, this.ViewModel.Color);
+        
+        public override Layer GetLayer(VectRect rect)=> AcrylicLayer.CreateFromRect(this.ViewModel.CanvasDevice, rect, this.ViewModel.Color);
     }
 }

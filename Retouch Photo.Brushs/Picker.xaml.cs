@@ -2,6 +2,7 @@
 using Retouch_Photo.Brushs.Stops;
 using System;
 using System.Linq;
+using System.Numerics;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
 
@@ -13,10 +14,11 @@ namespace Retouch_Photo.Brushs
         public delegate void StopsChangeHandler();
         public event StopsChangeHandler StopsChange;
 
+        bool IsPressed;
+        Vector2 Vector;
+
         StopsSize Size = new StopsSize();
-        StopsManager Manager = new StopsManager();//Left+o o o+right: 5 stops
-        //CanvasGradientStop[] Array//o o o o o: 5 stops
-        
+        StopsManager Manager = new StopsManager();
 
         private Brush brush;
         public Brush Brush
@@ -72,9 +74,12 @@ namespace Retouch_Photo.Brushs
                 this.Manager.DrawRightNode(args.DrawingSession, this.Size.Right, this.Size.Center);
             };
 
-            //CanvasOperator
-            this.CanvasOperator.Single_Start += (point) =>
+            //Manipulation
+            this.CanvasControl.PointerPressed += (s, e) =>
             {
+                this.IsPressed = true;
+                this.Vector = e.GetCurrentPoint(this.CanvasControl).Position.ToVector2();
+
                 if (this.Brush == null) return;
 
                 this.Manager.Index = -1;
@@ -85,17 +90,17 @@ namespace Retouch_Photo.Brushs
                 for (int i = this.Manager.Count - 1; i >= 0; i--)
                 {
                     float x = this.Size.OffsetToPosition(this.Manager.Stops[i].Position);
-                    if (Math.Abs(x - point.X) < this.Size.Radius)
+                    if (Math.Abs(x - this.Vector.X) < this.Size.Radius)
                     {
                         this.Manager.Index = i;
-                        CanvasGradientStop stop = this.Manager.Stops[i]; 
-                         this.StopChanged(stop.Color, (int)(stop.Position * 100), true);//Delegate
+                        CanvasGradientStop stop = this.Manager.Stops[i];
+                        this.StopChanged(stop.Color, (int)(stop.Position * 100), true);//Delegate
                         return;
                     }
                 }
 
                 //Left
-                bool isLeft = (Math.Abs(this.Size.Left - point.X) < this.Size.Radius);
+                bool isLeft = (Math.Abs(this.Size.Left - this.Vector.X) < this.Size.Radius);
                 if (isLeft)
                 {
                     this.Manager.IsLeft = true;
@@ -104,7 +109,7 @@ namespace Retouch_Photo.Brushs
                 }
 
                 //Right
-                bool isRight = (Math.Abs(this.Size.Right - point.X) < this.Size.Radius);
+                bool isRight = (Math.Abs(this.Size.Right - this.Vector.X) < this.Size.Radius);
                 if (isRight)
                 {
                     this.Manager.IsRight = true;
@@ -114,7 +119,7 @@ namespace Retouch_Photo.Brushs
 
 
                 //Add
-                float offset = this.Size.PositionToOffset(point.X);
+                float offset = this.Size.PositionToOffset(this.Vector.X);
                 CanvasGradientStop addStop = this.Manager.GetNewStop(offset);
 
                 this.Manager.Stops.Add(addStop);
@@ -124,23 +129,27 @@ namespace Retouch_Photo.Brushs
                 this.StopChanged(addStop.Color, (int)(addStop.Position * 100), true);//Delegate
                 return;
             };
-            this.CanvasOperator.Single_Delta += (point) =>
+            this.CanvasControl.PointerMoved += (s, e) =>
             {
+                this.Vector = e.GetCurrentPoint(this.CanvasControl).Position.ToVector2();
+
+                if (this.IsPressed == false) return;
                 if (this.Brush == null) return;
 
                 if (this.Manager.IsLeft) return;
                 if (this.Manager.IsRight) return;
 
-                float offset = this.Size.PositionToOffset(point.X);
+                float offset = this.Size.PositionToOffset(this.Vector.X);
                 this.SetOffset(offset);
 
                 this.OffsetChanged(offset);
 
-                this.CanvasControl.Invalidate();                
+                this.CanvasControl.Invalidate();
                 this.StopsChange?.Invoke();//Delegate
             };
-            this.CanvasOperator.Single_Complete += (point) =>
+            this.CanvasControl.PointerReleased += (s, e) =>
             {
+                this.IsPressed = false;
                 if (this.Brush == null) return;
 
                 this.CanvasControl.Invalidate();
@@ -161,7 +170,7 @@ namespace Retouch_Photo.Brushs
             //Offset            
             this.NumberControl.ValueChange += (s, value) => this.SetOffset((float)value / 100.0f);
         }
-                 
+
 
         private void OffsetChanged(float offset) => this.NumberControl.Value = (int)(offset * 100);
         private void StopChanged(Color color, int offset, bool isEnabled)
@@ -283,7 +292,5 @@ namespace Retouch_Photo.Brushs
             this.CanvasControl.Invalidate();
             return;
         }
-
-
     }
 }

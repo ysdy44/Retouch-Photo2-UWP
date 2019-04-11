@@ -6,15 +6,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     xmlns:elements="using:Retouch_Photo.Elements"
-    xmlns:lib="using:Retouch_Photo.Library"
     xmlns:pickers="using:Retouch_Photo.Pickers"
     mc:Ignorable="d"
     d:DesignHeight="800"
     d:DesignWidth="200">
 
     <UserControl.Resources>
-        <lib:CanvasOperator x:Name="CanvasOperator" DestinationControl="{Binding ElementName=CanvasControl}"/>
-
         <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <pickers:ColorPicker x:Name="ColorPicker" Width="200"/>
         </Flyout>

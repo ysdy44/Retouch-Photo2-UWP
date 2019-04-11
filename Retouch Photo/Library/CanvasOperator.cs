@@ -6,7 +6,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
-
 namespace Retouch_Photo.Library
 {
     /// <summary>给画布控件的指针事件提供单指、双指、移动事件</summary>

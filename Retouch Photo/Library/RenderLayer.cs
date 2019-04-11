@@ -81,6 +81,29 @@ namespace Retouch_Photo.Library
             layer = null;
         }
 
+        /// <summary>
+        /// Click on the layer
+        /// </summary>
+        /// <param name="point"> Click point</param>
+        /// <param name="inverseMatrix">inverse matrix </param>
+        /// <returns></returns>
+        public Layer GetClickedLayer(Vector2 point, Matrix3x2 inverseMatrix)
+        {
+            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+
+            foreach (Layer layer in this.Layers)
+            {
+                if (layer.IsVisual == false || layer.Opacity == 0) continue;
+
+                if (HomographyController.Transformer.ContainsBound(canvasPoint, layer.Transformer))
+                {
+                    return layer;
+                }
+            }
+
+            return null;
+        }
+
 
         #endregion
 

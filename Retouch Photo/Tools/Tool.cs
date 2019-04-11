@@ -14,7 +14,6 @@ namespace Retouch_Photo.Tools
         public ToolPage Page;
 
 
-        //Operator
         public abstract void Start(Vector2 point);
         public abstract void Delta(Vector2 point);
         public abstract void Complete(Vector2 point);

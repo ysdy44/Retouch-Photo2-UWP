@@ -6,11 +6,11 @@ using Retouch_Photo.ViewModels;
 
 namespace Retouch_Photo.Tools.Models
 {
-    public class EllipseTool : IRectangleTool
+    public class EllipseTool : LayerTool
     {
         //ViewModel
         DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
-        
+
         public EllipseTool()
         {
             base.Type = ToolType.Ellipse;
@@ -19,7 +19,6 @@ namespace Retouch_Photo.Tools.Models
             base.Page = new EllipsePage();
         }
 
-        
         //@Override
         public override void ToolOnNavigatedTo()//当前页面成为活动页面
         {

@@ -95,19 +95,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Brushs\Brush.cs" />
-    <Compile Include="Brushs\BrushType.cs" />
-    <Compile Include="Brushs\EllipticalGradient\EllipticalGradientManager.cs" />
-    <Compile Include="Brushs\EllipticalGradient\EllipticalGradientType.cs" />
-    <Compile Include="Brushs\LinearGradient\LinearGradientManager.cs" />
-    <Compile Include="Brushs\LinearGradient\LinearGradientType.cs" />
-    <Compile Include="Brushs\Picker.xaml.cs">
-      <DependentUpon>Picker.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Brushs\RadialGradient\RadialGradientManager.cs" />
-    <Compile Include="Brushs\RadialGradient\RadialGradientType.cs" />
-    <Compile Include="Brushs\Stops\StopsManager.cs" />
-    <Compile Include="Brushs\Stops\StopsSize.cs" />
     <Compile Include="Controls\AdjustmentsControl.xaml.cs">
       <DependentUpon>AdjustmentsControl.xaml</DependentUpon>
     </Compile>
@@ -135,6 +122,14 @@
     <Compile Include="Controls\TransformerControls\Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Library\CanvasOperator.cs" />
+    <Compile Include="Library\CurveNodes.cs" />
+    <Compile Include="Library\Debug.cs" />
+    <Compile Include="Library\DottedLine.cs" />
+    <Compile Include="Library\HomographyController.cs" />
+    <Compile Include="Library\MarqueeTool.cs" />
+    <Compile Include="Library\MatrixTransformer.cs" />
+    <Compile Include="Library\RenderLayer.cs" />
     <Compile Include="Tools\Controls\LineControl.xaml.cs">
       <DependentUpon>LineControl.xaml</DependentUpon>
     </Compile>
@@ -238,28 +233,29 @@
       <DependentUpon>ThemeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Library\Adjustment.cs" />
-    <Compile Include="Library\CurveNodes.cs" />
-    <Compile Include="Library\Debug.cs" />
-    <Compile Include="Library\DottedLine.cs" />
-    <Compile Include="Library\MarqueeTool.cs" />
-    <Compile Include="Library\RenderLayer.cs" />
-    <Compile Include="Library\MatrixTransformer.cs" />
-    <Compile Include="Library\HomographyController.cs" />
     <Compile Include="Models\Layers\AcrylicLayer.cs" />
     <Compile Include="Models\Layers\GeometryLayer.cs" />
     <Compile Include="Models\Layers\GeometryLayers\EllipseLayer.cs" />
     <Compile Include="Models\Layers\ImageLayer.cs" />
     <Compile Include="Models\Layers\GeometryLayers\RectangularLayer.cs" />
     <Compile Include="Models\Layers\LineLayer.cs" />
-    <Compile Include="Tools\IRectangleTool.cs" />
+    <Compile Include="Tools\ITools\IClickedTool.cs" />
+    <Compile Include="Tools\ITools\ICreateTool.cs" />
+    <Compile Include="Tools\ITool.cs" />
+    <Compile Include="Tools\LayerTool.cs" />
     <Compile Include="Tools\Models\AcrylicTool.cs" />
     <Compile Include="Tools\Models\CursorTool.cs" />
+    <Compile Include="Tools\Models\CursorTools\IBlueBox.cs" />
+    <Compile Include="Tools\Models\CursorTools\ITranslation.cs" />
     <Compile Include="Tools\Models\EllipseTool.cs" />
     <Compile Include="Tools\Models\GeometryTool.cs" />
-    <Compile Include="Tools\ICursorTool.cs" />
+    <Compile Include="Tools\ITools\ICursorTool.cs" />
     <Compile Include="Tools\Models\LineTool.cs" />
     <Compile Include="Tools\Models\NullTool.cs" />
     <Compile Include="Tools\Models\PaintBrushTool.cs" />
+    <Compile Include="Tools\Models\PaintBrushTools\IEllipticalGradient.cs" />
+    <Compile Include="Tools\Models\PaintBrushTools\ILinearGradient.cs" />
+    <Compile Include="Tools\Models\PaintBrushTools\IRadialGradient.cs" />
     <Compile Include="Tools\Models\PencilTool.cs" />
     <Compile Include="Tools\Models\PenTool.cs" />
     <Compile Include="Tools\Models\RectangleTool.cs" />
@@ -275,7 +271,6 @@
     <Compile Include="Pages\MainLayout.xaml.cs">
       <DependentUpon>MainLayout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Library\CanvasOperator.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -675,10 +670,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Brushs\Picker.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\AdjustmentsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -972,6 +963,10 @@
       <Project>{8b2218b3-59a4-445f-8765-752c5e700efa}</Project>
       <Name>Retouch Photo.Blends</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo.Brushs\Retouch Photo.Brushs.csproj">
+      <Project>{00e87876-1aa4-4b48-af1c-f1db75fbf587}</Project>
+      <Name>Retouch Photo.Brushs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo.Effects\Retouch Photo.Effects.csproj">
       <Project>{c14d4618-e234-4d91-8ced-49cbd9f6f3c7}</Project>
       <Name>Retouch Photo.Effects</Name>
@@ -980,17 +975,17 @@
       <Project>{448fcfb4-cb3c-4874-b157-3f0dfff044bc}</Project>
       <Name>Retouch Photo.Selections</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Retouch_Photo.Elements\Retouch_Photo.Elements.csproj">
+    <ProjectReference Include="..\Retouch_Photo.Elements\Retouch Photo.Elements.csproj">
       <Project>{0e5ac58e-36bf-44fe-877e-830f024b7109}</Project>
-      <Name>Retouch_Photo.Elements</Name>
+      <Name>Retouch Photo.Elements</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Retouch_Photo.Operates\Retouch_Photo.Operates.csproj">
+    <ProjectReference Include="..\Retouch_Photo.Operates\Retouch Photo.Operates.csproj">
       <Project>{c5a52472-53d8-4885-8488-0cf77a985794}</Project>
-      <Name>Retouch_Photo.Operates</Name>
+      <Name>Retouch Photo.Operates</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Retouch_Photo.Pickers\Retouch_Photo.Pickers.csproj">
+    <ProjectReference Include="..\Retouch_Photo.Pickers\Retouch Photo.Pickers.csproj">
       <Project>{0c6125aa-64a9-448a-ad15-38707d31eab6}</Project>
-      <Name>Retouch_Photo.Pickers</Name>
+      <Name>Retouch Photo.Pickers</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

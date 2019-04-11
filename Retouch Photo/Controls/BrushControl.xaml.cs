@@ -173,6 +173,8 @@ namespace Retouch_Photo.Controls
             this.ComboBox.SelectionChanged -= this.SelectionChanged;
             this.ComboBox.SelectedIndex = index;
             this.ComboBox.SelectionChanged += this.SelectionChanged;
+
+            this.CanvasControl.Invalidate();
         }
         private void SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

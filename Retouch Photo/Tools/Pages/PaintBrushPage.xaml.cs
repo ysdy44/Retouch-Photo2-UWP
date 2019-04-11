@@ -32,6 +32,9 @@ namespace Retouch_Photo.Tools.Pages
         //@Override
         public override void ToolOnNavigatedTo()//当前页面成为活动页面
         {
+            if (this.ViewModel.CurrentGeometryLayer == null) return;
+            BrushType type = this.ViewModel.CurrentGeometryLayer.FillBrush.Type;
+            this.BrushControl.ChangeSelectedIndex((int)type);
         }
         public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
         {

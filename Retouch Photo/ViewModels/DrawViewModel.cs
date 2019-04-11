@@ -192,12 +192,10 @@ namespace Retouch_Photo.ViewModels
             }
             set
             {
-                if (value == null ||
-                    this.RenderLayer.Layers == null ||
-                    this.RenderLayer.Layers.Count == 0)
+                if (value == null || this.RenderLayer.Layers == null || this.RenderLayer.Layers.Count == 0)
                 {
                     //Geometry
-                    if (value is GeometryLayer geometryLayer) this.CurrentGeometryLayer = null;
+                    this.CurrentGeometryLayer = null;
 
                     this.SelectedIndex = -1;
                     OnPropertyChanged(nameof(CurrentLayer));
@@ -209,8 +207,8 @@ namespace Retouch_Photo.ViewModels
                     this.SelectedIndex = this.RenderLayer.Layers.IndexOf(value);
 
                     //Geometry
-                    if (value is GeometryLayer geometryLayer) this.CurrentGeometryLayer = geometryLayer;
-                   
+                    this.CurrentGeometryLayer = (value is GeometryLayer geometryLayer) ? geometryLayer : null;
+                    
                     OnPropertyChanged(nameof(CurrentLayer));
                     return;
                 }
@@ -333,121 +331,29 @@ namespace Retouch_Photo.ViewModels
         #endregion
 
 
-        #region Transformer
-
-
+        //Transformer
         public TransformerMode TransformerMode = TransformerMode.None;
         public readonly Dictionary<TransformerMode, IController> TransformerDictionary = new Dictionary<TransformerMode, IController>
-            {
-                {TransformerMode.None,  new NoneController()},
-                {TransformerMode.Translation,  new TranslationController()},
-                {TransformerMode.Rotation,  new RotationController()},
-
-                {TransformerMode.SkewLeft,  new SkewLeftController()},
-                {TransformerMode.SkewTop,  new SkewTopController()},
-                {TransformerMode.SkewRight,  new SkewRightController()},
-                {TransformerMode.SkewBottom,  new SkewBottomController()},
-
-                {TransformerMode.ScaleLeft,  new ScaleLeftController()},
-                {TransformerMode.ScaleTop,  new ScaleTopController()},
-                {TransformerMode.ScaleRight,  new ScaleRightController()},
-                {TransformerMode.ScaleBottom,  new ScaleBottomController()},
-
-                {TransformerMode.ScaleLeftTop,  new ScaleLeftTopController()},
-                {TransformerMode.ScaleRightTop,  new ScaleRightTopController()},
-                {TransformerMode.ScaleRightBottom,  new ScaleRightBottomController()},
-                {TransformerMode.ScaleLeftBottom,  new ScaleLeftBottomController()},
-            };
-
-
-        public bool IsTransformer(TransformerMode mode)
         {
-            if (mode == TransformerMode.None) return false;
-            if (mode == TransformerMode.Translation) return false;
-            return true;
-        }
+             {TransformerMode.None,  new NoneController()},
+             {TransformerMode.Translation,  new TranslationController()},
+             {TransformerMode.Rotation,  new RotationController()},
 
+             {TransformerMode.SkewLeft,  new SkewLeftController()},
+             {TransformerMode.SkewTop,  new SkewTopController()},
+             {TransformerMode.SkewRight,  new SkewRightController()},
+             {TransformerMode.SkewBottom,  new SkewBottomController()},
 
-        public bool TransformerStart(Vector2 point)
-        {
-            // Transformer
-            Layer layer = this.CurrentLayer;
-            if (layer != null)
-            {
-                TransformerMode mode = Transformer.ContainsNodeMode(point, layer.Transformer,  this.MatrixTransformer.Matrix);
-                if (this.IsTransformer(mode))
-                {
-                    this.TransformerMode = mode;
-                    this.TransformerDictionary[mode].Start(point, layer, this.MatrixTransformer.Matrix, this.MatrixTransformer.InverseMatrix);
-                    return true;
-                }
-            }
+             {TransformerMode.ScaleLeft,  new ScaleLeftController()},
+             {TransformerMode.ScaleTop,  new ScaleTopController()},
+             {TransformerMode.ScaleRight,  new ScaleRightController()},
+             {TransformerMode.ScaleBottom,  new ScaleBottomController()},
 
-            this.TransformerMode = TransformerMode.None;
-            return false;
-        }
-
-        public bool TransformerDelta(Vector2 point)
-        {
-            if (this.TransformerMode==TransformerMode.None) return false;
-            
-            // Transformer
-            Layer layer = this.CurrentLayer;
-            if (layer != null)
-            {
-                TransformerMode mode = this.TransformerMode;
-                this.TransformerDictionary[mode].Delta(point, layer, this.MatrixTransformer.Matrix, this.MatrixTransformer.InverseMatrix);
-
-                this.Transformer = layer.Transformer;//Transformer
-                this.Invalidate();
-                 return true;
-            }
-
-            return false;
-        }
-
-        public bool TransformerComplete(Vector2 point)
-        {
-            if (this.TransformerMode==TransformerMode.None) return false;
-             
-            // Transformer
-            Layer layer = this.CurrentLayer;
-            if (layer != null)
-            {
-                TransformerMode mode = this.TransformerMode;
-                this.TransformerDictionary[mode].Complete(point, layer, this.MatrixTransformer.Matrix, this.MatrixTransformer.InverseMatrix);
-
-                this.TransformerMode = TransformerMode.None;
-                this.Invalidate();
-                return true;
-            }
-
-            this.CurrentLayer = null;
-
-            this.TransformerMode = TransformerMode.None;
-            this.Invalidate();
-            return false;
-        }
-
-
-        public bool TransformerDraw(CanvasDrawingSession ds)
-        {
-            Matrix3x2 matrix = this.MatrixTransformer.Matrix;
-            
-            //Transformer      
-            Layer layer = this.CurrentLayer;
-            if (layer != null)
-            {
-                layer.Draw(this.CanvasDevice, ds, matrix);
-                Transformer.DrawBoundNodes(ds, layer.Transformer, matrix);
-                return true;
-            }
-
-            return false;
-        }
-
-
-        #endregion
+             {TransformerMode.ScaleLeftTop,  new ScaleLeftTopController()},
+             {TransformerMode.ScaleRightTop,  new ScaleRightTopController()},
+             {TransformerMode.ScaleRightBottom,  new ScaleRightBottomController()},
+             {TransformerMode.ScaleLeftBottom,  new ScaleLeftBottomController()},
+        };
 
 
         /// <summary>选框模式</summary>
