@@ -4,7 +4,6 @@
     {
         None,
         Center,
-        XPoint,
-        YPoint,
+        Point
     }
 }

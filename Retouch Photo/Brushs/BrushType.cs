@@ -6,6 +6,7 @@
         Color,
         LinearGradient,
         RadialGradient,
+        EllipticalGradient,
         Image
     }
 }

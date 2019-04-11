@@ -1,5 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
+using Retouch_Photo.Brushs.EllipticalGradient;
 using Retouch_Photo.Brushs.LinearGradient;
 using Retouch_Photo.Brushs.RadialGradient;
 using System.Numerics;
@@ -19,40 +20,8 @@ namespace Retouch_Photo.Brushs
 
         public CanvasImageBrush ImageBrush;
         public LinearGradientManager LinearGradientManager = new LinearGradientManager();
-        public RadialGradientManager RadialGradientManager;
-
-        #region LinearBrush
-
-
-        //Manager
-
-        //Initialize
-        public void InitializeLinearBrush(Vector2 StartPoint, Vector2 EndPoint)
-        {
-            if (this.Type == BrushType.None || this.Type == BrushType.Color)
-            {
-                this.Type = BrushType.LinearGradient;
-                this.LinearGradientManager.StartPoint = StartPoint;
-                this.LinearGradientManager.EndPoint = EndPoint;
-            }
-        }
-         
-
-
-        #endregion
-
-
-        public CanvasRadialGradientBrush RadialBrush(ICanvasResourceCreator creator, Matrix3x2 matrix)
-        {
-            return new CanvasRadialGradientBrush(creator, this.Array)
-            {
-                Center = Vector2.Transform(this.RadialGradientManager.Center, matrix),
-                RadiusX = this.RadialGradientManager.RadiusX,
-                RadiusY = this.RadialGradientManager.RadiusY,
-            };
-        }
-
-
+        public RadialGradientManager RadialGradientManager = new RadialGradientManager();
+        public EllipticalGradientManager EllipticalGradientManager = new EllipticalGradientManager();
+        
     }
-
 }

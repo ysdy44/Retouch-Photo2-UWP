@@ -97,6 +97,8 @@
     </Compile>
     <Compile Include="Brushs\Brush.cs" />
     <Compile Include="Brushs\BrushType.cs" />
+    <Compile Include="Brushs\EllipticalGradient\EllipticalGradientManager.cs" />
+    <Compile Include="Brushs\EllipticalGradient\EllipticalGradientType.cs" />
     <Compile Include="Brushs\LinearGradient\LinearGradientManager.cs" />
     <Compile Include="Brushs\LinearGradient\LinearGradientType.cs" />
     <Compile Include="Brushs\Picker.xaml.cs">

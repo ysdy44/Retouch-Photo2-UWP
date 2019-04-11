@@ -1,6 +1,8 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo.Brushs;
+using Retouch_Photo.Brushs.EllipticalGradient;
 using Retouch_Photo.Brushs.LinearGradient;
+using Retouch_Photo.Brushs.RadialGradient;
 using Retouch_Photo.Models.Layers;
 using Retouch_Photo.Tools.Controls;
 using Retouch_Photo.Tools.Pages;
@@ -60,6 +62,11 @@ namespace Retouch_Photo.Tools.Models
                         break;
 
                     case BrushType.RadialGradient:
+                        this.RadialGradientStart(geometryLayer.FillBrush.RadialGradientManager, geometryLayer.Transformer, point);//LinearGradient
+                        return;
+
+                    case BrushType.EllipticalGradient:
+                        this.EllipticalGradientStart(geometryLayer.FillBrush.EllipticalGradientManager, geometryLayer.Transformer, point);//LinearGradient
                         return;
 
                     case BrushType.Image:
@@ -89,6 +96,11 @@ namespace Retouch_Photo.Tools.Models
                         break;
 
                     case BrushType.RadialGradient:
+                        this.RadialGradientDelta(geometryLayer.FillBrush.RadialGradientManager, geometryLayer.Transformer, point);//LinearGradient
+                        return;
+
+                    case BrushType.EllipticalGradient:
+                        this.EllipticalGradientDelta(geometryLayer.FillBrush.EllipticalGradientManager, geometryLayer.Transformer, point);//LinearGradient
                         return;
 
                     case BrushType.Image:
@@ -118,6 +130,11 @@ namespace Retouch_Photo.Tools.Models
                         break;
 
                     case BrushType.RadialGradient:
+                        this.RadialGradientComplete(geometryLayer.FillBrush.RadialGradientManager);//LinearGradient
+                        return;
+
+                    case BrushType.EllipticalGradient:
+                        this.EllipticalGradientComplete(geometryLayer.FillBrush.EllipticalGradientManager);//LinearGradient
                         return;
 
                     case BrushType.Image:
@@ -138,6 +155,8 @@ namespace Retouch_Photo.Tools.Models
                 Matrix3x2 matrix = this.ViewModel.MatrixTransformer.Matrix;
                 geometryLayer.Draw(this.ViewModel.CanvasDevice, ds, matrix);
 
+                Matrix3x2 matrix2 = geometryLayer.Transformer.Matrix * matrix;
+
 
                 switch (geometryLayer.FillBrush.Type)
                 {
@@ -148,12 +167,15 @@ namespace Retouch_Photo.Tools.Models
                         break;
 
                     case BrushType.LinearGradient:
-                        Matrix3x2 matrix2 = geometryLayer.Transformer.Matrix * matrix;
                         this.LinearGradientDraw(ds, geometryLayer.FillBrush.LinearGradientManager, matrix2);//LinearGradient
                         break;
 
-                    case BrushType.RadialGradient:
+                    case BrushType.RadialGradient:                      
+                        this.RadialGradientDraw(ds, geometryLayer.FillBrush.RadialGradientManager, matrix2);//LinearGradient
+                        break;
 
+                    case BrushType.EllipticalGradient:
+                        this.EllipticalGradientDraw(ds, geometryLayer.FillBrush.EllipticalGradientManager, matrix2);//LinearGradient
                         break;
 
                     case BrushType.Image:
@@ -245,6 +267,153 @@ namespace Retouch_Photo.Tools.Models
             Transformer.DrawNode(ds, startPoint);
             Transformer.DrawNode(ds, endPoint);
         }
+
+        #endregion
+
+
+        #region RadialGradient
+
+        
+        public void RadialGradientStart(RadialGradientManager manager, Transformer transformer, Vector2 point)
+        {
+            Matrix3x2 matrix = transformer.Matrix * this.ViewModel.MatrixTransformer.Matrix;
+
+            Vector2 point2 = Vector2.Transform(manager.Point, matrix);
+            if (Transformer.OutNodeDistance(point, point2) == false)
+            {
+                manager.Type = RadialGradientType.Point;
+                return;
+            }
+
+            Vector2 center = Vector2.Transform(manager.Center, matrix);
+            if (Transformer.OutNodeDistance(point, center) == false)
+            {
+                manager.Type = RadialGradientType.Center;
+                return;
+            }
+
+            this.ViewModel.Invalidate();
+        }
+        public void RadialGradientDelta(RadialGradientManager manager, Transformer transformer, Vector2 point)
+        {
+            Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.InverseMatrix * transformer.InverseMatrix;
+            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+
+            switch (manager.Type)
+            {
+                case RadialGradientType.None:
+                    return;
+
+                case RadialGradientType.Point:
+                    manager.Point = canvasPoint;
+                    this.ViewModel.Invalidate();
+                    break;
+
+                case RadialGradientType.Center:
+                    manager.Center = canvasPoint;
+                    this.ViewModel.Invalidate();
+                    break;
+
+                default:
+                    return;
+            }
+        }
+        public void RadialGradientComplete(RadialGradientManager manager)
+        {
+            manager.Type = RadialGradientType.None;
+        }
+
+        public void RadialGradientDraw(CanvasDrawingSession ds, RadialGradientManager manager, Matrix3x2 matrix)
+        {
+            Vector2 point = Vector2.Transform(manager.Point, matrix);
+            Vector2 center = Vector2.Transform(manager.Center, matrix);
+
+            ds.DrawLine(point, center, Colors.DodgerBlue);
+            Transformer.DrawNode(ds, point);
+            Transformer.DrawNode(ds, center);
+        }
+
+
+        #endregion
+
+
+        #region EllipticalGradient
+
+
+        public void EllipticalGradientStart(EllipticalGradientManager manager, Transformer transformer, Vector2 point)
+        {
+            Matrix3x2 matrix = transformer.Matrix * this.ViewModel.MatrixTransformer.Matrix;
+
+            Vector2 xPoint = Vector2.Transform(manager.XPoint, matrix);
+            if (Transformer.OutNodeDistance(point, xPoint) == false)
+            {
+                manager.Type = EllipticalGradientType.XPoint;
+                return;
+            }
+
+            Vector2 yPoint = Vector2.Transform(manager.YPoint, matrix);
+            if (Transformer.OutNodeDistance(point, yPoint) == false)
+            {
+                manager.Type = EllipticalGradientType.YPoint;
+                return;
+            }
+
+            Vector2 center = Vector2.Transform(manager.Center, matrix);
+            if (Transformer.OutNodeDistance(point, center) == false)
+            {
+                manager.Type = EllipticalGradientType.Center;
+                return;
+            }
+
+            this.ViewModel.Invalidate();
+        }
+        public void EllipticalGradientDelta(EllipticalGradientManager manager, Transformer transformer, Vector2 point)
+        {
+            Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.InverseMatrix * transformer.InverseMatrix;
+            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+
+            switch (manager.Type)
+            {
+                case EllipticalGradientType.None:
+                    return;
+
+                case EllipticalGradientType.XPoint:
+                    manager.XPoint = canvasPoint;
+                    this.ViewModel.Invalidate();
+                    break;
+
+                case EllipticalGradientType.YPoint:
+                    manager.YPoint = canvasPoint;
+                    this.ViewModel.Invalidate();
+                    break;
+
+                case EllipticalGradientType.Center:
+                    manager.Center = canvasPoint;
+                    this.ViewModel.Invalidate();
+                    break;
+
+                default:
+                    return;
+            }
+        }
+        public void EllipticalGradientComplete(EllipticalGradientManager manager)
+        {
+            manager.Type = EllipticalGradientType.None;
+        }
+
+        public void EllipticalGradientDraw(CanvasDrawingSession ds, EllipticalGradientManager manager, Matrix3x2 matrix)
+        {
+            Vector2 xPoint = Vector2.Transform(manager.XPoint, matrix);
+            Vector2 yPoint = Vector2.Transform(manager.YPoint, matrix);
+            Vector2 center = Vector2.Transform(manager.Center, matrix);
+
+            ds.DrawLine(xPoint, center, Colors.DodgerBlue);
+            ds.DrawLine(yPoint, center, Colors.DodgerBlue);
+            Transformer.DrawNode(ds, xPoint);
+            Transformer.DrawNode(ds, yPoint);
+            Transformer.DrawNode(ds, center);
+        }
+
 
         #endregion
 

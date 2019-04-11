@@ -2,8 +2,10 @@
 using Retouch_Photo.Brushs;
 using Retouch_Photo.Models.Layers;
 using Retouch_Photo.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Linq;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -61,8 +63,12 @@ namespace Retouch_Photo.Controls
                 this.ViewModel.Invalidate();
             };
 
-            this.ComboBox.ItemsSource = new List<BrushType> { BrushType.None, BrushType.Color, BrushType.LinearGradient, BrushType.RadialGradient, BrushType.Image };
+
+            // Foreach:
+            //     get enum0, enum1, enum2, enum3......
+            this.ComboBox.ItemsSource = from BrushType item in Enum.GetValues(typeof(BrushType)) select item;
             this.ComboBox.SelectionChanged += this.SelectionChanged;
+
 
             this.Border.Tapped += (s, e) =>
             {
@@ -95,6 +101,7 @@ namespace Retouch_Photo.Controls
                         break;
                 }
             };
+
 
             this.CanvasControl.SizeChanged += (s, e) =>
             {
@@ -131,6 +138,16 @@ namespace Retouch_Photo.Controls
                         break;
 
                     case BrushType.RadialGradient:
+                        float radius = Math.Min(this.CanvasWidth, this.CanvasHieght) / 2;
+                        arges.DrawingSession.FillRectangle(0, 0, this.CanvasWidth, this.CanvasHieght, new CanvasRadialGradientBrush(this.CanvasControl, this.GeometryLayer.FillBrush.Array)
+                        {
+                            Center = this.CanvasCenter,
+                            RadiusX = radius,
+                            RadiusY = radius
+                        });
+                        break;
+
+                    case BrushType.EllipticalGradient:
                         arges.DrawingSession.FillRectangle(0, 0, this.CanvasWidth, this.CanvasHieght, new CanvasRadialGradientBrush(this.CanvasControl, this.GeometryLayer.FillBrush.Array)
                         {
                             Center = this.CanvasCenter,
@@ -160,19 +177,45 @@ namespace Retouch_Photo.Controls
         private void SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (this.GeometryLayer == null) return;
-            BrushType type = (BrushType)this.ComboBox.SelectedIndex;
 
+            BrushType type = (BrushType)this.ComboBox.SelectedIndex;
             BrushType oldType = this.GeometryLayer.FillBrush.Type;
 
             //Initialize
-            if (type == BrushType.LinearGradient)
+            if (type == BrushType.Color && oldType != BrushType.Color)
             {
-                if (oldType == BrushType.None || oldType == BrushType.Color)
-                {
-                    this.GeometryLayer.FillBrush.Type = BrushType.LinearGradient;
-                    this.GeometryLayer.FillBrush.LinearGradientManager.StartPoint = this.GeometryLayer.Transformer.SrcLeftTop;
-                    this.GeometryLayer.FillBrush.LinearGradientManager.EndPoint = this.GeometryLayer.Transformer.SrcRightBottom;
-                }
+                this.GeometryLayer.FillBrush.Color = this.GeometryLayer.FillBrush.Array.First().Color;
+            }
+
+            //Initialize
+            if (type == BrushType.LinearGradient&& oldType!= BrushType.LinearGradient)
+            {
+                this.GeometryLayer.FillBrush.LinearGradientManager.Initialize
+                (
+                    startPoint: this.GeometryLayer.Transformer.SrcLeftTop,
+                    endPoint: this.GeometryLayer.Transformer.SrcRightBottom
+                );
+            }       
+
+            //Initialize
+            if (type == BrushType.RadialGradient&& oldType != BrushType.RadialGradient)
+            {
+                this.GeometryLayer.FillBrush.RadialGradientManager.Initialize
+                (
+                    center: Vector2.Add(this.GeometryLayer.Transformer.SrcLeftTop, this.GeometryLayer.Transformer.SrcRightBottom) / 2,
+                    radius: Vector2.Distance(this.GeometryLayer.Transformer.SrcLeftTop, this.GeometryLayer.Transformer.SrcLeftBottom) / 2
+                );
+            }
+
+            //Initialize
+            if (type == BrushType.EllipticalGradient && oldType != BrushType.EllipticalGradient)
+            {
+                this.GeometryLayer.FillBrush.EllipticalGradientManager.Initialize
+                (
+                    center: Vector2.Add(this.GeometryLayer.Transformer.SrcLeftTop, this.GeometryLayer.Transformer.SrcRightBottom) / 2,
+                    radiusX: Vector2.Distance(this.GeometryLayer.Transformer.SrcLeftTop, this.GeometryLayer.Transformer.SrcRightTop) / 2,
+                    radiusY: Vector2.Distance(this.GeometryLayer.Transformer.SrcLeftTop, this.GeometryLayer.Transformer.SrcLeftBottom) / 2
+                );
             }
 
             this.GeometryLayer.FillBrush.Type = type;

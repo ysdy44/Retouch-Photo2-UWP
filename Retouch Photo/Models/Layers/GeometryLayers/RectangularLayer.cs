@@ -71,11 +71,37 @@ namespace Retouch_Photo.Models.Layers.GeometryLayers
                         ds.FillGeometry(geometry, new CanvasLinearGradientBrush(this.ViewModel.CanvasDevice, base.FillBrush.Array)
                         {
                             StartPoint = Vector2.Transform(base.FillBrush.LinearGradientManager.StartPoint, matrix),
-                            EndPoint = Vector2.Transform(base.FillBrush.LinearGradientManager.EndPoint, matrix),
+                            EndPoint = Vector2.Transform(base.FillBrush.LinearGradientManager.EndPoint, matrix)
                         });
                         break;
 
                     case BrushType.RadialGradient:
+                        {
+                            Vector2 center = Vector2.Transform(base.FillBrush.RadialGradientManager.Center, matrix);
+                            Vector2 point = Vector2.Transform(base.FillBrush.RadialGradientManager.Point, matrix);
+                            float radius = Vector2.Distance(center, point);
+                            ds.FillGeometry(geometry, new CanvasRadialGradientBrush(this.ViewModel.CanvasDevice, base.FillBrush.Array)
+                            {
+                                RadiusX = radius,
+                                RadiusY = radius,
+                                Center = center
+                            });
+                        }
+                        break;
+
+                    case BrushType.EllipticalGradient:
+                        {
+                            Vector2 center = Vector2.Transform(base.FillBrush.EllipticalGradientManager.Center, matrix);
+                            Vector2 xPoint = Vector2.Transform(base.FillBrush.EllipticalGradientManager.XPoint, matrix);
+                            Vector2 yPoint = Vector2.Transform(base.FillBrush.EllipticalGradientManager.YPoint, matrix);
+                            ds.FillGeometry(geometry, new CanvasRadialGradientBrush(this.ViewModel.CanvasDevice, base.FillBrush.Array)
+                            {
+                                Transform = base.FillBrush.EllipticalGradientManager.GetTransform(center, xPoint),
+                                RadiusX = base.FillBrush.EllipticalGradientManager.GetRadiusX(center, xPoint),
+                                RadiusY = base.FillBrush.EllipticalGradientManager.GetRadiusY(center, yPoint),
+                                Center = center
+                            });
+                        }
                         break;
 
                     case BrushType.Image:
