@@ -52,17 +52,20 @@ namespace Retouch_Photo.Controls
             this.Drop += (s, e) => { };
             this.SizeChanged += (s, e) => this.ViewModel.MatrixTransformer.ControlSizeChanged(e.NewSize);
 
-
             //CanvasControl
-            this.CanvasControl.CreateResources += (sender, args) => this.ViewModel.CanvasManger = new CanvasControlManger(sender);
+            this.CanvasControl.CreateResources += (sender, args) =>
+            {
+                this.ViewModel.CanvasManger = new CanvasControlManger(sender);
+                this.ViewModel.Invalidate(); // Invalidate: Refresh the canvas after the canvas load is complete.
+            };
             this.CanvasControl.Draw += (sender, args) =>
             {
                 CanvasDrawingSession ds = args.DrawingSession;
                 Matrix3x2 virtualToControlMatrix = this.ViewModel.MatrixTransformer.VirtualToControlMatrix;
-                Color color = this.Brush.Color;
-
+                Color shadowColor = this.Brush.Color;
+                
                 //RenderLayer
-                this.ViewModel.RenderLayer.Draw(ds, virtualToControlMatrix, color);
+                this.ViewModel.RenderLayer.Draw(ds, virtualToControlMatrix, shadowColor);
               
                 //MatrixTransformer
                 this.ViewModel.MatrixTransformer.RulerDraw(ds);

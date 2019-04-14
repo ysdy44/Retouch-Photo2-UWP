@@ -205,7 +205,7 @@ namespace Retouch_Photo.Library
         /// Draw
         ///   [Virtual] To [Control] on MatrixTransformer
         /// </summary>
-        public void Draw(CanvasDrawingSession ds, Matrix3x2 virtualToControlMatrix,Color ShadowColor)
+        public void Draw(CanvasDrawingSession ds, Matrix3x2 virtualToControlMatrix,Color shadowColor)
         {
             if (this.RenderTarget == null) return;
 
@@ -217,7 +217,7 @@ namespace Retouch_Photo.Library
             ICanvasImage shadow = new ShadowEffect
             {
                 Source = image,
-                ShadowColor = ShadowColor,
+                ShadowColor = shadowColor,
                 BlurAmount = 4.0f
             };
 

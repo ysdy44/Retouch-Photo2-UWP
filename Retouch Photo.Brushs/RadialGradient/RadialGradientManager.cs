@@ -1,4 +1,6 @@
-﻿using System.Numerics;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Brushes;
+using System.Numerics;
 
 namespace Retouch_Photo.Brushs.RadialGradient
 {
@@ -26,6 +28,19 @@ namespace Retouch_Photo.Brushs.RadialGradient
         {
             this.Center = center;
             this.Point = new Vector2(center.X+radius, center.Y);
+        }
+
+        public CanvasRadialGradientBrush GetBrush(ICanvasResourceCreator creator, Matrix3x2 matrix, CanvasGradientStop[] array)
+        {
+            Vector2 center = Vector2.Transform(this.Center, matrix);
+            Vector2 point = Vector2.Transform(this.Point, matrix);
+            float radius = Vector2.Distance(center, point);
+            return new CanvasRadialGradientBrush(creator, array)
+            {
+                RadiusX = radius,
+                RadiusY = radius,
+                Center = center
+            };
         }
     }
 }

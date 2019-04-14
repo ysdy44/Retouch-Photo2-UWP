@@ -29,6 +29,7 @@ using static Retouch_Photo.Library.HomographyController;
 using Retouch_Photo.Tools.Models;
 using Retouch_Photo.Tools;
 using Retouch_Photo.Models.Layers;
+using Retouch_Photo.Brushs;
 
 namespace Retouch_Photo.ViewModels
 {
@@ -83,7 +84,7 @@ namespace Retouch_Photo.ViewModels
         /// <param name="isThumbnail"> draw thumbnails? </param>
         public void Invalidate(bool? isThumbnail = null)
         {
-            if (this.CanvasManger == null) return;
+           if (this.CanvasManger == null) return;
 
             this.RenderLayer.RenderTarget = this.RenderLayer.GetRender
             (
@@ -208,7 +209,7 @@ namespace Retouch_Photo.ViewModels
 
                     //Geometry
                     this.CurrentGeometryLayer = (value is GeometryLayer geometryLayer) ? geometryLayer : null;
-                    
+                
                     OnPropertyChanged(nameof(CurrentLayer));
                     return;
                 }
@@ -237,6 +238,16 @@ namespace Retouch_Photo.ViewModels
             get => this.currentGeometryLayer;
             set
             {
+
+                if (value!=null)
+                {
+                    if (value.FillBrush.Type== BrushType.Color)
+                    {
+                        //Color
+                        this.Color = value.FillBrush.Color;
+                    }
+                }
+
                 this.currentGeometryLayer = value;
                 OnPropertyChanged(nameof(CurrentGeometryLayer));
             }

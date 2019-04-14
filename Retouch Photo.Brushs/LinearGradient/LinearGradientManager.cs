@@ -1,4 +1,6 @@
-﻿using System.Numerics;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Brushes;
+using System.Numerics;
 
 namespace Retouch_Photo.Brushs.LinearGradient
 {
@@ -14,5 +16,11 @@ namespace Retouch_Photo.Brushs.LinearGradient
             this.StartPoint = startPoint;
             this.EndPoint = endPoint;
         }
+
+        public CanvasLinearGradientBrush GetBrush(ICanvasResourceCreator creator, Matrix3x2 matrix, CanvasGradientStop[] array) => new CanvasLinearGradientBrush(creator, array)
+        {
+            StartPoint = Vector2.Transform(this.StartPoint, matrix),
+            EndPoint = Vector2.Transform(this.EndPoint, matrix)
+        };
     }
 }

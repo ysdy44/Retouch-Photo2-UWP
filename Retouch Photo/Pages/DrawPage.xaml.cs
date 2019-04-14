@@ -14,7 +14,6 @@ namespace Retouch_Photo.Pages
         public DrawPage()
         {
             this.InitializeComponent();
-            this.Loaded += (s, e) => this.ViewModel.Invalidate();
 
             //Debuug
             MenuLayout.LayoutBinging(this.DebugLayout, this.DebugToggleButton);

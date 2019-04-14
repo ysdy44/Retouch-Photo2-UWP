@@ -4,179 +4,20 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d"
-    Height="222"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
-
-    <UserControl.Resources>
-
-        <!--DataTemplate-->
-        <DataTemplate x:Name="DataTemplate" x:DataType="SolidColorBrush">
-            <Rectangle Fill="{x:Bind}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-        </DataTemplate>
-
-        <!--Style-->
-        <Style x:Name="AppGridViewStyle" TargetType="GridView">
-            <Setter Property="Margin" Value="0,0,0,0" />
-            <Setter Property="Padding" Value="0,0,0,0" />
-            <Setter Property="IsTabStop" Value="False" />
-            <Setter Property="TabNavigation" Value="Once" />
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
-            <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
-            <Setter Property="ScrollViewer.IsHorizontalRailEnabled" Value="False" />
-            <Setter Property="ScrollViewer.VerticalScrollMode" Value="Enabled" />
-            <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="True" />
-            <Setter Property="ScrollViewer.ZoomMode" Value="Disabled" />
-            <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
-            <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True" />
-            <Setter Property="IsSwipeEnabled" Value="True" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="GridView">
-                        <Border BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}">
-                            <ScrollViewer x:Name="ScrollViewer" HorizontalAlignment="Stretch" TabNavigation="{TemplateBinding TabNavigation}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" AutomationProperties.AccessibilityView="Raw">
-                                <ItemsPresenter HorizontalAlignment="Center" Header="{TemplateBinding Header}" HeaderTemplate="{TemplateBinding HeaderTemplate}" HeaderTransitions="{TemplateBinding HeaderTransitions}" Footer="{TemplateBinding Footer}" FooterTemplate="{TemplateBinding FooterTemplate}" FooterTransitions="{TemplateBinding FooterTransitions}" Padding="{TemplateBinding Padding}" />
-                            </ScrollViewer>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!--ItemContainerStyle-->
-        <Style x:Name="AppItemContainerStyle" TargetType="GridViewItem" >
-            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
-            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
-            <Setter Property="TabNavigation" Value="Local" />
-            <Setter Property="IsHoldingEnabled" Value="True" />
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="VerticalContentAlignment" Value="Stretch" />
-            <Setter Property="Margin" Value="2" />
-            <Setter Property="MinWidth" Value="{ThemeResource GridViewItemMinWidth}" />
-            <Setter Property="MinHeight" Value="{ThemeResource GridViewItemMinHeight}" />
-            <Setter Property="AllowDrop" Value="False" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="GridViewItem">
-                        <Grid x:Name="ContentBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" RenderTransformOrigin="0.5,0.5">
-                            <Grid.RenderTransform>
-                                <ScaleTransform x:Name="ContentBorderScale" />
-                            </Grid.RenderTransform>
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal">
-                                        <Storyboard>
-                                            <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="PointerOver">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="BorderRectangle" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderRectangle" Storyboard.TargetProperty="Stroke">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListLowBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="BorderRectangle" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderRectangle" Storyboard.TargetProperty="Stroke">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListMediumBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Selected">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="BorderRectangle" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderRectangle" Storyboard.TargetProperty="Stroke">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseHighBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="PointerOverSelected">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="BorderRectangle" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderRectangle" Storyboard.TargetProperty="Stroke">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundChromeBlackMediumBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="PressedSelected">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="BorderRectangle" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderRectangle" Storyboard.TargetProperty="Stroke">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundChromeBlackMediumBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="DisabledStates">
-                                    <VisualState x:Name="Enabled" />
-                                    <VisualState x:Name="Disabled">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="Opacity" Duration="0" To="{ThemeResource ListViewItemDisabledThemeOpacity}" />
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <ContentPresenter x:Name="ContentPresenter" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}" />
-                            <TextBlock x:Name="PlaceholderTextBlock" Visibility="Collapsed" Text="Xg" Foreground="{x:Null}" Margin="{TemplateBinding Padding}" IsHitTestVisible="False" AutomationProperties.AccessibilityView="Raw" />
-                            <Rectangle x:Name="PlaceholderRect" Visibility="Collapsed" Fill="{ThemeResource ListViewItemPlaceholderBackground}" />
-                            <Rectangle x:Name="BorderRectangle" IsHitTestVisible="False" Stroke="{ThemeResource SystemControlHighlightListAccentLowBrush}" StrokeThickness="3" Opacity="0" />
-                            <Border x:Name="MultiArrangeOverlayTextBorder" Opacity="0" IsHitTestVisible="False" MinWidth="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{ThemeResource SystemControlBackgroundAccentBrush}" BorderThickness="2" BorderBrush="{ThemeResource SystemControlBackgroundChromeWhiteBrush}">
-                                <TextBlock x:Name="MultiArrangeOverlayText" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.DragItemsCount}" Style="{ThemeResource CaptionTextBlockStyle}" IsHitTestVisible="False" Opacity="0" VerticalAlignment="Center" HorizontalAlignment="Center" AutomationProperties.AccessibilityView="Raw" />
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-
-    </UserControl.Resources>
+    d:DesignHeight="60"
+    d:DesignWidth="200">
 
     <Grid>
-        <GridView x:Name="GridView"
-                  ItemsSource="{x:Bind Collection}"
-                 CanReorderItems="False" 
-                 IsSwipeEnabled="True" 
-                 AllowDrop="False"
-                 IsItemClickEnabled="True"
-                 ItemClick="GridView_ItemClick"
-                 SelectionChanged="GridView_SelectionChanged"
-                  ItemTemplate="{StaticResource DataTemplate}"
-                  Style="{StaticResource AppGridViewStyle}"
-                  ItemContainerStyle="{StaticResource AppItemContainerStyle}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
 
-        <Grid Margin="6" CornerRadius="16" Width="180" Height="36" HorizontalAlignment="Center" VerticalAlignment="Bottom" BorderThickness="0,0,1,3" BorderBrush="#44000000" Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Button x:Name="AddButton" Grid.Column="0" Width="Auto" Content="&#xE141;" FontSize="18" FontFamily="Segoe UI Symbol" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="AddButton_Tapped"/>
-            <ToggleButton x:Name="MultiSelectToggleButton" Grid.Column="1" Content="&#xF5EE;" FontSize="18" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Background="Transparent" Checked="MultiSelectToggleButton_Checked" Unchecked="MultiSelectToggleButton_Unchecked"/>
-            <Button x:Name="RemoveButton" Grid.Column="2" Width="Auto" Content="&#xE107;" FontSize="20" FontFamily="Segoe UI Symbol" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="RemoveButton_Tapped"/>
-        </Grid>
+        <canvas:CanvasControl x:Name="CanvasControl" Grid.Row="1"/>
+
+        <GridView x:Name="GridView"/>
 
     </Grid>
 </UserControl>

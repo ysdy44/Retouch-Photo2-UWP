@@ -1,7 +1,10 @@
-﻿using Microsoft.Graphics.Canvas.Brushes;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo.Brushs;
 using Retouch_Photo.ViewModels;
+using System.Numerics;
+using Windows.Graphics.Effects;
 using Windows.UI;
 
 namespace Retouch_Photo.Models.Layers
@@ -11,35 +14,37 @@ namespace Retouch_Photo.Models.Layers
         //ViewModel
         DrawViewModel ViewModel => Retouch_Photo.App.ViewModel;
 
-        public Brush FillBrush = new Brush();
+        //@override
+        protected abstract CanvasGeometry GetGeometry(ICanvasResourceCreator creator,  Matrix3x2 canvasToVirtualMatrix);
 
+        //Fill
+        public Brush FillBrush = new Brush();
+        //Stroke
         public float StrokeWidth = 1.0f;
         public Brush StrokeBrush;
         public CanvasStrokeStyle StrokeStyle;
 
+
+        public override void Draw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Matrix3x2 matrix) => ds.DrawGeometry(this.GetGeometry(creator, matrix), Windows.UI.Colors.DodgerBlue);
+        protected override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
+        {
+            CanvasCommandList command = new CanvasCommandList(creator);
+            using (CanvasDrawingSession ds = command.CreateDrawingSession())
+            {
+                CanvasGeometry geometry = this.GetGeometry(creator, canvasToVirtualMatrix);
+
+                this.FillBrush.DrawGeometry(this.ViewModel.CanvasDevice, ds, geometry, canvasToVirtualMatrix);
+            }
+            return command;
+        }
+
         public override void ColorChanged(Color color, bool fillOrStroke)
         {
-       //     if (fillOrStroke)
-       //     {
-       //         if (this.FillBrush is CanvasSolidColorBrush brush) brush.Color = color;
-        //        else this.FillBrush = new CanvasSolidColorBrush(this.ViewModel.CanvasDevice, color);
-        //    }
-       //     else
-          //  {
-          //      if (this.StrokeBrush is CanvasSolidColorBrush brush) brush.Color = color;
-          //      else this.StrokeBrush = new CanvasSolidColorBrush(this.ViewModel.CanvasDevice, color);
-         //   }
-        }
-        public override void BrushChanged(ICanvasBrush brush, bool fillOrStroke)
-        {
-        //    if (fillOrStroke)
-         //   {
-           //     this.FillBrush = brush;
-          //  }
-        //    else
-        //    {
-             //   this.StrokeBrush = brush;
-           // }
+            this.FillBrush.Color = color;
+            if (this.FillBrush.Type != BrushType.Color)
+            {
+                this.FillBrush.Type = BrushType.Color;
+            }
         }
     }
 }

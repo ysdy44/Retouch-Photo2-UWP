@@ -1,10 +1,10 @@
-﻿using MathNet.Numerics.LinearAlgebra.Double;
-using Microsoft.Graphics.Canvas;
+﻿using Microsoft.Graphics.Canvas;
+using OpenCvSharp;
 using Retouch_Photo.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
-using LA = MathNet.Numerics.LinearAlgebra;
 
 namespace Retouch_Photo.Library
 {
@@ -138,10 +138,10 @@ namespace Retouch_Photo.Library
                 layer.Transformer.DstLeftBottom = Vector2.Transform(startTransformer.DstLeftBottom, matrix);
             }
 
-
+           
             /// <summary> Find Homography. </summary>
-            public static Matrix3x2 FindHomography(Vector2 SrcLeftTop, Vector2 SrcRightTop, Vector2 SrcRightBottom, Vector2 SrcLeftBottom, Vector2 DstLeftTop, Vector2 DstRightTop, Vector2 DstRightBottom, Vector2 DstLeftBottom) => Transformer.VectorToMatrix(LA.Double.DenseMatrix.OfArray(new double[8, 8] { { SrcLeftTop.X, SrcLeftTop.Y, 1, 0, 0, 0, -DstLeftTop.X * SrcLeftTop.X, -DstLeftTop.X * SrcLeftTop.Y }, { 0, 0, 0, SrcLeftTop.X, SrcLeftTop.Y, 1, -DstLeftTop.Y * SrcLeftTop.X, -DstLeftTop.Y * SrcLeftTop.Y }, { SrcRightTop.X, SrcRightTop.Y, 1, 0, 0, 0, -DstRightTop.X * SrcRightTop.X, -DstRightTop.X * SrcRightTop.Y }, { 0, 0, 0, SrcRightTop.X, SrcRightTop.Y, 1, -DstRightTop.Y * SrcRightTop.X, -DstRightTop.Y * SrcRightTop.Y }, { SrcRightBottom.X, SrcRightBottom.Y, 1, 0, 0, 0, -DstRightBottom.X * SrcRightBottom.X, -DstRightBottom.X * SrcRightBottom.Y }, { 0, 0, 0, SrcRightBottom.X, SrcRightBottom.Y, 1, -DstRightBottom.Y * SrcRightBottom.X, -DstRightBottom.Y * SrcRightBottom.Y }, { SrcLeftBottom.X, SrcLeftBottom.Y, 1, 0, 0, 0, -DstLeftBottom.X * SrcLeftBottom.X, -DstLeftBottom.X * SrcLeftBottom.Y }, { 0, 0, 0, SrcLeftBottom.X, SrcLeftBottom.Y, 1, -DstLeftBottom.Y * SrcLeftBottom.X, -DstLeftBottom.Y * SrcLeftBottom.Y }, }).PseudoInverse() * new DenseVector(new double[8] { DstLeftTop.X, DstLeftTop.Y, DstRightTop.X, DstRightTop.Y, DstRightBottom.X, DstRightBottom.Y, DstLeftBottom.X, DstLeftBottom.Y }));
-            private static Matrix3x2 VectorToMatrix(LA.Vector<double> parameterVec) => new Matrix3x2((float)parameterVec[0], (float)parameterVec[3], (float)parameterVec[1], (float)parameterVec[4], (float)parameterVec[2], (float)parameterVec[5]);
+            public static Matrix3x2 FindHomography(Vector2 SrcLeftTop, Vector2 SrcRightTop, Vector2 SrcRightBottom, Vector2 SrcLeftBottom, Vector2 DstLeftTop, Vector2 DstRightTop, Vector2 DstRightBottom, Vector2 DstLeftBottom) => Transformer.MatToMatrix(Cv2.FindHomography(new List<Point2d>() { new Point2d(SrcLeftTop.X, SrcLeftTop.Y), new Point2d(SrcRightTop.X, SrcRightTop.Y), new Point2d(SrcRightBottom.X, SrcRightBottom.Y), new Point2d(SrcLeftBottom.X, SrcLeftBottom.Y), }, new List<Point2d> { new Point2d(DstLeftTop.X, DstLeftTop.Y), new Point2d(DstRightTop.X, DstRightTop.Y), new Point2d(DstRightBottom.X, DstRightBottom.Y), new Point2d(DstLeftBottom.X, DstLeftBottom.Y) }));
+            private static Matrix3x2 MatToMatrix(Mat mat) => new Matrix3x2(m11: (float)mat.GetArray(0, 0).First(), m12: (float)mat.GetArray(1, 0).First(), m21: (float)mat.GetArray(0, 1).First(), m22: (float)mat.GetArray(1, 1).First(), m31: (float)mat.GetArray(0, 2).First(), m32: (float)mat.GetArray(1, 2).First());
 
 
             #endregion

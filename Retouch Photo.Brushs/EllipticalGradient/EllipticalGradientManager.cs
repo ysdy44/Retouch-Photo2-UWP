@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Brushes;
+using System;
 using System.Numerics;
 
 namespace Retouch_Photo.Brushs.EllipticalGradient
@@ -102,6 +104,20 @@ namespace Retouch_Photo.Brushs.EllipticalGradient
             //Outer
             this.RadiusX = radiusX;
             this.RadiusY = radiusY;
+        }
+
+        public CanvasRadialGradientBrush GetBrush(ICanvasResourceCreator creator, Matrix3x2 matrix,CanvasGradientStop[] array)
+        {
+            Vector2 center = Vector2.Transform(this.Center, matrix);
+            Vector2 xPoint = Vector2.Transform(this.XPoint, matrix);
+            Vector2 yPoint = Vector2.Transform(this.YPoint, matrix);
+            return new CanvasRadialGradientBrush(creator, array)
+            {
+                Transform = this.GetTransform(center, xPoint),
+                RadiusX = this.GetRadiusX(center, xPoint),
+                RadiusY = this.GetRadiusY(center, yPoint),
+                Center = center
+            };
         }
 
         /// <summary> Get radians of the vector in the coordinate system. </summary>

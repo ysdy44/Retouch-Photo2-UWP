@@ -59,8 +59,6 @@ namespace Retouch_Photo.Models
         //@override
         /// <summary> 颜色改变 </summary>
         public virtual void ColorChanged(Color color, bool fillOrStroke = true) { }
-        /// <summary> 笔刷改变 </summary>
-        public virtual void BrushChanged(ICanvasBrush brush, bool fillOrStroke=true) { } 
         /// <summary> 在控件层上绘制蓝色边界线条（比如椭圆的边界线条） </summary>
         public virtual void Draw(ICanvasResourceCreator creator, CanvasDrawingSession ds, Matrix3x2 matrix) { }
         /// <summary> 得到图层渲染 </summary>
