@@ -115,10 +115,10 @@ namespace Retouch_Photo.Library
 
             public Vector2 DstCenter => (this.DstLeftTop + this.DstRightBottom) / 2;
 
-            public float DstMinX(Matrix3x2 matrix) => Math.Min(Math.Min(this.DstLeftTop.X, this.DstRightTop.X), Math.Min(this.DstRightBottom.X, this.DstLeftBottom.X));
-            public float DstMaxX(Matrix3x2 matrix) => Math.Max(Math.Max(this.DstLeftTop.X, this.DstRightTop.X), Math.Max(this.DstRightBottom.X, this.DstLeftBottom.X));
-            public float DstMinY(Matrix3x2 matrix) => Math.Min(Math.Min(this.DstLeftTop.Y, this.DstRightTop.Y), Math.Min(this.DstRightBottom.Y, this.DstLeftBottom.Y));
-            public float DstMaxY(Matrix3x2 matrix) => Math.Max(Math.Max(this.DstLeftTop.Y, this.DstRightTop.Y), Math.Max(this.DstRightBottom.Y, this.DstLeftBottom.Y));
+            public float DstMinX => Math.Min(Math.Min(this.DstLeftTop.X, this.DstRightTop.X), Math.Min(this.DstRightBottom.X, this.DstLeftBottom.X));
+            public float DstMaxX => Math.Max(Math.Max(this.DstLeftTop.X, this.DstRightTop.X), Math.Max(this.DstRightBottom.X, this.DstLeftBottom.X));
+            public float DstMinY => Math.Min(Math.Min(this.DstLeftTop.Y, this.DstRightTop.Y), Math.Min(this.DstRightBottom.Y, this.DstLeftBottom.Y));
+            public float DstMaxY => Math.Max(Math.Max(this.DstLeftTop.Y, this.DstRightTop.Y), Math.Max(this.DstRightBottom.Y, this.DstLeftBottom.Y));
 
 
             /// <summary> Multiplies matrix to layer's transformer. </summary>
