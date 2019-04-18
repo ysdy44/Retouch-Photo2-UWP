@@ -11,7 +11,7 @@ namespace Retouch_Photo.Brushs
 {
     public class Brush
     {
-        public BrushType Type = BrushType.Color;
+        public BrushType Type;
 
         public Color Color = Colors.Gray;
         public CanvasGradientStop[] Array = new CanvasGradientStop[]

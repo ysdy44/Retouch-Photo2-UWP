@@ -30,6 +30,7 @@ using Retouch_Photo.Tools.Models;
 using Retouch_Photo.Tools;
 using Retouch_Photo.Models.Layers;
 using Retouch_Photo.Brushs;
+using Retouch_Photo.Models.Layers.GeometryLayers;
 
 namespace Retouch_Photo.ViewModels
 {
@@ -170,6 +171,19 @@ namespace Retouch_Photo.ViewModels
         public MatrixTransformer MatrixTransformer = new MatrixTransformer();
 
 
+        /// <summary>渲染图层</summary>
+        public RenderLayer RenderLayer = new RenderLayer();
+        /// <summary>标尺线</summary>   
+        public bool IsRuler
+        {
+            get => this.MatrixTransformer.IsRuler;
+            set
+            {
+                this.MatrixTransformer.IsRuler = value;
+                OnPropertyChanged(nameof(IsRuler));
+            }
+        }
+      
         /// <summary>控件选定索引</summary>      
         public int SelectedIndex
         {
@@ -219,18 +233,6 @@ namespace Retouch_Photo.ViewModels
                 return;
             }
         }
-        /// <summary>渲染图层</summary>
-        public RenderLayer RenderLayer = new RenderLayer();
-        /// <summary>标尺线</summary>   
-        public bool IsRuler
-        {
-            get => this.MatrixTransformer.IsRuler;
-            set
-            {
-                this.MatrixTransformer.IsRuler = value;
-                OnPropertyChanged(nameof(IsRuler));
-            }
-        }
 
         /// <summary>当前几何图层</summary>     
         public GeometryLayer CurrentGeometryLayer//Geometry
@@ -248,11 +250,29 @@ namespace Retouch_Photo.ViewModels
                     }
                 }
 
+                //CurveLayer
+                if (value is CurveLayer curveLayer)                
+                    this.CurrentCurveLayer = curveLayer;                
+                else                
+                    this.CurrentCurveLayer = null;                
+
                 this.currentGeometryLayer = value;
                 OnPropertyChanged(nameof(CurrentGeometryLayer));
             }
         }
         private GeometryLayer currentGeometryLayer;
+
+        /// <summary>当前曲线图层</summary>     
+        public CurveLayer CurrentCurveLayer//Curve
+        {
+            get => this.currentCurveLayer;
+            set
+            {
+                this.currentCurveLayer = value;
+                OnPropertyChanged(nameof(CurrentCurveLayer));
+            }
+        }
+        private CurveLayer currentCurveLayer;
 
 
         #region Index & Tool
@@ -342,6 +362,9 @@ namespace Retouch_Photo.ViewModels
         #endregion
 
 
+        //Curve
+        public CurveNodes CurveNodes = new CurveNodes();
+        
         //Transformer
         public TransformerMode TransformerMode = TransformerMode.None;
         public readonly Dictionary<TransformerMode, IController> TransformerDictionary = new Dictionary<TransformerMode, IController>
@@ -365,8 +388,7 @@ namespace Retouch_Photo.ViewModels
              {TransformerMode.ScaleRightBottom,  new ScaleRightBottomController()},
              {TransformerMode.ScaleLeftBottom,  new ScaleLeftBottomController()},
         };
-
-
+        
         /// <summary>选框模式</summary>
         public MarqueeMode MarqueeMode
         {
@@ -379,7 +401,7 @@ namespace Retouch_Photo.ViewModels
             }
         }
         private MarqueeMode marqueeMode = MarqueeMode.None;
-
+        
         /// <summary> 文本 </summary>      
         public string Text
         {
@@ -391,9 +413,7 @@ namespace Retouch_Photo.ViewModels
             }
         }
         private string text;
-
-
-
+               
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }

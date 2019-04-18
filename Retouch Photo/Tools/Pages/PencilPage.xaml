@@ -6,12 +6,12 @@
     xmlns:local="using:Retouch_Photo.Tools.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:elements="using:Retouch_Photo.Elements"
     mc:Ignorable="d"
      
      >
 
     <StackPanel Orientation="Horizontal" Height="50" Padding="12,4">
-
     </StackPanel>
 
 </tool:ToolPage>

@@ -18,18 +18,11 @@ namespace Retouch_Photo.Library
         readonly Color Shadow = Color.FromArgb(70, 127, 127, 127);
 
         private Node Node;
-        public List<Node> Nodes;
 
         public NodeEditMode EditMode = NodeEditMode.Add;
         public NodeControlMode ControlMode = NodeControlMode.Mirrored;
 
-        public bool IsAnyChoose => this.Nodes.Any(e => e.ChooseMode != NodeChooseMode.None);
-
-
-        public CurveNodes() => this.Nodes = new List<Node> { };
-        public CurveNodes(List<Node> list) => this.Nodes = list;
-
-
+        
 
         #region Draw
 
@@ -39,25 +32,31 @@ namespace Retouch_Photo.Library
         /// </summary>
         /// <param name="creator"></param>
         /// <param name="ds"></param>
-        public void Draw(ICanvasResourceCreator creator, CanvasDrawingSession ds)
+        public void Draw( ICanvasResourceCreator creator, CanvasDrawingSession ds,Matrix3x2 matrix, List<Node> nodes)
         {
-            if (this.Nodes == null) return;
-            if (this.Nodes.Count == 0) return;
+            if (nodes == null) return;
+            if (nodes.Count == 0) return;
+
+            //Transform
+            foreach (Node item in nodes)
+            {
+                item.Transform(matrix);
+            }
 
             //Geometry 
-            CanvasGeometry geometry = CreatePath(creator, this.Nodes);
+            CanvasGeometry geometry = CreatePath(creator, nodes);
             ds.DrawGeometry(geometry, Blue, 2);
 
             //Nodes
-            foreach (Node item in this.Nodes)
+            foreach (Node item in nodes)
             {
-                if (item.ChooseMode == NodeChooseMode.None) this.DrawNodeVector(ds, item.Vector);
+                if (item.ChooseMode == NodeChooseMode.None) this.DrawNodeVector(ds, item.VectorTransform);
                 else
                 {
-                    this.DrawNodeControl(ds, item.Vector, item.RightControl);
-                    this.DrawNodeControl(ds, item.Vector, item.LeftControl);
+                    this.DrawNodeControl(ds, item.VectorTransform, item.RightControlTransform);
+                    this.DrawNodeControl(ds, item.VectorTransform, item.LeftControlTransform);
 
-                    this.DrawNodeVector2(ds, item.Vector);
+                    this.DrawNodeVector2(ds, item.VectorTransform);
                 }
             }
 
@@ -77,11 +76,18 @@ namespace Retouch_Photo.Library
         private CanvasGeometry CreatePath(ICanvasResourceCreator creator, List<Node> nodes)
         {
             CanvasPathBuilder pathBuilder = new CanvasPathBuilder(creator);
-            pathBuilder.BeginFigure(nodes.First().Vector);
+            pathBuilder.BeginFigure(nodes.First().VectorTransform);
 
-            for (int i = 0; i < this.Nodes.Count - 1; i++)//0 to 9
+            for (int i = 0; i < nodes.Count - 1; i++)//0 to 9
             {
-                pathBuilder.AddCubicBezier(nodes[i].LeftControl, nodes[i + 1].RightControl, nodes[i + 1].Vector);
+                if (nodes[i].IsSmooth == false)
+                {
+                    pathBuilder.AddLine(nodes[i + 1].VectorTransform);
+                }
+                else
+                {
+                    pathBuilder.AddCubicBezier(nodes[i].LeftControlTransform, nodes[i + 1].RightControlTransform, nodes[i + 1].VectorTransform);
+                }
             }
 
             pathBuilder.EndFigure(CanvasFigureLoop.Open);
@@ -130,46 +136,46 @@ namespace Retouch_Photo.Library
         /// Interpolation: Insert a new point between the selected points
         /// 插值：在选定的点之间插入新的点
         /// </summary>
-        public void Interpolation()
+        public void Interpolation( List<Node> nodes)
         {
             NodeChooseMode isChecked = NodeChooseMode.None;
 
             List<int> list = new List<int> { };
 
-            for (int i = 0; i < this.Nodes.Count; i++)
+            for (int i = 0; i < nodes.Count; i++)
             {
-                if (this.Nodes[i].ChooseMode != NodeChooseMode.None && isChecked != NodeChooseMode.None)
+                if (nodes[i].ChooseMode != NodeChooseMode.None && isChecked != NodeChooseMode.None)
                 {
                     list.Add(i);
                 }
 
-                isChecked = this.Nodes[i].ChooseMode;
+                isChecked = nodes[i].ChooseMode;
             }
 
             for (int i = 0; i < list.Count; i++)
             {
                 int index = list[i] + i;
-                Vector2 vect = this.Nodes[index - 1].Vector + this.Nodes[index].Vector;
+                Vector2 vect = nodes[index - 1].Vector + nodes[index].Vector;
 
                 Node node = new Node(vect / 2);
                 node.ChooseMode = NodeChooseMode.Vector;
-                this.Nodes.Insert(index, node);
+                nodes.Insert(index, node);
             }
         }
         /// <summary>
         /// Remove: Removes all selected points
         /// 移除：移除所有选定的点
         /// </summary>
-        public void Remove()
+        public void Remove(List<Node> nodes)
         {
             IEnumerable<int> enumerable =
-                from i in this.Nodes
+                from i in nodes
                 where i.ChooseMode != NodeChooseMode.None
-                select this.Nodes.IndexOf(i);
+                select nodes.IndexOf(i);
 
             foreach (int item in enumerable.Reverse())
             {
-                this.Nodes.RemoveAt(item);
+                nodes.RemoveAt(item);
             }
         }
 
@@ -178,12 +184,14 @@ namespace Retouch_Photo.Library
         /// Sharpening: Making the control line between points into a straight line
         /// 锐化：使点之间的控制线变成直线
         /// </summary>
-        public void Sharp()
+        public void Sharp(List<Node> nodes)
         {
-            foreach (Node item in this.Nodes)
+            foreach (Node item in nodes)
             {
                 if (item.ChooseMode != NodeChooseMode.None)
                 {
+                    item.IsSmooth = false;
+
                     item.LeftControl = item.RightControl = item.Vector;
                 }
             }
@@ -192,17 +200,19 @@ namespace Retouch_Photo.Library
         /// Smoothing: Makes the connection between the selected points into a Bezier curve
         /// 平滑：使选定的点之间的连线变成贝塞尔曲线
         /// </summary>
-        public void Smooth()
+        public void Smooth(List<Node> nodes)
         {
-            for (int i = 1; i < this.Nodes.Count - 1; i++)
+            for (int i = 1; i < nodes.Count - 1; i++)
             {
-                if (this.Nodes[i].ChooseMode != NodeChooseMode.None)
+                if (nodes[i].ChooseMode != NodeChooseMode.None)
                 {
-                    Vector2 Space = this.Nodes[i + 1].Vector - this.Nodes[i - 1].Vector;
+                    nodes[i].IsSmooth = true;
+
+                    Vector2 Space = nodes[i + 1].Vector - nodes[i - 1].Vector;
                     Vector2 Spa = Space / 6;
 
-                    this.Nodes[i].LeftControl = this.Nodes[i].Vector + Spa;
-                    this.Nodes[i].RightControl = this.Nodes[i].Vector - Spa;
+                    nodes[i].LeftControl = nodes[i].Vector + Spa;
+                    nodes[i].RightControl = nodes[i].Vector - Spa;
                 }
             }
         }
@@ -215,19 +225,19 @@ namespace Retouch_Photo.Library
         #region Operator
 
 
-        public void Operator_Start(Vector2 v)
+        public void Operator_Start(Vector2 vector,Matrix3x2 matrix,Matrix3x2 inverseMatrix, List<Node> nodes)
         {
             if (this.EditMode == NodeEditMode.Add)
             {
-                Add_Start(v);
+                Add_Start(vector, matrix, inverseMatrix, nodes);
             }
             else if (this.EditMode.HasFlag(NodeEditMode.EditMove))
             {
                 this.Node = null;
 
-                foreach (Node item in this.Nodes)
+                foreach (Node item in nodes)
                 {
-                    NodeChooseMode ChooseMode = item.GetChooseMode(v);
+                    NodeChooseMode ChooseMode = item.GetChooseMode(vector);
                     if (ChooseMode != NodeChooseMode.None)
                     {
                         item.ChooseMode = ChooseMode;
@@ -236,34 +246,34 @@ namespace Retouch_Photo.Library
                     }
                 }
 
-                if (this.Node != null) EditMove_Start(v);
-                else RectChoose_Start(v);
+                if (this.Node != null) EditMove_Start(vector, matrix, inverseMatrix, nodes);
+                else RectChoose_Start(vector, matrix, inverseMatrix);
             }
         }
 
-        public void Operator_Delta(Vector2 v)
+        public void Operator_Delta(Vector2 vector,Matrix3x2 matrix,Matrix3x2 inverseMatrix, List<Node> nodes)
         {
             if (this.EditMode == NodeEditMode.Add)
             {
-                Add_Delta(v);
+                Add_Delta(vector, matrix, inverseMatrix, nodes);
             }
             else if (this.EditMode.HasFlag(NodeEditMode.EditMove))
             {
-                if (this.Node != null) EditMove_Delta(v);
-                else RectChoose_Delta(v);
+                if (this.Node != null) EditMove_Delta(vector, matrix, inverseMatrix, nodes);
+                else RectChoose_Delta(vector, matrix, inverseMatrix, nodes);
             }
         }
 
-        public void Operator_Complete(Vector2 v)
+        public void Operator_Complete(Vector2 vector,Matrix3x2 matrix,Matrix3x2 inverseMatrix,List<Node> nodes)
         {
             if (this.EditMode == NodeEditMode.Add)
             {
-                Add_Complete(v);
+                Add_Complete(vector, matrix, inverseMatrix);
             }
             else if (this.EditMode.HasFlag(NodeEditMode.EditMove))
             {
-                if (this.Node != null) EditMove_Complete(v);
-                else RectChoose_Complete(v);
+                if (this.Node != null) EditMove_Complete(vector, matrix, inverseMatrix,nodes);
+                else RectChoose_Complete(vector, matrix, inverseMatrix, nodes);
             }
         }
 
@@ -273,17 +283,21 @@ namespace Retouch_Photo.Library
         #region Operator > Add
 
 
-        private void Add_Start(Vector2 v)
+        private void Add_Start(Vector2 vector,Matrix3x2 matrix,Matrix3x2 inverseMatrix, List<Node> nodes)
         {
-            this.Nodes.Add(new Node(v));
+            Vector2 inverseMatrixVector = Vector2.Transform(vector, inverseMatrix);
+
+            nodes.Add(new Node(inverseMatrixVector));
         }
 
-        private void Add_Delta(Vector2 v)
+        private void Add_Delta(Vector2 vector,Matrix3x2 matrix,Matrix3x2 inverseMatrix, List<Node> nodes)
         {
-            this.Nodes[this.Nodes.Count - 1].SetVector(v);
+            Vector2 inverseMatrixVector = Vector2.Transform(vector, inverseMatrix);
+
+            nodes[nodes.Count - 1].SetVector(inverseMatrixVector);
         }
 
-        private void Add_Complete(Vector2 v)
+        private void Add_Complete(Vector2 vector,Matrix3x2 matrix,Matrix3x2 inverseMatrix)
         {
         }
 
@@ -295,12 +309,14 @@ namespace Retouch_Photo.Library
 
         Vector2 EditMoveStart;
 
-        private void EditMove_Start(Vector2 v)
+        private void EditMove_Start(Vector2 vector,Matrix3x2 matrix,Matrix3x2 inverseMatrix, List<Node> nodes)
         {
+            Vector2 inverseMatrixVector = Vector2.Transform(vector, inverseMatrix);
+
             if (this.Node == null)
             {
-                this.RectChooseStart = v;
-                this.RectChooseEnd = v;
+                this.RectChooseStart = vector;
+                this.RectChooseEnd = vector;
                 return;
             }
             switch (this.Node.ChooseMode)
@@ -309,10 +325,10 @@ namespace Retouch_Photo.Library
                     break;
                 case NodeChooseMode.Vector:
                     {
-                        EditMoveStart = v;
+                        EditMoveStart = inverseMatrixVector;
                         if (this.Node.ChooseMode == NodeChooseMode.None)
                         {
-                            foreach (var item in this.Nodes)
+                            foreach (var item in nodes)
                             {
                                 item.ChooseMode = NodeChooseMode.None;
                             }
@@ -321,20 +337,22 @@ namespace Retouch_Photo.Library
                         break;
                     }
                 case NodeChooseMode.LeftControl:
-                    this.Node.SetLeftControlStart(v, this.ControlMode);
+                    this.Node.SetLeftControlStart(inverseMatrixVector, this.ControlMode);
                     break;
                 case NodeChooseMode.RightControl:
-                    this.Node.SetRightControlStart(v, this.ControlMode);
+                    this.Node.SetRightControlStart(inverseMatrixVector, this.ControlMode);
                     break;
                 default: break;
             }
         }
 
-        private void EditMove_Delta(Vector2 v)
+        private void EditMove_Delta(Vector2 vector,Matrix3x2 matrix,Matrix3x2 inverseMatrix, List<Node> nodes)
         {
+            Vector2 inverseMatrixVector = Vector2.Transform(vector, inverseMatrix);
+
             if (this.Node == null)
             {
-                this.RectChooseEnd = v;
+                this.RectChooseEnd = vector;
                 return;
             }
 
@@ -343,9 +361,9 @@ namespace Retouch_Photo.Library
                 case NodeChooseMode.None:
                     break;
                 case NodeChooseMode.Vector:
-                    Vector2 offset = v - EditMoveStart;
+                    Vector2 offset = inverseMatrixVector - EditMoveStart;
 
-                    foreach (var item in this.Nodes)
+                    foreach (var item in nodes)
                     {
                         if (item.ChooseMode != NodeChooseMode.None)
                         {
@@ -353,26 +371,28 @@ namespace Retouch_Photo.Library
                         }
                     }
 
-                    this.Node.SetVector(v);
+                    this.Node.SetVector(inverseMatrixVector);
 
-                    EditMoveStart = v;
+                    EditMoveStart = inverseMatrixVector;
                     break;
                 case NodeChooseMode.LeftControl:
-                    this.Node.SetLeftControlDelta(v, this.ControlMode);
+                    this.Node.SetLeftControlDelta(inverseMatrixVector, this.ControlMode);
                     break;
                 case NodeChooseMode.RightControl:
-                    this.Node.SetRightControlDelta(v, this.ControlMode);
+                    this.Node.SetRightControlDelta(inverseMatrixVector, this.ControlMode);
                     break;
                 default: break;
             }
 
         }
 
-        private void EditMove_Complete(Vector2 v)
+        private void EditMove_Complete(Vector2 vector,Matrix3x2 matrix,Matrix3x2 inverseMatrix, List<Node> nodes)
         {
+            Vector2 inverseMatrixVector = Vector2.Transform(vector, inverseMatrix);
+
             if (this.Node == null)
             {
-                foreach (var item in this.Nodes)
+                foreach (var item in nodes)
                 {
                     if (item.Vector.X > this.RectChooseStart.X && item.Vector.Y > this.RectChooseStart.Y && item.Vector.X < this.RectChooseEnd.X && item.Vector.Y < this.RectChooseEnd.Y)
                         item.ChooseMode = NodeChooseMode.Vector;
@@ -391,10 +411,10 @@ namespace Retouch_Photo.Library
                 case NodeChooseMode.Vector:
                     break;
                 case NodeChooseMode.LeftControl:
-                    this.Node.LeftControl = v;
+                    this.Node.LeftControl = inverseMatrixVector;
                     break;
                 case NodeChooseMode.RightControl:
-                    this.Node.RightControl = v;
+                    this.Node.RightControl = inverseMatrixVector;
                     break;
                 default: break;
             }
@@ -409,36 +429,36 @@ namespace Retouch_Photo.Library
         Vector2 RectChooseStart = new Vector2();
         Vector2 RectChooseEnd = new Vector2();
 
-        private void RectChoose_Start(Vector2 v)
+        private void RectChoose_Start(Vector2 vector,Matrix3x2 matrix,Matrix3x2 inverseMatrix)
         {
             this.EditMode = NodeEditMode.EditMove | NodeEditMode.RectChoose;
 
-            this.RectChooseStart = this.RectChooseEnd = v;
+            this.RectChooseStart = this.RectChooseEnd = vector;
         }
 
-        private void RectChoose_Delta(Vector2 v)
+        private void RectChoose_Delta(Vector2 vector,Matrix3x2 matrix,Matrix3x2 inverseMatrix, List<Node> nodes)
         {
-            this.RectChooseEnd = v;
+            this.RectChooseEnd = vector;
 
             //choose point which in rect
             float Left = Math.Min(this.RectChooseStart.X, this.RectChooseEnd.X);
             float Top = Math.Min(this.RectChooseStart.Y, this.RectChooseEnd.Y);
             float Right = Math.Max(this.RectChooseStart.X, this.RectChooseEnd.X);
             float Bottom = Math.Max(this.RectChooseStart.Y, this.RectChooseEnd.Y);
-            foreach (var item in this.Nodes)
+            foreach (var item in nodes)
             {
-                if (item.Vector.X > Left && item.Vector.X < Right && item.Vector.Y > Top && item.Vector.Y < Bottom)
+                if (item.VectorTransform.X > Left && item.VectorTransform.X < Right && item.VectorTransform.Y > Top && item.VectorTransform.Y < Bottom)
                     item.ChooseMode = NodeChooseMode.Vector;
                 else
                     item.ChooseMode = NodeChooseMode.None;
             }
         }
 
-        private void RectChoose_Complete(Vector2 v)
+        private void RectChoose_Complete(Vector2 vector,Matrix3x2 matrix,Matrix3x2 inverseMatrix, List<Node> nodes)
         {
             this.EditMode = NodeEditMode.EditMove;
 
-            this.RectChoose_Delta(v);
+            this.RectChoose_Delta(vector, matrix, inverseMatrix,nodes);
 
             this.RectChooseStart = this.RectChooseEnd = Vector2.Zero;
         }
@@ -450,11 +470,25 @@ namespace Retouch_Photo.Library
 
     /// <summary>  CurveNodes's node </summary>
     public class Node
-    {
+    {       
+        
+        //Transform
+        public Vector2 VectorTransform { get; private set; }
+        public Vector2 LeftControlTransform { get; private set; }
+        public Vector2 RightControlTransform { get; private set; }
+        public void Transform(Matrix3x2 matrix)
+        {
+            this.VectorTransform = Vector2.Transform(this.Vector, matrix);
+            this.LeftControlTransform = Vector2.Transform(this.LeftControl, matrix);
+            this.RightControlTransform = Vector2.Transform(this.RightControl, matrix);
+        }
+
+
         public Vector2 Vector;
         public Vector2 LeftControl;
         public Vector2 RightControl;
 
+        public bool IsSmooth;
         public NodeChooseMode ChooseMode;
 
         public Node(Vector2 v, NodeChooseMode mode = NodeChooseMode.None)
@@ -478,21 +512,21 @@ namespace Retouch_Photo.Library
         /// Move nodes
         /// </summary>
         /// <param name="v">the change of position</param>
-        public void Move(Vector2 v)
+        public void Move(Vector2 vector)
         {
-            this.Vector += v;
-            this.LeftControl += v;
-            this.RightControl += v;
+            this.Vector += vector;
+            this.LeftControl += vector;
+            this.RightControl += vector;
         }
         /// <summary>
         /// Set the vector of it
         /// </summary>
         /// <param name="v">the position</param>
-        public void SetVector(Vector2 v)
+        public void SetVector(Vector2 vector)
         {
-            Vector2 changed = v - this.Vector;
+            Vector2 changed = vector - this.Vector;
 
-            this.Vector = v;
+            this.Vector = vector;
             this.LeftControl += changed;
             this.RightControl += changed;
         }
@@ -576,14 +610,14 @@ namespace Retouch_Photo.Library
         /// </summary>
         /// <param name="v">the position</param>
         /// <returns></returns>
-        public NodeChooseMode GetChooseMode(Vector2 v)
+        public NodeChooseMode GetChooseMode(Vector2 vector)
         {
-            if (Vector2.DistanceSquared(v, this.Vector) < 100) return NodeChooseMode.Vector; ;
+            if (Vector2.DistanceSquared(vector, this.VectorTransform) < 100) return NodeChooseMode.Vector; ;
 
             if (this.ChooseMode != NodeChooseMode.None)
             {
-                if (Vector2.DistanceSquared(v, this.LeftControl) < 100) return NodeChooseMode.LeftControl;
-                else if (Vector2.DistanceSquared(v, this.RightControl) < 100) return NodeChooseMode.RightControl;
+                if (Vector2.DistanceSquared(vector, this.LeftControlTransform) < 100) return NodeChooseMode.LeftControl;
+                else if (Vector2.DistanceSquared(vector, this.RightControlTransform) < 100) return NodeChooseMode.RightControl;
             }
 
             return NodeChooseMode.None;
@@ -638,6 +672,5 @@ namespace Retouch_Photo.Library
         /// <summary> Two points in a straight line </summary>
         Asymmetric,
     }
-
-
+    
 }

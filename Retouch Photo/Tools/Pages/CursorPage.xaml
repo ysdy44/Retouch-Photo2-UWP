@@ -42,7 +42,7 @@
 
             <AppBarSeparator/>
 
-            <!--Skew-->
+            <!--More-->
             <Border Style="{StaticResource AppCircleBorderStyle}">
                 <Button x:Name="MoreButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
                     <FontIcon Glyph="&#xE10C;" FontFamily="Segoe MDL2 Assets"/>

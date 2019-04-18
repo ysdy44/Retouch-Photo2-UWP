@@ -107,6 +107,9 @@
     <Compile Include="Controls\LayerControls\AcrylicControl.xaml.cs">
       <DependentUpon>AcrylicControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LayerControls\GeometryControls\CurveControl.xaml.cs">
+      <DependentUpon>CurveControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LayerControls\GeometryControls\EllipseControl.xaml.cs">
       <DependentUpon>EllipseControl.xaml</DependentUpon>
     </Compile>
@@ -130,6 +133,7 @@
     <Compile Include="Library\MarqueeTool.cs" />
     <Compile Include="Library\MatrixTransformer.cs" />
     <Compile Include="Library\RenderLayer.cs" />
+    <Compile Include="Models\Layers\GeometryLayers\CurveLayer.cs" />
     <Compile Include="Tools\Controls\LineControl.xaml.cs">
       <DependentUpon>LineControl.xaml</DependentUpon>
     </Compile>
@@ -683,6 +687,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\LayerControls\AcrylicControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LayerControls\GeometryControls\CurveControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

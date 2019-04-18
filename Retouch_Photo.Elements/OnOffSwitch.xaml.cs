@@ -6,7 +6,7 @@ namespace Retouch_Photo.Elements
     public sealed partial class OnOffSwitch : UserControl
     { 
         //Delegate
-        public delegate void IsOnChangedHandler(bool IsOn);
+        public delegate void IsOnChangedHandler(bool isOn);
         public event IsOnChangedHandler IsOnChanged = null;
 
         public string OnContent
@@ -65,7 +65,7 @@ namespace Retouch_Photo.Elements
         {
             this.InitializeComponent();
             this.Loaded += (sender, e) => this._IsOn = this.IsOn;
-             this.OnSegmented.Tapped += (sender, e) => this.IsOn =false;
+            this.OnSegmented.Tapped += (sender, e) => this.IsOn = false;
             this.OffSegmented.Tapped += (sender, e) => this.IsOn = true;
         }
 
