@@ -1,0 +1,43 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Controls.BrushControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:lib="using:Retouch_Photo2.Library"
+    xmlns:pickers="using:HSVColorPickers"
+    xmlns:brushs="using:Retouch_Photo2.Brushs"
+    mc:Ignorable="d"
+    d:DesignHeight="800"
+    d:DesignWidth="200">
+
+    <UserControl.Resources>
+        <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <pickers:ColorPicker x:Name="ColorPicker" Width="200"/>
+        </Flyout>
+        <Flyout x:Name="PickerFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <brushs:Picker x:Name="PickerPicker" Width="200"/>
+        </Flyout>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="4"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <ComboBox x:Name="ComboBox"
+                  VerticalAlignment="Center"
+                  Background="{ThemeResource AppForeground}" 
+                  Style="{StaticResource AppComboBoxStyle}"/>
+
+        <Border x:Name="Border" Grid.Column="2" Width="90" Style="{StaticResource AppRoundedBorderStyle}">
+            <canvas:CanvasControl x:Name="CanvasControl" IsHitTestVisible="False"/>
+        </Border>
+        
+    </Grid>
+
+</UserControl>

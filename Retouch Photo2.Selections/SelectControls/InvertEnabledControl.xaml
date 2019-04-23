@@ -1,0 +1,17 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Selections.SelectControls.InvertEnabledControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="50">
+
+    <Grid>
+        <PathIcon Data="M29.664,3.6c0,-0.637 -0.253,-1.247 -0.703,-1.697c-0.45,-0.45 -1.061,-0.703 -1.697,-0.703c-4.04,0 -11.76,0 -11.76,0l0,28.56c0,0 7.72,0 11.76,0c0.636,0 1.247,-0.253 1.697,-0.703c0.45,-0.45 0.703,-1.06 0.703,-1.697c0,-5.384 0,-18.376 0,-23.76Z"
+                   Foreground="#FFC003"/>
+        <PathIcon Data="M3.057,27.807l3.952,0l0,1.713l-3.881,0c-0.985,0 -1.784,-0.8 -1.784,-1.785l0,-2.44l1.713,0l0,2.512Zm12.379,1.713l-6.372,0l0,-1.713l6.372,0l0,1.713Zm-12.379,-6.281l-1.713,0l0,-6.851l1.713,0l0,6.851Zm0,-8.907l-1.713,0l0,-6.851l1.713,0l0,6.851Zm3.952,-11.419l-3.952,0l0,2.512l-1.713,0l0,-2.44c0,-0.985 0.799,-1.785 1.784,-1.785l3.881,0l0,1.713Zm8.427,0l-6.372,0l0,-1.713l6.372,0l0,1.713Z"
+                   Foreground="Gray"/>
+    </Grid>
+</UserControl>

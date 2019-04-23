@@ -1,0 +1,238 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Controls.OperateControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:operates="using:Retouch_Photo2.Operates"
+    xmlns:operatesAliHor="using:Retouch_Photo2.Operates.AlignHorizontalControls"
+    xmlns:operatesAliVer="using:Retouch_Photo2.Operates.AlignVerticalControls"
+    xmlns:operatesArr="using:Retouch_Photo2.Operates.ArrangeControls"
+    xmlns:operatesTra="using:Retouch_Photo2.Operates.TransformControls"
+    mc:Ignorable="d"
+    MinWidth="200"
+    d:DesignHeight="800"
+    d:DesignWidth="200">
+
+    <StackPanel >
+
+        <TextBlock Text="Transform" Style="{StaticResource AppTextBlock}"/>
+
+        <!--#region Transform-->
+        <Border Style="{StaticResource AppRoundedBorderStyle}">
+            <Grid Height="46">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <operates:Button x:Name="FlipHorizontalButton" Grid.Column="0" ButtonIsEnabled="False" Label="Flip Horizontal" >
+                    <operates:Button.EnabledIcon>
+                        <operatesTra:FlipHorizontalEnabledControl/>
+                    </operates:Button.EnabledIcon>
+                    <operates:Button.DisabledIcon>
+                        <operatesTra:FlipHorizontalDisabledControl/>
+                    </operates:Button.DisabledIcon>
+                </operates:Button>
+
+                <operates:Button x:Name="FlipVerticalButton" Grid.Column="1" ButtonIsEnabled="False" Label="Flip Vertical" >
+                    <operates:Button.EnabledIcon>
+                        <operatesTra:FlipVerticalEnabledControl/>
+                    </operates:Button.EnabledIcon>
+                    <operates:Button.DisabledIcon>
+                        <operatesTra:FlipVerticalDisabledControl/>
+                    </operates:Button.DisabledIcon>
+                </operates:Button>
+
+                <operates:Button x:Name="RotateLeftButton" Grid.Column="2" ButtonIsEnabled="False" Label="Rotate Left">
+                    <operates:Button.EnabledIcon>
+                        <operatesTra:RotateLeftEnabledIControl/>
+                    </operates:Button.EnabledIcon>
+                    <operates:Button.DisabledIcon>
+                        <operatesTra:RotateLeftDisabledControl/>
+                    </operates:Button.DisabledIcon>
+                </operates:Button>
+
+                <operates:Button x:Name="RotateRightButton" Grid.Column="3" ButtonIsEnabled="False" Label="Rotate Right" >
+                    <operates:Button.EnabledIcon>
+                        <operatesTra:RotateRightEnabledControl/>
+                    </operates:Button.EnabledIcon>
+                    <operates:Button.DisabledIcon>
+                        <operatesTra:RotateRightDisabledControl/>
+                    </operates:Button.DisabledIcon>
+                </operates:Button>
+
+            </Grid>
+        </Border>
+
+        <!--#endregion-->
+
+        <TextBlock Text="Arrange" Style="{StaticResource AppTextBlock}"/>
+
+        <!--#region Arrange-->
+
+        <Border Style="{StaticResource AppRoundedBorderStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <operates:Button x:Name="ArrangeMoveBackButton" Grid.Column="0" ButtonIsEnabled="False" Label="Move To Back" >
+                    <operates:Button.EnabledIcon>
+                        <operatesArr:MoveBackEnabledControl/>
+                    </operates:Button.EnabledIcon>
+                    <operates:Button.DisabledIcon>
+                        <operatesArr:MoveBackDisabledControl/>
+                    </operates:Button.DisabledIcon>
+                </operates:Button>
+
+                <operates:Button x:Name="ArrangeBackOneButton" Grid.Column="1" ButtonIsEnabled="False" Label="Back One" >
+                    <operates:Button.EnabledIcon>
+                        <operatesArr:BackOneEnabledControl/>
+                    </operates:Button.EnabledIcon>
+                    <operates:Button.DisabledIcon>
+                        <operatesArr:BackOneDisabledControl/>
+                    </operates:Button.DisabledIcon>
+                </operates:Button>
+
+                <operates:Button x:Name="ArrangeForwardOneButton" Grid.Column="2" ButtonIsEnabled="False" Label="Forward One" >
+                    <operates:Button.EnabledIcon>
+                        <operatesArr:ForwardOneEnabledControl/>
+                    </operates:Button.EnabledIcon>
+                    <operates:Button.DisabledIcon>
+                        <operatesArr:ForwardOneDisabledControl/>
+                    </operates:Button.DisabledIcon>
+                </operates:Button>
+
+                <operates:Button x:Name="ArrangeMoveFrontButton" Grid.Column="3" ButtonIsEnabled="False" Label="Move To Front" >
+                    <operates:Button.EnabledIcon>
+                        <operatesArr:MoveFrontEnabledControl/>
+                    </operates:Button.EnabledIcon>
+                    <operates:Button.DisabledIcon>
+                        <operatesArr:MoveFrontDisabledControl/>
+                    </operates:Button.DisabledIcon>
+                </operates:Button>
+            </Grid>
+        </Border>
+
+        <!--#endregion-->
+
+        <TextBlock Text="Align Horizontal" Style="{StaticResource AppTextBlock}"/>
+
+        <!--#region Align Horizontal-->
+
+        <Border Style="{StaticResource AppRoundedBorderStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <operates:Button x:Name="AlignLeftButton" Grid.Column="0" ButtonIsEnabled="False" Label="Align Left" >
+                    <operates:Button.EnabledIcon>
+                        <operatesAliHor:LeftEnabledControl/>
+                    </operates:Button.EnabledIcon>
+                    <operates:Button.DisabledIcon>
+                        <operatesAliHor:LeftDisabledControl/>
+                    </operates:Button.DisabledIcon>
+                </operates:Button>
+
+                <operates:Button x:Name="AlignCenterButton" Grid.Column="1" ButtonIsEnabled="False" Label="Align Center" >
+                    <operates:Button.EnabledIcon>
+                        <operatesAliHor:CenterEnabledControl/>
+                    </operates:Button.EnabledIcon>
+                    <operates:Button.DisabledIcon>
+                        <operatesAliHor:CenterDisabledControl/>
+                    </operates:Button.DisabledIcon>
+                </operates:Button>
+
+                <operates:Button x:Name="AlignRightButton" Grid.Column="2" ButtonIsEnabled="False" Label="Align Right">
+                    <operates:Button.EnabledIcon>
+                        <operatesAliHor:RightEnabledControl/>
+                    </operates:Button.EnabledIcon>
+                    <operates:Button.DisabledIcon>
+                        <operatesAliHor:RightDisabledControl/>
+                    </operates:Button.DisabledIcon>
+                </operates:Button>
+
+                <ContentPresenter ContentTemplate="{StaticResource AppRowSeparator}"/>
+
+                <operates:Button x:Name="AlignSymmetryHorizontallyButton" Grid.Column="3" ButtonIsEnabled="False" Label="Symmetry">
+                    <operates:Button.EnabledIcon>
+                        <operatesAliHor:SymmetryEnabledControl/>
+                    </operates:Button.EnabledIcon>
+                    <operates:Button.DisabledIcon>
+                        <operatesAliHor:SymmetryDisabledControl/>
+                    </operates:Button.DisabledIcon>
+                </operates:Button>
+
+            </Grid>
+        </Border>
+
+        <!--#endregion-->
+
+        <TextBlock Text="Align Vertical" Style="{StaticResource AppTextBlock}"/>
+
+        <!--#region Align Vertical-->
+
+        <Border Style="{StaticResource AppRoundedBorderStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <operates:Button x:Name="AlignTopButton" Grid.Column="0" ButtonIsEnabled="False" Label="Align Top" >
+                    <operates:Button.EnabledIcon>
+                        <operatesAliVer:TopEnabledControl/>
+                    </operates:Button.EnabledIcon>
+                    <operates:Button.DisabledIcon>
+                        <operatesAliVer:TopDisabledControl/>
+                    </operates:Button.DisabledIcon>
+                </operates:Button>
+
+                <operates:Button x:Name="AlignMiddleButton" Grid.Column="1" ButtonIsEnabled="False" Label="Align Middle" >
+                    <operates:Button.EnabledIcon>
+                        <operatesAliVer:MiddleEnabledControl/>
+                    </operates:Button.EnabledIcon>
+                    <operates:Button.DisabledIcon>
+                        <operatesAliVer:MiddleDisabledControl/>
+                    </operates:Button.DisabledIcon>
+                </operates:Button>
+
+                <operates:Button x:Name="AlignBottomButton" Grid.Column="2" ButtonIsEnabled="False" Label="Align Bottom" >
+                    <operates:Button.EnabledIcon>
+                        <operatesAliVer:BottomEnabledControl/>
+                    </operates:Button.EnabledIcon>
+                    <operates:Button.DisabledIcon>
+                        <operatesAliVer:BottomDisabledControl/>
+                    </operates:Button.DisabledIcon>
+                </operates:Button>
+
+                <operates:Button x:Name="AlignSymmetryVerticallyButton" Grid.Column="3" ButtonIsEnabled="False" Label="Symmetry" >
+                    <operates:Button.EnabledIcon>
+                        <operatesAliVer:SymmetryEnabledControl/>
+                    </operates:Button.EnabledIcon>
+                    <operates:Button.DisabledIcon>
+                        <operatesAliVer:SymmetryDisabledControl/>
+                    </operates:Button.DisabledIcon>
+                </operates:Button>
+
+            </Grid>
+        </Border>
+
+        <!--#endregion-->
+
+        <ContentControl Height="8"/>
+        
+    </StackPanel>
+</UserControl>

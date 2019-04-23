@@ -1,0 +1,13 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Controls.LayerControls.ImageControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="50">
+
+    <PathIcon Data="M22.568,16.865l-22.568,0l0,-16.865l22.568,0l0,16.865Zm-21.091,-8.433l0,2.12l4.907,-4.527l9.528,9.196l1.896,0l-3.318,-3.343l1.824,-1.824l4.811,5.167l0,-2.441l-5.001,-4.93l-2.559,2.891l-7.181,-6.92l-4.907,4.611l0,0Zm16.127,-4.341c0.435,0 0.79,0.355 0.79,0.79c0,0.436 -0.355,0.791 -0.79,0.791c-0.436,0 -0.791,-0.355 -0.791,-0.791c0,-0.435 0.355,-0.79 0.791,-0.79Z"/>
+
+</UserControl>

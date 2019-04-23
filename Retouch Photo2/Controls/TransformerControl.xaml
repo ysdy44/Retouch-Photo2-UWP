@@ -1,0 +1,85 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Controls.TransformerControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Retouch_Photo2.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pickers="using:HSVColorPickers"
+    xmlns:elements="using:Retouch_Photo2.Elements"
+    mc:Ignorable="d"
+    d:DesignHeight="400"
+    d:DesignWidth="200">
+
+    
+    <StackPanel>
+       
+        <TextBlock Text="Size" Style="{StaticResource AppTextBlock}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
+        <Grid Height="90">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="12"/>
+            </Grid.RowDefinitions>
+
+            <Ellipse Grid.Column="0" Stretch="Uniform" Stroke="{ThemeResource AppBorderBrush}"/>
+            <pickers:NumberPicker x:Name="WPicker" Grid.Column="0" Height="30" Margin="4" Unit="%" />
+
+            <Ellipse Grid.Column="2" Stretch="Uniform" Stroke="{ThemeResource AppBorderBrush}"/>
+            <pickers:NumberPicker x:Name="HPicker" Grid.Column="2" Height="30" Margin="4" Unit="%"/>
+
+            <elements:ToggleControl x:Name="RatioToggleControl" Grid.Column="1">
+                <elements:ToggleControl.CenterContent>
+                    <FontIcon Glyph="&#x1F512;" FontFamily="Segoe UI Symbol" FontSize="18" />
+                </elements:ToggleControl.CenterContent>
+            </elements:ToggleControl>
+
+        </Grid>
+
+        <TextBlock Text="Postion" Style="{StaticResource AppTextBlock}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
+        <Grid Height="90">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="12"/>
+            </Grid.RowDefinitions>
+
+            <Ellipse Grid.Column="0" Stretch="Uniform" Stroke="{ThemeResource AppBorderBrush}"/>
+            <pickers:NumberPicker x:Name="XPicker" Grid.Column="0" Height="30" Margin="4" />
+
+            <Ellipse Grid.Column="2" Stretch="Uniform" Stroke="{ThemeResource AppBorderBrush}"/>
+            <pickers:NumberPicker x:Name="YPicker" Grid.Column="2" Height="30" Margin="4" />
+
+        </Grid>
+
+        <TextBlock Text="Radian" Style="{StaticResource AppTextBlock}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
+        <Grid Height="90">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="12"/>
+            </Grid.RowDefinitions>
+
+            <Ellipse Grid.Column="0" Stretch="Uniform" Stroke="{ThemeResource AppBorderBrush}"/>
+            <pickers:NumberPicker x:Name="RPicker" Grid.Column="0" Height="30" Margin="4" Unit="º" />
+
+            <Ellipse Grid.Column="2" Stretch="Uniform" Stroke="{ThemeResource AppBorderBrush}"/>
+            <pickers:NumberPicker x:Name="SPicker" Grid.Column="2" Height="30" Margin="4" Unit="º" />
+
+        </Grid>
+        
+        
+    </StackPanel>
+</UserControl>

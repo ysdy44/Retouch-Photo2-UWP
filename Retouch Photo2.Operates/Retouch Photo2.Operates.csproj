@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C5A52472-53D8-4885-8488-0CF77A985794}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Retouch_Photo2.Operates</RootNamespace>
+    <AssemblyName>Retouch_Photo2.Operates</AssemblyName>
+    <DefaultLanguage>zh-CN</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="AlignHorizontalControls\CenterDisabledControl.xaml.cs">
+      <DependentUpon>CenterDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AlignHorizontalControls\CenterEnabledControl.xaml.cs">
+      <DependentUpon>CenterEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AlignHorizontalControls\LeftDisabledControl.xaml.cs">
+      <DependentUpon>LeftDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AlignHorizontalControls\LeftEnabledControl.xaml.cs">
+      <DependentUpon>LeftEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AlignHorizontalControls\RightDisabledControl.xaml.cs">
+      <DependentUpon>RightDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AlignHorizontalControls\RightEnabledControl.xaml.cs">
+      <DependentUpon>RightEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AlignHorizontalControls\SymmetryDisabledControl.xaml.cs">
+      <DependentUpon>SymmetryDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AlignHorizontalControls\SymmetryEnabledControl.xaml.cs">
+      <DependentUpon>SymmetryEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AlignVerticalControls\BottomDisabledControl.xaml.cs">
+      <DependentUpon>BottomDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AlignVerticalControls\BottomEnabledControl.xaml.cs">
+      <DependentUpon>BottomEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AlignVerticalControls\MiddleDisabledControl.xaml.cs">
+      <DependentUpon>MiddleDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AlignVerticalControls\MiddleEnabledControl.xaml.cs">
+      <DependentUpon>MiddleEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AlignVerticalControls\SymmetryDisabledControl.xaml.cs">
+      <DependentUpon>SymmetryDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AlignVerticalControls\SymmetryEnabledControl.xaml.cs">
+      <DependentUpon>SymmetryEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AlignVerticalControls\TopDisabledControl.xaml.cs">
+      <DependentUpon>TopDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AlignVerticalControls\TopEnabledControl.xaml.cs">
+      <DependentUpon>TopEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ArrangeControls\BackOneDisabledControl.xaml.cs">
+      <DependentUpon>BackOneDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ArrangeControls\BackOneEnabledControl.xaml.cs">
+      <DependentUpon>BackOneEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ArrangeControls\ForwardOneDisabledControl.xaml.cs">
+      <DependentUpon>ForwardOneDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ArrangeControls\ForwardOneEnabledControl.xaml.cs">
+      <DependentUpon>ForwardOneEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ArrangeControls\MoveBackDisabledControl.xaml.cs">
+      <DependentUpon>MoveBackDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ArrangeControls\MoveBackEnabledControl.xaml.cs">
+      <DependentUpon>MoveBackEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ArrangeControls\MoveFrontDisabledControl.xaml.cs">
+      <DependentUpon>MoveFrontDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ArrangeControls\MoveFrontEnabledControl.xaml.cs">
+      <DependentUpon>MoveFrontEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Button.xaml.cs">
+      <DependentUpon>Button.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icon.xaml.cs">
+      <DependentUpon>Icon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransformControls\FlipHorizontalDisabledControl.xaml.cs">
+      <DependentUpon>FlipHorizontalDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TransformControls\FlipHorizontalEnabledControl.xaml.cs">
+      <DependentUpon>FlipHorizontalEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TransformControls\FlipVerticalDisabledControl.xaml.cs">
+      <DependentUpon>FlipVerticalDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TransformControls\FlipVerticalEnabledControl.xaml.cs">
+      <DependentUpon>FlipVerticalEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TransformControls\RotateLeftDisabledControl.xaml.cs">
+      <DependentUpon>RotateLeftDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TransformControls\RotateLeftEnabledIControl.xaml.cs">
+      <DependentUpon>RotateLeftEnabledIControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TransformControls\RotateRightDisabledControl.xaml.cs">
+      <DependentUpon>RotateRightDisabledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TransformControls\RotateRightEnabledControl.xaml.cs">
+      <DependentUpon>RotateRightEnabledControl.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Retouch_Photo.Operates.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.1.7</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="AlignHorizontalControls\CenterDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AlignHorizontalControls\CenterEnabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AlignHorizontalControls\LeftDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AlignHorizontalControls\LeftEnabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AlignHorizontalControls\RightDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AlignHorizontalControls\RightEnabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AlignHorizontalControls\SymmetryDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AlignHorizontalControls\SymmetryEnabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AlignVerticalControls\BottomDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AlignVerticalControls\BottomEnabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AlignVerticalControls\MiddleDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AlignVerticalControls\MiddleEnabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AlignVerticalControls\SymmetryDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AlignVerticalControls\SymmetryEnabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AlignVerticalControls\TopDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AlignVerticalControls\TopEnabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ArrangeControls\BackOneDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ArrangeControls\BackOneEnabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ArrangeControls\ForwardOneDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ArrangeControls\ForwardOneEnabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ArrangeControls\MoveBackDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ArrangeControls\MoveBackEnabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ArrangeControls\MoveFrontDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ArrangeControls\MoveFrontEnabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Button.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TransformControls\FlipHorizontalDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TransformControls\FlipHorizontalEnabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TransformControls\FlipVerticalDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TransformControls\FlipVerticalEnabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TransformControls\RotateLeftDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TransformControls\RotateLeftEnabledIControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TransformControls\RotateRightDisabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TransformControls\RotateRightEnabledControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

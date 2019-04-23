@@ -1,0 +1,74 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Pages.MenuLayout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    
+    xmlns:apiContractNotPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,5)"
+    xmlns:apiContractPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
+       
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    
+    <UserControl.Resources>
+
+        <!--Flyout-->
+        <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <Border x:Name="FlyoutBorder" Width="222">
+                <!--Content-->
+            </Border>
+        </Flyout>
+
+    </UserControl.Resources>
+
+
+    <!--Root-->
+    <Border x:Name="RootBorder" Width="222" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}">
+        <!--Content-->
+
+        
+        <!--UIElement-->
+        <Grid x:Name="ContentGrid">
+
+            <Grid.Resources>
+                <Storyboard  x:Name="Storyboard" >
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Height)" Storyboard.TargetName="StoryboardRectangle" EnableDependentAnimation ="True">
+                        <SplineDoubleKeyFrame x:Name="Frame" KeyTime="0:0:0.2" Value="200" KeySpline="0.5,1,1,1"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+            </Grid.Resources>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="36"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="TitlePanel" Padding="12,0" Background="{ThemeResource AppForeground}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="TextBlock" VerticalAlignment="Center" Foreground="{ThemeResource AppText}"/>
+                <Button x:Name="StateButton" Grid.Column="2" Padding="0" Width="28" Height="28" BorderThickness="1" BorderBrush="{ThemeResource SystemControlBackgroundBaseHighBrush}" Background="Transparent" >
+                    <FontIcon x:Name="StateIcon" FontSize="14" FontFamily="Segoe UI Symbol"/>
+                </Button>
+            </Grid>
+
+            <Rectangle x:Name="StoryboardRectangle" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Fill="{ThemeResource AppBackground}"/>
+
+            <Border x:Name="StoryboardBorder" Grid.Row="1" VerticalAlignment="Top">
+                <Border x:Name="ContentBorder" Padding="8,0" >
+                    <!--Content-->
+                </Border>
+            </Border>
+
+        </Grid>
+
+
+    </Border>
+
+</UserControl>
