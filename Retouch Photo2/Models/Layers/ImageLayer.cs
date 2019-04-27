@@ -31,7 +31,7 @@ namespace Retouch_Photo2.Models.Layers
             throw new NotImplementedException();
         }
 
-        protected override ICanvasImage GetRender(ICanvasResourceCreator creator, IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
+        protected override ICanvasImage GetRender(IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
             return new Transform2DEffect
             {

@@ -4,7 +4,7 @@ using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using static Retouch_Photo2.Library.HomographyController;
 
-namespace Retouch_Photo2.Tools
+namespace Retouch_Photo2.Tools.ITools
 {
     public class ICursorTool : ITool
     {
@@ -96,7 +96,7 @@ namespace Retouch_Photo2.Tools
             {
                 Matrix3x2 matrix = this.ViewModel.MatrixTransformer.Matrix;
 
-                layer.Draw(this.ViewModel.CanvasDevice, ds, matrix);
+                layer.Draw( ds, matrix);
                 Transformer.DrawBoundNodes(ds, layer.Transformer, matrix);
                 return true;
             }

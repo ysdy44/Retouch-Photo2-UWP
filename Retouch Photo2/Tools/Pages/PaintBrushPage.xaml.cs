@@ -36,9 +36,6 @@ namespace Retouch_Photo2.Tools.Pages
             BrushType type = this.ViewModel.CurrentGeometryLayer.FillBrush.Type;
             this.BrushControl.ChangeSelectedIndex((int)type);
         }
-        public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
-        {
-        }
 
         //Communication
         public override void Communication(int magicNumbers) => this.BrushControl.ChangeSelectedIndex(magicNumbers);

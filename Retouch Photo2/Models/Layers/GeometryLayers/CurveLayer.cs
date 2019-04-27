@@ -33,10 +33,11 @@ namespace Retouch_Photo2.Models.Layers.GeometryLayers
         public void ResetNodesGeometryByNodes()=>this.NodesGeometry = CurveLayer.GetNodesGeometry(this.ViewModel.CanvasDevice, this.Nodes);
         /// <summary> Reset this Transformer by NodesGeometry. </summary>
         public void ResetTransformerByNodesGeometry() => base.Transformer = CurveLayer.GetTransformer(this.NodesGeometry);
-        
 
-        public override void ResetTransformer()
+
+        public override void LayerOnNavigatedFrom() 
         {
+            // Reset the layer's  transformer
             Matrix3x2 matrix = base.Transformer.Matrix;
             foreach (Node node in this.Nodes)
             {
@@ -48,9 +49,9 @@ namespace Retouch_Photo2.Models.Layers.GeometryLayers
             this.ResetTransformerByNodesGeometry();
         }
 
-        protected override CanvasGeometry GetGeometry(ICanvasResourceCreator creator, Matrix3x2 canvasToVirtualMatrix)
+        protected override CanvasGeometry GetGeometry(Matrix3x2 canvasToVirtualMatrix)
         {
-            return this.NodesGeometry.Transform(base.Transformer.Matrix * canvasToVirtualMatrix);
+            return this.NodesGeometry.Transform(base.Transformer.Matrix).Transform(canvasToVirtualMatrix);
         }
 
         public static CurveLayer CreateFromPoint(ICanvasResourceCreator creator, Vector2 startPoint, Vector2 endPoint, Color color)

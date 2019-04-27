@@ -7,6 +7,10 @@ using static Retouch_Photo2.Library.HomographyController;
 
 namespace Retouch_Photo2.Tools.ITools
 {
+    /// <summary>
+    /// Clicked Tool Interface: 
+    ///   Drag distance more than a certain distance to trigger <see cref = "ClickedStart" /> event.
+    /// </summary>
     public class IClickedTool : ITool
     {
         //ViewModel
@@ -14,6 +18,7 @@ namespace Retouch_Photo2.Tools.ITools
        
         Vector2 point;
         bool IsClicked=true;
+
         readonly Func<Vector2, bool> ClickedStart;
         readonly Func<Vector2, bool> ClickedDelta;
         readonly Func<Vector2, bool> ClickedComplete;
@@ -53,7 +58,8 @@ namespace Retouch_Photo2.Tools.ITools
         {
             if (this.IsClicked)
             {
-                Layer layer = this.ViewModel.RenderLayer.GetClickedLayer(this.point, this.ViewModel.MatrixTransformer.InverseMatrix);
+                // Click on the layer
+                Layer layer = this.ViewModel.RenderLayer.GetClickedLayer(this.point, this.ViewModel.MatrixTransformer.Matrix);
                 this.ViewModel.CurrentLayer = layer;
             }
             else
@@ -64,9 +70,5 @@ namespace Retouch_Photo2.Tools.ITools
             return true;
         }
 
-        public override bool Draw(CanvasDrawingSession ds)
-        {
-            return false;
-            }
-    }
-}
+        public override bool Draw(CanvasDrawingSession ds)=> false;        
+    }}

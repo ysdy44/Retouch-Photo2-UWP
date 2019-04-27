@@ -4,7 +4,7 @@ using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.UI;
 
-namespace Retouch_Photo2.Tools.Models.CursorTools
+namespace Retouch_Photo2.Tools.ITools
 {
     public class IBlueBox : ITool
     {
@@ -59,7 +59,7 @@ namespace Retouch_Photo2.Tools.Models.CursorTools
         {
             if (this.IsCursorBox)
             {
-                var matrix = this.ViewModel.MatrixTransformer.Matrix;
+               Matrix3x2 matrix = this.ViewModel.MatrixTransformer.Matrix;
 
                 Vector2[] points = new Vector2[4];
                 points[0] = Vector2.Transform(this.StartPoint, matrix);

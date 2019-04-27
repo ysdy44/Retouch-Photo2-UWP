@@ -18,15 +18,7 @@ namespace Retouch_Photo2.Tools.Models
             base.WorkIcon = new AcrylicControl();
             base.Page = new AcrylicPage();
         }
-
-        //@Override
-        public override void ToolOnNavigatedTo()//当前页面成为活动页面
-        {
-        }
-        public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
-        {
-        }
-        
+                
         public override Layer GetLayer(VectRect rect)=> AcrylicLayer.CreateFromRect(this.ViewModel.CanvasDevice, rect, this.ViewModel.Color);
     }
 }

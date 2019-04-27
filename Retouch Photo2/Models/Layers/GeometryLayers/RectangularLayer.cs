@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Models.Layers.GeometryLayers
             base.Icon = new RectangularControl();
         }
 
-        protected override CanvasGeometry GetGeometry(ICanvasResourceCreator creator, Matrix3x2 canvasToVirtualMatrix)
+        protected override CanvasGeometry GetGeometry(Matrix3x2 canvasToVirtualMatrix)
         {
             //LTRB
             Vector2 leftTop = Vector2.Transform(this.Transformer.DstLeftTop, canvasToVirtualMatrix);
@@ -39,7 +39,7 @@ namespace Retouch_Photo2.Models.Layers.GeometryLayers
             };
 
             //Geometry
-            return CanvasGeometry.CreatePolygon(creator, points);
+            return CanvasGeometry.CreatePolygon(this.ViewModel.CanvasDevice, points);
         }
 
         public static RectangularLayer CreateFromRect(ICanvasResourceCreator creator, VectRect rect, Color color)

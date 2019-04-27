@@ -35,8 +35,5 @@ namespace Retouch_Photo2.Tools.Pages
         {
             this.ColorPicker.Color = this.ViewModel.Color;
         }
-        public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
-        {
-        }
     }
 }

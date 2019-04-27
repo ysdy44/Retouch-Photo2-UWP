@@ -75,6 +75,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -125,14 +126,13 @@
     <Compile Include="Controls\TransformerControls\Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Library\Adjustment.cs" />
     <Compile Include="Library\CanvasOperator.cs" />
     <Compile Include="Library\CurveNodes.cs" />
     <Compile Include="Library\Debug.cs" />
     <Compile Include="Library\DottedLine.cs" />
-    <Compile Include="Library\HomographyController.cs" />
     <Compile Include="Library\MarqueeTool.cs" />
     <Compile Include="Library\MatrixTransformer.cs" />
-    <Compile Include="Library\RenderLayer.cs" />
     <Compile Include="Models\Layers\GeometryLayers\CurveLayer.cs" />
     <Compile Include="Tools\Controls\LineControl.xaml.cs">
       <DependentUpon>LineControl.xaml</DependentUpon>
@@ -236,7 +236,6 @@
     <Compile Include="Element\ThemeControl.xaml.cs">
       <DependentUpon>ThemeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Library\Adjustment.cs" />
     <Compile Include="Models\Layers\AcrylicLayer.cs" />
     <Compile Include="Models\Layers\GeometryLayer.cs" />
     <Compile Include="Models\Layers\GeometryLayers\EllipseLayer.cs" />
@@ -249,17 +248,14 @@
     <Compile Include="Tools\LayerTool.cs" />
     <Compile Include="Tools\Models\AcrylicTool.cs" />
     <Compile Include="Tools\Models\CursorTool.cs" />
-    <Compile Include="Tools\Models\CursorTools\IBlueBox.cs" />
-    <Compile Include="Tools\Models\CursorTools\ITranslation.cs" />
+    <Compile Include="Tools\ITools\IBlueBox.cs" />
+    <Compile Include="Tools\ITools\ITranslation.cs" />
     <Compile Include="Tools\Models\EllipseTool.cs" />
     <Compile Include="Tools\Models\GeometryTool.cs" />
     <Compile Include="Tools\ITools\ICursorTool.cs" />
     <Compile Include="Tools\Models\LineTool.cs" />
     <Compile Include="Tools\Models\NullTool.cs" />
     <Compile Include="Tools\Models\PaintBrushTool.cs" />
-    <Compile Include="Tools\Models\PaintBrushTools\IEllipticalGradient.cs" />
-    <Compile Include="Tools\Models\PaintBrushTools\ILinearGradient.cs" />
-    <Compile Include="Tools\Models\PaintBrushTools\IRadialGradient.cs" />
     <Compile Include="Tools\Models\PencilTool.cs" />
     <Compile Include="Tools\Models\PenTool.cs" />
     <Compile Include="Tools\Models\RectangleTool.cs" />
@@ -327,7 +323,9 @@
     <Compile Include="Tools\ToolPage.cs" />
     <Compile Include="Tools\ToolType.cs" />
     <Compile Include="ViewModels\DrawViewModel.cs" />
+    <Compile Include="Library\HomographyController.cs" />
     <Compile Include="ViewModels\KeyViewModel.cs" />
+    <Compile Include="Library\RenderLayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -938,6 +936,9 @@
   <ItemGroup>
     <PackageReference Include="HSVColorPickers">
       <Version>1.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="MathNet.Numerics">
+      <Version>4.7.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.5</Version>

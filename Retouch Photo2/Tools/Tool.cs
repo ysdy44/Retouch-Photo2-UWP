@@ -23,9 +23,9 @@ namespace Retouch_Photo2.Tools
 
         //@Override
         /// <summary> 当前页面成为活动页面 </summary>
-        public abstract void ToolOnNavigatedTo();
+        public virtual void ToolOnNavigatedTo() { }
         /// <summary> 当前页面不再成为活动页面 </summary>
-        public abstract void ToolOnNavigatedFrom();
+        public virtual void ToolOnNavigatedFrom() { }
 
 
         //ToolList

@@ -31,16 +31,32 @@ namespace Retouch_Photo2.Library
             foreach (Node item in nodes)
             {
                 Vector2 vector = Vector2.Transform(item.Vector, matrix);
-                if (item.ChooseMode == NodeChooseMode.None) this.DrawNodeVector(ds, vector);
+                bool isChoosed = !(item.ChooseMode == NodeChooseMode.None);
+
+                if (item.IsSmooth)
+                {
+                    if (isChoosed)
+                    {
+                        //Right
+                        Vector2 rightControl = Vector2.Transform(item.RightControl, matrix);
+                        ds.DrawLine(rightControl, vector, Windows.UI.Colors.DodgerBlue);
+                       Retouch_Photo2.Library.HomographyController.Transformer.DrawNode(ds, rightControl);
+
+                        //Left
+                        Vector2 leftControl = Vector2.Transform(item.LeftControl, matrix);
+                        ds.DrawLine(leftControl, vector, Windows.UI.Colors.DodgerBlue);
+                        Retouch_Photo2.Library.HomographyController.Transformer.DrawNode(ds, leftControl);
+                    }
+
+                    //Vector
+                    Retouch_Photo2.Library.HomographyController.Transformer.DrawNode2(ds, vector);
+                }
                 else
                 {
-                    Vector2 rightControl = Vector2.Transform(item.RightControl, matrix);
-                    Vector2 leftControl = Vector2.Transform(item.LeftControl, matrix);
-
-                    this.DrawNodeControl(ds, vector, rightControl);
-                    this.DrawNodeControl(ds, vector, leftControl);
-
-                    this.DrawNodeVector2(ds, vector);
+                    if (isChoosed)
+                        Retouch_Photo2.Library.HomographyController.Transformer.DrawNode4(ds, vector); 
+                    else
+                        Retouch_Photo2.Library.HomographyController.Transformer.DrawNode3(ds, vector); 
                 }
             }
 
@@ -52,41 +68,8 @@ namespace Retouch_Photo2.Library
                 ds.DrawRectangle(rect, Windows.UI.Colors.DodgerBlue);
             }
         }
-
-
-
-
-        /// <summary>
-        /// draw a ⊙
-        /// </summary>
-        private void DrawNodeVector(CanvasDrawingSession ds, Vector2 vector)
-        {
-            ds.FillCircle(vector, 10, Windows.UI.Color.FromArgb(70, 127, 127, 127));
-            ds.FillCircle(vector, 8, Windows.UI.Colors.DodgerBlue);
-            ds.FillCircle(vector, 6, Windows.UI.Colors.White);
-        }
-        /// <summary>
-        /// draw a ●
-        /// </summary>
-        private void DrawNodeVector2(CanvasDrawingSession ds, Vector2 vector)
-        {
-            ds.FillCircle(vector, 10, Windows.UI.Color.FromArgb(70, 127, 127, 127));
-            ds.FillCircle(vector, 8, Windows.UI.Colors.White);
-            ds.FillCircle(vector, 6, Windows.UI.Colors.DodgerBlue);
-        }
-        /// <summary>
-        /// draw a ——⊕ 
-        /// </summary>
-        private void DrawNodeControl(CanvasDrawingSession ds, Vector2 vector, Vector2 control)
-        {
-            ds.DrawLine(control, vector, Windows.UI.Colors.DodgerBlue, 1);
-
-            ds.FillCircle(control, 8, Windows.UI.Color.FromArgb(70, 127, 127, 127));
-            ds.FillCircle(control, 7, Windows.UI.Colors.DodgerBlue);
-            ds.FillCircle(control, 6, Windows.UI.Colors.White);
-        }
-
-
+               
+   
         #endregion
 
         #region function
@@ -565,13 +548,13 @@ namespace Retouch_Photo2.Library
         /// <returns></returns>
         public NodeChooseMode GetChooseMode(Vector2 vector)
         {
-            if (Vector2.DistanceSquared(vector, this.Vector) < 100) return NodeChooseMode.Vector; ;
-
             if (this.ChooseMode != NodeChooseMode.None)
             {
                 if (Vector2.DistanceSquared(vector, this.LeftControl) < 100) return NodeChooseMode.LeftControl;
                 else if (Vector2.DistanceSquared(vector, this.RightControl) < 100) return NodeChooseMode.RightControl;
             }
+
+            if (Vector2.DistanceSquared(vector, this.Vector) < 100) return NodeChooseMode.Vector; ;
 
             return NodeChooseMode.None;
         }

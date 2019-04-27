@@ -7,11 +7,14 @@ using Windows.Graphics.Effects;
 using Windows.UI;
 using static Retouch_Photo2.Library.HomographyController;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.ViewModels;
 
 namespace Retouch_Photo2.Models.Layers.GeometryLayers
 {
     public class EllipseLayer : GeometryLayer
     {
+        //ViewModel
+        DrawViewModel ViewModel => Retouch_Photo2.App.ViewModel;
 
         public static readonly string Type = "Ellipse";
         protected EllipseLayer()
@@ -20,7 +23,7 @@ namespace Retouch_Photo2.Models.Layers.GeometryLayers
             base.Icon = new EllipseControl();
         }
              
-        protected override CanvasGeometry GetGeometry(ICanvasResourceCreator creator, Matrix3x2 canvasToVirtualMatrix)
+        protected override CanvasGeometry GetGeometry(Matrix3x2 canvasToVirtualMatrix)
         {
             /// <summary>
             /// A Ellipse has left, top, right, bottom four nodes.
@@ -52,7 +55,7 @@ namespace Retouch_Photo2.Models.Layers.GeometryLayers
             Vector2 bottom2 = bottom + horizontal;
 
             //Path
-            CanvasPathBuilder pathBuilder = new CanvasPathBuilder(creator);
+            CanvasPathBuilder pathBuilder = new CanvasPathBuilder(this.ViewModel.CanvasDevice);
             pathBuilder.BeginFigure(bottom);
             pathBuilder.AddCubicBezier(bottom1, left2, left);
             pathBuilder.AddCubicBezier(left1, top2, top);

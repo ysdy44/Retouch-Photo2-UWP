@@ -42,6 +42,7 @@ namespace Retouch_Photo2.Tools.ITools
 
             this.Layer.Transformer = Transformer.CreateFromSize(rect.Width, rect.Height, new Vector2(rect.X, rect.Y));
             this.ViewModel.InvalidateWithJumpedQueueLayer(this.Layer);
+            this.ViewModel.CurrentLayer = null;
             return true;
         }
         public override bool Complete(Vector2 point)
@@ -60,6 +61,9 @@ namespace Retouch_Photo2.Tools.ITools
 
         public override bool Draw(CanvasDrawingSession ds)
         {
+            if (this.Layer==null) return false;
+
+            this.Layer.Draw(ds,this.ViewModel.MatrixTransformer.Matrix);
             return false;
         }
     }

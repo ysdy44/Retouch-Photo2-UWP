@@ -13,9 +13,6 @@ namespace Retouch_Photo2.Controls
         //ViewModel
         DrawViewModel ViewModel => Retouch_Photo2.App.ViewModel;
 
-
-        Transformer StartTransformer;
-
         #region IsEnabled
 
 
@@ -171,7 +168,7 @@ namespace Retouch_Photo2.Controls
         private void OperateArrange(Action<Layer> action) 
         {
             if (this.Layer == null) return;
-            this.StartTransformer = this.Layer.Transformer;
+            this.Layer.OldTransformer = this.Layer.Transformer;
 
             action(this.Layer);//Action
 
@@ -183,14 +180,14 @@ namespace Retouch_Photo2.Controls
         private void OperateVector(Func<Layer, Vector2> action)
         {
             if (this.Layer == null) return;
-            this.StartTransformer = this.Layer.Transformer;
+            this.Layer.OldTransformer = this.Layer.Transformer;
 
             //Action
             Vector2 vector = action(this.Layer);
-            this.Layer.Transformer.DstLeftTop = this.StartTransformer.DstLeftTop + vector;
-            this.Layer.Transformer.DstRightTop = this.StartTransformer.DstRightTop + vector;
-            this.Layer.Transformer.DstRightBottom = this.StartTransformer.DstRightBottom + vector;
-            this.Layer.Transformer.DstLeftBottom = this.StartTransformer.DstLeftBottom + vector;
+            this.Layer.Transformer.DstLeftTop = this.Layer.OldTransformer.DstLeftTop + vector;
+            this.Layer.Transformer.DstRightTop = this.Layer.OldTransformer.DstRightTop + vector;
+            this.Layer.Transformer.DstRightBottom = this.Layer.OldTransformer.DstRightBottom + vector;
+            this.Layer.Transformer.DstLeftBottom = this.Layer.OldTransformer.DstLeftBottom + vector;
 
             this.ViewModel.Invalidate();
         }
@@ -198,14 +195,14 @@ namespace Retouch_Photo2.Controls
         private void OperateTransform(Func<Layer, Matrix3x2> action)
         {
             if (this.Layer == null) return;
-            this.StartTransformer = this.Layer.Transformer;
+            this.Layer.OldTransformer = this.Layer.Transformer;
 
             //Action
             Matrix3x2 matrix = action(this.Layer);
-            this.Layer.Transformer.DstLeftTop = Vector2.Transform(this.StartTransformer.DstLeftTop, matrix);
-            this.Layer.Transformer.DstRightTop = Vector2.Transform(this.StartTransformer.DstRightTop, matrix);
-            this.Layer.Transformer.DstRightBottom = Vector2.Transform(this.StartTransformer.DstRightBottom, matrix);
-            this.Layer.Transformer.DstLeftBottom = Vector2.Transform(this.StartTransformer.DstLeftBottom, matrix);
+            this.Layer.Transformer.DstLeftTop = Vector2.Transform(this.Layer.OldTransformer.DstLeftTop, matrix);
+            this.Layer.Transformer.DstRightTop = Vector2.Transform(this.Layer.OldTransformer.DstRightTop, matrix);
+            this.Layer.Transformer.DstRightBottom = Vector2.Transform(this.Layer.OldTransformer.DstRightBottom, matrix);
+            this.Layer.Transformer.DstLeftBottom = Vector2.Transform(this.Layer.OldTransformer.DstLeftBottom, matrix);
 
             this.ViewModel.Invalidate();
         }

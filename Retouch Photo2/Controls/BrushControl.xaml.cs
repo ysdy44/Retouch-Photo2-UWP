@@ -194,8 +194,8 @@ namespace Retouch_Photo2.Controls
             {
                 this.GeometryLayer.FillBrush.LinearGradientManager.Initialize
                 (
-                    startPoint: this.GeometryLayer.Transformer.SrcLeftTop,
-                    endPoint: this.GeometryLayer.Transformer.SrcRightBottom
+                    startPoint: this.GeometryLayer.Transformer.DstLeftTop,
+                    endPoint: this.GeometryLayer.Transformer.DstRightBottom
                 );
             }       
 
@@ -204,8 +204,8 @@ namespace Retouch_Photo2.Controls
             {
                 this.GeometryLayer.FillBrush.RadialGradientManager.Initialize
                 (
-                    center: Vector2.Add(this.GeometryLayer.Transformer.SrcLeftTop, this.GeometryLayer.Transformer.SrcRightBottom) / 2,
-                    radius: Vector2.Distance(this.GeometryLayer.Transformer.SrcLeftTop, this.GeometryLayer.Transformer.SrcLeftBottom) / 2
+                    center: Vector2.Add(this.GeometryLayer.Transformer.DstLeftTop, this.GeometryLayer.Transformer.DstRightBottom) / 2,
+                    radius: Vector2.Distance(this.GeometryLayer.Transformer.DstLeftTop, this.GeometryLayer.Transformer.DstLeftBottom) / 2
                 );
             }
 
@@ -214,9 +214,9 @@ namespace Retouch_Photo2.Controls
             {
                 this.GeometryLayer.FillBrush.EllipticalGradientManager.Initialize
                 (
-                    center: Vector2.Add(this.GeometryLayer.Transformer.SrcLeftTop, this.GeometryLayer.Transformer.SrcRightBottom) / 2,
-                    radiusX: Vector2.Distance(this.GeometryLayer.Transformer.SrcLeftTop, this.GeometryLayer.Transformer.SrcRightTop) / 2,
-                    radiusY: Vector2.Distance(this.GeometryLayer.Transformer.SrcLeftTop, this.GeometryLayer.Transformer.SrcLeftBottom) / 2
+                    center: Vector2.Add(this.GeometryLayer.Transformer.DstLeftTop, this.GeometryLayer.Transformer.DstRightBottom) / 2,
+                    radiusX: Vector2.Distance(this.GeometryLayer.Transformer.DstLeftTop, this.GeometryLayer.Transformer.DstRightTop) / 2,
+                    radiusY: Vector2.Distance(this.GeometryLayer.Transformer.DstLeftTop, this.GeometryLayer.Transformer.DstLeftBottom) / 2
                 );
             }
 

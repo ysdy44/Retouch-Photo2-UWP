@@ -4,7 +4,7 @@ using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using static Retouch_Photo2.Library.HomographyController;
 
-namespace Retouch_Photo2.Tools.Models.CursorTools
+namespace Retouch_Photo2.Tools.ITools
 {
     public class ITranslation : ITool
     {
@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Tools.Models.CursorTools
         public override bool Start(Vector2 point)
         {
             //Translation 
-            Layer layer = this.ViewModel.RenderLayer.GetClickedLayer(point, this.ViewModel.MatrixTransformer.InverseMatrix);
+            Layer layer = this.ViewModel.RenderLayer.GetClickedLayer(point, this.ViewModel.MatrixTransformer.Matrix);
             if (layer == null)
             {
                 return false;

@@ -11,11 +11,9 @@ namespace Retouch_Photo2.Tools.Models
         //ViewModel
         DrawViewModel ViewModel => Retouch_Photo2.App.ViewModel;
         
-
         Vector2 rightStartPoint;
         Vector2 rightStartPosition;
-
-
+        
         public ViewTool()
         {
             base.Type = ToolType.View;
@@ -24,16 +22,7 @@ namespace Retouch_Photo2.Tools.Models
             base.Page = new ViewPage();
         }
 
-
-        //@Override
-        public override void ToolOnNavigatedTo()//当前页面成为活动页面
-        {
-        }
-        public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
-        {
-        }
-
-
+        
         public override void Start(Vector2 point)
         {
             this.rightStartPoint = point;

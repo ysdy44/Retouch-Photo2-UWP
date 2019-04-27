@@ -20,6 +20,7 @@ using Retouch_Photo2.Tools.Controls;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
+using Retouch_Photo2.Models.Layers.GeometryLayers;
 
 namespace Retouch_Photo2.Tools.Pages
 {
@@ -95,12 +96,12 @@ namespace Retouch_Photo2.Tools.Pages
            
             action(this.ViewModel.CurveNodes,this.ViewModel.CurrentCurveLayer.Nodes);//Action
 
-            this.ViewModel.CurrentCurveLayer.NodesGeometry = Retouch_Photo2.Models.Layers.GeometryLayers.CurveLayer.GetNodesGeometry
-                (
+            this.ViewModel.CurrentCurveLayer.NodesGeometry = CurveLayer.GetNodesGeometry
+            (
                this.ViewModel.CanvasDevice,
                this.ViewModel.CurrentCurveLayer.Nodes
-                );
-            this.ViewModel.CurrentCurveLayer.ResetTransformer();
+            );
+            this.ViewModel.CurrentCurveLayer.TransformComplete();
             this.ViewModel.Invalidate();
         }
 
@@ -108,9 +109,6 @@ namespace Retouch_Photo2.Tools.Pages
         public override void ToolOnNavigatedTo()//当前页面成为活动页面
         {
             this.Switch.IsOn=!(this.ViewModel.CurveNodes.EditMode== NodeEditMode.Add);
-        }
-        public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
-        {
         }
     }
 }

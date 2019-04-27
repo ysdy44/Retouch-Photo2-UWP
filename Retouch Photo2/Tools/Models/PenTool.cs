@@ -23,15 +23,7 @@ namespace Retouch_Photo2.Tools.Models
             base.Page = new PenPage();
         }
 
-
-        //@Override
-        public override void ToolOnNavigatedTo()//当前页面成为活动页面
-        {
-        }
-        public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
-        {
-        }
-
+        
         bool hasStartPoint;
         Vector2 startPoint;
 
@@ -60,14 +52,14 @@ namespace Retouch_Photo2.Tools.Models
                 }
             }
 
-            this.ViewModel.CurveNodes.Operator_Start            (                point,                this.ViewModel.MatrixTransformer.Matrix,                this.ViewModel.MatrixTransformer.InverseMatrix,                this.ViewModel.CurrentCurveLayer.Nodes            );
+            this.ViewModel.CurveNodes.Operator_Start(point, this.ViewModel.MatrixTransformer.Matrix, this.ViewModel.MatrixTransformer.InverseMatrix, this.ViewModel.CurrentCurveLayer.Nodes);
             this.ViewModel.Invalidate();
         }
         public override void Delta(Vector2 point)
         {
             if (this.ViewModel.CurrentCurveLayer == null) return;
-            
-            this.ViewModel.CurveNodes.Operator_Delta            (                point,                this.ViewModel.MatrixTransformer.Matrix,                this.ViewModel.MatrixTransformer.InverseMatrix,                this.ViewModel.CurrentCurveLayer.Nodes            );
+
+            this.ViewModel.CurveNodes.Operator_Delta(point, this.ViewModel.MatrixTransformer.Matrix, this.ViewModel.MatrixTransformer.InverseMatrix, this.ViewModel.CurrentCurveLayer.Nodes);
 
             //ResetTransformer
             this.ViewModel.CurrentCurveLayer.ResetNodesGeometryByNodes();
@@ -77,8 +69,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             if (this.ViewModel.CurrentCurveLayer == null) return;
 
-            this.ViewModel.CurveNodes.Operator_Complete            (                point,                this.ViewModel.MatrixTransformer.Matrix,                this.ViewModel.MatrixTransformer.InverseMatrix,                this.ViewModel.CurrentCurveLayer.Nodes            );
-            
+            this.ViewModel.CurveNodes.Operator_Complete(point, this.ViewModel.MatrixTransformer.Matrix, this.ViewModel.MatrixTransformer.InverseMatrix, this.ViewModel.CurrentCurveLayer.Nodes);
+
             //ResetTransformer
             this.ViewModel.CurrentCurveLayer.ResetNodesGeometryByNodes();
             this.ViewModel.CurrentCurveLayer.ResetTransformerByNodesGeometry();

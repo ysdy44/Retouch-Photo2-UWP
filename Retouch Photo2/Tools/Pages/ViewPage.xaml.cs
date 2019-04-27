@@ -85,13 +85,5 @@ namespace Retouch_Photo2.Tools.Pages
             // Scale
             this.ScaleButton.Tapped += (s, e) => this.ScaleStoryboard.Begin();
         }
-
-        //@Override
-        public override void ToolOnNavigatedTo()//当前页面成为活动页面
-        {
-        }
-        public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
-        {
-        }
     }
 }

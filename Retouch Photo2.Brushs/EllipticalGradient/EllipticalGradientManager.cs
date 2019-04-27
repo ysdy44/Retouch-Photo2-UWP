@@ -2,17 +2,18 @@
 using Microsoft.Graphics.Canvas.Brushes;
 using System;
 using System.Numerics;
+using Windows.UI;
 
 namespace Retouch_Photo2.Brushs.EllipticalGradient
 {
-    public class EllipticalGradientManager
+    public class EllipticalGradientManager: IGradientManager
     {
         public EllipticalGradientType Type;
 
-        #region Outer
+        #region Gradient Outer
 
 
-        public Matrix3x2 GetTransform(Vector2 center, Vector2 xPoint) => Matrix3x2.CreateTranslation(-center) * Matrix3x2.CreateRotation(EllipticalGradientManager.VectorToRadians(xPoint - center)) * Matrix3x2.CreateTranslation(center);
+        public Matrix3x2 GetTransform(Vector2 center, Vector2 xPoint) => Matrix3x2.CreateTranslation(-center) * Matrix3x2.CreateRotation(Transformer2222.VectorToRadians(xPoint - center)) * Matrix3x2.CreateTranslation(center);
 
         private float RadiusX;
         public float GetRadiusX(Vector2 center, Vector2 xPoint) => Vector2.Distance(center, xPoint);
@@ -23,7 +24,7 @@ namespace Retouch_Photo2.Brushs.EllipticalGradient
 
         #endregion
 
-        #region Inner
+        #region Gradient Inner
 
 
         private Vector2 center;
@@ -40,6 +41,8 @@ namespace Retouch_Photo2.Brushs.EllipticalGradient
                 this.center = value;
             }
         }
+        public Vector2 OldCenter;
+
 
         private Vector2 xPoint;
         public Vector2 XPoint
@@ -57,6 +60,8 @@ namespace Retouch_Photo2.Brushs.EllipticalGradient
                 this.xPoint = value;
             }
         }
+        public Vector2 OldXPoint;
+
 
         private Vector2 yPoint;
         public Vector2 YPoint
@@ -74,7 +79,7 @@ namespace Retouch_Photo2.Brushs.EllipticalGradient
                 this.yPoint = value;
             }
         }
-
+        public Vector2 OldYPoint;
 
         #endregion
 
@@ -106,7 +111,7 @@ namespace Retouch_Photo2.Brushs.EllipticalGradient
             this.RadiusY = radiusY;
         }
 
-        public CanvasRadialGradientBrush GetBrush(ICanvasResourceCreator creator, Matrix3x2 matrix,CanvasGradientStop[] array)
+        public ICanvasBrush GetBrush(ICanvasResourceCreator creator, Matrix3x2 matrix,CanvasGradientStop[] array)
         {
             Vector2 center = Vector2.Transform(this.Center, matrix);
             Vector2 xPoint = Vector2.Transform(this.XPoint, matrix);
@@ -120,19 +125,75 @@ namespace Retouch_Photo2.Brushs.EllipticalGradient
             };
         }
 
-        /// <summary> Get radians of the vector in the coordinate system. </summary>
-        public static float VectorToRadians(Vector2 vector)
-        {
-            float tan = (float)Math.Atan(Math.Abs(vector.Y / vector.X));
 
-            //First Quantity
-            if (vector.X > 0 && vector.Y > 0) return tan;
-            //Second Quadrant
-            else if (vector.X > 0 && vector.Y < 0) return -tan;
-            //Third Quadrant  
-            else if (vector.X < 0 && vector.Y > 0) return (float)Math.PI - tan;
-            //Fourth Quadrant  
-            else return tan - (float)Math.PI;
+        #region Tool
+
+
+        public void Start(Vector2 point, Matrix3x2 matrix)
+        {
+            Vector2 xPoint = Vector2.Transform(this.XPoint, matrix);
+            if (Transformer2222.OutNodeDistance(point, xPoint) == false)
+            {
+                this.Type = EllipticalGradientType.XPoint;
+                return;
+            }
+
+            Vector2 yPoint = Vector2.Transform(this.YPoint, matrix);
+            if (Transformer2222.OutNodeDistance(point, yPoint) == false)
+            {
+                this.Type = EllipticalGradientType.YPoint;
+                return;
+            }
+
+            Vector2 center = Vector2.Transform(this.Center, matrix);
+            if (Transformer2222.OutNodeDistance(point, center) == false)
+            {
+                this.Type = EllipticalGradientType.Center;
+                return;
+            }
         }
+        public void Delta(Vector2 point, Matrix3x2 inverseMatrix)
+        {
+            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+
+            switch (this.Type)
+            {
+                case EllipticalGradientType.None:
+                    return;
+
+                case EllipticalGradientType.XPoint:
+                    this.XPoint = canvasPoint;
+                    break;
+
+                case EllipticalGradientType.YPoint:
+                    this.YPoint = canvasPoint;
+                    break;
+
+                case EllipticalGradientType.Center:
+                    this.Center = canvasPoint;
+                    break;
+
+                default:
+                    return;
+            }
+        }
+        public void Complete() => this.Type = EllipticalGradientType.None;
+
+        public void Draw(CanvasDrawingSession ds, Matrix3x2 matrix)
+        {
+            Vector2 xPoint = Vector2.Transform(this.XPoint, matrix);
+            Vector2 yPoint = Vector2.Transform(this.YPoint, matrix);
+            Vector2 center = Vector2.Transform(this.Center, matrix);
+
+            ds.DrawLine(xPoint, center, Colors.DodgerBlue);
+            ds.DrawLine(yPoint, center, Colors.DodgerBlue);
+            Transformer2222.DrawNode(ds, xPoint);
+            Transformer2222.DrawNode(ds, yPoint);
+            Transformer2222.DrawNode(ds, center);
+        }
+
+
+        #endregion
+
     }
 }

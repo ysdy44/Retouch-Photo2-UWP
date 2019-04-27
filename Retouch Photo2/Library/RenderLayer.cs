@@ -20,7 +20,7 @@ namespace Retouch_Photo2.Library
         {
             this.Layers.Clear();
 
-            if (project.Layers!=null)
+            if (project.Layers != null)
             {
                 foreach (Layer layer in project.Layers)
                 {
@@ -35,6 +35,37 @@ namespace Retouch_Photo2.Library
         #region Index & Layers
 
 
+        /// <summary>Current layer.</summary>      
+        public Layer Layer
+        {
+            get
+            {
+                if (this.Layers.Count == 0 || this.Index == -1) return null;
+
+                if (this.Index >= 0 && this.Index < this.Layers.Count) return this.Layers[this.Index];
+
+                return null;
+            }
+            set
+            {
+                if (value == null || this.Layers == null || this.Layers.Count == 0)
+                {
+                    this.Index = -1;
+                    return;
+                }
+
+                if (this.Layers.Contains(value))
+                {
+                    this.Index = this.Layers.IndexOf(value);
+                    return;
+                }
+
+                this.Index = -1;
+                return;
+            }
+        }
+
+
         /// <summary>Index of layers.</summary>      
         public int Index
         {
@@ -42,11 +73,11 @@ namespace Retouch_Photo2.Library
             get
             {
                 if (this.Layers == null || this.Layers.Count == 0) return -1;
-                if (this.Layers.Count == 1 ) return 0;
+                if (this.Layers.Count == 1) return 0;
                 return index;
             }
         }
-        private int index=-1;
+        private int index = -1;
 
         /// <summary> All layers. </summary>  
         public ObservableCollection<Layer> Layers = new ObservableCollection<Layer>();
@@ -58,7 +89,7 @@ namespace Retouch_Photo2.Library
         /// <param name="layer"> Which insert</param>
         public void Insert(Layer layer)
         {
-            if (this.Layers.Count==0)
+            if (this.Layers.Count == 0)
             {
                 this.Layers.Add(layer);
                 this.Index = 0;
@@ -68,7 +99,7 @@ namespace Retouch_Photo2.Library
             if (this.Index == -1) this.Index = 0;
             if (this.Index >= this.Layers.Count) this.Index = this.Layers.Count - 1;
 
-            this.Layers.Insert(this.Index , layer);
+            this.Layers.Insert(this.Index, layer);
         }
 
         /// <summary>
@@ -85,21 +116,27 @@ namespace Retouch_Photo2.Library
         /// Click on the layer
         /// </summary>
         /// <param name="point"> Click point</param>
-        /// <param name="inverseMatrix">inverse matrix </param>
+        /// <param name="matrix">matrix </param>
         /// <returns></returns>
-        public Layer GetClickedLayer(Vector2 point, Matrix3x2 inverseMatrix)
+        public Layer GetClickedLayer(Vector2 point, Matrix3x2 matrix)
         {
-            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
-
             foreach (Layer layer in this.Layers)
             {
                 if (layer.IsVisual == false || layer.Opacity == 0) continue;
 
-                if (HomographyController.Transformer.ContainsBound(canvasPoint, layer.Transformer))
+                App.ViewModel.Text = layer.Name;
+
+                Vector2 leftTop = Vector2.Transform(layer.Transformer.DstLeftTop, matrix);
+                Vector2 rightTop = Vector2.Transform(layer.Transformer.DstRightTop, matrix);
+                Vector2 rightBottom = Vector2.Transform(layer.Transformer.DstRightBottom, matrix);
+                Vector2 leftBottom = Vector2.Transform(layer.Transformer.DstLeftBottom, matrix);
+
+                if (HomographyController.Transformer.InQuadrangle(point, leftTop, rightTop, rightBottom, leftBottom))
                 {
                     return layer;
                 }
             }
+            App.ViewModel.Text = "Null";
 
             return null;
         }
@@ -126,16 +163,16 @@ namespace Retouch_Photo2.Library
                         ExtendX = CanvasEdgeBehavior.Wrap,
                         ExtendY = CanvasEdgeBehavior.Wrap,
                         Source = CanvasBitmap.CreateFromColors
-                             (
-                                resourceCreator: creator,
-                                widthInPixels: 2,
-                                heightInPixels: 2,
-                                colors: new Color[] //从数组创建2x2图片
-                                {
-                                   Color.FromArgb(255, 233, 233, 233),Colors.White,
-                                   Colors.White,Color.FromArgb(255, 233, 233, 233),
-                                }
-                             )
+                        (
+                            resourceCreator: creator,
+                            widthInPixels: 2,
+                            heightInPixels: 2,
+                            colors: new Color[] //从数组创建2x2图片
+                            {
+                                Color.FromArgb(255, 233, 233, 233),Colors.White,
+                                Colors.White,Color.FromArgb(255, 233, 233, 233),
+                            }
+                        )
                     }
                 }
             };
@@ -147,13 +184,13 @@ namespace Retouch_Photo2.Library
         ///   [Canvas] To [Virtual] on MatrixTransformer
         /// </summary>   
         public ICanvasImage RenderTarget;
-        public ICanvasImage GetRender(ICanvasResourceCreator creator, Matrix3x2 canvasToVirtualMatrix, int width, int height, float scale)
+        public ICanvasImage GetRender(Matrix3x2 canvasToVirtualMatrix, int width, int height, float scale)
         {
             ICanvasImage image = new ColorSourceEffect { Color = Colors.White };
 
             for (int i = this.Layers.Count - 1; i >= 0; i--)
             {
-                image = Layer.LayerRender(creator, this.Layers[i], image, canvasToVirtualMatrix);
+                image = Layer.LayerRender(this.Layers[i], image, canvasToVirtualMatrix);
             }
 
 
@@ -165,20 +202,20 @@ namespace Retouch_Photo2.Library
                 Source = image,
                 SourceRectangle = new Rect(leftTop.ToPoint(), rightBottom.ToPoint()),
             };
-        }    
-        public ICanvasImage GetRenderWithJumpedQueueLayer(ICanvasResourceCreator creator, Layer jumpedQueueLayer, Matrix3x2 canvasToVirtualMatrix, int width, int height, float scale)
+        }
+        public ICanvasImage GetRenderWithJumpedQueueLayer(Layer jumpedQueueLayer, Matrix3x2 canvasToVirtualMatrix, int width, int height, float scale)
         {
             ICanvasImage image = new ColorSourceEffect { Color = Colors.White };
 
             for (int i = this.Layers.Count - 1; i >= 0; i--)
             {
-                image = Layer.LayerRender(creator, this.Layers[i], image, canvasToVirtualMatrix);
+                image = Layer.LayerRender(this.Layers[i], image, canvasToVirtualMatrix);
 
                 /// Layer: 
                 ///    jumped the Queue (Index: 0~n)     
                 if (this.Index == i)
                 {
-                    image = Layer.LayerRender(creator, jumpedQueueLayer, image, canvasToVirtualMatrix);
+                    image = Layer.LayerRender(jumpedQueueLayer, image, canvasToVirtualMatrix);
                 }
             }
 
@@ -186,7 +223,7 @@ namespace Retouch_Photo2.Library
             ///    jumped the Queue  (Index: -1)
             if (this.Index == -1)
             {
-                image = Layer.LayerRender(creator, jumpedQueueLayer, image, canvasToVirtualMatrix); 
+                image = Layer.LayerRender(jumpedQueueLayer, image, canvasToVirtualMatrix);
             }
 
 
@@ -205,7 +242,7 @@ namespace Retouch_Photo2.Library
         /// Draw
         ///   [Virtual] To [Control] on MatrixTransformer
         /// </summary>
-        public void Draw(CanvasDrawingSession ds, Matrix3x2 virtualToControlMatrix,Color shadowColor)
+        public void Draw(CanvasDrawingSession ds, Matrix3x2 virtualToControlMatrix, Color shadowColor)
         {
             if (this.RenderTarget == null) return;
 

@@ -45,9 +45,8 @@ namespace Retouch_Photo2.Tools
 
         public override void Draw(CanvasDrawingSession ds)
         {
-            if (this.ICursorTool.Draw(ds)) return;
-
-            this.IClickedTool.Draw(ds);
+            this.ICreateTool.Draw(ds); 
+            this.ICursorTool.Draw(ds); 
         }
     }
 }

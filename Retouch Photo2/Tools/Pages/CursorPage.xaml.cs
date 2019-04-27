@@ -11,14 +11,6 @@ namespace Retouch_Photo2.Tools.Pages
         {
             this.InitializeComponent();
             this.MoreButton.Tapped += (s,e) => this.MoreFlyout.ShowAt(this.MoreButton);
-        }
-
-        //@Override
-        public override void ToolOnNavigatedTo()//当前页面成为活动页面
-        {
-        }
-        public override void ToolOnNavigatedFrom()//当前页面不再成为活动页面
-        {
-        }        
+        }   
     }
 }

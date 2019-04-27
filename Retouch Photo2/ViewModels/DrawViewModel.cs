@@ -89,7 +89,6 @@ namespace Retouch_Photo2.ViewModels
 
             this.RenderLayer.RenderTarget = this.RenderLayer.GetRender
             (
-                this.CanvasDevice,
                 this.MatrixTransformer.CanvasToVirtualMatrix,
                 this.MatrixTransformer.Width,
                 this.MatrixTransformer.Height,
@@ -132,7 +131,6 @@ namespace Retouch_Photo2.ViewModels
         {
             this.RenderLayer.RenderTarget = this.RenderLayer.GetRenderWithJumpedQueueLayer
             (
-                this.CanvasDevice,
                 jumpedQueueLayer,
                 this.MatrixTransformer.CanvasToVirtualMatrix,
                 this.MatrixTransformer.Width,
@@ -197,41 +195,27 @@ namespace Retouch_Photo2.ViewModels
         /// <summary>当前图层</summary>     
         public Layer CurrentLayer
         {
-            get
-            {
-                if (this.RenderLayer.Layers.Count == 0 || this.SelectedIndex == -1) return null;
-
-                if (this.SelectedIndex >= 0 && this.SelectedIndex < this.RenderLayer.Layers.Count()) return this.RenderLayer.Layers[this.SelectedIndex];
-
-                return null;
-            }
+            get => this.RenderLayer.Layer ;
             set
             {
-                if (value == null || this.RenderLayer.Layers == null || this.RenderLayer.Layers.Count == 0)
-                {
-                    //Geometry
+                //Geometry
+                if (value is GeometryLayer geometryLayer)
+                    this.CurrentGeometryLayer = geometryLayer;
+                else
                     this.CurrentGeometryLayer = null;
 
-                    this.SelectedIndex = -1;
-                    OnPropertyChanged(nameof(CurrentLayer));
-                    return;
-                }
-
-                if (this.RenderLayer.Layers.Contains(value))
-                {
-                    this.SelectedIndex = this.RenderLayer.Layers.IndexOf(value);
-
-                    //Geometry
-                    this.CurrentGeometryLayer = (value is GeometryLayer geometryLayer) ? geometryLayer : null;
+                //To
+                if (value != null)                
+                    value.LayerOnNavigatedTo();
                 
-                    OnPropertyChanged(nameof(CurrentLayer));
-                    return;
-                }
+                //Form
+                if (this.RenderLayer.Layer != null)                
+                    this.RenderLayer.Layer.LayerOnNavigatedFrom();                
+             
+                this.RenderLayer.Layer = value;
 
-                this.SelectedIndex = -1;
                 OnPropertyChanged(nameof(CurrentLayer));
-                return;
-            }
+            }                 
         }
 
         /// <summary>当前几何图层</summary>     
@@ -362,6 +346,9 @@ namespace Retouch_Photo2.ViewModels
         #endregion
 
 
+        #region Library
+
+
         //Curve
         public CurveNodes CurveNodes = new CurveNodes();
         
@@ -401,7 +388,11 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private MarqueeMode marqueeMode = MarqueeMode.None;
-        
+
+
+                #endregion
+
+
         /// <summary> 文本 </summary>      
         public string Text
         {

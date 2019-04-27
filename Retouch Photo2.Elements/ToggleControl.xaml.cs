@@ -56,7 +56,7 @@ namespace Retouch_Photo2.Elements
         {
             this.ContentPresenter.Background = IsChecked ? this.AccentColor : this.UnAccentColor;
             this.ContentPresenter.Foreground = IsChecked ? this.CheckColor : this.UnCheckColor;
-            
+
             this.CheckedChanged?.Invoke(isChecked);
         }
 
