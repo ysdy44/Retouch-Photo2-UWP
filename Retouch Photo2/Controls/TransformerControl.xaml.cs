@@ -61,6 +61,12 @@ namespace Retouch_Photo2.Controls
         public TransformerControl()
         {
             this.InitializeComponent();
+
+            this.IndicatorControl.ModeChanged += (mode) => 
+            {
+
+            };
+
             /*
              
             this.WPicker.Minimum = int.MinValue;
@@ -133,6 +139,8 @@ namespace Retouch_Photo2.Controls
         }
         private void NavigatorSet(Transformer newValue, Transformer oldValue)
         {
+            var radians = Transformer.VectorToRadians(newValue.DstLeft - newValue.DstRight);
+            this.IndicatorControl.Radians = (radians * 180 / Math.PI + 180);
             /*
                 if (oldValue.XScale != newValue.XScale) this.WPicker.Value = (int)(newValue.XScale * 100f);
                 if (oldValue.YScale != newValue.YScale) this.HPicker.Value = (int)(newValue.YScale * 100f);

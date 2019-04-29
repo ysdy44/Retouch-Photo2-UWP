@@ -15,7 +15,7 @@ namespace Retouch_Photo2.Library
         /// <summary> Maintain a ratio when scaling. </summary>
         public static bool IsRatio => App.ViewModel.KeyShift;
         /// <summary> Step Frequency when spinning. </summary>
-        public static bool IsStepFrequency => App.ViewModel.KeyShift;
+        public static bool IsStepFrequency => App.ViewModel.KeyAlt;
 
 
         //---------------------------------------------------------Transformer--------------------------------------------------------//

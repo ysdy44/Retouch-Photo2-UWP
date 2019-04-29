@@ -126,6 +126,9 @@
     <Compile Include="Controls\TransformerControls\Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TransformerControls\IndicatorControl.xaml.cs">
+      <DependentUpon>IndicatorControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Library\Adjustment.cs" />
     <Compile Include="Library\CanvasOperator.cs" />
     <Compile Include="Library\CurveNodes.cs" />
@@ -709,6 +712,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TransformerControls\Icon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TransformerControls\IndicatorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
