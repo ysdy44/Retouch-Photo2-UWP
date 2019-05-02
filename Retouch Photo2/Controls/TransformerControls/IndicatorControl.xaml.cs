@@ -10,6 +10,8 @@ namespace Retouch_Photo2.Controls.TransformerControls
 
     public enum IndicatorMode
     {
+        None,
+
         LeftTop,
         RightTop,
         RightBottom,
@@ -36,7 +38,7 @@ namespace Retouch_Photo2.Controls.TransformerControls
             get { return (IndicatorMode)GetValue(LayerProperty); }
             set { SetValue(LayerProperty, value); }
         }
-        public static readonly DependencyProperty LayerProperty = DependencyProperty.Register(nameof(Mode), typeof(IndicatorMode), typeof(IndicatorControl), new PropertyMetadata(IndicatorMode.LeftTop, (sender, e) =>
+        public static readonly DependencyProperty LayerProperty = DependencyProperty.Register(nameof(Mode), typeof(IndicatorMode), typeof(IndicatorControl), new PropertyMetadata(IndicatorMode.None, (sender, e) =>
         {
             IndicatorControl con = (IndicatorControl)sender;
 

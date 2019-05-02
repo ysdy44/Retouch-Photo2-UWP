@@ -198,6 +198,12 @@ namespace Retouch_Photo2.ViewModels
             get => this.RenderLayer.Layer ;
             set
             {
+                //Transformer
+                if (value == null)
+                    this.Transformer = null;
+                else
+                    this.Transformer = value.Transformer;
+
                 //Geometry
                 if (value is GeometryLayer geometryLayer)
                     this.CurrentGeometryLayer = geometryLayer;
@@ -215,7 +221,19 @@ namespace Retouch_Photo2.ViewModels
                 this.RenderLayer.Layer = value;
 
                 OnPropertyChanged(nameof(CurrentLayer));
-            }                 
+            }
+        }
+
+        /// <summary>变换</summary>    
+        private Transformer? transformer;
+        public Transformer? Transformer
+        {
+            get => this.transformer;
+            set
+            {
+                this.transformer = value;
+                OnPropertyChanged(nameof(Transformer));
+            }
         }
 
         /// <summary>当前几何图层</summary>     
@@ -271,18 +289,6 @@ namespace Retouch_Photo2.ViewModels
             {
                 this.color = value;
                 OnPropertyChanged(nameof(Color));
-            }
-        }
-
-        /// <summary>变换</summary>    
-        private Transformer transformer;
-        public Transformer Transformer
-        {
-            get => this.transformer;
-            set
-            {
-                this.transformer = value;
-                OnPropertyChanged(nameof(Transformer));
             }
         }
 

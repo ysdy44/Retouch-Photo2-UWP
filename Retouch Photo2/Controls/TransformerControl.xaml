@@ -11,67 +11,86 @@
     d:DesignHeight="400"
     d:DesignWidth="200">
 
-
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="46"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="0" Grid.Row="0" Text="Width" Style="{StaticResource AppTextBlock}"/>
-        <Border Grid.Column="0" Grid.Row="1" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
-            <pickers:NumberPicker x:Name="WPicker" Width="Auto" Height="Auto" Unit="dp" />
+        <Grid x:Name="IndicatorRootGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="46"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Width" Style="{StaticResource AppTextBlock}"/>
+            <Border Grid.Column="0" Grid.Row="1" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
+                <pickers:NumberPicker x:Name="WPicker" Width="Auto" Height="Auto" Unit="dp" />
+            </Border>
+
+            <TextBlock Grid.Column="2" Grid.Row="0" Text="Height" Style="{StaticResource AppTextBlock}"/>
+            <Border Grid.Column="2" Grid.Row="1" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
+                <pickers:NumberPicker x:Name="HPicker" Width="Auto" Height="Auto" Unit="dp"/>
+            </Border>
+
+            <elements:ToggleControl x:Name="RatioToggleControl" Grid.Column="1" Grid.Row="1" >
+                <elements:ToggleControl.CenterContent>
+                    <FontIcon Glyph="&#x1F512;" FontFamily="Segoe UI Symbol" FontSize="18" />
+                </elements:ToggleControl.CenterContent>
+            </elements:ToggleControl>
+
+            <!--/////////////////////////////////////////////////////////-->
+
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Rotate" Style="{StaticResource AppTextBlock}"/>
+            <Border Grid.Column="0" Grid.Row="3" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
+                <pickers:NumberPicker x:Name="RPicker" Width="Auto" Height="Auto" Unit="º" />
+            </Border>
+
+            <TextBlock Grid.Column="2" Grid.Row="2" Text="Skew" Style="{StaticResource AppTextBlock}"/>
+            <Border Grid.Column="2" Grid.Row="3" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
+                <pickers:NumberPicker x:Name="SPicker" Width="Auto" Height="Auto" Unit="º" />
+            </Border>
+
+            <!--/////////////////////////////////////////////////////////-->
+
+            <TextBlock Grid.Column="0" Grid.Row="4" Text="X" Style="{StaticResource AppTextBlock}"/>
+            <Border Grid.Column="0" Grid.Row="5" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
+                <pickers:NumberPicker x:Name="XPicker" Width="Auto" Height="Auto" />
+            </Border>
+
+            <TextBlock Grid.Column="2" Grid.Row="4" Text="Y" Style="{StaticResource AppTextBlock}"/>
+            <Border Grid.Column="2" Grid.Row="5" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
+                <pickers:NumberPicker x:Name="YPicker" Width="Auto" Height="Auto" />
+            </Border>
+
+            <!--/////////////////////////////////////////////////////////-->
+
+                <transformercontrols:IndicatorControl x:Name="IndicatorControl"
+                     Grid.Row="6" Grid.ColumnSpan="3"                                                                                    
+                     Background="{ThemeResource AppFill}"
+                     BorderBrush="{ThemeResource AppStroke}"
+                    />
+ 
+        </Grid>
+
+
+        <Border x:Name="RemoteRootGrid" Padding="0,10">
+            <transformercontrols:RemoteControl x:Name="RemoteControl" 
+                     Width="Auto" Height="Auto"                                               
+                     Background="{ThemeResource AppForeground}"
+                     BorderBrush="{ThemeResource AppBorderBrush}"
+                     Foreground="{ThemeResource AppText}"
+                      />
         </Border>
 
-        <TextBlock Grid.Column="2" Grid.Row="0" Text="Height" Style="{StaticResource AppTextBlock}"/>
-        <Border Grid.Column="2" Grid.Row="1" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
-            <pickers:NumberPicker x:Name="HPicker" Width="Auto" Height="Auto" Unit="dp"/>
-        </Border>
 
-        <elements:ToggleControl x:Name="RatioToggleControl" Grid.Column="1" Grid.Row="1" >
-            <elements:ToggleControl.CenterContent>
-                <FontIcon Glyph="&#x1F512;" FontFamily="Segoe UI Symbol" FontSize="18" />
-            </elements:ToggleControl.CenterContent>
-        </elements:ToggleControl>
-
-        <!--/////////////////////////////////////////////////////////-->
-
-        <TextBlock Grid.Column="0" Grid.Row="2" Text="Rotate" Style="{StaticResource AppTextBlock}"/>
-        <Border Grid.Column="0" Grid.Row="3" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
-            <pickers:NumberPicker x:Name="RPicker" Width="Auto" Height="Auto" Unit="º" />
-        </Border>
-
-        <TextBlock Grid.Column="2" Grid.Row="2" Text="Skew" Style="{StaticResource AppTextBlock}"/>
-        <Border Grid.Column="2" Grid.Row="3" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
-            <pickers:NumberPicker x:Name="SPicker" Width="Auto" Height="Auto" Unit="º" />
-        </Border>
-
-        <!--/////////////////////////////////////////////////////////-->
-
-        <TextBlock Grid.Column="0" Grid.Row="4" Text="X" Style="{StaticResource AppTextBlock}"/>
-        <Border Grid.Column="0" Grid.Row="5" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
-            <pickers:NumberPicker x:Name="XPicker" Width="Auto" Height="Auto" />
-        </Border>
-
-        <TextBlock Grid.Column="2" Grid.Row="4" Text="Y" Style="{StaticResource AppTextBlock}"/>
-        <Border Grid.Column="2" Grid.Row="5" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
-            <pickers:NumberPicker x:Name="YPicker" Width="Auto" Height="Auto" />
-        </Border>
-
-        <!--/////////////////////////////////////////////////////////-->
-
-        <transformercontrols:IndicatorControl x:Name="IndicatorControl" Grid.Row="6" Grid.ColumnSpan="3"/>
-
+        <Button x:Name="RemoteOrIndicatorButton" Width="30" Content="&#xECE7;" FontSize="18" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
 
     </Grid>
 </UserControl>

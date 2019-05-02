@@ -151,7 +151,7 @@
             <!--Transformer-->
             <local:MenuLayout x:Name="TransformerLayout" Text="Transformer" Placement="Bottom" Visibility="Collapsed">
                 <local:MenuLayout.ContentChild>
-                    <con:TransformerControl Transformer="{x:Bind ViewModel.Transformer,Mode=OneWay}" Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
+                    <con:TransformerControl Transformer="{x:Bind ViewModel.Transformer,Mode=OneWay}" />
                 </local:MenuLayout.ContentChild>
             </local:MenuLayout>
             

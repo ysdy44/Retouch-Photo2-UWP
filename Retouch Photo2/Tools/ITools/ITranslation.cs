@@ -43,6 +43,8 @@ namespace Retouch_Photo2.Tools.ITools
             else
             {
                 this.ViewModel.TransformerDictionary[TransformerMode.Translation].Delta(point, layer, this.ViewModel.MatrixTransformer.Matrix, this.ViewModel.MatrixTransformer.InverseMatrix);
+
+                this.ViewModel.Transformer = layer.Transformer;//Transformer
                 this.ViewModel.Invalidate();
                 return true;
             }

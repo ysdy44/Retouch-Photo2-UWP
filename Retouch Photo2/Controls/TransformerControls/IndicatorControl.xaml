@@ -6,7 +6,8 @@
     Background="{ThemeResource SystemControlBackgroundBaseHighBrush}"
     BorderBrush="{ThemeResource SystemControlBackgroundAltHighBrush}"
     Width="120"
-    Height="120">
+    Height="120"
+    >
 
     <UserControl.Resources>
 

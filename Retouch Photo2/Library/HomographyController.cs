@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Retouch_Photo2.Library
 {
-    public unsafe class HomographyController
+    public class HomographyController
     {
 
         /// <summary> Scaling around the center. </summary>
