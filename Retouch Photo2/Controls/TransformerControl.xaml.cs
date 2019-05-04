@@ -33,6 +33,14 @@ namespace Retouch_Photo2.Controls
                     this.IndicatorRootGrid.Visibility = Visibility.Visible;
                 }
 
+                if (this.remoteOrIndicator==true&& value==false)
+                {
+                    if (this.ViewModel.CurrentLayer is Layer layer)
+                    {
+                        this.Transformer = layer.Transformer;
+                    }
+                }
+
                 this.remoteOrIndicator = value;
             }
         }
@@ -119,8 +127,7 @@ namespace Retouch_Photo2.Controls
         public TransformerControl()
         {
             this.InitializeComponent();
-
-
+                    
             //RemoteOrIndicator
             this.RemoteOrIndicator = false;
             this.RemoteOrIndicatorButton.Tapped += (s, e) => this.RemoteOrIndicator = !this.RemoteOrIndicator;
@@ -138,6 +145,7 @@ namespace Retouch_Photo2.Controls
                 }
             };
 
+            ///////////////////////////////////////////////
 
             //Remote
             this.RemoteControl.Moved += (s, value) =>
@@ -147,7 +155,6 @@ namespace Retouch_Photo2.Controls
                     Transformer transformer = layer.Transformer;
                     Library.HomographyController.Transformer.Add(layer, transformer, value);
 
-                    this.Transformer = layer.Transformer;
                     this.ViewModel.Invalidate();
                 }
             };
@@ -169,14 +176,14 @@ namespace Retouch_Photo2.Controls
                     else
                         Library.HomographyController.Transformer.Add(layer, transformer, new Vector2(0, value.Y));
 
-                    this.Transformer = layer.Transformer;
                     this.ViewModel.Invalidate();
                 }
             };
             this.RemoteControl.ValueChangeCompleted += (s, value) => this.ViewModel.Invalidate();
 
+            ///////////////////////////////////////////////
 
-            this.WPicker.Minimum = int.MinValue;
+            this.WPicker.Minimum = 1;
             this.WPicker.Maximum = int.MaxValue;
             this.WPicker.ValueChange += (sender, value) =>
             {
@@ -206,7 +213,7 @@ namespace Retouch_Photo2.Controls
                 }
             };
 
-            this.HPicker.Minimum = int.MinValue;
+            this.HPicker.Minimum = 1;
             this.HPicker.Maximum = int.MaxValue;
             this.HPicker.ValueChange += (s, value) =>
             {
@@ -235,6 +242,110 @@ namespace Retouch_Photo2.Controls
                     }
                 }
             };
+
+            ///////////////////////////////////////////////
+
+            this.RPicker.Minimum = -180;
+            this.RPicker.Maximum = 180;
+            this.RPicker.ValueChange += (sender, value) =>
+            {
+                if (this.Transformer is Transformer transformer)
+                {
+                    if (this.ViewModel.CurrentLayer is Layer layer)
+                    {
+                        layer.OldTransformer = layer.Transformer;
+                        
+                        Vector2 horizontal = layer.Transformer.DstRight - layer.Transformer.DstLeft;
+                        float radians = this.GetRadians(horizontal);
+
+                        float radian = (value - radians) / 180.0f * Retouch_Photo2.Library.HomographyController.Transformer.PI;
+                        Vector2 vector = this.GetVectorWithIndicatorMode(layer.Transformer, this.Mode);
+
+                        Matrix3x2 matrix = Matrix3x2.CreateRotation(radian, vector);
+                        Retouch_Photo2.Library.HomographyController.Transformer.Multiplies(layer, layer.OldTransformer, matrix);
+
+                        this.Transformer = layer.Transformer;
+                        this.ViewModel.Invalidate();
+                    }
+                }
+            };
+
+            this.SPicker.Minimum = -90;
+            this.SPicker.Maximum = 90;
+            this.SPicker.ValueChange += (s, value) =>
+            {
+                if (this.Transformer is Transformer transformer)
+                {
+                    if (this.ViewModel.CurrentLayer is Layer layer)
+                    {
+                        float horizontalHalf = Vector2.Distance( layer.Transformer.DstCenter , layer.Transformer.DstRight);
+                        float verticalHalf = Vector2.Distance
+                        (                       
+                             layer.Transformer.DstCenter,
+                             Retouch_Photo2.Library.HomographyController.Transformer.FootPoint
+                             (
+                                  layer.Transformer.DstCenter,
+                                  layer.Transformer.DstLeftBottom,
+                                  layer.Transformer.DstRightBottom
+                             )
+                        );                       
+
+                        float radians = this.GetRadians(layer.Transformer.DstRight - layer.Transformer.DstLeft)
+                         / 180.0f * Retouch_Photo2.Library.HomographyController.Transformer.PI;
+                        float skew = -value / 180.0f * Retouch_Photo2.Library.HomographyController.Transformer.PI;
+
+
+                        //Vector2
+                        Vector2 postion;
+                        Vector2 center;
+                        switch (this.Mode)
+                        {
+                            case IndicatorMode.LeftTop:
+                            case IndicatorMode.Top:
+                            case IndicatorMode.RightTop:
+                                postion = new Vector2(-horizontalHalf, 0);
+                                center = layer.Transformer.DstTop;
+                                break;
+
+                            case IndicatorMode.LeftBottom:
+                            case IndicatorMode.Bottom:
+                            case IndicatorMode.RightBottom:
+                                postion = new Vector2(-horizontalHalf, -verticalHalf * 2);
+                                center = layer.Transformer.DstBottom;
+                                break;
+
+                            default:
+                                postion = new Vector2(-horizontalHalf, -verticalHalf);
+                                center = layer.Transformer.DstCenter;
+                                break;
+                        }
+
+
+                        //Transformer
+                        layer.OldTransformer = Retouch_Photo2.Library.HomographyController.Transformer.CreateFromSize
+                        (
+                            width: horizontalHalf * 2,
+                            height: verticalHalf*2,
+                            postion: postion
+                         );
+                        
+
+                        //Matrix
+                        Matrix3x2 matrix = 
+                        Matrix3x2.CreateSkew(skew, 0) *
+                        Matrix3x2.CreateRotation(radians) *
+                        Matrix3x2.CreateTranslation(center);
+                        
+
+                        Retouch_Photo2.Library.HomographyController.Transformer.Multiplies(layer, layer.OldTransformer, matrix);
+                        
+                        this.Transformer = layer.Transformer;
+                        this.ViewModel.Invalidate();
+                    }
+                }
+            };
+
+            ///////////////////////////////////////////////
 
             this.XPicker.Minimum = int.MinValue;
             this.XPicker.Maximum = int.MaxValue;
@@ -271,6 +382,8 @@ namespace Retouch_Photo2.Controls
                     }
                 }
             };
+
+            ///////////////////////////////////////////////
 
             this.RPicker.Minimum = -180;
             this.RPicker.Maximum = 180;
@@ -374,11 +487,11 @@ namespace Retouch_Photo2.Controls
         private float GetRadians(Vector2 vector)
         {
             float radians = Library.HomographyController.Transformer.VectorToRadians(vector);
-            if (float.IsNaN(radians)) return 0;
+            if (float.IsNaN(radians)) return 0.0f;
 
-            radians = radians * 180 / Library.HomographyController.Transformer.PI;
+            radians = radians * 180.0f / Library.HomographyController.Transformer.PI;
 
-            return radians % 180;
+            return radians % 180.0f;
         }
 
         private float GetSkew(Vector2 vector, float radians) 
@@ -386,10 +499,10 @@ namespace Retouch_Photo2.Controls
             float skew = Library.HomographyController.Transformer.VectorToRadians(vector);
             if (float.IsNaN(skew)) return 0;
 
-            skew = skew * 180 / Library.HomographyController.Transformer.PI;
-            skew = skew - radians - 90;
+            skew = skew * 180.0f / Library.HomographyController.Transformer.PI;
+            skew = skew - radians - 90.0f;
 
-            return skew % 180;
+            return skew % 180.0f;
         }
                 
     }

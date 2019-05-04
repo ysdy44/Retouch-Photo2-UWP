@@ -11,11 +11,16 @@ namespace Retouch_Photo2.Adjustments.Items
 
         public TemperatureAdjustmentItem() => base.Name = TemperatureAdjustment.Name;
 
-        //@override
-        public override Adjustment GetAdjustment() => new TemperatureAdjustment()
+        //@override      
+        public override Adjustment GetNewAdjustment()
         {
-            TemperatureAdjustmentItem = this
-        };
+            TemperatureAdjustment adjustment = new TemperatureAdjustment();
+
+            adjustment.TemperatureAdjustmentItem.Temperature = this.Temperature;
+            adjustment.TemperatureAdjustmentItem.Tint = this.Tint;
+
+            return adjustment;
+        }
         public override void Reset()
         {
             this.Temperature = 0.0f;

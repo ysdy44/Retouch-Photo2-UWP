@@ -11,10 +11,14 @@ namespace Retouch_Photo2.Adjustments.Items
         public ExposureAdjustmentItem() => base.Name = ExposureAdjustment.Name;
 
         //@override
-        public override Adjustment GetAdjustment() => new ExposureAdjustment()
+        public override Adjustment GetNewAdjustment()
         {
-            ExposureAdjustmentItem = this
-        };
+            ExposureAdjustment adjustment = new ExposureAdjustment();
+
+            adjustment.ExposureAdjustmentItem.Exposure = this.Exposure;
+
+            return adjustment;
+        }
         public override void Reset()
         {
             this.Exposure = 0.0f;

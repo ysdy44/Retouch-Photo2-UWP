@@ -34,7 +34,6 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.point = point;
             this.StartPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.InverseMatrix);
-            VectRect rect = new VectRect(this.StartPoint, this.StartPoint, this.ViewModel.MarqueeMode);
 
             this.Layer = LineLayer.CreateFromRect(this.ViewModel.CanvasDevice, this.StartPoint, this.StartPoint, this.ViewModel.Color);
             this.ViewModel.InvalidateWithJumpedQueueLayer(this.Layer);
@@ -44,7 +43,8 @@ namespace Retouch_Photo2.Tools.Models
             Vector2 endPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.InverseMatrix);
             VectRect rect = new VectRect(this.StartPoint, endPoint, this.ViewModel.MarqueeMode);
 
-            this.Layer.Transformer = Transformer.CreateFromVector(this.StartPoint, endPoint);
+            this.Layer.StartPoint = this.StartPoint;
+            this.Layer.EndPoint = endPoint;
             this.ViewModel.InvalidateWithJumpedQueueLayer(this.Layer);
         }
         public override void Complete(Vector2 point)
@@ -68,12 +68,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             if (this.Layer == null) return;
 
-            Matrix3x2 matrix = this.ViewModel.MatrixTransformer.Matrix;
-            Vector2 leftTop = Vector2.Transform(this.Layer.Transformer.DstLeftTop, matrix);
-            Vector2 rightBottom = Vector2.Transform(this.Layer.Transformer.DstRightBottom, matrix);
-
-            ds.DrawLine(leftTop, rightBottom, this.Layer.Stroke, this.Layer.StrokeWidth);
+            this.Layer.Draw(ds, this.ViewModel.MatrixTransformer.Matrix);
         }
-
     }
 }

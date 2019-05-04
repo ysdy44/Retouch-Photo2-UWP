@@ -9,10 +9,12 @@ namespace Retouch_Photo2.Adjustments.Items
         public GrayAdjustmentItem() => base.Name = GrayAdjustment.Name;
 
         //@override
-        public override Adjustment GetAdjustment() => new GrayAdjustment()
+        public override Adjustment GetNewAdjustment()
         {
-            GrayAdjustmentItem = this
-        };
+            GrayAdjustment adjustment = new GrayAdjustment();
+
+            return adjustment;
+        }
         public override void Reset() { }
         public override ICanvasImage GetRender(ICanvasImage image)
         {

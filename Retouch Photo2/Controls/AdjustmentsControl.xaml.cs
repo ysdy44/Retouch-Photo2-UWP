@@ -122,7 +122,7 @@ namespace Retouch_Photo2.Controls
                     IEnumerable<Adjustment> adjustments =
                        from adjustmentItem
                        in filter.AdjustmentItems
-                       select adjustmentItem.GetAdjustment();
+                       select adjustmentItem.GetNewAdjustment();
 
                     this.Replace(adjustments);
                 }
@@ -155,10 +155,14 @@ namespace Retouch_Photo2.Controls
         private void Replace(IEnumerable<Adjustment> adjustments)
         {
             if (this.Layer == null) return;
-            this.Layer.AdjustmentManager.Adjustments.Clear();
-            this.Layer.AdjustmentManager.Adjustments.AddRange(adjustments);
 
-            this.Invalidate(adjustments);
+            this.Layer.AdjustmentManager.Adjustments.Clear();
+            foreach (Adjustment adjustment in adjustments)
+            {
+                this.Layer.AdjustmentManager.Adjustments.Add(adjustment);
+            }
+
+            this.Invalidate(this.Layer.AdjustmentManager.Adjustments);
             this.ViewModel.Invalidate();
         }
          

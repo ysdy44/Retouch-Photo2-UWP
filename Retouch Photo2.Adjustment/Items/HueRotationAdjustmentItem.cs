@@ -11,10 +11,14 @@ namespace Retouch_Photo2.Adjustments.Items
         public HueRotationAdjustmentItem() => base.Name = HueRotationAdjustment.Name;
 
         //@override
-        public override Adjustment GetAdjustment() => new HueRotationAdjustment()
+        public override Adjustment GetNewAdjustment()
         {
-            HueRotationAdjustmentitem = this
-        };
+            HueRotationAdjustment adjustment = new HueRotationAdjustment();
+
+            adjustment.HueRotationAdjustmentitem.Angle = this.Angle;
+
+            return adjustment;
+        }
         public override void Reset()
         {
             this.Angle = 0.0f;

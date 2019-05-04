@@ -15,10 +15,18 @@ namespace Retouch_Photo2.Adjustments.Items
         public HighlightsAndShadowsAdjustmentItem() => base.Name = HighlightsAndShadowsAdjustment.Name;
 
         //@override
-        public override Adjustment GetAdjustment() => new HighlightsAndShadowsAdjustment()
+        public override Adjustment GetNewAdjustment()
         {
-            HighlightsAndShadowsAdjustmentItem = this
-        };
+            HighlightsAndShadowsAdjustment adjustment = new HighlightsAndShadowsAdjustment();
+
+            adjustment.HighlightsAndShadowsAdjustmentItem.Shadows = this.Shadows;
+            adjustment.HighlightsAndShadowsAdjustmentItem.Highlights = this.Highlights;
+            adjustment.HighlightsAndShadowsAdjustmentItem.Clarity = this.Clarity;
+            adjustment.HighlightsAndShadowsAdjustmentItem.MaskBlurAmount = this.MaskBlurAmount;
+            adjustment.HighlightsAndShadowsAdjustmentItem.SourceIsLinearGamma = this.SourceIsLinearGamma;
+
+            return adjustment;
+        }
         public override void Reset()
         {
             this.Shadows = 0.0f;

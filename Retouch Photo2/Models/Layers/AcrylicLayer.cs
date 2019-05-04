@@ -29,7 +29,19 @@ namespace Retouch_Photo2.Models.Layers
             this.TintColor = color;
         }
 
+        public override void Draw(CanvasDrawingSession ds, Matrix3x2 matrix)
+        {
+            //LTRB
+            Vector2 leftTop = Vector2.Transform(this.Transformer.DstLeftTop, matrix);
+            Vector2 rightTop = Vector2.Transform(this.Transformer.DstRightTop, matrix);
+            Vector2 rightBottom = Vector2.Transform(this.Transformer.DstRightBottom, matrix);
+            Vector2 leftBottom = Vector2.Transform(this.Transformer.DstLeftBottom, matrix);
 
+            ds.DrawLine(leftTop, rightTop, Windows.UI.Colors.DodgerBlue);
+            ds.DrawLine(rightTop, rightBottom, Windows.UI.Colors.DodgerBlue);
+            ds.DrawLine(rightBottom, leftBottom, Windows.UI.Colors.DodgerBlue);
+            ds.DrawLine(leftBottom, leftTop, Windows.UI.Colors.DodgerBlue);
+        }
         protected override ICanvasImage GetRender(IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
             Vector2 leftTop = Vector2.Transform(this.Transformer.DstLeftTop, canvasToVirtualMatrix);

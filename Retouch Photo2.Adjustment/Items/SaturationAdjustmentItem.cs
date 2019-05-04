@@ -12,10 +12,14 @@ namespace Retouch_Photo2.Adjustments.Items
         public SaturationAdjustmentItem() => base.Name = SaturationAdjustment.Name;
 
         //@override
-        public override Adjustment GetAdjustment() => new SaturationAdjustment()
+        public override Adjustment GetNewAdjustment()
         {
-            SaturationAdjustmentItem = this
-        };
+            SaturationAdjustment adjustment = new SaturationAdjustment();
+
+            adjustment.SaturationAdjustmentItem.Saturation = this.Saturation;
+
+            return adjustment;
+        }
         public override void Reset()
         {
             this.Saturation = 1.0f;

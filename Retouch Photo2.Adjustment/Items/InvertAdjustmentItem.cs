@@ -9,10 +9,12 @@ namespace Retouch_Photo2.Adjustments.Items
         public InvertAdjustmentItem() => base.Name = InvertAdjustment.Name;
 
         //@override
-        public override Adjustment GetAdjustment() => new InvertAdjustment()
+        public override Adjustment GetNewAdjustment()
         {
-            InvertAdjustmentItem = this
-        };
+            InvertAdjustment adjustment = new InvertAdjustment();
+
+            return adjustment;
+        }
         public override void Reset() { }
         public override ICanvasImage GetRender(ICanvasImage image)
         {

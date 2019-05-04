@@ -11,10 +11,14 @@ namespace Retouch_Photo2.Adjustments.Items
         public ContrastAdjustmentItem() => base.Name = ContrastAdjustment.Name;
 
         //@override
-        public override Adjustment GetAdjustment() => new ContrastAdjustment()
+        public override Adjustment GetNewAdjustment()
         {
-            ContrastAdjustmentItem = this
-        };
+            ContrastAdjustment adjustment = new ContrastAdjustment();
+
+            adjustment.ContrastAdjustmentItem.Contrast = this.Contrast;
+
+            return adjustment;
+        }
         public override void Reset()
         {
             this.Contrast = 0.0f;

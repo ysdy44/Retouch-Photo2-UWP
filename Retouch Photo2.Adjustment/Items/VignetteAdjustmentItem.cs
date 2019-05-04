@@ -14,10 +14,16 @@ namespace Retouch_Photo2.Adjustments.Items
         public VignetteAdjustmentItem() => base.Name = VignetteAdjustment.Name;
 
         //@override
-        public override Adjustment GetAdjustment() => new VignetteAdjustment()
+        public override Adjustment GetNewAdjustment()
         {
-            VignetteAdjustmentItem = this
-        };
+            VignetteAdjustment adjustment = new VignetteAdjustment();
+
+            adjustment.VignetteAdjustmentItem.Amount = this.Amount;
+            adjustment.VignetteAdjustmentItem.Curve = this.Curve;
+            adjustment.VignetteAdjustmentItem.Color = this.Color;
+
+            return adjustment;
+        }
         public override void Reset()
         {
             this.Amount = 0.0f;

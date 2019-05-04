@@ -20,10 +20,17 @@ namespace Retouch_Photo2.Adjustments.Items
         public BrightnessAdjustmentItem() => base.Name = BrightnessAdjustment.Name;
 
         //@override
-        public override Adjustment GetAdjustment() => new BrightnessAdjustment()
+        public override Adjustment GetNewAdjustment()
         {
-            BrightnessAdjustmentItem = this
-        };
+            BrightnessAdjustment adjustment = new BrightnessAdjustment();
+
+            adjustment.BrightnessAdjustmentItem.WhiteLight = this.WhiteLight;
+            adjustment.BrightnessAdjustmentItem.WhiteDark = this.WhiteDark;
+            adjustment.BrightnessAdjustmentItem.BlackLight = this.BlackLight;
+            adjustment.BrightnessAdjustmentItem.BlackDark = this.BlackDark;
+
+            return adjustment;
+        }
         public override void Reset()
         {
             this.WhiteLight = 1.0f;

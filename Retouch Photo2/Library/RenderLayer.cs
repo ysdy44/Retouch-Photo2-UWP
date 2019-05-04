@@ -40,7 +40,8 @@ namespace Retouch_Photo2.Library
         {
             get
             {
-                if (this.Layers.Count == 0 || this.Index == -1) return null;
+                if (this.Index ==-1) return null;
+                if (this.Layers.Count == 0) return null;
 
                 if (this.Index >= 0 && this.Index < this.Layers.Count) return this.Layers[this.Index];
 
@@ -67,17 +68,7 @@ namespace Retouch_Photo2.Library
 
 
         /// <summary>Index of layers.</summary>      
-        public int Index
-        {
-            set => index = value;
-            get
-            {
-                if (this.Layers == null || this.Layers.Count == 0) return -1;
-                if (this.Layers.Count == 1) return 0;
-                return index;
-            }
-        }
-        private int index = -1;
+        public int Index =-1;
 
         /// <summary> All layers. </summary>  
         public ObservableCollection<Layer> Layers = new ObservableCollection<Layer>();
@@ -124,8 +115,6 @@ namespace Retouch_Photo2.Library
             {
                 if (layer.IsVisual == false || layer.Opacity == 0) continue;
 
-                App.ViewModel.Text = layer.Name;
-
                 Vector2 leftTop = Vector2.Transform(layer.Transformer.DstLeftTop, matrix);
                 Vector2 rightTop = Vector2.Transform(layer.Transformer.DstRightTop, matrix);
                 Vector2 rightBottom = Vector2.Transform(layer.Transformer.DstRightBottom, matrix);
@@ -136,7 +125,6 @@ namespace Retouch_Photo2.Library
                     return layer;
                 }
             }
-            App.ViewModel.Text = "Null";
 
             return null;
         }

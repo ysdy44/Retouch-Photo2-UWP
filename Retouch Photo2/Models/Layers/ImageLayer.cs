@@ -13,24 +13,30 @@ using static Retouch_Photo2.Library.HomographyController;
 namespace Retouch_Photo2.Models.Layers
 {
     public class ImageLayer:Layer
-    {
-        
+    {        
         public static readonly string Type = "Image";
 
-        public CanvasBitmap Image { set; get; }
-        
+        public CanvasBitmap Image { set; get; }        
 
         protected ImageLayer()
         {
             base.Name = ImageLayer.Type;
             base.Icon = new ImageControl();
         }
-
-        private UIElement ImageControl()
+         
+        public override void Draw(CanvasDrawingSession ds, Matrix3x2 matrix)
         {
-            throw new NotImplementedException();
-        }
+            //LTRB
+            Vector2 leftTop = Vector2.Transform(this.Transformer.DstLeftTop, matrix);
+            Vector2 rightTop = Vector2.Transform(this.Transformer.DstRightTop, matrix);
+            Vector2 rightBottom = Vector2.Transform(this.Transformer.DstRightBottom, matrix);
+            Vector2 leftBottom = Vector2.Transform(this.Transformer.DstLeftBottom, matrix);
 
+            ds.DrawLine(leftTop, rightTop, Windows.UI.Colors.DodgerBlue);
+            ds.DrawLine(rightTop, rightBottom, Windows.UI.Colors.DodgerBlue);
+            ds.DrawLine(rightBottom, leftBottom, Windows.UI.Colors.DodgerBlue);
+            ds.DrawLine(leftBottom, leftTop, Windows.UI.Colors.DodgerBlue);
+        }
         protected override ICanvasImage GetRender(IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
             return new Transform2DEffect

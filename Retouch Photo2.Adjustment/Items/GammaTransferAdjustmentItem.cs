@@ -32,10 +32,34 @@ namespace Retouch_Photo2.Adjustments.Items
         public GammaTransferAdjustmentItem() => base.Name = GammaTransferAdjustment.Name;
 
         //@override
-        public override Adjustment GetAdjustment() => new GammaTransferAdjustment()
+        public override Adjustment GetNewAdjustment()
         {
-            GammaTransferAdjustmentItem = this
-        };
+            GammaTransferAdjustment adjustment = new GammaTransferAdjustment();
+
+            adjustment.GammaTransferAdjustmentItem.ClampOutput = this.ClampOutput;
+
+            adjustment.GammaTransferAdjustmentItem.AlphaDisable = this.AlphaDisable;
+            adjustment.GammaTransferAdjustmentItem.AlphaOffset = this.AlphaOffset;
+            adjustment.GammaTransferAdjustmentItem.AlphaExponent = this.AlphaExponent;
+            adjustment.GammaTransferAdjustmentItem.AlphaAmplitude = this.AlphaAmplitude;
+
+            adjustment.GammaTransferAdjustmentItem.RedDisable = this.RedDisable;
+            adjustment.GammaTransferAdjustmentItem.RedOffset = this.RedOffset;
+            adjustment.GammaTransferAdjustmentItem.RedExponent = this.RedExponent;
+            adjustment.GammaTransferAdjustmentItem.RedAmplitude = this.RedAmplitude;
+
+            adjustment.GammaTransferAdjustmentItem.GreenDisable = this.GreenDisable;
+            adjustment.GammaTransferAdjustmentItem.GreenOffset = this.GreenOffset;
+            adjustment.GammaTransferAdjustmentItem.GreenExponent = this.GreenExponent;
+            adjustment.GammaTransferAdjustmentItem.GreenAmplitude = this.GreenAmplitude;
+
+            adjustment.GammaTransferAdjustmentItem.BlueDisable = this.BlueDisable;
+            adjustment.GammaTransferAdjustmentItem.BlueOffset = this.BlueOffset;
+            adjustment.GammaTransferAdjustmentItem.BlueExponent = this.BlueExponent;
+            adjustment.GammaTransferAdjustmentItem.BlueAmplitude = this.BlueAmplitude;
+
+            return adjustment;
+        }
         public override void Reset()
         {
             this.ClampOutput = false;

@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
     BorderBrush="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}"
-    Foreground="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}"
+    Foreground="{ThemeResource SystemControlDisabledChromeDisabledLowBrush}"
     Width="222"
     Height="222"
     HorizontalAlignment="Center"

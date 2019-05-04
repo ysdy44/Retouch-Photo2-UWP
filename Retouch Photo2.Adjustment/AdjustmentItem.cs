@@ -12,7 +12,7 @@ namespace Retouch_Photo2.Adjustments
     {
         public string Name;
 
-        public abstract Adjustment GetAdjustment();
+        public abstract Adjustment GetNewAdjustment();
         public abstract void Reset();
         public abstract ICanvasImage GetRender(ICanvasImage image);
 

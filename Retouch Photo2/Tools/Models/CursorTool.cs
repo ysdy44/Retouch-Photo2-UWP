@@ -71,7 +71,7 @@ namespace Retouch_Photo2.Tools.Models
         public override void Draw(CanvasDrawingSession ds)
         {
             if (this.IBlueBox.Draw(ds)) return;
-            
+
             // Transformer
             if (this.ICursorTool.Draw(ds)) return;
 

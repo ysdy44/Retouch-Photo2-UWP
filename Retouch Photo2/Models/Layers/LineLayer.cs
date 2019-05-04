@@ -16,8 +16,8 @@ namespace Retouch_Photo2.Models.Layers
 
         public static readonly string Type = "Line";
 
-        Vector2 StartPoint, OldStartPoint;
-        Vector2 EndPoint, OldEndPoint;
+        public Vector2 StartPoint, OldStartPoint;
+        public Vector2 EndPoint, OldEndPoint;
 
         public Color Stroke = Color.FromArgb(255, 255, 255, 255);
         public float StrokeWidth = 1.0f;
@@ -30,20 +30,16 @@ namespace Retouch_Photo2.Models.Layers
 
         public override void TransformStart()
         {
+            base.TransformStart();
             this.OldStartPoint = this.StartPoint;
             this.OldEndPoint = this.EndPoint;
         }
         public override void TransformDelta()
         {
             Matrix3x2 matrix = Transformer.DivideMatrix(base.OldTransformer, base.Transformer);
- 
+
             this.StartPoint = Vector2.Transform(this.OldStartPoint, matrix);
             this.EndPoint = Vector2.Transform(this.OldEndPoint, matrix);
-        }
-        public override void TransformComplete()
-        {
-            this.TransformDelta();
-            base.Transformer = Transformer.CreateFromVector(this.StartPoint, this.EndPoint);
         }
 
         public override void ColorChanged(Color color, bool fillOrStroke)
@@ -51,15 +47,22 @@ namespace Retouch_Photo2.Models.Layers
             this.Stroke = color;
         }
 
+        public override void Draw(CanvasDrawingSession ds, Matrix3x2 matrix)
+        {
+            Vector2 startPoint = Vector2.Transform(this.StartPoint, matrix);
+            Vector2 endPoint = Vector2.Transform(this.EndPoint, matrix);
+
+            ds.DrawLine(startPoint, endPoint, Windows.UI.Colors.DodgerBlue);
+        }
         protected override ICanvasImage GetRender(IGraphicsEffectSource image, Matrix3x2 canvasToVirtualMatrix)
         {
-            Vector2 leftTop = Vector2.Transform(this.Transformer.DstLeftTop, canvasToVirtualMatrix);
-            Vector2 rightBottom = Vector2.Transform(this.Transformer.DstRightBottom, canvasToVirtualMatrix);
+            Vector2 startPoint = Vector2.Transform(this.StartPoint, canvasToVirtualMatrix);
+            Vector2 endPoint = Vector2.Transform(this.EndPoint, canvasToVirtualMatrix);
 
             CanvasCommandList command = new CanvasCommandList(this.ViewModel.CanvasDevice);
             using (CanvasDrawingSession ds = command.CreateDrawingSession())
             {
-                ds.DrawLine(leftTop, rightBottom, this.Stroke, this.StrokeWidth);
+                ds.DrawLine(startPoint, endPoint, this.Stroke, this.StrokeWidth);
             }
             return command;
         }
