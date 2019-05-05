@@ -46,15 +46,16 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Grid x:Name="TitlePanel" Padding="12,0" Background="{ThemeResource AppForeground}">
+            <Grid x:Name="TitlePanel" Background="{ThemeResource AppForeground}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="32"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="32"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="TextBlock" VerticalAlignment="Center" Foreground="{ThemeResource AppText}"/>
-                <Button x:Name="StateButton" Grid.Column="2" Padding="0" Width="28" Height="28" BorderThickness="1" BorderBrush="{ThemeResource SystemControlBackgroundBaseHighBrush}" Background="Transparent" >
-                    <FontIcon x:Name="StateIcon" FontSize="14" FontFamily="Segoe UI Symbol"/>
+                <Viewbox x:Name="IconViewBox" Width="20" Height="20" Opacity="0.4"/>
+                <TextBlock x:Name="TextBlock" Grid.Column="1"  VerticalAlignment="Center" Foreground="{ThemeResource AppText}"/>
+                <Button x:Name="StateButton" Grid.Column="2" Padding="0" Width="28" Height="28" BorderThickness="1" BorderBrush="{ThemeResource AppText}" Background="Transparent" >
+                    <FontIcon x:Name="StateIcon" FontSize="14" FontFamily="Segoe UI Symbol" Foreground="{ThemeResource AppText}"/>
                 </Button>
             </Grid>
 

@@ -91,7 +91,8 @@ namespace Retouch_Photo2.Pages
         private MenuLayoutState state;
 
         //Content
-        public string Text { set => this.TextBlock.Text = value; }
+        public string Text { set => this.TextBlock.Text = value; get => this.TextBlock.Text; }
+        public UIElement Icon { set => this.IconViewBox.Child = value; get => this.IconViewBox.Child; }
         public UIElement ContentChild { set => this.ContentBorder.Child = value; get => this.ContentBorder.Child; }
         public FlyoutPlacementMode Placement { set => this.Flyout.Placement = value; get => this.Flyout.Placement; }
 

@@ -14,10 +14,9 @@
 
     xmlns:con="using:Retouch_Photo2.Controls"
     xmlns:navigatorControls="using:Retouch_Photo2.Controls.NavigatorControls"
-    xmlns:brushControls="using:Retouch_Photo2.Brushs"
     xmlns:layersControls="using:Retouch_Photo2.Controls.LayersControls"
     xmlns:transformerControls="using:Retouch_Photo2.Controls.TransformerControls"
-    
+
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
 
@@ -115,13 +114,19 @@
 
             <!--Debug-->
             <local:MenuLayout x:Name="DebugLayout" Text="Selection" Placement="Bottom" Visibility="Collapsed">
+                <local:MenuLayout.Icon>
+                    <FontIcon FontSize="24" Glyph="&#x1F41E;" FontFamily="Segoe UI Symbol"/>
+                </local:MenuLayout.Icon>
                 <local:MenuLayout.ContentChild>
-                    <con:DebugControl  />
+                    <con:DebugControl />
                 </local:MenuLayout.ContentChild>
             </local:MenuLayout>
             
             <!--Selection-->
             <local:MenuLayout x:Name="SelectionLayout" Text="Selection" Placement="Bottom" Visibility="Collapsed">
+                <local:MenuLayout.Icon>
+                    <selections:Icon/>
+                </local:MenuLayout.Icon>
                 <local:MenuLayout.ContentChild>
                     <con:SelectionControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
                 </local:MenuLayout.ContentChild>
@@ -129,6 +134,9 @@
             
             <!--Operate-->
             <local:MenuLayout x:Name="OperateLayout" Text="Operate" Placement="Bottom" Visibility="Collapsed">
+                <local:MenuLayout.Icon>
+                    <operates:Icon/>
+                </local:MenuLayout.Icon>
                 <local:MenuLayout.ContentChild>
                     <con:OperateControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
                 </local:MenuLayout.ContentChild>
@@ -136,6 +144,9 @@
 
             <!--Adjustment-->
             <local:MenuLayout x:Name="AdjustmentLayout" Text="Adjustment" Placement="Bottom" Visibility="Collapsed">
+                <local:MenuLayout.Icon>
+                    <adjustments:Icon/>
+                </local:MenuLayout.Icon>
                 <local:MenuLayout.ContentChild>
                     <con:AdjustmentsControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
                 </local:MenuLayout.ContentChild>
@@ -143,6 +154,9 @@
 
             <!--Effects-->
             <local:MenuLayout x:Name="EffectLayout" Text="Effect" Placement="Bottom" Visibility="Collapsed">
+                <local:MenuLayout.Icon>
+                    <effects:Icon/>
+                </local:MenuLayout.Icon>
                 <local:MenuLayout.ContentChild>
                     <con:EffectsControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
                 </local:MenuLayout.ContentChild>
@@ -150,6 +164,9 @@
 
             <!--Transformer-->
             <local:MenuLayout x:Name="TransformerLayout" Text="Transformer" Placement="Bottom" Visibility="Collapsed">
+                <local:MenuLayout.Icon>
+                    <transformerControls:Icon/>
+                </local:MenuLayout.Icon>
                 <local:MenuLayout.ContentChild>
                     <con:TransformerControl Transformer="{x:Bind ViewModel.Transformer,Mode=OneWay}" />
                 </local:MenuLayout.ContentChild>
@@ -157,6 +174,9 @@
             
             <!--Navigator-->
             <local:MenuLayout x:Name="NavigatorLayout" Text="Navigator" Placement="Bottom" Visibility="Collapsed">
+                <local:MenuLayout.Icon>
+                    <navigatorControls:Icon/>
+                </local:MenuLayout.Icon>
                 <local:MenuLayout.ContentChild>
                     <con:NavigatorControl Brush="{ThemeResource AppForeground}"/>
                 </local:MenuLayout.ContentChild>
@@ -164,6 +184,9 @@
 
             <!--Color-->
             <local:MenuLayout x:Name="ColorLayout" Text="Color" Placement="Bottom" Visibility="Collapsed">
+                <local:MenuLayout.Icon>
+                    <Ellipse Width="50" Height="50" Fill="Gray"/>
+                </local:MenuLayout.Icon>
                 <local:MenuLayout.ContentChild>
                     <con:ColorControl Width="200" Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
                 </local:MenuLayout.ContentChild>
@@ -171,6 +194,9 @@
 
             <!--Layer-->
             <local:MenuLayout x:Name="LayerLayout" Text="Layer" Placement="Left" Visibility="Collapsed">
+                <local:MenuLayout.Icon>
+                    <layersControls:Icon/>
+                </local:MenuLayout.Icon>
                 <local:MenuLayout.ContentChild>
                     <layersControls:LayerControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}"/>
                 </local:MenuLayout.ContentChild>
