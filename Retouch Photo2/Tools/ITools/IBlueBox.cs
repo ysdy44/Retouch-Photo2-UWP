@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Tools.ITools
                 this.EndPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.InverseMatrix);
                 this.IsCursorBox = false;
 
-                this.ViewModel.CurrentLayer = null;
+                this.ViewModel.SetLayer(null);
                 this.ViewModel.Invalidate();
                 return true;
             }

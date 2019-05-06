@@ -19,6 +19,13 @@ namespace Retouch_Photo2.Tools.Models
             base.Page = new AcrylicPage();
         }
                 
-        public override Layer GetLayer(VectRect rect)=> AcrylicLayer.CreateFromRect(this.ViewModel.CanvasDevice, rect, this.ViewModel.Color);
+        public override Layer GetLayer(VectRect rect)=> AcrylicLayer.CreateFromRect
+        (
+            this.ViewModel.CanvasDevice, 
+            rect,
+            this.ViewModel.Color,
+           this.ViewModel.AcrylicTintOpacity,
+           this.ViewModel.AcrylicBlurAmount
+        );
     }
 }

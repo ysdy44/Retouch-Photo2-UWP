@@ -21,7 +21,7 @@
         
         <!--Flyout-->
         <Flyout x:Name="PropertyFlyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle }">
-            <conLayersControls:LayerControl Width="222" Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}"/>
+            <conLayersControls:LayerControl Width="222" Layer="{x:Bind ViewModel.Layer,Mode=OneWay}"/>
         </Flyout>
         
         <!--Style-->
@@ -91,7 +91,7 @@
     
     <ListView  x:Name="ListView"
                 
-               SelectedIndex="{x:Bind ViewModel.SelectedIndex,Mode=TwoWay}"
+               SelectedIndex="{x:Bind ViewModel.Index,Mode=TwoWay}"
                SelectionChanged="ListView_SelectionChanged"
                
                ItemsSource="{x:Bind ViewModel.RenderLayer.Layers}"

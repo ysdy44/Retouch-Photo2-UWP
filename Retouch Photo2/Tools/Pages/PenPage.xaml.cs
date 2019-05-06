@@ -68,8 +68,8 @@ namespace Retouch_Photo2.Tools.Pages
                 if (unRemoveCount > 2) curveNodes.Remove(nodes);
                 else
                 {
-                    this.ViewModel.RenderLayer.Remove(this.ViewModel.CurrentCurveLayer);
-                    this.ViewModel.CurrentLayer = null;
+                    this.ViewModel.RenderLayer.Remove(this.ViewModel.CurveLayer);
+                    this.ViewModel.SetLayer(null);
                 }
             });
             this.AddButton.Tapped += (s, e) => this.Operator((curveNodes, nodes) => curveNodes.Interpolation(nodes));
@@ -92,16 +92,16 @@ namespace Retouch_Photo2.Tools.Pages
 
         private void Operator(Action<CurveNodes,List<Node>> action)
         {
-            if (this.ViewModel.CurrentCurveLayer == null) return;
+            if (this.ViewModel.CurveLayer == null) return;
            
-            action(this.ViewModel.CurveNodes,this.ViewModel.CurrentCurveLayer.Nodes);//Action
+            action(this.ViewModel.CurveNodes,this.ViewModel.CurveLayer.Nodes);//Action
 
-            this.ViewModel.CurrentCurveLayer.NodesGeometry = CurveLayer.GetNodesGeometry
+            this.ViewModel.CurveLayer.NodesGeometry = CurveLayer.GetNodesGeometry
             (
                this.ViewModel.CanvasDevice,
-               this.ViewModel.CurrentCurveLayer.Nodes
+               this.ViewModel.CurveLayer.Nodes
             );
-            this.ViewModel.CurrentCurveLayer.TransformComplete();
+            this.ViewModel.CurveLayer.TransformComplete();
             this.ViewModel.Invalidate();
         }
 

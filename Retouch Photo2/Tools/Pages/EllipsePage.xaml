@@ -1,15 +1,29 @@
 ﻿<tool:ToolPage
-    xmlns:tool="using:Retouch_Photo2.Tools"
     x:Class="Retouch_Photo2.Tools.Pages.EllipsePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Retouch_Photo2.Tools.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
-    
-    <StackPanel Orientation="Horizontal" Height="50" Padding="12,4">
+    xmlns:element="using:Retouch_Photo2.Element"
+    xmlns:tool="using:Retouch_Photo2.Tools"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="400">
 
-    </StackPanel>
-    
+    <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
+        <StackPanel Orientation="Horizontal" Height="50" Padding="4">
+
+            <TextBlock Text="Fill:" Style="{ThemeResource AppTextBlock}"/>
+            <element:FillColorEllipseControl/>
+
+            <AppBarSeparator/>
+
+            <TextBlock Text="Stroke:" Style="{ThemeResource AppTextBlock}"/>
+            <element:StrokeColorEllipseControl/>
+
+            <TextBlock Text="StrokeWidth:" Style="{StaticResource AppTextBlock}"/>
+            <element:StrokeWidthControl/>
+
+        </StackPanel>
+    </ScrollViewer>
 </tool:ToolPage>

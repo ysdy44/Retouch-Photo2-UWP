@@ -24,7 +24,11 @@ namespace Retouch_Photo2.Controls.LayersControls
             if (e.NewValue is Layer layer)
             {
                 con.CheckBox.IsChecked = layer.IsVisual;
-                con.SecondBorder.Child = layer.Icon;                
+                try
+                {
+                    con.SecondBorder.Child = layer.Icon;
+                }
+                catch (System.Exception) { }
                 con.TextBlock.Text = layer.Name;
             }
         }));

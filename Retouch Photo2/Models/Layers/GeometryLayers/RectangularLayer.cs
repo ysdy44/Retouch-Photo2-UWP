@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Models.Layers.GeometryLayers
             return CanvasGeometry.CreatePolygon(this.ViewModel.CanvasDevice, points);
         }
 
-        public static RectangularLayer CreateFromRect(ICanvasResourceCreator creator, VectRect rect, Color color)
+        public static RectangularLayer CreateFromRect(ICanvasResourceCreator creator, VectRect rect, Color fillColor, Color strokeColor, float strokeWidth)
         {
             return new RectangularLayer
             {
@@ -50,8 +50,14 @@ namespace Retouch_Photo2.Models.Layers.GeometryLayers
                 FillBrush = new Brush
                 {
                     Type = BrushType.Color,
-                    Color = color
-                }
+                    Color = fillColor
+                },
+                StrokeBrush = new Brush
+                {
+                    Type = BrushType.Color,
+                    Color = strokeColor
+                },
+                StrokeWidth=strokeWidth
             };
         }
     }

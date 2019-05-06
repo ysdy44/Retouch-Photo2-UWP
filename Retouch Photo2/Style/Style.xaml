@@ -34,12 +34,12 @@
     <Style x:Key="AppFlyoutPresenterStyle" TargetType="FlyoutPresenter">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
-        <Setter Property="Margin" Value="-4" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="0" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Background" Value="{ThemeResource AppBackground}" />
         <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}" />
         <Setter Property="BorderThickness" Value="{ThemeResource FlyoutBorderThemeThickness}" />
-        <Setter Property="Padding" Value="{ThemeResource FlyoutContentThemePadding}" />
         <Setter Property="MinWidth" Value="{ThemeResource FlyoutThemeMinWidth}" />
         <Setter Property="MaxWidth" Value="{ThemeResource FlyoutThemeMaxWidth}" />
         <Setter Property="MinHeight" Value="{ThemeResource FlyoutThemeMinHeight}" />

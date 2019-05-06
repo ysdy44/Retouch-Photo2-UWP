@@ -1,17 +1,31 @@
 ﻿<tool:ToolPage
-    xmlns:tool="using:Retouch_Photo2.Tools"
     x:Class="Retouch_Photo2.Tools.Pages.LinePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Retouch_Photo2.Tools.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hSVColorPickers="using:HSVColorPickers"
+    xmlns:tool="using:Retouch_Photo2.Tools"
+    xmlns:element="using:Retouch_Photo2.Element"
     mc:Ignorable="d"
-     
-     >
+    >
 
-    <StackPanel Orientation="Horizontal" Height="50" Padding="12,4">
+    <tool:ToolPage.Resources>
+        <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <hSVColorPickers:ColorPicker x:Name="ColorPicker" Width="222"/>
+        </Flyout>
+    </tool:ToolPage.Resources>
 
-    </StackPanel>
+    <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
+        <StackPanel Orientation="Horizontal" Height="50" Padding="4">
+
+            <TextBlock Text="StrokeColor:" Style="{StaticResource AppTextBlock}"/>
+            <element:StrokeColorEllipseControl/>
+
+            <TextBlock Text="StrokeWidth:" Style="{StaticResource AppTextBlock}"/>
+            <element:StrokeWidthControl/>
+
+        </StackPanel>
+    </ScrollViewer>
 
 </tool:ToolPage>

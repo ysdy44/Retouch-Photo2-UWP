@@ -1,0 +1,47 @@
+﻿<UserControl
+    x:Name="UserControl"
+    x:Class="Retouch_Photo2.Brushs.BrushColorPicker"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hSVColorPickers="using:HSVColorPickers"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    VerticalAlignment="Top"
+    mc:Ignorable="d"
+    Width="230"
+    Padding="4"
+    d:DesignHeight="270"
+    d:DesignWidth="200">
+
+    <StackPanel 
+        Background="{x:Bind UserControl.Background,Mode=OneWay}"
+        Padding="{x:Bind UserControl.Padding,Mode=OneWay}"
+        >
+
+        <!--Toggle-->
+        <Border >
+            <ComboBox x:Name="ComboBox" ItemsSource="{x:Bind Pickers}" >
+                <ComboBox.Style>
+                    <Style TargetType="ComboBox">
+                        <Setter Property="Background" Value="{ThemeResource AppBarBackgroundThemeBrush}" />
+                        <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundListLowBrush}" />
+                        <Setter Property="BorderThickness" Value="1" />
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="VerticalAlignment" Value="Top" />
+                    </Style>
+                </ComboBox.Style>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate x:DataType="hSVColorPickers:Picker">
+                        <TextBlock Text="{x:Bind Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Border>
+
+        <!--Body-->
+        <ContentControl x:Name="ContentControl" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+
+    </StackPanel>
+</UserControl>

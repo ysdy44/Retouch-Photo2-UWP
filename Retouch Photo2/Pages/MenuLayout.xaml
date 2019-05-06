@@ -62,7 +62,7 @@
             <Rectangle x:Name="StoryboardRectangle" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Fill="{ThemeResource AppBackground}"/>
 
             <Border x:Name="StoryboardBorder" Grid.Row="1" VerticalAlignment="Top">
-                <Border x:Name="ContentBorder" Padding="8,0" >
+                <Border x:Name="ContentBorder">
                     <!--Content-->
                 </Border>
             </Border>

@@ -1,0 +1,101 @@
+﻿<UserControl
+    x:Name="UserControl"
+    x:Class="Retouch_Photo2.Brushs.BrushPicker"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:pickers="using:HSVColorPickers"
+    xmlns:brushs="using:Retouch_Photo2.Brushs"
+    mc:Ignorable="d"
+    Padding="4"
+    Width="320"
+    d:DesignHeight="200"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <brushs:BrushColorPicker x:Name="ColorPicker" Width="222"/>
+        </Flyout>
+    </UserControl.Resources>
+
+    <StackPanel Margin="{x:Bind UserControl.Padding,Mode=OneWay}">
+
+        <!--Gradient-->
+        <canvas:CanvasControl x:Name="CanvasControl" Height="60"/>
+
+        <!--Opacity-->
+        <Grid Height="44">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="90"/>
+            </Grid.ColumnDefinitions>
+
+            <pickers:HexPicker x:Name="HexPicker" Height="32" Background="Transparent"/>
+
+            <TextBlock Text="Opacity:" Grid.Column="1" HorizontalAlignment="Right" Style="{ThemeResource AppTextBlock}"/>
+
+            <Border Grid.Column="2" Height="40" MinHeight="28" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
+                <pickers:NumberPicker x:Name="OpacityControl" Width="Auto"/>
+            </Border>
+        </Grid>
+
+        <!--Offset-->
+        <Grid Height="44">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="90"/>
+            </Grid.ColumnDefinitions>
+
+            <pickers:StrawPicker x:Name="StrawPicker" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+            <TextBlock Text="Offset:" Grid.Column="1" HorizontalAlignment="Right" Style="{ThemeResource AppTextBlock}" VerticalAlignment="Center"/>
+            
+            <Border Grid.Column="2" Height="40" MinHeight="28" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
+                <pickers:NumberPicker x:Name="OffsetControl" Width="Auto" MinHeight="12"  />
+            </Border>
+        </Grid>
+
+        <!--Color-->
+        <Grid Height="44">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Row="3" VerticalAlignment="Center">
+                <Border x:Name="ColorButton" Style="{StaticResource AppCircleBorderStyle}">
+                    <Border.Background>
+                        <SolidColorBrush x:Name="SolidColorBrush"/>
+                    </Border.Background>
+                </Border>
+            </Border>
+
+            <Border Grid.Column="1" Height="40" MinHeight="30" MaxWidth="300" Style="{StaticResource AppRoundedBorderStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="CopyButton" Grid.Column="0" Width="Auto" HorizontalAlignment="Stretch" Background="{ThemeResource AppForeground}" FontFamily="{ThemeResource ContentControlThemeFontFamily}" Style="{ThemeResource NavigationBackButtonNormalStyle}">
+                        <TextBlock Text="Copy" Opacity="0.5"/>
+                    </Button>
+                    <Button x:Name="RemoveButton" Grid.Column="1" Width="Auto" HorizontalAlignment="Stretch" Background="{ThemeResource AppForeground}" FontFamily="{ThemeResource ContentControlThemeFontFamily}" Style="{ThemeResource NavigationBackButtonNormalStyle}">
+                        <TextBlock Text="Remove" Opacity="0.5"/>
+                    </Button>
+                    <Button x:Name="ReserveButton" Grid.Column="2" Width="Auto" HorizontalAlignment="Stretch" Background="{ThemeResource AppForeground}" FontFamily="{ThemeResource ContentControlThemeFontFamily}" Style="{ThemeResource NavigationBackButtonNormalStyle}">
+                        <TextBlock Text="Reserve" Opacity="0.5"/>
+                    </Button>
+                </Grid>
+            </Border>
+
+        </Grid>
+
+    </StackPanel>
+</UserControl>
+

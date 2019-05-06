@@ -96,8 +96,8 @@
                     </ToggleButton>
 
                     <!--Color-->
-                    <Border Height="50" Width="60" >
-                        <Border x:Name="ColorButton" Width="34" Height="34" Style="{StaticResource AppCircleBorderStyle}" >
+                    <Border Width="60">
+                        <Border x:Name="ColorButton" Width="38" Height="38" Style="{StaticResource AppCircleBorderStyle}">
                             <Border.Background>
                                 <SolidColorBrush Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
                             </Border.Background>
@@ -128,7 +128,7 @@
                     <selections:Icon/>
                 </local:MenuLayout.Icon>
                 <local:MenuLayout.ContentChild>
-                    <con:SelectionControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
+                    <con:SelectionControl Layer="{x:Bind ViewModel.Layer,Mode=OneWay}" />
                 </local:MenuLayout.ContentChild>
             </local:MenuLayout>
             
@@ -138,7 +138,7 @@
                     <operates:Icon/>
                 </local:MenuLayout.Icon>
                 <local:MenuLayout.ContentChild>
-                    <con:OperateControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
+                    <con:OperateControl Layer="{x:Bind ViewModel.Layer,Mode=OneWay}" />
                 </local:MenuLayout.ContentChild>
             </local:MenuLayout>
 
@@ -148,7 +148,7 @@
                     <adjustments:Icon/>
                 </local:MenuLayout.Icon>
                 <local:MenuLayout.ContentChild>
-                    <con:AdjustmentsControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
+                    <con:AdjustmentsControl Layer="{x:Bind ViewModel.Layer,Mode=OneWay}" />
                 </local:MenuLayout.ContentChild>
             </local:MenuLayout>
 
@@ -158,7 +158,7 @@
                     <effects:Icon/>
                 </local:MenuLayout.Icon>
                 <local:MenuLayout.ContentChild>
-                    <con:EffectsControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}" />
+                    <con:EffectsControl Layer="{x:Bind ViewModel.Layer,Mode=OneWay}" />
                 </local:MenuLayout.ContentChild>
             </local:MenuLayout>
 
@@ -185,10 +185,10 @@
             <!--Color-->
             <local:MenuLayout x:Name="ColorLayout" Text="Color" Placement="Bottom" Visibility="Collapsed">
                 <local:MenuLayout.Icon>
-                    <Ellipse Width="50" Height="50" Fill="Gray"/>
+                    <Ellipse Width="20" Height="20" Fill="Gray"/>
                 </local:MenuLayout.Icon>
                 <local:MenuLayout.ContentChild>
-                    <con:ColorControl Width="200" Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
+                    <element:FillColorControl/>
                 </local:MenuLayout.ContentChild>
             </local:MenuLayout>
 
@@ -198,7 +198,7 @@
                     <layersControls:Icon/>
                 </local:MenuLayout.Icon>
                 <local:MenuLayout.ContentChild>
-                    <layersControls:LayerControl Layer="{x:Bind ViewModel.CurrentLayer,Mode=OneWay}"/>
+                    <layersControls:LayerControl Layer="{x:Bind ViewModel.Layer,Mode=OneWay}"/>
                 </local:MenuLayout.ContentChild>
             </local:MenuLayout>
 

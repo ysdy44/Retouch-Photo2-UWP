@@ -99,9 +99,6 @@
     <Compile Include="Controls\AdjustmentsControl.xaml.cs">
       <DependentUpon>AdjustmentsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BrushControl.xaml.cs">
-      <DependentUpon>BrushControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\DebugControl.xaml.cs">
       <DependentUpon>DebugControl.xaml</DependentUpon>
     </Compile>
@@ -134,6 +131,18 @@
     </Compile>
     <Compile Include="Controls\TransformerControls\RemoteControl.xaml.cs">
       <DependentUpon>RemoteControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Element\FillColorEllipseControl.xaml.cs">
+      <DependentUpon>FillColorEllipseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Element\StrokeColorEllipseControl.xaml.cs">
+      <DependentUpon>StrokeColorEllipseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Element\FillColorControl.xaml.cs">
+      <DependentUpon>FillColorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Element\StrokeWidthControl.xaml.cs">
+      <DependentUpon>StrokeWidthControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Library\Adjustment.cs" />
     <Compile Include="Library\CanvasOperator.cs" />
@@ -169,9 +178,6 @@
     </Compile>
     <Compile Include="Element\AppbarControls\SaveControl.xaml.cs">
       <DependentUpon>SaveControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ColorControl.xaml.cs">
-      <DependentUpon>ColorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\EffectsControl.xaml.cs">
       <DependentUpon>EffectsControl.xaml</DependentUpon>
@@ -288,8 +294,8 @@
     <Compile Include="Pages\MenuLayout.xaml.cs">
       <DependentUpon>MenuLayout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Element\ModeControl.xaml.cs">
-      <DependentUpon>ModeControl.xaml</DependentUpon>
+    <Compile Include="Element\MarqueeModeControl.xaml.cs">
+      <DependentUpon>MarqueeModeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\Pages\AcrylicPage.xaml.cs">
       <DependentUpon>AcrylicPage.xaml</DependentUpon>
@@ -685,10 +691,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BrushControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\DebugControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -733,6 +735,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Element\FillColorEllipseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Element\StrokeColorEllipseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Element\FillColorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Element\StrokeWidthControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Tools\Controls\LineControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -766,10 +784,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Element\AppbarControls\SaveControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ColorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -889,7 +903,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Element\ModeControl.xaml">
+    <Page Include="Element\MarqueeModeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,16 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Element.StrokeWidthControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Retouch_Photo2.Element"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hSVColorPickers="using:HSVColorPickers"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="50">
+
+    <Border Width="70" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
+        <hSVColorPickers:NumberPicker x:Name="StrokeWidthPicker" Value="{x:Bind StrokeWidthConverter(ViewModel.StrokeWidth),Mode=OneWay}" Unit="%" Width="Auto"/>
+    </Border>
+</UserControl>

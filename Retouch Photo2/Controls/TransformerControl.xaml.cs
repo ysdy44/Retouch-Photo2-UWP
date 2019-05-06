@@ -35,7 +35,7 @@ namespace Retouch_Photo2.Controls
 
                 if (this.remoteOrIndicator==true&& value==false)
                 {
-                    if (this.ViewModel.CurrentLayer is Layer layer)
+                    if (this.ViewModel.Layer is Layer layer)
                     {
                         this.Transformer = layer.Transformer;
                     }
@@ -150,7 +150,7 @@ namespace Retouch_Photo2.Controls
             //Remote
             this.RemoteControl.Moved += (s, value) =>
             {
-                if (this.ViewModel.CurrentLayer is Layer layer)
+                if (this.ViewModel.Layer is Layer layer)
                 {
                     Transformer transformer = layer.Transformer;
                     Library.HomographyController.Transformer.Add(layer, transformer, value);
@@ -160,14 +160,14 @@ namespace Retouch_Photo2.Controls
             };
             this.RemoteControl.ValueChangeStarted += (s, value) =>
             {
-                if (this.ViewModel.CurrentLayer is Layer layer)
+                if (this.ViewModel.Layer is Layer layer)
                 {
                     layer.OldTransformer = layer.Transformer;
                 }
             };
             this.RemoteControl.ValueChangeDelta += (s, value) =>
             {
-                if (this.ViewModel.CurrentLayer is Layer layer)
+                if (this.ViewModel.Layer is Layer layer)
                 {
                     Transformer transformer = layer.OldTransformer;
 
@@ -189,7 +189,7 @@ namespace Retouch_Photo2.Controls
             {
                 if (this.Transformer is Transformer transformer)
                 {
-                    if (this.ViewModel.CurrentLayer is Layer layer)
+                    if (this.ViewModel.Layer is Layer layer)
                     {
                         //Scale
                         Vector2 horizontal = transformer.DstRight - transformer.DstLeft;
@@ -219,7 +219,7 @@ namespace Retouch_Photo2.Controls
             {
                 if (this.Transformer is Transformer transformer)
                 {
-                    if (this.ViewModel.CurrentLayer is Layer layer)
+                    if (this.ViewModel.Layer is Layer layer)
                     {
                         //Scale
                         Vector2 vertical = transformer.DstRight - transformer.DstLeft;
@@ -251,7 +251,7 @@ namespace Retouch_Photo2.Controls
             {
                 if (this.Transformer is Transformer transformer)
                 {
-                    if (this.ViewModel.CurrentLayer is Layer layer)
+                    if (this.ViewModel.Layer is Layer layer)
                     {
                         layer.OldTransformer = layer.Transformer;
                         
@@ -276,7 +276,7 @@ namespace Retouch_Photo2.Controls
             {
                 if (this.Transformer is Transformer transformer)
                 {
-                    if (this.ViewModel.CurrentLayer is Layer layer)
+                    if (this.ViewModel.Layer is Layer layer)
                     {
                         float horizontalHalf = Vector2.Distance( layer.Transformer.DstCenter , layer.Transformer.DstRight);
                         float verticalHalf = Vector2.Distance
@@ -353,10 +353,10 @@ namespace Retouch_Photo2.Controls
             {
                 if (this.Transformer is Transformer transformer)
                 {
-                    if (this.ViewModel.CurrentLayer is Layer layer)
+                    if (this.ViewModel.Layer is Layer layer)
                     {
                         Vector2 vector = this.GetVectorWithIndicatorMode(layer.Transformer, this.Mode);
-                        Vector2 offset = new Vector2(-vector.X, 0);
+                        Vector2 offset = new Vector2(value - vector.X, 0);
                         Library.HomographyController.Transformer.Add(layer, transformer, offset);
 
                         this.Transformer = layer.Transformer;
@@ -371,10 +371,10 @@ namespace Retouch_Photo2.Controls
             {
                 if (this.Transformer is Transformer transformer)
                 {
-                    if (this.ViewModel.CurrentLayer is Layer layer)
+                    if (this.ViewModel.Layer is Layer layer)
                     {
                         Vector2 vector = this.GetVectorWithIndicatorMode(layer.Transformer, this.Mode);
-                        Vector2 offset = new Vector2(0, -vector.Y);
+                        Vector2 offset = new Vector2(0, value - vector.Y);
                         Library.HomographyController.Transformer.Add(layer, transformer, offset);
 
                         this.Transformer = layer.Transformer;

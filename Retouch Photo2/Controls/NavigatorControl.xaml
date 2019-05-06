@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    xmlns:element="using:Retouch_Photo2.Element"
     mc:Ignorable="d"
     d:DesignHeight="400"
     d:DesignWidth="200">
@@ -18,8 +19,11 @@
             <xaml:CanvasControl x:Name="CanvasControl"/>
         </Border>
 
-        <TextBlock Text="Scale"  Style="{StaticResource AppTextBlock}"/>
-        <Border Height="33" Style="{StaticResource AppRoundedBorderStyle}">
+        <TextBlock Text="Marquee Mode:"  Style="{StaticResource AppTextBlock}"/>
+        <element:MarqueeModeControl Width="Auto" Margin="2,0" Mode="{x:Bind ViewModel.MarqueeMode,Mode=TwoWay}" />
+
+        <TextBlock Text="Scale:"  Style="{StaticResource AppTextBlock}"/>
+        <Border Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
             <Grid>
                 <Grid.ColumnDefinitions >
                     <ColumnDefinition Width="1*"/>
@@ -41,11 +45,8 @@
                 </Button>
             </Grid>
         </Border>        
-        
-        
+                
         <ContentControl Height="8"/>
-
-
 
         <Grid Height="40">
             <Grid.ColumnDefinitions>
@@ -59,6 +60,7 @@
         </Grid>
 
         <Rectangle Height="1" Fill="{ThemeResource AppBorderBrush}"/>
+        
         <Grid Height="40">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="36"/>

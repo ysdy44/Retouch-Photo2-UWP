@@ -33,7 +33,7 @@ namespace Retouch_Photo2.Tools.Models
                 start: (point) =>
                 {
                     //Transformer      
-                    GeometryLayer geometryLayer = this.ViewModel.CurrentGeometryLayer;
+                    GeometryLayer geometryLayer = this.ViewModel.GeometryLayer;
                     if (geometryLayer != null)
                     {
                         Matrix3x2 matrix = this.ViewModel.MatrixTransformer.Matrix;
@@ -83,7 +83,7 @@ namespace Retouch_Photo2.Tools.Models
                 delta: (point) =>
                 {
                     //Transformer      
-                    GeometryLayer geometryLayer = this.ViewModel.CurrentGeometryLayer;
+                    GeometryLayer geometryLayer = this.ViewModel.GeometryLayer;
                     if (geometryLayer != null)
                     {
                         Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.InverseMatrix;
@@ -129,7 +129,7 @@ namespace Retouch_Photo2.Tools.Models
                 complete: (point) =>
                 {
                     //Transformer      
-                    GeometryLayer geometryLayer = this.ViewModel.CurrentGeometryLayer;
+                    GeometryLayer geometryLayer = this.ViewModel.GeometryLayer;
                     if (geometryLayer != null)
                     {
                         Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.InverseMatrix;
@@ -182,7 +182,7 @@ namespace Retouch_Photo2.Tools.Models
         public override void Draw(CanvasDrawingSession ds)
         {
             //Transformer      
-            GeometryLayer geometryLayer = this.ViewModel.CurrentGeometryLayer;
+            GeometryLayer geometryLayer = this.ViewModel.GeometryLayer;
             if (geometryLayer == null) return;
             else
             {
@@ -240,7 +240,7 @@ namespace Retouch_Photo2.Tools.Models
 
             manager.Type = LinearGradientType.EndPoint;
 
-            base.Page.Communication(2);//Communication
+            this.ViewModel.SetBrush(BrushType.LinearGradient);
         }
     }
 }

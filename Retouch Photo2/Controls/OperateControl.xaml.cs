@@ -158,10 +158,10 @@ namespace Retouch_Photo2.Controls
             this.AlignVerticaIsEnabled = isEnabled;
 
             //Arrange
-            if (this.ViewModel.RenderLayer.Layers.Count < 2 || !isEnabled || this.ViewModel.SelectedIndex == -1)
+            if (this.ViewModel.RenderLayer.Layers.Count < 2 || !isEnabled || this.ViewModel.Index == -1)
                 this.ArrangeIsEnabled = false;
             else
-                this.InitializeArrange(0, this.ViewModel.RenderLayer.Layers.Count - 1, this.ViewModel.SelectedIndex);
+                this.InitializeArrange(0, this.ViewModel.RenderLayer.Layers.Count - 1, this.ViewModel.Index);
         }
 
         /// <summary> Operating on the layer. </summary>
@@ -172,7 +172,7 @@ namespace Retouch_Photo2.Controls
 
             action(this.Layer);//Action
 
-            this.ViewModel.CurrentLayer = this.Layer;
+            this.ViewModel.SetLayer(this.Layer);
             this.Initialize(this.Layer);
             this.ViewModel.Invalidate();
         }

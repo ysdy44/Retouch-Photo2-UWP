@@ -1,4 +1,6 @@
-﻿using Microsoft.Graphics.Canvas.Brushes;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Brushes;
+using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Brushs.Stops;
 using System;
 using System.Linq;
@@ -8,7 +10,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Brushs
 {
-    public sealed partial class Picker : UserControl
+    public sealed partial class BrushPicker : UserControl
     {
         //Delegate
         public delegate void StopsChangeHandler();
@@ -37,29 +39,51 @@ namespace Retouch_Photo2.Brushs
             }
         }
 
+        float CanvasWidth;
+        float CanvasHeight;
+        CanvasBitmap Bitmap;
 
-        public Picker()
+        public BrushPicker()
         {
             this.InitializeComponent();
             this.ReserveButton.Tapped += (s, e) => this.Reserve();
-            this.RemoveButton.Tapped += (s, e) =>
-            {
-                this.StopChanged(Colors.Transparent, 0, false);
-                this.Remove();
-            };
+            this.RemoveButton.Tapped += (s, e) => this.Remove();
 
             //CanvasControl
             this.CanvasControl.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
-                float width = (float)e.NewSize.Width;
-                float height = (float)e.NewSize.Height;
-                this.Size.SIzeChange(width, height);
+                this.CanvasWidth = (float)e.NewSize.Width;
+                this.CanvasHeight = (float)e.NewSize.Height;
+                this.Size.SIzeChange(this.CanvasWidth, this.CanvasHeight);
             };
-            this.CanvasControl.CreateResources += (sender, args) => { };
+            this.CanvasControl.CreateResources += (sender, args) =>
+            {
+                Color[] colors = new Color[]
+                {
+                     Windows.UI.Colors.LightGray, Windows.UI.Colors.White,
+                     Windows.UI.Colors.White, Windows.UI.Colors.LightGray
+                };
+                this.Bitmap = CanvasBitmap.CreateFromColors(sender, colors, 2, 2);
+            };
             this.CanvasControl.Draw += (sender, args) =>
             {
                 if (this.Brush == null) return;
+
+                args.DrawingSession.DrawImage(new DpiCompensationEffect
+                {
+                    Source = new ScaleEffect
+                    {
+                        Scale = new Vector2(this.CanvasHeight / 5),
+                        InterpolationMode = CanvasImageInterpolation.NearestNeighbor,
+                        Source = new BorderEffect
+                        {
+                            ExtendX = CanvasEdgeBehavior.Wrap,
+                            ExtendY = CanvasEdgeBehavior.Wrap,
+                            Source = this.Bitmap
+                        }
+                    }
+                });
 
                 //Background
                 this.Size.DrawBackground(args.DrawingSession, this.CanvasControl, this.Brush.Array);
@@ -157,27 +181,54 @@ namespace Retouch_Photo2.Brushs
             };
 
             //Color            
-            this.ColorPicker.ColorChange += (s, color) => this.SetColor(color);
-            this.StrawPicker.ColorChange += (s, color) => this.SetColor(color);
+            this.ColorPicker.ColorChange += (s, color) =>
+            {
+                this.HexPicker.Color = color;
+                this.SetColor(color);
+            };
+            this.StrawPicker.ColorChange += (s, color) =>
+            {
+                this.HexPicker.Color = color;
+                this.SetColor(color);
+            };
+            this.HexPicker.ColorChange += (s, color)=> 
+            {
+                color.A = this.SolidColorBrush.Color.A;
+                this.SetColor(color);
+            };
             this.ColorButton.Tapped += (s, e) =>
             {
                 if (this.Brush == null) return;
 
-                this.ColorFlyout.ShowAt(this.ColorButton);
-                this.ColorPicker.Color = this.SolidColorBrush.Color;
+                if (this.Manager.IsLeft || this.Manager.IsRight || this.Manager.Index >= 0)
+                {
+                    this.ColorFlyout.ShowAt(this.ColorButton);
+                    this.ColorPicker.Color = this.SolidColorBrush.Color;
+                }
             };
 
-            //Offset            
-            this.NumberControl.ValueChange += (s, value) => this.SetOffset((float)value / 100.0f);
+            //Opacity         
+            this.OpacityControl.Minimum = 0;
+            this.OpacityControl.Maximum = 255;
+            this.OpacityControl.ValueChange += (s, value) => this.SetColor(Color.FromArgb((byte)value, this.SolidColorBrush.Color.R, this.SolidColorBrush.Color.G, this.SolidColorBrush.Color.B));
+
+            //Offset         
+            this.OffsetControl.Minimum = 0;
+            this.OffsetControl.Maximum = 100;
+            this.OffsetControl.ValueChange += (s, value) => this.SetOffset((float)value / 100.0f);
         }
 
 
-        private void OffsetChanged(float offset) => this.NumberControl.Value = (int)(offset * 100);
+        private void OffsetChanged(float offset) => this.OffsetControl.Value = (int)(offset * 100);
         private void StopChanged(Color color, int offset, bool isEnabled)
         {
             this.SolidColorBrush.Color = color;
-            this.NumberControl.Value = offset;
-            this.RemoveButton.IsEnabled = this.NumberControl.IsEnabled = isEnabled;
+            this.HexPicker.Color = color;
+
+            this.OpacityControl.Value = color.A;
+            this.OffsetControl.Value = offset;
+
+            this.RemoveButton.IsEnabled = this.OffsetControl.IsEnabled = isEnabled;
         }
 
 
@@ -214,6 +265,9 @@ namespace Retouch_Photo2.Brushs
         public void SetColor(Color color)
         {
             this.SolidColorBrush.Color = color;
+
+            this.OpacityControl.Value = color.A;
+
             if (this.Brush == null) return;
 
             if (this.Manager.IsLeft)
@@ -274,7 +328,9 @@ namespace Retouch_Photo2.Brushs
 
             this.Manager.Reserve();
             this.Manager.SetArray(this.Brush.Array);
+
             this.CanvasControl.Invalidate();
+            this.StopsChange?.Invoke();//Delegate
         }
         // <summary> Remove current stop. </summary>
         public void Remove()
@@ -285,12 +341,32 @@ namespace Retouch_Photo2.Brushs
             if (this.Manager.IsRight) return;
 
             this.Manager.Stops.RemoveAt(this.Manager.Index);
-            this.Manager.Index = -1;
+
+            if (this.Manager.Stops.Count==0)
+            {
+                this.Manager.IsLeft = true;
+                this.Manager.IsRight = false;
+                this.Manager.Index = -1;
+
+                this.StopChanged(this.Manager.LeftColor, 0, false);
+            }
+            else
+            {
+                this.Manager.Index--;
+
+                if (this.Manager.Index> this.Manager.Stops.Count-1)
+                    this.Manager.Index = this.Manager.Stops.Count - 1;
+                else if (this.Manager.Index<0)
+                    this.Manager.Index = 0;
+
+                CanvasGradientStop stop = this.Manager.Stops[this.Manager.Index];
+                this.StopChanged(stop.Color, 0, false);
+            } 
 
             this.Brush.Array = this.Manager.GetArray();
 
             this.CanvasControl.Invalidate();
-            return;
+            this.StopsChange?.Invoke();//Delegate
         }
     }
 }

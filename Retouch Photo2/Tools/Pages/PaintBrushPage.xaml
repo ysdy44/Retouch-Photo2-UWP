@@ -7,17 +7,32 @@
     xmlns:tool="using:Retouch_Photo2.Tools"
     xmlns:brushs="using:Retouch_Photo2.Brushs"
     xmlns:controls="using:Retouch_Photo2.Controls"
+    xmlns:pickers="using:HSVColorPickers"
     mc:Ignorable="d"
-    d:DesignHeight="50"
-    d:DesignWidth="800"     
      >
 
+    <tool:ToolPage.Resources>
+        <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <pickers:ColorPicker x:Name="ColorPicker" Width="222"/>
+        </Flyout>
+        <Flyout x:Name="PickerFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <brushs:BrushPicker x:Name="BrushPicker"/>
+        </Flyout>
+    </tool:ToolPage.Resources>
+    
+    
     <StackPanel Orientation="Horizontal" Height="50" Padding="12,4">
-       
-        <TextBlock Text="Fill:" Style="{ThemeResource AppTextBlock}"/>
 
-        <controls:BrushControl x:Name="BrushControl" GeometryLayer="{x:Bind ViewModel.CurrentGeometryLayer,Mode=OneWay}"/>
+        <TextBlock Text="FillOrStroke:" Style="{ThemeResource AppTextBlock}"/>
+        <ComboBox x:Name="FillOrStrokeComboBox" SelectedIndex="{x:Bind FillOrStrokeConverter(ViewModel.FillOrStroke),Mode=OneWay}" VerticalAlignment="Center" Background="{ThemeResource AppForeground}" Style="{StaticResource AppComboBoxStyle}"/>
         
-    </StackPanel>
+        <AppBarSeparator/>
+        
+        <TextBlock Text="BrushType:" Style="{ThemeResource AppTextBlock}"/>
+        <ComboBox x:Name="BrushTypeComboBox" SelectedIndex="{x:Bind BrushConverter(ViewModel.Brush),Mode=OneWay}" VerticalAlignment="Center" Background="{ThemeResource AppForeground}" Style="{StaticResource AppComboBoxStyle}"/>
 
+        <TextBlock Text="Brush:" Style="{ThemeResource AppTextBlock}"/>
+        <brushs:BrushShowControl x:Name="BrushShowControl" Brush="{x:Bind ViewModel.Brush,Mode=OneWay}"/>
+
+    </StackPanel>
 </tool:ToolPage>

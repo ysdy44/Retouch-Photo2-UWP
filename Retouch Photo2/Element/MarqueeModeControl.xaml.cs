@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Element
 {
-    public sealed partial class ModeControl : UserControl
+    public sealed partial class MarqueeModeControl : UserControl
     {
         //Delegate
         public delegate void ModeChangedHandler(MarqueeMode mode);
@@ -31,9 +31,9 @@ namespace Retouch_Photo2.Element
             get { return (MarqueeMode)GetValue(ModeProperty); }
             set { SetValue(ModeProperty, value); }
         }
-        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(MarqueeMode), typeof(ModeControl), new PropertyMetadata(MarqueeMode.None, (sender, e) =>
+        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(MarqueeMode), typeof(MarqueeModeControl), new PropertyMetadata(MarqueeMode.None, (sender, e) =>
         {
-            ModeControl con = (ModeControl)sender;
+            MarqueeModeControl con = (MarqueeModeControl)sender;
 
             if (e.NewValue is MarqueeMode value)
             {
@@ -45,8 +45,8 @@ namespace Retouch_Photo2.Element
 
         #endregion
 
-        public ModeControl()
-        {
+        public MarqueeModeControl()
+        {            
             this.InitializeComponent();
 
             this.NoneSegmented.Tapped += (sender, e) => this.Mode = MarqueeMode.None;

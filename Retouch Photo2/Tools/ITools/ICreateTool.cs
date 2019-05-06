@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Tools.ITools
 
             this.Layer.Transformer = Transformer.CreateFromSize(rect.Width, rect.Height, new Vector2(rect.X, rect.Y));
             this.ViewModel.InvalidateWithJumpedQueueLayer(this.Layer);
-            this.ViewModel.CurrentLayer = null;
+            this.ViewModel.SetLayer(null);
             return true;
         }
         public override bool Complete(Vector2 point)
@@ -50,9 +50,10 @@ namespace Retouch_Photo2.Tools.ITools
             Vector2 endPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.InverseMatrix);
             VectRect rect = new VectRect(this.StartPoint, endPoint, this.ViewModel.MarqueeMode);
 
-            Layer Layer = this.GetLayerFunc(rect);//@Override
+            Layer layer = this.GetLayerFunc(rect);//@Override
             this.ViewModel.RenderLayer.Insert(Layer);
-            this.ViewModel.CurrentLayer = Layer;
+
+            this.ViewModel.SetLayer(Layer);
 
             this.Layer = null;
             this.ViewModel.Invalidate();

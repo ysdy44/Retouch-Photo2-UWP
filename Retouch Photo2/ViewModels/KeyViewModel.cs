@@ -30,13 +30,13 @@ namespace Retouch_Photo2.ViewModels
                     break;
 
                 case VirtualKey.Delete:
-                    Layer layer = this.ViewModel.CurrentLayer;
+                    Layer layer = this.ViewModel.Layer;
                     if (layer != null)
                     {
                         this.ViewModel.RenderLayer.Remove(layer);
                         this.ViewModel.Tool.ToolOnNavigatedTo();
                     }
-                    this.ViewModel.CurrentLayer = null;
+                    this.ViewModel.SetLayer(null);
                     break;
 
                 default:

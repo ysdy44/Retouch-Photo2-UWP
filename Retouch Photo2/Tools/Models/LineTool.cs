@@ -35,7 +35,7 @@ namespace Retouch_Photo2.Tools.Models
             this.point = point;
             this.StartPoint = Vector2.Transform(point, this.ViewModel.MatrixTransformer.InverseMatrix);
 
-            this.Layer = LineLayer.CreateFromRect(this.ViewModel.CanvasDevice, this.StartPoint, this.StartPoint, this.ViewModel.Color);
+            this.Layer = LineLayer.CreateFromRect(this.ViewModel.CanvasDevice, this.StartPoint, this.StartPoint, this.ViewModel.Color,this.ViewModel.StrokeWidth);
             this.ViewModel.InvalidateWithJumpedQueueLayer(this.Layer);
         }
         public override void Delta(Vector2 point)
@@ -54,9 +54,9 @@ namespace Retouch_Photo2.Tools.Models
 
             if (Transformer.OutNodeDistance(this.point, point))
             {
-                LineLayer layer = LineLayer.CreateFromRect(this.ViewModel.CanvasDevice, this.StartPoint, endPoint, this.ViewModel.Color);
+                LineLayer layer = LineLayer.CreateFromRect(this.ViewModel.CanvasDevice, this.StartPoint, endPoint, this.ViewModel.Color, this.ViewModel.StrokeWidth);
                 this.ViewModel.RenderLayer.Insert(layer);
-                this.ViewModel.CurrentLayer = layer;
+                this.ViewModel.SetLayer(layer);
             }
 
             this.Layer = null;

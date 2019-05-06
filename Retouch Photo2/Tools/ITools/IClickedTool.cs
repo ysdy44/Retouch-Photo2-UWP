@@ -60,7 +60,7 @@ namespace Retouch_Photo2.Tools.ITools
             {
                 // Click on the layer
                 Layer layer = this.ViewModel.RenderLayer.GetClickedLayer(this.point, this.ViewModel.MatrixTransformer.Matrix);
-                this.ViewModel.CurrentLayer = layer;
+                this.ViewModel.SetLayer(layer);
             }
             else
             {

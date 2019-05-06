@@ -18,8 +18,8 @@ namespace Retouch_Photo2.Tools.Models
             base.WorkIcon = new RectangleControl();
             base.Page = new RectanglePage();
         }
-        
 
-        public override Layer GetLayer(VectRect rect) => RectangularLayer.CreateFromRect(this.ViewModel.CanvasDevice, rect, this.ViewModel.Color);
+
+        public override Layer GetLayer(VectRect rect) => RectangularLayer.CreateFromRect(this.ViewModel.CanvasDevice, rect, this.ViewModel.Color, this.ViewModel.StrokeColor, this.ViewModel.StrokeWidth);
     }
 }

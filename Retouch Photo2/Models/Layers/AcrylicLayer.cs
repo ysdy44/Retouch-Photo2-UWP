@@ -75,14 +75,15 @@ namespace Retouch_Photo2.Models.Layers
 
         }
 
-        
-        public static AcrylicLayer CreateFromRect(ICanvasResourceCreator creator, VectRect rect, Color color, float opacity = 0.5f)
+
+        public static AcrylicLayer CreateFromRect(ICanvasResourceCreator creator, VectRect rect, Color color, float tintOpacity, float blurAmount)
         {
             return new AcrylicLayer
             {
                 Transformer = Transformer.CreateFromSize(rect.Width, rect.Height, new Vector2(rect.X, rect.Y), disabledRadian: true),
                 TintColor = color,
-                TintOpacity = opacity
+                TintOpacity = tintOpacity,
+                BlurAmount = blurAmount
             };
         }
 

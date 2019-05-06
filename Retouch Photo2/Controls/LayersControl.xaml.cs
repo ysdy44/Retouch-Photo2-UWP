@@ -52,10 +52,9 @@ namespace Retouch_Photo2.Controls
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e) => this.ViewModel.Invalidate();
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (e.ClickedItem is Layer item)
+            if (e.ClickedItem is Layer layer)
             {
-                this.ViewModel.CurrentLayer = item;
-                this.ViewModel.Transformer = item.Transformer;
+                this.ViewModel.SetLayer(layer);
             }
             this.ViewModel.Invalidate();
         }
@@ -63,6 +62,8 @@ namespace Retouch_Photo2.Controls
 
         private async void AddButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            this.ViewModel.Text = this.ViewModel.Index.ToString();
+            return;
             FileOpenPicker openPicker = new FileOpenPicker
             {
                 ViewMode = PickerViewMode.Thumbnail,
@@ -83,7 +84,8 @@ namespace Retouch_Photo2.Controls
             Layer layer = await ImageLayer.CreateFromFlie(this.ViewModel.CanvasDevice, file, center);
 
             this.ViewModel.RenderLayer.Insert(layer);
-            this.ViewModel.CurrentLayer = layer;
+
+            this.ViewModel.SetLayer(layer);
             this.ViewModel.Invalidate();
         }
     }

@@ -30,13 +30,11 @@ namespace Retouch_Photo2.Brushs.Stops
         public void DrawBackground(CanvasDrawingSession ds, ICanvasResourceCreator creator, CanvasGradientStop[] array)
         {
             //Rect
-            ds.FillRoundedRectangle(0, 0, this.OuterWidth, this.OuterHeight, 6, 6, new CanvasLinearGradientBrush(creator, array)
+            ds.FillRectangle(0, 0, this.OuterWidth, this.OuterHeight, new CanvasLinearGradientBrush(creator, array)
             {
                 StartPoint = new Vector2(this.Left, this.Center),
                 EndPoint = new Vector2(this.Right, this.Center),
             });
-            ds.DrawRoundedRectangle(0, 0, this.OuterWidth, this.OuterHeight, 6, 6, Colors.Gray);
-
 
             //Left
             ds.DrawLine(this.Left, 0, this.Left, this.OuterHeight, Color.FromArgb(70, 127, 127, 127), 3);

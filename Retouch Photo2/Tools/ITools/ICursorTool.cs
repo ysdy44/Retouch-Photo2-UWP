@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Tools.ITools
         public override bool Start(Vector2 point)
         {
             // Transformer
-            Layer layer = this.ViewModel.CurrentLayer;
+            Layer layer = this.ViewModel.Layer;
             if (layer == null)
             {
                 this.ViewModel.TransformerMode = TransformerMode.None;
@@ -44,7 +44,7 @@ namespace Retouch_Photo2.Tools.ITools
             if (this.ViewModel.TransformerMode == TransformerMode.None) return false;
 
             // Transformer
-            Layer layer = this.ViewModel.CurrentLayer;
+            Layer layer = this.ViewModel.Layer;
             if (layer == null)
             {
                 return false;
@@ -64,10 +64,10 @@ namespace Retouch_Photo2.Tools.ITools
             if (this.ViewModel.TransformerMode == TransformerMode.None) return false;
 
             // Transformer
-            Layer layer = this.ViewModel.CurrentLayer;
+            Layer layer = this.ViewModel.Layer;
             if (layer == null)
             {
-                this.ViewModel.CurrentLayer = null;
+                this.ViewModel.SetLayer(null);
 
                 this.ViewModel.TransformerMode = TransformerMode.None;
                 this.ViewModel.Invalidate();
@@ -87,7 +87,7 @@ namespace Retouch_Photo2.Tools.ITools
         public override bool Draw(CanvasDrawingSession ds)
         {
             //Transformer      
-            Layer layer = this.ViewModel.CurrentLayer;
+            Layer layer = this.ViewModel.Layer;
             if (layer == null)
             {
                 return false;

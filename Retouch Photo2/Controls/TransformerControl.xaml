@@ -16,7 +16,7 @@
         <Grid x:Name="IndicatorRootGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="46"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -29,13 +29,13 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="Width" Style="{StaticResource AppTextBlock}"/>
-            <Border Grid.Column="0" Grid.Row="1" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Width:" Style="{StaticResource AppTextBlock}"/>
+            <Border Grid.Column="0" Grid.Row="1" Background="Transparent" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
                 <pickers:NumberPicker x:Name="WPicker" Width="Auto" Height="Auto" Unit="dp" />
             </Border>
 
-            <TextBlock Grid.Column="2" Grid.Row="0" Text="Height" Style="{StaticResource AppTextBlock}"/>
-            <Border Grid.Column="2" Grid.Row="1" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
+            <TextBlock Grid.Column="2" Grid.Row="0" Text="Height:" Style="{StaticResource AppTextBlock}"/>
+            <Border Grid.Column="2" Grid.Row="1" Background="Transparent" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
                 <pickers:NumberPicker x:Name="HPicker" Width="Auto" Height="Auto" Unit="dp"/>
             </Border>
 
@@ -47,25 +47,25 @@
 
             <!--/////////////////////////////////////////////////////////-->
 
-            <TextBlock Grid.Column="0" Grid.Row="2" Text="Rotate" Style="{StaticResource AppTextBlock}"/>
-            <Border Grid.Column="0" Grid.Row="3" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Rotate:" Style="{StaticResource AppTextBlock}"/>
+            <Border Grid.Column="0" Grid.Row="3" Background="Transparent" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
                 <pickers:NumberPicker x:Name="RPicker" Width="Auto" Height="Auto" Unit="º" />
             </Border>
 
-            <TextBlock Grid.Column="2" Grid.Row="2" Text="Skew" Style="{StaticResource AppTextBlock}"/>
-            <Border Grid.Column="2" Grid.Row="3" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
+            <TextBlock Grid.Column="2" Grid.Row="2" Text="Skew:" Style="{StaticResource AppTextBlock}"/>
+            <Border Grid.Column="2" Grid.Row="3" Background="Transparent" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
                 <pickers:NumberPicker x:Name="SPicker" Width="Auto" Height="Auto" Unit="º" />
             </Border>
 
             <!--/////////////////////////////////////////////////////////-->
 
-            <TextBlock Grid.Column="0" Grid.Row="4" Text="X" Style="{StaticResource AppTextBlock}"/>
-            <Border Grid.Column="0" Grid.Row="5" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
+            <TextBlock Grid.Column="0" Grid.Row="4" Text="X:" Style="{StaticResource AppTextBlock}"/>
+            <Border Grid.Column="0" Grid.Row="5" Background="Transparent" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
                 <pickers:NumberPicker x:Name="XPicker" Width="Auto" Height="Auto" />
             </Border>
 
-            <TextBlock Grid.Column="2" Grid.Row="4" Text="Y" Style="{StaticResource AppTextBlock}"/>
-            <Border Grid.Column="2" Grid.Row="5" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
+            <TextBlock Grid.Column="2" Grid.Row="4" Text="Y:" Style="{StaticResource AppTextBlock}"/>
+            <Border Grid.Column="2" Grid.Row="5" Background="Transparent" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
                 <pickers:NumberPicker x:Name="YPicker" Width="Auto" Height="Auto" />
             </Border>
 
@@ -80,7 +80,7 @@
         </Grid>
 
 
-        <Border x:Name="RemoteRootGrid" Padding="0,10">
+        <Border x:Name="RemoteRootGrid" Padding="2">
             <transformercontrols:RemoteControl x:Name="RemoteControl" 
                      Width="Auto" Height="Auto"                                               
                      Background="{ThemeResource AppForeground}"

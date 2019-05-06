@@ -29,7 +29,7 @@ namespace Retouch_Photo2.Tools.Models
 
         public override void Start(Vector2 point)
         {
-            if (this.ViewModel.CurrentCurveLayer == null)
+            if (this.ViewModel.CurveLayer == null)
             {
                 if (this.hasStartPoint == false)
                 {
@@ -44,7 +44,7 @@ namespace Retouch_Photo2.Tools.Models
 
                     CurveLayer curveLayer = CurveLayer.CreateFromPoint(this.ViewModel.CanvasDevice, this.startPoint, endPoint, Colors.Black);
                     this.ViewModel.RenderLayer.Insert(curveLayer);
-                    this.ViewModel.CurrentCurveLayer = curveLayer;
+                    this.ViewModel.CurveLayer = curveLayer;
 
                     this.hasStartPoint = false;
                     this.ViewModel.Invalidate();
@@ -52,28 +52,28 @@ namespace Retouch_Photo2.Tools.Models
                 }
             }
 
-            this.ViewModel.CurveNodes.Operator_Start(point, this.ViewModel.MatrixTransformer.Matrix, this.ViewModel.MatrixTransformer.InverseMatrix, this.ViewModel.CurrentCurveLayer.Nodes);
+            this.ViewModel.CurveNodes.Operator_Start(point, this.ViewModel.MatrixTransformer.Matrix, this.ViewModel.MatrixTransformer.InverseMatrix, this.ViewModel.CurveLayer.Nodes);
             this.ViewModel.Invalidate();
         }
         public override void Delta(Vector2 point)
         {
-            if (this.ViewModel.CurrentCurveLayer == null) return;
+            if (this.ViewModel.CurveLayer == null) return;
 
-            this.ViewModel.CurveNodes.Operator_Delta(point, this.ViewModel.MatrixTransformer.Matrix, this.ViewModel.MatrixTransformer.InverseMatrix, this.ViewModel.CurrentCurveLayer.Nodes);
+            this.ViewModel.CurveNodes.Operator_Delta(point, this.ViewModel.MatrixTransformer.Matrix, this.ViewModel.MatrixTransformer.InverseMatrix, this.ViewModel.CurveLayer.Nodes);
 
             //ResetTransformer
-            this.ViewModel.CurrentCurveLayer.ResetNodesGeometryByNodes();
+            this.ViewModel.CurveLayer.ResetNodesGeometryByNodes();
             this.ViewModel.Invalidate();
         }
         public override void Complete(Vector2 point)
         {
-            if (this.ViewModel.CurrentCurveLayer == null) return;
+            if (this.ViewModel.CurveLayer == null) return;
 
-            this.ViewModel.CurveNodes.Operator_Complete(point, this.ViewModel.MatrixTransformer.Matrix, this.ViewModel.MatrixTransformer.InverseMatrix, this.ViewModel.CurrentCurveLayer.Nodes);
+            this.ViewModel.CurveNodes.Operator_Complete(point, this.ViewModel.MatrixTransformer.Matrix, this.ViewModel.MatrixTransformer.InverseMatrix, this.ViewModel.CurveLayer.Nodes);
 
             //ResetTransformer
-            this.ViewModel.CurrentCurveLayer.ResetNodesGeometryByNodes();
-            this.ViewModel.CurrentCurveLayer.ResetTransformerByNodesGeometry();
+            this.ViewModel.CurveLayer.ResetNodesGeometryByNodes();
+            this.ViewModel.CurveLayer.ResetTransformerByNodesGeometry();
             this.ViewModel.Invalidate();
         }
 
@@ -85,10 +85,10 @@ namespace Retouch_Photo2.Tools.Models
                 HomographyController.Transformer.DrawNode(ds, startPoint);
             }
 
-            if (this.ViewModel.CurrentCurveLayer == null) return;
+            if (this.ViewModel.CurveLayer == null) return;
 
             //Geometry 
-            CanvasGeometry geometry = this.ViewModel.CurrentCurveLayer.NodesGeometry.Transform(this.ViewModel.MatrixTransformer.Matrix);
+            CanvasGeometry geometry = this.ViewModel.CurveLayer.NodesGeometry.Transform(this.ViewModel.MatrixTransformer.Matrix);
             ds.DrawGeometry(geometry, Colors.DodgerBlue, 2);
 
             this.ViewModel.CurveNodes.Draw
@@ -96,7 +96,7 @@ namespace Retouch_Photo2.Tools.Models
                 this.ViewModel.CanvasDevice, 
                 ds,
                 this.ViewModel.MatrixTransformer.Matrix,
-                this.ViewModel.CurrentCurveLayer.Nodes
+                this.ViewModel.CurveLayer.Nodes
             );
         }
     }

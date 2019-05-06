@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Tools.ITools
             else
             {
                 this.IsTranslation = true;
-                this.ViewModel.CurrentLayer = layer;
+                this.ViewModel.SetLayer(layer);
                 this.ViewModel.TransformerDictionary[TransformerMode.Translation].Start(point, layer, this.ViewModel.MatrixTransformer.Matrix, this.ViewModel.MatrixTransformer.InverseMatrix);
 
                 return true;
@@ -35,7 +35,7 @@ namespace Retouch_Photo2.Tools.ITools
             if (this.IsTranslation == false) return false;
 
             //Translation 
-            Layer layer = this.ViewModel.CurrentLayer;
+            Layer layer = this.ViewModel.Layer;
             if (layer == null)
             {
                 return false;
@@ -56,7 +56,7 @@ namespace Retouch_Photo2.Tools.ITools
             this.IsTranslation = false;
 
             //Translation 
-            Layer layer = this.ViewModel.CurrentLayer;
+            Layer layer = this.ViewModel.Layer;
             if (layer == null)
             {
                 return false;
