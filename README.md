@@ -6,7 +6,7 @@
 
 
 ## Function description
-![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/Retouch_Designer/ScreenShot/2019-2-28.jpg)
+![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/Retouch_Designer/ScreenShot/2019-5-7.jpg)
 
 Vector Graphics Editing Tool, you can transform, fill graphics, support layers, graphics combination.
 
