@@ -26,9 +26,18 @@ namespace Retouch_Photo2.Element
                 if (width > 100.0f) width = 100.0f;
 
                 this.ViewModel.StrokeWidth = width;
+
+                //Line
                 if (this.ViewModel.LineLayer != null)
                 {
                     this.ViewModel.LineLayer.StrokeWidth = width;
+                    this.ViewModel.Invalidate();
+                }
+
+                //Geometry
+                if (this.ViewModel.GeometryLayer != null)
+                {
+                    this.ViewModel.GeometryLayer.StrokeWidth = width;
                     this.ViewModel.Invalidate();
                 }
             };

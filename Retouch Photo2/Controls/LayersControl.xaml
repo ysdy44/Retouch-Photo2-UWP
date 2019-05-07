@@ -92,13 +92,10 @@
     <ListView  x:Name="ListView"
                 
                SelectedIndex="{x:Bind ViewModel.Index,Mode=TwoWay}"
-               SelectionChanged="ListView_SelectionChanged"
                
                ItemsSource="{x:Bind ViewModel.RenderLayer.Layers}"
                ItemTemplate="{StaticResource DataTemplate}"
-                            
-               IsItemClickEnabled="True" ItemClick="ListView_ItemClick"
-               
+                                           
                Style="{StaticResource AppListViewStyle}"
                ItemContainerStyle="{StaticResource AppItemContainerStyle}"
                               
@@ -106,7 +103,7 @@
                >
         
         <ListView.Header>
-            <Button x:Name="AddButton" Width="Auto" Height="44"  Content="&#xE109;" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}" Tapped="AddButton_Tapped"/>
+            <Button x:Name="AddButton" Width="Auto" Height="44"  Content="&#xE109;" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
         </ListView.Header>
     </ListView>
     

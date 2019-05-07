@@ -276,12 +276,7 @@ namespace Retouch_Photo2.ViewModels
         public float StrokeWidth = 1.0f;
         /// <summary>填充或描边</summary>     
         public FillOrStroke FillOrStroke;
-        /// <summary>设置填充或描边</summary>     
-        public void SetFillOrStroke(FillOrStroke fillOrStroke)
-        {
-            this.FillOrStroke = fillOrStroke;
-            this.OnPropertyChanged(nameof(this.FillOrStroke));//Notify 
-        }
+        /// <summary>设置填充或描边</summary> 
         public void SetFillOrStroke(FillOrStroke fillOrStroke, Retouch_Photo2.Brushs.Brush brush)
         {
             this.FillOrStroke = fillOrStroke;
@@ -512,24 +507,25 @@ namespace Retouch_Photo2.ViewModels
             get => marqueeMode;
             set
             {
-                if (marqueeMode == value) return;
-                marqueeMode = value; 
+                if (this.marqueeMode == value) return;
+                this.marqueeMode = value; 
                 this.OnPropertyChanged(nameof(this.MarqueeMode));//Notify 
             }
         }
         private MarqueeMode marqueeMode = MarqueeMode.None;
 
 
-                #endregion
+            
+        #endregion
 
 
         /// <summary> 文本 </summary>      
         public string Text
         {
-            get => text;
+            get => this.text;
             set
             {
-                text = value; 
+                this.text = value; 
                 this.OnPropertyChanged(nameof(this.Text));//Notify 
             }
         }

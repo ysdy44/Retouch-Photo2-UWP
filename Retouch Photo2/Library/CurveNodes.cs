@@ -182,10 +182,9 @@ namespace Retouch_Photo2.Library
 
                 foreach (Node item in nodes)
                 {
-                    NodeChooseMode ChooseMode = item.GetChooseMode(inverseMatrixVector);
-                    if (ChooseMode != NodeChooseMode.None)
+                    Vector2 nodeTransfrom = Vector2.Transform(item.Vector, matrix);
+                    if (Vector2.DistanceSquared(vector, nodeTransfrom) < 400)
                     {
-                        item.ChooseMode = ChooseMode;
                         this.Node = item;
                         break;
                     }
@@ -536,31 +535,6 @@ namespace Retouch_Photo2.Library
                     break;
             }
         }
-
-
-
-
-        /// <summary>
-        /// Returns true if a vector or a control point is in the dot
-        /// 如果点中了向量或某个控制点，返回true
-        /// </summary>
-        /// <param name="v">the position</param>
-        /// <returns></returns>
-        public NodeChooseMode GetChooseMode(Vector2 vector)
-        {
-            if (this.ChooseMode != NodeChooseMode.None)
-            {
-                if (Vector2.DistanceSquared(vector, this.LeftControl) < 100) return NodeChooseMode.LeftControl;
-                else if (Vector2.DistanceSquared(vector, this.RightControl) < 100) return NodeChooseMode.RightControl;
-            }
-
-            if (Vector2.DistanceSquared(vector, this.Vector) < 100) return NodeChooseMode.Vector; ;
-
-            return NodeChooseMode.None;
-        }
-
-
-
     }
 
 

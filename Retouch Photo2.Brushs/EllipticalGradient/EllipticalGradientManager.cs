@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Brushs.EllipticalGradient
         #region Gradient Outer
 
 
-        public Matrix3x2 GetTransform(Vector2 center, Vector2 xPoint) => Matrix3x2.CreateTranslation(-center) * Matrix3x2.CreateRotation(Transformer2222.VectorToRadians(xPoint - center)) * Matrix3x2.CreateTranslation(center);
+        public Matrix3x2 GetTransform(Vector2 center, Vector2 xPoint) => Matrix3x2.CreateTranslation(-center) * Matrix3x2.CreateRotation(this.VectorToRadians(xPoint - center)) * Matrix3x2.CreateTranslation(center);
 
         private float RadiusX;
         public float GetRadiusX(Vector2 center, Vector2 xPoint) => Vector2.Distance(center, xPoint);
@@ -132,21 +132,21 @@ namespace Retouch_Photo2.Brushs.EllipticalGradient
         public void Start(Vector2 point, Matrix3x2 matrix)
         {
             Vector2 xPoint = Vector2.Transform(this.XPoint, matrix);
-            if (Transformer2222.OutNodeDistance(point, xPoint) == false)
+            if (Vector2.DistanceSquared(point, xPoint) < 400)
             {
                 this.Type = EllipticalGradientType.XPoint;
                 return;
             }
 
             Vector2 yPoint = Vector2.Transform(this.YPoint, matrix);
-            if (Transformer2222.OutNodeDistance(point, yPoint) == false)
+            if (Vector2.DistanceSquared(point, yPoint) < 400)
             {
                 this.Type = EllipticalGradientType.YPoint;
                 return;
             }
 
             Vector2 center = Vector2.Transform(this.Center, matrix);
-            if (Transformer2222.OutNodeDistance(point, center) == false)
+            if (Vector2.DistanceSquared(point, center) < 400)
             {
                 this.Type = EllipticalGradientType.Center;
                 return;
@@ -187,13 +187,39 @@ namespace Retouch_Photo2.Brushs.EllipticalGradient
 
             ds.DrawLine(xPoint, center, Colors.DodgerBlue);
             ds.DrawLine(yPoint, center, Colors.DodgerBlue);
-            Transformer2222.DrawNode(ds, xPoint);
-            Transformer2222.DrawNode(ds, yPoint);
-            Transformer2222.DrawNode(ds, center);
+            this.DrawNode(ds, xPoint);
+            this.DrawNode(ds, yPoint);
+            this.DrawNode(ds, center);
         }
 
 
+        /// <summary> Draw a ⊙. </summary>
+        public void DrawNode(CanvasDrawingSession ds, Vector2 vector)
+        {
+            ds.FillCircle(vector, 10, Windows.UI.Color.FromArgb(70, 127, 127, 127));
+            ds.FillCircle(vector, 8, Windows.UI.Colors.DodgerBlue);
+            ds.FillCircle(vector, 6, Windows.UI.Colors.White);
+        }
+
         #endregion
+
+
+
+        /// <summary> Get radians of the vector in the coordinate system. </summary>
+        public float VectorToRadians(Vector2 vector)
+        {
+            float tan = (float)Math.Atan(Math.Abs(vector.Y / vector.X));
+
+            //First Quantity
+            if (vector.X > 0 && vector.Y > 0) return tan;
+            //Second Quadrant
+            else if (vector.X > 0 && vector.Y < 0) return -tan;
+            //Third Quadrant  
+            else if (vector.X < 0 && vector.Y > 0) return (float)Math.PI - tan;
+            //Fourth Quadrant  
+            else return tan - (float)Math.PI;
+        }
+
 
     }
 }

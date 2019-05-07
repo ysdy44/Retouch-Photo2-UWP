@@ -7,26 +7,63 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using static Retouch_Photo2.Library.HomographyController;
 
 namespace Retouch_Photo2.Controls
 {
     public sealed partial class LayersControl : UserControl
     {
-
         //ViewModel
         public DrawViewModel ViewModel => Retouch_Photo2.App.ViewModel;
         
         //Delegate
         public delegate void FlyoutShowHandler(UserControl control);
         public event FlyoutShowHandler FlyoutShow = null;
-
-
+        
         public LayersControl()
         {
             this.InitializeComponent();
-        }
 
+            this.ListView.IsItemClickEnabled = true;
+            this.ListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is Layer layer)
+                {
+                    this.ViewModel.SetLayer(layer);
+                }
+                this.ViewModel.Invalidate();
+            };
+            this.ListView.SelectionChanged+=(s,e) => this.ViewModel.Invalidate();
+            
+
+            this.AddButton.Tapped += async (s, e) =>
+             {
+                //   this.ViewModel.Text = this.ViewModel.FillOrStroke.ToString();
+                //     return;
+                FileOpenPicker openPicker = new FileOpenPicker
+                 {
+                     ViewMode = PickerViewMode.Thumbnail,
+                     SuggestedStartLocation = PickerLocationId.PicturesLibrary,
+                     FileTypeFilter =
+                 {
+                     ".jpg",
+                     ".jpeg",
+                     ".png",
+                     ".bmp",
+                 }
+                 };
+
+                 StorageFile file = await openPicker.PickSingleFileAsync();
+                 if (file == null) return;
+
+                 Vector2 center = this.ViewModel.MatrixTransformer.Center;
+                 Layer layer = await ImageLayer.CreateFromFlie(this.ViewModel.CanvasDevice, file, center);
+
+                 this.ViewModel.RenderLayer.Insert(layer);
+
+                 this.ViewModel.SetLayer(layer);
+                 this.ViewModel.Invalidate();
+             };
+        }
 
         //Flyout
         UserControl control;
@@ -38,54 +75,11 @@ namespace Retouch_Photo2.Controls
             }
             else this.control = control;
         }
-
-
+        
         //Layer
         private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)
         {
             e.Handled = true;
-            this.ViewModel.Invalidate();
-        }
-
-
-        //ListView
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e) => this.ViewModel.Invalidate();
-        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            if (e.ClickedItem is Layer layer)
-            {
-                this.ViewModel.SetLayer(layer);
-            }
-            this.ViewModel.Invalidate();
-        }
-
-
-        private async void AddButton_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            this.ViewModel.Text = this.ViewModel.Index.ToString();
-            return;
-            FileOpenPicker openPicker = new FileOpenPicker
-            {
-                ViewMode = PickerViewMode.Thumbnail,
-                SuggestedStartLocation = PickerLocationId.PicturesLibrary,
-                FileTypeFilter =
-                {
-                     ".jpg",
-                     ".jpeg",
-                     ".png",
-                     ".bmp",
-                }
-            };
-
-            StorageFile file = await openPicker.PickSingleFileAsync();
-            if (file == null) return;
-
-            Vector2 center = this.ViewModel.MatrixTransformer.Center;
-            Layer layer = await ImageLayer.CreateFromFlie(this.ViewModel.CanvasDevice, file, center);
-
-            this.ViewModel.RenderLayer.Insert(layer);
-
-            this.ViewModel.SetLayer(layer);
             this.ViewModel.Invalidate();
         }
     }

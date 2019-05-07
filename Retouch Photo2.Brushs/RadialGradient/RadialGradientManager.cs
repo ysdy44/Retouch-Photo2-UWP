@@ -72,14 +72,14 @@ namespace Retouch_Photo2.Brushs.RadialGradient
         public void Start(Vector2 point, Matrix3x2 matrix)
         {
             Vector2 point2 = Vector2.Transform(this.Point, matrix);
-            if (Transformer2222.OutNodeDistance(point, point2) == false)
+            if (Vector2.DistanceSquared(point, point2) < 400)
             {
                 this.Type = RadialGradientType.Point;
                 return;
             }
 
             Vector2 center = Vector2.Transform(this.Center, matrix);
-            if (Transformer2222.OutNodeDistance(point, center) == false)
+            if (Vector2.DistanceSquared(point, center) < 400)
             {
                 this.Type = RadialGradientType.Center;
                 return;
@@ -114,10 +114,17 @@ namespace Retouch_Photo2.Brushs.RadialGradient
             Vector2 center = Vector2.Transform(this.Center, matrix);
 
             ds.DrawLine(point, center, Colors.DodgerBlue);
-            Transformer2222.DrawNode(ds, point);
-            Transformer2222.DrawNode(ds, center);
+            this.DrawNode(ds, point);
+            this.DrawNode(ds, center);
         }
 
+        /// <summary> Draw a ⊙. </summary>
+        public void DrawNode(CanvasDrawingSession ds, Vector2 vector)
+        {
+            ds.FillCircle(vector, 10, Windows.UI.Color.FromArgb(70, 127, 127, 127));
+            ds.FillCircle(vector, 8, Windows.UI.Colors.DodgerBlue);
+            ds.FillCircle(vector, 6, Windows.UI.Colors.White);
+        }
 
         #endregion
     }

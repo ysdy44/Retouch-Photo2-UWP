@@ -76,8 +76,6 @@ namespace Retouch_Photo2.Tools.Pages
             this.FillOrStrokeComboBox.ItemsSource = from FillOrStroke item in Enum.GetValues(typeof(FillOrStroke)) select item;
             this.FillOrStrokeComboBox.SelectionChanged += (s, e) =>
             {
-                if (this.ViewModel.Brush == null) return;
-
                 FillOrStroke type = (FillOrStroke)this.FillOrStrokeComboBox.SelectedIndex;
                 FillOrStroke oldType = this.ViewModel.FillOrStroke;
                 if (type == oldType) return;
@@ -87,13 +85,19 @@ namespace Retouch_Photo2.Tools.Pages
                 {
                     case FillOrStroke.Fill:
                         this.ViewModel.SetFillOrStroke(FillOrStroke.Fill, this.ViewModel.GeometryLayer.FillBrush);
+
+                        this.BrushShowControl.Invalidate();
+                        this.ViewModel.Invalidate();
                         break;
 
                     case FillOrStroke.Stroke:
                         this.ViewModel.SetFillOrStroke(FillOrStroke.Stroke, this.ViewModel.GeometryLayer.StrokeBrush);
+
+                        this.BrushShowControl.Invalidate();
+                        this.ViewModel.Invalidate();
                         break;
-                    default:
-                        break;
+
+                    default: break;
                 }
             };
 

@@ -120,7 +120,6 @@
     <Compile Include="EllipticalGradient\EllipticalGradientManager.cs" />
     <Compile Include="EllipticalGradient\EllipticalGradientType.cs" />
     <Compile Include="FillOrStroke.cs" />
-    <Compile Include="Transformer2222.cs" />
     <Compile Include="IGradientManager.cs" />
     <Compile Include="LinearGradient\LinearGradientManager.cs" />
     <Compile Include="LinearGradient\LinearGradientType.cs" />

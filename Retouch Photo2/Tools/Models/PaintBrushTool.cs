@@ -32,41 +32,50 @@ namespace Retouch_Photo2.Tools.Models
             (
                 start: (point) =>
                 {
-                    //Transformer      
-                    GeometryLayer geometryLayer = this.ViewModel.GeometryLayer;
-                    if (geometryLayer != null)
+                    //Transformer
+                    if (this.ViewModel.Brush != null)
                     {
                         Matrix3x2 matrix = this.ViewModel.MatrixTransformer.Matrix;
 
-                        switch (geometryLayer.FillBrush.Type)
+                        switch (this.ViewModel.Brush.Type)
                         {
                             case BrushType.None:
-                                geometryLayer.FillBrush.Type = BrushType.LinearGradient;
-                                this.LinearGradientInitialize(geometryLayer.FillBrush.LinearGradientManager, geometryLayer.Transformer, point);//LinearGradient
+                                {
+                                    this.ViewModel.Brush.Type = BrushType.LinearGradient;
+                                    if (this.ViewModel.Transformer is Transformer transformer)
+                                    {
+                                        this.LinearGradientInitialize(this.ViewModel.Brush.LinearGradientManager, transformer, point);//LinearGradient
+                                    }
+                                }
                                 return true;
 
                             case BrushType.Color:
-                                geometryLayer.FillBrush.Type = BrushType.LinearGradient;
-                                this.LinearGradientInitialize(geometryLayer.FillBrush.LinearGradientManager, geometryLayer.Transformer, point);//LinearGradient
+                                {
+                                    this.ViewModel.Brush.Type = BrushType.LinearGradient;
+                                    if (this.ViewModel.Transformer is Transformer transformer)
+                                    {
+                                        this.LinearGradientInitialize(this.ViewModel.Brush.LinearGradientManager, transformer, point);//LinearGradient
+                                    }
+                                }
                                 return true;
 
                             case BrushType.LinearGradient:
                                 {
-                                    IGradientManager manager = geometryLayer.FillBrush.LinearGradientManager;
+                                    IGradientManager manager = this.ViewModel.Brush.LinearGradientManager;
                                     manager.Start(point, matrix);
                                 }
                                 break;
 
                             case BrushType.RadialGradient:
                                 {
-                                    IGradientManager manager = geometryLayer.FillBrush.RadialGradientManager;
+                                    IGradientManager manager = this.ViewModel.Brush.RadialGradientManager;
                                     manager.Start(point, matrix);
                                 }
                                 return true;
 
                             case BrushType.EllipticalGradient:
                                 {
-                                    IGradientManager manager = geometryLayer.FillBrush.EllipticalGradientManager;
+                                    IGradientManager manager = this.ViewModel.Brush.EllipticalGradientManager;
                                     manager.Start(point, matrix);
                                 }
                                 return true;
@@ -88,7 +97,7 @@ namespace Retouch_Photo2.Tools.Models
                     {
                         Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.InverseMatrix;
                         
-                        switch (geometryLayer.FillBrush.Type)
+                        switch (this.ViewModel.Brush.Type)
                         {
                             case BrushType.None:
                                 return true;
@@ -98,21 +107,21 @@ namespace Retouch_Photo2.Tools.Models
 
                             case BrushType.LinearGradient:
                                 {
-                                    IGradientManager manager = geometryLayer.FillBrush.LinearGradientManager;
+                                    IGradientManager manager = this.ViewModel.Brush.LinearGradientManager;
                                     manager.Delta(point, inverseMatrix);
                                 }
                                 break;
 
                             case BrushType.RadialGradient:
                                 {
-                                    IGradientManager manager = geometryLayer.FillBrush.RadialGradientManager;
+                                    IGradientManager manager = this.ViewModel.Brush.RadialGradientManager;
                                     manager.Delta(point, inverseMatrix);
                                 }
                                 return true;
 
                             case BrushType.EllipticalGradient:
                                 {
-                                    IGradientManager manager = geometryLayer.FillBrush.EllipticalGradientManager;
+                                    IGradientManager manager = this.ViewModel.Brush.EllipticalGradientManager;
                                     manager.Delta(point, inverseMatrix);
                                 }
                                 return true;
@@ -134,7 +143,7 @@ namespace Retouch_Photo2.Tools.Models
                     {
                         Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.InverseMatrix;
 
-                        switch (geometryLayer.FillBrush.Type)
+                        switch (this.ViewModel.Brush.Type)
                         {
                             case BrushType.None:
                                 break;
@@ -144,21 +153,21 @@ namespace Retouch_Photo2.Tools.Models
 
                             case BrushType.LinearGradient:
                                 {
-                                    IGradientManager manager = geometryLayer.FillBrush.LinearGradientManager;
+                                    IGradientManager manager = this.ViewModel.Brush.LinearGradientManager;
                                     manager.Complete();
                                 }
                                 break;
 
                             case BrushType.RadialGradient:
                                 {
-                                    IGradientManager manager = geometryLayer.FillBrush.RadialGradientManager;
+                                    IGradientManager manager = this.ViewModel.Brush.RadialGradientManager;
                                     manager.Complete();
                                 }
                                 break;
 
                             case BrushType.EllipticalGradient:
                                 {
-                                    IGradientManager manager = geometryLayer.FillBrush.EllipticalGradientManager;
+                                    IGradientManager manager = this.ViewModel.Brush.EllipticalGradientManager;
                                     manager.Complete();
                                 }
                                 break;
@@ -189,7 +198,7 @@ namespace Retouch_Photo2.Tools.Models
                 Matrix3x2 matrix = this.ViewModel.MatrixTransformer.Matrix;
                 geometryLayer.Draw(ds, matrix);
 
-                switch (geometryLayer.FillBrush.Type)
+                switch (this.ViewModel.Brush.Type)
                 {
                     case BrushType.None:
                         break;
@@ -199,21 +208,21 @@ namespace Retouch_Photo2.Tools.Models
 
                     case BrushType.LinearGradient:
                         {
-                            IGradientManager manager = geometryLayer.FillBrush.LinearGradientManager;
+                            IGradientManager manager = this.ViewModel.Brush.LinearGradientManager;
                             manager.Draw(ds, matrix);
                         }
                         break;
 
                     case BrushType.RadialGradient:
                         {
-                            IGradientManager manager = geometryLayer.FillBrush.RadialGradientManager;
+                            IGradientManager manager = this.ViewModel.Brush.RadialGradientManager;
                             manager.Draw(ds, matrix);
                         }
                         break;
 
                     case BrushType.EllipticalGradient:
                         {
-                            IGradientManager manager = geometryLayer.FillBrush.EllipticalGradientManager;
+                            IGradientManager manager = this.ViewModel.Brush.EllipticalGradientManager;
                             manager.Draw(ds, matrix);
                         }
                         break;

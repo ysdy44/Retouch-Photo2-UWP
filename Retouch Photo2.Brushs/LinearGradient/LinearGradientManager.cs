@@ -37,14 +37,14 @@ namespace Retouch_Photo2.Brushs.LinearGradient
         public void Start(Vector2 point, Matrix3x2 matrix)
         {
             Vector2 startPoint = Vector2.Transform(this.StartPoint, matrix);
-            if (Transformer2222.OutNodeDistance(point, startPoint) == false)
+            if (Vector2.DistanceSquared(point, startPoint) <400)
             {
                 this.Type = LinearGradientType.StartPoint;
                 return;
             }
 
             Vector2 endPoint = Vector2.Transform(this.EndPoint, matrix);
-            if (Transformer2222.OutNodeDistance(point, endPoint) == false)
+            if (Vector2.DistanceSquared(point, endPoint) < 400)
             {
                 this.Type = LinearGradientType.EndPoint;
                 return;
@@ -79,10 +79,17 @@ namespace Retouch_Photo2.Brushs.LinearGradient
             Vector2 endPoint = Vector2.Transform(this.EndPoint, matrix);
 
             ds.DrawLine(startPoint, endPoint, Colors.DodgerBlue);
-            Transformer2222.DrawNode(ds, startPoint);
-            Transformer2222.DrawNode(ds, endPoint);
+            this.DrawNode(ds, startPoint);
+            this.DrawNode(ds, endPoint);
         }
 
+        /// <summary> Draw a ⊙. </summary>
+        public void DrawNode(CanvasDrawingSession ds, Vector2 vector)
+        {
+            ds.FillCircle(vector, 10, Windows.UI.Color.FromArgb(70, 127, 127, 127));
+            ds.FillCircle(vector, 8, Windows.UI.Colors.DodgerBlue);
+            ds.FillCircle(vector, 6, Windows.UI.Colors.White);
+        }
 
         #endregion
     }
