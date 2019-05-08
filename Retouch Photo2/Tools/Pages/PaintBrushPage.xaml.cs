@@ -131,6 +131,8 @@ namespace Retouch_Photo2.Tools.Pages
 
         private void SetNone()
         {
+            this.ViewModel.Brush.Color = Colors.Transparent;
+
             this.ViewModel.Brush.Type = BrushType.None;
             this.BrushShowControl.Invalidate();
             this.ViewModel.Invalidate();
@@ -160,6 +162,8 @@ namespace Retouch_Photo2.Tools.Pages
 
         private void SetLinearGradient(BrushType oldType)
         {
+            this.ViewModel.Brush.Color = Colors.Transparent;
+
             if (oldType != BrushType.LinearGradient)
             {
                 if (this.ViewModel.Transformer is Transformer transformer)
@@ -176,6 +180,8 @@ namespace Retouch_Photo2.Tools.Pages
 
         private void SetRadialGradient(BrushType oldType)
         {
+            this.ViewModel.Brush.Color = Colors.Transparent;
+
             if (oldType != BrushType.RadialGradient)
             {
                 if (this.ViewModel.Transformer is Transformer transformer)
@@ -193,6 +199,8 @@ namespace Retouch_Photo2.Tools.Pages
 
         private void SetEllipticalGradient(BrushType oldType)
         {
+            this.ViewModel.Brush.Color = Colors.Transparent;
+
             if (oldType != BrushType.EllipticalGradient)
             {
                 if (this.ViewModel.Transformer is Transformer transformer)
@@ -211,6 +219,8 @@ namespace Retouch_Photo2.Tools.Pages
 
         private void SetImage()
         {
+            this.ViewModel.Brush.Color = Colors.Transparent;
+
             this.ViewModel.Brush.Type = BrushType.Image;
             this.BrushShowControl.Invalidate();
             this.ViewModel.Invalidate();

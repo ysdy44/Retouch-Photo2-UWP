@@ -41,6 +41,18 @@ namespace Retouch_Photo2.Pages
 
             this.BackButton.Tapped += (sender, e) => this.Frame.GoBack();
             this.SaveButton.Tapped += (sender, e) => this.Frame.GoBack();
+
+            this.ColorPicker.ColorChange += (s, value) =>
+            {
+                this.ViewModel.Color = value;
+
+                Layer layer = this.ViewModel.Layer;
+                if (layer != null)
+                {
+                    layer.ColorChanged(value);
+                    this.ViewModel.Invalidate();
+                }
+            };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)//当前页面成为活动页面

@@ -62,10 +62,21 @@ namespace Retouch_Photo2.Models.Layers
 
         public override void ColorChanged(Color color, bool fillOrStroke)
         {
-            this.FillBrush.Color = color;
-            if (this.FillBrush.Type != BrushType.Color)
+            if (fillOrStroke)
             {
-                this.FillBrush.Type = BrushType.Color;
+                this.FillBrush.Color = color;
+                if (this.FillBrush.Type != BrushType.Color)
+                {
+                    this.FillBrush.Type = BrushType.Color;
+                }
+            }
+            else
+            {
+                this.StrokeBrush.Color = color;
+                if (this.StrokeBrush.Type != BrushType.Color)
+                {
+                    this.StrokeBrush.Type = BrushType.Color;
+                }
             }
         }
     }

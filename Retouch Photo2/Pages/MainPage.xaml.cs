@@ -64,6 +64,7 @@ namespace Retouch_Photo2.Pages
             {
                 this.Refresh();
 
+                return;
                 //return;
                 this.Frame.Navigate(typeof(DrawPage), Project.CreateFromSize(App.ViewModel.CanvasDevice, new Windows.Graphics.Imaging.BitmapSize
                 {

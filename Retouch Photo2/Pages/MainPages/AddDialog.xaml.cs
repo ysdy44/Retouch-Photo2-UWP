@@ -1,7 +1,7 @@
 ﻿using Windows.Graphics.Imaging;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Element
+namespace Retouch_Photo2.Pages.MainPages
 {
     public sealed partial class AddDialog : ContentDialog
     {

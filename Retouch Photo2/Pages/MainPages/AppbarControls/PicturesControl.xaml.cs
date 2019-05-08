@@ -2,7 +2,7 @@
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
-namespace Retouch_Photo2.Element.AppbarControls
+namespace Retouch_Photo2.Pages.MainPages.AppbarControls
 {
     public sealed partial class PicturesControl : UserControl
     {

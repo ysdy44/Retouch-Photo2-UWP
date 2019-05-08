@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Retouch_Photo2.Element
+namespace Retouch_Photo2.Pages.MainPages
 {
     public sealed partial class FolderDialog : ContentDialog
     {

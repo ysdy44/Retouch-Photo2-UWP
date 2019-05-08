@@ -16,7 +16,7 @@
     xmlns:navigatorControls="using:Retouch_Photo2.Controls.NavigatorControls"
     xmlns:layersControls="using:Retouch_Photo2.Controls.LayersControls"
     xmlns:transformerControls="using:Retouch_Photo2.Controls.TransformerControls"
-
+    xmlns:hsvColorPicker="using:HSVColorPickers"
     NavigationCacheMode="Enabled"
     mc:Ignorable="d">
 
@@ -99,8 +99,14 @@
                     <Border Width="60">
                         <Border x:Name="ColorButton" Width="38" Height="38" Style="{StaticResource AppCircleBorderStyle}">
                             <Border.Background>
-                                <SolidColorBrush Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
+                                <ImageBrush ImageSource="ms-appx:///Icons\GrayAndWhite.jpg"/>
                             </Border.Background>
+
+                            <Border>
+                                <Border.Background>
+                                    <SolidColorBrush Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
+                                </Border.Background>
+                            </Border>
                         </Border>
                     </Border>
 
@@ -188,7 +194,7 @@
                     <Ellipse Width="20" Height="20" Fill="Gray"/>
                 </local:MenuLayout.Icon>
                 <local:MenuLayout.ContentChild>
-                    <element:FillColorControl/>
+                    <hsvColorPicker:ColorPicker x:Name="ColorPicker" Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
                 </local:MenuLayout.ContentChild>
             </local:MenuLayout>
 

@@ -8,11 +8,9 @@ namespace Retouch_Photo2.Controls.LayersControls
 {
     public sealed partial class LayerControl : UserControl
     {
-
         //ViewModel
         DrawViewModel ViewModel => Retouch_Photo2.App.ViewModel;
-
-
+        
         #region DependencyProperty
 
         public Layer Layer
@@ -35,19 +33,16 @@ namespace Retouch_Photo2.Controls.LayersControls
         }));
 
         #endregion
-
-
+        
         public LayerControl()
         {
             this.InitializeComponent();
 
             //Control
-            this.Slider.ValueChanged += (sender, e) => this.ViewModel.Invalidate();
-            this.BlendControl.IndexChanged += (int index) => this.ViewModel.Invalidate();
+            this.Slider.ValueChanged += (s, e) => this.ViewModel.Invalidate();
+            this.BlendControl.IndexChanged += (index) => this.ViewModel.Invalidate();
 
             //Button
-            this.AdjustmentButton.Tapped += (sender, e) => { };
-            this.EffectButton.Tapped += (sender, e) => { };
             this.RemoveButton.Tapped += (sender, e) =>
             {
                 this.ViewModel.RenderLayer.Remove(this.Layer);

@@ -11,12 +11,15 @@
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations" 
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     
-    xmlns:elementAppbarControls="using:Retouch_Photo2.Element.AppbarControls"
+    xmlns:mainPagesAppbarControls="using:Retouch_Photo2.Pages.MainPages.AppbarControls"
+    xmlns:mainPages="using:Retouch_Photo2.Pages.MainPages"
     xmlns:element="using:Retouch_Photo2.Element"
     xmlns:models="using:Retouch_Photo2.Models"    
     xmlns:local="using:Retouch_Photo2.Pages"
     
     mc:Ignorable="d" 
+    d:DesignHeight="600"
+    d:DesignWidth="400"
     >
 
     <Page.Resources>
@@ -617,9 +620,9 @@
                         <Button.Flyout>
                             <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                 <StackPanel Width="140" Margin="-6">
-                                    <elementAppbarControls:AppBarControlSecondButton x:Name="SearchButton"  Glyph="&#xE094;"  Text="Search"/>
-                                    <elementAppbarControls:AppBarControlSecondButton x:Name="LocalButton"  Glyph="&#xE10F;"  Text="Local"/>
-                                    <elementAppbarControls:AppBarControlSecondButton x:Name="OpensourceButton"  Glyph="&#xE13D;"  Text="Opensource"/>
+                                    <mainPagesAppbarControls:AppBarControlSecondButton x:Name="SearchButton"  Glyph="&#xE094;"  Text="Search"/>
+                                    <mainPagesAppbarControls:AppBarControlSecondButton x:Name="LocalButton"  Glyph="&#xE10F;"  Text="Local"/>
+                                    <mainPagesAppbarControls:AppBarControlSecondButton x:Name="OpensourceButton"  Glyph="&#xE13D;"  Text="Opensource"/>
                                 </StackPanel>
                             </Flyout>
                         </Button.Flyout>
@@ -645,12 +648,12 @@
 
             <local:MainLayout.Foot>
                 <Grid>
-                    <element:AppbarControl x:Name="AppbarControl" />
-                    <elementAppbarControls:PicturesControl x:Name="AppbarPicturesControl" />
-                    <elementAppbarControls:SaveControl x:Name="AppbarSaveControl" />
-                    <elementAppbarControls:ShareControl x:Name="AppbarShareControl" />
-                    <elementAppbarControls:DeleteControl x:Name="AppbarDeleteControl" />
-                    <elementAppbarControls:DuplicateControl x:Name="AppbarDuplicateControl" />
+                    <mainPages:AppbarControl x:Name="AppbarControl" />
+                    <mainPagesAppbarControls:PicturesControl x:Name="AppbarPicturesControl" />
+                    <mainPagesAppbarControls:SaveControl x:Name="AppbarSaveControl" />
+                    <mainPagesAppbarControls:ShareControl x:Name="AppbarShareControl" />
+                    <mainPagesAppbarControls:DeleteControl x:Name="AppbarDeleteControl" />
+                    <mainPagesAppbarControls:DuplicateControl x:Name="AppbarDuplicateControl" />
                 </Grid>
             </local:MainLayout.Foot>
 
@@ -660,8 +663,8 @@
         <element:LoadingControl x:Name="LoadingControl" Text="Loading..." />
 
         <!--Dialog-->
-        <element:AddDialog x:Name="AddDialog"/>
-        <element:FolderDialog x:Name="FolderDialog" />
+        <mainPages:AddDialog x:Name="AddDialog"/>
+        <mainPages:FolderDialog x:Name="FolderDialog" />
 
     </Grid>
 </Page>

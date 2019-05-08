@@ -1,15 +1,15 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
-namespace Retouch_Photo2.Element.AppbarControls
+namespace Retouch_Photo2.Pages.MainPages.AppbarControls
 {
-    public sealed partial class DuplicateControl : UserControl
+    public sealed partial class DeleteControl : UserControl
     {
         //Delegate
         public event TappedEventHandler OKButtonTapped;
         public event TappedEventHandler CancelButtonTapped;
 
-        public DuplicateControl()
+        public DeleteControl()
         {
             this.InitializeComponent();
 

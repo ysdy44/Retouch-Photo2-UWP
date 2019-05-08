@@ -37,8 +37,15 @@ namespace Retouch_Photo2.Controls
 
             this.AddButton.Tapped += async (s, e) =>
              {
-                //   this.ViewModel.Text = this.ViewModel.FillOrStroke.ToString();
-                //     return;
+                 if (this.ViewModel.GeometryLayer == null)
+                 {
+                     this.ViewModel.Text = "";
+                     return;
+
+                 }
+
+                 this.ViewModel.Text = this.ViewModel.GeometryLayer.StrokeWidth.ToString();
+                 return;
                 FileOpenPicker openPicker = new FileOpenPicker
                  {
                      ViewMode = PickerViewMode.Thumbnail,

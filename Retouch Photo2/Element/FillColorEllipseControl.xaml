@@ -17,8 +17,14 @@
 
     <Border x:Name="ColorButton" Width="38" Height="38" Style="{StaticResource AppCircleBorderStyle}">
         <Border.Background>
-            <SolidColorBrush Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
+            <ImageBrush ImageSource="ms-appx:///Icons\GrayAndWhite.jpg"/>
         </Border.Background>
+        
+        <Border>
+            <Border.Background>
+                <SolidColorBrush Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
+            </Border.Background>
+        </Border>
     </Border>
     
 </UserControl>

@@ -41,7 +41,6 @@ namespace Retouch_Photo2.Tools.Models
                         {
                             case BrushType.None:
                                 {
-                                    this.ViewModel.Brush.Type = BrushType.LinearGradient;
                                     if (this.ViewModel.Transformer is Transformer transformer)
                                     {
                                         this.LinearGradientInitialize(this.ViewModel.Brush.LinearGradientManager, transformer, point);//LinearGradient
@@ -241,6 +240,8 @@ namespace Retouch_Photo2.Tools.Models
 
         private void LinearGradientInitialize(LinearGradientManager manager, Transformer transformer, Vector2 point)
         {
+            this.ViewModel.Brush.Color = Colors.Transparent;
+
             Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.InverseMatrix;
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 

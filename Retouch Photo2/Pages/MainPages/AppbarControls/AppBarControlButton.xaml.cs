@@ -1,10 +1,10 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
-namespace Retouch_Photo2.Element.AppbarControls
+namespace Retouch_Photo2.Pages.MainPages.AppbarControls
 {
-    public sealed partial class AppBarControlSecondButton : UserControl
-    {
+    public sealed partial class AppBarControlButton : UserControl
+    {         
         //delegate
         public event TappedEventHandler Tap;
 
@@ -12,7 +12,7 @@ namespace Retouch_Photo2.Element.AppbarControls
         public string Glyph { get => this.FontIcon.Glyph; set => this.FontIcon.Glyph = value; }
         public string Text { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
 
-        public AppBarControlSecondButton()
+        public AppBarControlButton()
         {
             this.InitializeComponent();
             this.Button.Tapped += (sender, e) => this.Tap?.Invoke(sender, e);

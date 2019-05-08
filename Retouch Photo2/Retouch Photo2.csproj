@@ -138,9 +138,6 @@
     <Compile Include="Element\StrokeColorEllipseControl.xaml.cs">
       <DependentUpon>StrokeColorEllipseControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Element\FillColorControl.xaml.cs">
-      <DependentUpon>FillColorControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Element\StrokeWidthControl.xaml.cs">
       <DependentUpon>StrokeWidthControl.xaml</DependentUpon>
     </Compile>
@@ -155,28 +152,28 @@
     <Compile Include="Tools\Controls\LineControl.xaml.cs">
       <DependentUpon>LineControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Element\AppbarControl.xaml.cs">
+    <Compile Include="Pages\MainPages\AppbarControl.xaml.cs">
       <DependentUpon>AppbarControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Element\AppbarControls\AppBarControlButton.xaml.cs">
+    <Compile Include="Pages\MainPages\AppbarControls\AppBarControlButton.xaml.cs">
       <DependentUpon>AppBarControlButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Element\AppbarControls\AppBarControlSecondButton.xaml.cs">
+    <Compile Include="Pages\MainPages\AppbarControls\AppBarControlSecondButton.xaml.cs">
       <DependentUpon>AppBarControlSecondButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Element\AppbarControls\DuplicateControl.xaml.cs">
+    <Compile Include="Pages\MainPages\AppbarControls\DuplicateControl.xaml.cs">
       <DependentUpon>DuplicateControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Element\AppbarControls\PicturesControl.xaml.cs">
+    <Compile Include="Pages\MainPages\AppbarControls\PicturesControl.xaml.cs">
       <DependentUpon>PicturesControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Element\AppbarControls\DeleteControl.xaml.cs">
+    <Compile Include="Pages\MainPages\AppbarControls\DeleteControl.xaml.cs">
       <DependentUpon>DeleteControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Element\AppbarControls\ShareControl.xaml.cs">
+    <Compile Include="Pages\MainPages\AppbarControls\ShareControl.xaml.cs">
       <DependentUpon>ShareControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Element\AppbarControls\SaveControl.xaml.cs">
+    <Compile Include="Pages\MainPages\AppbarControls\SaveControl.xaml.cs">
       <DependentUpon>SaveControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\EffectsControl.xaml.cs">
@@ -242,10 +239,10 @@
     <Compile Include="Controls\TransformerControl.xaml.cs">
       <DependentUpon>TransformerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Element\AddDialog.xaml.cs">
+    <Compile Include="Pages\MainPages\AddDialog.xaml.cs">
       <DependentUpon>AddDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Element\FolderDialog.xaml.cs">
+    <Compile Include="Pages\MainPages\FolderDialog.xaml.cs">
       <DependentUpon>FolderDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Element\ThemeControl.xaml.cs">
@@ -622,6 +619,7 @@
     <Content Include="Icons\2Logo-Small.png" />
     <Content Include="Icons\2Logo-Wide.png" />
     <Content Include="Icons\2Logo.png" />
+    <Content Include="Icons\GrayAndWhite.jpg" />
     <Content Include="Json\Filter.json" />
     <None Include="Json\FilterOriginal.json" />
     <None Include="Retouch Photo_TemporaryKey.pfx" />
@@ -743,10 +741,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Element\FillColorControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Element\StrokeWidthControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -755,35 +749,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Element\AppbarControl.xaml">
+    <Page Include="Pages\MainPages\AppbarControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Element\AppbarControls\AppBarControlButton.xaml">
+    <Page Include="Pages\MainPages\AppbarControls\AppBarControlButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Element\AppbarControls\AppBarControlSecondButton.xaml">
+    <Page Include="Pages\MainPages\AppbarControls\AppBarControlSecondButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Element\AppbarControls\DuplicateControl.xaml">
+    <Page Include="Pages\MainPages\AppbarControls\DuplicateControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Element\AppbarControls\PicturesControl.xaml">
+    <Page Include="Pages\MainPages\AppbarControls\PicturesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Element\AppbarControls\DeleteControl.xaml">
+    <Page Include="Pages\MainPages\AppbarControls\DeleteControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Element\AppbarControls\ShareControl.xaml">
+    <Page Include="Pages\MainPages\AppbarControls\ShareControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Element\AppbarControls\SaveControl.xaml">
+    <Page Include="Pages\MainPages\AppbarControls\SaveControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -871,11 +865,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Element\AddDialog.xaml">
+    <Page Include="Pages\MainPages\AddDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Element\FolderDialog.xaml">
+    <Page Include="Pages\MainPages\FolderDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -101,15 +101,24 @@ namespace Retouch_Photo2.Brushs
                     break;
 
                 case BrushType.LinearGradient:
-                    ds.FillGeometry(geometry, this.LinearGradientManager.GetBrush(creator, matrix, this.Array));
+                    {
+                        ICanvasBrush brush = this.LinearGradientManager.GetBrush(creator, matrix, this.Array);
+                        ds.FillGeometry(geometry, brush);
+                    }
                     break;
 
                 case BrushType.RadialGradient:
-                    ds.FillGeometry(geometry, this.RadialGradientManager.GetBrush(creator, matrix, this.Array));
+                    {
+                        ICanvasBrush brush = this.RadialGradientManager.GetBrush(creator, matrix, this.Array);
+                        ds.FillGeometry(geometry, brush);
+                    }
                     break;
 
                 case BrushType.EllipticalGradient:
-                    ds.FillGeometry(geometry, this.EllipticalGradientManager.GetBrush(creator, matrix, this.Array));
+                    {
+                        ICanvasBrush brush = this.EllipticalGradientManager.GetBrush(creator, matrix, this.Array);
+                        ds.FillGeometry(geometry, brush);
+                    }
                     break;
 
                 case BrushType.Image:
@@ -123,25 +132,37 @@ namespace Retouch_Photo2.Brushs
 
         public void DrawGeometry(ICanvasResourceCreator creator, CanvasDrawingSession ds, CanvasGeometry geometry, Matrix3x2 matrix,float strokeWidth)
         {
+            //Scale
+            float width = strokeWidth * (matrix.M11 + matrix.M22) / 2;
+
             switch (this.Type)
             {
                 case BrushType.None:
                     break;
 
                 case BrushType.Color:
-                    ds.DrawGeometry(geometry, this.Color);
+                    ds.DrawGeometry(geometry, this.Color, width);
                     break;
 
                 case BrushType.LinearGradient:
-                    ds.DrawGeometry(geometry, this.LinearGradientManager.GetBrush(creator, matrix, this.Array), strokeWidth);
+                    {
+                        ICanvasBrush brush = this.LinearGradientManager.GetBrush(creator, matrix, this.Array);
+                        ds.DrawGeometry(geometry, brush, width);
+                    }
                     break;
 
                 case BrushType.RadialGradient:
-                    ds.DrawGeometry(geometry, this.RadialGradientManager.GetBrush(creator, matrix, this.Array), strokeWidth);
+                    {
+                        ICanvasBrush brush = this.RadialGradientManager.GetBrush(creator, matrix, this.Array);
+                        ds.DrawGeometry(geometry, brush, width);
+                    }
                     break;
 
                 case BrushType.EllipticalGradient:
-                    ds.DrawGeometry(geometry, this.EllipticalGradientManager.GetBrush(creator, matrix, this.Array),strokeWidth);
+                    {
+                        ICanvasBrush brush = this.EllipticalGradientManager.GetBrush(creator, matrix, this.Array);
+                        ds.DrawGeometry(geometry, brush, width);
+                    }
                     break;
 
                 case BrushType.Image:
