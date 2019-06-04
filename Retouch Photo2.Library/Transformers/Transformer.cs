@@ -17,6 +17,17 @@ namespace Retouch_Photo2.Library
 
 
         //@Constructs
+        /// <summary> Constructs a <see cref = "Transformer" />. </summary>
+        public Transformer(TransformerVectors transformerVectors)
+        {
+            //Source
+            this.SourceVectors = transformerVectors;
+            //Destination
+            this.DestinationVectors = transformerVectors;
+
+            this.DdisabledRadian = false;
+        }
+        /// <summary> Constructs a <see cref = "Transformer" />. </summary>
         public Transformer(Vector2 leftTop, Vector2 rightBottom)
         {
             //Source
@@ -32,6 +43,7 @@ namespace Retouch_Photo2.Library
 
             this.DdisabledRadian = false;
         }
+        /// <summary> Constructs a <see cref = "Transformer" />. </summary>
         public Transformer(float width, float height, Vector2 postion, float scale = 1, bool disabledRadian = false)
         {
             //Source
@@ -51,19 +63,5 @@ namespace Retouch_Photo2.Library
 
 
         public Matrix3x2 Matrix => Transformer.FindHomography(this.SourceVectors, this.DestinationVectors);
-
-
-
-        public Vector2 DestinationLeft => (this.DestinationVectors.LeftTop + this.DestinationVectors.LeftBottom) / 2;
-        public Vector2 DestinationTop => (this.DestinationVectors.LeftTop + this.DestinationVectors.RightTop) / 2;
-        public Vector2 DestinationRight => (this.DestinationVectors.RightTop + this.DestinationVectors.RightBottom) / 2;
-        public Vector2 DestinationBottom => (this.DestinationVectors.RightBottom + this.DestinationVectors.LeftBottom) / 2;
-
-        public Vector2 DestinationCenter => (this.DestinationVectors.LeftTop + this.DestinationVectors.RightBottom) / 2;
-
-        public float DestinationMinX => Math.Min(Math.Min(this.DestinationVectors.LeftTop.X, this.DestinationVectors.RightTop.X), Math.Min(this.DestinationVectors.RightBottom.X, this.DestinationVectors.LeftBottom.X));
-        public float DestinationMaxX => Math.Max(Math.Max(this.DestinationVectors.LeftTop.X, this.DestinationVectors.RightTop.X), Math.Max(this.DestinationVectors.RightBottom.X, this.DestinationVectors.LeftBottom.X));
-        public float DestinationMinY => Math.Min(Math.Min(this.DestinationVectors.LeftTop.Y, this.DestinationVectors.RightTop.Y), Math.Min(this.DestinationVectors.RightBottom.Y, this.DestinationVectors.LeftBottom.Y));
-        public float DestinationMaxY => Math.Max(Math.Max(this.DestinationVectors.LeftTop.Y, this.DestinationVectors.RightTop.Y), Math.Max(this.DestinationVectors.RightBottom.Y, this.DestinationVectors.LeftBottom.Y));
-    }
+  }
 }

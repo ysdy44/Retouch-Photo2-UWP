@@ -6,6 +6,9 @@
         /// <summary> Normal </summary>
         None,
 
+        /// <summary> Drag and move the canvas. </summary>
+        View,
+
         /// <summary> Rectangle Geometry </summary>
         Rectangle,
     }

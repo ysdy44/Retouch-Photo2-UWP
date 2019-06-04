@@ -152,12 +152,18 @@
     <Compile Include="Tools\Controls\RectangleControl.xaml.cs">
       <DependentUpon>RectangleControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\Controls\ViewControl.xaml.cs">
+      <DependentUpon>ViewControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\Models\NoneTool.cs" />
     <Compile Include="Tools\Models\RectangleTool.cs" />
+    <Compile Include="Tools\Models\ViewTool.cs" />
     <Compile Include="Tools\Tool.cs" />
     <Compile Include="Tools\ToolType.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
+    <Compile Include="ViewModels\ViewModel.Tools.cs" />
     <Compile Include="ViewModels\ViewModel.RenderLayer.cs" />
+    <Compile Include="ViewModels\ViewModel.TransformerVectors.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -261,6 +267,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Tools\Controls\RectangleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\Controls\ViewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

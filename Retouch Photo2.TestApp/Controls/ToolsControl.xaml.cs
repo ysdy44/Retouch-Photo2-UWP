@@ -1,5 +1,4 @@
 ﻿using Retouch_Photo2.TestApp.Tools;
-using Retouch_Photo2.TestApp.Tools.Controls;
 using Retouch_Photo2.TestApp.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -14,24 +13,41 @@ namespace Retouch_Photo2.TestApp.Controls
         //ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
 
+        #region DependencyProperty
+
+        /// <summary> 
+        /// Type of <see cref = "ToolsControl" />. 
+        /// </summary>
+        public ToolType ToolType
+        {
+            get { return (ToolType)GetValue(ToolTypeProperty); }
+            set { SetValue(ToolTypeProperty, value); }
+        }
+        public static readonly DependencyProperty ToolTypeProperty = DependencyProperty.Register(nameof(ToolType), typeof(ToolType), typeof(ToolsControl), new PropertyMetadata(ToolType.None));
+
+        #endregion
+
         public ToolsControl()
         {
             this.InitializeComponent();
 
-            this.SetButton(this.RectangleButton, this.ViewModel.Tools[ToolType.Rectangle]);
+            this.SetButton(this.ViewButton, this.ViewModel.ViewTool);
+            this.SetButton(this.RectangleButton, this.ViewModel.RectangleTool);
         }
 
         private void SetButton(Retouch_Photo2.TestApp.Tools.Button button, Tool tool)
         {
             ToolType type = tool.Type;
 
-            button.Type =type;
+            //Content
+            button.Type = type;
             button.CenterContent = tool.Icon;
 
+            //ItemClick
             button.RootGrid.Tapped += (s, e) =>
             {
-                this.ViewModel.ToolType = type;
-                this.ViewModel.Tool = this.ViewModel.Tools[type];
+                this.ToolType = type;
+                this.ViewModel.Tool = tool;
             };
         }
     }

@@ -1,6 +1,4 @@
-﻿using MathNet.Numerics.LinearAlgebra.Double;
-using Microsoft.Graphics.Canvas;
-using System;
+﻿using System;
 using System.Numerics;
 
 namespace Retouch_Photo2.Library

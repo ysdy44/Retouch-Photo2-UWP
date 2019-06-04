@@ -1,36 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.Library;
-using Retouch_Photo2.TestApp.Models;
-using Retouch_Photo2.TestApp.Tools;
-using Retouch_Photo2.TestApp.Tools.Models;
+﻿using Retouch_Photo2.Layers;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.Library;
-using Retouch_Photo2.TestApp.ViewModels;
-using System.Numerics;
-using Windows.Foundation;
-using Windows.UI;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.TestApp.ViewModels
 {
     /// <summary> Retouch_Photo2's the only <see cref = "ViewModel" />. </summary>
-    public partial class ViewModel : INotifyPropertyChanged
+    public partial class ViewModel
     {
                     
         /// <summary>
@@ -46,15 +21,36 @@ namespace Retouch_Photo2.TestApp.ViewModels
         public ObservableCollection<Layer> Layers = new ObservableCollection<Layer>();
 
 
+        /// <summary> The layer is Checked, the other layers are UnChecked. </summary>
+        /// <param name="layer"> current layer </param>
+        public void LayerChecked(Layer layer)
+        {
+            foreach (Layer item in this.Layers)
+            {
+                item.IsChecked = (item == layer);
+            }
+        }
+
+        /// <summary> The all layers are UnChecked. </summary>
+        public void LayerUnChecked()
+        {
+            foreach (Layer item in this.Layers)
+            {
+                item.IsChecked = false;
+            }
+        }
+
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
         /// <summary> 
-        /// If <see cref="ViewModel.IsMezzanine"/> is turned on, 
+        /// If <see cref="ViewModel.IsMezzanine"/> is not **null**, 
         /// Insert <see cref="ViewModel.MezzanineLayer"/> between <see cref="ViewModel.Layers"/>
         /// </summary>
         public Layer MezzanineLayer { get; private set; }
-
-        /// <summary> Bool of <see cref="ViewModel.MezzanineLayer"/>. </summary>
-        public bool IsMezzanine { get; private set; }
 
         /// <summary> Index of <see cref="ViewModel.MezzanineLayer"/>. </summary>
         public int MezzanineIndex { get; private set; }
@@ -66,7 +62,6 @@ namespace Retouch_Photo2.TestApp.ViewModels
         /// <param name="layer"> MezzanineLayer </param>
         public void TurnOnMezzanine(Layer layer)
         {
-            this.IsMezzanine = true;
             this.MezzanineLayer = layer;
             this.MezzanineIndex = 0;
 
@@ -84,7 +79,6 @@ namespace Retouch_Photo2.TestApp.ViewModels
         /// </summary>
         public void TurnOffMezzanine()
         {
-            this.IsMezzanine = false;
             this.MezzanineLayer = null;
             this.MezzanineIndex = -1;
         }
@@ -94,7 +88,9 @@ namespace Retouch_Photo2.TestApp.ViewModels
         /// </summary>
         public void InsertMezzanine(Layer layer)
         {
-            int index = this.MezzanineIndex;
+            int index = this.MezzanineIndex-1;
+            if (index < 0) index = 0;
+
             this.Layers.Insert(index, layer);
 
             this.TurnOffMezzanine();

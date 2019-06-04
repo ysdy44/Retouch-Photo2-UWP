@@ -86,26 +86,35 @@ namespace Retouch_Photo2.TestApp.Controls
                 ICanvasImage previousImage = new ColorSourceEffect { Color = Colors.White };
                 Matrix3x2 canvasToVirtualMatrix = this.ViewModel.MatrixTransformer.GetMatrix(MatrixTransformerMode.CanvasToVirtual);
 
-                //Mezzanine :
-                //   If the mezzanine is turned on, 
-                //   Insert a MezzanineLayer between the Layers
-                if (this.ViewModel.IsMezzanine)
-                {
-                    for (int i = this.ViewModel.Layers.Count - 1; i >= 0; i--)
-                    {
-                        if (this.ViewModel.MezzanineIndex == i)
-                        {
-                            previousImage = Layer.Render(this.ViewModel.CanvasDevice, this.ViewModel.MezzanineLayer, previousImage, canvasToVirtualMatrix);
-                        }
+               
+                void aaa() =>
+                  previousImage = Layer.Render(this.ViewModel.CanvasDevice, this.ViewModel.MezzanineLayer, previousImage, canvasToVirtualMatrix);
 
-                        previousImage = Layer.Render(this.ViewModel.CanvasDevice, this.ViewModel.Layers[i], previousImage, canvasToVirtualMatrix);
+                void bbb(int i) =>
+                    previousImage = Layer.Render(this.ViewModel.CanvasDevice, this.ViewModel.Layers[i], previousImage, canvasToVirtualMatrix);
+
+
+                //Mezzanine :
+                //   If the mezzanine is not **null**, 
+                //   Insert a MezzanineLayer between the Layers
+                if (this.ViewModel.MezzanineLayer != null)
+                {
+                    if (this.ViewModel.Layers.Count == 0) aaa();
+                    else
+                    {
+                        for (int i = this.ViewModel.Layers.Count - 1; i >= 0; i--)
+                        {
+                            if (this.ViewModel.MezzanineIndex == i) aaa();
+
+                            bbb(i);
+                        }
                     }
                 }
                 else
                 {
                     for (int i = this.ViewModel.Layers.Count - 1; i >= 0; i--)
                     {
-                        previousImage = Layer.Render(this.ViewModel.CanvasDevice, this.ViewModel.Layers[i], previousImage, canvasToVirtualMatrix);
+                        bbb(i);
                     }
                 }
 
@@ -134,6 +143,12 @@ namespace Retouch_Photo2.TestApp.Controls
                 };
                 args.DrawingSession.DrawImage(shadow, 5.0f, 5.0f);
                 args.DrawingSession.DrawImage(finalCanvas);
+
+
+                if (this.ViewModel.TransformerVectors is TransformerVectors  vectors)
+                {
+                    Transformer.DrawBoundNodes(args.DrawingSession, vectors, this.ViewModel.MatrixTransformer.GetMatrix());
+                }
             };
 
 

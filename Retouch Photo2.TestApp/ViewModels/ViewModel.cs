@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -51,46 +52,6 @@ namespace Retouch_Photo2.TestApp.ViewModels
         public MatrixTransformer MatrixTransformer = new MatrixTransformer();
 
 
-        /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.TestApp.Tools.Tool" />. </summary>
-        public Tool Tool
-        {
-            get => this.tool;
-            set
-            {
-                //The current tool becomes the active tool.
-                Tool oldTool = this.tool;
-                oldTool.ToolOnNavigatedFrom();
-
-                //The current page does not become an active page.
-                Tool newTool = value;
-                newTool.ToolOnNavigatedTo();
-
-                this.tool = value;
-                this.OnPropertyChanged(nameof(this.Tool));//Notify 
-            }
-        }
-        private Tool tool = new NoneTool();
-
-        /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.TestApp.Tools.ToolType" />. </summary>
-        public ToolType ToolType
-        {
-            get => this.toolType;
-            set
-            {
-                this.toolType = value;
-                this.OnPropertyChanged(nameof(this.ToolType));//Notify 
-            }
-        }
-        private ToolType toolType;
-
-        /// <summary> Retouch_Photo2's the only <see cref = "ViewModel.Tools" />s. </summary>
-        public Dictionary<ToolType, Tool> Tools = new Dictionary<ToolType, Tool>
-        {
-             {ToolType.None,  new NoneTool()},
-             {ToolType.Rectangle,  new RectangleTool()},
-        };
-
-
 
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModel.Text" />. </summary>
         private string text;
@@ -103,15 +64,11 @@ namespace Retouch_Photo2.TestApp.ViewModels
                 this.OnPropertyChanged(nameof(this.Text));//Notify 
             }
         }
-
-
-
+               
 
         //Notify 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-
-
-
+               
     }
 }

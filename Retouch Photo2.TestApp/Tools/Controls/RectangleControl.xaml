@@ -8,6 +8,19 @@
     d:DesignHeight="50"
     d:DesignWidth="50">
 
+    <ToolTipService.ToolTip>
+        <Grid Height="32">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="32"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <PathIcon Data="M17.773,0c1.1,0 1.994,0.894 1.994,1.994l0,15.319c0,1.101 -0.894,1.994 -1.994,1.994l-15.779,0c-1.1,0 -1.994,-0.893 -1.994,-1.994l0,-15.319c0,-1.1 0.894,-1.994 1.994,-1.994l15.779,0Z"/>
+            </ContentPresenter>
+            <TextBlock Text="Rectangle" Grid.Column="1" VerticalAlignment="Center"/>
+        </Grid>
+    </ToolTipService.ToolTip>
+
     <PathIcon Data="M17.773,0c1.1,0 1.994,0.894 1.994,1.994l0,15.319c0,1.101 -0.894,1.994 -1.994,1.994l-15.779,0c-1.1,0 -1.994,-0.893 -1.994,-1.994l0,-15.319c0,-1.1 0.894,-1.994 1.994,-1.994l15.779,0Z"/>
 
 </UserControl>

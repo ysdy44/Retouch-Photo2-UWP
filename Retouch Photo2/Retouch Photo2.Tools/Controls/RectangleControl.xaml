@@ -9,7 +9,7 @@
     d:DesignWidth="50">
 
     <ToolTipService.ToolTip>
-        <Grid  Height="32">
+        <Grid Height="32">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="32"/>
                 <ColumnDefinition Width="*"/>

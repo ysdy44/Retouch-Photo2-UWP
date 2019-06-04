@@ -1,5 +1,9 @@
 ﻿using Retouch_Photo2.Layers;
+using Retouch_Photo2.Library;
 using Retouch_Photo2.TestApp.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Numerics;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.TestApp.Controls
@@ -19,18 +23,30 @@ namespace Retouch_Photo2.TestApp.Controls
             //Layer : ItemClick
             Layer.ItemClickAction = (layer, placementTarget) =>
             {
-                foreach (Layer item in this.ViewModel.Layers)
-                {
-                    item.IsChecked = (item == layer);
-                }
-                  
+                this.ViewModel.LayerChecked(layer);
+
+                this.ViewModel.TransformerVectors = layer.Transformer.DestinationVectors;//Transformer
+
                 this.ViewModel.Invalidate();//Invalidate
             };
 
             //Layer : ItemVisualChanged
             Layer.ItemVisualChangedAction = (layer) =>
             {
-                layer.IsVisual = !layer.IsVisual;
+                bool isVisual = !layer.IsVisual;
+
+                if (layer.IsChecked == false) layer.IsVisual = isVisual;
+                else
+                {
+                    foreach (Layer item in this.ViewModel.Layers)
+                    {
+                        if (item.IsChecked)
+                        {
+                            item.IsVisual = isVisual;
+                        }
+                    }
+                }
+
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -38,8 +54,11 @@ namespace Retouch_Photo2.TestApp.Controls
             Layer.ItemIsCheckedChangedAction = (layer) =>
             {
                 layer.IsChecked = !layer.IsChecked;
+
+                this.ViewModel.TransformerVectors = this.ViewModel.GetCheckedLayersTransformerVectors(this.ViewModel.Layers);
                 this.ViewModel.Invalidate();//Invalidate
             };
+
 
             this.AddButton.Tapped += (s, e) =>
             {
@@ -47,19 +66,6 @@ namespace Retouch_Photo2.TestApp.Controls
             };
         }
 
-        private void CheckBox_Checked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
 
-        }
-
-        private void CheckBox_Unchecked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-
-        }
-
-        private void CheckBox_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
-        {
-            e.Handled = true;
-        }
     }
 }

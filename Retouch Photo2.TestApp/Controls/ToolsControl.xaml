@@ -11,7 +11,8 @@
 
     <StackPanel>
 
-        <tools:Button x:Name="RectangleButton" GroupType="{x:Bind ViewModel.ToolType,Mode=OneWay}"/>
+        <tools:Button x:Name="ViewButton" GroupType="{x:Bind ToolType,Mode=OneWay}"/>
+        <tools:Button x:Name="RectangleButton" GroupType="{x:Bind ToolType,Mode=OneWay}"/>
 
     </StackPanel>
 </UserControl>

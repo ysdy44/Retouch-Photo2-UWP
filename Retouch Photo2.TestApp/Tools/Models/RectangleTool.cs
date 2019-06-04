@@ -9,7 +9,7 @@ using System.Numerics;
 namespace Retouch_Photo2.TestApp.Tools.Models
 {
     /// <summary>
-    /// <see cref="Tool"/>'s RectangleTool .
+    /// <see cref="Tool"/>'s RectangleTool.
     /// </summary>
     public class RectangleTool : Tool
     {
@@ -28,29 +28,38 @@ namespace Retouch_Photo2.TestApp.Tools.Models
         public override void Starting(Vector2 point) { }
         public override void Started(Vector2 startingPoint, Vector2 point)
         {
+            //Transformer
             Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.GetInverseMatrix();
-            RectangleLayer layer = new RectangleLayer
+            TransformerVectors transformerVectors = new TransformerVectors
+            (
+                Vector2.Transform(startingPoint, inverseMatrix),
+                Vector2.Transform(point, inverseMatrix)
+            );
+
+            //Layer
+            RectangleLayer rectangleLayer = new RectangleLayer
             {
-                Transformer = new Transformer
-                (
-                    Vector2.Transform(startingPoint, inverseMatrix),
-                    Vector2.Transform(point, inverseMatrix)                    
-                )
+                Transformer = new Transformer(transformerVectors)
             };
-            this.ViewModel.TurnOnMezzanine(layer);//Mezzanine
+            this.ViewModel.TurnOnMezzanine(rectangleLayer);//Mezzanine
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         public override void Delta(Vector2 startingPoint, Vector2 point)
-        {
+        {         
+            //Transformer
             Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.GetInverseMatrix();
-
-            TransformerVectors vectors = new TransformerVectors
+            TransformerVectors transformerVectors = new TransformerVectors
             (
                  Vector2.Transform(startingPoint, inverseMatrix),
                  Vector2.Transform(point, inverseMatrix)
             );
-            this.ViewModel.MezzanineLayer.Transformer.DestinationVectors = vectors;
+
+            //Transformer
+            this.ViewModel.TransformerVectors = transformerVectors;
+
+            //Layer
+            this.ViewModel.MezzanineLayer.Transformer.DestinationVectors = transformerVectors;
 
             this.ViewModel.Invalidate();//Invalidate
         }
@@ -58,18 +67,34 @@ namespace Retouch_Photo2.TestApp.Tools.Models
         {
             if (isSingleStarted)
             {
+                //Transformer
                 Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.GetInverseMatrix();
-                RectangleLayer layer = new RectangleLayer
+                TransformerVectors transformerVectors = new TransformerVectors
+                (
+                    Vector2.Transform(startingPoint, inverseMatrix),
+                    Vector2.Transform(point, inverseMatrix)
+                );
+
+                //Transformer
+                this.ViewModel.LayerUnChecked();
+                this.ViewModel.TransformerVectors = transformerVectors;
+
+                //Layer
+                RectangleLayer rectangleLayer = new RectangleLayer
                 {
-                    Transformer = new Transformer
-                    (
-                        Vector2.Transform(startingPoint, inverseMatrix),
-                        Vector2.Transform(point, inverseMatrix)
-                    )
+                    IsChecked = true,
+                    Transformer = new Transformer(transformerVectors)
                 };
-                this.ViewModel.InsertMezzanine(layer);//Mezzanine
+                this.ViewModel.InsertMezzanine(rectangleLayer);//Mezzanine
             }
-            else this.ViewModel.TurnOffMezzanine();//Mezzanine
+            else
+            {
+                //Transformer
+                this.ViewModel.TransformerVectors = this.ViewModel.GetCheckedLayersTransformerVectors(this.ViewModel.Layers);
+
+                //Layer
+                this.ViewModel.TurnOffMezzanine();//Mezzanine
+            }
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
