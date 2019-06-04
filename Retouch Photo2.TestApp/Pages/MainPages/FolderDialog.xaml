@@ -1,0 +1,29 @@
+﻿<ContentDialog
+    x:Class="Retouch_Photo2.TestApp.Pages.MainPages.FolderDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    BorderBrush="{ThemeResource AppStroke}"               
+    Background="{ThemeResource AppFill}"                                
+    PrimaryButtonText="OK"
+    SecondaryButtonText="Cancel">
+
+    <ContentDialog.Title>
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="ExpanedButton" VerticalAlignment="Center" Style="{ThemeResource TextBlockButtonStyle}">
+                <FontIcon Glyph="&#xE96E;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            </Button>
+            <TextBlock Text="Enter Folder Name" VerticalAlignment="Center"/>
+        </StackPanel>
+    </ContentDialog.Title>
+
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+        <Border Height="32" CornerRadius="2" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackground}">
+            <TextBox x:Name="TextBox" BorderThickness="0"/>
+        </Border>
+
+    </Grid>
+</ContentDialog>

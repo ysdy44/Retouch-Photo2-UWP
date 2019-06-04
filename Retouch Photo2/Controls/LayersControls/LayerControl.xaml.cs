@@ -46,7 +46,9 @@ namespace Retouch_Photo2.Controls.LayersControls
             this.RemoveButton.Tapped += (sender, e) =>
             {
                 this.ViewModel.RenderLayer.Remove(this.Layer);
+
                 this.ViewModel.SetLayer(null);
+
                 this.Layer = null;
             };
         }

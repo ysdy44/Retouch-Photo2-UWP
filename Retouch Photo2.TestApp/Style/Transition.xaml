@@ -1,0 +1,45 @@
+﻿<!--Transition-->
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <!--表示 Transition 对象的集合。 每个 Transition 对象均表示一个作为 Windows 运行时动画库的一部分的不同主题转换-->
+    <TransitionCollection x:Key="AppTransitionCollection"/>
+
+    <!--在添加或删除面板子级进行控制期间提供动画转换行为。 例如，如果在 Grid 中显示照片集合，则可以将此动画与 Grid 关联，以便在添加或删除照片时，照片会自动作为动画出现或消失在视图中-->
+    <AddDeleteThemeTransition x:Key="AppAddDeleteThemeTransition"/>
+    <!--为控件的内容发生更改的情况提供动画过渡表现方式-->
+    <ContentThemeTransition x:Key="AppContentThemeTransition"/>
+    <!--为边缘 UI 转换提供动画转换行为-->
+    <EdgeUIThemeTransition x:Key="AppEdgeUIThemeTransition" Edge="Bottom"/>
+    <!--在控件首次出现时对其提供动画转换行为。 您可以在单个对象或这些对象的容器上使用此实例。 在后一种情况下，子元素将按顺序而不是同时动画处理到视图中-->
+    <EntranceThemeTransition x:Key="AppEntranceThemeTransition" FromVerticalOffset="1000" FromHorizontalOffset="0" />
+    <!--为面板 UI 转换提供动画转换行为-->
+    <PaneThemeTransition x:Key="AppPaneThemeTransition" Edge="Bottom"/>
+    <!--提供在控件出现时应用于控件的热门组件的动画转换行为（例如对象上类似工具提示的 UI）-->
+    <PopupThemeTransition x:Key="AppPopupThemeTransition" FromHorizontalOffset="1000" FromVerticalOffset="0"/>
+    <!--为列表视图控件项目更改顺序的情况提供动画过渡表现方式。 通常这是由于拖放操作。 不同的控件和主题可能对涉及的动画具有不同的特性-->
+    <ReorderThemeTransition x:Key="AppReorderThemeTransition"/>
+    <!--在未设置上下文以及传递*移动*触发器时对布局的位置变动进行响应-->
+    <RepositionThemeTransition x:Key="AppRepositionThemeTransition" IsStaggeringEnabled="True"/>
+
+  
+
+    <!--导航主题动画-->
+    <NavigationThemeTransition x:Key="AppNavigationThemeTransition"/>
+
+    <!--（立体从左到右翻转，立体从右到左翻转）为导航过渡动画提供了常见的参数-->
+    <CommonNavigationTransitionInfo x:Key="AppCommonTransition"/>
+    <!--（快速由内而外，后退时快速由上而下）指定的对象将飞在连续过渡页面提供上下文-->
+    <ContinuumNavigationTransitionInfo x:Key="AppContinuumTransition"/>
+    <!--（快速由内而外，快速从外向里）指定动画运行当用户导航逻辑层次结构,从主列表详细信息页面-->
+    <DrillInNavigationTransitionInfo x:Key="AppDrillInTransition"/>
+    <!--（快速由下而上，后退时原来的页面快速由下而上）指定运行时的动画内容出现在一个页面-->
+    <EntranceNavigationTransitionInfo x:Key="AppEntranceTransition"/>
+    <!--（由下而上，由上而下）提供了一个幻灯片导航参数过渡-->
+    <SlideNavigationTransitionInfo x:Key="AppSlideTransition"/>
+    <!--（无动画）指定动画期间抑制导航-->
+    <SuppressNavigationTransitionInfo x:Key="AppSuppressTransition"/>
+ 
+</ResourceDictionary>

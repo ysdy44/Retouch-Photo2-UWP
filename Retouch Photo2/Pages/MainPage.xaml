@@ -609,14 +609,14 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <!-- -->
-                    <Button x:Name="RefreshButton" Visibility="Collapsed" Height="50" Width="60" Content="&#xE117;" FontSize="20" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
+                    <Button x:Name="RefreshButton" Visibility="Collapsed" Height="50" Width="60" Content="&#xE117;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
                     <Button x:Name="ThemeButton" Height="50" Width="60" Style="{ThemeResource NavigationBackButtonNormalStyle}">
                         <element:ThemeControl x:Name="ThemeControl" Brush="{ThemeResource AppForeground}"/>
                     </Button>
                 
                     <TextBlock Grid.Column="1" Text="Retouh Photo2" FontSize="32" FontWeight="Light" HorizontalAlignment="Center"/>
 
-                    <Button x:Name="PopupButton" Grid.Column="2" Height="50" Width="60" Content="&#xE712;" FontSize="24" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}" >
+                    <Button x:Name="PopupButton" Grid.Column="2" Height="50" Width="60" Content="&#xE712;" FontSize="24" FontFamily="{ThemeResource SymbolThemeFontFamily}" Style="{ThemeResource NavigationBackButtonNormalStyle}" >
                         <Button.Flyout>
                             <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                 <StackPanel Width="140" Margin="-6">

@@ -38,41 +38,55 @@ namespace Retouch_Photo2.Library
         /// <summary>Current layer.</summary>      
         public Layer Layer
         {
-            get
-            {
-                if (this.Index ==-1) return null;
-                if (this.Layers.Count == 0) return null;
-
-                if (this.Index >= 0 && this.Index < this.Layers.Count) return this.Layers[this.Index];
-
-                return null;
-            }
+            get => this.layer;
             set
             {
                 if (value == null || this.Layers == null || this.Layers.Count == 0)
                 {
                     this.Index = -1;
+                    this.layer = null;
                     return;
                 }
 
                 if (this.Layers.Contains(value))
                 {
                     this.Index = this.Layers.IndexOf(value);
+                    this.layer = value;
                     return;
                 }
-
-                this.Index = -1;
-                return;
+                else
+                {
+                    this.Index = -1;
+                    this.layer = null;
+                    return;
+                }
             }
         }
-
-
+        public Layer layer;
+                
         /// <summary>Index of layers.</summary>      
         public int Index =-1;
 
         /// <summary> All layers. </summary>  
         public ObservableCollection<Layer> Layers = new ObservableCollection<Layer>();
 
+        /// <summary>
+        /// Selecte the layer.
+        /// Empty others's status
+        /// </summary>
+        /// <param name="layer">the layet</param>
+        public void Selected(Layer layer)
+        {           
+            foreach (Layer item in this.Layers)
+            {
+                item.IsChecked = false;//Empty status
+            }
+
+            if (layer != null)
+            {
+                layer.IsChecked = true;//Selecte layer.
+            }
+        }
 
         /// <summary>
         /// Insert in layers.
@@ -80,6 +94,8 @@ namespace Retouch_Photo2.Library
         /// <param name="layer"> Which insert</param>
         public void Insert(Layer layer)
         {
+            this.Selected(layer);
+
             if (this.Layers.Count == 0)
             {
                 this.Layers.Add(layer);

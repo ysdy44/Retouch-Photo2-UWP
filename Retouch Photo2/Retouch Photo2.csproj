@@ -148,8 +148,9 @@
     <Compile Include="Library\DottedLine.cs" />
     <Compile Include="Library\MarqueeTool.cs" />
     <Compile Include="Library\MatrixTransformer.cs" />
+    <Compile Include="Models\Layer.Notify.cs" />
     <Compile Include="Models\Layers\GeometryLayers\CurveLayer.cs" />
-    <Compile Include="Tools\Controls\LineControl.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Controls\LineControl.xaml.cs">
       <DependentUpon>LineControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainPages\AppbarControl.xaml.cs">
@@ -209,31 +210,31 @@
     <Compile Include="Controls\SelectionControl.xaml.cs">
       <DependentUpon>SelectionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Controls\AcrylicControl.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Controls\AcrylicControl.xaml.cs">
       <DependentUpon>AcrylicControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Controls\CursorControl.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Controls\CursorControl.xaml.cs">
       <DependentUpon>CursorControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Controls\EllipseControl.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Controls\EllipseControl.xaml.cs">
       <DependentUpon>EllipseControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Controls\GeometryControl.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Controls\GeometryControl.xaml.cs">
       <DependentUpon>GeometryControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Controls\PaintBrushControl.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Controls\PaintBrushControl.xaml.cs">
       <DependentUpon>PaintBrushControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Controls\PencilControl.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Controls\PencilControl.xaml.cs">
       <DependentUpon>PencilControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Controls\PenControl.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Controls\PenControl.xaml.cs">
       <DependentUpon>PenControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Controls\RectangleControl.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Controls\RectangleControl.xaml.cs">
       <DependentUpon>RectangleControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Controls\ViewControl.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Controls\ViewControl.xaml.cs">
       <DependentUpon>ViewControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TransformerControl.xaml.cs">
@@ -254,24 +255,24 @@
     <Compile Include="Models\Layers\ImageLayer.cs" />
     <Compile Include="Models\Layers\GeometryLayers\RectangularLayer.cs" />
     <Compile Include="Models\Layers\LineLayer.cs" />
-    <Compile Include="Tools\ITools\IClickedTool.cs" />
-    <Compile Include="Tools\ITools\ICreateTool.cs" />
-    <Compile Include="Tools\ITool.cs" />
-    <Compile Include="Tools\LayerTool.cs" />
-    <Compile Include="Tools\Models\AcrylicTool.cs" />
-    <Compile Include="Tools\Models\CursorTool.cs" />
-    <Compile Include="Tools\ITools\IBlueBox.cs" />
-    <Compile Include="Tools\ITools\ITranslation.cs" />
-    <Compile Include="Tools\Models\EllipseTool.cs" />
-    <Compile Include="Tools\Models\GeometryTool.cs" />
-    <Compile Include="Tools\ITools\ICursorTool.cs" />
-    <Compile Include="Tools\Models\LineTool.cs" />
-    <Compile Include="Tools\Models\NullTool.cs" />
-    <Compile Include="Tools\Models\PaintBrushTool.cs" />
-    <Compile Include="Tools\Models\PencilTool.cs" />
-    <Compile Include="Tools\Models\PenTool.cs" />
-    <Compile Include="Tools\Models\RectangleTool.cs" />
-    <Compile Include="Tools\Models\ViewTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\ITools\IClickedTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\ITools\ICreateTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\ITool.cs" />
+    <Compile Include="Retouch Photo2.Tools\LayerTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\AcrylicTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\CursorTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\ITools\IBlueBox.cs" />
+    <Compile Include="Retouch Photo2.Tools\ITools\ITranslation.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\EllipseTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\GeometryTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\ITools\ICursorTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\LineTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\NullTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\PaintBrushTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\PencilTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\PenTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\RectangleTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\ViewTool.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\VectRect.cs" />
     <Compile Include="Pages\DrawLayout.xaml.cs">
@@ -294,49 +295,49 @@
     <Compile Include="Element\MarqueeModeControl.xaml.cs">
       <DependentUpon>MarqueeModeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Pages\AcrylicPage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Pages\AcrylicPage.xaml.cs">
       <DependentUpon>AcrylicPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Pages\CursorPage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Pages\CursorPage.xaml.cs">
       <DependentUpon>CursorPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Pages\EllipsePage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Pages\EllipsePage.xaml.cs">
       <DependentUpon>EllipsePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Pages\GeometryPage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Pages\GeometryPage.xaml.cs">
       <DependentUpon>GeometryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Element\CompositeModeControl.xaml.cs">
       <DependentUpon>CompositeModeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Pages\LinePage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Pages\LinePage.xaml.cs">
       <DependentUpon>LinePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Pages\PaintBrushPage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Pages\PaintBrushPage.xaml.cs">
       <DependentUpon>PaintBrushPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Pages\PencilPage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Pages\PencilPage.xaml.cs">
       <DependentUpon>PencilPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Pages\PenPage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Pages\PenPage.xaml.cs">
       <DependentUpon>PenPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Pages\RectanglePage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Pages\RectanglePage.xaml.cs">
       <DependentUpon>RectanglePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Pages\ViewPage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Pages\ViewPage.xaml.cs">
       <DependentUpon>ViewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controls\ToolControl.xaml.cs">
       <DependentUpon>ToolControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Tool.cs" />
-    <Compile Include="Tools\ToolPage.cs" />
-    <Compile Include="Tools\ToolType.cs" />
+    <Compile Include="Retouch Photo2.Tools\Tool.cs" />
+    <Compile Include="Retouch Photo2.Tools\ToolPage.cs" />
+    <Compile Include="Retouch Photo2.Tools\ToolType.cs" />
     <Compile Include="ViewModels\DrawViewModel.cs" />
     <Compile Include="Library\HomographyController.cs" />
-    <Compile Include="ViewModels\KeyViewModel.cs" />
+    <Compile Include="ViewModels\DrawViewModel.Keyboard.cs" />
     <Compile Include="Library\RenderLayer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -623,6 +624,7 @@
     <Content Include="Json\Filter.json" />
     <None Include="Json\FilterOriginal.json" />
     <None Include="Retouch Photo_TemporaryKey.pfx" />
+    <Compile Include="ViewModels\DrawViewModel.CanvasControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\BadgeLogo.scale-100.png" />
@@ -745,7 +747,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\Controls\LineControl.xaml">
+    <Page Include="Retouch Photo2.Tools\Controls\LineControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -825,39 +827,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\Controls\AcrylicControl.xaml">
+    <Page Include="Retouch Photo2.Tools\Controls\AcrylicControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\Controls\CursorControl.xaml">
+    <Page Include="Retouch Photo2.Tools\Controls\CursorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\Controls\EllipseControl.xaml">
+    <Page Include="Retouch Photo2.Tools\Controls\EllipseControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\Controls\GeometryControl.xaml">
+    <Page Include="Retouch Photo2.Tools\Controls\GeometryControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\Controls\PaintBrushControl.xaml">
+    <Page Include="Retouch Photo2.Tools\Controls\PaintBrushControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\Controls\PencilControl.xaml">
+    <Page Include="Retouch Photo2.Tools\Controls\PencilControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\Controls\PenControl.xaml">
+    <Page Include="Retouch Photo2.Tools\Controls\PenControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\Controls\RectangleControl.xaml">
+    <Page Include="Retouch Photo2.Tools\Controls\RectangleControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\Controls\ViewControl.xaml">
+    <Page Include="Retouch Photo2.Tools\Controls\ViewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -901,19 +903,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\Pages\AcrylicPage.xaml">
+    <Page Include="Retouch Photo2.Tools\Pages\AcrylicPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\Pages\CursorPage.xaml">
+    <Page Include="Retouch Photo2.Tools\Pages\CursorPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Tools\Pages\EllipsePage.xaml">
+    <Page Include="Retouch Photo2.Tools\Pages\EllipsePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Tools\Pages\GeometryPage.xaml">
+    <Page Include="Retouch Photo2.Tools\Pages\GeometryPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -921,27 +923,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Tools\Pages\LinePage.xaml">
+    <Page Include="Retouch Photo2.Tools\Pages\LinePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\Pages\PaintBrushPage.xaml">
+    <Page Include="Retouch Photo2.Tools\Pages\PaintBrushPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Tools\Pages\PencilPage.xaml">
+    <Page Include="Retouch Photo2.Tools\Pages\PencilPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Tools\Pages\PenPage.xaml">
+    <Page Include="Retouch Photo2.Tools\Pages\PenPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Tools\Pages\RectanglePage.xaml">
+    <Page Include="Retouch Photo2.Tools\Pages\RectanglePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Tools\Pages\ViewPage.xaml">
+    <Page Include="Retouch Photo2.Tools\Pages\ViewPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -2,6 +2,7 @@
 using Retouch_Photo2.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Controls.LayersControls
 {
@@ -9,10 +10,14 @@ namespace Retouch_Photo2.Controls.LayersControls
     {
         //ViewModel
         DrawViewModel ViewModel => Retouch_Photo2.App.ViewModel;
-        
+
+        //Converter
+        public double BoolToOpacityConverter(bool isChecked) => isChecked ? 1.0 : 0.5;
+        public Visibility BoolToVisibilityConverter(bool isChecked) => isChecked ? Visibility.Visible : Visibility.Collapsed;
+
         #region DependencyProperty
 
-        public  Layer Layer
+        public Layer Layer
         {
             get { return (Layer)GetValue(LayerProperty); }
             set { SetValue(LayerProperty, value); }
@@ -23,13 +28,13 @@ namespace Retouch_Photo2.Controls.LayersControls
 
             if (e.NewValue is Layer layer)
             {
-                con.CheckBox.IsChecked = layer.IsVisual;
-                try
-                {
-                    con.SecondBorder.Child = layer.Icon;
-                }
-                catch (System.Exception) { }
-                con.TextBlock.Text = layer.Name;
+          //      con.CheckBox.IsChecked = layer.IsVisual;
+          //      try
+        //        {
+           //         con.SecondBorder.Child = layer.Icon;
+           //     }
+            //    catch (System.Exception) { }
+              //  con.TextBlock.Text = layer.Name;
             }
         }));
 
@@ -44,19 +49,27 @@ namespace Retouch_Photo2.Controls.LayersControls
             this.InitializeComponent();
 
             //Flyout
-            this.BackgroundGrid.Holding += (sender, e) => this.FlyoutShow?.Invoke(this, this.Layer, true);
-            this.BackgroundGrid.RightTapped += (sender, e) => this.FlyoutShow?.Invoke(this, this.Layer, true);
-            this.BackgroundGrid.Tapped += (sender, e) => this.FlyoutShow?.Invoke(this, this.Layer, false);
+      //      this.BackgroundGrid.Holding += (sender, e) => this.FlyoutShow?.Invoke(this, this.Layer, true);
+      //      this.BackgroundGrid.RightTapped += (sender, e) => this.FlyoutShow?.Invoke(this, this.Layer, true);
+       //     this.BackgroundGrid.Tapped += (sender, e) => this.FlyoutShow?.Invoke(this, this.Layer, false);
          
             //CheckBox
-            this.CheckBox.Tapped += (sender, e) =>
-            {
-                e.Handled = true;
-                if (this.Layer == null) return;
+        //    this.CheckBox.Tapped += (sender, e) =>
+        //    {
+        //        e.Handled = true;
+         //       if (this.Layer == null) return;
 
-                this.Layer.IsVisual = this.CheckBox.IsChecked ?? false;
-                this.ViewModel.Invalidate();
-            };
-        }             
+         //       this.Layer.IsVisual = this.CheckBox.IsChecked ?? false;
+         //   };
+        }
+
+
+        private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.ViewModel.Invalidate();
+
+            e.Handled = true;
+        }
+         
     }
 }

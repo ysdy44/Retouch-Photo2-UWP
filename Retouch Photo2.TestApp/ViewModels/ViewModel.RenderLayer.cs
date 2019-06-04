@@ -1,0 +1,105 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Layers;
+using Retouch_Photo2.Library;
+using Retouch_Photo2.TestApp.Models;
+using Retouch_Photo2.TestApp.Tools;
+using Retouch_Photo2.TestApp.Tools.Models;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
+using Retouch_Photo2.Layers;
+using Retouch_Photo2.Library;
+using Retouch_Photo2.TestApp.ViewModels;
+using System.Numerics;
+using Windows.Foundation;
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+
+namespace Retouch_Photo2.TestApp.ViewModels
+{
+    /// <summary> Retouch_Photo2's the only <see cref = "ViewModel" />. </summary>
+    public partial class ViewModel : INotifyPropertyChanged
+    {
+                    
+        /// <summary>
+        /// Indicates that the contents of the CanvasControl need to be redrawn.
+        /// </summary>
+        /// <param name="mode"> invalidate mode </param>
+        public void Invalidate(InvalidateMode mode = InvalidateMode.None) => this.InvalidateAction?.Invoke(mode);
+        /// <summary> <see cref = "Action" /> of the <see cref = "ViewModel.Invalidate" />. </summary>
+        public Action<InvalidateMode> InvalidateAction { private get; set; }      
+      
+
+        /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.Layers.Layer" />s. </summary>
+        public ObservableCollection<Layer> Layers = new ObservableCollection<Layer>();
+
+
+
+        /// <summary> 
+        /// If <see cref="ViewModel.IsMezzanine"/> is turned on, 
+        /// Insert <see cref="ViewModel.MezzanineLayer"/> between <see cref="ViewModel.Layers"/>
+        /// </summary>
+        public Layer MezzanineLayer { get; private set; }
+
+        /// <summary> Bool of <see cref="ViewModel.MezzanineLayer"/>. </summary>
+        public bool IsMezzanine { get; private set; }
+
+        /// <summary> Index of <see cref="ViewModel.MezzanineLayer"/>. </summary>
+        public int MezzanineIndex { get; private set; }
+
+
+        /// <summary>
+        /// Turn on <see cref="ViewModel.IsMezzanine"/>.
+        /// </summary>
+        /// <param name="layer"> MezzanineLayer </param>
+        public void TurnOnMezzanine(Layer layer)
+        {
+            this.IsMezzanine = true;
+            this.MezzanineLayer = layer;
+            this.MezzanineIndex = 0;
+
+            for (int i = 0; i < this.Layers.Count; i++)
+            {
+                if (this.Layers[i].IsChecked)
+                {
+                    this.MezzanineIndex = i;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Turn off <see cref="ViewModel.IsMezzanine"/>.
+        /// </summary>
+        public void TurnOffMezzanine()
+        {
+            this.IsMezzanine = false;
+            this.MezzanineLayer = null;
+            this.MezzanineIndex = -1;
+        }
+
+        /// <summary>
+        /// Insert layer into<see cref="ViewModel.Layers"/>.
+        /// </summary>
+        public void InsertMezzanine(Layer layer)
+        {
+            int index = this.MezzanineIndex;
+            this.Layers.Insert(index, layer);
+
+            this.TurnOffMezzanine();
+        }
+        
+
+    }
+}

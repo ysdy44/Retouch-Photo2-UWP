@@ -1,27 +1,23 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Effects;
-using Microsoft.Graphics.Canvas.UI.Xaml;
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Effects;
 using Retouch_Photo2.Models.Layers;
 using Retouch_Photo2.ViewModels;
 using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Numerics;
 using System.Xml.Linq;
-using Windows.Foundation;
 using Windows.Graphics.Effects;
 using Windows.UI;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using static Retouch_Photo2.Library.HomographyController;
 
 namespace Retouch_Photo2.Models
 {
-    public abstract class Layer
-    {
+    public  abstract partial class Layer: INotifyPropertyChanged
+    { 
 
         //ViewModel
         DrawViewModel ViewModel => Retouch_Photo2.App.ViewModel;
@@ -30,7 +26,6 @@ namespace Retouch_Photo2.Models
         public UIElement Icon;
 
         public double Opacity = 100;
-        public bool IsVisual= true;
         public int BlendIndex;
         public Transformer Transformer, OldTransformer;
         public AdjustmentManager AdjustmentManager = new AdjustmentManager();
@@ -107,6 +102,11 @@ namespace Retouch_Photo2.Models
                }
             );
         }
-        
+
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string name) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
     }
 }

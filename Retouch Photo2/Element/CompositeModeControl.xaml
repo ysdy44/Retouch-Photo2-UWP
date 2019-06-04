@@ -25,7 +25,7 @@
         <StackPanel Orientation="Horizontal">
 
             <ContentPresenter x:Name="NewSegmented" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                <FontIcon Glyph="&#xE002;" FontFamily="Segoe MDL2 Assets"/>
+                <FontIcon Glyph="&#xE002;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </ContentPresenter>
             <ContentPresenter x:Name="AddSegmented" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <PathIcon Data="M1.235,1.359l14.463,0l0,7.664c0.158,-0.011 0.317,-0.016 0.477,-0.016c4.028,0 7.298,3.271 7.298,7.299c0,4.028 -3.27,7.299 -7.298,7.299c-4.029,0 -7.299,-3.271 -7.299,-7.299c0,-0.162 0.005,-0.322 0.015,-0.482l-7.656,0l0,-14.465Zm15.518,11.792l-1.051,0l0,2.678l-2.666,0l0,1.007l2.666,0l0,2.575l1.051,0l0,-2.575l2.544,0l0,-1.007l-2.544,0l0,-2.678Z"/>

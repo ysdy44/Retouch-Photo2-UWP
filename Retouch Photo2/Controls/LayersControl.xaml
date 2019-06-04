@@ -16,7 +16,40 @@
 
         <!--DataTemplate-->
         <DataTemplate x:Key="DataTemplate" x:DataType="models:Layer">
-            <conLayersControls:LayoutControl Layer="{x:Bind}" FlyoutShow="LayoutControl_FlyoutShow"/>
+            <Grid Background="Transparent" Tapped="{x:Bind RootGrid_Tapped}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="34"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="34"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Background-->
+                <Border Grid.Column="0" Background="{ThemeResource SystemControlHighlightAltListAccentMediumBrush}" Visibility="{x:Bind BoolToVisibilityConverter(IsChecked),Mode=OneWay}"/>
+                <Border Grid.Column="1" Grid.ColumnSpan="2" Background="{ThemeResource SystemControlHighlightAltListAccentHighBrush}" Visibility="{x:Bind BoolToVisibilityConverter(IsChecked),Mode=OneWay}"/>
+                <Border Grid.Column="3" Grid.ColumnSpan="2" Background="{ThemeResource SystemControlHighlightAltListAccentLowBrush}" Visibility="{x:Bind BoolToVisibilityConverter(IsChecked),Mode=OneWay}"/>
+
+                <!--IsChecked-->
+                <Border Grid.Column="0" Width="22">
+                    <CheckBox IsChecked="{x:Bind IsChecked,Mode=TwoWay}" Tapped="CheckBox_Tapped"/>
+                </Border>
+
+                <!--Icon-->
+                <Border Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Child="{x:Bind Icon,Mode=OneWay}">
+                </Border>
+
+                <!--Text-->
+                <TextBlock Grid.Column="2" Margin="2,0" VerticalAlignment="Center" Text="{x:Bind Text,Mode=OneWay}"/>
+                <Rectangle Grid.Column="3" Height="28" Fill="{ThemeResource SystemControlBackgroundBaseLowBrush}" Opacity="0.5"/>
+
+                <!--IsVisual-->
+                <Button Grid.Column="4" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tapped="{x:Bind VisualButton_Tapped}">
+                    <FontIcon Glyph="&#x1F441;" FontSize="26" FontFamily="Segoe UI Symbol" Opacity="{x:Bind BoolToOpacityConverter(IsVisual),Mode=OneWay}"/>
+                </Button>
+
+            </Grid>
+
         </DataTemplate>
         
         <!--Flyout-->
@@ -33,7 +66,7 @@
             <Setter Property="CanDragItems" Value="True"/>
             <Setter Property="CanReorderItems" Value="True"/>
             <Setter Property="ReorderMode" Value="Enabled"/>
-            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="SelectionMode" Value="None"/>
 
             <Setter Property="IsTabStop" Value="False"/>
             <Setter Property="TabNavigation" Value="Once"/>
@@ -103,7 +136,7 @@
                >
         
         <ListView.Header>
-            <Button x:Name="AddButton" Width="Auto" Height="44"  Content="&#xE109;" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
+            <Button x:Name="AddButton" Width="Auto" Height="44" Content="&#xE109;" HorizontalAlignment="Stretch" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
         </ListView.Header>
     </ListView>
     

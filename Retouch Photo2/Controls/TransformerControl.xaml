@@ -90,7 +90,7 @@
         </Border>
 
 
-        <Button x:Name="RemoteOrIndicatorButton" Width="30" Content="&#xECE7;" FontSize="18" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
+        <Button x:Name="RemoteOrIndicatorButton" Width="30" Content="&#xECE7;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
 
     </Grid>
 </UserControl>

@@ -184,7 +184,7 @@
     <ContentDialog.Title>
         <StackPanel Orientation="Horizontal">
             <Button x:Name="ExpanedButton" VerticalAlignment="Center" Style="{ThemeResource TextBlockButtonStyle}">
-                <FontIcon Glyph="&#xE96E;" FontFamily="Segoe MDL2 Assets"/>
+                <FontIcon Glyph="&#xE96E;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
             <TextBlock  Text="Add New Project" VerticalAlignment="Center"/>
         </StackPanel>

@@ -27,6 +27,7 @@ namespace Retouch_Photo2.Models
         public IEnumerable<Layer> Layers;
 
 
+        //@Static
         public static Project CreateFromXDocument(ICanvasResourceCreator creator, XDocument xdoc)
         {
             return new Project()
@@ -41,6 +42,7 @@ namespace Retouch_Photo2.Models
             };
         }
 
+        //@Static
         public static Project CreateFromSize(ICanvasResourceCreator creator, BitmapSize pixels)
         {
             int width = (int)pixels.Width;
@@ -54,6 +56,7 @@ namespace Retouch_Photo2.Models
             };
         }
 
+        //@Static
         public static async Task<Project> CreateFromFileAsync(ICanvasResourceCreator creator, StorageFile file)
         {
             using (IRandomAccessStream stream = await file.OpenReadAsync())

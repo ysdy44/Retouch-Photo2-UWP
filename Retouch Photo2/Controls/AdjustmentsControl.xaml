@@ -87,11 +87,11 @@
         </Grid.RowDefinitions>
 
         <Button x:Name="FilterButton" Grid.Column="0" Style="{ThemeResource NavigationBackButtonNormalStyle}" >
-            <FontIcon Glyph="&#xE169;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+            <FontIcon Glyph="&#xE169;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
         </Button>
 
         <Button x:Name="AddButton" Grid.Column="2" Style="{ThemeResource NavigationBackButtonNormalStyle}">
-            <FontIcon Glyph="&#xE109;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+            <FontIcon Glyph="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
         </Button>
         
         

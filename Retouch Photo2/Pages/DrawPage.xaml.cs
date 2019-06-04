@@ -35,8 +35,7 @@ namespace Retouch_Photo2.Pages
 
 
             //Layer
-            this.LayersControl.FlyoutShow += (control) =>
-            MenuLayout.ShowFlyoutAt(this.LayerLayout, control);
+            this.LayersControl.FlyoutShow += (placementTarget) => MenuLayout.ShowFlyoutAt(this.LayerLayout, placementTarget);
 
 
             this.BackButton.Tapped += (sender, e) => this.Frame.GoBack();

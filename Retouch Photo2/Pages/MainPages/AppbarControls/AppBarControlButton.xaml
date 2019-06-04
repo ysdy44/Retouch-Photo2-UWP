@@ -14,7 +14,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="16"/>
             </Grid.RowDefinitions>
-            <FontIcon x:Name="FontIcon" FontSize="24" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+            <FontIcon x:Name="FontIcon" FontSize="24" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"/>
             <TextBlock x:Name="TextBlock" Grid.Row="1" FontSize="12" FontFamily="Microsoft YaHei UI"/>
         </Grid>
     </Button>

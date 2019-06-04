@@ -27,10 +27,10 @@
 
 
         <Button x:Name="BackButton" Grid.Column="0" Style="{ThemeResource NavigationBackButtonNormalStyle}">
-            <FontIcon Glyph="&#xE0A6;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+            <FontIcon Glyph="&#xE0A6;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
         </Button>
         <Button x:Name="ResetButton" Grid.Column="2" Style="{ThemeResource NavigationBackButtonNormalStyle}">
-            <FontIcon Glyph="&#xE149;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+            <FontIcon Glyph="&#xE149;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
         </Button>
         <Border x:Name="Frame" Grid.ColumnSpan="3" Grid.Row="1" Background="Transparent">
             <!--Frame-->

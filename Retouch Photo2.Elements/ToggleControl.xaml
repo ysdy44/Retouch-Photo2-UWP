@@ -12,7 +12,7 @@
     <UserControl.Resources>
 
         <!--Background-->
-        <SolidColorBrush x:Name="AccentColor"  Color="{ThemeResource SystemAccentColor}"/>
+        <SolidColorBrush x:Name="AccentColor" Color="{ThemeResource SystemAccentColor}"/>
         <SolidColorBrush x:Name="UnAccentColor" Color="Transparent"/>
 
         <!--Foreground-->

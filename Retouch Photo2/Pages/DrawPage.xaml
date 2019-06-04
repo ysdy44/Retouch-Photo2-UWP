@@ -38,21 +38,21 @@
             </local:DrawLayout.CenterContent>
 
             <local:DrawLayout.TopLeftPane>
-                <Button x:Name="BackButton" Height="50" Width="60" Content="&#xE0D5;" FontSize="20" FontFamily="Segoe MDL2 Assets" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
+                <Button x:Name="BackButton" Height="50" Width="60" Content="&#xE0D5;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
             </local:DrawLayout.TopLeftPane>
 
             <local:DrawLayout.TopLeftStackBar>
                 <StackPanel Orientation="Horizontal">
                     <Border Style="{StaticResource AppCircleBorderStyle}">
-                        <Button x:Name="SaveButton" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE105;" FontSize="20" Foreground="Gray" FontFamily="Segoe MDL2 Assets" BorderThickness="0" Background="Transparent" />
+                        <Button x:Name="SaveButton" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE105;" FontSize="20" Foreground="Gray" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
                     </Border>
                     <ContentControl Width="6"/>
                     <Border Style="{StaticResource AppCircleBorderStyle}">
-                        <Button IsEnabled="False" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10E;" FontSize="18" Foreground="Gray" FontFamily="Segoe MDL2 Assets" BorderThickness="0" Background="Transparent" />
+                        <Button IsEnabled="False" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10E;" FontSize="18" Foreground="Gray" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
                     </Border>   
                     <ContentControl Width="6"/>
                     <Border Style="{StaticResource AppCircleBorderStyle}">
-                        <Button IsEnabled="False" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10D;" FontSize="18" Foreground="Gray" FontFamily="Segoe MDL2 Assets" BorderThickness="0" Background="Transparent" />
+                        <Button IsEnabled="False" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10D;" FontSize="18" Foreground="Gray" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
                     </Border>
                 </StackPanel>               
             </local:DrawLayout.TopLeftStackBar>
