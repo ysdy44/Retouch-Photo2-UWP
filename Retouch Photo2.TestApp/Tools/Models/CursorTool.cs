@@ -61,23 +61,9 @@ namespace Retouch_Photo2.TestApp.Tools.Models
         }
 
 
-         public   TransformerMode ContainsNodeMode(Vector2 point, Transformer transformer, Matrix3x2 matrix, bool disabledRadian = false)
-        {
-            if (App.ViewModel.Text.Length > 10)
-            {
-                App.ViewModel.Text = string.Empty;
-            }
-            else
-            {
-                App.ViewModel.Text = App.ViewModel.Text + "O";
-            }
-
-            return Transformer.ContainsNodeMode(point, transformer, matrix, disabledRadian);
-        }
-
         //Cursor
         /// <summary> <see cref = "CursorTool.Started" />'s method. </summary>
-        public bool CursorStarted(Vector2 startingPoint)
+        public bool CursorStarted(Vector2 startingPoint, bool isSetTransformerMode= true)
         {
             switch (this.ViewModel.SelectionMode)
             {
@@ -87,15 +73,17 @@ namespace Retouch_Photo2.TestApp.Tools.Models
                 case ListViewSelectionMode.Single:
                     {
                         Transformer transformer = this.ViewModel.SelectionLayer.TransformerMatrix.Destination;
-
-                        //TransformerMode
                         this.startingTransformer = transformer;
-                        this.TransformerMode = this.ContainsNodeMode
+
+                        if (isSetTransformerMode)
+                        {
+                            this.TransformerMode = Transformer.ContainsNodeMode
                         (
                             startingPoint, transformer,
                             this.ViewModel.CanvasTransformer.GetMatrix()
                         );
-                        if (this.TransformerMode == TransformerMode.None) return false;
+                            if (this.TransformerMode == TransformerMode.None) return false;
+                        }
 
                         this.ViewModel.SelectionLayer.TransformerMatrix.OldDestination = this.ViewModel.SelectionLayer.TransformerMatrix.Destination;
                         this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
@@ -106,15 +94,17 @@ namespace Retouch_Photo2.TestApp.Tools.Models
                 case ListViewSelectionMode.Multiple:
                     {
                         Transformer transformer = this.ViewModel.Transformer;
-
-                        //TransformerMode
                         this.startingTransformer = transformer;
-                        this.TransformerMode = this.ContainsNodeMode
-                        (
-                            startingPoint, transformer,
-                            this.ViewModel.CanvasTransformer.GetMatrix()
-                        );
-                        if (this.TransformerMode == TransformerMode.None) return false;
+
+                        if (isSetTransformerMode)
+                        {
+                            this.TransformerMode = Transformer.ContainsNodeMode
+                            (
+                                startingPoint, transformer,
+                                this.ViewModel.CanvasTransformer.GetMatrix()
+                            );
+                            if (this.TransformerMode == TransformerMode.None) return false;
+                        }
 
                         foreach (Layer selectionLayer in this.ViewModel.SelectionLayers)
                         {
@@ -226,7 +216,8 @@ namespace Retouch_Photo2.TestApp.Tools.Models
         /// Select a new layer and sets layer's Checked.
         /// </summary>
         /// <param name="point"> canvas-starting-point </param>
-        private void SelectLayer(Vector2 point)
+        /// <returns> Return **false** if you do not select to any layer. </returns>
+        private bool SelectLayer(Vector2 point)
         {
             Vector2 canvasStartingPoint = Vector2.Transform(point, this.ViewModel.CanvasTransformer.GetInverseMatrix());
 
@@ -257,7 +248,13 @@ namespace Retouch_Photo2.TestApp.Tools.Models
                 continue;
             }
 
-            this.ViewModel.Invalidate();//Invalidate
+
+            if (selected)
+            {
+                this.ViewModel.Invalidate();//Invalidate
+                return true;
+            }
+            else  return false;
         }
 
         /// <summary>
@@ -265,62 +262,32 @@ namespace Retouch_Photo2.TestApp.Tools.Models
         /// </summary>
         /// <param name="point"> canvas-starting-point </param>
         /// <param name="isAdd"> <see cref = "CursorMode.Add" /> or <see cref = "CursorMode.Subtract" /> </param>
-        private void AddLayer(Vector2 point, bool isAdd = true)
+        /// <returns> Return **false** if you do not select to any layer. </returns>
+        private bool AddLayer(Vector2 point, bool isAdd = true)
         {
+            Vector2 canvasStartingPoint = Vector2.Transform(point, this.ViewModel.CanvasTransformer.GetInverseMatrix());
+
             foreach (Layer layer in this.ViewModel.Layers)
             {
                 if (layer.IsVisual)
                 {
                     Transformer layerTransformer = layer.TransformerMatrix.Destination;
-                    bool layerInQuadrangle = Transformer.InQuadrangle(point, layerTransformer);
+                    bool layerInQuadrangle = Transformer.InQuadrangle(canvasStartingPoint, layerTransformer);
 
                     if (layerInQuadrangle)
                     {
-                        layer.IsChecked = isAdd;
-                        break;
+                        layer.IsChecked = isAdd;                        
+                        this.TransformerMode = TransformerMode.None;//TransformerMode
+                        this.ViewModel.SetSelectionMode(this.ViewModel.Layers);//Transformer
+
+                        this.ViewModel.Invalidate();//Invalidate
+
+                        return true;
                     }
                 }
             }
 
-            this.TransformerMode = TransformerMode.None;//TransformerMode
-            this.ViewModel.SetSelectionMode(this.ViewModel.Layers);//Transformer
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-
-        /// <summary>
-        /// <see cref = "CursorTool.Starting" />'s method.
-        /// </summary>
-        /// <param name="point"> Input point. </param>
-        /// <param name="transformer"> transformer </param>
-        private void SingleAndMultipleStarting(Vector2 point, Transformer transformer)
-        {
-            switch (this.CursorMode)
-            {
-                case CursorMode.New:
-                    {
-                        //TransformerMode
-                        this.TransformerMode = this.ContainsNodeMode
-                        (
-                            point, transformer,
-                            this.ViewModel.CanvasTransformer.GetMatrix()
-                        );
-
-                        if (this.TransformerMode == TransformerMode.None)
-                        {
-                            this.SelectLayer(point);
-                        }
-                    }
-                    break;
-
-                case CursorMode.Add:
-                    this.AddLayer(point, true);
-                    break;
-
-                case CursorMode.Subtract:
-                    this.AddLayer(point, false);
-                    break;
-            }
+            return false;
         }
 
 
@@ -330,23 +297,74 @@ namespace Retouch_Photo2.TestApp.Tools.Models
         //@Override
         public override void Starting(Vector2 point)
         {
+            //SelectionMode
             switch (this.ViewModel.SelectionMode)
             {
                 case ListViewSelectionMode.None:
                     {
                         this.TransformerMode = TransformerMode.None;//TransformerMode
-                        this.SelectLayer(point);
+                        bool isSelect = this.SelectLayer(point);
+                        if (isSelect)  return;
                     }
                     break;
                 case ListViewSelectionMode.Single:
-                    this.SingleAndMultipleStarting(point, this.ViewModel.SelectionLayer.TransformerMatrix.Destination);
+                    {
+                        Transformer transformer = this.ViewModel.SelectionLayer.TransformerMatrix.Destination;
+                        this.TransformerMode = Transformer.ContainsNodeMode(point, transformer, this.ViewModel.CanvasTransformer.GetMatrix());
+                    }
                     break;
                 case ListViewSelectionMode.Multiple:
-                    this.SingleAndMultipleStarting(point, this.ViewModel.Transformer);
+                    {
+                        Transformer transformer = this.ViewModel.Transformer;
+                        this.TransformerMode = Transformer.ContainsNodeMode(point, transformer, this.ViewModel.CanvasTransformer.GetMatrix());
+                    }
                     break;
             }
+
+
+
+            //CursorMode
+            switch (this.CursorMode)
+            {
+                case CursorMode.New:
+                    {
+                        if (this.TransformerMode == TransformerMode.None)
+                        {
+                            bool isSelect = this.SelectLayer(point);
+                            if (isSelect) return;
+                        }
+                    }
+                    break;
+                case CursorMode.Add:
+                    {
+                        if (this.TransformerMode == TransformerMode.None || this.TransformerMode == TransformerMode.Translation)
+                        {
+                            bool isAdd = this.AddLayer(point, true);
+                            if (isAdd) return;
+                        }
+                    }
+                    break;
+                case CursorMode.Subtract:
+                    {
+                        if (this.TransformerMode == TransformerMode.None || this.TransformerMode == TransformerMode.Translation)
+                        {
+                            bool isAdd = this.AddLayer(point, false);
+                            if (isAdd) return;
+                        }
+                    }
+                    break;
+            }
+
+
+
+            //TransformerMode
+            if (this.TransformerMode == TransformerMode.None)
+            {
+                this.ViewModel.SetSelectionModeNone();//Transformer
+                this.ViewModel.Invalidate();//Invalidate
+            }
         }
-        public override void Started(Vector2 startingPoint, Vector2 point) => this.CursorStarted(startingPoint);
+        public override void Started(Vector2 startingPoint, Vector2 point) => CursorStarted(startingPoint, false);
         public override void Delta(Vector2 startingPoint, Vector2 point) => this.CursorDelta(startingPoint, point);
         public override void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted) => this.CursorComplete();
 
