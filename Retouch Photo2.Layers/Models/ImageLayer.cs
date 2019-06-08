@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Layers.Models
             return new Transform2DEffect
             {
                 Source = this.Bitmap,
-                TransformMatrix = base.Transformer.Matrix * canvasToVirtualMatrix
+                TransformMatrix = base.TransformerMatrix.GetMatrix() * canvasToVirtualMatrix
             };
         }
     }

@@ -28,73 +28,71 @@ namespace Retouch_Photo2.TestApp.Tools.Models
         public override void Starting(Vector2 point) { }
         public override void Started(Vector2 startingPoint, Vector2 point)
         {
+            //Cursor
+            if (this.ViewModel.CursorTool.CursorStarted(startingPoint)) return;
+   
             //Transformer
-            Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.GetInverseMatrix();
-            TransformerVectors transformerVectors = new TransformerVectors
+            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+            Transformer transformer = new Transformer
             (
                 Vector2.Transform(startingPoint, inverseMatrix),
                 Vector2.Transform(point, inverseMatrix)
             );
 
-            //Layer
-            RectangleLayer rectangleLayer = new RectangleLayer
+            //Mezzanine
+            this.ViewModel.TurnOnMezzanine(new RectangleLayer
             {
-                Transformer = new Transformer(transformerVectors)
-            };
-            this.ViewModel.TurnOnMezzanine(rectangleLayer);//Mezzanine
+                TransformerMatrix = new TransformerMatrix(transformer)
+            });
+
+            this.ViewModel.Transformer=transformer;//Transformer
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         public override void Delta(Vector2 startingPoint, Vector2 point)
-        {         
-            //Transformer
-            Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.GetInverseMatrix();
-            TransformerVectors transformerVectors = new TransformerVectors
+        {
+            //Cursor
+            if (this.ViewModel.CursorTool.CursorDelta(startingPoint, point)) return;
+
+            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+            Transformer transformer = new Transformer
             (
                  Vector2.Transform(startingPoint, inverseMatrix),
                  Vector2.Transform(point, inverseMatrix)
             );
+            
+            this.ViewModel.MezzanineLayer.TransformerMatrix.Destination = transformer;//Mezzanine
 
-            //Transformer
-            this.ViewModel.TransformerVectors = transformerVectors;
-
-            //Layer
-            this.ViewModel.MezzanineLayer.Transformer.DestinationVectors = transformerVectors;
+            this.ViewModel.Transformer=transformer;//Transformer
 
             this.ViewModel.Invalidate();//Invalidate
         }
         public override void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
+            //Cursor
+            if (this.ViewModel.CursorTool.CursorComplete()) return;
+
             if (isSingleStarted)
             {
-                //Transformer
-                Matrix3x2 inverseMatrix = this.ViewModel.MatrixTransformer.GetInverseMatrix();
-                TransformerVectors transformerVectors = new TransformerVectors
+                Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+                Transformer transformer = new Transformer
                 (
                     Vector2.Transform(startingPoint, inverseMatrix),
                     Vector2.Transform(point, inverseMatrix)
                 );
 
-                //Transformer
-                this.ViewModel.LayerUnChecked();
-                this.ViewModel.TransformerVectors = transformerVectors;
+                this.ViewModel.LayerAllUnChecked();//Layer
 
-                //Layer
-                RectangleLayer rectangleLayer = new RectangleLayer
+                //Mezzanine
+                this.ViewModel.InsertMezzanine(new RectangleLayer
                 {
                     IsChecked = true,
-                    Transformer = new Transformer(transformerVectors)
-                };
-                this.ViewModel.InsertMezzanine(rectangleLayer);//Mezzanine
+                    TransformerMatrix = new TransformerMatrix(transformer)
+                });
             }
-            else
-            {
-                //Transformer
-                this.ViewModel.TransformerVectors = this.ViewModel.GetCheckedLayersTransformerVectors(this.ViewModel.Layers);
+            else this.ViewModel.TurnOffMezzanine();//Mezzanine
 
-                //Layer
-                this.ViewModel.TurnOffMezzanine();//Mezzanine
-            }
+            this.ViewModel.SetSelectionMode(this.ViewModel.Layers);//Transformer
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }

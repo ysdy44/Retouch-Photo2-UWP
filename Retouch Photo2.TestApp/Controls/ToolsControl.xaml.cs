@@ -30,9 +30,10 @@ namespace Retouch_Photo2.TestApp.Controls
         public ToolsControl()
         {
             this.InitializeComponent();
-
+            
             this.SetButton(this.ViewButton, this.ViewModel.ViewTool);
             this.SetButton(this.RectangleButton, this.ViewModel.RectangleTool);
+            this.SetButton(this.CursorButton, this.ViewModel.CursorTool);
         }
 
         private void SetButton(Retouch_Photo2.TestApp.Tools.Button button, Tool tool)

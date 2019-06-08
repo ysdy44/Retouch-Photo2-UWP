@@ -11,5 +11,8 @@
 
         /// <summary> Rectangle Geometry </summary>
         Rectangle,
+
+        /// <summary> Cursor Tool</summary>
+        Cursor,
     }
 }

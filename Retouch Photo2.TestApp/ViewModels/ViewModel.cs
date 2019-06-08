@@ -15,17 +15,9 @@ using System.Threading.Tasks;
 
 namespace Retouch_Photo2.TestApp.ViewModels
 {
-    public enum InvalidateMode
-    {
-        None,
-        Thumbnail,
-        HD,
-    }
     /// <summary> Retouch_Photo2's the only <see cref = "ViewModel" />. </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
-
-
 
         /// <summary> Reload <see cref = "ViewModel" /> </summary>
         /// <param name="project"> project </param>
@@ -33,8 +25,8 @@ namespace Retouch_Photo2.TestApp.ViewModels
         {
             if (project == null) return;
 
-            this.MatrixTransformer.Width = project.Width;
-            this.MatrixTransformer.Height = project.Height;
+            this.CanvasTransformer.Width = project.Width;
+            this.CanvasTransformer.Height = project.Height;
 
             this.Layers.Clear();
             foreach (Layer layer in project.Layers)
@@ -48,13 +40,11 @@ namespace Retouch_Photo2.TestApp.ViewModels
         public CanvasDevice CanvasDevice { get; } = new CanvasDevice();
 
 
-        /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.Library.MatrixTransformer" />. </summary>
-        public MatrixTransformer MatrixTransformer = new MatrixTransformer();
+        /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.Library.CanvasTransformer" />. </summary>
+        public CanvasTransformer CanvasTransformer { get; } = new CanvasTransformer();
 
-
-
+        
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModel.Text" />. </summary>
-        private string text;
         public string Text
         {
             get => this.text;
@@ -64,11 +54,11 @@ namespace Retouch_Photo2.TestApp.ViewModels
                 this.OnPropertyChanged(nameof(this.Text));//Notify 
             }
         }
+        private string text= string.Empty;
                
 
         //Notify 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-               
     }
 }

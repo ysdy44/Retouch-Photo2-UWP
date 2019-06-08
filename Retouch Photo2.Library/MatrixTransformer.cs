@@ -4,7 +4,7 @@ using Windows.Foundation;
 
 namespace Retouch_Photo2.Library
 {
-    /// <summary> <see cref = "MatrixTransformer" />'s matrix mode. </summary>
+    /// <summary> <see cref = "CanvasTransformer" />'s matrix mode. </summary>
     public enum MatrixTransformerMode
     {
         /// <summary> Canvas > Virtual > Control . </summary>
@@ -15,7 +15,7 @@ namespace Retouch_Photo2.Library
         VirtualToControl,
     }
 
-    /// <summary> <see cref = "MatrixTransformer" />'s inverse matrix mode. </summary>
+    /// <summary> <see cref = "CanvasTransformer" />'s inverse matrix mode. </summary>
     public enum InverseMatrixTransformerMode
     {
         /// <summary> Control > Virtual > Canvas . </summary>
@@ -40,15 +40,15 @@ namespace Retouch_Photo2.Library
     ///    Rotate around the origin first, then shift. (The canvas has a rotation angle)
     ///    
     /// </summary>
-    public class MatrixTransformer
+    public class CanvasTransformer
     {
 
-        /// <summary> <see cref = "MatrixTransformer" />'s width. </summary>
+        /// <summary> <see cref = "CanvasTransformer" />'s width. </summary>
         public int Width = 1000;
-        /// <summary> <see cref = "MatrixTransformer" />'s height. </summary>
+        /// <summary> <see cref = "CanvasTransformer" />'s height. </summary>
         public int Height = 1000;
 
-        /// <summary> <see cref = "MatrixTransformer" />'s scale. </summary>
+        /// <summary> <see cref = "CanvasTransformer" />'s scale. </summary>
         public float Scale = 1.0f;
 
         /// <summary> CanvasControl's width. </summary>
@@ -56,9 +56,9 @@ namespace Retouch_Photo2.Library
         /// <summary> CanvasControl's height. </summary>
         public float ControlHeight = 1000.0f;
 
-        /// /// <summary> <see cref = "MatrixTransformer" />'s translation. </summary>
+        /// /// <summary> <see cref = "CanvasTransformer" />'s translation. </summary>
         public Vector2 Position = new Vector2(0.0f, 0.0f);
-        /// <summary> <see cref = "MatrixTransformer" />'s rotation. </summary>
+        /// <summary> <see cref = "CanvasTransformer" />'s rotation. </summary>
         public float Radian = 0.0f;
 
         
@@ -118,9 +118,9 @@ namespace Retouch_Photo2.Library
 
 
         /// <summary>
-        /// Get <see cref = "MatrixTransformer" />'s matrix.
+        /// Gets <see cref = "CanvasTransformer" />'s matrix.
         /// </summary>
-        /// <param name="mode"> <see cref = "MatrixTransformer" />'s matrix mode. </param>
+        /// <param name="mode"> <see cref = "CanvasTransformer" />'s matrix mode. </param>
         /// <returns> matrix </returns>
         public Matrix3x2 GetMatrix(MatrixTransformerMode mode= MatrixTransformerMode.CanvasToVirtualToControl)
         {
@@ -137,9 +137,9 @@ namespace Retouch_Photo2.Library
         }
 
         /// <summary>
-        /// Get <see cref = "MatrixTransformer" />'s inverse matrix.
+        /// Gets <see cref = "CanvasTransformer" />'s inverse matrix.
         /// </summary>
-        /// <param name="mode"> <see cref = "MatrixTransformer" />'s inverse matrix mode. </param>
+        /// <param name="mode"> <see cref = "CanvasTransformer" />'s inverse matrix mode. </param>
         /// <returns> inverse matrix </returns>
         public Matrix3x2 GetInverseMatrix(InverseMatrixTransformerMode mode = InverseMatrixTransformerMode.ControlToVirtualToCanvas)
         {

@@ -37,8 +37,8 @@ namespace Retouch_Photo2.Layers
         public float Opacity=1.0f;
 
 
-        /// <summary> <see cref = "Layer" />'s transformer. </summary>
-        public Transformer Transformer;
+        /// <summary> <see cref = "Layer" />'s TransformerMatrix. </summary>
+        public TransformerMatrix TransformerMatrix;
 
         //@Static
         /// <summary>

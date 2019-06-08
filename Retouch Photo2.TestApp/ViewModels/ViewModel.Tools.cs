@@ -34,9 +34,11 @@ namespace Retouch_Photo2.TestApp.ViewModels
 
 
         /// <summary> <see cref="Tool"/>'s ViewTool. </summary>
-        public ViewTool ViewTool { private set; get; } = new ViewTool();
+        public ViewTool ViewTool { get; } = new ViewTool();
         /// <summary> <see cref="Tool"/>'s RectangleTool. </summary>
-        public RectangleTool RectangleTool { private set; get; } = new RectangleTool();
+        public RectangleTool RectangleTool {  get; } = new RectangleTool();
+        /// <summary> <see cref="Tool"/>'s CursorTool. </summary>
+        public CursorTool CursorTool { get; } = new CursorTool();
 
     }
 }

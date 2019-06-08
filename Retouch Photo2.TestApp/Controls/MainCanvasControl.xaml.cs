@@ -61,7 +61,7 @@ namespace Retouch_Photo2.TestApp.Controls
             this.SizeChanged += (s, e) => 
             {
                 if (e.NewSize == e.PreviousSize) return;
-                this.ViewModel.MatrixTransformer.Size = e.NewSize;
+                this.ViewModel.CanvasTransformer.Size = e.NewSize;
             };
                
 
@@ -84,7 +84,7 @@ namespace Retouch_Photo2.TestApp.Controls
             {
                 //Render : Blank Image
                 ICanvasImage previousImage = new ColorSourceEffect { Color = Colors.White };
-                Matrix3x2 canvasToVirtualMatrix = this.ViewModel.MatrixTransformer.GetMatrix(MatrixTransformerMode.CanvasToVirtual);
+                Matrix3x2 canvasToVirtualMatrix = this.ViewModel.CanvasTransformer.GetMatrix(MatrixTransformerMode.CanvasToVirtual);
 
                
                 void aaa() =>
@@ -120,8 +120,8 @@ namespace Retouch_Photo2.TestApp.Controls
 
 
                 //Crop : Get the border from MatrixTransformer
-                float width = this.ViewModel.MatrixTransformer.Width * this.ViewModel.MatrixTransformer.Scale;
-                float height = this.ViewModel.MatrixTransformer.Height * this.ViewModel.MatrixTransformer.Scale;
+                float width = this.ViewModel.CanvasTransformer.Width * this.ViewModel.CanvasTransformer.Scale;
+                float height = this.ViewModel.CanvasTransformer.Height * this.ViewModel.CanvasTransformer.Scale;
                 ICanvasImage cropRect = new CropEffect
                 {
                     Source = previousImage,
@@ -133,7 +133,7 @@ namespace Retouch_Photo2.TestApp.Controls
                 ICanvasImage finalCanvas = new Transform2DEffect
                 {
                     Source = cropRect,
-                    TransformMatrix = this.ViewModel.MatrixTransformer.GetMatrix(MatrixTransformerMode.VirtualToControl)
+                    TransformMatrix = this.ViewModel.CanvasTransformer.GetMatrix(MatrixTransformerMode.VirtualToControl)
                 };
                 ICanvasImage shadow = new ShadowEffect
                 {
@@ -145,10 +145,32 @@ namespace Retouch_Photo2.TestApp.Controls
                 args.DrawingSession.DrawImage(finalCanvas);
 
 
-                if (this.ViewModel.TransformerVectors is TransformerVectors  vectors)
+
+                ///////////////////////////////////////////////////////////////////////////////////
+
+
+                //Transformer
+                switch (this.ViewModel.SelectionMode)
                 {
-                    Transformer.DrawBoundNodes(args.DrawingSession, vectors, this.ViewModel.MatrixTransformer.GetMatrix());
-                }
+                    case ListViewSelectionMode.None:
+                        break;
+
+                    case ListViewSelectionMode.Single:
+                        {
+                            Transformer transformer = this.ViewModel.SelectionLayer.TransformerMatrix.Destination;
+                            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+                            Transformer.DrawBoundNodes(args.DrawingSession, transformer, matrix);
+                        }
+                        break;
+
+                    case ListViewSelectionMode.Multiple:
+                        {
+                            Transformer transformer = this.ViewModel.Transformer;
+                            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+                            Transformer.DrawBoundNodes(args.DrawingSession, transformer, matrix);
+                        }
+                        break;
+                } 
             };
 
 
@@ -182,13 +204,13 @@ namespace Retouch_Photo2.TestApp.Controls
             this.CanvasOperator.Right_Start += (point) =>
             {
                 this.rightStartPoint = point;
-                this.rightStartPosition = this.ViewModel.MatrixTransformer.Position;
+                this.rightStartPosition = this.ViewModel.CanvasTransformer.Position;
 
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
             };
             this.CanvasOperator.Right_Delta += (point) =>
             {
-                this.ViewModel.MatrixTransformer.Position = this.rightStartPosition - this.rightStartPoint + point;
+                this.ViewModel.CanvasTransformer.Position = this.rightStartPosition - this.rightStartPoint + point;
 
                 this.ViewModel.Invalidate();
             };
@@ -198,19 +220,19 @@ namespace Retouch_Photo2.TestApp.Controls
             //Double
             this.CanvasOperator.Double_Start += (center, space) =>
             {
-                this.doubleStartCenter = (center - this.ViewModel.MatrixTransformer.Position) / this.ViewModel.MatrixTransformer.Scale + new Vector2(this.ViewModel.MatrixTransformer.ControlWidth / 2, this.ViewModel.MatrixTransformer.ControlHeight / 2);
-                this.doubleStartPosition = this.ViewModel.MatrixTransformer.Position;
+                this.doubleStartCenter = (center - this.ViewModel.CanvasTransformer.Position) / this.ViewModel.CanvasTransformer.Scale + new Vector2(this.ViewModel.CanvasTransformer.ControlWidth / 2, this.ViewModel.CanvasTransformer.ControlHeight / 2);
+                this.doubleStartPosition = this.ViewModel.CanvasTransformer.Position;
 
                 this.doubleStartSpace = space;
-                this.doubleStartScale = this.ViewModel.MatrixTransformer.Scale;
+                this.doubleStartScale = this.ViewModel.CanvasTransformer.Scale;
 
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
             };
             this.CanvasOperator.Double_Delta += (center, space) =>
             {
-                this.ViewModel.MatrixTransformer.Scale = this.doubleStartScale / this.doubleStartSpace * space;
+                this.ViewModel.CanvasTransformer.Scale = this.doubleStartScale / this.doubleStartSpace * space;
 
-                this.ViewModel.MatrixTransformer.Position = center - (this.doubleStartCenter - new Vector2(this.ViewModel.MatrixTransformer.ControlWidth / 2, this.ViewModel.MatrixTransformer.ControlHeight / 2)) * this.ViewModel.MatrixTransformer.Scale;
+                this.ViewModel.CanvasTransformer.Position = center - (this.doubleStartCenter - new Vector2(this.ViewModel.CanvasTransformer.ControlWidth / 2, this.ViewModel.CanvasTransformer.ControlHeight / 2)) * this.ViewModel.CanvasTransformer.Scale;
 
                 this.ViewModel.Invalidate();
             };
@@ -222,18 +244,18 @@ namespace Retouch_Photo2.TestApp.Controls
             {
                 if (space > 0)
                 {
-                    if (this.ViewModel.MatrixTransformer.Scale < 10f)
+                    if (this.ViewModel.CanvasTransformer.Scale < 10f)
                     {
-                        this.ViewModel.MatrixTransformer.Scale *= 1.1f;
-                        this.ViewModel.MatrixTransformer.Position = point + (this.ViewModel.MatrixTransformer.Position - point) * 1.1f;
+                        this.ViewModel.CanvasTransformer.Scale *= 1.1f;
+                        this.ViewModel.CanvasTransformer.Position = point + (this.ViewModel.CanvasTransformer.Position - point) * 1.1f;
                     }
                 }
                 else
                 {
-                    if (this.ViewModel.MatrixTransformer.Scale > 0.1f)
+                    if (this.ViewModel.CanvasTransformer.Scale > 0.1f)
                     {
-                        this.ViewModel.MatrixTransformer.Scale /= 1.1f;
-                        this.ViewModel.MatrixTransformer.Position = point + (this.ViewModel.MatrixTransformer.Position - point) / 1.1f;
+                        this.ViewModel.CanvasTransformer.Scale /= 1.1f;
+                        this.ViewModel.CanvasTransformer.Position = point + (this.ViewModel.CanvasTransformer.Position - point) / 1.1f;
                     }
                 }
 

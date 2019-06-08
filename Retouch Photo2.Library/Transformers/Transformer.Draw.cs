@@ -8,13 +8,13 @@ namespace Retouch_Photo2.Library
     {
 
         /// <summary> Draw lines on bound. </summary>
-        public static void DrawBound(CanvasDrawingSession ds, TransformerVectors vectors, Matrix3x2 matrix)
+        public static void DrawBound(CanvasDrawingSession ds, Transformer transformer, Matrix3x2 matrix)
         {
             //LTRB
-            Vector2 leftTop = Vector2.Transform(vectors.LeftTop, matrix);
-            Vector2 rightTop = Vector2.Transform(vectors.RightTop, matrix);
-            Vector2 rightBottom = Vector2.Transform(vectors.RightBottom, matrix);
-            Vector2 leftBottom = Vector2.Transform(vectors.LeftBottom, matrix);
+            Vector2 leftTop = Vector2.Transform(transformer.LeftTop, matrix);
+            Vector2 rightTop = Vector2.Transform(transformer.RightTop, matrix);
+            Vector2 rightBottom = Vector2.Transform(transformer.RightBottom, matrix);
+            Vector2 leftBottom = Vector2.Transform(transformer.LeftBottom, matrix);
 
             //LTRB: Line
             ds.DrawLine(leftTop, rightTop, Windows.UI.Colors.DodgerBlue);
@@ -24,13 +24,13 @@ namespace Retouch_Photo2.Library
         }
 
         /// <summary> Draw nodes and lines on bound，just like【由】. </summary>
-        public static void DrawBoundNodes(CanvasDrawingSession ds, TransformerVectors vectors, Matrix3x2 matrix, bool disabledRadian = false)
+        public static void DrawBoundNodes(CanvasDrawingSession ds, Transformer transformer, Matrix3x2 matrix, bool disabledRadian = false)
         {
             //LTRB
-            Vector2 leftTop = Vector2.Transform(vectors.LeftTop, matrix);
-            Vector2 rightTop = Vector2.Transform(vectors.RightTop, matrix);
-            Vector2 rightBottom = Vector2.Transform(vectors.RightBottom, matrix);
-            Vector2 leftBottom = Vector2.Transform(vectors.LeftBottom, matrix);
+            Vector2 leftTop = Vector2.Transform(transformer.LeftTop, matrix);
+            Vector2 rightTop = Vector2.Transform(transformer.RightTop, matrix);
+            Vector2 rightBottom = Vector2.Transform(transformer.RightBottom, matrix);
+            Vector2 leftBottom = Vector2.Transform(transformer.LeftBottom, matrix);
 
             //Line
             ds.DrawLine(leftTop, rightTop, Windows.UI.Colors.DodgerBlue);

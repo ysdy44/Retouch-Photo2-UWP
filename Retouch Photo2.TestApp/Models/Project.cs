@@ -59,8 +59,8 @@ namespace Retouch_Photo2.TestApp.Models
 
                 int width = (int)bitmap.SizeInPixels.Width;
                 int height = (int)bitmap.SizeInPixels.Height;
-                Transformer transformer = new Transformer(width, height, Vector2.Zero);
-
+                TransformerMatrix transformerMatrix = new TransformerMatrix(width, height, Vector2.Zero);
+                
                 return new Project
                 {
                     Width = width,

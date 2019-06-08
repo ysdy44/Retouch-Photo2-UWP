@@ -22,10 +22,23 @@ namespace Retouch_Photo2.Library
         /// <summary> Get outside node. </summary>
         private static Vector2 OutsideNode(Vector2 nearNode, Vector2 farNode) => nearNode - Vector2.Normalize(farNode - nearNode) * Transformer.NodeDistanceDouble;
 
-
-        /// <summary> Point inside the Quadrangle. </summary>
+        /// <summary>
+        /// Point inside the Quadrangle
+        /// </summary>
         /// <param name="point"> The point. </param>
-        /// <returns> Is point in quadrangle? </returns>
+        /// <param name="transformer"> Layer's Transformer. </param>
+        /// <returns></returns>
+        public static bool InQuadrangle(Vector2 point, Transformer transformer) => Transformer.InQuadrangle(point, transformer.LeftTop, transformer.RightTop, transformer.RightBottom, transformer.LeftBottom);
+
+        /// <summary>
+        /// Point inside the Quadrangle
+        /// </summary>
+        /// <param name="point"> The point. </param>
+        /// <param name="leftTop"> The left-top point. </param>
+        /// <param name="rightTop"> The right-top point. </param>
+        /// <param name="rightBottom"> The right-bottom point. </param>
+        /// <param name="leftBottom"> The left-bottom point. </param>
+        /// <returns></returns>
         public static bool InQuadrangle(Vector2 point, Vector2 leftTop, Vector2 rightTop, Vector2 rightBottom, Vector2 leftBottom)
         {
             float a = (leftTop.X - leftBottom.X) * (point.Y - leftBottom.Y) - (leftTop.Y - leftBottom.Y) * (point.X - leftBottom.X);
@@ -35,22 +48,21 @@ namespace Retouch_Photo2.Library
             return (a > 0 && b > 0 && c > 0 && d > 0) || (a < 0 && b < 0 && c < 0 && d < 0);
         }
 
-
         /// <summary>
-        /// Returns whether the radian area filled by the skew node contains the specified point. 
+        /// Gets the radian area filled by the skew node contains the specified point. 
         /// </summary>
         /// <param name="point"> Input point. </param>
-        /// <param name="transformer"> Layer's transformer. </param>
+        /// <param name="transformer"> Layer's Transformer. </param>
         /// <param name="matrix"></param>
-        /// <param name="inverseMatrix"></param>
-        /// <returns>Transformer Mode</returns>
-        public static TransformerMode ContainsNodeMode(Vector2 point, Transformer transformer, Matrix3x2 matrix)
+        /// <param name="disabledRadian"> disabled radian </param>
+        /// <returns></returns>
+        public static TransformerMode ContainsNodeMode(Vector2 point, Transformer transformer, Matrix3x2 matrix, bool disabledRadian = false)
         {
             //LTRB
-            Vector2 leftTop = Vector2.Transform(transformer.DestinationVectors.LeftTop, matrix);
-            Vector2 rightTop = Vector2.Transform(transformer.DestinationVectors.RightTop, matrix);
-            Vector2 rightBottom = Vector2.Transform(transformer.DestinationVectors.RightBottom, matrix);
-            Vector2 leftBottom = Vector2.Transform(transformer.DestinationVectors.LeftBottom, matrix);
+            Vector2 leftTop = Vector2.Transform(transformer.LeftTop, matrix);
+            Vector2 rightTop = Vector2.Transform(transformer.RightTop, matrix);
+            Vector2 rightBottom = Vector2.Transform(transformer.RightBottom, matrix);
+            Vector2 leftBottom = Vector2.Transform(transformer.LeftBottom, matrix);
 
             //Scale2
             if (Transformer.InNodeRadius(leftTop, point)) return TransformerMode.ScaleLeftTop;
@@ -77,7 +89,7 @@ namespace Retouch_Photo2.Library
             Vector2 outsideBottom = Transformer.OutsideNode(centerBottom, centerTop);
 
             //Rotation
-            if (transformer.DdisabledRadian == false)
+            if (disabledRadian == false)
             {
                 if (Transformer.InNodeRadius(outsideTop, point)) return TransformerMode.Rotation;
 

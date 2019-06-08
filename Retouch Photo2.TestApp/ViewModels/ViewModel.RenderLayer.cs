@@ -4,6 +4,17 @@ using System.Collections.ObjectModel;
 
 namespace Retouch_Photo2.TestApp.ViewModels
 {
+    /// <summary> Mode of the <see cref = "ViewModel.Invalidate" />. </summary>
+    public enum InvalidateMode
+    {
+        /// <summary> Normal </summary>
+        None,
+        /// <summary> Thumbnail </summary>
+        Thumbnail,
+        /// <summary> High-definition </summary>
+        HD,
+    }
+
     /// <summary> Retouch_Photo2's the only <see cref = "ViewModel" />. </summary>
     public partial class ViewModel
     {
@@ -18,12 +29,12 @@ namespace Retouch_Photo2.TestApp.ViewModels
       
 
         /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.Layers.Layer" />s. </summary>
-        public ObservableCollection<Layer> Layers = new ObservableCollection<Layer>();
+        public ObservableCollection<Layer> Layers { get; } = new ObservableCollection<Layer>();
 
 
         /// <summary> The layer is Checked, the other layers are UnChecked. </summary>
         /// <param name="layer"> current layer </param>
-        public void LayerChecked(Layer layer)
+        public void LayerSingleChecked(Layer layer)
         {
             foreach (Layer item in this.Layers)
             {
@@ -32,7 +43,7 @@ namespace Retouch_Photo2.TestApp.ViewModels
         }
 
         /// <summary> The all layers are UnChecked. </summary>
-        public void LayerUnChecked()
+        public void LayerAllUnChecked()
         {
             foreach (Layer item in this.Layers)
             {

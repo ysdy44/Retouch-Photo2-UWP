@@ -23,9 +23,9 @@ namespace Retouch_Photo2.TestApp.Controls
             //Layer : ItemClick
             Layer.ItemClickAction = (layer, placementTarget) =>
             {
-                this.ViewModel.LayerChecked(layer);
+                this.ViewModel.LayerSingleChecked(layer);//Layer
 
-                this.ViewModel.TransformerVectors = layer.Transformer.DestinationVectors;//Transformer
+                this.ViewModel.SetSelectionModeSingle(layer);//Transformer
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -40,10 +40,7 @@ namespace Retouch_Photo2.TestApp.Controls
                 {
                     foreach (Layer item in this.ViewModel.Layers)
                     {
-                        if (item.IsChecked)
-                        {
-                            item.IsVisual = isVisual;
-                        }
+                        if (item.IsChecked)    item.IsVisual = isVisual;
                     }
                 }
 
@@ -55,7 +52,8 @@ namespace Retouch_Photo2.TestApp.Controls
             {
                 layer.IsChecked = !layer.IsChecked;
 
-                this.ViewModel.TransformerVectors = this.ViewModel.GetCheckedLayersTransformerVectors(this.ViewModel.Layers);
+                this.ViewModel.SetSelectionMode(this.ViewModel.Layers);//Transformer
+
                 this.ViewModel.Invalidate();//Invalidate
             };
 
