@@ -14,6 +14,7 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
         
     xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:layers="using:Retouch_Photo2.Layers"
     mc:Ignorable="d">
 
 
@@ -365,7 +366,8 @@
             <controls:DropShadowPanel Grid.Column="1" Style="{StaticResource DropShadowPanelStyle}">
                 <Rectangle x:Name="IconRightRectangle" Style="{StaticResource RectangleStyle}"/>
             </controls:DropShadowPanel>
-            <FontIcon x:Name="IconRightIcon" Glyph="&#xF156;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+
+            <layers:Icon x:Name="IconRightIcon" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
 
 

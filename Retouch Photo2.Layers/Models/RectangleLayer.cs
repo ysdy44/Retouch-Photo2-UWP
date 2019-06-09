@@ -12,7 +12,6 @@ namespace Retouch_Photo2.Layers.Models
     public class RectangleLayer : IGeometryLayer
     {
         //@Construct
-        /// <summary> Construct a RectangleLayer. </summary>
         public RectangleLayer()
         {
             base.Name = "Rectangle";
@@ -20,7 +19,7 @@ namespace Retouch_Photo2.Layers.Models
         }
 
         //@Override
-        public override CanvasGeometry GetGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
             //LTRB
             Vector2 leftTop = Vector2.Transform(base.TransformerMatrix.Destination.LeftTop, canvasToVirtualMatrix);

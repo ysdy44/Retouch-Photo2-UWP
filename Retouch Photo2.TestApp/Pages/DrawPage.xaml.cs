@@ -3,6 +3,8 @@ using Retouch_Photo2.TestApp.ViewModels;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml;
+using Retouch_Photo2.Layers;
+using Retouch_Photo2.Elements;
 
 namespace Retouch_Photo2.TestApp.Pages
 {  
@@ -12,9 +14,15 @@ namespace Retouch_Photo2.TestApp.Pages
         //ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
 
+        //@Construct
         public DrawPage()
         {
             this.InitializeComponent();
+
+            //Layer
+            this.Canvas.Children.Add(this.ViewModel.LayerMenuLayout);
+            Layer.FlyoutShowAction = (layer, placementTarget) => MenuLayout.ShowFlyoutAt(this.ViewModel.LayerMenuLayout, placementTarget);
+
 
             this.ThemeControl.ApplicationTheme = App.Current.RequestedTheme;
 

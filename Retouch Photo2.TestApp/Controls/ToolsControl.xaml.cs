@@ -26,17 +26,23 @@ namespace Retouch_Photo2.TestApp.Controls
         public static readonly DependencyProperty ToolTypeProperty = DependencyProperty.Register(nameof(ToolType), typeof(ToolType), typeof(ToolsControl), new PropertyMetadata(ToolType.None));
 
         #endregion
-
+        
+        //@Construct
         public ToolsControl()
         {
             this.InitializeComponent();
-            
-            this.SetButton(this.ViewButton, this.ViewModel.ViewTool);
-            this.SetButton(this.RectangleButton, this.ViewModel.RectangleTool);
-            this.SetButton(this.CursorButton, this.ViewModel.CursorTool);
+
+            //View
+            this.ConstructButton(this.ViewButton, this.ViewModel.ViewTool);
+            //Rectangle
+            this.ConstructButton(this.RectangleButton, this.ViewModel.RectangleTool);
+            //Ellipse
+            this.ConstructButton(this.EllipseButton, this.ViewModel.EllipseTool);
+            //Cursor
+            this.ConstructButton(this.CursorButton, this.ViewModel.CursorTool);
         }
 
-        private void SetButton(Retouch_Photo2.TestApp.Tools.Button button, Tool tool)
+        private void ConstructButton(Retouch_Photo2.TestApp.Tools.Button button, Tool tool)
         {
             ToolType type = tool.Type;
 

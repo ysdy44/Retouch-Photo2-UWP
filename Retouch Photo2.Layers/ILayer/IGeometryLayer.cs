@@ -13,12 +13,12 @@ namespace Retouch_Photo2.Layers.ILayer
     {
         //@Abstract
         /// <summary>
-        /// Get a specific geometry.
+        /// Create a specific geometry.
         /// </summary>
         /// /// <param name="resourceCreator"> resourceCreator </param>
         /// <param name="canvasToVirtualMatrix"> canvasToVirtualMatrix </param>
         /// <returns> geometry </returns>
-        public abstract CanvasGeometry GetGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix);
+        public abstract CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix);
 
         public Color Color = Colors.Gray;
 
@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Layers.ILayer
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession ds = command.CreateDrawingSession())
             {
-                CanvasGeometry geometry = this.GetGeometry(resourceCreator, canvasToVirtualMatrix);
+                CanvasGeometry geometry = this.CreateGeometry(resourceCreator, canvasToVirtualMatrix);
                 ds.FillGeometry(geometry, this.Color);
             }
             return command;

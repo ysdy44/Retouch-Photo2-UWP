@@ -20,7 +20,9 @@
                 IsChecked="{x:Bind IsChecked,Mode=OneWay}"
                 IsVisual="{x:Bind IsVisual,Mode=OneWay}"
                 
-                RootGridTapped="{x:Bind RootGrid_Tapped}"
+                ItemClick="{x:Bind ItemClick_Tapped}"
+                FlyoutShow="{x:Bind FlyoutShow_Tapped}"
+                
                 IsVisualButtonTapped="{x:Bind IsVisualButton_Tapped}"
                 CheckBoxTapped="{x:Bind CheckBox_Tapped}"
                 />

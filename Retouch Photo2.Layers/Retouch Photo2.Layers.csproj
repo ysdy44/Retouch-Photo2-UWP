@@ -109,15 +109,22 @@
     <Compile Include="Button.xaml.cs">
       <DependentUpon>Button.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\EllipseControl.xaml.cs">
+      <DependentUpon>EllipseControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ImageControl.xaml.cs">
       <DependentUpon>ImageControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\RectangleControl.xaml.cs">
       <DependentUpon>RectangleControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Icon.xaml.cs">
+      <DependentUpon>Icon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ILayer\IGeometryLayer.cs" />
     <Compile Include="Layer.Notify.cs" />
     <Compile Include="Layer.cs" />
+    <Compile Include="Models\EllipseLayer.cs" />
     <Compile Include="Models\ImageLayer.cs" />
     <Compile Include="Models\RectangleLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -136,6 +143,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\EllipseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ImageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -143,6 +154,10 @@
     <Page Include="Controls\RectangleControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

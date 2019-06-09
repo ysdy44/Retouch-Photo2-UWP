@@ -15,7 +15,6 @@ namespace Retouch_Photo2.Layers.Models
         public CanvasBitmap Bitmap { set; get; }
 
         //@Construct
-        /// <summary> Construct a ImageLayer. </summary>
         public ImageLayer()
         {
             base.Name = "Image";

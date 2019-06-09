@@ -30,8 +30,9 @@ namespace Retouch_Photo2.TestApp.Models
 
 
         //@Construct
-        /// <summary> Construct a project. </summary>
-        public Project() { }
+        public Project()
+        {
+        }
 
         /// <summary>
         /// Construct a project.

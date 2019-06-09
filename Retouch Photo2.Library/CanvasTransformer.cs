@@ -55,13 +55,24 @@ namespace Retouch_Photo2.Library
         public float ControlWidth = 1000.0f;
         /// <summary> CanvasControl's height. </summary>
         public float ControlHeight = 1000.0f;
+        /// <summary> CanvasControl's center. </summary>
+        public Vector2 ControlCenter = new Vector2(500.0f, 500.0f);
 
         /// /// <summary> <see cref = "CanvasTransformer" />'s translation. </summary>
         public Vector2 Position = new Vector2(0.0f, 0.0f);
         /// <summary> <see cref = "CanvasTransformer" />'s rotation. </summary>
         public float Radian = 0.0f;
 
-        
+
+        //@Construct
+        public CanvasTransformer()
+        {
+            this.ReloadMatrix();
+        }
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
         /// <summary> <see cref = "ControlWidth" /> and <see cref = "ControlHeight" />'s setter. </summary>
         public Size Size
@@ -71,23 +82,13 @@ namespace Retouch_Photo2.Library
             {
                 this.ControlWidth = size.Width < 100 ? 100.0f : (float)size.Width;
                 this.ControlHeight = size.Height < 100 ? 100.0f : (float)size.Height;
+                this.ControlCenter = new Vector2(this.ControlWidth / 2, this.ControlHeight / 2);
                 this.size = value;
             }
         }
         private Size size;
+               
 
-        //Matrix
-        Matrix3x2 Matrix => this.CanvasToVirtualMatrix * this.VirtualToControlMatrix;
-        Matrix3x2 CanvasToVirtualMatrix => Matrix3x2.CreateTranslation(-this.Width / 2, -this.Height / 2) * Matrix3x2.CreateScale(this.Scale);
-        Matrix3x2 VirtualToControlMatrix => Matrix3x2.CreateRotation(this.Radian) * Matrix3x2.CreateTranslation(this.Position);
-
-        //InverseMatrix
-        Matrix3x2 InverseMatrix => this.ControlToVirtualInverseMatrix * this.VirtualToCanvasInverseMatrix;
-        Matrix3x2 ControlToVirtualInverseMatrix => Matrix3x2.CreateTranslation(-this.Position) * Matrix3x2.CreateRotation(-this.Radian);
-        Matrix3x2 VirtualToCanvasInverseMatrix => Matrix3x2.CreateScale(1 / this.Scale) * Matrix3x2.CreateTranslation(this.Width / 2, this.Height / 2);
-
-
-        
         /// <summary> Fit to the screen. </summary>
         public void Fit()
         {
@@ -100,6 +101,8 @@ namespace Retouch_Photo2.Library
             this.Position.Y = this.ControlHeight / 2.0f;
 
             this.Radian = 0.0f;
+
+            this.ReloadMatrix();
         }
 
         /// <summary>
@@ -114,15 +117,31 @@ namespace Retouch_Photo2.Library
             this.Position.Y = this.ControlHeight / 2.0f;
 
             this.Radian = 0.0f;
+
+            this.ReloadMatrix();
         }
 
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        //Matrix
+        Matrix3x2 Matrix; 
+        Matrix3x2 CanvasToVirtualMatrix; 
+        Matrix3x2 VirtualToControlMatrix;
+
+        //InverseMatrix
+        Matrix3x2 InverseMatrix;
+        Matrix3x2 ControlToVirtualInverseMatrix; 
+        Matrix3x2 VirtualToCanvasInverseMatrix; 
+
+        
         /// <summary>
         /// Gets <see cref = "CanvasTransformer" />'s matrix.
         /// </summary>
         /// <param name="mode"> <see cref = "CanvasTransformer" />'s matrix mode. </param>
         /// <returns> matrix </returns>
-        public Matrix3x2 GetMatrix(MatrixTransformerMode mode= MatrixTransformerMode.CanvasToVirtualToControl)
+        public Matrix3x2 GetMatrix(MatrixTransformerMode mode = MatrixTransformerMode.CanvasToVirtualToControl)
         {
             switch (mode)
             {
@@ -153,7 +172,24 @@ namespace Retouch_Photo2.Library
                     return this.VirtualToCanvasInverseMatrix;
             }
             return this.InverseMatrix;
-        }      
-    
+        }
+
+
+        /// <summary>
+        /// Reload <see cref = "CanvasTransformer" />'s all matrix.
+        /// </summary>
+        public void ReloadMatrix()
+        {
+            //Matrix
+            this.VirtualToControlMatrix = Matrix3x2.CreateRotation(this.Radian) * Matrix3x2.CreateTranslation(this.Position);
+            this.CanvasToVirtualMatrix = Matrix3x2.CreateTranslation(-this.Width / 2, -this.Height / 2) * Matrix3x2.CreateScale(this.Scale);
+            this.Matrix = this.CanvasToVirtualMatrix * this.VirtualToControlMatrix;
+
+            //InverseMatrix
+            this.VirtualToCanvasInverseMatrix = Matrix3x2.CreateScale(1 / this.Scale) * Matrix3x2.CreateTranslation(this.Width / 2, this.Height / 2);
+            this.ControlToVirtualInverseMatrix = Matrix3x2.CreateTranslation(-this.Position) * Matrix3x2.CreateRotation(-this.Radian);
+            this.InverseMatrix = this.ControlToVirtualInverseMatrix * this.VirtualToCanvasInverseMatrix;
+        }
+
     }
 }

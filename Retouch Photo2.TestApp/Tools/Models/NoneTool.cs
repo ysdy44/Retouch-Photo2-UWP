@@ -8,6 +8,7 @@ namespace Retouch_Photo2.TestApp.Tools.Models
     /// </summary>
     public class NoneTool : Tool
     {
+        //@Construct
         public NoneTool()
         {
             base.Type = ToolType.None;

@@ -167,7 +167,8 @@ namespace Retouch_Photo2.TestApp.Pages
             this.State = GetState(); //State
         }
 
-        
+
+        //@Construct
         public DrawLayout()
         {
             this.InitializeComponent();

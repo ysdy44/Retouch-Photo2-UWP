@@ -1,5 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.TestApp.Tools.Controls;
+using Retouch_Photo2.TestApp.Tools.Pages;
 using Retouch_Photo2.TestApp.ViewModels;
 using System.Numerics;
 
@@ -15,12 +16,13 @@ namespace Retouch_Photo2.TestApp.Tools.Models
 
         Vector2 StartPosition;
 
+        //@Construct
         public ViewTool()
         {
             base.Type = ToolType.View;
             base.Icon = new ViewControl();
             base.ShowIcon = new ViewControl();
-            base.Page = null;
+            base.Page = new ViewPage();
         }
 
         //@Override
@@ -28,11 +30,14 @@ namespace Retouch_Photo2.TestApp.Tools.Models
         public override void Started(Vector2 startingPoint, Vector2 point)
         {
             this.StartPosition = this.ViewModel.CanvasTransformer.Position;
+
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         public override void Delta(Vector2 startingPoint, Vector2 point)
         {
             this.ViewModel.CanvasTransformer.Position = this.StartPosition - startingPoint + point;
+            this.ViewModel.CanvasTransformer.ReloadMatrix();
+
             this.ViewModel.Invalidate();//Invalidate
         }
         public override void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
@@ -40,6 +45,7 @@ namespace Retouch_Photo2.TestApp.Tools.Models
             if (isSingleStarted)
             {
                 this.ViewModel.CanvasTransformer.Position = this.StartPosition - startingPoint + point;
+                this.ViewModel.CanvasTransformer.ReloadMatrix();
             }
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         } 

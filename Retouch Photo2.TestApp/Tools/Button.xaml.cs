@@ -147,6 +147,7 @@ namespace Retouch_Photo2.TestApp.Tools
 
         #endregion
 
+        //@Construct
         public Button()
         {
             this.InitializeComponent();

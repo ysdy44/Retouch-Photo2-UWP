@@ -34,39 +34,29 @@ namespace Retouch_Photo2.Layers
             }
         }
         private bool isVisual = true;
-        
+
 
         //@Delegate
-        /// <summary>
-        /// Occurs when an item in a list view receives an interaction.
-        /// </summary>
-        /// <param name="layer"></param>
-        /// <param name="placementTarget"></param>
-        public static void ItemClick(Layer layer, FrameworkElement placementTarget) => Layer.ItemClickAction?.Invoke(layer, placementTarget);
-        /// <summary> <see cref = "Action" /> of the <see cref = "Layer.ItemClick" />. </summary>
+        /// <summary> Occurs when an item in a list view receives an interaction. </summary>
         public static Action<Layer, FrameworkElement> ItemClickAction { private get; set; }
         /// <summary> Event of <see cref = "DataTemplate" />. </summary>
-        public void RootGrid_Tapped(object sender, TappedRoutedEventArgs e) => Layer.ItemClick(this, (FrameworkElement)sender);
+        public void ItemClick_Tapped(FrameworkElement placementTarget) => Layer.ItemClickAction?.Invoke(this, placementTarget);
 
-        /// <summary>
-        /// Occurs when the visual changes of an item in a list view.
-        /// </summary>
-        /// <param name="layer"></param>
-        public static void ItemVisualChanged(Layer layer) => Layer.ItemVisualChangedAction?.Invoke(layer);
-        /// <summary> <see cref = "Action" /> of the <see cref = "Layer.ItemVisualChanged" />. </summary>
+        /// <summary> Occurs when an item in a list view rightTapped or holding. </summary>
+        public static Action<Layer, FrameworkElement> FlyoutShowAction { private get; set; }
+        /// <summary> Event of <see cref = "DataTemplate" />. </summary>
+        public void FlyoutShow_Tapped(FrameworkElement placementTarget) => Layer.FlyoutShowAction?.Invoke(this, placementTarget);
+
+
+        /// <summary> Occurs when the visual changes of an item in a list view. </summary>
         public static Action<Layer> ItemVisualChangedAction { private get; set; }
         /// <summary> Event of <see cref = "DataTemplate" />. </summary>
-        public void IsVisualButton_Tapped(object sender, TappedRoutedEventArgs e) => Layer.ItemVisualChanged(this);
-        
-        /// <summary>
-        /// Occurs when the value changes of an item in a list view.
-        /// </summary>
-        /// <param name="layer"></param>
-        public static void ItemIsCheckedChanged(Layer layer) => Layer.ItemIsCheckedChangedAction?.Invoke(layer);
-        /// <summary> <see cref = "Action" /> of the <see cref = "Layer.ItemIsCheckedChanged" />. </summary>
+        public void IsVisualButton_Tapped(object sender, TappedRoutedEventArgs e) => Layer.ItemVisualChangedAction?.Invoke(this);
+
+        /// <summary> Occurs when the value changes of an item in a list view. </summary>
         public static Action<Layer> ItemIsCheckedChangedAction { private get; set; }
         /// <summary> Event of <see cref = "DataTemplate" />. </summary>
-        public void CheckBox_Tapped(object sender, TappedRoutedEventArgs e) => Layer.ItemIsCheckedChanged(this);
+        public void CheckBox_Tapped(object sender, TappedRoutedEventArgs e) => Layer.ItemIsCheckedChangedAction?.Invoke(this);
 
 
         //Notify

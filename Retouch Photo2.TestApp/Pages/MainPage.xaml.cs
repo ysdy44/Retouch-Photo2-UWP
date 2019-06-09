@@ -130,6 +130,7 @@ namespace Retouch_Photo2.TestApp.Pages
         FolderDialog FolderDialog = new FolderDialog();
 
 
+        //@Construct
         public MainPage()
         {
             this.InitializeComponent();

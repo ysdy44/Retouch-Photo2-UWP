@@ -21,7 +21,7 @@
 
     </UserControl.Resources>
 
-    <Border Style="{StaticResource AppRoundedBorderStyle}">
+    <Border Height="40" Style="{StaticResource AppRoundedBorderStyle}">
         <StackPanel Orientation="Horizontal">
 
             <ContentPresenter x:Name="OnSegmented" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >

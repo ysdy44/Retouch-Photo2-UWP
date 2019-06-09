@@ -12,6 +12,9 @@
         /// <summary> Rectangle Geometry </summary>
         Rectangle,
 
+        /// <summary> Ellipse Geometry </summary>
+        Ellipse,
+        
         /// <summary> Cursor Tool</summary>
         Cursor,
     }

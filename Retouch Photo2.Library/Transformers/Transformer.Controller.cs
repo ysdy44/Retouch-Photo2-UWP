@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Library
         /// <param name="isCenter"> Scaling around the center. </param>
         /// <param name="isStepFrequency"> Step Frequency when spinning. </param>
         /// <returns> Transformer </returns>
-        public static Transformer Controller(TransformerMode mode, Vector2 startingPoint, Vector2 point, Transformer startingTransformer, Matrix3x2 inverseMatrix, bool isRatio=false, bool isCenter=false, bool isStepFrequency=false)
+        public static Transformer Controller(TransformerMode mode, Vector2 startingPoint, Vector2 point, Transformer startingTransformer, Matrix3x2 inverseMatrix, bool isRatio = false, bool isCenter = false, bool isStepFrequency = false)
         {
             switch (mode)
             {
@@ -27,12 +27,12 @@ namespace Retouch_Photo2.Library
 
                 case TransformerMode.Translation: return Transformer.Translation(startingPoint, point, startingTransformer, inverseMatrix);
 
-                case TransformerMode.Rotation: return Transformer.Rotation(startingPoint, point, startingTransformer, inverseMatrix,isStepFrequency);
+                case TransformerMode.Rotation: return Transformer.Rotation(startingPoint, point, startingTransformer, inverseMatrix, isStepFrequency);
 
-                case TransformerMode.SkewLeft: return Transformer.SkewLeft(startingPoint, point, startingTransformer, inverseMatrix);
-                case TransformerMode.SkewTop: return Transformer.SkewTop(startingPoint, point, startingTransformer, inverseMatrix);
-                case TransformerMode.SkewRight: return Transformer.SkewRight(startingPoint, point, startingTransformer, inverseMatrix);
-                case TransformerMode.SkewBottom: return Transformer.SkewBottom(startingPoint, point, startingTransformer, inverseMatrix);
+                case TransformerMode.SkewLeft: return Transformer.SkewLeft(startingPoint, point, startingTransformer, inverseMatrix, isCenter);
+                case TransformerMode.SkewTop: return Transformer.SkewTop(startingPoint, point, startingTransformer, inverseMatrix, isCenter);
+                case TransformerMode.SkewRight: return Transformer.SkewRight(startingPoint, point, startingTransformer, inverseMatrix, isCenter);
+                case TransformerMode.SkewBottom: return Transformer.SkewBottom(startingPoint, point, startingTransformer, inverseMatrix, isCenter);
 
                 case TransformerMode.ScaleLeft: return Transformer.ScaleLeft(point, startingTransformer, inverseMatrix, isRatio, isCenter);
                 case TransformerMode.ScaleTop: return Transformer.ScaleTop(point, startingTransformer, inverseMatrix, isRatio, isCenter);
@@ -47,7 +47,7 @@ namespace Retouch_Photo2.Library
 
             return startingTransformer;
         }
-       
+
 
         //Translation
         private static Transformer Translation(Vector2 startingPoint, Vector2 point, Transformer startingTransformer, Matrix3x2 inverseMatrix)
@@ -68,7 +68,7 @@ namespace Retouch_Photo2.Library
 
             float canvasRadian = Transformer.VectorToRadians(canvasPoint - center);
             if (isStepFrequency) canvasRadian = Transformer.RadiansStepFrequency(canvasRadian);
-            
+
             float canvasStartingRadian = Transformer.VectorToRadians(canvasStartingPoint - center);
             float radian = canvasRadian - canvasStartingRadian;
 
@@ -88,61 +88,73 @@ namespace Retouch_Photo2.Library
             return halfVector;
         }
 
-        private static Transformer SkewLeft(Vector2 startingPoint, Vector2 point, Transformer startingTransformer, Matrix3x2 inverseMatrix)
+        private static Transformer SkewLeft(Vector2 startingPoint, Vector2 point, Transformer startingTransformer, Matrix3x2 inverseMatrix, bool isCenter)
         {
             Vector2 linePoineA = startingTransformer.LeftTop;
             Vector2 linePoineB = startingTransformer.LeftBottom;
             Vector2 vector = Transformer.Skew(startingPoint, point, linePoineA, linePoineB);
 
-            return new Transformer
+            startingTransformer.LeftTop += vector;
+            startingTransformer.LeftBottom += vector;
+
+            if (isCenter)
             {
-                LeftTop = startingTransformer.LeftTop + vector,
-                RightTop = startingTransformer.RightTop,
-                RightBottom = startingTransformer.RightBottom,
-                LeftBottom = startingTransformer.LeftBottom + vector,
-            };
+                startingTransformer.RightTop -= vector;
+                startingTransformer.RightBottom -= vector;
+            }
+
+            return startingTransformer;
         }
-        private static Transformer SkewTop(Vector2 startingPoint, Vector2 point, Transformer startingTransformer, Matrix3x2 inverseMatrix)
+        private static Transformer SkewTop(Vector2 startingPoint, Vector2 point, Transformer startingTransformer, Matrix3x2 inverseMatrix, bool isCenter)
         {
             Vector2 linePoineA = startingTransformer.LeftTop;
             Vector2 linePoineB = startingTransformer.RightTop;
             Vector2 vector = Transformer.Skew(startingPoint, point, linePoineA, linePoineB);
 
-            return new Transformer
+            startingTransformer.LeftTop += vector;
+            startingTransformer.RightTop += vector;
+
+            if (isCenter)
             {
-                LeftTop = startingTransformer.LeftTop + vector,
-                RightTop = startingTransformer.RightTop + vector,
-                RightBottom = startingTransformer.RightBottom,
-                LeftBottom = startingTransformer.LeftBottom,
-            };
+                startingTransformer.RightBottom -= vector;
+                startingTransformer.LeftBottom -= vector;
+            }
+
+            return startingTransformer;
         }
-        private static Transformer SkewRight(Vector2 startingPoint, Vector2 point, Transformer startingTransformer, Matrix3x2 inverseMatrix)
+        private static Transformer SkewRight(Vector2 startingPoint, Vector2 point, Transformer startingTransformer, Matrix3x2 inverseMatrix, bool isCenter)
         {
             Vector2 linePoineA = startingTransformer.RightTop;
             Vector2 linePoineB = startingTransformer.RightBottom;
             Vector2 vector = Transformer.Skew(startingPoint, point, linePoineA, linePoineB);
 
-            return new Transformer
+            startingTransformer.RightTop += vector;
+            startingTransformer.RightBottom += vector;
+
+            if (isCenter)
             {
-                LeftTop = startingTransformer.LeftTop,
-                RightTop = startingTransformer.RightTop + vector,
-                RightBottom = startingTransformer.RightBottom + vector,
-                LeftBottom = startingTransformer.LeftBottom,
-            };
+                startingTransformer.LeftTop -= vector;
+                startingTransformer.LeftBottom -= vector;
+            }
+
+            return startingTransformer;
         }
-        private static Transformer SkewBottom(Vector2 startingPoint, Vector2 point, Transformer startingTransformer, Matrix3x2 inverseMatrix)
+        private static Transformer SkewBottom(Vector2 startingPoint, Vector2 point, Transformer startingTransformer, Matrix3x2 inverseMatrix, bool isCenter)
         {
             Vector2 linePoineA = startingTransformer.LeftBottom;
             Vector2 linePoineB = startingTransformer.RightBottom;
             Vector2 vector = Transformer.Skew(startingPoint, point, linePoineA, linePoineB);
-            
-            return new Transformer
+
+            startingTransformer.RightBottom += vector;
+            startingTransformer.LeftBottom += vector;
+
+            if (isCenter)
             {
-                LeftTop = startingTransformer.LeftTop,
-                RightTop = startingTransformer.RightTop,
-                RightBottom = startingTransformer.RightBottom + vector,
-                LeftBottom = startingTransformer.LeftBottom + vector,
-            };
+                startingTransformer.LeftTop -= vector;
+                startingTransformer.RightTop -= vector;
+            }
+
+            return startingTransformer;
         }
 
 
@@ -191,7 +203,7 @@ namespace Retouch_Photo2.Library
 
 
         //ScaleAround
-        private static Transformer ScaleAround(Vector2 point, Transformer startingTransformer,Matrix3x2 inverseMatrix,  bool isRatio, bool isCenter, Vector2 linePoint, Vector2 lineDiagonalPoint, Func<Transformer, bool, Vector2, Transformer> _func)
+        private static Transformer ScaleAround(Vector2 point, Transformer startingTransformer, Matrix3x2 inverseMatrix, bool isRatio, bool isCenter, Vector2 linePoint, Vector2 lineDiagonalPoint, Func<Transformer, bool, Vector2, Transformer> _func)
         {
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
             Vector2 footPoint = Transformer.FootPoint(canvasPoint, linePoint, lineDiagonalPoint);
@@ -218,17 +230,17 @@ namespace Retouch_Photo2.Library
             Vector2 linePoint = startingTransformer.CenterLeft;
             Vector2 lineDiagonalPoint = startingTransformer.CenterRight;
 
-            return Transformer.ScaleAround(point, startingTransformer,inverseMatrix, isRatio, isCenter,  linePoint, lineDiagonalPoint, Transformer._funcScaleLeft);
+            return Transformer.ScaleAround(point, startingTransformer, inverseMatrix, isRatio, isCenter, linePoint, lineDiagonalPoint, Transformer._funcScaleLeft);
         }
         static Transformer _funcScaleLeft(Transformer startingTransformer, bool isCenter, Vector2 vector)
         {
-            startingTransformer.LeftTop = startingTransformer.LeftTop + vector;
-            startingTransformer.LeftBottom = startingTransformer.LeftBottom + vector;
+            startingTransformer.LeftTop += vector;
+            startingTransformer.LeftBottom += vector;
 
             if (isCenter)
             {
-                startingTransformer.RightTop = startingTransformer.RightTop - vector;
-                startingTransformer.RightBottom = startingTransformer.RightBottom - vector;
+                startingTransformer.RightTop -= vector;
+                startingTransformer.RightBottom -= vector;
             }
 
             return startingTransformer;
@@ -243,13 +255,13 @@ namespace Retouch_Photo2.Library
         }
         static Transformer _funcScaleTop(Transformer startingTransformer, bool isCenter, Vector2 vector)
         {
-            startingTransformer.LeftTop = startingTransformer.LeftTop + vector;
-            startingTransformer.RightTop = startingTransformer.RightTop + vector;
+            startingTransformer.LeftTop += vector;
+            startingTransformer.RightTop += vector;
 
             if (isCenter)
             {
-                startingTransformer.LeftBottom = startingTransformer.LeftBottom - vector;
-                startingTransformer.RightBottom = startingTransformer.RightBottom - vector;
+                startingTransformer.LeftBottom -= vector;
+                startingTransformer.RightBottom -= vector;
             }
 
             return startingTransformer;
@@ -264,13 +276,13 @@ namespace Retouch_Photo2.Library
         }
         static Transformer _funcScaleRight(Transformer startingTransformer, bool isCenter, Vector2 vector)
         {
-            startingTransformer.RightTop = startingTransformer.RightTop + vector;
-            startingTransformer.RightBottom = startingTransformer.RightBottom + vector;
+            startingTransformer.RightTop += vector;
+            startingTransformer.RightBottom += vector;
 
             if (isCenter)
             {
-                startingTransformer.LeftTop = startingTransformer.LeftTop - vector;
-                startingTransformer.LeftBottom = startingTransformer.LeftBottom - vector;
+                startingTransformer.LeftTop -= vector;
+                startingTransformer.LeftBottom -= vector;
             }
 
             return startingTransformer;
@@ -285,13 +297,13 @@ namespace Retouch_Photo2.Library
         }
         static Transformer _funcScaleBottom(Transformer startingTransformer, bool isCenter, Vector2 vector)
         {
-            startingTransformer.LeftBottom = startingTransformer.LeftBottom + vector;
-            startingTransformer.RightBottom = startingTransformer.RightBottom + vector;
+            startingTransformer.LeftBottom += vector;
+            startingTransformer.RightBottom += vector;
 
             if (isCenter)
             {
-                startingTransformer.LeftTop = startingTransformer.LeftTop - vector;
-                startingTransformer.RightTop = startingTransformer.RightTop - vector;
+                startingTransformer.LeftTop -= vector;
+                startingTransformer.RightTop -= vector;
             }
 
             return startingTransformer;
@@ -379,10 +391,10 @@ namespace Retouch_Photo2.Library
         {
             return new Transformer
             {
-                LeftTop = returnVerticalPoint,
-                RightTop = returnDiagonalPoint,
-                RightBottom = returnHorizontalPoint,
-                LeftBottom = returnPoint,
+                LeftTop = returnDiagonalPoint,
+                RightTop = returnVerticalPoint,
+                RightBottom = returnPoint,
+                LeftBottom = returnHorizontalPoint,
             };
         }
 

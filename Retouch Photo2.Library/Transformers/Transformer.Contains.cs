@@ -20,7 +20,7 @@ namespace Retouch_Photo2.Library
 
 
         /// <summary> Get outside node. </summary>
-        private static Vector2 OutsideNode(Vector2 nearNode, Vector2 farNode) => nearNode - Vector2.Normalize(farNode - nearNode) * Transformer.NodeDistanceDouble;
+        internal static Vector2 OutsideNode(Vector2 nearNode, Vector2 farNode) => nearNode - Vector2.Normalize(farNode - nearNode) * Transformer.NodeDistanceDouble;
 
         /// <summary>
         /// Point inside the Quadrangle

@@ -1,9 +1,5 @@
 ﻿using Retouch_Photo2.Layers;
-using Retouch_Photo2.Library;
 using Retouch_Photo2.TestApp.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Numerics;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.TestApp.Controls
@@ -16,6 +12,7 @@ namespace Retouch_Photo2.TestApp.Controls
         //ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
 
+        //@Construct
         public LayersControl()
         {
             this.InitializeComponent();
@@ -23,24 +20,39 @@ namespace Retouch_Photo2.TestApp.Controls
             //Layer : ItemClick
             Layer.ItemClickAction = (layer, placementTarget) =>
             {
-                this.ViewModel.LayerSingleChecked(layer);//Layer
+                foreach (Layer item in this.ViewModel.Layers)
+                {
+                    item.IsChecked = (item == layer);
+                }
 
-                this.ViewModel.SetSelectionModeSingle(layer);//Transformer
+                this.ViewModel.SelectionSingle(layer);//Selection
 
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            //Layer : ItemVisualChanged
-            Layer.ItemVisualChangedAction = (layer) =>
+            //Layer : FlyoutShow
+            Layer.FlyoutShowAction = (layer, placementTarget) =>
             {
-                bool isVisual = !layer.IsVisual;
 
-                if (layer.IsChecked == false) layer.IsVisual = isVisual;
+            };
+
+            //Layer : ItemVisualChanged
+            Layer.ItemVisualChangedAction = (visualLayer) =>
+            {
+                bool isVisual = !visualLayer.IsVisual;
+
+                if (visualLayer.IsChecked == false)
+                {
+                    visualLayer.IsVisual = isVisual;
+                }
                 else
                 {
-                    foreach (Layer item in this.ViewModel.Layers)
+                    foreach (Layer layer in this.ViewModel.Layers)
                     {
-                        if (item.IsChecked)    item.IsVisual = isVisual;
+                        if (layer.IsChecked)
+                        {
+                            layer.IsVisual = isVisual;
+                        }
                     }
                 }
 
@@ -52,7 +64,7 @@ namespace Retouch_Photo2.TestApp.Controls
             {
                 layer.IsChecked = !layer.IsChecked;
 
-                this.ViewModel.SetSelectionMode(this.ViewModel.Layers);//Transformer
+                this.ViewModel.SetSelection();//Selection
 
                 this.ViewModel.Invalidate();//Invalidate
             };

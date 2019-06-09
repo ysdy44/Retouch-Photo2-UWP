@@ -8,6 +8,7 @@ namespace Retouch_Photo2.Layers.Controls
     /// </summary>
     public sealed partial class ImageControl : UserControl
     {
+        //@Construct
         public ImageControl()
         {
             this.InitializeComponent();

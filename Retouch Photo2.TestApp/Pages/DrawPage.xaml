@@ -7,7 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:controls="using:Retouch_Photo2.TestApp.Controls"
-    NavigationCacheMode="Enabled"
+    NavigationCacheMode="Enabled"   
+    
+    xmlns:layers="using:Retouch_Photo2.Layers"
+
     mc:Ignorable="d"
     >
 
@@ -47,12 +50,19 @@
                     <Border Style="{StaticResource AppCircleBorderStyle}">
                         <Button IsEnabled="True" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10D;" FontSize="18" Foreground="Gray" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
                     </Border>
+                    <ContentControl Width="6"/>
+                    <Border Style="{StaticResource AppCircleBorderStyle}">
+                        <elements:ThemeControl x:Name="ThemeControl" TitleBarColor="{ThemeResource AppForegroundColor}"/>
+                    </Border>
                 </StackPanel>
             </local:DrawLayout.TopLeftStackBar>
 
             <local:DrawLayout.TopRightPane>
                 <StackPanel Orientation="Horizontal">
-                    <elements:ThemeControl x:Name="ThemeControl" TitleBarColor="{ThemeResource AppForegroundColor}"/>
+
+                    <Button x:Name="LayerToggleButton" Width="50" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Right" VerticalAlignment="Stretch">
+                        <layers:Icon/>
+                    </Button>
 
                 </StackPanel>
             </local:DrawLayout.TopRightPane>
@@ -60,83 +70,8 @@
         </local:DrawLayout>
 
 
-        <Canvas>
-
-            <!--Debug-->
-            <elements:MenuLayout x:Name="DebugLayout" Text="Selection" Placement="Bottom" Visibility="Collapsed">
-                <elements:MenuLayout.Icon>
-                    <FontIcon FontSize="24" Glyph="&#x1F41E;" FontFamily="Segoe UI Symbol"/>
-                </elements:MenuLayout.Icon>
-                <elements:MenuLayout.ContentChild>
-                </elements:MenuLayout.ContentChild>
-            </elements:MenuLayout>
-
-            <!--Selection-->
-            <elements:MenuLayout x:Name="SelectionLayout" Text="Selection" Placement="Bottom" Visibility="Collapsed">
-                <elements:MenuLayout.Icon>
-                </elements:MenuLayout.Icon>
-                <elements:MenuLayout.ContentChild>
-                </elements:MenuLayout.ContentChild>
-            </elements:MenuLayout>
-
-            <!--Operate-->
-            <elements:MenuLayout x:Name="OperateLayout" Text="Operate" Placement="Bottom" Visibility="Collapsed">
-                <elements:MenuLayout.Icon>
-                </elements:MenuLayout.Icon>
-                <elements:MenuLayout.ContentChild>
-                </elements:MenuLayout.ContentChild>
-            </elements:MenuLayout>
-
-            <!--Adjustment-->
-            <elements:MenuLayout x:Name="AdjustmentLayout" Text="Adjustment" Placement="Bottom" Visibility="Collapsed">
-                <elements:MenuLayout.Icon>
-                </elements:MenuLayout.Icon>
-                <elements:MenuLayout.ContentChild>
-                </elements:MenuLayout.ContentChild>
-            </elements:MenuLayout>
-
-            <!--Effects-->
-            <elements:MenuLayout x:Name="EffectLayout" Text="Effect" Placement="Bottom" Visibility="Collapsed">
-                <elements:MenuLayout.Icon>
-                </elements:MenuLayout.Icon>
-                <elements:MenuLayout.ContentChild>
-                </elements:MenuLayout.ContentChild>
-            </elements:MenuLayout>
-
-            <!--Transformer-->
-            <elements:MenuLayout x:Name="TransformerLayout" Text="Transformer" Placement="Bottom" Visibility="Collapsed">
-                <elements:MenuLayout.Icon>
-                </elements:MenuLayout.Icon>
-                <elements:MenuLayout.ContentChild>
-                </elements:MenuLayout.ContentChild>
-            </elements:MenuLayout>
-
-            <!--Navigator-->
-            <elements:MenuLayout x:Name="NavigatorLayout" Text="Navigator" Placement="Bottom" Visibility="Collapsed">
-                <elements:MenuLayout.Icon>
-                </elements:MenuLayout.Icon>
-                <elements:MenuLayout.ContentChild>
-                </elements:MenuLayout.ContentChild>
-            </elements:MenuLayout>
-
-            <!--Color-->
-            <elements:MenuLayout x:Name="ColorLayout" Text="Color" Placement="Bottom" Visibility="Collapsed">
-                <elements:MenuLayout.Icon>
-                    <Ellipse Width="20" Height="20" Fill="Gray"/>
-                </elements:MenuLayout.Icon>
-                <elements:MenuLayout.ContentChild>
-                </elements:MenuLayout.ContentChild>
-            </elements:MenuLayout>
-
-            <!--Layer-->
-            <elements:MenuLayout x:Name="LayerLayout" Text="Layer" Placement="Left" Visibility="Collapsed">
-                <elements:MenuLayout.Icon>
-                </elements:MenuLayout.Icon>
-                <elements:MenuLayout.ContentChild>
-                </elements:MenuLayout.ContentChild>
-            </elements:MenuLayout>
-
-        </Canvas>
+        <!--MenuLayout-->      
+        <Canvas x:Name="Canvas"/>
 
 
         <!--Load-->
