@@ -107,6 +107,9 @@
     <Compile Include="Controls\ToolsControl.xaml.cs">
       <DependentUpon>ToolsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TransformerControl.xaml.cs">
+      <DependentUpon>TransformerControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Pages\DrawLayout.xaml.cs">
@@ -165,6 +168,9 @@
       <DependentUpon>ViewControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\ITool\ICreateTool.cs" />
+    <Compile Include="Tools\Models\CursorTool.Box.cs" />
+    <Compile Include="Tools\Models\CursorTool.Layer.cs" />
+    <Compile Include="Tools\Models\CursorTool.Cursor.cs" />
     <Compile Include="Tools\Models\CursorTool.cs" />
     <Compile Include="Tools\Models\EllipseTool.cs" />
     <Compile Include="Tools\Models\NoneTool.cs" />
@@ -219,6 +225,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ToolsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TransformerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -353,6 +363,10 @@
     <ProjectReference Include="..\Retouch Photo2.Library\Retouch Photo2.Library.csproj">
       <Project>{5a773056-cf52-4a57-b004-d3f170cea03b}</Project>
       <Name>Retouch Photo2.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Transformers\Retouch Photo2.Transformers.csproj">
+      <Project>{5a044bad-be63-4d1b-b0f0-927177058f7e}</Project>
+      <Name>Retouch Photo2.Transformers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

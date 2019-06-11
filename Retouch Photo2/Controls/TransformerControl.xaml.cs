@@ -57,7 +57,7 @@ namespace Retouch_Photo2.Controls
         {
             TransformerControl con = (TransformerControl)sender;
 
-            if (e.NewValue is Transformer  value)
+            if (e.NewValue is Transformer value)
             {
                 Vector2 horizontal = value.DstRight - value.DstLeft;
                 Vector2 vertical = value.DstBottom - value.DstTop;

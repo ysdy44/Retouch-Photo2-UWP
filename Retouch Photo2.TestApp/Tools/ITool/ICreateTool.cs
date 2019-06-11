@@ -1,7 +1,7 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Library;
 using Retouch_Photo2.TestApp.ViewModels;
+using Retouch_Photo2.Transformers;
 using System.Numerics;
 
 namespace Retouch_Photo2.TestApp.Tools.Models
@@ -45,7 +45,7 @@ namespace Retouch_Photo2.TestApp.Tools.Models
             //Mezzanine
             this.ViewModel.Mezzanine.SetLayer(this.CreateLayer(transformer),this.ViewModel.Layers);
             
-            this.ViewModel.Selection.Transformer = transformer;//Selection
+            this.ViewModel.SelectionTransformer = transformer;//Selection
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
@@ -63,14 +63,14 @@ namespace Retouch_Photo2.TestApp.Tools.Models
 
             this.ViewModel.Mezzanine.Layer.TransformerMatrix.Destination = transformer;//Mezzanine
 
-            this.ViewModel.Selection.Transformer = transformer;//Selection
+            this.ViewModel.SelectionTransformer = transformer;//Selection
 
             this.ViewModel.Invalidate();//Invalidate
         }
         public override void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
             //Cursor
-            if (this.ViewModel.CursorTool.CursorComplete()) return;
+            if (this.ViewModel.CursorTool.CursorComplete(isSingleStarted)) return;
 
             if (isSingleStarted)
             {
@@ -80,16 +80,17 @@ namespace Retouch_Photo2.TestApp.Tools.Models
                     Vector2.Transform(startingPoint, inverseMatrix),
                     Vector2.Transform(point, inverseMatrix)
                 );
-
-                foreach (Layer item in this.ViewModel.Layers)
+                
+                //Selection
+                this.ViewModel.SelectionSetValue((layer) =>
                 {
-                    item.IsChecked = false;
-                }
+                    layer.IsChecked = false;
+                });
                 this.ViewModel.Mezzanine.Insert(this.CreateLayer(transformer), this.ViewModel.Layers); //Mezzanine
             }
             else this.ViewModel.Mezzanine.None();//Mezzanine
 
-            this.ViewModel.SetSelection();//Selection
+            this.ViewModel.SetSelectionMode();//Selection
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }

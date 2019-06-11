@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
 
-namespace Retouch_Photo2.Library
+namespace Retouch_Photo2.Transformers
 {
-    /// <summary> Define Transformer. </summary>
+    /// <summary> Represents a Transformer (LeftTop, RightTop, RightBottom, LeftBottom). </summary>
     public partial struct Transformer
     {  
         /// <summary> Radius of node'. Defult 12. </summary>
@@ -23,10 +23,10 @@ namespace Retouch_Photo2.Library
         internal static Vector2 OutsideNode(Vector2 nearNode, Vector2 farNode) => nearNode - Vector2.Normalize(farNode - nearNode) * Transformer.NodeDistanceDouble;
 
         /// <summary>
-        /// Point inside the Quadrangle
+        /// Point inside the transformer's quadrangle.
         /// </summary>
         /// <param name="point"> The point. </param>
-        /// <param name="transformer"> Layer's Transformer. </param>
+        /// <param name="transformer"> The source transformer. </param>
         /// <returns></returns>
         public static bool InQuadrangle(Vector2 point, Transformer transformer) => Transformer.InQuadrangle(point, transformer.LeftTop, transformer.RightTop, transformer.RightBottom, transformer.LeftBottom);
 
@@ -47,6 +47,32 @@ namespace Retouch_Photo2.Library
             float d = (leftBottom.X - rightBottom.X) * (point.Y - rightBottom.Y) - (leftBottom.Y - rightBottom.Y) * (point.X - rightBottom.X);
             return (a > 0 && b > 0 && c > 0 && d > 0) || (a < 0 && b < 0 && c < 0 && d < 0);
         }
+
+        /// <summary>
+        /// The transformer was contained in a rectangle.
+        /// </summary>
+        /// <param name="left"> The destination rectangle's left. </param>
+        /// <param name="top"> The destination rectangle's top. </param>
+        /// <param name="right"> The destination rectangle's right. </param>
+        /// <param name="bottom"> The destination rectangle's bottom. </param>
+        /// <param name="transformer"> The source rectangle's left. </param>
+        /// <returns></returns>
+        public static bool Contained(float left, float top, float right, float bottom, Transformer transformer)
+        {
+            if (transformer.MinX < left) return false;
+            if (transformer.MinY < top) return false;
+            if (transformer.MaxX > right) return false;
+            if (transformer.MaxY > bottom) return false;
+
+            return true;
+        }
+        /// <summary>
+        /// The transformer was contained in a rectangle.
+        /// </summary>
+        /// <param name="rect"> The destination rectangle. </param>
+        /// <param name="transformer"> The source rectangle's left. </param>
+        /// <returns></returns>
+        public static bool Contained(TransformerRect rect, Transformer transformer) => Transformer.Contained(rect.Left, rect.Top, rect.Right, rect.Bottom, transformer);
 
         /// <summary>
         /// Gets the radian area filled by the skew node contains the specified point. 

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Numerics;
 
-namespace Retouch_Photo2.Library
+namespace Retouch_Photo2.Transformers
 {
-    /// <summary> Define Transformer. </summary>
+    /// <summary> Represents a Transformer (LeftTop, RightTop, RightBottom, LeftBottom). </summary>
     public partial struct Transformer
     {
 

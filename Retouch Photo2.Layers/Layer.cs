@@ -1,20 +1,15 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Library;
-using System;
-using System.Collections.Generic;
+using Retouch_Photo2.Transformers;
 using System.ComponentModel;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Graphics.Effects;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers
 {
     /// <summary>
-    /// <see cref="LayersControl"/>items's Model Class.
+    /// Layer Classes.
     /// </summary>
     public abstract partial class Layer : INotifyPropertyChanged
     {

@@ -2,7 +2,7 @@
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Library;
-using Retouch_Photo2.Library.Transformers;
+using Retouch_Photo2.Transformers;
 using Retouch_Photo2.TestApp.ViewModels;
 using System.Numerics;
 using Windows.Foundation;
@@ -25,7 +25,6 @@ namespace Retouch_Photo2.TestApp.Controls
         Vector2 singleStartingPoint;
         //Right
         Vector2 rightStartPoint;
-        Vector2 rightStartPosition;
         //Double
         Vector2 doubleStartCenter;
         Vector2 doubleStartPosition;
@@ -146,34 +145,23 @@ namespace Retouch_Photo2.TestApp.Controls
                 //Mezzanine 
                 if (this.ViewModel.Mezzanine.Layer == null)
                 {
-                    //Transformer
-                    switch (this.ViewModel.Selection.Mode)
-                    {
-                        case ListViewSelectionMode.None:
-                            break;
+                    //SelectionMode
+                    if (this.ViewModel.SelectionMode == ListViewSelectionMode.None) return;
 
-                        case ListViewSelectionMode.Single:
-                            {
-                                Transformer transformer = this.ViewModel.Selection.Layer.TransformerMatrix.Destination;
-                                Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                                args.DrawingSession.DrawBoundNodes(transformer, matrix);
-                            }
-                            break;
-
-                        case ListViewSelectionMode.Multiple:
-                            {
-                                Transformer transformer = this.ViewModel.Selection.Transformer;
-                                Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                                args.DrawingSession.DrawBoundNodes(transformer, matrix);
-                            }
-                            break;
-                    }
+                    //SelectionTransformer
+                    Transformer transformer = this.ViewModel.GetSelectionTransformer();
+                    Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+                    args.DrawingSession.DrawBoundNodes(transformer, matrix);
                 }
                 else
-                {
+                {                   
                     Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                    args.DrawingSession.DrawBound(this.ViewModel.Mezzanine.Layer.TransformerMatrix.Destination, matrix);
+                    args.DrawingSession.DrawBound(this.ViewModel.Mezzanine.Layer.TransformerMatrix.Destination, matrix); //Mezzanine 
                 }
+
+
+                //Tool
+                this.ViewModel.Tool.Draw(args.DrawingSession);
             };
 
 
@@ -208,11 +196,11 @@ namespace Retouch_Photo2.TestApp.Controls
             //Right
             this.CanvasOperator.Right_Start += (point) =>
             {
-                this.singleStartingPoint = point;
-                this.ViewModel.ViewTool.Started(this.singleStartingPoint, point);//Started
+                this.rightStartPoint = point;
+                this.ViewModel.ViewTool.Started(this.rightStartPoint, point);//Started
             };
-            this.CanvasOperator.Right_Delta += (point) => this.ViewModel.ViewTool.Delta(this.singleStartingPoint, point);//Delta
-            this.CanvasOperator.Right_Complete += (point) => this.ViewModel.ViewTool.Complete(this.singleStartingPoint, point, this.isSingleStarted);//Started
+            this.CanvasOperator.Right_Delta += (point) => this.ViewModel.ViewTool.Delta(this.rightStartPoint, point);//Delta
+            this.CanvasOperator.Right_Complete += (point) => this.ViewModel.ViewTool.Complete(this.rightStartPoint, point, this.isSingleStarted);//Started
 
 
             //Double

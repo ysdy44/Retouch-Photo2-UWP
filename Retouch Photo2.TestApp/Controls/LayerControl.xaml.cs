@@ -44,7 +44,7 @@ namespace Retouch_Photo2.TestApp.Controls
                 float opacity = this.ValueToOpacityConverter(e.NewValue);
 
                 this.ViewModel.SelectionOpacity = opacity;
-                this.ViewModel.Selection.SetLayer((layer)=>layer.Opacity= opacity);//Selection
+                this.ViewModel.SelectionSetValue((layer)=>layer.Opacity= opacity);//Selection
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -54,7 +54,7 @@ namespace Retouch_Photo2.TestApp.Controls
                 bool value = !this.ViewModel.SelectionIsVisual;
 
                 this.ViewModel.SelectionIsVisual = value;
-                this.ViewModel.Selection.SetLayer((layer) => layer.IsVisual = value);//Selection
+                this.ViewModel.SelectionSetValue((layer) => layer.IsVisual = value);//Selection
 
                 this.ViewModel.Invalidate();//Invalidate
             };

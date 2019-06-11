@@ -19,11 +19,16 @@ namespace Retouch_Photo2.TestApp.Pages
         {
             this.InitializeComponent();
 
+
+
+            //Transformer
+            MenuLayout.LayoutBinging(this.TransformerMenuLayout, this.TransformerToggleButton);
             //Layer
-            this.Canvas.Children.Add(this.ViewModel.LayerMenuLayout);
-            Layer.FlyoutShowAction = (layer, placementTarget) => MenuLayout.ShowFlyoutAt(this.ViewModel.LayerMenuLayout, placementTarget);
+            MenuLayout.LayoutBinging(this.LayerMenuLayout, this.LayerToggleButton);
+            Layer.FlyoutShowAction = (layer, placementTarget) => MenuLayout.ShowFlyoutAt(this.LayerMenuLayout, placementTarget);
 
 
+            //Theme
             this.ThemeControl.ApplicationTheme = App.Current.RequestedTheme;
 
             this.BackButton.Tapped += (sender, e) => this.Frame.GoBack();

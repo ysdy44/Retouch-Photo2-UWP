@@ -48,19 +48,6 @@ namespace Retouch_Photo2.TestApp.ViewModels
         /// <summary> <see cref="Tool"/>'s CursorTool. </summary>
         public CursorTool CursorTool { get; } = new CursorTool();
 
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-        /// <summary> Retouch_Photo2's the only Layer<see cref = "Retouch_Photo2.Elements.MenuLayout" />. </summary>
-        public MenuLayout LayerMenuLayout = new MenuLayout
-        {
-            Text = "Layer",
-            Icon = new Retouch_Photo2.Layers.Icon(),
-            ContentChild = new LayerControl(),
-            Placement = FlyoutPlacementMode.Left
-        };
-
-
+        
     }
 }

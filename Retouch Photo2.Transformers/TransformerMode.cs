@@ -1,6 +1,6 @@
-﻿namespace Retouch_Photo2.Library
+﻿namespace Retouch_Photo2.Transformers
 {
-    /// <summary> <see cref = "TransformerMode" />'s mode. </summary>
+    /// <summary> Mode of <see cref = "Transformer" />. </summary>
     public enum TransformerMode
     { 
         /// <summary> Normal. </summary>

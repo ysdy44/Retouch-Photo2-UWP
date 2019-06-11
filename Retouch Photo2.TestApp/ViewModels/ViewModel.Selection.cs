@@ -1,5 +1,5 @@
 ﻿using Retouch_Photo2.Layers;
-using Retouch_Photo2.Library;
+using Retouch_Photo2.Transformers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,12 @@ using System.Numerics;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.TestApp.ViewModels
-{
-    public class Selection
+{ 
+    /// <summary> Retouch_Photo2's the only <see cref = "ViewModel" />. </summary>
+    public partial class ViewModel
     {
+
+
 
         /// <summary>
         /// Gets selection-mode by count of checked layers. 
@@ -18,40 +21,79 @@ namespace Retouch_Photo2.TestApp.ViewModels
         /// 2>Multiple.
         /// Temporary Transformer: Extended
         /// </summary>
-        public ListViewSelectionMode Mode { get; private set; }
-
-
-        /// <summary> Transformer of <see cref = "Retouch_Photo2.Library.Selection" />. </summary>
-        public Transformer Transformer { get; set; }
-
-        /// <summary> Layer of <see cref = "Retouch_Photo2.Library.Selection" />. </summary>
-        public Layer Layer { get; private set; }
-        /// <summary> Layers of <see cref = "Retouch_Photo2.Library.Selection" />. </summary>
-        public IEnumerable<Layer> Layers { get; private set; }
-
-
-        /// <summary> Sets <see cref = "Selection.Mode" /> to None. </summary>
-        public void None()
+        public ListViewSelectionMode SelectionMode
         {
-            this.Transformer = new Transformer();
-            this.Layer = null;
-            this.Layers = null;
+            get => this.selectionMode;
+            set
+            {
+                this.selectionMode = value;
+                this.OnPropertyChanged(nameof(this.SelectionMode));//Notify 
+            }
+        }
+        private ListViewSelectionMode selectionMode;
 
-            this.Mode = ListViewSelectionMode.None;//Transformer
+        /// <summary> Transformer of checked layers.  </summary>
+        public Transformer SelectionTransformer
+        {
+            get => this.selectionTransformer;
+             set
+            {
+                this.selectionTransformer = value;
+                this.OnPropertyChanged(nameof(this.SelectionTransformer));//Notify 
+            }
+        }
+        private Transformer selectionTransformer;
+
+        /// <summary> Transformer of the single checked layer.  </summary>
+        public Layer SelectionLayer { get; private set; }
+
+        /// <summary> Transformer of the all checked layers.  </summary>
+        public IEnumerable<Layer> SelectionLayers { get; private set; }
+
+
+        /////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        /// <summary>
+        /// Sets <see cref = "ViewModel.SelectionMode" /> to None.
+        /// </summary>
+        public void SetSelectionModeNone()
+        {
+            this.SelectionTransformer = new Transformer();
+            this.SelectionLayer = null;
+            this.SelectionLayers = null;
+
+            this.SelectionMode = ListViewSelectionMode.None;
+
+            //////////////////////////
+
+            this.SetSelectionOpacity(0);
+            this.SelectionIsVisual = false;
         }
 
-        /// <summary> Sets <see cref = "Selection.Mode" /> to Single. </summary>
-        public void Single(Layer layer)
+        /// <summary>
+        /// Sets <see cref = "ViewModel.SelectionMode" /> to Single.
+        /// </summary>
+        /// <param name="layer"> The selection layer. </param>
+        public void SetSelectionModeSingle(Layer layer)
         {
-            this.Transformer = layer.TransformerMatrix.Destination;
-            this.Layer = layer;
-            this.Layers = null;
-            
-            this.Mode = ListViewSelectionMode.Single;//Transformer
+            this.SelectionTransformer = layer.TransformerMatrix.Destination;
+            this.SelectionLayer = layer;
+            this.SelectionLayers = null;
+
+            this.SelectionMode = ListViewSelectionMode.Single;
+
+            //////////////////////////
+
+            this.SetSelectionOpacity(layer.Opacity);
+            this.SelectionIsVisual = layer.IsVisual;
         }
 
-        /// <summary> Sets <see cref = "Selection.Mode" /> to Multiple. </summary>
-        public void Multiple(IEnumerable<Layer> layers)
+        /// <summary>
+        /// Sets <see cref = "ViewModel.SelectionMode" /> to Multiple.
+        /// </summary>
+        /// <param name="layers"> All selection layers. </param>
+        public void SetSelectionModeMultiple(IEnumerable<Layer> layers)
         {
             float left = float.MaxValue;
             float top = float.MaxValue;
@@ -77,87 +119,69 @@ namespace Retouch_Photo2.TestApp.ViewModels
                 }
             }
 
-            this.Transformer = new Transformer(left, top, right, bottom);
-            this.Layer = null;
-            this.Layers = layers;
+            this.SelectionTransformer = new Transformer(left, top, right, bottom);
+            this.SelectionLayer = null;
+            this.SelectionLayers = layers;
 
-            this.Mode = ListViewSelectionMode.Multiple;//Transformer
+            this.SelectionMode = ListViewSelectionMode.Multiple;//Transformer
         }
 
+
+        /// <summary> Sets <see cref = "ViewModel.SelectionMode" />. </summary>
+        public void SetSelectionMode()
+        {
+            IEnumerable<Layer> checkedLayers = from item in this.Layers where item.IsChecked select item;
+            int count = checkedLayers.Count();
+
+            if (count == 0)
+                this.SetSelectionModeNone();//None
+
+            else if (count == 1)
+                this.SetSelectionModeSingle(checkedLayers.Single());//Single
+
+            else if (count >= 2)
+                this.SetSelectionModeMultiple(checkedLayers);//Multiple
+        }
+
+
+        /////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        /// <summary>
+        /// Gets selection layer(s)'s transformer.
+        /// </summary>
+        /// <param name="action"> action </param>
+        public Transformer GetSelectionTransformer( )
+        {
+            if (this.SelectionMode== ListViewSelectionMode.Single)
+            {
+                return this.SelectionLayer.TransformerMatrix.Destination;
+            }
+
+            return this.SelectionTransformer;
+        }
 
         /// <summary>
         /// Sets all selection layer(s).
         /// </summary>
         /// <param name="action"> action </param>
-        public void SetLayer(Action<Layer> action)
+        public void SelectionSetValue(Action<Layer> action)
         {
-            switch (this.Mode)
+            switch (this.SelectionMode)
             {
                 case ListViewSelectionMode.None:
                     break;
                 case ListViewSelectionMode.Single:
-                    action(this.Layer);
+                    action(this.SelectionLayer);
                     break;
                 case ListViewSelectionMode.Multiple:
-                    foreach (Layer layer in this.Layers)
+                    foreach (Layer layer in this.SelectionLayers)
                     {
                         action(layer);
                     }
                     break;
             }
         }
-    }
-
-
-    /// <summary> Retouch_Photo2's the only <see cref = "ViewModel" />. </summary>
-    public partial class ViewModel
-    {
-
-        /// <summary> Retouch_Photo2's the only <see cref = "ViewModel.Selection" />. </summary>
-        public Selection Selection { get; } = new Selection();
-        /// <summary> Sets the <see cref = "ViewModel.Selection" />. </summary>
-        public void SetSelection()
-        {
-            IEnumerable<Layer> checkedLayers = from item in this.Layers where item.IsChecked select item;
-            int count = checkedLayers.Count();
-
-            if (count == 0)
-                this.SelectionNone();//None
-
-            else if (count == 1)
-                this.SelectionSingle(checkedLayers.Single());//Single
-
-            else if (count >= 2)
-                this.SelectionMultiple(checkedLayers);//Multiple
-        }
-
-
-
-        /// <summary> Sets <see cref = "Selection.Mode" /> to None. </summary>
-        public void SelectionNone()
-        {
-            this.Selection.None();
-
-            this.SetSelectionOpacity(0);
-            this.SelectionIsVisual = false;
-        }
-        /// <summary> Sets <see cref = "Selection.Mode" /> to Single. </summary>
-        public void SelectionSingle(Layer layer)
-        {
-            this.Selection.Single(layer);
-
-            this.SetSelectionOpacity(layer.Opacity);
-            this.SelectionIsVisual = layer.IsVisual;
-        }
-        /// <summary> Sets <see cref = "Selection.Mode" /> to Multiple. </summary>
-        public void SelectionMultiple(IEnumerable<Layer> layers)
-        {
-             this.Selection.Multiple(layers);
-        }
-
-
-
-        /////////////////////////////////////////////////////////////////////////////////////////////
 
 
         /// <summary> <see cref = "ViewModel.Selection" />'s opacity. </summary>

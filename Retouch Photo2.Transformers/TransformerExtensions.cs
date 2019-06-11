@@ -1,7 +1,7 @@
 ﻿using Microsoft.Graphics.Canvas;
 using System.Numerics;
 
-namespace Retouch_Photo2.Library.Transformers
+namespace Retouch_Photo2.Transformers
 {
     /// <summary>
     /// Extensions of <see cref = "Transformer" />.

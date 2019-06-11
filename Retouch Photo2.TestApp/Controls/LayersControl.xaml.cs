@@ -18,15 +18,17 @@ namespace Retouch_Photo2.TestApp.Controls
             this.InitializeComponent();
 
             //Layer : ItemClick
-            Layer.ItemClickAction = (layer, placementTarget) =>
+            Layer.ItemClickAction = (itemClickLayer, placementTarget) =>
             {
-                foreach (Layer item in this.ViewModel.Layers)
+                //Selection
+                this.ViewModel.SelectionSetValue((layer) =>
                 {
-                    item.IsChecked = (item == layer);
-                }
+                    layer.IsChecked = false;
+                });
+                
+                itemClickLayer.IsChecked = true;
 
-                this.ViewModel.SelectionSingle(layer);//Selection
-
+                this.ViewModel.SetSelectionModeSingle(itemClickLayer);//Selection
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -41,20 +43,13 @@ namespace Retouch_Photo2.TestApp.Controls
             {
                 bool isVisual = !visualLayer.IsVisual;
 
-                if (visualLayer.IsChecked == false)
+                if (visualLayer.IsChecked == false) visualLayer.IsVisual = isVisual;
+
+                //Selection
+                else this.ViewModel.SelectionSetValue((layer) =>
                 {
-                    visualLayer.IsVisual = isVisual;
-                }
-                else
-                {
-                    foreach (Layer layer in this.ViewModel.Layers)
-                    {
-                        if (layer.IsChecked)
-                        {
-                            layer.IsVisual = isVisual;
-                        }
-                    }
-                }
+                    layer.IsVisual = isVisual;
+                });
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -64,8 +59,7 @@ namespace Retouch_Photo2.TestApp.Controls
             {
                 layer.IsChecked = !layer.IsChecked;
 
-                this.ViewModel.SetSelection();//Selection
-
+                this.ViewModel.SetSelectionMode();//Selection
                 this.ViewModel.Invalidate();//Invalidate
             };
 

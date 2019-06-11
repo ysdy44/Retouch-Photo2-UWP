@@ -28,19 +28,15 @@ namespace Retouch_Photo2.TestApp.ViewModels
         {
             switch (key)
             {
-                case VirtualKey.Shift:
-                    this.KeyShift = true;
-                    break;
-
-                case VirtualKey.Control:
-                    this.KeyCtrl = true;
-                    break;
-
-                case VirtualKey.Space:
-                    this.KeyAlt = true;
-                    break;
+                case VirtualKey.Shift: this.KeyShift = true; break;
+                case VirtualKey.Control: this.KeyCtrl = true; break;
+                case VirtualKey.Space: this.KeyAlt = true; break;
 
                 case VirtualKey.Delete:
+                    break;
+
+                case VirtualKey.Escape:
+                    this.IsFullScreen = !this.IsFullScreen;
                     break;
 
                 default:
@@ -52,19 +48,10 @@ namespace Retouch_Photo2.TestApp.ViewModels
         {
             switch (key)
             {
-                case VirtualKey.Shift:
-                    this.KeyShift = false;
-                    break;
-
-                case VirtualKey.Control:
-                    this.KeyCtrl = false;
-                    break;
-
-                case VirtualKey.Space:
-                    this.KeyAlt = false;
-                    break;
-
-
+                case VirtualKey.Shift: this.KeyShift = false; break;
+                case VirtualKey.Control: this.KeyCtrl = false; break;
+                case VirtualKey.Space: this.KeyAlt = false; break;
+                    
                 default:
                     break;
             }
@@ -72,6 +59,7 @@ namespace Retouch_Photo2.TestApp.ViewModels
         
         private void KeyUpAndDown(VirtualKey key)
         {
+            App.ViewModel.Text = key.ToString();
             if (this.KeyCtrl == false && this.KeyShift == false)
             {
             }
@@ -185,6 +173,22 @@ namespace Retouch_Photo2.TestApp.ViewModels
             }
         }
         private bool keyIsMove;
+        
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+
+        /// <summary> Sets or Gets the page layout is full screen. </summary>
+        public bool IsFullScreen
+        {
+            get => this.isFullScreen;
+            set
+            {
+                this.isFullScreen = value;
+                this.OnPropertyChanged(nameof(this.IsFullScreen));//Notify 
+            }
+        }
+        private bool isFullScreen;
 
 
     }

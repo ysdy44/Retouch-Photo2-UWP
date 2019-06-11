@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Numerics;
 
-namespace Retouch_Photo2.Library
+namespace Retouch_Photo2.Transformers
 {
-    /// <summary> Define Transformer. </summary>
+    /// <summary> Represents a Transformer (LeftTop, RightTop, RightBottom, LeftBottom). </summary>
     public partial struct Transformer
     {
         /// <summary> Vector in LeftTop. </summary>
@@ -18,7 +18,13 @@ namespace Retouch_Photo2.Library
 
 
         //@Constructs
-        /// <summary> Constructs a <see cref = "Transformer" />. </summary>
+        /// <summary>
+        /// Constructs a <see cref = "Transformer" />.
+        /// </summary>
+        /// <param name="left"> Transformer's left. </param>
+        /// <param name="top"> Transformer's top. </param>
+        /// <param name="right"> Transformer's right. </param>
+        /// <param name="bottom"> Transformer's bottom. </param>
         public Transformer(float left, float top, float right, float bottom)
         {
             this.LeftTop = new Vector2(left, top);
@@ -26,27 +32,58 @@ namespace Retouch_Photo2.Library
             this.RightBottom = new Vector2(right, bottom);
             this.LeftBottom = new Vector2(left, bottom);
         }
-        /// <summary> Constructs a <see cref = "Transformer" />. </summary>
-        public Transformer(Vector2 leftTop, Vector2 rightBottom)
+        /// <summary>
+        /// Constructs a <see cref = "Transformer" />.
+        /// </summary>
+        /// <param name="rect"> Transformer's initial rectangle. </param>
+        public Transformer(TransformerRect rect)
         {
-            this.LeftTop = leftTop;
-            this.RightTop = new Vector2(rightBottom.X, leftTop.Y);
-            this.RightBottom = rightBottom;
-            this.LeftBottom = new Vector2(leftTop.X, rightBottom.Y);
+            this.LeftTop = rect.LeftTop;
+            this.RightTop = rect.RightTop;
+            this.RightBottom = rect.RightBottom;
+            this.LeftBottom = rect.LeftBottom;
+        }
+        /// <summary>
+        /// Constructs a <see cref = "Transformer" />.
+        /// </summary>
+        /// <param name="pointA"> Frist point of transformer.</param>
+        /// <param name="pointA"> Second point of transformer.</param>
+        public Transformer(Vector2 pointA, Vector2 pointB)
+        {
+            TransformerRect rect = new TransformerRect(pointA, pointB);
+
+            this.LeftTop = rect.LeftTop;
+            this.RightTop = rect.RightTop;
+            this.RightBottom = rect.RightBottom;
+            this.LeftBottom = rect.LeftBottom;
+        }
+
+        /// <summary>
+        /// Constructs a <see cref = "Transformer" />.
+        /// </summary>
+        /// <param name="width"> Width of transformer.</param>
+        /// <param name="height"> Height transformer.</param>
+        /// <param name="postion"> Postion of transformer. </param>
+        public Transformer(float width, float height, Vector2 postion)
+        {
+            this.LeftTop = postion;
+            this.RightTop = new Vector2(postion.X + width, postion.Y);
+            this.RightBottom = new Vector2(postion.X + width, postion.Y + height);
+            this.LeftBottom = new Vector2(postion.X, postion.Y + height);
         }
 
 
 
-        /// <summary> Gets the center vector. / </summary>
+        /// <summary> Gets the center vector. </summary>
         public Vector2 Center => (this.LeftTop + this.RightTop + this.RightBottom + this.LeftBottom) / 4;
 
-        /// <summary> Gets the center left vector. / </summary>
+        /// <summary> Gets the center left vector. </summary>
         public Vector2 CenterLeft => (this.LeftTop + this.LeftBottom) / 2;
-        /// <summary> Gets the center top vector. / </summary>
+        /// <summary> Gets the center top vector. </summary>
         public Vector2 CenterTop => (this.LeftTop + this.RightTop) / 2;
-        /// <summary> Gets the center right vector. / </summary>
+        /// <summary> Gets the center right vector. </summary>
         public Vector2 CenterRight => (this.RightTop + this.RightBottom) / 2;
-        /// <summary> Gets the center bottom vector. / </summary>
+        /// <summary> Gets the center bottom vector. </summary>
         public Vector2 CenterBottom => (this.RightBottom + this.LeftBottom) / 2;
 
         /// <summary> Gets the minimum value on the X-Axis. </summary>
@@ -58,6 +95,10 @@ namespace Retouch_Photo2.Library
         /// <summary> Gets the maximum  value on the Y-Axis. </summary>
         public float MaxY => Math.Max(Math.Max(this.LeftTop.Y, this.RightTop.Y), Math.Max(this.RightBottom.Y, this.LeftBottom.Y));
 
+        /// <summary> Gets horizontal vector. </summary>
+        public Vector2 Horizontal => (this.RightTop + this.RightBottom - this.LeftTop - this.LeftBottom) / 2;
+        /// <summary> Gets vertical vector. </summary>
+        public Vector2 Vertical => (this.RightBottom + this.LeftBottom - this.LeftTop - this.RightTop) / 2;
 
 
         //@Static

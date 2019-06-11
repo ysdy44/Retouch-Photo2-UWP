@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Input;
 namespace Retouch_Photo2.Layers
 {
     /// <summary>
-    /// <see cref="LayersControl"/>items's Model Class.
+    /// Layer Classes.
     /// </summary>
     public abstract partial class Layer : INotifyPropertyChanged
     {

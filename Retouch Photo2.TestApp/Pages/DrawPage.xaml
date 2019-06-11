@@ -10,6 +10,7 @@
     NavigationCacheMode="Enabled"   
     
     xmlns:layers="using:Retouch_Photo2.Layers"
+    xmlns:transformers="using:Retouch_Photo2.Transformers"
 
     mc:Ignorable="d"
     >
@@ -17,7 +18,7 @@
 
     <Grid >
 
-        <local:DrawLayout x:Name="DrawLayout" Tool="{x:Bind ViewModel.Tool,Mode=OneWay}">
+        <local:DrawLayout x:Name="DrawLayout" IsFullScreen="{x:Bind ViewModel.IsFullScreen,Mode=OneWay}" Tool="{x:Bind ViewModel.Tool,Mode=OneWay}">
 
             <local:DrawLayout.LeftPane>
                 <controls:ToolsControl/>
@@ -60,9 +61,13 @@
             <local:DrawLayout.TopRightPane>
                 <StackPanel Orientation="Horizontal">
 
-                    <Button x:Name="LayerToggleButton" Width="50" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Right" VerticalAlignment="Stretch">
+                    <ToggleButton x:Name="TransformerToggleButton" Width="60" BorderThickness="0" Background="Transparent" Foreground="{ThemeResource AppText}" VerticalAlignment="Stretch">
+                        <transformers:Icon/>
+                    </ToggleButton>
+
+                    <ToggleButton x:Name="LayerToggleButton" Width="60" BorderThickness="0" Background="Transparent" Foreground="{ThemeResource AppText}" VerticalAlignment="Stretch">
                         <layers:Icon/>
-                    </Button>
+                    </ToggleButton>
 
                 </StackPanel>
             </local:DrawLayout.TopRightPane>
@@ -70,8 +75,31 @@
         </local:DrawLayout>
 
 
-        <!--MenuLayout-->      
-        <Canvas x:Name="Canvas"/>
+        <!--MenuLayout-->
+        <Canvas>
+
+            <elements:MenuLayout x:Name="LayerMenuLayout" Text="Layer" Placement="Left">
+                <elements:MenuLayout.ContentChild>
+                    <controls:LayerControl/>
+                </elements:MenuLayout.ContentChild>
+                <elements:MenuLayout.Icon>
+                    <layers:Icon/>
+                </elements:MenuLayout.Icon>
+            </elements:MenuLayout>
+
+            <elements:MenuLayout x:Name="TransformerMenuLayout" Text="Transformer" Placement="Bottom">
+                <elements:MenuLayout.ContentChild>
+                    <controls:TransformerControl 
+                        Transformer="{x:Bind ViewModel.SelectionTransformer,Mode=OneWay}"                                                 
+                        Mode="{x:Bind ViewModel.SelectionMode,Mode=OneWay}"                                                
+                        />
+                </elements:MenuLayout.ContentChild>
+                <elements:MenuLayout.Icon>
+                    <transformers:Icon/>
+                </elements:MenuLayout.Icon>
+            </elements:MenuLayout>
+
+        </Canvas>
 
 
         <!--Load-->

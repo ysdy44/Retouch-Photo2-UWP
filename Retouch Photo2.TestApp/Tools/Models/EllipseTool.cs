@@ -1,8 +1,8 @@
 ﻿using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Library;
 using Retouch_Photo2.TestApp.Tools.Controls;
 using Retouch_Photo2.TestApp.ViewModels;
+using Retouch_Photo2.Transformers;
 
 namespace Retouch_Photo2.TestApp.Tools.Models
 {
