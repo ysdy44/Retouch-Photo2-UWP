@@ -58,7 +58,7 @@ namespace Retouch_Photo2.TestApp.Tools.Models
         /// Add the layer to the layers. 
         /// </summary>
         /// <param name="point"> point </param>
-        /// <param name="isAdd"> <see cref = "CursorAddMode.Add" /> or <see cref = "CursorAddMode.Subtract" /> </param>
+        /// <param name="isAdd"> <see cref = "CompositeMode.Add" /> or <see cref = "CompositeMode.Subtract" /> </param>
         /// <returns> Return **false** if you do not select to any layer. </returns>
         private bool AddLayer(Vector2 point, bool isAdd = true)
         {

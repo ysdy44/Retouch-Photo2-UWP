@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.TestApp.ViewModels;
+﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.TestApp.ViewModels;
 using Retouch_Photo2.Transformers;
 using System.Numerics;
 using Windows.UI.Xaml.Controls;
@@ -33,9 +34,10 @@ namespace Retouch_Photo2.TestApp.Tools.Models
                         this.TransformerMode = Transformer.ContainsNodeMode(point, transformer, matrix);
 
                         //Add
-                        switch (this.AddMode)
+                        switch (this.ViewModel.CompositeMode)
                         {
-                            case CursorAddMode.New:
+                            case CompositeMode.New:
+                            case CompositeMode.Intersect:
                                 {
                                     if (this.TransformerMode == TransformerMode.None)
                                     {
@@ -46,7 +48,7 @@ namespace Retouch_Photo2.TestApp.Tools.Models
                                     }
                                 }
                                 break;
-                            case CursorAddMode.Add:
+                            case CompositeMode.Add:
                                 {
                                     if (this.TransformerMode == TransformerMode.None || this.TransformerMode == TransformerMode.Translation)
                                     {
@@ -56,7 +58,7 @@ namespace Retouch_Photo2.TestApp.Tools.Models
                                     }
                                 }
                                 break;
-                            case CursorAddMode.Subtract:
+                            case CompositeMode.Subtract:
                                 {
                                     if (this.TransformerMode == TransformerMode.None || this.TransformerMode == TransformerMode.Translation)
                                     {
@@ -126,12 +128,48 @@ namespace Retouch_Photo2.TestApp.Tools.Models
         /// <summary> <see cref = "CursorTool.Complete" />'s method. </summary>
         public bool CursorComplete(bool isSingleStarted)
         {
-            if (this.ViewModel.SelectionMode == ListViewSelectionMode.None) return false;
+            switch (this.ViewModel.SelectionMode)
+            {
+                case ListViewSelectionMode.None:
+                    {
+                        return false;
+                    }
 
-            if (this.TransformerMode == TransformerMode.None) return false;
+                case ListViewSelectionMode.Single:
+                case ListViewSelectionMode.Multiple:
+                    {
+
+                        switch (this.ViewModel.CompositeMode)
+                        {
+                            case CompositeMode.New:
+                                {
+                                    if (this.TransformerMode == TransformerMode.None)
+                                    {
+                                        //Selection
+                                        this.ViewModel.SelectionSetValue((layer) =>
+                                        {
+                                            layer.IsChecked = false;
+                                        });
+                                        this.ViewModel.SetSelectionModeNone();//Selection
+                                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+
+                                        return false;
+                                    }
+                                }
+                                break;
+                            case CompositeMode.Add: break;
+                            case CompositeMode.Subtract: break;
+                            case CompositeMode.Intersect: break;
+                        }
+
+                    }
+                    break;
+            }
+                         
+
             this.TransformerMode = TransformerMode.None;//TransformerMode
-
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+
             return true;
         }
     }

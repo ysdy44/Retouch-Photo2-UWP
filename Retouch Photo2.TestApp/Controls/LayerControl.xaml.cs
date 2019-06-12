@@ -38,16 +38,30 @@ namespace Retouch_Photo2.TestApp.Controls
         {
             this.InitializeComponent();
 
-
             this.OpacitySlider.ValueChanged += (s, e) =>
             {
                 float opacity = this.ValueToOpacityConverter(e.NewValue);
-
+                                       
+                //Selection
                 this.ViewModel.SelectionOpacity = opacity;
-                this.ViewModel.SelectionSetValue((layer)=>layer.Opacity= opacity);//Selection
+                this.ViewModel.SelectionSetValue((layer) =>
+                {
+                    layer.Opacity = opacity;
+                });
 
                 this.ViewModel.Invalidate();//Invalidate
             };
+            this.BlendControl.TypeChanged += (type) =>
+            {
+                //Selection
+                this.ViewModel.SelectionBlendType = type;
+                this.ViewModel.SelectionSetValue((layer) =>
+                {
+                    layer.BlendType = type;
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };            
 
             this.VisualButton.Tapped += (s, e) =>
             {
@@ -58,8 +72,33 @@ namespace Retouch_Photo2.TestApp.Controls
 
                 this.ViewModel.Invalidate();//Invalidate
             };
+            this.RemoveButton.Tapped += (s, e) =>
+            {
+                switch (this.ViewModel.SelectionMode)
+                {
+                    case ListViewSelectionMode.None:
+                        break;
+                    case ListViewSelectionMode.Single:
+                        {
+                            this.ViewModel.Layers.Remove(this.ViewModel.SelectionLayer);
 
+                            this.ViewModel.SetSelectionModeNone();//Selection
+                            this.ViewModel.Invalidate();//Invalidate
+                        }
+                        break;
+                    case ListViewSelectionMode.Multiple:
+                        {
+                            foreach (Layer layer in this.ViewModel.SelectionLayers)
+                            {
+                                this.ViewModel.Layers.Remove(this.ViewModel.SelectionLayer);
+                            }
 
+                            this.ViewModel.SetSelectionModeNone();//Selection
+                            this.ViewModel.Invalidate();//Invalidate
+                        }
+                        break;
+                }
+            };
         }
 
 

@@ -5,33 +5,40 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    Height="40"
     d:DesignHeight="50"
     d:DesignWidth="200">
 
 
     <UserControl.Resources>
-
         <!--Background-->
         <SolidColorBrush x:Name="AccentColor"  Color="{ThemeResource SystemAccentColor}"/>
         <SolidColorBrush x:Name="UnAccentColor" Color="Transparent"/>
-
         <!--Foreground-->
         <SolidColorBrush x:Name="CheckColor" Color="White"/>
         <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource AppTextColor}"/>
-
     </UserControl.Resources>
 
-    <Border Height="40" Style="{StaticResource AppRoundedBorderStyle}">
+    
+    <Border Style="{StaticResource AppRoundedBorderStyle}">
         <StackPanel Orientation="Horizontal">
 
-            <ContentPresenter x:Name="OnSegmented" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
-                <TextBlock x:Name="OnTextBlock"/>
-            </ContentPresenter>
-            <ContentPresenter x:Name="OffSegmented" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
-                <TextBlock x:Name="OffTextBlock"/>
-            </ContentPresenter> 
+            <!--On-->
+            <ContentPresenter x:Name="OnSegmented" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                              Background="{x:Bind FalseToBackgroundConverter(IsOn),Mode=OneWay}"
+                              Foreground="{x:Bind FalseToForegroundConverter(IsOn),Mode=OneWay}"
+                              Content="{x:Bind OnContent,Mode=OneWay}"
+                              ToolTipService.ToolTip="{x:Bind OnContent,Mode=OneWay}"
+                              />
+
+            <!--Off-->
+            <ContentPresenter x:Name="OffSegmented" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"    
+                              Background="{x:Bind TrueToBackgroundConverter(IsOn),Mode=OneWay}"
+                              Foreground="{x:Bind TrueToForegroundConverter(IsOn),Mode=OneWay}"
+                              Content="{x:Bind OffContent,Mode=OneWay}"
+                              ToolTipService.ToolTip="{x:Bind OffContent,Mode=OneWay}"
+                             />
 
         </StackPanel>
     </Border>
-
 </UserControl>

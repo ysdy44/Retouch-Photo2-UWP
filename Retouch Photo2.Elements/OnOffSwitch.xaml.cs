@@ -1,78 +1,61 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.Elements
 {
     public sealed partial class OnOffSwitch : UserControl
     { 
-        //Delegate
-        public delegate void IsOnChangedHandler(bool isOn);
-        public event IsOnChangedHandler IsOnChanged = null;
+        //@Converter
+        private SolidColorBrush FalseToBackgroundConverter(bool isOn) => (isOn == false) ? this.AccentColor : this.UnAccentColor;
+        private SolidColorBrush FalseToForegroundConverter(bool isOn) => (isOn == false) ? this.CheckColor : this.UnCheckColor;
 
-        public string OnContent
-        {
-            get => this.OnTextBlock.Text;
-            set
-            {
-                this.OnTextBlock.Text = value;
-                ToolTipService.SetToolTip(this.OnSegmented,value);
-            }
-        }
-        public string OffCOfftent
-        {
-            get => this.OffTextBlock.Text;
-            set
-            {
-                this.OffTextBlock.Text = value;
-                ToolTipService.SetToolTip(this.OffSegmented, value);
-            }
-        }
-        
-        private bool _IsOn
-        {
-            set
-            {
-                this.SegmenteColor(this.OnSegmented, (value == false));
-                this.SegmenteColor(this.OffSegmented, (value == true));
+        private SolidColorBrush TrueToBackgroundConverter(bool isOn) => (isOn == true) ? this.AccentColor : this.UnAccentColor;
+        private SolidColorBrush TrueToForegroundConverter(bool isOn) => (isOn == true) ? this.CheckColor : this.UnCheckColor;
 
-                this.IsOnChanged?.Invoke(value);//Delegate
-            }
-        }
 
         #region DependencyProperty
 
 
+        /// <summary> Gets or sets whether the status of the <see cref = "OnOffSwitch" /> is "on". </summary>
         public bool IsOn
         {
             get { return (bool)GetValue(IsOnProperty); }
             set { SetValue(IsOnProperty, value); }
         }
-        public static readonly DependencyProperty IsOnProperty = DependencyProperty.Register(nameof(IsOn), typeof(bool), typeof(OnOffSwitch), new PropertyMetadata(false, (sender, e) =>
+        /// <summary> Identifies the <see cref = "OnOffSwitch.IsOn" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOnProperty = DependencyProperty.Register(nameof(IsOn), typeof(bool), typeof(OnOffSwitch), new PropertyMetadata(false));
+
+
+        /// <summary> Provides the object content that is displayed when the status of the <see cref = "OnOffSwitch" /> is on. </summary>
+        public object OnContent
         {
-            OnOffSwitch con = (OnOffSwitch)sender;
+            get { return (object)GetValue(OnContentProperty); }
+            set { SetValue(OnContentProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "OnOffSwitch.OnContent" /> dependency property. </summary>
+        public static readonly DependencyProperty OnContentProperty = DependencyProperty.Register(nameof(OnContent), typeof(object), typeof(OnOffSwitch), new PropertyMetadata(null));
 
-            if (e.NewValue is bool value)
-            {
-                con._IsOn = value;
-            }
-        }));
 
+        /// <summary> Provides the object content that is displayed when the status of the <see cref = "OnOffSwitch" /> is off. </summary>
+        public object OffContent
+        {
+            get { return (object)GetValue(OffContentProperty); }
+            set { SetValue(OffContentProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "OnOffSwitch.OffContent" /> dependency property. </summary>
+        public static readonly DependencyProperty OffContentProperty = DependencyProperty.Register(nameof(OnContent), typeof(object), typeof(OnOffSwitch), new PropertyMetadata(null));
 
 
         #endregion
 
+
+        //@Construct
         public OnOffSwitch()
         {
             this.InitializeComponent();
-            this.Loaded += (sender, e) => this._IsOn = this.IsOn;
-            this.OnSegmented.Tapped += (sender, e) => this.IsOn = false;
-            this.OffSegmented.Tapped += (sender, e) => this.IsOn = true;
-        }
-
-        private void SegmenteColor(ContentPresenter control, bool IsChecked)
-        {
-            control.Background = IsChecked ? this.AccentColor : this.UnAccentColor;
-            control.Foreground = IsChecked ? this.CheckColor : this.UnCheckColor;
+            this.OnSegmented.Tapped += (s, e) => this.IsOn = false;
+            this.OffSegmented.Tapped += (s, e) => this.IsOn = true;
         }
     }
 }

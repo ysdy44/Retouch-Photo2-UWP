@@ -18,6 +18,7 @@ namespace Retouch_Photo2.TestApp.Tools.Models
         public override Layer CreateLayer(Transformer transformer) => new EllipseLayer
         {
             IsChecked = true,
+            FillColor = this.ViewModel.FillColor,
             TransformerMatrix = new TransformerMatrix(transformer)
         };
 

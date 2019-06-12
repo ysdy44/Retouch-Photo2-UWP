@@ -20,17 +20,28 @@ namespace Retouch_Photo2.TestApp.Pages
             this.InitializeComponent();
 
 
-
             //Transformer
             MenuLayout.LayoutBinging(this.TransformerMenuLayout, this.TransformerToggleButton);
             //Layer
             MenuLayout.LayoutBinging(this.LayerMenuLayout, this.LayerToggleButton);
             Layer.FlyoutShowAction = (layer, placementTarget) => MenuLayout.ShowFlyoutAt(this.LayerMenuLayout, placementTarget);
+            //Color
+            MenuLayout.TappedBinging(this.ColorMenuLayout, this.ColorButton); 
+            this.ColorPicker.ColorChange += (s, value) =>
+            {
+                //Selection
+                this.ViewModel.FillColor = value;
+                this.ViewModel.SelectionSetValue((layer) =>
+                {
+                    layer.SetFillColor(value);
+                });
+                
+                this.ViewModel.Invalidate();//Invalidate
+            };
 
 
             //Theme
             this.ThemeControl.ApplicationTheme = App.Current.RequestedTheme;
-
             this.BackButton.Tapped += (sender, e) => this.Frame.GoBack();
             this.SaveButton.Tapped += (sender, e) => this.Frame.GoBack();
         }

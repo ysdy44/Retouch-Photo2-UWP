@@ -1,9 +1,11 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
+using Retouch_Photo2.Blends;
 using Retouch_Photo2.Transformers;
 using System.ComponentModel;
 using System.Numerics;
 using Windows.Graphics.Effects;
+using Windows.UI;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers
@@ -15,7 +17,7 @@ namespace Retouch_Photo2.Layers
     {
         //@Abstract
         /// <summary>
-        /// Get a specific rended-layer..
+        /// Gets a specific rended-layer..
         /// </summary>
         /// /// <param name="resourceCreator"> resourceCreator </param>
         /// <param name="previousImage"> Previous rendered images. </param>
@@ -24,16 +26,31 @@ namespace Retouch_Photo2.Layers
         public abstract ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IGraphicsEffectSource previousImage, Matrix3x2 canvasToVirtualMatrix);
 
 
+        //@Virtual
+        /// <summary>
+        /// Sets layer's fill-color.
+        /// </summary>
+        /// <param name="fillColor"> The destination fill-color. </param>
+        public virtual void SetFillColor(Color fillColor) { }
+        /// <summary>
+        /// Gets layer's fill-color.
+        /// </summary>
+        /// <returns> Return **Null** if layer does not have fill-color. </returns>
+        public virtual Color? GetFillColor() => null;
+
+
         /// <summary> <see cref = "Layer" />'s name. </summary>
         public string Name = "Layer";
         /// <summary> <see cref = "Layer" />'s icon. </summary>
         public UIElement Icon;
         /// <summary> <see cref = "Layer" />'s opacity. </summary>
         public float Opacity=1.0f;
-
+        /// <summary> <see cref = "Layer" />'s blend type. </summary>
+        public BlendType BlendType;
 
         /// <summary> <see cref = "Layer" />'s TransformerMatrix. </summary>
         public TransformerMatrix TransformerMatrix;
+
 
         //@Static
         /// <summary>
@@ -57,7 +74,17 @@ namespace Retouch_Photo2.Layers
                     Opacity = currentLayer.Opacity,
                     Source = currentImage
                 };
-            } 
+            }
+
+            if (currentLayer.BlendType != BlendType.Normal)
+            {
+                currentImage = Blend.Render
+                (
+                    currentImage,
+                    previousImage,
+                    currentLayer.BlendType
+                );
+            }
 
             return new CompositeEffect
             {

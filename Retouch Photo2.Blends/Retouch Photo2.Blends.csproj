@@ -108,6 +108,9 @@
   <ItemGroup>
     <Compile Include="Blend.cs" />
     <Compile Include="BlendType.cs" />
+    <Compile Include="Control.xaml.cs">
+      <DependentUpon>Control.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ColorBurnControl.xaml.cs">
       <DependentUpon>ColorBurnControl.xaml</DependentUpon>
     </Compile>
@@ -228,6 +231,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ColorBurnControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

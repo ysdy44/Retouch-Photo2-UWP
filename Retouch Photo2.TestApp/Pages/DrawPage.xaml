@@ -11,7 +11,7 @@
     
     xmlns:layers="using:Retouch_Photo2.Layers"
     xmlns:transformers="using:Retouch_Photo2.Transformers"
-
+    xmlns:hsvColorPicker="using:HSVColorPickers"
     mc:Ignorable="d"
     >
 
@@ -61,13 +61,29 @@
             <local:DrawLayout.TopRightPane>
                 <StackPanel Orientation="Horizontal">
 
+                    <!--Transformer-->
                     <ToggleButton x:Name="TransformerToggleButton" Width="60" BorderThickness="0" Background="Transparent" Foreground="{ThemeResource AppText}" VerticalAlignment="Stretch">
                         <transformers:Icon/>
                     </ToggleButton>
 
+                    <!--Layer-->
                     <ToggleButton x:Name="LayerToggleButton" Width="60" BorderThickness="0" Background="Transparent" Foreground="{ThemeResource AppText}" VerticalAlignment="Stretch">
                         <layers:Icon/>
                     </ToggleButton>
+
+                    <!--Color-->
+                    <Border Width="60">
+                        <Border x:Name="ColorButton" Width="38" Height="38" Style="{StaticResource AppCircleBorderStyle}">
+                            <Border.Background>
+                                <ImageBrush ImageSource="ms-appx:///Icons\GrayAndWhite.jpg"/>
+                            </Border.Background>
+                            <Border>
+                                <Border.Background>
+                                    <SolidColorBrush Color="{x:Bind ViewModel.FillColor,Mode=OneWay}"/>
+                                </Border.Background>
+                            </Border>
+                        </Border>
+                    </Border>
 
                 </StackPanel>
             </local:DrawLayout.TopRightPane>
@@ -89,16 +105,23 @@
 
             <elements:MenuLayout x:Name="TransformerMenuLayout" Text="Transformer" Placement="Bottom">
                 <elements:MenuLayout.ContentChild>
-                    <controls:TransformerControl 
-                        Transformer="{x:Bind ViewModel.SelectionTransformer,Mode=OneWay}"                                                 
-                        Mode="{x:Bind ViewModel.SelectionMode,Mode=OneWay}"                                                
-                        />
+                    <controls:TransformerControl Transformer="{x:Bind ViewModel.SelectionTransformer,Mode=OneWay}" Mode="{x:Bind ViewModel.SelectionMode,Mode=OneWay}"/>
                 </elements:MenuLayout.ContentChild>
                 <elements:MenuLayout.Icon>
                     <transformers:Icon/>
                 </elements:MenuLayout.Icon>
             </elements:MenuLayout>
 
+            <!--Color-->
+            <elements:MenuLayout x:Name="ColorMenuLayout" Text="Color" Placement="Bottom">
+                <elements:MenuLayout.Icon>
+                    <Ellipse Width="20" Height="20" Fill="Gray"/>
+                </elements:MenuLayout.Icon>
+                <elements:MenuLayout.ContentChild>
+                    <hsvColorPicker:ColorPicker x:Name="ColorPicker" Width="Auto" Color="{x:Bind ViewModel.FillColor,Mode=OneWay}"/>
+                </elements:MenuLayout.ContentChild>
+            </elements:MenuLayout>
+            
         </Canvas>
 
 

@@ -106,6 +106,10 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CompositeMode.cs" />
+    <Compile Include="CompositeModeControl.xaml.cs">
+      <DependentUpon>CompositeModeControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LoadingControl.xaml.cs">
       <DependentUpon>LoadingControl.xaml</DependentUpon>
     </Compile>
@@ -145,6 +149,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="CompositeModeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LoadingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

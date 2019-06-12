@@ -53,7 +53,7 @@ namespace Retouch_Photo2.TestApp.Controls
 
 
         #endregion
-               
+
         //@Construct
         public MainCanvasControl()
         {
@@ -249,7 +249,5 @@ namespace Retouch_Photo2.TestApp.Controls
                 this.ViewModel.Invalidate();
             };
         }
-
-
     }
 }

@@ -1,12 +1,12 @@
 ﻿using Windows.System;
 using Windows.UI.Xaml;
+using Retouch_Photo2.Elements;
 
 namespace Retouch_Photo2.TestApp.ViewModels
 {
     /// <summary> Retouch_Photo2's the only <see cref = "ViewModel" />. </summary>
     public partial class ViewModel
     {
-
         //@Construct
         public ViewModel()
         {
@@ -51,33 +51,30 @@ namespace Retouch_Photo2.TestApp.ViewModels
                 case VirtualKey.Shift: this.KeyShift = false; break;
                 case VirtualKey.Control: this.KeyCtrl = false; break;
                 case VirtualKey.Space: this.KeyAlt = false; break;
-                    
+
                 default:
                     break;
             }
         }
-        
+
         private void KeyUpAndDown(VirtualKey key)
         {
-            App.ViewModel.Text = key.ToString();
             if (this.KeyCtrl == false && this.KeyShift == false)
-            {
-            }
+                this.CompositeMode = CompositeMode.New;//CompositeMode
             else if (this.KeyCtrl == false && this.KeyShift)
-            {
-            }
+                this.CompositeMode = CompositeMode.Add;//CompositeMode
             else if (this.KeyCtrl && this.KeyShift == false)
-            {
-            }
-            else //if (this.KeyCtrl && this.KeyShift)
-            {
-            }
+                this.CompositeMode = CompositeMode.Subtract;//CompositeMode
+            else //if (this.KeyCtrl && this.KeyShift)       
+                this.CompositeMode = CompositeMode.Intersect;//CompositeMode
+
+
         }
 
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        
+
+
         /// <summary> keyboard's the **SHIFT** key. </summary>
         public bool KeyShift
         {
@@ -113,7 +110,6 @@ namespace Retouch_Photo2.TestApp.ViewModels
             set
             {
                 this.KeyIsStepFrequency = value;
-                this.KeyIsMove = value;
 
                 this.keyAlt = value;
                 this.OnPropertyChanged(nameof(this.KeyAlt));//Notify 
@@ -161,22 +157,22 @@ namespace Retouch_Photo2.TestApp.ViewModels
         }
         private bool keyIsStepFrequency;
 
-
-        /// <summary> Change <see cref = "ViewModel.CanvasTransformer" />'s Position when moving. </summary>
-        public bool KeyIsMove
+        /// <summary> Mode of composite between layers. </summary>
+        public Retouch_Photo2.Elements.CompositeMode CompositeMode
         {
-            get => this.keyIsMove;
+            get => this.compositeMode;
             set
             {
-                this.keyIsMove = value;
-                this.OnPropertyChanged(nameof(this.KeyIsMove));//Notify 
+                if (this.compositeMode == value) return;
+                this.compositeMode = value;              
+                this.OnPropertyChanged(nameof(this.CompositeMode));//Notify 
             }
         }
-        private bool keyIsMove;
-        
+        private Retouch_Photo2.Elements.CompositeMode compositeMode;
+
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
+
 
         /// <summary> Sets or Gets the page layout is full screen. </summary>
         public bool IsFullScreen

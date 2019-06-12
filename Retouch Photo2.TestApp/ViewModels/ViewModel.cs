@@ -12,6 +12,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI;
 
 namespace Retouch_Photo2.TestApp.ViewModels
 {
@@ -50,6 +51,7 @@ namespace Retouch_Photo2.TestApp.ViewModels
         /// <summary> Retouch_Photo2's the only <see cref = "Microsoft.Graphics.Canvas.CanvasDevice" />. </summary>
         public CanvasDevice CanvasDevice { get; } = new CanvasDevice();
 
+
         /// <summary>
         /// Indicates that the contents of the CanvasControl need to be redrawn.
         /// </summary>
@@ -61,27 +63,6 @@ namespace Retouch_Photo2.TestApp.ViewModels
 
         /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.Layers.Layer" />s. </summary>
         public ObservableCollection<Layer> Layers { get; } = new ObservableCollection<Layer>();
-
-
-
-        /// <summary> Retouch_Photo2's the only <see cref = "ViewModel.Text" />. </summary>
-        public string Text
-        {
-            get => this.text;
-            set
-            {
-                this.text = value;
-                this.OnPropertyChanged(nameof(this.Text));//Notify 
-            }
-        }
-        private string text= string.Empty;
-        /// <summary> Sets's the <see cref = "ViewModel.Text" />. </summary>
-        public void SetText()
-        {
-            if (App.ViewModel.Text.Length > 44) App.ViewModel.Text = string.Empty;
-            else App.ViewModel.Text += "O";
-        }
-
 
 
         //Notify 

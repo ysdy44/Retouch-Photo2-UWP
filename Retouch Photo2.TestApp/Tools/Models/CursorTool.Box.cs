@@ -1,5 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.TestApp.ViewModels;
 using Retouch_Photo2.Transformers;
@@ -30,22 +31,28 @@ namespace Retouch_Photo2.TestApp.Tools.Models
                 bool contained = Transformer.Contained(this.boxCanvasRect, layer.TransformerMatrix.Destination);
 
                 //Add
-                switch (this.AddMode)
+                switch (this.ViewModel.CompositeMode)
                 {
-                    case CursorAddMode.New:
+                    case CompositeMode.New:
                         {
                             layer.IsChecked = contained;
                         }
                         break;
-                    case CursorAddMode.Add:
+                    case CompositeMode.Add:
                         {
                             if (contained)
                                 layer.IsChecked = true;
                         }
                         break;
-                    case CursorAddMode.Subtract:
+                    case CompositeMode.Subtract:
                         {
                             if (contained)
+                                layer.IsChecked = false;
+                        }
+                        break;
+                    case CompositeMode.Intersect:
+                        {
+                            if (contained == false)
                                 layer.IsChecked = false;
                         }
                         break;

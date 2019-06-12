@@ -1,9 +1,11 @@
-﻿using Retouch_Photo2.Layers;
+﻿using Retouch_Photo2.Blends;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Transformers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using Windows.UI;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.TestApp.ViewModels
@@ -11,9 +13,6 @@ namespace Retouch_Photo2.TestApp.ViewModels
     /// <summary> Retouch_Photo2's the only <see cref = "ViewModel" />. </summary>
     public partial class ViewModel
     {
-
-
-
         /// <summary>
         /// Gets selection-mode by count of checked layers. 
         /// 0>None.
@@ -67,7 +66,8 @@ namespace Retouch_Photo2.TestApp.ViewModels
 
             //////////////////////////
 
-            this.SetSelectionOpacity(0);
+            this.SetSelectionOpacity(1.0f);
+            this.SetSelectionBlendType(BlendType.Normal);
             this.SelectionIsVisual = false;
         }
 
@@ -86,7 +86,13 @@ namespace Retouch_Photo2.TestApp.ViewModels
             //////////////////////////
 
             this.SetSelectionOpacity(layer.Opacity);
+            this.SetSelectionBlendType(layer.BlendType);
             this.SelectionIsVisual = layer.IsVisual;
+
+            if (layer.GetFillColor() is Color color)
+            {
+                this.FillColor = color;
+            }
         }
 
         /// <summary>
@@ -189,8 +195,20 @@ namespace Retouch_Photo2.TestApp.ViewModels
         /// <summary> Sets the <see cref = "ViewModel.SelectionOpacity" />. </summary>
         public void SetSelectionOpacity(float value)
         {
+            if (this.SelectionOpacity == value) return;
             this.SelectionOpacity = value;
             this.OnPropertyChanged(nameof(this.SelectionOpacity));//Notify 
+        }
+
+
+        /// <summary> <see cref = "ViewModel.Selection" />'s blend type. </summary>
+        public BlendType SelectionBlendType;
+        /// <summary> Sets the <see cref = "ViewModel.SelectionBlend" />. </summary>
+        public void SetSelectionBlendType(BlendType value)
+        {
+            if (this.SelectionBlendType == value) return;
+            this.SelectionBlendType = value;
+            this.OnPropertyChanged(nameof(this.SelectionBlendType));//Notify 
         }
 
 

@@ -187,6 +187,7 @@
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.Keyboard.cs" />
     <Compile Include="ViewModels\ViewModel.Canvas.cs" />
+    <Compile Include="ViewModels\ViewModel.Notify.cs" />
     <Compile Include="ViewModels\ViewModel.Tools.cs" />
     <Compile Include="ViewModels\ViewModel.Mezzanine.cs" />
     <Compile Include="ViewModels\ViewModel.Selection.cs" />
@@ -198,6 +199,7 @@
     <None Include="Retouch Photo2.TestApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Icons\GrayAndWhite.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -352,6 +354,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Retouch Photo2.Blends\Retouch Photo2.Blends.csproj">
+      <Project>{8b2218b3-59a4-445f-8765-752c5e700efa}</Project>
+      <Name>Retouch Photo2.Blends</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Elements\Retouch Photo2.Elements.csproj">
       <Project>{0e5ac58e-36bf-44fe-877e-830f024b7109}</Project>
       <Name>Retouch Photo2.Elements</Name>

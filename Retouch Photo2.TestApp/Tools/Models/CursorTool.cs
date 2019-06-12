@@ -7,17 +7,6 @@ using System.Numerics;
 
 namespace Retouch_Photo2.TestApp.Tools.Models
 {
-    /// <summary> Mode of <see cref="CursorTool"/>. </summary>
-    internal enum CursorAddMode
-    {
-        /// <summary> The current layer becomes the only selected layer. </summary>
-        New,
-        /// <summary> Add the current layer to the selected layer. </summary>
-        Add,
-        /// <summary> Subtract the current layer from the selected layer. </summary>
-        Subtract
-    }
-
     /// <summary>
     /// <see cref="Tool"/>'s CursorTool .
     /// </summary>
@@ -33,21 +22,6 @@ namespace Retouch_Photo2.TestApp.Tools.Models
         //Box
         bool isBox;
         TransformerRect boxCanvasRect;
-
-        //Add
-        CursorAddMode AddMode
-        {
-            get
-            {
-                if (this.ViewModel.KeyShift)
-                    return CursorAddMode.Add;
-
-                if (this.ViewModel.KeyCtrl)
-                    return CursorAddMode.Subtract;
-
-                return CursorAddMode.New;
-            }
-        }
 
         //@Construct
         public CursorTool()
@@ -108,17 +82,7 @@ namespace Retouch_Photo2.TestApp.Tools.Models
                 }
             }
 
-            if (this.CursorComplete(isSingleStarted)) return; //Cursor
-
-            {
-                //Selection
-                this.ViewModel.SelectionSetValue((layer) =>
-                {
-                    layer.IsChecked = false;
-                });
-                this.ViewModel.SetSelectionModeNone();//Selection
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-            }
+            this.CursorComplete(isSingleStarted);//Cursor            
         }
 
 

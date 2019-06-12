@@ -1,16 +1,14 @@
 ﻿<Page
     x:Class="Retouch_Photo2.TestApp.Tools.Pages.CursorPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Retouch_Photo2.TestApp.Tools.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
     >
-
 
     <StackPanel Orientation="Horizontal">
 
@@ -22,13 +20,11 @@
         </elements:ToggleControl>
 
         <AppBarSeparator/>
-
-        <elements:OnOffSwitch OnContent="None" OffCOfftent="Ratio" IsOn="{x:Bind ViewModel.KeyIsRatio,Mode=TwoWay}"/>
-
+        <elements:OnOffSwitch OnContent="None" OffContent="Ratio" IsOn="{x:Bind ViewModel.KeyIsRatio,Mode=TwoWay}"/>
         <AppBarSeparator/>
-
-        <elements:OnOffSwitch OnContent="None" OffCOfftent="Center" IsOn="{x:Bind ViewModel.KeyIsCenter,Mode=TwoWay}"/>
-
+        <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind ViewModel.KeyIsCenter,Mode=TwoWay}"/>
+        <AppBarSeparator/>
+        <elements:CompositeModeControl Mode="{x:Bind ViewModel.CompositeMode,Mode=TwoWay}"/>
         <AppBarSeparator/>
 
         <!--More-->
