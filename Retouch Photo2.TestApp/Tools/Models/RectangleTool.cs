@@ -1,6 +1,7 @@
 ﻿using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.TestApp.Tools.Controls;
+using Retouch_Photo2.TestApp.Tools.Pages;
 using Retouch_Photo2.TestApp.ViewModels;
 using Retouch_Photo2.Transformers;
 
@@ -28,7 +29,7 @@ namespace Retouch_Photo2.TestApp.Tools.Models
             base.Type = ToolType.Rectangle;
             base.Icon = new RectangleControl();
             base.ShowIcon = new RectangleControl();
-            base.Page = null;
+            base.Page = new RectanglePage();
         }      
     }
 }

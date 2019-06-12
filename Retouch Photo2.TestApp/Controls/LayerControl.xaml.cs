@@ -67,8 +67,12 @@ namespace Retouch_Photo2.TestApp.Controls
             {
                 bool value = !this.ViewModel.SelectionIsVisual;
 
+                //Selection
                 this.ViewModel.SelectionIsVisual = value;
-                this.ViewModel.SelectionSetValue((layer) => layer.IsVisual = value);//Selection
+                this.ViewModel.SelectionSetValue((layer) => 
+                {
+                    layer.IsVisual = value;
+                });
 
                 this.ViewModel.Invalidate();//Invalidate
             };

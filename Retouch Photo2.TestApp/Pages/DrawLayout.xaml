@@ -305,6 +305,11 @@
                 <animations:TranslationAnimation Duration="0:0:0.4" From="0,0,0" To="0,100,0"/>
             </animations:Implicit.HideAnimations>
 
+            <elements:RadiusAnimaPanel.CenterContent>
+                <ScrollViewer x:Name="ScrollViewer" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
+                    <!--Foot-->
+                </ScrollViewer>
+            </elements:RadiusAnimaPanel.CenterContent>
         </elements:RadiusAnimaPanel>
 
         

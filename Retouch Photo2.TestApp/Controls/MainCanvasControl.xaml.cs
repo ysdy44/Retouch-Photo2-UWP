@@ -141,17 +141,24 @@ namespace Retouch_Photo2.TestApp.Controls
                 args.DrawingSession.DrawImage(shadow, 5.0f, 5.0f);
                 args.DrawingSession.DrawImage(finalCanvas);
 
-                
+
                 //Mezzanine 
                 if (this.ViewModel.Mezzanine.Layer == null)
                 {
-                    //SelectionMode
-                    if (this.ViewModel.SelectionMode == ListViewSelectionMode.None) return;
-
-                    //SelectionTransformer
-                    Transformer transformer = this.ViewModel.GetSelectionTransformer();
-                    Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                    args.DrawingSession.DrawBoundNodes(transformer, matrix);
+                    //Selection
+                    switch (this.ViewModel.SelectionMode)
+                    {
+                        case ListViewSelectionMode.None:
+                            break;
+                        case ListViewSelectionMode.Single:
+                        case ListViewSelectionMode.Multiple:
+                            {
+                                Transformer transformer = this.ViewModel.GetSelectionTransformer();
+                                Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+                                args.DrawingSession.DrawBoundNodes(transformer, matrix);
+                            }
+                            break;
+                    }
                 }
                 else
                 {                   

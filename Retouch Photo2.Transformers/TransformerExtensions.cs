@@ -28,10 +28,10 @@ namespace Retouch_Photo2.Transformers
             Vector2 leftBottom = Vector2.Transform(transformer.LeftBottom, matrix);
 
             //LTRB: Line
-            ds.DrawThickLine(leftTop, rightTop);
-            ds.DrawThickLine(rightTop, rightBottom);
-            ds.DrawThickLine(rightBottom, leftBottom);
-            ds.DrawThickLine(leftBottom, leftTop);
+            ds.DrawLine(leftTop, rightTop);
+            ds.DrawLine(rightTop, rightBottom);
+            ds.DrawLine(rightBottom, leftBottom);
+            ds.DrawLine(leftBottom, leftTop);
         }
 
         /// <summary> Draw nodes and lines on bound，just like【由】. </summary>

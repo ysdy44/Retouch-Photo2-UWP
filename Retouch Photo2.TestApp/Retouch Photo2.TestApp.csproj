@@ -167,6 +167,12 @@
     <Compile Include="Tools\Controls\ViewControl.xaml.cs">
       <DependentUpon>ViewControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\Elements\FillColorEllipseControl.xaml.cs">
+      <DependentUpon>FillColorEllipseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\Elements\StrokeColorEllipseControl.xaml.cs">
+      <DependentUpon>StrokeColorEllipseControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\ITool\ICreateTool.cs" />
     <Compile Include="Tools\Models\CursorTool.Box.cs" />
     <Compile Include="Tools\Models\CursorTool.Layer.cs" />
@@ -178,6 +184,12 @@
     <Compile Include="Tools\Models\ViewTool.cs" />
     <Compile Include="Tools\Pages\CursorPage.xaml.cs">
       <DependentUpon>CursorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\Pages\EllipsePage.xaml.cs">
+      <DependentUpon>EllipsePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\Pages\RectanglePage.xaml.cs">
+      <DependentUpon>RectanglePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\Pages\ViewPage.xaml.cs">
       <DependentUpon>ViewPage.xaml</DependentUpon>
@@ -318,7 +330,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Tools\Elements\FillColorEllipseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\Elements\StrokeColorEllipseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Tools\Pages\CursorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\Pages\EllipsePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\Pages\RectanglePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

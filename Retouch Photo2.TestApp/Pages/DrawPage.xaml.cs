@@ -8,7 +8,9 @@ using Retouch_Photo2.Elements;
 
 namespace Retouch_Photo2.TestApp.Pages
 {  
-    /// <summary> Retouch_Photo2's the only <see cref = "DrawPage" />. </summary>
+    /// <summary> 
+    /// Retouch_Photo2's the only <see cref = "DrawPage" />. 
+    /// </summary>
     public sealed partial class DrawPage : Page
     {
         //ViewModel
@@ -44,6 +46,36 @@ namespace Retouch_Photo2.TestApp.Pages
             this.ThemeControl.ApplicationTheme = App.Current.RequestedTheme;
             this.BackButton.Tapped += (sender, e) => this.Frame.GoBack();
             this.SaveButton.Tapped += (sender, e) => this.Frame.GoBack();
+
+
+            //FillColor
+            this.ViewModel.FillColorFlyout = this.FillColorFlyout;
+            this.ViewModel.FillColorPicker = this.FillColorPicker;
+            this.FillColorPicker.ColorChange += (s, value) =>
+            {
+                //Selection
+                this.ViewModel.FillColor = value;
+                this.ViewModel.SelectionSetValue((layer) =>
+                {
+                    layer.SetFillColor(value);
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            //StrokeColor
+            this.ViewModel.StrokeColorFlyout = this.StrokeColorFlyout;
+            this.ViewModel.StrokeColorPicker = this.StrokeColorPicker;
+            this.StrokeColorPicker.ColorChange += (s, value) =>
+            {
+                //Selection
+                this.ViewModel.StrokeColor = value;
+                this.ViewModel.SelectionSetValue((layer) =>
+                {
+                    layer.SetStrokeColor(value);
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
         }
 
         //The current page becomes the active page

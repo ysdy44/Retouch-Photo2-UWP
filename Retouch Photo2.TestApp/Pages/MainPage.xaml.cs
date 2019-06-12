@@ -43,7 +43,9 @@ namespace Retouch_Photo2.TestApp.Pages
         Move,
     }
 
-    /// <summary> Retouch_Photo2's the only <see cref = "MainPage" />. </summary>
+    /// <summary> 
+    /// Retouch_Photo2's the only <see cref = "MainPage" />. 
+    /// </summary>
     public sealed partial class MainPage : Page
     {
         //ViewModel

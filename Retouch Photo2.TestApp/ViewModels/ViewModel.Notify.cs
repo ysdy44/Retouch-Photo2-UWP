@@ -1,9 +1,13 @@
 ﻿using System.ComponentModel;
 using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.TestApp.ViewModels
 {
-    /// <summary> Retouch_Photo2's the only <see cref = "ViewModel" />. </summary>
+    /// <summary> 
+    /// Retouch_Photo2's the only <see cref = "ViewModel" />. 
+    /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
                      
@@ -18,7 +22,15 @@ namespace Retouch_Photo2.TestApp.ViewModels
             }
         }
         private Color fillColor = Color.FromArgb(255, 214, 214, 214);
-        
+
+        /// <summary> Flyout of <see cref = "ViewModel.FillColor" />.  </summary>
+        public Flyout FillColorFlyout;
+
+        /// <summary> ColorPicker of <see cref = "ViewModel.FillColor" />.  </summary>
+        public HSVColorPickers.ColorPicker FillColorPicker;
+
+
+
         /// <summary> Retouch_Photo2's the only stroke-color. </summary>
         public Color StrokeColor
         {
@@ -30,8 +42,16 @@ namespace Retouch_Photo2.TestApp.ViewModels
             }
         }
         private Color strokeColor = Color.FromArgb(255, 0, 0, 0);
-               
-                /// <summary> Retouch_Photo2's the only <see cref = "ViewModel.Text" />. </summary>
+
+        /// <summary> Flyout of <see cref = "ViewModel.FillColor" />.  </summary>
+        public Flyout StrokeColorFlyout;
+
+        /// <summary> ColorPicker of <see cref = "ViewModel.StrokeColor" />.  </summary>
+        public HSVColorPickers.ColorPicker StrokeColorPicker;
+
+
+
+        /// <summary> Retouch_Photo2's the only <see cref = "ViewModel.Text" />. </summary>
         public string Text
         {
             get => this.text;

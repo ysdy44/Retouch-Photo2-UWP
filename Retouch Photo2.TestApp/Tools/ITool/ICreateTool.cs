@@ -38,8 +38,10 @@ namespace Retouch_Photo2.TestApp.Tools.Models
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Transformer transformer = new Transformer
             (
-                Vector2.Transform(startingPoint, inverseMatrix),
-                Vector2.Transform(point, inverseMatrix)
+                 Vector2.Transform(startingPoint, inverseMatrix),
+                 Vector2.Transform(point, inverseMatrix),
+                 this.ViewModel.KeyIsCenter,
+                 this.ViewModel.KeyIsRatio
             );
 
             //Mezzanine
@@ -58,7 +60,9 @@ namespace Retouch_Photo2.TestApp.Tools.Models
             Transformer transformer = new Transformer
             (
                  Vector2.Transform(startingPoint, inverseMatrix),
-                 Vector2.Transform(point, inverseMatrix)
+                 Vector2.Transform(point, inverseMatrix),
+                 this.ViewModel.KeyIsCenter,
+                 this.ViewModel.KeyIsRatio
             );
 
             this.ViewModel.Mezzanine.Layer.TransformerMatrix.Destination = transformer;//Mezzanine
@@ -77,10 +81,12 @@ namespace Retouch_Photo2.TestApp.Tools.Models
                 Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
                 Transformer transformer = new Transformer
                 (
-                    Vector2.Transform(startingPoint, inverseMatrix),
-                    Vector2.Transform(point, inverseMatrix)
+                     Vector2.Transform(startingPoint, inverseMatrix),
+                     Vector2.Transform(point, inverseMatrix),
+                     this.ViewModel.KeyIsCenter,
+                     this.ViewModel.KeyIsRatio
                 );
-                
+
                 //Selection
                 this.ViewModel.SelectionSetValue((layer) =>
                 {

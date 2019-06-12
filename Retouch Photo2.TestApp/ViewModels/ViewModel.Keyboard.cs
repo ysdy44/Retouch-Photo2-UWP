@@ -67,8 +67,6 @@ namespace Retouch_Photo2.TestApp.ViewModels
                 this.CompositeMode = CompositeMode.Subtract;//CompositeMode
             else //if (this.KeyCtrl && this.KeyShift)       
                 this.CompositeMode = CompositeMode.Intersect;//CompositeMode
-
-
         }
 
 

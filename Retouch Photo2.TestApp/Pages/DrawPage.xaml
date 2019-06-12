@@ -15,6 +15,21 @@
     mc:Ignorable="d"
     >
 
+    
+    <Page.Resources>
+        
+        <!--FillColor-->
+        <Flyout x:Name="FillColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <hsvColorPicker:ColorPicker x:Name="FillColorPicker" Width="222" Padding="0" Background="Transparent"/>
+        </Flyout>
+        
+        <!--StrokeColor-->
+        <Flyout x:Name="StrokeColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <hsvColorPicker:ColorPicker x:Name="StrokeColorPicker" Width="222" Padding="0" Background="Transparent"/>
+        </Flyout>
+        
+    </Page.Resources>
+    
 
     <Grid >
 
@@ -72,18 +87,19 @@
                     </ToggleButton>
 
                     <!--Color-->
-                    <Border Width="60">
-                        <Border x:Name="ColorButton" Width="38" Height="38" Style="{StaticResource AppCircleBorderStyle}">
-                            <Border.Background>
+                    <Grid x:Name="ColorButton" Width="38" Height="38" Margin="10,0">
+                        <Ellipse StrokeThickness="1" Stroke="{ThemeResource AppText}">
+                            <Ellipse.Fill>
                                 <ImageBrush ImageSource="ms-appx:///Icons\GrayAndWhite.jpg"/>
-                            </Border.Background>
-                            <Border>
-                                <Border.Background>
-                                    <SolidColorBrush Color="{x:Bind ViewModel.FillColor,Mode=OneWay}"/>
-                                </Border.Background>
-                            </Border>
-                        </Border>
-                    </Border>
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                        <Ellipse Margin="1">
+                            <Ellipse.Fill>
+                                <SolidColorBrush Color="{x:Bind ViewModel.FillColor,Mode=OneWay}"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </Grid>
 
                 </StackPanel>
             </local:DrawLayout.TopRightPane>

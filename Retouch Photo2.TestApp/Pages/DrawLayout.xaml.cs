@@ -117,7 +117,7 @@ namespace Retouch_Photo2.TestApp.Pages
                 con.IconLeftIcon.Content = newTool.ShowIcon;
 
                 //Page
-                con.RadiusAnimaPanel.CenterContent = newTool.Page;
+                con.ScrollViewer.Content = newTool.Page;
 
                 //If you choose a different tool, PhoneState will hided.
                 if (e.OldValue is Tool oldTool)

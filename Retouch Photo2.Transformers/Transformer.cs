@@ -43,6 +43,7 @@ namespace Retouch_Photo2.Transformers
             this.RightBottom = rect.RightBottom;
             this.LeftBottom = rect.LeftBottom;
         }
+
         /// <summary>
         /// Constructs a <see cref = "Transformer" />.
         /// </summary>
@@ -51,6 +52,23 @@ namespace Retouch_Photo2.Transformers
         public Transformer(Vector2 pointA, Vector2 pointB)
         {
             TransformerRect rect = new TransformerRect(pointA, pointB);
+
+            this.LeftTop = rect.LeftTop;
+            this.RightTop = rect.RightTop;
+            this.RightBottom = rect.RightBottom;
+            this.LeftBottom = rect.LeftBottom;
+        }
+        
+        /// <summary>
+        /// Constructs a <see cref = "Transformer" />.
+        /// </summary>
+        /// <param name="pointA"> Frist point of rectangle.</param>
+        /// <param name="pointA"> Second point of rectangle.</param>
+        /// <param name="isCenter"> Scaling around the center. </param>
+        /// <param name="isRatio"> Maintain a ratio when scaling. </param>
+        public Transformer(Vector2 pointA, Vector2 pointB, bool isCenter, bool isRatio)
+        {
+            TransformerRect rect = new TransformerRect(pointA, pointB, isCenter, isRatio);
 
             this.LeftTop = rect.LeftTop;
             this.RightTop = rect.RightTop;
