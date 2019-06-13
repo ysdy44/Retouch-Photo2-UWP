@@ -1,20 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using Retouch_Photo2.Layers;
+﻿using Retouch_Photo2.Layers;
 using Retouch_Photo2.TestApp.ViewModels;
-
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.TestApp.Controls
 {
@@ -31,7 +17,9 @@ namespace Retouch_Photo2.TestApp.Controls
         private float ValueToOpacityConverter(double value) => (float)value / 100.0f;
 
         private double BoolToOpacityConverter(bool isChecked) => isChecked ? 1.0 : 0.4;
-
+         
+        private bool SelectionModeToVoolConverter(ListViewSelectionMode selectionMode) => (selectionMode == ListViewSelectionMode.None) ? false : true;
+ 
 
         //@Construct
         public LayerControl()

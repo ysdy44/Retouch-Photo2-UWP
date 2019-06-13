@@ -1,6 +1,7 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Blends;
+using Retouch_Photo2.Effects;
 using Retouch_Photo2.Transformers;
 using System.ComponentModel;
 using System.Numerics;
@@ -60,6 +61,8 @@ namespace Retouch_Photo2.Layers
 
         /// <summary> <see cref = "Layer" />'s TransformerMatrix. </summary>
         public TransformerMatrix TransformerMatrix;
+        /// <summary> <see cref = "Layer" />'s EffectManager. </summary>
+        public EffectManager EffectManager = new EffectManager();
 
 
         //@Static
@@ -76,6 +79,8 @@ namespace Retouch_Photo2.Layers
             if (currentLayer.IsVisual == false || currentLayer.Opacity == 0) return previousImage;
 
             ICanvasImage currentImage = currentLayer.GetRender(resourceCreator, previousImage, canvasToVirtualMatrix);
+
+            currentImage = EffectManager.Render(currentLayer.EffectManager, currentImage);
 
             if (currentLayer.Opacity < 1.0)
             {

@@ -10,6 +10,7 @@
     NavigationCacheMode="Enabled"   
     
     xmlns:layers="using:Retouch_Photo2.Layers"
+    xmlns:effects="using:Retouch_Photo2.Effects"
     xmlns:transformers="using:Retouch_Photo2.Transformers"
     xmlns:hsvColorPicker="using:HSVColorPickers"
     mc:Ignorable="d"
@@ -44,7 +45,7 @@
             </local:DrawLayout.RightPane>
 
             <local:DrawLayout.CenterContent>
-                <controls:MainCanvasControl ShadowColor="{ThemeResource AppStrokeColor}"/>
+                <controls:MainCanvasControl ShadowColor="{ThemeResource AppStrokeColor}" IsRuler="{x:Bind ViewModel.IsRuler,Mode=OneWay}"/>
             </local:DrawLayout.CenterContent>
 
             <local:DrawLayout.TopLeftPane>
@@ -66,15 +67,31 @@
                     <Border Style="{StaticResource AppCircleBorderStyle}">
                         <Button IsEnabled="True" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10D;" FontSize="18" Foreground="Gray" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
                     </Border>
-                    <ContentControl Width="6"/>
+                    
+                    <AppBarSeparator/>
+                    
                     <Border Style="{StaticResource AppCircleBorderStyle}">
                         <elements:ThemeControl x:Name="ThemeControl" TitleBarColor="{ThemeResource AppForegroundColor}"/>
+                    </Border>
+                    <ContentControl Width="6"/>
+                    <Border Style="{StaticResource AppCircleBorderStyle}">
+                        <ToggleButton IsChecked="{x:Bind ViewModel.IsRuler,Mode=TwoWay}" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE80A;" FontSize="18" Foreground="Gray" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
                     </Border>
                 </StackPanel>
             </local:DrawLayout.TopLeftStackBar>
 
             <local:DrawLayout.TopRightPane>
                 <StackPanel Orientation="Horizontal">
+
+                    <!--Debug-->
+                    <ToggleButton x:Name="DebugToggleButton" Height="50" Width="60" BorderThickness="0" Background="Transparent" Foreground="{ThemeResource AppText}">
+                        <FontIcon FontSize="24" Glyph="&#x1F41E;" FontFamily="Segoe UI Symbol"/>
+                    </ToggleButton>
+
+                    <!--Effect-->
+                    <ToggleButton x:Name="EffectToggleButton" Width="60" BorderThickness="0" Background="Transparent" Foreground="{ThemeResource AppText}" VerticalAlignment="Stretch">
+                        <effects:Icon/>
+                    </ToggleButton>
 
                     <!--Transformer-->
                     <ToggleButton x:Name="TransformerToggleButton" Width="60" BorderThickness="0" Background="Transparent" Foreground="{ThemeResource AppText}" VerticalAlignment="Stretch">
@@ -87,14 +104,14 @@
                     </ToggleButton>
 
                     <!--Color-->
-                    <Grid x:Name="ColorButton" Width="38" Height="38" Margin="10,0">
-                        <Ellipse StrokeThickness="1" Stroke="{ThemeResource AppText}">
+                    <Grid x:Name="ColorButton" Width="60" Background="Transparent">
+                        <Ellipse Width="38" Height="38" StrokeThickness="1" Stroke="{ThemeResource AppText}" VerticalAlignment="Center">
                             <Ellipse.Fill>
                                 <ImageBrush ImageSource="ms-appx:///Icons\GrayAndWhite.jpg"/>
                             </Ellipse.Fill>
                         </Ellipse>
 
-                        <Ellipse Margin="1">
+                        <Ellipse Width="36" Height="36">
                             <Ellipse.Fill>
                                 <SolidColorBrush Color="{x:Bind ViewModel.FillColor,Mode=OneWay}"/>
                             </Ellipse.Fill>
@@ -110,15 +127,27 @@
         <!--MenuLayout-->
         <Canvas>
 
-            <elements:MenuLayout x:Name="LayerMenuLayout" Text="Layer" Placement="Left">
+            <!--Debug-->
+            <elements:MenuLayout x:Name="DebugMenuLayout" Text="Debug" Placement="Left">
                 <elements:MenuLayout.ContentChild>
-                    <controls:LayerControl/>
+                    <controls:DebugControl/>
                 </elements:MenuLayout.ContentChild>
                 <elements:MenuLayout.Icon>
-                    <layers:Icon/>
+                    <FontIcon FontSize="24" Glyph="&#x1F41E;" FontFamily="Segoe UI Symbol"/>
                 </elements:MenuLayout.Icon>
             </elements:MenuLayout>
 
+            <!--Effect-->
+            <elements:MenuLayout x:Name="EffectMenuLayout" Text="Effect" Placement="Bottom">
+                <elements:MenuLayout.ContentChild>
+                    <controls:EffectControl EffectManager="{x:Bind ViewModel.SelectionIsEffectManager,Mode=OneWay}"/>
+                </elements:MenuLayout.ContentChild>
+                <elements:MenuLayout.Icon>
+                    <effects:Icon/>
+                </elements:MenuLayout.Icon>
+            </elements:MenuLayout>
+
+            <!--Transformer-->
             <elements:MenuLayout x:Name="TransformerMenuLayout" Text="Transformer" Placement="Bottom">
                 <elements:MenuLayout.ContentChild>
                     <controls:TransformerControl Transformer="{x:Bind ViewModel.SelectionTransformer,Mode=OneWay}" Mode="{x:Bind ViewModel.SelectionMode,Mode=OneWay}"/>
@@ -128,10 +157,20 @@
                 </elements:MenuLayout.Icon>
             </elements:MenuLayout>
 
+            <!--Layer-->
+            <elements:MenuLayout x:Name="LayerMenuLayout" Text="Layer" Placement="Left">
+                <elements:MenuLayout.ContentChild>
+                    <controls:LayerControl/>
+                </elements:MenuLayout.ContentChild>
+                <elements:MenuLayout.Icon>
+                    <layers:Icon/>
+                </elements:MenuLayout.Icon>
+            </elements:MenuLayout>
+
             <!--Color-->
             <elements:MenuLayout x:Name="ColorMenuLayout" Text="Color" Placement="Bottom">
                 <elements:MenuLayout.Icon>
-                    <Ellipse Width="20" Height="20" Fill="Gray"/>
+                    <Ellipse Width="20" Height="20" Fill="Gray" />
                 </elements:MenuLayout.Icon>
                 <elements:MenuLayout.ContentChild>
                     <hsvColorPicker:ColorPicker x:Name="ColorPicker" Width="Auto" Color="{x:Bind ViewModel.FillColor,Mode=OneWay}"/>

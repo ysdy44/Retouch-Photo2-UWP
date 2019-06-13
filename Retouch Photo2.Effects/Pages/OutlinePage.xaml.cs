@@ -1,48 +1,28 @@
-﻿using Retouch_Photo2.Effects.Controls;
-using Retouch_Photo2.Effects.Items;
+﻿using Retouch_Photo2.Effects.Models;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Effects.Pages
 {
-    public sealed partial class OutlinePage : EffectPage
+    /// <summary>
+    /// <see cref = "OutlineEffect" /> 's Page.
+    /// </summary>
+    public sealed partial class OutlinePage : Page
     {
+        /// <summary> <see cref = "OuterShadowPage" />'s SizeSlider. </summary>
+        public Slider SizeSlider => this._SizeSlider;
+
+        //@Construct
         public OutlinePage()
         {
             this.InitializeComponent();
-            base.Type = EffectType.Outline;
-            base.Control = new Control()
+
+            this._SizeSlider.ValueChanged += (sender, e) =>
             {
-                Icon = new OutlineControl()
+                EffectManager.Invalidate((effectManager) =>
+                {
+                    effectManager.Outline_Size = (int)e.NewValue;
+                });
             };
-
-            this.SizeSlider.ValueChanged += (sender, e) =>
-            {
-                if (base.EffectManager == null) return;
-
-                base.EffectManager.OutlineEffectItem.Size = (int)e.NewValue;
-                EffectManager.Invalidate?.Invoke();
-            };
-        }
-
-        //@override
-        public override bool GetIsOn(EffectManager manager) => manager.OutlineEffectItem.IsOn;
-        public override void SetIsOn(EffectManager manager, bool isOn) => manager.OutlineEffectItem.IsOn = isOn;
-
-        public override void SetManager(EffectManager manager)
-        {
-            base.EffectManager = manager;
-            this.Invalidate(base.EffectManager.OutlineEffectItem);
-        }
-        public override void Reset()
-        {
-            if (base.EffectManager == null) return;
-
-            OutlineEffectItem item = base.EffectManager.OutlineEffectItem;
-            item.Reset();
-            this.Invalidate(item);
-        }
-        public void Invalidate(OutlineEffectItem item)
-        {
-            this.SizeSlider.Value = item.Size;
-        }
+        }        
     }
 }

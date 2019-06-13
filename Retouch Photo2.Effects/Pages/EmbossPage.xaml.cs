@@ -1,56 +1,38 @@
-﻿using Retouch_Photo2.Effects.Controls;
-using Retouch_Photo2.Effects.Items;
+﻿using Retouch_Photo2.Effects.Models;
+using Retouch_Photo2.Elements;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Effects.Pages
 {
-    public sealed partial class EmbossPage : EffectPage
+    /// <summary>
+    /// <see cref = "EmbossEffect" /> 's Page.
+    /// </summary>
+    public sealed partial class EmbossPage : Page
     {
+        /// <summary> <see cref = "EmbossPage" />'s BlurAmountSlider. </summary>
+        public Slider AmountSlider => this._AmountSlider;
+        /// <summary> <see cref = "EmbossPage" />'s RadiansPicker. </summary>
+        public RadiansPicker AnglePicker => this._AnglePicker;
+
+        //@Construct
         public EmbossPage()
         {
             this.InitializeComponent();
-            base.Type = EffectType.Emboss;
-            base.Control = new Control()
+
+            this._AmountSlider.ValueChanged += (s, e) =>
             {
-                Icon = new EmbossControl()
+                EffectManager.Invalidate((effectManager) =>
+                {
+                     effectManager.Emboss_Amount = (float)e.NewValue;
+                });
             };
-
-            this.AmountSlider.ValueChanged += (s, e) =>
+            this._AnglePicker.RadiansChange += (radians) =>
             {
-                if (base.EffectManager == null) return;
-
-                base.EffectManager.EmbossEffectItem.Amount = (float)e.NewValue;
-                EffectManager.Invalidate?.Invoke();
+                EffectManager.Invalidate((effectManager) =>
+                {
+                    effectManager.Emboss_Angle = radians;
+                });
             };
-            this.AnglePicker.RadiansChange += (radians) =>
-            {
-                if (base.EffectManager == null) return;
-
-                base.EffectManager.EmbossEffectItem.Angle = radians;
-                EffectManager.Invalidate?.Invoke();
-            };
-        }
-
-        //@override
-        public override bool GetIsOn(EffectManager manager) => manager.EmbossEffectItem.IsOn;
-        public override void SetIsOn(EffectManager manager, bool isOn) => manager.EmbossEffectItem.IsOn = isOn;
-
-        public override void SetManager(EffectManager manager)
-        {
-            base.EffectManager = manager;
-            this.Invalidate(base.EffectManager.EmbossEffectItem);
-        }
-        public override void Reset()
-        {
-            if (base.EffectManager == null) return;
-
-            base.EffectManager.StraightenEffectItem.Reset();
-            EmbossEffectItem item = base.EffectManager.EmbossEffectItem;
-            this.Invalidate(item);
-        }
-        public void Invalidate(EmbossEffectItem item)
-        {
-            this.AmountSlider.Value = item.Amount;
-            this.AnglePicker.Radians = item.Angle;
-        }
+        }        
     }
 }

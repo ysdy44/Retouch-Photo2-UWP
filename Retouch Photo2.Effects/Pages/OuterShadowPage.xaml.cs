@@ -1,87 +1,76 @@
-﻿using Retouch_Photo2.Effects.Controls;
-using Retouch_Photo2.Effects.Items;
+﻿using Retouch_Photo2.Effects.Models;
+using Retouch_Photo2.Elements;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.Effects.Pages
 {
-    public sealed partial class OuterShadowPage : EffectPage
+    /// <summary>
+    /// <see cref = "OuterShadowEffect" /> 's Page.
+    /// </summary>
+    public sealed partial class OuterShadowPage : Page
     {
+        /// <summary> <see cref = "OuterShadowPage" />'s RadiusSlider. </summary>
+        public Slider RadiusSlider => this._RadiusSlider;
+        /// <summary> <see cref = "OuterShadowPage" />'s OpacitySlider. </summary>
+        public Slider OpacitySlider => this._OpacitySlider;
+        /// <summary> <see cref = "OuterShadowPage" />'s OffsetSlider. </summary>
+        public Slider OffsetSlider => this._OffsetSlider;
+    
+        /// <summary> <see cref = "OuterShadowPage" />'s AnglePicker. </summary>
+        public RadiansPicker AnglePicker => this._AnglePicker;
+
+        /// <summary> <see cref = "OuterShadowPage" />'s SolidColorBrush. </summary>
+        public SolidColorBrush SolidColorBrush => this._SolidColorBrush;
+        
+        //@Construct
         public OuterShadowPage()
         {
             this.InitializeComponent();
-            base.Type = EffectType.OuterShadow;
-            base.Control = new Control()
+
+            this._RadiusSlider.ValueChanged += (s, e) =>
             {
-                Icon = new OuterShadowControl()
+                EffectManager.Invalidate((effectManager) =>
+                {
+                    effectManager.OuterShadow_Radius = (float)e.NewValue;
+                });
+            };
+            this._OpacitySlider.ValueChanged += (s, e) =>
+            {
+                EffectManager.Invalidate((effectManager) =>
+                {
+                    effectManager.OuterShadow_Opacity = (float)(e.NewValue / 100.0f);
+                });
+            };
+            this._OffsetSlider.ValueChanged += (s, e) =>
+            {
+                EffectManager.Invalidate((effectManager) =>
+                {
+                    effectManager.OuterShadow_Offset = (float)e.NewValue;
+                });
+            };
+            this._AnglePicker.RadiansChange += (radians) =>
+            {
+                EffectManager.Invalidate((effectManager) =>
+                {
+                    effectManager.OuterShadow_Angle = radians;
+                });
             };
 
-            this.RadiusSlider.ValueChanged += (s, e) =>
-            {
-                if (base.EffectManager == null) return;
-
-                base.EffectManager.OuterShadowEffectItem.Radius = (float)e.NewValue;
-                EffectManager.Invalidate?.Invoke();
-            };
-            this.OpacitySlider.ValueChanged += (s, e) =>
-            {
-                if (base.EffectManager == null) return;
-
-                base.EffectManager.OuterShadowEffectItem.Opacity = (float)(e.NewValue / 100.0);
-                EffectManager.Invalidate?.Invoke();
-            };
-            this.OffsetSlider.ValueChanged += (s, e) =>
-            {
-                if (base.EffectManager == null) return;
-
-                base.EffectManager.OuterShadowEffectItem.Offset = (float)e.NewValue;
-                EffectManager.Invalidate?.Invoke();
-            };
-            this.AnglePicker.RadiansChange += (radians) =>
-            {
-                if (base.EffectManager == null) return;
-
-                base.EffectManager.OuterShadowEffectItem.Angle = radians;
-                EffectManager.Invalidate?.Invoke();
-            };
             this.ColorButton.Tapped += (s, e) =>
             {
                 this.ColorFlyout.ShowAt(this.ColorButton);
-                this.ColorPicker.Color = base.EffectManager.OuterShadowEffectItem.Color;
+                this.ColorPicker.Color = this._SolidColorBrush.Color;
             };
             this.ColorPicker.ColorChange += (s, value) =>
             {
-                this.SolidColorBrush.Color = value;
+                this._SolidColorBrush.Color = value;
 
-                if (base.EffectManager == null) return;
-
-                base.EffectManager.OuterShadowEffectItem.Color = value;
-                EffectManager.Invalidate?.Invoke();
+                EffectManager.Invalidate((effectManager) =>
+                {
+                    effectManager.OuterShadow_Color = value;
+                });
             };
-        }
-
-        //@override
-        public override bool GetIsOn(EffectManager manager) => manager.OuterShadowEffectItem.IsOn;
-        public override void SetIsOn(EffectManager manager, bool isOn) => manager.OuterShadowEffectItem.IsOn = isOn;
-
-        public override void SetManager(EffectManager manager)
-        {
-            base.EffectManager = manager;
-            this.Invalidate(base.EffectManager.OuterShadowEffectItem);
-        }
-        public override void Reset()
-        {
-            if (base.EffectManager == null) return;
-
-            OuterShadowEffectItem item = base.EffectManager.OuterShadowEffectItem;
-            item.Reset();
-            this.Invalidate(item);
-        }
-        public void Invalidate(OuterShadowEffectItem item)
-        {
-            this.RadiusSlider.Value = item.Radius;
-            this.OpacitySlider.Value = item.Opacity * 100.0;
-            this.OffsetSlider.Value = item.Offset;
-            this.AnglePicker.Radians = item.Angle;
-            this.SolidColorBrush.Color = item.Color;
         }
     }
 }

@@ -1,49 +1,29 @@
 ﻿using Retouch_Photo2.Effects.Controls;
-using Retouch_Photo2.Effects.Items;
+using Retouch_Photo2.Effects.Models;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Effects.Pages
 {
-    public sealed partial class SharpenPage : EffectPage
+    /// <summary>
+    /// <see cref = "SharpenEffect" /> 's Page.
+    /// </summary>
+    public sealed partial class SharpenPage : Page
     {
+        /// <summary> <see cref = "SharpenPage" />'s AmountSlider. </summary>
+        public Slider AmountSlider => this._AmountSlider;
+
+        //@Construct
         public SharpenPage()
         {
             this.InitializeComponent();
-            base.Type = EffectType.Sharpen;
-            base.Control = new Control()
+
+            this._AmountSlider.ValueChanged += (s, e) =>
             {
-                Icon = new SharpenControl()
+                EffectManager.Invalidate((effectManager) =>
+                {
+                    effectManager.Sharpen_Amount = (float)e.NewValue / 10.0f;
+                });
             };
-
-            this.AmountSlider.ValueChanged += (s, e) =>
-            {
-                if (base.EffectManager == null) return;
-
-                base.EffectManager.SharpenEffectItem.Amount = (float)e.NewValue / 10.0f;
-                EffectManager.Invalidate?.Invoke();
-            };
-        }
-
-        //@override
-        public override bool GetIsOn(EffectManager manager) => manager.SharpenEffectItem.IsOn;
-        public override void SetIsOn(EffectManager manager, bool isOn) => manager.SharpenEffectItem.IsOn = isOn;
-
-        public override void SetManager(EffectManager manager)
-        {
-            base.EffectManager = manager;
-            this.Invalidate(base.EffectManager.SharpenEffectItem);
-        }
-        public override void Reset()
-        {
-            if (base.EffectManager == null) return;
-
-            SharpenEffectItem item = base.EffectManager.SharpenEffectItem;
-            item.Reset();
-            this.Invalidate(item);
-        }
-        public void Invalidate(SharpenEffectItem item)
-        {
-            this.AmountSlider.Value = item.Amount*10.0f;
-        }
+        }        
     }
 }
-

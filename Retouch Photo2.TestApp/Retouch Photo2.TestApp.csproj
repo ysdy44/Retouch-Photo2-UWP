@@ -95,6 +95,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DebugControl.xaml.cs">
+      <DependentUpon>DebugControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EffectControl.xaml.cs">
+      <DependentUpon>EffectControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>
@@ -200,6 +206,8 @@
     <Compile Include="ViewModels\ViewModel.Keyboard.cs" />
     <Compile Include="ViewModels\ViewModel.Canvas.cs" />
     <Compile Include="ViewModels\ViewModel.Notify.cs" />
+    <Compile Include="ViewModels\ViewModel.Selection.Notify.cs" />
+    <Compile Include="ViewModels\ViewModel.Selection.SetMode.cs" />
     <Compile Include="ViewModels\ViewModel.Tools.cs" />
     <Compile Include="ViewModels\ViewModel.Mezzanine.cs" />
     <Compile Include="ViewModels\ViewModel.Selection.cs" />
@@ -226,6 +234,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\DebugControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\EffectControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\LayerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -385,6 +401,10 @@
     <ProjectReference Include="..\Retouch Photo2.Blends\Retouch Photo2.Blends.csproj">
       <Project>{8b2218b3-59a4-445f-8765-752c5e700efa}</Project>
       <Name>Retouch Photo2.Blends</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Effects\Retouch Photo2.Effects.csproj">
+      <Project>{c14d4618-e234-4d91-8ced-49cbd9f6f3c7}</Project>
+      <Name>Retouch Photo2.Effects</Name>
     </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Elements\Retouch Photo2.Elements.csproj">
       <Project>{0e5ac58e-36bf-44fe-877e-830f024b7109}</Project>

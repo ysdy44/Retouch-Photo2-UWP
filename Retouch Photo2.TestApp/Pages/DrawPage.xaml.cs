@@ -22,6 +22,10 @@ namespace Retouch_Photo2.TestApp.Pages
             this.InitializeComponent();
 
 
+            //Debug
+            MenuLayout.LayoutBinging(this.DebugMenuLayout, this.DebugToggleButton);
+            //Effect
+            MenuLayout.LayoutBinging(this.EffectMenuLayout, this.EffectToggleButton);
             //Transformer
             MenuLayout.LayoutBinging(this.TransformerMenuLayout, this.TransformerToggleButton);
             //Layer

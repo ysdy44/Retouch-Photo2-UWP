@@ -1,0 +1,35 @@
+﻿<Page
+    x:Class="Retouch_Photo2.TestApp.Controls.DebugControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="800"
+    d:DesignWidth="70">
+
+
+    <StackPanel>
+        <Border Height="50" Background="{ThemeResource AppBackground}"  >
+            <TextBlock Text="AppBackground" Style="{StaticResource AppTextBlock}" />
+        </Border>
+        <Border Height="50" Background="{ThemeResource AppForeground}"  >
+            <TextBlock Text="AppForeground" Style="{StaticResource AppTextBlock}" />
+        </Border>
+        <Border Height="50" Background="{ThemeResource AppBorderBrush}"  >
+            <TextBlock Text="AppBorderBrush" Style="{StaticResource AppTextBlock}" />
+        </Border>
+        <Border Height="50" Background="{ThemeResource AppFill}"  >
+            <TextBlock Text="AppFill" Style="{StaticResource AppTextBlock}" />
+        </Border>
+        <Border Height="50" Background="{ThemeResource AppStroke}"  >
+            <TextBlock Text="AppStroke" Style="{StaticResource AppTextBlock}" />
+        </Border>
+        <Border Height="50" Background="{ThemeResource AppText}"  >
+            <TextBlock Text="AppText" Style="{StaticResource AppTextBlock}" />
+        </Border>
+        <Border Height="50" Background="{ThemeResource AppLinearBrush}"  >
+            <TextBlock Text="AppLinearBrush" Style="{StaticResource AppTextBlock}" />
+        </Border>
+    </StackPanel>
+</Page>

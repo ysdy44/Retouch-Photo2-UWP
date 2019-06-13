@@ -1,23 +1,23 @@
-﻿<effects:EffectPage
+﻿<Page
     x:Class="Retouch_Photo2.Effects.Pages.DirectionalBlurPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Retouch_Photo2.Effects.Pages" 
-    xmlns:effects="using:Retouch_Photo2.Effects"
-
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:element="using:Retouch_Photo2.Elements"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    >
 
     <StackPanel >
+        
         <TextBlock Text="BlurAmount" Style="{StaticResource AppTextBlock}"/>
-        <Slider x:Name="BlurAmountSlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
+        <Slider x:Name="_BlurAmountSlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
 
         <TextBlock Text="Angle" Style="{StaticResource AppTextBlock}"/>
-        <element:RadiansPicker x:Name="AnglePicker" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"
+        <element:RadiansPicker x:Name="_AnglePicker" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"
                                BorderBrush="{ThemeResource AppBorderBrush}"
                                Background="{ThemeResource AppForeground}"
                                />
+        
     </StackPanel>
-</effects:EffectPage>
+</Page>

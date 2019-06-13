@@ -3,21 +3,21 @@
     /// <summary> An <see cref = "Effect"/> corresponds to a <see cref = "EffectType" /> </summary>
     public enum EffectType
     {
-        /// <summary> 高斯模糊 </summary>
+        /// <summary> GaussianBlur (高斯模糊) </summary>
         GaussianBlur,
-        /// <summary> 定向模糊 </summary>
+        /// <summary> DirectionalBlur (定向模糊) </summary>
         DirectionalBlur,
-        /// <summary> 锐化ummary>
+        /// <summary> Sharpen (锐化) </summary>
         Sharpen,
-        /// <summary> 外部投影 </summary>
+        /// <summary> OuterShadow (外部投影) </summary>
         OuterShadow,
 
-        /// <summary> 轮廓 </summary>
+        /// <summary> Outline (轮廓) </summary>
         Outline,
 
-        /// <summary> 浮雕 </summary>
+        /// <summary> Emboss (浮雕) </summary>
         Emboss,
-        /// <summary> 拉直 </summary>
+        /// <summary> Straighten (拉直) </summary>
         Straighten
     }       
 }

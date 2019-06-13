@@ -1,48 +1,28 @@
-﻿using Retouch_Photo2.Effects.Controls;
-using Retouch_Photo2.Effects.Items;
+﻿using Retouch_Photo2.Effects.Models;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Effects.Pages
 {
-    public sealed partial class GaussianBlurPage : EffectPage
+    /// <summary>
+    /// <see cref = "GaussianBlurEffect" /> 's Page.
+    /// </summary>
+    public sealed partial class GaussianBlurPage : Page
     {
+        /// <summary> <see cref = "GaussianBlurPage" />'s BlurAmountSlider. </summary>
+        public Slider BlurAmountSlider => this._BlurAmountSlider;
+
+        //@Construct
         public GaussianBlurPage()
         {
             this.InitializeComponent();
-            base.Type = EffectType.GaussianBlur;
-            base.Control = new Control()
-            {
-                Icon = new GaussianBlurControl()
-            };
 
-            this.BlurAmountSlider.ValueChanged += (s, e) =>
+            this._BlurAmountSlider.ValueChanged += (s, e) =>
             {
-                  if (base.EffectManager == null) return;
-
-                  base.EffectManager.GaussianBlurEffectItem.BlurAmount = (float)e.NewValue;
-                  EffectManager.Invalidate?.Invoke();
+                EffectManager.Invalidate((effectManager) =>
+                {
+                    effectManager.GaussianBlur_BlurAmount = (float)e.NewValue;
+                });
             };
-        }
-        
-        //@override
-        public override bool GetIsOn(EffectManager manager) => manager.GaussianBlurEffectItem.IsOn;
-        public override void SetIsOn(EffectManager manager, bool isOn) => manager.GaussianBlurEffectItem.IsOn = isOn;
-                 
-        public override void SetManager(EffectManager manager)
-        {
-            base.EffectManager = manager;
-            this.Invalidate(base.EffectManager.SharpenEffectItem);
         }        
-        public override void Reset()
-        {
-            if (base.EffectManager == null) return;
-
-            SharpenEffectItem item = base.EffectManager.SharpenEffectItem;
-            item.Reset();
-            this.Invalidate(item);
-        }
-        public void Invalidate(SharpenEffectItem item)
-        {
-            this.BlurAmountSlider.Value = item.Amount;
-        }
     }
 }

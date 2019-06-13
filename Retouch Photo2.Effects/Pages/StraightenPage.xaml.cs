@@ -1,48 +1,28 @@
-﻿using Retouch_Photo2.Effects.Controls;
-using Retouch_Photo2.Effects.Items;
+﻿using Retouch_Photo2.Elements;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Effects.Pages
 {
-    public sealed partial class StraightenPage : EffectPage
+    /// <summary>
+    /// <see cref = "StraightenEffect" /> 's Page.
+    /// </summary>
+    public sealed partial class StraightenPage : Page
     {
+        /// <summary> <see cref = "StraightenPage" />'s AnglePicker. </summary>
+        public RadiansPicker AnglePicker => this._AnglePicker;
+
+        //@Construct
         public StraightenPage()
         {
             this.InitializeComponent();
-            base.Type = EffectType.Straighten;
-            base.Control = new Control()
+
+            this._AnglePicker.RadiansChange += (radians) =>
             {
-                Icon = new StraightenControl()
+                EffectManager.Invalidate((effectManager) =>
+                {
+                    effectManager.Straighten_Angle = radians / 4.0f;
+                });
             };
-
-            this.AnglePicker.RadiansChange += (radians) =>
-            {
-                if (base.EffectManager == null) return;
-
-                base.EffectManager.StraightenEffectItem.Angle = radians / 4.0f;
-                EffectManager.Invalidate?.Invoke();
-            };
-        }
-
-        //@override
-        public override bool GetIsOn(EffectManager manager) => manager.StraightenEffectItem.IsOn;
-        public override void SetIsOn(EffectManager manager, bool isOn) => manager.StraightenEffectItem.IsOn = isOn;
-
-        public override void SetManager(EffectManager manager)
-        {
-            base.EffectManager = manager;
-            this.Invalidate(base.EffectManager.StraightenEffectItem);
-        }
-        public override void Reset()
-        {
-            if (base.EffectManager == null) return;
-
-            StraightenEffectItem item = base.EffectManager.StraightenEffectItem;
-            item.Reset();
-            this.Invalidate(item);
-        }
-        public void Invalidate(StraightenEffectItem item)
-        {
-            this.AnglePicker.Radians = item.Angle * 4.0f;
-        }
+        }        
     }
 }

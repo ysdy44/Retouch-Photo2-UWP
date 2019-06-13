@@ -190,6 +190,6 @@ namespace Retouch_Photo2.Library
             this.ControlToVirtualInverseMatrix = Matrix3x2.CreateTranslation(-this.Position) * Matrix3x2.CreateRotation(-this.Radian);
             this.InverseMatrix = this.ControlToVirtualInverseMatrix * this.VirtualToCanvasInverseMatrix;
         }
-
+        
     }
 }

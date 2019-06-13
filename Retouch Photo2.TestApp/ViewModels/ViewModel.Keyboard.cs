@@ -184,6 +184,18 @@ namespace Retouch_Photo2.TestApp.ViewModels
         }
         private bool isFullScreen;
 
+        /// <summary> Sets or Gets the on state of the ruler on the canvas. </summary>
+        public bool IsRuler
+        {
+            get => this.isRuler;
+            set
+            {
+                this.isRuler = value;
+                this.OnPropertyChanged(nameof(this.IsRuler));//Notify 
+            }
+        }
+        private bool isRuler;
+
 
     }
 }

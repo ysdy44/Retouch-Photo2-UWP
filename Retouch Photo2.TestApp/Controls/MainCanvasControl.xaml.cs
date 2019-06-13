@@ -9,6 +9,8 @@ using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Microsoft.Graphics.Canvas.Text;
+using System;
 
 namespace Retouch_Photo2.TestApp.Controls
 {
@@ -30,7 +32,20 @@ namespace Retouch_Photo2.TestApp.Controls
         Vector2 doubleStartPosition;
         float doubleStartScale;
         float doubleStartSpace;
-        
+
+        //IsRuler
+        float ControlWidth => this.ViewModel.CanvasTransformer.ControlWidth;
+        float ControlHeight => this.ViewModel.CanvasTransformer.ControlHeight;
+        float Scale => this.ViewModel.CanvasTransformer.Scale;
+        readonly float RulerSpace = 20;
+        readonly CanvasTextFormat RulerTextFormat = new CanvasTextFormat()
+        {
+            FontSize = 12,
+            HorizontalAlignment = CanvasHorizontalAlignment.Center,
+            VerticalAlignment = CanvasVerticalAlignment.Center
+        };
+
+
         #region DependencyProperty
 
 
@@ -52,7 +67,27 @@ namespace Retouch_Photo2.TestApp.Controls
         }));
 
 
+        /// <summary> Sets or Gets the on state of the ruler on the <see cref = "MainCanvasControl" />. </summary>
+        public bool IsRuler
+        {
+            get { return (bool)GetValue(IsRulerProperty); }
+            set { SetValue(IsRulerProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "MainCanvasControl.IsRuler" /> dependency property. </summary>
+        public static readonly DependencyProperty IsRulerProperty = DependencyProperty.Register(nameof(IsRuler), typeof(bool), typeof(MainCanvasControl), new PropertyMetadata(false, (sender, e) =>
+        {
+            MainCanvasControl con = (MainCanvasControl)sender;
+
+            if (e.NewValue is bool value)
+            {
+                con.CanvasControl.Invalidate();
+            }
+        }));
+
+
+
         #endregion
+
 
         //@Construct
         public MainCanvasControl()
@@ -81,94 +116,145 @@ namespace Retouch_Photo2.TestApp.Controls
             };
             this.CanvasControl.Draw += (sender, args) =>
             {
-                //Render : Blank Image
+                //Blank Image
                 ICanvasImage previousImage = new ColorSourceEffect { Color = Colors.White };
-                Matrix3x2 canvasToVirtualMatrix = this.ViewModel.CanvasTransformer.GetMatrix(MatrixTransformerMode.CanvasToVirtual);
-
-               
-                void aaa() =>
-                  previousImage = Layer.Render(this.ViewModel.CanvasDevice, this.ViewModel.Mezzanine.Layer, previousImage, canvasToVirtualMatrix);
-
-                void bbb(int i) =>
-                    previousImage = Layer.Render(this.ViewModel.CanvasDevice, this.ViewModel.Layers[i], previousImage, canvasToVirtualMatrix);
 
 
-                //Mezzanine 
-                if (this.ViewModel.Mezzanine.Layer != null)
+                //Render & Mezzanine
                 {
-                    if (this.ViewModel.Layers.Count == 0) aaa();
+                    //Render
+                    Matrix3x2 canvasToVirtualMatrix = this.ViewModel.CanvasTransformer.GetMatrix(MatrixTransformerMode.CanvasToVirtual);
+
+                    void aaa() =>
+                      previousImage = Layer.Render(this.ViewModel.CanvasDevice, this.ViewModel.Mezzanine.Layer, previousImage, canvasToVirtualMatrix);
+
+                    void bbb(int i) =>
+                        previousImage = Layer.Render(this.ViewModel.CanvasDevice, this.ViewModel.Layers[i], previousImage, canvasToVirtualMatrix);
+
+
+                    //Mezzanine 
+                    if (this.ViewModel.Mezzanine.Layer != null)
+                    {
+                        if (this.ViewModel.Layers.Count == 0) aaa();
+                        else
+                        {
+                            for (int i = this.ViewModel.Layers.Count - 1; i >= 0; i--)
+                            {
+                                if (this.ViewModel.Mezzanine.Index == i) aaa();
+
+                                bbb(i);
+                            }
+                        }
+                    }
                     else
                     {
                         for (int i = this.ViewModel.Layers.Count - 1; i >= 0; i--)
                         {
-                            if (this.ViewModel.Mezzanine.Index == i) aaa();
-
                             bbb(i);
                         }
                     }
                 }
-                else
+
+
+                //Crop & Final
                 {
-                    for (int i = this.ViewModel.Layers.Count - 1; i >= 0; i--)
+                    //Crop : Get the border from MatrixTransformer
+                    float width = this.ViewModel.CanvasTransformer.Width * this.ViewModel.CanvasScale;
+                    float height = this.ViewModel.CanvasTransformer.Height * this.ViewModel.CanvasScale;
+                    ICanvasImage cropRect = new CropEffect
                     {
-                        bbb(i);
-                    }
+                        Source = previousImage,
+                        SourceRectangle = new Rect(-width / 2, -height / 2, width, height),
+                    };
+
+
+                    //Final : Draw to Canvas
+                    ICanvasImage finalCanvas = new Transform2DEffect
+                    {
+                        Source = cropRect,
+                        TransformMatrix = this.ViewModel.CanvasTransformer.GetMatrix(MatrixTransformerMode.VirtualToControl)
+                    };
+                    ICanvasImage shadow = new ShadowEffect
+                    {
+                        Source = finalCanvas,
+                        ShadowColor = this.ShadowColor,
+                        BlurAmount = 4.0f
+                    };
+                    args.DrawingSession.DrawImage(shadow, 5.0f, 5.0f);
+                    args.DrawingSession.DrawImage(finalCanvas);
                 }
 
 
-                //Crop : Get the border from MatrixTransformer
-                float width = this.ViewModel.CanvasTransformer.Width * this.ViewModel.CanvasScale;
-                float height = this.ViewModel.CanvasTransformer.Height * this.ViewModel.CanvasScale;
-                ICanvasImage cropRect = new CropEffect
+                //Selection & Mezzanine
                 {
-                    Source = previousImage,
-                    SourceRectangle = new Rect(-width / 2, -height / 2, width, height),
-                };
-
-
-                //Final : Draw to Canvas
-                ICanvasImage finalCanvas = new Transform2DEffect
-                {
-                    Source = cropRect,
-                    TransformMatrix = this.ViewModel.CanvasTransformer.GetMatrix(MatrixTransformerMode.VirtualToControl)
-                };
-                ICanvasImage shadow = new ShadowEffect
-                {
-                    Source = finalCanvas,
-                    ShadowColor = this.ShadowColor,
-                    BlurAmount = 4.0f
-                };
-                args.DrawingSession.DrawImage(shadow, 5.0f, 5.0f);
-                args.DrawingSession.DrawImage(finalCanvas);
-
-
-                //Mezzanine 
-                if (this.ViewModel.Mezzanine.Layer == null)
-                {
-                    //Selection
-                    switch (this.ViewModel.SelectionMode)
+                    if (this.ViewModel.Mezzanine.Layer == null)
                     {
-                        case ListViewSelectionMode.None:
-                            break;
-                        case ListViewSelectionMode.Single:
-                        case ListViewSelectionMode.Multiple:
-                            {
-                                Transformer transformer = this.ViewModel.GetSelectionTransformer();
-                                Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                                args.DrawingSession.DrawBoundNodes(transformer, matrix);
-                            }
-                            break;
+                        //Selection
+                        switch (this.ViewModel.SelectionMode)
+                        {
+                            case ListViewSelectionMode.None:
+                                break;
+                            case ListViewSelectionMode.Single:
+                            case ListViewSelectionMode.Multiple:
+                                {
+                                    Transformer transformer = this.ViewModel.GetSelectionTransformer();
+                                    Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+                                    args.DrawingSession.DrawBoundNodes(transformer, matrix);
+                                }
+                                break;
+                        }
                     }
-                }
-                else
-                {                   
-                    Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                    args.DrawingSession.DrawBound(this.ViewModel.Mezzanine.Layer.TransformerMatrix.Destination, matrix); //Mezzanine 
+                    else
+                    {
+                        //Mezzanine 
+                        Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+                        args.DrawingSession.DrawBound(this.ViewModel.Mezzanine.Layer.TransformerMatrix.Destination, matrix);
+                    }
                 }
 
 
                 //Tool
                 this.ViewModel.Tool.Draw(args.DrawingSession);
+
+
+                //IsRuler
+                if (this.IsRuler)
+                {
+                    Vector2 position = this.ViewModel.CanvasTransformer.GetMatrix().Translation;
+
+                    //line
+                    args.DrawingSession.FillRectangle(0, 0, this.ControlWidth, this.RulerSpace, Windows.UI.Color.FromArgb(64, 127, 127, 127));//Horizontal
+                    args.DrawingSession.FillRectangle(0, 0, this.RulerSpace, this.ControlHeight, Windows.UI.Color.FromArgb(64, 127, 127, 127));//Vertical
+                    args.DrawingSession.DrawLine(0, this.RulerSpace, this.ControlWidth, this.RulerSpace, Windows.UI.Colors.Gray);//Horizontal
+                    args.DrawingSession.DrawLine(this.RulerSpace, 0, this.RulerSpace, this.ControlHeight, Windows.UI.Colors.Gray);//Vertical
+
+                    //space
+                    float space = (10 * this.Scale);
+                    while (space < 10) space *= 5;
+                    while (space > 100) space /= 5;
+                    float spaceFive = space * 5;
+
+                    //Horizontal
+                    for (float X = position.X; X < this.ControlWidth; X += space) args.DrawingSession.DrawLine(X, 10, X, this.RulerSpace, Windows.UI.Colors.Gray);
+                    for (float X = position.X; X > this.RulerSpace; X -= space) args.DrawingSession.DrawLine(X, 10, X, this.RulerSpace, Windows.UI.Colors.Gray);
+                    //Vertical
+                    for (float Y = position.Y; Y < this.ControlHeight; Y += space) args.DrawingSession.DrawLine(10, Y, this.RulerSpace, Y, Windows.UI.Colors.Gray);
+                    for (float Y = position.Y; Y > this.RulerSpace; Y -= space) args.DrawingSession.DrawLine(10, Y, this.RulerSpace, Y, Windows.UI.Colors.Gray);
+
+                    //Horizontal
+                    for (float X = position.X; X < this.ControlWidth; X += spaceFive) args.DrawingSession.DrawLine(X, 10, X, this.RulerSpace, Windows.UI.Colors.Gray);
+                    for (float X = position.X; X > this.RulerSpace; X -= spaceFive) args.DrawingSession.DrawLine(X, 10, X, this.RulerSpace, Windows.UI.Colors.Gray);
+                    //Vertical
+                    for (float Y = position.Y; Y < this.ControlHeight; Y += spaceFive) args.DrawingSession.DrawLine(10, Y, this.RulerSpace, Y, Windows.UI.Colors.Gray);
+                    for (float Y = position.Y; Y > this.RulerSpace; Y -= spaceFive) args.DrawingSession.DrawLine(10, Y, this.RulerSpace, Y, Windows.UI.Colors.Gray);
+
+                    //Horizontal
+                    for (float X = position.X; X < this.ControlWidth; X += spaceFive) args.DrawingSession.DrawText(((int)(Math.Round((X - position.X) / this.Scale))).ToString(), X, 10, Windows.UI.Colors.Gray, RulerTextFormat);
+                    for (float X = position.X; X > this.RulerSpace; X -= spaceFive) args.DrawingSession.DrawText(((int)(Math.Round((X - position.X) / this.Scale))).ToString(), X, 10, Windows.UI.Colors.Gray, RulerTextFormat);
+                    //Vertical
+                    for (float Y = position.Y; Y < this.ControlHeight; Y += spaceFive) args.DrawingSession.DrawText(((int)(Math.Round((Y - position.Y) / this.Scale))).ToString(), 10, Y, Windows.UI.Colors.Gray, RulerTextFormat);
+                    for (float Y = position.Y; Y > this.RulerSpace; Y -= spaceFive) args.DrawingSession.DrawText(((int)(Math.Round((Y - position.Y) / this.Scale))).ToString(), 10, Y, Windows.UI.Colors.Gray, RulerTextFormat);
+                }
             };
 
 

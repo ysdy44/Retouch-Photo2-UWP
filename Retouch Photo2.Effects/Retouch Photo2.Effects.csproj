@@ -106,13 +106,13 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Control.xaml.cs">
-      <DependentUpon>Control.xaml</DependentUpon>
+    <Compile Include="Button.xaml.cs">
+      <DependentUpon>Button.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SharpenControl.xaml.cs">
       <DependentUpon>SharpenControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EffectItem.cs" />
+    <Compile Include="Effect.cs" />
     <Compile Include="EffectManager.cs" />
     <Compile Include="Controls\DirectionalBlurControl.xaml.cs">
       <DependentUpon>DirectionalBlurControl.xaml</DependentUpon>
@@ -132,17 +132,16 @@
     <Compile Include="Controls\StraightenControl.xaml.cs">
       <DependentUpon>StraightenControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EffectPage.cs" />
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Items\DirectionalBlurEffectItem.cs" />
-    <Compile Include="Items\EmbossEffectItem.cs" />
-    <Compile Include="Items\GaussianBlurEffectItem.cs" />
-    <Compile Include="Items\OuterShadowEffectItem.cs" />
-    <Compile Include="Items\OutlineEffectItem.cs" />
-    <Compile Include="Items\SharpenEffectItem.cs" />
-    <Compile Include="Items\StraightenEffectItem.cs" />
+    <Compile Include="Models\DirectionalBlurEffect.cs" />
+    <Compile Include="Models\EmbossEffect.cs" />
+    <Compile Include="Models\GaussianBlurEffect.cs" />
+    <Compile Include="Models\OuterShadowEffect.cs" />
+    <Compile Include="Models\OutlineEffect.cs" />
+    <Compile Include="Models\SharpenEffect.cs" />
+    <Compile Include="Models\StraightenEffect.cs" />
     <Compile Include="Pages\DirectionalBlurPage.xaml.cs">
       <DependentUpon>DirectionalBlurPage.xaml</DependentUpon>
     </Compile>
@@ -180,7 +179,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Control.xaml">
+    <Page Include="Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

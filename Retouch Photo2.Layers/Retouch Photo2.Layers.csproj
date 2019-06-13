@@ -165,6 +165,10 @@
       <Project>{8b2218b3-59a4-445f-8765-752c5e700efa}</Project>
       <Name>Retouch Photo2.Blends</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Effects\Retouch Photo2.Effects.csproj">
+      <Project>{c14d4618-e234-4d91-8ced-49cbd9f6f3c7}</Project>
+      <Name>Retouch Photo2.Effects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Library\Retouch Photo2.Library.csproj">
       <Project>{5a773056-cf52-4a57-b004-d3f170cea03b}</Project>
       <Name>Retouch Photo2.Library</Name>
