@@ -45,7 +45,7 @@
             </local:DrawLayout.RightPane>
 
             <local:DrawLayout.CenterContent>
-                <controls:MainCanvasControl ShadowColor="{ThemeResource AppStrokeColor}" IsRuler="{x:Bind ViewModel.IsRuler,Mode=OneWay}"/>
+                <controls:MainCanvasControl AccentColor="{ThemeResource SystemAccentColor}" ShadowColor="{ThemeResource AppStrokeColor}" IsRuler="{x:Bind ViewModel.IsRuler,Mode=OneWay}"/>
             </local:DrawLayout.CenterContent>
 
             <local:DrawLayout.TopLeftPane>
@@ -185,7 +185,7 @@
 
 
         <!--Tip-->
-        <Border IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Top" CornerRadius="4" Margin="60" Width="Auto" MinHeight="24" BorderThickness="1" BorderBrush="#3d9cf7" Background="#b5d4f2"   >
+        <Border IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Top" CornerRadius="4" Margin="60" Width="Auto" MinHeight="24" BorderThickness="1" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}" Background="{ThemeResource SystemControlHighlightAltListAccentLowBrush}"   >
             <TextBlock Text="{x:Bind ViewModel.Text, Mode=OneWay}" Margin="20,0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#0055a4"/>
         </Border>
 

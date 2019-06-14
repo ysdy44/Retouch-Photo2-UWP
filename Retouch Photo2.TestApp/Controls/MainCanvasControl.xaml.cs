@@ -49,6 +49,24 @@ namespace Retouch_Photo2.TestApp.Controls
         #region DependencyProperty
 
 
+        /// <summary> Gets or sets <see cref = "MainCanvasControl" />'s accent color. </summary>
+        public Color AccentColor
+        {
+            get { return (Color)GetValue(AccentColorProperty); }
+            set { SetValue(AccentColorProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "MainCanvasControl.AccentColor" /> dependency property. </summary>
+        public static readonly DependencyProperty AccentColorProperty = DependencyProperty.Register(nameof(AccentColor), typeof(Color), typeof(MainCanvasControl), new PropertyMetadata(Colors.DodgerBlue, (sender, e) =>
+        {
+            MainCanvasControl con = (MainCanvasControl)sender;
+
+            if (e.NewValue is Color value)
+            {
+                con.CanvasControl.Invalidate();
+            }
+        }));
+
+
         /// <summary> Gets or sets <see cref = "MainCanvasControl" />'s shadow color. </summary>
         public Color ShadowColor
         {
@@ -199,7 +217,7 @@ namespace Retouch_Photo2.TestApp.Controls
                                 {
                                     Transformer transformer = this.ViewModel.GetSelectionTransformer();
                                     Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                                    args.DrawingSession.DrawBoundNodes(transformer, matrix);
+                                    args.DrawingSession.DrawBoundNodes(transformer, matrix, this.AccentColor);
                                 }
                                 break;
                         }
@@ -208,7 +226,7 @@ namespace Retouch_Photo2.TestApp.Controls
                     {
                         //Mezzanine 
                         Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                        args.DrawingSession.DrawBound(this.ViewModel.Mezzanine.Layer.TransformerMatrix.Destination, matrix);
+                        args.DrawingSession.DrawBound(this.ViewModel.Mezzanine.Layer.TransformerMatrix.Destination, matrix, this.AccentColor);
                     }
                 }
 
