@@ -2,7 +2,8 @@
 using Retouch_Photo2.Transformers;
 using System.Linq;
 using System.Numerics;
-    
+using Windows.UI.Xaml;
+
 namespace Retouch_Photo2.TestApp.Tools.Models
 {
     /// <summary>
@@ -25,7 +26,7 @@ namespace Retouch_Photo2.TestApp.Tools.Models
 
             Layer selectedLayer = this.ViewModel.Layers.FirstOrDefault((layer) =>
             {
-                if (layer.IsVisual)
+                if (layer.Visibility== Visibility.Visible)
                 {
                     bool layerInQuadrangle = Transformer.InQuadrangle(canvasPoint, layer.TransformerMatrix.Destination);
                     if (layerInQuadrangle)
@@ -40,7 +41,7 @@ namespace Retouch_Photo2.TestApp.Tools.Models
 
 
             //Selection
-            this.ViewModel.SelectionSetValue((layer) =>
+            this.Selection.SetValue((layer) =>
             {
                 layer.IsChecked = false;
             });
@@ -49,7 +50,7 @@ namespace Retouch_Photo2.TestApp.Tools.Models
 
             //Selection
             selectedLayer.IsChecked = true;
-            this.ViewModel.SetSelectionModeSingle(selectedLayer);//Transformer
+            this.Selection.SetModeSingle(selectedLayer);//Transformer
             this.ViewModel.Invalidate();//Invalidate
             return true;
         }
@@ -66,7 +67,7 @@ namespace Retouch_Photo2.TestApp.Tools.Models
 
             Layer selectedLayer = this.ViewModel.Layers.FirstOrDefault((layer) =>
             {
-                if (layer.IsVisual)
+                if (layer.Visibility == Visibility.Visible)
                 {
                     Transformer layerTransformer = layer.TransformerMatrix.Destination;
                     bool layerInQuadrangle = Transformer.InQuadrangle(canvasPoint, layerTransformer);
@@ -80,7 +81,7 @@ namespace Retouch_Photo2.TestApp.Tools.Models
             selectedLayer.IsChecked = isAdd;
 
             this.TransformerMode = TransformerMode.None;//TransformerMode
-            this.ViewModel.SetSelectionMode();//Transformer
+            this.Selection.SetMode(this.ViewModel.Layers);//Transformer
             this.ViewModel.Invalidate();//Invalidate
 
             return true;

@@ -2,7 +2,7 @@
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Layers.Controls;
 using System.Numerics;
-using Windows.Graphics.Effects;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -18,11 +18,30 @@ namespace Retouch_Photo2.Layers.Models
         public ImageLayer()
         {
             base.Name = "Image";
-            base.Icon = new ImageControl();
         }
 
         //@Override
-        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IGraphicsEffectSource previousImage, Matrix3x2 canvasToVirtualMatrix)
+        public override UIElement GetIcon() => new ImageControl();
+        public override Layer Clone(ICanvasResourceCreator resourceCreator)
+        {
+            //@Debug
+            CanvasBitmap bitmap = this.Bitmap;
+
+            return new ImageLayer
+            {
+                Name = this.Name,
+                Opacity = this.Opacity,
+                BlendType = this.BlendType,
+                TransformerMatrix = this.TransformerMatrix,
+
+                IsChecked = this.IsChecked,
+                Visibility = this.Visibility,
+
+                Bitmap = bitmap,
+            };
+        }
+
+        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         {
             return new Transform2DEffect
             {

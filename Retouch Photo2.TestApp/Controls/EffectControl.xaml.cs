@@ -32,6 +32,9 @@ namespace Retouch_Photo2.TestApp.Controls
     {
         //ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
+        SelectionViewModel Selection => Retouch_Photo2.TestApp.App.Selection;
+        KeyboardViewModel Keyboard => Retouch_Photo2.TestApp.App.Keyboard;
+
 
         /// <summary> State of <see cref="EffectControl"/>. </summary>
         public EffectsControlState State
@@ -120,7 +123,7 @@ namespace Retouch_Photo2.TestApp.Controls
             //Effect
             Retouch_Photo2.Effects.EffectManager.InvalidateAction = (Action<EffectManager> action) =>
             {
-                this.ViewModel.SelectionSetValue((layer) =>
+                this.Selection.SetValue((layer) =>
                 {
                     action(layer.EffectManager);
                 });
@@ -139,7 +142,7 @@ namespace Retouch_Photo2.TestApp.Controls
             {
                 if (this.Effect == null) return;
 
-                this.Effect.Reset(this.ViewModel.SelectionIsEffectManager);
+                this.Effect.Reset(this.Selection.EffectManager);
 
                 this.ViewModel.Invalidate();
             };

@@ -14,6 +14,8 @@ namespace Retouch_Photo2.TestApp.Tools.Models
     {
         //ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
+        SelectionViewModel Selection => Retouch_Photo2.TestApp.App.Selection;
+        KeyboardViewModel Keyboard => Retouch_Photo2.TestApp.App.Keyboard;
 
         //Transformer
         Transformer oldTransformer;
@@ -76,7 +78,7 @@ namespace Retouch_Photo2.TestApp.Tools.Models
                 if (isSingleStarted)
                 {
                     this.BoxComplete();//Box
-                    this.ViewModel.SetSelectionMode();//Selection
+                    this.Selection.SetMode(this.ViewModel.Layers);//Selection
                     this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                     return;
                 }

@@ -1,6 +1,18 @@
 ﻿using Retouch_Photo2.Layers;
 using Retouch_Photo2.TestApp.ViewModels;
 using Windows.UI.Xaml.Controls;
+using System.Collections.Generic;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.Foundation;
+using Windows.Foundation.Metadata;
+using Windows.UI.Input;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Automation.Peers;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Media.Media3D;
 
 namespace Retouch_Photo2.TestApp.Controls
 {
@@ -11,6 +23,9 @@ namespace Retouch_Photo2.TestApp.Controls
     {
         //ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
+        SelectionViewModel Selection => Retouch_Photo2.TestApp.App.Selection;
+        KeyboardViewModel Keyboard => Retouch_Photo2.TestApp.App.Keyboard;
+
 
         //@Construct
         public LayersControl()
@@ -21,14 +36,14 @@ namespace Retouch_Photo2.TestApp.Controls
             Layer.ItemClickAction = (itemClickLayer, placementTarget) =>
             {
                 //Selection
-                this.ViewModel.SelectionSetValue((layer) =>
+                this.Selection.SetValue((layer) =>
                 {
                     layer.IsChecked = false;
                 });
                 
                 itemClickLayer.IsChecked = true;
 
-                this.ViewModel.SetSelectionModeSingle(itemClickLayer);//Selection
+                this.Selection.SetModeSingle(itemClickLayer);//Selection
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -38,18 +53,10 @@ namespace Retouch_Photo2.TestApp.Controls
 
             };
 
-            //Layer : ItemVisualChanged
-            Layer.ItemVisualChangedAction = (visualLayer) =>
+            //Layer : ItemVisibilityChangedAction
+            Layer.ItemVisibilityChangedAction = (visualLayer) =>
             {
-                bool isVisual = !visualLayer.IsVisual;
-
-                if (visualLayer.IsChecked == false) visualLayer.IsVisual = isVisual;
-
-                //Selection
-                else this.ViewModel.SelectionSetValue((layer) =>
-                {
-                    layer.IsVisual = isVisual;
-                });
+                visualLayer.Visibility = (visualLayer.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -59,7 +66,7 @@ namespace Retouch_Photo2.TestApp.Controls
             {
                 layer.IsChecked = !layer.IsChecked;
 
-                this.ViewModel.SetSelectionMode();//Selection
+                this.Selection.SetMode(this.ViewModel.Layers);//Selection
                 this.ViewModel.Invalidate();//Invalidate
             };
 

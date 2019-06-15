@@ -1,18 +1,9 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Library;
 using Retouch_Photo2.TestApp.Models;
-using Retouch_Photo2.TestApp.Tools;
-using Retouch_Photo2.TestApp.Tools.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI;
 
 namespace Retouch_Photo2.TestApp.ViewModels
 {
@@ -27,7 +18,9 @@ namespace Retouch_Photo2.TestApp.ViewModels
         HD,
     }
 
-    /// <summary> Retouch_Photo2's the only <see cref = "ViewModel" />. </summary>
+    /// <summary> 
+    /// Retouch_Photo2's the only <see cref = "ViewModel" />.
+    /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
 
@@ -65,8 +58,14 @@ namespace Retouch_Photo2.TestApp.ViewModels
         public ObservableCollection<Layer> Layers { get; } = new ObservableCollection<Layer>();
 
 
+
         //Notify 
+        /// <summary> Multicast event for property change notifications. </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// Notifies listeners that a property value has changed.
+        /// </summary>
+        /// <param name="name"> Name of the property used to notify listeners. </param>
         protected void OnPropertyChanged(string name) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

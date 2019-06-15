@@ -1,21 +1,13 @@
 ﻿using Retouch_Photo2.Layers;
-using System;
 using System.Collections.ObjectModel;
 
 namespace Retouch_Photo2.TestApp.ViewModels
 {
-    /// <summary> Retouch_Photo2's the only <see cref = "ViewModel" />. </summary>
-    public partial class ViewModel
+    /// <summary> 
+    /// Retouch_Photo2's the only <see cref = "ViewModel" />. 
+    /// </summary>
+    public class MezzanineViewModel
     {
-
-        /// <summary> Retouch_Photo2's the only <see cref = "ViewModel.Mezzanine" />s. </summary>
-        public Mezzanine Mezzanine { get; } = new Mezzanine();
-
-    }
-
-    public class Mezzanine
-    {
-
         /// <summary> If the layer is not **null**, insert it between layers. </summary>
         public Layer Layer { get; private set; }
 
@@ -31,16 +23,24 @@ namespace Retouch_Photo2.TestApp.ViewModels
         public void SetLayer(Layer layer, Collection<Layer> layers)
         {
             this.Layer = layer;
-            this.Index = 0;
+            this.Index = this.GetfFrstIndex(layers);
+        }
 
+
+        /// <summary>
+        /// Find the index of the first checked layer from the layers.
+        /// </summary>
+        /// <param name="layers"></param>
+        /// <returns></returns>
+        public int GetfFrstIndex(Collection<Layer> layers)
+        {
             for (int i = 0; i < layers.Count; i++)
             {
-                if (layers[i].IsChecked)
-                {
-                    this.Index = i;
-                }
+                if (layers[i].IsChecked) return i;
             }
+            return 0;
         }
+
 
         /// <summary>
         /// Turn off <see cref="Mezzanine.Layer"/>.

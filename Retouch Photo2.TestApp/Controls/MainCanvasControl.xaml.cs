@@ -21,6 +21,10 @@ namespace Retouch_Photo2.TestApp.Controls
     {
         //ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
+        SelectionViewModel Selection => Retouch_Photo2.TestApp.App.Selection;
+        KeyboardViewModel Keyboard => Retouch_Photo2.TestApp.App.Keyboard;
+        MezzanineViewModel Mezzanine => Retouch_Photo2.TestApp.App.Mezzanine;
+
 
         //Single
         bool isSingleStarted;
@@ -144,21 +148,21 @@ namespace Retouch_Photo2.TestApp.Controls
                     Matrix3x2 canvasToVirtualMatrix = this.ViewModel.CanvasTransformer.GetMatrix(MatrixTransformerMode.CanvasToVirtual);
 
                     void aaa() =>
-                      previousImage = Layer.Render(this.ViewModel.CanvasDevice, this.ViewModel.Mezzanine.Layer, previousImage, canvasToVirtualMatrix);
+                      previousImage = Layer.Render(this.ViewModel.CanvasDevice, this.Mezzanine.Layer, previousImage, canvasToVirtualMatrix);
 
                     void bbb(int i) =>
                         previousImage = Layer.Render(this.ViewModel.CanvasDevice, this.ViewModel.Layers[i], previousImage, canvasToVirtualMatrix);
 
 
                     //Mezzanine 
-                    if (this.ViewModel.Mezzanine.Layer != null)
+                    if (this.Mezzanine.Layer != null)
                     {
                         if (this.ViewModel.Layers.Count == 0) aaa();
                         else
                         {
                             for (int i = this.ViewModel.Layers.Count - 1; i >= 0; i--)
                             {
-                                if (this.ViewModel.Mezzanine.Index == i) aaa();
+                                if (this.Mezzanine.Index == i) aaa();
 
                                 bbb(i);
                             }
@@ -205,17 +209,17 @@ namespace Retouch_Photo2.TestApp.Controls
 
                 //Selection & Mezzanine
                 {
-                    if (this.ViewModel.Mezzanine.Layer == null)
+                    if (this.Mezzanine.Layer == null)
                     {
                         //Selection
-                        switch (this.ViewModel.SelectionMode)
+                        switch (this.Selection.Mode)
                         {
                             case ListViewSelectionMode.None:
                                 break;
                             case ListViewSelectionMode.Single:
                             case ListViewSelectionMode.Multiple:
                                 {
-                                    Transformer transformer = this.ViewModel.GetSelectionTransformer();
+                                    Transformer transformer = this.Selection.GetTransformer();
                                     Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
                                     args.DrawingSession.DrawBoundNodes(transformer, matrix, this.AccentColor);
                                 }
@@ -226,7 +230,7 @@ namespace Retouch_Photo2.TestApp.Controls
                     {
                         //Mezzanine 
                         Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                        args.DrawingSession.DrawBound(this.ViewModel.Mezzanine.Layer.TransformerMatrix.Destination, matrix, this.AccentColor);
+                        args.DrawingSession.DrawBound(this.Mezzanine.Layer.TransformerMatrix.Destination, matrix, this.AccentColor);
                     }
                 }
 

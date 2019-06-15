@@ -15,7 +15,7 @@ namespace Retouch_Photo2.TestApp.Tools.Models
         /// <summary> <see cref = "CursorTool.Starting" />'s method. </summary>
         public bool CursorStarting(Vector2 point)
         {
-            switch (this.ViewModel.SelectionMode)
+            switch (this.Selection.Mode)
             {
                 case ListViewSelectionMode.None:
                     {
@@ -29,12 +29,12 @@ namespace Retouch_Photo2.TestApp.Tools.Models
                 case ListViewSelectionMode.Single:
                 case ListViewSelectionMode.Multiple:
                     {
-                        Transformer transformer = this.ViewModel.GetSelectionTransformer();
+                        Transformer transformer = this.Selection.GetTransformer();
                         Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
                         this.TransformerMode = Transformer.ContainsNodeMode(point, transformer, matrix);
 
                         //Add
-                        switch (this.ViewModel.CompositeMode)
+                        switch (this.Keyboard.CompositeMode)
                         {
                             case CompositeMode.New:
                             case CompositeMode.Intersect:
@@ -79,9 +79,9 @@ namespace Retouch_Photo2.TestApp.Tools.Models
         /// <summary> <see cref = "CursorTool.Started" />'s method. </summary>
         public bool CursorStarted(Vector2 startingPoint, bool isSetTransformerMode = true)
         {
-            if (this.ViewModel.SelectionMode == ListViewSelectionMode.None) return false;
+            if (this.Selection.Mode == ListViewSelectionMode.None) return false;
 
-            this.oldTransformer = this.ViewModel.GetSelectionTransformer();
+            this.oldTransformer = this.Selection.GetTransformer();
 
             if (isSetTransformerMode)
             {
@@ -91,7 +91,7 @@ namespace Retouch_Photo2.TestApp.Tools.Models
             }
 
             //Selection
-            this.ViewModel.SelectionSetValue((layer) =>
+            this.Selection.SetValue((layer) =>
             {
                 layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
             });
@@ -103,21 +103,21 @@ namespace Retouch_Photo2.TestApp.Tools.Models
         /// <summary> <see cref = "CursorTool.Delta" />'s method. </summary>
         public bool CursorDelta(Vector2 startingPoint, Vector2 point)
         {
-            if (this.ViewModel.SelectionMode == ListViewSelectionMode.None) return false;
+            if (this.Selection.Mode == ListViewSelectionMode.None) return false;
 
             if (this.TransformerMode == TransformerMode.None) return false;
 
             //Transformer
-            this.ViewModel.SelectionTransformer = Transformer.Controller
+            this.Selection.Transformer = Transformer.Controller
             (
                 this.TransformerMode, startingPoint, point, this.oldTransformer,
                 this.ViewModel.CanvasTransformer.GetInverseMatrix(),
-                this.ViewModel.KeyIsRatio, this.ViewModel.KeyIsCenter, this.ViewModel.KeyIsStepFrequency
+                this.Keyboard.IsRatio, this.Keyboard.IsCenter, this.Keyboard.IsStepFrequency
             );
-            Matrix3x2 matrix = Transformer.FindHomography(this.oldTransformer, this.ViewModel.SelectionTransformer);
+            Matrix3x2 matrix = Transformer.FindHomography(this.oldTransformer, this.Selection.Transformer);
 
             //Selection
-            this.ViewModel.SelectionSetValue((layer) =>
+            this.Selection.SetValue((layer) =>
             {
                 layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
             });
@@ -128,7 +128,7 @@ namespace Retouch_Photo2.TestApp.Tools.Models
         /// <summary> <see cref = "CursorTool.Complete" />'s method. </summary>
         public bool CursorComplete(bool isSingleStarted)
         {
-            switch (this.ViewModel.SelectionMode)
+            switch (this.Selection.Mode)
             {
                 case ListViewSelectionMode.None:
                     {
@@ -139,18 +139,18 @@ namespace Retouch_Photo2.TestApp.Tools.Models
                 case ListViewSelectionMode.Multiple:
                     {
 
-                        switch (this.ViewModel.CompositeMode)
+                        switch (this.Keyboard.CompositeMode)
                         {
                             case CompositeMode.New:
                                 {
                                     if (this.TransformerMode == TransformerMode.None)
                                     {
                                         //Selection
-                                        this.ViewModel.SelectionSetValue((layer) =>
+                                        this.Selection.SetValue((layer) =>
                                         {
                                             layer.IsChecked = false;
                                         });
-                                        this.ViewModel.SetSelectionModeNone();//Selection
+                                        this.Selection.SetModeNone();//Selection
                                         this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
 
                                         return false;

@@ -3,6 +3,7 @@ using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Controls;
 using Retouch_Photo2.Layers.ILayer;
 using System.Numerics;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -15,10 +16,26 @@ namespace Retouch_Photo2.Layers.Models
         public EllipseLayer()
         {
             base.Name = "Ellipse";
-            base.Icon = new EllipseControl();
         }
 
         //@Override
+        public override UIElement GetIcon() => new EllipseControl();
+        public override Layer Clone(ICanvasResourceCreator resourceCreator)
+        {
+            return new EllipseLayer
+            {
+                Name=this.Name,
+                Opacity=this.Opacity,
+                BlendType=this.BlendType,
+                TransformerMatrix=this.TransformerMatrix,
+
+                IsChecked = this.IsChecked,
+                Visibility = this.Visibility,
+
+                FillColor = base.FillColor,
+            };
+        }         
+
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
             /// <summary>

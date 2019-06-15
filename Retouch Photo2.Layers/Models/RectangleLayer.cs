@@ -3,6 +3,7 @@ using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Controls;
 using Retouch_Photo2.Layers.ILayer;
 using System.Numerics;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -15,10 +16,26 @@ namespace Retouch_Photo2.Layers.Models
         public RectangleLayer()
         {
             base.Name = "Rectangle";
-            base.Icon = new RectangleControl();
         }
 
-        //@Override
+        //@Override      
+        public override UIElement GetIcon()=> new RectangleControl();
+        public override Layer Clone(ICanvasResourceCreator resourceCreator)
+        {
+            return new RectangleLayer
+            {
+                Name = this.Name,
+                Opacity = this.Opacity,
+                BlendType = this.BlendType,
+                TransformerMatrix = this.TransformerMatrix,
+
+                IsChecked = this.IsChecked,
+                Visibility = this.Visibility,
+
+                FillColor=base.FillColor,
+            };
+        }
+
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
             //LTRB

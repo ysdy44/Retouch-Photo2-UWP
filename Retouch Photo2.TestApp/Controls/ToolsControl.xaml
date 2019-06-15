@@ -7,14 +7,35 @@
     xmlns:tools="using:Retouch_Photo2.TestApp.Tools"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    Background="{ThemeResource AppBarBorderThemeBrush}"
+    >
 
     <StackPanel>
 
-        <tools:Button x:Name="ViewButton" GroupType="{x:Bind ToolType,Mode=OneWay}"/>
-        <tools:Button x:Name="RectangleButton" GroupType="{x:Bind ToolType,Mode=OneWay}"/>
-        <tools:Button x:Name="EllipseButton" GroupType="{x:Bind ToolType,Mode=OneWay}"/>
-        <tools:Button x:Name="CursorButton" GroupType="{x:Bind ToolType,Mode=OneWay}"/>
+        <tools:Button x:Name="ViewButton" GroupType="{x:Bind ToolType,Mode=OneWay}">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="View" Placement="Right" IsOpen="{x:Bind ViewModel.IsToolTip,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+            </ToolTipService.ToolTip>
+        </tools:Button>
+        
+        <tools:Button x:Name="RectangleButton" GroupType="{x:Bind ToolType,Mode=OneWay}">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="Rectangle" Placement="Right" IsOpen="{x:Bind ViewModel.IsToolTip,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+            </ToolTipService.ToolTip>
+        </tools:Button>
+        
+        <tools:Button x:Name="EllipseButton" GroupType="{x:Bind ToolType,Mode=OneWay}">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="Ellipse" Placement="Right" IsOpen="{x:Bind ViewModel.IsToolTip,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+            </ToolTipService.ToolTip>
+        </tools:Button>
+        
+        <tools:Button x:Name="CursorButton" GroupType="{x:Bind ToolType,Mode=OneWay}">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="Cursor" Placement="Right" IsOpen="{x:Bind ViewModel.IsToolTip,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+            </ToolTipService.ToolTip>
+        </tools:Button>
 
     </StackPanel>
 </UserControl>

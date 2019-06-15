@@ -31,7 +31,7 @@ namespace Retouch_Photo2.TestApp.Tools.Models
                 bool contained = Transformer.Contained(this.boxCanvasRect, layer.TransformerMatrix.Destination);
 
                 //Add
-                switch (this.ViewModel.CompositeMode)
+                switch (this.Keyboard.CompositeMode)
                 {
                     case CompositeMode.New:
                         {

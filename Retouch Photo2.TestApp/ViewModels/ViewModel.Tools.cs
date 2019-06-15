@@ -1,13 +1,5 @@
-﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.TestApp.Controls;
-using Retouch_Photo2.TestApp.Tools;
+﻿using Retouch_Photo2.TestApp.Tools;
 using Retouch_Photo2.TestApp.Tools.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Retouch_Photo2.TestApp.ViewModels
 {
@@ -47,7 +39,6 @@ namespace Retouch_Photo2.TestApp.ViewModels
 
         /// <summary> <see cref="Tool"/>'s CursorTool. </summary>
         public CursorTool CursorTool { get; } = new CursorTool();
-
-        
+                
     }
 }

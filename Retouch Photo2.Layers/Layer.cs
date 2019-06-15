@@ -24,43 +24,30 @@ namespace Retouch_Photo2.Layers
         /// <param name="previousImage"> Previous rendered images. </param>
         /// <param name="canvasToVirtualMatrix"> canvasToVirtualMatrix </param>
         /// <returns> image </returns>
-        public abstract ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IGraphicsEffectSource previousImage, Matrix3x2 canvasToVirtualMatrix);
-
-
-        //@Virtual
+        public abstract ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix);
         /// <summary>
-        /// Sets layer's fill-color.
+        /// Gets layer's icon.
         /// </summary>
-        /// <param name="fillColor"> The destination fill-color. </param>
-        public virtual void SetFillColor(Color fillColor) { }
-        /// <summary>
-        /// Gets layer's fill-color.
-        /// </summary>
-        /// <returns> Return **Null** if layer does not have fill-color. </returns>
-        public virtual Color? GetFillColor() => null;
-        /// <summary>
-        /// Sets layer's stroke-color.
-        /// </summary>
-        /// <param name="fillColor"> The destination stroke-color. </param>
-        public virtual void SetStrokeColor(Color strokeColor) { }
-        /// <summary>
-        /// Gets layer's stroke-color.
-        /// </summary>
-        /// <returns> Return **Null** if layer does not have stroke-color. </returns>
-        public virtual Color? GetStrokeColor() => null;
+        /// <returns> icon </returns>
+        public abstract UIElement GetIcon();
 
+        /// <summary>
+        /// Get layer own copy.
+        /// </summary>
+        /// /// <param name="resourceCreator"> resourceCreator </param>
+        /// <returns></returns>
+        public abstract Layer Clone(ICanvasResourceCreator resourceCreator);
 
+        
         /// <summary> <see cref = "Layer" />'s name. </summary>
         public string Name = "Layer";
         /// <summary> <see cref = "Layer" />'s icon. </summary>
-        public UIElement Icon;
+        public UIElement Icon=>this.GetIcon();
         /// <summary> <see cref = "Layer" />'s opacity. </summary>
         public float Opacity=1.0f;
         /// <summary> <see cref = "Layer" />'s blend type. </summary>
         public BlendType BlendType;
 
-        /// <summary> <see cref = "Layer" />'s TransformerMatrix. </summary>
-        public TransformerMatrix TransformerMatrix;
         /// <summary> <see cref = "Layer" />'s EffectManager. </summary>
         public EffectManager EffectManager = new EffectManager();
 
@@ -76,12 +63,16 @@ namespace Retouch_Photo2.Layers
         /// <returns> image </returns>
         public static ICanvasImage Render(ICanvasResourceCreator resourceCreator, Layer currentLayer, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         {
-            if (currentLayer.IsVisual == false || currentLayer.Opacity == 0) return previousImage;
+            if (currentLayer.Visibility == Visibility.Collapsed ) return previousImage;
+            if (currentLayer.Opacity == 0) return previousImage;
 
+            //GetRender
             ICanvasImage currentImage = currentLayer.GetRender(resourceCreator, previousImage, canvasToVirtualMatrix);
 
+            //Effect
             currentImage = EffectManager.Render(currentLayer.EffectManager, currentImage);
 
+            //Opacity
             if (currentLayer.Opacity < 1.0)
             {
                 currentImage= new OpacityEffect
@@ -91,6 +82,7 @@ namespace Retouch_Photo2.Layers
                 };
             }
 
+            //Blend
             if (currentLayer.BlendType != BlendType.Normal)
             {
                 currentImage = Blend.Render

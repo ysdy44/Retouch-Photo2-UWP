@@ -30,7 +30,7 @@ namespace Retouch_Photo2.Layers.ILayer
 
   
         //@Override
-        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IGraphicsEffectSource previousImage, Matrix3x2 canvasToVirtualMatrix)
+        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         {
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession ds = command.CreateDrawingSession())

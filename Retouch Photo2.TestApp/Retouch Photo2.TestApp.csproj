@@ -202,15 +202,16 @@
     </Compile>
     <Compile Include="Tools\Tool.cs" />
     <Compile Include="Tools\ToolType.cs" />
+    <Compile Include="ViewModels\KeyboardViewModel.Notify.cs" />
+    <Compile Include="ViewModels\MezzanineViewModel.cs" />
+    <Compile Include="ViewModels\SelectionViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
-    <Compile Include="ViewModels\ViewModel.Keyboard.cs" />
-    <Compile Include="ViewModels\ViewModel.Canvas.cs" />
+    <Compile Include="ViewModels\KeyboardViewModel.cs" />
+    <Compile Include="ViewModels\ViewModel.Transformer.cs" />
     <Compile Include="ViewModels\ViewModel.Notify.cs" />
-    <Compile Include="ViewModels\ViewModel.Selection.Notify.cs" />
-    <Compile Include="ViewModels\ViewModel.Selection.SetMode.cs" />
+    <Compile Include="ViewModels\SelectionViewModel.Notify.cs" />
+    <Compile Include="ViewModels\SelectionViewModel.SetMode.cs" />
     <Compile Include="ViewModels\ViewModel.Tools.cs" />
-    <Compile Include="ViewModels\ViewModel.Mezzanine.cs" />
-    <Compile Include="ViewModels\ViewModel.Selection.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

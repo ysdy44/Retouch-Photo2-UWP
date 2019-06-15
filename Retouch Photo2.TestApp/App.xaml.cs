@@ -10,9 +10,19 @@ namespace Retouch_Photo2.TestApp
 {
     sealed partial class App : Application
     {
-        /// <summary> Retouch_Photo2's the only <see cref = "ViewModel" />. </summary>
+        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.ViewModel" />. </summary>
         public static ViewModel ViewModel = new ViewModel();
-        
+
+        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.KeyboardViewModel" />. </summary>
+        public static KeyboardViewModel Keyboard = new KeyboardViewModel();
+
+        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.SelectionViewModel" />. </summary>
+        public static SelectionViewModel Selection = new SelectionViewModel();
+
+        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.MezzanineViewModel" />. </summary>
+        public static MezzanineViewModel Mezzanine = new MezzanineViewModel();
+
+
         public App()
         {
             this.InitializeComponent();

@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using Windows.UI;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.TestApp.ViewModels
@@ -49,6 +48,32 @@ namespace Retouch_Photo2.TestApp.ViewModels
         /// <summary> ColorPicker of <see cref = "ViewModel.StrokeColor" />.  </summary>
         public HSVColorPickers.ColorPicker StrokeColorPicker;
 
+
+
+        /// <summary> Retouch_Photo2's the only <see cref = "ViewModel.IsToolTip" />. </summary>
+        public bool IsToolTip
+        {
+            get => this.isToolTip;
+            set
+            {
+                this.isToolTip = value;
+                this.OnPropertyChanged(nameof(this.IsToolTip));//Notify 
+            }
+        }
+        private bool isToolTip;
+
+
+        /// <summary> Sets or Gets the on state of the ruler on the canvas. </summary>
+        public bool IsRuler
+        {
+            get => this.isRuler;
+            set
+            {
+                this.isRuler = value;
+                this.OnPropertyChanged(nameof(this.IsRuler));//Notify 
+            }
+        }
+        private bool isRuler;
 
 
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModel.Text" />. </summary>

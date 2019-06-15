@@ -91,7 +91,6 @@ namespace Retouch_Photo2.Effects
         //Straighten
         public bool Straighten_IsOn;
         public float Straighten_Angle = 0;
-                     
 
         //@static
         public static ICanvasImage Render(EffectManager  effectManager, ICanvasImage image)

@@ -32,7 +32,7 @@ namespace Retouch_Photo2.TestApp.ViewModels
                 this.OnPropertyChanged(nameof(this.CanvasScale));//Notify 
             }
         }
-
+        
 
     }
 }

@@ -13,6 +13,9 @@ namespace Retouch_Photo2.TestApp.Tools.Models
     {
         //ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
+        SelectionViewModel Selection => Retouch_Photo2.TestApp.App.Selection;
+        KeyboardViewModel Keyboard => Retouch_Photo2.TestApp.App.Keyboard;
+        MezzanineViewModel Mezzanine => Retouch_Photo2.TestApp.App.Mezzanine;
 
         //@Abstract
         /// <summary>
@@ -40,14 +43,14 @@ namespace Retouch_Photo2.TestApp.Tools.Models
             (
                  Vector2.Transform(startingPoint, inverseMatrix),
                  Vector2.Transform(point, inverseMatrix),
-                 this.ViewModel.KeyIsCenter,
-                 this.ViewModel.KeyIsRatio
+                 this.Keyboard.IsCenter,
+                 this.Keyboard.IsRatio
             );
 
             //Mezzanine
-            this.ViewModel.Mezzanine.SetLayer(this.CreateLayer(transformer),this.ViewModel.Layers);
+            this.Mezzanine.SetLayer(this.CreateLayer(transformer),this.ViewModel.Layers);
             
-            this.ViewModel.SelectionTransformer = transformer;//Selection
+            this.Selection.Transformer = transformer;//Selection
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
@@ -61,13 +64,13 @@ namespace Retouch_Photo2.TestApp.Tools.Models
             (
                  Vector2.Transform(startingPoint, inverseMatrix),
                  Vector2.Transform(point, inverseMatrix),
-                 this.ViewModel.KeyIsCenter,
-                 this.ViewModel.KeyIsRatio
+                 this.Keyboard.IsCenter,
+                 this.Keyboard.IsRatio
             );
 
-            this.ViewModel.Mezzanine.Layer.TransformerMatrix.Destination = transformer;//Mezzanine
+            this.Mezzanine.Layer.TransformerMatrix.Destination = transformer;//Mezzanine
 
-            this.ViewModel.SelectionTransformer = transformer;//Selection
+            this.Selection.Transformer = transformer;//Selection
 
             this.ViewModel.Invalidate();//Invalidate
         }
@@ -83,20 +86,20 @@ namespace Retouch_Photo2.TestApp.Tools.Models
                 (
                      Vector2.Transform(startingPoint, inverseMatrix),
                      Vector2.Transform(point, inverseMatrix),
-                     this.ViewModel.KeyIsCenter,
-                     this.ViewModel.KeyIsRatio
+                     this.Keyboard.IsCenter,
+                     this.Keyboard.IsRatio
                 );
 
                 //Selection
-                this.ViewModel.SelectionSetValue((layer) =>
+                this.Selection.SetValue((layer) =>
                 {
                     layer.IsChecked = false;
                 });
-                this.ViewModel.Mezzanine.Insert(this.CreateLayer(transformer), this.ViewModel.Layers); //Mezzanine
+                this.Mezzanine.Insert(this.CreateLayer(transformer), this.ViewModel.Layers); //Mezzanine
             }
-            else this.ViewModel.Mezzanine.None();//Mezzanine
+            else this.Mezzanine.None();//Mezzanine
 
-            this.ViewModel.SetSelectionMode();//Selection
+            this.Selection.SetMode(this.ViewModel.Layers);//Selection
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }

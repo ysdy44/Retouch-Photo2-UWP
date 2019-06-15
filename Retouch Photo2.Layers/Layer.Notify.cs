@@ -23,17 +23,17 @@ namespace Retouch_Photo2.Layers
         }
         private bool isChecked;
 
-        /// <summary> <see cref = "Layer" />'s IsVisual. </summary>
-        public bool IsVisual
+        /// <summary> <see cref = "Layer" />'s visibility. </summary>
+        public Visibility Visibility
         {
-            get => this.isVisual;
+            get => this.visibility;
             set
             {
-                this.isVisual = value;
-                this.OnPropertyChanged(nameof(this.IsVisual));//Notify 
+                this.visibility = value;
+                this.OnPropertyChanged(nameof(this.Visibility));//Notify 
             }
         }
-        private bool isVisual = true;
+        private Visibility visibility;
 
 
         //@Delegate
@@ -49,18 +49,24 @@ namespace Retouch_Photo2.Layers
 
 
         /// <summary> Occurs when the visual changes of an item in a list view. </summary>
-        public static Action<Layer> ItemVisualChangedAction { private get; set; }
+        public static Action<Layer> ItemVisibilityChangedAction { private get; set; }
         /// <summary> Event of <see cref = "DataTemplate" />. </summary>
-        public void IsVisualButton_Tapped(object sender, TappedRoutedEventArgs e) => Layer.ItemVisualChangedAction?.Invoke(this);
-
+        public void VisibilityButton_Tapped(object sender, TappedRoutedEventArgs e) => Layer.ItemVisibilityChangedAction?.Invoke(this);
+        
         /// <summary> Occurs when the value changes of an item in a list view. </summary>
         public static Action<Layer> ItemIsCheckedChangedAction { private get; set; }
         /// <summary> Event of <see cref = "DataTemplate" />. </summary>
         public void CheckBox_Tapped(object sender, TappedRoutedEventArgs e) => Layer.ItemIsCheckedChangedAction?.Invoke(this);
 
 
-        //Notify
+
+        //Notify 
+        /// <summary> Multicast event for property change notifications. </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// Notifies listeners that a property value has changed.
+        /// </summary>
+        /// <param name="name"> Name of the property used to notify listeners. </param>
         protected void OnPropertyChanged(string name) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

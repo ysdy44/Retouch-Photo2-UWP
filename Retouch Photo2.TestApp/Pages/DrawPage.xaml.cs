@@ -15,6 +15,8 @@ namespace Retouch_Photo2.TestApp.Pages
     {
         //ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
+        SelectionViewModel Selection => Retouch_Photo2.TestApp.App.Selection;
+        KeyboardViewModel Keyboard => Retouch_Photo2.TestApp.App.Keyboard;
 
         //@Construct
         public DrawPage()
@@ -37,7 +39,7 @@ namespace Retouch_Photo2.TestApp.Pages
             {
                 //Selection
                 this.ViewModel.FillColor = value;
-                this.ViewModel.SelectionSetValue((layer) =>
+                this.Selection.SetValue((layer) =>
                 {
                     layer.SetFillColor(value);
                 });
@@ -59,7 +61,7 @@ namespace Retouch_Photo2.TestApp.Pages
             {
                 //Selection
                 this.ViewModel.FillColor = value;
-                this.ViewModel.SelectionSetValue((layer) =>
+                this.Selection.SetValue((layer) =>
                 {
                     layer.SetFillColor(value);
                 });
@@ -73,7 +75,7 @@ namespace Retouch_Photo2.TestApp.Pages
             {
                 //Selection
                 this.ViewModel.StrokeColor = value;
-                this.ViewModel.SelectionSetValue((layer) =>
+                this.Selection.SetValue((layer) =>
                 {
                     layer.SetStrokeColor(value);
                 });

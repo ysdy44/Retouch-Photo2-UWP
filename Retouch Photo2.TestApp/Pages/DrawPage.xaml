@@ -34,38 +34,39 @@
 
     <Grid >
 
-        <local:DrawLayout x:Name="DrawLayout" IsFullScreen="{x:Bind ViewModel.IsFullScreen,Mode=OneWay}" Tool="{x:Bind ViewModel.Tool,Mode=OneWay}">
+        <local:DrawLayout x:Name="DrawLayout" IsFullScreen="{x:Bind Keyboard.IsFullScreen,Mode=OneWay}" Tool="{x:Bind ViewModel.Tool,Mode=OneWay}">
 
+            <!--Tool & Layer-->
             <local:DrawLayout.LeftPane>
                 <controls:ToolsControl/>
             </local:DrawLayout.LeftPane>
-
             <local:DrawLayout.RightPane>
                 <controls:LayersControl/>
             </local:DrawLayout.RightPane>
 
+            <!--Canvas & Back-->
             <local:DrawLayout.CenterContent>
-                <controls:MainCanvasControl AccentColor="{ThemeResource SystemAccentColor}" ShadowColor="{ThemeResource AppStrokeColor}" IsRuler="{x:Bind ViewModel.IsRuler,Mode=OneWay}"/>
+                <controls:MainCanvasControl AccentColor="{ThemeResource SystemAccentColor}" ShadowColor="{ThemeResource AppStrokeColor}" IsRuler="{x:Bind Keyboard.IsRuler,Mode=OneWay}"/>
             </local:DrawLayout.CenterContent>
-
             <local:DrawLayout.TopLeftPane>
                 <Button x:Name="BackButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <FontIcon Glyph="&#xE0D5;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
                 </Button>                        
             </local:DrawLayout.TopLeftPane>
 
+            <!--Left & Right-->
             <local:DrawLayout.TopLeftStackBar>
                 <StackPanel Orientation="Horizontal">
                     <Border Style="{StaticResource AppCircleBorderStyle}">
-                        <Button x:Name="SaveButton" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE105;" FontSize="20" Foreground="Gray" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
+                        <Button x:Name="SaveButton" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE105;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
                     </Border>
                     <ContentControl Width="6"/>
                     <Border Style="{StaticResource AppCircleBorderStyle}">
-                        <Button IsEnabled="True" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10E;" FontSize="18" Foreground="Gray" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
+                        <Button IsEnabled="True" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10E;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
                     </Border>
                     <ContentControl Width="6"/>
                     <Border Style="{StaticResource AppCircleBorderStyle}">
-                        <Button IsEnabled="True" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10D;" FontSize="18" Foreground="Gray" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
+                        <Button IsEnabled="True" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10D;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
                     </Border>
                     
                     <AppBarSeparator/>
@@ -75,33 +76,50 @@
                     </Border>
                     <ContentControl Width="6"/>
                     <Border Style="{StaticResource AppCircleBorderStyle}">
-                        <ToggleButton IsChecked="{x:Bind ViewModel.IsRuler,Mode=TwoWay}" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE80A;" FontSize="18" Foreground="Gray" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
+                        <ToggleButton IsChecked="{x:Bind ViewModel.IsRuler,Mode=TwoWay}" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE80A;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
+                    </Border>
+                    <ContentControl Width="6"/>
+                    <Border Style="{StaticResource AppCircleBorderStyle}">
+                        <ToggleButton IsChecked="{x:Bind ViewModel.IsToolTip,Mode=TwoWay}" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE897;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
                     </Border>
                 </StackPanel>
             </local:DrawLayout.TopLeftStackBar>
-
             <local:DrawLayout.TopRightPane>
                 <StackPanel Orientation="Horizontal">
 
                     <!--Debug-->
                     <ToggleButton x:Name="DebugToggleButton" Height="50" Width="60" BorderThickness="0" Background="Transparent" Foreground="{ThemeResource AppText}">
+                        <ToolTipService.ToolTip>
+                            <ToolTip Content="Debug" Placement="Bottom" IsOpen="{x:Bind ViewModel.IsToolTip,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        </ToolTipService.ToolTip>
                         <FontIcon FontSize="24" Glyph="&#x1F41E;" FontFamily="Segoe UI Symbol"/>
                     </ToggleButton>
 
                     <!--Effect-->
                     <ToggleButton x:Name="EffectToggleButton" Width="60" BorderThickness="0" Background="Transparent" Foreground="{ThemeResource AppText}" VerticalAlignment="Stretch">
+                        <ToolTipService.ToolTip>
+                            <ToolTip Content="Effect" Placement="Bottom" IsOpen="{x:Bind ViewModel.IsToolTip,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        </ToolTipService.ToolTip>
                         <effects:Icon/>
                     </ToggleButton>
 
                     <!--Transformer-->
                     <ToggleButton x:Name="TransformerToggleButton" Width="60" BorderThickness="0" Background="Transparent" Foreground="{ThemeResource AppText}" VerticalAlignment="Stretch">
+                        <ToolTipService.ToolTip>
+                            <ToolTip Content="Transformer" Placement="Bottom" IsOpen="{x:Bind ViewModel.IsToolTip,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        </ToolTipService.ToolTip>
                         <transformers:Icon/>
                     </ToggleButton>
 
                     <!--Layer-->
                     <ToggleButton x:Name="LayerToggleButton" Width="60" BorderThickness="0" Background="Transparent" Foreground="{ThemeResource AppText}" VerticalAlignment="Stretch">
+                        <ToolTipService.ToolTip>
+                            <ToolTip Content="Layer" Placement="Bottom" IsOpen="{x:Bind ViewModel.IsToolTip,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        </ToolTipService.ToolTip>
                         <layers:Icon/>
                     </ToggleButton>
+                    
+                    <AppBarSeparator/>
 
                     <!--Color-->
                     <Grid x:Name="ColorButton" Width="60" Background="Transparent">
@@ -140,7 +158,7 @@
             <!--Effect-->
             <elements:MenuLayout x:Name="EffectMenuLayout" Text="Effect" Placement="Bottom">
                 <elements:MenuLayout.ContentChild>
-                    <controls:EffectControl EffectManager="{x:Bind ViewModel.SelectionIsEffectManager,Mode=OneWay}"/>
+                    <controls:EffectControl EffectManager="{x:Bind Selection.EffectManager,Mode=OneWay}"/>
                 </elements:MenuLayout.ContentChild>
                 <elements:MenuLayout.Icon>
                     <effects:Icon/>
@@ -150,7 +168,7 @@
             <!--Transformer-->
             <elements:MenuLayout x:Name="TransformerMenuLayout" Text="Transformer" Placement="Bottom">
                 <elements:MenuLayout.ContentChild>
-                    <controls:TransformerControl Transformer="{x:Bind ViewModel.SelectionTransformer,Mode=OneWay}" Mode="{x:Bind ViewModel.SelectionMode,Mode=OneWay}"/>
+                    <controls:TransformerControl Transformer="{x:Bind Selection.Transformer,Mode=OneWay}" Mode="{x:Bind Selection.Mode,Mode=OneWay}"/>
                 </elements:MenuLayout.ContentChild>
                 <elements:MenuLayout.Icon>
                     <transformers:Icon/>
@@ -185,9 +203,11 @@
 
 
         <!--Tip-->
-        <Border IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Top" CornerRadius="4" Margin="60" Width="Auto" MinHeight="24" BorderThickness="1" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}" Background="{ThemeResource SystemControlHighlightAltListAccentLowBrush}"   >
-            <TextBlock Text="{x:Bind ViewModel.Text, Mode=OneWay}" Margin="20,0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#0055a4"/>
-        </Border>
+        <ContentControl Grid.Row="1" Margin="60" HorizontalAlignment="Center">
+            <ToolTip Style="{StaticResource AppToolTip}">
+                <TextBlock Text="{x:Bind ViewModel.Text, Mode=OneWay}"/>
+            </ToolTip>
+        </ContentControl>
 
     </Grid>
 </Page>

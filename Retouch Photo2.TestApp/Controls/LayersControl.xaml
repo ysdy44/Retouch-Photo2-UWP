@@ -18,12 +18,12 @@
                 Icon="{x:Bind Icon,Mode=OneWay}"
                 Text="{x:Bind Name,Mode=OneWay}"
                 IsChecked="{x:Bind IsChecked,Mode=OneWay}"
-                IsVisual="{x:Bind IsVisual,Mode=OneWay}"
+                Visibility="{x:Bind Visibility,Mode=OneWay}"
                 
                 ItemClick="{x:Bind ItemClick_Tapped}"
                 FlyoutShow="{x:Bind FlyoutShow_Tapped}"
                 
-                IsVisualButtonTapped="{x:Bind IsVisualButton_Tapped}"
+                VisibilityButtonTapped="{x:Bind VisibilityButton_Tapped}"
                 CheckBoxTapped="{x:Bind CheckBox_Tapped}"
                 />
         </DataTemplate>
@@ -104,8 +104,10 @@
 
         <ListView.Header>
             <Border Height="42">
-                <Button x:Name="AddButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <FontIcon Glyph="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                <Button x:Name="AddButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                    <ToolTipService.ToolTip>
+                        <ToolTip Content="Add" Placement="Bottom" IsOpen="{x:Bind ViewModel.IsToolTip,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                    </ToolTipService.ToolTip>
                 </Button>
             </Border>
         </ListView.Header>
