@@ -2,6 +2,7 @@
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.TestApp.ViewModels;
 using Retouch_Photo2.Transformers;
+using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -15,7 +16,7 @@ namespace Retouch_Photo2.TestApp.Controls
         //ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
         SelectionViewModel Selection => Retouch_Photo2.TestApp.App.Selection;
-        KeyboardViewModel Keyboard => Retouch_Photo2.TestApp.App.Keyboard; MezzanineViewModel Mezzanine => Retouch_Photo2.TestApp.App.Mezzanine;
+        MezzanineViewModel Mezzanine => Retouch_Photo2.TestApp.App.Mezzanine;
         
 
         //@Converter
@@ -23,11 +24,86 @@ namespace Retouch_Photo2.TestApp.Controls
         private float ValueToOpacityConverter(double value) => (float)value / 100.0f;
 
         private double VisibilityToOpacityConverter(Visibility visibility) => (visibility == Visibility.Visible) ? 1.0 : 0.4;
+        private bool GroupLayerToBoolConverter(GroupLayer groupLayer) => (groupLayer == null) ? false : true;
 
-        private bool SelectionModeNoneToFalseConverter(ListViewSelectionMode selectionMode) => (selectionMode == ListViewSelectionMode.None) ? false : true;
-        private bool SelectionModeMultipleToTrueConverter(ListViewSelectionMode selectionMode) => (selectionMode == ListViewSelectionMode.Multiple) ? true : false;
 
-        private Visibility SelectionModeSingleToVisibilityConverter(ListViewSelectionMode selectionMode) => (selectionMode == ListViewSelectionMode.Single) ? Visibility.Visible : Visibility.Collapsed;
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets <see cref = "LayerControl" />'s selection mode. </summary>
+        public ListViewSelectionMode Mode
+        {
+            get { return (ListViewSelectionMode)GetValue(ModeProperty); }
+            set { SetValue(ModeProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "LayerControl.Mode" /> dependency property. </summary>
+        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Transformer), typeof(ListViewSelectionMode), typeof(LayerControl), new PropertyMetadata(ListViewSelectionMode.None, (sender, e) =>
+        {
+            LayerControl con = (LayerControl)sender;
+
+            if (e.NewValue is ListViewSelectionMode value)
+            {
+                switch (value)
+                {
+                    case ListViewSelectionMode.None:
+                        {
+                            con.OpacitySlider.IsEnabled = false;
+                            con.BlendControl.IsEnabled = false;
+                            con.VisualButton.IsEnabled = false;
+                            con.DuplicateButton.IsEnabled = false;
+                            con.RemoveButton.IsEnabled = false;
+                        }
+                        break;
+                    case ListViewSelectionMode.Single:
+                    case ListViewSelectionMode.Multiple:
+                        {
+                            con.OpacitySlider.IsEnabled = true;
+                            con.BlendControl.IsEnabled = true;
+                            con.VisualButton.IsEnabled = true;
+                            con.DuplicateButton.IsEnabled = true;
+                            con.RemoveButton.IsEnabled = true;
+                        }
+                        break;
+                }
+
+                switch (value)
+                {
+                    case ListViewSelectionMode.None:
+                    case ListViewSelectionMode.Single:
+                        {
+                            con.GroupButton.IsEnabled = false;
+                        }
+                        break;
+
+                    case ListViewSelectionMode.Multiple:
+                        {
+                            con.GroupButton.IsEnabled = true;
+                        }
+                        break;
+
+                }
+
+                switch (value)
+                {
+                    case ListViewSelectionMode.Single:
+                        {
+                            con.ChildrenTextBlock.Visibility = Visibility.Visible;
+                            con.ChildrenBorder.Visibility = Visibility.Visible;
+                        }
+                        break;
+                    case ListViewSelectionMode.None:
+                    case ListViewSelectionMode.Multiple:
+                        {
+                            con.ChildrenTextBlock.Visibility = Visibility.Collapsed;
+                            con.ChildrenBorder.Visibility = Visibility.Collapsed;
+                        }
+                        break;
+                }
+            }
+        }));
+
+
+        #endregion
 
 
         //@Construct
@@ -63,8 +139,7 @@ namespace Retouch_Photo2.TestApp.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-
-
+            
             //Layer
             this.VisualButton.Tapped += (s, e) =>
             {
@@ -80,7 +155,7 @@ namespace Retouch_Photo2.TestApp.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.CopyButton.Tapped += (s, e) =>
+            this.DuplicateButton.Tapped += (s, e) =>
             {
                 int index = this.Mezzanine.GetfFrstIndex(this.ViewModel.Layers);
 
@@ -131,9 +206,9 @@ namespace Retouch_Photo2.TestApp.Controls
             //Group
             this.GroupButton.Tapped += (s, e) =>
             {
-                if (this.ViewModel.LayerMenuLayoutState== Elements.MenuLayoutState.FlyoutShow)
+                if (this.ViewModel.LayerMenuLayoutState == Elements.MenuLayoutState.FlyoutShow)
                 {
-                this.ViewModel.LayerMenuLayoutState = Elements.MenuLayoutState.FlyoutHide;
+                    this.ViewModel.LayerMenuLayoutState = Elements.MenuLayoutState.FlyoutHide;
                 }
 
 
@@ -166,9 +241,35 @@ namespace Retouch_Photo2.TestApp.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-
             this.UnGroupButton.Tapped += (s, e) =>
             {
+                if (this.Selection.IsGroupLayer == false) return;
+
+                if (this.Selection.Layer is GroupLayer groupLayer)
+                {
+                    //Index
+                    int index = this.Mezzanine.GetfFrstIndex(this.ViewModel.Layers);
+
+                    //Selection
+                    this.Selection.SetValue((layer) =>
+                    {
+                        layer.IsChecked = false;
+                    });
+
+                    //Insert
+                    this.ViewModel.Layers.Remove(groupLayer);
+                    foreach (Layer layer in groupLayer.Children)
+                    {
+                        this.ViewModel.Layers.Insert(index, layer);//Insert
+                    }
+
+                    //SetMode
+                    IEnumerable<Layer> layers = groupLayer.Children;
+                    Transformer transformer = groupLayer.TransformerMatrix.Destination;
+                    this.Selection.SetModeMultiple(layers, transformer);//Selection
+
+                    this.ViewModel.Invalidate();//Invalidate
+                }
             };
         }
 

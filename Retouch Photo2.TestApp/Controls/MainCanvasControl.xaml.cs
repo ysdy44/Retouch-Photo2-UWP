@@ -22,7 +22,6 @@ namespace Retouch_Photo2.TestApp.Controls
         //ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
         SelectionViewModel Selection => Retouch_Photo2.TestApp.App.Selection;
-        KeyboardViewModel Keyboard => Retouch_Photo2.TestApp.App.Keyboard;
         MezzanineViewModel Mezzanine => Retouch_Photo2.TestApp.App.Mezzanine;
 
 

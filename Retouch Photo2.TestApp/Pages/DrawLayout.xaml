@@ -45,10 +45,22 @@
             <Setter Property="Fill" Value="{ThemeResource AppBackground}"/>
         </Style>
 
+        <!--Storyboard-->
+        <Storyboard x:Name="LightStoryboard">
+            <ColorAnimation Storyboard.TargetName="RootGridBackground" Storyboard.TargetProperty="Color" To="#F8F8F8" Duration="0:0:0.2"/>
+        </Storyboard>
+        <!--Storyboard-->
+        <Storyboard x:Name="DarkStoryboard">
+            <ColorAnimation Storyboard.TargetName="RootGridBackground" Storyboard.TargetProperty="Color" To="#191919" Duration="0:0:0.2"/>
+        </Storyboard>
+
     </UserControl.Resources>
 
 
-    <Grid x:Name="RootGrid" Background="{ThemeResource AppForeground}">
+    <Grid x:Name="RootGrid">
+        <Grid.Background>
+            <SolidColorBrush x:Name="RootGridBackground" Color="{ThemeResource AppForegroundColor}"/>
+        </Grid.Background>
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>

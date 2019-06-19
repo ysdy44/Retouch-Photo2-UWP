@@ -142,8 +142,8 @@
     <Compile Include="Controls\ThemeControl.xaml.cs">
       <DependentUpon>ThemeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ToggleControl.xaml.cs">
-      <DependentUpon>ToggleControl.xaml</DependentUpon>
+    <Compile Include="RepeatControl.xaml.cs">
+      <DependentUpon>RepeatControl.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Retouch_Photo.Elements.rd.xml" />
   </ItemGroup>
@@ -200,7 +200,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ToggleControl.xaml">
+    <Page Include="RepeatControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

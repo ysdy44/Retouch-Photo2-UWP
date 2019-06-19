@@ -59,6 +59,23 @@ namespace Retouch_Photo2.TestApp.Pages
         /// <summary> TopLeftStackPanel's Child. </summary>
         public UIElement TopLeftStackBar { get => this.TopLeftStackPanel.Child; set => this.TopLeftStackPanel.Child = value; }
 
+        /// <summary> Backgroud's Color. </summary>
+        public ElementTheme Theme
+        {
+            set
+            {
+                switch (value)
+                {
+                    case ElementTheme.Light:
+                        this.LightStoryboard.Begin();//Storyboard
+                        break;
+                    case ElementTheme.Dark:
+                        this.DarkStoryboard.Begin();//Storyboard
+                        break;
+                }
+            }
+        }
+
 
         #region DependencyProperty
 

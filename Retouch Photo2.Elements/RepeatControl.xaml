@@ -1,0 +1,44 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Elements.RepeatControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" 
+    HorizontalAlignment="Stretch" 
+    VerticalAlignment="Stretch" 
+    d:DesignHeight="50"
+    d:DesignWidth="50">
+
+
+    <UserControl.Resources>
+
+        <!--Storyboard-->
+        <Storyboard x:Name="ShowStoryboard">
+            <ColorAnimation Storyboard.TargetName="FontIconForeground" Storyboard.TargetProperty="Color" To="White" Duration="0:0:0.2" />
+            <ColorAnimation Storyboard.TargetName="RootBorderBackground" Storyboard.TargetProperty="Color" To="{ThemeResource SystemAccentColor}" Duration="0:0:0.2" />
+        </Storyboard>
+
+        <!--Storyboard-->
+        <Storyboard x:Name="HideStoryboard">
+            <ColorAnimation Storyboard.TargetName="FontIconForeground" Storyboard.TargetProperty="Color" To="{ThemeResource AppTextColor}" Duration="0:0:0.2" />
+            <ColorAnimation Storyboard.TargetName="RootBorderBackground" Storyboard.TargetProperty="Color" To="Transparent" Duration="0:0:0.2" />
+        </Storyboard>
+
+    </UserControl.Resources>
+
+
+    <Border x:Name="RootBorder" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+        <Border.Background>
+            <SolidColorBrush x:Name="RootBorderBackground" Color="{ThemeResource AppForegroundColor}"/>
+        </Border.Background>
+        
+        <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" Glyph="&#xE897;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}">
+            <FontIcon.Foreground>
+                <SolidColorBrush x:Name="FontIconForeground" Color="{ThemeResource AppTextColor}"/>
+            </FontIcon.Foreground>
+        </FontIcon>
+        
+    </Border>
+    
+</UserControl>

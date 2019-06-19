@@ -16,12 +16,18 @@ namespace Retouch_Photo2.Elements
     {
 
         //@Content
+        /// <summary> Flyout's Placement. </summary>
         public FlyoutPlacementMode Placement { set => this.Flyout.Placement = value; get => this.Flyout.Placement; }
+
+        /// <summary> TextBlock's Text. </summary>
         public string Text { set => this.MenuLayoutContent.TextBlock.Text = value; get => this.MenuLayoutContent.TextBlock.Text; }
+        /// <summary> Title's Icon. </summary>
         public UIElement Icon { set => this.MenuLayoutContent.IconViewBox.Child = value; get => this.MenuLayoutContent.IconViewBox.Child; }
-        public UIElement ContentChild { set => this.MenuLayoutContent.ContentBorder.Child = value; get => this.MenuLayoutContent.ContentBorder.Child; }
-        
-        MenuLayoutContent MenuLayoutContent = new MenuLayoutContent();
+
+        /// <summary> TitleContentBorders Child. </summary>
+        public UIElement ContentChild { get; set; }
+        /// <summary> Flyout or Root. </summary>
+        public MenuLayoutContent MenuLayoutContent { get; private set; } = new MenuLayoutContent();
 
 
         #region DependencyProperty
@@ -50,91 +56,45 @@ namespace Retouch_Photo2.Elements
 
             if (e.NewValue is MenuLayoutState value)
             {
-
                 switch (value)
                 {
                     case MenuLayoutState.FlyoutHide:
-                    case MenuLayoutState.FlyoutShow:
                         {
+                            con.FlyoutOrRoot = true;
+                            con.HideOrShow = true;
+
                             //Flyout
-                            con.RootBorder.Child = null;
-                            con.FlyoutBorder.Child = con.MenuLayoutContent;
-
-                            con.Visibility = con.MenuLayoutContent.StoryboardRectangle.Visibility = Visibility.Collapsed;
+                            con.Flyout.Hide();
                         }
                         break;
-                    case MenuLayoutState.RootExpanded:
-                    case MenuLayoutState.RootNotExpanded:
-                        {
-                            //Root
-                            con.FlyoutBorder.Child = null;
-                            con.RootBorder.Child = con.MenuLayoutContent;
-
-                            con.Visibility = con.MenuLayoutContent.StoryboardRectangle.Visibility = Visibility.Visible;
-                        }
-                        break;
-                }
-
-
-                switch (value)
-                {
-                    case MenuLayoutState.FlyoutHide:
                     case MenuLayoutState.FlyoutShow:
                         {
-                            con.MenuLayoutContent.StateIcon.Glyph = "\uE1CB";
-                        }
-                        break;
-                    case MenuLayoutState.RootExpanded:
-                        {
-                            con.MenuLayoutContent.StateIcon.Glyph = "\uE141";
-                        }
-                        break;
-                    case MenuLayoutState.RootNotExpanded:
-                        {
-                            con.MenuLayoutContent.StateIcon.Glyph = "\uE196";
-                        }
-                        break;
-                }
+                            con.FlyoutOrRoot = true;
+                            con.HideOrShow = false;
 
-
-                switch (value)
-                {
-                    case MenuLayoutState.FlyoutHide:
-                    case MenuLayoutState.FlyoutShow:
-                    case MenuLayoutState.RootExpanded:
-                        {
-                            con.MenuLayoutContent.CloseButton.Visibility = Visibility.Collapsed;
-                            con.MenuLayoutContent.ContentBorder.Visibility = Visibility.Visible;
-                        }
-                        break;
-                    case MenuLayoutState.RootNotExpanded:
-                        {
-                            con.MenuLayoutContent.CloseButton.Visibility = Visibility.Visible;
-                            con.MenuLayoutContent.ContentBorder.Visibility = Visibility.Collapsed;
-                        }
-                        break;
-                }
-
-
-                switch (value)
-                {
-                    case MenuLayoutState.FlyoutShow:
-                        {
                             //Flyout
                             if (con.PlacementTarget != null) con.Flyout.ShowAt(con.PlacementTarget);
                         }
                         break;
-
-                    case MenuLayoutState.FlyoutHide:
                     case MenuLayoutState.RootExpanded:
+                        {
+                            con.FlyoutOrRoot = false;
+                            con.HideOrShow = false;
+
+                            //Flyout
+                            con.Flyout.Hide();
+                        }
+                        break;
                     case MenuLayoutState.RootNotExpanded:
                         {
+                            con.FlyoutOrRoot = false;
+                            con.HideOrShow = true;
+
                             //Flyout
                             con.Flyout.Hide();
                         }
                         break;
                 }
-
             }
         }));
         
@@ -142,11 +102,71 @@ namespace Retouch_Photo2.Elements
         #endregion
 
 
+        bool FlyoutOrRoot
+        {
+            set
+            {
+                if (value)
+                {
+                    //Flyout or Root
+                    this.RootBorder.Child = null;
+                    this.FlyoutBorder.Child = this.MenuLayoutContent;
+
+                    //Background
+                    this.Visibility = Visibility.Collapsed;
+                    this.MenuLayoutContent.StoryboardRectangle.Visibility = Visibility.Collapsed;
+
+                    //Close
+                    this.MenuLayoutContent.CloseButton.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    //Flyout or Root
+                    this.FlyoutBorder.Child = null;
+                    this.RootBorder.Child = this.MenuLayoutContent;
+
+                    //Background
+                    this.Visibility = Visibility.Visible;
+                    this.MenuLayoutContent.StoryboardRectangle.Visibility = Visibility.Visible;
+
+                    //Close
+                    this.MenuLayoutContent.CloseButton.Visibility = Visibility.Visible;
+                }
+            }
+        }        
+
+        bool HideOrShow
+        {
+            set
+            {
+                if (value)
+                {
+                    //Icon
+                    this.MenuLayoutContent.StateIcon.Glyph = "\uE196";
+
+                    //ContentBorder
+                    this.MenuLayoutContent.ContentBorder.Child = null; 
+                }
+                else
+                {
+                    //Icon
+                    this.MenuLayoutContent.StateIcon.Glyph = "\uE141";
+
+                    //ContentBorder
+                    this.MenuLayoutContent.ContentBorder.Child = this.ContentChild;
+                }
+            }
+        }
+
+
         //Postion: the position of the Root on the canvas.
         private Size ControlSize;
         private Vector2 Postion;
+        /// <summary> Gets Flyout's postion. </summary>
         private Vector2 GetElementVisualPostion(UIElement element) => element.TransformToVisual(Window.Current.Content).TransformPoint(new Point()).ToVector2();
+        /// <summary> Gets Root's postion. </summary>
         private Vector2 GetElementCanvasPostion(UIElement element) => new Vector2((float)Canvas.GetLeft(element), (float)Canvas.GetTop(element));
+        /// <summary> Sets Root's postion. </summary>
         private void SetElementCanvasPostion(UIElement element, Vector2 postion, Size size)
         {
             double X;
@@ -182,6 +202,7 @@ namespace Retouch_Photo2.Elements
             };
 
             //Button
+            this.MenuLayoutContent.CloseButton.Tapped += (s, e) =>  this.State = MenuLayoutState.FlyoutHide;              
             this.MenuLayoutContent.StateButton.Tapped += (s, e) =>
             {
                 if (this.State == MenuLayoutState.RootExpanded) this.State = MenuLayoutState.RootNotExpanded;
@@ -194,15 +215,10 @@ namespace Retouch_Photo2.Elements
                     this.State = MenuLayoutState.RootExpanded;
                 }
             };
-            this.MenuLayoutContent.CloseButton.Tapped += (s, e) =>
-            {
-                if (this.State == MenuLayoutState.RootNotExpanded)
-                    this.State = MenuLayoutState.FlyoutHide;              
-            };
 
             //Postion 
             this.MenuLayoutContent.TitlePanel.ManipulationMode = ManipulationModes.All;
-            this.MenuLayoutContent.TitlePanel.ManipulationStarted += (s, e) => this.Postion = this.GetElementCanvasPostion(this);
+            this.MenuLayoutContent.TitlePanel.ManipulationStarted += (s, e) =>this.Postion = this.GetElementVisualPostion(this);
             this.MenuLayoutContent.TitlePanel.ManipulationDelta += (s, e) =>
             {
                 if (this.State == MenuLayoutState.FlyoutShow) return;

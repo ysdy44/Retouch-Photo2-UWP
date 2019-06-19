@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo2.Blends;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Transformers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -35,7 +36,8 @@ namespace Retouch_Photo2.TestApp.ViewModels
             this.SetBlendType(BlendType.Normal);
             this.Visibility = Visibility.Collapsed;
 
-            this.SetChildren(null);
+            this.IsGroupLayer = false;
+            this.Children = null;
 
             this.EffectManager = null;
         }
@@ -58,7 +60,9 @@ namespace Retouch_Photo2.TestApp.ViewModels
             this.SetBlendType(layer.BlendType);
             this.Visibility = layer.Visibility;
 
-            this.SetChildren(layer);
+            if (layer is GroupLayer) this.IsGroupLayer = true;
+
+            this.Children = layer.Children;
 
             this.EffectManager = layer.EffectManager;
 
@@ -100,14 +104,29 @@ namespace Retouch_Photo2.TestApp.ViewModels
                 }
             }
 
-            this.Transformer = new Transformer(left, top, right, bottom);
+            Transformer transformer = new Transformer(left, top, right, bottom);
+            this.SetModeMultiple(layers, transformer);
+        }
+
+        /// <summary>
+        /// Sets <see cref = "SelectionViewModel.Mode" /> to Multiple.
+        /// </summary>
+        /// <param name="layers"> All selection layers. </param>
+        /// <param name="transformer"> transformer </param>
+        public void SetModeMultiple(IEnumerable<Layer> layers, Transformer transformer)
+        {
+            this.Transformer = transformer;
             this.Layer = null;
             this.Layers = layers;
 
-            this.SetChildren(null);
+            this.IsGroupLayer = false;
+            this.Children = null;
+
+            //this.EffectManager = layer.EffectManager;
 
             this.Mode = ListViewSelectionMode.Multiple;//Transformer           
         }
+
 
 
         /// <summary>

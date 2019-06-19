@@ -20,7 +20,11 @@ namespace Retouch_Photo2.TestApp.Controls
         //@Construct
         public LayersControl()
         {
-            this.InitializeComponent();              
+            this.InitializeComponent();
+            if (this.ViewModel.LayerPlacementTarget == null)
+            {
+                this.ViewModel.LayerPlacementTarget = this;
+            }
 
             this.AddButton.Tapped += (s, e) =>
             {

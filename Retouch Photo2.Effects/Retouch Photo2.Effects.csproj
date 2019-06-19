@@ -132,6 +132,7 @@
     <Compile Include="Controls\StraightenControl.xaml.cs">
       <DependentUpon>StraightenControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EffectsState.cs" />
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>

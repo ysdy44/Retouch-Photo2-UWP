@@ -9,22 +9,6 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.TestApp.Controls
 {
-    /// <summary> State of <see cref="EffectControl"/>. </summary>
-    public enum EffectsControlState
-    {
-        /// <summary> Normal. </summary>
-        None,
-
-        /// <summary> Disable. </summary>
-        Disable,
-
-        /// <summary> Effects display Mode. </summary>
-        Effects,
-
-        /// <summary> Effects edited Mode. </summary>
-        Edit
-    }
-
     /// <summary>
     /// Retouch_Photo2's the only <see cref = "EffectControl" />. 
     /// </summary>
@@ -37,22 +21,22 @@ namespace Retouch_Photo2.TestApp.Controls
 
 
         /// <summary> State of <see cref="EffectControl"/>. </summary>
-        public EffectsControlState State
+        public EffectsState State
         {
             get => this.state;
             set
             {
-                this.ItemsControl.Visibility = (value == EffectsControlState.Edit) ? Visibility.Collapsed : Visibility.Visible;
+                this.ItemsControl.Visibility = (value == EffectsState.Edit) ? Visibility.Collapsed : Visibility.Visible;
 
                 this.BackButton.Visibility =
                 this.ResetButton.Visibility =
                 this.Frame.Visibility =
-                    (value == EffectsControlState.Edit) ? Visibility.Visible : Visibility.Collapsed;
+                    (value == EffectsState.Edit) ? Visibility.Visible : Visibility.Collapsed;
 
                 this.state = value;
             }
         }
-        private EffectsControlState state;
+        private EffectsState state;
 
 
         Effect Effect;
@@ -91,7 +75,7 @@ namespace Retouch_Photo2.TestApp.Controls
                     effect.Button.IsOn = isOn;
                 }
 
-                con.State = EffectsControlState.Effects;//State
+                con.State = EffectsState.Effects;//State
             }
             else
             {
@@ -100,7 +84,7 @@ namespace Retouch_Photo2.TestApp.Controls
                     effect.Button.IsOn = null;
                 }
 
-                con.State = EffectsControlState.Disable;//State
+                con.State = EffectsState.Disable;//State
             }
         }));
 
@@ -111,10 +95,10 @@ namespace Retouch_Photo2.TestApp.Controls
         public EffectControl()
         {
             this.InitializeComponent();
-            this.State = EffectsControlState.Disable;
+            this.State = EffectsState.Disable;
             this.ItemsControl.ItemsSource = from item in this.Effects select item.Button;
 
-            foreach (Effect  effect in this.Effects)
+            foreach (Effect effect in this.Effects)
             {
                 //Binding
                 this.Binding(effect);
@@ -123,11 +107,13 @@ namespace Retouch_Photo2.TestApp.Controls
             //Effect
             Retouch_Photo2.Effects.EffectManager.InvalidateAction = (Action<EffectManager> action) =>
             {
+                //Selection
                 this.Selection.SetValue((layer) =>
                 {
                     action(layer.EffectManager);
                 });
-                this.ViewModel.Invalidate();
+
+                this.ViewModel.Invalidate();//Invalidate
             };
 
 
@@ -136,31 +122,43 @@ namespace Retouch_Photo2.TestApp.Controls
             {
                 this.Effect = null;
                 this.Frame.Child = null;
-                this.State = EffectsControlState.Effects;
+                this.State = EffectsState.Effects;
             };
             this.ResetButton.Tapped += (s, e) =>
             {
                 if (this.Effect == null) return;
+                //Selection
+                this.Selection.SetValue((layer) =>
+                {
+                    EffectManager effectManager = layer.EffectManager;
+                    this.Effect.Reset(effectManager);
+                    this.Effect.SetPageValueByEffectManager(effectManager);
+                });
 
-                this.Effect.Reset(this.Selection.EffectManager);
-
-                this.ViewModel.Invalidate();
+                this.ViewModel.Invalidate();//Invalidate
             };
         }
 
 
+        /// <summary>
+        /// Bind the events of the buttons in each effect.
+        /// </summary>
+        /// <param name="effect"> Effect </param>
         private void Binding(Effect effect)
         {
             //ToggleSwitch
             effect.Button.ToggleSwitch.Toggled += (s, e) =>
             {
                 bool isOn = effect.Button.ToggleSwitch.IsOn;
-                if (isOn == effect.Button.IsOn) return;
+                effect.Button.IsOn = isOn; 
+                
+                //Selection
+                this.Selection.SetValue((layer) =>
+                {
+                    effect.SetIsOn(layer.EffectManager, isOn);
+                });
 
-                effect.Button.IsOn = isOn;
-                effect.SetIsOn(this.EffectManager, isOn);
-
-                this.ViewModel.Invalidate();
+                this.ViewModel.Invalidate();//Invalidate
             };
 
             //RootButton
@@ -169,10 +167,15 @@ namespace Retouch_Photo2.TestApp.Controls
                 this.Effect = effect;
                 this.Frame.Child = effect.Page;
 
-                effect.SetPageValueByEffectManager(this.EffectManager);
+                //Selection
+                this.Selection.SetValue((layer) =>
+                {
+                    effect.SetPageValueByEffectManager(layer.EffectManager);
+                });
 
-                this.State = EffectsControlState.Edit;
+                this.State = EffectsState.Edit;
             };
         }
+
     }
 }

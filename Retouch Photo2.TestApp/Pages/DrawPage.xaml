@@ -34,7 +34,11 @@
 
     <Grid >
 
-        <local:DrawLayout x:Name="DrawLayout" IsFullScreen="{x:Bind Keyboard.IsFullScreen,Mode=OneWay}" Tool="{x:Bind ViewModel.Tool,Mode=OneWay}">
+        <local:DrawLayout x:Name="DrawLayout" 
+                          IsFullScreen="{x:Bind Keyboard.IsFullScreen,Mode=OneWay}" 
+                          Tool="{x:Bind ViewModel.Tool,Mode=OneWay}"
+                          Theme="{x:Bind ThemeControl.Theme,Mode=OneWay}"
+                          >
 
             <!--Tool & Layer-->
             <local:DrawLayout.LeftPane>
@@ -80,7 +84,7 @@
                     </Border>
                     <ContentControl Width="6"/>
                     <Border Style="{StaticResource AppCircleBorderStyle}">
-                        <ToggleButton IsChecked="{x:Bind ViewModel.IsToolTip,Mode=TwoWay}" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE897;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
+                        <elements:RepeatControl IsChecked="{x:Bind ViewModel.IsToolTip,Mode=TwoWay}"/>
                     </Border>
                 </StackPanel>
             </local:DrawLayout.TopLeftStackBar>
@@ -176,7 +180,7 @@
             <!--Layer-->
             <elements:MenuLayout x:Name="LayerMenuLayout" Text="Layer" Placement="Left" State="{x:Bind ViewModel.LayerMenuLayoutState,Mode=TwoWay}" PlacementTarget="{x:Bind ViewModel.LayerPlacementTarget,Mode=OneWay}">
                 <elements:MenuLayout.ContentChild>
-                    <controls:LayerControl/>
+                    <controls:LayerControl Mode="{x:Bind Selection.Mode,Mode=OneWay}"/>
                 </elements:MenuLayout.ContentChild>
                 <elements:MenuLayout.Icon>
                     <layers:Icon/>

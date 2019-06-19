@@ -8,18 +8,16 @@ namespace Retouch_Photo2.Elements
     /// Content of <see cref="MenuLayout"/>..
     /// </summary>
     public sealed partial class MenuLayoutContent : UserControl
-    {
-        
+    {        
         //@Content
         public Button StateButton { set => this._StateButton = value; get => this._StateButton; }
         public Button CloseButton { set => this._CloseButton = value; get => this._CloseButton; }
         public Grid TitlePanel { set => this._TitlePanel = value; get => this._TitlePanel; }
-        public Border ContentBorder { set => this._ContentBorder = value; get => this._ContentBorder; }
         public Viewbox IconViewBox { set => this._IconViewBox = value; get => this._IconViewBox; }
         public TextBlock TextBlock { set => this._TextBlock = value; get => this._TextBlock; }
         public FontIcon StateIcon { set => this._StateIcon = value; get => this._StateIcon; }
         public Rectangle StoryboardRectangle { set => this._StoryboardRectangle = value; get => this._StoryboardRectangle; }
-
+        public Border ContentBorder { set => this._ContentBorder = value; get => this._ContentBorder; }
 
         //@Construct
         public MenuLayoutContent()

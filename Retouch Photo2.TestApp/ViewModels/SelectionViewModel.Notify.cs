@@ -47,33 +47,34 @@ namespace Retouch_Photo2.TestApp.ViewModels
             }
         }
         private Visibility visibility;
-        
+
+
+        /// <summary> <see cref = "SelectionViewModel" />'s group layer. </summary>
+        public bool IsGroupLayer
+        {
+            get => this.isGroupLayer;
+            set
+            {
+                this.isGroupLayer = value;
+                this.OnPropertyChanged(nameof(this.IsGroupLayer));//Notify 
+            }
+        }
+        private bool isGroupLayer;
+
 
         /// <summary> <see cref = "SelectionViewModel" />'s Children. </summary>
-        public ObservableCollection<Layer> Children;
-
-        /// <summary> Sets the <see cref = "SelectionViewModel.Children" />. </summary>
-        public void SetChildren(Layer value)
+        public ObservableCollection<Layer> Children
         {
-            if (value != null)
+            get => this.children;
+            set
             {
-                if (value.Children != null)
-                {
-                    if (value.Children.Count != 0)
-                    {
-                        this.Children = value.Children;
-                        this.OnPropertyChanged(nameof(this.Children));//Notify
-                        return;
-                    }
-                }
+                this.children = value;
+                this.OnPropertyChanged(nameof(this.Children));//Notify 
             }
-
-            this.Children = null;
-            this.OnPropertyChanged(nameof(this.Children));//Notify
         }
+        private ObservableCollection<Layer> children;
 
-        
-
+               
         /// <summary> <see cref = "SelectionViewModel" />'s EffectManager. </summary>
         public EffectManager EffectManager
         {

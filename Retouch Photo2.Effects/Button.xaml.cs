@@ -39,27 +39,28 @@ namespace Retouch_Photo2.Effects
                 if (value)
                 {
                     //True
-                    con._RootButton.IsEnabled = true;
-                    con._ToggleSwitch.IsEnabled = true;
                     con._ToggleSwitch.IsOn = true;
+                    con._ToggleSwitch.IsEnabled = true;
+                    con._RootButton.IsEnabled = true;
                 }
                 else
                 {
                     //False
-                    con._RootButton.IsEnabled = false;
-                    con._ToggleSwitch.IsEnabled = true;
                     con._ToggleSwitch.IsOn = false;
+                    con._ToggleSwitch.IsEnabled = true;
+                    con._RootButton.IsEnabled = false;
                 }
             }
             else
             {
                 //Null
-                con._RootButton.IsEnabled = false;
-                con._ToggleSwitch.IsEnabled = false;
                 con._ToggleSwitch.IsOn = false;
+                con._ToggleSwitch.IsEnabled = false;
+                con._RootButton.IsEnabled = false;
             }
         }));
 
+         
         #endregion
 
         //@Construct
