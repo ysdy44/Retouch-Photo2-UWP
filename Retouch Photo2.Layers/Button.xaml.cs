@@ -88,7 +88,6 @@ namespace Retouch_Photo2.Layers
                 }
             };
             this.RootGrid.RightTapped += (s, e) => this.FlyoutShow?.Invoke(this);//Delegate
-            this.RootGrid.Holding += (s, e) => this.FlyoutShow?.Invoke(this);//Delegate
             this.VisibilityButton.Tapped += (s, e) =>
             {
                 this.VisibilityButtonTapped?.Invoke(s, e);//Delegate

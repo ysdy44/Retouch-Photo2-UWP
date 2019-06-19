@@ -1,64 +1,42 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.Elements
 {
+    /// <summary>
+    /// Controls used to toggle checked states.
+    /// </summary>
     public sealed partial class ToggleControl : UserControl
-    {
+    {        
+        //@Converter
+        private SolidColorBrush FalseToBackgroundConverter(bool isOn) => (isOn == false) ? this.AccentColor : this.UnAccentColor;
+        private SolidColorBrush FalseToForegroundConverter(bool isOn) => (isOn == false) ? this.CheckColor : this.UnCheckColor;
+
+        private SolidColorBrush TrueToBackgroundConverter(bool isOn) => (isOn == true) ? this.AccentColor : this.UnAccentColor;
+        private SolidColorBrush TrueToForegroundConverter(bool isOn) => (isOn == true) ? this.CheckColor : this.UnCheckColor;
+
+        //@Content
+        public object CenterContent { set => this.ContentPresenter.Content = value; get => this.ContentPresenter.Content; }
+               
         #region DependencyProperty
-
-
+        
+        /// <summary> Gets or sets whether the status of the <see cref = "ToggleControl" /> is "on". </summary>
         public bool IsChecked
         {
             get { return (bool)GetValue(IsCheckedProperty); }
             set { SetValue(IsCheckedProperty, value); }
         }
-        public static readonly DependencyProperty IsCheckedProperty = DependencyProperty.Register(nameof(IsChecked), typeof(ToggleControl), typeof(ToggleControl), new PropertyMetadata(false, (sender, e) =>
-        {
-            ToggleControl con = (ToggleControl)sender;
-
-            if (e.NewValue is bool value)
-            {
-                con.Check(value);
-            }
-        }));
-
-
-        public object CenterContent
-        {
-            get { return (object)GetValue(CenterContentProperty); }
-            set { SetValue(CenterContentProperty, value); }
-        }
-        public static readonly DependencyProperty CenterContentProperty = DependencyProperty.Register(nameof(CenterContent), typeof(ToggleControl), typeof(ToggleControl), new PropertyMetadata(false, (sender, e) =>
-        {
-            ToggleControl con = (ToggleControl)sender;
-
-            if (e.NewValue is object value)
-            {
-                con.ContentPresenter.Content = value;
-            }
-        }));
-
+        /// <summary> Identifies the <see cref = "ToggleControl.IsOn" /> dependency property. </summary>
+        public static readonly DependencyProperty IsCheckedProperty = DependencyProperty.Register(nameof(IsChecked), typeof(bool), typeof(ToggleControl), new PropertyMetadata(false));
 
         #endregion
 
-        //Delegate
-        public delegate void CheckedChangedHandler(bool IsChecked);
-        public event CheckedChangedHandler CheckedChanged = null;
-
+        //@Construct
         public ToggleControl()
         {
             this.InitializeComponent();
-            this.ContentPresenter.Tapped += (sender, e) => this.IsChecked = !this.IsChecked;
+            this.RootGrid.Tapped += (s, e) => this.IsChecked = !this.IsChecked;
         }
-
-        private void Check(bool isChecked)
-        {
-            this.ContentPresenter.Background = IsChecked ? this.AccentColor : this.UnAccentColor;
-            this.ContentPresenter.Foreground = IsChecked ? this.CheckColor : this.UnCheckColor;
-
-            this.CheckedChanged?.Invoke(isChecked);
-        }
-
     }
 }

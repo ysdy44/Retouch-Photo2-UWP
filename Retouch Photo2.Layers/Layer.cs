@@ -3,6 +3,7 @@ using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Effects;
 using Retouch_Photo2.Transformers;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Numerics;
 using Windows.Graphics.Effects;
@@ -47,6 +48,12 @@ namespace Retouch_Photo2.Layers
         public float Opacity=1.0f;
         /// <summary> <see cref = "Layer" />'s blend type. </summary>
         public BlendType BlendType;
+
+        /// <summary> <see cref = "Layer" />'s TransformerMatrix. </summary>
+        public TransformerMatrix TransformerMatrix;
+        /// <summary> <see cref = "Layer" />'s children layers. </summary>
+        public ObservableCollection<Layer> Children = new ObservableCollection<Layer>();
+
 
         /// <summary> <see cref = "Layer" />'s EffectManager. </summary>
         public EffectManager EffectManager = new EffectManager();

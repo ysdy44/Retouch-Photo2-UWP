@@ -106,16 +106,23 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CompositeMode.cs" />
-    <Compile Include="CompositeModeControl.xaml.cs">
+    <Compile Include="CompositeModes\CompositeMode.cs" />
+    <Compile Include="CompositeModes\CompositeModeControl.xaml.cs">
       <DependentUpon>CompositeModeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LoadingControl.xaml.cs">
+    <Compile Include="Controls\LoadingControl.xaml.cs">
       <DependentUpon>LoadingControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MenuLayout.xaml.cs">
+    <Compile Include="MenuLayouts\MenuLayout.xaml.cs">
       <DependentUpon>MenuLayout.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MenuLayouts\MenuLayoutButton.xaml.cs">
+      <DependentUpon>MenuLayoutButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MenuLayouts\MenuLayoutContent.xaml.cs">
+      <DependentUpon>MenuLayoutContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MenuLayouts\MenuLayoutState.cs" />
     <Compile Include="OnOffSwitch.xaml.cs">
       <DependentUpon>OnOffSwitch.xaml</DependentUpon>
     </Compile>
@@ -129,10 +136,10 @@
     <Compile Include="RadiansPicker.xaml.cs">
       <DependentUpon>RadiansPicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RadiusAnimaPanel.xaml.cs">
+    <Compile Include="Controls\RadiusAnimaPanel.xaml.cs">
       <DependentUpon>RadiusAnimaPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ThemeControl.xaml.cs">
+    <Compile Include="Controls\ThemeControl.xaml.cs">
       <DependentUpon>ThemeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ToggleControl.xaml.cs">
@@ -149,15 +156,23 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="CompositeModeControl.xaml">
+    <Page Include="CompositeModes\CompositeModeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoadingControl.xaml">
+    <Page Include="Controls\LoadingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MenuLayout.xaml">
+    <Page Include="MenuLayouts\MenuLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuLayouts\MenuLayoutButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuLayouts\MenuLayoutContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -177,11 +192,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="RadiusAnimaPanel.xaml">
+    <Page Include="Controls\RadiusAnimaPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ThemeControl.xaml">
+    <Page Include="Controls\ThemeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

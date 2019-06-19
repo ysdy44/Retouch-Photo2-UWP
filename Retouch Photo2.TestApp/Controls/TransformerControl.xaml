@@ -41,7 +41,7 @@
                 <pickers:NumberPicker x:Name="HPicker" Width="Auto" Height="Auto" Unit="dp"/>
             </Border>
 
-            <elements:ToggleControl x:Name="RatioToggleControl" Grid.Column="1" Grid.Row="1" >
+            <elements:ToggleControl x:Name="RatioToggleControl" Grid.Column="1" Grid.Row="1" IsChecked="{x:Bind IsRatio,Mode=TwoWay}">
                 <elements:ToggleControl.CenterContent>
                     <FontIcon Glyph="&#x1F512;" FontFamily="Segoe UI Symbol" FontSize="18" />
                 </elements:ToggleControl.CenterContent>

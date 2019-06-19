@@ -8,7 +8,7 @@ namespace Retouch_Photo2.Pages.MainPages.AppbarControls
         //delegate
         public event TappedEventHandler Tap;
 
-        //Content
+        //@Content
         public string Glyph { get => this.FontIcon.Glyph; set => this.FontIcon.Glyph = value; }
         public string Text { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
 

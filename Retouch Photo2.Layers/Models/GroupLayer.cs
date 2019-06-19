@@ -12,9 +12,6 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GroupLayer : Layer
     {
-        /// <summary> <see cref = "GroupLayer" />'s children layers. </summary>
-        public ObservableCollection<Layer> Children { get; private set; } = new ObservableCollection<Layer>();
-
         //@Construct
         public GroupLayer()
         {
@@ -23,24 +20,7 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Override
         public override UIElement GetIcon() => new GroupControl();
-        /*
-         
-      public override void CacheTransformerMatrix()
-      {
-            foreach (Layer child in this.Children)
-            {
-                child.CacheTransformerMatrix();
-            }
-        }
-        public override void MultipliesTransformerMatrix(Matrix3x2 matrix)
-        {
-            foreach (Layer child in this.Children)
-            {
-                child.MultipliesTransformerMatrix(matrix);
-            }
-        }
-             */
-
+  
         public override Layer Clone(ICanvasResourceCreator resourceCreator)
         {       
             ObservableCollection<Layer> children  = new ObservableCollection<Layer>();
@@ -56,11 +36,10 @@ namespace Retouch_Photo2.Layers.Models
                 Opacity = this.Opacity,
                 BlendType = this.BlendType,
                 TransformerMatrix = this.TransformerMatrix,
+                Children = children,
 
                 IsChecked=this.IsChecked,
                 Visibility=this.Visibility,
-
-                Children = children
             };
         }
 

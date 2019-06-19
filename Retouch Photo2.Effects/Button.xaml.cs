@@ -30,7 +30,7 @@ namespace Retouch_Photo2.Effects
             set { SetValue(IsOnProperty, value); }
         }
         /// <summary> Identifies the <see cref = "Button.IsOn" /> dependency property. </summary>
-        public static readonly DependencyProperty IsOnProperty = DependencyProperty.Register(nameof(IsOn), typeof(bool?), typeof(Button), new PropertyMetadata(null,(sender,e)=>
+        public static readonly DependencyProperty IsOnProperty = DependencyProperty.Register(nameof(IsOn), typeof(bool?), typeof(Button), new PropertyMetadata(null, (sender, e) =>
         {
             Button con = (Button)sender;
 

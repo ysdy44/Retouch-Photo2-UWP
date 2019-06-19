@@ -23,18 +23,29 @@ namespace Retouch_Photo2.TestApp.Pages
         {
             this.InitializeComponent();
 
-
-            //Debug
-            MenuLayout.LayoutBinging(this.DebugMenuLayout, this.DebugToggleButton);
-            //Effect
-            MenuLayout.LayoutBinging(this.EffectMenuLayout, this.EffectToggleButton);
-            //Transformer
-            MenuLayout.LayoutBinging(this.TransformerMenuLayout, this.TransformerToggleButton);
-            //Layer
-            MenuLayout.LayoutBinging(this.LayerMenuLayout, this.LayerToggleButton);
-            Layer.FlyoutShowAction = (layer, placementTarget) => MenuLayout.ShowFlyoutAt(this.LayerMenuLayout, placementTarget);
+           //Layer
+            Layer.FlyoutShowAction = (layer, placementTarget) =>
+            {
+                switch (this.ViewModel.LayerMenuLayoutState)
+                {
+                    case MenuLayoutState.FlyoutHide:
+                        {
+                            this.LayerMenuLayout.PlacementTarget = placementTarget;
+                            this.ViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutShow;
+                        }
+                        break;
+                    case MenuLayoutState.FlyoutShow:
+                        {
+                            this.ViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutHide;
+                            this.LayerMenuLayout.PlacementTarget = placementTarget;
+                            this.ViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutShow;
+                        }
+                        break;
+                }
+            };
+        
             //Color
-            MenuLayout.TappedBinging(this.ColorMenuLayout, this.ColorButton); 
+            this.ColorButton.Tapped += (s, e) => this.ViewModel.ColorMenuLayoutState = MenuLayoutButton.GetState(this.ViewModel.ColorMenuLayoutState);
             this.ColorPicker.ColorChange += (s, value) =>
             {
                 //Selection

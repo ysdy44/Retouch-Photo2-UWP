@@ -21,7 +21,7 @@
 
     </UserControl.Resources>
 
-    <Border Style="{StaticResource AppCircleBorderStyle}">
+    <Border x:Name="RootGrid" Style="{StaticResource AppCircleBorderStyle}">
         <ContentPresenter x:Name="ContentPresenter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
     </Border>
 

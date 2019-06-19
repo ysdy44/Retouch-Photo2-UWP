@@ -75,7 +75,8 @@ namespace Retouch_Photo2.Elements
         private ElementTheme theme;
 
         private ApplicationViewTitleBar TitleBar = ApplicationView.GetForCurrentView().TitleBar;
-        
+
+        //@Construct
         public ThemeControl()
         {
             this.InitializeComponent();

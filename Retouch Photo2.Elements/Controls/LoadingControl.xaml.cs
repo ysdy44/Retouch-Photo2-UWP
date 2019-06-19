@@ -8,7 +8,10 @@ namespace Retouch_Photo2.Elements
     /// </summary>
     public sealed partial class LoadingControl : UserControl
     {
-
+        //@Content
+        /// <summary> <see cref = "Windows.UI.Xaml.Controls.TextBlock" /> s Text. </summary>
+        public string Text { set => this.TextBlock.Text = value; get => this.TextBlock.Text; }
+        
         #region DependencyProperty
 
         /// <summary>
@@ -33,10 +36,7 @@ namespace Retouch_Photo2.Elements
 
         #endregion
 
-        /// <summary> <see cref = "Windows.UI.Xaml.Controls.TextBlock" /> s Text. </summary>
-        public string Text { set => this.TextBlock.Text = value; get => this.TextBlock.Text; }
-
-
+        //@Construct
         public LoadingControl()
         {
             this.InitializeComponent();

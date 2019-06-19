@@ -27,6 +27,8 @@ namespace Retouch_Photo2.TestApp.Controls
         private bool SelectionModeNoneToFalseConverter(ListViewSelectionMode selectionMode) => (selectionMode == ListViewSelectionMode.None) ? false : true;
         private bool SelectionModeMultipleToTrueConverter(ListViewSelectionMode selectionMode) => (selectionMode == ListViewSelectionMode.Multiple) ? true : false;
 
+        private Visibility SelectionModeSingleToVisibilityConverter(ListViewSelectionMode selectionMode) => (selectionMode == ListViewSelectionMode.Single) ? Visibility.Visible : Visibility.Collapsed;
+
 
         //@Construct
         public LayerControl()

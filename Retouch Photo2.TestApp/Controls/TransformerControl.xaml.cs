@@ -19,7 +19,7 @@ namespace Retouch_Photo2.TestApp.Controls
 
         Transformer oldTransformer;
 
-        bool IsRatio = false;
+
         IndicatorMode IndicatorMode = IndicatorMode.LeftTop;
 
         //RemoteOrIndicator
@@ -38,7 +38,17 @@ namespace Retouch_Photo2.TestApp.Controls
 
 
         #region DependencyProperty
+        
 
+        /// <summary> Gets or sets <see cref = "TransformerControl" />'s IsRatio. </summary>
+        public bool IsRatio
+        {
+            get { return (bool)GetValue(IsRatioProperty); }
+            set { SetValue(IsRatioProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "TransformerControl.IsRatio" /> dependency property. </summary>
+        public static readonly DependencyProperty IsRatioProperty = DependencyProperty.Register(nameof(IsRatio), typeof(bool), typeof(TransformerControl), new PropertyMetadata(false));
+        
 
         /// <summary> Gets or sets <see cref = "TransformerControl" />'s selection mode. </summary>
         public ListViewSelectionMode Mode
@@ -145,7 +155,6 @@ namespace Retouch_Photo2.TestApp.Controls
             this.RemoteOrIndicator = false;
             this.RemoteOrIndicatorButton.Tapped += (s, e) => this.RemoteOrIndicator = !this.RemoteOrIndicator;
 
-            this.RatioToggleControl.CheckedChanged += (isChecked) => this.IsRatio = isChecked;//Ratio
             this.IndicatorControl.ModeChanged += (mode) =>
             {
                 this.IndicatorMode = mode;//IndicatorMode

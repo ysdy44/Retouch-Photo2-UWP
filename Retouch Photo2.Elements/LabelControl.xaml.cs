@@ -5,7 +5,7 @@ namespace Retouch_Photo2.Elements
 {
     public sealed partial class LabelControl : UserControl
     {
-        //Content
+        //@Content
         public object ContentContent { set => this.ContentPresenter.Content = value; get => this.ContentPresenter.Content; }
         private bool isChecked;
         public bool IsChecked

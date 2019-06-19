@@ -1,28 +1,35 @@
 ﻿<UserControl
+    x:Name="UserControl"
     x:Class="Retouch_Photo2.Effects.Button"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    Width="Auto"
     Height="50"
+    BorderThickness="0,1,0,0" 
+    BorderBrush="{ThemeResource AppBorderBrush}"
+    Background="Transparent"
     d:DesignHeight="50"
     d:DesignWidth="200">
 
-    <Grid Height="50" BorderThickness="0,1,0,0" BorderBrush="{ThemeResource AppBorderBrush}">
+    <Grid 
+        Width="{x:Bind UserControl.Width,Mode=OneWay}"
+        Height="{x:Bind UserControl.Height,Mode=OneWay}"
+        BorderThickness="{x:Bind UserControl.BorderThickness,Mode=OneWay}"
+        BorderBrush="{x:Bind UserControl.BorderBrush,Mode=OneWay}"
+        Background="{x:Bind UserControl.Background,Mode=OneWay}"
+        >
      
         <!--Button-->
-        <Button x:Name="_RootButton" 
-                 HorizontalAlignment="Stretch"
-                 HorizontalContentAlignment="Left"
-                 Width="Auto"
-                 Style="{ThemeResource NavigationBackButtonNormalStyle}">
+        <Button x:Name="_RootButton" IsEnabled="False" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Width="Auto" Style="{ThemeResource NavigationBackButtonNormalStyle}">
             <!--Icon-->
         </Button>
 
         <Border Width="50" HorizontalAlignment="Right">
             <!--ToggleSwitch-->
-            <ToggleSwitch x:Name="_ToggleSwitch">
+            <ToggleSwitch x:Name="_ToggleSwitch" IsEnabled="False" IsOn="False">
                 <ToggleSwitch.Clip>
                     <RectangleGeometry Rect="0,0,50,50"/>
                 </ToggleSwitch.Clip>

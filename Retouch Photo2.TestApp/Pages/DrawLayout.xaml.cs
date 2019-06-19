@@ -43,6 +43,7 @@ namespace Retouch_Photo2.TestApp.Pages
     public sealed partial class DrawLayout : UserControl
     {
 
+        //@Content
         /// <summary> RightBorder's Child. </summary>
         public UIElement RightPane { get => this.RightBorder.Child; set => this.RightBorder.Child = value; }
         /// <summary> LeftBorder's Child. </summary>

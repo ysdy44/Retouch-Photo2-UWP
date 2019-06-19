@@ -10,7 +10,7 @@
     d:DesignHeight="50"
     d:DesignWidth="100">
 
-    <Border Height="Auto"     MinHeight="24"  Style="{StaticResource AppRoundedBorderStyle}">
+    <Border Height="Auto" MinHeight="24" Style="{StaticResource AppRoundedBorderStyle}">
         <Grid >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>

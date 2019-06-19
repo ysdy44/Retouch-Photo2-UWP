@@ -46,7 +46,7 @@
 
             <!--Canvas & Back-->
             <local:DrawLayout.CenterContent>
-                <controls:MainCanvasControl AccentColor="{ThemeResource SystemAccentColor}" ShadowColor="{ThemeResource AppStrokeColor}" IsRuler="{x:Bind Keyboard.IsRuler,Mode=OneWay}"/>
+                <controls:MainCanvasControl AccentColor="{ThemeResource SystemAccentColor}" ShadowColor="{ThemeResource AppStrokeColor}" IsRuler="{x:Bind ViewModel.IsRuler,Mode=OneWay}"/>
             </local:DrawLayout.CenterContent>
             <local:DrawLayout.TopLeftPane>
                 <Button x:Name="BackButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -88,37 +88,35 @@
                 <StackPanel Orientation="Horizontal">
 
                     <!--Debug-->
-                    <ToggleButton x:Name="DebugToggleButton" Height="50" Width="60" BorderThickness="0" Background="Transparent" Foreground="{ThemeResource AppText}">
+                    <elements:MenuLayoutButton x:Name="DebugMenuLayoutButton" State="{x:Bind ViewModel.DebugMenuLayoutState,Mode=TwoWay}">
                         <ToolTipService.ToolTip>
                             <ToolTip Content="Debug" Placement="Bottom" IsOpen="{x:Bind ViewModel.IsToolTip,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                         </ToolTipService.ToolTip>
-                        <FontIcon FontSize="24" Glyph="&#x1F41E;" FontFamily="Segoe UI Symbol"/>
-                    </ToggleButton>
+                        <elements:MenuLayoutButton.CenterContent>
+                            <FontIcon FontSize="24" Glyph="&#x1F41E;" FontFamily="Segoe UI Symbol"/>
+                        </elements:MenuLayoutButton.CenterContent>
+                    </elements:MenuLayoutButton>
 
                     <!--Effect-->
-                    <ToggleButton x:Name="EffectToggleButton" Width="60" BorderThickness="0" Background="Transparent" Foreground="{ThemeResource AppText}" VerticalAlignment="Stretch">
+                    <elements:MenuLayoutButton x:Name="EffectMenuLayoutButton" State="{x:Bind ViewModel.EffectMenuLayoutState,Mode=TwoWay}">
                         <ToolTipService.ToolTip>
                             <ToolTip Content="Effect" Placement="Bottom" IsOpen="{x:Bind ViewModel.IsToolTip,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                         </ToolTipService.ToolTip>
-                        <effects:Icon/>
-                    </ToggleButton>
+                        <elements:MenuLayoutButton.CenterContent>
+                            <effects:Icon/>
+                        </elements:MenuLayoutButton.CenterContent>
+                    </elements:MenuLayoutButton>
 
                     <!--Transformer-->
-                    <ToggleButton x:Name="TransformerToggleButton" Width="60" BorderThickness="0" Background="Transparent" Foreground="{ThemeResource AppText}" VerticalAlignment="Stretch">
+                    <elements:MenuLayoutButton x:Name="TransformerMenuLayoutButton" State="{x:Bind ViewModel.TransformerMenuLayoutState,Mode=TwoWay}">
                         <ToolTipService.ToolTip>
                             <ToolTip Content="Transformer" Placement="Bottom" IsOpen="{x:Bind ViewModel.IsToolTip,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                         </ToolTipService.ToolTip>
-                        <transformers:Icon/>
-                    </ToggleButton>
+                        <elements:MenuLayoutButton.CenterContent>
+                            <transformers:Icon/>
+                        </elements:MenuLayoutButton.CenterContent>
+                    </elements:MenuLayoutButton>
 
-                    <!--Layer-->
-                    <ToggleButton x:Name="LayerToggleButton" Width="60" BorderThickness="0" Background="Transparent" Foreground="{ThemeResource AppText}" VerticalAlignment="Stretch">
-                        <ToolTipService.ToolTip>
-                            <ToolTip Content="Layer" Placement="Bottom" IsOpen="{x:Bind ViewModel.IsToolTip,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-                        </ToolTipService.ToolTip>
-                        <layers:Icon/>
-                    </ToggleButton>
-                    
                     <AppBarSeparator/>
 
                     <!--Color-->
@@ -146,7 +144,7 @@
         <Canvas>
 
             <!--Debug-->
-            <elements:MenuLayout x:Name="DebugMenuLayout" Text="Debug" Placement="Left">
+            <elements:MenuLayout Text="Debug" Placement="Bottom" State="{x:Bind ViewModel.DebugMenuLayoutState,Mode=TwoWay}" PlacementTarget="{x:Bind DebugMenuLayoutButton}">
                 <elements:MenuLayout.ContentChild>
                     <controls:DebugControl/>
                 </elements:MenuLayout.ContentChild>
@@ -156,7 +154,7 @@
             </elements:MenuLayout>
 
             <!--Effect-->
-            <elements:MenuLayout x:Name="EffectMenuLayout" Text="Effect" Placement="Bottom">
+            <elements:MenuLayout x:Name="EffectMenuLayout" Text="Effect" Placement="Bottom" State="{x:Bind ViewModel.EffectMenuLayoutState,Mode=TwoWay}" PlacementTarget="{x:Bind EffectMenuLayoutButton}">
                 <elements:MenuLayout.ContentChild>
                     <controls:EffectControl EffectManager="{x:Bind Selection.EffectManager,Mode=OneWay}"/>
                 </elements:MenuLayout.ContentChild>
@@ -166,7 +164,7 @@
             </elements:MenuLayout>
 
             <!--Transformer-->
-            <elements:MenuLayout x:Name="TransformerMenuLayout" Text="Transformer" Placement="Bottom">
+            <elements:MenuLayout x:Name="TransformerMenuLayout" Text="Transformer" Placement="Bottom" State="{x:Bind ViewModel.TransformerMenuLayoutState,Mode=TwoWay}" PlacementTarget="{x:Bind TransformerMenuLayoutButton}">
                 <elements:MenuLayout.ContentChild>
                     <controls:TransformerControl Transformer="{x:Bind Selection.Transformer,Mode=OneWay}" Mode="{x:Bind Selection.Mode,Mode=OneWay}"/>
                 </elements:MenuLayout.ContentChild>
@@ -176,7 +174,7 @@
             </elements:MenuLayout>
 
             <!--Layer-->
-            <elements:MenuLayout x:Name="LayerMenuLayout" Text="Layer" Placement="Left">
+            <elements:MenuLayout x:Name="LayerMenuLayout" Text="Layer" Placement="Left" State="{x:Bind ViewModel.LayerMenuLayoutState,Mode=TwoWay}">
                 <elements:MenuLayout.ContentChild>
                     <controls:LayerControl/>
                 </elements:MenuLayout.ContentChild>
@@ -186,7 +184,7 @@
             </elements:MenuLayout>
 
             <!--Color-->
-            <elements:MenuLayout x:Name="ColorMenuLayout" Text="Color" Placement="Bottom">
+            <elements:MenuLayout x:Name="ColorMenuLayout" Text="Color" Placement="Bottom" State="{x:Bind ViewModel.ColorMenuLayoutState,Mode=TwoWay}" PlacementTarget="{x:Bind ColorButton}">
                 <elements:MenuLayout.Icon>
                     <Ellipse Width="20" Height="20" Fill="Gray" />
                 </elements:MenuLayout.Icon>

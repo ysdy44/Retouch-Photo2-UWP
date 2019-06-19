@@ -76,12 +76,10 @@
         </Border>
 
         
-        <TextBlock Text="Children" Style="{StaticResource AppTextBlock}"                   
-                Visibility="{x:Bind Selection.GroupLayerVisibility,Mode=OneWay}"
-                   />
+        <TextBlock Text="Children" Style="{StaticResource AppTextBlock}"
+                   Visibility="{x:Bind SelectionModeSingleToVisibilityConverter(Selection.Mode),Mode=OneWay}"/>
         <Border Margin="2,0" Height="Auto" Style="{StaticResource AppRoundedBorderStyle}"
-                Visibility="{x:Bind Selection.GroupLayerVisibility,Mode=OneWay}"
-                >
+                   Visibility="{x:Bind SelectionModeSingleToVisibilityConverter(Selection.Mode),Mode=OneWay}">
 
 
             <Border.Resources>
@@ -165,7 +163,7 @@
 
             <ListView x:Name="ListView"
                                
-               ItemsSource="{x:Bind Selection.GroupLayerChildren,Mode=OneWay}"
+               ItemsSource="{x:Bind Selection.Children,Mode=OneWay}"
                ItemTemplate="{StaticResource DataTemplate}"
                                            
                Style="{StaticResource ListViewStyle}"

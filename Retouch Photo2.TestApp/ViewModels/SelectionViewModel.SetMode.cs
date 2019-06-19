@@ -35,7 +35,7 @@ namespace Retouch_Photo2.TestApp.ViewModels
             this.SetBlendType(BlendType.Normal);
             this.Visibility = Visibility.Collapsed;
 
-            this.SetGroupLayer(null);
+            this.SetChildren(null);
 
             this.EffectManager = null;
         }
@@ -58,7 +58,7 @@ namespace Retouch_Photo2.TestApp.ViewModels
             this.SetBlendType(layer.BlendType);
             this.Visibility = layer.Visibility;
 
-            this.SetGroupLayer(layer);
+            this.SetChildren(layer);
 
             this.EffectManager = layer.EffectManager;
 
@@ -104,7 +104,7 @@ namespace Retouch_Photo2.TestApp.ViewModels
             this.Layer = null;
             this.Layers = layers;
 
-            this.SetGroupLayer(null);
+            this.SetChildren(null);
 
             this.Mode = ListViewSelectionMode.Multiple;//Transformer           
         }

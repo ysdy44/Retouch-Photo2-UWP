@@ -90,7 +90,7 @@ namespace Retouch_Photo2.Pages
         }
         private MenuLayoutState state;
 
-        //Content
+        //@Content
         public string Text { set => this.TextBlock.Text = value; get => this.TextBlock.Text; }
         public UIElement Icon { set => this.IconViewBox.Child = value; get => this.IconViewBox.Child; }
         public UIElement ContentChild { set => this.ContentBorder.Child = value; get => this.ContentBorder.Child; }

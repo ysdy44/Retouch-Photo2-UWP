@@ -49,45 +49,27 @@ namespace Retouch_Photo2.TestApp.ViewModels
         private Visibility visibility;
         
 
+        /// <summary> <see cref = "SelectionViewModel" />'s Children. </summary>
+        public ObservableCollection<Layer> Children;
 
-        /// <summary> <see cref = "SelectionViewModel" />'s group-layer. </summary>
-        public GroupLayer GroupLayer;
-        /// <summary> <see cref = "SelectionViewModel.GroupLayer" />'s Children. </summary>
-        public ObservableCollection<Layer> GroupLayerChildren;
-        /// <summary> <see cref = "SelectionViewModel.GroupLayer" />'s Visibility. </summary>
-        public Visibility GroupLayerVisibility = Visibility.Collapsed;
-        /// <summary> Sets the <see cref = "SelectionViewModel.GroupLayer" />. </summary>
-        public void SetGroupLayer(Layer value)
+        /// <summary> Sets the <see cref = "SelectionViewModel.Children" />. </summary>
+        public void SetChildren(Layer value)
         {
             if (value != null)
             {
-                if (value is GroupLayer groupLayer)
+                if (value.Children != null)
                 {
-                    this.GroupLayer = null;
-                    this.OnPropertyChanged(nameof(this.GroupLayer));//Notify 
-
-                    if (groupLayer.Children.Count != 0)
+                    if (value.Children.Count != 0)
                     {
-                        this.GroupLayerChildren = groupLayer.Children;
-                        this.OnPropertyChanged(nameof(this.GroupLayerChildren));//Notify 
-
-                        this.GroupLayerVisibility = Visibility.Visible;
-                        this.OnPropertyChanged(nameof(this.GroupLayerVisibility));//Notify 
+                        this.Children = value.Children;
+                        this.OnPropertyChanged(nameof(this.Children));//Notify
+                        return;
                     }
-
-                    return;
                 }
             }
 
-
-            this.GroupLayer = null;
-            this.OnPropertyChanged(nameof(this.GroupLayer));//Notify 
-
-            this.GroupLayerChildren = null;
-            this.OnPropertyChanged(nameof(this.GroupLayerChildren));//Notify 
-
-            this.GroupLayerVisibility =  Visibility.Collapsed;
-            this.OnPropertyChanged(nameof(this.GroupLayerVisibility));//Notify 
+            this.Children = null;
+            this.OnPropertyChanged(nameof(this.Children));//Notify
         }
 
         
