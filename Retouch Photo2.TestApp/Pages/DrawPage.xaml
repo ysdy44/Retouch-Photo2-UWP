@@ -174,7 +174,7 @@
             </elements:MenuLayout>
 
             <!--Layer-->
-            <elements:MenuLayout x:Name="LayerMenuLayout" Text="Layer" Placement="Left" State="{x:Bind ViewModel.LayerMenuLayoutState,Mode=TwoWay}">
+            <elements:MenuLayout x:Name="LayerMenuLayout" Text="Layer" Placement="Left" State="{x:Bind ViewModel.LayerMenuLayoutState,Mode=TwoWay}" PlacementTarget="{x:Bind ViewModel.LayerPlacementTarget,Mode=OneWay}">
                 <elements:MenuLayout.ContentChild>
                     <controls:LayerControl/>
                 </elements:MenuLayout.ContentChild>

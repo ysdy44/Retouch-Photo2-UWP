@@ -131,6 +131,11 @@ namespace Retouch_Photo2.TestApp.Controls
             //Group
             this.GroupButton.Tapped += (s, e) =>
             {
+                if (this.ViewModel.LayerMenuLayoutState== Elements.MenuLayoutState.FlyoutShow)
+                {
+                this.ViewModel.LayerMenuLayoutState = Elements.MenuLayoutState.FlyoutHide;
+                }
+
 
                 //TransformerMatrix
                 TransformerMatrix transformerMatrix = new TransformerMatrix(this.Selection.Transformer);
@@ -165,6 +170,19 @@ namespace Retouch_Photo2.TestApp.Controls
             this.UnGroupButton.Tapped += (s, e) =>
             {
             };
+        }
+
+        //@DataTemplate
+        /// <summary> DataTemplate's Button Tapped. </summary>
+        private void VisibilityButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            LayersControl.GetButtonDataContext(sender, out Grid rootGrid, out Layer layer);
+
+            layer.Visibility = (layer.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
+
+            this.ViewModel.Invalidate();//Invalidate
+
+            e.Handled = true;
         }
     }
 }

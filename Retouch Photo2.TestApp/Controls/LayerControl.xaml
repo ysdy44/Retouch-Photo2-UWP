@@ -10,6 +10,100 @@
     d:DesignHeight="300"
     d:DesignWidth="200">
 
+
+    <UserControl.Resources>
+
+        <!--DataTemplate-->
+        <DataTemplate x:Key="DataTemplate" x:DataType="layers:Layer">
+            <Grid x:Name="RootGrid" Background="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="36"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Icon-->
+                <Border Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Child="{x:Bind Icon,Mode=OneWay}"/>
+
+                <!--Text-->
+                <TextBlock Grid.Column="2" Margin="2,0" VerticalAlignment="Center" Text="{x:Bind Name,Mode=OneWay}"/>
+                <Rectangle Grid.Column="3" Height="28" Fill="{ThemeResource SystemControlBackgroundBaseLowBrush}" Opacity="0.5"/>
+
+                <!--Visibility-->
+                <Button x:Name="VisibilityButton" Grid.Column="4" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tapped="VisibilityButton_Tapped">
+                    <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}" Opacity="{x:Bind VisibilityToOpacityConverter(Visibility),Mode=OneWay}"/>
+                </Button>
+
+            </Grid>
+        </DataTemplate>
+
+        <!--Style-->
+        <Style x:Key="ListViewStyle" TargetType="ListView">
+
+            <Setter Property="AllowDrop" Value="True"/>
+            <Setter Property="CanDrag" Value="True"/>
+            <Setter Property="CanDragItems" Value="True"/>
+            <Setter Property="CanReorderItems" Value="True"/>
+            <Setter Property="ReorderMode" Value="Enabled"/>
+            <Setter Property="SelectionMode" Value="None"/>
+
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="TabNavigation" Value="Once"/>
+            <Setter Property="IsSwipeEnabled" Value="True"/>
+
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="MinHeight" Value="90"/>
+            <Setter Property="IsSwipeEnabled" Value="True"/>
+            <Setter Property="IsSwipeEnabled" Value="True"/>
+
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+            <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled"/>
+            <Setter Property="ScrollViewer.IsHorizontalRailEnabled" Value="False"/>
+            <Setter Property="ScrollViewer.VerticalScrollMode" Value="Enabled"/>
+            <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="True"/>
+            <Setter Property="ScrollViewer.ZoomMode" Value="Disabled"/>
+
+            <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
+            <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True"/>
+            <Setter Property="ItemContainerTransitions">
+                <Setter.Value>
+                    <TransitionCollection>
+                        <!--            
+                        <ReorderThemeTransition />
+
+                        <AddDeleteThemeTransition />
+                        <ContentThemeTransition />
+                        <EntranceThemeTransition IsStaggeringEnabled="False" />
+                       -->
+                    </TransitionCollection>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView" VerticalAlignment="Bottom"/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--ItemContainerStyle-->
+        <Style x:Key="ItemContainerStyle" TargetType="ListViewItem">
+            <Setter Property="MinWidth" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        </Style>
+
+    </UserControl.Resources>
+
+    
     <StackPanel>
 
         <TextBlock Text="Opacity" Style="{StaticResource AppTextBlock}"/>
@@ -80,89 +174,7 @@
                    Visibility="{x:Bind SelectionModeSingleToVisibilityConverter(Selection.Mode),Mode=OneWay}"/>
         <Border Margin="2,0" Height="Auto" Style="{StaticResource AppRoundedBorderStyle}"
                    Visibility="{x:Bind SelectionModeSingleToVisibilityConverter(Selection.Mode),Mode=OneWay}">
-
-
-            <Border.Resources>
-
-                <!--DataTemplate-->
-                <DataTemplate x:Key="DataTemplate" x:DataType="layers:Layer">
-                    <layers:GroupButton          
-                        
-                Icon="{x:Bind Icon,Mode=OneWay}"
-                Text="{x:Bind Name,Mode=OneWay}"
-                IsChecked="{x:Bind IsChecked,Mode=OneWay}"
-                Visibility="{x:Bind Visibility,Mode=OneWay}"
-                
-                VisibilityButtonTapped="{x:Bind VisibilityButton_Tapped}"
-                />
-                </DataTemplate>
-
-                <!--Style-->
-                <Style x:Key="ListViewStyle" TargetType="ListView">
-
-                    <Setter Property="AllowDrop" Value="True"/>
-                    <Setter Property="CanDrag" Value="True"/>
-                    <Setter Property="CanDragItems" Value="True"/>
-                    <Setter Property="CanReorderItems" Value="True"/>
-                    <Setter Property="ReorderMode" Value="Enabled"/>
-                    <Setter Property="SelectionMode" Value="None"/>
-
-                    <Setter Property="IsTabStop" Value="False"/>
-                    <Setter Property="TabNavigation" Value="Once"/>
-                    <Setter Property="IsSwipeEnabled" Value="True"/>
-
-                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                    <Setter Property="VerticalAlignment" Value="Stretch"/>
-                    <Setter Property="MinHeight" Value="90"/>
-                    <Setter Property="IsSwipeEnabled" Value="True"/>
-                    <Setter Property="IsSwipeEnabled" Value="True"/>
-
-                    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-                    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
-                    <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled"/>
-                    <Setter Property="ScrollViewer.IsHorizontalRailEnabled" Value="False"/>
-                    <Setter Property="ScrollViewer.VerticalScrollMode" Value="Enabled"/>
-                    <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="True"/>
-                    <Setter Property="ScrollViewer.ZoomMode" Value="Disabled"/>
-
-                    <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
-                    <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True"/>
-                    <Setter Property="ItemContainerTransitions">
-                        <Setter.Value>
-                            <TransitionCollection>
-                                <!--            
-                        <ReorderThemeTransition />
-
-                        <AddDeleteThemeTransition />
-                        <ContentThemeTransition />
-                        <EntranceThemeTransition IsStaggeringEnabled="False" />
-                       -->
-                            </TransitionCollection>
-                        </Setter.Value>
-                    </Setter>
-                    <Setter Property="ItemsPanel">
-                        <Setter.Value>
-                            <ItemsPanelTemplate>
-                                <ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView" VerticalAlignment="Bottom"/>
-                            </ItemsPanelTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-                <!--ItemContainerStyle-->
-                <Style x:Key="ItemContainerStyle" TargetType="ListViewItem">
-                    <Setter Property="MinWidth" Value="0"/>
-                    <Setter Property="Padding" Value="0"/>
-                    <Setter Property="Margin" Value="0"/>
-                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                    <Setter Property="VerticalAlignment" Value="Stretch"/>
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                </Style>
-
-            </Border.Resources>
-
-            <ListView x:Name="ListView"
-                               
+            <ListView x:Name="ListView"                               
                ItemsSource="{x:Bind Selection.Children,Mode=OneWay}"
                ItemTemplate="{StaticResource DataTemplate}"
                                            

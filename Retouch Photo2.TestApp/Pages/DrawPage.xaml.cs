@@ -23,27 +23,6 @@ namespace Retouch_Photo2.TestApp.Pages
         {
             this.InitializeComponent();
 
-           //Layer
-            Layer.FlyoutShowAction = (layer, placementTarget) =>
-            {
-                switch (this.ViewModel.LayerMenuLayoutState)
-                {
-                    case MenuLayoutState.FlyoutHide:
-                        {
-                            this.LayerMenuLayout.PlacementTarget = placementTarget;
-                            this.ViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutShow;
-                        }
-                        break;
-                    case MenuLayoutState.FlyoutShow:
-                        {
-                            this.ViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutHide;
-                            this.LayerMenuLayout.PlacementTarget = placementTarget;
-                            this.ViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutShow;
-                        }
-                        break;
-                }
-            };
-        
             //Color
             this.ColorButton.Tapped += (s, e) => this.ViewModel.ColorMenuLayoutState = MenuLayoutButton.GetState(this.ViewModel.ColorMenuLayoutState);
             this.ColorPicker.ColorChange += (s, value) =>

@@ -1,18 +1,9 @@
-﻿using Retouch_Photo2.Layers;
+﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.TestApp.ViewModels;
-using Windows.UI.Xaml.Controls;
-using System.Collections.Generic;
-using Windows.ApplicationModel.DataTransfer;
-using Windows.Foundation;
-using Windows.Foundation.Metadata;
-using Windows.UI.Input;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Automation.Peers;
-using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Media.Media3D;
 
 namespace Retouch_Photo2.TestApp.Controls
 {
@@ -24,59 +15,138 @@ namespace Retouch_Photo2.TestApp.Controls
         //ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
         SelectionViewModel Selection => Retouch_Photo2.TestApp.App.Selection;
-        KeyboardViewModel Keyboard => Retouch_Photo2.TestApp.App.Keyboard;
 
 
         //@Construct
         public LayersControl()
         {
-            this.InitializeComponent();
-
-            //Layer : ItemClick
-            Layer.ItemClickAction = (itemClickLayer, placementTarget) =>
-            {
-                //Selection
-                this.Selection.SetValue((layer) =>
-                {
-                    layer.IsChecked = false;
-                });
-                
-                itemClickLayer.IsChecked = true;
-
-                this.Selection.SetModeSingle(itemClickLayer);//Selection
-                this.ViewModel.Invalidate();//Invalidate
-            };
-
-            //Layer : FlyoutShow
-            Layer.FlyoutShowAction = (layer, placementTarget) =>
-            {
-
-            };
-
-            //Layer : ItemVisibilityChangedAction
-            Layer.ItemVisibilityChangedAction = (visualLayer) =>
-            {
-                visualLayer.Visibility = (visualLayer.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-
-            //Layer : ItemIsCheckedChanged
-            Layer.ItemIsCheckedChangedAction = (layer) =>
-            {
-                layer.IsChecked = !layer.IsChecked;
-
-                this.Selection.SetMode(this.ViewModel.Layers);//Selection
-                this.ViewModel.Invalidate();//Invalidate
-            };
-
+            this.InitializeComponent();              
 
             this.AddButton.Tapped += (s, e) =>
             {
 
             };
-        }
+        } 
+        
 
+        //@DataTemplate
+        /// <summary> DataTemplate's Grid Tapped. </summary>
+        private void RootGrid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            LayersControl.GetGridDataContext(sender, out Grid rootGrid, out Layer layer);
+
+            if (this.Selection.Layer == layer) //FlyoutShow
+            {
+                if (this.ViewModel.LayerMenuLayoutState == MenuLayoutState.FlyoutHide)
+                {
+                    this.ViewModel.LayerPlacementTarget = rootGrid;
+                    this.ViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutShow;
+                }
+                else if (this.ViewModel.LayerMenuLayoutState == MenuLayoutState.FlyoutShow)
+                {
+                    this.ViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutHide;
+                    this.ViewModel.LayerPlacementTarget = rootGrid;
+                    this.ViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutShow;
+                }
+            }
+            else  //ItemClick
+            {             
+                //Selection
+                this.Selection.SetValue((layer2) =>
+                {
+                    layer2.IsChecked = false;
+                });
+
+                layer.IsChecked = true;
+
+                this.Selection.SetModeSingle(layer);//Selection
+                this.ViewModel.Invalidate();//Invalidate
+            }
+        }
+    
+        /// <summary> DataTemplate's Grid RightTapped. </summary>
+        private void RootGrid_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            if (this.ViewModel.LayerMenuLayoutState == MenuLayoutState.FlyoutHide)
+            {
+                this.ViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutShow;
+            }
+        }
+     
+        /// <summary> DataTemplate's Button Tapped. </summary>
+        private void VisibilityButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            LayersControl.GetButtonDataContext(sender, out Grid rootGrid, out Layer layer);
+
+            layer.Visibility = (layer.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
+
+            this.ViewModel.Invalidate();//Invalidate
+
+            e.Handled = true;
+        }
+       
+        /// <summary> DataTemplate's CheckBox Tapped. </summary>
+        private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)
+        { 
+            LayersControl.GetButtonDataContext(sender, out Grid rootGrid, out Layer layer);
+            
+            layer.IsChecked = !layer.IsChecked;
+
+            this.Selection.SetMode(this.ViewModel.Layers);//Selection
+            this.ViewModel.Invalidate();//Invalidate
+
+            e.Handled = true;
+        }
+        
+
+
+        //@Static
+        /// <summary>
+        /// Get the data context of the Grid.
+        /// </summary>
+        /// <param name="senderGrid"> Grid. </param>
+        /// <param name="rootGrid"> DataTemplate. </param>
+        /// <param name="layer"> DataContext. </param>
+        public static void GetGridDataContext(object senderGrid, out Grid rootGrid, out Layer layer)
+        {
+            if (senderGrid is Grid rootGrid2)
+            {
+                if (rootGrid2.DataContext is Layer layer2)
+                {
+                    rootGrid = rootGrid2;
+                    layer = layer2;
+                    return;
+                }
+            }
+
+            rootGrid = null;
+            layer = null;
+        }
+        /// <summary>
+        /// Get the data context of the Grid's Button.
+        /// </summary>
+        /// <param name="senderButton"> Button. </param>
+        /// <param name="rootGrid"> DataTemplate. </param>
+        /// <param name="layer"> DataContext. </param>
+        public static void GetButtonDataContext(object senderButton, out Grid rootGrid, out Layer layer)
+        {
+            if (senderButton is Button button)
+            {
+                if (button.Parent is Grid rootGrid2)
+                {
+                    if (rootGrid2.DataContext is Layer layer2)
+                    {
+                        rootGrid = rootGrid2;
+                        layer = layer2;
+                        return;
+                    }
+                }
+            }
+
+
+            rootGrid = null;
+            layer = null;
+        }
 
     }
 }

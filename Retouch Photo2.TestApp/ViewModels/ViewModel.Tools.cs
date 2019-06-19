@@ -1,6 +1,7 @@
 ﻿using Retouch_Photo2.Elements;
 using Retouch_Photo2.TestApp.Tools;
 using Retouch_Photo2.TestApp.Tools.Models;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.TestApp.ViewModels
 {
@@ -96,6 +97,17 @@ namespace Retouch_Photo2.TestApp.ViewModels
             }
         }
         private MenuLayoutState layerMenuLayoutState;
+        /// <summary> PlacementTarget of LayerMenuLayout. </summary>
+        public FrameworkElement LayerPlacementTarget
+        {
+            get => this.layerPlacementTarget;
+            set
+            {
+                this.layerPlacementTarget = value;
+                this.OnPropertyChanged(nameof(this.LayerPlacementTarget));//Notify 
+            }
+        }
+        private FrameworkElement layerPlacementTarget;
 
         /// <summary> State of ColorMenuLayout. </summary>
         public MenuLayoutState ColorMenuLayoutState
@@ -112,6 +124,7 @@ namespace Retouch_Photo2.TestApp.ViewModels
 
 
 
-        
+
+
     }
 }
