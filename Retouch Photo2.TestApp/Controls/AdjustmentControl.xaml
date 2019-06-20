@@ -1,0 +1,116 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.TestApp.Controls.AdjustmentControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Retouch_Photo2.TestApp.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:adjustments="using:Retouch_Photo2.Adjustments"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    >
+
+    <UserControl.Resources>
+
+        <!--Flyout-->
+        <Flyout x:Name="PageFlyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <ListView x:Name="ListView" Width="190" SelectionMode="None" IsItemClickEnabled="True">
+                <ListView.Header>
+                    <TextBlock Text="Select a adjustment:" Style="{StaticResource AppTextBlock}"/>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="adjustments:AdjustmentPage">
+                        <ContentPresenter Content="{x:Bind Icon}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Flyout>
+
+        <Flyout x:Name="FilterFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <Border MaxWidth="330" MaxHeight="330">
+                <GridView x:Name="GridView" 
+                          ReorderMode="Enabled" CanReorderItems="True"
+                          AllowDrop="True" CanDrag="True" CanDragItems="True"
+                          SelectionMode="None" IsItemClickEnabled="True">
+                    <GridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem">
+                            <Setter Property="Background" Value="{ThemeResource AppForeground}" />
+                            <Setter Property="Width" Value="94" />
+                            <Setter Property="Margin" Value="2" />
+                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Setter Property="VerticalContentAlignment" Value="Center" />
+                            <Setter Property="HorizontalAlignment" Value="Stretch" />
+                            <Setter Property="VerticalAlignment" Value="Stretch" />
+                        </Style>
+                    </GridView.ItemContainerStyle>
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="3"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                    <GridView.Header>
+                        <TextBlock Text="Filter:" Style="{StaticResource AppTextBlock}"/>
+                    </GridView.Header>
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="adjustments:Filter">
+                            <TextBlock Text="{x:Bind Name}"/>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+            </Border>
+        </Flyout>
+
+
+        <!--DataTemplate-->
+        <DataTemplate x:Key="DataTemplate" x:DataType="adjustments:Adjustment">
+            <adjustments:Control 
+                Adjustment="{x:Bind}"                                 
+                Remove="AdjustmentControl_Remove"                                 
+                Edit="AdjustmentControl_Edit"/>
+        </DataTemplate>
+
+    </UserControl.Resources>
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*" MinHeight="165"/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="FilterButton" Grid.Column="0" Style="{ThemeResource NavigationBackButtonNormalStyle}" >
+            <FontIcon Glyph="&#xE169;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+        </Button>
+
+        <Button x:Name="AddButton" Grid.Column="2" Style="{ThemeResource NavigationBackButtonNormalStyle}">
+            <FontIcon Glyph="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+        </Button>
+
+
+        <Border x:Name="Border" Grid.ColumnSpan="3" Grid.Row="1" Height="Auto" VerticalAlignment="Top" Style="{StaticResource AppRoundedBorderStyle}">
+            <ItemsControl x:Name="ItemsControl" ItemTemplate="{StaticResource DataTemplate}"/>
+        </Border>
+        <TextBlock x:Name="TextBlock" Grid.ColumnSpan="3" Grid.Row="1" Text="No Adjustment" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlock}">
+    
+            
+        </TextBlock>
+
+
+        <Button x:Name="BackButton" Grid.Column="0" Content="&#xE0A6;" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
+        <Button x:Name="ResetButton" Grid.Column="2" Content="&#xE149;" Style="{ThemeResource NavigationBackButtonNormalStyle}"/>
+        <Border x:Name="Frame" Grid.ColumnSpan="3" Grid.Row="1" Background="Transparent">
+       
+            
+            <!--Frame-->
+        </Border>
+
+
+    </Grid>
+</UserControl>

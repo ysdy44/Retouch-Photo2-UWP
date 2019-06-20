@@ -1,13 +1,15 @@
 ﻿using Retouch_Photo2.TestApp.Models;
 using Retouch_Photo2.TestApp.Pages.MainPages;
-using Retouch_Photo2.TestApp.ViewModels;
+using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+
 
 namespace Retouch_Photo2.TestApp.Pages
 {
@@ -48,14 +50,12 @@ namespace Retouch_Photo2.TestApp.Pages
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        //ViewModel
+        //@ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
 
         ObservableCollection<Photo> PhotoFileList = new ObservableCollection<Photo>();
 
 
-        //Loading
-        private bool IsLoading { set => this.LoadingControl.IsActive = value; }
 
         //Add
         private async void AddShow() => await this.AddDialog.ShowAsync(ContentDialogPlacement.InPlace);
@@ -65,6 +65,9 @@ namespace Retouch_Photo2.TestApp.Pages
         private void FolderHide() => this.FolderDialog.Hide();
 
 
+
+        //Loading
+        private bool IsLoading { set => this.LoadingControl.IsActive = value; }
         /// <summary> State of <see cref="MainPage"/>. </summary>
         public MainPageState State
         {
@@ -118,6 +121,7 @@ namespace Retouch_Photo2.TestApp.Pages
         private MainPageState state;
 
 
+
         MainControl MainControl = new MainControl();
 
         AddDialog AddDialog = new AddDialog();
@@ -138,6 +142,12 @@ namespace Retouch_Photo2.TestApp.Pages
             this.InitializeComponent();
             this.Loaded += (s, e) =>
             {
+                //Theme
+                this.ViewModel.CanvasTheme = 
+                (App.Current.RequestedTheme == ApplicationTheme.Dark) ? 
+                ElementTheme.Dark : 
+                ElementTheme.Light;
+
                 Project project = new Project(1024,1024);//Project
                 this.Frame.Navigate(typeof(DrawPage), project);//Navigate    
             };

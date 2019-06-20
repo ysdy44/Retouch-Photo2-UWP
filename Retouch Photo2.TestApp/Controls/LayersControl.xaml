@@ -8,7 +8,11 @@
     mc:Ignorable="d"
     d:DesignHeight="800"
     d:DesignWidth="200">
-
+    
+    <ToolTipService.ToolTip>
+        <ToolTip Content="Layers" Placement="Left" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+    </ToolTipService.ToolTip>
+    
     <UserControl.Resources>
 
         <!--DataTemplate-->
@@ -84,13 +88,13 @@
             <Setter Property="ItemContainerTransitions">
                 <Setter.Value>
                     <TransitionCollection>
-                        <!--            
+                       
                         <ReorderThemeTransition />
 
                         <AddDeleteThemeTransition />
                         <ContentThemeTransition />
                         <EntranceThemeTransition IsStaggeringEnabled="False" />
-                       -->
+                          <!--          -->
                     </TransitionCollection>
                 </Setter.Value>
             </Setter>
@@ -129,7 +133,7 @@
             <Border Height="42">
                 <Button x:Name="AddButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Add" Placement="Bottom" IsOpen="{x:Bind ViewModel.IsToolTip,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Add" Placement="Bottom" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                 </Button>
             </Border>

@@ -1,16 +1,18 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
+using Microsoft.Graphics.Canvas.Text;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Library;
 using Retouch_Photo2.Transformers;
-using Retouch_Photo2.TestApp.ViewModels;
+using Retouch_Photo2.ViewModels;
+using Retouch_Photo2.ViewModels.Selections;
+using Retouch_Photo2.ViewModels.Tips;
+using System;
 using System.Numerics;
 using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Microsoft.Graphics.Canvas.Text;
-using System;
 
 namespace Retouch_Photo2.TestApp.Controls
 {
@@ -19,10 +21,11 @@ namespace Retouch_Photo2.TestApp.Controls
     /// </summary>
     public sealed partial class MainCanvasControl : UserControl
     {
-        //ViewModel
+        //@ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
-        SelectionViewModel Selection => Retouch_Photo2.TestApp.App.Selection;
-        MezzanineViewModel Mezzanine => Retouch_Photo2.TestApp.App.Mezzanine;
+        SelectionViewModel SelectionViewModel => Retouch_Photo2.TestApp.App.SelectionViewModel;
+        MezzanineViewModel MezzanineViewModel => Retouch_Photo2.TestApp.App.MezzanineViewModel;
+        TipViewModel TipViewModel => Retouch_Photo2.TestApp.App.TipViewModel;
 
 
         //Single
@@ -89,13 +92,13 @@ namespace Retouch_Photo2.TestApp.Controls
 
 
         /// <summary> Sets or Gets the on state of the ruler on the <see cref = "MainCanvasControl" />. </summary>
-        public bool IsRuler
+        public bool RulerVisible
         {
-            get { return (bool)GetValue(IsRulerProperty); }
-            set { SetValue(IsRulerProperty, value); }
+            get { return (bool)GetValue(RulerVisibleProperty); }
+            set { SetValue(RulerVisibleProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "MainCanvasControl.IsRuler" /> dependency property. </summary>
-        public static readonly DependencyProperty IsRulerProperty = DependencyProperty.Register(nameof(IsRuler), typeof(bool), typeof(MainCanvasControl), new PropertyMetadata(false, (sender, e) =>
+        /// <summary> Identifies the <see cref = "MainCanvasControl.RulerVisible" /> dependency property. </summary>
+        public static readonly DependencyProperty RulerVisibleProperty = DependencyProperty.Register(nameof(RulerVisible), typeof(bool), typeof(MainCanvasControl), new PropertyMetadata(false, (sender, e) =>
         {
             MainCanvasControl con = (MainCanvasControl)sender;
 
@@ -119,6 +122,10 @@ namespace Retouch_Photo2.TestApp.Controls
                 if (e.NewSize == e.PreviousSize) return;
                 this.ViewModel.CanvasTransformer.Size = e.NewSize;
             };
+
+
+            #region Draw
+
 
             //Draw
             this.ViewModel.InvalidateAction = (mode) =>
@@ -147,21 +154,21 @@ namespace Retouch_Photo2.TestApp.Controls
                     Matrix3x2 canvasToVirtualMatrix = this.ViewModel.CanvasTransformer.GetMatrix(MatrixTransformerMode.CanvasToVirtual);
 
                     void aaa() =>
-                      previousImage = Layer.Render(this.ViewModel.CanvasDevice, this.Mezzanine.Layer, previousImage, canvasToVirtualMatrix);
+                      previousImage = Layer.Render(this.ViewModel.CanvasDevice, this.MezzanineViewModel.Layer, previousImage, canvasToVirtualMatrix);
 
                     void bbb(int i) =>
                         previousImage = Layer.Render(this.ViewModel.CanvasDevice, this.ViewModel.Layers[i], previousImage, canvasToVirtualMatrix);
 
 
                     //Mezzanine 
-                    if (this.Mezzanine.Layer != null)
+                    if (this.MezzanineViewModel.Layer != null)
                     {
                         if (this.ViewModel.Layers.Count == 0) aaa();
                         else
                         {
                             for (int i = this.ViewModel.Layers.Count - 1; i >= 0; i--)
                             {
-                                if (this.Mezzanine.Index == i) aaa();
+                                if (this.MezzanineViewModel.Index == i) aaa();
 
                                 bbb(i);
                             }
@@ -208,17 +215,17 @@ namespace Retouch_Photo2.TestApp.Controls
 
                 //Selection & Mezzanine
                 {
-                    if (this.Mezzanine.Layer == null)
+                    if (this.MezzanineViewModel.Layer == null)
                     {
                         //Selection
-                        switch (this.Selection.Mode)
+                        switch (this.SelectionViewModel.Mode)
                         {
                             case ListViewSelectionMode.None:
                                 break;
                             case ListViewSelectionMode.Single:
                             case ListViewSelectionMode.Multiple:
                                 {
-                                    Transformer transformer = this.Selection.GetTransformer();
+                                    Transformer transformer = this.SelectionViewModel.GetTransformer();
                                     Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
                                     args.DrawingSession.DrawBoundNodes(transformer, matrix, this.AccentColor);
                                 }
@@ -229,17 +236,17 @@ namespace Retouch_Photo2.TestApp.Controls
                     {
                         //Mezzanine 
                         Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                        args.DrawingSession.DrawBound(this.Mezzanine.Layer.TransformerMatrix.Destination, matrix, this.AccentColor);
+                        args.DrawingSession.DrawBound(this.MezzanineViewModel.Layer.TransformerMatrix.Destination, matrix, this.AccentColor);
                     }
                 }
 
 
                 //Tool
-                this.ViewModel.Tool.Draw(args.DrawingSession);
+                this.TipViewModel.Tool.Draw(args.DrawingSession);
 
 
                 //IsRuler
-                if (this.IsRuler)
+                if (this.RulerVisible)
                 {
                     Vector2 position = this.ViewModel.CanvasTransformer.GetMatrix().Translation;
 
@@ -279,20 +286,28 @@ namespace Retouch_Photo2.TestApp.Controls
             };
 
 
+            #endregion
+
+
+            #region CanvasOperator
+
+
             //Single
             this.CanvasOperator.Single_Start += (point) =>
             {
                 this.isSingleStarted = false;
                 this.singleStartingPoint = point;
 
-               this.ViewModel.Tool.Starting(point);//Starting
+               this.TipViewModel.Tool.Starting(point);//Starting
+
+                this.ViewModel.CanvasHitTestVisible = false;//IsHitTestVisible
             };
             this.CanvasOperator.Single_Delta += (point) =>
             {
                 //Delta
                 if (this.isSingleStarted)
                 {
-                    this.ViewModel.Tool.Delta(this.singleStartingPoint, point);//Delta
+                    this.TipViewModel.Tool.Delta(this.singleStartingPoint, point);//Delta
                     return;
                 }
 
@@ -301,20 +316,33 @@ namespace Retouch_Photo2.TestApp.Controls
                 {
                     this.isSingleStarted = true;
 
-                    this.ViewModel.Tool.Started(this.singleStartingPoint, point);//Started
+                    this.TipViewModel.Tool.Started(this.singleStartingPoint, point);//Started
                 }
             };
-            this.CanvasOperator.Single_Complete += (point) => this.ViewModel.Tool.Complete(this.singleStartingPoint, point, this.isSingleStarted);//Started
+            this.CanvasOperator.Single_Complete += (point) =>
+            {
+                this.TipViewModel.Tool.Complete(this.singleStartingPoint, point, this.isSingleStarted);//Started
+
+                this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible
+            };
 
 
             //Right
             this.CanvasOperator.Right_Start += (point) =>
             {
                 this.rightStartPoint = point;
-                this.ViewModel.ViewTool.Started(this.rightStartPoint, point);//Started
+
+                this.TipViewModel.ViewTool.Started(this.rightStartPoint, point);//Started
+
+                this.ViewModel.CanvasHitTestVisible = false;//IsHitTestVisible
             };
-            this.CanvasOperator.Right_Delta += (point) => this.ViewModel.ViewTool.Delta(this.rightStartPoint, point);//Delta
-            this.CanvasOperator.Right_Complete += (point) => this.ViewModel.ViewTool.Complete(this.rightStartPoint, point, this.isSingleStarted);//Started
+            this.CanvasOperator.Right_Delta += (point) => this.TipViewModel.ViewTool.Delta(this.rightStartPoint, point);//Delta
+            this.CanvasOperator.Right_Complete += (point) =>
+            {
+            this.TipViewModel.ViewTool.Complete(this.rightStartPoint, point, this.isSingleStarted);//Started
+
+            this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible
+            };
 
 
             //Double
@@ -327,6 +355,8 @@ namespace Retouch_Photo2.TestApp.Controls
                 this.doubleStartScale = this.ViewModel.CanvasScale;
 
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+
+                this.ViewModel.CanvasHitTestVisible = false;//IsHitTestVisible
             };
             this.CanvasOperator.Double_Delta += (center, space) =>
             {
@@ -336,8 +366,12 @@ namespace Retouch_Photo2.TestApp.Controls
 
                 this.ViewModel.Invalidate();
             };
-            this.CanvasOperator.Double_Complete += (center, space) => this.ViewModel.Invalidate(InvalidateMode.HD);
+            this.CanvasOperator.Double_Complete += (center, space) =>
+            {
+                this.ViewModel.Invalidate(InvalidateMode.HD);
 
+                this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible
+            };
 
             //Wheel
             this.CanvasOperator.Wheel_Changed += (point, space) =>
@@ -362,6 +396,10 @@ namespace Retouch_Photo2.TestApp.Controls
                 this.ViewModel.CanvasTransformer.ReloadMatrix();
                 this.ViewModel.Invalidate();
             };
+
+
+            #endregion
+
         }
     }
 }

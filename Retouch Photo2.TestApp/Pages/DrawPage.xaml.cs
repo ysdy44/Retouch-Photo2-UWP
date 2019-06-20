@@ -1,77 +1,49 @@
-﻿using Retouch_Photo2.TestApp.Models;
-using Retouch_Photo2.TestApp.ViewModels;
+﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.TestApp.Models;
+using Retouch_Photo2.ViewModels;
+using Retouch_Photo2.ViewModels.Keyboards;
+using Retouch_Photo2.ViewModels.Selections;
+using Retouch_Photo2.ViewModels.Tips;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Windows.UI.Xaml;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.Elements;
 
 namespace Retouch_Photo2.TestApp.Pages
-{  
+{
     /// <summary> 
     /// Retouch_Photo2's the only <see cref = "DrawPage" />. 
     /// </summary>
     public sealed partial class DrawPage : Page
     {
-        //ViewModel
+        //@ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
-        SelectionViewModel Selection => Retouch_Photo2.TestApp.App.Selection;
-        KeyboardViewModel Keyboard => Retouch_Photo2.TestApp.App.Keyboard;
+        SelectionViewModel SelectionViewModel => Retouch_Photo2.TestApp.App.SelectionViewModel;
+        KeyboardViewModel KeyboardViewModel => Retouch_Photo2.TestApp.App.KeyboardViewModel;
+        TipViewModel TipViewModel => Retouch_Photo2.TestApp.App.TipViewModel;
+
 
         //@Construct
         public DrawPage()
         {
             this.InitializeComponent();
 
+            //Theme
+            this.BackButton.Tapped += (s, e) => this.Frame.GoBack();
+            this.SaveButton.Tapped += (s, e) => this.Frame.GoBack();
+                       
             //Color
-            this.ColorButton.Tapped += (s, e) => this.ViewModel.ColorMenuLayoutState = MenuLayoutButton.GetState(this.ViewModel.ColorMenuLayoutState);
+            this.ColorButton.Tapped += (s, e) => this.TipViewModel.ColorMenuLayoutState = MenuLayoutButton.GetState(this.TipViewModel.ColorMenuLayoutState);
             this.ColorPicker.ColorChange += (s, value) =>
             {
                 //Selection
-                this.ViewModel.FillColor = value;
-                this.Selection.SetValue((layer) =>
-                {
-                    layer.SetFillColor(value);
-                });
-                
-                this.ViewModel.Invalidate();//Invalidate
-            };
-
-
-            //Theme
-            this.ThemeControl.ApplicationTheme = App.Current.RequestedTheme;
-            this.BackButton.Tapped += (sender, e) => this.Frame.GoBack();
-            this.SaveButton.Tapped += (sender, e) => this.Frame.GoBack();
-
-
-            //FillColor
-            this.ViewModel.FillColorFlyout = this.FillColorFlyout;
-            this.ViewModel.FillColorPicker = this.FillColorPicker;
-            this.FillColorPicker.ColorChange += (s, value) =>
-            {
-                //Selection
-                this.ViewModel.FillColor = value;
-                this.Selection.SetValue((layer) =>
+                this.SelectionViewModel.FillColor = value;
+                this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.SetFillColor(value);
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
-            };
-            //StrokeColor
-            this.ViewModel.StrokeColorFlyout = this.StrokeColorFlyout;
-            this.ViewModel.StrokeColorPicker = this.StrokeColorPicker;
-            this.StrokeColorPicker.ColorChange += (s, value) =>
-            {
-                //Selection
-                this.ViewModel.StrokeColor = value;
-                this.Selection.SetValue((layer) =>
-                {
-                    layer.SetStrokeColor(value);
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
+            };          
         }
 
         //The current page becomes the active page

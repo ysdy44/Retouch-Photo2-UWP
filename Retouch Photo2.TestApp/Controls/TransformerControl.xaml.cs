@@ -1,7 +1,8 @@
-﻿using Retouch_Photo2.Layers;
-using Retouch_Photo2.TestApp.ViewModels;
-using Retouch_Photo2.Transformers;
+﻿using Retouch_Photo2.Transformers;
 using Retouch_Photo2.Transformers.Controls;
+using Retouch_Photo2.ViewModels;
+using Retouch_Photo2.ViewModels.Keyboards;
+using Retouch_Photo2.ViewModels.Selections;
 using System;
 using System.Numerics;
 using Windows.UI.Xaml;
@@ -11,15 +12,13 @@ namespace Retouch_Photo2.TestApp.Controls
 {
     public sealed partial class TransformerControl : UserControl
     {
-        //ViewModel
+        //@ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
-        SelectionViewModel Selection => Retouch_Photo2.TestApp.App.Selection;
-        KeyboardViewModel Keyboard => Retouch_Photo2.TestApp.App.Keyboard;
+        SelectionViewModel SelectionViewModel => Retouch_Photo2.TestApp.App.SelectionViewModel;
+        KeyboardViewModel KeyboardViewModel => Retouch_Photo2.TestApp.App.KeyboardViewModel;
 
 
         Transformer oldTransformer;
-
-
         IndicatorMode IndicatorMode = IndicatorMode.LeftTop;
 
         //RemoteOrIndicator
@@ -150,6 +149,8 @@ namespace Retouch_Photo2.TestApp.Controls
         {
             this.InitializeComponent();
 
+            #region Remote
+
 
             //RemoteOrIndicator
             this.RemoteOrIndicator = false;
@@ -159,9 +160,9 @@ namespace Retouch_Photo2.TestApp.Controls
             {
                 this.IndicatorMode = mode;//IndicatorMode
 
-                if (this.Selection.Mode == ListViewSelectionMode.None) return;
+                if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return;
 
-                Transformer transformer = this.Selection.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.GetTransformer();
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
 
                 this.XPicker.Value = (int)vector.X;
@@ -169,32 +170,30 @@ namespace Retouch_Photo2.TestApp.Controls
             };
 
 
-            ///////////////////////////////////////////////
-
 
             //Remote
             this.RemoteControl.Moved += (s, value) =>
             {
                 //Transformer
-                Transformer transformer = this.Selection.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.GetTransformer();
 
                 //Selection
-                this.Selection.SetValue((layer) =>
+                this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
                     layer.TransformerMatrix.Destination = Transformer.Add(layer.TransformerMatrix.OldDestination, value);
                 });
-                this.Selection.Transformer = Transformer.Add(transformer, value);
+                this.SelectionViewModel.Transformer = Transformer.Add(transformer, value);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
             this.RemoteControl.ValueChangeStarted += (s, value) =>
             {
                 //Transformer
-                this.oldTransformer = this.Selection.GetTransformer();
+                this.oldTransformer = this.SelectionViewModel.GetTransformer();
 
                 //Selection
-                this.Selection.SetValue((layer) =>
+                this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
                 });
@@ -209,18 +208,21 @@ namespace Retouch_Photo2.TestApp.Controls
                    new Vector2(0, value.Y);
 
                 //Selection
-                this.Selection.SetValue((layer) =>
+                this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.TransformerMatrix.Destination = Transformer.Add(layer.TransformerMatrix.OldDestination, vector);
                 });
-                this.Selection.Transformer = Transformer.Add(this.oldTransformer, vector);
+                this.SelectionViewModel.Transformer = Transformer.Add(this.oldTransformer, vector);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
             this.RemoteControl.ValueChangeCompleted += (s, value) => this.ViewModel.Invalidate(InvalidateMode.HD);
 
 
-            ///////////////////////////////////////////////
+            #endregion
+
+
+            #region Width Height
 
 
             this.WPicker.Minimum = 1;
@@ -228,7 +230,7 @@ namespace Retouch_Photo2.TestApp.Controls
             this.WPicker.ValueChange += (sender, value) =>
             {
                 //Transformer
-                Transformer transformer = this.Selection.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.GetTransformer();
                 Vector2 horizontal = transformer.Horizontal;
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
 
@@ -242,12 +244,12 @@ namespace Retouch_Photo2.TestApp.Controls
                 Matrix3x2.CreateRotation(canvasStartingRadian, vector);
 
                 //Selection
-                this.Selection.SetValue((layer) =>
+                this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
                     layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, scaleMatrix);
                 });
-                this.Selection.Transformer = Transformer.Multiplies(transformer, scaleMatrix);
+                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, scaleMatrix);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -258,7 +260,7 @@ namespace Retouch_Photo2.TestApp.Controls
             this.HPicker.ValueChange += (s, value) =>
             {                
                 //Transformer
-                Transformer transformer = this.Selection.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.GetTransformer();
                 Vector2 vertical = transformer.Vertical;
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
 
@@ -272,18 +274,21 @@ namespace Retouch_Photo2.TestApp.Controls
                 Matrix3x2.CreateRotation(canvasStartingRadian, vector);
 
                 //Selection
-                this.Selection.SetValue((layer) =>
+                this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
                     layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, scaleMatrix);
                 });
-                this.Selection.Transformer = Transformer.Multiplies(transformer, scaleMatrix);
+                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, scaleMatrix);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
 
 
-            ///////////////////////////////////////////////
+            #endregion
+
+
+            #region Radian Skew
 
 
             this.RPicker.Minimum = -180;
@@ -291,7 +296,7 @@ namespace Retouch_Photo2.TestApp.Controls
             this.RPicker.ValueChange += (s, value) =>
             { 
                 //Transformer
-                Transformer transformer = this.Selection.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.GetTransformer();
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
 
                 float canvasRadian = value / 180.0f * Transformer.PI;              
@@ -301,12 +306,12 @@ namespace Retouch_Photo2.TestApp.Controls
                 Matrix3x2 rotationMatrix = Matrix3x2.CreateRotation(radian, vector);
 
                 //Selection
-                this.Selection.SetValue((layer) =>
+                this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
                     layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, rotationMatrix);
                 });
-                this.Selection.Transformer = Transformer.Multiplies(transformer, rotationMatrix);
+                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, rotationMatrix);
 
                 this.ViewModel.Invalidate();
             };
@@ -316,7 +321,7 @@ namespace Retouch_Photo2.TestApp.Controls
             this.SPicker.ValueChange += (s, value) =>
             {
                 //Transformer
-                Transformer transformer = this.Selection.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.GetTransformer();
                 float horizontalHalf = Vector2.Distance(transformer.Center, transformer.CenterRight);
 
                 Vector2 footPoint = Transformer.FootPoint(transformer.Center, transformer.LeftBottom, transformer.RightBottom);
@@ -363,18 +368,21 @@ namespace Retouch_Photo2.TestApp.Controls
                 Transformer zeroTransformer = new Transformer(horizontalHalf * 2, verticalHalf * 2, postion);
 
                 //Selection
-                this.Selection.SetValue((layer) =>
+                this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
                     layer.TransformerMatrix.Destination=Transformer.Multiplies(zeroTransformer, skewMatrix);
                 });
-                this.Selection.Transformer = Transformer.Multiplies(zeroTransformer, skewMatrix);
+                this.SelectionViewModel.Transformer = Transformer.Multiplies(zeroTransformer, skewMatrix);
 
                 this.ViewModel.Invalidate();
             };
 
 
-            ///////////////////////////////////////////////
+            #endregion
+
+
+            #region X Y
 
 
             this.XPicker.Minimum = int.MinValue;
@@ -382,17 +390,17 @@ namespace Retouch_Photo2.TestApp.Controls
             this.XPicker.ValueChange += (s, value) =>
             {
                 //Transformer
-                Transformer transformer = this.Selection.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.GetTransformer();
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
                 Vector2 offset = new Vector2(value - vector.X, 0);
 
                 //Selection
-                this.Selection.SetValue((layer) =>
+                this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
                     layer.TransformerMatrix.Destination = Transformer.Add(layer.TransformerMatrix.OldDestination, offset);
                 });
-                this.Selection.Transformer = Transformer.Add(transformer, offset);
+                this.SelectionViewModel.Transformer = Transformer.Add(transformer, offset);
 
                 this.ViewModel.Invalidate();
             };
@@ -402,23 +410,26 @@ namespace Retouch_Photo2.TestApp.Controls
             this.YPicker.ValueChange += (s, value) =>
             {
                 //Transformer
-                Transformer transformer = this.Selection.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.GetTransformer();
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
                 Vector2 offset = new Vector2(0, value - vector.Y);
 
                 //Selection
-                this.Selection.SetValue((layer) =>
+                this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
                     layer.TransformerMatrix.Destination = Transformer.Add(layer.TransformerMatrix.OldDestination, offset);
                 });
-                this.Selection.Transformer = Transformer.Add(transformer, offset);
+                this.SelectionViewModel.Transformer = Transformer.Add(transformer, offset);
 
                 this.ViewModel.Invalidate();
-            };            
+            };
+
+
+            #endregion
         }
 
-        
+
         private Vector2 GetVectorWithIndicatorMode(Transformer value, IndicatorMode mode)
         {
             switch (this.IndicatorMode)

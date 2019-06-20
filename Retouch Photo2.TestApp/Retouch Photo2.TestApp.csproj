@@ -95,6 +95,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AdjustmentControl.xaml.cs">
+      <DependentUpon>AdjustmentControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DebugControl.xaml.cs">
       <DependentUpon>DebugControl.xaml</DependentUpon>
     </Compile>
@@ -116,13 +119,23 @@
     <Compile Include="Controls\TransformerControl.xaml.cs">
       <DependentUpon>TransformerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Photo.cs" />
-    <Compile Include="Models\Project.cs" />
     <Compile Include="Pages\DrawLayout.xaml.cs">
       <DependentUpon>DrawLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DrawPage.xaml.cs">
       <DependentUpon>DrawPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DrawPages\FillColorEllipseButton.xaml.cs">
+      <DependentUpon>FillColorEllipseButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DrawPages\FillColorEllipseControl.xaml.cs">
+      <DependentUpon>FillColorEllipseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DrawPages\StrokeColorEllipseButton.xaml.cs">
+      <DependentUpon>StrokeColorEllipseButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DrawPages\StrokeColorEllipseControl.xaml.cs">
+      <DependentUpon>StrokeColorEllipseControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -158,65 +171,33 @@
       <DependentUpon>ShareControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tools\Button.xaml.cs">
-      <DependentUpon>Button.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\Controls\CursorControl.xaml.cs">
-      <DependentUpon>CursorControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\Controls\EllipseControl.xaml.cs">
-      <DependentUpon>EllipseControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\Controls\RectangleControl.xaml.cs">
-      <DependentUpon>RectangleControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\Controls\ViewControl.xaml.cs">
-      <DependentUpon>ViewControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\Elements\FillColorEllipseControl.xaml.cs">
-      <DependentUpon>FillColorEllipseControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\Elements\StrokeColorEllipseControl.xaml.cs">
-      <DependentUpon>StrokeColorEllipseControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\ITool\ICreateTool.cs" />
-    <Compile Include="Tools\Models\CursorTool.Box.cs" />
-    <Compile Include="Tools\Models\CursorTool.Layer.cs" />
-    <Compile Include="Tools\Models\CursorTool.Cursor.cs" />
-    <Compile Include="Tools\Models\CursorTool.cs" />
-    <Compile Include="Tools\Models\EllipseTool.cs" />
-    <Compile Include="Tools\Models\NoneTool.cs" />
-    <Compile Include="Tools\Models\RectangleTool.cs" />
-    <Compile Include="Tools\Models\ViewTool.cs" />
-    <Compile Include="Tools\Pages\CursorPage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\ITool\ICreateTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\CursorTool.Box.cs" />
+    <Compile Include="Retouch Photo2.Tools\TransformerToolBase.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\CursorTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\EllipseTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\NoneTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\RectangleTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\ViewTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Pages\CursorPage.xaml.cs">
       <DependentUpon>CursorPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Pages\EllipsePage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Pages\EllipsePage.xaml.cs">
       <DependentUpon>EllipsePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Pages\RectanglePage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Pages\RectanglePage.xaml.cs">
       <DependentUpon>RectanglePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Pages\ViewPage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\Pages\ViewPage.xaml.cs">
       <DependentUpon>ViewPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Tool.cs" />
-    <Compile Include="Tools\ToolType.cs" />
-    <Compile Include="ViewModels\KeyboardViewModel.Notify.cs" />
-    <Compile Include="ViewModels\MezzanineViewModel.cs" />
-    <Compile Include="ViewModels\SelectionViewModel.cs" />
-    <Compile Include="ViewModels\ViewModel.cs" />
-    <Compile Include="ViewModels\KeyboardViewModel.cs" />
-    <Compile Include="ViewModels\ViewModel.Transformer.cs" />
-    <Compile Include="ViewModels\ViewModel.Notify.cs" />
-    <Compile Include="ViewModels\SelectionViewModel.Notify.cs" />
-    <Compile Include="ViewModels\SelectionViewModel.SetMode.cs" />
-    <Compile Include="ViewModels\ViewModel.Tools.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="Json\Filter.json" />
+    <None Include="Json\FilterOriginal.json" />
     <None Include="Retouch Photo2.TestApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +216,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\AdjustmentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\DebugControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -268,6 +253,22 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\DrawPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DrawPages\FillColorEllipseButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DrawPages\FillColorEllipseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DrawPages\StrokeColorEllipseButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DrawPages\StrokeColorEllipseControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -327,47 +328,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Tools\Button.xaml">
+    <Page Include="Retouch Photo2.Tools\Pages\CursorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\Controls\CursorControl.xaml">
+    <Page Include="Retouch Photo2.Tools\Pages\EllipsePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\Controls\EllipseControl.xaml">
+    <Page Include="Retouch Photo2.Tools\Pages\RectanglePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\Controls\RectangleControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Tools\Controls\ViewControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Tools\Elements\FillColorEllipseControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Tools\Elements\StrokeColorEllipseControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Tools\Pages\CursorPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Tools\Pages\EllipsePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Tools\Pages\RectanglePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Tools\Pages\ViewPage.xaml">
+    <Page Include="Retouch Photo2.Tools\Pages\ViewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -399,9 +372,17 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Retouch Photo2.Adjustment\Retouch Photo2.Adjustments.csproj">
+      <Project>{7256c005-0e5d-4c38-9115-e4eef9978233}</Project>
+      <Name>Retouch Photo2.Adjustments</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Blends\Retouch Photo2.Blends.csproj">
       <Project>{8b2218b3-59a4-445f-8765-752c5e700efa}</Project>
       <Name>Retouch Photo2.Blends</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Brushs\Retouch Photo2.Brushs.csproj">
+      <Project>{00e87876-1aa4-4b48-af1c-f1db75fbf587}</Project>
+      <Name>Retouch Photo2.Brushs</Name>
     </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Effects\Retouch Photo2.Effects.csproj">
       <Project>{c14d4618-e234-4d91-8ced-49cbd9f6f3c7}</Project>
@@ -419,9 +400,25 @@
       <Project>{5a773056-cf52-4a57-b004-d3f170cea03b}</Project>
       <Name>Retouch Photo2.Library</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Operates\Retouch Photo2.Operates.csproj">
+      <Project>{c5a52472-53d8-4885-8488-0cf77a985794}</Project>
+      <Name>Retouch Photo2.Operates</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Selections\Retouch Photo2.Selections.csproj">
+      <Project>{448fcfb4-cb3c-4874-b157-3f0dfff044bc}</Project>
+      <Name>Retouch Photo2.Selections</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Tools\Retouch Photo2.Tools.csproj">
+      <Project>{3f4ae427-651f-4791-a176-678a00a93b1e}</Project>
+      <Name>Retouch Photo2.Tools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Transformers\Retouch Photo2.Transformers.csproj">
       <Project>{5a044bad-be63-4d1b-b0f0-927177058f7e}</Project>
       <Name>Retouch Photo2.Transformers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.ViewModels\Retouch Photo2.ViewModels.csproj">
+      <Project>{d4571a00-4303-4ddb-b63b-6d741c82f73f}</Project>
+      <Name>Retouch Photo2.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

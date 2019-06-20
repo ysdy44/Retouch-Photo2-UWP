@@ -125,6 +125,7 @@
     <Compile Include="Layer.Color.cs" />
     <Compile Include="Layer.Notify.cs" />
     <Compile Include="Layer.cs" />
+    <Compile Include="LayerDataPackageExpansion.cs" />
     <Compile Include="Models\EllipseLayer.cs" />
     <Compile Include="Models\GroupLayer.cs" />
     <Compile Include="Models\ImageLayer.cs" />
@@ -163,6 +164,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Retouch Photo2.Adjustment\Retouch Photo2.Adjustments.csproj">
+      <Project>{7256C005-0E5D-4C38-9115-E4EEF9978233}</Project>
+      <Name>Retouch Photo2.Adjustments</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Blends\Retouch Photo2.Blends.csproj">
       <Project>{8b2218b3-59a4-445f-8765-752c5e700efa}</Project>
       <Name>Retouch Photo2.Blends</Name>

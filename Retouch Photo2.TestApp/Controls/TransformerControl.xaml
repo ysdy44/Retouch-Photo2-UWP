@@ -1,14 +1,11 @@
 ﻿<UserControl
     x:Class="Retouch_Photo2.TestApp.Controls.TransformerControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Retouch_Photo2.TestApp.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pickers="using:HSVColorPickers"
-    xmlns:transformers="using:Retouch_Photo2.Transformers"
     xmlns:transformersControls="using:Retouch_Photo2.Transformers.Controls"
-    xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignHeight="400"
     d:DesignWidth="200">
@@ -42,7 +39,7 @@
             </Border>
 
             <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource AppCircleBorderStyle}">
-                <ToggleButton x:Name="RatioToggleControl" IsChecked="{x:Bind IsRatio,Mode=TwoWay}">
+                <ToggleButton x:Name="RatioToggleControl" IsChecked="{x:Bind IsRatio,Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                     <FontIcon Glyph="&#x1F512;" FontFamily="Segoe UI Symbol" FontSize="18" />
                 </ToggleButton>
             </Border>

@@ -1,8 +1,12 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Layers.Controls;
 using Retouch_Photo2.Transformers;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Numerics;
+using Windows.Graphics.Effects;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers.Models
@@ -44,12 +48,21 @@ namespace Retouch_Photo2.Layers.Models
         }
 
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
-        {
-            foreach (Layer child in this.Children)
+        { 
+            CanvasCommandList command = new CanvasCommandList(resourceCreator);
+            using (CanvasDrawingSession ds = command.CreateDrawingSession())
             {
-                previousImage = Layer.Render(resourceCreator, child, previousImage, canvasToVirtualMatrix);
+                foreach (Layer child in this.Children)
+                {
+                    if (child.Visibility == Visibility.Collapsed) continue;
+                    if (child.Opacity ==0) continue;
+
+                    //GetRender
+                    ICanvasImage currentImage = child.GetRender(resourceCreator, previousImage, canvasToVirtualMatrix);
+                    ds.DrawImage(currentImage);
+                }
             }
-            return previousImage;
+            return command;
         }
     }
 }

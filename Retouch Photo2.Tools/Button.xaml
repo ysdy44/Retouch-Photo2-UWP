@@ -1,0 +1,107 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Tools.Button"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Height="50"
+    MinWidth="50"
+    HorizontalAlignment="Stretch"
+    d:DesignHeight="50"
+    d:DesignWidth="50">
+
+    <UserControl.Resources>
+
+        <!--Pointer -->
+        <SolidColorBrush x:Name="PointerOverColor" Color="{ThemeResource SystemBaseLowColor}"/>
+        <SolidColorBrush x:Name="PressedColor" Color="{ThemeResource SystemBaseLowColor}"/>
+        
+        <!--Background-->
+        <SolidColorBrush x:Name="AccentColor" Color="{ThemeResource SystemAccentColor}"/>
+        <SolidColorBrush x:Name="UnAccentColor" Color="Transparent"/>
+
+        <!--Foreground--> 
+        <SolidColorBrush x:Name="CheckColor" Color="White"/>
+        <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource SystemBaseMediumColor}"/>
+
+    </UserControl.Resources>
+
+    <Border x:Name="_RootGrid" Background="{StaticResource UnAccentColor}">
+
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="CommonStates">
+                
+                <VisualState x:Name="Normal">
+                    <Storyboard>
+                        <PointerUpThemeAnimation Storyboard.TargetName="_RootGrid" />
+                    </Storyboard>
+                </VisualState>
+                
+                <VisualState x:Name="PointerOver">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_RootGrid" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PointerOverColor}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource UnCheckColor}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <PointerUpThemeAnimation Storyboard.TargetName="_RootGrid" />
+                    </Storyboard>
+                </VisualState>
+                
+                <VisualState x:Name="Pressed">
+                    <Storyboard>
+                        <PointerDownThemeAnimation TargetName="_RootGrid" />
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_RootGrid" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PressedColor}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource UnCheckColor}" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                
+                
+                <VisualState x:Name="Selected">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_RootGrid" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AccentColor}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckColor}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <PointerUpThemeAnimation Storyboard.TargetName="_RootGrid" />
+                    </Storyboard>
+                </VisualState>
+                
+                <VisualState x:Name="PointerOverSelected">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_RootGrid" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AccentColor}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckColor}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <PointerUpThemeAnimation Storyboard.TargetName="_RootGrid" />
+                    </Storyboard>
+                </VisualState>
+                
+                <VisualState x:Name="PressedSelected">
+                    <Storyboard>
+                        <PointerDownThemeAnimation TargetName="_RootGrid" />
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_RootGrid" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AccentColor}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckColor}" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <ContentPresenter x:Name="ContentPresenter" IsHitTestVisible="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{StaticResource UnCheckColor}"/>
+    </Border>
+</UserControl>

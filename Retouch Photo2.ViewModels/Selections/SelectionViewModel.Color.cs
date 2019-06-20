@@ -1,0 +1,57 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Windows.UI;
+using Windows.UI.Xaml.Controls;
+
+namespace Retouch_Photo2.ViewModels.Selections
+{
+    /// <summary> 
+    /// Retouch_Photo2's the only <see cref = "SelectionViewModel" />. 
+    /// </summary>
+    public partial class SelectionViewModel : INotifyPropertyChanged
+    {
+
+        /// <summary> Retouch_Photo2's the only fill-color. </summary>
+        public Color FillColor
+        {
+            get => this.fillColor;
+            set
+            {
+                this.fillColor = value;
+                this.OnPropertyChanged(nameof(this.FillColor));//Notify 
+            }
+        }
+        private Color fillColor = Color.FromArgb(255, 214, 214, 214);
+
+        /// <summary> Flyout of <see cref = "ViewModel.FillColor" />.  </summary>
+        public Flyout FillColorFlyout;
+
+        /// <summary> ColorPicker of <see cref = "ViewModel.FillColor" />.  </summary>
+        public HSVColorPickers.ColorPicker FillColorPicker;
+
+
+
+        /// <summary> Retouch_Photo2's the only stroke-color. </summary>
+        public Color StrokeColor
+        {
+            get => this.strokeColor;
+            set
+            {
+                this.strokeColor = value;
+                this.OnPropertyChanged(nameof(this.StrokeColor));//Notify 
+            }
+        }
+        private Color strokeColor = Color.FromArgb(255, 0, 0, 0);
+
+        /// <summary> Flyout of <see cref = "ViewModel.FillColor" />.  </summary>
+        public Flyout StrokeColorFlyout;
+
+        /// <summary> ColorPicker of <see cref = "ViewModel.StrokeColor" />.  </summary>
+        public HSVColorPickers.ColorPicker StrokeColorPicker;
+
+    }
+}

@@ -1,6 +1,12 @@
 ﻿using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.TestApp.ViewModels;
+using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.ViewModels;
+using Retouch_Photo2.ViewModels.Selections;
+using Retouch_Photo2.ViewModels.Tips;
+using System;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -12,23 +18,72 @@ namespace Retouch_Photo2.TestApp.Controls
     /// </summary>
     public sealed partial class LayersControl : UserControl
     {
-        //ViewModel
+        //@ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
-        SelectionViewModel Selection => Retouch_Photo2.TestApp.App.Selection;
+        SelectionViewModel SelectionViewModel => Retouch_Photo2.TestApp.App.SelectionViewModel;
+        MezzanineViewModel MezzanineViewModel => Retouch_Photo2.TestApp.App.MezzanineViewModel;
+        TipViewModel TipViewModel => Retouch_Photo2.TestApp.App.TipViewModel;
 
 
         //@Construct
         public LayersControl()
         {
-            this.InitializeComponent();
-            if (this.ViewModel.LayerPlacementTarget == null)
-            {
-                this.ViewModel.LayerPlacementTarget = this;
-            }
+            this.InitializeComponent();                       
 
-            this.AddButton.Tapped += (s, e) =>
+            //Drag and Drop
+            this.ListView.DragItemsStarting += (object s, DragItemsStartingEventArgs e) =>
             {
+                Layer setLayer = null;
+                foreach (object item in e.Items)
+                {
+                    if (item is Layer layer)
+                    {
+                        setLayer = layer;
+                        break;
+                    }
+                }
+                if (setLayer == null) return;
 
+                /// Set the content of the <see cref = "DataPackage" />
+                e.Data.SetLayer(setLayer);
+                e.Data.RequestedOperation = DataPackageOperation.Copy;
+            };
+                                 
+
+            this.AddButton.Tapped += async (s, e) =>
+            {
+                //File
+                FileOpenPicker openPicker = new FileOpenPicker
+                {
+                    ViewMode = PickerViewMode.Thumbnail,
+                    SuggestedStartLocation = PickerLocationId.PicturesLibrary,
+                    FileTypeFilter =
+                 {
+                     ".jpg",
+                     ".jpeg",
+                     ".png",
+                     ".bmp",
+                 }
+                };
+
+                var file = await openPicker.PickSingleFileAsync();
+                if (file == null) return;
+
+                //ImageLayer
+                Layer imageLayer = await ImageLayer.CreateFromFlie(this.ViewModel.CanvasDevice, file);
+                imageLayer.IsChecked = true;
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer)=> 
+                {
+                    layer.IsChecked = false;
+                });
+
+                //Insert
+                int index = this.MezzanineViewModel.GetfFrstIndex(this.ViewModel.Layers);
+                this.ViewModel.Layers.Insert(index, imageLayer);
+ 
+                this.ViewModel.Invalidate();//Invalidate
             };
         } 
         
@@ -39,31 +94,24 @@ namespace Retouch_Photo2.TestApp.Controls
         {
             LayersControl.GetGridDataContext(sender, out Grid rootGrid, out Layer layer);
 
-            if (this.Selection.Layer == layer) //FlyoutShow
+            if (this.SelectionViewModel.Layer == layer) //FlyoutShow
             {
-                if (this.ViewModel.LayerMenuLayoutState == MenuLayoutState.FlyoutHide)
+                if (this.TipViewModel.LayerMenuLayoutState == MenuLayoutState.FlyoutHide)
                 {
-                    this.ViewModel.LayerPlacementTarget = rootGrid;
-                    this.ViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutShow;
-                }
-                else if (this.ViewModel.LayerMenuLayoutState == MenuLayoutState.FlyoutShow)
-                {
-                    this.ViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutHide;
-                    this.ViewModel.LayerPlacementTarget = rootGrid;
-                    this.ViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutShow;
+                this.TipViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutShow;
                 }
             }
-            else  //ItemClick
-            {             
+            else //ItemClick
+            {
                 //Selection
-                this.Selection.SetValue((layer2) =>
+                this.SelectionViewModel.SetValue((layer2) =>
                 {
                     layer2.IsChecked = false;
                 });
 
                 layer.IsChecked = true;
 
-                this.Selection.SetModeSingle(layer);//Selection
+                this.SelectionViewModel.SetModeSingle(layer);//Selection
                 this.ViewModel.Invalidate();//Invalidate
             }
         }
@@ -71,9 +119,9 @@ namespace Retouch_Photo2.TestApp.Controls
         /// <summary> DataTemplate's Grid RightTapped. </summary>
         private void RootGrid_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
-            if (this.ViewModel.LayerMenuLayoutState == MenuLayoutState.FlyoutHide)
+            if (this.TipViewModel.LayerMenuLayoutState == MenuLayoutState.FlyoutHide)
             {
-                this.ViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutShow;
+                this.TipViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutShow;
             }
         }
      
@@ -96,7 +144,7 @@ namespace Retouch_Photo2.TestApp.Controls
             
             layer.IsChecked = !layer.IsChecked;
 
-            this.Selection.SetMode(this.ViewModel.Layers);//Selection
+            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
             this.ViewModel.Invalidate();//Invalidate
 
             e.Handled = true;

@@ -1,6 +1,8 @@
 ﻿using Retouch_Photo2.Effects;
 using Retouch_Photo2.Effects.Models;
-using Retouch_Photo2.TestApp.ViewModels;
+using Retouch_Photo2.ViewModels;
+using Retouch_Photo2.ViewModels.Keyboards;
+using Retouch_Photo2.ViewModels.Selections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +16,10 @@ namespace Retouch_Photo2.TestApp.Controls
     /// </summary>
     public sealed partial class EffectControl : UserControl
     {
-        //ViewModel
+        //@ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
-        SelectionViewModel Selection => Retouch_Photo2.TestApp.App.Selection;
-        KeyboardViewModel Keyboard => Retouch_Photo2.TestApp.App.Keyboard;
+        SelectionViewModel SelectionViewModel => Retouch_Photo2.TestApp.App.SelectionViewModel;
+        KeyboardViewModel KeyboardViewModel => Retouch_Photo2.TestApp.App.KeyboardViewModel;
 
 
         /// <summary> State of <see cref="EffectControl"/>. </summary>
@@ -108,7 +110,7 @@ namespace Retouch_Photo2.TestApp.Controls
             Retouch_Photo2.Effects.EffectManager.InvalidateAction = (Action<EffectManager> action) =>
             {
                 //Selection
-                this.Selection.SetValue((layer) =>
+                this.SelectionViewModel.SetValue((layer) =>
                 {
                     action(layer.EffectManager);
                 });
@@ -128,7 +130,7 @@ namespace Retouch_Photo2.TestApp.Controls
             {
                 if (this.Effect == null) return;
                 //Selection
-                this.Selection.SetValue((layer) =>
+                this.SelectionViewModel.SetValue((layer) =>
                 {
                     EffectManager effectManager = layer.EffectManager;
                     this.Effect.Reset(effectManager);
@@ -153,7 +155,7 @@ namespace Retouch_Photo2.TestApp.Controls
                 effect.Button.IsOn = isOn; 
                 
                 //Selection
-                this.Selection.SetValue((layer) =>
+                this.SelectionViewModel.SetValue((layer) =>
                 {
                     effect.SetIsOn(layer.EffectManager, isOn);
                 });
@@ -168,7 +170,7 @@ namespace Retouch_Photo2.TestApp.Controls
                 this.Frame.Child = effect.Page;
 
                 //Selection
-                this.Selection.SetValue((layer) =>
+                this.SelectionViewModel.SetValue((layer) =>
                 {
                     effect.SetPageValueByEffectManager(layer.EffectManager);
                 });

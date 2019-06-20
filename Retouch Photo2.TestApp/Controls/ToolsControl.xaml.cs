@@ -1,5 +1,7 @@
-﻿using Retouch_Photo2.TestApp.Tools;
-using Retouch_Photo2.TestApp.ViewModels;
+﻿using Retouch_Photo2.Tools;
+using Retouch_Photo2.Tools.Models;
+using Retouch_Photo2.ViewModels;
+using Retouch_Photo2.ViewModels.Tips;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -10,8 +12,10 @@ namespace Retouch_Photo2.TestApp.Controls
     /// </summary>
     public sealed partial class ToolsControl : UserControl
     {
-        //ViewModel
+        //@ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
+        TipViewModel TipViewModel => Retouch_Photo2.TestApp.App.TipViewModel;
+
 
         #region DependencyProperty
 
@@ -26,23 +30,24 @@ namespace Retouch_Photo2.TestApp.Controls
         public static readonly DependencyProperty ToolTypeProperty = DependencyProperty.Register(nameof(ToolType), typeof(ToolType), typeof(ToolsControl), new PropertyMetadata(ToolType.None));
 
         #endregion
-        
+
+
         //@Construct
         public ToolsControl()
         {
             this.InitializeComponent();
 
             //View
-            this.ConstructButton(this.ViewButton, this.ViewModel.ViewTool);
+            this.ConstructButton(this.ViewButton, this.TipViewModel.ViewTool);
             //Rectangle
-            this.ConstructButton(this.RectangleButton, this.ViewModel.RectangleTool);
+            this.ConstructButton(this.RectangleButton, this.TipViewModel.RectangleTool);
             //Ellipse
-            this.ConstructButton(this.EllipseButton, this.ViewModel.EllipseTool);
+            this.ConstructButton(this.EllipseButton, this.TipViewModel.EllipseTool);
             //Cursor
-            this.ConstructButton(this.CursorButton, this.ViewModel.CursorTool);
+            this.ConstructButton(this.CursorButton, this.TipViewModel.CursorTool);
         }
 
-        private void ConstructButton(Retouch_Photo2.TestApp.Tools.Button button, Tool tool)
+        private void ConstructButton(Retouch_Photo2.Tools.Button button, Tool tool)
         {
             ToolType type = tool.Type;
 
@@ -54,7 +59,7 @@ namespace Retouch_Photo2.TestApp.Controls
             button.RootGrid.Tapped += (s, e) =>
             {
                 this.ToolType = type;
-                this.ViewModel.Tool = tool;
+                this.TipViewModel.Tool = tool;
             };
         }
     }

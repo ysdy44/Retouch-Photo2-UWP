@@ -1,5 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
+using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Effects;
 using Retouch_Photo2.Transformers;
@@ -19,7 +20,7 @@ namespace Retouch_Photo2.Layers
     {
         //@Abstract
         /// <summary>
-        /// Gets a specific rended-layer..
+        /// Gets a specific rended-layer.
         /// </summary>
         /// /// <param name="resourceCreator"> resourceCreator </param>
         /// <param name="previousImage"> Previous rendered images. </param>
@@ -57,6 +58,8 @@ namespace Retouch_Photo2.Layers
 
         /// <summary> <see cref = "Layer" />'s EffectManager. </summary>
         public EffectManager EffectManager = new EffectManager();
+        /// <summary> <see cref = "Layer" />'s AdjustmentManager. </summary>
+        public AdjustmentManager AdjustmentManager = new AdjustmentManager();
 
 
         //@Static
@@ -78,6 +81,9 @@ namespace Retouch_Photo2.Layers
 
             //Effect
             currentImage = EffectManager.Render(currentLayer.EffectManager, currentImage);
+
+            //Adjustment
+            currentImage = AdjustmentManager.Render(currentLayer.AdjustmentManager, currentImage);
 
             //Opacity
             if (currentLayer.Opacity < 1.0)

@@ -1,8 +1,13 @@
 ﻿using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.TestApp.ViewModels;
 using Retouch_Photo2.Transformers;
+using Retouch_Photo2.ViewModels;
+using Retouch_Photo2.ViewModels.Selections;
+using Retouch_Photo2.ViewModels.Tips;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -13,11 +18,15 @@ namespace Retouch_Photo2.TestApp.Controls
     /// </summary>
     public sealed partial class LayerControl : UserControl
     {
-        //ViewModel
+        //@ViewModel
         ViewModel ViewModel => Retouch_Photo2.TestApp.App.ViewModel;
-        SelectionViewModel Selection => Retouch_Photo2.TestApp.App.Selection;
-        MezzanineViewModel Mezzanine => Retouch_Photo2.TestApp.App.Mezzanine;
-        
+        SelectionViewModel SelectionViewModel => Retouch_Photo2.TestApp.App.SelectionViewModel;
+        MezzanineViewModel MezzanineViewModel => Retouch_Photo2.TestApp.App.MezzanineViewModel;
+        TipViewModel TipViewModel => Retouch_Photo2.TestApp.App.TipViewModel;
+
+
+        ObservableCollection<Layer> _reference => this.ViewModel.Layers;
+        ObservableCollection<Layer> _selection => this.SelectionViewModel.Layer.Children;
 
         //@Converter
         private double OpacityToValueConverter(float opacity) => opacity * 100.0d;
@@ -110,16 +119,19 @@ namespace Retouch_Photo2.TestApp.Controls
         public LayerControl()
         {
             this.InitializeComponent();
-                       
 
-            //Layer
+
+            #region Layer
+
+
+            //Opacity
             this.OpacitySlider.ValueChanged += (s, e) =>
             {
                 float opacity = this.ValueToOpacityConverter(e.NewValue);
 
                 //Selection
-                this.Selection.Opacity = opacity;
-                this.Selection.SetValue((layer) =>
+                this.SelectionViewModel.Opacity = opacity;
+                this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.Opacity = opacity;
                 });
@@ -127,11 +139,13 @@ namespace Retouch_Photo2.TestApp.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
+
+            //Blend
             this.BlendControl.TypeChanged += (type) =>
             {
                 //Selection
-                this.Selection.BlendType = type;
-                this.Selection.SetValue((layer) =>
+                this.SelectionViewModel.BlendType = type;
+                this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.BlendType = type;
                 });
@@ -139,15 +153,21 @@ namespace Retouch_Photo2.TestApp.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            
-            //Layer
+
+            #endregion
+
+
+            #region Layer
+
+
+            //Visual
             this.VisualButton.Tapped += (s, e) =>
             {
-                Visibility value = (this.Selection.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
+                Visibility value = (this.SelectionViewModel.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
 
                 //Selection
-                this.Selection.Visibility = value;
-                this.Selection.SetValue((layer) =>
+                this.SelectionViewModel.Visibility = value;
+                this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.Visibility = value;
                 });
@@ -155,47 +175,82 @@ namespace Retouch_Photo2.TestApp.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
+
+            //Duplicate
             this.DuplicateButton.Tapped += (s, e) =>
             {
-                int index = this.Mezzanine.GetfFrstIndex(this.ViewModel.Layers);
+                int index = this.MezzanineViewModel.GetfFrstIndex(this.ViewModel.Layers);
 
-                this.Selection.SetValue((layer) =>
-                {
-                    var cloneLayer = layer.Clone(this.ViewModel.CanvasDevice);//Clone
-
-                    //IsChecked
-                    cloneLayer.IsChecked = true;
-                    layer.IsChecked = false;
-
-                    this.ViewModel.Layers.Insert(index, cloneLayer);//Insert
-                });
-
-                this.Selection.SetModeNone();//Selection
-                this.ViewModel.Invalidate();//Invalidate
-            };
-
-            this.RemoveButton.Tapped += (s, e) =>
-            {
-                switch (this.Selection.Mode)
+                switch (this.SelectionViewModel.Mode)
                 {
                     case ListViewSelectionMode.None:
                         break;
                     case ListViewSelectionMode.Single:
                         {
-                            this.ViewModel.Layers.Remove(this.Selection.Layer);
+                            Layer cloneLayer = this.SelectionViewModel.Layer.Clone(this.ViewModel.CanvasDevice);//Clone
 
-                            this.Selection.SetModeNone();//Selection
+                            //IsChecked
+                            this.SelectionViewModel.Layer.IsChecked = false;
+                            cloneLayer.IsChecked = true;
+
+                            this.ViewModel.Layers.Insert(index, cloneLayer);//Insert
+                            this.SelectionViewModel.SetModeSingle(cloneLayer);//Selection
+                        }
+                        break;
+                    case ListViewSelectionMode.Multiple:
+                        {
+                            IEnumerable<Layer> cloneLayers = from cloneLayer in this.SelectionViewModel.Layers select cloneLayer.Clone(this.ViewModel.CanvasDevice);//Clone
+
+
+                            //IsChecked
+                            foreach (Layer layer in this.SelectionViewModel.Layers)
+                            {
+                                layer.IsChecked = true;
+                            }
+                            foreach (Layer cloneLayer in cloneLayers)
+                            {
+                                cloneLayer.IsChecked = true;
+                            }
+
+                            foreach (Layer cloneLayer in cloneLayers)
+                            {
+                                this.ViewModel.Layers.Insert(index, cloneLayer);//Insert
+                            }
+                            this.SelectionViewModel.SetModeMultiple(cloneLayers);//Selection
+                        }
+                        break;
+                }
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+
+
+            //Remove
+            this.RemoveButton.Tapped += (s, e) =>
+            {
+                switch (this.SelectionViewModel.Mode)
+                {
+                    case ListViewSelectionMode.None:
+                        break;
+                    case ListViewSelectionMode.Single:
+                        {
+                            this.ViewModel.Layers.Remove(this.SelectionViewModel.Layer);
+
+                            this.SelectionViewModel.SetModeNone();//Selection
                             this.ViewModel.Invalidate();//Invalidate
                         }
                         break;
                     case ListViewSelectionMode.Multiple:
                         {
-                            foreach (Layer layer in this.Selection.Layers)
+                            foreach (Layer layer in this.SelectionViewModel.Layers)
                             {
-                                this.ViewModel.Layers.Remove(this.Selection.Layer);
+                                this.ViewModel.Layers.Remove(this.SelectionViewModel.Layer);
                             }
 
-                            this.Selection.SetModeNone();//Selection
+                            this.SelectionViewModel.SetModeNone();//Selection
                             this.ViewModel.Invalidate();//Invalidate
                         }
                         break;
@@ -203,17 +258,23 @@ namespace Retouch_Photo2.TestApp.Controls
             };
 
 
+            #endregion
+
+
+            #region Group
+
+
             //Group
             this.GroupButton.Tapped += (s, e) =>
             {
-                if (this.ViewModel.LayerMenuLayoutState == Elements.MenuLayoutState.FlyoutShow)
+                if (this.TipViewModel.LayerMenuLayoutState == Elements.MenuLayoutState.FlyoutShow)
                 {
-                    this.ViewModel.LayerMenuLayoutState = Elements.MenuLayoutState.FlyoutHide;
+                    this.TipViewModel.LayerMenuLayoutState = Elements.MenuLayoutState.FlyoutHide;
                 }
 
 
                 //TransformerMatrix
-                TransformerMatrix transformerMatrix = new TransformerMatrix(this.Selection.Transformer);
+                TransformerMatrix transformerMatrix = new TransformerMatrix(this.SelectionViewModel.Transformer);
                 //GroupLayer
                 GroupLayer groupLayer = new GroupLayer
                 {
@@ -223,10 +284,11 @@ namespace Retouch_Photo2.TestApp.Controls
 
 
                 //Index
-                int index = this.Mezzanine.GetfFrstIndex(this.ViewModel.Layers);
+                int index = this.MezzanineViewModel.GetfFrstIndex(this.ViewModel.Layers);
                 //Selection
-                this.Selection.SetValue((layer) =>
+                this.SelectionViewModel.SetValue((layer) =>
                 {
+                    layer.IsChecked = false;
                     groupLayer.Children.Add(layer);//Add
                 });
 
@@ -236,22 +298,24 @@ namespace Retouch_Photo2.TestApp.Controls
                     this.ViewModel.Layers.Remove(layer);//Remove
                 }
 
-                this.Selection.SetModeSingle(groupLayer);//Selection
+                this.SelectionViewModel.SetModeSingle(groupLayer);//Selection
                 this.ViewModel.Layers.Insert(index, groupLayer);//Insert
                 this.ViewModel.Invalidate();//Invalidate
             };
 
+
+            //UnGroup
             this.UnGroupButton.Tapped += (s, e) =>
             {
-                if (this.Selection.IsGroupLayer == false) return;
+                if (this.SelectionViewModel.IsGroupLayer == false) return;
 
-                if (this.Selection.Layer is GroupLayer groupLayer)
+                if (this.SelectionViewModel.Layer is GroupLayer groupLayer)
                 {
                     //Index
-                    int index = this.Mezzanine.GetfFrstIndex(this.ViewModel.Layers);
+                    int index = this.MezzanineViewModel.GetfFrstIndex(this.ViewModel.Layers);
 
                     //Selection
-                    this.Selection.SetValue((layer) =>
+                    this.SelectionViewModel.SetValue((layer) =>
                     {
                         layer.IsChecked = false;
                     });
@@ -260,17 +324,75 @@ namespace Retouch_Photo2.TestApp.Controls
                     this.ViewModel.Layers.Remove(groupLayer);
                     foreach (Layer layer in groupLayer.Children)
                     {
+                        layer.IsChecked = true;
                         this.ViewModel.Layers.Insert(index, layer);//Insert
                     }
 
                     //SetMode
                     IEnumerable<Layer> layers = groupLayer.Children;
                     Transformer transformer = groupLayer.TransformerMatrix.Destination;
-                    this.Selection.SetModeMultiple(layers, transformer);//Selection
+                    this.SelectionViewModel.SetModeMultiple(layers, transformer);//Selection
 
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };
+
+
+            #endregion
+
+
+            #region Drag and Drop
+
+
+            //Target
+            this.ListView.AllowDrop = true;
+
+            this.ListView.CanDrag = false;
+            this.ListView.CanDragItems = false;
+
+            this.ListView.CanReorderItems = true;
+            this.ListView.ReorderMode = ListViewReorderMode.Disabled;
+            this.ListView.SelectionMode = ListViewSelectionMode.None;
+
+            /// DragOver is called when the dragged pointer moves over a UIElement with AllowDrop=True
+            /// We need to return an AcceptedOperation != None in either DragOver or DragEnter
+            this.ListView.DragOver += (object sender, DragEventArgs e) =>
+            {
+                // Our list only accepts text
+                e.AcceptedOperation = (e.DataView.Contains2(LayerDataPackageExpansion.DataFormat)) ? DataPackageOperation.Copy : DataPackageOperation.None;
+            };
+
+            /// We need to return the effective operation from Drop
+            /// This is not important for our source ListView, but it might be if the user
+            /// drags text from another source
+            this.ListView.Drop += (object sender, DragEventArgs e) =>
+            {
+                // This test is in theory not needed as we returned DataPackageOperation.None if
+                // the DataPackage did not contained text. However, it is always better if each
+                // method is robust by itself
+                if (e.DataView.Contains2(LayerDataPackageExpansion.DataFormat))
+                {
+                    // We need to take a Deferral as we won't be able to confirm the end
+                    // of the operation synchronously
+                    DragOperationDeferral def = e.GetDeferral();
+                    Layer getLayer = e.DataView.GetLayer();
+
+                    if (getLayer != this.SelectionViewModel.Layer)
+                    {
+                        if (this._reference.Contains(getLayer))
+                        {
+                            this._reference.Remove(getLayer);
+                            this._selection.Add(getLayer);
+                        }
+                    }
+                    else this.ViewModel.Text = "No!!!!";
+
+                    e.AcceptedOperation = DataPackageOperation.Copy;
+                    def.Complete();
+                }
+            };
+            #endregion
+
         }
 
         //@DataTemplate

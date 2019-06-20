@@ -1,4 +1,4 @@
-﻿using Retouch_Photo2.TestApp.Tools;
+﻿using Retouch_Photo2.Tools;
 using Windows.Devices.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -78,6 +78,16 @@ namespace Retouch_Photo2.TestApp.Pages
 
 
         #region DependencyProperty
+
+
+        /// <summary> Sets or Gets the on state of the IsHitTestVisible on the canvas. </summary>
+        public bool CanvasHitTestVisible
+        {
+            get { return (bool)GetValue(CanvasHitTestVisibleProperty); }
+            set { SetValue(CanvasHitTestVisibleProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "DrawLayout.CanvasHitTestVisible" /> dependency property. </summary>
+        public static readonly DependencyProperty CanvasHitTestVisibleProperty = DependencyProperty.Register(nameof(CanvasHitTestVisible), typeof(bool), typeof(DrawLayout), new PropertyMetadata(true));
 
 
         /// <summary> Sets or Gets the page layout is full screen. </summary>

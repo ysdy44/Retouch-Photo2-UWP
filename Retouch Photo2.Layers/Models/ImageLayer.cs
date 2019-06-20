@@ -1,7 +1,12 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Layers.Controls;
+using Retouch_Photo2.Transformers;
+using System;
 using System.Numerics;
+using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers.Models
@@ -49,5 +54,45 @@ namespace Retouch_Photo2.Layers.Models
                 TransformMatrix = base.TransformerMatrix.GetMatrix() * canvasToVirtualMatrix
             };
         }
+
+        //@Static
+        /// <summary>
+        /// Create a ImageLayer from file.
+        /// </summary>
+        /// /// <param name="resourceCreator"> resourceCreator </param>
+        /// <param name="file"> file </param>
+        /// <returns> ImageLayer </returns>
+        public static async Task<ImageLayer> CreateFromFlie(ICanvasResourceCreator resourceCreator, StorageFile file)
+        {
+            try
+            {
+                using (IRandomAccessStream stream = await file.OpenReadAsync())
+                {
+                    CanvasBitmap bitmap = await CanvasBitmap.LoadAsync(resourceCreator, stream, 96);
+
+                    return ImageLayer.CreateFromBitmap(bitmap); 
+                }
+            }
+            catch (Exception) { return null; }
+        }
+        /// <summary>
+        /// Create a ImageLayer from bitmap.
+        /// </summary>
+        /// <param name="bitmap"> bitmap </param>
+        /// <returns> ImageLayer </returns>
+        public static ImageLayer CreateFromBitmap(CanvasBitmap bitmap)
+        {
+            int width = (int)bitmap.SizeInPixels.Width;
+            int height = (int)bitmap.SizeInPixels.Height;
+
+            Transformer transformer = new Transformer(width, height, Vector2.Zero);
+
+            return new ImageLayer
+            {
+                TransformerMatrix = new TransformerMatrix(transformer),
+                Bitmap = bitmap
+            };
+        }
+
     }
 }

@@ -1,0 +1,78 @@
+﻿using System.ComponentModel;
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+
+namespace Retouch_Photo2.ViewModels
+{
+    /// <summary> 
+    /// Retouch_Photo2's the only <see cref = "ViewModel" />. 
+    /// </summary>
+    public partial class ViewModel : INotifyPropertyChanged
+    {
+                   
+
+        
+         
+
+        /// <summary> Sets or Gets the on state of the theme on the canvas. </summary>
+        public ElementTheme CanvasTheme
+        {
+            get => this.canvasTheme;
+            set
+            {
+                if (this.canvasTheme == value) return;
+                this.canvasTheme = value;
+                this.OnPropertyChanged(nameof(this.CanvasTheme));//Notify 
+            }
+        }
+        private ElementTheme canvasTheme;
+
+        /// <summary> Sets or Gets the on state of the ruler on the canvas. </summary>
+        public bool CanvasRulerVisible
+        {
+            get => this.canvasRulerVisible;
+            set
+            {
+                this.canvasRulerVisible = value;
+                this.OnPropertyChanged(nameof(this.CanvasRulerVisible));//Notify 
+            }
+        }
+        private bool canvasRulerVisible;
+        
+        /// <summary> Sets or Gets the on state of the IsHitTestVisible on the canvas. </summary>
+        public bool CanvasHitTestVisible
+        {
+            get => this.canvasHitTestVisible;
+            set
+            {
+                this.canvasHitTestVisible = value; 
+                this.OnPropertyChanged(nameof(this.CanvasHitTestVisible));//Notify 
+            }
+        }
+        private bool canvasHitTestVisible = true;
+
+        
+
+
+        /// <summary> Retouch_Photo2's the only <see cref = "ViewModel.Text" />. </summary>
+        public string Text
+        {
+            get => this.text;
+            set
+            {
+                this.text = value;
+                this.OnPropertyChanged(nameof(this.Text));//Notify 
+            }
+        }
+        private string text = string.Empty;
+        /// <summary> Sets's the <see cref = "ViewModel.Text" />. </summary>
+        public void SetText()
+        {
+            if (this.Text.Length > 44) this.Text = string.Empty;
+            else this.Text += "O";
+        }
+
+
+    }
+}

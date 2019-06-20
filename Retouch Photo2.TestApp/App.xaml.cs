@@ -1,4 +1,9 @@
-﻿using Retouch_Photo2.TestApp.ViewModels;
+﻿using Retouch_Photo2.Tools;
+using Retouch_Photo2.Tools.Models;
+using Retouch_Photo2.ViewModels;
+using Retouch_Photo2.ViewModels.Keyboards;
+using Retouch_Photo2.ViewModels.Selections;
+using Retouch_Photo2.ViewModels.Tips;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -13,14 +18,25 @@ namespace Retouch_Photo2.TestApp
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.ViewModel" />. </summary>
         public static ViewModel ViewModel = new ViewModel();
 
-        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.KeyboardViewModel" />. </summary>
-        public static KeyboardViewModel Keyboard = new KeyboardViewModel();
+        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.Keyboards.KeyboardViewModel" />. </summary>
+        public static KeyboardViewModel KeyboardViewModel = new KeyboardViewModel();
 
-        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.SelectionViewModel" />. </summary>
-        public static SelectionViewModel Selection = new SelectionViewModel();
+        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.Selections.SelectionViewModel" />. </summary>
+        public static SelectionViewModel SelectionViewModel = new SelectionViewModel();
 
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.MezzanineViewModel" />. </summary>
-        public static MezzanineViewModel Mezzanine = new MezzanineViewModel();
+        public static MezzanineViewModel MezzanineViewModel = new MezzanineViewModel();
+
+        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.Tips.TipViewModel" />. </summary>
+        public static TipViewModel TipViewModel = new TipViewModel(new NoneTool())
+        {
+            TransformerToolBase=new TransformerToolBase(),
+
+            ViewTool = new ViewTool(),
+            RectangleTool = new RectangleTool(),
+            EllipseTool = new EllipseTool(),
+            CursorTool = new CursorTool(),
+        };
 
 
         public App()
