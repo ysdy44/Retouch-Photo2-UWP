@@ -193,10 +193,6 @@
       <Project>{3f4ae427-651f-4791-a176-678a00a93b1e}</Project>
       <Name>Retouch Photo2.Tools</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Transformers\Retouch Photo2.Transformers.csproj">
-      <Project>{5a044bad-be63-4d1b-b0f0-927177058f7e}</Project>
-      <Name>Retouch Photo2.Transformers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.ViewModels\Retouch Photo2.ViewModels.csproj">
       <Project>{d4571a00-4303-4ddb-b63b-6d741c82f73f}</Project>
       <Name>Retouch Photo2.ViewModels</Name>

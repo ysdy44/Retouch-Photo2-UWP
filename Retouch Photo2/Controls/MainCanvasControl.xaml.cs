@@ -3,7 +3,7 @@ using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Text;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Library;
-using Retouch_Photo2.Transformers;
+using FanKit.Transformers;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
@@ -227,7 +227,7 @@ namespace Retouch_Photo2.Controls
                                 {
                                     Transformer transformer = this.SelectionViewModel.GetTransformer();
                                     Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                                    args.DrawingSession.DrawBoundNodes(transformer, matrix, this.AccentColor);
+                                    args.DrawingSession.DrawBoundNodes(transformer, matrix, this.AccentColor, this.SelectionViewModel.DsabledRadian);
                                 }
                                 break;
                         }

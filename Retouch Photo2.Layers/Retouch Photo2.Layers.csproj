@@ -172,6 +172,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\FanKit.Transformers\FanKit.Transformers\FanKit.Transformers.csproj">
+      <Project>{a98a4671-07f5-46c7-bad2-9fa0242d2855}</Project>
+      <Name>FanKit.Transformers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Adjustment\Retouch Photo2.Adjustments.csproj">
       <Project>{7256C005-0E5D-4C38-9115-E4EEF9978233}</Project>
       <Name>Retouch Photo2.Adjustments</Name>
@@ -187,10 +191,6 @@
     <ProjectReference Include="..\Retouch Photo2.Library\Retouch Photo2.Library.csproj">
       <Project>{5a773056-cf52-4a57-b004-d3f170cea03b}</Project>
       <Name>Retouch Photo2.Library</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Transformers\Retouch Photo2.Transformers.csproj">
-      <Project>{5A044BAD-BE63-4D1B-B0F0-927177058F7E}</Project>
-      <Name>Retouch Photo2.Transformers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,6 @@
-﻿using Retouch_Photo2.Blends;
+﻿using FanKit.Transformers;
+using Retouch_Photo2.Blends;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Transformers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -25,6 +24,8 @@ namespace Retouch_Photo2.ViewModels.Selections
         public void SetModeNone()
         {
             this.Transformer = new Transformer();
+            this.DsabledRadian = false;//DisabledRadian
+
             this.Layer = null;
             this.Layers = null;
 
@@ -55,6 +56,8 @@ namespace Retouch_Photo2.ViewModels.Selections
         public void SetModeSingle(Layer layer)
         {
             this.Transformer = layer.TransformerMatrix.Destination;
+            this.DsabledRadian = layer.TransformerMatrix.DisabledRadian;//DisabledRadian
+
             this.Layer = layer;
             this.Layers = null;
 
@@ -94,6 +97,7 @@ namespace Retouch_Photo2.ViewModels.Selections
             float top = float.MaxValue;
             float right = float.MinValue;
             float bottom = float.MinValue;
+            bool disabledRadian = false;//DisabledRadian
 
             //Foreach
             {
@@ -112,11 +116,13 @@ namespace Retouch_Photo2.ViewModels.Selections
                     aaa(item.TransformerMatrix.Destination.RightTop);
                     aaa(item.TransformerMatrix.Destination.RightTop);
                     aaa(item.TransformerMatrix.Destination.LeftBottom);
+
+                    if (item.TransformerMatrix.DisabledRadian) disabledRadian = true;//DisabledRadian
                 }
             }
 
             Transformer transformer = new Transformer(left, top, right, bottom);
-            this.SetModeMultiple(layers, transformer);
+            this.SetModeMultiple(layers, transformer, disabledRadian);
         }
 
         /// <summary>
@@ -124,9 +130,11 @@ namespace Retouch_Photo2.ViewModels.Selections
         /// </summary>
         /// <param name="layers"> All selection layers. </param>
         /// <param name="transformer"> transformer </param>
-        public void SetModeMultiple(IEnumerable<Layer> layers, Transformer transformer)
+        public void SetModeMultiple(IEnumerable<Layer> layers, Transformer transformer, bool disabledRadian)
         {
             this.Transformer = transformer;
+            this.DsabledRadian = disabledRadian;
+
             this.Layer = null;
             this.Layers = layers;
 

@@ -1,9 +1,8 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Tools;
-using Retouch_Photo2.Transformers;
 using System.Numerics;
 
 namespace Retouch_Photo2.Tools.Models

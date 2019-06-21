@@ -1,6 +1,4 @@
-﻿using Retouch_Photo2.Transformers;
-using Retouch_Photo2.Transformers.Controls;
-using Retouch_Photo2.ViewModels;
+﻿using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Keyboards;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
@@ -8,6 +6,7 @@ using System;
 using System.Numerics;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using FanKit.Transformers;
 
 namespace Retouch_Photo2.Controls
 {
@@ -64,42 +63,10 @@ namespace Retouch_Photo2.Controls
 
             if (e.NewValue is ListViewSelectionMode value)
             {
-                switch (value)
-                {
-                    case ListViewSelectionMode.None:
-                        {
-                            con.WPicker.IsEnabled = false;
-                            con.HPicker.IsEnabled = false;
+                if (con.mode == value) return;
 
-                            con.RPicker.IsEnabled = false;
-                            con.SPicker.IsEnabled = false;
-
-                            con.XPicker.IsEnabled = false;
-                            con.YPicker.IsEnabled = false;
-
-                            con.RatioToggleControl.IsEnabled = false;//IsRatio
-                            con.IndicatorControl.Mode = IndicatorMode.None;//IndicatorMode
-                        }
-                        break;
-
-                    case ListViewSelectionMode.Single:
-                    case ListViewSelectionMode.Multiple:
-                        {
-                            con.WPicker.IsEnabled = true;
-                            con.HPicker.IsEnabled = true;
-
-                            con.RPicker.IsEnabled = true;
-                            con.SPicker.IsEnabled = true;
-
-                            con.XPicker.IsEnabled = true;
-                            con.YPicker.IsEnabled = true;
-
-                            con.RatioToggleControl.IsEnabled = true;//IsRatio
-                            con.IndicatorControl.Mode = con.IndicatorMode;//IndicatorMode
-                        }
-                        break;
-
-                }
+                con.mode = value;
+                con.SetTransformer();
             }
         }));
 
@@ -117,33 +84,142 @@ namespace Retouch_Photo2.Controls
 
             if (e.NewValue is Transformer value)
             {
-                Vector2 horizontal = value.Horizontal;
-                Vector2 vertical = value.Vertical;
+                con.transformer = value;
+                con.SetTransformer();
+            }
+        }));
 
-                //Radians
-                float radians = con.GetRadians(horizontal);
-                con.RPicker.Value = (int)radians;
 
-                //Skew
-                float skew = con.GetSkew(vertical, radians);
-                con.SPicker.Value = (int)skew;
 
-                //Width Height
-                con.WPicker.Value = (int)horizontal.Length();
-                con.HPicker.Value = (int)vertical.Length();
+        public bool DisabledRadian
+        {
+            get { return (bool)GetValue(DisabledRadianProperty); }
+            set { SetValue(DisabledRadianProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "TransformerControl.DisabledRadian" /> dependency property. </summary>
+        public static readonly DependencyProperty DisabledRadianProperty = DependencyProperty.Register(nameof(Transformer), typeof(Transformer), typeof(TransformerControl), new PropertyMetadata(false, (sender, e) =>
+        {
+        TransformerControl con = (TransformerControl)sender;
 
-                //X Y
-                Vector2 vector = con.GetVectorWithIndicatorMode(value, con.IndicatorMode);
-                con.XPicker.Value = (int)vector.X;
-                con.YPicker.Value = (int)vector.Y;
+            if (e.NewValue is bool value)
+            {
+                if (con.disabledRadian == value) return;
 
-                //Indicator
-                con.IndicatorControl.Radians = radians;
+                con.disabledRadian = value;
+                con.SetTransformer();
             }
         }));
 
 
         #endregion
+
+
+
+
+        ListViewSelectionMode mode;
+        Transformer transformer;
+        bool disabledRadian;
+
+        void SetTransformer()
+        {
+            switch (this.mode)
+            {
+                case ListViewSelectionMode.None:
+                    {
+                        this.WPicker.IsEnabled = false;
+                        this.HPicker.IsEnabled = false;
+
+                        this.RPicker.IsEnabled = false;
+                        this.SPicker.IsEnabled = false;
+
+                        this.XPicker.IsEnabled = false;
+                        this.YPicker.IsEnabled = false;
+
+                        this.RatioToggleControl.IsEnabled = false;//IsRatio
+                        this.IndicatorControl.Mode = IndicatorMode.None;//IndicatorMode
+                    }
+                    break;
+
+                case ListViewSelectionMode.Single:
+                case ListViewSelectionMode.Multiple:
+                    {
+                        this.WPicker.IsEnabled = true;
+                        this.HPicker.IsEnabled = true;
+
+                        if (this.disabledRadian==false)
+                        {
+                            this.RPicker.IsEnabled = true;
+                            this.SPicker.IsEnabled = true;
+                        }
+                        else
+                        {
+                            this.RPicker.IsEnabled = false;
+                            this.SPicker.IsEnabled = false;
+                        }
+
+                        this.XPicker.IsEnabled = true;
+                        this.YPicker.IsEnabled = true;
+
+                        this.RatioToggleControl.IsEnabled = true;//IsRatio
+                        this.IndicatorControl.Mode = this.IndicatorMode;//IndicatorMode
+                    }
+                    break;
+
+            }
+
+
+
+            if (disabledRadian == false)
+            {
+                Vector2 horizontal = this.transformer.Horizontal;
+                Vector2 vertical = this.transformer.Vertical;
+
+                //Radians
+                float radians = this.GetRadians(horizontal);
+                this.RPicker.Value = (int)radians;
+
+                //Skew
+                float skew = this.GetSkew(vertical, radians);
+                this.SPicker.Value = (int)skew;
+
+                //Width Height
+                this.WPicker.Value = (int)horizontal.Length();
+                this.HPicker.Value = (int)vertical.Length();
+
+                //X Y
+                Vector2 vector = this.GetVectorWithIndicatorMode(this.transformer, this.IndicatorMode);
+                this.XPicker.Value = (int)vector.X;
+                this.YPicker.Value = (int)vector.Y;
+
+                //Indicator
+                this.IndicatorControl.Radians = radians;
+            }
+            else
+            {
+                Vector2 horizontal = this.transformer.Horizontal;
+                Vector2 vertical = this.transformer.Vertical;
+
+                //Radians
+                this.RPicker.Value = 0;
+
+                //Skew
+                this.SPicker.Value = 0;
+
+                //Width Height
+                this.WPicker.Value = (int)horizontal.Length();
+                this.HPicker.Value = (int)vertical.Length();
+
+                //X Y
+                Vector2 vector = this.GetVectorWithIndicatorMode(this.transformer, this.IndicatorMode);
+                this.XPicker.Value = (int)vector.X;
+                this.YPicker.Value = (int)vector.Y;
+
+                //Indicator
+                this.IndicatorControl.Radians = 0;
+            }
+        }
+
+
 
 
         //@Construct

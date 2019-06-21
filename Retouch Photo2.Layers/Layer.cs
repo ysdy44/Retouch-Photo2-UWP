@@ -1,14 +1,12 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Effects;
-using Retouch_Photo2.Transformers;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Numerics;
-using Windows.Graphics.Effects;
-using Windows.UI;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers

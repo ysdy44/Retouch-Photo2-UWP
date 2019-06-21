@@ -13,7 +13,7 @@
     xmlns:operate="using:Retouch_Photo2.Operates"
     xmlns:adjustments="using:Retouch_Photo2.Adjustments"
     xmlns:effects="using:Retouch_Photo2.Effects"
-    xmlns:transformers="using:Retouch_Photo2.Transformers"
+    xmlns:transformers="using:FanKit.Transformers"
     xmlns:layers="using:Retouch_Photo2.Layers"
     xmlns:selection="using:Retouch_Photo2.Selections"
     NavigationCacheMode="Enabled"    
@@ -265,6 +265,7 @@
                     <controls:TransformerControl 
                         Transformer="{x:Bind SelectionViewModel.Transformer,Mode=OneWay}" 
                         Mode="{x:Bind SelectionViewModel.Mode,Mode=OneWay}"
+                        DisabledRadian="{x:Bind SelectionViewModel.DsabledRadian,Mode=OneWay}"
                         />
                 </elements:MenuLayout.ContentChild>
                 <elements:MenuLayout.Icon>

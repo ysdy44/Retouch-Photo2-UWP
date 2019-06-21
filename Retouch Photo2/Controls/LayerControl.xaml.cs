@@ -1,6 +1,6 @@
-﻿using Retouch_Photo2.Layers;
+﻿using FanKit.Transformers;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Transformers;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
@@ -274,12 +274,15 @@ namespace Retouch_Photo2.Controls
 
 
                 //TransformerMatrix
-                TransformerMatrix transformerMatrix = new TransformerMatrix(this.SelectionViewModel.Transformer);
+                TransformerMatrix transformerMatrix = new TransformerMatrix(this.SelectionViewModel.Transformer)
+                {
+                    DisabledRadian = false//DisabledRadian
+                };
                 //GroupLayer
                 GroupLayer groupLayer = new GroupLayer
                 {
                     IsChecked = true,
-                    TransformerMatrix = transformerMatrix
+                    TransformerMatrix = transformerMatrix,
                 };
 
 
@@ -290,6 +293,8 @@ namespace Retouch_Photo2.Controls
                 {
                     layer.IsChecked = false;
                     groupLayer.Children.Add(layer);//Add
+
+                    if (layer.TransformerMatrix.DisabledRadian) transformerMatrix.DisabledRadian = true;//DisabledRadian
                 });
 
 
@@ -330,8 +335,7 @@ namespace Retouch_Photo2.Controls
 
                     //SetMode
                     IEnumerable<Layer> layers = groupLayer.Children;
-                    Transformer transformer = groupLayer.TransformerMatrix.Destination;
-                    this.SelectionViewModel.SetModeMultiple(layers, transformer);//Selection
+                    this.SelectionViewModel.SetModeMultiple(layers);//Selection
 
                     this.ViewModel.Invalidate();//Invalidate
                 }

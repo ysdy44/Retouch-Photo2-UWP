@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2.Layers", "Retouch Photo2.Layers\Retouch Photo2.Layers.csproj", "{15CBF0A7-0953-49F5-B541-F8BCAAB40053}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2.Transformers", "Retouch Photo2.Transformers\Retouch Photo2.Transformers.csproj", "{5A044BAD-BE63-4D1B-B0F0-927177058F7E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2", "Retouch Photo2\Retouch Photo2.csproj", "{1353AF55-E0F3-442A-9EEF-9087FAAD6F19}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2.Elements", "Retouch Photo2.Elements\Retouch Photo2.Elements.csproj", "{0E5AC58E-36BF-44FE-877E-830F024B7109}"
@@ -30,6 +28,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2.ViewModels", "Retouch Photo2.ViewModels\Retouch Photo2.ViewModels.csproj", "{D4571A00-4303-4DDB-B63B-6D741C82F73F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2.Tools", "Retouch Photo2.Tools\Retouch Photo2.Tools.csproj", "{3F4AE427-651F-4791-A176-678A00A93B1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FanKit.Transformers", "..\FanKit.Transformers\FanKit.Transformers\FanKit.Transformers.csproj", "{A98A4671-07F5-46C7-BAD2-9FA0242D2855}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,22 +59,6 @@ Global
 		{15CBF0A7-0953-49F5-B541-F8BCAAB40053}.Release|x64.Build.0 = Release|x64
 		{15CBF0A7-0953-49F5-B541-F8BCAAB40053}.Release|x86.ActiveCfg = Release|x86
 		{15CBF0A7-0953-49F5-B541-F8BCAAB40053}.Release|x86.Build.0 = Release|x86
-		{5A044BAD-BE63-4D1B-B0F0-927177058F7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A044BAD-BE63-4D1B-B0F0-927177058F7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A044BAD-BE63-4D1B-B0F0-927177058F7E}.Debug|ARM.ActiveCfg = Debug|ARM
-		{5A044BAD-BE63-4D1B-B0F0-927177058F7E}.Debug|ARM.Build.0 = Debug|ARM
-		{5A044BAD-BE63-4D1B-B0F0-927177058F7E}.Debug|x64.ActiveCfg = Debug|x64
-		{5A044BAD-BE63-4D1B-B0F0-927177058F7E}.Debug|x64.Build.0 = Debug|x64
-		{5A044BAD-BE63-4D1B-B0F0-927177058F7E}.Debug|x86.ActiveCfg = Debug|x86
-		{5A044BAD-BE63-4D1B-B0F0-927177058F7E}.Debug|x86.Build.0 = Debug|x86
-		{5A044BAD-BE63-4D1B-B0F0-927177058F7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A044BAD-BE63-4D1B-B0F0-927177058F7E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5A044BAD-BE63-4D1B-B0F0-927177058F7E}.Release|ARM.ActiveCfg = Release|ARM
-		{5A044BAD-BE63-4D1B-B0F0-927177058F7E}.Release|ARM.Build.0 = Release|ARM
-		{5A044BAD-BE63-4D1B-B0F0-927177058F7E}.Release|x64.ActiveCfg = Release|x64
-		{5A044BAD-BE63-4D1B-B0F0-927177058F7E}.Release|x64.Build.0 = Release|x64
-		{5A044BAD-BE63-4D1B-B0F0-927177058F7E}.Release|x86.ActiveCfg = Release|x86
-		{5A044BAD-BE63-4D1B-B0F0-927177058F7E}.Release|x86.Build.0 = Release|x86
 		{1353AF55-E0F3-442A-9EEF-9087FAAD6F19}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{1353AF55-E0F3-442A-9EEF-9087FAAD6F19}.Debug|ARM.ActiveCfg = Debug|ARM
 		{1353AF55-E0F3-442A-9EEF-9087FAAD6F19}.Debug|ARM.Build.0 = Debug|ARM
@@ -275,6 +259,22 @@ Global
 		{3F4AE427-651F-4791-A176-678A00A93B1E}.Release|x64.Build.0 = Release|x64
 		{3F4AE427-651F-4791-A176-678A00A93B1E}.Release|x86.ActiveCfg = Release|x86
 		{3F4AE427-651F-4791-A176-678A00A93B1E}.Release|x86.Build.0 = Release|x86
+		{A98A4671-07F5-46C7-BAD2-9FA0242D2855}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A98A4671-07F5-46C7-BAD2-9FA0242D2855}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A98A4671-07F5-46C7-BAD2-9FA0242D2855}.Debug|ARM.ActiveCfg = Debug|ARM
+		{A98A4671-07F5-46C7-BAD2-9FA0242D2855}.Debug|ARM.Build.0 = Debug|ARM
+		{A98A4671-07F5-46C7-BAD2-9FA0242D2855}.Debug|x64.ActiveCfg = Debug|x64
+		{A98A4671-07F5-46C7-BAD2-9FA0242D2855}.Debug|x64.Build.0 = Debug|x64
+		{A98A4671-07F5-46C7-BAD2-9FA0242D2855}.Debug|x86.ActiveCfg = Debug|x86
+		{A98A4671-07F5-46C7-BAD2-9FA0242D2855}.Debug|x86.Build.0 = Debug|x86
+		{A98A4671-07F5-46C7-BAD2-9FA0242D2855}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A98A4671-07F5-46C7-BAD2-9FA0242D2855}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A98A4671-07F5-46C7-BAD2-9FA0242D2855}.Release|ARM.ActiveCfg = Release|ARM
+		{A98A4671-07F5-46C7-BAD2-9FA0242D2855}.Release|ARM.Build.0 = Release|ARM
+		{A98A4671-07F5-46C7-BAD2-9FA0242D2855}.Release|x64.ActiveCfg = Release|x64
+		{A98A4671-07F5-46C7-BAD2-9FA0242D2855}.Release|x64.Build.0 = Release|x64
+		{A98A4671-07F5-46C7-BAD2-9FA0242D2855}.Release|x86.ActiveCfg = Release|x86
+		{A98A4671-07F5-46C7-BAD2-9FA0242D2855}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

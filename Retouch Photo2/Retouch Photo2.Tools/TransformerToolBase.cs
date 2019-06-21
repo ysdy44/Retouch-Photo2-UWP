@@ -1,6 +1,6 @@
-﻿using Retouch_Photo2.Elements;
+﻿using FanKit.Transformers;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Transformers;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Keyboards;
 using Retouch_Photo2.ViewModels.Selections;
@@ -46,7 +46,7 @@ namespace Retouch_Photo2.Tools
                     {
                         Transformer transformer = this.SelectionViewModel.GetTransformer();
                         Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                        this.TransformerMode = Transformer.ContainsNodeMode(point, transformer, matrix);
+                        this.TransformerMode = Transformer.ContainsNodeMode(point, transformer, matrix, this.SelectionViewModel.DsabledRadian);
 
                         //Add
                         switch (this.KeyboardViewModel.CompositeMode)
@@ -101,7 +101,7 @@ namespace Retouch_Photo2.Tools
             if (isSetTransformerMode)
             {
                 Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                this.TransformerMode = Transformer.ContainsNodeMode(startingPoint, this.oldTransformer, matrix);
+                this.TransformerMode = Transformer.ContainsNodeMode(startingPoint, this.oldTransformer, matrix, this.SelectionViewModel.DsabledRadian);
                 if (this.TransformerMode == TransformerMode.None) return false;
             }
 

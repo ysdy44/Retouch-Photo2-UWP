@@ -134,6 +134,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\FanKit.Transformers\FanKit.Transformers\FanKit.Transformers.csproj">
+      <Project>{a98a4671-07f5-46c7-bad2-9fa0242d2855}</Project>
+      <Name>FanKit.Transformers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Adjustment\Retouch Photo2.Adjustments.csproj">
       <Project>{7256c005-0e5d-4c38-9115-e4eef9978233}</Project>
       <Name>Retouch Photo2.Adjustments</Name>
@@ -161,10 +165,6 @@
     <ProjectReference Include="..\Retouch Photo2.Tools\Retouch Photo2.Tools.csproj">
       <Project>{3f4ae427-651f-4791-a176-678a00a93b1e}</Project>
       <Name>Retouch Photo2.Tools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Transformers\Retouch Photo2.Transformers.csproj">
-      <Project>{5a044bad-be63-4d1b-b0f0-927177058f7e}</Project>
-      <Name>Retouch Photo2.Transformers</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

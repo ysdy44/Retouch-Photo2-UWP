@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pickers="using:HSVColorPickers"
-    xmlns:transformersControls="using:Retouch_Photo2.Transformers.Controls"
+    xmlns:transformers="using:FanKit.Transformers"
     mc:Ignorable="d"
     d:DesignHeight="400"
     d:DesignWidth="200"
@@ -92,7 +92,7 @@
 
             <!--/////////////////////////////////////////////////////////-->
 
-            <transformersControls:IndicatorControl x:Name="IndicatorControl"
+            <transformers:IndicatorControl x:Name="IndicatorControl"
                      Grid.Row="6" Grid.ColumnSpan="3"                                                                                    
                      Background="{ThemeResource AppFill}"
                      BorderBrush="{ThemeResource AppStroke}"
@@ -100,13 +100,13 @@
                 <ToolTipService.ToolTip>
                     <ToolTip Content="Indicator" Placement="Left" IsOpen="{x:Bind TipViewModel.IsTransformerMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
-            </transformersControls:IndicatorControl>
+            </transformers:IndicatorControl>
 
         </Grid>
 
 
         <Border x:Name="RemoteRootGrid" Padding="2">
-            <transformersControls:RemoteControl x:Name="RemoteControl" 
+            <transformers:RemoteControl x:Name="RemoteControl" 
                      Width="Auto" Height="Auto"                                               
                      Background="{ThemeResource AppForeground}"
                      BorderBrush="{ThemeResource AppBorderBrush}"

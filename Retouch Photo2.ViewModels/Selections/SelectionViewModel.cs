@@ -1,6 +1,5 @@
-﻿using Retouch_Photo2.Layers;
-using Retouch_Photo2.Transformers;
-using System;
+﻿using FanKit.Transformers;
+using Retouch_Photo2.Layers;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Windows.UI.Xaml.Controls;
@@ -44,6 +43,18 @@ namespace Retouch_Photo2.ViewModels.Selections
         }
         private Transformer transformer;
 
+        /// <summary> Is disable rotate radian? Defult **false**. </summary>
+        public bool DsabledRadian
+        {
+            get => this.disabledRadian;
+            set
+            {
+                this.disabledRadian = value;
+                this.OnPropertyChanged(nameof(this.DsabledRadian));//Notify 
+            }
+        }
+        private bool disabledRadian;
+         
 
         /// <summary> Transformer of the single checked layer.  </summary>
         public Layer Layer { get; private set; }
