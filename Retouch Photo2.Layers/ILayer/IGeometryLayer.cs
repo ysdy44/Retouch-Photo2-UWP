@@ -20,16 +20,14 @@ namespace Retouch_Photo2.Layers.ILayer
         /// <returns> geometry </returns>
         public abstract CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix);
 
-        //@Override
-        public override Color? GetFillColor() => this.FillColor;
-        public override void SetFillColor(Color fillColor) => this.FillColor = fillColor;
-
 
         /// <summary> <see cref = "IGeometryLayer" />'s fill-color. </summary>
         public Color FillColor = Colors.Gray;
 
   
         //@Override
+        public override Color? GetFillColor() => this.FillColor;
+        public override void SetFillColor(Color fillColor) => this.FillColor = fillColor;
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         {
             CanvasCommandList command = new CanvasCommandList(resourceCreator);

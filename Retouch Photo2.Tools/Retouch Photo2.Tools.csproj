@@ -109,6 +109,9 @@
     <Compile Include="Button.xaml.cs">
       <DependentUpon>Button.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AcrylicControl.xaml.cs">
+      <DependentUpon>AcrylicControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CursorControl.xaml.cs">
       <DependentUpon>CursorControl.xaml</DependentUpon>
     </Compile>
@@ -139,6 +142,10 @@
     <Page Include="Button.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AcrylicControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CursorControl.xaml">
       <Generator>MSBuild:Compile</Generator>

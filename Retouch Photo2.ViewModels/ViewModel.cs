@@ -1,6 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.TestApp.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;

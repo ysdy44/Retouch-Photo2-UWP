@@ -1,61 +1,54 @@
-﻿using Retouch_Photo2.Models;
+﻿using Retouch_Photo2.Elements;
 using Retouch_Photo2.ViewModels;
+using Retouch_Photo2.ViewModels.Keyboards;
+using Retouch_Photo2.ViewModels.Selections;
+using Retouch_Photo2.ViewModels.Tips;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 namespace Retouch_Photo2.Pages
 {
+    /// <summary> 
+    /// Retouch_Photo2's the only <see cref = "DrawPage" />. 
+    /// </summary>
     public sealed partial class DrawPage : Page
     {
-        //ViewModel
-        DrawViewModel ViewModel => Retouch_Photo2.App.ViewModel;
+        //@ViewModel
+        ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
+        SelectionViewModel SelectionViewModel => Retouch_Photo2.App.SelectionViewModel;
+        KeyboardViewModel KeyboardViewModel => Retouch_Photo2.App.KeyboardViewModel;
+        TipViewModel TipViewModel => Retouch_Photo2.App.TipViewModel;
 
+
+        //@Construct
         public DrawPage()
         {
             this.InitializeComponent();
 
-            //Debuug
-            MenuLayout.LayoutBinging(this.DebugLayout, this.DebugToggleButton);
-            //Selection
-            MenuLayout.LayoutBinging(this.SelectionLayout, this.SelectionToggleButton);
-            //Operate
-            MenuLayout.LayoutBinging(this.OperateLayout, this.OperateToggleButton);
-            //Adjustment
-            MenuLayout.LayoutBinging(this.AdjustmentLayout, this.AdjustmentToggleButton);
-            //Effect
-            MenuLayout.LayoutBinging(this.EffectLayout, this.EffectToggleButton);
-            //Transformer
-            MenuLayout.LayoutBinging(this.TransformerLayout, this.TransformerToggleButton);
-            //Navigator
-            MenuLayout.LayoutBinging(this.NavigatorLayout, this.NavigatorToggleButton);
-
+            //Theme
+            this.BackButton.Tapped += (s, e) => this.Frame.GoBack();
+            this.SaveButton.Tapped += (s, e) => this.Frame.GoBack();
+                       
             //Color
-            MenuLayout.TappedBinging(this.ColorLayout, this.ColorButton);
-
-
-            //Layer
-            this.LayersControl.FlyoutShow += (placementTarget) => MenuLayout.ShowFlyoutAt(this.LayerLayout, placementTarget);
-
-
-            this.BackButton.Tapped += (sender, e) => this.Frame.GoBack();
-            this.SaveButton.Tapped += (sender, e) => this.Frame.GoBack();
-
+            this.ColorButton.Tapped += (s, e) => this.TipViewModel.ColorMenuLayoutState = MenuLayoutButton.GetState(this.TipViewModel.ColorMenuLayoutState);
             this.ColorPicker.ColorChange += (s, value) =>
             {
-                this.ViewModel.Color = value;
-
-                Layer layer = this.ViewModel.Layer;
-                if (layer != null)
+                //Selection
+                this.SelectionViewModel.FillColor = value;
+                this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.ColorChanged(value);
-                    this.ViewModel.Invalidate();
-                }
-            };
+                    layer.SetFillColor(value);
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };          
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)//当前页面成为活动页面
+        //The current page becomes the active page
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            return;
             if (e.Parameter is Project project)
             {
                 if (project == null)
@@ -64,19 +57,21 @@ namespace Retouch_Photo2.Pages
                     return;
                 }
 
-                this.Loaded += (sender, e2) =>
-                {
+             //   this.Loaded += (sender, e2) =>
+                //{
 
-                    this.LoadingControl.Visibility = Visibility.Visible;//Loading
-                    this.ViewModel.LoadFromProject(project);//Project
-                    this.LoadingControl.Visibility = Visibility.Collapsed;//Loading   
+            this.LoadingControl.Visibility = Visibility.Visible;//Loading
+            this.ViewModel.LoadFromProject(project);//Project
+            this.LoadingControl.Visibility = Visibility.Collapsed;//Loading   
 
-                    this.ViewModel.Invalidate();
-                };
+            this.ViewModel.Invalidate();
+               // };
             }
         }
-        protected override void OnNavigatedFrom(NavigationEventArgs e)//当前页面不再成为活动页面
+        //The current page no longer becomes an active page
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
         }
+        
     }
 }

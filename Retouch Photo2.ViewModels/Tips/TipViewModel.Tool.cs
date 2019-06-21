@@ -17,6 +17,10 @@ namespace Retouch_Photo2.ViewModels.Tips
                 case ToolType.None:
                     break;
 
+                case ToolType.Cursor:
+                    this.IsCursorToolOpen = isOpen;
+                    break;
+
                 case ToolType.View:
                     this.IsViewToolOpen = isOpen;
                     break;
@@ -27,8 +31,7 @@ namespace Retouch_Photo2.ViewModels.Tips
                 case ToolType.Ellipse:
                     break;
 
-                case ToolType.Cursor:
-                    this.IsCursorToolOpen = isOpen;
+                case ToolType.Acrylic:
                     break;
             } 
         }
@@ -62,6 +65,9 @@ namespace Retouch_Photo2.ViewModels.Tips
 
 
 
+        /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s CursorTool. </summary>
+        public Tool CursorTool;
+
         /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s ViewTool. </summary>
         public Tool ViewTool;
 
@@ -71,24 +77,13 @@ namespace Retouch_Photo2.ViewModels.Tips
         /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s EllipseTool. </summary>
         public Tool EllipseTool;
 
-        /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s CursorTool. </summary>
-        public Tool CursorTool;
-
+        /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s AcrylicTool. </summary>
+        public Tool AcrylicTool;
+        
 
         //////////////////////////////////////////////////////////////////////////////////////
-       
 
-        /// <summary> IsOpen of the <see cref = "TipViewModel.ViewTool" />. </summary>
-        public bool IsViewToolOpen
-        {
-            get => this.isViewToolOpen;
-            set
-            {
-                this.isViewToolOpen = value;
-                this.OnPropertyChanged(nameof(this.IsViewToolOpen));//Notify 
-            }
-        }
-        private bool isViewToolOpen;
+
 
         /// <summary> IsOpen of the <see cref = "TipViewModel.CursorTool" />. </summary>
         public bool IsCursorToolOpen
@@ -101,7 +96,18 @@ namespace Retouch_Photo2.ViewModels.Tips
             }
         }
         private bool isCursorToolOpen;
-        
+
+        /// <summary> IsOpen of the <see cref = "TipViewModel.ViewTool" />. </summary>
+        public bool IsViewToolOpen
+        {
+            get => this.isViewToolOpen;
+            set
+            {
+                this.isViewToolOpen = value;
+                this.OnPropertyChanged(nameof(this.IsViewToolOpen));//Notify 
+            }
+        }
+        private bool isViewToolOpen;        
 
 
     }

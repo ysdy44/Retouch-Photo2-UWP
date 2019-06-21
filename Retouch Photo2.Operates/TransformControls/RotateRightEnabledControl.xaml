@@ -8,5 +8,6 @@
     d:DesignHeight="50"
     d:DesignWidth="50">
 
-    <FontIcon Glyph="&#xE149;" FontFamily="Segoe UI Symbol" Foreground="Gray" />
+    <FontIcon Glyph="&#xE149;" FontFamily="Segoe UI Symbol" Foreground="Gray"/>
+    
 </UserControl>

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Streams;
 
-namespace Retouch_Photo2.TestApp.Models
+namespace Retouch_Photo2.ViewModels
 {
     /// <summary>
     /// Retouch_Photo2 's Project

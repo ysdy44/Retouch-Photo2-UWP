@@ -106,6 +106,9 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controls\AcrylicControl.xaml.cs">
+      <DependentUpon>AcrylicControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\EllipseControl.xaml.cs">
       <DependentUpon>EllipseControl.xaml</DependentUpon>
     </Compile>
@@ -126,6 +129,7 @@
     <Compile Include="Layer.Notify.cs" />
     <Compile Include="Layer.cs" />
     <Compile Include="LayerDataPackageExpansion.cs" />
+    <Compile Include="Models\AcrylicLayer.cs" />
     <Compile Include="Models\EllipseLayer.cs" />
     <Compile Include="Models\GroupLayer.cs" />
     <Compile Include="Models\ImageLayer.cs" />
@@ -142,6 +146,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\AcrylicControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\EllipseControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

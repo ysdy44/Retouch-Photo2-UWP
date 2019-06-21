@@ -28,7 +28,6 @@
                               Background="{x:Bind FalseToBackgroundConverter(IsOn),Mode=OneWay}"
                               Foreground="{x:Bind FalseToForegroundConverter(IsOn),Mode=OneWay}"
                               Content="{x:Bind OnContent,Mode=OneWay}"
-                              ToolTipService.ToolTip="{x:Bind OnContent,Mode=OneWay}"
                               />
 
             <!--Off-->
@@ -36,7 +35,6 @@
                               Background="{x:Bind TrueToBackgroundConverter(IsOn),Mode=OneWay}"
                               Foreground="{x:Bind TrueToForegroundConverter(IsOn),Mode=OneWay}"
                               Content="{x:Bind OffContent,Mode=OneWay}"
-                              ToolTipService.ToolTip="{x:Bind OffContent,Mode=OneWay}"
                              />
 
         </StackPanel>

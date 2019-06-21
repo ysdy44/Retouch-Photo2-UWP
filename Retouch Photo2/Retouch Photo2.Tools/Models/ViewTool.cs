@@ -6,43 +6,50 @@ using System.Numerics;
 
 namespace Retouch_Photo2.Tools.Models
 {
+    /// <summary>
+    /// <see cref="Tool"/>'s ViewTool.
+    /// </summary>
     public class ViewTool : Tool
     {
-        //ViewModel
-        DrawViewModel ViewModel => Retouch_Photo2.App.ViewModel;
-        
-        Vector2 rightStartPoint;
-        Vector2 rightStartPosition;
-        
+        //@ViewModel
+        ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
+
+        Vector2 StartPosition;
+
+        //@Construct
         public ViewTool()
         {
             base.Type = ToolType.View;
             base.Icon = new ViewControl();
-            base.WorkIcon = new ViewControl();
+            base.ShowIcon = new ViewControl();
             base.Page = new ViewPage();
         }
 
-        
-        public override void Start(Vector2 point)
+        //@Override
+        public override void Starting(Vector2 point) { }
+        public override void Started(Vector2 startingPoint, Vector2 point)
         {
-            this.rightStartPoint = point;
-            this.rightStartPosition = this.ViewModel.MatrixTransformer.Position;
+            this.StartPosition = this.ViewModel.CanvasTransformer.Position;
 
-            this.ViewModel.Invalidate(isThumbnail: true);
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
-        public override void Delta(Vector2 point)
+        public override void Delta(Vector2 startingPoint, Vector2 point)
         {
-            this.ViewModel.MatrixTransformer.Position = this.rightStartPosition - this.rightStartPoint + point;
+            this.ViewModel.CanvasTransformer.Position = this.StartPosition - startingPoint + point;
+            this.ViewModel.CanvasTransformer.ReloadMatrix();
 
-            this.ViewModel.Invalidate();
+            this.ViewModel.Invalidate();//Invalidate
         }
-        public override void Complete(Vector2 point)
+        public override void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
-            this.ViewModel.Invalidate(isThumbnail: false);
-        }
+            if (isSingleStarted)
+            {
+                this.ViewModel.CanvasTransformer.Position = this.StartPosition - startingPoint + point;
+                this.ViewModel.CanvasTransformer.ReloadMatrix();
+            }
+            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+        } 
 
-        public override void Draw(CanvasDrawingSession ds)
-        {
-        }
+        public override void Draw(CanvasDrawingSession ds) { }
     }
 }

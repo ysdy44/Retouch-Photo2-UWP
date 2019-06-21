@@ -30,17 +30,22 @@ namespace Retouch_Photo2.ViewModels.Selections
 
             this.Mode = ListViewSelectionMode.None;
 
+
             //////////////////////////
+
 
             this.SetOpacity(1.0f);
             this.SetBlendType(BlendType.Normal);
             this.Visibility = Visibility.Collapsed;
 
-            this.IsGroupLayer = false;
-            this.Children = null;
 
+            this.Children = null;
             this.EffectManager = null;
             this.AdjustmentManager = null;
+
+
+            this.SetGroupLayer(null);
+            this.SetAcrylicLayer(null);
         }
 
         /// <summary>
@@ -55,19 +60,24 @@ namespace Retouch_Photo2.ViewModels.Selections
 
             this.Mode = ListViewSelectionMode.Single;
 
+
             //////////////////////////
+
 
             this.SetOpacity(layer.Opacity);
             this.SetBlendType(layer.BlendType);
             this.Visibility = layer.Visibility;
 
-            if (layer is GroupLayer) this.IsGroupLayer = true;
 
             this.Children = layer.Children;
-
             this.EffectManager = layer.EffectManager;
             this.AdjustmentManager = layer.AdjustmentManager;
             
+
+            this.SetGroupLayer(layer);
+            this.SetAcrylicLayer(layer);
+
+
             if (layer.GetFillColor() is Color color)
             {
                  //App.ViewModel.FillColor = color;
@@ -120,13 +130,24 @@ namespace Retouch_Photo2.ViewModels.Selections
             this.Layer = null;
             this.Layers = layers;
 
-            this.IsGroupLayer = false;
-            this.Children = null;
+            this.Mode = ListViewSelectionMode.Multiple;//Transformer      
 
+
+            //////////////////////////
+
+
+            //this.SetOpacity(0);
+            //this.SetBlendType( BlendType.Normal);
+            //this.Visibility = Visibility.Collapsed;
+            
+
+            this.Children = null;
             //this.EffectManager = layer.EffectManager;
             this.AdjustmentManager = null;
 
-            this.Mode = ListViewSelectionMode.Multiple;//Transformer           
+
+            this.SetGroupLayer(null);
+            this.SetAcrylicLayer(null);     
         }
 
 

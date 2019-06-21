@@ -50,17 +50,23 @@ namespace Retouch_Photo2.ViewModels.Selections
         private Visibility visibility;
 
 
-        /// <summary> <see cref = "SelectionViewModel" />'s group layer. </summary>
-        public bool IsGroupLayer
+        /// <summary> GroupLayer's Exist. </summary>     
+        public bool IsGroupLayer;
+        /// <summary> Sets GroupLayer. </summary>     
+        private void SetGroupLayer(Layer layer)
         {
-            get => this.isGroupLayer;
-            set
+            if (layer==null)
             {
-                this.isGroupLayer = value;
+                this.IsGroupLayer = false;
+                this.OnPropertyChanged(nameof(this.IsGroupLayer));//Notify 
+            }
+
+            if (layer is GroupLayer acrylicLayer)
+            {
+                this.IsGroupLayer = true;
                 this.OnPropertyChanged(nameof(this.IsGroupLayer));//Notify 
             }
         }
-        private bool isGroupLayer;
 
 
         /// <summary> <see cref = "SelectionViewModel" />'s Children. </summary>
@@ -99,5 +105,28 @@ namespace Retouch_Photo2.ViewModels.Selections
             }
         }
         private AdjustmentManager adjustmentManager;
+
+
+        /// <summary> AcrylicLayer's TintOpacity. </summary>     
+        public float AcrylicTintOpacity = 0.5f;
+        /// <summary> AcrylicLayer's BlurAmount. </summary>     
+        public float AcrylicBlurAmount = 12.0f;
+        /// <summary> Sets AcrylicLayer. </summary>     
+        private void SetAcrylicLayer(Layer layer)
+        {
+            if (layer is AcrylicLayer acrylicLayer)
+            {
+                this.AcrylicTintOpacity = acrylicLayer.TintOpacity;
+                this.OnPropertyChanged(nameof(this.AcrylicTintOpacity));//Notify 
+
+                this.AcrylicBlurAmount = acrylicLayer.BlurAmount;
+                this.OnPropertyChanged(nameof(this.AcrylicBlurAmount));//Notify 
+
+                return;
+            }
+        }
+
+
+
     }
 }

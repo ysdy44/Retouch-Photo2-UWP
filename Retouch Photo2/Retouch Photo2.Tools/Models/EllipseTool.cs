@@ -1,25 +1,38 @@
-﻿using Retouch_Photo2.Models;
-using Retouch_Photo2.Models.Layers.GeometryLayers;
+﻿using Retouch_Photo2.Layers;
+using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Controls;
+using Retouch_Photo2.Tools.ITool;
 using Retouch_Photo2.Tools.Pages;
+using Retouch_Photo2.Transformers;
 using Retouch_Photo2.ViewModels;
+using Retouch_Photo2.ViewModels.Selections;
 
 namespace Retouch_Photo2.Tools.Models
 {
-    public class EllipseTool : LayerTool
+    /// <summary>
+    /// <see cref="ICreateTool"/>'s EllipseTool.
+    /// </summary>
+    public class EllipseTool : ICreateTool
     {
-        //ViewModel
-        DrawViewModel ViewModel => Retouch_Photo2.App.ViewModel;
+        //@ViewModel
+        ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
+        SelectionViewModel SelectionViewModel => Retouch_Photo2.App.SelectionViewModel;
 
+        //@Override
+        public override Layer CreateLayer(Transformer transformer) => new EllipseLayer
+        {
+            IsChecked = true,
+            FillColor = this.SelectionViewModel.FillColor,
+            TransformerMatrix = new TransformerMatrix(transformer)
+        };
+
+        //@Construct
         public EllipseTool()
         {
             base.Type = ToolType.Ellipse;
             base.Icon = new EllipseControl();
-            base.WorkIcon = new EllipseControl();
+            base.ShowIcon = new EllipseControl();
             base.Page = new EllipsePage();
         }
-        
-
-        public override Layer GetLayer(VectRect rect) => EllipseLayer.CreateFromRect(this.ViewModel.CanvasDevice, rect, this.ViewModel.Color);
     }
 }

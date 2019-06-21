@@ -1,25 +1,38 @@
-﻿using Retouch_Photo2.Models;
-using Retouch_Photo2.Models.Layers.GeometryLayers;
+﻿using Retouch_Photo2.Layers;
+using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Controls;
+using Retouch_Photo2.Tools.ITool;
 using Retouch_Photo2.Tools.Pages;
+using Retouch_Photo2.Transformers;
 using Retouch_Photo2.ViewModels;
+using Retouch_Photo2.ViewModels.Selections;
 
 namespace Retouch_Photo2.Tools.Models
 {
-    public class RectangleTool : LayerTool
+    /// <summary>
+    /// <see cref="ICreateTool"/>'s RectangleTool.
+    /// </summary>
+    public class RectangleTool : ICreateTool
     {
-        //ViewModel
-        DrawViewModel ViewModel => Retouch_Photo2.App.ViewModel;
+        //@ViewModel
+        ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
+        SelectionViewModel SelectionViewModel => Retouch_Photo2.App.SelectionViewModel;
 
+        //@Override
+        public override Layer CreateLayer(Transformer transformer) => new RectangleLayer
+        {
+            IsChecked=true,
+            FillColor=this.SelectionViewModel.FillColor,
+            TransformerMatrix=new TransformerMatrix(transformer)
+        };
+
+        //@Construct
         public RectangleTool()
         {
             base.Type = ToolType.Rectangle;
             base.Icon = new RectangleControl();
-            base.WorkIcon = new RectangleControl();
+            base.ShowIcon = new RectangleControl();
             base.Page = new RectanglePage();
-        }
-
-
-        public override Layer GetLayer(VectRect rect) => RectangularLayer.CreateFromRect(this.ViewModel.CanvasDevice, rect, this.ViewModel.Color, this.ViewModel.StrokeColor, this.ViewModel.StrokeWidth);
+        }      
     }
 }

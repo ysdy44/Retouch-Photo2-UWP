@@ -11,7 +11,6 @@ namespace Retouch_Photo2.Operates
 
         public UIElement EnabledIcon { get => this.EnabledViewbox.Child; set => this.EnabledViewbox.Child = value; }
         public UIElement DisabledIcon { get => this.DisabledViewbox.Child; set => this.DisabledViewbox.Child = value; }
-        public string Label{set => ToolTipService.SetToolTip(this, value);}
 
         public bool ButtonIsEnabled
         {

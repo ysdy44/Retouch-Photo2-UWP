@@ -1,210 +1,321 @@
-﻿using Retouch_Photo2.Models;
+﻿using Retouch_Photo2.Transformers;
 using Retouch_Photo2.ViewModels;
-using System;
+using Retouch_Photo2.ViewModels.Selections;
+using Retouch_Photo2.ViewModels.Tips;
 using System.Numerics;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using static Retouch_Photo2.Library.HomographyController;
 
 namespace Retouch_Photo2.Controls
 {
+    /// <summary> 
+    /// Retouch_Photo2's the only <see cref = "OperateControl" />. 
+    /// </summary>
     public sealed partial class OperateControl : UserControl
     {
-        //ViewModel
-        DrawViewModel ViewModel => Retouch_Photo2.App.ViewModel;
-
-        #region IsEnabled
-
-
-        //Transform
-        bool TransformIsEnabled
-        {
-            set
-            {
-                this.FlipHorizontalButton.ButtonIsEnabled = value;
-                this.FlipVerticalButton.ButtonIsEnabled = value;
-                this.RotateLeftButton.ButtonIsEnabled = value;
-                this.RotateRightButton.ButtonIsEnabled = value;
-            }
-        }
-
-        //Arrange
-        bool ArrangeIsEnabled
-        {
-            set
-            {
-                this.ArrangeMoveBackButton.ButtonIsEnabled = value;
-                this.ArrangeBackOneButton.ButtonIsEnabled = value;
-                this.ArrangeForwardOneButton.ButtonIsEnabled = value;
-                this.ArrangeMoveFrontButton.ButtonIsEnabled = value;
-            }
-        }
-        private void InitializeArrange(int min, int max, int index)
-        {
-            this.ArrangeMoveBackButton.ButtonIsEnabled = !(index == max);
-            this.ArrangeBackOneButton.ButtonIsEnabled = (index < max);
-            this.ArrangeForwardOneButton.ButtonIsEnabled = (index > min);
-            this.ArrangeMoveFrontButton.ButtonIsEnabled = !(index == min);
-        }
-
-        //Align Horizontal
-        bool AlignHorizontalIsEnabled
-        {
-            set
-            {
-                this.AlignLeftButton.ButtonIsEnabled = value;
-                this.AlignCenterButton.ButtonIsEnabled = value;
-                this.AlignRightButton.ButtonIsEnabled = value;
-                this.AlignSymmetryHorizontallyButton.ButtonIsEnabled = value;
-            }
-        }
-
-        //Align Vertical
-        bool AlignVerticaIsEnabled
-        {
-            set
-            {
-                this.AlignTopButton.ButtonIsEnabled = value;
-                this.AlignMiddleButton.ButtonIsEnabled = value;
-                this.AlignBottomButton.ButtonIsEnabled = value;
-                this.AlignSymmetryVerticallyButton.ButtonIsEnabled = value;
-            }
-        }
-
-
-        #endregion
+        //@ViewModel
+        ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
+        SelectionViewModel SelectionViewModel => Retouch_Photo2.App.SelectionViewModel;
+        MezzanineViewModel MezzanineViewModel => Retouch_Photo2.App.MezzanineViewModel;
+        TipViewModel TipViewModel => Retouch_Photo2.App.TipViewModel;
+                     
 
         #region DependencyProperty
 
-        public Layer Layer
+        /// <summary> Gets or sets <see cref = "OperateControl" />'s Mode. </summary>
+        public ListViewSelectionMode Mode
         {
-            get { return (Layer)GetValue(LayerProperty); }
-            set { SetValue(LayerProperty, value); }
+            get { return (ListViewSelectionMode)GetValue(ModeProperty); }
+            set { SetValue(ModeProperty, value); }
         }
-        public static readonly DependencyProperty LayerProperty = DependencyProperty.Register(nameof(Layer), typeof(Layer), typeof(OperateControl), new PropertyMetadata(null, (sender, e) =>
+        /// <summary> Identifies the <see cref = "OperateControl.Mode" /> dependency property. </summary>
+        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(ListViewSelectionMode), typeof(OperateControl), new PropertyMetadata(ListViewSelectionMode.None, (sender, e) =>
         {
             OperateControl con = (OperateControl)sender;
 
-            if (e.NewValue is Layer value)
+            if (e.NewValue is ListViewSelectionMode value)
             {
-                con.Initialize(value);
-            }
-            else
-            {
-                con.Initialize(null);
+                switch (value)
+                {
+                    case ListViewSelectionMode.None:
+                        {
+                            //Transform
+                            con.FlipHorizontalButton.ButtonIsEnabled = false;
+                            con.FlipVerticalButton.ButtonIsEnabled = false;
+                            con.RotateLeftButton.ButtonIsEnabled = false;
+                            con.RotateRightButton.ButtonIsEnabled = false;
+
+                            //Align Horizontal
+                            con.AlignLeftButton.ButtonIsEnabled = false;
+                            con.AlignCenterButton.ButtonIsEnabled = false;
+                            con.AlignRightButton.ButtonIsEnabled = false;
+                            con.AlignSymmetryHorizontallyButton.ButtonIsEnabled = false;
+
+                            //Align Vertical
+                            con.AlignTopButton.ButtonIsEnabled = false;
+                            con.AlignMiddleButton.ButtonIsEnabled = false;
+                            con.AlignBottomButton.ButtonIsEnabled = false;
+                            con.AlignSymmetryVerticallyButton.ButtonIsEnabled = false;
+
+                            //Arrange
+                            con.ArrangeMoveBackButton.ButtonIsEnabled = false;
+                            con.ArrangeBackOneButton.ButtonIsEnabled = false;
+                            con.ArrangeForwardOneButton.ButtonIsEnabled = false;
+                            con.ArrangeMoveFrontButton.ButtonIsEnabled = false;
+                        }
+                        break;
+                    case ListViewSelectionMode.Single:
+                    case ListViewSelectionMode.Multiple:
+                        {
+                            //Transform
+                            con.FlipHorizontalButton.ButtonIsEnabled = true;
+                            con.FlipVerticalButton.ButtonIsEnabled = true;
+                            con.RotateLeftButton.ButtonIsEnabled = true;
+                            con.RotateRightButton.ButtonIsEnabled = true;
+
+                            //Align Horizontal
+                            con.AlignLeftButton.ButtonIsEnabled = true;
+                            con.AlignCenterButton.ButtonIsEnabled = true;
+                            con.AlignRightButton.ButtonIsEnabled = true;
+                            con.AlignSymmetryHorizontallyButton.ButtonIsEnabled = true;
+
+                            //Align Vertical
+                            con.AlignTopButton.ButtonIsEnabled = true;
+                            con.AlignMiddleButton.ButtonIsEnabled = true;
+                            con.AlignBottomButton.ButtonIsEnabled = true;
+                            con.AlignSymmetryVerticallyButton.ButtonIsEnabled = true;
+
+                            //Arrange
+                            con.ArrangeMoveBackButton.ButtonIsEnabled = true;
+                            con.ArrangeBackOneButton.ButtonIsEnabled = true;
+                            con.ArrangeForwardOneButton.ButtonIsEnabled = true;
+                            con.ArrangeMoveFrontButton.ButtonIsEnabled = true;
+                        }
+                        break;
+                }
             }
         }));
 
         #endregion
+        
 
+        //@Construct
         public OperateControl()
         {
             this.InitializeComponent();
 
-            //Transform
-            this.FlipHorizontalButton.Tapped += (sender, e) => this.OperateTransform((Layer layer) => Matrix3x2.CreateScale(-1, 1, layer.Transformer.DstCenter));
-            this.FlipVerticalButton.Tapped += (sender, e) => this.OperateTransform((Layer layer) => Matrix3x2.CreateScale(1, -1, layer.Transformer.DstCenter));
-            this.RotateLeftButton.Tapped += (sender, e) => this.OperateTransform((Layer layer) => Matrix3x2.CreateRotation(-Transformer.PiHalf, layer.Transformer.DstCenter));
-            this.RotateRightButton.Tapped += (sender, e) => this.OperateTransform((Layer layer) => Matrix3x2.CreateRotation(Transformer.PiHalf, layer.Transformer.DstCenter));
-            
-            //Align Horizontal
-            this.AlignLeftButton.ButtonTapped += (sender, e) => this.OperateVector((Layer layer) => new Vector2(0 - layer.Transformer.DstMinX, 0));
-            this.AlignCenterButton.ButtonTapped += (sender, e) => this.OperateVector((Layer layer) => new Vector2(this.ViewModel.MatrixTransformer.Width / 2 - layer.Transformer.DstCenter.X, 0));
-            this.AlignRightButton.ButtonTapped += (sender, e) => this.OperateVector((Layer layer) => new Vector2(this.ViewModel.MatrixTransformer.Width - layer.Transformer.DstMaxX, 0));
-            this.AlignSymmetryHorizontallyButton.ButtonTapped += (sender, e) => this.OperateVector((Layer layer) => new Vector2(0, 0));
 
-            //Align Vertical
-            this.AlignTopButton.ButtonTapped += (sender, e) => this.OperateVector((Layer layer) => new Vector2(0, 0 - layer.Transformer.DstMinY));
-            this.AlignMiddleButton.ButtonTapped += (sender, e) => this.OperateVector((Layer layer) => new Vector2(0, this.ViewModel.MatrixTransformer.Height / 2 - layer.Transformer.DstCenter.Y));
-            this.AlignBottomButton.ButtonTapped += (sender, e) => this.OperateVector((Layer layer) => new Vector2(0, this.ViewModel.MatrixTransformer.Height - layer.Transformer.DstMaxY));
-            this.AlignSymmetryVerticallyButton.ButtonTapped += (sender, e) => this.OperateVector((Layer layer) => new Vector2(0, 0));
+            #region Transform
 
-            //Arrange
-            this.ArrangeMoveBackButton.ButtonTapped += (sender, e) => this.OperateArrange((Layer layer) =>
+
+            this.FlipHorizontalButton.Tapped += (s, e) =>
             {
-                this.ViewModel.RenderLayer.Layers.Remove(layer);
-                this.ViewModel.RenderLayer.Layers.Add(layer);
-            });
-            this.ArrangeBackOneButton.ButtonTapped += (sender, e) => this.OperateArrange((Layer layer) =>
+                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Matrix3x2 matrix = Matrix3x2.CreateScale(-1, 1, transformer.Center);
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
+                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                });
+                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+
+            this.FlipVerticalButton.Tapped += (s, e) =>
             {
-                int index = this.ViewModel.RenderLayer.Layers.IndexOf(layer);
-                this.ViewModel.RenderLayer.Layers.Remove(layer);
-                this.ViewModel.RenderLayer.Layers.Insert(index + 1, layer);
-            });
-            this.ArrangeForwardOneButton.ButtonTapped += (sender, e) => this.OperateArrange((Layer layer) =>
+                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Matrix3x2 matrix = Matrix3x2.CreateScale(1, -1, transformer.Center);
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
+                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                });
+                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+
+            this.RotateLeftButton.Tapped += (s, e) =>
             {
-                int index = this.ViewModel.RenderLayer.Layers.IndexOf(layer);
-                this.ViewModel.RenderLayer.Layers.Remove(layer);
-                this.ViewModel.RenderLayer.Layers.Insert(index - 1, layer);
-            });
-            this.ArrangeMoveFrontButton.ButtonTapped += (sender, e) => this.OperateArrange((Layer layer) =>
+                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Matrix3x2 matrix = Matrix3x2.CreateRotation(Transformer.PiHalf, transformer.Center);
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
+                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                });
+                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+
+            this.RotateRightButton.Tapped += (s, e) =>
             {
-                this.ViewModel.RenderLayer.Layers.Remove(layer);
-                this.ViewModel.RenderLayer.Layers.Insert(0, layer);
-            });
-        }
+                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Matrix3x2 matrix = Matrix3x2.CreateRotation(-Transformer.PiHalf, transformer.Center);
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
+                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                });
+                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
 
 
-        /// <summary> Initialize all button. </summary>
-        public void Initialize(Layer layer)
-        {
-            bool isEnabled = !(layer == null);
+            #endregion
 
-            //Transform
-            this.TransformIsEnabled = isEnabled;
-            //Align Horizontal            
-            this.AlignHorizontalIsEnabled = isEnabled;
-            //Align Vertical            
-            this.AlignVerticaIsEnabled = isEnabled;
 
-            //Arrange
-            if (this.ViewModel.RenderLayer.Layers.Count < 2 || !isEnabled || this.ViewModel.Index == -1)
-                this.ArrangeIsEnabled = false;
-            else
-                this.InitializeArrange(0, this.ViewModel.RenderLayer.Layers.Count - 1, this.ViewModel.Index);
-        }
+            #region Align Horizontal
 
-        /// <summary> Operating on the layer. </summary>
-        private void OperateArrange(Action<Layer> action) 
-        {
-            if (this.Layer == null) return;
-            this.Layer.OldTransformer = this.Layer.Transformer;
 
-            action(this.Layer);//Action
+            this.AlignLeftButton.ButtonTapped += (s, e) =>
+            {
+                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Matrix3x2 matrix = Matrix3x2.CreateTranslation(0 - transformer.MinX, 0);
 
-            this.ViewModel.SetLayer(this.Layer);
-            this.Initialize(this.Layer);
-            this.ViewModel.Invalidate();
-        }
-        /// <summary> Vector operating on the layer. </summary>
-        private void OperateVector(Func<Layer, Vector2> action)
-        {
-            if (this.Layer == null) return;
-            this.Layer.OldTransformer = this.Layer.Transformer;
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
+                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                });
+                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
-            //Action
-            Vector2 vector = action(this.Layer);
-            this.Layer.Transformer.DstLeftTop = this.Layer.OldTransformer.DstLeftTop + vector;
-            this.Layer.Transformer.DstRightTop = this.Layer.OldTransformer.DstRightTop + vector;
-            this.Layer.Transformer.DstRightBottom = this.Layer.OldTransformer.DstRightBottom + vector;
-            this.Layer.Transformer.DstLeftBottom = this.Layer.OldTransformer.DstLeftBottom + vector;
+                this.ViewModel.Invalidate();//Invalidate
+            };
 
-            this.ViewModel.Invalidate();
-        }
-        /// <summary> Transform operating on the layer. </summary>
-        private void OperateTransform(Func<Layer, Matrix3x2> action)
-        {
-            if (this.Layer == null) return;
-            this.Layer.OldTransformer = this.Layer.Transformer;
+            this.AlignCenterButton.ButtonTapped += (s, e) =>
+            {
+                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width / 2 - transformer.Center.X, 0);
 
-            //Action
-            Matrix3x2 matrix = action(this.Layer);
-            this.Layer.Transformer.DstLeftTop = Vector2.Transform(this.Layer.OldTransformer.DstLeftTop, matrix);
-            this.Layer.Transformer.DstRightTop = Vector2.Transform(this.Layer.OldTransformer.DstRightTop, matrix);
-            this.Layer.Transformer.DstRightBottom = Vector2.Transform(this.Layer.OldTransformer.DstRightBottom, matrix);
-            this.Layer.Transformer.DstLeftBottom = Vector2.Transform(this.Layer.OldTransformer.DstLeftBottom, matrix);
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
+                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                });
+                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
-            this.ViewModel.Invalidate();
+                this.ViewModel.Invalidate();//Invalidate
+            };
+
+            this.AlignRightButton.ButtonTapped += (s, e) =>
+            {
+                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width - transformer.MaxX, 0);
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
+                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                });
+                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+
+            this.AlignSymmetryHorizontallyButton.ButtonTapped += (s, e) => { };
+
+
+            #endregion
+
+
+            #region Align Vertical
+
+
+            this.AlignTopButton.ButtonTapped += (s, e) =>
+            {
+                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Matrix3x2 matrix = Matrix3x2.CreateTranslation(0 , 0- transformer.MinY);
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
+                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                });
+                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+
+            this.AlignMiddleButton.ButtonTapped += (s, e) =>
+            {
+                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Matrix3x2 matrix = Matrix3x2.CreateTranslation(0,this.ViewModel.CanvasTransformer.Height / 2 - transformer.Center.Y);
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
+                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                });
+                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+
+            this.AlignBottomButton.ButtonTapped += (s, e) =>
+            {
+                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, this.ViewModel.CanvasTransformer.Height - transformer.MaxY);
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
+                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                });
+                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+
+            this.AlignSymmetryVerticallyButton.ButtonTapped += (s, e) => { };
+
+
+            #endregion
+
+
+            #region Arrange
+
+
+            this.ArrangeMoveBackButton.ButtonTapped += (s, e) =>
+            {
+
+            };
+
+            this.ArrangeBackOneButton.ButtonTapped += (s, e) =>
+            {
+
+            };
+
+            this.ArrangeForwardOneButton.ButtonTapped += (s, e) => 
+            {
+
+            };
+
+            this.ArrangeMoveFrontButton.ButtonTapped += (s, e) =>
+            {
+
+            };
+
+
+            #endregion
+
         }
     }
 }

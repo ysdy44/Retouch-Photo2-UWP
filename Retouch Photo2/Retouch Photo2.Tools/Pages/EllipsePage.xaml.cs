@@ -1,12 +1,14 @@
-﻿using Retouch_Photo2.ViewModels;
+﻿using Retouch_Photo2.Tools.Models;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Pages
 {
-    public sealed partial class EllipsePage : ToolPage
-    {
-        //ViewModel
-        DrawViewModel ViewModel => Retouch_Photo2.App.ViewModel;
-
+    /// <summary>
+    /// <see cref="EllipseTool"/>'s Page.
+    /// </summary>
+    public sealed partial class EllipsePage : Page
+    {     
+        //@Construct
         public EllipsePage()
         {
             this.InitializeComponent();

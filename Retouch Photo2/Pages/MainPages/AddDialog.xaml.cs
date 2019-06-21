@@ -3,32 +3,30 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Pages.MainPages
 {
+    /// <summary>
+    /// <see cref = "MainPage" /> Appbar's <see cref = "AddDialog" />.
+    /// </summary>
     public sealed partial class AddDialog : ContentDialog
     {
-        #region Delegate
-
-        /// <summary></summary>
-        public delegate void AddSizeHandler(BitmapSize pixels);
-        public event AddSizeHandler AddSize = null;
-
-        #endregion
+        /// <summary> <see cref = "AddDialog" /> 's BitmapSize.</summary>
+        public BitmapSize Size => new BitmapSize()
+        {
+            Width = (uint)this.WidthNumberPicker.Value,
+            Height = (uint)this.HeighNumberPicker.Value
+        };
 
         public AddDialog()
         {
             this.InitializeComponent();
 
-            this.SecondaryButtonClick += (sender, args) => this.Hide();
-            this.PrimaryButtonClick += (sender, args) =>
-            {
-                this.Hide();
-
-                BitmapSize pixels = new BitmapSize()
-                {
-                    Width = (uint)WidthNumberPicker.Value,
-                    Height = (uint)HeighNumberPicker.Value
-                };
-                this.AddSize?.Invoke(pixels);//Delegate
-            };
+            this.WidthNumberPicker.Unit = "px";
+            this.HeighNumberPicker.Unit = "px";
+            this.WidthNumberPicker.Minimum = 16;
+            this.HeighNumberPicker.Minimum = 16;
+            this.WidthNumberPicker.Maximum = 16384;
+            this.HeighNumberPicker.Maximum = 16384;
+            this.WidthNumberPicker.Value = 1024;
+            this.HeighNumberPicker.Value = 1024;
         }
     }
 }

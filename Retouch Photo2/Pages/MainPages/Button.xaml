@@ -1,0 +1,21 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Pages.MainPages.Button"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="50">
+
+    <Button x:Name="_RootButton" Width="60" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="16"/>
+            </Grid.RowDefinitions>
+            <FontIcon x:Name="FontIcon" FontSize="24" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+            <TextBlock x:Name="TextBlock" Grid.Row="1" FontSize="12" FontFamily="Microsoft YaHei UI"/>
+        </Grid>
+    </Button>
+</UserControl>

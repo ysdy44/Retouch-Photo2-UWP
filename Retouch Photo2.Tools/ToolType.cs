@@ -17,7 +17,10 @@
         /// <summary> Ellipse Geometry </summary>
         Ellipse,
 
-        /// <summary> Cursor Tool</summary>
+        /// <summary> Cursor Tool </summary>
         Cursor,
+
+        /// <summary> Acrylic Layer </summary>
+        Acrylic
     }
 }

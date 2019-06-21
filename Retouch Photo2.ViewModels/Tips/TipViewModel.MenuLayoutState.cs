@@ -13,10 +13,18 @@ namespace Retouch_Photo2.ViewModels.Tips
 
         private void SetMenuLayoutStateIsOpen(bool isOpen)
         {
-            //MenuLayoutState
+
+            //Operate
+            if (this.OperateMenuLayoutState == Elements.MenuLayoutState.RootExpanded)
+                this.IsOperateMenuLayoutOpen = isOpen;
+
+            //Transformer
+            if (this.TransformerMenuLayoutState == Elements.MenuLayoutState.RootExpanded)
+                this.IsTransformerMenuLayoutOpen = isOpen;
+
+            //Layer
             if (this.LayerMenuLayoutState == Elements.MenuLayoutState.RootExpanded)
                 this.IsLayerMenuLayoutOpen = isOpen;
-
         }
 
 
@@ -36,6 +44,32 @@ namespace Retouch_Photo2.ViewModels.Tips
         }
         private MenuLayoutState debugMenuLayoutState;
 
+        /// <summary> State of SelectionMenuLayoutState. </summary>
+        public MenuLayoutState SelectionMenuLayoutState
+        {
+            get => this.selectionMenuLayoutState;
+            set
+            {
+                if (this.selectionMenuLayoutState == value) return;
+                this.selectionMenuLayoutState = value;
+                this.OnPropertyChanged(nameof(this.SelectionMenuLayoutState));//Notify 
+            }
+        }
+        private MenuLayoutState selectionMenuLayoutState;
+
+        /// <summary> State of OperateMenuLayoutState. </summary>
+        public MenuLayoutState OperateMenuLayoutState
+        {
+            get => this.operateMenuLayoutState;
+            set
+            {
+                if (this.operateMenuLayoutState == value) return;
+                this.operateMenuLayoutState = value;
+                this.OnPropertyChanged(nameof(this.OperateMenuLayoutState));//Notify 
+            }
+        }
+        private MenuLayoutState operateMenuLayoutState;
+        
         /// <summary> State of AdjustmentMenuLayout. </summary>
         public MenuLayoutState AdjustmentMenuLayoutState
         {
@@ -103,6 +137,32 @@ namespace Retouch_Photo2.ViewModels.Tips
 
 
         /////////////////////////////////////////////////////////////////////////////////////////
+
+
+        /// <summary> IsOpen of the <see cref = "TipViewModel.OperateMenuLayoutState" />. </summary>
+        public bool IsOperateMenuLayoutOpen
+        {
+            get => this.isOperateMenuLayoutOpen;
+            set
+            {
+                this.isOperateMenuLayoutOpen = value;
+                this.OnPropertyChanged(nameof(this.IsOperateMenuLayoutOpen));//Notify 
+            }
+        }
+        private bool isOperateMenuLayoutOpen;
+
+
+        /// <summary> IsOpen of the <see cref = "TipViewModel.TransformerMenuLayoutState" />. </summary>
+        public bool IsTransformerMenuLayoutOpen
+        {
+            get => this.isTransformerMenuLayoutOpen;
+            set
+            {
+                this.isTransformerMenuLayoutOpen = value;
+                this.OnPropertyChanged(nameof(this.IsTransformerMenuLayoutOpen));//Notify 
+            }
+        }
+        private bool isTransformerMenuLayoutOpen;
 
 
         /// <summary> IsOpen of the <see cref = "TipViewModel.LayerMenuLayoutState" />. </summary>

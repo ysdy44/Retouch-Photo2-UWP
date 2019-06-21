@@ -36,14 +36,15 @@ namespace Retouch_Photo2.Layers.Models
 
             return new GroupLayer
             {
-                Name = this.Name,
-                Opacity = this.Opacity,
-                BlendType = this.BlendType,
-                TransformerMatrix = this.TransformerMatrix,
-                Children = children,
+                Name = base.Name,
+                Opacity = base.Opacity,
+                BlendType = base.BlendType,
+                TransformerMatrix = base.TransformerMatrix,
 
-                IsChecked=this.IsChecked,
-                Visibility=this.Visibility,
+                IsChecked = base.IsChecked,
+                Visibility = base.Visibility,
+
+                Children = children,
             };
         }
 

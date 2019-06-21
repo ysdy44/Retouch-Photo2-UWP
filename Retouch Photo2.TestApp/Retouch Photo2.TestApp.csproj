@@ -95,113 +95,18 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AdjustmentControl.xaml.cs">
-      <DependentUpon>AdjustmentControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DebugControl.xaml.cs">
-      <DependentUpon>DebugControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\EffectControl.xaml.cs">
-      <DependentUpon>EffectControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\LayerControl.xaml.cs">
-      <DependentUpon>LayerControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\LayersControl.xaml.cs">
-      <DependentUpon>LayersControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MainCanvasControl.xaml.cs">
-      <DependentUpon>MainCanvasControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ToolsControl.xaml.cs">
-      <DependentUpon>ToolsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TransformerControl.xaml.cs">
-      <DependentUpon>TransformerControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\DrawLayout.xaml.cs">
-      <DependentUpon>DrawLayout.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\DrawPage.xaml.cs">
-      <DependentUpon>DrawPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\DrawPages\FillColorEllipseButton.xaml.cs">
-      <DependentUpon>FillColorEllipseButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\DrawPages\FillColorEllipseControl.xaml.cs">
-      <DependentUpon>FillColorEllipseControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\DrawPages\StrokeColorEllipseButton.xaml.cs">
-      <DependentUpon>StrokeColorEllipseButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\DrawPages\StrokeColorEllipseControl.xaml.cs">
-      <DependentUpon>StrokeColorEllipseControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MainPages\AddDialog.xaml.cs">
-      <DependentUpon>AddDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MainPages\Button.xaml.cs">
-      <DependentUpon>Button.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MainPages\DeleteControl.xaml.cs">
-      <DependentUpon>DeleteControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MainPages\DuplicateControl.xaml.cs">
-      <DependentUpon>DuplicateControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MainPages\FolderDialog.xaml.cs">
-      <DependentUpon>FolderDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MainPages\MainControl.xaml.cs">
-      <DependentUpon>MainControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MainPages\PicturesControl.xaml.cs">
-      <DependentUpon>PicturesControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MainPages\SaveControl.xaml.cs">
-      <DependentUpon>SaveControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MainPages\SecondButton.xaml.cs">
-      <DependentUpon>SecondButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MainPages\ShareControl.xaml.cs">
-      <DependentUpon>ShareControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Retouch Photo2.Tools\ITool\ICreateTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\CursorTool.Box.cs" />
-    <Compile Include="Retouch Photo2.Tools\TransformerToolBase.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\CursorTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\EllipseTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\NoneTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\RectangleTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\ViewTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Pages\CursorPage.xaml.cs">
-      <DependentUpon>CursorPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Pages\EllipsePage.xaml.cs">
-      <DependentUpon>EllipsePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Pages\RectanglePage.xaml.cs">
-      <DependentUpon>RectanglePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Pages\ViewPage.xaml.cs">
-      <DependentUpon>ViewPage.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <Content Include="Json\Filter.json" />
-    <None Include="Json\FilterOriginal.json" />
     <None Include="Retouch Photo2.TestApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Icons\GrayAndWhite.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -216,131 +121,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\AdjustmentControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\DebugControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\EffectControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\LayerControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\LayersControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\MainCanvasControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ToolsControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\TransformerControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\DrawLayout.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\DrawPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\DrawPages\FillColorEllipseButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\DrawPages\FillColorEllipseControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\DrawPages\StrokeColorEllipseButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\DrawPages\StrokeColorEllipseControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\MainPages\AddDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\MainPages\Button.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\MainPages\DeleteControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\MainPages\DuplicateControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\MainPages\FolderDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\MainPages\MainControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\MainPages\PicturesControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\MainPages\SaveControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\MainPages\SecondButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\MainPages\ShareControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Style\Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Style\Template.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Style\Transition.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Pages\CursorPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Pages\EllipsePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Pages\RectanglePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Pages\ViewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

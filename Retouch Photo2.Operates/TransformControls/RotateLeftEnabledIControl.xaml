@@ -8,6 +8,10 @@
     d:DesignHeight="50"
     d:DesignWidth="50">
 
-    <FontIcon Glyph="&#xE14A;" FontFamily="Segoe UI Symbol" Foreground="Gray" />
+    <FontIcon Glyph="&#xE149;" FontFamily="Segoe UI Symbol" Foreground="Gray" RenderTransformOrigin="0.5,0.5">
+        <FontIcon.RenderTransform>
+            <ScaleTransform ScaleX="-1"/>
+        </FontIcon.RenderTransform>
+    </FontIcon>
 
 </UserControl>

@@ -1,0 +1,68 @@
+﻿using Retouch_Photo2.Tools;
+using Retouch_Photo2.Tools.Models;
+using Retouch_Photo2.ViewModels;
+using Retouch_Photo2.ViewModels.Tips;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+
+namespace Retouch_Photo2.Controls
+{
+    /// <summary> 
+    /// Retouch_Photo2's the only <see cref = "ToolsControl" />. 
+    /// </summary>
+    public sealed partial class ToolsControl : UserControl
+    {
+        //@ViewModel
+        ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
+        TipViewModel TipViewModel => Retouch_Photo2.App.TipViewModel;
+
+
+        #region DependencyProperty
+
+        /// <summary> 
+        /// Type of <see cref = "ToolsControl" />. 
+        /// </summary>
+        public ToolType ToolType
+        {
+            get { return (ToolType)GetValue(ToolTypeProperty); }
+            set { SetValue(ToolTypeProperty, value); }
+        }
+        public static readonly DependencyProperty ToolTypeProperty = DependencyProperty.Register(nameof(ToolType), typeof(ToolType), typeof(ToolsControl), new PropertyMetadata(ToolType.None));
+
+        #endregion
+
+
+        //@Construct
+        public ToolsControl()
+        {
+            this.InitializeComponent();
+
+            //Cursor
+            this.ConstructButton(this.CursorButton, this.TipViewModel.CursorTool);
+            //View
+            this.ConstructButton(this.ViewButton, this.TipViewModel.ViewTool);
+            //Rectangle
+            this.ConstructButton(this.RectangleButton, this.TipViewModel.RectangleTool);
+            //Ellipse
+            this.ConstructButton(this.EllipseButton, this.TipViewModel.EllipseTool);
+            //Acrylic
+            this.ConstructButton(this.AcrylicButton, this.TipViewModel.AcrylicTool);
+        }
+
+        private void ConstructButton(Retouch_Photo2.Tools.Button button, Tool tool)
+        {
+            ToolType type = tool.Type;
+
+            //Content
+            button.Type = type;
+            button.CenterContent = tool.Icon;
+
+            //ItemClick
+            button.RootGrid.Tapped += (s, e) =>
+            {
+                this.ToolType = type;
+                this.TipViewModel.Tool = tool;
+            };
+        }
+    }
+}

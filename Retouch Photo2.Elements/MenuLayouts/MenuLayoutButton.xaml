@@ -20,7 +20,7 @@
         <SolidColorBrush x:Name="UnAccentColor" Color="Transparent"/>
 
         <!--Foreground-->
-        <SolidColorBrush x:Name="CheckColor" Color="White"/>
+        <SolidColorBrush x:Name="CheckColor" Color="{ThemeResource SystemBaseHighColor}"/>
         <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource AppTextColor}"/>
 
     </UserControl.Resources>

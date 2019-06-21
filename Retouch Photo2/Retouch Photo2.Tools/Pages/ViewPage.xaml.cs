@@ -1,15 +1,22 @@
-﻿using Retouch_Photo2.ViewModels;
+﻿using Retouch_Photo2.Tools.Models;
+using Retouch_Photo2.ViewModels;
+using Retouch_Photo2.ViewModels.Tips;
 using System;
+using Windows.UI.Xaml.Controls;
+
 
 namespace Retouch_Photo2.Tools.Pages
 {
-
     /// <summary>
-    /// The converter of Angle and radian .
+    /// <see cref="ViewTool"/>'s Page.
     /// </summary>
-    public static class ViewConverter
+    public sealed partial class ViewPage : Page
     {
-
+        //@ViewModel
+        public ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
+        public TipViewModel TipViewModel => Retouch_Photo2.App.TipViewModel;
+        
+        //@Converter
         /*         
         [1] y = x * π / 180
 
@@ -20,12 +27,12 @@ namespace Retouch_Photo2.Tools.Pages
         [5] radian = value * π / 180
         [6] value = radian * 180 / π
         */
-        public static double RadianDefult = 0;
-        public static double RadianMinimum = -180;
-        public static double RadianMaximum = 180;
-
-        public static double RadianToValue(float radian) => radian * 180.0 / Math.PI;
-        public static float ValueToRadian(double value) => (float)(value * Math.PI / 180.0);
+        private const double RadianDefult = 0;
+        private const double RadianMinimum = -180;
+        private const double RadianMaximum = 180;
+        private double RadianToValue(float radian) => radian * 180.0 / Math.PI;
+        private float ValueToRadian(double value) => (float)(value * Math.PI / 180.0);
+        private string RadianToString(float radian) => ((int)((radian * 180.0 / Math.PI))).ToString()+ "º";
 
 
         /*         
@@ -39,50 +46,52 @@ namespace Retouch_Photo2.Tools.Pages
         [6] scale = 10 / (1 - value)
         [7] value = 1 - 10 / scale
         */
-        public static readonly double ScaleDefult = -9;
-        public static readonly double ScaleMinimum = -99;
-        public static readonly double ScaleMaximum = 0;
+        private const double ScaleDefult = -9;
+        private const double ScaleMinimum = -99;
+        private const double ScaleMaximum = 0;
+        private double ScaleToValue(float scale) => 1 - 10 / scale;
+        private float ValueToScale(double value) => (float)(10 / (1 - value));
+        private string ScaleToString(float scale) => ((int)(scale * 100)).ToString()+"%";
 
-        public static double ScaleToValue(float scale) => 1 - 10 / scale;
-        public static float ValueToScale(double value) => (float)(10 / (1 - value));
 
-    }
-
-    public sealed partial class ViewPage : ToolPage
-    {
-        //ViewModel
-        public DrawViewModel ViewModel => Retouch_Photo2.App.ViewModel;
-        
+        //@Construct
         public ViewPage()
         {
             this.InitializeComponent();
 
             //Radian
-            this.RadianFrame.Value = ViewConverter.RadianDefult;
-            this.RadianSlider.Value = ViewConverter.RadianToValue(this.ViewModel.MatrixTransformer.Radian);
-            this.RadianSlider.Maximum = ViewConverter.RadianMaximum;
-            this.RadianSlider.Minimum = ViewConverter.RadianMinimum;
+            this.RadianFrame.Value = ViewPage.RadianDefult;
+            this.RadianSlider.Maximum = ViewPage.RadianMaximum;
+            this.RadianSlider.Minimum = ViewPage.RadianMinimum;
             this.RadianSlider.ValueChanged += (s, e) =>
             {
-                this.ViewModel.MatrixTransformer.Radian = ViewConverter.ValueToRadian(e.NewValue);
-                this.ViewModel.Invalidate();
-            };
+                float radian = this.ValueToRadian(e.NewValue);
+                this.RadianTextBlock.SetValue(TextBlock.TextProperty, this.RadianToString(radian));//DependencyObject
 
-            //Radian
+                //CanvasTransformer
+                this.ViewModel.CanvasTransformer.Radian = this.ValueToRadian(e.NewValue);
+                this.ViewModel.CanvasTransformer.ReloadMatrix();
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
             this.RadianButton.Tapped += (s, e) => this.RadianStoryboard.Begin();
 
-            // Scale
-            this.ScaleFrame.Value = ViewConverter.ScaleDefult;
-            this.ScaleSlider.Value = ViewConverter.ScaleToValue(this.ViewModel.MatrixTransformer.Scale);
-            this.ScaleSlider.Maximum = ViewConverter.ScaleMaximum;
-            this.ScaleSlider.Minimum = ViewConverter.ScaleMinimum;
-            this.ScaleSlider.ValueChanged += (s, e) =>
-            {
-                this.ViewModel.MatrixTransformer.Scale = ViewConverter.ValueToScale(e.NewValue);
-                this.ViewModel.Invalidate();
-            };          
 
             // Scale
+            this.ScaleFrame.Value = ViewPage.ScaleDefult;
+            this.ScaleSlider.Maximum = ViewPage.ScaleMaximum;
+            this.ScaleSlider.Minimum = ViewPage.ScaleMinimum;
+            this.ScaleSlider.ValueChanged += (s, e) =>
+            {
+                float scale = this.ValueToScale(e.NewValue);
+                this.ScaleTextBlock.SetValue(TextBlock.TextProperty, this.ScaleToString(scale));//DependencyObject
+
+                //CanvasTransformer
+                this.ViewModel.CanvasTransformer.Scale = scale;
+                this.ViewModel.CanvasTransformer.ReloadMatrix();
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
             this.ScaleButton.Tapped += (s, e) => this.ScaleStoryboard.Begin();
         }
     }

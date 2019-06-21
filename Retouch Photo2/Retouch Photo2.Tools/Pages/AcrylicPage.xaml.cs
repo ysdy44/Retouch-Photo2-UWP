@@ -1,16 +1,25 @@
-﻿using Retouch_Photo2.ViewModels;
+﻿using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Tools.Models;
+using Retouch_Photo2.ViewModels;
+using Retouch_Photo2.ViewModels.Selections;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Pages
 {
-    public sealed partial class AcrylicPage : ToolPage
+    /// <summary>
+    /// <see cref="AcrylicTool"/>'s Page.
+    /// </summary>
+    public sealed partial class AcrylicPage : Page
     {
-        //ViewModel
-        DrawViewModel ViewModel => Retouch_Photo2.App.ViewModel;
+        //@ViewModel
+        ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
+        SelectionViewModel SelectionViewModel => Retouch_Photo2.App.SelectionViewModel;
 
-        //Converter
+        //@Converter
         public int TintOpacityConverter(float value) => (int)(value * 100.0f);
         public int BlurAmountConverter(float value) => (int)value;
 
+        //@Construct
         public AcrylicPage()
         {
             this.InitializeComponent();
@@ -21,16 +30,21 @@ namespace Retouch_Photo2.Tools.Pages
             this.TintOpacityPicker.ValueChange += (s, value) =>
             {
                 float opacity = value / 100.0f;
-
                 if (opacity < 0.0f) opacity = 0.0f;
-                if (opacity >0.9f) opacity = 0.9f;
+                if (opacity > 0.9f) opacity = 0.9f;
 
-                this.ViewModel.AcrylicTintOpacity = opacity ;
-                if (this.ViewModel.AcrylicLayer!=null)
+                this.SelectionViewModel.AcrylicTintOpacity = opacity;
+            
+                //Selection
+                this.SelectionViewModel.SetValue((layer)=> 
                 {
-                    this.ViewModel.AcrylicLayer.TintOpacity = opacity ;
-                    this.ViewModel.Invalidate();
-                }
+                    if (layer is AcrylicLayer acrylicLayer)
+                    {
+                        acrylicLayer.TintOpacity = opacity;
+                    }
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
             };
 
             //BlurAmount
@@ -38,18 +52,24 @@ namespace Retouch_Photo2.Tools.Pages
             this.BlurAmountPicker.Maximum = 100;
             this.BlurAmountPicker.ValueChange += (s, value) =>
             {
-                float amount = value  ;
-
+                float amount = value;
                 if (amount < 10.0f) amount = 10.0f;
                 if (amount > 100.0f) amount = 100.0f;
 
-                this.ViewModel.AcrylicBlurAmount = amount;
-                if (this.ViewModel.AcrylicLayer != null)
+                this.SelectionViewModel.AcrylicBlurAmount = amount;
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
                 {
-                    this.ViewModel.AcrylicLayer.BlurAmount = amount;
-                    this.ViewModel.Invalidate();
-                }
+                    if (layer is AcrylicLayer acrylicLayer)
+                    {
+                        acrylicLayer.BlurAmount = amount;
+                    }
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
             };
+
         }
     }
 }
