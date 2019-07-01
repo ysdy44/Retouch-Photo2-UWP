@@ -3,11 +3,15 @@ using Retouch_Photo2.Adjustments.Models;
 
 namespace Retouch_Photo2.Adjustments.Pages
 {
+    /// <summary>
+    /// Page of <see cref = "ContrastAdjustment"/>.
+    /// </summary>
     public sealed partial class ContrastPage : AdjustmentPage
     {
 
         public ContrastAdjustment ContrastAdjustment;
 
+        //@Construct
         public ContrastPage()
         {
             base.Type = AdjustmentType.Contrast;

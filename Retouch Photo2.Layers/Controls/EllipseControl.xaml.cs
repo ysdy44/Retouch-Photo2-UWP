@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Layers.Controls
 {
     /// <summary>
-    /// <see cref="EllipseLayer"/>'s Control .
+    /// Control of <see cref = "EllipseLayer"/>.
     /// </summary>
     public sealed partial class EllipseControl : UserControl
     {

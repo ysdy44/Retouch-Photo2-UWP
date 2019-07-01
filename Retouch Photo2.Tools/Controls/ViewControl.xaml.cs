@@ -3,7 +3,7 @@
 namespace Retouch_Photo2.Tools.Controls
 {
     /// <summary>
-    /// <see cref="ViewTool"/>'s Control.
+    /// Control of <see cref = "ViewTool"/>.
     /// </summary>
     public sealed partial class ViewControl : UserControl
     {

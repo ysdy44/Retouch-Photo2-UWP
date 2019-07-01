@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Effects.Controls
 {
     /// <summary>
-    /// <see cref = "SharpenEffect" /> 's Page.
+    /// Control of <see cref = "SharpenEffect"/>.
     /// </summary>
     public sealed partial class SharpenControl : UserControl
     {

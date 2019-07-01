@@ -1,16 +1,17 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Adjustments;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Retouch_Photo2.Adjustments
 {
-    /// <summary> <see cref = "Adjustment" />'s manager. </summary>
+    /// <summary> 
+    /// <see cref = "Adjustment" />'s manager. 
+    /// </summary>
     public class AdjustmentManager
     {
         public List<Adjustment> Adjustments { get; set; } = new List<Adjustment>();
 
-        //@static
+        //@Static
         public static ICanvasImage Render(AdjustmentManager manager, ICanvasImage image)
         {
             if (manager.Adjustments.Count == 0) return image;

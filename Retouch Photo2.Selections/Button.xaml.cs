@@ -1,43 +1,34 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Selections
 {
+    /// <summary>
+    /// Button of <see cref="Selection">.
+    /// </summary>
     public sealed partial class Button : UserControl
     {
 
-        //@Delegate
-        public event TappedEventHandler ButtonTapped;
-
+        //@Content
+        /// <summary> Root button. </summary>
+        public Windows.UI.Xaml.Controls.Button RootButton { get => this._RootButton; set => this._RootButton = value; }
+        /// <summary> Enabled icon. </summary>
         public UIElement EnabledIcon { get => this.EnabledViewbox.Child; set => this.EnabledViewbox.Child = value; }
+        /// <summary> Disabled icon. </summary>
         public UIElement DisabledIcon { get => this.DisabledViewbox.Child; set => this.DisabledViewbox.Child = value; }
-        public string Label
-        {
-            get => this.TextBlock.Text;
-            set
-            {
-                this.TextBlock.Text = value;
-                ToolTipService.SetToolTip(this, value);
-            }
-        }
+        /// <summary> TextBlock' text. </summary>
+        public string Label { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
 
-        public bool ButtonIsEnabled
-        {
-            set
-            {
-                this.RootButton.IsEnabled = value;
 
-                this.EnabledViewbox.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
-                this.DisabledViewbox.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
-            }
-        }
+        //@Converter
+        private Visibility BoolToVisibleConverter(bool isEnabled) => isEnabled ? Visibility.Visible : Visibility.Collapsed;
+        private Visibility BoolToCollapsedConverter(bool isEnabled) => isEnabled ? Visibility.Collapsed : Visibility.Visible;
 
+
+        //@Construct
         public Button()
         {
             this.InitializeComponent();
-            this.RootButton.Tapped += (s, e) => this.ButtonTapped?.Invoke(s, e);
         }
-
     }
 }

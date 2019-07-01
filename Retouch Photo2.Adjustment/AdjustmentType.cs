@@ -1,31 +1,33 @@
 ﻿namespace Retouch_Photo2.Adjustments
 {
-    /// <summary> An <see cref = "Adjustment"/> corresponds to a <see cref = "AdjustmentType" /> </summary>
+    /// <summary> 
+    /// Type of <see cref = "Adjustment"/>.
+    /// </summary>
     public enum AdjustmentType
     {
-        /// <summary> 灰度 </summary>
+        /// <summary> Gray. </summary>
         Gray,
-        /// <summary> 反色 </summary>
+        /// <summary> Invert. </summary>
         Invert,
 
-        /// <summary> 曝光 </summary>
+        /// <summary> Exposure. </summary>
         Exposure,
-        /// <summary> 明度 </summary>
+        /// <summary> Brightness. </summary>
         Brightness,
-        /// <summary> 饱和度 </summary>
+        /// <summary> Saturation. </summary>
         Saturation,
-        /// <summary> 色相旋转 </summary>
+        /// <summary> Hue rotation. </summary>
         HueRotation,
-        /// <summary> 对比度 </summary>
+        /// <summary> Contrast. </summary>
         Contrast,
-        /// <summary> 冷暖 </summary>
+        /// <summary> Temperature. </summary>
         Temperature,
 
-        /// <summary> 高亮/阴影 </summary>
+        /// <summary> Highlights and shadows. </summary>
         HighlightsAndShadows,
-        /// <summary> 伽马转移 </summary>
+        /// <summary> Gamma transfer. </summary>
         GammaTransfer,
-        /// <summary> 装饰图案 </summary>
+        /// <summary> Vignette. </summary>
         Vignette
     }
 }

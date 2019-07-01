@@ -3,11 +3,15 @@ using Retouch_Photo2.Adjustments.Models;
 
 namespace Retouch_Photo2.Adjustments.Pages
 {
+    /// <summary>
+    /// Page of <see cref = "HighlightsAndShadowsAdjustment"/>.
+    /// </summary>
     public sealed partial class HighlightsAndShadowsPage : AdjustmentPage
     {
 
         public HighlightsAndShadowsAdjustment HighlightsAndShadowsAdjustment;
 
+        //@Construct
         public HighlightsAndShadowsPage()
         {
             base.Type = AdjustmentType.HighlightsAndShadows;

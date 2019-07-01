@@ -1,16 +1,17 @@
-﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Adjustments.Controls;
+﻿using Retouch_Photo2.Adjustments.Controls;
 using Retouch_Photo2.Adjustments.Items;
-using Retouch_Photo2.Adjustments.Pages;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
+    /// <summary>
+    /// <see cref="Adjustment"/>'s HighlightsAndShadowsAdjustment.
+    /// </summary>
     public class HighlightsAndShadowsAdjustment : Adjustment
     {
-        public static readonly string Name = "HighlightsAndShadows";
+        public const string Name = "HighlightsAndShadows";
         public HighlightsAndShadowsAdjustmentItem HighlightsAndShadowsAdjustmentItem = new HighlightsAndShadowsAdjustmentItem();
 
+        //@Construct
         public HighlightsAndShadowsAdjustment()
         {
             base.Type = AdjustmentType.HighlightsAndShadows;
@@ -21,5 +22,3 @@ namespace Retouch_Photo2.Adjustments.Models
         }
     }
 }
-
-

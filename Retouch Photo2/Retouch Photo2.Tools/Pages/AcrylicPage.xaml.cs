@@ -6,8 +6,8 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Pages
 {
-    /// <summary>
-    /// <see cref="AcrylicTool"/>'s Page.
+    /// <summary> 
+    /// Page of <see cref = "AcrylicTool"/>.
     /// </summary>
     public sealed partial class AcrylicPage : Page
     {

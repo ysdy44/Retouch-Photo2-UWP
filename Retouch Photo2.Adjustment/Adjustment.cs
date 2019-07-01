@@ -4,13 +4,16 @@ using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Adjustments
 {
+    //@Delegate
     public delegate void AdjustmentHandler(Adjustment adjustment);
     public delegate void AdjustmentsHandler(IEnumerable<Adjustment> adjustments);
 
-    /// <summary> Adjust Layers. </summary>
+    /// <summary> 
+    /// Adjust Layers. 
+    /// </summary>
     public abstract class Adjustment
     {
-        //@static
+        //@Static
         public static Action Invalidate;
 
         public AdjustmentType Type;

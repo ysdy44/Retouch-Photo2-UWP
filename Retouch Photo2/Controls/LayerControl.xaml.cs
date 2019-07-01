@@ -247,7 +247,7 @@ namespace Retouch_Photo2.Controls
                         {
                             foreach (Layer layer in this.SelectionViewModel.Layers)
                             {
-                                this.ViewModel.Layers.Remove(this.SelectionViewModel.Layer);
+                                this.ViewModel.Layers.Remove(layer);
                             }
 
                             this.SelectionViewModel.SetModeNone();//Selection

@@ -5,22 +5,25 @@
     /// </summary>
     public enum ToolType
     {
-        /// <summary> Normal </summary>
+        /// <summary> Normal. </summary>
         None,
+
+        /// <summary> Cursor tool. </summary>
+        Cursor,
+
+        /// <summary> Fill or stroke geometry. </summary>
+        Brush,
 
         /// <summary> Drag and move the canvas. </summary>
         View,
 
-        /// <summary> Rectangle Geometry </summary>
+        /// <summary> Create rectangle geometry. </summary>
         Rectangle,
 
-        /// <summary> Ellipse Geometry </summary>
+        /// <summary> Create ellipse geometry. </summary>
         Ellipse,
 
-        /// <summary> Cursor Tool </summary>
-        Cursor,
-
-        /// <summary> Acrylic Layer </summary>
+        /// <summary> Create acrylic layer. </summary>
         Acrylic
     }
 }

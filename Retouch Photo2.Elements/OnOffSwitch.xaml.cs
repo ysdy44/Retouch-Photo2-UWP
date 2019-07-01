@@ -4,6 +4,9 @@ using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.Elements
 {
+    /// <summary>
+    /// On or off.
+    /// </summary>
     public sealed partial class OnOffSwitch : UserControl
     { 
         //@Converter

@@ -18,19 +18,19 @@
                 <ToolTip Content="Cursor" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
         </tools:Button>
-        
+
         <tools:Button x:Name="ViewButton" GroupType="{x:Bind ToolType,Mode=OneWay}">
             <ToolTipService.ToolTip>
                 <ToolTip Content="View" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
         </tools:Button>
-        
+
         <tools:Button x:Name="RectangleButton" GroupType="{x:Bind ToolType,Mode=OneWay}">
             <ToolTipService.ToolTip>
                 <ToolTip Content="Rectangle" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
         </tools:Button>
-        
+
         <tools:Button x:Name="EllipseButton" GroupType="{x:Bind ToolType,Mode=OneWay}">
             <ToolTipService.ToolTip>
                 <ToolTip Content="Ellipse" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>

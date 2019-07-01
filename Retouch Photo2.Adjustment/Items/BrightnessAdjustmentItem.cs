@@ -5,6 +5,9 @@ using System.Numerics;
 
 namespace Retouch_Photo2.Adjustments.Items
 {
+    /// <summary>
+    /// Item of <see cref="BrightnessAdjustment">.
+    /// </summary>
     public class BrightnessAdjustmentItem : AdjustmentItem
     {       
         /// <summary> Interval 1.0->0.5 . </summary>
@@ -17,9 +20,13 @@ namespace Retouch_Photo2.Adjustments.Items
         /// <summary> Interval 0.0->0.5 . </summary>
         public float BlackDark;
 
-        public BrightnessAdjustmentItem() => base.Name = BrightnessAdjustment.Name;
+        //@Construct
+        public BrightnessAdjustmentItem()
+        {
+            base.Name = BrightnessAdjustment.Name;
+        }
 
-        //@override
+        //@Override
         public override Adjustment GetNewAdjustment()
         {
             BrightnessAdjustment adjustment = new BrightnessAdjustment();

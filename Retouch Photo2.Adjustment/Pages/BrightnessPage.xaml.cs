@@ -3,10 +3,14 @@ using Retouch_Photo2.Adjustments.Models;
 
 namespace Retouch_Photo2.Adjustments.Pages
 {
+    /// <summary>
+    /// Page of <see cref = "BrightnessAdjustment"/>.
+    /// </summary>
     public sealed partial class BrightnessPage : AdjustmentPage
     {
         public BrightnessAdjustment BrightnessAdjustment;
-        
+
+        //@Construct
         public BrightnessPage()
         {
             base.Type = AdjustmentType.Brightness;

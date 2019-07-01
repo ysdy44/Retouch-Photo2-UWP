@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Effects.Pages
 {
     /// <summary>
-    /// <see cref = "DirectionalBlurEffect" /> 's Page.
+    /// Page of <see cref = "DirectionalBlurEffect"/>.
     /// </summary>
     public sealed partial class DirectionalBlurPage : Page
     {

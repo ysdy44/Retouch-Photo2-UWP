@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Media;
 namespace Retouch_Photo2.Effects.Pages
 {
     /// <summary>
-    /// <see cref = "OuterShadowEffect" /> 's Page.
+    /// Page of <see cref = "OuterShadowEffect"/>.
     /// </summary>
     public sealed partial class OuterShadowPage : Page
     {

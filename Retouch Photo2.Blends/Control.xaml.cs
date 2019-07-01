@@ -3,21 +3,24 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Blends
 {
+    /// <summary>
+    /// Control of <see cref="Blend">.
+    /// </summary>
     public sealed partial class Control : UserControl
     {
-        //Delegate
+        //@Delegate
         public delegate void BlendTypeChangedHandler(BlendType type);
         public event BlendTypeChangedHandler TypeChanged = null;
 
         #region DependencyProperty
 
-        
+        /// <summary> Gets or Sets type. </summary>
         public BlendType BlendType
         {
             get { return (BlendType)GetValue(BlendTypeProperty); }
             set { SetValue(BlendTypeProperty, value); }
         }
-
+        /// <summary> Identifies the <see cref = "Control.BlendType"/> dependency property. </summary>
         public static readonly DependencyProperty BlendTypeProperty = DependencyProperty.Register(nameof(BlendType), typeof(BlendType), typeof(Control), new PropertyMetadata(BlendType.Normal, (sender, e) =>
         {
             Control con = (Control)sender;
@@ -34,11 +37,11 @@ namespace Retouch_Photo2.Blends
                 con.ComboBox.SelectedIndex = index;
             }
         }));
-        
+
 
         #endregion
 
-
+        //@Construct
         public Control()
         {
             this.InitializeComponent();

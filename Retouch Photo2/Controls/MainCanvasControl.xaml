@@ -14,6 +14,50 @@
         <transformers:CanvasOperator x:Name="CanvasOperator" DestinationControl="{Binding ElementName=CanvasControl}"/>
     </UserControl.Resources>
 
-    <canvas:CanvasControl x:Name="CanvasControl" UseSharedDevice="True" CustomDevice="{x:Bind ViewModel.CanvasDevice}"/>
-
+        <canvas:CanvasControl x:Name="CanvasControl" UseSharedDevice="True" CustomDevice="{x:Bind ViewModel.CanvasDevice}"/>
+    
 </UserControl>
+    
+    
+    <!--
+        
+            <StackPanel HorizontalAlignment="Left" >
+    <Button Content="Fit" Tapped="Button_Tapped"/>
+    <TextBlock IsHitTestVisible="False">
+                
+                
+                <Run>Width:</Run>
+                <Run x:Name="WidthRun"/>
+                <LineBreak/>
+                <LineBreak/>
+                
+                <Run>Height:</Run>
+                <Run x:Name="HeightRun"/>
+                <LineBreak/>
+                <LineBreak/>
+                
+                <Run>X:</Run>
+                <Run x:Name="XRun"/>
+                <LineBreak/>
+                <LineBreak/>
+                
+                <Run>Y:</Run>
+                <Run x:Name="YRun"/>
+                <LineBreak/>
+                <LineBreak/>
+                
+                <Run>Scale:</Run>
+                <Run x:Name="ScaleRun"/>
+                <LineBreak/>
+                <LineBreak/>
+                
+                <Run>Radian:</Run>
+                <Run x:Name="RadianRun"/>
+                <LineBreak/>
+                <LineBreak/>
+
+
+    </TextBlock>
+    </StackPanel>
+
+    -->

@@ -3,7 +3,7 @@
 namespace Retouch_Photo2.Tools.Controls
 {
     /// <summary>
-    /// <see cref="EllipseTool"/>'s Control.
+    /// Control of <see cref = "EllipseTool"/>.
     /// </summary>
     public sealed partial class EllipseControl : UserControl
     {

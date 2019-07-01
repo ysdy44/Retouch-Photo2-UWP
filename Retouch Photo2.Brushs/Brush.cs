@@ -9,30 +9,40 @@ using Windows.UI;
 
 namespace Retouch_Photo2.Brushs
 {
+    /// <summary>
+    /// Brush Classes.
+    /// </summary>
     public class Brush
     {
+        /// <summary> <see cref="Brush">'s IsFollowTransform. </summary>
         public bool IsFollowTransform = true;
 
+        /// <summary> <see cref="Brush">'s type. </summary>
         public BrushType Type;
 
+        /// <summary> <see cref="Brush">'s color. </summary>
         public Color Color = Colors.Gray;
+        /// <summary> <see cref="Brush">'s gradient colors. </summary>
         public CanvasGradientStop[] Array = new CanvasGradientStop[]
         {
              new CanvasGradientStop{Color= Colors.White, Position=0.0f },
              new CanvasGradientStop{Color= Colors.Gray, Position=1.0f }
         };
 
+        /// <summary> <see cref="Brush">'s LinearGradientManager. </summary>
         public LinearGradientManager LinearGradientManager = new LinearGradientManager();
+        /// <summary> <see cref="Brush">'s RadialGradientManager. </summary>
         public RadialGradientManager RadialGradientManager = new RadialGradientManager();
+        /// <summary> <see cref="Brush">'s EllipticalGradientManager. </summary>
         public EllipticalGradientManager EllipticalGradientManager = new EllipticalGradientManager();
-
+        /// <summary> <see cref="Brush">'s CanvasImageBrush. </summary>
         public CanvasImageBrush ImageBrush;
 
 
         public void TransformStart()
         {
             switch (this.Type)
-            {  
+            {
                 case BrushType.LinearGradient:
                     this.LinearGradientManager.OldStartPoint = this.LinearGradientManager.StartPoint;
                     this.LinearGradientManager.OldEndPoint = this.LinearGradientManager.EndPoint;
@@ -56,7 +66,7 @@ namespace Retouch_Photo2.Brushs
                     break;
             }
         }
-        public void TransformDelta( Matrix3x2 matrix)
+        public void TransformDelta(Matrix3x2 matrix)
         {
             switch (this.Type)
             {
@@ -83,12 +93,19 @@ namespace Retouch_Photo2.Brushs
                     break;
             }
         }
-        public void TransformComplete (Matrix3x2 matrix)
+        public void TransformComplete(Matrix3x2 matrix)
         {
             this.TransformDelta(matrix);
         }
 
 
+        /// <summary>
+        /// Fill geometry.
+        /// </summary>
+        /// <param name="creator"> ICanvasResourceCreator. </param>
+        /// <param name="ds"> CanvasDrawingSession. </param>
+        /// <param name="geometry"> CanvasGeometry. </param>
+        /// <param name="matrix"> matrix. </param>
         public void FillGeometry(ICanvasResourceCreator creator, CanvasDrawingSession ds, CanvasGeometry geometry, Matrix3x2 matrix)
         {
             switch (this.Type)
@@ -129,7 +146,14 @@ namespace Retouch_Photo2.Brushs
             }
         }
 
-
+        /// <summary>
+        /// Draw geometry.
+        /// </summary>
+        /// <param name="creator"> ICanvasResourceCreator. </param>
+        /// <param name="ds"> CanvasDrawingSession. </param>
+        /// <param name="geometry"> CanvasGeometry. </param>
+        /// <param name="matrix"> matrix. </param>
+        /// <param name="strokeWidth"> Stroke width. </param>
         public void DrawGeometry(ICanvasResourceCreator creator, CanvasDrawingSession ds, CanvasGeometry geometry, Matrix3x2 matrix,float strokeWidth)
         {
             //Scale

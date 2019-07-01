@@ -92,7 +92,7 @@ namespace Retouch_Photo2.Effects
         public bool Straighten_IsOn;
         public float Straighten_Angle = 0;
 
-        //@static
+        //@Static
         public static ICanvasImage Render(EffectManager  effectManager, ICanvasImage image)
         {
             //GaussianBlur

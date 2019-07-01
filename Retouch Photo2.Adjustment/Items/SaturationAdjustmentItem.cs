@@ -1,17 +1,23 @@
-﻿using Retouch_Photo2.Adjustments.Models;
-using Microsoft.Graphics.Canvas;
+﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments.Models;
 
 namespace Retouch_Photo2.Adjustments.Items
 {
+    /// <summary>
+    /// Item of <see cref="SaturationAdjustment">.
+    /// </summary>
     public class SaturationAdjustmentItem : AdjustmentItem
     {
         public float Saturation;
 
-        public SaturationAdjustmentItem() => base.Name = SaturationAdjustment.Name;
+        //@Construct
+        public SaturationAdjustmentItem()
+        {
+            base.Name = SaturationAdjustment.Name;
+        }
 
-        //@override
+        //@Override
         public override Adjustment GetNewAdjustment()
         {
             SaturationAdjustment adjustment = new SaturationAdjustment();

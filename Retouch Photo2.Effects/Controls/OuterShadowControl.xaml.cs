@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Effects.Controls
 {
     /// <summary>
-    /// <see cref = "OuterShadowEffect" /> 's Page.
+    /// Control of <see cref = "OuterShadowEffect"/>.
     /// </summary>
     public sealed partial class OuterShadowControl : UserControl
     {

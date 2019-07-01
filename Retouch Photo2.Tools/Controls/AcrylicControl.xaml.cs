@@ -3,7 +3,7 @@
 namespace Retouch_Photo2.Tools.Controls
 {
     /// <summary>
-    /// <see cref="AcrylicTool"/>'s Control.
+    /// Control of <see cref = "AcrylicTool"/>.
     /// </summary>
     public sealed partial class AcrylicControl : UserControl
     {

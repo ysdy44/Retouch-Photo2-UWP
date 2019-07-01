@@ -5,6 +5,9 @@ using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Elements
 {
+    /// <summary>
+    /// Manipulation of the rotation angle.
+    /// </summary>
     public sealed partial class RadiansPicker : UserControl
     {
         /// <summary> 5 degree </summary>
@@ -19,7 +22,7 @@ namespace Retouch_Photo2.Elements
         public static Vector2 RadiansToVector(float radians, float radius, Vector2 center) => new Vector2((float)Math.Cos(radians), (float)Math.Sin(radians)) * radius + center;
 
 
-        //Delegate   
+        //@Delegate   
         public delegate void RadiansChangeHandler(float radians);
         public event RadiansChangeHandler RadiansChange;
 

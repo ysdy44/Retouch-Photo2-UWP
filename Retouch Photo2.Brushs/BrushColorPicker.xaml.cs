@@ -4,9 +4,12 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Brushs
 {
+    /// <summary>
+    /// Picker of <see cref="Brush">.
+    /// </summary>
     public sealed partial class BrushColorPicker : UserControl
     {
-        //Delegate
+        //@Delegate
         public event ColorChangeHandler ColorChange;
 
 
@@ -94,8 +97,9 @@ namespace Retouch_Photo2.Brushs
 
 
         #endregion
-        
 
+
+        //@Construct
         public BrushColorPicker()
         {
             this.InitializeComponent();
@@ -120,4 +124,3 @@ namespace Retouch_Photo2.Brushs
         }
     }
 }
-

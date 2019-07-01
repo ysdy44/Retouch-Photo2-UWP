@@ -12,6 +12,9 @@ namespace Retouch_Photo2.Adjustments.Pages
         Blue
     }
 
+    /// <summary>
+    /// Page of <see cref = "GammaTransferAdjustment"/>.
+    /// </summary>
     public sealed partial class GammaTransferPage : AdjustmentPage
     {
 
@@ -107,6 +110,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
+        //@Construct
         public GammaTransferPage()
         {
             base.Type = AdjustmentType.GammaTransfer;

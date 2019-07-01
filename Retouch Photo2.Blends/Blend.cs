@@ -6,16 +6,41 @@ using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Blends
 {
+    /// <summary>
+    /// Blend Classes.
+    /// </summary>
     public abstract class Blend
     {
+        /// <summary> <see cref="Blend">'s type. </summary>
         public BlendType Type;
+        /// <summary> <see cref="Blend">'s icon. </summary>
         public FrameworkElement Icon => this.GetIcon();
-        protected abstract FrameworkElement GetIcon();
 
+        //@Abstract
+        /// <summary>
+        /// Gets icon.
+        /// </summary>
+        /// <returns></returns>
+        protected abstract FrameworkElement GetIcon();
+        /// <summary>
+        /// Gets a specific rended-blend.
+        /// </summary>
+        /// <param name="background"> Background image. </param>
+        /// <param name="foreground"> Foreground image. </param>
+        /// <returns> ICanvasImage </returns>
         protected abstract ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground);
+
+        //@Static
+        /// <summary>
+        /// Render images and layers together.
+        /// </summary>      
+        /// <param name="background"> Background image. </param>
+        /// <param name="foreground"> Foreground image. </param>
+        /// <param name="type"> Type </param>
+        /// <returns> ICanvasImage </returns>
         public static ICanvasImage Render(ICanvasImage background, ICanvasImage foreground, BlendType type) => Blend.BlendList.FirstOrDefault(e => e.Type == type).GetRender(background, foreground);
-        
-        //@static
+
+        //@Static
         public static List<Blend> BlendList = new List<Blend>
         {
              new NormalBlend(),
@@ -53,5 +78,6 @@ namespace Retouch_Photo2.Blends
              new SubtractBlend(),           
              new DivisionBlend(),
         };
+
     }
 }

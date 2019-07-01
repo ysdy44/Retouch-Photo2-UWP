@@ -3,11 +3,15 @@ using Retouch_Photo2.Adjustments.Models;
 
 namespace Retouch_Photo2.Adjustments.Pages
 {
+    /// <summary>
+    /// Page of <see cref = "GrayAdjustment"/>.
+    /// </summary>
     public sealed partial class GrayPage : AdjustmentPage
     {
 
         public GrayAdjustment GrayAdjustment;
 
+        //@Construct
         public GrayPage()
         {
             base.Type = AdjustmentType.Gray;

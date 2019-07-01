@@ -3,11 +3,15 @@ using Retouch_Photo2.Adjustments.Models;
 
 namespace Retouch_Photo2.Adjustments.Pages
 {
+    /// <summary>
+    /// Page of <see cref = "ExposureAdjustment"/>.
+    /// </summary>
     public sealed partial class ExposurePage : AdjustmentPage
     {
 
         public ExposureAdjustment ExposureAdjustment;
 
+        //@Construct
         public ExposurePage()
         {
             base.Type = AdjustmentType.Exposure;

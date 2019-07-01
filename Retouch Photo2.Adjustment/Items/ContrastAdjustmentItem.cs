@@ -4,13 +4,20 @@ using Retouch_Photo2.Adjustments.Models;
 
 namespace Retouch_Photo2.Adjustments.Items
 {
+    /// <summary>
+    /// Item of <see cref="ContrastAdjustment">.
+    /// </summary>
     public class ContrastAdjustmentItem: AdjustmentItem
     {
         public float Contrast;
 
-        public ContrastAdjustmentItem() => base.Name = ContrastAdjustment.Name;
+        //@Construct
+        public ContrastAdjustmentItem()
+        {
+            base.Name = ContrastAdjustment.Name;
+        }
 
-        //@override
+        //@Override
         public override Adjustment GetNewAdjustment()
         {
             ContrastAdjustment adjustment = new ContrastAdjustment();

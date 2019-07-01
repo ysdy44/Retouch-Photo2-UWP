@@ -4,13 +4,20 @@ using Retouch_Photo2.Adjustments.Models;
 
 namespace Retouch_Photo2.Adjustments.Items
 {
+    /// <summary>
+    /// Item of <see cref="ExposureAdjustment">.
+    /// </summary>
     public class ExposureAdjustmentItem : AdjustmentItem
     {
         public float Exposure;
 
-        public ExposureAdjustmentItem() => base.Name = ExposureAdjustment.Name;
+        //@Construct
+        public ExposureAdjustmentItem()
+        {
+            base.Name = ExposureAdjustment.Name;
+        }
 
-        //@override
+        //@Override
         public override Adjustment GetNewAdjustment()
         {
             ExposureAdjustment adjustment = new ExposureAdjustment();

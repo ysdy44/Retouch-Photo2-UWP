@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Tools.Pages
 {
     /// <summary>
-    /// <see cref="RectangleTool"/>'s Page.
+    /// Page of <see cref = "RectangleTool"/>.
     /// </summary>
     public sealed partial class RectanglePage : Page
     {

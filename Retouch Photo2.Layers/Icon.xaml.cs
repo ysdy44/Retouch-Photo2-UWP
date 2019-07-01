@@ -7,7 +7,7 @@ namespace Retouch_Photo2.Layers
     /// </summary>
     public sealed partial class Icon : UserControl
     {
-        //@Converter
+        //@Construct
         public Icon()
         {
             this.InitializeComponent();

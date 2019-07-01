@@ -7,16 +7,32 @@ using System.Linq;
 
 namespace Retouch_Photo2.Adjustments
 {
-    /// <summary> This contains all an <see cref = "Adjustment" />'s information. </summary>
+    /// <summary> 
+    /// This contains all an <see cref = "Adjustment" />'s information. 
+    /// </summary>
     public abstract class AdjustmentItem
     {
+        /// <summary> <see cref="AdjustmentItem">'s name. </summary>
         public string Name;
 
+        //@Abstract
+        /// <summary>
+        /// Get a new adjustment.
+        /// </summary>
+        /// <returns> Adjustment </returns>
         public abstract Adjustment GetNewAdjustment();
+        /// <summary>
+        /// Reset the adjustment.
+        /// </summary>
         public abstract void Reset();
+        /// <summary>
+        /// Gets a specific rended-image.
+        /// </summary>
+        /// <param name="image"> previousImage </param>
+        /// <returns> ICanvasImage </returns>
         public abstract ICanvasImage GetRender(ICanvasImage image);
 
-        //@static
+        //@Static
         /// <summary> [Json] --> List [Item] </summary>
         public static IEnumerable<AdjustmentItem> GetItemsFromJson(string json)
         {
@@ -32,7 +48,7 @@ namespace Retouch_Photo2.Adjustments
             return items;
         }
 
-        //@static
+        //@Static
         /// <summary> [Json] --> [Item] </summary>
         public static AdjustmentItem GetItemFromJson(string json)
         {

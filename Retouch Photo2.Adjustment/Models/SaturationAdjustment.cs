@@ -1,16 +1,17 @@
-﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Adjustments.Controls;
+﻿using Retouch_Photo2.Adjustments.Controls;
 using Retouch_Photo2.Adjustments.Items;
-using Retouch_Photo2.Adjustments.Pages;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
+    /// <summary>
+    /// <see cref="Adjustment"/>'s SaturationAdjustment.
+    /// </summary>
     public class SaturationAdjustment : Adjustment
     {
-        public static readonly string Name = "Saturation";
+        public const string Name = "Saturation";
         public SaturationAdjustmentItem SaturationAdjustmentItem=new SaturationAdjustmentItem();
 
+        //@Construct
         public SaturationAdjustment()
         {
             base.Type = AdjustmentType.Saturation;
@@ -21,4 +22,3 @@ namespace Retouch_Photo2.Adjustments.Models
         }
     }
 }
-

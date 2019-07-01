@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Effects.Controls
 {
     /// <summary>
-    /// <see cref = "EmbossEffect" /> 's Page.
+    /// Control of <see cref = "EmbossEffect"/>.
     /// </summary>
     public sealed partial class EmbossControl : UserControl
     {

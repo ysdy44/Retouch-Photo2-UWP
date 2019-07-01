@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Layers.Controls
 {
     /// <summary>
-    /// <see cref="GroupLayer"/>'s Control .
+    /// Control of <see cref = "GroupLayer"/>.
     /// </summary>
     public sealed partial class GroupControl : UserControl
     {

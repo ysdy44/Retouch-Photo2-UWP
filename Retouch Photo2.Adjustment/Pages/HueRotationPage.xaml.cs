@@ -4,11 +4,15 @@ using System;
 
 namespace Retouch_Photo2.Adjustments.Pages
 {
+    /// <summary>
+    /// Page of <see cref = "HueRotationAdjustment"/>.
+    /// </summary>
     public sealed partial class HueRotationPage : AdjustmentPage
     {
 
         public HueRotationAdjustment HueRotationAdjustment;
 
+        //@Construct
         public HueRotationPage()
         {
             base.Type = AdjustmentType.HueRotation;

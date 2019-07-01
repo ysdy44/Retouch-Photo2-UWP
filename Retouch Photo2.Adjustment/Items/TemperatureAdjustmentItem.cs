@@ -4,14 +4,21 @@ using Microsoft.Graphics.Canvas.Effects;
 
 namespace Retouch_Photo2.Adjustments.Items
 {
+    /// <summary>
+    /// Item of <see cref="TemperatureAdjustment">.
+    /// </summary>
     public class TemperatureAdjustmentItem: AdjustmentItem
     {
         public float Temperature;
         public float Tint;
 
-        public TemperatureAdjustmentItem() => base.Name = TemperatureAdjustment.Name;
+        //@Construct
+        public TemperatureAdjustmentItem()
+        {
+            base.Name = TemperatureAdjustment.Name;
+        }
 
-        //@override      
+        //@Override      
         public override Adjustment GetNewAdjustment()
         {
             TemperatureAdjustment adjustment = new TemperatureAdjustment();

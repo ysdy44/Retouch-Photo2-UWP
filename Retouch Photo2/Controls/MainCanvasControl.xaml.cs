@@ -1,13 +1,10 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Microsoft.Graphics.Canvas.Text;
 using Retouch_Photo2.Layers;
-using FanKit.Transformers;
-using FanKit.Transformers;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
-using System;
 using System.Numerics;
 using Windows.Foundation;
 using Windows.UI;
@@ -101,6 +98,12 @@ namespace Retouch_Photo2.Controls
         #endregion
 
 
+
+        private void Button_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            this.ViewModel.CanvasTransformer.Fit();
+            this.ViewModel.Invalidate();
+        }
         //@Construct
         public MainCanvasControl()
         {
@@ -130,15 +133,30 @@ namespace Retouch_Photo2.Controls
 
                 this.CanvasControl.Invalidate();
             };
+            this.CanvasControl.CreateResources += (sender, args) =>
+            {
+                this.ViewModel.CanvasTransformer.Size = new Size(sender.ActualWidth, sender.ActualHeight);
+            };
             this.CanvasControl.Draw += (sender, args) =>
             {
-                //Blank Image
-                ICanvasImage previousImage = new ColorSourceEffect { Color = Colors.White };
+                /*                
+                 
+                this.WidthRun.Text = this.ViewModel.CanvasTransformer.Width.ToString();
+                this.HeightRun.Text = this.ViewModel.CanvasTransformer.Height.ToString();
 
+                this.XRun.Text = this.ViewModel.CanvasTransformer.Position.X.ToString();
+                this.YRun.Text = this.ViewModel.CanvasTransformer.Position.Y.ToString();
+
+                this.ScaleRun.Text = this.ViewModel.CanvasTransformer.Scale.ToString();
+                this.RadianRun.Text = this.ViewModel.CanvasTransformer.Radian.ToString();
+                 
+                 */
+                 
 
                 //Render & Mezzanine
                 {
-                    //Render
+                    ICanvasImage previousImage = new ColorSourceEffect { Color = Colors.White };
+
                     Matrix3x2 canvasToVirtualMatrix = this.ViewModel.CanvasTransformer.GetMatrix(MatrixTransformerMode.CanvasToVirtual);
 
                     void aaa() =>
@@ -169,38 +187,12 @@ namespace Retouch_Photo2.Controls
                             bbb(i);
                         }
                     }
+
+                    //Draw
+                    args.DrawingSession.DrawCrad(previousImage, this.ViewModel.CanvasTransformer, this.ShadowColor);
                 }
 
-
-                //Crop & Final
-                {
-                    //Crop : Get the border from MatrixTransformer
-                    float width = this.ViewModel.CanvasTransformer.Width * this.ViewModel.CanvasScale;
-                    float height = this.ViewModel.CanvasTransformer.Height * this.ViewModel.CanvasScale;
-                    ICanvasImage cropRect = new CropEffect
-                    {
-                        Source = previousImage,
-                        SourceRectangle = new Rect(-width / 2, -height / 2, width, height),
-                    };
-
-
-                    //Final : Draw to Canvas
-                    ICanvasImage finalCanvas = new Transform2DEffect
-                    {
-                        Source = cropRect,
-                        TransformMatrix = this.ViewModel.CanvasTransformer.GetMatrix(MatrixTransformerMode.VirtualToControl)
-                    };
-                    ICanvasImage shadow = new ShadowEffect
-                    {
-                        Source = finalCanvas,
-                        ShadowColor = this.ShadowColor,
-                        BlurAmount = 4.0f
-                    };
-                    args.DrawingSession.DrawImage(shadow, 5.0f, 5.0f);
-                    args.DrawingSession.DrawImage(finalCanvas);
-                }
-
-
+                
                 //Selection & Mezzanine
                 {
                     if (this.MezzanineViewModel.Layer == null)
@@ -234,56 +226,7 @@ namespace Retouch_Photo2.Controls
 
 
                 //IsRuler
-                if (this.RulerVisible)
-                {
-                    //Ruler
-                    const float rulerSpace = 20;
-                    CanvasTextFormat rulerTextFormat = new CanvasTextFormat()
-                    {
-                        FontSize = 12,
-                        HorizontalAlignment = CanvasHorizontalAlignment.Center,
-                        VerticalAlignment = CanvasVerticalAlignment.Center
-                    };
-
-                    //Canvas
-                    Vector2 position = this.ViewModel.CanvasTransformer.GetMatrix().Translation;
-                    float scale = this.ViewModel.CanvasTransformer.Scale;
-                    float controlWidth = this.ViewModel.CanvasTransformer.ControlWidth;
-                    float controlHeight = this.ViewModel.CanvasTransformer.ControlHeight;
-
-                    //line
-                    args.DrawingSession.FillRectangle(0, 0, controlWidth, rulerSpace, Windows.UI.Color.FromArgb(64, 127, 127, 127));//Horizontal
-                    args.DrawingSession.FillRectangle(0, 0, rulerSpace, controlHeight, Windows.UI.Color.FromArgb(64, 127, 127, 127));//Vertical
-                    args.DrawingSession.DrawLine(0, rulerSpace, controlWidth, rulerSpace, Windows.UI.Colors.Gray);//Horizontal
-                    args.DrawingSession.DrawLine(rulerSpace, 0, rulerSpace, controlHeight, Windows.UI.Colors.Gray);//Vertical
-
-                    //space
-                    float space = (10 * scale);
-                    while (space < 10) space *= 5;
-                    while (space > 100) space /= 5;
-                    float spaceFive = space * 5;
-
-                    //Horizontal
-                    for (float X = position.X; X < controlWidth; X += space) args.DrawingSession.DrawLine(X, 10, X, rulerSpace, Windows.UI.Colors.Gray);
-                    for (float X = position.X; X > rulerSpace; X -= space) args.DrawingSession.DrawLine(X, 10, X, rulerSpace, Windows.UI.Colors.Gray);
-                    //Vertical
-                    for (float Y = position.Y; Y < controlHeight; Y += space) args.DrawingSession.DrawLine(10, Y, rulerSpace, Y, Windows.UI.Colors.Gray);
-                    for (float Y = position.Y; Y > rulerSpace; Y -= space) args.DrawingSession.DrawLine(10, Y, rulerSpace, Y, Windows.UI.Colors.Gray);
-
-                    //Horizontal
-                    for (float X = position.X; X < controlWidth; X += spaceFive) args.DrawingSession.DrawLine(X, 10, X, rulerSpace, Windows.UI.Colors.Gray);
-                    for (float X = position.X; X > rulerSpace; X -= spaceFive) args.DrawingSession.DrawLine(X, 10, X, rulerSpace, Windows.UI.Colors.Gray);
-                    //Vertical
-                    for (float Y = position.Y; Y < controlHeight; Y += spaceFive) args.DrawingSession.DrawLine(10, Y, rulerSpace, Y, Windows.UI.Colors.Gray);
-                    for (float Y = position.Y; Y > rulerSpace; Y -= spaceFive) args.DrawingSession.DrawLine(10, Y, rulerSpace, Y, Windows.UI.Colors.Gray);
-
-                    //Horizontal
-                    for (float X = position.X; X < controlWidth; X += spaceFive) args.DrawingSession.DrawText(((int)(Math.Round((X - position.X) / scale))).ToString(), X, 10, Windows.UI.Colors.Gray, rulerTextFormat);
-                    for (float X = position.X; X > rulerSpace; X -= spaceFive) args.DrawingSession.DrawText(((int)(Math.Round((X - position.X) / scale))).ToString(), X, 10, Windows.UI.Colors.Gray, rulerTextFormat);
-                    //Vertical
-                    for (float Y = position.Y; Y < controlHeight; Y += spaceFive) args.DrawingSession.DrawText(((int)(Math.Round((Y - position.Y) / scale))).ToString(), 10, Y, Windows.UI.Colors.Gray, rulerTextFormat);
-                    for (float Y = position.Y; Y > rulerSpace; Y -= spaceFive) args.DrawingSession.DrawText(((int)(Math.Round((Y - position.Y) / scale))).ToString(), 10, Y, Windows.UI.Colors.Gray, rulerTextFormat);
-                }
+                if (this.RulerVisible) args.DrawingSession.DrawRuler(this.ViewModel.CanvasTransformer);
             };
 
 
@@ -340,9 +283,9 @@ namespace Retouch_Photo2.Controls
             this.CanvasOperator.Right_Delta += (point) => this.TipViewModel.ViewTool.Delta(this.rightStartPoint, point);//Delta
             this.CanvasOperator.Right_Complete += (point) =>
             {
-            this.TipViewModel.ViewTool.Complete(this.rightStartPoint, point, this.isSingleStarted);//Started
+                this.TipViewModel.ViewTool.Complete(this.rightStartPoint, point, this.isSingleStarted);//Started
 
-            this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible
+                this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible
             };
 
 

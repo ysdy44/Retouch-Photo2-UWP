@@ -40,56 +40,56 @@ namespace Retouch_Photo2.Controls
                     case ListViewSelectionMode.None:
                         {
                             //Transform
-                            con.FlipHorizontalButton.ButtonIsEnabled = false;
-                            con.FlipVerticalButton.ButtonIsEnabled = false;
-                            con.RotateLeftButton.ButtonIsEnabled = false;
-                            con.RotateRightButton.ButtonIsEnabled = false;
+                            con.FlipHorizontalButton.IsEnabled = false;
+                            con.FlipVerticalButton.IsEnabled = false;
+                            con.RotateLeftButton.IsEnabled = false;
+                            con.RotateRightButton.IsEnabled = false;
 
                             //Align Horizontal
-                            con.AlignLeftButton.ButtonIsEnabled = false;
-                            con.AlignCenterButton.ButtonIsEnabled = false;
-                            con.AlignRightButton.ButtonIsEnabled = false;
-                            con.AlignSymmetryHorizontallyButton.ButtonIsEnabled = false;
+                            con.AlignLeftButton.IsEnabled = false;
+                            con.AlignCenterButton.IsEnabled = false;
+                            con.AlignRightButton.IsEnabled = false;
+                            con.AlignSymmetryHorizontallyButton.IsEnabled = false;
 
                             //Align Vertical
-                            con.AlignTopButton.ButtonIsEnabled = false;
-                            con.AlignMiddleButton.ButtonIsEnabled = false;
-                            con.AlignBottomButton.ButtonIsEnabled = false;
-                            con.AlignSymmetryVerticallyButton.ButtonIsEnabled = false;
+                            con.AlignTopButton.IsEnabled = false;
+                            con.AlignMiddleButton.IsEnabled = false;
+                            con.AlignBottomButton.IsEnabled = false;
+                            con.AlignSymmetryVerticallyButton.IsEnabled = false;
 
                             //Arrange
-                            con.ArrangeMoveBackButton.ButtonIsEnabled = false;
-                            con.ArrangeBackOneButton.ButtonIsEnabled = false;
-                            con.ArrangeForwardOneButton.ButtonIsEnabled = false;
-                            con.ArrangeMoveFrontButton.ButtonIsEnabled = false;
+                            con.ArrangeMoveBackButton.IsEnabled = false;
+                            con.ArrangeBackOneButton.IsEnabled = false;
+                            con.ArrangeForwardOneButton.IsEnabled = false;
+                            con.ArrangeMoveFrontButton.IsEnabled = false;
                         }
                         break;
                     case ListViewSelectionMode.Single:
                     case ListViewSelectionMode.Multiple:
                         {
                             //Transform
-                            con.FlipHorizontalButton.ButtonIsEnabled = true;
-                            con.FlipVerticalButton.ButtonIsEnabled = true;
-                            con.RotateLeftButton.ButtonIsEnabled = true;
-                            con.RotateRightButton.ButtonIsEnabled = true;
+                            con.FlipHorizontalButton.IsEnabled = true;
+                            con.FlipVerticalButton.IsEnabled = true;
+                            con.RotateLeftButton.IsEnabled = true;
+                            con.RotateRightButton.IsEnabled = true;
 
                             //Align Horizontal
-                            con.AlignLeftButton.ButtonIsEnabled = true;
-                            con.AlignCenterButton.ButtonIsEnabled = true;
-                            con.AlignRightButton.ButtonIsEnabled = true;
-                            con.AlignSymmetryHorizontallyButton.ButtonIsEnabled = true;
+                            con.AlignLeftButton.IsEnabled = true;
+                            con.AlignCenterButton.IsEnabled = true;
+                            con.AlignRightButton.IsEnabled = true;
+                            con.AlignSymmetryHorizontallyButton.IsEnabled = true;
 
                             //Align Vertical
-                            con.AlignTopButton.ButtonIsEnabled = true;
-                            con.AlignMiddleButton.ButtonIsEnabled = true;
-                            con.AlignBottomButton.ButtonIsEnabled = true;
-                            con.AlignSymmetryVerticallyButton.ButtonIsEnabled = true;
+                            con.AlignTopButton.IsEnabled = true;
+                            con.AlignMiddleButton.IsEnabled = true;
+                            con.AlignBottomButton.IsEnabled = true;
+                            con.AlignSymmetryVerticallyButton.IsEnabled = true;
 
                             //Arrange
-                            con.ArrangeMoveBackButton.ButtonIsEnabled = true;
-                            con.ArrangeBackOneButton.ButtonIsEnabled = true;
-                            con.ArrangeForwardOneButton.ButtonIsEnabled = true;
-                            con.ArrangeMoveFrontButton.ButtonIsEnabled = true;
+                            con.ArrangeMoveBackButton.IsEnabled = true;
+                            con.ArrangeBackOneButton.IsEnabled = true;
+                            con.ArrangeForwardOneButton.IsEnabled = true;
+                            con.ArrangeMoveFrontButton.IsEnabled = true;
                         }
                         break;
                 }
@@ -108,7 +108,7 @@ namespace Retouch_Photo2.Controls
             #region Transform
 
 
-            this.FlipHorizontalButton.Tapped += (s, e) =>
+            this.FlipHorizontalButton.RootButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.SelectionViewModel.GetTransformer();
                 Matrix3x2 matrix = Matrix3x2.CreateScale(-1, 1, transformer.Center);
@@ -124,7 +124,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.FlipVerticalButton.Tapped += (s, e) =>
+            this.FlipVerticalButton.RootButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.SelectionViewModel.GetTransformer();
                 Matrix3x2 matrix = Matrix3x2.CreateScale(1, -1, transformer.Center);
@@ -140,7 +140,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.RotateLeftButton.Tapped += (s, e) =>
+            this.RotateLeftButton.RootButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.SelectionViewModel.GetTransformer();
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(TransformerMath.PiOver2, transformer.Center);
@@ -156,7 +156,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.RotateRightButton.Tapped += (s, e) =>
+            this.RotateRightButton.RootButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.SelectionViewModel.GetTransformer();
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(-TransformerMath.PiOver2, transformer.Center);
@@ -179,7 +179,7 @@ namespace Retouch_Photo2.Controls
             #region Align Horizontal
 
 
-            this.AlignLeftButton.ButtonTapped += (s, e) =>
+            this.AlignLeftButton.RootButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.SelectionViewModel.GetTransformer();
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0 - transformer.MinX, 0);
@@ -195,7 +195,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.AlignCenterButton.ButtonTapped += (s, e) =>
+            this.AlignCenterButton.RootButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.SelectionViewModel.GetTransformer();
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width / 2 - transformer.Center.X, 0);
@@ -211,7 +211,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.AlignRightButton.ButtonTapped += (s, e) =>
+            this.AlignRightButton.RootButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.SelectionViewModel.GetTransformer();
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width - transformer.MaxX, 0);
@@ -227,7 +227,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.AlignSymmetryHorizontallyButton.ButtonTapped += (s, e) => { };
+            this.AlignSymmetryHorizontallyButton.RootButton.Tapped += (s, e) => { };
 
 
             #endregion
@@ -236,7 +236,7 @@ namespace Retouch_Photo2.Controls
             #region Align Vertical
 
 
-            this.AlignTopButton.ButtonTapped += (s, e) =>
+            this.AlignTopButton.RootButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.SelectionViewModel.GetTransformer();
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0 , 0- transformer.MinY);
@@ -252,7 +252,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.AlignMiddleButton.ButtonTapped += (s, e) =>
+            this.AlignMiddleButton.RootButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.SelectionViewModel.GetTransformer();
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0,this.ViewModel.CanvasTransformer.Height / 2 - transformer.Center.Y);
@@ -268,7 +268,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.AlignBottomButton.ButtonTapped += (s, e) =>
+            this.AlignBottomButton.RootButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.SelectionViewModel.GetTransformer();
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, this.ViewModel.CanvasTransformer.Height - transformer.MaxY);
@@ -284,7 +284,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.AlignSymmetryVerticallyButton.ButtonTapped += (s, e) => { };
+            this.AlignSymmetryVerticallyButton.RootButton.Tapped += (s, e) => { };
 
 
             #endregion
@@ -293,22 +293,22 @@ namespace Retouch_Photo2.Controls
             #region Arrange
 
 
-            this.ArrangeMoveBackButton.ButtonTapped += (s, e) =>
+            this.ArrangeMoveBackButton.RootButton.Tapped += (s, e) =>
             {
 
             };
 
-            this.ArrangeBackOneButton.ButtonTapped += (s, e) =>
+            this.ArrangeBackOneButton.RootButton.Tapped += (s, e) =>
             {
 
             };
 
-            this.ArrangeForwardOneButton.ButtonTapped += (s, e) => 
+            this.ArrangeForwardOneButton.RootButton.Tapped += (s, e) => 
             {
 
             };
 
-            this.ArrangeMoveFrontButton.ButtonTapped += (s, e) =>
+            this.ArrangeMoveFrontButton.RootButton.Tapped += (s, e) =>
             {
 
             };

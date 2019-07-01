@@ -10,9 +10,12 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Brushs
 {
+    /// <summary>
+    /// Picker of <see cref="Brush">.
+    /// </summary>
     public sealed partial class BrushPicker : UserControl
     {
-        //Delegate
+        //@Delegate
         public delegate void StopsChangeHandler();
         public event StopsChangeHandler StopsChange;
 
@@ -42,7 +45,8 @@ namespace Retouch_Photo2.Brushs
         float CanvasWidth;
         float CanvasHeight;
         CanvasBitmap Bitmap;
-
+       
+        //@Construct
         public BrushPicker()
         {
             this.InitializeComponent();

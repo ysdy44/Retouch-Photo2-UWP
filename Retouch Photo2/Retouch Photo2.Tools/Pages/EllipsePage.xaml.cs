@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Tools.Pages
 {
     /// <summary>
-    /// <see cref="EllipseTool"/>'s Page.
+    /// Page of <see cref = "EllipseTool"/>.
     /// </summary>
     public sealed partial class EllipsePage : Page
     {     

@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Elements
 {
     /// <summary>
-    /// <see cref = "Page" />'s <see cref = "LoadingControl" />.
+    /// Loading animation controls.
     /// </summary>
     public sealed partial class LoadingControl : UserControl
     {

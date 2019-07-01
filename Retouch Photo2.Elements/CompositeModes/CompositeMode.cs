@@ -1,6 +1,8 @@
 ﻿namespace Retouch_Photo2.Elements
 {
-    /// <summary> Mode of composite between layers. </summary>
+    /// <summary> 
+    /// Mode of composite between layers. 
+    /// </summary>
     public enum CompositeMode
     {
         /// <summary> New layer. </summary>

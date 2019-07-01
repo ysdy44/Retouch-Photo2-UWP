@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Layers.Controls
 {
     /// <summary>
-    /// <see cref="RectangleLayer"/>'s Control .
+    /// Control of <see cref = "RectangleLayer"/>.
     /// </summary>
     public sealed partial class RectangleControl : UserControl
     {

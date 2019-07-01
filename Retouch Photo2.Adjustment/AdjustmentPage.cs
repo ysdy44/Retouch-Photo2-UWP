@@ -6,10 +6,14 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Adjustments
 {
-    /// <summary> An <see cref = "Adjustment"/> corresponds to a <see cref = "AdjustmentPage" />. </summary>
-    public abstract  class AdjustmentPage : Page
+    /// <summary> 
+    /// <see cref = "Adjustment"/>'s page.
+    /// </summary>
+    public abstract class AdjustmentPage : Page
     {
+        /// <summary> <see cref = "AdjustmentPage"/>'s type. </summary>
         public AdjustmentType Type;
+        /// <summary> <see cref = "AdjustmentPage"/>'s icon. </summary>
         public FrameworkElement Icon;
 
         /// <summary> Return a new <see cref = "Adjustment"/>. </summary>
@@ -25,7 +29,7 @@ namespace Retouch_Photo2.Adjustments
         public abstract void Reset();
 
 
-        //@static
+        //@Static
         public static AdjustmentPage GetPage(AdjustmentType type) => AdjustmentPage.PageList.First(e => e.Type == type);
         public static List<AdjustmentPage> PageList = new List<AdjustmentPage>()
         {

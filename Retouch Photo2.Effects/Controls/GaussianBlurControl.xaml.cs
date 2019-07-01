@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Effects.Controls
 {
     /// <summary>
-    /// <see cref = "GaussianBlurEffect" /> 's Page.
+    /// Control of <see cref = "GaussianBlurEffect"/>.
     /// </summary>
     public sealed partial class GaussianBlurControl : UserControl
     {

@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
+﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
-using Retouch_Photo2.Brushs;
+using Microsoft.Graphics.Canvas.Effects;
 using System;
-using System.Collections.Generic;
 using System.Numerics;
-using System.Linq;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Effects;
 
 namespace Retouch_Photo2.Brushs
 {
+    /// <summary>
+    /// Control of <see cref="Brush">Show.
+    /// </summary>
     public sealed partial class BrushShowControl : UserControl
     {
         Vector2 CanvasCenter;
@@ -28,24 +22,26 @@ namespace Retouch_Photo2.Brushs
 
 
         #region DependencyProperty
-
+  
+        /// <summary> Sets or Gets brush. </summary>
         public Brush Brush
         {
             get { return (Brush)GetValue(BrushProperty); }
             set { SetValue(BrushProperty, value); }
         }
+        /// <summary> Identifies the <see cref = "BrushShowControl.Brush" /> dependency property. </summary>
         public static readonly DependencyProperty BrushProperty = DependencyProperty.Register(nameof(Brush), typeof(Brush), typeof(BrushShowControl), new PropertyMetadata(null, (sender, e) =>
         {
             BrushShowControl con = (BrushShowControl)sender;
 
             con.CanvasControl.Invalidate();
-         //   if (e.NewValue is Brush  brush)   {   }
         }));
 
         #endregion
 
         public void Invalidate() => this.CanvasControl.Invalidate();
 
+        //@Construct
         public BrushShowControl()
         {
             this.InitializeComponent();

@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Effects.Pages
 {
     /// <summary>
-    /// <see cref = "EmbossEffect" /> 's Page.
+    /// Page of <see cref = "EmbossEffect"/>.
     /// </summary>
     public sealed partial class EmbossPage : Page
     {

@@ -1,23 +1,22 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Storage;
 
 namespace Retouch_Photo2.Adjustments
 {
+    //@Delegate
     public delegate void AdjustmentFilterHandler(Filter adjustmentFilter);
     
-    /// <summary> Preset <see cref = "Adjustment" />. </summary>
+    /// <summary>
+    /// <see cref = "Adjustment" />'s filter. 
+    /// </summary>
     public class Filter
     {        
         public string Name;
 
         public IEnumerable<AdjustmentItem> AdjustmentItems;
 
-        //@static
+        //@Static
         /// <summary> [Json] --> List [Filter] </summary>
         public static IEnumerable<Filter> GetFiltersFromJson(string json)
         {
@@ -34,7 +33,7 @@ namespace Retouch_Photo2.Adjustments
             return filters;
         }
 
-        //@static
+        //@Static
         /// <summary> [Json] --> [Filter] </summary>
         public static Filter GetFilterFromJson(string json)
         {

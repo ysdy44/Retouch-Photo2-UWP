@@ -3,11 +3,15 @@ using Retouch_Photo2.Adjustments.Models;
 
 namespace Retouch_Photo2.Adjustments.Pages
 {
+    /// <summary>
+    /// Page of <see cref = "SaturationAdjustment"/>.
+    /// </summary>
     public sealed partial class SaturationPage : AdjustmentPage
     {
 
         public SaturationAdjustment SaturationAdjustment;
 
+        //@Construct
         public SaturationPage()
         {
             base.Type = AdjustmentType.Saturation;

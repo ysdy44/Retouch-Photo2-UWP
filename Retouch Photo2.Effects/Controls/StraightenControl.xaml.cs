@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Effects.Controls
 {
     /// <summary>
-    /// <see cref = "StraightenEffect" /> 's Page.
+    /// Control of <see cref = "StraightenEffect"/>.
     /// </summary>
     public sealed partial class StraightenControl : UserControl
     {

@@ -12,12 +12,13 @@ namespace Retouch_Photo2.Elements
 
         #region DependencyProperty
 
-        /// <summary> Checked of <see cref="RepeatControl"/>. </summary>
+        /// <summary> Gets or Sets the control checked. </summary>
         public bool IsChecked
         {
             get { return (bool)GetValue(IsCheckedProperty); }
             set { SetValue(IsCheckedProperty, value); }
         }
+        /// <summary> Identifies the <see cref = "RepeatControl.IsChecked" /> dependency property. </summary>
         public static readonly DependencyProperty IsCheckedProperty = DependencyProperty.Register(nameof(IsChecked), typeof(bool), typeof(RepeatControl), new PropertyMetadata(false, (sender, e) =>
         {
             RepeatControl con = (RepeatControl)sender;

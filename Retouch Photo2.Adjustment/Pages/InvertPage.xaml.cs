@@ -3,11 +3,15 @@ using Retouch_Photo2.Adjustments.Models;
 
 namespace Retouch_Photo2.Adjustments.Pages
 {
+    /// <summary>
+    /// Page of <see cref = "InvertAdjustment"/>.
+    /// </summary>
     public sealed partial class InvertPage : AdjustmentPage
     {
 
         public InvertAdjustment InvertAdjustment;
 
+        //@Construct
         public InvertPage()
         {
             base.Type = AdjustmentType.Invert;

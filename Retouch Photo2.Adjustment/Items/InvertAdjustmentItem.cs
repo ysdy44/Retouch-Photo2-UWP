@@ -1,14 +1,21 @@
-﻿using Retouch_Photo2.Adjustments.Models;
-using Microsoft.Graphics.Canvas;
+﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments.Models;
+
 namespace Retouch_Photo2.Adjustments.Items
 {
+    /// <summary>
+    /// Item of <see cref="InvertAdjustment">.
+    /// </summary>
     public class InvertAdjustmentItem : AdjustmentItem
     {
-        public InvertAdjustmentItem() => base.Name = InvertAdjustment.Name;
+        //@Construct
+        public InvertAdjustmentItem()
+        {
+            base.Name = InvertAdjustment.Name;
+        }
 
-        //@override
+        //@Override
         public override Adjustment GetNewAdjustment()
         {
             InvertAdjustment adjustment = new InvertAdjustment();

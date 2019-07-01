@@ -3,7 +3,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools
 {
-    /// <summary> PointerState of <see cref="ButtonState"/>. </summary>
+    /// <summary> 
+    /// PointerState of <see cref="ButtonState"/>. 
+    /// </summary>
     public enum PointerState
     {     
         /// <summary> Normal. </summary>
@@ -14,7 +16,9 @@ namespace Retouch_Photo2.Tools
         Pressed,
     }
 
-    /// <summary> State of <see cref="Button"/>. </summary>
+    /// <summary> 
+    /// State of <see cref="Button"/>.
+    /// </summary>
     public enum ButtonState
     {
         /// <summary> Normal. </summary>

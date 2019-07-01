@@ -3,7 +3,7 @@
 namespace Retouch_Photo2.Tools.Controls
 {
     /// <summary>
-    /// <see cref="CursorTool"/>'s Control.
+    /// Control of <see cref = "CursorTool"/>.
     /// </summary>
     public sealed partial class CursorControl : UserControl
     {

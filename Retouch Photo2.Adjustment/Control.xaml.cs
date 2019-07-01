@@ -3,6 +3,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Adjustments
 {
+    /// <summary>
+    /// Retouch_Photo2 Adjustments 's control.
+    /// </summary>
     public sealed partial class Control : UserControl
     {
         #region DependencyProperty
@@ -17,11 +20,12 @@ namespace Retouch_Photo2.Adjustments
         #endregion
 
 
-        //Delegate
+        //@Delegate
         public event AdjustmentHandler Remove = null;
         public event AdjustmentHandler Edit = null;
 
 
+        //@Construct
         public Control()
         {
             this.InitializeComponent();

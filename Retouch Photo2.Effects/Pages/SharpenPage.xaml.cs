@@ -1,11 +1,10 @@
-﻿using Retouch_Photo2.Effects.Controls;
-using Retouch_Photo2.Effects.Models;
+﻿using Retouch_Photo2.Effects.Models;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Effects.Pages
 {
     /// <summary>
-    /// <see cref = "SharpenEffect" /> 's Page.
+    /// Page of <see cref = "SharpenEffect"/>.
     /// </summary>
     public sealed partial class SharpenPage : Page
     {

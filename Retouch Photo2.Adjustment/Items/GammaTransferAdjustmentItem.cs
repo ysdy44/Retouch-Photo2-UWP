@@ -1,10 +1,12 @@
-﻿using Retouch_Photo2.Adjustments.Models;
-using Microsoft.Graphics.Canvas;
+﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments.Models;
 
 namespace Retouch_Photo2.Adjustments.Items
 {
+    /// <summary>
+    /// Item of <see cref="GammaTransferAdjustment">.
+    /// </summary>
     public class GammaTransferAdjustmentItem : AdjustmentItem
     {
         public bool ClampOutput;
@@ -29,9 +31,13 @@ namespace Retouch_Photo2.Adjustments.Items
         public float BlueExponent;
         public float BlueAmplitude;
 
-        public GammaTransferAdjustmentItem() => base.Name = GammaTransferAdjustment.Name;
+        //@Construct
+        public GammaTransferAdjustmentItem()
+        {
+            base.Name = GammaTransferAdjustment.Name;
+        }
 
-        //@override
+        //@Override
         public override Adjustment GetNewAdjustment()
         {
             GammaTransferAdjustment adjustment = new GammaTransferAdjustment();

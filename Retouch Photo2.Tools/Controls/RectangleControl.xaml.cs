@@ -3,7 +3,7 @@
 namespace Retouch_Photo2.Tools.Controls
 {
     /// <summary>
-    /// <see cref="RectangleTool"/>'s Control.
+    /// Control of <see cref = "RectangleTool"/>.
     /// </summary>
     public sealed partial class RectangleControl : UserControl
     {

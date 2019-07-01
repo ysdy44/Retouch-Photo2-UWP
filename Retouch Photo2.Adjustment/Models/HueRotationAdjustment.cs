@@ -1,16 +1,17 @@
-﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Adjustments.Controls;
+﻿using Retouch_Photo2.Adjustments.Controls;
 using Retouch_Photo2.Adjustments.Items;
-using Retouch_Photo2.Adjustments.Pages;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
+    /// <summary>
+    /// <see cref="Adjustment"/>'s HueRotationAdjustment.
+    /// </summary>
     public class HueRotationAdjustment : Adjustment
     {
-        public static readonly string Name = "HueRotation";
+        public const string Name = "HueRotation";
         public HueRotationAdjustmentItem HueRotationAdjustmentitem=new HueRotationAdjustmentItem();
 
+        //@Construct
         public HueRotationAdjustment()
         {
             base.Type = AdjustmentType.HueRotation;
@@ -21,4 +22,3 @@ namespace Retouch_Photo2.Adjustments.Models
         }
     }
 }
-

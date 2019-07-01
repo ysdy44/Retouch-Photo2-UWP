@@ -1,9 +1,12 @@
-﻿using Retouch_Photo2.Adjustments.Models;
-using Microsoft.Graphics.Canvas;
+﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments.Models;
+
 namespace Retouch_Photo2.Adjustments.Items
 {
+    /// <summary>
+    /// Item of <see cref="HighlightsAndShadowsAdjustment">.
+    /// </summary>
     public class HighlightsAndShadowsAdjustmentItem : AdjustmentItem
     {
         public float Shadows;
@@ -12,9 +15,13 @@ namespace Retouch_Photo2.Adjustments.Items
         public float MaskBlurAmount;
         public bool SourceIsLinearGamma;
 
-        public HighlightsAndShadowsAdjustmentItem() => base.Name = HighlightsAndShadowsAdjustment.Name;
+        //@Construct
+        public HighlightsAndShadowsAdjustmentItem()
+        {
+            base.Name = HighlightsAndShadowsAdjustment.Name;
+        }
 
-        //@override
+        //@Override
         public override Adjustment GetNewAdjustment()
         {
             HighlightsAndShadowsAdjustment adjustment = new HighlightsAndShadowsAdjustment();

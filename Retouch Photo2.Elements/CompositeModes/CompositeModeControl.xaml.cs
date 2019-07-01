@@ -4,7 +4,9 @@ using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.Elements
 {
-    /// <summary> Control of <see cref = "CompositeMode" />. </summary>
+    /// <summary> 
+    /// Control of <see cref = "CompositeMode" />. 
+    /// </summary>
     public sealed partial class CompositeModeControl : UserControl
     {
         //@Converter

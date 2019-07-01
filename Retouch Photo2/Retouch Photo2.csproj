@@ -180,6 +180,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Retouch Photo2.Tools\ITool\ICreateTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\AcrylicTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\BrushTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\CursorTool.Box.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\CursorTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\EllipseTool.cs" />
@@ -188,6 +189,9 @@
     <Compile Include="Retouch Photo2.Tools\Models\ViewTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Pages\AcrylicPage.xaml.cs">
       <DependentUpon>AcrylicPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\Pages\BrushPage.xaml.cs">
+      <DependentUpon>BrushPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Pages\CursorPage.xaml.cs">
       <DependentUpon>CursorPage.xaml</DependentUpon>
@@ -660,6 +664,10 @@
     <Page Include="Retouch Photo2.Tools\Pages\AcrylicPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\Pages\BrushPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Retouch Photo2.Tools\Pages\CursorPage.xaml">
       <Generator>MSBuild:Compile</Generator>

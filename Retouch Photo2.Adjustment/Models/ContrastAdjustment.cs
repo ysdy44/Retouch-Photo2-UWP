@@ -6,11 +6,15 @@ using Retouch_Photo2.Adjustments.Pages;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
+    /// <summary>
+    /// <see cref="Adjustment"/>'s ContrastAdjustment.
+    /// </summary>
     public class ContrastAdjustment : Adjustment
     {
-        public static readonly string Name = "Contrast";
+        public const string Name = "Contrast";
         public ContrastAdjustmentItem ContrastAdjustmentItem=new ContrastAdjustmentItem();
 
+        //@Construct
         public ContrastAdjustment()
         {
             base.Type = AdjustmentType.Contrast;
@@ -21,4 +25,3 @@ namespace Retouch_Photo2.Adjustments.Models
         }
     }
 }
-

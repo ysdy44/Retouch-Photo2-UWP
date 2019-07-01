@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Tools.Pages
 {
     /// <summary>
-    /// <see cref="ViewTool"/>'s Page.
+    /// Page of <see cref = "ViewTool"/>.
     /// </summary>
     public sealed partial class ViewPage : Page
     {

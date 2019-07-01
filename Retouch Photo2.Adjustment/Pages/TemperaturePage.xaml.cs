@@ -3,11 +3,15 @@ using Retouch_Photo2.Adjustments.Models;
 
 namespace Retouch_Photo2.Adjustments.Pages
 {
+    /// <summary>
+    /// Page of <see cref = "TemperatureAdjustment"/>.
+    /// </summary>
     public sealed partial class TemperaturePage : AdjustmentPage
     {
 
         public TemperatureAdjustment TemperatureAdjustment;
 
+        //@Construct
         public TemperaturePage()
         {
             base.Type = AdjustmentType.Temperature;

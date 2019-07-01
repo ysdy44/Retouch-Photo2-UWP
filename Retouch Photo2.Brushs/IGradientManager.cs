@@ -4,6 +4,9 @@ using System.Numerics;
 
 namespace Retouch_Photo2.Brushs
 {
+    /// <summary>
+    /// Interface of <see cref="GradientManager">.
+    /// </summary>
     public interface IGradientManager
     {
         ICanvasBrush GetBrush(ICanvasResourceCreator creator, Matrix3x2 matrix, CanvasGradientStop[] array);

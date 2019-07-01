@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Tools.Pages
 {
     /// <summary>
-    /// <see cref="CursorTool"/>'s Page.
+    /// Page of <see cref = "CursorTool"/>.
     /// </summary>
     public sealed partial class CursorPage : Page
     {

@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Effects.Controls
 {
     /// <summary>
-    /// <see cref = "OutlineEffect" /> 's Page.
+    /// Control of <see cref = "OutlineEffect"/>.
     /// </summary>
     public sealed partial class OutlineControl : UserControl
     {

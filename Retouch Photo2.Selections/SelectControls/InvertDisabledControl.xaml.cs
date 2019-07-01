@@ -4,6 +4,7 @@ namespace Retouch_Photo2.Selections.SelectControls
 {
     public sealed partial class InvertDisabledControl : UserControl
     {
+        //@Construct
         public InvertDisabledControl()
         {
             this.InitializeComponent();

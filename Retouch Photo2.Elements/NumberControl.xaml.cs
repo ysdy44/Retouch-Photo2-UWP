@@ -2,19 +2,22 @@
 
 namespace Retouch_Photo2.Elements
 {
+    /// <summary>
+    /// Enter number.
+    /// </summary>
     public sealed partial class NumberControl : UserControl
-    { 
-      public  double Value
-        {
-            get => this.Slider.Value;
-            set => this.Slider.Value=value;
-        }
-
-        //delegate
+    {
+        //@delegate
         public delegate void NumberChangeHandler(object sender, double value);
         public event NumberChangeHandler ValueChange;
 
+        public double Value
+        {
+            get => this.Slider.Value;
+            set => this.Slider.Value = value;
+        }
 
+        //@Construct
         public NumberControl()
         {
             this.InitializeComponent();

@@ -5,7 +5,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Elements
 { 
-    /// <summary> Click the button to toggle sensitive themes for your application. </summary>
+    /// <summary> 
+    /// Click the button to toggle sensitive themes for your application. 
+    /// </summary>
     public sealed partial class ThemeControl : UserControl
     {
         

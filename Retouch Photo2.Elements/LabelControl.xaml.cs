@@ -3,6 +3,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Elements
 {
+    /// <summary>
+    /// Label control.
+    /// </summary>
     public sealed partial class LabelControl : UserControl
     {
         //@Content
@@ -18,6 +21,7 @@ namespace Retouch_Photo2.Elements
             }
         }
 
+        //@Construct
         public LabelControl()
         {
             this.InitializeComponent();

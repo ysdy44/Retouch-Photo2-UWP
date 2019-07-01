@@ -5,15 +5,22 @@ using Microsoft.Graphics.Canvas.Effects;
 
 namespace Retouch_Photo2.Adjustments.Items
 {
+    /// <summary>
+    /// Item of <see cref="VignetteAdjustment">.
+    /// </summary>
     public class VignetteAdjustmentItem : AdjustmentItem
     {
         public float Amount;
         public float Curve;
         public Color Color;
 
-        public VignetteAdjustmentItem() => base.Name = VignetteAdjustment.Name;
+        //@Construct
+        public VignetteAdjustmentItem()
+        {
+            base.Name = VignetteAdjustment.Name;
+        }
 
-        //@override
+        //@Override
         public override Adjustment GetNewAdjustment()
         {
             VignetteAdjustment adjustment = new VignetteAdjustment();

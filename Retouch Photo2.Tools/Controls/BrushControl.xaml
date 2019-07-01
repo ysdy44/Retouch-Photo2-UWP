@@ -1,0 +1,17 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Tools.Controls.BrushControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="50">
+
+    <Path
+        StrokeThickness="1"
+        Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}"
+        Fill="{ThemeResource SystemControlBackgroundBaseHighBrush}"        
+        Data="M19.767,0l0,19.307l-19.767,0l0,-19.307l19.767,0Zm-14.223,17.096l11.959,-11.959l0,-1.33l-13.289,13.289l1.33,0Zm4.8,0l7.159,-7.159l0,-1.406l-8.565,8.565l1.406,0Zm4.8,0l2.359,-2.359l0,-1.406l-3.765,3.765l1.406,0Zm-12.88,-1.444l0,-1.482l11.959,-11.959l1.482,0l-13.441,13.441Zm0,-4.876l0,-1.406l7.159,-7.159l1.406,0l-8.565,8.565Zm0,-4.8l0,-1.406l2.359,-2.359l1.406,0l-3.765,3.765Z"/>
+
+</UserControl>
