@@ -31,23 +31,41 @@ namespace Retouch_Photo2.ViewModels.Selections
             {
                 case ListViewSelectionMode.None:
                     break;
+
                 case ListViewSelectionMode.Single:
-                    {
-                        this.SetValueForeachChildren(action, this.Layer, setChildrenValue);
-                    }
+                    this.SetValueSingle(action, setChildrenValue);
                     break;
+
                 case ListViewSelectionMode.Multiple:
-                    {
-                        foreach (Layer selectionLayer in this.Layers)
-                        {
-                            this.SetValueForeachChildren(action, selectionLayer, setChildrenValue);
-                        }
-                    }
+                    this.SetValueMultiple(action, setChildrenValue);
                     break;
             }
         }
 
+        /// <summary>
+        /// Sets the selection layer.
+        /// </summary>
+        /// <param name="action"> action </param>
+        /// <param name="setChildrenValue"> Whether to set the value along with the child? </param>
+        private void SetValueSingle(Action<Layer> action, bool setChildrenValue = false)
+        {
+            this.SetValueForeachChildren(action, this.Layer, setChildrenValue);
+        }
 
+        /// <summary>
+        /// Sets all selection layers.
+        /// </summary>
+        /// <param name="action"> action </param>
+        /// <param name="setChildrenValue"> Whether to set the value along with the child? </param>
+        private void SetValueMultiple(Action<Layer> action, bool setChildrenValue = false)
+        {
+            foreach (Layer selectionLayer in this.Layers)
+            {
+                this.SetValueForeachChildren(action, selectionLayer, setChildrenValue);
+            }
+        }
+
+               
         /// <summary>
         /// Sets the layer's children.
         /// </summary>

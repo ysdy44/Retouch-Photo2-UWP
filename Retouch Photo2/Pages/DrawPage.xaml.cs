@@ -6,6 +6,7 @@ using Retouch_Photo2.ViewModels.Tips;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.Toolkit.Uwp.UI.Extensions;
 
 namespace Retouch_Photo2.Pages
 {

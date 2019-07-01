@@ -143,7 +143,7 @@ namespace Retouch_Photo2.Controls
             this.RotateLeftButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.SelectionViewModel.GetTransformer();
-                Matrix3x2 matrix = Matrix3x2.CreateRotation(Transformer.PiHalf, transformer.Center);
+                Matrix3x2 matrix = Matrix3x2.CreateRotation(TransformerMath.PiOver2, transformer.Center);
 
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
@@ -159,7 +159,7 @@ namespace Retouch_Photo2.Controls
             this.RotateRightButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.SelectionViewModel.GetTransformer();
-                Matrix3x2 matrix = Matrix3x2.CreateRotation(-Transformer.PiHalf, transformer.Center);
+                Matrix3x2 matrix = Matrix3x2.CreateRotation(-TransformerMath.PiOver2, transformer.Center);
 
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>

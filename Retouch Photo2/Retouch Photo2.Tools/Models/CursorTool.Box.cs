@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Tools.Models
             //Add
             foreach (Layer layer in this.ViewModel.Layers)
             {
-                bool contained = Transformer.Contained(this.boxCanvasRect, layer.TransformerMatrix.Destination);
+                bool contained = layer.TransformerMatrix.Destination.Contained(this.boxCanvasRect);
 
                 //Add
                 switch (this.KeyboardViewModel.CompositeMode)

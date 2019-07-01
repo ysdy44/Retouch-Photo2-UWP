@@ -2,7 +2,7 @@
 using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Text;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Library;
+using FanKit.Transformers;
 using FanKit.Transformers;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
@@ -38,18 +38,6 @@ namespace Retouch_Photo2.Controls
         Vector2 doubleStartPosition;
         float doubleStartScale;
         float doubleStartSpace;
-
-        //IsRuler
-        float ControlWidth => this.ViewModel.CanvasTransformer.ControlWidth;
-        float ControlHeight => this.ViewModel.CanvasTransformer.ControlHeight;
-        float Scale => this.ViewModel.CanvasTransformer.Scale;
-        readonly float RulerSpace = 20;
-        readonly CanvasTextFormat RulerTextFormat = new CanvasTextFormat()
-        {
-            FontSize = 12,
-            HorizontalAlignment = CanvasHorizontalAlignment.Center,
-            VerticalAlignment = CanvasVerticalAlignment.Center
-        };
 
 
         #region DependencyProperty
@@ -248,40 +236,53 @@ namespace Retouch_Photo2.Controls
                 //IsRuler
                 if (this.RulerVisible)
                 {
+                    //Ruler
+                    const float rulerSpace = 20;
+                    CanvasTextFormat rulerTextFormat = new CanvasTextFormat()
+                    {
+                        FontSize = 12,
+                        HorizontalAlignment = CanvasHorizontalAlignment.Center,
+                        VerticalAlignment = CanvasVerticalAlignment.Center
+                    };
+
+                    //Canvas
                     Vector2 position = this.ViewModel.CanvasTransformer.GetMatrix().Translation;
+                    float scale = this.ViewModel.CanvasTransformer.Scale;
+                    float controlWidth = this.ViewModel.CanvasTransformer.ControlWidth;
+                    float controlHeight = this.ViewModel.CanvasTransformer.ControlHeight;
 
                     //line
-                    args.DrawingSession.FillRectangle(0, 0, this.ControlWidth, this.RulerSpace, Windows.UI.Color.FromArgb(64, 127, 127, 127));//Horizontal
-                    args.DrawingSession.FillRectangle(0, 0, this.RulerSpace, this.ControlHeight, Windows.UI.Color.FromArgb(64, 127, 127, 127));//Vertical
-                    args.DrawingSession.DrawLine(0, this.RulerSpace, this.ControlWidth, this.RulerSpace, Windows.UI.Colors.Gray);//Horizontal
-                    args.DrawingSession.DrawLine(this.RulerSpace, 0, this.RulerSpace, this.ControlHeight, Windows.UI.Colors.Gray);//Vertical
+                    args.DrawingSession.FillRectangle(0, 0, controlWidth, rulerSpace, Windows.UI.Color.FromArgb(64, 127, 127, 127));//Horizontal
+                    args.DrawingSession.FillRectangle(0, 0, rulerSpace, controlHeight, Windows.UI.Color.FromArgb(64, 127, 127, 127));//Vertical
+                    args.DrawingSession.DrawLine(0, rulerSpace, controlWidth, rulerSpace, Windows.UI.Colors.Gray);//Horizontal
+                    args.DrawingSession.DrawLine(rulerSpace, 0, rulerSpace, controlHeight, Windows.UI.Colors.Gray);//Vertical
 
                     //space
-                    float space = (10 * this.Scale);
+                    float space = (10 * scale);
                     while (space < 10) space *= 5;
                     while (space > 100) space /= 5;
                     float spaceFive = space * 5;
 
                     //Horizontal
-                    for (float X = position.X; X < this.ControlWidth; X += space) args.DrawingSession.DrawLine(X, 10, X, this.RulerSpace, Windows.UI.Colors.Gray);
-                    for (float X = position.X; X > this.RulerSpace; X -= space) args.DrawingSession.DrawLine(X, 10, X, this.RulerSpace, Windows.UI.Colors.Gray);
+                    for (float X = position.X; X < controlWidth; X += space) args.DrawingSession.DrawLine(X, 10, X, rulerSpace, Windows.UI.Colors.Gray);
+                    for (float X = position.X; X > rulerSpace; X -= space) args.DrawingSession.DrawLine(X, 10, X, rulerSpace, Windows.UI.Colors.Gray);
                     //Vertical
-                    for (float Y = position.Y; Y < this.ControlHeight; Y += space) args.DrawingSession.DrawLine(10, Y, this.RulerSpace, Y, Windows.UI.Colors.Gray);
-                    for (float Y = position.Y; Y > this.RulerSpace; Y -= space) args.DrawingSession.DrawLine(10, Y, this.RulerSpace, Y, Windows.UI.Colors.Gray);
+                    for (float Y = position.Y; Y < controlHeight; Y += space) args.DrawingSession.DrawLine(10, Y, rulerSpace, Y, Windows.UI.Colors.Gray);
+                    for (float Y = position.Y; Y > rulerSpace; Y -= space) args.DrawingSession.DrawLine(10, Y, rulerSpace, Y, Windows.UI.Colors.Gray);
 
                     //Horizontal
-                    for (float X = position.X; X < this.ControlWidth; X += spaceFive) args.DrawingSession.DrawLine(X, 10, X, this.RulerSpace, Windows.UI.Colors.Gray);
-                    for (float X = position.X; X > this.RulerSpace; X -= spaceFive) args.DrawingSession.DrawLine(X, 10, X, this.RulerSpace, Windows.UI.Colors.Gray);
+                    for (float X = position.X; X < controlWidth; X += spaceFive) args.DrawingSession.DrawLine(X, 10, X, rulerSpace, Windows.UI.Colors.Gray);
+                    for (float X = position.X; X > rulerSpace; X -= spaceFive) args.DrawingSession.DrawLine(X, 10, X, rulerSpace, Windows.UI.Colors.Gray);
                     //Vertical
-                    for (float Y = position.Y; Y < this.ControlHeight; Y += spaceFive) args.DrawingSession.DrawLine(10, Y, this.RulerSpace, Y, Windows.UI.Colors.Gray);
-                    for (float Y = position.Y; Y > this.RulerSpace; Y -= spaceFive) args.DrawingSession.DrawLine(10, Y, this.RulerSpace, Y, Windows.UI.Colors.Gray);
+                    for (float Y = position.Y; Y < controlHeight; Y += spaceFive) args.DrawingSession.DrawLine(10, Y, rulerSpace, Y, Windows.UI.Colors.Gray);
+                    for (float Y = position.Y; Y > rulerSpace; Y -= spaceFive) args.DrawingSession.DrawLine(10, Y, rulerSpace, Y, Windows.UI.Colors.Gray);
 
                     //Horizontal
-                    for (float X = position.X; X < this.ControlWidth; X += spaceFive) args.DrawingSession.DrawText(((int)(Math.Round((X - position.X) / this.Scale))).ToString(), X, 10, Windows.UI.Colors.Gray, RulerTextFormat);
-                    for (float X = position.X; X > this.RulerSpace; X -= spaceFive) args.DrawingSession.DrawText(((int)(Math.Round((X - position.X) / this.Scale))).ToString(), X, 10, Windows.UI.Colors.Gray, RulerTextFormat);
+                    for (float X = position.X; X < controlWidth; X += spaceFive) args.DrawingSession.DrawText(((int)(Math.Round((X - position.X) / scale))).ToString(), X, 10, Windows.UI.Colors.Gray, rulerTextFormat);
+                    for (float X = position.X; X > rulerSpace; X -= spaceFive) args.DrawingSession.DrawText(((int)(Math.Round((X - position.X) / scale))).ToString(), X, 10, Windows.UI.Colors.Gray, rulerTextFormat);
                     //Vertical
-                    for (float Y = position.Y; Y < this.ControlHeight; Y += spaceFive) args.DrawingSession.DrawText(((int)(Math.Round((Y - position.Y) / this.Scale))).ToString(), 10, Y, Windows.UI.Colors.Gray, RulerTextFormat);
-                    for (float Y = position.Y; Y > this.RulerSpace; Y -= spaceFive) args.DrawingSession.DrawText(((int)(Math.Round((Y - position.Y) / this.Scale))).ToString(), 10, Y, Windows.UI.Colors.Gray, RulerTextFormat);
+                    for (float Y = position.Y; Y < controlHeight; Y += spaceFive) args.DrawingSession.DrawText(((int)(Math.Round((Y - position.Y) / scale))).ToString(), 10, Y, Windows.UI.Colors.Gray, rulerTextFormat);
+                    for (float Y = position.Y; Y > rulerSpace; Y -= spaceFive) args.DrawingSession.DrawText(((int)(Math.Round((Y - position.Y) / scale))).ToString(), 10, Y, Windows.UI.Colors.Gray, rulerTextFormat);
                 }
             };
 

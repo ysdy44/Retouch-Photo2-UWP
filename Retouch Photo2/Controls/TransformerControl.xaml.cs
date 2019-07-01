@@ -312,7 +312,7 @@ namespace Retouch_Photo2.Controls
                 Vector2 horizontal = transformer.Horizontal;
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
 
-                float canvasStartingRadian = Transformer.VectorToRadians(transformer.CenterTop - transformer.Center);
+                float canvasStartingRadian = TransformerMath.VectorToRadians(transformer.CenterTop - transformer.Center);
                 float canvasStartingWidth = horizontal.Length();
                 float scale = value/canvasStartingWidth;
                 
@@ -342,7 +342,7 @@ namespace Retouch_Photo2.Controls
                 Vector2 vertical = transformer.Vertical;
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
 
-                float canvasStartingRadian = Transformer.VectorToRadians(transformer.CenterTop - transformer.Center);
+                float canvasStartingRadian = TransformerMath.VectorToRadians(transformer.CenterTop - transformer.Center);
                 float canvasStartingWidth = vertical.Length();
                 float scale = value / canvasStartingWidth;
 
@@ -377,10 +377,10 @@ namespace Retouch_Photo2.Controls
                 Transformer transformer = this.SelectionViewModel.GetTransformer();
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
 
-                float canvasRadian = value / 180.0f * Transformer.PI;              
-                float canvasStartingRadian = Transformer.VectorToRadians(transformer.CenterTop - transformer.Center);
+                float canvasRadian = value / 180.0f * TransformerMath.Pi;              
+                float canvasStartingRadian = TransformerMath.VectorToRadians(transformer.CenterTop - transformer.Center);
 
-                float radian = canvasRadian - canvasStartingRadian - Transformer.PiHalf;
+                float radian = canvasRadian - canvasStartingRadian - TransformerMath.PiOver2;
                 Matrix3x2 rotationMatrix = Matrix3x2.CreateRotation(radian, vector);
 
                 //Selection
@@ -402,12 +402,12 @@ namespace Retouch_Photo2.Controls
                 Transformer transformer = this.SelectionViewModel.GetTransformer();
                 float horizontalHalf = Vector2.Distance(transformer.Center, transformer.CenterRight);
 
-                Vector2 footPoint = Transformer.FootPoint(transformer.Center, transformer.LeftBottom, transformer.RightBottom);
+                Vector2 footPoint = TransformerMath.FootPoint(transformer.Center, transformer.LeftBottom, transformer.RightBottom);
                 float verticalHalf = Vector2.Distance(transformer.Center, footPoint);
 
                 Vector2 horizontal = transformer.Horizontal;
-                float radians = this.GetRadians(horizontal) / 180.0f * Transformer.PI;
-                float skew = -value / 180.0f * Transformer.PI;
+                float radians = this.GetRadians(horizontal) / 180.0f * TransformerMath.Pi;
+                float skew = -value / 180.0f * TransformerMath.Pi;
                 
                 //Vector2
                 Vector2 postion;
@@ -530,19 +530,19 @@ namespace Retouch_Photo2.Controls
         
         private float GetRadians(Vector2 vector)
         {
-            float radians = Transformer.VectorToRadians(vector);
+            float radians = TransformerMath.VectorToRadians(vector);
             if (float.IsNaN(radians)) return 0.0f;
 
-            float value = radians * 180.0f / Transformer.PI;
+            float value = radians * 180.0f / TransformerMath.Pi;
             return value % 180.0f;
         }
 
         private float GetSkew(Vector2 vector, float radians)
         {
-            float skew = Transformer.VectorToRadians(vector);
+            float skew = TransformerMath.VectorToRadians(vector);
             if (float.IsNaN(skew)) return 0;
 
-            skew = skew * 180.0f / Transformer.PI;
+            skew = skew * 180.0f / TransformerMath.Pi;
             skew = skew - radians - 90.0f;
 
             return skew % 180.0f;

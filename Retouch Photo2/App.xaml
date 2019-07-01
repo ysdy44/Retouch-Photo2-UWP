@@ -20,7 +20,7 @@
 
                 <ResourceDictionary x:Key="Default">
 
-                    <Color x:Key="AppForegroundColor" >#F8F8F8</Color> 
+                    <Color x:Key="AppForegroundColor" >#F8F8F8</Color>
                     <SolidColorBrush x:Key="AppForeground" Color="{ThemeResource AppForegroundColor}"/>
                     <Color x:Key="AppBackgroundColor" >#F0F0F2</Color>
                     <SolidColorBrush x:Key="AppBackground" Color="{ThemeResource AppBackgroundColor}"/>

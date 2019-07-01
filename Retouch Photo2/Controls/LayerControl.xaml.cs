@@ -388,12 +388,15 @@ namespace Retouch_Photo2.Controls
                             this._selection.Add(getLayer);
                         }
                     }
-                    else this.ViewModel.Text = "No!!!!";
 
                     e.AcceptedOperation = DataPackageOperation.Copy;
                     def.Complete();
                 }
+
+                this.ViewModel.Invalidate();//Invalidate
             };
+
+
             #endregion
 
         }

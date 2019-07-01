@@ -126,6 +126,9 @@
     <EmbeddedResource Include="Properties\Retouch_Photo2.ViewModels.rd.xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FanKit.Transformers">
+      <Version>1.1.2</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.7</Version>
     </PackageReference>
@@ -134,10 +137,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\FanKit.Transformers\FanKit.Transformers\FanKit.Transformers.csproj">
-      <Project>{a98a4671-07f5-46c7-bad2-9fa0242d2855}</Project>
-      <Name>FanKit.Transformers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Adjustment\Retouch Photo2.Adjustments.csproj">
       <Project>{7256c005-0e5d-4c38-9115-e4eef9978233}</Project>
       <Name>Retouch Photo2.Adjustments</Name>
@@ -157,10 +156,6 @@
     <ProjectReference Include="..\Retouch Photo2.Layers\Retouch Photo2.Layers.csproj">
       <Project>{15cbf0a7-0953-49f5-b541-f8bcaab40053}</Project>
       <Name>Retouch Photo2.Layers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Library\Retouch Photo2.Library.csproj">
-      <Project>{5a773056-cf52-4a57-b004-d3f170cea03b}</Project>
-      <Name>Retouch Photo2.Library</Name>
     </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Tools\Retouch Photo2.Tools.csproj">
       <Project>{3f4ae427-651f-4791-a176-678a00a93b1e}</Project>

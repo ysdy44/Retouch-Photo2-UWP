@@ -128,7 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HSVColorPickers">
-      <Version>1.1.6</Version>
+      <Version>1.1.7</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.7</Version>
@@ -176,10 +176,6 @@
     <ProjectReference Include="..\Retouch Photo2.Layers\Retouch Photo2.Layers.csproj">
       <Project>{15cbf0a7-0953-49f5-b541-f8bcaab40053}</Project>
       <Name>Retouch Photo2.Layers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Library\Retouch Photo2.Library.csproj">
-      <Project>{5a773056-cf52-4a57-b004-d3f170cea03b}</Project>
-      <Name>Retouch Photo2.Library</Name>
     </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Operates\Retouch Photo2.Operates.csproj">
       <Project>{c5a52472-53d8-4885-8488-0cf77a985794}</Project>
