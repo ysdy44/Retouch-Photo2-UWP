@@ -23,7 +23,7 @@
         >
      
         <!--Button-->
-        <Button x:Name="_RootButton" IsEnabled="False" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Width="Auto" Style="{ThemeResource NavigationBackButtonNormalStyle}">
+        <Button x:Name="_RootButton" IsEnabled="False" HorizontalContentAlignment="Left" Width="Auto" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <!--Icon-->
         </Button>
 

@@ -82,13 +82,13 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="CopyButton" Grid.Column="0" Width="Auto" HorizontalAlignment="Stretch" Background="{ThemeResource AppForeground}" FontFamily="{ThemeResource ContentControlThemeFontFamily}" Style="{ThemeResource NavigationBackButtonNormalStyle}">
+                    <Button x:Name="CopyButton" Grid.Column="0" Width="Auto" FontFamily="{ThemeResource ContentControlThemeFontFamily}" BorderThickness="0" BorderBrush="Transparent" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock Text="Copy" Opacity="0.5"/>
                     </Button>
-                    <Button x:Name="RemoveButton" Grid.Column="1" Width="Auto" HorizontalAlignment="Stretch" Background="{ThemeResource AppForeground}" FontFamily="{ThemeResource ContentControlThemeFontFamily}" Style="{ThemeResource NavigationBackButtonNormalStyle}">
+                    <Button x:Name="RemoveButton" Grid.Column="1" Width="Auto" FontFamily="{ThemeResource ContentControlThemeFontFamily}" BorderThickness="0" BorderBrush="Transparent" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock Text="Remove" Opacity="0.5"/>
                     </Button>
-                    <Button x:Name="ReserveButton" Grid.Column="2" Width="Auto" HorizontalAlignment="Stretch" Background="{ThemeResource AppForeground}" FontFamily="{ThemeResource ContentControlThemeFontFamily}" Style="{ThemeResource NavigationBackButtonNormalStyle}">
+                    <Button x:Name="ReserveButton" Grid.Column="2" Width="Auto" FontFamily="{ThemeResource ContentControlThemeFontFamily}" BorderThickness="0" BorderBrush="Transparent" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <TextBlock Text="Reserve" Opacity="0.5"/>
                     </Button>
                 </Grid>
