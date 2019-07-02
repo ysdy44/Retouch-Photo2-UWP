@@ -159,7 +159,7 @@ namespace Retouch_Photo2.ViewModels.Selections
 
             this.SetGroupLayer(null);
             this.SetAcrylicLayer(null);
-            this.SetGeometryLayer(null);
+            //this.SetGeometryLayer(null);
         }
 
 

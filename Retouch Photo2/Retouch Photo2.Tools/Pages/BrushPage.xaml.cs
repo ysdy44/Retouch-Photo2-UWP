@@ -155,25 +155,21 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                 Vector2 endPoint = transformer.CenterBottom;
 
                 this.SelectionViewModel.InitializeLinearGradient(startPoint, endPoint);//Initialize
-                
+
                 this.ViewModel.Invalidate();//Invalidate
             };
             this.RadialGradientComboBoxItem.Tapped += (s, e) =>
             {
                 //ComboBox
                 this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.RadialGradient);
-                
+
                 Transformer transformer = this.SelectionViewModel.Transformer;
                 Vector2 center = transformer.Center;
                 Vector2 point = transformer.CenterBottom;
 
                 //Brush
                 this.SelectionViewModel.BrushType = BrushType.RadialGradient;
-                this.SelectionViewModel.BrushArray = new CanvasGradientStop[]
-                {
-                      new CanvasGradientStop{Color= Colors.White, Position=0.0f },
-                      new CanvasGradientStop{Color= Colors.Gray, Position=1.0f }
-                };
+                this.SelectionViewModel.BrushArray = Brush.GetNewArray();
                 this.SelectionViewModel.BrushRadialGradientCenter = center;
                 this.SelectionViewModel.BrushRadialGradientPoint = point;
 
@@ -187,6 +183,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                             case FillOrStroke.Fill:
                                 {
                                     geometryLayer.FillBrush.Type = BrushType.RadialGradient;
+                                    geometryLayer.FillBrush.Array = Brush.GetNewArray();
                                     geometryLayer.FillBrush.RadialGradientCenter = center;
                                     geometryLayer.FillBrush.RadialGradientPoint = point;
                                 }
@@ -194,6 +191,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                             case FillOrStroke.Stroke:
                                 {
                                     geometryLayer.StrokeBrush.Type = BrushType.RadialGradient;
+                                    geometryLayer.StrokeBrush.Array = Brush.GetNewArray();
                                     geometryLayer.StrokeBrush.RadialGradientCenter = center;
                                     geometryLayer.StrokeBrush.RadialGradientPoint = point;
                                 }
@@ -208,7 +206,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
             {
                 //ComboBox
                 this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.EllipticalGradient);
-                
+
                 Transformer transformer = this.SelectionViewModel.Transformer;
                 Vector2 center = transformer.Center;
                 Vector2 xPoint = transformer.CenterRight;
@@ -216,11 +214,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
 
                 //Brush
                 this.SelectionViewModel.BrushType = BrushType.EllipticalGradient;
-                this.SelectionViewModel.BrushArray = new CanvasGradientStop[]
-                {
-                      new CanvasGradientStop{Color= Colors.White, Position=0.0f },
-                      new CanvasGradientStop{Color= Colors.Gray, Position=1.0f }
-                };
+                this.SelectionViewModel.BrushArray = Brush.GetNewArray();
                 this.SelectionViewModel.BrushEllipticalGradientCenter = center;
                 this.SelectionViewModel.BrushEllipticalGradientXPoint = xPoint;
                 this.SelectionViewModel.BrushEllipticalGradientYPoint = yPoint;
@@ -235,6 +229,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                             case FillOrStroke.Fill:
                                 {
                                     geometryLayer.FillBrush.Type = BrushType.EllipticalGradient;
+                                    geometryLayer.FillBrush.Array = Brush.GetNewArray();
                                     geometryLayer.FillBrush.EllipticalGradientCenter = center;
                                     geometryLayer.FillBrush.EllipticalGradientXPoint = xPoint;
                                     geometryLayer.FillBrush.EllipticalGradientYPoint = yPoint;
@@ -243,6 +238,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                             case FillOrStroke.Stroke:
                                 {
                                     geometryLayer.StrokeBrush.Type = BrushType.EllipticalGradient;
+                                    geometryLayer.StrokeBrush.Array = Brush.GetNewArray();
                                     geometryLayer.StrokeBrush.EllipticalGradientCenter = center;
                                     geometryLayer.StrokeBrush.EllipticalGradientXPoint = xPoint;
                                     geometryLayer.StrokeBrush.EllipticalGradientYPoint = yPoint;
