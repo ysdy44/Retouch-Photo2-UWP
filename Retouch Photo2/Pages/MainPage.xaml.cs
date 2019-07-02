@@ -50,7 +50,7 @@ namespace Retouch_Photo2.Pages
     public sealed partial class MainPage : Page
     {
         //@ViewModel
-       // ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
+       // ViewModel ViewModel => App.ViewModel;
 
         ObservableCollection<Photo> PhotoFileList = new ObservableCollection<Photo>();
 
@@ -142,7 +142,7 @@ namespace Retouch_Photo2.Pages
             this.Loaded += (s, e) =>
             {
                 //Theme
-                Retouch_Photo2.App.ViewModel.CanvasTheme =
+                App.ViewModel.CanvasTheme =
                 (App.Current.RequestedTheme == ApplicationTheme.Dark) ?
                 ElementTheme.Dark :
                 ElementTheme.Light;
@@ -282,7 +282,7 @@ namespace Retouch_Photo2.Pages
             StorageFile file = await openPicker.PickSingleFileAsync();
             if (file == null) return;
 
-            Project project = await Project.CreateFromFileAsync(Retouch_Photo2.App.ViewModel.CanvasDevice, file);//Project
+            Project project = await Project.CreateFromFileAsync(App.ViewModel.CanvasDevice, file);//Project
             this.Frame.Navigate(typeof(DrawPage), project);//Navigate       
         }
     }

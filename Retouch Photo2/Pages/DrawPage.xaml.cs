@@ -16,10 +16,10 @@ namespace Retouch_Photo2.Pages
     public sealed partial class DrawPage : Page
     {
         //@ViewModel
-        ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
-        SelectionViewModel SelectionViewModel => Retouch_Photo2.App.SelectionViewModel;
-        KeyboardViewModel KeyboardViewModel => Retouch_Photo2.App.KeyboardViewModel;
-        TipViewModel TipViewModel => Retouch_Photo2.App.TipViewModel;
+        ViewModel ViewModel => App.ViewModel;
+        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
 
 
         //@Construct

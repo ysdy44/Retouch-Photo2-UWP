@@ -12,7 +12,7 @@ namespace Retouch_Photo2.Tools.Models
     public class ViewTool : Tool
     {
         //@ViewModel
-        ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
+        ViewModel ViewModel => App.ViewModel;
 
         Vector2 StartPosition;
 

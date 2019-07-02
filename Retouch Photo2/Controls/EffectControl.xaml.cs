@@ -17,9 +17,9 @@ namespace Retouch_Photo2.Controls
     public sealed partial class EffectControl : UserControl
     {
         //@ViewModel
-        ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
-        SelectionViewModel SelectionViewModel => Retouch_Photo2.App.SelectionViewModel;
-        KeyboardViewModel KeyboardViewModel => Retouch_Photo2.App.KeyboardViewModel;
+        ViewModel ViewModel => App.ViewModel;
+        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
 
 
         /// <summary> State of <see cref="EffectControl"/>. </summary>
@@ -105,9 +105,9 @@ namespace Retouch_Photo2.Controls
                 //Binding
                 this.Binding(effect);
             }
-            
+
             //Effect
-            Retouch_Photo2.Effects.EffectManager.InvalidateAction = (Action<EffectManager> action) =>
+            EffectManager.InvalidateAction = (Action<EffectManager> action) =>
             {
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>

@@ -7,7 +7,7 @@ namespace Retouch_Photo2.Tools
     /// PointerState of <see cref="ButtonState"/>. 
     /// </summary>
     public enum PointerState
-    {     
+    {
         /// <summary> Normal. </summary>
         None,
         /// <summary> Pointer-over. </summary>
@@ -45,13 +45,39 @@ namespace Retouch_Photo2.Tools
         private double BoolToOpacityConverter(bool isChecked) => isChecked ? 1.0 : 0.5;
         private Visibility BoolToVisibilityConverter(bool isChecked) => isChecked ? Visibility.Visible : Visibility.Collapsed;
 
-
+    
         /// <summary> <see cref = "Button" />'s Type. </summary>
         public ToolType Type { get; set; }
         /// <summary> <see cref = "Button" />'s RootGrid. </summary>
         public Border RootGrid { set => this._RootGrid = value; get => this._RootGrid; }
         /// <summary> ContentPresenter's Content. </summary>
         public object CenterContent { set => this.ContentPresenter.Content = value; get => this.ContentPresenter.Content; }
+
+
+        #region DependencyProperty
+
+        /// <summary> The identifier of the buttonthat is currently selected. </summary>
+        public ToolType GroupType
+        {
+            get { return (ToolType)GetValue(GroupTypeProperty); }
+            set { SetValue(GroupTypeProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "Button.GroupType" /> dependency property. </summary>
+        public static readonly DependencyProperty GroupTypeProperty = DependencyProperty.Register(nameof(GroupType), typeof(ToolType), typeof(Button), new PropertyMetadata(null, (sender, e) =>
+        {
+            Button con = (Button)sender;
+
+            if (e.NewValue is ToolType value)
+            {
+                bool isSelected = (value == con.Type);
+                if (con.IsSelected == isSelected) return;
+
+                con.IsSelected = isSelected;
+                con.State = con.GetState();
+            }
+        }));
+
+        #endregion
 
 
         /// <summary> State of <see cref="Button"/>. </summary>
@@ -71,7 +97,7 @@ namespace Retouch_Photo2.Tools
                     case ButtonState.Pressed:
                         VisualStateManager.GoToState(this, this.Pressed.Name, false);
                         break;
-                        
+
                     case ButtonState.Selected:
                         VisualStateManager.GoToState(this, this.Selected.Name, false);
                         break;
@@ -117,39 +143,14 @@ namespace Retouch_Photo2.Tools
                         }
                     }
                     break;
-                
+
                 default:
                     break;
             }
 
             return ButtonState.None;
         }
-
-
-        #region DependencyProperty
-
-        /// <summary> The identifier of the buttonthat is currently selected. </summary>
-        public ToolType GroupType
-        {
-            get { return (ToolType)GetValue(GroupTypeProperty); }
-            set { SetValue(GroupTypeProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "Button.GroupType" /> dependency property. </summary>
-        public static readonly DependencyProperty GroupTypeProperty = DependencyProperty.Register(nameof(GroupType), typeof(ToolType), typeof(Button), new PropertyMetadata(null, (sender, e) =>
-        {
-            Button con = (Button)sender;
-
-            if (e.NewValue is ToolType value)
-            {
-                bool isSelected = (value == con.Type);
-                if (con.IsSelected == isSelected) return;
-
-                con.IsSelected = isSelected;
-                con.State = con.GetState();
-            }
-        }));
-
-        #endregion
+        
 
         //@Construct
         public Button()

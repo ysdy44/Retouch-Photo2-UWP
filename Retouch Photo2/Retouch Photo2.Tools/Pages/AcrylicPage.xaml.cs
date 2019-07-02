@@ -12,8 +12,8 @@ namespace Retouch_Photo2.Tools.Pages
     public sealed partial class AcrylicPage : Page
     {
         //@ViewModel
-        ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
-        SelectionViewModel SelectionViewModel => Retouch_Photo2.App.SelectionViewModel;
+        ViewModel ViewModel => App.ViewModel;
+        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Converter
         public int TintOpacityConverter(float value) => (int)(value * 100.0f);

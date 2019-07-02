@@ -25,8 +25,8 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
     public sealed partial class BrushPage : Page
     {
         //@ViewModel
-        ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
-        SelectionViewModel SelectionViewModel => Retouch_Photo2.App.SelectionViewModel;
+        ViewModel ViewModel => App.ViewModel;
+        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Construct
         public BrushPage()

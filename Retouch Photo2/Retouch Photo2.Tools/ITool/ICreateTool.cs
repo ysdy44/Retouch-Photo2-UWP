@@ -15,11 +15,11 @@ namespace Retouch_Photo2.Tools.ITool
     public abstract class ICreateTool : Tool
     {
         //@ViewModel
-        ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
-        SelectionViewModel SelectionViewModel => Retouch_Photo2.App.SelectionViewModel;
-        KeyboardViewModel KeyboardViewModel => Retouch_Photo2.App.KeyboardViewModel;
-        MezzanineViewModel MezzanineViewModel => Retouch_Photo2.App.MezzanineViewModel;
-        TipViewModel TipViewModel => Retouch_Photo2.App.TipViewModel;
+        ViewModel ViewModel => App.ViewModel;
+        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
+        MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
 
         //@Abstract
         /// <summary>

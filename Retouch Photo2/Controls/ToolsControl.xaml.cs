@@ -1,5 +1,4 @@
 ﻿using Retouch_Photo2.Tools;
-using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Tips;
 using Windows.UI.Xaml;
@@ -8,13 +7,13 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Controls
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "ToolsControl" />. 
+    /// Retouch_Photo2's the only <see cref = "ToolsControl"/>. 
     /// </summary>
     public sealed partial class ToolsControl : UserControl
     {
         //@ViewModel
-        ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
-        TipViewModel TipViewModel => Retouch_Photo2.App.TipViewModel;
+        ViewModel ViewModel => App.ViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
 
 
         #region DependencyProperty
@@ -36,7 +35,7 @@ namespace Retouch_Photo2.Controls
         public ToolsControl()
         {
             this.InitializeComponent();
-
+             
             //Cursor
             this.ConstructButton(this.CursorButton, this.TipViewModel.CursorTool);
             //View
@@ -49,7 +48,7 @@ namespace Retouch_Photo2.Controls
             this.ConstructButton(this.AcrylicButton, this.TipViewModel.AcrylicTool);
         }
 
-        private void ConstructButton(Retouch_Photo2.Tools.Button button, Tool tool)
+        private void ConstructButton(Tools.Button button, Tool tool)
         {
             ToolType type = tool.Type;
 

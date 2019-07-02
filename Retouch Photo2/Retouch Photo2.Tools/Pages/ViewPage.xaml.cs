@@ -13,8 +13,8 @@ namespace Retouch_Photo2.Tools.Pages
     public sealed partial class ViewPage : Page
     {
         //@ViewModel
-        public ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
-        public TipViewModel TipViewModel => Retouch_Photo2.App.TipViewModel;
+        public ViewModel ViewModel => App.ViewModel;
+        public TipViewModel TipViewModel => App.TipViewModel;
         
         //@Converter
         /*         

@@ -17,9 +17,9 @@ namespace Retouch_Photo2.Tools
     public partial class TransformerToolBase : ToolBase
     {
         //@ViewModel
-        ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
-        SelectionViewModel SelectionViewModel => Retouch_Photo2.App.SelectionViewModel;
-        KeyboardViewModel KeyboardViewModel => Retouch_Photo2.App.KeyboardViewModel;
+        ViewModel ViewModel => App.ViewModel;
+        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
 
 
         //Transformer

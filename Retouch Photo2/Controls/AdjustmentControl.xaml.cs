@@ -11,20 +11,20 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Controls
 {
-    public enum AdjustmentControlState
-    {
-        None,
-        Disable,
-        Null,
-        Adjustments,
-        Edit
-    }
-
     public sealed partial class AdjustmentControl : UserControl
     {
+        public enum AdjustmentControlState
+        {
+            None,
+            Disable,
+            Null,
+            Adjustments,
+            Edit
+        }
+
         //@ViewModel
-        ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
-        SelectionViewModel SelectionViewModel  => Retouch_Photo2.App.SelectionViewModel;
+        ViewModel ViewModel => App.ViewModel;
+        SelectionViewModel SelectionViewModel  => App.SelectionViewModel;
 
 
         private AdjustmentControlState state = AdjustmentControlState.None;
@@ -96,7 +96,7 @@ namespace Retouch_Photo2.Controls
             };
 
             //Adjustment
-            Retouch_Photo2.Adjustments.Adjustment.Invalidate = () => this.ViewModel.Invalidate();
+            Adjustment.Invalidate = () => this.ViewModel.Invalidate();
 
             //Button
             this.FilterButton.Tapped += (sender, e) => this.FilterFlyout.ShowAt(this.FilterButton);

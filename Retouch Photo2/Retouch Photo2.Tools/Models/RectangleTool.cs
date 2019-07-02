@@ -15,8 +15,8 @@ namespace Retouch_Photo2.Tools.Models
     public class RectangleTool : ICreateTool
     {
         //@ViewModel
-        ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
-        SelectionViewModel SelectionViewModel => Retouch_Photo2.App.SelectionViewModel;
+        ViewModel ViewModel => App.ViewModel;
+        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Override
         public override Layer CreateLayer(Transformer transformer) => new RectangleLayer

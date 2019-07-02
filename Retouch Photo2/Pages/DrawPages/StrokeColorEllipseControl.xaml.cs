@@ -10,8 +10,8 @@ namespace Retouch_Photo2.Pages.DrawPages
     public sealed partial class StrokeColorEllipseControl : UserControl
     {
         //@ViewModel
-        ViewModel ViewModel => Retouch_Photo2.App.ViewModel;
-        SelectionViewModel SelectionViewModel => Retouch_Photo2.App.SelectionViewModel;
+        ViewModel ViewModel => App.ViewModel;
+        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Content
         /// <summary> StrokeColorEllipseControl's _ColorPicker. </summary>
