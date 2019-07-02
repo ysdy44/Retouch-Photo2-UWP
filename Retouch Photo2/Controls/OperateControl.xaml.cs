@@ -110,7 +110,7 @@ namespace Retouch_Photo2.Controls
 
             this.FlipHorizontalButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(-1, 1, transformer.Center);
 
                 //Selection
@@ -126,7 +126,7 @@ namespace Retouch_Photo2.Controls
 
             this.FlipVerticalButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(1, -1, transformer.Center);
 
                 //Selection
@@ -142,7 +142,7 @@ namespace Retouch_Photo2.Controls
 
             this.RotateLeftButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(TransformerMath.PiOver2, transformer.Center);
 
                 //Selection
@@ -158,7 +158,7 @@ namespace Retouch_Photo2.Controls
 
             this.RotateRightButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(-TransformerMath.PiOver2, transformer.Center);
 
                 //Selection
@@ -181,7 +181,7 @@ namespace Retouch_Photo2.Controls
 
             this.AlignLeftButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0 - transformer.MinX, 0);
 
                 //Selection
@@ -197,7 +197,7 @@ namespace Retouch_Photo2.Controls
 
             this.AlignCenterButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width / 2 - transformer.Center.X, 0);
 
                 //Selection
@@ -213,7 +213,7 @@ namespace Retouch_Photo2.Controls
 
             this.AlignRightButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width - transformer.MaxX, 0);
 
                 //Selection
@@ -238,7 +238,7 @@ namespace Retouch_Photo2.Controls
 
             this.AlignTopButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0 , 0- transformer.MinY);
 
                 //Selection
@@ -254,7 +254,7 @@ namespace Retouch_Photo2.Controls
 
             this.AlignMiddleButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0,this.ViewModel.CanvasTransformer.Height / 2 - transformer.Center.Y);
 
                 //Selection
@@ -270,7 +270,7 @@ namespace Retouch_Photo2.Controls
 
             this.AlignBottomButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, this.ViewModel.CanvasTransformer.Height - transformer.MaxY);
 
                 //Selection

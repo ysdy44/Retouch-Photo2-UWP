@@ -304,8 +304,7 @@
       
         <!--Foot-->
         <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Column="1" Grid.Row="2"
-            Visibility="Visible" 
-            IsHitTestVisible="{x:Bind CanvasHitTestVisible,Mode=OneWay}">
+            Visibility="Visible" >
             <!--Normal-->
 
             <!--Visibility:Show-->
@@ -392,8 +391,7 @@
         
         <!--Left-->
         <Border x:Name="LeftBorder" Grid.Column="0" Grid.Row="1" MinHeight="200" BorderBrush="{ThemeResource AppStroke}"
-                Grid.RowSpan="2" CornerRadius="0" VerticalAlignment="Stretch" BorderThickness="0,1,1,1" Visibility="Visible" Margin="0" Background="{ThemeResource AppBackground}"
-                IsHitTestVisible="{x:Bind CanvasHitTestVisible,Mode=OneWay}">
+                Grid.RowSpan="2" CornerRadius="0" VerticalAlignment="Stretch" BorderThickness="0,1,1,1" Visibility="Visible" Margin="0" Background="{ThemeResource AppBackground}">
             <!--Normal-->
 
             <!--Visibility:Show-->
@@ -411,8 +409,7 @@
         </Border>
         <!--Right-->
         <Border x:Name="RightBorder" Grid.Column="2" MinHeight="200" BorderBrush="{ThemeResource AppStroke}"
-                Grid.Row ="1" Grid.RowSpan="2" CornerRadius="0" VerticalAlignment="Center" BorderThickness="1,1,0,1" Visibility="Visible" Background="{ThemeResource AppBackground}"
-                IsHitTestVisible="{x:Bind CanvasHitTestVisible,Mode=OneWay}">
+                Grid.Row ="1" Grid.RowSpan="2" CornerRadius="0" VerticalAlignment="Center" BorderThickness="1,1,0,1" Visibility="Visible" Background="{ThemeResource AppBackground}">
             <!--Normal-->
 
             <!--Visibility:Show-->

@@ -60,8 +60,8 @@ namespace Retouch_Photo2.ViewModels.Tips
         }
         private Tool tool;
 
-        /// <summary> <see cref="Retouch_Photo2.Tools.ToolBase"/>'s TransformerToolBase. </summary>
-        public ToolBase TransformerToolBase;
+        /// <summary> <see cref="Retouch_Photo2.Tools.ITransformerTool"/>'s TransformerToolBase. </summary>
+        public ITransformerTool TransformerToolBase;
 
 
 
@@ -70,6 +70,9 @@ namespace Retouch_Photo2.ViewModels.Tips
 
         /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s ViewTool. </summary>
         public Tool ViewTool;
+
+        /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s BrushTool. </summary>
+        public Tool BrushTool;
 
         /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s RectangleTool. </summary>
         public Tool RectangleTool;

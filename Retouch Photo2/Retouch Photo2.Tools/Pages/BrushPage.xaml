@@ -1,17 +1,62 @@
 ﻿<Page
     x:Class="Retouch_Photo2.Retouch_Photo2.Tools.Pages.BrushPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pagesDrawPages="using:Retouch_Photo2.Pages.DrawPages"
-    xmlns:hSVColorPickers="using:HSVColorPickers"
+    xmlns:brushs="using:Retouch_Photo2.Brushs"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
     >
 
-    <StackPanel Orientation="Horizontal">
 
+    <Page.Resources>
+        <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <brushs:BrushColorPicker x:Name="ColorPicker" Width="222"/>
+        </Flyout>
+        <Flyout x:Name="BrushFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <brushs:BrushPicker x:Name="BrushPicker" Width="320"/>
+        </Flyout>
+    </Page.Resources>
+    
+
+    <StackPanel Orientation="Horizontal">
+                
+        <TextBlock Text="Fill or Stroke:" Style="{StaticResource AppTextBlock}"/>
+        <Border Height="40" Style="{StaticResource AppRoundedBorderStyle}">
+            <ComboBox x:Name="FillOrStrokeComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
+                  SelectedIndex="{x:Bind FillOrStrokeToIndexConverter(SelectionViewModel.FillOrStroke),Mode=OneWay}" 
+                  >
+                <ComboBoxItem x:Name="FillComboBoxItem" Content="Fill"/>
+                <ComboBoxItem x:Name="StrokeComboBoxItem" Content="Stroke"/>
+            </ComboBox>
+        </Border>
+        
+        <AppBarSeparator/>
+                
+        <TextBlock Text="Brush type:" Style="{StaticResource AppTextBlock}"/>
+        <Border Height="40" Style="{StaticResource AppRoundedBorderStyle}">
+            <ComboBox x:Name="BrushTypeComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
+                  SelectedIndex="{x:Bind BrushTypeToIndexConverter(SelectionViewModel.BrushType),Mode=OneWay}" 
+                  >
+                <ComboBoxItem x:Name="NoneComboBoxItem" Content="None"/>
+                <ComboBoxItem x:Name="ColorComboBoxItem" Content="Color"/>
+                <ComboBoxItem x:Name="LinearGradientComboBoxItem" Content="Linear gradient"/>
+                <ComboBoxItem x:Name="RadialGradientComboBoxItem" Content="Radial gradient"/>
+                <ComboBoxItem x:Name="EllipticalGradientComboBoxItem" Content="Elliptical gradient"/>
+                <ComboBoxItem x:Name="ImageComboBoxItem" Content="Image"/>
+            </ComboBox>
+        </Border>
+
+        <AppBarSeparator/>
+        
+        <TextBlock Text="Brush:" Style="{StaticResource AppTextBlock}"/>
+        <brushs:BrushShowControl x:Name="ShowControl" 
+                                 Type="{x:Bind SelectionViewModel.BrushType,Mode=OneWay}"
+                                 Color="{x:Bind SelectionViewModel.BrushColor,Mode=OneWay}"
+                                 Array="{x:Bind SelectionViewModel.BrushArray,Mode=OneWay}"
+                                 />
+        
     </StackPanel>
 </Page>

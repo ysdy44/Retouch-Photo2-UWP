@@ -33,10 +33,11 @@ namespace Retouch_Photo2
         {
             TransformerToolBase = new TransformerToolBase(),
 
+            CursorTool = new CursorTool(),
             ViewTool = new ViewTool(),
+            BrushTool = new BrushTool(),
             RectangleTool = new RectangleTool(),
             EllipseTool = new EllipseTool(),
-            CursorTool = new CursorTool(),
             AcrylicTool = new AcrylicTool(),
         };
 

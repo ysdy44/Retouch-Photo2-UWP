@@ -1,10 +1,15 @@
-﻿using Retouch_Photo2.Adjustments;
+﻿using Microsoft.Graphics.Canvas.Brushes;
+using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
+using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Effects;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.Layers.ILayer;
 using Retouch_Photo2.Layers.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Numerics;
+using Windows.UI;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.ViewModels.Selections
@@ -124,6 +129,149 @@ namespace Retouch_Photo2.ViewModels.Selections
 
                 return;
             }
+        }
+
+
+        
+        /// <summary> Brush's Fill or Stroke. </summary>     
+        public FillOrStroke FillOrStroke;
+
+        /// <summary> Brush's type. </summary>     
+        public BrushType BrushType;
+
+        /// <summary> Brush's color. </summary>     
+        public Color BrushColor;
+        /// <summary> Brush's gradient colors. </summary>     
+        public CanvasGradientStop[] BrushArray;
+
+
+        /// <summary> Brush''s linear gradient start point. </summary>
+        public Vector2 BrushLinearGradientStartPoint;
+        /// <summary> Brush''s linear gradient end point. </summary>
+        public Vector2 BrushLinearGradientEndPoint;
+
+        /// <summary> Brush''s radial gradient center point. </summary>
+        public Vector2 BrushRadialGradientCenter;
+        /// <summary> Brush''s radial gradient control point. </summary>
+        public Vector2 BrushRadialGradientPoint;
+
+        /// <summary> Brush''s elliptical gradient center point. </summary>
+        public Vector2 BrushEllipticalGradientCenter;
+        /// <summary> Brush''s elliptical gradient x-point. </summary>
+        public Vector2 BrushEllipticalGradientXPoint;
+        /// <summary> Brush''s elliptical gradient y-point. </summary>
+        public Vector2 BrushEllipticalGradientYPoint;
+
+
+        /// <summary> Sets GeometryLayer's brush. </summary>     
+        public void SetBrush(Brush brush)
+        {
+            switch (brush.Type)
+            {
+                case BrushType.None:
+                    break;
+                case BrushType.Color:
+                    {
+                        this.BrushColor = brush.Color;
+                        this.OnPropertyChanged(nameof(this.BrushColor));//Notify 
+                    }
+                    break;
+                case BrushType.LinearGradient:
+                    {
+                        this.BrushLinearGradientStartPoint = brush.LinearGradientStartPoint;
+                        this.BrushLinearGradientEndPoint = brush.LinearGradientEndPoint;
+
+                        this.BrushArray = brush.Array;
+                        this.OnPropertyChanged(nameof(this.BrushArray));//Notify 
+                    }
+                    break;
+                case BrushType.RadialGradient:
+                    {
+                        this.BrushRadialGradientCenter = brush.RadialGradientCenter;
+                        this.BrushRadialGradientPoint = brush.RadialGradientPoint;
+
+                        this.BrushArray = brush.Array;
+                        this.OnPropertyChanged(nameof(this.BrushArray));//Notify 
+                    }
+                    break;
+                case BrushType.EllipticalGradient:
+                    {
+                        this.BrushEllipticalGradientCenter = brush.EllipticalGradientCenter;
+                        this.BrushEllipticalGradientXPoint = brush.EllipticalGradientXPoint;
+                        this.BrushEllipticalGradientYPoint = brush.EllipticalGradientYPoint;
+
+                        this.BrushArray = brush.Array;
+                        this.OnPropertyChanged(nameof(this.BrushArray));//Notify 
+                    }
+                    break;
+                case BrushType.Image:
+                    break;
+                default:
+                    break;
+            }
+
+            this.BrushType = brush.Type;
+            this.OnPropertyChanged(nameof(this.BrushType));//Notify 
+        }
+
+        /// <summary> Sets GeometryLayer. </summary>     
+        private void SetGeometryLayer(Layer layer)
+        {
+            if (layer is IGeometryLayer geometryLayer)
+            {
+                switch (this.FillOrStroke)
+                {
+                    case FillOrStroke.Fill:
+                        this.SetBrush(geometryLayer.FillBrush);
+                        break;
+                    case FillOrStroke.Stroke:
+                        this.SetBrush(geometryLayer.StrokeBrush);
+                        break;
+                }
+                return;
+            }
+
+            this.BrushType = BrushType.None;
+            this.OnPropertyChanged(nameof(this.BrushType));//Notify 
+        }
+
+               
+        public void InitializeLinearGradient(Vector2 startPoint, Vector2 endPoint)
+        {
+            //Brush
+            this.BrushType = BrushType.LinearGradient;
+            this.BrushArray = new CanvasGradientStop[]
+            {
+                 new CanvasGradientStop{Color= Colors.White, Position=0.0f },
+                 new CanvasGradientStop{Color= Colors.Gray, Position=1.0f }
+            };
+            this.BrushLinearGradientStartPoint = startPoint;
+            this.BrushLinearGradientEndPoint = endPoint;
+
+            //Selection
+            this.SetValue((layer) =>
+            {
+                if (layer is IGeometryLayer geometryLayer)
+                {
+                    switch (this.FillOrStroke)
+                    {
+                        case FillOrStroke.Fill:
+                            {
+                                geometryLayer.FillBrush.Type = BrushType.LinearGradient;
+                                geometryLayer.FillBrush.LinearGradientStartPoint = startPoint;
+                                geometryLayer.FillBrush.LinearGradientEndPoint = endPoint;
+                            }
+                            break;
+                        case FillOrStroke.Stroke:
+                            {
+                                geometryLayer.FillBrush.Type = BrushType.LinearGradient;
+                                geometryLayer.StrokeBrush.LinearGradientStartPoint = startPoint;
+                                geometryLayer.StrokeBrush.LinearGradientEndPoint = endPoint;
+                            }
+                            break;
+                    }
+                }
+            });
         }
 
 

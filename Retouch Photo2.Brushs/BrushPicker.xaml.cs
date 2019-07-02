@@ -25,20 +25,20 @@ namespace Retouch_Photo2.Brushs
         StopsSize Size = new StopsSize();
         StopsManager Manager = new StopsManager();
 
-        private Brush brush;
-        public Brush Brush
+        private CanvasGradientStop[] array;
+        public CanvasGradientStop[] Array
         {
-            get => this.brush;
+            get => this.array;
             set
             {
                 if (value != null)
                 {
-                    this.Manager.Initialize(value.Array);
-                    CanvasGradientStop stop = value.Array.First();
+                    this.Manager.Initialize(value);
+                    CanvasGradientStop stop = value.First();
                     this.StopChanged(stop.Color, (int)(stop.Position * 100), false);
                 }
 
-                this.brush = value;
+                this.array = value;
             }
         }
 
@@ -72,7 +72,7 @@ namespace Retouch_Photo2.Brushs
             };
             this.CanvasControl.Draw += (sender, args) =>
             {
-                if (this.Brush == null) return;
+                if (this.Array == null) return;
 
                 args.DrawingSession.DrawImage(new DpiCompensationEffect
                 {
@@ -90,7 +90,7 @@ namespace Retouch_Photo2.Brushs
                 });
 
                 //Background
-                this.Size.DrawBackground(args.DrawingSession, this.CanvasControl, this.Brush.Array);
+                this.Size.DrawBackground(args.DrawingSession, this.CanvasControl, this.Array);
 
                 //Stops
                 for (int i = 0; i < this.Manager.Count; i++)
@@ -108,7 +108,7 @@ namespace Retouch_Photo2.Brushs
                 this.IsPressed = true;
                 this.Vector = e.GetCurrentPoint(this.CanvasControl).Position.ToVector2();
 
-                if (this.Brush == null) return;
+                if (this.Array == null) return;
 
                 this.Manager.Index = -1;
                 this.Manager.IsLeft = false;
@@ -152,7 +152,7 @@ namespace Retouch_Photo2.Brushs
 
                 this.Manager.Stops.Add(addStop);
                 this.Manager.Index = this.Manager.Count - 1;
-                this.Brush.Array = this.Manager.GetArray();
+                this.Array = this.Manager.GetArray();
 
                 this.StopChanged(addStop.Color, (int)(addStop.Position * 100), true);//Delegate
                 return;
@@ -162,7 +162,7 @@ namespace Retouch_Photo2.Brushs
                 this.Vector = e.GetCurrentPoint(this.CanvasControl).Position.ToVector2();
 
                 if (this.IsPressed == false) return;
-                if (this.Brush == null) return;
+                if (this.Array == null) return;
 
                 if (this.Manager.IsLeft) return;
                 if (this.Manager.IsRight) return;
@@ -178,7 +178,7 @@ namespace Retouch_Photo2.Brushs
             this.CanvasControl.PointerReleased += (s, e) =>
             {
                 this.IsPressed = false;
-                if (this.Brush == null) return;
+                if (this.Array == null) return;
 
                 this.CanvasControl.Invalidate();
                 this.StopsChange?.Invoke();//Delegate
@@ -202,7 +202,7 @@ namespace Retouch_Photo2.Brushs
             };
             this.ColorButton.Tapped += (s, e) =>
             {
-                if (this.Brush == null) return;
+                if (this.Array == null) return;
 
                 if (this.Manager.IsLeft || this.Manager.IsRight || this.Manager.Index >= 0)
                 {
@@ -239,7 +239,7 @@ namespace Retouch_Photo2.Brushs
         // <summary> Set the offset of the current stop. </summary>
         public void SetOffset(float offset)
         {
-            if (this.Brush == null) return;
+            if (this.Array == null) return;
 
             if (this.Manager.IsLeft) return;
             if (this.Manager.IsRight) return;
@@ -260,7 +260,7 @@ namespace Retouch_Photo2.Brushs
                 Position = offset
             };
             this.Manager.Stops[index] = stop;
-            this.Brush.Array[index + 1] = stop;
+            this.Array[index + 1] = stop;
 
             this.CanvasControl.Invalidate();
             return;
@@ -272,12 +272,12 @@ namespace Retouch_Photo2.Brushs
 
             this.OpacityControl.Value = color.A;
 
-            if (this.Brush == null) return;
+            if (this.Array == null) return;
 
             if (this.Manager.IsLeft)
             {
                 this.Manager.LeftColor = color;
-                this.Brush.Array[0] = new CanvasGradientStop
+                this.Array[0] = new CanvasGradientStop
                 {
                     Color = color,
                     Position = 0
@@ -291,7 +291,7 @@ namespace Retouch_Photo2.Brushs
             if (this.Manager.IsRight)
             {
                 this.Manager.RightColor = color;
-                this.Brush.Array[this.Manager.Count + 1] = new CanvasGradientStop
+                this.Array[this.Manager.Count + 1] = new CanvasGradientStop
                 {
                     Color = color,
                     Position = 1
@@ -316,7 +316,7 @@ namespace Retouch_Photo2.Brushs
                     Position = this.Manager.Stops[index].Position
                 };
                 this.Manager.Stops[index] = stop;
-                this.Brush.Array[index + 1] = stop;
+                this.Array[index + 1] = stop;
 
                 this.CanvasControl.Invalidate();
                 this.StopsChange?.Invoke();//Delegate
@@ -328,10 +328,10 @@ namespace Retouch_Photo2.Brushs
         // <summary> Reserve all stops. </summary>
         public void Reserve()
         {
-            if (this.Brush == null) return;
+            if (this.Array == null) return;
 
             this.Manager.Reserve();
-            this.Manager.SetArray(this.Brush.Array);
+            this.Manager.SetArray(this.Array);
 
             this.CanvasControl.Invalidate();
             this.StopsChange?.Invoke();//Delegate
@@ -339,7 +339,7 @@ namespace Retouch_Photo2.Brushs
         // <summary> Remove current stop. </summary>
         public void Remove()
         {
-            if (this.Brush == null) return;
+            if (this.Array == null) return;
 
             if (this.Manager.IsLeft) return;
             if (this.Manager.IsRight) return;
@@ -367,7 +367,7 @@ namespace Retouch_Photo2.Brushs
                 this.StopChanged(stop.Color, 0, false);
             } 
 
-            this.Brush.Array = this.Manager.GetArray();
+            this.Array = this.Manager.GetArray();
 
             this.CanvasControl.Invalidate();
             this.StopsChange?.Invoke();//Delegate

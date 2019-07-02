@@ -1,11 +1,12 @@
-﻿using System.Numerics;
+﻿using Microsoft.Graphics.Canvas;
+using System.Numerics;
 
 namespace Retouch_Photo2.Tools
 {
     /// <summary> 
-    /// Base of <see cref = "Tool" />.
+    /// Interface of <see cref = "TransformerTool" />.
     /// </summary>
-    public abstract class ToolBase
+    public abstract class ITransformerTool
     {
         //Cursor
         /// <summary> <see cref = "Tool.Starting" />'s method. </summary>
@@ -19,5 +20,8 @@ namespace Retouch_Photo2.Tools
 
         /// <summary> <see cref = "Tool.Complete" />'s method. </summary>
         public abstract bool Complete(bool isSingleStarted);
+     
+        /// <summary> <see cref = "Tool.Draw" />'s method. </summary>
+        public abstract void Draw(CanvasDrawingSession ds);
     }
 }

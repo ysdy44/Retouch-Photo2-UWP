@@ -53,6 +53,7 @@ namespace Retouch_Photo2.Controls
 
             if (e.NewValue is Color value)
             {
+                con.ViewModel.AccentColor = value;
                 con.CanvasControl.Invalidate();
             }
         }));
@@ -97,13 +98,7 @@ namespace Retouch_Photo2.Controls
 
         #endregion
 
-
-
-        private void Button_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
-        {
-            this.ViewModel.CanvasTransformer.Fit();
-            this.ViewModel.Invalidate();
-        }
+        
         //@Construct
         public MainCanvasControl()
         {
@@ -139,20 +134,6 @@ namespace Retouch_Photo2.Controls
             };
             this.CanvasControl.Draw += (sender, args) =>
             {
-                /*                
-                 
-                this.WidthRun.Text = this.ViewModel.CanvasTransformer.Width.ToString();
-                this.HeightRun.Text = this.ViewModel.CanvasTransformer.Height.ToString();
-
-                this.XRun.Text = this.ViewModel.CanvasTransformer.Position.X.ToString();
-                this.YRun.Text = this.ViewModel.CanvasTransformer.Position.Y.ToString();
-
-                this.ScaleRun.Text = this.ViewModel.CanvasTransformer.Scale.ToString();
-                this.RadianRun.Text = this.ViewModel.CanvasTransformer.Radian.ToString();
-                 
-                 */
-                 
-
                 //Render & Mezzanine
                 {
                     ICanvasImage previousImage = new ColorSourceEffect { Color = Colors.White };
@@ -192,25 +173,13 @@ namespace Retouch_Photo2.Controls
                     args.DrawingSession.DrawCrad(previousImage, this.ViewModel.CanvasTransformer, this.ShadowColor);
                 }
 
-                
-                //Selection & Mezzanine
+
+                //Tool & Mezzanine
                 {
                     if (this.MezzanineViewModel.Layer == null)
                     {
-                        //Selection
-                        switch (this.SelectionViewModel.Mode)
-                        {
-                            case ListViewSelectionMode.None:
-                                break;
-                            case ListViewSelectionMode.Single:
-                            case ListViewSelectionMode.Multiple:
-                                {
-                                    Transformer transformer = this.SelectionViewModel.GetTransformer();
-                                    Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                                    args.DrawingSession.DrawBoundNodes(transformer, matrix, this.AccentColor, this.SelectionViewModel.DsabledRadian);
-                                }
-                                break;
-                        }
+                        //Tool
+                        this.TipViewModel.Tool.Draw(args.DrawingSession);
                     }
                     else
                     {
@@ -219,10 +188,6 @@ namespace Retouch_Photo2.Controls
                         args.DrawingSession.DrawBound(this.MezzanineViewModel.Layer.TransformerMatrix.Destination, matrix, this.AccentColor);
                     }
                 }
-
-
-                //Tool
-                this.TipViewModel.Tool.Draw(args.DrawingSession);
 
 
                 //IsRuler

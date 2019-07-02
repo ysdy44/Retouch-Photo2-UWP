@@ -22,24 +22,56 @@ namespace Retouch_Photo2.Brushs
 
 
         #region DependencyProperty
-  
-        /// <summary> Sets or Gets brush. </summary>
-        public Brush Brush
+
+
+        /// <summary> Sets or Gets brush type. </summary>
+        public BrushType Type
         {
-            get { return (Brush)GetValue(BrushProperty); }
-            set { SetValue(BrushProperty, value); }
+            get { return (BrushType)GetValue(TypeProperty); }
+            set { SetValue(TypeProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "BrushShowControl.Brush" /> dependency property. </summary>
-        public static readonly DependencyProperty BrushProperty = DependencyProperty.Register(nameof(Brush), typeof(Brush), typeof(BrushShowControl), new PropertyMetadata(null, (sender, e) =>
+
+        /// <summary> Identifies the <see cref = "BrushShowControl.Type" /> dependency property. </summary>
+        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(BrushType), typeof(BrushShowControl), new PropertyMetadata(BrushType.None, (sender, e) =>
         {
             BrushShowControl con = (BrushShowControl)sender;
 
             con.CanvasControl.Invalidate();
         }));
 
+
+        /// <summary> Sets or Gets brush color. </summary>
+        public Color Color
+        {
+            get { return (Color)GetValue(ColorProperty); }
+            set { SetValue(ColorProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "BrushShowControl.Color" /> dependency property. </summary>
+        public static readonly DependencyProperty ColorProperty = DependencyProperty.Register(nameof(Color), typeof(Color), typeof(BrushShowControl), new PropertyMetadata(Colors.Transparent, (sender, e) =>
+        {
+            BrushShowControl con = (BrushShowControl)sender;
+
+            con.CanvasControl.Invalidate();
+        }));
+
+
+        /// <summary> Sets or Gets gradient colors. </summary>
+        public CanvasGradientStop[] Array
+        {
+            get { return (CanvasGradientStop[])GetValue(ArrayProperty); }
+            set { SetValue(ArrayProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "BrushShowControl.Array" /> dependency property. </summary>
+        public static readonly DependencyProperty ArrayProperty = DependencyProperty.Register(nameof(Array), typeof(CanvasGradientStop[]), typeof(BrushShowControl), new PropertyMetadata(null, (sender, e) =>
+        {
+            BrushShowControl con = (BrushShowControl)sender;
+
+            con.CanvasControl.Invalidate();
+        }));
+
+
         #endregion
 
-        public void Invalidate() => this.CanvasControl.Invalidate();
 
         //@Construct
         public BrushShowControl()
@@ -64,32 +96,32 @@ namespace Retouch_Photo2.Brushs
             };
             this.CanvasControl.Draw += (s, args) =>
             {
-                if (this.Brush==null)
+                if (this.Array==null)
                 {
                     this.DrawNone(args.DrawingSession, this.CanvasWidth, this.CanvasHeight);
                     return;
                 }
 
-                switch (this.Brush.Type)
+                switch (this.Type)
                 {
                     case BrushType.None:
                         this.DrawNone(args.DrawingSession, this.CanvasWidth, this.CanvasHeight);
                         break;
 
                     case BrushType.Color:
-                        this.DrawColor(args.DrawingSession, this.Brush.Color);
+                        this.DrawColor(args.DrawingSession, this.Color);
                         break;
 
                     case BrushType.LinearGradient:
-                        this.DrawLinearGradient(args.DrawingSession, this.CanvasControl, this.Brush.Array, this.CanvasWidth, this.CanvasHeight, this.CanvasCenter.Y);
+                        this.DrawLinearGradient(args.DrawingSession, this.CanvasControl, this.Array, this.CanvasWidth, this.CanvasHeight, this.CanvasCenter.Y);
                         break;
 
                     case BrushType.RadialGradient:
-                        this.DrawRadialGradient(args.DrawingSession, this.CanvasControl, this.Brush.Array, this.CanvasWidth, this.CanvasHeight, this.CanvasCenter);
+                        this.DrawRadialGradient(args.DrawingSession, this.CanvasControl, this.Array, this.CanvasWidth, this.CanvasHeight, this.CanvasCenter);
                         break;
 
                     case BrushType.EllipticalGradient:
-                        this.DrawEllipticalGradient(args.DrawingSession, this.CanvasControl, this.Brush.Array, this.CanvasWidth, this.CanvasHeight, this.CanvasCenter);
+                        this.DrawEllipticalGradient(args.DrawingSession, this.CanvasControl, this.Array, this.CanvasWidth, this.CanvasHeight, this.CanvasCenter);
                         break;
 
                     case BrushType.Image:

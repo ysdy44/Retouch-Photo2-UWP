@@ -3,6 +3,7 @@ using Retouch_Photo2.Layers;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using Windows.UI;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -40,6 +41,8 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
+        /// <summary> Retouch_Photo2's the only AccentColor. </summary>
+        public Color AccentColor;
         /// <summary> Retouch_Photo2's the only <see cref = "Microsoft.Graphics.Canvas.CanvasDevice" />. </summary>
         public CanvasDevice CanvasDevice { get; } = new CanvasDevice();
 

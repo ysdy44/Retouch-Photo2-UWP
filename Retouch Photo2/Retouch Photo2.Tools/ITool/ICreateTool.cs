@@ -38,7 +38,7 @@ namespace Retouch_Photo2.Tools.ITool
         public override void Starting(Vector2 point) { }
         public override void Started(Vector2 startingPoint, Vector2 point)
         {
-            if (this.TipViewModel.TransformerToolBase.Started(startingPoint)) return;//CursorToolBase
+            if (this.TipViewModel.TransformerToolBase.Started(startingPoint)) return;//TransformerToolBase
 
             //Transformer
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
@@ -59,7 +59,7 @@ namespace Retouch_Photo2.Tools.ITool
         }
         public override void Delta(Vector2 startingPoint, Vector2 point)
         {
-            if (this.TipViewModel.TransformerToolBase.Delta(startingPoint, point)) return;//CursorToolBase
+            if (this.TipViewModel.TransformerToolBase.Delta(startingPoint, point)) return;//TransformerToolBase
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Transformer transformer = new Transformer
@@ -78,7 +78,7 @@ namespace Retouch_Photo2.Tools.ITool
         }
         public override void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
-            if (this.TipViewModel.TransformerToolBase.Complete(isSingleStarted)) return;//CursorToolBase
+            if (this.TipViewModel.TransformerToolBase.Complete(isSingleStarted)) return;//TransformerToolBase
 
             if (isSingleStarted)
             {
@@ -105,6 +105,9 @@ namespace Retouch_Photo2.Tools.ITool
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
 
-        public override void Draw(CanvasDrawingSession ds) { }
+        public override void Draw(CanvasDrawingSession ds)
+        {
+            this.TipViewModel.TransformerToolBase.Draw(ds);//TransformerToolBase
+        }
     }
 }

@@ -240,7 +240,7 @@ namespace Retouch_Photo2.Controls
 
                 if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return;
 
-                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.Transformer;
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
 
                 this.XPicker.Value = (int)vector.X;
@@ -252,8 +252,7 @@ namespace Retouch_Photo2.Controls
             //Remote
             this.RemoteControl.Moved += (s, value) =>
             {
-                //Transformer
-                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.Transformer;
 
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
@@ -267,8 +266,7 @@ namespace Retouch_Photo2.Controls
             };
             this.RemoteControl.ValueChangeStarted += (s, value) =>
             {
-                //Transformer
-                this.oldTransformer = this.SelectionViewModel.GetTransformer();
+                this.oldTransformer = this.SelectionViewModel.Transformer;
 
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
@@ -307,8 +305,7 @@ namespace Retouch_Photo2.Controls
             this.WPicker.Maximum = int.MaxValue;
             this.WPicker.ValueChange += (sender, value) =>
             {
-                //Transformer
-                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.Transformer;
                 Vector2 horizontal = transformer.Horizontal;
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
 
@@ -337,8 +334,7 @@ namespace Retouch_Photo2.Controls
             this.HPicker.Maximum = int.MaxValue;
             this.HPicker.ValueChange += (s, value) =>
             {                
-                //Transformer
-                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.Transformer;
                 Vector2 vertical = transformer.Vertical;
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
 
@@ -373,8 +369,7 @@ namespace Retouch_Photo2.Controls
             this.RPicker.Maximum = 180;
             this.RPicker.ValueChange += (s, value) =>
             { 
-                //Transformer
-                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.Transformer;
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
 
                 float canvasRadian = value / 180.0f * TransformerMath.Pi;              
@@ -398,8 +393,7 @@ namespace Retouch_Photo2.Controls
             this.SPicker.Maximum = 90;
             this.SPicker.ValueChange += (s, value) =>
             {
-                //Transformer
-                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.Transformer;
                 float horizontalHalf = Vector2.Distance(transformer.Center, transformer.CenterRight);
 
                 Vector2 footPoint = TransformerMath.FootPoint(transformer.Center, transformer.LeftBottom, transformer.RightBottom);
@@ -467,8 +461,7 @@ namespace Retouch_Photo2.Controls
             this.XPicker.Maximum = int.MaxValue;
             this.XPicker.ValueChange += (s, value) =>
             {
-                //Transformer
-                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.Transformer;
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
                 Vector2 offset = new Vector2(value - vector.X, 0);
 
@@ -487,8 +480,7 @@ namespace Retouch_Photo2.Controls
             this.YPicker.Maximum = int.MaxValue;
             this.YPicker.ValueChange += (s, value) =>
             {
-                //Transformer
-                Transformer transformer = this.SelectionViewModel.GetTransformer();
+                Transformer transformer = this.SelectionViewModel.Transformer;
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
                 Vector2 offset = new Vector2(0, value - vector.Y);
 

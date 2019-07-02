@@ -11,11 +11,11 @@
         /// <summary> Cursor tool. </summary>
         Cursor,
 
-        /// <summary> Fill or stroke geometry. </summary>
-        Brush,
-
         /// <summary> Drag and move the canvas. </summary>
         View,
+
+        /// <summary> Fill or stroke geometry. </summary>
+        Brush,
 
         /// <summary> Create rectangle geometry. </summary>
         Rectangle,

@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Controls;
@@ -22,7 +23,11 @@ namespace Retouch_Photo2.Tools.Models
         public override Layer CreateLayer(Transformer transformer) => new EllipseLayer
         {
             IsChecked = true,
-            FillColor = this.SelectionViewModel.FillColor,
+            FillBrush = new Brush
+            {
+                Type = BrushType.Color,
+                Color = this.SelectionViewModel.FillColor,
+            },
             TransformerMatrix = new TransformerMatrix(transformer)
         };
 

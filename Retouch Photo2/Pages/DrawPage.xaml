@@ -27,7 +27,6 @@
                           IsFullScreen="{x:Bind KeyboardViewModel.IsFullScreen,Mode=OneWay}" 
                           Tool="{x:Bind TipViewModel.Tool,Mode=OneWay}"
                           Theme="{x:Bind ViewModel.CanvasTheme,Mode=OneWay}"
-                          CanvasHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}"
                           >
 
             <!--Tool & Layer-->

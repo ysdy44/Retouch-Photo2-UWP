@@ -47,6 +47,8 @@ namespace Retouch_Photo2.ViewModels.Selections
 
             this.SetGroupLayer(null);
             this.SetAcrylicLayer(null);
+            this.SetGeometryLayer(null);
+            
         }
 
         /// <summary>
@@ -79,6 +81,7 @@ namespace Retouch_Photo2.ViewModels.Selections
 
             this.SetGroupLayer(layer);
             this.SetAcrylicLayer(layer);
+            this.SetGeometryLayer(layer);
 
 
             if (layer.GetFillColor() is Color color)
@@ -155,7 +158,8 @@ namespace Retouch_Photo2.ViewModels.Selections
 
 
             this.SetGroupLayer(null);
-            this.SetAcrylicLayer(null);     
+            this.SetAcrylicLayer(null);
+            this.SetGeometryLayer(null);
         }
 
 

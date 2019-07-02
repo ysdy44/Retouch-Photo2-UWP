@@ -181,6 +181,9 @@
     <Compile Include="Retouch Photo2.Tools\ITool\ICreateTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\AcrylicTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\BrushTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\BrushTools\EllipticalGradientTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\BrushTools\LinearGradientTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\BrushTools\RadialGradientTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\CursorTool.Box.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\CursorTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\EllipseTool.cs" />
@@ -205,7 +208,7 @@
     <Compile Include="Retouch Photo2.Tools\Pages\ViewPage.xaml.cs">
       <DependentUpon>ViewPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\TransformerToolBase.cs" />
+    <Compile Include="Retouch Photo2.Tools\TransformerTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

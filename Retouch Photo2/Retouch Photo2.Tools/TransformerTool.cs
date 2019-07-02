@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
@@ -12,9 +13,9 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Tools
 {
     /// <summary>
-    /// <see cref="ToolBase"/>'s TransformerToolBase.
+    /// <see cref="ITransformerTool"/>'s TransformerToolBase.
     /// </summary>
-    public partial class TransformerToolBase : ToolBase
+    public partial class TransformerToolBase : ITransformerTool
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
@@ -39,12 +40,10 @@ namespace Retouch_Photo2.Tools
                         if (isSelect) return true;
                         else return false;
                     }
-
-
                 case ListViewSelectionMode.Single:
                 case ListViewSelectionMode.Multiple:
                     {
-                        Transformer transformer = this.SelectionViewModel.GetTransformer();
+                        Transformer transformer = this.SelectionViewModel.Transformer;
                         Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
                         this.TransformerMode = Transformer.ContainsNodeMode(point, transformer, matrix, this.SelectionViewModel.DsabledRadian);
 
@@ -88,7 +87,6 @@ namespace Retouch_Photo2.Tools
                     break;
             }
 
-            // if (this.TransformerMode== TransformerMode.None)
             return true;
         }
 
@@ -96,7 +94,7 @@ namespace Retouch_Photo2.Tools
         {
             if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return false;
 
-            this.oldTransformer = this.SelectionViewModel.GetTransformer();
+            this.oldTransformer = this.SelectionViewModel.Transformer;
 
             if (isSetTransformerMode)
             {
@@ -145,15 +143,10 @@ namespace Retouch_Photo2.Tools
         {
             switch (this.SelectionViewModel.Mode)
             {
-                case ListViewSelectionMode.None:
-                    {
-                        return false;
-                    }
-
+                case ListViewSelectionMode.None: return false;
                 case ListViewSelectionMode.Single:
                 case ListViewSelectionMode.Multiple:
                     {
-
                         switch (this.KeyboardViewModel.CompositeMode)
                         {
                             case CompositeMode.New:
@@ -176,11 +169,9 @@ namespace Retouch_Photo2.Tools
                             case CompositeMode.Subtract: break;
                             case CompositeMode.Intersect: break;
                         }
-
                     }
                     break;
             }
-                         
 
             this.TransformerMode = TransformerMode.None;//TransformerMode
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
@@ -188,7 +179,24 @@ namespace Retouch_Photo2.Tools
             return true;
         }
 
-               
+        public override void Draw(CanvasDrawingSession ds)
+        {
+            //Selection
+            switch (this.SelectionViewModel.Mode)
+            {
+                case ListViewSelectionMode.None:
+                    break;
+                case ListViewSelectionMode.Single:
+                case ListViewSelectionMode.Multiple:
+                    {
+                        Transformer transformer = this.SelectionViewModel.Transformer;
+                        Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+                        ds.DrawBoundNodes(transformer, matrix, this.ViewModel.AccentColor, this.SelectionViewModel.DsabledRadian);
+                    }
+                    break;
+            }
+        }
+
 
         /// <summary>
         /// Select a layer from a point,
@@ -265,6 +273,5 @@ namespace Retouch_Photo2.Tools
 
             return true;
         }
-
     }
 }

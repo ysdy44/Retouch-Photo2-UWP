@@ -27,6 +27,12 @@
             </ToolTipService.ToolTip>
         </tools:Button>
 
+        <tools:Button x:Name="BrushButton" GroupType="{x:Bind ToolType,Mode=OneWay}">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="Brush" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+            </ToolTipService.ToolTip>
+        </tools:Button>
+
         <tools:Button x:Name="RectangleButton" GroupType="{x:Bind ToolType,Mode=OneWay}">
             <ToolTipService.ToolTip>
                 <ToolTip Content="Rectangle" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>

@@ -11,27 +11,20 @@
 
                 <ResourceDictionary x:Key="Default">
 
-                    <!--Foreground-->
                     <Color x:Key="AppForegroundColor" >#F8F8F8</Color>
                     <SolidColorBrush x:Key="AppForeground" Color="{ThemeResource AppForegroundColor}"/>
-                    <!--Background-->
                     <Color x:Key="AppBackgroundColor" >#F0F0F2</Color>
                     <SolidColorBrush x:Key="AppBackground" Color="{ThemeResource AppBackgroundColor}"/>
-                    <!--BorderBrush-->
                     <Color x:Key="AppBorderBrushColor" >#CECEDE</Color>
                     <SolidColorBrush x:Key="AppBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
 
-                    <!--Fill-->
                     <Color x:Key="AppFillColor" >#FFFFFF</Color>
                     <SolidColorBrush x:Key="AppFill" Color="{ThemeResource AppFillColor}"/>
-                    <!--Stroke-->
                     <Color x:Key="AppStrokeColor" >#666b6791</Color>
                     <SolidColorBrush x:Key="AppStroke" Color="{ThemeResource AppStrokeColor}"/>
-                    <!--Text-->
                     <Color x:Key="AppTextColor" >#88000000</Color>
                     <SolidColorBrush x:Key="AppText" Color="{ThemeResource AppTextColor}"/>
 
-                    <!--Linear-->
                     <LinearGradientBrush x:Key="AppLinearBrush" StartPoint="0.5,0" EndPoint="0.5,1">
                         <GradientStop Color="#FFFFFF" Offset="0"/>
                         <GradientStop Color="#f7f7f7" Offset="0.25"/>
@@ -44,27 +37,20 @@
 
                 <ResourceDictionary x:Key="Dark">
 
-                    <!--Foreground-->
                     <Color x:Key="AppForegroundColor" >#191919</Color>
                     <SolidColorBrush x:Key="AppForeground" Color="{ThemeResource AppForegroundColor}"/>
-                    <!--Background-->
                     <Color x:Key="AppBackgroundColor" >#0E0E0E</Color>
                     <SolidColorBrush x:Key="AppBackground" Color="{ThemeResource AppBackgroundColor}"/>
-                    <!--BorderBrush-->
                     <Color x:Key="AppBorderBrushColor" >#202020</Color>
                     <SolidColorBrush x:Key="AppBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
 
-                    <!--Fill-->
                     <Color x:Key="AppFillColor" >#2B2B2B</Color>
                     <SolidColorBrush x:Key="AppFill" Color="{ThemeResource AppFillColor}"/>
-                    <!--Stroke-->
                     <Color x:Key="AppStrokeColor" >#AA000000</Color>
                     <SolidColorBrush x:Key="AppStroke" Color="{ThemeResource AppStrokeColor}"/>
-                    <!--Text-->
                     <Color x:Key="AppTextColor" >#88FFFFFF</Color>
                     <SolidColorBrush x:Key="AppText" Color="{ThemeResource AppTextColor}"/>
 
-                    <!--Linear-->
                     <LinearGradientBrush x:Key="AppLinearBrush" StartPoint="0.5,0" EndPoint="0.5,1">
                         <GradientStop Color="#232323" Offset="0"/>
                         <GradientStop Color="#212121" Offset="0.25"/>

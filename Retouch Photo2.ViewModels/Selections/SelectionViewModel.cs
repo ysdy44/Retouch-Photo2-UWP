@@ -62,22 +62,7 @@ namespace Retouch_Photo2.ViewModels.Selections
 
         /// <summary> Transformer of the all checked layers.  </summary>
         public IEnumerable<Layer> Layers { get; private set; }
-
         
-        /// <summary>
-        /// Gets selection layer(s)'s transformer.
-        /// </summary>
-        /// <param name="action"> action </param>
-        public Transformer GetTransformer()
-        {
-            if (this.Mode == ListViewSelectionMode.Single)
-            {
-                return this.Layer.TransformerMatrix.Destination;
-            }
-
-            return this.Transformer;
-        }
-
 
         //Notify 
         /// <summary> Multicast event for property change notifications. </summary>

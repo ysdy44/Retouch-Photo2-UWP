@@ -32,7 +32,8 @@ namespace Retouch_Photo2.Layers.Models
                 IsChecked = base.IsChecked,
                 Visibility = base.Visibility,
 
-                FillColor =base.FillColor,
+                FillBrush = base.FillBrush,
+                StrokeBrush = base.StrokeBrush,
             };
         }
 
