@@ -22,6 +22,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
         Point
     }
 
+
     /// <summary>
     /// <see cref="BrushTool"/>'s BrushRadialGradientTool.
     /// </summary>
@@ -33,8 +34,8 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
 
 
         //@Content
-        Vector2 Center { get => this.SelectionViewModel.BrushRadialGradientCenter; set => this.SelectionViewModel.BrushRadialGradientCenter = value; }
-        Vector2 Point { get => this.SelectionViewModel.BrushRadialGradientPoint; set => this.SelectionViewModel.BrushRadialGradientPoint = value; }
+        Vector2 Center { get => this.SelectionViewModel.BrushPoints.RadialGradientCenter; set => this.SelectionViewModel.BrushPoints.RadialGradientCenter = value; }
+        Vector2 Point { get => this.SelectionViewModel.BrushPoints.RadialGradientPoint; set => this.SelectionViewModel.BrushPoints.RadialGradientPoint = value; }
 
 
         /// <summary> Type of <see cref="RadialGradientTool">. </summary>
@@ -84,28 +85,36 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
                         this.Center = center;
                         this.Point = point2;
 
-                        //Selection
-                        this.SelectionViewModel.SetValue((layer) =>
+                        //FillOrStroke
+                        switch (this.SelectionViewModel.FillOrStroke)
                         {
-                            if (layer is IGeometryLayer geometryLayer)
-                            {
-                                switch (this.SelectionViewModel.FillOrStroke)
+                            case FillOrStroke.Fill:
                                 {
-                                    case FillOrStroke.Fill:
+                                    //Selection
+                                    this.SelectionViewModel.SetValue((layer) =>
+                                    {
+                                        if (layer is IGeometryLayer geometryLayer)
                                         {
-                                            geometryLayer.FillBrush.RadialGradientCenter = center;
-                                            geometryLayer.FillBrush.RadialGradientPoint = point2;
+                                            geometryLayer.FillBrush.Points.RadialGradientCenter = center;
+                                            geometryLayer.FillBrush.Points.RadialGradientPoint = point2;
                                         }
-                                        break;
-                                    case FillOrStroke.Stroke:
-                                        {
-                                            geometryLayer.StrokeBrush.RadialGradientCenter = center;
-                                            geometryLayer.StrokeBrush.RadialGradientPoint = point2;
-                                        }
-                                        break;
+                                    }, true);
                                 }
-                            }
-                        });
+                                break;
+                            case FillOrStroke.Stroke:
+                                {
+                                    //Selection
+                                    this.SelectionViewModel.SetValue((layer) =>
+                                    {
+                                        if (layer is IGeometryLayer geometryLayer)
+                                        {
+                                            geometryLayer.StrokeBrush.Points.RadialGradientCenter = center;
+                                            geometryLayer.StrokeBrush.Points.RadialGradientPoint = point2;
+                                        }
+                                    }, true);
+                                }
+                                break;
+                        }
 
                         this.ViewModel.Invalidate();//Invalidate
                     }
@@ -118,26 +127,34 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
                         //Brush
                         this.Point = point2;
 
-                        //Selection
-                        this.SelectionViewModel.SetValue((layer) =>
+                        //FillOrStroke
+                        switch (this.SelectionViewModel.FillOrStroke)
                         {
-                            if (layer is IGeometryLayer geometryLayer)
-                            {
-                                switch (this.SelectionViewModel.FillOrStroke)
+                            case FillOrStroke.Fill:
                                 {
-                                    case FillOrStroke.Fill:
+                                    //Selection
+                                    this.SelectionViewModel.SetValue((layer) =>
+                                    {
+                                        if (layer is IGeometryLayer geometryLayer)
                                         {
-                                            geometryLayer.FillBrush.RadialGradientPoint = point2;
+                                            geometryLayer.FillBrush.Points.RadialGradientPoint = point2;
                                         }
-                                        break;
-                                    case FillOrStroke.Stroke:
-                                        {
-                                            geometryLayer.StrokeBrush.RadialGradientPoint = point2;
-                                        }
-                                        break;
+                                    }, true);
                                 }
-                            }
-                        });
+                                break;
+                            case FillOrStroke.Stroke:
+                                {
+                                    //Selection
+                                    this.SelectionViewModel.SetValue((layer) =>
+                                    {
+                                        if (layer is IGeometryLayer geometryLayer)
+                                        {
+                                            geometryLayer.StrokeBrush.Points.RadialGradientPoint = point2;
+                                        }
+                                    }, true);
+                                }
+                                break;
+                        }
 
                         this.ViewModel.Invalidate();//Invalidate
                     }

@@ -15,6 +15,22 @@ namespace Retouch_Photo2.ViewModels.Selections
     public partial class SelectionViewModel : INotifyPropertyChanged
     {
 
+        /// <summary> Retouch_Photo2's the only color. </summary>
+        public Color Color
+        {
+            get => this.color;
+            set
+            {
+                this.color = value;
+                this.OnPropertyChanged(nameof(this.Color));//Notify 
+            }
+        }
+        private Color color = Color.FromArgb(255, 214, 214, 214);
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+
+
         /// <summary> Retouch_Photo2's the only fill-color. </summary>
         public Color FillColor
         {
@@ -33,6 +49,8 @@ namespace Retouch_Photo2.ViewModels.Selections
         /// <summary> ColorPicker of <see cref = "ViewModel.FillColor" />.  </summary>
         public HSVColorPickers.ColorPicker FillColorPicker;
 
+
+        ///////////////////////////////////////////////////////////////////////////////////////
 
 
         /// <summary> Retouch_Photo2's the only stroke-color. </summary>
@@ -53,5 +71,20 @@ namespace Retouch_Photo2.ViewModels.Selections
         /// <summary> ColorPicker of <see cref = "ViewModel.StrokeColor" />.  </summary>
         public HSVColorPickers.ColorPicker StrokeColorPicker;
 
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+
+
+        /// <summary> Retouch_Photo2's the only stroke-width. </summary>
+        public float StrokeWidth
+        {
+            get => this.strokeWidth;
+            set
+            {
+                this.strokeWidth = value;
+                this.OnPropertyChanged(nameof(this.StrokeWidth));//Notify 
+            }
+        }
+        private float strokeWidth = 1;
     }
 }

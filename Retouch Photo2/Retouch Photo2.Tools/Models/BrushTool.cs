@@ -1,11 +1,15 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Layers;
+using Retouch_Photo2.Layers.ILayer;
 using Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools;
 using Retouch_Photo2.Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.Tools.Controls;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
+using Retouch_Photo2.ViewModels.Tips;
 using System.Numerics;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
@@ -17,13 +21,14 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
 
         //Brush
         LinearGradientTool LinearGradientTool = new LinearGradientTool();
         RadialGradientTool RadialGradientTool = new RadialGradientTool();
         EllipticalGradientTool EllipticalGradientTool = new EllipticalGradientTool();
-          
- 
+
+
         //@Construct
         public BrushTool()
         {
@@ -32,14 +37,23 @@ namespace Retouch_Photo2.Tools.Models
             base.ShowIcon = new BrushControl();
             base.Page = new BrushPage();
         }
-               
 
-        //@Override
+
+        //@Override        
+        public override void ToolOnNavigatedTo()
+        {
+            //Brush
+            this.SelectionViewModel.SetBrushFormSingleMode(this.SelectionViewModel.FillOrStroke);
+        }
+
         public override void Starting(Vector2 point)
         {
         }
         public override void Started(Vector2 startingPoint, Vector2 point)
         {
+            //Selection
+            if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return;
+
             switch (this.SelectionViewModel.BrushType)
             {
                 case BrushType.None:
@@ -49,7 +63,7 @@ namespace Retouch_Photo2.Tools.Models
                         Vector2 startPoint = Vector2.Transform(startingPoint, inverseMatrix);
                         Vector2 endPoint = Vector2.Transform(point, inverseMatrix);
 
-                        this.SelectionViewModel.InitializeLinearGradient(startPoint, endPoint);//Initialize
+                        this.SelectionViewModel.SetBrushToLinearGradient(startPoint, endPoint);//Initialize
 
                         this.LinearGradientTool.Type = LinearGradientType.EndPoint;//LinearGradientTool
 
@@ -72,17 +86,20 @@ namespace Retouch_Photo2.Tools.Models
         }
         public override void Delta(Vector2 startingPoint, Vector2 point)
         {
-         switch (this.SelectionViewModel.BrushType)
+            //Selection
+            if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return;
+
+            switch (this.SelectionViewModel.BrushType)
             {
                 case BrushType.None:
                     break;
                 case BrushType.Color:
                     break;
                 case BrushType.LinearGradient:
-                        this.LinearGradientTool.Delta(startingPoint, point);//LinearGradientTool
+                    this.LinearGradientTool.Delta(startingPoint, point);//LinearGradientTool
                     break;
                 case BrushType.RadialGradient:
-                        this.RadialGradientTool.Delta(startingPoint, point);//RadialGradientTool
+                    this.RadialGradientTool.Delta(startingPoint, point);//RadialGradientTool
                     break;
                 case BrushType.EllipticalGradient:
                     this.EllipticalGradientTool.Delta(startingPoint, point);//EllipticalGradientTool
@@ -95,23 +112,16 @@ namespace Retouch_Photo2.Tools.Models
         }
         public override void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
-            switch (this.SelectionViewModel.BrushType)
+            //Selection
+            if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return;
+
+            this.LinearGradientTool.Type = LinearGradientType.None;//LinearGradientTool
+            this.RadialGradientTool.Type = RadialGradientType.None;//RadialGradientTool
+            this.EllipticalGradientTool.Type = EllipticalGradientType.None;//EllipticalGradientTool
+
+            if (isSingleStarted == false)
             {
-                case BrushType.None:
-                    return;
-                case BrushType.Color:
-                    return; 
-                case BrushType.LinearGradient:
-                    this.LinearGradientTool.Type = LinearGradientType.None;//LinearGradientTool
-                    return; 
-                case BrushType.RadialGradient:
-                    this.RadialGradientTool.Type= RadialGradientType.None;//RadialGradientTool
-                    return; 
-                case BrushType.EllipticalGradient:
-                    this.EllipticalGradientTool.Type = EllipticalGradientType.None;//EllipticalGradientTool
-                    return; 
-                case BrushType.Image:
-                    return; 
+                this.TipViewModel.TransformerTool.SelectLayer(startingPoint);//TransformerTool
             }
         }
 
@@ -124,13 +134,13 @@ namespace Retouch_Photo2.Tools.Models
                 case BrushType.Color:
                     break;
                 case BrushType.LinearGradient:
-                        this.LinearGradientTool.Draw(ds);//LinearGradientTool
+                    this.LinearGradientTool.Draw(ds);//LinearGradientTool
                     break;
                 case BrushType.RadialGradient:
                     this.RadialGradientTool.Draw(ds);//RadialGradientTool
                     break;
                 case BrushType.EllipticalGradient:
-                        this.EllipticalGradientTool.Draw(ds);//EllipticalGradientTool
+                    this.EllipticalGradientTool.Draw(ds);//EllipticalGradientTool
                     break;
                 case BrushType.Image:
                     break;

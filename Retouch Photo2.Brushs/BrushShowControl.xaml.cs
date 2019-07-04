@@ -96,12 +96,6 @@ namespace Retouch_Photo2.Brushs
             };
             this.CanvasControl.Draw += (s, args) =>
             {
-                if (this.Array==null)
-                {
-                    this.DrawNone(args.DrawingSession, this.CanvasWidth, this.CanvasHeight);
-                    return;
-                }
-
                 switch (this.Type)
                 {
                     case BrushType.None:

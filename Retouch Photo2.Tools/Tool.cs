@@ -57,7 +57,7 @@ namespace Retouch_Photo2.Tools
         public abstract void Draw(CanvasDrawingSession ds);
 
 
-        //@Override
+        //@Virtual
         /// <summary> The current tool becomes the active tool. </summary>
         public virtual void ToolOnNavigatedTo() { }
         /// <summary> The current page does not become an active page. </summary>

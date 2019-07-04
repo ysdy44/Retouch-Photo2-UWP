@@ -1,5 +1,4 @@
 ﻿using FanKit.Transformers;
-using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Layers.ILayer;
 using Retouch_Photo2.Tools.Models;
@@ -7,8 +6,9 @@ using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
 using System.Numerics;
-using Windows.UI;
+using System.Linq;
 using Windows.UI.Xaml.Controls;
+using Retouch_Photo2.Layers;
 
 namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
 {
@@ -26,6 +26,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
         //@Converter
         private int FillOrStrokeToIndexConverter(FillOrStroke fillOrStroke) => (int)fillOrStroke;
         private int BrushTypeToIndexConverter(BrushType brushType) => (int)brushType;
+        private bool SelectionModeToBoolConverter(ListViewSelectionMode selectionMode) => selectionMode !=  ListViewSelectionMode.None;
 
 
         //@Construct
@@ -40,39 +41,18 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                 this.FillComboBoxItem.SetValue(ComboBox.SelectedIndexProperty, (int)FillOrStroke.Fill);
 
                 //Brush
-                this.SelectionViewModel.FillOrStroke = FillOrStroke.Fill;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    if (layer is IGeometryLayer geometryLayer)
-                    {
-                        //Brush
-                        this.SelectionViewModel.BrushType = geometryLayer.FillBrush.Type;
-                        this.SelectionViewModel.SetBrush(geometryLayer.FillBrush);
-                    }
-                });
+                this.SelectionViewModel.SetBrushFormSingleMode(FillOrStroke.Fill);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
+
             this.StrokeComboBoxItem.Tapped += (s, e) =>
             {
                 //ComboBox
-                this.StrokeComboBoxItem.SetValue(ComboBox.SelectedIndexProperty, (int)FillOrStroke.Stroke);
+                this.FillComboBoxItem.SetValue(ComboBox.SelectedIndexProperty, (int)FillOrStroke.Stroke);
 
                 //Brush
-                this.SelectionViewModel.FillOrStroke = FillOrStroke.Stroke;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    if (layer is IGeometryLayer geometryLayer)
-                    {
-                        //Brush
-                        this.SelectionViewModel.BrushType = geometryLayer.StrokeBrush.Type;
-                        this.SelectionViewModel.SetBrush(geometryLayer.StrokeBrush);
-                    }
-                });
+                this.SelectionViewModel.SetBrushFormSingleMode(FillOrStroke.Stroke);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -88,25 +68,38 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                 //Brush
                 this.SelectionViewModel.BrushType = BrushType.None;
 
-                //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                //FillOrStroke
+                switch (this.SelectionViewModel.FillOrStroke)
                 {
-                    if (layer is IGeometryLayer geometryLayer)
-                    {
-                        switch (this.SelectionViewModel.FillOrStroke)
+                    case FillOrStroke.Fill:
                         {
-                            case FillOrStroke.Fill:
-                                geometryLayer.FillBrush.Type = BrushType.None;
-                                break;
-                            case FillOrStroke.Stroke:
-                                geometryLayer.StrokeBrush.Type = BrushType.None;
-                                break;
+                            //Selection
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                if (layer is IGeometryLayer geometryLayer)
+                                {
+                                    geometryLayer.FillBrush.Type = BrushType.None;
+                                }
+                            }, true);
                         }
-                    }
-                });
+                        break;
+                    case FillOrStroke.Stroke:
+                        {
+                            //Selection
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                if (layer is IGeometryLayer geometryLayer)
+                                {
+                                    geometryLayer.StrokeBrush.Type = BrushType.None;
+                                }
+                            }, true);
+                        }
+                        break;
+                }
 
                 this.ViewModel.Invalidate();//Invalidate
             };
+
             this.ColorComboBoxItem.Tapped += (s, e) =>
             {
                 //ComboBox
@@ -116,35 +109,48 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                 this.SelectionViewModel.BrushType = BrushType.Color;
                 switch (this.SelectionViewModel.FillOrStroke)
                 {
-                    case FillOrStroke.Fill: this.SelectionViewModel.BrushColor = this.SelectionViewModel.FillColor; break;
-                    case FillOrStroke.Stroke: this.SelectionViewModel.BrushColor = this.SelectionViewModel.StrokeColor; break;
+                    case FillOrStroke.Fill:
+                        this.SelectionViewModel.Color = this.SelectionViewModel.FillColor;
+                        break;
+                    case FillOrStroke.Stroke:
+                        this.SelectionViewModel.Color = this.SelectionViewModel.StrokeColor;
+                        break;
                 }
 
-                //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                //FillOrStroke
+                switch (this.SelectionViewModel.FillOrStroke)
                 {
-                    if (layer is IGeometryLayer geometryLayer)
-                    {
-                        switch (this.SelectionViewModel.FillOrStroke)
+                    case FillOrStroke.Fill:
                         {
-                            case FillOrStroke.Fill:
+                            //Selection
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                if (layer is IGeometryLayer geometryLayer)
                                 {
                                     geometryLayer.FillBrush.Type = BrushType.Color;
                                     geometryLayer.FillBrush.Color = this.SelectionViewModel.FillColor;
                                 }
-                                break;
-                            case FillOrStroke.Stroke:
+                            }, true);
+                        }
+                        break;
+                    case FillOrStroke.Stroke:
+                        {
+                            //Selection
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                if (layer is IGeometryLayer geometryLayer)
                                 {
                                     geometryLayer.StrokeBrush.Type = BrushType.Color;
-                                    geometryLayer.FillBrush.Color = this.SelectionViewModel.StrokeColor;
+                                    geometryLayer.StrokeBrush.Color = this.SelectionViewModel.StrokeColor;
                                 }
-                                break;
+                            }, true);
                         }
-                    }
-                });
+                        break;
+                }
 
                 this.ViewModel.Invalidate();//Invalidate
             };
+
             this.LinearGradientComboBoxItem.Tapped += (s, e) =>
             {
                 //ComboBox
@@ -154,10 +160,11 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                 Vector2 startPoint = transformer.CenterTop;
                 Vector2 endPoint = transformer.CenterBottom;
 
-                this.SelectionViewModel.InitializeLinearGradient(startPoint, endPoint);//Initialize
+                this.SelectionViewModel.SetBrushToLinearGradient(startPoint, endPoint);//Initialize
 
                 this.ViewModel.Invalidate();//Invalidate
             };
+
             this.RadialGradientComboBoxItem.Tapped += (s, e) =>
             {
                 //ComboBox
@@ -170,38 +177,47 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                 //Brush
                 this.SelectionViewModel.BrushType = BrushType.RadialGradient;
                 this.SelectionViewModel.BrushArray = Brush.GetNewArray();
-                this.SelectionViewModel.BrushRadialGradientCenter = center;
-                this.SelectionViewModel.BrushRadialGradientPoint = point;
+                this.SelectionViewModel.BrushPoints.RadialGradientCenter = center;
+                this.SelectionViewModel.BrushPoints.RadialGradientPoint = point;
 
-                //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                //FillOrStroke
+                switch (this.SelectionViewModel.FillOrStroke)
                 {
-                    if (layer is IGeometryLayer geometryLayer)
-                    {
-                        switch (this.SelectionViewModel.FillOrStroke)
+                    case FillOrStroke.Fill:
                         {
-                            case FillOrStroke.Fill:
+                            //Selection
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                if (layer is IGeometryLayer geometryLayer)
                                 {
                                     geometryLayer.FillBrush.Type = BrushType.RadialGradient;
                                     geometryLayer.FillBrush.Array = Brush.GetNewArray();
-                                    geometryLayer.FillBrush.RadialGradientCenter = center;
-                                    geometryLayer.FillBrush.RadialGradientPoint = point;
+                                    geometryLayer.FillBrush.Points.RadialGradientCenter = center;
+                                    geometryLayer.FillBrush.Points.RadialGradientPoint = point;
                                 }
-                                break;
-                            case FillOrStroke.Stroke:
+                            }, true);
+                        }
+                        break;
+                    case FillOrStroke.Stroke:
+                        {
+                            //Selection
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                if (layer is IGeometryLayer geometryLayer)
                                 {
                                     geometryLayer.StrokeBrush.Type = BrushType.RadialGradient;
                                     geometryLayer.StrokeBrush.Array = Brush.GetNewArray();
-                                    geometryLayer.StrokeBrush.RadialGradientCenter = center;
-                                    geometryLayer.StrokeBrush.RadialGradientPoint = point;
+                                    geometryLayer.StrokeBrush.Points.RadialGradientCenter = center;
+                                    geometryLayer.StrokeBrush.Points.RadialGradientPoint = point;
                                 }
-                                break;
+                            }, true);
                         }
-                    }
-                });
+                        break;
+                }
 
                 this.ViewModel.Invalidate();//Invalidate
             };
+
             this.EllipticalGradientComboBoxItem.Tapped += (s, e) =>
             {
                 //ComboBox
@@ -215,41 +231,50 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                 //Brush
                 this.SelectionViewModel.BrushType = BrushType.EllipticalGradient;
                 this.SelectionViewModel.BrushArray = Brush.GetNewArray();
-                this.SelectionViewModel.BrushEllipticalGradientCenter = center;
-                this.SelectionViewModel.BrushEllipticalGradientXPoint = xPoint;
-                this.SelectionViewModel.BrushEllipticalGradientYPoint = yPoint;
+                this.SelectionViewModel.BrushPoints.EllipticalGradientCenter = center;
+                this.SelectionViewModel.BrushPoints.EllipticalGradientXPoint = xPoint;
+                this.SelectionViewModel.BrushPoints.EllipticalGradientYPoint = yPoint;
 
-                //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                //FillOrStroke
+                switch (this.SelectionViewModel.FillOrStroke)
                 {
-                    if (layer is IGeometryLayer geometryLayer)
-                    {
-                        switch (this.SelectionViewModel.FillOrStroke)
-                        {
-                            case FillOrStroke.Fill:
+                    case FillOrStroke.Fill:
+                        {     
+                            //Selection
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                if (layer is IGeometryLayer geometryLayer)
                                 {
                                     geometryLayer.FillBrush.Type = BrushType.EllipticalGradient;
                                     geometryLayer.FillBrush.Array = Brush.GetNewArray();
-                                    geometryLayer.FillBrush.EllipticalGradientCenter = center;
-                                    geometryLayer.FillBrush.EllipticalGradientXPoint = xPoint;
-                                    geometryLayer.FillBrush.EllipticalGradientYPoint = yPoint;
+                                    geometryLayer.FillBrush.Points.EllipticalGradientCenter = center;
+                                    geometryLayer.FillBrush.Points.EllipticalGradientXPoint = xPoint;
+                                    geometryLayer.FillBrush.Points.EllipticalGradientYPoint = yPoint;
                                 }
-                                break;
-                            case FillOrStroke.Stroke:
+                            }, true);
+                        }
+                        break;
+                    case FillOrStroke.Stroke:
+                        {   
+                            //Selection
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                if (layer is IGeometryLayer geometryLayer)
                                 {
                                     geometryLayer.StrokeBrush.Type = BrushType.EllipticalGradient;
                                     geometryLayer.StrokeBrush.Array = Brush.GetNewArray();
-                                    geometryLayer.StrokeBrush.EllipticalGradientCenter = center;
-                                    geometryLayer.StrokeBrush.EllipticalGradientXPoint = xPoint;
-                                    geometryLayer.StrokeBrush.EllipticalGradientYPoint = yPoint;
+                                    geometryLayer.StrokeBrush.Points.EllipticalGradientCenter = center;
+                                    geometryLayer.StrokeBrush.Points.EllipticalGradientXPoint = xPoint;
+                                    geometryLayer.StrokeBrush.Points.EllipticalGradientYPoint = yPoint;
                                 }
-                                break;
+                            }, true);
                         }
-                    }
-                });
+                        break;
+                }
 
                 this.ViewModel.Invalidate();//Invalidate
             };
+
             this.ImageComboBoxItem.Tapped += (s, e) =>
             {
                 //BrushType
@@ -257,6 +282,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
 
                 this.ViewModel.Invalidate();//Invalidate
             };
+
 
 
             //Show
@@ -268,7 +294,15 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                         break;
                     case BrushType.Color:
                         {
-                            this.ColorPicker.Color = this.SelectionViewModel.BrushColor;
+                            switch (this.SelectionViewModel.FillOrStroke)
+                            {
+                                case FillOrStroke.Fill:
+                                    this.ColorPicker.Color = this.SelectionViewModel.FillColor;
+                                    break;
+                                case FillOrStroke.Stroke:
+                                    this.ColorPicker.Color = this.SelectionViewModel.StrokeColor;
+                                    break;
+                            }
                             this.ColorFlyout.ShowAt(this.ShowControl);
                         }
                         break;
@@ -288,32 +322,35 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
             };
             this.ColorPicker.ColorChange += (s, value) =>
             {
+                this.SelectionViewModel.Color = value;
+
                 //Brush
                 this.SelectionViewModel.BrushType = BrushType.Color;
-                this.SelectionViewModel.BrushColor = value;
 
-                //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                //FillOrStroke
+                switch (this.SelectionViewModel.FillOrStroke)
                 {
-                    if (layer is IGeometryLayer geometryLayer)
-                    {
-                        switch (this.SelectionViewModel.FillOrStroke)
+                    case FillOrStroke.Fill:
                         {
-                            case FillOrStroke.Fill:
-                                {
-                                    geometryLayer.FillBrush.Type = BrushType.Color;
-                                    geometryLayer.FillBrush.Color = value;
-                                }
-                                break;
-                            case FillOrStroke.Stroke:
-                                {
-                                    geometryLayer.StrokeBrush.Type = BrushType.Color;
-                                    geometryLayer.StrokeBrush.Color = value;
-                                }
-                                break;
+                            //Selection
+                            this.SelectionViewModel.FillColor = value;
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                layer.SetFillColor(value);
+                            }, true);
                         }
-                    }
-                });
+                        break;
+                    case FillOrStroke.Stroke:
+                        {
+                            //Selection
+                            this.SelectionViewModel.StrokeColor = value;
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                layer.SetStrokeColor(value);
+                            }, true);
+                        }
+                        break;
+                }
 
                 this.ViewModel.Invalidate();//Invalidate
             };

@@ -7,6 +7,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.Toolkit.Uwp.UI.Extensions;
+using Retouch_Photo2.Brushs;
 
 namespace Retouch_Photo2.Pages
 {
@@ -35,12 +36,45 @@ namespace Retouch_Photo2.Pages
             this.ColorButton.Tapped += (s, e) => this.TipViewModel.ColorMenuLayoutState = MenuLayoutButton.GetState(this.TipViewModel.ColorMenuLayoutState);
             this.ColorPicker.ColorChange += (s, value) =>
             {
-                //Selection
-                this.SelectionViewModel.FillColor = value;
-                this.SelectionViewModel.SetValue((layer) =>
+                this.SelectionViewModel.Color = value;
+
+                //FillOrStroke
+                switch (this.SelectionViewModel.FillOrStroke)
                 {
-                    layer.SetFillColor(value);
-                });
+                    case FillOrStroke.Fill:
+                        this.SelectionViewModel.FillColor = value;
+                        break;
+                    case FillOrStroke.Stroke:
+                        this.SelectionViewModel.StrokeColor = value;
+                        break;
+                }
+
+                if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return;
+
+                this.SelectionViewModel.BrushType = BrushType.Color;
+
+                //FillOrStroke
+                switch (this.SelectionViewModel.FillOrStroke)
+                {
+                    case FillOrStroke.Fill:
+                        {
+                            //Selection
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                layer.SetFillColor(value);
+                            }, true);
+                        }
+                        break;
+                    case FillOrStroke.Stroke:
+                        {
+                            //Selection
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                layer.SetStrokeColor(value);
+                            }, true);
+                        }
+                        break;
+                }
 
                 this.ViewModel.Invalidate();//Invalidate
             };          

@@ -22,6 +22,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
         EndPoint,
     }
 
+
     /// <summary>
     /// <see cref="BrushTool"/>'s BrushLinearGradientTool.
     /// </summary>
@@ -33,14 +34,14 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
 
 
         //@Content
-        Vector2 StartPoint { get => this.SelectionViewModel.BrushLinearGradientStartPoint; set => this.SelectionViewModel.BrushLinearGradientStartPoint = value; }
-        Vector2 EndPoint { get => this.SelectionViewModel.BrushLinearGradientEndPoint; set => this.SelectionViewModel.BrushLinearGradientEndPoint = value; }
+        Vector2 StartPoint { get => this.SelectionViewModel.BrushPoints.LinearGradientStartPoint; set => this.SelectionViewModel.BrushPoints.LinearGradientStartPoint = value; }
+        Vector2 EndPoint { get => this.SelectionViewModel.BrushPoints.LinearGradientEndPoint; set => this.SelectionViewModel.BrushPoints.LinearGradientEndPoint = value; }
 
 
         /// <summary> Type of <see cref="LinearGradientTool">. </summary>
         public LinearGradientType Type = LinearGradientType.None;
-        
-        
+
+
         //@Override
         public void Started(Vector2 startingPoint, Vector2 point)
         {
@@ -77,22 +78,34 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
                         //Brush
                         this.StartPoint = startPoint;
 
-                        //Selection
-                        this.SelectionViewModel.SetValue((layer) =>
+                        //FillOrStroke
+                        switch (this.SelectionViewModel.FillOrStroke)
                         {
-                            if (layer is IGeometryLayer geometryLayer)
-                            {
-                                switch (this.SelectionViewModel.FillOrStroke)
+                            case FillOrStroke.Fill:
                                 {
-                                    case FillOrStroke.Fill:
-                                        geometryLayer.FillBrush.LinearGradientStartPoint = startPoint;
-                                        break;
-                                    case FillOrStroke.Stroke:
-                                        geometryLayer.StrokeBrush.LinearGradientStartPoint = startPoint;
-                                        break;
+                                    //Selection
+                                    this.SelectionViewModel.SetValue((layer) =>
+                                    {
+                                        if (layer is IGeometryLayer geometryLayer)
+                                        {
+                                            geometryLayer.FillBrush.Points.LinearGradientStartPoint = startPoint;
+                                        }
+                                    }, true);
                                 }
-                            }
-                        });
+                                break;
+                            case FillOrStroke.Stroke:
+                                {
+                                    //Selection
+                                    this.SelectionViewModel.SetValue((layer) =>
+                                    {
+                                        if (layer is IGeometryLayer geometryLayer)
+                                        {
+                                            geometryLayer.StrokeBrush.Points.LinearGradientStartPoint = startPoint;
+                                        }
+                                    }, true);
+                                }
+                                break;
+                        }
 
                         this.ViewModel.Invalidate();//Invalidate
                     }
@@ -105,22 +118,34 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
                         //Brush
                         this.EndPoint = endPoint;
 
-                        //Selection
-                        this.SelectionViewModel.SetValue((layer) =>
+                        //FillOrStroke
+                        switch (this.SelectionViewModel.FillOrStroke)
                         {
-                            if (layer is IGeometryLayer geometryLayer)
-                            {
-                                switch (this.SelectionViewModel.FillOrStroke)
+                            case FillOrStroke.Fill:
                                 {
-                                    case FillOrStroke.Fill:
-                                        geometryLayer.FillBrush.LinearGradientEndPoint = endPoint;
-                                        break;
-                                    case FillOrStroke.Stroke:
-                                        geometryLayer.StrokeBrush.LinearGradientEndPoint = endPoint;
-                                        break;
+                                    //Selection
+                                    this.SelectionViewModel.SetValue((layer) =>
+                                    {
+                                        if (layer is IGeometryLayer geometryLayer)
+                                        {
+                                            geometryLayer.FillBrush.Points.LinearGradientEndPoint = endPoint;
+                                        }
+                                    }, true);
                                 }
-                            }
-                        });
+                                break;
+                            case FillOrStroke.Stroke:
+                                {
+                                    //Selection
+                                    this.SelectionViewModel.SetValue((layer) =>
+                                    {
+                                        if (layer is IGeometryLayer geometryLayer)
+                                        {
+                                            geometryLayer.StrokeBrush.Points.LinearGradientEndPoint = endPoint;
+                                        }
+                                    }, true);
+                                }
+                                break;
+                        }
 
                         this.ViewModel.Invalidate();//Invalidate
                     }

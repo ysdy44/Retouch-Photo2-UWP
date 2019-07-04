@@ -144,6 +144,9 @@
     <Compile Include="Pages\DrawPages\StrokeColorEllipseControl.xaml.cs">
       <DependentUpon>StrokeColorEllipseControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DrawPages\StrokeWidthPicker.xaml.cs">
+      <DependentUpon>StrokeWidthPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -620,6 +623,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\DrawPages\StrokeWidthPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -703,10 +710,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FanKit.Transformers">
-      <Version>1.1.2</Version>
+      <Version>1.1.4</Version>
     </PackageReference>
     <PackageReference Include="HSVColorPickers">
-      <Version>1.1.7</Version>
+      <Version>1.1.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.5</Version>

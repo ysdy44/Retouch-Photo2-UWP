@@ -28,8 +28,5 @@
         <Border Height="50" Background="{ThemeResource AppText}"  >
             <TextBlock Text="AppText" Style="{StaticResource AppTextBlock}" />
         </Border>
-        <Border Height="50" Background="{ThemeResource AppLinearBrush}"  >
-            <TextBlock Text="AppLinearBrush" Style="{StaticResource AppTextBlock}" />
-        </Border>
     </StackPanel>
 </Page>

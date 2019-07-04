@@ -93,8 +93,7 @@ namespace Retouch_Photo2.Controls
                 con.CanvasControl.Invalidate();
             }
         }));
-
-
+        
 
         #endregion
 
@@ -178,6 +177,16 @@ namespace Retouch_Photo2.Controls
                 {
                     if (this.MezzanineViewModel.Layer == null)
                     {
+                        Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+
+                        foreach (Layer layer in this.ViewModel.Layers)
+                        {
+                            if (layer.IsChecked)
+                            {
+                                layer.DrawBound(sender, args.DrawingSession, matrix, this.ViewModel.AccentColor);
+                            }
+                        }
+
                         //Tool
                         this.TipViewModel.Tool.Draw(args.DrawingSession);
                     }
@@ -185,7 +194,7 @@ namespace Retouch_Photo2.Controls
                     {
                         //Mezzanine 
                         Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                        args.DrawingSession.DrawBound(this.MezzanineViewModel.Layer.TransformerMatrix.Destination, matrix, this.AccentColor);
+                        this.MezzanineViewModel.Layer.DrawBound(sender, args.DrawingSession, matrix, this.AccentColor);
                     }
                 }
 

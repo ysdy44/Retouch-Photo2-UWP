@@ -1,4 +1,5 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Controls;
 using Retouch_Photo2.Layers.ILayer;
@@ -27,16 +28,22 @@ namespace Retouch_Photo2.Layers.Models
                 Name=base.Name,
                 Opacity= base.Opacity,
                 BlendType= base.BlendType,
-                TransformerMatrix= base.TransformerMatrix,
 
                 IsChecked = base.IsChecked,
                 Visibility = base.Visibility,
 
+                TransformerMatrix = new TransformerMatrix
+                {
+                    Source = base.TransformerMatrix.Source,
+                    Destination = base.TransformerMatrix.Destination,
+                    DisabledRadian = base.TransformerMatrix.DisabledRadian,
+                },
+
                 FillBrush = base.FillBrush,
                 StrokeBrush = base.StrokeBrush,
             };
-        }         
-
+        }
+        
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
             /// <summary>

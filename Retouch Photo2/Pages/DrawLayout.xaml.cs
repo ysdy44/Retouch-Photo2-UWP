@@ -5,18 +5,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Pages
 {
-    /// <summary> PhoneState of <see cref="DrawLayoutState"/>. </summary>
-    public enum PhoneState
-    {
-        /// <summary> Hide left and right borders. </summary>
-        Hided,
-        /// <summary> Show left border. </summary>
-        ShowLeft,
-        /// <summary> Show right border. </summary>
-        ShowRight,
-    }
-
-    /// <summary> State of <see cref="DrawLayout"/>. </summary>
+    /// <summary> 
+    /// State of <see cref="DrawLayout"/>. 
+    /// </summary>
     public enum DrawLayoutState
     {
         /// <summary> Normal. </summary>
@@ -38,6 +29,55 @@ namespace Retouch_Photo2.Pages
         /// <summary> Person computer. </summary>
         PC,
     }
+
+
+    /// <summary>
+    /// Manager of <see cref="DrawLayout"/>. 
+    /// </summary>
+    public class DrawLayoutStateManager
+    {
+        /// <summary> 
+        /// PhoneState of <see cref="DrawLayoutStateManager"/>. 
+        /// </summary>
+        public enum DrawLayoutPhoneState
+        {
+            /// <summary> Hide left and right borders. </summary>
+            Hided,
+            /// <summary> Show left border. </summary>
+            ShowLeft,
+            /// <summary> Show right border. </summary>
+            ShowRight,
+        }
+
+        /// <summary> <see cref="DrawLayout.IsFullScreen"/>. </summary>
+        public bool IsFullScreen;
+        /// <summary> <see cref="DrawLayout.Width"/>. </summary>
+        public double Width;
+        /// <summary> <see cref="DrawLayout.PhoneState"/>. </summary>
+        public DrawLayoutPhoneState PhoneState;
+
+        /// <summary>
+        /// Return status based on propertys.
+        /// </summary>
+        /// <returns> state </returns>
+        public DrawLayoutState GetState()
+        {
+            if (this.IsFullScreen) return DrawLayoutState.FullScreen;
+
+            if (this.Width > 900.0) return DrawLayoutState.PC;
+            if (this.Width > 600.0) return DrawLayoutState.Pad;
+
+            switch (this.PhoneState)
+            {
+                case DrawLayoutPhoneState.Hided: return DrawLayoutState.Phone;
+                case DrawLayoutPhoneState.ShowLeft: return DrawLayoutState.PhoneShowLeft;
+                case DrawLayoutPhoneState.ShowRight: return DrawLayoutState.PhoneShowRight;
+            }
+
+            return DrawLayoutState.None;
+        }
+    }
+
 
     /// <summary> <see cref = "DrawPage" />'s layout. </summary>
     public sealed partial class DrawLayout : UserControl
@@ -79,7 +119,7 @@ namespace Retouch_Photo2.Pages
 
         #region DependencyProperty
 
-        
+
         /// <summary> Sets or Gets the page layout is full screen. </summary>
         public bool IsFullScreen
         {
@@ -93,27 +133,8 @@ namespace Retouch_Photo2.Pages
 
             if (e.NewValue is bool value)
             {
-                con.isFullScreen = value;
-                con.State = con.GetState();//State
-            }
-        }));
-
-
-        /// <summary> Gets or sets <see cref = "DrawLayout" />'s phone state. </summary>
-        public PhoneState PhoneState
-        {
-            get { return (PhoneState)GetValue(PhoneStateProperty); }
-            set { SetValue(PhoneStateProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "DrawLayout.Tool" /> dependency property. </summary>
-        public static readonly DependencyProperty PhoneStateProperty = DependencyProperty.Register(nameof(PhoneState), typeof(PhoneState), typeof(DrawLayout), new PropertyMetadata(PhoneState.Hided, (sender, e) =>
-        {
-            DrawLayout con = (DrawLayout)sender;
-
-            if (e.NewValue is PhoneState value)
-            {
-                con.phoneState = value;
-                con.State = con.GetState();//State
+                con.Manager.IsFullScreen = value;
+                con.State = con.Manager.GetState();//State
             }
         }));
 
@@ -142,10 +163,10 @@ namespace Retouch_Photo2.Pages
                 {
                     if (newTool.Type != oldTool.Type)
                     {
-                        if (con.phoneState != PhoneState.Hided)
+                        if (con.Manager.PhoneState != DrawLayoutStateManager.DrawLayoutPhoneState.Hided)
                         {
-                            con.phoneState = PhoneState.Hided;
-                            con.State = con.GetState();//State
+                            con.Manager.PhoneState = DrawLayoutStateManager.DrawLayoutPhoneState.Hided;
+                            con.State = con.Manager.GetState();//State
                         }
                     }
                 }
@@ -156,6 +177,8 @@ namespace Retouch_Photo2.Pages
         #endregion
 
 
+        /// <summary> Manager of <see cref="DrawLayout"/>. </summary>
+        DrawLayoutStateManager Manager = new DrawLayoutStateManager();
         /// <summary> State of <see cref="DrawLayout"/>. </summary>
         public DrawLayoutState State
         {
@@ -195,27 +218,6 @@ namespace Retouch_Photo2.Pages
         }
         private DrawLayoutState state;
 
-        bool isFullScreen;
-        double sizeWidth;
-        PhoneState phoneState;
-
-        private DrawLayoutState GetState()
-        {
-            if (this.isFullScreen) return DrawLayoutState.FullScreen;
-
-            if (this.sizeWidth > 900.0) return DrawLayoutState.PC;
-            if (this.sizeWidth > 600.0) return DrawLayoutState.Pad;
-
-            switch (this.phoneState)
-            {
-                case PhoneState.Hided: return DrawLayoutState.Phone;
-                case PhoneState.ShowLeft: return DrawLayoutState.PhoneShowLeft;
-                case PhoneState.ShowRight: return DrawLayoutState.PhoneShowRight;
-            }
-
-            return DrawLayoutState.None;
-        }
-
 
         //@Construct
         public DrawLayout()
@@ -225,30 +227,48 @@ namespace Retouch_Photo2.Pages
             this.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
-                this.sizeWidth = e.NewSize.Width;
-                this.State = this.GetState(); //State
+                this.Manager.Width = e.NewSize.Width;
+                this.State = this.Manager.GetState(); //State
             };
-            
+
             //FullScreen
             this.UnFullScreenButton.Tapped += (s, e) => this.IsFullScreen = false;
             this.FullScreenButton.Tapped += (s, e) => this.IsFullScreen = true;
 
             //DismissOverlay
-            this.IconDismissOverlay.Tapped += (s, e) => this.PhoneState = PhoneState.Hided;
-            
+            this.IconDismissOverlay.Tapped += (s, e) =>
+            {
+                this.Manager.PhoneState = DrawLayoutStateManager.DrawLayoutPhoneState.Hided;
+                this.State = this.Manager.GetState();//State
+            };
+
             //IconLeft
-            this.IconLeftGrid.Tapped += (s, e) => this.PhoneState = PhoneState.ShowLeft;
+            this.IconLeftGrid.Tapped += (s, e) =>
+            {
+                this.Manager.PhoneState = DrawLayoutStateManager.DrawLayoutPhoneState.ShowLeft;
+                this.State = this.Manager.GetState();//State
+            };
             this.IconLeftGrid.PointerEntered += (s, e) =>
             {
-                if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)                
-                    this.PhoneState = PhoneState.ShowLeft;                
+                if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
+                {
+                    this.Manager.PhoneState = DrawLayoutStateManager.DrawLayoutPhoneState.ShowLeft;
+                    this.State = this.Manager.GetState();//State
+                }
             };
             //IconRight
-            this.IconRightGrid.Tapped += (s, e) => this.PhoneState = PhoneState.ShowRight;
+            this.IconRightGrid.Tapped += (s, e) =>
+            {
+                this.Manager.PhoneState = DrawLayoutStateManager.DrawLayoutPhoneState.ShowRight;
+                this.State = this.Manager.GetState();//State
+            };
             this.IconRightGrid.PointerEntered += (s, e) =>
             {
-                if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)                
-                    this.PhoneState = PhoneState.ShowRight;                
+                if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
+                {
+                    this.Manager.PhoneState = DrawLayoutStateManager.DrawLayoutPhoneState.ShowRight;
+                    this.State = this.Manager.GetState();//State
+                }
             };
         }
     }

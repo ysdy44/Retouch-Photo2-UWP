@@ -84,9 +84,20 @@ namespace Retouch_Photo2.ViewModels.Selections
             this.SetGeometryLayer(layer);
 
 
+            //////////////////////////
+
+
             if (layer.GetFillColor() is Color color)
             {
-                 //App.ViewModel.FillColor = color;
+                switch (this.FillOrStroke)
+                {
+                    case Brushs.FillOrStroke.Fill:
+                        this.FillColor = color;
+                        break;
+                    case Brushs.FillOrStroke.Stroke:
+                        this.StrokeColor = color;
+                        break;
+                }
             }
         }
 

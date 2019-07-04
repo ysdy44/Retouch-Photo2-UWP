@@ -8,6 +8,7 @@ using System.Linq;
 using System.Numerics;
 using Windows.Graphics.Effects;
 using Windows.UI.Xaml;
+using Windows.UI;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -39,15 +40,21 @@ namespace Retouch_Photo2.Layers.Models
                 Name = base.Name,
                 Opacity = base.Opacity,
                 BlendType = base.BlendType,
-                TransformerMatrix = base.TransformerMatrix,
 
                 IsChecked = base.IsChecked,
                 Visibility = base.Visibility,
 
+                TransformerMatrix = new TransformerMatrix
+                {
+                    Source = base.TransformerMatrix.Source,
+                    Destination = base.TransformerMatrix.Destination,
+                    DisabledRadian = base.TransformerMatrix.DisabledRadian,
+                },
+
                 Children = children,
             };
         }
-
+        
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         { 
             CanvasCommandList command = new CanvasCommandList(resourceCreator);

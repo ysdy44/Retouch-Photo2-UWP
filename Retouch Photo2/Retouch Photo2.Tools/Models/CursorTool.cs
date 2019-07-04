@@ -41,7 +41,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.isBox = false; //Box
 
-            if (this.TipViewModel.TransformerToolBase.Starting(point)) return; //TransformerToolBase
+            if (this.TipViewModel.TransformerTool.Starting(point)) return; //TransformerToolBase
 
             this.isBox = true; //Box
         }
@@ -55,7 +55,7 @@ namespace Retouch_Photo2.Tools.Models
                 return;
             }
 
-            this.TipViewModel.TransformerToolBase.Started(startingPoint, false);//TransformerToolBase
+            this.TipViewModel.TransformerTool.Started(startingPoint, false);//TransformerToolBase
         }
         public override void Delta(Vector2 startingPoint, Vector2 point)
         {
@@ -67,7 +67,7 @@ namespace Retouch_Photo2.Tools.Models
                 return;
             }
 
-            this.TipViewModel.TransformerToolBase.Delta(startingPoint, point); //TransformerToolBase
+            this.TipViewModel.TransformerTool.Delta(startingPoint, point); //TransformerToolBase
         }
         public override void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
@@ -85,7 +85,7 @@ namespace Retouch_Photo2.Tools.Models
                 }
             }
 
-            this.TipViewModel.TransformerToolBase.Complete(isSingleStarted); //TransformerToolBase
+            this.TipViewModel.TransformerTool.Complete(isSingleStarted); //TransformerToolBase
         }
 
 
@@ -98,7 +98,7 @@ namespace Retouch_Photo2.Tools.Models
                 return;
             }
 
-            this.TipViewModel.TransformerToolBase.Draw(ds);//TransformerToolBase
+            this.TipViewModel.TransformerTool.Draw(ds);//TransformerToolBase
         }
     }
 }

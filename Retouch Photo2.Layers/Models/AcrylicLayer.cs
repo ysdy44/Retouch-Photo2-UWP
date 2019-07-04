@@ -1,4 +1,5 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Layers.Controls;
 using System.Numerics;
@@ -32,10 +33,16 @@ namespace Retouch_Photo2.Layers.Models
                 Name = base.Name,
                 Opacity = base.Opacity,
                 BlendType = base.BlendType,
-                TransformerMatrix = base.TransformerMatrix,
 
                 IsChecked = base.IsChecked,
                 Visibility = base.Visibility,
+
+                TransformerMatrix = new TransformerMatrix
+                {
+                    Source = base.TransformerMatrix.Source,
+                    Destination = base.TransformerMatrix.Destination,
+                    DisabledRadian = base.TransformerMatrix.DisabledRadian,
+                },
 
                 TintOpacity = this.TintOpacity,
                 TintColor = this.TintColor,
@@ -45,6 +52,7 @@ namespace Retouch_Photo2.Layers.Models
 
         public override Color? GetFillColor() => this.TintColor;
         public override void SetFillColor(Color fillColor) => this.TintColor = fillColor;
+        
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         {
             Vector2 leftTop = Vector2.Transform(base.TransformerMatrix.Destination.LeftTop, canvasToVirtualMatrix);

@@ -177,7 +177,7 @@
                         <Ellipse Width="36" Height="36">
                             <Ellipse.Fill>
                                 <SolidColorBrush 
-                                    Color="{x:Bind SelectionViewModel.FillColor,Mode=OneWay}"
+                                    Color="{x:Bind SelectionViewModel.Color,Mode=OneWay}"
                                     />
                             </Ellipse.Fill>
                         </Ellipse>
@@ -262,9 +262,10 @@
                                  PlacementTarget="{x:Bind TransformerMenuLayoutButton}">
                 <elements:MenuLayout.ContentChild>
                     <controls:TransformerControl 
-                        Transformer="{x:Bind SelectionViewModel.Transformer,Mode=OneWay}" 
-                        Mode="{x:Bind SelectionViewModel.Mode,Mode=OneWay}"
-                        DisabledRadian="{x:Bind SelectionViewModel.DsabledRadian,Mode=OneWay}"
+                           Tool="{x:Bind TipViewModel.Tool,Mode=OneWay}"
+                           DisabledRadian="{x:Bind SelectionViewModel.DsabledRadian,Mode=OneWay}"
+                           Mode="{x:Bind SelectionViewModel.Mode,Mode=OneWay}"
+                           Transformer="{x:Bind SelectionViewModel.Transformer,Mode=OneWay}" 
                         />
                 </elements:MenuLayout.ContentChild>
                 <elements:MenuLayout.Icon>
@@ -294,7 +295,7 @@
                 </elements:MenuLayout.Icon>
                 <elements:MenuLayout.ContentChild>
                     <hsvColorPicker:ColorPicker x:Name="ColorPicker" Width="Auto" 
-                                                Color="{x:Bind SelectionViewModel.FillColor,Mode=OneWay}"/>
+                                                Color="{x:Bind SelectionViewModel.Color,Mode=OneWay}"/>
                 </elements:MenuLayout.ContentChild>
             </elements:MenuLayout>
             

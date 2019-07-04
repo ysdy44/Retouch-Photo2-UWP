@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pagesDrawPages="using:Retouch_Photo2.Pages.DrawPages"
+    xmlns:hSVColorPickers="using:HSVColorPickers"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -19,6 +20,11 @@
 
         <TextBlock Text="StrokeColor:" Style="{StaticResource AppTextBlock}"/>
         <pagesDrawPages:StrokeColorEllipseButton/>
+
+        <AppBarSeparator/>
+
+        <TextBlock Text="StrokeWidth:" Style="{StaticResource AppTextBlock}"/>
+        <pagesDrawPages:StrokeWidthPicker/>
 
     </StackPanel>
 </Page>

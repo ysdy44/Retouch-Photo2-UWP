@@ -116,8 +116,8 @@ namespace Retouch_Photo2.Controls
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
-                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                    layer.CacheTransform();
+                    layer.TransformMultiplies(matrix);
                 });
                 this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
@@ -132,8 +132,8 @@ namespace Retouch_Photo2.Controls
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
-                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                    layer.CacheTransform();
+                    layer.TransformMultiplies(matrix);
                 });
                 this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
@@ -148,8 +148,8 @@ namespace Retouch_Photo2.Controls
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
-                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                    layer.CacheTransform();
+                    layer.TransformMultiplies(matrix);
                 });
                 this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
@@ -164,8 +164,8 @@ namespace Retouch_Photo2.Controls
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
-                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                    layer.CacheTransform();
+                    layer.TransformMultiplies(matrix);
                 });
                 this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
@@ -187,8 +187,8 @@ namespace Retouch_Photo2.Controls
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
-                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                    layer.CacheTransform();
+                    layer.TransformMultiplies(matrix);
                 });
                 this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
@@ -203,8 +203,8 @@ namespace Retouch_Photo2.Controls
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
-                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                    layer.CacheTransform();
+                    layer.TransformMultiplies(matrix);
                 });
                 this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
@@ -219,8 +219,8 @@ namespace Retouch_Photo2.Controls
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
-                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                    layer.CacheTransform();
+                    layer.TransformMultiplies(matrix);
                 });
                 this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
@@ -244,8 +244,8 @@ namespace Retouch_Photo2.Controls
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
-                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                    layer.CacheTransform();
+                    layer.TransformMultiplies(matrix);
                 });
                 this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
@@ -260,8 +260,8 @@ namespace Retouch_Photo2.Controls
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
-                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                    layer.CacheTransform();
+                    layer.TransformMultiplies(matrix);
                 });
                 this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
@@ -274,12 +274,12 @@ namespace Retouch_Photo2.Controls
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, this.ViewModel.CanvasTransformer.Height - transformer.MaxY);
 
                 //Selection
+                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
-                    layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                    layer.CacheTransform();
+                    layer.TransformMultiplies(matrix);
                 });
-                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
                 this.ViewModel.Invalidate();//Invalidate
             };

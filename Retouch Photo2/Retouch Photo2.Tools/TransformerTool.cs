@@ -13,9 +13,9 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Tools
 {
     /// <summary>
-    /// <see cref="ITransformerTool"/>'s TransformerToolBase.
+    /// <see cref="ITransformerTool"/>'s TransformerTool.
     /// </summary>
-    public partial class TransformerToolBase : ITransformerTool
+    public partial class TransformerTool : ITransformerTool
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
@@ -66,7 +66,7 @@ namespace Retouch_Photo2.Tools
                                 {
                                     if (this.TransformerMode == TransformerMode.None || this.TransformerMode == TransformerMode.Translation)
                                     {
-                                        bool isAdd = this.AddLayer(point, true);
+                                        bool isAdd = this.AddLayer(point, CompositeMode.Add);
                                         if (isAdd) return true;
                                         else return false;
                                     }
@@ -76,7 +76,7 @@ namespace Retouch_Photo2.Tools
                                 {
                                     if (this.TransformerMode == TransformerMode.None || this.TransformerMode == TransformerMode.Translation)
                                     {
-                                        bool isAdd = this.AddLayer(point, false);
+                                        bool isAdd = this.AddLayer(point, CompositeMode.Subtract);
                                         if (isAdd) return true;
                                         else return false;
                                     }
@@ -106,7 +106,7 @@ namespace Retouch_Photo2.Tools
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
+                layer.CacheTransform();
             }, true);
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
@@ -132,7 +132,7 @@ namespace Retouch_Photo2.Tools
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                layer.TransformerMatrix.Destination = Transformer.Multiplies(layer.TransformerMatrix.OldDestination, matrix);
+                layer.TransformMultiplies(matrix);
             }, true);
 
             this.ViewModel.Invalidate();//Invalidate
@@ -179,6 +179,7 @@ namespace Retouch_Photo2.Tools
             return true;
         }
 
+
         public override void Draw(CanvasDrawingSession ds)
         {
             //Selection
@@ -198,15 +199,7 @@ namespace Retouch_Photo2.Tools
         }
 
 
-        /// <summary>
-        /// Select a layer from a point,
-        /// make it to <see cref = "Selection.Layer" />
-        /// and make the <see cref = "TransformerMode" /> to move,
-        /// find the layer that makes it unique, and 
-        /// </summary>
-        /// <param name="point"> point </param>
-        /// <returns> Return **false** if you do not select to any layer. </returns>
-        private bool SelectLayer(Vector2 point)
+        public override bool SelectLayer(Vector2 point)
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasPoint = Vector2.Transform(point, matrix);
@@ -246,9 +239,9 @@ namespace Retouch_Photo2.Tools
         /// Add the layer to the layers. 
         /// </summary>
         /// <param name="point"> point </param>
-        /// <param name="isAdd"> <see cref = "CompositeMode.Add" /> or <see cref = "CompositeMode.Subtract" /> </param>
+        /// <param name="mode"> <see cref = "CompositeMode.Add" /> or <see cref = "CompositeMode.Subtract" /> </param>
         /// <returns> Return **false** if you do not select to any layer. </returns>
-        private bool AddLayer(Vector2 point, bool isAdd = true)
+        private bool AddLayer(Vector2 point, CompositeMode mode)
         {
             Vector2 canvasPoint = Vector2.Transform(point, this.ViewModel.CanvasTransformer.GetInverseMatrix());
 
@@ -265,7 +258,15 @@ namespace Retouch_Photo2.Tools
             });
 
             if (selectedLayer == null) return false;
-            selectedLayer.IsChecked = isAdd;
+            switch (mode)
+            {
+                case CompositeMode.Add:
+                    selectedLayer.IsChecked = true;
+                    break;
+                case CompositeMode.Subtract:
+                    selectedLayer.IsChecked = false;
+                    break;
+            }
 
             this.TransformerMode = TransformerMode.None;//TransformerMode
             this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Transformer

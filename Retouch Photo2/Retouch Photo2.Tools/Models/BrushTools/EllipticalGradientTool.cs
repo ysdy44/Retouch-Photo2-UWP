@@ -24,6 +24,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
         YPoint,
     }
 
+
     /// <summary>
     /// <see cref="BrushTool"/>'s BrushEllipticalGradientTool.
     /// </summary>
@@ -35,9 +36,9 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
 
 
         //@Content
-        Vector2 Center { get => this.SelectionViewModel.BrushEllipticalGradientCenter; set => this.SelectionViewModel.BrushEllipticalGradientCenter = value; }
-        Vector2 XPoint { get => this.SelectionViewModel.BrushEllipticalGradientXPoint; set => this.SelectionViewModel.BrushEllipticalGradientXPoint = value; }
-        Vector2 YPoint { get => this.SelectionViewModel.BrushEllipticalGradientYPoint; set => this.SelectionViewModel.BrushEllipticalGradientYPoint = value; }
+        Vector2 Center { get => this.SelectionViewModel.BrushPoints.EllipticalGradientCenter; set => this.SelectionViewModel.BrushPoints.EllipticalGradientCenter = value; }
+        Vector2 XPoint { get => this.SelectionViewModel.BrushPoints.EllipticalGradientXPoint; set => this.SelectionViewModel.BrushPoints.EllipticalGradientXPoint = value; }
+        Vector2 YPoint { get => this.SelectionViewModel.BrushPoints.EllipticalGradientYPoint; set => this.SelectionViewModel.BrushPoints.EllipticalGradientYPoint = value; }
 
 
         /// <summary> Type of <see cref="RadialGradientTool">. </summary>
@@ -115,19 +116,19 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
                                 {
                                     case FillOrStroke.Fill:
                                         {
-                                            geometryLayer.FillBrush.EllipticalGradientXPoint = xPoint;
-                                            geometryLayer.FillBrush.EllipticalGradientYPoint = yPoint;
+                                            geometryLayer.FillBrush.Points.EllipticalGradientXPoint = xPoint;
+                                            geometryLayer.FillBrush.Points.EllipticalGradientYPoint = yPoint;
                                         }
                                         break;
                                     case FillOrStroke.Stroke:
                                         {
-                                            geometryLayer.StrokeBrush.EllipticalGradientXPoint = xPoint;
-                                            geometryLayer.StrokeBrush.EllipticalGradientYPoint = yPoint;
+                                            geometryLayer.StrokeBrush.Points.EllipticalGradientXPoint = xPoint;
+                                            geometryLayer.StrokeBrush.Points.EllipticalGradientYPoint = yPoint;
                                         }
                                         break;
                                 }
                             }
-                        });
+                        }, true);
 
                         this.ViewModel.Invalidate();//Invalidate
                     }
@@ -146,28 +147,36 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
                         this.YPoint = yPoint;
                         this.XPoint = xPoint;
 
-                        //Selection
-                        this.SelectionViewModel.SetValue((layer) =>
+                        //FillOrStroke
+                        switch (this.SelectionViewModel.FillOrStroke)
                         {
-                            if (layer is IGeometryLayer geometryLayer)
-                            {
-                                switch (this.SelectionViewModel.FillOrStroke)
+                            case FillOrStroke.Fill:
                                 {
-                                    case FillOrStroke.Fill:
+                                    //Selection
+                                    this.SelectionViewModel.SetValue((layer) =>
+                                    {
+                                        if (layer is IGeometryLayer geometryLayer)
                                         {
-                                            geometryLayer.FillBrush.EllipticalGradientYPoint = yPoint;
-                                            geometryLayer.FillBrush.EllipticalGradientXPoint = xPoint;
+                                            geometryLayer.FillBrush.Points.EllipticalGradientYPoint = yPoint;
+                                            geometryLayer.FillBrush.Points.EllipticalGradientXPoint = xPoint;
                                         }
-                                        break;
-                                    case FillOrStroke.Stroke:
-                                        {
-                                            geometryLayer.StrokeBrush.EllipticalGradientYPoint = yPoint;
-                                            geometryLayer.StrokeBrush.EllipticalGradientXPoint = xPoint;
-                                        }
-                                        break;
+                                    }, true);
                                 }
-                            }
-                        });
+                                break;
+                            case FillOrStroke.Stroke:
+                                {
+                                    //Selection
+                                    this.SelectionViewModel.SetValue((layer) =>
+                                    {
+                                        if (layer is IGeometryLayer geometryLayer)
+                                        {
+                                            geometryLayer.StrokeBrush.Points.EllipticalGradientYPoint = yPoint;
+                                            geometryLayer.StrokeBrush.Points.EllipticalGradientXPoint = xPoint;
+                                        }
+                                    }, true);
+                                }
+                                break;
+                        }
 
                         this.ViewModel.Invalidate();//Invalidate
                     }
@@ -184,30 +193,38 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
                         this.XPoint = xPoint;
                         this.YPoint = yPoint;
 
-                        //Selection
-                        this.SelectionViewModel.SetValue((layer) =>
+                        //FillOrStroke
+                        switch (this.SelectionViewModel.FillOrStroke)
                         {
-                            if (layer is IGeometryLayer geometryLayer)
-                            {
-                                switch (this.SelectionViewModel.FillOrStroke)
+                            case FillOrStroke.Fill:
                                 {
-                                    case FillOrStroke.Fill:
+                                    //Selection
+                                    this.SelectionViewModel.SetValue((layer) =>
+                                    {
+                                        if (layer is IGeometryLayer geometryLayer)
                                         {
-                                            geometryLayer.FillBrush.EllipticalGradientCenter = center;
-                                            geometryLayer.FillBrush.EllipticalGradientXPoint = xPoint;
-                                            geometryLayer.FillBrush.EllipticalGradientYPoint = yPoint;
+                                            geometryLayer.FillBrush.Points.EllipticalGradientCenter = center;
+                                            geometryLayer.FillBrush.Points.EllipticalGradientXPoint = xPoint;
+                                            geometryLayer.FillBrush.Points.EllipticalGradientYPoint = yPoint;
                                         }
-                                        break;
-                                    case FillOrStroke.Stroke:
-                                        {
-                                            geometryLayer.StrokeBrush.EllipticalGradientCenter = center;
-                                            geometryLayer.StrokeBrush.EllipticalGradientXPoint = xPoint;
-                                            geometryLayer.StrokeBrush.EllipticalGradientYPoint = yPoint;
-                                        }
-                                        break;
+                                    }, true);
                                 }
-                            }
-                        });
+                                break;
+                            case FillOrStroke.Stroke:
+                                {
+                                    //Selection
+                                    this.SelectionViewModel.SetValue((layer) =>
+                                    {
+                                        if (layer is IGeometryLayer geometryLayer)
+                                        {
+                                            geometryLayer.StrokeBrush.Points.EllipticalGradientCenter = center;
+                                            geometryLayer.StrokeBrush.Points.EllipticalGradientXPoint = xPoint;
+                                            geometryLayer.StrokeBrush.Points.EllipticalGradientYPoint = yPoint;
+                                        }
+                                    }, true);
+                                }
+                                break;
+                        }
 
                         this.ViewModel.Invalidate();//Invalidate
                     }

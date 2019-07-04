@@ -37,8 +37,7 @@ namespace Retouch_Photo2.Controls
 
 
         #region DependencyProperty
-
-
+        
         /// <summary> Gets or sets <see cref = "LayerControl" />'s selection mode. </summary>
         public ListViewSelectionMode Mode
         {
@@ -110,8 +109,7 @@ namespace Retouch_Photo2.Controls
                 }
             }
         }));
-
-
+        
         #endregion
 
 
@@ -187,43 +185,42 @@ namespace Retouch_Photo2.Controls
                         break;
                     case ListViewSelectionMode.Single:
                         {
-                            Layer cloneLayer = this.SelectionViewModel.Layer.Clone(this.ViewModel.CanvasDevice);//Clone
+                            //Clone
+                            Layer cloneLayer = this.SelectionViewModel.Layer.Clone(this.ViewModel.CanvasDevice);
 
                             //IsChecked
                             this.SelectionViewModel.Layer.IsChecked = false;
-                            cloneLayer.IsChecked = true;
 
-                            this.ViewModel.Layers.Insert(index, cloneLayer);//Insert
+                            //Insert
+                            this.ViewModel.Layers.Insert(index, cloneLayer);
+
                             this.SelectionViewModel.SetModeSingle(cloneLayer);//Selection
                         }
                         break;
                     case ListViewSelectionMode.Multiple:
                         {
-                            IEnumerable<Layer> cloneLayers = from cloneLayer in this.SelectionViewModel.Layers select cloneLayer.Clone(this.ViewModel.CanvasDevice);//Clone
+                            List<Layer> cloneLayers = new List<Layer>();
 
-
-                            //IsChecked
                             foreach (Layer layer in this.SelectionViewModel.Layers)
                             {
-                                layer.IsChecked = true;
-                            }
-                            foreach (Layer cloneLayer in cloneLayers)
-                            {
-                                cloneLayer.IsChecked = true;
+                                //Clone
+                                cloneLayers.Add(layer.Clone(this.ViewModel.CanvasDevice));
+
+                                //IsChecked
+                                layer.IsChecked = false;
                             }
 
-                            foreach (Layer cloneLayer in cloneLayers)
+                            for (int i = 0; i < cloneLayers.Count; i++)
                             {
-                                this.ViewModel.Layers.Insert(index, cloneLayer);//Insert
+                                //Insert
+                                this.ViewModel.Layers.Insert(index, cloneLayers[i]);//Insert
                             }
-                            this.SelectionViewModel.SetModeMultiple(cloneLayers);//Selection
+
+                            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
                         }
                         break;
                 }
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                });
-
+                
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -231,30 +228,24 @@ namespace Retouch_Photo2.Controls
             //Remove
             this.RemoveButton.Tapped += (s, e) =>
             {
-                switch (this.SelectionViewModel.Mode)
+                Layer removeLayer = null;
+
+                do
                 {
-                    case ListViewSelectionMode.None:
-                        break;
-                    case ListViewSelectionMode.Single:
+                    if (removeLayer != null)
+                    {
+                        if (this.ViewModel.Layers.Contains(removeLayer))
                         {
-                            this.ViewModel.Layers.Remove(this.SelectionViewModel.Layer);
-
-                            this.SelectionViewModel.SetModeNone();//Selection
-                            this.ViewModel.Invalidate();//Invalidate
+                            this.ViewModel.Layers.Remove(removeLayer);
                         }
-                        break;
-                    case ListViewSelectionMode.Multiple:
-                        {
-                            foreach (Layer layer in this.SelectionViewModel.Layers)
-                            {
-                                this.ViewModel.Layers.Remove(layer);
-                            }
+                    }
 
-                            this.SelectionViewModel.SetModeNone();//Selection
-                            this.ViewModel.Invalidate();//Invalidate
-                        }
-                        break;
+                    removeLayer = this.ViewModel.Layers.FirstOrDefault(layer => layer.IsChecked == true);
                 }
+                while (removeLayer != null);
+
+                this.SelectionViewModel.SetModeNone();//Selection
+                this.ViewModel.Invalidate();//Invalidate
             };
 
 

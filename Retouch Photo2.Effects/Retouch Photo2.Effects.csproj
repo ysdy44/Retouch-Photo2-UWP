@@ -170,7 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HSVColorPickers">
-      <Version>1.1.7</Version>
+      <Version>1.1.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.5</Version>

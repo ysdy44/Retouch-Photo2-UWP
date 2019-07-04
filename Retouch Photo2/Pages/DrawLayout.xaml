@@ -303,7 +303,7 @@
         </Grid>
       
         <!--Foot-->
-        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Column="1" Grid.Row="2"
+        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Column="1" Grid.Row="2" ShadowColor="{ThemeResource AppStrokeColor}"
             Visibility="Visible" >
             <!--Normal-->
 

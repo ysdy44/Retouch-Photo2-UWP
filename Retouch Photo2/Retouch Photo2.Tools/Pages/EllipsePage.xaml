@@ -20,5 +20,10 @@
         <TextBlock Text="StrokeColor:" Style="{StaticResource AppTextBlock}"/>
         <pagesDrawPages:StrokeColorEllipseButton/>
 
+        <AppBarSeparator/>
+
+        <TextBlock Text="StrokeWidth:" Style="{StaticResource AppTextBlock}"/>
+        <pagesDrawPages:StrokeWidthPicker/>
+
     </StackPanel>
 </Page>

@@ -8,7 +8,17 @@ namespace Retouch_Photo2.Tools
     /// </summary>
     public abstract class ITransformerTool
     {
-        //Cursor
+        /// <summary>
+        /// Select a layer from a point,
+        /// make it to <see cref = "Selection.Layer" />
+        /// and make the <see cref = "TransformerMode" /> to move,
+        /// find the layer that makes it unique, and 
+        /// </summary>
+        /// <param name="point"> point </param>
+        /// <returns> Return **false** if you do not select to any layer. </returns>
+        public abstract bool SelectLayer(Vector2 point);
+
+
         /// <summary> <see cref = "Tool.Starting" />'s method. </summary>
         public abstract bool Starting(Vector2 point);
 

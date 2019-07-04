@@ -1,20 +1,21 @@
 ﻿<Application
     x:Class="Retouch_Photo2.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
 
     <Application.Resources>
         <ResourceDictionary>
 
             <!--Theme-->
             <!--           
-            AppForeground【前景色】        
-            AppBackground【背景色】        
-            AppBorderBrush【边线色】        
+                AppForeground: Foreground Color,
+                AppBackground: Background Color,
+                AppBorderBrush: Border Color,
             
-            AppFill【高亮色】            
-            AppStroke【投影色】 
-            AppLinearBrush【渐变笔刷】
+                AppFill: Highlight Color,
+                AppStroke: Shadow Color,
+                AppLinearBrush: Linear Brush,
             -->
             <ResourceDictionary.ThemeDictionaries>
 

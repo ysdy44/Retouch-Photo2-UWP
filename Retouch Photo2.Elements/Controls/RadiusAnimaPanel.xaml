@@ -8,6 +8,7 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"   
     HorizontalAlignment="Center"
     VerticalAlignment="Bottom"    
+    Background="{ThemeResource SystemControlBackgroundAltHighBrush}"
     Margin="12"
     mc:Ignorable="d"
     d:DesignHeight="50"
@@ -30,8 +31,8 @@
         </Grid.Resources>
 
         <!--Shadow-->
-        <controls:DropShadowPanel HorizontalContentAlignment="Stretch" OffsetY="3" ShadowOpacity="0.3" Color="Black">
-            <Rectangle x:Name="Rectangle" RadiusX="25" RadiusY="25"  Fill="{ThemeResource SystemControlBackgroundAltHighBrush}"/>
+        <controls:DropShadowPanel HorizontalContentAlignment="Stretch" OffsetY="3" ShadowOpacity="{x:Bind ShadowOpacity,Mode=OneWay}" Color="{x:Bind ShadowColor,Mode=OneWay}">
+            <Rectangle x:Name="Rectangle" RadiusX="25" RadiusY="25" Fill="{x:Bind UserControl.Background,Mode=OneWay}"/>
         </controls:DropShadowPanel>
 
         <!--Content-->

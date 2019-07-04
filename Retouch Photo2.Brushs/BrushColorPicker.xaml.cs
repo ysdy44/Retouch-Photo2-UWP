@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Brushs
                 }
 
                 this.ContentControl.Content = newControl;
-                newControl.SetColor(this._Color);
+                newControl.Color=this._Color;
 
                 newControl.ColorChange += this.Picker_ColorChange;
 
@@ -69,7 +69,7 @@ namespace Retouch_Photo2.Brushs
                     return;
 
                 Color color = Color.FromArgb(255, value.R, value.G, value.B);
-                this.Pickers[this.Index].Control.SetColor(color);
+                this.Pickers[this.Index].Control.Color=color;
 
                 this._color = color;
             }
@@ -120,7 +120,7 @@ namespace Retouch_Photo2.Brushs
         private void Picker_ColorChange2(object sender, Color value)
         {
             this._Color = value;
-            this.Pickers[this.Index].Control.SetColor(value);
+            this.Pickers[this.Index].Control.Color=value;
         }
     }
 }

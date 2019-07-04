@@ -32,11 +32,29 @@ namespace Retouch_Photo2.Layers.ILayer
 
 
         //@Override
-        public override void SetFillColor(Color fillColor) => this.FillBrush.Color = fillColor;
+        public override void SetFillColor(Color fillColor)
+        {
+            this.FillBrush.Color = fillColor;
+            
+            if (this.FillBrush.Type != BrushType.Color)
+            {
+                this.FillBrush.Type = BrushType.Color;
+            }
+        }
         public override Color? GetFillColor() => this.FillBrush.Color;
 
-        public override void SetStrokeColor(Color strokeColor) => this.StrokeBrush.Color = strokeColor;
+
+        public override void SetStrokeColor(Color strokeColor)
+        {    
+            this.StrokeBrush.Color = strokeColor;
+
+            if (this.StrokeBrush.Type != BrushType.Color)
+            {
+                this.StrokeBrush.Type = BrushType.Color;
+            }
+        }
         public override Color? GetStrokeColor() => this.StrokeBrush.Color;
+
 
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -58,8 +76,8 @@ namespace Retouch_Photo2.Layers.ILayer
 
                         case BrushType.LinearGradient:
                             {
-                                Vector2 startPoint = Vector2.Transform(this.FillBrush.LinearGradientStartPoint, canvasToVirtualMatrix);
-                                Vector2 endPoint = Vector2.Transform(this.FillBrush.LinearGradientEndPoint, canvasToVirtualMatrix);
+                                Vector2 startPoint = Vector2.Transform(this.FillBrush.Points.LinearGradientStartPoint, canvasToVirtualMatrix);
+                                Vector2 endPoint = Vector2.Transform(this.FillBrush.Points.LinearGradientEndPoint, canvasToVirtualMatrix);
 
                                 ICanvasBrush brush = new CanvasLinearGradientBrush(resourceCreator, this.FillBrush.Array)
                                 {
@@ -73,8 +91,8 @@ namespace Retouch_Photo2.Layers.ILayer
 
                         case BrushType.RadialGradient:
                             {
-                                Vector2 center = Vector2.Transform(this.FillBrush.RadialGradientCenter, canvasToVirtualMatrix);
-                                Vector2 point = Vector2.Transform(this.FillBrush.RadialGradientPoint, canvasToVirtualMatrix);
+                                Vector2 center = Vector2.Transform(this.FillBrush.Points.RadialGradientCenter, canvasToVirtualMatrix);
+                                Vector2 point = Vector2.Transform(this.FillBrush.Points.RadialGradientPoint, canvasToVirtualMatrix);
                                 float radius = Vector2.Distance(center, point);
 
                                 ICanvasBrush brush = new CanvasRadialGradientBrush(resourceCreator, this.FillBrush.Array)
@@ -90,9 +108,9 @@ namespace Retouch_Photo2.Layers.ILayer
 
                         case BrushType.EllipticalGradient:
                             {
-                                Vector2 center = Vector2.Transform(this.FillBrush.EllipticalGradientCenter, canvasToVirtualMatrix);
-                                Vector2 xPoint = Vector2.Transform(this.FillBrush.EllipticalGradientXPoint, canvasToVirtualMatrix);
-                                Vector2 yPoint = Vector2.Transform(this.FillBrush.EllipticalGradientYPoint, canvasToVirtualMatrix);
+                                Vector2 center = Vector2.Transform(this.FillBrush.Points.EllipticalGradientCenter, canvasToVirtualMatrix);
+                                Vector2 xPoint = Vector2.Transform(this.FillBrush.Points.EllipticalGradientXPoint, canvasToVirtualMatrix);
+                                Vector2 yPoint = Vector2.Transform(this.FillBrush.Points.EllipticalGradientYPoint, canvasToVirtualMatrix);
 
                                 float radiusX = Vector2.Distance(center, xPoint);
                                 float radiusY = Vector2.Distance(center, yPoint);
@@ -135,8 +153,8 @@ namespace Retouch_Photo2.Layers.ILayer
 
                         case BrushType.LinearGradient:
                             {
-                                Vector2 startPoint = Vector2.Transform(this.StrokeBrush.LinearGradientStartPoint, canvasToVirtualMatrix);
-                                Vector2 endPoint = Vector2.Transform(this.StrokeBrush.LinearGradientEndPoint, canvasToVirtualMatrix);
+                                Vector2 startPoint = Vector2.Transform(this.StrokeBrush.Points.LinearGradientStartPoint, canvasToVirtualMatrix);
+                                Vector2 endPoint = Vector2.Transform(this.StrokeBrush.Points.LinearGradientEndPoint, canvasToVirtualMatrix);
 
                                 ICanvasBrush brush = new CanvasLinearGradientBrush(resourceCreator, this.StrokeBrush.Array)
                                 {
@@ -150,8 +168,8 @@ namespace Retouch_Photo2.Layers.ILayer
 
                         case BrushType.RadialGradient:
                             {
-                                Vector2 center = Vector2.Transform(this.StrokeBrush.RadialGradientCenter, canvasToVirtualMatrix);
-                                Vector2 point = Vector2.Transform(this.StrokeBrush.RadialGradientPoint, canvasToVirtualMatrix);
+                                Vector2 center = Vector2.Transform(this.StrokeBrush.Points.RadialGradientCenter, canvasToVirtualMatrix);
+                                Vector2 point = Vector2.Transform(this.StrokeBrush.Points.RadialGradientPoint, canvasToVirtualMatrix);
                                 float radius = Vector2.Distance(center, point);
 
                                 ICanvasBrush brush = new CanvasRadialGradientBrush(resourceCreator, this.StrokeBrush.Array)
@@ -167,9 +185,9 @@ namespace Retouch_Photo2.Layers.ILayer
 
                         case BrushType.EllipticalGradient:
                             {
-                                Vector2 center = Vector2.Transform(this.StrokeBrush.EllipticalGradientCenter, canvasToVirtualMatrix);
-                                Vector2 xPoint = Vector2.Transform(this.StrokeBrush.EllipticalGradientXPoint, canvasToVirtualMatrix);
-                                Vector2 yPoint = Vector2.Transform(this.StrokeBrush.EllipticalGradientYPoint, canvasToVirtualMatrix);
+                                Vector2 center = Vector2.Transform(this.StrokeBrush.Points.EllipticalGradientCenter, canvasToVirtualMatrix);
+                                Vector2 xPoint = Vector2.Transform(this.StrokeBrush.Points.EllipticalGradientXPoint, canvasToVirtualMatrix);
+                                Vector2 yPoint = Vector2.Transform(this.StrokeBrush.Points.EllipticalGradientYPoint, canvasToVirtualMatrix);
 
                                 float radiusX = Vector2.Distance(center, xPoint);
                                 float radiusY = Vector2.Distance(center, yPoint);
@@ -199,5 +217,152 @@ namespace Retouch_Photo2.Layers.ILayer
             }
             return command;
         }
+        public override void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession ds, Matrix3x2 matrix, Windows.UI.Color accentColor)
+        {
+            CanvasGeometry geometry = this.CreateGeometry(resourceCreator, matrix);
+            ds.DrawGeometry(geometry, accentColor);
+        }
+
+        
+        public override void CacheTransform()
+        {
+            base.CacheTransform();
+
+            this.FillBrush.OldPoints = this.FillBrush.Points;
+            this.StrokeBrush.OldPoints = this.StrokeBrush.Points;
+        }
+        public override void TransformMultiplies(Matrix3x2 matrix)
+        {
+            base.TransformMultiplies(matrix);
+
+            switch (this.FillBrush.Type)
+            {
+                case BrushType.None:
+                    break;
+                case BrushType.Color:
+                    break;
+                case BrushType.LinearGradient:
+                    {
+                        this.FillBrush.Points.LinearGradientStartPoint = Vector2.Transform(this.FillBrush.OldPoints.LinearGradientStartPoint, matrix); ;
+                        this.FillBrush.Points.LinearGradientEndPoint = Vector2.Transform(this.FillBrush.OldPoints.LinearGradientEndPoint, matrix); ;
+                    }
+                    break;
+                case BrushType.RadialGradient:
+                    {
+                        this.FillBrush.Points.RadialGradientCenter = Vector2.Transform(this.FillBrush.OldPoints.RadialGradientCenter, matrix); ;
+                        this.FillBrush.Points.RadialGradientPoint = Vector2.Transform(this.FillBrush.OldPoints.RadialGradientPoint, matrix); ;
+                    }
+                    break;
+                case BrushType.EllipticalGradient:
+                    {
+                        this.FillBrush.Points.EllipticalGradientCenter = Vector2.Transform(this.FillBrush.OldPoints.EllipticalGradientCenter, matrix); ;
+                        this.FillBrush.Points.EllipticalGradientXPoint = Vector2.Transform(this.FillBrush.OldPoints.EllipticalGradientXPoint, matrix); ;
+                        this.FillBrush.Points.EllipticalGradientYPoint = Vector2.Transform(this.FillBrush.OldPoints.EllipticalGradientYPoint, matrix); ;
+                    }
+                    break;
+                case BrushType.Image:
+                    break;
+                default:
+                    break;
+            }
+
+            switch (this.StrokeBrush.Type)
+            {
+                case BrushType.None:
+                    break;
+                case BrushType.Color:
+                    break;
+                case BrushType.LinearGradient:
+                    {
+                        this.StrokeBrush.Points.LinearGradientStartPoint = Vector2.Transform(this.StrokeBrush.OldPoints.LinearGradientStartPoint, matrix); ;
+                        this.StrokeBrush.Points.LinearGradientEndPoint = Vector2.Transform(this.StrokeBrush.OldPoints.LinearGradientEndPoint, matrix); ;
+                    }
+                    break;
+                case BrushType.RadialGradient:
+                    {
+                        this.StrokeBrush.Points.RadialGradientCenter = Vector2.Transform(this.StrokeBrush.OldPoints.RadialGradientCenter, matrix); ;
+                        this.StrokeBrush.Points.RadialGradientPoint = Vector2.Transform(this.StrokeBrush.OldPoints.RadialGradientPoint, matrix); ;
+                    }
+                    break;
+                case BrushType.EllipticalGradient:
+                    {
+                        this.StrokeBrush.Points.EllipticalGradientCenter = Vector2.Transform(this.StrokeBrush.OldPoints.EllipticalGradientCenter, matrix); ;
+                        this.StrokeBrush.Points.EllipticalGradientXPoint = Vector2.Transform(this.StrokeBrush.OldPoints.EllipticalGradientXPoint, matrix); ;
+                        this.StrokeBrush.Points.EllipticalGradientYPoint = Vector2.Transform(this.StrokeBrush.OldPoints.EllipticalGradientYPoint, matrix); ;
+                    }
+                    break;
+                case BrushType.Image:
+                    break;
+                default:
+                    break;
+            }
+        }
+        public override void TransformAdd(Vector2 vector)
+        {
+            base.TransformAdd(vector);
+
+            switch (this.FillBrush.Type)
+            {
+                case BrushType.None:
+                    break;
+                case BrushType.Color:
+                    break;
+                case BrushType.LinearGradient:
+                    {
+                        this.FillBrush.Points.LinearGradientStartPoint = Vector2.Add(this.FillBrush.OldPoints.LinearGradientStartPoint, vector); ;
+                        this.FillBrush.Points.LinearGradientEndPoint = Vector2.Add(this.FillBrush.OldPoints.LinearGradientEndPoint, vector); ;
+                    }
+                    break;
+                case BrushType.RadialGradient:
+                    {
+                        this.FillBrush.Points.RadialGradientCenter = Vector2.Add(this.FillBrush.OldPoints.RadialGradientCenter, vector); ;
+                        this.FillBrush.Points.RadialGradientPoint = Vector2.Add(this.FillBrush.OldPoints.RadialGradientPoint, vector); ;
+                    }
+                    break;
+                case BrushType.EllipticalGradient:
+                    {
+                        this.FillBrush.Points.EllipticalGradientCenter = Vector2.Add(this.FillBrush.OldPoints.EllipticalGradientCenter, vector); ;
+                        this.FillBrush.Points.EllipticalGradientXPoint = Vector2.Add(this.FillBrush.OldPoints.EllipticalGradientXPoint, vector); ;
+                        this.FillBrush.Points.EllipticalGradientYPoint = Vector2.Add(this.FillBrush.OldPoints.EllipticalGradientYPoint, vector); ;
+                    }
+                    break;
+                case BrushType.Image:
+                    break;
+                default:
+                    break;
+            }
+
+            switch (this.StrokeBrush.Type)
+            {
+                case BrushType.None:
+                    break;
+                case BrushType.Color:
+                    break;
+                case BrushType.LinearGradient:
+                    {
+                        this.StrokeBrush.Points.LinearGradientStartPoint = Vector2.Add(this.StrokeBrush.OldPoints.LinearGradientStartPoint, vector); ;
+                        this.StrokeBrush.Points.LinearGradientEndPoint = Vector2.Add(this.StrokeBrush.OldPoints.LinearGradientEndPoint, vector); ;
+                    }
+                    break;
+                case BrushType.RadialGradient:
+                    {
+                        this.StrokeBrush.Points.RadialGradientCenter = Vector2.Add(this.StrokeBrush.OldPoints.RadialGradientCenter, vector); ;
+                        this.StrokeBrush.Points.RadialGradientPoint = Vector2.Add(this.StrokeBrush.OldPoints.RadialGradientPoint, vector); ;
+                    }
+                    break;
+                case BrushType.EllipticalGradient:
+                    {
+                        this.StrokeBrush.Points.EllipticalGradientCenter = Vector2.Add(this.StrokeBrush.OldPoints.EllipticalGradientCenter, vector); ;
+                        this.StrokeBrush.Points.EllipticalGradientXPoint = Vector2.Add(this.StrokeBrush.OldPoints.EllipticalGradientXPoint, vector); ;
+                        this.StrokeBrush.Points.EllipticalGradientYPoint = Vector2.Add(this.StrokeBrush.OldPoints.EllipticalGradientYPoint, vector); ;
+                    }
+                    break;
+                case BrushType.Image:
+                    break;
+                default:
+                    break;
+            }
+        }
+
     }
 }
