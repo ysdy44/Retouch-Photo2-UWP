@@ -42,12 +42,9 @@ namespace Retouch_Photo2.Layers.Models
                 IsChecked = base.IsChecked,
                 Visibility = base.Visibility,
 
-                TransformerMatrix = new TransformerMatrix
-                {
-                    Source = base.TransformerMatrix.Source,
-                    Destination = base.TransformerMatrix.Destination,
-                    DisabledRadian = base.TransformerMatrix.DisabledRadian,
-                },
+                Source = base.Source,
+                Destination = base.Destination,
+                DisabledRadian = base.DisabledRadian,
 
                 Bitmap = bitmap,
             };
@@ -58,7 +55,7 @@ namespace Retouch_Photo2.Layers.Models
             return new Transform2DEffect
             {
                 Source = this.Bitmap,
-                TransformMatrix = base.TransformerMatrix.GetMatrix() * canvasToVirtualMatrix
+                TransformMatrix = base.GetMatrix() * canvasToVirtualMatrix
             };
         }
 
@@ -96,7 +93,10 @@ namespace Retouch_Photo2.Layers.Models
 
             return new ImageLayer
             {
-                TransformerMatrix = new TransformerMatrix(transformer),
+                Source = transformer,
+                Destination = transformer,
+                DisabledRadian = false,
+
                 Bitmap = bitmap
             };
         }

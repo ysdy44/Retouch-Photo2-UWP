@@ -32,12 +32,9 @@ namespace Retouch_Photo2.Layers.Models
                 IsChecked = base.IsChecked,
                 Visibility = base.Visibility,
 
-                TransformerMatrix = new TransformerMatrix
-                {
-                    Source = base.TransformerMatrix.Source,
-                    Destination = base.TransformerMatrix.Destination,
-                    DisabledRadian = base.TransformerMatrix.DisabledRadian,
-                },
+                Source = base.Source,
+                Destination = base.Destination,
+                DisabledRadian = base.DisabledRadian,
 
                 FillBrush = base.FillBrush,
                 StrokeBrush = base.StrokeBrush,
@@ -57,10 +54,10 @@ namespace Retouch_Photo2.Layers.Models
             /// <summary>
 
             //LTRB
-            Vector2 left = Vector2.Transform(base.TransformerMatrix.Destination.CenterLeft, canvasToVirtualMatrix);
-            Vector2 top = Vector2.Transform(base.TransformerMatrix.Destination.CenterTop, canvasToVirtualMatrix);
-            Vector2 right = Vector2.Transform(base.TransformerMatrix.Destination.CenterRight, canvasToVirtualMatrix);
-            Vector2 bottom = Vector2.Transform(base.TransformerMatrix.Destination.CenterBottom, canvasToVirtualMatrix);
+            Vector2 left = Vector2.Transform(base.Destination.CenterLeft, canvasToVirtualMatrix);
+            Vector2 top = Vector2.Transform(base.Destination.CenterTop, canvasToVirtualMatrix);
+            Vector2 right = Vector2.Transform(base.Destination.CenterRight, canvasToVirtualMatrix);
+            Vector2 bottom = Vector2.Transform(base.Destination.CenterBottom, canvasToVirtualMatrix);
             //HV
             Vector2 horizontal = (right - left) * 0.276f;// vector / 2 * 0.552f
             Vector2 vertical = (bottom - top) * 0.276f;// vector / 2 * 0.552f

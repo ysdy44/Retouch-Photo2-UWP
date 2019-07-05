@@ -208,7 +208,7 @@ namespace Retouch_Photo2.Tools
             {
                 if (layer.Visibility == Visibility.Visible)
                 {
-                    bool layerInQuadrangle = Transformer.InQuadrangle(canvasPoint, layer.TransformerMatrix.Destination);
+                    bool layerInQuadrangle = Transformer.InQuadrangle(canvasPoint, layer.Destination);
                     if (layerInQuadrangle)
                     {
                         selectedLayer = layer;
@@ -249,7 +249,7 @@ namespace Retouch_Photo2.Tools
             {
                 if (layer.Visibility == Visibility.Visible)
                 {
-                    Transformer layerTransformer = layer.TransformerMatrix.Destination;
+                    Transformer layerTransformer = layer.Destination;
                     bool layerInQuadrangle = Transformer.InQuadrangle(canvasPoint, layerTransformer);
                     if (layerInQuadrangle) return true;
                 }

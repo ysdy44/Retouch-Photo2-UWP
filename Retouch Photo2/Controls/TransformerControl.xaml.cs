@@ -555,8 +555,8 @@ namespace Retouch_Photo2.Controls
                 this.SelectionViewModel.Transformer = Transformer.Multiplies(zeroTransformer, matrix);
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.TransformerMatrix.OldDestination = layer.TransformerMatrix.Destination;
-                    layer.TransformerMatrix.Destination=Transformer.Multiplies(zeroTransformer, matrix);
+                    layer.OldDestination = layer.Destination;
+                    layer.Destination=Transformer.Multiplies(zeroTransformer, matrix);
                 });
 
                 this.ViewModel.Invalidate();

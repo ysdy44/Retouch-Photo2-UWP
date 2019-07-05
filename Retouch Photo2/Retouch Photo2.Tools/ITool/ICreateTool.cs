@@ -70,7 +70,8 @@ namespace Retouch_Photo2.Tools.ITool
                  this.KeyboardViewModel.IsRatio
             );
 
-            this.MezzanineViewModel.Layer.TransformerMatrix.Destination = transformer;//Mezzanine
+            this.MezzanineViewModel.Layer.Source = transformer;//Mezzanine
+            this.MezzanineViewModel.Layer.Destination = transformer;//Mezzanine
 
             this.SelectionViewModel.Transformer = transformer;//Selection
 

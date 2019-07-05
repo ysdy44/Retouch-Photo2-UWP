@@ -1,4 +1,6 @@
-﻿using Microsoft.Graphics.Canvas.Brushes;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas.Brushes;
+using System.Numerics;
 using Windows.UI;
 
 namespace Retouch_Photo2.Brushs
@@ -6,15 +8,8 @@ namespace Retouch_Photo2.Brushs
     /// <summary>
     /// Brush Classes.
     /// </summary>
-    public class Brush
+    public class Brush: ICacheTransform
     {
-        /// <summary> Gets new CanvasGradientStop array. </summary>
-        public static CanvasGradientStop[] GetNewArray() => new CanvasGradientStop[]
-        {
-            new CanvasGradientStop{Color= Colors.White, Position=0.0f },
-            new CanvasGradientStop{Color= Colors.Gray, Position=1.0f }
-        };
-
         /// <summary> <see cref="Brush">'s type. </summary>
         public BrushType Type;
         
@@ -27,13 +22,126 @@ namespace Retouch_Photo2.Brushs
              new CanvasGradientStop{Color= Colors.White, Position=0.0f },
              new CanvasGradientStop{Color= Colors.Gray, Position=1.0f }
         };
-
+        
         /// <summary> <see cref="Brush">'s points. </summary>
         public BrushPoints Points;
         /// <summary> <see cref = "Brush.Points" />'s old cache. </summary>
         public BrushPoints OldPoints;
+        
 
-        /// <summary> <see cref="Brush">'s CanvasImageBrush. </summary>
-        public CanvasImageBrush ImageBrush;
+        //@Interface
+        /// <summary>
+        ///  Cache the brush's transformer.
+        /// </summary>
+        public void CacheTransform()
+        {
+            switch (this.Type)
+            {
+                case BrushType.None:
+                    break;
+                case BrushType.Color:
+                    break;
+                case BrushType.LinearGradient:
+                    {
+                        this.OldPoints.LinearGradientStartPoint = this.Points.LinearGradientStartPoint;
+                        this.OldPoints.LinearGradientEndPoint = this.Points.LinearGradientEndPoint;
+                    }
+                    break;
+                case BrushType.RadialGradient:
+                    {
+                        this.OldPoints.RadialGradientCenter = this.Points.RadialGradientCenter;
+                        this.OldPoints.RadialGradientPoint = this.Points.RadialGradientPoint;
+                    }
+                    break;
+                case BrushType.EllipticalGradient:
+                    {
+                        this.OldPoints.EllipticalGradientCenter = this.Points.EllipticalGradientCenter;
+                        this.OldPoints.EllipticalGradientXPoint = this.Points.EllipticalGradientXPoint;
+                        this.OldPoints.EllipticalGradientYPoint = this.Points.EllipticalGradientYPoint;
+                    }
+                    break;
+                case BrushType.Image:
+                    break;
+            }
+        }
+        /// <summary>
+        ///  Transforms the brush by the given matrix.
+        /// </summary>
+        /// <param name="matrix"> The sestination matrix. </param>
+        public void TransformMultiplies(Matrix3x2 matrix)
+        {
+            switch (this.Type)
+            {
+                case BrushType.None:
+                    break;
+                case BrushType.Color:
+                    break;
+                case BrushType.LinearGradient:
+                    {
+                        this.Points.LinearGradientStartPoint = Vector2.Transform(this.OldPoints.LinearGradientStartPoint, matrix);
+                        this.Points.LinearGradientEndPoint = Vector2.Transform(this.OldPoints.LinearGradientEndPoint, matrix);
+                    }
+                    break;
+                case BrushType.RadialGradient:
+                    {
+                        this.Points.RadialGradientCenter = Vector2.Transform(this.OldPoints.RadialGradientCenter, matrix);
+                        this.Points.RadialGradientPoint = Vector2.Transform(this.OldPoints.RadialGradientPoint, matrix);
+                    }
+                    break;
+                case BrushType.EllipticalGradient:
+                    {
+                        this.Points.EllipticalGradientCenter = Vector2.Transform(this.OldPoints.EllipticalGradientCenter, matrix);
+                        this.Points.EllipticalGradientXPoint = Vector2.Transform(this.OldPoints.EllipticalGradientXPoint, matrix);
+                        this.Points.EllipticalGradientYPoint = Vector2.Transform(this.OldPoints.EllipticalGradientYPoint, matrix);
+                    }
+                    break;
+                case BrushType.Image:
+                    break;
+            }
+        }
+        /// <summary>
+        ///  Transforms the brush by the given vector.
+        /// </summary>
+        /// <param name="vector"> The sestination vector. </param>
+        public void TransformAdd(Vector2 vector)
+        {
+            switch (this.Type)
+            {
+                case BrushType.None:
+                    break;
+                case BrushType.Color:
+                    break;
+                case BrushType.LinearGradient:
+                    {
+                        this.Points.LinearGradientStartPoint = Vector2.Add(this.OldPoints.LinearGradientStartPoint, vector);
+                        this.Points.LinearGradientEndPoint = Vector2.Add(this.OldPoints.LinearGradientEndPoint, vector);
+                    }
+                    break;
+                case BrushType.RadialGradient:
+                    {
+                        this.Points.RadialGradientCenter = Vector2.Add(this.OldPoints.RadialGradientCenter, vector);
+                        this.Points.RadialGradientPoint = Vector2.Add(this.OldPoints.RadialGradientPoint, vector);
+                    }
+                    break;
+                case BrushType.EllipticalGradient:
+                    {
+                        this.Points.EllipticalGradientCenter = Vector2.Add(this.OldPoints.EllipticalGradientCenter, vector);
+                        this.Points.EllipticalGradientXPoint = Vector2.Add(this.OldPoints.EllipticalGradientXPoint, vector);
+                        this.Points.EllipticalGradientYPoint = Vector2.Add(this.OldPoints.EllipticalGradientYPoint, vector);
+                    }
+                    break;
+                case BrushType.Image:
+                    break;
+            }
+        }
+
+
+        //@Static
+        /// <summary> Gets new CanvasGradientStop array. </summary>
+        public static CanvasGradientStop[] GetNewArray() => new CanvasGradientStop[]
+        {
+            new CanvasGradientStop{Color= Colors.White, Position=0.0f },
+            new CanvasGradientStop{Color= Colors.Gray, Position=1.0f }
+        };
     }
 }

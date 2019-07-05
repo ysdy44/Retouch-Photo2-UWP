@@ -28,7 +28,9 @@ namespace Retouch_Photo2.Tools.Models
                 Type = BrushType.Color,
                 Color = this.SelectionViewModel.FillColor,
             },
-            TransformerMatrix = new TransformerMatrix(transformer)
+
+            Source = transformer,
+            Destination = transformer,
         };
 
         //@Construct

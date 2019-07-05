@@ -264,16 +264,17 @@ namespace Retouch_Photo2.Controls
                 }
 
 
-                //TransformerMatrix
-                TransformerMatrix transformerMatrix = new TransformerMatrix(this.SelectionViewModel.Transformer)
-                {
-                    DisabledRadian = false//DisabledRadian
-                };
+                //Transformer
+                Transformer transformer = this.SelectionViewModel.Transformer;
+
                 //GroupLayer
                 GroupLayer groupLayer = new GroupLayer
                 {
                     IsChecked = true,
-                    TransformerMatrix = transformerMatrix,
+
+                    Source = transformer,
+                    Destination = transformer,
+                    DisabledRadian = false//DisabledRadian
                 };
 
 
@@ -285,7 +286,10 @@ namespace Retouch_Photo2.Controls
                     layer.IsChecked = false;
                     groupLayer.Children.Add(layer);//Add
 
-                    if (layer.TransformerMatrix.DisabledRadian) transformerMatrix.DisabledRadian = true;//DisabledRadian
+                    if (layer.DisabledRadian)
+                    {
+                        groupLayer.DisabledRadian = true;//DisabledRadian
+                    }
                 });
 
 

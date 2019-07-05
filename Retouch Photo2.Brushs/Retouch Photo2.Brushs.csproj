@@ -126,6 +126,9 @@
     <EmbeddedResource Include="Properties\Retouch_Photo.Brushs.rd.xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FanKit.Transformers">
+      <Version>1.1.5</Version>
+    </PackageReference>
     <PackageReference Include="HSVColorPickers">
       <Version>1.1.9</Version>
     </PackageReference>

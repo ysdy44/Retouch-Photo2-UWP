@@ -57,8 +57,8 @@ namespace Retouch_Photo2.ViewModels.Selections
         /// <param name="layer"> The selection layer. </param>
         public void SetModeSingle(Layer layer)
         {
-            this.Transformer = layer.TransformerMatrix.Destination;
-            this.DsabledRadian = layer.TransformerMatrix.DisabledRadian;//DisabledRadian
+            this.Transformer = layer.Destination;
+            this.DsabledRadian = layer.DisabledRadian;//DisabledRadian
 
             this.Layer = layer;
             this.Layers = null;
@@ -124,14 +124,17 @@ namespace Retouch_Photo2.ViewModels.Selections
                 }
 
                 //Foreach
-                foreach (Layer item in layers)
+                foreach (Layer layer in layers)
                 {
-                    aaa(item.TransformerMatrix.Destination.LeftTop);
-                    aaa(item.TransformerMatrix.Destination.RightTop);
-                    aaa(item.TransformerMatrix.Destination.RightTop);
-                    aaa(item.TransformerMatrix.Destination.LeftBottom);
+                    aaa(layer.Destination.LeftTop);
+                    aaa(layer.Destination.RightTop);
+                    aaa(layer.Destination.RightTop);
+                    aaa(layer.Destination.LeftBottom);
 
-                    if (item.TransformerMatrix.DisabledRadian) disabledRadian = true;//DisabledRadian
+                    if (layer.DisabledRadian)
+                    {
+                        disabledRadian = true;//DisabledRadian
+                    }
                 }
             }
 

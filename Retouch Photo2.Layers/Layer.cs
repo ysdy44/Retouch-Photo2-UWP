@@ -13,36 +13,38 @@ namespace Retouch_Photo2.Layers
     /// <summary>
     /// Layer Classes.
     /// </summary>
-    public abstract partial class Layer : INotifyPropertyChanged
+    public abstract partial class Layer : INotifyPropertyChanged, ICacheTransform
     {
         //@Abstract
          /// <summary>
         /// Gets layer's icon.
         /// </summary>
         /// <returns> icon </returns>
-        public abstract UIElement GetIcon();      
+        public abstract UIElement GetIcon();
         /// <summary>
         /// Get layer own copy.
         /// </summary>
         /// /// <param name="resourceCreator"> resourceCreator </param>
-        /// <returns></returns>
+        /// <returns> The cloned layer. </returns>
         public abstract Layer Clone(ICanvasResourceCreator resourceCreator);
 
-        //@Virtual
+
+        //@Interface
         /// <summary>
-        ///  Cache a layer'a transformer.
+        ///  Cache a layer's transformer.
         /// </summary>
-        public virtual void CacheTransform() => this.TransformerMatrix.OldDestination = this.TransformerMatrix.Destination;
+        public virtual void CacheTransform()=>  this.OldDestination = this.Destination;        
         /// <summary>
         ///  Transforms a layer by the given matrix.
         /// </summary>
         /// <param name="matrix"> The sestination matrix. </param>
-        public virtual void TransformMultiplies(Matrix3x2 matrix) => this.TransformerMatrix.Destination = Transformer.Multiplies(this.TransformerMatrix.OldDestination, matrix);
+        public virtual void TransformMultiplies(Matrix3x2 matrix)=> this.Destination = Transformer.Multiplies(this.OldDestination, matrix);
         /// <summary>
         ///  Transforms a layer by the given vector.
         /// </summary>
         /// <param name="vector"> The sestination vector. </param>
-        public virtual void TransformAdd(Vector2 vector) => this.TransformerMatrix.Destination = Transformer.Add(this.TransformerMatrix.OldDestination, vector);
+        public virtual void TransformAdd(Vector2 vector)=>  this.Destination = Transformer.Add(this.OldDestination, vector);
+        
 
         
         /// <summary> <see cref = "Layer" />'s name. </summary>
@@ -54,13 +56,27 @@ namespace Retouch_Photo2.Layers
         /// <summary> <see cref = "Layer" />'s blend type. </summary>
         public BlendType BlendType;
 
-        /// <summary> <see cref = "Layer" />'s TransformerMatrix. </summary>
-        public TransformerMatrix TransformerMatrix;
+
+        
+        /// <summary>
+        /// Gets transformer-matrix>'s resulting matrix.
+        /// </summary>
+        /// <returns> The product matrix. </returns>
+        public Matrix3x2 GetMatrix() => Transformer.FindHomography(this.Source, this.Destination);
+        /// <summary> The source Transformer. </summary>
+        public Transformer Source { get; set; }
+        /// <summary> The destination Transformer. </summary>
+        public Transformer Destination { get; set; }
+        /// <summary> <see cref = "TransformerMatrix.Destination" />'s old cache. </summary>
+        public Transformer OldDestination { get; set; }
+        /// <summary> Is disable rotate radian? Defult **false**. </summary>
+        public bool DisabledRadian { get; set; }
+
+
 
         /// <summary> <see cref = "Layer" />'s children layers. </summary>
         public ObservableCollection<Layer> Children = new ObservableCollection<Layer>();
-        
-        /// <summary> <see cref = "Layer" />'s EffectManager. </summary>
+                /// <summary> <see cref = "Layer" />'s EffectManager. </summary>
         public EffectManager EffectManager = new EffectManager();
         /// <summary> <see cref = "Layer" />'s AdjustmentManager. </summary>
         public AdjustmentManager AdjustmentManager = new AdjustmentManager();

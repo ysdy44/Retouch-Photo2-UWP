@@ -40,10 +40,10 @@ namespace Retouch_Photo2.Layers
         public virtual void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession ds, Matrix3x2 matrix, Windows.UI.Color accentColor)
         {
             //LTRB
-            Vector2 leftTop = Vector2.Transform(this.TransformerMatrix.Destination.LeftTop, matrix);
-            Vector2 rightTop = Vector2.Transform(this.TransformerMatrix.Destination.RightTop, matrix);
-            Vector2 rightBottom = Vector2.Transform(this.TransformerMatrix.Destination.RightBottom, matrix);
-            Vector2 leftBottom = Vector2.Transform(this.TransformerMatrix.Destination.LeftBottom, matrix);
+            Vector2 leftTop = Vector2.Transform(this.Destination.LeftTop, matrix);
+            Vector2 rightTop = Vector2.Transform(this.Destination.RightTop, matrix);
+            Vector2 rightBottom = Vector2.Transform(this.Destination.RightBottom, matrix);
+            Vector2 leftBottom = Vector2.Transform(this.Destination.LeftBottom, matrix);
 
             ds.DrawLine(leftTop, rightTop, accentColor);
             ds.DrawLine(rightTop, rightBottom, accentColor);

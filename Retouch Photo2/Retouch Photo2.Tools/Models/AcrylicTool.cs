@@ -23,10 +23,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             IsChecked = true,
             TintColor = this.SelectionViewModel.FillColor,
-            TransformerMatrix = new TransformerMatrix(transformer)
-            {
-                DisabledRadian= true//DisabledRadian
-            }
+
+            Source = transformer,
+            Destination = transformer,
+            DisabledRadian = true//DisabledRadian
         };
 
         //@Construct

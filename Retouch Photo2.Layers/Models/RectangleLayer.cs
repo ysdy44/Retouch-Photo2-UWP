@@ -32,12 +32,9 @@ namespace Retouch_Photo2.Layers.Models
                 IsChecked = base.IsChecked,
                 Visibility = base.Visibility,
 
-                TransformerMatrix = new TransformerMatrix
-                {
-                    Source = base.TransformerMatrix.Source,
-                    Destination = base.TransformerMatrix.Destination,
-                    DisabledRadian = base.TransformerMatrix.DisabledRadian,
-                },
+                Source = base.Source,
+                Destination = base.Destination,
+                DisabledRadian = base.DisabledRadian,
 
                 FillBrush = base.FillBrush,
                 StrokeBrush = base.StrokeBrush,
@@ -47,10 +44,10 @@ namespace Retouch_Photo2.Layers.Models
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
             //LTRB
-            Vector2 leftTop = Vector2.Transform(base.TransformerMatrix.Destination.LeftTop, canvasToVirtualMatrix);
-            Vector2 rightTop = Vector2.Transform(base.TransformerMatrix.Destination.RightTop, canvasToVirtualMatrix);
-            Vector2 rightBottom = Vector2.Transform(base.TransformerMatrix.Destination.RightBottom, canvasToVirtualMatrix);
-            Vector2 leftBottom = Vector2.Transform(base.TransformerMatrix.Destination.LeftBottom, canvasToVirtualMatrix);
+            Vector2 leftTop = Vector2.Transform(base.Destination.LeftTop, canvasToVirtualMatrix);
+            Vector2 rightTop = Vector2.Transform(base.Destination.RightTop, canvasToVirtualMatrix);
+            Vector2 rightBottom = Vector2.Transform(base.Destination.RightBottom, canvasToVirtualMatrix);
+            Vector2 leftBottom = Vector2.Transform(base.Destination.LeftBottom, canvasToVirtualMatrix);
 
             //Points
             Vector2[] points = new Vector2[]
