@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:brushs="using:Retouch_Photo2.Brushs"
+    xmlns:brushsControls="using:Retouch_Photo2.Brushs.Controls"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -13,10 +14,10 @@
 
     <Page.Resources>
         <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <brushs:BrushColorPicker x:Name="ColorPicker" Width="222"/>
+            <brushsControls:ColorPicker x:Name="ColorPicker" Width="222"/>
         </Flyout>
         <Flyout x:Name="BrushFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <brushs:BrushPicker x:Name="BrushPicker" Width="320"/>
+            <brushsControls:StopsPicker x:Name="BrushPicker" Width="320"/>
         </Flyout>
     </Page.Resources>
     
@@ -44,9 +45,9 @@
                  >
                 <ComboBoxItem x:Name="NoneComboBoxItem" Content="None"/>
                 <ComboBoxItem x:Name="ColorComboBoxItem" Content="Color"/>
-                <ComboBoxItem x:Name="LinearGradientComboBoxItem" Content="Linear gradient"/>
-                <ComboBoxItem x:Name="RadialGradientComboBoxItem" Content="Radial gradient"/>
-                <ComboBoxItem x:Name="EllipticalGradientComboBoxItem" Content="Elliptical gradient"/>
+                <ComboBoxItem x:Name="LinearGradientComboBoxItem" Content="Linear"/>
+                <ComboBoxItem x:Name="RadialGradientComboBoxItem" Content="Radial"/>
+                <ComboBoxItem x:Name="EllipticalGradientComboBoxItem" Content="Elliptical"/>
                 <ComboBoxItem x:Name="ImageComboBoxItem" Content="Image"/>
             </ComboBox>
         </Border>
@@ -54,10 +55,10 @@
         <AppBarSeparator/>
         
         <TextBlock Text="Brush:" Style="{StaticResource AppTextBlock}"/>
-        <brushs:BrushShowControl x:Name="ShowControl" 
+        <brushsControls:ShowControl x:Name="ShowControl" 
                                  Color="{x:Bind SelectionViewModel.Color,Mode=OneWay}"
-                                 Type="{x:Bind SelectionViewModel.BrushType,Mode=OneWay}"
-                                 Array="{x:Bind SelectionViewModel.BrushArray,Mode=OneWay}"
+                                 BrushType="{x:Bind SelectionViewModel.BrushType,Mode=OneWay}"
+                                 BrushArray="{x:Bind SelectionViewModel.BrushArray,Mode=OneWay}"
                                  />
         
     </StackPanel>

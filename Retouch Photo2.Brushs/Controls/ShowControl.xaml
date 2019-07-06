@@ -1,6 +1,6 @@
 ﻿<UserControl
     x:Name="UserControl"
-    x:Class="Retouch_Photo2.Brushs.BrushShowControl"
+    x:Class="Retouch_Photo2.Brushs.Controls.ShowControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -13,11 +13,7 @@
     d:DesignWidth="50"
     >
 
-    <Border x:Name="Border" 
-            Width="{x:Bind UserControl.Width,Mode=OneWay}"
-            Height="{x:Bind UserControl.Height,Mode=OneWay}"
-            Style="{StaticResource AppRoundedBorderStyle}"
-            >
+    <Border x:Name="Border" Width="{x:Bind UserControl.Width,Mode=OneWay}" Height="{x:Bind UserControl.Height,Mode=OneWay}" Style="{StaticResource AppRoundedBorderStyle}">
         <canvas:CanvasControl x:Name="CanvasControl" IsHitTestVisible="False"/>
-    </Border>
+    </Border>    
 </UserControl>

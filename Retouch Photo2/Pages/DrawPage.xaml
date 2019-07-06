@@ -16,6 +16,7 @@
     xmlns:transformers="using:FanKit.Transformers"
     xmlns:layers="using:Retouch_Photo2.Layers"
     xmlns:selection="using:Retouch_Photo2.Selections"
+    xmlns:controls1="using:Retouch_Photo2.Brushs.Controls"
     NavigationCacheMode="Enabled"    
     mc:Ignorable="d"
     >
@@ -300,8 +301,8 @@
             </elements:MenuLayout>
             
         </Canvas>
-
-
+        
+        
         <!--Load-->
         <elements:LoadingControl x:Name="LoadingControl" Text="Saving..."/>
 

@@ -6,6 +6,7 @@ using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
 using System.Numerics;
+using Microsoft.Graphics.Canvas.Brushes;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.Layers;
@@ -310,7 +311,9 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                     case BrushType.RadialGradient:
                     case BrushType.EllipticalGradient:
                         {
-                            this.BrushPicker.Array = this.SelectionViewModel.BrushArray;
+                            CanvasGradientStop[] array= this.SelectionViewModel.BrushArray;
+                            this.BrushPicker.SetArray(array);
+
                             this.BrushFlyout.ShowAt(this.ShowControl);
                         }
                         break;
@@ -320,6 +323,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                         break;
                 }
             };
+
             this.ColorPicker.ColorChange += (s, value) =>
             {
                 this.SelectionViewModel.Color = value;
@@ -347,6 +351,43 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                             this.SelectionViewModel.SetValue((layer) =>
                             {
                                 layer.SetStrokeColor(value);
+                            }, true);
+                        }
+                        break;
+                }
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+
+            this.BrushPicker.StopsChanged += (array) =>
+            {
+                //Selection
+                this.SelectionViewModel.BrushArray = (CanvasGradientStop[])array.Clone();
+
+                //FillOrStroke
+                switch (this.SelectionViewModel.FillOrStroke)
+                {
+                    case FillOrStroke.Fill:
+                        {
+                            //Selection
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                if (layer is IGeometryLayer geometryLayer)
+                                {
+                                    geometryLayer.FillBrush.Array= (CanvasGradientStop[])array.Clone();
+                                }
+                            }, true);
+                        }
+                        break;
+                    case FillOrStroke.Stroke:
+                        {
+                            //Selection
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                if (layer is IGeometryLayer geometryLayer)
+                                {
+                                    geometryLayer.StrokeBrush.Array = (CanvasGradientStop[])array.Clone();
+                                }
                             }, true);
                         }
                         break;

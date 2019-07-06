@@ -10,14 +10,14 @@
     d:DesignHeight="50"
     d:DesignWidth="50">
 
-    <Grid x:Name="RootGrid">
-        <Ellipse StrokeThickness="1" Stroke="{ThemeResource AppText}">
+    <Grid x:Name="RootGrid" Background="Transparent">
+        <Ellipse IsHitTestVisible="False" StrokeThickness="1" Stroke="{ThemeResource AppText}">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="ms-appx:///Icons\GrayAndWhite.jpg"/>
             </Ellipse.Fill>
         </Ellipse>
 
-        <Ellipse Margin="1">
+        <Ellipse IsHitTestVisible="False" Margin="1">
             <Ellipse.Fill>
                 <SolidColorBrush Color="{x:Bind SelectionViewModel.FillColor,Mode=OneWay}"/>
             </Ellipse.Fill>

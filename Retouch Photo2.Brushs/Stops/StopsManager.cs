@@ -6,7 +6,9 @@ using Windows.UI;
 
 namespace Retouch_Photo2.Brushs.Stops
 {
-    /// <summary> Stops </summary>
+    /// <summary>
+    /// Manager of CanvasGradientStop class array.
+    /// </summary>
     public class StopsManager
     {
         public bool IsLeft;

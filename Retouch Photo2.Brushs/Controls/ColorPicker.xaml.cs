@@ -2,21 +2,22 @@
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Brushs
+namespace Retouch_Photo2.Brushs.Controls
 {
     /// <summary>
-    /// Picker of <see cref="Brush">.
+    /// Color picker (ง •̀_•́)ง
     /// </summary>
-    public sealed partial class BrushColorPicker : UserControl
+    public sealed partial class ColorPicker : UserControl
     {
         //@Delegate
+        /// <summary> Occurs when the color value changes. </summary>
         public event ColorChangeHandler ColorChange;
 
 
         #region Picker
 
-
-        Picker[] Pickers = new Picker[]
+        /// <summary> All pickers. </summary>
+        public Picker[] Pickers = new Picker[]
         {
             new Picker( "Swatches",new SwatchesPicker()),
             new Picker( "Wheel",new WheelPicker()),
@@ -27,7 +28,7 @@ namespace Retouch_Photo2.Brushs
             new Picker( "Palette Value",PalettePicker.CreateFormValue()),
         };
 
-        private int index;
+        /// <summary> Get or set index of the current picker. </summary>
         public int Index
         {
             get => this.index;
@@ -42,13 +43,14 @@ namespace Retouch_Photo2.Brushs
                 }
 
                 this.ContentControl.Content = newControl;
-                newControl.Color=this._Color;
+                newControl.Color = this._Color;
 
                 newControl.ColorChange += this.Picker_ColorChange;
 
                 this.index = value;
             }
         }
+        private int index;
 
 
         #endregion
@@ -57,19 +59,18 @@ namespace Retouch_Photo2.Brushs
         #region Color
 
 
-        /// <summary> Color of Color Picker </summary>
+        /// <summary> Get or set current color. </summary>
         public Color Color
         {
-            get => Color.FromArgb(this.Alpha, this._color.R, this._color.G, this._color.B);
+            get => Color.FromArgb(255, this._color.R, this._color.G, this._color.B);
             set
             {
-                if (value.A != this.Alpha) this.Alpha = value.A;
 
-                if (value.A == this.Alpha && value.R == this._color.R && value.G == this._color.G && value.B == this._color.B)
+                if ( value.R == this._color.R && value.G == this._color.G && value.B == this._color.B)
                     return;
 
                 Color color = Color.FromArgb(255, value.R, value.G, value.B);
-                this.Pickers[this.Index].Control.Color=color;
+                this.Pickers[this.Index].Control.Color = color;
 
                 this._color = color;
             }
@@ -80,27 +81,26 @@ namespace Retouch_Photo2.Brushs
             get => this._color;
             set
             {
-                if (value.A == this.Alpha && value.R == this._color.R && value.G == this._color.G && value.B == this._color.B)
+                if (value.R == this._color.R && value.G == this._color.G && value.B == this._color.B)
                     return;
 
                 this._color = Color.FromArgb(255, value.R, value.G, value.B);
-                this.ColorChange?.Invoke(this, Color.FromArgb(this.Alpha, value.R, value.G, value.B));//Delegate
+                this.ColorChange?.Invoke(this, Color.FromArgb(255, value.R, value.G, value.B));//Delegate
             }
         }
 
-        private Color _color;
-
-
-
-        /// <summary> Alpha of Color Picker </summary>
-        public byte Alpha;
-
+        private Color _color
+        {
+            get => this.SolidColorBrushName.Color;
+            set => this.SolidColorBrushName.Color = value;
+        }
+        
 
         #endregion
-
+        
 
         //@Construct
-        public BrushColorPicker()
+        public ColorPicker()
         {
             this.InitializeComponent();
 
@@ -108,19 +108,11 @@ namespace Retouch_Photo2.Brushs
             this.Index = 0;
             this.ComboBox.SelectedIndex = this.Index;
             this.ComboBox.SelectionChanged += (s, e) => this.Index = this.ComboBox.SelectedIndex;
-
-            //Alpha
-            this.Alpha = 255;
         }
 
         private void Picker_ColorChange(object sender, Color value)
         {
             this._Color = value;
-        }
-        private void Picker_ColorChange2(object sender, Color value)
-        {
-            this._Color = value;
-            this.Pickers[this.Index].Control.Color=value;
         }
     }
 }

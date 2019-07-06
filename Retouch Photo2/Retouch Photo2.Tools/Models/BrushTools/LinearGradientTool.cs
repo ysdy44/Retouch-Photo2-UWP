@@ -160,13 +160,26 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
 
             Vector2 startPoint = Vector2.Transform(this.StartPoint, matrix);
             Vector2 endPoint = Vector2.Transform(this.EndPoint, matrix);
-            ds.DrawThickLine(startPoint, endPoint);
 
+            //Line
+            ds.DrawLine(startPoint, endPoint, Windows.UI.Colors.White, 4);
+
+            //Circle
+            ds.FillCircle(startPoint, 10, Windows.UI.Colors.White);
+            ds.FillCircle(endPoint, 10, Windows.UI.Colors.White);
+
+            //Line
+            ds.DrawLine(startPoint, endPoint, this.ViewModel.AccentColor, 2);
+
+            //Circle
             foreach (CanvasGradientStop stop in this.SelectionViewModel.BrushArray)
             {
                 Vector2 position = startPoint * (1.0f - stop.Position) + endPoint * stop.Position;
-                ds.DrawNode2(position, stop.Color);
+
+                ds.FillCircle(position, 8, this.ViewModel.AccentColor);
+                ds.FillCircle(position, 6, stop.Color);
             }
+            
         }
     }
 }
