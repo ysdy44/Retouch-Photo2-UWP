@@ -11,27 +11,51 @@ namespace Retouch_Photo2.Brushs.Stops
     /// </summary>
     public class StopsManager
     {
+
+        /// <summary> Is it left? </summary>
         public bool IsLeft;
+        /// <summary> Left stop color. </summary>
         public Color LeftColor = Colors.White;
 
-        public int Index;
-        public int Count => this.Stops.Count;
-        public List<CanvasGradientStop> Stops = new List<CanvasGradientStop>();
-
+        /// <summary> Is it right? </summary>
         public bool IsRight;
+        /// <summary> Right stop color. </summary>
         public Color RightColor = Colors.Gray;
 
-        /// <summary> Initialize </summary>
-        public void Initialize(CanvasGradientStop[] array)
+        /// <summary> Index of stops. </summary>
+        public int Index;
+        /// <summary> Count of stops. </summary>
+        public int Count => this.Stops.Count;
+        /// <summary> Stops. </summary>
+        public List<CanvasGradientStop> Stops = new List<CanvasGradientStop>();
+
+
+        /// <summary>
+        /// Initialize this manager's data
+        /// </summary>
+        /// <param name="array"> array </param>
+        public void InitializeDate(CanvasGradientStop[] array)
         {
-            this.Index = -1;
-            this.IsLeft = true;
-            this.IsRight = false;
-
             int count = array.Count();
-            this.LeftColor = array[0].Color;
-            this.RightColor = array[count - 1].Color;
 
+            if (count <= 2)
+            {
+                this.Index = -1;
+                this.IsLeft = true;
+                this.IsRight = false;
+            }
+            else if (count - 2 <= this.Index)
+            {
+                this.Index = -1;
+                this.IsLeft = false;
+                this.IsRight = true;
+            }
+
+            //Left right
+            this.LeftColor = array.First().Color;
+            this.RightColor = array.Last().Color;
+
+            //Stops
             this.Stops.Clear();
             for (int i = 1; i < count - 1; i++)
             {
@@ -40,30 +64,41 @@ namespace Retouch_Photo2.Brushs.Stops
         }
 
 
-        /// <summary> Left + Stops + Right </summary>
-        public CanvasGradientStop[] GetArray()
+
+        /// <summary>
+        /// Generate a new CanvasGradientStop array from the manager's data.
+        /// </summary>
+        /// <returns> stops </returns>
+        public CanvasGradientStop[] GenerateArrayFromDate()
         {
             CanvasGradientStop[] array = new CanvasGradientStop[this.Count + 2];
-            this.SetArray(array);
+            this.Copy(array);
             return array;
         }
 
-        /// <summary> Left + Stops + Right </summary>
-        public void SetArray(CanvasGradientStop[] array)
+        /// <summary>
+        /// Assigning a value to an array by the manager's data.
+        /// </summary>
+        /// <param name="array"> The destination array. </param>
+        public void Copy(CanvasGradientStop[] array)
         {
             if (this.Count + 2 != array.Count()) return;
+
+            //left
             array[0] = new CanvasGradientStop
             {
                 Color = this.LeftColor,
                 Position = 0.0f
             };
 
+            //Right
             array[this.Count + 1] = new CanvasGradientStop
             {
                 Color = this.RightColor,
                 Position = 1.0f
             };
 
+            //Stops
             if (this.Count == 0) return;
             for (int i = 0; i < this.Count; i++)
             {
@@ -71,15 +106,22 @@ namespace Retouch_Photo2.Brushs.Stops
             }
         }
 
-        /// <summary> Get new stop. </summary>
-        public CanvasGradientStop GetNewStop(float offset)
+        /// <summary>
+        /// Insert a new step by offset.
+        /// </summary>
+        /// <param name="offset"> The source offset. </param>
+        /// <returns> stop </returns>
+        public CanvasGradientStop InsertNewStepByOffset(float offset)
         {
+            //Left
             Color left = this.LeftColor;
             float leftDistance = 1.0f;
 
+            //Right
             Color right = this.RightColor;
             float rightDistance = 1.0f;
 
+            //Stops
             foreach (CanvasGradientStop stop in this.Stops)
             {
                 float distance = offset - stop.Position;
@@ -111,7 +153,9 @@ namespace Retouch_Photo2.Brushs.Stops
             };
         }
 
-        /// <summary> Reserve all stops. </summary>
+        /// <summary>
+        /// Reverse all manager's data.
+        /// </summary>
         public void Reserve()
         {
             //Index
@@ -123,6 +167,7 @@ namespace Retouch_Photo2.Brushs.Stops
             this.LeftColor = RightColorColor;
             this.RightColor = leftStopColor;
 
+            //Stops
             for (int i = 0; i < this.Stops.Count; i++)
             {
                 CanvasGradientStop stop = this.Stops[i];
@@ -133,16 +178,6 @@ namespace Retouch_Photo2.Brushs.Stops
                 };
             }
         }
-
-
-        //Node
-        public void DrawLeftNode(CanvasDrawingSession ds, float x, float y) => this.DrawNode(ds, x, y, this.LeftColor, this.IsLeft);
-        public void DrawRightNode(CanvasDrawingSession ds, float x, float y) => this.DrawNode(ds, x, y, this.RightColor, this.IsRight);
-        public void DrawNode(CanvasDrawingSession ds, float x, float y, Color color, bool isCurrent)
-        {
-            ds.FillCircle(x, y, 10, isCurrent ? Colors.Black : Color.FromArgb(70, 127, 127, 127));
-            ds.FillCircle(x, y, 8, Colors.White);
-            ds.FillCircle(x, y, 6, color);
-        }
+        
     }
 }

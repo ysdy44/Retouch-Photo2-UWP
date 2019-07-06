@@ -1,45 +1,80 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
-using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Brushs.Stops;
 using System;
 using System.Linq;
-using System.Numerics;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Brushs.Controls
 {
     //@Delegate
-    public delegate void StopsChangedHandler(CanvasGradientStop[] array);
+    /// <summary>
+    ///  Method that represents the handling of the StopsChanged event.
+    /// </summary>
+    /// <param name="sender"> The object to which the event handler is attached. </param>
+    /// <param name="array"> Event data. </param>
+    public delegate void StopsChangedHandler(object sender, CanvasGradientStop[] array);
+
 
     /// <summary>
     /// Stops picker.
     /// </summary>
     public sealed partial class StopsPicker : UserControl
-    {       
+    {
         //@Delegate
+        /// <summary> Occurs when the stops changes. </summary>
         public event StopsChangedHandler StopsChanged;
 
+        //@Content
+        /// <summary> ComboBox's item. </summary>
+        public ComboBoxItem LinearGradientComboBoxItem => this._LinearGradientComboBoxItem;
+        /// <summary> ComboBox's item. </summary>
+        public ComboBoxItem RadialGradientComboBoxItem => this._RadialGradientComboBoxItem;
+        /// <summary> ComboBox's item. </summary>
+        public ComboBoxItem EllipticalGradientComboBoxItem => this._EllipticalGradientComboBoxItem;
+
+        //Background
+        CanvasBitmap GrayAndWhiteBackground;
 
         StopsSize Size = new StopsSize();
         StopsManager Manager = new StopsManager();
 
-        float SizeWidth;
-        float SizeHeight;
-        CanvasBitmap Bitmap; 
 
         private CanvasGradientStop[] array;
+        /// <summary>
+        /// Set a brush value for the control.
+        /// </summary>
+        /// <param name="value"> brush </param>
         public void SetArray(CanvasGradientStop[] value)
         {
             if (value != null)
             {
-                this.Manager.Initialize(value);
+                this.Manager.InitializeDate(value);
                 CanvasGradientStop stop = value.First();
                 this.StopChanged(stop.Color, (int)(stop.Position * 100), false);
             }
 
             this.array = value;
+        }
+        /// <summary>
+        /// Set a brush type for the control.
+        /// </summary>
+        /// <param name="value"></param>
+        public void SetBrushType(BrushType value)
+        {
+            switch (value)
+            {
+                case BrushType.LinearGradient:
+                    this.ComboBox.SelectedIndex = 000;
+                    break;
+                case BrushType.RadialGradient:
+                    this.ComboBox.SelectedIndex = 001;
+                    break;
+                case BrushType.EllipticalGradient:
+                    this.ComboBox.SelectedIndex = 002;
+                    break;
+            }
         }
 
 
@@ -48,6 +83,136 @@ namespace Retouch_Photo2.Brushs.Controls
         {
             this.InitializeComponent();
 
+            //Canvas
+            this.CanvasControl.SizeChanged += (s, e) =>
+            {
+                if (e.NewSize == e.PreviousSize) return;
+                this.Size.SIzeChange((float)e.NewSize.Width, (float)e.NewSize.Height);
+            };
+            this.CanvasControl.CreateResources += (sender, args) => this.GrayAndWhiteBackground = Brush.CreateGrayAndWhiteBackground(sender, (float)sender.ActualWidth, (float)sender.ActualHeight, 6);
+            this.CanvasControl.Draw += (sender, args) =>
+            {
+                if (this.array == null) return;
+
+                //Background
+                args.DrawingSession.DrawImage(this.GrayAndWhiteBackground);
+
+                //LinearGradient
+                this.Size.DrawLinearGradient(args.DrawingSession, this.CanvasControl, this.array);
+
+                //Lines
+                this.Size.DrawLines(args.DrawingSession);
+
+                //Nodes
+                this.Size.DrawNodes(args.DrawingSession, this.Manager);
+            };
+
+
+            //CanvasOperator
+            this.CanvasOperator.Single_Start += (point) =>
+            {
+                if (this.array == null) return;
+
+                this.Manager.Index = -1;
+                this.Manager.IsLeft = false;
+                this.Manager.IsRight = false;
+
+                //Stops
+                for (int i = this.Manager.Count - 1; i >= 0; i--)
+                {
+                    float x = this.Size.OffsetToPosition(this.Manager.Stops[i].Position);
+                    if (Math.Abs(x - point.X) < StopsSize.Radius)
+                    {
+                        this.Manager.Index = i;
+                        CanvasGradientStop stop = this.Manager.Stops[i];
+                        this.StopChanged(stop.Color, (int)(stop.Position * 100), true);//Delegate
+                        return;
+                    }
+                }
+
+                //Left
+                bool isLeft = (Math.Abs(this.Size.Left - point.X) < StopsSize.Radius);
+                if (isLeft)
+                {
+                    this.Manager.IsLeft = true;
+                    this.StopChanged(this.Manager.LeftColor, 0, false);//Delegate
+                    return;
+                }
+
+                //Right
+                bool isRight = (Math.Abs(this.Size.Right - point.X) < StopsSize.Radius);
+                if (isRight)
+                {
+                    this.Manager.IsRight = true;
+                    this.StopChanged(this.Manager.RightColor, 100, false);//Delegate
+                    return;
+                }
+
+
+                //Add
+                float offset = this.Size.PositionToOffset(point.X);
+                CanvasGradientStop addStop = this.Manager.InsertNewStepByOffset(offset);
+
+                this.Manager.Stops.Add(addStop);
+                this.Manager.Index = this.Manager.Count - 1;
+
+                CanvasGradientStop[] array = this.Manager.GenerateArrayFromDate();
+                this.SetArray(array);
+
+                this.StopChanged(addStop.Color, (int)(addStop.Position * 100), true);//Delegate
+                return;
+            };
+            this.CanvasOperator.Single_Delta += (point) =>
+            {
+                if (this.array == null) return;
+
+                if (this.Manager.IsLeft) return;
+                if (this.Manager.IsRight) return;
+
+                float offset = this.Size.PositionToOffset(point.X);
+                this.SetOffset(offset);
+
+                this.OffsetChanged(offset);
+
+                this.CanvasControl.Invalidate();
+                this.StopsChanged?.Invoke(this, this.array);//Delegate
+            };
+            this.CanvasControl.PointerReleased += (s, e) =>
+            {
+                if (this.array == null) return;
+
+                this.CanvasControl.Invalidate();
+                this.StopsChanged?.Invoke(this, this.array);//Delegate
+            };
+
+
+            //Color            
+            this.ColorPicker.ColorChange += (s, color) => this.SetColor(color);
+            this.StrawPicker.ColorChange += (s, color) => this.SetColor(color);
+            this.ColorButton.Tapped += (s, e) =>
+            {
+                if (this.array == null) return;
+
+                if (this.Manager.IsLeft || this.Manager.IsRight || this.Manager.Index >= 0)
+                {
+                    this.ColorPicker.Color = this.SolidColorBrush.Color;
+                    this.ColorFlyout.ShowAt(this.ColorButton);//Flyout
+                }
+            };
+
+
+            //Opacity         
+            this.OpacityPicker.Minimum = 0;
+            this.OpacityPicker.Maximum = 255;
+            this.OpacityPicker.Unit = "º";
+            this.OpacityPicker.ValueChange += (s, value) => this.SetColor(Color.FromArgb((byte)value, this.SolidColorBrush.Color.R, this.SolidColorBrush.Color.G, this.SolidColorBrush.Color.B));
+
+            //Offset         
+            this.OffsetPicker.Minimum = 0;
+            this.OffsetPicker.Maximum = 100;
+            this.OffsetPicker.Unit = "%";
+            this.OffsetPicker.ValueChange += (s, value) => this.SetOffset((float)value / 100.0f);
+
 
             // Reserve all stops. 
             this.ReserveButton.Tapped += (s, e) =>
@@ -55,12 +220,13 @@ namespace Retouch_Photo2.Brushs.Controls
                 if (this.array == null) return;
 
                 this.Manager.Reserve();
-                this.Manager.SetArray(this.array);
+                this.Manager.Copy(this.array);
 
                 this.CanvasControl.Invalidate();
-                this.StopsChanged?.Invoke(this.array);//Delegate
+                this.StopsChanged?.Invoke(this, this.array);//Delegate
             };
-            // Remove current stop
+
+            // Remove current stop.
             this.RemoveButton.Tapped += (s, e) =>
             {
 
@@ -92,179 +258,25 @@ namespace Retouch_Photo2.Brushs.Controls
                     this.StopChanged(stop.Color, 0, false);
                 }
 
-                this.array = this.Manager.GetArray();
+                this.array = this.Manager.GenerateArrayFromDate();
 
                 this.CanvasControl.Invalidate();
-                this.StopsChanged?.Invoke(this.array);//Delegate
+                this.StopsChanged?.Invoke(this, this.array);//Delegate
             };
-
-
-            //Canvas
-            this.CanvasControl.SizeChanged += (s, e) =>
-            {
-                if (e.NewSize == e.PreviousSize) return;
-                this.SizeWidth = (float)e.NewSize.Width;
-                this.SizeHeight = (float)e.NewSize.Height;
-                this.Size.SIzeChange(this.SizeWidth, this.SizeHeight);
-            };
-            this.CanvasControl.CreateResources += (sender, args) =>
-            {
-                Color[] colors = new Color[]
-                {
-                     Windows.UI.Colors.LightGray, Windows.UI.Colors.White,
-                     Windows.UI.Colors.White, Windows.UI.Colors.LightGray
-                };
-                this.Bitmap = CanvasBitmap.CreateFromColors(sender, colors, 2, 2);
-            };
-            this.CanvasControl.Draw += (sender, args) =>
-            {
-                if (this.array == null) return;
-
-                args.DrawingSession.DrawImage(new DpiCompensationEffect
-                {
-                    Source = new ScaleEffect
-                    {
-                        Scale = new Vector2(this.SizeHeight / 5),
-                        InterpolationMode = CanvasImageInterpolation.NearestNeighbor,
-                        Source = new BorderEffect
-                        {
-                            ExtendX = CanvasEdgeBehavior.Wrap,
-                            ExtendY = CanvasEdgeBehavior.Wrap,
-                            Source = this.Bitmap
-                        }
-                    }
-                });
-
-                //Background
-                this.Size.DrawBackground(args.DrawingSession, this.CanvasControl, this.array);
-
-                //Stops
-                for (int i = 0; i < this.Manager.Count; i++)
-                {
-                    CanvasGradientStop stop = this.Manager.Stops[i];
-                    this.Manager.DrawNode(args.DrawingSession, this.Size.OffsetToPosition(stop.Position), this.Size.Center, stop.Color, (i == this.Manager.Index));
-                }
-                this.Manager.DrawLeftNode(args.DrawingSession, this.Size.Left, this.Size.Center);
-                this.Manager.DrawRightNode(args.DrawingSession, this.Size.Right, this.Size.Center);
-            };
-
-
-            //CanvasOperator
-            this.CanvasOperator.Single_Start += (point) =>
-            {
-                if (this.array == null) return;
-
-                this.Manager.Index = -1;
-                this.Manager.IsLeft = false;
-                this.Manager.IsRight = false;
-
-                //Stops
-                for (int i = this.Manager.Count - 1; i >= 0; i--)
-                {
-                    float x = this.Size.OffsetToPosition(this.Manager.Stops[i].Position);
-                    if (Math.Abs(x - point.X) < this.Size.Radius)
-                    {
-                        this.Manager.Index = i;
-                        CanvasGradientStop stop = this.Manager.Stops[i];
-                        this.StopChanged(stop.Color, (int)(stop.Position * 100), true);//Delegate
-                        return;
-                    }
-                }
-
-                //Left
-                bool isLeft = (Math.Abs(this.Size.Left - point.X) < this.Size.Radius);
-                if (isLeft)
-                {
-                    this.Manager.IsLeft = true;
-                    this.StopChanged(this.Manager.LeftColor, 0, false);//Delegate
-                    return;
-                }
-
-                //Right
-                bool isRight = (Math.Abs(this.Size.Right - point.X) < this.Size.Radius);
-                if (isRight)
-                {
-                    this.Manager.IsRight = true;
-                    this.StopChanged(this.Manager.RightColor, 100, false);//Delegate
-                    return;
-                }
-
-
-                //Add
-                float offset = this.Size.PositionToOffset(point.X);
-                CanvasGradientStop addStop = this.Manager.GetNewStop(offset);
-
-                this.Manager.Stops.Add(addStop);
-                this.Manager.Index = this.Manager.Count - 1;
-
-                CanvasGradientStop[] array = this.Manager.GetArray();
-                this.SetArray(array);
-
-                this.StopChanged(addStop.Color, (int)(addStop.Position * 100), true);//Delegate
-                return;
-            };
-            this.CanvasOperator.Single_Delta += (point) =>
-            {
-                if (this.array == null) return;
-
-                if (this.Manager.IsLeft) return;
-                if (this.Manager.IsRight) return;
-
-                float offset = this.Size.PositionToOffset(point.X);
-                this.SetOffset(offset);
-
-                this.OffsetChanged(offset);
-
-                this.CanvasControl.Invalidate();
-                this.StopsChanged?.Invoke(this.array);//Delegate
-            };
-            this.CanvasControl.PointerReleased += (s, e) =>
-            {
-                if (this.array == null) return;
-
-                this.CanvasControl.Invalidate();
-                this.StopsChanged?.Invoke(this.array);//Delegate
-            };
-
-
-            //Color            
-            this.ColorPicker.ColorChange += (s, color) =>
-            {
-                this.SetColor(color);
-            };
-            this.StrawPicker.ColorChange += (s, color) =>
-            {
-                this.SetColor(color);
-            };
-            this.ColorButton.Tapped += (s, e) =>
-            {
-                if (this.array == null) return;
-
-                if (this.Manager.IsLeft || this.Manager.IsRight || this.Manager.Index >= 0)
-                {
-                    this.ColorFlyout.ShowAt(this.ColorButton);
-                    this.ColorPicker.Color = this.SolidColorBrush.Color;
-                }
-            };
-
-
-            //Opacity         
-            this.OpacityPicker.Minimum = 0;
-            this.OpacityPicker.Maximum = 255;
-            this.OpacityPicker.Unit = "º";
-            this.OpacityPicker.ValueChange += (s, value) => this.SetColor(Color.FromArgb((byte)value, this.SolidColorBrush.Color.R, this.SolidColorBrush.Color.G, this.SolidColorBrush.Color.B));
-
-
-            //Offset         
-            this.OffsetPicker.Minimum = 0;
-            this.OffsetPicker.Maximum = 100;
-            this.OffsetPicker.Unit = "%";
-            this.OffsetPicker.ValueChange += (s, value) => this.SetOffset((float)value / 100.0f);
-
         }
 
 
+        /// <summary>
+        ///  Occur when the offset changed.
+        /// </summary>
+        /// <param name="offset"> offset </param>
         private void OffsetChanged(float offset) => this.OffsetPicker.Value = (int)(offset * 100);
+        /// <summary>
+        ///  Occur when the stop changed.
+        /// </summary>
+        /// <param name="color"> The source stop color. </param>
+        /// <param name="offset"> The source stop offset. </param>
+        /// <param name="isEnabled"> Control enabled. </param>
         private void StopChanged(Color color, int offset, bool isEnabled)
         {
             this.SolidColorBrush.Color = color;
@@ -272,11 +284,16 @@ namespace Retouch_Photo2.Brushs.Controls
             this.OpacityPicker.Value = color.A;
             this.OffsetPicker.Value = offset;
 
-            this.RemoveButton.IsEnabled = this.OffsetPicker.IsEnabled = isEnabled;
+            //IsEnabled
+            this.RemoveButton.IsEnabled = isEnabled;
+            this.OffsetPicker.IsEnabled = isEnabled;
         }
 
 
-        // <summary> Set the offset of the current stop. </summary>
+        /// <summary>
+        /// Set the offset of the current stop.
+        /// </summary>
+        /// <param name="offset"> The source stop offset. </param>
         public void SetOffset(float offset)
         {
             if (this.array == null) return;
@@ -305,7 +322,10 @@ namespace Retouch_Photo2.Brushs.Controls
             this.CanvasControl.Invalidate();
             return;
         }
-        // <summary> Set the color of the current stop. </summary>
+        /// <summary>
+        /// Set the color of the current stop.
+        /// </summary>
+        /// <param name="color"> The source stop color. </param>
         public void SetColor(Color color)
         {
             this.SolidColorBrush.Color = color;
@@ -324,7 +344,7 @@ namespace Retouch_Photo2.Brushs.Controls
                 };
 
                 this.CanvasControl.Invalidate();
-                this.StopsChanged?.Invoke(this.array);//Delegate
+                this.StopsChanged?.Invoke(this, this.array);//Delegate
                 return;
             }
 
@@ -338,7 +358,7 @@ namespace Retouch_Photo2.Brushs.Controls
                 };
 
                 this.CanvasControl.Invalidate();
-                this.StopsChanged?.Invoke(this.array);//Delegate
+                this.StopsChanged?.Invoke(this, this.array);//Delegate
                 return;
             }
 
@@ -359,10 +379,10 @@ namespace Retouch_Photo2.Brushs.Controls
                 this.array[index + 1] = stop;
 
                 this.CanvasControl.Invalidate();
-                this.StopsChanged?.Invoke(this.array);//Delegate
+                this.StopsChanged?.Invoke(this, this.array);//Delegate
                 return;
             }
         }
-                          
+
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
-using Microsoft.Graphics.Canvas.Effects;
 using System.Numerics;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
@@ -18,7 +17,7 @@ namespace Retouch_Photo2.Brushs.Controls
         Vector2 Center;
 
         //Background
-        CanvasRenderTarget GrayAndWhiteBackground;
+        CanvasBitmap GrayAndWhiteBackground;
         
              
         #region DependencyProperty
@@ -79,7 +78,7 @@ namespace Retouch_Photo2.Brushs.Controls
                 this.SizeHeight = (float)e.NewSize.Height;
                 this.Center = new Vector2(this.SizeWidth / 2, this.SizeHeight / 2);
             };
-            this.CanvasControl.CreateResources += (sender, args) => this.GrayAndWhiteBackground = ShowControl.CreateGrayAndWhiteBackground(sender, (float)sender.ActualWidth, (float)sender.ActualHeight);
+            this.CanvasControl.CreateResources += (sender, args) => this.GrayAndWhiteBackground = Brush.CreateGrayAndWhiteBackground(sender, (float)sender.ActualWidth, (float)sender.ActualHeight);
             this.CanvasControl.Draw += (s, args) =>
             {
                 switch (this.brushType)
@@ -134,50 +133,7 @@ namespace Retouch_Photo2.Brushs.Controls
                 }
 
             };
-        }        
-
-
-        //@Static
-        /// <summary>
-        /// Create a gray-and-white bitmap.
-        /// </summary>
-        /// <param name="resourceCreator"> resourceCreator </param>
-        /// <param name="width"> The bitmap width. </param>
-        /// <param name="height"> The bitmap height. </param>
-        /// <returns> CanvasRenderTarget </returns>
-        public static CanvasRenderTarget CreateGrayAndWhiteBackground(ICanvasResourceCreatorWithDpi resourceCreator, float width, float height)
-        {
-            CanvasRenderTarget background = new CanvasRenderTarget(resourceCreator, width, height);
-
-            Color[] colors = new Color[]
-            {
-                  Windows.UI.Colors.LightGray,
-                  Windows.UI.Colors.White,
-                  Windows.UI.Colors.White,
-                  Windows.UI.Colors.LightGray
-            };
-
-            CanvasBitmap bitmap = CanvasBitmap.CreateFromColors(resourceCreator, colors, 2, 2);
-
-            using (CanvasDrawingSession ds = background.CreateDrawingSession())
-            {
-                ds.DrawImage(new DpiCompensationEffect
-                {
-                    Source = new ScaleEffect
-                    {
-                        Scale = new Vector2(height / 4),
-                        InterpolationMode = CanvasImageInterpolation.NearestNeighbor,
-                        Source = new BorderEffect
-                        {
-                            ExtendX = CanvasEdgeBehavior.Wrap,
-                            ExtendY = CanvasEdgeBehavior.Wrap,
-                            Source = bitmap
-                        }
-                    }
-                });
-            }
-
-            return background;
         }
+
     }
 }

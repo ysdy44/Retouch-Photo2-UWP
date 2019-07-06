@@ -16,8 +16,8 @@
         <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <brushsControls:ColorPicker x:Name="ColorPicker" Width="222"/>
         </Flyout>
-        <Flyout x:Name="BrushFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <brushsControls:StopsPicker x:Name="BrushPicker" Width="320"/>
+        <Flyout x:Name="StopsFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <brushsControls:StopsPicker x:Name="StopsPicker" Width="320"/>
         </Flyout>
     </Page.Resources>
     
