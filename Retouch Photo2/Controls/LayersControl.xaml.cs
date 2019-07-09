@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Elements;
+﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
@@ -6,6 +7,7 @@ using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
 using System;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -32,8 +34,6 @@ namespace Retouch_Photo2.Controls
 
             this.ViewModel.Layers.CollectionChanged += (s, e) =>
             {
-                this.ViewModel.Text = e.Action.ToString();
-
                if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
                 {
                     this.ViewModel.Invalidate();//Invalidate
@@ -43,25 +43,22 @@ namespace Retouch_Photo2.Controls
             this.AddButton.Tapped += async (s, e) =>
             {
                 //File
-                FileOpenPicker openPicker = new FileOpenPicker
-                {
-                    ViewMode = PickerViewMode.Thumbnail,
-                    SuggestedStartLocation = PickerLocationId.PicturesLibrary,
-                    FileTypeFilter =
-                 {
-                     ".jpg",
-                     ".jpeg",
-                     ".png",
-                     ".bmp",
-                 }
-                };
-
-                var file = await openPicker.PickSingleFileAsync();
+                StorageFile file = await this.ViewModel.PickSingleFileAsync( PickerLocationId.PicturesLibrary);
                 if (file == null) return;
 
-                //ImageLayer
-                Layer imageLayer = await ImageLayer.CreateFromFlie(this.ViewModel.CanvasDevice, file);
-                imageLayer.IsChecked = true;
+                //ImageKey
+                string imageKey = file.Name;
+
+                //CanvasBitmap
+                CanvasBitmap bitmap = await this.ViewModel.GetCanvasBitmap(file);
+                if (bitmap == null) return;
+
+                //Images
+                this.ViewModel.Images.Add(imageKey, bitmap);
+
+                //Layer
+                ImageLayer imageLayer = new ImageLayer(imageKey, this.ViewModel.GetImage);
+                if (imageLayer == null) return;
 
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
@@ -74,7 +71,6 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Layers.Insert(index, imageLayer);
 
                 this.SelectionViewModel.SetModeSingle(imageLayer);//Selection
-
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -124,7 +120,7 @@ namespace Retouch_Photo2.Controls
             {
                 if (this.TipViewModel.LayerMenuLayoutState == MenuLayoutState.FlyoutHide)
                 {
-                this.TipViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutShow;
+                    this.TipViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutShow;
                 }
             }
             else //ItemClick

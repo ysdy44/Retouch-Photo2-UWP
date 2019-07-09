@@ -19,14 +19,14 @@
         <AppBarSeparator/>
 
         <TextBlock Text="TintOpacity:" Style="{StaticResource AppTextBlock}"/>
-        <Border Width="70" Height="40" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
+        <Border Width="70" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
             <hSVColorPickers:NumberPicker x:Name="TintOpacityPicker" Value="{x:Bind TintOpacityConverter(SelectionViewModel.AcrylicTintOpacity),Mode=OneWay}" Unit="%" Width="Auto"/>
         </Border>
         
         <AppBarSeparator/>
 
         <TextBlock Text="BlurAmount:" Style="{StaticResource AppTextBlock}"/>
-        <Border Width="70" Height="40" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
+        <Border Width="70" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
             <hSVColorPickers:NumberPicker x:Name="BlurAmountPicker" Value="{x:Bind BlurAmountConverter(SelectionViewModel.AcrylicBlurAmount),Mode=OneWay}" Unit="dp" Width="Auto"/>
         </Border>
         

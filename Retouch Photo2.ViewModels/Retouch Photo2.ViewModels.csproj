@@ -122,6 +122,7 @@
     <Compile Include="Tips\TipViewModel.MenuLayoutState.cs" />
     <Compile Include="Tips\TipViewModel.Tool.cs" />
     <Compile Include="ViewModel.cs" />
+    <Compile Include="ViewModel.Image.cs" />
     <Compile Include="ViewModel.Notify.cs" />
     <Compile Include="ViewModel.Transformer.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.ViewModels.rd.xml" />

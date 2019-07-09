@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel;
-using Windows.UI;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -10,10 +8,6 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
-                   
-
-        
-         
 
         /// <summary> Sets or Gets the on state of the theme on the canvas. </summary>
         public ElementTheme CanvasTheme
@@ -51,9 +45,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private bool canvasHitTestVisible = true;
-
-        
-
+               
 
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModel.Text" />. </summary>
         public string Text
@@ -72,7 +64,5 @@ namespace Retouch_Photo2.ViewModels
             if (this.Text.Length > 44) this.Text = string.Empty;
             else this.Text += "O";
         }
-
-
     }
 }

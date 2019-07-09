@@ -5,7 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tools="using:Retouch_Photo2.Tools"
-    xmlns:loca="using:Retouch_Photo2.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
@@ -42,6 +41,12 @@
         <tools:Button x:Name="EllipseButton" GroupType="{x:Bind ToolType,Mode=OneWay}">
             <ToolTipService.ToolTip>
                 <ToolTip Content="Ellipse" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+            </ToolTipService.ToolTip>
+        </tools:Button>
+
+        <tools:Button x:Name="ImageButton" GroupType="{x:Bind ToolType,Mode=OneWay}">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="Image" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
         </tools:Button>
 

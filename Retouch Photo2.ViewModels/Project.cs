@@ -33,6 +33,24 @@ namespace Retouch_Photo2.ViewModels
         public Project()
         {
         }
+        /// <summary>
+        /// Construct a project from <see cref = "ImageLayer" />.
+        /// </summary>
+        /// <param name="imageLayer"> ImageLayer. </param>
+        public Project(ImageLayer imageLayer)
+        {
+            CanvasBitmap bitmap = imageLayer.GetImage(imageLayer.ImageKey);
+
+            int width = (int)bitmap.SizeInPixels.Width;
+            int height = (int)bitmap.SizeInPixels.Height;
+
+            this.Width = width;
+            this.Height = height;
+            this.Layers = new List<Layer>()
+            {
+                 imageLayer
+            };
+        }
 
         /// <summary>
         /// Construct a project.
@@ -44,37 +62,6 @@ namespace Retouch_Photo2.ViewModels
             this.Width = width;
             this.Height = height;
             this.Layers = new List<Layer>();
-        }
-
-        //@Static
-        /// <summary>
-        /// Create a project from <see cref = "StorageFile" />.
-        /// </summary>
-        /// <param name="creator"> ICanvasResourceCreator. </param>
-        /// <param name="file"> StorageFile. </param>
-        public static async Task<Project> CreateFromFileAsync(ICanvasResourceCreator creator, StorageFile file)
-        {
-            using (IRandomAccessStream stream = await file.OpenReadAsync())
-            {
-                CanvasBitmap bitmap = await CanvasBitmap.LoadAsync(creator, stream, 96);
-
-                int width = (int)bitmap.SizeInPixels.Width;
-                int height = (int)bitmap.SizeInPixels.Height;
-                TransformerMatrix transformerMatrix = new TransformerMatrix(width, height, Vector2.Zero);
-                
-                return new Project
-                {
-                    Width = width,
-                    Height = height,
-                    Layers = new List<Layer>()
-                    {
-                        new ImageLayer()
-                        {
-                            Bitmap=bitmap
-                        }
-                    }
-                };
-            }
         }
     }
 }

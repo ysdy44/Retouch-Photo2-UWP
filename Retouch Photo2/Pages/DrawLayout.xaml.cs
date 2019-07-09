@@ -232,8 +232,8 @@ namespace Retouch_Photo2.Pages
             };
 
             //FullScreen
-            this.UnFullScreenButton.Tapped += (s, e) => this.IsFullScreen = false;
-            this.FullScreenButton.Tapped += (s, e) => this.IsFullScreen = true;
+            this.UnFullScreenButton.Tapped += (s, e) => this.IsFullScreen = !this.IsFullScreen;
+            this.FullScreenButton.Tapped += (s, e) => this.IsFullScreen = !this.IsFullScreen;
 
             //DismissOverlay
             this.IconDismissOverlay.Tapped += (s, e) =>

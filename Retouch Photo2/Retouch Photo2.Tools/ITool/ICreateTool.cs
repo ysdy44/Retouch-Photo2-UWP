@@ -51,7 +51,8 @@ namespace Retouch_Photo2.Tools.ITool
             );
 
             //Mezzanine
-            this.MezzanineViewModel.SetLayer(this.CreateLayer(transformer),this.ViewModel.Layers);
+            Layer createLayer = this.CreateLayer(transformer);
+            this.MezzanineViewModel.SetLayer(createLayer, this.ViewModel.Layers);
 
             this.SelectionViewModel.Transformer = transformer;//Selection
 
@@ -61,6 +62,7 @@ namespace Retouch_Photo2.Tools.ITool
         {
             if (this.TipViewModel.TransformerTool.Delta(startingPoint, point)) return;//TransformerToolBase
 
+            //Transformer
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Transformer transformer = new Transformer
             (
@@ -70,8 +72,9 @@ namespace Retouch_Photo2.Tools.ITool
                  this.KeyboardViewModel.IsRatio
             );
 
-            this.MezzanineViewModel.Layer.Source = transformer;//Mezzanine
-            this.MezzanineViewModel.Layer.Destination = transformer;//Mezzanine
+            //Mezzanine
+            this.MezzanineViewModel.Layer.Source = transformer;
+            this.MezzanineViewModel.Layer.Destination = transformer;
 
             this.SelectionViewModel.Transformer = transformer;//Selection
 
@@ -97,7 +100,10 @@ namespace Retouch_Photo2.Tools.ITool
                 {
                     layer.IsChecked = false;
                 });
-                this.MezzanineViewModel.Insert(this.CreateLayer(transformer), this.ViewModel.Layers); //Mezzanine
+
+                //Mezzanine
+                Layer createLayer = this.CreateLayer(transformer);
+                this.MezzanineViewModel.Insert(createLayer, this.ViewModel.Layers);
             }
             else this.MezzanineViewModel.None();//Mezzanine
 

@@ -1,0 +1,51 @@
+﻿<Page
+    x:Class="Retouch_Photo2.Tools.Pages.ImagePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pagesDrawPages="using:Retouch_Photo2.Pages.DrawPages"
+    xmlns:hSVColorPickers="using:HSVColorPickers"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="400"
+    >
+
+    
+    <Page.Resources>
+        <!--Storyboard-->
+        <Storyboard x:Name="EaseStoryboard">
+            <ColorAnimation From="{ThemeResource SystemBaseHighColor}" To="{ThemeResource AppBorderBrushColor}" Storyboard.TargetProperty="Color" Storyboard.TargetName="SelectBorderBorderBrush" d:IsOptimized="True">
+                <ColorAnimation.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </ColorAnimation.EasingFunction>
+            </ColorAnimation>
+        </Storyboard>
+    </Page.Resources>
+
+
+    <StackPanel Orientation="Horizontal">
+
+        <TextBlock Text="{x:Bind ImageSummaryStoryboardConverter(SelectionViewModel.ImageSummary),Mode=OneWay}" Style="{StaticResource AppTextBlock}"/>
+
+        <!--Select-->
+        <Border Style="{StaticResource AppRoundedBorderStyle}">
+            <Border.BorderBrush>
+                <SolidColorBrush x:Name="SelectBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
+            </Border.BorderBrush>
+            <Button x:Name="SelectButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TextBlock Text="Select image"/>
+            </Button>
+        </Border> 
+        
+        <AppBarSeparator/>
+
+        <!--Replace-->
+        <Border Style="{StaticResource AppRoundedBorderStyle}">
+            <Button x:Name="ReplaceButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TextBlock Text="Replace image"/>
+            </Button>
+        </Border>
+        
+    </StackPanel>
+</Page>

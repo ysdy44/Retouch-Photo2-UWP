@@ -1,9 +1,15 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Layers;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Windows.UI;
+using Retouch_Photo2.Layers.Models;
+using Windows.Storage;
+using Windows.Storage.Streams;
+using System.Threading.Tasks;
+using Windows.Storage.Pickers;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -42,7 +48,7 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary> Retouch_Photo2's the only AccentColor. </summary>
-        public Color AccentColor;
+        public Color AccentColor { get; set; }
         /// <summary> Retouch_Photo2's the only <see cref = "Microsoft.Graphics.Canvas.CanvasDevice" />. </summary>
         public CanvasDevice CanvasDevice { get; } = new CanvasDevice();
 
@@ -58,8 +64,7 @@ namespace Retouch_Photo2.ViewModels
 
         /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.Layers.Layer" />s. </summary>
         public ObservableCollection<Layer> Layers { get; } = new ObservableCollection<Layer>();
-
-
+       
 
         //Notify 
         /// <summary> Multicast event for property change notifications. </summary>

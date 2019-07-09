@@ -7,13 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d"
-    Width="90" 
-    Height="40"
     d:DesignHeight="50"
     d:DesignWidth="50"
     >
 
-    <Border x:Name="Border" Width="{x:Bind UserControl.Width,Mode=OneWay}" Height="{x:Bind UserControl.Height,Mode=OneWay}" Style="{StaticResource AppRoundedBorderStyle}">
+    <Border x:Name="Border" Width="90" Style="{StaticResource AppRoundedBorderStyle}">
         <canvas:CanvasControl x:Name="CanvasControl" IsHitTestVisible="False"/>
     </Border>    
 </UserControl>

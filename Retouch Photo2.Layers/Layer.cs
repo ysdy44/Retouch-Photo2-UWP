@@ -33,24 +33,24 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         ///  Cache a layer's transformer.
         /// </summary>
-        public virtual void CacheTransform()=>  this.OldDestination = this.Destination;        
+        public virtual void CacheTransform() => this.OldDestination = this.Destination;
         /// <summary>
         ///  Transforms a layer by the given matrix.
         /// </summary>
         /// <param name="matrix"> The sestination matrix. </param>
-        public virtual void TransformMultiplies(Matrix3x2 matrix)=> this.Destination = Transformer.Multiplies(this.OldDestination, matrix);
+        public virtual void TransformMultiplies(Matrix3x2 matrix) => this.Destination = this.OldDestination * matrix;
         /// <summary>
         ///  Transforms a layer by the given vector.
         /// </summary>
         /// <param name="vector"> The sestination vector. </param>
-        public virtual void TransformAdd(Vector2 vector)=>  this.Destination = Transformer.Add(this.OldDestination, vector);
-        
+        public virtual void TransformAdd(Vector2 vector) => this.Destination = this.OldDestination + vector;
 
-        
+
+
         /// <summary> <see cref = "Layer" />'s name. </summary>
-        public string Name = "Layer";
+        public string Name { get; protected set; } = "Layer";
         /// <summary> <see cref = "Layer" />'s icon. </summary>
-        public UIElement Icon=>this.GetIcon();
+        public UIElement Icon => this.GetIcon();
         /// <summary> <see cref = "Layer" />'s opacity. </summary>
         public float Opacity=1.0f;
         /// <summary> <see cref = "Layer" />'s blend type. </summary>

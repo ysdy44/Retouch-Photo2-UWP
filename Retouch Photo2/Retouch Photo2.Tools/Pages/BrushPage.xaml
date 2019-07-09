@@ -4,7 +4,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:brushs="using:Retouch_Photo2.Brushs"
     xmlns:brushsControls="using:Retouch_Photo2.Brushs.Controls"
     mc:Ignorable="d"
     d:DesignHeight="50"
@@ -25,10 +24,9 @@
     <StackPanel Orientation="Horizontal">
                 
         <TextBlock Text="Fill or Stroke:" Style="{StaticResource AppTextBlock}"/>
-        <Border Height="40" Style="{StaticResource AppRoundedBorderStyle}">
+        <Border Style="{StaticResource AppRoundedBorderStyle}">
             <ComboBox x:Name="FillOrStrokeComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
                   SelectedIndex="{x:Bind FillOrStrokeToIndexConverter(SelectionViewModel.FillOrStroke),Mode=OneWay}" 
-                  IsEnabled="{x:Bind SelectionModeToBoolConverter(SelectionViewModel.Mode),Mode=OneWay}" 
                   >
                 <ComboBoxItem x:Name="FillComboBoxItem" Content="Fill"/>
                 <ComboBoxItem x:Name="StrokeComboBoxItem" Content="Stroke"/>
@@ -38,7 +36,7 @@
         <AppBarSeparator/>
                 
         <TextBlock Text="BrushType:" Style="{StaticResource AppTextBlock}"/>
-        <Border Height="40" Style="{StaticResource AppRoundedBorderStyle}">
+        <Border Style="{StaticResource AppRoundedBorderStyle}">
             <ComboBox x:Name="BrushTypeComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
                   SelectedIndex="{x:Bind BrushTypeToIndexConverter(SelectionViewModel.BrushType),Mode=OneWay}" 
                   IsEnabled="{x:Bind SelectionModeToBoolConverter(SelectionViewModel.Mode),Mode=OneWay}" 

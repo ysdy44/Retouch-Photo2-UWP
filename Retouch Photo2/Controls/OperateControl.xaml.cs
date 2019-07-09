@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Controls
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-                     
+
 
         #region DependencyProperty
 
@@ -97,7 +97,7 @@ namespace Retouch_Photo2.Controls
         }));
 
         #endregion
-        
+
 
         //@Construct
         public OperateControl()
@@ -114,12 +114,12 @@ namespace Retouch_Photo2.Controls
                 Matrix3x2 matrix = Matrix3x2.CreateScale(-1, 1, transformer.Center);
 
                 //Selection
+                this.SelectionViewModel.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
                     layer.TransformMultiplies(matrix);
                 });
-                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -130,12 +130,12 @@ namespace Retouch_Photo2.Controls
                 Matrix3x2 matrix = Matrix3x2.CreateScale(1, -1, transformer.Center);
 
                 //Selection
+                this.SelectionViewModel.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
                     layer.TransformMultiplies(matrix);
                 });
-                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -146,12 +146,12 @@ namespace Retouch_Photo2.Controls
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(TransformerMath.PiOver2, transformer.Center);
 
                 //Selection
+                this.SelectionViewModel.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
                     layer.TransformMultiplies(matrix);
                 });
-                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -162,12 +162,12 @@ namespace Retouch_Photo2.Controls
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(-TransformerMath.PiOver2, transformer.Center);
 
                 //Selection
+                this.SelectionViewModel.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
                     layer.TransformMultiplies(matrix);
                 });
-                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -185,12 +185,12 @@ namespace Retouch_Photo2.Controls
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0 - transformer.MinX, 0);
 
                 //Selection
+                this.SelectionViewModel.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
                     layer.TransformMultiplies(matrix);
                 });
-                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -201,12 +201,12 @@ namespace Retouch_Photo2.Controls
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width / 2 - transformer.Center.X, 0);
 
                 //Selection
+                this.SelectionViewModel.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
                     layer.TransformMultiplies(matrix);
                 });
-                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -217,12 +217,12 @@ namespace Retouch_Photo2.Controls
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width - transformer.MaxX, 0);
 
                 //Selection
+                this.SelectionViewModel.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
                     layer.TransformMultiplies(matrix);
                 });
-                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -239,15 +239,15 @@ namespace Retouch_Photo2.Controls
             this.AlignTopButton.RootButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.SelectionViewModel.Transformer;
-                Matrix3x2 matrix = Matrix3x2.CreateTranslation(0 , 0- transformer.MinY);
+                Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, 0 - transformer.MinY);
 
                 //Selection
+                this.SelectionViewModel.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
                     layer.TransformMultiplies(matrix);
                 });
-                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -255,15 +255,15 @@ namespace Retouch_Photo2.Controls
             this.AlignMiddleButton.RootButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.SelectionViewModel.Transformer;
-                Matrix3x2 matrix = Matrix3x2.CreateTranslation(0,this.ViewModel.CanvasTransformer.Height / 2 - transformer.Center.Y);
+                Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, this.ViewModel.CanvasTransformer.Height / 2 - transformer.Center.Y);
 
                 //Selection
+                this.SelectionViewModel.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
                     layer.TransformMultiplies(matrix);
                 });
-                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -274,7 +274,7 @@ namespace Retouch_Photo2.Controls
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, this.ViewModel.CanvasTransformer.Height - transformer.MaxY);
 
                 //Selection
-                this.SelectionViewModel.Transformer = Transformer.Multiplies(transformer, matrix);
+                this.SelectionViewModel.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
@@ -303,7 +303,7 @@ namespace Retouch_Photo2.Controls
 
             };
 
-            this.ArrangeForwardOneButton.RootButton.Tapped += (s, e) => 
+            this.ArrangeForwardOneButton.RootButton.Tapped += (s, e) =>
             {
 
             };

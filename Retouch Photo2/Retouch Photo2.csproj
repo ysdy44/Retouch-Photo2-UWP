@@ -190,6 +190,7 @@
     <Compile Include="Retouch Photo2.Tools\Models\CursorTool.Box.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\CursorTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\EllipseTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\ImageTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\NoneTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\RectangleTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\ViewTool.cs" />
@@ -204,6 +205,9 @@
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Pages\EllipsePage.xaml.cs">
       <DependentUpon>EllipsePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\Pages\ImagePage.xaml.cs">
+      <DependentUpon>ImagePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Pages\RectanglePage.xaml.cs">
       <DependentUpon>RectanglePage.xaml</DependentUpon>
@@ -686,6 +690,10 @@
     <Page Include="Retouch Photo2.Tools\Pages\EllipsePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\Pages\ImagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Retouch Photo2.Tools\Pages\RectanglePage.xaml">
       <Generator>MSBuild:Compile</Generator>

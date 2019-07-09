@@ -11,7 +11,7 @@
     d:DesignWidth="50"
     >
 
-    <Border Width="70" Height="40" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
+    <Border Width="70" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
         <hSVColorPickers:NumberPicker x:Name="Picker" Value="{x:Bind StrokeWidthConverter(SelectionViewModel.StrokeWidth),Mode=OneWay}" Unit="%" Width="Auto"/>
     </Border>
     

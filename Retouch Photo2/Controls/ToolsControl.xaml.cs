@@ -46,6 +46,8 @@ namespace Retouch_Photo2.Controls
             this.ConstructButton(this.RectangleButton, this.TipViewModel.RectangleTool);
             //Ellipse
             this.ConstructButton(this.EllipseButton, this.TipViewModel.EllipseTool);
+            //Image
+            this.ConstructButton(this.ImageButton, this.TipViewModel.ImageTool);
             //Acrylic
             this.ConstructButton(this.AcrylicButton, this.TipViewModel.AcrylicTool);
         }

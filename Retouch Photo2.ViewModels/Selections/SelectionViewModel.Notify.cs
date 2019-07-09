@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Adjustments;
+﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Effects;
 using Retouch_Photo2.Layers;
@@ -125,8 +126,45 @@ namespace Retouch_Photo2.ViewModels.Selections
                 return;
             }
         }
-                     
 
+
+        /// <summary> <see cref = "SelectionViewModel" />'s ImageKey. </summary>
+        public string ImageKey;
+        /// <summary> Sets ImageLayer. </summary>     
+        private void SetImageLayer(Layer layer)
+        {
+            if (layer is ImageLayer imageLayer)
+            {
+                string imageKey= imageLayer.ImageKey;
+
+                //ImageKey
+                this.ImageKey = imageKey;
+
+                //CanvasBitmap
+                CanvasBitmap bitmap = imageLayer.GetImage(imageKey);
+                this.ImageSummary = string.Format
+                (
+                    "{0} {1}x{2}pixels {3}Dpi",
+                    imageKey,
+                    bitmap.SizeInPixels.Width,
+                    bitmap.SizeInPixels.Height,
+                    bitmap.Dpi
+                );
+
+                return;
+            }
+        }
+
+        public string ImageSummary
+        {
+            get => this.imageSummary;
+            set
+            {
+                this.imageSummary = value;
+                this.OnPropertyChanged(nameof(this.ImageSummary));//Notify 
+            }
+        }
+        private string imageSummary;
 
     }
 }

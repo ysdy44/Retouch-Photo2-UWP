@@ -23,6 +23,9 @@
         /// <summary> Create ellipse geometry. </summary>
         Ellipse,
 
+        /// <summary> Create image layer. </summary>
+        Image,
+
         /// <summary> Create acrylic layer. </summary>
         Acrylic
     }

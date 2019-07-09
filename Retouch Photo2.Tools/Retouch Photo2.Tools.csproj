@@ -121,6 +121,9 @@
     <Compile Include="Controls\EllipseControl.xaml.cs">
       <DependentUpon>EllipseControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ImageControl.xaml.cs">
+      <DependentUpon>ImageControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RectangleControl.xaml.cs">
       <DependentUpon>RectangleControl.xaml</DependentUpon>
     </Compile>
@@ -161,6 +164,10 @@
     <Page Include="Controls\EllipseControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ImageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\RectangleControl.xaml">
       <Generator>MSBuild:Compile</Generator>

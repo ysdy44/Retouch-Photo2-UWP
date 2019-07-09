@@ -80,6 +80,9 @@ namespace Retouch_Photo2.ViewModels.Tips
         /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s EllipseTool. </summary>
         public Tool EllipseTool;
 
+        /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s ImageTool. </summary>
+        public Tool ImageTool;
+
         /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s AcrylicTool. </summary>
         public Tool AcrylicTool;
         
