@@ -11,6 +11,25 @@
     d:DesignWidth="200"
     >
 
+
+    <UserControl.Resources>
+        <!--Storyboard-->
+        <Storyboard x:Name="XEaseStoryboard">
+            <ColorAnimation From="{ThemeResource SystemBaseHighColor}" To="{ThemeResource AppBorderBrushColor}" Storyboard.TargetProperty="Color" Storyboard.TargetName="XBorderBorderBrush" d:IsOptimized="True">
+                <ColorAnimation.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </ColorAnimation.EasingFunction>
+            </ColorAnimation>
+        </Storyboard>
+        <Storyboard x:Name="YEaseStoryboard">
+            <ColorAnimation From="{ThemeResource SystemBaseHighColor}" To="{ThemeResource AppBorderBrushColor}" Storyboard.TargetProperty="Color" Storyboard.TargetName="YBorderBorderBrush" d:IsOptimized="True">
+                <ColorAnimation.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </ColorAnimation.EasingFunction>
+            </ColorAnimation>
+        </Storyboard>
+    </UserControl.Resources>
+
     <Grid>
 
         <Grid x:Name="IndicatorRootGrid">
@@ -79,6 +98,9 @@
                 <ToolTipService.ToolTip>
                     <ToolTip Content="X-axis" Placement="Top" IsOpen="{x:Bind TipViewModel.IsTransformerMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
+                <Border.BorderBrush>
+                    <SolidColorBrush x:Name="XBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
+                </Border.BorderBrush>
                 <pickers:NumberPicker x:Name="XPicker" Width="Auto" Height="Auto" />
             </Border>
 
@@ -87,6 +109,9 @@
                 <ToolTipService.ToolTip>
                     <ToolTip Content="Y-axis" Placement="Top" IsOpen="{x:Bind TipViewModel.IsTransformerMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
+                <Border.BorderBrush>
+                    <SolidColorBrush x:Name="YBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
+                </Border.BorderBrush>
                 <pickers:NumberPicker x:Name="YPicker" Width="Auto" Height="Auto" />
             </Border>
 

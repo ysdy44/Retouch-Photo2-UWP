@@ -47,8 +47,9 @@ namespace Retouch_Photo2.ViewModels.Selections
 
             this.SetGroupLayer(null);
             this.SetAcrylicLayer(null);
+            this.SetImageLayer(null);
             this.SetGeometryLayer(null);
-            
+
         }
 
         /// <summary>
@@ -81,6 +82,7 @@ namespace Retouch_Photo2.ViewModels.Selections
 
             this.SetGroupLayer(layer);
             this.SetAcrylicLayer(layer);
+            this.SetImageLayer(layer);
             this.SetGeometryLayer(layer);
 
 
@@ -173,6 +175,7 @@ namespace Retouch_Photo2.ViewModels.Selections
 
             this.SetGroupLayer(null);
             this.SetAcrylicLayer(null);
+            //this.SetImageLayer(layer);
             //this.SetGeometryLayer(null);
         }
 

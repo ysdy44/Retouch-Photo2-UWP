@@ -30,7 +30,9 @@ namespace Retouch_Photo2.ViewModels
     public partial class ViewModel : INotifyPropertyChanged
     {
 
-        /// <summary> Reload <see cref = "ViewModel" /> </summary>
+        /// <summary>
+        /// Reload <see cref = "ViewModel" /> 
+        /// </summary>
         /// <param name="project"> project </param>
         public void LoadFromProject(Project project)
         {
@@ -64,7 +66,72 @@ namespace Retouch_Photo2.ViewModels
 
         /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.Layers.Layer" />s. </summary>
         public ObservableCollection<Layer> Layers { get; } = new ObservableCollection<Layer>();
-       
+
+
+
+        /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.Layers.Models.ImageLayer" />'s images. </summary>
+        public Stack<ImageRe> Images = new Stack<ImageRe>();
+
+        /// <summary>
+        /// Gets image which key is equal to the source key.
+        /// </summary>
+        /// <param name="key"> The source key. </param>
+        /// <returns> ImageRe </returns>
+        public ImageRe GetImage(string key)
+        {
+            foreach (ImageRe imageRe in Images)
+            {
+                if (imageRe.Key == key)
+                {
+                    return imageRe;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Gets images contains image which key is equal to the source key.
+        /// </summary>
+        /// <param name="key"> The source key. </param>
+        /// <returns> bool </returns>
+        public bool ContainsImage(string key)
+        {
+            foreach (ImageRe imageRe in Images)
+            {
+                if (imageRe.Key == key)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+                
+        /// <summary>
+        /// Async pick a file.
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        public async Task<StorageFile> PickSingleFileAsync(PickerLocationId location)
+        {
+            FileOpenPicker openPicker = new FileOpenPicker
+            {
+                ViewMode = PickerViewMode.Thumbnail,
+                SuggestedStartLocation = location,
+                FileTypeFilter =
+                {
+                    ".jpg",
+                    ".jpeg",
+                    ".png",
+                    ".bmp"
+                }
+            };
+
+            StorageFile file = await openPicker.PickSingleFileAsync();
+            return file;
+        }
+
 
         //Notify 
         /// <summary> Multicast event for property change notifications. </summary>

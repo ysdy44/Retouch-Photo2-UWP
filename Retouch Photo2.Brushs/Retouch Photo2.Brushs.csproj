@@ -108,6 +108,7 @@
   <ItemGroup>
     <Compile Include="Brush.cs" />
     <Compile Include="BrushPoints.cs" />
+    <Compile Include="GradientBrushType.cs" />
     <Compile Include="BrushType.cs" />
     <Compile Include="Controls\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>

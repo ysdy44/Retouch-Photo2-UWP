@@ -45,32 +45,37 @@ namespace Retouch_Photo2.Tools.Models
         }
         public override void Started(Vector2 startingPoint, Vector2 point)
         {
-            //ImageKey
-            string imageKey = this.SelectionViewModel.ImageKey;
-            if (imageKey == null)
+            ImageRe imageRe = this.SelectionViewModel.ImageRe;
+
+            //ImageRe
+            if (imageRe == null)
             {
-                this.SelectionViewModel.ImageSummary = string.Empty;
+                this.SelectionViewModel.ImageRe = new ImageRe { IsStoryboardNotify = true };
                 return;
             }
-
-            //CanvasBitmap
-            CanvasBitmap bitmap = this.ViewModel.GetImage(imageKey);
-            if (bitmap == null)
+            if (imageRe.IsStoryboardNotify == true)
             {
-                this.SelectionViewModel.ImageSummary = string.Empty;
+                this.SelectionViewModel.ImageRe = new ImageRe { IsStoryboardNotify = true };
                 return;
             }
 
             //Transformer
-            this.SizeWidth = bitmap.SizeInPixels.Width;
-            this.SizeHeight = bitmap.SizeInPixels.Height;
-            Transformer transformer = this.CreateTransformer(startingPoint, point, this.SizeWidth, this.SizeHeight);
+            this.SizeWidth = imageRe.Width;
+            this.SizeHeight = imageRe.Height;
+            Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
+            Transformer transformerDestination = this.CreateTransformer(startingPoint, point, imageRe.Width, imageRe.Height);
 
             //Mezzanine
-            Layer createLayer = this.CreateLayer(imageKey, transformer);
+            Layer createLayer = new ImageLayer()
+            {
+                ImageRe = imageRe,
+                Source = transformerSource,
+                Destination = transformerDestination,
+                IsChecked = true,
+            };
             this.MezzanineViewModel.SetLayer(createLayer, this.ViewModel.Layers);
 
-            this.SelectionViewModel.Transformer = transformer;//Selection
+            this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
@@ -79,11 +84,11 @@ namespace Retouch_Photo2.Tools.Models
             if (this.MezzanineViewModel.Layer == null) return;
 
             //Transformer
-            Transformer transformer = this.CreateTransformer(startingPoint, point, this.SizeWidth, this.SizeHeight);
-                        
-            this.MezzanineViewModel.Layer.Destination = transformer;//Mezzanine
+            Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this.SizeWidth, this.SizeHeight);
 
-            this.SelectionViewModel.Transformer = transformer;//Selection
+            this.MezzanineViewModel.Layer.Destination = transformerDestination;//Mezzanine
+
+            this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
             this.ViewModel.Invalidate();//Invalidate
         }
@@ -93,17 +98,15 @@ namespace Retouch_Photo2.Tools.Models
 
             if (isSingleStarted)
             {
-                //ImageKey
-                string imageKey = this.SelectionViewModel.ImageKey;
-                if (imageKey == null) return;
+                ImageRe imageRe = this.SelectionViewModel.ImageRe;
 
-                //CanvasBitmap
-                CanvasBitmap bitmap = this.ViewModel.GetImage(imageKey);
-                if (bitmap == null) return;
-
+                //ImageRe
+                if (imageRe == null) return;
+                if (imageRe.IsStoryboardNotify == true) return;
+                
                 //Transformer
-                float sizeWidth = bitmap.SizeInPixels.Width;
-                float sizeHeight = bitmap.SizeInPixels.Height;
+                float sizeWidth = imageRe.Width;
+                float sizeHeight = imageRe.Height;
                 Transformer transformer = this.CreateTransformer(startingPoint, point, sizeWidth, sizeHeight);
 
                 //Selection
@@ -112,8 +115,20 @@ namespace Retouch_Photo2.Tools.Models
                     layer.IsChecked = false;
                 });
 
+                //Transformer
+                this.SizeWidth = imageRe.Width;
+                this.SizeHeight = imageRe.Height;
+                Transformer transformerDestination = this.CreateTransformer(startingPoint, point, imageRe.Width, imageRe.Height);
+                Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
+
                 //Mezzanine
-                Layer createLayer = this.CreateLayer(imageKey, transformer);
+                Layer createLayer = new ImageLayer()
+                {
+                    ImageRe = imageRe,
+                    Source = transformerSource,
+                    Destination = transformerDestination,
+                    IsChecked = true,
+                };
                 this.MezzanineViewModel.Insert(createLayer, this.ViewModel.Layers);
             }
             else this.MezzanineViewModel.None();//Mezzanine
@@ -128,13 +143,6 @@ namespace Retouch_Photo2.Tools.Models
         {
         }
 
-
-
-        public Layer CreateLayer(string imageKey, Transformer transformer) => new ImageLayer(imageKey, this.ViewModel.GetImage)
-        {
-            IsChecked = true,
-            Destination = transformer
-        };
 
         public Transformer CreateTransformer(Vector2 startingPoint, Vector2 point, float sizeWidth, float sizeHeight)
         {
@@ -159,7 +167,7 @@ namespace Retouch_Photo2.Tools.Models
             if (sizeWidth > sizeHeight)
             {
                 float heightSquared = lengthSquared / (1 + (sizeWidth * sizeWidth) / (sizeHeight * sizeHeight));
-                float height = (float)Math.Sqrt(heightSquared) / 1.4142135623730950488016887242097f; 
+                float height = (float)Math.Sqrt(heightSquared) / 1.4142135623730950488016887242097f;
 
                 if (height < 10) height = 10;
                 float width = height * sizeWidth / sizeHeight;
@@ -244,6 +252,6 @@ namespace Retouch_Photo2.Tools.Models
                 };
             }
         }
-               
+
     }
 }

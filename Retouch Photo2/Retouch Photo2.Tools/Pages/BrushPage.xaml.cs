@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Layers.ILayer;
 using Retouch_Photo2.Tools.Models;
@@ -6,10 +7,7 @@ using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
 using System.Numerics;
-using Microsoft.Graphics.Canvas.Brushes;
-using System.Linq;
 using Windows.UI.Xaml.Controls;
-using Retouch_Photo2.Layers;
 
 namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
 {
@@ -26,8 +24,34 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
 
         //@Converter
         private int FillOrStrokeToIndexConverter(FillOrStroke fillOrStroke) => (int)fillOrStroke;
-        private int BrushTypeToIndexConverter(BrushType brushType) => (int)brushType;
-        private bool SelectionModeToBoolConverter(ListViewSelectionMode selectionMode) => selectionMode !=  ListViewSelectionMode.None;
+        private int BrushTypeToIndexConverter(BrushType brushType)
+        {
+            switch (brushType)
+            {
+                case BrushType.Disabled: return 000;
+                case BrushType.None: return 000;
+                case BrushType.Color: return 001;
+                case BrushType.LinearGradient: return 002;
+                case BrushType.RadialGradient: return 003;
+                case BrushType.EllipticalGradient: return 004;
+                case BrushType.Image: return 005;
+            }
+            return 000;
+        }
+        private bool BrushTypeToIsEnabledConverter(BrushType brushType)
+        {
+            switch (brushType)
+            {
+                case BrushType.Disabled: return false;
+                case BrushType.None: return true;
+                case BrushType.Color: return true;
+                case BrushType.LinearGradient: return true;
+                case BrushType.RadialGradient: return true;
+                case BrushType.EllipticalGradient: return true;
+                case BrushType.Image: return true;
+            }
+            return false;
+        }
 
 
         //@Construct
@@ -38,22 +62,12 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
             //FillOrStroke
             this.FillComboBoxItem.Tapped += (s, e) =>
             {
-                //ComboBox
-                this.FillComboBoxItem.SetValue(ComboBox.SelectedIndexProperty, (int)FillOrStroke.Fill);
-
-                //Brush
-                this.SelectionViewModel.SetBrushFormSingleMode(FillOrStroke.Fill);
-
+                this.SelectionViewModel.SetBrushFormSingleMode(FillOrStroke.Fill);//Brush
                 this.ViewModel.Invalidate();//Invalidate
             };
             this.StrokeComboBoxItem.Tapped += (s, e) =>
             {
-                //ComboBox
-                this.FillComboBoxItem.SetValue(ComboBox.SelectedIndexProperty, (int)FillOrStroke.Stroke);
-
-                //Brush
-                this.SelectionViewModel.SetBrushFormSingleMode(FillOrStroke.Stroke);
-
+                this.SelectionViewModel.SetBrushFormSingleMode(FillOrStroke.Stroke);//Brush
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -61,14 +75,41 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
             //BrushType
             this.NoneComboBoxItem.Tapped += (s, e) => this.BrushTypeNone();
             this.ColorComboBoxItem.Tapped += (s, e) => this.BrushTypeColor();
-            this.LinearGradientComboBoxItem.Tapped += (s, e) => this.BrushTypeLinearGradient();
-            this.RadialGradientComboBoxItem.Tapped += (s, e) => this.BrushTypeRadialGradient();
-            this.EllipticalGradientComboBoxItem.Tapped += (s, e) => this.BrushTypeEllipticalGradient();
+            this.LinearGradientComboBoxItem.Tapped += (s, e) =>
+            {
+                this.BrushTypeLinearGradient();
+                this.StopsPicker.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.LinearGradient);//ComboBox
+            };
+            this.RadialGradientComboBoxItem.Tapped += (s, e) =>
+            {
+                this.BrushTypeRadialGradient();
+                this.StopsPicker.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.RadialGradient);//ComboBox
+            };
+            this.EllipticalGradientComboBoxItem.Tapped += (s, e) =>
+            {
+                this.BrushTypeEllipticalGradient();
+                this.StopsPicker.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.EllipticalGradient);//ComboBox
+            };
             this.ImageComboBoxItem.Tapped += (s, e) => this.BrushTypeImage();
 
-            this.StopsPicker.LinearGradientComboBoxItem.Tapped += (s, e) => this.BrushTypeLinearGradient();
-            this.StopsPicker.RadialGradientComboBoxItem.Tapped += (s, e) => this.BrushTypeRadialGradient();
-            this.StopsPicker.EllipticalGradientComboBoxItem.Tapped += (s, e) => this.BrushTypeEllipticalGradient();
+            this.StopsPicker.LinearGradientComboBoxItem.Tapped += (s, e) =>
+            {
+                this.BrushTypeLinearGradient();
+                this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.LinearGradient);//ComboBox
+                this.EaseStoryboard.Begin();//Storyboard
+            };
+            this.StopsPicker.RadialGradientComboBoxItem.Tapped += (s, e) =>
+            {
+                this.BrushTypeRadialGradient();
+                this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.RadialGradient);//ComboBox
+                this.EaseStoryboard.Begin();//Storyboard
+            };
+            this.StopsPicker.EllipticalGradientComboBoxItem.Tapped += (s, e) =>
+            {
+                this.BrushTypeEllipticalGradient();
+                this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.EllipticalGradient);//ComboBox
+                this.EaseStoryboard.Begin();//Storyboard
+            };
 
 
             //Show
@@ -96,12 +137,8 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                     case BrushType.RadialGradient:
                     case BrushType.EllipticalGradient:
                         {
-                            CanvasGradientStop[] array= this.SelectionViewModel.BrushArray;
+                            CanvasGradientStop[] array = this.SelectionViewModel.BrushArray;
                             this.StopsPicker.SetArray(array);
-
-                            BrushType brushType = this.SelectionViewModel.BrushType;
-                            this.StopsPicker.SetBrushType(brushType);
-
                             this.StopsFlyout.ShowAt(this.ShowControl);//Flyout
                         }
                         break;
@@ -162,7 +199,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                             {
                                 if (layer is IGeometryLayer geometryLayer)
                                 {
-                                    geometryLayer.FillBrush.Array= (CanvasGradientStop[])array.Clone();
+                                    geometryLayer.FillBrush.Array = (CanvasGradientStop[])array.Clone();
                                 }
                             }, true);
                         }
@@ -189,9 +226,6 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
         //BrushType
         private void BrushTypeNone()
         {
-            //ComboBox
-            this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.None);
-
             //Brush
             this.SelectionViewModel.BrushType = BrushType.None;
 
@@ -226,12 +260,9 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
 
             this.ViewModel.Invalidate();//Invalidate
         }
-        
+
         private void BrushTypeColor()
         {
-            //ComboBox
-            this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.Color);
-
             //Brush
             this.SelectionViewModel.BrushType = BrushType.Color;
             switch (this.SelectionViewModel.FillOrStroke)
@@ -280,9 +311,6 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
 
         private void BrushTypeLinearGradient()
         {
-            //ComboBox
-            this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.LinearGradient);
-
             Transformer transformer = this.SelectionViewModel.Transformer;
             Vector2 startPoint = transformer.CenterTop;
             Vector2 endPoint = transformer.CenterBottom;
@@ -294,9 +322,6 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
 
         private void BrushTypeRadialGradient()
         {
-            //ComboBox
-            this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.RadialGradient);
-
             Transformer transformer = this.SelectionViewModel.Transformer;
             Vector2 center = transformer.Center;
             Vector2 point = transformer.CenterBottom;
@@ -347,9 +372,6 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
 
         private void BrushTypeEllipticalGradient()
         {
-            //ComboBox
-            this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.EllipticalGradient);
-
             Transformer transformer = this.SelectionViewModel.Transformer;
             Vector2 center = transformer.Center;
             Vector2 xPoint = transformer.CenterRight;
@@ -401,14 +423,14 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
 
             this.ViewModel.Invalidate();//Invalidate
         }
-        
+
         private void BrushTypeImage()
         {
             //BrushType
             this.SelectionViewModel.BrushType = BrushType.Image;
 
-                this.ViewModel.Invalidate();//Invalidate
-            }
+            this.ViewModel.Invalidate();//Invalidate
+        }
 
     }
 }

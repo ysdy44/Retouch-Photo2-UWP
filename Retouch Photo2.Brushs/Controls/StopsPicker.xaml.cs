@@ -26,7 +26,8 @@ namespace Retouch_Photo2.Brushs.Controls
         /// <summary> Occurs when the stops changes. </summary>
         public event StopsChangedHandler StopsChanged;
 
-        //@Content
+        //@Content        
+        public ComboBox BrushTypeComboBox => this._BrushTypeComboBox;
         /// <summary> ComboBox's item. </summary>
         public ComboBoxItem LinearGradientComboBoxItem => this._LinearGradientComboBoxItem;
         /// <summary> ComboBox's item. </summary>
@@ -56,25 +57,6 @@ namespace Retouch_Photo2.Brushs.Controls
             }
 
             this.array = value;
-        }
-        /// <summary>
-        /// Set a brush type for the control.
-        /// </summary>
-        /// <param name="value"></param>
-        public void SetBrushType(BrushType value)
-        {
-            switch (value)
-            {
-                case BrushType.LinearGradient:
-                    this.ComboBox.SelectedIndex = 000;
-                    break;
-                case BrushType.RadialGradient:
-                    this.ComboBox.SelectedIndex = 001;
-                    break;
-                case BrushType.EllipticalGradient:
-                    this.ComboBox.SelectedIndex = 002;
-                    break;
-            }
         }
 
 

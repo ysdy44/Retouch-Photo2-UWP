@@ -32,7 +32,7 @@ namespace Retouch_Photo2.ViewModels.Selections
             }
         }
         private BrushType brushType;
-        
+
         /// <summary> Brush's gradient stops. </summary>     
         public CanvasGradientStop[] BrushArray
         {
@@ -115,7 +115,7 @@ namespace Retouch_Photo2.ViewModels.Selections
                 return;
             }
 
-            this.BrushType = BrushType.None;
+            this.BrushType = BrushType.Disabled;
         }
 
 

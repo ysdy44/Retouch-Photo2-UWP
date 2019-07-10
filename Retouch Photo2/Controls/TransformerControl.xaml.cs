@@ -346,22 +346,7 @@ namespace Retouch_Photo2.Controls
             //RemoteOrIndicator
             this.RemoteOrIndicator = false;
             this.RemoteOrIndicatorButton.Tapped += (s, e) => this.RemoteOrIndicator = !this.RemoteOrIndicator;
-
-            this.IndicatorControl.ModeChanged += (s, mode) =>
-            {
-                this.IndicatorMode = mode;//IndicatorMode
-
-                if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return;
-
-                Transformer transformer = this.SelectionViewModel.Transformer;
-                Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
-
-                this.XPicker.Value = (int)vector.X;
-                this.YPicker.Value = (int)vector.Y;
-            };
-
-
-
+                       
             //Remote
             this.RemoteControl.Moved += (s, value) =>
             {
@@ -407,6 +392,38 @@ namespace Retouch_Photo2.Controls
             };
             this.RemoteControl.ValueChangeCompleted += (s, value) => this.ViewModel.Invalidate(InvalidateMode.HD);
 
+
+            #endregion
+
+
+            #region Indicator
+
+            this.IndicatorControl.ModeChanged += (s, mode) =>
+            {
+                {
+                    IndicatorMode newMode = mode;
+                    IndicatorMode oldMode = this.IndicatorMode;
+
+                    HorizontalAlignment newHorizontal = this.GetHorizontalAlignmentFormIndicatorMode(newMode);
+                    HorizontalAlignment oldHorizontal = this.GetHorizontalAlignmentFormIndicatorMode(oldMode);
+
+                    VerticalAlignment newVertical = this.GetVerticalAlignmentFormIndicatorMode(newMode);
+                    VerticalAlignment oldVertical = this.GetVerticalAlignmentFormIndicatorMode(oldMode);
+
+                    if (newHorizontal != oldHorizontal) this.XEaseStoryboard.Begin();//Storyboard
+                    if (newVertical != oldVertical) this.YEaseStoryboard.Begin();//Storyboard
+                }
+
+                this.IndicatorMode = mode;//IndicatorMode
+
+                if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return;
+
+                Transformer transformer = this.SelectionViewModel.Transformer;
+                Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
+
+                this.XPicker.Value = (int)vector.X;
+                this.YPicker.Value = (int)vector.Y;
+            };
 
             #endregion
 
@@ -613,6 +630,12 @@ namespace Retouch_Photo2.Controls
         }
 
 
+        /// <summary>
+        /// Gets vector by left, right, top, bottom.
+        /// </summary>
+        /// <param name="value"> Transformer </param>
+        /// <param name="mode"> IndicatorMode </param>
+        /// <returns></returns>
         private Vector2 GetVectorWithIndicatorMode(Transformer value, IndicatorMode mode)
         {
             switch (this.IndicatorMode)
@@ -652,6 +675,45 @@ namespace Retouch_Photo2.Controls
 
             return skew % 180.0f;
         }
+
+
+        //@Debug
+        //Indicator
+        private HorizontalAlignment GetHorizontalAlignmentFormIndicatorMode(IndicatorMode mode)
+        {
+            switch (mode)
+            {
+                case IndicatorMode.None:  return HorizontalAlignment.Center;
+                case IndicatorMode.LeftTop: return HorizontalAlignment.Left;
+                case IndicatorMode.RightTop: return HorizontalAlignment.Right;
+                case IndicatorMode.RightBottom: return HorizontalAlignment.Right;
+                case IndicatorMode.LeftBottom: return HorizontalAlignment.Left;
+                case IndicatorMode.Left: return HorizontalAlignment.Left;
+                case IndicatorMode.Top: return HorizontalAlignment.Center;
+                case IndicatorMode.Right: return HorizontalAlignment.Right;
+                case IndicatorMode.Bottom: return HorizontalAlignment.Center;
+                case IndicatorMode.Center: return HorizontalAlignment.Center;
+                default: return HorizontalAlignment.Center;
+            }
+        }
+        private VerticalAlignment GetVerticalAlignmentFormIndicatorMode(IndicatorMode mode )
+        {
+            switch (mode)
+            {
+                case IndicatorMode.None: return VerticalAlignment.Center;
+                case IndicatorMode.LeftTop: return VerticalAlignment.Top;
+                case IndicatorMode.RightTop: return VerticalAlignment.Top;
+                case IndicatorMode.RightBottom: return VerticalAlignment.Bottom;
+                case IndicatorMode.LeftBottom: return VerticalAlignment.Bottom;
+                case IndicatorMode.Left: return VerticalAlignment.Center;
+                case IndicatorMode.Top: return VerticalAlignment.Top;
+                case IndicatorMode.Right: return VerticalAlignment.Center;
+                case IndicatorMode.Bottom: return VerticalAlignment.Bottom;
+                case IndicatorMode.Center: return VerticalAlignment.Center;
+                default: return VerticalAlignment.Center;
+            }
+        }
+   
 
     }
 }

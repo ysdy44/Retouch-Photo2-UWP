@@ -127,44 +127,27 @@ namespace Retouch_Photo2.ViewModels.Selections
             }
         }
 
-
-        /// <summary> <see cref = "SelectionViewModel" />'s ImageKey. </summary>
-        public string ImageKey;
+        
+        /// <summary> <see cref = "SelectionViewModel" />'s ImageRe. </summary>
+        public ImageRe ImageRe
+        {
+            get => this.imageRe;
+            set
+            {
+                this.imageRe = value;
+                this.OnPropertyChanged(nameof(this.ImageRe));//Notify 
+            }
+        }
+        private ImageRe imageRe;
         /// <summary> Sets ImageLayer. </summary>     
         private void SetImageLayer(Layer layer)
         {
             if (layer is ImageLayer imageLayer)
             {
-                string imageKey= imageLayer.ImageKey;
-
-                //ImageKey
-                this.ImageKey = imageKey;
-
-                //CanvasBitmap
-                CanvasBitmap bitmap = imageLayer.GetImage(imageKey);
-                this.ImageSummary = string.Format
-                (
-                    "{0} {1}x{2}pixels {3}Dpi",
-                    imageKey,
-                    bitmap.SizeInPixels.Width,
-                    bitmap.SizeInPixels.Height,
-                    bitmap.Dpi
-                );
-
-                return;
+                this.ImageRe = imageLayer.ImageRe;
             }
         }
 
-        public string ImageSummary
-        {
-            get => this.imageSummary;
-            set
-            {
-                this.imageSummary = value;
-                this.OnPropertyChanged(nameof(this.ImageSummary));//Notify 
-            }
-        }
-        private string imageSummary;
 
     }
 }

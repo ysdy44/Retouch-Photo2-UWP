@@ -10,14 +10,24 @@
     d:DesignWidth="400"
     >
 
-
+    
     <Page.Resources>
+        <!--Flyout-->
         <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <brushsControls:ColorPicker x:Name="ColorPicker" Width="222"/>
         </Flyout>
         <Flyout x:Name="StopsFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <brushsControls:StopsPicker x:Name="StopsPicker" Width="320"/>
         </Flyout>
+        
+        <!--Storyboard-->
+        <Storyboard x:Name="EaseStoryboard">
+            <ColorAnimation From="{ThemeResource SystemBaseHighColor}" To="{ThemeResource AppBorderBrushColor}" Storyboard.TargetProperty="Color" Storyboard.TargetName="BrushTypeBorderBorderBrush" d:IsOptimized="True">
+                <ColorAnimation.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </ColorAnimation.EasingFunction>
+            </ColorAnimation>
+        </Storyboard>
     </Page.Resources>
     
 
@@ -37,9 +47,12 @@
                 
         <TextBlock Text="BrushType:" Style="{StaticResource AppTextBlock}"/>
         <Border Style="{StaticResource AppRoundedBorderStyle}">
+            <Border.BorderBrush>
+                <SolidColorBrush x:Name="BrushTypeBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
+            </Border.BorderBrush>
             <ComboBox x:Name="BrushTypeComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
                   SelectedIndex="{x:Bind BrushTypeToIndexConverter(SelectionViewModel.BrushType),Mode=OneWay}" 
-                  IsEnabled="{x:Bind SelectionModeToBoolConverter(SelectionViewModel.Mode),Mode=OneWay}" 
+                  IsEnabled="{x:Bind BrushTypeToIsEnabledConverter(SelectionViewModel.BrushType),Mode=OneWay}" 
                  >
                 <ComboBoxItem x:Name="NoneComboBoxItem" Content="None"/>
                 <ComboBoxItem x:Name="ColorComboBoxItem" Content="Color"/>

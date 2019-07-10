@@ -36,10 +36,10 @@ namespace Retouch_Photo2.ViewModels
         /// <summary>
         /// Construct a project from <see cref = "ImageLayer" />.
         /// </summary>
-        /// <param name="imageLayer"> ImageLayer. </param>
+        /// <param name="imageLayer"> ImageLayer </param>
         public Project(ImageLayer imageLayer)
         {
-            CanvasBitmap bitmap = imageLayer.GetImage(imageLayer.ImageKey);
+            CanvasBitmap bitmap = imageLayer.ImageRe.Source;
 
             int width = (int)bitmap.SizeInPixels.Width;
             int height = (int)bitmap.SizeInPixels.Height;
@@ -57,7 +57,7 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         /// <param name="width"> width </param>
         /// <param name="height"> height </param>
-        public Project(int width ,int height)
+        public Project(int width, int height)
         {
             this.Width = width;
             this.Height = height;

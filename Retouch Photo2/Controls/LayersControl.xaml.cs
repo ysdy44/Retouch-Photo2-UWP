@@ -1,4 +1,5 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
@@ -6,6 +7,7 @@ using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
 using System;
+using System.Numerics;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -45,20 +47,29 @@ namespace Retouch_Photo2.Controls
                 //File
                 StorageFile file = await this.ViewModel.PickSingleFileAsync( PickerLocationId.PicturesLibrary);
                 if (file == null) return;
+                
+                //ImageRe
+                ImageRe imageRe = await ImageRe.CreateFromStorageFile(this.ViewModel.CanvasDevice, file);
+                if (imageRe == null) return;
 
-                //ImageKey
-                string imageKey = file.Name;
-
-                //CanvasBitmap
-                CanvasBitmap bitmap = await this.ViewModel.GetCanvasBitmap(file);
-                if (bitmap == null) return;
+                //Contains
+                bool isContains = this.ViewModel.ContainsImage(imageRe.Key);
+                if (isContains) imageRe = this.ViewModel.GetImage(imageRe.Key);
 
                 //Images
-                this.ViewModel.Images.Add(imageKey, bitmap);
+                this.ViewModel.Images.Push(imageRe);//Insert
+                                                  
+                //Transformer
+                Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
 
                 //Layer
-                ImageLayer imageLayer = new ImageLayer(imageKey, this.ViewModel.GetImage);
-                if (imageLayer == null) return;
+                ImageLayer imageLayer = new ImageLayer()
+                {
+                    ImageRe= imageRe,
+                    Source = transformerSource,
+                    Destination= transformerSource,
+                    IsChecked = true
+                };
 
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>

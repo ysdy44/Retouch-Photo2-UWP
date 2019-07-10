@@ -125,6 +125,7 @@
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
     <Compile Include="ILayer\IGeometryLayer.cs" />
+    <Compile Include="ImageRe.cs" />
     <Compile Include="Layer.Color.cs" />
     <Compile Include="Layer.Notify.cs" />
     <Compile Include="Layer.cs" />

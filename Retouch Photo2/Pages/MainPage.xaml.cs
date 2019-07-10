@@ -1,10 +1,13 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Pages.MainPages;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Numerics;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -223,16 +226,24 @@ namespace Retouch_Photo2.Pages
                     StorageFile file = await this.ViewModel.PickSingleFileAsync(PickerLocationId.PicturesLibrary);
                     if (file == null) return;
 
-                    //ImageKey
-                    string imageKey = file.Name;
+                    //ImageRe
+                    ImageRe imageRe = await ImageRe.CreateFromStorageFile(this.ViewModel.CanvasDevice, file);
+                    if (imageRe == null) return;
+                    
+                    //Contains
+                    bool isContains = this.ViewModel.ContainsImage(imageRe.Key);
+                    if (isContains) imageRe = this.ViewModel.GetImage(imageRe.Key);
 
-                    //CanvasBitmap
-                    CanvasBitmap bitmap = await this.ViewModel.GetCanvasBitmap(file);
-                    if (bitmap == null) return;
+                    //Transformer
+                    Transformer transformer = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
 
                     //Layer
-                    ImageLayer imageLayer = new ImageLayer(imageKey, this.ViewModel.GetImage);
-                    if (imageLayer == null) return;
+                    ImageLayer imageLayer = new ImageLayer()
+                    {
+                        ImageRe = imageRe,
+                        Source = transformer,
+                        Destination = transformer,
+                    };
 
                     //Project
                     Project project = new Project(imageLayer);
@@ -245,20 +256,28 @@ namespace Retouch_Photo2.Pages
                     StorageFile file = await this.ViewModel.PickSingleFileAsync(PickerLocationId.Desktop);
                     if (file == null) return;
 
-                    //ImageKey
-                    string imageKey = file.Name;
+                    //ImageRe
+                    ImageRe imageRe = await ImageRe.CreateFromStorageFile(this.ViewModel.CanvasDevice, file);
+                    if (imageRe == null) return;
 
-                    //CanvasBitmap
-                    CanvasBitmap bitmap = await this.ViewModel.GetCanvasBitmap(file);
-                    if (bitmap == null) return;
+                    //Contains
+                    bool isContains = this.ViewModel.ContainsImage(imageRe.Key);
+                    if (isContains) imageRe = this.ViewModel.GetImage(imageRe.Key);
+
+                    //Transformer
+                    Transformer transformer = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
 
                     //Layer
-                    ImageLayer imageLayer = new ImageLayer(imageKey, this.ViewModel.GetImage);
-                    if (imageLayer == null) return;
+                    ImageLayer imageLayer = new ImageLayer()
+                    {
+                        ImageRe = imageRe,
+                        Source = transformer,
+                        Destination = transformer,
+                    };
 
                     //Project
                     Project project = new Project(imageLayer);
-                    this.Frame.Navigate(typeof(DrawPage), project);//Navigate
+                    this.Frame.Navigate(typeof(DrawPage), project);//Navigate       
                 };
 
                 this.PicturesControl.CancelButton.Tapped += (s, e) => this.State = MainPageState.Main;
