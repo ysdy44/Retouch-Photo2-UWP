@@ -148,7 +148,7 @@ namespace Retouch_Photo2.Controls
             set { SetValue(ModeProperty, value); }
         }
         /// <summary> Identifies the <see cref = "TransformerControl.Mode" /> dependency property. </summary>
-        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Transformer), typeof(ListViewSelectionMode), typeof(TransformerControl), new PropertyMetadata(ListViewSelectionMode.None, (sender, e) =>
+        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(ListViewSelectionMode), typeof(TransformerControl), new PropertyMetadata(ListViewSelectionMode.None, (sender, e) =>
         {
             TransformerControl con = (TransformerControl)sender;
 
@@ -182,7 +182,7 @@ namespace Retouch_Photo2.Controls
             set { SetValue(DisabledRadianProperty, value); }
         }
         /// <summary> Identifies the <see cref = "TransformerControl.DisabledRadian" /> dependency property. </summary>
-        public static readonly DependencyProperty DisabledRadianProperty = DependencyProperty.Register(nameof(Transformer), typeof(Transformer), typeof(TransformerControl), new PropertyMetadata(false, (sender, e) =>
+        public static readonly DependencyProperty DisabledRadianProperty = DependencyProperty.Register(nameof(DisabledRadian), typeof(bool), typeof(TransformerControl), new PropertyMetadata(false, (sender, e) =>
         {
             TransformerControl con = (TransformerControl)sender;
 

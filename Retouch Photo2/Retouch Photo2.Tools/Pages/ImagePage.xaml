@@ -4,6 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:layers="using:Retouch_Photo2.Layers"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -11,6 +12,7 @@
 
     
     <Page.Resources>
+        
         <!--Storyboard-->
         <Storyboard x:Name="EaseStoryboard">
             <ColorAnimation From="{ThemeResource SystemBaseHighColor}" To="{ThemeResource AppBorderBrushColor}" Storyboard.TargetProperty="Color" Storyboard.TargetName="SelectBorderBorderBrush" d:IsOptimized="True">
@@ -19,12 +21,27 @@
                 </ColorAnimation.EasingFunction>
             </ColorAnimation>
         </Storyboard>
+
+        <!--Flyout-->
+        <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <ListView x:Name="ListView" SelectionMode="None" IsItemClickEnabled="True"/>
+        </Flyout>
+        
     </Page.Resources>
 
 
     <StackPanel Orientation="Horizontal">
 
         <TextBlock Text="{x:Bind ImageReStoryboardConverter(SelectionViewModel.ImageRe),Mode=OneWay}" Style="{StaticResource AppTextBlock}"/>
+
+        <!--Select-->
+        <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
+            <Button x:Name="ClearButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                <FontIcon Glyph="&#xE106;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+            </Button>
+        </Border>
+
+        <ContentControl Width="8"/>
 
         <!--Select-->
         <Border Style="{StaticResource AppRoundedBorderStyle}">
@@ -46,5 +63,14 @@
             </Button>
         </Border>
         
+        <ContentControl Width="8"/>
+
+        <!--Stack-->
+        <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
+            <Button x:Name="StackButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                <FontIcon Glyph="&#xE14C;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+            </Button>
+        </Border>
+
     </StackPanel>
 </Page>

@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Controls
             set { SetValue(ModeProperty, value); }
         }
         /// <summary> Identifies the <see cref = "LayerControl.Mode" /> dependency property. </summary>
-        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Transformer), typeof(ListViewSelectionMode), typeof(LayerControl), new PropertyMetadata(ListViewSelectionMode.None, (sender, e) =>
+        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(ListViewSelectionMode), typeof(LayerControl), new PropertyMetadata(ListViewSelectionMode.None, (sender, e) =>
         {
             LayerControl con = (LayerControl)sender;
 

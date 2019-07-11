@@ -14,7 +14,7 @@
 
         <!--StepFrequency-->
         <TextBlock Text="StepFrequency:" Visibility="Collapsed" Style="{StaticResource AppTextBlock}"/>
-        <Border Style="{StaticResource AppCircleBorderStyle}">
+        <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip Content="StepFrequency" Placement="Top" IsOpen="{x:Bind TipViewModel.IsCursorToolOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
@@ -51,7 +51,7 @@
         <AppBarSeparator/>
 
         <!--More-->
-        <Border Style="{StaticResource AppCircleBorderStyle}">
+        <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
             <Button x:Name="MoreButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
                 <FontIcon Glyph="&#xE10C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>

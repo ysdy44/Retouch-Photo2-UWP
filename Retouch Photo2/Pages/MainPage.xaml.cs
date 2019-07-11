@@ -230,9 +230,8 @@ namespace Retouch_Photo2.Pages
                     ImageRe imageRe = await ImageRe.CreateFromStorageFile(this.ViewModel.CanvasDevice, file);
                     if (imageRe == null) return;
                     
-                    //Contains
-                    bool isContains = this.ViewModel.ContainsImage(imageRe.Key);
-                    if (isContains) imageRe = this.ViewModel.GetImage(imageRe.Key);
+                    //Images
+                    this.ViewModel.DuplicateChecking(imageRe);
 
                     //Transformer
                     Transformer transformer = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
@@ -260,9 +259,8 @@ namespace Retouch_Photo2.Pages
                     ImageRe imageRe = await ImageRe.CreateFromStorageFile(this.ViewModel.CanvasDevice, file);
                     if (imageRe == null) return;
 
-                    //Contains
-                    bool isContains = this.ViewModel.ContainsImage(imageRe.Key);
-                    if (isContains) imageRe = this.ViewModel.GetImage(imageRe.Key);
+                    //Images
+                    this.ViewModel.DuplicateChecking(imageRe);
 
                     //Transformer
                     Transformer transformer = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);

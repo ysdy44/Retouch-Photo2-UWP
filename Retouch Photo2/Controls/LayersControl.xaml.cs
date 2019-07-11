@@ -52,13 +52,9 @@ namespace Retouch_Photo2.Controls
                 ImageRe imageRe = await ImageRe.CreateFromStorageFile(this.ViewModel.CanvasDevice, file);
                 if (imageRe == null) return;
 
-                //Contains
-                bool isContains = this.ViewModel.ContainsImage(imageRe.Key);
-                if (isContains) imageRe = this.ViewModel.GetImage(imageRe.Key);
+               //Images
+                this.ViewModel.DuplicateChecking(imageRe);
 
-                //Images
-                this.ViewModel.Images.Push(imageRe);//Insert
-                                                  
                 //Transformer
                 Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
 

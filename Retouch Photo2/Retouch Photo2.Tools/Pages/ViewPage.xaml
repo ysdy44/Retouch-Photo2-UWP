@@ -38,7 +38,7 @@
         </Slider>
         <!--Radian-->
         <ContentControl Width="6"/>
-        <Border Style="{StaticResource AppCircleBorderStyle}">
+        <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip Content="Reset radian" Placement="Top" IsOpen="{x:Bind TipViewModel.IsViewToolOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
@@ -59,7 +59,7 @@
         </Slider>        
         <ContentControl Width="6"/>
         <!--Scale-->
-        <Border Style="{StaticResource AppCircleBorderStyle}">
+        <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip Content="Reset scale" Placement="Top" IsOpen="{x:Bind TipViewModel.IsViewToolOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>

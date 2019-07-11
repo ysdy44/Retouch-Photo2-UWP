@@ -46,6 +46,7 @@ namespace Retouch_Photo2.Tools.Pages
         public ImagePage()
         {
             this.InitializeComponent();
+            this.ClearButton.Tapped += (s, e) => this.SelectionViewModel.ImageRe = new ImageRe { IsStoryboardNotify = true };//ImageRe
             this.SelectButton.Tapped += async (s, e) =>
             {
                 //File
@@ -55,12 +56,9 @@ namespace Retouch_Photo2.Tools.Pages
                 //imageRe
                 ImageRe imageRe = await ImageRe.CreateFromStorageFile(this.ViewModel.CanvasDevice, file);
                 if (imageRe == null) return;
-
-                //Contains
-                bool isContains = this.ViewModel.ContainsImage(imageRe.Key);
-                if (isContains) imageRe = this.ViewModel.GetImage(imageRe.Key);
-
-                this.ViewModel.Images.Push(imageRe);//Images
+                
+                //Images
+                this.ViewModel.DuplicateChecking(imageRe);
 
                 this.SelectionViewModel.ImageRe = imageRe;//ImageRe
             };
@@ -73,10 +71,9 @@ namespace Retouch_Photo2.Tools.Pages
                 //imageRe
                 ImageRe imageRe = await ImageRe.CreateFromStorageFile(this.ViewModel.CanvasDevice, file);
                 if (imageRe == null) return;
-
-                //Contains
-                bool isContains = this.ViewModel.ContainsImage(imageRe.Key);
-                if (isContains) imageRe = this.ViewModel.GetImage(imageRe.Key);
+                
+                //Images
+                this.ViewModel.DuplicateChecking(imageRe);
 
                 //Transformer
                 Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
@@ -92,6 +89,19 @@ namespace Retouch_Photo2.Tools.Pages
                 }, true);
 
                 this.ViewModel.Invalidate();//Invalidate
+            };
+            this.StackButton.Tapped +=   (s, e) => 
+            {
+                this.ListView.ItemsSource = null;
+                this.ListView.ItemsSource = this.ViewModel.Images;
+                this.Flyout.ShowAt(this.StackButton);//this.StackButton
+            };
+            this.ListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is ImageRe imageRe)
+                {
+                    this.SelectionViewModel.ImageRe = imageRe;//ImageRe
+                }
             };
         }
     }

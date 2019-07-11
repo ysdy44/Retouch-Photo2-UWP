@@ -71,42 +71,26 @@ namespace Retouch_Photo2.ViewModels
 
         /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.Layers.Models.ImageLayer" />'s images. </summary>
         public Stack<ImageRe> Images = new Stack<ImageRe>();
-
+        
         /// <summary>
-        /// Gets image which key is equal to the source key.
+        /// Check duplicate ImageRe.
+        /// If it exists, replace it, or insert it into the Images.
         /// </summary>
-        /// <param name="key"> The source key. </param>
-        /// <returns> ImageRe </returns>
-        public ImageRe GetImage(string key)
+        /// <param name="imageRe"> The source ImageRe. </param>
+        public void DuplicateChecking(ImageRe imageRe)
         {
-            foreach (ImageRe imageRe in Images)
+            foreach (ImageRe imageRe2 in Images)
             {
-                if (imageRe.Key == key)
+                if (imageRe2.Key == imageRe.Key)
                 {
-                    return imageRe;
+                    imageRe= imageRe2;
+                    return;
                 }
             }
 
-            return null;
+            this.Images.Push(imageRe);//Images
         }
 
-        /// <summary>
-        /// Gets images contains image which key is equal to the source key.
-        /// </summary>
-        /// <param name="key"> The source key. </param>
-        /// <returns> bool </returns>
-        public bool ContainsImage(string key)
-        {
-            foreach (ImageRe imageRe in Images)
-            {
-                if (imageRe.Key == key)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
                 
         /// <summary>
         /// Async pick a file.

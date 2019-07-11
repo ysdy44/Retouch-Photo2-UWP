@@ -47,7 +47,7 @@ namespace Retouch_Photo2.Elements
             set { SetValue(OffContentProperty, value); }
         }
         /// <summary> Identifies the <see cref = "OnOffSwitch.OffContent" /> dependency property. </summary>
-        public static readonly DependencyProperty OffContentProperty = DependencyProperty.Register(nameof(OnContent), typeof(object), typeof(OnOffSwitch), new PropertyMetadata(null));
+        public static readonly DependencyProperty OffContentProperty = DependencyProperty.Register(nameof(OffContent), typeof(object), typeof(OnOffSwitch), new PropertyMetadata(null));
 
 
         #endregion
