@@ -31,7 +31,7 @@ namespace Retouch_Photo2.ViewModels.Selections
                 this.OnPropertyChanged(nameof(this.BrushType));//Notify 
             }
         }
-        private BrushType brushType;
+        private BrushType brushType = BrushType.Disabled;
 
         /// <summary> Brush's gradient stops. </summary>     
         public CanvasGradientStop[] BrushArray

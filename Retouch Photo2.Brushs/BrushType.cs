@@ -5,9 +5,6 @@
     /// </summary>
     public enum BrushType
     {
-        /// <summary> Disabled brush. </summary>
-        Disabled,
-
         /// <summary> Normal. </summary>
         None,
 
@@ -23,5 +20,8 @@
 
         /// <summary> Image brush. </summary>
         Image,
+
+        /// <summary> Disabled brush. </summary>
+        Disabled,
     }
 }
