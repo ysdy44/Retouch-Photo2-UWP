@@ -18,15 +18,11 @@ namespace Retouch_Photo2.Layers.Models
         //@Construct
         public ImageLayer()
         {
-            base.Name = "Image";
-        }
-        public ImageLayer(ImageRe imageRe)
-        {
-            base.Name = "Image"; 
         }
 
         //@Override
-        public override UIElement GetIcon() => new ImageControl();
+        public override string Type => "Image";
+        public override UIElement Icon => new ImageControl();
         public override Layer Clone(ICanvasResourceCreator resourceCreator)
         {
             return new ImageLayer

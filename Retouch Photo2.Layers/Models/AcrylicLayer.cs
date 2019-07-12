@@ -21,11 +21,11 @@ namespace Retouch_Photo2.Layers.Models
         //@Construct
         public AcrylicLayer()
         {
-            base.Name = "Acrylic";
         }
 
         //@Override
-        public override UIElement GetIcon() => new AcrylicControl();
+        public override string Type => "Acrylic";
+        public override UIElement Icon => new AcrylicControl();
         public override Layer Clone(ICanvasResourceCreator resourceCreator)
         {
             return new AcrylicLayer

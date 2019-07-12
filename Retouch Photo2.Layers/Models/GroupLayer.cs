@@ -20,11 +20,11 @@ namespace Retouch_Photo2.Layers.Models
         //@Construct
         public GroupLayer()
         {
-            base.Name = "Group";
         }
 
         //@Override
-        public override UIElement GetIcon() => new GroupControl();
+        public override string Type => "Group";
+        public override UIElement Icon => new GroupControl();
   
         public override Layer Clone(ICanvasResourceCreator resourceCreator)
         {       

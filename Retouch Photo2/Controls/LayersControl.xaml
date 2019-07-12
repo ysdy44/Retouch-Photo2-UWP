@@ -20,10 +20,10 @@
             <Grid x:Name="RootGrid" Background="Transparent" Tapped="RootGrid_Tapped" RightTapped="RootGrid_RightTapped">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30"/>
-                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="30"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="1"/>
-                    <ColumnDefinition Width="36"/>
+                    <ColumnDefinition Width="30"/>
                 </Grid.ColumnDefinitions>
 
                 <!--Background-->
@@ -44,7 +44,12 @@
                 <Border Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Child="{x:Bind Icon,Mode=OneWay}"/>
 
                 <!--Text-->
-                <TextBlock Grid.Column="2" Margin="2,0" VerticalAlignment="Center" Text="{x:Bind Name,Mode=OneWay}"/>
+                <TextBlock Grid.Column="2" VerticalAlignment="Center">
+                    <Run Text="{x:Bind Name,Mode=OneWay}"/>
+                    <Run Foreground="{ThemeResource AppText}">(</Run>
+                    <Run Text="{x:Bind Type,Mode=OneWay}" Foreground="{ThemeResource AppText}"/>
+                    <Run Foreground="{ThemeResource AppText}">)</Run>
+                </TextBlock>
                 <Rectangle Grid.Column="3" Height="28" Fill="{ThemeResource SystemControlBackgroundBaseLowBrush}" Opacity="0.5"/>
 
                 <!--Visibility-->

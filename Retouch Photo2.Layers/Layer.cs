@@ -16,11 +16,13 @@ namespace Retouch_Photo2.Layers
     public abstract partial class Layer : INotifyPropertyChanged, ICacheTransform
     {
         //@Abstract
+        /// <summary> Gets layer's type name. </summary>
+        public abstract string Type { get; }
          /// <summary>
         /// Gets layer's icon.
         /// </summary>
         /// <returns> icon </returns>
-        public abstract UIElement GetIcon();
+        public abstract UIElement Icon { get; }
         /// <summary>
         /// Get layer own copy.
         /// </summary>
@@ -48,9 +50,7 @@ namespace Retouch_Photo2.Layers
 
 
         /// <summary> <see cref = "Layer" />'s name. </summary>
-        public string Name { get; protected set; } = "Layer";
-        /// <summary> <see cref = "Layer" />'s icon. </summary>
-        public UIElement Icon => this.GetIcon();
+        public string Name;
         /// <summary> <see cref = "Layer" />'s opacity. </summary>
         public float Opacity=1.0f;
         /// <summary> <see cref = "Layer" />'s blend type. </summary>

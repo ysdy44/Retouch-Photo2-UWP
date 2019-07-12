@@ -16,11 +16,11 @@ namespace Retouch_Photo2.Layers.Models
         //@Construct
         public RectangleLayer()
         {
-            base.Name = "Rectangle";
         }
 
         //@Override      
-        public override UIElement GetIcon()=> new RectangleControl();
+        public override string Type => "Rectangle";
+        public override UIElement Icon=> new RectangleControl();
         public override Layer Clone(ICanvasResourceCreator resourceCreator)
         {
             return new RectangleLayer

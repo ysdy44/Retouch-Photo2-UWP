@@ -16,11 +16,11 @@ namespace Retouch_Photo2.Layers.Models
         //@Construct
         public EllipseLayer()
         {
-            base.Name = "Ellipse";
         }
 
-        //@Override
-        public override UIElement GetIcon() => new EllipseControl();
+        //@Override       
+        public override string Type => "Ellipse";
+        public override UIElement Icon => new EllipseControl();
         public override Layer Clone(ICanvasResourceCreator resourceCreator)
         {
             return new EllipseLayer
