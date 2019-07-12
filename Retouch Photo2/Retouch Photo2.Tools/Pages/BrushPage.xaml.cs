@@ -73,6 +73,8 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
 
 
             //BrushType
+            this.StopsPicker.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.LinearGradient);//ComboBox
+
             this.NoneComboBoxItem.Tapped += (s, e) => this.BrushTypeNone();
             this.ColorComboBoxItem.Tapped += (s, e) => this.BrushTypeColor();
             this.LinearGradientComboBoxItem.Tapped += (s, e) =>

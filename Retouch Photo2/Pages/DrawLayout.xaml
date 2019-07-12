@@ -224,10 +224,10 @@
 
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="66"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition x:Name="RightGridLenght"
-                Width="70"/>
+                Width="66"/>
             <!--Normal-->
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>

@@ -9,12 +9,14 @@
     d:DesignHeight="50"
     d:DesignWidth="400">
 
-
-    <ComboBox x:Name="ComboBox" Style="{StaticResource AppComboBoxStyle}">
-        <ComboBox.ItemTemplate>
-            <DataTemplate x:DataType="local:Blend">
-                <ContentPresenter Content="{x:Bind Icon}"/>
-            </DataTemplate>
-        </ComboBox.ItemTemplate>
-    </ComboBox>
+    
+    <Border Style="{StaticResource AppRoundedBorderStyle}">
+        <ComboBox x:Name="ComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch">
+            <ComboBox.ItemTemplate>
+                <DataTemplate x:DataType="local:Blend">
+                    <ContentPresenter Content="{x:Bind Icon}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+    </Border>
 </UserControl>
