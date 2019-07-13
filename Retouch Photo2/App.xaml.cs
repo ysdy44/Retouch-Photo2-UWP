@@ -38,6 +38,7 @@ namespace Retouch_Photo2
             BrushTool = new BrushTool(),
             RectangleTool = new RectangleTool(),
             EllipseTool = new EllipseTool(),
+            PenTool = new PenTool(),
             ImageTool = new ImageTool(),
             AcrylicTool = new AcrylicTool(),
         };

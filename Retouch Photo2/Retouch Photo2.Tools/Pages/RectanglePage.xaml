@@ -21,7 +21,7 @@
         <TextBlock Text="StrokeColor:" Style="{StaticResource AppTextBlock}"/>
         <pagesDrawPages:StrokeColorEllipseButton/>
 
-        <AppBarSeparator/>
+        <ContentControl Width="12"/>
 
         <TextBlock Text="StrokeWidth:" Style="{StaticResource AppTextBlock}"/>
         <pagesDrawPages:StrokeWidthPicker/>

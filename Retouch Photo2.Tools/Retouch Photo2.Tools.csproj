@@ -124,6 +124,9 @@
     <Compile Include="Controls\ImageControl.xaml.cs">
       <DependentUpon>ImageControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PenControl.xaml.cs">
+      <DependentUpon>PenControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RectangleControl.xaml.cs">
       <DependentUpon>RectangleControl.xaml</DependentUpon>
     </Compile>
@@ -166,6 +169,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ImageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PenControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

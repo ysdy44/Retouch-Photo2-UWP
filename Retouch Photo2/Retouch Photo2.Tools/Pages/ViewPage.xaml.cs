@@ -4,7 +4,6 @@ using Retouch_Photo2.ViewModels.Tips;
 using System;
 using Windows.UI.Xaml.Controls;
 
-
 namespace Retouch_Photo2.Tools.Pages
 {
     /// <summary>

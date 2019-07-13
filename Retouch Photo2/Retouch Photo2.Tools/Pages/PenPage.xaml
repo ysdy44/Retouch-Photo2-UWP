@@ -1,0 +1,99 @@
+﻿<Page
+    x:Class="Retouch_Photo2.Tools.Pages.PenPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:pagesDrawPages="using:Retouch_Photo2.Pages.DrawPages"
+    mc:Ignorable="d"
+    >
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Add or Nodes-->
+        <elements:OnOffSwitch OnContent="Add" OffContent="Nodes" IsOn="{x:Bind AddOrNodes,Mode=TwoWay}">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="StepFrequency" Placement="Top" IsOpen="{x:Bind TipViewModel.IsPenToolOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+            </ToolTipService.ToolTip>
+        </elements:OnOffSwitch>
+
+        <!--Add-->
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Visibility="{x:Bind FalseToVisibilityConverter(AddOrNodes),Mode=OneWay}">
+
+            <AppBarSeparator/>
+
+            <TextBlock Text="FillColor:" Style="{StaticResource AppTextBlock}"/>
+            <pagesDrawPages:FillColorEllipseButton/>
+
+            <AppBarSeparator/>
+
+            <TextBlock Text="StrokeColor:" Style="{StaticResource AppTextBlock}"/>
+            <pagesDrawPages:StrokeColorEllipseButton/>
+
+            <ContentControl Width="12"/>
+
+            <TextBlock Text="StrokeWidth:" Style="{StaticResource AppTextBlock}"/>
+            <pagesDrawPages:StrokeWidthPicker/>
+
+        </StackPanel>
+
+        <!--Nodes-->
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Visibility="{x:Bind TrueToVisibilityConverter(AddOrNodes),Mode=OneWay}">
+           
+            <AppBarSeparator/>
+
+            <TextBlock Text="Remove:" Style="{StaticResource AppTextBlock}"/>
+            <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
+                <ToolTipService.ToolTip>
+                    <ToolTip Content="Remove the current point" Placement="Top" IsOpen="{x:Bind TipViewModel.IsPenToolOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                </ToolTipService.ToolTip>
+                <Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                    <FontIcon Glyph="&#xE107;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+                </Button>
+            </Border>
+            
+            <ContentControl Width="10"/>
+
+            <TextBlock Text="Insert:" Style="{StaticResource AppTextBlock}"/>
+            <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
+                <ToolTipService.ToolTip>
+                    <ToolTip Content="Insert from current point" Placement="Top" IsOpen="{x:Bind TipViewModel.IsPenToolOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                </ToolTipService.ToolTip>
+                <Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                    <FontIcon Glyph="&#xE109;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+                </Button>
+            </Border>
+
+            <AppBarSeparator/>
+
+            <TextBlock Text="Sharp:" Style="{StaticResource AppTextBlock}"/>
+            <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
+                <ToolTipService.ToolTip>
+                    <ToolTip Content="Sharp curves" Placement="Top" IsOpen="{x:Bind TipViewModel.IsPenToolOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                </ToolTipService.ToolTip>
+                <Button Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                    <PathIcon Foreground="{ThemeResource AppText}" Data="M8.948,9.521c-0.282,-0.507 -0.442,-1.088 -0.442,-1.706c0,-1.972 1.632,-3.573 3.642,-3.573c2.01,0 3.642,1.601 3.642,3.573c0,0.699 -0.205,1.352 -0.56,1.903l8.074,8.931c0.266,0.294 0.159,0.778 -0.023,0.928c-0.21,0.172 -0.71,0.312 -1.067,-0.023l-8.137,-8.709c-0.56,0.344 -1.221,0.542 -1.929,0.542c-0.798,0 -1.536,-0.252 -2.136,-0.679l0.02,0.022l-8.246,8.824c-0.357,0.335 -0.857,0.195 -1.067,0.023c-0.182,-0.15 -0.289,-0.634 -0.023,-0.928c1.465,-1.62 8.252,-9.128 8.252,-9.128l0,0Zm3.2,-3.493c1.005,0 1.821,0.801 1.821,1.787c0,0.986 -0.816,1.786 -1.821,1.786c-1.005,0 -1.821,-0.8 -1.821,-1.786c0,-0.986 0.816,-1.787 1.821,-1.787Z"/>
+                </Button>
+            </Border>
+
+            <ContentControl Width="10"/>
+
+            <TextBlock Text="Smooth:" Style="{StaticResource AppTextBlock}"/>
+            <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
+                <ToolTipService.ToolTip>
+                    <ToolTip Content="Smooth curves" Placement="Top" IsOpen="{x:Bind TipViewModel.IsPenToolOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                </ToolTipService.ToolTip>
+                <Button Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                    <PathIcon Foreground="{ThemeResource AppText}" Data="M15.539,6.921c-0.039,-0.624 -1.034,-2.994 -3.651,-3.022c-2.621,0.055 -3.608,2.351 -3.64,2.984c-0.698,0 -4.583,0.114 -5.727,0c-0.214,-0.394 -0.5,-0.702 -1.141,-0.703c-0.403,-0.01 -1.245,0.268 -1.237,1.163c0.007,0.847 0.834,1.174 1.237,1.166c0.457,-0.008 0.966,-0.298 1.141,-0.728c1.191,0 4.089,0.021 5.314,0c-4.657,2.505 -7.273,9.805 -7.814,11.527c-0.103,0.328 0.19,0.736 0.389,0.776c0.198,0.041 0.622,0.039 0.752,-0.412c1.131,-3.92 3.549,-8.482 7.207,-10.823c0.676,1.825 2.346,2.524 3.519,2.524c1.172,0 2.884,-0.64 3.518,-2.524c2.845,1.494 5.754,4.947 7.401,10.823c0.073,0.26 0.389,0.496 0.753,0.412c0.148,-0.034 0.548,-0.305 0.412,-0.752c-1.618,-5.32 -4.095,-9.564 -7.959,-11.551c2.441,0.011 4.302,0.024 5.46,0.025c0.172,0.36 0.572,0.717 1.189,0.703c0.772,0.007 1.189,-0.662 1.189,-1.166c-0.019,-0.566 -0.415,-1.138 -1.238,-1.163c-0.632,0.016 -0.975,0.326 -1.156,0.716c-1.199,0.01 -3.936,0.025 -5.918,0.025Zm-3.651,-1.154c1.044,0 1.892,0.837 1.892,1.869c0,1.031 -0.848,1.868 -1.892,1.868c-1.045,0 -1.893,-0.837 -1.893,-1.868c0,-1.032 0.848,-1.869 1.893,-1.869Z"/>
+                </Button>
+            </Border>
+
+        </StackPanel>
+
+    </Grid>
+</Page>

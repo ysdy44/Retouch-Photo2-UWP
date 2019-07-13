@@ -23,6 +23,9 @@
         /// <summary> Create ellipse geometry. </summary>
         Ellipse,
 
+        /// <summary> Pen curve tool. </summary>
+        Pen,
+
         /// <summary> Create image layer. </summary>
         Image,
 

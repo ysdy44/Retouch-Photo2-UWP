@@ -63,8 +63,8 @@
             </ComboBox>
         </Border>
 
-        <AppBarSeparator/>
-        
+        <ContentControl Width="12"/>
+
         <TextBlock Text="Brush:" Style="{StaticResource AppTextBlock}"/>
         <brushsControls:ShowControl x:Name="ShowControl" 
                                  Color="{x:Bind SelectionViewModel.Color,Mode=OneWay}"

@@ -43,6 +43,12 @@
                 <ToolTip Content="Ellipse" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
         </tools:Button>
+        
+        <tools:Button x:Name="PenButton" GroupType="{x:Bind ToolType,Mode=OneWay}">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="Pen" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+            </ToolTipService.ToolTip>
+        </tools:Button>
 
         <tools:Button x:Name="ImageButton" GroupType="{x:Bind ToolType,Mode=OneWay}">
             <ToolTipService.ToolTip>

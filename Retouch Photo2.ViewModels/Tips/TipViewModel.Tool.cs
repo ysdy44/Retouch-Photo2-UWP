@@ -31,6 +31,10 @@ namespace Retouch_Photo2.ViewModels.Tips
                 case ToolType.Ellipse:
                     break;
 
+                case ToolType.Pen:
+                    this.IsPenToolOpen = isOpen;
+                    break;
+
                 case ToolType.Acrylic:
                     break;
             } 
@@ -80,6 +84,9 @@ namespace Retouch_Photo2.ViewModels.Tips
         /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s EllipseTool. </summary>
         public Tool EllipseTool;
 
+        /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s PenTool. </summary>
+        public Tool PenTool;
+
         /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s ImageTool. </summary>
         public Tool ImageTool;
 
@@ -113,8 +120,19 @@ namespace Retouch_Photo2.ViewModels.Tips
                 this.OnPropertyChanged(nameof(this.IsViewToolOpen));//Notify 
             }
         }
-        private bool isViewToolOpen;        
+        private bool isViewToolOpen;
 
+        /// <summary> IsOpen of the <see cref = "TipPenModel.PenTool" />. </summary>
+        public bool IsPenToolOpen
+        {
+            get => this.isPenToolOpen;
+            set
+            {
+                this.isPenToolOpen = value;
+                this.OnPropertyChanged(nameof(this.IsPenToolOpen));//Notify 
+            }
+        }
+        private bool isPenToolOpen;
 
     }
 }

@@ -13,10 +13,10 @@
 
     <StackPanel Orientation="Horizontal">
 
-        <TextBlock Text="FillColor:" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Text="TintColor:" Style="{StaticResource AppTextBlock}"/>
         <pagesDrawPages:FillColorEllipseButton/>
-        
-        <AppBarSeparator/>
+
+        <ContentControl Width="12"/>
 
         <TextBlock Text="TintOpacity:" Style="{StaticResource AppTextBlock}"/>
         <Border Width="70" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
