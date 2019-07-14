@@ -15,14 +15,17 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
+        <!--Adjustment-->
         <ContentPresenter Content="{x:Bind AdjustmentNullConverter(Adjustment)}"/>
 
-        <Button x:Name="EditButton" Grid.Column="1" Width="30" Height="40" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}"        
+        <!--Edit-->
+        <Button x:Name="EditButton" Grid.Column="1" Width="30" Height="40" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                 Visibility="{x:Bind AdjustmentVisibilityConverter(Adjustment)}" >
             <FontIcon FontSize="14" Glyph="&#xEC88;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
         </Button>
 
-        <Button x:Name="RemoveButton" Grid.Column="2" Width="30" Height="40" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" >
+        <!--Remove-->
+        <Button x:Name="RemoveButton" Grid.Column="2" Width="30" Height="40" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <FontIcon FontSize="12" Glyph="&#xE106;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
         </Button>
 

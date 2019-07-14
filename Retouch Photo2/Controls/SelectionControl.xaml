@@ -21,9 +21,10 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
+        <!--Edit-->
         <StackPanel Grid.Column="0">
 
-            <selections:Button x:Name="CutButton" IsEnabled="False" Label="Cut">
+            <selections:Button x:Name="CutButton" Label="Cut">
                 <selections:Button.EnabledIcon>
                     <selectionsEdi:CutEnabledControl/>
                 </selections:Button.EnabledIcon>
@@ -32,7 +33,7 @@
                 </selections:Button.DisabledIcon>
             </selections:Button>
 
-            <selections:Button x:Name="CopyButton" IsEnabled="False" Label="Copy">
+            <selections:Button x:Name="CopyButton" Label="Copy">
                 <selections:Button.EnabledIcon>
                     <selectionsEdi:CopyEnabledControl/>
                 </selections:Button.EnabledIcon>
@@ -41,7 +42,7 @@
                 </selections:Button.DisabledIcon>
             </selections:Button>
 
-            <selections:Button x:Name="PasteButton" IsEnabled="False" Label="Paste">
+            <selections:Button x:Name="PasteButton" Label="Paste">
                 <selections:Button.EnabledIcon>
                     <selectionsEdi:PasteEnabledControl/>
                 </selections:Button.EnabledIcon>
@@ -50,7 +51,7 @@
                 </selections:Button.DisabledIcon>
             </selections:Button>
 
-            <selections:Button x:Name="ClearButton" IsEnabled="False" Label="Clear">
+            <selections:Button x:Name="RemoveButton" Label="Clear">
                 <selections:Button.EnabledIcon>
                     <selectionsEdi:ClearEnabledControl/>
                 </selections:Button.EnabledIcon>
@@ -61,7 +62,7 @@
 
             <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
 
-            <selections:Button x:Name="ExtractButton" IsEnabled="False" Label="Extract">
+            <selections:Button x:Name="ExtractButton" Label="Extract">
                 <selections:Button.EnabledIcon>
                     <selectionsEdi2:ExtractEnabledControl/>
                 </selections:Button.EnabledIcon>
@@ -70,7 +71,7 @@
                 </selections:Button.DisabledIcon>
             </selections:Button>
 
-            <selections:Button x:Name="MergeButton" IsEnabled="False" Label="Merge">
+            <selections:Button x:Name="MergeButton" Label="Merge">
                 <selections:Button.EnabledIcon>
                     <selectionsEdi2:MergeEnabledControl/>
                 </selections:Button.EnabledIcon>
@@ -83,18 +84,19 @@
 
         <Rectangle Grid.Column="1" Width="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
 
+        <!--Select-->
         <StackPanel Grid.Column="2">
 
-            <selections:Button x:Name="AllButton" IsEnabled="False" Label="All">
+            <selections:Button x:Name="AllButton" Label="All">
                 <selections:Button.EnabledIcon>
-                    <selectionsSel:AllEnabledControl/>
+                    <selectionsSel:AllEnabledControl VerticalAlignment="Center" VerticalContentAlignment="Center"/>
                 </selections:Button.EnabledIcon>
                 <selections:Button.DisabledIcon>
                     <selectionsSel:AllDisabledControl/>
                 </selections:Button.DisabledIcon>
             </selections:Button>
 
-            <selections:Button x:Name="DeselectButton" IsEnabled="False" Label="Deselect">
+            <selections:Button x:Name="DeselectButton" Label="Deselect">
                 <selections:Button.EnabledIcon>
                     <selectionsSel:DeselectEnabledControl/>
                 </selections:Button.EnabledIcon>
@@ -103,7 +105,7 @@
                 </selections:Button.DisabledIcon>
             </selections:Button>
 
-            <selections:Button x:Name="PixelButton" IsEnabled="False" Label="Pixel">
+            <selections:Button x:Name="PixelButton" Label="Pixel">
                 <selections:Button.EnabledIcon>
                     <selectionsSel:PixelEnabledControl/>
                 </selections:Button.EnabledIcon>
@@ -112,7 +114,7 @@
                 </selections:Button.DisabledIcon>
             </selections:Button>
 
-            <selections:Button x:Name="InvertButton" IsEnabled="False" Label="Invert">
+            <selections:Button x:Name="InvertButton" Label="Invert">
                 <selections:Button.EnabledIcon>
                     <selectionsSel:InvertEnabledControl/>
                 </selections:Button.EnabledIcon>
@@ -123,7 +125,7 @@
 
             <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
 
-            <selections:Button x:Name="FeatherButton" IsEnabled="False" Label="Feather">
+            <selections:Button x:Name="FeatherButton" Label="Feather">
                 <selections:Button.EnabledIcon>
                     <selectionsSel2:FeatherEnabledControl/>
                 </selections:Button.EnabledIcon>
@@ -132,7 +134,7 @@
                 </selections:Button.DisabledIcon>
             </selections:Button>
 
-            <selections:Button x:Name="TransformButton" IsEnabled="False" Label="Transform">
+            <selections:Button x:Name="TransformButton" Label="Transform">
                 <selections:Button.EnabledIcon>
                     <selectionsSel2:TransformEnabledControl/>
                 </selections:Button.EnabledIcon>

@@ -55,7 +55,7 @@
 
         <!--More-->
         <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
-            <Button x:Name="MoreButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
+            <Button x:Name="MoreButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <FontIcon Glyph="&#xE10C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
         </Border>

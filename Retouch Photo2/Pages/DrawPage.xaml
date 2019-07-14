@@ -211,7 +211,8 @@
                                  State="{x:Bind TipViewModel.SelectionMenuLayoutState,Mode=TwoWay}" 
                                  PlacementTarget="{x:Bind SelectionMenuLayoutButton}">
                 <elements:MenuLayout.ContentChild>
-                    <controls:SelectionControl/>
+                    <controls:SelectionControl
+                       Mode="{x:Bind SelectionViewModel.Mode,Mode=OneWay}"/>
                 </elements:MenuLayout.ContentChild>
                 <elements:MenuLayout.Icon>
                     <selection:Icon/>

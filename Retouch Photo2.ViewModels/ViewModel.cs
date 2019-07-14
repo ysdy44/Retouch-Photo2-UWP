@@ -10,6 +10,7 @@ using Windows.Storage;
 using Windows.Storage.Streams;
 using System.Threading.Tasks;
 using Windows.Storage.Pickers;
+using System.Linq;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -67,6 +68,21 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.Layers.Layer" />s. </summary>
         public ObservableCollection<Layer> Layers { get; } = new ObservableCollection<Layer>();
 
+        /// <summary> Remove all checked layer(s). </summary>
+        public void RemoveLayers()
+        {
+            //Remove
+            Layer removeLayer = null;
+            do
+            {
+                if (removeLayer != null)
+                    if (this.Layers.Contains(removeLayer))
+                        this.Layers.Remove(removeLayer);
+
+                removeLayer = this.Layers.FirstOrDefault(layer => layer.IsChecked == true);
+            }
+            while (removeLayer != null);
+        }
 
 
         /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.Layers.Models.ImageLayer" />'s images. </summary>

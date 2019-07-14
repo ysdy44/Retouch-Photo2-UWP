@@ -56,11 +56,11 @@ namespace Retouch_Photo2.ViewModels.Selections
         private bool disabledRadian;
          
 
-        /// <summary> Transformer of the single checked layer.  </summary>
+        /// <summary> The single checked layer.  </summary>
         public Layer Layer { get; private set; }
 
 
-        /// <summary> Transformer of the all checked layers.  </summary>
+        /// <summary> The all checked layers.  </summary>
         public IEnumerable<Layer> Layers { get; private set; }
         
 

@@ -6,12 +6,31 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    Width="Auto"
+    Height="46"
+    BorderThickness="0,0,0,0" 
+    BorderBrush="Transparent"
+    Background="Transparent"
+    HorizontalAlignment="Stretch"
+    VerticalAlignment="Stretch"
     d:DesignHeight="50"
     d:DesignWidth="100"
     >
 
-    <Button x:Name="_RootButton" Width="Auto" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
-        <Grid Height="44" Padding="8,0">
+    <Button
+        x:Name="_RootButton"        
+        Padding="0"
+        IsEnabled="{x:Bind UserControl.IsEnabled,Mode=OneWay}" 
+        Width="{x:Bind UserControl.Width,Mode=OneWay}"
+        Height="{x:Bind UserControl.Height,Mode=OneWay}"
+        BorderThickness="{x:Bind UserControl.BorderThickness,Mode=OneWay}"
+        BorderBrush="{x:Bind UserControl.BorderBrush,Mode=OneWay}"
+        Background="{x:Bind UserControl.Background,Mode=OneWay}"
+        HorizontalAlignment="{x:Bind UserControl.HorizontalAlignment,Mode=OneWay}"
+        VerticalAlignment="{x:Bind UserControl.VerticalAlignment,Mode=OneWay}"
+        HorizontalContentAlignment="Left"
+        >
+        <Grid Height="34" Padding="8,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="8"/>
@@ -19,11 +38,11 @@
             </Grid.ColumnDefinitions>
 
             <!--Enabled-->
-            <Viewbox x:Name="EnabledViewbox" Width="28" Height="28" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <Viewbox x:Name="EnabledViewbox" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center"
                         Visibility="{x:Bind BoolToVisibleConverter(UserControl.IsEnabled),Mode=OneWay}"/>
       
             <!--Disabled-->
-            <Viewbox x:Name="DisabledViewbox" Width="28" Height="28" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <Viewbox x:Name="DisabledViewbox" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center"
                         Visibility="{x:Bind BoolToCollapsedConverter(UserControl.IsEnabled),Mode=OneWay}"/>
 
             <TextBlock x:Name="TextBlock" Grid.Column="2" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>

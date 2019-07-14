@@ -6,11 +6,29 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    Width="Auto"
+    Height="Auto"
+    BorderThickness="0,0,0,0" 
+    BorderBrush="Transparent"
+    Background="Transparent"
+    HorizontalAlignment="Stretch"
+    VerticalAlignment="Stretch"
     d:DesignWidth="50"
     d:DesignHeight="50"
     >
 
-    <Button x:Name="_RootButton" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Background="Transparent">
+    <Button 
+        x:Name="_RootButton"         
+        Padding="0"
+        IsEnabled="{x:Bind UserControl.IsEnabled,Mode=OneWay}"
+        Width="{x:Bind UserControl.Width,Mode=OneWay}"
+        Height="{x:Bind UserControl.Height,Mode=OneWay}"
+        BorderThickness="{x:Bind UserControl.BorderThickness,Mode=OneWay}"
+        BorderBrush="{x:Bind UserControl.BorderBrush,Mode=OneWay}"
+        Background="{x:Bind UserControl.Background,Mode=OneWay}"
+        HorizontalAlignment="{x:Bind UserControl.HorizontalAlignment,Mode=OneWay}"
+        VerticalAlignment="{x:Bind UserControl.VerticalAlignment,Mode=OneWay}"
+        >
         <Grid Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center">
 
             <!--Enabled-->

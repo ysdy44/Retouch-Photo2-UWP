@@ -228,21 +228,7 @@ namespace Retouch_Photo2.Controls
             //Remove
             this.RemoveButton.Tapped += (s, e) =>
             {
-                Layer removeLayer = null;
-
-                do
-                {
-                    if (removeLayer != null)
-                    {
-                        if (this.ViewModel.Layers.Contains(removeLayer))
-                        {
-                            this.ViewModel.Layers.Remove(removeLayer);
-                        }
-                    }
-
-                    removeLayer = this.ViewModel.Layers.FirstOrDefault(layer => layer.IsChecked == true);
-                }
-                while (removeLayer != null);
+                this.ViewModel.RemoveLayers();//Remove
 
                 this.SelectionViewModel.SetModeNone();//Selection
                 this.ViewModel.Invalidate();//Invalidate

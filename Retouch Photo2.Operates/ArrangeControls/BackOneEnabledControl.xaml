@@ -8,7 +8,7 @@
     d:DesignHeight="40"
     d:DesignWidth="40">
 
-    <Canvas Width="40" Height="40" >
+    <Canvas Width="40" Height="40">
         <Rectangle Canvas.Left="15" Canvas.Top="5" Width="21"  Height="21" Fill="Gray" />
         <Polygon Points="13,28 24,28 24,36 5,36 5,17 13,17" Fill="#E2A747" />
     </Canvas>
