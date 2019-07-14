@@ -1,14 +1,9 @@
-﻿using Windows.UI.Xaml.Controls;
-using FanKit.Transformers;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.Layers.Models;
+﻿using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -81,6 +76,15 @@ namespace Retouch_Photo2.Controls
         public SelectionControl()
         {
             this.InitializeComponent();
+            this.PasteButton.IsEnabled = false;//PasteButton
+
+
+            this.ExtractButton.IsEnabled = false;
+            this.MergeButton.IsEnabled = false;
+            this.PixelButton.IsEnabled = false;
+            this.FeatherButton.IsEnabled = false;
+            this.TransformButton.IsEnabled = false;
+
 
             #region Edit
 
@@ -103,6 +107,11 @@ namespace Retouch_Photo2.Controls
                             this.Layers = from layer in this.SelectionViewModel.Layers select layer.Clone(this.ViewModel.CanvasDevice);                        
                         break;
                 }
+
+                if (this.Layer!=null || this.Layers!=null)
+                    this.PasteButton.IsEnabled = true;//PasteButton
+                else
+                    this.PasteButton.IsEnabled = false;//PasteButton
                 
                 this.ViewModel.RemoveLayers();//Remove
 
@@ -127,6 +136,11 @@ namespace Retouch_Photo2.Controls
                         this.Layers = from layer in this.SelectionViewModel.Layers select layer.Clone(this.ViewModel.CanvasDevice);
                         break;
                 }
+
+                if (this.Layer != null || this.Layers != null)
+                    this.PasteButton.IsEnabled = true;//PasteButton
+                else
+                    this.PasteButton.IsEnabled = false;//PasteButton
             };
             this.PasteButton.RootButton.Tapped += (s, e) =>
             {
