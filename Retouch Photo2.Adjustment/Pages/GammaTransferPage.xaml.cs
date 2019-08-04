@@ -15,10 +15,15 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// <summary>
     /// Page of <see cref = "GammaTransferAdjustment"/>.
     /// </summary>
-    public sealed partial class GammaTransferPage : AdjustmentPage
+    public sealed partial class GammaTransferPage : IAdjustmentPage
     {
 
         public GammaTransferAdjustment GammaTransferAdjustment;
+
+        public AdjustmentType Type { get; } = AdjustmentType.GammaTransfer;
+        public FrameworkElement Icon { get; } = new GammaTransferControl();
+        public FrameworkElement Page => this;
+
         
         //State
         public GammaTransferPageState State
@@ -31,9 +36,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                 this.AlphaCheckBox.Visibility = this.AlphaOffsetTextBlock.Visibility = this.AlphaOffsetSlider.Visibility = this.AlphaExponentTextBlock.Visibility = this.AlphaExponentSlider.Visibility = this.AlphaAmplitudeTextBlock.Visibility = this.AlphaAmplitudeSlider.Visibility = alpha ? Visibility.Visible : Visibility.Collapsed;
                 if (alpha)
                 {
-                    this.AlphaOffsetSlider.Value = this.GammaTransferAdjustment.GammaTransferAdjustmentItem.AlphaOffset * 100.0f;
-                    this.AlphaExponentSlider.Value = this.GammaTransferAdjustment.GammaTransferAdjustmentItem.AlphaExponent * 100.0f;
-                    this.AlphaAmplitudeSlider.Value = this.GammaTransferAdjustment.GammaTransferAdjustmentItem.AlphaAmplitude * 100.0f;
+                    this.AlphaOffsetSlider.Value = this.GammaTransferAdjustment.AlphaOffset * 100.0f;
+                    this.AlphaExponentSlider.Value = this.GammaTransferAdjustment.AlphaExponent * 100.0f;
+                    this.AlphaAmplitudeSlider.Value = this.GammaTransferAdjustment.AlphaAmplitude * 100.0f;
                 }
 
                 //Red
@@ -42,9 +47,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                 this.RedCheckBox.Visibility = this.RedOffsetTextBlock.Visibility = this.RedOffsetSlider.Visibility = this.RedExponentTextBlock.Visibility = this.RedExponentSlider.Visibility = this.RedAmplitudeTextBlock.Visibility = this.RedAmplitudeSlider.Visibility = red ? Visibility.Visible : Visibility.Collapsed;
                 if (red)
                 {
-                    this.RedOffsetSlider.Value = this.GammaTransferAdjustment.GammaTransferAdjustmentItem.RedOffset * 100.0f;
-                    this.RedExponentSlider.Value = this.GammaTransferAdjustment.GammaTransferAdjustmentItem.RedExponent * 100.0f;
-                    this.RedAmplitudeSlider.Value = this.GammaTransferAdjustment.GammaTransferAdjustmentItem.RedAmplitude * 100.0f;
+                    this.RedOffsetSlider.Value = this.GammaTransferAdjustment.RedOffset * 100.0f;
+                    this.RedExponentSlider.Value = this.GammaTransferAdjustment.RedExponent * 100.0f;
+                    this.RedAmplitudeSlider.Value = this.GammaTransferAdjustment.RedAmplitude * 100.0f;
                 }
 
                 //Green
@@ -53,9 +58,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                 this.GreenCheckBox.Visibility = this.GreenOffsetTextBlock.Visibility = this.GreenOffsetSlider.Visibility = this.GreenExponentTextBlock.Visibility = this.GreenExponentSlider.Visibility = this.GreenAmplitudeTextBlock.Visibility = this.GreenAmplitudeSlider.Visibility = green ? Visibility.Visible : Visibility.Collapsed;
                 if (green)
                 {
-                    this.GreenOffsetSlider.Value = this.GammaTransferAdjustment.GammaTransferAdjustmentItem.GreenOffset * 100.0f;
-                    this.GreenExponentSlider.Value = this.GammaTransferAdjustment.GammaTransferAdjustmentItem.GreenExponent * 100.0f;
-                    this.GreenAmplitudeSlider.Value = this.GammaTransferAdjustment.GammaTransferAdjustmentItem.GreenAmplitude * 100.0f;
+                    this.GreenOffsetSlider.Value = this.GammaTransferAdjustment.GreenOffset * 100.0f;
+                    this.GreenExponentSlider.Value = this.GammaTransferAdjustment.GreenExponent * 100.0f;
+                    this.GreenAmplitudeSlider.Value = this.GammaTransferAdjustment.GreenAmplitude * 100.0f;
                 }
 
                 //Blue
@@ -64,9 +69,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                 this.BlueCheckBox.Visibility = this.BlueOffsetTextBlock.Visibility = this.BlueOffsetSlider.Visibility = this.BlueExponentTextBlock.Visibility = this.BlueExponentSlider.Visibility = this.BlueAmplitudeTextBlock.Visibility = this.BlueAmplitudeSlider.Visibility = blue ? Visibility.Visible : Visibility.Collapsed;
                 if (blue)
                 {
-                    this.BlueOffsetSlider.Value = this.GammaTransferAdjustment.GammaTransferAdjustmentItem.BlueOffset * 100.0f;
-                    this.BlueExponentSlider.Value = this.GammaTransferAdjustment.GammaTransferAdjustmentItem.BlueExponent * 100.0f;
-                    this.BlueAmplitudeSlider.Value = this.GammaTransferAdjustment.GammaTransferAdjustmentItem.BlueAmplitude * 100.0f;
+                    this.BlueOffsetSlider.Value = this.GammaTransferAdjustment.BlueOffset * 100.0f;
+                    this.BlueExponentSlider.Value = this.GammaTransferAdjustment.BlueExponent * 100.0f;
+                    this.BlueAmplitudeSlider.Value = this.GammaTransferAdjustment.BlueAmplitude * 100.0f;
                 }
             }
         }
@@ -113,8 +118,6 @@ namespace Retouch_Photo2.Adjustments.Pages
         //@Construct
         public GammaTransferPage()
         {
-            base.Type = AdjustmentType.GammaTransfer;
-            base.Icon = new GammaTransferControl();
             this.InitializeComponent();
 
             this.Loaded += (s, e) =>
@@ -133,112 +136,112 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.AlphaCheckBox.Toggled += (s, e) =>
             {
                 if (this.GammaTransferAdjustment == null) return;
-                this.AlphaDisable = this.GammaTransferAdjustment.GammaTransferAdjustmentItem.AlphaDisable = !this.AlphaCheckBox.IsOn;
-                Adjustment.Invalidate?.Invoke();
+                this.AlphaDisable = this.GammaTransferAdjustment.AlphaDisable = !this.AlphaCheckBox.IsOn;
+                AdjustmentManager.Invalidate?.Invoke();
             };
             this.AlphaOffsetSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.GammaTransferAdjustment == null) return;
-                this.GammaTransferAdjustment.GammaTransferAdjustmentItem.AlphaOffset = (float)(value / 100.0f);
-                Adjustment.Invalidate?.Invoke();
+                this.GammaTransferAdjustment.AlphaOffset = (float)(value / 100.0f);
+                AdjustmentManager.Invalidate?.Invoke();
             };
             this.AlphaExponentSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.GammaTransferAdjustment == null) return;
-                this.GammaTransferAdjustment.GammaTransferAdjustmentItem.AlphaExponent = (float)(value / 100.0f);
-                Adjustment.Invalidate?.Invoke();
+                this.GammaTransferAdjustment.AlphaExponent = (float)(value / 100.0f);
+                AdjustmentManager.Invalidate?.Invoke();
             };
             this.AlphaAmplitudeSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.GammaTransferAdjustment == null) return;
-                this.GammaTransferAdjustment.GammaTransferAdjustmentItem.AlphaAmplitude = (float)(value / 100.0f);
-                Adjustment.Invalidate?.Invoke();
+                this.GammaTransferAdjustment.AlphaAmplitude = (float)(value / 100.0f);
+                AdjustmentManager.Invalidate?.Invoke();
             };
 
             //Red
             this.RedCheckBox.Toggled += (s, e) =>
             {
                 if (this.GammaTransferAdjustment == null) return;
-                this.RedDisable = this.GammaTransferAdjustment.GammaTransferAdjustmentItem.RedDisable = !this.RedCheckBox.IsOn;
-                Adjustment.Invalidate?.Invoke();
+                this.RedDisable = this.GammaTransferAdjustment.RedDisable = !this.RedCheckBox.IsOn;
+                AdjustmentManager.Invalidate?.Invoke();
             };
             this.RedOffsetSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.GammaTransferAdjustment == null) return;
-                this.GammaTransferAdjustment.GammaTransferAdjustmentItem.RedOffset = (float)(value / 100.0f);
-                Adjustment.Invalidate?.Invoke();
+                this.GammaTransferAdjustment.RedOffset = (float)(value / 100.0f);
+                AdjustmentManager.Invalidate?.Invoke();
             };
             this.RedExponentSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.GammaTransferAdjustment == null) return;
-                this.GammaTransferAdjustment.GammaTransferAdjustmentItem.RedExponent = (float)(value / 100.0f);
-                Adjustment.Invalidate?.Invoke();
+                this.GammaTransferAdjustment.RedExponent = (float)(value / 100.0f);
+                AdjustmentManager.Invalidate?.Invoke();
             };
             this.RedAmplitudeSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.GammaTransferAdjustment == null) return;
-                this.GammaTransferAdjustment.GammaTransferAdjustmentItem.RedAmplitude = (float)(value / 100.0f);
-                Adjustment.Invalidate?.Invoke();
+                this.GammaTransferAdjustment.RedAmplitude = (float)(value / 100.0f);
+                AdjustmentManager.Invalidate?.Invoke();
             };
 
             //Green
             this.GreenCheckBox.Toggled += (s, e) =>
             {
                 if (this.GammaTransferAdjustment == null) return;
-                this.GreenDisable = this.GammaTransferAdjustment.GammaTransferAdjustmentItem.GreenDisable = !this.GreenCheckBox.IsOn;
-                Adjustment.Invalidate?.Invoke();
+                this.GreenDisable = this.GammaTransferAdjustment.GreenDisable = !this.GreenCheckBox.IsOn;
+                AdjustmentManager.Invalidate?.Invoke();
             };
             this.GreenOffsetSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.GammaTransferAdjustment == null) return;
-                this.GammaTransferAdjustment.GammaTransferAdjustmentItem.GreenOffset = (float)(value / 100.0f);
-                Adjustment.Invalidate?.Invoke();
+                this.GammaTransferAdjustment.GreenOffset = (float)(value / 100.0f);
+                AdjustmentManager.Invalidate?.Invoke();
             };
             this.GreenExponentSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.GammaTransferAdjustment == null) return;
-                this.GammaTransferAdjustment.GammaTransferAdjustmentItem.GreenExponent = (float)(value / 100.0f);
-                Adjustment.Invalidate?.Invoke();
+                this.GammaTransferAdjustment.GreenExponent = (float)(value / 100.0f);
+                AdjustmentManager.Invalidate?.Invoke();
             };
             this.GreenAmplitudeSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.GammaTransferAdjustment == null) return;
-                this.GammaTransferAdjustment.GammaTransferAdjustmentItem.GreenAmplitude = (float)(value / 100.0f);
-                Adjustment.Invalidate?.Invoke();
+                this.GammaTransferAdjustment.GreenAmplitude = (float)(value / 100.0f);
+                AdjustmentManager.Invalidate?.Invoke();
             };
 
             //Blue
             this.BlueCheckBox.Toggled += (s, e) =>
             {
                 if (this.GammaTransferAdjustment == null) return;
-                this.BlueDisable = this.GammaTransferAdjustment.GammaTransferAdjustmentItem.BlueDisable = !this.BlueCheckBox.IsOn;
-                Adjustment.Invalidate?.Invoke();
+                this.BlueDisable = this.GammaTransferAdjustment.BlueDisable = !this.BlueCheckBox.IsOn;
+                AdjustmentManager.Invalidate?.Invoke();
             };
 
             this.BlueOffsetSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.GammaTransferAdjustment == null) return;
-                this.GammaTransferAdjustment.GammaTransferAdjustmentItem.BlueOffset = (float)(value / 100.0f);
-                Adjustment.Invalidate?.Invoke();
+                this.GammaTransferAdjustment.BlueOffset = (float)(value / 100.0f);
+                AdjustmentManager.Invalidate?.Invoke();
             };
             this.BlueExponentSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.GammaTransferAdjustment == null) return;
-                this.GammaTransferAdjustment.GammaTransferAdjustmentItem.BlueExponent = (float)(value / 100.0f);
-                Adjustment.Invalidate?.Invoke();
+                this.GammaTransferAdjustment.BlueExponent = (float)(value / 100.0f);
+                AdjustmentManager.Invalidate?.Invoke();
             };
             this.BlueAmplitudeSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.GammaTransferAdjustment == null) return;
-                this.GammaTransferAdjustment.GammaTransferAdjustmentItem.BlueAmplitude = (float)(value / 100.0f);
-                Adjustment.Invalidate?.Invoke();
+                this.GammaTransferAdjustment.BlueAmplitude = (float)(value / 100.0f);
+                AdjustmentManager.Invalidate?.Invoke();
             };
         }
 
         //@override
-        public override Adjustment GetNewAdjustment() => new GammaTransferAdjustment();
-        public override Adjustment GetAdjustment() => this.GammaTransferAdjustment;
-        public override void SetAdjustment(Adjustment value)
+        public IAdjustment GetNewAdjustment() => new GammaTransferAdjustment();
+        public IAdjustment GetAdjustment() => this.GammaTransferAdjustment;
+        public void SetAdjustment(IAdjustment value)
         {
             if (value is GammaTransferAdjustment adjustment)
             {
@@ -247,40 +250,40 @@ namespace Retouch_Photo2.Adjustments.Pages
             }
         }
 
-        public override void Close() => this.GammaTransferAdjustment = null;
-        public override void Reset()
+        public void Close() => this.GammaTransferAdjustment = null;
+        public void Reset()
         {
             if (this.GammaTransferAdjustment == null) return;
 
-            this.GammaTransferAdjustment.Item.Reset();
+            this.GammaTransferAdjustment.Reset();
             this.Invalidate(this.GammaTransferAdjustment);
         }
 
         public void Invalidate(GammaTransferAdjustment adjustment)
         {
             //Alpha
-            this.AlphaDisable = this.AlphaCheckBox.IsOn = !adjustment.GammaTransferAdjustmentItem.AlphaDisable;
-            this.AlphaOffsetSlider.Value = adjustment.GammaTransferAdjustmentItem.AlphaOffset * 100.0f;
-            this.AlphaExponentSlider.Value = adjustment.GammaTransferAdjustmentItem.AlphaExponent * 100.0f;
-            this.AlphaAmplitudeSlider.Value = adjustment.GammaTransferAdjustmentItem.AlphaAmplitude * 100.0f;
+            this.AlphaDisable = this.AlphaCheckBox.IsOn = !adjustment.AlphaDisable;
+            this.AlphaOffsetSlider.Value = adjustment.AlphaOffset * 100.0f;
+            this.AlphaExponentSlider.Value = adjustment.AlphaExponent * 100.0f;
+            this.AlphaAmplitudeSlider.Value = adjustment.AlphaAmplitude * 100.0f;
 
             //Red
-            this.RedDisable = this.RedCheckBox.IsOn = !adjustment.GammaTransferAdjustmentItem.RedDisable;
-            this.RedOffsetSlider.Value = adjustment.GammaTransferAdjustmentItem.RedOffset * 100.0f;
-            this.RedExponentSlider.Value = adjustment.GammaTransferAdjustmentItem.RedExponent * 100.0f;
-            this.RedAmplitudeSlider.Value = adjustment.GammaTransferAdjustmentItem.RedAmplitude * 100.0f;
+            this.RedDisable = this.RedCheckBox.IsOn = !adjustment.RedDisable;
+            this.RedOffsetSlider.Value = adjustment.RedOffset * 100.0f;
+            this.RedExponentSlider.Value = adjustment.RedExponent * 100.0f;
+            this.RedAmplitudeSlider.Value = adjustment.RedAmplitude * 100.0f;
 
             //Green
-            this.GreenDisable = this.GreenCheckBox.IsOn = !adjustment.GammaTransferAdjustmentItem.GreenDisable;
-            this.GreenOffsetSlider.Value = adjustment.GammaTransferAdjustmentItem.GreenOffset * 100.0f;
-            this.GreenExponentSlider.Value = adjustment.GammaTransferAdjustmentItem.GreenExponent * 100.0f;
-            this.GreenAmplitudeSlider.Value = adjustment.GammaTransferAdjustmentItem.GreenAmplitude * 100.0f;
+            this.GreenDisable = this.GreenCheckBox.IsOn = !adjustment.GreenDisable;
+            this.GreenOffsetSlider.Value = adjustment.GreenOffset * 100.0f;
+            this.GreenExponentSlider.Value = adjustment.GreenExponent * 100.0f;
+            this.GreenAmplitudeSlider.Value = adjustment.GreenAmplitude * 100.0f;
 
             //Blue
-            this.BlueDisable = this.BlueCheckBox.IsOn = !adjustment.GammaTransferAdjustmentItem.BlueDisable;
-            this.BlueOffsetSlider.Value = adjustment.GammaTransferAdjustmentItem.BlueOffset * 100.0f;
-            this.BlueExponentSlider.Value = adjustment.GammaTransferAdjustmentItem.BlueExponent * 100.0f;
-            this.BlueAmplitudeSlider.Value = adjustment.GammaTransferAdjustmentItem.BlueAmplitude * 100.0f;
+            this.BlueDisable = this.BlueCheckBox.IsOn = !adjustment.BlueDisable;
+            this.BlueOffsetSlider.Value = adjustment.BlueOffset * 100.0f;
+            this.BlueExponentSlider.Value = adjustment.BlueExponent * 100.0f;
+            this.BlueAmplitudeSlider.Value = adjustment.BlueAmplitude * 100.0f;
         }
     }
 }

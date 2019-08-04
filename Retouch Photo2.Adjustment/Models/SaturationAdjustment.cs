@@ -1,24 +1,46 @@
-﻿using Retouch_Photo2.Adjustments.Controls;
-using Retouch_Photo2.Adjustments.Items;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
+using Retouch_Photo2.Adjustments.Controls;
+using Windows.UI.Xaml;
+using Newtonsoft.Json;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
     /// <summary>
-    /// <see cref="Adjustment"/>'s SaturationAdjustment.
+    /// <see cref="IAdjustment"/>'s SaturationAdjustment.
     /// </summary>
-    public class SaturationAdjustment : Adjustment
+    [JsonObject(MemberSerialization.OptIn)]
+    public class SaturationAdjustment : IAdjustment
     {
-        public const string Name = "Saturation";
-        public SaturationAdjustmentItem SaturationAdjustmentItem=new SaturationAdjustmentItem();
+        [JsonProperty]
+        public string TypeName { get; } = AdjustmentType.Saturation.ToString();
+         public AdjustmentType Type => AdjustmentType.Saturation;
+         public FrameworkElement Icon { get; } = new SaturationControl();
+         public Visibility Visibility => Visibility.Visible;
 
-        //@Construct
-        public SaturationAdjustment()
+
+        [JsonProperty]
+        public float Saturation;
+
+
+        public void Reset()
         {
-            base.Type = AdjustmentType.Saturation;
-            base.Icon = new SaturationControl();
-            base.Item = this.SaturationAdjustmentItem;
-            base.Item.Reset();
-            base.HasPage = true;
+            this.Saturation = 1.0f;
+        }
+        public ICanvasImage GetRender(ICanvasImage image)
+        {
+            return new SaturationEffect
+            {
+                Saturation = this.Saturation,
+                Source = image
+            };
+        }
+        public IAdjustment Clone()
+        {
+            return new SaturationAdjustment
+            {
+                Saturation = this.Saturation,
+            };
         }
     }
 }

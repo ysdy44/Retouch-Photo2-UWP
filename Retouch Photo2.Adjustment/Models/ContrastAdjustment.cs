@@ -1,27 +1,46 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments.Controls;
-using Retouch_Photo2.Adjustments.Items;
-using Retouch_Photo2.Adjustments.Pages;
+using Windows.UI.Xaml;
+using Newtonsoft.Json;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
     /// <summary>
-    /// <see cref="Adjustment"/>'s ContrastAdjustment.
+    /// <see cref="IAdjustment"/>'s ContrastAdjustment.
     /// </summary>
-    public class ContrastAdjustment : Adjustment
+    [JsonObject(MemberSerialization.OptIn)]
+    public class ContrastAdjustment : IAdjustment
     {
-        public const string Name = "Contrast";
-        public ContrastAdjustmentItem ContrastAdjustmentItem=new ContrastAdjustmentItem();
+        [JsonProperty]
+        public string TypeName { get; } = AdjustmentType.Contrast.ToString();
+         public AdjustmentType Type => AdjustmentType.Contrast;
+         public FrameworkElement Icon { get; } = new ContrastControl();
+         public Visibility Visibility => Visibility.Visible;
 
-        //@Construct
-        public ContrastAdjustment()
+
+        [JsonProperty]
+        public float Contrast;
+
+
+        public void Reset()
         {
-            base.Type = AdjustmentType.Contrast;
-            base.Icon = new ContrastControl();
-            base.Item = this.ContrastAdjustmentItem;
-            base.Item.Reset();
-            base.HasPage = true;
+            this.Contrast = 0.0f;
+        }
+        public ICanvasImage GetRender(ICanvasImage image)
+        {
+            return new ContrastEffect
+            {
+                Contrast = this.Contrast,
+                Source = image
+            };
+        }
+        public IAdjustment Clone()
+        {
+            return new ContrastAdjustment
+            {
+                Contrast = this.Contrast,
+            };
         }
     }
 }

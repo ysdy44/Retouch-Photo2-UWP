@@ -19,7 +19,7 @@
                     <TextBlock Text="Select a adjustment:" Style="{StaticResource AppTextBlock}"/>
                 </ListView.Header>
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="adjustments:AdjustmentPage">
+                    <DataTemplate x:DataType="adjustments:IAdjustmentPage">
                         <ContentPresenter Content="{x:Bind Icon}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -28,7 +28,7 @@
 
         <Flyout x:Name="FilterFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <Border MaxWidth="330" MaxHeight="330">
-                <GridView x:Name="GridView" 
+                <GridView x:Name="FilterGridView" 
                           ReorderMode="Enabled" CanReorderItems="True"
                           AllowDrop="True" CanDrag="True" CanDragItems="True"
                           SelectionMode="None" IsItemClickEnabled="True">
@@ -63,11 +63,30 @@
 
 
         <!--DataTemplate-->
-        <DataTemplate x:Key="DataTemplate" x:DataType="adjustments:Adjustment">
-            <adjustments:Control 
-                Adjustment="{x:Bind}"                                 
-                Remove="AdjustmentControl_Remove"                                 
-                Edit="AdjustmentControl_Edit"/>
+        <DataTemplate x:Key="DataTemplate" x:DataType="adjustments:IAdjustment">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Adjustment-->
+                <ContentPresenter Content="{x:Bind Icon}"/>
+
+                <!--Edit-->
+                <Button x:Name="EditButton" Grid.Column="1" Width="30" Height="40" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                     Visibility="{x:Bind Visibility}" Tapped="EditButton_Tapped">
+                    <FontIcon FontSize="14" Glyph="&#xEC88;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+                </Button>
+
+                <!--Remove-->
+                <Button x:Name="RemoveButton" Grid.Column="2" Width="30" Height="40" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Tapped="RemoveButton_Tapped">
+                    <FontIcon FontSize="12" Glyph="&#xE106;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+                </Button>
+
+            </Grid>
         </DataTemplate>
 
     </UserControl.Resources>

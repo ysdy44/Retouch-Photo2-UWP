@@ -1,25 +1,31 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Newtonsoft.Json;
+using Retouch_Photo2.Adjustments.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Retouch_Photo2.Adjustments
 {
     /// <summary> 
-    /// <see cref = "Adjustment" />'s manager. 
+    /// <see cref = "IAdjustment" />'s manager. 
     /// </summary>
     public class AdjustmentManager
     {
-        public List<Adjustment> Adjustments { get; set; } = new List<Adjustment>();
+        //@Static
+        public static Action Invalidate;
+
+        public List<IAdjustment> Adjustments { get; set; } = new List<IAdjustment>();
 
         //@Static
         public static ICanvasImage Render(AdjustmentManager manager, ICanvasImage image)
         {
             if (manager.Adjustments.Count == 0) return image;
-            if (manager.Adjustments.Count == 1) return manager.Adjustments.Single().Item.GetRender(image);
+            if (manager.Adjustments.Count == 1) return manager.Adjustments.Single().GetRender(image);
 
-            foreach (var item in manager.Adjustments)
+            foreach (IAdjustment adjustment in manager.Adjustments)
             {
-                image = item.Item.GetRender(image);
+                image = adjustment.GetRender(image);
             }
             return image;
         }

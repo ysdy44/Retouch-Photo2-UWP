@@ -7,23 +7,23 @@
 
   {
     "Name": "Memory",
-    "AdjustmentItems": [
+    "Adjustments": [
 
 
       {
-        "Name": "Exposure",
+        "TypeName": "Exposure",
         "Exposure": 0.27
       },
       {
-        "Name": "Saturation",
+        "TypeName": "Saturation",
         "Saturation": 1.33
       },
       {
-        "Name": "Contrast",
+        "TypeName": "Contrast",
         "Contrast": 1.0
       },
       {
-        "Name": "Temperature",
+        "TypeName": "Temperature",
         "Temperature": 0.49,
         "Tint": 0.0
       },
@@ -31,7 +31,7 @@
 
 
       {
-        "Name": "HighlightsAndShadows",
+        "TypeName": "HighlightsAndShadows",
         "Shadows": -0.375,
         "Highlights": 0.455,
         "Clarity": 0.0,
@@ -39,7 +39,7 @@
         "SourceIsLinearGamma": false
       },
       {
-        "Name": "GammaTransfer",
+        "TypeName": "GammaTransfer",
         "ClampOutput": false,
 
         "AlphaDisable": true,
@@ -70,33 +70,33 @@
 
   {
     "Name": "Old",
-    "AdjustmentItems": [
+    "Adjustments": [
 
       {
-        "Name": "Exposure",
+        "TypeName": "Exposure",
         "Exposure": 0.05
       },
       {
-        "Name": "Brightness",
+        "TypeName": "Brightness",
         "WhiteLight": 1.0,
         "WhiteDark": 1.0,
         "BlackLight": 0.0,
         "BlackDark": 0.13
       },
       {
-        "Name": "Saturation",
+        "TypeName": "Saturation",
         "Saturation": 0.52
       },
       {
-        "Name": "HueRotation",
+        "TypeName": "HueRotation",
         "Angle": 3.66
       },
       {
-        "Name": "Contrast",
+        "TypeName": "Contrast",
         "Contrast": 0.31
       },
       {
-        "Name": "Temperature",
+        "TypeName": "Temperature",
         "Temperature": 0.39,
         "Tint": 0.0
       },
@@ -104,7 +104,7 @@
 
 
       {
-        "Name": "HighlightsAndShadows",
+        "TypeName": "HighlightsAndShadows",
         "Shadows": 0.015,
         "Highlights": 0.0,
         "Clarity": 0.0,
@@ -112,7 +112,7 @@
         "SourceIsLinearGamma": false
       },
       {
-        "Name": "Vignette",
+        "TypeName": "Vignette",
         "Amount": 0.66,
         "Curve": 0.0,
         "Color": {
@@ -130,30 +130,30 @@
 
   {
     "Name": "Childhood",
-    "AdjustmentItems": [
+    "Adjustments": [
 
 
       {
-        "Name": "Exposure",
+        "TypeName": "Exposure",
         "Exposure": 0.34
       },
       {
-        "Name": "Brightness",
+        "TypeName": "Brightness",
         "WhiteLight": 0.99,
         "WhiteDark": 1.0,
         "BlackLight": 0.0,
         "BlackDark": 0.0
       },
       {
-        "Name": "Saturation",
+        "TypeName": "Saturation",
         "Saturation": 1.06
       },
       {
-        "Name": "Contrast",
+        "TypeName": "Contrast",
         "Contrast": 0.75
       },
       {
-        "Name": "Temperature",
+        "TypeName": "Temperature",
         "Temperature": 0.0,
         "Tint": 0.11
       },
@@ -161,7 +161,7 @@
 
 
       {
-        "Name": "HighlightsAndShadows",
+        "TypeName": "HighlightsAndShadows",
         "Shadows": -0.45,
         "Highlights": 0.035,
         "Clarity": 0.0,
@@ -169,7 +169,7 @@
         "SourceIsLinearGamma": false
       },
       {
-        "Name": "GammaTransfer",
+        "TypeName": "GammaTransfer",
         "ClampOutput": false,
 
         "AlphaDisable": true,
@@ -199,30 +199,30 @@
 
   {
     "Name": "Morning",
-    "AdjustmentItems": [
+    "Adjustments": [
 
 
 
       {
-        "Name": "Brightness",
+        "TypeName": "Brightness",
         "WhiteLight": 0.73,
         "WhiteDark": 1.0,
         "BlackLight": 0.0,
         "BlackDark": 0.0
       },
       {
-        "Name": "Saturation",
+        "TypeName": "Saturation",
         "Saturation": 1.21
       },
       {
-        "Name": "Contrast",
+        "TypeName": "Contrast",
         "Contrast": 0.205
       },
 
 
 
       {
-        "Name": "HighlightsAndShadows",
+        "TypeName": "HighlightsAndShadows",
         "Shadows": -0.04,
         "Highlights": 0.22,
         "Clarity": 0.0,
@@ -230,7 +230,7 @@
         "SourceIsLinearGamma": false
       },
       {
-        "Name": "GammaTransfer",
+        "TypeName": "GammaTransfer",
         "ClampOutput": false,
 
         "AlphaDisable": true,
@@ -261,32 +261,32 @@
 
   {
     "Name": "Shadow",
-    "AdjustmentItems": [
+    "Adjustments": [
 
 
 
 
       {
-        "Name": "Exposure",
+        "TypeName": "Exposure",
         "Exposure": 0.25
       },
       {
-        "Name": "Brightness",
+        "TypeName": "Brightness",
         "WhiteLight": 0.97,
         "WhiteDark": 1.0,
         "BlackLight": 0.0,
         "BlackDark": 0.0
       },
       {
-        "Name": "Saturation",
+        "TypeName": "Saturation",
         "Saturation": 0.44
       },
       {
-        "Name": "Contrast",
+        "TypeName": "Contrast",
         "Contrast": 0.145
       },
       {
-        "Name": "Temperature",
+        "TypeName": "Temperature",
         "Temperature": 0.08,
         "Tint": 0.0
       },
@@ -294,7 +294,7 @@
 
 
       {
-        "Name": "HighlightsAndShadows",
+        "TypeName": "HighlightsAndShadows",
         "Shadows": -0.095,
         "Highlights": 0.3,
         "Clarity": 0.0,
@@ -302,7 +302,7 @@
         "SourceIsLinearGamma": false
       },
       {
-        "Name": "Vignette",
+        "TypeName": "Vignette",
         "Amount": 0.56,
         "Curve": 0.0,
         "Color": {
@@ -320,29 +320,29 @@
 
   {
     "Name": "Dusk",
-    "AdjustmentItems": [
+    "Adjustments": [
 
       {
-        "Name": "Exposure",
+        "TypeName": "Exposure",
         "Exposure": -0.02
       },
       {
-        "Name": "Brightness",
+        "TypeName": "Brightness",
         "WhiteLight": 0.48,
         "WhiteDark": 1.0,
         "BlackLight": 0.0,
         "BlackDark": 0.0
       },
       {
-        "Name": "Saturation",
+        "TypeName": "Saturation",
         "Saturation": 1.56
       },
       {
-        "Name": "Contrast",
+        "TypeName": "Contrast",
         "Contrast": 0.025
       },
       {
-        "Name": "Temperature",
+        "TypeName": "Temperature",
         "Temperature": 0.075,
         "Tint": 0.0
       }
@@ -357,23 +357,23 @@
 
   {
     "Name": "Pure",
-    "AdjustmentItems": [
+    "Adjustments": [
 
 
       {
-        "Name": "Exposure",
+        "TypeName": "Exposure",
         "Exposure": 0.51
       },
       {
-        "Name": "Saturation",
+        "TypeName": "Saturation",
         "Saturation": 1.26
       },
       {
-        "Name": "Contrast",
+        "TypeName": "Contrast",
         "Contrast": 0.08
       },
       {
-        "Name": "Temperature",
+        "TypeName": "Temperature",
         "Temperature": -0.195,
         "Tint": 0.0
       },
@@ -381,7 +381,7 @@
 
 
       {
-        "Name": "HighlightsAndShadows",
+        "TypeName": "HighlightsAndShadows",
         "Shadows": 0.31,
         "Highlights": 0.88,
         "Clarity": 0.0,
@@ -398,20 +398,20 @@
 
   {
     "Name": "Cowboy",
-    "AdjustmentItems": [
+    "Adjustments": [
 
 
 
       {
-        "Name": "Exposure",
+        "TypeName": "Exposure",
         "Exposure": 0.32
       },
       {
-        "Name": "Contrast",
+        "TypeName": "Contrast",
         "Contrast": 0.375
       },
       {
-        "Name": "Temperature",
+        "TypeName": "Temperature",
         "Temperature": 0.34,
         "Tint": 0.0
       },
@@ -419,7 +419,7 @@
 
 
       {
-        "Name": "HighlightsAndShadows",
+        "TypeName": "HighlightsAndShadows",
         "Shadows": 0.03,
         "Highlights": 0.275,
         "Clarity": 0.0,
@@ -436,18 +436,18 @@
 
   {
     "Name": "Tranquil",
-    "AdjustmentItems": [
+    "Adjustments": [
 
 
       {
-        "Name": "Exposure",
+        "TypeName": "Exposure",
         "Exposure": 0.38
       },
 
 
 
       {
-        "Name": "HighlightsAndShadows",
+        "TypeName": "HighlightsAndShadows",
         "Shadows": 0.115,
         "Highlights": 0.0,
         "Clarity": 0.0,
@@ -455,7 +455,7 @@
         "SourceIsLinearGamma": false
       },
       {
-        "Name": "GammaTransfer",
+        "TypeName": "GammaTransfer",
         "ClampOutput": false,
 
         "AlphaDisable": true,
@@ -484,37 +484,37 @@
   },
 
 
-  
+
 
   {
     "Name": "Unreal",
-    "AdjustmentItems": [
+    "Adjustments": [
 
 
       {
-        "Name": "Exposure",
+        "TypeName": "Exposure",
         "Exposure": 0.16
       },
       {
-        "Name": "Brightness",
+        "TypeName": "Brightness",
         "WhiteLight": 0.94,
         "WhiteDark": 1.0,
         "BlackLight": 0.0,
         "BlackDark": 0.0
       },
       {
-        "Name": "Saturation",
+        "TypeName": "Saturation",
         "Saturation": 1.38
       },
       {
-        "Name": "Contrast",
+        "TypeName": "Contrast",
         "Contrast": 0.895
       },
 
 
 
       {
-        "Name": "HighlightsAndShadows",
+        "TypeName": "HighlightsAndShadows",
         "Shadows": -0.14,
         "Highlights": 1.0,
         "Clarity": 0.0,
@@ -522,7 +522,7 @@
         "SourceIsLinearGamma": false
       },
       {
-        "Name": "GammaTransfer",
+        "TypeName": "GammaTransfer",
         "ClampOutput": false,
 
         "AlphaDisable": true,
@@ -555,38 +555,38 @@
 
   {
     "Name": "Blues",
-    "AdjustmentItems": [
+    "Adjustments": [
 
 
 
       {
-        "Name": "Exposure",
+        "TypeName": "Exposure",
         "Exposure": 0.16
       },
       {
-        "Name": "Brightness",
+        "TypeName": "Brightness",
         "WhiteLight": 0.94,
         "WhiteDark": 1.0,
         "BlackLight": 0.0,
         "BlackDark": 0.0
       },
       {
-        "Name": "Saturation",
+        "TypeName": "Saturation",
         "Saturation": 1.38
       },
       {
-        "Name": "HueRotation",
+        "TypeName": "HueRotation",
         "Angle": 6.0
       },
       {
-        "Name": "Contrast",
+        "TypeName": "Contrast",
         "Contrast": 0.5
       },
 
 
 
       {
-        "Name": "HighlightsAndShadows",
+        "TypeName": "HighlightsAndShadows",
         "Shadows": -0.29,
         "Highlights": -0.055,
         "Clarity": 0.0,
@@ -594,7 +594,7 @@
         "SourceIsLinearGamma": false
       },
       {
-        "Name": "GammaTransfer",
+        "TypeName": "GammaTransfer",
         "ClampOutput": false,
 
         "AlphaDisable": true,
@@ -618,7 +618,7 @@
         "BlueAmplitude": 1.0
       },
       {
-        "Name": "Vignette",
+        "TypeName": "Vignette",
         "Amount": 1.0,
         "Curve": 0.0,
         "Color": {
@@ -638,20 +638,20 @@
 
   {
     "Name": "Handsome",
-    "AdjustmentItems": [
+    "Adjustments": [
 
 
 
       {
-        "Name": "Exposure",
+        "TypeName": "Exposure",
         "Exposure": -0.1
       },
       {
-        "Name": "Contrast",
+        "TypeName": "Contrast",
         "Contrast": 0.775
       },
       {
-        "Name": "Temperature",
+        "TypeName": "Temperature",
         "Temperature": 0.165,
         "Tint": 0.0
       },
@@ -659,7 +659,7 @@
 
 
       {
-        "Name": "HighlightsAndShadows",
+        "TypeName": "HighlightsAndShadows",
         "Shadows": -0.06,
         "Highlights": 0.555,
         "Clarity": 0.0,
@@ -667,7 +667,7 @@
         "SourceIsLinearGamma": false
       },
       {
-        "Name": "GammaTransfer",
+        "TypeName": "GammaTransfer",
         "ClampOutput": false,
 
         "AlphaDisable": false,
@@ -700,26 +700,26 @@
 
   {
     "Name": "Sentimental",
-    "AdjustmentItems": [
+    "Adjustments": [
 
 
       {
-        "Name": "Exposure",
+        "TypeName": "Exposure",
         "Exposure": 0.13
       },
       {
-        "Name": "Brightness",
+        "TypeName": "Brightness",
         "WhiteLight": 1.0,
         "WhiteDark": 1.0,
         "BlackLight": 0.0,
         "BlackDark": 0.02
       },
       {
-        "Name": "Contrast",
+        "TypeName": "Contrast",
         "Contrast": 0.72
       },
       {
-        "Name": "Temperature",
+        "TypeName": "Temperature",
         "Temperature": 0.19,
         "Tint": 0.0
       },
@@ -727,7 +727,7 @@
 
 
       {
-        "Name": "HighlightsAndShadows",
+        "TypeName": "HighlightsAndShadows",
         "Shadows": -0.365,
         "Highlights": -0.815,
         "Clarity": 0.0,
@@ -735,7 +735,7 @@
         "SourceIsLinearGamma": false
       },
       {
-        "Name": "GammaTransfer",
+        "TypeName": "GammaTransfer",
         "ClampOutput": false,
 
         "AlphaDisable": false,
@@ -769,23 +769,23 @@
 
   {
     "Name": "Personality",
-    "AdjustmentItems": [
+    "Adjustments": [
 
 
       {
-        "Name": "Exposure",
+        "TypeName": "Exposure",
         "Exposure": -0.14
       },
       {
-        "Name": "Saturation",
+        "TypeName": "Saturation",
         "Saturation": 1.48
       },
       {
-        "Name": "Contrast",
+        "TypeName": "Contrast",
         "Contrast": 1.0
       },
       {
-        "Name": "Temperature",
+        "TypeName": "Temperature",
         "Temperature": 0.155,
         "Tint": 0.0
       },
@@ -793,7 +793,7 @@
 
 
       {
-        "Name": "HighlightsAndShadows",
+        "TypeName": "HighlightsAndShadows",
         "Shadows": 0.685,
         "Highlights": 0.0,
         "Clarity": 0.0,
@@ -801,7 +801,7 @@
         "SourceIsLinearGamma": false
       },
       {
-        "Name": "Vignette",
+        "TypeName": "Vignette",
         "Amount": 0.455,
         "Curve": 0.0,
         "Color": {

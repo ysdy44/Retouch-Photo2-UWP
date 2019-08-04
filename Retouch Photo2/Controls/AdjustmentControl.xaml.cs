@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo2.Adjustments;
+using Retouch_Photo2.Adjustments.Pages;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using System;
@@ -8,23 +9,31 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Controls
-{
+{   
+    /// <summary> 
+    /// State of <see cref="AdjustmentControl"/>. 
+    /// </summary>
+    public enum AdjustmentControlState
+    {
+        None,
+        Disable,
+        Null,
+        Adjustments,
+        Edit
+    }
+
+    /// <summary> 
+    /// Retouch_Photo2's the only <see cref = "AdjustmentControl" />. 
+    /// </summary>
     public sealed partial class AdjustmentControl : UserControl
     {
-        public enum AdjustmentControlState
-        {
-            None,
-            Disable,
-            Null,
-            Adjustments,
-            Edit
-        }
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel  => App.SelectionViewModel;
+        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
 
         private AdjustmentControlState state = AdjustmentControlState.None;
@@ -36,7 +45,7 @@ namespace Retouch_Photo2.Controls
 
                 this.BackButton.Visibility = this.ResetButton.Visibility = this.Frame.Visibility = (value == AdjustmentControlState.Edit) ? Visibility.Visible : Visibility.Collapsed;
                 this.AddButton.Visibility = this.FilterButton.Visibility = (value == AdjustmentControlState.Edit) ? Visibility.Collapsed : Visibility.Visible;
-                this.ListView.IsEnabled = this.GridView.IsEnabled = (value == AdjustmentControlState.Null || value == AdjustmentControlState.Adjustments);
+                this.ListView.IsEnabled = this.FilterGridView.IsEnabled = (value == AdjustmentControlState.Null || value == AdjustmentControlState.Adjustments);
                 this.Border.Visibility = (value == AdjustmentControlState.Adjustments) ? Visibility.Visible : Visibility.Collapsed;
                 this.TextBlock.Visibility = (value == AdjustmentControlState.Null || value == AdjustmentControlState.Disable) ? Visibility.Visible : Visibility.Collapsed;
 
@@ -44,26 +53,44 @@ namespace Retouch_Photo2.Controls
             }
         }
 
-        private AdjustmentPage page;
-        public AdjustmentPage Page
+        private IAdjustmentPage page;
+        public IAdjustmentPage Page
         {
             get => this.page;
             set
             {
-                this.Frame.Child = value;
+                this.Frame.Child = value.Page;
 
                 this.page = value;
             }
         }
+        public List<IAdjustmentPage> PageList = new List<IAdjustmentPage>()
+        {
+            new GrayPage(),
+            new InvertPage(),
+
+            new ExposurePage(),
+            new BrightnessPage(),
+            new SaturationPage(),
+            new HueRotationPage(),
+            new ContrastPage(),
+            new TemperaturePage(),
+
+            new HighlightsAndShadowsPage(),
+            new GammaTransferPage(),
+            new VignettePage(),
+        };
+
 
         #region DependencyProperty
 
-
+        /// <summary> Gets or sets <see cref = "AdjustmentControl" />'s adjustment manager. </summary>
         public AdjustmentManager AdjustmentManager
         {
             get { return (AdjustmentManager)GetValue(AdjustmentManagerProperty); }
             set { SetValue(AdjustmentManagerProperty, value); }
         }
+        /// <summary> Identifies the <see cref = "AdjustmentControl.AdjustmentManager" /> dependency property. </summary>
         public static readonly DependencyProperty AdjustmentManagerProperty = DependencyProperty.Register(nameof(AdjustmentManager), typeof(AdjustmentManager), typeof(AdjustmentControl), new PropertyMetadata(null, (sender, e) =>
         {
             AdjustmentControl con = (AdjustmentControl)sender;
@@ -77,11 +104,11 @@ namespace Retouch_Photo2.Controls
                 con.State = AdjustmentControlState.Disable;
             }
         }));
-
-
+        
         #endregion
 
 
+        //@Construct
         public AdjustmentControl()
         {
             this.InitializeComponent();
@@ -89,129 +116,124 @@ namespace Retouch_Photo2.Controls
             this.Loaded += async (s, e) =>
             {
                 if (this.ListView.ItemsSource == null)
-                    this.ListView.ItemsSource = AdjustmentPage.PageList;
+                    this.ListView.ItemsSource = this.PageList;
 
-                if (this.GridView.ItemsSource == null)
-                    this.GridView.ItemsSource = (await AdjustmentControl.GetFilterSource()).ToList();
+                if (this.FilterGridView.ItemsSource == null)
+                    this.FilterGridView.ItemsSource = (await AdjustmentControl.GetFilterSource()).ToList();
             };
 
+
             //Adjustment
-            Adjustment.Invalidate = () => this.ViewModel.Invalidate();
+            AdjustmentManager.Invalidate = () => this.ViewModel.Invalidate();
+
 
             //Button
-            this.FilterButton.Tapped += (sender, e) => this.FilterFlyout.ShowAt(this.FilterButton);
-            this.AddButton.Tapped += (sender, e) => this.PageFlyout.ShowAt((Button)sender);
-            this.BackButton.Tapped += (sender, e) => this.Close();
-            this.ResetButton.Tapped += (sender, e) => this.Reset();
+            this.FilterButton.Tapped += (s, e) => this.FilterFlyout.ShowAt(this.FilterButton);
+            this.AddButton.Tapped += (s, e) => this.PageFlyout.ShowAt((Button)s);
+
 
             //Page
-            this.ListView.ItemClick += (sender, e) =>
+            this.BackButton.Tapped += (s, e) =>
             {
-                if (e.ClickedItem is AdjustmentPage item)
+                if (this.Page == null) return;
+
+                this.Page.Close();
+                this.Page = null;
+
+                this.State = AdjustmentControlState.Adjustments;
+            };
+            this.ResetButton.Tapped += (s, e) =>
+            {
+                if (this.Page == null) return;
+
+                this.Page.Reset();
+                this.ViewModel.Invalidate();
+            };
+
+
+            // Adjustment
+            this.ListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is IAdjustmentPage item)
                 {
-                    Adjustment adjustment = item.GetNewAdjustment();
-                    this.Add(adjustment);
+                    //Selection
+                    this.SelectionViewModel.SetValue((layer) =>
+                    {
+                        IAdjustment adjustment = item.GetNewAdjustment();
+
+                        layer.AdjustmentManager.Adjustments.Add(adjustment);
+
+                        this.Invalidate(layer.AdjustmentManager.Adjustments);
+                    });
+
+                    this.ViewModel.Invalidate();//Invalidate
+
                     this.PageFlyout.Hide();
                 }
             };
 
-            //Filter
-            this.GridView.ItemClick += (s, e) =>
+
+            //GridView
+            this.FilterGridView.ItemClick += (s, e) =>
             {
                 if (e.ClickedItem is Filter filter)
                 {
-                    // Filter -- > List<Item> -- > List<Adjustment>
-                    IEnumerable<Adjustment> adjustments =
-                       from adjustmentItem
-                       in filter.AdjustmentItems
-                       select adjustmentItem.GetNewAdjustment();
+                    //Selection
+                    this.SelectionViewModel.SetValue((layer) =>
+                    {
+                        layer.AdjustmentManager.Adjustments.Clear();
+                        foreach (IAdjustment adjustment in filter.Adjustments)
+                        {
+                            IAdjustment cloneAdjustment = adjustment.Clone();
+                            layer.AdjustmentManager.Adjustments.Add(cloneAdjustment);
+                        }
+                        this.Invalidate(layer.AdjustmentManager.Adjustments);
+                    });
 
-                    this.Replace(adjustments);
+                    this.ViewModel.Invalidate();//Invalidate     
                 }
             };
         }
 
-        //Adjustment
-        private void AdjustmentControl_Remove(Adjustment adjustment) => this.Remove(adjustment);
-        private void AdjustmentControl_Edit(Adjustment adjustment) => this.Edit(adjustment);
 
-        /// <summary> Add a Adjustment. </summary>
-        private void Add(Adjustment adjustment)
+        //@DataTemplate
+        /// <summary> DataTemplate's EditButton Tapped. </summary>
+        private void EditButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            //Selection
-            this.SelectionViewModel.SetValue((layer)=>
-            {
-                layer.AdjustmentManager.Adjustments.Add(adjustment);
+            AdjustmentControl.GetGridDataContext(sender, out Grid rootGrid, out IAdjustment adjustment);
 
-                this.Invalidate(layer.AdjustmentManager.Adjustments);
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-        /// <summary> Remove the Adjustment. </summary>
-        private void Remove(Adjustment adjustment)
-        {
-            //Selection
-            this.SelectionViewModel.SetValue((layer) =>
-            {
-                layer.AdjustmentManager.Adjustments.Remove(adjustment);
-
-                this.Invalidate(layer.AdjustmentManager.Adjustments);
-            }); 
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-        /// <summary> Replace all Adjustments. </summary>
-        private void Replace(IEnumerable<Adjustment> adjustments)
-        {
-            //Selection
-            this.SelectionViewModel.SetValue((layer) =>
-            {
-                layer.AdjustmentManager.Adjustments.Clear();
-                foreach (Adjustment adjustment in adjustments)
-                {
-                    layer.AdjustmentManager.Adjustments.Add(adjustment);
-                }
-                this.Invalidate(layer.AdjustmentManager.Adjustments);
-            });
-             
-            this.ViewModel.Invalidate();//Invalidate
-        }
-
-        /// <summary> Edit the Adjustment. </summary>
-        public void Edit(Adjustment adjustment)
-        {
             if (adjustment == null) return;
-            if (!adjustment.HasPage) return;
+            if (adjustment.Visibility == Visibility.Collapsed) return;
 
-            AdjustmentPage adjustmentPage = AdjustmentPage.GetPage(adjustment.Type);
+            IAdjustmentPage adjustmentPage = this.PageList.First(page => page.Type == adjustment.Type);
 
             adjustmentPage.SetAdjustment(adjustment);
             this.Page = adjustmentPage;
 
             this.State = AdjustmentControlState.Edit;
         }
-        /// <summary> Clear the Adjustment. </summary>
-        private void Close()
+        /// <summary> DataTemplate's RemoveButton Tapped. </summary>
+        private void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (this.Page == null) return;
+            AdjustmentControl.GetGridDataContext(sender, out Grid rootGrid, out IAdjustment adjustment);
 
-            this.Page.Close();
-            this.Page = null;
+            //Selection
+            this.SelectionViewModel.SetValue((layer) =>
+            {
+                layer.AdjustmentManager.Adjustments.Remove(adjustment);
 
-            this.State = AdjustmentControlState.Adjustments;
-        }
-        /// <summary> Reset the Adjustment. </summary>
-        private void Reset()
-        {
-            if (this.Page == null) return;
+                this.Invalidate(layer.AdjustmentManager.Adjustments);
+            });
 
-            this.Page.Reset();
-            this.ViewModel.Invalidate();
+            this.ViewModel.Invalidate();//Invalidate   
         }
 
-        /// <summary> Invalidate Adjustment ItemsControl. </summary>
-        public void Invalidate(IEnumerable<Adjustment> adjustments)
+
+        /// <summary>
+        ///  Invalidate Adjustment ItemsControl.
+        /// </summary>
+        /// <param name="adjustments"> The source adjustments. </param>
+        public void Invalidate(IEnumerable<IAdjustment> adjustments)
         {
             if (adjustments == null) return;
 
@@ -220,6 +242,31 @@ namespace Retouch_Photo2.Controls
 
             this.State = (this.SelectionViewModel.Layer.AdjustmentManager.Adjustments.Count == 0) ? AdjustmentControlState.Null : AdjustmentControlState.Adjustments;
         }
+
+
+        //@Static
+        /// <summary>
+        /// Get the data context of the Grid.
+        /// </summary>
+        /// <param name="senderGrid"> Grid. </param>
+        /// <param name="rootGrid"> DataTemplate. </param>
+        /// <param name="adjustment"> DataContext. </param>
+        public static void GetGridDataContext(object senderGrid, out Grid rootGrid, out IAdjustment adjustment)
+        {
+            if (senderGrid is Grid rootGrid2)
+            {
+                if (rootGrid2.DataContext is IAdjustment layer2)
+                {
+                    rootGrid = rootGrid2;
+                    adjustment = layer2;
+                    return;
+                }
+            }
+
+            rootGrid = null;
+            adjustment = null;
+        }
+
 
         #region File
 
@@ -276,5 +323,6 @@ namespace Retouch_Photo2.Controls
 
 
         #endregion
+
     }
 }

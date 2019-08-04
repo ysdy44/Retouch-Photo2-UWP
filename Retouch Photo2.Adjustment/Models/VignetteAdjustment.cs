@@ -1,24 +1,56 @@
-﻿using Retouch_Photo2.Adjustments.Controls;
-using Retouch_Photo2.Adjustments.Items;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
+using Newtonsoft.Json;
+using Retouch_Photo2.Adjustments.Controls;
+using Windows.UI;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
     /// <summary>
-    /// <see cref="Adjustment"/>'s VignetteAdjustment.
+    /// <see cref="IAdjustment"/>'s VignetteAdjustment.
     /// </summary>
-    public class VignetteAdjustment : Adjustment
+    [JsonObject(MemberSerialization.OptIn)]
+    public class VignetteAdjustment : IAdjustment
     {
-        public const string Name = "Vignette";
-        public VignetteAdjustmentItem VignetteAdjustmentItem = new VignetteAdjustmentItem();
+        [JsonProperty] public string TypeName { get; } = AdjustmentType.Vignette.ToString();
+        public AdjustmentType Type => AdjustmentType.Vignette;
+        public FrameworkElement Icon { get; } = new VignetteControl();
+        public Visibility Visibility => Visibility.Visible;
 
-        //@Construct
-        public VignetteAdjustment()
+
+        [JsonProperty]
+        public float Amount;
+        [JsonProperty]
+        public float Curve;
+        [JsonProperty]
+        public Color Color;
+
+
+        public void Reset()
         {
-            base.Type = AdjustmentType.Vignette;
-            base.Icon = new VignetteControl();
-            base.Item = this.VignetteAdjustmentItem;
-            base.Item.Reset();
-            base.HasPage = true;
+            this.Amount = 0.0f;
+            this.Curve = 0.0f;
+            this.Color = Colors.Black;
+        }
+        public ICanvasImage GetRender(ICanvasImage image)
+        {
+            return new VignetteEffect
+            {
+                Amount = this.Amount,
+                Curve = this.Curve,
+                Color = this.Color,
+                Source = image
+            };
+        }
+        public IAdjustment Clone()
+        {
+            return new VignetteAdjustment
+            {
+                Amount = this.Amount,
+                Curve = this.Curve,
+                Color = this.Color,
+            };
         }
     }
 }

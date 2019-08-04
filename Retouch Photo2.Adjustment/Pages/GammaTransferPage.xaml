@@ -1,4 +1,4 @@
-﻿<adjustments:AdjustmentPage
+﻿<Page
     x:Class="Retouch_Photo2.Adjustments.Pages.GammaTransferPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,7 +12,7 @@
     >
 
 
-    <adjustments:AdjustmentPage.Resources>
+    <Page.Resources>
 
         <!--Background-->
         <SolidColorBrush x:Name="AccentColor"  Color="{ThemeResource AppStrokeColor}"/>
@@ -98,7 +98,7 @@
             <GradientStop Color="{StaticResource BlueRight}" Offset="1"/>
         </LinearGradientBrush>
         
-    </adjustments:AdjustmentPage.Resources>
+    </Page.Resources>
 
 
     <StackPanel >
@@ -165,4 +165,4 @@
 
                         <ContentControl Height="12"/>
     </StackPanel>
-</adjustments:AdjustmentPage>
+</Page>

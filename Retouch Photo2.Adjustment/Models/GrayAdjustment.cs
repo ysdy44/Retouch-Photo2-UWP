@@ -1,24 +1,35 @@
-﻿using Retouch_Photo2.Adjustments.Controls;
-using Retouch_Photo2.Adjustments.Items;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
+using Retouch_Photo2.Adjustments.Controls;
+using Windows.UI.Xaml;
+using Newtonsoft.Json;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
     /// <summary>
-    /// <see cref="Adjustment"/>'s GrayAdjustment.
+    /// <see cref="IAdjustment"/>'s GammaTransferAdjustment.
     /// </summary>
-    public class GrayAdjustment: Adjustment
+    [JsonObject(MemberSerialization.OptIn)]
+    public class GrayAdjustment : IAdjustment
     {
-        public const string Name = "Gray";
-        public GrayAdjustmentItem GrayAdjustmentItem = new GrayAdjustmentItem();
+        [JsonProperty]
+        public string TypeName { get; } = AdjustmentType.Gray.ToString();
+         public AdjustmentType Type => AdjustmentType.Gray;
+         public FrameworkElement Icon { get; } = new GrayControl();
+        public Visibility Visibility => Visibility.Collapsed;
 
-        //@Construct
-        public GrayAdjustment()
+
+        public void Reset() { }
+        public ICanvasImage GetRender(ICanvasImage image)
         {
-            base.Type = AdjustmentType.Gray;
-            base.Icon = new GrayControl();
-            base.Item = this.GrayAdjustmentItem;
-            base.Item.Reset();
-            base.HasPage = false;
+            return new GrayscaleEffect
+            {
+                Source = image
+            };
+        }
+        public IAdjustment Clone()
+        {
+            return new GrayAdjustment();
         }
     }
 }

@@ -1,24 +1,51 @@
-﻿using Retouch_Photo2.Adjustments.Controls;
-using Retouch_Photo2.Adjustments.Items;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
+using Retouch_Photo2.Adjustments.Controls;
+using Windows.UI.Xaml;
+using Newtonsoft.Json;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
     /// <summary>
-    /// <see cref="Adjustment"/>'s TemperatureAdjustment.
+    /// <see cref="IAdjustment"/>'s TemperatureAdjustment.
     /// </summary>
-    public class TemperatureAdjustment : Adjustment
+    [JsonObject(MemberSerialization.OptIn)]
+    public class TemperatureAdjustment : IAdjustment
     {
-        public const string Name = "Temperature";
-        public TemperatureAdjustmentItem TemperatureAdjustmentItem =new TemperatureAdjustmentItem();
+        [JsonProperty]
+        public string TypeName { get; } = AdjustmentType.Temperature.ToString();
+         public AdjustmentType Type => AdjustmentType.Temperature;
+         public FrameworkElement Icon { get; } = new TemperatureControl();
+         public Visibility Visibility => Visibility.Visible;
 
-        //@Construct
-        public TemperatureAdjustment()
+
+        [JsonProperty]
+        public float Temperature;
+        [JsonProperty]
+        public float Tint;
+
+
+        public void Reset()
         {
-            base.Type = AdjustmentType.Temperature;
-            base.Icon = new TemperatureControl();
-            base.Item = this.TemperatureAdjustmentItem;
-            base.Item.Reset();
-            base.HasPage = true;
+            this.Temperature = 0.0f;
+            this.Tint = 0.0f;
+        }
+        public ICanvasImage GetRender(ICanvasImage image)
+        {
+            return new TemperatureAndTintEffect
+            {
+                Temperature = this.Temperature,
+                Tint = this.Tint,
+                Source = image
+            };
+        }
+        public IAdjustment Clone()
+        {
+            return new TemperatureAdjustment
+            {
+                Temperature = this.Temperature,
+                Tint = this.Tint,
+            };
         }
     }
 }

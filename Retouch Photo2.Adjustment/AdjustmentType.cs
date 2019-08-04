@@ -1,7 +1,7 @@
 ﻿namespace Retouch_Photo2.Adjustments
 {
     /// <summary> 
-    /// Type of <see cref = "Adjustment"/>.
+    /// Type of <see cref = "IAdjustment"/>.
     /// </summary>
     public enum AdjustmentType
     {

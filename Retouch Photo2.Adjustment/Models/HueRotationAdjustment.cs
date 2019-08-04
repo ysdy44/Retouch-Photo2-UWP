@@ -1,24 +1,46 @@
-﻿using Retouch_Photo2.Adjustments.Controls;
-using Retouch_Photo2.Adjustments.Items;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
+using Retouch_Photo2.Adjustments.Controls;
+using Windows.UI.Xaml;
+using Newtonsoft.Json;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
     /// <summary>
-    /// <see cref="Adjustment"/>'s HueRotationAdjustment.
+    /// <see cref="IAdjustment"/>'s HueRotationAdjustment.
     /// </summary>
-    public class HueRotationAdjustment : Adjustment
+    [JsonObject(MemberSerialization.OptIn)]
+    public class HueRotationAdjustment : IAdjustment
     {
-        public const string Name = "HueRotation";
-        public HueRotationAdjustmentItem HueRotationAdjustmentitem=new HueRotationAdjustmentItem();
+        [JsonProperty]
+        public string TypeName { get; } = AdjustmentType.HueRotation.ToString();
+         public AdjustmentType Type => AdjustmentType.HueRotation;
+         public FrameworkElement Icon { get; } = new HueRotationControl();
+         public Visibility Visibility => Visibility.Visible;
 
-        //@Construct
-        public HueRotationAdjustment()
+
+        [JsonProperty]
+        public float Angle;
+
+
+        public void Reset()
         {
-            base.Type = AdjustmentType.HueRotation;
-            base.Icon = new HueRotationControl();
-            base.Item = this.HueRotationAdjustmentitem;
-            base.Item.Reset();
-            base.HasPage = true;
+            this.Angle = 0.0f;
+        }
+        public ICanvasImage GetRender(ICanvasImage image)
+        {
+            return new HueRotationEffect
+            {
+                Angle = this.Angle,
+                Source = image
+            };
+        }
+        public IAdjustment Clone()
+        {
+            return new HueRotationAdjustment
+            {
+                Angle = this.Angle,
+            };
         }
     }
 }

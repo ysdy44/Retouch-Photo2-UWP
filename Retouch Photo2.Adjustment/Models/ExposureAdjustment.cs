@@ -1,24 +1,46 @@
-﻿using Retouch_Photo2.Adjustments.Controls;
-using Retouch_Photo2.Adjustments.Items;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
+using Retouch_Photo2.Adjustments.Controls;
+using Windows.UI.Xaml;
+using Newtonsoft.Json;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
     /// <summary>
-    /// <see cref="Adjustment"/>'s ExposureAdjustment.
+    /// <see cref="IAdjustment"/>'s ExposureAdjustment.
     /// </summary>
-    public class ExposureAdjustment : Adjustment
+    [JsonObject(MemberSerialization.OptIn)]
+    public class ExposureAdjustment : IAdjustment
     {
-        public const string Name = "Exposure";
-        public ExposureAdjustmentItem ExposureAdjustmentItem=new ExposureAdjustmentItem();
+        [JsonProperty]
+        public string TypeName { get; } = AdjustmentType.Exposure.ToString();
+        public AdjustmentType Type => AdjustmentType.Exposure;
+        public FrameworkElement Icon { get; } = new ExposureControl();
+        public Visibility Visibility => Visibility.Visible;
 
-        //@Construct
-        public ExposureAdjustment()
+
+        [JsonProperty]
+        public float Exposure;
+
+
+        public void Reset()
         {
-            base.Type = AdjustmentType.Exposure;
-            base.Icon = new ExposureControl();
-            base.Item = this.ExposureAdjustmentItem;
-            base.Item.Reset();
-            base.HasPage = true;
+            this.Exposure = 0.0f;
+        }
+        public ICanvasImage GetRender(ICanvasImage image)
+        {
+            return new ExposureEffect
+            {
+                Exposure = this.Exposure,
+                Source = image
+            };
+        }
+        public IAdjustment Clone()
+        {
+            return new ExposureAdjustment
+            {
+                Exposure = this.Exposure,
+            };
         }
     }
 }

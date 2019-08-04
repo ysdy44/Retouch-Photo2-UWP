@@ -1,40 +1,43 @@
 ﻿using Retouch_Photo2.Adjustments.Controls;
 using Retouch_Photo2.Adjustments.Models;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Adjustments.Pages
 {
     /// <summary>
     /// Page of <see cref = "VignetteAdjustment"/>.
     /// </summary>
-    public sealed partial class VignettePage : AdjustmentPage
+    public sealed partial class VignettePage : IAdjustmentPage
     {
 
         public VignetteAdjustment VignetteAdjustment;
 
+        public AdjustmentType Type { get; } = AdjustmentType.Vignette;
+        public FrameworkElement Icon { get; } = new VignetteControl();
+        public FrameworkElement Page => this;
+        
         //@Construct
         public VignettePage()
         {
-            base.Type = AdjustmentType.Vignette;
-            base.Icon = new VignetteControl();
             this.InitializeComponent();
 
             this.AmountSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.VignetteAdjustment == null) return;
-                this.VignetteAdjustment.VignetteAdjustmentItem.Amount = (float)(value / 100);
-                Adjustment.Invalidate?.Invoke();
+                this.VignetteAdjustment.Amount = (float)(value / 100);
+                AdjustmentManager.Invalidate?.Invoke();
             };
             this.CurveSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.VignetteAdjustment == null) return;
-                this.VignetteAdjustment.VignetteAdjustmentItem.Curve = (float)(value / 100);
-                Adjustment.Invalidate?.Invoke();
+                this.VignetteAdjustment.Curve = (float)(value / 100);
+                AdjustmentManager.Invalidate?.Invoke();
             };
             this.ColorButton.Tapped += (s, e) =>
             {
                 if (this.VignetteAdjustment == null) return;
                 this.ColorFlyout.ShowAt(this.ColorButton);
-                this.ColorPicker.Color = this.VignetteAdjustment.VignetteAdjustmentItem.Color;
+                this.ColorPicker.Color = this.VignetteAdjustment.Color;
             };
             this.ColorPicker.ColorChange += (s, value) =>
             {
@@ -44,15 +47,15 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                 if (this.VignetteAdjustment == null) return;
 
-                this.VignetteAdjustment.VignetteAdjustmentItem.Color = value;
-                Adjustment.Invalidate?.Invoke();
+                this.VignetteAdjustment.Color = value;
+                AdjustmentManager.Invalidate?.Invoke();
             };
         }
 
         //@override
-        public override Adjustment GetNewAdjustment() => new VignetteAdjustment();
-        public override Adjustment GetAdjustment() => this.VignetteAdjustment;
-        public override void SetAdjustment(Adjustment value)
+        public IAdjustment GetNewAdjustment() => new VignetteAdjustment();
+        public IAdjustment GetAdjustment() => this.VignetteAdjustment;
+        public void SetAdjustment(IAdjustment value)
         {
             if (value is VignetteAdjustment adjustment)
             {
@@ -61,20 +64,20 @@ namespace Retouch_Photo2.Adjustments.Pages
             }
         }
 
-        public override void Close() => this.VignetteAdjustment = null;
-        public override void Reset()
+        public void Close() => this.VignetteAdjustment = null;
+        public void Reset()
         {
             if (this.VignetteAdjustment == null) return;
 
-            this.VignetteAdjustment.Item.Reset();
+            this.VignetteAdjustment.Reset();
             this.Invalidate(this.VignetteAdjustment);
         }
 
         public void Invalidate(VignetteAdjustment adjustment)
         {
-            this.AmountSlider.Value = adjustment.VignetteAdjustmentItem.Amount * 100;
-            this.CurveSlider.Value = adjustment.VignetteAdjustmentItem.Curve * 100;
-            this.SolidColorBrush.Color = this.AmountRight.Color = this.CurveRight.Color = adjustment.VignetteAdjustmentItem.Color;
+            this.AmountSlider.Value = adjustment.Amount * 100;
+            this.CurveSlider.Value = adjustment.Curve * 100;
+            this.SolidColorBrush.Color = this.AmountRight.Color = this.CurveRight.Color = adjustment.Color;
         }
     }
 }

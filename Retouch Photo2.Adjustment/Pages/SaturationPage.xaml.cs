@@ -1,35 +1,38 @@
 ﻿using Retouch_Photo2.Adjustments.Controls;
 using Retouch_Photo2.Adjustments.Models;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Adjustments.Pages
 {
     /// <summary>
     /// Page of <see cref = "SaturationAdjustment"/>.
     /// </summary>
-    public sealed partial class SaturationPage : AdjustmentPage
+    public sealed partial class SaturationPage : IAdjustmentPage
     {
 
         public SaturationAdjustment SaturationAdjustment;
 
+        public AdjustmentType Type { get; } = AdjustmentType.Saturation;
+        public FrameworkElement Icon { get; } = new SaturationControl();
+        public FrameworkElement Page => this;
+               
         //@Construct
         public SaturationPage()
         {
-            base.Type = AdjustmentType.Saturation;
-            base.Icon = new SaturationControl();
             this.InitializeComponent();
 
             this.SaturationSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.SaturationAdjustment == null) return;
-                this.SaturationAdjustment.SaturationAdjustmentItem.Saturation = (float)(value / 100);
-                Adjustment.Invalidate?.Invoke();
+                this.SaturationAdjustment.Saturation = (float)(value / 100);
+                AdjustmentManager.Invalidate?.Invoke();
             };
         }
 
         //@override
-        public override Adjustment GetNewAdjustment() => new SaturationAdjustment();
-        public override Adjustment GetAdjustment() => this.SaturationAdjustment;
-        public override void SetAdjustment(Adjustment value)
+        public IAdjustment GetNewAdjustment() => new SaturationAdjustment();
+        public IAdjustment GetAdjustment() => this.SaturationAdjustment;
+        public void SetAdjustment(IAdjustment value)
         {
             if (value is SaturationAdjustment adjustment)
             {
@@ -38,18 +41,18 @@ namespace Retouch_Photo2.Adjustments.Pages
             }
         }
 
-        public override void Close() => this.SaturationAdjustment = null;
-        public override void Reset()
+        public void Close() => this.SaturationAdjustment = null;
+        public void Reset()
         {
             if (this.SaturationAdjustment == null) return;
 
-            this.SaturationAdjustment.Item.Reset();
+            this.SaturationAdjustment.Reset();
             this.Invalidate(this.SaturationAdjustment);
         }
 
         public void Invalidate(SaturationAdjustment adjustment)
         {
-            this.SaturationSlider.Value = adjustment.SaturationAdjustmentItem.Saturation * 100;
+            this.SaturationSlider.Value = adjustment.Saturation * 100;
         }
     }
 }

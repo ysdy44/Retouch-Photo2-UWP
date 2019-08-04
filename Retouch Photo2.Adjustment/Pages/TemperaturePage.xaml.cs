@@ -1,41 +1,44 @@
 ﻿using Retouch_Photo2.Adjustments.Controls;
 using Retouch_Photo2.Adjustments.Models;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Adjustments.Pages
 {
     /// <summary>
     /// Page of <see cref = "TemperatureAdjustment"/>.
     /// </summary>
-    public sealed partial class TemperaturePage : AdjustmentPage
+    public sealed partial class TemperaturePage : IAdjustmentPage
     {
 
         public TemperatureAdjustment TemperatureAdjustment;
 
+        public AdjustmentType Type { get; } = AdjustmentType.Temperature;
+        public FrameworkElement Icon { get; } = new TemperatureControl();
+        public FrameworkElement Page => this;
+               
         //@Construct
         public TemperaturePage()
         {
-            base.Type = AdjustmentType.Temperature;
-            base.Icon = new TemperatureControl();
             this.InitializeComponent();
 
             this.TemperatureSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.TemperatureAdjustment == null) return;
-                this.TemperatureAdjustment.TemperatureAdjustmentItem.Temperature = (float)(value / 100);
-                Adjustment.Invalidate?.Invoke();
+                this.TemperatureAdjustment.Temperature = (float)(value / 100);
+                AdjustmentManager.Invalidate?.Invoke();
             };
             this.TintSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.TemperatureAdjustment == null) return;
-                this.TemperatureAdjustment.TemperatureAdjustmentItem.Tint = (float)(value / 100);
-                Adjustment.Invalidate?.Invoke();
+                this.TemperatureAdjustment.Tint = (float)(value / 100);
+                AdjustmentManager.Invalidate?.Invoke();
             };
         }
 
         //@override
-        public override Adjustment GetNewAdjustment() => new TemperatureAdjustment();
-        public override Adjustment GetAdjustment() => this.TemperatureAdjustment;
-        public override void SetAdjustment(Adjustment value)
+        public IAdjustment GetNewAdjustment() => new TemperatureAdjustment();
+        public IAdjustment GetAdjustment() => this.TemperatureAdjustment;
+        public void SetAdjustment(IAdjustment value)
         {
             if (value is TemperatureAdjustment adjustment)
             {
@@ -44,19 +47,19 @@ namespace Retouch_Photo2.Adjustments.Pages
             }
         }
 
-        public override void Close() => this.TemperatureAdjustment = null;
-        public override void Reset()
+        public void Close() => this.TemperatureAdjustment = null;
+        public void Reset()
         {
             if (this.TemperatureAdjustment == null) return;
 
-            this.TemperatureAdjustment.Item.Reset();
+            this.TemperatureAdjustment.Reset();
             this.Invalidate(this.TemperatureAdjustment);
         }
 
         public void Invalidate(TemperatureAdjustment adjustment)
         {
-            this.TemperatureSlider.Value = adjustment.TemperatureAdjustmentItem.Temperature * 100;
-            this.TintSlider.Value = adjustment.TemperatureAdjustmentItem.Tint * 100;
+            this.TemperatureSlider.Value = adjustment.Temperature * 100;
+            this.TintSlider.Value = adjustment.Tint * 100;
         }
     }
 }

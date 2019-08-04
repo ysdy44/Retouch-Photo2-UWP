@@ -1,28 +1,31 @@
 ﻿using Retouch_Photo2.Adjustments.Controls;
 using Retouch_Photo2.Adjustments.Models;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Adjustments.Pages
 {
     /// <summary>
     /// Page of <see cref = "GrayAdjustment"/>.
     /// </summary>
-    public sealed partial class GrayPage : AdjustmentPage
+    public sealed partial class GrayPage : IAdjustmentPage
     {
 
         public GrayAdjustment GrayAdjustment;
 
+        public AdjustmentType Type { get; } = AdjustmentType.Gray;
+        public FrameworkElement Icon { get; } = new GrayControl();
+        public FrameworkElement Page => this;
+               
         //@Construct
         public GrayPage()
         {
-            base.Type = AdjustmentType.Gray;
-            base.Icon = new GrayControl();
             this.InitializeComponent();            
         }
 
         //@override
-        public override Adjustment GetNewAdjustment() => new GrayAdjustment();
-        public override Adjustment GetAdjustment() => this.GrayAdjustment;
-        public override void SetAdjustment(Adjustment value)
+        public IAdjustment GetNewAdjustment() => new GrayAdjustment();
+        public IAdjustment GetAdjustment() => this.GrayAdjustment;
+        public void SetAdjustment(IAdjustment value)
         {
             if (value is GrayAdjustment adjustment)
             {
@@ -31,12 +34,12 @@ namespace Retouch_Photo2.Adjustments.Pages
             }
         }
 
-        public override void Close() => this.GrayAdjustment = null;
-        public override void Reset()
+        public void Close() => this.GrayAdjustment = null;
+        public void Reset()
         {
             if (this.GrayAdjustment == null) return;
 
-            this.GrayAdjustment.Item.Reset();
+            this.GrayAdjustment.Reset();
             this.Invalidate(this.GrayAdjustment);
         }
 

@@ -11,39 +11,39 @@
 
 
       {
-        "Name": "Gray"
+        "TypeName": "Gray"
       },
       {
-        "Name": "Invert"
+        "TypeName": "Invert"
       },
 
 
 
       {
-        "Name": "Exposure",
+        "TypeName": "Exposure",
         "Exposure": 0.0
       },
       {
-        "Name": "Brightness",
+        "TypeName": "Brightness",
         "WhiteLight": 1.0,
         "WhiteDark": 1.0,
         "BlackLight": 0.0,
         "BlackDark": 0.0
       },
       {
-        "Name": "Saturation",
+        "TypeName": "Saturation",
         "Saturation": 1.0
       },
       {
-        "Name": "HueRotation",
+        "TypeName": "HueRotation",
         "Angle": 0.0
       },
       {
-        "Name": "Contrast",
+        "TypeName": "Contrast",
         "Contrast": 0.0
       },
       {
-        "Name": "Temperature",
+        "TypeName": "Temperature",
         "Temperature": 0.0,
         "Tint": 0.0
       },
@@ -51,7 +51,7 @@
 
 
       {
-        "Name": "HighlightsAndShadows",
+        "TypeName": "HighlightsAndShadows",
         "Shadows": 0.0,
         "Highlights": 0.0,
         "Clarity": 0.0,
@@ -59,7 +59,7 @@
         "SourceIsLinearGamma": false
       },
       {
-        "Name": "GammaTransfer",
+        "TypeName": "GammaTransfer",
         "ClampOutput": false,
 
         "AlphaDisable": true,
@@ -83,7 +83,7 @@
         "BlueAmplitude": 1.0
       },
       {
-        "Name": "Vignette",
+        "TypeName": "Vignette",
         "Amount": 0.0,
         "Curve": 0.0,
         "Color": {
