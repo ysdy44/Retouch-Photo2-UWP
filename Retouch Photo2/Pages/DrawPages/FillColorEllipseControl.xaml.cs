@@ -30,7 +30,7 @@ namespace Retouch_Photo2.Pages.DrawPages
                 this.SelectionViewModel.FillColor = value;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.SetFillColor(value);
+                    layer.FillColor = value;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate

@@ -1,7 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.Layers.ILayer;
 using Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools;
 using Retouch_Photo2.Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.Tools.Controls;
@@ -125,7 +123,7 @@ namespace Retouch_Photo2.Tools.Models
             }
         }
 
-        public override void Draw(CanvasDrawingSession ds)
+        public override void Draw(CanvasDrawingSession drawingSession)
         {
             switch (this.SelectionViewModel.BrushType)
             {
@@ -134,13 +132,13 @@ namespace Retouch_Photo2.Tools.Models
                 case BrushType.Color:
                     break;
                 case BrushType.LinearGradient:
-                    this.LinearGradientTool.Draw(ds);//LinearGradientTool
+                    this.LinearGradientTool.Draw(drawingSession);//LinearGradientTool
                     break;
                 case BrushType.RadialGradient:
-                    this.RadialGradientTool.Draw(ds);//RadialGradientTool
+                    this.RadialGradientTool.Draw(drawingSession);//RadialGradientTool
                     break;
                 case BrushType.EllipticalGradient:
-                    this.EllipticalGradientTool.Draw(ds);//EllipticalGradientTool
+                    this.EllipticalGradientTool.Draw(drawingSession);//EllipticalGradientTool
                     break;
                 case BrushType.Image:
                     break;

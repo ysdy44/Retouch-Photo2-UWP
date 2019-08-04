@@ -22,11 +22,31 @@ namespace Retouch_Photo2.Controls
 
 
         /// <summary> The single copyed layer.  </summary>
-        public Layer Layer { get; private set; }
+        public ILayer Layer
+        {
+            get => this.layer;
+            private set
+            {
+                this.AA.Visibility = (value == null) ? Visibility.Collapsed : Visibility.Visible;
+                this.layer = value;
+            }
+        }
+        public ILayer layer;
 
 
         /// <summary> The all copyed layers.  </summary>
-        public IEnumerable<Layer> Layers { get; private set; }
+         public List<ILayer> Layers
+    {
+            get => this.layers;
+            private set
+            {
+                this.BB.Visibility = (value == null) ? Visibility.Collapsed : Visibility.Visible;
+                if (value != null) this.CC.Text = value.Count().ToString();
+                else this.CC.Text = 0.ToString();
+                this.layers = value;
+            }
+        }
+        public List<ILayer> layers = new List<ILayer>();
 
 
         #region DependencyProperty
@@ -91,28 +111,37 @@ namespace Retouch_Photo2.Controls
 
             this.CutButton.RootButton.Tapped += (s, e) =>
             {
-                //Edit
-                this.Layer = null;
-                this.Layers = null;
-
                 //Selection
                 switch (this.SelectionViewModel.Mode)
                 {
                     case ListViewSelectionMode.None:
+                        {
+                            this.Layer = null;
+                            this.Layers = null;
+                        }
                         break;
-                    case ListViewSelectionMode.Single:                        
-                            this.Layer = this.SelectionViewModel.Layer.Clone(this.ViewModel.CanvasDevice);                        
+                    case ListViewSelectionMode.Single:
+                        {
+                            this.Layer = this.SelectionViewModel.Layer.Clone(this.ViewModel.CanvasDevice);
+                            this.Layers = null;
+                        }
                         break;
                     case ListViewSelectionMode.Multiple:
-                            this.Layers = from layer in this.SelectionViewModel.Layers select layer.Clone(this.ViewModel.CanvasDevice);                        
+                        {
+                            this.Layer = null;
+
+                            this.Layers.Clear();
+                            foreach (ILayer layer in this.SelectionViewModel.Layers)
+                            {
+                                ILayer cloneLayer = layer.Clone(this.ViewModel.CanvasDevice);
+                                this.Layers.Add(cloneLayer);
+                            }
+                        }
                         break;
                 }
 
-                if (this.Layer!=null || this.Layers!=null)
-                    this.PasteButton.IsEnabled = true;//PasteButton
-                else
-                    this.PasteButton.IsEnabled = false;//PasteButton
-                
+                this.PasteButton.IsEnabled = (this.Layer != null || this.Layers != null);//PasteButton
+
                 this.ViewModel.RemoveLayers();//Remove
 
                 this.SelectionViewModel.SetModeNone();//Selection
@@ -120,52 +149,59 @@ namespace Retouch_Photo2.Controls
             };
             this.CopyButton.RootButton.Tapped += (s, e) =>
             {
-                //Edit
-                this.Layer = null;
-                this.Layers = null;
-
                 //Selection
                 switch (this.SelectionViewModel.Mode)
                 {
                     case ListViewSelectionMode.None:
+                        {
+                            this.Layer = null;
+                            this.Layers = null;
+                        }
                         break;
                     case ListViewSelectionMode.Single:
-                        this.Layer = this.SelectionViewModel.Layer.Clone(this.ViewModel.CanvasDevice);
+                        {
+                            this.Layer = this.SelectionViewModel.Layer.Clone(this.ViewModel.CanvasDevice);
+                            this.Layers = null;
+                        }
                         break;
                     case ListViewSelectionMode.Multiple:
-                        this.Layers = from layer in this.SelectionViewModel.Layers select layer.Clone(this.ViewModel.CanvasDevice);
+                        {
+                            this.Layer = null;
+
+                            this.Layers.Clear();
+                            foreach (ILayer layer in this.SelectionViewModel.Layers)
+                            {
+                                ILayer cloneLayer = layer.Clone(this.ViewModel.CanvasDevice);
+                                this.Layers.Add(cloneLayer);
+                            }
+                        }
                         break;
                 }
 
-                if (this.Layer != null || this.Layers != null)
-                    this.PasteButton.IsEnabled = true;//PasteButton
-                else
-                    this.PasteButton.IsEnabled = false;//PasteButton
+                this.PasteButton.IsEnabled = (this.Layer != null || this.Layers != null);//PasteButton
             };
             this.PasteButton.RootButton.Tapped += (s, e) =>
             {
                 int index = this.MezzanineViewModel.GetfFrstIndex(this.ViewModel.Layers);
-                                
+                
                 if (this.Layer == null && this.Layers == null)//None
                 {
-
                 }
                 else if (this.Layer != null && this.Layers == null)//Single
                 {
-                    //Clone
-                    Layer cloneLayer = this.Layer.Clone(this.ViewModel.CanvasDevice);
-
-                    //Insert
-                    this.ViewModel.Layers.Insert(index, cloneLayer);
+                    ILayer cloneLayer = this.Layer.Clone(this.ViewModel.CanvasDevice);//Clone
+                                        
+                    this.ViewModel.Layers.Insert(index, cloneLayer);//Insert
 
                     this.SelectionViewModel.SetModeSingle(cloneLayer);//Selection
                 }
                 else if (this.Layer == null && this.Layers != null)//Multiple
                 {
-                    foreach (Layer layer in this.Layers)
+                    foreach (ILayer layer in this.Layers)
                     {
-                        //Insert
-                        this.ViewModel.Layers.Insert(index, layer.Clone(this.ViewModel.CanvasDevice));//Insert
+                        ILayer cloneLayer = layer.Clone(this.ViewModel.CanvasDevice);//Clone
+                                                
+                        this.ViewModel.Layers.Insert(index, cloneLayer);//Insert
                     }
 
                     this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
@@ -195,7 +231,7 @@ namespace Retouch_Photo2.Controls
                 if (count == 0) return;
 
                 //Selection
-                foreach (Layer layer in this.ViewModel.Layers)
+                foreach (ILayer layer in this.ViewModel.Layers)
                 {
                     layer.IsChecked = true;
                 }
@@ -209,7 +245,7 @@ namespace Retouch_Photo2.Controls
                 if (count == 0) return;
                 
                 //Selection
-                foreach (Layer layer in this.ViewModel.Layers)
+                foreach (ILayer layer in this.ViewModel.Layers)
                 {
                     layer.IsChecked = false;
                 }
@@ -225,7 +261,7 @@ namespace Retouch_Photo2.Controls
                 if (count == 0) return;
 
                 //Selection
-                foreach (Layer layer in this.ViewModel.Layers)
+                foreach (ILayer layer in this.ViewModel.Layers)
                 {
                     layer.IsChecked = !layer.IsChecked;
                 }

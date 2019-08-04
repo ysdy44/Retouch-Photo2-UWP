@@ -54,7 +54,7 @@ namespace Retouch_Photo2.ViewModels.Selections
         /// <summary> GroupLayer's Exist. </summary>     
         public bool IsGroupLayer;
         /// <summary> Sets GroupLayer. </summary>     
-        private void SetGroupLayer(Layer layer)
+        private void SetGroupLayer(ILayer layer)
         {
             if (layer==null)
             {
@@ -71,7 +71,7 @@ namespace Retouch_Photo2.ViewModels.Selections
 
 
         /// <summary> <see cref = "SelectionViewModel" />'s Children. </summary>
-        public ObservableCollection<Layer> Children
+        public ObservableCollection<ILayer> Children
         {
             get => this.children;
             set
@@ -80,7 +80,7 @@ namespace Retouch_Photo2.ViewModels.Selections
                 this.OnPropertyChanged(nameof(this.Children));//Notify 
             }
         }
-        private ObservableCollection<Layer> children;
+        private ObservableCollection<ILayer> children;
 
                
         /// <summary> <see cref = "SelectionViewModel" />'s EffectManager. </summary>
@@ -113,7 +113,7 @@ namespace Retouch_Photo2.ViewModels.Selections
         /// <summary> AcrylicLayer's BlurAmount. </summary>     
         public float AcrylicBlurAmount = 12.0f;
         /// <summary> Sets AcrylicLayer. </summary>     
-        private void SetAcrylicLayer(Layer layer)
+        private void SetAcrylicLayer(ILayer layer)
         {
             if (layer is AcrylicLayer acrylicLayer)
             {
@@ -140,7 +140,7 @@ namespace Retouch_Photo2.ViewModels.Selections
         }
         private ImageRe imageRe;
         /// <summary> Sets ImageLayer. </summary>     
-        private void SetImageLayer(Layer layer)
+        private void SetImageLayer(ILayer layer)
         {
             if (layer is ImageLayer imageLayer)
             {

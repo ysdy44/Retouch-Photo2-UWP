@@ -61,7 +61,7 @@ namespace Retouch_Photo2.Pages
                             //Selection
                             this.SelectionViewModel.SetValue((layer) =>
                             {
-                                layer.SetFillColor(value);
+                                layer.FillColor = value;
                             }, true);
                         }
                         break;
@@ -70,7 +70,7 @@ namespace Retouch_Photo2.Pages
                             //Selection
                             this.SelectionViewModel.SetValue((layer) =>
                             {
-                                layer.SetStrokeColor(value);
+                                layer.StrokeColor = value;
                             }, true);
                         }
                         break;

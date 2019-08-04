@@ -180,7 +180,7 @@ namespace Retouch_Photo2.Tools
         }
 
 
-        public override void Draw(CanvasDrawingSession ds)
+        public override void Draw(CanvasDrawingSession drawingSession)
         {
             //Selection
             switch (this.SelectionViewModel.Mode)
@@ -192,7 +192,7 @@ namespace Retouch_Photo2.Tools
                     {
                         Transformer transformer = this.SelectionViewModel.Transformer;
                         Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                        ds.DrawBoundNodes(transformer, matrix, this.ViewModel.AccentColor, this.SelectionViewModel.DsabledRadian);
+                        drawingSession.DrawBoundNodes(transformer, matrix, this.ViewModel.AccentColor, this.SelectionViewModel.DsabledRadian);
                     }
                     break;
             }
@@ -204,7 +204,7 @@ namespace Retouch_Photo2.Tools
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasPoint = Vector2.Transform(point, matrix);
 
-            Layer selectedLayer = this.ViewModel.Layers.FirstOrDefault((layer) =>
+            ILayer selectedLayer = this.ViewModel.Layers.FirstOrDefault((layer) =>
             {
                 if (layer.Visibility == Visibility.Visible)
                 {
@@ -245,7 +245,7 @@ namespace Retouch_Photo2.Tools
         {
             Vector2 canvasPoint = Vector2.Transform(point, this.ViewModel.CanvasTransformer.GetInverseMatrix());
 
-            Layer selectedLayer = this.ViewModel.Layers.FirstOrDefault((layer) =>
+            ILayer selectedLayer = this.ViewModel.Layers.FirstOrDefault((layer) =>
             {
                 if (layer.Visibility == Visibility.Visible)
                 {

@@ -61,7 +61,7 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Create a Image form a file.
         /// </summary>
-        /// /// <param name="resourceCreator"> resourceCreator </param>
+        /// <param name="resourceCreator"> The resource-creator. </param>
         /// <param name="file"> The source file. </param>
         /// <returns> The product ImageRe. </returns>
         public async static Task<ImageRe> CreateFromStorageFile(ICanvasResourceCreator resourceCreator, StorageFile file)

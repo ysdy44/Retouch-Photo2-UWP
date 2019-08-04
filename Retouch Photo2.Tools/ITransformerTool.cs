@@ -32,6 +32,6 @@ namespace Retouch_Photo2.Tools
         public abstract bool Complete(bool isSingleStarted);
      
         /// <summary> <see cref = "Tool.Draw" />'s method. </summary>
-        public abstract void Draw(CanvasDrawingSession ds);
+        public abstract void Draw(CanvasDrawingSession drawingSession);
     }
 }

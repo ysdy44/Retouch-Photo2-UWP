@@ -17,38 +17,22 @@ namespace Retouch_Photo2.Layers.Models
         public float TintOpacity = 0.5f;
         public Color TintColor = Color.FromArgb(255, 255, 255, 255);
         public float BlurAmount = 12.0f;
-
-        //@Construct
-        public AcrylicLayer()
-        {
-        }
+        
 
         //@Override
         public override string Type => "Acrylic";
         public override UIElement Icon => new AcrylicControl();
-        public override Layer Clone(ICanvasResourceCreator resourceCreator)
+        public override Color? FillColor
         {
-            return new AcrylicLayer
+           get => this.TintColor;
+            set
             {
-                Name = base.Name,
-                Opacity = base.Opacity,
-                BlendType = base.BlendType,
-
-                IsChecked = base.IsChecked,
-                Visibility = base.Visibility,
-                
-                Source = base.Source,
-                Destination = base.Destination,
-                DisabledRadian = base.DisabledRadian,
-
-                TintOpacity = this.TintOpacity,
-                TintColor = this.TintColor,
-                BlurAmount = this.BlurAmount,
-            };
+                if (value is Color color)
+                {
+                    this.TintColor = color;
+                }
+            }
         }
-
-        public override Color? GetFillColor() => this.TintColor;
-        public override void SetFillColor(Color fillColor) => this.TintColor = fillColor;
         
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -77,6 +61,27 @@ namespace Retouch_Photo2.Layers.Models
                          }
                     }
                 }
+            };
+        }
+
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        {
+            return new AcrylicLayer
+            {
+                Name = base.Name,
+                Opacity = base.Opacity,
+                BlendType = base.BlendType,
+
+                IsChecked = base.IsChecked,
+                Visibility = base.Visibility,
+
+                Source = base.Source,
+                Destination = base.Destination,
+                DisabledRadian = base.DisabledRadian,
+
+                TintOpacity = this.TintOpacity,
+                TintColor = this.TintColor,
+                BlurAmount = this.BlurAmount,
             };
         }
     }

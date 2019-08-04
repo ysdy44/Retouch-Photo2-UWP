@@ -30,7 +30,7 @@ namespace Retouch_Photo2.Pages.DrawPages
                 this.SelectionViewModel.StrokeColor = value;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.SetStrokeColor(value);
+                    layer.StrokeColor = value;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate

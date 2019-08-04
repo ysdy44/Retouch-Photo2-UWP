@@ -1,7 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Layers.ILayer;
+using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
@@ -167,7 +167,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                             this.SelectionViewModel.FillColor = value;
                             this.SelectionViewModel.SetValue((layer) =>
                             {
-                                layer.SetFillColor(value);
+                                layer.FillColor=value;
                             }, true);
                         }
                         break;
@@ -177,7 +177,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                             this.SelectionViewModel.StrokeColor = value;
                             this.SelectionViewModel.SetValue((layer) =>
                             {
-                                layer.SetStrokeColor(value);
+                                layer.StrokeColor = value;
                             }, true);
                         }
                         break;

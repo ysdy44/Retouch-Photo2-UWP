@@ -1,14 +1,8 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Layers.Controls;
-using FanKit.Transformers;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Numerics;
-using Windows.Graphics.Effects;
 using Windows.UI.Xaml;
-using Windows.UI;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -17,21 +11,35 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GroupLayer : Layer
     {
-        //@Construct
-        public GroupLayer()
-        {
-        }
-
         //@Override
         public override string Type => "Group";
         public override UIElement Icon => new GroupControl();
   
-        public override Layer Clone(ICanvasResourceCreator resourceCreator)
-        {       
-            ObservableCollection<Layer> children  = new ObservableCollection<Layer>();
-            foreach (Layer child in this.Children)
+        
+        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
+        { 
+            CanvasCommandList command = new CanvasCommandList(resourceCreator);
+            using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
             {
-                Layer cloneLayer = child.Clone(resourceCreator);//Clone
+                foreach (ILayer child in this.Children)
+                {
+                    if (child.Visibility == Visibility.Collapsed) continue;
+                    if (child.Opacity ==0) continue;
+
+                    //GetRender
+                    ICanvasImage currentImage = child.GetRender(resourceCreator, previousImage, canvasToVirtualMatrix);
+                    drawingSession.DrawImage(currentImage);
+                }
+            }
+            return command;
+        }
+
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        {       
+            ObservableCollection<ILayer> children  = new ObservableCollection<ILayer>();
+            foreach (ILayer child in this.Children)
+            {
+                ILayer cloneLayer = child.Clone(resourceCreator);//Clone
                 children.Add(cloneLayer);//Add
             }
 
@@ -50,24 +58,6 @@ namespace Retouch_Photo2.Layers.Models
 
                 Children = children,
             };
-        }
-        
-        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
-        { 
-            CanvasCommandList command = new CanvasCommandList(resourceCreator);
-            using (CanvasDrawingSession ds = command.CreateDrawingSession())
-            {
-                foreach (Layer child in this.Children)
-                {
-                    if (child.Visibility == Visibility.Collapsed) continue;
-                    if (child.Opacity ==0) continue;
-
-                    //GetRender
-                    ICanvasImage currentImage = child.GetRender(resourceCreator, previousImage, canvasToVirtualMatrix);
-                    ds.DrawImage(currentImage);
-                }
-            }
-            return command;
         }
     }
 }

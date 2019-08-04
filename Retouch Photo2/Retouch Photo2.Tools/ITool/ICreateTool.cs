@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Tools.ITool
         /// </summary>
         /// <param name="transformer"> transformer </param>
         /// <returns> Layer </returns>
-        public abstract Layer CreateLayer(Transformer transformer);
+        public abstract ILayer CreateLayer(Transformer transformer);
 
         //@Construct
         public ICreateTool()
@@ -51,7 +51,7 @@ namespace Retouch_Photo2.Tools.ITool
             );
 
             //Mezzanine
-            Layer createLayer = this.CreateLayer(transformer);
+            ILayer createLayer = this.CreateLayer(transformer);
             this.MezzanineViewModel.SetLayer(createLayer, this.ViewModel.Layers);
 
             this.SelectionViewModel.Transformer = transformer;//Selection
@@ -102,7 +102,7 @@ namespace Retouch_Photo2.Tools.ITool
                 });
 
                 //Mezzanine
-                Layer createLayer = this.CreateLayer(transformer);
+                ILayer createLayer = this.CreateLayer(transformer);
                 this.MezzanineViewModel.Insert(createLayer, this.ViewModel.Layers);
             }
             else this.MezzanineViewModel.None();//Mezzanine
@@ -112,9 +112,9 @@ namespace Retouch_Photo2.Tools.ITool
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
 
-        public override void Draw(CanvasDrawingSession ds)
+        public override void Draw(CanvasDrawingSession drawingSession)
         {
-            this.TipViewModel.TransformerTool.Draw(ds);//TransformerToolBase
+            this.TipViewModel.TransformerTool.Draw(drawingSession);//TransformerToolBase
         }
     }
 }

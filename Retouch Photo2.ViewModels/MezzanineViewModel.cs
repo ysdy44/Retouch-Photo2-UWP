@@ -9,7 +9,7 @@ namespace Retouch_Photo2.ViewModels
     public class MezzanineViewModel
     {
         /// <summary> If the layer is not **null**, insert it between layers. </summary>
-        public Layer Layer { get; private set; }
+        public ILayer Layer { get; private set; }
 
         /// <summary> Index of the <see cref="Mezzanine.Layer"/>. </summary>
         public int Index { get; private set; }
@@ -20,7 +20,7 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         /// <param name="layer"> The source layer. </param>
         /// <param name="layers"> The destination layers. </param>
-        public void SetLayer(Layer layer, Collection<Layer> layers)
+        public void SetLayer(ILayer layer, ObservableCollection<ILayer> layers)
         {
             this.Layer = layer;
             this.Index = this.GetfFrstIndex(layers);
@@ -32,7 +32,7 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         /// <param name="layers"></param>
         /// <returns></returns>
-        public int GetfFrstIndex(Collection<Layer> layers)
+        public int GetfFrstIndex(ObservableCollection<ILayer> layers)
         {
             for (int i = 0; i < layers.Count; i++)
             {
@@ -57,7 +57,7 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         /// <param name="layer"> The source layer. </param>
         /// <param name="layers"> The destination layers. </param>
-        public void Insert(Layer layer, Collection<Layer> layers)
+        public void Insert(ILayer layer, ObservableCollection<ILayer> layers)
         {
             int index = this.Index - 1;
             if (index < 0) index = 0;

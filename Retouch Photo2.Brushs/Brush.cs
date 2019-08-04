@@ -151,7 +151,7 @@ namespace Retouch_Photo2.Brushs
         /// <summary>
         /// Create a gray-and-white bitmap.
         /// </summary>
-        /// <param name="resourceCreator"> resourceCreator </param>
+        /// <param name="resourceCreator"> The resource-creator. </param>
         /// <param name="width"> The bitmap width. </param>
         /// <param name="height"> The bitmap height. </param>
         /// <param name="columns"> Number of columns. </param>
@@ -170,9 +170,9 @@ namespace Retouch_Photo2.Brushs
 
             CanvasBitmap bitmap = CanvasBitmap.CreateFromColors(resourceCreator, colors, 2, 2);
 
-            using (CanvasDrawingSession ds = background.CreateDrawingSession())
+            using (CanvasDrawingSession drawingSession = background.CreateDrawingSession())
             {
-                ds.DrawImage(new DpiCompensationEffect
+                drawingSession.DrawImage(new DpiCompensationEffect
                 {
                     Source = new ScaleEffect
                     {

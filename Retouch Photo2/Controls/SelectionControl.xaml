@@ -80,6 +80,9 @@
                 </selections:Button.DisabledIcon>
             </selections:Button>
 
+            <Ellipse x:Name="AA" Width="22" Height="22" Fill="Red"/>
+            <Ellipse x:Name="BB" Width="22" Height="22" Fill="Green"/>
+            <TextBlock x:Name="CC"/>
         </StackPanel>
 
         <Rectangle Grid.Column="1" Width="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />

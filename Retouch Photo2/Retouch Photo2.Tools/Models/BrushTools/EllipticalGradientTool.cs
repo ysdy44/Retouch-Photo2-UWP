@@ -2,7 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Layers.ILayer;
+using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using System.Numerics;
@@ -235,22 +235,22 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
         }
 
 
-        public void Draw(CanvasDrawingSession ds)
+        public void Draw(CanvasDrawingSession drawingSession)
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
             Vector2 center = Vector2.Transform(this.Center, matrix);
             Vector2 xPoint = Vector2.Transform(this.XPoint, matrix);
             Vector2 yPoint = Vector2.Transform(this.YPoint, matrix);
-            ds.DrawThickLine(center, xPoint);
-            ds.DrawThickLine(center, yPoint);
+            drawingSession.DrawThickLine(center, xPoint);
+            drawingSession.DrawThickLine(center, yPoint);
 
             foreach (CanvasGradientStop stop in this.SelectionViewModel.BrushArray)
             {
                 Vector2 position = center * (1.0f - stop.Position) + yPoint * stop.Position;
-                ds.DrawNode2(position, stop.Color);
+                drawingSession.DrawNode2(position, stop.Color);
             }
-            ds.DrawNode2(xPoint);
+            drawingSession.DrawNode2(xPoint);
         }
     }
 }

@@ -89,16 +89,16 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public override void Draw(CanvasDrawingSession ds)
+        public override void Draw(CanvasDrawingSession drawingSession)
         {
             //Box
             if (this.isBox)
             {
-                this.BoxDraw(ds);//Box
+                this.BoxDraw(drawingSession);//Box
                 return;
             }
 
-            this.TipViewModel.TransformerTool.Draw(ds);//TransformerToolBase
+            this.TipViewModel.TransformerTool.Draw(drawingSession);//TransformerToolBase
         }
     }
 }

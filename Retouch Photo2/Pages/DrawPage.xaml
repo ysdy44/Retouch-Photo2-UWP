@@ -9,7 +9,9 @@
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:controls="using:Retouch_Photo2.Controls"
     xmlns:hsvColorPicker="using:HSVColorPickers"
-
+    
+ xmlns:toolkitControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    
     xmlns:operate="using:Retouch_Photo2.Operates"
     xmlns:adjustments="using:Retouch_Photo2.Adjustments"
     xmlns:effects="using:Retouch_Photo2.Effects"
@@ -39,7 +41,7 @@
             </local:DrawLayout.RightPane>
 
             <!--Canvas & Back-->
-            <local:DrawLayout.CenterContent>
+            <local:DrawLayout.CenterContent>                
                 <controls:MainCanvasControl 
                     AccentColor="{ThemeResource SystemAccentColor}" 
                     ShadowColor="{ThemeResource AppStrokeColor}" 

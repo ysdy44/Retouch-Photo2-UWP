@@ -43,7 +43,7 @@ namespace Retouch_Photo2.ViewModels
             this.CanvasTransformer.Height = project.Height;
 
             this.Layers.Clear();
-            foreach (Layer layer in project.Layers)
+            foreach (ILayer layer in project.Layers)
             {
                 this.Layers.Add(layer);
             }
@@ -65,14 +65,14 @@ namespace Retouch_Photo2.ViewModels
         public Action<InvalidateMode> InvalidateAction { private get; set; }
 
 
-        /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.Layers.Layer" />s. </summary>
-        public ObservableCollection<Layer> Layers { get; } = new ObservableCollection<Layer>();
+        /// <summary> Retouch_Photo2's the only ILayers. </summary>
+        public ObservableCollection<ILayer> Layers { get; } = new ObservableCollection<ILayer>();
 
         /// <summary> Remove all checked layer(s). </summary>
         public void RemoveLayers()
         {
             //Remove
-            Layer removeLayer = null;
+            ILayer removeLayer = null;
             do
             {
                 if (removeLayer != null)
@@ -132,14 +132,14 @@ namespace Retouch_Photo2.ViewModels
             return file;
         }
 
-
-        //Notify 
+        
+        //@Notify 
         /// <summary> Multicast event for property change notifications. </summary>
         public event PropertyChangedEventHandler PropertyChanged;
         /// <summary>
         /// Notifies listeners that a property value has changed.
         /// </summary>
-        /// <param name="name"> Name of the property used to notify listeners. </param>
-        protected void OnPropertyChanged(string name) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        /// <param name="propertyName"> Name of the property used to notify listeners. </param>
+        protected void OnPropertyChanged(string propertyName) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

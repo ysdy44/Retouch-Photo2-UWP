@@ -20,18 +20,21 @@ namespace Retouch_Photo2.Tools.Models
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Override
-        public override Layer CreateLayer(Transformer transformer) => new RectangleLayer
+        public override ILayer CreateLayer(Transformer transformer)
         {
-            IsChecked=true,
-            FillBrush = new Brush
+            return new RectangleLayer
             {
-                Type = BrushType.Color,
-                Color = this.SelectionViewModel.FillColor,
-            },
+                IsChecked = true,
+                FillBrush = new Brush
+                {
+                    Type = BrushType.Color,
+                    Color = this.SelectionViewModel.FillColor,
+                },
 
-            Source = transformer,
-            Destination = transformer,
-        };
+                Source = transformer,
+                Destination = transformer,
+            };
+        }
 
         //@Construct
         public RectangleTool()

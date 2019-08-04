@@ -38,6 +38,6 @@ namespace Retouch_Photo2.Tools.Models
         {
         }
 
-        public override void Draw(CanvasDrawingSession ds) { }
+        public override void Draw(CanvasDrawingSession drawingSession) { }
     }
 }

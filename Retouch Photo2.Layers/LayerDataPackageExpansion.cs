@@ -11,21 +11,21 @@ namespace Retouch_Photo2.Layers
         public const string DataFormat = "Layer";
 
         /// <summary> Layer drag and drop. </summary>
-        static Layer Layer;
+        static ILayer Layer;
 
         /// <summary>
         /// <see cref = "DataPackage" /> extending methods.
         /// Sets the layer that DataPackage contains
         /// </summary>
         /// <param name="layer"> The destination layer. </param>
-        public static void SetLayer(this DataPackage dataPackage, Layer layer) => LayerDataPackageExpansion.Layer = layer;
+        public static void SetLayer(this DataPackage dataPackage, ILayer layer) => LayerDataPackageExpansion.Layer = layer;
 
         /// <summary>
         /// <see cref = "DataPackageView" /> extending methods.
         /// Gets the layer that DataPackage contains
         /// </summary>
         /// <returns> The destination layer. </returns>
-        public static Layer GetLayer(this DataPackageView dataPackageView) => LayerDataPackageExpansion.Layer;
+        public static ILayer GetLayer(this DataPackageView dataPackageView) => LayerDataPackageExpansion.Layer;
 
         /// <summary>
         /// Check that DataPackageView contains a specific data format.

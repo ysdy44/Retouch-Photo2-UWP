@@ -20,7 +20,7 @@
             <Grid x:Name="RootGrid" Background="Transparent" Tapped="RootGrid_Tapped" RightTapped="RootGrid_RightTapped">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30"/>
-                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="38"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="1"/>
                     <ColumnDefinition Width="30"/>

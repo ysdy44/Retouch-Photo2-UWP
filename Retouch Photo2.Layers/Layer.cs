@@ -1,84 +1,124 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Effects;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Numerics;
+using Windows.UI;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers
 {
     /// <summary>
-    /// Layer Classes.
+    /// Represents a layer that can have render properties. Provides a rendering method.
     /// </summary>
-    public abstract partial class Layer : INotifyPropertyChanged, ICacheTransform
+    public abstract partial class Layer : ILayer, INotifyPropertyChanged
     {
+
         //@Abstract
-        /// <summary> Gets layer's type name. </summary>
         public abstract string Type { get; }
-         /// <summary>
-        /// Gets layer's icon.
-        /// </summary>
-        /// <returns> icon </returns>
         public abstract UIElement Icon { get; }
-        /// <summary>
-        /// Get layer own copy.
-        /// </summary>
-        /// /// <param name="resourceCreator"> resourceCreator </param>
-        /// <returns> The cloned layer. </returns>
-        public abstract Layer Clone(ICanvasResourceCreator resourceCreator);
+        public virtual Color? FillColor { get; set; }
+        public virtual Color? StrokeColor { get; set; }
 
 
-        //@Interface
-        /// <summary>
-        ///  Cache a layer's transformer.
-        /// </summary>
+        public string Name { get; set; } = string.Empty;
+        public float Opacity { get; set; } = 1.0f;
+        public BlendType BlendType { get; set; } = BlendType.Normal;
+
+
+        public Matrix3x2 GetMatrix() => Transformer.FindHomography(this.Source, this.Destination);
+        public Transformer Source { get; set; }
+        public Transformer Destination { get; set; }
+        public Transformer OldDestination { get; set; }
+        public bool DisabledRadian { get; set; } = false;
+
+        public ObservableCollection<ILayer> Children { get; protected set; } = new ObservableCollection<ILayer>();
+        public EffectManager EffectManager { get; } = new EffectManager();
+        public AdjustmentManager AdjustmentManager { get; } = new AdjustmentManager();
+
+
+
+        //@Abstract
+        public abstract ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix);
+        public virtual void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
+        {
+            //LTRB
+            Vector2 leftTop = Vector2.Transform(this.Destination.LeftTop, matrix);
+            Vector2 rightTop = Vector2.Transform(this.Destination.RightTop, matrix);
+            Vector2 rightBottom = Vector2.Transform(this.Destination.RightBottom, matrix);
+            Vector2 leftBottom = Vector2.Transform(this.Destination.LeftBottom, matrix);
+
+            drawingSession.DrawLine(leftTop, rightTop, accentColor);
+            drawingSession.DrawLine(rightTop, rightBottom, accentColor);
+            drawingSession.DrawLine(rightBottom, leftBottom, accentColor);
+            drawingSession.DrawLine(leftBottom, leftTop, accentColor);
+        }
+
+        public abstract ILayer Clone(ICanvasResourceCreator resourceCreator);
+
+
+        //@Abstract
         public virtual void CacheTransform() => this.OldDestination = this.Destination;
-        /// <summary>
-        ///  Transforms a layer by the given matrix.
-        /// </summary>
-        /// <param name="matrix"> The sestination matrix. </param>
         public virtual void TransformMultiplies(Matrix3x2 matrix) => this.Destination = this.OldDestination * matrix;
-        /// <summary>
-        ///  Transforms a layer by the given vector.
-        /// </summary>
-        /// <param name="vector"> The sestination vector. </param>
         public virtual void TransformAdd(Vector2 vector) => this.Destination = this.OldDestination + vector;
 
 
-
-        /// <summary> <see cref = "Layer" />'s name. </summary>
-        public string Name;
-        /// <summary> <see cref = "Layer" />'s opacity. </summary>
-        public float Opacity=1.0f;
-        /// <summary> <see cref = "Layer" />'s blend type. </summary>
-        public BlendType BlendType;
-
-
-        
+        //@Static
         /// <summary>
-        /// Gets transformer-matrix>'s resulting matrix.
-        /// </summary>
-        /// <returns> The product matrix. </returns>
-        public Matrix3x2 GetMatrix() => Transformer.FindHomography(this.Source, this.Destination);
-        /// <summary> The source Transformer. </summary>
-        public Transformer Source { get; set; }
-        /// <summary> The destination Transformer. </summary>
-        public Transformer Destination { get; set; }
-        /// <summary> <see cref = "TransformerMatrix.Destination" />'s old cache. </summary>
-        public Transformer OldDestination { get; set; }
-        /// <summary> Is disable rotate radian? Defult **false**. </summary>
-        public bool DisabledRadian { get; set; }
+        /// Render images and layers together.
+        /// </summary>  
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="currentLayer"> The current layer. </param>
+        /// <param name="previousImage"> Previous rendered images. </param>
+        /// <param name="canvasToVirtualMatrix"> The canvas-to-virtual matrix. </param>
+        /// <returns> The rendered layer. </returns>
+        public static ICanvasImage Render(ICanvasResourceCreator resourceCreator, ILayer currentLayer, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
+        {
+            if (currentLayer.Visibility == Visibility.Collapsed) return previousImage;
+            if (currentLayer.Opacity == 0) return previousImage;
 
+            //GetRender
+            ICanvasImage currentImage = currentLayer.GetRender(resourceCreator, previousImage, canvasToVirtualMatrix);
 
+            //Effect
+            currentImage = EffectManager.Render(currentLayer.EffectManager, currentImage);
 
-        /// <summary> <see cref = "Layer" />'s children layers. </summary>
-        public ObservableCollection<Layer> Children = new ObservableCollection<Layer>();
-                /// <summary> <see cref = "Layer" />'s EffectManager. </summary>
-        public EffectManager EffectManager = new EffectManager();
-        /// <summary> <see cref = "Layer" />'s AdjustmentManager. </summary>
-        public AdjustmentManager AdjustmentManager = new AdjustmentManager();
+            //Adjustment
+            currentImage = AdjustmentManager.Render(currentLayer.AdjustmentManager, currentImage);
+
+            //Opacity
+            if (currentLayer.Opacity < 1.0)
+            {
+                currentImage = new OpacityEffect
+                {
+                    Opacity = currentLayer.Opacity,
+                    Source = currentImage
+                };
+            }
+
+            //Blend
+            if (currentLayer.BlendType != BlendType.Normal)
+            {
+                currentImage = Blend.Render
+                (
+                    currentImage,
+                    previousImage,
+                    currentLayer.BlendType
+                );
+            }
+
+            return new CompositeEffect
+            {
+                Sources =
+                {
+                    previousImage,
+                    currentImage,
+                }
+            };
+        }
     }
 }

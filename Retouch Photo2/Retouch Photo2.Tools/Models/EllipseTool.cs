@@ -20,7 +20,7 @@ namespace Retouch_Photo2.Tools.Models
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Override
-        public override Layer CreateLayer(Transformer transformer) => new EllipseLayer
+        public override ILayer CreateLayer(Transformer transformer) => new EllipseLayer
         {
             IsChecked = true,
             FillBrush = new Brush

@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Tools.Models
         private void BoxComplete()
         {
             //Add
-            foreach (Layer layer in this.ViewModel.Layers)
+            foreach (ILayer layer in this.ViewModel.Layers)
             {
                 bool contained = layer.Destination.Contained(this.boxCanvasRect);
 
@@ -60,7 +60,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
         /// <summary> <see cref = "CursorTool.Draw" />'s method. </summary>
-        public void BoxDraw(CanvasDrawingSession ds)
+        public void BoxDraw(CanvasDrawingSession drawingSession)
         {
             //Points
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
@@ -74,8 +74,8 @@ namespace Retouch_Photo2.Tools.Models
 
             //Geometry
             CanvasGeometry geometry = CanvasGeometry.CreatePolygon(this.ViewModel.CanvasDevice, points);
-            ds.FillGeometry(geometry, Windows.UI.Color.FromArgb(128, 30, 144, 255));
-            ds.DrawGeometry(geometry, Windows.UI.Colors.DodgerBlue, 1);
+            drawingSession.FillGeometry(geometry, Windows.UI.Color.FromArgb(128, 30, 144, 255));
+            drawingSession.DrawGeometry(geometry, Windows.UI.Colors.DodgerBlue, 1);
         }
     }
 }

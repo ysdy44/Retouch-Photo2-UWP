@@ -96,10 +96,10 @@ namespace Retouch_Photo2.Controls
 
             this.ListView.DragItemsStarting += (object s, DragItemsStartingEventArgs e) =>
             {
-                Layer setLayer = null;
+                ILayer setLayer = null;
                 foreach (object item in e.Items)
                 {
-                    if (item is Layer layer)
+                    if (item is ILayer layer)
                     {
                         setLayer = layer;
                         break;
@@ -121,7 +121,7 @@ namespace Retouch_Photo2.Controls
         /// <summary> DataTemplate's Grid Tapped. </summary>
         private void RootGrid_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            LayersControl.GetGridDataContext(sender, out Grid rootGrid, out Layer layer);
+            LayersControl.GetGridDataContext(sender, out Grid rootGrid, out ILayer layer);
 
             if (this.SelectionViewModel.Layer == layer) //FlyoutShow
             {
@@ -157,7 +157,7 @@ namespace Retouch_Photo2.Controls
         /// <summary> DataTemplate's Button Tapped. </summary>
         private void VisibilityButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            LayersControl.GetButtonDataContext(sender, out Grid rootGrid, out Layer layer);
+            LayersControl.GetButtonDataContext(sender, out Grid rootGrid, out ILayer layer);
 
             layer.Visibility = (layer.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
 
@@ -169,7 +169,7 @@ namespace Retouch_Photo2.Controls
         /// <summary> DataTemplate's CheckBox Tapped. </summary>
         private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)
         { 
-            LayersControl.GetButtonDataContext(sender, out Grid rootGrid, out Layer layer);
+            LayersControl.GetButtonDataContext(sender, out Grid rootGrid, out ILayer layer);
             
             layer.IsChecked = !layer.IsChecked;
 
@@ -188,11 +188,11 @@ namespace Retouch_Photo2.Controls
         /// <param name="senderGrid"> Grid. </param>
         /// <param name="rootGrid"> DataTemplate. </param>
         /// <param name="layer"> DataContext. </param>
-        public static void GetGridDataContext(object senderGrid, out Grid rootGrid, out Layer layer)
+        public static void GetGridDataContext(object senderGrid, out Grid rootGrid, out ILayer layer)
         {
             if (senderGrid is Grid rootGrid2)
             {
-                if (rootGrid2.DataContext is Layer layer2)
+                if (rootGrid2.DataContext is ILayer layer2)
                 {
                     rootGrid = rootGrid2;
                     layer = layer2;
@@ -209,13 +209,13 @@ namespace Retouch_Photo2.Controls
         /// <param name="senderButton"> Button. </param>
         /// <param name="rootGrid"> DataTemplate. </param>
         /// <param name="layer"> DataContext. </param>
-        public static void GetButtonDataContext(object senderButton, out Grid rootGrid, out Layer layer)
+        public static void GetButtonDataContext(object senderButton, out Grid rootGrid, out ILayer layer)
         {
             if (senderButton is Button button)
             {
                 if (button.Parent is Grid rootGrid2)
                 {
-                    if (rootGrid2.DataContext is Layer layer2)
+                    if (rootGrid2.DataContext is ILayer layer2)
                     {
                         rootGrid = rootGrid2;
                         layer = layer2;

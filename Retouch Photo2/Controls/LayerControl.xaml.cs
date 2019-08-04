@@ -25,8 +25,8 @@ namespace Retouch_Photo2.Controls
         TipViewModel TipViewModel => App.TipViewModel;
 
 
-        ObservableCollection<Layer> _reference => this.ViewModel.Layers;
-        ObservableCollection<Layer> _selection => this.SelectionViewModel.Layer.Children;
+        ObservableCollection<ILayer> _reference => this.ViewModel.Layers;
+        ObservableCollection<ILayer> _selection => this.SelectionViewModel.Layer.Children;
 
         //@Converter
         private double OpacityToValueConverter(float opacity) => opacity * 100.0d;
@@ -186,7 +186,7 @@ namespace Retouch_Photo2.Controls
                     case ListViewSelectionMode.Single:
                         {
                             //Clone
-                            Layer cloneLayer = this.SelectionViewModel.Layer.Clone(this.ViewModel.CanvasDevice);
+                            ILayer cloneLayer = this.SelectionViewModel.Layer.Clone(this.ViewModel.CanvasDevice);
 
                             //IsChecked
                             this.SelectionViewModel.Layer.IsChecked = false;
@@ -199,9 +199,9 @@ namespace Retouch_Photo2.Controls
                         break;
                     case ListViewSelectionMode.Multiple:
                         {
-                            List<Layer> cloneLayers = new List<Layer>();
+                            List<ILayer> cloneLayers = new List<ILayer>();
 
-                            foreach (Layer layer in this.SelectionViewModel.Layers)
+                            foreach (ILayer layer in this.SelectionViewModel.Layers)
                             {
                                 //Clone
                                 cloneLayers.Add(layer.Clone(this.ViewModel.CanvasDevice));
@@ -279,7 +279,7 @@ namespace Retouch_Photo2.Controls
                 });
 
 
-                foreach (Layer layer in groupLayer.Children)
+                foreach (ILayer layer in groupLayer.Children)
                 {
                     this.ViewModel.Layers.Remove(layer);//Remove
                 }
@@ -308,14 +308,14 @@ namespace Retouch_Photo2.Controls
 
                     //Insert
                     this.ViewModel.Layers.Remove(groupLayer);
-                    foreach (Layer layer in groupLayer.Children)
+                    foreach (ILayer layer in groupLayer.Children)
                     {
                         layer.IsChecked = true;
                         this.ViewModel.Layers.Insert(index, layer);//Insert
                     }
 
                     //SetMode
-                    IEnumerable<Layer> layers = groupLayer.Children;
+                    IEnumerable<ILayer> layers = groupLayer.Children;
                     this.SelectionViewModel.SetModeMultiple(layers);//Selection
 
                     this.ViewModel.Invalidate();//Invalidate
@@ -359,7 +359,7 @@ namespace Retouch_Photo2.Controls
                     // We need to take a Deferral as we won't be able to confirm the end
                     // of the operation synchronously
                     DragOperationDeferral def = e.GetDeferral();
-                    Layer getLayer = e.DataView.GetLayer();
+                    ILayer getLayer = e.DataView.GetLayer();
 
                     if (getLayer != this.SelectionViewModel.Layer)
                     {
@@ -386,7 +386,7 @@ namespace Retouch_Photo2.Controls
         /// <summary> DataTemplate's Button Tapped. </summary>
         private void VisibilityButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            LayersControl.GetButtonDataContext(sender, out Grid rootGrid, out Layer layer);
+            LayersControl.GetButtonDataContext(sender, out Grid rootGrid, out ILayer layer);
 
             layer.Visibility = (layer.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
 

@@ -56,7 +56,7 @@ namespace Retouch_Photo2.ViewModels.Selections
         /// Sets <see cref = "SelectionViewModel.Mode" /> to Single.
         /// </summary>
         /// <param name="layer"> The selection layer. </param>
-        public void SetModeSingle(Layer layer)
+        public void SetModeSingle(ILayer layer)
         {
             this.Transformer = layer.Destination;
             this.DsabledRadian = layer.DisabledRadian;//DisabledRadian
@@ -89,7 +89,7 @@ namespace Retouch_Photo2.ViewModels.Selections
             //////////////////////////
 
 
-            if (layer.GetFillColor() is Color color)
+            if (layer.FillColor is Color color)
             {
                 switch (this.FillOrStroke)
                 {
@@ -107,7 +107,7 @@ namespace Retouch_Photo2.ViewModels.Selections
         /// Sets <see cref = "SelectionViewModel.Mode" /> to Multiple.
         /// </summary>
         /// <param name="layers"> All selection layers. </param>
-        public void SetModeMultiple(IEnumerable<Layer> layers)
+        public void SetModeMultiple(IEnumerable<ILayer> layers)
         {
             float left = float.MaxValue;
             float top = float.MaxValue;
@@ -126,7 +126,7 @@ namespace Retouch_Photo2.ViewModels.Selections
                 }
 
                 //Foreach
-                foreach (Layer layer in layers)
+                foreach (ILayer layer in layers)
                 {
                     aaa(layer.Destination.LeftTop);
                     aaa(layer.Destination.RightTop);
@@ -149,7 +149,7 @@ namespace Retouch_Photo2.ViewModels.Selections
         /// </summary>
         /// <param name="layers"> All selection layers. </param>
         /// <param name="transformer"> transformer </param>
-        public void SetModeMultiple(IEnumerable<Layer> layers, Transformer transformer, bool disabledRadian)
+        public void SetModeMultiple(IEnumerable<ILayer> layers, Transformer transformer, bool disabledRadian)
         {
             this.Transformer = transformer;
             this.DsabledRadian = disabledRadian;
@@ -185,9 +185,9 @@ namespace Retouch_Photo2.ViewModels.Selections
         ///  Sets <see cref = "SelectionViewModel.Mode" />.
         /// </summary>
         /// <param name="layers"> Layers </param>
-        public void SetMode(Collection<Layer> layers)
+        public void SetMode(Collection<ILayer> layers)
         {
-            IEnumerable<Layer> checkedLayers = from item in layers where item.IsChecked select item;
+            IEnumerable<ILayer> checkedLayers = from item in layers where item.IsChecked select item;
             int count = checkedLayers.Count();
 
             if (count == 0)

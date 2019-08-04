@@ -3,10 +3,11 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Layers;
 using System.Numerics;
 using Windows.UI;
 
-namespace Retouch_Photo2.Layers.ILayer
+namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
     /// <see cref="Layer"/>'s IGeometryLayer .
@@ -17,8 +18,8 @@ namespace Retouch_Photo2.Layers.ILayer
         /// <summary>
         /// Create a specific geometry.
         /// </summary>
-        /// /// <param name="resourceCreator"> resourceCreator </param>
-        /// <param name="canvasToVirtualMatrix"> canvasToVirtualMatrix </param>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="canvasToVirtualMatrix"> The canvas-to-virtual matrix. </param>
         /// <returns> geometry </returns>
         public abstract CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix);
 
@@ -32,34 +33,44 @@ namespace Retouch_Photo2.Layers.ILayer
 
 
         //@Override
-        public override void SetFillColor(Color fillColor)
+        public override Color? FillColor
         {
-            this.FillBrush.Color = fillColor;
-            
-            if (this.FillBrush.Type != BrushType.Color)
+            get => this.FillBrush.Color;
+            set
             {
-                this.FillBrush.Type = BrushType.Color;
+                if (this.FillBrush.Type != BrushType.Color)
+                {
+                    this.FillBrush.Type = BrushType.Color;
+                }
+
+                if (value is Color color)
+                {
+                    this.FillBrush.Color = color;
+                }
             }
         }
-        public override Color? GetFillColor() => this.FillBrush.Color;
-
-
-        public override void SetStrokeColor(Color strokeColor)
-        {    
-            this.StrokeBrush.Color = strokeColor;
-
-            if (this.StrokeBrush.Type != BrushType.Color)
+        public override Color? StrokeColor
+        {
+            get => this.StrokeBrush.Color;
+            set
             {
-                this.StrokeBrush.Type = BrushType.Color;
+                if (this.StrokeBrush.Type != BrushType.Color)
+                {
+                    this.StrokeBrush.Type = BrushType.Color;
+                }
+
+                if (value is Color color)
+                {
+                    this.StrokeBrush.Color = color;
+                }
             }
         }
-        public override Color? GetStrokeColor() => this.StrokeBrush.Color;
 
 
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         {
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
-            using (CanvasDrawingSession ds = command.CreateDrawingSession())
+            using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
             {
                 CanvasGeometry geometry = this.CreateGeometry(resourceCreator, canvasToVirtualMatrix);
 
@@ -71,7 +82,7 @@ namespace Retouch_Photo2.Layers.ILayer
                             break;
 
                         case BrushType.Color:
-                            ds.FillGeometry(geometry, this.FillBrush.Color);
+                            drawingSession.FillGeometry(geometry, this.FillBrush.Color);
                             break;
 
                         case BrushType.LinearGradient:
@@ -85,7 +96,7 @@ namespace Retouch_Photo2.Layers.ILayer
                                     EndPoint = endPoint,
                                 };
 
-                                ds.FillGeometry(geometry, brush);
+                                drawingSession.FillGeometry(geometry, brush);
                             }
                             break;
 
@@ -102,7 +113,7 @@ namespace Retouch_Photo2.Layers.ILayer
                                     Center = center
                                 };
 
-                                ds.FillGeometry(geometry, brush);
+                                drawingSession.FillGeometry(geometry, brush);
                             }
                             break;
 
@@ -126,7 +137,7 @@ namespace Retouch_Photo2.Layers.ILayer
                                     Center = center
                                 };
 
-                                ds.FillGeometry(geometry, brush);
+                                drawingSession.FillGeometry(geometry, brush);
                             }
                             break;
 
@@ -148,7 +159,7 @@ namespace Retouch_Photo2.Layers.ILayer
                             break;
 
                         case BrushType.Color:
-                            ds.DrawGeometry(geometry, this.StrokeBrush.Color, strokeWidth);
+                            drawingSession.DrawGeometry(geometry, this.StrokeBrush.Color, strokeWidth);
                             break;
 
                         case BrushType.LinearGradient:
@@ -162,7 +173,7 @@ namespace Retouch_Photo2.Layers.ILayer
                                     EndPoint = endPoint,
                                 };
 
-                                ds.DrawGeometry(geometry, brush, strokeWidth);
+                                drawingSession.DrawGeometry(geometry, brush, strokeWidth);
                             }
                             break;
 
@@ -179,7 +190,7 @@ namespace Retouch_Photo2.Layers.ILayer
                                     Center = center
                                 };
 
-                                ds.DrawGeometry(geometry, brush, strokeWidth);
+                                drawingSession.DrawGeometry(geometry, brush, strokeWidth);
                             }
                             break;
 
@@ -203,7 +214,7 @@ namespace Retouch_Photo2.Layers.ILayer
                                     Center = center
                                 };
 
-                                ds.DrawGeometry(geometry, brush, strokeWidth);
+                                drawingSession.DrawGeometry(geometry, brush, strokeWidth);
                             }
                             break;
 
@@ -217,10 +228,10 @@ namespace Retouch_Photo2.Layers.ILayer
             }
             return command;
         }
-        public override void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession ds, Matrix3x2 matrix, Windows.UI.Color accentColor)
+        public override void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
         {
             CanvasGeometry geometry = this.CreateGeometry(resourceCreator, matrix);
-            ds.DrawGeometry(geometry, accentColor);
+            drawingSession.DrawGeometry(geometry, accentColor);
         }
 
         

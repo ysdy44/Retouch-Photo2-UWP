@@ -130,7 +130,7 @@ namespace Retouch_Photo2.ViewModels.Keyboards
         /// <summary>
         /// Notifies listeners that a property value has changed.
         /// </summary>
-        /// <param name="name"> Name of the property used to notify listeners. </param>
-        protected void OnPropertyChanged(string name) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        /// <param name="propertyName"> Name of the property used to notify listeners. </param>
+        protected void OnPropertyChanged(string propertyName) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

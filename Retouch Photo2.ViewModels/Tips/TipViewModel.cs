@@ -30,15 +30,15 @@ namespace Retouch_Photo2.ViewModels.Tips
             }
         }
         private bool isOpen;
-                     
+        
 
-        //Notify 
+        //@Notify 
         /// <summary> Multicast event for property change notifications. </summary>
         public event PropertyChangedEventHandler PropertyChanged;
         /// <summary>
         /// Notifies listeners that a property value has changed.
         /// </summary>
-        /// <param name="name"> Name of the property used to notify listeners. </param>
-        protected void OnPropertyChanged(string name) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        /// <param name="propertyName"> Name of the property used to notify listeners. </param>
+        protected void OnPropertyChanged(string propertyName) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

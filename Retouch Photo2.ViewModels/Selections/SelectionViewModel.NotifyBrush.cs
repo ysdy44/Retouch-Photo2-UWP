@@ -1,7 +1,7 @@
 ﻿using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Layers.ILayer;
+using Retouch_Photo2.Layers.Models;
 using System.ComponentModel;
 using System.Numerics;
 using Windows.UI.Xaml.Controls;
@@ -95,7 +95,7 @@ namespace Retouch_Photo2.ViewModels.Selections
         }
 
         /// <summary> Sets GeometryLayer. </summary>     
-        private void SetGeometryLayer(Layer layer)
+        private void SetGeometryLayer(ILayer layer)
         {
             if (layer is IGeometryLayer geometryLayer)
             {

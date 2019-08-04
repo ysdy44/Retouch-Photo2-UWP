@@ -16,7 +16,7 @@ namespace Retouch_Photo2.ViewModels.Selections
         /// </summary>
         /// <param name="action"> action </param>
         /// <param name="setChildrenValue"> Whether to set the value along with the child? </param>
-        public void SetValue(Action<Layer> action, bool setChildrenValue = false)
+        public void SetValue(Action<ILayer> action, bool setChildrenValue = false)
         {
             switch (this.Mode)
             {
@@ -38,7 +38,7 @@ namespace Retouch_Photo2.ViewModels.Selections
         /// </summary>
         /// <param name="action"> action </param>
         /// <param name="setChildrenValue"> Whether to set the value along with the child? </param>
-        private void SetValueSingle(Action<Layer> action, bool setChildrenValue = false)
+        private void SetValueSingle(Action<ILayer> action, bool setChildrenValue = false)
         {
             this.SetValueForeachChildren(action, this.Layer, setChildrenValue);
         }
@@ -48,9 +48,9 @@ namespace Retouch_Photo2.ViewModels.Selections
         /// </summary>
         /// <param name="action"> action </param>
         /// <param name="setChildrenValue"> Whether to set the value along with the child? </param>
-        private void SetValueMultiple(Action<Layer> action, bool setChildrenValue = false)
+        private void SetValueMultiple(Action<ILayer> action, bool setChildrenValue = false)
         {
-            foreach (Layer selectionLayer in this.Layers)
+            foreach (ILayer selectionLayer in this.Layers)
             {
                 this.SetValueForeachChildren(action, selectionLayer, setChildrenValue);
             }
@@ -63,13 +63,13 @@ namespace Retouch_Photo2.ViewModels.Selections
         /// <param name="action"> action </param>
         /// <param name="layer"> The source layer. </param>
         /// <param name="setChildrenValue"> Whether to set the value along with the child? </param>
-        private void SetValueForeachChildren(Action<Layer> action, Layer layer, bool setChildrenValue)
+        private void SetValueForeachChildren(Action<ILayer> action, ILayer layer, bool setChildrenValue)
         {
             action(layer);
 
             if (setChildrenValue)
             {
-                foreach (Layer child in layer.Children)
+                foreach (ILayer child in layer.Children)
                 {
                     this.SetValueForeachChildren(action, child, setChildrenValue);
                 }

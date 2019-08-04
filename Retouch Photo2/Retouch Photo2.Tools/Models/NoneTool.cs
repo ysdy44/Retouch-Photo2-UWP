@@ -24,6 +24,6 @@ namespace Retouch_Photo2.Tools.Models
         public override void Delta(Vector2 startingPoint, Vector2 point) { }
         public override void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted) { }
 
-        public override void Draw(CanvasDrawingSession ds) { }
+        public override void Draw(CanvasDrawingSession drawingSession) { }
     }
 }

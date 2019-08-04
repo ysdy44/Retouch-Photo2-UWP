@@ -23,7 +23,17 @@ namespace Retouch_Photo2.Layers.Models
         //@Override
         public override string Type => "Image";
         public override UIElement Icon => new ImageControl();
-        public override Layer Clone(ICanvasResourceCreator resourceCreator)
+        
+        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
+        {
+            return new Transform2DEffect
+            {
+                Source = this.ImageRe.Source,
+                TransformMatrix = base.GetMatrix() * canvasToVirtualMatrix
+            };
+        }
+
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             return new ImageLayer
             {
@@ -39,15 +49,6 @@ namespace Retouch_Photo2.Layers.Models
                 DisabledRadian = base.DisabledRadian,
 
                 ImageRe = this.ImageRe,
-            };
-        }
-        
-        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
-        {
-            return new Transform2DEffect
-            {
-                Source = this.ImageRe.Source,
-                TransformMatrix = base.GetMatrix() * canvasToVirtualMatrix
             };
         }
     }

@@ -124,12 +124,11 @@
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ILayer\IGeometryLayer.cs" />
+    <Compile Include="ILayer.cs" />
+    <Compile Include="Models\IGeometryLayer.cs" />
     <Compile Include="ImageRe.cs" />
-    <Compile Include="Layer.Color.cs" />
     <Compile Include="Layer.Notify.cs" />
     <Compile Include="Layer.cs" />
-    <Compile Include="Layer.Render.cs" />
     <Compile Include="LayerDataPackageExpansion.cs" />
     <Compile Include="Models\AcrylicLayer.cs" />
     <Compile Include="Models\EllipseLayer.cs" />

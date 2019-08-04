@@ -179,7 +179,7 @@ namespace Retouch_Photo2.Controls
                     {
                         Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
-                        foreach (Layer layer in this.ViewModel.Layers)
+                        foreach (ILayer layer in this.ViewModel.Layers)
                         {
                             if (layer.IsChecked)
                             {

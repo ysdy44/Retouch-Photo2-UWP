@@ -1,8 +1,7 @@
-﻿using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
+﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Controls;
-using Retouch_Photo2.Layers.ILayer;
+using Retouch_Photo2.Layers.Models;
 using System.Numerics;
 using Windows.UI.Xaml;
 
@@ -13,33 +12,9 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class EllipseLayer : IGeometryLayer
     {
-        //@Construct
-        public EllipseLayer()
-        {
-        }
-
         //@Override       
         public override string Type => "Ellipse";
         public override UIElement Icon => new EllipseControl();
-        public override Layer Clone(ICanvasResourceCreator resourceCreator)
-        {
-            return new EllipseLayer
-            {
-                Name=base.Name,
-                Opacity= base.Opacity,
-                BlendType= base.BlendType,
-
-                IsChecked = base.IsChecked,
-                Visibility = base.Visibility,
-
-                Source = base.Source,
-                Destination = base.Destination,
-                DisabledRadian = base.DisabledRadian,
-
-                FillBrush = base.FillBrush,
-                StrokeBrush = base.StrokeBrush,
-            };
-        }
         
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -82,6 +57,26 @@ namespace Retouch_Photo2.Layers.Models
             pathBuilder.EndFigure(CanvasFigureLoop.Closed);
             //Geometry
             return CanvasGeometry.CreatePath(pathBuilder);
+        }
+ 
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        {
+            return new EllipseLayer
+            {
+                Name=base.Name,
+                Opacity= base.Opacity,
+                BlendType= base.BlendType,
+
+                IsChecked = base.IsChecked,
+                Visibility = base.Visibility,
+
+                Source = base.Source,
+                Destination = base.Destination,
+                DisabledRadian = base.DisabledRadian,
+
+                FillBrush = base.FillBrush,
+                StrokeBrush = base.StrokeBrush,
+            };
         }
     }
 }

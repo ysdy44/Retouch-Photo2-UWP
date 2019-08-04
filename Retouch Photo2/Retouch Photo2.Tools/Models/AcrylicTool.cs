@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Tools.Models
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Override
-        public override Layer CreateLayer(Transformer transformer) => new AcrylicLayer
+        public override ILayer CreateLayer(Transformer transformer) => new AcrylicLayer
         {
             IsChecked = true,
             TintColor = this.SelectionViewModel.FillColor,

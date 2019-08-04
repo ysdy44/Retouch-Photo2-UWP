@@ -66,7 +66,7 @@ namespace Retouch_Photo2.Tools.Models
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, imageRe.Width, imageRe.Height);
 
             //Mezzanine
-            Layer createLayer = new ImageLayer()
+            ILayer createLayer = new ImageLayer()
             {
                 ImageRe = imageRe,
                 Source = transformerSource,
@@ -122,7 +122,7 @@ namespace Retouch_Photo2.Tools.Models
                 Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
 
                 //Mezzanine
-                Layer createLayer = new ImageLayer()
+                ILayer createLayer = new ImageLayer()
                 {
                     ImageRe = imageRe,
                     Source = transformerSource,
@@ -139,7 +139,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public override void Draw(CanvasDrawingSession ds)
+        public override void Draw(CanvasDrawingSession drawingSession)
         {
         }
 

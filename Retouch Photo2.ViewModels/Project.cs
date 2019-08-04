@@ -1,13 +1,7 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using FanKit.Transformers;
-using System;
 using System.Collections.Generic;
-using System.Numerics;
-using System.Threading.Tasks;
-using Windows.Storage;
-using Windows.Storage.Streams;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -26,7 +20,7 @@ namespace Retouch_Photo2.ViewModels
         public int Height { set; get; }
 
         /// <summary> <see cref = "Project" />'s layers. </summary>
-        public IEnumerable<Layer> Layers;
+        public IEnumerable<ILayer> Layers;
 
 
         //@Construct
@@ -46,7 +40,7 @@ namespace Retouch_Photo2.ViewModels
 
             this.Width = width;
             this.Height = height;
-            this.Layers = new List<Layer>()
+            this.Layers = new List<ILayer>()
             {
                  imageLayer
             };
@@ -61,7 +55,7 @@ namespace Retouch_Photo2.ViewModels
         {
             this.Width = width;
             this.Height = height;
-            this.Layers = new List<Layer>();
+            this.Layers = new List<ILayer>();
         }
     }
 }

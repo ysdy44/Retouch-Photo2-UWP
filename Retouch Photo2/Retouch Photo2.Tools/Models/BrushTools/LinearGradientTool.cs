@@ -2,7 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Layers.ILayer;
+using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using System.Numerics;
@@ -154,7 +154,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
         }
 
 
-        public void Draw(CanvasDrawingSession ds)
+        public void Draw(CanvasDrawingSession drawingSession)
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
@@ -162,22 +162,22 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
             Vector2 endPoint = Vector2.Transform(this.EndPoint, matrix);
 
             //Line
-            ds.DrawLine(startPoint, endPoint, Windows.UI.Colors.White, 4);
+            drawingSession.DrawLine(startPoint, endPoint, Windows.UI.Colors.White, 4);
 
             //Circle
-            ds.FillCircle(startPoint, 10, Windows.UI.Colors.White);
-            ds.FillCircle(endPoint, 10, Windows.UI.Colors.White);
+            drawingSession.FillCircle(startPoint, 10, Windows.UI.Colors.White);
+            drawingSession.FillCircle(endPoint, 10, Windows.UI.Colors.White);
 
             //Line
-            ds.DrawLine(startPoint, endPoint, this.ViewModel.AccentColor, 2);
+            drawingSession.DrawLine(startPoint, endPoint, this.ViewModel.AccentColor, 2);
 
             //Circle
             foreach (CanvasGradientStop stop in this.SelectionViewModel.BrushArray)
             {
                 Vector2 position = startPoint * (1.0f - stop.Position) + endPoint * stop.Position;
 
-                ds.FillCircle(position, 8, this.ViewModel.AccentColor);
-                ds.FillCircle(position, 6, stop.Color);
+                drawingSession.FillCircle(position, 8, this.ViewModel.AccentColor);
+                drawingSession.FillCircle(position, 6, stop.Color);
             }
             
         }

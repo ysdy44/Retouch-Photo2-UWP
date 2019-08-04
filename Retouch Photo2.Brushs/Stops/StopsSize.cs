@@ -45,13 +45,13 @@ namespace Retouch_Photo2.Brushs.Stops
         /// <summary>
         /// Draw linear-gradient.
         /// </summary>
-        /// <param name="ds"> CanvasDrawingSession </param>
-        /// <param name="resourceCreator"> resourceCreator </param>
+        /// <param name="drawingSession"> The drawing-session. </param>
+        /// <param name="resourceCreator"> The resource-creator. </param>
         /// <param name="array"> array </param>
-        public void DrawLinearGradient(CanvasDrawingSession ds, ICanvasResourceCreator resourceCreator, CanvasGradientStop[] array)
+        public void DrawLinearGradient(CanvasDrawingSession drawingSession, ICanvasResourceCreator resourceCreator, CanvasGradientStop[] array)
         {
             //LinearGradient
-            ds.FillRectangle(0, 0, this.OuterWidth, this.OuterHeight, new CanvasLinearGradientBrush(resourceCreator, array)
+            drawingSession.FillRectangle(0, 0, this.OuterWidth, this.OuterHeight, new CanvasLinearGradientBrush(resourceCreator, array)
             {
                 StartPoint = new Vector2(this.Left, this.Center),
                 EndPoint = new Vector2(this.Right, this.Center),
@@ -61,45 +61,45 @@ namespace Retouch_Photo2.Brushs.Stops
         /// <summary>
         /// Draw lines.
         /// </summary>
-        /// <param name="ds"> CanvasDrawingSession </param>
-        public void DrawLines(CanvasDrawingSession ds)
+        /// <param name="drawingSession"> The drawing-session. </param>
+        public void DrawLines(CanvasDrawingSession drawingSession)
         { 
             //Left
-            ds.DrawLine(this.Left, 0, this.Left, this.OuterHeight, Color.FromArgb(70, 127, 127, 127), 3);
-            ds.DrawLine(this.Left, 0, this.Left, this.OuterHeight, Colors.White);
+            drawingSession.DrawLine(this.Left, 0, this.Left, this.OuterHeight, Color.FromArgb(70, 127, 127, 127), 3);
+            drawingSession.DrawLine(this.Left, 0, this.Left, this.OuterHeight, Colors.White);
             //Right
-            ds.DrawLine(this.Right, 0, this.Right, this.OuterHeight, Color.FromArgb(70, 127, 127, 127), 3);
-            ds.DrawLine(this.Right, 0, this.Right, this.OuterHeight, Colors.White);
+            drawingSession.DrawLine(this.Right, 0, this.Right, this.OuterHeight, Color.FromArgb(70, 127, 127, 127), 3);
+            drawingSession.DrawLine(this.Right, 0, this.Right, this.OuterHeight, Colors.White);
             //Center
-            ds.DrawLine(this.Left, this.Center, this.Right, this.Center, Color.FromArgb(70, 127, 127, 127), 3);
-            ds.DrawLine(this.Left, this.Center, this.Right, this.Center, Colors.White);
+            drawingSession.DrawLine(this.Left, this.Center, this.Right, this.Center, Color.FromArgb(70, 127, 127, 127), 3);
+            drawingSession.DrawLine(this.Left, this.Center, this.Right, this.Center, Colors.White);
         }
 
         /// <summary>
         /// Draw nodes.
         /// </summary>
-        /// <param name="ds"> CanvasDrawingSession </param>
+        /// <param name="drawingSession"> The drawing-session. </param>
         /// <param name="manager"> StopsManager </param>
-        public void DrawNodes(CanvasDrawingSession ds, StopsManager manager)
+        public void DrawNodes(CanvasDrawingSession drawingSession, StopsManager manager)
         {
             //Stops
             for (int i = 0; i < manager.Count; i++)
             {
                 CanvasGradientStop stop = manager.Stops[i];
                 Vector2 position = new Vector2(this.OffsetToPosition(stop.Position), this.Center);
-                if (manager.Index == i) ds.FillCircle(position, 10, Colors.Black);
-                ds.DrawNode2(position, stop.Color);
+                if (manager.Index == i) drawingSession.FillCircle(position, 10, Colors.Black);
+                drawingSession.DrawNode2(position, stop.Color);
             }
 
             //Left
             Vector2 left = new Vector2(this.Left, this.Center);
-            if (manager.IsLeft) ds.FillCircle(left, 10, Colors.Black);
-            ds.DrawNode2(left, manager.LeftColor);
+            if (manager.IsLeft) drawingSession.FillCircle(left, 10, Colors.Black);
+            drawingSession.DrawNode2(left, manager.LeftColor);
 
             //Right
             Vector2 right = new Vector2(this.Right, this.Center);
-            if (manager.IsLeft) ds.FillCircle(right, 10, Colors.Black);
-            ds.DrawNode2(right, manager.LeftColor);
+            if (manager.IsLeft) drawingSession.FillCircle(right, 10, Colors.Black);
+            drawingSession.DrawNode2(right, manager.LeftColor);
         }
     }
 }
