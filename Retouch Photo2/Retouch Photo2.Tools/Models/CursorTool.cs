@@ -55,7 +55,7 @@ namespace Retouch_Photo2.Tools.Models
                 return;
             }
 
-            this.TipViewModel.TransformerTool.Started(startingPoint, false);//TransformerToolBase
+            this.TipViewModel.TransformerTool.Started(startingPoint, point, false);//TransformerToolBase
         }
         public override void Delta(Vector2 startingPoint, Vector2 point)
         {
@@ -85,7 +85,7 @@ namespace Retouch_Photo2.Tools.Models
                 }
             }
 
-            this.TipViewModel.TransformerTool.Complete(isSingleStarted); //TransformerToolBase
+            this.TipViewModel.TransformerTool.Complete(startingPoint, point, isSingleStarted); //TransformerToolBase
         }
 
 

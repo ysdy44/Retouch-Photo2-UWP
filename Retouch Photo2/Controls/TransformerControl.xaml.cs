@@ -98,17 +98,17 @@ namespace Retouch_Photo2.Controls
 
 
         /// <summary> Gets or sets <see cref = "TransformerControl" />'s tool. </summary>
-        public Tool Tool
+        public ITool Tool
         {
-            get { return (Tool)GetValue(ToolProperty); }
+            get { return (ITool)GetValue(ToolProperty); }
             set { SetValue(ToolProperty, value); }
         }
         /// <summary> Identifies the <see cref = "TransformerControl.Tool" /> dependency property. </summary>
-        public static readonly DependencyProperty ToolProperty = DependencyProperty.Register(nameof(Tool), typeof(Tool), typeof(TransformerControl), new PropertyMetadata(null, (sender, e) =>
+        public static readonly DependencyProperty ToolProperty = DependencyProperty.Register(nameof(Tool), typeof(ITool), typeof(TransformerControl), new PropertyMetadata(null, (sender, e) =>
         {
             TransformerControl con = (TransformerControl)sender;
 
-            if (e.NewValue is Tool value)
+            if (e.NewValue is ITool value)
             {
                 switch (value.Type)
                 {

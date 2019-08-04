@@ -140,17 +140,17 @@ namespace Retouch_Photo2.Pages
 
 
         /// <summary> Gets or sets <see cref = "DrawLayout" />'s tool. </summary>
-        public Tool Tool
+        public ITool Tool
         {
-            get { return (Tool)GetValue(ToolProperty); }
+            get { return (ITool)GetValue(ToolProperty); }
             set { SetValue(ToolProperty, value); }
         }
         /// <summary> Identifies the <see cref = "DrawLayout.Tool" /> dependency property. </summary>
-        public static readonly DependencyProperty ToolProperty = DependencyProperty.Register(nameof(Tool), typeof(Tool), typeof(DrawLayout), new PropertyMetadata(null, (sender, e) =>
+        public static readonly DependencyProperty ToolProperty = DependencyProperty.Register(nameof(Tool), typeof(ITool), typeof(DrawLayout), new PropertyMetadata(null, (sender, e) =>
         {
             DrawLayout con = (DrawLayout)sender;
 
-            if (e.NewValue is Tool newTool)
+            if (e.NewValue is ITool newTool)
             {
                 //Show
                 con.IconLeftIcon.Content = newTool.ShowIcon;
@@ -159,7 +159,7 @@ namespace Retouch_Photo2.Pages
                 con.ScrollViewer.Content = newTool.Page;
 
                 //If you choose a different tool, PhoneState will hided.
-                if (e.OldValue is Tool oldTool)
+                if (e.OldValue is ITool oldTool)
                 {
                     if (newTool.Type != oldTool.Type)
                     {

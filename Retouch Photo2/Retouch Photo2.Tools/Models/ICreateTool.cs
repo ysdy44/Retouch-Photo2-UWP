@@ -7,7 +7,7 @@ using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
 using System.Numerics;
 
-namespace Retouch_Photo2.Tools.ITool
+namespace Retouch_Photo2.Tools.Models
 {
     /// <summary>
     /// <see cref="Tool"/>'s ICreateTool.

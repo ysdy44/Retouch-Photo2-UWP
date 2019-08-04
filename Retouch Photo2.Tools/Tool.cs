@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Tools
         public abstract void Started(Vector2 startingPoint, Vector2 point);
         public abstract void Delta(Vector2 startingPoint, Vector2 point);
         public abstract void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted);
-        
+
         public abstract void Draw(CanvasDrawingSession drawingSession);
 
 
