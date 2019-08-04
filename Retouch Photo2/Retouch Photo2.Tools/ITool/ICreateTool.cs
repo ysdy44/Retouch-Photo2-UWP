@@ -38,7 +38,7 @@ namespace Retouch_Photo2.Tools.ITool
         public override void Starting(Vector2 point) { }
         public override void Started(Vector2 startingPoint, Vector2 point)
         {
-            if (this.TipViewModel.TransformerTool.Started(startingPoint)) return;//TransformerToolBase
+            if (this.TipViewModel.TransformerTool.Started(startingPoint, point)) return;//TransformerToolBase
 
             //Transformer
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
@@ -82,7 +82,7 @@ namespace Retouch_Photo2.Tools.ITool
         }
         public override void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
-            if (this.TipViewModel.TransformerTool.Complete(isSingleStarted)) return;//TransformerToolBase
+            if (this.TipViewModel.TransformerTool.Complete(startingPoint, point, isSingleStarted)) return;//TransformerToolBase
 
             if (isSingleStarted)
             {

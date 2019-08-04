@@ -1,16 +1,15 @@
-﻿using System;
-using System.Numerics;
-using FanKit.Transformers;
+﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Controls;
-using Retouch_Photo2.Tools.ITool;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Keyboards;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
+using System;
+using System.Numerics;
 
 namespace Retouch_Photo2.Tools.Models
 {

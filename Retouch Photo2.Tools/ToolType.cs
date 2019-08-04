@@ -1,7 +1,7 @@
 ﻿namespace Retouch_Photo2.Tools
 {
     /// <summary> 
-    /// Type of <see cref = "Tool" />.
+    /// Type of Tool.
     /// </summary>
     public enum ToolType
     {

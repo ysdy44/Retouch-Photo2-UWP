@@ -23,13 +23,48 @@ namespace Retouch_Photo2.Tools
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
 
 
-        //Transformer
         Transformer oldTransformer;
         TransformerMode TransformerMode;
 
 
-        //@Override
-        public override bool Starting(Vector2 point)
+        public bool SelectLayer(Vector2 point)
+        {
+            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+            Vector2 canvasPoint = Vector2.Transform(point, matrix);
+
+            ILayer selectedLayer = this.ViewModel.Layers.FirstOrDefault((layer) =>
+            {
+                if (layer.Visibility == Visibility.Visible)
+                {
+                    bool layerInQuadrangle = Transformer.InQuadrangle(canvasPoint, layer.Destination);
+                    if (layerInQuadrangle)
+                    {
+                        selectedLayer = layer;
+                        return true;
+                    }
+                }
+                return false;
+            });
+            if (selectedLayer == null) return false;
+
+
+            //Selection
+            this.SelectionViewModel.SetValue((layer) =>
+            {
+                layer.IsChecked = false;
+            });
+            this.TransformerMode = TransformerMode.Translation;//TransformerMode
+
+
+            //Selection
+            selectedLayer.IsChecked = true;
+            this.SelectionViewModel.SetModeSingle(selectedLayer);//Transformer
+            this.ViewModel.Invalidate();//Invalidate
+            return true;
+        }
+
+
+        public bool Starting(Vector2 point)
         {
             switch (this.SelectionViewModel.Mode)
             {
@@ -89,8 +124,7 @@ namespace Retouch_Photo2.Tools
 
             return true;
         }
-
-        public override bool Started(Vector2 startingPoint, bool isSetTransformerMode = true)
+        public bool Started(Vector2 startingPoint, Vector2 point, bool isSetTransformerMode = true)
         {
             if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return false;
 
@@ -113,8 +147,7 @@ namespace Retouch_Photo2.Tools
 
             return true;
         }
-
-        public override bool Delta(Vector2 startingPoint, Vector2 point)
+        public bool Delta(Vector2 startingPoint, Vector2 point)
         {
             if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return false;
 
@@ -138,8 +171,7 @@ namespace Retouch_Photo2.Tools
             this.ViewModel.Invalidate();//Invalidate
             return true;
         }
-
-        public override bool Complete(bool isSingleStarted)
+        public bool Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
             switch (this.SelectionViewModel.Mode)
             {
@@ -179,8 +211,7 @@ namespace Retouch_Photo2.Tools
             return true;
         }
 
-
-        public override void Draw(CanvasDrawingSession drawingSession)
+        public void Draw(CanvasDrawingSession drawingSession)
         {
             //Selection
             switch (this.SelectionViewModel.Mode)
@@ -198,42 +229,6 @@ namespace Retouch_Photo2.Tools
             }
         }
 
-
-        public override bool SelectLayer(Vector2 point)
-        {
-            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-            Vector2 canvasPoint = Vector2.Transform(point, matrix);
-
-            ILayer selectedLayer = this.ViewModel.Layers.FirstOrDefault((layer) =>
-            {
-                if (layer.Visibility == Visibility.Visible)
-                {
-                    bool layerInQuadrangle = Transformer.InQuadrangle(canvasPoint, layer.Destination);
-                    if (layerInQuadrangle)
-                    {
-                        selectedLayer = layer;
-                        return true;
-                    }
-                }
-                return false;
-            });
-            if (selectedLayer == null) return false;
-
-
-            //Selection
-            this.SelectionViewModel.SetValue((layer) =>
-            {
-                layer.IsChecked = false;
-            });
-            this.TransformerMode = TransformerMode.Translation;//TransformerMode
-
-
-            //Selection
-            selectedLayer.IsChecked = true;
-            this.SelectionViewModel.SetModeSingle(selectedLayer);//Transformer
-            this.ViewModel.Invalidate();//Invalidate
-            return true;
-        }
 
         /// <summary>
         /// Add the layer to the layers. 
@@ -274,5 +269,6 @@ namespace Retouch_Photo2.Tools
 
             return true;
         }
+
     }
 }

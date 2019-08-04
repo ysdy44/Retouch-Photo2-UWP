@@ -45,53 +45,53 @@ namespace Retouch_Photo2.ViewModels.Tips
 
 
         /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.TestApp.Tools.Tool" />. </summary>
-        public Tool Tool
+        public ITool Tool
         {
             get => this.tool;
             set
             {
                 //The current tool becomes the active tool.
-                Tool oldTool = this.tool;
-                oldTool.ToolOnNavigatedFrom();
+                ITool oldTool = this.tool;
+                oldTool.OnNavigatedFrom();
 
                 //The current page does not become an active page.
-                Tool newTool = value;
-                newTool.ToolOnNavigatedTo();
+                ITool newTool = value;
+                newTool.OnNavigatedTo();
 
                 this.tool = value;
                 this.OnPropertyChanged(nameof(this.Tool));//Notify 
             }
         }
-        private Tool tool;
+        private ITool tool;
 
-        /// <summary> <see cref="Retouch_Photo2.Tools.ITransformerTool"/>'s TransformerTool. </summary>
+        /// <summary> TransformerTool. </summary>
         public ITransformerTool TransformerTool;
 
 
 
-        /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s CursorTool. </summary>
-        public Tool CursorTool;
+        /// <summary> CursorTool. </summary>
+        public ITool CursorTool;
 
-        /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s ViewTool. </summary>
-        public Tool ViewTool;
+        /// <summary> ViewTool. </summary>
+        public ITool ViewTool;
 
-        /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s BrushTool. </summary>
-        public Tool BrushTool;
+        /// <summary> BrushTool. </summary>
+        public ITool BrushTool;
 
-        /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s RectangleTool. </summary>
-        public Tool RectangleTool;
+        /// <summary> RectangleTool. </summary>
+        public ITool RectangleTool;
 
-        /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s EllipseTool. </summary>
-        public Tool EllipseTool;
+        /// <summary> EllipseTool. </summary>
+        public ITool EllipseTool;
 
-        /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s PenTool. </summary>
-        public Tool PenTool;
+        /// <summary> PenTool. </summary>
+        public ITool PenTool;
 
-        /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s ImageTool. </summary>
-        public Tool ImageTool;
+        /// <summary> ImageTool. </summary>
+        public ITool ImageTool;
 
-        /// <summary> <see cref="Retouch_Photo2.Tools.Tool"/>'s AcrylicTool. </summary>
-        public Tool AcrylicTool;
+        /// <summary> AcrylicTool. </summary>
+        public ITool AcrylicTool;
         
 
         //////////////////////////////////////////////////////////////////////////////////////

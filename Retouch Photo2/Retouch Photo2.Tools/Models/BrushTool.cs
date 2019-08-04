@@ -38,7 +38,7 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Override        
-        public override void ToolOnNavigatedTo()
+        public override void OnNavigatedTo()
         {
             //Brush
             this.SelectionViewModel.SetBrushFormSingleMode(this.SelectionViewModel.FillOrStroke);

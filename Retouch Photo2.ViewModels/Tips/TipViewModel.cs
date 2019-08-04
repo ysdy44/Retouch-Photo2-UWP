@@ -10,7 +10,7 @@ namespace Retouch_Photo2.ViewModels.Tips
     {
 
         //@Construct
-        public TipViewModel(Tool tool)
+        public TipViewModel(ITool tool)
         {
             this.tool = tool;
         }

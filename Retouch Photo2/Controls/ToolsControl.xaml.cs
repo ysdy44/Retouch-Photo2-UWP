@@ -54,7 +54,7 @@ namespace Retouch_Photo2.Controls
             this.ConstructButton(this.AcrylicButton, this.TipViewModel.AcrylicTool);
         }
 
-        private void ConstructButton(Tools.Button button, Tool tool)
+        private void ConstructButton(Tools.Button button, ITool tool)
         {
             ToolType type = tool.Type;
 
