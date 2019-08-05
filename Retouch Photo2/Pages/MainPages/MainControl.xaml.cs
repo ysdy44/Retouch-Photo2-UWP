@@ -8,49 +8,51 @@ namespace Retouch_Photo2.Pages.MainPages
     public sealed partial class MainControl : Page
     {
 
+        //@Content
         /// <summary> <see cref = "MainControl" />'s AddButton. </summary>
-        public Windows.UI.Xaml.Controls.Button AddButton { get => this._AddButton.RootButton; set => this._AddButton.RootButton = value; }
+        public Windows.UI.Xaml.Controls.Button AddButton   => this._AddButton.RootButton;  
         /// <summary> <see cref = "MainControl" />'s PicturesButton. </summary>
-        public Windows.UI.Xaml.Controls.Button PicturesButton { get => this._PicturesButton.RootButton; set => this._PicturesButton.RootButton = value; }
+        public Windows.UI.Xaml.Controls.Button PicturesButton   => this._PicturesButton.RootButton;  
      
         /// <summary> <see cref = "MainControl" />'s SaveButton. </summary>
-        public Windows.UI.Xaml.Controls.Button SaveButton { get => this._SaveButton.RootButton; set => this._SaveButton.RootButton = value; }
+        public Windows.UI.Xaml.Controls.Button SaveButton   => this._SaveButton.RootButton;  
         /// <summary> <see cref = "MainControl" />'s ShareButton. </summary>
-        public Windows.UI.Xaml.Controls.Button ShareButton { get => this._ShareButton.RootButton; set => this._ShareButton.RootButton = value; }
+        public Windows.UI.Xaml.Controls.Button ShareButton   => this._ShareButton.RootButton;  
      
         /// <summary> <see cref = "MainControl" />'s DeleteButton. </summary>
-        public Windows.UI.Xaml.Controls.Button DeleteButton { get => this._DeleteButton.RootButton; set => this._DeleteButton.RootButton = value; }
+        public Windows.UI.Xaml.Controls.Button DeleteButton   => this._DeleteButton.RootButton;  
         /// <summary> <see cref = "MainControl" />'s DuplicateButton. </summary>
-        public Windows.UI.Xaml.Controls.Button DuplicateButton { get => this._DuplicateButton.RootButton; set => this._DuplicateButton.RootButton = value; }
+        public Windows.UI.Xaml.Controls.Button DuplicateButton   => this._DuplicateButton.RootButton;  
      
         /// <summary> <see cref = "MainControl" />'s FolderButton. </summary>
-        public Windows.UI.Xaml.Controls.Button FolderButton { get => this._FolderButton.RootButton; set => this._FolderButton.RootButton = value; }
+        public Windows.UI.Xaml.Controls.Button FolderButton   => this._FolderButton.RootButton;  
         /// <summary> <see cref = "MainControl" />'s MoveButton. </summary>
-        public Windows.UI.Xaml.Controls.Button MoveButton { get => this._MoveButton.RootButton; set => this._MoveButton.RootButton = value; }
+        public Windows.UI.Xaml.Controls.Button MoveButton   => this._MoveButton.RootButton; 
 
 
         //Second
         /// <summary> <see cref = "MainControl" />'s SecondAddButton. </summary>
-        public Windows.UI.Xaml.Controls.Button SecondAddButton { get => this._SecondAddButton.RootButton; set => this._SecondAddButton.RootButton = value; }
+        public Windows.UI.Xaml.Controls.Button SecondAddButton   => this._SecondAddButton.RootButton;  
         /// <summary> <see cref = "MainControl" />'s SecondPicturesButton. </summary>
-        public Windows.UI.Xaml.Controls.Button SecondPicturesButton { get => this._SecondPicturesButton.RootButton; set => this._SecondPicturesButton.RootButton = value; }
+        public Windows.UI.Xaml.Controls.Button SecondPicturesButton   => this._SecondPicturesButton.RootButton;  
 
         /// <summary> <see cref = "MainControl" />'s SecondSaveButton. </summary>
-        public Windows.UI.Xaml.Controls.Button SecondSaveButton { get => this._SecondSaveButton.RootButton; set => this._SecondSaveButton.RootButton = value; }
+        public Windows.UI.Xaml.Controls.Button SecondSaveButton   => this._SecondSaveButton.RootButton;  
         /// <summary> <see cref = "MainControl" />'s SecondShareButton. </summary>
-        public Windows.UI.Xaml.Controls.Button SecondShareButton { get => this._SecondShareButton.RootButton; set => this._SecondShareButton.RootButton = value; }
+        public Windows.UI.Xaml.Controls.Button SecondShareButton   => this._SecondShareButton.RootButton;  
 
         /// <summary> <see cref = "MainControl" />'s SecondDeleteButton. </summary>
-        public Windows.UI.Xaml.Controls.Button SecondDeleteButton { get => this._SecondDeleteButton.RootButton; set => this._SecondDeleteButton.RootButton = value; }
+        public Windows.UI.Xaml.Controls.Button SecondDeleteButton   => this._SecondDeleteButton.RootButton;  
         /// <summary> <see cref = "MainControl" />'s SecondDuplicateButton. </summary>
-        public Windows.UI.Xaml.Controls.Button SecondDuplicateButton { get => this._SecondDuplicateButton.RootButton; set => this._SecondDuplicateButton.RootButton = value; }
+        public Windows.UI.Xaml.Controls.Button SecondDuplicateButton   => this._SecondDuplicateButton.RootButton;  
 
         /// <summary> <see cref = "MainControl" />'s SecondFolderButton. </summary>
-        public Windows.UI.Xaml.Controls.Button SecondFolderButton { get => this._SecondFolderButton.RootButton; set => this._SecondFolderButton.RootButton = value; }
+        public Windows.UI.Xaml.Controls.Button SecondFolderButton   => this._SecondFolderButton.RootButton;  
         /// <summary> <see cref = "MainControl" />'s SecondMoveButton. </summary>
-        public Windows.UI.Xaml.Controls.Button SecondMoveButton { get => this._SecondMoveButton.RootButton; set => this._SecondMoveButton.RootButton = value; }
+        public Windows.UI.Xaml.Controls.Button SecondMoveButton   => this._SecondMoveButton.RootButton;
 
 
+        //@Construct
         public MainControl()
         {
             this.InitializeComponent();

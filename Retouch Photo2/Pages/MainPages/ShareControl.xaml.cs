@@ -2,7 +2,9 @@
 
 namespace Retouch_Photo2.Pages.MainPages
 {
-    /// <summary> Format of <see cref="ShareControl"/>. </summary>
+    /// <summary>
+    /// Format of <see cref="ShareControl"/>. 
+    /// </summary>
     public enum ShareFormatType
     {
         JPEG,
@@ -17,19 +19,15 @@ namespace Retouch_Photo2.Pages.MainPages
     /// </summary>
     public sealed partial class ShareControl : UserControl
     {
-
+        //@Content
         /// <summary> Format. </summary>
-        public SaveFormatType Format
-        {
-            get => (SaveFormatType)this.ComboBox.SelectedIndex;
-            set => this.ComboBox.SelectedIndex = (int)value;
-        }
-
+        public SaveFormatType Format { get => (SaveFormatType)this.ComboBox.SelectedIndex; set => this.ComboBox.SelectedIndex = (int)value; }
         /// <summary> <see cref = "ShareControl" />'s OKButton. </summary>
-        public Windows.UI.Xaml.Controls.Button OKButton { get => this._OKButton.RootButton; set => this._OKButton.RootButton = value; }
+        public Windows.UI.Xaml.Controls.Button OKButton => this._OKButton.RootButton;
         /// <summary> <see cref = "ShareControl" />'s CancelButton. </summary>
-        public Windows.UI.Xaml.Controls.Button CancelButton { get => this._CancelButton.RootButton; set => this._CancelButton.RootButton = value; }
+        public Windows.UI.Xaml.Controls.Button CancelButton => this._CancelButton.RootButton;
 
+        //@Construct
         public ShareControl()
         {
             this.InitializeComponent();

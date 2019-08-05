@@ -1,6 +1,6 @@
 ﻿namespace Retouch_Photo2.Effects
 {
-    /// <summary> State of <see cref="Effect"/>. </summary>
+    /// <summary> State of <see cref="IEffect"/>. </summary>
     public enum EffectsState
     {
         /// <summary> Disable. </summary>

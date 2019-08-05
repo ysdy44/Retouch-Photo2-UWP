@@ -1,34 +1,28 @@
 ﻿using Retouch_Photo2.Effects.Controls;
 using Retouch_Photo2.Effects.Pages;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Effects.Models
 {
     /// <summary>
-    /// <see cref="Effect"/>'s SharpenEffect .
+    /// <see cref="IEffect"/>'s SharpenEffect .
     /// </summary>
-    public class SharpenEffect : Effect
+    public class SharpenEffect : IEffect
     {
-        //Icon
-        readonly SharpenControl SharpenControl = new SharpenControl();
-        //Page
-        readonly SharpenPage SharpenPage = new SharpenPage();
+        SharpenPage SharpenPage { get; } = new SharpenPage();
 
-        //@Construct
-        public SharpenEffect()
-        {
-            base.Type = EffectType.Sharpen;
-            base.Button = new Retouch_Photo2.Effects.Button(this.SharpenControl);
-            base.Page = this.SharpenPage;
-        }
+        public EffectType Type => EffectType.Sharpen;
+        public Button Button { get; } = new Retouch_Photo2.Effects.Button(new SharpenControl());
+        public Page Page => this.SharpenPage;
 
-        //@override
-        public override bool GetIsOn(EffectManager effectManager) => effectManager.Sharpen_IsOn;
-        public override void SetIsOn(EffectManager effectManager, bool isOn) => effectManager.Sharpen_IsOn = isOn;
-        public override void Reset(EffectManager effectManager)
+
+        public bool GetIsOn(EffectManager effectManager) => effectManager.Sharpen_IsOn;
+        public void SetIsOn(EffectManager effectManager, bool isOn) => effectManager.Sharpen_IsOn = isOn;
+        public void Reset(EffectManager effectManager)
         {
             effectManager.Sharpen_Amount = 0;
         }
-        public override void SetPageValueByEffectManager(EffectManager effectManager)
+        public void SetPageValueByEffectManager(EffectManager effectManager)
         {
             this.SharpenPage.AmountSlider.Value = effectManager.Sharpen_Amount * 10.0f;
         }

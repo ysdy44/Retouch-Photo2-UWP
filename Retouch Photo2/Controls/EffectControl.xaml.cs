@@ -41,8 +41,8 @@ namespace Retouch_Photo2.Controls
         private EffectsState state;
 
 
-        Effect Effect;
-        List<Effect> Effects = new List<Effect>
+        IEffect Effect;
+        List<IEffect> Effects = new List<IEffect>
         {
             new GaussianBlurEffect(),
             new DirectionalBlurEffect(),
@@ -100,7 +100,7 @@ namespace Retouch_Photo2.Controls
             this.State = EffectsState.Disable;
             this.ItemsControl.ItemsSource = from item in this.Effects select item.Button;
 
-            foreach (Effect effect in this.Effects)
+            foreach (IEffect effect in this.Effects)
             {
                 //Binding
                 this.Binding(effect);
@@ -146,7 +146,7 @@ namespace Retouch_Photo2.Controls
         /// Bind the events of the buttons in each effect.
         /// </summary>
         /// <param name="effect"> Effect </param>
-        private void Binding(Effect effect)
+        private void Binding(IEffect effect)
         {
             //ToggleSwitch
             effect.Button.ToggleSwitch.Toggled += (s, e) =>

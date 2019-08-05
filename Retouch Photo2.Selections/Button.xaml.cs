@@ -11,7 +11,7 @@ namespace Retouch_Photo2.Selections
 
         //@Content
         /// <summary> Root button. </summary>
-        public Windows.UI.Xaml.Controls.Button RootButton { get => this._RootButton; set => this._RootButton = value; }
+        public Windows.UI.Xaml.Controls.Button RootButton => this._RootButton;
         /// <summary> Enabled icon. </summary>
         public UIElement EnabledIcon { get => this.EnabledViewbox.Child; set => this.EnabledViewbox.Child = value; }
         /// <summary> Disabled icon. </summary>

@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Controls
-{   
+{
     /// <summary> 
     /// State of <see cref="AdjustmentControl"/>. 
     /// </summary>
@@ -104,7 +104,7 @@ namespace Retouch_Photo2.Controls
                 con.State = AdjustmentControlState.Disable;
             }
         }));
-        
+
         #endregion
 
 
@@ -119,7 +119,7 @@ namespace Retouch_Photo2.Controls
                     this.ListView.ItemsSource = this.PageList;
 
                 if (this.FilterGridView.ItemsSource == null)
-                    this.FilterGridView.ItemsSource = (await AdjustmentControl.GetFilterSource()).ToList();
+                    this.FilterGridView.ItemsSource = (await Filter.GetFilterSource()).ToList();
             };
 
 
@@ -200,7 +200,7 @@ namespace Retouch_Photo2.Controls
         /// <summary> DataTemplate's EditButton Tapped. </summary>
         private void EditButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            AdjustmentControl.GetGridDataContext(sender, out Grid rootGrid, out IAdjustment adjustment);
+            AdjustmentControl.GetGridDataContext(sender, out IAdjustment adjustment);
 
             if (adjustment == null) return;
             if (adjustment.Visibility == Visibility.Collapsed) return;
@@ -215,7 +215,7 @@ namespace Retouch_Photo2.Controls
         /// <summary> DataTemplate's RemoveButton Tapped. </summary>
         private void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            AdjustmentControl.GetGridDataContext(sender, out Grid rootGrid, out IAdjustment adjustment);
+            AdjustmentControl.GetGridDataContext(sender, out IAdjustment adjustment);
 
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
@@ -248,81 +248,24 @@ namespace Retouch_Photo2.Controls
         /// <summary>
         /// Get the data context of the Grid.
         /// </summary>
-        /// <param name="senderGrid"> Grid. </param>
-        /// <param name="rootGrid"> DataTemplate. </param>
+        /// <param name="sender"> Button. </param>
         /// <param name="adjustment"> DataContext. </param>
-        public static void GetGridDataContext(object senderGrid, out Grid rootGrid, out IAdjustment adjustment)
+        public static void GetGridDataContext(object sender, out IAdjustment adjustment)
         {
-            if (senderGrid is Grid rootGrid2)
+            if (sender is Button button)
             {
-                if (rootGrid2.DataContext is IAdjustment layer2)
+                if (button.Parent is Grid rootGrid)
                 {
-                    rootGrid = rootGrid2;
-                    adjustment = layer2;
-                    return;
+                    if (rootGrid.DataContext is IAdjustment adjustment2)
+                    {
+                        adjustment = adjustment2;
+                        return;
+                    }
                 }
             }
 
-            rootGrid = null;
             adjustment = null;
         }
-
-
-        #region File
-
-
-        //Filter
-        public static async Task<IEnumerable<Filter>> GetFilterSource()
-        {
-            string json = await AdjustmentControl.ReadFromLocalFolder("Filter.json");
-
-            if (json == null)
-            {
-                json = await AdjustmentControl.ReadFromApplicationPackage("ms-appx:///Json/Filter.json");
-                AdjustmentControl.WriteToLocalFolder(json, "ms-appx:///Json/Filter.json");
-            }
-            IEnumerable<Filter> source = Filter.GetFiltersFromJson(json);
-
-            return source;
-        }
-
-        /// <summary> Read json file from Application Package. </summary> 
-        public static async Task<string> ReadFromApplicationPackage(string fileName)
-        {
-            Uri uri = new Uri(fileName);
-            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(uri);
-            return await FileIO.ReadTextAsync(file);
-        }
-
-        /// <summary> Read json file from Local Folder. </summary> 
-        public static async Task<string> ReadFromLocalFolder(string fileName)
-        {
-            try
-            {
-                StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync(fileName);
-                return await FileIO.ReadTextAsync(file);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        /// <summary> Write json file to Local Folder. </summary> 
-        public static async void WriteToLocalFolder(string json, string fileName)
-        {
-            try
-            {
-                StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
-                await FileIO.WriteTextAsync(file, json);
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-
-        #endregion
 
     }
 }

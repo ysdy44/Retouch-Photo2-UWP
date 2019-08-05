@@ -1,36 +1,30 @@
 ﻿using Retouch_Photo2.Effects.Controls;
 using Retouch_Photo2.Effects.Pages;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Effects.Models
 {
     /// <summary>
-    /// <see cref="Effect"/>'s StraightenEffect .
+    /// <see cref="IEffect"/>'s StraightenEffect .
     /// </summary>
-    public class StraightenEffect : Effect
+    public class StraightenEffect : IEffect
     {
-        //Icon
-        readonly StraightenControl StraightenControl = new StraightenControl();
-        //Page
-        readonly StraightenPage StraightenPage = new StraightenPage();
+        StraightenPage StraightenPage { get; } = new StraightenPage();
 
-        //@Construct
-        public StraightenEffect()
-        {
-            base.Type = EffectType.Straighten;
-            base.Button = new Retouch_Photo2.Effects.Button(this.StraightenControl);
-            base.Page = this.StraightenPage;
-        }
+        public EffectType Type => EffectType.Straighten;
+        public Button Button { get; } = new Retouch_Photo2.Effects.Button(new StraightenControl());
+        public Page Page => this.StraightenPage;
 
-        //@override
-        public override bool GetIsOn(EffectManager effectManager) => effectManager.Straighten_IsOn;
-        public override void SetIsOn(EffectManager effectManager, bool isOn) => effectManager.Straighten_IsOn = isOn;
-        public override void Reset(EffectManager effectManager)
+
+        public bool GetIsOn(EffectManager effectManager) => effectManager.Straighten_IsOn;
+        public void SetIsOn(EffectManager effectManager, bool isOn) => effectManager.Straighten_IsOn = isOn;
+        public void Reset(EffectManager effectManager)
         {
             effectManager.Straighten_Angle = 0;
         }
-        public override void SetPageValueByEffectManager(EffectManager effectManager)
+        public void SetPageValueByEffectManager(EffectManager effectManager)
         {
-            this.StraightenPage.AnglePicker.Radians = effectManager.Straighten_Angle* 4.0f; ;
+            this.StraightenPage.AnglePicker.Radians = effectManager.Straighten_Angle * 4.0f; ;
         }
     }
 }

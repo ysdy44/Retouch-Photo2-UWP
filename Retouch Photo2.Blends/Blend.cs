@@ -1,83 +1,76 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Blends.Models;
-using System.Collections.Generic;
-using System.Linq;
-using Windows.UI.Xaml;
+using Microsoft.Graphics.Canvas.Effects;
 
 namespace Retouch_Photo2.Blends
 {
     /// <summary>
-    /// Blend Classes.
+    /// Provides static blend rendering method.
     /// </summary>
-    public abstract class Blend
+    public class Blend
     {
-        /// <summary> <see cref="Blend">'s type. </summary>
-        public BlendType Type;
-        /// <summary> <see cref="Blend">'s icon. </summary>
-        public FrameworkElement Icon => this.GetIcon();
-
-        //@Abstract
-        /// <summary>
-        /// Gets icon.
-        /// </summary>
-        /// <returns></returns>
-        protected abstract FrameworkElement GetIcon();
-        /// <summary>
-        /// Gets a specific rended-blend.
-        /// </summary>
-        /// <param name="background"> Background image. </param>
-        /// <param name="foreground"> Foreground image. </param>
-        /// <returns> ICanvasImage </returns>
-        protected abstract ICanvasImage GetRender(ICanvasImage background, ICanvasImage foreground);
-
         //@Static
         /// <summary>
-        /// Render images and layers together.
+        /// Render images and blend together.
         /// </summary>      
         /// <param name="background"> Background image. </param>
         /// <param name="foreground"> Foreground image. </param>
         /// <param name="type"> Type </param>
-        /// <returns> ICanvasImage </returns>
-        public static ICanvasImage Render(ICanvasImage background, ICanvasImage foreground, BlendType type) => Blend.BlendList.FirstOrDefault(e => e.Type == type).GetRender(background, foreground);
-
-        //@Static
-        public static List<Blend> BlendList = new List<Blend>
+        /// <returns> The rendered blend. </returns>
+        public static ICanvasImage Render(ICanvasImage background, ICanvasImage foreground, BlendType type)
         {
-             new NormalBlend(),
-            
-             new MultiplyBlend(),
-             new ScreenBlend(),            
-             new DissolveBlend(),
-            
-             new DarkenBlend(),            
-             new LightenBlend(),          
-             new DarkerColorBlend(),           
-             new LighterColorBlend(),
-          
-             new ColorBurnBlend(),
-             new ColorDodgeBlend(),
-             new LinearBurnBlend(),
-             new LinearDodgeBlend(),
-                     
-             new OverlayBlend(),            
-             new SoftLightBlend(),          
-             new HardLightBlend(),      
-             new VividLightBlend(),         
-             new LinearLightBlend(),         
-             new PinLightBlend(),
-            
-             new HardMixBlend(),     
-             new DifferenceBlend(),            
-             new ExclusionBlend(),
-          
-             new HueBlend(),
-             new SaturationBlend(),          
-             new ColorBlend(),
-           
-             new LuminosityBlend(),          
-             new SubtractBlend(),           
-             new DivisionBlend(),
-        };
+            if (type== BlendType.Normal)
+            {
+                return new CompositeEffect
+                {
+                    Sources =
+                    {
+                        foreground,
+                        background
+                    }
+                };
+            }
 
+            return new BlendEffect
+            {
+                Background = background,
+                Foreground = foreground,
+                Mode = Blend.GetMode(type)
+            };
+        } 
+
+        private static BlendEffectMode GetMode(BlendType type)
+        {
+            switch (type)
+            {
+                case BlendType.Normal: return BlendEffectMode.Multiply;
+                case BlendType.Multiply: return BlendEffectMode.Multiply;
+                case BlendType.Screen: return BlendEffectMode.Screen;
+                case BlendType.Dissolve: return BlendEffectMode.Dissolve;
+                case BlendType.Darken: return BlendEffectMode.Darken;
+                case BlendType.Lighten: return BlendEffectMode.Lighten;
+                case BlendType.DarkerColor: return BlendEffectMode.DarkerColor;
+                case BlendType.LighterColor: return BlendEffectMode.LighterColor;
+                case BlendType.ColorBurn: return BlendEffectMode.ColorBurn;
+                case BlendType.ColorDodge: return BlendEffectMode.ColorDodge;
+                case BlendType.LinearBurn: return BlendEffectMode.LinearBurn;
+                case BlendType.LinearDodge: return BlendEffectMode.LinearDodge;
+                case BlendType.Overlay: return BlendEffectMode.Overlay;
+                case BlendType.SoftLight: return BlendEffectMode.SoftLight;
+                case BlendType.HardLight: return BlendEffectMode.HardLight;
+                case BlendType.VividLight: return BlendEffectMode.VividLight;
+                case BlendType.LinearLight: return BlendEffectMode.LinearLight;
+                case BlendType.PinLight: return BlendEffectMode.PinLight;
+                case BlendType.HardMix: return BlendEffectMode.HardMix;
+                case BlendType.Difference: return BlendEffectMode.Difference;
+                case BlendType.Exclusion: return BlendEffectMode.Exclusion;
+                case BlendType.Hue: return BlendEffectMode.Hue;
+                case BlendType.Saturation: return BlendEffectMode.Saturation;
+                case BlendType.Color: return BlendEffectMode.Color;
+                case BlendType.Luminosity: return BlendEffectMode.Luminosity;
+                case BlendType.Subtract: return BlendEffectMode.Subtract;
+                case BlendType.Division: return BlendEffectMode.Division;
+                default: return BlendEffectMode.Multiply;
+            }
+        }
     }
 }

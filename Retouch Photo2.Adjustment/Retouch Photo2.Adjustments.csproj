@@ -106,6 +106,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AdjustmentHandler.cs" />
     <Compile Include="IAdjustment.cs" />
     <Compile Include="IAdjustmentPage.cs" />
     <Compile Include="Filter.cs" />

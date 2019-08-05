@@ -192,33 +192,6 @@
     <Compile Include="Controls\VividLightControl.xaml.cs">
       <DependentUpon>VividLightControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\ColorBlend.cs" />
-    <Compile Include="Models\ColorBurnBlend.cs" />
-    <Compile Include="Models\ColorDodgeBlend.cs" />
-    <Compile Include="Models\DarkenBlend.cs" />
-    <Compile Include="Models\DarkerColorBlend.cs" />
-    <Compile Include="Models\DifferenceBlend.cs" />
-    <Compile Include="Models\DissolveBlend.cs" />
-    <Compile Include="Models\DivisionBlend.cs" />
-    <Compile Include="Models\ExclusionBlend.cs" />
-    <Compile Include="Models\HardLightBlend.cs" />
-    <Compile Include="Models\HardMixBlend.cs" />
-    <Compile Include="Models\HueBlend.cs" />
-    <Compile Include="Models\LightenBlend.cs" />
-    <Compile Include="Models\LighterColorBlend.cs" />
-    <Compile Include="Models\LinearBurnBlend.cs" />
-    <Compile Include="Models\LinearDodgeBlend.cs" />
-    <Compile Include="Models\LinearLightBlend.cs" />
-    <Compile Include="Models\LuminosityBlend.cs" />
-    <Compile Include="Models\MultiplyBlend.cs" />
-    <Compile Include="Models\NormalBlend.cs" />
-    <Compile Include="Models\OverlayBlend.cs" />
-    <Compile Include="Models\PinLightBlend.cs" />
-    <Compile Include="Models\SaturationBlend.cs" />
-    <Compile Include="Models\ScreenBlend.cs" />
-    <Compile Include="Models\SoftLightBlend.cs" />
-    <Compile Include="Models\SubtractBlend.cs" />
-    <Compile Include="Models\VividLightBlend.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo.Blends.rd.xml" />
   </ItemGroup>

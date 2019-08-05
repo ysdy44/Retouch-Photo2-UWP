@@ -1,34 +1,28 @@
 ﻿using Retouch_Photo2.Effects.Controls;
 using Retouch_Photo2.Effects.Pages;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Effects.Models
 {
     /// <summary>
-    /// <see cref="Effect"/>'s OutlineEffect .
+    /// <see cref="IEffect"/>'s OutlineEffect .
     /// </summary>
-    public class OutlineEffect : Effect
+    public class OutlineEffect : IEffect
     {
-        //Icon
-        readonly OutlineControl OutlineControl = new OutlineControl();
-        //Page
-        readonly OutlinePage OutlinePage = new OutlinePage();
+        OutlinePage OutlinePage { get; } = new OutlinePage();
 
-        //@Construct
-        public OutlineEffect()
-        {
-            base.Type = EffectType.Outline;
-            base.Button = new Retouch_Photo2.Effects.Button(this.OutlineControl);
-            base.Page = this.OutlinePage;
-        }
+        public EffectType Type => EffectType.Outline;
+        public Button Button { get; } = new Retouch_Photo2.Effects.Button(new OutlineControl());
+        public Page Page => this.OutlinePage;
 
-        //@override
-        public override bool GetIsOn(EffectManager effectManager) => effectManager.Outline_IsOn;
-        public override void SetIsOn(EffectManager effectManager, bool isOn) => effectManager.Outline_IsOn = isOn;
-        public override void Reset(EffectManager effectManager)
+
+        public bool GetIsOn(EffectManager effectManager) => effectManager.Outline_IsOn;
+        public void SetIsOn(EffectManager effectManager, bool isOn) => effectManager.Outline_IsOn = isOn;
+        public void Reset(EffectManager effectManager)
         {
             effectManager.Outline_Size = 0;
         }
-        public override void SetPageValueByEffectManager(EffectManager effectManager)
+        public void SetPageValueByEffectManager(EffectManager effectManager)
         {
             this.OutlinePage.SizeSlider.Value = effectManager.Outline_Size;
         }

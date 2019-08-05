@@ -5,10 +5,6 @@ using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Adjustments
 {
-    //@Delegate
-    public delegate void AdjustmentHandler(IAdjustment adjustment);
-    public delegate void AdjustmentsHandler(IEnumerable<IAdjustment> adjustments);
-
     /// <summary> 
     /// Provides icon and data for adjustments.
     /// </summary>
@@ -33,7 +29,7 @@ namespace Retouch_Photo2.Adjustments
         /// Gets a specific rended-image.
         /// </summary>
         /// <param name="image"> previousImage </param>
-        /// <returns> The rendered iamge. </returns>
+        /// <returns> The rendered adjustment. </returns>
         ICanvasImage GetRender(ICanvasImage image);
         /// <summary>
         /// Get IAdjustment own copy.

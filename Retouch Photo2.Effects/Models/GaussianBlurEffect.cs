@@ -1,34 +1,28 @@
 ﻿using Retouch_Photo2.Effects.Controls;
 using Retouch_Photo2.Effects.Pages;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Effects.Models
 {
     /// <summary>
-    /// <see cref="Effect"/>'s GaussianBlurEffect .
+    /// <see cref="IEffect"/>'s GaussianBlurEffect .
     /// </summary>
-    public class GaussianBlurEffect : Effect
+    public class GaussianBlurEffect : IEffect
     {
-        //Icon
-        readonly GaussianBlurControl GaussianBlurControl = new GaussianBlurControl();
-        //Page
-        readonly GaussianBlurPage GaussianBlurPage = new GaussianBlurPage();
+        GaussianBlurPage GaussianBlurPage { get; } = new GaussianBlurPage();
 
-        //@Construct
-        public GaussianBlurEffect()
-        {
-            base.Type = EffectType.GaussianBlur;
-            base.Button = new Retouch_Photo2.Effects.Button(this.GaussianBlurControl);
-            base.Page = this.GaussianBlurPage;
-        }
+        public EffectType Type => EffectType.GaussianBlur;
+        public Button Button { get; } = new Retouch_Photo2.Effects.Button(new GaussianBlurControl());
+        public Page Page => this.GaussianBlurPage;
 
-        //@override
-        public override bool GetIsOn(EffectManager effectManager) => effectManager.GaussianBlur_IsOn;
-        public override void SetIsOn(EffectManager effectManager, bool isOn) => effectManager.GaussianBlur_IsOn = isOn;
-        public override void Reset(EffectManager effectManager)
+
+        public bool GetIsOn(EffectManager effectManager) => effectManager.GaussianBlur_IsOn;
+        public void SetIsOn(EffectManager effectManager, bool isOn) => effectManager.GaussianBlur_IsOn = isOn;
+        public void Reset(EffectManager effectManager)
         {
             effectManager.GaussianBlur_BlurAmount = 0;
-         }
-        public override void SetPageValueByEffectManager(EffectManager effectManager)
+        }
+        public void SetPageValueByEffectManager(EffectManager effectManager)
         {
             this.GaussianBlurPage.BlurAmountSlider.Value = effectManager.GaussianBlur_BlurAmount;
         }

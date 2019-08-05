@@ -7,7 +7,7 @@ using Windows.UI;
 namespace Retouch_Photo2.Effects
 {
     /// <summary> 
-    /// <see cref = "Effect" />'s manager. 
+    /// <see cref = "IEffect" />'s manager. 
     /// </summary>
     public class EffectManager
     {

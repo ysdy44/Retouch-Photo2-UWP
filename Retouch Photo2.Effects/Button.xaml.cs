@@ -12,8 +12,7 @@ namespace Retouch_Photo2.Effects
         public Windows.UI.Xaml.Controls.Button RootButton => this._RootButton;
         /// <summary> <see cref = "Button" />'s ToggleSwitch. </summary>
         public Windows.UI.Xaml.Controls.ToggleSwitch ToggleSwitch => this._ToggleSwitch;
-
-
+        
         #region DependencyProperty
 
         /// <summary> 

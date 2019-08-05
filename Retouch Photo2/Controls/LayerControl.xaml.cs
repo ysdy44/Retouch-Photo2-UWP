@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using Retouch_Photo2.Blends;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
@@ -139,8 +140,10 @@ namespace Retouch_Photo2.Controls
 
 
             //Blend
-            this.BlendControl.TypeChanged += (type) =>
+            this.BlendControl.ComboBox.SelectionChanged += (s,e) =>
             {
+                BlendType type = (BlendType)this.BlendControl.ComboBox.SelectedIndex;
+
                 //Selection
                 this.SelectionViewModel.BlendType = type;
                 this.SelectionViewModel.SetValue((layer) =>
