@@ -22,7 +22,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.InitializeComponent();
         }
 
-        //@override
+        
         public IAdjustment GetNewAdjustment() => new InvertAdjustment();
         public IAdjustment GetAdjustment() => this.InvertAdjustment;
         public void SetAdjustment(IAdjustment value)

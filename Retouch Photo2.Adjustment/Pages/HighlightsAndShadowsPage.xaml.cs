@@ -47,7 +47,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
         }
 
-        //@override
+        
         public IAdjustment GetNewAdjustment() => new HighlightsAndShadowsAdjustment();
         public IAdjustment GetAdjustment() => this.HighlightsAndShadowsAdjustment;
         public void SetAdjustment(IAdjustment value)

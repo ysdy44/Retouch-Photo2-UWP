@@ -10,13 +10,15 @@ using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
 using System;
 using System.Numerics;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
     /// <summary>
-    /// <see cref="Tool"/>'s ImageTool.
+    /// <see cref="ITool"/>'s ImageTool.
     /// </summary>
-    public class ImageTool : Tool
+    public partial class ImageTool : ITool
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
@@ -28,21 +30,15 @@ namespace Retouch_Photo2.Tools.Models
         float SizeWidth;
         float SizeHeight;
 
-        //@Construct
-        public ImageTool()
-        {
-            base.Type = ToolType.Image;
-            base.Icon = new ImageControl();
-            base.ShowIcon = new ImageControl();
-            base.Page = new ImagePage();
-        }
+
+        public ToolType Type => ToolType.Image;
+        public FrameworkElement Icon { get; } = new ImageControl();
+        public FrameworkElement ShowIcon { get; } = new ImageControl();
+        public Page Page { get; } = new ImagePage();
 
 
-        public override void Starting(Vector2 point)
-        {
-
-        }
-        public override void Started(Vector2 startingPoint, Vector2 point)
+        public void Starting(Vector2 point) { }
+        public void Started(Vector2 startingPoint, Vector2 point)
         {
             ImageRe imageRe = this.SelectionViewModel.ImageRe;
 
@@ -78,7 +74,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
-        public override void Delta(Vector2 startingPoint, Vector2 point)
+        public void Delta(Vector2 startingPoint, Vector2 point)
         {
             if (this.MezzanineViewModel.Layer == null) return;
 
@@ -91,7 +87,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate();//Invalidate
         }
-        public override void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
             if (this.MezzanineViewModel.Layer == null) return;
 
@@ -102,7 +98,7 @@ namespace Retouch_Photo2.Tools.Models
                 //ImageRe
                 if (imageRe == null) return;
                 if (imageRe.IsStoryboardNotify == true) return;
-                
+
                 //Transformer
                 float sizeWidth = imageRe.Width;
                 float sizeHeight = imageRe.Height;
@@ -138,119 +134,10 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public override void Draw(CanvasDrawingSession drawingSession)
-        {
-        }
+        public void Draw(CanvasDrawingSession drawingSession) { }
 
 
-        public Transformer CreateTransformer(Vector2 startingPoint, Vector2 point, float sizeWidth, float sizeHeight)
-        {
-            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-            Transformer canvasTransformer = this.GetAspectRatioRectangle(startingPoint, point, sizeWidth, sizeHeight);
-            return canvasTransformer * inverseMatrix;
-        }
-
-        /// <summary>
-        /// Get a rectangle with the same size scale.
-        /// </summary>
-        /// <param name="startingPoint"> starting-point </param>
-        /// <param name="point"> point </param>
-        /// <param name="sizeWidth"> The source size width. </param>
-        /// <param name="sizeHeight"> The source size height. </param>
-        /// <returns> Transformer </returns>
-        private Transformer GetAspectRatioRectangle(Vector2 startingPoint, Vector2 point, float sizeWidth, float sizeHeight)
-        {
-            float lengthSquared = Vector2.DistanceSquared(startingPoint, point);
-
-            //Height not less than 10
-            if (sizeWidth > sizeHeight)
-            {
-                float heightSquared = lengthSquared / (1 + (sizeWidth * sizeWidth) / (sizeHeight * sizeHeight));
-                float height = (float)Math.Sqrt(heightSquared) / 1.4142135623730950488016887242097f;
-
-                if (height < 10) height = 10;
-                float width = height * sizeWidth / sizeHeight;
-
-                return this.GetRectangleInQuadrant(startingPoint, point, width, height);
-            }
-            //Width not less than 10
-            else if (sizeWidth < sizeHeight)
-            {
-                float widthSquared = lengthSquared / (1 + (sizeHeight * sizeHeight) / (sizeWidth * sizeWidth));
-                float width = (float)Math.Sqrt(widthSquared) / 1.4142135623730950488016887242097f; ;
-
-                if (width < 10) width = 10;
-                float height = width * sizeHeight / sizeWidth;
-
-                return this.GetRectangleInQuadrant(startingPoint, point, width, height);
-            }
-            //Width equals height
-            else
-            {
-                float spare = (float)Math.Sqrt(lengthSquared) / 1.4142135623730950488016887242097f; ;
-
-                return this.GetRectangleInQuadrant(startingPoint, point, spare, spare);
-            }
-        }
-
-        /// <summary>
-        /// Get a rectangle corresponding to the 1, 2, 3 or 4 quadrant.
-        /// </summary>
-        /// <param name="startingPoint"> starting-point </param>
-        /// <param name="point"> point </param>
-        /// <param name="sizeWidth"> The source size width. </param>
-        /// <param name="sizeHeight"> The source size height. </param>
-        /// <returns> Transformer </returns>
-        private Transformer GetRectangleInQuadrant(Vector2 startingPoint, Vector2 point, float width, float height)
-        {
-            bool xAxis = (point.X >= startingPoint.X);
-            bool yAxis = (point.Y >= startingPoint.Y);
-
-            //Fourth Quadrant  
-            if (xAxis && yAxis)
-            {
-                return new Transformer
-                {
-                    LeftTop = new Vector2(startingPoint.X, startingPoint.Y),
-                    RightTop = new Vector2(startingPoint.X + width, startingPoint.Y),
-                    RightBottom = new Vector2(startingPoint.X + width, startingPoint.Y + height),
-                    LeftBottom = new Vector2(startingPoint.X, startingPoint.Y + height),
-                };
-            }
-            //Third Quadrant  
-            else if (xAxis == false && yAxis)
-            {
-                return new Transformer
-                {
-                    LeftTop = new Vector2(startingPoint.X, startingPoint.Y),
-                    RightTop = new Vector2(startingPoint.X - width, startingPoint.Y),
-                    RightBottom = new Vector2(startingPoint.X - width, startingPoint.Y + height),
-                    LeftBottom = new Vector2(startingPoint.X, startingPoint.Y + height),
-                };
-            }
-            //First Quantity
-            else if (xAxis && yAxis == false)
-            {
-                return new Transformer
-                {
-                    LeftTop = new Vector2(startingPoint.X, startingPoint.Y),
-                    RightTop = new Vector2(startingPoint.X + width, startingPoint.Y),
-                    RightBottom = new Vector2(startingPoint.X + width, startingPoint.Y - height),
-                    LeftBottom = new Vector2(startingPoint.X, startingPoint.Y - height),
-                };
-            }
-            //Second Quadrant
-            else
-            {
-                return new Transformer
-                {
-                    LeftTop = new Vector2(startingPoint.X, startingPoint.Y),
-                    RightTop = new Vector2(startingPoint.X - width, startingPoint.Y),
-                    RightBottom = new Vector2(startingPoint.X - width, startingPoint.Y - height),
-                    LeftBottom = new Vector2(startingPoint.X, startingPoint.Y - height),
-                };
-            }
-        }
-
+        public void OnNavigatedTo() { }
+        public void OnNavigatedFrom() { }
     }
 }

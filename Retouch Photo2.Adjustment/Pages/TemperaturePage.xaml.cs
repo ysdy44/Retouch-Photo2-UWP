@@ -35,7 +35,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
         }
 
-        //@override
+        
         public IAdjustment GetNewAdjustment() => new TemperatureAdjustment();
         public IAdjustment GetAdjustment() => this.TemperatureAdjustment;
         public void SetAdjustment(IAdjustment value)

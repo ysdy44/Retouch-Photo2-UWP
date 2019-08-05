@@ -7,14 +7,15 @@ using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
 using System.Numerics;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
     /// <summary>
-    /// <see cref="Tool"/>'s BrushTool.
+    /// <see cref="ITool"/>'s BrushTool.
     /// </summary>
-    public class BrushTool : Tool
+    public class BrushTool : ITool
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
@@ -26,28 +27,16 @@ namespace Retouch_Photo2.Tools.Models
         RadialGradientTool RadialGradientTool = new RadialGradientTool();
         EllipticalGradientTool EllipticalGradientTool = new EllipticalGradientTool();
 
+        public ToolType Type=> ToolType.Brush;
+        public FrameworkElement Icon { get; } = new BrushControl();
+        public FrameworkElement ShowIcon { get; } = new BrushControl();
+        public Page Page { get; }= new BrushPage();
+        
 
-        //@Construct
-        public BrushTool()
-        {
-            base.Type = ToolType.Brush;
-            base.Icon = new BrushControl();
-            base.ShowIcon = new BrushControl();
-            base.Page = new BrushPage();
-        }
-
-
-        //@Override        
-        public override void OnNavigatedTo()
-        {
-            //Brush
-            this.SelectionViewModel.SetBrushFormSingleMode(this.SelectionViewModel.FillOrStroke);
-        }
-
-        public override void Starting(Vector2 point)
+        public void Starting(Vector2 point)
         {
         }
-        public override void Started(Vector2 startingPoint, Vector2 point)
+        public void Started(Vector2 startingPoint, Vector2 point)
         {
             //Selection
             if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return;
@@ -82,7 +71,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate();//Invalidate
         }
-        public override void Delta(Vector2 startingPoint, Vector2 point)
+        public void Delta(Vector2 startingPoint, Vector2 point)
         {
             //Selection
             if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return;
@@ -108,7 +97,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate();//Invalidate
         }
-        public override void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
             //Selection
             if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return;
@@ -123,7 +112,7 @@ namespace Retouch_Photo2.Tools.Models
             }
         }
 
-        public override void Draw(CanvasDrawingSession drawingSession)
+        public void Draw(CanvasDrawingSession drawingSession)
         {
             switch (this.SelectionViewModel.BrushType)
             {
@@ -144,5 +133,9 @@ namespace Retouch_Photo2.Tools.Models
                     break;
             }
         }
+
+
+        public void OnNavigatedTo()=>   this.SelectionViewModel.SetBrushFormSingleMode(this.SelectionViewModel.FillOrStroke);
+        public void OnNavigatedFrom() { }
     }
 }

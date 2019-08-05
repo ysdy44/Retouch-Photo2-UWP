@@ -7,13 +7,24 @@ using Retouch_Photo2.ViewModels.Keyboards;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
 using System.Numerics;
+using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools;
+using Retouch_Photo2.Retouch_Photo2.Tools.Pages;
+using Retouch_Photo2.Tools.Controls;
+using Retouch_Photo2.ViewModels;
+using Retouch_Photo2.ViewModels.Selections;
+using Retouch_Photo2.ViewModels.Tips;
+using System.Numerics;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
     /// <summary>
-    /// <see cref="Tool"/>'s CursorTool.
+    /// <see cref="ITool"/>'s CursorTool.
     /// </summary>
-    public partial class CursorTool : Tool
+    public partial class CursorTool : ITool
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
@@ -26,18 +37,14 @@ namespace Retouch_Photo2.Tools.Models
         bool isBox;
         TransformerRect boxCanvasRect;
 
-        //@Construct
-        public CursorTool()
-        {
-            base.Type = ToolType.Cursor;
-            base.Icon = new CursorControl();
-            base.ShowIcon = new CursorControl();
-            base.Page = new CursorPage();
-        }
 
-
-        //@Override
-        public override void Starting(Vector2 point)
+        public ToolType Type=> ToolType.Cursor;
+        public FrameworkElement Icon { get; }= new CursorControl();
+        public FrameworkElement ShowIcon { get; }= new CursorControl();
+        public Page Page { get; }= new CursorPage();
+        
+        
+        public void Starting(Vector2 point)
         {
             this.isBox = false; //Box
 
@@ -45,7 +52,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.isBox = true; //Box
         }
-        public override void Started(Vector2 startingPoint, Vector2 point)
+        public void Started(Vector2 startingPoint, Vector2 point)
         {
             //Box
             if (this.isBox)
@@ -57,7 +64,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.TipViewModel.TransformerTool.Started(startingPoint, point, false);//TransformerToolBase
         }
-        public override void Delta(Vector2 startingPoint, Vector2 point)
+        public void Delta(Vector2 startingPoint, Vector2 point)
         {
             //Box
             if (this.isBox)
@@ -69,7 +76,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.TipViewModel.TransformerTool.Delta(startingPoint, point); //TransformerToolBase
         }
-        public override void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
             //Box
             if (this.isBox)
@@ -89,7 +96,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public override void Draw(CanvasDrawingSession drawingSession)
+        public void Draw(CanvasDrawingSession drawingSession)
         {
             //Box
             if (this.isBox)
@@ -100,5 +107,9 @@ namespace Retouch_Photo2.Tools.Models
 
             this.TipViewModel.TransformerTool.Draw(drawingSession);//TransformerToolBase
         }
+
+
+        public void OnNavigatedTo() { }
+        public void OnNavigatedFrom() { }
     }
 }

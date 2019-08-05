@@ -6,6 +6,8 @@ using Retouch_Photo2.Tools.Controls;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
@@ -18,7 +20,8 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
-        //@Override
+
+        //@Coverride
         public override ILayer CreateLayer(Transformer transformer)
         {
             return new RectangleLayer
@@ -35,13 +38,9 @@ namespace Retouch_Photo2.Tools.Models
             };
         }
 
-        //@Construct
-        public RectangleTool()
-        {
-            base.Type = ToolType.Rectangle;
-            base.Icon = new RectangleControl();
-            base.ShowIcon = new RectangleControl();
-            base.Page = new RectanglePage();
-        }      
+        public override ToolType Type => ToolType.Rectangle;
+        public override FrameworkElement Icon { get; } = new RectangleControl();
+        public override FrameworkElement ShowIcon { get; } = new RectangleControl();
+        public override Page Page { get; } = new RectanglePage();
     }
 }

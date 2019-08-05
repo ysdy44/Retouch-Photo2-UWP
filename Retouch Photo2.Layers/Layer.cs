@@ -21,8 +21,8 @@ namespace Retouch_Photo2.Layers
         //@Abstract
         public abstract string Type { get; }
         public abstract UIElement Icon { get; }
-        public virtual Color? FillColor { get; set; }
-        public virtual Color? StrokeColor { get; set; }
+        public virtual Color? FillColor { get; set; } = null;
+        public virtual Color? StrokeColor { get; set; } = null;
 
 
         public string Name { get; set; } = string.Empty;

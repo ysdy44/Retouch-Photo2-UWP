@@ -30,7 +30,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
         }
 
-        //@override
+        
         public IAdjustment GetNewAdjustment() => new HueRotationAdjustment();
         public IAdjustment GetAdjustment() => this.HueRotationAdjustment;
         public void SetAdjustment(IAdjustment value)

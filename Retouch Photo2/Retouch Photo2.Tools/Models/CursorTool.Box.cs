@@ -8,9 +8,9 @@ using System.Numerics;
 namespace Retouch_Photo2.Tools.Models
 {
     /// <summary>
-    /// <see cref="Tool"/>'s CursorTool.
+    /// <see cref="ITool"/>'s CursorTool.
     /// </summary>
-    public partial class CursorTool : Tool
+    public partial class CursorTool : ITool
     {
         /// <summary> <see cref = "CursorTool.Delta" />'s method. </summary>
         private void BoxDelta(Vector2 startingPoint, Vector2 point)

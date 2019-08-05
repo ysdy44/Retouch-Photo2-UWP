@@ -47,7 +47,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
         }
 
-        //@override
+        
         public IAdjustment GetNewAdjustment() => new BrightnessAdjustment();
         public IAdjustment GetAdjustment() => this.BrightnessAdjustment;
         public void SetAdjustment(IAdjustment value)

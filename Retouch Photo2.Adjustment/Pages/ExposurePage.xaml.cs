@@ -29,7 +29,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
         }
 
-        //@override
+        
         public IAdjustment GetNewAdjustment() => new ExposureAdjustment();
         public IAdjustment GetAdjustment() => this.ExposureAdjustment;
         public void SetAdjustment(IAdjustment value)

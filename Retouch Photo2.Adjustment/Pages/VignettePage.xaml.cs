@@ -52,7 +52,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
         }
 
-        //@override
+        
         public IAdjustment GetNewAdjustment() => new VignetteAdjustment();
         public IAdjustment GetAdjustment() => this.VignetteAdjustment;
         public void SetAdjustment(IAdjustment value)

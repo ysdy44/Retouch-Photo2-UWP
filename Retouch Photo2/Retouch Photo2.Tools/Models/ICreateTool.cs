@@ -6,13 +6,15 @@ using Retouch_Photo2.ViewModels.Keyboards;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
 using System.Numerics;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
     /// <summary>
-    /// <see cref="Tool"/>'s ICreateTool.
+    /// <see cref="ITool"/>'s ICreateTool.
     /// </summary>
-    public abstract class ICreateTool : Tool
+    public abstract class ICreateTool : ITool
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
@@ -29,14 +31,14 @@ namespace Retouch_Photo2.Tools.Models
         /// <returns> Layer </returns>
         public abstract ILayer CreateLayer(Transformer transformer);
 
-        //@Construct
-        public ICreateTool()
-        {
-        }
+        public abstract ToolType Type { get; }
+        public abstract FrameworkElement Icon { get; }
+        public abstract FrameworkElement ShowIcon { get; }
+        public abstract Page Page { get; }
 
-        //@Override
-        public override void Starting(Vector2 point) { }
-        public override void Started(Vector2 startingPoint, Vector2 point)
+
+        public void Starting(Vector2 point) { }
+        public void Started(Vector2 startingPoint, Vector2 point)
         {
             if (this.TipViewModel.TransformerTool.Started(startingPoint, point)) return;//TransformerToolBase
 
@@ -58,7 +60,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
-        public override void Delta(Vector2 startingPoint, Vector2 point)
+        public void Delta(Vector2 startingPoint, Vector2 point)
         {
             if (this.TipViewModel.TransformerTool.Delta(startingPoint, point)) return;//TransformerToolBase
 
@@ -80,7 +82,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate();//Invalidate
         }
-        public override void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
             if (this.TipViewModel.TransformerTool.Complete(startingPoint, point, isSingleStarted)) return;//TransformerToolBase
 
@@ -112,9 +114,13 @@ namespace Retouch_Photo2.Tools.Models
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
 
-        public override void Draw(CanvasDrawingSession drawingSession)
+        public void Draw(CanvasDrawingSession drawingSession)
         {
             this.TipViewModel.TransformerTool.Draw(drawingSession);//TransformerToolBase
         }
+
+
+        public void OnNavigatedTo() { }
+        public void OnNavigatedFrom() { }
     }
 }

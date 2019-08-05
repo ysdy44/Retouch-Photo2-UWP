@@ -191,6 +191,7 @@
     <Compile Include="Retouch Photo2.Tools\Models\CursorTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\EllipseTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\ImageTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\ImageTool.Rectangle.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\NoneTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\PenTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\RectangleTool.cs" />
@@ -753,9 +754,7 @@
       <Version>1.23.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Retouch Photo2.Tools\ITool\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Retouch Photo2.Adjustment\Retouch Photo2.Adjustments.csproj">
       <Project>{7256c005-0e5d-4c38-9115-e4eef9978233}</Project>

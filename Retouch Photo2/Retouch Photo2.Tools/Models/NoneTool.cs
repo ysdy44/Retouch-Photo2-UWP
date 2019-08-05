@@ -1,29 +1,30 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Tools;
 using System.Numerics;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
     /// <summary>
-    /// <see cref="Tool"/>'s NoneTool.
+    /// <see cref="ITool"/>'s NoneTool.
     /// </summary>
-    public class NoneTool : Tool
+    public class NoneTool : ITool
     {
-        //@Construct
-        public NoneTool()
-        {
-            base.Type = ToolType.None;
-            base.Icon = null;
-            base.ShowIcon = null;
-            base.Page = null;
-        }
+        public ToolType Type=>ToolType.None;
+        public FrameworkElement Icon { get; } = null;
+        public FrameworkElement ShowIcon { get; }= null;
+        public Page Page { get; }= null;
 
-        //@Override
-        public override void Starting(Vector2 point) { }
-        public override void Started(Vector2 startingPoint, Vector2 point) { }
-        public override void Delta(Vector2 startingPoint, Vector2 point) { }
-        public override void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted) { }
+        
+        public void Starting(Vector2 point) { }
+        public void Started(Vector2 startingPoint, Vector2 point) { }
+        public void Delta(Vector2 startingPoint, Vector2 point) { }
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted) { }
 
-        public override void Draw(CanvasDrawingSession drawingSession) { }
+        public void Draw(CanvasDrawingSession drawingSession) { }
+
+
+        public void OnNavigatedTo() { }
+        public void OnNavigatedFrom() { }
     }
 }

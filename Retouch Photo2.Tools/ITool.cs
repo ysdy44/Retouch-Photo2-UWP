@@ -11,13 +11,13 @@ namespace Retouch_Photo2.Tools
     public interface ITool
     {
         /// <summary> Gets or Sets IITool's type. </summary>
-        ToolType Type { get; set; }
+        ToolType Type { get; }
         /// <summary> Gets or Sets IITool's icon. </summary>
-        FrameworkElement Icon { get; set; }
+        FrameworkElement Icon { get; }
         /// <summary> Gets or Sets IITool's icon2. </summary>
-        FrameworkElement ShowIcon { get; set; }
+        FrameworkElement ShowIcon { get; }
         /// <summary> Gets or Sets IITool's page. </summary>
-        Page Page { get; set; }
+        Page Page { get; }
 
 
         /// <summary>

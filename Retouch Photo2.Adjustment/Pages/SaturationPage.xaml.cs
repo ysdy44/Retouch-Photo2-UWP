@@ -29,7 +29,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
         }
 
-        //@override
+        
         public IAdjustment GetNewAdjustment() => new SaturationAdjustment();
         public IAdjustment GetAdjustment() => this.SaturationAdjustment;
         public void SetAdjustment(IAdjustment value)

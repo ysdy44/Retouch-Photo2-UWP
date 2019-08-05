@@ -238,7 +238,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
         }
 
-        //@override
+        
         public IAdjustment GetNewAdjustment() => new GammaTransferAdjustment();
         public IAdjustment GetAdjustment() => this.GammaTransferAdjustment;
         public void SetAdjustment(IAdjustment value)

@@ -26,6 +26,7 @@ namespace Retouch_Photo2.Controls
             get { return (ToolType)GetValue(ToolTypeProperty); }
             set { SetValue(ToolTypeProperty, value); }
         }
+        /// <summary> Identifies the <see cref = "ToolsControl.ToolType" /> dependency property. </summary>
         public static readonly DependencyProperty ToolTypeProperty = DependencyProperty.Register(nameof(ToolType), typeof(ToolType), typeof(ToolsControl), new PropertyMetadata(ToolType.None));
 
         #endregion

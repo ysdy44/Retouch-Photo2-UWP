@@ -6,6 +6,8 @@ using Retouch_Photo2.Tools.Controls;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
@@ -17,6 +19,7 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+
 
         //@Override
         public override ILayer CreateLayer(Transformer transformer) => new EllipseLayer
@@ -32,13 +35,9 @@ namespace Retouch_Photo2.Tools.Models
             Destination = transformer,
         };
 
-        //@Construct
-        public EllipseTool()
-        {
-            base.Type = ToolType.Ellipse;
-            base.Icon = new EllipseControl();
-            base.ShowIcon = new EllipseControl();
-            base.Page = new EllipsePage();
-        }
+        public override ToolType Type => ToolType.Ellipse;
+        public override FrameworkElement Icon { get; } = new EllipseControl();
+        public override FrameworkElement ShowIcon { get; } = new EllipseControl();
+        public override Page Page { get; } = new EllipsePage();
     }
 }

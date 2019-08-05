@@ -69,7 +69,6 @@ namespace Retouch_Photo2.Tools.Pages
 
                 this.ViewModel.Invalidate();//Invalidate
             };
-
         }
     }
 }

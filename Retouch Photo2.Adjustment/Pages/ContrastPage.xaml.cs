@@ -29,7 +29,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
         }
 
-        //@override
+        
         public IAdjustment GetNewAdjustment() => new ContrastAdjustment();
         public IAdjustment GetAdjustment() => this.ContrastAdjustment;
         public void SetAdjustment(IAdjustment value)
