@@ -3,6 +3,7 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using System.Numerics;
@@ -23,12 +24,11 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
         /// <summary> Y point. </summary>
         YPoint,
     }
-
-
+    
     /// <summary>
     /// <see cref="BrushTool"/>'s BrushEllipticalGradientTool.
     /// </summary>
-    public class EllipticalGradientTool 
+    public class EllipticalGradientTool
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;

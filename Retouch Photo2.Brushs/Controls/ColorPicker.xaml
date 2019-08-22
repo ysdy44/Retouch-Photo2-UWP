@@ -26,8 +26,8 @@
         >
 
         <!--ComboBox-->
-        <Border>
-            <ComboBox x:Name="ComboBox" ItemsSource="{x:Bind Pickers}" >
+        <Border Padding="0,2">
+            <ComboBox x:Name="ComboBox">
                 <ComboBox.Style>
                     <Style TargetType="ComboBox">
                         <Setter Property="Background" Value="{ThemeResource AppBarBackgroundThemeBrush}" />
@@ -39,8 +39,8 @@
                     </Style>
                 </ComboBox.Style>
                 <ComboBox.ItemTemplate>
-                    <DataTemplate x:DataType="local:Picker">
-                        <TextBlock Text="{x:Bind Name}"/>
+                    <DataTemplate x:DataType="x:String">
+                        <TextBlock Text="{x:Bind}"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>

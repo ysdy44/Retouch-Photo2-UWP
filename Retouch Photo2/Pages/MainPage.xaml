@@ -15,9 +15,12 @@
    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     
    xmlns:viewModels="using:Retouch_Photo2.ViewModels"
-   mc:Ignorable="d"
-    
-   Background="{ThemeResource AppBackground}">
+    xmlns:mainpages="using:Retouch_Photo2.Pages.MainPages"
+    mc:Ignorable="d"
+
+   RequestedTheme="{x:Bind ViewModel.CanvasTheme,Mode=OneWay}" 
+   Background="{ThemeResource AppBackground}"
+    >
 
 
     <Page.Resources>
@@ -619,10 +622,14 @@
             </Grid.ColumnDefinitions>
             <Button x:Name="RefreshButton" Width="Auto" Content="&#xE117;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"/>
             <TextBlock Grid.Column="1" Text="Retouh Photo2" FontSize="32" FontWeight="Light" HorizontalAlignment="Center"/>
-            <elements:ThemeControl x:Name="ThemeControl" Grid.Column="2" TitleBarColor="{ThemeResource AppForegroundColor}"/>
+            <elements:ThemeControl x:Name="ThemeControl" Grid.Column="2" 
+                       TitleBarColor="{ThemeResource AppForegroundColor}"
+                       Theme="{x:Bind ViewModel.CanvasTheme,Mode=TwoWay}" 
+                       />
         </Grid>
 
         <!--Body-->
+        <mainpages:InitialControl x:Name="InitialControl" Grid.Row="1"/>
         <GridView x:Name="GridView"        
                     Grid.Row="1"
                     AllowDrop="True"              
@@ -636,12 +643,16 @@
                     Style="{StaticResource GridViewStyle}"                    
                     animations:ReorderGridAnimation.Duration="300"
                     />
-                
+        
         <!--Foot-->
-        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Row="1"/>
+        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Row="1" ShadowColor="{ThemeResource AppStrokeColor}"/>
 
         <!--Loading-->
         <elements:LoadingControl x:Name="LoadingControl" Grid.RowSpan="3"/>
+
+        <!--Dialog-->
+        <mainpages:AddDialog x:Name="AddDialog" Grid.Row="1"/>
+        <mainpages:AddDialog x:Name="FolderDialog" Grid.Row="1"/>
 
     </Grid>
 </Page>

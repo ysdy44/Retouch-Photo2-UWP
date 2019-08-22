@@ -44,12 +44,8 @@ namespace Retouch_Photo2.Controls
 
             this.AddButton.Tapped += async (s, e) =>
             {
-                //File
-                StorageFile file = await this.ViewModel.PickSingleFileAsync( PickerLocationId.PicturesLibrary);
-                if (file == null) return;
-                
                 //ImageRe
-                ImageRe imageRe = await ImageRe.CreateFromStorageFile(this.ViewModel.CanvasDevice, file);
+                ImageRe imageRe = await ImageRe.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, PickerLocationId.PicturesLibrary);
                 if (imageRe == null) return;
 
                //Images
@@ -59,7 +55,7 @@ namespace Retouch_Photo2.Controls
                 Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
 
                 //Layer
-                ImageLayer imageLayer = new ImageLayer()
+                ImageLayer imageLayer = new ImageLayer
                 {
                     ImageRe= imageRe,
                     Source = transformerSource,

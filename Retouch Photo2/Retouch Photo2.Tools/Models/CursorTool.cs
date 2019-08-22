@@ -7,15 +7,6 @@ using Retouch_Photo2.ViewModels.Keyboards;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
 using System.Numerics;
-using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools;
-using Retouch_Photo2.Retouch_Photo2.Tools.Pages;
-using Retouch_Photo2.Tools.Controls;
-using Retouch_Photo2.ViewModels;
-using Retouch_Photo2.ViewModels.Selections;
-using Retouch_Photo2.ViewModels.Tips;
-using System.Numerics;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

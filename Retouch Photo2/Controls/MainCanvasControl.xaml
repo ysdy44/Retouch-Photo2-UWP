@@ -14,8 +14,8 @@
         <transformers:CanvasOperator x:Name="CanvasOperator" DestinationControl="{Binding ElementName=CanvasControl}"/>
     </UserControl.Resources>
 
-        <canvas:CanvasControl x:Name="CanvasControl" UseSharedDevice="True" CustomDevice="{x:Bind ViewModel.CanvasDevice}"/>
-    
+    <canvas:CanvasControl x:Name="CanvasControl" UseSharedDevice="True" CustomDevice="{x:Bind ViewModel.CanvasDevice}"/>
+
 </UserControl>
     
     

@@ -5,59 +5,19 @@
    xmlns:local="using:Retouch_Photo2.TestApp.Pages"
    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-   >
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    xmlns:transformers="using:FanKit.Transformers"   
+    SizeChanged="Page_SizeChanged"
+    >
 
+    <UserControl.Resources>
+        <transformers:CanvasOperator x:Name="CanvasOperator" 
+                                     DestinationControl="{Binding ElementName=CanvasControl}"
+                                     Single_Start="CanvasOperator_Single_Start"
+                                     Single_Delta="CanvasOperator_Single_Delta"
+                                     Single_Complete="CanvasOperator_Single_Complete"
+                                     />
+    </UserControl.Resources>
 
-    <Grid>
-
-
-
-        <Grid Width="480"  MinWidth="300" MaxWidth="600"
-              Height="220" MinHeight="200" MaxHeight="280" 
-              Background="Gray">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="50"/>
-            </Grid.RowDefinitions>
-
-            <!--Canvas-->
-            <Border Grid.ColumnSpan="4">
-                <Border  Background="White" Margin="4"/>
-            </Border>
-            
-            <!--ComboBox-->
-            <ComboBox Grid.Row="1" Grid.ColumnSpan="2" Margin="4,0" BorderThickness="1" HorizontalAlignment="Stretch"/>
-
-            <!--Straw-->
-            <Border Grid.Row="2" Width="77" Height="22" Background="White">
-            </Border>
-            
-            <!--Color-->
-            <Ellipse Width="50" Height="50" Grid.Row="3" Fill="White">
-            </Ellipse>
-
-            <!--Opacity-->
-            <TextBlock Text="Opacity:" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right"/>
-            <Border Grid.Column="3" Grid.Row="1" Height="36" CornerRadius="6" BorderThickness="1" BorderBrush="White"/>
-
-            <!--Offset-->
-            <TextBlock Text="Offset:" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right"/>
-            <Border Grid.Column="3" Grid.Row="2" Height="36" CornerRadius="6" BorderThickness="1" BorderBrush="White"/>
-
-            <!--Stop-->
-            <Border Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="3" Height="44" CornerRadius="6" BorderThickness="1" BorderBrush="White"/>
-       
-        </Grid>
-        
-        
-        
-    </Grid>
+    <canvas:CanvasControl x:Name="CanvasControl" Draw="CanvasControl_Draw"/>
 </Page>

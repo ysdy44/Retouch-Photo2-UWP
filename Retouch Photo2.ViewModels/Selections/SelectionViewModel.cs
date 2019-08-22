@@ -31,7 +31,7 @@ namespace Retouch_Photo2.ViewModels.Selections
         private ListViewSelectionMode mode;
 
 
-        /// <summary> Transformer of selection layers.  </summary>
+        /// <summary> Transformer of selection layers. </summary>
         public Transformer Transformer
         {
             get => this.transformer;
@@ -56,11 +56,11 @@ namespace Retouch_Photo2.ViewModels.Selections
         private bool disabledRadian;
          
 
-        /// <summary> The single checked layer.  </summary>
+        /// <summary> The single checked layer. </summary>
         public ILayer Layer { get; private set; }
 
 
-        /// <summary> The all checked layers.  </summary>
+        /// <summary> The all checked layers. </summary>
         public IEnumerable<ILayer> Layers { get; private set; }
 
 

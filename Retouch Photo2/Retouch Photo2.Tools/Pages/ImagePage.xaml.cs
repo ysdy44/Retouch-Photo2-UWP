@@ -49,12 +49,8 @@ namespace Retouch_Photo2.Tools.Pages
             this.ClearButton.Tapped += (s, e) => this.SelectionViewModel.ImageRe = new ImageRe { IsStoryboardNotify = true };//ImageRe
             this.SelectButton.Tapped += async (s, e) =>
             {
-                //File
-                StorageFile file = await this.ViewModel.PickSingleFileAsync(PickerLocationId.PicturesLibrary);
-                if (file == null) return;
-
                 //imageRe
-                ImageRe imageRe = await ImageRe.CreateFromStorageFile(this.ViewModel.CanvasDevice, file);
+                ImageRe imageRe = await ImageRe.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, PickerLocationId.PicturesLibrary);
                 if (imageRe == null) return;
                 
                 //Images
@@ -64,12 +60,8 @@ namespace Retouch_Photo2.Tools.Pages
             };
             this.ReplaceButton.Tapped += async (s, e) =>
             {
-                //File
-                StorageFile file = await this.ViewModel.PickSingleFileAsync(PickerLocationId.PicturesLibrary);
-                if (file == null) return;
-
                 //imageRe
-                ImageRe imageRe = await ImageRe.CreateFromStorageFile(this.ViewModel.CanvasDevice, file);
+                ImageRe imageRe = await ImageRe.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, PickerLocationId.PicturesLibrary);
                 if (imageRe == null) return;
                 
                 //Images

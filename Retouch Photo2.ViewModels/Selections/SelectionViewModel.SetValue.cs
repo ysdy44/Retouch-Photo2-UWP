@@ -31,25 +31,25 @@ namespace Retouch_Photo2.ViewModels.Selections
 
             this.Mode = ListViewSelectionMode.None;
 
-
             //////////////////////////
-
 
             this.SetOpacity(1.0f);
             this.SetBlendType(BlendType.Normal);
             this.Visibility = Visibility.Collapsed;
 
+            //////////////////////////
 
             this.Children = null;
             this.EffectManager = null;
             this.AdjustmentManager = null;
 
+            //////////////////////////
 
             this.SetGroupLayer(null);
             this.SetAcrylicLayer(null);
             this.SetImageLayer(null);
             this.SetGeometryLayer(null);
-
+            this.SetCurveLayer(null);
         }
 
         /// <summary>
@@ -66,28 +66,27 @@ namespace Retouch_Photo2.ViewModels.Selections
 
             this.Mode = ListViewSelectionMode.Single;
 
-
             //////////////////////////
-
 
             this.SetOpacity(layer.Opacity);
             this.SetBlendType(layer.BlendType);
             this.Visibility = layer.Visibility;
 
+            //////////////////////////
 
             this.Children = layer.Children;
             this.EffectManager = layer.EffectManager;
             this.AdjustmentManager = layer.AdjustmentManager;
-            
+
+            //////////////////////////
 
             this.SetGroupLayer(layer);
             this.SetAcrylicLayer(layer);
             this.SetImageLayer(layer);
             this.SetGeometryLayer(layer);
-
+            this.SetCurveLayer(layer);
 
             //////////////////////////
-
 
             if (layer.FillColor is Color color)
             {
@@ -159,24 +158,25 @@ namespace Retouch_Photo2.ViewModels.Selections
 
             this.Mode = ListViewSelectionMode.Multiple;//Transformer      
 
-
             //////////////////////////
-
 
             //this.SetOpacity(0);
             //this.SetBlendType( BlendType.Normal);
             //this.Visibility = Visibility.Collapsed;
-            
+
+            //////////////////////////
 
             this.Children = null;
             //this.EffectManager = layer.EffectManager;
             this.AdjustmentManager = null;
 
+            //////////////////////////
 
             this.SetGroupLayer(null);
             this.SetAcrylicLayer(null);
             //this.SetImageLayer(layer);
             //this.SetGeometryLayer(null);
+            this.SetCurveLayer(null);
         }
 
 

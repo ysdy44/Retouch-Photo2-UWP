@@ -32,8 +32,8 @@ namespace Retouch_Photo2.Tools.Models
         };
 
         public override ToolType Type => ToolType.Acrylic;
-        public override FrameworkElement Icon { get; }= new AcrylicControl();
-        public override FrameworkElement ShowIcon { get; }= new AcrylicControl();
-        public override Page Page { get; }= new AcrylicPage();
+        public override FrameworkElement Icon { get; } = new AcrylicControl();
+        public override FrameworkElement ShowIcon { get; } = new AcrylicControl();
+        public override Page Page { get; } = new AcrylicPage();
     }
 }

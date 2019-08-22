@@ -1,6 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using System.ComponentModel;
 using System.Numerics;
@@ -13,14 +12,11 @@ namespace Retouch_Photo2.ViewModels.Selections
     /// </summary>
     public partial class SelectionViewModel : INotifyPropertyChanged
     {
-
         /// <summary> Brush's Fill or Stroke. </summary>     
         public FillOrStroke FillOrStroke;
-
-
+        
         //////////////////////////////////////
-
-            
+                    
         /// <summary> Brush's type. </summary>     
         public BrushType BrushType
         {
@@ -93,35 +89,9 @@ namespace Retouch_Photo2.ViewModels.Selections
 
             this.BrushType = brush.Type;
         }
-
-        /// <summary> Sets GeometryLayer. </summary>     
-        private void SetGeometryLayer(ILayer layer)
-        {
-            if (layer is IGeometryLayer geometryLayer)
-            {
-                this.FillColor = geometryLayer.FillBrush.Color;
-                this.StrokeColor = geometryLayer.StrokeBrush.Color;
-                this.StrokeWidth = geometryLayer.StrokeWidth;
-
-                switch (this.FillOrStroke)
-                {
-                    case FillOrStroke.Fill:
-                        this.SetBrush(geometryLayer.FillBrush);
-                        break;
-                    case FillOrStroke.Stroke:
-                        this.SetBrush(geometryLayer.StrokeBrush);
-                        break;
-                }
-                return;
-            }
-
-            this.BrushType = BrushType.Disabled;
-        }
-
-
+               
         //////////////////////////////////////
-
-
+        
         /// <summary>
         /// Sets the brush form SingleMode.
         /// </summary>
@@ -203,6 +173,5 @@ namespace Retouch_Photo2.ViewModels.Selections
                     break;
             }
         }       
-
     }
 }

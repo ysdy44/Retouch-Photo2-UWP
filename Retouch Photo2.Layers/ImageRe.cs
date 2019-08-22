@@ -4,6 +4,7 @@ using System;
 using System.Numerics;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 
 namespace Retouch_Photo2.Layers
@@ -57,17 +58,34 @@ namespace Retouch_Photo2.Layers
         /// <returns> The string representation. </returns>
         public override string ToString() => string.Format("{0} {1}x{2}pixels {3}Dpi", this.Key, this.Width, this.Height, this.Dpi);
 
-        //@Static
+        //@Static 
         /// <summary>
-        /// Create a Image form a file.
+        /// Create a Image form a LocationId.
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="file"> The source file. </param>
+        /// <param name="location"> The destination LocationId. </param>
         /// <returns> The product ImageRe. </returns>
-        public async static Task<ImageRe> CreateFromStorageFile(ICanvasResourceCreator resourceCreator, StorageFile file)
+        public async static Task<ImageRe> CreateFromLocationIdAsync(ICanvasResourceCreator resourceCreator, PickerLocationId location)
         {
+            //Picker
+            FileOpenPicker openPicker = new FileOpenPicker
+            {
+                ViewMode = PickerViewMode.Thumbnail,
+                SuggestedStartLocation = location,
+                FileTypeFilter =
+                {
+                    ".jpg",
+                    ".jpeg",
+                    ".png",
+                    ".bmp"
+                }
+            };
+
+            //File
+            StorageFile file = await openPicker.PickSingleFileAsync();
             if (file == null) return null;
 
+            //ImageRe
             using (IRandomAccessStream stream = await file.OpenReadAsync())
             {
                 CanvasBitmap bitmap = await CanvasBitmap.LoadAsync(resourceCreator, stream);

@@ -108,29 +108,6 @@ namespace Retouch_Photo2.ViewModels
         }
 
                 
-        /// <summary>
-        /// Async pick a file.
-        /// </summary>
-        /// <param name="location"></param>
-        /// <returns></returns>
-        public async Task<StorageFile> PickSingleFileAsync(PickerLocationId location)
-        {
-            FileOpenPicker openPicker = new FileOpenPicker
-            {
-                ViewMode = PickerViewMode.Thumbnail,
-                SuggestedStartLocation = location,
-                FileTypeFilter =
-                {
-                    ".jpg",
-                    ".jpeg",
-                    ".png",
-                    ".bmp"
-                }
-            };
-
-            StorageFile file = await openPicker.PickSingleFileAsync();
-            return file;
-        }
 
         
         //@Notify 

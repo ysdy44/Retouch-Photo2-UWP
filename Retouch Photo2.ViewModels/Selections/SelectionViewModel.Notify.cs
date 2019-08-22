@@ -1,6 +1,6 @@
-﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Adjustments;
+﻿using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
+using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Effects;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
@@ -26,7 +26,6 @@ namespace Retouch_Photo2.ViewModels.Selections
             this.OnPropertyChanged(nameof(this.Opacity));//Notify 
         }
 
-
         /// <summary> <see cref = "SelectionViewModel" />'s blend type. </summary>
         public BlendType BlendType;
         /// <summary> Sets the <see cref = "SelectionViewModel.BlendType" />. </summary>
@@ -36,7 +35,6 @@ namespace Retouch_Photo2.ViewModels.Selections
             this.BlendType = value;
             this.OnPropertyChanged(nameof(this.BlendType));//Notify 
         }
-
 
         /// <summary> <see cref = "SelectionViewModel" />'s visibility. </summary>
         public Visibility Visibility
@@ -50,25 +48,7 @@ namespace Retouch_Photo2.ViewModels.Selections
         }
         private Visibility visibility;
 
-
-        /// <summary> GroupLayer's Exist. </summary>     
-        public bool IsGroupLayer;
-        /// <summary> Sets GroupLayer. </summary>     
-        private void SetGroupLayer(ILayer layer)
-        {
-            if (layer==null)
-            {
-                this.IsGroupLayer = false;
-                this.OnPropertyChanged(nameof(this.IsGroupLayer));//Notify 
-            }
-
-            if (layer is GroupLayer acrylicLayer)
-            {
-                this.IsGroupLayer = true;
-                this.OnPropertyChanged(nameof(this.IsGroupLayer));//Notify 
-            }
-        }
-
+        //////////////////////////
 
         /// <summary> <see cref = "SelectionViewModel" />'s Children. </summary>
         public ObservableCollection<ILayer> Children
@@ -82,7 +62,6 @@ namespace Retouch_Photo2.ViewModels.Selections
         }
         private ObservableCollection<ILayer> children;
 
-               
         /// <summary> <see cref = "SelectionViewModel" />'s EffectManager. </summary>
         public EffectManager EffectManager
         {
@@ -107,6 +86,25 @@ namespace Retouch_Photo2.ViewModels.Selections
         }
         private AdjustmentManager adjustmentManager;
 
+        //////////////////////////
+
+        /// <summary> GroupLayer's Exist. </summary>     
+        public bool IsGroupLayer;
+        /// <summary> Sets GroupLayer. </summary>     
+        private void SetGroupLayer(ILayer layer)
+        {
+            if (layer == null)
+            {
+                this.IsGroupLayer = false;
+                this.OnPropertyChanged(nameof(this.IsGroupLayer));//Notify 
+            }
+
+            if (layer is GroupLayer acrylicLayer)
+            {
+                this.IsGroupLayer = true;
+                this.OnPropertyChanged(nameof(this.IsGroupLayer));//Notify 
+            }
+        }
 
         /// <summary> AcrylicLayer's TintOpacity. </summary>     
         public float AcrylicTintOpacity = 0.5f;
@@ -127,7 +125,6 @@ namespace Retouch_Photo2.ViewModels.Selections
             }
         }
 
-        
         /// <summary> <see cref = "SelectionViewModel" />'s ImageRe. </summary>
         public ImageRe ImageRe
         {
@@ -148,6 +145,54 @@ namespace Retouch_Photo2.ViewModels.Selections
             }
         }
 
+        /// <summary> Sets GeometryLayer. </summary>     
+        private void SetGeometryLayer(ILayer layer)
+        {
+            if (layer is IGeometryLayer geometryLayer)
+            {
+                this.FillColor = geometryLayer.FillBrush.Color;
+                this.StrokeColor = geometryLayer.StrokeBrush.Color;
+                this.StrokeWidth = geometryLayer.StrokeWidth;
 
+                switch (this.FillOrStroke)
+                {
+                    case FillOrStroke.Fill:
+                        this.SetBrush(geometryLayer.FillBrush);
+                        break;
+                    case FillOrStroke.Stroke:
+                        this.SetBrush(geometryLayer.StrokeBrush);
+                        break;
+                }
+                return;
+            }
+
+            this.BrushType = BrushType.Disabled;
+        }
+
+        /// <summary> Sets PenTool node mode. </summary>     
+        public bool IsPenToolNodeMode
+        {
+            get => this.isPenToolNodeMode;
+            set
+            {
+                this.isPenToolNodeMode = value;
+                this.OnPropertyChanged(nameof(this.IsPenToolNodeMode));//Notify 
+            }
+        }       
+        private bool isPenToolNodeMode;
+        /// <summary> <see cref = "SelectionViewModel" />'s CurveLayer. </summary>
+        public CurveLayer CurveLayer { get; private set; }
+        /// <summary> Sets CurveLayer. </summary>     
+        private void SetCurveLayer(ILayer layer)
+        {
+            if (layer is CurveLayer curveLayer)
+            {
+                this.CurveLayer = curveLayer;
+            }
+            else
+            {
+                this.CurveLayer = null;
+            }
+        }
     }
 }

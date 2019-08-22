@@ -2,11 +2,8 @@
 using Retouch_Photo2.Adjustments.Pages;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -18,10 +15,15 @@ namespace Retouch_Photo2.Controls
     /// </summary>
     public enum AdjustmentControlState
     {
+        /// <summary> Normal. </summary>
         None,
+        /// <summary> Control is not available. </summary>
         Disable,
+        /// <summary> Control no adjustment. </summary>
         Null,
+        /// <summary> There are adjustments.. </summary>
         Adjustments,
+        /// <summary> Editing adjustments. </summary>
         Edit
     }
 

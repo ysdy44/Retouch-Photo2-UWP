@@ -21,11 +21,10 @@ namespace Retouch_Photo2.Tools
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
-
-
+        
         Transformer oldTransformer;
         TransformerMode TransformerMode;
-
+        
 
         public bool SelectLayer(Vector2 point)
         {
@@ -62,7 +61,7 @@ namespace Retouch_Photo2.Tools
             this.ViewModel.Invalidate();//Invalidate
             return true;
         }
-
+        
 
         public bool Starting(Vector2 point)
         {
@@ -269,6 +268,5 @@ namespace Retouch_Photo2.Tools
 
             return true;
         }
-
     }
 }

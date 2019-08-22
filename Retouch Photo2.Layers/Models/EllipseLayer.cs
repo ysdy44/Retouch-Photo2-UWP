@@ -1,7 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Controls;
-using Retouch_Photo2.Layers.Models;
 using System.Numerics;
 using Windows.UI.Xaml;
 

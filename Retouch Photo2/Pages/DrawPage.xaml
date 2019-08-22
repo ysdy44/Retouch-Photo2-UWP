@@ -19,6 +19,8 @@
     xmlns:layers="using:Retouch_Photo2.Layers"
     xmlns:selection="using:Retouch_Photo2.Selections"
     xmlns:controls1="using:Retouch_Photo2.Brushs.Controls"
+    
+    RequestedTheme="{x:Bind ViewModel.CanvasTheme,Mode=OneWay}" 
     NavigationCacheMode="Enabled"    
     mc:Ignorable="d"
     >
@@ -86,6 +88,7 @@
                     <ContentControl Width="6"/>
                     <Border Style="{StaticResource AppCircleBorderStyle}">
                         <elements:RepeatControl 
+                            RequestedTheme="{x:Bind ViewModel.CanvasTheme,Mode=OneWay}" 
                             IsChecked="{x:Bind TipViewModel.IsOpen,Mode=TwoWay}"
                             />
                     </Border>

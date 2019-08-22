@@ -1,4 +1,5 @@
 ﻿using HSVColorPickers;
+using System.Linq;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
 
@@ -17,15 +18,15 @@ namespace Retouch_Photo2.Brushs.Controls
         #region Picker
 
         /// <summary> All pickers. </summary>
-        public Picker[] Pickers = new Picker[]
+        public IColorPicker[] Pickers = new IColorPicker[]
         {
-            new Picker( "Swatches",new SwatchesPicker()),
-            new Picker( "Wheel",new WheelPicker()),
-            new Picker( "RGB",new RGBPicker()),
-            new Picker( "HSV",new HSVPicker()),
-            new Picker( "Palette Hue",PalettePicker.CreateFormHue()),
-            new Picker( "Palette Saturation",PalettePicker.CreateFormSaturation()),
-            new Picker( "Palette Value",PalettePicker.CreateFormValue()),
+            new SwatchesPicker(),
+            new WheelPicker(),
+            new RGBPicker(),
+            new HSVPicker(),
+            PalettePicker.CreateFormHue(),
+            PalettePicker.CreateFormSaturation(),
+            PalettePicker.CreateFormValue(),
         };
 
         /// <summary> Get or set index of the current picker. </summary>
@@ -34,11 +35,11 @@ namespace Retouch_Photo2.Brushs.Controls
             get => this.index;
             set
             {
-                IPicker newControl = this.Pickers[value].Control;
+                IColorPicker newControl = this.Pickers[value];
 
                 if (value != this.index)
                 {
-                    IPicker oldControl = this.Pickers[this.index].Control;
+                    IColorPicker oldControl = this.Pickers[this.index];
                     oldControl.ColorChange -= this.Picker_ColorChange;
                 }
 
@@ -70,7 +71,7 @@ namespace Retouch_Photo2.Brushs.Controls
                     return;
 
                 Color color = Color.FromArgb(255, value.R, value.G, value.B);
-                this.Pickers[this.Index].Control.Color = color;
+                this.Pickers[this.Index].Color = color;
 
                 this._color = color;
             }
@@ -103,6 +104,7 @@ namespace Retouch_Photo2.Brushs.Controls
         public ColorPicker()
         {
             this.InitializeComponent();
+            this.ComboBox.ItemsSource = from p in this.Pickers select p.Type;
 
             //Picker
             this.Index = 0;

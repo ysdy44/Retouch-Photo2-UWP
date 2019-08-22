@@ -21,32 +21,11 @@ namespace Retouch_Photo2.Controls
         TipViewModel TipViewModel => App.TipViewModel;
 
 
-        /// <summary> The single copyed layer.  </summary>
-        public ILayer Layer
-        {
-            get => this.layer;
-            private set
-            {
-                this.AA.Visibility = (value == null) ? Visibility.Collapsed : Visibility.Visible;
-                this.layer = value;
-            }
-        }
-        public ILayer layer;
-
-
-        /// <summary> The all copyed layers.  </summary>
-         public List<ILayer> Layers
-    {
-            get => this.layers;
-            private set
-            {
-                this.BB.Visibility = (value == null) ? Visibility.Collapsed : Visibility.Visible;
-                if (value != null) this.CC.Text = value.Count().ToString();
-                else this.CC.Text = 0.ToString();
-                this.layers = value;
-            }
-        }
-        public List<ILayer> layers = new List<ILayer>();
+        /// <summary> The single copyed layer. </summary>
+        public ILayer Layer;
+        
+        /// <summary> The all copyed layers. </summary> 
+        public List<ILayer> Layers = new List<ILayer>();
 
 
         #region DependencyProperty
@@ -92,6 +71,8 @@ namespace Retouch_Photo2.Controls
         }));
 
         #endregion
+
+
         //@Construct
         public SelectionControl()
         {

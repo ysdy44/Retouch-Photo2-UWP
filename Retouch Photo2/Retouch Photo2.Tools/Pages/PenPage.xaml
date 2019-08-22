@@ -16,14 +16,14 @@
         </Grid.ColumnDefinitions>
 
         <!--Add or Nodes-->
-        <elements:OnOffSwitch OnContent="Add" OffContent="Nodes" IsOn="{x:Bind AddOrNodes,Mode=TwoWay}">
+        <elements:OnOffSwitch OnContent="Add" OffContent="Nodes" IsOn="{x:Bind SelectionViewModel.IsPenToolNodeMode, Mode=TwoWay}">
             <ToolTipService.ToolTip>
                 <ToolTip Content="StepFrequency" Placement="Top" IsOpen="{x:Bind TipViewModel.IsPenToolOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
         </elements:OnOffSwitch>
 
         <!--Add-->
-        <StackPanel Grid.Column="1" Orientation="Horizontal" Visibility="{x:Bind FalseToVisibilityConverter(AddOrNodes),Mode=OneWay}">
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Visibility="{x:Bind FalseToVisibilityConverter(SelectionViewModel.IsPenToolNodeMode),Mode=OneWay}">
 
             <AppBarSeparator/>
 
@@ -43,7 +43,7 @@
         </StackPanel>
 
         <!--Nodes-->
-        <StackPanel Grid.Column="1" Orientation="Horizontal" Visibility="{x:Bind TrueToVisibilityConverter(AddOrNodes),Mode=OneWay}">
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Visibility="{x:Bind TrueToVisibilityConverter(SelectionViewModel.IsPenToolNodeMode),Mode=OneWay}">
            
             <AppBarSeparator/>
 
