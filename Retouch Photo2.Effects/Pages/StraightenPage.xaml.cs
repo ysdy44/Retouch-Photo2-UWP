@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Effects.Pages
         {
             this.InitializeComponent();
 
-            this._AnglePicker.RadiansChange += (radians) =>
+            this._AnglePicker.RadiansChange += (s, radians) =>
             {
                 EffectManager.Invalidate((effectManager) =>
                 {

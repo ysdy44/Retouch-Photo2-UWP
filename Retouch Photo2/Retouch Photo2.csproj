@@ -197,10 +197,13 @@
     <Compile Include="Retouch Photo2.Tools\Models\ImageTool.Rectangle.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\NoneTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\PenTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\PenTools\AddNodeTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\PenTools\AddTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\PenTools\Guider.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\PenTools\MoveSingleNodeControlPointTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\PenTools\MoveSingleNodePointTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\PenTools\RectChooseTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\PenTools\EditMoveTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\PenTools\PreviewNodeTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\PenTools\MoveTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\PenTools\PreviewTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\RectangleTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\ViewTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Pages\AcrylicPage.xaml.cs">

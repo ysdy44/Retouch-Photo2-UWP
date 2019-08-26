@@ -14,9 +14,6 @@ namespace Retouch_Photo2.Layers
     /// </summary>
     public class ImageRe
     {
-        /// <summary> Provide <see cref="ImageRe"/>'s animation in property notifications. </summary>
-        public bool IsStoryboardNotify = false;
-
         /// <summary> Gets key. </summary>
         public string Key => this.Name;
         /// <summary> Gets bitmap dpi. </summary>  

@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Tools.Models
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 pointA = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 pointB = Vector2.Transform(point, inverseMatrix);
-            this.boxCanvasRect = new TransformerRect(pointA, pointB);
+            this._boxCanvasRect = new TransformerRect(pointA, pointB);
         }
 
         /// <summary> <see cref = "CursorTool.Complete" />'s method. </summary>
@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Tools.Models
             //Add
             foreach (ILayer layer in this.ViewModel.Layers)
             {
-                bool contained = layer.Destination.Contained(this.boxCanvasRect);
+                bool contained = layer.Destination.Contained(this._boxCanvasRect);
 
                 //Add
                 switch (this.KeyboardViewModel.CompositeMode)
@@ -66,10 +66,10 @@ namespace Retouch_Photo2.Tools.Models
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             Vector2[] points = new Vector2[]
             {
-                 Vector2.Transform(this.boxCanvasRect.LeftTop, matrix),
-                 Vector2.Transform(this.boxCanvasRect.RightTop, matrix),
-                 Vector2.Transform(this.boxCanvasRect.RightBottom, matrix),
-                 Vector2.Transform(this.boxCanvasRect.LeftBottom, matrix),
+                 Vector2.Transform(this._boxCanvasRect.LeftTop, matrix),
+                 Vector2.Transform(this._boxCanvasRect.RightTop, matrix),
+                 Vector2.Transform(this._boxCanvasRect.RightBottom, matrix),
+                 Vector2.Transform(this._boxCanvasRect.LeftBottom, matrix),
             };
 
             //Geometry

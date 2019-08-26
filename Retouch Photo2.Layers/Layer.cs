@@ -33,7 +33,7 @@ namespace Retouch_Photo2.Layers
         public Matrix3x2 GetMatrix() => Transformer.FindHomography(this.Source, this.Destination);
         public Transformer Source { get; set; }
         public Transformer Destination { get; set; }
-        public Transformer OldDestination { get; set; }
+        private Transformer _oldDestination;
         public bool DisabledRadian { get; set; } = false;
 
         public ObservableCollection<ILayer> Children { get; protected set; } = new ObservableCollection<ILayer>();
@@ -62,9 +62,9 @@ namespace Retouch_Photo2.Layers
 
 
         //@Abstract
-        public virtual void CacheTransform() => this.OldDestination = this.Destination;
-        public virtual void TransformMultiplies(Matrix3x2 matrix) => this.Destination = this.OldDestination * matrix;
-        public virtual void TransformAdd(Vector2 vector) => this.Destination = this.OldDestination + vector;
+        public virtual void CacheTransform() => this._oldDestination = this.Destination;
+        public virtual void TransformMultiplies(Matrix3x2 matrix) => this.Destination = this._oldDestination * matrix;
+        public virtual void TransformAdd(Vector2 vector) => this.Destination = this._oldDestination + vector;
 
 
         //@Static

@@ -23,15 +23,15 @@ namespace Retouch_Photo2.Tools.Models
         TipViewModel TipViewModel => App.TipViewModel;
 
         //Brush
-        readonly LinearGradientTool LinearGradientTool = new LinearGradientTool();
-        readonly RadialGradientTool RadialGradientTool = new RadialGradientTool();
-        readonly EllipticalGradientTool EllipticalGradientTool = new EllipticalGradientTool();
+        public readonly LinearGradientTool LinearGradientTool = new LinearGradientTool();
+        public readonly RadialGradientTool RadialGradientTool = new RadialGradientTool();
+        public readonly EllipticalGradientTool EllipticalGradientTool = new EllipticalGradientTool();
 
         public ToolType Type => ToolType.Brush;
         public FrameworkElement Icon { get; } = new BrushControl();
         public FrameworkElement ShowIcon { get; } = new BrushControl();
-        public Page Page { get; } = new BrushPage();
-
+        public Page Page => this._brushPage;
+        BrushPage _brushPage { get; } = new BrushPage();
 
         public void Starting(Vector2 point)
         {
@@ -133,8 +133,7 @@ namespace Retouch_Photo2.Tools.Models
                     break;
             }
         }
-
-
+        
         public void OnNavigatedTo() => this.SelectionViewModel.SetBrushFormSingleMode(this.SelectionViewModel.FillOrStroke);
         public void OnNavigatedFrom() { }
     }

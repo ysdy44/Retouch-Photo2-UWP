@@ -48,8 +48,6 @@ namespace Retouch_Photo2.Layers
         Transformer Source { get; set; }
         /// <summary> The destination transformer. </summary>
         Transformer Destination { get; set; }
-        /// <summary> The destination transformer 's old cache. </summary>
-        Transformer OldDestination { get; set; }
         /// <summary> Is disable rotate radian? Defult **false**. </summary>
         bool DisabledRadian { get; set; }
 

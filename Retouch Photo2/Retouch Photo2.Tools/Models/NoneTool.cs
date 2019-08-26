@@ -10,12 +10,12 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public class NoneTool : ITool
     {
-        public ToolType Type=>ToolType.None;
+        public ToolType Type => ToolType.None;
         public FrameworkElement Icon { get; } = null;
-        public FrameworkElement ShowIcon { get; }= null;
-        public Page Page { get; }= null;
+        public FrameworkElement ShowIcon { get; } = null;
+        public Page Page { get; } = null;
 
-        
+
         public void Starting(Vector2 point) { }
         public void Started(Vector2 startingPoint, Vector2 point) { }
         public void Delta(Vector2 startingPoint, Vector2 point) { }

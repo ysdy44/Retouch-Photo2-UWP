@@ -573,7 +573,6 @@ namespace Retouch_Photo2.Controls
                 this.SelectionViewModel.Transformer = zeroTransformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.OldDestination = layer.Destination;
                     layer.Destination = zeroTransformer * matrix;
                 });
 

@@ -3,28 +3,24 @@ using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs.Stops;
 using System;
 using System.Linq;
+using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Brushs.Controls
 {
-    //@Delegate
-    /// <summary>
-    ///  Method that represents the handling of the StopsChanged event.
-    /// </summary>
-    /// <param name="sender"> The object to which the event handler is attached. </param>
-    /// <param name="array"> Event data. </param>
-    public delegate void StopsChangedHandler(object sender, CanvasGradientStop[] array);
-
-
     /// <summary>
     /// Stops picker.
     /// </summary>
     public sealed partial class StopsPicker : UserControl
     {
         //@Delegate
-        /// <summary> Occurs when the stops changes. </summary>
-        public event StopsChangedHandler StopsChanged;
+        /// <summary>
+        /// Occurs when the stops changes. 
+        /// </summary>
+        /// <param name="sender"> The object to which the event handler is attached. </param>
+        /// <param name="array"> Event data. </param>
+        public event TypedEventHandler<object, CanvasGradientStop[]> StopsChanged;
 
         //@Content        
         public ComboBox BrushTypeComboBox => this._BrushTypeComboBox;

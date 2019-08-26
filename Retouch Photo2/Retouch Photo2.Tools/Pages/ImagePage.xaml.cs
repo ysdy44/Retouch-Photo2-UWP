@@ -7,6 +7,7 @@ using System.Numerics;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace Retouch_Photo2.Tools.Pages
 {
@@ -19,34 +20,14 @@ namespace Retouch_Photo2.Tools.Pages
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
-
-        //@Converter
-        private string ImageReStoryboardConverter(ImageRe imageRe)
-        {
-            if (imageRe == null) return null;
-
-            if (imageRe.IsStoryboardNotify == true)
-            {
-                this.EaseStoryboard.Begin();//Storyboard
-                return null;
-            }
-
-            return imageRe.ToString();
-        }
-        private bool ImageReToIsEnabledConverter(ImageRe imageRe)
-        {
-            if (imageRe == null) return false;
-            if (imageRe.IsStoryboardNotify == true) return false;
-
-            return true;
-        }
-
+        //@Content
+        public Storyboard EaseStoryboard => this._EaseStoryboard;
 
         //@Construct
         public ImagePage()
         {
             this.InitializeComponent();
-            this.ClearButton.Tapped += (s, e) => this.SelectionViewModel.ImageRe = new ImageRe { IsStoryboardNotify = true };//ImageRe
+            this.ClearButton.Tapped += (s, e) => this.SelectionViewModel.ImageRe =null;//ImageRe
             this.SelectButton.Tapped += async (s, e) =>
             {
                 //imageRe

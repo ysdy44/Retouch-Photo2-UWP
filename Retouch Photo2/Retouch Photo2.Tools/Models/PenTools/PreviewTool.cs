@@ -7,14 +7,13 @@ using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using System.Collections.Generic;
 using System.Numerics;
-using Windows.UI;
 
 namespace Retouch_Photo2.Tools.Models.PenTools
 {
     /// <summary>
     /// <see cref="PenTool"/>'s PenPreviewNodeTool.
     /// </summary>
-    public class PreviewNodeTool
+    public class PreviewTool
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
@@ -22,11 +21,11 @@ namespace Retouch_Photo2.Tools.Models.PenTools
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
         List<Node> Nodes => this.SelectionViewModel.CurveLayer.Nodes;
 
-        private Vector2 _left;
-        private Vector2 _right;
+        Vector2 _left;
+        Vector2 _right;
 
         /// <summary> Only the left point. </summary>
-        private bool _hasTempLeftPoint;
+        bool _hasTempLeftPoint;
 
         public void Start(Vector2 point)
         {
@@ -38,14 +37,14 @@ namespace Retouch_Photo2.Tools.Models.PenTools
 
             this.ViewModel.Invalidate();
         }
-        public void Delta(Vector2 startingPoint, Vector2 point)
+        public void Delta(Vector2 point)
         {
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
             this._right = canvasPoint;
 
-            this.ViewModel.Invalidate();
+            this.ViewModel.Invalidate();//Invalidate
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
@@ -75,21 +74,20 @@ namespace Retouch_Photo2.Tools.Models.PenTools
         /// <param name="drawingSession"> The drawing-session. </param>
         public void Draw(CanvasDrawingSession drawingSession)
         {
-            this.ViewModel.Text = $"this._hasTempLeftPoint == {this._hasTempLeftPoint}";
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             Vector2 lineLeft = Vector2.Transform(this._left, matrix);
 
             if (this._hasTempLeftPoint)
             {
-                drawingSession.DrawNode(lineLeft);
+                drawingSession.DrawNode3(lineLeft);
             }
             else
             {
                 Vector2 lineRight = Vector2.Transform(this._right, matrix);
 
                 drawingSession.DrawLineDodgerBlue(lineLeft, lineRight);
-                drawingSession.DrawNode(lineLeft);
-                drawingSession.DrawNode(lineRight);
+                drawingSession.DrawNode3(lineLeft);
+                drawingSession.DrawNode3(lineRight);
             }
         }
 

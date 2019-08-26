@@ -36,7 +36,6 @@ namespace Retouch_Photo2.Tools.Models
         public abstract FrameworkElement ShowIcon { get; }
         public abstract Page Page { get; }
 
-
         public void Starting(Vector2 point) { }
         public void Started(Vector2 startingPoint, Vector2 point)
         {

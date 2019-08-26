@@ -13,10 +13,10 @@ namespace Retouch_Photo2.ViewModels.Selections
     public partial class SelectionViewModel : INotifyPropertyChanged
     {
         /// <summary> Brush's Fill or Stroke. </summary>     
-        public FillOrStroke FillOrStroke;
-        
+        public FillOrStroke FillOrStroke { get; set; }
+
         //////////////////////////////////////
-                    
+
         /// <summary> Brush's type. </summary>     
         public BrushType BrushType
         {
@@ -40,10 +40,10 @@ namespace Retouch_Photo2.ViewModels.Selections
             }
         }
         private CanvasGradientStop[] brushArray;
-        
+
         /// <summary> Brush. </summary>     
         public BrushPoints BrushPoints;
-                
+
         /// <summary> Sets GeometryLayer's brush. </summary>     
         public void SetBrush(Brush brush)
         {

@@ -18,8 +18,7 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-
-
+        
         //@Override
         public override ILayer CreateLayer(Transformer transformer) => new AcrylicLayer
         {
@@ -34,6 +33,7 @@ namespace Retouch_Photo2.Tools.Models
         public override ToolType Type => ToolType.Acrylic;
         public override FrameworkElement Icon { get; } = new AcrylicControl();
         public override FrameworkElement ShowIcon { get; } = new AcrylicControl();
-        public override Page Page { get; } = new AcrylicPage();
+        public override Page Page => this._acrylicPage;
+        AcrylicPage _acrylicPage { get; } = new AcrylicPage();
     }
 }

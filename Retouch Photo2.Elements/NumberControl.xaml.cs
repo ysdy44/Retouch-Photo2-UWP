@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using Windows.Foundation;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Elements
 {
@@ -7,9 +8,11 @@ namespace Retouch_Photo2.Elements
     /// </summary>
     public sealed partial class NumberControl : UserControl
     {
-        //@delegate
-        public delegate void NumberChangeHandler(object sender, double value);
-        public event NumberChangeHandler ValueChange;
+        //@Delegate
+        /// <summary>
+        /// 
+        /// </summary>
+        public event TypedEventHandler<object, double> ValueChange;
 
         public double Value
         {
@@ -34,7 +37,7 @@ namespace Retouch_Photo2.Elements
             {
                 this.TextBox.Text = e.NewValue.ToString();
 
-                this.ValueChange?.Invoke(this, e.NewValue); //delegate
+                this.ValueChange?.Invoke(this, e.NewValue); //Delegate
             };
         }
 

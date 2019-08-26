@@ -41,6 +41,7 @@ namespace Retouch_Photo2.Tools.Models
         public override ToolType Type => ToolType.Rectangle;
         public override FrameworkElement Icon { get; } = new RectangleControl();
         public override FrameworkElement ShowIcon { get; } = new RectangleControl();
-        public override Page Page { get; } = new RectanglePage();
+        public override Page Page => this._rectanglePage;
+        RectanglePage _rectanglePage { get; } = new RectanglePage();
     }
 }

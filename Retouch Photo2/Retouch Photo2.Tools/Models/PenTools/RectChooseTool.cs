@@ -19,15 +19,15 @@ namespace Retouch_Photo2.Tools.Models.PenTools
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         List<Node> Nodes => this.SelectionViewModel.CurveLayer.Nodes;
 
-        public TransformerRect Rect;
-        private bool _isPressed = false;
+        TransformerRect _rect;
+        bool _isPressed = false;
 
         public void Start(Vector2 point)
         {
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            this.Rect = new TransformerRect(canvasPoint, canvasPoint);
+            this._rect = new TransformerRect(canvasPoint, canvasPoint);
             this._isPressed = true;
             
             this.ViewModel.Invalidate();//Invalidate
@@ -38,17 +38,23 @@ namespace Retouch_Photo2.Tools.Models.PenTools
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint=Vector2.Transform(point, inverseMatrix);
 
-            this.Rect = new TransformerRect(canvasStartingPoint, canvasPoint);
+            this._rect = new TransformerRect(canvasStartingPoint, canvasPoint);
 
             //Choose point which in the rect.
             for (int i = 0; i < this.Nodes.Count; i++)
             {
-                bool isContained = this.Nodes[i].Contained(this.Rect);
-                this.Nodes[i].IsChecked = isContained;
+                Node node = this.Nodes[i];
+
+                bool isContained = node.Contained(this._rect);
+                if (node.IsChecked != isContained)
+                {
+                    node.IsChecked = isContained;
+                    this.Nodes[i] = node;
+                }
             }
             this.ViewModel.Invalidate();//Invalidate
         }
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
+        public void Complete(Vector2 startingPoint, Vector2 point)
         {
             this._isPressed = false;
             this.Delta(startingPoint,point);            
@@ -62,26 +68,29 @@ namespace Retouch_Photo2.Tools.Models.PenTools
         {
             if (this._isPressed == false) return;
 
-            //LTRB
-            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-            Vector2 leftTop = Vector2.Transform(this.Rect.LeftTop, matrix);
-            Vector2 rightTop = Vector2.Transform(this.Rect.RightTop, matrix);
-            Vector2 rightBottom = Vector2.Transform(this.Rect.RightBottom, matrix);
-            Vector2 leftBottom = Vector2.Transform(this.Rect.LeftBottom, matrix);
-
-            //Points
-            Vector2[] points = new Vector2[]
+            //TODO:替换Fankit的方法，drawingSession.DrawRect
             {
+                //LTRB
+                Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+                Vector2 leftTop = Vector2.Transform(this._rect.LeftTop, matrix);
+                Vector2 rightTop = Vector2.Transform(this._rect.RightTop, matrix);
+                Vector2 rightBottom = Vector2.Transform(this._rect.RightBottom, matrix);
+                Vector2 leftBottom = Vector2.Transform(this._rect.LeftBottom, matrix);
+
+                //Points
+                Vector2[] points = new Vector2[]
+                {
                 leftTop,
                 rightTop,
                 rightBottom,
                 leftBottom
-            };
+                };
 
-            //Geometry
-            CanvasGeometry canvasGeometry= CanvasGeometry.CreatePolygon(this.ViewModel.CanvasDevice, points);
-            drawingSession.FillGeometry(canvasGeometry, Windows.UI.Color.FromArgb(90, 54, 135, 230));
-            drawingSession.DrawGeometry(canvasGeometry, Windows.UI.Colors.DodgerBlue);
+                //Geometry
+                CanvasGeometry canvasGeometry = CanvasGeometry.CreatePolygon(this.ViewModel.CanvasDevice, points);
+                drawingSession.FillGeometry(canvasGeometry, Windows.UI.Color.FromArgb(90, 54, 135, 230));
+                drawingSession.DrawGeometry(canvasGeometry, Windows.UI.Colors.DodgerBlue);
+            }
         }
     }
 }

@@ -11,9 +11,9 @@ using System.Numerics;
 namespace Retouch_Photo2.Tools.Models.PenTools
 {
     /// <summary>
-    /// <see cref="PenTool"/>'s PenAddNodeTool.
+    /// <see cref="PenTool"/>'s PenAddTool.
     /// </summary>
-    public class AddNodeTool
+    public class AddTool
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
@@ -28,26 +28,50 @@ namespace Retouch_Photo2.Tools.Models.PenTools
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            this._endNode = new Node(canvasPoint);
+            Node node = new Node
+            {
+                Point = canvasPoint,
+                LeftControlPoint = canvasPoint,
+                RightControlPoint = canvasPoint,
+                IsChecked = false,
+                IsSmooth = false,
+            };
+            this._endNode = node;
             this._lastNode = this.SelectionViewModel.CurveLayer.Nodes.Last();
             this.ViewModel.Invalidate();
         }
-        public void Delta(Vector2 startingPoint, Vector2 point)
+        public void Delta(Vector2 point)
         {
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            this._endNode.Vector = canvasPoint;
+            Node node = new Node
+            {
+                Point = canvasPoint,
+                LeftControlPoint = canvasPoint,
+                RightControlPoint = canvasPoint,
+                IsChecked = false,
+                IsSmooth = false,
+            };
+            this._endNode = node;
             this.ViewModel.Invalidate();
         }
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
+        public void Complete(Vector2 point)
         {
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            Node node = new Node(canvasPoint);
+            Node node = new Node
+            {
+                Point = canvasPoint,
+                LeftControlPoint = canvasPoint,
+                RightControlPoint = canvasPoint,
+                IsChecked = false,
+                IsSmooth = false,
+            };
             this.Nodes.Add(node);
-            this.ViewModel.Invalidate();
+            this.SelectionViewModel.CurveLayer.CorrectionTransformer();
+            this.ViewModel.Invalidate();//Invalidate
         }
 
         /// <summary>
@@ -57,9 +81,9 @@ namespace Retouch_Photo2.Tools.Models.PenTools
         public void Draw(CanvasDrawingSession drawingSession)
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-            Vector2 lastPoint = Vector2.Transform(this._lastNode.Vector, matrix);
-            Vector2 endPoint = Vector2.Transform(this._endNode.Vector, matrix);
-            
+            Vector2 lastPoint = Vector2.Transform(this._lastNode.Point, matrix);
+            Vector2 endPoint = Vector2.Transform(this._endNode.Point, matrix);
+
             drawingSession.DrawLineDodgerBlue(lastPoint, endPoint);
             drawingSession.DrawNode4(endPoint);
         }

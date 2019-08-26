@@ -16,24 +16,24 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
 
-        Vector2 StartPosition;
+        Vector2 _startPosition;
 
         public ToolType Type => ToolType.View;
         public FrameworkElement Icon { get; } = new ViewControl();
         public FrameworkElement ShowIcon { get; } = new ViewControl();
-        public Page Page { get; } = new ViewPage();
-
+        public Page Page => this._viewPage;
+        ViewPage _viewPage { get; } = new ViewPage();
 
         public void Starting(Vector2 point) { }
         public void Started(Vector2 startingPoint, Vector2 point)
         {
-            this.StartPosition = this.ViewModel.CanvasTransformer.Position;
+            this._startPosition = this.ViewModel.CanvasTransformer.Position;
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
-            this.ViewModel.CanvasTransformer.Position = this.StartPosition - startingPoint + point;
+            this.ViewModel.CanvasTransformer.Position = this._startPosition - startingPoint + point;
             this.ViewModel.CanvasTransformer.ReloadMatrix();
 
             this.ViewModel.Invalidate();//Invalidate
@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             if (isSingleStarted)
             {
-                this.ViewModel.CanvasTransformer.Position = this.StartPosition - startingPoint + point;
+                this.ViewModel.CanvasTransformer.Position = this._startPosition - startingPoint + point;
                 this.ViewModel.CanvasTransformer.ReloadMatrix();
             }
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate

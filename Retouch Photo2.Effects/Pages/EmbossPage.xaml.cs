@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Effects.Pages
                      effectManager.Emboss_Amount = (float)e.NewValue;
                 });
             };
-            this._AnglePicker.RadiansChange += (radians) =>
+            this._AnglePicker.RadiansChange += (s, radians) =>
             {
                 EffectManager.Invalidate((effectManager) =>
                 {

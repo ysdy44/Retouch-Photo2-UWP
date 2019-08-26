@@ -27,16 +27,15 @@ namespace Retouch_Photo2.Tools.Models
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
-        float SizeWidth;
-        float SizeHeight;
-
-
+        float _sizeWidth;
+        float _sizeHeight;
+        
         public ToolType Type => ToolType.Image;
         public FrameworkElement Icon { get; } = new ImageControl();
         public FrameworkElement ShowIcon { get; } = new ImageControl();
-        public Page Page { get; } = new ImagePage();
-
-
+        public Page Page => this._imagePage;
+        ImagePage _imagePage { get; } = new ImagePage();
+        
         public void Starting(Vector2 point) { }
         public void Started(Vector2 startingPoint, Vector2 point)
         {
@@ -45,18 +44,13 @@ namespace Retouch_Photo2.Tools.Models
             //ImageRe
             if (imageRe == null)
             {
-                this.SelectionViewModel.ImageRe = new ImageRe { IsStoryboardNotify = true };
-                return;
-            }
-            if (imageRe.IsStoryboardNotify == true)
-            {
-                this.SelectionViewModel.ImageRe = new ImageRe { IsStoryboardNotify = true };
+                this._imagePage.EaseStoryboard.Begin();
                 return;
             }
 
             //Transformer
-            this.SizeWidth = imageRe.Width;
-            this.SizeHeight = imageRe.Height;
+            this._sizeWidth = imageRe.Width;
+            this._sizeHeight = imageRe.Height;
             Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, imageRe.Width, imageRe.Height);
 
@@ -79,7 +73,7 @@ namespace Retouch_Photo2.Tools.Models
             if (this.MezzanineViewModel.Layer == null) return;
 
             //Transformer
-            Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this.SizeWidth, this.SizeHeight);
+            Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
 
             this.MezzanineViewModel.Layer.Destination = transformerDestination;//Mezzanine
 
@@ -97,7 +91,6 @@ namespace Retouch_Photo2.Tools.Models
 
                 //ImageRe
                 if (imageRe == null) return;
-                if (imageRe.IsStoryboardNotify == true) return;
 
                 //Transformer
                 float sizeWidth = imageRe.Width;
@@ -111,8 +104,8 @@ namespace Retouch_Photo2.Tools.Models
                 });
 
                 //Transformer
-                this.SizeWidth = imageRe.Width;
-                this.SizeHeight = imageRe.Height;
+                this._sizeWidth = imageRe.Width;
+                this._sizeHeight = imageRe.Height;
                 Transformer transformerDestination = this.CreateTransformer(startingPoint, point, imageRe.Width, imageRe.Height);
                 Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
 

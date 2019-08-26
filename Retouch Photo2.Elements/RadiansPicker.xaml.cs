@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Numerics;
+using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
@@ -22,9 +23,8 @@ namespace Retouch_Photo2.Elements
         public static Vector2 RadiansToVector(float radians, float radius, Vector2 center) => new Vector2((float)Math.Cos(radians), (float)Math.Sin(radians)) * radius + center;
 
 
-        //@Delegate   
-        public delegate void RadiansChangeHandler(float radians);
-        public event RadiansChangeHandler RadiansChange;
+        //@Delegate
+        public event TypedEventHandler<object, float> RadiansChange;
 
         private float radians;
         public float Radians
@@ -48,7 +48,7 @@ namespace Retouch_Photo2.Elements
                 {
                     float integer = this.FiveInteger(value);
 
-                    this.RadiansChange?.Invoke(integer);
+                    this.RadiansChange?.Invoke(this, integer);
 
                     this.radians = integer;
                 }

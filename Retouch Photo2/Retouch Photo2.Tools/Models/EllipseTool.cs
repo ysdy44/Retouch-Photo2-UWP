@@ -19,8 +19,7 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-
-
+        
         //@Override
         public override ILayer CreateLayer(Transformer transformer) => new EllipseLayer
         {
@@ -38,6 +37,7 @@ namespace Retouch_Photo2.Tools.Models
         public override ToolType Type => ToolType.Ellipse;
         public override FrameworkElement Icon { get; } = new EllipseControl();
         public override FrameworkElement ShowIcon { get; } = new EllipseControl();
-        public override Page Page { get; } = new EllipsePage();
+        public override Page Page => this._ellipsePage;
+        EllipsePage _ellipsePage { get; } = new EllipsePage();
     }
 }

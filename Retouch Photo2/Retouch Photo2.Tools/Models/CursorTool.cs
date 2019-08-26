@@ -25,28 +25,27 @@ namespace Retouch_Photo2.Tools.Models
         TipViewModel TipViewModel => App.TipViewModel;
 
         //Box
-        bool isBox;
-        TransformerRect boxCanvasRect;
-
-
+        bool _isBox;
+        TransformerRect _boxCanvasRect;
+        
         public ToolType Type=> ToolType.Cursor;
         public FrameworkElement Icon { get; }= new CursorControl();
         public FrameworkElement ShowIcon { get; }= new CursorControl();
-        public Page Page { get; }= new CursorPage();
-        
-        
+        public Page Page => this._cursorPage;
+        CursorPage _cursorPage { get; } = new CursorPage();
+
         public void Starting(Vector2 point)
         {
-            this.isBox = false; //Box
+            this._isBox = false; //Box
 
             if (this.TipViewModel.TransformerTool.Starting(point)) return; //TransformerToolBase
 
-            this.isBox = true; //Box
+            this._isBox = true; //Box
         }
         public void Started(Vector2 startingPoint, Vector2 point)
         {
             //Box
-            if (this.isBox)
+            if (this._isBox)
             {
                 this.BoxDelta(startingPoint, point);//Box
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
@@ -58,7 +57,7 @@ namespace Retouch_Photo2.Tools.Models
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
             //Box
-            if (this.isBox)
+            if (this._isBox)
             {
                 this.BoxDelta(startingPoint, point);//Box
                 this.ViewModel.Invalidate();//Invalidate
@@ -70,9 +69,9 @@ namespace Retouch_Photo2.Tools.Models
         public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
             //Box
-            if (this.isBox)
+            if (this._isBox)
             {
-                this.isBox = false;
+                this._isBox = false;
 
                 if (isSingleStarted)
                 {
@@ -85,12 +84,11 @@ namespace Retouch_Photo2.Tools.Models
 
             this.TipViewModel.TransformerTool.Complete(startingPoint, point, isSingleStarted); //TransformerToolBase
         }
-
-
+        
         public void Draw(CanvasDrawingSession drawingSession)
         {
             //Box
-            if (this.isBox)
+            if (this._isBox)
             {
                 this.BoxDraw(drawingSession);//Box
                 return;
@@ -98,8 +96,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.TipViewModel.TransformerTool.Draw(drawingSession);//TransformerToolBase
         }
-
-
+        
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom() { }
     }

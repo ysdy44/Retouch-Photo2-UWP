@@ -49,7 +49,7 @@ namespace Retouch_Photo2.Effects.Pages
                     effectManager.OuterShadow_Offset = (float)e.NewValue;
                 });
             };
-            this._AnglePicker.RadiansChange += (radians) =>
+            this._AnglePicker.RadiansChange += (s, radians) =>
             {
                 EffectManager.Invalidate((effectManager) =>
                 {

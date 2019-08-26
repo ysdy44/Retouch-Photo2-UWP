@@ -14,7 +14,7 @@
     <Page.Resources>
         
         <!--Storyboard-->
-        <Storyboard x:Name="EaseStoryboard">
+        <Storyboard x:Name="_EaseStoryboard">
             <ColorAnimation From="{ThemeResource SystemBaseHighColor}" To="{ThemeResource AppBorderBrushColor}" Storyboard.TargetProperty="Color" Storyboard.TargetName="SelectBorderBorderBrush" d:IsOptimized="True">
                 <ColorAnimation.EasingFunction>
                     <BounceEase EasingMode="EaseOut"/>
@@ -32,7 +32,7 @@
 
     <StackPanel Orientation="Horizontal">
 
-        <TextBlock Text="{x:Bind ImageReStoryboardConverter(SelectionViewModel.ImageRe),Mode=OneWay}" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Text="{x:Bind SelectionViewModel.ImageRe,Mode=OneWay}" Style="{StaticResource AppTextBlock}"/>
 
         <!--Select-->
         <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
@@ -58,7 +58,7 @@
         <!--Replace-->
         <Border Style="{StaticResource AppRoundedBorderStyle}">
             <Button x:Name="ReplaceButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                 IsEnabled="{x:Bind ImageReToIsEnabledConverter(SelectionViewModel.ImageRe),Mode=OneWay}">
+                 IsEnabled="{x:Bind SelectionViewModel.IsImageLayer,Mode=OneWay}">
                 <TextBlock Text="Replace image"/>
             </Button>
         </Border>
