@@ -1,5 +1,4 @@
 ﻿using FanKit.Transformers;
-using FanKit.Win2Ds;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Controls;
@@ -19,7 +18,7 @@ namespace Retouch_Photo2.Layers.Models
         public override string Type => "Curve";
         public override UIElement Icon => new CurveControl();
 
-        public List<Node> Nodes   = new List<Node>();
+        public NodeCollection NodeCollection { get; private set; }
 
 
         //@Construct
@@ -27,31 +26,13 @@ namespace Retouch_Photo2.Layers.Models
         /// Construct a curve layer.
         /// </summary>
         /// <param name="nodes"> The source nodes. </param>
-        public CurveLayer(IEnumerable<Node> nodes) => this.Nodes = nodes.ToList();
+        public CurveLayer(IEnumerable<Node> nodes) => this.NodeCollection = new NodeCollection(nodes); 
         /// <summary>
         /// Construct a curve layer from a line.
         /// </summary>
         /// <param name="left"> The first source vector. </param>
         /// <param name="right"> The second source vector. </param>
-        public CurveLayer(Vector2 left, Vector2 right) => this.Nodes = new List<Node>
-        {
-             new Node
-             {
-                 Point = left,
-                 LeftControlPoint = left,
-                 RightControlPoint = left,
-                 IsChecked = false,
-                 IsSmooth = false,
-             },
-             new Node
-             {
-                 Point = right,
-                 LeftControlPoint = right,
-                 RightControlPoint = right,
-                 IsChecked = false,
-                 IsSmooth = false,
-             }
-        };
+        public CurveLayer(Vector2 left, Vector2 right) => this.NodeCollection = new NodeCollection(left, right);
 
 
         //@Override
@@ -59,33 +40,33 @@ namespace Retouch_Photo2.Layers.Models
         {
             base.CacheTransform();
 
-            for (int i = 0; i < this.Nodes.Count; i++)
+            for (int i = 0; i < this.NodeCollection.Count; i++)
             {
-                Node node = this.Nodes[i];
+                Node node = this.NodeCollection[i];
                 node.CacheTransform();
-                this.Nodes[i] = node;
+                this.NodeCollection[i] = node;
             }
         }
         public override void TransformMultiplies(Matrix3x2 matrix)
         {
             base.TransformMultiplies(matrix);
 
-            for (int i = 0; i < this.Nodes.Count; i++)
+            for (int i = 0; i < this.NodeCollection.Count; i++)
             {
-                Node node = this.Nodes[i];
+                Node node = this.NodeCollection[i];
                 node.TransformMultiplies(matrix);
-                this.Nodes[i] = node;
+                this.NodeCollection[i] = node;
             }
         }
         public override void TransformAdd(Vector2 vector)
         {
             base.TransformAdd(vector);
 
-            for (int i = 0; i < this.Nodes.Count; i++)
+            for (int i = 0; i < this.NodeCollection.Count; i++)
             {
-                Node node = this.Nodes[i];
+                Node node = this.NodeCollection[i];
                 node.TransformAdd(vector);
-                this.Nodes[i] = node;
+                this.NodeCollection[i] = node;
             }
         }
 
@@ -93,12 +74,12 @@ namespace Retouch_Photo2.Layers.Models
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {  
             CanvasPathBuilder pathBuilder = new CanvasPathBuilder(resourceCreator);
-            pathBuilder.BeginFigure(this.Nodes.First().Point);
+            pathBuilder.BeginFigure(this.NodeCollection.First().Point);
 
-            for (int i = 0; i < this.Nodes.Count - 1; i++)
+            for (int i = 0; i < this.NodeCollection.Count - 1; i++)
             {
-                Node current = this.Nodes[i];             
-                Node preview = this.Nodes[i + 1];
+                Node current = this.NodeCollection[i];             
+                Node preview = this.NodeCollection[i + 1];
                 
                 if (current.IsSmooth && preview.IsSmooth)
                     pathBuilder.AddCubicBezier(current.LeftControlPoint, preview.RightControlPoint, preview.Point);
@@ -116,7 +97,7 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            return new CurveLayer(this.Nodes)
+            return new CurveLayer(this.NodeCollection)
             {
                 Name = base.Name,
                 Opacity = base.Opacity,
@@ -146,7 +127,7 @@ namespace Retouch_Photo2.Layers.Models
             float right = float.MinValue;
             float bottom = float.MinValue;
 
-            foreach (Node node in this.Nodes)
+            foreach (Node node in this.NodeCollection)
             {
                 Vector2 vector = node.Point;
 

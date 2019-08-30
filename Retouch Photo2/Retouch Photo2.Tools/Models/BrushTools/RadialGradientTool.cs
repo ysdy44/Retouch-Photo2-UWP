@@ -50,7 +50,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
             Vector2 center = Vector2.Transform(this.Center, matrix);
-            if (Transformer.InNodeRadius(startingPoint, center))
+            if (FanKit.Math.InNodeRadius(startingPoint, center))
             {
                 this.OldCenter = this.Center;
                 this.OldPoint = this.Point;
@@ -60,7 +60,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
             }
 
             Vector2 point2 = Vector2.Transform(this.Point, matrix);
-            if (Transformer.InNodeRadius(startingPoint, point2))
+            if (FanKit.Math.InNodeRadius(startingPoint, point2))
             {
                 this.Type = RadialGradientType.Point;
                 return;

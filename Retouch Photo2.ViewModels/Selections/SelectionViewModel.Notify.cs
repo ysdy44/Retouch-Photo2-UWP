@@ -192,7 +192,7 @@ namespace Retouch_Photo2.ViewModels.Selections
         {
             if (layer is CurveLayer curveLayer)
             {
-                this.IsPenToolNodesMode = (curveLayer.Nodes.Count != 2);
+                this.IsPenToolNodesMode = (curveLayer.NodeCollection.Count != 2);
                 this.CurveLayer = curveLayer;
             }
             else

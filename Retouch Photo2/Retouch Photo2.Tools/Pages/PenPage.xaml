@@ -6,18 +6,22 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:pagesDrawPages="using:Retouch_Photo2.Pages.DrawPages"
+    xmlns:touchbar="using:Retouch_Photo2.Tools.Touchbar"
     mc:Ignorable="d"
     >
 
     <Page.Resources>
         <!--Flyout-->
-        <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            
+        <Flyout x:Name="Flyout" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <touchbar:PenTouchbar x:Name="_touchbar"/>
         </Flyout>
     </Page.Resources>
 
+    
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
@@ -101,6 +105,15 @@
             </Border>
 
         </StackPanel>
+     
+        <AppBarSeparator Grid.Column="2"/>
 
+        <!--More-->
+        <Border Grid.Column="3" Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
+            <Button x:Name="MoreButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <FontIcon Glyph="&#xE10C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            </Button>
+        </Border>
+        
     </Grid>
 </Page>

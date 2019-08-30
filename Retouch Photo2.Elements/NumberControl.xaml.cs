@@ -9,11 +9,10 @@ namespace Retouch_Photo2.Elements
     public sealed partial class NumberControl : UserControl
     {
         //@Delegate
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <summary> Occurs when the value changes. </summary>
         public event TypedEventHandler<object, double> ValueChange;
 
+        /// <summary> Get or set value. </summary>
         public double Value
         {
             get => this.Slider.Value;

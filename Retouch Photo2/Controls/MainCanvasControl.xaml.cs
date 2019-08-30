@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
@@ -23,20 +24,10 @@ namespace Retouch_Photo2.Controls
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-
-
-        //Single
+        
         bool isSingleStarted;
         Vector2 singleStartingPoint;
-        //Right
-        Vector2 rightStartPoint;
-        //Double
-        Vector2 doubleStartCenter;
-        Vector2 doubleStartPosition;
-        float doubleStartScale;
-        float doubleStartSpace;
-
-
+        
         #region DependencyProperty
 
 
@@ -96,8 +87,7 @@ namespace Retouch_Photo2.Controls
         
 
         #endregion
-
-        
+                
         //@Construct
         public MainCanvasControl()
         {
@@ -216,7 +206,8 @@ namespace Retouch_Photo2.Controls
                 this.isSingleStarted = false;
                 this.singleStartingPoint = point;
 
-               this.TipViewModel.Tool.Starting(point);//Starting
+                ITool tool = this.TipViewModel.Tool;
+                tool.Starting(point);//Starting
 
                 this.ViewModel.CanvasHitTestVisible = false;//IsHitTestVisible
             };
@@ -225,21 +216,24 @@ namespace Retouch_Photo2.Controls
                 //Delta
                 if (this.isSingleStarted)
                 {
-                    this.TipViewModel.Tool.Delta(this.singleStartingPoint, point);//Delta
+                    ITool tool = this.TipViewModel.Tool;
+                    tool.Delta(this.singleStartingPoint, point);//Delta
                     return;
                 }
 
                 //Started
-                if ((this.singleStartingPoint - point).LengthSquared() > 400.0f)
+                if (FanKit.Math.OutNodeDistance(this.singleStartingPoint ,point))
                 {
                     this.isSingleStarted = true;
 
-                    this.TipViewModel.Tool.Started(this.singleStartingPoint, point);//Started
+                    ITool tool = this.TipViewModel.Tool;
+                    tool.Started(this.singleStartingPoint, point);//Started
                 }
             };
             this.CanvasOperator.Single_Complete += (point) =>
             {
-                this.TipViewModel.Tool.Complete(this.singleStartingPoint, point, this.isSingleStarted);//Started
+                ITool tool = this.TipViewModel.Tool;
+                tool.Complete(this.singleStartingPoint, point, this.isSingleStarted);//Started
 
                 this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible
             };
@@ -248,17 +242,18 @@ namespace Retouch_Photo2.Controls
             //Right
             this.CanvasOperator.Right_Start += (point) =>
             {
-                this.rightStartPoint = point;
-
-                this.TipViewModel.ViewTool.Started(this.rightStartPoint, point);//Started
-
+                this.ViewModel.CanvasTransformer.CacheMove(point);
                 this.ViewModel.CanvasHitTestVisible = false;//IsHitTestVisible
             };
-            this.CanvasOperator.Right_Delta += (point) => this.TipViewModel.ViewTool.Delta(this.rightStartPoint, point);//Delta
+            this.CanvasOperator.Right_Delta += (point) =>
+            {
+                this.ViewModel.CanvasTransformer.Move(point);
+                this.ViewModel.Invalidate();//Invalidate
+            };
             this.CanvasOperator.Right_Complete += (point) =>
             {
-                this.TipViewModel.ViewTool.Complete(this.rightStartPoint, point, this.isSingleStarted);//Started
-
+                this.ViewModel.CanvasTransformer.Move(point);
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                 this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible
             };
 
@@ -266,28 +261,18 @@ namespace Retouch_Photo2.Controls
             //Double
             this.CanvasOperator.Double_Start += (center, space) =>
             {
-                this.doubleStartCenter = (center - this.ViewModel.CanvasTransformer.Position) / this.ViewModel.CanvasScale + this.ViewModel.CanvasTransformer.ControlCenter;
-                this.doubleStartPosition = this.ViewModel.CanvasTransformer.Position;
-
-                this.doubleStartSpace = space;
-                this.doubleStartScale = this.ViewModel.CanvasScale;
-
+                this.ViewModel.CanvasTransformer.CachePinch(center, space);
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
-
                 this.ViewModel.CanvasHitTestVisible = false;//IsHitTestVisible
             };
             this.CanvasOperator.Double_Delta += (center, space) =>
             {
-                this.ViewModel.CanvasScale = this.doubleStartScale / this.doubleStartSpace * space;
-                this.ViewModel.CanvasTransformer.Position = center - (this.doubleStartCenter - this.ViewModel.CanvasTransformer.ControlCenter) * this.ViewModel.CanvasScale;
-                this.ViewModel.CanvasTransformer.ReloadMatrix();
-
-                this.ViewModel.Invalidate();
+                this.ViewModel.CanvasTransformer.Pinch(center, space);
+                this.ViewModel.Invalidate();//Invalidate
             };
             this.CanvasOperator.Double_Complete += (center, space) =>
             {
                 this.ViewModel.Invalidate(InvalidateMode.HD);
-
                 this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible
             };
 
@@ -295,24 +280,11 @@ namespace Retouch_Photo2.Controls
             this.CanvasOperator.Wheel_Changed += (point, space) =>
             {
                 if (space > 0)
-                {
-                    if (this.ViewModel.CanvasScale < 10f)
-                    {
-                        this.ViewModel.CanvasScale *= 1.1f;
-                        this.ViewModel.CanvasTransformer.Position = point + (this.ViewModel.CanvasTransformer.Position - point) * 1.1f;
-                    }
-                }
+                    this.ViewModel.CanvasTransformer.ZoomIn(point);
                 else
-                {
-                    if (this.ViewModel.CanvasScale > 0.1f)
-                    {
-                        this.ViewModel.CanvasScale /= 1.1f;
-                        this.ViewModel.CanvasTransformer.Position = point + (this.ViewModel.CanvasTransformer.Position - point) / 1.1f;
-                    }
-                }
+                    this.ViewModel.CanvasTransformer.ZoomOut(point);
 
-                this.ViewModel.CanvasTransformer.ReloadMatrix();
-                this.ViewModel.Invalidate();
+                this.ViewModel.Invalidate();//Invalidate
             };
 
 

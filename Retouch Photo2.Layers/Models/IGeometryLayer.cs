@@ -1,9 +1,7 @@
-﻿using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
+﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Layers;
 using System.Numerics;
 using Windows.UI;
 
@@ -126,7 +124,7 @@ namespace Retouch_Photo2.Layers.Models
                                 float radiusX = Vector2.Distance(center, xPoint);
                                 float radiusY = Vector2.Distance(center, yPoint);
                                 Matrix3x2 transformMatrix = Matrix3x2.CreateTranslation(-center)
-                                    * Matrix3x2.CreateRotation(TransformerMath.VectorToRadians(xPoint - center))
+                                    * Matrix3x2.CreateRotation(FanKit.Math.VectorToRadians(xPoint - center))
                                     * Matrix3x2.CreateTranslation(center);
 
                                 ICanvasBrush brush = new CanvasRadialGradientBrush(resourceCreator, this.FillBrush.Array)
@@ -203,7 +201,7 @@ namespace Retouch_Photo2.Layers.Models
                                 float radiusX = Vector2.Distance(center, xPoint);
                                 float radiusY = Vector2.Distance(center, yPoint);
                                 Matrix3x2 transformMatrix = Matrix3x2.CreateTranslation(-center)
-                                    * Matrix3x2.CreateRotation(TransformerMath.VectorToRadians(xPoint - center))
+                                    * Matrix3x2.CreateRotation(FanKit.Math.VectorToRadians(xPoint - center))
                                     * Matrix3x2.CreateTranslation(center);
 
                                 ICanvasBrush brush = new CanvasRadialGradientBrush(resourceCreator, this.StrokeBrush.Array)

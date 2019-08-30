@@ -132,7 +132,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                                     this.ColorPicker.Color = this.SelectionViewModel.StrokeColor;
                                     break;
                             }
-                            this.ColorFlyout.ShowAt(this.ShowControl);//Flyout
+                            this.ColorFlyout.ShowAt(this);//Flyout
                         }
                         break;
                     case BrushType.LinearGradient:
@@ -141,7 +141,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                         {
                             CanvasGradientStop[] array = this.SelectionViewModel.BrushArray;
                             this.StopsPicker.SetArray(array);
-                            this.StopsFlyout.ShowAt(this.ShowControl);//Flyout
+                            this.StopsFlyout.ShowAt(this);//Flyout
                         }
                         break;
                     case BrushType.Image:

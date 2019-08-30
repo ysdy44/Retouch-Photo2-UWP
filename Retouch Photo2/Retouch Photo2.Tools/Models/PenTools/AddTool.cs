@@ -1,10 +1,7 @@
 ﻿using FanKit.Transformers;
-using FanKit.Win2Ds;
 using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
@@ -18,7 +15,7 @@ namespace Retouch_Photo2.Tools.Models.PenTools
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        List<Node> Nodes => this.SelectionViewModel.CurveLayer.Nodes;
+        NodeCollection NodeCollection => this.SelectionViewModel.CurveLayer.NodeCollection;
 
         Node _endNode;
         Node _lastNode;
@@ -37,7 +34,7 @@ namespace Retouch_Photo2.Tools.Models.PenTools
                 IsSmooth = false,
             };
             this._endNode = node;
-            this._lastNode = this.SelectionViewModel.CurveLayer.Nodes.Last();
+            this._lastNode = this.SelectionViewModel.CurveLayer.NodeCollection.Last();
             this.ViewModel.Invalidate();
         }
         public void Delta(Vector2 point)
@@ -69,7 +66,7 @@ namespace Retouch_Photo2.Tools.Models.PenTools
                 IsChecked = false,
                 IsSmooth = false,
             };
-            this.Nodes.Add(node);
+            this.NodeCollection.Add(node);
             this.SelectionViewModel.CurveLayer.CorrectionTransformer();
             this.ViewModel.Invalidate();//Invalidate
         }

@@ -67,7 +67,7 @@ namespace Retouch_Photo2.Tools.Pages
             {
                 this.ListView.ItemsSource = null;
                 this.ListView.ItemsSource = this.ViewModel.Images;
-                this.Flyout.ShowAt(this.StackButton);//this.StackButton
+                this.Flyout.ShowAt(this);//this.StackButton
             };
             this.ListView.ItemClick += (s, e) =>
             {

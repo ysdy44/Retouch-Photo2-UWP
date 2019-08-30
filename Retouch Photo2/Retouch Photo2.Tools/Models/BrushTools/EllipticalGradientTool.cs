@@ -54,7 +54,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
             Vector2 xPoint = Vector2.Transform(this.XPoint, matrix);
-            if (Transformer.InNodeRadius(startingPoint, xPoint))
+            if (FanKit.Math.InNodeRadius(startingPoint, xPoint))
             {
                 this.OldCenter = this.Center;
                 this.OldYPoint = this.YPoint;
@@ -64,7 +64,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
             }
 
             Vector2 yPoint = Vector2.Transform(this.YPoint, matrix);
-            if (Transformer.InNodeRadius(startingPoint, yPoint))
+            if (FanKit.Math.InNodeRadius(startingPoint, yPoint))
             {
                 this.OldCenter = this.Center;
                 this.OldXPoint = this.XPoint;
@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
             }
 
             Vector2 center = Vector2.Transform(this.Center, matrix);
-            if (Transformer.InNodeRadius(startingPoint, center))
+            if (FanKit.Math.InNodeRadius(startingPoint, center))
             {
                 this.OldCenter = this.Center;
                 this.OldXPoint = this.XPoint;

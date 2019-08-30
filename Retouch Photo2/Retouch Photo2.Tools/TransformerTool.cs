@@ -35,8 +35,8 @@ namespace Retouch_Photo2.Tools
             {
                 if (layer.Visibility == Visibility.Visible)
                 {
-                    bool layerInQuadrangle = Transformer.InQuadrangle(canvasPoint, layer.Destination);
-                    if (layerInQuadrangle)
+                    bool isFillContainsPoint = layer.Destination.FillContainsPoint(canvasPoint);
+                    if (isFillContainsPoint)
                     {
                         selectedLayer = layer;
                         return true;
@@ -243,9 +243,8 @@ namespace Retouch_Photo2.Tools
             {
                 if (layer.Visibility == Visibility.Visible)
                 {
-                    Transformer layerTransformer = layer.Destination;
-                    bool layerInQuadrangle = Transformer.InQuadrangle(canvasPoint, layerTransformer);
-                    if (layerInQuadrangle) return true;
+                    bool isFillContainsPoint = layer.Destination.FillContainsPoint(canvasPoint);
+                    if (isFillContainsPoint) return true;
                 }
 
                 return false;

@@ -1,11 +1,9 @@
 ﻿using FanKit.Transformers;
-using FanKit.Win2Ds;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
-using System.Collections.Generic;
 using System.Numerics;
 
 namespace Retouch_Photo2.Tools.Models.PenTools
@@ -19,7 +17,7 @@ namespace Retouch_Photo2.Tools.Models.PenTools
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
-        List<Node> Nodes => this.SelectionViewModel.CurveLayer.Nodes;
+        NodeCollection NodeCollection => this.SelectionViewModel.CurveLayer.NodeCollection;
 
         Vector2 _left;
         Vector2 _right;

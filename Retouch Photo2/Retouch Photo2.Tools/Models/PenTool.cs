@@ -1,44 +1,17 @@
 ﻿using FanKit.Transformers;
-using FanKit.Win2Ds;
+using FanKit.Transformers.Extensions;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Tools.Controls;
 using Retouch_Photo2.Tools.Models.PenTools;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
-using System.Collections.Generic;
 using System.Numerics;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
-    /// <summary>
-    /// State of <see cref="PenTool"/>. 
-    /// </summary>
-    public enum PenToolMode
-    {
-        /// <summary> Normal. </summary>
-        None,
-
-        /// <summary> Preview a line before creating a layer. </summary>
-        Preview,
-        /// <summary> Add a node to nodes in curve layer. </summary>
-        Add,
-        /// <summary> Move multiple nodes in curve layer. </summary>
-        Move,
-
-        /// <summary> Move a node's point. </summary>
-        MoveSingleNodePoint,
-        /// <summary> Move a node's left-control-point. </summary>
-        MoveSingleNodeLeftControlPoint,
-        /// <summary> Move a node's right-control-point. </summary>
-        MoveSingleNodeRightControlPoint,
-
-        /// <summary> Draw a choose rectangle. </summary>
-        RectChoose,
-    }
-
     /// <summary>
     /// <see cref="ITool"/>'s PenTool.
     /// </summary>
@@ -48,220 +21,198 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
-        List<Node> Nodes => this.SelectionViewModel.CurveLayer.Nodes;
-
-        //Pen
-        public PenToolMode Mode = PenToolMode.None;
-        public readonly PreviewTool PreviewTool = new PreviewTool();
-        public readonly AddTool AddTool = new AddTool();
-        public readonly MoveTool MoveTool = new MoveTool();
-        public readonly Guider Guider = new Guider();
-        public readonly MoveSingleNodePointTool MoveSingleNodePointTool = new MoveSingleNodePointTool();
-        public readonly MoveSingleNodeControlPointTool MoveSingleNodeControlPointTool = new MoveSingleNodeControlPointTool();
-        public readonly RectChooseTool RectChooseTool = new RectChooseTool();
-
+        NodeCollection NodeCollection => this.SelectionViewModel.CurveLayer.NodeCollection;
+ 
         public ToolType Type => ToolType.Pen;
         public FrameworkElement Icon { get; } = new PenControl();
         public FrameworkElement ShowIcon { get; } = new PenControl();
         public Page Page => this._penPage;
         PenPage _penPage { get; } = new PenPage();
+        
+        //Pen
+        public NodeCollectionMode Mode = NodeCollectionMode.None;
+        public readonly PreviewTool PreviewTool = new PreviewTool();
+        public readonly AddTool AddTool = new AddTool();
+        Node _oldNode;
+        TransformerRect _transformerRect;
 
         public void Starting(Vector2 point)
         {
             if (this.SelectionViewModel.CurveLayer == null)
+                this.Mode = NodeCollectionMode.Preview;
+            else if (this.SelectionViewModel.IsPenToolNodesMode == false)
+                this.Mode = NodeCollectionMode.Add;
+            else
             {
-                this.Mode = PenToolMode.Preview;
-                this.PreviewTool.Start(point);//PreviewNode
-                return;
+                Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+                this.Mode = NodeCollection.ContainsNodeCollectionMode(point, this.NodeCollection, matrix);
             }
 
-            if (this.SelectionViewModel.IsPenToolNodesMode == false)
+            switch (this.Mode)
             {
-                this.Mode = PenToolMode.Add;
-                this.AddTool.Start(point);//AddNode
-                return;
+                case NodeCollectionMode.None:
+                    break;
+                case NodeCollectionMode.Preview:
+                    this.PreviewTool.Start(point);//PreviewNode
+                    break;
+                case NodeCollectionMode.Add:
+                    this.AddTool.Start(point);//AddNode
+                    break;
+                case NodeCollectionMode.Move:
+                    this.NodeCollection.CacheTransform(isOnlySelected:true);
+                    break;
+                case NodeCollectionMode.MoveSingleNodePoint:
+                    this.NodeCollection.SelectionOnlyOne(this.NodeCollection.Index);
+                    this._oldNode = this.NodeCollection[this.NodeCollection.Index];
+                    break;
+                case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
+                    this._oldNode = this.NodeCollection[this.NodeCollection.Index];
+                    break;
+                case NodeCollectionMode.MoveSingleNodeRightControlPoint:
+                    this._oldNode = this.NodeCollection[this.NodeCollection.Index];
+                    break;
+                case NodeCollectionMode.RectChoose:
+                    {
+                        Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+                        Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+
+                        this._transformerRect = new TransformerRect(canvasPoint, canvasPoint);
+                    }
+                    break;
             }
 
-            //Guider
-            this.Guider.SetType(point);
-            switch (this.Guider.Type)
-            {
-                case GuiderType.PointWithChecked:
-                    {
-                        this.Mode = PenToolMode.Move;
-                        this.MoveTool.Start();//EditMove
-                        return;
-                    }
-                case GuiderType.PointWithoutChecked:
-                    {
-                        this.Mode = PenToolMode.MoveSingleNodePoint;
-                        this.MoveSingleNodePointTool.Start(point, this.Guider.Index);//MoveSingleNodePointTool
-                        return;
-                    }
-                case GuiderType.LeftControlPoint:
-                    {
-                        this.Mode = PenToolMode.MoveSingleNodeLeftControlPoint;
-                        this.MoveSingleNodeControlPointTool.StartLeftControl(this.Guider.Index);//MoveSingleNodeControlPointTool
-                        return;
-                    }
-                case GuiderType.RightControlPoint:
-                    {
-                        this.Mode = PenToolMode.MoveSingleNodeRightControlPoint;
-                        this.MoveSingleNodeControlPointTool.StartRightControl(this.Guider.Index);//MoveSingleNodeControlPointTool
-                        return;
-                    }
-            }
-
-            this.Mode = PenToolMode.RectChoose;
-            this.RectChooseTool.Start(point);//RectChoose
-            return;
+            this.ViewModel.Invalidate();//Invalidate
         }
         public void Started(Vector2 startingPoint, Vector2 point) { }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
             if (this.SelectionViewModel.CurveLayer == null)
             {
-                if (this.Mode == PenToolMode.Preview)
+                if (this.Mode == NodeCollectionMode.Preview)
                 {
                     this.PreviewTool.Delta(point);//PreviewNode
                 }
                 return;
             }
 
+            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+            Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+
             switch (this.Mode)
             {
-                case PenToolMode.Add:
+                case NodeCollectionMode.None:
+                    break;
+                case NodeCollectionMode.Preview:
+                    break;
+                case NodeCollectionMode.Add:
                     this.AddTool.Delta(point);//AddNode
-                    return;
-                case PenToolMode.Move:
-                    this.MoveTool.Delta(startingPoint, point);//EditMove
-                    return;
-
-                case PenToolMode.MoveSingleNodePoint:
-                    this.MoveSingleNodePointTool.Delta(point, this.Guider.Index);//MoveSingleNodePointTool
-                    return;
-                case PenToolMode.MoveSingleNodeLeftControlPoint:
-                    this.MoveSingleNodeControlPointTool.DeltaLeftControl(point, this.Guider.Index);//MoveSingleNodeControlPointTool
-                    return;
-                case PenToolMode.MoveSingleNodeRightControlPoint:
-                    this.MoveSingleNodeControlPointTool.DeltaRightControl(point, this.Guider.Index);//MoveSingleNodeControlPointTool
-                    return;
-
-                case PenToolMode.RectChoose:
-                    this.RectChooseTool.Delta(startingPoint, point);//RectChoose
-                    return;
+                    break;
+                case NodeCollectionMode.Move:
+                    {
+                        Vector2 vector = canvasPoint - canvasStartingPoint;
+                        this.NodeCollection.TransformAdd(vector);
+                    }
+                    break;
+                case NodeCollectionMode.MoveSingleNodePoint:
+                    this.NodeCollection[this.NodeCollection.Index] = this._oldNode.Move(canvasPoint);
+                    break;
+                case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
+                    this.NodeCollection[this.NodeCollection.Index] = this._penPage.Touchbar.Controller(canvasPoint, this._oldNode, isLeftControlPoint: true);
+                    break;
+                case NodeCollectionMode.MoveSingleNodeRightControlPoint:
+                    this.NodeCollection[this.NodeCollection.Index] = this._penPage.Touchbar.Controller(canvasPoint, this._oldNode, isLeftControlPoint: false);
+                    break;
+                case NodeCollectionMode.RectChoose:
+                    {
+                        TransformerRect transformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
+                        this._transformerRect = transformerRect;
+                        this.NodeCollection.RectChoose(transformerRect);
+                    }
+                    break;
             }
+
+            this.ViewModel.Invalidate();//Invalidate
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
-        {
-            PenToolMode mode = this.Mode;
-            this.Mode = PenToolMode.None;
-
+        { 
             if (this.SelectionViewModel.CurveLayer == null)
             {
-                if (mode == PenToolMode.Preview)
+                if (this.Mode == NodeCollectionMode.Preview)
                 {
                     this.PreviewTool.Complete(startingPoint, point, isSingleStarted);//PreviewNode
                 }
                 return;
             }
 
-            if (mode == PenToolMode.Add && this.SelectionViewModel.CurveLayer != null)
+            if (this.Mode == NodeCollectionMode.Add && this.SelectionViewModel.CurveLayer != null)
             {
                 this.AddTool.Complete(point);//AddNode
                 return;
             }
 
+            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+            Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+
             if (isSingleStarted)
             {
-                switch (mode)
+                switch (this.Mode)
                 {
-                    case PenToolMode.Move:
-                        this.MoveTool.Complete(startingPoint, point);//EditMove
-                        return;
-
-                    case PenToolMode.MoveSingleNodePoint:
-                        this.MoveSingleNodePointTool.Complete(point, this.Guider.Index);//MoveSingleNodePointTool
-                        return;
-                    case PenToolMode.MoveSingleNodeLeftControlPoint:
-                        this.MoveSingleNodeControlPointTool.CompleteLeftControl(point, this.Guider.Index);//MoveSingleNodeControlPointTool
-                        return;
-                    case PenToolMode.MoveSingleNodeRightControlPoint:
-                        this.MoveSingleNodeControlPointTool.CompleteRightControl(point, this.Guider.Index);//MoveSingleNodeControlPointTool
-                        return;
-
-                    case PenToolMode.RectChoose:
-                        this.RectChooseTool.Complete(startingPoint, point);//RectChoose
-                        return;
+                    case NodeCollectionMode.Move:
+                        {
+                            Vector2 vector = canvasPoint - canvasStartingPoint;
+                            this.NodeCollection.TransformAdd(vector);
+                        }
+                        break;
+                    case NodeCollectionMode.MoveSingleNodePoint:
+                        this.NodeCollection[this.NodeCollection.Index] = this._oldNode.Move(canvasPoint);
+                        break;
+                    case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
+                        this.NodeCollection[this.NodeCollection.Index] = this._penPage.Touchbar.Controller(canvasPoint, this._oldNode, isLeftControlPoint: true);
+                        break;
+                    case NodeCollectionMode.MoveSingleNodeRightControlPoint:
+                        this.NodeCollection[this.NodeCollection.Index] = this._penPage.Touchbar.Controller(canvasPoint, this._oldNode, isLeftControlPoint: false);
+                        break;
+                    case NodeCollectionMode.RectChoose:
+                        this._transformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
+                        break;
                 }
             }
 
+            this.SelectionViewModel.CurveLayer.CorrectionTransformer();
+            this.Mode = NodeCollectionMode.None;
+
             this.ViewModel.Invalidate();//Invalidate
-            return;
         }
 
         public void Draw(CanvasDrawingSession drawingSession)
         {
             if (this.SelectionViewModel.CurveLayer == null)
             {
-                if (this.Mode == PenToolMode.Preview)
+                if (this.Mode == NodeCollectionMode.Preview)
                 {
                     this.PreviewTool.Draw(drawingSession);//PreviewNode
                 }
                 return;
             }
 
+            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+
             switch (this.Mode)
             {
-                case PenToolMode.Add:
+                case NodeCollectionMode.Add:
                     this.AddTool.Draw(drawingSession);//AddNode
                     break;
-
-                case PenToolMode.RectChoose:
-                    this.RectChooseTool.Draw(drawingSession);//RectChoose
+                case NodeCollectionMode.RectChoose:
+                    {
+                        TransformerRect transformerRect = this._transformerRect;
+                        drawingSession.FillRectDodgerBlue(this.ViewModel.CanvasDevice, transformerRect, matrix);
+                    }
                     break;
             }
 
-            //Draw end-point and control points.
-            {
-                Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                for (int i = 0; i < this.Nodes.Count; i++)
-                {
-                    Node node = this.Nodes[i];
-                    Vector2 vector = Vector2.Transform(node.Point, matrix);
-
-                    if (node.IsChecked == false)
-                    {
-                        if (node.IsSmooth == false) drawingSession.DrawNode3(vector);
-                        else drawingSession.DrawNode(vector);
-                    }
-                    else
-                    {
-                        if (node.IsSmooth == false) drawingSession.DrawNode4(vector);
-                        else
-                        {
-                            //Ignoring the right-control-point of the first point.
-                            if (i != 0)
-                            {
-                                Vector2 rightControlPoint = Vector2.Transform(node.RightControlPoint, matrix);
-                                drawingSession.DrawLineDodgerBlue(vector, rightControlPoint);
-                                drawingSession.DrawNode(rightControlPoint);//TODO: Fankit更新后，请改成DrawNode5
-                                drawingSession.FillCircle(rightControlPoint, 3, Windows.UI.Colors.Red);
-                            }
-
-                            //Ignoring the left-control-point of the last point.
-                            if (i != this.Nodes.Count - 1)
-                            {
-                                Vector2 leftControlPoint = Vector2.Transform(node.LeftControlPoint, matrix);
-                                drawingSession.DrawLineDodgerBlue(vector, leftControlPoint);
-                                drawingSession.DrawNode(leftControlPoint);//TODO: Fankit更新后，请改成DrawNode5
-                            }
-
-                            drawingSession.DrawNode2(vector);
-                        }
-                    }
-                }
-            }
+            drawingSession.DrawNodeCollection(this.NodeCollection, matrix);
         }
 
 

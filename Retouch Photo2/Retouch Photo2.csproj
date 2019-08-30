@@ -198,11 +198,6 @@
     <Compile Include="Retouch Photo2.Tools\Models\NoneTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\PenTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\PenTools\AddTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\PenTools\Guider.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\PenTools\MoveSingleNodeControlPointTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\PenTools\MoveSingleNodePointTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\PenTools\RectChooseTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\PenTools\MoveTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\PenTools\PreviewTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\RectangleTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\ViewTool.cs" />
@@ -229,6 +224,9 @@
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Pages\ViewPage.xaml.cs">
       <DependentUpon>ViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\Touchbar\PenTouchbar.xaml.cs">
+      <DependentUpon>PenTouchbar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\TransformerTool.cs" />
   </ItemGroup>
@@ -726,6 +724,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Retouch Photo2.Tools\Touchbar\PenTouchbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Style\Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -741,7 +743,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FanKit.Transformers">
-      <Version>1.1.6</Version>
+      <Version>1.2.0</Version>
     </PackageReference>
     <PackageReference Include="HSVColorPickers">
       <Version>1.2.0</Version>

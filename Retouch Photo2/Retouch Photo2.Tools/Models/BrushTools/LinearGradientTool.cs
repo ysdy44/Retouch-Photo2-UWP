@@ -48,14 +48,14 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
             Vector2 startPoint = Vector2.Transform(this.StartPoint, matrix);
-            if (Transformer.InNodeRadius(startingPoint, startPoint))
+            if (FanKit.Math.InNodeRadius(startingPoint, startPoint))
             {
                 this.Type = LinearGradientType.StartPoint;
                 return;
             }
 
             Vector2 endPoint = Vector2.Transform(this.EndPoint, matrix);
-            if (Transformer.InNodeRadius(startingPoint, endPoint))
+            if (FanKit.Math.InNodeRadius(startingPoint, endPoint))
             {
                 this.Type = LinearGradientType.EndPoint;
                 return;
