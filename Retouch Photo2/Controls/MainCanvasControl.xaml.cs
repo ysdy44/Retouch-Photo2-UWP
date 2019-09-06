@@ -262,17 +262,24 @@ namespace Retouch_Photo2.Controls
             this.CanvasOperator.Double_Start += (center, space) =>
             {
                 this.ViewModel.CanvasTransformer.CachePinch(center, space);
+
+                this.ViewModel.NotifyCanvasTransformerScale();//Notify
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+
                 this.ViewModel.CanvasHitTestVisible = false;//IsHitTestVisible
             };
             this.CanvasOperator.Double_Delta += (center, space) =>
             {
                 this.ViewModel.CanvasTransformer.Pinch(center, space);
+
+                this.ViewModel.NotifyCanvasTransformerScale();//Notify
                 this.ViewModel.Invalidate();//Invalidate
             };
             this.CanvasOperator.Double_Complete += (center, space) =>
             {
+                this.ViewModel.NotifyCanvasTransformerScale();//Notify
                 this.ViewModel.Invalidate(InvalidateMode.HD);
+
                 this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible
             };
 
@@ -284,6 +291,7 @@ namespace Retouch_Photo2.Controls
                 else
                     this.ViewModel.CanvasTransformer.ZoomOut(point);
 
+                this.ViewModel.NotifyCanvasTransformerScale();//Notify
                 this.ViewModel.Invalidate();//Invalidate
             };
 

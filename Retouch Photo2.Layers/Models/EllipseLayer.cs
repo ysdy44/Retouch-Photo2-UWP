@@ -32,6 +32,10 @@ namespace Retouch_Photo2.Layers.Models
             Vector2 top = Vector2.Transform(base.Destination.CenterTop, canvasToVirtualMatrix);
             Vector2 right = Vector2.Transform(base.Destination.CenterRight, canvasToVirtualMatrix);
             Vector2 bottom = Vector2.Transform(base.Destination.CenterBottom, canvasToVirtualMatrix);
+
+            //TODO: 替换
+            //   return TransformerRect.CreateEllipse(resourceCreator, left, top, right, bottom);
+
             //HV
             Vector2 horizontal = (right - left) * 0.276f;// vector / 2 * 0.552f
             Vector2 vertical = (bottom - top) * 0.276f;// vector / 2 * 0.552f

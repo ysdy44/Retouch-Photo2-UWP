@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo2.Tools;
 using System.ComponentModel;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.ViewModels.Tips
 {
@@ -8,8 +9,6 @@ namespace Retouch_Photo2.ViewModels.Tips
     /// </summary>
     public partial class TipViewModel : INotifyPropertyChanged
     {
-
-
         private void SetToolIsOpen(bool isOpen)
         {
             switch (this.Tool.Type)

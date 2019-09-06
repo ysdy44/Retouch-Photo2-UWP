@@ -197,8 +197,7 @@
     <Compile Include="Retouch Photo2.Tools\Models\ImageTool.Rectangle.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\NoneTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\PenTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\PenTools\AddTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\PenTools\PreviewTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\PenTool.Preview.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\RectangleTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\ViewTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Pages\AcrylicPage.xaml.cs">
@@ -225,9 +224,14 @@
     <Compile Include="Retouch Photo2.Tools\Pages\ViewPage.xaml.cs">
       <DependentUpon>ViewPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Touchbar\PenTouchbar.xaml.cs">
-      <DependentUpon>PenTouchbar.xaml</DependentUpon>
+    <Compile Include="Retouch Photo2.Tools\Pages\ViewPages\RadianTouchbarSlider.xaml.cs">
+      <DependentUpon>RadianTouchbarSlider.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Tools\Pages\ViewPages\ScaleTouchbarSlider.xaml.cs">
+      <DependentUpon>ScaleTouchbarSlider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\Pages\ViewPages\ViewPageType.cs" />
+    <Compile Include="Retouch Photo2.Tools\Pages\ViewPages\ViewConverter.cs" />
     <Compile Include="Retouch Photo2.Tools\TransformerTool.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -724,7 +728,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Touchbar\PenTouchbar.xaml">
+    <Page Include="Retouch Photo2.Tools\Pages\ViewPages\RadianTouchbarSlider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\Pages\ViewPages\ScaleTouchbarSlider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -743,7 +751,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FanKit.Transformers">
-      <Version>1.2.0</Version>
+      <Version>1.3.2</Version>
     </PackageReference>
     <PackageReference Include="HSVColorPickers">
       <Version>1.2.0</Version>

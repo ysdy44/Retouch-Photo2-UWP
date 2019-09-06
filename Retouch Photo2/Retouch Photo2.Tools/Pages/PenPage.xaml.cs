@@ -1,6 +1,6 @@
 ﻿using FanKit.Transformers;
+using Retouch_Photo2.Tools.Flyouts;
 using Retouch_Photo2.Tools.Models;
-using Retouch_Photo2.Tools.Touchbar;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
@@ -21,8 +21,8 @@ namespace Retouch_Photo2.Tools.Pages
         NodeCollection NodeCollection => this.SelectionViewModel.CurveLayer.NodeCollection;
 
         //@Content
-        /// <summary> PenPage's Touchbar. </summary>
-        public PenTouchbar Touchbar => this._touchbar;
+        /// <summary> PenPage's Flyout. </summary>
+        public PenFlyout PenFlyout => this._penFlyout;
 
         //@Converter
         private Visibility FalseToVisibilityConverter(bool value) => value ? Visibility.Collapsed : Visibility.Visible;

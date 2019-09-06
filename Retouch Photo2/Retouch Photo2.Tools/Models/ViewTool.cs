@@ -1,7 +1,9 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Tools.Controls;
 using Retouch_Photo2.Tools.Pages;
+using Retouch_Photo2.Tools.Pages.ViewPages;
 using Retouch_Photo2.ViewModels;
+using Retouch_Photo2.ViewModels.Tips;
 using System.Numerics;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -15,13 +17,14 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
 
         public ToolType Type => ToolType.View;
         public FrameworkElement Icon { get; } = new ViewControl();
         public FrameworkElement ShowIcon { get; } = new ViewControl();
         public Page Page => this._viewPage;
         ViewPage _viewPage { get; } = new ViewPage();
-
+        
         public void Starting(Vector2 point) { }
         public void Started(Vector2 startingPoint, Vector2 point)
         {
@@ -43,6 +46,6 @@ namespace Retouch_Photo2.Tools.Models
 
 
         public void OnNavigatedTo() { }
-        public void OnNavigatedFrom() { }
+        public void OnNavigatedFrom()        {}
     }
 }

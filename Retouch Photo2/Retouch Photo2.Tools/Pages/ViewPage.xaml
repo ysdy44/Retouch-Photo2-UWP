@@ -9,64 +9,24 @@
     d:DesignWidth="400"
     >
 
-
-    <Page.Resources>
-        <!--Radian-->
-        <Storyboard x:Name="RadianStoryboard">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Value" Storyboard.TargetName="RadianSlider" EnableDependentAnimation ="True">
-                <SplineDoubleKeyFrame x:Name="RadianFrame" KeyTime="0:0:0.2" KeySpline="0.5,1.0 1,1"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <!--Scale-->
-        <Storyboard x:Name="ScaleStoryboard">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Value" Storyboard.TargetName="ScaleSlider" EnableDependentAnimation ="True">
-                <SplineDoubleKeyFrame x:Name="ScaleFrame" KeyTime="0:0:0.2" KeySpline="0.5,1.0 1,1"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-    </Page.Resources>
-        
      
     <StackPanel Orientation="Horizontal">
 
         <!--Radian-->
         <TextBlock Text="Radian:" Style="{StaticResource AppTextBlock}"/>
-        <!--Radian-->
-        <Slider x:Name="RadianSlider" Width="222" Value="{x:Bind RadianToValue(ViewModel.CanvasRadian),Mode=OneWay}" Style="{StaticResource AppOpacitySliderStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip Content="Slider to change radian" Placement="Top" IsOpen="{x:Bind TipViewModel.IsViewToolOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-            </ToolTipService.ToolTip>
-        </Slider>
-        <!--Radian-->
-        <ContentControl Width="6"/>
-        <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip Content="Reset radian" Placement="Top" IsOpen="{x:Bind TipViewModel.IsViewToolOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-            </ToolTipService.ToolTip>
-            <Button x:Name="RadianButton" Padding="0" BorderThickness="0" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <TextBlock x:Name="RadianTextBlock" Text="{x:Bind RadianToString(ViewModel.CanvasRadian),Mode=OneWay}"/>
-            </Button>
+        <Border Width="Auto" MinWidth="80" Style="{StaticResource AppCircleBorderStyle}">
+            <ToggleButton x:Name="RadianToggleButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
+                          Content="{x:Bind RadianToString(ViewModel.CanvasTransformerRadian),Mode=OneWay}"/>
         </Border>
         
         <AppBarSeparator/>
 
         <!--Scale-->
         <TextBlock Text="Scale:" Style="{StaticResource AppTextBlock}"/>
-        <!--Scale-->
-        <Slider x:Name="ScaleSlider" Width="222" Value="{x:Bind ScaleToValue(ViewModel.CanvasScale),Mode=OneWay}" Style="{StaticResource AppOpacitySliderStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip Content="Slider to change scale" Placement="Top" IsOpen="{x:Bind TipViewModel.IsViewToolOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-            </ToolTipService.ToolTip>
-        </Slider>        
-        <ContentControl Width="6"/>
-        <!--Scale-->
-        <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip Content="Reset scale" Placement="Top" IsOpen="{x:Bind TipViewModel.IsViewToolOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-            </ToolTipService.ToolTip>
-            <Button x:Name="ScaleButton" Padding="0" BorderThickness="0" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <TextBlock x:Name="ScaleTextBlock" Text="{x:Bind ScaleToString(ViewModel.CanvasScale),Mode=OneWay}"/>
-            </Button>
-        </Border>        
+        <Border Width="Auto" MinWidth="80" Style="{StaticResource AppCircleBorderStyle}">
+            <ToggleButton x:Name="ScaleToggleButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
+                          Content="{x:Bind ScaleToString(ViewModel.CanvasTransformerScale),Mode=OneWay}"/>
+        </Border>      
 
     </StackPanel>
 </Page>

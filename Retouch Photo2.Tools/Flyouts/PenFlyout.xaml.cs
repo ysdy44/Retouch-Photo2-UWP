@@ -1,14 +1,13 @@
 ﻿using FanKit.Transformers;
-using Retouch_Photo2.Tools.Models;
 using System.Numerics;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Tools.Touchbar
+namespace Retouch_Photo2.Tools.Flyouts
 {
     /// <summary>
-    /// Touchbar of <see cref = "PenTool"/>.
+    /// Flyout of <see cref = "PenTool"/>.
     /// </summary>
-    public sealed partial class PenTouchbar : UserControl
+    public sealed partial class PenFlyout : UserControl
     {
         private SelfControlPointMode selfMode;
         public SelfControlPointMode SelfMode
@@ -50,13 +49,14 @@ namespace Retouch_Photo2.Tools.Touchbar
         public EachControlPointLengthMode EachLengthMode;
         public EachControlPointAngleMode EachAngleMode;
 
+        /// <summary> Controllers for control points. </summary>
         public Node Controller(Vector2 point, Node startingNode, bool isLeftControlPoint) => Node.Controller(this.SelfMode, this.EachLengthMode, this.EachAngleMode, point, startingNode, isLeftControlPoint);
 
         //@Construct
-        public PenTouchbar()
+        public PenFlyout()
         {
             this.InitializeComponent();
-            this.Loaded += (s, e) => 
+            this.Loaded += (s, e) =>
             {
                 this.MirroredRadioButton.IsChecked = true;
 

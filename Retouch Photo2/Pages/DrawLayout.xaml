@@ -15,6 +15,7 @@
         
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:layers="using:Retouch_Photo2.Layers"
+    xmlns:tools="using:Retouch_Photo2.Tools"
     mc:Ignorable="d">
 
 
@@ -226,8 +227,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="70"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition x:Name="RightGridLenght"
-                Width="70"/>
+            <ColumnDefinition x:Name="RightGridLenght" Width="70"/>
             <!--Normal-->
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -301,7 +301,11 @@
                 <FontIcon Glyph="&#xE1D9;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
         </Grid>
-      
+
+        <!--Touchbar-->
+        <Border x:Name="TouchbarBorder" Grid.Column="1" Grid.Row="1" Margin="12,0" MinWidth="200" MaxWidth="800" VerticalAlignment="Bottom">
+        
+        </Border>
         <!--Foot-->
         <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Column="1" Grid.Row="2" ShadowColor="{ThemeResource AppStrokeColor}"
             Visibility="Visible" >

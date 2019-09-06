@@ -50,7 +50,7 @@
         <Setter Property="Background" Value="{ThemeResource AppForeground}"/>
     </Style>
 
-
+    
     <!--Flyout-->
     <Style x:Key="AppFlyoutPresenterStyle" TargetType="FlyoutPresenter">
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -99,6 +99,8 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    
     <!--Slider-->
     <Style x:Key="AppOpacitySliderStyle" TargetType="Slider">
         <Setter Property="HorizontalAlignment" Value="Stretch"/>

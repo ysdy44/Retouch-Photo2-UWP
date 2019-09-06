@@ -24,6 +24,9 @@ namespace Retouch_Photo2.Layers.Models
             Vector2 rightTop = Vector2.Transform(base.Destination.RightTop, canvasToVirtualMatrix);
             Vector2 rightBottom = Vector2.Transform(base.Destination.RightBottom, canvasToVirtualMatrix);
             Vector2 leftBottom = Vector2.Transform(base.Destination.LeftBottom, canvasToVirtualMatrix);
+          
+            //TODO: 替换
+            //   return TransformerRect.CreateRectangle(resourceCreator, leftTop, rightTop, rightBottom, leftBottom);
 
             //Points
             Vector2[] points = new Vector2[]

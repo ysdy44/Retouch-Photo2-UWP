@@ -92,6 +92,9 @@ namespace Retouch_Photo2.Pages
         /// <summary> CenterBorder's Child. </summary>
         public UIElement CenterContent { get => this.CenterBorder.Child; set => this.CenterBorder.Child = value; }
 
+        /// <summary> TouchbarBorder's Child. </summary>
+        public UIElement Touchbar { get => this.TouchbarBorder.Child; set => this.TouchbarBorder.Child = value; }
+
         /// <summary> TopLeftBorder's Child. </summary>
         public UIElement TopLeftPane { get => this.TopLeftBorder.Child; set => this.TopLeftBorder.Child = value; }
         /// <summary> TopRightBorder's Child. </summary>

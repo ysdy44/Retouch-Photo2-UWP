@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Pages
         public DrawPage()
         {
             this.InitializeComponent();
-
+            
             //Theme
             this.BackButton.Tapped += (s, e) => this.Frame.GoBack();
             this.SaveButton.Tapped += (s, e) => this.Frame.GoBack();

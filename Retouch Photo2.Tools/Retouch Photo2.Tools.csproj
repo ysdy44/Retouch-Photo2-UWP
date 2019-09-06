@@ -133,6 +133,9 @@
     <Compile Include="Controls\ViewControl.xaml.cs">
       <DependentUpon>ViewControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Flyouts\PenFlyout.xaml.cs">
+      <DependentUpon>PenFlyout.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ITool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ITransformerTool.cs" />
@@ -140,6 +143,9 @@
     <EmbeddedResource Include="Properties\Retouch_Photo2.Tools.rd.xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FanKit.Transformers">
+      <Version>1.3.2</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.5</Version>
     </PackageReference>
@@ -183,6 +189,10 @@
     <Page Include="Controls\ViewControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Flyouts\PenFlyout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

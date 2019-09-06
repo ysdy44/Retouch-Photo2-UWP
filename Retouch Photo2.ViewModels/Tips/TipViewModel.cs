@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo2.Tools;
 using System.ComponentModel;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.ViewModels.Tips
 {
@@ -14,6 +15,19 @@ namespace Retouch_Photo2.ViewModels.Tips
         {
             this.tool = tool;
         }
+
+
+        /// <summary> Retouch_Photo2's the only <see cref = "TipViewModel.Touchbar" />. </summary>
+        public UIElement Touchbar
+        {
+            get => this.touchbar;
+            set
+            {
+                this.touchbar = value;
+                this.OnPropertyChanged(nameof(this.Touchbar));//Notify 
+            }
+        }
+        private UIElement touchbar;
 
 
         /// <summary> Retouch_Photo2's the only <see cref = "TipViewModel.IsOpen" />. </summary>

@@ -7,13 +7,14 @@
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:pagesDrawPages="using:Retouch_Photo2.Pages.DrawPages"
     xmlns:touchbar="using:Retouch_Photo2.Tools.Touchbar"
+    xmlns:toolFlyouts="using:Retouch_Photo2.Tools.Flyouts"
     mc:Ignorable="d"
     >
 
     <Page.Resources>
         <!--Flyout-->
         <Flyout x:Name="Flyout" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <touchbar:PenTouchbar x:Name="_touchbar"/>
+            <toolFlyouts:PenFlyout x:Name="_penFlyout"/>
         </Flyout>
     </Page.Resources>
 
