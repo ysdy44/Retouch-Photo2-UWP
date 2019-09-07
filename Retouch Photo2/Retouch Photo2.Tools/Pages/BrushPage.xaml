@@ -15,7 +15,7 @@
     <Page.Resources>
         <!--Flyout-->
         <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <hSVColorPickers:ColorPicker x:Name="ColorPicker" Width="222"/>
+            <hSVColorPickers:ColorPicker x:Name="ColorPicker" Width="222" Background="Transparent" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" />
         </Flyout>
         <Flyout x:Name="StopsFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <brushsControls:StopsPicker x:Name="StopsPicker" Width="320"/>

@@ -2,7 +2,9 @@
 using Retouch_Photo2.Elements.MainPages;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Tools.Touchbars;
 using Retouch_Photo2.ViewModels;
+using Retouch_Photo2.ViewModels.Tips;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -23,7 +25,8 @@ namespace Retouch_Photo2.Pages
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-
+        TipViewModel TipViewModel => App.TipViewModel;
+        
         ObservableCollection<Photo> PhotoFileList = new ObservableCollection<Photo>();
 
 
@@ -122,11 +125,17 @@ namespace Retouch_Photo2.Pages
         {
             this.InitializeComponent();
 
-            this.ViewModel.CanvasTheme = (App.Current.RequestedTheme == ApplicationTheme.Dark) ? ElementTheme.Dark : ElementTheme.Light;
+           // this.ViewModel.CanvasTheme = (App.Current.RequestedTheme == ApplicationTheme.Dark) ? ElementTheme.Dark : ElementTheme.Light;
             this.ThemeControl.Loaded += (s, e) => this.ThemeControl.ApplicationTheme = App.Current.RequestedTheme;
 
             this.Loaded += (s, e) =>
             {
+                this.TipViewModel.StrokeWidthTouchbar = new StrokeWidthTouchbar();
+                this.TipViewModel.ViewRadianTouchbar = new ViewRadianTouchbar();
+                this.TipViewModel.ViewScaleTouchbar = new ViewScaleTouchbar();
+                this.TipViewModel.AcrylicTintOpacityTouchbar = new AcrylicTintOpacityTouchbar();
+                this.TipViewModel.AcrylicBlurAmountTouchbar = new AcrylicBlurAmountTouchbar();
+
                 if (this.PhotoFileList.Count == 0)
                     this.State = MainPageState.None;//State   
                 else

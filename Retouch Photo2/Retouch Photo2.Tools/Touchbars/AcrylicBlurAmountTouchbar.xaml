@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Retouch_Photo2.Tools.Elements.ViewRadianTouchbarSlider"
+    x:Class="Retouch_Photo2.Tools.Touchbars.AcrylicBlurAmountTouchbar"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,10 +9,10 @@
     d:DesignHeight="50"
     d:DesignWidth="200"
     >
-        
+
     <elements:TouchbarSlider x:Name="TouchbarSlider" 
-                Number="{x:Bind NumberConverter(ViewModel.CanvasTransformerRadian),Mode=OneWay}"
-                Value="{x:Bind ValueConverter(ViewModel.CanvasTransformerRadian),Mode=OneWay}"
-                />
+                             Number="{x:Bind NumberConverter(SelectionViewModel.AcrylicBlurAmount),Mode=OneWay}"
+                             Value="{x:Bind ValueConverter(SelectionViewModel.AcrylicBlurAmount),Mode=OneWay}"
+                             />
 
 </UserControl>

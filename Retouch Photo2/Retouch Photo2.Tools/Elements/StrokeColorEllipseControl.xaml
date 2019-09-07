@@ -11,7 +11,7 @@
 
     <UserControl.Resources>
         <Flyout x:Name="_Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <hsvColorPicker:ColorPicker x:Name="_ColorPicker" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+            <hsvColorPicker:ColorPicker x:Name="_ColorPicker" Background="Transparent" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
         </Flyout>
     </UserControl.Resources>
 

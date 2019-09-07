@@ -17,19 +17,6 @@ namespace Retouch_Photo2.ViewModels.Tips
         }
 
 
-        /// <summary> Retouch_Photo2's the only <see cref = "TipViewModel.Touchbar" />. </summary>
-        public UIElement Touchbar
-        {
-            get => this.touchbar;
-            set
-            {
-                this.touchbar = value;
-                this.OnPropertyChanged(nameof(this.Touchbar));//Notify 
-            }
-        }
-        private UIElement touchbar;
-
-
         /// <summary> Retouch_Photo2's the only <see cref = "TipViewModel.IsOpen" />. </summary>
         public bool IsOpen
         {

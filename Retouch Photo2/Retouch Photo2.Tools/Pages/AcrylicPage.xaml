@@ -4,8 +4,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -22,6 +22,7 @@
         <!--TintOpacity-->
         <TextBlock Text="TintOpacity:" Style="{StaticResource AppTextBlock}"/>
         <elements:TouchbarButton x:Name="TintOpacityTouchbarButton"
+                      IsChecked="{x:Bind AcrylicTintOpacityTypeConverter(TipViewModel.TouchbarType),Mode=OneWay}"
                       Number="{x:Bind TintOpacityNumberConverter(SelectionViewModel.AcrylicTintOpacity),Mode=OneWay}"
                       />
 
@@ -30,6 +31,7 @@
         <!--BlurAmount-->
         <TextBlock Text="BlurAmount:" Style="{StaticResource AppTextBlock}"/>
         <elements:TouchbarButton x:Name="BlurAmountTouchbarButton"
+                      IsChecked="{x:Bind AcrylicBlurAmountTypeConverter(TipViewModel.TouchbarType),Mode=OneWay}"
                       Number="{x:Bind BlurAmountNumberConverter(SelectionViewModel.AcrylicBlurAmount),Mode=OneWay}"
                       />
         

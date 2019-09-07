@@ -39,10 +39,7 @@ namespace Retouch_Photo2.ViewModels.Tips
             } 
         }
 
-
-        ///////////////////////////////////////////////////////////////////////////////////
-
-
+        
         /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.TestApp.Tools.Tool" />. </summary>
         public ITool Tool
         {
@@ -65,8 +62,7 @@ namespace Retouch_Photo2.ViewModels.Tips
 
         /// <summary> TransformerTool. </summary>
         public ITransformerTool TransformerTool;
-
-
+        
 
         /// <summary> CursorTool. </summary>
         public ITool CursorTool;
@@ -92,11 +88,7 @@ namespace Retouch_Photo2.ViewModels.Tips
         /// <summary> AcrylicTool. </summary>
         public ITool AcrylicTool;
         
-
-        //////////////////////////////////////////////////////////////////////////////////////
-
-
-
+        
         /// <summary> IsOpen of the <see cref = "TipViewModel.CursorTool" />. </summary>
         public bool IsCursorToolOpen
         {

@@ -18,7 +18,6 @@
     xmlns:elementsMainpages="using:Retouch_Photo2.Elements.MainPages"
     mc:Ignorable="d"
 
-   RequestedTheme="{x:Bind ViewModel.CanvasTheme,Mode=OneWay}" 
    Background="{ThemeResource AppBackground}"
     >
 
@@ -624,7 +623,6 @@
             <TextBlock Grid.Column="1" Text="Retouh Photo2" FontSize="32" FontWeight="Light" HorizontalAlignment="Center"/>
             <elements:ThemeControl x:Name="ThemeControl" Grid.Column="2" 
                        TitleBarColor="{ThemeResource AppForegroundColor}"
-                       Theme="{x:Bind ViewModel.CanvasTheme,Mode=TwoWay}" 
                        />
         </Grid>
 

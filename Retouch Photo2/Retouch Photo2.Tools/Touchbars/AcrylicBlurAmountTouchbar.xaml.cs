@@ -1,22 +1,26 @@
-﻿using Retouch_Photo2.Layers.Models;
+﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Tools.Elements
+namespace Retouch_Photo2.Tools.Touchbars
 {
-    public sealed partial class AcrylicBlurAmountTouchbarSlider : UserControl
+    public sealed partial class AcrylicBlurAmountTouchbar : UserControl, ITouchbar
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
+        public TouchbarType Type => TouchbarType.AcrylicBlurAmount;
+        public UserControl Self => this;
+
         //@Converter
         private int NumberConverter(float blurAmount) => (int)blurAmount;
-        private double ValueConverter(float blurAmount) => blurAmount ;
-         
+        private double ValueConverter(float blurAmount) => blurAmount;
+
         //@Construct
-        public AcrylicBlurAmountTouchbarSlider()
+        public AcrylicBlurAmountTouchbar()
         {
             this.InitializeComponent();
 
@@ -37,7 +41,7 @@ namespace Retouch_Photo2.Tools.Elements
             this.TouchbarSlider.ValueChangeDelta += (sender, value) =>
             {
                 float amount = (float)value;
-            this.Change(amount);
+                this.Change(amount);
             };
             this.TouchbarSlider.ValueChangeCompleted += (sender, value) => { };
         }

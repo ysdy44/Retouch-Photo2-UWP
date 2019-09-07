@@ -1,24 +1,28 @@
-﻿using Retouch_Photo2.Layers.Models;
+﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Tools.Elements
+namespace Retouch_Photo2.Tools.Touchbars
 {
-    public sealed partial class StrokeWidthControl : UserControl
+    public sealed partial class StrokeWidthTouchbar : UserControl, ITouchbar
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
+        public TouchbarType Type => TouchbarType.StrokeWidth;
+        public UserControl Self => this;
+
         //@Converter
         private int NumberConverter(float strokeWidth) => (int)(strokeWidth * 100.0f);
         private double ValueConverter(float strokeWidth) => strokeWidth;
 
         //@Construct
-        public StrokeWidthControl()
+        public StrokeWidthTouchbar()
         {
             this.InitializeComponent();
 
@@ -34,7 +38,7 @@ namespace Retouch_Photo2.Tools.Elements
 
             //Value
             this.TouchbarSlider.Minimum = 0d;
-            this.TouchbarSlider.Maximum = 100d;
+            this.TouchbarSlider.Maximum = 10d;
             this.TouchbarSlider.ValueChangeStarted += (sender, value) => { };
             this.TouchbarSlider.ValueChangeDelta += (sender, value) =>
             {

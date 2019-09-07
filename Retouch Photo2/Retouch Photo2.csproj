@@ -148,14 +148,14 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Retouch Photo2.Tools\Elements\AcrylicBlurAmountTouchbarSlider.xaml.cs">
-      <DependentUpon>AcrylicBlurAmountTouchbarSlider.xaml</DependentUpon>
+    <Compile Include="Retouch Photo2.Tools\Touchbars\AcrylicBlurAmountTouchbar.xaml.cs">
+      <DependentUpon>AcrylicBlurAmountTouchbar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Elements\AcrylicTintOpacityTouchbarSlider.xaml.cs">
-      <DependentUpon>AcrylicTintOpacityTouchbarSlider.xaml</DependentUpon>
+    <Compile Include="Retouch Photo2.Tools\Touchbars\AcrylicTintOpacityTouchbar.xaml.cs">
+      <DependentUpon>AcrylicTintOpacityTouchbar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Elements\StrokeWidthControl.xaml.cs">
-      <DependentUpon>StrokeWidthControl.xaml</DependentUpon>
+    <Compile Include="Retouch Photo2.Tools\Touchbars\StrokeWidthTouchbar.xaml.cs">
+      <DependentUpon>StrokeWidthTouchbar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Models\ICreateTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\AcrylicTool.cs" />
@@ -197,11 +197,11 @@
     <Compile Include="Retouch Photo2.Tools\Pages\ViewPage.xaml.cs">
       <DependentUpon>ViewPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Elements\ViewRadianTouchbarSlider.xaml.cs">
-      <DependentUpon>ViewRadianTouchbarSlider.xaml</DependentUpon>
+    <Compile Include="Retouch Photo2.Tools\Touchbars\ViewRadianTouchbar.xaml.cs">
+      <DependentUpon>ViewRadianTouchbar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Elements\ViewScaleTouchbarSlider.xaml.cs">
-      <DependentUpon>ViewScaleTouchbarSlider.xaml</DependentUpon>
+    <Compile Include="Retouch Photo2.Tools\Touchbars\ViewScaleTouchbar.xaml.cs">
+      <DependentUpon>ViewScaleTouchbar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\TransformerTool.cs" />
   </ItemGroup>
@@ -619,15 +619,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Elements\AcrylicBlurAmountTouchbarSlider.xaml">
+    <Page Include="Retouch Photo2.Tools\Touchbars\AcrylicBlurAmountTouchbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Elements\AcrylicTintOpacityTouchbarSlider.xaml">
+    <Page Include="Retouch Photo2.Tools\Touchbars\AcrylicTintOpacityTouchbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Elements\StrokeWidthControl.xaml">
+    <Page Include="Retouch Photo2.Tools\Touchbars\StrokeWidthTouchbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -663,11 +663,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Elements\ViewRadianTouchbarSlider.xaml">
+    <Page Include="Retouch Photo2.Tools\Touchbars\ViewRadianTouchbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Elements\ViewScaleTouchbarSlider.xaml">
+    <Page Include="Retouch Photo2.Tools\Touchbars\ViewScaleTouchbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

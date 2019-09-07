@@ -11,12 +11,13 @@ namespace Retouch_Photo2.Tools.Elements
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-
-        //@Static
-        public static StrokeWidthControl StrokeWidthControl = new StrokeWidthControl();
+        
 
         //@Converter
         private int NumberConverter(float strokeWidth) => (int)(strokeWidth * 100.0f);
+
+        private bool StrokeWidthTypeConverter(TouchbarType type) => type == TouchbarType.StrokeWidth;
+
 
         //@Construct
         public StrokeWidthButton()
@@ -27,15 +28,9 @@ namespace Retouch_Photo2.Tools.Elements
             this.TouchbarButton.Tapped2 += (s, isChecked) =>
             {
                 if (isChecked)
-                {
-                    this.TouchbarButton.IsChecked = false;
-                    this.TipViewModel.Touchbar = null;
-                }
+                    this.TipViewModel.SetTouchbar(TouchbarType.None);//Touchbar
                 else
-                {
-                    this.TouchbarButton.IsChecked = true;
-                    this.TipViewModel.Touchbar = StrokeWidthButton.StrokeWidthControl;
-                }
+                    this.TipViewModel.SetTouchbar(TouchbarType.StrokeWidth);//Touchbar
             };
         }
     }

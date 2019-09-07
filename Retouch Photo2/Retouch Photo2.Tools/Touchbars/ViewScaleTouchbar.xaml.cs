@@ -1,20 +1,24 @@
-﻿using Retouch_Photo2.Tools.Models;
+﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Tools.Elements
+namespace Retouch_Photo2.Tools.Touchbars
 {
-    public sealed partial class ViewScaleTouchbarSlider : UserControl
+    public sealed partial class ViewScaleTouchbar : UserControl, ITouchbar
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+
+        public TouchbarType Type => TouchbarType.ViewScale;
+        public UserControl Self => this;
 
         //@Converter
         private int NumberConverter(float scale) => ViewScaleConverter.ScaleToNumber(scale);
         private double ValueConverter(float scale) => ViewScaleConverter.ScaleToValue(scale);
 
         //@Construct
-        public ViewScaleTouchbarSlider()
+        public ViewScaleTouchbar()
         {
             this.InitializeComponent();
 
@@ -24,8 +28,8 @@ namespace Retouch_Photo2.Tools.Elements
             this.TouchbarSlider.NumberMaximum = ViewScaleConverter.MaxNumber;
             this.TouchbarSlider.NumberChange += (sender, number) =>
             {
-                float scale= ViewScaleConverter.NumberToScale(number);
-                this.Change(scale);
+                float scale = ViewScaleConverter.NumberToScale(number);
+                this.ViewModel.SetCanvasTransformerScale(scale);//CanvasTransformer
             };
 
             //Value
@@ -35,21 +39,9 @@ namespace Retouch_Photo2.Tools.Elements
             this.TouchbarSlider.ValueChangeDelta += (sender, value) =>
             {
                 float scale = ViewScaleConverter.ValueToScale(value);
-                this.Change(scale);
+                this.ViewModel.SetCanvasTransformerScale(scale);//CanvasTransformer
             };
             this.TouchbarSlider.ValueChangeCompleted += (sender, value) => { };
         }
-
-        public void Change(float scale)
-        {
-            this.ViewModel.Text = scale.ToString();
-            //CanvasTransformer
-            this.ViewModel.CanvasTransformer.Scale = scale;
-            this.ViewModel.CanvasTransformer.ReloadMatrix();
-
-            this.ViewModel.NotifyCanvasTransformerScale();//Notify
-            this.ViewModel.Invalidate();//Invalidate
-        }
-
     }
 }

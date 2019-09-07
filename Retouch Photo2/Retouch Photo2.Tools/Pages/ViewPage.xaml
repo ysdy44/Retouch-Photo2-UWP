@@ -5,7 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:elements="using:Retouch_Photo2.Elements"
-    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -26,16 +25,19 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Page.Resources>
-    
+
 
     <StackPanel Orientation="Horizontal">
 
         <!--Radian-->
         <TextBlock Text="Radian:" Style="{StaticResource AppTextBlock}"/>
-        <elements:TouchbarButton x:Name="RadianTouchbarButton" Unit="º"
+        <elements:TouchbarButton x:Name="RadianTouchbarButton"
+                      IsChecked="{x:Bind ViewRadianTypeConverter(TipViewModel.TouchbarType),Mode=OneWay}"
                       Number="{x:Bind RadianNumberConverter(ViewModel.CanvasTransformerRadian),Mode=OneWay}"
                       />
-
+        
+        <ContentControl Width="4"/>
+        
         <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
             <Button x:Name="RadianClearButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                 <FontIcon Glyph="&#xE106;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
@@ -46,9 +48,12 @@
 
         <!--Scale-->
         <TextBlock Text="Scale:" Style="{StaticResource AppTextBlock}"/>
-        <elements:TouchbarButton x:Name="ScaleTouchbarButton" Unit="%"
+        <elements:TouchbarButton x:Name="ScaleTouchbarButton"
+                      IsChecked="{x:Bind ViewScaleTypeConverter(TipViewModel.TouchbarType),Mode=OneWay}"
                          Number="{x:Bind ScaleNumberConverter(ViewModel.CanvasTransformerScale),Mode=OneWay}"
                         />
+
+        <ContentControl Width="4"/>
         
         <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
             <Button x:Name="ScaleClearButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">

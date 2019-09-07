@@ -23,7 +23,9 @@
 
 
     <UserControl.Resources>
+        <!--CanvasOperator-->
         <transformers:CanvasOperator x:Name="CanvasOperator" DestinationControl="{x:Bind CanvasControl}"/>
+        <!--Flyout-->
         <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <hSVColorPickers:ColorPicker x:Name="ColorPicker" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
         </Flyout>

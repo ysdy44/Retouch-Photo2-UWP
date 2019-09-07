@@ -1,6 +1,7 @@
 ﻿using Retouch_Photo2.Pages;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.Tools.Models;
+using Retouch_Photo2.Tools.Touchbars;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Keyboards;
 using Retouch_Photo2.ViewModels.Selections;
@@ -41,6 +42,14 @@ namespace Retouch_Photo2
             PenTool = new PenTool(),
             ImageTool = new ImageTool(),
             AcrylicTool = new AcrylicTool(),
+              
+            /*
+           StrokeWidthTouchbar = new StrokeWidthTouchbar(),
+            ViewRadianTouchbar = new ViewRadianTouchbar(),
+            ViewScaleTouchbar = new ViewScaleTouchbar(),
+            AcrylicTintOpacityTouchbar = new AcrylicTintOpacityTouchbar(),
+            AcrylicBlurAmountTouchbar = new AcrylicBlurAmountTouchbar(),
+             */
         };
 
 

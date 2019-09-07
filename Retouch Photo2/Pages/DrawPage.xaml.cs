@@ -25,13 +25,16 @@ namespace Retouch_Photo2.Pages
         //@Converter
         private FrameworkElement IconConverter(ITool tool) => tool.ShowIcon;
         private Page PageConverter(ITool tool) => tool.Page;
-        
+
         //@Construct
         public DrawPage()
         {
             this.InitializeComponent();
-            
-            //Theme
+            this.Loaded += (s, e) =>
+            {
+                this.ThemeControl.ApplicationTheme = App.Current.RequestedTheme;
+            };
+
             this.BackButton.Tapped += (s, e) => this.Frame.GoBack();
             this.SaveButton.Tapped += (s, e) => this.Frame.GoBack();
                        

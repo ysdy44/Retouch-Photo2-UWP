@@ -1,8 +1,6 @@
-﻿using Retouch_Photo2.Tools.Elements;
-using Retouch_Photo2.Tools.Models;
+﻿using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Tips;
-using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -18,48 +16,18 @@ namespace Retouch_Photo2.Tools.Pages
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
+
         //@Converter
         private int RadianNumberConverter(float radian) => ViewRadianConverter.RadianToNumber(radian);
         private int ScaleNumberConverter(float scale) => ViewScaleConverter.ScaleToNumber(scale);
 
-        //@Touchbar
-        ViewRadianTouchbarSlider _radianTouchbarSlider { get; } = new ViewRadianTouchbarSlider();
-        ViewScaleTouchbarSlider _scaleTouchbarSlider { get; } = new ViewScaleTouchbarSlider();
+        private bool ViewRadianTypeConverter(TouchbarType type) => type == TouchbarType.ViewRadian;
+        private bool ViewScaleTypeConverter(TouchbarType type) => type == TouchbarType.ViewScale;
 
-        /// <summary> Type of ViewPage. </summary>
-        public ViewToolType Type
-        {
-            set
-            {
-                switch (value)
-                {
-                    case ViewToolType.None:
-                        {
-                            this.RadianTouchbarButton.IsChecked = false;
-                            this.ScaleTouchbarButton.IsChecked = false;
-                            this.TipViewModel.Touchbar = null;//Touchbar
-                        }
-                        break;
-                    case ViewToolType.Radian:
-                        {
-                            this.RadianTouchbarButton.IsChecked = true;
-                            this.ScaleTouchbarButton.IsChecked = false;
-                            this.TipViewModel.Touchbar = this._radianTouchbarSlider;//Touchbar
-                        }
-                        break;
-                    case ViewToolType.Scale:
-                        {
-                            this.RadianTouchbarButton.IsChecked = false;
-                            this.ScaleTouchbarButton.IsChecked = true;
-                            this.TipViewModel.Touchbar = this._scaleTouchbarSlider;//Touchbar
-                        }
-                        break;
-                }
-            }
-        }
 
         #region DependencyProperty
         
+
         /// <summary> Gets or sets radian. </summary>
         public double Radian
         {
@@ -73,9 +41,10 @@ namespace Retouch_Photo2.Tools.Pages
 
             if (e.NewValue is double value)
             {
-                con._radianTouchbarSlider.Change((float)value);
+                con.ViewModel.SetCanvasTransformerRadian((float)value);//CanvasTransformer
             }
         }));
+
 
         /// <summary> Gets or sets scale. </summary>
         public double Scale
@@ -90,39 +59,48 @@ namespace Retouch_Photo2.Tools.Pages
 
             if (e.NewValue is double value)
             {
-                con._scaleTouchbarSlider.Change((float)value);
+                con.ViewModel.SetCanvasTransformerScale((float)value);//CanvasTransformer
             }
         }));
 
+
         #endregion
+
+
         //@Construct
         public ViewPage()
         {
             this.InitializeComponent();
-            
+            Storyboard.SetTarget(this.RadianKeyFrames, this);
+            Storyboard.SetTarget(this.ScaleKeyFrames, this);
+
             //Radian
+            this.RadianTouchbarButton.Unit = "º";
             this.RadianTouchbarButton.Tapped2 += (s, isChecked) =>
             {
-                if (isChecked) this.Type = ViewToolType.None;
-                else this.Type = ViewToolType.Radian;
+                if (isChecked)
+                    this.TipViewModel.SetTouchbar(TouchbarType.None);//Touchbar
+                else
+                    this.TipViewModel.SetTouchbar(TouchbarType.ViewRadian);//Touchbar
             };
             this.RadianClearButton.Tapped += (s, e) =>
             {
-                Storyboard.SetTarget(this.RadianKeyFrames, this);
                 this.Radian = this.ViewModel.CanvasTransformer.Radian;
                 this.RadianStoryboard.Begin();
             };
 
             //Scale
+            this.ScaleTouchbarButton.Unit = "%";
             this.ScaleTouchbarButton.Tapped2 += (s, isChecked) =>
             {
-                if (isChecked) this.Type = ViewToolType.None;
-                else this.Type = ViewToolType.Scale;
+                if (isChecked)
+                    this.TipViewModel.SetTouchbar(TouchbarType.None);//Touchbar
+                else
+                    this.TipViewModel.SetTouchbar(TouchbarType.ViewScale);//Touchbar
             };
             this.ScaleClearButton.Tapped += (s, e) =>
             {
-                Storyboard.SetTarget(this.ScaleKeyFrames, this);
-                this.Scale = this.ViewModel.CanvasTransformer.Radian;
+                this.Scale = this.ViewModel.CanvasTransformer.Scale;
                 this.ScaleStoryboard.Begin();
             };
         }
