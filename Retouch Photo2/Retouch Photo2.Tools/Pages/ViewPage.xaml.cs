@@ -1,8 +1,11 @@
-﻿using Retouch_Photo2.Tools.Models;
-using Retouch_Photo2.Tools.Pages.ViewPages;
+﻿using Retouch_Photo2.Tools.Elements;
+using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Tips;
+using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace Retouch_Photo2.Tools.Pages
 {
@@ -12,79 +15,116 @@ namespace Retouch_Photo2.Tools.Pages
     public sealed partial class ViewPage : Page
     {
         //@ViewModel
-        public ViewModel ViewModel => App.ViewModel;
-        public TipViewModel TipViewModel => App.TipViewModel;
-
-        //@Touchbar
-        RadianTouchbarSlider _radianTouchbarSlider { get; } = new RadianTouchbarSlider();
-        ScaleTouchbarSlider _scaleTouchbarSlider { get; } = new ScaleTouchbarSlider();
+        ViewModel ViewModel => App.ViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
 
         //@Converter
-        private string RadianToString(float radian) => ViewConverter.RadianToString(radian);
-        private string ScaleToString(float radian) => ViewConverter.ScaleToString(radian);
+        private int RadianNumberConverter(float radian) => ViewRadianConverter.RadianToNumber(radian);
+        private int ScaleNumberConverter(float scale) => ViewScaleConverter.ScaleToNumber(scale);
 
-
-        bool _isSetting;
+        //@Touchbar
+        ViewRadianTouchbarSlider _radianTouchbarSlider { get; } = new ViewRadianTouchbarSlider();
+        ViewScaleTouchbarSlider _scaleTouchbarSlider { get; } = new ViewScaleTouchbarSlider();
 
         /// <summary> Type of ViewPage. </summary>
-        public ViewPageType Type
+        public ViewToolType Type
         {
-            get => this.type;
             set
             {
-                if (this.type == value) return;
-
-                if (this._isSetting) return;
-                this._isSetting = true;
-
                 switch (value)
                 {
-                    case ViewPageType.None:
+                    case ViewToolType.None:
                         {
-                            this.RadianToggleButton.IsChecked = false;
-                            this.ScaleToggleButton.IsChecked = false;
-
+                            this.RadianTouchbarButton.IsChecked = false;
+                            this.ScaleTouchbarButton.IsChecked = false;
                             this.TipViewModel.Touchbar = null;//Touchbar
                         }
                         break;
-                    case ViewPageType.Radian:
+                    case ViewToolType.Radian:
                         {
-                            this.RadianToggleButton.IsChecked = true;
-                            this.ScaleToggleButton.IsChecked = false;
-
+                            this.RadianTouchbarButton.IsChecked = true;
+                            this.ScaleTouchbarButton.IsChecked = false;
                             this.TipViewModel.Touchbar = this._radianTouchbarSlider;//Touchbar
                         }
                         break;
-                    case ViewPageType.Scale:
+                    case ViewToolType.Scale:
                         {
-                            this.RadianToggleButton.IsChecked = false;
-                            this.ScaleToggleButton.IsChecked = true;
-
+                            this.RadianTouchbarButton.IsChecked = false;
+                            this.ScaleTouchbarButton.IsChecked = true;
                             this.TipViewModel.Touchbar = this._scaleTouchbarSlider;//Touchbar
                         }
                         break;
                 }
-
-                this._isSetting = false;
-
-                this.type=value;
             }
         }
-        private ViewPageType type;
 
+        #region DependencyProperty
+        
+        /// <summary> Gets or sets radian. </summary>
+        public double Radian
+        {
+            get { return (double)GetValue(RadianProperty); }
+            set { SetValue(RadianProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "ViewPage.Radian" /> dependency property. </summary>
+        public static readonly DependencyProperty RadianProperty = DependencyProperty.Register(nameof(Radian), typeof(double), typeof(ViewPage), new PropertyMetadata(0.0f, (sender, e) =>
+        {
+            ViewPage con = (ViewPage)sender;
 
+            if (e.NewValue is double value)
+            {
+                con._radianTouchbarSlider.Change((float)value);
+            }
+        }));
+
+        /// <summary> Gets or sets scale. </summary>
+        public double Scale
+        {
+            get { return (double)GetValue(ScaleProperty); }
+            set { SetValue(ScaleProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "ViewPage.Scale" /> dependency property. </summary>
+        public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register(nameof(Scale), typeof(double), typeof(ViewPage), new PropertyMetadata(0.0f, (sender, e) =>
+        {
+            ViewPage con = (ViewPage)sender;
+
+            if (e.NewValue is double value)
+            {
+                con._scaleTouchbarSlider.Change((float)value);
+            }
+        }));
+
+        #endregion
         //@Construct
         public ViewPage()
         {
             this.InitializeComponent();
-
+            
             //Radian
-            this.RadianToggleButton.Unchecked += (s, e) => this.Type = ViewPageType.None;
-            this.RadianToggleButton.Checked += (s, e) => this.Type = ViewPageType.Radian;
+            this.RadianTouchbarButton.Tapped2 += (s, isChecked) =>
+            {
+                if (isChecked) this.Type = ViewToolType.None;
+                else this.Type = ViewToolType.Radian;
+            };
+            this.RadianClearButton.Tapped += (s, e) =>
+            {
+                Storyboard.SetTarget(this.RadianKeyFrames, this);
+                this.Radian = this.ViewModel.CanvasTransformer.Radian;
+                this.RadianStoryboard.Begin();
+            };
 
             //Scale
-            this.ScaleToggleButton.Unchecked += (s, e) => this.Type = ViewPageType.None;
-            this.ScaleToggleButton.Checked += (s, e) => this.Type = ViewPageType.Scale;
+            this.ScaleTouchbarButton.Tapped2 += (s, isChecked) =>
+            {
+                if (isChecked) this.Type = ViewToolType.None;
+                else this.Type = ViewToolType.Scale;
+            };
+            this.ScaleClearButton.Tapped += (s, e) =>
+            {
+                Storyboard.SetTarget(this.ScaleKeyFrames, this);
+                this.Scale = this.ViewModel.CanvasTransformer.Radian;
+                this.ScaleStoryboard.Begin();
+            };
         }
     }
 }

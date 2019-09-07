@@ -1,7 +1,7 @@
 ﻿using FanKit.Transformers;
+using Retouch_Photo2.Elements.MainPages;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Pages.MainPages;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.ObjectModel;
@@ -14,44 +14,8 @@ using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-
 namespace Retouch_Photo2.Pages
 {
-    /// <summary> 
-    /// State of <see cref="MainPage"/>. 
-    /// </summary>
-    public enum MainPageState
-    {
-        /// <summary> Normal. </summary>
-        None,
-
-        /// <summary> Main. </summary>
-        Main,
-        /// <summary> Loading. </summary>
-        //Loading,
-
-        /// <summary> Add a blank project. </summary>
-        //Add,
-        /// <summary> Add a pictures project. </summary>
-        Pictures,
-
-        /// <summary> Save project(s). </summary>
-        Save,
-        /// <summary> Share project(s). </summary>
-        Share,
-
-        /// <summary> Delete project(s). </summary>
-        Delete,
-        /// <summary> Duplicate project(s). </summary>
-        Duplicate,
-
-        /// <summary> Create a new Folder. </summary>
-        //Folder,
-        /// <summary> Move a project into a folder. </summary>
-        Move,
-    }
-
-
     /// <summary> 
     /// Retouch_Photo2's the only <see cref = "MainPage" />. 
     /// </summary>

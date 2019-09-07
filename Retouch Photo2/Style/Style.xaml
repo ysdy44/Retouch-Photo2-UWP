@@ -50,57 +50,14 @@
         <Setter Property="Background" Value="{ThemeResource AppForeground}"/>
     </Style>
 
-    
+
     <!--Flyout-->
     <Style x:Key="AppFlyoutPresenterStyle" TargetType="FlyoutPresenter">
-        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="Margin" Value="0"/>
-        <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Background" Value="{ThemeResource AppBackground}"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}"/>
-        <Setter Property="BorderThickness" Value="{ThemeResource FlyoutBorderThemeThickness}"/>
-        <Setter Property="MinWidth" Value="{ThemeResource FlyoutThemeMinWidth}"/>
-        <Setter Property="MaxWidth" Value="{ThemeResource FlyoutThemeMaxWidth}"/>
-        <Setter Property="MinHeight" Value="{ThemeResource FlyoutThemeMinHeight}"/>
-        <Setter Property="MaxHeight" Value="{ThemeResource FlyoutThemeMaxHeight}"/>
-        <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Auto"/>
-        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto"/>
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="ScrollViewer.ZoomMode" Value="Disabled"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="FlyoutPresenter">
-                    <!--   
-                        <controls:DropShadowPanel HorizontalAlignment="Center" OffsetX="4" OffsetY="4" BlurRadius="20"  Color="{ThemeResource AppStrokeColor}">
-                    -->
-                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                        <ScrollViewer x:Name="ScrollViewer"
-                            ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}"
-                            HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
-                            HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-                            VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
-                            VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-                            AutomationProperties.AccessibilityView="Raw">
-                            <ContentPresenter Content="{TemplateBinding Content}"
-                                ContentTemplate="{TemplateBinding ContentTemplate}"
-                                ContentTransitions="{TemplateBinding ContentTransitions}"
-                                Margin="{TemplateBinding Padding}"
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </ScrollViewer>
-                    </Border>
-                    <!--
-                           </controls:DropShadowPanel>
-                        -->
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
-    
-    
+
+
     <!--Slider-->
     <Style x:Key="AppOpacitySliderStyle" TargetType="Slider">
         <Setter Property="HorizontalAlignment" Value="Stretch"/>

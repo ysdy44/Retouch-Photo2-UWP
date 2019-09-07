@@ -133,10 +133,14 @@
     <Compile Include="Controls\ViewControl.xaml.cs">
       <DependentUpon>ViewControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Flyouts\PenFlyout.xaml.cs">
+    <Compile Include="Elements\PenFlyout.xaml.cs">
       <DependentUpon>PenFlyout.xaml</DependentUpon>
     </Compile>
     <Compile Include="ITool.cs" />
+    <Compile Include="Models\AcrylicToolType.cs" />
+    <Compile Include="Models\ViewRadianConverter.cs" />
+    <Compile Include="Models\ViewScaleConverter.cs" />
+    <Compile Include="Models\ViewToolType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ITransformerTool.cs" />
     <Compile Include="ToolType.cs" />
@@ -190,11 +194,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Flyouts\PenFlyout.xaml">
+    <Page Include="Elements\PenFlyout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

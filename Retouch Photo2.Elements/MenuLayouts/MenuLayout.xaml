@@ -19,11 +19,18 @@
 
     <UserControl.Resources>
         <!--Flyout-->
-        <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource FlyoutPresenterStyle}">
             <Border x:Name="FlyoutBorder" Width="222">
                 <!--Content-->
             </Border>
         </Flyout>
+        <!--Style-->
+        <Style x:Key="FlyoutPresenterStyle" TargetType="FlyoutPresenter">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Background" Value="{ThemeResource AppBackground}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}"/>
+        </Style>
     </UserControl.Resources>
 
 

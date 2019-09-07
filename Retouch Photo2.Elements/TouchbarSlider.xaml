@@ -30,9 +30,7 @@
         
         <Border CornerRadius="4" BorderThickness="1" Background="White" BorderBrush="Black">
             <hsvColorPickers:NumberPicker x:Name="NumberPicker" Foreground="Black" Width="Auto" HorizontalAlignment="Stretch"
-                                          Unit="{x:Bind Unit,Mode=OneWay}"
-                                          Minimum="{x:Bind MinimumConverter(Minimum),Mode=OneWay}"
-                                          Maximum="{x:Bind MinimumConverter(Maximum),Mode=OneWay}"                                          
+                                          FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                                           />
         </Border>
 

@@ -69,6 +69,8 @@ namespace Retouch_Photo2.Controls
                 this.ToolType = type;
                 this.TipViewModel.Tool = tool;
 
+                this.TipViewModel.Touchbar = null;//Touchbar
+
                 this.ViewModel.Invalidate();//Invalidate
             };
         }

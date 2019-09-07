@@ -25,7 +25,7 @@
     <UserControl.Resources>
         <transformers:CanvasOperator x:Name="CanvasOperator" DestinationControl="{x:Bind CanvasControl}"/>
         <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <local:ColorPicker x:Name="ColorPicker" Width="222"/>
+            <hSVColorPickers:ColorPicker x:Name="ColorPicker" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
         </Flyout>
     </UserControl.Resources>
 
@@ -91,14 +91,14 @@
         <!--Opacity-->
         <TextBlock Text="Opacity:" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Style="{ThemeResource AppTextBlock}"/>
         <Border Grid.Column="3" Grid.Row="2" Margin="2,0" Height="40" MinHeight="28" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
-            <hSVColorPickers:NumberPicker x:Name="OpacityPicker" Width="Auto"/>
+            <hSVColorPickers:NumberPicker x:Name="OpacityPicker" Width="Auto" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
         </Border>
 
 
         <!--Offset-->
         <TextBlock Text="Offset:" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" Style="{ThemeResource AppTextBlock}"/>
         <Border Grid.Column="3" Grid.Row="4" Margin="2,0" Height="40" MinHeight="28" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
-            <hSVColorPickers:NumberPicker x:Name="OffsetPicker" Width="Auto"/>
+            <hSVColorPickers:NumberPicker x:Name="OffsetPicker" Width="Auto" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
         </Border>
 
         <!--Stop-->

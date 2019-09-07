@@ -10,9 +10,9 @@
     xmlns:controls="using:Retouch_Photo2.Controls"
     xmlns:effects="using:Retouch_Photo2.Effects"
     xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:elementDrawPages="using:Retouch_Photo2.Elements.DrawPages"
     xmlns:layers="using:Retouch_Photo2.Layers"
     xmlns:operate="using:Retouch_Photo2.Operates"
-    xmlns:local="using:Retouch_Photo2.Pages"
     xmlns:selection="using:Retouch_Photo2.Selections"
     RequestedTheme="{x:Bind ViewModel.CanvasTheme,Mode=OneWay}" 
     NavigationCacheMode="Enabled"    
@@ -22,37 +22,43 @@
 
     <Grid >
 
-        <local:DrawLayout x:Name="DrawLayout" 
-                          IsFullScreen="{x:Bind KeyboardViewModel.IsFullScreen,Mode=OneWay}" 
-                          Tool="{x:Bind TipViewModel.Tool,Mode=OneWay}"
-                          Touchbar="{x:Bind TipViewModel.Touchbar,Mode=OneWay}"
-                          Theme="{x:Bind ViewModel.CanvasTheme,Mode=OneWay}"
-                          >
+        <elementDrawPages:DrawLayout x:Name="DrawLayout" 
+               Touchbar="{x:Bind TipViewModel.Touchbar,Mode=OneWay}"
+               ShowIcon="{x:Bind IconConverter(TipViewModel.Tool),Mode=OneWay}"
+               Page="{x:Bind PageConverter(TipViewModel.Tool),Mode=OneWay}"
+                     
+               Theme="{x:Bind ViewModel.CanvasTheme,Mode=OneWay}"
+               IsFullScreen="{x:Bind KeyboardViewModel.IsFullScreen,Mode=OneWay}" 
+               >
 
             <!--Tool & Layer-->
-            <local:DrawLayout.LeftPane>
+            <elementDrawPages:DrawLayout.Icon>
+                <layers:Icon/>
+            </elementDrawPages:DrawLayout.Icon>
+            
+            <elementDrawPages:DrawLayout.LeftPane>
                 <controls:ToolsControl/>
-            </local:DrawLayout.LeftPane>
-            <local:DrawLayout.RightPane>
+            </elementDrawPages:DrawLayout.LeftPane>
+            <elementDrawPages:DrawLayout.RightPane>
                 <controls:LayersControl x:Name="LayersControl"/>
-            </local:DrawLayout.RightPane>
+            </elementDrawPages:DrawLayout.RightPane>
 
             <!--Canvas & Back-->
-            <local:DrawLayout.CenterContent>                
+            <elementDrawPages:DrawLayout.CenterContent>                
                 <controls:MainCanvasControl 
                     AccentColor="{ThemeResource SystemAccentColor}" 
                     ShadowColor="{ThemeResource AppStrokeColor}" 
                     RulerVisible="{x:Bind ViewModel.CanvasRulerVisible,Mode=OneWay}"
                     />
-            </local:DrawLayout.CenterContent>
-            <local:DrawLayout.TopLeftPane>
+            </elementDrawPages:DrawLayout.CenterContent>
+            <elementDrawPages:DrawLayout.TopLeftPane>
                 <Button x:Name="BackButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <FontIcon Glyph="&#xE0D5;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
                 </Button>                        
-            </local:DrawLayout.TopLeftPane>
+            </elementDrawPages:DrawLayout.TopLeftPane>
 
             <!--Left & Right-->
-            <local:DrawLayout.TopLeftStackBar>
+            <elementDrawPages:DrawLayout.TopLeftStackBar>
                 <StackPanel Orientation="Horizontal">
                     <Border Style="{StaticResource AppCircleBorderStyle}">
                         <Button x:Name="SaveButton" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE105;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
@@ -88,8 +94,8 @@
                             />
                     </Border>
                 </StackPanel>
-            </local:DrawLayout.TopLeftStackBar>
-            <local:DrawLayout.TopRightPane>
+            </elementDrawPages:DrawLayout.TopLeftStackBar>
+            <elementDrawPages:DrawLayout.TopRightPane>
                 <StackPanel Orientation="Horizontal">
 
                     <!--Debug-->
@@ -185,9 +191,9 @@
                     </Grid>
 
                 </StackPanel>
-            </local:DrawLayout.TopRightPane>
+            </elementDrawPages:DrawLayout.TopRightPane>
 
-        </local:DrawLayout>
+        </elementDrawPages:DrawLayout>
 
 
         <!--MenuLayout-->
@@ -297,7 +303,8 @@
                 </elements:MenuLayout.Icon>
                 <elements:MenuLayout.ContentChild>
                     <hsvColorPicker:ColorPicker x:Name="ColorPicker" Width="Auto" 
-                                                Color="{x:Bind SelectionViewModel.Color,Mode=OneWay}"/>
+                                                Color="{x:Bind SelectionViewModel.Color,Mode=OneWay}"
+                                                FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
                 </elements:MenuLayout.ContentChild>
             </elements:MenuLayout>
             

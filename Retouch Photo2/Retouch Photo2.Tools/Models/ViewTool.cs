@@ -1,7 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Tools.Controls;
 using Retouch_Photo2.Tools.Pages;
-using Retouch_Photo2.Tools.Pages.ViewPages;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Tips;
 using System.Numerics;

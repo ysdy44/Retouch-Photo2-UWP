@@ -1,0 +1,285 @@
+﻿<Page
+    x:Class="Retouch_Photo2.Elements.MainPages.MainControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Retouch_Photo2.Elements.MainPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    >
+
+
+    <Page.Resources>
+
+        <!--Flyout-->
+        <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <StackPanel Width="140">
+                <local:SecondButton x:Name="_SecondAddButton" Glyph="&#xE109;" Text="Add"/>
+                <local:SecondButton x:Name="_SecondPicturesButton" Glyph="&#xEB9F;" Text="Pictures"/>
+                <local:SecondButton x:Name="_SecondSaveButton" Glyph="&#xE105;" Text="Save"/>
+                <local:SecondButton x:Name="_SecondShareButton" Glyph="&#xE72D;" Text="Share"/>
+                <local:SecondButton x:Name="_SecondDeleteButton" Glyph="&#xE107;" Text="Delete"/>
+                <local:SecondButton x:Name="_SecondDuplicateButton" Glyph="&#xE16F;" Text="Duplicate"/>
+                <local:SecondButton x:Name="_SecondFolderButton" Glyph="&#xE188;" Text="Folder"/>
+                <local:SecondButton x:Name="_SecondMoveButton" Glyph="&#xE197;" Text="Move"/>
+            </StackPanel>
+        </Flyout>
+
+    </Page.Resources>
+
+
+    <StackPanel Orientation="Horizontal">
+
+
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="200"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+
+                        <!--Primry Buttons-->
+
+                        <Setter Target="_AddButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_PicturesButton.Visibility" Value="Collapsed"/>
+
+                        <Setter Target="AppBarSeparator0.Visibility" Value="Collapsed"/>
+                        <Setter Target="_SaveButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_ShareButton.Visibility" Value="Collapsed"/>
+
+                        <Setter Target="AppBarSeparator1.Visibility" Value="Collapsed"/>
+                        <Setter Target="_DeleteButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_DuplicateButton.Visibility" Value="Collapsed"/>
+
+                        <Setter Target="AppBarSeparator2.Visibility" Value="Collapsed"/>
+                        <Setter Target="_FolderButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_MoveButton.Visibility" Value="Collapsed"/>
+
+                        <Setter Target="AppBarSeparator3.Visibility" Value="Visible"/>
+                        <Setter Target="_MoreButton.Visibility" Value="Visible"/>
+
+
+                        <!--Second Buttons-->
+
+                        <Setter Target="_SecondAddButton.Visibility" Value="Visible"/>
+                        <Setter Target="_SecondPicturesButton.Visibility" Value="Visible"/>
+
+                        <Setter Target="_SecondSaveButton.Visibility" Value="Visible"/>
+                        <Setter Target="_SecondShareButton.Visibility" Value="Visible"/>
+
+                        <Setter Target="_SecondDeleteButton.Visibility" Value="Visible"/>
+                        <Setter Target="_SecondDuplicateButton.Visibility" Value="Visible"/>
+
+                        <Setter Target="_SecondFolderButton.Visibility" Value="Visible"/>
+                        <Setter Target="_SecondMoveButton.Visibility" Value="Visible"/>
+
+
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="300"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+
+                        <!--Primry Buttons-->
+
+                        <Setter Target="_AddButton.Visibility" Value="Visible"/>
+                        <Setter Target="_PicturesButton.Visibility" Value="Visible"/>
+
+                        <Setter Target="AppBarSeparator0.Visibility" Value="Collapsed"/>
+                        <Setter Target="_SaveButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_ShareButton.Visibility" Value="Collapsed"/>
+
+                        <Setter Target="AppBarSeparator1.Visibility" Value="Collapsed"/>
+                        <Setter Target="_DeleteButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_DuplicateButton.Visibility" Value="Collapsed"/>
+
+                        <Setter Target="AppBarSeparator2.Visibility" Value="Collapsed"/>
+                        <Setter Target="_FolderButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_MoveButton.Visibility" Value="Collapsed"/>
+
+                        <Setter Target="AppBarSeparator3.Visibility" Value="Visible"/>
+                        <Setter Target="_MoreButton.Visibility" Value="Visible"/>
+
+
+                        <!--Second Buttons-->
+
+                        <Setter Target="_SecondAddButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_SecondPicturesButton.Visibility" Value="Collapsed"/>
+
+                        <Setter Target="_SecondSaveButton.Visibility" Value="Visible"/>
+                        <Setter Target="_SecondShareButton.Visibility" Value="Visible"/>
+
+                        <Setter Target="_SecondDeleteButton.Visibility" Value="Visible"/>
+                        <Setter Target="_SecondDuplicateButton.Visibility" Value="Visible"/>
+
+                        <Setter Target="_SecondFolderButton.Visibility" Value="Visible"/>
+                        <Setter Target="_SecondMoveButton.Visibility" Value="Visible"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="440"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+
+                        <!--Primry Buttons-->
+
+                        <Setter Target="_AddButton.Visibility" Value="Visible"/>
+                        <Setter Target="_PicturesButton.Visibility" Value="Visible"/>
+
+                        <Setter Target="AppBarSeparator0.Visibility" Value="Visible"/>
+                        <Setter Target="_SaveButton.Visibility" Value="Visible"/>
+                        <Setter Target="_ShareButton.Visibility" Value="Visible"/>
+
+                        <Setter Target="AppBarSeparator1.Visibility" Value="Collapsed"/>
+                        <Setter Target="_DeleteButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_DuplicateButton.Visibility" Value="Collapsed"/>
+
+                        <Setter Target="AppBarSeparator2.Visibility" Value="Collapsed"/>
+                        <Setter Target="_FolderButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_MoveButton.Visibility" Value="Collapsed"/>
+
+                        <Setter Target="AppBarSeparator3.Visibility" Value="Visible"/>
+                        <Setter Target="_MoreButton.Visibility" Value="Visible"/>
+
+
+                        <!--Second Buttons-->
+
+                        <Setter Target="_SecondAddButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_SecondPicturesButton.Visibility" Value="Collapsed"/>
+
+                        <Setter Target="_SecondSaveButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_SecondShareButton.Visibility" Value="Collapsed"/>
+
+                        <Setter Target="_SecondDeleteButton.Visibility" Value="Visible"/>
+                        <Setter Target="_SecondDuplicateButton.Visibility" Value="Visible"/>
+
+                        <Setter Target="_SecondFolderButton.Visibility" Value="Visible"/>
+                        <Setter Target="_SecondMoveButton.Visibility" Value="Visible"/>
+
+
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="550"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+
+                        <!--Primry Buttons-->
+
+                        <Setter Target="_AddButton.Visibility" Value="Visible"/>
+                        <Setter Target="_PicturesButton.Visibility" Value="Visible"/>
+
+                        <Setter Target="AppBarSeparator0.Visibility" Value="Visible"/>
+                        <Setter Target="_SaveButton.Visibility" Value="Visible"/>
+                        <Setter Target="_ShareButton.Visibility" Value="Visible"/>
+
+                        <Setter Target="AppBarSeparator1.Visibility" Value="Visible"/>
+                        <Setter Target="_DeleteButton.Visibility" Value="Visible"/>
+                        <Setter Target="_DuplicateButton.Visibility" Value="Visible"/>
+
+                        <Setter Target="AppBarSeparator2.Visibility" Value="Collapsed"/>
+                        <Setter Target="_FolderButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_MoveButton.Visibility" Value="Collapsed"/>
+
+                        <Setter Target="AppBarSeparator3.Visibility" Value="Visible"/>
+                        <Setter Target="_MoreButton.Visibility" Value="Visible"/>
+
+
+                        <!--Second Buttons-->
+
+                        <Setter Target="_SecondAddButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_SecondPicturesButton.Visibility" Value="Collapsed"/>
+
+                        <Setter Target="_SecondSaveButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_SecondShareButton.Visibility" Value="Collapsed"/>
+
+                        <Setter Target="_SecondDeleteButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_SecondDuplicateButton.Visibility" Value="Collapsed"/>
+
+                        <Setter Target="_SecondFolderButton.Visibility" Value="Visible"/>
+                        <Setter Target="_SecondMoveButton.Visibility" Value="Visible"/>
+
+
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="620"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+
+                        <!--Primry Buttons-->
+
+                        <Setter Target="_AddButton.Visibility" Value="Visible"/>
+                        <Setter Target="_PicturesButton.Visibility" Value="Visible"/>
+
+                        <Setter Target="AppBarSeparator0.Visibility" Value="Visible"/>
+                        <Setter Target="_SaveButton.Visibility" Value="Visible"/>
+                        <Setter Target="_ShareButton.Visibility" Value="Visible"/>
+
+                        <Setter Target="AppBarSeparator1.Visibility" Value="Visible"/>
+                        <Setter Target="_DeleteButton.Visibility" Value="Visible"/>
+                        <Setter Target="_DuplicateButton.Visibility" Value="Visible"/>
+
+                        <Setter Target="AppBarSeparator2.Visibility" Value="Visible"/>
+                        <Setter Target="_FolderButton.Visibility" Value="Visible"/>
+                        <Setter Target="_MoveButton.Visibility" Value="Visible"/>
+
+                        <Setter Target="AppBarSeparator3.Visibility" Value="Collapsed"/>
+                        <Setter Target="_MoreButton.Visibility" Value="Collapsed"/>
+
+
+                        <!--Second Buttons-->
+
+                        <Setter Target="_SecondAddButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_SecondPicturesButton.Visibility" Value="Collapsed"/>
+
+                        <Setter Target="_SecondSaveButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_SecondShareButton.Visibility" Value="Collapsed"/>
+
+                        <Setter Target="_SecondDeleteButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_SecondDuplicateButton.Visibility" Value="Collapsed"/>
+
+                        <Setter Target="_SecondFolderButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="_SecondMoveButton.Visibility" Value="Collapsed"/>
+
+
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+
+        <local:Button x:Name="_AddButton" Glyph="&#xE109;" Text="Add"/>
+        <local:Button x:Name="_PicturesButton" Glyph="&#xEB9F;" Text="Pictures"/>
+
+        <AppBarSeparator x:Name="AppBarSeparator0"/>
+        <local:Button x:Name="_SaveButton" Glyph="&#xE105;" Text="Save"/>
+        <local:Button x:Name="_ShareButton" Glyph="&#xE72D;" Text="Share"/>
+
+        <AppBarSeparator x:Name="AppBarSeparator1"/>
+        <local:Button x:Name="_DeleteButton" Glyph="&#xE107;" Text="Delete"/>
+        <local:Button x:Name="_DuplicateButton" Glyph="&#xE16F;" Text="Duplicate"/>
+
+        <AppBarSeparator x:Name="AppBarSeparator2"/>
+        <local:Button x:Name="_FolderButton" Glyph="&#xE188;" Text="Folder"/>
+        <local:Button x:Name="_MoveButton" Glyph="&#xE197;" Text="Move"/>
+
+        <AppBarSeparator x:Name="AppBarSeparator3"/>
+        <local:Button x:Name="_MoreButton" Glyph="&#xE712;" Text="More"/>
+
+    </StackPanel>
+</Page>

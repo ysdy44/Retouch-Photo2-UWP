@@ -18,26 +18,39 @@ namespace Retouch_Photo2.Elements
         /// <summary> Occurs when the value change is complete. </summary>
         public event TouchValueChangeHandler ValueChangeCompleted;
         /// <summary> Occurs when the value changes. </summary>
-        public event ValueChangeHandler ValueChange;
-
-
-        //@Converter
-        private int ValueConverter(double value) => (int)value;
-        private int MinimumConverter(double value) => (int)value;
-        private int MaximumConverter(double value) => (int)value;
-        
+        public event ValueChangeHandler NumberChange;
+                 
 
         #region DependencyProperty
 
 
+        /// <summary> Get or set the current value for a NumberPicker. </summary>
+        public int Number
+        {
+            get => this.NumberPicker.Value;
+            set => this.NumberPicker.Value = value;
+        }
+
+        /// <summary> Get or set the minimum desirable Value for range elements. </summary>
+        public int NumberMinimum
+        {
+            get => this.NumberPicker.Minimum;
+            set => this.NumberPicker.Minimum = value;
+        }
+
+        /// <summary> Get or set the maximum desirable Value for range elements. </summary>
+        public int NumberMaximum
+        {
+            get => this.NumberPicker.Maximum;
+            set => this.NumberPicker.Maximum = value;
+        }
+        
         /// <summary> Get or set the string Unit for range elements. </summary>
         public string Unit
         {
-            get { return (string)GetValue(UnitProperty); }
-            set { SetValue(UnitProperty, value); }
+            get => this.NumberPicker.Unit;
+            set => this.NumberPicker.Unit = value;
         }
-        /// <summary> Identifies the <see cref = "NumberPicker.Unit" /> dependency property. </summary>
-        public static readonly DependencyProperty UnitProperty = DependencyProperty.Register(nameof(Unit), typeof(string), typeof(TouchbarSlider), new PropertyMetadata(string.Empty));
 
 
         private double value;
@@ -54,7 +67,7 @@ namespace Retouch_Photo2.Elements
             set => this.value = value;
         }
 
-        /// <summary> Get or set the current value for a TouchSlider. </summary>
+        /// <summary> Get or set the current value for a TouchbarSlider. </summary>
         public double Value
         {
             get => this.value;
@@ -65,7 +78,6 @@ namespace Retouch_Photo2.Elements
                 if (width < 0) width = 0;
                 Canvas.SetLeft(this.Ellipse, width);
 
-                this.NumberPicker.Value = this.ValueConverter(value);//Converter
                 this.value = value;
             }
         }
@@ -91,7 +103,7 @@ namespace Retouch_Photo2.Elements
             get { return (double)GetValue(MinimumProperty); }
             set { SetValue(MinimumProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "TouchSlider.Minimum" /> dependency property. </summary>
+        /// <summary> Identifies the <see cref = "TouchbarSlider.Minimum" /> dependency property. </summary>
         public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(nameof(Minimum), typeof(double), typeof(NumberPicker), new PropertyMetadata(0.0));
 
 
@@ -101,7 +113,7 @@ namespace Retouch_Photo2.Elements
             get { return (double)GetValue(MaximumProperty); }
             set { SetValue(MaximumProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "TouchSlider.Minimum" /> dependency property. </summary>
+        /// <summary> Identifies the <see cref = "TouchbarSlider.Minimum" /> dependency property. </summary>
         public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(nameof(Maximum), typeof(double), typeof(NumberPicker), new PropertyMetadata(100.0));
 
 
@@ -110,13 +122,13 @@ namespace Retouch_Photo2.Elements
 
         //@Construct
         /// <summary>
-        /// Construct a TouchSlider.
+        /// Construct a TouchbarSlider.
         /// </summary>
         public TouchbarSlider()
         {
             this.InitializeComponent();
 
-            this.NumberPicker.ValueChange+=(s,value) => this.ValueChange?.Invoke(this, value);//Delegate
+            this.NumberPicker.ValueChange += (s, value) => this.NumberChange?.Invoke(this, value);//Delegate
 
             this.Loaded += (s, e) => this.Value = this.value;
             this.SizeChanged += (s, e) => this.Value = this.value;

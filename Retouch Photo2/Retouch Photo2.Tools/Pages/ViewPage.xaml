@@ -4,29 +4,57 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
     >
 
-     
+
+    <Page.Resources>
+        <!--Radian-->
+        <Storyboard x:Name="RadianStoryboard">
+            <DoubleAnimationUsingKeyFrames x:Name="RadianKeyFrames" Storyboard.TargetProperty="Radian" EnableDependentAnimation ="True">
+                <SplineDoubleKeyFrame Value="0.0" KeyTime="0:0:0.2" KeySpline="0.5,1.0 1,1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <!--Scale-->
+        <Storyboard x:Name="ScaleStoryboard">
+            <DoubleAnimationUsingKeyFrames x:Name="ScaleKeyFrames" Storyboard.TargetProperty="Scale" EnableDependentAnimation ="True">
+                <SplineDoubleKeyFrame Value="1.0" KeyTime="0:0:0.2" KeySpline="0.5,1.0 1,1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
+    
+
     <StackPanel Orientation="Horizontal">
 
         <!--Radian-->
         <TextBlock Text="Radian:" Style="{StaticResource AppTextBlock}"/>
-        <Border Width="Auto" MinWidth="80" Style="{StaticResource AppCircleBorderStyle}">
-            <ToggleButton x:Name="RadianToggleButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
-                          Content="{x:Bind RadianToString(ViewModel.CanvasTransformerRadian),Mode=OneWay}"/>
+        <elements:TouchbarButton x:Name="RadianTouchbarButton" Unit="º"
+                      Number="{x:Bind RadianNumberConverter(ViewModel.CanvasTransformerRadian),Mode=OneWay}"
+                      />
+
+        <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
+            <Button x:Name="RadianClearButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                <FontIcon Glyph="&#xE106;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+            </Button>
         </Border>
         
         <AppBarSeparator/>
 
         <!--Scale-->
         <TextBlock Text="Scale:" Style="{StaticResource AppTextBlock}"/>
-        <Border Width="Auto" MinWidth="80" Style="{StaticResource AppCircleBorderStyle}">
-            <ToggleButton x:Name="ScaleToggleButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
-                          Content="{x:Bind ScaleToString(ViewModel.CanvasTransformerScale),Mode=OneWay}"/>
-        </Border>      
-
+        <elements:TouchbarButton x:Name="ScaleTouchbarButton" Unit="%"
+                         Number="{x:Bind ScaleNumberConverter(ViewModel.CanvasTransformerScale),Mode=OneWay}"
+                        />
+        
+        <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
+            <Button x:Name="ScaleClearButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                <FontIcon Glyph="&#xE106;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+            </Button>
+        </Border>
+        
     </StackPanel>
 </Page>

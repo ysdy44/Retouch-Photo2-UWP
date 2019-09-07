@@ -15,7 +15,7 @@
    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     
    xmlns:viewModels="using:Retouch_Photo2.ViewModels"
-    xmlns:mainpages="using:Retouch_Photo2.Pages.MainPages"
+    xmlns:elementsMainpages="using:Retouch_Photo2.Elements.MainPages"
     mc:Ignorable="d"
 
    RequestedTheme="{x:Bind ViewModel.CanvasTheme,Mode=OneWay}" 
@@ -629,7 +629,7 @@
         </Grid>
 
         <!--Body-->
-        <mainpages:InitialControl x:Name="InitialControl" Grid.Row="1"/>
+        <elementsMainpages:InitialControl x:Name="InitialControl" Grid.Row="1"/>
         <GridView x:Name="GridView"        
                     Grid.Row="1"
                     AllowDrop="True"              
@@ -651,8 +651,8 @@
         <elements:LoadingControl x:Name="LoadingControl" Grid.RowSpan="3"/>
 
         <!--Dialog-->
-        <mainpages:AddDialog x:Name="AddDialog" Grid.Row="1"/>
-        <mainpages:AddDialog x:Name="FolderDialog" Grid.Row="1"/>
+        <elementsMainpages:AddDialog x:Name="AddDialog" Grid.Row="1"/>
+        <elementsMainpages:AddDialog x:Name="FolderDialog" Grid.Row="1"/>
 
     </Grid>
 </Page>

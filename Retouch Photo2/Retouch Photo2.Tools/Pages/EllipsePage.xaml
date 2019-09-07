@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pagesDrawPages="using:Retouch_Photo2.Pages.DrawPages"
+    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -13,17 +13,17 @@
     <StackPanel Orientation="Horizontal">
 
         <TextBlock Text="FillColor:" Style="{StaticResource AppTextBlock}"/>
-        <pagesDrawPages:FillColorEllipseButton/>
+        <toolsElements:FillColorEllipseButton/>
 
         <AppBarSeparator/>
 
         <TextBlock Text="StrokeColor:" Style="{StaticResource AppTextBlock}"/>
-        <pagesDrawPages:StrokeColorEllipseButton/>
+        <toolsElements:StrokeColorEllipseButton/>
 
         <ContentControl Width="12"/>
 
         <TextBlock Text="StrokeWidth:" Style="{StaticResource AppTextBlock}"/>
-        <pagesDrawPages:StrokeWidthPicker/>
+        <toolsElements:StrokeWidthButton/>
 
     </StackPanel>
 </Page>

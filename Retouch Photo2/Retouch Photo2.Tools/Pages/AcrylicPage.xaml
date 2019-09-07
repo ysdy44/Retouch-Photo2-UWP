@@ -1,11 +1,11 @@
 ﻿<Page
     x:Class="Retouch_Photo2.Tools.Pages.AcrylicPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pagesDrawPages="using:Retouch_Photo2.Pages.DrawPages"
-    xmlns:hSVColorPickers="using:HSVColorPickers"
+    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -13,22 +13,25 @@
 
     <StackPanel Orientation="Horizontal">
 
+        <!--TintColor-->
         <TextBlock Text="TintColor:" Style="{StaticResource AppTextBlock}"/>
-        <pagesDrawPages:FillColorEllipseButton/>
+        <toolsElements:FillColorEllipseButton/>
 
         <ContentControl Width="12"/>
-
-        <TextBlock Text="TintOpacity:" Style="{StaticResource AppTextBlock}"/>
-        <Border Width="70" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
-            <hSVColorPickers:NumberPicker x:Name="TintOpacityPicker" Value="{x:Bind TintOpacityConverter(SelectionViewModel.AcrylicTintOpacity),Mode=OneWay}" Unit="%" Width="Auto"/>
-        </Border>
         
+        <!--TintOpacity-->
+        <TextBlock Text="TintOpacity:" Style="{StaticResource AppTextBlock}"/>
+        <elements:TouchbarButton x:Name="TintOpacityTouchbarButton"
+                      Number="{x:Bind TintOpacityNumberConverter(SelectionViewModel.AcrylicTintOpacity),Mode=OneWay}"
+                      />
+
         <AppBarSeparator/>
 
+        <!--BlurAmount-->
         <TextBlock Text="BlurAmount:" Style="{StaticResource AppTextBlock}"/>
-        <Border Width="70" Background="Transparent" Style="{StaticResource AppRoundedBorderStyle}">
-            <hSVColorPickers:NumberPicker x:Name="BlurAmountPicker" Value="{x:Bind BlurAmountConverter(SelectionViewModel.AcrylicBlurAmount),Mode=OneWay}" Unit="dp" Width="Auto"/>
-        </Border>
+        <elements:TouchbarButton x:Name="BlurAmountTouchbarButton"
+                      Number="{x:Bind BlurAmountNumberConverter(SelectionViewModel.AcrylicBlurAmount),Mode=OneWay}"
+                      />
         
     </StackPanel>
 </Page>

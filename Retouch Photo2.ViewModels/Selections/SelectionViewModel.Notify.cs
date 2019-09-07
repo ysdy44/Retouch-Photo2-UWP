@@ -107,21 +107,36 @@ namespace Retouch_Photo2.ViewModels.Selections
 
 
         /// <summary> AcrylicLayer's TintOpacity. </summary>     
-        public float AcrylicTintOpacity { get; set; } = 0.5f;
+        public float AcrylicTintOpacity
+        {
+            get => this.acrylicTintOpacity;
+            set
+            {
+                if (this.acrylicTintOpacity == value) return;
+                this.acrylicTintOpacity = value;
+                this.OnPropertyChanged(nameof(this.AcrylicTintOpacity));//Notify 
+            }
+        }
+        private float acrylicTintOpacity = 0.5f;
         /// <summary> AcrylicLayer's BlurAmount. </summary>     
-        public float AcrylicBlurAmount { get; set; } = 12.0f;
+        public float AcrylicBlurAmount
+        {
+            get => this.acrylicBlurAmount;
+            set
+            {
+                if (this.acrylicBlurAmount == value) return;
+                this.acrylicBlurAmount = value;
+                this.OnPropertyChanged(nameof(this.AcrylicBlurAmount));//Notify 
+            }
+        }
+        private float acrylicBlurAmount = 12.0f;
         /// <summary> Sets AcrylicLayer. </summary>     
         private void SetAcrylicLayer(ILayer layer)
         {
             if (layer is AcrylicLayer acrylicLayer)
             {
                 this.AcrylicTintOpacity = acrylicLayer.TintOpacity;
-                this.OnPropertyChanged(nameof(this.AcrylicTintOpacity));//Notify 
-
                 this.AcrylicBlurAmount = acrylicLayer.BlurAmount;
-                this.OnPropertyChanged(nameof(this.AcrylicBlurAmount));//Notify 
-
-                return;
             }
         }
 

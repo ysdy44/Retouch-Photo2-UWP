@@ -1,4 +1,6 @@
-﻿using Retouch_Photo2.Elements;
+﻿using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Elements;
+using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Keyboards;
 using Retouch_Photo2.ViewModels.Selections;
@@ -6,8 +8,6 @@ using Retouch_Photo2.ViewModels.Tips;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Microsoft.Toolkit.Uwp.UI.Extensions;
-using Retouch_Photo2.Brushs;
 
 namespace Retouch_Photo2.Pages
 {
@@ -22,7 +22,10 @@ namespace Retouch_Photo2.Pages
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
-
+        //@Converter
+        private FrameworkElement IconConverter(ITool tool) => tool.ShowIcon;
+        private Page PageConverter(ITool tool) => tool.Page;
+        
         //@Construct
         public DrawPage()
         {

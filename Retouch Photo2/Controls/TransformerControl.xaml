@@ -53,7 +53,7 @@
                 <ToolTipService.ToolTip>
                     <ToolTip Content="Width" Placement="Top" IsOpen="{x:Bind TipViewModel.IsTransformerMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
-                <pickers:NumberPicker x:Name="WPicker" Width="Auto" Height="Auto" Unit="dp" />
+                <pickers:NumberPicker x:Name="WPicker" Width="Auto" Height="Auto" Unit="dp" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
             </Border>
 
             <TextBlock Grid.Column="2" Grid.Row="0" Text="Height:" Style="{StaticResource AppTextBlock}"/>
@@ -61,7 +61,7 @@
                 <ToolTipService.ToolTip>
                     <ToolTip Content="Height" Placement="Top" IsOpen="{x:Bind TipViewModel.IsTransformerMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
-                <pickers:NumberPicker x:Name="HPicker" Width="Auto" Height="Auto" Unit="dp"/>
+                <pickers:NumberPicker x:Name="HPicker" Width="Auto" Height="Auto" Unit="dp" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
             </Border>
 
             <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource AppCircleBorderStyle}">
@@ -69,7 +69,7 @@
                     <ToolTip Content="Ratio" Placement="Top" IsOpen="{x:Bind TipViewModel.IsTransformerMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
                 <ToggleButton x:Name="RatioToggleControl" IsChecked="{x:Bind IsRatio,Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                    <FontIcon Glyph="&#x1F512;" FontFamily="Segoe UI Symbol" FontSize="18" />
+                    <FontIcon Glyph="&#x1F512;" FontFamily="Segoe UI Symbol" FontSize="18"/>
                 </ToggleButton>
             </Border>
 
@@ -80,7 +80,7 @@
                 <ToolTipService.ToolTip>
                     <ToolTip Content="Rotate" Placement="Top" IsOpen="{x:Bind TipViewModel.IsTransformerMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
-                <pickers:NumberPicker x:Name="RPicker" Width="Auto" Height="Auto" Unit="º" />
+                <pickers:NumberPicker x:Name="RPicker" Width="Auto" Height="Auto" Unit="º" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
             </Border>
 
             <TextBlock Grid.Column="2" Grid.Row="2" Text="Skew:" Style="{StaticResource AppTextBlock}"/>
@@ -88,7 +88,7 @@
                 <ToolTipService.ToolTip>
                     <ToolTip Content="Skew" Placement="Top" IsOpen="{x:Bind TipViewModel.IsTransformerMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
-                <pickers:NumberPicker x:Name="SPicker" Width="Auto" Height="Auto" Unit="º" />
+                <pickers:NumberPicker x:Name="SPicker" Width="Auto" Height="Auto" Unit="º" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
             </Border>
 
             <!--/////////////////////////////////////////////////////////-->
@@ -101,7 +101,7 @@
                 <Border.BorderBrush>
                     <SolidColorBrush x:Name="XBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
                 </Border.BorderBrush>
-                <pickers:NumberPicker x:Name="XPicker" Width="Auto" Height="Auto" />
+                <pickers:NumberPicker x:Name="XPicker" Width="Auto" Height="Auto" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
             </Border>
 
             <TextBlock Grid.Column="2" Grid.Row="4" Text="Y:" Style="{StaticResource AppTextBlock}"/>
@@ -112,7 +112,7 @@
                 <Border.BorderBrush>
                     <SolidColorBrush x:Name="YBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
                 </Border.BorderBrush>
-                <pickers:NumberPicker x:Name="YPicker" Width="Auto" Height="Auto" />
+                <pickers:NumberPicker x:Name="YPicker" Width="Auto" Height="Auto" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
             </Border>
 
             <!--/////////////////////////////////////////////////////////-->
