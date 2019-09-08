@@ -194,6 +194,16 @@ namespace Retouch_Photo2.Controls
         }));
 
 
+        /// <summary> Gets or sets <see cref = "LayerControl" />'s ToolTip IsOpen. </summary>
+        public bool IsOpen
+        {
+            get { return (bool)GetValue(IsOpenProperty); }
+            set { SetValue(IsOpenProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "LayerControl.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(TransformerControl), new PropertyMetadata(false));
+
+
         #endregion
 
 

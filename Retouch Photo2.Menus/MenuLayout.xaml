@@ -1,0 +1,53 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Menus.MenuLayout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    mc:Ignorable="d" 
+    Width="222"
+    >
+    
+    <UserControl.Resources>
+        <!--Storyboard-->
+        <Storyboard x:Name="Storyboard" >
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Height)" Storyboard.TargetName="StoryboardRectangle" EnableDependentAnimation ="True">
+                <SplineDoubleKeyFrame x:Name="Frame" KeyTime="0:0:0.2" Value="200" KeySpline="0.5,1,1,1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="36"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="_TitlePanel" Background="{ThemeResource AppForeground}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="32"/>
+                <ColumnDefinition Width="32"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="TextBlock" Grid.Column="0" Margin="12,0" VerticalAlignment="Center" Foreground="{ThemeResource AppText}"/>
+            <Button x:Name="_CloseButton" Grid.Column="1" Padding="0" Width="28" Height="28" BorderThickness="1" BorderBrush="{ThemeResource AppText}" Background="Transparent">
+                <FontIcon Glyph="&#xE106;" FontSize="14" FontFamily="{StaticResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+            </Button>
+            <Button x:Name="_StateButton" Grid.Column="2" Padding="0" Width="28" Height="28" BorderThickness="1" BorderBrush="{ThemeResource AppText}" Background="Transparent">
+                <FontIcon x:Name="StateIcon" FontSize="14" FontFamily="Segoe UI Symbol" Foreground="{ThemeResource AppText}"/>
+            </Button>
+        </Grid>
+
+        <Rectangle x:Name="StoryboardRectangle" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Top" Fill="{ThemeResource AppBackground}"/>
+
+        <Border x:Name="StoryboardBorder" Grid.Row="1" VerticalAlignment="Top">
+            <Border x:Name="ContentBorder">
+                <!--Content-->
+            </Border>
+        </Border>
+
+    </Grid>
+</UserControl>

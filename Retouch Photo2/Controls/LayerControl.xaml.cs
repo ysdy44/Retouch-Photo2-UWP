@@ -2,6 +2,7 @@
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
@@ -39,6 +40,7 @@ namespace Retouch_Photo2.Controls
 
         #region DependencyProperty
         
+
         /// <summary> Gets or sets <see cref = "LayerControl" />'s selection mode. </summary>
         public ListViewSelectionMode Mode
         {
@@ -110,7 +112,18 @@ namespace Retouch_Photo2.Controls
                 }
             }
         }));
-        
+
+               
+        /// <summary> Gets or sets <see cref = "LayerControl" />'s ToolTip IsOpen. </summary>
+        public bool IsOpen
+        {
+            get { return (bool)GetValue(IsOpenProperty); }
+            set { SetValue(IsOpenProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "LayerControl.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(LayerControl), new PropertyMetadata(false));
+
+
         #endregion
 
 
@@ -247,10 +260,11 @@ namespace Retouch_Photo2.Controls
             //Group
             this.GroupButton.Tapped += (s, e) =>
             {
-                if (this.TipViewModel.LayerMenuLayoutState == Elements.MenuLayoutState.FlyoutShow)
-                {
-                    this.TipViewModel.LayerMenuLayoutState = Elements.MenuLayoutState.FlyoutHide;
-                }
+                //TODO: ffff
+           //     if (this.TipViewModel.LayerMenuState == MenuState.FlyoutShow)
+            //    {
+            //        this.TipViewModel.LayerMenuState = MenuState.FlyoutHide;
+              //  }
 
 
                 //Transformer

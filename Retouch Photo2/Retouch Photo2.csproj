@@ -126,6 +126,13 @@
     <Compile Include="Controls\TransformerControl.xaml.cs">
       <DependentUpon>TransformerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Menus\Buttons\AdjustmentButton.xaml.cs">
+      <DependentUpon>AdjustmentButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Menus\Layouts\AdjustmentLayout.xaml.cs">
+      <DependentUpon>AdjustmentLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Menus\Models\AdjustmentMenu.cs" />
     <Compile Include="Pages\DrawPage.xaml.cs">
       <DependentUpon>DrawPage.xaml</DependentUpon>
     </Compile>
@@ -591,6 +598,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Menus\Buttons\AdjustmentButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Menus\Layouts\AdjustmentLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\DrawPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -731,6 +746,10 @@
     <ProjectReference Include="..\Retouch Photo2.Layers\Retouch Photo2.Layers.csproj">
       <Project>{15cbf0a7-0953-49f5-b541-f8bcaab40053}</Project>
       <Name>Retouch Photo2.Layers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Menus\Retouch Photo2.Menus.csproj">
+      <Project>{b1ed78fd-fc8e-423f-aa65-c9b50757554f}</Project>
+      <Name>Retouch Photo2.Menus</Name>
     </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Selections\Retouch Photo2.Selections.csproj">
       <Project>{448fcfb4-cb3c-4874-b157-3f0dfff044bc}</Project>

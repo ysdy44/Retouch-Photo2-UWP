@@ -109,6 +109,7 @@
     <Compile Include="Button.xaml.cs">
       <DependentUpon>Button.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ButtonState.cs" />
     <Compile Include="Controls\AcrylicControl.xaml.cs">
       <DependentUpon>AcrylicControl.xaml</DependentUpon>
     </Compile>

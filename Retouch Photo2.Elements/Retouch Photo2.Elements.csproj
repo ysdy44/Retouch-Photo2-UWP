@@ -152,16 +152,6 @@
     <Compile Include="MainPages\ShareControl.xaml.cs">
       <DependentUpon>ShareControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MenuLayouts\MenuLayout.xaml.cs">
-      <DependentUpon>MenuLayout.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MenuLayouts\MenuLayoutButton.xaml.cs">
-      <DependentUpon>MenuLayoutButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MenuLayouts\MenuLayoutContent.xaml.cs">
-      <DependentUpon>MenuLayoutContent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MenuLayouts\MenuLayoutState.cs" />
     <Compile Include="OnOffSwitch.xaml.cs">
       <DependentUpon>OnOffSwitch.xaml</DependentUpon>
     </Compile>
@@ -268,18 +258,6 @@
     <Page Include="MainPages\ShareControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MenuLayouts\MenuLayout.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MenuLayouts\MenuLayoutButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MenuLayouts\MenuLayoutContent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="OnOffSwitch.xaml">
       <SubType>Designer</SubType>

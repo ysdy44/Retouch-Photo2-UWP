@@ -15,6 +15,7 @@
     xmlns:layers="using:Retouch_Photo2.Layers"
     xmlns:operate="using:Retouch_Photo2.Operates"
     xmlns:selection="using:Retouch_Photo2.Selections"
+    xmlns:menu="using:Retouch_Photo2.Menus"
     NavigationCacheMode="Enabled"    
     mc:Ignorable="d"
     >
@@ -96,100 +97,8 @@
                 </StackPanel>
             </elementDrawPages:DrawLayout.TopLeftStackBar>
             <elementDrawPages:DrawLayout.TopRightPane>
-                <StackPanel Orientation="Horizontal">
-
-                    <!--Debug-->
-                    <elements:MenuLayoutButton x:Name="DebugMenuLayoutButton" 
-                                               State="{x:Bind TipViewModel.DebugMenuLayoutState,Mode=TwoWay}">
-                        <ToolTipService.ToolTip>
-                            <ToolTip Content="Debug" Placement="Bottom"  Style="{StaticResource AppToolTip}"
-                                     IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}"
-                                     />
-                        </ToolTipService.ToolTip>
-                        <elements:MenuLayoutButton.CenterContent>
-                            <FontIcon FontSize="24" Glyph="&#x1F41E;" FontFamily="Segoe UI Symbol"/>
-                        </elements:MenuLayoutButton.CenterContent>
-                    </elements:MenuLayoutButton>
-
-                    <!--Selection-->
-                    <elements:MenuLayoutButton x:Name="SelectionMenuLayoutButton" 
-                                               State="{x:Bind TipViewModel.SelectionMenuLayoutState,Mode=TwoWay}">
-                        <ToolTipService.ToolTip>
-                            <ToolTip Content="Selection" Placement="Bottom" Style="{StaticResource AppToolTip}"
-                                     IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" />
-                        </ToolTipService.ToolTip>
-                        <elements:MenuLayoutButton.CenterContent>
-                            <selection:Icon/>
-                        </elements:MenuLayoutButton.CenterContent>
-                    </elements:MenuLayoutButton>
-
-                    <!--Operate-->
-                    <elements:MenuLayoutButton x:Name="OperateMenuLayoutButton" 
-                                               State="{x:Bind TipViewModel.OperateMenuLayoutState,Mode=TwoWay}">
-                        <ToolTipService.ToolTip>
-                            <ToolTip Content="Operate" Placement="Bottom" Style="{StaticResource AppToolTip}"
-                                     IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" />
-                        </ToolTipService.ToolTip>
-                        <elements:MenuLayoutButton.CenterContent>
-                            <operate:Icon/>
-                        </elements:MenuLayoutButton.CenterContent>
-                    </elements:MenuLayoutButton>
-
-                    <!--Adjustment-->
-                    <elements:MenuLayoutButton x:Name="AdjustmentMenuLayoutButton" 
-                                               State="{x:Bind TipViewModel.AdjustmentMenuLayoutState,Mode=TwoWay}">
-                        <ToolTipService.ToolTip>
-                            <ToolTip Content="Adjustment" Placement="Bottom" Style="{StaticResource AppToolTip}"
-                                     IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" />
-                        </ToolTipService.ToolTip>
-                        <elements:MenuLayoutButton.CenterContent>
-                            <adjustments:Icon/>
-                        </elements:MenuLayoutButton.CenterContent>
-                    </elements:MenuLayoutButton>
-
-                    <!--Effect-->
-                    <elements:MenuLayoutButton x:Name="EffectMenuLayoutButton" 
-                                               State="{x:Bind TipViewModel.EffectMenuLayoutState,Mode=TwoWay}">
-                        <ToolTipService.ToolTip>
-                            <ToolTip Content="Effect" Placement="Bottom" Style="{StaticResource AppToolTip}"
-                                     IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" />
-                        </ToolTipService.ToolTip>
-                        <elements:MenuLayoutButton.CenterContent>
-                            <effects:Icon/>
-                        </elements:MenuLayoutButton.CenterContent>
-                    </elements:MenuLayoutButton>
-
-                    <!--Transformer-->
-                    <elements:MenuLayoutButton x:Name="TransformerMenuLayoutButton" 
-                                               State="{x:Bind TipViewModel.TransformerMenuLayoutState,Mode=TwoWay}">
-                        <ToolTipService.ToolTip>
-                            <ToolTip Content="Transformer" Placement="Bottom" Style="{StaticResource AppToolTip}"
-                                     IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}"/>
-                        </ToolTipService.ToolTip>
-                        <elements:MenuLayoutButton.CenterContent>
-                            <transformers:Icon/>
-                        </elements:MenuLayoutButton.CenterContent>
-                    </elements:MenuLayoutButton>
-
-                    <AppBarSeparator/>
-
-                    <!--Color-->
-                    <Grid x:Name="ColorButton" Width="60" Background="Transparent">
-                        <Ellipse Width="38" Height="38" StrokeThickness="1" Stroke="{ThemeResource AppText}" VerticalAlignment="Center">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="ms-appx:///Icons\GrayAndWhite.jpg"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-
-                        <Ellipse Width="36" Height="36">
-                            <Ellipse.Fill>
-                                <SolidColorBrush 
-                                    Color="{x:Bind SelectionViewModel.Color,Mode=OneWay}"
-                                    />
-                            </Ellipse.Fill>
-                        </Ellipse>
-                    </Grid>
-
+                <StackPanel x:Name="TopRightPaneStackPanel" Orientation="Horizontal">
+                    <!--MenuButton-->
                 </StackPanel>
             </elementDrawPages:DrawLayout.TopRightPane>
 
@@ -197,118 +106,10 @@
 
 
         <!--MenuLayout-->
-        <Canvas
+        <Canvas x:Name="CenterCanvas"
             IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}">
-
-            <!--Debug-->
-            <elements:MenuLayout Text="Debug" Placement="Bottom"
-                                 State="{x:Bind TipViewModel.DebugMenuLayoutState,Mode=TwoWay}" 
-                                 PlacementTarget="{x:Bind DebugMenuLayoutButton}">
-                <elements:MenuLayout.ContentChild>
-                    <controls:DebugControl/>
-                </elements:MenuLayout.ContentChild>
-                <elements:MenuLayout.Icon>
-                    <FontIcon FontSize="24" Glyph="&#x1F41E;" FontFamily="Segoe UI Symbol"/>
-                </elements:MenuLayout.Icon>
-            </elements:MenuLayout>
-
-            <!--Selection-->
-            <elements:MenuLayout x:Name="SelectionMenuLayout" Text="Selection" Placement="Bottom" 
-                                 State="{x:Bind TipViewModel.SelectionMenuLayoutState,Mode=TwoWay}" 
-                                 PlacementTarget="{x:Bind SelectionMenuLayoutButton}">
-                <elements:MenuLayout.ContentChild>
-                    <controls:SelectionControl
-                       Mode="{x:Bind SelectionViewModel.Mode,Mode=OneWay}"/>
-                </elements:MenuLayout.ContentChild>
-                <elements:MenuLayout.Icon>
-                    <selection:Icon/>
-                </elements:MenuLayout.Icon>
-            </elements:MenuLayout>
-
-            <!--Operate-->
-            <elements:MenuLayout x:Name="OperateMenuLayout" Text="Operate" Placement="Bottom" 
-                                 State="{x:Bind TipViewModel.OperateMenuLayoutState,Mode=TwoWay}" 
-                                 PlacementTarget="{x:Bind OperateMenuLayoutButton}">
-                <elements:MenuLayout.ContentChild>
-                    <controls:OperateControl 
-                        Mode="{x:Bind SelectionViewModel.Mode,Mode=OneWay}"/>
-                </elements:MenuLayout.ContentChild>
-                <elements:MenuLayout.Icon>
-                    <operate:Icon/>
-                </elements:MenuLayout.Icon>
-            </elements:MenuLayout>
-
-            <!--Adjustment-->
-            <elements:MenuLayout x:Name="AdjustmentMenuLayout" Text="Adjustment" Placement="Bottom" 
-                                 State="{x:Bind TipViewModel.AdjustmentMenuLayoutState,Mode=TwoWay}" 
-                                 PlacementTarget="{x:Bind AdjustmentMenuLayoutButton}">
-                <elements:MenuLayout.ContentChild>
-                    <controls:AdjustmentControl 
-                        AdjustmentManager="{x:Bind SelectionViewModel.AdjustmentManager,Mode=OneWay}"/>
-                </elements:MenuLayout.ContentChild>
-                <elements:MenuLayout.Icon>
-                    <adjustments:Icon/>
-                </elements:MenuLayout.Icon>
-            </elements:MenuLayout>
-
-            <!--Effect-->
-            <elements:MenuLayout x:Name="EffectMenuLayout" Text="Effect" Placement="Bottom" 
-                                 State="{x:Bind TipViewModel.EffectMenuLayoutState,Mode=TwoWay}" 
-                                 PlacementTarget="{x:Bind EffectMenuLayoutButton}">
-                <elements:MenuLayout.ContentChild>
-                    <controls:EffectControl 
-                        EffectManager="{x:Bind SelectionViewModel.EffectManager,Mode=OneWay}"/>
-                </elements:MenuLayout.ContentChild>
-                <elements:MenuLayout.Icon>
-                    <effects:Icon/>
-                </elements:MenuLayout.Icon>
-            </elements:MenuLayout>
-
-            <!--Transformer-->
-            <elements:MenuLayout x:Name="TransformerMenuLayout" Text="Transformer" Placement="Bottom" 
-                                 State="{x:Bind TipViewModel.TransformerMenuLayoutState,Mode=TwoWay}" 
-                                 PlacementTarget="{x:Bind TransformerMenuLayoutButton}">
-                <elements:MenuLayout.ContentChild>
-                    <controls:TransformerControl 
-                           Tool="{x:Bind TipViewModel.Tool,Mode=OneWay}"
-                           DisabledRadian="{x:Bind SelectionViewModel.DsabledRadian,Mode=OneWay}"
-                           Mode="{x:Bind SelectionViewModel.Mode,Mode=OneWay}"
-                           Transformer="{x:Bind SelectionViewModel.Transformer,Mode=OneWay}" 
-                        />
-                </elements:MenuLayout.ContentChild>
-                <elements:MenuLayout.Icon>
-                    <transformers:Icon/>
-                </elements:MenuLayout.Icon>
-            </elements:MenuLayout>
-
-            <!--Layer-->
-            <elements:MenuLayout x:Name="LayerMenuLayout" Text="Layer" Placement="Left" 
-                                 State="{x:Bind TipViewModel.LayerMenuLayoutState,Mode=TwoWay}" 
-                                 PlacementTarget="{x:Bind LayersControl}">
-                <elements:MenuLayout.ContentChild>
-                    <controls:LayerControl 
-                        Mode="{x:Bind SelectionViewModel.Mode,Mode=OneWay}"/>
-                </elements:MenuLayout.ContentChild>
-                <elements:MenuLayout.Icon>
-                    <layers:Icon/>
-                </elements:MenuLayout.Icon>
-            </elements:MenuLayout>
-
-            <!--Color-->
-            <elements:MenuLayout x:Name="ColorMenuLayout" Text="Color" Placement="Bottom"
-                                 State="{x:Bind TipViewModel.ColorMenuLayoutState,Mode=TwoWay}" 
-                                 PlacementTarget="{x:Bind ColorButton}">
-                <elements:MenuLayout.Icon>
-                    <Ellipse Width="20" Height="20" Fill="Gray" />
-                </elements:MenuLayout.Icon>
-                <elements:MenuLayout.ContentChild>
-                    <hsvColorPicker:ColorPicker x:Name="ColorPicker" Width="Auto" 
-                                                Color="{x:Bind SelectionViewModel.Color,Mode=OneWay}"
-                                                FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-                </elements:MenuLayout.ContentChild>
-            </elements:MenuLayout>
-            
-        </Canvas>
+            <!--MenuLayout-->
+         </Canvas>
         
         
         <!--Load-->

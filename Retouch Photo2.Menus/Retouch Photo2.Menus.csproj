@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D4571A00-4303-4DDB-B63B-6D741C82F73F}</ProjectGuid>
+    <ProjectGuid>{B1ED78FD-FC8E-423F-AA65-C9B50757554F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Retouch_Photo2.ViewModels</RootNamespace>
-    <AssemblyName>Retouch Photo2.ViewModels</AssemblyName>
+    <RootNamespace>Retouch_Photo2.Menus</RootNamespace>
+    <AssemblyName>Retouch Photo2.Menus</AssemblyName>
     <DefaultLanguage>zh-CN</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
@@ -106,71 +106,28 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Keyboards\KeyboardViewModel.cs" />
-    <Compile Include="Keyboards\KeyboardViewModel.Notify.cs" />
-    <Compile Include="MezzanineViewModel.cs" />
-    <Compile Include="Photo.cs" />
-    <Compile Include="Project.cs" />
+    <Compile Include="IMenu.cs" />
+    <Compile Include="IMenuButton.cs" />
+    <Compile Include="IMenuLayout.cs" />
+    <Compile Include="Menu.cs" />
+    <Compile Include="MenuLayout.xaml.cs">
+      <DependentUpon>MenuLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MenuState.cs" />
+    <Compile Include="MenuType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Selections\SelectionViewModel.Color.cs" />
-    <Compile Include="Selections\SelectionViewModel.cs" />
-    <Compile Include="Selections\SelectionViewModel.NotifyBrush.cs" />
-    <Compile Include="Selections\SelectionViewModel.Notify.cs" />
-    <Compile Include="Selections\SelectionViewModel.SetMode.cs" />
-    <Compile Include="Selections\SelectionViewModel.SetValue.cs" />
-    <Compile Include="Tips\TipViewModel.cs" />
-    <Compile Include="Tips\TipViewModel.Menu.cs" />
-    <Compile Include="Tips\TipViewModel.Tool.cs" />
-    <Compile Include="Tips\TipViewModel.Touchbar.cs" />
-    <Compile Include="ViewModel.cs" />
-    <Compile Include="ViewModel.Notify.cs" />
-    <Compile Include="ViewModel.Transformer.cs" />
-    <EmbeddedResource Include="Properties\Retouch_Photo2.ViewModels.rd.xml" />
+    <EmbeddedResource Include="Properties\Retouch_Photo2.Menus.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FanKit.Transformers">
-      <Version>1.3.2</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.1.5</Version>
-    </PackageReference>
-    <PackageReference Include="Win2D.uwp">
-      <Version>1.23.0</Version>
+      <Version>6.1.7</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Retouch Photo2.Adjustment\Retouch Photo2.Adjustments.csproj">
-      <Project>{7256c005-0e5d-4c38-9115-e4eef9978233}</Project>
-      <Name>Retouch Photo2.Adjustments</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Blends\Retouch Photo2.Blends.csproj">
-      <Project>{8b2218b3-59a4-445f-8765-752c5e700efa}</Project>
-      <Name>Retouch Photo2.Blends</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Brushs\Retouch Photo2.Brushs.csproj">
-      <Project>{00e87876-1aa4-4b48-af1c-f1db75fbf587}</Project>
-      <Name>Retouch Photo2.Brushs</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Effects\Retouch Photo2.Effects.csproj">
-      <Project>{c14d4618-e234-4d91-8ced-49cbd9f6f3c7}</Project>
-      <Name>Retouch Photo2.Effects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Elements\Retouch Photo2.Elements.csproj">
-      <Project>{0e5ac58e-36bf-44fe-877e-830f024b7109}</Project>
-      <Name>Retouch Photo2.Elements</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Layers\Retouch Photo2.Layers.csproj">
-      <Project>{15cbf0a7-0953-49f5-b541-f8bcaab40053}</Project>
-      <Name>Retouch Photo2.Layers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Menus\Retouch Photo2.Menus.csproj">
-      <Project>{b1ed78fd-fc8e-423f-aa65-c9b50757554f}</Project>
-      <Name>Retouch Photo2.Menus</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Tools\Retouch Photo2.Tools.csproj">
-      <Project>{3f4ae427-651f-4791-a176-678a00a93b1e}</Project>
-      <Name>Retouch Photo2.Tools</Name>
-    </ProjectReference>
+    <Page Include="MenuLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

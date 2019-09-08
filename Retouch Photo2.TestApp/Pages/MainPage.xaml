@@ -7,17 +7,19 @@
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     xmlns:transformers="using:FanKit.Transformers"   
-    SizeChanged="Page_SizeChanged"
-    >
+     >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55"/>
+         </Grid.RowDefinitions>
 
-    <UserControl.Resources>
-        <transformers:CanvasOperator x:Name="CanvasOperator" 
-                                     DestinationControl="{Binding ElementName=CanvasControl}"
-                                     Single_Start="CanvasOperator_Single_Start"
-                                     Single_Delta="CanvasOperator_Single_Delta"
-                                     Single_Complete="CanvasOperator_Single_Complete"
-                                     />
-    </UserControl.Resources>
+        <StackPanel x:Name="StackPanel" Orientation="Horizontal">
+            
+        </StackPanel>
+        <Canvas x:Name="Canvas" Grid.Row="1">
+        
+    </Canvas>
 
-    <canvas:CanvasControl x:Name="CanvasControl" Draw="CanvasControl_Draw"/>
+    </Grid>
+
 </Page>

@@ -3,6 +3,7 @@ using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
@@ -116,39 +117,42 @@ namespace Retouch_Photo2.Controls
         //@DataTemplate
         /// <summary> DataTemplate's Grid Tapped. </summary>
         private void RootGrid_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            LayersControl.GetGridDataContext(sender, out Grid rootGrid, out ILayer layer);
+        {            //TODO:LayerMenuState
 
-            if (this.SelectionViewModel.Layer == layer) //FlyoutShow
-            {
-                if (this.TipViewModel.LayerMenuLayoutState == MenuLayoutState.FlyoutHide)
-                {
-                    this.TipViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutShow;
-                }
-            }
-            else //ItemClick
-            {
-                //Selection
-                this.SelectionViewModel.SetValue((layer2) =>
-                {
-                    layer2.IsChecked = false;
-                });
+      //      LayersControl.GetGridDataContext(sender, out Grid rootGrid, out ILayer layer);
 
-                layer.IsChecked = true;
+        //    if (this.SelectionViewModel.Layer == layer) //FlyoutShow
+       //     {            //TODO:LayerMenuState
 
-                this.SelectionViewModel.SetModeSingle(layer);//Selection
-                this.ViewModel.Invalidate();//Invalidate
-            }
+         //       if (this.TipViewModel.LayerMenuState == MenuState.FlyoutHide)
+          //      {
+            //        this.TipViewModel.LayerMenuState = MenuState.FlyoutShow;
+            //    }
+     //       }
+         //   else //ItemClick
+         //   {
+          //      //Selection
+         //       this.SelectionViewModel.SetValue((layer2) =>
+         //       {
+          //          layer2.IsChecked = false;
+           //     });
+
+          //      layer.IsChecked = true;
+
+         //       this.SelectionViewModel.SetModeSingle(layer);//Selection
+           //     this.ViewModel.Invalidate();//Invalidate
+      //      }
         }
     
         /// <summary> DataTemplate's Grid RightTapped. </summary>
         private void RootGrid_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
-            if (this.TipViewModel.LayerMenuLayoutState == MenuLayoutState.FlyoutHide)
-            {
-                this.TipViewModel.LayerMenuLayoutState = MenuLayoutState.FlyoutShow;
-            }
-        }
+            //TODO:LayerMenuState
+            //    if (this.TipViewModel.LayerMenuState == MenuState.FlyoutHide)
+            //    {
+            //      this.TipViewModel.LayerMenuState = MenuState.FlyoutShow;
+    //    }
+    }
      
         /// <summary> DataTemplate's Button Tapped. </summary>
         private void VisibilityButton_Tapped(object sender, TappedRoutedEventArgs e)

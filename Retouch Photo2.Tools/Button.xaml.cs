@@ -3,39 +3,19 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools
 {
-    /// <summary> 
-    /// PointerState of <see cref="ButtonState"/>. 
-    /// </summary>
-    public enum PointerState
-    {
-        /// <summary> Normal. </summary>
-        None,
-        /// <summary> Pointer-over. </summary>
-        PointerOver,
-        /// <summary> Pressed. </summary>
-        Pressed,
-    }
 
-    /// <summary> 
-    /// State of <see cref="Button"/>.
-    /// </summary>
-    public enum ButtonState
-    {
-        /// <summary> Normal. </summary>
-        None,
-        /// <summary> Pointer-over. </summary>
-        PointerOver,
-        /// <summary> Pressed. </summary>
-        Pressed,
-
-        /// <summary> Selected. </summary>
-        Selected,
-        /// <summary> Selected (Pointer-over). </summary>
-        PointerOverSelected,
-        /// <summary> Selected (Pressed). </summary>
-        PressedSelected,
-    }
-
+        /// <summary> 
+        /// PointerState of <see cref="ButtonState"/>. 
+        /// </summary>
+        enum PointerState
+        {
+            /// <summary> Normal. </summary>
+            None,
+            /// <summary> Pointer-over. </summary>
+            PointerOver,
+            /// <summary> Pressed. </summary>
+            Pressed,
+        }
     /// <summary>
     /// Retouch_Photo2 Tools 's Button.
     /// </summary>
@@ -45,14 +25,13 @@ namespace Retouch_Photo2.Tools
         private double BoolToOpacityConverter(bool isChecked) => isChecked ? 1.0 : 0.5;
         private Visibility BoolToVisibilityConverter(bool isChecked) => isChecked ? Visibility.Visible : Visibility.Collapsed;
 
-    
+
         /// <summary> <see cref = "Button" />'s Type. </summary>
         public ToolType Type { get; set; }
         /// <summary> <see cref = "Button" />'s RootGrid. </summary>
         public Border RootGrid { set => this._RootGrid = value; get => this._RootGrid; }
         /// <summary> ContentPresenter's Content. </summary>
         public object CenterContent { set => this.ContentPresenter.Content = value; get => this.ContentPresenter.Content; }
-
 
         #region DependencyProperty
 

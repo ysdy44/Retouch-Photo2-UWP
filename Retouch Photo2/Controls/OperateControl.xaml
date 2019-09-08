@@ -30,7 +30,7 @@
 
                 <operates:Button x:Name="FlipHorizontalButton" Grid.Column="0" IsEnabled="False">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Flip Horizontal" Placement="Top" IsOpen="{x:Bind TipViewModel.IsOperateMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Flip Horizontal" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:Button.EnabledIcon>
                         <operatesTra:FlipHorizontalEnabledControl/>
@@ -42,7 +42,7 @@
 
                 <operates:Button x:Name="FlipVerticalButton" Grid.Column="1" IsEnabled="False">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Flip Vertical" Placement="Top" IsOpen="{x:Bind TipViewModel.IsOperateMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Flip Vertical" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:Button.EnabledIcon>
                         <operatesTra:FlipVerticalEnabledControl/>
@@ -54,7 +54,7 @@
 
                 <operates:Button x:Name="RotateLeftButton" Grid.Column="2" IsEnabled="False">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Rotate Left" Placement="Top" IsOpen="{x:Bind TipViewModel.IsOperateMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Rotate Left" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:Button.EnabledIcon>
                         <operatesTra:RotateLeftEnabledIControl/>
@@ -66,7 +66,7 @@
 
                 <operates:Button x:Name="RotateRightButton" Grid.Column="3" IsEnabled="False">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Rotate Right" Placement="Top" IsOpen="{x:Bind TipViewModel.IsOperateMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Rotate Right" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:Button.EnabledIcon>
                         <operatesTra:RotateRightEnabledControl/>
@@ -96,7 +96,7 @@
 
                 <operates:Button x:Name="ArrangeMoveBackButton" Grid.Column="0" IsEnabled="False">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Move To Back" Placement="Top" IsOpen="{x:Bind TipViewModel.IsOperateMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Move To Back" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:Button.EnabledIcon>
                         <operatesArr:MoveBackEnabledControl/>
@@ -108,7 +108,7 @@
 
                 <operates:Button x:Name="ArrangeBackOneButton" Grid.Column="1" IsEnabled="False">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Back One" Placement="Top" IsOpen="{x:Bind TipViewModel.IsOperateMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Back One" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:Button.EnabledIcon>
                         <operatesArr:BackOneEnabledControl/>
@@ -120,7 +120,7 @@
 
                 <operates:Button x:Name="ArrangeForwardOneButton" Grid.Column="2" IsEnabled="False">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Forward One" Placement="Top" IsOpen="{x:Bind TipViewModel.IsOperateMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Forward One" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:Button.EnabledIcon>
                         <operatesArr:ForwardOneEnabledControl/>
@@ -132,7 +132,7 @@
 
                 <operates:Button x:Name="ArrangeMoveFrontButton" Grid.Column="3" IsEnabled="False">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Move To Front" Placement="Top" IsOpen="{x:Bind TipViewModel.IsOperateMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Move To Front" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:Button.EnabledIcon>
                         <operatesArr:MoveFrontEnabledControl/>
@@ -161,7 +161,7 @@
 
                 <operates:Button x:Name="AlignLeftButton" Grid.Column="0" IsEnabled="False">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Align Left" Placement="Top" IsOpen="{x:Bind TipViewModel.IsOperateMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Align Left" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:Button.EnabledIcon>
                         <operatesAliHor:LeftEnabledControl/>
@@ -173,7 +173,7 @@
 
                 <operates:Button x:Name="AlignCenterButton" Grid.Column="1" IsEnabled="False">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Align Center" Placement="Top" IsOpen="{x:Bind TipViewModel.IsOperateMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Align Center" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:Button.EnabledIcon>
                         <operatesAliHor:CenterEnabledControl/>
@@ -185,7 +185,7 @@
 
                 <operates:Button x:Name="AlignRightButton" Grid.Column="2" IsEnabled="False">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Align Right" Placement="Top" IsOpen="{x:Bind TipViewModel.IsOperateMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Align Right" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:Button.EnabledIcon>
                         <operatesAliHor:RightEnabledControl/>
@@ -197,7 +197,7 @@
 
                 <operates:Button x:Name="AlignSymmetryHorizontallyButton" Grid.Column="3" IsEnabled="False">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Symmetry" Placement="Top" IsOpen="{x:Bind TipViewModel.IsOperateMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Symmetry" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:Button.EnabledIcon>
                         <operatesAliHor:SymmetryEnabledControl/>
@@ -227,7 +227,7 @@
 
                 <operates:Button x:Name="AlignTopButton" Grid.Column="0" IsEnabled="False">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Align Top" Placement="Top" IsOpen="{x:Bind TipViewModel.IsOperateMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Align Top" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:Button.EnabledIcon>
                         <operatesAliVer:TopEnabledControl/>
@@ -239,7 +239,7 @@
 
                 <operates:Button x:Name="AlignMiddleButton" Grid.Column="1" IsEnabled="False">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Align Middle" Placement="Top" IsOpen="{x:Bind TipViewModel.IsOperateMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Align Middle" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:Button.EnabledIcon>
                         <operatesAliVer:MiddleEnabledControl/>
@@ -251,7 +251,7 @@
 
                 <operates:Button x:Name="AlignBottomButton" Grid.Column="2" IsEnabled="False">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Align Bottom" Placement="Top" IsOpen="{x:Bind TipViewModel.IsOperateMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Align Bottom" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:Button.EnabledIcon>
                         <operatesAliVer:BottomEnabledControl/>
@@ -263,7 +263,7 @@
 
                 <operates:Button x:Name="AlignSymmetryVerticallyButton" Grid.Column="3" IsEnabled="False">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Symmetry" Placement="Top" IsOpen="{x:Bind TipViewModel.IsOperateMenuLayoutOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Symmetry" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:Button.EnabledIcon>
                         <operatesAliVer:SymmetryEnabledControl/>

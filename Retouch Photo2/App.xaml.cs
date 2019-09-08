@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Pages;
+﻿using Retouch_Photo2.Menus.Models;
+using Retouch_Photo2.Pages;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.Tools.Touchbars;
@@ -32,8 +33,10 @@ namespace Retouch_Photo2
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.Tips.TipViewModel" />. </summary>
         public static TipViewModel TipViewModel = new TipViewModel(new NoneTool())
         {
+            //TransformerTool
             TransformerTool = new TransformerTool(),
 
+            //Tool
             CursorTool = new CursorTool(),
             ViewTool = new ViewTool(),
             BrushTool = new BrushTool(),
@@ -42,14 +45,16 @@ namespace Retouch_Photo2
             PenTool = new PenTool(),
             ImageTool = new ImageTool(),
             AcrylicTool = new AcrylicTool(),
-              
-            /*
-           StrokeWidthTouchbar = new StrokeWidthTouchbar(),
+
+            //Touchbar
+            StrokeWidthTouchbar = new StrokeWidthTouchbar(),
             ViewRadianTouchbar = new ViewRadianTouchbar(),
             ViewScaleTouchbar = new ViewScaleTouchbar(),
             AcrylicTintOpacityTouchbar = new AcrylicTintOpacityTouchbar(),
             AcrylicBlurAmountTouchbar = new AcrylicBlurAmountTouchbar(),
-             */
+
+            //Menu
+            AdjustmentMenu = new AdjustmentMenu(),
         };
 
 

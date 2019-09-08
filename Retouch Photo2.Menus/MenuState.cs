@@ -1,9 +1,9 @@
-﻿namespace Retouch_Photo2.Elements
+﻿namespace Retouch_Photo2.Menus
 {
     /// <summary> 
-    /// State of <see cref="MenuLayout"/>.
+    /// State of <see cref="Menu"/>.
     /// </summary>
-    public enum MenuLayoutState
+    public enum MenuState
     {
         /// <summary> Flyout hided. </summary>
         FlyoutHide,

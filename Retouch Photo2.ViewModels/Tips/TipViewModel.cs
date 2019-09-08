@@ -24,8 +24,6 @@ namespace Retouch_Photo2.ViewModels.Tips
             set
             {
                 this.SetToolIsOpen(value);//Tool
-                this.SetMenuLayoutStateIsOpen(value);//MenuLayoutState
-
                 this.isOpen = value;
                 this.OnPropertyChanged(nameof(this.IsOpen));//Notify 
             }
