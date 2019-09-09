@@ -4,9 +4,9 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Menus
 {
     /// <summary>
-    /// Content of <see cref="MenuLayout"/>..
+    /// Layout of IMenu.
     /// </summary>
-    public sealed partial class MenuLayout : UserControl
+    public partial class MenuLayout : UserControl
     {
         //@Content
         public string Text { set => this.TextBlock.Text = value; get => this.TextBlock.Text; }
@@ -17,84 +17,43 @@ namespace Retouch_Photo2.Menus
         public UIElement CloseButton => this._CloseButton;
         public UIElement TitlePanel => this._TitlePanel;
 
-
-        #region State
-
+        
         public MenuState State
         {
-            get => this.state;
             set
             {
                 switch (value)
                 {
                     case MenuState.FlyoutHide:
+                    case MenuState.FlyoutShow:
+                        this._CloseButton.Visibility = Visibility.Collapsed;
+                        break;
+                    case MenuState.RootExpanded:
+                    case MenuState.RootNotExpanded:
+                        this._CloseButton.Visibility = Visibility.Visible;
+                        break;
+                }
+
+                switch (value)
+                {
+                    case MenuState.FlyoutHide:
+                    case MenuState.RootNotExpanded:
                         {
-                            this.FlyoutOrRoot = true;
-                            this.HideOrShow = true;
+                            this.StateIcon.Glyph = "\uE196";
+                            this.ContentBorder.Visibility = Visibility.Collapsed;
                         }
                         break;
                     case MenuState.FlyoutShow:
-                        {
-                            this.FlyoutOrRoot = true;
-                            this.HideOrShow = false;
-                        }
-                        break;
                     case MenuState.RootExpanded:
                         {
-                            this.FlyoutOrRoot = false;
-                            this.HideOrShow = false;
-                        }
-                        break;
-                    case MenuState.RootNotExpanded:
-                        {
-                            this.FlyoutOrRoot = false;
-                            this.HideOrShow = true;
+                            this.StateIcon.Glyph = "\uE141";
+                            this.ContentBorder.Visibility = Visibility.Visible;
                         }
                         break;
                 }
-
-
-                this.state = value;
             }
         }
-        private MenuState state;
-
-        private bool HideOrShow
-        {
-            set
-            {
-                if (value)
-                {
-                     this.StateIcon.Glyph = "\uE196";
-                     this.ContentBorder.Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                     this.StateIcon.Glyph = "\uE141";
-                     this.ContentBorder.Visibility = Visibility.Visible;
-                }
-            }
-        }
-
-        private bool FlyoutOrRoot
-        {
-            set
-            {
-                if (value)
-                {
-                    this.StoryboardRectangle.Visibility = Visibility.Collapsed;
-                    this._CloseButton.Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    this.StoryboardRectangle.Visibility = Visibility.Visible;
-                    this._CloseButton.Visibility = Visibility.Visible;
-                }
-            }
-        }
-
-        #endregion
-
+                  
 
         //@Construct
         public MenuLayout()

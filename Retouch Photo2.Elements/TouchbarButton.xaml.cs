@@ -1,4 +1,4 @@
-﻿using Windows.Foundation;
+﻿using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -9,7 +9,7 @@ namespace Retouch_Photo2.Elements
     {
         //@Delegate
         /// <summary> Occurs when the IsChecked change. </summary>
-        public TypedEventHandler<object, bool> Tapped2;
+        public EventHandler<bool> Switch;
 
         //@Converter
         private SolidColorBrush BoolToBackgroundConverter(bool isChecked) => isChecked ? this.AccentColor : this.UnAccentColor;
@@ -60,7 +60,7 @@ namespace Retouch_Photo2.Elements
         public TouchbarButton()
         {
             this.InitializeComponent();
-            this.RootBorder.Tapped+=(s,e) => this.Tapped2?.Invoke(this, this.IsChecked);//Delegate
+            this.RootBorder.Tapped+=(s,e) => this.Switch?.Invoke(this, this.IsChecked);//Delegate
         }
     }
 }

@@ -12,16 +12,15 @@ namespace Retouch_Photo2.ViewModels.Tips
 
         private void SetMenusOpen(bool isOpen)
         {
-            this.DebugMenu.MenuLayout.IsOpen =
-            this.SelectionMenu.MenuLayout.IsOpen =
-            this.OperateMenu.MenuLayout.IsOpen =
-            this.AdjustmentMenu.MenuLayout.IsOpen =
-            this.EffectMenu.MenuLayout.IsOpen =
-            this.TransformerMenu.MenuLayout.IsOpen =
-            this.ColorMenu.MenuLayout.IsOpen =
-            this.ToolMenu.MenuLayout.IsOpen =
-            this.LayerMenu.MenuLayout.IsOpen =
-                isOpen;
+            this.DebugMenu.IsOpen = isOpen;
+            this.SelectionMenu.IsOpen = isOpen;
+            this.OperateMenu.IsOpen = isOpen;
+            this.AdjustmentMenu.IsOpen = isOpen;
+            this.EffectMenu.IsOpen = isOpen;
+            this.TransformerMenu.IsOpen = isOpen;
+            this.ColorMenu.IsOpen = isOpen;
+            this.ToolMenu.IsOpen = isOpen;
+            this.LayerMenu.IsOpen = isOpen;
         }
 
         /// <summary> Debug. </summary>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Numerics;
-using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
@@ -24,7 +23,7 @@ namespace Retouch_Photo2.Elements
 
 
         //@Delegate
-        public event TypedEventHandler<object, float> RadiansChange;
+        public event EventHandler<float> RadiansChange;
 
         private float radians;
         public float Radians

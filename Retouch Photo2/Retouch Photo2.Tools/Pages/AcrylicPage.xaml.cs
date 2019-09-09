@@ -33,7 +33,7 @@ namespace Retouch_Photo2.Tools.Pages
 
             //TintOpacity
             this.TintOpacityTouchbarButton.Unit = "%";
-            this.TintOpacityTouchbarButton.Tapped2 += (s, isChecked) =>
+            this.TintOpacityTouchbarButton.Switch += (s, isChecked) =>
             {
                 if (isChecked)
                     this.TipViewModel.SetTouchbar(TouchbarType.None);//Touchbar
@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Tools.Pages
 
             //BlurAmount
             this.BlurAmountTouchbarButton.Unit = "dp";
-            this.BlurAmountTouchbarButton.Tapped2 += (s, isChecked) =>
+            this.BlurAmountTouchbarButton.Switch += (s, isChecked) =>
             {
                 if (isChecked)
                     this.TipViewModel.SetTouchbar(TouchbarType.None);//Touchbar

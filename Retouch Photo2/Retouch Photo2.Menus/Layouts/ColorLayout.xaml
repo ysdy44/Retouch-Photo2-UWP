@@ -10,12 +10,6 @@
     d:DesignHeight="200"
     d:DesignWidth="200"
     >
-
-    <UserControl.Resources>
-        <!--Flyout-->
-        <Flyout x:Name="_Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-    </UserControl.Resources>
-
     
     <menus:MenuLayout x:Name="_Layout" Text="Color">     
         
@@ -24,7 +18,7 @@
         </menus:MenuLayout.Icon>        
         <menus:MenuLayout.ContentChild>
             
-            <hsvColorPicker:ColorPicker x:Name="ColorPicker" Width="Auto" 
+            <hsvColorPicker:ColorPicker x:Name="ColorPicker" Width="Auto" Background="Transparent"
                      Color="{x:Bind SelectionViewModel.Color,Mode=OneWay}"
                      FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
         </menus:MenuLayout.ContentChild>

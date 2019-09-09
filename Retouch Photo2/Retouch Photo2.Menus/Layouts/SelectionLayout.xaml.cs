@@ -19,8 +19,6 @@ namespace Retouch_Photo2.Menus.Layouts
         public MenuState State { set => this._Layout.State = value; }
         public UIElement Self => this;
 
-        public Flyout Flyout => this._Flyout;
-
         public UIElement StateButton => this._Layout.StateButton;
         public UIElement CloseButton => this._Layout.CloseButton;
         public UIElement TitlePanel => this._Layout.TitlePanel;

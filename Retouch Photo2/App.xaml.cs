@@ -53,8 +53,8 @@ namespace Retouch_Photo2
             AcrylicTintOpacityTouchbar = new AcrylicTintOpacityTouchbar(),
             AcrylicBlurAmountTouchbar = new AcrylicBlurAmountTouchbar(),
 
-            //Menu
-            DebugMenu = new DebugMenu(),
+        //Menu
+        DebugMenu = new DebugMenu(),
             SelectionMenu = new SelectionMenu(),
             OperateMenu = new OperateMenu(),
             AdjustmentMenu = new AdjustmentMenu(),

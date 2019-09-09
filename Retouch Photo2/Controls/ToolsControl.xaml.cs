@@ -43,24 +43,24 @@ namespace Retouch_Photo2.Controls
             this.InitializeComponent();
              
             //Cursor
-            this.ConstructButton(this.CursorButton, this.TipViewModel.CursorTool);
+            this.Construct(this.CursorButton, this.TipViewModel.CursorTool);
             //View
-            this.ConstructButton(this.ViewButton, this.TipViewModel.ViewTool);
+            this.Construct(this.ViewButton, this.TipViewModel.ViewTool);
             //Brush
-            this.ConstructButton(this.BrushButton, this.TipViewModel.BrushTool);
+            this.Construct(this.BrushButton, this.TipViewModel.BrushTool);
             //Rectangle
-            this.ConstructButton(this.RectangleButton, this.TipViewModel.RectangleTool);
+            this.Construct(this.RectangleButton, this.TipViewModel.RectangleTool);
             //Ellipse
-            this.ConstructButton(this.EllipseButton, this.TipViewModel.EllipseTool);
+            this.Construct(this.EllipseButton, this.TipViewModel.EllipseTool);
             //Pen
-            this.ConstructButton(this.PenButton, this.TipViewModel.PenTool);
+            this.Construct(this.PenButton, this.TipViewModel.PenTool);
             //Image
-            this.ConstructButton(this.ImageButton, this.TipViewModel.ImageTool);
+            this.Construct(this.ImageButton, this.TipViewModel.ImageTool);
             //Acrylic
-            this.ConstructButton(this.AcrylicButton, this.TipViewModel.AcrylicTool);
+            this.Construct(this.AcrylicButton, this.TipViewModel.AcrylicTool);
         }
 
-        private void ConstructButton(Tools.Button button, ITool tool)
+        private void Construct(Tools.Button button, ITool tool)
         {
             ToolType type = tool.Type;
 

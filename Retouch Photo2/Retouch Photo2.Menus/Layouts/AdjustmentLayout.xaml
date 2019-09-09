@@ -4,30 +4,23 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:adjustments="using:Retouch_Photo2.Adjustments"
     xmlns:controls="using:Retouch_Photo2.Controls"
     xmlns:menus="using:Retouch_Photo2.Menus"
-    xmlns:adjustments="using:Retouch_Photo2.Adjustments"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
     >
 
-    <UserControl.Resources>
-        <!--Flyout-->
-        <Flyout x:Name="_Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-    </UserControl.Resources>
-
-
     <menus:MenuLayout x:Name="_Layout" Text="Adjustment">
-        
         <menus:MenuLayout.Icon>
             <adjustments:Icon/>
         </menus:MenuLayout.Icon>
-        
+
         <menus:MenuLayout.ContentChild>
             <controls:AdjustmentControl AdjustmentManager="{x:Bind SelectionViewModel.AdjustmentManager,Mode=OneWay}"/>
         </menus:MenuLayout.ContentChild>
-        
-    </menus:MenuLayout>
 
+    </menus:MenuLayout>
+    
 </UserControl>

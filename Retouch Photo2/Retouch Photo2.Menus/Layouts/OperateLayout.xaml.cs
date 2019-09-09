@@ -15,20 +15,9 @@ namespace Retouch_Photo2.Menus.Layouts
 
 
         //@Content
-        public bool IsOpen
-        {
-            set
-            {
-                if (this._Layout.State == MenuState.RootExpanded)
-                {
-                    this.OperateControl.IsOpen = value;
-                }
-            }
-        }
+        public bool IsOpen { set { this.OperateControl.IsOpen = value; } }
         public MenuState State { set => this._Layout.State = value; }
         public UIElement Self => this;
-
-        public Flyout Flyout => this._Flyout;
 
         public UIElement StateButton => this._Layout.StateButton;
         public UIElement CloseButton => this._Layout.CloseButton;

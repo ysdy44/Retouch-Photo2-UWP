@@ -3,7 +3,6 @@ using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs.Stops;
 using System;
 using System.Linq;
-using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
 
@@ -15,12 +14,8 @@ namespace Retouch_Photo2.Brushs.Controls
     public sealed partial class StopsPicker : UserControl
     {
         //@Delegate
-        /// <summary>
-        /// Occurs when the stops changes. 
-        /// </summary>
-        /// <param name="sender"> The object to which the event handler is attached. </param>
-        /// <param name="array"> Event data. </param>
-        public event TypedEventHandler<object, CanvasGradientStop[]> StopsChanged;
+        /// <summary> Occurs when the stops changes. </summary>
+        public event EventHandler<CanvasGradientStop[]> StopsChanged;
 
         //@Content        
         public ComboBox BrushTypeComboBox => this._BrushTypeComboBox;

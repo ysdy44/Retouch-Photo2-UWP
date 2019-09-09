@@ -7,7 +7,7 @@ namespace Retouch_Photo2.Menus.Models
     {
         public MenuType Type => MenuType.Transformer;
 
-        public override IMenuLayout MenuLayout { get; } = new TransformerLayout();
-        public override IMenuButton MenuButton { get; } = new TransformerButton();
+        public override IMenuLayout Layout { get; } = new TransformerLayout();
+        public override IMenuButton Button { get; } = new TransformerButton();
     }
 }

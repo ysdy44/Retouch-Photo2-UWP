@@ -7,7 +7,7 @@ namespace Retouch_Photo2.Menus.Models
     {
         public MenuType Type => MenuType.Adjustment;
 
-        public override IMenuLayout MenuLayout { get; } = new AdjustmentLayout();
-        public override IMenuButton MenuButton { get; } = new AdjustmentButton();
+        public override IMenuLayout Layout { get; } = new AdjustmentLayout();
+        public override IMenuButton Button { get; } = new AdjustmentButton();
     }
 }

@@ -130,12 +130,6 @@ namespace Retouch_Photo2.Pages
 
             this.Loaded += (s, e) =>
             {
-                this.TipViewModel.StrokeWidthTouchbar = new StrokeWidthTouchbar();
-                this.TipViewModel.ViewRadianTouchbar = new ViewRadianTouchbar();
-                this.TipViewModel.ViewScaleTouchbar = new ViewScaleTouchbar();
-                this.TipViewModel.AcrylicTintOpacityTouchbar = new AcrylicTintOpacityTouchbar();
-                this.TipViewModel.AcrylicBlurAmountTouchbar = new AcrylicBlurAmountTouchbar();
-
                 if (this.PhotoFileList.Count == 0)
                     this.State = MainPageState.None;//State   
                 else

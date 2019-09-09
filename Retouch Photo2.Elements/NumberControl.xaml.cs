@@ -1,4 +1,4 @@
-﻿using Windows.Foundation;
+﻿using System;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Elements
@@ -10,7 +10,7 @@ namespace Retouch_Photo2.Elements
     {
         //@Delegate
         /// <summary> Occurs when the value changes. </summary>
-        public event TypedEventHandler<object, double> ValueChange;
+        public event EventHandler<double> ValueChange;
 
         /// <summary> Get or set value. </summary>
         public double Value

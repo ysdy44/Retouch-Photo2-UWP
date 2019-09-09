@@ -3,19 +3,19 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools
 {
+    /// <summary> 
+    /// PointerState of <see cref="ButtonState"/>. 
+    /// </summary>
+    enum PointerState
+    {
+        /// <summary> Normal. </summary>
+        None,
+        /// <summary> Pointer-over. </summary>
+        PointerOver,
+        /// <summary> Pressed. </summary>
+        Pressed,
+    }
 
-        /// <summary> 
-        /// PointerState of <see cref="ButtonState"/>. 
-        /// </summary>
-        enum PointerState
-        {
-            /// <summary> Normal. </summary>
-            None,
-            /// <summary> Pointer-over. </summary>
-            PointerOver,
-            /// <summary> Pressed. </summary>
-            Pressed,
-        }
     /// <summary>
     /// Retouch_Photo2 Tools 's Button.
     /// </summary>
@@ -129,7 +129,7 @@ namespace Retouch_Photo2.Tools
 
             return ButtonState.None;
         }
-        
+
 
         //@Construct
         public Button()

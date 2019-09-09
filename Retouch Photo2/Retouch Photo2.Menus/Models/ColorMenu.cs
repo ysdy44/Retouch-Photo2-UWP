@@ -7,7 +7,7 @@ namespace Retouch_Photo2.Menus.Models
     {
         public MenuType Type => MenuType.Color;
 
-        public override IMenuLayout MenuLayout { get; } = new ColorLayout();
-        public override IMenuButton MenuButton { get; } = new ColorButton();
+        public override IMenuLayout Layout { get; } = new ColorLayout();
+        public override IMenuButton Button { get; } = new ColorButton();
     }
 }

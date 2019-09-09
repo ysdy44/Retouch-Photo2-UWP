@@ -20,11 +20,21 @@
     </UserControl.Resources>
     
 
-    <Grid>
+    <Grid BorderThickness="1"
+               BorderBrush="{ThemeResource AppBorderBrush}"
+               Background="{ThemeResource AppBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="36"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
+        <Rectangle x:Name="StoryboardRectangle" Grid.Row="1"/>
+
+        <Border x:Name="StoryboardBorder" Grid.Row="1" VerticalAlignment="Top">
+            <Border x:Name="ContentBorder">
+                <!--Content-->
+            </Border>
+        </Border>
 
         <Grid x:Name="_TitlePanel" Background="{ThemeResource AppForeground}">
             <Grid.ColumnDefinitions>
@@ -42,14 +52,6 @@
                 <FontIcon x:Name="StateIcon" FontSize="14" FontFamily="Segoe UI Symbol" Foreground="{ThemeResource AppText}"/>
             </Button>
         </Grid>
-
-        <Rectangle x:Name="StoryboardRectangle" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Top" Fill="{ThemeResource AppBackground}"/>
-
-        <Border x:Name="StoryboardBorder" Grid.Row="1" VerticalAlignment="Top">
-            <Border x:Name="ContentBorder">
-                <!--Content-->
-            </Border>
-        </Border>
 
     </Grid>
 </UserControl>

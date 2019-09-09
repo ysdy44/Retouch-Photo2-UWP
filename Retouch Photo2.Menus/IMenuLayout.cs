@@ -1,5 +1,5 @@
 ﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Menus
 {
@@ -11,9 +11,6 @@ namespace Retouch_Photo2.Menus
         MenuState State { set; }
         /// <summary> Gets it yourself. </summary>
         UIElement Self { get; }
-
-        /// <summary> Gets flyout. </summary>
-        Flyout Flyout { get; }
 
         /// <summary> Gets layout's StateButton. </summary>
         UIElement StateButton { get; }

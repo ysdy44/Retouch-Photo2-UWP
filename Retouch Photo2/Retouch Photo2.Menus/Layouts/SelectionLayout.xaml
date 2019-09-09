@@ -11,13 +11,7 @@
     d:DesignHeight="200"
     d:DesignWidth="200"
     >
-
-    <UserControl.Resources>
-        <!--Flyout-->
-        <Flyout x:Name="_Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-    </UserControl.Resources>
-
-
+    
     <menus:MenuLayout x:Name="_Layout" Text="Selection">
         
         <menus:MenuLayout.Icon>

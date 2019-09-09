@@ -1,4 +1,7 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.Foundation;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Retouch_Photo2.Menus
 {
@@ -7,16 +10,24 @@ namespace Retouch_Photo2.Menus
     /// </summary>
     public interface IMenu
     {
+        /// <summary> Move the MenuOverlay  to a new location in the collection. </summary>
+        EventHandler<UIElement> Move { get; set; }
+
+        /// <summary> Sets IMenu's ToolTip IsOpen. </summary>
+        bool IsOpen { set; }
         /// <summary> Gets IMenu's type. </summary>
         MenuType Type { get; }
         /// <summary> Gets IMenu's state. </summary>
         MenuState State { get; set; }
 
         /// <summary> Gets IMenu's layout. </summary>
-        IMenuLayout MenuLayout { get; }
+        IMenuLayout Layout { get; }
         /// <summary> Gets IMenu's button. </summary>
-        IMenuButton MenuButton { get; }
+        IMenuButton Button { get; }
+
         /// <summary> Gets overlay on canvas. </summary>
-        UIElement MenuOverlay { get; }
+        UIElement Overlay { get; }
+        /// <summary> Gets flyout. </summary>
+        FlyoutBase Flyout { get; }
     }
 }

@@ -38,18 +38,59 @@ namespace Retouch_Photo2.Pages
 
             this.BackButton.Tapped += (s, e) => this.Frame.GoBack();
             this.SaveButton.Tapped += (s, e) => this.Frame.GoBack();
-                        
+
 
             //Menu
-            DrawPage.AddMenu(this, this.TipViewModel.DebugMenu);
-            DrawPage.AddMenu(this, this.TipViewModel.SelectionMenu);
-            DrawPage.AddMenu(this, this.TipViewModel.OperateMenu);
-            DrawPage.AddMenu(this, this.TipViewModel.AdjustmentMenu);
-            DrawPage.AddMenu(this, this.TipViewModel.EffectMenu);
-            DrawPage.AddMenu(this, this.TipViewModel.TransformerMenu);
-            DrawPage.AddMenu(this, this.TipViewModel.ColorMenu);
-            DrawPage.AddMenu(this, this.TipViewModel.ToolMenu);
-            DrawPage.AddMenu(this, this.TipViewModel.LayerMenu);
+            this.Construct(this.TipViewModel.DebugMenu);
+            this.Construct(this.TipViewModel.SelectionMenu);
+            this.Construct(this.TipViewModel.OperateMenu);
+            this.Construct(this.TipViewModel.AdjustmentMenu);
+            this.Construct(this.TipViewModel.EffectMenu);
+            this.Construct(this.TipViewModel.TransformerMenu);
+            this.Construct(this.TipViewModel.ColorMenu);
+            this.Construct(this.TipViewModel.ToolMenu);
+            this.Construct(this.TipViewModel.LayerMenu);
+        }
+
+
+        private void Construct(IMenu menu)
+        {
+            UIElementCollection uIElements = this.OverlayCanvas.Children;
+
+            //MenuOverlay
+            UIElement overlay = menu.Overlay;
+            uIElements.Add(overlay);
+
+            menu.Move += (s, e) =>
+            {
+                int index = uIElements.IndexOf(menu.Overlay);
+                int count = uIElements.Count;
+                uIElements.Move((uint)index, (uint)count - 1);
+            };
+
+            //MenuButton
+            IMenuButton menuButton = menu.Button;
+            switch (menuButton.Type)
+            {
+                case MenuButtonType.None:
+                    {
+                        FrameworkElement button = menuButton.Self;
+                        this.DrawLayout.TopRightPanelChildren.Add(button);
+                    }
+                    break;
+                case MenuButtonType.ToolButton:
+                    {
+                        FrameworkElement toolButton = menuButton.Self;
+                        this.ToolsControl.MoreBorderChild = toolButton;
+                    }
+                    break;
+                case MenuButtonType.LayersControl:
+                    {
+                        FrameworkElement layersControl = menuButton.Self;
+                        this.DrawLayout.RightPane = layersControl;
+                    }
+                    break;
+            }
         }
 
 
@@ -79,34 +120,6 @@ namespace Retouch_Photo2.Pages
         //The current page no longer becomes an active page
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-        }
-
-
-        //@Static
-        private static void AddMenu(DrawPage drawPage, IMenu menu)
-        {
-            //MenuOverlay
-            UIElement overlay = menu.MenuOverlay;
-            drawPage.OverlayCanvas.Children.Add(overlay);
-
-
-            //MenuButton
-            IMenuButton menuButton = menu.MenuButton;
-            switch (menuButton.Type)
-            {
-                case MenuButtonType.None:
-                    FrameworkElement button = menuButton.Self;
-                    drawPage.DrawLayout.TopRightPanelChildren.Add(button);
-                    break;
-                case MenuButtonType.ToolButton:
-                    FrameworkElement toolButton = menuButton.Self;
-                    drawPage.ToolsControl.MoreBorderChild = toolButton;
-                    break;
-                case MenuButtonType.LayersControl:
-                    FrameworkElement layersControl = menuButton.Self;
-                    drawPage.DrawLayout.RightPane = layersControl;
-                    break;
-            }
         }
     }
 }
