@@ -27,7 +27,8 @@ namespace Retouch_Photo2.Tools.Models
         //Box
         bool _isBox;
         TransformerRect _boxCanvasRect;
-        
+
+        public bool IsOpen { set { this._cursorPage.IsOpen = value; } }
         public ToolType Type=> ToolType.Cursor;
         public FrameworkElement Icon { get; }= new CursorControl();
         public FrameworkElement ShowIcon { get; }= new CursorControl();

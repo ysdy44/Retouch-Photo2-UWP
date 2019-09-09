@@ -12,7 +12,7 @@ namespace Retouch_Photo2.Elements
 
         #region DependencyProperty
 
-        /// <summary> Gets or Sets the control checked. </summary>
+        /// <summary> Gets or sets the control checked. </summary>
         public bool IsChecked
         {
             get { return (bool)GetValue(IsCheckedProperty); }

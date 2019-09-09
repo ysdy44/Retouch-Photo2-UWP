@@ -14,15 +14,13 @@ namespace Retouch_Photo2.Elements
         
         #region DependencyProperty
 
-        /// <summary>
-        /// Gets or sets whether the <see cref = "LoadingControl" /> Visibility.
-        /// </summary>
+        /// <summary> Gets or sets whether the <see cref = "LoadingControl" /> Visibility. </summary>
         public bool IsActive
         {
             get { return (bool)GetValue(IsActiveProperty); }
             set { SetValue(IsActiveProperty, value); }
-        }
-
+        }       
+        /// <summary> Identifies the <see cref = "LoadingControl.IsActive" /> dependency property. </summary>
         public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(nameof(IsActive), typeof(bool), typeof(ThemeControl), new PropertyMetadata(false, (sender, e) =>
         {
             LoadingControl con = (LoadingControl)sender;

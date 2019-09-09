@@ -109,10 +109,12 @@
     <Compile Include="IMenu.cs" />
     <Compile Include="IMenuButton.cs" />
     <Compile Include="IMenuLayout.cs" />
-    <Compile Include="Menu.cs" />
+    <Compile Include="MenuBase.cs" />
+    <Compile Include="MenuButtonType.cs" />
     <Compile Include="MenuLayout.xaml.cs">
       <DependentUpon>MenuLayout.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MenuSize.cs" />
     <Compile Include="MenuState.cs" />
     <Compile Include="MenuType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

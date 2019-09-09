@@ -17,11 +17,11 @@ namespace Retouch_Photo2.ViewModels.Tips
                     break;
 
                 case ToolType.Cursor:
-                    this.IsCursorToolOpen = isOpen;
+                   this.CursorTool.IsOpen = isOpen;
                     break;
 
                 case ToolType.View:
-                    this.IsViewToolOpen = isOpen;
+              this.ViewTool.IsOpen = isOpen;
                     break;
 
                 case ToolType.Rectangle:
@@ -31,7 +31,7 @@ namespace Retouch_Photo2.ViewModels.Tips
                     break;
 
                 case ToolType.Pen:
-                    this.IsPenToolOpen = isOpen;
+                 this.PenTool.IsOpen = isOpen;
                     break;
 
                 case ToolType.Acrylic:
@@ -87,43 +87,6 @@ namespace Retouch_Photo2.ViewModels.Tips
 
         /// <summary> AcrylicTool. </summary>
         public ITool AcrylicTool;
-        
-        
-        /// <summary> IsOpen of the <see cref = "TipViewModel.CursorTool" />. </summary>
-        public bool IsCursorToolOpen
-        {
-            get => this.isCursorToolOpen;
-            set
-            {
-                this.isCursorToolOpen = value;
-                this.OnPropertyChanged(nameof(this.IsCursorToolOpen));//Notify 
-            }
-        }
-        private bool isCursorToolOpen;
-
-        /// <summary> IsOpen of the <see cref = "TipViewModel.ViewTool" />. </summary>
-        public bool IsViewToolOpen
-        {
-            get => this.isViewToolOpen;
-            set
-            {
-                this.isViewToolOpen = value;
-                this.OnPropertyChanged(nameof(this.IsViewToolOpen));//Notify 
-            }
-        }
-        private bool isViewToolOpen;
-
-        /// <summary> IsOpen of the <see cref = "TipPenModel.PenTool" />. </summary>
-        public bool IsPenToolOpen
-        {
-            get => this.isPenToolOpen;
-            set
-            {
-                this.isPenToolOpen = value;
-                this.OnPropertyChanged(nameof(this.IsPenToolOpen));//Notify 
-            }
-        }
-        private bool isPenToolOpen;
 
     }
 }

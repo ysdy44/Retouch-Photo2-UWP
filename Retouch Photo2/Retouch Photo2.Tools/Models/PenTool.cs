@@ -24,6 +24,7 @@ namespace Retouch_Photo2.Tools.Models
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
         NodeCollection NodeCollection => this.SelectionViewModel.CurveLayer.NodeCollection;
 
+        public bool IsOpen { set { this._penPage.IsOpen = value; } }
         public ToolType Type => ToolType.Pen;
         public FrameworkElement Icon { get; } = new PenControl();
         public FrameworkElement ShowIcon { get; } = new PenControl();

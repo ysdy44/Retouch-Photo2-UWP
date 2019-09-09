@@ -3,7 +3,7 @@
 namespace Retouch_Photo2.Effects
 {
     /// <summary>
-    /// Effect Classes.
+    /// Represents a special effect that adds effects to layers
     /// </summary>
     public interface IEffect
     {

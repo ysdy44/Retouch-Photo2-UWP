@@ -10,11 +10,13 @@ namespace Retouch_Photo2.Menus
     {
         //@Content
         public string Text { set => this.TextBlock.Text = value; get => this.TextBlock.Text; }
+        public UIElement Icon { set => this.IconViewbox.Child = value; get => this.IconViewbox.Child; }
         public UIElement ContentChild { set => this.ContentBorder.Child = value; get => this.ContentBorder.Child; }
-
+                
         public UIElement StateButton => this._StateButton;
         public UIElement CloseButton => this._CloseButton;
         public UIElement TitlePanel => this._TitlePanel;
+
 
         #region State
 
@@ -92,6 +94,7 @@ namespace Retouch_Photo2.Menus
         }
 
         #endregion
+
 
         //@Construct
         public MenuLayout()

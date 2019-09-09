@@ -27,7 +27,20 @@ namespace Retouch_Photo2.Tools.Pages
         //@Converter
         private Visibility FalseToVisibilityConverter(bool value) => value ? Visibility.Collapsed : Visibility.Visible;
         private Visibility TrueToVisibilityConverter(bool value) => value ? Visibility.Visible : Visibility.Collapsed;
-        
+
+        #region DependencyProperty
+
+        /// <summary> Gets or sets <see cref = "PenPage" />'s ToolTip IsOpen. </summary>
+        public bool IsOpen
+        {
+            get { return (bool)GetValue(IsOpenProperty); }
+            set { SetValue(IsOpenProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "PenPage.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(PenPage), new PropertyMetadata(false));
+
+        #endregion
+
         //@Construct
         public PenPage()
         {

@@ -8,13 +8,13 @@ using Windows.UI;
 namespace Retouch_Photo2.Brushs
 {
     /// <summary>
-    /// Brush Classes.
+    /// Define the object used to draw geometry.
     /// </summary>
     public class Brush: ICacheTransform
     {
         /// <summary> <see cref="Brush">'s type. </summary>
         public BrushType Type;
-        
+
         /// <summary> <see cref="Brush">'s color. </summary>
         public Color Color = Colors.Gray;
 

@@ -31,6 +31,7 @@ namespace Retouch_Photo2.Tools.Models
         /// <returns> Layer </returns>
         public abstract ILayer CreateLayer(Transformer transformer);
 
+        public abstract bool IsOpen { set; }
         public abstract ToolType Type { get; }
         public abstract FrameworkElement Icon { get; }
         public abstract FrameworkElement ShowIcon { get; }

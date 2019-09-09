@@ -5,10 +5,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus.Buttons
 {
-    public sealed partial class AdjustmentButton : UserControl, IMenuButton
+    public sealed partial class SelectionButton : UserControl, IMenuButton
     {
         //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@Content
@@ -33,9 +32,10 @@ namespace Retouch_Photo2.Menus.Buttons
             }
         }
         public FrameworkElement Self => this;
-        
+        public MenuButtonType Type => MenuButtonType.None;
+
         //@Construct
-        public AdjustmentButton()
+        public SelectionButton()
         {
             this.InitializeComponent();
         }

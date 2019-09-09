@@ -16,6 +16,11 @@ namespace Retouch_Photo2.Controls
         TipViewModel TipViewModel => App.TipViewModel;
 
 
+        //@Content
+        /// <summary> MoreBorder's Child. </summary>
+        public UIElement MoreBorderChild { get => this.MoreBorder.Child; set => this.MoreBorder.Child = value; }
+        
+
         #region DependencyProperty
 
         /// <summary> 

@@ -17,7 +17,7 @@ namespace Retouch_Photo2.Blends
 
         #region DependencyProperty
 
-        /// <summary> Gets or Sets type. </summary>
+        /// <summary> Gets or sets type. </summary>
         public BlendType BlendType
         {
             get { return (BlendType)GetValue(BlendTypeProperty); }

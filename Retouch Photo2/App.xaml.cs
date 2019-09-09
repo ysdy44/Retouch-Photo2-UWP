@@ -54,7 +54,16 @@ namespace Retouch_Photo2
             AcrylicBlurAmountTouchbar = new AcrylicBlurAmountTouchbar(),
 
             //Menu
+            DebugMenu = new DebugMenu(),
+            SelectionMenu = new SelectionMenu(),
+            OperateMenu = new OperateMenu(),
             AdjustmentMenu = new AdjustmentMenu(),
+            EffectMenu = new EffectMenu(),
+            TransformerMenu = new TransformerMenu(),
+            ColorMenu = new ColorMenu(),
+            ToolMenu = new ToolMenu(),
+            LayerMenu = new LayerMenu(),
+
         };
 
 

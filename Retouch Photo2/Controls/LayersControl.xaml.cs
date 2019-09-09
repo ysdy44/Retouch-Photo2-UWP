@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Controls
     /// <summary> 
     /// Retouch_Photo2's the only <see cref = "LayersControl" />. 
     /// </summary>
-    public sealed partial class LayersControl : UserControl
+    public partial class LayersControl : UserControl
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
@@ -117,42 +117,41 @@ namespace Retouch_Photo2.Controls
         //@DataTemplate
         /// <summary> DataTemplate's Grid Tapped. </summary>
         private void RootGrid_Tapped(object sender, TappedRoutedEventArgs e)
-        {            //TODO:LayerMenuState
+        {           
+            LayersControl.GetGridDataContext(sender, out Grid rootGrid, out ILayer layer);
 
-      //      LayersControl.GetGridDataContext(sender, out Grid rootGrid, out ILayer layer);
+            if (this.SelectionViewModel.Layer == layer) //FlyoutShow
+            {            
 
-        //    if (this.SelectionViewModel.Layer == layer) //FlyoutShow
-       //     {            //TODO:LayerMenuState
+                if (this.TipViewModel.LayerMenu.State == MenuState.FlyoutHide)
+                {
+                    this.TipViewModel.LayerMenu.State = MenuState.FlyoutShow;
+                }
+            }
+            else //ItemClick
+            {
+                //Selection
+                this.SelectionViewModel.SetValue((layer2) =>
+                {
+                    layer2.IsChecked = false;
+                });
 
-         //       if (this.TipViewModel.LayerMenuState == MenuState.FlyoutHide)
-          //      {
-            //        this.TipViewModel.LayerMenuState = MenuState.FlyoutShow;
-            //    }
-     //       }
-         //   else //ItemClick
-         //   {
-          //      //Selection
-         //       this.SelectionViewModel.SetValue((layer2) =>
-         //       {
-          //          layer2.IsChecked = false;
-           //     });
+                layer.IsChecked = true;
 
-          //      layer.IsChecked = true;
-
-         //       this.SelectionViewModel.SetModeSingle(layer);//Selection
-           //     this.ViewModel.Invalidate();//Invalidate
-      //      }
+                this.SelectionViewModel.SetModeSingle(layer);//Selection
+                this.ViewModel.Invalidate();//Invalidate
+            }
         }
     
         /// <summary> DataTemplate's Grid RightTapped. </summary>
         private void RootGrid_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
-            //TODO:LayerMenuState
-            //    if (this.TipViewModel.LayerMenuState == MenuState.FlyoutHide)
-            //    {
-            //      this.TipViewModel.LayerMenuState = MenuState.FlyoutShow;
-    //    }
-    }
+            //Menu
+            if (this.TipViewModel.LayerMenu.State == MenuState.FlyoutHide)
+            {
+                this.TipViewModel.LayerMenu.State = MenuState.FlyoutShow;
+            }
+        }
      
         /// <summary> DataTemplate's Button Tapped. </summary>
         private void VisibilityButton_Tapped(object sender, TappedRoutedEventArgs e)

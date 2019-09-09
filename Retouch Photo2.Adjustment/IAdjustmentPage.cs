@@ -7,11 +7,11 @@ namespace Retouch_Photo2.Adjustments
     /// </summary>
     public interface IAdjustmentPage
     {
-        /// <summary> IAdjustmentPage's type. </summary>
+        /// <summary> Gets IAdjustmentPage's type. </summary>
         AdjustmentType Type { get; }
-        /// <summary> IAdjustmentPage's icon. </summary>
+        /// <summary> Gets IAdjustmentPage's icon. </summary>
         FrameworkElement Icon { get; }
-        /// <summary> IAdjustmentPage's Page. </summary>
+        /// <summary> Gets IAdjustmentPage's Page. </summary>
         FrameworkElement Page { get; }
         
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>

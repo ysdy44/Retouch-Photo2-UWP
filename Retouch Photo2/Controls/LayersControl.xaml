@@ -9,10 +9,6 @@
     d:DesignHeight="800"
     d:DesignWidth="200">
     
-    <ToolTipService.ToolTip>
-        <ToolTip Content="Layers" Placement="Left" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-    </ToolTipService.ToolTip>
-    
     <UserControl.Resources>
 
         <!--DataTemplate-->
@@ -128,13 +124,8 @@
                >
 
         <ListView.Header>
-            <Border Height="42">
-                <Button x:Name="AddButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                    <ToolTipService.ToolTip>
-                        <ToolTip Content="Add" Placement="Bottom" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-                    </ToolTipService.ToolTip>
-                </Button>
-            </Border>
+            <Button x:Name="AddButton" Height="42" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"/>
         </ListView.Header>
+
     </ListView>
 </UserControl>

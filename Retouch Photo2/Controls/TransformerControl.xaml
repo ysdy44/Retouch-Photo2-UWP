@@ -123,7 +123,7 @@
                      BorderBrush="{ThemeResource AppStroke}"
                     >
                 <ToolTipService.ToolTip>
-                    <ToolTip Content="Indicator" Placement="Left" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                    <ToolTip Content="Indicator" Placement="Bottom" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
             </transformers:IndicatorControl>
 

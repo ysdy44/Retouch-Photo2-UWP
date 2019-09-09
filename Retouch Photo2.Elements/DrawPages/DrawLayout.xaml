@@ -275,7 +275,7 @@
 
             <Border x:Name="TopLeftBorder" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
-            <Border x:Name="TopLeftStackPanel" Grid.Column="1" HorizontalAlignment="Left" 
+            <StackPanel x:Name="TopLeftStackPanel" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" 
                     Visibility="Visible">
                 <!--Normal-->
 
@@ -291,9 +291,9 @@
                     <animations:OpacityAnimation Duration="0:0:0.5" From="1.0" To="0.0"/>
                 </animations:Implicit.HideAnimations>
 
-            </Border>
+            </StackPanel>
 
-            <Border x:Name="TopRightBorder" Grid.Column="2"/>
+            <StackPanel x:Name="TopRightStackPanel" Grid.Column="2" Orientation="Horizontal"/>
 
             <!--FullScreen-->
             <Button x:Name="FullScreenButton" Grid.Column="3" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -365,8 +365,8 @@
             <controls:DropShadowPanel Grid.Column="1" Style="{StaticResource DropShadowPanelStyle}">
                 <Rectangle x:Name="IconLeftRectangle" Style="{StaticResource RectangleStyle}"/>
             </controls:DropShadowPanel>
-            
-            <Border x:Name="IconLeftBorder" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <ContentControl x:Name="IconLeftIcon" HorizontalAlignment="Center" VerticalAlignment="Center"/>
       
         </Grid>
         <!--IconRight-->
@@ -389,7 +389,7 @@
                 <Rectangle x:Name="IconRightRectangle" Style="{StaticResource RectangleStyle}"/>
             </controls:DropShadowPanel>
 
-            <Border x:Name="IconRightBorder" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ContentControl x:Name="IconRightIcon" HorizontalAlignment="Center" VerticalAlignment="Center"/>
  
         </Grid>
 

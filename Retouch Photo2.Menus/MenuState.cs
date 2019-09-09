@@ -1,7 +1,7 @@
 ﻿namespace Retouch_Photo2.Menus
 {
     /// <summary> 
-    /// State of <see cref="Menu"/>.
+    /// State of <see cref="MenuBase"/>.
     /// </summary>
     public enum MenuState
     {

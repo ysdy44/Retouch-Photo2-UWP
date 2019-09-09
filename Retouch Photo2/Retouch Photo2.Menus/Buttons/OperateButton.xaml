@@ -1,21 +1,21 @@
 ﻿<UserControl
-    x:Class="Retouch_Photo2.Menus.Buttons.AdjustmentButton"
+    x:Class="Retouch_Photo2.Menus.Buttons.OperateButton"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:adjustments="using:Retouch_Photo2.Adjustments"
-    mc:Ignorable="d"
+    xmlns:operate="using:Retouch_Photo2.Operates"
     d:DesignHeight="50"
     d:DesignWidth="50"
     Width="60" 
+    mc:Ignorable="d"
     >
 
     <ToolTipService.ToolTip>
-        <ToolTip Content="Adjustment"  Placement="Bottom" Style="{StaticResource AppToolTip}"                                   
+        <ToolTip Content="Operate" Placement="Bottom" Style="{StaticResource AppToolTip}"                                   
             IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" />
     </ToolTipService.ToolTip>
-        
+
     <UserControl.Resources>
         <!--Background-->
         <SolidColorBrush x:Name="AccentColor" Color="{ThemeResource SystemAccentColor}"/>
@@ -27,7 +27,7 @@
     </UserControl.Resources>
 
     <Button x:Name="Button" BorderThickness="0" BorderBrush="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <adjustments:Icon HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    </Button>    
+        <operate:Icon/>
+    </Button>
 
 </UserControl>

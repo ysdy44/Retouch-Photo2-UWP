@@ -11,6 +11,10 @@
     Background="{ThemeResource AppBarBorderThemeBrush}"
     >
 
+    <ScrollViewer 
+        HorizontalScrollBarVisibility="Disabled"
+        VerticalScrollBarVisibility="Hidden"
+        >
     <StackPanel>
         
         
@@ -61,7 +65,12 @@
                 <ToolTip Content="Acrylic" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
         </tools:Button>
-        
 
-    </StackPanel>
+        <Border x:Name="MoreBorder">
+            
+        </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+    
 </UserControl>

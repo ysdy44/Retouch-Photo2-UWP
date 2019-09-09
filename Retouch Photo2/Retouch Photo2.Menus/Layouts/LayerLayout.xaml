@@ -1,0 +1,34 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Menus.Layouts.LayerLayout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Retouch_Photo2.Controls"
+    xmlns:layers1="using:Retouch_Photo2.Layers"
+    xmlns:menus="using:Retouch_Photo2.Menus"
+    mc:Ignorable="d"
+    d:DesignHeight="200"
+    d:DesignWidth="200"
+    >
+
+    <UserControl.Resources>
+        <!--Flyout-->
+        <Flyout x:Name="_Flyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+    </UserControl.Resources>
+
+
+    <menus:MenuLayout x:Name="_Layout" Text="Layer">
+        
+        <menus:MenuLayout.Icon>
+            <layers1:Icon/>
+        </menus:MenuLayout.Icon>
+        
+        <menus:MenuLayout.ContentChild>
+            <controls:LayerControl x:Name="LayerControl"
+                                   Mode="{x:Bind SelectionViewModel.Mode,Mode=OneWay}"/>
+        </menus:MenuLayout.ContentChild>
+        
+    </menus:MenuLayout>
+    
+</UserControl>

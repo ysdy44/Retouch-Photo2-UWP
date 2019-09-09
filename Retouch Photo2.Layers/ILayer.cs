@@ -15,9 +15,9 @@ namespace Retouch_Photo2.Layers
     /// </summary>
     public interface ILayer : ICacheTransform
     { 
-        /// <summary> Gets or Sets ILayer's IsChecked. </summary>
+        /// <summary> Gets or sets ILayer's IsChecked. </summary>
         bool IsChecked { get; set; }
-        /// <summary> Gets or Sets ILayer's visibility. </summary>
+        /// <summary> Gets or sets ILayer's visibility. </summary>
         Visibility Visibility { get; set; }
 
 
@@ -25,17 +25,17 @@ namespace Retouch_Photo2.Layers
         string Type { get; }
         /// <summary> Gets ILayer's icon. </summary>
         UIElement Icon { get; }
-        /// <summary> Gets or Sets ILayer's fill-color. </summary>
+        /// <summary> Gets or sets ILayer's fill-color. </summary>
         Color? FillColor { get; set; }
-        /// <summary> Gets or Sets ILayer's stroke-color. </summary>
+        /// <summary> Gets or sets ILayer's stroke-color. </summary>
         Color? StrokeColor { get; set; }
 
 
-        /// <summary> Gets or Sets ILayer's name. </summary>
+        /// <summary> Gets or sets ILayer's name. </summary>
         string Name { get; set; }
-        /// <summary> Gets or Sets ILayer's opacity. </summary>
+        /// <summary> Gets or sets ILayer's opacity. </summary>
         float Opacity { get; set; }
-        /// <summary> Gets or Sets ILayer's blend type. </summary>
+        /// <summary> Gets or sets ILayer's blend type. </summary>
         BlendType BlendType { get; set; }
 
 

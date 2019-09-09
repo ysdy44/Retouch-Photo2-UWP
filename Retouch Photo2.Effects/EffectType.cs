@@ -1,6 +1,8 @@
 ﻿namespace Retouch_Photo2.Effects
-{  
-    /// <summary> An <see cref = "IEffect"/> corresponds to a <see cref = "EffectType" /> </summary>
+{
+    /// <summary> 
+    /// Type of Effect.
+    /// </summary>
     public enum EffectType
     {
         /// <summary> GaussianBlur (高斯模糊) </summary>

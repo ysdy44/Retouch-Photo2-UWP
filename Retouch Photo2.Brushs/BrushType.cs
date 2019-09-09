@@ -1,7 +1,7 @@
 ﻿namespace Retouch_Photo2.Brushs
 {
     /// <summary>
-    /// Type of <see cref="Brush">.
+    /// Type of Brush.
     /// </summary>
     public enum BrushType
     {

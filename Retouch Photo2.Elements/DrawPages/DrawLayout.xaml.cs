@@ -20,10 +20,11 @@ namespace Retouch_Photo2.Elements.DrawPages
 
         /// <summary> TopLeftBorder's Child. </summary>
         public UIElement TopLeftPane { get => this.TopLeftBorder.Child; set => this.TopLeftBorder.Child = value; }
-        /// <summary> TopRightBorder's Child. </summary>
-        public UIElement TopRightPane { get => this.TopRightBorder.Child; set => this.TopRightBorder.Child = value; }
-        /// <summary> TopLeftStackPanel's Child. </summary>
-        public UIElement TopLeftStackBar { get => this.TopLeftStackPanel.Child; set => this.TopLeftStackPanel.Child = value; }
+        /// <summary> TopRightStackPanel's Children. </summary>
+        public UIElementCollection TopRightPanelChildren => this.TopRightStackPanel.Children;
+
+        /// <summary> TopLeftStackPanel's Children. </summary>
+        public UIElementCollection TopLeftPanelChildren => this.TopLeftStackPanel.Children;
 
 
         //@Content  
@@ -31,9 +32,9 @@ namespace Retouch_Photo2.Elements.DrawPages
         public UIElement Touchbar { get => this.TouchbarBorder.Child; set => this.TouchbarBorder.Child = value; }
 
         /// <summary> Gets or sets <see cref = "DrawLayout" />'s ShowIcon. </summary>
-        public UIElement ShowIcon { get => this.IconLeftBorder.Child; set => this.IconLeftBorder.Child = value; }
+        public object ShowIcon { get => this.IconLeftIcon.Content; set => this.IconLeftIcon.Content = value; }
         /// <summary> Gets or sets <see cref = "DrawLayout" />'s Icon. </summary>
-        public UIElement Icon { get => this.IconRightBorder.Child; set => this.IconRightBorder.Child = value; }
+        public object Icon { get => this.IconRightIcon.Content; set => this.IconRightIcon.Content = value; }
         
         /// <summary> Gets or sets <see cref = "DrawLayout" />'s Page. </summary>
         public Page Page

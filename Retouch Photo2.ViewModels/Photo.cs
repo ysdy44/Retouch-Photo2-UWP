@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Input;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary>
-    /// <see cref="MainPage"/>items's Model Class .
+    /// MainPage items's Model Class .
     /// </summary>
     public class Photo : INotifyPropertyChanged
     {

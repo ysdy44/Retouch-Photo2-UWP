@@ -29,7 +29,8 @@ namespace Retouch_Photo2.Tools.Models
 
         float _sizeWidth;
         float _sizeHeight;
-        
+
+        public bool IsOpen { set { } }
         public ToolType Type => ToolType.Image;
         public FrameworkElement Icon { get; } = new ImageControl();
         public FrameworkElement ShowIcon { get; } = new ImageControl();

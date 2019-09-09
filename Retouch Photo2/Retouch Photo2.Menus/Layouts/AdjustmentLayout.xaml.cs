@@ -11,14 +11,15 @@ namespace Retouch_Photo2.Menus.Layouts
 
 
         //@Content
-        public MenuState State { set => this._MenuLayout.State = value; }
+        public bool IsOpen { set { } }
+        public MenuState State { set => this._Layout.State = value; }
         public UIElement Self => this;
 
         public Flyout Flyout => this._Flyout;
 
-        public UIElement StateButton => this._MenuLayout.StateButton;
-        public UIElement CloseButton => this._MenuLayout.CloseButton;
-        public UIElement TitlePanel => this._MenuLayout.TitlePanel;
+        public UIElement StateButton => this._Layout.StateButton;
+        public UIElement CloseButton => this._Layout.CloseButton;
+        public UIElement TitlePanel => this._Layout.TitlePanel;
 
 
         //@Construct

@@ -27,6 +27,7 @@ namespace Retouch_Photo2.Tools.Models
         public readonly RadialGradientTool RadialGradientTool = new RadialGradientTool();
         public readonly EllipticalGradientTool EllipticalGradientTool = new EllipticalGradientTool();
 
+        public bool IsOpen { set { } }
         public ToolType Type => ToolType.Brush;
         public FrameworkElement Icon { get; } = new BrushControl();
         public FrameworkElement ShowIcon { get; } = new BrushControl();

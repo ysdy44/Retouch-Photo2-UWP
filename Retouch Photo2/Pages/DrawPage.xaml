@@ -33,16 +33,12 @@
                >
 
             <!--Tool & Layer-->
+            <elementDrawPages:DrawLayout.LeftPane>
+                <controls:ToolsControl x:Name="ToolsControl"/>
+            </elementDrawPages:DrawLayout.LeftPane>
             <elementDrawPages:DrawLayout.Icon>
                 <layers:Icon/>
             </elementDrawPages:DrawLayout.Icon>
-            
-            <elementDrawPages:DrawLayout.LeftPane>
-                <controls:ToolsControl/>
-            </elementDrawPages:DrawLayout.LeftPane>
-            <elementDrawPages:DrawLayout.RightPane>
-                <controls:LayersControl x:Name="LayersControl"/>
-            </elementDrawPages:DrawLayout.RightPane>
 
             <!--Canvas & Back-->
             <elementDrawPages:DrawLayout.CenterContent>                
@@ -59,54 +55,47 @@
             </elementDrawPages:DrawLayout.TopLeftPane>
 
             <!--Left & Right-->
-            <elementDrawPages:DrawLayout.TopLeftStackBar>
-                <StackPanel Orientation="Horizontal">
-                    <Border Style="{StaticResource AppCircleBorderStyle}">
-                        <Button x:Name="SaveButton" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE105;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
-                    </Border>
-                    <ContentControl Width="6"/>
-                    <Border Style="{StaticResource AppCircleBorderStyle}">
-                        <Button IsEnabled="True" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10E;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
-                    </Border>
-                    <ContentControl Width="6"/>
-                    <Border Style="{StaticResource AppCircleBorderStyle}">
-                        <Button IsEnabled="True" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10D;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
-                    </Border>
-                    
-                    <AppBarSeparator/>
-                    
-                    <Border Style="{StaticResource AppCircleBorderStyle}">
-                        <elements:ThemeControl x:Name="ThemeControl" 
+            <elementDrawPages:DrawLayout.TopLeftPanelChildren>
+                <Border Style="{StaticResource AppCircleBorderStyle}">
+                    <Button x:Name="SaveButton" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE105;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
+                </Border>
+                <ContentControl Width="6"/>
+                <Border Style="{StaticResource AppCircleBorderStyle}">
+                    <Button IsEnabled="True" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10E;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
+                </Border>
+                <ContentControl Width="6"/>
+                <Border Style="{StaticResource AppCircleBorderStyle}">
+                    <Button IsEnabled="True" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10D;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
+                </Border>
+
+                <AppBarSeparator/>
+
+                <Border Style="{StaticResource AppCircleBorderStyle}">
+                    <elements:ThemeControl x:Name="ThemeControl" 
                                               Theme="{x:Bind RequestedTheme, Mode=TwoWay}"
                                                TitleBarColor="{ThemeResource AppForegroundColor}"
                                                />
-                    </Border>
-                    <ContentControl Width="6"/>
-                    <Border Style="{StaticResource AppCircleBorderStyle}">
-                        <ToggleButton Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE80A;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" 
+                </Border>
+                <ContentControl Width="6"/>
+                <Border Style="{StaticResource AppCircleBorderStyle}">
+                    <ToggleButton Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE80A;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" 
                             IsChecked="{x:Bind ViewModel.CanvasRulerVisible,Mode=TwoWay}"                             
                             />
-                    </Border>
-                    <ContentControl Width="6"/>
-                    <Border Style="{StaticResource AppCircleBorderStyle}">
-                        <elements:RepeatControl 
+                </Border>
+                <ContentControl Width="6"/>
+                <Border Style="{StaticResource AppCircleBorderStyle}">
+                    <elements:RepeatControl 
                             RequestedTheme="{x:Bind ViewModel.CanvasTheme,Mode=OneWay}" 
                             IsChecked="{x:Bind TipViewModel.IsOpen,Mode=TwoWay}"
                             />
-                    </Border>
-                </StackPanel>
-            </elementDrawPages:DrawLayout.TopLeftStackBar>
-            <elementDrawPages:DrawLayout.TopRightPane>
-                <StackPanel x:Name="TopRightPaneStackPanel" Orientation="Horizontal">
-                    <!--MenuButton-->
-                </StackPanel>
-            </elementDrawPages:DrawLayout.TopRightPane>
+                </Border>
+            </elementDrawPages:DrawLayout.TopLeftPanelChildren>
 
         </elementDrawPages:DrawLayout>
 
 
-        <!--MenuLayout-->
-        <Canvas x:Name="CenterCanvas"
+        <!--Menu-->
+        <Canvas x:Name="OverlayCanvas"
             IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}">
             <!--MenuLayout-->
          </Canvas>
@@ -119,9 +108,7 @@
         <!--Tip-->
         <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="60" HorizontalAlignment="Center">
             <ToolTip Style="{StaticResource AppToolTip}">
-                <TextBlock 
-                    Text="{x:Bind ViewModel.Text, Mode=OneWay}"
-                    />
+                <TextBlock Text="{x:Bind ViewModel.Text, Mode=OneWay}"/>
             </ToolTip>
         </ContentControl>
 

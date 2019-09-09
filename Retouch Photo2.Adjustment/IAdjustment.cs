@@ -11,7 +11,7 @@ namespace Retouch_Photo2.Adjustments
     [JsonObject(MemberSerialization.OptIn)]
     public interface IAdjustment
     {
-        /// <summary> Gets or Stes adjustment's type. </summary>
+        /// <summary> Gets adjustment's type. </summary>
         [JsonProperty]
         string TypeName { get; }
 

@@ -137,6 +137,9 @@
     <Compile Include="Elements\PenFlyout.xaml.cs">
       <DependentUpon>PenFlyout.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Icon.xaml.cs">
+      <DependentUpon>Icon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ITool.cs" />
     <Compile Include="ITouchbar.cs" />
     <Compile Include="Models\AcrylicToolType.cs" />
@@ -197,6 +200,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Elements\PenFlyout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Icon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

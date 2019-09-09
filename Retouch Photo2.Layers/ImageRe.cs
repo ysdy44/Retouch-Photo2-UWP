@@ -25,9 +25,9 @@ namespace Retouch_Photo2.Layers
 
         /// <summary> The source bitmap. </summary>
         public CanvasBitmap Source;
-        /// <summary> Gets or Sets <see cref="StorageFile.Name"/>. </summary>
+        /// <summary> Gets or sets <see cref="StorageFile.Name"/>. </summary>
         public string Name;
-        /// <summary> Gets or Sets <see cref="StorageFile.FolderRelativeId"/>. </summary>
+        /// <summary> Gets or sets <see cref="StorageFile.FolderRelativeId"/>. </summary>
         public string FolderRelativeId;
 
         /// <summary>
