@@ -28,8 +28,8 @@ namespace Retouch_Photo2.Menus
                     case MenuState.FlyoutShow:
                         this._CloseButton.Visibility = Visibility.Collapsed;
                         break;
-                    case MenuState.RootExpanded:
-                    case MenuState.RootNotExpanded:
+                    case MenuState.OverlayExpanded:
+                    case MenuState.OverlayNotExpanded:
                         this._CloseButton.Visibility = Visibility.Visible;
                         break;
                 }
@@ -37,14 +37,14 @@ namespace Retouch_Photo2.Menus
                 switch (value)
                 {
                     case MenuState.FlyoutHide:
-                    case MenuState.RootNotExpanded:
+                    case MenuState.OverlayNotExpanded:
                         {
                             this.StateIcon.Glyph = "\uE196";
                             this.ContentBorder.Visibility = Visibility.Collapsed;
                         }
                         break;
                     case MenuState.FlyoutShow:
-                    case MenuState.RootExpanded:
+                    case MenuState.OverlayExpanded:
                         {
                             this.StateIcon.Glyph = "\uE141";
                             this.ContentBorder.Visibility = Visibility.Visible;

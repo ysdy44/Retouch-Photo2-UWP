@@ -1,4 +1,4 @@
-﻿namespace Retouch_Photo2.Tools
+﻿namespace Retouch_Photo2.Tools.Buttons
 {
     /// <summary> 
     /// State of <see cref="Button"/>.

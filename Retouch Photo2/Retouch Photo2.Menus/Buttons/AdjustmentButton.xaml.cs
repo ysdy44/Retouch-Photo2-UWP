@@ -12,26 +12,7 @@ namespace Retouch_Photo2.Menus.Buttons
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@Content
-        public MenuState State
-        {
-            set
-            {
-                this.Button.Background = (value == MenuState.FlyoutShow) ? this.AccentColor : this.UnAccentColor;
-
-                switch (value)
-                {
-                    case MenuState.FlyoutHide:
-                        this.Button.Foreground = this.UnCheckColor;
-                        break;
-                    case MenuState.FlyoutShow:
-                        this.Button.Foreground = this.ThreeStateColor;
-                        break;
-                    default:
-                        this.Button.Foreground = this.CheckColor;
-                        break;
-                }
-            }
-        }
+        public MenuState State { set => this.Button.SetMenuState(value); }
         public FrameworkElement Self => this;
         public MenuButtonType Type => MenuButtonType.None;
 

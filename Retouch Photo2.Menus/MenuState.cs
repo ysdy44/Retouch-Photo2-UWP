@@ -11,10 +11,10 @@
         /// <summary> Flyout showed. </summary>
         FlyoutShow,
 
-        /// <summary> Root expanded. </summary>
-        RootExpanded,
+        /// <summary> Overlay expanded. </summary>
+        OverlayExpanded,
 
-        /// <summary> Root not expanded. </summary>
-        RootNotExpanded
+        /// <summary> Overlay not expanded. </summary>
+        OverlayNotExpanded
     }
 }

@@ -106,10 +106,11 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Button.xaml.cs">
+    <Compile Include="Buttons\Button.xaml.cs">
       <DependentUpon>Button.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ButtonState.cs" />
+    <Compile Include="Buttons\ButtonState.cs" />
+    <Compile Include="Buttons\ButtonStateManager.cs" />
     <Compile Include="Controls\AcrylicControl.xaml.cs">
       <DependentUpon>AcrylicControl.xaml</DependentUpon>
     </Compile>
@@ -163,7 +164,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Button.xaml">
+    <Page Include="Buttons\Button.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

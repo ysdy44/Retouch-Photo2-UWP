@@ -72,7 +72,7 @@ namespace Retouch_Photo2.Menus
             {
                 if (this.Layout == null) return;
 
-                if (this.State == MenuState.RootExpanded)
+                if (this.State == MenuState.OverlayExpanded)
                 {
                     this.Layout.IsOpen = value;
                 }
@@ -97,8 +97,8 @@ namespace Retouch_Photo2.Menus
                             this._overlay.Visibility = Visibility.Collapsed;
                         }
                         break;
-                    case MenuState.RootExpanded:
-                    case MenuState.RootNotExpanded:
+                    case MenuState.OverlayExpanded:
+                    case MenuState.OverlayNotExpanded:
                         {
                             this._flyout.Content = null;
                             this._overlay.Child = this.Layout.Self;
@@ -110,8 +110,8 @@ namespace Retouch_Photo2.Menus
                 switch (value)
                 {
                     case MenuState.FlyoutHide:
-                    case MenuState.RootExpanded:
-                    case MenuState.RootNotExpanded:
+                    case MenuState.OverlayExpanded:
+                    case MenuState.OverlayNotExpanded:
                         this._flyout.Hide();
                         break;
                     case MenuState.FlyoutShow:
@@ -169,14 +169,14 @@ namespace Retouch_Photo2.Menus
             this.Layout.CloseButton.Tapped += (s, e) => this.State = MenuState.FlyoutHide;
             this.Layout.StateButton.Tapped += (s, e) =>
             {
-                if (this.State == MenuState.RootExpanded) this.State = MenuState.RootNotExpanded;
-                else if (this.State == MenuState.RootNotExpanded) this.State = MenuState.RootExpanded;
+                if (this.State == MenuState.OverlayExpanded) this.State = MenuState.OverlayNotExpanded;
+                else if (this.State == MenuState.OverlayNotExpanded) this.State = MenuState.OverlayExpanded;
                 else
                 {
                     Vector2 postion = MenuSize.GetElementVisualPostion(this.Layout.TitlePanel);
                     MenuSize.SetElementCanvasPostion(this.Overlay, postion, this._size.Size);
 
-                    this.State = MenuState.RootExpanded;
+                    this.State = MenuState.OverlayExpanded;
                 }
             };
 
@@ -211,10 +211,10 @@ namespace Retouch_Photo2.Menus
                 case MenuState.FlyoutShow:
                     return MenuState.FlyoutHide;
 
-                case MenuState.RootExpanded:
-                    return MenuState.RootNotExpanded;
-                case MenuState.RootNotExpanded:
-                    return MenuState.RootExpanded;
+                case MenuState.OverlayExpanded:
+                    return MenuState.OverlayNotExpanded;
+                case MenuState.OverlayNotExpanded:
+                    return MenuState.OverlayExpanded;
             }
             return MenuState.FlyoutShow;
         }

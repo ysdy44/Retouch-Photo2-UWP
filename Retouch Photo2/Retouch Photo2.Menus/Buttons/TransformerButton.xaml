@@ -4,6 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:menusButtons="using:Retouch_Photo2.Menus.MenuButtons"
     xmlns:transformers="using:FanKit.Transformers"
     d:DesignHeight="50"
     d:DesignWidth="50"
@@ -15,19 +16,12 @@
         <ToolTip Content="Transformer" Placement="Bottom" Style="{StaticResource AppToolTip}"                                   
             IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" />
     </ToolTipService.ToolTip>
+    
 
-    <UserControl.Resources>
-        <!--Background-->
-        <SolidColorBrush x:Name="AccentColor" Color="{ThemeResource SystemAccentColor}"/>
-        <SolidColorBrush x:Name="UnAccentColor" Color="Transparent"/>
-        <!--Foreground-->
-        <SolidColorBrush x:Name="CheckColor" Color="{ThemeResource SystemBaseHighColor}"/>
-        <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource AppTextColor}"/>
-        <SolidColorBrush x:Name="ThreeStateColor" Color="White"/>
-    </UserControl.Resources>
-
-    <Button x:Name="Button" BorderThickness="0" BorderBrush="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <transformers:Icon/>
-    </Button>
+    <menusButtons:Button x:Name="Button">
+        <menusButtons:Button.CenterContent>
+            <transformers:Icon/>
+        </menusButtons:Button.CenterContent>
+    </menusButtons:Button>
 
 </UserControl>

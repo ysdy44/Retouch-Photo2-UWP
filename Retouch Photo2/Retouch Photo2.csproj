@@ -148,9 +148,7 @@
     <Compile Include="Retouch Photo2.Menus\Buttons\SelectionButton.xaml.cs">
       <DependentUpon>SelectionButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\Buttons\ToolButton.xaml.cs">
-      <DependentUpon>ToolButton.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Retouch Photo2.Menus\Buttons\ToolButton.cs" />
     <Compile Include="Retouch Photo2.Menus\Buttons\TransformerButton.xaml.cs">
       <DependentUpon>TransformerButton.xaml</DependentUpon>
     </Compile>
@@ -682,10 +680,6 @@
     <Page Include="Retouch Photo2.Menus\Buttons\SelectionButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Menus\Buttons\ToolButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Retouch Photo2.Menus\Buttons\TransformerButton.xaml">
       <Generator>MSBuild:Compile</Generator>

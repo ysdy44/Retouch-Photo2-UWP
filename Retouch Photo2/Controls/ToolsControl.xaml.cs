@@ -60,7 +60,7 @@ namespace Retouch_Photo2.Controls
             this.Construct(this.AcrylicButton, this.TipViewModel.AcrylicTool);
         }
 
-        private void Construct(Tools.Button button, ITool tool)
+        private void Construct(Tools.Buttons.Button button, ITool tool)
         {
             ToolType type = tool.Type;
 
@@ -69,7 +69,7 @@ namespace Retouch_Photo2.Controls
             button.CenterContent = tool.Icon;
 
             //ItemClick
-            button.RootGrid.Tapped += (s, e) =>
+            button.Tapped += (s, e) =>
             {
                 this.ToolType = type;
                 this.TipViewModel.Tool = tool;
