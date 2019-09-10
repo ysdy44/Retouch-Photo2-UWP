@@ -30,14 +30,21 @@
 
     </UserControl.Resources>
 
-    <Grid>
-        
+
+    <ContentPresenter x:Name="ContentPresenter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{StaticResource AccentColor}" Foreground="{StaticResource HighlightColor}">
+
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="CommonStates">
 
                 <VisualState x:Name="Normal">
                     <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource UnAccentColor}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource UnCheckColor}" />
+                        </ObjectAnimationUsingKeyFrames>
                         <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
                     </Storyboard>
                 </VisualState>
@@ -119,9 +126,6 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <ContentPresenter x:Name="ContentPresenter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" Foreground="{StaticResource UnCheckColor}"/>
-        <TextBlock/>
-   
-    </Grid>
+    </ContentPresenter>
 
 </UserControl>
