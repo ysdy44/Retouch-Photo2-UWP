@@ -5,17 +5,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:transformers="using:FanKit.Transformers"
-    xmlns:hsvColorPicker="using:HSVColorPickers"
-    xmlns:adjustments="using:Retouch_Photo2.Adjustments"
     xmlns:controls="using:Retouch_Photo2.Controls"
-    xmlns:effects="using:Retouch_Photo2.Effects"
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:elementDrawPages="using:Retouch_Photo2.Elements.DrawPages"
     xmlns:layers="using:Retouch_Photo2.Layers"
-    xmlns:operate="using:Retouch_Photo2.Operates"
-    xmlns:selection="using:Retouch_Photo2.Selections"
-    xmlns:menu="using:Retouch_Photo2.Menus"
     NavigationCacheMode="Enabled"    
     mc:Ignorable="d"
     >
@@ -41,12 +34,24 @@
             </elementDrawPages:DrawLayout.Icon>
 
             <!--Canvas & Back-->
-            <elementDrawPages:DrawLayout.CenterContent>                
-                <controls:MainCanvasControl 
+            <elementDrawPages:DrawLayout.CenterContent>
+                <Grid>
+
+                    <!--Canvas-->
+                    <controls:MainCanvasControl 
                     AccentColor="{ThemeResource SystemAccentColor}" 
                     ShadowColor="{ThemeResource AppStrokeColor}" 
                     RulerVisible="{x:Bind ViewModel.CanvasRulerVisible,Mode=OneWay}"
                     />
+
+                    <!--Tip-->
+                    <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="60" HorizontalAlignment="Center">
+                        <ToolTip Style="{StaticResource AppToolTip}">
+                            <TextBlock Text="{x:Bind ViewModel.Text, Mode=OneWay}"/>
+                        </ToolTip>
+                    </ContentControl>
+
+                </Grid>
             </elementDrawPages:DrawLayout.CenterContent>
             <elementDrawPages:DrawLayout.TopLeftPane>
                 <Button x:Name="BackButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -103,14 +108,6 @@
         
         <!--Load-->
         <elements:LoadingControl x:Name="LoadingControl" Text="Saving..."/>
-
-
-        <!--Tip-->
-        <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="60" HorizontalAlignment="Center">
-            <ToolTip Style="{StaticResource AppToolTip}">
-                <TextBlock Text="{x:Bind ViewModel.Text, Mode=OneWay}"/>
-            </ToolTip>
-        </ContentControl>
 
     </Grid>
 </Page>

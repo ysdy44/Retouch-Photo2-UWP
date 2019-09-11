@@ -97,17 +97,19 @@
                     <VisualState.Setters>
 
                         <!--TopGrid-->
-                        <Setter Target = "TopLeftStackPanel.Visibility" Value="Collapsed"/>
+                        <Setter Target = "TopRightStackPanel.(Grid.Column)" Value="0"/>
+                        <Setter Target = "TopRightStackPanel.(Grid.ColumnSpan)" Value="4"/>
+                        <Setter Target = "TopRightStackPanel.(Grid.Row)" Value="1"/>
 
                         <!--Left-->
-                        <Setter Target = "LeftBorder.VerticalAlignment" Value="Center"/>
                         <Setter Target = "LeftBorder.Margin" Value="0,20"/>
-                        <Setter Target = "LeftBorder.(Grid.RowSpan)" Value="1"/>
                         <Setter Target = "LeftBorder.Visibility" Value="Collapsed"/>
                         <!--IconLeft-->
                         <Setter Target = "IconLeftGrid.Visibility" Value="Visible"/>
-                        
+
                         <!--Right-->
+                        <Setter Target = "RightBorder.(Grid.Row)" Value="0"/>
+                        <Setter Target = "RightBorder.(Grid.RowSpan)" Value="3"/>
                         <Setter Target = "RightBorder.BorderThickness" Value="1,1,0,1"/>
                         <Setter Target = "RightBorder.Visibility" Value="Collapsed"/>
                         <!--IconRight-->
@@ -120,13 +122,14 @@
                     <VisualState.Setters >
 
                         <!--TopGrid-->
-                        <Setter Target = "TopLeftStackPanel.Visibility" Value="Collapsed"/>
+                        <Setter Target = "TopRightStackPanel.(Grid.Column)" Value="0"/>
+                        <Setter Target = "TopRightStackPanel.(Grid.ColumnSpan)" Value="4"/>
+                        <Setter Target = "TopRightStackPanel.(Grid.Row)" Value="1"/>
 
                         <!--DismissOverlay-->
                         <Setter Target = "IconDismissOverlay.Visibility" Value="Visible"/>
 
                         <!--Left-->
-                        <Setter Target = "LeftBorder.VerticalAlignment" Value="Center"/>
                         <Setter Target = "LeftBorder.Margin" Value="0,20"/>
                         <!--IconLeft-->
                         <Setter Target = "IconLeftGrid.Visibility" Value="Visible"/>
@@ -134,6 +137,8 @@
                         <Setter Target = "IconLeftIcon.Foreground" Value="{StaticResource CheckColor}"/>
 
                         <!--Right-->
+                        <Setter Target = "RightBorder.(Grid.Row)" Value="0"/>
+                        <Setter Target = "RightBorder.(Grid.RowSpan)" Value="3"/>
                         <Setter Target = "RightBorder.Visibility" Value="Collapsed"/>
                         <!--IconRight-->
                         <Setter Target = "IconRightGrid.Visibility" Value="Visible"/>
@@ -146,14 +151,15 @@
                 <VisualState x:Name="PhoneShowRight">
                     <VisualState.Setters >
 
-                        <!--TopGrid-->
-                        <Setter Target = "TopLeftStackPanel.Visibility" Value="Collapsed"/>
+                        <!--Top-->
+                        <Setter Target = "TopRightStackPanel.(Grid.Column)" Value="0"/>
+                        <Setter Target = "TopRightStackPanel.(Grid.ColumnSpan)" Value="4"/>
+                        <Setter Target = "TopRightStackPanel.(Grid.Row)" Value="1"/>
 
                         <!--DismissOverlay-->
                         <Setter Target = "IconDismissOverlay.Visibility" Value="Visible"/>
 
                         <!--Left-->
-                        <Setter Target = "LeftBorder.VerticalAlignment" Value="Center"/>
                         <Setter Target = "LeftBorder.Margin" Value="0,20"/>
                         <Setter Target = "LeftBorder.Visibility" Value="Collapsed"/>
                         <!--IconLeft-->
@@ -161,6 +167,10 @@
                         <Setter Target = "IconLeftRectangle.Fill" Value="{StaticResource UnAccentColor}"/>
                         <Setter Target = "IconLeftIcon.Foreground" Value="{StaticResource UnCheckColor}"/>
 
+                        <!--Right-->
+                        <Setter Target = "RightBorder.(Grid.Row)" Value="0"/>
+                        <Setter Target = "RightBorder.(Grid.RowSpan)" Value="3"/>
+                        
                         <!--IconRight-->
                         <Setter Target = "IconRightGrid.Visibility" Value="Visible"/>
                         <Setter Target = "IconRightRectangle.Fill" Value="{StaticResource AccentColor}"/>
@@ -173,9 +183,15 @@
                 <VisualState x:Name="Pad">
                     <VisualState.Setters >
 
+                        <!--Top-->
+                        <Setter Target = "TopRightStackPanel.(Grid.Column)" Value="2"/>
+                        <Setter Target = "TopRightStackPanel.(Grid.ColumnSpan)" Value="1"/>
+                        <Setter Target = "TopRightStackPanel.(Grid.Row)" Value="0"/>
+
                         <!--Left-->
+                        <Setter Target = "LeftBorder.(Grid.Row)" Value="1"/>
+                        <Setter Target = "LeftBorder.(Grid.RowSpan)" Value="2"/>
                         <Setter Target = "LeftBorder.CornerRadius" Value="0,8,8,0"/>
-                        <Setter Target = "LeftBorder.VerticalAlignment" Value="Center"/>
                         <Setter Target = "LeftBorder.Margin" Value="0,20"/>
 
                         <!--Right-->
@@ -189,15 +205,21 @@
                 <VisualState x:Name="PC">
                     <VisualState.Setters >
 
-                        <!--TopGrid-->
+                        <!--Top-->
                         <Setter Target="TopGrid.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target = "TopRightStackPanel.(Grid.Column)" Value="0"/>
+                        <Setter Target = "TopRightStackPanel.(Grid.ColumnSpan)" Value="3"/>
+                        <Setter Target = "TopRightStackPanel.(Grid.Row)" Value="0"/>
 
                         <!--CenterBorder-->
                         <Setter Target = "CenterBorder.(Grid.Column)" Value="1"/>
                         <Setter Target = "CenterBorder.(Grid.ColumnSpan)" Value="1"/>
 
                         <!--Left-->
+                        <Setter Target = "LeftBorder.(Grid.Row)" Value="1"/>
+                        <Setter Target = "LeftBorder.(Grid.RowSpan)" Value="2"/>
                         <Setter Target = "LeftBorder.BorderThickness" Value="0,0,1,0"/>
+                        <Setter Target = "LeftBorder.VerticalAlignment" Value="Stretch"/>
                         <Setter Target = "LeftBorder.Background"
                         apiContractNotPresent5:Value="{ThemeResource AppForeground}"
                         apiContractPresent5:Value="{ThemeResource SystemControlAcrylicWindowBrush}"
@@ -230,7 +252,7 @@
             <!--Normal-->
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto" MinHeight="50"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto" MinHeight="50"/>
         </Grid.RowDefinitions>
@@ -272,8 +294,12 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-            <Border x:Name="TopLeftBorder" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Border x:Name="TopLeftBorder" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 
             <StackPanel x:Name="TopLeftStackPanel" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" 
                     Visibility="Visible">
@@ -293,7 +319,7 @@
 
             </StackPanel>
 
-            <StackPanel x:Name="TopRightStackPanel" Grid.Column="2" Orientation="Horizontal"/>
+            <StackPanel x:Name="TopRightStackPanel" Orientation="Horizontal" HorizontalAlignment="Right"/>
 
             <!--FullScreen-->
             <Button x:Name="FullScreenButton" Grid.Column="3" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -396,8 +422,8 @@
 
         
         <!--Left-->
-        <Border x:Name="LeftBorder" Grid.Column="0" Grid.Row="1" MinHeight="200" BorderBrush="{ThemeResource AppStroke}"
-                Grid.RowSpan="2" CornerRadius="0" VerticalAlignment="Stretch" BorderThickness="0,1,1,1" Visibility="Visible" Margin="0" Background="{ThemeResource AppBackground}">
+        <Border x:Name="LeftBorder" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" MinHeight="200" BorderBrush="{ThemeResource AppStroke}"
+                CornerRadius="0" VerticalAlignment="Center" BorderThickness="0,1,1,1" Visibility="Visible" Margin="0" Background="{ThemeResource AppBackground}">
             <!--Normal-->
 
             <!--Visibility:Show-->
