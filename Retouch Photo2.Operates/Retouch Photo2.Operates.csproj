@@ -178,9 +178,11 @@
     <Compile Include="ArrangeControls\MoveFrontEnabledControl.xaml.cs">
       <DependentUpon>MoveFrontEnabledControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Button.xaml.cs">
+    <Compile Include="Buttons\Button.xaml.cs">
       <DependentUpon>Button.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Buttons\ButtonState.cs" />
+    <Compile Include="Buttons\ButtonStateManager.cs" />
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
@@ -313,7 +315,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Button.xaml">
+    <Page Include="Buttons\Button.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

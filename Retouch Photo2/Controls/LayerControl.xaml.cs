@@ -22,9 +22,9 @@ namespace Retouch_Photo2.Controls
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
-
+        MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;        
 
         ObservableCollection<ILayer> _reference => this.ViewModel.Layers;
         ObservableCollection<ILayer> _selection => this.SelectionViewModel.Layer.Children;
@@ -259,11 +259,11 @@ namespace Retouch_Photo2.Controls
             //Group
             this.GroupButton.Tapped += (s, e) =>
             {
-                //TODO: ffff
-           //     if (this.TipViewModel.LayerMenuState == MenuState.FlyoutShow)
-            //    {
-            //        this.TipViewModel.LayerMenuState = MenuState.FlyoutHide;
-              //  }
+                //Menu
+                if (this.TipViewModel.LayerMenu.State == MenuState.FlyoutShow)
+                {
+                    this.TipViewModel.LayerMenu.State = MenuState.FlyoutHide;
+                }
 
 
                 //Transformer

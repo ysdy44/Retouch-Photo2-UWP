@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:operates="using:Retouch_Photo2.Operates"
+    xmlns:operatesButtons="using:Retouch_Photo2.Operates.Buttons"
     xmlns:operatesAliHor="using:Retouch_Photo2.Operates.AlignHorizontalControls"
     xmlns:operatesAliVer="using:Retouch_Photo2.Operates.AlignVerticalControls"
     xmlns:operatesArr="using:Retouch_Photo2.Operates.ArrangeControls"
@@ -28,53 +28,53 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <operates:Button x:Name="FlipHorizontalButton" Grid.Column="0" IsEnabled="False">
+                <operatesButtons:Button x:Name="FlipHorizontalButton" Grid.Column="0" IsEnabled="False">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Flip Horizontal" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <operates:Button.EnabledIcon>
+                    <operatesButtons:Button.EnabledIcon>
                         <operatesTra:FlipHorizontalEnabledControl/>
-                    </operates:Button.EnabledIcon>
-                    <operates:Button.DisabledIcon>
+                    </operatesButtons:Button.EnabledIcon>
+                    <operatesButtons:Button.DisabledIcon>
                         <operatesTra:FlipHorizontalDisabledControl/>
-                    </operates:Button.DisabledIcon>
-                </operates:Button>
+                    </operatesButtons:Button.DisabledIcon>
+                </operatesButtons:Button>
 
-                <operates:Button x:Name="FlipVerticalButton" Grid.Column="1" IsEnabled="False">
+                <operatesButtons:Button x:Name="FlipVerticalButton" Grid.Column="1" IsEnabled="False">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Flip Vertical" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <operates:Button.EnabledIcon>
+                    <operatesButtons:Button.EnabledIcon>
                         <operatesTra:FlipVerticalEnabledControl/>
-                    </operates:Button.EnabledIcon>
-                    <operates:Button.DisabledIcon>
+                    </operatesButtons:Button.EnabledIcon>
+                    <operatesButtons:Button.DisabledIcon>
                         <operatesTra:FlipVerticalDisabledControl/>
-                    </operates:Button.DisabledIcon>
-                </operates:Button>
+                    </operatesButtons:Button.DisabledIcon>
+                </operatesButtons:Button>
 
-                <operates:Button x:Name="RotateLeftButton" Grid.Column="2" IsEnabled="False">
+                <operatesButtons:Button x:Name="RotateLeftButton" Grid.Column="2" IsEnabled="False">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Rotate Left" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <operates:Button.EnabledIcon>
+                    <operatesButtons:Button.EnabledIcon>
                         <operatesTra:RotateLeftEnabledIControl/>
-                    </operates:Button.EnabledIcon>
-                    <operates:Button.DisabledIcon>
+                    </operatesButtons:Button.EnabledIcon>
+                    <operatesButtons:Button.DisabledIcon>
                         <operatesTra:RotateLeftDisabledControl/>
-                    </operates:Button.DisabledIcon>
-                </operates:Button>
+                    </operatesButtons:Button.DisabledIcon>
+                </operatesButtons:Button>
 
-                <operates:Button x:Name="RotateRightButton" Grid.Column="3" IsEnabled="False">
+                <operatesButtons:Button x:Name="RotateRightButton" Grid.Column="3" IsEnabled="False">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Rotate Right" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <operates:Button.EnabledIcon>
+                    <operatesButtons:Button.EnabledIcon>
                         <operatesTra:RotateRightEnabledControl/>
-                    </operates:Button.EnabledIcon>
-                    <operates:Button.DisabledIcon>
+                    </operatesButtons:Button.EnabledIcon>
+                    <operatesButtons:Button.DisabledIcon>
                         <operatesTra:RotateRightDisabledControl/>
-                    </operates:Button.DisabledIcon>
-                </operates:Button>
+                    </operatesButtons:Button.DisabledIcon>
+                </operatesButtons:Button>
 
             </Grid>
         </Border>
@@ -94,53 +94,53 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <operates:Button x:Name="ArrangeMoveBackButton" Grid.Column="0" IsEnabled="False">
+                <operatesButtons:Button x:Name="ArrangeMoveBackButton" Grid.Column="0" IsEnabled="False">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Move To Back" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <operates:Button.EnabledIcon>
+                    <operatesButtons:Button.EnabledIcon>
                         <operatesArr:MoveBackEnabledControl/>
-                    </operates:Button.EnabledIcon>
-                    <operates:Button.DisabledIcon>
+                    </operatesButtons:Button.EnabledIcon>
+                    <operatesButtons:Button.DisabledIcon>
                         <operatesArr:MoveBackDisabledControl/>
-                    </operates:Button.DisabledIcon>
-                </operates:Button>
+                    </operatesButtons:Button.DisabledIcon>
+                </operatesButtons:Button>
 
-                <operates:Button x:Name="ArrangeBackOneButton" Grid.Column="1" IsEnabled="False">
+                <operatesButtons:Button x:Name="ArrangeBackOneButton" Grid.Column="1" IsEnabled="False">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Back One" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <operates:Button.EnabledIcon>
+                    <operatesButtons:Button.EnabledIcon>
                         <operatesArr:BackOneEnabledControl/>
-                    </operates:Button.EnabledIcon>
-                    <operates:Button.DisabledIcon>
+                    </operatesButtons:Button.EnabledIcon>
+                    <operatesButtons:Button.DisabledIcon>
                         <operatesArr:BackOneDisabledControl/>
-                    </operates:Button.DisabledIcon>
-                </operates:Button>
+                    </operatesButtons:Button.DisabledIcon>
+                </operatesButtons:Button>
 
-                <operates:Button x:Name="ArrangeForwardOneButton" Grid.Column="2" IsEnabled="False">
+                <operatesButtons:Button x:Name="ArrangeForwardOneButton" Grid.Column="2" IsEnabled="False">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Forward One" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <operates:Button.EnabledIcon>
+                    <operatesButtons:Button.EnabledIcon>
                         <operatesArr:ForwardOneEnabledControl/>
-                    </operates:Button.EnabledIcon>
-                    <operates:Button.DisabledIcon>
+                    </operatesButtons:Button.EnabledIcon>
+                    <operatesButtons:Button.DisabledIcon>
                         <operatesArr:ForwardOneDisabledControl/>
-                    </operates:Button.DisabledIcon>
-                </operates:Button>
+                    </operatesButtons:Button.DisabledIcon>
+                </operatesButtons:Button>
 
-                <operates:Button x:Name="ArrangeMoveFrontButton" Grid.Column="3" IsEnabled="False">
+                <operatesButtons:Button x:Name="ArrangeMoveFrontButton" Grid.Column="3" IsEnabled="False">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Move To Front" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <operates:Button.EnabledIcon>
+                    <operatesButtons:Button.EnabledIcon>
                         <operatesArr:MoveFrontEnabledControl/>
-                    </operates:Button.EnabledIcon>
-                    <operates:Button.DisabledIcon>
+                    </operatesButtons:Button.EnabledIcon>
+                    <operatesButtons:Button.DisabledIcon>
                         <operatesArr:MoveFrontDisabledControl/>
-                    </operates:Button.DisabledIcon>
-                </operates:Button>
+                    </operatesButtons:Button.DisabledIcon>
+                </operatesButtons:Button>
             </Grid>
         </Border>
 
@@ -159,53 +159,53 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <operates:Button x:Name="AlignLeftButton" Grid.Column="0" IsEnabled="False">
+                <operatesButtons:Button x:Name="AlignLeftButton" Grid.Column="0" IsEnabled="False">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Align Left" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <operates:Button.EnabledIcon>
+                    <operatesButtons:Button.EnabledIcon>
                         <operatesAliHor:LeftEnabledControl/>
-                    </operates:Button.EnabledIcon>
-                    <operates:Button.DisabledIcon>
+                    </operatesButtons:Button.EnabledIcon>
+                    <operatesButtons:Button.DisabledIcon>
                         <operatesAliHor:LeftDisabledControl/>
-                    </operates:Button.DisabledIcon>
-                </operates:Button>
+                    </operatesButtons:Button.DisabledIcon>
+                </operatesButtons:Button>
 
-                <operates:Button x:Name="AlignCenterButton" Grid.Column="1" IsEnabled="False">
+                <operatesButtons:Button x:Name="AlignCenterButton" Grid.Column="1" IsEnabled="False">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Align Center" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <operates:Button.EnabledIcon>
+                    <operatesButtons:Button.EnabledIcon>
                         <operatesAliHor:CenterEnabledControl/>
-                    </operates:Button.EnabledIcon>
-                    <operates:Button.DisabledIcon>
+                    </operatesButtons:Button.EnabledIcon>
+                    <operatesButtons:Button.DisabledIcon>
                         <operatesAliHor:CenterDisabledControl/>
-                    </operates:Button.DisabledIcon>
-                </operates:Button>
+                    </operatesButtons:Button.DisabledIcon>
+                </operatesButtons:Button>
 
-                <operates:Button x:Name="AlignRightButton" Grid.Column="2" IsEnabled="False">
+                <operatesButtons:Button x:Name="AlignRightButton" Grid.Column="2" IsEnabled="False">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Align Right" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <operates:Button.EnabledIcon>
+                    <operatesButtons:Button.EnabledIcon>
                         <operatesAliHor:RightEnabledControl/>
-                    </operates:Button.EnabledIcon>
-                    <operates:Button.DisabledIcon>
+                    </operatesButtons:Button.EnabledIcon>
+                    <operatesButtons:Button.DisabledIcon>
                         <operatesAliHor:RightDisabledControl/>
-                    </operates:Button.DisabledIcon>
-                </operates:Button>
+                    </operatesButtons:Button.DisabledIcon>
+                </operatesButtons:Button>
 
-                <operates:Button x:Name="AlignSymmetryHorizontallyButton" Grid.Column="3" IsEnabled="False">
+                <operatesButtons:Button x:Name="AlignSymmetryHorizontallyButton" Grid.Column="3" IsEnabled="False">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Symmetry" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <operates:Button.EnabledIcon>
+                    <operatesButtons:Button.EnabledIcon>
                         <operatesAliHor:SymmetryEnabledControl/>
-                    </operates:Button.EnabledIcon>
-                    <operates:Button.DisabledIcon>
+                    </operatesButtons:Button.EnabledIcon>
+                    <operatesButtons:Button.DisabledIcon>
                         <operatesAliHor:SymmetryDisabledControl/>
-                    </operates:Button.DisabledIcon>
-                </operates:Button>
+                    </operatesButtons:Button.DisabledIcon>
+                </operatesButtons:Button>
 
             </Grid>
         </Border>
@@ -225,53 +225,53 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <operates:Button x:Name="AlignTopButton" Grid.Column="0" IsEnabled="False">
+                <operatesButtons:Button x:Name="AlignTopButton" Grid.Column="0" IsEnabled="False">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Align Top" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <operates:Button.EnabledIcon>
+                    <operatesButtons:Button.EnabledIcon>
                         <operatesAliVer:TopEnabledControl/>
-                    </operates:Button.EnabledIcon>
-                    <operates:Button.DisabledIcon>
+                    </operatesButtons:Button.EnabledIcon>
+                    <operatesButtons:Button.DisabledIcon>
                         <operatesAliVer:TopDisabledControl/>
-                    </operates:Button.DisabledIcon>
-                </operates:Button>
+                    </operatesButtons:Button.DisabledIcon>
+                </operatesButtons:Button>
 
-                <operates:Button x:Name="AlignMiddleButton" Grid.Column="1" IsEnabled="False">
+                <operatesButtons:Button x:Name="AlignMiddleButton" Grid.Column="1" IsEnabled="False">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Align Middle" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <operates:Button.EnabledIcon>
+                    <operatesButtons:Button.EnabledIcon>
                         <operatesAliVer:MiddleEnabledControl/>
-                    </operates:Button.EnabledIcon>
-                    <operates:Button.DisabledIcon>
+                    </operatesButtons:Button.EnabledIcon>
+                    <operatesButtons:Button.DisabledIcon>
                         <operatesAliVer:MiddleDisabledControl/>
-                    </operates:Button.DisabledIcon>
-                </operates:Button>
+                    </operatesButtons:Button.DisabledIcon>
+                </operatesButtons:Button>
 
-                <operates:Button x:Name="AlignBottomButton" Grid.Column="2" IsEnabled="False">
+                <operatesButtons:Button x:Name="AlignBottomButton" Grid.Column="2" IsEnabled="False">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Align Bottom" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <operates:Button.EnabledIcon>
+                    <operatesButtons:Button.EnabledIcon>
                         <operatesAliVer:BottomEnabledControl/>
-                    </operates:Button.EnabledIcon>
-                    <operates:Button.DisabledIcon>
+                    </operatesButtons:Button.EnabledIcon>
+                    <operatesButtons:Button.DisabledIcon>
                         <operatesAliVer:BottomDisabledControl/>
-                    </operates:Button.DisabledIcon>
-                </operates:Button>
+                    </operatesButtons:Button.DisabledIcon>
+                </operatesButtons:Button>
 
-                <operates:Button x:Name="AlignSymmetryVerticallyButton" Grid.Column="3" IsEnabled="False">
+                <operatesButtons:Button x:Name="AlignSymmetryVerticallyButton" Grid.Column="3" IsEnabled="False">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Symmetry" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <operates:Button.EnabledIcon>
+                    <operatesButtons:Button.EnabledIcon>
                         <operatesAliVer:SymmetryEnabledControl/>
-                    </operates:Button.EnabledIcon>
-                    <operates:Button.DisabledIcon>
+                    </operatesButtons:Button.EnabledIcon>
+                    <operatesButtons:Button.DisabledIcon>
                         <operatesAliVer:SymmetryDisabledControl/>
-                    </operates:Button.DisabledIcon>
-                </operates:Button>
+                    </operatesButtons:Button.DisabledIcon>
+                </operatesButtons:Button>
 
             </Grid>
         </Border>

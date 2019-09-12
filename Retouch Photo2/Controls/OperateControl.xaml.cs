@@ -120,7 +120,7 @@ namespace Retouch_Photo2.Controls
             #region Transform
 
 
-            this.FlipHorizontalButton.RootButton.Tapped += (s, e) =>
+            this.FlipHorizontalButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(-1, 1, transformer.Center);
@@ -136,7 +136,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.FlipVerticalButton.RootButton.Tapped += (s, e) =>
+            this.FlipVerticalButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(1, -1, transformer.Center);
@@ -152,7 +152,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.RotateLeftButton.RootButton.Tapped += (s, e) =>
+            this.RotateLeftButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(FanKit.Math.PiOver2, transformer.Center);
@@ -168,7 +168,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.RotateRightButton.RootButton.Tapped += (s, e) =>
+            this.RotateRightButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(-FanKit.Math.PiOver2, transformer.Center);
@@ -191,7 +191,7 @@ namespace Retouch_Photo2.Controls
             #region Align Horizontal
 
 
-            this.AlignLeftButton.RootButton.Tapped += (s, e) =>
+            this.AlignLeftButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0 - transformer.MinX, 0);
@@ -207,7 +207,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.AlignCenterButton.RootButton.Tapped += (s, e) =>
+            this.AlignCenterButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width / 2 - transformer.Center.X, 0);
@@ -223,7 +223,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.AlignRightButton.RootButton.Tapped += (s, e) =>
+            this.AlignRightButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width - transformer.MaxX, 0);
@@ -239,7 +239,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.AlignSymmetryHorizontallyButton.RootButton.Tapped += (s, e) => { };
+            this.AlignSymmetryHorizontallyButton.Tapped += (s, e) => { };
 
 
             #endregion
@@ -248,7 +248,7 @@ namespace Retouch_Photo2.Controls
             #region Align Vertical
 
 
-            this.AlignTopButton.RootButton.Tapped += (s, e) =>
+            this.AlignTopButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, 0 - transformer.MinY);
@@ -264,7 +264,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.AlignMiddleButton.RootButton.Tapped += (s, e) =>
+            this.AlignMiddleButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, this.ViewModel.CanvasTransformer.Height / 2 - transformer.Center.Y);
@@ -280,7 +280,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.AlignBottomButton.RootButton.Tapped += (s, e) =>
+            this.AlignBottomButton.Tapped += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, this.ViewModel.CanvasTransformer.Height - transformer.MaxY);
@@ -296,7 +296,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.AlignSymmetryVerticallyButton.RootButton.Tapped += (s, e) => { };
+            this.AlignSymmetryVerticallyButton.Tapped += (s, e) => { };
 
 
             #endregion
@@ -305,22 +305,22 @@ namespace Retouch_Photo2.Controls
             #region Arrange
 
 
-            this.ArrangeMoveBackButton.RootButton.Tapped += (s, e) =>
+            this.ArrangeMoveBackButton.Tapped += (s, e) =>
             {
 
             };
 
-            this.ArrangeBackOneButton.RootButton.Tapped += (s, e) =>
+            this.ArrangeBackOneButton.Tapped += (s, e) =>
             {
 
             };
 
-            this.ArrangeForwardOneButton.RootButton.Tapped += (s, e) =>
+            this.ArrangeForwardOneButton.Tapped += (s, e) =>
             {
 
             };
 
-            this.ArrangeMoveFrontButton.RootButton.Tapped += (s, e) =>
+            this.ArrangeMoveFrontButton.Tapped += (s, e) =>
             {
 
             };
