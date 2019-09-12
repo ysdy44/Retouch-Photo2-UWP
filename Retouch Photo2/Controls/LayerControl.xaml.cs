@@ -24,7 +24,6 @@ namespace Retouch_Photo2.Controls
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
 
 
         ObservableCollection<ILayer> _reference => this.ViewModel.Layers;

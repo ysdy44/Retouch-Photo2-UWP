@@ -141,25 +141,39 @@ namespace Retouch_Photo2.ViewModels.Selections
         }
 
 
-        /// <summary> ImageLayer's Exist. </summary>     
-        public bool IsImageLayer { get; set; }
+        /// <summary> ImageLayer's Exist. </summary>      
+        public bool IsImageLayer
+        {
+            get => this.isImageLayer;
+            set
+            {
+                this.isImageLayer = value;
+                this.OnPropertyChanged(nameof(this.IsImageLayer));//Notify 
+            }
+        }
+        private bool isImageLayer;
         /// <summary> <see cref = "SelectionViewModel" />'s ImageRe. </summary>
-        public ImageRe ImageRe { get; set; }
+        public ImageRe ImageRe
+        {
+            get => this.imageRe;
+            set
+            {
+                this.imageRe = value;
+                this.OnPropertyChanged(nameof(this.ImageRe));//Notify 
+            }
+        }
+        private ImageRe imageRe;
         /// <summary> Sets ImageLayer. </summary>     
         private void SetImageLayer(ILayer layer)
         {
             if (layer is ImageLayer imageLayer)
             {
                 this.IsImageLayer = true;
-                this.OnPropertyChanged(nameof(this.IsImageLayer));//Notify 
-
                 this.ImageRe = imageLayer.ImageRe;
-                this.OnPropertyChanged(nameof(this.ImageRe));//Notify 
             }
             else
             {
                 this.IsImageLayer = false;
-                this.OnPropertyChanged(nameof(this.IsImageLayer));//Notify 
             }
         }
 

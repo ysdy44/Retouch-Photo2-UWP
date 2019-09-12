@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Tools.Controls;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
@@ -20,9 +21,12 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
+        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
+
+        ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
+        CompositeMode CompositeMode => this.KeyboardViewModel.CompositeMode;
 
         //Box
         bool _isBox;
@@ -39,7 +43,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             this._isBox = false; //Box
 
-            if (this.TipViewModel.TransformerTool.Starting(point)) return; //TransformerToolBase
+            if (this.TransformerTool.Starting(point)) return; //TransformerToolBase
 
             this._isBox = true; //Box
         }
@@ -53,7 +57,7 @@ namespace Retouch_Photo2.Tools.Models
                 return;
             }
 
-            this.TipViewModel.TransformerTool.Started(startingPoint, point, false);//TransformerToolBase
+            this.TransformerTool.Started(startingPoint, point, false);//TransformerToolBase
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
@@ -65,7 +69,7 @@ namespace Retouch_Photo2.Tools.Models
                 return;
             }
 
-            this.TipViewModel.TransformerTool.Delta(startingPoint, point); //TransformerToolBase
+            this.TransformerTool.Delta(startingPoint, point); //TransformerToolBase
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
@@ -83,7 +87,7 @@ namespace Retouch_Photo2.Tools.Models
                 }
             }
 
-            this.TipViewModel.TransformerTool.Complete(startingPoint, point, isSingleStarted); //TransformerToolBase
+            this.TransformerTool.Complete(startingPoint, point, isSingleStarted); //TransformerToolBase
         }
         
         public void Draw(CanvasDrawingSession drawingSession)
@@ -95,7 +99,7 @@ namespace Retouch_Photo2.Tools.Models
                 return;
             }
 
-            this.TipViewModel.TransformerTool.Draw(drawingSession);//TransformerToolBase
+            this.TransformerTool.Draw(drawingSession);//TransformerToolBase
         }
         
         public void OnNavigatedTo() { }

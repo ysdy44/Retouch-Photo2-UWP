@@ -30,7 +30,7 @@ namespace Retouch_Photo2.Tools.Models
                 bool contained = layer.Destination.Contained(this._boxCanvasRect);
 
                 //Add
-                switch (this.KeyboardViewModel.CompositeMode)
+                switch (this.CompositeMode)
                 {
                     case CompositeMode.New:
                         {

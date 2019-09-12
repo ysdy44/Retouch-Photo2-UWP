@@ -6,8 +6,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="50"
-    d:DesignWidth="50">
+    d:DesignWidth="50"
+    >
 
-    <PathIcon Data="M10.573,0c5.835,0 10.573,4.508 10.573,10.343c0,5.835 -4.738,10.343 -10.573,10.343c-5.835,0 -10.573,-4.508 -10.573,-10.343c0,-5.835 4.738,-10.343 10.573,-10.343Z"/>
+    <PathIcon>
+        <PathIcon.Data>
+              M10.573,0c5.835,0 10.573,4.508 10.573,10.343c0,5.835 -4.738,10.343 -10.573,10.343c-5.835,0 -10.573,-4.508 -10.573,-10.343c0,-5.835 4.738,-10.343 10.573,-10.343Z
+        </PathIcon.Data>
+    </PathIcon>
 
 </UserControl>

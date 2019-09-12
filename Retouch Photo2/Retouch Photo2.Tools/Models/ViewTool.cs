@@ -16,7 +16,6 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
 
         public bool IsOpen { set { } }
         public ToolType Type => ToolType.View;

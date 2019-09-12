@@ -4,7 +4,6 @@ using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
-using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
 using System.Numerics;
 using Windows.Foundation;
@@ -21,10 +20,12 @@ namespace Retouch_Photo2.Controls
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        
+
+        ITool Tool => this.TipViewModel.Tool;
+
+
         bool isSingleStarted;
         Vector2 singleStartingPoint;
         
@@ -206,8 +207,7 @@ namespace Retouch_Photo2.Controls
                 this.isSingleStarted = false;
                 this.singleStartingPoint = point;
 
-                ITool tool = this.TipViewModel.Tool;
-                tool.Starting(point);//Starting
+                this.Tool.Starting(point);//Starting
 
                 this.ViewModel.CanvasHitTestVisible = false;//IsHitTestVisible
             };
@@ -216,8 +216,7 @@ namespace Retouch_Photo2.Controls
                 //Delta
                 if (this.isSingleStarted)
                 {
-                    ITool tool = this.TipViewModel.Tool;
-                    tool.Delta(this.singleStartingPoint, point);//Delta
+                    this.Tool.Delta(this.singleStartingPoint, point);//Delta
                     return;
                 }
 
@@ -226,14 +225,12 @@ namespace Retouch_Photo2.Controls
                 {
                     this.isSingleStarted = true;
 
-                    ITool tool = this.TipViewModel.Tool;
-                    tool.Started(this.singleStartingPoint, point);//Started
+                    this.Tool.Started(this.singleStartingPoint, point);//Started
                 }
             };
             this.CanvasOperator.Single_Complete += (point) =>
             {
-                ITool tool = this.TipViewModel.Tool;
-                tool.Complete(this.singleStartingPoint, point, this.isSingleStarted);//Started
+                this.Tool.Complete(this.singleStartingPoint, point, this.isSingleStarted);//Started
 
                 this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible
             };

@@ -13,6 +13,26 @@
 
     <StackPanel Orientation="Horizontal">
 
+
+        <!--Control-->
+        <elements:OnOffSwitch OnContent="None" OffContent="Square" IsOn="{x:Bind KeyboardViewModel.IsSquare,Mode=TwoWay}">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="Equal width and height" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+            </ToolTipService.ToolTip>
+        </elements:OnOffSwitch>
+
+        <ContentControl Width="12"/>
+
+        <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="Center scaling" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+            </ToolTipService.ToolTip>
+        </elements:OnOffSwitch>
+
+
+        <AppBarSeparator/>
+        
+        
         <!--TintColor-->
         <TextBlock Text="TintColor:" Style="{StaticResource AppTextBlock}"/>
         <toolsElements:FillColorEllipseButton/>

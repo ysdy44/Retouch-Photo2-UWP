@@ -32,6 +32,18 @@ namespace Retouch_Photo2.ViewModels.Keyboards
         }
         private bool isRatio;
 
+        /// <summary> Equal width and height. </summary>
+        public bool IsSquare
+        {
+            get => this.isSquare;
+            set
+            {
+                this.isSquare = value;
+                this.OnPropertyChanged(nameof(this.IsSquare));//Notify 
+            }
+        }
+        private bool isSquare;
+
         /// <summary> Step Frequency when spinning. </summary>
         public bool IsStepFrequency
         {

@@ -30,7 +30,7 @@ namespace Retouch_Photo2.Tools.Models
             DisabledRadian = true//DisabledRadian
         };
 
-        public override bool IsOpen { set { } }
+        public override bool IsOpen { set { this._acrylicPage.IsOpen = value; } }
         public override ToolType Type => ToolType.Acrylic;
         public override FrameworkElement Icon { get; } = new AcrylicControl();
         public override FrameworkElement ShowIcon { get; } = new AcrylicControl();

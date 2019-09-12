@@ -9,8 +9,6 @@ namespace Retouch_Photo2.Menus.Layouts
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
-
 
         //@Content
         public bool IsOpen { set { } }

@@ -21,7 +21,15 @@ namespace Retouch_Photo2.Tools
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
-        
+
+        Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
+        ListViewSelectionMode Mode => this.SelectionViewModel.Mode;
+        CompositeMode CompositeMode => this.KeyboardViewModel.CompositeMode;
+        bool IsRatio => this.KeyboardViewModel.IsRatio;
+        bool IsCenter => this.KeyboardViewModel.IsCenter;
+        bool IsStepFrequency => this.KeyboardViewModel.IsStepFrequency;
+         
+
         Transformer oldTransformer;
         TransformerMode TransformerMode;
         
@@ -65,7 +73,7 @@ namespace Retouch_Photo2.Tools
 
         public bool Starting(Vector2 point)
         {
-            switch (this.SelectionViewModel.Mode)
+            switch (this.Mode)
             {
                 case ListViewSelectionMode.None:
                     {
@@ -77,12 +85,12 @@ namespace Retouch_Photo2.Tools
                 case ListViewSelectionMode.Single:
                 case ListViewSelectionMode.Multiple:
                     {
-                        Transformer transformer = this.SelectionViewModel.Transformer;
+                        Transformer transformer = this.Transformer;
                         Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
                         this.TransformerMode = Transformer.ContainsNodeMode(point, transformer, matrix, this.SelectionViewModel.DsabledRadian);
 
                         //Add
-                        switch (this.KeyboardViewModel.CompositeMode)
+                        switch (this.CompositeMode)
                         {
                             case CompositeMode.New:
                             case CompositeMode.Intersect:
@@ -125,9 +133,9 @@ namespace Retouch_Photo2.Tools
         }
         public bool Started(Vector2 startingPoint, Vector2 point, bool isSetTransformerMode = true)
         {
-            if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return false;
+            if (this.Mode == ListViewSelectionMode.None) return false;
 
-            this.oldTransformer = this.SelectionViewModel.Transformer;
+            this.oldTransformer = this.Transformer;
 
             if (isSetTransformerMode)
             {
@@ -148,18 +156,22 @@ namespace Retouch_Photo2.Tools
         }
         public bool Delta(Vector2 startingPoint, Vector2 point)
         {
-            if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return false;
+            if (this.Mode == ListViewSelectionMode.None) return false;
 
             if (this.TransformerMode == TransformerMode.None) return false;
 
             //Transformer
-            this.SelectionViewModel.Transformer = Transformer.Controller
+            this.Transformer = Transformer.Controller
             (
-                this.TransformerMode, startingPoint, point, this.oldTransformer,
+                this.TransformerMode, 
+                startingPoint, point, 
+                this.oldTransformer,
                 this.ViewModel.CanvasTransformer.GetInverseMatrix(),
-                this.KeyboardViewModel.IsRatio, this.KeyboardViewModel.IsCenter, this.KeyboardViewModel.IsStepFrequency
+                this.IsRatio, 
+                this.IsCenter, 
+                this.IsStepFrequency
             );
-            Matrix3x2 matrix = Transformer.FindHomography(this.oldTransformer, this.SelectionViewModel.Transformer);
+            Matrix3x2 matrix = Transformer.FindHomography(this.oldTransformer, this.Transformer);
 
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
@@ -172,13 +184,13 @@ namespace Retouch_Photo2.Tools
         }
         public bool Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
-            switch (this.SelectionViewModel.Mode)
+            switch (this.Mode)
             {
                 case ListViewSelectionMode.None: return false;
                 case ListViewSelectionMode.Single:
                 case ListViewSelectionMode.Multiple:
                     {
-                        switch (this.KeyboardViewModel.CompositeMode)
+                        switch (this.CompositeMode)
                         {
                             case CompositeMode.New:
                                 {
@@ -213,14 +225,14 @@ namespace Retouch_Photo2.Tools
         public void Draw(CanvasDrawingSession drawingSession)
         {
             //Selection
-            switch (this.SelectionViewModel.Mode)
+            switch (this.Mode)
             {
                 case ListViewSelectionMode.None:
                     break;
                 case ListViewSelectionMode.Single:
                 case ListViewSelectionMode.Multiple:
                     {
-                        Transformer transformer = this.SelectionViewModel.Transformer;
+                        Transformer transformer = this.Transformer;
                         Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
                         drawingSession.DrawBoundNodes(transformer, matrix, this.ViewModel.AccentColor, this.SelectionViewModel.DsabledRadian);
                     }

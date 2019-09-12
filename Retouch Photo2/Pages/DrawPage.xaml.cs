@@ -19,7 +19,6 @@ namespace Retouch_Photo2.Pages
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 

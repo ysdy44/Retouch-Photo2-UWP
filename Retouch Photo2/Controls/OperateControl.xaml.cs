@@ -17,8 +17,8 @@ namespace Retouch_Photo2.Controls
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
 
+        Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
 
         #region DependencyProperty
 
@@ -122,11 +122,11 @@ namespace Retouch_Photo2.Controls
 
             this.FlipHorizontalButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.Transformer;
+                Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(-1, 1, transformer.Center);
 
                 //Selection
-                this.SelectionViewModel.Transformer = transformer * matrix;
+                this.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
@@ -138,11 +138,11 @@ namespace Retouch_Photo2.Controls
 
             this.FlipVerticalButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.Transformer;
+                Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(1, -1, transformer.Center);
 
                 //Selection
-                this.SelectionViewModel.Transformer = transformer * matrix;
+                this.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
@@ -154,11 +154,11 @@ namespace Retouch_Photo2.Controls
 
             this.RotateLeftButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.Transformer;
+                Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(FanKit.Math.PiOver2, transformer.Center);
 
                 //Selection
-                this.SelectionViewModel.Transformer = transformer * matrix;
+                this.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
@@ -170,11 +170,11 @@ namespace Retouch_Photo2.Controls
 
             this.RotateRightButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.Transformer;
+                Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(-FanKit.Math.PiOver2, transformer.Center);
 
                 //Selection
-                this.SelectionViewModel.Transformer = transformer * matrix;
+                this.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
@@ -193,11 +193,11 @@ namespace Retouch_Photo2.Controls
 
             this.AlignLeftButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.Transformer;
+                Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0 - transformer.MinX, 0);
 
                 //Selection
-                this.SelectionViewModel.Transformer = transformer * matrix;
+                this.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
@@ -209,11 +209,11 @@ namespace Retouch_Photo2.Controls
 
             this.AlignCenterButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.Transformer;
+                Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width / 2 - transformer.Center.X, 0);
 
                 //Selection
-                this.SelectionViewModel.Transformer = transformer * matrix;
+                this.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
@@ -225,11 +225,11 @@ namespace Retouch_Photo2.Controls
 
             this.AlignRightButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.Transformer;
+                Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width - transformer.MaxX, 0);
 
                 //Selection
-                this.SelectionViewModel.Transformer = transformer * matrix;
+                this.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
@@ -250,11 +250,11 @@ namespace Retouch_Photo2.Controls
 
             this.AlignTopButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.Transformer;
+                Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, 0 - transformer.MinY);
 
                 //Selection
-                this.SelectionViewModel.Transformer = transformer * matrix;
+                this.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
@@ -266,11 +266,11 @@ namespace Retouch_Photo2.Controls
 
             this.AlignMiddleButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.Transformer;
+                Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, this.ViewModel.CanvasTransformer.Height / 2 - transformer.Center.Y);
 
                 //Selection
-                this.SelectionViewModel.Transformer = transformer * matrix;
+                this.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
@@ -282,11 +282,11 @@ namespace Retouch_Photo2.Controls
 
             this.AlignBottomButton.RootButton.Tapped += (s, e) =>
             {
-                Transformer transformer = this.SelectionViewModel.Transformer;
+                Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, this.ViewModel.CanvasTransformer.Height - transformer.MaxY);
 
                 //Selection
-                this.SelectionViewModel.Transformer = transformer * matrix;
+                this.Transformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();

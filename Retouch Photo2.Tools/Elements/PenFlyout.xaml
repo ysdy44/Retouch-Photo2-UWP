@@ -237,7 +237,12 @@
                     <RadioButton x:Name="MirroredRadioButton"  Tag="Mirrored" Style="{StaticResource RadioButtonStyle}">
                         <Viewbox Width="70" Height="70" >
                             <Canvas Width="768" Height="640">
-                                <Path Data="M131.966,558.011c0,0 7.333,-52.381 16.056,-77.162c16.801,-47.725 95.528,-189.054 242.638,-187.777c160.509,1.394 229.257,140.201 243.976,181.533c9.159,25.719 18.287,79.838 18.287,79.838" StrokeThickness="30" Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}" Fill="#3A9AFD"/>
+
+                                <Path StrokeThickness="30" Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}" Fill="#3A9AFD">
+                                    <Path.Data>
+                                        M131.966,558.011c0,0 7.333,-52.381 16.056,-77.162c16.801,-47.725 95.528,-189.054 242.638,-187.777c160.509,1.394 229.257,140.201 243.976,181.533c9.159,25.719 18.287,79.838 18.287,79.838
+                                    </Path.Data>
+                                </Path>
 
                                 <Line X1="186.502" Y1="282" X2="630" Y2="282" StrokeThickness="30" Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}"/>
                                 <Ellipse Canvas.Left="576" Canvas.Top="246" Width="70" Height="70" Fill="{ThemeResource SystemControlBackgroundBaseHighBrush}"/>
@@ -252,7 +257,12 @@
                     <RadioButton x:Name="DisconnectedRadioButton" Tag="Disconnected" Style="{StaticResource RadioButtonStyle}">
                         <Viewbox Width="70" Height="70" >
                             <Canvas Width="768" Height="640">
-                                <Path Data="M131.966,558.011c0,0 7.333,-52.381 16.056,-77.162c16.801,-47.725 117.931,-265.823 242.638,-187.777c128.73,80.563 262.263,261.371 262.263,261.371" StrokeThickness="30" Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}" Fill="#3A9AFD"/>
+
+                                <Path StrokeThickness="30" Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}" Fill="#3A9AFD">
+                                    <Path.Data>
+                                        M131.966,558.011c0,0 7.333,-52.381 16.056,-77.162c16.801,-47.725 117.931,-265.823 242.638,-187.777c128.73,80.563 262.263,261.371 262.263,261.371
+                                    </Path.Data>
+                                </Path>
 
                                 <Line X1="360" Y1="260" X2="190" Y2="282" StrokeThickness="30" Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}"/>
                                 <Line X1="360" Y1="260" X2="555" Y2="440" StrokeThickness="30" Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}"/>
@@ -268,7 +278,12 @@
                     <RadioButton x:Name="AsymmetricRadioButton" Tag="Asymmetric" Style="{StaticResource RadioButtonStyle}">
                         <Viewbox Width="70" Height="70" >
                             <Canvas Width="768" Height="640">
-                                <Path Data="M131.966,558.011c0,0 8.048,-86.536 15.499,-111.729c13.455,-45.495 34.756,-160.62 181.867,-159.343c160.508,1.394 262.709,81.66 305.304,187.666c10.18,25.333 18.287,79.838 18.287,79.838" StrokeThickness="30" Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}" Fill="#3A9AFD"/>
+
+                                <Path StrokeThickness="30" Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}" Fill="#3A9AFD">
+                                    <Path.Data>
+                                        M131.966,558.011c0,0 8.048,-86.536 15.499,-111.729c13.455,-45.495 34.756,-160.62 181.867,-159.343c160.508,1.394 262.709,81.66 305.304,187.666c10.18,25.333 18.287,79.838 18.287,79.838
+                                    </Path.Data>
+                                </Path>
 
                                 <Line X1="186.502" Y1="282" X2="630" Y2="282" StrokeThickness="30" Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}"/>
                                 <Ellipse Canvas.Left="576" Canvas.Top="246" Width="70" Height="70" Fill="{ThemeResource SystemControlBackgroundBaseHighBrush}"/>

@@ -1,16 +1,12 @@
 ﻿using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
-using System;
 using System.Numerics;
 using Windows.ApplicationModel.DataTransfer;
-using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -29,6 +25,7 @@ namespace Retouch_Photo2.Controls
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
+        IMenu LayerMenu => this.TipViewModel.LayerMenu;
 
         //@Construct
         public LayersControl()
@@ -123,9 +120,9 @@ namespace Retouch_Photo2.Controls
             if (this.SelectionViewModel.Layer == layer) //FlyoutShow
             {            
 
-                if (this.TipViewModel.LayerMenu.State == MenuState.FlyoutHide)
+                if (this.LayerMenu.State == MenuState.FlyoutHide)
                 {
-                    this.TipViewModel.LayerMenu.State = MenuState.FlyoutShow;
+                    this.LayerMenu.State = MenuState.FlyoutShow;
                 }
             }
             else //ItemClick
@@ -147,9 +144,9 @@ namespace Retouch_Photo2.Controls
         private void RootGrid_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
             //Menu
-            if (this.TipViewModel.LayerMenu.State == MenuState.FlyoutHide)
+            if (this.LayerMenu.State == MenuState.FlyoutHide)
             {
-                this.TipViewModel.LayerMenu.State = MenuState.FlyoutShow;
+                this.LayerMenu.State = MenuState.FlyoutShow;
             }
         }
      

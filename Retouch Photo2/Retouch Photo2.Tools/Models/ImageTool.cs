@@ -23,9 +23,7 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
 
         float _sizeWidth;
         float _sizeHeight;

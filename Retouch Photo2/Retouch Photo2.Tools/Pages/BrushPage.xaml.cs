@@ -19,7 +19,9 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
+
+        FillOrStroke FillOrStroke => this.SelectionViewModel.FillOrStroke;
+        BrushType BrushType { get => this.SelectionViewModel.BrushType; set => this.SelectionViewModel.BrushType=value; }
 
 
         //@Converter
@@ -117,13 +119,13 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
             //Show
             this.ShowControl.Tapped += (s, e) =>
             {
-                switch (this.SelectionViewModel.BrushType)
+                switch (this.BrushType)
                 {
                     case BrushType.None:
                         break;
                     case BrushType.Color:
                         {
-                            switch (this.SelectionViewModel.FillOrStroke)
+                            switch (this.FillOrStroke)
                             {
                                 case FillOrStroke.Fill:
                                     this.ColorPicker.Color = this.SelectionViewModel.FillColor;
@@ -156,10 +158,10 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                 this.SelectionViewModel.Color = value;
 
                 //Brush
-                this.SelectionViewModel.BrushType = BrushType.Color;
+                this.BrushType = BrushType.Color;
 
                 //FillOrStroke
-                switch (this.SelectionViewModel.FillOrStroke)
+                switch (this.FillOrStroke)
                 {
                     case FillOrStroke.Fill:
                         {
@@ -192,7 +194,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
                 this.SelectionViewModel.BrushArray = (CanvasGradientStop[])array.Clone();
 
                 //FillOrStroke
-                switch (this.SelectionViewModel.FillOrStroke)
+                switch (this.FillOrStroke)
                 {
                     case FillOrStroke.Fill:
                         {
@@ -229,10 +231,10 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
         private void BrushTypeNone()
         {
             //Brush
-            this.SelectionViewModel.BrushType = BrushType.None;
+            this.BrushType = BrushType.None;
 
             //FillOrStroke
-            switch (this.SelectionViewModel.FillOrStroke)
+            switch (this.FillOrStroke)
             {
                 case FillOrStroke.Fill:
                     {
@@ -266,8 +268,8 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
         private void BrushTypeColor()
         {
             //Brush
-            this.SelectionViewModel.BrushType = BrushType.Color;
-            switch (this.SelectionViewModel.FillOrStroke)
+            this.BrushType = BrushType.Color;
+            switch (this.FillOrStroke)
             {
                 case FillOrStroke.Fill:
                     this.SelectionViewModel.Color = this.SelectionViewModel.FillColor;
@@ -278,7 +280,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
             }
 
             //FillOrStroke
-            switch (this.SelectionViewModel.FillOrStroke)
+            switch (this.FillOrStroke)
             {
                 case FillOrStroke.Fill:
                     {
@@ -329,13 +331,13 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
             Vector2 point = transformer.CenterBottom;
 
             //Brush
-            this.SelectionViewModel.BrushType = BrushType.RadialGradient;
+            this.BrushType = BrushType.RadialGradient;
             this.SelectionViewModel.BrushArray = Brush.GetNewArray();
             this.SelectionViewModel.BrushPoints.RadialGradientCenter = center;
             this.SelectionViewModel.BrushPoints.RadialGradientPoint = point;
 
             //FillOrStroke
-            switch (this.SelectionViewModel.FillOrStroke)
+            switch (this.FillOrStroke)
             {
                 case FillOrStroke.Fill:
                     {
@@ -380,14 +382,14 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
             Vector2 yPoint = transformer.CenterBottom;
 
             //Brush
-            this.SelectionViewModel.BrushType = BrushType.EllipticalGradient;
+            this.BrushType = BrushType.EllipticalGradient;
             this.SelectionViewModel.BrushArray = Brush.GetNewArray();
             this.SelectionViewModel.BrushPoints.EllipticalGradientCenter = center;
             this.SelectionViewModel.BrushPoints.EllipticalGradientXPoint = xPoint;
             this.SelectionViewModel.BrushPoints.EllipticalGradientYPoint = yPoint;
 
             //FillOrStroke
-            switch (this.SelectionViewModel.FillOrStroke)
+            switch (this.FillOrStroke)
             {
                 case FillOrStroke.Fill:
                     {
@@ -429,7 +431,7 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
         private void BrushTypeImage()
         {
             //BrushType
-            this.SelectionViewModel.BrushType = BrushType.Image;
+            this.BrushType = BrushType.Image;
 
             this.ViewModel.Invalidate();//Invalidate
         }

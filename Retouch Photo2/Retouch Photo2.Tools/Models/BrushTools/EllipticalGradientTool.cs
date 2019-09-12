@@ -34,12 +34,10 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
-
-        //@Content
-        Vector2 Center { get => this.SelectionViewModel.BrushPoints.EllipticalGradientCenter; set => this.SelectionViewModel.BrushPoints.EllipticalGradientCenter = value; }
-        Vector2 XPoint { get => this.SelectionViewModel.BrushPoints.EllipticalGradientXPoint; set => this.SelectionViewModel.BrushPoints.EllipticalGradientXPoint = value; }
-        Vector2 YPoint { get => this.SelectionViewModel.BrushPoints.EllipticalGradientYPoint; set => this.SelectionViewModel.BrushPoints.EllipticalGradientYPoint = value; }
-
+        Vector2 EllipticalGradientCenter { get => this.SelectionViewModel.BrushPoints.EllipticalGradientCenter; set => this.SelectionViewModel.BrushPoints.EllipticalGradientCenter = value; }
+        Vector2 EllipticalGradientXPoint { get => this.SelectionViewModel.BrushPoints.EllipticalGradientXPoint; set => this.SelectionViewModel.BrushPoints.EllipticalGradientXPoint = value; }
+        Vector2 EllipticalGradientYPoint { get => this.SelectionViewModel.BrushPoints.EllipticalGradientYPoint; set => this.SelectionViewModel.BrushPoints.EllipticalGradientYPoint = value; }
+        FillOrStroke FillOrStroke => this.SelectionViewModel.FillOrStroke;
 
         /// <summary> Type of <see cref="RadialGradientTool">. </summary>
         public EllipticalGradientType Type = EllipticalGradientType.None;
@@ -53,32 +51,32 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
-            Vector2 xPoint = Vector2.Transform(this.XPoint, matrix);
+            Vector2 xPoint = Vector2.Transform(this.EllipticalGradientXPoint, matrix);
             if (FanKit.Math.InNodeRadius(startingPoint, xPoint))
             {
-                this.OldCenter = this.Center;
-                this.OldYPoint = this.YPoint;
+                this.OldCenter = this.EllipticalGradientCenter;
+                this.OldYPoint = this.EllipticalGradientYPoint;
 
                 this.Type = EllipticalGradientType.XPoint;
                 return;
             }
 
-            Vector2 yPoint = Vector2.Transform(this.YPoint, matrix);
+            Vector2 yPoint = Vector2.Transform(this.EllipticalGradientYPoint, matrix);
             if (FanKit.Math.InNodeRadius(startingPoint, yPoint))
             {
-                this.OldCenter = this.Center;
-                this.OldXPoint = this.XPoint;
+                this.OldCenter = this.EllipticalGradientCenter;
+                this.OldXPoint = this.EllipticalGradientXPoint;
 
                 this.Type = EllipticalGradientType.YPoint;
                 return;
             }
 
-            Vector2 center = Vector2.Transform(this.Center, matrix);
+            Vector2 center = Vector2.Transform(this.EllipticalGradientCenter, matrix);
             if (FanKit.Math.InNodeRadius(startingPoint, center))
             {
-                this.OldCenter = this.Center;
-                this.OldXPoint = this.XPoint;
-                this.OldYPoint = this.YPoint;
+                this.OldCenter = this.EllipticalGradientCenter;
+                this.OldXPoint = this.EllipticalGradientXPoint;
+                this.OldYPoint = this.EllipticalGradientYPoint;
 
                 this.Type = EllipticalGradientType.Center;
                 return;
@@ -104,15 +102,15 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
                         Vector2 yPoint = radiusY * reflect + this.OldCenter;
 
                         //Brush
-                        this.XPoint = xPoint;
-                        this.YPoint = yPoint;
+                        this.EllipticalGradientXPoint = xPoint;
+                        this.EllipticalGradientYPoint = yPoint;
 
                         //Selection
                         this.SelectionViewModel.SetValue((layer) =>
                         {
                             if (layer is IGeometryLayer geometryLayer)
                             {
-                                switch (this.SelectionViewModel.FillOrStroke)
+                                switch (this.FillOrStroke)
                                 {
                                     case FillOrStroke.Fill:
                                         {
@@ -144,11 +142,11 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
                         Vector2 xPoint = radiusX * reflect + this.OldCenter;
 
                         //Brush
-                        this.YPoint = yPoint;
-                        this.XPoint = xPoint;
+                        this.EllipticalGradientYPoint = yPoint;
+                        this.EllipticalGradientXPoint = xPoint;
 
                         //FillOrStroke
-                        switch (this.SelectionViewModel.FillOrStroke)
+                        switch (this.FillOrStroke)
                         {
                             case FillOrStroke.Fill:
                                 {
@@ -189,12 +187,12 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
                         Vector2 yPoint = center + this.OldYPoint - this.OldCenter;
 
                         //Brush
-                        this.Center = center;
-                        this.XPoint = xPoint;
-                        this.YPoint = yPoint;
+                        this.EllipticalGradientCenter = center;
+                        this.EllipticalGradientXPoint = xPoint;
+                        this.EllipticalGradientYPoint = yPoint;
 
                         //FillOrStroke
-                        switch (this.SelectionViewModel.FillOrStroke)
+                        switch (this.FillOrStroke)
                         {
                             case FillOrStroke.Fill:
                                 {
@@ -239,9 +237,9 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
-            Vector2 center = Vector2.Transform(this.Center, matrix);
-            Vector2 xPoint = Vector2.Transform(this.XPoint, matrix);
-            Vector2 yPoint = Vector2.Transform(this.YPoint, matrix);
+            Vector2 center = Vector2.Transform(this.EllipticalGradientCenter, matrix);
+            Vector2 xPoint = Vector2.Transform(this.EllipticalGradientXPoint, matrix);
+            Vector2 yPoint = Vector2.Transform(this.EllipticalGradientYPoint, matrix);
             drawingSession.DrawThickLine(center, xPoint);
             drawingSession.DrawThickLine(center, yPoint);
 

@@ -22,6 +22,9 @@ namespace Retouch_Photo2.Tools.Models
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
+        ListViewSelectionMode Mode => this.SelectionViewModel.Mode;
+        BrushType BrushType => this.SelectionViewModel.BrushType;
+
         //Brush
         public readonly LinearGradientTool LinearGradientTool = new LinearGradientTool();
         public readonly RadialGradientTool RadialGradientTool = new RadialGradientTool();
@@ -40,9 +43,9 @@ namespace Retouch_Photo2.Tools.Models
         public void Started(Vector2 startingPoint, Vector2 point)
         {
             //Selection
-            if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return;
+            if (this.Mode == ListViewSelectionMode.None) return;
 
-            switch (this.SelectionViewModel.BrushType)
+            switch (this.BrushType)
             {
                 case BrushType.None:
                 case BrushType.Color:
@@ -75,9 +78,9 @@ namespace Retouch_Photo2.Tools.Models
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
             //Selection
-            if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return;
+            if (this.Mode == ListViewSelectionMode.None) return;
 
-            switch (this.SelectionViewModel.BrushType)
+            switch (this.BrushType)
             {
                 case BrushType.None:
                     break;
@@ -101,7 +104,7 @@ namespace Retouch_Photo2.Tools.Models
         public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
             //Selection
-            if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return;
+            if (this.Mode == ListViewSelectionMode.None) return;
 
             this.LinearGradientTool.Type = LinearGradientType.None;//LinearGradientTool
             this.RadialGradientTool.Type = RadialGradientType.None;//RadialGradientTool
@@ -115,7 +118,7 @@ namespace Retouch_Photo2.Tools.Models
 
         public void Draw(CanvasDrawingSession drawingSession)
         {
-            switch (this.SelectionViewModel.BrushType)
+            switch (this.BrushType)
             {
                 case BrushType.None:
                     break;

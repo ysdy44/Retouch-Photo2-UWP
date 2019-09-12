@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -12,6 +13,25 @@
 
     <StackPanel Orientation="Horizontal">
 
+        <!--Control-->
+        <elements:OnOffSwitch OnContent="None" OffContent="Square" IsOn="{x:Bind KeyboardViewModel.IsSquare,Mode=TwoWay}">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="Equal width and height" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+            </ToolTipService.ToolTip>
+        </elements:OnOffSwitch>
+
+        <ContentControl Width="12"/>
+
+        <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="Center scaling" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+            </ToolTipService.ToolTip>
+        </elements:OnOffSwitch>
+
+
+        <AppBarSeparator/>
+
+        
         <TextBlock Text="FillColor:" Style="{StaticResource AppTextBlock}"/>
         <toolsElements:FillColorEllipseButton/>
 

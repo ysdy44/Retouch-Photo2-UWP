@@ -19,9 +19,13 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
+        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
+
+        ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
+        bool IsCenter => this.KeyboardViewModel.IsCenter;
+        bool IsSquare => this.KeyboardViewModel.IsSquare;
 
         //@Abstract
         /// <summary>
@@ -40,7 +44,7 @@ namespace Retouch_Photo2.Tools.Models
         public void Starting(Vector2 point) { }
         public void Started(Vector2 startingPoint, Vector2 point)
         {
-            if (this.TipViewModel.TransformerTool.Started(startingPoint, point)) return;//TransformerToolBase
+            if (this.TransformerTool.Started(startingPoint, point)) return;//TransformerToolBase
 
             //Transformer
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
@@ -48,8 +52,8 @@ namespace Retouch_Photo2.Tools.Models
             (
                  Vector2.Transform(startingPoint, inverseMatrix),
                  Vector2.Transform(point, inverseMatrix),
-                 this.KeyboardViewModel.IsCenter,
-                 this.KeyboardViewModel.IsRatio
+                 this.IsCenter,
+                 this.IsSquare
             );
 
             //Mezzanine
@@ -62,7 +66,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
-            if (this.TipViewModel.TransformerTool.Delta(startingPoint, point)) return;//TransformerToolBase
+            if (this.TransformerTool.Delta(startingPoint, point)) return;//TransformerToolBase
 
             //Transformer
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
@@ -70,8 +74,8 @@ namespace Retouch_Photo2.Tools.Models
             (
                  Vector2.Transform(startingPoint, inverseMatrix),
                  Vector2.Transform(point, inverseMatrix),
-                 this.KeyboardViewModel.IsCenter,
-                 this.KeyboardViewModel.IsRatio
+                 this.IsCenter,
+                 this.IsSquare
             );
 
             //Mezzanine
@@ -84,7 +88,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
-            if (this.TipViewModel.TransformerTool.Complete(startingPoint, point, isSingleStarted)) return;//TransformerToolBase
+            if (this.TransformerTool.Complete(startingPoint, point, isSingleStarted)) return;//TransformerToolBase
 
             if (isSingleStarted)
             {
@@ -93,8 +97,8 @@ namespace Retouch_Photo2.Tools.Models
                 (
                      Vector2.Transform(startingPoint, inverseMatrix),
                      Vector2.Transform(point, inverseMatrix),
-                     this.KeyboardViewModel.IsCenter,
-                     this.KeyboardViewModel.IsRatio
+                     this.IsCenter,
+                     this.IsSquare
                 );
 
                 //Selection
@@ -116,7 +120,7 @@ namespace Retouch_Photo2.Tools.Models
 
         public void Draw(CanvasDrawingSession drawingSession)
         {
-            this.TipViewModel.TransformerTool.Draw(drawingSession);//TransformerToolBase
+            this.TransformerTool.Draw(drawingSession);//TransformerToolBase
         }
 
 

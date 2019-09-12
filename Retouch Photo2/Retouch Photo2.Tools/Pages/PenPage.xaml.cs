@@ -1,9 +1,9 @@
 ﻿using FanKit.Transformers;
+using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Elements;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
-using Retouch_Photo2.ViewModels.Tips;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -17,8 +17,8 @@ namespace Retouch_Photo2.Tools.Pages
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
-        NodeCollection NodeCollection => this.SelectionViewModel.CurveLayer.NodeCollection;
+
+        CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
 
         //@Content
         /// <summary> PenPage's Flyout. </summary>
@@ -49,27 +49,27 @@ namespace Retouch_Photo2.Tools.Pages
 
             this.RemoveButton.Tapped += (s, e) =>
             {
-                if (this.SelectionViewModel.CurveLayer == null) return;
-                NodeCollection.RemoveCheckedNodes(this.NodeCollection);
+                if (this.CurveLayer == null) return;
+                NodeCollection.RemoveCheckedNodes(this.CurveLayer.NodeCollection);
                 this.ViewModel.Invalidate();//Invalidate
             };
             this.AddButton.Tapped += (s, e) =>
             {
-                if (this.SelectionViewModel.CurveLayer == null) return;
-                NodeCollection.Interpolation(this.NodeCollection);
+                if (this.CurveLayer == null) return;
+                NodeCollection.Interpolation(this.CurveLayer.NodeCollection);
                 this.ViewModel.Invalidate();//Invalidate
             };
 
             this.SharpButton.Tapped += (s, e) =>
             {
-                if (this.SelectionViewModel.CurveLayer == null) return;
-                NodeCollection.SharpCheckedNodes(this.NodeCollection);
+                if (this.CurveLayer == null) return;
+                NodeCollection.SharpCheckedNodes(this.CurveLayer.NodeCollection);
                 this.ViewModel.Invalidate();//Invalidate
             };
             this.SmoothButton.Tapped += (s, e) =>
             {
-                if (this.SelectionViewModel.CurveLayer == null) return;
-                NodeCollection.SmoothCheckedNodes(this.NodeCollection);
+                if (this.CurveLayer == null) return;
+                NodeCollection.SmoothCheckedNodes(this.CurveLayer.NodeCollection);
                 this.ViewModel.Invalidate();//Invalidate
             };
         }

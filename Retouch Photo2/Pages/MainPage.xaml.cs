@@ -25,7 +25,6 @@ namespace Retouch_Photo2.Pages
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
         
         ObservableCollection<Photo> PhotoFileList = new ObservableCollection<Photo>();
 

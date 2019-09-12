@@ -34,7 +34,7 @@ namespace Retouch_Photo2.Tools.Models
             Destination = transformer,
         };
 
-        public override bool IsOpen { set { } }
+        public override bool IsOpen { set { this._ellipsePage.IsOpen = value; } }
         public override ToolType Type => ToolType.Ellipse;
         public override FrameworkElement Icon { get; } = new EllipseControl();
         public override FrameworkElement ShowIcon { get; } = new EllipseControl();

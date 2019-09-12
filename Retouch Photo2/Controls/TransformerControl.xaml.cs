@@ -71,14 +71,13 @@ namespace Retouch_Photo2.Controls
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
+
+        Transformer SelectionTransformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
 
 
         Transformer oldTransformer;
         IndicatorMode IndicatorMode = IndicatorMode.LeftTop;
-
-
+        
         //RemoteOrIndicator
         private bool remoteOrIndicator;
         public bool RemoteOrIndicator
@@ -360,11 +359,11 @@ namespace Retouch_Photo2.Controls
             //Remote
             this.RemoteControl.Moved += (s, value) =>
             {
-                Transformer transformer = this.SelectionViewModel.Transformer;
+                Transformer transformer = this.SelectionTransformer;
                 Vector2 vector = value;
 
                 //Selection
-                this.SelectionViewModel.Transformer = transformer + vector;
+                this.SelectionTransformer = transformer + vector;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
@@ -376,7 +375,7 @@ namespace Retouch_Photo2.Controls
             this.RemoteControl.ValueChangeStarted += (s, value) =>
             {
                 //Selection
-                this.oldTransformer = this.SelectionViewModel.Transformer;
+                this.oldTransformer = this.SelectionTransformer;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
@@ -392,7 +391,7 @@ namespace Retouch_Photo2.Controls
                    new Vector2(0, value.Y);
 
                 //Selection
-                this.SelectionViewModel.Transformer = this.oldTransformer + vector;
+                this.SelectionTransformer = this.oldTransformer + vector;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.TransformAdd(vector);
@@ -428,7 +427,7 @@ namespace Retouch_Photo2.Controls
 
                 if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return;
 
-                Transformer transformer = this.SelectionViewModel.Transformer;
+                Transformer transformer = this.SelectionTransformer;
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
 
                 this.XPicker.Value = (int)vector.X;
@@ -445,7 +444,7 @@ namespace Retouch_Photo2.Controls
             this.WPicker.Maximum = int.MaxValue;
             this.WPicker.ValueChange += (sender, value) =>
             {
-                Transformer transformer = this.SelectionViewModel.Transformer;
+                Transformer transformer = this.SelectionTransformer;
                 Vector2 horizontal = transformer.Horizontal;
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
 
@@ -459,7 +458,7 @@ namespace Retouch_Photo2.Controls
                 Matrix3x2.CreateRotation(canvasStartingRadian, vector);
 
                 //Selection
-                this.SelectionViewModel.Transformer = transformer * matrix;
+                this.SelectionTransformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
@@ -474,7 +473,7 @@ namespace Retouch_Photo2.Controls
             this.HPicker.Maximum = int.MaxValue;
             this.HPicker.ValueChange += (s, value) =>
             {
-                Transformer transformer = this.SelectionViewModel.Transformer;
+                Transformer transformer = this.SelectionTransformer;
                 Vector2 vertical = transformer.Vertical;
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
 
@@ -488,7 +487,7 @@ namespace Retouch_Photo2.Controls
                 Matrix3x2.CreateRotation(canvasStartingRadian, vector);
 
                 //Selection
-                this.SelectionViewModel.Transformer = transformer * matrix;
+                this.SelectionTransformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
@@ -509,7 +508,7 @@ namespace Retouch_Photo2.Controls
             this.RPicker.Maximum = 180;
             this.RPicker.ValueChange += (s, value) =>
             {
-                Transformer transformer = this.SelectionViewModel.Transformer;
+                Transformer transformer = this.SelectionTransformer;
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
 
                 float canvasRadian = value / 180.0f * FanKit.Math.Pi;
@@ -519,7 +518,7 @@ namespace Retouch_Photo2.Controls
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(radian, vector);
 
                 //Selection
-                this.SelectionViewModel.Transformer = transformer * matrix;
+                this.SelectionTransformer = transformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
@@ -533,7 +532,7 @@ namespace Retouch_Photo2.Controls
             this.SPicker.Maximum = 90;
             this.SPicker.ValueChange += (s, value) =>
             {
-                Transformer transformer = this.SelectionViewModel.Transformer;
+                Transformer transformer = this.SelectionTransformer;
                 float horizontalHalf = Vector2.Distance(transformer.Center, transformer.CenterRight);
 
                 Vector2 footPoint = FanKit.Math.FootPoint(transformer.Center, transformer.LeftBottom, transformer.RightBottom);
@@ -580,7 +579,7 @@ namespace Retouch_Photo2.Controls
                 Transformer zeroTransformer = new Transformer(horizontalHalf * 2, verticalHalf * 2, postion);
 
                 //Selection
-                this.SelectionViewModel.Transformer = zeroTransformer * matrix;
+                this.SelectionTransformer = zeroTransformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.Destination = zeroTransformer * matrix;
@@ -600,12 +599,12 @@ namespace Retouch_Photo2.Controls
             this.XPicker.Maximum = int.MaxValue;
             this.XPicker.ValueChange += (s, value) =>
             {
-                Transformer transformer = this.SelectionViewModel.Transformer;
+                Transformer transformer = this.SelectionTransformer;
                 Vector2 indicator = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
                 Vector2 vector = new Vector2(value - indicator.X, 0);
 
                 //Selection
-                this.SelectionViewModel.Transformer = transformer + vector;
+                this.SelectionTransformer = transformer + vector;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
@@ -619,12 +618,12 @@ namespace Retouch_Photo2.Controls
             this.YPicker.Maximum = int.MaxValue;
             this.YPicker.ValueChange += (s, value) =>
             {
-                Transformer transformer = this.SelectionViewModel.Transformer;
+                Transformer transformer = this.SelectionTransformer;
                 Vector2 indicator = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
                 Vector2 vector = new Vector2(0, value - indicator.Y);
 
                 //Selection
-                this.SelectionViewModel.Transformer = transformer + vector;
+                this.SelectionTransformer = transformer + vector;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();

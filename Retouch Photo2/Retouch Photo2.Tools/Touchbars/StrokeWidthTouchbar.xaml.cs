@@ -11,7 +11,6 @@ namespace Retouch_Photo2.Tools.Touchbars
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         public TouchbarType Type => TouchbarType.StrokeWidth;

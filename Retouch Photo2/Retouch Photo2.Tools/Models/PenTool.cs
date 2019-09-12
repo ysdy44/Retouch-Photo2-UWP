@@ -1,6 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
+using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Controls;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
@@ -22,7 +23,9 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
-        NodeCollection NodeCollection => this.SelectionViewModel.CurveLayer.NodeCollection;
+
+        CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
+        NodeCollection NodeCollection => this.CurveLayer.NodeCollection;
 
         public bool IsOpen { set { this._penPage.IsOpen = value; } }
         public ToolType Type => ToolType.Pen;
@@ -46,7 +49,7 @@ namespace Retouch_Photo2.Tools.Models
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            if (this.SelectionViewModel.CurveLayer == null)
+            if (this.CurveLayer == null)
                 this.Mode = NodeCollectionMode.Preview;
             else if (this.SelectionViewModel.IsPenToolNodesMode == false)
                 this.Mode = NodeCollectionMode.Add;
@@ -71,7 +74,7 @@ namespace Retouch_Photo2.Tools.Models
                             IsSmooth = false,
                         };
                         this._addEndNode = node;
-                        this._addLastNode = this.SelectionViewModel.CurveLayer.NodeCollection.Last();
+                        this._addLastNode = this.CurveLayer.NodeCollection.Last();
                     }
                     break;
                 case NodeCollectionMode.Move:
@@ -101,7 +104,7 @@ namespace Retouch_Photo2.Tools.Models
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            if (this.SelectionViewModel.CurveLayer == null)
+            if (this.CurveLayer == null)
             {
                 if (this.Mode == NodeCollectionMode.Preview)
                 {
@@ -162,7 +165,7 @@ namespace Retouch_Photo2.Tools.Models
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            if (this.SelectionViewModel.CurveLayer == null)
+            if (this.CurveLayer == null)
             {
                 if (this.Mode == NodeCollectionMode.Preview)
                 {
@@ -171,7 +174,7 @@ namespace Retouch_Photo2.Tools.Models
             }
             else
             {
-                if (this.Mode == NodeCollectionMode.Add && this.SelectionViewModel.CurveLayer != null)
+                if (this.Mode == NodeCollectionMode.Add && this.CurveLayer != null)
                 {
                     Node node = new Node
                     {
@@ -208,7 +211,7 @@ namespace Retouch_Photo2.Tools.Models
                     }
                 }
 
-                this.SelectionViewModel.CurveLayer.CorrectionTransformer();
+                this.CurveLayer.CorrectionTransformer();
                 this.Mode = NodeCollectionMode.None;
             }
             
@@ -217,7 +220,7 @@ namespace Retouch_Photo2.Tools.Models
 
         public void Draw(CanvasDrawingSession drawingSession)
         {
-            if (this.SelectionViewModel.CurveLayer == null)
+            if (this.CurveLayer == null)
             {
                 if (this.Mode == NodeCollectionMode.Preview)
                 {
@@ -255,10 +258,10 @@ namespace Retouch_Photo2.Tools.Models
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
-            if (this.SelectionViewModel.CurveLayer == null) return;
+            if (this.CurveLayer == null) return;
 
             //The PenTool may change the current CurveLayer's transformer.
-            this.SelectionViewModel.Transformer = this.SelectionViewModel.CurveLayer.Destination;
+            this.SelectionViewModel.Transformer = this.CurveLayer.Destination;
         }
     }
 }

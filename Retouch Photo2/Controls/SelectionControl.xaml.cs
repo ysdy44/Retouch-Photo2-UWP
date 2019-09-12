@@ -18,7 +18,6 @@ namespace Retouch_Photo2.Controls
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
 
 
         /// <summary> The single copyed layer. </summary>
@@ -90,7 +89,7 @@ namespace Retouch_Photo2.Controls
             #region Edit
 
 
-            this.CutButton.RootButton.Tapped += (s, e) =>
+            this.CutButton.Tapped += (s, e) =>
             {
                 //Selection
                 switch (this.SelectionViewModel.Mode)
@@ -128,7 +127,7 @@ namespace Retouch_Photo2.Controls
                 this.SelectionViewModel.SetModeNone();//Selection
                 this.ViewModel.Invalidate();//Invalidate
             };
-            this.CopyButton.RootButton.Tapped += (s, e) =>
+            this.CopyButton.Tapped += (s, e) =>
             {
                 //Selection
                 switch (this.SelectionViewModel.Mode)
@@ -161,7 +160,7 @@ namespace Retouch_Photo2.Controls
 
                 this.PasteButton.IsEnabled = (this.Layer != null || this.Layers != null);//PasteButton
             };
-            this.PasteButton.RootButton.Tapped += (s, e) =>
+            this.PasteButton.Tapped += (s, e) =>
             {
                 int index = this.MezzanineViewModel.GetfFrstIndex(this.ViewModel.Layers);
                 
@@ -190,7 +189,7 @@ namespace Retouch_Photo2.Controls
 
                 this.ViewModel.Invalidate();//Invalidate
             };
-            this.RemoveButton.RootButton.Tapped += (s, e) =>
+            this.RemoveButton.Tapped += (s, e) =>
             {
                 this.ViewModel.RemoveLayers();//Remove
 
@@ -206,7 +205,7 @@ namespace Retouch_Photo2.Controls
             #region Select
 
 
-            this.AllButton.RootButton.Tapped += (s, e) =>
+            this.AllButton.Tapped += (s, e) =>
             {
                 int count = this.ViewModel.Layers.Count;
                 if (count == 0) return;
@@ -220,7 +219,7 @@ namespace Retouch_Photo2.Controls
                 this.SelectionViewModel.SetModeMultiple(this.ViewModel.Layers);//Selection
                 this.ViewModel.Invalidate();//Invalidate
             };
-            this.DeselectButton.RootButton.Tapped += (s, e) =>
+            this.DeselectButton.Tapped += (s, e) =>
             {
                 int count = this.ViewModel.Layers.Count;
                 if (count == 0) return;
@@ -236,7 +235,7 @@ namespace Retouch_Photo2.Controls
             };
 
 
-            this.InvertButton.RootButton.Tapped += (s, e) =>
+            this.InvertButton.Tapped += (s, e) =>
             {
                 int count = this.ViewModel.Layers.Count;
                 if (count == 0) return;

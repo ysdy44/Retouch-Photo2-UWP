@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:selections="using:Retouch_Photo2.Selections"
+    xmlns:selectionsButtons="using:Retouch_Photo2.Selections.Buttons"
     xmlns:selectionsEdi2="using:Retouch_Photo2.Selections.Edit2Controls"
     xmlns:selectionsEdi="using:Retouch_Photo2.Selections.EditControls"
     xmlns:selectionsSel2="using:Retouch_Photo2.Selections.Select2Controls"
@@ -24,61 +24,61 @@
         <!--Edit-->
         <StackPanel Grid.Column="0">
 
-            <selections:Button x:Name="CutButton" Label="Cut">
-                <selections:Button.EnabledIcon>
+            <selectionsButtons:Button x:Name="CutButton" Label="Cut">
+                <selectionsButtons:Button.EnabledIcon>
                     <selectionsEdi:CutEnabledControl/>
-                </selections:Button.EnabledIcon>
-                <selections:Button.DisabledIcon>
+                </selectionsButtons:Button.EnabledIcon>
+                <selectionsButtons:Button.DisabledIcon>
                     <selectionsEdi:CutDisabledControl/>
-                </selections:Button.DisabledIcon>
-            </selections:Button>
+                </selectionsButtons:Button.DisabledIcon>
+            </selectionsButtons:Button>
 
-            <selections:Button x:Name="CopyButton" Label="Copy">
-                <selections:Button.EnabledIcon>
+            <selectionsButtons:Button x:Name="CopyButton" Label="Copy">
+                <selectionsButtons:Button.EnabledIcon>
                     <selectionsEdi:CopyEnabledControl/>
-                </selections:Button.EnabledIcon>
-                <selections:Button.DisabledIcon>
+                </selectionsButtons:Button.EnabledIcon>
+                <selectionsButtons:Button.DisabledIcon>
                     <selectionsEdi:CopyDisabledControl/>
-                </selections:Button.DisabledIcon>
-            </selections:Button>
+                </selectionsButtons:Button.DisabledIcon>
+            </selectionsButtons:Button>
 
-            <selections:Button x:Name="PasteButton" Label="Paste">
-                <selections:Button.EnabledIcon>
+            <selectionsButtons:Button x:Name="PasteButton" Label="Paste">
+                <selectionsButtons:Button.EnabledIcon>
                     <selectionsEdi:PasteEnabledControl/>
-                </selections:Button.EnabledIcon>
-                <selections:Button.DisabledIcon>
+                </selectionsButtons:Button.EnabledIcon>
+                <selectionsButtons:Button.DisabledIcon>
                     <selectionsEdi:PasteDisabledControl/>
-                </selections:Button.DisabledIcon>
-            </selections:Button>
+                </selectionsButtons:Button.DisabledIcon>
+            </selectionsButtons:Button>
 
-            <selections:Button x:Name="RemoveButton" Label="Clear">
-                <selections:Button.EnabledIcon>
+            <selectionsButtons:Button x:Name="RemoveButton" Label="Clear">
+                <selectionsButtons:Button.EnabledIcon>
                     <selectionsEdi:ClearEnabledControl/>
-                </selections:Button.EnabledIcon>
-                <selections:Button.DisabledIcon>
+                </selectionsButtons:Button.EnabledIcon>
+                <selectionsButtons:Button.DisabledIcon>
                     <selectionsEdi:ClearDisabledControl/>
-                </selections:Button.DisabledIcon>
-            </selections:Button>
+                </selectionsButtons:Button.DisabledIcon>
+            </selectionsButtons:Button>
 
             <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
 
-            <selections:Button x:Name="ExtractButton" Label="Extract">
-                <selections:Button.EnabledIcon>
+            <selectionsButtons:Button x:Name="ExtractButton" Label="Extract">
+                <selectionsButtons:Button.EnabledIcon>
                     <selectionsEdi2:ExtractEnabledControl/>
-                </selections:Button.EnabledIcon>
-                <selections:Button.DisabledIcon>
+                </selectionsButtons:Button.EnabledIcon>
+                <selectionsButtons:Button.DisabledIcon>
                     <selectionsEdi2:ExtractDisabledControl/>
-                </selections:Button.DisabledIcon>
-            </selections:Button>
+                </selectionsButtons:Button.DisabledIcon>
+            </selectionsButtons:Button>
 
-            <selections:Button x:Name="MergeButton" Label="Merge">
-                <selections:Button.EnabledIcon>
+            <selectionsButtons:Button x:Name="MergeButton" Label="Merge">
+                <selectionsButtons:Button.EnabledIcon>
                     <selectionsEdi2:MergeEnabledControl/>
-                </selections:Button.EnabledIcon>
-                <selections:Button.DisabledIcon>
+                </selectionsButtons:Button.EnabledIcon>
+                <selectionsButtons:Button.DisabledIcon>
                     <selectionsEdi2:MergeDisabledControl/>
-                </selections:Button.DisabledIcon>
-            </selections:Button>
+                </selectionsButtons:Button.DisabledIcon>
+            </selectionsButtons:Button>
 
         </StackPanel>
 
@@ -87,61 +87,61 @@
         <!--Select-->
         <StackPanel Grid.Column="2">
 
-            <selections:Button x:Name="AllButton" Label="All">
-                <selections:Button.EnabledIcon>
+            <selectionsButtons:Button x:Name="AllButton" Label="All">
+                <selectionsButtons:Button.EnabledIcon>
                     <selectionsSel:AllEnabledControl VerticalAlignment="Center" VerticalContentAlignment="Center"/>
-                </selections:Button.EnabledIcon>
-                <selections:Button.DisabledIcon>
+                </selectionsButtons:Button.EnabledIcon>
+                <selectionsButtons:Button.DisabledIcon>
                     <selectionsSel:AllDisabledControl/>
-                </selections:Button.DisabledIcon>
-            </selections:Button>
+                </selectionsButtons:Button.DisabledIcon>
+            </selectionsButtons:Button>
 
-            <selections:Button x:Name="DeselectButton" Label="Deselect">
-                <selections:Button.EnabledIcon>
+            <selectionsButtons:Button x:Name="DeselectButton" Label="Deselect">
+                <selectionsButtons:Button.EnabledIcon>
                     <selectionsSel:DeselectEnabledControl/>
-                </selections:Button.EnabledIcon>
-                <selections:Button.DisabledIcon>
+                </selectionsButtons:Button.EnabledIcon>
+                <selectionsButtons:Button.DisabledIcon>
                     <selectionsSel:DeselectDisabledControl/>
-                </selections:Button.DisabledIcon>
-            </selections:Button>
+                </selectionsButtons:Button.DisabledIcon>
+            </selectionsButtons:Button>
 
-            <selections:Button x:Name="PixelButton" Label="Pixel">
-                <selections:Button.EnabledIcon>
+            <selectionsButtons:Button x:Name="PixelButton" Label="Pixel">
+                <selectionsButtons:Button.EnabledIcon>
                     <selectionsSel:PixelEnabledControl/>
-                </selections:Button.EnabledIcon>
-                <selections:Button.DisabledIcon>
+                </selectionsButtons:Button.EnabledIcon>
+                <selectionsButtons:Button.DisabledIcon>
                     <selectionsSel:PixelDisabledControl/>
-                </selections:Button.DisabledIcon>
-            </selections:Button>
+                </selectionsButtons:Button.DisabledIcon>
+            </selectionsButtons:Button>
 
-            <selections:Button x:Name="InvertButton" Label="Invert">
-                <selections:Button.EnabledIcon>
+            <selectionsButtons:Button x:Name="InvertButton" Label="Invert">
+                <selectionsButtons:Button.EnabledIcon>
                     <selectionsSel:InvertEnabledControl/>
-                </selections:Button.EnabledIcon>
-                <selections:Button.DisabledIcon>
+                </selectionsButtons:Button.EnabledIcon>
+                <selectionsButtons:Button.DisabledIcon>
                     <selectionsSel:InvertDisabledControl/>
-                </selections:Button.DisabledIcon>
-            </selections:Button>
+                </selectionsButtons:Button.DisabledIcon>
+            </selectionsButtons:Button>
 
             <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
 
-            <selections:Button x:Name="FeatherButton" Label="Feather">
-                <selections:Button.EnabledIcon>
+            <selectionsButtons:Button x:Name="FeatherButton" Label="Feather">
+                <selectionsButtons:Button.EnabledIcon>
                     <selectionsSel2:FeatherEnabledControl/>
-                </selections:Button.EnabledIcon>
-                <selections:Button.DisabledIcon>
+                </selectionsButtons:Button.EnabledIcon>
+                <selectionsButtons:Button.DisabledIcon>
                     <selectionsSel2:FeatherDisabledControl/>
-                </selections:Button.DisabledIcon>
-            </selections:Button>
+                </selectionsButtons:Button.DisabledIcon>
+            </selectionsButtons:Button>
 
-            <selections:Button x:Name="TransformButton" Label="Transform">
-                <selections:Button.EnabledIcon>
+            <selectionsButtons:Button x:Name="TransformButton" Label="Transform">
+                <selectionsButtons:Button.EnabledIcon>
                     <selectionsSel2:TransformEnabledControl/>
-                </selections:Button.EnabledIcon>
-                <selections:Button.DisabledIcon>
+                </selectionsButtons:Button.EnabledIcon>
+                <selectionsButtons:Button.DisabledIcon>
                     <selectionsSel2:TransformDisabledControl/>
-                </selections:Button.DisabledIcon>
-            </selections:Button>
+                </selectionsButtons:Button.DisabledIcon>
+            </selectionsButtons:Button>
 
         </StackPanel>
 

@@ -6,12 +6,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"    
     d:DesignHeight="50"
-    d:DesignWidth="50">
+    d:DesignWidth="50"
+    >
 
-    <Path
-        StrokeThickness="1"
-        Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}"
-        Fill="#439EFB"        
-        Data="M17.773,0c1.1,0 1.994,0.894 1.994,1.994l0,15.319c0,1.101 -0.894,1.994 -1.994,1.994l-15.779,0c-1.1,0 -1.994,-0.893 -1.994,-1.994l0,-15.319c0,-1.1 0.894,-1.994 1.994,-1.994l15.779,0Z"/>
+    <Path StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="#439EFB">
+        <Path.Data>
+            M17.773,0c1.1,0 1.994,0.894 1.994,1.994l0,15.319c0,1.101 -0.894,1.994 -1.994,1.994l-15.779,0c-1.1,0 -1.994,-0.893 -1.994,-1.994l0,-15.319c0,-1.1 0.894,-1.994 1.994,-1.994l15.779,0Z
+        </Path.Data>
+    </Path>
 
 </UserControl>

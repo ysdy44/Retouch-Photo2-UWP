@@ -38,7 +38,7 @@ namespace Retouch_Photo2.Tools.Models
             };
         }
 
-        public override bool IsOpen { set { } }
+        public override bool IsOpen { set { this._rectanglePage.IsOpen = value; } }
         public override ToolType Type => ToolType.Rectangle;
         public override FrameworkElement Icon { get; } = new RectangleControl();
         public override FrameworkElement ShowIcon { get; } = new RectangleControl();
