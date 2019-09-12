@@ -5,12 +5,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="40"
-    d:DesignWidth="40">
+    d:DesignHeight="50"
+    d:DesignWidth="50"
+    >
 
     <Canvas Width="40" Height="40" >
         <Rectangle Canvas.Left="10" Canvas.Top="10" Width="20" Height="20" Fill="Gray" Opacity="0.5"/>
         <Polygon Points="35,5 35,17 31,17 31,9 23,9 23,5" Fill="Gray" Opacity="0.5"/>
         <Polygon Points="9,31 17,31 17,35 5,35 5,23 9,23" Fill="Gray" Opacity="0.5"/>
     </Canvas>
+    
 </UserControl>

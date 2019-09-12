@@ -6,10 +6,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="50"
-    d:DesignWidth="50">
+    d:DesignWidth="50"
+    >
     
     <Canvas Width="40" Height="40" >
         <Polygon Points="6,4 19,18 32,4" Fill="DodgerBlue"/>
         <Polygon Points="6,36 19,22 32,36" Fill="Gray"/>
     </Canvas>
+    
 </UserControl>

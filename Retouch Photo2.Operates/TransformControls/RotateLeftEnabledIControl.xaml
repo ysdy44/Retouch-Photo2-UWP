@@ -5,8 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="40"
-    d:DesignWidth="40"
+    d:DesignHeight="50"
+    d:DesignWidth="50"
     >
     
         <FontIcon Glyph="&#xE149;" FontFamily="Segoe UI Symbol" Foreground="Gray" RenderTransformOrigin="0.5,0.5">
