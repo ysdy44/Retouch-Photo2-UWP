@@ -60,16 +60,16 @@ namespace Retouch_Photo2.Controls
             this.Construct(this.AcrylicButton, this.TipViewModel.AcrylicTool);
         }
 
-        private void Construct(Tools.Buttons.Button button, ITool tool)
+        private void Construct(ToolButton toolButton, ITool tool)
         {
             ToolType type = tool.Type;
 
             //Content
-            button.Type = type;
-            button.CenterContent = tool.Icon;
+            toolButton.Type = type;
+            toolButton.CenterContent = tool.Icon;
 
             //ItemClick
-            button.Tapped += (s, e) =>
+            toolButton.Tapped += (s, e) =>
             {
                 this.ToolType = type;
                 this.TipViewModel.Tool = tool;

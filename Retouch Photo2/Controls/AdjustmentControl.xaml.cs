@@ -11,28 +11,10 @@ using Windows.UI.Xaml.Input;
 namespace Retouch_Photo2.Controls
 {
     /// <summary> 
-    /// State of <see cref="AdjustmentControl"/>. 
-    /// </summary>
-    public enum AdjustmentControlState
-    {
-        /// <summary> Normal. </summary>
-        None,
-        /// <summary> Control is not available. </summary>
-        Disable,
-        /// <summary> Control no adjustment. </summary>
-        Null,
-        /// <summary> There are adjustments.. </summary>
-        Adjustments,
-        /// <summary> Editing adjustments. </summary>
-        Edit
-    }
-
-    /// <summary> 
     /// Retouch_Photo2's the only <see cref = "AdjustmentControl" />. 
     /// </summary>
     public sealed partial class AdjustmentControl : UserControl
     {
-
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;

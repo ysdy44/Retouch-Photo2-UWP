@@ -10,7 +10,7 @@
     <StackPanel >
         
         <TextBlock Text="BlurAmount" Style="{StaticResource AppTextBlock}"/>
-        <Slider x:Name="_BlurAmountSlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
+        <Slider x:Name="BlurAmountSlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
   
     </StackPanel>    
 </Page>

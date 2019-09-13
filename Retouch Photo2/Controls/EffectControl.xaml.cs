@@ -5,7 +5,6 @@ using Retouch_Photo2.ViewModels.Keyboards;
 using Retouch_Photo2.ViewModels.Selections;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -23,22 +22,28 @@ namespace Retouch_Photo2.Controls
 
 
         /// <summary> State of <see cref="EffectControl"/>. </summary>
-        public EffectsState State
+        public EffectControlState State
         {
-            get => this.state;
             set
             {
-                this.ItemsControl.Visibility = (value == EffectsState.Edit) ? Visibility.Collapsed : Visibility.Visible;
+                if (value == EffectControlState.Edit)
+                {
+                    this.StackPanel.Visibility = Visibility.Collapsed;
 
-                this.BackButton.Visibility =
-                this.ResetButton.Visibility =
-                this.Frame.Visibility =
-                    (value == EffectsState.Edit) ? Visibility.Visible : Visibility.Collapsed;
+                    this.BackButton.Visibility = Visibility.Visible;
+                    this.ResetButton.Visibility = Visibility.Visible;
+                    this.Frame.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    this.StackPanel.Visibility = Visibility.Visible;
 
-                this.state = value;
+                    this.BackButton.Visibility = Visibility.Collapsed;
+                    this.ResetButton.Visibility = Visibility.Collapsed;
+                    this.Frame.Visibility = Visibility.Collapsed;
+                }
             }
         }
-        private EffectsState state;
 
 
         IEffect Effect;
@@ -71,22 +76,26 @@ namespace Retouch_Photo2.Controls
 
             if (e.NewValue is EffectManager value)
             {
-                foreach (var effect in con.Effects)
+                foreach (IEffect effect in con.Effects)
                 {
-                    bool isOn = effect.GetIsOn(value);
-                    effect.Button.IsOn = isOn;
+                    //IsEnabled
+                    effect.Button.ToggleSwitch.IsEnabled = true;
+
+                    //IsOn
+                    effect.Button.FollowEffectManager(value);
                 }
 
-                con.State = EffectsState.Effects;//State
+                con.State = EffectControlState.Effects;//State
             }
             else
             {
-                foreach (var effect in con.Effects)
+                foreach (IEffect effect in con.Effects)
                 {
-                    effect.Button.IsOn = null;
+                    //IsEnabled
+                    effect.Button.ToggleSwitch.IsEnabled = false;
                 }
 
-                con.State = EffectsState.Disable;//State
+                con.State = EffectControlState.Disable;//State
             }
         }));
 
@@ -97,13 +106,18 @@ namespace Retouch_Photo2.Controls
         public EffectControl()
         {
             this.InitializeComponent();
-            this.State = EffectsState.Disable;
-            this.ItemsControl.ItemsSource = from item in this.Effects select item.Button;
+            this.State = EffectControlState.Disable;
 
             foreach (IEffect effect in this.Effects)
             {
-                //Binding
-                this.Binding(effect);
+                UIElement button = effect.Button.Self;
+                this.StackPanel.Children.Add(button);
+
+                //Switch
+                effect.Button.ToggleSwitch.Toggled += (s, e) => this.Overwriting(effect);
+
+                //Navigate
+                effect.Button.Self.Tapped += (s, e) => this.Navigate(effect);
             }
 
             //Effect
@@ -118,65 +132,68 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-
             //Button
+            this.ResetButton.Tapped += (s, e) => this.Reset(this.Effect);
             this.BackButton.Tapped += (s, e) =>
             {
                 this.Effect = null;
                 this.Frame.Child = null;
-                this.State = EffectsState.Effects;
-            };
-            this.ResetButton.Tapped += (s, e) =>
-            {
-                if (this.Effect == null) return;
-                //Selection
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    EffectManager effectManager = layer.EffectManager;
-                    this.Effect.Reset(effectManager);
-                    this.Effect.SetPageValueByEffectManager(effectManager);
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.State = EffectControlState.Effects;
             };
         }
 
 
-        /// <summary>
-        /// Bind the events of the buttons in each effect.
-        /// </summary>
-        /// <param name="effect"> Effect </param>
-        private void Binding(IEffect effect)
+        public void Reset(IEffect effect)
         {
-            //ToggleSwitch
-            effect.Button.ToggleSwitch.Toggled += (s, e) =>
+            if (effect == null) return;
+
+            //Selection
+            this.SelectionViewModel.SetValue((layer) =>
             {
-                bool isOn = effect.Button.ToggleSwitch.IsOn;
-                effect.Button.IsOn = isOn; 
-                
-                //Selection
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    effect.SetIsOn(layer.EffectManager, isOn);
-                });
+                IEffectPage page = effect.Page;
+                page.Reset();
 
-                this.ViewModel.Invalidate();//Invalidate
-            };
+                EffectManager effectManager = layer.EffectManager;
+                page.ResetEffectManager(effectManager);
+            });
 
-            //RootButton
-            effect.Button.RootButton.Tapped += (s, e) =>
+            this.ViewModel.Invalidate();//Invalidate
+        }
+
+        public void Overwriting(IEffect effect)
+        {
+            if (effect == null) return;
+            if (effect.Button.ToggleSwitch.IsEnabled == false) return;
+
+            //Selection
+            this.SelectionViewModel.SetValue((layer) =>
             {
-                this.Effect = effect;
-                this.Frame.Child = effect.Page;
+                EffectManager effectManager = layer.EffectManager;
+                effect.Button.OverwritingEffectManager(effectManager);
+            });
+            this.ViewModel.Invalidate();//Invalidate
+        }
 
-                //Selection
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    effect.SetPageValueByEffectManager(layer.EffectManager);
-                });
+        public void Navigate(IEffect effect)
+        {
+            if (effect == null) return;
+            if (effect.Button.ToggleSwitch.IsEnabled == false) return;
+            if (effect.Button.ToggleSwitch.IsOn == false) return;
 
-                this.State = EffectsState.Edit;
-            };
+
+            this.Effect = effect;
+
+            IEffectPage page = effect.Page;
+            this.Frame.Child = page.Self;
+
+            //Selection
+            this.SelectionViewModel.SetValue((layer) =>
+            {
+                EffectManager effectManager = layer.EffectManager;
+                effect.Page.FollowEffectManager(effectManager);
+            });
+
+            this.State = EffectControlState.Edit;
         }
 
     }

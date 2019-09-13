@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:tools="using:Retouch_Photo2.Tools"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -31,7 +31,7 @@
 
         <!--Radian-->
         <TextBlock Text="Radian:" Style="{StaticResource AppTextBlock}"/>
-        <elements:TouchbarButton x:Name="RadianTouchbarButton"
+        <tools:TouchbarButton x:Name="RadianTouchbarButton"
                       IsChecked="{x:Bind ViewRadianTypeConverter(TipViewModel.TouchbarType),Mode=OneWay}"
                       Number="{x:Bind RadianNumberConverter(ViewModel.CanvasTransformerRadian),Mode=OneWay}"
                       />
@@ -52,7 +52,7 @@
 
         <!--Scale-->
         <TextBlock Text="Scale:" Style="{StaticResource AppTextBlock}"/>
-        <elements:TouchbarButton x:Name="ScaleTouchbarButton"
+        <tools:TouchbarButton x:Name="ScaleTouchbarButton"
                       IsChecked="{x:Bind ViewScaleTypeConverter(TipViewModel.TouchbarType),Mode=OneWay}"
                          Number="{x:Bind ScaleNumberConverter(ViewModel.CanvasTransformerScale),Mode=OneWay}"
                         />

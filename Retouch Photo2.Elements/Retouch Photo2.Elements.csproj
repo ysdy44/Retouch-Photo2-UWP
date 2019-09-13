@@ -158,9 +158,6 @@
     <Compile Include="LabelControl.xaml.cs">
       <DependentUpon>LabelControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NumberControl.xaml.cs">
-      <DependentUpon>NumberControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RadiansPicker.xaml.cs">
       <DependentUpon>RadiansPicker.xaml</DependentUpon>
@@ -173,12 +170,6 @@
     </Compile>
     <Compile Include="RepeatControl.xaml.cs">
       <DependentUpon>RepeatControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TouchbarButton.xaml.cs">
-      <DependentUpon>TouchbarButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TouchbarSlider.xaml.cs">
-      <DependentUpon>TouchbarSlider.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Retouch_Photo.Elements.rd.xml" />
   </ItemGroup>
@@ -267,10 +258,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NumberControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="RadiansPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -284,14 +271,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RepeatControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TouchbarButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TouchbarSlider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

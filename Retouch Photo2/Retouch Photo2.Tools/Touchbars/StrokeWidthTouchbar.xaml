@@ -4,13 +4,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:tools="using:Retouch_Photo2.Tools"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="200"
     >
 
-    <elements:TouchbarSlider x:Name="TouchbarSlider" 
+    <tools:TouchbarSlider x:Name="TouchbarSlider" 
                              Number="{x:Bind NumberConverter(SelectionViewModel.StrokeWidth), Mode=OneWay}"
                              Value="{x:Bind ValueConverter(SelectionViewModel.StrokeWidth), Mode=OneWay}"
                              />

@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Menus.Buttons
                 }
             }
         }
-        public FrameworkElement Self { get; } = new Button
+        public FrameworkElement Self{ get; } = new Button
         {
             Height = 50,
             BorderThickness = new Thickness(0),

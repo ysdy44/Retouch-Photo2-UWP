@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Tools.Elements
             this.InitializeComponent();
 
             this.TouchbarButton.Unit = "%";
-            this.TouchbarButton.Switch += (s, isChecked) =>
+            this.TouchbarButton.Toggled += (s, isChecked) =>
             {
                 if (isChecked)
                     this.TipViewModel.SetTouchbar(TouchbarType.None);//Touchbar

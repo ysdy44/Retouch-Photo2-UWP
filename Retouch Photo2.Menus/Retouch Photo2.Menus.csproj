@@ -106,20 +106,20 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MenuButtons\Button.xaml.cs">
-      <DependentUpon>Button.xaml</DependentUpon>
+    <Compile Include="MenuButtons\MenuButton.xaml.cs">
+      <DependentUpon>MenuButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MenuButtons\ButtonState.cs" />
-    <Compile Include="MenuButtons\ButtonStateManager.cs" />
+    <Compile Include="MenuButtons\MenuButtonState.cs" />
+    <Compile Include="MenuButtons\MenuButtonStateManager.cs" />
     <Compile Include="IMenu.cs" />
-    <Compile Include="IMenuButton.cs" />
-    <Compile Include="IMenuLayout.cs" />
+    <Compile Include="MenuButtons\IMenuButton.cs" />
+    <Compile Include="MenuLayouts\IMenuLayout.cs" />
     <Compile Include="MenuBase.cs" />
-    <Compile Include="MenuButtonType.cs" />
-    <Compile Include="MenuLayout.xaml.cs">
+    <Compile Include="MenuButtons\MenuButtonType.cs" />
+    <Compile Include="MenuLayouts\MenuLayout.xaml.cs">
       <DependentUpon>MenuLayout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MenuSize.cs" />
+    <Compile Include="MenuLayouts\MenuLayoutSize.cs" />
     <Compile Include="MenuState.cs" />
     <Compile Include="MenuType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -131,11 +131,11 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="MenuButtons\Button.xaml">
+    <Page Include="MenuButtons\MenuButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MenuLayout.xaml">
+    <Page Include="MenuLayouts\MenuLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

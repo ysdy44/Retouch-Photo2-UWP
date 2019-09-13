@@ -1,9 +1,7 @@
 ﻿using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
-using Retouch_Photo2.ViewModels.Tips;
 using System.Collections.Generic;
-using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

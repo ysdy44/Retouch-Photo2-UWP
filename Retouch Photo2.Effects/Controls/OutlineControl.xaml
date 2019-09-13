@@ -6,18 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
    d:DesignHeight="50"
-   d:DesignWidth="200">
-
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="40"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-
-        
-        <TextBlock Text="Outline" Grid.Column="1" VerticalAlignment="Center" FontFamily="{ThemeResource ContentControlThemeFontFamily}"/>
-
-    </Grid>
-
+   d:DesignWidth="50"
+    >
+ 
 </UserControl>

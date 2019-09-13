@@ -18,13 +18,13 @@
     <StackPanel >
         
         <TextBlock Text="Radius" Style="{StaticResource AppTextBlock}"/>
-        <Slider x:Name="_RadiusSlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
+        <Slider x:Name="RadiusSlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
 
         <TextBlock Text="Opacity" Style="{StaticResource AppTextBlock}"/>
-        <Slider x:Name="_OpacitySlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
+        <Slider x:Name="OpacitySlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
 
         <TextBlock Text="Offset" Style="{StaticResource AppTextBlock}"/>
-        <Slider x:Name="_OffsetSlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
+        <Slider x:Name="OffsetSlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -37,7 +37,7 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Column="0" Grid.Row="0" Text="Angle" Style="{StaticResource AppTextBlock}"/>
-            <element:RadiansPicker x:Name="_AnglePicker" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"
+            <element:RadiansPicker x:Name="AnglePicker" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"
                                BorderBrush="{ThemeResource AppBorderBrush}"
                                Background="{ThemeResource AppForeground}"
                                />
@@ -45,7 +45,7 @@
             <TextBlock Grid.Column="1" Grid.Row="0" Text="Color" Style="{StaticResource AppTextBlock}"/>
             <Border x:Name="ColorButton" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource AppCircleBorderStyle}">
                 <Border.Background>
-                    <SolidColorBrush x:Name="_SolidColorBrush"/>
+                    <SolidColorBrush x:Name="SolidColorBrush"/>
                 </Border.Background>
             </Border>
             

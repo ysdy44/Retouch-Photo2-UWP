@@ -11,10 +11,10 @@
     <StackPanel >
         
         <TextBlock Text="Amount" Style="{StaticResource AppTextBlock}"/>
-        <Slider x:Name="_AmountSlider" Minimum="0" Maximum="10" Style="{ThemeResource AppOpacitySliderStyle}"/>
+        <Slider x:Name="AmountSlider" Minimum="0" Maximum="10" Style="{ThemeResource AppOpacitySliderStyle}"/>
 
         <TextBlock Text="Angle" Style="{StaticResource AppTextBlock}"/>
-        <element:RadiansPicker x:Name="_AnglePicker" HorizontalAlignment="Left" VerticalAlignment="Top"
+        <element:RadiansPicker x:Name="AnglePicker" HorizontalAlignment="Left" VerticalAlignment="Top"
                                BorderBrush="{ThemeResource AppBorderBrush}"
                                Background="{ThemeResource AppForeground}"
                                />

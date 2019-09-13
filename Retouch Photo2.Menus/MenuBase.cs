@@ -62,7 +62,7 @@ namespace Retouch_Photo2.Menus
         };
         
 
-        readonly MenuSize _size = new MenuSize();
+        readonly MenuLayoutSize _size = new MenuLayoutSize();
 
 
         /// <summary> ToolTip IsOpen. </summary>
@@ -173,8 +173,8 @@ namespace Retouch_Photo2.Menus
                 else if (this.State == MenuState.OverlayNotExpanded) this.State = MenuState.OverlayExpanded;
                 else
                 {
-                    Vector2 postion = MenuSize.GetElementVisualPostion(this.Layout.TitlePanel);
-                    MenuSize.SetElementCanvasPostion(this.Overlay, postion, this._size.Size);
+                    Vector2 postion = MenuLayoutSize.GetElementVisualPostion(this.Layout.TitlePanel);
+                    MenuLayoutSize.SetElementCanvasPostion(this.Overlay, postion, this._size.Size);
 
                     this.State = MenuState.OverlayExpanded;
                 }
@@ -184,14 +184,14 @@ namespace Retouch_Photo2.Menus
             this.Layout.TitlePanel.ManipulationMode = ManipulationModes.All;
             this.Layout.TitlePanel.ManipulationStarted += (s, e) =>
             {
-                this._size.Postion = MenuSize.GetElementVisualPostion(this.Overlay);
+                this._size.Postion = MenuLayoutSize.GetElementVisualPostion(this.Overlay);
                 this.Move?.Invoke(this, this.Overlay); //Delegate
             };
             this.Layout.TitlePanel.ManipulationDelta += (s, e) =>
             {
                 if (this.State == MenuState.FlyoutShow) return;
                 this._size.Postion += e.Delta.Translation.ToVector2();
-                MenuSize.SetElementCanvasPostion(this.Overlay, this._size.Postion, this._size.Size);
+                MenuLayoutSize.SetElementCanvasPostion(this.Overlay, this._size.Postion, this._size.Size);
             };
         }
 

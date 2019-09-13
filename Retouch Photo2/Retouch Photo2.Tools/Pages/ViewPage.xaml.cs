@@ -76,7 +76,7 @@ namespace Retouch_Photo2.Tools.Pages
 
             //Radian
             this.RadianTouchbarButton.Unit = "º";
-            this.RadianTouchbarButton.Switch += (s, isChecked) =>
+            this.RadianTouchbarButton.Toggled += (s, isChecked) =>
             {
                 if (isChecked)
                     this.TipViewModel.SetTouchbar(TouchbarType.None);//Touchbar
@@ -91,7 +91,7 @@ namespace Retouch_Photo2.Tools.Pages
 
             //Scale
             this.ScaleTouchbarButton.Unit = "%";
-            this.ScaleTouchbarButton.Switch += (s, isChecked) =>
+            this.ScaleTouchbarButton.Toggled += (s, isChecked) =>
             {
                 if (isChecked)
                     this.TipViewModel.SetTouchbar(TouchbarType.None);//Touchbar

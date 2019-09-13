@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:menusButtons="using:Retouch_Photo2.Menus.MenuButtons"
+    xmlns:menus="using:Retouch_Photo2.Menus"
     d:DesignHeight="50"
     d:DesignWidth="50"
     Width="60" 
@@ -17,10 +17,10 @@
     </ToolTipService.ToolTip>
 
     
-    <menusButtons:Button x:Name="Button">
-        <menusButtons:Button.CenterContent>
+    <menus:MenuButton x:Name="Button">
+        <menus:MenuButton.CenterContent>
             <FontIcon FontSize="24" Glyph="&#x1F41E;" FontFamily="Segoe UI Symbol"/>
-        </menusButtons:Button.CenterContent>
-    </menusButtons:Button>
+        </menus:MenuButton.CenterContent>
+    </menus:MenuButton>
 
 </UserControl>

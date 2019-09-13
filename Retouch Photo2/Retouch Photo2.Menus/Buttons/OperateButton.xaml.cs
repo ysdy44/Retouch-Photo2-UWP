@@ -1,6 +1,6 @@
 ﻿using Retouch_Photo2.ViewModels.Tips;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Menus.Buttons
 {
@@ -11,7 +11,7 @@ namespace Retouch_Photo2.Menus.Buttons
 
         //@Content
         public MenuState State { set => this.Button.SetMenuState(value); }
-        public FrameworkElement Self => this;
+        public FrameworkElement Self=> this;
         public MenuButtonType Type => MenuButtonType.None;
 
         //@Construct

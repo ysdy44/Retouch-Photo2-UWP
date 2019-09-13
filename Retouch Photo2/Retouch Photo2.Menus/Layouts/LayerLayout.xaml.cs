@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Menus.Layouts
         //@Content
         public bool IsOpen { set { this.LayerControl.IsOpen = value; } }
         public MenuState State { set => this._Layout.State = value; }
-        public UIElement Self => this;
+        public FrameworkElement Self => this;
 
         public UIElement StateButton => this._Layout.StateButton;
         public UIElement CloseButton => this._Layout.CloseButton;

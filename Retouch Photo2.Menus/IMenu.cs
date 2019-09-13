@@ -1,5 +1,4 @@
 ﻿using System;
-using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
 
@@ -10,7 +9,7 @@ namespace Retouch_Photo2.Menus
     /// </summary>
     public interface IMenu
     {
-        /// <summary> Move the MenuOverlay  to a new location in the collection. </summary>
+        /// <summary> Move the MenuOverlay to a new location in the collection. </summary>
         EventHandler<UIElement> Move { get; set; }
 
         /// <summary> Sets IMenu's ToolTip IsOpen. </summary>

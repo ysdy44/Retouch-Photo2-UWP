@@ -1,9 +1,7 @@
 ﻿using FanKit.Transformers;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
-using Retouch_Photo2.ViewModels.Keyboards;
 using Retouch_Photo2.ViewModels.Selections;
-using Retouch_Photo2.ViewModels.Tips;
 using System;
 using System.Numerics;
 using Windows.UI.Xaml;
@@ -11,58 +9,6 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Controls
 {
-    /// <summary> 
-    /// State of <see cref="TransformerControl"/>. 
-    /// </summary>
-    public enum TransformerControlState
-    {
-        /// <summary> Enabled. </summary>
-        Enabled,
-        /// <summary> Disabled radian. </summary>
-        EnabledWithoutRadian,
-        /// <summary> Disabled. </summary>
-        Disabled
-    }
-
-
-    /// <summary> 
-    /// Manager of <see cref="TransformerControlState"/>. 
-    /// </summary>
-    public class TransformerControlStateManager
-    {
-        /// <summary> <see cref = "TransformerControl.Tool" />/ </summary>
-        public bool DisabledTool;
-        /// <summary> <see cref = "TransformerControl.DisabledRadian" />/ </summary>
-        public bool DisabledRadian;
-        /// <summary> <see cref = "TransformerControl.Mode" />/ </summary>
-        public ListViewSelectionMode Mode;
-
-        /// <summary>
-        /// Return status based on propertys.
-        /// </summary>
-        /// <returns> state </returns>
-        public TransformerControlState GetState()
-        {
-            if (this.DisabledTool) return TransformerControlState.Disabled;
-
-            switch (this.Mode)
-            {
-                case ListViewSelectionMode.None: return TransformerControlState.Disabled;
-                case ListViewSelectionMode.Single:
-                case ListViewSelectionMode.Multiple:
-                    {
-                        if (this.DisabledRadian)
-                            return TransformerControlState.EnabledWithoutRadian;
-                        else
-                            return TransformerControlState.Enabled;
-                    }
-            }
-
-            return TransformerControlState.Enabled;
-        }
-    }
-
-
     /// <summary>
     /// Retouch_Photo2's the only <see cref = "TransformerControl" />. 
     /// </summary>

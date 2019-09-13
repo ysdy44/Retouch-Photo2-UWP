@@ -106,11 +106,11 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Buttons\Button.xaml.cs">
-      <DependentUpon>Button.xaml</DependentUpon>
+    <Compile Include="ToolButtons\ToolButton.xaml.cs">
+      <DependentUpon>ToolButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Buttons\ButtonState.cs" />
-    <Compile Include="Buttons\ButtonStateManager.cs" />
+    <Compile Include="ToolButtons\ToolButtonState.cs" />
+    <Compile Include="ToolButtons\ToolButtonStateManager.cs" />
     <Compile Include="Controls\AcrylicControl.xaml.cs">
       <DependentUpon>AcrylicControl.xaml</DependentUpon>
     </Compile>
@@ -149,12 +149,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ITransformerTool.cs" />
     <Compile Include="ToolType.cs" />
+    <Compile Include="TouchbarButton.xaml.cs">
+      <DependentUpon>TouchbarButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TouchbarSlider.xaml.cs">
+      <DependentUpon>TouchbarSlider.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TouchbarType.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.Tools.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FanKit.Transformers">
       <Version>1.3.2</Version>
+    </PackageReference>
+    <PackageReference Include="HSVColorPickers">
+      <Version>1.2.3</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.5</Version>
@@ -164,7 +173,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Buttons\Button.xaml">
+    <Page Include="ToolButtons\ToolButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -207,6 +216,14 @@
     <Page Include="Icon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TouchbarButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TouchbarSlider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup />

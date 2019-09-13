@@ -4,8 +4,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:menusButtons="using:Retouch_Photo2.Menus.MenuButtons"
     xmlns:transformers="using:FanKit.Transformers"
+    xmlns:menus="using:Retouch_Photo2.Menus"
     d:DesignHeight="50"
     d:DesignWidth="50"
     Width="60" 
@@ -16,12 +16,12 @@
         <ToolTip Content="Transformer" Placement="Bottom" Style="{StaticResource AppToolTip}"                                   
             IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" />
     </ToolTipService.ToolTip>
-    
 
-    <menusButtons:Button x:Name="Button">
-        <menusButtons:Button.CenterContent>
+
+    <menus:MenuButton x:Name="Button">
+        <menus:MenuButton.CenterContent>
             <transformers:Icon/>
-        </menusButtons:Button.CenterContent>
-    </menusButtons:Button>
+        </menus:MenuButton.CenterContent>
+    </menus:MenuButton>
 
 </UserControl>

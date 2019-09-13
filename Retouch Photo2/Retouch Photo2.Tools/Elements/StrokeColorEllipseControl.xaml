@@ -6,8 +6,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hsvColorPicker="using:HSVColorPickers"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="200">
+    d:DesignHeight="50"
+    d:DesignWidth="50"
+    >
 
     <UserControl.Resources>
         <Flyout x:Name="_Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">

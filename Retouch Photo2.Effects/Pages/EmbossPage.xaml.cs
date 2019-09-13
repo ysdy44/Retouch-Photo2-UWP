@@ -1,5 +1,5 @@
 ﻿using Retouch_Photo2.Effects.Models;
-using Retouch_Photo2.Elements;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Effects.Pages
@@ -7,32 +7,46 @@ namespace Retouch_Photo2.Effects.Pages
     /// <summary>
     /// Page of <see cref = "EmbossEffect"/>.
     /// </summary>
-    public sealed partial class EmbossPage : Page
+    public sealed partial class EmbossPage : Page, IEffectPage
     {
-        /// <summary> <see cref = "EmbossPage" />'s BlurAmountSlider. </summary>
-        public Slider AmountSlider => this._AmountSlider;
-        /// <summary> <see cref = "EmbossPage" />'s RadiansPicker. </summary>
-        public RadiansPicker AnglePicker => this._AnglePicker;
+        //@Content
+        public FrameworkElement Self => this;
 
         //@Construct
         public EmbossPage()
         {
             this.InitializeComponent();
 
-            this._AmountSlider.ValueChanged += (s, e) =>
+            this.AmountSlider.ValueChanged += (s, e) =>
             {
                 EffectManager.Invalidate((effectManager) =>
                 {
                      effectManager.Emboss_Amount = (float)e.NewValue;
                 });
             };
-            this._AnglePicker.RadiansChange += (s, radians) =>
+            this.AnglePicker.RadiansChange += (s, radians) =>
             {
                 EffectManager.Invalidate((effectManager) =>
                 {
                     effectManager.Emboss_Angle = radians;
                 });
             };
-        }        
+        }
+
+        public void Reset()
+        {
+            this.AmountSlider.Value = 0;
+            this.AnglePicker.Radians = 0;
+        }
+        public void ResetEffectManager(EffectManager effectManager)
+        {
+            effectManager.Emboss_Amount = 0;
+            effectManager.Emboss_Angle = 0;
+        }
+        public void FollowEffectManager(EffectManager effectManager)
+        {
+            this.AmountSlider.Value = effectManager.Emboss_Amount;
+            this.AnglePicker.Radians = effectManager.Emboss_Angle;
+        }
     }
 }

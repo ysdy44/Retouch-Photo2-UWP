@@ -106,12 +106,35 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Button.xaml.cs">
-      <DependentUpon>Button.xaml</DependentUpon>
+    <Compile Include="Buttons\DirectionalBlurControl.xaml.cs">
+      <DependentUpon>DirectionalBlurControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\EmbossControl.xaml.cs">
+      <DependentUpon>EmbossControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\GaussianBlurControl.xaml.cs">
+      <DependentUpon>GaussianBlurControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\OuterShadowControl.xaml.cs">
+      <DependentUpon>OuterShadowControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\OutlineControl.xaml.cs">
+      <DependentUpon>OutlineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\SharpenControl.xaml.cs">
+      <DependentUpon>SharpenControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\StraightenControl.xaml.cs">
+      <DependentUpon>StraightenControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SharpenControl.xaml.cs">
       <DependentUpon>SharpenControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EffectButtons\EffectButton.xaml.cs">
+      <DependentUpon>EffectButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EffectButtons\EffectButtonState.cs" />
+    <Compile Include="EffectButtons\EffectButtonStateManager.cs" />
     <Compile Include="IEffect.cs" />
     <Compile Include="EffectManager.cs" />
     <Compile Include="Controls\DirectionalBlurControl.xaml.cs">
@@ -132,10 +155,11 @@
     <Compile Include="Controls\StraightenControl.xaml.cs">
       <DependentUpon>StraightenControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EffectsState.cs" />
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EffectButtons\IEffectButton.cs" />
+    <Compile Include="EffectPages\IEffectPage.cs" />
     <Compile Include="Models\DirectionalBlurEffect.cs" />
     <Compile Include="Models\EmbossEffect.cs" />
     <Compile Include="Models\GaussianBlurEffect.cs" />
@@ -180,9 +204,33 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Button.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Buttons\DirectionalBlurControl.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Buttons\EmbossControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Buttons\GaussianBlurControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Buttons\OuterShadowControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Buttons\OutlineControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Buttons\SharpenControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Buttons\StraightenControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\DirectionalBlurControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -211,6 +259,10 @@
     <Page Include="Controls\StraightenControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EffectButtons\EffectButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Icon.xaml">
       <SubType>Designer</SubType>
@@ -251,6 +303,7 @@
       <Name>Retouch Photo2.Elements</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

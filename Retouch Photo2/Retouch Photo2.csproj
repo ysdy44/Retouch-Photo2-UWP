@@ -99,12 +99,14 @@
     <Compile Include="Controls\AdjustmentControl.xaml.cs">
       <DependentUpon>AdjustmentControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AdjustmentControlState.cs" />
     <Compile Include="Controls\DebugControl.xaml.cs">
       <DependentUpon>DebugControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\EffectControl.xaml.cs">
       <DependentUpon>EffectControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\EffectControlState.cs" />
     <Compile Include="Controls\LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>
@@ -129,6 +131,8 @@
     <Compile Include="Controls\TransformerControl.xaml.cs">
       <DependentUpon>TransformerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TransformerControlState.cs" />
+    <Compile Include="Controls\TransformerControlStateManager.cs" />
     <Compile Include="Retouch Photo2.Menus\Buttons\AdjustmentButton.xaml.cs">
       <DependentUpon>AdjustmentButton.xaml</DependentUpon>
     </Compile>
@@ -392,8 +396,8 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Retouch Photo2.Menus\Buttons\AdjustmentButton.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Retouch Photo2.Menus\Buttons\ColorButton.xaml">
       <Generator>MSBuild:Compile</Generator>

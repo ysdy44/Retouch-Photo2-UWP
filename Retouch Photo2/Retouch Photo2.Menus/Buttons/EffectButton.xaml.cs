@@ -11,7 +11,7 @@ namespace Retouch_Photo2.Menus.Buttons
 
         //@Content
         public MenuState State { set => this.Button.SetMenuState(value); }
-        public FrameworkElement Self => this;
+        public FrameworkElement Self=> this;
         public MenuButtonType Type => MenuButtonType.None;
 
         //@Construct

@@ -4,13 +4,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:tools="using:Retouch_Photo2.Tools"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="50"
     >
     
-    <elements:TouchbarButton x:Name="TouchbarButton"
+    <tools:TouchbarButton x:Name="TouchbarButton"
                  IsChecked="{x:Bind StrokeWidthTypeConverter(TipViewModel.TouchbarType),Mode=OneWay}"
                  Number="{x:Bind NumberConverter(SelectionViewModel.StrokeWidth), Mode=OneWay}"
                    />
