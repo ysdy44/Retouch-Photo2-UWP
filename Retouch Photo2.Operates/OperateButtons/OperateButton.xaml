@@ -71,7 +71,7 @@
         <Viewbox x:Name="EnabledViewbox" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
             <!--Disabled-->
-        <Viewbox x:Name="DisabledViewbox" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Viewbox x:Name="DisabledViewbox" Visibility="Collapsed" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
     </Grid>
 

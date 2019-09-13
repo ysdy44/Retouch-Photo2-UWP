@@ -84,7 +84,7 @@
         <Viewbox x:Name="EnabledViewbox" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <!--Disabled-->
-        <Viewbox x:Name="DisabledViewbox" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Viewbox x:Name="DisabledViewbox" Visibility="Collapsed" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <TextBlock x:Name="TextBlock" Grid.Column="2" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Foreground="{StaticResource CheckColor}"/>
 
