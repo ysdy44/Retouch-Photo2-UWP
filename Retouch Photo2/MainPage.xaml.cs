@@ -2,9 +2,7 @@
 using Retouch_Photo2.Elements.MainPages;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Tools.Touchbars;
 using Retouch_Photo2.ViewModels;
-using Retouch_Photo2.ViewModels.Tips;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -16,7 +14,7 @@ using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Pages
+namespace Retouch_Photo2
 {
     /// <summary> 
     /// Retouch_Photo2's the only <see cref = "MainPage" />. 

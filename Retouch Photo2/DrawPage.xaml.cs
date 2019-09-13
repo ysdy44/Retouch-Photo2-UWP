@@ -10,7 +10,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace Retouch_Photo2.Pages
+namespace Retouch_Photo2
 {
     /// <summary> 
     /// Retouch_Photo2's the only <see cref = "DrawPage" />. 

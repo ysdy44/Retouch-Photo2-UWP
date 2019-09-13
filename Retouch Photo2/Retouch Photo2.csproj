@@ -180,7 +180,7 @@
       <DependentUpon>TransformerLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Menus\Models\AdjustmentMenu.cs" />
-    <Compile Include="Pages\DrawPage.xaml.cs">
+    <Compile Include="DrawPage.xaml.cs">
       <DependentUpon>DrawPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Menus\Models\ColorMenu.cs" />
@@ -206,7 +206,7 @@
     <Compile Include="Retouch Photo2.Tools\Elements\StrokeWidthButton.xaml.cs">
       <DependentUpon>StrokeWidthButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MainPage.xaml.cs">
+    <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -423,7 +423,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\DrawPage.xaml">
+    <Page Include="DrawPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -479,7 +479,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\MainPage.xaml">
+    <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

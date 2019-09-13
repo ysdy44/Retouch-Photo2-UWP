@@ -1,5 +1,4 @@
 ﻿using Retouch_Photo2.Menus.Models;
-using Retouch_Photo2.Pages;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.Tools.Touchbars;
@@ -53,8 +52,8 @@ namespace Retouch_Photo2
             AcrylicTintOpacityTouchbar = new AcrylicTintOpacityTouchbar(),
             AcrylicBlurAmountTouchbar = new AcrylicBlurAmountTouchbar(),
 
-        //Menu
-        DebugMenu = new DebugMenu(),
+            //Menu
+            DebugMenu = new DebugMenu(),
             SelectionMenu = new SelectionMenu(),
             OperateMenu = new OperateMenu(),
             AdjustmentMenu = new AdjustmentMenu(),
