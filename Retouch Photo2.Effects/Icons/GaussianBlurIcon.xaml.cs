@@ -1,15 +1,15 @@
 ﻿using Retouch_Photo2.Effects.Models;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Effects.Controls
+namespace Retouch_Photo2.Effects.Icons
 {
     /// <summary>
-    /// Control of <see cref = "OutlineEffect"/>.
+    /// Icon of <see cref = "GaussianBlurEffect"/>.
     /// </summary>
-    public sealed partial class OutlineControl : UserControl
+    public sealed partial class GaussianBlurIcon : UserControl
     {
         //@Construct
-        public OutlineControl()
+        public GaussianBlurIcon()
         {
             this.InitializeComponent();
         }

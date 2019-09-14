@@ -1,8 +1,8 @@
 ﻿<UserControl
-    x:Class="Retouch_Photo2.Effects.Controls.StraightenControl"
+    x:Class="Retouch_Photo2.Effects.Icons.OuterShadowIcon"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
    d:DesignHeight="50"
@@ -11,7 +11,7 @@
 
     <PathIcon>
         <PathIcon.Data>
-            M19.992,14.193l-14.897,0l14.897,-14.093l0,14.093Zm-19.992,-14.193l14.896,0l-14.896,14.094l0,-14.094Zm18.289,12.49l0,-8.303l-9.107,8.303l9.107,0Zm-16.586,-10.787l9.106,0l-9.106,8.304l0,-8.304Z
+            M0,0l19.987,0l0,2.453l3.095,0l0,13.492l-19.988,0l0,-2.453l-3.094,0l0,-13.492Zm21.482,4.051l-1.495,0l0,9.441l-15.293,0l0,1.07l16.788,0l0,-10.511Z
         </PathIcon.Data>
     </PathIcon>
 

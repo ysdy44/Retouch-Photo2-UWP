@@ -1,15 +1,15 @@
 ﻿using Retouch_Photo2.Effects.Models;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Effects.Controls
+namespace Retouch_Photo2.Effects.Icons
 {
     /// <summary>
-    /// Control of <see cref = "SharpenEffect"/>.
+    /// Icon of <see cref = "OuterShadowEffect"/>.
     /// </summary>
-    public sealed partial class SharpenControl : UserControl
+    public sealed partial class OuterShadowIcon : UserControl
     {
         //@Construct
-        public SharpenControl()
+        public OuterShadowIcon()
         {
             this.InitializeComponent();
         }

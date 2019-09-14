@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:effects="using:Retouch_Photo2.Effects"
-    xmlns:effectControls="using:Retouch_Photo2.Effects.Controls"
+    xmlns:effectIcons="using:Retouch_Photo2.Effects.Icons"
     mc:Ignorable="d"
    d:DesignHeight="50"
    d:DesignWidth="200"
@@ -13,7 +13,7 @@
 
     <effects:EffectButton x:Name="Button" Label="Sharpen">
         <effects:EffectButton.Icon>
-            <effectControls:SharpenControl/>
+            <effectIcons:SharpenIcon/>
         </effects:EffectButton.Icon>
     </effects:EffectButton>
 

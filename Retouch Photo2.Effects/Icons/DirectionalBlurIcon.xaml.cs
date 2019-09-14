@@ -1,15 +1,15 @@
 ﻿using Retouch_Photo2.Effects.Models;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Effects.Controls
+namespace Retouch_Photo2.Effects.Icons
 {
     /// <summary>
-    /// Control of <see cref = "OuterShadowEffect"/>.
+    /// Icon of <see cref = "DirectionalBlurEffect"/>.
     /// </summary>
-    public sealed partial class OuterShadowControl : UserControl
+    public sealed partial class DirectionalBlurIcon : UserControl
     {
         //@Construct
-        public OuterShadowControl()
+        public DirectionalBlurIcon()
         {
             this.InitializeComponent();
         }

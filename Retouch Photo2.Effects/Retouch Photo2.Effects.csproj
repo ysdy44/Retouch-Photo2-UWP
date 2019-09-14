@@ -106,29 +106,29 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Buttons\DirectionalBlurControl.xaml.cs">
-      <DependentUpon>DirectionalBlurControl.xaml</DependentUpon>
+    <Compile Include="Buttons\DirectionalBlurButton.xaml.cs">
+      <DependentUpon>DirectionalBlurButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Buttons\EmbossControl.xaml.cs">
-      <DependentUpon>EmbossControl.xaml</DependentUpon>
+    <Compile Include="Buttons\EmbossButton.xaml.cs">
+      <DependentUpon>EmbossButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Buttons\GaussianBlurControl.xaml.cs">
-      <DependentUpon>GaussianBlurControl.xaml</DependentUpon>
+    <Compile Include="Buttons\GaussianBlurButton.xaml.cs">
+      <DependentUpon>GaussianBlurButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Buttons\OuterShadowControl.xaml.cs">
-      <DependentUpon>OuterShadowControl.xaml</DependentUpon>
+    <Compile Include="Buttons\OuterShadowButton.xaml.cs">
+      <DependentUpon>OuterShadowButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Buttons\OutlineControl.xaml.cs">
-      <DependentUpon>OutlineControl.xaml</DependentUpon>
+    <Compile Include="Buttons\OutlineButton.xaml.cs">
+      <DependentUpon>OutlineButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Buttons\SharpenControl.xaml.cs">
-      <DependentUpon>SharpenControl.xaml</DependentUpon>
+    <Compile Include="Buttons\SharpenButton.xaml.cs">
+      <DependentUpon>SharpenButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Buttons\StraightenControl.xaml.cs">
-      <DependentUpon>StraightenControl.xaml</DependentUpon>
+    <Compile Include="Buttons\StraightenButton.xaml.cs">
+      <DependentUpon>StraightenButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SharpenControl.xaml.cs">
-      <DependentUpon>SharpenControl.xaml</DependentUpon>
+    <Compile Include="Icons\SharpenIcon.xaml.cs">
+      <DependentUpon>SharpenIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="EffectButtons\EffectButton.xaml.cs">
       <DependentUpon>EffectButton.xaml</DependentUpon>
@@ -137,23 +137,23 @@
     <Compile Include="EffectButtons\EffectButtonStateManager.cs" />
     <Compile Include="IEffect.cs" />
     <Compile Include="EffectManager.cs" />
-    <Compile Include="Controls\DirectionalBlurControl.xaml.cs">
-      <DependentUpon>DirectionalBlurControl.xaml</DependentUpon>
+    <Compile Include="Icons\DirectionalBlurIcon.xaml.cs">
+      <DependentUpon>DirectionalBlurIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\EmbossControl.xaml.cs">
-      <DependentUpon>EmbossControl.xaml</DependentUpon>
+    <Compile Include="Icons\EmbossIcon.xaml.cs">
+      <DependentUpon>EmbossIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GaussianBlurControl.xaml.cs">
-      <DependentUpon>GaussianBlurControl.xaml</DependentUpon>
+    <Compile Include="Icons\GaussianBlurIcon.xaml.cs">
+      <DependentUpon>GaussianBlurIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OuterShadowControl.xaml.cs">
-      <DependentUpon>OuterShadowControl.xaml</DependentUpon>
+    <Compile Include="Icons\OuterShadowIcon.xaml.cs">
+      <DependentUpon>OuterShadowIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OutlineControl.xaml.cs">
-      <DependentUpon>OutlineControl.xaml</DependentUpon>
+    <Compile Include="Icons\OutlineIcon.xaml.cs">
+      <DependentUpon>OutlineIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\StraightenControl.xaml.cs">
-      <DependentUpon>StraightenControl.xaml</DependentUpon>
+    <Compile Include="Icons\StraightenIcon.xaml.cs">
+      <DependentUpon>StraightenIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
@@ -204,59 +204,59 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Buttons\DirectionalBlurControl.xaml">
+    <Page Include="Buttons\DirectionalBlurButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Buttons\EmbossControl.xaml">
+    <Page Include="Buttons\EmbossButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Buttons\GaussianBlurControl.xaml">
+    <Page Include="Buttons\GaussianBlurButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Buttons\OuterShadowControl.xaml">
+    <Page Include="Buttons\OuterShadowButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Buttons\OutlineControl.xaml">
+    <Page Include="Buttons\OutlineButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Buttons\SharpenControl.xaml">
+    <Page Include="Buttons\SharpenButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Buttons\StraightenControl.xaml">
+    <Page Include="Buttons\StraightenButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\DirectionalBlurControl.xaml">
+    <Page Include="Icons\DirectionalBlurIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\EmbossControl.xaml">
+    <Page Include="Icons\EmbossIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\GaussianBlurControl.xaml">
+    <Page Include="Icons\GaussianBlurIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\OuterShadowControl.xaml">
+    <Page Include="Icons\OuterShadowIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\OutlineControl.xaml">
+    <Page Include="Icons\OutlineIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\SharpenControl.xaml">
+    <Page Include="Icons\SharpenIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\StraightenControl.xaml">
+    <Page Include="Icons\StraightenIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

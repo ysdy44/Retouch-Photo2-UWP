@@ -1,15 +1,15 @@
 ﻿using Retouch_Photo2.Effects.Models;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Effects.Controls
+namespace Retouch_Photo2.Effects.Icons
 {
     /// <summary>
-    /// Control of <see cref = "StraightenEffect"/>.
+    /// Icon of <see cref = "SharpenEffect"/>.
     /// </summary>
-    public sealed partial class StraightenControl : UserControl
+    public sealed partial class SharpenIcon : UserControl
     {
         //@Construct
-        public StraightenControl()
+        public SharpenIcon()
         {
             this.InitializeComponent();
         }

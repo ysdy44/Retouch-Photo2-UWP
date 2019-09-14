@@ -1,15 +1,15 @@
 ﻿using Retouch_Photo2.Effects.Models;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Effects.Controls
+namespace Retouch_Photo2.Effects.Icons
 {
     /// <summary>
-    /// Control of <see cref = "EmbossEffect"/>.
+    /// Icon of <see cref = "StraightenEffect"/>.
     /// </summary>
-    public sealed partial class EmbossControl : UserControl
+    public sealed partial class StraightenIcon : UserControl
     {
         //@Construct
-        public EmbossControl()
+        public StraightenIcon()
         {
             this.InitializeComponent();
         }
