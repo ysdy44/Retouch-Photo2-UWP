@@ -1,0 +1,28 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Selections.Edit2Icons.MergeEnabledIcon"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="50"
+    >
+
+    <Grid>
+
+        <PathIcon Foreground="DodgerBlue">
+            <PathIcon.Data>
+                M24.194,25.56l-20.404,0c-0.625,0 -1.133,-0.508 -1.133,-1.134l0,-20.403c0,-0.626 0.508,-1.134 1.133,-1.134l20.404,0c0.625,0 1.133,0.508 1.133,1.134l0,20.403c0,0.626 -0.508,1.134 -1.133,1.134Z
+            </PathIcon.Data>
+        </PathIcon>
+
+        <PathIcon Foreground="Gray">
+            <PathIcon.Data>
+                M27.567,6.188c0.751,0 1.36,0.609 1.36,1.36l0,20.114c0,0.751 -0.609,1.36 -1.36,1.36l-19.95,0c-0.751,0 -1.36,-0.609 -1.36,-1.36l0,-0.611l20.863,0l0,-20.863l0.447,0Z
+            </PathIcon.Data>
+        </PathIcon>
+        
+    </Grid>
+    
+</UserControl>

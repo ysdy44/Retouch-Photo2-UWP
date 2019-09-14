@@ -111,81 +111,81 @@
     </Compile>
     <Compile Include="SelectionButtons\SelectionButtonState.cs" />
     <Compile Include="SelectionButtons\SelectionButtonStateManager.cs" />
-    <Compile Include="Edit2Controls\ExtractDisabledControl.xaml.cs">
-      <DependentUpon>ExtractDisabledControl.xaml</DependentUpon>
+    <Compile Include="Edit2Icons\ExtractDisabledIcon.xaml.cs">
+      <DependentUpon>ExtractDisabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Edit2Controls\ExtractEnabledControl.xaml.cs">
-      <DependentUpon>ExtractEnabledControl.xaml</DependentUpon>
+    <Compile Include="Edit2Icons\ExtractEnabledIcon.xaml.cs">
+      <DependentUpon>ExtractEnabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Edit2Controls\MergeDisabledControl.xaml.cs">
-      <DependentUpon>MergeDisabledControl.xaml</DependentUpon>
+    <Compile Include="Edit2Icons\MergeDisabledIcon.xaml.cs">
+      <DependentUpon>MergeDisabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Edit2Controls\MergeEnabledControl.xaml.cs">
-      <DependentUpon>MergeEnabledControl.xaml</DependentUpon>
+    <Compile Include="Edit2Icons\MergeEnabledIcon.xaml.cs">
+      <DependentUpon>MergeEnabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditControls\ClearDisabledControl.xaml.cs">
-      <DependentUpon>ClearDisabledControl.xaml</DependentUpon>
+    <Compile Include="EditIcons\ClearDisabledIcon.xaml.cs">
+      <DependentUpon>ClearDisabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditControls\ClearEnabledControl.xaml.cs">
-      <DependentUpon>ClearEnabledControl.xaml</DependentUpon>
+    <Compile Include="EditIcons\ClearEnabledIcon.xaml.cs">
+      <DependentUpon>ClearEnabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditControls\CopyDisabledControl.xaml.cs">
-      <DependentUpon>CopyDisabledControl.xaml</DependentUpon>
+    <Compile Include="EditIcons\CopyDisabledIcon.xaml.cs">
+      <DependentUpon>CopyDisabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditControls\CopyEnabledControl.xaml.cs">
-      <DependentUpon>CopyEnabledControl.xaml</DependentUpon>
+    <Compile Include="EditIcons\CopyEnabledIcon.xaml.cs">
+      <DependentUpon>CopyEnabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditControls\CutDisabledControl.xaml.cs">
-      <DependentUpon>CutDisabledControl.xaml</DependentUpon>
+    <Compile Include="EditIcons\CutDisabledIcon.xaml.cs">
+      <DependentUpon>CutDisabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditControls\CutEnabledControl.xaml.cs">
-      <DependentUpon>CutEnabledControl.xaml</DependentUpon>
+    <Compile Include="EditIcons\CutEnabledIcon.xaml.cs">
+      <DependentUpon>CutEnabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditControls\PasteDisabledControl.xaml.cs">
-      <DependentUpon>PasteDisabledControl.xaml</DependentUpon>
+    <Compile Include="EditIcons\PasteDisabledIcon.xaml.cs">
+      <DependentUpon>PasteDisabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditControls\PasteEnabledControl.xaml.cs">
-      <DependentUpon>PasteEnabledControl.xaml</DependentUpon>
+    <Compile Include="EditIcons\PasteEnabledIcon.xaml.cs">
+      <DependentUpon>PasteEnabledIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Select2Controls\FeatherDisabledControl.xaml.cs">
-      <DependentUpon>FeatherDisabledControl.xaml</DependentUpon>
+    <Compile Include="Select2Icons\FeatherDisabledIcon.xaml.cs">
+      <DependentUpon>FeatherDisabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Select2Controls\FeatherEnabledControl.xaml.cs">
-      <DependentUpon>FeatherEnabledControl.xaml</DependentUpon>
+    <Compile Include="Select2Icons\FeatherEnabledIcon.xaml.cs">
+      <DependentUpon>FeatherEnabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Select2Controls\TransformDisabledControl.xaml.cs">
-      <DependentUpon>TransformDisabledControl.xaml</DependentUpon>
+    <Compile Include="Select2Icons\TransformDisabledIcon.xaml.cs">
+      <DependentUpon>TransformDisabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Select2Controls\TransformEnabledControl.xaml.cs">
-      <DependentUpon>TransformEnabledControl.xaml</DependentUpon>
+    <Compile Include="Select2Icons\TransformEnabledIcon.xaml.cs">
+      <DependentUpon>TransformEnabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SelectControls\AllDisabledControl.xaml.cs">
-      <DependentUpon>AllDisabledControl.xaml</DependentUpon>
+    <Compile Include="SelectIcons\AllDisabledIcon.xaml.cs">
+      <DependentUpon>AllDisabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SelectControls\AllEnabledControl.xaml.cs">
-      <DependentUpon>AllEnabledControl.xaml</DependentUpon>
+    <Compile Include="SelectIcons\AllEnabledIcon.xaml.cs">
+      <DependentUpon>AllEnabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SelectControls\DeselectDisabledControl.xaml.cs">
-      <DependentUpon>DeselectDisabledControl.xaml</DependentUpon>
+    <Compile Include="SelectIcons\DeselectDisabledIcon.xaml.cs">
+      <DependentUpon>DeselectDisabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SelectControls\DeselectEnabledControl.xaml.cs">
-      <DependentUpon>DeselectEnabledControl.xaml</DependentUpon>
+    <Compile Include="SelectIcons\DeselectEnabledIcon.xaml.cs">
+      <DependentUpon>DeselectEnabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SelectControls\InvertDisabledControl.xaml.cs">
-      <DependentUpon>InvertDisabledControl.xaml</DependentUpon>
+    <Compile Include="SelectIcons\InvertDisabledIcon.xaml.cs">
+      <DependentUpon>InvertDisabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SelectControls\InvertEnabledControl.xaml.cs">
-      <DependentUpon>InvertEnabledControl.xaml</DependentUpon>
+    <Compile Include="SelectIcons\InvertEnabledIcon.xaml.cs">
+      <DependentUpon>InvertEnabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SelectControls\PixelDisabledControl.xaml.cs">
-      <DependentUpon>PixelDisabledControl.xaml</DependentUpon>
+    <Compile Include="SelectIcons\PixelDisabledIcon.xaml.cs">
+      <DependentUpon>PixelDisabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SelectControls\PixelEnabledControl.xaml.cs">
-      <DependentUpon>PixelEnabledControl.xaml</DependentUpon>
+    <Compile Include="SelectIcons\PixelEnabledIcon.xaml.cs">
+      <DependentUpon>PixelEnabledIcon.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Retouch_Photo.Selections.rd.xml" />
   </ItemGroup>
@@ -199,51 +199,51 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Edit2Controls\ExtractDisabledControl.xaml">
+    <Page Include="Edit2Icons\ExtractDisabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Edit2Controls\ExtractEnabledControl.xaml">
+    <Page Include="Edit2Icons\ExtractEnabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Edit2Controls\MergeDisabledControl.xaml">
+    <Page Include="Edit2Icons\MergeDisabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Edit2Controls\MergeEnabledControl.xaml">
+    <Page Include="Edit2Icons\MergeEnabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditControls\ClearDisabledControl.xaml">
+    <Page Include="EditIcons\ClearDisabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditControls\ClearEnabledControl.xaml">
+    <Page Include="EditIcons\ClearEnabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditControls\CopyDisabledControl.xaml">
+    <Page Include="EditIcons\CopyDisabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditControls\CopyEnabledControl.xaml">
+    <Page Include="EditIcons\CopyEnabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditControls\CutDisabledControl.xaml">
+    <Page Include="EditIcons\CutDisabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditControls\CutEnabledControl.xaml">
+    <Page Include="EditIcons\CutEnabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditControls\PasteDisabledControl.xaml">
+    <Page Include="EditIcons\PasteDisabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditControls\PasteEnabledControl.xaml">
+    <Page Include="EditIcons\PasteEnabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -251,51 +251,51 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Select2Controls\FeatherDisabledControl.xaml">
+    <Page Include="Select2Icons\FeatherDisabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Select2Controls\FeatherEnabledControl.xaml">
+    <Page Include="Select2Icons\FeatherEnabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Select2Controls\TransformDisabledControl.xaml">
+    <Page Include="Select2Icons\TransformDisabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Select2Controls\TransformEnabledControl.xaml">
+    <Page Include="Select2Icons\TransformEnabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SelectControls\AllDisabledControl.xaml">
+    <Page Include="SelectIcons\AllDisabledIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SelectControls\AllEnabledControl.xaml">
+    <Page Include="SelectIcons\AllEnabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SelectControls\DeselectDisabledControl.xaml">
+    <Page Include="SelectIcons\DeselectDisabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SelectControls\DeselectEnabledControl.xaml">
+    <Page Include="SelectIcons\DeselectEnabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SelectControls\InvertDisabledControl.xaml">
+    <Page Include="SelectIcons\InvertDisabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SelectControls\InvertEnabledControl.xaml">
+    <Page Include="SelectIcons\InvertEnabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SelectControls\PixelDisabledControl.xaml">
+    <Page Include="SelectIcons\PixelDisabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SelectControls\PixelEnabledControl.xaml">
+    <Page Include="SelectIcons\PixelEnabledIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

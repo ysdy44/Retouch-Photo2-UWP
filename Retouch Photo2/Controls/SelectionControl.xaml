@@ -5,10 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:selections="using:Retouch_Photo2.Selections"
-    xmlns:selectionsEdi2="using:Retouch_Photo2.Selections.Edit2Controls"
-    xmlns:selectionsEdi="using:Retouch_Photo2.Selections.EditControls"
-    xmlns:selectionsSel2="using:Retouch_Photo2.Selections.Select2Controls"
-    xmlns:selectionsSel="using:Retouch_Photo2.Selections.SelectControls"
+    xmlns:selectionsEdit2Icons="using:Retouch_Photo2.Selections.Edit2Icons"
+    xmlns:selectionsEditIcons="using:Retouch_Photo2.Selections.EditIcons"
+    xmlns:selectionsSelect2Icons="using:Retouch_Photo2.Selections.Select2Icons"
+    xmlns:selectionsSelectIcons="using:Retouch_Photo2.Selections.SelectIcons"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="300"
@@ -26,37 +26,37 @@
 
             <selections:SelectionButton x:Name="CutButton" Label="Cut">
                 <selections:SelectionButton.EnabledIcon>
-                    <selectionsEdi:CutEnabledControl/>
+                    <selectionsEditIcons:CutEnabledIcon/>
                 </selections:SelectionButton.EnabledIcon>
                 <selections:SelectionButton.DisabledIcon>
-                    <selectionsEdi:CutDisabledControl/>
+                    <selectionsEditIcons:CutDisabledIcon/>
                 </selections:SelectionButton.DisabledIcon>
             </selections:SelectionButton>
 
             <selections:SelectionButton x:Name="CopyButton" Label="Copy">
                 <selections:SelectionButton.EnabledIcon>
-                    <selectionsEdi:CopyEnabledControl/>
+                    <selectionsEditIcons:CopyEnabledIcon/>
                 </selections:SelectionButton.EnabledIcon>
                 <selections:SelectionButton.DisabledIcon>
-                    <selectionsEdi:CopyDisabledControl/>
+                    <selectionsEditIcons:CopyDisabledIcon/>
                 </selections:SelectionButton.DisabledIcon>
             </selections:SelectionButton>
 
             <selections:SelectionButton x:Name="PasteButton" Label="Paste">
                 <selections:SelectionButton.EnabledIcon>
-                    <selectionsEdi:PasteEnabledControl/>
+                    <selectionsEditIcons:PasteEnabledIcon/>
                 </selections:SelectionButton.EnabledIcon>
                 <selections:SelectionButton.DisabledIcon>
-                    <selectionsEdi:PasteDisabledControl/>
+                    <selectionsEditIcons:PasteDisabledIcon/>
                 </selections:SelectionButton.DisabledIcon>
             </selections:SelectionButton>
 
             <selections:SelectionButton x:Name="RemoveButton" Label="Clear">
                 <selections:SelectionButton.EnabledIcon>
-                    <selectionsEdi:ClearEnabledControl/>
+                    <selectionsEditIcons:ClearEnabledIcon/>
                 </selections:SelectionButton.EnabledIcon>
                 <selections:SelectionButton.DisabledIcon>
-                    <selectionsEdi:ClearDisabledControl/>
+                    <selectionsEditIcons:ClearDisabledIcon/>
                 </selections:SelectionButton.DisabledIcon>
             </selections:SelectionButton>
 
@@ -64,19 +64,19 @@
 
             <selections:SelectionButton x:Name="ExtractButton" Label="Extract">
                 <selections:SelectionButton.EnabledIcon>
-                    <selectionsEdi2:ExtractEnabledControl/>
+                    <selectionsEdit2Icons:ExtractEnabledIcon/>
                 </selections:SelectionButton.EnabledIcon>
                 <selections:SelectionButton.DisabledIcon>
-                    <selectionsEdi2:ExtractDisabledControl/>
+                    <selectionsEdit2Icons:ExtractDisabledIcon/>
                 </selections:SelectionButton.DisabledIcon>
             </selections:SelectionButton>
 
             <selections:SelectionButton x:Name="MergeButton" Label="Merge">
                 <selections:SelectionButton.EnabledIcon>
-                    <selectionsEdi2:MergeEnabledControl/>
+                    <selectionsEdit2Icons:MergeEnabledIcon/>
                 </selections:SelectionButton.EnabledIcon>
                 <selections:SelectionButton.DisabledIcon>
-                    <selectionsEdi2:MergeDisabledControl/>
+                    <selectionsEdit2Icons:MergeDisabledIcon/>
                 </selections:SelectionButton.DisabledIcon>
             </selections:SelectionButton>
 
@@ -89,37 +89,37 @@
 
             <selections:SelectionButton x:Name="AllButton" Label="All">
                 <selections:SelectionButton.EnabledIcon>
-                    <selectionsSel:AllEnabledControl VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+                    <selectionsSelectIcons:AllEnabledIcon/>
                 </selections:SelectionButton.EnabledIcon>
                 <selections:SelectionButton.DisabledIcon>
-                    <selectionsSel:AllDisabledControl/>
+                    <selectionsSelectIcons:AllDisabledIcon/>
                 </selections:SelectionButton.DisabledIcon>
             </selections:SelectionButton>
 
             <selections:SelectionButton x:Name="DeselectButton" Label="Deselect">
                 <selections:SelectionButton.EnabledIcon>
-                    <selectionsSel:DeselectEnabledControl/>
+                    <selectionsSelectIcons:DeselectEnabledIcon/>
                 </selections:SelectionButton.EnabledIcon>
                 <selections:SelectionButton.DisabledIcon>
-                    <selectionsSel:DeselectDisabledControl/>
+                    <selectionsSelectIcons:DeselectDisabledIcon/>
                 </selections:SelectionButton.DisabledIcon>
             </selections:SelectionButton>
 
             <selections:SelectionButton x:Name="PixelButton" Label="Pixel">
                 <selections:SelectionButton.EnabledIcon>
-                    <selectionsSel:PixelEnabledControl/>
+                    <selectionsSelectIcons:PixelEnabledIcon/>
                 </selections:SelectionButton.EnabledIcon>
                 <selections:SelectionButton.DisabledIcon>
-                    <selectionsSel:PixelDisabledControl/>
+                    <selectionsSelectIcons:PixelDisabledIcon/>
                 </selections:SelectionButton.DisabledIcon>
             </selections:SelectionButton>
 
             <selections:SelectionButton x:Name="InvertButton" Label="Invert">
                 <selections:SelectionButton.EnabledIcon>
-                    <selectionsSel:InvertEnabledControl/>
+                    <selectionsSelectIcons:InvertEnabledIcon/>
                 </selections:SelectionButton.EnabledIcon>
                 <selections:SelectionButton.DisabledIcon>
-                    <selectionsSel:InvertDisabledControl/>
+                    <selectionsSelectIcons:InvertDisabledIcon/>
                 </selections:SelectionButton.DisabledIcon>
             </selections:SelectionButton>
 
@@ -127,19 +127,19 @@
 
             <selections:SelectionButton x:Name="FeatherButton" Label="Feather">
                 <selections:SelectionButton.EnabledIcon>
-                    <selectionsSel2:FeatherEnabledControl/>
+                    <selectionsSelect2Icons:FeatherEnabledIcon/>
                 </selections:SelectionButton.EnabledIcon>
                 <selections:SelectionButton.DisabledIcon>
-                    <selectionsSel2:FeatherDisabledControl/>
+                    <selectionsSelect2Icons:FeatherDisabledIcon/>
                 </selections:SelectionButton.DisabledIcon>
             </selections:SelectionButton>
 
             <selections:SelectionButton x:Name="TransformButton" Label="Transform">
                 <selections:SelectionButton.EnabledIcon>
-                    <selectionsSel2:TransformEnabledControl/>
+                    <selectionsSelect2Icons:TransformEnabledIcon/>
                 </selections:SelectionButton.EnabledIcon>
                 <selections:SelectionButton.DisabledIcon>
-                    <selectionsSel2:TransformDisabledControl/>
+                    <selectionsSelect2Icons:TransformDisabledIcon/>
                 </selections:SelectionButton.DisabledIcon>
             </selections:SelectionButton>
 
