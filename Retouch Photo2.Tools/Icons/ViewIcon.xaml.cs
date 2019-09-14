@@ -1,14 +1,14 @@
 ﻿using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Tools.Controls
+namespace Retouch_Photo2.Tools.Icons
 {
     /// <summary>
-    /// Control of <see cref = "PenTool"/>.
+    /// Icon of <see cref = "ViewTool"/>.
     /// </summary>
-    public sealed partial class PenControl : UserControl
+    public sealed partial class ViewIcon : UserControl
     {
         //@Construct
-        public PenControl()
+        public ViewIcon()
         {
             this.InitializeComponent();
         }

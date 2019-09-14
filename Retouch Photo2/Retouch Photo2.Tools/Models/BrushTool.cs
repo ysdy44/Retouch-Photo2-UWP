@@ -2,7 +2,7 @@
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools;
 using Retouch_Photo2.Retouch_Photo2.Tools.Pages;
-using Retouch_Photo2.Tools.Controls;
+using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
@@ -32,8 +32,8 @@ namespace Retouch_Photo2.Tools.Models
 
         public bool IsOpen { set { } }
         public ToolType Type => ToolType.Brush;
-        public FrameworkElement Icon { get; } = new BrushControl();
-        public FrameworkElement ShowIcon { get; } = new BrushControl();
+        public FrameworkElement Icon { get; } = new BrushIcon();
+        public FrameworkElement ShowIcon { get; } = new BrushIcon();
         public Page Page => this._brushPage;
         BrushPage _brushPage { get; } = new BrushPage();
 

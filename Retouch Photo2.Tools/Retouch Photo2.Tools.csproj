@@ -120,29 +120,29 @@
     </Compile>
     <Compile Include="ToolButtons\ToolButtonState.cs" />
     <Compile Include="ToolButtons\ToolButtonStateManager.cs" />
-    <Compile Include="Controls\AcrylicControl.xaml.cs">
-      <DependentUpon>AcrylicControl.xaml</DependentUpon>
+    <Compile Include="Icons\AcrylicIcon.xaml.cs">
+      <DependentUpon>AcrylicIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BrushControl.xaml.cs">
-      <DependentUpon>BrushControl.xaml</DependentUpon>
+    <Compile Include="Icons\BrushIcon.xaml.cs">
+      <DependentUpon>BrushIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CursorControl.xaml.cs">
-      <DependentUpon>CursorControl.xaml</DependentUpon>
+    <Compile Include="Icons\CursorIcon.xaml.cs">
+      <DependentUpon>CursorIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\EllipseControl.xaml.cs">
-      <DependentUpon>EllipseControl.xaml</DependentUpon>
+    <Compile Include="Icons\EllipseIcon.xaml.cs">
+      <DependentUpon>EllipseIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ImageControl.xaml.cs">
-      <DependentUpon>ImageControl.xaml</DependentUpon>
+    <Compile Include="Icons\ImageIcon.xaml.cs">
+      <DependentUpon>ImageIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\PenControl.xaml.cs">
-      <DependentUpon>PenControl.xaml</DependentUpon>
+    <Compile Include="Icons\PenIcon.xaml.cs">
+      <DependentUpon>PenIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RectangleControl.xaml.cs">
-      <DependentUpon>RectangleControl.xaml</DependentUpon>
+    <Compile Include="Icons\RectangleIcon.xaml.cs">
+      <DependentUpon>RectangleIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ViewControl.xaml.cs">
-      <DependentUpon>ViewControl.xaml</DependentUpon>
+    <Compile Include="Icons\ViewIcon.xaml.cs">
+      <DependentUpon>ViewIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Elements\PenFlyout.xaml.cs">
       <DependentUpon>PenFlyout.xaml</DependentUpon>
@@ -198,35 +198,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\AcrylicControl.xaml">
+    <Page Include="Icons\AcrylicIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BrushControl.xaml">
+    <Page Include="Icons\BrushIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\CursorControl.xaml">
+    <Page Include="Icons\CursorIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\EllipseControl.xaml">
+    <Page Include="Icons\EllipseIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ImageControl.xaml">
+    <Page Include="Icons\ImageIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\PenControl.xaml">
+    <Page Include="Icons\PenIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\RectangleControl.xaml">
+    <Page Include="Icons\RectangleIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ViewControl.xaml">
+    <Page Include="Icons\ViewIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

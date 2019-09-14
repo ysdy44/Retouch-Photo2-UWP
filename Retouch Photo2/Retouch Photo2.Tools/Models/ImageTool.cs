@@ -2,7 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Tools.Controls;
+using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Keyboards;
@@ -30,8 +30,8 @@ namespace Retouch_Photo2.Tools.Models
 
         public bool IsOpen { set { } }
         public ToolType Type => ToolType.Image;
-        public FrameworkElement Icon { get; } = new ImageControl();
-        public FrameworkElement ShowIcon { get; } = new ImageControl();
+        public FrameworkElement Icon { get; } = new ImageIcon();
+        public FrameworkElement ShowIcon { get; } = new ImageIcon();
         public Page Page => this._imagePage;
         ImagePage _imagePage { get; } = new ImagePage();
         

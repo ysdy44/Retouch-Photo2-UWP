@@ -2,7 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Tools.Controls;
+using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
@@ -29,8 +29,8 @@ namespace Retouch_Photo2.Tools.Models
 
         public bool IsOpen { set { this._penPage.IsOpen = value; } }
         public ToolType Type => ToolType.Pen;
-        public FrameworkElement Icon { get; } = new PenControl();
-        public FrameworkElement ShowIcon { get; } = new PenControl();
+        public FrameworkElement Icon { get; } = new PenIcon();
+        public FrameworkElement ShowIcon { get; } = new PenIcon();
         public Page Page => this._penPage;
         PenPage _penPage { get; } = new PenPage();
 

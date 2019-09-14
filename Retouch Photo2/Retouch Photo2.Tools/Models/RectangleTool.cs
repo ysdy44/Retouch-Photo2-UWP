@@ -2,7 +2,7 @@
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Tools.Controls;
+using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
@@ -40,8 +40,8 @@ namespace Retouch_Photo2.Tools.Models
 
         public override bool IsOpen { set { this._rectanglePage.IsOpen = value; } }
         public override ToolType Type => ToolType.Rectangle;
-        public override FrameworkElement Icon { get; } = new RectangleControl();
-        public override FrameworkElement ShowIcon { get; } = new RectangleControl();
+        public override FrameworkElement Icon { get; } = new RectangleIcon();
+        public override FrameworkElement ShowIcon { get; } = new RectangleIcon();
         public override Page Page => this._rectanglePage;
         RectanglePage _rectanglePage { get; } = new RectanglePage();
     }

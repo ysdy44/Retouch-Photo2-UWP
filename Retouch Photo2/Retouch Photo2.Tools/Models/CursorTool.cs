@@ -1,7 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.Tools.Controls;
+using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Keyboards;
@@ -34,8 +34,8 @@ namespace Retouch_Photo2.Tools.Models
 
         public bool IsOpen { set { this._cursorPage.IsOpen = value; } }
         public ToolType Type=> ToolType.Cursor;
-        public FrameworkElement Icon { get; }= new CursorControl();
-        public FrameworkElement ShowIcon { get; }= new CursorControl();
+        public FrameworkElement Icon { get; }= new CursorIcon();
+        public FrameworkElement ShowIcon { get; }= new CursorIcon();
         public Page Page => this._cursorPage;
         CursorPage _cursorPage { get; } = new CursorPage();
 

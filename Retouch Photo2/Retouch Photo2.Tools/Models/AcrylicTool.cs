@@ -1,7 +1,7 @@
 ﻿using FanKit.Transformers;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Tools.Controls;
+using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
@@ -32,8 +32,8 @@ namespace Retouch_Photo2.Tools.Models
 
         public override bool IsOpen { set { this._acrylicPage.IsOpen = value; } }
         public override ToolType Type => ToolType.Acrylic;
-        public override FrameworkElement Icon { get; } = new AcrylicControl();
-        public override FrameworkElement ShowIcon { get; } = new AcrylicControl();
+        public override FrameworkElement Icon { get; } = new AcrylicIcon();
+        public override FrameworkElement ShowIcon { get; } = new AcrylicIcon();
         public override Page Page => this._acrylicPage;
         AcrylicPage _acrylicPage { get; } = new AcrylicPage();
     }

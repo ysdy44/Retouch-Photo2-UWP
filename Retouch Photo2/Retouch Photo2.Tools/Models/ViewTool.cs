@@ -1,5 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Tools.Controls;
+using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Tips;
@@ -19,8 +19,8 @@ namespace Retouch_Photo2.Tools.Models
 
         public bool IsOpen { set { } }
         public ToolType Type => ToolType.View;
-        public FrameworkElement Icon { get; } = new ViewControl();
-        public FrameworkElement ShowIcon { get; } = new ViewControl();
+        public FrameworkElement Icon { get; } = new ViewIcon();
+        public FrameworkElement ShowIcon { get; } = new ViewIcon();
         public Page Page => this._viewPage;
         ViewPage _viewPage { get; } = new ViewPage();
         
