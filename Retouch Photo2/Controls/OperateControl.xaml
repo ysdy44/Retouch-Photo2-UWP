@@ -5,10 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:operates="using:Retouch_Photo2.Operates"
-    xmlns:operatesAliHor="using:Retouch_Photo2.Operates.AlignHorizontalControls"
-    xmlns:operatesAliVer="using:Retouch_Photo2.Operates.AlignVerticalControls"
-    xmlns:operatesArr="using:Retouch_Photo2.Operates.ArrangeControls"
-    xmlns:operatesTra="using:Retouch_Photo2.Operates.TransformControls"
+    xmlns:operatesAlignHorizontalIcons="using:Retouch_Photo2.Operates.AlignHorizontalIcons"
+    xmlns:operatesAlignVerticalIcons="using:Retouch_Photo2.Operates.AlignVerticalIcons"
+    xmlns:operatesArrangeIcons="using:Retouch_Photo2.Operates.ArrangeIcons"
+    xmlns:operatesTransformIcons="using:Retouch_Photo2.Operates.TransformIcons"
     mc:Ignorable="d"
     MinWidth="200"
     d:DesignHeight="400"
@@ -39,10 +39,10 @@
                             <ToolTip Content="Flip Horizontal" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                         </ToolTipService.ToolTip>
                         <operates:OperateButton.EnabledIcon>
-                            <operatesTra:FlipHorizontalEnabledControl/>
+                            <operatesTransformIcons:FlipHorizontalEnabledIcon/>
                         </operates:OperateButton.EnabledIcon>
                         <operates:OperateButton.DisabledIcon>
-                            <operatesTra:FlipHorizontalDisabledControl/>
+                            <operatesTransformIcons:FlipHorizontalDisabledIcon/>
                         </operates:OperateButton.DisabledIcon>
                     </operates:OperateButton>
 
@@ -51,10 +51,10 @@
                             <ToolTip Content="Flip Vertical" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                         </ToolTipService.ToolTip>
                         <operates:OperateButton.EnabledIcon>
-                            <operatesTra:FlipVerticalEnabledControl/>
+                            <operatesTransformIcons:FlipVerticalEnabledIcon/>
                         </operates:OperateButton.EnabledIcon>
                         <operates:OperateButton.DisabledIcon>
-                            <operatesTra:FlipVerticalDisabledControl/>
+                            <operatesTransformIcons:FlipVerticalDisabledIcon/>
                         </operates:OperateButton.DisabledIcon>
                     </operates:OperateButton>
 
@@ -73,10 +73,10 @@
                             <ToolTip Content="Rotate Left" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                         </ToolTipService.ToolTip>
                         <operates:OperateButton.EnabledIcon>
-                            <operatesTra:RotateLeftEnabledIControl/>
+                            <operatesTransformIcons:RotateLeftEnabledIIcon/>
                         </operates:OperateButton.EnabledIcon>
                         <operates:OperateButton.DisabledIcon>
-                            <operatesTra:RotateLeftDisabledControl/>
+                            <operatesTransformIcons:RotateLeftDisabledIcon/>
                         </operates:OperateButton.DisabledIcon>
                     </operates:OperateButton>
 
@@ -85,10 +85,10 @@
                             <ToolTip Content="Rotate Right" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                         </ToolTipService.ToolTip>
                         <operates:OperateButton.EnabledIcon>
-                            <operatesTra:RotateRightEnabledControl/>
+                            <operatesTransformIcons:RotateRightEnabledIcon/>
                         </operates:OperateButton.EnabledIcon>
                         <operates:OperateButton.DisabledIcon>
-                            <operatesTra:RotateRightDisabledControl/>
+                            <operatesTransformIcons:RotateRightDisabledIcon/>
                         </operates:OperateButton.DisabledIcon>
                     </operates:OperateButton>
 
@@ -114,10 +114,10 @@
                         <ToolTip Content="Move To Back" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:OperateButton.EnabledIcon>
-                        <operatesArr:MoveBackEnabledControl/>
+                        <operatesArrangeIcons:MoveBackEnabledIcon/>
                     </operates:OperateButton.EnabledIcon>
                     <operates:OperateButton.DisabledIcon>
-                        <operatesArr:MoveBackDisabledControl/>
+                        <operatesArrangeIcons:MoveBackDisabledIcon/>
                     </operates:OperateButton.DisabledIcon>
                 </operates:OperateButton>
 
@@ -126,10 +126,10 @@
                         <ToolTip Content="Back One" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:OperateButton.EnabledIcon>
-                        <operatesArr:BackOneEnabledControl/>
+                        <operatesArrangeIcons:BackOneEnabledIcon/>
                     </operates:OperateButton.EnabledIcon>
                     <operates:OperateButton.DisabledIcon>
-                        <operatesArr:BackOneDisabledControl/>
+                        <operatesArrangeIcons:BackOneDisabledIcon/>
                     </operates:OperateButton.DisabledIcon>
                 </operates:OperateButton>
 
@@ -138,10 +138,10 @@
                         <ToolTip Content="Forward One" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:OperateButton.EnabledIcon>
-                        <operatesArr:ForwardOneEnabledControl/>
+                        <operatesArrangeIcons:ForwardOneEnabledIcon/>
                     </operates:OperateButton.EnabledIcon>
                     <operates:OperateButton.DisabledIcon>
-                        <operatesArr:ForwardOneDisabledControl/>
+                        <operatesArrangeIcons:ForwardOneDisabledIcon/>
                     </operates:OperateButton.DisabledIcon>
                 </operates:OperateButton>
 
@@ -150,16 +150,16 @@
                         <ToolTip Content="Move To Front" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:OperateButton.EnabledIcon>
-                        <operatesArr:MoveFrontEnabledControl/>
+                        <operatesArrangeIcons:MoveFrontEnabledIcon/>
                     </operates:OperateButton.EnabledIcon>
                     <operates:OperateButton.DisabledIcon>
-                        <operatesArr:MoveFrontDisabledControl/>
+                        <operatesArrangeIcons:MoveFrontDisabledIcon/>
                     </operates:OperateButton.DisabledIcon>
                 </operates:OperateButton>
             </Grid>
         </Border>
 
-        
+
         <!--Align Horizontal-->
         <TextBlock Text="Align Horizontal:" Style="{StaticResource AppTextBlock}"/>
         <Grid Margin="2,0">
@@ -182,10 +182,10 @@
                             <ToolTip Content="Align Left" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                         </ToolTipService.ToolTip>
                         <operates:OperateButton.EnabledIcon>
-                            <operatesAliHor:LeftEnabledControl/>
+                            <operatesAlignHorizontalIcons:LeftEnabledIcon/>
                         </operates:OperateButton.EnabledIcon>
                         <operates:OperateButton.DisabledIcon>
-                            <operatesAliHor:LeftDisabledControl/>
+                            <operatesAlignHorizontalIcons:LeftDisabledIcon/>
                         </operates:OperateButton.DisabledIcon>
                     </operates:OperateButton>
 
@@ -194,10 +194,10 @@
                             <ToolTip Content="Align Center" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                         </ToolTipService.ToolTip>
                         <operates:OperateButton.EnabledIcon>
-                            <operatesAliHor:CenterEnabledControl/>
+                            <operatesAlignHorizontalIcons:CenterEnabledIcon/>
                         </operates:OperateButton.EnabledIcon>
                         <operates:OperateButton.DisabledIcon>
-                            <operatesAliHor:CenterDisabledControl/>
+                            <operatesAlignHorizontalIcons:CenterDisabledIcon/>
                         </operates:OperateButton.DisabledIcon>
                     </operates:OperateButton>
 
@@ -206,10 +206,10 @@
                             <ToolTip Content="Align Right" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                         </ToolTipService.ToolTip>
                         <operates:OperateButton.EnabledIcon>
-                            <operatesAliHor:RightEnabledControl/>
+                            <operatesAlignHorizontalIcons:RightEnabledIcon/>
                         </operates:OperateButton.EnabledIcon>
                         <operates:OperateButton.DisabledIcon>
-                            <operatesAliHor:RightDisabledControl/>
+                            <operatesAlignHorizontalIcons:RightDisabledIcon/>
                         </operates:OperateButton.DisabledIcon>
                     </operates:OperateButton>
 
@@ -223,17 +223,17 @@
                         <ToolTip Content="Symmetry" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:OperateButton.EnabledIcon>
-                        <operatesAliHor:SymmetryEnabledControl/>
+                        <operatesAlignHorizontalIcons:SymmetryEnabledIcon/>
                     </operates:OperateButton.EnabledIcon>
                     <operates:OperateButton.DisabledIcon>
-                        <operatesAliHor:SymmetryDisabledControl/>
+                        <operatesAlignHorizontalIcons:SymmetryDisabledIcon/>
                     </operates:OperateButton.DisabledIcon>
                 </operates:OperateButton>
 
             </Border>
 
         </Grid>
-        
+
 
         <!--Align Vertical-->
         <TextBlock Text="Align Vertical:" Style="{StaticResource AppTextBlock}"/>
@@ -257,10 +257,10 @@
                             <ToolTip Content="Align Top" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                         </ToolTipService.ToolTip>
                         <operates:OperateButton.EnabledIcon>
-                            <operatesAliVer:TopEnabledControl/>
+                            <operatesAlignVerticalIcons:TopEnabledIcon/>
                         </operates:OperateButton.EnabledIcon>
                         <operates:OperateButton.DisabledIcon>
-                            <operatesAliVer:TopDisabledControl/>
+                            <operatesAlignVerticalIcons:TopDisabledIcon/>
                         </operates:OperateButton.DisabledIcon>
                     </operates:OperateButton>
 
@@ -269,10 +269,10 @@
                             <ToolTip Content="Align Middle" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                         </ToolTipService.ToolTip>
                         <operates:OperateButton.EnabledIcon>
-                            <operatesAliVer:MiddleEnabledControl/>
+                            <operatesAlignVerticalIcons:MiddleEnabledIcon/>
                         </operates:OperateButton.EnabledIcon>
                         <operates:OperateButton.DisabledIcon>
-                            <operatesAliVer:MiddleDisabledControl/>
+                            <operatesAlignVerticalIcons:MiddleDisabledIcon/>
                         </operates:OperateButton.DisabledIcon>
                     </operates:OperateButton>
 
@@ -281,10 +281,10 @@
                             <ToolTip Content="Align Bottom" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                         </ToolTipService.ToolTip>
                         <operates:OperateButton.EnabledIcon>
-                            <operatesAliVer:BottomEnabledControl/>
+                            <operatesAlignVerticalIcons:BottomEnabledIcon/>
                         </operates:OperateButton.EnabledIcon>
                         <operates:OperateButton.DisabledIcon>
-                            <operatesAliVer:BottomDisabledControl/>
+                            <operatesAlignVerticalIcons:BottomDisabledIcon/>
                         </operates:OperateButton.DisabledIcon>
                     </operates:OperateButton>
 
@@ -292,24 +292,24 @@
             </Border>
 
             <Border Grid.Column="2" Style="{StaticResource AppRoundedBorderStyle}">
-              
+
                 <operates:OperateButton x:Name="AlignSymmetryVerticallyButton" IsEnabled="False">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Symmetry" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <operates:OperateButton.EnabledIcon>
-                        <operatesAliVer:SymmetryEnabledControl/>
+                        <operatesAlignVerticalIcons:SymmetryEnabledIcon/>
                     </operates:OperateButton.EnabledIcon>
                     <operates:OperateButton.DisabledIcon>
-                        <operatesAliVer:SymmetryDisabledControl/>
+                        <operatesAlignVerticalIcons:SymmetryDisabledIcon/>
                     </operates:OperateButton.DisabledIcon>
                 </operates:OperateButton>
-                
+
             </Border>
 
         </Grid>
 
-        
+
         <ContentControl Height="2"/>
 
     </StackPanel>
