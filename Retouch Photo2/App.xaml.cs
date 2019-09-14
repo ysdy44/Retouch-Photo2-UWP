@@ -62,7 +62,6 @@ namespace Retouch_Photo2
             ColorMenu = new ColorMenu(),
             ToolMenu = new ToolMenu(),
             LayerMenu = new LayerMenu(),
-
         };
 
 
