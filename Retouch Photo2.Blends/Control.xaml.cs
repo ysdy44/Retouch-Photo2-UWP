@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using Retouch_Photo2.Blends.Icons;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Blends
@@ -31,7 +32,7 @@ namespace Retouch_Photo2.Blends
         //@Construct
         public Control()
         {
-            this.InitializeComponent(); 
+            this.InitializeComponent();
         }
     }
 }

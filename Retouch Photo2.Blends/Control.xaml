@@ -4,51 +4,57 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:Retouch_Photo2.Blends.Controls"
+    xmlns:icons="using:Retouch_Photo2.Blends.Icons"
     mc:Ignorable="d"
     d:DesignHeight="50"
-    d:DesignWidth="400">
+    d:DesignWidth="200"
+    >
 
+    <ComboBox 
+        x:Name="_ComboBox"
+        BorderThickness="0" 
+        BorderBrush="Transparent"
+        Background="Transparent" 
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"                    
+        SelectedIndex="{x:Bind BlendTypeToIntConverter(BlendType),Mode=OneWay}"
+        >
 
-    <Border Style="{StaticResource AppRoundedBorderStyle}">
-        <ComboBox x:Name="_ComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch"
-                    SelectedIndex="{x:Bind BlendTypeToIntConverter(BlendType),Mode=OneWay}">
+        <icons:NormalIcon/>
 
-            <controls:NormalControl/>
+        <icons:MultiplyIcon/>
+        <icons:ScreenIcon/>
+        <icons:DissolveIcon/>
 
-            <controls:MultiplyControl/>
-            <controls:ScreenControl/>
-            <controls:DissolveControl/>
+        <icons:DarkenIcon/>
+        <icons:LightenIcon/>
+        <icons:DarkerColorIcon/>
+        <icons:LighterColorIcon/>
 
-            <controls:DarkenControl/>
-            <controls:LightenControl/>
-            <controls:DarkerColorControl/>
-            <controls:LighterColorControl/>
+        <icons:ColorBurnIcon/>
+        <icons:ColorDodgeIcon/>
+        <icons:LinearBurnIcon/>
+        <icons:LinearDodgeIcon/>
 
-            <controls:ColorBurnControl/>
-            <controls:ColorDodgeControl/>
-            <controls:LinearBurnControl/>
-            <controls:LinearDodgeControl/>
+        <icons:OverlayIcon/>
+        <icons:SoftLightIcon/>
+        <icons:HardLightIcon/>
+        <icons:VividLightIcon/>
+        <icons:LinearLightIcon/>
+        <icons:PinLightIcon/>
 
-            <controls:OverlayControl/>
-            <controls:SoftLightControl/>
-            <controls:HardLightControl/>
-            <controls:VividLightControl/>
-            <controls:LinearLightControl/>
-            <controls:PinLightControl/>
+        <icons:HardMixIcon/>
+        <icons:DifferenceIcon/>
+        <icons:ExclusionIcon/>
 
-            <controls:HardMixControl/>
-            <controls:DifferenceControl/>
-            <controls:ExclusionControl/>
+        <icons:HueIcon/>
+        <icons:SaturationIcon/>
+        <icons:ColorIcon/>
 
-            <controls:HueControl/>
-            <controls:SaturationControl/>
-            <controls:ColorControl/>
+        <icons:LuminosityIcon/>
+        <icons:SubtractIcon/>
+        <icons:DivisionIcon/>
 
-            <controls:LuminosityControl/>
-            <controls:SubtractControl/>
-            <controls:DivisionControl/>
+    </ComboBox>
 
-        </ComboBox>
-    </Border>
 </UserControl>
