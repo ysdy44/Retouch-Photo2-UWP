@@ -299,7 +299,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Border x:Name="TopLeftBorder" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+            <Border x:Name="TopLeftBorder" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
             <StackPanel x:Name="TopLeftStackPanel" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" 
                     Visibility="Visible">

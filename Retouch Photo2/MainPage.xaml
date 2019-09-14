@@ -23,6 +23,9 @@
 
     <Page.Resources>
 
+        <!--Extensions-->
+        <elements:ApplicationViewTitleBarBackgroundExtensions x:Key="AVTBBE" TitleBarColor="{ThemeResource AppForegroundColor}"/>
+     
         <!--DataTemplate-->
         <DataTemplate x:Name="DataTemplate" x:DataType="viewModels:Photo">
             <Grid >
@@ -618,11 +621,17 @@
                 <ColumnDefinition Width="6*"/>
                 <ColumnDefinition Width="1*" MinWidth="50" MaxWidth="80"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="RefreshButton" Width="Auto" Content="&#xE117;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"/>
+
+            <Button x:Name="RefreshButton" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                <FontIcon FontSize="20" Glyph="&#xE117;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+            </Button>
+          
             <TextBlock Grid.Column="1" Text="Retouh Photo2" FontSize="32" FontWeight="Light" HorizontalAlignment="Center"/>
-            <elements:ThemeControl x:Name="ThemeControl" Grid.Column="2" 
-                       TitleBarColor="{ThemeResource AppForegroundColor}"
-                       />
+        
+            <Button x:Name="SettingButton" Grid.Column="2" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                <FontIcon FontSize="22" Glyph="&#xE115;" FontFamily="Segoe UI Symbol" />
+            </Button>
+
         </Grid>
 
         <!--Body-->

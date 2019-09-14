@@ -122,9 +122,6 @@ namespace Retouch_Photo2
         {
             this.InitializeComponent();
 
-           // this.ViewModel.CanvasTheme = (App.Current.RequestedTheme == ApplicationTheme.Dark) ? ElementTheme.Dark : ElementTheme.Light;
-            this.ThemeControl.Loaded += (s, e) => this.ThemeControl.ApplicationTheme = App.Current.RequestedTheme;
-
             this.Loaded += (s, e) =>
             {
                 if (this.PhotoFileList.Count == 0)
@@ -135,6 +132,12 @@ namespace Retouch_Photo2
                 //Project project = new Project(1024, 1024);//Project
                 //this.Frame.Navigate(typeof(DrawPage), project);//Navigate    
             };
+
+            this.SettingButton.Tapped += (s, e) =>
+            {
+                this.Frame.Navigate(typeof(SettingPage));//Navigate     
+            };
+
             this.GridView.ItemClick += (s, e) =>
             {
                 if (this.State != MainPageState.None) return;

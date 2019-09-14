@@ -110,6 +110,7 @@
     <Compile Include="CompositeModes\CompositeModeControl.xaml.cs">
       <DependentUpon>CompositeModeControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ApplicationViewTitleBarBackgroundExtensions.cs" />
     <Compile Include="Controls\LoadingControl.xaml.cs">
       <DependentUpon>LoadingControl.xaml</DependentUpon>
     </Compile>

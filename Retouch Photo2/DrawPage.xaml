@@ -54,9 +54,9 @@
                 </Grid>
             </elementDrawPages:DrawLayout.CenterContent>
             <elementDrawPages:DrawLayout.TopLeftPane>
-                <Button x:Name="BackButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Button x:Name="BackButton" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                     <FontIcon Glyph="&#xE0D5;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
-                </Button>                        
+                </Button>
             </elementDrawPages:DrawLayout.TopLeftPane>
 
             <!--Left & Right-->
