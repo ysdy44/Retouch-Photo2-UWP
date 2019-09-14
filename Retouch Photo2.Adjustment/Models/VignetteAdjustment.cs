@@ -1,7 +1,7 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Newtonsoft.Json;
-using Retouch_Photo2.Adjustments.Controls;
+using Retouch_Photo2.Adjustments.Icons;
 using Windows.UI;
 using Windows.UI.Xaml;
 
@@ -13,10 +13,11 @@ namespace Retouch_Photo2.Adjustments.Models
     [JsonObject(MemberSerialization.OptIn)]
     public class VignetteAdjustment : IAdjustment
     {
-        [JsonProperty] public string TypeName { get; } = AdjustmentType.Vignette.ToString();
+        [JsonProperty]
+        public string TypeName { get; } = AdjustmentType.Vignette.ToString();
         public AdjustmentType Type => AdjustmentType.Vignette;
-        public FrameworkElement Icon { get; } = new VignetteControl();
-        public Visibility Visibility => Visibility.Visible;
+        public FrameworkElement Icon { get; } = new VignetteIcon();
+        public Visibility PageVisibility => Visibility.Visible;
 
 
         [JsonProperty]

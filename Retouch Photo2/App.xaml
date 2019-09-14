@@ -76,7 +76,6 @@
             <!--Merged-->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ms-appx:///Style/Style.xaml"/>
-                <ResourceDictionary Source="ms-appx:///Style/Transition.xaml"/>
                 <ResourceDictionary Source="ms-appx:///Style/Template.xaml"/>
 
                 <!--Version-->

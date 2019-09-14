@@ -1,4 +1,4 @@
-﻿using Retouch_Photo2.Adjustments.Controls;
+﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using Windows.UI.Xaml;
 
@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         public GammaTransferAdjustment GammaTransferAdjustment;
 
         public AdjustmentType Type { get; } = AdjustmentType.GammaTransfer;
-        public FrameworkElement Icon { get; } = new GammaTransferControl();
+        public FrameworkElement Icon { get; } = new GammaTransferIcon();
         public FrameworkElement Page => this;
 
         
@@ -240,7 +240,6 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         
         public IAdjustment GetNewAdjustment() => new GammaTransferAdjustment();
-        public IAdjustment GetAdjustment() => this.GammaTransferAdjustment;
         public void SetAdjustment(IAdjustment value)
         {
             if (value is GammaTransferAdjustment adjustment)

@@ -1,4 +1,4 @@
-﻿using Retouch_Photo2.Adjustments.Controls;
+﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using Windows.UI.Xaml;
 
@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         public GrayAdjustment GrayAdjustment;
 
         public AdjustmentType Type { get; } = AdjustmentType.Gray;
-        public FrameworkElement Icon { get; } = new GrayControl();
+        public FrameworkElement Icon { get; } = new GrayIcon();
         public FrameworkElement Page => this;
                
         //@Construct
@@ -24,7 +24,6 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         
         public IAdjustment GetNewAdjustment() => new GrayAdjustment();
-        public IAdjustment GetAdjustment() => this.GrayAdjustment;
         public void SetAdjustment(IAdjustment value)
         {
             if (value is GrayAdjustment adjustment)

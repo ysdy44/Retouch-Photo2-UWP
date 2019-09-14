@@ -1,15 +1,15 @@
 ﻿using Retouch_Photo2.Adjustments.Models;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Adjustments.Controls
+namespace Retouch_Photo2.Adjustments.Icons
 {
     /// <summary>
-    /// Control of <see cref = "HueRotationAdjustment"/>.
+    /// Icon of <see cref = "VignetteAdjustment"/>.
     /// </summary>
-    public sealed partial class HueRotationControl : UserControl
+    public sealed partial class VignetteIcon : UserControl
     {
         //@Construct
-        public HueRotationControl()
+        public VignetteIcon()
         {
             this.InitializeComponent();
         }

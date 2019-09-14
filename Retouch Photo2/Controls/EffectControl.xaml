@@ -5,8 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
-    xmlns:effects="using:Retouch_Photo2.Effects"
-    xmlns:effectControls="using:Retouch_Photo2.Effects.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
@@ -53,6 +51,8 @@
         <Button x:Name="ResetButton" Grid.Column="2" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <FontIcon Glyph="&#xE149;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
         </Button>
+        
+        
         <Border x:Name="Frame" Grid.ColumnSpan="3" Grid.Row="1" Background="Transparent">
 
             <!--Visibility:Show-->

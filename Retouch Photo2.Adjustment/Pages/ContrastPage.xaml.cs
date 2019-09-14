@@ -1,4 +1,4 @@
-﻿using Retouch_Photo2.Adjustments.Controls;
+﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using Windows.UI.Xaml;
 
@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         public ContrastAdjustment ContrastAdjustment;
 
         public AdjustmentType Type { get; } = AdjustmentType.Contrast;
-        public FrameworkElement Icon { get; } = new ContrastControl();
+        public FrameworkElement Icon { get; } = new ContrastIcon();
         public FrameworkElement Page => this;
 
         //@Construct
@@ -31,7 +31,6 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         
         public IAdjustment GetNewAdjustment() => new ContrastAdjustment();
-        public IAdjustment GetAdjustment() => this.ContrastAdjustment;
         public void SetAdjustment(IAdjustment value)
         {
             if (value is ContrastAdjustment adjustment)

@@ -1,4 +1,4 @@
-﻿using Retouch_Photo2.Adjustments.Controls;
+﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using Windows.UI.Xaml;
 
@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         public TemperatureAdjustment TemperatureAdjustment;
 
         public AdjustmentType Type { get; } = AdjustmentType.Temperature;
-        public FrameworkElement Icon { get; } = new TemperatureControl();
+        public FrameworkElement Icon { get; } = new TemperatureIcon();
         public FrameworkElement Page => this;
                
         //@Construct
@@ -37,7 +37,6 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         
         public IAdjustment GetNewAdjustment() => new TemperatureAdjustment();
-        public IAdjustment GetAdjustment() => this.TemperatureAdjustment;
         public void SetAdjustment(IAdjustment value)
         {
             if (value is TemperatureAdjustment adjustment)

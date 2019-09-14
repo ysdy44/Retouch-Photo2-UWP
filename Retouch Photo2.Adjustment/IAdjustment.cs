@@ -1,6 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Adjustments
@@ -11,7 +10,7 @@ namespace Retouch_Photo2.Adjustments
     [JsonObject(MemberSerialization.OptIn)]
     public interface IAdjustment
     {
-        /// <summary> Gets adjustment's type. </summary>
+        /// <summary> Gets adjustment's type name. </summary>
         [JsonProperty]
         string TypeName { get; }
 
@@ -20,7 +19,7 @@ namespace Retouch_Photo2.Adjustments
         /// <summary> Gets IAdjustment's icon. </summary>
         FrameworkElement Icon { get; }
         /// <summary> Gets whether page is visible. </summary>
-        Visibility Visibility { get; }
+        Visibility PageVisibility { get; }
         
         /// <summary> Reset the adjustment data. </summary>
         void Reset();
@@ -38,12 +37,14 @@ namespace Retouch_Photo2.Adjustments
         IAdjustment Clone();
     }
     
-    /// <summary> <see cref = "IAdjustment" />'s substitute. </summary>
+    /// <summary> 
+    /// <see cref = "IAdjustment" />'s substitute. 
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class Adjustment2
     {
-        /// <summary> Gets or Stes adjustment's type. </summary>
+        /// <summary> Gets or sets adjustment's type name. </summary>
         [JsonProperty]
-        public string TypeName { get; }
+        public string TypeName { get; set; }
     }
 }

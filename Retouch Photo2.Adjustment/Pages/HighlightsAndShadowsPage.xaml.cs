@@ -1,4 +1,4 @@
-﻿using Retouch_Photo2.Adjustments.Controls;
+﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using Windows.UI.Xaml;
 
@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         public HighlightsAndShadowsAdjustment HighlightsAndShadowsAdjustment;
 
         public AdjustmentType Type { get; } = AdjustmentType.HighlightsAndShadows;
-        public FrameworkElement Icon { get; } = new HighlightsAndShadowsControl();
+        public FrameworkElement Icon { get; } = new HighlightsAndShadowsIcon();
         public FrameworkElement Page => this;
                
         //@Construct
@@ -49,7 +49,6 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         
         public IAdjustment GetNewAdjustment() => new HighlightsAndShadowsAdjustment();
-        public IAdjustment GetAdjustment() => this.HighlightsAndShadowsAdjustment;
         public void SetAdjustment(IAdjustment value)
         {
             if (value is HighlightsAndShadowsAdjustment adjustment)

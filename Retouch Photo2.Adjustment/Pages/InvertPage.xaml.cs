@@ -1,4 +1,4 @@
-﻿using Retouch_Photo2.Adjustments.Controls;
+﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using Windows.UI.Xaml;
 
@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         public InvertAdjustment InvertAdjustment;
 
         public AdjustmentType Type { get; } = AdjustmentType.Invert;
-        public FrameworkElement Icon { get; } = new InvertControl();
+        public FrameworkElement Icon { get; } = new InvertIcon();
         public FrameworkElement Page => this;
                
         //@Construct
@@ -24,7 +24,6 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         
         public IAdjustment GetNewAdjustment() => new InvertAdjustment();
-        public IAdjustment GetAdjustment() => this.InvertAdjustment;
         public void SetAdjustment(IAdjustment value)
         {
             if (value is InvertAdjustment adjustment)

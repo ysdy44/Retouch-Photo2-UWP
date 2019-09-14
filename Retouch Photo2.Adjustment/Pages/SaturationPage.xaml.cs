@@ -1,4 +1,4 @@
-﻿using Retouch_Photo2.Adjustments.Controls;
+﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using Windows.UI.Xaml;
 
@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         public SaturationAdjustment SaturationAdjustment;
 
         public AdjustmentType Type { get; } = AdjustmentType.Saturation;
-        public FrameworkElement Icon { get; } = new SaturationControl();
+        public FrameworkElement Icon { get; } = new SaturationIcon();
         public FrameworkElement Page => this;
                
         //@Construct
@@ -31,7 +31,6 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         
         public IAdjustment GetNewAdjustment() => new SaturationAdjustment();
-        public IAdjustment GetAdjustment() => this.SaturationAdjustment;
         public void SetAdjustment(IAdjustment value)
         {
             if (value is SaturationAdjustment adjustment)

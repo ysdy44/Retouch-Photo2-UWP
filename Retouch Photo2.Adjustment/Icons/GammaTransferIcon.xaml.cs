@@ -1,15 +1,15 @@
 ﻿using Retouch_Photo2.Adjustments.Models;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Adjustments.Controls
+namespace Retouch_Photo2.Adjustments.Icons
 {
     /// <summary>
-    /// Control of <see cref = "GrayAdjustment"/>.
+    /// Icon of <see cref = "GammaTransferAdjustment"/>.
     /// </summary>
-    public sealed partial class GrayControl : UserControl
+    public sealed partial class GammaTransferIcon : UserControl
     {
         //@Construct
-        public GrayControl()
+        public GammaTransferIcon()
         {
             this.InitializeComponent();
         }

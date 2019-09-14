@@ -1,4 +1,4 @@
-﻿using Retouch_Photo2.Adjustments.Controls;
+﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using System;
 using Windows.UI.Xaml;
@@ -14,7 +14,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         public HueRotationAdjustment HueRotationAdjustment;
 
         public AdjustmentType Type { get; } = AdjustmentType.Brightness;
-        public FrameworkElement Icon { get; } = new HueRotationControl();
+        public FrameworkElement Icon { get; } = new HueRotationIcon();
         public FrameworkElement Page => this;
                
         //@Construct
@@ -32,7 +32,6 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         
         public IAdjustment GetNewAdjustment() => new HueRotationAdjustment();
-        public IAdjustment GetAdjustment() => this.HueRotationAdjustment;
         public void SetAdjustment(IAdjustment value)
         {
             if (value is HueRotationAdjustment adjustment)

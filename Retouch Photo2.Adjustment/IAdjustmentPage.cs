@@ -16,8 +16,6 @@ namespace Retouch_Photo2.Adjustments
         
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         IAdjustment GetNewAdjustment();
-        /// <summary> Return the current <see cref = "IAdjustment"/>. </summary>
-        IAdjustment GetAdjustment();
         /// <summary> Assignment the current <see cref = "IAdjustment"/>. </summary>
         void SetAdjustment(IAdjustment adjustment);
 

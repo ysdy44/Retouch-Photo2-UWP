@@ -1,15 +1,15 @@
 ﻿using Retouch_Photo2.Adjustments.Models;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Adjustments.Controls
+namespace Retouch_Photo2.Adjustments.Icons
 {
     /// <summary>
-    /// Control of <see cref = "VignetteAdjustment"/>.
+    /// Icon of <see cref = "InvertAdjustment"/>.
     /// </summary>
-    public sealed partial class VignetteControl : UserControl
+    public sealed partial class InvertIcon : UserControl
     {
         //@Construct
-        public VignetteControl()
+        public InvertIcon()
         {
             this.InitializeComponent();
         }

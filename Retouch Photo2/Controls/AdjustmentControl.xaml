@@ -1,9 +1,10 @@
 ﻿<UserControl
     x:Class="Retouch_Photo2.Controls.AdjustmentControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:adjustments="using:Retouch_Photo2.Adjustments"
     mc:Ignorable="d"
     d:DesignHeight="300"
@@ -14,18 +15,20 @@
 
         <!--Flyout-->
         <Flyout x:Name="PageFlyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <ListView x:Name="ListView" Width="190" SelectionMode="None" IsItemClickEnabled="True">
+            <ListView x:Name="PageListView" Width="190" SelectionMode="None" IsItemClickEnabled="True">
+               
                 <ListView.Header>
                     <TextBlock Text="Select a adjustment:" Style="{StaticResource AppTextBlock}"/>
                 </ListView.Header>
+                
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="adjustments:IAdjustmentPage">
                         <ContentPresenter Content="{x:Bind Icon}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
+                
             </ListView>
         </Flyout>
-
         <Flyout x:Name="FilterFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <Border MaxWidth="330" MaxHeight="330">
                 <GridView x:Name="FilterGridView" 
@@ -61,32 +64,33 @@
             </Border>
         </Flyout>
 
-
         <!--DataTemplate-->
         <DataTemplate x:Key="DataTemplate" x:DataType="adjustments:IAdjustment">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
+            <Border Margin="2" Style="{StaticResource AppRoundedBorderStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
 
-                <!--Adjustment-->
-                <ContentPresenter Content="{x:Bind Icon}"/>
+                    <!--Adjustment-->
+                    <ContentPresenter Content="{x:Bind Icon}"/>
 
-                <!--Edit-->
-                <Button x:Name="EditButton" Grid.Column="1" Width="30" Height="40" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                     Visibility="{x:Bind Visibility}" Tapped="EditButton_Tapped">
-                    <FontIcon FontSize="14" Glyph="&#xEC88;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
-                </Button>
+                    <!--Edit-->
+                    <Button x:Name="EditButton" Grid.Column="1" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                     Visibility="{x:Bind PageVisibility}" Tapped="EditButton_Tapped">
+                        <FontIcon FontSize="14" Glyph="&#xEC88;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+                    </Button>
 
-                <!--Remove-->
-                <Button x:Name="RemoveButton" Grid.Column="2" Width="30" Height="40" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    <!--Remove-->
+                    <Button x:Name="RemoveButton" Grid.Column="2" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         Tapped="RemoveButton_Tapped">
-                    <FontIcon FontSize="12" Glyph="&#xE106;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
-                </Button>
+                        <FontIcon FontSize="12" Glyph="&#xE106;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+                    </Button>
 
-            </Grid>
+                </Grid>
+            </Border>
         </DataTemplate>
 
     </UserControl.Resources>
@@ -101,33 +105,54 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*" MinHeight="165"/>
-            <RowDefinition Height="2"/>
         </Grid.RowDefinitions>
+
 
         <Button x:Name="FilterButton" Grid.Column="0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <FontIcon Glyph="&#xE169;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
         </Button>
-
         <Button x:Name="AddButton" Grid.Column="2" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <FontIcon Glyph="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
         </Button>
 
 
-        <Border x:Name="Border" Grid.ColumnSpan="3" Grid.Row="1" Margin="2,0" Height="Auto" VerticalAlignment="Top" Style="{StaticResource AppRoundedBorderStyle}">
-            <ItemsControl x:Name="ItemsControl" ItemTemplate="{StaticResource DataTemplate}"/>
-        </Border>
-        <TextBlock x:Name="TextBlock" Grid.ColumnSpan="3" Grid.Row="1" Text="No Adjustment" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlock}">
-    
-            
-        </TextBlock>
+        <ItemsControl x:Name="ItemsControl" Grid.ColumnSpan="3" Grid.Row="1"
+                          VerticalAlignment="Top" ItemTemplate="{StaticResource DataTemplate}">
+
+            <!--Visibility:Show-->
+            <animations:Implicit.ShowAnimations>
+                <animations:TranslationAnimation Duration="0:0:0.4" From="-25,0,0" To="0,0,0"/>
+                <animations:OpacityAnimation Duration="0:0:0.5" From="0.0" To="1.0"/>
+            </animations:Implicit.ShowAnimations>
+
+        </ItemsControl>
+        <TextBlock x:Name="TextBlock" Grid.ColumnSpan="3" Grid.Row="1" Text="No Adjustment" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlock}"/>
 
 
-        <Button x:Name="BackButton" Grid.Column="0" Content="&#xE0A6;" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-        <Button x:Name="ResetButton" Grid.Column="2" Content="&#xE149;" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Button x:Name="BackButton" Grid.Column="0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+            <!--Visibility:Show-->
+            <animations:Implicit.ShowAnimations>
+                <animations:TranslationAnimation Duration="0:0:0.4" From="50,0,0" To="0,0,0"/>
+                <animations:OpacityAnimation Duration="0:0:0.5" From="0.0" To="1.0"/>
+            </animations:Implicit.ShowAnimations>
+
+            <FontIcon Glyph="&#xE0A6;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+        </Button>
+        <Button x:Name="ResetButton" Grid.Column="2" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <FontIcon Glyph="&#xE149;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+        </Button>
+   
+        
         <Border x:Name="Frame" Grid.ColumnSpan="3" Grid.Row="1" Background="Transparent">
-       
-            
-            <!--Frame-->
+
+            <!--Visibility:Show-->
+            <animations:Implicit.ShowAnimations>
+                <animations:TranslationAnimation Duration="0:0:0.4" From="0,25,0" To="0,0,0"/>
+                <animations:OpacityAnimation Duration="0:0:0.5" From="0.0" To="1.0"/>
+            </animations:Implicit.ShowAnimations>
+
+            <!--Frame-->      
         </Border>
 
 

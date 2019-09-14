@@ -1,4 +1,4 @@
-﻿using Retouch_Photo2.Adjustments.Controls;
+﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using Windows.UI.Xaml;
 
@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         public ExposureAdjustment ExposureAdjustment;
 
         public AdjustmentType Type { get; } = AdjustmentType.Exposure;
-        public FrameworkElement Icon { get; } = new ExposureControl();
+        public FrameworkElement Icon { get; } = new ExposureIcon();
         public FrameworkElement Page => this;
 
         //@Construct
@@ -31,7 +31,6 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         
         public IAdjustment GetNewAdjustment() => new ExposureAdjustment();
-        public IAdjustment GetAdjustment() => this.ExposureAdjustment;
         public void SetAdjustment(IAdjustment value)
         {
             if (value is ExposureAdjustment adjustment)

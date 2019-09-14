@@ -1,15 +1,15 @@
 ﻿using Retouch_Photo2.Adjustments.Models;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Adjustments.Controls
+namespace Retouch_Photo2.Adjustments.Icons
 {
     /// <summary>
-    /// Control of <see cref = "SaturationAdjustment"/>.
+    /// Icon of <see cref = "ExposureAdjustment"/>.
     /// </summary>
-    public sealed partial class SaturationControl : UserControl
+    public sealed partial class ExposureIcon : UserControl
     {
         //@Construct
-        public SaturationControl()
+        public ExposureIcon()
         {
             this.InitializeComponent();
         }

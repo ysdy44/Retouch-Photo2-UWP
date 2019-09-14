@@ -1,6 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Adjustments.Controls;
+using Retouch_Photo2.Adjustments.Icons;
 using Windows.UI.Xaml;
 using Newtonsoft.Json;
 
@@ -14,9 +14,9 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         [JsonProperty]
         public string TypeName { get; } = AdjustmentType.HueRotation.ToString();
-         public AdjustmentType Type => AdjustmentType.HueRotation;
-         public FrameworkElement Icon { get; } = new HueRotationControl();
-         public Visibility Visibility => Visibility.Visible;
+        public AdjustmentType Type => AdjustmentType.HueRotation;
+        public FrameworkElement Icon { get; } = new HueRotationIcon();
+        public Visibility PageVisibility => Visibility.Visible;
 
 
         [JsonProperty]

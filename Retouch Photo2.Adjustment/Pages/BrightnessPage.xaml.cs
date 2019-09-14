@@ -1,4 +1,4 @@
-﻿using Retouch_Photo2.Adjustments.Controls;
+﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using Windows.UI.Xaml;
 
@@ -12,7 +12,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         public BrightnessAdjustment BrightnessAdjustment;
 
         public AdjustmentType Type { get; } = AdjustmentType.Brightness;
-        public FrameworkElement Icon { get; } = new BrightnessControl();
+        public FrameworkElement Icon { get; } = new BrightnessIcon();
         public FrameworkElement Page => this;
 
         //@Construct
@@ -49,7 +49,6 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         
         public IAdjustment GetNewAdjustment() => new BrightnessAdjustment();
-        public IAdjustment GetAdjustment() => this.BrightnessAdjustment;
         public void SetAdjustment(IAdjustment value)
         {
             if (value is BrightnessAdjustment adjustment)

@@ -1,15 +1,15 @@
 ﻿using Retouch_Photo2.Adjustments.Models;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Adjustments.Controls
+namespace Retouch_Photo2.Adjustments.Icons
 {
     /// <summary>
-    /// Control of <see cref = "BrightnessAdjustment"/>.
+    /// Icon of <see cref = "BrightnessAdjustment"/>.
     /// </summary>
-    public sealed partial class BrightnessControl : UserControl
+    public sealed partial class BrightnessIcon : UserControl
     {
         //@Construct
-        public BrightnessControl()
+        public BrightnessIcon()
         {
             this.InitializeComponent();
         }

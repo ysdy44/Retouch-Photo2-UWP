@@ -106,49 +106,48 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AdjustmentHandler.cs" />
+    <Compile Include="FilterHelper.cs" />
     <Compile Include="IAdjustment.cs" />
     <Compile Include="IAdjustmentPage.cs" />
     <Compile Include="Filter.cs" />
     <Compile Include="AdjustmentManager.cs" />
     <Compile Include="AdjustmentType.cs" />
-    <Compile Include="Controls\BrightnessControl.xaml.cs">
-      <DependentUpon>BrightnessControl.xaml</DependentUpon>
+    <Compile Include="Icons\BrightnessIcon.xaml.cs">
+      <DependentUpon>BrightnessIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ContrastControl.xaml.cs">
-      <DependentUpon>ContrastControl.xaml</DependentUpon>
+    <Compile Include="Icons\ContrastIcon.xaml.cs">
+      <DependentUpon>ContrastIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ExposureControl.xaml.cs">
-      <DependentUpon>ExposureControl.xaml</DependentUpon>
+    <Compile Include="Icons\ExposureIcon.xaml.cs">
+      <DependentUpon>ExposureIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GammaTransferControl.xaml.cs">
-      <DependentUpon>GammaTransferControl.xaml</DependentUpon>
+    <Compile Include="Icons\GammaTransferIcon.xaml.cs">
+      <DependentUpon>GammaTransferIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GrayControl.xaml.cs">
-      <DependentUpon>GrayControl.xaml</DependentUpon>
+    <Compile Include="Icons\GrayIcon.xaml.cs">
+      <DependentUpon>GrayIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\HighlightsAndShadowsControl.xaml.cs">
-      <DependentUpon>HighlightsAndShadowsControl.xaml</DependentUpon>
+    <Compile Include="Icons\HighlightsAndShadowsIcon.xaml.cs">
+      <DependentUpon>HighlightsAndShadowsIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\HueRotationControl.xaml.cs">
-      <DependentUpon>HueRotationControl.xaml</DependentUpon>
+    <Compile Include="Icons\HueRotationIcon.xaml.cs">
+      <DependentUpon>HueRotationIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\InvertControl.xaml.cs">
-      <DependentUpon>InvertControl.xaml</DependentUpon>
+    <Compile Include="Icons\InvertIcon.xaml.cs">
+      <DependentUpon>InvertIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SaturationControl.xaml.cs">
-      <DependentUpon>SaturationControl.xaml</DependentUpon>
+    <Compile Include="Icons\SaturationIcon.xaml.cs">
+      <DependentUpon>SaturationIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TemperatureControl.xaml.cs">
-      <DependentUpon>TemperatureControl.xaml</DependentUpon>
+    <Compile Include="Icons\TemperatureIcon.xaml.cs">
+      <DependentUpon>TemperatureIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\VignetteControl.xaml.cs">
-      <DependentUpon>VignetteControl.xaml</DependentUpon>
+    <Compile Include="Icons\VignetteIcon.xaml.cs">
+      <DependentUpon>VignetteIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="JsonAttribute.cs" />
     <Compile Include="Models\BrightnessAdjustment.cs" />
     <Compile Include="Models\ContrastAdjustment.cs" />
     <Compile Include="Models\ExposureAdjustment.cs" />
@@ -211,47 +210,47 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\BrightnessControl.xaml">
+    <Page Include="Icons\BrightnessIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ContrastControl.xaml">
+    <Page Include="Icons\ContrastIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ExposureControl.xaml">
+    <Page Include="Icons\ExposureIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\GammaTransferControl.xaml">
+    <Page Include="Icons\GammaTransferIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\GrayControl.xaml">
+    <Page Include="Icons\GrayIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\HighlightsAndShadowsControl.xaml">
+    <Page Include="Icons\HighlightsAndShadowsIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\HueRotationControl.xaml">
+    <Page Include="Icons\HueRotationIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\InvertControl.xaml">
+    <Page Include="Icons\InvertIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\SaturationControl.xaml">
+    <Page Include="Icons\SaturationIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\TemperatureControl.xaml">
+    <Page Include="Icons\TemperatureIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\VignetteControl.xaml">
+    <Page Include="Icons\VignetteIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

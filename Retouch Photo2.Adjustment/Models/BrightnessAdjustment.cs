@@ -1,6 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Adjustments.Controls;
+using Retouch_Photo2.Adjustments.Icons;
 using System.Numerics;
 using Windows.UI.Xaml;
 using Newtonsoft.Json;
@@ -16,8 +16,8 @@ namespace Retouch_Photo2.Adjustments.Models
         [JsonProperty]
         public string TypeName { get; } = AdjustmentType.Brightness.ToString();
         public AdjustmentType Type => AdjustmentType.Brightness;
-        public FrameworkElement Icon { get; } = new BrightnessControl();
-        public Visibility Visibility => Visibility.Visible;
+        public FrameworkElement Icon { get; } = new BrightnessIcon();
+        public Visibility PageVisibility => Visibility.Visible;
 
         /// <summary> Interval 1.0->0.5 . </summary>
         [JsonProperty]

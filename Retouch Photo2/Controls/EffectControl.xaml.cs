@@ -46,8 +46,26 @@ namespace Retouch_Photo2.Controls
         }
 
 
-        IEffect Effect;
-        List<IEffect> Effects = new List<IEffect>
+        private IEffect effect;
+        public IEffect Effect
+        {
+            get => this.effect;
+            set
+            {
+                if (value == null)
+                {
+                    this.Frame.Child = null;
+                    this.State = EffectControlState.Effects;
+                }
+                else
+                {
+                    this.Frame.Child = value.Page.Self;
+                    this.State = EffectControlState.Edit;
+                }
+                this.effect = value;
+            }
+        }
+        public List<IEffect> Effects = new List<IEffect>
         {
             new GaussianBlurEffect(),
             new DirectionalBlurEffect(),
@@ -134,12 +152,7 @@ namespace Retouch_Photo2.Controls
 
             //Button
             this.ResetButton.Tapped += (s, e) => this.Reset(this.Effect);
-            this.BackButton.Tapped += (s, e) =>
-            {
-                this.Effect = null;
-                this.Frame.Child = null;
-                this.State = EffectControlState.Effects;
-            };
+            this.BackButton.Tapped += (s, e) =>  this.Effect = null;
         }
 
 
@@ -179,21 +192,16 @@ namespace Retouch_Photo2.Controls
             if (effect == null) return;
             if (effect.Button.ToggleSwitch.IsEnabled == false) return;
             if (effect.Button.ToggleSwitch.IsOn == false) return;
-
-
+            
             this.Effect = effect;
-
             IEffectPage page = effect.Page;
-            this.Frame.Child = page.Self;
 
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
                 EffectManager effectManager = layer.EffectManager;
-                effect.Page.FollowEffectManager(effectManager);
+                page.FollowEffectManager(effectManager);
             });
-
-            this.State = EffectControlState.Edit;
         }
 
     }
