@@ -1,7 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Layers.Controls;
+using Retouch_Photo2.Layers.Icons;
 using Retouch_Photo2.Layers.Models;
 using System.Numerics;
 using Windows.UI.Xaml;
@@ -15,7 +15,7 @@ namespace Retouch_Photo2.Layers.Models
     {
         //@Override      
         public override string Type => "Rectangle";
-        public override UIElement Icon=> new RectangleControl();
+        public override UIElement Icon=> new RectangleIcon();
 
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)

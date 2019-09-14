@@ -1,15 +1,15 @@
 ﻿using Retouch_Photo2.Layers.Models;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Layers.Controls
+namespace Retouch_Photo2.Layers.Icons
 {
     /// <summary>
-    /// Control of <see cref = "RectangleLayer"/>.
+    /// Icon of <see cref = "AcrylicLayer"/>.
     /// </summary>
-    public sealed partial class RectangleControl : UserControl
+    public sealed partial class AcrylicIcon : UserControl
     {
         //@Construct
-        public RectangleControl()
+        public AcrylicIcon()
         {
             this.InitializeComponent();
         }

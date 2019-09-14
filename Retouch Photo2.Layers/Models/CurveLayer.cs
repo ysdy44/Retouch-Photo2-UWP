@@ -1,7 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Layers.Controls;
+using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Layers.Models
     {
         //@Override       
         public override string Type => "Curve";
-        public override UIElement Icon => new CurveControl();
+        public override UIElement Icon => new CurveIcon();
 
         public NodeCollection NodeCollection { get; private set; }
 

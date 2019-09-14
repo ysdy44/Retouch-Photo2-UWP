@@ -106,23 +106,23 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Controls\AcrylicControl.xaml.cs">
-      <DependentUpon>AcrylicControl.xaml</DependentUpon>
+    <Compile Include="Icons\AcrylicIcon.xaml.cs">
+      <DependentUpon>AcrylicIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CurveControl.xaml.cs">
-      <DependentUpon>CurveControl.xaml</DependentUpon>
+    <Compile Include="Icons\CurveIcon.xaml.cs">
+      <DependentUpon>CurveIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\EllipseControl.xaml.cs">
-      <DependentUpon>EllipseControl.xaml</DependentUpon>
+    <Compile Include="Icons\EllipseIcon.xaml.cs">
+      <DependentUpon>EllipseIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GroupControl.xaml.cs">
-      <DependentUpon>GroupControl.xaml</DependentUpon>
+    <Compile Include="Icons\GroupIcon.xaml.cs">
+      <DependentUpon>GroupIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ImageControl.xaml.cs">
-      <DependentUpon>ImageControl.xaml</DependentUpon>
+    <Compile Include="Icons\ImageIcon.xaml.cs">
+      <DependentUpon>ImageIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RectangleControl.xaml.cs">
-      <DependentUpon>RectangleControl.xaml</DependentUpon>
+    <Compile Include="Icons\RectangleIcon.xaml.cs">
+      <DependentUpon>RectangleIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
@@ -154,27 +154,27 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\AcrylicControl.xaml">
+    <Page Include="Icons\AcrylicIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\CurveControl.xaml">
+    <Page Include="Icons\CurveIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\EllipseControl.xaml">
+    <Page Include="Icons\EllipseIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\GroupControl.xaml">
+    <Page Include="Icons\GroupIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ImageControl.xaml">
+    <Page Include="Icons\ImageIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\RectangleControl.xaml">
+    <Page Include="Icons\RectangleIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

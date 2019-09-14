@@ -1,7 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Layers.Controls;
+using Retouch_Photo2.Layers.Icons;
 using System.Numerics;
 using Windows.Foundation;
 using Windows.UI;
@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Override
         public override string Type => "Acrylic";
-        public override UIElement Icon => new AcrylicControl();
+        public override UIElement Icon => new AcrylicIcon();
         public override Color? FillColor
         {
            get => this.TintColor;

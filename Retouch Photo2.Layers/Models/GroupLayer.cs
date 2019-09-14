@@ -1,5 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Layers.Controls;
+using Retouch_Photo2.Layers.Icons;
 using System.Collections.ObjectModel;
 using System.Numerics;
 using Windows.UI.Xaml;
@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Layers.Models
     {
         //@Override
         public override string Type => "Group";
-        public override UIElement Icon => new GroupControl();
+        public override UIElement Icon => new GroupIcon();
   
         
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)

@@ -1,7 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Layers.Controls;
+using Retouch_Photo2.Layers.Icons;
 using System.Numerics;
 using Windows.UI.Xaml;
 
@@ -15,14 +15,9 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary> <see cref = "ImageLayer" />'s image. </summary>
         public ImageRe ImageRe { get; set; }
 
-        //@Construct
-        public ImageLayer()
-        {
-        }
-
         //@Override
         public override string Type => "Image";
-        public override UIElement Icon => new ImageControl();
+        public override UIElement Icon => new ImageIcon();
         
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         {

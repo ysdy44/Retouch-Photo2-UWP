@@ -1,6 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Layers.Controls;
+using Retouch_Photo2.Layers.Icons;
 using System.Numerics;
 using Windows.UI.Xaml;
 
@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Layers.Models
     {
         //@Override       
         public override string Type => "Ellipse";
-        public override UIElement Icon => new EllipseControl();
+        public override UIElement Icon => new EllipseIcon();
         
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
