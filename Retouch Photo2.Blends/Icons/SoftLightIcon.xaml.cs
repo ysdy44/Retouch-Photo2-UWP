@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Blends.Icons
 {
     /// <summary>
-    /// Control of <see cref="BlendEffectMode.SoftLightBlend">.
+    /// Icon of <see cref="BlendEffectMode.SoftLightBlend">.
     /// </summary>
     public sealed partial class SoftLightIcon : UserControl
     {

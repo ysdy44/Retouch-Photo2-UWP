@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Blends.Icons
 {
     /// <summary>
-    /// Control of <see cref="BlendEffectMode.DifferenceBlend">.
+    /// Icon of <see cref="BlendEffectMode.DifferenceBlend">.
     /// </summary>
     public sealed partial class DifferenceIcon : UserControl
     {

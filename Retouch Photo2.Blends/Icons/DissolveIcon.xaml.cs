@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Blends.Icons
 {
     /// <summary>
-    /// Control of <see cref="BlendEffectMode.DissolveBlend">.
+    /// Icon of <see cref="BlendEffectMode.DissolveBlend">.
     /// </summary>
     public sealed partial class DissolveIcon : UserControl
     {
