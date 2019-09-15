@@ -22,9 +22,9 @@ namespace Retouch_Photo2.Elements.MainPages
     {
         //@Content
         /// <summary> <see cref = "SaveControl" />'s OKButton. </summary>
-        public Windows.UI.Xaml.Controls.Button OKButton   => this._OKButton.RootButton;  
+        public Button OKButton   => this._OKButton.RootButton;  
         /// <summary> <see cref = "SaveControl" />'s CancelButton. </summary>
-        public Windows.UI.Xaml.Controls.Button CancelButton => this._CancelButton.RootButton;
+        public Button CancelButton => this._CancelButton.RootButton;
 
         //@Construct
         public DuplicateControl()

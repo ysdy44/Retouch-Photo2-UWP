@@ -2,7 +2,6 @@
     x:Class="Retouch_Photo2.Elements.MainPages.InitialControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Retouch_Photo2.Elements.MainPages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -18,47 +17,56 @@
         HorizontalAlignment="{x:Bind UserControl.HorizontalAlignment,Mode=OneWay}" 
         VerticalAlignment="{x:Bind UserControl.VerticalAlignment,Mode=OneWay}"
         >
-        <TextBlock Text="No projects? You could..." HorizontalAlignment="Center" Foreground="{ThemeResource AppText}"/>
+        <StackPanel.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition IsStaggeringEnabled="True"/>
+            </TransitionCollection>
+        </StackPanel.ChildrenTransitions>
 
-        <ContentControl Height="12"/>
+        <StackPanel.Children>
 
-        <Border Width="Auto" HorizontalAlignment="Center" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}" Style="{StaticResource AppCircleBorderStyle}">
-            <Button x:Name="_AddButton" Height="38" Padding="12,0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                <StackPanel Orientation="Horizontal">
-                    <FontIcon  Glyph="&#xE109;" FontSize="22" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" />
-                    <ContentControl Width="12"/>
-                    <TextBlock Text="Add New Project" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" />
-                </StackPanel>
-            </Button>
-        </Border>
+            <TextBlock Text="No projects? You could..." HorizontalAlignment="Center" Foreground="{ThemeResource AppText}"/>
 
-        <ContentControl Height="12"/>
-        <Rectangle Height="1" Fill="{ThemeResource AppStroke}"/>
-        <ContentControl Height="12"/>
+            <ContentControl Height="12"/>
 
-        <Border Width="Auto" HorizontalAlignment="Center" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}" Style="{StaticResource AppCircleBorderStyle}">
-            <Button x:Name="__PhotoButton" Height="38" Padding="12,0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                <StackPanel Orientation="Horizontal">
-                    <FontIcon  Glyph="&#xEB9F;" FontSize="22" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" />
-                    <ContentControl Width="12"/>
-                    <TextBlock Text="New Project From Pictures" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" />
-                </StackPanel>
-            </Button>
-        </Border>
-        
-        <ContentControl Height="12"/>
+            <Border Width="Auto" HorizontalAlignment="Center" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}" Style="{StaticResource AppCircleBorderStyle}">
+                <Button x:Name="_AddButton" Height="38" Padding="12,0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon  Glyph="&#xE109;" FontSize="22" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                        <ContentControl Width="12"/>
+                        <TextBlock Text="Add New Project" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                    </StackPanel>
+                </Button>
+            </Border>
 
-        <Border Width="Auto" HorizontalAlignment="Center" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}" Style="{StaticResource AppCircleBorderStyle}">
-            <Button x:Name="_DestopButton" Height="38" Padding="12,0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                <StackPanel Orientation="Horizontal">
-                    <FontIcon  Glyph="&#xEC4E;" FontSize="22" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" />
-                    <ContentControl Width="12"/>
-                    <TextBlock Text="New Project From Destop" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" />
-                </StackPanel>
-            </Button>
-        </Border>
-        
-        
+            <ContentControl Height="12"/>
+            <Rectangle Height="1" Fill="{ThemeResource AppStroke}"/>
+            <ContentControl Height="12"/>
+
+            <Border Width="Auto" HorizontalAlignment="Center" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}" Style="{StaticResource AppCircleBorderStyle}">
+                <Button x:Name="__PhotoButton" Height="38" Padding="12,0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon  Glyph="&#xEB9F;" FontSize="22" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                        <ContentControl Width="12"/>
+                        <TextBlock Text="New Project From Pictures" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                    </StackPanel>
+                </Button>
+            </Border>
+
+            <ContentControl Height="12"/>
+
+            <Border Width="Auto" HorizontalAlignment="Center" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}" Style="{StaticResource AppCircleBorderStyle}">
+                <Button x:Name="_DestopButton" Height="38" Padding="12,0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon  Glyph="&#xEC4E;" FontSize="22" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                        <ContentControl Width="12"/>
+                        <TextBlock Text="New Project From Destop" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                    </StackPanel>
+                </Button>
+            </Border>
+
+
+        </StackPanel.Children>
     </StackPanel>
 
 </UserControl>

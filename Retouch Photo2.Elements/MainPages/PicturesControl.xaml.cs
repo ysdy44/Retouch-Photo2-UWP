@@ -9,11 +9,11 @@ namespace Retouch_Photo2.Elements.MainPages
     {
         //@Content
         /// <summary> <see cref = "PicturesControl" />'s PhotoButton. </summary>
-        public Windows.UI.Xaml.Controls.Button PhotoButton  => this._PhotoButton.RootButton;  
+        public Button PhotoButton  => this._PhotoButton.RootButton;  
         /// <summary> <see cref = "PicturesControl" />'s DestopButton. </summary>
-        public Windows.UI.Xaml.Controls.Button DestopButton  => this._DestopButton.RootButton;  
+        public Button DestopButton  => this._DestopButton.RootButton;  
         /// <summary> <see cref = "PicturesControl" />'s CancelButton. </summary>
-        public Windows.UI.Xaml.Controls.Button CancelButton => this._CancelButton.RootButton;
+        public Button CancelButton => this._CancelButton.RootButton;
 
         //@Construct
         public PicturesControl()

@@ -623,12 +623,28 @@
             </Grid.ColumnDefinitions>
 
             <Button x:Name="RefreshButton" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                <Button.Transitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
+                    </TransitionCollection>
+                </Button.Transitions>
                 <FontIcon FontSize="20" Glyph="&#xE117;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
             </Button>
-          
-            <TextBlock Grid.Column="1" Text="Retouh Photo2" FontSize="32" FontWeight="Light" HorizontalAlignment="Center"/>
-        
+
+            <TextBlock Grid.Column="1" Text="Retouh Photo2" FontSize="32" FontWeight="Light" HorizontalAlignment="Center">
+                <TextBlock.Transitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition FromHorizontalOffset="50" FromVerticalOffset="0"/>
+                    </TransitionCollection>
+                </TextBlock.Transitions>
+            </TextBlock>
+
             <Button x:Name="SettingButton" Grid.Column="2" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                <Button.Transitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
+                    </TransitionCollection>
+                </Button.Transitions>
                 <FontIcon FontSize="22" Glyph="&#xE115;" FontFamily="Segoe UI Symbol" />
             </Button>
 

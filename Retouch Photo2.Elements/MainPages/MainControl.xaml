@@ -263,23 +263,23 @@
         </VisualStateManager.VisualStateGroups>
 
 
-        <local:Button x:Name="_AddButton" Glyph="&#xE109;" Text="Add"/>
-        <local:Button x:Name="_PicturesButton" Glyph="&#xEB9F;" Text="Pictures"/>
+        <local:MainPageButton x:Name="_AddButton" Glyph="&#xE109;" Text="Add"/>
+        <local:MainPageButton x:Name="_PicturesButton" Glyph="&#xEB9F;" Text="Pictures"/>
 
         <AppBarSeparator x:Name="AppBarSeparator0"/>
-        <local:Button x:Name="_SaveButton" Glyph="&#xE105;" Text="Save"/>
-        <local:Button x:Name="_ShareButton" Glyph="&#xE72D;" Text="Share"/>
+        <local:MainPageButton x:Name="_SaveButton" Glyph="&#xE105;" Text="Save"/>
+        <local:MainPageButton x:Name="_ShareButton" Glyph="&#xE72D;" Text="Share"/>
 
         <AppBarSeparator x:Name="AppBarSeparator1"/>
-        <local:Button x:Name="_DeleteButton" Glyph="&#xE107;" Text="Delete"/>
-        <local:Button x:Name="_DuplicateButton" Glyph="&#xE16F;" Text="Duplicate"/>
+        <local:MainPageButton x:Name="_DeleteButton" Glyph="&#xE107;" Text="Delete"/>
+        <local:MainPageButton x:Name="_DuplicateButton" Glyph="&#xE16F;" Text="Duplicate"/>
 
         <AppBarSeparator x:Name="AppBarSeparator2"/>
-        <local:Button x:Name="_FolderButton" Glyph="&#xE188;" Text="Folder"/>
-        <local:Button x:Name="_MoveButton" Glyph="&#xE197;" Text="Move"/>
+        <local:MainPageButton x:Name="_FolderButton" Glyph="&#xE188;" Text="Folder"/>
+        <local:MainPageButton x:Name="_MoveButton" Glyph="&#xE197;" Text="Move"/>
 
         <AppBarSeparator x:Name="AppBarSeparator3"/>
-        <local:Button x:Name="_MoreButton" Glyph="&#xE712;" Text="More"/>
+        <local:MainPageButton x:Name="_MoreButton" Glyph="&#xE712;" Text="More"/>
 
     </StackPanel>
 </Page>

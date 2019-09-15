@@ -122,8 +122,8 @@
     <Compile Include="MainPages\AddDialog.xaml.cs">
       <DependentUpon>AddDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPages\Button.xaml.cs">
-      <DependentUpon>Button.xaml</DependentUpon>
+    <Compile Include="MainPages\MainPageButton.xaml.cs">
+      <DependentUpon>MainPageButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPages\DeleteControl.xaml.cs">
       <DependentUpon>DeleteControl.xaml</DependentUpon>
@@ -211,7 +211,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainPages\Button.xaml">
+    <Page Include="MainPages\MainPageButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

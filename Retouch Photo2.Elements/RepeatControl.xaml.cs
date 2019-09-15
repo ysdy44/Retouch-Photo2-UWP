@@ -25,15 +25,15 @@ namespace Retouch_Photo2.Elements
 
             if (e.NewValue is bool value)
             {
-                switch (value)
+                if (value)
                 {
-                    case true:
-                        con.ShowStoryboard.Begin();//Storyboard
-                        break;
-
-                    case false:
-                        con.HideStoryboard.Begin();//Storyboard
-                        break;
+                    con.FontIcon.Foreground = con.CheckColor;
+                    con.ShowStoryboard.Begin();//Storyboard
+                }
+                else
+                {
+                    con.FontIcon.Foreground = con.UnCheckColor;
+                    con.HideStoryboard.Begin();//Storyboard
                 }
             }
         }));

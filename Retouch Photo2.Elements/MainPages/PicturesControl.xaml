@@ -10,9 +10,9 @@
     d:DesignWidth="800">
 
     <StackPanel Orientation="Horizontal">
-        <local:Button x:Name="_PhotoButton" Glyph="&#xEB9F;"  Text="Library"/>
-        <local:Button x:Name="_DestopButton"  Glyph="&#xEC4E;" Text="Destop"/>
+        <local:MainPageButton x:Name="_PhotoButton" Glyph="&#xEB9F;"  Text="Library"/>
+        <local:MainPageButton x:Name="_DestopButton"  Glyph="&#xEC4E;" Text="Destop"/>
         <AppBarSeparator/>
-        <local:Button x:Name="_CancelButton" Glyph="&#xE106;" Text="Cancel"/>
+        <local:MainPageButton x:Name="_CancelButton" Glyph="&#xE106;" Text="Cancel"/>
     </StackPanel>
 </UserControl>

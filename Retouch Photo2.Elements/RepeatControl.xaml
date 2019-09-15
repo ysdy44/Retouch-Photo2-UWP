@@ -15,30 +15,27 @@
 
         <!--Storyboard-->
         <Storyboard x:Name="ShowStoryboard">
-            <ColorAnimation Storyboard.TargetName="FontIconForeground" Storyboard.TargetProperty="Color" To="White" Duration="0:0:0.2" />
             <ColorAnimation Storyboard.TargetName="RootBorderBackground" Storyboard.TargetProperty="Color" To="{ThemeResource SystemAccentColor}" Duration="0:0:0.2" />
         </Storyboard>
-
         <!--Storyboard-->
         <Storyboard x:Name="HideStoryboard">
-            <ColorAnimation Storyboard.TargetName="FontIconForeground" Storyboard.TargetProperty="Color" To="{ThemeResource AppTextColor}" Duration="0:0:0.2" />
             <ColorAnimation Storyboard.TargetName="RootBorderBackground" Storyboard.TargetProperty="Color" To="Transparent" Duration="0:0:0.2" />
         </Storyboard>
+        
+        <!--Foreground-->
+        <SolidColorBrush x:Name="CheckColor" Color="{ThemeResource SystemAccentColor}"/>
+        <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource AppTextColor}"/>
 
     </UserControl.Resources>
 
 
-    <Border x:Name="RootBorder" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+    <Border x:Name="RootBorder" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Border.Background>
             <SolidColorBrush x:Name="RootBorderBackground" Color="{ThemeResource AppForegroundColor}"/>
         </Border.Background>
-        
-        <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" Glyph="&#xE897;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}">
-            <FontIcon.Foreground>
-                <SolidColorBrush x:Name="FontIconForeground" Color="{ThemeResource AppTextColor}"/>
-            </FontIcon.Foreground>
-        </FontIcon>
-        
+
+        <FontIcon x:Name="FontIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Glyph="&#xE897;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+
     </Border>
     
 </UserControl>

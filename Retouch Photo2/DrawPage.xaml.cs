@@ -32,10 +32,12 @@ namespace Retouch_Photo2
             this.InitializeComponent();
             this.Loaded += (s, e) =>
             {
-                this.ThemeControl.ApplicationTheme = App.Current.RequestedTheme;
+                ApplicationTheme theme = App.Current.RequestedTheme;
+                this.ThemeControl.ApplicationTheme = theme;
+                this.ThemeControl2.ApplicationTheme = theme;
             };
 
-            this.BackButton.Tapped += (s, e) => this.Frame.GoBack();
+            this.DrawLayout.BackButton.Tapped += (s, e) => this.Frame.GoBack();
             this.SaveButton.Tapped += (s, e) => this.Frame.GoBack();
 
 
@@ -74,7 +76,7 @@ namespace Retouch_Photo2
                 case MenuButtonType.None:
                     {
                         FrameworkElement button = menuButton.Self;
-                        this.DrawLayout.TopRightPanelChildren.Add(button);
+                        this.DrawLayout.HeadRightChildren.Add(button);
                     }
                     break;
                 case MenuButtonType.ToolButton:

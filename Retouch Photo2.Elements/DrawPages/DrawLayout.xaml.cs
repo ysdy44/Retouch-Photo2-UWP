@@ -10,40 +10,33 @@ namespace Retouch_Photo2.Elements.DrawPages
     public sealed partial class DrawLayout : UserControl
     {
         //@Content
+        /// <summary> CenterBorder's Child. </summary>
+        public UIElement CenterChild { get => this.CenterBorder.Child; set => this.CenterBorder.Child = value; }
         /// <summary> RightBorder's Child. </summary>
         public UIElement RightPane { get => this.RightBorder.Child; set => this.RightBorder.Child = value; }
         /// <summary> LeftBorder's Child. </summary>
         public UIElement LeftPane { get => this.LeftBorder.Child; set => this.LeftBorder.Child = value; }
+        
+        /// <summary> BackButton. </summary>
+        public Button BackButton { get => this._BackButton; set => this._BackButton = value; }
+        /// <summary> HeadRightStackPanel's Children. </summary>
+        public UIElementCollection HeadRightChildren => this.HeadRightStackPanel.Children;
 
-        /// <summary> CenterBorder's Child. </summary>
-        public UIElement CenterContent { get => this.CenterBorder.Child; set => this.CenterBorder.Child = value; }
+        /// <summary> IconLeftIcon's Content. </summary>
+        public object ShowIcon { get => this.IconLeftContentControl.Content; set => this.IconLeftContentControl.Content = value; }
+        /// <summary> IconRightIcon's Content. </summary>
+        public object Icon { get => this.IconRightContentControl.Content; set => this.IconRightContentControl.Content = value; }
 
-        /// <summary> TopLeftBorder's Child. </summary>
-        public UIElement TopLeftPane { get => this.TopLeftBorder.Child; set => this.TopLeftBorder.Child = value; }
-        /// <summary> TopRightStackPanel's Children. </summary>
-        public UIElementCollection TopRightPanelChildren => this.TopRightStackPanel.Children;
-
-        /// <summary> TopLeftStackPanel's Children. </summary>
-        public UIElementCollection TopLeftPanelChildren => this.TopLeftStackPanel.Children;
-
-
-        //@Content  
         /// <summary> TouchbarBorder's Child. </summary>
         public UIElement Touchbar { get => this.TouchbarBorder.Child; set => this.TouchbarBorder.Child = value; }
-
-        /// <summary> Gets or sets <see cref = "DrawLayout" />'s ShowIcon. </summary>
-        public object ShowIcon { get => this.IconLeftIcon.Content; set => this.IconLeftIcon.Content = value; }
-        /// <summary> Gets or sets <see cref = "DrawLayout" />'s Icon. </summary>
-        public object Icon { get => this.IconRightIcon.Content; set => this.IconRightIcon.Content = value; }
-        
-        /// <summary> Gets or sets <see cref = "DrawLayout" />'s Page. </summary>
-        public Page Page
+        /// <summary> Gets or sets FootScrollViewer's content. </summary>
+        public Page FootPage
         {
-            get => this.page;
+            get => this.footPage;
             set
             {
                 //If you choose a different tool, PhoneState will hided.
-                Page oldPage = this.page;
+                Page oldPage = this.footPage;
 
                 if (value != oldPage)
                 {
@@ -54,11 +47,11 @@ namespace Retouch_Photo2.Elements.DrawPages
                     }
                 }
 
-                this.ScrollViewer.Content = value;
-                this.page=value;
+                this.FootScrollViewer.Content = value;
+                this.footPage=value;
             }
         }
-        private Page page;
+        private Page footPage;
 
 
         #region DependencyProperty
@@ -109,7 +102,6 @@ namespace Retouch_Photo2.Elements.DrawPages
         /// <summary> State of <see cref="DrawLayout"/>. </summary>
         public DrawLayoutState State
         {
-            get => this.state;
             set
             {
                 switch (value)
@@ -140,10 +132,8 @@ namespace Retouch_Photo2.Elements.DrawPages
                         VisualStateManager.GoToState(this, this.PC.Name, false);
                         break;
                 }
-                this.state = value;
             }
         }
-        private DrawLayoutState state;
 
 
         //@Construct
@@ -156,6 +146,9 @@ namespace Retouch_Photo2.Elements.DrawPages
                 if (e.NewSize == e.PreviousSize) return;
                 this.Manager.Width = e.NewSize.Width;
                 this.State = this.Manager.GetState(); //State
+
+                //Float
+                this.FloatPartState = this.GetFloatState();
             };
 
             //FullScreen
@@ -197,6 +190,78 @@ namespace Retouch_Photo2.Elements.DrawPages
                     this.State = this.Manager.GetState();//State
                 }
             };
+        }
+    }
+
+
+    public sealed partial class DrawLayout : UserControl
+    {
+        //@Content
+        /// <summary> FloatTopStackPanelPart1's Children. </summary>
+        public UIElementCollection FloatTopPart1Children => this.FloatTopStackPanelPart1.Children;
+        /// <summary> FloatTopStackPanelPart2's Children. </summary>
+        public UIElementCollection FloatTopPart2Children => this.FloatTopStackPanelPart2.Children;
+
+        /// <summary> FloatBottomStackPanelPart1's Children. </summary>
+        public UIElementCollection FloatBottomPart1Children => this.FloatBottomStackPanelPart1.Children;
+        /// <summary> FloatBottomStackPanelPart2's Children. </summary>
+        public UIElementCollection FloatBottomPart2Children => this.FloatBottomStackPanelPart2.Children;
+
+
+        /// <summary> State of <see cref="DrawLayout"/>'s float part. </summary>
+        public VerticalAlignment FloatPartState
+        {
+            set
+            {
+                switch (value)
+                {
+                    case VerticalAlignment.Top:
+                        {
+                            this.FloatTopStackPanel.Visibility = Visibility.Visible;
+                            this.FloatTopStackPanelPart1.Visibility = Visibility.Visible;
+                            this.FloatTopStackPanelPart2.Visibility = Visibility.Visible;
+
+                            this.FloatBottomBorder.Visibility = Visibility.Collapsed;
+                            this.FloatBottomStackPanelPart1.Visibility = Visibility.Collapsed;
+                            this.FloatBottomStackPanelPart2.Visibility = Visibility.Collapsed;
+                        }
+                        break;
+                    case VerticalAlignment.Center:
+                        {
+                            this.FloatTopStackPanel.Visibility = Visibility.Visible;
+                            this.FloatTopStackPanelPart1.Visibility = Visibility.Visible;
+                            this.FloatTopStackPanelPart2.Visibility = Visibility.Collapsed;
+
+                            this.FloatBottomBorder.Visibility = Visibility.Visible;
+                            this.FloatBottomStackPanelPart1.Visibility = Visibility.Collapsed;
+                            this.FloatBottomStackPanelPart2.Visibility = Visibility.Visible;
+                        }
+                        break;
+                    case VerticalAlignment.Bottom:
+                        {
+                            this.FloatTopStackPanel.Visibility = Visibility.Collapsed;
+                            this.FloatTopStackPanelPart1.Visibility = Visibility.Collapsed;
+                            this.FloatTopStackPanelPart2.Visibility = Visibility.Collapsed;
+
+                            this.FloatBottomBorder.Visibility = Visibility.Visible;
+                            this.FloatBottomStackPanelPart1.Visibility = Visibility.Visible;
+                            this.FloatBottomStackPanelPart2.Visibility = Visibility.Visible;
+                        }
+                        break;
+                }
+            }
+        }
+
+        private VerticalAlignment GetFloatState()
+        {
+            double floatHeadWidth = this.FloatHeadColumnDefinition.ActualWidth - this.HeadRightScrollViewer.ExtentWidth; ;
+
+            if (floatHeadWidth > 300)
+                return VerticalAlignment.Top;
+            else if (floatHeadWidth < 140)
+                return VerticalAlignment.Bottom;
+            else
+                return VerticalAlignment.Center;
         }
     }
 }
