@@ -6,6 +6,7 @@ using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Keyboards;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
+using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -25,22 +26,23 @@ namespace Retouch_Photo2
         //@Converter
         private FrameworkElement IconConverter(ITool tool) => tool.ShowIcon;
         private Page PageConverter(ITool tool) => tool.Page;
+        public Visibility BoolToVisibilityConverter(bool isChecked) => isChecked ? Visibility.Visible : Visibility.Collapsed;
 
         //@Construct
         public DrawPage()
         {
             this.InitializeComponent();
-            this.Loaded += (s, e) =>
-            {
-                ApplicationTheme theme = App.Current.RequestedTheme;
-                this.ThemeControl.ApplicationTheme = theme;
-                this.ThemeControl2.ApplicationTheme = theme;
-            };
+            this.Loaded += (s, e) => this.ThemeControl.ApplicationTheme = App.Current.RequestedTheme;
 
+            //Appbar
+            this.ExpandAppbar.ChildrenWidth = new List<double> { 40, 4, 40, 4, 40, 32, 40, 4, 40, 4, 40, 4, 40, };
             this.DrawLayout.BackButton.Tapped += (s, e) => this.Frame.GoBack();
             this.SaveButton.Tapped += (s, e) => this.Frame.GoBack();
 
-
+            //FullScreen
+            this.UnFullScreenButton.Tapped += (s, e) => this.DrawLayout.IsFullScreen = !DrawLayout.IsFullScreen;
+            this.FullScreenButton.Tapped += (s, e) => DrawLayout.IsFullScreen = !DrawLayout.IsFullScreen;
+                                   
             //Menu
             this.Construct(this.TipViewModel.DebugMenu);
             this.Construct(this.TipViewModel.SelectionMenu);
@@ -76,7 +78,7 @@ namespace Retouch_Photo2
                 case MenuButtonType.None:
                     {
                         FrameworkElement button = menuButton.Self;
-                        this.DrawLayout.HeadRightChildren.Add(button);
+                        this.DrawLayout.HeadRightStackPane.Children.Add(button);
                     }
                     break;
                 case MenuButtonType.ToolButton:

@@ -23,7 +23,6 @@
         <!--Background-->
         <SolidColorBrush x:Name="AccentColor" Color="{ThemeResource SystemAccentColor}"/>
         <SolidColorBrush x:Name="UnAccentColor" Color="{ThemeResource AppBackgroundColor}"/>
-
         <!--Foreground-->
         <SolidColorBrush x:Name="CheckColor" Color="White"/>
         <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource SystemBaseHighColor}"/>
@@ -49,7 +48,6 @@
         <Storyboard x:Name="LightStoryboard">
             <ColorAnimation Storyboard.TargetName="RootGridBackground" Storyboard.TargetProperty="Color" To="#F8F8F8" Duration="0:0:0.2"/>
         </Storyboard>
-        <!--Storyboard-->
         <Storyboard x:Name="DarkStoryboard">
             <ColorAnimation Storyboard.TargetName="RootGridBackground" Storyboard.TargetProperty="Color" To="#191919" Duration="0:0:0.2"/>
         </Storyboard>
@@ -75,8 +73,7 @@
 
                         <!--Head-->
                         <Setter Target = "HeadGrid.Visibility" Value="Collapsed"/>
-                        <Setter Target = "HeadBottomBorder.Visibility" Value="Collapsed"/>
-                        
+
                         <!--Left-->
                         <Setter Target = "LeftBorder.Visibility" Value="Collapsed"/>
 
@@ -89,7 +86,7 @@
 
                         <!--Foot-->
                         <Setter Target = "TouchbarBorder.Visibility" Value="Collapsed"/>
-                        
+
                         <!--RadiusAnimaPanel-->
                         <Setter Target = "RadiusAnimaPanel.Visibility" Value="Collapsed"/>
 
@@ -99,6 +96,9 @@
                 <!--Phone-->
                 <VisualState x:Name="Phone">
                     <VisualState.Setters>
+
+                        <!--HeadRight-->
+                        <Setter Target = "HeadRightButtonBorder.Visibility" Value="Visible"/>
 
                         <!--Left-->
                         <Setter Target = "LeftBorder.Margin" Value="0,20"/>
@@ -119,6 +119,9 @@
 
                 <VisualState x:Name="PhoneShowLeft">
                     <VisualState.Setters >
+
+                        <!--HeadRight-->
+                        <Setter Target = "HeadRightButtonBorder.Visibility" Value="Visible"/>
 
                         <!--DismissOverlay-->
                         <Setter Target = "IconDismissOverlay.Visibility" Value="Visible"/>
@@ -143,7 +146,10 @@
                 </VisualState>
 
                 <VisualState x:Name="PhoneShowRight">
-                    <VisualState.Setters >
+                    <VisualState.Setters>
+
+                        <!--HeadRight-->
+                        <Setter Target = "HeadRightButtonBorder.Visibility" Value="Visible"/>
 
                         <!--DismissOverlay-->
                         <Setter Target = "IconDismissOverlay.Visibility" Value="Visible"/>
@@ -159,12 +165,12 @@
                         <!--Right-->
                         <Setter Target = "RightBorder.(Grid.Row)" Value="0"/>
                         <Setter Target = "RightBorder.(Grid.RowSpan)" Value="3"/>
-                        
+
                         <!--IconRight-->
                         <Setter Target = "IconRightGrid.Visibility" Value="Visible"/>
                         <Setter Target = "IconRightRectangle.Fill" Value="{StaticResource AccentColor}"/>
                         <Setter Target = "IconRightContentControl.Foreground" Value="{StaticResource CheckColor}"/>
-                        
+
                     </VisualState.Setters>
                 </VisualState>
 
@@ -172,13 +178,8 @@
                 <VisualState x:Name="Pad">
                     <VisualState.Setters >
 
-                        <!--Button-->
-                        <Setter Target = "UnFullScreenButton.Width" Value="80"/>
-                        <Setter Target = "_BackButton.Width" Value="80"/>
-                        <Setter Target = "FullScreenButton.Width" Value="80"/>
-
-                        <!--Head-->
-                        <Setter Target="HeadRightScrollViewer.HorizontalScrollMode" Value="Disabled"/>
+                        <!--HeadRight-->
+                        <Setter Target = "HeadRightExpandBorder.Visibility" Value="Visible"/>
 
                         <!--Left-->
                         <Setter Target = "LeftBorder.(Grid.Row)" Value="1"/>
@@ -190,10 +191,14 @@
                         <Setter Target = "RightBorder.CornerRadius" Value="8,0,0,8"/>
                         <Setter Target = "RightBorder.BorderThickness" Value="1,1,0,1"/>
 
-                        <!--Foot-->
+                        <!--Touchbar-->
                         <Setter Target = "TouchbarBorder.(Grid.Column)" Value="1"/>
                         <Setter Target = "TouchbarBorder.(Grid.ColumnSpan)" Value="1"/>
                         
+                        <!--Foot-->
+                        <Setter Target = "FootRowDefinition.Height" Value="84"/>
+                        <Setter Target = "RadiusAnimaPanel.Margin" Value="8"/>
+
                     </VisualState.Setters>
                 </VisualState>
 
@@ -201,14 +206,11 @@
                 <VisualState x:Name="PC">
                     <VisualState.Setters >
 
-                        <!--Button-->
-                        <Setter Target = "UnFullScreenButton.Width" Value="80"/>
-                        <Setter Target = "_BackButton.Width" Value="80"/>
-                        <Setter Target = "FullScreenButton.Width" Value="80"/>
+                        <!--HeadRight-->
+                        <Setter Target = "HeadRightExpandBorder.Visibility" Value="Visible"/>
 
                         <!--Head-->
                         <Setter Target = "HeadGrid.(Grid.ColumnSpan)" Value="2"/>
-                        <Setter Target = "HeadRightScrollViewer.HorizontalScrollMode" Value="Disabled"/>
 
                         <!--CenterBorder-->
                         <Setter Target = "CenterBorder.(Grid.Column)" Value="1"/>
@@ -234,12 +236,16 @@
                         apiContractPresent5:Value="{ThemeResource SystemControlAcrylicWindowBrush}"
                         />
 
-                        <!--Foot-->
+                        <!--Touchbar-->
                         <Setter Target = "TouchbarBorder.(Grid.Column)" Value="1"/>
                         <Setter Target = "TouchbarBorder.(Grid.ColumnSpan)" Value="1"/>
 
                         <!--GridLenght-->
                         <Setter Target = "RightGridLenght.Width" Value="190"/>
+
+                        <!--Foot-->
+                        <Setter Target = "FootRowDefinition.Height" Value="106"/>
+                        <Setter Target = "RadiusAnimaPanel.Margin" Value="14"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -256,7 +262,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition x:Name="FootRowDefinition" Height="60"/>
         </Grid.RowDefinitions>
 
 
@@ -264,89 +270,70 @@
         <developerTools:AlignmentGrid Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="Gray"/>
         <!--CenterChildt-->
         <Border x:Name="CenterBorder" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="2"/>
-        <!--FullScreen-->
-        <Button x:Name="UnFullScreenButton" Grid.Column="1" Grid.ColumnSpan="2" Width="50" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Right" VerticalAlignment="Stretch">
-            <FontIcon Glyph="&#xE1D8;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-        </Button>
-        
-        
+
+        <!--HeadRight-->
+        <ScrollViewer x:Name="HeadRightScrollViewer" Visibility="Collapsed" Grid.Row="1" Grid.ColumnSpan="3"
+                      HorizontalAlignment="Center" VerticalAlignment="Top"
+                      HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" 
+                      VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled"
+                      BorderThickness="1,0,1,1" BorderBrush="{ThemeResource AppBorderBrush}"
+                      Background="{ThemeResource AppBackground}"
+                      >
+
+            <!--Visibility:Show-->
+            <animations:Implicit.ShowAnimations>
+                <animations:TranslationAnimation Duration="0:0:0.4" From="0,-50,0" To="0,0,0"/>
+            </animations:Implicit.ShowAnimations>
+
+            <!--Visibility:Hide-->
+            <animations:Implicit.HideAnimations>
+                <animations:TranslationAnimation Duration="0:0:0.4" From="0,0,0" To="0,-50,0"/>
+            </animations:Implicit.HideAnimations>
+            
+        </ScrollViewer>
         <!--Head-->
         <Grid x:Name="HeadGrid" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppLinearBrush}"
               Grid.ColumnSpan="3" Visibility="Visible">
 
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>
-                <animations:TranslationAnimation Duration="0:0:0.4" From="0,-100,0" To="0,0,0"/>
+                <animations:TranslationAnimation Duration="0:0:0.4" From="0,-50,0" To="0,0,0"/>
             </animations:Implicit.ShowAnimations>
 
             <!--Visibility:Hide-->
             <animations:Implicit.HideAnimations>
-                <animations:TranslationAnimation Duration="0:0:0.4" From="0,0,0" To="0,-100,0"/>
+                <animations:TranslationAnimation Duration="0:0:0.4" From="0,0,0" To="0,-50,0"/>
             </animations:Implicit.HideAnimations>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition x:Name="FloatHeadColumnDefinition" Width="*"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <!--Back-->
-            <Button x:Name="_BackButton" Width="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                <FontIcon Glyph="&#xE0D5;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+            <Button x:Name="_BackButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                <FontIcon Glyph="&#xE0D5;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
             </Button>
 
-            <!--Float-->
-            <StackPanel x:Name="FloatTopStackPanel" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
-
-                <!--Visibility:Show-->
-                <animations:Implicit.ShowAnimations>
-                    <animations:OpacityAnimation Duration="0:0:0.2" From="0.0" To="1.0"/>
-                </animations:Implicit.ShowAnimations>
-
-                <!--Visibility:Hide-->
-                <animations:Implicit.HideAnimations>
-                    <animations:OpacityAnimation Duration="0:0:0.2" From="1.0" To="0.0"/>
-                </animations:Implicit.HideAnimations>
-                
-                <StackPanel x:Name="FloatTopStackPanelPart1" Orientation="Horizontal"/>
-                <StackPanel x:Name="FloatTopStackPanelPart2" Orientation="Horizontal"/>
-            </StackPanel>
-
-            <ScrollViewer x:Name="HeadRightScrollViewer" Grid.Column="1" HorizontalAlignment="Right" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
-                <StackPanel x:Name="HeadRightStackPanel" Orientation="Horizontal"/>
-            </ScrollViewer>
-
-            <!--FullScreen-->
-            <Button x:Name="FullScreenButton" Grid.Column="2" Width="50" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <FontIcon Glyph="&#xE1D9;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-            </Button>
-        </Grid>
-        <Border x:Name="HeadBottomBorder" Grid.Row="1" Grid.Column="1" >
-            <!--Float-->
-            <Border x:Name="FloatBottomBorder" Height="Auto" Margin="2" Padding="8,0" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource AppRoundedBorderStyle}">
-
-                <!--Visibility:Show-->
-                <animations:Implicit.ShowAnimations>
-                    <animations:OpacityAnimation Duration="0:0:0.2" From="0.0" To="1.0"/>
-                </animations:Implicit.ShowAnimations>
-
-                <!--Visibility:Hide-->
-                <animations:Implicit.HideAnimations>
-                    <animations:OpacityAnimation Duration="0:0:0.2" From="1.0" To="0.0"/>
-                </animations:Implicit.HideAnimations>
-
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel x:Name="FloatBottomStackPanelPart1" Orientation="Horizontal"/>
-                    <StackPanel x:Name="FloatBottomStackPanelPart2" Orientation="Horizontal"/>
-                </StackPanel>
+            <!--Left-->
+            <Border x:Name="HeadLeftBorder" Grid.Column="1" HorizontalAlignment="Stretch"/>
+        
+            <!--Right-->
+            <Border x:Name="HeadRightExpandBorder" Visibility="Collapsed" Grid.Column="2" HorizontalAlignment="Right"/>
+            <Border x:Name="HeadRightButtonBorder" Width="90" Margin="8,0" Visibility="Collapsed" Grid.Column="2" HorizontalAlignment="Right" Style="{StaticResource AppRoundedBorderStyle}">
+                <ToggleButton x:Name="HeadRightToggleButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <FontIcon Glyph="&#xE700;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                </ToggleButton>
             </Border>
-        </Border>
+
+        </Grid>
+     
+        
         <!--Touchbar-->
-        <Border x:Name="TouchbarBorder" Grid.ColumnSpan="3" Grid.Row="1" Margin="12,0" MinWidth="200" MaxWidth="800" VerticalAlignment="Bottom">
-            <!--Touchbar-->
-        </Border>
+        <Border x:Name="TouchbarBorder" Grid.ColumnSpan="3" Grid.Row="1" Margin="12,0" MinWidth="200" MaxWidth="800" VerticalAlignment="Bottom"/>
         <!--Foot-->
-        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Column="1" Grid.Row="2" ShadowColor="{ThemeResource AppStrokeColor}">
+        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Column="1" Grid.Row="2" Margin="0,2" ShadowColor="{ThemeResource AppStrokeColor}">
 
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>
@@ -364,7 +351,7 @@
                 </ScrollViewer>
             </elements:RadiusAnimaPanel.CenterContent>
         </elements:RadiusAnimaPanel>
-        
+
 
         <!--DismissOverlay-->
         <Border x:Name="IconDismissOverlay" Visibility="Collapsed" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{ThemeResource AppStroke}">
@@ -393,16 +380,16 @@
             <animations:Implicit.HideAnimations>
                 <animations:Vector3Animation Target="Scale" Duration="0:0:0.2" From="1" To="0"/>
             </animations:Implicit.HideAnimations>
-            
-            <controls:DropShadowPanel Grid.Column="1" Style="{StaticResource DropShadowPanelStyle}">
+
+            <controls:DropShadowPanel Style="{StaticResource DropShadowPanelStyle}">
                 <Rectangle x:Name="IconLeftRectangle" Style="{StaticResource RectangleStyle}"/>
             </controls:DropShadowPanel>
 
             <ContentControl x:Name="IconLeftContentControl" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-      
+
         </Grid>
         <!--IconRight-->
-        <Grid x:Name="IconRightGrid" Visibility="Collapsed" Grid.Column="2" Grid.Row="2" Width="50" Height="50"
+        <Grid x:Name="IconRightGrid" Visibility="Collapsed" Grid.Column="2" Grid.Row="2" Width="50" Height="50" 
               extensions:VisualExtensions.CenterPoint="25,25,0">
 
             <!--Visibility:Show-->
@@ -415,15 +402,15 @@
                 <animations:Vector3Animation Target="Scale" Duration="0:0:0.2" From="1" To="0"/>
             </animations:Implicit.HideAnimations>
 
-            <controls:DropShadowPanel Grid.Column="1" Style="{StaticResource DropShadowPanelStyle}">
+            <controls:DropShadowPanel Style="{StaticResource DropShadowPanelStyle}">
                 <Rectangle x:Name="IconRightRectangle" Style="{StaticResource RectangleStyle}"/>
             </controls:DropShadowPanel>
 
             <ContentControl x:Name="IconRightContentControl" HorizontalAlignment="Center" VerticalAlignment="Center"/>
- 
+
         </Grid>
 
-        
+
         <!--Left-->
         <Border x:Name="LeftBorder" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" MinHeight="200" BorderBrush="{ThemeResource AppStroke}"
                 CornerRadius="0" VerticalAlignment="Center" BorderThickness="0,1,1,1" Visibility="Visible" Margin="0" Background="{ThemeResource AppBackground}">
@@ -459,6 +446,6 @@
 
         </Border>
 
-        
+
     </Grid>
 </UserControl>

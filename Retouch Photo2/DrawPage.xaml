@@ -26,12 +26,14 @@
 
 
     <Page.Resources>
-        <!--Extensions-->
-        <elements:ApplicationViewTitleBarBackgroundExtensions x:Key="AVTBBE" TitleBarColor="{ThemeResource AppForegroundColor}"/>
+
+        <!--Extension-->
+        <elements:ApplicationViewTitleBarBackgroundExtension x:Key="AVTBBE" TitleBarColor="{ThemeResource AppForegroundColor}"/>
+
     </Page.Resources>
-    
-    
-    <Grid >
+
+
+    <Grid>
 
         <elementDrawPages:DrawLayout x:Name="DrawLayout" 
                Touchbar="{x:Bind TipViewModel.TouchbarControl,Mode=OneWay}"
@@ -60,70 +62,76 @@
                     RulerVisible="{x:Bind ViewModel.CanvasRulerVisible,Mode=OneWay}"
                     />
             </elementDrawPages:DrawLayout.CenterChild>
-            
-            <!--Float-->
-            <elementDrawPages:DrawLayout.FloatTopPart1Children>
-                <Border Style="{StaticResource AppCircleBorderStyle}">
-                    <Button x:Name="SaveButton" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE105;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
-                </Border>
-                <ContentControl Width="6"/>
-                <Border Style="{StaticResource AppCircleBorderStyle}">
-                    <Button IsEnabled="True" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10E;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
-                </Border>
-                <ContentControl Width="6"/>
-                <Border Style="{StaticResource AppCircleBorderStyle}">
-                    <Button IsEnabled="True" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10D;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
-                </Border>
-            </elementDrawPages:DrawLayout.FloatTopPart1Children>
-            <elementDrawPages:DrawLayout.FloatTopPart2Children>
-                <AppBarSeparator/>
-                <Border Style="{StaticResource AppCircleBorderStyle}">
-                    <elements:ThemeControl x:Name="ThemeControl" Theme="{x:Bind RequestedTheme, Mode=TwoWay}"/>
-                </Border>
-                <ContentControl Width="6"/>
-                <Border Style="{StaticResource AppCircleBorderStyle}">
-                    <ToggleButton Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE80A;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" 
+
+            <!--HeadLeft-->
+            <elementDrawPages:DrawLayout.HeadLeftPane>
+                <elements:ExpandAppbar x:Name="ExpandAppbar">
+                    <elements:ExpandAppbar.Children>
+
+                        <Border Style="{StaticResource AppCircleBorderStyle}">
+                            <Button x:Name="SaveButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Background="Transparent">
+                                <FontIcon Glyph="&#xE105;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </Button>
+                        </Border>
+
+                        <ContentControl Width="4"/>
+
+                        <Border Style="{StaticResource AppCircleBorderStyle}">
+                            <Button IsEnabled="True" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Background="Transparent">
+                                <FontIcon Glyph="&#xE10E;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </Button>
+                        </Border>
+
+                        <ContentControl Width="4"/>
+
+                        <Border Style="{StaticResource AppCircleBorderStyle}">
+                            <Button IsEnabled="True" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Background="Transparent">
+                                <FontIcon Glyph="&#xE10D;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </Button>
+                        </Border>
+
+                        <AppBarSeparator/>
+
+                        <Border Style="{StaticResource AppCircleBorderStyle}">
+                            <elements:ThemeControl x:Name="ThemeControl" Theme="{x:Bind RequestedTheme, Mode=TwoWay}"/>
+                        </Border>
+
+                        <ContentControl Width="4"/>
+
+                        <Border Style="{StaticResource AppCircleBorderStyle}">
+                            <ToggleButton Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE80A;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" 
                             IsChecked="{x:Bind ViewModel.CanvasRulerVisible,Mode=TwoWay}"/>
-                </Border>
-                <ContentControl Width="6"/>
-                <Border Style="{StaticResource AppCircleBorderStyle}">
-                    <elements:RepeatControl IsChecked="{x:Bind TipViewModel.IsOpen,Mode=TwoWay}"/>
-                </Border>                    
-            </elementDrawPages:DrawLayout.FloatTopPart2Children>
-            <elementDrawPages:DrawLayout.FloatBottomPart1Children>
-                <Border Style="{StaticResource AppCircleBorderStyle}">
-                    <Button x:Name="SaveButton2" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE105;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
-                </Border>
-                <ContentControl Width="6"/>
-                <Border Style="{StaticResource AppCircleBorderStyle}">
-                    <Button IsEnabled="True" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10E;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
-                </Border>
-                <ContentControl Width="6"/>
-                <Border Style="{StaticResource AppCircleBorderStyle}">
-                    <Button IsEnabled="True" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE10D;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" />
-                </Border>
-                <AppBarSeparator/>
-            </elementDrawPages:DrawLayout.FloatBottomPart1Children>
-            <elementDrawPages:DrawLayout.FloatBottomPart2Children>
-                <Border Style="{StaticResource AppCircleBorderStyle}">
-                    <elements:ThemeControl x:Name="ThemeControl2" Theme="{x:Bind RequestedTheme, Mode=TwoWay}"/>
-                </Border>
-                <ContentControl Width="6"/>
-                <Border Style="{StaticResource AppCircleBorderStyle}">
-                    <ToggleButton Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE80A;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" 
-                            IsChecked="{x:Bind ViewModel.CanvasRulerVisible,Mode=TwoWay}"/>
-                </Border>
-                <ContentControl Width="6"/>
-                <Border Style="{StaticResource AppCircleBorderStyle}">
-                    <elements:RepeatControl IsChecked="{x:Bind TipViewModel.IsOpen,Mode=TwoWay}"/>
-                </Border>
-            </elementDrawPages:DrawLayout.FloatBottomPart2Children>                        
-     
+                        </Border>
+
+                        <ContentControl Width="4"/>
+
+                        <Border Style="{StaticResource AppCircleBorderStyle}">
+                            <elements:RepeatControl IsChecked="{x:Bind TipViewModel.IsOpen,Mode=TwoWay}"/>
+                        </Border>
+
+                        <ContentControl Width="4"/>
+
+                        <Border Style="{StaticResource AppCircleBorderStyle}">
+                            <Button x:Name="FullScreenButton" Width="Auto" Height="Auto" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <FontIcon Glyph="&#xE1D9;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </Button>
+                        </Border>
+                        
+                    </elements:ExpandAppbar.Children>
+                </elements:ExpandAppbar>
+            </elementDrawPages:DrawLayout.HeadLeftPane>
+
         </elementDrawPages:DrawLayout>
 
 
         <!--Menu-->
         <Canvas x:Name="OverlayCanvas" IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}"/>
+
+        <!--FullScreen-->
+        <Button x:Name="UnFullScreenButton" Width="50" Height="50" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Right" VerticalAlignment="Top"
+                Visibility="{x:Bind BoolToVisibilityConverter(DrawLayout.IsFullScreen), Mode=OneWay}">
+            <FontIcon Glyph="&#xE1D8;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+        </Button>
 
         <!--Tip-->
         <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,110,0,0" HorizontalAlignment="Center">

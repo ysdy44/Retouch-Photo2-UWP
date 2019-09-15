@@ -110,7 +110,10 @@
     <Compile Include="CompositeModes\CompositeModeControl.xaml.cs">
       <DependentUpon>CompositeModeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ApplicationViewTitleBarBackgroundExtensions.cs" />
+    <Compile Include="Controls\ApplicationViewTitleBarBackgroundExtension.cs" />
+    <Compile Include="Controls\ExpandAppbar.xaml.cs">
+      <DependentUpon>ExpandAppbar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LoadingControl.xaml.cs">
       <DependentUpon>LoadingControl.xaml</DependentUpon>
     </Compile>
@@ -196,6 +199,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="CompositeModes\CompositeModeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ExpandAppbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
