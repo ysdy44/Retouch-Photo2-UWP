@@ -124,7 +124,7 @@ namespace Retouch_Photo2.Elements
             {
                 return HorizontalAlignment.Right;
             }
-            else if (index >= count)
+            else if (index > count - 3)
             {
                 return HorizontalAlignment.Left;
             }

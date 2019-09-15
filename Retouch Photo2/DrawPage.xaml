@@ -113,7 +113,7 @@
 
                         <Border Style="{StaticResource AppCircleBorderStyle}">
                             <Button x:Name="FullScreenButton" Width="Auto" Height="Auto" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <FontIcon Glyph="&#xE1D9;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                <FontIcon Glyph="&#xE1D9;" FontSize="16" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </Button>
                         </Border>
                         

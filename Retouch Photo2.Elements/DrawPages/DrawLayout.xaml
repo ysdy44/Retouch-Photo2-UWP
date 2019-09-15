@@ -73,6 +73,7 @@
 
                         <!--Head-->
                         <Setter Target = "HeadGrid.Visibility" Value="Collapsed"/>
+                        <Setter Target = "HeadRightScrollViewer.Visibility" Value="Collapsed"/>
 
                         <!--Left-->
                         <Setter Target = "LeftBorder.Visibility" Value="Collapsed"/>
@@ -282,12 +283,12 @@
 
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>
-                <animations:TranslationAnimation Duration="0:0:0.4" From="0,-50,0" To="0,0,0"/>
+                <animations:TranslationAnimation Duration="0:0:0.6" From="0,-100,0" To="0,0,0"/>
             </animations:Implicit.ShowAnimations>
 
             <!--Visibility:Hide-->
             <animations:Implicit.HideAnimations>
-                <animations:TranslationAnimation Duration="0:0:0.4" From="0,0,0" To="0,-50,0"/>
+                <animations:TranslationAnimation Duration="0:0:0.6" From="0,0,0" To="0,-100,0"/>
             </animations:Implicit.HideAnimations>
             
         </ScrollViewer>
