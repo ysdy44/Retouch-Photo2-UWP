@@ -10,7 +10,7 @@ namespace Retouch_Photo2.Menus
     {
         //@Content
         public string Text { set => this.TextBlock.Text = value; get => this.TextBlock.Text; }
-        public UIElement Icon { set => this.IconViewbox.Child = value; get => this.IconViewbox.Child; }
+        public UIElement Icon { set; get ; }
         public UIElement ContentChild { set => this.ContentBorder.Child = value; get => this.ContentBorder.Child; }
                 
         public UIElement StateButton => this._StateButton;
@@ -26,11 +26,17 @@ namespace Retouch_Photo2.Menus
                 {
                     case MenuState.FlyoutHide:
                     case MenuState.FlyoutShow:
-                        this._CloseButton.Visibility = Visibility.Collapsed;
+                        {
+                            this._TitlePanel.Background = this.UnAccentColor;
+                            this._CloseButton.Visibility = Visibility.Collapsed;
+                        }
                         break;
                     case MenuState.OverlayExpanded:
                     case MenuState.OverlayNotExpanded:
-                        this._CloseButton.Visibility = Visibility.Visible;
+                        {
+                            this._TitlePanel.Background = this.AccentColor;
+                            this._CloseButton.Visibility = Visibility.Visible;
+                        }
                         break;
                 }
 
@@ -46,7 +52,7 @@ namespace Retouch_Photo2.Menus
                     case MenuState.FlyoutShow:
                     case MenuState.OverlayExpanded:
                         {
-                            this.StateIcon.Glyph = "\uE141";
+                            this.StateIcon.Glyph = "\uE840";
                             this.ContentBorder.Visibility = Visibility.Visible;
                         }
                         break;

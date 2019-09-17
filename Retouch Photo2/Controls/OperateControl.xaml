@@ -20,7 +20,7 @@
 
         <!--Transform-->
         <TextBlock Text="Transform:" Style="{StaticResource AppTextBlock}"/>
-        <Grid>
+        <Grid Margin="2,0">
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2"/>

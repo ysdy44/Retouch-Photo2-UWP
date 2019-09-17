@@ -16,9 +16,9 @@
         <menus:MenuLayout.Icon>
             <Ellipse Width="20" Height="20" Fill="Gray" />
         </menus:MenuLayout.Icon>        
-        <menus:MenuLayout.ContentChild>
             
-            <hsvColorPicker:ColorPicker x:Name="ColorPicker" Width="Auto" Background="Transparent"
+        <menus:MenuLayout.ContentChild>
+            <hsvColorPicker:ColorPicker x:Name="ColorPicker" Width="223" Background="Transparent"
                      Color="{x:Bind SelectionViewModel.Color,Mode=OneWay}"
                      FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
         </menus:MenuLayout.ContentChild>

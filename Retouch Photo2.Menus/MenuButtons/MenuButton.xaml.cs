@@ -40,17 +40,17 @@ namespace Retouch_Photo2.Menus
         public MenuButton()
         {
             this.InitializeComponent();
-            this.ContentPresenter.PointerEntered += (s, e) =>
+            this.RootGrid.PointerEntered += (s, e) =>
             {
                 this.Manager.PointerState = MenuButtonStateManager.ButtonPointerState.PointerOver;
                 this.State = this.Manager.GetState();//State
             };
-            this.ContentPresenter.PointerPressed += (s, e) =>
+            this.RootGrid.PointerPressed += (s, e) =>
             {
                 this.Manager.PointerState = MenuButtonStateManager.ButtonPointerState.Pressed;
                 this.State = this.Manager.GetState();//State
             };
-            this.ContentPresenter.PointerExited += (s, e) =>
+            this.RootGrid.PointerExited += (s, e) =>
             {
                 this.Manager.PointerState = MenuButtonStateManager.ButtonPointerState.None;
                 this.State = this.Manager.GetState();//State

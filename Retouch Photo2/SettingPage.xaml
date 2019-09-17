@@ -4,6 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     Background="{ThemeResource AppBackground}"
     >
@@ -20,6 +21,12 @@
     </Page.Transitions>
 
 
+    <Page.Resources>
+        <!--Extensions-->
+        <elements:ApplicationViewTitleBarBackgroundExtension x:Key="AVTBBE" TitleBarColor="{ThemeResource AppForeground}"/>
+    </Page.Resources>
+    
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -43,7 +50,7 @@
                 <FontIcon Glyph="&#xE0D5;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
             </Button>
 
-            <TextBlock Grid.Column="1" Text="Setting" FontSize="32" FontWeight="Light" HorizontalAlignment="Center">
+            <TextBlock Grid.Column="1" Text="Setting" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
                 <TextBlock.Transitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromHorizontalOffset="50" FromVerticalOffset="0"/>

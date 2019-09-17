@@ -29,7 +29,7 @@
                 
             </ListView>
         </Flyout>
-        <Flyout x:Name="FilterFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="FilterFlyout" Placement="Top" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <Border MaxWidth="330" MaxHeight="330">
                 <GridView x:Name="FilterGridView" 
                           ReorderMode="Enabled" CanReorderItems="True"
@@ -105,12 +105,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*" MinHeight="165"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-
-        <Button x:Name="FilterButton" Grid.Column="0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <FontIcon Glyph="&#xE169;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
-        </Button>
         <Button x:Name="AddButton" Grid.Column="2" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <FontIcon Glyph="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
         </Button>
@@ -144,7 +141,7 @@
         </Button>
    
         
-        <Border x:Name="Frame" Grid.ColumnSpan="3" Grid.Row="1" Background="Transparent">
+        <Border x:Name="Frame" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="2" Background="Transparent">
 
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>
@@ -155,6 +152,13 @@
             <!--Frame-->      
         </Border>
 
+
+        <Border x:Name="FilterButton" Margin="2" Height="36" Grid.ColumnSpan="3" Grid.Row="2" Style="{StaticResource AppRoundedBorderStyle}">
+            <Grid Padding="8,0">
+                <TextBlock Text="Default Filters" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{ThemeResource AppText}"/>
+                <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Right"/>
+            </Grid>
+        </Border>
 
     </Grid>
 </UserControl>

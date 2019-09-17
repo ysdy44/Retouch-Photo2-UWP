@@ -4,17 +4,9 @@ using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using System.Collections.Generic;
 using System.Linq;
-using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Newtonsoft.Json;
-using Retouch_Photo2.Adjustments.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Windows.Storage;
 
 namespace Retouch_Photo2.Controls
 {

@@ -19,52 +19,45 @@
         <SolidColorBrush x:Name="PointerOverColor" Color="{ThemeResource SystemBaseLowColor}"/>
         <SolidColorBrush x:Name="PressedColor" Color="{ThemeResource SystemBaseLowColor}"/>
 
-        <!--Background-->
-        <SolidColorBrush x:Name="AccentColor" Color="{ThemeResource SystemAccentColor}"/>
-        <SolidColorBrush x:Name="UnAccentColor" Color="Transparent"/>
-
         <!--Foreground-->
         <SolidColorBrush x:Name="CheckColor" Color="{ThemeResource SystemBaseHighColor}"/>
         <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource SystemBaseMediumLowColor}"/>
-        <SolidColorBrush x:Name="HighlightColor" Color="White"/>
+        <SolidColorBrush x:Name="HighlightColor" Color="{ThemeResource SystemAccentColor}"/>
 
     </UserControl.Resources>
 
-
-    <ContentPresenter x:Name="ContentPresenter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{StaticResource AccentColor}" Foreground="{StaticResource HighlightColor}">
+    
+    <Grid x:Name="RootGrid" Background="Transparent">
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="CommonStates">
+            <VisualStateGroup x:Name="VisualStateGroup">
 
                 <VisualState x:Name="Normal">
                     <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource UnAccentColor}" />
-                        </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource UnCheckColor}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
+                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                     </Storyboard>
                 </VisualState>
 
                 <VisualState x:Name="PointerOver">
                     <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PointerOverColor}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource UnCheckColor}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
+                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                     </Storyboard>
                 </VisualState>
 
                 <VisualState x:Name="Pressed">
                     <Storyboard>
                         <PointerDownThemeAnimation TargetName="ContentPresenter" />
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PressedColor}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
@@ -77,9 +70,6 @@
                 <VisualState x:Name="Flyout">
                     <Storyboard>
                         <PointerDownThemeAnimation TargetName="ContentPresenter" />
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AccentColor}" />
-                        </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource HighlightColor}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -89,43 +79,53 @@
 
                 <VisualState x:Name="Overlay">
                     <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource UnAccentColor}" />
-                        </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckColor}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TipRectangle" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                     </Storyboard>
                 </VisualState>
 
                 <VisualState x:Name="PointerOverOverlay">
                     <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PointerOverColor}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckColor}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TipRectangle" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                     </Storyboard>
                 </VisualState>
 
                 <VisualState x:Name="PressedOverlay">
                     <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PressedColor}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckColor}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TipRectangle" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                     </Storyboard>
                 </VisualState>
 
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-    </ContentPresenter>
+        <ContentPresenter x:Name="ContentPresenter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{StaticResource HighlightColor}"/>
+
+        <Rectangle x:Name="TipRectangle" IsHitTestVisible="False" Visibility="Collapsed" Height="4" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="{StaticResource HighlightColor}"/>
+      
+    </Grid>
 
 </UserControl>
