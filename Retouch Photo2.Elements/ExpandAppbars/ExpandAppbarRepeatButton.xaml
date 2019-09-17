@@ -5,24 +5,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource AppBarBorderThemeBrush}"
     d:DesignHeight="50"
     d:DesignWidth="50"
     >
 
 
     <UserControl.Resources>
+
         <!--Foreground-->
         <SolidColorBrush x:Name="CheckColor" Color="White"/>
         <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource AppTextColor}"/>
+
+        <!--Background-->
+        <SolidColorBrush x:Name="AccentColor" Color="{ThemeResource SystemAccentColor}"/>
+
     </UserControl.Resources>
 
 
     <Border x:Name="RootGrid" Style="{StaticResource AppCircleBorderStyle}">
-        <Border.Background>
-            <SolidColorBrush x:Name="RootBorderBackground"/>
-        </Border.Background>
-        
+
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="CommonStates">
@@ -39,8 +40,8 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckColor}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ColorAnimation Storyboard.TargetName="RootBorderBackground" Storyboard.TargetProperty="Color" 
-                                        To="{ThemeResource SystemAccentColor}" Duration="0:0:0.2"/>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="AccentBorder" 
+                                         Duration="0:0:0.2" From="0.0" To="1.0" d:IsOptimized="True"/>
                     </Storyboard>
                 </VisualState>
 
@@ -49,15 +50,18 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource UnCheckColor}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ColorAnimation Storyboard.TargetName="RootBorderBackground" Storyboard.TargetProperty="Color" 
-                                        To="{ThemeResource AppForegroundColor}" Duration="0:0:0.2"/>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="AccentBorder" 
+                                         Duration="0:0:0.2" From="1.0" To="0.0" d:IsOptimized="True"/>
                     </Storyboard>
                 </VisualState>
 
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-
-        <ContentPresenter x:Name="ContentPresenter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        
+        <Grid>
+            <Border x:Name="AccentBorder" Opacity="0.0" BorderThickness="0" BorderBrush="Transparent" Background="{ThemeResource AccentColor}" Style="{StaticResource AppCircleBorderStyle}"/>
+            <ContentPresenter x:Name="ContentPresenter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </Grid>
 
     </Border>
 

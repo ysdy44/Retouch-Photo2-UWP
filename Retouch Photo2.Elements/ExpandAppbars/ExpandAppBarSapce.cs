@@ -9,6 +9,9 @@ namespace Retouch_Photo2.Elements
         public FrameworkElement Self => this;
 
         //@Construct
-        public ExpandAppBarSapce() => base.Width = this.ExpandWidth;
+        public ExpandAppBarSapce() : base()
+        {
+            base.Width = this.ExpandWidth;
+        }
     }
 }

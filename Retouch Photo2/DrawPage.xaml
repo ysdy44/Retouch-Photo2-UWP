@@ -86,7 +86,7 @@
 
                         <elements:ExpandAppbarButton x:Name="ThemeButton">
                             <elements:ExpandAppbarButton.CenterContent>
-                                <elements:ThemeControl x:Name="ThemeControl" Theme="{x:Bind RequestedTheme, Mode=TwoWay}"/>
+                                <elements:ThemeControl x:Name="ThemeControl" Foreground="{ThemeResource AppText}" Theme="{x:Bind RequestedTheme, Mode=TwoWay}"/>
                             </elements:ExpandAppbarButton.CenterContent>
                         </elements:ExpandAppbarButton>
 

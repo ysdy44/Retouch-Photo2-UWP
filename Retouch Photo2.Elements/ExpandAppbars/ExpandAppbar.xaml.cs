@@ -85,7 +85,7 @@ namespace Retouch_Photo2.Elements
                 if (e.NewSize == e.PreviousSize) return;
 
                 //Width
-                double width = e.NewSize.Width - 70;
+                double width = e.NewSize.Width - 40;
                 int index = ExpandAppbar.Measure(width, this.Children);
 
                 //Index

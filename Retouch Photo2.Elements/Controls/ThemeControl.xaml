@@ -6,12 +6,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Width="Auto"
-    Height="Auto"
-    HorizontalAlignment="Stretch" 
-    VerticalAlignment="Stretch" 
-    BorderThickness="0"
-    Background="Transparent"
     d:DesignHeight="50"
     d:DesignWidth="50"
     >
@@ -42,14 +36,14 @@
     <Grid >
 
         <!--FontIcon-->
-        <FontIcon x:Name="LightIcon" Opacity="0.0" FontSize="22" Glyph="&#xE706;" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <FontIcon x:Name="LightIcon" Opacity="0.0" FontSize="22" Glyph="&#xE706;" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{x:Bind UserControl.Foreground, Mode=OneWay}">
             <FontIcon.RenderTransform>
                 <TranslateTransform Y="0"/>
             </FontIcon.RenderTransform>
         </FontIcon>
 
         <!--FontIcon-->
-        <FontIcon x:Name="NightIcon" Opacity="0.0" FontSize="22" Glyph="&#xEC46;" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <FontIcon x:Name="NightIcon" Opacity="0.0" FontSize="22" Glyph="&#xEC46;" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{x:Bind UserControl.Foreground, Mode=OneWay}">
             <FontIcon.RenderTransform>
                 <TranslateTransform Y="0"/>
             </FontIcon.RenderTransform>

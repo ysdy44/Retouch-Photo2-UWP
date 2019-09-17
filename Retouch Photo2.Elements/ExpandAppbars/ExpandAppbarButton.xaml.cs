@@ -30,6 +30,7 @@ namespace Retouch_Photo2.Elements
         public ExpandAppbarButton()
         {
             this.InitializeComponent();
+            this.Width = this.ExpandWidth;
             this.RootGrid.PointerEntered += (s, e) =>
             {
                 this.State = ClickMode.Hover;

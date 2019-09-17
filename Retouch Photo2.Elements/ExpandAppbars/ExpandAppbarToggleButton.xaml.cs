@@ -60,6 +60,7 @@ namespace Retouch_Photo2.Elements
         public ExpandAppbarToggleButton()
         {
             this.InitializeComponent();
+            base.Width = this.ExpandWidth;
             this.Loaded += (s, e) => this.SetIsSelected(this.IsChecked);
             this.RootGrid.PointerEntered += (s, e) => this.State = ClickMode.Hover;
             this.RootGrid.PointerPressed += (s, e) => this.State = ClickMode.Press;

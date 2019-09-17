@@ -1,4 +1,5 @@
-﻿using Windows.Devices.Input;
+﻿using System.Threading.Tasks;
+using Windows.Devices.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -18,13 +19,9 @@ namespace Retouch_Photo2.Elements
             set
             {
                 if (value)
-                {
                     VisualStateManager.GoToState(this, this.Selected.Name, false);
-                }
                 else
-                {
                     VisualStateManager.GoToState(this, this.UnSelected.Name, false);
-                }
             }
         }
 
@@ -55,6 +52,7 @@ namespace Retouch_Photo2.Elements
         public ExpandAppbarRepeatButton()
         {
             this.InitializeComponent();
+            this.Width = this.ExpandWidth;
             this.Loaded += (s, e) => this.State = this.IsChecked;
             this.PointerEntered += (s, e) =>
             {
@@ -62,7 +60,7 @@ namespace Retouch_Photo2.Elements
                 {
                     this.IsChecked = true;
                 }
-            };
+            }; 
             this.PointerPressed += (s, e) => this.IsChecked = true;
             this.PointerReleased += (s, e) => this.IsChecked = false;
             this.PointerExited += (s, e) => this.IsChecked = false;
