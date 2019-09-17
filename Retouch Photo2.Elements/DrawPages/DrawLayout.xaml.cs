@@ -18,12 +18,12 @@ namespace Retouch_Photo2.Elements.DrawPages
         /// <summary> RightBorder's Child. </summary>
         public UIElement RightPane { get => this.RightBorder.Child; set => this.RightBorder.Child = value; }
         /// <summary> LeftBorder's Child. </summary>
-        public UIElement LeftPane { get => this.LeftBorder.Child; set => this.LeftBorder.Child = value; }
+        public UIElementCollection LeftPaneChildren => this.LeftStackPanel.Children;
 
-        /// <summary> IconLeftIcon's Content. </summary>
-        public object ShowIcon { get => this.IconLeftContentControl.Content; set => this.IconLeftContentControl.Content = value; }
-        /// <summary> IconRightIcon's Content. </summary>
-        public object Icon { get => this.IconRightContentControl.Content; set => this.IconRightContentControl.Content = value; }
+        /// <summary> IconLeftContentControl's Content. </summary>
+        public object LeftIcon { get => this.IconLeftContentControl.Content; set => this.IconLeftContentControl.Content = value; }
+        /// <summary> IconRightContentControl's Content. </summary>
+        public object RightIcon { get => this.IconRightContentControl.Content; set => this.IconRightContentControl.Content = value; }
 
         /// <summary> TouchbarBorder's Child. </summary>
         public UIElement Touchbar { get => this.TouchbarBorder.Child; set => this.TouchbarBorder.Child = value; }
@@ -50,7 +50,7 @@ namespace Retouch_Photo2.Elements.DrawPages
             }
         }
         private Page footPage;
-
+        
 
         #region HeadLeft & HeadRight
 
@@ -59,13 +59,12 @@ namespace Retouch_Photo2.Elements.DrawPages
         public UIElement HeadLeftPane { get => this.HeadLeftBorder.Child; set => this.HeadLeftBorder.Child = value; }
 
 
-        /// <summary> HeadRightStackPane. </summary>
-        public StackPanel HeadRightStackPane { get; set; } = new StackPanel
-        {
-            Orientation = Orientation.Horizontal
-        };
-        /// <summary> HeadRight's Expand. </summary>
-        public bool IsHeadRightExpand
+        /// <summary> HeadRightStackPane's Children. </summary>
+        public UIElementCollection HeadRightChildren => this.HeadRightStackPane.Children;
+
+        StackPanel HeadRightStackPane = new StackPanel { Orientation = Orientation.Horizontal };
+
+        bool IsHeadRightExpand
         {
             set
             {
@@ -172,6 +171,7 @@ namespace Retouch_Photo2.Elements.DrawPages
             }
         }
         
+
         //@Construct
         public DrawLayout()
         {

@@ -10,14 +10,16 @@ namespace Retouch_Photo2.Tools
     /// </summary>
     public interface ITool
     {
-        /// <summary> Sets IITool's ToolTip IsOpen. </summary>
-        bool IsOpen { set; }
+        /// <summary> Sets IITool's IsSelected. </summary>
+        bool IsSelected { set; }
+
         /// <summary> Gets IITool's type. </summary>
         ToolType Type { get; }
         /// <summary> Gets IITool's icon. </summary>
         FrameworkElement Icon { get; }
-        /// <summary> Gets IITool's icon2. </summary>
-        FrameworkElement ShowIcon { get; }
+        /// <summary> Gets IITool's button. </summary>
+        IToolButton Button { get; }
+
         /// <summary> Gets IITool's page. </summary>
         Page Page { get; }
 

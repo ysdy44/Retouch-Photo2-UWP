@@ -15,21 +15,15 @@ namespace Retouch_Photo2.Tools.Pages
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
 
-        #region DependencyProperty
 
-        /// <summary> Gets or sets <see cref = "CursorPage" />'s ToolTip IsOpen. </summary>
-        public bool IsOpen
-        {
-            get { return (bool)GetValue(IsOpenProperty); }
-            set { SetValue(IsOpenProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "CursorPage.IsOpen" /> dependency property. </summary>
-        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(CursorPage), new PropertyMetadata(false));
+        //@Converter
+        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
+        public bool IsSelected { private get; set; }
 
-        #endregion
-
+               
         //@Construct
         public CursorPage()
         {

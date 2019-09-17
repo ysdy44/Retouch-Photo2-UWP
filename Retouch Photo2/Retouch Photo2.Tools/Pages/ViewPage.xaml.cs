@@ -24,9 +24,12 @@ namespace Retouch_Photo2.Tools.Pages
         private bool ViewRadianTypeConverter(TouchbarType type) => type == TouchbarType.ViewRadian;
         private bool ViewScaleTypeConverter(TouchbarType type) => type == TouchbarType.ViewScale;
 
+        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
+        public bool IsSelected { private get; set; }
+
 
         #region DependencyProperty
-        
+
 
         /// <summary> Gets or sets radian. </summary>
         public double Radian

@@ -428,6 +428,12 @@
                 <animations:OpacityAnimation Duration="0:0:0.2" From="1.0" To="0.0"/>
             </animations:Implicit.HideAnimations>
 
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch">
+                <StackPanel x:Name="LeftStackPanel" HorizontalAlignment="Stretch">
+                    <!--Content-->
+                </StackPanel>
+            </ScrollViewer >
+            
         </Border>
         <!--Right-->
         <Border x:Name="RightBorder" Grid.Column="2" MinHeight="200" BorderBrush="{ThemeResource AppStroke}"

@@ -1,6 +1,7 @@
 ﻿using FanKit.Transformers;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
+using Retouch_Photo2.ViewModels.Tips;
 using System.Numerics;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -15,6 +16,7 @@ namespace Retouch_Photo2.Controls
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
@@ -22,7 +24,7 @@ namespace Retouch_Photo2.Controls
 
         //@Converter
         private bool IsOpenConverter(bool isOpen) => isOpen && this.IsOverlayExpanded;
-        public bool IsOverlayExpanded;
+        public bool IsOverlayExpanded { private get; set; }
 
 
         #region DependencyProperty
@@ -102,17 +104,7 @@ namespace Retouch_Photo2.Controls
             }
         }));
 
-
-        /// <summary> Gets or sets <see cref = "OperateControl" />'s ToolTip IsOpen. </summary>
-        public bool IsOpen
-        {
-            get { return (bool)GetValue(IsOpenProperty); }
-            set { SetValue(IsOpenProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "OperateControl.IsOpen" /> dependency property. </summary>
-        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(OperateControl), new PropertyMetadata(false));
-
-
+        
         #endregion
 
 

@@ -19,11 +19,7 @@
         </menus:MenuLayout.Icon>
         
         <menus:MenuLayout.ContentChild>
-            <controls:OperateControl x:Name="OperateControl"
-                                     Mode="{x:Bind SelectionViewModel.Mode,Mode=OneWay}"
-                                 
-                                     IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}"
-                                     />
+            <controls:OperateControl x:Name="OperateControl" Mode="{x:Bind SelectionViewModel.Mode,Mode=OneWay}"/>
         </menus:MenuLayout.ContentChild>
         
     </menus:MenuLayout>

@@ -37,22 +37,17 @@
 
         <elementDrawPages:DrawLayout x:Name="DrawLayout" 
                Touchbar="{x:Bind TipViewModel.TouchbarControl,Mode=OneWay}"
-               ShowIcon="{x:Bind IconConverter(TipViewModel.Tool),Mode=OneWay}"
+               LeftIcon="{x:Bind IconConverter(TipViewModel.Tool),Mode=OneWay}"
                FootPage="{x:Bind PageConverter(TipViewModel.Tool),Mode=OneWay}"
                                              
                Theme="{x:Bind RequestedTheme, Mode=OneWay}"
                IsFullScreen="{x:Bind KeyboardViewModel.IsFullScreen,Mode=OneWay}" 
                >
 
-            <!--Tool-->
-            <elementDrawPages:DrawLayout.LeftPane>
-                <controls:ToolsControl x:Name="ToolsControl"/>
-            </elementDrawPages:DrawLayout.LeftPane>
-
-            <!--Icon-->
-            <elementDrawPages:DrawLayout.Icon>
+            <!--RightIcon-->
+            <elementDrawPages:DrawLayout.RightIcon>
                 <layers:Icon/>
-            </elementDrawPages:DrawLayout.Icon>
+            </elementDrawPages:DrawLayout.RightIcon>
 
             <!--Canvas-->
             <elementDrawPages:DrawLayout.CenterChild>

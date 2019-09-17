@@ -1,5 +1,4 @@
-﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.Menus;
+﻿using Retouch_Photo2.Menus;
 using System.ComponentModel;
 
 namespace Retouch_Photo2.ViewModels.Tips
@@ -9,6 +8,11 @@ namespace Retouch_Photo2.ViewModels.Tips
     /// </summary>
     public partial class TipViewModel : INotifyPropertyChanged
     {
+
+        /// <summary> Tool. </summary>
+        public IMenu ToolMenu;
+        /// <summary> Layer. </summary>
+        public IMenu LayerMenu;
 
         /// <summary> Debug. </summary>
         public IMenu DebugMenu;
@@ -27,11 +31,6 @@ namespace Retouch_Photo2.ViewModels.Tips
 
         /// <summary> Color. </summary>
         public IMenu ColorMenu;
-
-        /// <summary> Tool. </summary>
-        public IMenu ToolMenu;
-        /// <summary> Layer. </summary>
-        public IMenu LayerMenu;
 
     }
 }

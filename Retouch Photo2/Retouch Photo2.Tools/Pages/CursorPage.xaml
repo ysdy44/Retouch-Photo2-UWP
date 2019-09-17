@@ -16,7 +16,7 @@
         <TextBlock Text="StepFrequency:" Visibility="Collapsed" Style="{StaticResource AppTextBlock}"/>
         <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
             <ToolTipService.ToolTip>
-                <ToolTip Content="StepFrequency" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                <ToolTip Content="StepFrequency" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
             <ToggleButton x:Name="StepFrequencyToggleControl" IsChecked="{x:Bind KeyboardViewModel.IsStepFrequency,Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                 <PathIcon>
@@ -32,7 +32,7 @@
         <!--Control-->
         <elements:OnOffSwitch OnContent="None" OffContent="Ratio" IsOn="{x:Bind KeyboardViewModel.IsRatio,Mode=TwoWay}">
             <ToolTipService.ToolTip>
-                <ToolTip Content="Ratio scaling" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                <ToolTip Content="Ratio scaling" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>  
         </elements:OnOffSwitch>
         
@@ -40,7 +40,7 @@
         
         <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}">
             <ToolTipService.ToolTip>
-                <ToolTip Content="Center scaling" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                <ToolTip Content="Center scaling" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
         </elements:OnOffSwitch>
 
@@ -50,7 +50,7 @@
         <TextBlock Text="Multi-Mode:" Visibility="Collapsed" Style="{StaticResource AppTextBlock}"/>
         <elements:CompositeModeControl Mode="{x:Bind KeyboardViewModel.CompositeMode,Mode=TwoWay}">
             <ToolTipService.ToolTip>
-                <ToolTip Content="Multi-Mode" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                <ToolTip Content="Multi-Mode" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>        
         </elements:CompositeModeControl>
         

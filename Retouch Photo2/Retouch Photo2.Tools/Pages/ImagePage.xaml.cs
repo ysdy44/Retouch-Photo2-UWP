@@ -20,8 +20,15 @@ namespace Retouch_Photo2.Tools.Pages
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
+
         //@Content
         public Storyboard EaseStoryboard => this._EaseStoryboard;
+
+
+        //@Converter
+        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
+        public bool IsSelected { private get; set; }
+
 
         //@Construct
         public ImagePage()

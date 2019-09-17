@@ -1,8 +1,9 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools;
-using Retouch_Photo2.Retouch_Photo2.Tools.Pages;
+using Retouch_Photo2.Tools.Buttons;
 using Retouch_Photo2.Tools.Icons;
+using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
@@ -30,10 +31,17 @@ namespace Retouch_Photo2.Tools.Models
         public readonly RadialGradientTool RadialGradientTool = new RadialGradientTool();
         public readonly EllipticalGradientTool EllipticalGradientTool = new EllipticalGradientTool();
 
-        public bool IsOpen { set { } }
+        public bool IsSelected
+        {
+            set
+            {
+                this.Button.IsSelected = value;
+                this._brushPage.IsSelected = value;
+            }
+        }
         public ToolType Type => ToolType.Brush;
         public FrameworkElement Icon { get; } = new BrushIcon();
-        public FrameworkElement ShowIcon { get; } = new BrushIcon();
+        public IToolButton Button { get; } = new BrushButton();
         public Page Page => this._brushPage;
         BrushPage _brushPage { get; } = new BrushPage();
 

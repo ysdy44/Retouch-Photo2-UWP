@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Tools.Buttons;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
@@ -28,10 +29,17 @@ namespace Retouch_Photo2.Tools.Models
         float _sizeWidth;
         float _sizeHeight;
 
-        public bool IsOpen { set { } }
+        public bool IsSelected
+        {
+            set
+            {
+                this.Button.IsSelected = value;
+                this._imagePage.IsSelected = value;
+            }
+        }
         public ToolType Type => ToolType.Image;
         public FrameworkElement Icon { get; } = new ImageIcon();
-        public FrameworkElement ShowIcon { get; } = new ImageIcon();
+        public IToolButton Button { get; } = new ImageButton();
         public Page Page => this._imagePage;
         ImagePage _imagePage { get; } = new ImagePage();
         

@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Height="50"
     MinWidth="50"
+    HorizontalAlignment="Stretch"
     Background="Transparent"
     d:DesignHeight="50"
     d:DesignWidth="50"

@@ -17,7 +17,7 @@
         <!--Control-->
         <elements:OnOffSwitch OnContent="None" OffContent="Square" IsOn="{x:Bind KeyboardViewModel.IsSquare,Mode=TwoWay}">
             <ToolTipService.ToolTip>
-                <ToolTip Content="Equal width and height" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                <ToolTip Content="Equal width and height" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
         </elements:OnOffSwitch>
 
@@ -25,7 +25,7 @@
 
         <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}">
             <ToolTipService.ToolTip>
-                <ToolTip Content="Center scaling" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                <ToolTip Content="Center scaling" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
         </elements:OnOffSwitch>
         

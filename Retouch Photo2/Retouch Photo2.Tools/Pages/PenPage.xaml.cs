@@ -4,6 +4,7 @@ using Retouch_Photo2.Tools.Elements;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
+using Retouch_Photo2.ViewModels.Tips;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -16,30 +17,24 @@ namespace Retouch_Photo2.Tools.Pages
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
+
 
         //@Content
         /// <summary> PenPage's Flyout. </summary>
         public PenFlyout PenFlyout => this._penFlyout;
 
+
         //@Converter
         private Visibility FalseToVisibilityConverter(bool value) => value ? Visibility.Collapsed : Visibility.Visible;
         private Visibility TrueToVisibilityConverter(bool value) => value ? Visibility.Visible : Visibility.Collapsed;
 
-        #region DependencyProperty
+        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
+        public bool IsSelected { private get; set; }
 
-        /// <summary> Gets or sets <see cref = "PenPage" />'s ToolTip IsOpen. </summary>
-        public bool IsOpen
-        {
-            get { return (bool)GetValue(IsOpenProperty); }
-            set { SetValue(IsOpenProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "PenPage.IsOpen" /> dependency property. </summary>
-        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(PenPage), new PropertyMetadata(false));
-
-        #endregion
 
         //@Construct
         public PenPage()

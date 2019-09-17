@@ -24,7 +24,7 @@ namespace Retouch_Photo2
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@Converter
-        private FrameworkElement IconConverter(ITool tool) => tool.ShowIcon;
+        private FrameworkElement IconConverter(ITool tool) => tool.Icon;
         private Page PageConverter(ITool tool) => tool.Page;
         public Visibility BoolToVisibilityConverter(bool isChecked) => isChecked ? Visibility.Visible : Visibility.Collapsed;
 
@@ -42,60 +42,107 @@ namespace Retouch_Photo2
             //FullScreen
             this.UnFullScreenButton.Tapped += (s, e) => this.DrawLayout.IsFullScreen = !DrawLayout.IsFullScreen;
             this.FullScreenButton.Tapped += (s, e) => DrawLayout.IsFullScreen = !DrawLayout.IsFullScreen;
-                                   
+
+
+            //Tool
+            this.ConstructTool(this.TipViewModel.CursorTool);
+            this.ConstructTool(this.TipViewModel.ViewTool);
+            this.ConstructTool(this.TipViewModel.BrushTool);
+            this.ConstructTool(this.TipViewModel.RectangleTool);
+            this.ConstructTool(this.TipViewModel.EllipseTool);
+            this.ConstructTool(this.TipViewModel.PenTool);
+            this.ConstructTool(this.TipViewModel.ImageTool);
+            this.ConstructTool(this.TipViewModel.AcrylicTool);
+
+
             //Menu
-            this.Construct(this.TipViewModel.DebugMenu);
-            this.Construct(this.TipViewModel.SelectionMenu);
-            this.Construct(this.TipViewModel.OperateMenu);
-            this.Construct(this.TipViewModel.AdjustmentMenu);
-            this.Construct(this.TipViewModel.EffectMenu);
-            this.Construct(this.TipViewModel.TransformerMenu);
-            this.Construct(this.TipViewModel.ColorMenu);
-            this.Construct(this.TipViewModel.ToolMenu);
-            this.Construct(this.TipViewModel.LayerMenu);
+            this.ConstructMenu(this.TipViewModel.ToolMenu);
+            this.ConstructMenu(this.TipViewModel.LayerMenu);
+            this.ConstructMenu(this.TipViewModel.DebugMenu);
+            this.ConstructMenu(this.TipViewModel.SelectionMenu);
+            this.ConstructMenu(this.TipViewModel.OperateMenu);
+            this.ConstructMenu(this.TipViewModel.AdjustmentMenu);
+            this.ConstructMenu(this.TipViewModel.EffectMenu);
+            this.ConstructMenu(this.TipViewModel.TransformerMenu);
+            this.ConstructMenu(this.TipViewModel.ColorMenu);
+        }
+
+        #region Tool
+
+
+        List<ITool> Tools = new List<ITool>();
+        UIElementCollection TooLeft => this.DrawLayout.LeftPaneChildren;
+
+
+        private void ConstructTool(ITool tool)
+        {
+            if (tool == null) return;
+
+            this.Tools.Add(tool);
+
+            IToolButton button = tool.Button;
+
+            button.Self.Tapped += (s, e) =>
+            {
+                this.ToolGroupType(tool.Type);
+                this.TipViewModel.Tool = tool;
+            };
+
+            this.TooLeft.Add(button.Self);
+        }
+
+        private void ToolGroupType(ToolType groupType)
+        {
+            foreach (ITool tool in this.Tools)
+            {
+                if (tool == null) break;
+
+                tool.IsSelected = (tool.Type == groupType);
+            }
+
+            this.ViewModel.Invalidate();//Invalidate
+
+            this.TipViewModel.SetTouchbar(TouchbarType.None);//Touchbar
         }
 
 
-        private void Construct(IMenu menu)
-        {
-            UIElementCollection uIElements = this.OverlayCanvas.Children;
+        #endregion
 
+        #region Menu
+
+
+        UIElementCollection MenuOverlay => this.OverlayCanvas.Children;
+        UIElementCollection MenuHead => this.DrawLayout.HeadRightChildren;
+        UIElement MenuLayersControl { set => this.DrawLayout.RightPane = value; }
+
+
+        private void ConstructMenu(IMenu menu)
+        {
+            if (menu == null) return;
+            
             //MenuOverlay
             UIElement overlay = menu.Overlay;
-            uIElements.Add(overlay);
+            this.MenuOverlay.Add(overlay);
 
             menu.Move += (s, e) =>
             {
-                int index = uIElements.IndexOf(menu.Overlay);
-                int count = uIElements.Count;
-                uIElements.Move((uint)index, (uint)count - 1);
+                int index = this.MenuOverlay.IndexOf(menu.Overlay);
+                int count = this.MenuOverlay.Count;
+                this.MenuOverlay.Move((uint)index, (uint)count - 1);
             };
 
             //MenuButton
             IMenuButton menuButton = menu.Button;
             switch (menuButton.Type)
             {
-                case MenuButtonType.None:
-                    {
-                        FrameworkElement button = menuButton.Self;
-                        this.DrawLayout.HeadRightStackPane.Children.Add(button);
-                    }
-                    break;
-                case MenuButtonType.ToolButton:
-                    {
-                        FrameworkElement toolButton = menuButton.Self;
-                        this.ToolsControl.MoreBorderChild = toolButton;
-                    }
-                    break;
-                case MenuButtonType.LayersControl:
-                    {
-                        FrameworkElement layersControl = menuButton.Self;
-                        this.DrawLayout.RightPane = layersControl;
-                    }
-                    break;
+                case MenuButtonType.None: this.MenuHead.Add(menuButton.Self); break;
+                case MenuButtonType.ToolButton: this.TooLeft.Add(menuButton.Self); break;
+                case MenuButtonType.LayersControl: this.MenuLayersControl = menuButton.Self; break;
             }
         }
 
+
+        #endregion
 
         //The current page becomes the active page
         protected override void OnNavigatedTo(NavigationEventArgs e)

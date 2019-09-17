@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Tools.Buttons;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
@@ -27,10 +28,17 @@ namespace Retouch_Photo2.Tools.Models
         CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
         NodeCollection NodeCollection => this.CurveLayer.NodeCollection;
 
-        public bool IsOpen { set { this._penPage.IsOpen = value; } }
+        public bool IsSelected
+        {
+            set
+            {
+                this.Button.IsSelected = value;
+                this._penPage.IsSelected = value;
+            }
+        }
         public ToolType Type => ToolType.Pen;
         public FrameworkElement Icon { get; } = new PenIcon();
-        public FrameworkElement ShowIcon { get; } = new PenIcon();
+        public IToolButton Button { get; } = new PenButton();
         public Page Page => this._penPage;
         PenPage _penPage { get; } = new PenPage();
 

@@ -2,6 +2,7 @@
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
+using Retouch_Photo2.ViewModels.Tips;
 using System;
 using System.Numerics;
 using Windows.UI.Xaml;
@@ -16,6 +17,7 @@ namespace Retouch_Photo2.Controls
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         Transformer SelectionTransformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
@@ -23,7 +25,7 @@ namespace Retouch_Photo2.Controls
 
         //@Converter
         private bool IsOpenConverter(bool isOpen) => isOpen && this.IsOverlayExpanded && this.RemoteOrIndicator;
-        public bool IsOverlayExpanded;
+        public bool IsOverlayExpanded { private get; set; }
 
 
         //RemoteOrIndicator
@@ -139,16 +141,6 @@ namespace Retouch_Photo2.Controls
                 con.State = con.Manager.GetState();
             }
         }));
-
-
-        /// <summary> Gets or sets <see cref = "TransformerControl" />'s ToolTip IsOpen. </summary>
-        public bool IsOpen
-        {
-            get { return (bool)GetValue(IsOpenProperty); }
-            set { SetValue(IsOpenProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "TransformerControl.IsOpen" /> dependency property. </summary>
-        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(TransformerControl), new PropertyMetadata(false));
 
 
         #endregion

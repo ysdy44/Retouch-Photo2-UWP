@@ -2,6 +2,7 @@
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Tools.Buttons;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
@@ -34,10 +35,17 @@ namespace Retouch_Photo2.Tools.Models
             Destination = transformer,
         };
 
-        public override bool IsOpen { set { this._ellipsePage.IsOpen = value; } }
+        public override bool IsSelected
+        {
+            set
+            {
+                this.Button.IsSelected = value;
+                this._ellipsePage.IsSelected = value;
+            }
+        }
         public override ToolType Type => ToolType.Ellipse;
         public override FrameworkElement Icon { get; } = new EllipseIcon();
-        public override FrameworkElement ShowIcon { get; } = new EllipseIcon();
+        public override IToolButton Button { get; } = new EllipseButton();
         public override Page Page => this._ellipsePage;
         EllipsePage _ellipsePage { get; } = new EllipsePage();
     }

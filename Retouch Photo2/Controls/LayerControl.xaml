@@ -63,7 +63,7 @@
         <Slider x:Name="OpacitySlider" Margin="2,0" TickFrequency="25" TickPlacement="Inline" Style="{StaticResource AppOpacitySliderStyle}" 
                 Value="{x:Bind OpacityToValueConverter(SelectionViewModel.Opacity),Mode=OneWay}">
             <ToolTipService.ToolTip>
-                <ToolTip Content="Opacity" Placement="Top" IsOpen="{x:Bind IsOpenConverter(IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                <ToolTip Content="Opacity" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
         </Slider>
 
@@ -71,7 +71,7 @@
         <TextBlock Text="Blend" Style="{StaticResource AppTextBlock}"/>
         <Border Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
             <ToolTipService.ToolTip>
-                <ToolTip Content="Blend Type" Placement="Top" IsOpen="{x:Bind IsOpenConverter(IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                <ToolTip Content="Blend Type" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
             <blend:Control x:Name="BlendControl" BlendType="{x:Bind SelectionViewModel.BlendType,Mode=OneWay}"/>
         </Border>
@@ -89,19 +89,19 @@
 
                 <Button x:Name="VisualButton" Grid.Column="0" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Visual" Placement="Top" IsOpen="{x:Bind IsOpenConverter(IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Visual" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}" Opacity="{x:Bind VisibilityToOpacityConverter(SelectionViewModel.Visibility),Mode=OneWay}"/>
                 </Button>
                 <Button x:Name="Rasterise" Grid.Column="1" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Rasterise" Placement="Top" IsOpen="{x:Bind IsOpenConverter(IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Rasterise" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                 </Button>
 
                 <Button x:Name="DuplicateButton" Grid.Column="2" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Duplicate" Placement="Top" IsOpen="{x:Bind IsOpenConverter(IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Duplicate" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <PathIcon Foreground="{ThemeResource AppText}">
                         <PathIcon.Data>
@@ -111,7 +111,7 @@
                 </Button>
                 <Button x:Name="RemoveButton" Grid.Column="3" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Remove" Placement="Top" IsOpen="{x:Bind IsOpenConverter(IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Remove" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <PathIcon Foreground="{ThemeResource AppText}">
                         <PathIcon.Data>

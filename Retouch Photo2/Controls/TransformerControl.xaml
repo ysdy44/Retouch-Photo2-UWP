@@ -51,7 +51,7 @@
             <TextBlock Grid.Column="0" Grid.Row="0" Text="Width:" Style="{StaticResource AppTextBlock}"/>
             <Border Grid.Column="0" Grid.Row="1" Background="Transparent" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
                 <ToolTipService.ToolTip>
-                    <ToolTip Content="Width" Placement="Top" IsOpen="{x:Bind IsOpenConverter(IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                    <ToolTip Content="Width" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
                 <pickers:NumberPicker x:Name="WPicker" Width="Auto" Height="Auto" Unit="dp" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
             </Border>
@@ -59,14 +59,14 @@
             <TextBlock Grid.Column="2" Grid.Row="0" Text="Height:" Style="{StaticResource AppTextBlock}"/>
             <Border Grid.Column="2" Grid.Row="1" Background="Transparent" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
                 <ToolTipService.ToolTip>
-                    <ToolTip Content="Height" Placement="Top" IsOpen="{x:Bind IsOpenConverter(IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                    <ToolTip Content="Height" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
                 <pickers:NumberPicker x:Name="HPicker" Width="Auto" Height="Auto" Unit="dp" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
             </Border>
 
             <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource AppCircleBorderStyle}">
                 <ToolTipService.ToolTip>
-                    <ToolTip Content="Ratio" Placement="Top" IsOpen="{x:Bind IsOpenConverter(IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                    <ToolTip Content="Ratio" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
                 <ToggleButton x:Name="RatioToggleControl" IsChecked="{x:Bind IsRatio,Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                     <FontIcon Glyph="&#x1F512;" FontFamily="Segoe UI Symbol" FontSize="18"/>
@@ -78,7 +78,7 @@
             <TextBlock Grid.Column="0" Grid.Row="2" Text="Rotate:" Style="{StaticResource AppTextBlock}"/>
             <Border Grid.Column="0" Grid.Row="3" Background="Transparent" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
                 <ToolTipService.ToolTip>
-                    <ToolTip Content="Rotate" Placement="Top" IsOpen="{x:Bind IsOpenConverter(IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                    <ToolTip Content="Rotate" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
                 <pickers:NumberPicker x:Name="RPicker" Width="Auto" Height="Auto" Unit="º" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
             </Border>
@@ -86,7 +86,7 @@
             <TextBlock Grid.Column="2" Grid.Row="2" Text="Skew:" Style="{StaticResource AppTextBlock}"/>
             <Border Grid.Column="2" Grid.Row="3" Background="Transparent" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
                 <ToolTipService.ToolTip>
-                    <ToolTip Content="Skew" Placement="Top" IsOpen="{x:Bind IsOpenConverter(IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                    <ToolTip Content="Skew" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
                 <pickers:NumberPicker x:Name="SPicker" Width="Auto" Height="Auto" Unit="º" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
             </Border>
@@ -96,7 +96,7 @@
             <TextBlock Grid.Column="0" Grid.Row="4" Text="X:" Style="{StaticResource AppTextBlock}"/>
             <Border Grid.Column="0" Grid.Row="5" Background="Transparent" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
                 <ToolTipService.ToolTip>
-                    <ToolTip Content="X-axis" Placement="Top" IsOpen="{x:Bind IsOpenConverter(IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                    <ToolTip Content="X-axis" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
                 <Border.BorderBrush>
                     <SolidColorBrush x:Name="XBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
@@ -107,7 +107,7 @@
             <TextBlock Grid.Column="2" Grid.Row="4" Text="Y:" Style="{StaticResource AppTextBlock}"/>
             <Border Grid.Column="2" Grid.Row="5" Background="Transparent" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
                 <ToolTipService.ToolTip>
-                    <ToolTip Content="Y-axis" Placement="Top" IsOpen="{x:Bind IsOpenConverter(IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                    <ToolTip Content="Y-axis" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
                 <Border.BorderBrush>
                     <SolidColorBrush x:Name="YBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
@@ -123,7 +123,7 @@
                      BorderBrush="{ThemeResource AppStroke}"
                     >
                 <ToolTipService.ToolTip>
-                    <ToolTip Content="Indicator" Placement="Bottom" IsOpen="{x:Bind IsOpenConverter(IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                    <ToolTip Content="Indicator" Placement="Bottom" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
             </transformers:IndicatorControl>
 

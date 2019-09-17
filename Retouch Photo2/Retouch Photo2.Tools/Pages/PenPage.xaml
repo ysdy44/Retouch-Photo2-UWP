@@ -29,7 +29,7 @@
         <!--Add or Nodes-->
         <elements:OnOffSwitch OnContent="Add" OffContent="Move" IsOn="{x:Bind SelectionViewModel.IsPenToolNodesMode, Mode=TwoWay}">
             <ToolTipService.ToolTip>
-                <ToolTip Content="StepFrequency" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                <ToolTip Content="StepFrequency" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
         </elements:OnOffSwitch>
 
@@ -61,7 +61,7 @@
             <TextBlock Text="Remove:" Style="{StaticResource AppTextBlock}"/>
             <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
                 <ToolTipService.ToolTip>
-                    <ToolTip Content="Remove the current point" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                    <ToolTip Content="Remove the current point" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
                 <Button x:Name="RemoveButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                     <FontIcon Glyph="&#xE107;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
@@ -73,7 +73,7 @@
             <TextBlock Text="Insert:" Style="{StaticResource AppTextBlock}"/>
             <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
                 <ToolTipService.ToolTip>
-                    <ToolTip Content="Insert from current point" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                    <ToolTip Content="Insert from current point" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
                 <Button x:Name="AddButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                     <FontIcon Glyph="&#xE109;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
@@ -85,7 +85,7 @@
             <TextBlock Text="Sharp:" Style="{StaticResource AppTextBlock}"/>
             <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
                 <ToolTipService.ToolTip>
-                    <ToolTip Content="Sharp curves" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                    <ToolTip Content="Sharp curves" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
                 <Button x:Name="SharpButton" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                     <PathIcon Foreground="{ThemeResource AppText}">
@@ -101,7 +101,7 @@
             <TextBlock Text="Smooth:" Style="{StaticResource AppTextBlock}"/>
             <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
                 <ToolTipService.ToolTip>
-                    <ToolTip Content="Smooth curves" Placement="Top" IsOpen="{x:Bind IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                    <ToolTip Content="Smooth curves" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
                 <Button x:Name="SmoothButton" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                     <PathIcon Foreground="{ThemeResource AppText}">

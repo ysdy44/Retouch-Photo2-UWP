@@ -10,10 +10,10 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public class NoneTool : ITool
     {
-        public bool IsOpen { set { } }
+        public bool IsSelected { set { } }
         public ToolType Type => ToolType.None;
         public FrameworkElement Icon { get; } = null;
-        public FrameworkElement ShowIcon { get; } = null;
+        public IToolButton Button { get; } = null;
         public Page Page { get; } = null;
 
 

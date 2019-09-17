@@ -9,36 +9,19 @@ namespace Retouch_Photo2.Tools
     public sealed partial class ToolButton : UserControl
     {
         //@Content
-        /// <summary> Button's Type. </summary>
-        public ToolType Type { get; set; }
+        /// <summary> Button's IsSelected. </summary>
+        public bool IsSelected
+        {
+            set
+            {
+                if (this.Manager.IsSelected == value) return;
+
+                this.Manager.IsSelected = value;
+                this.State = this.Manager.GetState();
+            }
+        }
         /// <summary> ContentPresenter's Content. </summary>
         public object CenterContent { set => this.ContentPresenter.Content = value; get => this.ContentPresenter.Content; }
-
-
-        #region DependencyProperty
-
-        /// <summary> The identifier of the buttonthat is currently selected. </summary>
-        public ToolType GroupType
-        {
-            get { return (ToolType)GetValue(GroupTypeProperty); }
-            set { SetValue(GroupTypeProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "ToolButton.GroupType" /> dependency property. </summary>
-        public static readonly DependencyProperty GroupTypeProperty = DependencyProperty.Register(nameof(GroupType), typeof(ToolType), typeof(ToolButton), new PropertyMetadata(null, (sender, e) =>
-        {
-            ToolButton con = (ToolButton)sender;
-
-            if (e.NewValue is ToolType value)
-            {
-                bool isSelected = (value == con.Type);
-                if (con.Manager.IsSelected == isSelected) return;
-
-                con.Manager.IsSelected = isSelected;
-                con.State = con.Manager.GetState();
-            }
-        }));
-
-        #endregion
 
         
         /// <summary> Manager of <see cref="ToolButton"/>. </summary>

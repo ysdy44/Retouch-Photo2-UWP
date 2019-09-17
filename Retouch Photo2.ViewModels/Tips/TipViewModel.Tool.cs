@@ -8,38 +8,7 @@ namespace Retouch_Photo2.ViewModels.Tips
     /// Retouch_Photo2's the only <see cref = "TipViewModel" />.
     /// </summary>
     public partial class TipViewModel : INotifyPropertyChanged
-    {
-        private void SetToolIsOpen(bool isOpen)
-        {
-            switch (this.Tool.Type)
-            {
-                case ToolType.None:
-                    break;
-
-                case ToolType.Cursor:
-                   this.CursorTool.IsOpen = isOpen;
-                    break;
-
-                case ToolType.View:
-              this.ViewTool.IsOpen = isOpen;
-                    break;
-
-                case ToolType.Rectangle:
-                    break;
-
-                case ToolType.Ellipse:
-                    break;
-
-                case ToolType.Pen:
-                 this.PenTool.IsOpen = isOpen;
-                    break;
-
-                case ToolType.Acrylic:
-                    break;
-            } 
-        }
-
-        
+    {        
         /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.TestApp.Tools.Tool" />. </summary>
         public ITool Tool
         {

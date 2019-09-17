@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Tools.Buttons;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
@@ -17,10 +18,17 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
 
-        public bool IsOpen { set { } }
+        public bool IsSelected
+        {
+            set
+            {
+                this.Button.IsSelected = value;
+                this._viewPage.IsSelected = value;
+            }
+        }
         public ToolType Type => ToolType.View;
         public FrameworkElement Icon { get; } = new ViewIcon();
-        public FrameworkElement ShowIcon { get; } = new ViewIcon();
+        public IToolButton Button { get; } = new ViewButton();
         public Page Page => this._viewPage;
         ViewPage _viewPage { get; } = new ViewPage();
         

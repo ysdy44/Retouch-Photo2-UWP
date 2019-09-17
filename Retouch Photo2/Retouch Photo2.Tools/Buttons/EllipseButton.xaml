@@ -1,0 +1,24 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Tools.Buttons.EllipseButton"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tools="using:Retouch_Photo2.Tools"
+    xmlns:toolsIcons="using:Retouch_Photo2.Tools.Icons"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="50"
+    >
+
+    <ToolTipService.ToolTip>
+        <ToolTip Content="Ellipse" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+    </ToolTipService.ToolTip>
+
+    <tools:ToolButton x:Name="Button">
+        <tools:ToolButton.CenterContent>
+            <toolsIcons:EllipseIcon/>
+        </tools:ToolButton.CenterContent>
+    </tools:ToolButton>
+
+</UserControl>

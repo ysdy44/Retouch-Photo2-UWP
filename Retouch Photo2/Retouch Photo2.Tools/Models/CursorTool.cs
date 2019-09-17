@@ -1,6 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Tools.Buttons;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
@@ -32,10 +33,17 @@ namespace Retouch_Photo2.Tools.Models
         bool _isBox;
         TransformerRect _boxCanvasRect;
 
-        public bool IsOpen { set { this._cursorPage.IsOpen = value; } }
+        public bool IsSelected
+        {
+            set
+            {
+                this.Button.IsSelected = value;
+                this._cursorPage.IsSelected = value;
+            }
+        }
         public ToolType Type=> ToolType.Cursor;
         public FrameworkElement Icon { get; }= new CursorIcon();
-        public FrameworkElement ShowIcon { get; }= new CursorIcon();
+        public IToolButton Button { get; } = new CursorButton();
         public Page Page => this._cursorPage;
         CursorPage _cursorPage { get; } = new CursorPage();
 

@@ -4,25 +4,23 @@ using Retouch_Photo2.ViewModels.Tips;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Tools.Pages
+namespace Retouch_Photo2.Tools.Buttons
 {
     /// <summary>
-    /// Page of <see cref = "EllipseTool"/>.
+    /// Button of <see cref = "EllipseTool"/>.
     /// </summary>
-    public sealed partial class EllipsePage : Page
+    public sealed partial class EllipseButton : UserControl, IToolButton
     {
         //@ViewModel
         TipViewModel TipViewModel => App.TipViewModel;
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
 
+        //@Content
+        public bool IsSelected { set => this.Button.IsSelected = value; }
+        public FrameworkElement Self => this;
 
-        //@Converter
-        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
-        public bool IsSelected { private get; set; }
-
-               
         //@Construct
-        public EllipsePage()
+        public EllipseButton()
         {
             this.InitializeComponent();
         }

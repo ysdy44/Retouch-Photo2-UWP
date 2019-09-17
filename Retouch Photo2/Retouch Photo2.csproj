@@ -125,9 +125,6 @@
     <Compile Include="Controls\ToolControl.xaml.cs">
       <DependentUpon>ToolControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolsControl.xaml.cs">
-      <DependentUpon>ToolsControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\TransformerControl.xaml.cs">
       <DependentUpon>TransformerControl.xaml</DependentUpon>
     </Compile>
@@ -195,6 +192,30 @@
     <Compile Include="Retouch Photo2.Menus\Models\OperateMenu.cs" />
     <Compile Include="Retouch Photo2.Menus\Models\SelectionMenu.cs" />
     <Compile Include="Retouch Photo2.Menus\Models\TransformerMenu.cs" />
+    <Compile Include="Retouch Photo2.Tools\Buttons\AcrylicButton.xaml.cs">
+      <DependentUpon>AcrylicButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\Buttons\BrushButton.xaml.cs">
+      <DependentUpon>BrushButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\Buttons\CursorButton.xaml.cs">
+      <DependentUpon>CursorButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\Buttons\EllipseButton.xaml.cs">
+      <DependentUpon>EllipseButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\Buttons\ImageButton.xaml.cs">
+      <DependentUpon>ImageButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\Buttons\PenButton.xaml.cs">
+      <DependentUpon>PenButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\Buttons\RectangleButton.xaml.cs">
+      <DependentUpon>RectangleButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\Buttons\ViewButton.xaml.cs">
+      <DependentUpon>ViewButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Tools\Elements\FillColorEllipseButton.xaml.cs">
       <DependentUpon>FillColorEllipseButton.xaml</DependentUpon>
     </Compile>
@@ -390,10 +411,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ToolsControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\TransformerControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -463,6 +480,38 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Retouch Photo2.Menus\Layouts\TransformerLayout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\Buttons\AcrylicButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\Buttons\BrushButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\Buttons\CursorButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\Buttons\EllipseButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\Buttons\ImageButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\Buttons\PenButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\Buttons\RectangleButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\Buttons\ViewButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

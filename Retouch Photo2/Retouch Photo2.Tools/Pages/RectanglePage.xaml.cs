@@ -13,19 +13,13 @@ namespace Retouch_Photo2.Tools.Pages
     {
         //@ViewModel
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
-        
-        #region DependencyProperty
+        TipViewModel TipViewModel => App.TipViewModel;
 
-        /// <summary> Gets or sets <see cref = "RectanglePage" />'s ToolTip IsOpen. </summary>
-        public bool IsOpen
-        {
-            get { return (bool)GetValue(IsOpenProperty); }
-            set { SetValue(IsOpenProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "RectanglePage.IsOpen" /> dependency property. </summary>
-        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(RectanglePage), new PropertyMetadata(false));
 
-        #endregion
+        //@Converter
+        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
+        public bool IsSelected { private get; set; }
+
 
         //@Construct
         public RectanglePage()

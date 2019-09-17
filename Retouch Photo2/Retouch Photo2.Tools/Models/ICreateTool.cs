@@ -35,10 +35,10 @@ namespace Retouch_Photo2.Tools.Models
         /// <returns> Layer </returns>
         public abstract ILayer CreateLayer(Transformer transformer);
 
-        public abstract bool IsOpen { set; }
+        public abstract bool IsSelected { set; }
         public abstract ToolType Type { get; }
         public abstract FrameworkElement Icon { get; }
-        public abstract FrameworkElement ShowIcon { get; }
+        public abstract IToolButton Button { get; }
         public abstract Page Page { get; }
 
         public void Starting(Vector2 point) { }

@@ -9,7 +9,7 @@ using Retouch_Photo2.ViewModels.Tips;
 using System.Numerics;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
+namespace Retouch_Photo2.Tools.Pages
 {
     /// <summary>
     /// Page of <see cref = "BrushTool"/>.
@@ -54,6 +54,9 @@ namespace Retouch_Photo2.Retouch_Photo2.Tools.Pages
             }
             return false;
         }
+
+        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
+        public bool IsSelected { private get; set; }
 
 
         //@Construct

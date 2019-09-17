@@ -19,11 +19,7 @@
         </menus:MenuLayout.Icon>
         
         <menus:MenuLayout.ContentChild>
-            <controls:LayerControl x:Name="LayerControl"                              
-                        Mode="{x:Bind SelectionViewModel.Mode,Mode=OneWay}"                                  
-                                   
-                        IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}"
-                        />
+            <controls:LayerControl x:Name="LayerControl" Mode="{x:Bind SelectionViewModel.Mode,Mode=OneWay}"/>
         </menus:MenuLayout.ContentChild>
         
     </menus:MenuLayout>

@@ -23,7 +23,6 @@ namespace Retouch_Photo2.ViewModels.Tips
             get => this.isOpen;
             set
             {
-                this.SetToolIsOpen(value);//Tool
                 this.isOpen = value;
                 this.OnPropertyChanged(nameof(this.IsOpen));//Notify 
             }
