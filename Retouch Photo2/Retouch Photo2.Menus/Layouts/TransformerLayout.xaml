@@ -24,6 +24,8 @@
                            DisabledRadian="{x:Bind SelectionViewModel.DsabledRadian,Mode=OneWay}"
                            Mode="{x:Bind SelectionViewModel.Mode,Mode=OneWay}"
                            Transformer="{x:Bind SelectionViewModel.Transformer,Mode=OneWay}" 
+                                       
+                           IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}"
                         />
         </menus:MenuLayout.ContentChild>
         

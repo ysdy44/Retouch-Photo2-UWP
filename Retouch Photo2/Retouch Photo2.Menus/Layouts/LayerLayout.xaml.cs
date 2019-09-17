@@ -11,11 +11,18 @@ namespace Retouch_Photo2.Menus.Layouts
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
 
 
         //@Content
-        public bool IsOpen { set { this.LayerControl.IsOpen = value; } }
-        public MenuState State { set => this._Layout.State = value; }
+        public MenuState State
+        {
+            set
+            {
+                this._Layout.State = value;
+                this.LayerControl.IsOverlayExpanded = value == MenuState.OverlayExpanded;
+            }
+        }
         public FrameworkElement Self => this;
 
         public UIElement StateButton => this._Layout.StateButton;

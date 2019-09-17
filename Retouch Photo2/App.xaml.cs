@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Navigation;
 namespace Retouch_Photo2
 {
     public sealed partial class App : Application
-    {      
+    {
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.ViewModel" />. </summary>
         public static ViewModel ViewModel = new ViewModel();
 
@@ -36,6 +36,7 @@ namespace Retouch_Photo2
             TransformerTool = new TransformerTool(),
 
             //Tool
+            /*
             CursorTool = new CursorTool(),
             ViewTool = new ViewTool(),
             BrushTool = new BrushTool(),
@@ -44,13 +45,16 @@ namespace Retouch_Photo2
             PenTool = new PenTool(),
             ImageTool = new ImageTool(),
             AcrylicTool = new AcrylicTool(),
+             */
 
             //Touchbar
+            /*
             StrokeWidthTouchbar = new StrokeWidthTouchbar(),
             ViewRadianTouchbar = new ViewRadianTouchbar(),
             ViewScaleTouchbar = new ViewScaleTouchbar(),
             AcrylicTintOpacityTouchbar = new AcrylicTintOpacityTouchbar(),
             AcrylicBlurAmountTouchbar = new AcrylicBlurAmountTouchbar(),
+            */
 
             //Menu
             DebugMenu = new DebugMenu(),

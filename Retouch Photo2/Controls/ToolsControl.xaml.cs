@@ -62,6 +62,8 @@ namespace Retouch_Photo2.Controls
 
         private void Construct(ToolButton toolButton, ITool tool)
         {
+            if (tool == null) return;
+
             ToolType type = tool.Type;
 
             //Content

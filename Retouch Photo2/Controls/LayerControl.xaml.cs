@@ -28,6 +28,12 @@ namespace Retouch_Photo2.Controls
         ObservableCollection<ILayer> _reference => this.ViewModel.Layers;
         ObservableCollection<ILayer> _selection => this.SelectionViewModel.Layer.Children;
 
+
+        //@Converter
+        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsOverlayExpanded;
+        public bool IsOverlayExpanded;
+
+
         //@Converter
         private double OpacityToValueConverter(float opacity) => opacity * 100.0d;
         private float ValueToOpacityConverter(double value) => (float)value / 100.0f;

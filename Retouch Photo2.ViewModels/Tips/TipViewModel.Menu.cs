@@ -10,19 +10,6 @@ namespace Retouch_Photo2.ViewModels.Tips
     public partial class TipViewModel : INotifyPropertyChanged
     {
 
-        private void SetMenusOpen(bool isOpen)
-        {
-            this.DebugMenu.IsOpen = isOpen;
-            this.SelectionMenu.IsOpen = isOpen;
-            this.OperateMenu.IsOpen = isOpen;
-            this.AdjustmentMenu.IsOpen = isOpen;
-            this.EffectMenu.IsOpen = isOpen;
-            this.TransformerMenu.IsOpen = isOpen;
-            this.ColorMenu.IsOpen = isOpen;
-            this.ToolMenu.IsOpen = isOpen;
-            this.LayerMenu.IsOpen = isOpen;
-        }
-
         /// <summary> Debug. </summary>
         public IMenu DebugMenu;
 

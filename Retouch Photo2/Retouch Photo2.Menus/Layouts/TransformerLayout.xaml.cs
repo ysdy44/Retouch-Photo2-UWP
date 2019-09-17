@@ -15,8 +15,14 @@ namespace Retouch_Photo2.Menus.Layouts
 
 
         //@Content
-        public bool IsOpen { set { this.TransformerControl.IsOpen = value; } }
-        public MenuState State { set => this._Layout.State = value; }
+        public MenuState State
+        {
+            set
+            {
+                this._Layout.State = value;
+                this.TransformerControl.IsOverlayExpanded = value == MenuState.OverlayExpanded;
+            }
+        }
         public FrameworkElement Self => this;
 
         public UIElement StateButton => this._Layout.StateButton;

@@ -21,9 +21,11 @@ namespace Retouch_Photo2.Controls
         Transformer SelectionTransformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
 
 
-        Transformer oldTransformer;
-        IndicatorMode IndicatorMode = IndicatorMode.LeftTop;
-        
+        //@Converter
+        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsOverlayExpanded && this.RemoteOrIndicator;
+        public bool IsOverlayExpanded;
+
+
         //RemoteOrIndicator
         private bool remoteOrIndicator;
         public bool RemoteOrIndicator
@@ -31,8 +33,8 @@ namespace Retouch_Photo2.Controls
             get => this.remoteOrIndicator;
             set
             {
-                this.RemoteRootGrid.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
-                this.IndicatorRootGrid.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
+                this.RemoteRootGrid.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
+                this.IndicatorRootGrid.Visibility = value ? Visibility.Visible : Visibility.Collapsed; 
 
                 this.remoteOrIndicator = value;
             }
@@ -150,6 +152,10 @@ namespace Retouch_Photo2.Controls
 
 
         #endregion
+
+        
+        Transformer oldTransformer;
+        IndicatorMode IndicatorMode = IndicatorMode.LeftTop;
 
 
         /// <summary> Manager of <see cref="TransformerControlState"/>. </summary>

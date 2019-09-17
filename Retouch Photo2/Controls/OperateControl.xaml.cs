@@ -19,6 +19,12 @@ namespace Retouch_Photo2.Controls
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
 
+
+        //@Converter
+        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsOverlayExpanded;
+        public bool IsOverlayExpanded;
+
+
         #region DependencyProperty
 
 

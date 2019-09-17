@@ -64,20 +64,7 @@ namespace Retouch_Photo2.Menus
 
         readonly MenuLayoutSize _size = new MenuLayoutSize();
 
-
-        /// <summary> ToolTip IsOpen. </summary>
-        public bool IsOpen
-        {
-            set
-            {
-                if (this.Layout == null) return;
-
-                if (this.State == MenuState.OverlayExpanded)
-                {
-                    this.Layout.IsOpen = value;
-                }
-            }
-        }
+               
         /// <summary> State of MenuBase. </summary>
         public MenuState State
         {

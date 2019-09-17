@@ -11,9 +11,7 @@ namespace Retouch_Photo2.Menus
     {
         /// <summary> Move the MenuOverlay to a new location in the collection. </summary>
         EventHandler<UIElement> Move { get; set; }
-
-        /// <summary> Sets IMenu's ToolTip IsOpen. </summary>
-        bool IsOpen { set; }
+        
         /// <summary> Gets IMenu's type. </summary>
         MenuType Type { get; }
         /// <summary> Gets IMenu's state. </summary>

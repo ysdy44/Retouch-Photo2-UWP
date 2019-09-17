@@ -4,8 +4,6 @@ namespace Retouch_Photo2.Menus
 {
     public interface IMenuLayout
     {
-        /// <summary> Sets IMenuLayout's ToolTip IsOpen. </summary>
-        bool IsOpen { set; }
         /// <summary> Sets IMenuLayout's state. </summary>
         MenuState State { set; }
         /// <summary> Gets it yourself. </summary>
