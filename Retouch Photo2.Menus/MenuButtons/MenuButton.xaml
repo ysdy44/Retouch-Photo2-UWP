@@ -17,7 +17,7 @@
 
         <!--Pointer -->
         <SolidColorBrush x:Name="PointerOverColor" Color="{ThemeResource SystemBaseLowColor}"/>
-        <SolidColorBrush x:Name="PressedColor" Color="{ThemeResource SystemBaseLowColor}"/>
+        <SolidColorBrush x:Name="PressedColor" Color="{ThemeResource SystemBaseMediumLowColor}"/>
 
         <!--Foreground-->
         <SolidColorBrush x:Name="CheckColor" Color="{ThemeResource SystemBaseHighColor}"/>

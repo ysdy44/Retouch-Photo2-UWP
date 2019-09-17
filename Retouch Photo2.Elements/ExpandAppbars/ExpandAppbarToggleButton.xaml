@@ -1,32 +1,33 @@
-﻿<UserControl 
-    x:Name="UserControl"
-    x:Class="Retouch_Photo2.Selections.SelectionButton"
+﻿<UserControl
+    x:Class="Retouch_Photo2.Elements.ExpandAppbarToggleButton"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    MinWidth="50"
-    Height="46"
-    Padding="8,0"
-    Background="Transparent"
+    mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="50"
-    mc:Ignorable="d"
     >
 
 
-    <UserControl.Resources>        
+    <UserControl.Resources>
+
         <!--Pointer -->
         <SolidColorBrush x:Name="PointerOverColor" Color="{ThemeResource SystemBaseLowColor}"/>
         <SolidColorBrush x:Name="PressedColor" Color="{ThemeResource SystemBaseMediumLowColor}"/>
+
+        <!--Background-->
+        <SolidColorBrush x:Name="AccentColor" Color="{ThemeResource SystemAccentColor}"/>
+
         <!--Foreground-->
         <SolidColorBrush x:Name="CheckColor" Color="{ThemeResource SystemBaseHighColor}"/>
         <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource SystemBaseMediumLowColor}"/>
+        
     </UserControl.Resources>
 
 
-    <Grid x:Name="RootGrid" Padding="{x:Bind UserControl.Padding,Mode=OneWay}" Background="Transparent">
-        
+    <Border x:Name="RootGrid" Style="{StaticResource AppCircleBorderStyle}">
+
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="CommonStates">
@@ -56,38 +57,23 @@
                 </VisualState>
 
 
-                <VisualState x:Name="Disabled">
+                <VisualState x:Name="Selected">
                     <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Foreground">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource UnCheckColor}" />
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckColor}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="EnabledViewbox" Storyboard.TargetProperty="Visibility">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed" />
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DisabledViewbox" Storyboard.TargetProperty="Visibility">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AccentColor}" />
                         </ObjectAnimationUsingKeyFrames>
                         <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                     </Storyboard>
-                </VisualState>
+                </VisualState> 
 
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="8"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <ContentPresenter x:Name="ContentPresenter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{StaticResource UnCheckColor}"/>
 
-        <!--Enabled-->
-        <Viewbox x:Name="EnabledViewbox" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-        <!--Disabled-->
-        <Viewbox x:Name="DisabledViewbox" Visibility="Collapsed" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-        <TextBlock x:Name="TextBlock" Grid.Column="2" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Foreground="{StaticResource CheckColor}"/>
-
-    </Grid>
-
+    </Border>
+    
 </UserControl>

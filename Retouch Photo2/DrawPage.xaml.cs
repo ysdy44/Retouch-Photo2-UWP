@@ -24,8 +24,6 @@ namespace Retouch_Photo2
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@Converter
-        private FrameworkElement IconConverter(ITool tool) => tool.Icon;
-        private Page PageConverter(ITool tool) => tool.Page;
         public Visibility BoolToVisibilityConverter(bool isChecked) => isChecked ? Visibility.Visible : Visibility.Collapsed;
 
         //@Construct
@@ -35,13 +33,14 @@ namespace Retouch_Photo2
             this.Loaded += (s, e) => this.ThemeControl.ApplicationTheme = App.Current.RequestedTheme;
 
             //Appbar
-            this.ExpandAppbar.ChildrenWidth = new List<double> { 40, 4, 40, 4, 40, 32, 40, 4, 40, 4, 40, 4, 40, };
             this.DrawLayout.BackButton.Tapped += (s, e) => this.Frame.GoBack();
             this.SaveButton.Tapped += (s, e) => this.Frame.GoBack();
 
+            this.ThemeButton.Tapped += (s, e) => this.ThemeControl.Toggle();
+            
             //FullScreen
             this.UnFullScreenButton.Tapped += (s, e) => this.DrawLayout.IsFullScreen = !DrawLayout.IsFullScreen;
-            this.FullScreenButton.Tapped += (s, e) => DrawLayout.IsFullScreen = !DrawLayout.IsFullScreen;
+            this.FullScreenButton.Tapped += (s, e) => this.DrawLayout.IsFullScreen = !this.DrawLayout.IsFullScreen;
 
 
             //Tool
@@ -71,9 +70,12 @@ namespace Retouch_Photo2
 
 
         List<ITool> Tools = new List<ITool>();
+
         UIElementCollection TooLeft => this.DrawLayout.LeftPaneChildren;
-
-
+        object LeftIcon { set => this.DrawLayout.LeftIcon = value; }
+        Page FootPage { set => this.DrawLayout.FootPage = value; }
+                
+ 
         private void ConstructTool(ITool tool)
         {
             if (tool == null) return;
@@ -85,6 +87,9 @@ namespace Retouch_Photo2
             button.Self.Tapped += (s, e) =>
             {
                 this.ToolGroupType(tool.Type);
+
+                this.LeftIcon = tool.Icon;
+                this.FootPage = tool.Page;
                 this.TipViewModel.Tool = tool;
             };
 

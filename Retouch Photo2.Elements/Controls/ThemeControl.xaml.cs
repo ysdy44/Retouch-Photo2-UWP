@@ -4,22 +4,16 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Elements
 {
     /// <summary> 
-    /// Click the button to toggle sensitive themes for your application. 
+    /// Toggle sensitive themes for your application. 
     /// </summary>
     public sealed partial class ThemeControl : UserControl
     {
-        
+
         /// <summary> Theme of current <see cref="Application"/>. </summary>
-        public ApplicationTheme ApplicationTheme
-        {
-            set
-            {
-                this.Theme = (value == ApplicationTheme.Dark) ? ElementTheme.Dark : ElementTheme.Light;
-            }
-        }
+        public ApplicationTheme ApplicationTheme { set { this.Theme = (value == ApplicationTheme.Dark) ? ElementTheme.Dark : ElementTheme.Light; } }
         
         #region DependencyProperty
-        
+
         /// <summary> Theme of current <see cref="Window"/>. </summary>
         public ElementTheme Theme
         {
@@ -38,35 +32,20 @@ namespace Retouch_Photo2.Elements
                     frameworkElement.RequestedTheme = value;
                 }
 
-                if (value == ElementTheme.Dark)
-                {
-                    con.DarkStoryboard.Begin();//Storyboard
-                }
-                else
-                {
-                    con.LightStoryboard.Begin();//Storyboard      
-                }         
-
+                if (value == ElementTheme.Dark) con.DarkStoryboard.Begin();//Storyboard
+                else con.LightStoryboard.Begin();//Storyboard      
             }
         }));
-        
-        #endregion
 
+        #endregion
+        
         //@Construct
         public ThemeControl()
         {
             this.InitializeComponent();
-            this.Button.Tapped += (s, e) =>
-            {
-                if (this.Theme== ElementTheme.Dark)
-                {
-                    this.Theme = ElementTheme.Light;
-                }
-                else
-                {
-                    this.Theme = ElementTheme.Dark;
-                }
-            };
         }
+
+        /// <summary> Trigger switching theme. </summary>
+        public void Toggle() => this.Theme = (this.Theme == ElementTheme.Dark) ? ElementTheme.Light : ElementTheme.Dark;
     }
 }

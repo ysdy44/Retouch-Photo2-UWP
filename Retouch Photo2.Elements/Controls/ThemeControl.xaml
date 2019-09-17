@@ -13,7 +13,8 @@
     BorderThickness="0"
     Background="Transparent"
     d:DesignHeight="50"
-    d:DesignWidth="50">
+    d:DesignWidth="50"
+    >
     
     
     <UserControl.Resources>
@@ -37,31 +38,22 @@
     </UserControl.Resources>
 
 
-    <Button x:Name="Button" 
-            Width="{x:Bind UserControl.Width,Mode=OneWay}" 
-            Height="{x:Bind UserControl.Height,Mode=OneWay}" 
-            HorizontalAlignment="{x:Bind UserControl.HorizontalAlignment,Mode=OneWay}" 
-            VerticalAlignment="{x:Bind UserControl.VerticalAlignment,Mode=OneWay}" 
-            BorderThickness="{x:Bind UserControl.BorderThickness,Mode=OneWay}" 
-            BorderBrush="{x:Bind UserControl.BorderBrush,Mode=OneWay}" 
-            Background="{x:Bind UserControl.Background,Mode=OneWay}" 
-            >
-        <Grid >
 
-            <!--FontIcon-->
-            <FontIcon x:Name="LightIcon" Opacity="0.0" FontSize="22" Glyph="&#xE706;" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <FontIcon.RenderTransform>
-                    <TranslateTransform Y="0"/>
-                </FontIcon.RenderTransform>
-            </FontIcon>
+    <Grid >
 
-            <!--FontIcon-->
-            <FontIcon x:Name="NightIcon" Opacity="0.0" FontSize="22" Glyph="&#xEC46;" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <FontIcon.RenderTransform>
-                    <TranslateTransform Y="0"/>
-                </FontIcon.RenderTransform>
-            </FontIcon>
+        <!--FontIcon-->
+        <FontIcon x:Name="LightIcon" Opacity="0.0" FontSize="22" Glyph="&#xE706;" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <FontIcon.RenderTransform>
+                <TranslateTransform Y="0"/>
+            </FontIcon.RenderTransform>
+        </FontIcon>
 
-        </Grid>
-    </Button>
+        <!--FontIcon-->
+        <FontIcon x:Name="NightIcon" Opacity="0.0" FontSize="22" Glyph="&#xEC46;" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <FontIcon.RenderTransform>
+                <TranslateTransform Y="0"/>
+            </FontIcon.RenderTransform>
+        </FontIcon>
+
+    </Grid>
 </UserControl>

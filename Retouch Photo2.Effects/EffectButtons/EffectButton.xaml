@@ -19,7 +19,7 @@
     <UserControl.Resources>
         <!--Pointer -->
         <SolidColorBrush x:Name="PointerOverColor" Color="{ThemeResource SystemBaseLowColor}"/>
-        <SolidColorBrush x:Name="PressedColor" Color="{ThemeResource SystemBaseLowColor}"/>
+        <SolidColorBrush x:Name="PressedColor" Color="{ThemeResource SystemBaseMediumLowColor}"/>
         <!--Foreground-->
         <SolidColorBrush x:Name="CheckColor" Color="{ThemeResource SystemBaseHighColor}"/>
         <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource SystemBaseMediumLowColor}"/>

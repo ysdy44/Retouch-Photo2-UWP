@@ -11,12 +11,11 @@ namespace Retouch_Photo2.Elements
     {
         //@Content
         /// <summary> Gets and sets children elements. </summary>
-        public List<UIElement> Children { get; set; } = new List<UIElement>();
-        /// <summary> Gets and sets children width. </summary>
-        public List<double> ChildrenWidth { get; set; } = new List<double>();
+        public List<IExpandAppbarElement> Children { get; set; } = new List<IExpandAppbarElement>();
 
+        #region Mode
 
-        int Index;         
+        int Index;
         HorizontalAlignment Mode
         {
             set
@@ -32,7 +31,7 @@ namespace Retouch_Photo2.Elements
                             {
                                 this.StackPanel.Children.Add(element);
                             }
-                            this.MoreBorder.Visibility = Visibility.Collapsed;
+                            this.MoreButton.Visibility = Visibility.Collapsed;
                         }
                         break;
                     case HorizontalAlignment.Center:
@@ -40,12 +39,12 @@ namespace Retouch_Photo2.Elements
                             {
                                 for (int i = 0; i < this.Children.Count; i++)
                                 {
-                                    UIElement element = this.Children[i];
+                                    UIElement element = this.Children[i].Self;
 
                                     if (i < this.Index) this.StackPanel.Children.Add(element);
                                     else this.SecondStackPanel.Children.Add(element);
                                 }
-                                this.MoreBorder.Visibility = Visibility.Visible;
+                                this.MoreButton.Visibility = Visibility.Visible;
                             }
                         }
                         break;
@@ -55,13 +54,14 @@ namespace Retouch_Photo2.Elements
                             {
                                 this.SecondStackPanel.Children.Add(element);
                             }
-                            this.MoreBorder.Visibility = Visibility.Visible;
+                            this.MoreButton.Visibility = Visibility.Visible;
                         }
                         break;
                 }
             }
         }
 
+        #endregion
 
         //@Construct
         public ExpandAppbar()
@@ -73,7 +73,7 @@ namespace Retouch_Photo2.Elements
                 {
                     //Width
                     double width = this.ActualWidth - 50;
-                    int index = ExpandAppbar.Measure(width, this.ChildrenWidth);
+                    int index = ExpandAppbar.Measure(width, this.Children);
 
                     //Index
                     this.Index = index;
@@ -83,11 +83,10 @@ namespace Retouch_Photo2.Elements
             this.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
-                if (this.ChildrenWidth == null) return;
 
                 //Width
-                double width = e.NewSize.Width - 50;
-                int index = ExpandAppbar.Measure(width, this.ChildrenWidth);
+                double width = e.NewSize.Width - 70;
+                int index = ExpandAppbar.Measure(width, this.Children);
 
                 //Index
                 if (this.Index != index)
@@ -96,17 +95,18 @@ namespace Retouch_Photo2.Elements
                     this.Mode = ExpandAppbar.Arrange(index, this.Children.Count);
                 }
             };
+            this.MoreButton.Tapped += (s, e) => this.Flyout.ShowAt(this.MoreButton);
         }
 
 
         //@Static
-        private static int Measure(double sizeWidth, IList<double> childrenWidth)
+        private static int Measure(double sizeWidth, IList<IExpandAppbarElement> children)
         {
             double addWidth = 0;
 
-            for (int i = 0; i < childrenWidth.Count; i++)
+            for (int i = 0; i < children.Count; i++)
             {
-                double width = childrenWidth[i];
+                double width = children[i].ExpandWidth;
                 addWidth += width;
 
                 if (addWidth > sizeWidth)
@@ -115,9 +115,8 @@ namespace Retouch_Photo2.Elements
                 }
             }
 
-            return childrenWidth.Count;
+            return children.Count;
         }
-
         private static HorizontalAlignment Arrange(int index, int count)
         {
             if (index <= 0)
@@ -133,6 +132,5 @@ namespace Retouch_Photo2.Elements
                 return HorizontalAlignment.Center;
             }
         }
-
     }
 }

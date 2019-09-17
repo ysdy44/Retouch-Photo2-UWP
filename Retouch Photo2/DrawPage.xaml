@@ -36,10 +36,7 @@
     <Grid>
 
         <elementDrawPages:DrawLayout x:Name="DrawLayout" 
-               Touchbar="{x:Bind TipViewModel.TouchbarControl,Mode=OneWay}"
-               LeftIcon="{x:Bind IconConverter(TipViewModel.Tool),Mode=OneWay}"
-               FootPage="{x:Bind PageConverter(TipViewModel.Tool),Mode=OneWay}"
-                                             
+               Touchbar="{x:Bind TipViewModel.TouchbarControl,Mode=OneWay}"                                             
                Theme="{x:Bind RequestedTheme, Mode=OneWay}"
                IsFullScreen="{x:Bind KeyboardViewModel.IsFullScreen,Mode=OneWay}" 
                >
@@ -63,55 +60,60 @@
                 <elements:ExpandAppbar x:Name="ExpandAppbar">
                     <elements:ExpandAppbar.Children>
 
-                        <Border Style="{StaticResource AppCircleBorderStyle}">
-                            <Button x:Name="SaveButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Background="Transparent">
-                                <FontIcon Glyph="&#xE105;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                            </Button>
-                        </Border>
+                        <elements:ExpandAppbarButton x:Name="SaveButton">
+                            <elements:ExpandAppbarButton.CenterContent>
+                                <FontIcon Glyph="&#xE105;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </elements:ExpandAppbarButton.CenterContent>
+                        </elements:ExpandAppbarButton>
 
-                        <ContentControl Width="4"/>
+                        <elements:ExpandAppBarSapce/>
 
-                        <Border Style="{StaticResource AppCircleBorderStyle}">
-                            <Button IsEnabled="True" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Background="Transparent">
-                                <FontIcon Glyph="&#xE10E;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                            </Button>
-                        </Border>
+                        <elements:ExpandAppbarButton x:Name="UndoButton">
+                            <elements:ExpandAppbarButton.CenterContent>
+                                <FontIcon Glyph="&#xE10E;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </elements:ExpandAppbarButton.CenterContent>
+                        </elements:ExpandAppbarButton>
 
-                        <ContentControl Width="4"/>
+                        <elements:ExpandAppBarSapce/>
 
-                        <Border Style="{StaticResource AppCircleBorderStyle}">
-                            <Button IsEnabled="True" Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Background="Transparent">
-                                <FontIcon Glyph="&#xE10D;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                            </Button>
-                        </Border>
+                        <elements:ExpandAppbarButton x:Name="RedoButton">
+                            <elements:ExpandAppbarButton.CenterContent>
+                                <FontIcon Glyph="&#xE10D;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </elements:ExpandAppbarButton.CenterContent>
+                        </elements:ExpandAppbarButton>
 
-                        <AppBarSeparator/>
+                        <elements:ExpandAppBarSeparator/>
 
-                        <Border Style="{StaticResource AppCircleBorderStyle}">
-                            <elements:ThemeControl x:Name="ThemeControl" Theme="{x:Bind RequestedTheme, Mode=TwoWay}"/>
-                        </Border>
+                        <elements:ExpandAppbarButton x:Name="ThemeButton">
+                            <elements:ExpandAppbarButton.CenterContent>
+                                <elements:ThemeControl x:Name="ThemeControl" Theme="{x:Bind RequestedTheme, Mode=TwoWay}"/>
+                            </elements:ExpandAppbarButton.CenterContent>
+                        </elements:ExpandAppbarButton>
 
-                        <ContentControl Width="4"/>
+                        <elements:ExpandAppBarSapce/>
 
-                        <Border Style="{StaticResource AppCircleBorderStyle}">
-                            <ToggleButton Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE80A;" FontSize="18" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" Background="Transparent" 
-                            IsChecked="{x:Bind ViewModel.CanvasRulerVisible,Mode=TwoWay}"/>
-                        </Border>
+                        <elements:ExpandAppbarToggleButton IsChecked="{x:Bind ViewModel.CanvasRulerVisible,Mode=TwoWay}">
+                            <elements:ExpandAppbarToggleButton.CenterContent>
+                                <FontIcon Glyph="&#xE80A;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </elements:ExpandAppbarToggleButton.CenterContent>        
+                        </elements:ExpandAppbarToggleButton>
 
-                        <ContentControl Width="4"/>
+                        <elements:ExpandAppBarSapce/>
 
-                        <Border Style="{StaticResource AppCircleBorderStyle}">
-                            <elements:RepeatControl IsChecked="{x:Bind TipViewModel.IsOpen,Mode=TwoWay}"/>
-                        </Border>
+                        <elements:ExpandAppbarRepeatButton IsChecked="{x:Bind TipViewModel.IsOpen,Mode=TwoWay}">
+                            <elements:ExpandAppbarRepeatButton.CenterContent>
+                                <FontIcon Glyph="&#xE897;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </elements:ExpandAppbarRepeatButton.CenterContent>
+                        </elements:ExpandAppbarRepeatButton>
 
-                        <ContentControl Width="4"/>
+                        <elements:ExpandAppBarSapce/>
 
-                        <Border Style="{StaticResource AppCircleBorderStyle}">
-                            <Button x:Name="FullScreenButton" Width="Auto" Height="Auto" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <FontIcon Glyph="&#xE1D9;" FontSize="16" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                            </Button>
-                        </Border>
-                        
+                        <elements:ExpandAppbarButton x:Name="FullScreenButton">
+                            <elements:ExpandAppbarButton.CenterContent>
+                                <FontIcon Glyph="&#xE1D9;" FontSize="16" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </elements:ExpandAppbarButton.CenterContent>
+                        </elements:ExpandAppbarButton>
+
                     </elements:ExpandAppbar.Children>
                 </elements:ExpandAppbar>
             </elementDrawPages:DrawLayout.HeadLeftPane>

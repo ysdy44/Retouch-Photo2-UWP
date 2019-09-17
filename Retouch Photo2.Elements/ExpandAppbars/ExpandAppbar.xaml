@@ -4,14 +4,25 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     HorizontalAlignment="Stretch"
     VerticalAlignment="Center"
     d:DesignHeight="50"
     d:DesignWidth="400"
     >
+
     
+    <UserControl.Resources>
+        <!--Flyout-->
+        <Flyout x:Name="Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <StackPanel x:Name="SecondStackPanel" Margin="8,2" Orientation="Horizontal">
+                <!--Second-->
+            </StackPanel>
+        </Flyout>
+    </UserControl.Resources>
     
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -24,21 +35,12 @@
         </StackPanel>
 
         <!--More-->
-        <Border x:Name="MoreBorder" Grid.Column="1" Style="{StaticResource AppCircleBorderStyle}">
-            <Button BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-
-                <Button.Flyout>
-                    <Flyout x:Name="Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                        <StackPanel x:Name="SecondStackPanel" Margin="8,2" Orientation="Horizontal">
-                            <!--Second-->
-                        </StackPanel>
-                    </Flyout>
-                </Button.Flyout>
-                
+        <elements:ExpandAppbarButton x:Name="MoreButton" Grid.Column="1">
+            <elements:ExpandAppbarButton.CenterContent>
                 <FontIcon Glyph="&#xE10C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-            </Button>
-        </Border>
-
+            </elements:ExpandAppbarButton.CenterContent>
+        </elements:ExpandAppbarButton>
+        
     </Grid>
     
 </UserControl>

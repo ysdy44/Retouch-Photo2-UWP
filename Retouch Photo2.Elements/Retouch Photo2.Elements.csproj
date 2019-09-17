@@ -111,7 +111,7 @@
       <DependentUpon>CompositeModeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ApplicationViewTitleBarBackgroundExtension.cs" />
-    <Compile Include="Controls\ExpandAppbar.xaml.cs">
+    <Compile Include="ExpandAppbars\ExpandAppbar.xaml.cs">
       <DependentUpon>ExpandAppbar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\LoadingControl.xaml.cs">
@@ -122,6 +122,18 @@
     </Compile>
     <Compile Include="DrawPages\DrawLayoutState.cs" />
     <Compile Include="DrawPages\DrawLayoutStateManager.cs" />
+    <Compile Include="ExpandAppbars\ExpandAppbarRepeatButton.xaml.cs">
+      <DependentUpon>ExpandAppbarRepeatButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExpandAppbars\ExpandAppbarToggleButton.xaml.cs">
+      <DependentUpon>ExpandAppbarToggleButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExpandAppbars\ExpandAppbarButton.xaml.cs">
+      <DependentUpon>ExpandAppbarButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExpandAppbars\ExpandAppBarSapce.cs" />
+    <Compile Include="ExpandAppbars\ExpandAppBarSeparator.cs" />
+    <Compile Include="ExpandAppbars\IExpandAppbarElement.cs" />
     <Compile Include="MainPages\AddDialog.xaml.cs">
       <DependentUpon>AddDialog.xaml</DependentUpon>
     </Compile>
@@ -202,7 +214,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ExpandAppbar.xaml">
+    <Page Include="ExpandAppbars\ExpandAppbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -213,6 +225,18 @@
     <Page Include="DrawPages\DrawLayout.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ExpandAppbars\ExpandAppbarRepeatButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ExpandAppbars\ExpandAppbarToggleButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ExpandAppbars\ExpandAppbarButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainPages\AddDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
