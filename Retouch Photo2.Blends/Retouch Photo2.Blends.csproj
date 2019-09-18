@@ -106,10 +106,10 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Blend.cs" />
+    <Compile Include="BlendHelper.cs" />
     <Compile Include="BlendType.cs" />
-    <Compile Include="Control.xaml.cs">
-      <DependentUpon>Control.xaml</DependentUpon>
+    <Compile Include="BlendControl.xaml.cs">
+      <DependentUpon>BlendControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icons\ColorBurnIcon.xaml.cs">
       <DependentUpon>ColorBurnIcon.xaml</DependentUpon>
@@ -204,7 +204,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Control.xaml">
+    <Page Include="BlendControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -4,12 +4,18 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:menus="using:Retouch_Photo2.Menus"
     mc:Ignorable="d"
     d:DesignHeight="800"
-    d:DesignWidth="70">
+    d:DesignWidth="200"
+    >
 
 
     <StackPanel>
+        
+        <!--Head-->
+        <menus:MenuTitle x:Name="_MenuTitle" Text="Debug"/>
+        
         <Border Height="50" Background="{ThemeResource AppBackground}"  >
             <TextBlock Text="AppBackground" Style="{StaticResource AppTextBlock}" />
         </Border>
@@ -28,5 +34,7 @@
         <Border Height="50" Background="{ThemeResource AppText}"  >
             <TextBlock Text="AppText" Style="{StaticResource AppTextBlock}" />
         </Border>
+        
     </StackPanel>
+    
 </Page>

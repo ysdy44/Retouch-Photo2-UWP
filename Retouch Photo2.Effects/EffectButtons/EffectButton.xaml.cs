@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Effects
         /// <summary> Manager of <see cref="EffectButton"/>. </summary>
         EffectButtonStateManager Manager = new EffectButtonStateManager();
         /// <summary> State of <see cref="EffectButton"/>. </summary>
-        public EffectButtonState State
+        EffectButtonState State
         {
             set
             {

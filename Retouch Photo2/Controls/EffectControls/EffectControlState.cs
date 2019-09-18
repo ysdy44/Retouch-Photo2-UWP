@@ -5,13 +5,15 @@
     /// </summary>
     public enum EffectControlState
     {
+        /// <summary> Normal. </summary>
+        None,
         /// <summary> Disable. </summary>
         Disable,
 
         /// <summary> Effects display Mode. </summary>
         Effects,
 
-        /// <summary> Effects edited Mode. </summary>
+        /// <summary> Editing effects. </summary>
         Edit
     }
 }

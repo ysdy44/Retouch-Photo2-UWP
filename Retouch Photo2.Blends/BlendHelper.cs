@@ -6,7 +6,7 @@ namespace Retouch_Photo2.Blends
     /// <summary>
     /// Provides static blend rendering method.
     /// </summary>
-    public class Blend
+    public class BlendHelper
     {
         //@Static
         /// <summary>
@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Blends
         /// <returns> The rendered blend. </returns>
         public static ICanvasImage Render(ICanvasImage background, ICanvasImage foreground, BlendType type)
         {
-            if (type== BlendType.Normal)
+            if (type== BlendType.None)
             {
                 return new CompositeEffect
                 {
@@ -34,7 +34,7 @@ namespace Retouch_Photo2.Blends
             {
                 Background = background,
                 Foreground = foreground,
-                Mode = Blend.GetMode(type)
+                Mode = BlendHelper.GetMode(type)
             };
         } 
 
@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Blends
         {
             switch (type)
             {
-                case BlendType.Normal: return BlendEffectMode.Multiply;
+                case BlendType.None: return BlendEffectMode.Multiply;
                 case BlendType.Multiply: return BlendEffectMode.Multiply;
                 case BlendType.Screen: return BlendEffectMode.Screen;
                 case BlendType.Dissolve: return BlendEffectMode.Dissolve;

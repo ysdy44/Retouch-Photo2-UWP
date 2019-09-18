@@ -19,16 +19,17 @@ namespace Retouch_Photo2.Menus.Layouts
         {
             set
             {
-                this._Layout.State = value;
-                this.TransformerControl.IsOverlayExpanded = value == MenuState.OverlayExpanded;
+                this.Control.MenuTitle.State = value;
+                this.Control.Height = (value == MenuState.OverlayNotExpanded) ? 40.0f : double.NaN;
+                this.Control.IsOverlayExpanded = value == MenuState.OverlayExpanded;
             }
         }
         public FrameworkElement Self => this;
 
-        public UIElement StateButton => this._Layout.StateButton;
-        public UIElement CloseButton => this._Layout.CloseButton;
-        public UIElement TitlePanel => this._Layout.TitlePanel;
-
+        public UIElement StateButton => this.Control.MenuTitle.StateButton;
+        public UIElement CloseButton => this.Control.MenuTitle.CloseButton;
+        public UIElement TitlePanel => this.Control.MenuTitle.RootGrid;
+        
 
         //@Construct
         public TransformerLayout()

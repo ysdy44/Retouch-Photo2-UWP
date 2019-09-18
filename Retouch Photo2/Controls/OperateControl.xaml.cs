@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
@@ -20,6 +21,10 @@ namespace Retouch_Photo2.Controls
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
+        
+        
+        //@Content
+        public MenuTitle MenuTitle => this._MenuTitle;
 
 
         //@Converter

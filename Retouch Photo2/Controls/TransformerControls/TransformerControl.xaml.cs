@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using Retouch_Photo2.Menus;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
@@ -23,24 +24,29 @@ namespace Retouch_Photo2.Controls
         Transformer SelectionTransformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
 
 
+        //@Content
+        public MenuTitle MenuTitle => this._MenuTitle;
+
+
         //@Converter
-        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsOverlayExpanded && this.RemoteOrIndicator;
+        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsOverlayExpanded && this.IsSecondPage;
         public bool IsOverlayExpanded { private get; set; }
 
 
         //RemoteOrIndicator
-        private bool remoteOrIndicator;
-        public bool RemoteOrIndicator
+        public bool IsSecondPage
         {
-            get => this.remoteOrIndicator;
+            get => this.isSecondPage;
             set
             {
-                this.RemoteRootGrid.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
-                this.IndicatorRootGrid.Visibility = value ? Visibility.Visible : Visibility.Collapsed; 
+                this._MenuTitle.IsSecondPage = value;
+                this.FitstGrid.Visibility = value ? Visibility.Collapsed : Visibility.Visible; 
+                this.SecondGird.Visibility = value ? Visibility.Visible : Visibility.Collapsed; 
 
-                this.remoteOrIndicator = value;
+                this.isSecondPage = value;
             }
         }
+        private bool isSecondPage;
 
 
         #region DependencyProperty
@@ -293,12 +299,21 @@ namespace Retouch_Photo2.Controls
         {
             this.InitializeComponent();
 
+            this._MenuTitle.ResetButton.Visibility = Visibility.Collapsed;
+            this._MenuTitle.BackButton.Tapped += (s, e) =>
+            {
+                this.IsSecondPage = false;
+            };
+
             #region Remote
 
 
             //RemoteOrIndicator
-            this.RemoteOrIndicator = false;
-            this.RemoteOrIndicatorButton.Tapped += (s, e) => this.RemoteOrIndicator = !this.RemoteOrIndicator;
+            this.IsSecondPage = false;
+            this.RemoteButton.Tapped += (s, e) =>
+            {
+                this.IsSecondPage = true;
+            };
                        
             //Remote
             this.RemoteControl.Moved += (s, value) =>

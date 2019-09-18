@@ -1,12 +1,12 @@
 ﻿namespace Retouch_Photo2.Blends
 {
     /// <summary>
-    /// Type of <see cref="Blend">.
+    /// Type of Blend.
     /// </summary>
     public enum BlendType
     {
         /// <summary> Normal. </summary>
-        Normal,
+        None,
 
         /// <summary> 正片叠底 </summary>    
         Multiply,

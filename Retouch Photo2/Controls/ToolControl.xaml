@@ -4,15 +4,21 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:menus="using:Retouch_Photo2.Menus"
     mc:Ignorable="d"
-    MinHeight="200" 
+    MinHeight="200"
     MinWidth="122"
     d:DesignHeight="200"
     d:DesignWidth="200"
     >
-    
-    <GridView>
+
+
+    <StackPanel>
+
+        <!--Head-->
+        <menus:MenuTitle x:Name="_MenuTitle" Text="Tool"/>
         
-    </GridView>
-    
+        
+    </StackPanel>
+
 </UserControl>

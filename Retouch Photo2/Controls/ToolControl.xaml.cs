@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using Retouch_Photo2.Menus;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Controls
 {
@@ -7,6 +8,9 @@ namespace Retouch_Photo2.Controls
     /// </summary>
     public sealed partial class ToolControl : UserControl
     {
+        //@Content
+        public MenuTitle MenuTitle => this._MenuTitle;
+
         //@Construct
         public ToolControl()
         {

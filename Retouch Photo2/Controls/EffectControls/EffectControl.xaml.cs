@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo2.Effects;
 using Retouch_Photo2.Effects.Models;
+using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Keyboards;
 using Retouch_Photo2.ViewModels.Selections;
@@ -21,28 +22,30 @@ namespace Retouch_Photo2.Controls
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
 
 
+        //@Content
+        public MenuTitle MenuTitle => this._MenuTitle;
+
+
+        /// <summary> Manager of <see cref="EffectControlState"/>. </summary>
+        EffectControlStateManager Manager = new EffectControlStateManager();
         /// <summary> State of <see cref="EffectControl"/>. </summary>
-        public EffectControlState State
+        EffectControlState State
         {
-            set
-            {
-                if (value == EffectControlState.Edit)
-                {
-                    this.StackPanel.Visibility = Visibility.Collapsed;
-
-                    this.BackButton.Visibility = Visibility.Visible;
-                    this.ResetButton.Visibility = Visibility.Visible;
-                    this.Frame.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    this.StackPanel.Visibility = Visibility.Visible;
-
-                    this.BackButton.Visibility = Visibility.Collapsed;
-                    this.ResetButton.Visibility = Visibility.Collapsed;
-                    this.Frame.Visibility = Visibility.Collapsed;
-                }
-            }
+              set
+             {
+                 if (value == EffectControlState.Edit)
+                 {
+                     this.MenuTitle.IsSecondPage = true;
+                     this.StackPanel.Visibility = Visibility.Collapsed;
+                     this.EffectBoder.Visibility = Visibility.Visible;
+                 }
+                 else
+                 {
+                     this.MenuTitle.IsSecondPage = false;
+                     this.StackPanel.Visibility = Visibility.Visible;
+                     this.EffectBoder.Visibility = Visibility.Collapsed;
+                 }
+             }
         }
 
 
@@ -53,15 +56,10 @@ namespace Retouch_Photo2.Controls
             set
             {
                 if (value == null)
-                {
-                    this.Frame.Child = null;
-                    this.State = EffectControlState.Effects;
-                }
+                    this.EffectBoder.Child = null;
                 else
-                {
-                    this.Frame.Child = value.Page.Self;
-                    this.State = EffectControlState.Edit;
-                }
+                    this.EffectBoder.Child = value.Page.Self;
+
                 this.effect = value;
             }
         }
@@ -103,7 +101,9 @@ namespace Retouch_Photo2.Controls
                     effect.Button.FollowEffectManager(value);
                 }
 
-                con.State = EffectControlState.Effects;//State
+                con.Manager.IsEdit = false;
+                con.Manager.ExistEffect = true;
+                con.State = con.Manager.GetState();//State
             }
             else
             {
@@ -113,7 +113,9 @@ namespace Retouch_Photo2.Controls
                     effect.Button.ToggleSwitch.IsEnabled = false;
                 }
 
-                con.State = EffectControlState.Disable;//State
+                con.Manager.IsEdit = false;
+                con.Manager.ExistEffect = true;
+                con.State = con.Manager.GetState();//State
             }
         }));
 
@@ -151,27 +153,36 @@ namespace Retouch_Photo2.Controls
             };
 
             //Button
-            this.ResetButton.Tapped += (s, e) => this.Reset(this.Effect);
-            this.BackButton.Tapped += (s, e) =>  this.Effect = null;
-        }
-
-
-        public void Reset(IEffect effect)
-        {
-            if (effect == null) return;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.MenuTitle.ResetButton.Tapped += (s, e) =>
             {
-                IEffectPage page = effect.Page;
-                page.Reset();
+                if (this.Effect == null) return;
 
-                EffectManager effectManager = layer.EffectManager;
-                page.ResetEffectManager(effectManager);
-            });
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    IEffectPage page = this.Effect.Page;
+                    page.Reset();
 
-            this.ViewModel.Invalidate();//Invalidate
+                    EffectManager effectManager = layer.EffectManager;
+                    page.ResetEffectManager(effectManager);
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+                return;
+            };
+
+            this.MenuTitle.BackButton.Tapped += (s, e) =>
+            {
+                this.Effect = null;
+
+                this.Manager.IsEdit = false;
+                this.State = this.Manager.GetState();//State
+            };
         }
+
+
+
+     
 
         public void Overwriting(IEffect effect)
         {
@@ -201,7 +212,12 @@ namespace Retouch_Photo2.Controls
             {
                 EffectManager effectManager = layer.EffectManager;
                 page.FollowEffectManager(effectManager);
+
+                return;
             });
+
+            this.Manager.IsEdit = true;
+            this.State = this.Manager.GetState();//State
         }
 
     }

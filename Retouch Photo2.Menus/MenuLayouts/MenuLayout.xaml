@@ -12,10 +12,6 @@
 
     <UserControl.Resources>
         
-        <!--Background-->
-        <SolidColorBrush x:Name="AccentColor" Color="{ThemeResource AppForeground}"/>
-        <SolidColorBrush x:Name="UnAccentColor" Color="Transparent"/>
-
         <!--Storyboard-->
         <Storyboard x:Name="Storyboard" >
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Height)" Storyboard.TargetName="StoryboardRectangle" EnableDependentAnimation ="True">
@@ -38,36 +34,16 @@
 
     <controls:DropShadowPanel Style="{StaticResource DropShadowPanelStyle}">
         <Grid Width="222" BorderThickness="1" BorderBrush="{ThemeResource AppFill}" Background="{ThemeResource AppBackground}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
 
-        <Rectangle x:Name="StoryboardRectangle" Grid.Row="1"/>
+            <Rectangle x:Name="StoryboardRectangle"/>
 
-        <Border x:Name="StoryboardBorder" Grid.Row="1" VerticalAlignment="Top">
-            <Border x:Name="ContentBorder">
-                <!--Content-->
+            <Border x:Name="StoryboardBorder" VerticalAlignment="Top">
+                <Border x:Name="ContentBorder">
+                    <!--Content-->
+                </Border>
             </Border>
-        </Border>
 
-        <Grid x:Name="_TitlePanel">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="12"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock x:Name="TextBlock" Grid.Column="1" TextTrimming="CharacterEllipsis" FontWeight="Medium" Style="{StaticResource TitleTextBlockStyle}"/>
-            <Button x:Name="_CloseButton" Grid.Column="2" Padding="0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <FontIcon Glyph="&#xE10A;" FontSize="20" FontFamily="{StaticResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
-            </Button>
-            <Button x:Name="_StateButton" Grid.Column="3" Padding="0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <FontIcon x:Name="StateIcon" FontSize="20" FontFamily="{StaticResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
-            </Button>
         </Grid>
-
-    </Grid>
     </controls:DropShadowPanel>
-    
+
 </UserControl>

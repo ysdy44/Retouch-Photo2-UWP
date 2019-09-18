@@ -20,7 +20,7 @@ namespace Retouch_Photo2.Selections
         /// <summary> Manager of <see cref="SelectionButton"/>. </summary>
         SelectionButtonStateManager Manager = new SelectionButtonStateManager();
         /// <summary> State of <see cref="SelectionButton"/>. </summary>
-        public SelectionButtonState State
+        SelectionButtonState State
         {
             set
             {

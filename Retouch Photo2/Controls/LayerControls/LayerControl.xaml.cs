@@ -29,9 +29,31 @@ namespace Retouch_Photo2.Controls
         ObservableCollection<ILayer> _selection => this.SelectionViewModel.Layer.Children;
 
 
-        //@Converter
-        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsOverlayExpanded;
-        public bool IsOverlayExpanded { private get; set; }
+        //@Content
+        public MenuTitle MenuTitle => this._MenuTitle;
+
+
+        /// <summary> Manager of <see cref="LayerControlState"/>. </summary>
+        LayerControlStateManager Manager = new LayerControlStateManager();
+        /// <summary> State of <see cref="LayerControl"/>. </summary>
+        LayerControlState State
+        {
+            set
+            {
+                switch (value)
+                {
+                    case LayerControlState.None: VisualStateManager.GoToState(this, this.Normal.Name, false); break;
+                    case LayerControlState.Disable: VisualStateManager.GoToState(this, this.Disable.Name, false); break;
+
+                    case LayerControlState.SingleLayerWithChildren: VisualStateManager.GoToState(this, this.SingleLayerWithChildren.Name, false); break;
+                    case LayerControlState.SingleLayerWithoutChildren: VisualStateManager.GoToState(this, this.SingleLayerWithoutChildren.Name, false); break;
+                    case LayerControlState.MultipleLayer: VisualStateManager.GoToState(this, this.MultipleLayer.Name, false); break;
+
+                    case LayerControlState.Blends: VisualStateManager.GoToState(this, this.Blends.Name, false); break;
+                    case LayerControlState.Children: VisualStateManager.GoToState(this, this.Children.Name, false); break;
+                }
+            }
+        }
 
 
         //@Converter
@@ -39,13 +61,16 @@ namespace Retouch_Photo2.Controls
         private float ValueToOpacityConverter(double value) => (float)value / 100.0f;
 
         private double VisibilityToOpacityConverter(Visibility visibility) => (visibility == Visibility.Visible) ? 1.0 : 0.4;
-        private bool GroupLayerToBoolConverter(GroupLayer groupLayer) => (groupLayer == null) ? false : true;
+        private bool GroupLayerToboolConverter(GroupLayer groupLayer) => (groupLayer == null) ? false : true;
+
+        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsOverlayExpanded;
+        public bool IsOverlayExpanded { private get; set; }
 
 
         #region DependencyProperty
-        
 
-        /// <summary> Gets or sets <see cref = "LayerControl" />'s selection mode. </summary>
+
+        /// <summary> Gets or sets the selection mode. </summary>
         public ListViewSelectionMode Mode
         {
             get { return (ListViewSelectionMode)GetValue(ModeProperty); }
@@ -58,65 +83,36 @@ namespace Retouch_Photo2.Controls
 
             if (e.NewValue is ListViewSelectionMode value)
             {
-                switch (value)
-                {
-                    case ListViewSelectionMode.None:
-                        {
-                            con.OpacitySlider.IsEnabled = false;
-                            con.BlendControl.IsEnabled = false;
-                            con.VisualButton.IsEnabled = false;
-                            con.DuplicateButton.IsEnabled = false;
-                            con.RemoveButton.IsEnabled = false;
-                        }
-                        break;
-                    case ListViewSelectionMode.Single:
-                    case ListViewSelectionMode.Multiple:
-                        {
-                            con.OpacitySlider.IsEnabled = true;
-                            con.BlendControl.IsEnabled = true;
-                            con.VisualButton.IsEnabled = true;
-                            con.DuplicateButton.IsEnabled = true;
-                            con.RemoveButton.IsEnabled = true;
-                        }
-                        break;
-                }
+                con.Manager.IsBlends = false;
+                con.Manager.IsChildren = false;
 
-                switch (value)
-                {
-                    case ListViewSelectionMode.None:
-                    case ListViewSelectionMode.Single:
-                        {
-                            con.GroupButton.IsEnabled = false;
-                        }
-                        break;
-
-                    case ListViewSelectionMode.Multiple:
-                        {
-                            con.GroupButton.IsEnabled = true;
-                        }
-                        break;
-
-                }
-
-                switch (value)
-                {
-                    case ListViewSelectionMode.Single:
-                        {
-                            con.ChildrenTextBlock.Visibility = Visibility.Visible;
-                            con.ChildrenBorder.Visibility = Visibility.Visible;
-                        }
-                        break;
-                    case ListViewSelectionMode.None:
-                    case ListViewSelectionMode.Multiple:
-                        {
-                            con.ChildrenTextBlock.Visibility = Visibility.Collapsed;
-                            con.ChildrenBorder.Visibility = Visibility.Collapsed;
-                        }
-                        break;
-                }
+                con.Manager.Mode = value;
+                con.State = con.Manager.GetState();//State
             }
         }));
-        
+
+
+        /// <summary> Gets or sets the current layer is GroupLayer. </summary>
+        public bool IsGroupLayer
+        {
+            get { return (bool)GetValue(IsGroupLayerProperty); }
+            set { SetValue(IsGroupLayerProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "LayerControl.IsGroupLayer" /> dependency property. </summary>
+        public static readonly DependencyProperty IsGroupLayerProperty = DependencyProperty.Register(nameof(IsGroupLayer), typeof(bool), typeof(LayerControl), new PropertyMetadata(false, (sender, e) =>
+        {
+            LayerControl con = (LayerControl)sender;
+
+            if (e.NewValue is bool value)
+            {
+                con.Manager.IsBlends = false;
+                con.Manager.IsChildren = false;
+
+                con.Manager.IsGroupLayer = value;
+                con.State = con.Manager.GetState();//State
+            }
+        }));
+
 
         #endregion
 
@@ -125,6 +121,14 @@ namespace Retouch_Photo2.Controls
         public LayerControl()
         {
             this.InitializeComponent();
+            
+            //Menu
+            this._MenuTitle.BackButton.Tapped += (s, e) =>
+            {
+                this.Manager.IsBlends = false;
+                this.Manager.IsChildren = false;
+                this.State = this.Manager.GetState();//State
+            };
 
 
             #region Layer
@@ -147,15 +151,20 @@ namespace Retouch_Photo2.Controls
 
 
             //Blend
-            this.BlendControl.ComboBox.SelectionChanged += (s,e) =>
+            this.BlendButton.Tapped += (s, e) =>
             {
-                BlendType type = (BlendType)this.BlendControl.ComboBox.SelectedIndex;
+                this.BlendControl.BlendType = this.SelectionViewModel.BlendType;
 
+                this.Manager.IsBlends = true;
+                this.State = this.Manager.GetState();//State
+            };
+            this.BlendControl.BlendTypeChanged += (s, blendType) =>
+            {
                 //Selection
-                this.SelectionViewModel.BlendType = type;
+                this.SelectionViewModel.BlendType = blendType;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.BlendType = type;
+                    layer.BlendType = blendType;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
@@ -165,7 +174,7 @@ namespace Retouch_Photo2.Controls
             #endregion
 
 
-            #region Layer
+            #region Layers
 
 
             //Visual
@@ -235,22 +244,6 @@ namespace Retouch_Photo2.Controls
             };
 
 
-            //Remove
-            this.RemoveButton.Tapped += (s, e) =>
-            {
-                this.ViewModel.RemoveLayers();//Remove
-
-                this.SelectionViewModel.SetModeNone();//Selection
-                this.ViewModel.Invalidate();//Invalidate
-            };
-
-
-            #endregion
-
-
-            #region Group
-
-
             //Group
             this.GroupButton.Tapped += (s, e) =>
             {
@@ -301,6 +294,33 @@ namespace Retouch_Photo2.Controls
             };
 
 
+            //Remove
+            this.RemoveButton.Tapped += (s, e) =>
+            {
+                this.ViewModel.RemoveLayers();//Remove
+
+                this.SelectionViewModel.SetModeNone();//Selection
+                this.ViewModel.Invalidate();//Invalidate
+            };
+
+
+            #endregion
+
+
+            #region Children
+
+
+            this.ChildrenButton.Tapped += (s, e) =>
+            {
+                if (this.SelectionViewModel.Layer == null) return;
+
+                this.ChildrenListView.ItemsSource = this.SelectionViewModel.Layer.Children ;
+
+                this.Manager.IsChildren = true;
+                this.State = this.Manager.GetState();//State
+            };
+
+
             //UnGroup
             this.UnGroupButton.Tapped += (s, e) =>
             {
@@ -340,18 +360,18 @@ namespace Retouch_Photo2.Controls
             #region Drag and Drop
 
 
-            this.ListView.AllowDrop = true;
+            this.ChildrenListView.AllowDrop = true;
 
-            this.ListView.CanDrag = false;
-            this.ListView.CanDragItems = false;
+            this.ChildrenListView.CanDrag = false;
+            this.ChildrenListView.CanDragItems = false;
 
-            this.ListView.CanReorderItems = true;
-            this.ListView.ReorderMode = ListViewReorderMode.Enabled;
-            this.ListView.SelectionMode = ListViewSelectionMode.None;
+            this.ChildrenListView.CanReorderItems = true;
+            this.ChildrenListView.ReorderMode = ListViewReorderMode.Enabled;
+            this.ChildrenListView.SelectionMode = ListViewSelectionMode.None;
 
             /// DragOver is called when the dragged pointer moves over a UIElement with AllowDrop=True
             /// We need to return an AcceptedOperation != None in either DragOver or DragEnter
-            this.ListView.DragOver += (object sender, DragEventArgs e) =>
+            this.ChildrenListView.DragOver += (object sender, DragEventArgs e) =>
             {
                 // Our list only accepts text
                 e.AcceptedOperation = (e.DataView.Contains2(LayerDataPackageExpansion.DataFormat)) ? DataPackageOperation.Copy : DataPackageOperation.None;
@@ -360,7 +380,7 @@ namespace Retouch_Photo2.Controls
             /// We need to return the effective operation from Drop
             /// This is not important for our source ListView, but it might be if the user
             /// drags text from another source
-            this.ListView.Drop += (object sender, DragEventArgs e) =>
+            this.ChildrenListView.Drop += (object sender, DragEventArgs e) =>
             {
                 // This test is in theory not needed as we returned DataPackageOperation.None if
                 // the DataPackage did not contained text. However, it is always better if each

@@ -9,11 +9,15 @@
         None,
         /// <summary> Control is not available. </summary>
         Disable,
-        /// <summary> Control no adjustment. </summary>
-        Null,
-        /// <summary> There are adjustments.. </summary>
-        Adjustments,
+
+        /// <summary> There is no adjustment. </summary>
+        ZeroAdjustments,
+        /// <summary> There are some adjustments.. </summary>
+        Adjustments, 
+
         /// <summary> Editing adjustments. </summary>
-        Edit
+        Edit,
+        /// <summary> Filters list. </summary>
+        Filters,
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Adjustments.Pages;
+using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using System.Collections.Generic;
@@ -18,35 +19,30 @@ namespace Retouch_Photo2.Controls
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+        
+
+        //@Content
+        public MenuTitle MenuTitle => this._MenuTitle;
 
 
-        private AdjustmentControlState state = AdjustmentControlState.None;
-        public AdjustmentControlState State
+        /// <summary> Manager of <see cref="AdjustmentControlState"/>. </summary>
+        AdjustmentControlStateManager Manager = new AdjustmentControlStateManager();
+        /// <summary> State of <see cref="AdjustmentControl"/>. </summary>
+        AdjustmentControlState State
         {
             set
             {
-                if (this.state == value) return;
-                
-                Visibility edit = (value == AdjustmentControlState.Edit) ? Visibility.Visible : Visibility.Collapsed;
-                this.BackButton.Visibility = edit;
-                this.ResetButton.Visibility = edit;
-                this.Frame.Visibility = edit;
+                switch (value)
+                {
+                    case AdjustmentControlState.None: VisualStateManager.GoToState(this, this.Normal.Name, false); break;
+                    case AdjustmentControlState.Disable: VisualStateManager.GoToState(this, this.Disable.Name, false); break;
 
-                Visibility edit2 = (value == AdjustmentControlState.Edit) ? Visibility.Collapsed : Visibility.Visible;
-                this.AddButton.Visibility = edit2;
-                this.FilterButton.Visibility = edit2;
-
-                bool sss = (value == AdjustmentControlState.Null || value == AdjustmentControlState.Adjustments);
-                this.PageListView.IsEnabled = sss;
-                this.FilterGridView.IsEnabled = sss;
-
-                Visibility adjustments = (value == AdjustmentControlState.Adjustments) ? Visibility.Visible : Visibility.Collapsed;
-                this.ItemsControl.Visibility = adjustments;
-
-                Visibility disable = (value == AdjustmentControlState.Null || value == AdjustmentControlState.Disable) ? Visibility.Visible : Visibility.Collapsed;
-                this.TextBlock.Visibility = disable;
-
-                this.state = value;
+                    case AdjustmentControlState.ZeroAdjustments: VisualStateManager.GoToState(this, this.ZeroAdjustments.Name, false); break;
+                    case AdjustmentControlState.Adjustments: VisualStateManager.GoToState(this, this.Adjustments.Name, false); break;
+                        
+                    case AdjustmentControlState.Edit: VisualStateManager.GoToState(this, this.Edit.Name, false); break;
+                    case AdjustmentControlState.Filters: VisualStateManager.GoToState(this, this.Filters.Name, false); break;
+                }
             }
         }
 
@@ -59,19 +55,10 @@ namespace Retouch_Photo2.Controls
             {
                 if (value == null)
                 {
-                    if (this.page != null)
-                    {
-                        this.page.Close();
-                    }
-
-                    this.Frame.Child = null;
-                    this.State = AdjustmentControlState.Adjustments;
+                    if (this.page != null) this.page.Close();
+                    this.AdjustmentPageBorder.Child = null;
                 }
-                else
-                {
-                    this.Frame.Child = value.Page;
-                    this.State = AdjustmentControlState.Edit;
-                }
+                else this.AdjustmentPageBorder.Child = value.Page;
 
                 this.page = value;
             }
@@ -107,14 +94,16 @@ namespace Retouch_Photo2.Controls
         {
             AdjustmentControl con = (AdjustmentControl)sender;
 
+            con.Manager.IsEdit = false;
+            con.Manager.IsFilter = false;
+            con.Manager.Adjustments = null;
+
             if (e.NewValue is AdjustmentManager value)
             {
-                con.Invalidate(value);
+                con.Manager.Adjustments = value.Adjustments;
             }
-            else
-            {
-                con.State = AdjustmentControlState.Disable;
-            }
+
+            con.State = con.Manager.GetState();//State
         }));
 
         #endregion
@@ -127,37 +116,54 @@ namespace Retouch_Photo2.Controls
             this.State = AdjustmentControlState.Disable;
             this.Loaded += async (s, e) =>
             {
-                if (this.PageListView.ItemsSource == null)
+                if (this.AdjustmentPageListView.ItemsSource == null)
                 {
-                    this.PageListView.ItemsSource = this.PageList;
+                    this.AdjustmentPageListView.ItemsSource = this.PageList;
                 }
 
-                if (this.FilterGridView.ItemsSource == null)
+                if (this.FilterListView.ItemsSource == null)
                 {
                     IEnumerable<Filter> source =await FilterHelper.GetFilterSource();
-                    this.FilterGridView.ItemsSource = source.ToList();
+                    this.FilterListView.ItemsSource = source.ToList();
                 }
             };
 
 
             //Adjustment
-            AdjustmentManager.Invalidate = () => this.ViewModel.Invalidate();
+            AdjustmentManager.Invalidate = () => this.ViewModel.Invalidate(); 
 
 
             //Button
-            this.FilterButton.Tapped += (s, e) => this.FilterFlyout.ShowAt(this.FilterButton);
-            this.AddButton.Tapped += (s, e) => this.PageFlyout.ShowAt(this.AddButton);
+            this.AddButton.Tapped += (s, e) => this.AdjustmentPageFlyout.ShowAt(this.AddButton);
+            this.FilterButton.Tapped += (s, e) =>
+            {
+                this.Manager.IsFilter = true;
+                this.State = this.Manager.GetState();//State
+            };
 
 
-            //Page
-            this.BackButton.Tapped += (s, e) => this.Page = null;
-            this.ResetButton.Tapped += (s, e) => this.Reset(this.Page);
+            //Menu
+            this._MenuTitle.ResetButton.Tapped += (s, e) =>
+            {
+                if (this.Page == null) return;
+
+                this.Page.Reset();
+                this.ViewModel.Invalidate();
+            };
+            this._MenuTitle.BackButton.Tapped += (s, e) =>
+            {
+                this.Page = null;
+
+                this.Manager.IsEdit = false;
+                this.Manager.IsFilter = false;
+                this.State = this.Manager.GetState();//State
+            };
 
 
             //ListView
-            this.PageListView.ItemClick += (s, e) =>
+            this.AdjustmentPageListView.ItemClick += (s, e) =>
             {
-                this.PageFlyout.Hide();
+                this.AdjustmentPageFlyout.Hide();
 
                 if (e.ClickedItem is IAdjustmentPage item)
                 {
@@ -167,9 +173,10 @@ namespace Retouch_Photo2.Controls
                         IAdjustment _new = item.GetNewAdjustment();
                         layer.AdjustmentManager.Adjustments.Add(_new);//Add
 
-                        this.Invalidate(layer.AdjustmentManager);//Invalidate
-                        //this.Edit(_new);
+                        this.Manager.Adjustments = layer.AdjustmentManager.Adjustments;
+                        this.State = this.Manager.GetState();//State
 
+                        this.InvalidateItemsControl();//Invalidate
                         this.ViewModel.Invalidate();//Invalidate
                         return;
                     });
@@ -177,11 +184,9 @@ namespace Retouch_Photo2.Controls
             };
 
 
-            //GridView
-            this.FilterGridView.ItemClick += (s, e) =>
+            //ListView
+            this.FilterListView.ItemClick += (s, e) =>
             {
-                this.FilterFlyout.Hide();
-
                 if (e.ClickedItem is Filter filter)
                 {
                     IEnumerable<IAdjustment> clones = from a in filter.Adjustments select a.Clone();
@@ -192,8 +197,10 @@ namespace Retouch_Photo2.Controls
                         layer.AdjustmentManager.Adjustments.Clear();//Clear
                         layer.AdjustmentManager.Adjustments.AddRange(clones);//Add
                         
-                        this.Invalidate(layer.AdjustmentManager);
+                        this.Manager.Adjustments = layer.AdjustmentManager.Adjustments;
+                        this.State = this.Manager.GetState();//State
 
+                        this.InvalidateItemsControl();//Invalidate
                         this.ViewModel.Invalidate();//Invalidate     
                         return;
                     });
@@ -208,7 +215,17 @@ namespace Retouch_Photo2.Controls
         {
             AdjustmentControl.GetGridDataContext(sender, out IAdjustment adjustment);
 
-            this.Edit(adjustment);
+            if (adjustment == null) return;
+            if (adjustment.PageVisibility == Visibility.Collapsed) return;
+
+            this.Manager.IsEdit = true;
+            this.State = this.Manager.GetState();//State
+
+            AdjustmentType type = adjustment.Type;
+            IAdjustmentPage adjustmentPage = this.PageList.First(page => page.Type == type);
+
+            this.Page = adjustmentPage;
+            this.Page.SetAdjustment(adjustment);
         }
         /// <summary> DataTemplate's RemoveButton Tapped. </summary>
         private void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e)
@@ -219,45 +236,26 @@ namespace Retouch_Photo2.Controls
             this.SelectionViewModel.SetValue((layer) =>
             {
                 layer.AdjustmentManager.Adjustments.Remove(adjustment);//Remove
-                this.Invalidate(layer.AdjustmentManager);//Invalidate
 
+                this.Manager.Adjustments = layer.AdjustmentManager.Adjustments;
+                this.State = this.Manager.GetState();//State
+
+                this.InvalidateItemsControl();//Invalidate
                 this.ViewModel.Invalidate();//Invalidate   
                 return;
             });
         }
 
-
-        private void Reset(IAdjustmentPage adjustmentPage)
-        {
-            if (adjustmentPage == null) return;
-
-            adjustmentPage.Reset();
-            this.ViewModel.Invalidate();
-        }
-        private void Edit(IAdjustment adjustment)
-        {
-            if (adjustment == null) return;
-            if (adjustment.PageVisibility == Visibility.Collapsed) return;
-
-            AdjustmentType type = adjustment.Type;
-            IAdjustmentPage adjustmentPage = this.PageList.First(page => page.Type == type);
-
-            this.Page = adjustmentPage;
-            this.Page.SetAdjustment(adjustment);
-        }
+        
         /// <summary>
         ///  Invalidate Adjustment ItemsControl.
         /// </summary>
-        /// <param name="adjustmentManager"> The adjustment-manager. </param>
-        public void Invalidate(AdjustmentManager adjustmentManager)
+        private void InvalidateItemsControl()
         {
-            if (adjustmentManager == null) return;
+            if (this.Manager.Adjustments == null) return;
 
             this.ItemsControl.ItemsSource = null;
-            this.ItemsControl.ItemsSource = adjustmentManager.Adjustments;
-
-            int count = adjustmentManager.Adjustments.Count();
-            this.State = (count == 0) ? AdjustmentControlState.Null : AdjustmentControlState.Adjustments;
+            this.ItemsControl.ItemsSource = this.Manager.Adjustments;
         }
 
 

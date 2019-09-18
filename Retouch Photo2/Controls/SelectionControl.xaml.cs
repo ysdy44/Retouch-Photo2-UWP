@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo2.Layers;
+using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
 using System.Collections.Generic;
@@ -16,6 +17,10 @@ namespace Retouch_Photo2.Controls
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
+
+
+        //@Content
+        public MenuTitle MenuTitle => this._MenuTitle;
 
 
         /// <summary> The single copyed layer. </summary>

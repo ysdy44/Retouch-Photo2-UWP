@@ -5,23 +5,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Retouch_Photo2.Controls"
-    xmlns:layers1="using:Retouch_Photo2.Layers"
     xmlns:menus="using:Retouch_Photo2.Menus"
     mc:Ignorable="d"
     d:DesignHeight="200"
     d:DesignWidth="200"
     >
-    
-    <menus:MenuLayout x:Name="_Layout" Text="Layer">
-        
-        <menus:MenuLayout.Icon>
-            <layers1:Icon/>
-        </menus:MenuLayout.Icon>
-        
+
+    <menus:MenuLayout x:Name="Layout">
         <menus:MenuLayout.ContentChild>
-            <controls:LayerControl x:Name="LayerControl" Mode="{x:Bind SelectionViewModel.Mode,Mode=OneWay}"/>
-        </menus:MenuLayout.ContentChild>
-        
+            <controls:LayerControl x:Name="Control" 
+                                   Mode="{x:Bind SelectionViewModel.Mode,Mode=OneWay}"
+                                   IsGroupLayer="{x:Bind SelectionViewModel.IsGroupLayer,Mode=OneWay}"
+                                   />
+        </menus:MenuLayout.ContentChild>        
     </menus:MenuLayout>
     
 </UserControl>

@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Tools
         /// <summary> Manager of <see cref="ToolButton"/>. </summary>
         ToolButtonStateManager Manager = new ToolButtonStateManager();
         /// <summary> State of <see cref="ToolButton"/>. </summary>
-        public ToolButtonState State
+        ToolButtonState State
         {
             set
             {

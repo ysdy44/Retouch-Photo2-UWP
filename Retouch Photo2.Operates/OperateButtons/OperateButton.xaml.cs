@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Operates
         /// <summary> Manager of <see cref="OperateButton"/>. </summary>
         OperateButtonStateManager Manager = new OperateButtonStateManager();
         /// <summary> State of <see cref="OperateButton"/>. </summary>
-        public OperateButtonState State
+        OperateButtonState State
         {
             set
             {

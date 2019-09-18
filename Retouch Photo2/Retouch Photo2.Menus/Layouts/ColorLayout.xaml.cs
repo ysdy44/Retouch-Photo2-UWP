@@ -1,7 +1,6 @@
 ﻿using Retouch_Photo2.Brushs;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
-using Retouch_Photo2.ViewModels.Tips;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -15,13 +14,20 @@ namespace Retouch_Photo2.Menus.Layouts
 
 
         //@Content
-        public MenuState State { set => this._Layout.State = value; }
+        public MenuState State
+        {
+            set
+            {
+                this.MenuTitle.State = value;
+                this.ColorPicker.Visibility = (value == MenuState.OverlayNotExpanded) ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
         public FrameworkElement Self => this;
 
-        public UIElement StateButton => this._Layout.StateButton;
-        public UIElement CloseButton => this._Layout.CloseButton;
-        public UIElement TitlePanel => this._Layout.TitlePanel;
-
+        public UIElement StateButton => this.MenuTitle.StateButton;
+        public UIElement CloseButton => this.MenuTitle.CloseButton;
+        public UIElement TitlePanel => this.MenuTitle.RootGrid;
+               
 
         //@Construct
         public ColorLayout()

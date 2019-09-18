@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         public HueRotationAdjustment HueRotationAdjustment;
 
-        public AdjustmentType Type { get; } = AdjustmentType.Brightness;
+        public AdjustmentType Type { get; } = AdjustmentType.HueRotation;
         public FrameworkElement Icon { get; } = new HueRotationIcon();
         public FrameworkElement Page => this;
                

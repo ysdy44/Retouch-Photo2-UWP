@@ -4,24 +4,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:menus="using:Retouch_Photo2.Menus"
     xmlns:controls="using:Retouch_Photo2.Controls"
-    xmlns:effects="using:Retouch_Photo2.Effects"
+    xmlns:menus="using:Retouch_Photo2.Menus"
     mc:Ignorable="d"
     d:DesignHeight="200"
     d:DesignWidth="200"
     >
-    
-    <menus:MenuLayout  x:Name="_Layout" Text="Effect">
-        
-        <menus:MenuLayout.Icon>
-            <effects:Icon/>
-        </menus:MenuLayout.Icon>
 
+    <menus:MenuLayout  x:Name="Layout">
         <menus:MenuLayout.ContentChild>
-            <controls:EffectControl EffectManager="{x:Bind SelectionViewModel.EffectManager,Mode=OneWay}"/>
-        </menus:MenuLayout.ContentChild>
-        
+            <controls:EffectControl x:Name="Control" EffectManager="{x:Bind SelectionViewModel.EffectManager,Mode=OneWay}"/>
+        </menus:MenuLayout.ContentChild>        
     </menus:MenuLayout>
     
 </UserControl>

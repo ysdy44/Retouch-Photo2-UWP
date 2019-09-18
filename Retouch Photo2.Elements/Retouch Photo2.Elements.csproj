@@ -149,9 +149,6 @@
     <Compile Include="MainPages\FolderDialog.xaml.cs">
       <DependentUpon>FolderDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPages\InitialControl.xaml.cs">
-      <DependentUpon>InitialControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainPages\MainControl.xaml.cs">
       <DependentUpon>MainControl.xaml</DependentUpon>
     </Compile>
@@ -255,10 +252,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MainPages\FolderDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MainPages\InitialControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

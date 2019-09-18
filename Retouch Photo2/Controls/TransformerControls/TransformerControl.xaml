@@ -4,8 +4,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pickers="using:HSVColorPickers"
     xmlns:transformers="using:FanKit.Transformers"
+    xmlns:pickers="using:HSVColorPickers"
+    xmlns:menus="using:Retouch_Photo2.Menus"
     mc:Ignorable="d"
     d:DesignHeight="400"
     d:DesignWidth="200"
@@ -30,9 +31,17 @@
         </Storyboard>
     </UserControl.Resources>
 
+    
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*" MinHeight="165"/>
+        </Grid.RowDefinitions>
 
-        <Grid x:Name="IndicatorRootGrid">
+        <!--Head-->
+        <menus:MenuTitle x:Name="_MenuTitle" Text="Effect"/>
+
+        <Grid x:Name="FitstGrid" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="Auto"/>
@@ -46,6 +55,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Column="0" Grid.Row="0" Text="Width:" Style="{StaticResource AppTextBlock}"/>
@@ -127,10 +137,14 @@
                 </ToolTipService.ToolTip>
             </transformers:IndicatorControl>
 
+            <Button x:Name="RemoteButton" Grid.ColumnSpan="3" Grid.Row="7" Margin="2" Tag="Position Remote" Style="{StaticResource AppRoundedButton}">
+                <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            </Button>
+                        
         </Grid>
 
 
-        <Border x:Name="RemoteRootGrid" Padding="2">
+        <Border x:Name="SecondGird" Padding="2" Grid.Row="1">
             <transformers:RemoteControl x:Name="RemoteControl" 
                      Width="Auto" Height="Auto"                                               
                      Background="{ThemeResource AppForeground}"
@@ -139,8 +153,6 @@
                       />
         </Border>
 
-
-        <Button x:Name="RemoteOrIndicatorButton" Width="40" Height="40" Content="&#xECE7;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"/>
 
     </Grid>
 </UserControl>

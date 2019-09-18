@@ -34,7 +34,7 @@ namespace Retouch_Photo2.ViewModels.Selections
             //////////////////////////
 
             this.SetOpacity(1.0f);
-            this.SetBlendType(BlendType.Normal);
+            this.BlendType = BlendType.None;
             this.Visibility = Visibility.Collapsed;
 
             //////////////////////////
@@ -69,7 +69,7 @@ namespace Retouch_Photo2.ViewModels.Selections
             //////////////////////////
 
             this.SetOpacity(layer.Opacity);
-            this.SetBlendType(layer.BlendType);
+            this.BlendType = layer.BlendType;
             this.Visibility = layer.Visibility;
 
             //////////////////////////

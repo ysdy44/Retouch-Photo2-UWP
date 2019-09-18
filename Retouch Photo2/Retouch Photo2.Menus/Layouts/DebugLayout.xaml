@@ -11,16 +11,10 @@
     d:DesignWidth="200"
     >
     
-    <menus:MenuLayout x:Name="_Layout" Text="Debug">
-
+    <menus:MenuLayout x:Name="Layout">
         <menus:MenuLayout.ContentChild>
-            <controls:DebugControl/>
+            <controls:DebugControl x:Name="Control"/>
         </menus:MenuLayout.ContentChild>
-
-        <menus:MenuLayout.Icon>
-            <FontIcon FontSize="32" Glyph="&#x1F41E;" FontFamily="Segoe UI Symbol"/>
-        </menus:MenuLayout.Icon>
-
     </menus:MenuLayout>
     
 </UserControl>

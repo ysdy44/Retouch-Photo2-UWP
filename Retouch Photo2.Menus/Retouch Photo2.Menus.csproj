@@ -121,6 +121,9 @@
     </Compile>
     <Compile Include="MenuLayouts\MenuLayoutSize.cs" />
     <Compile Include="MenuState.cs" />
+    <Compile Include="MenuTitles\MenuTitle.xaml.cs">
+      <DependentUpon>MenuTitle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MenuType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.Menus.rd.xml" />
@@ -139,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MenuLayouts\MenuLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuTitles\MenuTitle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

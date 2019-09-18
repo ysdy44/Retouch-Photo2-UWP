@@ -10,19 +10,24 @@
     d:DesignHeight="200"
     d:DesignWidth="200"
     >
-    
-    <menus:MenuLayout x:Name="_Layout" Text="Color">     
-        
-        <menus:MenuLayout.Icon>
-            <Ellipse Width="20" Height="20" Fill="Gray" />
-        </menus:MenuLayout.Icon>        
-            
+
+    <menus:MenuLayout x:Name="Layout">
         <menus:MenuLayout.ContentChild>
-            <hsvColorPicker:ColorPicker x:Name="ColorPicker" Width="223" Background="Transparent"
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <!--Head-->
+                <menus:MenuTitle x:Name="MenuTitle" Text="Color"/>
+
+                <hsvColorPicker:ColorPicker x:Name="ColorPicker" Grid.Row="1" Background="Transparent"
                      Color="{x:Bind SelectionViewModel.Color,Mode=OneWay}"
                      FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-        </menus:MenuLayout.ContentChild>
-        
+                
+            </Grid>
+        </menus:MenuLayout.ContentChild>        
     </menus:MenuLayout>
     
 </UserControl>

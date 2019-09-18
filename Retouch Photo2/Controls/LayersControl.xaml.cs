@@ -155,10 +155,12 @@ namespace Retouch_Photo2.Controls
         {
             LayersControl.GetButtonDataContext(sender, out Grid rootGrid, out ILayer layer);
 
-            layer.Visibility = (layer.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
+            Visibility visible = (layer.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
+            layer.Visibility = visible;
 
+            this.SelectionViewModel.Visibility = visible;//Selection
             this.ViewModel.Invalidate();//Invalidate
-
+           
             e.Handled = true;
         }
        

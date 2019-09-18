@@ -9,12 +9,19 @@
     xmlns:selectionsEditIcons="using:Retouch_Photo2.Selections.EditIcons"
     xmlns:selectionsSelect2Icons="using:Retouch_Photo2.Selections.Select2Icons"
     xmlns:selectionsSelectIcons="using:Retouch_Photo2.Selections.SelectIcons"
+    xmlns:menus="using:Retouch_Photo2.Menus"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="300"
     >
+    
+    
+    <StackPanel>
 
-    <Grid>
+        <!--Head-->
+        <menus:MenuTitle x:Name="_MenuTitle" Text="Selection"/>
+        
+        <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1"/>
@@ -145,6 +152,8 @@
 
         </StackPanel>
 
-    </Grid>
+        </Grid>
+        
+    </StackPanel>
 
 </UserControl>

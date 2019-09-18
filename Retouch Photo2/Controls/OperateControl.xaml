@@ -9,6 +9,7 @@
     xmlns:operatesAlignVerticalIcons="using:Retouch_Photo2.Operates.AlignVerticalIcons"
     xmlns:operatesArrangeIcons="using:Retouch_Photo2.Operates.ArrangeIcons"
     xmlns:operatesTransformIcons="using:Retouch_Photo2.Operates.TransformIcons"
+    xmlns:menus="using:Retouch_Photo2.Menus"
     mc:Ignorable="d"
     MinWidth="200"
     d:DesignHeight="400"
@@ -17,6 +18,8 @@
 
     <StackPanel>
 
+        <!--Head-->
+        <menus:MenuTitle x:Name="_MenuTitle" Text="Operate"/>
 
         <!--Transform-->
         <TextBlock Text="Transform:" Style="{StaticResource AppTextBlock}"/>

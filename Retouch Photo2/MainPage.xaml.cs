@@ -154,9 +154,9 @@ namespace Retouch_Photo2
             };
 
             //Initial
-            this.InitialControl.AddButton.Tapped += (s, e) => this.AddDialogShow();
-            this.InitialControl.PhotoButton.Tapped += async (s, e) => await this.NewProjectFromPictures(PickerLocationId.PicturesLibrary);
-            this.InitialControl.DestopButton.Tapped += async (s, e) => await this.NewProjectFromPictures(PickerLocationId.Desktop);
+            this.AddButton.Tapped += (s, e) => this.AddDialogShow();
+            this.PhotoButton.Tapped += async (s, e) => await this.NewProjectFromPictures(PickerLocationId.PicturesLibrary);
+            this.DestopButton.Tapped += async (s, e) => await this.NewProjectFromPictures(PickerLocationId.Desktop);
 
             //Main
             this.MainControl.AddButton.Tapped += (s, e) => this.AddDialogShow();

@@ -28,14 +28,16 @@ namespace Retouch_Photo2.ViewModels.Selections
 
 
         /// <summary> <see cref = "SelectionViewModel" />'s blend type. </summary>
-        public BlendType BlendType { get; set; }
-        /// <summary> Sets the <see cref = "SelectionViewModel.BlendType" />. </summary>
-        public void SetBlendType(BlendType value)
-        {
-            if (this.BlendType == value) return;
-            this.BlendType = value;
-            this.OnPropertyChanged(nameof(this.BlendType));//Notify 
+        public BlendType BlendType
+    {
+            get => this.blendType;
+            set
+            {
+                this.blendType = value;
+                this.OnPropertyChanged(nameof(this.BlendType));//Notify 
+            }
         }
+        private BlendType blendType;
 
 
         /// <summary> <see cref = "SelectionViewModel" />'s visibility. </summary>

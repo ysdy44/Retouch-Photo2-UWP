@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Layers
 
         public string Name { get; set; } = string.Empty;
         public float Opacity { get; set; } = 1.0f;
-        public BlendType BlendType { get; set; } = BlendType.Normal;
+        public BlendType BlendType { get; set; } = BlendType.None;
 
 
         public Matrix3x2 GetMatrix() => Transformer.FindHomography(this.Source, this.Destination);
@@ -101,9 +101,9 @@ namespace Retouch_Photo2.Layers
             }
 
             //Blend
-            if (currentLayer.BlendType != BlendType.Normal)
+            if (currentLayer.BlendType != BlendType.None)
             {
-                currentImage = Blend.Render
+                currentImage = BlendHelper.Render
                 (
                     currentImage,
                     previousImage,

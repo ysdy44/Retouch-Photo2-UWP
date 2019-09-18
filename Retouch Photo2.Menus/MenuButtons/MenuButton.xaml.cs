@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Menus
         /// <summary> Manager of <see cref="MenuButton"/>. </summary>
         MenuButtonStateManager Manager = new MenuButtonStateManager();
         /// <summary> State of <see cref="MenuButton"/>. </summary>
-        public MenuButtonState State
+        MenuButtonState State
         {
             set
             {

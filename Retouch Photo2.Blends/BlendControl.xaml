@@ -1,24 +1,16 @@
 ﻿<UserControl
-    x:Class="Retouch_Photo2.Blends.Control"
+    x:Class="Retouch_Photo2.Blends.BlendControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:icons="using:Retouch_Photo2.Blends.Icons"
     mc:Ignorable="d"
-    d:DesignHeight="50"
+    d:DesignHeight="600"
     d:DesignWidth="200"
     >
 
-    <ComboBox 
-        x:Name="_ComboBox"
-        BorderThickness="0" 
-        BorderBrush="Transparent"
-        Background="Transparent" 
-        HorizontalAlignment="Stretch"
-        VerticalAlignment="Stretch"                    
-        SelectedIndex="{x:Bind BlendTypeToIntConverter(BlendType),Mode=OneWay}"
-        >
+    <ListView x:Name="ListView" IsItemClickEnabled="True" SelectionMode="Single">
 
         <icons:NormalIcon/>
 
@@ -55,6 +47,6 @@
         <icons:SubtractIcon/>
         <icons:DivisionIcon/>
 
-    </ComboBox>
+    </ListView>
 
 </UserControl>

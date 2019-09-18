@@ -5,23 +5,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Retouch_Photo2.Controls"
-    xmlns:tools="using:Retouch_Photo2.Tools"
     xmlns:menus="using:Retouch_Photo2.Menus"
     mc:Ignorable="d"
     d:DesignHeight="200"
     d:DesignWidth="200"
     >
-    
-    <menus:MenuLayout x:Name="_Layout" Text="Tool">
-        
-        <menus:MenuLayout.Icon>
-            <tools:Icon/>
-        </menus:MenuLayout.Icon>
-        
+
+    <menus:MenuLayout x:Name="Layout">
         <menus:MenuLayout.ContentChild>
-            <controls:ToolControl/>
+            <controls:ToolControl x:Name="Control"/>
         </menus:MenuLayout.ContentChild>
-        
     </menus:MenuLayout>
     
 </UserControl>
