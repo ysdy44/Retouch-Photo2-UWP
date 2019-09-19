@@ -12,7 +12,7 @@
     >
     
     <ToolTipService.ToolTip>
-        <ToolTip Content="Image" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+        <ToolTip Content="Image Tool" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
     </ToolTipService.ToolTip>
 
 

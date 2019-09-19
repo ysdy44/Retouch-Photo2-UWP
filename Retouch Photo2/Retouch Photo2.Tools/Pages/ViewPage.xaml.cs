@@ -21,9 +21,6 @@ namespace Retouch_Photo2.Tools.Pages
         private int RadianNumberConverter(float radian) => ViewRadianConverter.RadianToNumber(radian);
         private int ScaleNumberConverter(float scale) => ViewScaleConverter.ScaleToNumber(scale);
 
-        private bool ViewRadianTypeConverter(TouchbarType type) => type == TouchbarType.ViewRadian;
-        private bool ViewScaleTypeConverter(TouchbarType type) => type == TouchbarType.ViewScale;
-
         private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
         public bool IsSelected { private get; set; }
 
@@ -79,13 +76,6 @@ namespace Retouch_Photo2.Tools.Pages
 
             //Radian
             this.RadianTouchbarButton.Unit = "º";
-            this.RadianTouchbarButton.Toggled += (s, isChecked) =>
-            {
-                if (isChecked)
-                    this.TipViewModel.SetTouchbar(TouchbarType.None);//Touchbar
-                else
-                    this.TipViewModel.SetTouchbar(TouchbarType.ViewRadian);//Touchbar
-            };
             this.RadianClearButton.Tapped += (s, e) =>
             {
                 this.Radian = this.ViewModel.CanvasTransformer.Radian;
@@ -94,13 +84,6 @@ namespace Retouch_Photo2.Tools.Pages
 
             //Scale
             this.ScaleTouchbarButton.Unit = "%";
-            this.ScaleTouchbarButton.Toggled += (s, isChecked) =>
-            {
-                if (isChecked)
-                    this.TipViewModel.SetTouchbar(TouchbarType.None);//Touchbar
-                else
-                    this.TipViewModel.SetTouchbar(TouchbarType.ViewScale);//Touchbar
-            };
             this.ScaleClearButton.Tapped += (s, e) =>
             {
                 this.Scale = this.ViewModel.CanvasTransformer.Scale;

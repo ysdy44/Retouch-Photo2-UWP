@@ -10,6 +10,11 @@
     mc:Ignorable="d"
     >
 
+    <ToolTipService.ToolTip>
+        <ToolTip Content="Color" Placement="Bottom" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+    </ToolTipService.ToolTip>
+
+
     <Grid x:Name="RootGrid" Background="Transparent">
         <Ellipse Width="38" Height="38" StrokeThickness="1" Stroke="{ThemeResource AppText}" VerticalAlignment="Center">
             <Ellipse.Fill>

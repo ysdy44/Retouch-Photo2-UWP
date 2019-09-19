@@ -25,6 +25,7 @@ namespace Retouch_Photo2.Tools.Pages
         public RectanglePage()
         {
             this.InitializeComponent();
+            this.MoreButton.Tapped += (s, e) => this.Flyout.ShowAt(this);
         }
     }
 }

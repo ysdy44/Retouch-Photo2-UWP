@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hSVColorPickers="using:HSVColorPickers"
     xmlns:brushsControls="using:Retouch_Photo2.Brushs.Controls"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -13,6 +14,7 @@
 
     
     <Page.Resources>
+        
         <!--Flyout-->
         <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <hSVColorPickers:ColorPicker x:Name="ColorPicker" Width="222" Background="Transparent" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" />
@@ -29,6 +31,7 @@
                 </ColorAnimation.EasingFunction>
             </ColorAnimation>
         </Storyboard>
+        
     </Page.Resources>
     
 
@@ -44,8 +47,8 @@
             </ComboBox>
         </Border>
         
-        <AppBarSeparator/>
-                
+        <elements:ExpandAppBarSeparator/>
+
         <TextBlock Text="BrushType:" Style="{StaticResource AppTextBlock}"/>
         <Border Style="{StaticResource AppRoundedBorderStyle}">
             <Border.BorderBrush>
@@ -64,7 +67,7 @@
             </ComboBox>
         </Border>
 
-        <ContentControl Width="12"/>
+        <elements:ExpandAppBarSapce/>
 
         <TextBlock Text="Brush:" Style="{StaticResource AppTextBlock}"/>
         <brushsControls:ShowControl x:Name="ShowControl" 

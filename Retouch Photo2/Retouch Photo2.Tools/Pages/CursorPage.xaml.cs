@@ -1,9 +1,7 @@
 ﻿using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Keyboards;
-using Retouch_Photo2.ViewModels.Selections;
 using Retouch_Photo2.ViewModels.Tips;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Pages
@@ -18,16 +16,15 @@ namespace Retouch_Photo2.Tools.Pages
         TipViewModel TipViewModel => App.TipViewModel;
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
 
-
         //@Converter
         private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
         public bool IsSelected { private get; set; }
 
-               
         //@Construct
         public CursorPage()
         {
             this.InitializeComponent();
+            this.MoreButton.Tapped += (s, e) => this.Flyout.ShowAt(this);
         }
     }
 }

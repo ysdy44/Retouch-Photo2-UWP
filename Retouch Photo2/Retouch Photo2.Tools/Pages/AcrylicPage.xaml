@@ -12,49 +12,63 @@
     d:DesignWidth="400"
     >
 
-    <StackPanel Orientation="Horizontal">
+    <Page.Resources>
+        <!--Flyout-->
+        <Flyout x:Name="Flyout" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <StackPanel Padding="2" MinWidth="300">
 
+                <!--Ratio-->
+                <TextBlock Text="Equal width and height:" Style="{StaticResource AppTextBlock}"/>
+                <elements:OnOffSwitch OnContent="None" OffContent="Square" IsOn="{x:Bind KeyboardViewModel.IsSquare,Mode=TwoWay}"/>
 
-        <!--Control-->
-        <elements:OnOffSwitch OnContent="None" OffContent="Square" IsOn="{x:Bind KeyboardViewModel.IsSquare,Mode=TwoWay}">
-            <ToolTipService.ToolTip>
-                <ToolTip Content="Equal width and height" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-            </ToolTipService.ToolTip>
-        </elements:OnOffSwitch>
+                <elements:ExpandAppBarSapce/>
 
-        <ContentControl Width="12"/>
+                <!--Center-->
+                <TextBlock Text="Center Scaling:" Style="{StaticResource AppTextBlock}"/>
+                <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}"/>
 
-        <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}">
-            <ToolTipService.ToolTip>
-                <ToolTip Content="Center scaling" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-            </ToolTipService.ToolTip>
-        </elements:OnOffSwitch>
-
-
-        <AppBarSeparator/>
+            </StackPanel>
+        </Flyout>
+    </Page.Resources>
         
+
+    <StackPanel Orientation="Horizontal">        
         
         <!--TintColor-->
         <TextBlock Text="TintColor:" Style="{StaticResource AppTextBlock}"/>
         <toolsElements:FillColorEllipseButton/>
 
-        <ContentControl Width="12"/>
-        
+        <elements:ExpandAppBarSapce/>
+
         <!--TintOpacity-->
         <TextBlock Text="TintOpacity:" Style="{StaticResource AppTextBlock}"/>
         <tools:TouchbarButton x:Name="TintOpacityTouchbarButton"
-                      IsChecked="{x:Bind AcrylicTintOpacityTypeConverter(TipViewModel.TouchbarType),Mode=OneWay}"
+                      Type="AcrylicTintOpacity"
+                      GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
                       Number="{x:Bind TintOpacityNumberConverter(SelectionViewModel.AcrylicTintOpacity),Mode=OneWay}"
                       />
 
-        <AppBarSeparator/>
+        <elements:ExpandAppBarSapce/>
 
         <!--BlurAmount-->
         <TextBlock Text="BlurAmount:" Style="{StaticResource AppTextBlock}"/>
         <tools:TouchbarButton x:Name="BlurAmountTouchbarButton"
-                      IsChecked="{x:Bind AcrylicBlurAmountTypeConverter(TipViewModel.TouchbarType),Mode=OneWay}"
+                      Type="AcrylicBlurAmount"
+                      GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
                       Number="{x:Bind BlurAmountNumberConverter(SelectionViewModel.AcrylicBlurAmount),Mode=OneWay}"
                       />
+
+        <elements:ExpandAppBarSapce/>
+
+        <!--More-->
+        <elements:ExpandAppbarButton x:Name="MoreButton">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="More" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+            </ToolTipService.ToolTip>
+            <elements:ExpandAppbarButton.CenterContent>
+                <FontIcon Glyph="&#xE10C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            </elements:ExpandAppbarButton.CenterContent>
+        </elements:ExpandAppbarButton>
         
     </StackPanel>
 </Page>

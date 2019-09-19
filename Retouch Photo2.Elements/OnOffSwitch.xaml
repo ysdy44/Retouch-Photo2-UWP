@@ -7,7 +7,9 @@
     mc:Ignorable="d"
     Height="40"
     d:DesignHeight="50"
-    d:DesignWidth="200">
+    d:DesignWidth="200"
+    HorizontalAlignment="Left"
+    >
 
 
     <UserControl.Resources>

@@ -11,27 +11,39 @@ namespace Retouch_Photo2.ViewModels.Tips
     {
 
         /// <summary> Touchbar type. </summary>
-        public TouchbarType TouchbarType;
-        /// <summary> Touchbar control. </summary>
-        public UserControl TouchbarControl;
-        /// <summary> Sets Touchbar. </summary>     
-        public void SetTouchbar(TouchbarType type)
+        public TouchbarType TouchbarType
         {
-            this.TouchbarType = type;
-            this.OnPropertyChanged(nameof(this.TouchbarType));//Notify 
+            get => this.touchbarType;
+            set
+            {
+                if (this.touchbarType == value) return;
 
-            ITouchbar touchbar = this.GetTouchbar(type);
-            if (touchbar == null)
-            {
-                this.TouchbarControl = null;
-                this.OnPropertyChanged(nameof(this.TouchbarControl));//Notify 
+                ITouchbar touchbar = this.GetTouchbar(value);
+
+                if (touchbar == null)
+                    this.TouchbarControl = null;
+                else
+                    this.TouchbarControl = touchbar.Self;
+
+                this.touchbarType = value;
+                this.OnPropertyChanged(nameof(this.TouchbarType));//Notify 
             }
-            else
+        }
+        private TouchbarType touchbarType;
+
+        /// <summary> Touchbar control. </summary>
+        public UserControl TouchbarControl
+        {
+
+            get => this.touchbarControl;
+            set
             {
-                this.TouchbarControl = touchbar.Self;
+                this.touchbarControl = value;
                 this.OnPropertyChanged(nameof(this.TouchbarControl));//Notify 
             }
         }
+        private UserControl touchbarControl;
+
         private ITouchbar GetTouchbar(TouchbarType type)
         {
             switch (type)

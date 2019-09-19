@@ -13,8 +13,7 @@
     >
 
     <ToolTipService.ToolTip>
-        <ToolTip Content="Operate" Placement="Bottom" Style="{StaticResource AppToolTip}"                                   
-            IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" />
+        <ToolTip Content="Operate" Placement="Bottom" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
     </ToolTipService.ToolTip>
 
 

@@ -11,8 +11,9 @@
     >
     
     <tools:TouchbarButton x:Name="TouchbarButton"
-                 IsChecked="{x:Bind StrokeWidthTypeConverter(TipViewModel.TouchbarType),Mode=OneWay}"
-                 Number="{x:Bind NumberConverter(SelectionViewModel.StrokeWidth), Mode=OneWay}"
-                   />
+                      Type="StrokeWidth"
+                      GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
+                      Number="{x:Bind NumberConverter(SelectionViewModel.StrokeWidth),Mode=OneWay}"
+                      />
     
 </UserControl>

@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo2.ViewModels.Selections;
+using Retouch_Photo2.ViewModels.Tips;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -8,6 +9,7 @@ namespace Retouch_Photo2.Menus.Buttons
     {
         //@ViewModel
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
 
         //@Content
         public MenuState State { set { } }

@@ -33,7 +33,8 @@ namespace Retouch_Photo2.Tools.Pages
         private Visibility TrueToVisibilityConverter(bool value) => value ? Visibility.Visible : Visibility.Collapsed;
 
         private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
-        public bool IsSelected { private get; set; }
+        private bool NodesIsOpenConverter(bool isOpen) => isOpen && this.IsSelected&&this.SelectionViewModel.IsPenToolNodesMode;
+         public bool IsSelected { private get; set; }
 
 
         //@Construct

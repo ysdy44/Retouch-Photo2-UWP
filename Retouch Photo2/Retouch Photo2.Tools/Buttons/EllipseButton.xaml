@@ -12,7 +12,7 @@
     >
 
     <ToolTipService.ToolTip>
-        <ToolTip Content="Ellipse" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+        <ToolTip Content="Ellipse Tool" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
     </ToolTipService.ToolTip>
 
     <tools:ToolButton x:Name="Button">

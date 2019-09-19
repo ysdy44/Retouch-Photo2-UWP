@@ -107,7 +107,7 @@ namespace Retouch_Photo2
 
             this.ViewModel.Invalidate();//Invalidate
 
-            this.TipViewModel.SetTouchbar(TouchbarType.None);//Touchbar
+            this.TipViewModel.TouchbarType = TouchbarType.None;//Touchbar
         }
 
 

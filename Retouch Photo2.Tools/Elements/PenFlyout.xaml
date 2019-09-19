@@ -11,7 +11,7 @@
     >
 
 
-    <StackPanel Padding="2,0,2,2">
+    <StackPanel Padding="2" MinWidth="300">
 
         <TextBlock Text="Restriction:" Style="{StaticResource AppTextBlock}"/>
         <Border Height="Auto" HorizontalAlignment="Left" Style="{ThemeResource AppRoundedBorderStyle}">

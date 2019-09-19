@@ -10,7 +10,7 @@
     >
 
     <ToolTipService.ToolTip>
-        <ToolTip Content="Pen" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+        <ToolTip Content="Pen Tool" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
     </ToolTipService.ToolTip>
 
 

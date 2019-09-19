@@ -3,8 +3,8 @@ using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using Retouch_Photo2.ViewModels.Selections;
+using Retouch_Photo2.ViewModels.Tips;
 using System.Numerics;
-using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -18,18 +18,16 @@ namespace Retouch_Photo2.Tools.Pages
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-
-
+        
         //@Content
         public Storyboard EaseStoryboard => this._EaseStoryboard;
-
-
+        
         //@Converter
         private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
         public bool IsSelected { private get; set; }
-
-
+        
         //@Construct
         public ImagePage()
         {

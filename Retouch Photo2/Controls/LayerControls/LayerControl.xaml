@@ -212,7 +212,7 @@
                     </Button>
                     <Button x:Name="GroupButton" Grid.Column="1" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                         <ToolTipService.ToolTip>
-                            <ToolTip Content="Group" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                            <ToolTip Content="Group" VerticalOffset="40" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                         </ToolTipService.ToolTip>
                         <FontIcon Glyph="&#xF0E2;" FontSize="20" FontFamily="{StaticResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
                     </Button>
@@ -229,7 +229,7 @@
                     </Button>
                     <Button x:Name="RemoveButton" Grid.Column="3" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                         <ToolTipService.ToolTip>
-                            <ToolTip Content="Remove" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                            <ToolTip Content="Remove" VerticalOffset="40" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                         </ToolTipService.ToolTip>
                         <PathIcon Foreground="{ThemeResource AppText}">
                             <PathIcon.Data>

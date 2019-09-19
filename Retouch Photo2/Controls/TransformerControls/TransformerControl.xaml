@@ -7,6 +7,7 @@
     xmlns:transformers="using:FanKit.Transformers"
     xmlns:pickers="using:HSVColorPickers"
     xmlns:menus="using:Retouch_Photo2.Menus"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignHeight="400"
     d:DesignWidth="200"
@@ -74,15 +75,15 @@
                 <pickers:NumberPicker x:Name="HPicker" Width="Auto" Height="Auto" Unit="dp" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
             </Border>
 
-            <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource AppCircleBorderStyle}">
+            <elements:ExpandAppbarToggleButton x:Name="RatioToggleControl" IsChecked="{x:Bind IsRatio,Mode=TwoWay}">
                 <ToolTipService.ToolTip>
-                    <ToolTip Content="Ratio" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                    <ToolTip Content="Ratio Scaling" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
-                <ToggleButton x:Name="RatioToggleControl" IsChecked="{x:Bind IsRatio,Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                    <FontIcon Glyph="&#x1F512;" FontFamily="Segoe UI Symbol" FontSize="18"/>
-                </ToggleButton>
-            </Border>
-
+                <elements:ExpandAppbarToggleButton.CenterContent>
+                    <FontIcon Glyph="&#x1F512;" FontSize="18" FontFamily="Segoe UI Symbol"/>
+                </elements:ExpandAppbarToggleButton.CenterContent>
+            </elements:ExpandAppbarToggleButton>
+            
             <!--/////////////////////////////////////////////////////////-->
 
             <TextBlock Grid.Column="0" Grid.Row="2" Text="Rotate:" Style="{StaticResource AppTextBlock}"/>

@@ -11,39 +11,52 @@
     d:DesignWidth="400"
     >
 
+    <Page.Resources>
+        <!--Flyout-->
+        <Flyout x:Name="Flyout" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <StackPanel Padding="2" MinWidth="300">
+
+                <!--Ratio-->
+                <TextBlock Text="Equal width and height:" Style="{StaticResource AppTextBlock}"/>
+                <elements:OnOffSwitch OnContent="None" OffContent="Square" IsOn="{x:Bind KeyboardViewModel.IsSquare,Mode=TwoWay}"/>
+
+                <elements:ExpandAppBarSapce/>
+
+                <!--Center-->
+                <TextBlock Text="Center Scaling:" Style="{StaticResource AppTextBlock}"/>
+                <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}"/>
+
+            </StackPanel>
+        </Flyout>
+    </Page.Resources>
+
+
     <StackPanel Orientation="Horizontal">
-
-        <!--Control-->
-        <elements:OnOffSwitch OnContent="None" OffContent="Square" IsOn="{x:Bind KeyboardViewModel.IsSquare,Mode=TwoWay}">
-            <ToolTipService.ToolTip>
-                <ToolTip Content="Equal width and height" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-            </ToolTipService.ToolTip>
-        </elements:OnOffSwitch>
-
-        <ContentControl Width="12"/>
-
-        <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}">
-            <ToolTipService.ToolTip>
-                <ToolTip Content="Center scaling" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-            </ToolTipService.ToolTip>
-        </elements:OnOffSwitch>
-
-
-        <AppBarSeparator/>
-
-        
+                
         <TextBlock Text="FillColor:" Style="{StaticResource AppTextBlock}"/>
         <toolsElements:FillColorEllipseButton/>
 
-        <AppBarSeparator/>
+        <elements:ExpandAppBarSapce/>
 
         <TextBlock Text="StrokeColor:" Style="{StaticResource AppTextBlock}"/>
         <toolsElements:StrokeColorEllipseButton/>
 
-        <ContentControl Width="12"/>
+        <elements:ExpandAppBarSapce/>
 
         <TextBlock Text="StrokeWidth:" Style="{StaticResource AppTextBlock}"/>
         <toolsElements:StrokeWidthButton/>
+
+        <elements:ExpandAppBarSapce/>
+
+        <!--More-->
+        <elements:ExpandAppbarButton x:Name="MoreButton">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="More" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+            </ToolTipService.ToolTip>
+            <elements:ExpandAppbarButton.CenterContent>
+                <FontIcon Glyph="&#xE10C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            </elements:ExpandAppbarButton.CenterContent>
+        </elements:ExpandAppbarButton>
 
     </StackPanel>
 </Page>

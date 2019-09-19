@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:layers="using:Retouch_Photo2.Layers"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -35,13 +36,16 @@
         <TextBlock Text="{x:Bind SelectionViewModel.ImageRe,Mode=OneWay}" Style="{StaticResource AppTextBlock}"/>
 
         <!--Select-->
-        <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
-            <Button x:Name="ClearButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                <FontIcon Glyph="&#xE106;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
-            </Button>
-        </Border>
+        <elements:ExpandAppbarButton x:Name="ClearButton">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="Cleat current image" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+            </ToolTipService.ToolTip>
+            <elements:ExpandAppbarButton.CenterContent>
+                <FontIcon Glyph="&#xE106;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            </elements:ExpandAppbarButton.CenterContent>
+        </elements:ExpandAppbarButton>
 
-        <ContentControl Width="8"/>
+        <elements:ExpandAppBarSapce/>
 
         <!--Select-->
         <Border Style="{StaticResource AppRoundedBorderStyle}">
@@ -51,9 +55,9 @@
             <Button x:Name="SelectButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <TextBlock Text="Select image"/>
             </Button>
-        </Border> 
-        
-        <AppBarSeparator/>
+        </Border>
+
+        <elements:ExpandAppBarSapce/>
 
         <!--Replace-->
         <Border Style="{StaticResource AppRoundedBorderStyle}">
@@ -62,15 +66,18 @@
                 <TextBlock Text="Replace image"/>
             </Button>
         </Border>
-        
-        <ContentControl Width="8"/>
+
+        <elements:ExpandAppBarSapce/>
 
         <!--Stack-->
-        <Border Background="Transparent" Style="{StaticResource AppCircleBorderStyle}">
-            <Button x:Name="StackButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                <FontIcon Glyph="&#xE14C;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
-            </Button>
-        </Border>
+        <elements:ExpandAppbarButton x:Name="StackButton">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="Cleat current image" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+            </ToolTipService.ToolTip>
+            <elements:ExpandAppbarButton.CenterContent>
+                <FontIcon Glyph="&#xE14C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            </elements:ExpandAppbarButton.CenterContent>
+        </elements:ExpandAppbarButton>
 
     </StackPanel>
 </Page>

@@ -12,7 +12,7 @@
     >
 
     <ToolTipService.ToolTip>
-        <ToolTip Content="Acrylic" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+        <ToolTip Content="Acrylic Tool" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
     </ToolTipService.ToolTip>
 
     <tools:ToolButton x:Name="Button">
