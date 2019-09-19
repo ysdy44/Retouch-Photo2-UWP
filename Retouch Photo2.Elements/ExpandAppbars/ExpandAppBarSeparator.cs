@@ -20,7 +20,7 @@ namespace Retouch_Photo2.Elements
             {
                 Width = 1,
                 Opacity = 0.6,
-                Margin = new Thickness(0, 6, 0, 6),
+                Height = 26,
                 Fill = new SolidColorBrush(Colors.Gray),
                 HorizontalAlignment = HorizontalAlignment.Center,
             };

@@ -40,7 +40,7 @@
         </Grid.RowDefinitions>
 
         <!--Head-->
-        <menus:MenuTitle x:Name="_MenuTitle" Text="Effect"/>
+        <menus:MenuTitle x:Name="_MenuTitle" Text="Transformer"/>
 
         <Grid x:Name="FitstGrid" Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -75,7 +75,7 @@
                 <pickers:NumberPicker x:Name="HPicker" Width="Auto" Height="Auto" Unit="dp" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
             </Border>
 
-            <elements:ExpandAppbarToggleButton x:Name="RatioToggleControl" IsChecked="{x:Bind IsRatio,Mode=TwoWay}">
+            <elements:ExpandAppbarToggleButton x:Name="RatioToggleControl" Grid.Column="1" Grid.Row="1" IsChecked="{x:Bind IsRatio,Mode=TwoWay}">
                 <ToolTipService.ToolTip>
                     <ToolTip Content="Ratio Scaling" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>

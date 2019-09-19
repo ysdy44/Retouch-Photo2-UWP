@@ -1,17 +1,33 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.Tools
 {
     public sealed partial class TouchbarButton : UserControl
     {
-        //@Converter
-        private SolidColorBrush BoolToBackgroundConverter(bool isChecked) => isChecked ? this.AccentColor : this.UnAccentColor;
-        private SolidColorBrush BoolToForegroundConverter(bool isChecked) => isChecked ? this.CheckColor : this.UnCheckColor;
+        /// <summary> State of <see cref="TouchbarButton"/>. </summary>
+        ClickMode State
+        {
+            set
+            {
+                if (this.IsChecked)
+                {
+                    VisualStateManager.GoToState(this, this.Selected.Name, false);
+                    return;
+                }
+
+                switch (value)
+                {
+                    case ClickMode.Release: VisualStateManager.GoToState(this, this.Normal.Name, false); break;
+                    case ClickMode.Hover: VisualStateManager.GoToState(this, this.PointerOver.Name, false); break;
+                    case ClickMode.Press: VisualStateManager.GoToState(this, this.Pressed.Name, false); break;
+                }
+            }
+        }
+        bool IsChecked;
 
         #region DependencyProperty
-        
+
 
         /// <summary> Gets or sets the type of <see cref = "TouchbarButton" />. </summary>
         public TouchbarType Type
@@ -30,25 +46,16 @@ namespace Retouch_Photo2.Tools
             set { SetValue(GroupTypeProperty, value); }
         }
         /// <summary> Identifies the <see cref = "TouchbarButton.GroupType" /> dependency property. </summary>
-        public static readonly DependencyProperty GroupTypeProperty = DependencyProperty.Register(nameof(GroupType), typeof(TouchbarType), typeof(TouchbarSlider), new PropertyMetadata(TouchbarType.None,(sender,e)=> 
+        public static readonly DependencyProperty GroupTypeProperty = DependencyProperty.Register(nameof(GroupType), typeof(TouchbarType), typeof(TouchbarSlider), new PropertyMetadata(TouchbarType.None, (sender, e) =>
         {
             TouchbarButton con = (TouchbarButton)sender;
 
             if (e.NewValue is TouchbarType value)
             {
-                con.IsChecked = (value==con.Type);
+                con.IsChecked = (value == con.Type);
+                con.State = ClickMode.Release;//State
             }
         }));
-
-
-        /// <summary> Gets or sets whether the status of the <see cref = "TouchbarButton" /> is "on". </summary>
-        public bool IsChecked
-        {
-            get { return (bool)GetValue(IsCheckedProperty); }
-            set { SetValue(IsCheckedProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "TouchbarButton.IsChecked" /> dependency property. </summary>
-        public static readonly DependencyProperty IsCheckedProperty = DependencyProperty.Register(nameof(IsChecked), typeof(bool), typeof(TouchbarSlider), new PropertyMetadata(false));
 
 
         /// <summary> Get or set the string Unit for range elements. </summary>
@@ -83,6 +90,11 @@ namespace Retouch_Photo2.Tools
         public TouchbarButton()
         {
             this.InitializeComponent();
+
+            this.RootBorder.PointerEntered += (s, e) => this.State = ClickMode.Hover;//State            
+            this.RootBorder.PointerPressed += (s, e) => this.State = ClickMode.Press;//State            
+            this.RootBorder.PointerExited += (s, e) => this.State = ClickMode.Release;//State            
+
             this.RootBorder.Tapped += (s, e) =>
             {
                 if (this.IsChecked)

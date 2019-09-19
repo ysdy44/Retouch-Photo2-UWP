@@ -152,20 +152,20 @@
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
     <Compile Include="ITool.cs" />
-    <Compile Include="ITouchbar.cs" />
+    <Compile Include="Touchbars\ITouchbar.cs" />
     <Compile Include="Models\AcrylicToolType.cs" />
     <Compile Include="Models\ViewRadianConverter.cs" />
     <Compile Include="Models\ViewScaleConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ITransformerTool.cs" />
     <Compile Include="ToolType.cs" />
-    <Compile Include="TouchbarButton.xaml.cs">
+    <Compile Include="Touchbars\TouchbarButton.xaml.cs">
       <DependentUpon>TouchbarButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TouchbarSlider.xaml.cs">
+    <Compile Include="Touchbars\TouchbarSlider.xaml.cs">
       <DependentUpon>TouchbarSlider.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TouchbarType.cs" />
+    <Compile Include="Touchbars\TouchbarType.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.Tools.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -239,11 +239,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TouchbarButton.xaml">
+    <Page Include="Touchbars\TouchbarButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="TouchbarSlider.xaml">
+    <Page Include="Touchbars\TouchbarSlider.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
