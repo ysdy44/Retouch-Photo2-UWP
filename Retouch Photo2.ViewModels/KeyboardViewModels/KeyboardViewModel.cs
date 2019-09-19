@@ -3,7 +3,7 @@ using Windows.UI.Xaml;
 using System.ComponentModel;
 using Retouch_Photo2.Elements;
 
-namespace Retouch_Photo2.ViewModels.Keyboards
+namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
     /// Retouch_Photo2's the only <see cref = "KeyboardViewModel" />. 
@@ -33,7 +33,6 @@ namespace Retouch_Photo2.ViewModels.Keyboards
             switch (key)
             {
                 case VirtualKey.Shift:
-                    this.SetKeyShift(true);
                     this.SetKeyShift(true);
                     break;
                 case VirtualKey.Control:
@@ -93,6 +92,7 @@ namespace Retouch_Photo2.ViewModels.Keyboards
         private void SetKeyShift(bool value)
         {
             this.IsRatio = value;
+            this.IsSquare = value;
 
             this.KeyShift = value;
             this.OnPropertyChanged(nameof(this.KeyShift));//Notify 

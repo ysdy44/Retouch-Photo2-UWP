@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.ViewModels.Selections
+namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
     /// Retouch_Photo2's the only <see cref = "SelectionViewModel" />. 

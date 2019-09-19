@@ -1,11 +1,7 @@
-﻿using Retouch_Photo2.Controls;
-using Retouch_Photo2.Elements.DrawPages;
+﻿using Retouch_Photo2.Elements.DrawPages;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
-using Retouch_Photo2.ViewModels.Keyboards;
-using Retouch_Photo2.ViewModels.Selections;
-using Retouch_Photo2.ViewModels.Tips;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

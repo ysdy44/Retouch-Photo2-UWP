@@ -106,22 +106,22 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Keyboards\KeyboardViewModel.cs" />
-    <Compile Include="Keyboards\KeyboardViewModel.Notify.cs" />
+    <Compile Include="KeyboardViewModels\KeyboardViewModel.cs" />
+    <Compile Include="KeyboardViewModels\KeyboardViewModel.Notify.cs" />
     <Compile Include="MezzanineViewModel.cs" />
     <Compile Include="Photo.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Selections\SelectionViewModel.Color.cs" />
-    <Compile Include="Selections\SelectionViewModel.cs" />
-    <Compile Include="Selections\SelectionViewModel.NotifyBrush.cs" />
-    <Compile Include="Selections\SelectionViewModel.Notify.cs" />
-    <Compile Include="Selections\SelectionViewModel.SetMode.cs" />
-    <Compile Include="Selections\SelectionViewModel.SetValue.cs" />
-    <Compile Include="Tips\TipViewModel.cs" />
-    <Compile Include="Tips\TipViewModel.Menu.cs" />
-    <Compile Include="Tips\TipViewModel.Tool.cs" />
-    <Compile Include="Tips\TipViewModel.Touchbar.cs" />
+    <Compile Include="SelectionViewModels\SelectionViewModel.Color.cs" />
+    <Compile Include="SelectionViewModels\SelectionViewModel.cs" />
+    <Compile Include="SelectionViewModels\SelectionViewModel.NotifyBrush.cs" />
+    <Compile Include="SelectionViewModels\SelectionViewModel.Notify.cs" />
+    <Compile Include="SelectionViewModels\SelectionViewModel.SetMode.cs" />
+    <Compile Include="SelectionViewModels\SelectionViewModel.SetValue.cs" />
+    <Compile Include="TipViewModels\TipViewModel.cs" />
+    <Compile Include="TipViewModels\TipViewModel.Menu.cs" />
+    <Compile Include="TipViewModels\TipViewModel.Tool.cs" />
+    <Compile Include="TipViewModels\TipViewModel.Touchbar.cs" />
     <Compile Include="ViewModel.cs" />
     <Compile Include="ViewModel.Notify.cs" />
     <Compile Include="ViewModel.Transformer.cs" />

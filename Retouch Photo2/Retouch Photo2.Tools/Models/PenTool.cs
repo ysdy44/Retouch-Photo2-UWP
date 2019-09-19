@@ -6,10 +6,8 @@ using Retouch_Photo2.Tools.Buttons;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
-using Retouch_Photo2.ViewModels.Selections;
 using System.Linq;
 using System.Numerics;
-using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

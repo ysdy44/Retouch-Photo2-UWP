@@ -4,7 +4,6 @@ using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
-using Retouch_Photo2.ViewModels.Tips;
 using System.Numerics;
 using Windows.Foundation;
 using Windows.UI;

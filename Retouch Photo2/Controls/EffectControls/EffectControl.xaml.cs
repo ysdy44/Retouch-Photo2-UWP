@@ -2,8 +2,6 @@
 using Retouch_Photo2.Effects.Models;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
-using Retouch_Photo2.ViewModels.Keyboards;
-using Retouch_Photo2.ViewModels.Selections;
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml;

@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.ViewModels.Selections
+namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
     /// Retouch_Photo2's the only <see cref = "SelectionViewModel" />. 

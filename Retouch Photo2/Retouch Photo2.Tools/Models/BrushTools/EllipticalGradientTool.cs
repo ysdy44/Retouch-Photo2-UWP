@@ -5,10 +5,9 @@ using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
-using Retouch_Photo2.ViewModels.Selections;
 using System.Numerics;
 
-namespace Retouch_Photo2.Retouch_Photo2.Tools.Models.BrushTools
+namespace Retouch_Photo2.Tools.Models.BrushTools
 {
     /// <summary>
     /// Type of <see cref="RadialGradientTool">.

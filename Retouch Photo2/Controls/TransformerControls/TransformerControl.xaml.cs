@@ -2,8 +2,6 @@
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
-using Retouch_Photo2.ViewModels.Selections;
-using Retouch_Photo2.ViewModels.Tips;
 using System;
 using System.Numerics;
 using Windows.UI.Xaml;

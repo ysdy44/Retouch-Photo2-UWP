@@ -1,7 +1,7 @@
 ﻿using Retouch_Photo2.Menus;
 using System.ComponentModel;
 
-namespace Retouch_Photo2.ViewModels.Tips
+namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
     /// Retouch_Photo2's the only <see cref = "TipViewModel" />.

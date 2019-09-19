@@ -3,8 +3,6 @@ using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
-using Retouch_Photo2.ViewModels.Keyboards;
-using Retouch_Photo2.ViewModels.Selections;
 using System.Linq;
 using System.Numerics;
 using Windows.UI.Xaml;

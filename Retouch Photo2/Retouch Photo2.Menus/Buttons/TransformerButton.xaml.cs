@@ -1,6 +1,6 @@
-﻿using Retouch_Photo2.ViewModels.Tips;
-using Windows.UI.Xaml.Controls;
+﻿using Retouch_Photo2.ViewModels;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus.Buttons
 {

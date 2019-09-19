@@ -1,6 +1,4 @@
 ﻿using Retouch_Photo2.ViewModels;
-using Retouch_Photo2.ViewModels.Selections;
-using Retouch_Photo2.ViewModels.Tips;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

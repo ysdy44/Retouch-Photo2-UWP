@@ -1,6 +1,5 @@
 ﻿using Retouch_Photo2.Tools.Models;
-using Retouch_Photo2.ViewModels.Keyboards;
-using Retouch_Photo2.ViewModels.Tips;
+using Retouch_Photo2.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

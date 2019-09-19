@@ -1,7 +1,5 @@
-﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.Layers.Models;
+﻿using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
-using Retouch_Photo2.ViewModels.Selections;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Touchbars

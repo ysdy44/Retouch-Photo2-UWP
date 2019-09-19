@@ -2,8 +2,6 @@
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
-using Retouch_Photo2.ViewModels.Selections;
-using Retouch_Photo2.ViewModels.Tips;
 using System.Numerics;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml.Controls;

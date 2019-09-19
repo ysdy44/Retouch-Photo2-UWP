@@ -1,11 +1,8 @@
 ﻿using FanKit.Transformers;
-using Retouch_Photo2.Blends;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
-using Retouch_Photo2.ViewModels.Selections;
-using Retouch_Photo2.ViewModels.Tips;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Windows.ApplicationModel.DataTransfer;

@@ -1,6 +1,5 @@
 ﻿using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
-using Retouch_Photo2.ViewModels.Tips;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;

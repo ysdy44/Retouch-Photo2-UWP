@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Retouch_Photo2.ViewModels.Keyboards
+namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
     /// Retouch_Photo2's the only <see cref = "KeyboardViewModel" />. 

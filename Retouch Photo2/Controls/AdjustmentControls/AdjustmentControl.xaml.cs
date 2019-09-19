@@ -2,7 +2,6 @@
 using Retouch_Photo2.Adjustments.Pages;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
-using Retouch_Photo2.ViewModels.Selections;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
