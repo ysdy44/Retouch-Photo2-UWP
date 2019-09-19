@@ -22,9 +22,7 @@ namespace Retouch_Photo2.Controls
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-
-        IMenu LayerMenu => this.TipViewModel.LayerMenu;
-
+        
         //@Construct
         public LayersControl()
         {
@@ -116,12 +114,9 @@ namespace Retouch_Photo2.Controls
             LayersControl.GetGridDataContext(sender, out Grid rootGrid, out ILayer layer);
 
             if (this.SelectionViewModel.Layer == layer) //FlyoutShow
-            {            
-
-                if (this.LayerMenu.State == MenuState.FlyoutHide)
-                {
-                    this.LayerMenu.State = MenuState.FlyoutShow;
-                }
+            {
+                //Menu          
+                this.TipViewModel.SetMenuState(MenuType.Layer, source: MenuState.FlyoutHide, destinations: MenuState.FlyoutShow);
             }
             else //ItemClick
             {
@@ -142,12 +137,9 @@ namespace Retouch_Photo2.Controls
         private void RootGrid_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
             //Menu
-            if (this.LayerMenu.State == MenuState.FlyoutHide)
-            {
-                this.LayerMenu.State = MenuState.FlyoutShow;
-            }
+            this.TipViewModel.SetMenuState(MenuType.Layer, MenuState.FlyoutHide, MenuState.FlyoutShow);
         }
-     
+
         /// <summary> DataTemplate's Button Tapped. </summary>
         private void VisibilityButton_Tapped(object sender, TappedRoutedEventArgs e)
         {

@@ -1,9 +1,11 @@
-﻿using Retouch_Photo2.Menus.Models;
+﻿using Retouch_Photo2.Menus;
+using Retouch_Photo2.Menus.Models;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.Tools.Touchbars;
 using Retouch_Photo2.ViewModels;
 using System;
+using System.Collections.Generic;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -33,32 +35,42 @@ namespace Retouch_Photo2
             TransformerTool = new TransformerTool(),
 
             //Tool
-            CursorTool = new CursorTool(),
-            ViewTool = new ViewTool(),
-            BrushTool = new BrushTool(),
-            RectangleTool = new RectangleTool(),
-            EllipseTool = new EllipseTool(),
-            PenTool = new PenTool(),
-            ImageTool = new ImageTool(),
-            AcrylicTool = new AcrylicTool(),
+            Tools = new List<ITool>
+            {
+                 new NoneTool(),
+                 new CursorTool(),
+                 new ViewTool(),
+                 new BrushTool(),
+                 new RectangleTool(),
+                 new EllipseTool(),
+                 new PenTool(),
+                 new ImageTool(),
+                 new AcrylicTool(),
+            },
 
             //Touchbar
-            StrokeWidthTouchbar = new StrokeWidthTouchbar(),
-            ViewRadianTouchbar = new ViewRadianTouchbar(),
-            ViewScaleTouchbar = new ViewScaleTouchbar(),
-            AcrylicTintOpacityTouchbar = new AcrylicTintOpacityTouchbar(),
-            AcrylicBlurAmountTouchbar = new AcrylicBlurAmountTouchbar(),
+            Touchbars = new List<ITouchbar>
+            {
+                new StrokeWidthTouchbar(),
+                new ViewRadianTouchbar(),
+                new ViewScaleTouchbar(),
+                new AcrylicTintOpacityTouchbar(),
+                new AcrylicBlurAmountTouchbar(),
+            },
 
             //Menu
-            DebugMenu = new DebugMenu(),
-            SelectionMenu = new SelectionMenu(),
-            OperateMenu = new OperateMenu(),
-            AdjustmentMenu = new AdjustmentMenu(),
-            EffectMenu = new EffectMenu(),
-            TransformerMenu = new TransformerMenu(),
-            ColorMenu = new ColorMenu(),
-            ToolMenu = new ToolMenu(),
-            LayerMenu = new LayerMenu(),
+            Menus = new List<IMenu>
+            {
+                new DebugMenu(),
+                new SelectionMenu(),
+                new OperateMenu(),
+                new AdjustmentMenu(),
+                new EffectMenu(),
+                new TransformerMenu(),
+                new ColorMenu(),
+                new ToolMenu(),
+                new LayerMenu(),
+            },
         };
 
 

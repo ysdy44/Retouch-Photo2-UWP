@@ -2,7 +2,6 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.Foundation;
@@ -22,12 +21,11 @@ namespace Retouch_Photo2.Controls
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
-        ITool Tool => this.TipViewModel.Tool;
-
 
         bool isSingleStarted;
         Vector2 singleStartingPoint;
-        
+
+
         #region DependencyProperty
 
 
@@ -84,15 +82,16 @@ namespace Retouch_Photo2.Controls
                 con.CanvasControl.Invalidate();
             }
         }));
-        
+
 
         #endregion
-                
+
+
         //@Construct
         public MainCanvasControl()
         {
             this.InitializeComponent();
-            this.SizeChanged += (s, e) => 
+            this.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
                 this.ViewModel.CanvasTransformer.Size = e.NewSize;
@@ -206,7 +205,8 @@ namespace Retouch_Photo2.Controls
                 this.isSingleStarted = false;
                 this.singleStartingPoint = point;
 
-                this.Tool.Starting(point);//Starting
+                //Tool
+                this.TipViewModel.Tool.Starting(point);//Starting
 
                 this.ViewModel.CanvasHitTestVisible = false;//IsHitTestVisible
             };
@@ -215,21 +215,25 @@ namespace Retouch_Photo2.Controls
                 //Delta
                 if (this.isSingleStarted)
                 {
-                    this.Tool.Delta(this.singleStartingPoint, point);//Delta
+                    //Tool
+                    this.TipViewModel.Tool.Delta(this.singleStartingPoint, point);//Delta
+
                     return;
                 }
 
                 //Started
-                if (FanKit.Math.OutNodeDistance(this.singleStartingPoint ,point))
+                if (FanKit.Math.OutNodeDistance(this.singleStartingPoint, point))
                 {
                     this.isSingleStarted = true;
 
-                    this.Tool.Started(this.singleStartingPoint, point);//Started
+                    //Tool
+                    this.TipViewModel.Tool.Started(this.singleStartingPoint, point);//Started
                 }
             };
             this.CanvasOperator.Single_Complete += (point) =>
             {
-                this.Tool.Complete(this.singleStartingPoint, point, this.isSingleStarted);//Started
+                //Tool
+                this.TipViewModel.Tool.Complete(this.singleStartingPoint, point, this.isSingleStarted);//Complete
 
                 this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible
             };

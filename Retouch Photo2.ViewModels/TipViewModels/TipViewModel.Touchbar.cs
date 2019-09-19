@@ -1,6 +1,8 @@
 ﻿using Retouch_Photo2.Tools;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Windows.UI.Xaml.Controls;
+using System.Linq;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -18,12 +20,10 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.touchbarType == value) return;
 
-                ITouchbar touchbar = this.GetTouchbar(value);
+                ITouchbar touchbar = this.Touchbars.FirstOrDefault(t => t.Type == value);
 
-                if (touchbar == null)
-                    this.TouchbarControl = null;
-                else
-                    this.TouchbarControl = touchbar.Self;
+                this.Touchbar = touchbar;
+                this.OnPropertyChanged(nameof(this.Touchbar));//Notify 
 
                 this.touchbarType = value;
                 this.OnPropertyChanged(nameof(this.TouchbarType));//Notify 
@@ -31,46 +31,11 @@ namespace Retouch_Photo2.ViewModels
         }
         private TouchbarType touchbarType;
 
-        /// <summary> Touchbar control. </summary>
-        public UserControl TouchbarControl
-        {
+        /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.Tools.ITouchbar" />. </summary>
+        public ITouchbar Touchbar { get; set; }
 
-            get => this.touchbarControl;
-            set
-            {
-                this.touchbarControl = value;
-                this.OnPropertyChanged(nameof(this.TouchbarControl));//Notify 
-            }
-        }
-        private UserControl touchbarControl;
-
-        private ITouchbar GetTouchbar(TouchbarType type)
-        {
-            switch (type)
-            {
-                case TouchbarType.None: return null;
-                case TouchbarType.StrokeWidth: return this.StrokeWidthTouchbar;
-                case TouchbarType.ViewRadian: return this.ViewRadianTouchbar;
-                case TouchbarType.ViewScale: return this.ViewScaleTouchbar;
-                case TouchbarType.AcrylicTintOpacity: return this.AcrylicTintOpacityTouchbar;
-                case TouchbarType.AcrylicBlurAmount: return this.AcrylicBlurAmountTouchbar;
-            }
-            return null;
-        }
-
-
-        /// <summary> StrokeWidthTouchbar. </summary>
-        public ITouchbar StrokeWidthTouchbar;
-
-        /// <summary> ViewRadianTouchbar. </summary>
-        public ITouchbar ViewRadianTouchbar;
-        /// <summary> ViewScaleTouchbar. </summary>
-        public ITouchbar ViewScaleTouchbar;
-
-        /// <summary> AcrylicTintOpacityTouchbar. </summary>
-        public ITouchbar AcrylicTintOpacityTouchbar;
-        /// <summary> AcrylicBlurAmountTouchbar. </summary>
-        public ITouchbar AcrylicBlurAmountTouchbar;
+        /// <summary> Touchbars. </summary>
+        public IList<ITouchbar> Touchbars { get; set; } = new List<ITouchbar>();
 
     }
 }

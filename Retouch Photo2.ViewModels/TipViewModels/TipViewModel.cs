@@ -1,6 +1,5 @@
 ﻿using Retouch_Photo2.Tools;
 using System.ComponentModel;
-using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -11,9 +10,9 @@ namespace Retouch_Photo2.ViewModels
     {
 
         //@Construct
-        public TipViewModel(ITool tool)
+        public TipViewModel(ITool noneTool)
         {
-            this.tool = tool;
+            this.tool = noneTool;
         }
 
 

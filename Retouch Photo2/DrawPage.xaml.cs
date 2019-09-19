@@ -21,6 +21,11 @@ namespace Retouch_Photo2
 
         //@Converter
         public Visibility BoolToVisibilityConverter(bool isChecked) => isChecked ? Visibility.Visible : Visibility.Collapsed;
+        public UserControl TouchbarConverter(ITouchbar touchbar)
+        {
+            if (touchbar == null) return null;
+            else return touchbar.Self;
+        }
 
         //@Construct
         public DrawPage()
@@ -40,27 +45,18 @@ namespace Retouch_Photo2
 
 
             //Tool
-            this.ConstructTool(this.TipViewModel.CursorTool);
-            this.ConstructTool(this.TipViewModel.ViewTool);
-            this.ConstructTool(this.TipViewModel.BrushTool);
-            this.ConstructTool(this.TipViewModel.RectangleTool);
-            this.ConstructTool(this.TipViewModel.EllipseTool);
-            this.ConstructTool(this.TipViewModel.PenTool);
-            this.ConstructTool(this.TipViewModel.ImageTool);
-            this.ConstructTool(this.TipViewModel.AcrylicTool);
-
+            foreach (ITool tool in this.TipViewModel.Tools)
+            {
+                this.ConstructTool(tool);
+            }
 
             //Menu
-            this.ConstructMenu(this.TipViewModel.ToolMenu);
-            this.ConstructMenu(this.TipViewModel.LayerMenu);
-            this.ConstructMenu(this.TipViewModel.DebugMenu);
-            this.ConstructMenu(this.TipViewModel.SelectionMenu);
-            this.ConstructMenu(this.TipViewModel.OperateMenu);
-            this.ConstructMenu(this.TipViewModel.AdjustmentMenu);
-            this.ConstructMenu(this.TipViewModel.EffectMenu);
-            this.ConstructMenu(this.TipViewModel.TransformerMenu);
-            this.ConstructMenu(this.TipViewModel.ColorMenu);
+            foreach (IMenu menu in this.TipViewModel.Menus)
+            {
+                this.ConstructMenu(menu);
+            }
         }
+
 
         #region Tool
 
@@ -80,16 +76,19 @@ namespace Retouch_Photo2
 
             IToolButton button = tool.Button;
 
-            button.Self.Tapped += (s, e) =>
+            if (button!=null)
             {
-                this.ToolGroupType(tool.Type);
+                button.Self.Tapped += (s, e) =>
+                {
+                    this.ToolGroupType(tool.Type);
 
-                this.LeftIcon = tool.Icon;
-                this.FootPage = tool.Page;
-                this.TipViewModel.Tool = tool;
-            };
+                    this.LeftIcon = tool.Icon;
+                    this.FootPage = tool.Page;
+                    this.TipViewModel.Tool = tool;
+                };
 
-            this.TooLeft.Add(button.Self);
+                this.TooLeft.Add(button.Self);
+            }
         }
 
         private void ToolGroupType(ToolType groupType)
@@ -108,6 +107,7 @@ namespace Retouch_Photo2
 
 
         #endregion
+
 
         #region Menu
 
@@ -145,6 +145,7 @@ namespace Retouch_Photo2
 
         #endregion
 
+
         //The current page becomes the active page
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -172,5 +173,6 @@ namespace Retouch_Photo2
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
         }
+
     }
 }

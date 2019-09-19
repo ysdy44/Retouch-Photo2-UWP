@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo2.Tools;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Windows.UI.Xaml.Controls;
 
@@ -9,10 +10,10 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public partial class TipViewModel : INotifyPropertyChanged
     {        
-        /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.TestApp.Tools.Tool" />. </summary>
+        /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.Tools.ITool" />. </summary>
         public ITool Tool
         {
-            get => this.tool;
+            get => this.tool ;
             set
             {
                 //The current tool becomes the active tool.
@@ -30,32 +31,9 @@ namespace Retouch_Photo2.ViewModels
         private ITool tool;
 
         /// <summary> TransformerTool. </summary>
-        public ITransformerTool TransformerTool;
-        
+        public ITransformerTool TransformerTool { get; set; } 
 
-        /// <summary> CursorTool. </summary>
-        public ITool CursorTool;
-
-        /// <summary> ViewTool. </summary>
-        public ITool ViewTool;
-
-        /// <summary> BrushTool. </summary>
-        public ITool BrushTool;
-
-        /// <summary> RectangleTool. </summary>
-        public ITool RectangleTool;
-
-        /// <summary> EllipseTool. </summary>
-        public ITool EllipseTool;
-
-        /// <summary> PenTool. </summary>
-        public ITool PenTool;
-
-        /// <summary> ImageTool. </summary>
-        public ITool ImageTool;
-
-        /// <summary> AcrylicTool. </summary>
-        public ITool AcrylicTool;
-
+        /// <summary> Tools. </summary>
+        public IList<ITool> Tools { get; set; } = new List<ITool>();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo2.Menus;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Retouch_Photo2.ViewModels
@@ -9,28 +10,47 @@ namespace Retouch_Photo2.ViewModels
     public partial class TipViewModel : INotifyPropertyChanged
     {
 
-        /// <summary> Tool. </summary>
-        public IMenu ToolMenu;
-        /// <summary> Layer. </summary>
-        public IMenu LayerMenu;
+        /// <summary> Menus. </summary>
+        public IList<IMenu> Menus { get; set; } = new List<IMenu>();
 
-        /// <summary> Debug. </summary>
-        public IMenu DebugMenu;
 
-        /// <summary> Selection. </summary>
-        public IMenu SelectionMenu;
-        /// <summary> Operate. </summary>
-        public IMenu OperateMenu;
+        /// <summary>
+        /// Sets the destination IMenu's state.
+        /// </summary>
+        /// <param name="type"> The destination IMenu's type. </param>
+        /// <param name="destinations"> The destination state. </param>
+        public void SetMenuState(MenuType type, MenuState destinations)
+        {
+            foreach (IMenu menu in this.Menus)
+            {
+                if (menu.Type == type)
+                {
+                    menu.State = destinations;
+                    break;
+                }
+            }
+        }
 
-        /// <summary> Adjustment. </summary>
-        public IMenu AdjustmentMenu;
-        /// <summary> Effect. </summary>
-        public IMenu EffectMenu;
-        /// <summary> Transformer. </summary>
-        public IMenu TransformerMenu;
-
-        /// <summary> Color. </summary>
-        public IMenu ColorMenu;
+        /// <summary>
+        /// Sets the destination IMenu's state.
+        /// </summary>
+        /// <param name="type"> The destination IMenu's type. </param>
+        /// <param name="source"> The source state. </param>
+        /// <param name="destinations"> The destination state. </param>
+        public void SetMenuState(MenuType type, MenuState source, MenuState destinations)
+        {
+            foreach (IMenu menu in this.Menus)
+            {
+                if (menu.Type == type)
+                {
+                    if (menu.State == source)
+                    {
+                        menu.State = destinations;
+                    }
+                    break;
+                }
+            }
+        }
 
     }
 }

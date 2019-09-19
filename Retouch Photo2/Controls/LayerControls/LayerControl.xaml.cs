@@ -245,11 +245,7 @@ namespace Retouch_Photo2.Controls
             this.GroupButton.Tapped += (s, e) =>
             {
                 //Menu
-                if (this.TipViewModel.LayerMenu.State == MenuState.FlyoutShow)
-                {
-                    this.TipViewModel.LayerMenu.State = MenuState.FlyoutHide;
-                }
-
+                this.TipViewModel.SetMenuState(MenuType.Layer, destinations: MenuState.FlyoutHide);
 
                 //Transformer
                 Transformer transformer = this.SelectionViewModel.Transformer;
