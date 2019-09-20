@@ -106,11 +106,9 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="SelectionButtons\SelectionButton.xaml.cs">
+    <Compile Include="SelectionButton.xaml.cs">
       <DependentUpon>SelectionButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SelectionButtons\SelectionButtonState.cs" />
-    <Compile Include="SelectionButtons\SelectionButtonStateManager.cs" />
     <Compile Include="Edit2Icons\ExtractDisabledIcon.xaml.cs">
       <DependentUpon>ExtractDisabledIcon.xaml</DependentUpon>
     </Compile>
@@ -195,7 +193,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="SelectionButtons\SelectionButton.xaml">
+    <Page Include="SelectionButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

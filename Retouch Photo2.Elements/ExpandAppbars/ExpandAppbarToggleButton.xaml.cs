@@ -11,28 +11,26 @@ namespace Retouch_Photo2.Elements
         public FrameworkElement Self => this;
 
 
-        /// <summary> State of <see cref="ExpandAppbarButton"/>. </summary>
-        public ClickMode State
+        //@VisualState
+        bool _vsIsSelected;
+        ClickMode _vsClickMode;
+        public VisualState VisualState
         {
-            set
+            get
             {
+                if (this._vsIsSelected) return this.Selected;
 
-                if (this.IsSelected)
+                switch (this._vsClickMode)
                 {
-                    VisualStateManager.GoToState(this, this.Selected.Name, false);
-                    return;
+                    case ClickMode.Release: return this.Normal;
+                    case ClickMode.Hover: return this.PointerOver;
+                    case ClickMode.Press: return this.Pressed;
                 }
-
-                switch (value)
-                {
-                    case ClickMode.Release: VisualStateManager.GoToState(this, this.Normal.Name, false); break;
-                    case ClickMode.Hover: VisualStateManager.GoToState(this, this.PointerOver.Name, false); break;
-                    case ClickMode.Press: VisualStateManager.GoToState(this, this.Pressed.Name, false); break;
-                }
+                return this.Normal;
             }
+            set => VisualStateManager.GoToState(this, value.Name, false);
         }
-        bool IsSelected = false;
-
+        
 
         #region DependencyProperty
 
@@ -49,7 +47,8 @@ namespace Retouch_Photo2.Elements
 
             if (e.NewValue is bool value)
             {
-                con.SetIsSelected(value);
+                con._vsIsSelected = value;
+                con.VisualState = con.VisualState;//State
             }
         }));
 
@@ -61,18 +60,29 @@ namespace Retouch_Photo2.Elements
         {
             this.InitializeComponent();
             base.Width = this.ExpandWidth;
-            this.Loaded += (s, e) => this.SetIsSelected(this.IsChecked);
-            this.RootGrid.PointerEntered += (s, e) => this.State = ClickMode.Hover;
-            this.RootGrid.PointerPressed += (s, e) => this.State = ClickMode.Press;
-            this.RootGrid.PointerExited += (s, e) => this.State = ClickMode.Release;
+
+            this.Loaded += (s, e) =>
+            {
+                this._vsIsSelected = this.IsChecked;
+                this.VisualState = this.VisualState;//State
+            };
             this.RootGrid.Tapped += (s, e) => this.IsChecked = !this.IsChecked;
-        }
 
-
-        public void SetIsSelected(bool isSelected)
-        {
-            this.IsSelected = isSelected;
-            this.State = ClickMode.Release;
+            this.RootGrid.PointerEntered += (s, e) =>
+            {
+                this._vsClickMode = ClickMode.Hover;
+                this.VisualState = this.VisualState;//State
+            };
+            this.RootGrid.PointerPressed += (s, e) =>
+            {
+                this._vsClickMode = ClickMode.Press;
+                this.VisualState = this.VisualState;//State
+            };
+            this.RootGrid.PointerExited += (s, e) =>
+            {
+                this._vsClickMode = ClickMode.Release;
+                this.VisualState = this.VisualState;//State
+            };
         }
     }
 }

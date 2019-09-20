@@ -20,7 +20,7 @@ namespace Retouch_Photo2.Controls
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;        
+        MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
 
         ObservableCollection<ILayer> _reference => this.ViewModel.Layers;
         ObservableCollection<ILayer> _selection => this.SelectionViewModel.Layer.Children;
@@ -30,26 +30,31 @@ namespace Retouch_Photo2.Controls
         public MenuTitle MenuTitle => this._MenuTitle;
 
 
-        /// <summary> Manager of <see cref="LayerControlState"/>. </summary>
-        LayerControlStateManager Manager = new LayerControlStateManager();
-        /// <summary> State of <see cref="LayerControl"/>. </summary>
-        LayerControlState State
+        //@VisualState
+        bool _vsIsBlends;
+        bool _vsIsChildren;
+        bool _vsIsGroupLayer;
+        ListViewSelectionMode _vsMode;
+        public VisualState VisualState
         {
-            set
+            get
             {
-                switch (value)
+                if (this._vsIsBlends) return this.Blends;
+                if (this._vsIsChildren) return this.Children;
+
+                switch (this.Mode)
                 {
-                    case LayerControlState.None: VisualStateManager.GoToState(this, this.Normal.Name, false); break;
-                    case LayerControlState.Disable: VisualStateManager.GoToState(this, this.Disable.Name, false); break;
-
-                    case LayerControlState.SingleLayerWithChildren: VisualStateManager.GoToState(this, this.SingleLayerWithChildren.Name, false); break;
-                    case LayerControlState.SingleLayerWithoutChildren: VisualStateManager.GoToState(this, this.SingleLayerWithoutChildren.Name, false); break;
-                    case LayerControlState.MultipleLayer: VisualStateManager.GoToState(this, this.MultipleLayer.Name, false); break;
-
-                    case LayerControlState.Blends: VisualStateManager.GoToState(this, this.Blends.Name, false); break;
-                    case LayerControlState.Children: VisualStateManager.GoToState(this, this.Children.Name, false); break;
+                    case ListViewSelectionMode.None: return this.Disable;
+                    case ListViewSelectionMode.Single:
+                        return this._vsIsGroupLayer ?
+                            this.SingleLayerWithChildren : 
+                            this.SingleLayerWithoutChildren;
+                    case ListViewSelectionMode.Multiple: return this.MultipleLayer;
                 }
+
+                return this.Normal;
             }
+            set => VisualStateManager.GoToState(this, value.Name, false);
         }
 
 
@@ -80,11 +85,11 @@ namespace Retouch_Photo2.Controls
 
             if (e.NewValue is ListViewSelectionMode value)
             {
-                con.Manager.IsBlends = false;
-                con.Manager.IsChildren = false;
+                con._vsIsBlends = false;
+                con._vsIsChildren = false;
 
-                con.Manager.Mode = value;
-                con.State = con.Manager.GetState();//State
+                con._vsMode = value;
+                con.VisualState = con.VisualState;//State
             }
         }));
 
@@ -102,11 +107,11 @@ namespace Retouch_Photo2.Controls
 
             if (e.NewValue is bool value)
             {
-                con.Manager.IsBlends = false;
-                con.Manager.IsChildren = false;
+                con._vsIsBlends = false;
+                con._vsIsChildren = false;
 
-                con.Manager.IsGroupLayer = value;
-                con.State = con.Manager.GetState();//State
+                con._vsIsGroupLayer = value;
+                con.VisualState = con.VisualState;//State
             }
         }));
 
@@ -118,13 +123,13 @@ namespace Retouch_Photo2.Controls
         public LayerControl()
         {
             this.InitializeComponent();
-            
+
             //Menu
             this._MenuTitle.BackButton.Tapped += (s, e) =>
             {
-                this.Manager.IsBlends = false;
-                this.Manager.IsChildren = false;
-                this.State = this.Manager.GetState();//State
+                this._vsIsBlends = false;
+                this._vsIsChildren = false;
+                this.VisualState = this.VisualState;//State
             };
 
 
@@ -152,8 +157,8 @@ namespace Retouch_Photo2.Controls
             {
                 this.BlendControl.BlendType = this.SelectionViewModel.BlendType;
 
-                this.Manager.IsBlends = true;
-                this.State = this.Manager.GetState();//State
+                this._vsIsBlends = true;
+                this.VisualState = this.VisualState;//State
             };
             this.BlendControl.BlendTypeChanged += (s, blendType) =>
             {
@@ -236,7 +241,7 @@ namespace Retouch_Photo2.Controls
                         }
                         break;
                 }
-                
+
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -307,10 +312,10 @@ namespace Retouch_Photo2.Controls
             {
                 if (this.SelectionViewModel.Layer == null) return;
 
-                this.ChildrenListView.ItemsSource = this.SelectionViewModel.Layer.Children ;
+                this.ChildrenListView.ItemsSource = this.SelectionViewModel.Layer.Children;
 
-                this.Manager.IsChildren = true;
-                this.State = this.Manager.GetState();//State
+                this._vsIsChildren = true;
+                this.VisualState = this.VisualState;//State
             };
 
 

@@ -36,7 +36,7 @@
     <Grid>
 
         <elementDrawPages:DrawLayout x:Name="DrawLayout" 
-               Touchbar="{x:Bind TouchbarConverter(TipViewModel.Touchbar),Mode=OneWay}"                                             
+               Touchbar="{x:Bind TipViewModel.TouchbarControl,Mode=OneWay}"                                             
                Theme="{x:Bind RequestedTheme, Mode=OneWay}"
                IsFullScreen="{x:Bind KeyboardViewModel.IsFullScreen,Mode=OneWay}" 
                >

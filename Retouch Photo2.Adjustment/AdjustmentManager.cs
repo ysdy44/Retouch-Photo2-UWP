@@ -1,6 +1,4 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Newtonsoft.Json;
-using Retouch_Photo2.Adjustments.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

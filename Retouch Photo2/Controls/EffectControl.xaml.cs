@@ -24,26 +24,12 @@ namespace Retouch_Photo2.Controls
         public MenuTitle MenuTitle => this._MenuTitle;
 
 
-        /// <summary> Manager of <see cref="EffectControlState"/>. </summary>
-        EffectControlStateManager Manager = new EffectControlStateManager();
-        /// <summary> State of <see cref="EffectControl"/>. </summary>
-        EffectControlState State
+        //@VisualState
+        public bool _vsIsEdit;
+        public VisualState VisualState
         {
-              set
-             {
-                 if (value == EffectControlState.Edit)
-                 {
-                     this.MenuTitle.IsSecondPage = true;
-                     this.StackPanel.Visibility = Visibility.Collapsed;
-                     this.EffectBoder.Visibility = Visibility.Visible;
-                 }
-                 else
-                 {
-                     this.MenuTitle.IsSecondPage = false;
-                     this.StackPanel.Visibility = Visibility.Visible;
-                     this.EffectBoder.Visibility = Visibility.Collapsed;
-                 }
-             }
+            get => this._vsIsEdit ? this.Edit : this.Normal;
+            set => VisualStateManager.GoToState(this, value.Name, false);
         }
 
 
@@ -99,9 +85,8 @@ namespace Retouch_Photo2.Controls
                     effect.Button.FollowEffectManager(value);
                 }
 
-                con.Manager.IsEdit = false;
-                con.Manager.ExistEffect = true;
-                con.State = con.Manager.GetState();//State
+                con._vsIsEdit = false;
+                con.VisualState = con.VisualState;//State
             }
             else
             {
@@ -111,9 +96,8 @@ namespace Retouch_Photo2.Controls
                     effect.Button.ToggleSwitch.IsEnabled = false;
                 }
 
-                con.Manager.IsEdit = false;
-                con.Manager.ExistEffect = true;
-                con.State = con.Manager.GetState();//State
+                con._vsIsEdit = false;
+                con.VisualState = con.VisualState;//State
             }
         }));
 
@@ -124,7 +108,7 @@ namespace Retouch_Photo2.Controls
         public EffectControl()
         {
             this.InitializeComponent();
-            this.State = EffectControlState.Disable;
+            this.VisualState = this.VisualState;//State
 
             foreach (IEffect effect in this.Effects)
             {
@@ -173,8 +157,8 @@ namespace Retouch_Photo2.Controls
             {
                 this.Effect = null;
 
-                this.Manager.IsEdit = false;
-                this.State = this.Manager.GetState();//State
+                this._vsIsEdit = false;
+                this.VisualState = this.VisualState;//State
             };
         }
 
@@ -214,8 +198,8 @@ namespace Retouch_Photo2.Controls
                 return;
             });
 
-            this.Manager.IsEdit = true;
-            this.State = this.Manager.GetState();//State
+            this._vsIsEdit = true;
+            this.VisualState = this.VisualState;//State
         }
 
     }

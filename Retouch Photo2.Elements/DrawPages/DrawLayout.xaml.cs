@@ -10,6 +10,8 @@ namespace Retouch_Photo2.Elements.DrawPages
     public sealed partial class DrawLayout : UserControl
     {
         //@Content
+        #region Content
+
         /// <summary> BackButton. </summary>
         public Button BackButton => this._BackButton;
         /// <summary> CenterBorder's Child. </summary>
@@ -38,10 +40,10 @@ namespace Retouch_Photo2.Elements.DrawPages
 
                 if (value != oldPage)
                 {
-                    if (this.Manager.PhoneState != DrawLayoutStateManager.DrawLayoutPhoneState.Hided)
+                    if (this._vsPhoneType != PhoneLayoutType.Hided)
                     {
-                        this.Manager.PhoneState = DrawLayoutStateManager.DrawLayoutPhoneState.Hided;
-                        this.State = this.Manager.GetState();//State
+                        this._vsPhoneType = PhoneLayoutType.Hided;
+                        this.VisualState = this.VisualState;//State
                     }
                 }
 
@@ -51,6 +53,8 @@ namespace Retouch_Photo2.Elements.DrawPages
         }
         private Page footPage;
         
+        #endregion 
+
 
         #region HeadLeft & HeadRight
 
@@ -64,10 +68,16 @@ namespace Retouch_Photo2.Elements.DrawPages
 
         StackPanel HeadRightStackPane = new StackPanel { Orientation = Orientation.Horizontal };
 
+        bool _IsHeadRightExpand;
+
+        bool isHeadRightExpand;
         bool IsHeadRightExpand
         {
+            get => this.isHeadRightExpand;
             set
             {
+                if (this.isHeadRightExpand == value) return;
+
                 if (value)
                 {
                     this.HeadRightScrollViewer.Content = null;
@@ -78,6 +88,7 @@ namespace Retouch_Photo2.Elements.DrawPages
                     this.HeadRightExpandBorder.Child = null;
                     this.HeadRightScrollViewer.Content = this.HeadRightStackPane;
                 }
+                this.isHeadRightExpand = value;
             }
         }
 
@@ -119,58 +130,63 @@ namespace Retouch_Photo2.Elements.DrawPages
 
             if (e.NewValue is bool value)
             {
-                con.Manager.IsFullScreen = value;
-                con.State = con.Manager.GetState();//State
+                con._vsIsFullScreen = value;
+                con.VisualState = con.VisualState;//State
             }
         }));
-        
-        
+
+
         #endregion
 
 
-        /// <summary> Manager of <see cref="DrawLayout"/>. </summary>
-        DrawLayoutStateManager Manager = new DrawLayoutStateManager();
-        /// <summary> State of <see cref="DrawLayout"/>. </summary>
-        public DrawLayoutState State
+        //@VisualState
+        bool _vsIsFullScreen;
+        PhoneLayoutType _vsPhoneType= PhoneLayoutType.Hided;
+
+        DeviceLayoutType _vsDeviceType = DeviceLayoutType.Adaptive;
+        double _vsScreenWidth;
+        double _vsPhoneMaxWidth = 600.0;
+        double _vsPadMaxWidth = 900.0;
+
+        public VisualState VisualState
         {
-            set
+            get
             {
-                switch (value)
+                this._IsHeadRightExpand = true;
+
+                if (this._vsIsFullScreen) return this.FullScreen;
+
+                switch (this._vsDeviceType)
                 {
-                    case DrawLayoutState.None:
-                        VisualStateManager.GoToState(this, this.Normal.Name, false);
-                        break;
-
-                    case DrawLayoutState.FullScreen:
-                        VisualStateManager.GoToState(this, this.FullScreen.Name, false);
-                        break;
-
-                    case DrawLayoutState.Phone: 
-                            this.IsHeadRightExpand = false;
-                        VisualStateManager.GoToState(this, this.Phone.Name, false);
-                        break;
-                    case DrawLayoutState.PhoneShowLeft:
-                        this.IsHeadRightExpand = false;
-                        VisualStateManager.GoToState(this, this.PhoneShowLeft.Name, false);
-                        break;
-                    case DrawLayoutState.PhoneShowRight:
-                        this.IsHeadRightExpand = false;
-                        VisualStateManager.GoToState(this, this.PhoneShowRight.Name, false);
-                        break;
-
-                    case DrawLayoutState.Pad:
-                        this.IsHeadRightExpand = true;
-                        VisualStateManager.GoToState(this, this.Pad.Name, false);
-                        break;
-
-                    case DrawLayoutState.PC:
-                        this.IsHeadRightExpand = true;
-                        VisualStateManager.GoToState(this, this.PC.Name, false);
+                    case DeviceLayoutType.PC: return this.PC;
+                    case DeviceLayoutType.Pad: return this.Pad;
+                    case DeviceLayoutType.Phone:  break;
+                    case DeviceLayoutType.Adaptive:
+                        {
+                            double width = this._vsScreenWidth;
+                            if (width > this._vsPadMaxWidth) return this.PC;
+                            if (width > this._vsPhoneMaxWidth) return this.Pad;
+                        }
                         break;
                 }
+
+                this._IsHeadRightExpand = false;
+                switch (this._vsPhoneType)
+                {
+                    case PhoneLayoutType.Hided: return this.Phone;
+                    case PhoneLayoutType.ShowLeft: return this.PhoneShowLeft;
+                    case PhoneLayoutType.ShowRight: return this.PhoneShowRight;
+                }
+
+                return this.Normal;
+            }
+            set
+            {
+                this.IsHeadRightExpand = this._IsHeadRightExpand;
+                VisualStateManager.GoToState(this, value.Name, false);
             }
         }
-        
+
 
         //@Construct
         public DrawLayout()
@@ -180,8 +196,8 @@ namespace Retouch_Photo2.Elements.DrawPages
             this.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
-                this.Manager.Width = e.NewSize.Width;
-                this.State = this.Manager.GetState(); //State
+                this._vsScreenWidth = e.NewSize.Width;
+                this.VisualState = this.VisualState;//State
             };
 
             //HeadRight
@@ -191,36 +207,36 @@ namespace Retouch_Photo2.Elements.DrawPages
             //DismissOverlay
             this.IconDismissOverlay.Tapped += (s, e) =>
             {
-                this.Manager.PhoneState = DrawLayoutStateManager.DrawLayoutPhoneState.Hided;
-                this.State = this.Manager.GetState();//State
+                this._vsPhoneType = PhoneLayoutType.Hided;
+                this.VisualState = this.VisualState;//State
             };
 
             //IconLeft
             this.IconLeftGrid.Tapped += (s, e) =>
             {
-                this.Manager.PhoneState = DrawLayoutStateManager.DrawLayoutPhoneState.ShowLeft;
-                this.State = this.Manager.GetState();//State
+                this._vsPhoneType = PhoneLayoutType.ShowLeft;
+                this.VisualState = this.VisualState;//State
             };
             this.IconLeftGrid.PointerEntered += (s, e) =>
             {
                 if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
                 {
-                    this.Manager.PhoneState = DrawLayoutStateManager.DrawLayoutPhoneState.ShowLeft;
-                    this.State = this.Manager.GetState();//State
+                    this._vsPhoneType = PhoneLayoutType.ShowLeft;
+                    this.VisualState = this.VisualState;//State
                 }
             };
             //IconRight
             this.IconRightGrid.Tapped += (s, e) =>
             {
-                this.Manager.PhoneState = DrawLayoutStateManager.DrawLayoutPhoneState.ShowRight;
-                this.State = this.Manager.GetState();//State
+                this._vsPhoneType = PhoneLayoutType.ShowRight;
+                this.VisualState = this.VisualState;//State
             };
             this.IconRightGrid.PointerEntered += (s, e) =>
             {
                 if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
                 {
-                    this.Manager.PhoneState = DrawLayoutStateManager.DrawLayoutPhoneState.ShowRight;
-                    this.State = this.Manager.GetState();//State
+                    this._vsPhoneType = PhoneLayoutType.ShowRight;
+                    this.VisualState = this.VisualState;//State
                 }
             };
         }

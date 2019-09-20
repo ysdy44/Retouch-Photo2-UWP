@@ -10,7 +10,7 @@ namespace Retouch_Photo2.Menus.Buttons
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@Content
-        public MenuState State { set => this.Button.SetMenuState(value); }
+        public MenuState State { set => this.Button.MenuState = value; }
         public FrameworkElement Self=> this;
         public MenuButtonType Type => MenuButtonType.None;
 

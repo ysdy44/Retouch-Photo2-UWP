@@ -19,13 +19,10 @@ namespace Retouch_Photo2
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
+
         //@Converter
         public Visibility BoolToVisibilityConverter(bool isChecked) => isChecked ? Visibility.Visible : Visibility.Collapsed;
-        public UserControl TouchbarConverter(ITouchbar touchbar)
-        {
-            if (touchbar == null) return null;
-            else return touchbar.Self;
-        }
+
 
         //@Construct
         public DrawPage()

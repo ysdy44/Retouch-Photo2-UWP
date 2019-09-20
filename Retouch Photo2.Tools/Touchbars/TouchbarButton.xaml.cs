@@ -5,26 +5,27 @@ namespace Retouch_Photo2.Tools
 {
     public sealed partial class TouchbarButton : UserControl
     {
-        /// <summary> State of <see cref="TouchbarButton"/>. </summary>
-        ClickMode State
-        {
-            set
-            {
-                if (this.IsChecked)
-                {
-                    VisualStateManager.GoToState(this, this.Selected.Name, false);
-                    return;
-                }
 
-                switch (value)
+        //@VisualState
+        bool _vsIsSelected;
+        ClickMode _vsClickMode;
+        public VisualState VisualState
+        {
+            get
+            {
+                if (this._vsIsSelected) return this.Selected;
+
+                switch (this._vsClickMode)
                 {
-                    case ClickMode.Release: VisualStateManager.GoToState(this, this.Normal.Name, false); break;
-                    case ClickMode.Hover: VisualStateManager.GoToState(this, this.PointerOver.Name, false); break;
-                    case ClickMode.Press: VisualStateManager.GoToState(this, this.Pressed.Name, false); break;
+                    case ClickMode.Release: return this.Normal;
+                    case ClickMode.Hover: return this.PointerOver;
+                    case ClickMode.Press: return this.Pressed;
                 }
+                return this.Normal;
             }
+            set => VisualStateManager.GoToState(this, value.Name, false);
         }
-        bool IsChecked;
+
 
         #region DependencyProperty
 
@@ -52,8 +53,8 @@ namespace Retouch_Photo2.Tools
 
             if (e.NewValue is TouchbarType value)
             {
-                con.IsChecked = (value == con.Type);
-                con.State = ClickMode.Release;//State
+                con._vsIsSelected = (value == con.Type);
+                con.VisualState = con.VisualState;//State
             }
         }));
 
@@ -83,6 +84,7 @@ namespace Retouch_Photo2.Tools
 
         #endregion
 
+
         //@Construct
         /// <summary>
         /// Construct a TouchbarButton.
@@ -90,14 +92,25 @@ namespace Retouch_Photo2.Tools
         public TouchbarButton()
         {
             this.InitializeComponent();
-
-            this.RootBorder.PointerEntered += (s, e) => this.State = ClickMode.Hover;//State            
-            this.RootBorder.PointerPressed += (s, e) => this.State = ClickMode.Press;//State            
-            this.RootBorder.PointerExited += (s, e) => this.State = ClickMode.Release;//State            
-
+            this.RootBorder.PointerEntered += (s, e) =>
+            {
+                this._vsClickMode = ClickMode.Hover;
+                this.VisualState = this.VisualState;//State
+            };
+            this.RootBorder.PointerPressed += (s, e) =>
+            {
+                this._vsClickMode = ClickMode.Press;
+                this.VisualState = this.VisualState;//State
+            };
+            this.RootBorder.PointerExited += (s, e) =>
+            {
+                this._vsClickMode = ClickMode.Release;
+                this.VisualState = this.VisualState;//State
+            };
+                       
             this.RootBorder.Tapped += (s, e) =>
             {
-                if (this.IsChecked)
+                if (this._vsIsSelected)
                 {
                     this.GroupType = TouchbarType.None;
                 }

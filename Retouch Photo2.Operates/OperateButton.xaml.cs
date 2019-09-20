@@ -1,22 +1,29 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Elements
+namespace Retouch_Photo2.Operates
 {
-    public sealed partial class ExpandAppbarButton : UserControl, IExpandAppbarElement
+    /// <summary>
+    /// Retouch_Photo2 Operates 's Button.
+    /// </summary>
+    public sealed partial class OperateButton : UserControl
     {
         //@Content
-        public object CenterContent { get => this.ContentPresenter.Content; set => this.ContentPresenter.Content = value; }
-        public double ExpandWidth => 40.0d;
-        public FrameworkElement Self => this;
+        /// <summary> Enabled icon. </summary>
+        public UIElement EnabledIcon { get => this.EnabledViewbox.Child; set => this.EnabledViewbox.Child = value; }
+        /// <summary> Disabled icon. </summary>
+        public UIElement DisabledIcon { get => this.DisabledViewbox.Child; set => this.DisabledViewbox.Child = value; }
 
-
+               
         //@VisualState
+        bool _vsIsEnabled;
         ClickMode _vsClickMode;
         public VisualState VisualState
         {
             get
             {
+                if (this._vsIsEnabled==false) return this.Disabled;
+
                 switch (this._vsClickMode)
                 {
                     case ClickMode.Release: return this.Normal;
@@ -30,10 +37,20 @@ namespace Retouch_Photo2.Elements
 
 
         //@Construct
-        public ExpandAppbarButton()
+        public OperateButton()
         {
             this.InitializeComponent();
-            this.Width = this.ExpandWidth;
+            this.Loaded += (s, e) =>
+            {
+                this._vsIsEnabled = base.IsEnabled;
+                this.VisualState = this.VisualState;//State
+            };
+            this.IsEnabledChanged += (s, e) =>
+            {
+                this._vsIsEnabled = base.IsEnabled;
+                this.VisualState = this.VisualState;//State
+            };
+
             this.RootGrid.PointerEntered += (s, e) =>
             {
                 this._vsClickMode = ClickMode.Hover;

@@ -109,8 +109,6 @@
     <Compile Include="MenuButtons\MenuButton.xaml.cs">
       <DependentUpon>MenuButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MenuButtons\MenuButtonState.cs" />
-    <Compile Include="MenuButtons\MenuButtonStateManager.cs" />
     <Compile Include="IMenu.cs" />
     <Compile Include="MenuButtons\IMenuButton.cs" />
     <Compile Include="MenuLayouts\IMenuLayout.cs" />

@@ -67,24 +67,6 @@
                     </Storyboard>
                 </VisualState>
 
-                <VisualState x:Name="PointerOverSelected">
-                    <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AccentColor}" />
-                        </ObjectAnimationUsingKeyFrames>
-                        <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
-                    </Storyboard>
-                </VisualState>
-
-                <VisualState x:Name="PressedSelected">
-                    <Storyboard>
-                        <PointerDownThemeAnimation TargetName="ContentPresenter" />
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AccentColor}" />
-                        </ObjectAnimationUsingKeyFrames>
-                    </Storyboard>
-                </VisualState>
-
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         

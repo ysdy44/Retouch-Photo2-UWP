@@ -111,6 +111,7 @@
       <DependentUpon>CompositeModeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ApplicationViewTitleBarBackgroundExtension.cs" />
+    <Compile Include="DrawPages\DeviceLayoutType.cs" />
     <Compile Include="ExpandAppbars\ExpandAppbar.xaml.cs">
       <DependentUpon>ExpandAppbar.xaml</DependentUpon>
     </Compile>
@@ -121,7 +122,7 @@
       <DependentUpon>DrawLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="DrawPages\DrawLayoutState.cs" />
-    <Compile Include="DrawPages\DrawLayoutStateManager.cs" />
+    <Compile Include="DrawPages\PhoneLayoutType.cs" />
     <Compile Include="ExpandAppbars\ExpandAppbarRepeatButton.xaml.cs">
       <DependentUpon>ExpandAppbarRepeatButton.xaml</DependentUpon>
     </Compile>

@@ -13,23 +13,27 @@ namespace Retouch_Photo2.Effects
         /// <summary> EffectButton' ToggleSwitch. </summary>
         public ToggleSwitch ToggleSwitch => this._ToggleSwitch;
 
-        /// <summary> Manager of <see cref="EffectButton"/>. </summary>
-        EffectButtonStateManager Manager = new EffectButtonStateManager();
-        /// <summary> State of <see cref="EffectButton"/>. </summary>
-        EffectButtonState State
-        {
-            set
-            {
-                switch (value)
-                {
-                    case EffectButtonState.None: VisualStateManager.GoToState(this, this.Normal.Name, false); break;
-                    case EffectButtonState.PointerOver: VisualStateManager.GoToState(this, this.PointerOver.Name, false); break;
-                    case EffectButtonState.Pressed: VisualStateManager.GoToState(this, this.Pressed.Name, false); break;
 
-                    case EffectButtonState.Disabled: VisualStateManager.GoToState(this, this.Disabled.Name, false); break;
-                    case EffectButtonState.NonDisabled: VisualStateManager.GoToState(this, this.NonDisabled.Name, false); break;
+        //@VisualState
+        bool _vsIsEnabled;
+        bool _vsIsOn;
+        ClickMode _vsClickMode;
+        public VisualState VisualState
+        {
+            get
+            {
+                if (this._vsIsEnabled == false) return this.Disabled;
+                if (this._vsIsOn == false) return this.NonDisabled;
+
+                switch (this._vsClickMode)
+                {
+                    case ClickMode.Release: return this.Normal;
+                    case ClickMode.Hover: return this.PointerOver;
+                    case ClickMode.Press: return this.Pressed;
                 }
+                return this.Normal;
             }
+            set => VisualStateManager.GoToState(this, value.Name, false);
         }
 
 
@@ -37,33 +41,37 @@ namespace Retouch_Photo2.Effects
         public EffectButton()
         {
             this.InitializeComponent();
+            this.Loaded += (s, e) =>
+            {
+                this._vsIsEnabled = base.IsEnabled;
+                this.VisualState = this.VisualState;//State
+            };
+
             this.RootGrid.PointerEntered += (s, e) =>
             {
-                this.Manager.PointerState = EffectButtonStateManager.ButtonPointerState.PointerOver;
-                this.State = this.Manager.GetState();//State
+                this._vsClickMode = ClickMode.Hover;
+                this.VisualState = this.VisualState;//State
             };
             this.RootGrid.PointerPressed += (s, e) =>
             {
-                this.Manager.PointerState = EffectButtonStateManager.ButtonPointerState.Pressed;
-                this.State = this.Manager.GetState();//State
+                this._vsClickMode = ClickMode.Press;
+                this.VisualState = this.VisualState;//State
             };
             this.RootGrid.PointerExited += (s, e) =>
             {
-                this.Manager.PointerState = EffectButtonStateManager.ButtonPointerState.None;
-                this.State = this.Manager.GetState();//State
+                this._vsClickMode = ClickMode.Release;
+                this.VisualState = this.VisualState;//State
             };
-
-
-            this.Loaded += (s, e) => this.State = this.Manager.GetState();//State
+            
             this._ToggleSwitch.IsEnabledChanged += (s, e) =>
             {
-                this.Manager.IsEnabled = this._ToggleSwitch.IsEnabled;
-                this.State = this.Manager.GetState();//State
+                this._vsIsEnabled = this._ToggleSwitch.IsEnabled;
+                this._vsClickMode = ClickMode.Release;//State
             };
             this._ToggleSwitch.Toggled += (s, e) =>
             {
-                this.Manager.IsOn = this._ToggleSwitch.IsOn;
-                this.State = this.Manager.GetState();//State
+                this._vsIsOn = this._ToggleSwitch.IsOn;
+                this._vsClickMode = ClickMode.Release;//State
             };
         } 
     }

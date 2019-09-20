@@ -18,31 +18,29 @@ namespace Retouch_Photo2.Controls
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        
+
 
         //@Content
         public MenuTitle MenuTitle => this._MenuTitle;
 
 
-        /// <summary> Manager of <see cref="AdjustmentControlState"/>. </summary>
-        AdjustmentControlStateManager Manager = new AdjustmentControlStateManager();
-        /// <summary> State of <see cref="AdjustmentControl"/>. </summary>
-        AdjustmentControlState State
+        //@VisualState
+        bool _vsIsEdit;
+        bool _vsIsFilter;
+        List<IAdjustment> _vsAdjustments; 
+        public VisualState VisualState
         {
-            set
+            get
             {
-                switch (value)
-                {
-                    case AdjustmentControlState.None: VisualStateManager.GoToState(this, this.Normal.Name, false); break;
-                    case AdjustmentControlState.Disable: VisualStateManager.GoToState(this, this.Disable.Name, false); break;
+                if (this._vsIsEdit) return this.Edit;
+                if (this._vsIsFilter) return this.Filters;
 
-                    case AdjustmentControlState.ZeroAdjustments: VisualStateManager.GoToState(this, this.ZeroAdjustments.Name, false); break;
-                    case AdjustmentControlState.Adjustments: VisualStateManager.GoToState(this, this.Adjustments.Name, false); break;
-                        
-                    case AdjustmentControlState.Edit: VisualStateManager.GoToState(this, this.Edit.Name, false); break;
-                    case AdjustmentControlState.Filters: VisualStateManager.GoToState(this, this.Filters.Name, false); break;
-                }
+                if (this._vsAdjustments == null) return this.Disable;
+
+                if (this._vsAdjustments.Count == 0) return this.ZeroAdjustments;
+                else return this.Adjustments;
             }
+            set => VisualStateManager.GoToState(this, value.Name, false);
         }
 
 
@@ -93,16 +91,16 @@ namespace Retouch_Photo2.Controls
         {
             AdjustmentControl con = (AdjustmentControl)sender;
 
-            con.Manager.IsEdit = false;
-            con.Manager.IsFilter = false;
-            con.Manager.Adjustments = null;
+            con._vsIsEdit = false;
+            con._vsIsFilter = false;
+            con.Adjustments = null;
 
             if (e.NewValue is AdjustmentManager value)
             {
-                con.Manager.Adjustments = value.Adjustments;
+                con._vsAdjustments = value.Adjustments;
             }
 
-            con.State = con.Manager.GetState();//State
+            con.VisualState = con.VisualState;//State
         }));
 
         #endregion
@@ -112,7 +110,8 @@ namespace Retouch_Photo2.Controls
         public AdjustmentControl()
         {
             this.InitializeComponent();
-            this.State = AdjustmentControlState.Disable;
+            this.VisualState = this.VisualState;//State
+
             this.Loaded += async (s, e) =>
             {
                 if (this.AdjustmentPageListView.ItemsSource == null)
@@ -136,8 +135,8 @@ namespace Retouch_Photo2.Controls
             this.AddButton.Tapped += (s, e) => this.AdjustmentPageFlyout.ShowAt(this.AddButton);
             this.FilterButton.Tapped += (s, e) =>
             {
-                this.Manager.IsFilter = true;
-                this.State = this.Manager.GetState();//State
+                this._vsIsFilter = true;
+                this.VisualState = this.VisualState;//State
             };
 
 
@@ -153,9 +152,9 @@ namespace Retouch_Photo2.Controls
             {
                 this.Page = null;
 
-                this.Manager.IsEdit = false;
-                this.Manager.IsFilter = false;
-                this.State = this.Manager.GetState();//State
+                this._vsIsEdit = false;
+                this._vsIsFilter = false;
+                this.VisualState = this.VisualState;//State
             };
 
 
@@ -172,8 +171,8 @@ namespace Retouch_Photo2.Controls
                         IAdjustment _new = item.GetNewAdjustment();
                         layer.AdjustmentManager.Adjustments.Add(_new);//Add
 
-                        this.Manager.Adjustments = layer.AdjustmentManager.Adjustments;
-                        this.State = this.Manager.GetState();//State
+                        this._vsAdjustments = layer.AdjustmentManager.Adjustments;
+                        this.VisualState = this.VisualState;//State
 
                         this.InvalidateItemsControl();//Invalidate
                         this.ViewModel.Invalidate();//Invalidate
@@ -196,8 +195,8 @@ namespace Retouch_Photo2.Controls
                         layer.AdjustmentManager.Adjustments.Clear();//Clear
                         layer.AdjustmentManager.Adjustments.AddRange(clones);//Add
                         
-                        this.Manager.Adjustments = layer.AdjustmentManager.Adjustments;
-                        this.State = this.Manager.GetState();//State
+                        this._vsAdjustments = layer.AdjustmentManager.Adjustments;
+                        this.VisualState = this.VisualState;//State
 
                         this.InvalidateItemsControl();//Invalidate
                         this.ViewModel.Invalidate();//Invalidate     
@@ -217,8 +216,8 @@ namespace Retouch_Photo2.Controls
             if (adjustment == null) return;
             if (adjustment.PageVisibility == Visibility.Collapsed) return;
 
-            this.Manager.IsEdit = true;
-            this.State = this.Manager.GetState();//State
+            this._vsIsEdit = true;
+            this.VisualState = this.VisualState;//State
 
             AdjustmentType type = adjustment.Type;
             IAdjustmentPage adjustmentPage = this.PageList.First(page => page.Type == type);
@@ -236,8 +235,8 @@ namespace Retouch_Photo2.Controls
             {
                 layer.AdjustmentManager.Adjustments.Remove(adjustment);//Remove
 
-                this.Manager.Adjustments = layer.AdjustmentManager.Adjustments;
-                this.State = this.Manager.GetState();//State
+                this._vsAdjustments = layer.AdjustmentManager.Adjustments;
+                this.VisualState = this.VisualState;//State
 
                 this.InvalidateItemsControl();//Invalidate
                 this.ViewModel.Invalidate();//Invalidate   
@@ -251,10 +250,10 @@ namespace Retouch_Photo2.Controls
         /// </summary>
         private void InvalidateItemsControl()
         {
-            if (this.Manager.Adjustments == null) return;
+            if (this._vsAdjustments == null) return;
 
             this.ItemsControl.ItemsSource = null;
-            this.ItemsControl.ItemsSource = this.Manager.Adjustments;
+            this.ItemsControl.ItemsSource = this._vsAdjustments;
         }
 
 

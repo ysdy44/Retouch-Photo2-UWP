@@ -1,6 +1,6 @@
-﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.Tools.Models;
+﻿using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Touchbars
@@ -11,7 +11,7 @@ namespace Retouch_Photo2.Tools.Touchbars
         ViewModel ViewModel => App.ViewModel;
 
         public TouchbarType Type => TouchbarType.ViewRadian;
-        public UserControl Self => this;
+        public UIElement Self => this;
 
         //@Converter
         private int NumberConverter(float radian) => (int)ViewRadianConverter.RadianToNumber(radian);

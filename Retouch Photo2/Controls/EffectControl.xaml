@@ -13,6 +13,30 @@
 
 
     <Grid>
+        
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
+
+                <!--Edit-->
+                <VisualState x:Name="Edit">
+                    <VisualState.Setters>
+
+                        <Setter Target = "_MenuTitle.IsSecondPage" Value="true"/>
+
+                        <Setter Target = "StackPanel.Visibility" Value="Collapsed"/>
+                        <Setter Target = "EffectBoder.Visibility" Value="Visible"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*" MinHeight="165"/>
@@ -37,7 +61,7 @@
             </StackPanel.Children>
 
         </StackPanel>
-        <Border x:Name="EffectBoder" Grid.ColumnSpan="3" Grid.Row="1" Background="Transparent">
+        <Border x:Name="EffectBoder" Visibility="Collapsed" Grid.ColumnSpan="3" Grid.Row="1" Background="Transparent">
 
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>

@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools
 {
@@ -11,6 +12,6 @@ namespace Retouch_Photo2.Tools
         TouchbarType Type { get; }
 
         /// <summary> Gets it yourself. </summary>
-        UserControl Self { get; }
+        UIElement Self { get; }
     }
 }

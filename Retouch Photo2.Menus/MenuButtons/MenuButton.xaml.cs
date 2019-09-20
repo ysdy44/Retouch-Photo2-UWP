@@ -11,30 +11,50 @@ namespace Retouch_Photo2.Menus
         //@Content 
         /// <summary> ContentPresenter's Content. </summary>
         public object CenterContent { set => this.ContentPresenter.Content = value; get => this.ContentPresenter.Content; }
-
-
-        /// <summary> Manager of <see cref="MenuButton"/>. </summary>
-        MenuButtonStateManager Manager = new MenuButtonStateManager();
-        /// <summary> State of <see cref="MenuButton"/>. </summary>
-        MenuButtonState State
+        /// <summary> MenuButton's MenuState. </summary>
+        public MenuState MenuState
         {
             set
             {
-                switch (value)
-                {
-                    case MenuButtonState.None: VisualStateManager.GoToState(this, this.Normal.Name, false); break;
-                    case MenuButtonState.PointerOver: VisualStateManager.GoToState(this, this.PointerOver.Name, false); break;
-                    case MenuButtonState.Pressed: VisualStateManager.GoToState(this, this.Pressed.Name, false); break;
-
-                    case MenuButtonState.Flyout: VisualStateManager.GoToState(this, this.Flyout.Name, false); break;
-
-                    case MenuButtonState.Overlay: VisualStateManager.GoToState(this, this.Overlay.Name, false); break;
-                    case MenuButtonState.PointerOverOverlay: VisualStateManager.GoToState(this, this.PointerOverOverlay.Name, false); break;
-                    case MenuButtonState.PressedOverlay: VisualStateManager.GoToState(this, this.PressedOverlay.Name, false); break;
-                }
+                this._vsMenuState = value;
+                this.VisualState = this.VisualState;//State         
             }
         }
 
+
+        //@VisualState
+        MenuState _vsMenuState;
+        ClickMode _vsClickMode;
+        public VisualState VisualState
+        {
+            get
+            {
+                if (this._vsMenuState == MenuState.FlyoutShow) return this.Flyout;
+
+                if (this._vsMenuState == MenuState.FlyoutHide)
+                {
+                    switch (this._vsClickMode)
+                    {
+                        case ClickMode.Release: return this.Normal;
+                        case ClickMode.Hover: return this.PointerOver;
+                        case ClickMode.Press: return this.Pressed;
+                    }
+                }
+
+                if (this._vsMenuState == MenuState.OverlayExpanded || this._vsMenuState == MenuState.OverlayNotExpanded)
+                {
+                    switch (this._vsClickMode)
+                    {
+                        case ClickMode.Release: return this.Overlay;
+                        case ClickMode.Hover: return this.PointerOverOverlay;
+                        case ClickMode.Press: return this.PressedOverlay;
+                    }
+                }
+                return this.Normal;
+            }
+            set => VisualStateManager.GoToState(this, value.Name, false);
+        }
+                     
 
         //@Construct
         public MenuButton()
@@ -42,26 +62,19 @@ namespace Retouch_Photo2.Menus
             this.InitializeComponent();
             this.RootGrid.PointerEntered += (s, e) =>
             {
-                this.Manager.PointerState = MenuButtonStateManager.ButtonPointerState.PointerOver;
-                this.State = this.Manager.GetState();//State
+                this._vsClickMode = ClickMode.Hover;
+                this.VisualState = this.VisualState;//State
             };
             this.RootGrid.PointerPressed += (s, e) =>
             {
-                this.Manager.PointerState = MenuButtonStateManager.ButtonPointerState.Pressed;
-                this.State = this.Manager.GetState();//State
+                this._vsClickMode = ClickMode.Press;
+                this.VisualState = this.VisualState;//State
             };
             this.RootGrid.PointerExited += (s, e) =>
             {
-                this.Manager.PointerState = MenuButtonStateManager.ButtonPointerState.None;
-                this.State = this.Manager.GetState();//State
+                this._vsClickMode = ClickMode.Release;
+                this.VisualState = this.VisualState;//State
             };
-        }
-
-        
-        public void SetMenuState(MenuState state)
-        {
-            this.Manager.MenuState = state;
-            this.State = this.Manager.GetState();//State
-        }
+        }        
     }
 }

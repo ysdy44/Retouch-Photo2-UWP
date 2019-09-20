@@ -14,55 +14,55 @@ namespace Retouch_Photo2.Tools
         {
             set
             {
-                if (this.Manager.IsSelected == value) return;
+                if (this._vsIsSelected == value) return;
 
-                this.Manager.IsSelected = value;
-                this.State = this.Manager.GetState();
+                this._vsIsSelected = value;
+                this.VisualState = this.VisualState;//State
             }
         }
         /// <summary> ContentPresenter's Content. </summary>
         public object CenterContent { set => this.ContentPresenter.Content = value; get => this.ContentPresenter.Content; }
 
-        
-        /// <summary> Manager of <see cref="ToolButton"/>. </summary>
-        ToolButtonStateManager Manager = new ToolButtonStateManager();
-        /// <summary> State of <see cref="ToolButton"/>. </summary>
-        ToolButtonState State
-        {
-            set
-            {
-                switch (value)
-                {
-                    case ToolButtonState.None: VisualStateManager.GoToState(this, this.Normal.Name, false); break;
-                    case ToolButtonState.PointerOver: VisualStateManager.GoToState(this, this.PointerOver.Name, false); break;
-                    case ToolButtonState.Pressed: VisualStateManager.GoToState(this, this.Pressed.Name, false); break;
 
-                    case ToolButtonState.Selected: VisualStateManager.GoToState(this, this.Selected.Name, false); break;
-                    case ToolButtonState.PointerOverSelected: VisualStateManager.GoToState(this, this.PointerOverSelected.Name, false); break;
-                    case ToolButtonState.PressedSelected: VisualStateManager.GoToState(this, this.PressedSelected.Name, false); break;
+        //@VisualState
+        bool _vsIsSelected;
+        ClickMode _vsClickMode;
+        public VisualState VisualState
+        {
+            get
+            {
+                if (this._vsIsSelected) return this.Selected;
+
+                switch (this._vsClickMode)
+                {
+                    case ClickMode.Release: return this.Normal;
+                    case ClickMode.Hover: return this.PointerOver;
+                    case ClickMode.Press: return this.Pressed;
                 }
+                return this.Normal;
             }
+            set => VisualStateManager.GoToState(this, value.Name, false);
         }
 
-
+               
         //@Construct
         public ToolButton()
         {
             this.InitializeComponent();
             this.ContentPresenter.PointerEntered += (s, e) =>
             {
-                this.Manager.PointerState = ToolButtonStateManager.ButtonPointerState.PointerOver;
-                this.State = this.Manager.GetState();//State
+                this._vsClickMode = ClickMode.Hover;
+                this.VisualState = this.VisualState;//State
             };
             this.ContentPresenter.PointerPressed += (s, e) =>
             {
-                this.Manager.PointerState = ToolButtonStateManager.ButtonPointerState.Pressed;
-                this.State = this.Manager.GetState();//State
+                this._vsClickMode = ClickMode.Press;
+                this.VisualState = this.VisualState;//State
             };
             this.ContentPresenter.PointerExited += (s, e) =>
             {
-                this.Manager.PointerState = ToolButtonStateManager.ButtonPointerState.None;
-                this.State = this.Manager.GetState();//State
+                this._vsClickMode = ClickMode.Release;
+                this.VisualState = this.VisualState;//State
             };
         }
     }

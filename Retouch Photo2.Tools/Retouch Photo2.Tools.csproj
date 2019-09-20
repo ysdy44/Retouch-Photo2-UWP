@@ -119,8 +119,6 @@
       <DependentUpon>ToolButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="ToolButtons\IToolButton.cs" />
-    <Compile Include="ToolButtons\ToolButtonState.cs" />
-    <Compile Include="ToolButtons\ToolButtonStateManager.cs" />
     <Compile Include="Icons\AcrylicIcon.xaml.cs">
       <DependentUpon>AcrylicIcon.xaml</DependentUpon>
     </Compile>

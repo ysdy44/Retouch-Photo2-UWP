@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Windows.UI.Xaml.Controls;
 using System.Linq;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -22,17 +23,33 @@ namespace Retouch_Photo2.ViewModels
 
                 ITouchbar touchbar = this.Touchbars.FirstOrDefault(t => t.Type == value);
 
-                this.Touchbar = touchbar;
-                this.OnPropertyChanged(nameof(this.Touchbar));//Notify 
-
+                if (touchbar==null)
+                {
+                    this.TouchbarControl = null;
+                }
+                else
+                {
+                    this.TouchbarControl = touchbar.Self;
+                }
+ 
                 this.touchbarType = value;
                 this.OnPropertyChanged(nameof(this.TouchbarType));//Notify 
             }
         }
         private TouchbarType touchbarType;
 
-        /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.Tools.ITouchbar" />. </summary>
-        public ITouchbar Touchbar { get; set; }
+        /// <summary> Touchbar's control. </summary>
+        public UIElement TouchbarControl
+        {
+
+            get => this.touchbarControl;
+            set
+            {
+                this.touchbarControl = value;
+                this.OnPropertyChanged(nameof(this.TouchbarControl));//Notify 
+            }
+        }
+        private UIElement touchbarControl;
 
         /// <summary> Touchbars. </summary>
         public IList<ITouchbar> Touchbars { get; set; } = new List<ITouchbar>();

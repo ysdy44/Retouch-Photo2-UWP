@@ -178,11 +178,9 @@
     <Compile Include="ArrangeIcons\MoveFrontEnabledIcon.xaml.cs">
       <DependentUpon>MoveFrontEnabledIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OperateButtons\OperateButton.xaml.cs">
+    <Compile Include="OperateButton.xaml.cs">
       <DependentUpon>OperateButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OperateButtons\OperateButtonState.cs" />
-    <Compile Include="OperateButtons\OperateButtonStateManager.cs" />
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
@@ -315,7 +313,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="OperateButtons\OperateButton.xaml">
+    <Page Include="OperateButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

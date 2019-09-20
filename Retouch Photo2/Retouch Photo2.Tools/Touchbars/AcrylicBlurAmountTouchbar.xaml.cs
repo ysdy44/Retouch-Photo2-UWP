@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Touchbars
@@ -11,7 +12,7 @@ namespace Retouch_Photo2.Tools.Touchbars
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         public TouchbarType Type => TouchbarType.AcrylicBlurAmount;
-        public UserControl Self => this;
+        public UIElement Self => this;
 
         //@Converter
         private int NumberConverter(float blurAmount) => (int)blurAmount;

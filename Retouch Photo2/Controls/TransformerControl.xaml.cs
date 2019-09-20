@@ -9,6 +9,21 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Controls
 {
+    /// <summary> 
+    /// State of <see cref="TransformerControl"/>. 
+    /// </summary>
+    public enum TransformerControlState
+    {
+        /// <summary> Enabled. </summary>
+        Enabled,
+        
+        /// <summary> Disabled radian. </summary>
+        EnabledWithoutRadian,
+
+        /// <summary> Disabled. </summary>
+        Disabled
+    }
+
     /// <summary>
     /// Retouch_Photo2's the only <see cref = "TransformerControl" />. 
     /// </summary>
@@ -30,135 +45,45 @@ namespace Retouch_Photo2.Controls
         private bool IsOpenConverter(bool isOpen) => isOpen && this.IsOverlayExpanded && this.IsSecondPage;
         public bool IsOverlayExpanded { private get; set; }
 
-
-        //RemoteOrIndicator
         public bool IsSecondPage
         {
-            get => this.isSecondPage;
+            get => this._MenuTitle.IsSecondPage;
             set
             {
-                this._MenuTitle.IsSecondPage = value;
-                this.FitstGrid.Visibility = value ? Visibility.Collapsed : Visibility.Visible; 
-                this.SecondGird.Visibility = value ? Visibility.Visible : Visibility.Collapsed; 
+                this.FitstGrid.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
+                this.SecondGird.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
 
-                this.isSecondPage = value;
+                this._MenuTitle.IsSecondPage = value;
             }
         }
-        private bool isSecondPage;
+        
 
-
-        #region DependencyProperty
-
-
-        /// <summary> Gets or sets <see cref = "TransformerControl" />'s tool. </summary>
-        public ITool Tool
+        //@VisualState
+        bool _vsDisabledTool;
+        bool _vsDisabledRadian;
+        Transformer _vsTransformer;
+        ListViewSelectionMode _vsMode;
+        public TransformerControlState VisualState
         {
-            get { return (ITool)GetValue(ToolProperty); }
-            set { SetValue(ToolProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "TransformerControl.Tool" /> dependency property. </summary>
-        public static readonly DependencyProperty ToolProperty = DependencyProperty.Register(nameof(Tool), typeof(ITool), typeof(TransformerControl), new PropertyMetadata(null, (sender, e) =>
-        {
-            TransformerControl con = (TransformerControl)sender;
-
-            if (e.NewValue is ITool value)
+            get
             {
-                switch (value.Type)
+                if (this._vsDisabledTool) return TransformerControlState.Disabled;
+
+                switch (this._vsMode)
                 {
-                    case ToolType.Cursor:
-                    case ToolType.View:
-                    case ToolType.Rectangle:
-                    case ToolType.Ellipse:
-                    case ToolType.Acrylic:
+                    case ListViewSelectionMode.None: return TransformerControlState.Disabled;
+                    case ListViewSelectionMode.Single:
+                    case ListViewSelectionMode.Multiple:
                         {
-                            con.Manager.DisabledTool = false;
-                            con.State = con.Manager.GetState();
-                            return;
+                            if (this._vsDisabledRadian)
+                                return TransformerControlState.EnabledWithoutRadian;
+                            else
+                                return TransformerControlState.Enabled;
                         }
                 }
+
+                return TransformerControlState.Enabled;
             }
-
-            con.Manager.DisabledTool = true;
-            con.State = con.Manager.GetState();
-            return;
-        }));
-
-
-        /// <summary> Gets or sets <see cref = "TransformerControl" />'s IsRatio. </summary>
-        public bool IsRatio
-        {
-            get { return (bool)GetValue(IsRatioProperty); }
-            set { SetValue(IsRatioProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "TransformerControl.IsRatio" /> dependency property. </summary>
-        public static readonly DependencyProperty IsRatioProperty = DependencyProperty.Register(nameof(IsRatio), typeof(bool), typeof(TransformerControl), new PropertyMetadata(false));
-
-
-        /// <summary> Gets or sets <see cref = "TransformerControl" />'s selection mode. </summary>
-        public ListViewSelectionMode Mode
-        {
-            get { return (ListViewSelectionMode)GetValue(ModeProperty); }
-            set { SetValue(ModeProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "TransformerControl.Mode" /> dependency property. </summary>
-        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(ListViewSelectionMode), typeof(TransformerControl), new PropertyMetadata(ListViewSelectionMode.None, (sender, e) =>
-        {
-            TransformerControl con = (TransformerControl)sender;
-
-            if (e.NewValue is ListViewSelectionMode value)
-            {
-                con.Manager.Mode = value;
-                con.State = con.Manager.GetState();
-            }
-        }));
-
-
-        /// <summary> Gets or sets <see cref = "TransformerControl" />'s transformer. </summary>
-        public Transformer Transformer
-        {
-            get { return (Transformer)GetValue(TransformerProperty); }
-            set { SetValue(TransformerProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "TransformerControl.Transformer" /> dependency property. </summary>
-        public static readonly DependencyProperty TransformerProperty = DependencyProperty.Register(nameof(Transformer), typeof(Transformer), typeof(TransformerControl), new PropertyMetadata(new Transformer(), (sender, e) =>
-        {
-            TransformerControl con = (TransformerControl)sender;
-
-            con.State = con.Manager.GetState();
-        }));
-
-
-
-        public bool DisabledRadian
-        {
-            get { return (bool)GetValue(DisabledRadianProperty); }
-            set { SetValue(DisabledRadianProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "TransformerControl.DisabledRadian" /> dependency property. </summary>
-        public static readonly DependencyProperty DisabledRadianProperty = DependencyProperty.Register(nameof(DisabledRadian), typeof(bool), typeof(TransformerControl), new PropertyMetadata(false, (sender, e) =>
-        {
-            TransformerControl con = (TransformerControl)sender;
-
-            if (e.NewValue is bool value)
-            {
-                con.Manager.DisabledRadian = value;
-                con.State = con.Manager.GetState();
-            }
-        }));
-
-
-        #endregion
-
-        
-        Transformer oldTransformer;
-        IndicatorMode IndicatorMode = IndicatorMode.LeftTop;
-
-
-        /// <summary> Manager of <see cref="TransformerControlState"/>. </summary>
-        TransformerControlStateManager Manager = new TransformerControlStateManager();
-        /// <summary> State of <see cref="TransformerControl"/>. </summary>
-        TransformerControlState State
-        {
             set
             {
                 switch (value)
@@ -167,8 +92,8 @@ namespace Retouch_Photo2.Controls
                         {
                             //Value
                             {
-                                Vector2 horizontal = this.Transformer.Horizontal;
-                                Vector2 vertical = this.Transformer.Vertical;
+                                Vector2 horizontal = this._vsTransformer.Horizontal;
+                                Vector2 vertical = this._vsTransformer.Vertical;
 
                                 //Radians
                                 float radians = this.GetRadians(horizontal);
@@ -211,8 +136,8 @@ namespace Retouch_Photo2.Controls
                         {
                             //Value
                             {
-                                Vector2 horizontal = this.Transformer.Horizontal;
-                                Vector2 vertical = this.Transformer.Vertical;
+                                Vector2 horizontal = this._vsTransformer.Horizontal;
+                                Vector2 vertical = this._vsTransformer.Vertical;
 
                                 //Radians
                                 this.RPicker.Value = 0;
@@ -292,6 +217,118 @@ namespace Retouch_Photo2.Controls
         }
 
 
+
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets <see cref = "TransformerControl" />'s tool. </summary>
+        public ITool Tool
+        {
+            get { return (ITool)GetValue(ToolProperty); }
+            set { SetValue(ToolProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "TransformerControl.Tool" /> dependency property. </summary>
+        public static readonly DependencyProperty ToolProperty = DependencyProperty.Register(nameof(Tool), typeof(ITool), typeof(TransformerControl), new PropertyMetadata(null, (sender, e) =>
+        {
+            TransformerControl con = (TransformerControl)sender;
+
+            if (e.NewValue is ITool value)
+            {
+                switch (value.Type)
+                {
+                    case ToolType.Cursor:
+                    case ToolType.View:
+                    case ToolType.Rectangle:
+                    case ToolType.Ellipse:
+                    case ToolType.Acrylic:
+                        {
+                            con._vsDisabledTool = false;
+                            con.VisualState = con.VisualState;//State
+                            return;
+                        }
+                }
+            }
+
+            con._vsDisabledTool = true;
+            con.VisualState = con.VisualState;//State
+            return;
+        }));
+
+
+        /// <summary> Gets or sets <see cref = "TransformerControl" />'s IsRatio. </summary>
+        public bool IsRatio
+        {
+            get { return (bool)GetValue(IsRatioProperty); }
+            set { SetValue(IsRatioProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "TransformerControl.IsRatio" /> dependency property. </summary>
+        public static readonly DependencyProperty IsRatioProperty = DependencyProperty.Register(nameof(IsRatio), typeof(bool), typeof(TransformerControl), new PropertyMetadata(false));
+
+
+        /// <summary> Gets or sets <see cref = "TransformerControl" />'s selection mode. </summary>
+        public ListViewSelectionMode Mode
+        {
+            get { return (ListViewSelectionMode)GetValue(ModeProperty); }
+            set { SetValue(ModeProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "TransformerControl.Mode" /> dependency property. </summary>
+        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(ListViewSelectionMode), typeof(TransformerControl), new PropertyMetadata(ListViewSelectionMode.None, (sender, e) =>
+        {
+            TransformerControl con = (TransformerControl)sender;
+
+            if (e.NewValue is ListViewSelectionMode value)
+            {
+                con._vsMode = value;
+                con.VisualState = con.VisualState;//State
+            }
+        }));
+
+
+        /// <summary> Gets or sets <see cref = "TransformerControl" />'s transformer. </summary>
+        public Transformer Transformer
+        {
+            get { return (Transformer)GetValue(TransformerProperty); }
+            set { SetValue(TransformerProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "TransformerControl.Transformer" /> dependency property. </summary>
+        public static readonly DependencyProperty TransformerProperty = DependencyProperty.Register(nameof(Transformer), typeof(Transformer), typeof(TransformerControl), new PropertyMetadata(new Transformer(), (sender, e) =>
+        {
+            TransformerControl con = (TransformerControl)sender;
+
+            if (e.NewValue is Transformer value)
+            {
+                con._vsTransformer = value;
+                con.VisualState = con.VisualState;//State
+            }
+        }));
+
+
+
+        public bool DisabledRadian
+        {
+            get { return (bool)GetValue(DisabledRadianProperty); }
+            set { SetValue(DisabledRadianProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "TransformerControl.DisabledRadian" /> dependency property. </summary>
+        public static readonly DependencyProperty DisabledRadianProperty = DependencyProperty.Register(nameof(DisabledRadian), typeof(bool), typeof(TransformerControl), new PropertyMetadata(false, (sender, e) =>
+        {
+            TransformerControl con = (TransformerControl)sender;
+
+            if (e.NewValue is bool value)
+            {
+                con._vsDisabledRadian = value;
+                con.VisualState = con.VisualState;//State
+            }
+        }));
+
+
+        #endregion
+
+        
+        Transformer oldTransformer;
+        IndicatorMode IndicatorMode = IndicatorMode.LeftTop;
+
+
         //@Construct
         public TransformerControl()
         {
@@ -367,14 +404,13 @@ namespace Retouch_Photo2.Controls
             this.IndicatorControl.ModeChanged += (s, mode) =>
             {
                 {
-                    IndicatorMode newMode = mode;
-                    IndicatorMode oldMode = this.IndicatorMode;
+                    IndicatorMode startingMode = this.IndicatorMode;
 
-                    HorizontalAlignment newHorizontal = this.GetHorizontalAlignmentFormIndicatorMode(newMode);
-                    HorizontalAlignment oldHorizontal = this.GetHorizontalAlignmentFormIndicatorMode(oldMode);
+                    HorizontalAlignment newHorizontal = this.GetHorizontalAlignmentFormIndicatorMode(mode);
+                    HorizontalAlignment oldHorizontal = this.GetHorizontalAlignmentFormIndicatorMode(startingMode);
 
-                    VerticalAlignment newVertical = this.GetVerticalAlignmentFormIndicatorMode(newMode);
-                    VerticalAlignment oldVertical = this.GetVerticalAlignmentFormIndicatorMode(oldMode);
+                    VerticalAlignment newVertical = this.GetVerticalAlignmentFormIndicatorMode(mode);
+                    VerticalAlignment oldVertical = this.GetVerticalAlignmentFormIndicatorMode(startingMode);
 
                     if (newHorizontal != oldHorizontal) this.XEaseStoryboard.Begin();//Storyboard
                     if (newVertical != oldVertical) this.YEaseStoryboard.Begin();//Storyboard
