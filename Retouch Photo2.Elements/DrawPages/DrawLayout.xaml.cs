@@ -2,7 +2,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Elements.DrawPages
+namespace Retouch_Photo2.Elements
 {
     /// <summary> 
     /// <see cref = "DrawPage" />'s layout. 
@@ -141,12 +141,12 @@ namespace Retouch_Photo2.Elements.DrawPages
 
         //@VisualState
         bool _vsIsFullScreen;
+        double _vsScreenWidth;
         PhoneLayoutType _vsPhoneType= PhoneLayoutType.Hided;
 
-        DeviceLayoutType _vsDeviceType = DeviceLayoutType.Adaptive;
-        double _vsScreenWidth;
-        double _vsPhoneMaxWidth = 600.0;
-        double _vsPadMaxWidth = 900.0;
+        public DeviceLayoutType VisualStateDeviceType = DeviceLayoutType.Adaptive;
+        public double VisualStatePhoneMaxWidth = 600.0;
+        public double VisualStatePadMaxWidth = 900.0;
 
         public VisualState VisualState
         {
@@ -156,7 +156,7 @@ namespace Retouch_Photo2.Elements.DrawPages
 
                 if (this._vsIsFullScreen) return this.FullScreen;
 
-                switch (this._vsDeviceType)
+                switch (this.VisualStateDeviceType)
                 {
                     case DeviceLayoutType.PC: return this.PC;
                     case DeviceLayoutType.Pad: return this.Pad;
@@ -164,8 +164,8 @@ namespace Retouch_Photo2.Elements.DrawPages
                     case DeviceLayoutType.Adaptive:
                         {
                             double width = this._vsScreenWidth;
-                            if (width > this._vsPadMaxWidth) return this.PC;
-                            if (width > this._vsPhoneMaxWidth) return this.Pad;
+                            if (width > this.VisualStatePadMaxWidth) return this.PC;
+                            if (width > this.VisualStatePhoneMaxWidth) return this.Pad;
                         }
                         break;
                 }

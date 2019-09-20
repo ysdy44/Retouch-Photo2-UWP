@@ -14,23 +14,11 @@ using System.Linq;
 
 namespace Retouch_Photo2.ViewModels
 {
-    /// <summary> Mode of the <see cref = "ViewModel.Invalidate" />. </summary>
-    public enum InvalidateMode
-    {
-        /// <summary> Normal </summary>
-        None,
-        /// <summary> Thumbnail </summary>
-        Thumbnail,
-        /// <summary> High-definition </summary>
-        HD,
-    }
-
     /// <summary> 
     /// Retouch_Photo2's the only <see cref = "ViewModel" />.
     /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
-
         /// <summary>
         /// Reload <see cref = "ViewModel" /> 
         /// </summary>

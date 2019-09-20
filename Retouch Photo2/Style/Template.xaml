@@ -11,5 +11,22 @@
     <DataTemplate x:Name="AppColumnSeparator">
         <Rectangle Width="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
     </DataTemplate>
+
+    <!--ListView Header-->
+    <DataTemplate x:Name="AppListViewBaseHeader">
+        <Border Height="50">
+            <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center"              
+                            Content="~no more~" FontSize="14" FontFamily="Forte" 
+                               Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}"/>
+        </Border>
+    </DataTemplate>
+    <!--ListView Footer-->
+    <DataTemplate x:Name="AppListViewBaseFooter" >
+        <Border Height="50">
+            <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Content="~end~" FontSize="20" FontFamily="Forte" 
+                               Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}"/>
+        </Border>
+    </DataTemplate>
     
 </ResourceDictionary>

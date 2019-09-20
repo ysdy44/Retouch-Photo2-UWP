@@ -9,19 +9,6 @@ namespace Retouch_Photo2.ViewModels
     public partial class ViewModel : INotifyPropertyChanged
     {
 
-        /// <summary> Sets or Gets the on state of the theme on the canvas. </summary>
-        public ElementTheme CanvasTheme
-        {
-            get => this.canvasTheme;
-            set
-            {
-                if (this.canvasTheme == value) return;
-                this.canvasTheme = value;
-                this.OnPropertyChanged(nameof(this.CanvasTheme));//Notify 
-            }
-        }
-        private ElementTheme canvasTheme;
-
         /// <summary> Sets or Gets the on state of the ruler on the canvas. </summary>
         public bool CanvasRulerVisible
         {

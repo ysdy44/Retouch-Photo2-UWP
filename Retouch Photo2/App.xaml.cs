@@ -20,13 +20,16 @@ namespace Retouch_Photo2
         public static ViewModel ViewModel = new ViewModel();
 
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.KeyboardViewModel" />. </summary>
-        public static KeyboardViewModel KeyboardViewModel = new KeyboardViewModel();
+        public static KeyboardViewModel KeyboardViewModel= new KeyboardViewModel();
 
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.SelectionViewModel" />. </summary>
-        public static SelectionViewModel SelectionViewModel = new SelectionViewModel();
+        public static SelectionViewModel SelectionViewModel= new SelectionViewModel();
 
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.MezzanineViewModel" />. </summary>
         public static MezzanineViewModel MezzanineViewModel = new MezzanineViewModel();
+
+        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.SettingViewModel" />. </summary>
+        public static SettingViewModel SettingViewModel = new SettingViewModel();
 
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.TipViewModel" />. </summary>
         public static TipViewModel TipViewModel = new TipViewModel(new NoneTool())
@@ -37,6 +40,7 @@ namespace Retouch_Photo2
             //Tool
             Tools = new List<ITool>
             {
+                /*
                  new NoneTool(),
                  new CursorTool(),
                  new ViewTool(),
@@ -46,21 +50,25 @@ namespace Retouch_Photo2
                  new PenTool(),
                  new ImageTool(),
                  new AcrylicTool(),
+                 */
             },
 
             //Touchbar
             Touchbars = new List<ITouchbar>
             {
+                /*
                 new StrokeWidthTouchbar(),
                 new ViewRadianTouchbar(),
                 new ViewScaleTouchbar(),
                 new AcrylicTintOpacityTouchbar(),
                 new AcrylicBlurAmountTouchbar(),
+                 */
             },
 
             //Menu
             Menus = new List<IMenu>
             {
+                /*
                 new DebugMenu(),
                 new SelectionMenu(),
                 new OperateMenu(),
@@ -70,6 +78,7 @@ namespace Retouch_Photo2
                 new ColorMenu(),
                 new ToolMenu(),
                 new LayerMenu(),
+                 */
             },
         };
 

@@ -106,7 +106,8 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="FilterHelper.cs" />
+    <Compile Include="IFilterFactory.cs" />
+    <Compile Include="FilterFactory.cs" />
     <Compile Include="IAdjustment.cs" />
     <Compile Include="IAdjustmentPage.cs" />
     <Compile Include="Filter.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IFilter.cs" />
     <Compile Include="Models\BrightnessAdjustment.cs" />
     <Compile Include="Models\ContrastAdjustment.cs" />
     <Compile Include="Models\ExposureAdjustment.cs" />
@@ -302,6 +304,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Retouch Photo2.Elements\Retouch Photo2.Elements.csproj">
+      <Project>{0E5AC58E-36BF-44FE-877E-830F024B7109}</Project>
+      <Name>Retouch Photo2.Elements</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

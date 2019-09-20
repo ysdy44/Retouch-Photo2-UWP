@@ -1,4 +1,4 @@
-﻿using Retouch_Photo2.Elements.DrawPages;
+﻿using Retouch_Photo2.Elements;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
@@ -18,6 +18,7 @@ namespace Retouch_Photo2
         ViewModel ViewModel => App.ViewModel;
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
         //@Converter
@@ -28,14 +29,27 @@ namespace Retouch_Photo2
         public DrawPage()
         {
             this.InitializeComponent();
-            this.Loaded += (s, e) => this.ThemeControl.ApplicationTheme = App.Current.RequestedTheme;
 
             //Appbar
             this.DrawLayout.BackButton.Tapped += (s, e) => this.Frame.GoBack();
             this.SaveButton.Tapped += (s, e) => this.Frame.GoBack();
 
-            this.ThemeButton.Tapped += (s, e) => this.ThemeControl.Toggle();
-            
+            this.ThemeButton.Loaded += (s, e) =>
+            {
+                ElementTheme theme = this.SettingViewModel.ElementTheme;
+                this.ThemeControl.Theme = theme;
+            };
+            this.ThemeButton.Tapped += (s, e) =>
+            {
+                //Trigger switching theme.
+                ElementTheme theme = this.ThemeControl.Theme;
+                theme = (theme == ElementTheme.Dark) ? ElementTheme.Light : ElementTheme.Dark;
+
+                this.ThemeControl.Theme = theme;
+                ApplicationViewTitleBarBackgroundExtension.SetTheme(theme);
+            };
+
+
             //FullScreen
             this.UnFullScreenButton.Tapped += (s, e) => this.DrawLayout.IsFullScreen = !DrawLayout.IsFullScreen;
             this.FullScreenButton.Tapped += (s, e) => this.DrawLayout.IsFullScreen = !this.DrawLayout.IsFullScreen;
@@ -146,6 +160,12 @@ namespace Retouch_Photo2
         //The current page becomes the active page
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            //Setting
+            this.DrawLayout.VisualStateDeviceType = this.SettingViewModel.LayoutDeviceType;
+            this.DrawLayout.VisualStatePhoneMaxWidth = this.SettingViewModel.LayoutPhoneMaxWidth;
+            this.DrawLayout.VisualStatePadMaxWidth = this.SettingViewModel.LayoutPadMaxWidth;
+
+
             return;
             if (e.Parameter is Project project)
             {

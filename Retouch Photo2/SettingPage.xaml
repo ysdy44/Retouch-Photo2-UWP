@@ -4,6 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
     xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     Background="{ThemeResource AppBackground}"
@@ -32,6 +33,110 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
+        <!--Developer-->
+        <developerTools:AlignmentGrid Grid.Row="1" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="Gray"/>
+
+        
+        <!--Body-->
+        <ScrollViewer x:Name="ScrollViewer" Grid.RowSpan="2">
+            <Border>
+                <StackPanel Padding="20,0" MaxWidth="600">
+                    <StackPanel.ChildrenTransitions>
+                        <TransitionCollection>
+                            <EntranceThemeTransition IsStaggeringEnabled="True"/>
+                        </TransitionCollection>
+                    </StackPanel.ChildrenTransitions>
+
+                    <StackPanel.Children>
+
+
+                        <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseHeader}"/>
+
+                        
+                        <ContentControl Height="12"/>
+
+                        
+                        <!--Layout-->
+                        <Border x:Name="LayoutBorder" Width="330" Height="210" Background="White" HorizontalAlignment="Left">
+                            <!--Layout-->
+                        </Border>
+                        
+                        
+                        <!--Theme-->
+                        <TextBlock Text="Theme" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Height="Auto" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
+                            <StackPanel Orientation="Horizontal">
+
+                                <RadioButton x:Name="LightRadioButton" Tag="Light" Style="{StaticResource AppTapRadioButtonStyle}">
+                                    <FontIcon FontSize="20" Glyph="&#xE708;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                </RadioButton>
+                                <RadioButton x:Name="DarkRadioButton" Tag="Dark" Style="{StaticResource AppTapRadioButtonStyle}">
+                                    <FontIcon FontSize="26" Glyph="&#xE706;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                </RadioButton>
+                                <RadioButton x:Name="DefaultRadioButton" Tag="Use System" Style="{StaticResource AppTapRadioButtonStyle}">
+                                    <FontIcon FontSize="22" Glyph="&#xE7E8;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                </RadioButton>
+
+                            </StackPanel>
+                        </Border>
+
+                        
+                        <ContentControl Height="12"/>
+
+                        
+                        <!--Layout-->
+                        <TextBlock Text="Layout" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Height="Auto" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
+                            <StackPanel Orientation="Horizontal">
+
+                                <RadioButton x:Name="PhoneButton" Tag="Phone" Style="{StaticResource AppTapRadioButtonStyle}">
+                                    <FontIcon FontSize="22" Glyph="&#xE8EA;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                </RadioButton>
+                                    <RadioButton x:Name="PadButton" Tag="Pad" Style="{StaticResource AppTapRadioButtonStyle}">
+                                    <FontIcon FontSize="22" Glyph="&#xE70A;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                </RadioButton>
+                                <RadioButton x:Name="PCButton" Tag="PC" Style="{StaticResource AppTapRadioButtonStyle}">
+                                    <FontIcon FontSize="22" Glyph="&#xF71E;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                </RadioButton>
+                                <Rectangle Width="1" Fill="{ThemeResource AppBorderBrush}"/>
+                                <RadioButton x:Name="AdaptiveButton" Tag="Adaptive" Style="{StaticResource AppTapRadioButtonStyle}">
+                                    <FontIcon FontSize="32" Glyph="&#xEBC6;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                </RadioButton>
+
+                            </StackPanel>
+                        </Border>
+                        
+                        
+                        <ContentControl Height="12"/>
+
+
+                        <!--Adaptive-->
+                        <TextBlock x:Name="AdaptiveTextBlock" Text="Adaptive Width" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <elements:AdaptiveWidthGrid x:Name="AdaptiveGrid"/>
+
+
+                        <ContentControl Height="12"/>
+
+                        
+                        <!--Local-->
+                        <TextBlock Text="Local Folder" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Button x:Name="LocalFolderButton" Content="Open" Width="100" 
+                                BorderThickness="1"
+                                BorderBrush="{ThemeResource AppBorderBrush}"                                
+                                Background="{ThemeResource AppForeground}"
+                                />
+
+
+                        <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseFooter}"/>
+
+
+                    </StackPanel.Children>
+
+                </StackPanel>
+            </Border>
+        </ScrollViewer>
+
 
         <!--Head-->
         <Grid HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
@@ -41,7 +146,7 @@
                 <ColumnDefinition Width="1*" MinWidth="50" MaxWidth="80"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="BackButton" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+            <Button x:Name="BackButton" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
                 <Button.Transitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
@@ -59,64 +164,6 @@
             </TextBlock>
 
         </Grid>
-
-        <ScrollViewer Grid.Row="1">
-            <Border>
-                <StackPanel Padding="12,0" MaxWidth="600">
-                    <StackPanel.ChildrenTransitions>
-                        <TransitionCollection>
-                            <EntranceThemeTransition IsStaggeringEnabled="True"/>
-                        </TransitionCollection>
-                    </StackPanel.ChildrenTransitions>
-
-                    <StackPanel.Children>
-
-                        <!--Theme-->
-                        <TextBlock Text="Theme" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border Height="Auto" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
-                            <StackPanel Orientation="Horizontal">
-
-                                <RadioButton x:Name="LightRadioButton" Tag="Light" Style="{StaticResource AppTapRadioButtonStyle}">
-                                    <FontIcon FontSize="20" Glyph="&#xE708;" FontFamily="Segoe MDL2 Assets"/>
-                                </RadioButton>
-                                <RadioButton x:Name="DarkRadioButton" Tag="Dark" Style="{StaticResource AppTapRadioButtonStyle}">
-                                    <FontIcon FontSize="26" Glyph="&#xE706;" FontFamily="Segoe MDL2 Assets"/>
-                                </RadioButton>
-                                <RadioButton x:Name="DefaultRadioButton" Tag="System" Style="{StaticResource AppTapRadioButtonStyle}">
-                                    <FontIcon FontSize="22" Glyph="&#xE7E8;" FontFamily="Segoe MDL2 Assets"/>
-                                </RadioButton>
-
-                            </StackPanel>
-                        </Border>
-
-                        <ContentControl Height="12"/>
-
-                        <!--ThemeMode-->
-                        <TextBlock Text="Layout" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border Height="Auto" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
-                            <StackPanel Orientation="Horizontal">
-
-                                <RadioButton x:Name="PhoneButton" Tag="Phone" Style="{StaticResource AppTapRadioButtonStyle}">
-                                    <FontIcon FontSize="22" Glyph="&#xE8EA;" FontFamily="Segoe MDL2 Assets"/>
-                                </RadioButton>
-                                <RadioButton x:Name="PadButton" Tag="Pad" Style="{StaticResource AppTapRadioButtonStyle}">
-                                    <FontIcon FontSize="22" Glyph="&#xE70A;" FontFamily="Segoe MDL2 Assets"/>
-                                </RadioButton>
-                                <RadioButton x:Name="PCButton" Tag="PC" Style="{StaticResource AppTapRadioButtonStyle}">
-                                    <FontIcon FontSize="22" Glyph="&#xF71E;" FontFamily="Segoe MDL2 Assets"/>
-                                </RadioButton>
-                                <RadioButton x:Name="AdaptiveButton" Tag="Adaptive" Style="{StaticResource AppTapRadioButtonStyle}">
-                                    <FontIcon FontSize="32" Glyph="&#xEBC6;" FontFamily="Segoe MDL2 Assets"/>
-                                </RadioButton>
-
-                            </StackPanel>
-                        </Border>
-
-                    </StackPanel.Children>
-
-                </StackPanel>
-            </Border>
-        </ScrollViewer>
 
     </Grid>
 </Page>

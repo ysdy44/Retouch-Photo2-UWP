@@ -27,13 +27,10 @@ namespace Retouch_Photo2.Elements
 
             if (e.NewValue is ElementTheme value)
             {
-                if (Window.Current.Content is FrameworkElement frameworkElement)
-                {
-                    frameworkElement.RequestedTheme = value;
-                }
-
-                if (value == ElementTheme.Dark) con.DarkStoryboard.Begin();//Storyboard
-                else con.LightStoryboard.Begin();//Storyboard      
+                if (value == ElementTheme.Dark)
+                    con.DarkStoryboard.Begin();//Storyboard
+                else
+                    con.LightStoryboard.Begin();//Storyboard      
             }
         }));
 
@@ -44,8 +41,5 @@ namespace Retouch_Photo2.Elements
         {
             this.InitializeComponent();
         }
-
-        /// <summary> Trigger switching theme. </summary>
-        public void Toggle() => this.Theme = (this.Theme == ElementTheme.Dark) ? ElementTheme.Light : ElementTheme.Dark;
     }
 }

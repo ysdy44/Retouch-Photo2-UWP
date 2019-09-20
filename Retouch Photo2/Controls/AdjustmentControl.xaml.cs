@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Adjustments.Pages;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
@@ -121,8 +122,20 @@ namespace Retouch_Photo2.Controls
 
                 if (this.FilterListView.ItemsSource == null)
                 {
-                    IEnumerable<Filter> source =await FilterHelper.GetFilterSource();
-                    this.FilterListView.ItemsSource = source.ToList();
+                    string json = await ApplicationLocalTextFileUtility.ReadFromLocalFolder("Filter.json");
+
+                    if (json == null)
+                    {
+                        json = await ApplicationLocalTextFileUtility.ReadFromApplicationPackage("ms-appx:///Json/Filter.json");
+                        await ApplicationLocalTextFileUtility.WriteToLocalFolder(json, "Filter.json");
+                    }
+
+                    if (json != null)
+                    {
+                        IFilterFactory filterFactory = new FilterFactory();
+                        IEnumerable<Filter> source = filterFactory.CreateFilters(json);
+                        this.FilterListView.ItemsSource = source.ToList();
+                    }
                 }
             };
 

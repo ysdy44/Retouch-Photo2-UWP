@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "ViewModel" />. 
+    /// Retouch_Photo2's the only <see cref = "MezzanineViewModel" />. 
     /// </summary>
     public class MezzanineViewModel
     {

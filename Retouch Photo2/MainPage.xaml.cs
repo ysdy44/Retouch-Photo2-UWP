@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Elements.MainPages;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
@@ -13,6 +14,7 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace Retouch_Photo2
 {
@@ -23,7 +25,8 @@ namespace Retouch_Photo2
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        
+        SettingViewModel SettingViewModel { get => App.SettingViewModel; set => App.SettingViewModel = value; }
+
         ObservableCollection<Photo> PhotoFileList = new ObservableCollection<Photo>();
 
 
@@ -122,8 +125,29 @@ namespace Retouch_Photo2
         {
             this.InitializeComponent();
 
-            this.Loaded += (s, e) =>
+
+            this.Loaded += async (s, e) =>
             {
+                //Setting
+                SettingViewModel setting = null;
+
+                try
+                {
+                    setting = await SettingViewModel.CreateFromLocalFile();
+                }
+                catch (Exception)
+                {
+                }
+
+                if (setting != null)
+                {
+                    this.SettingViewModel = setting;
+                }
+
+                ElementTheme theme = this.SettingViewModel.ElementTheme;
+                ApplicationViewTitleBarBackgroundExtension.SetTheme(theme);
+
+
                 if (this.PhotoFileList.Count == 0)
                     this.State = MainPageState.None;//State   
                 else
@@ -223,6 +247,19 @@ namespace Retouch_Photo2
                 this.IsLoading = false;//Loading
             };
         }
+
+
+
+        //The current page becomes the active page
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+        }
+        //The current page no longer becomes an active page
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+
+        }
+
 
         private async Task NewProjectFromPictures(PickerLocationId location)
         {

@@ -35,5 +35,18 @@ namespace Retouch_Photo2.Elements
 
         #endregion
 
+
+        //@Static
+        /// <summary>
+        /// Sets the application theme.
+        /// </summary>
+        /// <param name="value"> The destination theme. </param>
+        public static void SetTheme(ElementTheme value)
+        {
+            if (Window.Current.Content is FrameworkElement frameworkElement)
+            {
+                frameworkElement.RequestedTheme = value;
+            }
+        }
     }
 }

@@ -106,11 +106,12 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ApplicationLocalTextFileProvider.cs" />
     <Compile Include="CompositeModes\CompositeMode.cs" />
     <Compile Include="CompositeModes\CompositeModeControl.xaml.cs">
       <DependentUpon>CompositeModeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ApplicationViewTitleBarBackgroundExtension.cs" />
+    <Compile Include="ApplicationViewTitleBarBackgroundExtension.cs" />
     <Compile Include="DrawPages\DeviceLayoutType.cs" />
     <Compile Include="ExpandAppbars\ExpandAppbar.xaml.cs">
       <DependentUpon>ExpandAppbar.xaml</DependentUpon>
@@ -184,6 +185,18 @@
     </Compile>
     <Compile Include="RepeatControl.xaml.cs">
       <DependentUpon>RepeatControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingPages\AdaptiveWidthGrid.xaml.cs">
+      <DependentUpon>AdaptiveWidthGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingPages\PadLayout.xaml.cs">
+      <DependentUpon>PadLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingPages\PCLayout.xaml.cs">
+      <DependentUpon>PCLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingPages\PhoneLayout.xaml.cs">
+      <DependentUpon>PhoneLayout.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Retouch_Photo.Elements.rd.xml" />
   </ItemGroup>
@@ -297,6 +310,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RepeatControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingPages\AdaptiveWidthGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingPages\PadLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingPages\PCLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingPages\PhoneLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

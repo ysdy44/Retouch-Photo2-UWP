@@ -7,7 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Retouch_Photo2.Controls"
     xmlns:elements="using:Retouch_Photo2.Elements"
-    xmlns:elementDrawPages="using:Retouch_Photo2.Elements.DrawPages"
     xmlns:layers="using:Retouch_Photo2.Layers"
     NavigationCacheMode="Enabled"    
     mc:Ignorable="d"
@@ -35,28 +34,28 @@
 
     <Grid>
 
-        <elementDrawPages:DrawLayout x:Name="DrawLayout" 
+        <elements:DrawLayout x:Name="DrawLayout" 
                Touchbar="{x:Bind TipViewModel.TouchbarControl,Mode=OneWay}"                                             
                Theme="{x:Bind RequestedTheme, Mode=OneWay}"
                IsFullScreen="{x:Bind KeyboardViewModel.IsFullScreen,Mode=OneWay}" 
                >
 
             <!--RightIcon-->
-            <elementDrawPages:DrawLayout.RightIcon>
+            <elements:DrawLayout.RightIcon>
                 <layers:Icon/>
-            </elementDrawPages:DrawLayout.RightIcon>
+            </elements:DrawLayout.RightIcon>
 
             <!--Canvas-->
-            <elementDrawPages:DrawLayout.CenterChild>
+            <elements:DrawLayout.CenterChild>
                 <controls:MainCanvasControl 
                     AccentColor="{ThemeResource SystemAccentColor}" 
                     ShadowColor="{ThemeResource AppStrokeColor}" 
                     RulerVisible="{x:Bind ViewModel.CanvasRulerVisible,Mode=OneWay}"
                     />
-            </elementDrawPages:DrawLayout.CenterChild>
+            </elements:DrawLayout.CenterChild>
 
             <!--HeadLeft-->
-            <elementDrawPages:DrawLayout.HeadLeftPane>
+            <elements:DrawLayout.HeadLeftPane>
                 <elements:ExpandAppbar x:Name="ExpandAppbar">
                     <elements:ExpandAppbar.Children>
 
@@ -98,7 +97,7 @@
                                 <ToolTip Content="Theme" VerticalOffset="40" Placement="Bottom" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
-                                <elements:ThemeControl x:Name="ThemeControl" Foreground="{ThemeResource AppText}" Theme="{x:Bind RequestedTheme, Mode=TwoWay}"/>
+                                <elements:ThemeControl x:Name="ThemeControl" Foreground="{ThemeResource AppText}"/>
                             </elements:ExpandAppbarButton.CenterContent>
                         </elements:ExpandAppbarButton>
 
@@ -134,9 +133,9 @@
 
                     </elements:ExpandAppbar.Children>
                 </elements:ExpandAppbar>
-            </elementDrawPages:DrawLayout.HeadLeftPane>
+            </elements:DrawLayout.HeadLeftPane>
 
-        </elementDrawPages:DrawLayout>
+        </elements:DrawLayout>
 
 
         <!--Menu-->
