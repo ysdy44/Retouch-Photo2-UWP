@@ -1,5 +1,4 @@
-﻿using HSVColorPickers;
-using System;
+﻿using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -11,23 +10,37 @@ namespace Retouch_Photo2.Elements
     public sealed partial class AdaptiveWidthGrid : UserControl
     {
         //@Delegate  
+        /// <summary> Occurs when the scroll-mode changes. </summary>
         public EventHandler<ScrollMode> ScrollModeChanged;
+        /// <summary> Occurs when the phone-width value changes. </summary>
         public EventHandler<int> PhoneWidthChanged;
+        /// <summary> Occurs when the pad-width value changes. </summary>
         public EventHandler<int> PadWidthChanged;
 
+
         //@VisualState
-        public VisualState VisualState
+        VisualState VisualState
         {
             get => base.IsEnabled ? this.Normal : this.Disable;
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
 
+
         #region Width
 
+
+        /// <summary> Layout phone width. </summary>
         public int PhoneWidth = 600;
+     
+        /// <summary> Layout pad width. </summary>
         public int PadWidth = 900;
-        public void Width2() => this.SetWidth(this.PhoneWidth, this.PadWidth);
-        private void SetWidth(int phoneWidth, int padWidth, int pcWidth = 2000)
+     
+        /// <summary>
+        /// Change the layout based on width.
+        /// </summary>
+        public void SetWidth() => this._SetWidth(this.PhoneWidth, this.PadWidth);
+
+        private void _SetWidth(int phoneWidth, int padWidth, int pcWidth = 2000)
         {
             this.PhoneTextBlock.Text = $"{phoneWidth}";
             this.PadTextBlock.Text = $"{padWidth}";
@@ -41,7 +54,11 @@ namespace Retouch_Photo2.Elements
             this.PCGridLength.Width = new GridLength(pcLength < 1 ? 1 : pcLength, GridUnitType.Star);
         }
 
+
         #endregion
+
+
+        #region Drag
 
 
         double _horizontal;
@@ -76,14 +93,16 @@ namespace Retouch_Photo2.Elements
         }
 
 
+        #endregion
 
         //@Construct
         public AdaptiveWidthGrid()
         {
             this.InitializeComponent();
-            this.IsEnabledChanged += (s, e) => this.VisualState = this.VisualState;//State
+            base.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            base.IsEnabledChanged += (s, e) => this.VisualState = this.VisualState;//State
 
-
+            //Phone
             this.PhoneThumb.DragStarted += (s, e) =>
             {
                 this.DragStarted();
@@ -98,7 +117,7 @@ namespace Retouch_Photo2.Elements
                 this.PhoneWidth = (int)(this._startingPhoneWidth * scale);
                 if (this.PhoneWidth < 300) this.PhoneWidth = 300;
                 if (this.PhoneWidth > this.PadWidth - 100) this.PhoneWidth = this.PadWidth - 100;
-                this.Width2();
+                this.SetWidth();
             };
             this.PhoneThumb.DragCompleted += (s, e) =>
             {
@@ -106,7 +125,7 @@ namespace Retouch_Photo2.Elements
                 this.PhoneWidthChanged?.Invoke(this, this.PhoneWidth);//Delegate
             };
 
-
+            //Pad
             this.PadThumb.DragStarted += (s, e) =>
             {
                 this.DragStarted();
@@ -121,7 +140,7 @@ namespace Retouch_Photo2.Elements
                 this.PadWidth = (int)((this._startingPadWidth - this._startingPhoneWidth) * scale) + this._startingPhoneWidth;
                 if (this.PadWidth < this.PhoneWidth + 100) this.PadWidth = this.PhoneWidth + 100;
                 if (this.PadWidth > 1800) this.PadWidth = 1800;
-                this.Width2();
+                this.SetWidth();
             };
             this.PadThumb.DragCompleted += (s, e) =>
             {

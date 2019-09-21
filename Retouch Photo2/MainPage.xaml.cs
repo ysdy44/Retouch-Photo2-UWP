@@ -253,6 +253,10 @@ namespace Retouch_Photo2
         //The current page becomes the active page
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            //Theme
+            ElementTheme theme = this.SettingViewModel.ElementTheme;
+            this.RequestedTheme = theme;
+            ApplicationViewTitleBarBackgroundExtension.SetTheme(theme);
         }
         //The current page no longer becomes an active page
         protected override void OnNavigatedFrom(NavigationEventArgs e)

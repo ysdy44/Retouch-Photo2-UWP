@@ -40,6 +40,10 @@ namespace Retouch_Photo2
             //Tool
             Tools = new List<ITool>
             {
+                new CursorTool(),
+                new ImageTool(),
+                new RectangleTool(),
+
                 /*
                  new NoneTool(),
                  new CursorTool(),

@@ -20,26 +20,7 @@ namespace Retouch_Photo2.Layers.Models
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
-            //LTRB
-            Vector2 leftTop = Vector2.Transform(base.Destination.LeftTop, canvasToVirtualMatrix);
-            Vector2 rightTop = Vector2.Transform(base.Destination.RightTop, canvasToVirtualMatrix);
-            Vector2 rightBottom = Vector2.Transform(base.Destination.RightBottom, canvasToVirtualMatrix);
-            Vector2 leftBottom = Vector2.Transform(base.Destination.LeftBottom, canvasToVirtualMatrix);
-          
-            //TODO: 替换
- //        return TransformerRect.CreateRectangle(resourceCreator, leftTop, rightTop, rightBottom, leftBottom);
-
-            //Points
-            Vector2[] points = new Vector2[]
-            {
-                leftTop,
-                rightTop,
-                rightBottom,
-                leftBottom
-            };
-
-            //Geometry
-            return CanvasGeometry.CreatePolygon(resourceCreator, points);
+            return base.Destination.ToRectangle(resourceCreator, canvasToVirtualMatrix);            
         }
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)

@@ -112,6 +112,9 @@
     <Compile Include="Icons\PenDisconnectedIcon.xaml.cs">
       <DependentUpon>PenDisconnectedIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Icons\CropIcon.xaml.cs">
+      <DependentUpon>CropIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Icons\PenMirroredIcon.xaml.cs">
       <DependentUpon>PenMirroredIcon.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,10 @@
     <Page Include="Icons\PenDisconnectedIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Icons\CropIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Icons\PenMirroredIcon.xaml">
       <SubType>Designer</SubType>

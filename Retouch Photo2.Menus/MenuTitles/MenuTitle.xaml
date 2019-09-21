@@ -20,7 +20,7 @@
     
 
     <Grid x:Name="_RootGrid">
-
+        
         <Grid x:Name="FirstGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="12"/>
@@ -28,17 +28,20 @@
                 <ColumnDefinition Width="40"/>
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="TextBlock" Grid.Column="1" TextTrimming="CharacterEllipsis" FontSize="24" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
             
-            <TextBlock x:Name="TextBlock" Grid.Column="1" TextTrimming="CharacterEllipsis" FontWeight="Medium" Style="{StaticResource TitleTextBlockStyle}"/>
             <Button x:Name="_CloseButton" Grid.Column="2" Padding="0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <FontIcon Glyph="&#xE10A;" FontSize="20" FontFamily="{StaticResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
             </Button>
+            
             <Button x:Name="_StateButton" Grid.Column="3" Padding="0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <FontIcon x:Name="StateIcon" FontSize="20" FontFamily="{StaticResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
             </Button>
 
         </Grid>
 
+        
         <Grid x:Name="SecondGrid" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>
@@ -57,6 +60,7 @@
                 <FontIcon Glyph="&#xE0A6;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
            
             </Button>
+            
             <Button x:Name="_ResetButton" Grid.Column="3" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                     Visibility="{x:Bind ResetButtonVisibility, Mode=OneWay}">
                 <FontIcon Glyph="&#xE149;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>

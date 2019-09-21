@@ -20,6 +20,7 @@ namespace Retouch_Photo2.Controls
         ViewModel ViewModel => App.ViewModel;
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
+        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
 
 
         bool isSingleStarted;
@@ -96,6 +97,15 @@ namespace Retouch_Photo2.Controls
                 if (e.NewSize == e.PreviousSize) return;
                 this.ViewModel.CanvasTransformer.Size = e.NewSize;
             };
+            if (this.KeyboardViewModel.Move == null)
+            {
+                this.KeyboardViewModel.Move += (s, value) =>
+                {
+                    this.ViewModel.CanvasTransformer.Position += value;
+                    this.ViewModel.CanvasTransformer.ReloadMatrix();
+                    this.ViewModel.Invalidate();//Invalidate
+                };
+            }
 
 
             #region Draw

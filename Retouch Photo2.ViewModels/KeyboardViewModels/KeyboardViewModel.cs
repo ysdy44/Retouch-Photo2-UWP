@@ -2,6 +2,8 @@
 using Windows.UI.Xaml;
 using System.ComponentModel;
 using Retouch_Photo2.Elements;
+using System;
+using System.Numerics;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -10,6 +12,9 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public partial class KeyboardViewModel : INotifyPropertyChanged
     {
+        //@Delegate  
+        /// <summary> Occurs when the canvas position moved. </summary>
+        public EventHandler<Vector2> Move;
 
         //@Construct
         public KeyboardViewModel()
@@ -48,6 +53,20 @@ namespace Retouch_Photo2.ViewModels
                 case VirtualKey.Escape:
                     this.IsFullScreen = !this.IsFullScreen;
                     break;
+
+                case VirtualKey.Left:
+                    this.Move?.Invoke(this, new Vector2(50, 0));//Delegate
+                    break;
+                case VirtualKey.Up:
+                    this.Move?.Invoke(this, new Vector2(0, 50));//Delegate
+                    break;
+                case VirtualKey.Right:
+                    this.Move?.Invoke(this, new Vector2(-50, 0));//Delegate
+                    break;
+                case VirtualKey.Down:
+                    this.Move?.Invoke(this, new Vector2(0, -50));//Delegate
+                    break;
+
 
                 default:
                     break;

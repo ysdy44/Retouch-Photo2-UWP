@@ -16,6 +16,7 @@ namespace Retouch_Photo2
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
@@ -37,9 +38,10 @@ namespace Retouch_Photo2
                 }
 
                 //Adaptive
-                bool isAdaptive = value == DeviceLayoutType.Adaptive;
+                bool isAdaptive = (value == DeviceLayoutType.Adaptive);
                 this.AdaptiveTextBlock.Opacity = isAdaptive ? 1.0 : 0.6;
                 this.AdaptiveGrid.IsEnabled = isAdaptive;
+                this.AdaptiveResetButton.IsEnabled = isAdaptive;
             }
         }
 
@@ -56,19 +58,19 @@ namespace Retouch_Photo2
                 {
                     ApplicationViewTitleBarBackgroundExtension.SetTheme(ElementTheme.Light);
                     this.SettingViewModel.ElementTheme = ElementTheme.Light;
-                    this.SettingViewModel.WriteToLocalFolder();
+                    this.SettingViewModel.WriteToLocalFolder();//Write
                 };
                 this.DarkRadioButton.Tapped += (s, e) =>
                 {
                     ApplicationViewTitleBarBackgroundExtension.SetTheme(ElementTheme.Dark);
                     this.SettingViewModel.ElementTheme = ElementTheme.Dark;
-                    this.SettingViewModel.WriteToLocalFolder();
+                    this.SettingViewModel.WriteToLocalFolder();//Write
                 };
                 this.DefaultRadioButton.Tapped += (s, e) =>
                 {
                     ApplicationViewTitleBarBackgroundExtension.SetTheme(ElementTheme.Default);
                     this.SettingViewModel.ElementTheme = ElementTheme.Default;
-                    this.SettingViewModel.WriteToLocalFolder();
+                    this.SettingViewModel.WriteToLocalFolder();//Write
                 };
             }
 
@@ -78,25 +80,25 @@ namespace Retouch_Photo2
                 {
                     this.DeviceLayoutType = DeviceLayoutType.Phone;
                     this.SettingViewModel.LayoutDeviceType = DeviceLayoutType.Phone;
-                    this.SettingViewModel.WriteToLocalFolder();
+                    this.SettingViewModel.WriteToLocalFolder();//Write
                 };
                 this.PadButton.Tapped += (s, e) =>
                 {
                     this.DeviceLayoutType = DeviceLayoutType.Pad;
                     this.SettingViewModel.LayoutDeviceType = DeviceLayoutType.Pad;
-                    this.SettingViewModel.WriteToLocalFolder();
+                    this.SettingViewModel.WriteToLocalFolder();//Write
                 };
                 this.PCButton.Tapped += (s, e) =>
                 {
                     this.DeviceLayoutType = DeviceLayoutType.PC;
                     this.SettingViewModel.LayoutDeviceType = DeviceLayoutType.PC;
-                    this.SettingViewModel.WriteToLocalFolder();
+                    this.SettingViewModel.WriteToLocalFolder();//Write
                 };
                 this.AdaptiveButton.Tapped += (s, e) =>
                 {
                     this.DeviceLayoutType = DeviceLayoutType.Adaptive;
                     this.SettingViewModel.LayoutDeviceType = DeviceLayoutType.Adaptive;
-                    this.SettingViewModel.WriteToLocalFolder();
+                    this.SettingViewModel.WriteToLocalFolder();//Write
                 };
             }
 
@@ -115,7 +117,19 @@ namespace Retouch_Photo2
                 this.AdaptiveGrid.PadWidthChanged += (s, value) =>
                 {
                     this.SettingViewModel.LayoutPadMaxWidth = value;
-                    this.SettingViewModel.WriteToLocalFolder();
+                    this.SettingViewModel.WriteToLocalFolder();//Write
+                };
+                this.AdaptiveResetButton.Click += (s, e) =>
+                {
+                    //Adaptive
+                    this.AdaptiveGrid.PhoneWidth = SettingViewModel.DefaultLayoutPhoneMaxWidth;
+                    this.AdaptiveGrid.PadWidth = SettingViewModel.DefaultLayoutPadMaxWidth;
+                    this.AdaptiveGrid.SetWidth();
+
+                    //Setting
+                    this.SettingViewModel.LayoutPhoneMaxWidth = SettingViewModel.DefaultLayoutPhoneMaxWidth;
+                    this.SettingViewModel.LayoutPadMaxWidth = SettingViewModel.DefaultLayoutPadMaxWidth;
+                    this.SettingViewModel.WriteToLocalFolder();//Write
                 };
             }
 
@@ -133,6 +147,8 @@ namespace Retouch_Photo2
         {
             //Theme
             ElementTheme theme = this.SettingViewModel.ElementTheme;
+            this.RequestedTheme = theme;
+            ApplicationViewTitleBarBackgroundExtension.SetTheme(theme);
             this.LightRadioButton.IsChecked = (theme == ElementTheme.Light);
             this.DarkRadioButton.IsChecked = (theme == ElementTheme.Dark);
             this.DefaultRadioButton.IsChecked = (theme == ElementTheme.Default);
@@ -148,11 +164,12 @@ namespace Retouch_Photo2
             //Adaptive
             this.AdaptiveGrid.PhoneWidth = this.SettingViewModel.LayoutPhoneMaxWidth;
             this.AdaptiveGrid.PadWidth = this.SettingViewModel.LayoutPadMaxWidth;
-            this.AdaptiveGrid.Width2();
+            this.AdaptiveGrid.SetWidth();
         }
         //The current page no longer becomes an active page
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
         }
+        
     }
 }

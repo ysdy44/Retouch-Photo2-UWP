@@ -25,6 +25,89 @@
     <Page.Resources>
         <!--Extensions-->
         <elements:ApplicationViewTitleBarBackgroundExtension x:Key="AVTBBE" TitleBarColor="{ThemeResource AppForeground}"/>
+        <!--Style-->
+        <Style x:Name="KetButtonStyle" TargetType="ToggleButton">
+            <Setter Property="IsHitTestVisible" Value="False" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="0,2" />
+            <Setter Property="Foreground" Value="{StaticResource AppText}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <StackPanel Orientation="Horizontal" Padding="{TemplateBinding Padding}">
+                         
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+
+                                    <VisualState x:Name="PointerOver"/>
+
+                                    <VisualState x:Name="Pressed"/>
+
+                                    <VisualState x:Name="Disabled"/>
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppForeground}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseHighBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="CheckedPointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppForeground}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseHighBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="CheckedPressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppForeground}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseHighBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="CheckedDisabled"/>
+                                    <VisualState x:Name="Indeterminate"/>
+                                    <VisualState x:Name="IndeterminatePointerOver"/>
+                                    <VisualState x:Name="IndeterminatePressed"/>
+                                    <VisualState x:Name="IndeterminateDisabled"/>
+                                </VisualStateGroup>
+
+                            </VisualStateManager.VisualStateGroups>
+                            
+                        <ContentControl 
+                            MinWidth="200"
+                                Margin="4,0"                                                  
+                                Content="{TemplateBinding Tag}"
+                                Foreground="{TemplateBinding Foreground}"                                            
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"                                                   
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"                                                  
+                                />
+                            <Border x:Name="Border" Width="60" HorizontalAlignment="Left" Background="{ThemeResource SystemControlBackgroundAccentBrush}" Style="{StaticResource AppRoundedBorderStyle}">
+                                <ContentPresenter x:Name="ContentPresenter" Content="{TemplateBinding Content}"                       
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"  
+                                                  ContentTransitions="{TemplateBinding ContentTransitions}"                        
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"                       
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                                  Foreground="White"
+                                                  />
+                            </Border>
+                        </StackPanel>
+                                                
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
     
     
@@ -56,7 +139,7 @@
                         
                         <ContentControl Height="12"/>
 
-                        
+
                         <!--Layout-->
                         <Border x:Name="LayoutBorder" Width="330" Height="210" Background="White" HorizontalAlignment="Left">
                             <!--Layout-->
@@ -114,18 +197,25 @@
                         <!--Adaptive-->
                         <TextBlock x:Name="AdaptiveTextBlock" Text="Adaptive Width" Style="{StaticResource TitleTextBlockStyle}"/>
                         <elements:AdaptiveWidthGrid x:Name="AdaptiveGrid"/>
+                        <HyperlinkButton x:Name="AdaptiveResetButton" Content="Reset adaptive width"/>
 
-
+                        
                         <ContentControl Height="12"/>
 
+
+                        <!--Key-->
+                        <TextBlock Text="Shortcuts" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <ToggleButton Tag="IsCenter" Content="Ctrl" IsChecked="{x:Bind KeyboardViewModel.IsCenter, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+                        <ToggleButton Tag="IsRatio" Content="Shift" IsChecked="{x:Bind KeyboardViewModel.IsRatio, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+                        <ToggleButton Tag="IsSquare" Content="Shift" IsChecked="{x:Bind KeyboardViewModel.IsSquare, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+                        <ToggleButton Tag="IsStepFrequency" Content="Space" IsChecked="{x:Bind KeyboardViewModel.IsStepFrequency, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+
+                        <ToggleButton Tag="FullScreen" Content="Esc" IsChecked="{x:Bind KeyboardViewModel.IsFullScreen, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+                      
                         
                         <!--Local-->
                         <TextBlock Text="Local Folder" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Button x:Name="LocalFolderButton" Content="Open" Width="100" 
-                                BorderThickness="1"
-                                BorderBrush="{ThemeResource AppBorderBrush}"                                
-                                Background="{ThemeResource AppForeground}"
-                                />
+                        <Button x:Name="LocalFolderButton" Content="Open" Width="100" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}"/>
 
 
                         <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseFooter}"/>

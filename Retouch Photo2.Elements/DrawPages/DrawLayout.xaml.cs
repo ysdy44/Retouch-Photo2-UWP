@@ -82,11 +82,13 @@ namespace Retouch_Photo2.Elements
                 {
                     this.HeadRightScrollViewer.Content = null;
                     this.HeadRightExpandBorder.Child = this.HeadRightStackPane;
+                    this.HeadRightScrollViewer.Visibility = Visibility.Collapsed;
                 }
                 else
                 {
                     this.HeadRightExpandBorder.Child = null;
                     this.HeadRightScrollViewer.Content = this.HeadRightStackPane;
+                    this.HeadRightScrollViewer.Visibility = Visibility.Visible;
                 }
                 this.isHeadRightExpand = value;
             }
@@ -192,7 +194,7 @@ namespace Retouch_Photo2.Elements
         public DrawLayout()
         {
             this.InitializeComponent();
-
+            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
             this.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;

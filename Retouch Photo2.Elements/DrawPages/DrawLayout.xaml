@@ -273,7 +273,8 @@
         <Border x:Name="CenterBorder" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="2"/>
 
         <!--HeadRight-->
-        <ScrollViewer x:Name="HeadRightScrollViewer" Visibility="Collapsed" Grid.Row="1" Grid.ColumnSpan="3"
+        <ScrollViewer x:Name="HeadRightScrollViewer" Visibility="Collapsed" 
+                      Grid.Row="1" Grid.ColumnSpan="3" MinWidth="250" MinHeight="50"
                       HorizontalAlignment="Center" VerticalAlignment="Top"
                       HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" 
                       VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled"
@@ -313,7 +314,7 @@
             </Grid.ColumnDefinitions>
 
             <!--Back-->
-            <Button x:Name="_BackButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+            <Button x:Name="_BackButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
                 <FontIcon Glyph="&#xE0D5;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
             </Button>
 
@@ -323,6 +324,17 @@
             <!--Right-->
             <Border x:Name="HeadRightExpandBorder" Visibility="Collapsed" Grid.Column="2" HorizontalAlignment="Right"/>
             <Border x:Name="HeadRightButtonBorder" Width="90" Margin="8,0" Visibility="Collapsed" Grid.Column="2" HorizontalAlignment="Right" Style="{StaticResource AppRoundedBorderStyle}">
+
+                <!--Visibility:Show-->
+                <animations:Implicit.ShowAnimations>
+                    <animations:OpacityAnimation Duration="0:0:0.2" From="0.0" To="1.0"/>
+                </animations:Implicit.ShowAnimations>
+
+                <!--Visibility:Hide-->
+                <animations:Implicit.HideAnimations>
+                    <animations:OpacityAnimation Duration="0:0:0.2" From="1.0" To="0.0"/>
+                </animations:Implicit.HideAnimations>
+                
                 <ToggleButton x:Name="HeadRightToggleButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <FontIcon Glyph="&#xE700;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                 </ToggleButton>
@@ -334,7 +346,11 @@
         <!--Touchbar-->
         <Border x:Name="TouchbarBorder" Grid.ColumnSpan="3" Grid.Row="1" Margin="12,0" MinWidth="200" MaxWidth="800" VerticalAlignment="Bottom"/>
         <!--Foot-->
-        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Column="1" Grid.Row="2" Margin="0,2" ShadowColor="{ThemeResource AppStrokeColor}">
+        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Column="1" Grid.Row="2" Margin="0,2" 
+                                   ShadowOpacity="0.9"
+                                   ShadowColor="{ThemeResource AppStrokeColor}"
+                                   Background="{ThemeResource AppBackground}"
+                                   >
 
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>

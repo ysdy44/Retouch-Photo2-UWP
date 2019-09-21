@@ -27,15 +27,7 @@
     </UserControl.Resources>
 
 
-    <Border x:Name="RootBorder"
-        Width="Auto" 
-        MinWidth="80" 
-        Height="40"      
-        CornerRadius="20" 
-        BorderThickness="1" 
-        BorderBrush="{ThemeResource AppBorderBrush}"  
-        Background="{StaticResource UnAccentColor}"
-        >
+    <Border x:Name="RootBorder" Width="Auto" MinWidth="80" Style="{StaticResource AppCircleBorderStyle}">
         
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>

@@ -11,8 +11,8 @@ namespace Retouch_Photo2.ViewModels
     [JsonObject(MemberSerialization.OptIn)]
     public class SettingViewModel
     {
-        public readonly int DefaultLayoutPhoneMaxWidth = 600;
-        public readonly int DefaultLayoutPadMaxWidth = 900;
+        public const int DefaultLayoutPhoneMaxWidth = 600;
+        public const int DefaultLayoutPadMaxWidth = 900;
 
 
         //Theme

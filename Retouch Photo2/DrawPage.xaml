@@ -116,7 +116,7 @@
 
                         <elements:ExpandAppbarButton x:Name="FullScreenButton">
                             <ToolTipService.ToolTip>
-                                <ToolTip Content="Full Screen" Placement="Bottom" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip Content="Full Screen" VerticalOffset="40" Placement="Bottom" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
                                 <FontIcon Glyph="&#xE1D9;" FontSize="16" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -142,11 +142,15 @@
         <Canvas x:Name="OverlayCanvas" IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}"/>
 
         <!--FullScreen-->
-        <Button x:Name="UnFullScreenButton" Width="50" Height="50" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Right" VerticalAlignment="Top"
-                Visibility="{x:Bind BoolToVisibilityConverter(DrawLayout.IsFullScreen), Mode=OneWay}">
-            <FontIcon Glyph="&#xE1D8;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-        </Button>
-
+        <elements:ExpandAppbarButton x:Name="UnFullScreenButton"                                     
+                                    Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top"            
+                                     Visibility="{x:Bind BoolToVisibilityConverter(DrawLayout.IsFullScreen), Mode=OneWay}"
+                                     >
+            <elements:ExpandAppbarButton.CenterContent>
+                <FontIcon Glyph="&#xE1D8;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            </elements:ExpandAppbarButton.CenterContent>
+        </elements:ExpandAppbarButton>
+        
         <!--Tip-->
         <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,110,0,0" HorizontalAlignment="Center">
             <ToolTip Style="{StaticResource AppToolTip}">
