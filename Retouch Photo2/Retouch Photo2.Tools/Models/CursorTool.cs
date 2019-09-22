@@ -1,6 +1,8 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools.Buttons;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.Tools.Pages;
@@ -26,9 +28,11 @@ namespace Retouch_Photo2.Tools.Models
         ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
         CompositeMode CompositeMode => this.KeyboardViewModel.CompositeMode;
 
+
         //Box
         bool _isBox;
         TransformerRect _boxCanvasRect;
+
 
         public bool IsSelected
         {
@@ -44,6 +48,7 @@ namespace Retouch_Photo2.Tools.Models
         public Page Page => this._cursorPage;
         CursorPage _cursorPage { get; } = new CursorPage();
 
+
         public void Starting(Vector2 point)
         {
             this._isBox = false; //Box
@@ -57,7 +62,11 @@ namespace Retouch_Photo2.Tools.Models
             //Box
             if (this._isBox)
             {
-                this.BoxDelta(startingPoint, point);//Box
+                Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+                Vector2 pointA = Vector2.Transform(startingPoint, inverseMatrix);
+                Vector2 pointB = Vector2.Transform(point, inverseMatrix);
+                this._boxCanvasRect = new TransformerRect(pointA, pointB);
+
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
                 return;
             }
@@ -69,7 +78,11 @@ namespace Retouch_Photo2.Tools.Models
             //Box
             if (this._isBox)
             {
-                this.BoxDelta(startingPoint, point);//Box
+                Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+                Vector2 pointA = Vector2.Transform(startingPoint, inverseMatrix);
+                Vector2 pointB = Vector2.Transform(point, inverseMatrix);
+                this._boxCanvasRect = new TransformerRect(pointA, pointB);
+
                 this.ViewModel.Invalidate();//Invalidate
                 return;
             }
@@ -85,7 +98,7 @@ namespace Retouch_Photo2.Tools.Models
 
                 if (isSingleStarted)
                 {
-                    this.BoxComplete();//Box
+                    this.BoxChoose();//Box
                     this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
                     this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                     return;
@@ -100,7 +113,9 @@ namespace Retouch_Photo2.Tools.Models
             //Box
             if (this._isBox)
             {
-                this.BoxDraw(drawingSession);//Box
+                Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+                CanvasGeometry geometry = this._boxCanvasRect.ToRectangle(this.ViewModel.CanvasDevice, matrix);
+                drawingSession.DrawGeometryDodgerBlue(geometry);
                 return;
             }
 
@@ -109,5 +124,30 @@ namespace Retouch_Photo2.Tools.Models
         
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom() { }
+
+
+        private void BoxChoose()
+        {
+            foreach (ILayer layer in this.ViewModel.Layers)
+            {
+                bool contained = layer.Destination.Contained(this._boxCanvasRect);
+
+                switch (this.CompositeMode)
+                {
+                    case CompositeMode.New:
+                        layer.IsChecked = contained;
+                        break;
+                    case CompositeMode.Add:
+                        if (contained) layer.IsChecked = true;
+                        break;
+                    case CompositeMode.Subtract:
+                        if (contained) layer.IsChecked = false;
+                        break;
+                    case CompositeMode.Intersect:
+                        if (contained == false) layer.IsChecked = false;
+                        break;
+                }
+            }
+        }
     }
 }

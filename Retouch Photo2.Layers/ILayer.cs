@@ -51,6 +51,11 @@ namespace Retouch_Photo2.Layers
         /// <summary> Is disable rotate radian? Defult **false**. </summary>
         bool DisabledRadian { get; set; }
 
+        /// <summary> Is cropped? </summary>
+        bool IsCrop { get; set; }
+        /// <summary> The cropped transformer. </summary>
+        Transformer CropSource { get; set; }
+
         /// <summary> The ILayer's children layers. </summary>
         ObservableCollection<ILayer> Children { get; }
         /// <summary> The ILayer's effect manager. </summary>

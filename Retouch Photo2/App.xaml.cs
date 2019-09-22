@@ -43,7 +43,8 @@ namespace Retouch_Photo2
                 new CursorTool(),
                 new ImageTool(),
                 new RectangleTool(),
-
+                new CropTool(),
+                
                 /*
                  new NoneTool(),
                  new CursorTool(),
@@ -54,6 +55,7 @@ namespace Retouch_Photo2
                  new PenTool(),
                  new ImageTool(),
                  new AcrylicTool(),
+                 new CropTool(),
                  */
             },
 

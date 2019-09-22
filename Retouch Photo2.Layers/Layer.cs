@@ -36,6 +36,9 @@ namespace Retouch_Photo2.Layers
         private Transformer _oldDestination;
         public bool DisabledRadian { get; set; } = false;
 
+        public bool IsCrop { get; set; }
+        public Transformer CropSource { get; set; }
+
         public ObservableCollection<ILayer> Children { get; protected set; } = new ObservableCollection<ILayer>();
         public EffectManager EffectManager { get; } = new EffectManager();
         public AdjustmentManager AdjustmentManager { get; } = new AdjustmentManager();

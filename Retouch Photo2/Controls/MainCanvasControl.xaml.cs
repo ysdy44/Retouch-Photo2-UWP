@@ -132,7 +132,7 @@ namespace Retouch_Photo2.Controls
             };
             this.CanvasControl.Draw += (sender, args) =>
             {
-                //Render & Mezzanine
+                //Render & Mezzanine & Crad
                 {
                     ICanvasImage previousImage = new ColorSourceEffect { Color = Colors.White };
 
@@ -167,17 +167,20 @@ namespace Retouch_Photo2.Controls
                         }
                     }
 
-                    //Draw
+                    //Crad
                     args.DrawingSession.DrawCrad(previousImage, this.ViewModel.CanvasTransformer, this.ShadowColor);
                 }
 
 
-                //Tool & Mezzanine
+                //Mezzanine & Tool & Bound
                 {
-                    if (this.MezzanineViewModel.Layer == null)
-                    {
-                        Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+                    Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
+                    //Mezzanine 
+                    if (this.MezzanineViewModel.Layer != null) this.MezzanineViewModel.Layer.DrawBound(sender, args.DrawingSession, matrix, this.AccentColor);
+                    else
+                    {
+                        //Bound
                         foreach (ILayer layer in this.ViewModel.Layers)
                         {
                             if (layer.IsChecked)
@@ -189,16 +192,10 @@ namespace Retouch_Photo2.Controls
                         //Tool
                         this.TipViewModel.Tool.Draw(args.DrawingSession);
                     }
-                    else
-                    {
-                        //Mezzanine 
-                        Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                        this.MezzanineViewModel.Layer.DrawBound(sender, args.DrawingSession, matrix, this.AccentColor);
-                    }
                 }
 
 
-                //IsRuler
+                //Ruler
                 if (this.RulerVisible) args.DrawingSession.DrawRuler(this.ViewModel.CanvasTransformer);
             };
 

@@ -209,6 +209,9 @@
     <Compile Include="Retouch Photo2.Tools\Buttons\RectangleButton.xaml.cs">
       <DependentUpon>RectangleButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Tools\Buttons\CropButton.xaml.cs">
+      <DependentUpon>CropButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Tools\Buttons\ViewButton.xaml.cs">
       <DependentUpon>ViewButton.xaml</DependentUpon>
     </Compile>
@@ -231,6 +234,10 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\CropTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Pages\CropPage.xaml.cs">
+      <DependentUpon>CropPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Tools\Touchbars\AcrylicBlurAmountTouchbar.xaml.cs">
       <DependentUpon>AcrylicBlurAmountTouchbar.xaml</DependentUpon>
     </Compile>
@@ -246,7 +253,6 @@
     <Compile Include="Retouch Photo2.Tools\Models\BrushTools\EllipticalGradientTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\BrushTools\LinearGradientTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\BrushTools\RadialGradientTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\CursorTool.Box.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\CursorTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\EllipseTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\ImageTool.cs" />
@@ -507,6 +513,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Retouch Photo2.Tools\Buttons\CropButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Retouch Photo2.Tools\Buttons\ViewButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -532,6 +542,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\Pages\CropPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
