@@ -74,6 +74,8 @@ namespace Retouch_Photo2
             //Menu
             Menus = new List<IMenu>
             {
+                new LayerMenu(),
+
                 /*
                 new DebugMenu(),
                 new SelectionMenu(),

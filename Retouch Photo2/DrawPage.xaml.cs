@@ -73,8 +73,6 @@ namespace Retouch_Photo2
         #region Tool
 
 
-        List<ITool> Tools = new List<ITool>();
-
         UIElementCollection TooLeft => this.DrawLayout.LeftPaneChildren;
         object LeftIcon { set => this.DrawLayout.LeftIcon = value; }
         Page FootPage { set => this.DrawLayout.FootPage = value; }
@@ -83,9 +81,6 @@ namespace Retouch_Photo2
         private void ConstructTool(ITool tool)
         {
             if (tool == null) return;
-
-            this.Tools.Add(tool);
-
             IToolButton button = tool.Button;
 
             if (button!=null)
@@ -105,7 +100,7 @@ namespace Retouch_Photo2
 
         private void ToolGroupType(ToolType groupType)
         {
-            foreach (ITool tool in this.Tools)
+            foreach (ITool tool in this.TipViewModel.Tools)
             {
                 if (tool == null) break;
 
@@ -126,9 +121,9 @@ namespace Retouch_Photo2
 
         UIElementCollection MenuOverlay => this.OverlayCanvas.Children;
         UIElementCollection MenuHead => this.DrawLayout.HeadRightChildren;
-        UIElement MenuLayersControl { set => this.DrawLayout.RightPane = value; }
+        UIElement MenuLayersIndicator { set => this.LayersControl.IndicatorChild = value; }
 
-
+        
         private void ConstructMenu(IMenu menu)
         {
             if (menu == null) return;
@@ -150,7 +145,7 @@ namespace Retouch_Photo2
             {
                 case MenuButtonType.None: this.MenuHead.Add(menuButton.Self); break;
                 case MenuButtonType.ToolButton: this.TooLeft.Add(menuButton.Self); break;
-                case MenuButtonType.LayersControl: this.MenuLayersControl = menuButton.Self; break;
+                case MenuButtonType.LayersControlIndicator: this.MenuLayersIndicator = menuButton.Self; break;
             }
         }
 

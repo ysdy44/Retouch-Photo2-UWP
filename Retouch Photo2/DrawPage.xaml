@@ -25,10 +25,8 @@
 
 
     <Page.Resources>
-
         <!--Extension-->
         <elements:ApplicationViewTitleBarBackgroundExtension x:Key="AVTBBE" TitleBarColor="{ThemeResource AppForeground}"/>
-
     </Page.Resources>
 
 
@@ -44,6 +42,11 @@
             <elements:DrawLayout.RightIcon>
                 <layers:Icon/>
             </elements:DrawLayout.RightIcon>
+
+            <!--RightPane-->
+            <elements:DrawLayout.RightPane>
+                <controls:LayersControl x:Name="LayersControl"/>
+            </elements:DrawLayout.RightPane>
 
             <!--Canvas-->
             <elements:DrawLayout.CenterChild>

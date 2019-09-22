@@ -117,7 +117,7 @@
     <Compile Include="MenuLayouts\MenuLayout.xaml.cs">
       <DependentUpon>MenuLayout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MenuLayouts\MenuLayoutSize.cs" />
+    <Compile Include="MenuOverlaySize.cs" />
     <Compile Include="MenuState.cs" />
     <Compile Include="MenuTitles\MenuTitle.xaml.cs">
       <DependentUpon>MenuTitle.xaml</DependentUpon>

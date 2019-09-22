@@ -6,9 +6,9 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Menus
 {
     /// <summary>
-    /// Represents a class that calculates the position and size of the menu.
+    /// Represents a class that calculates the position and size of the menu overlay.
     /// </summary>
-    public class MenuLayoutSize
+    public class MenuOverlaySize
     {
         /// <summary> Size of content. </summary>
         public Size Size;

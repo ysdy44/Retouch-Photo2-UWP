@@ -62,7 +62,7 @@ namespace Retouch_Photo2.Menus
         };
         
 
-        readonly MenuLayoutSize _size = new MenuLayoutSize();
+        readonly MenuOverlaySize _size = new MenuOverlaySize();
 
                
         /// <summary> State of MenuBase. </summary>
@@ -133,7 +133,7 @@ namespace Retouch_Photo2.Menus
                         this.Button.Self.Tapped += (s, e) => this.State = MenuBase.GetState(this.State);
                     }
                     break;
-                case MenuButtonType.LayersControl:
+                case MenuButtonType.LayersControlIndicator:
                     {
                         this.Flyout.Placement = FlyoutPlacementMode.Left;
                     }
@@ -160,8 +160,8 @@ namespace Retouch_Photo2.Menus
                 else if (this.State == MenuState.OverlayNotExpanded) this.State = MenuState.OverlayExpanded;
                 else
                 {
-                    Vector2 postion = MenuLayoutSize.GetElementVisualPostion(this.Layout.TitlePanel);
-                    MenuLayoutSize.SetElementCanvasPostion(this.Overlay, postion, this._size.Size);
+                    Vector2 postion = MenuOverlaySize.GetElementVisualPostion(this.Layout.TitlePanel);
+                    MenuOverlaySize.SetElementCanvasPostion(this.Overlay, postion, this._size.Size);
 
                     this.State = MenuState.OverlayExpanded;
                 }
@@ -171,14 +171,14 @@ namespace Retouch_Photo2.Menus
             this.Layout.TitlePanel.ManipulationMode = ManipulationModes.All;
             this.Layout.TitlePanel.ManipulationStarted += (s, e) =>
             {
-                this._size.Postion = MenuLayoutSize.GetElementVisualPostion(this.Overlay);
+                this._size.Postion = MenuOverlaySize.GetElementVisualPostion(this.Overlay);
                 this.Move?.Invoke(this, this.Overlay); //Delegate
             };
             this.Layout.TitlePanel.ManipulationDelta += (s, e) =>
             {
                 if (this.State == MenuState.FlyoutShow) return;
                 this._size.Postion += e.Delta.Translation.ToVector2();
-                MenuLayoutSize.SetElementCanvasPostion(this.Overlay, this._size.Postion, this._size.Size);
+                MenuOverlaySize.SetElementCanvasPostion(this.Overlay, this._size.Postion, this._size.Size);
             };
         }
 

@@ -5,6 +5,7 @@ using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Linq;
 using System.Numerics;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -158,13 +159,15 @@ namespace Retouch_Photo2.Tools
 
             if (this.TransformerMode == TransformerMode.None) return false;
 
+            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+
             //Transformer
             this.Transformer = Transformer.Controller
             (
                 this.TransformerMode, 
                 startingPoint, point, 
                 this.oldTransformer,
-                this.ViewModel.CanvasTransformer.GetInverseMatrix(),
+                inverseMatrix,
                 this.IsRatio, 
                 this.IsCenter, 
                 this.IsStepFrequency
@@ -232,7 +235,9 @@ namespace Retouch_Photo2.Tools
                     {
                         Transformer transformer = this.Transformer;
                         Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                        drawingSession.DrawBoundNodes(transformer, matrix, this.ViewModel.AccentColor, this.SelectionViewModel.DsabledRadian);
+                        Color accentColor = this.ViewModel.AccentColor;
+                        bool dsabledRadian = this.SelectionViewModel.DsabledRadian;
+                        drawingSession.DrawBoundNodes(transformer, matrix, accentColor, disabledRadian: dsabledRadian);
                     }
                     break;
             }

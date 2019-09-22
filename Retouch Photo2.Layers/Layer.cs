@@ -49,16 +49,7 @@ namespace Retouch_Photo2.Layers
         public abstract ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix);
         public virtual void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
         {
-            //LTRB
-            Vector2 leftTop = Vector2.Transform(this.Destination.LeftTop, matrix);
-            Vector2 rightTop = Vector2.Transform(this.Destination.RightTop, matrix);
-            Vector2 rightBottom = Vector2.Transform(this.Destination.RightBottom, matrix);
-            Vector2 leftBottom = Vector2.Transform(this.Destination.LeftBottom, matrix);
-
-            drawingSession.DrawLine(leftTop, rightTop, accentColor);
-            drawingSession.DrawLine(rightTop, rightBottom, accentColor);
-            drawingSession.DrawLine(rightBottom, leftBottom, accentColor);
-            drawingSession.DrawLine(leftBottom, leftTop, accentColor);
+            drawingSession.DrawBound(this.Destination, matrix, accentColor);
         }
 
         public abstract ILayer Clone(ICanvasResourceCreator resourceCreator);

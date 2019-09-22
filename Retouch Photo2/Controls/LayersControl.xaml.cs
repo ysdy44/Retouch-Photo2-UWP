@@ -5,6 +5,7 @@ using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.Foundation;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -22,7 +23,11 @@ namespace Retouch_Photo2.Controls
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        
+
+        //@Content
+        /// <summary> IndicatorBorder's Child. </summary>
+        public UIElement IndicatorChild { get => this.IndicatorBorder.Child; set => this.IndicatorBorder.Child = value; }
+
         //@Construct
         public LayersControl()
         {
@@ -104,8 +109,19 @@ namespace Retouch_Photo2.Controls
 
 
             #endregion
-        } 
-        
+        }
+
+
+        private void ShowMenu(Grid rootGrid)
+        {
+            Point rootGridPosition = rootGrid.TransformToVisual(this).TransformPoint(new Point());
+            Canvas.SetTop(this.IndicatorBorder, rootGridPosition.Y);
+
+            //Menu
+            this.TipViewModel.SetMenuState(MenuType.Layer, MenuState.FlyoutHide, MenuState.FlyoutShow);
+        }
+
+
 
         //@DataTemplate
         /// <summary> DataTemplate's Grid Tapped. </summary>
@@ -115,8 +131,7 @@ namespace Retouch_Photo2.Controls
 
             if (this.SelectionViewModel.Layer == layer) //FlyoutShow
             {
-                //Menu          
-                this.TipViewModel.SetMenuState(MenuType.Layer, source: MenuState.FlyoutHide, destinations: MenuState.FlyoutShow);
+                this.ShowMenu(rootGrid);//Menu
             }
             else //ItemClick
             {
@@ -132,12 +147,14 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             }
         }
-    
+
         /// <summary> DataTemplate's Grid RightTapped. </summary>
         private void RootGrid_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
-            //Menu
-            this.TipViewModel.SetMenuState(MenuType.Layer, MenuState.FlyoutHide, MenuState.FlyoutShow);
+            if (sender is Grid rootGrid)
+            {
+                this.ShowMenu(rootGrid);//Menu
+            }
         }
 
         /// <summary> DataTemplate's Button Tapped. </summary>

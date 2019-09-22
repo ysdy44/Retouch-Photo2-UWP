@@ -7,7 +7,8 @@
     xmlns:layers="using:Retouch_Photo2.Layers"
     mc:Ignorable="d"
     d:DesignHeight="800"
-    d:DesignWidth="200">
+    d:DesignWidth="200"
+    >    
     
     <UserControl.Resources>
 
@@ -114,7 +115,13 @@
     </UserControl.Resources>
 
 
-    <ListView x:Name="ListView"
+    <Grid>
+        
+        <Canvas>
+            <Border x:Name="IndicatorBorder" MinWidth="50" Height="40"/>
+        </Canvas>
+        
+        <ListView x:Name="ListView"
                                
                ItemsSource="{x:Bind ViewModel.Layers}"
                ItemTemplate="{StaticResource DataTemplate}"
@@ -123,9 +130,11 @@
                ItemContainerStyle="{StaticResource ItemContainerStyle}"
                >
 
-        <ListView.Header>
-            <Button x:Name="AddButton" Height="42" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"/>
-        </ListView.Header>
+            <ListView.Header>
+                <Button x:Name="AddButton" Height="42" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"/>
+            </ListView.Header>
 
-    </ListView>
+        </ListView>
+    </Grid>
+
 </UserControl>

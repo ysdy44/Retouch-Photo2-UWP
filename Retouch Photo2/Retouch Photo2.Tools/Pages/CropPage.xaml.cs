@@ -15,7 +15,9 @@ namespace Retouch_Photo2.Tools.Pages
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
-
+        //@Converter
+        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
+        public bool IsSelected { private get; set; }
 
         //@Construct
         public CropPage()
