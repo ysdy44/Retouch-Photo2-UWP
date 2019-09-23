@@ -661,18 +661,33 @@
             </StackPanel.ChildrenTransitions>
 
             <StackPanel.Children>
+           
                 <TextBlock Text="No projects? You could..." HorizontalAlignment="Center" Foreground="{ThemeResource AppText}"/>
                 <ContentControl Height="6"/>
-                <Button x:Name="AddButton" Tag="Add New Project" Style="{StaticResource AppCircleButton}">
-                    <FontIcon Glyph="&#xE109;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+            
+                <Button x:Name="AddButton" Style="{StaticResource AppCircleButton}">
+                    <Button.Tag>
+                        <FontIcon Glyph="&#xE109;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                    </Button.Tag>                
+                    Add New Project
                 </Button>
+                
                 <Rectangle Height="1" Fill="{ThemeResource AppBorderBrush}" HorizontalAlignment="Stretch"/>
-                <Button x:Name="PhotoButton" Tag="New Project From Pictures" Style="{StaticResource AppCircleButton}">
-                    <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+              
+                <Button x:Name="PhotoButton" Style="{StaticResource AppCircleButton}">
+                    <Button.Tag>
+                        <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                    </Button.Tag>                
+                    New Project From Pictures
                 </Button>
-                <Button x:Name="DestopButton" Tag="New Project From Destop" Style="{StaticResource AppCircleButton}">
-                    <FontIcon Glyph="&#xEC4E;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                
+                <Button x:Name="DestopButton" Style="{StaticResource AppCircleButton}">
+                    <Button.Tag>
+                        <FontIcon Glyph="&#xEC4E;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                    </Button.Tag>                
+                    New Project From Destop
                 </Button>
+                
             </StackPanel.Children>
 
         </StackPanel>
@@ -700,7 +715,7 @@
         <elements:LoadingControl x:Name="LoadingControl" Grid.RowSpan="3"/>
 
         <!--Dialog-->
-        <elementsMainpages:AddDialog x:Name="AddDialog" Grid.Row="1"/>
+        <elementsMainpages:AddDialog x:Name="AddDialog" Grid.Row="1" />
         <elementsMainpages:AddDialog x:Name="FolderDialog" Grid.Row="1"/>
 
     </Grid>

@@ -543,14 +543,15 @@
         <Setter Property="MinWidth" Value="40"/>
         <Setter Property="MinHeight" Value="32"/>
         <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="RootGrid" 
                             CornerRadius="20"
-                            Padding="{TemplateBinding Padding}" 
                             BorderThickness="1" 
+                            Padding="12,0"
                             BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}" 
                             Background="Transparent" 
                         >
@@ -602,25 +603,29 @@
 
                         </VisualStateManager.VisualStateGroups>
 
-                        <StackPanel Orientation="Horizontal">
-
-                            <ContentPresenter x:Name="ContentPresenter"
-                            Grid.Column="2" 
-                            Content="{TemplateBinding Content}"
-                            ContentTransitions="{TemplateBinding ContentTransitions}"
-                            ContentTemplate="{TemplateBinding ContentTemplate}"
-
-                              Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"
-                             AutomationProperties.AccessibilityView="Raw" />
-
-                            <ContentControl Width="12"/>
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
                             <ContentControl x:Name="ContentControl"
-                              Content="{TemplateBinding Tag}" 
+                              Content="{TemplateBinding Tag}"
                               VerticalAlignment="Center"
+
+                              Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"
+                              AutomationProperties.AccessibilityView="Raw" />
+
+                            <ContentPresenter x:Name="ContentPresenter" Grid.Column="2"
+                              Margin="{TemplateBinding Padding}"
+                              Content="{TemplateBinding Content}" 
+                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                               Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"
                                />
-                        </StackPanel>
+                        </Grid>
 
                     </Border>
                 </ControlTemplate>

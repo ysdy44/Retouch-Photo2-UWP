@@ -27,6 +27,8 @@ namespace Retouch_Photo2.Controls
         //@Content
         /// <summary> IndicatorBorder's Child. </summary>
         public UIElement IndicatorChild { get => this.IndicatorBorder.Child; set => this.IndicatorBorder.Child = value; }
+        /// <summary> AddButton </summary>
+        public Button AddButton => this._AddButton;
 
         //@Construct
         public LayersControl()
@@ -39,41 +41,6 @@ namespace Retouch_Photo2.Controls
                 {
                     this.ViewModel.Invalidate();//Invalidate
                 }
-            };
-
-            this.AddButton.Tapped += async (s, e) =>
-            {
-                //ImageRe
-                ImageRe imageRe = await ImageRe.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, PickerLocationId.PicturesLibrary);
-                if (imageRe == null) return;
-
-               //Images
-                this.ViewModel.DuplicateChecking(imageRe);
-
-                //Transformer
-                Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
-
-                //Layer
-                ImageLayer imageLayer = new ImageLayer
-                {
-                    ImageRe= imageRe,
-                    Source = transformerSource,
-                    Destination= transformerSource,
-                    IsChecked = true
-                };
-
-                //Selection
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    layer.IsChecked = false;
-                });
-
-                //Insert
-                int index = this.MezzanineViewModel.GetfFrstIndex(this.ViewModel.Layers);
-                this.ViewModel.Layers.Insert(index, imageLayer);
-
-                this.SelectionViewModel.SetModeSingle(imageLayer);//Selection
-                this.ViewModel.Invalidate();//Invalidate
             };
 
 

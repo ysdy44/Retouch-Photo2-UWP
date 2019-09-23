@@ -18,6 +18,7 @@ namespace Retouch_Photo2.Elements.MainPages
         public AddDialog()
         {
             this.InitializeComponent();
+            base.SecondaryButtonClick += (sender, args) => base.Hide();
 
             this.WidthNumberPicker.Unit = "px";
             this.HeighNumberPicker.Unit = "px";

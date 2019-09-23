@@ -4,12 +4,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:hSVColorPickers="using:HSVColorPickers"
-    mc:Ignorable="d"
-    BorderBrush="{ThemeResource AppStroke}"               
-    Background="{ThemeResource AppFill}"                                
-    PrimaryButtonText="OK"
+    xmlns:hSVColorPickers="using:HSVColorPickers"     
+    BorderThickness="1" 
+    BorderBrush="{ThemeResource AppBorderBrush}" 
+    Background="{ThemeResource AppBackground}"
+    SecondaryButtonStyle="{StaticResource AppCircleButton}"
+    PrimaryButtonStyle="{StaticResource AppCircleButton}"
     SecondaryButtonText="Cancel"
+    PrimaryButtonText="OK"
+    mc:Ignorable="d"
     >
     
 

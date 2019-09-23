@@ -30,14 +30,6 @@ namespace Retouch_Photo2
         ObservableCollection<Photo> PhotoFileList = new ObservableCollection<Photo>();
 
 
-        //Add
-        private async void AddDialogShow() => await this.AddDialog.ShowAsync(ContentDialogPlacement.InPlace);
-        private void AddDialogHide() => this.AddDialog.Hide();
-
-        private async void FolderDialogShow() => await this.FolderDialog.ShowAsync(ContentDialogPlacement.InPlace);
-        private void FolderDialogHide() => this.FolderDialog.Hide();
-
-
         //Loading
         private bool IsLoading { set => this.LoadingControl.IsActive = value; }
         /// <summary> State of <see cref="MainPage"/>. </summary>
@@ -178,35 +170,34 @@ namespace Retouch_Photo2
             };
 
             //Initial
-            this.AddButton.Tapped += (s, e) => this.AddDialogShow();
+            this.AddButton.Tapped += async (s, e) => await this.AddDialog.ShowAsync(ContentDialogPlacement.InPlace);
             this.PhotoButton.Tapped += async (s, e) => await this.NewProjectFromPictures(PickerLocationId.PicturesLibrary);
             this.DestopButton.Tapped += async (s, e) => await this.NewProjectFromPictures(PickerLocationId.Desktop);
 
             //Main
-            this.MainControl.AddButton.Tapped += (s, e) => this.AddDialogShow();
+            this.MainControl.AddButton.Tapped += async (s, e) => await this.AddDialog.ShowAsync(ContentDialogPlacement.InPlace);
             this.MainControl.PicturesButton.Tapped += (s, e) => this.State = MainPageState.Pictures;
             this.MainControl.SaveButton.Tapped += (s, e) => this.State = MainPageState.Save;
             this.MainControl.ShareButton.Tapped += (s, e) => this.State = MainPageState.Share;
             this.MainControl.DeleteButton.Tapped += (s, e) => this.State = MainPageState.Delete;
             this.MainControl.DuplicateButton.Tapped += (s, e) => this.State = MainPageState.Duplicate;
-            this.MainControl.FolderButton.Tapped += (s, e) => this.FolderDialogShow();
+            this.MainControl.FolderButton.Tapped += async (s, e) => await this.FolderDialog.ShowAsync(ContentDialogPlacement.InPlace);
             this.MainControl.MoveButton.Tapped += (s, e) => this.State = MainPageState.Move;
 
             //Second
-            this.MainControl.SecondAddButton.Tapped += (s, e) => this.AddDialogShow();
+            this.MainControl.SecondAddButton.Tapped += async (s, e) => await this.AddDialog.ShowAsync(ContentDialogPlacement.InPlace);
             this.MainControl.SecondPicturesButton.Tapped += (s, e) => this.State = MainPageState.Pictures;
             this.MainControl.SecondSaveButton.Tapped += (s, e) => this.State = MainPageState.Save;
             this.MainControl.SecondShareButton.Tapped += (s, e) => this.State = MainPageState.Share;
             this.MainControl.SecondDeleteButton.Tapped += (s, e) => this.State = MainPageState.Delete;
             this.MainControl.SecondDuplicateButton.Tapped += (s, e) => this.State = MainPageState.Duplicate;
-            this.MainControl.SecondFolderButton.Tapped += (s, e) => this.FolderDialogShow();
+            this.MainControl.SecondFolderButton.Tapped += async (s, e) => await this.FolderDialog.ShowAsync(ContentDialogPlacement.InPlace);
             this.MainControl.SecondMoveButton.Tapped += (s, e) => this.State = MainPageState.Move;
 
             //Add
-            this.AddDialog.SecondaryButtonClick += (sender, args) => this.AddDialogHide();
             this.AddDialog.PrimaryButtonClick += (sender, args) =>
             {
-                this.AddDialogHide();
+                this.AddDialog.Hide();
 
                 this.IsLoading = true;//Loading
 
@@ -235,10 +226,9 @@ namespace Retouch_Photo2
             this.DuplicateControl.CancelButton.Tapped += (s, e) => this.State = MainPageState.Main;
 
             //Folder
-            this.FolderDialog.SecondaryButtonClick += (sender, args) => this.FolderDialogHide();
-            this.FolderDialog.PrimaryButtonClick += (sender, args) =>
+            this.FolderDialog.PrimaryButtonClick += (s, e) =>
             {
-                this.FolderDialogHide();
+                this.FolderDialog.Hide();
 
                 this.IsLoading = true;//Loading
 

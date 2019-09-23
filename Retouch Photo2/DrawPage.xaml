@@ -164,5 +164,8 @@
         <!--Load-->
         <elements:LoadingControl x:Name="LoadingControl" Text="Saving..."/>
 
+        <!--Dialog-->
+        <elements:LayersAddDialog x:Name="LayersAddDialog"/>
+
     </Grid>
 </Page>

@@ -1,8 +1,14 @@
-﻿using Retouch_Photo2.Elements;
+﻿using FanKit.Transformers;
+using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers;
+using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
-using System.Collections.Generic;
+using System;
+using System.Numerics;
+using System.Threading.Tasks;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -19,6 +25,8 @@ namespace Retouch_Photo2
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
+        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+        MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
 
 
         //@Converter
@@ -67,6 +75,12 @@ namespace Retouch_Photo2
             {
                 this.ConstructMenu(menu);
             }
+
+
+            //LayersAdd
+            this.LayersControl.AddButton.Tapped += async (s, e) => await this.LayersAddDialog.ShowAsync(ContentDialogPlacement.InPlace);
+            this.LayersAddDialog.PhotoButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.PicturesLibrary);
+            this.LayersAddDialog.DestopButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.Desktop);
         }
 
 
@@ -193,5 +207,42 @@ namespace Retouch_Photo2
         {
         }
 
+
+        private async Task AddImage(PickerLocationId location)
+        {
+            //ImageRe
+            ImageRe imageRe = await ImageRe.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, location);
+            if (imageRe == null) return;
+
+            //Images
+            this.ViewModel.DuplicateChecking(imageRe);
+
+            //Transformer
+            Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
+
+            //Layer
+            ImageLayer imageLayer = new ImageLayer
+            {
+                ImageRe = imageRe,
+                Source = transformerSource,
+                Destination = transformerSource,
+                IsChecked = true
+            };
+
+            //Selection
+            this.SelectionViewModel.SetValue((layer) =>
+            {
+                layer.IsChecked = false;
+            });
+
+            //Insert
+            int index = this.MezzanineViewModel.GetfFrstIndex(this.ViewModel.Layers);
+            this.ViewModel.Layers.Insert(index, imageLayer);
+
+            this.LayersAddDialog.Hide();
+
+            this.SelectionViewModel.SetModeSingle(imageLayer);//Selection
+            this.ViewModel.Invalidate();//Invalidate
+        }
     }
 }
