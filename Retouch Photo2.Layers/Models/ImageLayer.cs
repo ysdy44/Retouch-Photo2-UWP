@@ -1,5 +1,4 @@
-﻿using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
+﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Layers.Icons;
 using System.Numerics;
@@ -21,30 +20,25 @@ namespace Retouch_Photo2.Layers.Models
         
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         {
+            Matrix3x2 matrix = base.TransformManager.GetMatrix();
+
             return new Transform2DEffect
             {
                 Source = this.ImageRe.Source,
-                TransformMatrix = base.GetMatrix() * canvasToVirtualMatrix
+                TransformMatrix = matrix * canvasToVirtualMatrix
             };
         }
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            return new ImageLayer
+            ImageLayer imageLayer= new ImageLayer
             {
-                Name = base.Name,
-                Opacity = base.Opacity,
-                BlendType = base.BlendType,
-
-                IsChecked = base.IsChecked,
-                Visibility = base.Visibility,
-
-                Source = base.Source,
-                Destination = base.Destination,
-                DisabledRadian = base.DisabledRadian,
-
                 ImageRe = this.ImageRe,
             };
+
+            base.CopyWith(resourceCreator, imageLayer);
+
+            return imageLayer;
         }
     }
 }

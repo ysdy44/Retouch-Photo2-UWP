@@ -64,13 +64,13 @@ namespace Retouch_Photo2.Controls
         #region DependencyProperty
 
         /// <summary> Gets or sets <see cref = "EffectControl" />'s EffectManager. </summary>
-        public EffectManager EffectManager
+        public EffectManager? EffectManager
         {
-            get { return (EffectManager)GetValue(EffectManagerProperty); }
+            get { return (EffectManager?)GetValue(EffectManagerProperty); }
             set { SetValue(EffectManagerProperty, value); }
         }
         /// <summary> Identifies the <see cref = "EffectControl.Mode" /> dependency property. </summary>
-        public static readonly DependencyProperty EffectManagerProperty = DependencyProperty.Register(nameof(EffectManager), typeof(EffectManager), typeof(EffectControl), new PropertyMetadata(null, (sender, e) =>
+        public static readonly DependencyProperty EffectManagerProperty = DependencyProperty.Register(nameof(EffectManager), typeof(EffectManager?), typeof(EffectControl), new PropertyMetadata(null, (sender, e) =>
         {
             EffectControl con = (EffectControl)sender;
 
@@ -123,7 +123,7 @@ namespace Retouch_Photo2.Controls
             }
 
             //Effect
-            EffectManager.InvalidateAction = (Action<EffectManager> action) =>
+            Retouch_Photo2.Effects.EffectManager.InvalidateAction = (Action<EffectManager> action) =>
             {
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>

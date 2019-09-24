@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
@@ -575,7 +576,8 @@ namespace Retouch_Photo2.Controls
                 this.SelectionTransformer = zeroTransformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.Destination = zeroTransformer * matrix;
+                    layer.TransformManager = TransformManager.
+                    SetDestination(layer.TransformManager, zeroTransformer * matrix);
                 });
 
                 this.ViewModel.Invalidate();

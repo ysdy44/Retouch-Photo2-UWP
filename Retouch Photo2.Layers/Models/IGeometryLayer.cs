@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Layers.Models
         /// <returns> geometry </returns>
         public abstract CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix);
 
-        
+
         /// <summary> <see cref = "IGeometryLayer" />'s fill-brush. </summary>
         public Brush FillBrush = new Brush();
         /// <summary> <see cref = "IGeometryLayer" />'s stroke-brush. </summary>
@@ -78,70 +78,23 @@ namespace Retouch_Photo2.Layers.Models
                     {
                         case BrushType.None:
                             break;
-
                         case BrushType.Color:
                             drawingSession.FillGeometry(geometry, this.FillBrush.Color);
                             break;
-
                         case BrushType.LinearGradient:
-                            {
-                                Vector2 startPoint = Vector2.Transform(this.FillBrush.Points.LinearGradientStartPoint, canvasToVirtualMatrix);
-                                Vector2 endPoint = Vector2.Transform(this.FillBrush.Points.LinearGradientEndPoint, canvasToVirtualMatrix);
-
-                                ICanvasBrush brush = new CanvasLinearGradientBrush(resourceCreator, this.FillBrush.Array)
-                                {
-                                    StartPoint = startPoint,
-                                    EndPoint = endPoint,
-                                };
-
-                                drawingSession.FillGeometry(geometry, brush);
-                            }
+                            ICanvasBrush linearGradient = this.FillBrush.GetLinearGradient(resourceCreator, canvasToVirtualMatrix);
+                            drawingSession.FillGeometry(geometry, linearGradient);
                             break;
-
                         case BrushType.RadialGradient:
-                            {
-                                Vector2 center = Vector2.Transform(this.FillBrush.Points.RadialGradientCenter, canvasToVirtualMatrix);
-                                Vector2 point = Vector2.Transform(this.FillBrush.Points.RadialGradientPoint, canvasToVirtualMatrix);
-                                float radius = Vector2.Distance(center, point);
-
-                                ICanvasBrush brush = new CanvasRadialGradientBrush(resourceCreator, this.FillBrush.Array)
-                                {
-                                    RadiusX = radius,
-                                    RadiusY = radius,
-                                    Center = center
-                                };
-
-                                drawingSession.FillGeometry(geometry, brush);
-                            }
+                            ICanvasBrush radialGradientBrush = this.FillBrush.GetRadialGradientBrush(resourceCreator, canvasToVirtualMatrix);
+                            drawingSession.FillGeometry(geometry, radialGradientBrush);
                             break;
-
                         case BrushType.EllipticalGradient:
-                            {
-                                Vector2 center = Vector2.Transform(this.FillBrush.Points.EllipticalGradientCenter, canvasToVirtualMatrix);
-                                Vector2 xPoint = Vector2.Transform(this.FillBrush.Points.EllipticalGradientXPoint, canvasToVirtualMatrix);
-                                Vector2 yPoint = Vector2.Transform(this.FillBrush.Points.EllipticalGradientYPoint, canvasToVirtualMatrix);
-
-                                float radiusX = Vector2.Distance(center, xPoint);
-                                float radiusY = Vector2.Distance(center, yPoint);
-                                Matrix3x2 transformMatrix = Matrix3x2.CreateTranslation(-center)
-                                    * Matrix3x2.CreateRotation(FanKit.Math.VectorToRadians(xPoint - center))
-                                    * Matrix3x2.CreateTranslation(center);
-
-                                ICanvasBrush brush = new CanvasRadialGradientBrush(resourceCreator, this.FillBrush.Array)
-                                {
-                                    Transform = transformMatrix,
-                                    RadiusX = radiusX,
-                                    RadiusY = radiusY,
-                                    Center = center
-                                };
-
-                                drawingSession.FillGeometry(geometry, brush);
-                            }
+                            ICanvasBrush ellipticalGradientBrush = this.FillBrush.GetEllipticalGradientBrush(resourceCreator, canvasToVirtualMatrix);
+                            drawingSession.FillGeometry(geometry, ellipticalGradientBrush);
                             break;
-
                         case BrushType.Image:
                             break;
-
                         default:
                             break;
                     }
@@ -155,70 +108,23 @@ namespace Retouch_Photo2.Layers.Models
                     {
                         case BrushType.None:
                             break;
-
                         case BrushType.Color:
                             drawingSession.DrawGeometry(geometry, this.StrokeBrush.Color, strokeWidth);
                             break;
-
                         case BrushType.LinearGradient:
-                            {
-                                Vector2 startPoint = Vector2.Transform(this.StrokeBrush.Points.LinearGradientStartPoint, canvasToVirtualMatrix);
-                                Vector2 endPoint = Vector2.Transform(this.StrokeBrush.Points.LinearGradientEndPoint, canvasToVirtualMatrix);
-
-                                ICanvasBrush brush = new CanvasLinearGradientBrush(resourceCreator, this.StrokeBrush.Array)
-                                {
-                                    StartPoint = startPoint,
-                                    EndPoint = endPoint,
-                                };
-
-                                drawingSession.DrawGeometry(geometry, brush, strokeWidth);
-                            }
+                            ICanvasBrush linearGradient = this.StrokeBrush.GetLinearGradient(resourceCreator, canvasToVirtualMatrix);
+                            drawingSession.DrawGeometry(geometry, linearGradient, strokeWidth);
                             break;
-
                         case BrushType.RadialGradient:
-                            {
-                                Vector2 center = Vector2.Transform(this.StrokeBrush.Points.RadialGradientCenter, canvasToVirtualMatrix);
-                                Vector2 point = Vector2.Transform(this.StrokeBrush.Points.RadialGradientPoint, canvasToVirtualMatrix);
-                                float radius = Vector2.Distance(center, point);
-
-                                ICanvasBrush brush = new CanvasRadialGradientBrush(resourceCreator, this.StrokeBrush.Array)
-                                {
-                                    RadiusX = radius,
-                                    RadiusY = radius,
-                                    Center = center
-                                };
-
-                                drawingSession.DrawGeometry(geometry, brush, strokeWidth);
-                            }
+                            ICanvasBrush radialGradientBrush = this.StrokeBrush.GetRadialGradientBrush(resourceCreator, canvasToVirtualMatrix);
+                            drawingSession.DrawGeometry(geometry, radialGradientBrush, strokeWidth);
                             break;
-
                         case BrushType.EllipticalGradient:
-                            {
-                                Vector2 center = Vector2.Transform(this.StrokeBrush.Points.EllipticalGradientCenter, canvasToVirtualMatrix);
-                                Vector2 xPoint = Vector2.Transform(this.StrokeBrush.Points.EllipticalGradientXPoint, canvasToVirtualMatrix);
-                                Vector2 yPoint = Vector2.Transform(this.StrokeBrush.Points.EllipticalGradientYPoint, canvasToVirtualMatrix);
-
-                                float radiusX = Vector2.Distance(center, xPoint);
-                                float radiusY = Vector2.Distance(center, yPoint);
-                                Matrix3x2 transformMatrix = Matrix3x2.CreateTranslation(-center)
-                                    * Matrix3x2.CreateRotation(FanKit.Math.VectorToRadians(xPoint - center))
-                                    * Matrix3x2.CreateTranslation(center);
-
-                                ICanvasBrush brush = new CanvasRadialGradientBrush(resourceCreator, this.StrokeBrush.Array)
-                                {
-                                    Transform = transformMatrix,
-                                    RadiusX = radiusX,
-                                    RadiusY = radiusY,
-                                    Center = center
-                                };
-
-                                drawingSession.DrawGeometry(geometry, brush, strokeWidth);
-                            }
+                            ICanvasBrush ellipticalGradientBrush = this.StrokeBrush.GetEllipticalGradientBrush(resourceCreator, canvasToVirtualMatrix);
+                            drawingSession.DrawGeometry(geometry, ellipticalGradientBrush, strokeWidth);
                             break;
-
                         case BrushType.Image:
                             break;
-
                         default:
                             break;
                     }
@@ -232,7 +138,7 @@ namespace Retouch_Photo2.Layers.Models
             drawingSession.DrawGeometry(geometry, accentColor);
         }
 
-        
+
         public override void CacheTransform()
         {
             base.CacheTransform();
@@ -253,7 +159,6 @@ namespace Retouch_Photo2.Layers.Models
 
             this.FillBrush.TransformAdd(vector);
             this.StrokeBrush.TransformAdd(vector);
-        }
-
+        }       
     }
 }

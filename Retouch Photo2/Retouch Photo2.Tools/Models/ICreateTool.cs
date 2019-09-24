@@ -41,7 +41,7 @@ namespace Retouch_Photo2.Tools.Models
         public void Starting(Vector2 point) { }
         public void Started(Vector2 startingPoint, Vector2 point)
         {
-            if (this.TransformerTool.Started(startingPoint, point)) return;//TransformerToolBase
+            if (this.TransformerTool.Started(startingPoint, point, isSetTransformerMode: true)) return;//TransformerTool
 
             //Transformer
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
@@ -63,7 +63,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
-            if (this.TransformerTool.Delta(startingPoint, point)) return;//TransformerToolBase
+            if (this.TransformerTool.Delta(startingPoint, point)) return;//TransformerTool
 
             //Transformer
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
@@ -76,8 +76,10 @@ namespace Retouch_Photo2.Tools.Models
             );
 
             //Mezzanine
-            this.MezzanineViewModel.Layer.Source = transformer;
-            this.MezzanineViewModel.Layer.Destination = transformer;
+            this.MezzanineViewModel.Layer.TransformManager = TransformManager.
+                SetSource(this.MezzanineViewModel.Layer.TransformManager, transformer);
+            this.MezzanineViewModel.Layer.TransformManager = TransformManager.
+                SetDestination(this.MezzanineViewModel.Layer.TransformManager, transformer);
 
             this.SelectionViewModel.Transformer = transformer;//Selection
 
@@ -85,7 +87,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
-            if (this.TransformerTool.Complete(startingPoint, point, isSingleStarted)) return;//TransformerToolBase
+            if (this.TransformerTool.Complete(startingPoint, point, isSingleStarted)) return;//TransformerTool
 
             if (isSingleStarted)
             {
@@ -117,7 +119,7 @@ namespace Retouch_Photo2.Tools.Models
 
         public void Draw(CanvasDrawingSession drawingSession)
         {
-            this.TransformerTool.Draw(drawingSession);//TransformerToolBase
+            this.TransformerTool.Draw(drawingSession);//TransformerTool
         }
 
 

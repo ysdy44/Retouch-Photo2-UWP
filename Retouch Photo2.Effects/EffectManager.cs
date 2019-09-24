@@ -9,7 +9,7 @@ namespace Retouch_Photo2.Effects
     /// <summary> 
     /// <see cref = "IEffect" />'s manager. 
     /// </summary>
-    public class EffectManager
+    public struct EffectManager
     {
         //@Static
         /// <summary>
@@ -23,24 +23,24 @@ namespace Retouch_Photo2.Effects
 
         //GaussianBlur
         public bool GaussianBlur_IsOn;
-        public float GaussianBlur_BlurAmount=0;
+        public float GaussianBlur_BlurAmount;
 
         //DirectionalBlur
         public bool DirectionalBlur_IsOn;
-        public float DirectionalBlur_BlurAmount=0;
-        public float DirectionalBlur_Angle=0;
+        public float DirectionalBlur_BlurAmount;
+        public float DirectionalBlur_Angle;
 
         //Sharpen
         public bool Sharpen_IsOn;
-        public float Sharpen_Amount = 0;
+        public float Sharpen_Amount;
 
         //OuterShadow
         public bool OuterShadow_IsOn;
-        public float OuterShadow_Radius = 0;
-        public float OuterShadow_Opacity = 0.5f;
-        public Color OuterShadow_Color = Colors.Black;
+        public float OuterShadow_Radius;
+        public float OuterShadow_Opacity;
+        public Color OuterShadow_Color;
 
-        private float OuterShadow_offset = 0;
+        private float OuterShadow_offset;
         public float OuterShadow_Offset
         {
             get => this.OuterShadow_offset;
@@ -50,7 +50,7 @@ namespace Retouch_Photo2.Effects
                 this.OuterShadow_offset = value;
             }
         }
-        private float OuterShadow_angle= 0.78539816339744830961566084581988f;// 1/4 π
+        private float OuterShadow_angle;
         public float OuterShadow_Angle
         {
             get => this.OuterShadow_angle;
@@ -60,11 +60,11 @@ namespace Retouch_Photo2.Effects
                 this.OuterShadow_angle = value;
             }
         }
-        Vector2 OuterShadow_Position = Vector2.Zero;
+        Vector2 OuterShadow_Position;
 
         //Outline
         public bool Outline_IsOn;
-        private int Outline_size=1;
+        private int Outline_size;
         public int Outline_Size
         {
             get => this.Outline_size;
@@ -80,20 +80,21 @@ namespace Retouch_Photo2.Effects
         }
 
         public MorphologyEffectMode Outline_Mode { get; private set; }
-        public int Outline_Width { get; private set; } = 1;
-        public int Outline_Height { get; private set; } = 1;
+        public int Outline_Width { get; private set; } 
+        public int Outline_Height { get; private set; } 
 
         //Emboss
         public bool Emboss_IsOn;
-        public float Emboss_Amount = 1;
-        public float Emboss_Angle = 0;
+        public float Emboss_Amount;
+        public float Emboss_Angle;
         
         //Straighten
         public bool Straighten_IsOn;
-        public float Straighten_Angle = 0;
+        public float Straighten_Angle;
+
 
         //@Static
-        public static ICanvasImage Render(EffectManager  effectManager, ICanvasImage image)
+        public static ICanvasImage Render(EffectManager effectManager, ICanvasImage image)
         {
             //GaussianBlur
             if (effectManager.GaussianBlur_IsOn)

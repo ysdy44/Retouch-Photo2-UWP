@@ -107,6 +107,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Brush.cs" />
+    <Compile Include="Brush.ICanvasBrush.cs" />
     <Compile Include="BrushPoints.cs" />
     <Compile Include="GradientBrushType.cs" />
     <Compile Include="BrushType.cs" />

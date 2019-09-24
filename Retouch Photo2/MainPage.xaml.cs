@@ -271,8 +271,12 @@ namespace Retouch_Photo2
             ImageLayer imageLayer = new ImageLayer()
             {
                 ImageRe = imageRe,
-                Source = transformerSource,
-                Destination = transformerSource,
+
+                TransformManager = new TransformManager
+                {
+                    Source = transformerSource,
+                    Destination = transformerSource,
+                },
             };
 
             //Project

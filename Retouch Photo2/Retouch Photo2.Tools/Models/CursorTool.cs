@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             this._isBox = false; //Box
 
-            if (this.TransformerTool.Starting(point)) return; //TransformerToolBase
+            if (this.TransformerTool.Starting(point)) return; //TransformerTool
 
             this._isBox = true; //Box
         }
@@ -71,7 +71,7 @@ namespace Retouch_Photo2.Tools.Models
                 return;
             }
 
-            this.TransformerTool.Started(startingPoint, point, false);//TransformerToolBase
+            this.TransformerTool.Started(startingPoint, point, isSetTransformerMode: false);//TransformerTool
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
@@ -87,7 +87,7 @@ namespace Retouch_Photo2.Tools.Models
                 return;
             }
 
-            this.TransformerTool.Delta(startingPoint, point); //TransformerToolBase
+            this.TransformerTool.Delta(startingPoint, point);//TransformerTool
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
@@ -105,7 +105,7 @@ namespace Retouch_Photo2.Tools.Models
                 }
             }
 
-            this.TransformerTool.Complete(startingPoint, point, isSingleStarted); //TransformerToolBase
+            this.TransformerTool.Complete(startingPoint, point, isSingleStarted); //TransformerTool
         }
         
         public void Draw(CanvasDrawingSession drawingSession)
@@ -119,7 +119,7 @@ namespace Retouch_Photo2.Tools.Models
                 return;
             }
 
-            this.TransformerTool.Draw(drawingSession);//TransformerToolBase
+            this.TransformerTool.Draw(drawingSession);//TransformerTool
         }
         
         public void OnNavigatedTo() { }
@@ -130,7 +130,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             foreach (ILayer layer in this.ViewModel.Layers)
             {
-                bool contained = layer.Destination.Contained(this._boxCanvasRect);
+                Transformer transformer = layer.TransformManager.Destination;
+                bool contained = transformer.Contained(this._boxCanvasRect);
 
                 switch (this.CompositeMode)
                 {

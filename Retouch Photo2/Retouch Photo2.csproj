@@ -293,6 +293,7 @@
       <DependentUpon>ViewScaleTouchbar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\TransformerTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\TransformerTool.Select.cs" />
     <Compile Include="SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>

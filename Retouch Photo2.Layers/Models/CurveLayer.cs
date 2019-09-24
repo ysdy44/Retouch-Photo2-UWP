@@ -40,79 +40,39 @@ namespace Retouch_Photo2.Layers.Models
         {
             base.CacheTransform();
 
-            for (int i = 0; i < this.NodeCollection.Count; i++)
-            {
-                Node node = this.NodeCollection[i];
-                node.CacheTransform();
-                this.NodeCollection[i] = node;
-            }
+            this.NodeCollection.CacheTransform();
         }
         public override void TransformMultiplies(Matrix3x2 matrix)
         {
             base.TransformMultiplies(matrix);
 
-            for (int i = 0; i < this.NodeCollection.Count; i++)
-            {
-                Node node = this.NodeCollection[i];
-                node.TransformMultiplies(matrix);
-                this.NodeCollection[i] = node;
-            }
+            this.NodeCollection.TransformMultiplies(matrix);
         }
         public override void TransformAdd(Vector2 vector)
         {
             base.TransformAdd(vector);
 
-            for (int i = 0; i < this.NodeCollection.Count; i++)
-            {
-                Node node = this.NodeCollection[i];
-                node.TransformAdd(vector);
-                this.NodeCollection[i] = node;
-            }
+            this.NodeCollection.TransformAdd(vector);
         }
 
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
-        {  
-            CanvasPathBuilder pathBuilder = new CanvasPathBuilder(resourceCreator);
-            pathBuilder.BeginFigure(this.NodeCollection.First().Point);
-
-            for (int i = 0; i < this.NodeCollection.Count - 1; i++)
-            {
-                Node current = this.NodeCollection[i];             
-                Node preview = this.NodeCollection[i + 1];
-                
-                if (current.IsSmooth && preview.IsSmooth)
-                    pathBuilder.AddCubicBezier(current.LeftControlPoint, preview.RightControlPoint, preview.Point);
-                else if (current.IsSmooth && preview.IsSmooth == false)
-                    pathBuilder.AddCubicBezier(current.LeftControlPoint, preview.Point, preview.Point);
-                else if (current.IsSmooth == false && preview.IsSmooth)
-                    pathBuilder.AddCubicBezier(current.Point, preview.RightControlPoint, preview.Point);
-                else 
-                    pathBuilder.AddLine(preview.Point);
-            }
-
-            pathBuilder.EndFigure(CanvasFigureLoop.Open);
-            return CanvasGeometry.CreatePath(pathBuilder).Transform(canvasToVirtualMatrix);
+        {
+            return this.NodeCollection.CreateGeometry(resourceCreator).Transform(canvasToVirtualMatrix);
         }
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            return new CurveLayer(this.NodeCollection)
+            CurveLayer curveLayer= new CurveLayer(this.NodeCollection)
             {
-                Name = base.Name,
-                Opacity = base.Opacity,
-                BlendType = base.BlendType,
-
-                IsChecked = base.IsChecked,
-                Visibility = base.Visibility,
-
-                Source = base.Source,
-                Destination = base.Destination,
-                DisabledRadian = base.DisabledRadian,
-
                 FillBrush = base.FillBrush,
                 StrokeBrush = base.StrokeBrush,
+                NodeCollection = new NodeCollection(from node in this.NodeCollection select node)
             };
+
+            base.CopyWith(resourceCreator, curveLayer);
+
+            return curveLayer;
         }
 
 
@@ -138,8 +98,10 @@ namespace Retouch_Photo2.Layers.Models
             }
             
             Transformer transformer = new Transformer(left, top, right, bottom);
-            base.Source = transformer;
-            base.Destination = transformer;
+            base.TransformManager = TransformManager.
+                SetSource(base.TransformManager, transformer);
+            base.TransformManager = TransformManager.   
+                SetDestination(base.TransformManager, transformer);
         }
     }
 }

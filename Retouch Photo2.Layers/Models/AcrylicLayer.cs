@@ -36,8 +36,9 @@ namespace Retouch_Photo2.Layers.Models
         
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         {
-            Vector2 leftTop = Vector2.Transform(base.Destination.LeftTop, canvasToVirtualMatrix);
-            Vector2 rightBottom = Vector2.Transform(base.Destination.RightBottom, canvasToVirtualMatrix);
+            Transformer transformer = base.TransformManager.Destination;
+            Vector2 leftTop = Vector2.Transform(transformer.LeftTop, canvasToVirtualMatrix);
+            Vector2 rightBottom = Vector2.Transform(transformer.RightBottom, canvasToVirtualMatrix);
 
             return new CropEffect
             {
@@ -66,23 +67,16 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            return new AcrylicLayer
+            AcrylicLayer acrylicLayer = new AcrylicLayer
             {
-                Name = base.Name,
-                Opacity = base.Opacity,
-                BlendType = base.BlendType,
-
-                IsChecked = base.IsChecked,
-                Visibility = base.Visibility,
-
-                Source = base.Source,
-                Destination = base.Destination,
-                DisabledRadian = base.DisabledRadian,
-
                 TintOpacity = this.TintOpacity,
                 TintColor = this.TintColor,
                 BlurAmount = this.BlurAmount,
             };
+
+            base.CopyWith(resourceCreator, acrylicLayer);
+
+            return acrylicLayer;
         }
     }
 }

@@ -267,7 +267,8 @@ namespace Retouch_Photo2.Tools.Models
             if (this.CurveLayer == null) return;
 
             //The PenTool may change the current CurveLayer's transformer.
-            this.SelectionViewModel.Transformer = this.CurveLayer.Destination;
+            Transformer transformer = this.CurveLayer.TransformManager.Destination;
+            this.SelectionViewModel.Transformer = transformer;
         }
     }
 }

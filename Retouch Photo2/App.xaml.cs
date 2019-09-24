@@ -40,12 +40,13 @@ namespace Retouch_Photo2
             //Tool
             Tools = new List<ITool>
             {
+                /*
                 new CursorTool(),
                 new ImageTool(),
                 new RectangleTool(),
                 new CropTool(),
+                 */
                 
-                /*
                  new NoneTool(),
                  new CursorTool(),
                  new ViewTool(),
@@ -56,27 +57,27 @@ namespace Retouch_Photo2
                  new ImageTool(),
                  new AcrylicTool(),
                  new CropTool(),
-                 */
             },
 
             //Touchbar
             Touchbars = new List<ITouchbar>
             {
                 /*
+                 */
                 new StrokeWidthTouchbar(),
                 new ViewRadianTouchbar(),
                 new ViewScaleTouchbar(),
                 new AcrylicTintOpacityTouchbar(),
                 new AcrylicBlurAmountTouchbar(),
-                 */
             },
 
             //Menu
             Menus = new List<IMenu>
             {
-                new LayerMenu(),
-
                 /*
+                new LayerMenu(),
+                 */
+
                 new DebugMenu(),
                 new SelectionMenu(),
                 new OperateMenu(),
@@ -86,7 +87,6 @@ namespace Retouch_Photo2
                 new ColorMenu(),
                 new ToolMenu(),
                 new LayerMenu(),
-                 */
             },
         };
 

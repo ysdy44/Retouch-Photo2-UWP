@@ -39,29 +39,14 @@ namespace Retouch_Photo2.Layers
         BlendType BlendType { get; set; }
 
 
-        /// <summary>
-        /// Gets transformer-matrix's resulting matrix.
-        /// </summary>
-        /// <returns> The product matrix. </returns>
-        Matrix3x2 GetMatrix();
-        /// <summary> The source transformer. </summary>
-        Transformer Source { get; set; }
-        /// <summary> The destination transformer. </summary>
-        Transformer Destination { get; set; }
-        /// <summary> Is disable rotate radian? Defult **false**. </summary>
-        bool DisabledRadian { get; set; }
-
-        /// <summary> Is cropped? </summary>
-        bool IsCrop { get; set; }
-        /// <summary> The cropped transformer. </summary>
-        Transformer CropSource { get; set; }
-
-        /// <summary> The ILayer's children layers. </summary>
-        ObservableCollection<ILayer> Children { get; }
+        /// <summary> Gets or sets ILayer's transformer. </summary>
+        TransformManager TransformManager { get; set; }
         /// <summary> The ILayer's effect manager. </summary>
-        EffectManager EffectManager { get; }
+        EffectManager EffectManager { get; set; }
         /// <summary> The ILayer's adjustment manager. </summary>
-        AdjustmentManager AdjustmentManager { get; }
+        AdjustmentManager AdjustmentManager { get; set; }
+        /// <summary> The ILayer's children layers. </summary>
+        ObservableCollection<ILayer> Children { get; set; }
 
 
         /// <summary>
@@ -81,11 +66,18 @@ namespace Retouch_Photo2.Layers
         /// <param name="accentColor"> The accent color. </param>
         void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor);
 
+
         /// <summary>
         /// Get ILayer own copy.
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>
         /// <returns> The cloned ILayer. </returns>
         ILayer Clone(ICanvasResourceCreator resourceCreator);
+        /// <summary>
+        /// Copy a layer with self.
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="layer"> The cloned ILayer. </param>
+        void CopyWith(ICanvasResourceCreator resourceCreator,ILayer layer);
     }
 }

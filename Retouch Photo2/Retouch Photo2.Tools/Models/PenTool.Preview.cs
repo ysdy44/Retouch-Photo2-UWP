@@ -1,6 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using System.Numerics;
 
@@ -83,8 +84,11 @@ namespace Retouch_Photo2.Tools.Models
                     Color = this.SelectionViewModel.FillColor,
                 },
 
-                Source = transformer,
-                Destination = transformer,
+                TransformManager = new TransformManager
+                {
+                    Source = transformer,
+                    Destination = transformer,
+                }
             };
 
             //Selection

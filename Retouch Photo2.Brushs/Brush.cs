@@ -10,7 +10,7 @@ namespace Retouch_Photo2.Brushs
     /// <summary>
     /// Define the object used to draw geometry.
     /// </summary>
-    public class Brush: ICacheTransform
+    public partial class Brush : ICacheTransform
     {
         /// <summary> <see cref="Brush">'s type. </summary>
         public BrushType Type;

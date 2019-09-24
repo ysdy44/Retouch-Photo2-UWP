@@ -1,6 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
+using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
@@ -138,11 +139,17 @@ namespace Retouch_Photo2.Controls
 
                     Matrix3x2 canvasToVirtualMatrix = this.ViewModel.CanvasTransformer.GetMatrix(MatrixTransformerMode.CanvasToVirtual);
 
-                    void aaa() =>
-                      previousImage = Layer.Render(this.ViewModel.CanvasDevice, this.MezzanineViewModel.Layer, previousImage, canvasToVirtualMatrix);
+                    void aaa()
+                    {
+                        ILayer mezzanineLayer = this.MezzanineViewModel.Layer;
+                        previousImage = Layer.Render(this.ViewModel.CanvasDevice, mezzanineLayer, previousImage, canvasToVirtualMatrix);
+                    }
 
-                    void bbb(int i) =>
-                        previousImage = Layer.Render(this.ViewModel.CanvasDevice, this.ViewModel.Layers[i], previousImage, canvasToVirtualMatrix);
+                    void bbb(int i)
+                    {
+                        ILayer currentLayer = this.ViewModel.Layers[i];
+                        previousImage = Layer.Render(this.ViewModel.CanvasDevice, currentLayer, previousImage, canvasToVirtualMatrix);
+                    }
 
 
                     //Mezzanine 

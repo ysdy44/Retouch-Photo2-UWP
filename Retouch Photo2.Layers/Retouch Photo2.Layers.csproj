@@ -128,6 +128,7 @@
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
     <Compile Include="ILayer.cs" />
+    <Compile Include="TransformManager.cs" />
     <Compile Include="Models\CurveLayer.cs" />
     <Compile Include="Models\IGeometryLayer.cs" />
     <Compile Include="ImageRe.cs" />

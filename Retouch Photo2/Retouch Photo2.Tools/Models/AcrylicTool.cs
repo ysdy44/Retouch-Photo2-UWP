@@ -25,9 +25,12 @@ namespace Retouch_Photo2.Tools.Models
             IsChecked = true,
             TintColor = this.SelectionViewModel.FillColor,
 
-            Source = transformer,
-            Destination = transformer,
-            DisabledRadian = true//DisabledRadian
+            TransformManager = new TransformManager
+            {
+                Source = transformer,
+                Destination = transformer,
+                DisabledRadian = true//DisabledRadian
+            }
         };
 
         public override bool IsSelected

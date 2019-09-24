@@ -1,6 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Layers.Icons;
-using System.Collections.ObjectModel;
 using System.Numerics;
 using Windows.UI.Xaml;
 
@@ -24,7 +23,7 @@ namespace Retouch_Photo2.Layers.Models
                 foreach (ILayer child in this.Children)
                 {
                     if (child.Visibility == Visibility.Collapsed) continue;
-                    if (child.Opacity ==0) continue;
+                    if (child.Opacity == 0) continue;
 
                     //GetRender
                     ICanvasImage currentImage = child.GetRender(resourceCreator, previousImage, canvasToVirtualMatrix);
@@ -35,29 +34,12 @@ namespace Retouch_Photo2.Layers.Models
         }
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
-        {       
-            ObservableCollection<ILayer> children  = new ObservableCollection<ILayer>();
-            foreach (ILayer child in this.Children)
-            {
-                ILayer cloneLayer = child.Clone(resourceCreator);//Clone
-                children.Add(cloneLayer);//Add
-            }
+        {
+            GroupLayer groupLayer = new GroupLayer();
 
-            return new GroupLayer
-            {
-                Name = base.Name,
-                Opacity = base.Opacity,
-                BlendType = base.BlendType,
+            base.CopyWith(resourceCreator, groupLayer);
 
-                IsChecked = base.IsChecked,
-                Visibility = base.Visibility,
-                
-                Source = base.Source,
-                Destination = base.Destination,
-                DisabledRadian = base.DisabledRadian,
-
-                Children = children,
-            };
+            return groupLayer;
         }
     }
 }

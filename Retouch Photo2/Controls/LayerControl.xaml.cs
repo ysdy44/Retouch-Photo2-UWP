@@ -260,9 +260,11 @@ namespace Retouch_Photo2.Controls
                 {
                     IsChecked = true,
 
-                    Source = transformer,
-                    Destination = transformer,
-                    DisabledRadian = false//DisabledRadian
+                    TransformManager = new TransformManager
+                    {
+                        Source = transformer,
+                        Destination = transformer,
+                    }
                 };
 
 
@@ -274,9 +276,11 @@ namespace Retouch_Photo2.Controls
                     layer.IsChecked = false;
                     groupLayer.Children.Add(layer);//Add
 
-                    if (layer.DisabledRadian)
+                    if (layer.TransformManager.DisabledRadian)
                     {
-                        groupLayer.DisabledRadian = true;//DisabledRadian
+                        //DisabledRadian
+                        groupLayer.TransformManager = TransformManager.
+                            SetDisabledRadian(groupLayer.TransformManager, true);
                     }
                 });
 

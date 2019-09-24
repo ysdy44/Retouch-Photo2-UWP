@@ -1,4 +1,5 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Numerics;
@@ -17,27 +18,21 @@ namespace Retouch_Photo2.Layers.Models
         
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
-            return base.Destination.ToEllipse(resourceCreator, canvasToVirtualMatrix);
+            Transformer transformer = base.TransformManager.Destination;
+            return transformer.ToEllipse(resourceCreator, canvasToVirtualMatrix);
         }
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            return new EllipseLayer
+            EllipseLayer ellipseLayer= new EllipseLayer
             {
-                Name=base.Name,
-                Opacity= base.Opacity,
-                BlendType= base.BlendType,
-
-                IsChecked = base.IsChecked,
-                Visibility = base.Visibility,
-
-                Source = base.Source,
-                Destination = base.Destination,
-                DisabledRadian = base.DisabledRadian,
-
                 FillBrush = base.FillBrush,
                 StrokeBrush = base.StrokeBrush,
             };
+
+            base.CopyWith(resourceCreator, ellipseLayer);
+
+            return ellipseLayer;
         }
     }
 }

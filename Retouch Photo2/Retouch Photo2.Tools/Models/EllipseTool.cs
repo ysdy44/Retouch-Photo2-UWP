@@ -30,8 +30,11 @@ namespace Retouch_Photo2.Tools.Models
                 Color = this.SelectionViewModel.FillColor,
             },
 
-            Source = transformer,
-            Destination = transformer,
+            TransformManager = new TransformManager
+            {
+                Source = transformer,
+                Destination = transformer,
+            }
         };
 
         public override bool IsSelected

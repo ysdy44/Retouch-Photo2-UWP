@@ -60,10 +60,15 @@ namespace Retouch_Photo2.Tools.Models
             //Mezzanine
             ILayer createLayer = new ImageLayer()
             {
-                ImageRe = imageRe,
-                Source = transformerSource,
-                Destination = transformerDestination,
                 IsChecked = true,
+
+                TransformManager=new TransformManager
+                {
+                    Source = transformerSource,
+                    Destination = transformerDestination,
+                },
+
+                ImageRe = imageRe,
             };
             this.MezzanineViewModel.SetLayer(createLayer, this.ViewModel.Layers);
 
@@ -78,7 +83,9 @@ namespace Retouch_Photo2.Tools.Models
             //Transformer
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
 
-            this.MezzanineViewModel.Layer.Destination = transformerDestination;//Mezzanine
+            //Mezzanine
+            this.MezzanineViewModel.Layer.TransformManager = TransformManager.
+                SetCropDestination(this.MezzanineViewModel.Layer.TransformManager, transformerDestination);
 
             this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
@@ -115,10 +122,15 @@ namespace Retouch_Photo2.Tools.Models
                 //Mezzanine
                 ILayer createLayer = new ImageLayer()
                 {
-                    ImageRe = imageRe,
-                    Source = transformerSource,
-                    Destination = transformerDestination,
                     IsChecked = true,
+
+                    TransformManager=new TransformManager
+                    {
+                        Source = transformerSource,
+                        Destination = transformerDestination,
+                    },
+
+                    ImageRe = imageRe,
                 };
                 this.MezzanineViewModel.Insert(createLayer, this.ViewModel.Layers);
             }

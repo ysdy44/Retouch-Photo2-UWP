@@ -1,12 +1,9 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
-using System.Linq;
 using System.Numerics;
 using Windows.UI;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools
@@ -29,45 +26,8 @@ namespace Retouch_Photo2.Tools
         bool IsStepFrequency => this.KeyboardViewModel.IsStepFrequency;
          
 
-        Transformer oldTransformer;
-        TransformerMode TransformerMode;
-        
-
-        public bool SelectLayer(Vector2 point)
-        {
-            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-            Vector2 canvasPoint = Vector2.Transform(point, matrix);
-
-            ILayer selectedLayer = this.ViewModel.Layers.FirstOrDefault((layer) =>
-            {
-                if (layer.Visibility == Visibility.Visible)
-                {
-                    bool isFillContainsPoint = layer.Destination.FillContainsPoint(canvasPoint);
-                    if (isFillContainsPoint)
-                    {
-                        selectedLayer = layer;
-                        return true;
-                    }
-                }
-                return false;
-            });
-            if (selectedLayer == null) return false;
-
-
-            //Selection
-            this.SelectionViewModel.SetValue((layer) =>
-            {
-                layer.IsChecked = false;
-            });
-            this.TransformerMode = TransformerMode.Translation;//TransformerMode
-
-
-            //Selection
-            selectedLayer.IsChecked = true;
-            this.SelectionViewModel.SetModeSingle(selectedLayer);//Transformer
-            this.ViewModel.Invalidate();//Invalidate
-            return true;
-        }
+        Transformer _oldTransformer;
+        TransformerMode _transformerMode;
         
 
         public bool Starting(Vector2 point)
@@ -76,56 +36,28 @@ namespace Retouch_Photo2.Tools
             {
                 case ListViewSelectionMode.None:
                     {
-                        this.TransformerMode = TransformerMode.None;//TransformerMode
-                        bool isSelect = this.SelectLayer(point);
-                        if (isSelect) return true;
-                        else return false;
+                        this._transformerMode = TransformerMode.None;//TransformerMode
+                        bool isSelect = this.SelectSingleLayer(point);
+                        return isSelect;
                     }
                 case ListViewSelectionMode.Single:
                 case ListViewSelectionMode.Multiple:
                     {
+                        //Transformer
                         Transformer transformer = this.Transformer;
                         Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                        this.TransformerMode = Transformer.ContainsNodeMode(point, transformer, matrix, this.SelectionViewModel.DsabledRadian);
+                        bool dsabledRadian = this.SelectionViewModel.DsabledRadian;
+                        TransformerMode transformerMode = Transformer.ContainsNodeMode
+                        (
+                             point,
+                             transformer,
+                             matrix,
+                             dsabledRadian
+                        );
+                        this._transformerMode = transformerMode;
 
-                        //Add
-                        switch (this.CompositeMode)
-                        {
-                            case CompositeMode.New:
-                            case CompositeMode.Intersect:
-                                {
-                                    if (this.TransformerMode == TransformerMode.None)
-                                    {
-                                        bool isSelect = this.SelectLayer(point);
-
-                                        if (isSelect) return true;
-                                        else return false;
-                                    }
-                                }
-                                break;
-                            case CompositeMode.Add:
-                                {
-                                    if (this.TransformerMode == TransformerMode.None || this.TransformerMode == TransformerMode.Translation)
-                                    {
-                                        bool isAdd = this.AddLayer(point, CompositeMode.Add);
-                                        if (isAdd) return true;
-                                        else return false;
-                                    }
-                                }
-                                break;
-                            case CompositeMode.Subtract:
-                                {
-                                    if (this.TransformerMode == TransformerMode.None || this.TransformerMode == TransformerMode.Translation)
-                                    {
-                                        bool isAdd = this.AddLayer(point, CompositeMode.Subtract);
-                                        if (isAdd) return true;
-                                        else return false;
-                                    }
-                                }
-                                break;
-                        }
+                        return this.StartingFromTransformerMode(point,transformerMode);
                     }
-                    break;
             }
 
             return true;
@@ -134,13 +66,23 @@ namespace Retouch_Photo2.Tools
         {
             if (this.Mode == ListViewSelectionMode.None) return false;
 
-            this.oldTransformer = this.Transformer;
+            this._oldTransformer = this.Transformer;
 
             if (isSetTransformerMode)
             {
+                //Transformer
                 Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                this.TransformerMode = Transformer.ContainsNodeMode(startingPoint, this.oldTransformer, matrix, this.SelectionViewModel.DsabledRadian);
-                if (this.TransformerMode == TransformerMode.None) return false;
+                bool dsabledRadian = this.SelectionViewModel.DsabledRadian;
+                TransformerMode transformerMode = Transformer.ContainsNodeMode
+                (
+                    startingPoint,
+                    this._oldTransformer,
+                    matrix,
+                    dsabledRadian
+                );
+                this._transformerMode = transformerMode;
+
+                if (transformerMode == TransformerMode.None) return false;
             }
 
             //Selection
@@ -150,34 +92,35 @@ namespace Retouch_Photo2.Tools
             }, true);
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-
             return true;
         }
         public bool Delta(Vector2 startingPoint, Vector2 point)
         {
             if (this.Mode == ListViewSelectionMode.None) return false;
-
-            if (this.TransformerMode == TransformerMode.None) return false;
+            if (this._transformerMode == TransformerMode.None) return false;
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
 
             //Transformer
-            this.Transformer = Transformer.Controller
+            Transformer transformer = Transformer.Controller
             (
-                this.TransformerMode, 
-                startingPoint, point, 
-                this.oldTransformer,
+                this._transformerMode, 
+                startingPoint, 
+                point, 
+                this._oldTransformer,
                 inverseMatrix,
                 this.IsRatio, 
                 this.IsCenter, 
                 this.IsStepFrequency
             );
-            Matrix3x2 matrix = Transformer.FindHomography(this.oldTransformer, this.Transformer);
+            this.Transformer = transformer;
+
+            Matrix3x2 matrix = Transformer.FindHomography(this._oldTransformer, transformer);
 
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                layer.TransformMultiplies(matrix);
+                layer.TransformMultiplies(matrix );
             }, true);
 
             this.ViewModel.Invalidate();//Invalidate
@@ -195,7 +138,7 @@ namespace Retouch_Photo2.Tools
                         {
                             case CompositeMode.New:
                                 {
-                                    if (this.TransformerMode == TransformerMode.None)
+                                    if (this._transformerMode == TransformerMode.None)
                                     {
                                         //Selection
                                         this.SelectionViewModel.SetValue((layer) =>
@@ -203,8 +146,8 @@ namespace Retouch_Photo2.Tools
                                             layer.IsChecked = false;
                                         });
                                         this.SelectionViewModel.SetModeNone();//Selection
-                                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
 
+                                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                                         return false;
                                     }
                                 }
@@ -217,7 +160,7 @@ namespace Retouch_Photo2.Tools
                     break;
             }
 
-            this.TransformerMode = TransformerMode.None;//TransformerMode
+            this._transformerMode = TransformerMode.None;//TransformerMode
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
 
             return true;
@@ -228,59 +171,25 @@ namespace Retouch_Photo2.Tools
             //Selection
             switch (this.Mode)
             {
-                case ListViewSelectionMode.None:
-                    break;
+                case ListViewSelectionMode.None: break;
                 case ListViewSelectionMode.Single:
                 case ListViewSelectionMode.Multiple:
                     {
+                        //Transformer
                         Transformer transformer = this.Transformer;
                         Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
                         Color accentColor = this.ViewModel.AccentColor;
                         bool dsabledRadian = this.SelectionViewModel.DsabledRadian;
-                        drawingSession.DrawBoundNodes(transformer, matrix, accentColor, disabledRadian: dsabledRadian);
+                        drawingSession.DrawBoundNodes
+                        (
+                            transformer, 
+                            matrix, 
+                            accentColor, 
+                            dsabledRadian
+                         );
                     }
                     break;
             }
-        }
-
-
-        /// <summary>
-        /// Add the layer to the layers. 
-        /// </summary>
-        /// <param name="point"> point </param>
-        /// <param name="mode"> <see cref = "CompositeMode.Add" /> or <see cref = "CompositeMode.Subtract" /> </param>
-        /// <returns> Return **false** if you do not select to any layer. </returns>
-        private bool AddLayer(Vector2 point, CompositeMode mode)
-        {
-            Vector2 canvasPoint = Vector2.Transform(point, this.ViewModel.CanvasTransformer.GetInverseMatrix());
-
-            ILayer selectedLayer = this.ViewModel.Layers.FirstOrDefault((layer) =>
-            {
-                if (layer.Visibility == Visibility.Visible)
-                {
-                    bool isFillContainsPoint = layer.Destination.FillContainsPoint(canvasPoint);
-                    if (isFillContainsPoint) return true;
-                }
-
-                return false;
-            });
-
-            if (selectedLayer == null) return false;
-            switch (mode)
-            {
-                case CompositeMode.Add:
-                    selectedLayer.IsChecked = true;
-                    break;
-                case CompositeMode.Subtract:
-                    selectedLayer.IsChecked = false;
-                    break;
-            }
-
-            this.TransformerMode = TransformerMode.None;//TransformerMode
-            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Transformer
-            this.ViewModel.Invalidate();//Invalidate
-
-            return true;
         }
     }
 }

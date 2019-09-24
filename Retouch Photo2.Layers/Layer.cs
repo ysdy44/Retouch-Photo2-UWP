@@ -1,12 +1,14 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
+using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Effects;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Numerics;
+using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
 
@@ -30,36 +32,69 @@ namespace Retouch_Photo2.Layers
         public BlendType BlendType { get; set; } = BlendType.None;
 
 
-        public Matrix3x2 GetMatrix() => Transformer.FindHomography(this.Source, this.Destination);
-        public Transformer Source { get; set; }
-        public Transformer Destination { get; set; }
-        private Transformer _oldDestination;
-        public bool DisabledRadian { get; set; } = false;
+        public TransformManager TransformManager { get; set; }
+        public EffectManager EffectManager { get; set; }
+        public AdjustmentManager AdjustmentManager { get; set; } = new AdjustmentManager();
+        public ObservableCollection<ILayer> Children { get; set; } = new ObservableCollection<ILayer>();
 
-        public bool IsCrop { get; set; }
-        public Transformer CropSource { get; set; }
-
-        public ObservableCollection<ILayer> Children { get; protected set; } = new ObservableCollection<ILayer>();
-        public EffectManager EffectManager { get; } = new EffectManager();
-        public AdjustmentManager AdjustmentManager { get; } = new AdjustmentManager();
-
+        
+        //@Abstract
+        public virtual void CacheTransform()
+        {
+            this.TransformManager = TransformManager.
+                Set_oldDestination(this.TransformManager, this.TransformManager.Destination);
+            this.TransformManager = TransformManager.
+                Set_oldCropDestination(this.TransformManager, this.TransformManager.CropDestination);
+        }
+        public virtual void TransformMultiplies(Matrix3x2 matrix)
+        {
+            this.TransformManager = TransformManager.
+            SetDestination(this.TransformManager, this.TransformManager._oldDestination * matrix);
+            this.TransformManager = TransformManager.
+                SetCropDestination(this.TransformManager, this.TransformManager._oldCropDestination * matrix);
+        }
+        public virtual void TransformAdd(Vector2 vector)
+        {
+            this.TransformManager = TransformManager.
+                SetDestination(this.TransformManager, this.TransformManager._oldDestination + vector);
+            this.TransformManager = TransformManager.
+                SetCropDestination(this.TransformManager, this.TransformManager._oldCropDestination + vector);
+        }
 
 
         //@Abstract
         public abstract ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix);
         public virtual void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
         {
-            drawingSession.DrawBound(this.Destination, matrix, accentColor);
+            Transformer transformer = this.TransformManager.Destination;
+            drawingSession.DrawBound(transformer, matrix, accentColor);
         }
 
+
         public abstract ILayer Clone(ICanvasResourceCreator resourceCreator);
+        public void CopyWith(ICanvasResourceCreator resourceCreator, ILayer currentLayer)
+        {
+            currentLayer.Name = this.Name;
+            currentLayer.Opacity = this.Opacity;
+            currentLayer.BlendType = this.BlendType;
 
+            currentLayer.IsChecked = this.IsChecked;
+            currentLayer.Visibility = this.Visibility;
 
-        //@Abstract
-        public virtual void CacheTransform() => this._oldDestination = this.Destination;
-        public virtual void TransformMultiplies(Matrix3x2 matrix) => this.Destination = this._oldDestination * matrix;
-        public virtual void TransformAdd(Vector2 vector) => this.Destination = this._oldDestination + vector;
-
+            currentLayer.TransformManager = this.TransformManager;
+            currentLayer.EffectManager = this.EffectManager;
+            
+            foreach (IAdjustment adjustment in this.AdjustmentManager.Adjustments)
+            {
+                IAdjustment clone = adjustment.Clone(); 
+                currentLayer.AdjustmentManager.Adjustments.Add(clone);
+            }
+            foreach (ILayer layer in this.Children)
+            {
+                ILayer clone = layer.Clone(resourceCreator);
+                currentLayer.Children.Add(clone);
+            }            
+        }
 
         //@Static
         /// <summary>
@@ -75,9 +110,12 @@ namespace Retouch_Photo2.Layers
             if (currentLayer.Visibility == Visibility.Collapsed) return previousImage;
             if (currentLayer.Opacity == 0) return previousImage;
 
-            //GetRender
+            //Layer
             ICanvasImage currentImage = currentLayer.GetRender(resourceCreator, previousImage, canvasToVirtualMatrix);
 
+            //Transform
+            currentImage = TransformManager.Render(currentLayer.TransformManager, resourceCreator,currentImage, canvasToVirtualMatrix);
+            
             //Effect
             currentImage = EffectManager.Render(currentLayer.EffectManager, currentImage);
 

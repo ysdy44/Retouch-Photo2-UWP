@@ -9,14 +9,11 @@ namespace Retouch_Photo2.Tools
     public interface ITransformerTool
     {
         /// <summary>
-        /// Select a layer from a point,
-        /// make it to selection layer
-        /// and make the TransformerMode to move,
-        /// find the layer that makes it unique, and 
+        /// Select a layer from a point, make it to selection layer and make the TransformerMode to move.
         /// </summary>
-        /// <param name="point"> point </param>
+        /// <param name="point"> The point. </param>
         /// <returns> Return **false** if you do not select to any layer. </returns>
-        bool SelectLayer(Vector2 point);
+        bool SelectSingleLayer(Vector2 point);
         
 
         /// <summary>

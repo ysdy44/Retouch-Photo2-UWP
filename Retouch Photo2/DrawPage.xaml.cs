@@ -78,7 +78,14 @@ namespace Retouch_Photo2
 
 
             //LayersAdd
-            this.LayersControl.AddButton.Tapped += async (s, e) => await this.LayersAddDialog.ShowAsync(ContentDialogPlacement.InPlace);
+            this.LayersControl.AddButton.Tapped += async (s, e) =>// await this.LayersAddDialog.ShowAsync(ContentDialogPlacement.InPlace);
+            {
+                this.ViewModel.CanvasTransformer.Scale = 1;
+                this.ViewModel.CanvasTransformer.Radian = 0;
+                this.ViewModel.CanvasTransformer.Position = Vector2.Zero;
+                this.ViewModel.CanvasTransformer.ReloadMatrix();
+                this.ViewModel.Invalidate();
+            };
             this.LayersAddDialog.PhotoButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.PicturesLibrary);
             this.LayersAddDialog.DestopButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.Desktop);
         }
@@ -223,10 +230,15 @@ namespace Retouch_Photo2
             //Layer
             ImageLayer imageLayer = new ImageLayer
             {
+                IsChecked = true,
+
+                TransformManager=new TransformManager
+                {
+                    Source = transformerSource,
+                    Destination = transformerSource,
+                },
+                
                 ImageRe = imageRe,
-                Source = transformerSource,
-                Destination = transformerSource,
-                IsChecked = true
             };
 
             //Selection

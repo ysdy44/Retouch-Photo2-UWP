@@ -70,7 +70,7 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary> <see cref = "SelectionViewModel" />'s EffectManager. </summary>
-        public EffectManager EffectManager
+        public EffectManager? EffectManager
         {
             get => this.effectManager;
             set
@@ -79,7 +79,7 @@ namespace Retouch_Photo2.ViewModels
                 this.OnPropertyChanged(nameof(this.EffectManager));//Notify 
             }
         }
-        private EffectManager effectManager;
+        private EffectManager? effectManager;
 
 
         /// <summary> <see cref = "SelectionViewModel" />'s AdjustmentManager. </summary>

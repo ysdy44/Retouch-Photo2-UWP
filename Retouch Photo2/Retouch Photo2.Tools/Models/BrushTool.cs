@@ -118,7 +118,9 @@ namespace Retouch_Photo2.Tools.Models
 
             if (isSingleStarted == false)
             {
-                this.TipViewModel.TransformerTool.SelectLayer(startingPoint);//TransformerTool
+                //TransformerTool
+                ITransformerTool transformerTool = this.TipViewModel.TransformerTool;
+                transformerTool.SelectSingleLayer(startingPoint);
             }
         }
 

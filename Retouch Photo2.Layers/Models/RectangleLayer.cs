@@ -2,7 +2,6 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
-using Retouch_Photo2.Layers.Models;
 using System.Numerics;
 using Windows.UI.Xaml;
 
@@ -20,27 +19,22 @@ namespace Retouch_Photo2.Layers.Models
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
-            return base.Destination.ToRectangle(resourceCreator, canvasToVirtualMatrix);            
+            Transformer transformer = base.TransformManager.Destination;
+            
+            return transformer.ToRectangle(resourceCreator, canvasToVirtualMatrix);            
         }
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            return new RectangleLayer
+            RectangleLayer rectangleLayer = new RectangleLayer
             {
-                Name = base.Name,
-                Opacity = base.Opacity,
-                BlendType = base.BlendType,
-
-                IsChecked = base.IsChecked,
-                Visibility = base.Visibility,
-
-                Source = base.Source,
-                Destination = base.Destination,
-                DisabledRadian = base.DisabledRadian,
-
                 FillBrush = base.FillBrush,
                 StrokeBrush = base.StrokeBrush,
             };
+
+            base.CopyWith(resourceCreator, rectangleLayer);
+
+            return rectangleLayer;
         }
     }
 }
