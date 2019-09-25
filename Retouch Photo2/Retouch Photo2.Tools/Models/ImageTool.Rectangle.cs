@@ -13,6 +13,7 @@ namespace Retouch_Photo2.Tools.Models
         public Transformer CreateTransformer(Vector2 startingPoint, Vector2 point, float sizeWidth, float sizeHeight)
         {
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+            //TODO: Fankit.Transformers.CreateWithAspectRatio()
             Transformer canvasTransformer = this.GetAspectRatioRectangle(startingPoint, point, sizeWidth, sizeHeight);
             return canvasTransformer * inverseMatrix;
         }

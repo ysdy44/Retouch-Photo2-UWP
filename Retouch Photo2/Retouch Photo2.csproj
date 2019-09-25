@@ -191,6 +191,9 @@
     <Compile Include="Retouch Photo2.Tools\Buttons\AcrylicButton.xaml.cs">
       <DependentUpon>AcrylicButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Tools\Buttons\TransparencyButton.xaml.cs">
+      <DependentUpon>TransparencyButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Tools\Buttons\BrushButton.xaml.cs">
       <DependentUpon>BrushButton.xaml</DependentUpon>
     </Compile>
@@ -234,9 +237,15 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\TransparencyTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\CropTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Pages\BrushPage.xaml.Public.cs" />
+    <Compile Include="Retouch Photo2.Tools\Pages\BrushPage.xaml.BrushType.cs" />
     <Compile Include="Retouch Photo2.Tools\Pages\CropPage.xaml.cs">
       <DependentUpon>CropPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\Pages\TransparencyPage.xaml.cs">
+      <DependentUpon>TransparencyPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Touchbars\AcrylicBlurAmountTouchbar.xaml.cs">
       <DependentUpon>AcrylicBlurAmountTouchbar.xaml</DependentUpon>
@@ -250,9 +259,6 @@
     <Compile Include="Retouch Photo2.Tools\Models\ICreateTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\AcrylicTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\BrushTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\BrushTools\EllipticalGradientTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\BrushTools\LinearGradientTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\BrushTools\RadialGradientTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\CursorTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\EllipseTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\ImageTool.cs" />
@@ -490,6 +496,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Retouch Photo2.Tools\Buttons\TransparencyButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Retouch Photo2.Tools\Buttons\BrushButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -549,6 +559,10 @@
     <Page Include="Retouch Photo2.Tools\Pages\CropPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\Pages\TransparencyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Retouch Photo2.Tools\Touchbars\AcrylicBlurAmountTouchbar.xaml">
       <SubType>Designer</SubType>

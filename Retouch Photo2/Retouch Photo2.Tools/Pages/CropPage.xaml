@@ -4,20 +4,79 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
     >
 
+    <Page.Resources>
+        <!--Flyout-->
+        <Flyout x:Name="Flyout" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <StackPanel Padding="2" MinWidth="300">
+
+                <!--Ratio-->
+                <TextBlock Text="Ratio Scaling:" Style="{StaticResource AppTextBlock}"/>
+                <elements:OnOffSwitch OnContent="None" OffContent="Ratio" IsOn="{x:Bind KeyboardViewModel.IsRatio,Mode=TwoWay}"/>
+
+                <elements:ExpandAppBarSapce/>
+
+                <!--Center-->
+                <TextBlock Text="Center Scaling:" Style="{StaticResource AppTextBlock}"/>
+                <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}"/>
+
+            </StackPanel>
+        </Flyout>
+    </Page.Resources>
+
 
     <StackPanel Orientation="Horizontal">
 
+        <!--Crop-->
+        <elements:ExpandAppbarToggleButton IsHitTestVisible="False" IsChecked="{x:Bind SelectionViewModel.IsCrop,Mode=TwoWay}">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="IsCrop" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+            </ToolTipService.ToolTip>
+            <elements:ExpandAppbarToggleButton.CenterContent>
+                <PathIcon>
+                    <PathIcon.Data>
+                        M2.264,17.096l4.337,0l0,2.211l-6.601,0l0,-6.371l2.264,0l0,4.16Zm17.503,2.211l-6.601,0l0,-2.211l4.337,0l0,-4.16l2.264,0l0,6.371Zm-3.164,-16.373l0,13.44l-13.44,0l0,-13.44l13.44,0Zm3.164,3.437l-2.264,0l0,-4.16l-4.337,0l0,-2.211l6.601,0l0,6.371Zm-13.166,-4.16l-4.337,0l0,4.16l-2.264,0l0,-6.371l6.601,0l0,2.211Z
+                    </PathIcon.Data>
+                </PathIcon>
+            </elements:ExpandAppbarToggleButton.CenterContent>
+        </elements:ExpandAppbarToggleButton>
+
+        <elements:ExpandAppBarSapce/>
+        
         <!--Reset-->
         <Border Style="{StaticResource AppRoundedBorderStyle}">
-            <Button x:Name="ResetButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Button x:Name="ResetButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                 IsEnabled="{x:Bind SelectionViewModel.IsCrop, Mode=OneWay}">
                 <TextBlock Text="Reset Crop"/>
             </Button>
         </Border>
+        
+        <elements:ExpandAppBarSapce/>
+
+        <!--Fit-->
+        <Border Style="{StaticResource AppRoundedBorderStyle}">
+            <Button x:Name="FitButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                 IsEnabled="{x:Bind SelectionViewModel.IsCrop, Mode=OneWay}">
+                <TextBlock Text="Fit Crop"/>
+            </Button>
+        </Border>
+
+        <elements:ExpandAppBarSapce/>
+
+        <!--More-->
+        <elements:ExpandAppbarButton x:Name="MoreButton">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="More" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+            </ToolTipService.ToolTip>
+            <elements:ExpandAppbarButton.CenterContent>
+                <FontIcon Glyph="&#xE10C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            </elements:ExpandAppbarButton.CenterContent>
+        </elements:ExpandAppbarButton>
         
     </StackPanel>
 </Page>

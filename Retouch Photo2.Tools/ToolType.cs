@@ -16,6 +16,8 @@
 
         /// <summary> Fill or stroke geometry. </summary>
         Brush,
+        /// <summary> Transparency tool. </summary>
+        Transparency,
 
         /// <summary> Create rectangle geometry. </summary>
         Rectangle,

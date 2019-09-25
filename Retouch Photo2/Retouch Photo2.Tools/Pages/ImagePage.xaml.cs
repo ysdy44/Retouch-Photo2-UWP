@@ -5,7 +5,6 @@ using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Animation;
 
 namespace Retouch_Photo2.Tools.Pages
 {
@@ -19,9 +18,6 @@ namespace Retouch_Photo2.Tools.Pages
         TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         
-        //@Content
-        public Storyboard EaseStoryboard => this._EaseStoryboard;
-        
         //@Converter
         private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
         public bool IsSelected { private get; set; }
@@ -30,6 +26,7 @@ namespace Retouch_Photo2.Tools.Pages
         public ImagePage()
         {
             this.InitializeComponent();
+
             this.ClearButton.Tapped += (s, e) => this.SelectionViewModel.ImageRe =null;//ImageRe
             this.SelectButton.Tapped += async (s, e) =>
             {
@@ -42,6 +39,7 @@ namespace Retouch_Photo2.Tools.Pages
 
                 this.SelectionViewModel.ImageRe = imageRe;//ImageRe
             };
+
             this.ReplaceButton.Tapped += async (s, e) =>
             {
                 //imageRe
@@ -72,6 +70,7 @@ namespace Retouch_Photo2.Tools.Pages
                 this.ListView.ItemsSource = this.ViewModel.Images;
                 this.Flyout.ShowAt(this);//this.StackButton
             };
+
             this.ListView.ItemClick += (s, e) =>
             {
                 if (e.ClickedItem is ImageRe imageRe)
@@ -79,6 +78,20 @@ namespace Retouch_Photo2.Tools.Pages
                     this.SelectionViewModel.ImageRe = imageRe;//ImageRe
                 }
             };
+
+            //Storyboard
+            this.EaseStoryboard.Completed+=(s,e) => this.SelectToolTip.IsOpen = false;
+        }
+
+        /// <summary>
+        /// Tip.
+        /// </summary>
+        public void TipSelect()
+        {
+            this.SelectToolTip.IsOpen = true;
+
+            //Storyboard
+            this.EaseStoryboard.Begin();
         }
     }
 }

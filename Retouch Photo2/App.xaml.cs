@@ -95,6 +95,7 @@ namespace Retouch_Photo2
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            Layers.Models.AcrylicLayer.ddddddd += (s) => App.ViewModel.Text = s;
         }
 
 

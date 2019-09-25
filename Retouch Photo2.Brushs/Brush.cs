@@ -147,6 +147,10 @@ namespace Retouch_Photo2.Brushs
             new CanvasGradientStop{Color= Colors.White, Position=0.0f },
             new CanvasGradientStop{Color= Colors.Gray, Position=1.0f }
         };
+
+        //TODO: 
+        // HSVColorPickers.GreyWhiteMeshHelpher.GetGradientStopArray()
+
         /// <summary>
         /// Create a gray-and-white bitmap.
         /// </summary>
@@ -157,6 +161,10 @@ namespace Retouch_Photo2.Brushs
         /// <returns> CanvasRenderTarget </returns>
         public static CanvasRenderTarget CreateGrayAndWhiteBackground(ICanvasResourceCreatorWithDpi resourceCreator, float width, float height,int columns=4)
         {
+            //TODO: 
+            // HSVColorPickers.GreyWhiteMeshHelpher.GetLinearGradientBrush()
+            // HSVColorPickers.GreyWhiteMeshHelpher.GetBorderExtendMesh()
+
             CanvasRenderTarget background = new CanvasRenderTarget(resourceCreator, width, height);
             
             Color[] colors = new Color[]

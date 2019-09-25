@@ -118,6 +118,8 @@
       <DependentUpon>StopsPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="FillOrStroke.cs" />
+    <Compile Include="Operates\BrushOperateHelper.cs" />
+    <Compile Include="Operates\BrushOperateMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stops\StopsManager.cs" />
     <Compile Include="Stops\StopsSize.cs" />

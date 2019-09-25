@@ -39,6 +39,7 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
+            this.IsCrop = false;
             this.Children = null;
             this.EffectManager = null;
             this.AdjustmentManager = null;
@@ -74,6 +75,7 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
+            this.IsCrop = (layer.TransformManager.IsCrop && (layer.TransformManager.DisabledRadian == false));
             this.Children = layer.Children;
             this.EffectManager = layer.EffectManager;
             this.AdjustmentManager = layer.AdjustmentManager;
@@ -169,6 +171,7 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
+            this.IsCrop = layers.Any(layer=>(layer.TransformManager.IsCrop && (layer.TransformManager.DisabledRadian == false)));
             this.Children = null;
             //this.EffectManager = layer.EffectManager;
             this.AdjustmentManager = null;

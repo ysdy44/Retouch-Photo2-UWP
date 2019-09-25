@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Tools.Models;
+﻿using FanKit.Transformers;
+using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using Windows.UI.Xaml.Controls;
 
@@ -13,6 +14,7 @@ namespace Retouch_Photo2.Tools.Pages
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;       
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
 
         //@Converter
         private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
@@ -30,8 +32,27 @@ namespace Retouch_Photo2.Tools.Pages
                     layer.TransformManager.IsCrop = false;
                 }, true);
 
+                this.SelectionViewModel.IsCrop = false;//Selection
                 this.ViewModel.Invalidate();//Invalidate
             };
+            this.FitButton.Tapped += (s, e) =>
+            {
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    if (layer.TransformManager.IsCrop)
+                    {
+                        Transformer cropTransformer = layer.TransformManager.CropDestination;
+                        layer.TransformManager.Destination = cropTransformer;
+                        layer.TransformManager.IsCrop = false;
+                    }
+                }, true);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+
+            
+            this.MoreButton.Tapped += (s, e) => this.Flyout.ShowAt(this);
         }
     }
 }

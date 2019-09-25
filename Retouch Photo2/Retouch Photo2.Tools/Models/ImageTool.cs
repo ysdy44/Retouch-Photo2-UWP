@@ -47,7 +47,7 @@ namespace Retouch_Photo2.Tools.Models
             //ImageRe
             if (imageRe == null)
             {
-                this._imagePage.EaseStoryboard.Begin();
+                this._imagePage.TipSelect();
                 return;
             }
 

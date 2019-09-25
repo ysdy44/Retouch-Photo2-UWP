@@ -2,8 +2,10 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Layers.Icons;
+using System;
 using System.Numerics;
 using Windows.Foundation;
+using Windows.Graphics.Effects;
 using Windows.UI;
 using Windows.UI.Xaml;
 
@@ -33,7 +35,8 @@ namespace Retouch_Photo2.Layers.Models
                 }
             }
         }
-        
+        public static Action<string> ddddddd;
+
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         {
             Transformer transformer = base.TransformManager.Destination;

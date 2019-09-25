@@ -1,0 +1,223 @@
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Brushes;
+using System.Numerics;
+
+namespace Retouch_Photo2.Brushs
+{
+    public static class BrushOperateHelper
+    {
+
+        public static BrushOperateMode ContainsNodeMode(Vector2 point, BrushType brushType, BrushPoints brushPoints, Matrix3x2 matrix)
+        {
+            switch (brushType)
+            {
+                case BrushType.None: return BrushOperateMode.LinearGradientEndPoint;
+
+                case BrushType.Color: return BrushOperateMode.LinearGradientEndPoint;
+
+                case BrushType.LinearGradient:
+                    {
+                        Vector2 startPoint = Vector2.Transform(brushPoints.LinearGradientStartPoint, matrix);
+                        if (FanKit.Math.InNodeRadius(point, startPoint))
+                        {
+                            return BrushOperateMode.LinearGradientStartPoint;
+                        }
+
+                        Vector2 endPoint = Vector2.Transform(brushPoints.LinearGradientEndPoint, matrix);
+                        if (FanKit.Math.InNodeRadius(point, endPoint))
+                        {
+                            return BrushOperateMode.LinearGradientEndPoint;
+                        }
+                    }
+                    break;
+
+                case BrushType.RadialGradient:
+                    {
+                        Vector2 center = Vector2.Transform(brushPoints.RadialGradientCenter, matrix);
+                        if (FanKit.Math.InNodeRadius(point, center))
+                        {
+                            return BrushOperateMode.RadialGradientCenter;
+                        }
+
+                        Vector2 point2 = Vector2.Transform(brushPoints.RadialGradientPoint, matrix);
+                        if (FanKit.Math.InNodeRadius(point, point2))
+                        {
+                            return BrushOperateMode.RadialGradientPoint;
+                        }
+                    }
+                    break;
+
+                case BrushType.EllipticalGradient:
+                    {
+                        Vector2 xPoint = Vector2.Transform(brushPoints.EllipticalGradientXPoint, matrix);
+                        if (FanKit.Math.InNodeRadius(point, xPoint))
+                        {
+                            return BrushOperateMode.EllipticalGradientXPoint;
+                        }
+
+                        Vector2 yPoint = Vector2.Transform(brushPoints.EllipticalGradientYPoint, matrix);
+                        if (FanKit.Math.InNodeRadius(point, yPoint))
+                        {
+                            return BrushOperateMode.EllipticalGradientYPoint;
+                        }
+
+                        Vector2 center = Vector2.Transform(brushPoints.EllipticalGradientCenter, matrix);
+                        if (FanKit.Math.InNodeRadius(point, center))
+                        {
+                            return BrushOperateMode.EllipticalGradientCenter;
+                        }
+                    }
+                    break;
+            }
+
+            return BrushOperateMode.None;
+        }
+
+
+        public static BrushPoints? Controller(Vector2 point, BrushPoints startingBrushPoints, BrushOperateMode mode, Matrix3x2 inverseMatrix)
+        {
+            switch (mode)
+            {
+                case BrushOperateMode.LinearGradientStartPoint:
+                    {
+                        Vector2 startPoint = Vector2.Transform(point, inverseMatrix);
+
+                        startingBrushPoints.LinearGradientStartPoint = startPoint;
+                        return startingBrushPoints;
+                    }
+                case BrushOperateMode.LinearGradientEndPoint:
+                    {
+                        Vector2 endPoint = Vector2.Transform(point, inverseMatrix);
+
+                        startingBrushPoints.LinearGradientEndPoint = endPoint;
+                        return startingBrushPoints;
+                    }
+
+                case BrushOperateMode.RadialGradientCenter:
+                    {
+                        Vector2 center = Vector2.Transform(point, inverseMatrix);
+                        Vector2 point2 = center + startingBrushPoints.RadialGradientPoint - startingBrushPoints.RadialGradientCenter;
+
+                        startingBrushPoints.RadialGradientCenter = center;
+                        startingBrushPoints.RadialGradientPoint = point2;
+                        return startingBrushPoints;
+                    }
+                case BrushOperateMode.RadialGradientPoint:
+                    {
+                        Vector2 point2 = Vector2.Transform(point, inverseMatrix);
+
+                        startingBrushPoints.RadialGradientPoint = point2;
+                        return startingBrushPoints;
+                    }
+
+                case BrushOperateMode.EllipticalGradientCenter:
+                    {
+                        Vector2 center = Vector2.Transform(point, inverseMatrix);
+                        Vector2 xPoint = center + startingBrushPoints.EllipticalGradientXPoint - startingBrushPoints.EllipticalGradientCenter;
+                        Vector2 yPoint = center + startingBrushPoints.EllipticalGradientYPoint - startingBrushPoints.EllipticalGradientCenter;
+
+                        startingBrushPoints.EllipticalGradientCenter = center;
+                        startingBrushPoints.EllipticalGradientXPoint = xPoint;
+                        startingBrushPoints.EllipticalGradientYPoint = yPoint;
+                        return startingBrushPoints;
+                    }
+                case BrushOperateMode.EllipticalGradientXPoint:
+                    {
+                        Vector2 xPoint = Vector2.Transform(point, inverseMatrix);
+
+                        Vector2 normalize = Vector2.Normalize(xPoint - startingBrushPoints.EllipticalGradientCenter);
+                        float radiusY = Vector2.Distance(startingBrushPoints.EllipticalGradientYPoint, startingBrushPoints.EllipticalGradientCenter);
+                        Vector2 reflect = new Vector2(-normalize.Y, normalize.X);
+                        Vector2 yPoint = radiusY * reflect + startingBrushPoints.EllipticalGradientCenter;
+
+                        startingBrushPoints.EllipticalGradientXPoint = xPoint;
+                        startingBrushPoints.EllipticalGradientYPoint = yPoint;
+                        return startingBrushPoints;
+                    }
+                case BrushOperateMode.EllipticalGradientYPoint:
+                    {
+                        Vector2 yPoint = Vector2.Transform(point, inverseMatrix);
+
+                        Vector2 normalize = Vector2.Normalize(yPoint - startingBrushPoints.EllipticalGradientCenter);
+                        float radiusX = Vector2.Distance(startingBrushPoints.EllipticalGradientXPoint, startingBrushPoints.EllipticalGradientCenter);
+                        Vector2 reflect = new Vector2(normalize.Y, -normalize.X);
+                        Vector2 xPoint = radiusX * reflect + startingBrushPoints.EllipticalGradientCenter;
+
+                        startingBrushPoints.EllipticalGradientXPoint = xPoint;
+                        startingBrushPoints.EllipticalGradientYPoint = yPoint;
+                        return startingBrushPoints;
+                    }
+            }
+
+            return null;
+        }
+
+
+        public static void Draw(CanvasDrawingSession drawingSession, BrushType brushType, BrushPoints brushPoints, CanvasGradientStop[] brushArray, Matrix3x2 matrix, Windows.UI.Color accentColor)
+        {
+            switch (brushType)
+            {
+                case BrushType.None:
+                    break;
+                case BrushType.Color:
+                    break;
+                case BrushType.LinearGradient:
+                    {
+                        Vector2 startPoint = Vector2.Transform(brushPoints.LinearGradientStartPoint, matrix);
+                        Vector2 endPoint = Vector2.Transform(brushPoints.LinearGradientEndPoint, matrix);
+
+                        //Line
+                        drawingSession.DrawLine(startPoint, endPoint, Windows.UI.Colors.White, 4);
+
+                        //Circle
+                        drawingSession.FillCircle(startPoint, 10, Windows.UI.Colors.White);
+                        drawingSession.FillCircle(endPoint, 10, Windows.UI.Colors.White);
+
+                        //Line
+                        drawingSession.DrawLine(startPoint, endPoint, accentColor, 2);
+
+                        //Circle
+                        foreach (CanvasGradientStop stop in brushArray)
+                        {
+                            Vector2 position = startPoint * (1.0f - stop.Position) + endPoint * stop.Position;
+
+                            drawingSession.FillCircle(position, 8, accentColor);
+                            drawingSession.FillCircle(position, 6, stop.Color);
+                        }
+                    }
+                    break;
+                case BrushType.RadialGradient:
+                    {
+                        Vector2 center = Vector2.Transform(brushPoints.RadialGradientCenter, matrix);
+                        Vector2 point2 = Vector2.Transform(brushPoints.RadialGradientPoint, matrix);
+                        drawingSession.DrawThickLine(center, point2);
+
+                        foreach (CanvasGradientStop stop in brushArray)
+                        {
+                            Vector2 position = center * (1.0f - stop.Position) + point2 * stop.Position;
+                            drawingSession.DrawNode2(position, stop.Color);
+                        }
+                    }
+                    break;
+                case BrushType.EllipticalGradient:
+                    {
+                        Vector2 center = Vector2.Transform(brushPoints.EllipticalGradientCenter, matrix);
+                        Vector2 xPoint = Vector2.Transform(brushPoints.EllipticalGradientXPoint, matrix);
+                        Vector2 yPoint = Vector2.Transform(brushPoints.EllipticalGradientYPoint, matrix);
+                        drawingSession.DrawThickLine(center, xPoint);
+                        drawingSession.DrawThickLine(center, yPoint);
+
+                        foreach (CanvasGradientStop stop in brushArray)
+                        {
+                            Vector2 position = center * (1.0f - stop.Position) + yPoint * stop.Position;
+                            drawingSession.DrawNode2(position, stop.Color);
+                        }
+                        drawingSession.DrawNode2(xPoint);
+                    }
+                    break;
+            }
+        }
+
+    }
+}

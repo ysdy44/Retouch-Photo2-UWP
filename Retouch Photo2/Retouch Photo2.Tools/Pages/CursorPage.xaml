@@ -33,7 +33,6 @@
     <StackPanel Orientation="Horizontal">
 
         <!--StepFrequency-->
-        <TextBlock Text="StepFrequency:" Visibility="Collapsed" Style="{StaticResource AppTextBlock}"/>
         <elements:ExpandAppbarToggleButton IsChecked="{x:Bind KeyboardViewModel.IsStepFrequency,Mode=TwoWay}">
             <ToolTipService.ToolTip>
                 <ToolTip Content="Step Frequency" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
@@ -50,7 +49,6 @@
         <elements:ExpandAppBarSapce/>
 
         <!--Multi-Mode-->
-        <TextBlock Text="Multi-Mode:" Visibility="Collapsed" Style="{StaticResource AppTextBlock}"/>
         <elements:CompositeModeControl Mode="{x:Bind KeyboardViewModel.CompositeMode,Mode=TwoWay}">
             <ToolTipService.ToolTip>
                 <ToolTip Content="Multi-Mode" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>

@@ -15,7 +15,7 @@
     <Page.Resources>
         
         <!--Storyboard-->
-        <Storyboard x:Name="_EaseStoryboard">
+        <Storyboard x:Name="EaseStoryboard">
             <ColorAnimation From="{ThemeResource SystemBaseHighColor}" To="{ThemeResource AppBorderBrushColor}" Storyboard.TargetProperty="Color" Storyboard.TargetName="SelectBorderBorderBrush" d:IsOptimized="True">
                 <ColorAnimation.EasingFunction>
                     <BounceEase EasingMode="EaseOut"/>
@@ -52,8 +52,11 @@
             <Border.BorderBrush>
                 <SolidColorBrush x:Name="SelectBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
             </Border.BorderBrush>
+            <ToolTipService.ToolTip>
+                <ToolTip x:Name="SelectToolTip" Content="Click and select a picture" Placement="Top" Style="{StaticResource AppToolTip}"/>
+            </ToolTipService.ToolTip>
             <Button x:Name="SelectButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <TextBlock Text="Select image"/>
+                <TextBlock Text="Select Image"/>
             </Button>
         </Border>
 
@@ -63,7 +66,7 @@
         <Border Style="{StaticResource AppRoundedBorderStyle}">
             <Button x:Name="ReplaceButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                  IsEnabled="{x:Bind SelectionViewModel.IsImageLayer,Mode=OneWay}">
-                <TextBlock Text="Replace image"/>
+                <TextBlock Text="Replace Image"/>
             </Button>
         </Border>
 

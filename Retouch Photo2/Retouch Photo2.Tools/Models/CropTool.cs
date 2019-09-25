@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Buttons;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.Tools.Pages;
@@ -96,6 +97,7 @@ namespace Retouch_Photo2.Tools.Models
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
             if (this._layer == null) return;
+            if (this._layer.TransformManager.DisabledRadian) return;
             if (this._transformerMode == TransformerMode.None) return;
 
             bool isTranslation = (this._transformerMode == TransformerMode.Translation);
@@ -139,6 +141,7 @@ namespace Retouch_Photo2.Tools.Models
                 this._layer.TransformManager.CropDestination = transformer;
             }
 
+            this.SelectionViewModel.IsCrop = true;//Selection
             this.ViewModel.Invalidate();//Invalidate
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
@@ -157,15 +160,18 @@ namespace Retouch_Photo2.Tools.Models
             {
                 if (layer.IsChecked)
                 {
-                    Transformer transformer = layer.TransformManager.ActualDestination;
+                    if (layer.TransformManager.DisabledRadian==false)
+                    {
+                        Transformer transformer = layer.TransformManager.ActualDestination;
 
-                    //LTRB
-                    Vector2 leftTop = Vector2.Transform(transformer.LeftTop, matrix);
-                    Vector2 rightTop = Vector2.Transform(transformer.RightTop, matrix);
-                    Vector2 rightBottom = Vector2.Transform(transformer.RightBottom, matrix);
-                    Vector2 leftBottom = Vector2.Transform(transformer.LeftBottom, matrix);
+                        //LTRB
+                        Vector2 leftTop = Vector2.Transform(transformer.LeftTop, matrix);
+                        Vector2 rightTop = Vector2.Transform(transformer.RightTop, matrix);
+                        Vector2 rightBottom = Vector2.Transform(transformer.RightBottom, matrix);
+                        Vector2 leftBottom = Vector2.Transform(transformer.LeftBottom, matrix);
 
-                    _drawCrop(drawingSession, leftTop, rightTop, rightBottom, leftBottom, Colors.BlueViolet);
+                        _drawCrop(drawingSession, leftTop, rightTop, rightBottom, leftBottom, Colors.BlueViolet);
+                    }
                 }
             }
         }

@@ -106,6 +106,9 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Icons\TransparencyIcon.xaml.cs">
+      <DependentUpon>TransparencyIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Icons\PenAsymmetricIcon.xaml.cs">
       <DependentUpon>PenAsymmetricIcon.xaml</DependentUpon>
     </Compile>
@@ -154,7 +157,6 @@
     </Compile>
     <Compile Include="ITool.cs" />
     <Compile Include="Touchbars\ITouchbar.cs" />
-    <Compile Include="Models\AcrylicToolType.cs" />
     <Compile Include="Models\ViewRadianConverter.cs" />
     <Compile Include="Models\ViewScaleConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -184,6 +186,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Icons\TransparencyIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Icons\PenAsymmetricIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

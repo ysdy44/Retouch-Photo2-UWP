@@ -1,8 +1,9 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Buttons;
 using Retouch_Photo2.Tools.Icons;
-using Retouch_Photo2.Tools.Models.BrushTools;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
@@ -24,10 +25,6 @@ namespace Retouch_Photo2.Tools.Models
         ListViewSelectionMode Mode => this.SelectionViewModel.Mode;
         BrushType BrushType => this.SelectionViewModel.BrushType;
 
-        //Brush
-        public readonly LinearGradientTool LinearGradientTool = new LinearGradientTool();
-        public readonly RadialGradientTool RadialGradientTool = new RadialGradientTool();
-        public readonly EllipticalGradientTool EllipticalGradientTool = new EllipticalGradientTool();
 
         public bool IsSelected
         {
@@ -43,6 +40,11 @@ namespace Retouch_Photo2.Tools.Models
         public Page Page => this._brushPage;
         BrushPage _brushPage { get; } = new BrushPage();
 
+
+        BrushPoints _startingBrushPoints;
+        public BrushOperateMode OperateMode = BrushOperateMode.None;
+
+
         public void Starting(Vector2 point)
         {
         }
@@ -51,32 +53,31 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             if (this.Mode == ListViewSelectionMode.None) return;
 
-            switch (this.BrushType)
+            if (this.BrushType == BrushType.None|| this.BrushType == BrushType.Color)
             {
-                case BrushType.None:
-                case BrushType.Color:
-                    {
-                        Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-                        Vector2 startPoint = Vector2.Transform(startingPoint, inverseMatrix);
-                        Vector2 endPoint = Vector2.Transform(point, inverseMatrix);
+                Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+                Vector2 startPoint = Vector2.Transform(startingPoint, inverseMatrix);
+                Vector2 endPoint = Vector2.Transform(point, inverseMatrix);
 
-                        this.SelectionViewModel.SetBrushToLinearGradient(startPoint, endPoint);//Initialize
+                BrushPoints brushPoints = new BrushPoints
+                {
+                    LinearGradientStartPoint = startPoint,
+                    LinearGradientEndPoint = endPoint,
+                };
+                this._startingBrushPoints = brushPoints;
+                this._brushPage.Gradient(GradientBrushType.LinearGradient, brushPoints);
 
-                        this.LinearGradientTool.Type = LinearGradientType.EndPoint;//LinearGradientTool
+                this.OperateMode = BrushOperateMode.LinearGradientEndPoint;
+            }
+            else
+            {
+                Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+                BrushType brushType = this.BrushType;
 
-                        return;
-                    }
-                case BrushType.LinearGradient:
-                    this.LinearGradientTool.Started(startingPoint, point);//LinearGradientTool
-                    break;
-                case BrushType.RadialGradient:
-                    this.RadialGradientTool.Started(startingPoint, point);//RadialGradientTool
-                    break;
-                case BrushType.EllipticalGradient:
-                    this.EllipticalGradientTool.Started(startingPoint, point);//EllipticalGradientTool
-                    break;
-                case BrushType.Image:
-                    break;
+                BrushPoints brushPoints = this.SelectionViewModel.BrushPoints;
+                this._startingBrushPoints = brushPoints;
+
+                this.OperateMode = BrushOperateHelper.ContainsNodeMode(startingPoint, brushType, brushPoints, matrix);
             }
 
             this.ViewModel.Invalidate();//Invalidate
@@ -85,36 +86,42 @@ namespace Retouch_Photo2.Tools.Models
         {
             //Selection
             if (this.Mode == ListViewSelectionMode.None) return;
+            if (this.OperateMode ==  BrushOperateMode.None) return;
 
-            switch (this.BrushType)
+            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+            
+            BrushPoints? brushPointsController = BrushOperateHelper.Controller(point, this._startingBrushPoints, this.OperateMode, inverseMatrix);
+
+            if (brushPointsController is BrushPoints brushPoints)
             {
-                case BrushType.None:
-                    break;
-                case BrushType.Color:
-                    break;
-                case BrushType.LinearGradient:
-                    this.LinearGradientTool.Delta(startingPoint, point);//LinearGradientTool
-                    break;
-                case BrushType.RadialGradient:
-                    this.RadialGradientTool.Delta(startingPoint, point);//RadialGradientTool
-                    break;
-                case BrushType.EllipticalGradient:
-                    this.EllipticalGradientTool.Delta(startingPoint, point);//EllipticalGradientTool
-                    break;
-                case BrushType.Image:
-                    break;
-            }
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    if (layer is IGeometryLayer geometryLayer)
+                    {
+                        //FillOrStroke
+                        switch (this.SelectionViewModel.FillOrStroke)
+                        {
+                            case FillOrStroke.Fill:
+                                geometryLayer.FillBrush.Points = brushPoints;
+                                break;
+                            case FillOrStroke.Stroke:
+                                geometryLayer.StrokeBrush.Points = brushPoints;
+                                break;
+                        }
+                    }
+                }, true);
 
-            this.ViewModel.Invalidate();//Invalidate
+                this.SelectionViewModel.BrushPoints = brushPoints;//Selection
+                this.ViewModel.Invalidate();//Invalidate
+            }
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
             //Selection
             if (this.Mode == ListViewSelectionMode.None) return;
 
-            this.LinearGradientTool.Type = LinearGradientType.None;//LinearGradientTool
-            this.RadialGradientTool.Type = RadialGradientType.None;//RadialGradientTool
-            this.EllipticalGradientTool.Type = EllipticalGradientType.None;//EllipticalGradientTool
+            this.OperateMode = BrushOperateMode.None;
 
             if (isSingleStarted == false)
             {
@@ -126,27 +133,21 @@ namespace Retouch_Photo2.Tools.Models
 
         public void Draw(CanvasDrawingSession drawingSession)
         {
-            switch (this.BrushType)
-            {
-                case BrushType.None:
-                    break;
-                case BrushType.Color:
-                    break;
-                case BrushType.LinearGradient:
-                    this.LinearGradientTool.Draw(drawingSession);//LinearGradientTool
-                    break;
-                case BrushType.RadialGradient:
-                    this.RadialGradientTool.Draw(drawingSession);//RadialGradientTool
-                    break;
-                case BrushType.EllipticalGradient:
-                    this.EllipticalGradientTool.Draw(drawingSession);//EllipticalGradientTool
-                    break;
-                case BrushType.Image:
-                    break;
-            }
+            BrushType brushType = this.BrushType;
+            BrushPoints brushPoints = this.SelectionViewModel.BrushPoints;
+            CanvasGradientStop[] brushArray = this.SelectionViewModel.BrushArray;
+            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+            Windows.UI.Color accentColor = this.ViewModel.AccentColor;
+
+            BrushOperateHelper.Draw(drawingSession, brushType, brushPoints, brushArray, matrix, accentColor);
         }
-        
-        public void OnNavigatedTo() => this.SelectionViewModel.SetBrushFormSingleMode(this.SelectionViewModel.FillOrStroke);
+
+
+        public void OnNavigatedTo()
+        {
+            FillOrStroke fillOrStroke = this.SelectionViewModel.FillOrStroke;
+            this._brushPage.SetFillOrStroke(fillOrStroke);
+        }
         public void OnNavigatedFrom() { }
     }
 }
