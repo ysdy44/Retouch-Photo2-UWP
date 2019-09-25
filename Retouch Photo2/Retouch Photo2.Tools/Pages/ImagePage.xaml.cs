@@ -60,8 +60,7 @@ namespace Retouch_Photo2.Tools.Pages
                     if (layer is ImageLayer imageLayer)
                     {
                         imageLayer.ImageRe = imageRe;
-                        imageLayer.TransformManager = TransformManager.
-                               SetSource(imageLayer.TransformManager, transformerSource);
+                        imageLayer.TransformManager.Source = transformerSource;
                     }
                 }, true);
 

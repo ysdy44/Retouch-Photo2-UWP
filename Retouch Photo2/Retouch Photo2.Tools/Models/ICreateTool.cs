@@ -28,8 +28,8 @@ namespace Retouch_Photo2.Tools.Models
         /// <summary>
         /// Create a specific layer.
         /// </summary>
-        /// <param name="transformer"> transformer </param>
-        /// <returns> Layer </returns>
+        /// <param name="transformer"> The source transformer. </param>
+        /// <returns> The created layer. </returns>
         public abstract ILayer CreateLayer(Transformer transformer);
 
         public abstract bool IsSelected { set; }
@@ -76,10 +76,8 @@ namespace Retouch_Photo2.Tools.Models
             );
 
             //Mezzanine
-            this.MezzanineViewModel.Layer.TransformManager = TransformManager.
-                SetSource(this.MezzanineViewModel.Layer.TransformManager, transformer);
-            this.MezzanineViewModel.Layer.TransformManager = TransformManager.
-                SetDestination(this.MezzanineViewModel.Layer.TransformManager, transformer);
+            this.MezzanineViewModel.Layer.TransformManager.Source = transformer;
+            this.MezzanineViewModel.Layer.TransformManager.Destination = transformer;
 
             this.SelectionViewModel.Transformer = transformer;//Selection
 

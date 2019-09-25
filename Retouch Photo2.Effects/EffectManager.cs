@@ -9,7 +9,7 @@ namespace Retouch_Photo2.Effects
     /// <summary> 
     /// <see cref = "IEffect" />'s manager. 
     /// </summary>
-    public struct EffectManager
+    public class EffectManager
     {
         //@Static
         /// <summary>
@@ -19,28 +19,28 @@ namespace Retouch_Photo2.Effects
         public static void Invalidate(Action<EffectManager> action) => EffectManager.InvalidateAction?.Invoke(action);
         /// <summary> <see cref = "Action" /> of the <see cref = "EffectManager" />. </summary>
         public static Action<Action<EffectManager>> InvalidateAction { private get; set; }
-        
+
 
         //GaussianBlur
         public bool GaussianBlur_IsOn;
-        public float GaussianBlur_BlurAmount;
+        public float GaussianBlur_BlurAmount = 0;
 
         //DirectionalBlur
         public bool DirectionalBlur_IsOn;
-        public float DirectionalBlur_BlurAmount;
-        public float DirectionalBlur_Angle;
+        public float DirectionalBlur_BlurAmount = 0;
+        public float DirectionalBlur_Angle = 0;
 
         //Sharpen
         public bool Sharpen_IsOn;
-        public float Sharpen_Amount;
+        public float Sharpen_Amount = 0;
 
         //OuterShadow
         public bool OuterShadow_IsOn;
-        public float OuterShadow_Radius;
-        public float OuterShadow_Opacity;
-        public Color OuterShadow_Color;
+        public float OuterShadow_Radius = 0;
+        public float OuterShadow_Opacity = 0.5f;
+        public Color OuterShadow_Color = Colors.Black;
 
-        private float OuterShadow_offset;
+        private float OuterShadow_offset = 0;
         public float OuterShadow_Offset
         {
             get => this.OuterShadow_offset;
@@ -50,7 +50,7 @@ namespace Retouch_Photo2.Effects
                 this.OuterShadow_offset = value;
             }
         }
-        private float OuterShadow_angle;
+        private float OuterShadow_angle = 0.78539816339744830961566084581988f;// 1/4 π
         public float OuterShadow_Angle
         {
             get => this.OuterShadow_angle;
@@ -60,11 +60,11 @@ namespace Retouch_Photo2.Effects
                 this.OuterShadow_angle = value;
             }
         }
-        Vector2 OuterShadow_Position;
+        Vector2 OuterShadow_Position = Vector2.Zero;
 
         //Outline
         public bool Outline_IsOn;
-        private int Outline_size;
+        private int Outline_size = 1;
         public int Outline_Size
         {
             get => this.Outline_size;
@@ -80,18 +80,63 @@ namespace Retouch_Photo2.Effects
         }
 
         public MorphologyEffectMode Outline_Mode { get; private set; }
-        public int Outline_Width { get; private set; } 
-        public int Outline_Height { get; private set; } 
+        public int Outline_Width { get; private set; } = 1;
+        public int Outline_Height { get; private set; } = 1;
 
         //Emboss
         public bool Emboss_IsOn;
-        public float Emboss_Amount;
-        public float Emboss_Angle;
-        
+        public float Emboss_Amount = 1;
+        public float Emboss_Angle = 0;
+
         //Straighten
         public bool Straighten_IsOn;
-        public float Straighten_Angle;
+        public float Straighten_Angle = 0;
 
+        /// <summary>
+        /// Get EffectManager own copy.
+        /// </summary>
+        /// <returns> The cloned EffectManager. </returns>
+        public EffectManager Clone()
+        {
+            return new EffectManager
+            {
+                //GaussianBlur
+                GaussianBlur_IsOn = this.GaussianBlur_IsOn,
+                GaussianBlur_BlurAmount = this.GaussianBlur_BlurAmount,
+
+                //DirectionalBlur
+                DirectionalBlur_IsOn = this.DirectionalBlur_IsOn,
+                DirectionalBlur_BlurAmount = this.DirectionalBlur_BlurAmount,
+                DirectionalBlur_Angle = this.DirectionalBlur_Angle,
+
+                //Sharpen
+                Sharpen_IsOn = this.Sharpen_IsOn,
+                Sharpen_Amount = this.Sharpen_Amount,
+
+                //OuterShadow
+                OuterShadow_IsOn = this.OuterShadow_IsOn,
+                OuterShadow_Radius = this.OuterShadow_Radius,
+                OuterShadow_Opacity = this.OuterShadow_Opacity,
+                OuterShadow_Color = this.OuterShadow_Color,
+
+                OuterShadow_Offset = this.OuterShadow_Offset,
+                OuterShadow_Angle = this.OuterShadow_Angle,
+                OuterShadow_Position = this.OuterShadow_Position,
+
+                //Outline
+                Outline_IsOn = this.Outline_IsOn,
+                Outline_Size = this.Outline_Size,
+
+                //Emboss
+                Emboss_IsOn = this.Emboss_IsOn,
+                Emboss_Amount = this.Emboss_Amount,
+                Emboss_Angle = this.Emboss_Angle,
+
+                //Straighten
+                Straighten_IsOn = this.Straighten_IsOn,
+                Straighten_Angle = this.Straighten_Angle,
+            };
+        }
 
         //@Static
         public static ICanvasImage Render(EffectManager effectManager, ICanvasImage image)
@@ -109,7 +154,7 @@ namespace Retouch_Photo2.Effects
             //DirectionalBlur
             if (effectManager.DirectionalBlur_IsOn)
             {
-                image= new Microsoft.Graphics.Canvas.Effects.DirectionalBlurEffect
+                image = new Microsoft.Graphics.Canvas.Effects.DirectionalBlurEffect
                 {
                     Source = image,
                     BlurAmount = effectManager.DirectionalBlur_BlurAmount,

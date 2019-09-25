@@ -231,13 +231,8 @@ namespace Retouch_Photo2
             ImageLayer imageLayer = new ImageLayer
             {
                 IsChecked = true,
+                TransformManager = new TransformManager(transformerSource),
 
-                TransformManager=new TransformManager
-                {
-                    Source = transformerSource,
-                    Destination = transformerSource,
-                },
-                
                 ImageRe = imageRe,
             };
 

@@ -120,7 +120,7 @@ namespace Retouch_Photo2.Tools
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                layer.TransformMultiplies(matrix );
+                layer.TransformMultiplies(matrix);
             }, true);
 
             this.ViewModel.Invalidate();//Invalidate

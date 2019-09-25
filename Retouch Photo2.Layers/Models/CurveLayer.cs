@@ -98,10 +98,9 @@ namespace Retouch_Photo2.Layers.Models
             }
             
             Transformer transformer = new Transformer(left, top, right, bottom);
-            base.TransformManager = TransformManager.
-                SetSource(base.TransformManager, transformer);
-            base.TransformManager = TransformManager.   
-                SetDestination(base.TransformManager, transformer);
+
+            base.TransformManager.Source = transformer;
+            base.TransformManager.Destination = transformer;
         }
     }
 }

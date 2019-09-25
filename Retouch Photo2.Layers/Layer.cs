@@ -32,34 +32,16 @@ namespace Retouch_Photo2.Layers
         public BlendType BlendType { get; set; } = BlendType.None;
 
 
-        public TransformManager TransformManager { get; set; }
-        public EffectManager EffectManager { get; set; }
+        public TransformManager TransformManager { get; set; } = new TransformManager();
+        public EffectManager EffectManager { get; set; } = new EffectManager();
         public AdjustmentManager AdjustmentManager { get; set; } = new AdjustmentManager();
         public ObservableCollection<ILayer> Children { get; set; } = new ObservableCollection<ILayer>();
 
-        
+
         //@Abstract
-        public virtual void CacheTransform()
-        {
-            this.TransformManager = TransformManager.
-                Set_oldDestination(this.TransformManager, this.TransformManager.Destination);
-            this.TransformManager = TransformManager.
-                Set_oldCropDestination(this.TransformManager, this.TransformManager.CropDestination);
-        }
-        public virtual void TransformMultiplies(Matrix3x2 matrix)
-        {
-            this.TransformManager = TransformManager.
-            SetDestination(this.TransformManager, this.TransformManager._oldDestination * matrix);
-            this.TransformManager = TransformManager.
-                SetCropDestination(this.TransformManager, this.TransformManager._oldCropDestination * matrix);
-        }
-        public virtual void TransformAdd(Vector2 vector)
-        {
-            this.TransformManager = TransformManager.
-                SetDestination(this.TransformManager, this.TransformManager._oldDestination + vector);
-            this.TransformManager = TransformManager.
-                SetCropDestination(this.TransformManager, this.TransformManager._oldCropDestination + vector);
-        }
+        public virtual void CacheTransform() => this.TransformManager.CacheTransform();
+        public virtual void TransformMultiplies(Matrix3x2 matrix) => this.TransformManager.TransformMultiplies(matrix);
+        public virtual void TransformAdd(Vector2 vector) => this.TransformManager.TransformAdd(vector);
 
 
         //@Abstract
@@ -81,8 +63,8 @@ namespace Retouch_Photo2.Layers
             currentLayer.IsChecked = this.IsChecked;
             currentLayer.Visibility = this.Visibility;
 
-            currentLayer.TransformManager = this.TransformManager;
-            currentLayer.EffectManager = this.EffectManager;
+            currentLayer.TransformManager = this.TransformManager.Clone();
+            currentLayer.EffectManager = this.EffectManager.Clone();
             
             foreach (IAdjustment adjustment in this.AdjustmentManager.Adjustments)
             {

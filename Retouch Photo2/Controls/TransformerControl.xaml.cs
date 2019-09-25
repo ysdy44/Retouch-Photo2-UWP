@@ -576,8 +576,7 @@ namespace Retouch_Photo2.Controls
                 this.SelectionTransformer = zeroTransformer * matrix;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.TransformManager = TransformManager.
-                    SetDestination(layer.TransformManager, zeroTransformer * matrix);
+                     layer.TransformManager.Destination = zeroTransformer * matrix;
                 });
 
                 this.ViewModel.Invalidate();

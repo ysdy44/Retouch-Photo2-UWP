@@ -45,12 +45,15 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new CropButton();
         public Page Page => this._cropPage;
         CropPage _cropPage { get; } = new CropPage();
-                        
+
 
         ILayer _layer;
-        TransformManager _startingTransformManager;
+        bool _startingIsCrop;
+        Transformer _startingDestination;
+        Transformer _startingCropDestination;
         TransformerMode _transformerMode;
-        
+        Transformer _getStartingShowDestination() => this._startingIsCrop ? this._startingCropDestination : this._startingDestination;
+
 
         public void Starting(Vector2 point)
         {
@@ -78,7 +81,9 @@ namespace Retouch_Photo2.Tools.Models
                     if (transformerMode != TransformerMode.None)
                     {
                         this._layer = layer;
-                        this._startingTransformManager = layer.TransformManager;
+                        this._startingDestination = layer.TransformManager.Destination;
+                        this._startingIsCrop = layer.TransformManager.IsCrop;
+                        this._startingCropDestination = layer.TransformManager.CropDestination;
                         this._transformerMode = transformerMode;
 
                         break;
@@ -100,11 +105,11 @@ namespace Retouch_Photo2.Tools.Models
             Transformer startingDestination;
             if (isTranslation)
             {
-                startingDestination = this._startingTransformManager.Destination;
+                startingDestination = this._startingDestination;
             }
             else
             {
-                startingDestination = this._startingTransformManager.GetShowDestination();
+                startingDestination = this._getStartingShowDestination();
             }
             
             Transformer transformer = Transformer.Controller
@@ -120,18 +125,14 @@ namespace Retouch_Photo2.Tools.Models
             );
 
             //Crop
-            this._layer.TransformManager = TransformManager.
-                SetIsCrop(this._layer.TransformManager, true);
-
+            this._layer.TransformManager.IsCrop = true;
             if (isTranslation)
             {
-                this._layer.TransformManager = TransformManager.
-                    SetDestination(this._layer.TransformManager, transformer);
+                this._layer.TransformManager.Destination = transformer;
             }
             else
             {
-                this._layer.TransformManager = TransformManager.
-                    SetCropDestination(this._layer.TransformManager, transformer);
+                this._layer.TransformManager.CropDestination = transformer;
             }
 
             this.ViewModel.Invalidate();//Invalidate

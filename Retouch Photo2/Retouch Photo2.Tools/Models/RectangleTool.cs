@@ -27,13 +27,8 @@ namespace Retouch_Photo2.Tools.Models
             return new RectangleLayer
             {
                 IsChecked = true,
-
-                TransformManager=new TransformManager
-                {
-                    Source = transformer,
-                    Destination = transformer,
-                },
-
+                TransformManager = new TransformManager(transformer),
+                
                 FillBrush = new Brush
                 {
                     Type = BrushType.Color,

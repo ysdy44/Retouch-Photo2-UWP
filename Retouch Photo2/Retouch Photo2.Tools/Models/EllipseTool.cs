@@ -24,17 +24,13 @@ namespace Retouch_Photo2.Tools.Models
         public override ILayer CreateLayer(Transformer transformer) => new EllipseLayer
         {
             IsChecked = true,
+            TransformManager = new TransformManager(transformer),
+
             FillBrush = new Brush
             {
                 Type = BrushType.Color,
                 Color = this.SelectionViewModel.FillColor,
             },
-
-            TransformManager = new TransformManager
-            {
-                Source = transformer,
-                Destination = transformer,
-            }
         };
 
         public override bool IsSelected

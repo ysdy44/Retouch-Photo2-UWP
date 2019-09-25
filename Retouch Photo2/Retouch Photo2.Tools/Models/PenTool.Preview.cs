@@ -77,18 +77,14 @@ namespace Retouch_Photo2.Tools.Models
             CurveLayer curveLayer = new CurveLayer(canvasStartingPoint, canvasPoint)
             {
                 IsChecked = true,
+                TransformManager = new TransformManager(transformer),
+
                 StrokeWidth = 1,
                 StrokeBrush = new Brush
                 {
                     Type = BrushType.Color,
                     Color = this.SelectionViewModel.FillColor,
                 },
-
-                TransformManager = new TransformManager
-                {
-                    Source = transformer,
-                    Destination = transformer,
-                }
             };
 
             //Selection
