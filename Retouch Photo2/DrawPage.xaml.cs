@@ -78,14 +78,7 @@ namespace Retouch_Photo2
 
 
             //LayersAdd
-            this.LayersControl.AddButton.Tapped += async (s, e) =>// await this.LayersAddDialog.ShowAsync(ContentDialogPlacement.InPlace);
-            {
-                this.ViewModel.CanvasTransformer.Scale = 1;
-                this.ViewModel.CanvasTransformer.Radian = 0;
-                this.ViewModel.CanvasTransformer.Position = Vector2.Zero;
-                this.ViewModel.CanvasTransformer.ReloadMatrix();
-                this.ViewModel.Invalidate();
-            };
+            this.LayersControl.AddButton.Tapped += async (s, e) => await this.LayersAddDialog.ShowAsync(ContentDialogPlacement.InPlace);
             this.LayersAddDialog.PhotoButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.PicturesLibrary);
             this.LayersAddDialog.DestopButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.Desktop);
         }

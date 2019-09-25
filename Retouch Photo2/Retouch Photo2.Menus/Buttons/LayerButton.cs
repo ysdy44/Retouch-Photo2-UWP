@@ -8,7 +8,7 @@ namespace Retouch_Photo2.Menus.Buttons
     public class LayerButton : IMenuButton
     {
         public MenuState State { set { } }
-        public FrameworkElement Self { get; } = new Border
+        public FrameworkElement Self { get; } = true ? new Border() : new Border
         {
             Background = new SolidColorBrush(Colors.Red),
             Child=new TextBlock

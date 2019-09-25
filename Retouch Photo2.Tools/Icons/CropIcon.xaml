@@ -9,6 +9,10 @@
     d:DesignWidth="50"
     >
 
-    <TextBlock Text="?"/>
-
+    <Path StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="{ThemeResource SystemControlBackgroundBaseHighBrush}">
+        <Path.Data>
+            M2.264,17.096l4.337,0l0,2.211l-6.601,0l0,-6.371l2.264,0l0,4.16Zm17.503,2.211l-6.601,0l0,-2.211l4.337,0l0,-4.16l2.264,0l0,6.371Zm-3.164,-16.373l0,13.44l-13.44,0l0,-13.44l13.44,0Zm3.164,3.437l-2.264,0l0,-4.16l-4.337,0l0,-2.211l6.601,0l0,6.371Zm-13.166,-4.16l-4.337,0l0,4.16l-2.264,0l0,-6.371l6.601,0l0,2.211Z                
+        </Path.Data>
+    </Path>
+    
 </UserControl>

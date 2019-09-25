@@ -1,8 +1,6 @@
 ﻿using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Animation;
 
 namespace Retouch_Photo2.Tools.Pages
 {
@@ -13,7 +11,8 @@ namespace Retouch_Photo2.Tools.Pages
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;       
+        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Converter
         private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
@@ -23,7 +22,16 @@ namespace Retouch_Photo2.Tools.Pages
         public CropPage()
         {
             this.InitializeComponent();
+            this.ResetButton.Tapped += (s, e) =>
+            {
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.TransformManager.IsCrop = false;
+                }, true);
 
+                this.ViewModel.Invalidate();//Invalidate
+            };
         }
     }
 }

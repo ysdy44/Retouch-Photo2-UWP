@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Controls
 
 
         //@Converter
-        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsOverlayExpanded && this.IsSecondPage;
+        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsOverlayExpanded && !this.IsSecondPage;
         public bool IsOverlayExpanded { private get; set; }
 
         public bool IsSecondPage

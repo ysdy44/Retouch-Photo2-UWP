@@ -52,8 +52,8 @@ namespace Retouch_Photo2.Tools.Models
         Transformer _startingDestination;
         Transformer _startingCropDestination;
         TransformerMode _transformerMode;
-        Transformer _getStartingShowDestination() => this._startingIsCrop ? this._startingCropDestination : this._startingDestination;
-
+        Transformer _startingActualDestination => this._startingIsCrop ? this._startingCropDestination : this._startingDestination;
+        
 
         public void Starting(Vector2 point)
         {
@@ -67,7 +67,7 @@ namespace Retouch_Photo2.Tools.Models
                 if (layer.IsChecked)
                 {
                     //Transformer
-                    Transformer transformer = layer.TransformManager.GetShowDestination();
+                    Transformer transformer = layer.TransformManager.ActualDestination;
                     Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
                     bool dsabledRadian = false;
                     TransformerMode transformerMode = Transformer.ContainsNodeMode
@@ -109,7 +109,7 @@ namespace Retouch_Photo2.Tools.Models
             }
             else
             {
-                startingDestination = this._getStartingShowDestination();
+                startingDestination = this._startingActualDestination;
             }
             
             Transformer transformer = Transformer.Controller
@@ -129,6 +129,10 @@ namespace Retouch_Photo2.Tools.Models
             if (isTranslation)
             {
                 this._layer.TransformManager.Destination = transformer;
+                if (this._startingIsCrop == false)
+                {
+                    this._layer.TransformManager.CropDestination = this._startingDestination;
+                }
             }
             else
             {
@@ -153,7 +157,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 if (layer.IsChecked)
                 {
-                    Transformer transformer = layer.TransformManager.GetShowDestination();
+                    Transformer transformer = layer.TransformManager.ActualDestination;
 
                     //LTRB
                     Vector2 leftTop = Vector2.Transform(transformer.LeftTop, matrix);
@@ -171,7 +175,7 @@ namespace Retouch_Photo2.Tools.Models
         private static void _drawCrop(CanvasDrawingSession drawingSession, Vector2 leftTop, Vector2 rightTop, Vector2 rightBottom, Vector2 leftBottom, Windows.UI.Color accentColor)
         {
             //Line            
-            //TODO: FAnkit后
+            //TODO: 更新Fankit后，删掉
             if (false)
             {
                 // CanvasDrawingSessionExtensions._drawBound(drawingSession, leftTop, rightTop, rightBottom, leftBottom, accentColor);
@@ -205,25 +209,26 @@ namespace Retouch_Photo2.Tools.Models
             const float space = 2;
             Vector2 verticalSpace = verticalUnit * space;
             Vector2 horizontalSpace = horizontalUnit * space;
-                                             
+
             //Scale2
             {
+                const float strokeWidth = 2;
                 Vector2 leftTopOutside = leftTop - verticalSpace - horizontalSpace;
                 Vector2 rightTopOutside = rightTop - verticalSpace + horizontalSpace;
                 Vector2 rightBottomOutside = rightBottom + verticalSpace + horizontalSpace;
                 Vector2 leftBottomOutside = leftBottom + verticalSpace - horizontalSpace;
 
-                drawingSession.DrawLine(leftTopOutside, leftTopOutside + horizontalLength, accentColor, 2);
-                drawingSession.DrawLine(leftTopOutside, leftTopOutside + verticalLength, accentColor, 2);
+                drawingSession.DrawLine(leftTopOutside, leftTopOutside + horizontalLength, accentColor, strokeWidth);
+                drawingSession.DrawLine(leftTopOutside, leftTopOutside + verticalLength, accentColor, strokeWidth);
            
-                drawingSession.DrawLine(rightTopOutside, rightTopOutside - horizontalLength, accentColor, 2);
-                drawingSession.DrawLine(rightTopOutside, rightTopOutside + verticalLength, accentColor, 2);
+                drawingSession.DrawLine(rightTopOutside, rightTopOutside - horizontalLength, accentColor, strokeWidth);
+                drawingSession.DrawLine(rightTopOutside, rightTopOutside + verticalLength, accentColor, strokeWidth);
           
-                drawingSession.DrawLine(rightBottomOutside, rightBottomOutside - horizontalLength, accentColor, 2);
-                drawingSession.DrawLine(rightBottomOutside, rightBottomOutside - verticalLength, accentColor, 2);
+                drawingSession.DrawLine(rightBottomOutside, rightBottomOutside - horizontalLength, accentColor, strokeWidth);
+                drawingSession.DrawLine(rightBottomOutside, rightBottomOutside - verticalLength, accentColor, strokeWidth);
            
-                drawingSession.DrawLine(leftBottomOutside, leftBottomOutside + horizontalLength, accentColor, 2);
-                drawingSession.DrawLine(leftBottomOutside, leftBottomOutside - verticalLength, accentColor, 2);
+                drawingSession.DrawLine(leftBottomOutside, leftBottomOutside + horizontalLength, accentColor, strokeWidth);
+                drawingSession.DrawLine(leftBottomOutside, leftBottomOutside - verticalLength, accentColor, strokeWidth);
             }
 
             //Scale1
@@ -247,6 +252,11 @@ namespace Retouch_Photo2.Tools.Models
 
 
         public void OnNavigatedTo() { }
-        public void OnNavigatedFrom() { }
+        public void OnNavigatedFrom()
+        {
+            // The transformer may change after the layer is cropped.
+            // So, reset the transformer.
+            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+        }
     }
 }

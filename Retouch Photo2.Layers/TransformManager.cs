@@ -26,6 +26,9 @@ namespace Retouch_Photo2.Layers
         /// <summary> The cropped destination transformer. </summary>
         public Transformer CropDestination { get; set; }
         Transformer _startingCropDestination;
+      
+        /// <summary> Gets actual destination transformer. </summary>
+        public Transformer ActualDestination => this.IsCrop ? this.CropDestination : this.Destination;
 
 
         //@Construct
@@ -61,14 +64,7 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         /// <returns> The product matrix. </returns>
         public Matrix3x2 GetMatrix() => Transformer.FindHomography(this.Source, this.Destination);
-        /// <summary>
-        /// Gets showed destination transformer.
-        /// </summary>
-        /// <returns> Return **CropDestination** if the **IsCrop** is true, otherwise **Destination**. </returns>
-        public Transformer GetShowDestination()
-        {
-            return this.IsCrop ? this.CropDestination : this.Destination;
-        }
+ 
         /// <summary>
         /// Get TransformManager own copy.
         /// </summary>

@@ -58,7 +58,7 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="layer"> The selection layer. </param>
         public void SetModeSingle(ILayer layer)
         {
-            this.Transformer = layer.TransformManager.Destination;
+            this.Transformer = layer.TransformManager.ActualDestination;
             this.DsabledRadian = layer.TransformManager.DisabledRadian;//DisabledRadian
 
             this.Layer = layer;
@@ -127,7 +127,7 @@ namespace Retouch_Photo2.ViewModels
                 //Foreach
                 foreach (ILayer layer in layers)
                 {
-                    Transformer transformer = layer.TransformManager.Destination;
+                    Transformer transformer = layer.TransformManager.ActualDestination;
                     aaa(transformer.LeftTop);
                     aaa(transformer.RightTop);
                     aaa(transformer.RightTop);
