@@ -35,7 +35,7 @@ namespace Retouch_Photo2.Elements
 
         #endregion
 
-
+                    
         //@Static
         /// <summary>
         /// Sets the application theme.
@@ -45,7 +45,10 @@ namespace Retouch_Photo2.Elements
         {
             if (Window.Current.Content is FrameworkElement frameworkElement)
             {
-                frameworkElement.RequestedTheme = value;
+                if (frameworkElement.RequestedTheme != value)
+                {
+                    frameworkElement.RequestedTheme = value;
+                }
             }
         }
     }

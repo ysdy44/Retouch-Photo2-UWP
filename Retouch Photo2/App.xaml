@@ -19,7 +19,7 @@
             -->
             <ResourceDictionary.ThemeDictionaries>
 
-                <ResourceDictionary x:Key="Default">
+                <ResourceDictionary x:Key="Light">
 
                     <Color x:Key="AppForegroundColor" >#F8F8F8</Color>
                     <SolidColorBrush x:Key="AppForeground" Color="{ThemeResource AppForegroundColor}"/>
