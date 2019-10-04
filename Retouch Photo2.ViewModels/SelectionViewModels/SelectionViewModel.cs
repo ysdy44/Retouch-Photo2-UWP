@@ -19,16 +19,16 @@ namespace Retouch_Photo2.ViewModels
         /// 2>Multiple.
         /// Temporary Transformer: Extended
         /// </summary>
-        public ListViewSelectionMode Mode
+        public ListViewSelectionMode SelectionMode
         {
-            get => this.mode;
+            get => this.selectionMode;
             set
             {
-                this.mode = value;
-                this.OnPropertyChanged(nameof(this.Mode));//Notify 
+                this.selectionMode = value;
+                this.OnPropertyChanged(nameof(this.SelectionMode));//Notify 
             }
         }
-        private ListViewSelectionMode mode;
+        private ListViewSelectionMode selectionMode;
 
 
         /// <summary> Transformer of selection layers. </summary>

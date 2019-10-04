@@ -250,7 +250,7 @@
                 <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
 
-            <ContentControl Height="6"/>
+            <ContentControl Height="2"/>
         </StackPanel>
 
     </Grid>

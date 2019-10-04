@@ -112,7 +112,7 @@
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarToggleButton.CenterContent>
                                 <FontIcon Glyph="&#xE80A;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                            </elements:ExpandAppbarToggleButton.CenterContent>        
+                            </elements:ExpandAppbarToggleButton.CenterContent>
                         </elements:ExpandAppbarToggleButton>
 
                         <elements:ExpandAppBarSapce/>

@@ -14,7 +14,7 @@
     <menus:MenuLayout x:Name="Layout">
         <menus:MenuLayout.ContentChild>
             <controls:LayerControl x:Name="Control" 
-                                   Mode="{x:Bind SelectionViewModel.Mode,Mode=OneWay}"
+                                   Mode="{x:Bind SelectionViewModel.SelectionMode,Mode=OneWay}"
                                    IsGroupLayer="{x:Bind SelectionViewModel.IsGroupLayer,Mode=OneWay}"
                                    />
         </menus:MenuLayout.ContentChild>        

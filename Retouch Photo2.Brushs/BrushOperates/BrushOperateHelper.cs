@@ -5,6 +5,9 @@ using System.Numerics;
 
 namespace Retouch_Photo2.Brushs
 {
+    /// <summary>
+    /// Provides static calculations for brush positions。
+    /// </summary>
     public static class BrushOperateHelper
     {
 
@@ -12,22 +15,22 @@ namespace Retouch_Photo2.Brushs
         {
             switch (brushType)
             {
-                case BrushType.None: return BrushOperateMode.LinearGradientEndPoint;
+                case BrushType.None: return BrushOperateMode.LinearEndPoint;
 
-                case BrushType.Color: return BrushOperateMode.LinearGradientEndPoint;
+                case BrushType.Color: return BrushOperateMode.LinearEndPoint;
 
                 case BrushType.LinearGradient:
                     {
                         Vector2 startPoint = Vector2.Transform(brushPoints.LinearGradientStartPoint, matrix);
                         if (FanKit.Math.InNodeRadius(point, startPoint))
                         {
-                            return BrushOperateMode.LinearGradientStartPoint;
+                            return BrushOperateMode.LinearStartPoint;
                         }
 
                         Vector2 endPoint = Vector2.Transform(brushPoints.LinearGradientEndPoint, matrix);
                         if (FanKit.Math.InNodeRadius(point, endPoint))
                         {
-                            return BrushOperateMode.LinearGradientEndPoint;
+                            return BrushOperateMode.LinearEndPoint;
                         }
                     }
                     break;
@@ -37,13 +40,13 @@ namespace Retouch_Photo2.Brushs
                         Vector2 center = Vector2.Transform(brushPoints.RadialGradientCenter, matrix);
                         if (FanKit.Math.InNodeRadius(point, center))
                         {
-                            return BrushOperateMode.RadialGradientCenter;
+                            return BrushOperateMode.RadialCenter;
                         }
 
                         Vector2 point2 = Vector2.Transform(brushPoints.RadialGradientPoint, matrix);
                         if (FanKit.Math.InNodeRadius(point, point2))
                         {
-                            return BrushOperateMode.RadialGradientPoint;
+                            return BrushOperateMode.RadialPoint;
                         }
                     }
                     break;
@@ -53,19 +56,19 @@ namespace Retouch_Photo2.Brushs
                         Vector2 xPoint = Vector2.Transform(brushPoints.EllipticalGradientXPoint, matrix);
                         if (FanKit.Math.InNodeRadius(point, xPoint))
                         {
-                            return BrushOperateMode.EllipticalGradientXPoint;
+                            return BrushOperateMode.EllipticalXPoint;
                         }
 
                         Vector2 yPoint = Vector2.Transform(brushPoints.EllipticalGradientYPoint, matrix);
                         if (FanKit.Math.InNodeRadius(point, yPoint))
                         {
-                            return BrushOperateMode.EllipticalGradientYPoint;
+                            return BrushOperateMode.EllipticalYPoint;
                         }
 
                         Vector2 center = Vector2.Transform(brushPoints.EllipticalGradientCenter, matrix);
                         if (FanKit.Math.InNodeRadius(point, center))
                         {
-                            return BrushOperateMode.EllipticalGradientCenter;
+                            return BrushOperateMode.EllipticalCenter;
                         }
                     }
                     break;
@@ -79,14 +82,14 @@ namespace Retouch_Photo2.Brushs
         {
             switch (mode)
             {
-                case BrushOperateMode.LinearGradientStartPoint:
+                case BrushOperateMode.LinearStartPoint:
                     {
                         Vector2 startPoint = Vector2.Transform(point, inverseMatrix);
 
                         startingBrushPoints.LinearGradientStartPoint = startPoint;
                         return startingBrushPoints;
                     }
-                case BrushOperateMode.LinearGradientEndPoint:
+                case BrushOperateMode.LinearEndPoint:
                     {
                         Vector2 endPoint = Vector2.Transform(point, inverseMatrix);
 
@@ -94,7 +97,7 @@ namespace Retouch_Photo2.Brushs
                         return startingBrushPoints;
                     }
 
-                case BrushOperateMode.RadialGradientCenter:
+                case BrushOperateMode.RadialCenter:
                     {
                         Vector2 center = Vector2.Transform(point, inverseMatrix);
                         Vector2 point2 = center + startingBrushPoints.RadialGradientPoint - startingBrushPoints.RadialGradientCenter;
@@ -103,7 +106,7 @@ namespace Retouch_Photo2.Brushs
                         startingBrushPoints.RadialGradientPoint = point2;
                         return startingBrushPoints;
                     }
-                case BrushOperateMode.RadialGradientPoint:
+                case BrushOperateMode.RadialPoint:
                     {
                         Vector2 point2 = Vector2.Transform(point, inverseMatrix);
 
@@ -111,7 +114,7 @@ namespace Retouch_Photo2.Brushs
                         return startingBrushPoints;
                     }
 
-                case BrushOperateMode.EllipticalGradientCenter:
+                case BrushOperateMode.EllipticalCenter:
                     {
                         Vector2 center = Vector2.Transform(point, inverseMatrix);
                         Vector2 xPoint = center + startingBrushPoints.EllipticalGradientXPoint - startingBrushPoints.EllipticalGradientCenter;
@@ -122,7 +125,7 @@ namespace Retouch_Photo2.Brushs
                         startingBrushPoints.EllipticalGradientYPoint = yPoint;
                         return startingBrushPoints;
                     }
-                case BrushOperateMode.EllipticalGradientXPoint:
+                case BrushOperateMode.EllipticalXPoint:
                     {
                         Vector2 xPoint = Vector2.Transform(point, inverseMatrix);
 
@@ -135,7 +138,7 @@ namespace Retouch_Photo2.Brushs
                         startingBrushPoints.EllipticalGradientYPoint = yPoint;
                         return startingBrushPoints;
                     }
-                case BrushOperateMode.EllipticalGradientYPoint:
+                case BrushOperateMode.EllipticalYPoint:
                     {
                         Vector2 yPoint = Vector2.Transform(point, inverseMatrix);
 
@@ -152,7 +155,7 @@ namespace Retouch_Photo2.Brushs
 
             return null;
         }
-
+        
 
         public static void Draw(CanvasDrawingSession drawingSession, BrushType brushType, BrushPoints brushPoints, CanvasGradientStop[] brushArray, Matrix3x2 matrix, Windows.UI.Color accentColor)
         {

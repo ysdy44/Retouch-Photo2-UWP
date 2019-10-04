@@ -1,10 +1,9 @@
-﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Brushes;
+﻿using Microsoft.Graphics.Canvas.Brushes;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI;
 
-namespace Retouch_Photo2.Brushs.Stops
+namespace Retouch_Photo2.Brushs
 {
     /// <summary>
     /// Manager of CanvasGradientStop class array.

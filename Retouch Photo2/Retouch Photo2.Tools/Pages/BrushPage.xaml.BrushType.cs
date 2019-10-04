@@ -89,7 +89,7 @@ namespace Retouch_Photo2.Tools.Pages
                 LinearGradientStartPoint = startPoint,
                 LinearGradientEndPoint = endPoint,
             };
-            this.Gradient(GradientBrushType.LinearGradient, brushPoints);
+            this.Gradient(GradientBrushType.Linear, brushPoints);
 
             this.ViewModel.Invalidate();//Invalidate
         }
@@ -105,7 +105,7 @@ namespace Retouch_Photo2.Tools.Pages
                 RadialGradientCenter = center,
                 RadialGradientPoint = point,
             };
-            this.Gradient(GradientBrushType.RadialGradient, brushPoints);
+            this.Gradient(GradientBrushType.Radial, brushPoints);
 
             this.ViewModel.Invalidate();//Invalidate
         }
@@ -123,7 +123,7 @@ namespace Retouch_Photo2.Tools.Pages
                 EllipticalGradientXPoint = xPoint,
                 EllipticalGradientYPoint = yPoint,
             };
-            this.Gradient(GradientBrushType.EllipticalGradient, brushPoints);
+            this.Gradient(GradientBrushType.Elliptical, brushPoints);
 
             this.ViewModel.Invalidate();//Invalidate
         }

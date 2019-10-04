@@ -35,9 +35,8 @@ namespace Retouch_Photo2.Menus.Layouts
 
             this.ColorPicker.ColorChange += (s, value) =>
             {
-                this.SelectionViewModel.Color = value;
-
                 //FillOrStroke
+                this.SelectionViewModel.Color = value;
                 switch (this.SelectionViewModel.FillOrStroke)
                 {
                     case FillOrStroke.Fill:
@@ -48,36 +47,27 @@ namespace Retouch_Photo2.Menus.Layouts
                         break;
                 }
 
-                if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return;
-
-                this.SelectionViewModel.BrushType = BrushType.Color;
-
-                //FillOrStroke
-                switch (this.SelectionViewModel.FillOrStroke)
+                if (this.SelectionViewModel.SelectionMode!= ListViewSelectionMode.None)
                 {
-                    case FillOrStroke.Fill:
+                    //Selection
+                    this.SelectionViewModel.BrushType = BrushType.Color;
+                    this.SelectionViewModel.SetValue((layer) =>
+                    {
+                        //FillOrStroke
+                        switch (this.SelectionViewModel.FillOrStroke)
                         {
-                            //Selection
-                            this.SelectionViewModel.SetValue((layer) =>
-                            {
+                            case FillOrStroke.Fill:
                                 layer.FillColor = value;
-                            }, true);
-                        }
-                        break;
-                    case FillOrStroke.Stroke:
-                        {
-                            //Selection
-                            this.SelectionViewModel.SetValue((layer) =>
-                            {
+                                break;
+                            case FillOrStroke.Stroke:
                                 layer.StrokeColor = value;
-                            }, true);
+                                break;
                         }
-                        break;
+                    }, true);
+
+                    this.ViewModel.Invalidate();//Invalidate
                 }
-
-                this.ViewModel.Invalidate();//Invalidate
             };
-
         }
     }
 }

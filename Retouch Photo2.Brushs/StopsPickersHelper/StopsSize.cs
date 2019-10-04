@@ -1,11 +1,10 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
-using Retouch_Photo2.Brushs.Controls;
 using System.Numerics;
 using Windows.UI;
 
-namespace Retouch_Photo2.Brushs.Stops
+namespace Retouch_Photo2.Brushs
 {
     /// <summary>
     /// Size of <see cref="StopsPicker">.

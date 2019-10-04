@@ -13,7 +13,7 @@
 
     <menus:MenuLayout x:Name="Layout">
         <menus:MenuLayout.ContentChild>
-            <controls:OperateControl x:Name="Control" Mode="{x:Bind SelectionViewModel.Mode,Mode=OneWay}"/>
+            <controls:OperateControl x:Name="Control" Mode="{x:Bind SelectionViewModel.SelectionMode,Mode=OneWay}"/>
         </menus:MenuLayout.ContentChild>        
     </menus:MenuLayout>
     

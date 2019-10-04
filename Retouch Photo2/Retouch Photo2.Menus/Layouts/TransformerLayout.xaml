@@ -16,7 +16,7 @@
             <controls:TransformerControl x:Name="Control"
                            Tool="{x:Bind TipViewModel.Tool,Mode=OneWay}"
                            DisabledRadian="{x:Bind SelectionViewModel.DsabledRadian,Mode=OneWay}"
-                           Mode="{x:Bind SelectionViewModel.Mode,Mode=OneWay}"
+                           Mode="{x:Bind SelectionViewModel.SelectionMode,Mode=OneWay}"
                            Transformer="{x:Bind SelectionViewModel.Transformer,Mode=OneWay}" 
                            />
         </menus:MenuLayout.ContentChild>        

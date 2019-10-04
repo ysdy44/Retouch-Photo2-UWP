@@ -47,13 +47,16 @@ namespace Retouch_Photo2
                 new CropTool(),
                  */
                 
-                 new NoneTool(),
                  new CursorTool(),
+                 null,
                  new ViewTool(),
                  new BrushTool(),
+                 new TransparencyTool(),
+                 null,
                  new RectangleTool(),
                  new EllipseTool(),
                  new PenTool(),
+                 null,
                  new ImageTool(),
                  new AcrylicTool(),
                  new CropTool(),

@@ -4,7 +4,7 @@ using System.Numerics;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Brushs.Controls
+namespace Retouch_Photo2.Brushs
 {
     /// <summary>
     /// A control used to show a brush.

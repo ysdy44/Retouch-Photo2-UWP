@@ -419,7 +419,7 @@ namespace Retouch_Photo2.Controls
 
                 this.IndicatorMode = mode;//IndicatorMode
 
-                if (this.SelectionViewModel.Mode == ListViewSelectionMode.None) return;
+                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
 
                 Transformer transformer = this.SelectionTransformer;
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);

@@ -200,7 +200,7 @@ namespace Retouch_Photo2.Controls
             {
                 int index = this.MezzanineViewModel.GetfFrstIndex(this.ViewModel.Layers);
 
-                switch (this.SelectionViewModel.Mode)
+                switch (this.SelectionViewModel.SelectionMode)
                 {
                     case ListViewSelectionMode.None:
                         break;

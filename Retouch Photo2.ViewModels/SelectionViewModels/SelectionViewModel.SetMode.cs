@@ -18,7 +18,7 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="setChildrenValue"> Whether to set the value along with the child? </param>
         public void SetValue(Action<ILayer> action, bool setChildrenValue = false)
         {
-            switch (this.Mode)
+            switch (this.SelectionMode)
             {
                 case ListViewSelectionMode.None:
                     break;

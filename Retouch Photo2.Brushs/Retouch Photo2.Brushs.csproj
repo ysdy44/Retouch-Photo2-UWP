@@ -109,20 +109,24 @@
     <Compile Include="Brush.cs" />
     <Compile Include="Brush.ICanvasBrush.cs" />
     <Compile Include="BrushPoints.cs" />
-    <Compile Include="GradientBrushType.cs" />
+    <Compile Include="StopsPickers\StopsPicker.xaml.Set.cs" />
+    <Compile Include="StopsPickers\SliderControl.xaml.cs">
+      <DependentUpon>SliderControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StopsPickersHelper\GradientBrushType.cs" />
     <Compile Include="BrushType.cs" />
-    <Compile Include="Controls\ShowControl.xaml.cs">
+    <Compile Include="ShowControls\ShowControl.xaml.cs">
       <DependentUpon>ShowControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\StopsPicker.xaml.cs">
+    <Compile Include="StopsPickers\StopsPicker.xaml.cs">
       <DependentUpon>StopsPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="FillOrStroke.cs" />
-    <Compile Include="Operates\BrushOperateHelper.cs" />
-    <Compile Include="Operates\BrushOperateMode.cs" />
+    <Compile Include="BrushOperates\BrushOperateHelper.cs" />
+    <Compile Include="BrushOperates\BrushOperateMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Stops\StopsManager.cs" />
-    <Compile Include="Stops\StopsSize.cs" />
+    <Compile Include="StopsPickersHelper\StopsManager.cs" />
+    <Compile Include="StopsPickersHelper\StopsSize.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo.Brushs.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -140,11 +144,15 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\ShowControl.xaml">
+    <Page Include="ShowControls\ShowControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\StopsPicker.xaml">
+    <Page Include="StopsPickers\SliderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StopsPickers\StopsPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Tools
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
-        ListViewSelectionMode Mode => this.SelectionViewModel.Mode;
+        ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
         CompositeMode CompositeMode => this.KeyboardViewModel.CompositeMode;
         bool IsRatio => this.KeyboardViewModel.IsRatio;
         bool IsCenter => this.KeyboardViewModel.IsCenter;

@@ -21,9 +21,9 @@ namespace Retouch_Photo2.Tools.Pages
             BrushType brushType = BrushType.LinearGradient;
             switch (gradientBrushType)
             {
-                case GradientBrushType.LinearGradient: brushType = BrushType.LinearGradient; break;
-                case GradientBrushType.RadialGradient: brushType = BrushType.RadialGradient; break;
-                case GradientBrushType.EllipticalGradient: brushType = BrushType.EllipticalGradient; break;
+                case GradientBrushType.Linear: brushType = BrushType.LinearGradient; break;
+                case GradientBrushType.Radial: brushType = BrushType.RadialGradient; break;
+                case GradientBrushType.Elliptical: brushType = BrushType.EllipticalGradient; break;
             }
 
             //Brush
@@ -39,13 +39,13 @@ namespace Retouch_Photo2.Tools.Pages
                     //FillOrStroke
                     switch (this.SelectionViewModel.FillOrStroke)
                     {
-                        case FillOrStroke.Fill:
+                        case FillOrStroke.Stroke:
                             geometryLayer.StrokeBrush.Type = brushType;
                             geometryLayer.StrokeBrush.Array = Brush.GetNewArray();
                             geometryLayer.StrokeBrush.Points = brushPoints;
                             break;
 
-                        case FillOrStroke.Stroke:
+                        case FillOrStroke.Fill:
                             geometryLayer.FillBrush.Type = brushType;
                             geometryLayer.FillBrush.Array = Brush.GetNewArray();
                             geometryLayer.FillBrush.Points = brushPoints;
@@ -61,7 +61,7 @@ namespace Retouch_Photo2.Tools.Pages
         /// <param name="fillOrStroke"> The fill or stroke. </param>
         public void SetFillOrStroke(FillOrStroke fillOrStroke)
         {
-            if (this.SelectionViewModel.Mode != ListViewSelectionMode.Single) return;
+            if (this.SelectionViewModel.SelectionMode != ListViewSelectionMode.Single) return;
 
             //Selection
             if (this.SelectionViewModel.Layer is IGeometryLayer geometryLayer)

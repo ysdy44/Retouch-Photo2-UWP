@@ -22,7 +22,7 @@ namespace Retouch_Photo2.Tools.Models
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
-        ListViewSelectionMode Mode => this.SelectionViewModel.Mode;
+        ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
         BrushType BrushType => this.SelectionViewModel.BrushType;
 
 
@@ -65,9 +65,9 @@ namespace Retouch_Photo2.Tools.Models
                     LinearGradientEndPoint = endPoint,
                 };
                 this._startingBrushPoints = brushPoints;
-                this._brushPage.Gradient(GradientBrushType.LinearGradient, brushPoints);
+                this._brushPage.Gradient(GradientBrushType.Linear, brushPoints);
 
-                this.OperateMode = BrushOperateMode.LinearGradientEndPoint;
+                this.OperateMode = BrushOperateMode.LinearEndPoint;
             }
             else
             {

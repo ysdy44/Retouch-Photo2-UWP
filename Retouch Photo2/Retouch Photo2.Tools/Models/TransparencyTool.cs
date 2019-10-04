@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Tools.Models
                 this._transparencyPage.IsSelected = value;
             }
         }
-        public ToolType Type => ToolType.Brush;
+        public ToolType Type => ToolType.Transparency;
         public FrameworkElement Icon { get; } = new TransparencyIcon();
         public IToolButton Button { get; } = new TransparencyButton();
         public Page Page => this._transparencyPage;

@@ -63,24 +63,24 @@ namespace Retouch_Photo2.Tools.Pages
 
             //GradientBrushType
             {
-                this.StopsPicker.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.LinearGradient);//ComboBox
+                this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Linear);//ComboBox
 
                 this.NoneComboBoxItem.Tapped += (s, e) => this.ToBrushTypeNone();
                 this.ColorComboBoxItem.Tapped += (s, e) => this.ToBrushTypeColor();
                 this.LinearGradientComboBoxItem.Tapped += (s, e) =>
                 {
                     this.ToBrushTypeLinearGradient();
-                    this.StopsPicker.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.LinearGradient);//ComboBox
+                    this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Linear);//ComboBox
                 };
                 this.RadialGradientComboBoxItem.Tapped += (s, e) =>
                 {
                     this.ToBrushTypeRadialGradient();
-                    this.StopsPicker.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.RadialGradient);//ComboBox
+                    this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Radial);//ComboBox
                 };
                 this.EllipticalGradientComboBoxItem.Tapped += (s, e) =>
                 {
                     this.ToBrushTypeEllipticalGradient();
-                    this.StopsPicker.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.EllipticalGradient);//ComboBox
+                    this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Elliptical);//ComboBox
                 };
                 this.ImageComboBoxItem.Tapped += (s, e) => this.ToBrushTypeImage();
             }
@@ -88,19 +88,19 @@ namespace Retouch_Photo2.Tools.Pages
 
             //BrushType
             {
-                this.StopsPicker.LinearGradientComboBoxItem.Tapped += (s, e) =>
+                this.StopsPicker.LinearGradientItem.Tapped += (s, e) =>
                 {
                     this.ToBrushTypeLinearGradient();
                     this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.LinearGradient);//ComboBox
                     this.EaseStoryboard.Begin();//Storyboard
                 };
-                this.StopsPicker.RadialGradientComboBoxItem.Tapped += (s, e) =>
+                this.StopsPicker.RadialGradientItem.Tapped += (s, e) =>
                 {
                     this.ToBrushTypeRadialGradient();
                     this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.RadialGradient);//ComboBox
                     this.EaseStoryboard.Begin();//Storyboard
                 };
-                this.StopsPicker.EllipticalGradientComboBoxItem.Tapped += (s, e) =>
+                this.StopsPicker.EllipticalGradientItem.Tapped += (s, e) =>
                 {
                     this.ToBrushTypeEllipticalGradient();
                     this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.EllipticalGradient);//ComboBox
@@ -153,30 +153,21 @@ namespace Retouch_Photo2.Tools.Pages
                     //Brush
                     this.SelectionViewModel.BrushType = BrushType.Color;
 
-                    //FillOrStroke
-                    switch (this.SelectionViewModel.FillOrStroke)
-                    {
-                        case FillOrStroke.Fill:
-                            {
-                                //Selection
-                                this.SelectionViewModel.FillColor = value;
-                                this.SelectionViewModel.SetValue((layer) =>
-                                {
-                                    layer.FillColor = value;
-                                }, true);
-                            }
-                            break;
-                        case FillOrStroke.Stroke:
-                            {
-                                //Selection
-                                this.SelectionViewModel.StrokeColor = value;
-                                this.SelectionViewModel.SetValue((layer) =>
-                                {
-                                    layer.StrokeColor = value;
-                                }, true);
-                            }
-                            break;
-                    }
+                    //Selection
+                    this.SelectionViewModel.FillColor = value;
+                    this.SelectionViewModel.SetValue((layer) =>
+                    { 
+                        //FillOrStroke
+                        switch (this.SelectionViewModel.FillOrStroke)
+                        {
+                            case FillOrStroke.Fill:
+                                layer.FillColor = value;
+                                break;
+                            case FillOrStroke.Stroke:
+                                layer.StrokeColor = value;
+                                break;
+                        }
+                    }, true);
 
                     this.ViewModel.Invalidate();//Invalidate
                 };

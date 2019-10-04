@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hSVColorPickers="using:HSVColorPickers"
-    xmlns:brushsControls="using:Retouch_Photo2.Brushs.Controls"
+    xmlns:brushs="using:Retouch_Photo2.Brushs"
     xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
@@ -20,7 +20,7 @@
             <hSVColorPickers:ColorPicker x:Name="ColorPicker" Width="222" Background="Transparent" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" />
         </Flyout>
         <Flyout x:Name="StopsFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <brushsControls:StopsPicker x:Name="StopsPicker" Width="320"/>
+            <brushs:StopsPicker x:Name="StopsPicker" Width="320"/>
         </Flyout>
         
         <!--Storyboard-->
@@ -70,7 +70,7 @@
         <elements:ExpandAppBarSapce/>
 
         <TextBlock Text="Brush:" Style="{StaticResource AppTextBlock}"/>
-        <brushsControls:ShowControl x:Name="ShowControl" 
+        <brushs:ShowControl x:Name="ShowControl" 
                                  Color="{x:Bind SelectionViewModel.Color,Mode=OneWay}"
                                  BrushType="{x:Bind SelectionViewModel.BrushType,Mode=OneWay}"
                                  BrushArray="{x:Bind SelectionViewModel.BrushArray,Mode=OneWay}"

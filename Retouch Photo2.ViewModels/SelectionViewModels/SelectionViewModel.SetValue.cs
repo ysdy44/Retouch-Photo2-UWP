@@ -19,7 +19,7 @@ namespace Retouch_Photo2.ViewModels
     {
 
         /// <summary>
-        /// Sets <see cref = "SelectionViewModel.Mode" /> to None.
+        /// Sets <see cref = "SelectionViewModel.SelectionMode" /> to None.
         /// </summary>
         public void SetModeNone()
         {
@@ -29,7 +29,7 @@ namespace Retouch_Photo2.ViewModels
             this.Layer = null;
             this.Layers = null;
 
-            this.Mode = ListViewSelectionMode.None;
+            this.SelectionMode = ListViewSelectionMode.None;
 
             //////////////////////////
 
@@ -54,7 +54,7 @@ namespace Retouch_Photo2.ViewModels
         }
 
         /// <summary>
-        /// Sets <see cref = "SelectionViewModel.Mode" /> to Single.
+        /// Sets <see cref = "SelectionViewModel.SelectionMode" /> to Single.
         /// </summary>
         /// <param name="layer"> The selection layer. </param>
         public void SetModeSingle(ILayer layer)
@@ -65,7 +65,7 @@ namespace Retouch_Photo2.ViewModels
             this.Layer = layer;
             this.Layers = null;
 
-            this.Mode = ListViewSelectionMode.Single;
+            this.SelectionMode = ListViewSelectionMode.Single;
 
             //////////////////////////
 
@@ -105,7 +105,7 @@ namespace Retouch_Photo2.ViewModels
         }
 
         /// <summary>
-        /// Sets <see cref = "SelectionViewModel.Mode" /> to Multiple.
+        /// Sets <see cref = "SelectionViewModel.SelectionMode" /> to Multiple.
         /// </summary>
         /// <param name="layers"> All selection layers. </param>
         public void SetModeMultiple(IEnumerable<ILayer> layers)
@@ -149,7 +149,7 @@ namespace Retouch_Photo2.ViewModels
         }
 
         /// <summary>
-        /// Sets <see cref = "SelectionViewModel.Mode" /> to Multiple.
+        /// Sets <see cref = "SelectionViewModel.SelectionMode" /> to Multiple.
         /// </summary>
         /// <param name="layers"> All selection layers. </param>
         /// <param name="transformer"> transformer </param>
@@ -161,7 +161,7 @@ namespace Retouch_Photo2.ViewModels
             this.Layer = null;
             this.Layers = layers;
 
-            this.Mode = ListViewSelectionMode.Multiple;//Transformer      
+            this.SelectionMode = ListViewSelectionMode.Multiple;//Transformer      
 
             //////////////////////////
 
@@ -188,7 +188,7 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary>
-        ///  Sets <see cref = "SelectionViewModel.Mode" />.
+        ///  Sets <see cref = "SelectionViewModel.SelectionMode" />.
         /// </summary>
         /// <param name="layers"> Layers </param>
         public void SetMode(Collection<ILayer> layers)

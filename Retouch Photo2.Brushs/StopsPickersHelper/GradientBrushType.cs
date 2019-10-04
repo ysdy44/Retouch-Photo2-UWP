@@ -6,10 +6,12 @@
     public enum GradientBrushType
     {
         /// <summary> Linear gradien brush. </summary>
-        LinearGradient,
+        Linear,
+
         /// <summary> Radial gradien brush. </summary>
-        RadialGradient,
+        Radial,
+
         /// <summary> Elliptical gradien brush. </summary>
-        EllipticalGradient
+        Elliptical
     }
 }

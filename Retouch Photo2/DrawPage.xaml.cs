@@ -11,7 +11,9 @@ using System.Threading.Tasks;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 namespace Retouch_Photo2
 {
@@ -94,7 +96,18 @@ namespace Retouch_Photo2
  
         private void ConstructTool(ITool tool)
         {
-            if (tool == null) return;
+            if (tool == null)
+            {
+                Rectangle rectangle = new Rectangle
+                {
+                    Fill = new SolidColorBrush(Windows.UI.Colors.Gray),
+                    Height = 1,
+                    Opacity = 0.4,
+                    Margin = new Thickness(4, 0, 4, 0),
+                };
+                this.TooLeft.Add(rectangle);
+                return;
+            }
             IToolButton button = tool.Button;
 
             if (button!=null)
@@ -116,9 +129,11 @@ namespace Retouch_Photo2
         {
             foreach (ITool tool in this.TipViewModel.Tools)
             {
-                if (tool == null) break;
-
-                tool.IsSelected = (tool.Type == groupType);
+                if (tool != null)
+                {
+                    bool isSelected = (tool.Type == groupType);
+                    tool.IsSelected = isSelected;
+                }
             }
 
             this.ViewModel.Invalidate();//Invalidate

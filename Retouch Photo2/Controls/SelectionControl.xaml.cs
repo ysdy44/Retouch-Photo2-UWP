@@ -94,7 +94,7 @@ namespace Retouch_Photo2.Controls
             this.CutButton.Tapped += (s, e) =>
             {
                 //Selection
-                switch (this.SelectionViewModel.Mode)
+                switch (this.SelectionViewModel.SelectionMode)
                 {
                     case ListViewSelectionMode.None:
                         {
@@ -132,7 +132,7 @@ namespace Retouch_Photo2.Controls
             this.CopyButton.Tapped += (s, e) =>
             {
                 //Selection
-                switch (this.SelectionViewModel.Mode)
+                switch (this.SelectionViewModel.SelectionMode)
                 {
                     case ListViewSelectionMode.None:
                         {
