@@ -22,7 +22,7 @@
         <SolidColorBrush x:Name="AccentColor" Color="{ThemeResource SystemAccentColor}"/>
 
         <!--Foreground-->
-        <SolidColorBrush x:Name="CheckColor" Color="{ThemeResource SystemBaseHighColor}"/>
+        <SolidColorBrush x:Name="CheckColor" Color="White"/>
         <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource SystemBaseMediumLowColor}"/>
         
     </UserControl.Resources>

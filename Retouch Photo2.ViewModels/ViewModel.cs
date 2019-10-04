@@ -30,10 +30,10 @@ namespace Retouch_Photo2.ViewModels
             this.CanvasTransformer.Width = project.Width;
             this.CanvasTransformer.Height = project.Height;
 
-            this.Layers.Clear();
+            this.Layers.RootLayers.Clear();
             foreach (ILayer layer in project.Layers)
             {
-                this.Layers.Add(layer);
+                this.Layers.RootLayers.Add(layer);
             }
         }
 
@@ -54,24 +54,8 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary> Retouch_Photo2's the only ILayers. </summary>
-        public ObservableCollection<ILayer> Layers { get; } = new ObservableCollection<ILayer>();
-
-        /// <summary> Remove all checked layer(s). </summary>
-        public void RemoveLayers()
-        {
-            //Remove
-            ILayer removeLayer = null;
-            do
-            {
-                if (removeLayer != null)
-                    if (this.Layers.Contains(removeLayer))
-                        this.Layers.Remove(removeLayer);
-
-                removeLayer = this.Layers.FirstOrDefault(layer => layer.IsChecked == true);
-            }
-            while (removeLayer != null);
-        }
-
+        public LayerCollection Layers { get; } = new LayerCollection();
+        
 
         /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.Layers.Models.ImageLayer" />'s images. </summary>
         public Stack<ImageRe> Images = new Stack<ImageRe>();

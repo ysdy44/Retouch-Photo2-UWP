@@ -21,12 +21,14 @@ namespace Retouch_Photo2.Layers
         /// <summary> Is disable rotate radian? Defult **false**. </summary>
         public bool DisabledRadian { get; set; }
         
+
         /// <summary> Is cropped? </summary>
         public bool IsCrop { get; set; }
         /// <summary> The cropped destination transformer. </summary>
         public Transformer CropDestination { get; set; }
         Transformer _startingCropDestination;
       
+
         /// <summary> Gets actual destination transformer. </summary>
         public Transformer ActualDestination => this.IsCrop ? this.CropDestination : this.Destination;
 
@@ -35,9 +37,7 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Constructs a <see cref = "TransformManager" />.
         /// </summary>
-        public TransformManager()
-        {
-        }
+        public TransformManager() { }
         /// <summary>
         /// Constructs a <see cref = "TransformManager" />.
         /// </summary>

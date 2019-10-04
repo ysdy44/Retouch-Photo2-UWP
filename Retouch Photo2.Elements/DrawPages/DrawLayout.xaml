@@ -108,6 +108,10 @@
                         <Setter Target = "IconLeftGrid.Visibility" Value="Visible"/>
 
                         <!--Right-->
+                        <Setter Target = "RightBorder.HorizontalAlignment" Value="Right"/>
+                        <Setter Target = "RightBorder.(Grid.Column)" Value="1"/>
+                        <Setter Target = "RightBorder.(Grid.ColumnSpan)" Value="2"/>
+                        
                         <Setter Target = "RightBorder.(Grid.Row)" Value="0"/>
                         <Setter Target = "RightBorder.(Grid.RowSpan)" Value="3"/>
                         <Setter Target = "RightBorder.BorderThickness" Value="1,1,0,1"/>
@@ -135,6 +139,10 @@
                         <Setter Target = "IconLeftContentControl.Foreground" Value="{StaticResource CheckColor}"/>
 
                         <!--Right-->
+                        <Setter Target = "RightBorder.HorizontalAlignment" Value="Right"/>
+                        <Setter Target = "RightBorder.(Grid.Column)" Value="1"/>
+                        <Setter Target = "RightBorder.(Grid.ColumnSpan)" Value="2"/>
+                        
                         <Setter Target = "RightBorder.(Grid.Row)" Value="0"/>
                         <Setter Target = "RightBorder.(Grid.RowSpan)" Value="3"/>
                         <Setter Target = "RightBorder.Visibility" Value="Collapsed"/>
@@ -164,6 +172,10 @@
                         <Setter Target = "IconLeftContentControl.Foreground" Value="{StaticResource UnCheckColor}"/>
 
                         <!--Right-->
+                        <Setter Target = "RightBorder.HorizontalAlignment" Value="Right"/>
+                        <Setter Target = "RightBorder.(Grid.Column)" Value="1"/>
+                        <Setter Target = "RightBorder.(Grid.ColumnSpan)" Value="2"/>
+                        
                         <Setter Target = "RightBorder.(Grid.Row)" Value="0"/>
                         <Setter Target = "RightBorder.(Grid.RowSpan)" Value="3"/>
 
@@ -189,6 +201,8 @@
                         <Setter Target = "LeftBorder.Margin" Value="0,20"/>
 
                         <!--Right-->
+                        <Setter Target = "RightBorder.Width" Value="Auto"/>
+                        
                         <Setter Target = "RightBorder.CornerRadius" Value="8,0,0,8"/>
                         <Setter Target = "RightBorder.BorderThickness" Value="1,1,0,1"/>
 
@@ -199,7 +213,7 @@
                         <!--Foot-->
                         <Setter Target = "FootRowDefinition.Height" Value="84"/>
                         <Setter Target = "RadiusAnimaPanel.Margin" Value="8"/>
-
+                        
                     </VisualState.Setters>
                 </VisualState>
 
@@ -228,6 +242,8 @@
                         />
 
                         <!--Right-->
+                        <Setter Target = "RightBorder.Width" Value="Auto"/>
+                        
                         <Setter Target = "RightBorder.(Grid.Row)" Value="0"/>
                         <Setter Target = "RightBorder.(Grid.RowSpan)" Value="3"/>
                         <Setter Target = "RightBorder.VerticalAlignment" Value="Stretch"/>
@@ -241,12 +257,12 @@
                         <Setter Target = "TouchbarBorder.(Grid.Column)" Value="1"/>
                         <Setter Target = "TouchbarBorder.(Grid.ColumnSpan)" Value="1"/>
 
-                        <!--GridLenght-->
-                        <Setter Target = "RightGridLenght.Width" Value="190"/>
-
                         <!--Foot-->
                         <Setter Target = "FootRowDefinition.Height" Value="106"/>
                         <Setter Target = "RadiusAnimaPanel.Margin" Value="14"/>
+
+                        <!--GridLenght-->
+                        <Setter Target = "RightGridLenght.Width" Value="190"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -453,7 +469,7 @@
         </Border>
         <!--Right-->
         <Border x:Name="RightBorder" Grid.Column="2" MinHeight="200" BorderBrush="{ThemeResource AppStroke}"
-                Grid.Row ="1" Grid.RowSpan="2" CornerRadius="0" VerticalAlignment="Center" BorderThickness="1,1,0,1" Visibility="Visible" Background="{ThemeResource AppBackground}">
+               Width="190" Grid.Row ="1" Grid.RowSpan="2" CornerRadius="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1,1,0,1" Visibility="Visible" Background="{ThemeResource AppBackground}">
 
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>

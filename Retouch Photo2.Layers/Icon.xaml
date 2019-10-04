@@ -6,7 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="50"
-    d:DesignWidth="50">
+    d:DesignWidth="50"
+    >
 
     <PathIcon>
         <PathIcon.Data>

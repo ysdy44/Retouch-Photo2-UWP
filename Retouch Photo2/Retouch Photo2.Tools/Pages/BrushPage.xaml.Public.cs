@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Brushs;
+﻿using HSVColorPickers;
+using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Models;
 using Windows.UI.Xaml.Controls;
@@ -28,7 +29,7 @@ namespace Retouch_Photo2.Tools.Pages
 
             //Brush
             this.SelectionViewModel.BrushType = brushType;
-            this.SelectionViewModel.BrushArray = Brush.GetNewArray();
+            this.SelectionViewModel.BrushArray = GreyWhiteMeshHelpher.GetGradientStopArray();
             this.SelectionViewModel.BrushPoints = brushPoints;
 
             //Selection
@@ -41,13 +42,13 @@ namespace Retouch_Photo2.Tools.Pages
                     {
                         case FillOrStroke.Stroke:
                             geometryLayer.StrokeBrush.Type = brushType;
-                            geometryLayer.StrokeBrush.Array = Brush.GetNewArray();
+                            geometryLayer.StrokeBrush.Array = GreyWhiteMeshHelpher.GetGradientStopArray();
                             geometryLayer.StrokeBrush.Points = brushPoints;
                             break;
 
                         case FillOrStroke.Fill:
                             geometryLayer.FillBrush.Type = brushType;
-                            geometryLayer.FillBrush.Array = Brush.GetNewArray();
+                            geometryLayer.FillBrush.Array = GreyWhiteMeshHelpher.GetGradientStopArray();
                             geometryLayer.FillBrush.Points = brushPoints;
                             break;
                     }

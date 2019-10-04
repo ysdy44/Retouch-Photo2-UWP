@@ -28,7 +28,6 @@ namespace Retouch_Photo2
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
 
 
         //@Converter
@@ -224,7 +223,7 @@ namespace Retouch_Photo2
 
 
         private async Task AddImage(PickerLocationId location)
-        {
+        { 
             //ImageRe
             ImageRe imageRe = await ImageRe.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, location);
             if (imageRe == null) return;
@@ -236,9 +235,9 @@ namespace Retouch_Photo2
             Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
 
             //Layer
-            ImageLayer imageLayer = new ImageLayer
+            ImageLayer imageLayer = new ImageLayer(this.ViewModel.Layers)
             {
-                IsChecked = true,
+                SelectMode = SelectMode.Selected,
                 TransformManager = new TransformManager(transformerSource),
 
                 ImageRe = imageRe,
@@ -247,12 +246,12 @@ namespace Retouch_Photo2
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                layer.IsChecked = false;
+                layer.SelectMode =  SelectMode.UnSelected;
             });
 
-            //Insert
-            int index = this.MezzanineViewModel.GetfFrstIndex(this.ViewModel.Layers);
-            this.ViewModel.Layers.Insert(index, imageLayer);
+            //Mezzanine
+            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(imageLayer);
+            this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
 
             this.LayersAddDialog.Hide();
 

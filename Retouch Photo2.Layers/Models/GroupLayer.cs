@@ -6,14 +6,18 @@ using Windows.UI.Xaml;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="Layer"/>'s GroupLayer .
+    /// <see cref="LayerBase"/>'s GroupLayer .
     /// </summary>
-    public class GroupLayer : Layer
+    public class GroupLayer : LayerBase
     {
+        //@Construct
+        public GroupLayer(LayerCollection layerCollection) : base(layerCollection)
+        {
+            base.Control.Icon = new GroupIcon();
+        }
+
         //@Override
         public override string Type => "Group";
-        public override UIElement Icon => new GroupIcon();
-  
         
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         { 
@@ -33,12 +37,11 @@ namespace Retouch_Photo2.Layers.Models
             return command;
         }
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(LayerCollection layerCollection, ICanvasResourceCreator resourceCreator)
         {
-            GroupLayer groupLayer = new GroupLayer();
+            GroupLayer groupLayer = new GroupLayer(layerCollection);
 
-            base.CopyWith(resourceCreator, groupLayer);
-
+            LayerBase.CopyWith(layerCollection, resourceCreator, groupLayer, this);
             return groupLayer;
         }
     }

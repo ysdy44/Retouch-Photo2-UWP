@@ -22,11 +22,11 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Coverride
-        public override ILayer CreateLayer(Transformer transformer)
+        public override ILayer CreateLayer(LayerCollection layerCollection, Transformer transformer)
         {
-            return new RectangleLayer
+            return new RectangleLayer(layerCollection)
             {
-                IsChecked = true,
+                SelectMode = SelectMode.Selected,
                 TransformManager = new TransformManager(transformer),
                 
                 FillBrush = new Brush

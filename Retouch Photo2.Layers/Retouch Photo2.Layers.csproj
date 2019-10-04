@@ -127,14 +127,31 @@
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ILayer.cs" />
+    <Compile Include="LayerCollections\LayerCollection.Mezzanine.cs" />
+    <Compile Include="Layers\ILayer.cs" />
+    <Compile Include="LayerCollections\LayerCollection.Arrange_Parents_Controls.cs" />
+    <Compile Include="LayerCollections\LayerCollection.ControlHeight.cs" />
+    <Compile Include="LayerCollections\LayerCollection.cs" />
+    <Compile Include="LayerCollections\LayerCollection.Drag_Move_Insert.cs" />
+    <Compile Include="LayerCollections\LayerCollection.Group.cs" />
+    <Compile Include="LayerCollections\LayerCollection.Remove.cs" />
+    <Compile Include="LayerCollections\LayerCollection.Select_ShiftSelect_SelectedLayers.cs" />
+    <Compile Include="LayerControls\ILayerControl.cs" />
+    <Compile Include="LayerControls\LayerControl.xaml.cs">
+      <DependentUpon>LayerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LayerMode\ExpandMode.cs" />
+    <Compile Include="LayerMode\LayerExtensions.cs" />
+    <Compile Include="LayerMode\OverlayMode.cs" />
+    <Compile Include="LayerMode\SelectMode.cs" />
+    <Compile Include="Layers\LayerBase.Children.cs" />
+    <Compile Include="Layers\LayerBase.Control.cs" />
+    <Compile Include="Layers\LayerBase.Render.cs" />
+    <Compile Include="Layers\LayerBase.Property.cs" />
     <Compile Include="TransformManager.cs" />
     <Compile Include="Models\CurveLayer.cs" />
     <Compile Include="Models\IGeometryLayer.cs" />
     <Compile Include="ImageRe.cs" />
-    <Compile Include="Layer.Notify.cs" />
-    <Compile Include="Layer.cs" />
-    <Compile Include="LayerDataPackageExpansion.cs" />
     <Compile Include="Models\AcrylicLayer.cs" />
     <Compile Include="Models\EllipseLayer.cs" />
     <Compile Include="Models\GroupLayer.cs" />
@@ -145,7 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FanKit.Transformers">
-      <Version>1.3.4</Version>
+      <Version>1.3.5</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.5</Version>
@@ -182,6 +199,10 @@
     <Page Include="Icon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LayerControls\LayerControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

@@ -40,7 +40,6 @@ namespace Retouch_Photo2.ViewModels
             //////////////////////////
 
             this.IsCrop = false;
-            this.Children = null;
             this.EffectManager = null;
             this.AdjustmentManager = null;
 
@@ -76,7 +75,6 @@ namespace Retouch_Photo2.ViewModels
             //////////////////////////
 
             this.IsCrop = (layer.TransformManager.IsCrop && (layer.TransformManager.DisabledRadian == false));
-            this.Children = layer.Children;
             this.EffectManager = layer.EffectManager;
             this.AdjustmentManager = layer.AdjustmentManager;
 
@@ -172,7 +170,6 @@ namespace Retouch_Photo2.ViewModels
             //////////////////////////
 
             this.IsCrop = layers.Any(layer=>(layer.TransformManager.IsCrop && (layer.TransformManager.DisabledRadian == false)));
-            this.Children = null;
             //this.EffectManager = layer.EffectManager;
             this.AdjustmentManager = null;
 
@@ -191,9 +188,14 @@ namespace Retouch_Photo2.ViewModels
         ///  Sets <see cref = "SelectionViewModel.SelectionMode" />.
         /// </summary>
         /// <param name="layers"> Layers </param>
-        public void SetMode(Collection<ILayer> layers)
+        public void SetMode(IList<ILayer> layers)
         {
-            IEnumerable<ILayer> checkedLayers = from item in layers where item.IsChecked select item;
+            IEnumerable<ILayer> checkedLayers = 
+                from item 
+                in layers
+                where item.SelectMode.ToBool()
+                select item;
+
             int count = checkedLayers.Count();
 
             if (count == 0)

@@ -8,9 +8,9 @@ using Windows.UI;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="Layer"/>'s IGeometryLayer .
+    /// <see cref="LayerBase"/>'s IGeometryLayer .
     /// </summary>
-    public abstract class IGeometryLayer : Layer
+    public abstract class IGeometryLayer : LayerBase
     {
         //@Abstract
         /// <summary>
@@ -29,6 +29,14 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary> <see cref = "IGeometryLayer" />'s stroke-width. </summary>
         public float StrokeWidth = 1;
 
+        //@Construct
+        /// <summary>
+        /// Construct a IGeometryLayer.
+        /// </summary>
+        /// <param name="layerCollection"> The layer-collection. </param>
+        public IGeometryLayer(LayerCollection layerCollection) : base(layerCollection)
+        {
+        }
 
         //@Override
         public override Color? FillColor

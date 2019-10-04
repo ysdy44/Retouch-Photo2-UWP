@@ -192,7 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HSVColorPickers">
-      <Version>1.3.3</Version>
+      <Version>1.3.4</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.5</Version>

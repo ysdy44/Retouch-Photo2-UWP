@@ -207,7 +207,7 @@ namespace Retouch_Photo2.Elements
             this.HeadRightToggleButton.Unchecked += (s, e) => this.HeadRightScrollViewer.Visibility = Visibility.Collapsed;
 
             //DismissOverlay
-            this.IconDismissOverlay.Tapped += (s, e) =>
+            this.IconDismissOverlay.PointerPressed += (s, e) =>
             {
                 this._vsPhoneType = PhoneLayoutType.Hided;
                 this.VisualState = this.VisualState;//State

@@ -12,11 +12,15 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class RectangleLayer : IGeometryLayer
     {
+        //@Construct
+        public RectangleLayer(LayerCollection layerCollection) : base(layerCollection)
+        {
+            base.Control.Icon = new RectangleIcon();
+        }
+
         //@Override      
         public override string Type => "Rectangle";
-        public override UIElement Icon=> new RectangleIcon();
-
-
+        
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
             Transformer transformer = base.TransformManager.Destination;
@@ -24,16 +28,15 @@ namespace Retouch_Photo2.Layers.Models
             return transformer.ToRectangle(resourceCreator, canvasToVirtualMatrix);            
         }
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(LayerCollection layerCollection, ICanvasResourceCreator resourceCreator)
         {
-            RectangleLayer rectangleLayer = new RectangleLayer
+            RectangleLayer rectangleLayer = new RectangleLayer(layerCollection)
             {
                 FillBrush = base.FillBrush,
                 StrokeBrush = base.StrokeBrush,
             };
 
-            base.CopyWith(resourceCreator, rectangleLayer);
-
+            LayerBase.CopyWith(layerCollection, resourceCreator, rectangleLayer, this);
             return rectangleLayer;
         }
     }

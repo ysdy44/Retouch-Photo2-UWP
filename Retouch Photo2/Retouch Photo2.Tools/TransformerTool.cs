@@ -1,6 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.UI;
@@ -143,7 +144,7 @@ namespace Retouch_Photo2.Tools
                                         //Selection
                                         this.SelectionViewModel.SetValue((layer) =>
                                         {
-                                            layer.IsChecked = false;
+                                            layer.SelectMode = SelectMode.UnSelected;
                                         });
                                         this.SelectionViewModel.SetModeNone();//Selection
 

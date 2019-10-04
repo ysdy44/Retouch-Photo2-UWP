@@ -55,7 +55,7 @@ namespace Retouch_Photo2.Tools
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasPoint = Vector2.Transform(point, matrix);
 
-            ILayer selectedLayer = this.ViewModel.Layers.FirstOrDefault((layer) =>
+            ILayer selectedLayer = this.ViewModel.Layers.RootLayers.FirstOrDefault((layer) =>
             {
                 if (layer.Visibility == Visibility.Visible)
                 {
@@ -75,13 +75,13 @@ namespace Retouch_Photo2.Tools
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                layer.IsChecked = false;
+                layer.SelectMode = SelectMode.UnSelected;
             });
             this._transformerMode = TransformerMode.Translation;//TransformerMode
 
 
             //Selection
-            selectedLayer.IsChecked = true;
+            selectedLayer.SelectMode = SelectMode.Selected;
             this.SelectionViewModel.SetModeSingle(selectedLayer);//Transformer
             this.ViewModel.Invalidate();//Invalidate
             return true;
@@ -98,7 +98,7 @@ namespace Retouch_Photo2.Tools
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            ILayer selectedLayer = this.ViewModel.Layers.FirstOrDefault((layer) =>
+            ILayer selectedLayer = this.ViewModel.Layers.RootLayers.FirstOrDefault((layer) =>
             {
                 if (layer.Visibility == Visibility.Visible)
                 {
@@ -115,15 +115,15 @@ namespace Retouch_Photo2.Tools
             switch (mode)
             {
                 case CompositeMode.Add:
-                    selectedLayer.IsChecked = true;
+                    selectedLayer.SelectMode = SelectMode.Selected;
                     break;
                 case CompositeMode.Subtract:
-                    selectedLayer.IsChecked = false;
+                    selectedLayer.SelectMode = SelectMode.UnSelected;
                     break;
             }
 
             this._transformerMode = TransformerMode.None;//TransformerMode
-            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Transformer
+            this.SelectionViewModel.SetMode(this.ViewModel.Layers.RootLayers);//Transformer
             this.ViewModel.Invalidate();//Invalidate
 
             return true;

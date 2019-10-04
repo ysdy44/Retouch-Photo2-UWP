@@ -20,19 +20,14 @@ namespace Retouch_Photo2.Controls
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
-
-        ObservableCollection<ILayer> _reference => this.ViewModel.Layers;
-        ObservableCollection<ILayer> _selection => this.SelectionViewModel.Layer.Children;
-
+        
 
         //@Content
         public MenuTitle MenuTitle => this._MenuTitle;
-
+                
 
         //@VisualState
         bool _vsIsBlends;
-        bool _vsIsChildren;
         bool _vsIsGroupLayer;
         ListViewSelectionMode _vsMode;
         public VisualState VisualState
@@ -40,7 +35,6 @@ namespace Retouch_Photo2.Controls
             get
             {
                 if (this._vsIsBlends) return this.Blends;
-                if (this._vsIsChildren) return this.Children;
 
                 switch (this.Mode)
                 {
@@ -56,13 +50,13 @@ namespace Retouch_Photo2.Controls
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
-
+        
 
         //@Converter
         private double OpacityToValueConverter(float opacity) => opacity * 100.0d;
         private float ValueToOpacityConverter(double value) => (float)value / 100.0f;
 
-        private double VisibilityToOpacityConverter(Visibility visibility) => (visibility == Visibility.Visible) ? 1.0 : 0.4;
+        private bool VisibilityToBoolConverter(Visibility visibility) => visibility == Visibility.Visible;
         private bool GroupLayerToboolConverter(GroupLayer groupLayer) => (groupLayer == null) ? false : true;
 
         private bool IsOpenConverter(bool isOpen) => isOpen && this.IsOverlayExpanded;
@@ -86,7 +80,6 @@ namespace Retouch_Photo2.Controls
             if (e.NewValue is ListViewSelectionMode value)
             {
                 con._vsIsBlends = false;
-                con._vsIsChildren = false;
 
                 con._vsMode = value;
                 con.VisualState = con.VisualState;//State
@@ -108,7 +101,6 @@ namespace Retouch_Photo2.Controls
             if (e.NewValue is bool value)
             {
                 con._vsIsBlends = false;
-                con._vsIsChildren = false;
 
                 con._vsIsGroupLayer = value;
                 con.VisualState = con.VisualState;//State
@@ -128,7 +120,6 @@ namespace Retouch_Photo2.Controls
             this._MenuTitle.BackButton.Tapped += (s, e) =>
             {
                 this._vsIsBlends = false;
-                this._vsIsChildren = false;
                 this.VisualState = this.VisualState;//State
             };
 
@@ -197,7 +188,8 @@ namespace Retouch_Photo2.Controls
 
             //Duplicate
             this.DuplicateButton.Tapped += (s, e) =>
-            {
+            {//TODO: Layer New
+             /*
                 int index = this.MezzanineViewModel.GetfFrstIndex(this.ViewModel.Layers);
 
                 switch (this.SelectionViewModel.SelectionMode)
@@ -243,12 +235,17 @@ namespace Retouch_Photo2.Controls
                 }
 
                 this.ViewModel.Invalidate();//Invalidate
+
+             */
             };
 
 
             //Group
             this.GroupButton.Tapped += (s, e) =>
             {
+                //TODO: Layer New
+                /*
+
                 //Menu
                 this.TipViewModel.SetMenuState(MenuType.Layer, destinations: MenuState.FlyoutHide);
 
@@ -287,16 +284,20 @@ namespace Retouch_Photo2.Controls
                 this.SelectionViewModel.SetModeSingle(groupLayer);//Selection
                 this.ViewModel.Layers.Insert(index, groupLayer);//Insert
                 this.ViewModel.Invalidate();//Invalidate
+                */
             };
 
 
             //Remove
             this.RemoveButton.Tapped += (s, e) =>
-            {
+            {//TODO: Layer New
+             /*
                 this.ViewModel.RemoveLayers();//Remove
 
                 this.SelectionViewModel.SetModeNone();//Selection
                 this.ViewModel.Invalidate();//Invalidate
+
+             */
             };
 
 
@@ -306,6 +307,8 @@ namespace Retouch_Photo2.Controls
             #region Children
 
 
+            //TODO: Layer New
+            /*
             this.ChildrenButton.Tapped += (s, e) =>
             {
                 if (this.SelectionViewModel.Layer == null) return;
@@ -315,11 +318,13 @@ namespace Retouch_Photo2.Controls
                 this._vsIsChildren = true;
                 this.VisualState = this.VisualState;//State
             };
+            */
 
 
             //UnGroup
-            this.UnGroupButton.Tapped += (s, e) =>
-            {
+            //this.UnGroupButton.Tapped += (s, e) =>
+            {//TODO: Layer New
+                /*
                 if (this.SelectionViewModel.IsGroupLayer == false) return;
 
                 if (this.SelectionViewModel.Layer is GroupLayer groupLayer)
@@ -347,79 +352,15 @@ namespace Retouch_Photo2.Controls
 
                     this.ViewModel.Invalidate();//Invalidate
                 }
+                 
+                 */
             };
 
 
             #endregion
 
-
-            #region Drag and Drop
-
-
-            this.ChildrenListView.AllowDrop = true;
-
-            this.ChildrenListView.CanDrag = false;
-            this.ChildrenListView.CanDragItems = false;
-
-            this.ChildrenListView.CanReorderItems = true;
-            this.ChildrenListView.ReorderMode = ListViewReorderMode.Enabled;
-            this.ChildrenListView.SelectionMode = ListViewSelectionMode.None;
-
-            /// DragOver is called when the dragged pointer moves over a UIElement with AllowDrop=True
-            /// We need to return an AcceptedOperation != None in either DragOver or DragEnter
-            this.ChildrenListView.DragOver += (object sender, DragEventArgs e) =>
-            {
-                // Our list only accepts text
-                e.AcceptedOperation = (e.DataView.Contains2(LayerDataPackageExpansion.DataFormat)) ? DataPackageOperation.Copy : DataPackageOperation.None;
-            };
-
-            /// We need to return the effective operation from Drop
-            /// This is not important for our source ListView, but it might be if the user
-            /// drags text from another source
-            this.ChildrenListView.Drop += (object sender, DragEventArgs e) =>
-            {
-                // This test is in theory not needed as we returned DataPackageOperation.None if
-                // the DataPackage did not contained text. However, it is always better if each
-                // method is robust by itself
-                if (e.DataView.Contains2(LayerDataPackageExpansion.DataFormat))
-                {
-                    // We need to take a Deferral as we won't be able to confirm the end
-                    // of the operation synchronously
-                    DragOperationDeferral def = e.GetDeferral();
-                    ILayer getLayer = e.DataView.GetLayer();
-
-                    if (getLayer != this.SelectionViewModel.Layer)
-                    {
-                        if (this._reference.Contains(getLayer))
-                        {
-                            this._reference.Remove(getLayer);
-                            this._selection.Add(getLayer);
-                        }
-                    }
-
-                    e.AcceptedOperation = DataPackageOperation.Copy;
-                    def.Complete();
-                }
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-
-
-            #endregion
-
+            
         }
-
-        //@DataTemplate
-        /// <summary> DataTemplate's Button Tapped. </summary>
-        private void VisibilityButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
-        {
-            LayersControl.GetButtonDataContext(sender, out Grid rootGrid, out ILayer layer);
-
-            layer.Visibility = (layer.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
-
-            this.ViewModel.Invalidate();//Invalidate
-
-            e.Handled = true;
-        }
+        
     }
 }

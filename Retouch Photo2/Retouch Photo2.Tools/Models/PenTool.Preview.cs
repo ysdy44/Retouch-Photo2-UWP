@@ -32,12 +32,12 @@ namespace Retouch_Photo2.Tools.Models
             if (this._hasPreviewTempLeftPoint)
             {
                 this._hasPreviewTempLeftPoint = false;
-                this.CreateLayer(this._previewLeft, canvasPoint);
+                this.CreateLayer(this.ViewModel.Layers, this._previewLeft, canvasPoint);
             }
             else if (isSingleStarted)
             {
                 this._hasPreviewTempLeftPoint = false;
-                this.CreateLayer(canvasStartingPoint, canvasPoint);
+                this.CreateLayer(this.ViewModel.Layers, canvasStartingPoint, canvasPoint);
             }
             else
             {
@@ -68,15 +68,15 @@ namespace Retouch_Photo2.Tools.Models
             }
         }
 
-        private void CreateLayer(Vector2 canvasStartingPoint, Vector2 canvasPoint)
+        private void CreateLayer(LayerCollection layerCollection, Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             //Transformer
             Transformer transformer = new Transformer(canvasPoint, canvasStartingPoint);
 
             //Layer
-            CurveLayer curveLayer = new CurveLayer(canvasStartingPoint, canvasPoint)
+            CurveLayer curveLayer = new CurveLayer(layerCollection,canvasStartingPoint, canvasPoint)
             {
-                IsChecked = true,
+                SelectMode = SelectMode.Selected,
                 TransformManager = new TransformManager(transformer),
 
                 StrokeWidth = 1,
@@ -90,12 +90,12 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                layer.IsChecked = false;
+                layer.SelectMode =  SelectMode.UnSelected;
             });
 
-            //Insert
-            int index = this.MezzanineViewModel.GetfFrstIndex(this.ViewModel.Layers);
-            this.ViewModel.Layers.Insert(index, curveLayer);
+            //Mezzanine
+            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(curveLayer);
+            this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
 
             this.SelectionViewModel.SetModeSingle(curveLayer);//Selection
             this.ViewModel.Invalidate();//Invalidate

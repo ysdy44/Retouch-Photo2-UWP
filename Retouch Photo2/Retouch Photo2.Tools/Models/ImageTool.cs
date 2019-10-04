@@ -20,7 +20,6 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
 
         float _sizeWidth;
         float _sizeHeight;
@@ -39,6 +38,8 @@ namespace Retouch_Photo2.Tools.Models
         public Page Page => this._imagePage;
         ImagePage _imagePage { get; } = new ImagePage();
         
+        ILayer MezzanineLayer;
+
         public void Starting(Vector2 point) { }
         public void Started(Vector2 startingPoint, Vector2 point)
         {
@@ -58,14 +59,14 @@ namespace Retouch_Photo2.Tools.Models
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, imageRe.Width, imageRe.Height);
 
             //Mezzanine
-            ILayer createLayer = new ImageLayer()
+            this.MezzanineLayer = new ImageLayer(this.ViewModel.Layers)
             {
-                IsChecked = true,
+                SelectMode = SelectMode.Selected,
                 TransformManager = new TransformManager(transformerSource, transformerDestination),
 
                 ImageRe = imageRe,
             };
-            this.MezzanineViewModel.SetLayer(createLayer, this.ViewModel.Layers);
+            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.MezzanineLayer);
 
             this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
@@ -73,59 +74,29 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
-            if (this.MezzanineViewModel.Layer == null) return;
+            if (this.MezzanineLayer == null) return;
 
-            //Transformer
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
-
-            //Mezzanine
-            this.MezzanineViewModel.Layer.TransformManager.Destination = transformerDestination;
-
+            this.MezzanineLayer.TransformManager.Destination = transformerDestination;
             this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
             this.ViewModel.Invalidate();//Invalidate
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
-            if (this.MezzanineViewModel.Layer == null) return;
+            if (this.MezzanineLayer == null) return;
 
             if (isSingleStarted)
             {
-                ImageRe imageRe = this.SelectionViewModel.ImageRe;
+                Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
+                this.MezzanineLayer.TransformManager.Destination = transformerDestination;
+                this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
-                //ImageRe
-                if (imageRe == null) return;
-
-                //Transformer
-                float sizeWidth = imageRe.Width;
-                float sizeHeight = imageRe.Height;
-                Transformer transformer = this.CreateTransformer(startingPoint, point, sizeWidth, sizeHeight);
-
-                //Selection
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    layer.IsChecked = false;
-                });
-
-                //Transformer
-                this._sizeWidth = imageRe.Width;
-                this._sizeHeight = imageRe.Height;
-                Transformer transformerDestination = this.CreateTransformer(startingPoint, point, imageRe.Width, imageRe.Height);
-                Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
-
-                //Mezzanine
-                ILayer createLayer = new ImageLayer()
-                {
-                    IsChecked = true,
-                    TransformManager = new TransformManager(transformerSource, transformerDestination),
-                    
-                    ImageRe = imageRe,
-                };
-                this.MezzanineViewModel.Insert(createLayer, this.ViewModel.Layers);
+                this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
             }
-            else this.MezzanineViewModel.None();//Mezzanine
+            else this.ViewModel.Layers.RemoveMezzanineLayer(this.MezzanineLayer);//Mezzanine
 
-            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+            this.SelectionViewModel.SetMode(this.ViewModel.Layers.RootLayers);//Selection
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
@@ -136,5 +107,13 @@ namespace Retouch_Photo2.Tools.Models
 
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom() { }
+
+
+        private Transformer CreateTransformer(Vector2 startingPoint, Vector2 point, float sizeWidth, float sizeHeight)
+        {
+            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+            Transformer canvasTransformer = Transformer.CreateWithAspectRatio(startingPoint, point, sizeWidth, sizeHeight);
+            return canvasTransformer * inverseMatrix;
+        }
     }
 }

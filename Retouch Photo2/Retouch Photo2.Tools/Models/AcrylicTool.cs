@@ -18,13 +18,13 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        
+
         //@Override
-        public override ILayer CreateLayer(Transformer transformer)
+        public override ILayer CreateLayer(LayerCollection layerCollection, Transformer transformer)
         {
-            return new AcrylicLayer
+            return new AcrylicLayer(layerCollection)
             {
-                IsChecked = true,
+                SelectMode = SelectMode.Selected,
                 TransformManager = new TransformManager(transformer)
                 {
                     DisabledRadian = true//DisabledRadian

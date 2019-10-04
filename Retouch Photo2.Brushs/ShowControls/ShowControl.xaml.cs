@@ -1,4 +1,5 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using HSVColorPickers;
+using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using System.Numerics;
 using Windows.UI;
@@ -17,7 +18,7 @@ namespace Retouch_Photo2.Brushs
         Vector2 Center;
 
         //Background
-        CanvasBitmap GrayAndWhiteBackground;
+        CanvasRenderTarget GrayAndWhiteBackground;
 
 
         #region DependencyProperty
@@ -78,8 +79,22 @@ namespace Retouch_Photo2.Brushs
                 this.SizeHeight = (float)e.NewSize.Height;
                 this.Center = new Vector2(this.SizeWidth / 2, this.SizeHeight / 2);
             };
-            this.CanvasControl.CreateResources += (sender, args) => this.GrayAndWhiteBackground = Brush.CreateGrayAndWhiteBackground(sender, (float)sender.ActualWidth, (float)sender.ActualHeight);
-            this.CanvasControl.Draw += (sender, args) =>
+            this.CanvasControl.CreateResources += (sender, args) =>
+            {
+                float width = (float)sender.ActualWidth;
+                float height = (float)sender.ActualHeight;
+                this.GrayAndWhiteBackground  = new CanvasRenderTarget(sender, width, height);
+
+                using (CanvasDrawingSession drawingSession = this.GrayAndWhiteBackground.CreateDrawingSession())
+                {
+                    CanvasBitmap bitmap = GreyWhiteMeshHelpher.GetGreyWhiteMesh(sender);
+                    ICanvasImage extendMesh = GreyWhiteMeshHelpher.GetBorderExtendMesh(height / 4, bitmap);
+                    drawingSession.DrawImage(extendMesh);
+                }
+            };
+            
+                   
+    this.CanvasControl.Draw += (sender, args) =>
             {
                 {
                     switch (this.brushType)
@@ -136,5 +151,7 @@ namespace Retouch_Photo2.Brushs
                 }
             };
         }
+
+
     }
 }

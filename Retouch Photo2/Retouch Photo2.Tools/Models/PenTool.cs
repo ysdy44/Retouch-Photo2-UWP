@@ -21,7 +21,6 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
 
         CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
         NodeCollection NodeCollection => this.CurveLayer.NodeCollection;

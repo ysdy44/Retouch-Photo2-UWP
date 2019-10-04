@@ -19,7 +19,6 @@ namespace Retouch_Photo2.Controls
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
 
@@ -88,7 +87,7 @@ namespace Retouch_Photo2.Controls
 
         #endregion
 
-
+        
         //@Construct
         public MainCanvasControl()
         {
@@ -138,40 +137,11 @@ namespace Retouch_Photo2.Controls
                     ICanvasImage previousImage = new ColorSourceEffect { Color = Colors.White };
 
                     Matrix3x2 canvasToVirtualMatrix = this.ViewModel.CanvasTransformer.GetMatrix(MatrixTransformerMode.CanvasToVirtual);
-
-                    void aaa()
+                    
+                    for (int i = this.ViewModel.Layers.RootLayers.Count - 1; i >= 0; i--)
                     {
-                        ILayer mezzanineLayer = this.MezzanineViewModel.Layer;
-                        previousImage = Layer.Render(this.ViewModel.CanvasDevice, mezzanineLayer, previousImage, canvasToVirtualMatrix);
-                    }
-
-                    void bbb(int i)
-                    {
-                        ILayer currentLayer = this.ViewModel.Layers[i];
-                        previousImage = Layer.Render(this.ViewModel.CanvasDevice, currentLayer, previousImage, canvasToVirtualMatrix);
-                    }
-
-
-                    //Mezzanine 
-                    if (this.MezzanineViewModel.Layer != null)
-                    {
-                        if (this.ViewModel.Layers.Count == 0) aaa();
-                        else
-                        {
-                            for (int i = this.ViewModel.Layers.Count - 1; i >= 0; i--)
-                            {
-                                bbb(i);
-
-                                if (this.MezzanineViewModel.Index == i) aaa();//Mezzanine
-                            }
-                        }
-                    }
-                    else
-                    {
-                        for (int i = this.ViewModel.Layers.Count - 1; i >= 0; i--)
-                        {
-                            bbb(i);
-                        }
+                        ILayer currentLayer = this.ViewModel.Layers.RootLayers[i];
+                        previousImage = LayerBase.Render(this.ViewModel.CanvasDevice, currentLayer, previousImage, canvasToVirtualMatrix);
                     }
 
                     //Crad
@@ -179,26 +149,21 @@ namespace Retouch_Photo2.Controls
                 }
 
 
-                //Mezzanine & Tool & Bound
+                //Tool & Bound
                 {
                     Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
-                    //Mezzanine 
-                    if (this.MezzanineViewModel.Layer != null) this.MezzanineViewModel.Layer.DrawBound(sender, args.DrawingSession, matrix, this.AccentColor);
-                    else
+                    //Bound
+                    foreach (ILayer layer in this.ViewModel.Layers.RootLayers)
                     {
-                        //Bound
-                        foreach (ILayer layer in this.ViewModel.Layers)
+                        if (layer.SelectMode.ToBool())
                         {
-                            if (layer.IsChecked)
-                            {
-                                layer.DrawBound(sender, args.DrawingSession, matrix, this.ViewModel.AccentColor);
-                            }
+                            layer.DrawBound(sender, args.DrawingSession, matrix, this.ViewModel.AccentColor);
                         }
-
-                        //Tool
-                        this.TipViewModel.Tool.Draw(args.DrawingSession);
                     }
+
+                    //Tool
+                    this.TipViewModel.Tool.Draw(args.DrawingSession);
                 }
 
 

@@ -15,7 +15,6 @@ namespace Retouch_Photo2.Controls
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
 
 
         //@Content
@@ -93,6 +92,10 @@ namespace Retouch_Photo2.Controls
 
             this.CutButton.Tapped += (s, e) =>
             {
+                //TODO: Layer New
+                /*
+
+
                 //Selection
                 switch (this.SelectionViewModel.SelectionMode)
                 {
@@ -128,9 +131,13 @@ namespace Retouch_Photo2.Controls
 
                 this.SelectionViewModel.SetModeNone();//Selection
                 this.ViewModel.Invalidate();//Invalidate
+                */
             };
             this.CopyButton.Tapped += (s, e) =>
             {
+                //TODO: Layer New
+                /*
+
                 //Selection
                 switch (this.SelectionViewModel.SelectionMode)
                 {
@@ -161,9 +168,13 @@ namespace Retouch_Photo2.Controls
                 }
 
                 this.PasteButton.IsEnabled = (this.Layer != null || this.Layers != null);//PasteButton
+
+                */
             };
             this.PasteButton.Tapped += (s, e) =>
-            {
+            {//TODO: Layer New
+             /*
+
                 int index = this.MezzanineViewModel.GetfFrstIndex(this.ViewModel.Layers);
                 
                 if (this.Layer == null && this.Layers == null)//None
@@ -171,7 +182,7 @@ namespace Retouch_Photo2.Controls
                 }
                 else if (this.Layer != null && this.Layers == null)//Single
                 {
-                    ILayer cloneLayer = this.Layer.Clone(this.ViewModel.CanvasDevice);//Clone
+                    ILayer cloneLayer = this.Layer.Clone(this.ViewModel.Layers, this.ViewModel.CanvasDevice);//Clone
                                         
                     this.ViewModel.Layers.Insert(index, cloneLayer);//Insert
 
@@ -181,7 +192,7 @@ namespace Retouch_Photo2.Controls
                 {
                     foreach (ILayer layer in this.Layers)
                     {
-                        ILayer cloneLayer = layer.Clone(this.ViewModel.CanvasDevice);//Clone
+                        ILayer cloneLayer = layer.Clone(this.ViewModel.Layers, this.ViewModel.CanvasDevice);//Clone
                                                 
                         this.ViewModel.Layers.Insert(index, cloneLayer);//Insert
                     }
@@ -190,13 +201,19 @@ namespace Retouch_Photo2.Controls
                 }
 
                 this.ViewModel.Invalidate();//Invalidate
+             */
             };
             this.RemoveButton.Tapped += (s, e) =>
             {
+                //TODO: Layer New
+                /*
+
                 this.ViewModel.RemoveLayers();//Remove
 
                 this.SelectionViewModel.SetModeNone();//Selection
                 this.ViewModel.Invalidate();//Invalidate
+
+                */
             };
 
 
@@ -208,7 +225,8 @@ namespace Retouch_Photo2.Controls
 
 
             this.AllButton.Tapped += (s, e) =>
-            {
+            {//TODO: Layer New
+             /*
                 int count = this.ViewModel.Layers.Count;
                 if (count == 0) return;
 
@@ -220,9 +238,15 @@ namespace Retouch_Photo2.Controls
 
                 this.SelectionViewModel.SetModeMultiple(this.ViewModel.Layers);//Selection
                 this.ViewModel.Invalidate();//Invalidate
+
+             */
             };
             this.DeselectButton.Tapped += (s, e) =>
             {
+                //TODO: Layer New
+                /*
+
+
                 int count = this.ViewModel.Layers.Count;
                 if (count == 0) return;
                 
@@ -234,11 +258,15 @@ namespace Retouch_Photo2.Controls
 
                 this.SelectionViewModel.SetModeNone();//Selection
                 this.ViewModel.Invalidate();//Invalidate
+                */
             };
 
 
             this.InvertButton.Tapped += (s, e) =>
             {
+                //TODO: Layer New
+                /*
+
                 int count = this.ViewModel.Layers.Count;
                 if (count == 0) return;
 
@@ -250,6 +278,8 @@ namespace Retouch_Photo2.Controls
 
                 this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
                 this.ViewModel.Invalidate();//Invalidate
+
+                */
             };
 
 

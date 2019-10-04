@@ -25,9 +25,6 @@ namespace Retouch_Photo2
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.SelectionViewModel" />. </summary>
         public static SelectionViewModel SelectionViewModel= new SelectionViewModel();
 
-        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.MezzanineViewModel" />. </summary>
-        public static MezzanineViewModel MezzanineViewModel = new MezzanineViewModel();
-
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.SettingViewModel" />. </summary>
         public static SettingViewModel SettingViewModel = new SettingViewModel();
 
@@ -98,7 +95,6 @@ namespace Retouch_Photo2
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            Layers.Models.AcrylicLayer.ddddddd += (s) => App.ViewModel.Text = s;
         }
 
 

@@ -56,18 +56,21 @@ namespace Retouch_Photo2
             {
                 this.LightRadioButton.Tapped += (s, e) =>
                 {
+                    this.RequestedTheme = ElementTheme.Light;
                     ApplicationViewTitleBarBackgroundExtension.SetTheme(ElementTheme.Light);
                     this.SettingViewModel.ElementTheme = ElementTheme.Light;
                     this.SettingViewModel.WriteToLocalFolder();//Write
                 };
                 this.DarkRadioButton.Tapped += (s, e) =>
                 {
+                    this.RequestedTheme = ElementTheme.Dark;
                     ApplicationViewTitleBarBackgroundExtension.SetTheme(ElementTheme.Dark);
                     this.SettingViewModel.ElementTheme = ElementTheme.Dark;
                     this.SettingViewModel.WriteToLocalFolder();//Write
                 };
                 this.DefaultRadioButton.Tapped += (s, e) =>
                 {
+                    this.RequestedTheme = ElementTheme.Default;
                     ApplicationViewTitleBarBackgroundExtension.SetTheme(ElementTheme.Default);
                     this.SettingViewModel.ElementTheme = ElementTheme.Default;
                     this.SettingViewModel.WriteToLocalFolder();//Write

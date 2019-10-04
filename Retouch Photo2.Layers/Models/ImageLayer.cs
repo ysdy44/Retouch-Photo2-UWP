@@ -7,16 +7,21 @@ using Windows.UI.Xaml;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="Layer"/>'s ImageLayer .
+    /// <see cref="LayerBase"/>'s ImageLayer .
     /// </summary>
-    public class ImageLayer : Layer
+    public class ImageLayer : LayerBase
     {
         /// <summary> <see cref = "ImageLayer" />'s image. </summary>
         public ImageRe ImageRe { get; set; }
 
+        //@Construct
+        public ImageLayer(LayerCollection layerCollection) : base(layerCollection)
+        {
+            base.Control.Icon = new ImageIcon();
+        }
+
         //@Override
         public override string Type => "Image";
-        public override UIElement Icon => new ImageIcon();
         
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -29,15 +34,14 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(LayerCollection layerCollection, ICanvasResourceCreator resourceCreator)
         {
-            ImageLayer imageLayer= new ImageLayer
+            ImageLayer imageLayer= new ImageLayer(layerCollection)
             {
                 ImageRe = this.ImageRe,
             };
 
-            base.CopyWith(resourceCreator, imageLayer);
-
+            LayerBase.CopyWith(layerCollection, resourceCreator, imageLayer, this);
             return imageLayer;
         }
     }

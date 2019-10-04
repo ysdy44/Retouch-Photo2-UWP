@@ -21,7 +21,6 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
@@ -99,7 +98,8 @@ namespace Retouch_Photo2.Tools.Models
                 if (isSingleStarted)
                 {
                     this.BoxChoose();//Box
-                    this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+
+                    this.SelectionViewModel.SetMode(this.ViewModel.Layers.RootLayers);//Selection
                     this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                     return;
                 }
@@ -128,7 +128,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void BoxChoose()
         {
-            foreach (ILayer layer in this.ViewModel.Layers)
+            foreach (ILayer layer in this.ViewModel.Layers.RootLayers)
             {
                 Transformer transformer = layer.TransformManager.Destination;
                 bool contained = transformer.Contained(this._boxCanvasRect);
@@ -136,16 +136,16 @@ namespace Retouch_Photo2.Tools.Models
                 switch (this.CompositeMode)
                 {
                     case CompositeMode.New:
-                        layer.IsChecked = contained;
+                        layer.SelectMode = SelectMode.Selected;
                         break;
                     case CompositeMode.Add:
-                        if (contained) layer.IsChecked = true;
+                        if (contained) layer.SelectMode = SelectMode.Selected;
                         break;
                     case CompositeMode.Subtract:
-                        if (contained) layer.IsChecked = false;
+                        if (contained) layer.SelectMode = SelectMode.UnSelected;
                         break;
                     case CompositeMode.Intersect:
-                        if (contained == false) layer.IsChecked = false;
+                        if (contained == false) layer.SelectMode = SelectMode.UnSelected;
                         break;
                 }
             }

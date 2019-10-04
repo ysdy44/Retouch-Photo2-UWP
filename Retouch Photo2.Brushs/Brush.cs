@@ -1,7 +1,6 @@
 ﻿using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
+using HSVColorPickers;
 using Microsoft.Graphics.Canvas.Brushes;
-using Microsoft.Graphics.Canvas.Effects;
 using System.Numerics;
 using Windows.UI;
 
@@ -19,12 +18,8 @@ namespace Retouch_Photo2.Brushs
         public Color Color = Colors.Gray;
 
         /// <summary> <see cref="Brush">'s gradient colors. </summary>
-        public CanvasGradientStop[] Array = new CanvasGradientStop[]
-        {
-             new CanvasGradientStop{Color= Colors.White, Position=0.0f },
-             new CanvasGradientStop{Color= Colors.Gray, Position=1.0f }
-        };
-        
+        public CanvasGradientStop[] Array = GreyWhiteMeshHelpher.GetGradientStopArray();
+
         /// <summary> <see cref="Brush">'s points. </summary>
         public BrushPoints Points;
         private BrushPoints _oldPoints;
@@ -135,68 +130,6 @@ namespace Retouch_Photo2.Brushs
                     break;
             }
         }
-
-
-        //@Static
-        /// <summary> 
-        /// Gets new CanvasGradientStop array. 
-        /// </summary>
-        /// <returns> stops </returns>
-        public static CanvasGradientStop[] GetNewArray() => new CanvasGradientStop[]
-        {
-            new CanvasGradientStop{Color= Colors.White, Position=0.0f },
-            new CanvasGradientStop{Color= Colors.Gray, Position=1.0f }
-        };
-
-        //TODO: 
-        // HSVColorPickers.GreyWhiteMeshHelpher.GetGradientStopArray()
-
-        /// <summary>
-        /// Create a gray-and-white bitmap.
-        /// </summary>
-        /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="width"> The bitmap width. </param>
-        /// <param name="height"> The bitmap height. </param>
-        /// <param name="columns"> Number of columns. </param>
-        /// <returns> CanvasRenderTarget </returns>
-        public static CanvasRenderTarget CreateGrayAndWhiteBackground(ICanvasResourceCreatorWithDpi resourceCreator, float width, float height,int columns=4)
-        {
-            //TODO: 
-            // HSVColorPickers.GreyWhiteMeshHelpher.GetLinearGradientBrush()
-            // HSVColorPickers.GreyWhiteMeshHelpher.GetBorderExtendMesh()
-
-            CanvasRenderTarget background = new CanvasRenderTarget(resourceCreator, width, height);
-            
-            Color[] colors = new Color[]
-            {
-                  Windows.UI.Colors.LightGray,
-                  Windows.UI.Colors.White,
-                  Windows.UI.Colors.White,
-                  Windows.UI.Colors.LightGray
-            };
-
-            CanvasBitmap bitmap = CanvasBitmap.CreateFromColors(resourceCreator, colors, 2, 2);
-
-            using (CanvasDrawingSession drawingSession = background.CreateDrawingSession())
-            {
-                drawingSession.DrawImage(new DpiCompensationEffect
-                {
-                    Source = new ScaleEffect
-                    {
-                        Scale = new Vector2(height / columns),
-                        InterpolationMode = CanvasImageInterpolation.NearestNeighbor,
-                        Source = new BorderEffect
-                        {
-                            ExtendX = CanvasEdgeBehavior.Wrap,
-                            ExtendY = CanvasEdgeBehavior.Wrap,
-                            Source = bitmap
-                        }
-                    }
-                });
-            }
-
-            return background;
-        }
-
+         
     }
 }

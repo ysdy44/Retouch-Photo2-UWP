@@ -4,6 +4,7 @@ using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Effects;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Windows.UI.Xaml;
@@ -67,18 +68,6 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private bool isCrop;
-
-        /// <summary> <see cref = "SelectionViewModel" />'s Children. </summary>
-        public ObservableCollection<ILayer> Children
-        {
-            get => this.children;
-            set
-            {
-                this.children = value;
-                this.OnPropertyChanged(nameof(this.Children));//Notify 
-            }
-        }
-        private ObservableCollection<ILayer> children;
 
 
         /// <summary> <see cref = "SelectionViewModel" />'s EffectManager. </summary>

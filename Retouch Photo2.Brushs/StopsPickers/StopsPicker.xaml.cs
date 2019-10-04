@@ -1,4 +1,5 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using HSVColorPickers;
+using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using System;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace Retouch_Photo2.Brushs
         public ComboBoxItem EllipticalGradientItem => this._EllipticalGradientItem;
 
         //Background
-        CanvasBitmap GrayAndWhiteBackground;
+        CanvasRenderTarget GrayAndWhiteBackground;
 
         StopsSize Size = new StopsSize();
         StopsManager Manager = new StopsManager();
@@ -62,7 +63,20 @@ namespace Retouch_Photo2.Brushs
                     if (e.NewSize == e.PreviousSize) return;
                     this.Size.SIzeChange((float)e.NewSize.Width, (float)e.NewSize.Height);
                 };
-                this.CanvasControl.CreateResources += (sender, args) => this.GrayAndWhiteBackground = Brush.CreateGrayAndWhiteBackground(sender, (float)sender.ActualWidth, (float)sender.ActualHeight, 6);
+                this.CanvasControl.CreateResources += (sender, args) =>
+                {
+                    float width = (float)sender.ActualWidth;
+                    float height = (float)sender.ActualHeight;
+                    this.GrayAndWhiteBackground = new CanvasRenderTarget(sender, width, height);
+
+                    using (CanvasDrawingSession drawingSession = this.GrayAndWhiteBackground.CreateDrawingSession())
+                    {
+                        CanvasBitmap bitmap = GreyWhiteMeshHelpher.GetGreyWhiteMesh(sender);
+                        ICanvasImage extendMesh = GreyWhiteMeshHelpher.GetBorderExtendMesh(height / 4, bitmap);
+                        drawingSession.DrawImage(extendMesh);
+                    }
+                };
+
                 this.CanvasControl.Draw += (sender, args) =>
                 {
                     if (this.array == null) return;

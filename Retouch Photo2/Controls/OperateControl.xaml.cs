@@ -16,7 +16,6 @@ namespace Retouch_Photo2.Controls
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        MezzanineViewModel MezzanineViewModel => App.MezzanineViewModel;
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
         

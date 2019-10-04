@@ -268,7 +268,7 @@ namespace Retouch_Photo2
             Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
 
             //Layer
-            ImageLayer imageLayer = new ImageLayer()
+            ImageLayer imageLayer = new ImageLayer(this.ViewModel.Layers)
             {
                 TransformManager = new TransformManager(transformerSource),
                 ImageRe = imageRe,

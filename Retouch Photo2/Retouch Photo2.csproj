@@ -262,7 +262,6 @@
     <Compile Include="Retouch Photo2.Tools\Models\CursorTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\EllipseTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\ImageTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\ImageTool.Rectangle.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\NoneTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\PenTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\PenTool.Preview.cs" />
@@ -631,10 +630,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FanKit.Transformers">
-      <Version>1.3.4</Version>
+      <Version>1.3.5</Version>
     </PackageReference>
     <PackageReference Include="HSVColorPickers">
-      <Version>1.3.3</Version>
+      <Version>1.3.4</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.5</Version>

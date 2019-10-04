@@ -16,7 +16,6 @@ namespace Retouch_Photo2.Layers.Models
     {
         //@Override       
         public override string Type => "Curve";
-        public override UIElement Icon => new CurveIcon();
 
         public NodeCollection NodeCollection { get; private set; }
 
@@ -26,13 +25,21 @@ namespace Retouch_Photo2.Layers.Models
         /// Construct a curve layer.
         /// </summary>
         /// <param name="nodes"> The source nodes. </param>
-        public CurveLayer(IEnumerable<Node> nodes) => this.NodeCollection = new NodeCollection(nodes); 
+        public CurveLayer(LayerCollection layerCollection,IEnumerable<Node> nodes) : base(layerCollection)
+        {
+            base.Control.Icon = new CurveIcon();
+            this.NodeCollection = new NodeCollection(nodes); 
+        }
         /// <summary>
         /// Construct a curve layer from a line.
         /// </summary>
         /// <param name="left"> The first source vector. </param>
         /// <param name="right"> The second source vector. </param>
-        public CurveLayer(Vector2 left, Vector2 right) => this.NodeCollection = new NodeCollection(left, right);
+        public CurveLayer(LayerCollection layerCollection,Vector2 left, Vector2 right) : base(layerCollection)
+        {
+            base.Control.Icon = new CurveIcon();
+            this.NodeCollection = new NodeCollection(left, right);
+        }
 
 
         //@Override
@@ -61,17 +68,16 @@ namespace Retouch_Photo2.Layers.Models
             return this.NodeCollection.CreateGeometry(resourceCreator).Transform(canvasToVirtualMatrix);
         }
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(LayerCollection layerCollection, ICanvasResourceCreator resourceCreator)
         {
-            CurveLayer curveLayer= new CurveLayer(this.NodeCollection)
+            CurveLayer curveLayer = new CurveLayer(layerCollection, this.NodeCollection)
             {
                 FillBrush = base.FillBrush,
                 StrokeBrush = base.StrokeBrush,
                 NodeCollection = new NodeCollection(from node in this.NodeCollection select node)
             };
 
-            base.CopyWith(resourceCreator, curveLayer);
-
+            LayerBase.CopyWith(layerCollection, resourceCreator, curveLayer, this);
             return curveLayer;
         }
 

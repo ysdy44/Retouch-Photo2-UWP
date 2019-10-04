@@ -12,21 +12,25 @@ using Windows.UI.Xaml;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="Layer"/>'s AcrylicLayer .
+    /// <see cref="LayerBase"/>'s AcrylicLayer .
     /// </summary>
-    public class AcrylicLayer : Layer
+    public class AcrylicLayer : LayerBase
     {
         public float TintOpacity = 0.5f;
         public Color TintColor = Color.FromArgb(255, 255, 255, 255);
         public float BlurAmount = 12.0f;
-        
+
+        //@Construct
+        public AcrylicLayer(LayerCollection layerCollection) : base(layerCollection)
+        {
+            base.Control.Icon = new AcrylicIcon();
+        }
 
         //@Override
         public override string Type => "Acrylic";
-        public override UIElement Icon => new AcrylicIcon();
         public override Color? FillColor
         {
-           get => this.TintColor;
+            get => this.TintColor;
             set
             {
                 if (value is Color color)
@@ -35,7 +39,6 @@ namespace Retouch_Photo2.Layers.Models
                 }
             }
         }
-        public static Action<string> ddddddd;
 
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -68,17 +71,16 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(LayerCollection layerCollection, ICanvasResourceCreator resourceCreator)
         {
-            AcrylicLayer acrylicLayer = new AcrylicLayer
+            AcrylicLayer acrylicLayer = new AcrylicLayer(layerCollection)
             {
                 TintOpacity = this.TintOpacity,
                 TintColor = this.TintColor,
                 BlurAmount = this.BlurAmount,
             };
 
-            base.CopyWith(resourceCreator, acrylicLayer);
-
+            LayerBase.CopyWith(layerCollection, resourceCreator, acrylicLayer, this);
             return acrylicLayer;
         }
     }
