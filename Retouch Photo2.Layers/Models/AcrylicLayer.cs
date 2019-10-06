@@ -40,7 +40,7 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         {
-            Transformer transformer = base.TransformManager.Destination;
+            Transformer transformer = base.ActualDestinationAboutGroupLayer;
             Vector2 leftTop = Vector2.Transform(transformer.LeftTop, canvasToVirtualMatrix);
             Vector2 rightBottom = Vector2.Transform(transformer.RightBottom, canvasToVirtualMatrix);
 

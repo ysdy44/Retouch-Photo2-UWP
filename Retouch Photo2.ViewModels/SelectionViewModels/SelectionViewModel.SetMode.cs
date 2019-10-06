@@ -93,9 +93,9 @@ namespace Retouch_Photo2.ViewModels
         }
         private void _setModeSingle(ILayer layer)
         {
-            this.Transformer = layer.TransformManager.ActualDestination;
+            this.Transformer = layer.ActualDestinationAboutGroupLayer;
             this.DsabledRadian = layer.TransformManager.DisabledRadian;//DisabledRadian
-
+            
             this.Layer = layer;
             this.Layers = null;
 

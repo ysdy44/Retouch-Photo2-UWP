@@ -67,7 +67,7 @@ namespace Retouch_Photo2.Tools.Models
                 if (layer.SelectMode.ToBool())
                 {
                     //Transformer
-                    Transformer transformer = layer.TransformManager.ActualDestination;
+                    Transformer transformer = layer.ActualDestinationAboutGroupLayer;
                     Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
                     bool dsabledRadian = false;
                     TransformerMode transformerMode = Transformer.ContainsNodeMode
@@ -161,7 +161,7 @@ namespace Retouch_Photo2.Tools.Models
                 {
                     if (layer.TransformManager.DisabledRadian==false)
                     {
-                        Transformer transformer = layer.TransformManager.ActualDestination;
+                        Transformer transformer = layer.ActualDestinationAboutGroupLayer;
                         drawingSession.DrawCrop(transformer, matrix, Colors.BlueViolet);
                     }
                 }

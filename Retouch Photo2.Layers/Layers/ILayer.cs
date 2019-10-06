@@ -29,8 +29,9 @@ namespace Retouch_Photo2.Layers
         BlendType BlendType { get; set; }
         /// <summary> Gets or sets ILayer's visibility. </summary>
         Visibility Visibility { get; set; }
-               
 
+        /// <summary> Gets ILayer's actual transformer. </summary>
+        Transformer ActualDestinationAboutGroupLayer { get; }
         /// <summary> Gets or sets ILayer's transformer. </summary>
         TransformManager TransformManager { get; set; }
         /// <summary> Gets or sets ILayer's effect manager. </summary>

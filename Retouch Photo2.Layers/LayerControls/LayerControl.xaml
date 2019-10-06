@@ -15,7 +15,7 @@
         <!--Background-->
         <SolidColorBrush x:Name="AccentColor" Color="{ThemeResource SystemAccentColor}"/>
         <SolidColorBrush x:Name="UnAccentColor" Color="Transparent"/>
-        <SolidColorBrush x:Name="ThreeStateColor" Opacity="0.6" Color="{ThemeResource SystemAccentColor}"/>
+        <SolidColorBrush x:Name="ThreeStateColor" Opacity="0.4" Color="{ThemeResource SystemAccentColor}"/>
         <SolidColorBrush x:Name="FourStateColor" Opacity="0.15" Color="{ThemeResource SystemAccentColor}"/>
 
         <!--Foreground-->

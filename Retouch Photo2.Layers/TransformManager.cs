@@ -29,10 +29,6 @@ namespace Retouch_Photo2.Layers
         Transformer _startingCropDestination;
       
 
-        /// <summary> Gets actual destination transformer. </summary>
-        public Transformer ActualDestination => this.IsCrop ? this.CropDestination : this.Destination;
-
-
         //@Construct
         /// <summary>
         /// Constructs a <see cref = "TransformManager" />.

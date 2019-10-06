@@ -59,7 +59,7 @@ namespace Retouch_Photo2.Tools
             {
                 if (layer.Visibility == Visibility.Visible)
                 {
-                    Transformer transformer = layer.TransformManager.Destination;
+                    Transformer transformer = layer.ActualDestinationAboutGroupLayer;
                     bool isFillContainsPoint = transformer.FillContainsPoint(canvasPoint);
                     if (isFillContainsPoint)
                     {
@@ -104,7 +104,7 @@ namespace Retouch_Photo2.Tools
                 if (layer.Visibility == Visibility.Visible)
                 {
                     //Transformer
-                    Transformer transformer = layer.TransformManager.Destination;
+                    Transformer transformer = layer.ActualDestinationAboutGroupLayer;
                     bool isFillContainsPoint = transformer.FillContainsPoint(canvasPoint);
                     if (isFillContainsPoint) return true;
                 }

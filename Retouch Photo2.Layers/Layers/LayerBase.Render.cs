@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Layers
         public abstract ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix);
         public virtual void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
         {
-            Transformer transformer = this.TransformManager.Destination;
+            Transformer transformer = this.ActualDestinationAboutGroupLayer;
             drawingSession.DrawBound(transformer, matrix, accentColor);
         }
 

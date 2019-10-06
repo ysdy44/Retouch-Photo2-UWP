@@ -30,7 +30,7 @@ namespace Retouch_Photo2.Layers
             //Foreach
             foreach (ILayer layer in layers)
             {
-                Transformer transformer = layer.TransformManager.ActualDestination;
+                Transformer transformer = layer.ActualDestinationAboutGroupLayer;
                 aaa(transformer.LeftTop);
                 aaa(transformer.RightTop);
                 aaa(transformer.RightBottom);

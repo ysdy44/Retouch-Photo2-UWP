@@ -1,7 +1,9 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Effects;
+using Retouch_Photo2.Layers.Models;
 using System.Numerics;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -21,6 +23,7 @@ namespace Retouch_Photo2.Layers
         public BlendType BlendType { get; set; } = BlendType.None;
         public Visibility Visibility { get; set; }
 
+        public virtual Transformer ActualDestinationAboutGroupLayer => this.TransformManager.IsCrop ? this.TransformManager.CropDestination : this.TransformManager.Destination;
         public TransformManager TransformManager { get; set; } = new TransformManager();
         public EffectManager EffectManager { get; set; } = new EffectManager();
         public AdjustmentManager AdjustmentManager { get; set; } = new AdjustmentManager();
@@ -32,9 +35,39 @@ namespace Retouch_Photo2.Layers
         
 
         //@Virtual
-        public virtual void CacheTransform() => this.TransformManager.CacheTransform();
-        public virtual void TransformMultiplies(Matrix3x2 matrix) => this.TransformManager.TransformMultiplies(matrix);
-        public virtual void TransformAdd(Vector2 vector) => this.TransformManager.TransformAdd(vector);
+        public virtual void CacheTransform()
+        {
+            //AboutGroupLayer 
+            if (this.parents!=null)
+            {
+                if (this.parents is GroupLayer  groupLayer)
+                {
+                    groupLayer.IsChildrenChanged = true;
+                }
+            }
+
+            foreach (ILayer child in this.Children)
+            {
+                child.TransformManager.CacheTransform();
+            }
+            this.TransformManager.CacheTransform();
+        }
+        public virtual void TransformMultiplies(Matrix3x2 matrix)
+        {
+            foreach (ILayer child in this.Children)
+            {
+                child.TransformManager.TransformMultiplies(matrix);
+            }
+            this.TransformManager.TransformMultiplies(matrix);
+        }
+        public virtual void TransformAdd(Vector2 vector)
+        {
+            foreach (ILayer child in this.Children)
+            {
+                child.TransformManager.TransformAdd(vector);
+            }
+            this.TransformManager.TransformAdd(vector);
+        }
 
 
         //@Abstract

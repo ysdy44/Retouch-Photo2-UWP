@@ -130,7 +130,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             foreach (ILayer layer in this.ViewModel.Layers.RootLayers)
             {
-                Transformer transformer = layer.TransformManager.ActualDestination;
+                Transformer transformer = layer.ActualDestinationAboutGroupLayer;
                 bool contained = transformer.Contained(this._boxCanvasRect);
                 App.ViewModel.Text = contained.ToString();
 

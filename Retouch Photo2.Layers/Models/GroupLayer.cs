@@ -1,4 +1,5 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Layers.Icons;
 using System.Numerics;
 using Windows.UI.Xaml;
@@ -10,6 +11,8 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GroupLayer : LayerBase
     {
+        public bool IsChildrenChanged=false;
+
         //@Construct
         public GroupLayer() 
         {
@@ -19,34 +22,20 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Override
         public override string Type => "Group";
-        
-        public override void CacheTransform()
-        {
-            base.CacheTransform();
 
-            foreach (ILayer child in this.Children)
+        public override Transformer ActualDestinationAboutGroupLayer
+        {
+            get
             {
-                child.TransformManager.CacheTransform();
+                if (this.IsChildrenChanged)
+                {
+                    this.TransformManager.Destination = LayerCollection.GetLayersTransformer(base.Children);
+                }
+
+                return base.ActualDestinationAboutGroupLayer;
             }
         }
-        public override void TransformMultiplies(Matrix3x2 matrix)
-        {
-            base.TransformMultiplies(matrix);
 
-            foreach (ILayer child in this.Children)
-            {
-                child.TransformManager.TransformMultiplies(matrix);
-            }
-        }
-        public override void TransformAdd(Vector2 vector)
-        {
-            base.TransformAdd(vector);
-
-            foreach (ILayer child in this.Children)
-            {
-                child.TransformManager.TransformAdd(vector);
-            }
-        }
 
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         { 
