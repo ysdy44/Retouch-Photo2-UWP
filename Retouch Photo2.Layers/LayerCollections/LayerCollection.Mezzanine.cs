@@ -1,6 +1,4 @@
-﻿using Retouch_Photo2.Layers.Models;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace Retouch_Photo2.Layers
 {
@@ -11,10 +9,15 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Mezzanine
         /// </summary>
-        public void MezzanineOnFirstSelectedLayer(ILayer mezzanineLayer)
+        public void MezzanineOnFirstSelectedLayer(ILayer mezzanineLayer) => this._mezzanineOnFirstSelectedLayer(mezzanineLayer, null);
+        public void MezzanineRangeOnFirstSelectedLayer(IList<ILayer> mezzanineLayers) => this._mezzanineOnFirstSelectedLayer(null, mezzanineLayers);
+        private void _mezzanineOnFirstSelectedLayer(ILayer mezzanineLayer, IList<ILayer> mezzanineLayers)
         {
-            ILayer firstSelectedLayer = null;
-            IList<ILayer> mezzanineLayers = null;
+            int firstIndex=-1; 
+            ILayer firstIParent = null;
+
+             ILayer firstSelectedLayer = null;
+            IList<ILayer> parentChildren = null;
 
             void mezzanineOnFirstSelectedLayer(IList<ILayer> layers)
             {
@@ -23,7 +26,7 @@ namespace Retouch_Photo2.Layers
                     if (child.SelectMode.ToBool())
                     {
                         firstSelectedLayer = child;
-                        mezzanineLayers = layers;
+                        parentChildren = layers;
                         break;
                     }
                     else
@@ -36,24 +39,37 @@ namespace Retouch_Photo2.Layers
 
             //Recursive
             mezzanineOnFirstSelectedLayer( this.RootLayers);
-            
 
-            if (firstSelectedLayer == null || mezzanineLayers == null)
+
+
+            if (firstSelectedLayer == null || parentChildren == null)
             {
-                this.RootLayers.Insert(0, mezzanineLayer);//Insert
+                firstIndex = 0;
+                firstIParent = null;
+                parentChildren = this.RootLayers;
             }
             else
             {
-                int index = mezzanineLayers.IndexOf(firstSelectedLayer);
+                firstIndex = parentChildren.IndexOf(firstSelectedLayer);
+                firstIndex--;
+                if (firstIndex < 0) firstIndex = 0;
+                if (firstIndex >= parentChildren.Count) firstIndex = parentChildren.Count - 1;
 
-                if (index >= 0)
+                firstIParent = firstSelectedLayer.Parents;
+            }
+            
+                       
+            if (mezzanineLayer!=null)
+            {
+                mezzanineLayer.Parents = firstIParent;
+                parentChildren.Insert(firstIndex, mezzanineLayer);//Insert
+            }
+            else if (mezzanineLayers != null)
+            {
+                foreach (ILayer child in mezzanineLayers)
                 {
-                    if (index < mezzanineLayers.Count)
-                    {
-                        mezzanineLayer.Parents = firstSelectedLayer.Parents;
-
-                        mezzanineLayers.Insert(index, mezzanineLayer);//Insert
-                    }
+                    child.Parents = firstIParent;
+                    parentChildren.Insert(firstIndex, child);//Insert
                 }
             }
         }
@@ -64,6 +80,8 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         public void RemoveMezzanineLayer(ILayer mezzanineLayer)
         {
+            if (mezzanineLayer == null) return;
+     
             IList<ILayer> parentsChildren = (mezzanineLayer.Parents == null) ?
                 this.RootLayers : mezzanineLayer.Parents.Children;
 

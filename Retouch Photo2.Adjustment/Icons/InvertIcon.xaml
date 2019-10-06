@@ -24,7 +24,9 @@
             </Ellipse.Fill>
         </Ellipse>
 
-        <TextBlock Text="Invert" Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center">
+            Invert
+        </TextBlock>
         
     </Grid>
     

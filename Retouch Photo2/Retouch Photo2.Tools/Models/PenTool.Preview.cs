@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Tools.Models
             Transformer transformer = new Transformer(canvasPoint, canvasStartingPoint);
 
             //Layer
-            CurveLayer curveLayer = new CurveLayer(layerCollection,canvasStartingPoint, canvasPoint)
+            CurveLayer curveLayer = new CurveLayer(canvasStartingPoint, canvasPoint)
             {
                 SelectMode = SelectMode.Selected,
                 TransformManager = new TransformManager(transformer),
@@ -97,7 +97,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(curveLayer);
             this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
 
-            this.SelectionViewModel.SetModeSingle(curveLayer);//Selection
+            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
             this.ViewModel.Invalidate();//Invalidate
         }
 

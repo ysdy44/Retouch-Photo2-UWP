@@ -79,9 +79,8 @@ namespace Retouch_Photo2
 
 
             //LayersAdd
-            this.LayersControl.AddButton.Tapped += async (s, e) => await this.LayersAddDialog.ShowAsync(ContentDialogPlacement.InPlace);
-            this.LayersAddDialog.PhotoButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.PicturesLibrary);
-            this.LayersAddDialog.DestopButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.Desktop);
+            this.LayersControl.PhotoButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.PicturesLibrary);
+            this.LayersControl.DestopButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.Desktop);
         }
 
 
@@ -235,7 +234,7 @@ namespace Retouch_Photo2
             Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
 
             //Layer
-            ImageLayer imageLayer = new ImageLayer(this.ViewModel.Layers)
+            ImageLayer imageLayer = new ImageLayer
             {
                 SelectMode = SelectMode.Selected,
                 TransformManager = new TransformManager(transformerSource),
@@ -253,9 +252,7 @@ namespace Retouch_Photo2
             this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(imageLayer);
             this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
 
-            this.LayersAddDialog.Hide();
-
-            this.SelectionViewModel.SetModeSingle(imageLayer);//Selection
+            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
             this.ViewModel.Invalidate();//Invalidate
         }
     }

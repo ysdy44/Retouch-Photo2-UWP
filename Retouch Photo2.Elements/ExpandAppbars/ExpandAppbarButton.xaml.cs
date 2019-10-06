@@ -17,6 +17,8 @@ namespace Retouch_Photo2.Elements
         {
             get
             {
+                if (this.IsEnabled == false) return this.Disable;
+        
                 switch (this._vsClickMode)
                 {
                     case ClickMode.Release: return this.Normal;
@@ -34,6 +36,7 @@ namespace Retouch_Photo2.Elements
         {
             this.InitializeComponent();
             this.Width = this.ExpandWidth;
+            this.IsEnabledChanged += (s, e) => this.VisualState = this.VisualState;//State
             this.RootGrid.PointerEntered += (s, e) =>
             {
                 this._vsClickMode = ClickMode.Hover;

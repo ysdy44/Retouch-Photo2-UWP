@@ -60,7 +60,7 @@ namespace Retouch_Photo2.Tools.Pages
                         imageLayer.ImageRe = imageRe;
                         imageLayer.TransformManager.Source = transformerSource;
                     }
-                }, true);
+                });
 
                 this.ViewModel.Invalidate();//Invalidate
             };

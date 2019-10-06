@@ -99,9 +99,10 @@
                         <Setter Target = "BlendButton.IsEnabled" Value="false"/>
                         
                         <Setter Target = "VisualButton.IsEnabled" Value="false"/>
-                        <Setter Target = "GroupButton.IsEnabled" Value="false"/>
                         <Setter Target = "DuplicateButton.IsEnabled" Value="false"/>
                         <Setter Target = "RemoveButton.IsEnabled" Value="false"/>
+                        <Setter Target = "GroupButton.IsEnabled" Value="false"/>
+                        <Setter Target = "UnGroupButton.IsEnabled" Value="false"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -111,7 +112,6 @@
                 <VisualState x:Name="SingleLayerWithChildren">
                     <VisualState.Setters>
 
-                        <Setter Target = "GroupButton.IsEnabled" Value="false"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -120,7 +120,7 @@
                 <VisualState x:Name="SingleLayerWithoutChildren">
                     <VisualState.Setters>
                         
-                        <Setter Target = "GroupButton.IsEnabled" Value="false"/>
+                        <Setter Target = "UnGroupButton.IsEnabled" Value="false"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -129,6 +129,7 @@
                 <VisualState x:Name="MultipleLayer">
                     <VisualState.Setters>
 
+                        <Setter Target = "UnGroupButton.IsEnabled" Value="false"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -153,9 +154,13 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="*" MinHeight="165"/>
         </Grid.RowDefinitions>
-        
+
         <!--Head-->
-        <menus:MenuTitle x:Name="_MenuTitle" Text="Layer"/>
+        <menus:MenuTitle x:Name="_MenuTitle" ResetButtonVisibility="Visible">
+            <menus:MenuTitle.Text>
+                Layer
+            </menus:MenuTitle.Text>
+        </menus:MenuTitle>
         
         <!--Body-->
         <blends:BlendControl x:Name="BlendControl" Grid.Row="1" Visibility="Collapsed" MaxHeight="300" Background="Transparent">
@@ -171,12 +176,16 @@
         <StackPanel x:Name="MainStackPanel" Grid.Row="1">
 
             <!--Layer-->
-            <TextBlock Text="Opacity" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                Opacity
+            </TextBlock>
             <Slider x:Name="OpacitySlider" Margin="2,0" TickFrequency="25" TickPlacement="Inline" Style="{StaticResource AppOpacitySliderStyle}" 
                 Value="{x:Bind OpacityToValueConverter(SelectionViewModel.Opacity),Mode=OneWay}"/>
 
             <!--Layer-->
-            <TextBlock Text="Blend Mode" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                Blend Mode
+            </TextBlock>
             <Button x:Name="BlendButton" Margin="2,0" Style="{StaticResource AppRoundedButton}"
                     Tag="{x:Bind SelectionViewModel.BlendType,Mode=OneWay}">
                 <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -194,11 +203,15 @@
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Layers" Style="{StaticResource AppTextBlock}"/>
+                <TextBlock Style="{StaticResource AppTextBlock}">
+                    Layers
+                </TextBlock>
 
                 <Rectangle Grid.Column="2" Width="1" Fill="{ThemeResource AppForeground}"/>
-                
-                <TextBlock Grid.Column="3" Text="Visual" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}"/>
+
+                <TextBlock Grid.Column="3" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}">
+                    Visual
+                </TextBlock>
                 <elements:ExpandAppbarToggleButton x:Name="VisualButton" Grid.Column="4" IsChecked="{x:Bind VisibilityToBoolConverter(SelectionViewModel.Visibility),Mode=OneWay}">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Visual" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
@@ -218,11 +231,13 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
-                
-                <TextBlock Grid.Column="0" Text="Remove" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}"/>
+
+                <TextBlock Grid.Column="0" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}">
+                    Remove
+                </TextBlock>
                 <elements:ExpandAppbarButton x:Name="RemoveButton" Grid.Column="1">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Remove" VerticalOffset="40" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Remove" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <elements:ExpandAppbarButton.CenterContent>
                         <PathIcon>
@@ -235,7 +250,9 @@
 
                 <Rectangle Grid.Column="2" Width="1" Fill="{ThemeResource AppForeground}"/>
 
-                <TextBlock Grid.Column="3" Text="Duplicate" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}"/>
+                <TextBlock Grid.Column="3" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}">
+                    Duplicate
+                </TextBlock>
                 <elements:ExpandAppbarButton x:Name="DuplicateButton" Grid.Column="4">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Duplicate" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
@@ -262,10 +279,12 @@
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="Group" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}"/>
-                <elements:ExpandAppbarButton x:Name="GroupButton" Grid.Column="1">
+                <TextBlock Grid.Column="0" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}">
+                    Group
+                </TextBlock>        
+                <elements:ExpandAppbarButton x:Name="GroupButton" Grid.Column="1" IsEnabled="True">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Group" VerticalOffset="40" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="Group" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <elements:ExpandAppbarButton.CenterContent>
                         <FontIcon Glyph="&#xF0E2;" FontSize="20" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
@@ -274,10 +293,12 @@
                 
                 <Rectangle Grid.Column="2" Width="1" Fill="{ThemeResource AppForeground}"/>
 
-                <TextBlock Grid.Column="3" Text="UnGroup" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}"/>
-                <elements:ExpandAppbarButton x:Name="UnGroupButton" Grid.Column="4">
+                <TextBlock Grid.Column="3" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}">
+                    UnGroup
+                </TextBlock> 
+                <elements:ExpandAppbarButton x:Name="UnGroupButton" Grid.Column="4" IsEnabled="True">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="UnGroup" VerticalOffset="40" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip Content="UnGroup" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                     <elements:ExpandAppbarButton.CenterContent>
                         <FontIcon Glyph="&#xF0E2;" FontSize="20" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
@@ -287,7 +308,9 @@
             </Grid>
 
             <!--Layer-->
-            <TextBlock Text="Tags" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                Tag
+            </TextBlock>
             <StackPanel Height="40" Orientation="Horizontal" HorizontalAlignment="Center">
 
                 <RadioButton Background="LightCoral" BorderBrush="{ThemeResource AppStroke}" Style="{StaticResource RadioButtonStyle}"/>

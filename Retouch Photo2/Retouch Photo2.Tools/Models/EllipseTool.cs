@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Tools.Models
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         
         //@Override
-        public override ILayer CreateLayer(LayerCollection layerCollection, Transformer transformer) => new EllipseLayer(layerCollection)
+        public override ILayer CreateLayer(Transformer transformer) => new EllipseLayer
         {
             SelectMode = SelectMode.Selected,
             TransformManager = new TransformManager(transformer),

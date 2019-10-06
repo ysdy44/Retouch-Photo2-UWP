@@ -30,7 +30,9 @@
     <StackPanel Orientation="Horizontal">
 
         <!--Radian-->
-        <TextBlock Text="Radian:" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Radian
+        </TextBlock>
         <tools:TouchbarButton x:Name="RadianTouchbarButton"
                       Type="ViewRadian"
                       GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
@@ -55,7 +57,9 @@
         <elements:ExpandAppBarSeparator/>
         
         <!--Scale-->
-        <TextBlock Text="Scale:" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Scale
+        </TextBlock>
         <tools:TouchbarButton x:Name="ScaleTouchbarButton"
                       Type="ViewScale"
                       GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"

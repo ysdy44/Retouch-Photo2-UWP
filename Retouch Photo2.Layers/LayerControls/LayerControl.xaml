@@ -37,29 +37,28 @@
     <Grid x:Name="RootGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="DepthColumn" Width="0"/>
-            <ColumnDefinition Width="24"/>
+            <ColumnDefinition Width="30"/>
             <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="40"/>
-            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
 
-        <!--Expaned-->
-        <Button x:Name="_ExpanedButton" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-            <FontIcon x:Name="ExpanedFontIcon" FontSize="12" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-        </Button>
-
-        <!--Icon-->
-        <Border x:Name="IconBorder" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-        <!--Icon-->
-        <TextBlock x:Name="TextBlock" Grid.Column="3" Margin="8,0" VerticalAlignment="Center"/>
-
         <!--Selected-->
-        <Button x:Name="_SelectedButton" Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+        <Button x:Name="_SelectedButton" Grid.Column="1" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
             <FontIcon x:Name="SelectedFontIcon" Glyph="&#xE001;" FontSize="18" Foreground="{StaticResource UnCheckColor}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
         </Button>
 
+        <!--Icon-->
+        <ContentControl x:Name="IconContentControl" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <!--Text-->
+        <TextBlock x:Name="TextBlock" Grid.Column="3" Margin="8,0" VerticalAlignment="Center"/>
+
+        <!--Expaned-->
+        <Button x:Name="_ExpanedButton" Grid.Column="4" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+            <FontIcon x:Name="ExpanedFontIcon" FontSize="14" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+        </Button>
+       
         <!--Line-->
         <Border Grid.Column="2" Grid.ColumnSpan="3" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
 

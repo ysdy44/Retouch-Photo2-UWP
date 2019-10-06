@@ -50,8 +50,12 @@
         </VisualStateManager.VisualStateGroups>
 
         <StackPanel Margin="8" VerticalAlignment="Center">
-            <TextBlock Text="Save to Gallery" FontWeight="Bold"/>
-            <TextBlock Text="Select project(s) to be saved." FontSize="12" Style="{ThemeResource AppTextBlock}"/>
+            <TextBlock FontWeight="Bold">
+                Save to Gallery
+            </TextBlock>
+            <TextBlock FontSize="12" Style="{ThemeResource AppTextBlock}">
+                Select project(s) to be saved.
+            </TextBlock>
         </StackPanel>
 
         <Border MinWidth="90" Margin="4" CornerRadius="2" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}">
@@ -66,8 +70,16 @@
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <AppBarSeparator/>
-            <local:MainPageButton x:Name="_OKButton" Glyph="&#xE10B;" Text="OK"/>
-            <local:MainPageButton  x:Name="_CancelButton" Glyph="&#xE106;" Text="Cancel"/>
+            <local:MainPageButton x:Name="_OKButton" Glyph="&#xE10B;">
+                <local:MainPageButton.Text>
+                    OK
+                </local:MainPageButton.Text>
+            </local:MainPageButton>
+            <local:MainPageButton x:Name="_CancelButton" Glyph="&#xE106;">
+                <local:MainPageButton.Text>
+                    Cancel
+                </local:MainPageButton.Text>
+            </local:MainPageButton>
         </StackPanel>
 
     </StackPanel>

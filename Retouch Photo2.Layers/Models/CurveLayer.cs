@@ -5,7 +5,6 @@ using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -25,9 +24,11 @@ namespace Retouch_Photo2.Layers.Models
         /// Construct a curve layer.
         /// </summary>
         /// <param name="nodes"> The source nodes. </param>
-        public CurveLayer(LayerCollection layerCollection,IEnumerable<Node> nodes) : base(layerCollection)
+        public CurveLayer(IEnumerable<Node> nodes) 
         {
             base.Control.Icon = new CurveIcon();
+            base.Control.Text = "Curve";
+
             this.NodeCollection = new NodeCollection(nodes); 
         }
         /// <summary>
@@ -35,9 +36,11 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         /// <param name="left"> The first source vector. </param>
         /// <param name="right"> The second source vector. </param>
-        public CurveLayer(LayerCollection layerCollection,Vector2 left, Vector2 right) : base(layerCollection)
+        public CurveLayer(Vector2 left, Vector2 right) 
         {
             base.Control.Icon = new CurveIcon();
+            base.Control.Text = "Curve";
+
             this.NodeCollection = new NodeCollection(left, right);
         }
 
@@ -68,16 +71,16 @@ namespace Retouch_Photo2.Layers.Models
             return this.NodeCollection.CreateGeometry(resourceCreator).Transform(canvasToVirtualMatrix);
         }
 
-        public override ILayer Clone(LayerCollection layerCollection, ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            CurveLayer curveLayer = new CurveLayer(layerCollection, this.NodeCollection)
+            CurveLayer curveLayer = new CurveLayer( this.NodeCollection)
             {
                 FillBrush = base.FillBrush,
                 StrokeBrush = base.StrokeBrush,
                 NodeCollection = new NodeCollection(from node in this.NodeCollection select node)
             };
 
-            LayerBase.CopyWith(layerCollection, resourceCreator, curveLayer, this);
+            LayerBase.CopyWith(resourceCreator, curveLayer, this);
             return curveLayer;
         }
 

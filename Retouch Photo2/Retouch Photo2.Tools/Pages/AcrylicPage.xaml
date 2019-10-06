@@ -18,13 +18,17 @@
             <StackPanel Padding="2" MinWidth="300">
 
                 <!--Ratio-->
-                <TextBlock Text="Equal width and height:" Style="{StaticResource AppTextBlock}"/>
+                <TextBlock Style="{StaticResource AppTextBlock}">
+                    Equal width and height
+                </TextBlock>
                 <elements:OnOffSwitch OnContent="None" OffContent="Square" IsOn="{x:Bind KeyboardViewModel.IsSquare,Mode=TwoWay}"/>
 
                 <elements:ExpandAppBarSapce/>
 
                 <!--Center-->
-                <TextBlock Text="Center Scaling:" Style="{StaticResource AppTextBlock}"/>
+                <TextBlock Style="{StaticResource AppTextBlock}">
+                    Center Scaling
+                </TextBlock>
                 <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}"/>
 
             </StackPanel>
@@ -35,13 +39,17 @@
     <StackPanel Orientation="Horizontal">        
         
         <!--TintColor-->
-        <TextBlock Text="TintColor:" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            TintColor
+        </TextBlock>
         <toolsElements:FillColorEllipseButton/>
 
         <elements:ExpandAppBarSapce/>
 
         <!--TintOpacity-->
-        <TextBlock Text="TintOpacity:" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            TintOpacity
+        </TextBlock>
         <tools:TouchbarButton x:Name="TintOpacityTouchbarButton"
                       Type="AcrylicTintOpacity"
                       GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
@@ -51,7 +59,9 @@
         <elements:ExpandAppBarSapce/>
 
         <!--BlurAmount-->
-        <TextBlock Text="BlurAmount:" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            BlurAmount
+        </TextBlock>
         <tools:TouchbarButton x:Name="BlurAmountTouchbarButton"
                       Type="AcrylicBlurAmount"
                       GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"

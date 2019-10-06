@@ -18,16 +18,32 @@ namespace Retouch_Photo2.Controls
         TipViewModel TipViewModel => App.TipViewModel;
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
-        
-        
+                
+
         //@Content
         public MenuTitle MenuTitle => this._MenuTitle;
+        
 
+        //@VisualState
+        bool _vsIsHorizontal;
+        bool _vsIsVertically;
+        public VisualState VisualState
+        {
+            get
+            {
+                if (this._vsIsHorizontal) return this.Horizontal;
+                if (this._vsIsVertically) return this.Vertically;
+
+                return this.Normal;
+            }
+            set => VisualStateManager.GoToState(this, value.Name, false);
+        }
+        
 
         //@Converter
         private bool IsOpenConverter(bool isOpen) => isOpen && this.IsOverlayExpanded;
         public bool IsOverlayExpanded { private get; set; }
-
+        
 
         #region DependencyProperty
 
@@ -108,13 +124,20 @@ namespace Retouch_Photo2.Controls
 
         
         #endregion
-
+        
 
         //@Construct
         public OperateControl()
         {
             this.InitializeComponent();
 
+            //Menu
+            this._MenuTitle.BackButton.Tapped += (s, e) =>
+            {
+                this._vsIsHorizontal = false;
+                this._vsIsVertically = false;
+                this.VisualState = this.VisualState;//State
+            };
 
             #region Transform
 
@@ -238,8 +261,12 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.AlignSymmetryHorizontallyButton.Tapped += (s, e) => { };
-
+            this.AlignSymmetryHorizontallyButton.Tapped += (s, e) =>
+            {
+                this._vsIsHorizontal = true;
+                this.VisualState = this.VisualState;//State
+            };
+            
 
             #endregion
 
@@ -295,8 +322,11 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.AlignSymmetryVerticallyButton.Tapped += (s, e) => { };
-
+            this.AlignSymmetryVerticallyButton.Tapped += (s, e) =>
+            {
+                this._vsIsVertically = true;
+                this.VisualState = this.VisualState;//State
+            };
 
             #endregion
 

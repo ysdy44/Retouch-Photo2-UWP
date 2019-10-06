@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Tools.Pages
                             break;
                     }
                 }
-            }), true);
+            }));
         }
 
         /// <summary>

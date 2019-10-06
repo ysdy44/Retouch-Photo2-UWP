@@ -90,7 +90,7 @@ namespace Retouch_Photo2.Tools
             this.SelectionViewModel.SetValue((layer) =>
             {
                 layer.CacheTransform();
-            }, true);
+            });
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
             return true;
@@ -122,7 +122,7 @@ namespace Retouch_Photo2.Tools
             this.SelectionViewModel.SetValue((layer) =>
             {
                 layer.TransformMultiplies(matrix);
-            }, true);
+            });
 
             this.ViewModel.Invalidate();//Invalidate
             return true;
@@ -146,7 +146,7 @@ namespace Retouch_Photo2.Tools
                                         {
                                             layer.SelectMode = SelectMode.UnSelected;
                                         });
-                                        this.SelectionViewModel.SetModeNone();//Selection
+                                        this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
 
                                         this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                                         return false;

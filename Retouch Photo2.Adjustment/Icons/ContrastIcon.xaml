@@ -25,7 +25,9 @@
             </Ellipse.Fill>
         </Ellipse>
 
-        <TextBlock Text="Contrast" Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center">
+            Contrast
+        </TextBlock>
         
     </Grid>
     

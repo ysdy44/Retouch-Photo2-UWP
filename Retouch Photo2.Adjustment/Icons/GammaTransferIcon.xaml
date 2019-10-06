@@ -24,8 +24,10 @@
                 </LinearGradientBrush>
             </Ellipse.Fill>
         </Ellipse>
-        
-        <TextBlock Text="Gamma Transfer" Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center">
+            Gamma Transfer
+        </TextBlock>
         
     </Grid>
     

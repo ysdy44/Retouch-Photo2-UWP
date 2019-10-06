@@ -2,15 +2,7 @@
 using Retouch_Photo2.Layers;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using Windows.UI;
-using Retouch_Photo2.Layers.Models;
-using Windows.Storage;
-using Windows.Storage.Streams;
-using System.Threading.Tasks;
-using Windows.Storage.Pickers;
-using System.Linq;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -19,6 +11,7 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
+
         /// <summary>
         /// Reload <see cref = "ViewModel" /> 
         /// </summary>
@@ -38,24 +31,34 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
-        /// <summary> Retouch_Photo2's the only AccentColor. </summary>
-        public Color AccentColor { get; set; }
+        /// <summary> Retouch_Photo2's the only ILayers. </summary>
+        public LayerCollection Layers { get; } = new LayerCollection();
+        /// <summary> Retouch_Photo2's the only Mezzanine Layer. </summary>
+        public ILayer MezzanineLayer = null;
+
+
+        #region Invalidate
+
+
         /// <summary> Retouch_Photo2's the only <see cref = "Microsoft.Graphics.Canvas.CanvasDevice" />. </summary>
         public CanvasDevice CanvasDevice { get; } = new CanvasDevice();
-
-
+                 
+        
         /// <summary>
         /// Indicates that the contents of the CanvasControl need to be redrawn.
         /// </summary>
         /// <param name="mode"> invalidate mode </param>
         public void Invalidate(InvalidateMode mode = InvalidateMode.None) => this.InvalidateAction?.Invoke(mode);
+      
         /// <summary> <see cref = "Action" /> of the <see cref = "ViewModel.Invalidate" />. </summary>
         public Action<InvalidateMode> InvalidateAction { private get; set; }
 
 
-        /// <summary> Retouch_Photo2's the only ILayers. </summary>
-        public LayerCollection Layers { get; } = new LayerCollection();
-        
+        #endregion
+
+
+        #region ImageRe
+
 
         /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.Layers.Models.ImageLayer" />'s images. </summary>
         public Stack<ImageRe> Images = new Stack<ImageRe>();
@@ -79,9 +82,10 @@ namespace Retouch_Photo2.ViewModels
             this.Images.Push(imageRe);//Images
         }
 
-                
 
+        #endregion
         
+
         //@Notify 
         /// <summary> Multicast event for property change notifications. </summary>
         public event PropertyChangedEventHandler PropertyChanged;

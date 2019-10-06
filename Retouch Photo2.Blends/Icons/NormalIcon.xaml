@@ -19,7 +19,9 @@
         <Polygon Points="4,10 12,2 20,10 12,18" Fill="DodgerBlue"/>
         <Polygon Points="20,10 12,2 14,0 24,10 14,20 12,18" Fill="OrangeRed"/>
         
-        <TextBlock Text="Normal" Grid.Column="1" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="1" VerticalAlignment="Center">
+            Normal
+        </TextBlock>
 
     </Grid>
     

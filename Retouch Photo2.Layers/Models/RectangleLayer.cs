@@ -13,9 +13,10 @@ namespace Retouch_Photo2.Layers.Models
     public class RectangleLayer : IGeometryLayer
     {
         //@Construct
-        public RectangleLayer(LayerCollection layerCollection) : base(layerCollection)
+        public RectangleLayer()
         {
             base.Control.Icon = new RectangleIcon();
+            base.Control.Text = "Rectangle";
         }
 
         //@Override      
@@ -28,15 +29,15 @@ namespace Retouch_Photo2.Layers.Models
             return transformer.ToRectangle(resourceCreator, canvasToVirtualMatrix);            
         }
 
-        public override ILayer Clone(LayerCollection layerCollection, ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            RectangleLayer rectangleLayer = new RectangleLayer(layerCollection)
+            RectangleLayer rectangleLayer = new RectangleLayer
             {
                 FillBrush = base.FillBrush,
                 StrokeBrush = base.StrokeBrush,
             };
 
-            LayerBase.CopyWith(layerCollection, resourceCreator, rectangleLayer, this);
+            LayerBase.CopyWith(resourceCreator, rectangleLayer, this);
             return rectangleLayer;
         }
     }

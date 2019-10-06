@@ -28,15 +28,7 @@ namespace Retouch_Photo2.Layers.Models
         public Brush StrokeBrush = new Brush();
         /// <summary> <see cref = "IGeometryLayer" />'s stroke-width. </summary>
         public float StrokeWidth = 1;
-
-        //@Construct
-        /// <summary>
-        /// Construct a IGeometryLayer.
-        /// </summary>
-        /// <param name="layerCollection"> The layer-collection. </param>
-        public IGeometryLayer(LayerCollection layerCollection) : base(layerCollection)
-        {
-        }
+        
 
         //@Override
         public override Color? FillColor

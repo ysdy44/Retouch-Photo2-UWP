@@ -13,9 +13,10 @@ namespace Retouch_Photo2.Layers.Models
     public class EllipseLayer : IGeometryLayer
     {
         //@Construct
-        public EllipseLayer(LayerCollection layerCollection) : base(layerCollection)
+        public EllipseLayer()
         {
             base.Control.Icon = new EllipseIcon();
+            base.Control.Text = "Ellipse";
         }
 
         //@Override       
@@ -27,15 +28,15 @@ namespace Retouch_Photo2.Layers.Models
             return transformer.ToEllipse(resourceCreator, canvasToVirtualMatrix);
         }
 
-        public override ILayer Clone(LayerCollection layerCollection, ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            EllipseLayer ellipseLayer= new EllipseLayer(layerCollection)
+            EllipseLayer ellipseLayer= new EllipseLayer
             {
                 FillBrush = base.FillBrush,
                 StrokeBrush = base.StrokeBrush,
             };
 
-            LayerBase.CopyWith(layerCollection, resourceCreator, ellipseLayer, this);
+            LayerBase.CopyWith(resourceCreator, ellipseLayer, this);
             return ellipseLayer;
         }
     }

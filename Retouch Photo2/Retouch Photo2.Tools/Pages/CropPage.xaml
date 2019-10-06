@@ -16,13 +16,17 @@
             <StackPanel Padding="2" MinWidth="300">
 
                 <!--Ratio-->
-                <TextBlock Text="Ratio Scaling:" Style="{StaticResource AppTextBlock}"/>
+                <TextBlock Style="{StaticResource AppTextBlock}">
+                    Ratio Scaling
+                </TextBlock>
                 <elements:OnOffSwitch OnContent="None" OffContent="Ratio" IsOn="{x:Bind KeyboardViewModel.IsRatio,Mode=TwoWay}"/>
 
                 <elements:ExpandAppBarSapce/>
 
                 <!--Center-->
-                <TextBlock Text="Center Scaling:" Style="{StaticResource AppTextBlock}"/>
+                <TextBlock Style="{StaticResource AppTextBlock}">
+                    Center Scaling
+                </TextBlock>
                 <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}"/>
 
             </StackPanel>
@@ -52,7 +56,9 @@
         <Border Style="{StaticResource AppRoundedBorderStyle}">
             <Button x:Name="ResetButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                  IsEnabled="{x:Bind SelectionViewModel.IsCrop, Mode=OneWay}">
-                <TextBlock Text="Reset Crop"/>
+                <TextBlock>
+                    Reset Crop
+                </TextBlock>
             </Button>
         </Border>
         
@@ -62,7 +68,9 @@
         <Border Style="{StaticResource AppRoundedBorderStyle}">
             <Button x:Name="FitButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                  IsEnabled="{x:Bind SelectionViewModel.IsCrop, Mode=OneWay}">
-                <TextBlock Text="Fit Crop"/>
+                <TextBlock>
+                    Fit Crop
+                </TextBlock>
             </Button>
         </Border>
 

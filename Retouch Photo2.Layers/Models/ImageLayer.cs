@@ -15,9 +15,10 @@ namespace Retouch_Photo2.Layers.Models
         public ImageRe ImageRe { get; set; }
 
         //@Construct
-        public ImageLayer(LayerCollection layerCollection) : base(layerCollection)
+        public ImageLayer()
         {
             base.Control.Icon = new ImageIcon();
+            base.Control.Text = "Image";
         }
 
         //@Override
@@ -34,14 +35,14 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
 
-        public override ILayer Clone(LayerCollection layerCollection, ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            ImageLayer imageLayer= new ImageLayer(layerCollection)
+            ImageLayer imageLayer= new ImageLayer
             {
                 ImageRe = this.ImageRe,
             };
 
-            LayerBase.CopyWith(layerCollection, resourceCreator, imageLayer, this);
+            LayerBase.CopyWith(resourceCreator, imageLayer, this);
             return imageLayer;
         }
     }

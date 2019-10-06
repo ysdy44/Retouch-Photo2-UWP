@@ -17,15 +17,15 @@ namespace Retouch_Photo2.Menus.Layouts
         {
             set
             {
-                this.MenuTitle.State = value;
+                this._MenuTitle.State = value;
                 this.ColorPicker.Visibility = (value == MenuState.OverlayNotExpanded) ? Visibility.Collapsed : Visibility.Visible;
             }
         }
         public FrameworkElement Self => this;
 
-        public UIElement StateButton => this.MenuTitle.StateButton;
-        public UIElement CloseButton => this.MenuTitle.CloseButton;
-        public UIElement TitlePanel => this.MenuTitle.RootGrid;
+        public UIElement StateButton => this._MenuTitle.StateButton;
+        public UIElement CloseButton => this._MenuTitle.CloseButton;
+        public UIElement TitlePanel => this._MenuTitle.RootGrid;
                
 
         //@Construct
@@ -63,7 +63,7 @@ namespace Retouch_Photo2.Menus.Layouts
                                 layer.StrokeColor = value;
                                 break;
                         }
-                    }, true);
+                    });
 
                     this.ViewModel.Invalidate();//Invalidate
                 }

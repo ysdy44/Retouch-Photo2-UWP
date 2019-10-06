@@ -151,11 +151,17 @@
      
 
         <!--Bottom-->
-        <TextBlock Grid.Column="0" Grid.Row="2" Text="Phone" HorizontalAlignment="Center" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" Style="{StaticResource AppTextBlock}">
+            Phone
+        </TextBlock>
         <TextBlock x:Name="PhoneTextBlock" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center"/>
-        <TextBlock Grid.Column="2" Grid.Row="2" Text="Pad" HorizontalAlignment="Center" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" Style="{StaticResource AppTextBlock}">
+            Pad
+        </TextBlock>
         <TextBlock x:Name="PadTextBlock" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center"/>
-        <TextBlock Grid.Column="4" Grid.Row="2" Text="PC" HorizontalAlignment="Center" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" Style="{StaticResource AppTextBlock}">
+            PC
+        </TextBlock>
         
         
     </Grid>

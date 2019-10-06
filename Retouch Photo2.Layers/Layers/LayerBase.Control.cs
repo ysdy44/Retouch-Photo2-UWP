@@ -3,18 +3,21 @@ using System.Linq;
 
 namespace Retouch_Photo2.Layers
 {
-    public partial class LayerBase : ILayer
+    /// <summary>
+    /// Represents a layer that can have render properties. Provides a rendering method.
+    /// </summary>
+    public abstract partial class LayerBase : ILayer
     {
 
         public ILayerControl Control { get; private set; }
 
         //@Constructs
-        public LayerBase(LayerCollection layerCollection)
+        public LayerBase()
         {
-            this.Control = new LayerControl(layerCollection, this);
+            this.Control = new LayerControl(this);
         }
 
-        #region MyRegion
+        #region OverlayMode
 
 
         /// <summary> Gets or sets <see cref = "LayerControl" />'s overlay show status. </summary>

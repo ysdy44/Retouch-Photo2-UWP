@@ -21,10 +21,11 @@ namespace Retouch_Photo2.Controls
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
+        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
 
-        bool isSingleStarted;
-        Vector2 singleStartingPoint;
+        bool _isSingleStarted;
+        Vector2 _singleStartingPoint;
 
 
         #region DependencyProperty
@@ -87,7 +88,6 @@ namespace Retouch_Photo2.Controls
 
         #endregion
 
-        
         //@Construct
         public MainCanvasControl()
         {
@@ -132,7 +132,7 @@ namespace Retouch_Photo2.Controls
             };
             this.CanvasControl.Draw += (sender, args) =>
             {
-                //Render & Mezzanine & Crad
+                //Render & Crad
                 {
                     ICanvasImage previousImage = new ColorSourceEffect { Color = Colors.White };
 
@@ -150,6 +150,12 @@ namespace Retouch_Photo2.Controls
 
 
                 //Tool & Bound
+                if (this.ViewModel.MezzanineLayer != null)
+                {
+                    Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+                    args.DrawingSession.DrawBound(this.SelectionViewModel.Transformer, matrix);
+                }
+                else
                 {
                     Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
@@ -166,7 +172,6 @@ namespace Retouch_Photo2.Controls
                     this.TipViewModel.Tool.Draw(args.DrawingSession);
                 }
 
-
                 //Ruler
                 if (this.RulerVisible) args.DrawingSession.DrawRuler(this.ViewModel.CanvasTransformer);
             };
@@ -181,8 +186,8 @@ namespace Retouch_Photo2.Controls
             //Single
             this.CanvasOperator.Single_Start += (point) =>
             {
-                this.isSingleStarted = false;
-                this.singleStartingPoint = point;
+                this._isSingleStarted = false;
+                this._singleStartingPoint = point;
 
                 //Tool
                 this.TipViewModel.Tool.Starting(point);//Starting
@@ -192,27 +197,27 @@ namespace Retouch_Photo2.Controls
             this.CanvasOperator.Single_Delta += (point) =>
             {
                 //Delta
-                if (this.isSingleStarted)
+                if (this._isSingleStarted)
                 {
                     //Tool
-                    this.TipViewModel.Tool.Delta(this.singleStartingPoint, point);//Delta
+                    this.TipViewModel.Tool.Delta(this._singleStartingPoint, point);//Delta
 
                     return;
                 }
 
                 //Started
-                if (FanKit.Math.OutNodeDistance(this.singleStartingPoint, point))
+                if (FanKit.Math.OutNodeDistance(this._singleStartingPoint, point))
                 {
-                    this.isSingleStarted = true;
+                    this._isSingleStarted = true;
 
                     //Tool
-                    this.TipViewModel.Tool.Started(this.singleStartingPoint, point);//Started
+                    this.TipViewModel.Tool.Started(this._singleStartingPoint, point);//Started
                 }
             };
             this.CanvasOperator.Single_Complete += (point) =>
             {
                 //Tool
-                this.TipViewModel.Tool.Complete(this.singleStartingPoint, point, this.isSingleStarted);//Complete
+                this.TipViewModel.Tool.Complete(this._singleStartingPoint, point, this._isSingleStarted);//Complete
 
                 this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible
             };

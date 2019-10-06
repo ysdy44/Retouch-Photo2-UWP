@@ -12,7 +12,7 @@ namespace Retouch_Photo2.Layers
         //@Content
         public FrameworkElement Self => this;
         public string Text { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
-        public UIElement Icon { get => this.IconBorder.Child; set => this.IconBorder.Child = value; }
+        public object Icon { get => this.IconContentControl.Content; set => this.IconContentControl.Content = value; }
 
 
         private int controlHeight = 40;
@@ -62,16 +62,24 @@ namespace Retouch_Photo2.Layers
 
 
         //@Construct
-        public LayerControl(LayerCollection layerCollection, ILayer layer)
+        public LayerControl(ILayer layer)
         {
             this.InitializeComponent();
 
-            this.ControlHeight = layerCollection.ControlsHeight;
+            this.ControlHeight = LayerCollection.ControlsHeight;
 
             //LayerCollection
             {
-                this.Tapped += (s, e) => layerCollection.ItemClick?.Invoke(layer);//Delegate
-                this.RightTapped += (s, e) => layerCollection.RightTapped?.Invoke(layer);//Delegate
+                this.Tapped += (s, e) =>
+                {
+                    LayerCollection.ItemClick?.Invoke(layer);//Delegate
+                    e.Handled = true;
+                };
+                this.RightTapped += (s, e) =>
+                {
+                    LayerCollection.RightTapped?.Invoke(layer);//Delegate
+                    e.Handled = true;
+                };
                 this.Loaded += (s, e) =>
                 {
                     if (layer.ExpandMode == ExpandMode.None)
@@ -95,7 +103,8 @@ namespace Retouch_Photo2.Layers
                 };
                 this.SelectedButton.Tapped += (s, e) =>
                 {
-                    layer.Selected();
+                    layer.Selected(); 
+                    LayerCollection.SelectChanged?.Invoke();//Delegate   
                     e.Handled = true;
                 };
             }
@@ -104,16 +113,16 @@ namespace Retouch_Photo2.Layers
             {
                 this.ManipulationStarted += (s, e) =>
                 {
-                    layerCollection.IsOverlay = true;
-                    layerCollection.DragItemsStarted?.Invoke(layer, layer.SelectMode);//Delegate     
+                    LayerCollection.IsOverlay = true;
+                    LayerCollection.DragItemsStarted?.Invoke(layer, layer.SelectMode);//Delegate     
                 };
                 this.ManipulationCompleted += (s, e) =>
                 {
-                    if (layerCollection.IsOverlay)
+                    if (LayerCollection.IsOverlay)
                     {
-                        layerCollection.DragItemsCompleted?.Invoke();//Delegate
+                        LayerCollection.DragItemsCompleted?.Invoke();//Delegate
 
-                        layerCollection.IsOverlay = false;
+                        LayerCollection.IsOverlay = false;
                         layer.OverlayMode = OverlayMode.None;
                     }
                 };
@@ -123,13 +132,13 @@ namespace Retouch_Photo2.Layers
             {
                 this.PointerMoved += (s, e) =>
                 {
-                    if (layerCollection.IsOverlay)
+                    if (LayerCollection.IsOverlay)
                     {
                         Point position = e.GetCurrentPoint(this).Position;
                         OverlayMode overlayMode = this.GetOverlay(position.Y);
 
                         layer.OverlayMode = overlayMode;
-                        layerCollection.DragItemsDelta?.Invoke(layer, overlayMode);//Delegate
+                        LayerCollection.DragItemsDelta?.Invoke(layer, overlayMode);//Delegate
                     }
                 };
                 this.PointerExited += (s, e) => layer.OverlayMode = OverlayMode.None;
@@ -141,7 +150,7 @@ namespace Retouch_Photo2.Layers
         public void SetExpandMode(ExpandMode value)
         {
             this.ExpanedButton.Visibility = (value == ExpandMode.NoChildren) ? Visibility.Collapsed : Visibility.Visible;
-            this.ExpanedFontIcon.Glyph = (value == ExpandMode.Expand) ? "\uF169" : "\uEDD6";
+            this.ExpanedFontIcon.Glyph = (value == ExpandMode.Expand) ? "\xE011" : "\xE014";
         }
         public void SetSelectMode(SelectMode value)
         {
@@ -150,14 +159,20 @@ namespace Retouch_Photo2.Layers
             if (value.ToBool())
             {
                 this.ManipulationMode = ManipulationModes.TranslateY;
-                this.TextBlock.Foreground = this.ExpanedFontIcon.Foreground = this.SelectedFontIcon.Foreground = this.CheckColor;
-                this.SelectedFontIcon.Glyph = "\uE005";
+                this.IconContentControl.Foreground =
+                    this.TextBlock.Foreground = 
+                    this.ExpanedFontIcon.Foreground =
+                    this.SelectedFontIcon.Foreground = this.CheckColor;
+                this.SelectedFontIcon.Glyph = "\xEC61";
             }
             else
             {
                 this.ManipulationMode = ManipulationModes.System;
-                this.TextBlock.Foreground = this.ExpanedFontIcon.Foreground = this.SelectedFontIcon.Foreground = this.UnCheckColor;
-                this.SelectedFontIcon.Glyph = "\uE003";
+                this.IconContentControl.Foreground =
+                    this.TextBlock.Foreground =
+                    this.ExpanedFontIcon.Foreground =
+                    this.SelectedFontIcon.Foreground = this.UnCheckColor;
+                this.SelectedFontIcon.Glyph = "\xECCA";
             }
         }
         public void SetOverlayMode(OverlayMode value)

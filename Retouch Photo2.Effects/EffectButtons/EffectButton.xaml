@@ -6,7 +6,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="Auto"
-    Height="50"
+    Height="44"
     BorderThickness="0,1,0,0" 
     BorderBrush="{ThemeResource AppBorderBrush}"
     Background="Transparent"
@@ -20,9 +20,9 @@
         <!--Pointer -->
         <SolidColorBrush x:Name="PointerOverColor" Color="{ThemeResource SystemBaseLowColor}"/>
         <SolidColorBrush x:Name="PressedColor" Color="{ThemeResource SystemBaseMediumLowColor}"/>
-        <!--Foreground-->
-        <SolidColorBrush x:Name="CheckColor" Color="{ThemeResource SystemBaseHighColor}"/>
-        <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource SystemBaseMediumLowColor}"/>
+
+        <SolidColorBrush x:Name="CheckColor" Color="{ThemeResource AppTextColor}"/>
+        <SolidColorBrush x:Name="UnCheckColor" Opacity="0.3" Color="{ThemeResource AppTextColor}"/>
     </UserControl.Resources>
 
 
@@ -102,7 +102,7 @@
         <TextBlock x:Name="TextBlock" Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Foreground="{StaticResource CheckColor}"/>
 
         <!--ToggleSwitch-->
-        <ToggleSwitch x:Name="_ToggleSwitch" Grid.Column="2">
+        <ToggleSwitch x:Name="_ToggleSwitch" Grid.Column="2" IsOn="False" IsEnabled="False">
             <ToggleSwitch.Clip>
                 <RectangleGeometry Rect="0,0,50,50"/>
             </ToggleSwitch.Clip>

@@ -14,146 +14,148 @@
     d:DesignHeight="50"
     d:DesignWidth="300"
     >
-    
-    
+
+
     <StackPanel>
 
         <!--Head-->
-        <menus:MenuTitle x:Name="_MenuTitle" Text="Selection"/>
-        
+        <menus:MenuTitle x:Name="_MenuTitle">
+            <menus:MenuTitle.Text>
+                Selection
+            </menus:MenuTitle.Text>
+        </menus:MenuTitle>
+
         <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
 
-        <!--Edit-->
-        <StackPanel Grid.Column="0">
+            <!--Edit-->
+            <StackPanel Grid.Column="0">
 
-            <selections:SelectionButton x:Name="CutButton" Label="Cut">
-                <selections:SelectionButton.EnabledIcon>
-                    <selectionsEditIcons:CutEnabledIcon/>
-                </selections:SelectionButton.EnabledIcon>
-                <selections:SelectionButton.DisabledIcon>
-                    <selectionsEditIcons:CutDisabledIcon/>
-                </selections:SelectionButton.DisabledIcon>
-            </selections:SelectionButton>
+                <selections:SelectionButton x:Name="CutButton" Label="Cut" IsEnabled="False">
+                    <selections:SelectionButton.EnabledIcon>
+                        <selectionsEditIcons:CutEnabledIcon/>
+                    </selections:SelectionButton.EnabledIcon>
+                    <selections:SelectionButton.DisabledIcon>
+                        <selectionsEditIcons:CutDisabledIcon/>
+                    </selections:SelectionButton.DisabledIcon>
+                </selections:SelectionButton>
 
-            <selections:SelectionButton x:Name="CopyButton" Label="Copy">
-                <selections:SelectionButton.EnabledIcon>
-                    <selectionsEditIcons:CopyEnabledIcon/>
-                </selections:SelectionButton.EnabledIcon>
-                <selections:SelectionButton.DisabledIcon>
-                    <selectionsEditIcons:CopyDisabledIcon/>
-                </selections:SelectionButton.DisabledIcon>
-            </selections:SelectionButton>
+                <selections:SelectionButton x:Name="CopyButton" Label="Copy" IsEnabled="False">
+                    <selections:SelectionButton.EnabledIcon>
+                        <selectionsEditIcons:CopyEnabledIcon/>
+                    </selections:SelectionButton.EnabledIcon>
+                    <selections:SelectionButton.DisabledIcon>
+                        <selectionsEditIcons:CopyDisabledIcon/>
+                    </selections:SelectionButton.DisabledIcon>
+                </selections:SelectionButton>
 
-            <selections:SelectionButton x:Name="PasteButton" Label="Paste">
-                <selections:SelectionButton.EnabledIcon>
-                    <selectionsEditIcons:PasteEnabledIcon/>
-                </selections:SelectionButton.EnabledIcon>
-                <selections:SelectionButton.DisabledIcon>
-                    <selectionsEditIcons:PasteDisabledIcon/>
-                </selections:SelectionButton.DisabledIcon>
-            </selections:SelectionButton>
+                <selections:SelectionButton x:Name="PasteButton" Label="Paste" IsEnabled="False">
+                    <selections:SelectionButton.EnabledIcon>
+                        <selectionsEditIcons:PasteEnabledIcon/>
+                    </selections:SelectionButton.EnabledIcon>
+                    <selections:SelectionButton.DisabledIcon>
+                        <selectionsEditIcons:PasteDisabledIcon/>
+                    </selections:SelectionButton.DisabledIcon>
+                </selections:SelectionButton>
 
-            <selections:SelectionButton x:Name="RemoveButton" Label="Clear">
-                <selections:SelectionButton.EnabledIcon>
-                    <selectionsEditIcons:ClearEnabledIcon/>
-                </selections:SelectionButton.EnabledIcon>
-                <selections:SelectionButton.DisabledIcon>
-                    <selectionsEditIcons:ClearDisabledIcon/>
-                </selections:SelectionButton.DisabledIcon>
-            </selections:SelectionButton>
+                <selections:SelectionButton x:Name="RemoveButton" Label="Clear" IsEnabled="False">
+                    <selections:SelectionButton.EnabledIcon>
+                        <selectionsEditIcons:ClearEnabledIcon/>
+                    </selections:SelectionButton.EnabledIcon>
+                    <selections:SelectionButton.DisabledIcon>
+                        <selectionsEditIcons:ClearDisabledIcon/>
+                    </selections:SelectionButton.DisabledIcon>
+                </selections:SelectionButton>
 
-            <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
+                <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
 
-            <selections:SelectionButton x:Name="ExtractButton" Label="Extract">
-                <selections:SelectionButton.EnabledIcon>
-                    <selectionsEdit2Icons:ExtractEnabledIcon/>
-                </selections:SelectionButton.EnabledIcon>
-                <selections:SelectionButton.DisabledIcon>
-                    <selectionsEdit2Icons:ExtractDisabledIcon/>
-                </selections:SelectionButton.DisabledIcon>
-            </selections:SelectionButton>
+                <selections:SelectionButton x:Name="ExtractButton" Label="Extract" IsEnabled="False">
+                    <selections:SelectionButton.EnabledIcon>
+                        <selectionsEdit2Icons:ExtractEnabledIcon/>
+                    </selections:SelectionButton.EnabledIcon>
+                    <selections:SelectionButton.DisabledIcon>
+                        <selectionsEdit2Icons:ExtractDisabledIcon/>
+                    </selections:SelectionButton.DisabledIcon>
+                </selections:SelectionButton>
 
-            <selections:SelectionButton x:Name="MergeButton" Label="Merge">
-                <selections:SelectionButton.EnabledIcon>
-                    <selectionsEdit2Icons:MergeEnabledIcon/>
-                </selections:SelectionButton.EnabledIcon>
-                <selections:SelectionButton.DisabledIcon>
-                    <selectionsEdit2Icons:MergeDisabledIcon/>
-                </selections:SelectionButton.DisabledIcon>
-            </selections:SelectionButton>
+                <selections:SelectionButton x:Name="MergeButton" Label="Merge" IsEnabled="False">
+                    <selections:SelectionButton.EnabledIcon>
+                        <selectionsEdit2Icons:MergeEnabledIcon/>
+                    </selections:SelectionButton.EnabledIcon>
+                    <selections:SelectionButton.DisabledIcon>
+                        <selectionsEdit2Icons:MergeDisabledIcon/>
+                    </selections:SelectionButton.DisabledIcon>
+                </selections:SelectionButton>
 
-        </StackPanel>
+            </StackPanel>
 
-        <Rectangle Grid.Column="1" Width="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
+            <Rectangle Grid.Column="1" Width="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
 
-        <!--Select-->
-        <StackPanel Grid.Column="2">
+            <!--Select-->
+            <StackPanel Grid.Column="2">
 
-            <selections:SelectionButton x:Name="AllButton" Label="All">
-                <selections:SelectionButton.EnabledIcon>
-                    <selectionsSelectIcons:AllEnabledIcon/>
-                </selections:SelectionButton.EnabledIcon>
-                <selections:SelectionButton.DisabledIcon>
-                    <selectionsSelectIcons:AllDisabledIcon/>
-                </selections:SelectionButton.DisabledIcon>
-            </selections:SelectionButton>
+                <selections:SelectionButton x:Name="AllButton" Label="All">
+                    <selections:SelectionButton.EnabledIcon>
+                        <selectionsSelectIcons:AllEnabledIcon/>
+                    </selections:SelectionButton.EnabledIcon>
+                    <selections:SelectionButton.DisabledIcon>
+                        <selectionsSelectIcons:AllDisabledIcon/>
+                    </selections:SelectionButton.DisabledIcon>
+                </selections:SelectionButton>
 
-            <selections:SelectionButton x:Name="DeselectButton" Label="Deselect">
-                <selections:SelectionButton.EnabledIcon>
-                    <selectionsSelectIcons:DeselectEnabledIcon/>
-                </selections:SelectionButton.EnabledIcon>
-                <selections:SelectionButton.DisabledIcon>
-                    <selectionsSelectIcons:DeselectDisabledIcon/>
-                </selections:SelectionButton.DisabledIcon>
-            </selections:SelectionButton>
+                <selections:SelectionButton x:Name="DeselectButton" Label="Deselect" IsEnabled="False">
+                    <selections:SelectionButton.EnabledIcon>
+                        <selectionsSelectIcons:DeselectEnabledIcon/>
+                    </selections:SelectionButton.EnabledIcon>
+                    <selections:SelectionButton.DisabledIcon>
+                        <selectionsSelectIcons:DeselectDisabledIcon/>
+                    </selections:SelectionButton.DisabledIcon>
+                </selections:SelectionButton>
 
-            <selections:SelectionButton x:Name="PixelButton" Label="Pixel">
-                <selections:SelectionButton.EnabledIcon>
-                    <selectionsSelectIcons:PixelEnabledIcon/>
-                </selections:SelectionButton.EnabledIcon>
-                <selections:SelectionButton.DisabledIcon>
-                    <selectionsSelectIcons:PixelDisabledIcon/>
-                </selections:SelectionButton.DisabledIcon>
-            </selections:SelectionButton>
+                <selections:SelectionButton x:Name="PixelButton" Label="Pixel" IsEnabled="False">
+                    <selections:SelectionButton.EnabledIcon>
+                        <selectionsSelectIcons:PixelEnabledIcon/>
+                    </selections:SelectionButton.EnabledIcon>
+                    <selections:SelectionButton.DisabledIcon>
+                        <selectionsSelectIcons:PixelDisabledIcon/>
+                    </selections:SelectionButton.DisabledIcon>
+                </selections:SelectionButton>
 
-            <selections:SelectionButton x:Name="InvertButton" Label="Invert">
-                <selections:SelectionButton.EnabledIcon>
-                    <selectionsSelectIcons:InvertEnabledIcon/>
-                </selections:SelectionButton.EnabledIcon>
-                <selections:SelectionButton.DisabledIcon>
-                    <selectionsSelectIcons:InvertDisabledIcon/>
-                </selections:SelectionButton.DisabledIcon>
-            </selections:SelectionButton>
+                <selections:SelectionButton x:Name="InvertButton" Label="Invert" IsEnabled="False">
+                    <selections:SelectionButton.EnabledIcon>
+                        <selectionsSelectIcons:InvertEnabledIcon/>
+                    </selections:SelectionButton.EnabledIcon>
+                    <selections:SelectionButton.DisabledIcon>
+                        <selectionsSelectIcons:InvertDisabledIcon/>
+                    </selections:SelectionButton.DisabledIcon>
+                </selections:SelectionButton>
 
-            <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
+                <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
 
-            <selections:SelectionButton x:Name="FeatherButton" Label="Feather">
-                <selections:SelectionButton.EnabledIcon>
-                    <selectionsSelect2Icons:FeatherEnabledIcon/>
-                </selections:SelectionButton.EnabledIcon>
-                <selections:SelectionButton.DisabledIcon>
-                    <selectionsSelect2Icons:FeatherDisabledIcon/>
-                </selections:SelectionButton.DisabledIcon>
-            </selections:SelectionButton>
+                <selections:SelectionButton x:Name="FeatherButton" Label="Feather" IsEnabled="False">
+                    <selections:SelectionButton.EnabledIcon>
+                        <selectionsSelect2Icons:FeatherEnabledIcon/>
+                    </selections:SelectionButton.EnabledIcon>
+                    <selections:SelectionButton.DisabledIcon>
+                        <selectionsSelect2Icons:FeatherDisabledIcon/>
+                    </selections:SelectionButton.DisabledIcon>
+                </selections:SelectionButton>
 
-            <selections:SelectionButton x:Name="TransformButton" Label="Transform">
-                <selections:SelectionButton.EnabledIcon>
-                    <selectionsSelect2Icons:TransformEnabledIcon/>
-                </selections:SelectionButton.EnabledIcon>
-                <selections:SelectionButton.DisabledIcon>
-                    <selectionsSelect2Icons:TransformDisabledIcon/>
-                </selections:SelectionButton.DisabledIcon>
-            </selections:SelectionButton>
+                <selections:SelectionButton x:Name="TransformButton" Label="Transform" IsEnabled="False">
+                    <selections:SelectionButton.EnabledIcon>
+                        <selectionsSelect2Icons:TransformEnabledIcon/>
+                    </selections:SelectionButton.EnabledIcon>
+                    <selections:SelectionButton.DisabledIcon>
+                        <selectionsSelect2Icons:TransformDisabledIcon/>
+                    </selections:SelectionButton.DisabledIcon>
+                </selections:SelectionButton>
 
-        </StackPanel>
+            </StackPanel>
 
         </Grid>
-        
     </StackPanel>
-
 </UserControl>

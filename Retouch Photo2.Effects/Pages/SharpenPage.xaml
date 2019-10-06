@@ -7,9 +7,11 @@
     mc:Ignorable="d"
     >
 
-    <StackPanel >
+    <StackPanel>
 
-        <TextBlock Text="Amount" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Amount
+        </TextBlock>
         <Slider x:Name="AmountSlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
 
     </StackPanel>

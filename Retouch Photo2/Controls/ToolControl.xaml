@@ -16,7 +16,11 @@
     <StackPanel>
 
         <!--Head-->
-        <menus:MenuTitle x:Name="_MenuTitle" Text="Tool"/>
+        <menus:MenuTitle x:Name="_MenuTitle">
+            <menus:MenuTitle.Text>
+                Tool
+            </menus:MenuTitle.Text>
+        </menus:MenuTitle>
         
         
     </StackPanel>

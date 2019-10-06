@@ -6,9 +6,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel >
-        
-        <TextBlock Text="Size" Style="{StaticResource AppTextBlock}"/>
+    <StackPanel>
+
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Size
+        </TextBlock>
         <Slider x:Name="SizeSlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
   
     </StackPanel>

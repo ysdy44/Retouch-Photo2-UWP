@@ -18,11 +18,15 @@
         </Grid.RowDefinitions>
 
         <!--Offset-->
-        <TextBlock Grid.Row="0" Text="Offset" Opacity="0.8" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="0" Opacity="0.8" VerticalAlignment="Center">
+            Offset
+        </TextBlock>
         <hSVColorPickers:NumberPicker x:Name="_OPicker" Grid.Row="0" Minimum="0" Maximum="100" Unit="%" HorizontalAlignment="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
 
         <!--A-->
-        <TextBlock Grid.Row="1" Text="Alpha" Opacity="0.8" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="1" Opacity="0.8" VerticalAlignment="Center">
+            Alpha
+        </TextBlock>
         <hSVColorPickers:NumberPicker x:Name="_APicker" Grid.Row="1" Minimum="0" Maximum="255" HorizontalAlignment="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
         <hSVColorPickers:TouchSlider x:Name="_ASlider" Grid.Row="2" Minimum="0" Maximum="255" BorderBrush="{ThemeResource AppBorderBrush}">
             <hSVColorPickers:TouchSlider.SliderBrush>

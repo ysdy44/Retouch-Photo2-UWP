@@ -9,10 +9,10 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public partial class SelectionViewModel : INotifyPropertyChanged
     {
+
         /// <summary> Brush's Fill or Stroke. </summary>     
         public FillOrStroke FillOrStroke { get; set; }
 
-        //////////////////////////////////////
 
         /// <summary> Brush's type. </summary>     
         public BrushType BrushType
@@ -59,7 +59,5 @@ namespace Retouch_Photo2.ViewModels
 
             this.BrushType = brush.Type;
         }
-                       
-
     }
 }

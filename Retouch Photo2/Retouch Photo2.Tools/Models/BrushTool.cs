@@ -110,7 +110,7 @@ namespace Retouch_Photo2.Tools.Models
                                 break;
                         }
                     }
-                }, true);
+                });
 
                 this.SelectionViewModel.BrushPoints = brushPoints;//Selection
                 this.ViewModel.Invalidate();//Invalidate

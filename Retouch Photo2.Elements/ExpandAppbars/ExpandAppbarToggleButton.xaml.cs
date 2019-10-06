@@ -18,6 +18,7 @@ namespace Retouch_Photo2.Elements
         {
             get
             {
+                if (base.IsEnabled == false) return this.Disable;
                 if (this._vsIsSelected) return this.Selected;
 
                 switch (this._vsClickMode)
@@ -60,7 +61,7 @@ namespace Retouch_Photo2.Elements
         {
             this.InitializeComponent();
             base.Width = this.ExpandWidth;
-
+            this.IsEnabledChanged += (s, e) => this.VisualState = this.VisualState;//State
             this.Loaded += (s, e) =>
             {
                 this._vsIsSelected = this.IsChecked;

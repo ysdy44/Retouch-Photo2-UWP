@@ -30,7 +30,7 @@ namespace Retouch_Photo2.Tools.Pages
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.TransformManager.IsCrop = false;
-                }, true);
+                });
 
                 this.SelectionViewModel.IsCrop = false;//Selection
                 this.ViewModel.Invalidate();//Invalidate
@@ -46,7 +46,7 @@ namespace Retouch_Photo2.Tools.Pages
                         layer.TransformManager.Destination = cropTransformer;
                         layer.TransformManager.IsCrop = false;
                     }
-                }, true);
+                });
 
                 this.ViewModel.Invalidate();//Invalidate
             };

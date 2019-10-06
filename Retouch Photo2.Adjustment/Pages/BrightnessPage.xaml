@@ -13,7 +13,9 @@
 
     <StackPanel >
 
-        <TextBlock Text="White to Light" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            White to Light
+        </TextBlock>
         <pic:TouchSlider x:Name="WhiteLightSlider" Minimum="50" Maximum="100">
             <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
@@ -23,7 +25,9 @@
             </pic:TouchSlider.SliderBrush>
         </pic:TouchSlider>
 
-        <TextBlock Text="White to Dark" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            White to Dark
+        </TextBlock>
         <pic:TouchSlider x:Name="WhiteDarkSlider" Minimum="50" Maximum="100">
             <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
@@ -33,7 +37,9 @@
             </pic:TouchSlider.SliderBrush>
         </pic:TouchSlider>
 
-        <TextBlock Text="Black to Light" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Black to Light
+        </TextBlock>
         <pic:TouchSlider x:Name="BlackLightSlider" Minimum="0" Maximum="50">
             <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
@@ -43,7 +49,9 @@
             </pic:TouchSlider.SliderBrush>
         </pic:TouchSlider>
 
-        <TextBlock Text="Black to Dark" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Black to Dark
+        </TextBlock>
         <pic:TouchSlider x:Name="BlackDarkSlider" Minimum="0" Maximum="50">
             <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">

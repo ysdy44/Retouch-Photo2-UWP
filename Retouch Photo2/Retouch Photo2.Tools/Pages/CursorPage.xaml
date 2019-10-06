@@ -16,13 +16,17 @@
             <StackPanel Padding="2" MinWidth="300">
 
                 <!--Ratio-->
-                <TextBlock Text="Ratio Scaling:" Style="{StaticResource AppTextBlock}"/>
+                <TextBlock Style="{StaticResource AppTextBlock}">
+                    Ratio Scaling
+                </TextBlock>
                 <elements:OnOffSwitch OnContent="None" OffContent="Ratio" IsOn="{x:Bind KeyboardViewModel.IsRatio,Mode=TwoWay}"/>
 
                 <elements:ExpandAppBarSapce/>
 
                 <!--Center-->
-                <TextBlock Text="Center Scaling:" Style="{StaticResource AppTextBlock}"/>
+                <TextBlock Style="{StaticResource AppTextBlock}">
+                    Center Scaling
+                </TextBlock>
                 <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}"/>
 
             </StackPanel>      

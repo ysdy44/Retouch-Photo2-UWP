@@ -56,7 +56,9 @@
                 <ToolTip x:Name="SelectToolTip" Content="Click and select a picture" Placement="Top" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
             <Button x:Name="SelectButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <TextBlock Text="Select Image"/>
+                <TextBlock>
+                    Select Image
+                </TextBlock>
             </Button>
         </Border>
 
@@ -66,7 +68,9 @@
         <Border Style="{StaticResource AppRoundedBorderStyle}">
             <Button x:Name="ReplaceButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                  IsEnabled="{x:Bind SelectionViewModel.IsImageLayer,Mode=OneWay}">
-                <TextBlock Text="Replace Image"/>
+                <TextBlock>
+                    Replace Image
+                </TextBlock>
             </Button>
         </Border>
 

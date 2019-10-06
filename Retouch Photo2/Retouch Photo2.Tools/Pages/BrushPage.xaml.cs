@@ -167,7 +167,7 @@ namespace Retouch_Photo2.Tools.Pages
                                 layer.StrokeColor = value;
                                 break;
                         }
-                    }, true);
+                    });
 
                     this.ViewModel.Invalidate();//Invalidate
                 };
@@ -192,7 +192,7 @@ namespace Retouch_Photo2.Tools.Pages
                                     break;
                             }
                         }
-                    }), true);
+                    }));
 
                     this.ViewModel.Invalidate();//Invalidate
                 };

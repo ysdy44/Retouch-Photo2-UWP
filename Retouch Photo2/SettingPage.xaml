@@ -147,7 +147,9 @@
                         
                         
                         <!--Theme-->
-                        <TextBlock Text="Theme" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock Style="{StaticResource TitleTextBlockStyle}">
+                            Theme
+                        </TextBlock>
                         <Border Height="Auto" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel Orientation="Horizontal">
 
@@ -169,7 +171,9 @@
 
                         
                         <!--Layout-->
-                        <TextBlock Text="Layout" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock Style="{StaticResource TitleTextBlockStyle}">
+                            Layout
+                        </TextBlock>
                         <Border Height="Auto" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel Orientation="Horizontal">
 
@@ -195,7 +199,9 @@
 
 
                         <!--Adaptive-->
-                        <TextBlock x:Name="AdaptiveTextBlock" Text="Adaptive Width" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock x:Name="AdaptiveTextBlock" Style="{StaticResource TitleTextBlockStyle}">
+                            Adaptive Width
+                        </TextBlock>
                         <elements:AdaptiveWidthGrid x:Name="AdaptiveGrid"/>
                         <HyperlinkButton x:Name="AdaptiveResetButton" Content="Reset adaptive width"/>
 
@@ -204,7 +210,9 @@
 
 
                         <!--Key-->
-                        <TextBlock Text="Shortcuts" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock Style="{StaticResource TitleTextBlockStyle}">
+                            Shortcuts
+                        </TextBlock>
                         <ToggleButton Tag="IsCenter" Content="Ctrl" IsChecked="{x:Bind KeyboardViewModel.IsCenter, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
                         <ToggleButton Tag="IsRatio" Content="Shift" IsChecked="{x:Bind KeyboardViewModel.IsRatio, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
                         <ToggleButton Tag="IsSquare" Content="Shift" IsChecked="{x:Bind KeyboardViewModel.IsSquare, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
@@ -214,7 +222,9 @@
                       
                         
                         <!--Local-->
-                        <TextBlock Text="Local Folder" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock Style="{StaticResource TitleTextBlockStyle}">
+                            Local Folder
+                        </TextBlock>
                         <Button x:Name="LocalFolderButton" Content="Open" Width="100" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}"/>
 
 
@@ -245,12 +255,13 @@
                 <FontIcon Glyph="&#xE0D5;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
             </Button>
 
-            <TextBlock Grid.Column="1" Text="Setting" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
+            <TextBlock Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
                 <TextBlock.Transitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromHorizontalOffset="50" FromVerticalOffset="0"/>
                     </TransitionCollection>
                 </TextBlock.Transitions>
+                Setting
             </TextBlock>
 
         </Grid>

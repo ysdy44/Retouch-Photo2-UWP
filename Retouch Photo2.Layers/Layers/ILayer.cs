@@ -48,11 +48,10 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Get ILayer own copy.
         /// </summary>
-        /// <param name="layerCollection"> The layer-collection. </param>
         /// <param name="resourceCreator"> The resource-creator. </param>
         /// <returns> The cloned ILayer. </returns>
-        ILayer Clone(LayerCollection layerCollection, ICanvasResourceCreator resourceCreator);
-        
+        ILayer Clone(ICanvasResourceCreator resourceCreator);
+
 
         #endregion
 

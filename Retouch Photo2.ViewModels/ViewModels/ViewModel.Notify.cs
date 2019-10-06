@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using Windows.UI.Xaml;
+using Windows.UI;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -8,6 +8,10 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
+
+        /// <summary> Retouch_Photo2's the only AccentColor. </summary>
+        public Color AccentColor { get; set; }
+
 
         /// <summary> Sets or Gets the on state of the ruler on the canvas. </summary>
         public bool CanvasRulerVisible

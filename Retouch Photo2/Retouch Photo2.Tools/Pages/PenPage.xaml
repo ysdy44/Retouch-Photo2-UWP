@@ -39,17 +39,23 @@
 
             <elements:ExpandAppBarSapce/>
 
-            <TextBlock Text="FillColor:" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                FillColor
+            </TextBlock>
             <toolsElements:FillColorEllipseButton/>
 
             <elements:ExpandAppBarSapce/>
 
-            <TextBlock Text="StrokeColor:" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                StrokeColor
+            </TextBlock>
             <toolsElements:StrokeColorEllipseButton/>
 
             <elements:ExpandAppBarSapce/>
 
-            <TextBlock Text="StrokeWidth:" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                StrokeWidth
+            </TextBlock>
             <toolsElements:StrokeWidthButton/>
 
         </StackPanel>
@@ -60,7 +66,9 @@
 
             <elements:ExpandAppBarSapce/>
 
-            <TextBlock Text="Remove:" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                Remove
+            </TextBlock>
             <elements:ExpandAppbarButton x:Name="RemoveButton">
                 <ToolTipService.ToolTip>
                     <ToolTip Content="Remove the current point" VerticalOffset="40" Placement="Top" IsOpen="{x:Bind NodesIsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
@@ -68,11 +76,13 @@
                 <elements:ExpandAppbarButton.CenterContent>
                     <FontIcon Glyph="&#xE107;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
                 </elements:ExpandAppbarButton.CenterContent>
-            </elements:ExpandAppbarButton >
+            </elements:ExpandAppbarButton>
 
             <elements:ExpandAppBarSapce/>
 
-            <TextBlock Text="Insert:" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                Insert
+            </TextBlock>
             <elements:ExpandAppbarButton x:Name="AddButton">
                 <ToolTipService.ToolTip>
                     <ToolTip Content="Insert from current point" Placement="Top" IsOpen="{x:Bind NodesIsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
@@ -84,7 +94,9 @@
 
             <elements:ExpandAppBarSeparator/>
 
-            <TextBlock Text="Sharp:" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                Sharp
+            </TextBlock>
             <elements:ExpandAppbarButton x:Name="SharpButton">
                 <ToolTipService.ToolTip>
                     <ToolTip Content="Sharp curves" VerticalOffset="40" Placement="Top" IsOpen="{x:Bind NodesIsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
@@ -97,9 +109,12 @@
                     </PathIcon>
                 </elements:ExpandAppbarButton.CenterContent>
             </elements:ExpandAppbarButton>
+            
             <elements:ExpandAppBarSapce/>
 
-            <TextBlock Text="Smooth:" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                Smooth
+            </TextBlock>
             <elements:ExpandAppbarButton x:Name="SmoothButton">
                 <ToolTipService.ToolTip>
                     <ToolTip Content="Smooth curves" Placement="Top" IsOpen="{x:Bind NodesIsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>

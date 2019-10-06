@@ -15,7 +15,9 @@
             <Button x:Name="ExpanedButton" VerticalAlignment="Center" Style="{ThemeResource TextBlockButtonStyle}">
                 <FontIcon Glyph="&#xE96E;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
-            <TextBlock Text="Enter Folder Name" VerticalAlignment="Center"/>
+            <TextBlock VerticalAlignment="Center">
+                Enter Folder Name
+            </TextBlock>
         </StackPanel>
     </ContentDialog.Title>
 

@@ -6,7 +6,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     MinWidth="50"
-    Height="46"
+    Height="40"
     Padding="8,0"
     Background="Transparent"
     d:DesignHeight="50"
@@ -20,8 +20,8 @@
         <SolidColorBrush x:Name="PointerOverColor" Color="{ThemeResource SystemBaseLowColor}"/>
         <SolidColorBrush x:Name="PressedColor" Color="{ThemeResource SystemBaseMediumLowColor}"/>
         <!--Foreground-->
-        <SolidColorBrush x:Name="CheckColor" Color="{ThemeResource SystemBaseHighColor}"/>
-        <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource SystemBaseMediumLowColor}"/>
+        <SolidColorBrush x:Name="CheckColor" Color="{ThemeResource AppTextColor}"/>
+        <SolidColorBrush x:Name="UnCheckColor" Opacity="0.3" Color="{ThemeResource AppTextColor}"/>
     </UserControl.Resources>
 
 

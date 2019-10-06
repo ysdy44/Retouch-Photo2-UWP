@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Retouch_Photo2.Layers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Windows.UI.Xaml.Controls;
@@ -22,13 +23,19 @@ namespace Retouch_Photo2.ViewModels
         public ListViewSelectionMode SelectionMode
         {
             get => this.selectionMode;
-            set
+            private set
             {
                 this.selectionMode = value;
                 this.OnPropertyChanged(nameof(this.SelectionMode));//Notify 
             }
         }
         private ListViewSelectionMode selectionMode;
+        
+        /// <summary> The single checked layer. </summary>
+        public ILayer Layer { get; private set; }
+        
+        /// <summary> The all checked layers. </summary>
+        public IEnumerable<ILayer> Layers { get; private set; }
 
 
         /// <summary> Transformer of selection layers. </summary>
@@ -54,14 +61,30 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private bool disabledRadian;
-         
+        
+        /// <summary>
+        /// Sets all selection layer(s).
+        /// </summary>
+        /// <param name="action"> action </param>
+        public void SetValue(Action<ILayer> action)
+        {
+            switch (this.SelectionMode)
+            {
+                case ListViewSelectionMode.None:
+                    break;
 
-        /// <summary> The single checked layer. </summary>
-        public ILayer Layer { get; private set; }
+                case ListViewSelectionMode.Single:
+                    action(this.Layer);
+                    break;
 
-
-        /// <summary> The all checked layers. </summary>
-        public IEnumerable<ILayer> Layers { get; private set; }
+                case ListViewSelectionMode.Multiple:
+                    foreach (ILayer child in this.Layers)
+                    {
+                        action(child);
+                    }
+                    break;
+            }
+        }
 
 
         //@Notify 

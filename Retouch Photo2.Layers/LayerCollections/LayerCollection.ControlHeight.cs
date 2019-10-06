@@ -4,25 +4,22 @@ namespace Retouch_Photo2.Layers
 {
     public partial class LayerCollection
     {
+        //@Static
+        /// <summary>
+        /// Gets layer controls height.
+        /// </summary>
+        public static int ControlsHeight { get; private set; } = 40;
 
         /// <summary>
-        /// Gets or sets all layer controls height.
+        /// Sets all layer controls height.
         /// </summary>
-        public int ControlsHeight
+        public void SetControlHeight(int controlHeight)
         {
-            get => this.controlHeight;
-            set
-            {
-                if(this.controlHeight == value) return;
+            LayerCollection.ControlsHeight = controlHeight;
 
-                //Recursive
-                this._setControlHeight(this.RootLayers, value);
-
-                this.controlHeight = value;
-            }
+            //Recursive
+            this._setControlHeight(this.RootLayers, controlHeight);
         }
-        private int controlHeight = 40;
-
 
         private void _setControlHeight(IList<ILayer> layers, int controlHeight)
         {

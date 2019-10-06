@@ -23,9 +23,6 @@ namespace Retouch_Photo2.ViewModels
         private Color color = Color.FromArgb(255, 214, 214, 214);
 
 
-        ///////////////////////////////////////////////////////////////////////////////////////
-
-
         /// <summary> Retouch_Photo2's the only fill-color. </summary>
         public Color FillColor
         {
@@ -37,15 +34,10 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private Color fillColor = Color.FromArgb(255, 214, 214, 214);
-
         /// <summary> Flyout of <see cref = "ViewModel.FillColor" />. </summary>
         public Flyout FillColorFlyout { get; set; }
-
         /// <summary> ColorPicker of <see cref = "ViewModel.FillColor" />. </summary>
         public HSVColorPickers.ColorPicker FillColorPicker { get; set; }
-
-
-        ///////////////////////////////////////////////////////////////////////////////////////
 
 
         /// <summary> Retouch_Photo2's the only stroke-color. </summary>
@@ -59,15 +51,10 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private Color strokeColor = Color.FromArgb(255, 0, 0, 0);
-
         /// <summary> Flyout of <see cref = "ViewModel.FillColor" />. </summary>
         public Flyout StrokeColorFlyout { get; set; }
-
         /// <summary> ColorPicker of <see cref = "ViewModel.StrokeColor" />. </summary>
         public HSVColorPickers.ColorPicker StrokeColorPicker { get; set; }
-
-
-        ///////////////////////////////////////////////////////////////////////////////////////
 
 
         /// <summary> Retouch_Photo2's the only stroke-width. </summary>
@@ -81,5 +68,6 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private float strokeWidth = 1;
+
     }
 }

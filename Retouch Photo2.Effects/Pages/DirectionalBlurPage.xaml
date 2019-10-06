@@ -8,12 +8,16 @@
     mc:Ignorable="d"
     >
 
-    <StackPanel >
+    <StackPanel>
         
-        <TextBlock Text="BlurAmount" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            BlurAmount
+        </TextBlock>
         <Slider x:Name="BlurAmountSlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
 
-        <TextBlock Text="Angle" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Angle
+        </TextBlock>
         <element:RadiansPicker x:Name="AnglePicker" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"
                                BorderBrush="{ThemeResource AppBorderBrush}"
                                Background="{ThemeResource AppForeground}"

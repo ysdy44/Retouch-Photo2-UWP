@@ -12,7 +12,9 @@
     >
 
     <StackPanel >
-        <TextBlock Text="Contrast" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Contrast
+        </TextBlock>
         <pic:TouchSlider x:Name="ContrastSlider" Minimum="-100" Maximum="100">
             <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">

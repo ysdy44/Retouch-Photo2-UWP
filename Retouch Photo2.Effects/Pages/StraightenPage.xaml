@@ -8,9 +8,11 @@
     mc:Ignorable="d"
     >
 
-    <StackPanel >
-        
-        <TextBlock Text="Angle" Style="{StaticResource AppTextBlock}"/>
+    <StackPanel>
+
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Angle
+        </TextBlock>
         <element:RadiansPicker x:Name="AnglePicker" HorizontalAlignment="Left" VerticalAlignment="Top"
                                BorderBrush="{ThemeResource AppBorderBrush}"
                                Background="{ThemeResource AppForeground}"

@@ -2,12 +2,9 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Layers.Icons;
-using System;
 using System.Numerics;
 using Windows.Foundation;
-using Windows.Graphics.Effects;
 using Windows.UI;
-using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -21,9 +18,10 @@ namespace Retouch_Photo2.Layers.Models
         public float BlurAmount = 12.0f;
 
         //@Construct
-        public AcrylicLayer(LayerCollection layerCollection) : base(layerCollection)
+        public AcrylicLayer() 
         {
             base.Control.Icon = new AcrylicIcon();
+            base.Control.Text = "Acrylic";
         }
 
         //@Override
@@ -71,16 +69,16 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
 
-        public override ILayer Clone(LayerCollection layerCollection, ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            AcrylicLayer acrylicLayer = new AcrylicLayer(layerCollection)
+            AcrylicLayer acrylicLayer = new AcrylicLayer
             {
                 TintOpacity = this.TintOpacity,
                 TintColor = this.TintColor,
                 BlurAmount = this.BlurAmount,
             };
 
-            LayerBase.CopyWith(layerCollection, resourceCreator, acrylicLayer, this);
+            LayerBase.CopyWith(resourceCreator, acrylicLayer, this);
             return acrylicLayer;
         }
     }

@@ -50,14 +50,26 @@
         </VisualStateManager.VisualStateGroups>
 
         <StackPanel Margin="8" VerticalAlignment="Center">
-            <TextBlock Text="Dupliate Projects" FontWeight="Bold"/>
-            <TextBlock Text="Select project(s) to be duplicated." FontSize="12" Style="{ThemeResource AppTextBlock}"/>
+            <TextBlock FontWeight="Bold">
+                Dupliate Projects
+            </TextBlock>
+            <TextBlock FontSize="12" Style="{ThemeResource AppTextBlock}">
+                Select project(s) to be duplicated.
+            </TextBlock>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <AppBarSeparator/>
-            <local:MainPageButton x:Name="_OKButton" Glyph="&#xE10B;" Text="OK"/>
-            <local:MainPageButton  x:Name="_CancelButton" Glyph="&#xE106;" Text="Cancel"/>
+            <local:MainPageButton x:Name="_OKButton" Glyph="&#xE10B;">
+                <local:MainPageButton.Text>
+                    OK
+                </local:MainPageButton.Text>
+            </local:MainPageButton>
+            <local:MainPageButton x:Name="_CancelButton" Glyph="&#xE106;">
+                <local:MainPageButton.Text>
+                    Cancel
+                </local:MainPageButton.Text>
+            </local:MainPageButton>
         </StackPanel>
 
     </StackPanel>

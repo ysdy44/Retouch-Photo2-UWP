@@ -17,13 +17,17 @@
             <StackPanel Padding="2" MinWidth="300">
 
                 <!--Ratio-->
-                <TextBlock Text="Equal width and height:" Style="{StaticResource AppTextBlock}"/>
+                <TextBlock Style="{StaticResource AppTextBlock}">
+                    Equal width and height
+                </TextBlock>
                 <elements:OnOffSwitch OnContent="None" OffContent="Square" IsOn="{x:Bind KeyboardViewModel.IsSquare,Mode=TwoWay}"/>
 
                 <elements:ExpandAppBarSapce/>
 
                 <!--Center-->
-                <TextBlock Text="Center Scaling:" Style="{StaticResource AppTextBlock}"/>
+                <TextBlock Style="{StaticResource AppTextBlock}">
+                    Center Scaling
+                </TextBlock>
                 <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}"/>
 
             </StackPanel>
@@ -32,18 +36,24 @@
 
 
     <StackPanel Orientation="Horizontal">
-        
-        <TextBlock Text="FillColor:" Style="{StaticResource AppTextBlock}"/>
+
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            FillColor
+        </TextBlock>
         <toolsElements:FillColorEllipseButton/>
 
         <elements:ExpandAppBarSapce/>
 
-        <TextBlock Text="StrokeColor:" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            StrokeColor
+        </TextBlock>
         <toolsElements:StrokeColorEllipseButton/>
 
         <elements:ExpandAppBarSapce/>
 
-        <TextBlock Text="StrokeWidth:" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            StrokeWidth
+        </TextBlock>
         <toolsElements:StrokeWidthButton/>
 
         <elements:ExpandAppBarSapce/>

@@ -4,8 +4,6 @@ using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Effects;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Windows.UI.Xaml;
 
@@ -30,7 +28,7 @@ namespace Retouch_Photo2.ViewModels
 
         /// <summary> <see cref = "SelectionViewModel" />'s blend type. </summary>
         public BlendType BlendType
-    {
+        {
             get => this.blendType;
             set
             {
@@ -215,7 +213,7 @@ namespace Retouch_Photo2.ViewModels
                 this.isPenToolNodesMode = value;
                 this.OnPropertyChanged(nameof(this.IsPenToolNodesMode));//Notify 
             }
-        }       
+        }
         private bool isPenToolNodesMode;
         /// <summary> <see cref = "SelectionViewModel" />'s CurveLayer. </summary>
         public CurveLayer CurveLayer { get; set; }
@@ -233,6 +231,5 @@ namespace Retouch_Photo2.ViewModels
                 this.CurveLayer = null;
             }
         }
-
     }
 }

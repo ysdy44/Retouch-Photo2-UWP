@@ -4,7 +4,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:adjustments="using:Retouch_Photo2.Adjustments"
     xmlns:pic="using:HSVColorPickers"
     mc:Ignorable="d"
     d:DesignHeight="300"
@@ -12,7 +11,9 @@
     >
 
     <StackPanel >
-        <TextBlock Text="Temperature" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Temperature
+        </TextBlock>
         <pic:TouchSlider x:Name="TemperatureSlider" Minimum="-100" Maximum="100">
             <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
@@ -23,7 +24,9 @@
             </pic:TouchSlider.SliderBrush>
         </pic:TouchSlider>
 
-        <TextBlock Text="Tint" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Tint
+        </TextBlock>
         <pic:TouchSlider x:Name="TintSlider" Minimum="-100" Maximum="100">
             <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">

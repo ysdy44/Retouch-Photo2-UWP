@@ -20,9 +20,9 @@ namespace Retouch_Photo2.Tools.Models
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Override
-        public override ILayer CreateLayer(LayerCollection layerCollection, Transformer transformer)
+        public override ILayer CreateLayer(Transformer transformer)
         {
-            return new AcrylicLayer(layerCollection)
+            return new AcrylicLayer
             {
                 SelectMode = SelectMode.Selected,
                 TransformManager = new TransformManager(transformer)

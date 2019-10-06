@@ -10,6 +10,7 @@ using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using System.Linq;
 
 namespace Retouch_Photo2.Controls
 {
@@ -27,9 +28,11 @@ namespace Retouch_Photo2.Controls
         //@Content
         /// <summary> IndicatorBorder's Child. </summary>
         public UIElement IndicatorChild { get => this.IndicatorBorder.Child; set => this.IndicatorBorder.Child = value; }
-        /// <summary> AddButton </summary>
-        public Button AddButton => this._AddButton;
-        
+        /// <summary> PhotoButton. </summary>
+        public Button PhotoButton => this._PhotoButton;
+        /// <summary> DestopButton. </summary>
+        public Button DestopButton => this._DestopButton;
+
         //LayerCollection
         ILayer DragSourceLayer;
         ILayer DragDestinationLayer;
@@ -47,14 +50,40 @@ namespace Retouch_Photo2.Controls
             {
                 if (e.NewValue == e.OldValue) return;
                 int controlHeight = (int)e.NewValue;
-                this.ViewModel.Layers.ControlsHeight = controlHeight;
+                this.ViewModel.Layers.SetControlHeight(controlHeight); 
             };
+            this.Tapped += (s, e) =>
+            {
+                foreach (ILayer child in this.ViewModel.Layers.RootLayers)
+                {
+                    child.SelectMode = SelectMode.UnSelected;
+                }
+
+                this.SelectionViewModel.SetModeNone();//Selection
+                this.ViewModel.Invalidate();
+            };
+            this.RightTapped += (s, e) =>
+            {
+                //Menu
+                this.TipViewModel.SetMenuState(MenuType.Layer, MenuState.FlyoutHide, MenuState.FlyoutShow);
+            };
+            this.Holding += (s, e) =>
+            {
+                //Menu
+                this.TipViewModel.SetMenuState(MenuType.Layer, MenuState.FlyoutHide, MenuState.FlyoutShow);
+            };
+            this.AddButton.Tapped += (s, e) =>
+            {
+                this.AddImageFlyout.ShowAt(this.AddButton);
+                e.Handled = true;
+            };
+
 
             #region LayerCollection
 
-            this.ViewModel.Layers.ItemClick += (layer) =>
-            {             
-                if (layer.SelectMode.ToBool())
+             LayerCollection.ItemClick += (layer) =>
+            {
+                if (layer.SelectMode == SelectMode.Selected)
                 {
                     this.ShowLayerMenu(layer);
                     return;
@@ -74,25 +103,34 @@ namespace Retouch_Photo2.Controls
                     {
                         child.SelectMode = SelectMode.UnSelected;
                     }
+
                     layer.SelectMode = SelectMode.Selected;
+                    this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+                    this.ViewModel.Invalidate();
                 }
             };
-            this.ViewModel.Layers.RightTapped += (layer) =>
+            LayerCollection.RightTapped += (layer) =>
             {
                 this.ShowLayerMenu(layer);
             };
+            LayerCollection.SelectChanged += () =>
+            {
+                this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+                this.ViewModel.Invalidate();
+            };
 
-            this.ViewModel.Layers.DragItemsStarted += (layer, selectMode) =>
+
+            LayerCollection.DragItemsStarted += (layer, selectMode) =>
             {
                 this.DragSourceLayer = layer;
                 this.DragLayerSelectMode = selectMode;
             };
-            this.ViewModel.Layers.DragItemsDelta += (layer, overlayMode) =>
+            LayerCollection.DragItemsDelta += (layer, overlayMode) =>
             {
                 this.DragDestinationLayer = layer;
                 this.DragLayerOverlayMode = overlayMode;
             };
-            this.ViewModel.Layers.DragItemsCompleted += () =>
+            LayerCollection.DragItemsCompleted += () =>
             {
                 this.ViewModel.Layers.DragComplete(this.DragDestinationLayer, this.DragSourceLayer, this.DragLayerOverlayMode, this.DragLayerSelectMode);
                 this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();

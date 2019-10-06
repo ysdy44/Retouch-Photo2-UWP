@@ -15,26 +15,15 @@
             <Button x:Name="ExpanedButton" VerticalAlignment="Center" Style="{ThemeResource TextBlockButtonStyle}">
                 <FontIcon Glyph="&#xE96E;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
-            <TextBlock  Text="Add New Layer" VerticalAlignment="Center"/>
+            <TextBlock VerticalAlignment="Center">
+                Add New Layer
+            </TextBlock>
         </StackPanel>
     </ContentDialog.Title>
 
 
     <StackPanel>
 
-        <Button x:Name="_PhotoButton" Style="{StaticResource AppCircleButton}">
-            <Button.Tag>
-                <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-            </Button.Tag>
-            New Image From Pictures
-        </Button>
-
-        <Button x:Name="_DestopButton" Style="{StaticResource AppCircleButton}">
-            <Button.Tag>
-                <FontIcon Glyph="&#xEC4E;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-            </Button.Tag>
-            New Image From Destop
-        </Button>
 
         <Button x:Name="_CancelButton" Style="{StaticResource AppCircleButton}">
             Cancel

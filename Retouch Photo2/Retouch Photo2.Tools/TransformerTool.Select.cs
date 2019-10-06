@@ -82,7 +82,8 @@ namespace Retouch_Photo2.Tools
 
             //Selection
             selectedLayer.SelectMode = SelectMode.Selected;
-            this.SelectionViewModel.SetModeSingle(selectedLayer);//Transformer
+
+            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
             this.ViewModel.Invalidate();//Invalidate
             return true;
         }
@@ -123,7 +124,8 @@ namespace Retouch_Photo2.Tools
             }
 
             this._transformerMode = TransformerMode.None;//TransformerMode
-            this.SelectionViewModel.SetMode(this.ViewModel.Layers.RootLayers);//Transformer
+
+            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Transformer
             this.ViewModel.Invalidate();//Invalidate
 
             return true;

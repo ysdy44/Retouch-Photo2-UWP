@@ -50,7 +50,7 @@ namespace Retouch_Photo2.Controls
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
-        
+
 
         //@Converter
         private double OpacityToValueConverter(float opacity) => opacity * 100.0d;
@@ -124,7 +124,7 @@ namespace Retouch_Photo2.Controls
             };
 
 
-            #region Layer
+            #region Property
 
 
             //Opacity
@@ -184,182 +184,71 @@ namespace Retouch_Photo2.Controls
 
                 this.ViewModel.Invalidate();//Invalidate
             };
-
-
+            
+            
             //Duplicate
             this.DuplicateButton.Tapped += (s, e) =>
-            {//TODO: Layer New
-             /*
-                int index = this.MezzanineViewModel.GetfFrstIndex(this.ViewModel.Layers);
+            {
+                var layers = this.ViewModel.Layers.GetAllSelectedLayers();
+                this.ViewModel.Layers.MezzanineRangeOnFirstSelectedLayer(layers);
+                this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
 
-                switch (this.SelectionViewModel.SelectionMode)
-                {
-                    case ListViewSelectionMode.None:
-                        break;
-                    case ListViewSelectionMode.Single:
-                        {
-                            //Clone
-                            ILayer cloneLayer = this.SelectionViewModel.Layer.Clone(this.ViewModel.CanvasDevice);
-
-                            //IsChecked
-                            this.SelectionViewModel.Layer.IsChecked = false;
-
-                            //Insert
-                            this.ViewModel.Layers.Insert(index, cloneLayer);
-
-                            this.SelectionViewModel.SetModeSingle(cloneLayer);//Selection
-                        }
-                        break;
-                    case ListViewSelectionMode.Multiple:
-                        {
-                            List<ILayer> cloneLayers = new List<ILayer>();
-
-                            foreach (ILayer layer in this.SelectionViewModel.Layers)
-                            {
-                                //Clone
-                                cloneLayers.Add(layer.Clone(this.ViewModel.CanvasDevice));
-
-                                //IsChecked
-                                layer.IsChecked = false;
-                            }
-
-                            for (int i = 0; i < cloneLayers.Count; i++)
-                            {
-                                //Insert
-                                this.ViewModel.Layers.Insert(index, cloneLayers[i]);//Insert
-                            }
-
-                            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
-                        }
-                        break;
-                }
-
+                this.SelectionViewModel.SetMode(this.ViewModel.Layers);
                 this.ViewModel.Invalidate();//Invalidate
+            };
 
-             */
+            //Remove
+            this.RemoveButton.Tapped += (s, e) =>
+            {
+                this.ViewModel.Layers.RemoveAllSelectedLayers();
+                this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+
+                this.SelectionViewModel.SetMode(this.ViewModel.Layers);
+                this.ViewModel.Invalidate();//Invalidate
             };
 
 
             //Group
             this.GroupButton.Tapped += (s, e) =>
             {
-                //TODO: Layer New
-                /*
+                this.ViewModel.Layers.GroupAllSelectedLayers();
+                this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
 
-                //Menu
-                this.TipViewModel.SetMenuState(MenuType.Layer, destinations: MenuState.FlyoutHide);
-
-                //Transformer
-                Transformer transformer = this.SelectionViewModel.Transformer;
-
-                //GroupLayer
-                GroupLayer groupLayer = new GroupLayer
-                {
-                    IsChecked = true,
-                    TransformManager = new TransformManager(transformer),
-                };
-
-
-                //Index
-                int index = this.MezzanineViewModel.GetfFrstIndex(this.ViewModel.Layers);
-                //Selection
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    layer.IsChecked = false;
-                    groupLayer.Children.Add(layer);//Add
-
-                    if (layer.TransformManager.DisabledRadian)
-                    {
-                        //DisabledRadian
-                        groupLayer.TransformManager.DisabledRadian = true;
-                    }
-                });
-
-
-                foreach (ILayer layer in groupLayer.Children)
-                {
-                    this.ViewModel.Layers.Remove(layer);//Remove
-                }
-
-                this.SelectionViewModel.SetModeSingle(groupLayer);//Selection
-                this.ViewModel.Layers.Insert(index, groupLayer);//Insert
+                this.SelectionViewModel.SetMode(this.ViewModel.Layers);
                 this.ViewModel.Invalidate();//Invalidate
-                */
             };
-
-
-            //Remove
-            this.RemoveButton.Tapped += (s, e) =>
-            {//TODO: Layer New
-             /*
-                this.ViewModel.RemoveLayers();//Remove
-
-                this.SelectionViewModel.SetModeNone();//Selection
-                this.ViewModel.Invalidate();//Invalidate
-
-             */
-            };
-
-
-            #endregion
-
-
-            #region Children
-
-
-            //TODO: Layer New
-            /*
-            this.ChildrenButton.Tapped += (s, e) =>
-            {
-                if (this.SelectionViewModel.Layer == null) return;
-
-                this.ChildrenListView.ItemsSource = this.SelectionViewModel.Layer.Children;
-
-                this._vsIsChildren = true;
-                this.VisualState = this.VisualState;//State
-            };
-            */
 
 
             //UnGroup
-            //this.UnGroupButton.Tapped += (s, e) =>
-            {//TODO: Layer New
-                /*
-                if (this.SelectionViewModel.IsGroupLayer == false) return;
-
-                if (this.SelectionViewModel.Layer is GroupLayer groupLayer)
+            this.UnGroupButton.Tapped += (s, e) =>
+            {
+                if (this.SelectionViewModel.Layer!=null)
                 {
-                    //Index
-                    int index = this.MezzanineViewModel.GetfFrstIndex(this.ViewModel.Layers);
-
-                    //Selection
-                    this.SelectionViewModel.SetValue((layer) =>
+                    if (this.SelectionViewModel.Layer is GroupLayer groupLayer)
                     {
-                        layer.IsChecked = false;
-                    });
+                        ILayer parent = groupLayer.Parents;
+                        IList<ILayer> parentChildren = (parent == null) ? this.ViewModel.Layers.RootLayers : parent.Children;
 
-                    //Insert
-                    this.ViewModel.Layers.Remove(groupLayer);
-                    foreach (ILayer layer in groupLayer.Children)
-                    {
-                        layer.IsChecked = true;
-                        this.ViewModel.Layers.Insert(index, layer);//Insert
+                        int index = parentChildren.IndexOf(groupLayer);
+                        parentChildren.Remove(groupLayer);
+
+                        foreach (ILayer child in groupLayer.Children)
+                        {
+                            child.Parents = parent;
+                            child.SelectMode = SelectMode.Selected;
+                            parentChildren.Insert(index, child);
+                        }
+
+                        this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+
+                        this.SelectionViewModel.SetMode(this.ViewModel.Layers);
+                        this.ViewModel.Invalidate();//Invalidate
                     }
-
-                    //SetMode
-                    IEnumerable<ILayer> layers = groupLayer.Children;
-                    this.SelectionViewModel.SetModeMultiple(layers);//Selection
-
-                    this.ViewModel.Invalidate();//Invalidate
                 }
-                 
-                 */
             };
-
 
             #endregion
 
-            
         }
         
     }

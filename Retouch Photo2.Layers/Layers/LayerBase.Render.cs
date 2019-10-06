@@ -9,7 +9,10 @@ using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers
 {
-    public partial class LayerBase : ILayer
+    /// <summary>
+    /// Represents a layer that can have render properties. Provides a rendering method.
+    /// </summary>
+    public abstract partial class LayerBase : ILayer
     {
         
         //@Abstract

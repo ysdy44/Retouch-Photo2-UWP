@@ -4,6 +4,7 @@ using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using System.Linq;
 
 namespace Retouch_Photo2.Controls
 {
@@ -49,6 +50,7 @@ namespace Retouch_Photo2.Controls
                         {
                             //Edit
                             con.CutButton.IsEnabled = false;
+                            con.CopyButton.IsEnabled = false;
                             con.RemoveButton.IsEnabled = false;
 
                             //Select
@@ -60,6 +62,7 @@ namespace Retouch_Photo2.Controls
                         {
                             //Edit
                             con.CutButton.IsEnabled = true;
+                            con.CopyButton.IsEnabled = true;
                             con.RemoveButton.IsEnabled = true;
 
                             //Select
@@ -77,25 +80,12 @@ namespace Retouch_Photo2.Controls
         public SelectionControl()
         {
             this.InitializeComponent();
-            this.PasteButton.IsEnabled = false;//PasteButton
-
-
-            this.ExtractButton.IsEnabled = false;
-            this.MergeButton.IsEnabled = false;
-            this.PixelButton.IsEnabled = false;
-            this.FeatherButton.IsEnabled = false;
-            this.TransformButton.IsEnabled = false;
-
 
             #region Edit
 
 
             this.CutButton.Tapped += (s, e) =>
             {
-                //TODO: Layer New
-                /*
-
-
                 //Selection
                 switch (this.SelectionViewModel.SelectionMode)
                 {
@@ -127,17 +117,14 @@ namespace Retouch_Photo2.Controls
 
                 this.PasteButton.IsEnabled = (this.Layer != null || this.Layers != null);//PasteButton
 
-                this.ViewModel.RemoveLayers();//Remove
+                this.ViewModel.Layers.RemoveAllSelectedLayers();//Remove
+                this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
 
-                this.SelectionViewModel.SetModeNone();//Selection
+                this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
                 this.ViewModel.Invalidate();//Invalidate
-                */
             };
             this.CopyButton.Tapped += (s, e) =>
             {
-                //TODO: Layer New
-                /*
-
                 //Selection
                 switch (this.SelectionViewModel.SelectionMode)
                 {
@@ -168,52 +155,50 @@ namespace Retouch_Photo2.Controls
                 }
 
                 this.PasteButton.IsEnabled = (this.Layer != null || this.Layers != null);//PasteButton
-
-                */
             };
             this.PasteButton.Tapped += (s, e) =>
-            {//TODO: Layer New
-             /*
-
-                int index = this.MezzanineViewModel.GetfFrstIndex(this.ViewModel.Layers);
-                
+            {
                 if (this.Layer == null && this.Layers == null)//None
                 {
                 }
                 else if (this.Layer != null && this.Layers == null)//Single
                 {
-                    ILayer cloneLayer = this.Layer.Clone(this.ViewModel.Layers, this.ViewModel.CanvasDevice);//Clone
-                                        
-                    this.ViewModel.Layers.Insert(index, cloneLayer);//Insert
+                    ILayer cloneLayer = this.Layer.Clone(this.ViewModel.CanvasDevice);//Clone
+                    this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(cloneLayer);//Mezzanine
 
+                    this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+
+                    cloneLayer.SelectMode = SelectMode.Selected;
                     this.SelectionViewModel.SetModeSingle(cloneLayer);//Selection
+                    this.ViewModel.Invalidate();//Invalidate
                 }
                 else if (this.Layer == null && this.Layers != null)//Multiple
                 {
-                    foreach (ILayer layer in this.Layers)
+                    IList<ILayer> cloneLayers = new List<ILayer>();
+                    foreach (ILayer child in this.Layers)
                     {
-                        ILayer cloneLayer = layer.Clone(this.ViewModel.Layers, this.ViewModel.CanvasDevice);//Clone
-                                                
-                        this.ViewModel.Layers.Insert(index, cloneLayer);//Insert
+                        ILayer cloneLayer = child.Clone(this.ViewModel.CanvasDevice);//Clone
+                        cloneLayer.SelectMode = SelectMode.Selected;
+                        cloneLayers.Add(cloneLayer);
                     }
 
-                    this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
-                }
+                    this.ViewModel.Layers.MezzanineRangeOnFirstSelectedLayer(cloneLayers);//Mezzanine
 
-                this.ViewModel.Invalidate();//Invalidate
-             */
+                    this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+
+                    this.SelectionViewModel.SetModeMultiple(cloneLayers);//Selection
+                    this.ViewModel.Invalidate();//Invalidate        
+                }
             };
             this.RemoveButton.Tapped += (s, e) =>
             {
-                //TODO: Layer New
-                /*
+                int count = this.ViewModel.Layers.RootLayers.Count;
+                if (count == 0) return;
 
-                this.ViewModel.RemoveLayers();//Remove
+                this.ViewModel.Layers.RemoveAllSelectedLayers();
 
-                this.SelectionViewModel.SetModeNone();//Selection
+                this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
                 this.ViewModel.Invalidate();//Invalidate
-
-                */
             };
 
 
@@ -225,61 +210,37 @@ namespace Retouch_Photo2.Controls
 
 
             this.AllButton.Tapped += (s, e) =>
-            {//TODO: Layer New
-             /*
-                int count = this.ViewModel.Layers.Count;
-                if (count == 0) return;
-
-                //Selection
-                foreach (ILayer layer in this.ViewModel.Layers)
-                {
-                    layer.IsChecked = true;
-                }
-
-                this.SelectionViewModel.SetModeMultiple(this.ViewModel.Layers);//Selection
-                this.ViewModel.Invalidate();//Invalidate
-
-             */
-            };
-            this.DeselectButton.Tapped += (s, e) =>
             {
-                //TODO: Layer New
-                /*
-
-
-                int count = this.ViewModel.Layers.Count;
-                if (count == 0) return;
-                
-                //Selection
-                foreach (ILayer layer in this.ViewModel.Layers)
-                {
-                    layer.IsChecked = false;
-                }
-
-                this.SelectionViewModel.SetModeNone();//Selection
-                this.ViewModel.Invalidate();//Invalidate
-                */
-            };
-
-
-            this.InvertButton.Tapped += (s, e) =>
-            {
-                //TODO: Layer New
-                /*
-
-                int count = this.ViewModel.Layers.Count;
+                int count = this.ViewModel.Layers.RootLayers.Count;
                 if (count == 0) return;
 
                 //Selection
-                foreach (ILayer layer in this.ViewModel.Layers)
+                foreach (ILayer layer in this.ViewModel.Layers.RootLayers)
                 {
-                    layer.IsChecked = !layer.IsChecked;
+                    layer.SelectMode =  SelectMode.Selected;
                 }
 
                 this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
                 this.ViewModel.Invalidate();//Invalidate
+            };
+            this.DeselectButton.Tapped += (s, e) =>
+            {
+                int count = this.ViewModel.Layers.RootLayers.Count;
+                if (count == 0) return;
 
-                */
+                //Selection
+                foreach (ILayer layer in this.ViewModel.Layers.RootLayers)
+                {
+                    layer.SelectMode = SelectMode.UnSelected;
+                }
+
+                this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+                this.ViewModel.Invalidate();//Invalidate
+            };
+
+
+            this.InvertButton.Tapped += (s, e) =>
+            { 
             };
 
 

@@ -24,7 +24,9 @@
             </Ellipse.Fill>
         </Ellipse>
 
-        <TextBlock Text="Exposure" Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center">
+            Exposure
+        </TextBlock>
         
     </Grid>
     

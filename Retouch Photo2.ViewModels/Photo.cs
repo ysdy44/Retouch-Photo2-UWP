@@ -94,6 +94,7 @@ namespace Retouch_Photo2.ViewModels
         public void Exited(object sender, PointerRoutedEventArgs e) => this.DarkenVisibility = Visibility.Collapsed;
 
 
+        //@Static
         /// <summary>
         /// Create a <see cref = "Photo" /> from <see cref = "StorageFile" />.
         /// </summary>
@@ -118,9 +119,7 @@ namespace Retouch_Photo2.ViewModels
             }
             else return null;
         }
-
-
-        //@Static
+        
         /// <summary>
         /// Get <see cref = "StorageFile" /> from the destination <see cref = "StorageFolder" />.
         /// </summary>

@@ -4,7 +4,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:adjustments="using:Retouch_Photo2.Adjustments"
     xmlns:pic="using:HSVColorPickers"
     mc:Ignorable="d"
     d:DesignHeight="300"
@@ -37,7 +36,7 @@
             <GradientStop Color="{StaticResource AlphaRight}" Offset="0"/>
             <GradientStop Color="{StaticResource AlphaRight}" Offset="1"/>
         </LinearGradientBrush>
-        
+
         <!--Red-->
         <Color x:Key="RedLeft" >#FFC67A</Color>
         <Color x:Key="RedRight" >#FF4f00</Color>
@@ -77,7 +76,7 @@
             <GradientStop Color="{StaticResource GreenRight}" Offset="0"/>
             <GradientStop Color="{StaticResource GreenRight}" Offset="1"/>
         </LinearGradientBrush>
-        
+
         <!--Blue-->
         <Color x:Key="BlueLeft">#92C7F7</Color>
         <Color x:Key="BlueRight">#1376F7</Color>
@@ -97,7 +96,7 @@
             <GradientStop Color="{StaticResource BlueRight}" Offset="0"/>
             <GradientStop Color="{StaticResource BlueRight}" Offset="1"/>
         </LinearGradientBrush>
-        
+
     </Page.Resources>
 
 
@@ -126,43 +125,69 @@
             </ContentPresenter>
 
         </Grid>
-                
+
         <!--GammaTransfer Alpha-->
         <ToggleSwitch x:Name="AlphaCheckBox" Margin="12,0"/>
-        <TextBlock x:Name="AlphaOffsetTextBlock" Text="Offset" Style="{StaticResource AppTextBlock}"/>
+
+        <TextBlock x:Name="AlphaOffsetTextBlock" Style="{StaticResource AppTextBlock}">
+            Offset
+        </TextBlock>
         <pic:TouchSlider x:Name="AlphaOffsetSlider" Value="0" Minimum="0" Maximum="100" SliderBrush="{StaticResource AlphaLeftBrush}"/>
-        <TextBlock x:Name="AlphaExponentTextBlock" Text="Exponent" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="AlphaExponentTextBlock" Style="{StaticResource AppTextBlock}">
+            Exponent
+        </TextBlock>
         <pic:TouchSlider x:Name="AlphaExponentSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource AlphaRightBrush}" />
-        <TextBlock x:Name="AlphaAmplitudeTextBlock" Text="Amplitude" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="AlphaAmplitudeTextBlock" Style="{StaticResource AppTextBlock}">
+            Amplitude
+        </TextBlock>
         <pic:TouchSlider x:Name="AlphaAmplitudeSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource AlphaCenterBrush}"/>
 
         <!--GammaTransfer Red-->
         <ToggleSwitch x:Name="RedCheckBox" Margin="12,0"/>
-        <TextBlock x:Name="RedOffsetTextBlock" Text="Offset" Style="{StaticResource AppTextBlock}"/>
+
+        <TextBlock x:Name="RedOffsetTextBlock" Style="{StaticResource AppTextBlock}">
+            Offset
+        </TextBlock>
         <pic:TouchSlider x:Name="RedOffsetSlider" Value="0" Minimum="0" Maximum="100" SliderBrush="{StaticResource RedLeftBrush}"/>
-        <TextBlock x:Name="RedExponentTextBlock" Text="Exponent" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="RedExponentTextBlock" Style="{StaticResource AppTextBlock}">
+            Exponent
+        </TextBlock>
         <pic:TouchSlider x:Name="RedExponentSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource RedRightBrush}"/>
-        <TextBlock x:Name="RedAmplitudeTextBlock" Text="Amplitude" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="RedAmplitudeTextBlock" Style="{StaticResource AppTextBlock}">
+            Amplitude
+        </TextBlock>
         <pic:TouchSlider x:Name="RedAmplitudeSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource RedCenterBrush}"/>
 
         <!--GammaTransfer Green-->
         <ToggleSwitch x:Name="GreenCheckBox" Margin="12,0"/>
-        <TextBlock x:Name="GreenOffsetTextBlock" Text="Offset" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="GreenOffsetTextBlock" Style="{StaticResource AppTextBlock}">
+            Offset
+        </TextBlock>
         <pic:TouchSlider x:Name="GreenOffsetSlider" Value="0" Minimum="0" Maximum="100" SliderBrush="{StaticResource GreenLeftBrush}"/>
-        <TextBlock x:Name="GreenExponentTextBlock" Text="Exponent" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="GreenExponentTextBlock" Style="{StaticResource AppTextBlock}">
+            Exponent
+        </TextBlock>
         <pic:TouchSlider x:Name="GreenExponentSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource GreenRightBrush}"/>
-        <TextBlock x:Name="GreenAmplitudeTextBlock" Text="Amplitude" Style="{StaticResource AppTextBlock}"/>
-            <pic:TouchSlider x:Name="GreenAmplitudeSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource GreenCenterBrush}"/>
+        <TextBlock x:Name="GreenAmplitudeTextBlock" Style="{StaticResource AppTextBlock}">
+            Amplitude
+        </TextBlock>
+        <pic:TouchSlider x:Name="GreenAmplitudeSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource GreenCenterBrush}"/>
 
-            <!--GammaTransfer Blue-->
+        <!--GammaTransfer Blue-->
         <ToggleSwitch x:Name="BlueCheckBox" Margin="12,0"/>
-        <TextBlock x:Name="BlueOffsetTextBlock" Text="Offset" Style="{StaticResource AppTextBlock}"/>
-                <pic:TouchSlider x:Name="BlueOffsetSlider" Value="0" Minimum="0" Maximum="100" SliderBrush="{StaticResource BlueLeftBrush}"/>
-                <TextBlock x:Name="BlueExponentTextBlock" Text="Exponent" Style="{StaticResource AppTextBlock}"/>
-                    <pic:TouchSlider x:Name="BlueExponentSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource BlueRightBrush}"/>
-                    <TextBlock x:Name="BlueAmplitudeTextBlock" Text="Amplitude" Style="{StaticResource AppTextBlock}"/>
-                        <pic:TouchSlider x:Name="BlueAmplitudeSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource BlueCenterBrush}"/>
+        <TextBlock x:Name="BlueOffsetTextBlock" Style="{StaticResource AppTextBlock}">
+            Offset
+        </TextBlock>
+        <pic:TouchSlider x:Name="BlueOffsetSlider" Value="0" Minimum="0" Maximum="100" SliderBrush="{StaticResource BlueLeftBrush}"/>
+        <TextBlock x:Name="BlueExponentTextBlock" Style="{StaticResource AppTextBlock}">
+            Exponent
+        </TextBlock>
+        <pic:TouchSlider x:Name="BlueExponentSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource BlueRightBrush}"/>
+        <TextBlock x:Name="BlueAmplitudeTextBlock" Style="{StaticResource AppTextBlock}">
+            Amplitude
+        </TextBlock>
+        <pic:TouchSlider x:Name="BlueAmplitudeSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource BlueCenterBrush}"/>
 
-                        <ContentControl Height="12"/>
+        <ContentControl Height="12"/>
     </StackPanel>
 </Page>

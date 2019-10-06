@@ -20,7 +20,11 @@
                 </Grid.RowDefinitions>
                 
                 <!--Head-->
-                <menus:MenuTitle x:Name="MenuTitle" Text="Color"/>
+                <menus:MenuTitle x:Name="_MenuTitle">
+                    <menus:MenuTitle.Text>
+                        Color
+                    </menus:MenuTitle.Text>
+                </menus:MenuTitle>
 
                 <hsvColorPicker:ColorPicker x:Name="ColorPicker" Grid.Row="1" Background="Transparent"
                      Color="{x:Bind SelectionViewModel.Color,Mode=OneWay}"

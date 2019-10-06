@@ -63,6 +63,11 @@ namespace Retouch_Photo2.Selections
                 this._vsClickMode = ClickMode.Press;
                 this.VisualState = this.VisualState;//State
             };
+            this.RootGrid.PointerReleased += (s, e) =>
+            {
+                this._vsClickMode = ClickMode.Release;
+                this.VisualState = this.VisualState;//State
+            };
             this.RootGrid.PointerExited += (s, e) =>
             {
                 this._vsClickMode = ClickMode.Release;

@@ -162,10 +162,11 @@
         </ContentControl>
 
         <!--Load-->
-        <elements:LoadingControl x:Name="LoadingControl" Text="Saving..."/>
-
-        <!--Dialog-->
-        <elements:LayersAddDialog x:Name="LayersAddDialog"/>
+        <elements:LoadingControl x:Name="LoadingControl">
+            <elements:LoadingControl.Text>
+                Saving...
+            </elements:LoadingControl.Text>
+        </elements:LoadingControl>
 
     </Grid>
 </Page>

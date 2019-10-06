@@ -99,7 +99,7 @@ namespace Retouch_Photo2.Tools.Models
                 {
                     this.BoxChoose();//Box
 
-                    this.SelectionViewModel.SetMode(this.ViewModel.Layers.RootLayers);//Selection
+                    this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
                     this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                     return;
                 }
@@ -130,13 +130,16 @@ namespace Retouch_Photo2.Tools.Models
         {
             foreach (ILayer layer in this.ViewModel.Layers.RootLayers)
             {
-                Transformer transformer = layer.TransformManager.Destination;
+                Transformer transformer = layer.TransformManager.ActualDestination;
                 bool contained = transformer.Contained(this._boxCanvasRect);
+                App.ViewModel.Text = contained.ToString();
 
                 switch (this.CompositeMode)
                 {
                     case CompositeMode.New:
-                        layer.SelectMode = SelectMode.Selected;
+                        layer.SelectMode = contained?
+                            SelectMode.Selected: 
+                            SelectMode.UnSelected;
                         break;
                     case CompositeMode.Add:
                         if (contained) layer.SelectMode = SelectMode.Selected;

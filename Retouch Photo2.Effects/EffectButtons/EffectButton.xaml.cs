@@ -67,11 +67,13 @@ namespace Retouch_Photo2.Effects
             {
                 this._vsIsEnabled = this._ToggleSwitch.IsEnabled;
                 this._vsClickMode = ClickMode.Release;//State
+                this.VisualState = this.VisualState;//State
             };
             this._ToggleSwitch.Toggled += (s, e) =>
             {
                 this._vsIsOn = this._ToggleSwitch.IsOn;
                 this._vsClickMode = ClickMode.Release;//State
+                this.VisualState = this.VisualState;//State
             };
         } 
     }

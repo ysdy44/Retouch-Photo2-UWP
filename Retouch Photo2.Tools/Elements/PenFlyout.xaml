@@ -13,7 +13,9 @@
 
     <StackPanel Padding="2" MinWidth="300">
 
-        <TextBlock Text="Restriction:" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Restriction
+        </TextBlock>
         <Border Height="Auto" HorizontalAlignment="Left" Style="{ThemeResource AppRoundedBorderStyle}">
             <StackPanel Orientation="Horizontal" Padding="8,0">
                 <CheckBox x:Name="AngleCheckBox" Content="Angle" MinWidth="100"/>
@@ -23,7 +25,9 @@
 
         <ContentControl Height="8"/>
 
-        <TextBlock Text="Mode:" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Mode
+        </TextBlock>
         <Border Height="Auto" Style="{ThemeResource AppRoundedBorderStyle}">
             <ScrollViewer>
                 <StackPanel Orientation="Horizontal">

@@ -38,8 +38,6 @@ namespace Retouch_Photo2.Tools.Models
         public Page Page => this._imagePage;
         ImagePage _imagePage { get; } = new ImagePage();
         
-        ILayer MezzanineLayer;
-
         public void Starting(Vector2 point) { }
         public void Started(Vector2 startingPoint, Vector2 point)
         {
@@ -51,7 +49,7 @@ namespace Retouch_Photo2.Tools.Models
                 this._imagePage.TipSelect();
                 return;
             }
-
+            
             //Transformer
             this._sizeWidth = imageRe.Width;
             this._sizeHeight = imageRe.Height;
@@ -59,14 +57,14 @@ namespace Retouch_Photo2.Tools.Models
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, imageRe.Width, imageRe.Height);
 
             //Mezzanine
-            this.MezzanineLayer = new ImageLayer(this.ViewModel.Layers)
+            this.ViewModel.MezzanineLayer = new ImageLayer
             {
                 SelectMode = SelectMode.Selected,
                 TransformManager = new TransformManager(transformerSource, transformerDestination),
 
                 ImageRe = imageRe,
             };
-            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.MezzanineLayer);
+            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.ViewModel.MezzanineLayer);
 
             this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
@@ -74,29 +72,36 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
-            if (this.MezzanineLayer == null) return;
+            if (this.ViewModel.MezzanineLayer == null) return;
 
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
-            this.MezzanineLayer.TransformManager.Destination = transformerDestination;
+            this.ViewModel.MezzanineLayer.TransformManager.Destination = transformerDestination;
             this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
             this.ViewModel.Invalidate();//Invalidate
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
-            if (this.MezzanineLayer == null) return;
+            if (this.ViewModel.MezzanineLayer == null) return;
 
             if (isSingleStarted)
             {
                 Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
-                this.MezzanineLayer.TransformManager.Destination = transformerDestination;
+                this.ViewModel.MezzanineLayer.TransformManager.Destination = transformerDestination;
                 this.SelectionViewModel.Transformer = transformerDestination;//Selection
+
+                foreach (ILayer child in this.ViewModel.Layers.RootLayers)
+                {
+                    child.SelectMode = SelectMode.UnSelected;
+                }
+                this.ViewModel.MezzanineLayer.SelectMode = SelectMode.Selected;
+                this.ViewModel.MezzanineLayer = null;
 
                 this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
             }
-            else this.ViewModel.Layers.RemoveMezzanineLayer(this.MezzanineLayer);//Mezzanine
+            else this.ViewModel.Layers.RemoveMezzanineLayer(this.ViewModel.MezzanineLayer);//Mezzanine
 
-            this.SelectionViewModel.SetMode(this.ViewModel.Layers.RootLayers);//Selection
+            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }

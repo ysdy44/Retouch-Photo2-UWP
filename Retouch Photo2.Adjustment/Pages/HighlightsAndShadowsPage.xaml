@@ -4,7 +4,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:adjustments="using:Retouch_Photo2.Adjustments"
     xmlns:pic="using:HSVColorPickers"
     mc:Ignorable="d"
     d:DesignHeight="300"
@@ -13,7 +12,9 @@
 
     <StackPanel >
 
-        <TextBlock Text="Shadows" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Shadows
+        </TextBlock>
         <pic:TouchSlider x:Name="ShadowsSlider" Minimum="-100" Maximum="100">
             <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
@@ -22,8 +23,10 @@
                 </LinearGradientBrush>
             </pic:TouchSlider.SliderBrush>
         </pic:TouchSlider>
-        
-        <TextBlock Text="Highlights" Style="{StaticResource AppTextBlock}"/>
+
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Highlights
+        </TextBlock>
         <pic:TouchSlider x:Name="HighlightsSlider" Minimum="-100" Maximum="100">
             <pic:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
@@ -33,14 +36,18 @@
             </pic:TouchSlider.SliderBrush>
         </pic:TouchSlider>
 
-        <TextBlock Text="Clarity" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Clarity
+        </TextBlock>
         <pic:TouchSlider x:Name="ClaritySlider" Minimum="-100" Maximum="100">
             <pic:TouchSlider.SliderBrush>
             <SolidColorBrush Color="{ThemeResource AppBorderBrushColor}"/>
             </pic:TouchSlider.SliderBrush>
         </pic:TouchSlider>
-        
-        <TextBlock Text="MaskBlurAmount" Style="{StaticResource AppTextBlock}"/>
+
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            MaskBlurAmount
+        </TextBlock>
         <pic:TouchSlider x:Name="MaskBlurAmountSlider" Minimum="0" Maximum="100">
             <pic:TouchSlider.SliderBrush>
                 <SolidColorBrush Color="{ThemeResource AppBorderBrushColor}"/>

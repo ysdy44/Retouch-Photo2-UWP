@@ -36,8 +36,10 @@
     
 
     <StackPanel Orientation="Horizontal">
-                
-        <TextBlock Text="Fill or Stroke:" Style="{StaticResource AppTextBlock}"/>
+
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Fill or Stroke
+        </TextBlock>
         <Border Style="{StaticResource AppRoundedBorderStyle}">
             <ComboBox x:Name="FillOrStrokeComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
                   SelectedIndex="{x:Bind FillOrStrokeToIndexConverter(SelectionViewModel.FillOrStroke),Mode=OneWay}" 
@@ -49,7 +51,9 @@
         
         <elements:ExpandAppBarSeparator/>
 
-        <TextBlock Text="BrushType:" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            BrushType
+        </TextBlock>
         <Border Style="{StaticResource AppRoundedBorderStyle}">
             <Border.BorderBrush>
                 <SolidColorBrush x:Name="BrushTypeBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
@@ -69,7 +73,9 @@
 
         <elements:ExpandAppBarSapce/>
 
-        <TextBlock Text="Brush:" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Brush
+        </TextBlock>
         <brushs:ShowControl x:Name="ShowControl" 
                                  Color="{x:Bind SelectionViewModel.Color,Mode=OneWay}"
                                  BrushType="{x:Bind SelectionViewModel.BrushType,Mode=OneWay}"

@@ -94,11 +94,14 @@ namespace Retouch_Photo2.Controls
 
             con._vsIsEdit = false;
             con._vsIsFilter = false;
-            con.Adjustments = null;
 
             if (e.NewValue is AdjustmentManager value)
             {
                 con._vsAdjustments = value.Adjustments;
+            }
+            else
+            {
+                con._vsAdjustments = null;
             }
 
             con.VisualState = con.VisualState;//State

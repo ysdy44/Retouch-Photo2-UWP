@@ -173,9 +173,6 @@
     <Compile Include="OnOffSwitch.xaml.cs">
       <DependentUpon>OnOffSwitch.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LabelControl.xaml.cs">
-      <DependentUpon>LabelControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RadiansPicker.xaml.cs">
       <DependentUpon>RadiansPicker.xaml</DependentUpon>
@@ -185,9 +182,6 @@
     </Compile>
     <Compile Include="Controls\ThemeControl.xaml.cs">
       <DependentUpon>ThemeControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="RepeatControl.xaml.cs">
-      <DependentUpon>RepeatControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingPages\AdaptiveWidthGrid.xaml.cs">
       <DependentUpon>AdaptiveWidthGrid.xaml</DependentUpon>
@@ -300,10 +294,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LabelControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="RadiansPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -313,10 +303,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ThemeControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="RepeatControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

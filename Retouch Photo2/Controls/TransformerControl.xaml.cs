@@ -374,7 +374,7 @@ namespace Retouch_Photo2.Controls
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.CacheTransform();
-                }, true);
+                });
 
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
             };
@@ -390,7 +390,7 @@ namespace Retouch_Photo2.Controls
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.TransformAdd(vector);
-                }, true);
+                });
 
                 this.ViewModel.Invalidate();//Invalidate
             };

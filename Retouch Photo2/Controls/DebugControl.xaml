@@ -12,29 +12,45 @@
 
 
     <StackPanel>
-        
+
         <!--Head-->
-        <menus:MenuTitle x:Name="_MenuTitle" Text="Debug"/>
-        
-        <Border Height="50" Background="{ThemeResource AppBackground}"  >
-            <TextBlock Text="AppBackground" Style="{StaticResource AppTextBlock}" />
+        <menus:MenuTitle x:Name="_MenuTitle">
+            <menus:MenuTitle.Text>
+                Debug
+            </menus:MenuTitle.Text>
+        </menus:MenuTitle>
+
+        <Border Height="50" Background="{ThemeResource AppBackground}">
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                AppBackground
+            </TextBlock>
         </Border>
-        <Border Height="50" Background="{ThemeResource AppForeground}"  >
-            <TextBlock Text="AppForeground" Style="{StaticResource AppTextBlock}" />
+        <Border Height="50" Background="{ThemeResource AppForeground}">
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                AppForeground
+            </TextBlock>
         </Border>
-        <Border Height="50" Background="{ThemeResource AppBorderBrush}"  >
-            <TextBlock Text="AppBorderBrush" Style="{StaticResource AppTextBlock}" />
+        <Border Height="50" Background="{ThemeResource AppBorderBrush}">
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                AppBorderBrush
+            </TextBlock>
         </Border>
-        <Border Height="50" Background="{ThemeResource AppFill}"  >
-            <TextBlock Text="AppFill" Style="{StaticResource AppTextBlock}" />
+        <Border Height="50" Background="{ThemeResource AppFill}">
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                AppFill
+            </TextBlock>
         </Border>
-        <Border Height="50" Background="{ThemeResource AppStroke}"  >
-            <TextBlock Text="AppStroke" Style="{StaticResource AppTextBlock}" />
+        <Border Height="50" Background="{ThemeResource AppStroke}">
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                AppStroke
+            </TextBlock>
         </Border>
-        <Border Height="50" Background="{ThemeResource AppText}"  >
-            <TextBlock Text="AppText" Style="{StaticResource AppTextBlock}" />
+        <Border Height="50" Background="{ThemeResource AppText}">
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                AppText
+            </TextBlock>
         </Border>
-        
+
     </StackPanel>
-    
+
 </Page>

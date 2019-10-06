@@ -40,7 +40,11 @@
         </Grid.RowDefinitions>
 
         <!--Head-->
-        <menus:MenuTitle x:Name="_MenuTitle" Text="Transformer"/>
+        <menus:MenuTitle x:Name="_MenuTitle">
+            <menus:MenuTitle.Text>
+                Transformer
+            </menus:MenuTitle.Text>
+        </menus:MenuTitle>
 
         <Grid x:Name="FitstGrid" Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -59,7 +63,9 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="Width:" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource AppTextBlock}">
+                Width
+            </TextBlock>
             <Border Grid.Column="0" Grid.Row="1" Background="Transparent" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
                 <ToolTipService.ToolTip>
                     <ToolTip Content="Width" Placement="Left" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
@@ -67,7 +73,9 @@
                 <pickers:NumberPicker x:Name="WPicker" Width="Auto" Height="Auto" Unit="dp" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
             </Border>
 
-            <TextBlock Grid.Column="2" Grid.Row="0" Text="Height:" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock Grid.Column="2" Grid.Row="0" Style="{StaticResource AppTextBlock}">
+                Height
+            </TextBlock>
             <Border Grid.Column="2" Grid.Row="1" Background="Transparent" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
                 <ToolTipService.ToolTip>
                     <ToolTip Content="Height" Placement="Right" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
@@ -86,7 +94,9 @@
             
             <!--/////////////////////////////////////////////////////////-->
 
-            <TextBlock Grid.Column="0" Grid.Row="2" Text="Rotate:" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock Grid.Column="0" Grid.Row="2" Style="{StaticResource AppTextBlock}">
+                Rotate
+            </TextBlock>
             <Border Grid.Column="0" Grid.Row="3" Background="Transparent" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
                 <ToolTipService.ToolTip>
                     <ToolTip Content="Rotate" Placement="Left" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
@@ -94,7 +104,9 @@
                 <pickers:NumberPicker x:Name="RPicker" Width="Auto" Height="Auto" Unit="º" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
             </Border>
 
-            <TextBlock Grid.Column="2" Grid.Row="2" Text="Skew:" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock Grid.Column="2" Grid.Row="2" Style="{StaticResource AppTextBlock}">
+                Skew
+            </TextBlock>
             <Border Grid.Column="2" Grid.Row="3" Background="Transparent" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
                 <ToolTipService.ToolTip>
                     <ToolTip Content="Skew" Placement="Right" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
@@ -104,7 +116,9 @@
 
             <!--/////////////////////////////////////////////////////////-->
 
-            <TextBlock Grid.Column="0" Grid.Row="4" Text="X:" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock Grid.Column="0" Grid.Row="4" Style="{StaticResource AppTextBlock}">
+                X
+            </TextBlock>
             <Border Grid.Column="0" Grid.Row="5" Background="Transparent" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
                 <ToolTipService.ToolTip>
                     <ToolTip Content="X-axis" Placement="Left" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
@@ -115,7 +129,9 @@
                 <pickers:NumberPicker x:Name="XPicker" Width="Auto" Height="Auto" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
             </Border>
 
-            <TextBlock Grid.Column="2" Grid.Row="4" Text="Y:" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock Grid.Column="2" Grid.Row="4" Style="{StaticResource AppTextBlock}">
+                Y
+            </TextBlock>
             <Border Grid.Column="2" Grid.Row="5" Background="Transparent" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
                 <ToolTipService.ToolTip>
                     <ToolTip Content="Y-axis" Placement="Right" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>

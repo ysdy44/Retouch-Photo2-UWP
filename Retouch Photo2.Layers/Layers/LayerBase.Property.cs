@@ -38,18 +38,17 @@ namespace Retouch_Photo2.Layers
 
 
         //@Abstract
-        public abstract ILayer Clone(LayerCollection layerCollection, ICanvasResourceCreator resourceCreator);
+        public abstract ILayer Clone(ICanvasResourceCreator resourceCreator);
 
 
         //@Static
         /// <summary>
         /// Copy a layer with self.
         /// </summary>
-        /// <param name="layerCollection"> The layer-collection. </param>
         /// <param name="resourceCreator"> The resource-creator. </param>
         /// <param name="source"> The source ILayer. </param>
         /// <param name="destination"> The destination ILayer. </param>
-        public static void CopyWith(LayerCollection layerCollection, ICanvasResourceCreator resourceCreator, ILayer destination, ILayer source)
+        public static void CopyWith(ICanvasResourceCreator resourceCreator, ILayer destination, ILayer source)
         {
             destination.Name = source.Name;
             destination.Opacity = source.Opacity;
@@ -66,7 +65,7 @@ namespace Retouch_Photo2.Layers
             }
             foreach (ILayer layer in source.Children)
             {
-                ILayer clone = layer.Clone(layerCollection, resourceCreator);
+                ILayer clone = layer.Clone(resourceCreator);
                 destination.Children.Add(clone);
             }
         }

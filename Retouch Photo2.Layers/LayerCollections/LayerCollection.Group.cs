@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Layers.Models;
+﻿using FanKit.Transformers;
+using Retouch_Photo2.Layers.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -33,6 +34,9 @@ namespace Retouch_Photo2.Layers
                 IList<ILayer> tempGrouplayers = this._createTempGrouplayers();
                 if (tempGrouplayers.Count == 0) return;
                 this._addLayersToGroupLayer(groupLayer, tempGrouplayers);
+
+                Transformer transformer = LayerCollection.GetLayersTransformer(tempGrouplayers);
+                groupLayer.TransformManager = new TransformManager(transformer);
             }
 
             //Arrange
@@ -49,7 +53,7 @@ namespace Retouch_Photo2.Layers
         {
             ILayer insertParents = insertIayer.Parents;
 
-            ILayer groupLayer = new GroupLayer(this)
+            ILayer groupLayer = new GroupLayer
             {
                 Parents = insertParents,
             };  

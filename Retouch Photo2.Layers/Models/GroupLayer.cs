@@ -11,14 +11,43 @@ namespace Retouch_Photo2.Layers.Models
     public class GroupLayer : LayerBase
     {
         //@Construct
-        public GroupLayer(LayerCollection layerCollection) : base(layerCollection)
+        public GroupLayer() 
         {
             base.Control.Icon = new GroupIcon();
+            base.Control.Text = "Group";
         }
 
         //@Override
         public override string Type => "Group";
         
+        public override void CacheTransform()
+        {
+            base.CacheTransform();
+
+            foreach (ILayer child in this.Children)
+            {
+                child.TransformManager.CacheTransform();
+            }
+        }
+        public override void TransformMultiplies(Matrix3x2 matrix)
+        {
+            base.TransformMultiplies(matrix);
+
+            foreach (ILayer child in this.Children)
+            {
+                child.TransformManager.TransformMultiplies(matrix);
+            }
+        }
+        public override void TransformAdd(Vector2 vector)
+        {
+            base.TransformAdd(vector);
+
+            foreach (ILayer child in this.Children)
+            {
+                child.TransformManager.TransformAdd(vector);
+            }
+        }
+
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         { 
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
@@ -36,13 +65,13 @@ namespace Retouch_Photo2.Layers.Models
             }
             return command;
         }
-
-        public override ILayer Clone(LayerCollection layerCollection, ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GroupLayer groupLayer = new GroupLayer(layerCollection);
+            GroupLayer groupLayer = new GroupLayer();
 
-            LayerBase.CopyWith(layerCollection, resourceCreator, groupLayer, this);
+            LayerBase.CopyWith(resourceCreator, groupLayer, this);
             return groupLayer;
         }
+
     }
 }

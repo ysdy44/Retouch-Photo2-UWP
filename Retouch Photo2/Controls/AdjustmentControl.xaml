@@ -20,7 +20,9 @@
             <ListView x:Name="AdjustmentPageListView" Width="190" MaxHeight="400" SelectionMode="None" IsItemClickEnabled="True">
                
                 <ListView.Header>
-                    <TextBlock Text="Select a adjustment:" Style="{StaticResource AppTextBlock}"/>
+                    <TextBlock Style="{StaticResource AppTextBlock}">
+                        Select a adjustment
+                    </TextBlock>
                 </ListView.Header>
                 
                 <ListView.ItemTemplate>
@@ -90,6 +92,7 @@
                 <VisualState x:Name="ZeroAdjustments">
                     <VisualState.Setters >
 
+                        
                         <Setter Target = "TextBlock.Visibility" Value="Visible"/>
                         
                     </VisualState.Setters>
@@ -147,11 +150,17 @@
         </Grid.RowDefinitions>
 
         <!--Head-->
-        <menus:MenuTitle x:Name="_MenuTitle" Text="Adjustment" />
+        <menus:MenuTitle x:Name="_MenuTitle">
+            <menus:MenuTitle.Text>
+                Adjustment
+            </menus:MenuTitle.Text>
+        </menus:MenuTitle>
 
         <!--Body-->
         <ItemsControl x:Name="ItemsControl" Visibility="Collapsed" Grid.Row="1" VerticalAlignment="Top" ItemTemplate="{StaticResource DataTemplate}"/>
-        <TextBlock x:Name="TextBlock" Visibility="Collapsed" Grid.Row="1" Text="No Adjustment" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlock}"/>
+        <TextBlock x:Name="TextBlock" Visibility="Collapsed" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlock}">
+            No Adjustment
+        </TextBlock>
         <Border x:Name="AdjustmentPageBorder" Visibility="Collapsed" Grid.Row="1" Background="Transparent">
 
             <!--Visibility:Show-->

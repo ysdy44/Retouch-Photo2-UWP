@@ -69,8 +69,19 @@
                         </ObjectAnimationUsingKeyFrames>
                         <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                     </Storyboard>
-                </VisualState> 
+                </VisualState>
 
+                <VisualState x:Name="Disable">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBackgroundDisabled}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushDisabled}" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 

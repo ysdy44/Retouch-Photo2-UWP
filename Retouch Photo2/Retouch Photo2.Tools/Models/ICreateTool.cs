@@ -22,17 +22,14 @@ namespace Retouch_Photo2.Tools.Models
         ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
         bool IsCenter => this.KeyboardViewModel.IsCenter;
         bool IsSquare => this.KeyboardViewModel.IsSquare;
-
-        ILayer MezzanineLayer;
-
+        
         //@Abstract
         /// <summary>
         /// Create a specific layer.
         /// </summary>
-        /// <param name="layerCollection"> The layer-collection. </param>
         /// <param name="transformer"> The source transformer. </param>
         /// <returns> The created layer. </returns>
-        public abstract ILayer CreateLayer(LayerCollection layerCollection, Transformer transformer);
+        public abstract ILayer CreateLayer( Transformer transformer);
 
         public abstract bool IsSelected { set; }
         public abstract ToolType Type { get; }
@@ -44,7 +41,7 @@ namespace Retouch_Photo2.Tools.Models
         public void Started(Vector2 startingPoint, Vector2 point)
         {
             if (this.TransformerTool.Started(startingPoint, point, isSetTransformerMode: true)) return;//TransformerTool
-
+            
             //Transformer
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Transformer transformer = new Transformer
@@ -56,8 +53,8 @@ namespace Retouch_Photo2.Tools.Models
             );
 
             //Mezzanine
-            this.MezzanineLayer = this.CreateLayer(this.ViewModel.Layers, transformer);
-            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.MezzanineLayer);
+            this.ViewModel.MezzanineLayer = this.CreateLayer(transformer);
+            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.ViewModel.MezzanineLayer);
 
             this.SelectionViewModel.Transformer = transformer;//Selection
 
@@ -78,8 +75,8 @@ namespace Retouch_Photo2.Tools.Models
             );
 
             //Mezzanine
-            this.MezzanineLayer.TransformManager.Source = transformer;
-            this.MezzanineLayer.TransformManager.Destination = transformer;
+            this.ViewModel.MezzanineLayer.TransformManager.Source = transformer;
+            this.ViewModel.MezzanineLayer.TransformManager.Destination = transformer;
 
             this.SelectionViewModel.Transformer = transformer;//Selection
 
@@ -102,14 +99,21 @@ namespace Retouch_Photo2.Tools.Models
                 );
 
                 //Mezzanine
-                this.MezzanineLayer.TransformManager.Source = transformer;
-                this.MezzanineLayer.TransformManager.Destination = transformer;
+                this.ViewModel.MezzanineLayer.TransformManager.Source = transformer;
+                this.ViewModel.MezzanineLayer.TransformManager.Destination = transformer;
+
+                foreach (ILayer child in this.ViewModel.Layers.RootLayers)
+                {
+                    child.SelectMode = SelectMode.UnSelected;
+                }
+                this.ViewModel.MezzanineLayer.SelectMode = SelectMode.Selected;
+                this.ViewModel.MezzanineLayer = null;
 
                 this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
             }
-            else this.ViewModel.Layers.RemoveMezzanineLayer(this.MezzanineLayer);//Mezzanine
+            else this.ViewModel.Layers.RemoveMezzanineLayer(this.ViewModel.MezzanineLayer);//Mezzanine
 
-            this.SelectionViewModel.SetMode(this.ViewModel.Layers.RootLayers);//Selection
+            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }

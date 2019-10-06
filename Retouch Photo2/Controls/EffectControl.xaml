@@ -45,14 +45,17 @@
         </Grid.RowDefinitions>
 
         <!--Head-->
-        <menus:MenuTitle x:Name="_MenuTitle" Text="Effect" ResetButtonVisibility="Visible"/>
+        <menus:MenuTitle x:Name="_MenuTitle" ResetButtonVisibility="Visible">
+            <menus:MenuTitle.Text>
+                Effect
+            </menus:MenuTitle.Text>
+        </menus:MenuTitle>
 
         <!--Body-->
         <StackPanel x:Name="StackPanel" Grid.Row="1">
 
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>
-                <animations:TranslationAnimation Duration="0:0:0.4" From="-25,0,0" To="0,0,0"/>
                 <animations:OpacityAnimation Duration="0:0:0.5" From="0.0" To="1.0"/>
             </animations:Implicit.ShowAnimations>
 

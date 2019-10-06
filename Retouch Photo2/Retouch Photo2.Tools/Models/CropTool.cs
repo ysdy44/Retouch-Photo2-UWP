@@ -174,7 +174,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             // The transformer may change after the layer is cropped.
             // So, reset the transformer.
-            this.SelectionViewModel.SetMode(this.ViewModel.Layers.RootLayers);//Selection
+            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
         }
     }
 }
