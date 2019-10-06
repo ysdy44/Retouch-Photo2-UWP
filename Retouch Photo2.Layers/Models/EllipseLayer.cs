@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Layers.Models
         
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
-            Transformer transformer = base.ActualDestinationAboutGroupLayer;
+            Transformer transformer = base.GetActualDestinationWithRefactoringTransformer;
             return transformer.ToEllipse(resourceCreator, canvasToVirtualMatrix);
         }
 

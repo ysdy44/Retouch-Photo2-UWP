@@ -30,8 +30,11 @@ namespace Retouch_Photo2.Layers
         /// <summary> Gets or sets ILayer's visibility. </summary>
         Visibility Visibility { get; set; }
 
-        /// <summary> Gets ILayer's actual transformer. </summary>
-        Transformer ActualDestinationAboutGroupLayer { get; }
+        /// <summary> Gets or sets ILayer is need to refactoring transformer. </summary>
+        bool IsRefactoringTransformer { get; set; }
+        /// <summary> Gets ILayer's actually transformer. </summary>
+        Transformer GetActualDestinationWithRefactoringTransformer { get; }
+
         /// <summary> Gets or sets ILayer's transformer. </summary>
         TransformManager TransformManager { get; set; }
         /// <summary> Gets or sets ILayer's effect manager. </summary>

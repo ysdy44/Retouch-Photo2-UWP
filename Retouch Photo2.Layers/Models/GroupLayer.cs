@@ -11,7 +11,6 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GroupLayer : LayerBase
     {
-        public bool IsChildrenChanged=false;
 
         //@Construct
         public GroupLayer() 
@@ -23,20 +22,23 @@ namespace Retouch_Photo2.Layers.Models
         //@Override
         public override string Type => "Group";
 
-        public override Transformer ActualDestinationAboutGroupLayer
+        public override Transformer GetActualDestinationWithRefactoringTransformer
         {
             get
             {
-                if (this.IsChildrenChanged)
+                if (this.IsRefactoringTransformer)
                 {
-                    this.TransformManager.Destination = LayerCollection.GetLayersTransformer(base.Children);
+                    Transformer transformer = LayerCollection.RefactoringTransformer(this.Children);
+                    this.TransformManager.Source = transformer;
+                    this.TransformManager.Destination = transformer;
+
+                    this.IsRefactoringTransformer = false;
                 }
 
-                return base.ActualDestinationAboutGroupLayer;
+                return base.GetActualDestinationWithRefactoringTransformer;
             }
         }
-
-
+        
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         { 
             CanvasCommandList command = new CanvasCommandList(resourceCreator);

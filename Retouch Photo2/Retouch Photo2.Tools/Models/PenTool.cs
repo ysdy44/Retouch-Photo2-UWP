@@ -216,7 +216,7 @@ namespace Retouch_Photo2.Tools.Models
                     }
                 }
 
-                this.CurveLayer.CorrectionTransformer();
+                this.CurveLayer.IsRefactoringTransformer = true;//RefactoringTransformer
                 this.Mode = NodeCollectionMode.None;
             }
             
@@ -251,7 +251,7 @@ namespace Retouch_Photo2.Tools.Models
                     {
                         CanvasGeometry canvasGeometry = this._transformerRect.ToRectangle(this.ViewModel.CanvasDevice);
                         CanvasGeometry canvasGeometryTransform = canvasGeometry.Transform(matrix);
-                        drawingSession.DrawThickGeometry(canvasGeometryTransform);
+                        drawingSession.DrawGeometryDodgerBlue(canvasGeometryTransform);
                     }
                     break;
             }
@@ -266,7 +266,7 @@ namespace Retouch_Photo2.Tools.Models
             if (this.CurveLayer == null) return;
 
             //The PenTool may change the current CurveLayer's transformer.
-            Transformer transformer = this.CurveLayer.ActualDestinationAboutGroupLayer;
+            Transformer transformer = this.CurveLayer.GetActualDestinationWithRefactoringTransformer;
             this.SelectionViewModel.Transformer = transformer;
         }
     }

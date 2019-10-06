@@ -23,7 +23,9 @@ namespace Retouch_Photo2.Layers
         public BlendType BlendType { get; set; } = BlendType.None;
         public Visibility Visibility { get; set; }
 
-        public virtual Transformer ActualDestinationAboutGroupLayer => this.TransformManager.IsCrop ? this.TransformManager.CropDestination : this.TransformManager.Destination;
+        public bool IsRefactoringTransformer { get; set; }
+        public virtual Transformer GetActualDestinationWithRefactoringTransformer => this.TransformManager.IsCrop ? this.TransformManager.CropDestination : this.TransformManager.Destination;
+
         public TransformManager TransformManager { get; set; } = new TransformManager();
         public EffectManager EffectManager { get; set; } = new EffectManager();
         public AdjustmentManager AdjustmentManager { get; set; } = new AdjustmentManager();
@@ -37,12 +39,12 @@ namespace Retouch_Photo2.Layers
         //@Virtual
         public virtual void CacheTransform()
         {
-            //AboutGroupLayer 
-            if (this.parents!=null)
+            //RefactoringTransformer
+            if (this.parents != null)
             {
-                if (this.parents is GroupLayer  groupLayer)
+                if (this.parents is GroupLayer groupLayer)
                 {
-                    groupLayer.IsChildrenChanged = true;
+                    groupLayer.IsRefactoringTransformer = true;
                 }
             }
 

@@ -93,7 +93,7 @@ namespace Retouch_Photo2.ViewModels
         }
         private void _setModeSingle(ILayer layer)
         {
-            this.Transformer = layer.ActualDestinationAboutGroupLayer;
+            this.Transformer = layer.GetActualDestinationWithRefactoringTransformer;
             this.DsabledRadian = layer.TransformManager.DisabledRadian;//DisabledRadian
             
             this.Layer = layer;
@@ -148,7 +148,7 @@ namespace Retouch_Photo2.ViewModels
         }
         private void _setModeMultiple(IList<ILayer> layers)
         {
-            Transformer transformer = LayerCollection.GetLayersTransformer(layers);
+            Transformer transformer = LayerCollection.RefactoringTransformer(layers);
             this._setModeMultipleWithTransformer(layers, transformer, false);
         }
 

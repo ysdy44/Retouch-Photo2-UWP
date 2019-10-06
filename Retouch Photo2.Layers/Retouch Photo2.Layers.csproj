@@ -128,7 +128,7 @@
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
     <Compile Include="LayerCollections\LayerCollection.Mezzanine.cs" />
-    <Compile Include="LayerCollections\LayerCollection.Transformer.cs" />
+    <Compile Include="LayerCollections\LayerCollection.RefactoringTransformer.cs" />
     <Compile Include="Layers\ILayer.cs" />
     <Compile Include="LayerCollections\LayerCollection.Arrange_Parents_Controls.cs" />
     <Compile Include="LayerCollections\LayerCollection.ControlHeight.cs" />

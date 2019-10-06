@@ -35,7 +35,7 @@ namespace Retouch_Photo2.Layers
                 if (tempGrouplayers.Count == 0) return;
                 this._addLayersToGroupLayer(groupLayer, tempGrouplayers);
 
-                Transformer transformer = LayerCollection.GetLayersTransformer(tempGrouplayers);
+                Transformer transformer = LayerCollection.RefactoringTransformer(tempGrouplayers);
                 groupLayer.TransformManager = new TransformManager(transformer);
             }
 

@@ -66,6 +66,23 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
+        public override Transformer GetActualDestinationWithRefactoringTransformer
+        {
+            get
+            {
+                if (this.IsRefactoringTransformer)
+                {
+                    Transformer transformer = LayerCollection.RefactoringTransformer(this.NodeCollection);
+                    this.TransformManager.Source = transformer;
+                    this.TransformManager.Destination = transformer;
+
+                    this.IsRefactoringTransformer = false;
+                }
+
+                return base.GetActualDestinationWithRefactoringTransformer;
+            }
+        }
+
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
             return this.NodeCollection.CreateGeometry(resourceCreator).Transform(canvasToVirtualMatrix);
@@ -84,32 +101,5 @@ namespace Retouch_Photo2.Layers.Models
             return curveLayer;
         }
 
-
-        //@Static
-        /// <summary>
-        /// Correct transformer based on nodes.
-        /// </summary>
-        public void CorrectionTransformer()
-        {
-            float left = float.MaxValue;
-            float top = float.MaxValue;
-            float right = float.MinValue;
-            float bottom = float.MinValue;
-
-            foreach (Node node in this.NodeCollection)
-            {
-                Vector2 vector = node.Point;
-
-                if (left > vector.X) left = vector.X;
-                if (top > vector.Y) top = vector.Y;
-                if (right < vector.X) right = vector.X;
-                if (bottom < vector.Y) bottom = vector.Y;
-            }
-            
-            Transformer transformer = new Transformer(left, top, right, bottom);
-
-            base.TransformManager.Source = transformer;
-            base.TransformManager.Destination = transformer;
-        }
     }
 }
