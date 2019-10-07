@@ -101,7 +101,7 @@ namespace Retouch_Photo2
                 {
                     Fill = new SolidColorBrush(Windows.UI.Colors.Gray),
                     Height = 1,
-                    Opacity = 0.4,
+                    Opacity = 0.2,
                     Margin = new Thickness(4, 0, 4, 0),
                 };
                 this.TooLeft.Add(rectangle);

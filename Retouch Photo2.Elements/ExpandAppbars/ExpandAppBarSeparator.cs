@@ -37,7 +37,7 @@ namespace Retouch_Photo2.Elements
         Rectangle _rectangle = new Rectangle
         {
             Width = 1,
-            Opacity = 0.6,
+            Opacity = 0.4,
             Height = 26,
             Fill = new SolidColorBrush(Colors.Gray),
             HorizontalAlignment = HorizontalAlignment.Center,

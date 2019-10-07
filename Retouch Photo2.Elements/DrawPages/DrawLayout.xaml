@@ -287,8 +287,8 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="70"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*" MinWidth="50"/>
+                <ColumnDefinition Width="10*" MaxWidth="420"/>
             </Grid.ColumnDefinitions>
 
             <!--Back-->
@@ -300,15 +300,15 @@
             <Border x:Name="HeadLeftBorder" Grid.Column="1" HorizontalAlignment="Stretch"/>
 
             <!--HeadRight-->
-            <ScrollViewer Grid.Column="2" MinWidth="0"
+                <ScrollViewer Grid.Column="2" HorizontalAlignment="Right"
                       IsHorizontalRailEnabled="True" IsVerticalRailEnabled="False"
                       HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" 
                       VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled"
                       >
-                <StackPanel x:Name="HeadRightStackPane" Orientation="Horizontal">
-                    <!--HeadRight-->
-                </StackPanel>
-            </ScrollViewer>
+                    <StackPanel x:Name="HeadRightStackPane" Orientation="Horizontal">
+                        <!--HeadRight-->
+                    </StackPanel>
+                </ScrollViewer>
 
         </Grid>
      

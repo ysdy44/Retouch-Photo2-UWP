@@ -81,7 +81,7 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="StackPanel" Storyboard.TargetProperty="HorizontalAlignment">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Left" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Visibility">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlockBorder" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Foreground">
@@ -107,7 +107,7 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="StackPanel" Storyboard.TargetProperty="HorizontalAlignment">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Left" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Visibility">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlockBorder" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Foreground">
@@ -133,8 +133,10 @@
             <Border x:Name="AccentBorder" Grid.ColumnSpan="2" Opacity="0.0" BorderThickness="0" BorderBrush="Transparent" Background="{ThemeResource AccentColor}" Style="{StaticResource AppCircleBorderStyle}"/>
 
             <StackPanel x:Name="StackPanel" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Border x:Name="TextBlockBorder" Padding="4,0" Visibility="Collapsed" Width="120">
+                    <TextBlock x:Name="TextBlock" Style="{StaticResource AppTextBlock}"/>
+                </Border>
                 <ContentPresenter x:Name="ContentPresenter" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{StaticResource UnCheckColor}"/>
-                <TextBlock x:Name="TextBlock" Visibility="Collapsed" Style="{StaticResource AppTextBlock}"/>
             </StackPanel>
             
         </Grid>

@@ -13,21 +13,54 @@
         <!--Flyout-->
         <Flyout x:Name="AddImageFlyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <StackPanel>
-                <Button x:Name="_PhotoButton" Height="50" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch">
-                    <TextBlock Foreground="{ThemeResource AppText}">
-                        New Image From Pictures
-                    </TextBlock>
+                
+                <TextBlock Style="{StaticResource AppTextBlock}">
+                    Add new ImageLayer
+                </TextBlock>
+                
+                <Rectangle Height="1" Fill="{StaticResource AppBorderBrush}"/>
+
+                <Button x:Name="_PhotoButton" Height="40" Padding="0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Padding="4,0" Width="120">
+                            <TextBlock Style="{StaticResource AppTextBlock}">
+                                From Pictures
+                            </TextBlock>
+                        </Border>
+                        <Border Width="40">
+                            <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
+                        </Border>                   
+                    </StackPanel>
                 </Button>
-                <Button x:Name="_DestopButton" Height="50" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch">
-                    <TextBlock Foreground="{ThemeResource AppText}">
-                        New Image From Destop
-                    </TextBlock>
+                
+                <Button x:Name="_DestopButton" Height="40" Padding="0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Padding="4,0" Width="120">
+                            <TextBlock Style="{StaticResource AppTextBlock}">
+                            From Destop
+                            </TextBlock>
+                        </Border>
+                        <Border Width="40">
+                            <FontIcon Glyph="&#xEC4E;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
+                        </Border>
+                    </StackPanel>
                 </Button>
-                <Button x:Name="_PadButton" Height="50" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch">
-                    <TextBlock Foreground="{ThemeResource AppText}">
-                        Width
-                    </TextBlock>
+                
+                <Rectangle Height="1" Fill="{StaticResource AppBorderBrush}"/>
+
+                <Button x:Name="_PadButton" Height="40" Padding="0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Padding="4,0" Width="120">
+                            <TextBlock Style="{StaticResource AppTextBlock}">
+                                Change Width
+                            </TextBlock>
+                        </Border>
+                        <Border Width="40">
+                            <FontIcon Glyph="&#xE746;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
+                        </Border>
+                    </StackPanel>
                 </Button>
+
             </StackPanel>
         </Flyout>
     </UserControl.Resources>
