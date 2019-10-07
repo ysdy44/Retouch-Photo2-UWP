@@ -8,24 +8,27 @@ namespace Retouch_Photo2.Elements
     public class ApplicationViewTitleBarBackgroundExtension : DependencyObject
     {
         private static readonly ApplicationViewTitleBar TitleBar = ApplicationView.GetForCurrentView().TitleBar;
+        public static System.Action<string> ssss;
 
         #region DependencyProperty
 
         /// <summary> Color of <see cref="ApplicationViewTitleBar"/>. </summary>
-        public SolidColorBrush TitleBarColor
+        public Color TitleBarColor
         {
-            get { return (SolidColorBrush)GetValue(TitleBarColorProperty); }
-            set { SetValue(TitleBarColorProperty, value); }
-        }
+            get { return (Color)GetValue(TitleBarColorProperty); }
+            set
+            {
+                ssss?.Invoke(value.ToString()); //Delegate
+                SetValue(TitleBarColorProperty, value); }
+            }
         /// <summary> Identifies the <see cref = "ApplicationViewTitleBarBackgroundExtension.TitleBarColor" /> dependency property. </summary>
-        public static readonly DependencyProperty TitleBarColorProperty = DependencyProperty.Register(nameof(TitleBarColor), typeof(SolidColorBrush), typeof(ApplicationViewTitleBarBackgroundExtension), new PropertyMetadata(new SolidColorBrush(Colors.Gray), (sender, e) =>
+        public static readonly DependencyProperty TitleBarColorProperty = DependencyProperty.Register(nameof(TitleBarColor), typeof(Color), typeof(ApplicationViewTitleBarBackgroundExtension), new PropertyMetadata(Colors.Gray, (sender, e) =>
         {
             ApplicationViewTitleBarBackgroundExtension con = (ApplicationViewTitleBarBackgroundExtension)sender;
 
-            if (e.NewValue is SolidColorBrush value)
+            if (e.NewValue is Color value)
             {
-                Color color = value.Color;
-
+                Color color = value;
                 ApplicationViewTitleBarBackgroundExtension.TitleBar.BackgroundColor = color;
                 ApplicationViewTitleBarBackgroundExtension.TitleBar.InactiveBackgroundColor = color;
                 ApplicationViewTitleBarBackgroundExtension.TitleBar.ButtonBackgroundColor = color;

@@ -18,32 +18,37 @@
    mc:Ignorable="d"
 
    Background="{ThemeResource AppBackground}"
+   NavigationCacheMode="Enabled"    
    >
 
 
     <Page.Resources>
-
         <!--Extensions-->
-        <elements:ApplicationViewTitleBarBackgroundExtension x:Key="AVTBBE" TitleBarColor="{ThemeResource AppForeground}"/>
-     
-        <!--DataTemplate-->
-        <DataTemplate x:Name="DataTemplate" x:DataType="viewModels:Photo">
-            <Grid >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="2"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="10"/>
-                </Grid.RowDefinitions>
+        <elements:ApplicationViewTitleBarBackgroundExtension x:Key="AVTBBE" TitleBarColor="{ThemeResource AppForegroundColor}"/>
+    </Page.Resources>
 
-                <controls:DropShadowPanel 
+
+    <Grid>
+
+        <Grid.Resources>
+            <!--DataTemplate-->
+            <DataTemplate x:Name="DataTemplate" x:DataType="viewModels:Photo">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+
+                    <controls:DropShadowPanel 
                     HorizontalAlignment="Center"
                     BlurRadius="20" 
                     OffsetX="8" 
                     OffsetY="8" 
                     ShadowOpacity="0.8" 
                     Color="{ThemeResource AppStrokeColor}">
-                    <Grid MaxWidth="200" Margin="6"                      
+                        <Grid MaxWidth="200" Margin="6"                      
                           BorderThickness="1"                     
                           apiContractNotPresent5:BorderBrush="{ThemeResource SystemControlBackgroundBaseLowBrush}"                     
                           apiContractPresent5:BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"                          
@@ -55,25 +60,22 @@
                           PointerReleased="{x:Bind Exited}"            
                           PointerCanceled="{x:Bind Exited}"            
                           PointerCaptureLost="{x:Bind Exited}">
-                      
-                        <!--Image-->
-                        <controls:ImageEx Source="{x:Bind Uri,Mode=OneWay}" MinWidth="60" MinHeight="60" IsCacheEnabled="True" />
-                      
-                        <!--Draken-->
-                        <Rectangle Opacity="0.4" Fill="{ThemeResource AppStroke}" Visibility="{x:Bind DarkenVisibility,Mode=OneWay}"/>
-                 
-                    </Grid>
-                </controls:DropShadowPanel>
 
-                <TextBlock Grid.Row="2" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Text="{x:Bind Name,Mode=OneWay}" Foreground="{ThemeResource AppBarSeparatorForegroundThemeBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <!--Image-->
+                            <controls:ImageEx Source="{x:Bind Uri,Mode=OneWay}" MinWidth="60" MinHeight="60" IsCacheEnabled="True" />
 
-            </Grid>
-        </DataTemplate>
+                            <!--Draken-->
+                            <Rectangle Opacity="0.4" Fill="{ThemeResource AppStroke}" Visibility="{x:Bind DarkenVisibility,Mode=OneWay}"/>
 
-    </Page.Resources>
+                        </Grid>
+                    </controls:DropShadowPanel>
 
+                    <TextBlock Grid.Row="2" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Text="{x:Bind Name,Mode=OneWay}" Foreground="{ThemeResource AppBarSeparatorForegroundThemeBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-    <Grid>
+                </Grid>
+            </DataTemplate>
+        </Grid.Resources>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>

@@ -19,7 +19,6 @@ namespace Retouch_Photo2
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
-
         //Layout
         PhoneLayout PhoneLayout = new PhoneLayout();
         PadLayout PadLayout = new PadLayout();
