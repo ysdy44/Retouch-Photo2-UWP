@@ -78,7 +78,7 @@ namespace Retouch_Photo2.Tools.Pages
             this.ViewModel.Invalidate();//Invalidate
         }
 
-        private void ToBrushTypeLinearGradient()
+        private void ToBrushTypeLinearGradient(bool isResetBrushArray)
         {
             Transformer transformer = this.SelectionViewModel.Transformer;
             Vector2 startPoint = transformer.CenterTop;
@@ -89,12 +89,12 @@ namespace Retouch_Photo2.Tools.Pages
                 LinearGradientStartPoint = startPoint,
                 LinearGradientEndPoint = endPoint,
             };
-            this.Gradient(GradientBrushType.Linear, brushPoints);
+            this.Gradient(GradientBrushType.Linear, brushPoints, isResetBrushArray: isResetBrushArray);
 
             this.ViewModel.Invalidate();//Invalidate
         }
 
-        private void ToBrushTypeRadialGradient()
+        private void ToBrushTypeRadialGradient(bool isResetBrushArray)
         {
             Transformer transformer = this.SelectionViewModel.Transformer;
             Vector2 center = transformer.Center;
@@ -105,12 +105,12 @@ namespace Retouch_Photo2.Tools.Pages
                 RadialGradientCenter = center,
                 RadialGradientPoint = point,
             };
-            this.Gradient(GradientBrushType.Radial, brushPoints);
+            this.Gradient(GradientBrushType.Radial, brushPoints, isResetBrushArray: isResetBrushArray);
 
             this.ViewModel.Invalidate();//Invalidate
         }
 
-        private void ToBrushTypeEllipticalGradient()
+        private void ToBrushTypeEllipticalGradient(bool isResetBrushArray)
         {
             Transformer transformer = this.SelectionViewModel.Transformer;
             Vector2 center = transformer.Center;
@@ -123,7 +123,7 @@ namespace Retouch_Photo2.Tools.Pages
                 EllipticalGradientXPoint = xPoint,
                 EllipticalGradientYPoint = yPoint,
             };
-            this.Gradient(GradientBrushType.Elliptical, brushPoints);
+            this.Gradient(GradientBrushType.Elliptical, brushPoints, isResetBrushArray: isResetBrushArray);
 
             this.ViewModel.Invalidate();//Invalidate
         }

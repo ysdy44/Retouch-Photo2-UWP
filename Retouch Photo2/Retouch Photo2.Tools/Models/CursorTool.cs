@@ -7,6 +7,7 @@ using Retouch_Photo2.Tools.Buttons;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
+using System.Collections.Generic;
 using System.Numerics;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -97,7 +98,14 @@ namespace Retouch_Photo2.Tools.Models
 
                 if (isSingleStarted)
                 {
-                    this.BoxChoose();//Box
+                    //Select a layer of the same depth
+                    bool isChildSingle = (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single
+                        && this.SelectionViewModel.Layer.Parents != null);
+                    IList<ILayer> parentsChildren = isChildSingle ?
+                        this.SelectionViewModel.Layer.Parents.Children :
+                        this.ViewModel.Layers.RootLayers;
+
+                    this.BoxChoose(parentsChildren);//Box 
 
                     this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
                     this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
@@ -126,13 +134,12 @@ namespace Retouch_Photo2.Tools.Models
         public void OnNavigatedFrom() { }
 
 
-        private void BoxChoose()
+        private void BoxChoose(IList<ILayer> layers)
         {
-            foreach (ILayer layer in this.ViewModel.Layers.RootLayers)
+            foreach (ILayer layer in layers)
             {
                 Transformer transformer = layer.GetActualDestinationWithRefactoringTransformer;
                 bool contained = transformer.Contained(this._boxCanvasRect);
-                App.ViewModel.Text = contained.ToString();
 
                 switch (this.CompositeMode)
                 {

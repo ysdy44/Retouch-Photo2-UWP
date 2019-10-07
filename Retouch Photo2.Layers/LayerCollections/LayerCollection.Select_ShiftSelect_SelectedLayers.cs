@@ -17,15 +17,13 @@ namespace Retouch_Photo2.Layers
             {
                 foreach (ILayer child in layers)
                 {
-                    if (child.SelectMode.ToBool())
+                    if (child.SelectMode == SelectMode.Selected)
                     {
                         addLayers.Add(child);
                     }
-                    else
-                    {
-                        //Recursive
-                        addLayer(child.Children);
-                    }
+
+                    //Recursive
+                    addLayer(child.Children);
                 }
             }
 

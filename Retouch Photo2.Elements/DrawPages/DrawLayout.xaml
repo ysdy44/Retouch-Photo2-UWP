@@ -73,7 +73,6 @@
 
                         <!--Head-->
                         <Setter Target = "HeadGrid.Visibility" Value="Collapsed"/>
-                        <Setter Target = "HeadRightScrollViewer.Visibility" Value="Collapsed"/>
 
                         <!--Left-->
                         <Setter Target = "LeftBorder.Visibility" Value="Collapsed"/>
@@ -98,9 +97,6 @@
                 <VisualState x:Name="Phone">
                     <VisualState.Setters>
 
-                        <!--HeadRight-->
-                        <Setter Target = "HeadRightButtonBorder.Visibility" Value="Visible"/>
-
                         <!--Left-->
                         <Setter Target = "LeftBorder.Margin" Value="0,20"/>
                         <Setter Target = "LeftBorder.Visibility" Value="Collapsed"/>
@@ -119,14 +115,14 @@
                         <!--IconRight-->
                         <Setter Target = "IconRightGrid.Visibility" Value="Visible"/>
 
+                        <!--GridLenght-->
+                        <Setter Target = "RightGridLenght.Width" Value="70"/>
+
                     </VisualState.Setters>
                 </VisualState>
 
                 <VisualState x:Name="PhoneShowLeft">
                     <VisualState.Setters >
-
-                        <!--HeadRight-->
-                        <Setter Target = "HeadRightButtonBorder.Visibility" Value="Visible"/>
 
                         <!--DismissOverlay-->
                         <Setter Target = "IconDismissOverlay.Visibility" Value="Visible"/>
@@ -151,14 +147,14 @@
                         <Setter Target = "IconRightRectangle.Fill" Value="{StaticResource UnAccentColor}"/>
                         <Setter Target = "IconRightContentControl.Foreground" Value="{StaticResource UnCheckColor}"/>
 
+                        <!--GridLenght-->
+                        <Setter Target = "RightGridLenght.Width" Value="70"/>
+
                     </VisualState.Setters>
                 </VisualState>
 
                 <VisualState x:Name="PhoneShowRight">
                     <VisualState.Setters>
-
-                        <!--HeadRight-->
-                        <Setter Target = "HeadRightButtonBorder.Visibility" Value="Visible"/>
 
                         <!--DismissOverlay-->
                         <Setter Target = "IconDismissOverlay.Visibility" Value="Visible"/>
@@ -184,16 +180,16 @@
                         <Setter Target = "IconRightRectangle.Fill" Value="{StaticResource AccentColor}"/>
                         <Setter Target = "IconRightContentControl.Foreground" Value="{StaticResource CheckColor}"/>
 
+                        <!--GridLenght-->
+                        <Setter Target = "RightGridLenght.Width" Value="70"/>
+
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Pad-->
                 <VisualState x:Name="Pad">
-                    <VisualState.Setters >
-
-                        <!--HeadRight-->
-                        <Setter Target = "HeadRightExpandBorder.Visibility" Value="Visible"/>
-
+                    <VisualState.Setters>
+                        
                         <!--Left-->
                         <Setter Target = "LeftBorder.(Grid.Row)" Value="1"/>
                         <Setter Target = "LeftBorder.(Grid.RowSpan)" Value="2"/>
@@ -202,7 +198,7 @@
 
                         <!--Right-->
                         <Setter Target = "RightBorder.Width" Value="Auto"/>
-                        
+                        <Setter Target = "RightBorder.Margin" Value="0,20"/>
                         <Setter Target = "RightBorder.CornerRadius" Value="8,0,0,8"/>
                         <Setter Target = "RightBorder.BorderThickness" Value="1,1,0,1"/>
 
@@ -220,9 +216,6 @@
                 <!--PC-->
                 <VisualState x:Name="PC">
                     <VisualState.Setters >
-
-                        <!--HeadRight-->
-                        <Setter Target = "HeadRightExpandBorder.Visibility" Value="Visible"/>
 
                         <!--Head-->
                         <Setter Target = "HeadGrid.(Grid.ColumnSpan)" Value="2"/>
@@ -246,7 +239,6 @@
                         
                         <Setter Target = "RightBorder.(Grid.Row)" Value="0"/>
                         <Setter Target = "RightBorder.(Grid.RowSpan)" Value="3"/>
-                        <Setter Target = "RightBorder.VerticalAlignment" Value="Stretch"/>
                         <Setter Target = "RightBorder.BorderThickness" Value="1,0,0,0"/>
                         <Setter Target = "RightBorder.Background"
                         apiContractNotPresent5:Value="{ThemeResource AppForeground}"
@@ -262,7 +254,7 @@
                         <Setter Target = "RadiusAnimaPanel.Margin" Value="14"/>
 
                         <!--GridLenght-->
-                        <Setter Target = "RightGridLenght.Width" Value="190"/>
+                        <Setter Target = "RightGridLenght.Width" Value="220"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -288,40 +280,10 @@
         <!--CenterChildt-->
         <Border x:Name="CenterBorder" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="2"/>
 
-        <!--HeadRight-->
-        <ScrollViewer x:Name="HeadRightScrollViewer" Visibility="Collapsed" 
-                      Grid.Row="1" Grid.ColumnSpan="3" MinWidth="250" MinHeight="50"
-                      HorizontalAlignment="Center" VerticalAlignment="Top"
-                      HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" 
-                      VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled"
-                      BorderThickness="1,0,1,1" BorderBrush="{ThemeResource AppBorderBrush}"
-                      Background="{ThemeResource AppBackground}"
-                      >
-
-            <!--Visibility:Show-->
-            <animations:Implicit.ShowAnimations>
-                <animations:TranslationAnimation Duration="0:0:0.6" From="0,-100,0" To="0,0,0"/>
-            </animations:Implicit.ShowAnimations>
-
-            <!--Visibility:Hide-->
-            <animations:Implicit.HideAnimations>
-                <animations:TranslationAnimation Duration="0:0:0.6" From="0,0,0" To="0,-100,0"/>
-            </animations:Implicit.HideAnimations>
-            
-        </ScrollViewer>
+     
         <!--Head-->
         <Grid x:Name="HeadGrid" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppLinearBrush}"
-              Grid.ColumnSpan="3" Visibility="Visible">
-
-            <!--Visibility:Show-->
-            <animations:Implicit.ShowAnimations>
-                <animations:TranslationAnimation Duration="0:0:0.4" From="0,-50,0" To="0,0,0"/>
-            </animations:Implicit.ShowAnimations>
-
-            <!--Visibility:Hide-->
-            <animations:Implicit.HideAnimations>
-                <animations:TranslationAnimation Duration="0:0:0.4" From="0,0,0" To="0,-50,0"/>
-            </animations:Implicit.HideAnimations>
+              Grid.ColumnSpan="3">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="70"/>
@@ -334,27 +296,19 @@
                 <FontIcon Glyph="&#xE0D5;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
             </Button>
 
-            <!--Left-->
+            <!--HeadLeft-->
             <Border x:Name="HeadLeftBorder" Grid.Column="1" HorizontalAlignment="Stretch"/>
-        
-            <!--Right-->
-            <Border x:Name="HeadRightExpandBorder" Visibility="Collapsed" Grid.Column="2" HorizontalAlignment="Right"/>
-            <Border x:Name="HeadRightButtonBorder" Width="90" Margin="8,0" Visibility="Collapsed" Grid.Column="2" HorizontalAlignment="Right" Style="{StaticResource AppRoundedBorderStyle}">
 
-                <!--Visibility:Show-->
-                <animations:Implicit.ShowAnimations>
-                    <animations:OpacityAnimation Duration="0:0:0.2" From="0.0" To="1.0"/>
-                </animations:Implicit.ShowAnimations>
-
-                <!--Visibility:Hide-->
-                <animations:Implicit.HideAnimations>
-                    <animations:OpacityAnimation Duration="0:0:0.2" From="1.0" To="0.0"/>
-                </animations:Implicit.HideAnimations>
-                
-                <ToggleButton x:Name="HeadRightToggleButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <FontIcon Glyph="&#xE700;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                </ToggleButton>
-            </Border>
+            <!--HeadRight-->
+            <ScrollViewer Grid.Column="2" MinWidth="0"
+                      IsHorizontalRailEnabled="True" IsVerticalRailEnabled="False"
+                      HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" 
+                      VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled"
+                      >
+                <StackPanel x:Name="HeadRightStackPane" Orientation="Horizontal">
+                    <!--HeadRight-->
+                </StackPanel>
+            </ScrollViewer>
 
         </Grid>
      
@@ -469,7 +423,7 @@
         </Border>
         <!--Right-->
         <Border x:Name="RightBorder" Grid.Column="2" MinHeight="200" BorderBrush="{ThemeResource AppStroke}"
-               Width="190" Grid.Row ="1" Grid.RowSpan="2" CornerRadius="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1,1,0,1" Visibility="Visible" Background="{ThemeResource AppBackground}">
+               Width="220" Grid.Row ="1" Grid.RowSpan="2" CornerRadius="0" HorizontalAlignment="Stretch" BorderThickness="1,1,0,1" Visibility="Visible" Background="{ThemeResource AppBackground}">
 
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>

@@ -9,5 +9,8 @@ namespace Retouch_Photo2.Elements
 
         /// <summary> Gets it yourself. </summary>
         FrameworkElement Self { get; }
+
+        /// <summary> Sets is second page. </summary>
+        bool IsSecondPage { set; }
     }
 }

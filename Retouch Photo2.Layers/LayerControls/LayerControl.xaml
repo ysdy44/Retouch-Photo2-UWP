@@ -60,11 +60,17 @@
         </Button>
        
         <!--Line-->
-        <Border Grid.Column="2" Grid.ColumnSpan="3" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
+        <Rectangle IsHitTestVisible="False" Grid.Column="0" Fill="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
+        <Rectangle IsHitTestVisible="False" Grid.Column="1" Grid.ColumnSpan="4" Height="1" VerticalAlignment="Bottom" Fill="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
+        <Rectangle IsHitTestVisible="False" Grid.Column="1" Margin="0,2" Width="2" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+            <Rectangle.Fill>
+                <SolidColorBrush x:Name="TagColor" Color="Transparent"/>
+            </Rectangle.Fill>
+        </Rectangle>
 
         <!--Overlay-->
         <Border x:Name="OverlayShowTopBorder" Grid.Column="0" Grid.ColumnSpan="6" Height="14.3" VerticalAlignment="Top" Style="{StaticResource OverlayStyle}"/>
-        <Border x:Name="OverlayShowCenterBorder" Grid.Column="2" Grid.ColumnSpan="3" Height="21.4" VerticalAlignment="Center" Style="{StaticResource OverlayStyle}"/>
+        <Border x:Name="OverlayShowCenterBorder" Grid.Column="1" Grid.ColumnSpan="4" Height="21.4" VerticalAlignment="Center" Style="{StaticResource OverlayStyle}"/>
         <Border x:Name="OverlayShowBottomBorder" Grid.Column="0" Grid.ColumnSpan="6" Height="14.3" VerticalAlignment="Bottom" Style="{StaticResource OverlayStyle}"/>
 
     </Grid>

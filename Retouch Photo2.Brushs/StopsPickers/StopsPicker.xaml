@@ -62,7 +62,7 @@
 
 
         <!--Tittle-->
-        <Grid Grid.Row="2"  Padding="2,0">
+        <Grid Grid.Row="2" Padding="2,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20*" MinWidth="90" MaxWidth="160"/>
                 <ColumnDefinition Width="1*"/>

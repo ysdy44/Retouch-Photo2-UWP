@@ -6,28 +6,53 @@ namespace Retouch_Photo2.Elements
     public sealed partial class ExpandAppbarToggleButton : UserControl, IExpandAppbarElement
     {
         //@Content
+        /// <summary> TextBlock's Text </summary>
+        public string Text { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
         public object CenterContent { get => this.ContentPresenter.Content; set => this.ContentPresenter.Content = value; }
         public double ExpandWidth => 40.0d;
         public FrameworkElement Self => this;
+        public bool IsSecondPage
+        {
+            set
+            {
+                this._vsIsSecondPage = value;
+                this.VisualState = this.VisualState;//State
+            }
+        }
 
 
         //@VisualState
         bool _vsIsSelected;
         ClickMode _vsClickMode;
+        bool _vsIsSecondPage;
         public VisualState VisualState
         {
             get
             {
-                if (base.IsEnabled == false) return this.Disable;
-                if (this._vsIsSelected) return this.Selected;
-
-                switch (this._vsClickMode)
+                if (this._vsIsSecondPage == false)
                 {
-                    case ClickMode.Release: return this.Normal;
-                    case ClickMode.Hover: return this.PointerOver;
-                    case ClickMode.Press: return this.Pressed;
+                    if (this._vsIsSelected) return this.Selected;
+
+                    switch (this._vsClickMode)
+                    {
+                        case ClickMode.Release: return this.Normal;
+                        case ClickMode.Hover: return this.PointerOver;
+                        case ClickMode.Press: return this.Pressed;
+                    }
+                    return this.Normal;
                 }
-                return this.Normal;
+                else
+                {
+                    if (this._vsIsSelected) return this.SecondSelected;
+
+                    switch (this._vsClickMode)
+                    {
+                        case ClickMode.Release: return this.Second;
+                        case ClickMode.Hover: return this.SecondPointerOver;
+                        case ClickMode.Press: return this.SecondPressed;
+                    }
+                    return this.Second;
+                }
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
@@ -60,26 +85,29 @@ namespace Retouch_Photo2.Elements
         public ExpandAppbarToggleButton()
         {
             this.InitializeComponent();
-            base.Width = this.ExpandWidth;
-            this.IsEnabledChanged += (s, e) => this.VisualState = this.VisualState;//State
             this.Loaded += (s, e) =>
             {
                 this._vsIsSelected = this.IsChecked;
                 this.VisualState = this.VisualState;//State
             };
-            this.RootGrid.Tapped += (s, e) => this.IsChecked = !this.IsChecked;
+            this.Tapped += (s, e) => this.IsChecked = !this.IsChecked;
 
-            this.RootGrid.PointerEntered += (s, e) =>
+            this.PointerEntered += (s, e) =>
             {
                 this._vsClickMode = ClickMode.Hover;
                 this.VisualState = this.VisualState;//State
             };
-            this.RootGrid.PointerPressed += (s, e) =>
+            this.PointerPressed += (s, e) =>
             {
                 this._vsClickMode = ClickMode.Press;
                 this.VisualState = this.VisualState;//State
             };
-            this.RootGrid.PointerExited += (s, e) =>
+            this.PointerPressed += (s, e) =>
+            {
+                this._vsClickMode = ClickMode.Hover;
+                this.VisualState = this.VisualState;//State
+            };
+            this.PointerExited += (s, e) =>
             {
                 this._vsClickMode = ClickMode.Release;
                 this.VisualState = this.VisualState;//State

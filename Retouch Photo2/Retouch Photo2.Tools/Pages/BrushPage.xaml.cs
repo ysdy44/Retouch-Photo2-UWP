@@ -69,17 +69,17 @@ namespace Retouch_Photo2.Tools.Pages
                 this.ColorComboBoxItem.Tapped += (s, e) => this.ToBrushTypeColor();
                 this.LinearGradientComboBoxItem.Tapped += (s, e) =>
                 {
-                    this.ToBrushTypeLinearGradient();
+                    this.ToBrushTypeLinearGradient(isResetBrushArray: true);
                     this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Linear);//ComboBox
                 };
                 this.RadialGradientComboBoxItem.Tapped += (s, e) =>
                 {
-                    this.ToBrushTypeRadialGradient();
+                    this.ToBrushTypeRadialGradient(isResetBrushArray: true);
                     this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Radial);//ComboBox
                 };
                 this.EllipticalGradientComboBoxItem.Tapped += (s, e) =>
                 {
-                    this.ToBrushTypeEllipticalGradient();
+                    this.ToBrushTypeEllipticalGradient(isResetBrushArray: true);
                     this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Elliptical);//ComboBox
                 };
                 this.ImageComboBoxItem.Tapped += (s, e) => this.ToBrushTypeImage();
@@ -90,19 +90,19 @@ namespace Retouch_Photo2.Tools.Pages
             {
                 this.StopsPicker.LinearGradientItem.Tapped += (s, e) =>
                 {
-                    this.ToBrushTypeLinearGradient();
+                    this.ToBrushTypeLinearGradient(isResetBrushArray: false);
                     this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.LinearGradient);//ComboBox
                     this.EaseStoryboard.Begin();//Storyboard
                 };
                 this.StopsPicker.RadialGradientItem.Tapped += (s, e) =>
                 {
-                    this.ToBrushTypeRadialGradient();
+                    this.ToBrushTypeRadialGradient(isResetBrushArray: false);
                     this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.RadialGradient);//ComboBox
                     this.EaseStoryboard.Begin();//Storyboard
                 };
                 this.StopsPicker.EllipticalGradientItem.Tapped += (s, e) =>
                 {
-                    this.ToBrushTypeEllipticalGradient();
+                    this.ToBrushTypeEllipticalGradient(isResetBrushArray: false);
                     this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.EllipticalGradient);//ComboBox
                     this.EaseStoryboard.Begin();//Storyboard
                 };

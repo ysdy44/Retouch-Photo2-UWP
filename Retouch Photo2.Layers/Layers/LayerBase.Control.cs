@@ -17,6 +17,23 @@ namespace Retouch_Photo2.Layers
             this.Control = new LayerControl(this);
         }
 
+        #region TagType
+
+        private TagType tagType;
+        public TagType TagType
+        {
+            get => this.tagType;
+            set
+            {
+                this.Control.SetTagType(value);
+                this.tagType = value;
+            }
+        }
+
+
+        #endregion
+
+
         #region OverlayMode
 
 

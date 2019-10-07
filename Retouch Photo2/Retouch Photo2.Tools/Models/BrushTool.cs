@@ -65,7 +65,7 @@ namespace Retouch_Photo2.Tools.Models
                     LinearGradientEndPoint = endPoint,
                 };
                 this._startingBrushPoints = brushPoints;
-                this._brushPage.Gradient(GradientBrushType.Linear, brushPoints);
+                this._brushPage.Gradient(GradientBrushType.Linear, brushPoints, isResetBrushArray: true);
 
                 this.OperateMode = BrushOperateMode.LinearEndPoint;
             }

@@ -129,6 +129,11 @@
     </Compile>
     <Compile Include="LayerCollections\LayerCollection.Mezzanine.cs" />
     <Compile Include="LayerCollections\LayerCollection.RefactoringTransformer.cs" />
+    <Compile Include="LayerControls\LayerControl.xaml.Control.cs" />
+    <Compile Include="LayerControls\TagControl.xaml.cs">
+      <DependentUpon>TagControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LayerMode\TagType.cs" />
     <Compile Include="Layers\ILayer.cs" />
     <Compile Include="LayerCollections\LayerCollection.Arrange_Parents_Controls.cs" />
     <Compile Include="LayerCollections\LayerCollection.ControlHeight.cs" />
@@ -204,6 +209,10 @@
     <Page Include="LayerControls\LayerControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LayerControls\TagControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

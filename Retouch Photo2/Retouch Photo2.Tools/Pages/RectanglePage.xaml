@@ -22,7 +22,7 @@
                 </TextBlock>
                 <elements:OnOffSwitch OnContent="None" OffContent="Square" IsOn="{x:Bind KeyboardViewModel.IsSquare,Mode=TwoWay}"/>
 
-                <elements:ExpandAppBarSapce/>
+                <ContentControl Width="4"/>
 
                 <!--Center-->
                 <TextBlock Style="{StaticResource AppTextBlock}">
@@ -42,31 +42,29 @@
         </TextBlock>
         <toolsElements:FillColorEllipseButton/>
 
-        <elements:ExpandAppBarSapce/>
+        <ContentControl Width="4"/>
 
         <TextBlock Style="{StaticResource AppTextBlock}">
             StrokeColor
         </TextBlock>
         <toolsElements:StrokeColorEllipseButton/>
 
-        <elements:ExpandAppBarSapce/>
+        <ContentControl Width="4"/>
 
         <TextBlock Style="{StaticResource AppTextBlock}">
             StrokeWidth
         </TextBlock>
         <toolsElements:StrokeWidthButton/>
 
-        <elements:ExpandAppBarSapce/>
+        <ContentControl Width="4"/>
 
         <!--More-->
-        <elements:ExpandAppbarButton x:Name="MoreButton">
+        <Button x:Name="MoreButton" Style="{StaticResource AppCircleButtonStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip Content="More" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
-            <elements:ExpandAppbarButton.CenterContent>
-                <FontIcon Glyph="&#xE10C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-            </elements:ExpandAppbarButton.CenterContent>
-        </elements:ExpandAppbarButton>
-        
+            <FontIcon Glyph="&#xE10C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+        </Button>
+
     </StackPanel>
 </Page>

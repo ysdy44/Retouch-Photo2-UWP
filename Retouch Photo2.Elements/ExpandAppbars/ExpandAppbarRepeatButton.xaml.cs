@@ -8,20 +8,52 @@ namespace Retouch_Photo2.Elements
     public sealed partial class ExpandAppbarRepeatButton : UserControl, IExpandAppbarElement
     {
         //@Content
+        /// <summary> TextBlock's Text </summary>
+        public string Text { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
         public object CenterContent { get => this.ContentPresenter.Content; set => this.ContentPresenter.Content = value; }
         public double ExpandWidth => 40.0d;
         public FrameworkElement Self => this;
-
-
-        /// <summary> State of <see cref="ExpandAppbarButton"/>. </summary>
-        public bool State
+        public bool IsSecondPage
         {
             set
             {
-                if (value)
-                    VisualStateManager.GoToState(this, this.Selected.Name, false);
+                this._vsIsSecondPage = value;
+                this.VisualState = this.VisualState;//State
+            }
+        }
+
+
+        //@VisualState
+        bool _vsIsSelected;
+        bool _vsIsSecondPage;        
+        public VisualState VisualState
+        {
+            get
+            {
+                if (this._vsIsSelected)
+                {
+                    this.ShowStoryboard.Begin();//Storyboard
+
+                    if (this._vsIsSecondPage == false)
+                        return this.Selected;
+                    else
+                        return this.SecondSelected;
+                }
                 else
-                    VisualStateManager.GoToState(this, this.UnSelected.Name, false);
+                {
+                    this.HideStoryboard.Begin();//Storyboard
+
+                    if (this._vsIsSecondPage == false)
+                        return this.UnSelected;
+                    else
+                        return this.SecondUnSelected;
+                }
+            }
+            set
+            {
+                if (value == null) return;
+                
+                VisualStateManager.GoToState(this, value.Name, false);
             }
         }
 
@@ -41,7 +73,8 @@ namespace Retouch_Photo2.Elements
 
             if (e.NewValue is bool value)
             {
-                con.State = value;
+                con._vsIsSelected = value;
+                con.VisualState = con.VisualState;//State
             }
         }));
 
@@ -52,8 +85,7 @@ namespace Retouch_Photo2.Elements
         public ExpandAppbarRepeatButton()
         {
             this.InitializeComponent();
-            this.Width = this.ExpandWidth;
-            this.Loaded += (s, e) => this.State = this.IsChecked;
+            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
             this.PointerEntered += (s, e) =>
             {
                 if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)

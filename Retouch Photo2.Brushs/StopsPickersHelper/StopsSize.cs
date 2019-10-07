@@ -98,7 +98,7 @@ namespace Retouch_Photo2.Brushs
             //Right
             Vector2 right = new Vector2(this.Right, this.Center);
             if (manager.IsLeft) drawingSession.FillCircle(right, 10, Colors.Black);
-            drawingSession.DrawNode2(right, manager.LeftColor);
+            drawingSession.DrawNode2(right, manager.RightColor);
         }
     }
 }

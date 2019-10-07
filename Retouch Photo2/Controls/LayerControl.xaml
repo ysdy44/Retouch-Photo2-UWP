@@ -8,82 +8,15 @@
     xmlns:blends="using:Retouch_Photo2.Blends"
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:menus="using:Retouch_Photo2.Menus"
+    xmlns:layers="using:Retouch_Photo2.Layers"    
     mc:Ignorable="d"
     d:DesignHeight="400"
     d:DesignWidth="200"
     >
-        
-    <UserControl.Resources>
-        <Style x:Name="RadioButtonStyle" TargetType="RadioButton">
-            <Setter Property="BorderBrush" Value="DodgerBlue" />
-            <Setter Property="Background" Value="DodgerBlue" />
-            <Setter Property="Foreground" Value="{ThemeResource RadioButtonForeground}" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="VerticalAlignment" Value="Stretch" />
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="MinWidth" Value="30" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="RadioButton">
-                        <Grid x:Name="RootGrid" Background="Transparent">
 
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal" />
 
-                                    <VisualState x:Name="PointerOver">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="CheckOuterEllipse" Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
-                                        </Storyboard>
-                                    </VisualState>
-
-                                    <VisualState x:Name="Pressed">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="CheckOuterEllipse" Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
-                                        </Storyboard>
-                                    </VisualState>
-
-                                    <VisualState x:Name="Disabled">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterEllipse" Storyboard.TargetProperty="Stroke">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource RadioButtonOuterEllipseStrokeDisabled}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-
-                                <VisualStateGroup x:Name="CheckStates">
-                                    <VisualState x:Name="Checked">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="OuterEllipse" Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Unchecked" />
-                                    <VisualState x:Name="Indeterminate" />
-
-                                </VisualStateGroup>
-
-                            </VisualStateManager.VisualStateGroups>
-
-                            <Ellipse x:Name="OuterEllipse" Width="26" Height="26" Opacity="0" UseLayoutRounding="False"
-                                                 StrokeThickness="1" Stroke="{TemplateBinding Foreground}" />
-                            <Ellipse x:Name="CheckOuterEllipse" Width="26" Height="26" Opacity="0"
-                                                 UseLayoutRounding="False" StrokeThickness="1" Stroke="{TemplateBinding Foreground}" />
-                            <Ellipse x:Name="CheckGlyph" Width="16" Height="16" UseLayoutRounding="False" 
-                                                 StrokeThickness="1" Stroke="{TemplateBinding BorderBrush}" Fill="{TemplateBinding Background}" />
-
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </UserControl.Resources>
-
-    
     <Grid>
-        
+
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
@@ -95,9 +28,9 @@
                 <VisualState x:Name="Disable">
                     <VisualState.Setters>
 
-                        <Setter Target = "OpacitySlider.IsEnabled" Value="false"/>                        
+                        <Setter Target = "OpacitySlider.IsEnabled" Value="false"/>
                         <Setter Target = "BlendButton.IsEnabled" Value="false"/>
-                        
+
                         <Setter Target = "VisualButton.IsEnabled" Value="false"/>
                         <Setter Target = "DuplicateButton.IsEnabled" Value="false"/>
                         <Setter Target = "RemoveButton.IsEnabled" Value="false"/>
@@ -119,7 +52,7 @@
                 <!--SingleLayerWithoutChildren-->
                 <VisualState x:Name="SingleLayerWithoutChildren">
                     <VisualState.Setters>
-                        
+
                         <Setter Target = "UnGroupButton.IsEnabled" Value="false"/>
 
                     </VisualState.Setters>
@@ -149,7 +82,7 @@
 
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-                
+
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*" MinHeight="165"/>
@@ -161,7 +94,7 @@
                 Layer
             </menus:MenuTitle.Text>
         </menus:MenuTitle>
-        
+
         <!--Body-->
         <blends:BlendControl x:Name="BlendControl" Grid.Row="1" Visibility="Collapsed" MaxHeight="300" Background="Transparent">
 
@@ -172,7 +105,7 @@
             </animations:Implicit.ShowAnimations>
 
         </blends:BlendControl>
-      
+
         <StackPanel x:Name="MainStackPanel" Grid.Row="1">
 
             <!--Layer-->
@@ -186,11 +119,11 @@
             <TextBlock Style="{StaticResource AppTextBlock}">
                 Blend Mode
             </TextBlock>
-            <Button x:Name="BlendButton" Margin="2,0" Style="{StaticResource AppRoundedButton}"
+            <Button x:Name="BlendButton" Margin="2,0" Style="{StaticResource AppTagRoundedButton}"
                     Tag="{x:Bind SelectionViewModel.BlendType,Mode=OneWay}">
                 <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
-            
+
             <ContentControl Height="4"/>
 
             <!--Layers-->
@@ -212,14 +145,12 @@
                 <TextBlock Grid.Column="3" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}">
                     Visual
                 </TextBlock>
-                <elements:ExpandAppbarToggleButton x:Name="VisualButton" Grid.Column="4" IsChecked="{x:Bind VisibilityToBoolConverter(SelectionViewModel.Visibility),Mode=OneWay}">
+                <ToggleButton x:Name="VisualButton" Grid.Column="4" IsChecked="{x:Bind VisibilityToBoolConverter(SelectionViewModel.Visibility),Mode=OneWay}" Style="{StaticResource AppCircleToggleButtonStyle}">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Visual" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <elements:ExpandAppbarToggleButton.CenterContent>
-                        <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}" />
-                    </elements:ExpandAppbarToggleButton.CenterContent>
-                </elements:ExpandAppbarToggleButton>
+                    <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}" />
+                </ToggleButton>
 
             </Grid>
             <Rectangle Width="Auto" Height="1" Margin="2,4" HorizontalAlignment="Stretch" Fill="{ThemeResource AppForeground}"/>
@@ -235,36 +166,32 @@
                 <TextBlock Grid.Column="0" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}">
                     Remove
                 </TextBlock>
-                <elements:ExpandAppbarButton x:Name="RemoveButton" Grid.Column="1">
+                <Button x:Name="RemoveButton" Grid.Column="1" Style="{StaticResource AppCircleButtonStyle}">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Remove" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <elements:ExpandAppbarButton.CenterContent>
-                        <PathIcon>
-                            <PathIcon.Data>
-                                M19.2,5.76l0,13.92c0,0.509 -0.202,0.998 -0.562,1.358c-0.36,0.36 -0.849,0.562 -1.358,0.562c-2.275,0 -5.76,0 -5.76,0c0,0 -3.374,0 -5.577,0c-1.038,0 -2.128,-0.825 -2.159,-1.862c-0.127,-4.186 -0.184,-13.978 -0.184,-13.978l-1.68,0l0,-1.68l5.52,0c0,0 0,-0.72 0,-1.44c0,-0.382 0.152,-0.748 0.422,-1.018c0.27,-0.27 0.636,-0.422 1.018,-0.422c1.598,0 4.162,0 5.76,0c0.382,0 0.748,0.152 1.018,0.422c0.27,0.27 0.422,0.636 0.422,1.018l0,1.44l4.8,0l0,1.68l-1.68,0Zm-4.68,3.84l0,10.56c0,0 1.325,0 2.28,0c0.255,0 0.499,-0.101 0.679,-0.281c0.18,-0.18 0.281,-0.424 0.281,-0.679l0,-13.44l-12.48,0l0,13.451c0,0.252 0.1,0.493 0.278,0.671c0.178,0.178 0.419,0.278 0.671,0.278c0.956,0 2.291,0 2.291,0l0,-10.56l1.56,0l0,10.56l2.88,0l0,-10.56l1.56,0Zm0.24,-5.52c0,0 0,-0.703 0,-1.2c0,-0.127 -0.051,-0.249 -0.141,-0.339c-0.09,-0.09 -0.212,-0.141 -0.339,-0.141c-1.124,0 -3.916,0 -5.04,0c-0.127,0 -0.249,0.051 -0.339,0.141c-0.09,0.09 -0.141,0.212 -0.141,0.339l0,1.2l6,0l0,0Z
-                            </PathIcon.Data>
-                        </PathIcon>
-                    </elements:ExpandAppbarButton.CenterContent>
-                </elements:ExpandAppbarButton>
+                    <PathIcon>
+                        <PathIcon.Data>
+                            M19.2,5.76l0,13.92c0,0.509 -0.202,0.998 -0.562,1.358c-0.36,0.36 -0.849,0.562 -1.358,0.562c-2.275,0 -5.76,0 -5.76,0c0,0 -3.374,0 -5.577,0c-1.038,0 -2.128,-0.825 -2.159,-1.862c-0.127,-4.186 -0.184,-13.978 -0.184,-13.978l-1.68,0l0,-1.68l5.52,0c0,0 0,-0.72 0,-1.44c0,-0.382 0.152,-0.748 0.422,-1.018c0.27,-0.27 0.636,-0.422 1.018,-0.422c1.598,0 4.162,0 5.76,0c0.382,0 0.748,0.152 1.018,0.422c0.27,0.27 0.422,0.636 0.422,1.018l0,1.44l4.8,0l0,1.68l-1.68,0Zm-4.68,3.84l0,10.56c0,0 1.325,0 2.28,0c0.255,0 0.499,-0.101 0.679,-0.281c0.18,-0.18 0.281,-0.424 0.281,-0.679l0,-13.44l-12.48,0l0,13.451c0,0.252 0.1,0.493 0.278,0.671c0.178,0.178 0.419,0.278 0.671,0.278c0.956,0 2.291,0 2.291,0l0,-10.56l1.56,0l0,10.56l2.88,0l0,-10.56l1.56,0Zm0.24,-5.52c0,0 0,-0.703 0,-1.2c0,-0.127 -0.051,-0.249 -0.141,-0.339c-0.09,-0.09 -0.212,-0.141 -0.339,-0.141c-1.124,0 -3.916,0 -5.04,0c-0.127,0 -0.249,0.051 -0.339,0.141c-0.09,0.09 -0.141,0.212 -0.141,0.339l0,1.2l6,0l0,0Z
+                        </PathIcon.Data>
+                    </PathIcon>
+                </Button>
 
                 <Rectangle Grid.Column="2" Width="1" Fill="{ThemeResource AppForeground}"/>
 
                 <TextBlock Grid.Column="3" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}">
                     Duplicate
                 </TextBlock>
-                <elements:ExpandAppbarButton x:Name="DuplicateButton" Grid.Column="4">
+                <Button x:Name="DuplicateButton" Grid.Column="4" Style="{StaticResource AppCircleButtonStyle}">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Duplicate" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <elements:ExpandAppbarButton.CenterContent>
-                        <PathIcon>
-                            <PathIcon.Data>
-                                M13.858,22.08l-8.756,0c-1.359,0 -2.462,-1.103 -2.462,-2.462l0,-12.596c0,-1.359 1.103,-2.462 2.462,-2.462l8.756,0c1.359,0 2.462,1.103 2.462,2.462l0,12.596c0,1.359 -1.103,2.462 -2.462,2.462Zm-0.461,-15.84l-7.834,0c-0.682,0 -1.236,0.554 -1.236,1.237l0,11.686c0,0.683 0.554,1.237 1.236,1.237l7.834,0c0.682,0 1.236,-0.554 1.236,-1.237l0,-11.686c0,-0.683 -0.554,-1.237 -1.236,-1.237Zm-5.357,-2.4l-1.799,0c0.033,-1.33 1.123,-2.4 2.461,-2.4l8.756,0c1.359,0 2.462,1.103 2.462,2.462l0,12.596c0,1.359 -1.103,2.462 -2.462,2.462l-0.418,0l0,-1.681c0.663,-0.023 1.193,-0.568 1.193,-1.236l0,-11.686c0,-0.683 -0.554,-1.237 -1.236,-1.237l-7.834,0c-0.498,0 -0.927,0.295 -1.123,0.72Z
-                            </PathIcon.Data>
-                        </PathIcon>
-                    </elements:ExpandAppbarButton.CenterContent>
-                </elements:ExpandAppbarButton>
+                    <PathIcon>
+                        <PathIcon.Data>
+                            M13.858,22.08l-8.756,0c-1.359,0 -2.462,-1.103 -2.462,-2.462l0,-12.596c0,-1.359 1.103,-2.462 2.462,-2.462l8.756,0c1.359,0 2.462,1.103 2.462,2.462l0,12.596c0,1.359 -1.103,2.462 -2.462,2.462Zm-0.461,-15.84l-7.834,0c-0.682,0 -1.236,0.554 -1.236,1.237l0,11.686c0,0.683 0.554,1.237 1.236,1.237l7.834,0c0.682,0 1.236,-0.554 1.236,-1.237l0,-11.686c0,-0.683 -0.554,-1.237 -1.236,-1.237Zm-5.357,-2.4l-1.799,0c0.033,-1.33 1.123,-2.4 2.461,-2.4l8.756,0c1.359,0 2.462,1.103 2.462,2.462l0,12.596c0,1.359 -1.103,2.462 -2.462,2.462l-0.418,0l0,-1.681c0.663,-0.023 1.193,-0.568 1.193,-1.236l0,-11.686c0,-0.683 -0.554,-1.237 -1.236,-1.237l-7.834,0c-0.498,0 -0.927,0.295 -1.123,0.72Z
+                        </PathIcon.Data>
+                    </PathIcon>
+                </Button>
 
             </Grid>
 
@@ -281,48 +208,34 @@
 
                 <TextBlock Grid.Column="0" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}">
                     Group
-                </TextBlock>        
-                <elements:ExpandAppbarButton x:Name="GroupButton" Grid.Column="1" IsEnabled="True">
+                </TextBlock>
+                <Button x:Name="GroupButton" Grid.Column="1" IsEnabled="True" Style="{StaticResource AppCircleButtonStyle}">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Group" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <elements:ExpandAppbarButton.CenterContent>
-                        <FontIcon Glyph="&#xF0E2;" FontSize="20" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                    </elements:ExpandAppbarButton.CenterContent>
-                </elements:ExpandAppbarButton>
-                
+                    <FontIcon Glyph="&#xF0E2;" FontSize="20" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                </Button>
+
                 <Rectangle Grid.Column="2" Width="1" Fill="{ThemeResource AppForeground}"/>
 
                 <TextBlock Grid.Column="3" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}">
                     UnGroup
-                </TextBlock> 
-                <elements:ExpandAppbarButton x:Name="UnGroupButton" Grid.Column="4" IsEnabled="True">
+                </TextBlock>
+                <Button x:Name="UnGroupButton" Grid.Column="4" IsEnabled="True" Style="{StaticResource AppCircleButtonStyle}">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="UnGroup" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
-                    <elements:ExpandAppbarButton.CenterContent>
-                        <FontIcon Glyph="&#xF0E2;" FontSize="20" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                    </elements:ExpandAppbarButton.CenterContent>
-                </elements:ExpandAppbarButton>
-                
+                    <FontIcon Glyph="&#xF0E2;" FontSize="20" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                </Button>
+
             </Grid>
 
             <!--Layer-->
             <TextBlock Style="{StaticResource AppTextBlock}">
                 Tag
             </TextBlock>
-            <StackPanel Height="40" Orientation="Horizontal" HorizontalAlignment="Center">
+            <layers:TagControl x:Name="TagControl" TagType="{x:Bind SelectionViewModel.TagType,Mode=OneWay}" />
 
-                <RadioButton Background="LightCoral" BorderBrush="{ThemeResource AppStroke}" Style="{StaticResource RadioButtonStyle}"/>
-                <RadioButton Background="Orange" BorderBrush="{ThemeResource AppStroke}" Style="{StaticResource RadioButtonStyle}"/>
-                <RadioButton Background="Yellow" BorderBrush="{ThemeResource AppStroke}" Style="{StaticResource RadioButtonStyle}"/>
-                <RadioButton Background="YellowGreen" BorderBrush="{ThemeResource AppStroke}" Style="{StaticResource RadioButtonStyle}"/>
-                <RadioButton Background="SkyBlue" BorderBrush="{ThemeResource AppStroke}" Style="{StaticResource RadioButtonStyle}"/>
-                <RadioButton Background="Plum" BorderBrush="{ThemeResource AppStroke}" Style="{StaticResource RadioButtonStyle}"/>
-                <RadioButton Background="LightGray" BorderBrush="{ThemeResource AppStroke}" Style="{StaticResource RadioButtonStyle}"/>
-
-            </StackPanel>
-            
             <ContentControl Height="2"/>
         </StackPanel>
 

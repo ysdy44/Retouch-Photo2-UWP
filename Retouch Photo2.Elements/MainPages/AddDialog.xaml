@@ -8,8 +8,8 @@
     BorderThickness="1" 
     BorderBrush="{ThemeResource AppBorderBrush}" 
     Background="{ThemeResource AppBackground}"
-    SecondaryButtonStyle="{StaticResource AppCircleButton}"
-    PrimaryButtonStyle="{StaticResource AppCircleButton}"
+    SecondaryButtonStyle="{StaticResource AppTagAccentLineCircleButton}"
+    PrimaryButtonStyle="{StaticResource AppTagAccentLineCircleButton}"
     mc:Ignorable="d"
     >
     

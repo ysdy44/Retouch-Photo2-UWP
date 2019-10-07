@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Tools.Pages
         /// To a gradient brush.
         /// </summary>
         /// <param name="brushPoints"> The brush-points </param>
-        public void Gradient(GradientBrushType gradientBrushType, BrushPoints brushPoints)
+        public void Gradient(GradientBrushType gradientBrushType, BrushPoints brushPoints,bool isResetBrushArray)
         {
             //GradientBrushType
             BrushType brushType = BrushType.LinearGradient;
@@ -29,7 +29,7 @@ namespace Retouch_Photo2.Tools.Pages
 
             //Brush
             this.SelectionViewModel.BrushType = brushType;
-            this.SelectionViewModel.BrushArray = GreyWhiteMeshHelpher.GetGradientStopArray();
+            if (isResetBrushArray) this.SelectionViewModel.BrushArray = GreyWhiteMeshHelpher.GetGradientStopArray();
             this.SelectionViewModel.BrushPoints = brushPoints;
 
             //Selection
@@ -42,13 +42,13 @@ namespace Retouch_Photo2.Tools.Pages
                     {
                         case FillOrStroke.Stroke:
                             geometryLayer.StrokeBrush.Type = brushType;
-                            geometryLayer.StrokeBrush.Array = GreyWhiteMeshHelpher.GetGradientStopArray();
+                            if (isResetBrushArray) geometryLayer.StrokeBrush.Array = GreyWhiteMeshHelpher.GetGradientStopArray();
                             geometryLayer.StrokeBrush.Points = brushPoints;
                             break;
 
                         case FillOrStroke.Fill:
                             geometryLayer.FillBrush.Type = brushType;
-                            geometryLayer.FillBrush.Array = GreyWhiteMeshHelpher.GetGradientStopArray();
+                            if (isResetBrushArray) geometryLayer.FillBrush.Array = GreyWhiteMeshHelpher.GetGradientStopArray();
                             geometryLayer.FillBrush.Points = brushPoints;
                             break;
                     }

@@ -162,13 +162,7 @@ namespace Retouch_Photo2.Controls
 
                 this.ViewModel.Invalidate();//Invalidate
             };
-
-
-            #endregion
-
-
-            #region Layers
-
+                       
 
             //Visual
             this.VisualButton.Tapped += (s, e) =>
@@ -184,6 +178,24 @@ namespace Retouch_Photo2.Controls
 
                 this.ViewModel.Invalidate();//Invalidate
             };
+
+
+            //TagType
+            this.TagControl.TagTypeChanged += (s, tagType) =>
+            {
+                //Selection
+                this.SelectionViewModel.TagType = tagType;
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.TagType = tagType;
+                });
+            };
+
+            #endregion
+
+
+            #region Layers
+
             
             
             //Duplicate

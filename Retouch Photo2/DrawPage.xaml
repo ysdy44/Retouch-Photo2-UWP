@@ -12,7 +12,7 @@
     mc:Ignorable="d"
     >
 
-
+    
     <Page.Transitions>
         <TransitionCollection>
             <NavigationThemeTransition>
@@ -28,8 +28,8 @@
         <!--Extension-->
         <elements:ApplicationViewTitleBarBackgroundExtension x:Key="AVTBBE" TitleBarColor="{ThemeResource AppForeground}"/>
     </Page.Resources>
-
-
+    
+    
     <Grid>
 
         <elements:DrawLayout x:Name="DrawLayout" 
@@ -69,6 +69,9 @@
                             <elements:ExpandAppbarButton.CenterContent>
                                 <FontIcon Glyph="&#xE105;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarButton.CenterContent>
+                            <elements:ExpandAppbarButton.Text>
+                                Save
+                            </elements:ExpandAppbarButton.Text>
                         </elements:ExpandAppbarButton>
 
                         <elements:ExpandAppBarSapce/>
@@ -80,6 +83,9 @@
                             <elements:ExpandAppbarButton.CenterContent>
                                 <FontIcon Glyph="&#xE10E;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarButton.CenterContent>
+                            <elements:ExpandAppbarButton.Text>
+                                Undo
+                            </elements:ExpandAppbarButton.Text>
                         </elements:ExpandAppbarButton>
 
                         <elements:ExpandAppBarSapce/>
@@ -91,6 +97,9 @@
                             <elements:ExpandAppbarButton.CenterContent>
                                 <FontIcon Glyph="&#xE10D;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarButton.CenterContent>
+                            <elements:ExpandAppbarButton.Text>
+                                Redo
+                            </elements:ExpandAppbarButton.Text>
                         </elements:ExpandAppbarButton>
 
                         <elements:ExpandAppBarSeparator/>
@@ -102,6 +111,9 @@
                             <elements:ExpandAppbarButton.CenterContent>
                                 <elements:ThemeControl x:Name="ThemeControl" Foreground="{ThemeResource AppText}"/>
                             </elements:ExpandAppbarButton.CenterContent>
+                            <elements:ExpandAppbarButton.Text>
+                                Theme
+                            </elements:ExpandAppbarButton.Text>
                         </elements:ExpandAppbarButton>
 
                         <elements:ExpandAppBarSapce/>
@@ -113,6 +125,9 @@
                             <elements:ExpandAppbarToggleButton.CenterContent>
                                 <FontIcon Glyph="&#xE80A;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarToggleButton.CenterContent>
+                            <elements:ExpandAppbarToggleButton.Text>
+                                Ruler
+                            </elements:ExpandAppbarToggleButton.Text>
                         </elements:ExpandAppbarToggleButton>
 
                         <elements:ExpandAppBarSapce/>
@@ -124,6 +139,9 @@
                             <elements:ExpandAppbarButton.CenterContent>
                                 <FontIcon Glyph="&#xE1D9;" FontSize="16" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarButton.CenterContent>
+                            <elements:ExpandAppbarButton.Text>
+                                FullScreen
+                            </elements:ExpandAppbarButton.Text>
                         </elements:ExpandAppbarButton>
 
                         <elements:ExpandAppBarSapce/>
@@ -132,6 +150,9 @@
                             <elements:ExpandAppbarRepeatButton.CenterContent>
                                 <FontIcon Glyph="&#xE897;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarRepeatButton.CenterContent>
+                            <elements:ExpandAppbarRepeatButton.Text>
+                                Tip
+                            </elements:ExpandAppbarRepeatButton.Text>
                         </elements:ExpandAppbarRepeatButton>
 
                     </elements:ExpandAppbar.Children>
@@ -145,14 +166,10 @@
         <Canvas x:Name="OverlayCanvas" IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}"/>
 
         <!--FullScreen-->
-        <elements:ExpandAppbarButton x:Name="UnFullScreenButton"                                     
-                                    Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top"            
-                                     Visibility="{x:Bind BoolToVisibilityConverter(DrawLayout.IsFullScreen), Mode=OneWay}"
-                                     >
-            <elements:ExpandAppbarButton.CenterContent>
+        <Button x:Name="UnFullScreenButton" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AppCircleButtonStyle}"
+                                     Visibility="{x:Bind BoolToVisibilityConverter(DrawLayout.IsFullScreen), Mode=OneWay}">
                 <FontIcon Glyph="&#xE1D8;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-            </elements:ExpandAppbarButton.CenterContent>
-        </elements:ExpandAppbarButton>
+        </Button>
         
         <!--Tip-->
         <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,110,0,0" HorizontalAlignment="Center">

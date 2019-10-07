@@ -16,6 +16,7 @@ namespace Retouch_Photo2.Layers
         Button ExpanedButton { get; }
         Button SelectedButton { get; }
 
+        void SetTagType(TagType value);
         void SetExpandMode(ExpandMode value);
         void SetSelectMode(SelectMode value);
         void SetOverlayMode(OverlayMode value);

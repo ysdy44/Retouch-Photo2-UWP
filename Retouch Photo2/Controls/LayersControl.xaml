@@ -21,7 +21,12 @@
                 <Button x:Name="_DestopButton" Height="50" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch">
                     <TextBlock Foreground="{ThemeResource AppText}">
                         New Image From Destop
-                    </TextBlock> 
+                    </TextBlock>
+                </Button>
+                <Button x:Name="_PadButton" Height="50" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch">
+                    <TextBlock Foreground="{ThemeResource AppText}">
+                        Width
+                    </TextBlock>
                 </Button>
             </StackPanel>
         </Flyout>
@@ -36,7 +41,7 @@
         </Grid.RowDefinitions>
         
         <Button x:Name="AddButton" Height="42" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"/>
-        <Slider x:Name="ControlHeightSlider" Margin="4,0" Grid.Row="3" Minimum="40" Maximum="80" Width="300" StepFrequency="10" VerticalAlignment="Center"/>
+        <Slider x:Name="ControlHeightSlider" Margin="4,0" Grid.Row="3" Minimum="40" Maximum="80" StepFrequency="10" VerticalAlignment="Center"/>
 
         <Canvas Grid.Row="1">
             <Border x:Name="IndicatorBorder" MinWidth="50" Height="40"/>

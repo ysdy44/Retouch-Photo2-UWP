@@ -51,6 +51,19 @@ namespace Retouch_Photo2.ViewModels
         }
         private Visibility visibility;
 
+        /// <summary> <see cref = "SelectionViewModel" />'s tag type. </summary>
+        public TagType TagType
+        {
+            get => this.tagType;
+            set
+            {
+                if (this.tagType == value) return;
+                this.tagType = value;
+                this.OnPropertyChanged(nameof(this.TagType));//Notify 
+            }
+        }
+        private TagType tagType;
+
 
         //////////////////////////
 

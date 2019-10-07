@@ -1,9 +1,11 @@
 ﻿using FanKit.Transformers;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools
 {
@@ -55,7 +57,14 @@ namespace Retouch_Photo2.Tools
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasPoint = Vector2.Transform(point, matrix);
 
-            ILayer selectedLayer = this.ViewModel.Layers.RootLayers.FirstOrDefault((layer) =>
+            //Select a layer of the same depth
+            bool isChildSingle = (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single
+                && this.SelectionViewModel.Layer.Parents != null);
+            IList<ILayer> parentsChildren = isChildSingle ?
+                this.SelectionViewModel.Layer.Parents.Children :
+                this.ViewModel.Layers.RootLayers;
+
+            ILayer selectedLayer = parentsChildren.FirstOrDefault((layer) =>
             {
                 if (layer.Visibility == Visibility.Visible)
                 {

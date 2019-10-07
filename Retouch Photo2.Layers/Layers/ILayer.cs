@@ -97,6 +97,9 @@ namespace Retouch_Photo2.Layers
         ILayerControl Control { get; }
 
 
+        /// <summary> Gets or sets ILayer's tag-type. </summary>
+        TagType TagType { get; set; }
+
         /// <summary> Gets or sets ILayer's overlay-mode. </summary>
         OverlayMode OverlayMode { get; set; }
 

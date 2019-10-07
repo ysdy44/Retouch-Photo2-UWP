@@ -70,11 +70,9 @@
             <Slider Style="{StaticResource AppOpacitySliderStyle}"/>
             <Grid>
                 <CheckBox Content="Space"/>
-                <elements:ExpandAppbarButton HorizontalAlignment="Right">
-                    <elements:ExpandAppbarButton.CenterContent>
-                        <FontIcon Glyph="&#xE10B;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                    </elements:ExpandAppbarButton.CenterContent>
-                </elements:ExpandAppbarButton>
+                <Button HorizontalAlignment="Right" Style="{StaticResource AppCircleButtonStyle}">
+                    <FontIcon Glyph="&#xE10B;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                </Button>
             </Grid>
         </StackPanel>
 
@@ -86,11 +84,9 @@
             <Slider Style="{StaticResource AppOpacitySliderStyle}"/>
             <Grid>
                 <CheckBox Content="Space"/>
-                <elements:ExpandAppbarButton HorizontalAlignment="Right">
-                    <elements:ExpandAppbarButton.CenterContent>
-                        <FontIcon Glyph="&#xE10B;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                    </elements:ExpandAppbarButton.CenterContent>
-                </elements:ExpandAppbarButton>
+                <Button HorizontalAlignment="Right" Style="{StaticResource AppCircleButtonStyle}">
+                    <FontIcon Glyph="&#xE10B;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                </Button>
             </Grid>
         </StackPanel>
 

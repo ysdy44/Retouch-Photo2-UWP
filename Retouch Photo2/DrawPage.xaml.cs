@@ -81,6 +81,7 @@ namespace Retouch_Photo2
             //LayersAdd
             this.LayersControl.PhotoButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.PicturesLibrary);
             this.LayersControl.DestopButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.Desktop);
+            this.LayersControl.PadButton.Tapped += (s, e) => this.DrawLayout.IsPadLayersControlWidth = !this.DrawLayout.IsPadLayersControlWidth;
         }
 
 

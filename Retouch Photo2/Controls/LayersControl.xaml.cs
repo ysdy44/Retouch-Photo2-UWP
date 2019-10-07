@@ -32,6 +32,8 @@ namespace Retouch_Photo2.Controls
         public Button PhotoButton => this._PhotoButton;
         /// <summary> DestopButton. </summary>
         public Button DestopButton => this._DestopButton;
+        /// <summary> PadButton. </summary>
+        public Button PadButton => this._PadButton;
 
         //LayerCollection
         ILayer DragSourceLayer;

@@ -10,8 +10,6 @@ namespace Retouch_Photo2.Elements
     public sealed partial class DrawLayout : UserControl
     {
         //@Content
-        #region Content
-
         /// <summary> BackButton. </summary>
         public Button BackButton => this._BackButton;
         /// <summary> CenterBorder's Child. </summary>
@@ -53,50 +51,12 @@ namespace Retouch_Photo2.Elements
         }
         private Page footPage;
         
-        #endregion 
-
-
-        #region HeadLeft & HeadRight
-
-
+        
         /// <summary> HeadLeftBorder's Child. </summary>
         public UIElement HeadLeftPane { get => this.HeadLeftBorder.Child; set => this.HeadLeftBorder.Child = value; }
-
-
         /// <summary> HeadRightStackPane's Children. </summary>
         public UIElementCollection HeadRightChildren => this.HeadRightStackPane.Children;
-
-        StackPanel HeadRightStackPane = new StackPanel { Orientation = Orientation.Horizontal };
-
-        bool _IsHeadRightExpand;
-
-        bool isHeadRightExpand;
-        bool IsHeadRightExpand
-        {
-            get => this.isHeadRightExpand;
-            set
-            {
-                if (this.isHeadRightExpand == value) return;
-
-                if (value)
-                {
-                    this.HeadRightScrollViewer.Content = null;
-                    this.HeadRightExpandBorder.Child = this.HeadRightStackPane;
-                    this.HeadRightScrollViewer.Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    this.HeadRightExpandBorder.Child = null;
-                    this.HeadRightScrollViewer.Content = this.HeadRightStackPane;
-                    this.HeadRightScrollViewer.Visibility = Visibility.Visible;
-                }
-                this.isHeadRightExpand = value;
-            }
-        }
-
-
-        #endregion
-
+               
 
         #region DependencyProperty
 
@@ -141,10 +101,26 @@ namespace Retouch_Photo2.Elements
         #endregion
 
 
+        private bool isPadLayersControlWidth;
+        public bool IsPadLayersControlWidth
+        {
+            get => this.isPadLayersControlWidth;
+            set
+            {
+                if (this._vsActualWidthType== DeviceLayoutType.Pad)
+                {
+                    double width = value ? 220 : 70;
+                    this.RightGridLenght.Width = new GridLength(width);
+                }
+
+                this.isPadLayersControlWidth = value;
+            }
+        }
+
         //@VisualState
         bool _vsIsFullScreen;
-        double _vsScreenWidth;
-        PhoneLayoutType _vsPhoneType= PhoneLayoutType.Hided;
+        PhoneLayoutType _vsPhoneType = PhoneLayoutType.Hided;
+        DeviceLayoutType _vsActualWidthType = DeviceLayoutType.Adaptive;
 
         public DeviceLayoutType VisualStateDeviceType = DeviceLayoutType.Adaptive;
         public double VisualStatePhoneMaxWidth = 600.0;
@@ -154,39 +130,37 @@ namespace Retouch_Photo2.Elements
         {
             get
             {
-                this._IsHeadRightExpand = true;
-
                 if (this._vsIsFullScreen) return this.FullScreen;
 
                 switch (this.VisualStateDeviceType)
                 {
-                    case DeviceLayoutType.PC: return this.PC;
+                    case DeviceLayoutType.Phone: return this._getPhoneVisualState(this._vsPhoneType);
                     case DeviceLayoutType.Pad: return this.Pad;
-                    case DeviceLayoutType.Phone:  break;
+                    case DeviceLayoutType.PC: return this.PC;
                     case DeviceLayoutType.Adaptive:
                         {
-                            double width = this._vsScreenWidth;
-                            if (width > this.VisualStatePadMaxWidth) return this.PC;
-                            if (width > this.VisualStatePhoneMaxWidth) return this.Pad;
+                            switch (this._vsActualWidthType)
+                            {
+                                case DeviceLayoutType.Phone: return this._getPhoneVisualState(this._vsPhoneType);
+                                case DeviceLayoutType.Pad: return this.Pad;
+                                case DeviceLayoutType.PC: return this.PC;
+                            }
                         }
                         break;
                 }
-
-                this._IsHeadRightExpand = false;
-                switch (this._vsPhoneType)
-                {
-                    case PhoneLayoutType.Hided: return this.Phone;
-                    case PhoneLayoutType.ShowLeft: return this.PhoneShowLeft;
-                    case PhoneLayoutType.ShowRight: return this.PhoneShowRight;
-                }
-
                 return this.Normal;
             }
-            set
+            set => VisualStateManager.GoToState(this, value.Name, false);
+        }
+        private VisualState _getPhoneVisualState(PhoneLayoutType phoneLayoutType)
+        {
+            switch (this._vsPhoneType)
             {
-                this.IsHeadRightExpand = this._IsHeadRightExpand;
-                VisualStateManager.GoToState(this, value.Name, false);
+                case PhoneLayoutType.Hided: return this.Phone;
+                case PhoneLayoutType.ShowLeft: return this.PhoneShowLeft;
+                case PhoneLayoutType.ShowRight: return this.PhoneShowRight;
             }
+            return this.Normal;
         }
 
 
@@ -198,13 +172,14 @@ namespace Retouch_Photo2.Elements
             this.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
-                this._vsScreenWidth = e.NewSize.Width;
+                double width = e.NewSize.Width;
+
+                if (width > this.VisualStatePadMaxWidth) this._vsActualWidthType = DeviceLayoutType.PC;
+                else if (width > this.VisualStatePhoneMaxWidth) this._vsActualWidthType = DeviceLayoutType.Pad;
+                else this._vsActualWidthType = DeviceLayoutType.Phone;
+
                 this.VisualState = this.VisualState;//State
             };
-
-            //HeadRight
-            this.HeadRightToggleButton.Checked += (s, e) => this.HeadRightScrollViewer.Visibility = Visibility.Visible;
-            this.HeadRightToggleButton.Unchecked += (s, e) => this.HeadRightScrollViewer.Visibility = Visibility.Collapsed;
 
             //DismissOverlay
             this.IconDismissOverlay.PointerPressed += (s, e) =>

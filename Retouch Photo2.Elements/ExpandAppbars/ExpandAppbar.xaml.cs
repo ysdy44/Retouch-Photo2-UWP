@@ -11,11 +11,16 @@ namespace Retouch_Photo2.Elements
     {
         //@Content
         /// <summary> Gets and sets children elements. </summary>
-        public List<IExpandAppbarElement> Children { get; set; } = new List<IExpandAppbarElement>();
+        public IList<IExpandAppbarElement> Children { get; set; } = new List<IExpandAppbarElement>();
 
         #region Mode
 
         int Index;
+        /// <summary>
+        /// Left: Button show
+        /// RightL button hid
+        /// Center: middle
+        /// </summary>
         HorizontalAlignment Mode
         {
             set
@@ -27,9 +32,10 @@ namespace Retouch_Photo2.Elements
                 {
                     case HorizontalAlignment.Left:
                         {
-                            foreach (UIElement element in this.Children)
+                            foreach (IExpandAppbarElement element in this.Children)
                             {
-                                this.StackPanel.Children.Add(element);
+                                element.IsSecondPage = false;
+                                this.StackPanel.Children.Add(element.Self);
                             }
                             this.MoreButton.Visibility = Visibility.Collapsed;
                         }
@@ -39,10 +45,18 @@ namespace Retouch_Photo2.Elements
                             {
                                 for (int i = 0; i < this.Children.Count; i++)
                                 {
-                                    UIElement element = this.Children[i].Self;
+                                    IExpandAppbarElement element = this.Children[i];
 
-                                    if (i < this.Index) this.StackPanel.Children.Add(element);
-                                    else this.SecondStackPanel.Children.Add(element);
+                                    if (i < this.Index)
+                                    {
+                                        element.IsSecondPage = false;
+                                        this.StackPanel.Children.Add(element.Self);
+                                    }
+                                    else
+                                    {
+                                        element.IsSecondPage = true;
+                                        this.SecondStackPanel.Children.Add(element.Self);
+                                    }
                                 }
                                 this.MoreButton.Visibility = Visibility.Visible;
                             }
@@ -50,9 +64,10 @@ namespace Retouch_Photo2.Elements
                         break;
                     case HorizontalAlignment.Right:
                         {
-                            foreach (UIElement element in this.Children)
+                            foreach (IExpandAppbarElement element in this.Children)
                             {
-                                this.SecondStackPanel.Children.Add(element);
+                                element.IsSecondPage = true;
+                                this.SecondStackPanel.Children.Add(element.Self);
                             }
                             this.MoreButton.Visibility = Visibility.Visible;
                         }

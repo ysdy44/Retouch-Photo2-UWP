@@ -48,8 +48,8 @@
                 <ComboBoxItem x:Name="StrokeComboBoxItem" Content="Stroke"/>
             </ComboBox>
         </Border>
-        
-        <elements:ExpandAppBarSeparator/>
+
+        <ContentControl Width="4"/>
 
         <TextBlock Style="{StaticResource AppTextBlock}">
             BrushType
@@ -71,7 +71,7 @@
             </ComboBox>
         </Border>
 
-        <elements:ExpandAppBarSapce/>
+        <ContentControl Width="4"/>
 
         <TextBlock Style="{StaticResource AppTextBlock}">
             Brush

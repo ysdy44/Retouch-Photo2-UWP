@@ -36,16 +36,14 @@
         <TextBlock Text="{x:Bind SelectionViewModel.ImageRe,Mode=OneWay}" Style="{StaticResource AppTextBlock}"/>
 
         <!--Select-->
-        <elements:ExpandAppbarButton x:Name="ClearButton">
+        <Button x:Name="ClearButton" Style="{StaticResource AppCircleButtonStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip Content="Cleat current image" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
-            <elements:ExpandAppbarButton.CenterContent>
-                <FontIcon Glyph="&#xE106;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-            </elements:ExpandAppbarButton.CenterContent>
-        </elements:ExpandAppbarButton>
+            <FontIcon Glyph="&#xE106;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+        </Button>
 
-        <elements:ExpandAppBarSapce/>
+        <ContentControl Width="4"/>
 
         <!--Select-->
         <Border Style="{StaticResource AppRoundedBorderStyle}">
@@ -62,7 +60,7 @@
             </Button>
         </Border>
 
-        <elements:ExpandAppBarSapce/>
+        <ContentControl Width="4"/>
 
         <!--Replace-->
         <Border Style="{StaticResource AppRoundedBorderStyle}">
@@ -74,17 +72,15 @@
             </Button>
         </Border>
 
-        <elements:ExpandAppBarSapce/>
+        <ContentControl Width="4"/>
 
         <!--Stack-->
-        <elements:ExpandAppbarButton x:Name="StackButton">
+        <Button x:Name="StackButton" Style="{StaticResource AppCircleButtonStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip Content="Cleat current image" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
-            <elements:ExpandAppbarButton.CenterContent>
-                <FontIcon Glyph="&#xE14C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-            </elements:ExpandAppbarButton.CenterContent>
-        </elements:ExpandAppbarButton>
+            <FontIcon Glyph="&#xE14C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+        </Button>
 
     </StackPanel>
 </Page>

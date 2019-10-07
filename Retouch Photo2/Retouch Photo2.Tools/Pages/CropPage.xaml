@@ -21,7 +21,7 @@
                 </TextBlock>
                 <elements:OnOffSwitch OnContent="None" OffContent="Ratio" IsOn="{x:Bind KeyboardViewModel.IsRatio,Mode=TwoWay}"/>
 
-                <elements:ExpandAppBarSapce/>
+                <ContentControl Width="4"/>
 
                 <!--Center-->
                 <TextBlock Style="{StaticResource AppTextBlock}">
@@ -37,20 +37,18 @@
     <StackPanel Orientation="Horizontal">
 
         <!--Crop-->
-        <elements:ExpandAppbarToggleButton IsHitTestVisible="False" IsChecked="{x:Bind SelectionViewModel.IsCrop,Mode=TwoWay}">
+        <ToggleButton IsHitTestVisible="False" IsChecked="{x:Bind SelectionViewModel.IsCrop,Mode=TwoWay}" Style="{StaticResource AppCircleToggleButtonStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip Content="IsCrop" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
-            <elements:ExpandAppbarToggleButton.CenterContent>
                 <PathIcon>
                     <PathIcon.Data>
                         M2.264,17.096l4.337,0l0,2.211l-6.601,0l0,-6.371l2.264,0l0,4.16Zm17.503,2.211l-6.601,0l0,-2.211l4.337,0l0,-4.16l2.264,0l0,6.371Zm-3.164,-16.373l0,13.44l-13.44,0l0,-13.44l13.44,0Zm3.164,3.437l-2.264,0l0,-4.16l-4.337,0l0,-2.211l6.601,0l0,6.371Zm-13.166,-4.16l-4.337,0l0,4.16l-2.264,0l0,-6.371l6.601,0l0,2.211Z
                     </PathIcon.Data>
                 </PathIcon>
-            </elements:ExpandAppbarToggleButton.CenterContent>
-        </elements:ExpandAppbarToggleButton>
+        </ToggleButton>
 
-        <elements:ExpandAppBarSapce/>
+        <ContentControl Width="4"/>
         
         <!--Reset-->
         <Border Style="{StaticResource AppRoundedBorderStyle}">
@@ -62,7 +60,7 @@
             </Button>
         </Border>
         
-        <elements:ExpandAppBarSapce/>
+        <ContentControl Width="4"/>
 
         <!--Fit-->
         <Border Style="{StaticResource AppRoundedBorderStyle}">
@@ -74,17 +72,15 @@
             </Button>
         </Border>
 
-        <elements:ExpandAppBarSapce/>
+        <ContentControl Width="4"/>
 
         <!--More-->
-        <elements:ExpandAppbarButton x:Name="MoreButton">
+        <Button x:Name="MoreButton" Style="{StaticResource AppCircleButtonStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip Content="More" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
             </ToolTipService.ToolTip>
-            <elements:ExpandAppbarButton.CenterContent>
-                <FontIcon Glyph="&#xE10C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-            </elements:ExpandAppbarButton.CenterContent>
-        </elements:ExpandAppbarButton>
-        
+            <FontIcon Glyph="&#xE10C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+        </Button>
+
     </StackPanel>
 </Page>

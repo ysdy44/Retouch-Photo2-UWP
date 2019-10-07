@@ -10,40 +10,37 @@ using Microsoft.Graphics.Canvas.Text;
 using Microsoft.Graphics.Canvas;
 using Windows.UI;
 using Windows.UI.Xaml;
+using Retouch_Photo2.Layers;
+using Retouch_Photo2.Layers.Models;
 
 namespace Retouch_Photo2.TestApp.Pages
 {
-
-    public interface IMenu
+    public sealed partial class MainPage : Page
     {
 
-    }
+        ILayer Layer01 = new RectangleLayer();
+        ILayer Layer02 = new RectangleLayer();
+        ILayer Layer03 = new RectangleLayer();
+        ILayer Layer04 = new RectangleLayer();
 
-    public sealed partial class MainPage : Page
-    {  
         public MainPage()
         {
             this.InitializeComponent();
+
+            this.StackPanel.Children.Add(this.Layer01.Control.Self);
+            this.StackPanel.Children.Add(this.Layer02.Control.Self);
+            this.StackPanel.Children.Add(this.Layer03.Control.Self);
+            this.StackPanel.Children.Add(this.Layer04.Control.Self);
         }
-
-
-
-
-        public bool IsOpen
-        {
-            get { return (bool)GetValue(IsOpenProperty); }
-            set { SetValue(IsOpenProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for IsOpen.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsOpenProperty =
-            DependencyProperty.Register("IsOpen", typeof(bool), typeof(MainPage), new PropertyMetadata(false));
-
-
 
         private void Button_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            IsOpen = !IsOpen;
+
+        }
+
+        private void Button02_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -6,7 +6,8 @@
    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
-    xmlns:transformers="using:FanKit.Transformers"   
+    xmlns:transformers="using:FanKit.Transformers"
+    xmlns:layers="using:Retouch_Photo2.Layers"
     Background="{ThemeResource AppBarItemBackgroundThemeBrush}"
      >
 
@@ -17,100 +18,13 @@
     </Page.Resources>
 
 
-    <ScrollViewer Background="LightGray">
-
         <StackPanel x:Name="StackPanel" Orientation="Vertical" Padding="111">
 
+            
+        <AppBarSeparator/>
+        <Button x:Name="Button01" Content="00001" Tapped="Button_Tapped"/>
+        <Button x:Name="Button02" Content="00002" Tapped="Button02_Tapped"/>
 
-
-            <Button Content="Button" Width="120" Tapped="Button_Tapped">
-
-                <ToolTipService.ToolTip>
-                    <ToolTip
-                        x:Name="aaaaaaaaaaaaaaaaaaaaaaaaa"
-                        
-                        Content="Adjustment" 
-                         Placement="Bottom"
-                     VerticalOffset="0"
-                             HorizontalOffset="0"
-         HorizontalAlignment="Center"
-                         IsOpen="{x:Bind IsOpen,Mode=OneWay}"
-                         >
-                        <ToolTip.Style>
-                            <Style TargetType="ToolTip">
-                                <Setter Property="Foreground" Value="{ThemeResource ToolTipForeground}" />
-                                <Setter Property="Background" Value="{ThemeResource ToolTipBackground}" />
-                                <Setter Property="BorderBrush" Value="{ThemeResource ToolTipBorderBrush}" />
-                                <Setter Property="BorderThickness" Value="{ThemeResource ToolTipBorderThemeThickness}" />
-                                <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
-                                <Setter Property="FontSize" Value="{ThemeResource ToolTipContentThemeFontSize}" />
-                                <Setter Property="Padding" Value="8,5,8,7" />
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="ToolTip">
-                                            <Grid x:Name="RootGrid">
-
-                                                <VisualStateManager.VisualStateGroups>
-                                                    <VisualStateGroup x:Name="OpenStates">
-                                                        <VisualState x:Name="Closed">
-
-                                                            <Storyboard>
-                                                                <FadeOutThemeAnimation TargetName="RootGrid" />
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name="Opened">
-
-                                                            <Storyboard>
-                                                                <FadeInThemeAnimation TargetName="RootGrid" />
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                    </VisualStateGroup>
-
-                                                </VisualStateManager.VisualStateGroups>
-
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="40"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                </Grid.RowDefinitions>
-
-                                                <ContentPresenter x:Name="LayoutRoot" Grid.Row="1" 
-                                                              CornerRadius="4"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        MaxWidth="320"
-                        Content="{TemplateBinding Content}"
-                        ContentTransitions="{TemplateBinding ContentTransitions}"
-                        ContentTemplate="{TemplateBinding ContentTemplate}"
-                        Padding="{TemplateBinding Padding}"
-                        TextWrapping="Wrap">
-                                                </ContentPresenter>
-
-                                                <Polyline Points="0,40 10,0 20,40"
-                                                          StrokeThickness="{TemplateBinding BorderThickness}" 
-                                                          Stroke="{TemplateBinding BorderBrush}" 
-                                                          Fill="{TemplateBinding Background}"
-                                                          HorizontalAlignment="Center"                                                          
-                                                          />
-
-                                                <Rectangle Grid.Row="1" Width="20" Height="4"
-                                                       Fill="{TemplateBinding Background}" 
-                                                       HorizontalAlignment="Center" 
-                                                       VerticalAlignment="Top"
-                                                       />
-
-                                            </Grid>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ToolTip.Style>
-                    </ToolTip>
-                </ToolTipService.ToolTip>
-            </Button>
-
-
-        </StackPanel>
-    </ScrollViewer>
+    </StackPanel>
     </Page>
     

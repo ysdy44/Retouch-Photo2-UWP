@@ -13,8 +13,8 @@ namespace Retouch_Photo2.Selections
         public UIElement EnabledIcon { get => this.EnabledViewbox.Child; set => this.EnabledViewbox.Child = value; }
         /// <summary> Disabled icon. </summary>
         public UIElement DisabledIcon { get => this.DisabledViewbox.Child; set => this.DisabledViewbox.Child = value; }
-        /// <summary> TextBlock' text. </summary>
-        public string Label { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
+        /// <summary> TextBlock' Text. </summary>
+        public string Text { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
 
 
         //@VisualState
