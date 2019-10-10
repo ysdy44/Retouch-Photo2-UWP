@@ -229,11 +229,11 @@ namespace Retouch_Photo2.ViewModels
         }
         private bool isPenToolNodesMode;
         /// <summary> <see cref = "SelectionViewModel" />'s CurveLayer. </summary>
-        public CurveLayer CurveLayer { get; set; }
+        public GeometryCurveLayer CurveLayer { get; set; }
         /// <summary> Sets CurveLayer. </summary>     
         private void SetCurveLayer(ILayer layer)
         {
-            if (layer is CurveLayer curveLayer)
+            if (layer is GeometryCurveLayer curveLayer)
             {
                 this.IsPenToolNodesMode = (curveLayer.NodeCollection.Count != 2);
                 this.CurveLayer = curveLayer;
@@ -244,5 +244,8 @@ namespace Retouch_Photo2.ViewModels
                 this.CurveLayer = null;
             }
         }
+
+
+
     }
 }

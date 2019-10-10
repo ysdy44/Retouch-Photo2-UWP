@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Tools.Models
             Transformer transformer = new Transformer(canvasPoint, canvasStartingPoint);
 
             //Layer
-            CurveLayer curveLayer = new CurveLayer(canvasStartingPoint, canvasPoint)
+            GeometryCurveLayer curveLayer = new GeometryCurveLayer(canvasStartingPoint, canvasPoint)
             {
                 SelectMode = SelectMode.Selected,
                 TransformManager = new TransformManager(transformer),

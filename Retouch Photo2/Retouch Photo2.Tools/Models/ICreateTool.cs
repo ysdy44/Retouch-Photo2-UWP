@@ -22,14 +22,14 @@ namespace Retouch_Photo2.Tools.Models
         ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
         bool IsCenter => this.KeyboardViewModel.IsCenter;
         bool IsSquare => this.KeyboardViewModel.IsSquare;
-        
+
         //@Abstract
         /// <summary>
         /// Create a specific layer.
         /// </summary>
         /// <param name="transformer"> The source transformer. </param>
         /// <returns> The created layer. </returns>
-        public abstract ILayer CreateLayer( Transformer transformer);
+        public abstract ILayer CreateLayer(Transformer transformer);
 
         public abstract bool IsSelected { set; }
         public abstract ToolType Type { get; }

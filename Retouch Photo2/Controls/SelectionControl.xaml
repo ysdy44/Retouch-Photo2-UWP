@@ -128,7 +128,7 @@
                     </selections:SelectionButton.Text>
                 </selections:SelectionButton>
 
-                <selections:SelectionButton x:Name="DeselectButton" IsEnabled="False">
+                <selections:SelectionButton x:Name="DeselectButton">
                     <selections:SelectionButton.EnabledIcon>
                         <selectionsSelectIcons:DeselectEnabledIcon/>
                     </selections:SelectionButton.EnabledIcon>

@@ -9,8 +9,9 @@ namespace Retouch_Photo2.Tools
     {
         /// <summary> Sets IToolButton's IsSelected. </summary>
         bool IsSelected { set; }
-
         /// <summary> Gets it yourself. </summary>
         FrameworkElement Self { get; }
+        /// <summary> Gets IToolButton's type. </summary>
+        ToolButtonType Type { get; }
     }
 }

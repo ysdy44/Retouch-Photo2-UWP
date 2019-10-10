@@ -15,6 +15,7 @@ namespace Retouch_Photo2.Controls
         public ToolControl()
         {
             this.InitializeComponent();
+            this.ItemsControl.ItemsSource = DrawPage.GeometryTools;
         }
     }
 }

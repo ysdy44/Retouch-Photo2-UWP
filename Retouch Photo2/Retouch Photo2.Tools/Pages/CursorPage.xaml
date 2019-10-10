@@ -5,34 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
     >
-
-    <Page.Resources>
-        <!--Flyout-->
-        <Flyout x:Name="Flyout" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel Padding="2" MinWidth="300">
-
-                <!--Ratio-->
-                <TextBlock Style="{StaticResource AppTextBlock}">
-                    Ratio Scaling
-                </TextBlock>
-                <elements:OnOffSwitch OnContent="None" OffContent="Ratio" IsOn="{x:Bind KeyboardViewModel.IsRatio,Mode=TwoWay}"/>
-
-                <ContentControl Width="4"/>
-
-                <!--Center-->
-                <TextBlock Style="{StaticResource AppTextBlock}">
-                    Center Scaling
-                </TextBlock>
-                <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}"/>
-
-            </StackPanel>
-        </Flyout>
-    </Page.Resources>
-
 
     <StackPanel Orientation="Horizontal">
 
@@ -59,13 +36,7 @@
 
         <ContentControl Width="4"/>
 
-        <!--More-->
-        <Button x:Name="MoreButton" Style="{StaticResource AppCircleButtonStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip Content="More" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-            </ToolTipService.ToolTip>
-            <FontIcon Glyph="&#xE10C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-        </Button>
+        <toolsElements:MoreCreateButton/>
 
     </StackPanel>
 </Page>

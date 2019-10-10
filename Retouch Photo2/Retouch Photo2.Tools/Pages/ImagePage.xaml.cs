@@ -18,10 +18,6 @@ namespace Retouch_Photo2.Tools.Pages
         TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         
-        //@Converter
-        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
-        public bool IsSelected { private get; set; }
-        
         //@Construct
         public ImagePage()
         {
@@ -78,9 +74,6 @@ namespace Retouch_Photo2.Tools.Pages
                     this.SelectionViewModel.ImageRe = imageRe;//ImageRe
                 }
             };
-
-            //Storyboard
-            this.EaseStoryboard.Completed+=(s,e) => this.SelectToolTip.IsOpen = false;
         }
 
         /// <summary>
@@ -88,8 +81,6 @@ namespace Retouch_Photo2.Tools.Pages
         /// </summary>
         public void TipSelect()
         {
-            this.SelectToolTip.IsOpen = true;
-
             //Storyboard
             this.EaseStoryboard.Begin();
         }

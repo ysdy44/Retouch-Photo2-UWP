@@ -17,7 +17,7 @@
 
     <tools:ToolButton x:Name="Button">
         <tools:ToolButton.CenterContent>
-            <toolsIcons:EllipseIcon/>
+            <toolsIcons:GeometryEllipseIcon/>
         </tools:ToolButton.CenterContent>
     </tools:ToolButton>
 

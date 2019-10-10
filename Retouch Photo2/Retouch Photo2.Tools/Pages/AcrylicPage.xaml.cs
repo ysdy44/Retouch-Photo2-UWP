@@ -34,13 +34,6 @@ namespace Retouch_Photo2.Tools.Pages
 
             //BlurAmount
             this.BlurAmountTouchbarButton.Unit = "dp";
-
-            //More
-            this.MoreButton.Tapped += (s, e) =>
-            {
-                this.TipViewModel.TouchbarType = TouchbarType.None;//Touchbar
-                this.Flyout.ShowAt(this);
-            };
         }
     }
 }

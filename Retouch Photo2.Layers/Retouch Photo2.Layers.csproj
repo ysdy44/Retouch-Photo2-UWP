@@ -106,14 +106,54 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Icons\GeometryArrowIcon.xaml.cs">
+      <DependentUpon>GeometryArrowIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\GeometryCapsuleIcon.xaml.cs">
+      <DependentUpon>GeometryCapsuleIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\GeometryCogIcon.xaml.cs">
+      <DependentUpon>GeometryCogIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\GeometryDiamondIcon.xaml.cs">
+      <DependentUpon>GeometryDiamondIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\GeometryHeartIcon.xaml.cs">
+      <DependentUpon>GeometryHeartIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\GeometryPentagonIcon.xaml.cs">
+      <DependentUpon>GeometryPentagonIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\GeometryPieIcon.xaml.cs">
+      <DependentUpon>GeometryPieIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\GeometryRoundRectIcon.xaml.cs">
+      <DependentUpon>GeometryRoundRectIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\GeometryStarIcon.xaml.cs">
+      <DependentUpon>GeometryStarIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\GeometryTriangleIcon.xaml.cs">
+      <DependentUpon>GeometryTriangleIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeometryArrowLayer.cs" />
+    <Compile Include="Models\GeometryCapsuleLayer.cs" />
+    <Compile Include="Models\GeometryCogLayer.cs" />
+    <Compile Include="Models\GeometryDiamondLayer.cs" />
+    <Compile Include="Models\GeometryHeartLayer.cs" />
+    <Compile Include="Models\GeometryPentagonLayer.cs" />
+    <Compile Include="Models\GeometryPieLayer.cs" />
+    <Compile Include="Models\GeometryRoundRectLayer.cs" />
+    <Compile Include="Models\GeometryStarLayer.cs" />
+    <Compile Include="Models\GeometryTriangleLayer.cs" />
     <Compile Include="Icons\AcrylicIcon.xaml.cs">
       <DependentUpon>AcrylicIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\CurveIcon.xaml.cs">
-      <DependentUpon>CurveIcon.xaml</DependentUpon>
+    <Compile Include="Icons\GeometryCurveIcon.xaml.cs">
+      <DependentUpon>GeometryCurveIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\EllipseIcon.xaml.cs">
-      <DependentUpon>EllipseIcon.xaml</DependentUpon>
+    <Compile Include="Icons\GeometryEllipseIcon.xaml.cs">
+      <DependentUpon>GeometryEllipseIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icons\GroupIcon.xaml.cs">
       <DependentUpon>GroupIcon.xaml</DependentUpon>
@@ -121,8 +161,8 @@
     <Compile Include="Icons\ImageIcon.xaml.cs">
       <DependentUpon>ImageIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\RectangleIcon.xaml.cs">
-      <DependentUpon>RectangleIcon.xaml</DependentUpon>
+    <Compile Include="Icons\GeometryRectangleIcon.xaml.cs">
+      <DependentUpon>GeometryRectangleIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
@@ -155,14 +195,14 @@
     <Compile Include="Layers\LayerBase.Render.cs" />
     <Compile Include="Layers\LayerBase.Property.cs" />
     <Compile Include="TransformManager.cs" />
-    <Compile Include="Models\CurveLayer.cs" />
+    <Compile Include="Models\GeometryCurveLayer.cs" />
     <Compile Include="Models\IGeometryLayer.cs" />
     <Compile Include="ImageRe.cs" />
     <Compile Include="Models\AcrylicLayer.cs" />
-    <Compile Include="Models\EllipseLayer.cs" />
+    <Compile Include="Models\GeometryEllipseLayer.cs" />
     <Compile Include="Models\GroupLayer.cs" />
     <Compile Include="Models\ImageLayer.cs" />
-    <Compile Include="Models\RectangleLayer.cs" />
+    <Compile Include="Models\GeometryRectangleLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.Layers.rd.xml" />
   </ItemGroup>
@@ -178,15 +218,55 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Icons\GeometryArrowIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\GeometryCapsuleIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\GeometryCogIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\GeometryDiamondIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\GeometryHeartIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\GeometryPentagonIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\GeometryPieIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\GeometryRoundRectIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\GeometryStarIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\GeometryTriangleIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Icons\AcrylicIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Icons\CurveIcon.xaml">
+    <Page Include="Icons\GeometryCurveIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Icons\EllipseIcon.xaml">
+    <Page Include="Icons\GeometryEllipseIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -198,7 +278,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Icons\RectangleIcon.xaml">
+    <Page Include="Icons\GeometryRectangleIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

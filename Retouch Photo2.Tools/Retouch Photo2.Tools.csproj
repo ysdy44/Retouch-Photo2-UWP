@@ -106,20 +106,83 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Buttons\GeometryTriangleButton.xaml.cs">
+      <DependentUpon>GeometryTriangleButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\GeometryDiamondButton.xaml.cs">
+      <DependentUpon>GeometryDiamondButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\GeometryPentagonButton.xaml.cs">
+      <DependentUpon>GeometryPentagonButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\GeometryStarButton.xaml.cs">
+      <DependentUpon>GeometryStarButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\GeometryPieButton.xaml.cs">
+      <DependentUpon>GeometryPieButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\GeometryCogButton.xaml.cs">
+      <DependentUpon>GeometryCogButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\GeometryArrowButton.xaml.cs">
+      <DependentUpon>GeometryArrowButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\GeometryCapsuleButton.xaml.cs">
+      <DependentUpon>GeometryCapsuleButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\GeometryHeartButton.xaml.cs">
+      <DependentUpon>GeometryHeartButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Buttons\GeometryRoundRectButton.xaml.cs">
+      <DependentUpon>GeometryRoundRectButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\GeometryPentagonIcon.xaml.cs">
+      <DependentUpon>GeometryPentagonIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\GeometryRoundRectIcon.xaml.cs">
+      <DependentUpon>GeometryRoundRectIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\GeometryStarIcon.xaml.cs">
+      <DependentUpon>GeometryStarIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\GeometryPieIcon.xaml.cs">
+      <DependentUpon>GeometryPieIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\GeometryCogIcon.xaml.cs">
+      <DependentUpon>GeometryCogIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\GeometryArrowIcon.xaml.cs">
+      <DependentUpon>GeometryArrowIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\GeometryCapsuleIcon.xaml.cs">
+      <DependentUpon>GeometryCapsuleIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\GeometryHeartIcon.xaml.cs">
+      <DependentUpon>GeometryHeartIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\GeometryDiamondIcon.xaml.cs">
+      <DependentUpon>GeometryDiamondIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Icons\GeometryTriangleIcon.xaml.cs">
+      <DependentUpon>GeometryTriangleIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Icons\TransparencyIcon.xaml.cs">
       <DependentUpon>TransparencyIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\PenAsymmetricIcon.xaml.cs">
+    <Compile Include="Elements\PenAsymmetricIcon.xaml.cs">
       <DependentUpon>PenAsymmetricIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\PenDisconnectedIcon.xaml.cs">
+    <Compile Include="Elements\PenDisconnectedIcon.xaml.cs">
       <DependentUpon>PenDisconnectedIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icons\CropIcon.xaml.cs">
       <DependentUpon>CropIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\PenMirroredIcon.xaml.cs">
+    <Compile Include="Elements\PenMirroredIcon.xaml.cs">
       <DependentUpon>PenMirroredIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToolButtons\GeometryToolButton.xaml.cs">
+      <DependentUpon>GeometryToolButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="ToolButtons\ToolButton.xaml.cs">
       <DependentUpon>ToolButton.xaml</DependentUpon>
@@ -134,8 +197,8 @@
     <Compile Include="Icons\CursorIcon.xaml.cs">
       <DependentUpon>CursorIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\EllipseIcon.xaml.cs">
-      <DependentUpon>EllipseIcon.xaml</DependentUpon>
+    <Compile Include="Icons\GeometryEllipseIcon.xaml.cs">
+      <DependentUpon>GeometryEllipseIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icons\ImageIcon.xaml.cs">
       <DependentUpon>ImageIcon.xaml</DependentUpon>
@@ -143,8 +206,8 @@
     <Compile Include="Icons\PenIcon.xaml.cs">
       <DependentUpon>PenIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\RectangleIcon.xaml.cs">
-      <DependentUpon>RectangleIcon.xaml</DependentUpon>
+    <Compile Include="Icons\GeometryRectangleIcon.xaml.cs">
+      <DependentUpon>GeometryRectangleIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icons\ViewIcon.xaml.cs">
       <DependentUpon>ViewIcon.xaml</DependentUpon>
@@ -156,6 +219,7 @@
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
     <Compile Include="ITool.cs" />
+    <Compile Include="ToolButtons\ToolButtonType.cs" />
     <Compile Include="Touchbars\ITouchbar.cs" />
     <Compile Include="Models\ViewRadianConverter.cs" />
     <Compile Include="Models\ViewScaleConverter.cs" />
@@ -186,15 +250,95 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Buttons\GeometryTriangleButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Buttons\GeometryDiamondButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Buttons\GeometryPentagonButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Buttons\GeometryStarButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Buttons\GeometryPieButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Buttons\GeometryCogButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Buttons\GeometryArrowButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Buttons\GeometryCapsuleButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Buttons\GeometryHeartButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Buttons\GeometryRoundRectButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Icons\GeometryPentagonIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\GeometryRoundRectIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Icons\GeometryStarIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\GeometryPieIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\GeometryCogIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\GeometryArrowIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\GeometryCapsuleIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\GeometryHeartIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\GeometryDiamondIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\GeometryTriangleIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Icons\TransparencyIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Icons\PenAsymmetricIcon.xaml">
+    <Page Include="Elements\PenAsymmetricIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Icons\PenDisconnectedIcon.xaml">
+    <Page Include="Elements\PenDisconnectedIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -202,7 +346,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Icons\PenMirroredIcon.xaml">
+    <Page Include="Elements\PenMirroredIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ToolButtons\GeometryToolButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -222,7 +370,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Icons\EllipseIcon.xaml">
+    <Page Include="Icons\GeometryEllipseIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -234,7 +382,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Icons\RectangleIcon.xaml">
+    <Page Include="Icons\GeometryRectangleIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

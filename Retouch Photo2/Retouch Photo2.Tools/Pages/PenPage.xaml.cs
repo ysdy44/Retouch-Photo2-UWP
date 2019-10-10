@@ -18,23 +18,12 @@ namespace Retouch_Photo2.Tools.Pages
         TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
-        CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
-
-
+        GeometryCurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
+        
         //@Content
         /// <summary> PenPage's Flyout. </summary>
         public PenFlyout PenFlyout => this._penFlyout;
-
-
-        //@Converter
-        private Visibility FalseToVisibilityConverter(bool value) => value ? Visibility.Collapsed : Visibility.Visible;
-        private Visibility TrueToVisibilityConverter(bool value) => value ? Visibility.Visible : Visibility.Collapsed;
-
-        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
-        private bool NodesIsOpenConverter(bool isOpen) => isOpen && this.IsSelected&&this.SelectionViewModel.IsPenToolNodesMode;
-         public bool IsSelected { private get; set; }
-
-
+        
         //@Construct
         public PenPage()
         {

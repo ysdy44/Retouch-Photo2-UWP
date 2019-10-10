@@ -239,8 +239,8 @@ namespace Retouch_Photo2.Controls
                 {
                     case ToolType.Cursor:
                     case ToolType.View:
-                    case ToolType.Rectangle:
-                    case ToolType.Ellipse:
+                    case ToolType.GeometryRectangle:
+                    case ToolType.GeometryEllipse:
                     case ToolType.Acrylic:
                         {
                             con._vsDisabledTool = false;

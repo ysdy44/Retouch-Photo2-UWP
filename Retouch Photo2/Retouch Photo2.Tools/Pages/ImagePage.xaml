@@ -35,50 +35,44 @@
 
         <TextBlock Text="{x:Bind SelectionViewModel.ImageRe,Mode=OneWay}" Style="{StaticResource AppTextBlock}"/>
 
+        <ContentControl Width="4"/>
+
         <!--Select-->
-        <Button x:Name="ClearButton" Style="{StaticResource AppCircleButtonStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip Content="Cleat current image" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-            </ToolTipService.ToolTip>
-            <FontIcon Glyph="&#xE106;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Select
+        </TextBlock>
+        <Button x:Name="SelectButton" Style="{StaticResource AppCircleButtonStyle}">
+            <Button.BorderBrush>
+                <SolidColorBrush x:Name="SelectBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
+            </Button.BorderBrush>
+            <FontIcon Glyph="&#xE109;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
         </Button>
 
         <ContentControl Width="4"/>
 
-        <!--Select-->
-        <Border Style="{StaticResource AppRoundedBorderStyle}">
-            <Border.BorderBrush>
-                <SolidColorBrush x:Name="SelectBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
-            </Border.BorderBrush>
-            <ToolTipService.ToolTip>
-                <ToolTip x:Name="SelectToolTip" Content="Click and select a picture" Placement="Top" Style="{StaticResource AppToolTip}"/>
-            </ToolTipService.ToolTip>
-            <Button x:Name="SelectButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <TextBlock>
-                    Select Image
-                </TextBlock>
-            </Button>
-        </Border>
-
-        <ContentControl Width="4"/>
-
         <!--Replace-->
-        <Border Style="{StaticResource AppRoundedBorderStyle}">
-            <Button x:Name="ReplaceButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Replace
+        </TextBlock>
+        <Button x:Name="ReplaceButton" Style="{StaticResource AppCircleButtonStyle}"
                  IsEnabled="{x:Bind SelectionViewModel.IsImageLayer,Mode=OneWay}">
-                <TextBlock>
-                    Replace Image
-                </TextBlock>
-            </Button>
-        </Border>
+            <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
+        </Button>
+
+        <AppBarSeparator/>
+
+        <!--Select-->
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Clear
+        </TextBlock>
+        <Button x:Name="ClearButton" Style="{StaticResource AppCircleButtonStyle}">
+            <FontIcon Glyph="&#xE106;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+        </Button>
 
         <ContentControl Width="4"/>
-
+        
         <!--Stack-->
         <Button x:Name="StackButton" Style="{StaticResource AppCircleButtonStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip Content="Cleat current image" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-            </ToolTipService.ToolTip>
             <FontIcon Glyph="&#xE14C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
         </Button>
 

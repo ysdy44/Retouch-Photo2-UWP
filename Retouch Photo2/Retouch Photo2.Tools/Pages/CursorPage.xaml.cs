@@ -22,7 +22,6 @@ namespace Retouch_Photo2.Tools.Pages
         public CursorPage()
         {
             this.InitializeComponent();
-            this.MoreButton.Tapped += (s, e) => this.Flyout.ShowAt(this);
         }
     }
 }

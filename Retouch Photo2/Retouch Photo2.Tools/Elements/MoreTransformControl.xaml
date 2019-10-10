@@ -1,0 +1,35 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Tools.Elements.MoreTransformControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:elements="using:Retouch_Photo2.Elements"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="50"
+    >
+    
+    <UserControl.Resources>
+        <Flyout x:Name="_Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <StackPanel Padding="2" MinWidth="300">
+
+                <!--Ratio-->
+                <TextBlock Style="{StaticResource AppTextBlock}">
+                    Ratio Scaling
+                </TextBlock>
+                <elements:OnOffSwitch OnContent="None" OffContent="Ratio" IsOn="{x:Bind KeyboardViewModel.IsRatio,Mode=TwoWay}"/>
+
+                <ContentControl Width="4"/>
+
+                <!--Center-->
+                <TextBlock Style="{StaticResource AppTextBlock}">
+                    Center Scaling
+                </TextBlock>
+                <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}"/>
+
+            </StackPanel>
+        </Flyout>
+    </UserControl.Resources>
+    
+</UserControl>

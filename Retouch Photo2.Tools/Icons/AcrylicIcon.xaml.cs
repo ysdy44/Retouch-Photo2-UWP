@@ -3,7 +3,7 @@
 namespace Retouch_Photo2.Tools.Icons
 {
     /// <summary>
-    /// Icon of <see cref = "AcrylicTool"/>.
+    /// Icon of <see cref = "GeometryAcrylicTool"/>.
     /// </summary>
     public sealed partial class AcrylicIcon : UserControl
     {

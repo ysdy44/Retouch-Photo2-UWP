@@ -27,7 +27,10 @@
     </UserControl.Resources>
     
 
-    <ContentPresenter x:Name="ContentPresenter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent">
+    <ContentPresenter x:Name="ContentPresenter"
+                      HorizontalContentAlignment="Center" 
+                      VerticalContentAlignment="Center" 
+                      Background="Transparent">
         
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>

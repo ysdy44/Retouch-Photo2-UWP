@@ -172,8 +172,6 @@
             <!--Frame-->
         </Border>
         <ListView x:Name="FilterListView" Visibility="Collapsed" Grid.Row="1" MaxHeight="300" Padding="4,0"
-                          ReorderMode="Enabled" CanReorderItems="True"
-                          AllowDrop="True" CanDrag="True" CanDragItems="True"
                           SelectionMode="None" IsItemClickEnabled="True">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">

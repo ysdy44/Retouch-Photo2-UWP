@@ -1,6 +1,7 @@
 ﻿using Retouch_Photo2.Menus;
 using Retouch_Photo2.Menus.Models;
 using Retouch_Photo2.Tools;
+using Retouch_Photo2.Tools;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.Tools.Touchbars;
 using Retouch_Photo2.ViewModels;
@@ -50,13 +51,28 @@ namespace Retouch_Photo2
                  new BrushTool(),
                  new TransparencyTool(),
                  null,
-                 new RectangleTool(),
-                 new EllipseTool(),
+                 new GeometryRectangleTool(),
+                 new GeometryEllipseTool(),
                  new PenTool(),
                  null,
                  new ImageTool(),
                  new AcrylicTool(),
                  new CropTool(),
+
+
+                 new GeometryRoundRectTool(),
+                 new GeometryTriangleTool(),
+                 null,
+                 new GeometryDiamondTool(),
+                 new GeometryPentagonTool(),
+                 new GeometryStarTool(),
+                 new GeometryPieTool(),
+                 null,
+                 new GeometryCogTool(),
+                 new GeometryArrowTool(),
+                 new GeometryCapsuleTool(),
+                 new GeometryHeartTool(),
+
             },
 
             //Touchbar
@@ -65,10 +81,16 @@ namespace Retouch_Photo2
                 /*
                  */
                 new StrokeWidthTouchbar(),
+
                 new ViewRadianTouchbar(),
                 new ViewScaleTouchbar(),
+
                 new AcrylicTintOpacityTouchbar(),
                 new AcrylicBlurAmountTouchbar(),
+
+                new GeometryRoundRectCornerTouchbar(),
+                new GeometryTriangleCenterTouchbar(),
+                
             },
 
             //Menu

@@ -1,0 +1,23 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Tools.Buttons.GeometryTriangleButton"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolsIcons="using:Retouch_Photo2.Tools.Icons"
+    xmlns:tools="using:Retouch_Photo2.Tools"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="200"
+    >
+
+    <tools:GeometryToolButton x:Name="Button">
+        <tools:GeometryToolButton.Text>
+            Triangle
+        </tools:GeometryToolButton.Text>
+        <tools:GeometryToolButton.CenterContent>
+            <toolsIcons:GeometryTriangleIcon/>
+        </tools:GeometryToolButton.CenterContent>
+    </tools:GeometryToolButton>
+
+</UserControl>

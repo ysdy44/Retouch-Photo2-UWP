@@ -172,7 +172,7 @@
         </Button>
         
         <!--Tip-->
-        <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,110,0,0" HorizontalAlignment="Center">
+        <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,70,0,0" HorizontalAlignment="Center">
             <ToolTip Style="{StaticResource AppToolTip}">
                 <TextBlock Text="{x:Bind ViewModel.Text, Mode=OneWay}"/>
             </ToolTip>

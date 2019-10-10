@@ -11,29 +11,6 @@
     d:DesignHeight="50"
     d:DesignWidth="400"
     >
-
-    <Page.Resources>
-        <!--Flyout-->
-        <Flyout x:Name="Flyout" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel Padding="2" MinWidth="300">
-
-                <!--Ratio-->
-                <TextBlock Style="{StaticResource AppTextBlock}">
-                    Equal width and height
-                </TextBlock>
-                <elements:OnOffSwitch OnContent="None" OffContent="Square" IsOn="{x:Bind KeyboardViewModel.IsSquare,Mode=TwoWay}"/>
-
-                <ContentControl Width="4"/>
-
-                <!--Center-->
-                <TextBlock Style="{StaticResource AppTextBlock}">
-                    Center Scaling
-                </TextBlock>
-                <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}"/>
-
-            </StackPanel>
-        </Flyout>
-    </Page.Resources>
         
 
     <StackPanel Orientation="Horizontal">        
@@ -70,13 +47,7 @@
 
         <ContentControl Width="4"/>
 
-        <!--More-->
-        <Button x:Name="MoreButton" Style="{StaticResource AppCircleButtonStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip Content="More" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-            </ToolTipService.ToolTip>
-            <FontIcon Glyph="&#xE10C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-        </Button>
+        <toolsElements:MoreCreateButton/>
 
     </StackPanel>
 </Page>

@@ -59,7 +59,6 @@ namespace Retouch_Photo2.Controls
         private bool VisibilityToBoolConverter(Visibility visibility) => visibility == Visibility.Visible;
         private bool GroupLayerToboolConverter(GroupLayer groupLayer) => (groupLayer == null) ? false : true;
 
-        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsOverlayExpanded;
         public bool IsOverlayExpanded { private get; set; }
 
 

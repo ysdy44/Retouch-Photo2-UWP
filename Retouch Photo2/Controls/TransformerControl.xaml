@@ -83,14 +83,12 @@
                 <pickers:NumberPicker x:Name="HPicker" Width="Auto" Height="Auto" Unit="dp" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
             </Border>
 
-            <elements:ExpandAppbarToggleButton x:Name="RatioToggleControl" Grid.Column="1" Grid.Row="1" IsChecked="{x:Bind IsRatio,Mode=TwoWay}">
+            <ToggleButton x:Name="RatioToggleControl" Grid.Column="1" Grid.Row="1" IsChecked="{x:Bind IsRatio,Mode=TwoWay}" Style="{StaticResource AppCircleToggleButtonStyle}">
                 <ToolTipService.ToolTip>
                     <ToolTip Content="Ratio Scaling" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                 </ToolTipService.ToolTip>
-                <elements:ExpandAppbarToggleButton.CenterContent>
                     <FontIcon Glyph="&#x1F512;" FontSize="18" FontFamily="Segoe UI Symbol"/>
-                </elements:ExpandAppbarToggleButton.CenterContent>
-            </elements:ExpandAppbarToggleButton>
+            </ToggleButton>
             
             <!--/////////////////////////////////////////////////////////-->
 

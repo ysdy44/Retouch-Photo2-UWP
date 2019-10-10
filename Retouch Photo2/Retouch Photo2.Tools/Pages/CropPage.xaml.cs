@@ -16,10 +16,6 @@ namespace Retouch_Photo2.Tools.Pages
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
 
-        //@Converter
-        private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
-        public bool IsSelected { private get; set; }
-
         //@Construct
         public CropPage()
         {
@@ -50,9 +46,6 @@ namespace Retouch_Photo2.Tools.Pages
 
                 this.ViewModel.Invalidate();//Invalidate
             };
-
-            
-            this.MoreButton.Tapped += (s, e) => this.Flyout.ShowAt(this);
         }
     }
 }

@@ -8,12 +8,17 @@
     mc:Ignorable="d"
     MinHeight="200"
     MinWidth="122"
+    MaxHeight="350"
     d:DesignHeight="200"
     d:DesignWidth="200"
     >
 
 
-    <StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*" MinHeight="165"/>
+        </Grid.RowDefinitions>
 
         <!--Head-->
         <menus:MenuTitle x:Name="_MenuTitle">
@@ -21,8 +26,13 @@
                 Tool
             </menus:MenuTitle.Text>
         </menus:MenuTitle>
+
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled">
+        <ItemsControl x:Name="ItemsControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <!--GeometryTools-->
+        </ItemsControl>            
+        </ScrollViewer>
         
-        
-    </StackPanel>
+    </Grid>
 
 </UserControl>

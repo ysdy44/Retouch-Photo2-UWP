@@ -1,0 +1,28 @@
+﻿using FanKit.Transformers;
+using Retouch_Photo2.Layers;
+using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Tools.Buttons;
+using Retouch_Photo2.Tools.Icons;
+using Retouch_Photo2.Tools.Pages;
+using Retouch_Photo2.Tools.Models;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+
+namespace Retouch_Photo2.Tools
+{
+    /// <summary>
+    /// <see cref="ITool"/>'s GeometryHeartTool.
+    /// </summary>
+    public class GeometryHeartTool : IGeometryTool
+    {
+        //@Override
+        public override IGeometryLayer CreateGeometryLayer(Transformer transformer)
+        {
+            return new GeometryHeartLayer();
+        }
+        public override ToolType Type => ToolType.GeometryHeart;
+        public override FrameworkElement Icon { get; } = new HeartIcon();
+        public override IToolButton Button { get; } = new GeometryHeartButton();
+        public override Page Page { get; } = new GeometryHeartPage();
+    }
+}

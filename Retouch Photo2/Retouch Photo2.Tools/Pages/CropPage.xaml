@@ -5,82 +5,38 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
     >
 
-    <Page.Resources>
-        <!--Flyout-->
-        <Flyout x:Name="Flyout" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel Padding="2" MinWidth="300">
-
-                <!--Ratio-->
-                <TextBlock Style="{StaticResource AppTextBlock}">
-                    Ratio Scaling
-                </TextBlock>
-                <elements:OnOffSwitch OnContent="None" OffContent="Ratio" IsOn="{x:Bind KeyboardViewModel.IsRatio,Mode=TwoWay}"/>
-
-                <ContentControl Width="4"/>
-
-                <!--Center-->
-                <TextBlock Style="{StaticResource AppTextBlock}">
-                    Center Scaling
-                </TextBlock>
-                <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}"/>
-
-            </StackPanel>
-        </Flyout>
-    </Page.Resources>
-
 
     <StackPanel Orientation="Horizontal">
 
-        <!--Crop-->
-        <ToggleButton IsHitTestVisible="False" IsChecked="{x:Bind SelectionViewModel.IsCrop,Mode=TwoWay}" Style="{StaticResource AppCircleToggleButtonStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip Content="IsCrop" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-            </ToolTipService.ToolTip>
-                <PathIcon>
-                    <PathIcon.Data>
-                        M2.264,17.096l4.337,0l0,2.211l-6.601,0l0,-6.371l2.264,0l0,4.16Zm17.503,2.211l-6.601,0l0,-2.211l4.337,0l0,-4.16l2.264,0l0,6.371Zm-3.164,-16.373l0,13.44l-13.44,0l0,-13.44l13.44,0Zm3.164,3.437l-2.264,0l0,-4.16l-4.337,0l0,-2.211l6.601,0l0,6.371Zm-13.166,-4.16l-4.337,0l0,4.16l-2.264,0l0,-6.371l6.601,0l0,2.211Z
-                    </PathIcon.Data>
-                </PathIcon>
-        </ToggleButton>
-
-        <ContentControl Width="4"/>
-        
         <!--Reset-->
-        <Border Style="{StaticResource AppRoundedBorderStyle}">
-            <Button x:Name="ResetButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Reset
+        </TextBlock>
+        <Button x:Name="ResetButton" Style="{StaticResource AppCircleButtonStyle}"
                  IsEnabled="{x:Bind SelectionViewModel.IsCrop, Mode=OneWay}">
-                <TextBlock>
-                    Reset Crop
-                </TextBlock>
-            </Button>
-        </Border>
-        
+            <FontIcon Glyph="&#xF617;" FontSize="24" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+        </Button>
+
         <ContentControl Width="4"/>
 
         <!--Fit-->
-        <Border Style="{StaticResource AppRoundedBorderStyle}">
-            <Button x:Name="FitButton" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Fit
+        </TextBlock>
+        <Button x:Name="FitButton" Style="{StaticResource AppCircleButtonStyle}"
                  IsEnabled="{x:Bind SelectionViewModel.IsCrop, Mode=OneWay}">
-                <TextBlock>
-                    Fit Crop
-                </TextBlock>
-            </Button>
-        </Border>
+            <FontIcon Glyph="&#xE9A6;" FontSize="22" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource AppText}"/>
+        </Button>
 
         <ContentControl Width="4"/>
 
-        <!--More-->
-        <Button x:Name="MoreButton" Style="{StaticResource AppCircleButtonStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip Content="More" Placement="Top" IsOpen="{x:Bind IsOpenConverter(TipViewModel.IsOpen),Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-            </ToolTipService.ToolTip>
-            <FontIcon Glyph="&#xE10C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-        </Button>
+        <toolsElements:MoreCreateButton/>
 
     </StackPanel>
 </Page>

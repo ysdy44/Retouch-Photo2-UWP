@@ -59,6 +59,11 @@ namespace Retouch_Photo2.Tools
                 this._vsClickMode = ClickMode.Press;
                 this.VisualState = this.VisualState;//State
             };
+            this.ContentPresenter.PointerReleased += (s, e) =>
+            {
+                this._vsClickMode = ClickMode.Release;
+                this.VisualState = this.VisualState;//State
+            };
             this.ContentPresenter.PointerExited += (s, e) =>
             {
                 this._vsClickMode = ClickMode.Release;

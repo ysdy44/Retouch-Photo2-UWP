@@ -14,6 +14,9 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
+using Windows.Foundation.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Retouch_Photo2
 {
@@ -87,11 +90,14 @@ namespace Retouch_Photo2
 
         #region Tool
 
+        //@Static
+        public static ObservableCollection<UIElement> GeometryTools = new ObservableCollection<UIElement>();
 
         UIElementCollection TooLeft => this.DrawLayout.LeftPaneChildren;
         object LeftIcon { set => this.DrawLayout.LeftIcon = value; }
         Page FootPage { set => this.DrawLayout.FootPage = value; }
-                
+
+        ToolButtonType _tempToolButtonType;
  
         private void ConstructTool(ITool tool)
         {
@@ -104,7 +110,16 @@ namespace Retouch_Photo2
                     Opacity = 0.2,
                     Margin = new Thickness(4, 0, 4, 0),
                 };
-                this.TooLeft.Add(rectangle);
+
+                switch (this._tempToolButtonType)
+                {
+                    case ToolButtonType.None:
+                        this.TooLeft.Add(rectangle);
+                        break;
+                    case ToolButtonType.Geometry:
+                        DrawPage.GeometryTools.Add(rectangle);
+                        break;
+                }
                 return;
             }
             IToolButton button = tool.Button;
@@ -120,7 +135,16 @@ namespace Retouch_Photo2
                     this.TipViewModel.Tool = tool;
                 };
 
-                this.TooLeft.Add(button.Self);
+                this._tempToolButtonType = button.Type;
+                switch (button.Type)
+                {
+                    case ToolButtonType.None:
+                        this.TooLeft.Add(button.Self);
+                        break;
+                    case ToolButtonType.Geometry:
+                        DrawPage.GeometryTools.Add(button.Self);
+                        break;
+                }
             }
         }
 

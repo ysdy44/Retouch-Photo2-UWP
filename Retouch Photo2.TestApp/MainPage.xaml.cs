@@ -18,10 +18,10 @@ namespace Retouch_Photo2.TestApp.Pages
     public sealed partial class MainPage : Page
     {
 
-        ILayer Layer01 = new RectangleLayer();
-        ILayer Layer02 = new RectangleLayer();
-        ILayer Layer03 = new RectangleLayer();
-        ILayer Layer04 = new RectangleLayer();
+        ILayer Layer01 = new GeometryRectangleLayer();
+        ILayer Layer02 = new GeometryRectangleLayer();
+        ILayer Layer03 = new GeometryRectangleLayer();
+        ILayer Layer04 = new GeometryRectangleLayer();
 
         public MainPage()
         {
