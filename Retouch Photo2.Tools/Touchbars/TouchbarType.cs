@@ -26,6 +26,14 @@
 
         /// <summary> GeometryTriangleTool's center-point. </summary>
         GeometryTriangleCenter,
-        
+
+        /// <summary> GeometryPentagonTool's points. </summary>
+        GeometryPentagonPoints,
+
+        /// <summary> GeometryStarTool's points. </summary>
+        GeometryStarPoints,
+        /// <summary> GeometryStarTool's inner-radius . </summary>
+        GeometryStarInnerRadius,
+
     }
 }

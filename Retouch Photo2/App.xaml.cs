@@ -90,7 +90,10 @@ namespace Retouch_Photo2
 
                 new GeometryRoundRectCornerTouchbar(),
                 new GeometryTriangleCenterTouchbar(),
-                
+                new GeometryPentagonPointsTouchbar(),
+                new GeometryStarPointsTouchbar(),
+                new GeometryStarInnerRadiusTouchbar(),
+            
             },
 
             //Menu

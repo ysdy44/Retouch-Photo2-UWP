@@ -30,6 +30,7 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
+
         /// <summary> GeometryRoundRectLayer's corner. </summary>     
         public float GeometryRoundRectCorner
         {
@@ -42,6 +43,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private float geometryRoundRectCorner = 0.12f;
+
 
 
         /// <summary> GeometryTriangle's center-point. </summary>     
@@ -58,6 +60,47 @@ namespace Retouch_Photo2.ViewModels
         private float geometryTriangleCenter = 0.5f;
 
 
+
+        /// <summary> GeometryPentagon's points </summary>     
+        public int GeometryPentagonPoints
+        {
+            get => this.geometryPentagonPoints;
+            set
+            {
+                if (this.geometryPentagonPoints == value) return;
+                this.geometryPentagonPoints = value;
+                this.OnPropertyChanged(nameof(this.GeometryPentagonPoints));//Notify 
+            }
+        }
+        private int geometryPentagonPoints = 5;
+
+
+
+        /// <summary> GeometryStar's points </summary>     
+        public int GeometryStarPoints
+        {
+            get => this.geometryStarPoints;
+            set
+            {
+                if (this.geometryStarPoints == value) return;
+                this.geometryStarPoints = value;
+                this.OnPropertyChanged(nameof(this.GeometryStarPoints));//Notify 
+            }
+        }
+        private int geometryStarPoints = 5;
+
+        /// <summary> GeometryStar's inner-radius </summary>     
+        public float GeometryStarInnerRadius
+        {
+            get => this.geometryStarInnerRadius;
+            set
+            {
+                if (this.geometryStarInnerRadius == value) return;
+                this.geometryStarInnerRadius = value;
+                this.OnPropertyChanged(nameof(this.GeometryStarInnerRadius));//Notify 
+            }
+        }
+        private float geometryStarInnerRadius = 0.4f;
 
 
     }

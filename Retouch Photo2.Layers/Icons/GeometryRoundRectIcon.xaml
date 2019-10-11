@@ -9,6 +9,6 @@
     d:DesignWidth="50"
     >
 
-    <Rectangle RadiusX="6" RadiusY="6" Width="22" Height="22" StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="#439EFB"/>
+    <Rectangle RadiusX="6" RadiusY="6" Width="22" Height="22"/>
 
 </UserControl>

@@ -11,7 +11,6 @@
     >
     
     <tools:TouchbarButton x:Name="TouchbarButton"
-                      Type="StrokeWidth"
                       GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
                       Number="{x:Bind NumberConverter(SelectionViewModel.StrokeWidth),Mode=OneWay}"
                       />

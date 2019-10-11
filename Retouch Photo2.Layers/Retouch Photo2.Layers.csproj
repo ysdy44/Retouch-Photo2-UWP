@@ -194,6 +194,7 @@
     <Compile Include="Layers\LayerBase.Control.cs" />
     <Compile Include="Layers\LayerBase.Render.cs" />
     <Compile Include="Layers\LayerBase.Property.cs" />
+    <Compile Include="Models\GeometryUtil.cs" />
     <Compile Include="TransformManager.cs" />
     <Compile Include="Models\GeometryCurveLayer.cs" />
     <Compile Include="Models\IGeometryLayer.cs" />

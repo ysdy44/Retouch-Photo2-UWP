@@ -30,9 +30,11 @@ namespace Retouch_Photo2.Tools.Pages
             this.InitializeComponent();
 
             //TintOpacity
+            this.TintOpacityTouchbarButton.Type = TouchbarType.AcrylicTintOpacity;
             this.TintOpacityTouchbarButton.Unit = "%";
 
             //BlurAmount
+            this.BlurAmountTouchbarButton.Type = TouchbarType.AcrylicBlurAmount;
             this.BlurAmountTouchbarButton.Unit = "dp";
         }
     }

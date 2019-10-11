@@ -18,6 +18,7 @@ namespace Retouch_Photo2.Tools.Elements
         {            
             this.InitializeComponent();
 
+            this.TouchbarButton.Type = TouchbarType.StrokeWidth;
             this.TouchbarButton.Unit = "%";
         }
     }

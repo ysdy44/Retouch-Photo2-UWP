@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:tools="using:Retouch_Photo2.Tools"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -12,6 +13,17 @@
 
     <StackPanel Orientation="Horizontal">
 
+        <!--Points-->
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Points
+        </TextBlock>
+        <tools:TouchbarButton x:Name="PointsTouchbarButton"
+                      GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
+                      Number="{x:Bind SelectionViewModel.GeometryPentagonPoints,Mode=OneWay}"
+                      />
+
+        <ContentControl Width="4"/>
+        
         <toolsElements:MoreCreateButton/>
 
     </StackPanel>

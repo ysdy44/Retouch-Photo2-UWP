@@ -52,6 +52,8 @@ namespace Retouch_Photo2.Layers.Models
             {
                 FillBrush = base.FillBrush,
                 StrokeBrush = base.StrokeBrush,
+
+                Center = this.Center,
             };
 
             LayerBase.CopyWith(resourceCreator, TriangleLayer, this);

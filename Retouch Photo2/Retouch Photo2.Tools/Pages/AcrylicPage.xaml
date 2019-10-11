@@ -28,7 +28,6 @@
             TintOpacity
         </TextBlock>
         <tools:TouchbarButton x:Name="TintOpacityTouchbarButton"
-                      Type="AcrylicTintOpacity"
                       GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
                       Number="{x:Bind TintOpacityNumberConverter(SelectionViewModel.AcrylicTintOpacity),Mode=OneWay}"
                       />
@@ -40,7 +39,6 @@
             BlurAmount
         </TextBlock>
         <tools:TouchbarButton x:Name="BlurAmountTouchbarButton"
-                      Type="AcrylicBlurAmount"
                       GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
                       Number="{x:Bind BlurAmountNumberConverter(SelectionViewModel.AcrylicBlurAmount),Mode=OneWay}"
                       />

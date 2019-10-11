@@ -7,6 +7,7 @@ using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.Tools.Models;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Retouch_Photo2.ViewModels;
 
 namespace Retouch_Photo2.Tools
 {
@@ -15,10 +16,16 @@ namespace Retouch_Photo2.Tools
     /// </summary>
     public class GeometryTriangleTool : IGeometryTool
     {
+        //@ViewModel
+        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+
         //@Override
         public override IGeometryLayer CreateGeometryLayer(Transformer transformer)
         {
-            return new GeometryTriangleLayer();
+            return new GeometryTriangleLayer
+            {
+                Center = this.SelectionViewModel.GeometryTriangleCenter
+            };
         }
         public override ToolType Type => ToolType.GeometryTriangle;
         public override FrameworkElement Icon { get; } = new GeometryTriangleIcon();

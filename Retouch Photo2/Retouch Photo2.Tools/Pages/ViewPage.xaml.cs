@@ -74,6 +74,7 @@ namespace Retouch_Photo2.Tools.Pages
             Storyboard.SetTarget(this.ScaleKeyFrames, this);
 
             //Radian
+            this.RadianTouchbarButton.Type = TouchbarType.ViewRadian;
             this.RadianTouchbarButton.Unit = "º";
             this.RadianClearButton.Tapped += (s, e) =>
             {
@@ -82,6 +83,7 @@ namespace Retouch_Photo2.Tools.Pages
             };
 
             //Scale
+            this.ScaleTouchbarButton.Type = TouchbarType.ViewScale;
             this.ScaleTouchbarButton.Unit = "%";
             this.ScaleClearButton.Tapped += (s, e) =>
             {

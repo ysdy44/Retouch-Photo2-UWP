@@ -24,6 +24,7 @@ namespace Retouch_Photo2.Tools.Pages
             this.InitializeComponent();
 
             //Corner
+            this.CornerTouchbarButton.Type = TouchbarType.GeometryRoundRectCorner;
             this.CornerTouchbarButton.Unit = "%";
         }
     }

@@ -18,7 +18,6 @@
             Corner
         </TextBlock>
         <tools:TouchbarButton x:Name="CornerTouchbarButton"
-                      Type="GeometryRoundRectCorner"
                       GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
                       Number="{x:Bind CornerNumberConverter(SelectionViewModel.GeometryRoundRectCorner),Mode=OneWay}"
                       />

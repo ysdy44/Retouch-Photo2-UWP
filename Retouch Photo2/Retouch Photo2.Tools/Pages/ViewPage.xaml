@@ -34,7 +34,6 @@
             Radian
         </TextBlock>
         <tools:TouchbarButton x:Name="RadianTouchbarButton"
-                      Type="ViewRadian"
                       GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
                       Number="{x:Bind RadianNumberConverter(ViewModel.CanvasTransformerRadian),Mode=OneWay}"
                       />
@@ -59,7 +58,6 @@
             Scale
         </TextBlock>
         <tools:TouchbarButton x:Name="ScaleTouchbarButton"
-                      Type="ViewScale"
                       GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
                       Number="{x:Bind ScaleNumberConverter(ViewModel.CanvasTransformerScale),Mode=OneWay}"
                        />
