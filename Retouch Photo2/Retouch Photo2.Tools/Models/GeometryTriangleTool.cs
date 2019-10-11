@@ -30,6 +30,6 @@ namespace Retouch_Photo2.Tools
         public override ToolType Type => ToolType.GeometryTriangle;
         public override FrameworkElement Icon { get; } = new GeometryTriangleIcon();
         public override IToolButton Button { get; } = new GeometryTriangleButton();
-        public override Page Page { get; } = new GeometryTrianglePage();
+        public override IToolPage Page { get; } = new GeometryTrianglePage();
     }
 }

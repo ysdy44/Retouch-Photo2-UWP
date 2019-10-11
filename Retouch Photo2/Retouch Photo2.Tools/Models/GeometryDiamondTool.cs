@@ -23,6 +23,6 @@ namespace Retouch_Photo2.Tools
         public override ToolType Type => ToolType.GeometryDiamond;
         public override FrameworkElement Icon { get; } = new GeometryDiamondIcon();
         public override IToolButton Button { get; } = new GeometryDiamondButton();
-        public override Page Page { get; } = new GeometryDiamondPage();
+        public override IToolPage Page { get; } = new GeometryDiamondPage();
     }
 }

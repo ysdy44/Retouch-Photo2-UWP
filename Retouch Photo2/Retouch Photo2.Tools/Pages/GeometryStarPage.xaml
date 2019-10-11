@@ -18,9 +18,15 @@
             Points
         </TextBlock>
         <tools:TouchbarButton x:Name="PointsTouchbarButton"
-                      GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
                       Number="{x:Bind SelectionViewModel.GeometryStarPoints,Mode=OneWay}"
-                      />
+                      >
+            <tools:TouchbarButton.TouchbarSlider>
+                <tools:TouchbarSlider x:Name="PointsTouchbarSlider" 
+                             Number="{x:Bind SelectionViewModel.GeometryStarPoints,Mode=OneWay}"
+                             Value="{x:Bind PointsValueConverter(SelectionViewModel.GeometryStarPoints),Mode=OneWay}"
+                             />
+            </tools:TouchbarButton.TouchbarSlider>
+        </tools:TouchbarButton>
 
         <ContentControl Width="4"/>
 
@@ -29,10 +35,16 @@
             Inner Radius
         </TextBlock>
         <tools:TouchbarButton x:Name="InnerRadiusTouchbarButton"
-                      GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
                       Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryStarInnerRadius),Mode=OneWay}"
-                      />
-
+                       >
+            <tools:TouchbarButton.TouchbarSlider>
+                <tools:TouchbarSlider x:Name="InnerRadiusTouchbarSlider"
+                    Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryStarInnerRadius),Mode=OneWay}"
+                    Value="{x:Bind InnerRadiusValueConverter(SelectionViewModel.GeometryStarInnerRadius), Mode=OneWay}" 
+                     />
+            </tools:TouchbarButton.TouchbarSlider>
+        </tools:TouchbarButton>
+        
         <ContentControl Width="4"/>
         
         <toolsElements:MoreCreateButton/>

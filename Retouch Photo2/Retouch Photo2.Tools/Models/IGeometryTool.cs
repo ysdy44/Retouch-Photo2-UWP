@@ -39,7 +39,5 @@ namespace Retouch_Photo2.Tools.Models
 
             return geometryLayer;
         }
-
-        public override bool IsSelected { set => this.Button.IsSelected = value; }
     }
 }

@@ -17,19 +17,10 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
 
-        public bool IsSelected
-        {
-            set
-            {
-                this.Button.IsSelected = value;
-                this._viewPage.IsSelected = value;
-            }
-        }
         public ToolType Type => ToolType.View;
         public FrameworkElement Icon { get; } = new ViewIcon();
         public IToolButton Button { get; } = new ViewButton();
-        public Page Page => this._viewPage;
-        ViewPage _viewPage { get; } = new ViewPage();
+        public IToolPage Page { get; } = new ViewPage();
         
         public void Starting(Vector2 point) { }
         public void Started(Vector2 startingPoint, Vector2 point)
@@ -49,9 +40,8 @@ namespace Retouch_Photo2.Tools.Models
         }
 
         public void Draw(CanvasDrawingSession drawingSession) { }
-
-
+        
         public void OnNavigatedTo() { }
-        public void OnNavigatedFrom()        {}
+        public void OnNavigatedFrom() { }
     }
 }

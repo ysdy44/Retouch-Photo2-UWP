@@ -181,6 +181,7 @@
     <Compile Include="Elements\PenMirroredIcon.xaml.cs">
       <DependentUpon>PenMirroredIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IToolPage.cs" />
     <Compile Include="ToolButtons\GeometryToolButton.xaml.cs">
       <DependentUpon>GeometryToolButton.xaml</DependentUpon>
     </Compile>
@@ -220,7 +221,6 @@
     </Compile>
     <Compile Include="ITool.cs" />
     <Compile Include="ToolButtons\ToolButtonType.cs" />
-    <Compile Include="Touchbars\ITouchbar.cs" />
     <Compile Include="Models\ViewRadianConverter.cs" />
     <Compile Include="Models\ViewScaleConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -232,7 +232,6 @@
     <Compile Include="Touchbars\TouchbarSlider.xaml.cs">
       <DependentUpon>TouchbarSlider.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Touchbars\TouchbarType.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.Tools.rd.xml" />
   </ItemGroup>
   <ItemGroup>

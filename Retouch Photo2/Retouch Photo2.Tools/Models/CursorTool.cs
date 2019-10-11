@@ -27,28 +27,16 @@ namespace Retouch_Photo2.Tools.Models
 
         ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
         CompositeMode CompositeMode => this.KeyboardViewModel.CompositeMode;
-
-
+        
         //Box
         bool _isBox;
         TransformerRect _boxCanvasRect;
-
-
-        public bool IsSelected
-        {
-            set
-            {
-                this.Button.IsSelected = value;
-                this._cursorPage.IsSelected = value;
-            }
-        }
+        
         public ToolType Type=> ToolType.Cursor;
         public FrameworkElement Icon { get; }= new CursorIcon();
         public IToolButton Button { get; } = new CursorButton();
-        public Page Page => this._cursorPage;
-        CursorPage _cursorPage { get; } = new CursorPage();
-
-
+        public IToolPage Page { get; } = new CursorPage();
+        
         public void Starting(Vector2 point)
         {
             this._isBox = false; //Box

@@ -23,6 +23,6 @@ namespace Retouch_Photo2.Tools
         public override ToolType Type => ToolType.GeometryCog;
         public override FrameworkElement Icon { get; } = new GeometryCogIcon();
         public override IToolButton Button { get; } = new GeometryCogButton();
-        public override Page Page { get; } = new GeometryCogPage();
+        public override IToolPage Page { get; } = new GeometryCogPage();
     }
 }

@@ -26,18 +26,10 @@ namespace Retouch_Photo2.Tools.Models
         BrushType BrushType => this.SelectionViewModel.BrushType;
 
 
-        public bool IsSelected
-        {
-            set
-            {
-                this.Button.IsSelected = value;
-                this._brushPage.IsSelected = value;
-            }
-        }
         public ToolType Type => ToolType.Brush;
         public FrameworkElement Icon { get; } = new BrushIcon();
         public IToolButton Button { get; } = new BrushButton();
-        public Page Page => this._brushPage;
+        public IToolPage Page => this._brushPage;
         BrushPage _brushPage { get; } = new BrushPage();
 
 

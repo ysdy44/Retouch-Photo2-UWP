@@ -31,6 +31,6 @@ namespace Retouch_Photo2.Tools
         public override ToolType Type => ToolType.GeometryStar;
         public override FrameworkElement Icon { get; } = new GeometryStarIcon();
         public override IToolButton Button { get; } = new GeometryStarButton();
-        public override Page Page { get; } = new GeometryStarPage();
+        public override IToolPage Page { get; } = new GeometryStarPage();
     }
 }

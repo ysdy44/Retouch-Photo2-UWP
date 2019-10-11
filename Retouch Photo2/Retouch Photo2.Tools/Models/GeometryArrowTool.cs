@@ -23,6 +23,6 @@ namespace Retouch_Photo2.Tools
         public override ToolType Type => ToolType.GeometryArrow;
         public override FrameworkElement Icon { get; } = new GeometryArrowIcon();
         public override IToolButton Button { get; } = new GeometryArrowButton();
-        public override Page Page { get; } = new GeometryArrowPage();
+        public override IToolPage Page { get; } = new GeometryArrowPage();
     }
 }

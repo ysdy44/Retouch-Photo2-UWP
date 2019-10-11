@@ -32,12 +32,10 @@ namespace Retouch_Photo2.Tools.Models
         bool IsStepFrequency => this.KeyboardViewModel.IsStepFrequency;
 
 
-        public bool IsSelected { set { this.Button.IsSelected = value; } }
         public ToolType Type => ToolType.Crop;
         public FrameworkElement Icon { get; } = new CropIcon();
         public IToolButton Button { get; } = new CropButton();
-        public Page Page => this._cropPage;
-        CropPage _cropPage { get; } = new CropPage();
+        public IToolPage Page { get; } = new CropPage();
 
 
         ILayer _layer;

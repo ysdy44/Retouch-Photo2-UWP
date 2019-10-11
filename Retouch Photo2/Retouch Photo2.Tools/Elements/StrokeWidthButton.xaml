@@ -9,10 +9,16 @@
     d:DesignHeight="50"
     d:DesignWidth="50"
     >
-    
-    <tools:TouchbarButton x:Name="TouchbarButton"
-                      GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
-                      Number="{x:Bind NumberConverter(SelectionViewModel.StrokeWidth),Mode=OneWay}"
-                      />
+
+    <tools:TouchbarButton x:Name="StrokeWidthTouchbarButton"
+                      Number="{x:Bind StrokeWidthNumberConverter(SelectionViewModel.StrokeWidth),Mode=OneWay}"
+                      >
+        <tools:TouchbarButton.TouchbarSlider>
+            <tools:TouchbarSlider x:Name="StrokeWidthTouchbarSlider" 
+                             Number="{x:Bind StrokeWidthNumberConverter(SelectionViewModel.StrokeWidth), Mode=OneWay}"
+                             Value="{x:Bind StrokeWidthValueConverter(SelectionViewModel.StrokeWidth), Mode=OneWay}"
+                             />
+        </tools:TouchbarButton.TouchbarSlider>
+    </tools:TouchbarButton>
     
 </UserControl>

@@ -121,7 +121,6 @@
     <Compile Include="TipViewModels\TipViewModel.cs" />
     <Compile Include="TipViewModels\TipViewModel.Menu.cs" />
     <Compile Include="TipViewModels\TipViewModel.Tool.cs" />
-    <Compile Include="TipViewModels\TipViewModel.Touchbar.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.Notify.cs" />
     <Compile Include="ViewModels\ViewModel.Transformer.cs" />

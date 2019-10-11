@@ -11,6 +11,8 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryDiamondLayer : IGeometryLayer
     {
+        public float Mid = 0.5f;
+
         //@Construct
         public GeometryDiamondLayer()
         {
@@ -25,18 +27,24 @@ namespace Retouch_Photo2.Layers.Models
         {
             Transformer transformer = base.GetActualDestinationWithRefactoringTransformer;
 
+            Vector2 leftTop = Vector2.Transform(transformer.LeftTop, canvasToVirtualMatrix);
+            Vector2 rightTop = Vector2.Transform(transformer.RightTop, canvasToVirtualMatrix);
+            Vector2 rightBottom = Vector2.Transform(transformer.RightBottom, canvasToVirtualMatrix);
+            Vector2 leftBottom = Vector2.Transform(transformer.LeftBottom, canvasToVirtualMatrix);
+
             Vector2 centerLeft = Vector2.Transform(transformer.CenterLeft, canvasToVirtualMatrix);
-            Vector2 centerTop = Vector2.Transform(transformer.CenterTop, canvasToVirtualMatrix);
             Vector2 centerRight = Vector2.Transform(transformer.CenterRight, canvasToVirtualMatrix);
-            Vector2 centerBottom = Vector2.Transform(transformer.CenterBottom, canvasToVirtualMatrix);
+
+            Vector2 top = leftTop * (1.0f - this.Mid) + rightTop * this.Mid;
+            Vector2 bottom = leftBottom * (1.0f - this.Mid) + rightBottom * this.Mid;
 
             //Points
             Vector2[] points = new Vector2[]
             {
                 centerLeft,
-                centerTop,
+                top,
                 centerRight,
-                centerBottom,
+                bottom,
             };
 
             //Geometry

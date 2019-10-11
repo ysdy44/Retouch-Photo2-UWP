@@ -1,7 +1,8 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Tools.Buttons;
+using Retouch_Photo2.Tools.Pages;
 using System.Numerics;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
@@ -10,11 +11,10 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public class NoneTool : ITool
     {
-        public bool IsSelected { set { } }
         public ToolType Type => ToolType.None;
         public FrameworkElement Icon { get; } = null;
-        public IToolButton Button { get; } = null;
-        public Page Page { get; } = null;
+        public IToolButton Button { get; } = new NoneButton();
+        public IToolPage Page { get; } = new NonePage();
 
 
         public void Starting(Vector2 point) { }

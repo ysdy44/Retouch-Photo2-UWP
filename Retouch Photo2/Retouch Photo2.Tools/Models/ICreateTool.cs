@@ -4,7 +4,6 @@ using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
@@ -31,11 +30,10 @@ namespace Retouch_Photo2.Tools.Models
         /// <returns> The created layer. </returns>
         public abstract ILayer CreateLayer(Transformer transformer);
 
-        public abstract bool IsSelected { set; }
         public abstract ToolType Type { get; }
         public abstract FrameworkElement Icon { get; }
         public abstract IToolButton Button { get; }
-        public abstract Page Page { get; }
+        public abstract IToolPage Page { get; }
 
         public void Starting(Vector2 point) { }
         public void Started(Vector2 startingPoint, Vector2 point)

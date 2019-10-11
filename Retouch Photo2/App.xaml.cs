@@ -1,9 +1,7 @@
 ﻿using Retouch_Photo2.Menus;
 using Retouch_Photo2.Menus.Models;
 using Retouch_Photo2.Tools;
-using Retouch_Photo2.Tools;
 using Retouch_Photo2.Tools.Models;
-using Retouch_Photo2.Tools.Touchbars;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -74,28 +72,7 @@ namespace Retouch_Photo2
                  new GeometryHeartTool(),
 
             },
-
-            //Touchbar
-            Touchbars = new List<ITouchbar>
-            {
-                /*
-                 */
-                new StrokeWidthTouchbar(),
-
-                new ViewRadianTouchbar(),
-                new ViewScaleTouchbar(),
-
-                new AcrylicTintOpacityTouchbar(),
-                new AcrylicBlurAmountTouchbar(),
-
-                new GeometryRoundRectCornerTouchbar(),
-                new GeometryTriangleCenterTouchbar(),
-                new GeometryPentagonPointsTouchbar(),
-                new GeometryStarPointsTouchbar(),
-                new GeometryStarInnerRadiusTouchbar(),
             
-            },
-
             //Menu
             Menus = new List<IMenu>
             {

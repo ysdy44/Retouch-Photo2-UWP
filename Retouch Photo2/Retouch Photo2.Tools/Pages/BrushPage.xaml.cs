@@ -3,6 +3,7 @@ using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Pages
@@ -10,12 +11,15 @@ namespace Retouch_Photo2.Tools.Pages
     /// <summary>
     /// Page of <see cref = "BrushTool"/>.
     /// </summary>
-    public sealed partial class BrushPage : Page
+    public sealed partial class BrushPage : Page, IToolPage
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
+        //@Content
+        public FrameworkElement Self => this;
+        public bool IsSelected { private get; set; }
 
         //@Converter
         private int FillOrStrokeToIndexConverter(FillOrStroke fillOrStroke) => (int)fillOrStroke;
@@ -36,9 +40,7 @@ namespace Retouch_Photo2.Tools.Pages
         private bool BrushTypeToIsEnabledConverter(BrushType brushType) => (brushType != BrushType.Disabled);
 
         private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
-        public bool IsSelected { private get; set; }
-
-
+        
         //@Construct
         public BrushPage()
         {
@@ -198,6 +200,8 @@ namespace Retouch_Photo2.Tools.Pages
                 };
             }
         }
-              
+
+        public void OnNavigatedTo() { }
+        public void OnNavigatedFrom() { }
     }
 }

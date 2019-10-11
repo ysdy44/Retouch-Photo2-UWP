@@ -23,6 +23,6 @@ namespace Retouch_Photo2.Tools
         public override ToolType Type => ToolType.GeometryCapsule;
         public override FrameworkElement Icon { get; } = new GeometryCapsuleIcon();
         public override IToolButton Button { get; } = new GeometryCapsuleButton();
-        public override Page Page { get; } = new GeometryCapsulePage();
+        public override IToolPage Page { get; } = new GeometryCapsulePage();
     }
 }

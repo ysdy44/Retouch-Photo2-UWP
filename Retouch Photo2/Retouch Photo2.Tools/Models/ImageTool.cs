@@ -24,11 +24,10 @@ namespace Retouch_Photo2.Tools.Models
         float _sizeWidth;
         float _sizeHeight;
 
-        public bool IsSelected { set { this.Button.IsSelected = value; } }
         public ToolType Type => ToolType.Image;
         public FrameworkElement Icon { get; } = new ImageIcon();
         public IToolButton Button { get; } = new ImageButton();
-        public Page Page => this._imagePage;
+        public IToolPage Page => this._imagePage;
         ImagePage _imagePage { get; } = new ImagePage();
         
         public void Starting(Vector2 point) { }

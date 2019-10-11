@@ -20,19 +20,10 @@ namespace Retouch_Photo2.Tools.Models
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         
-        public bool IsSelected
-        {
-            set
-            {
-                this.Button.IsSelected = value;
-                this._transparencyPage.IsSelected = value;
-            }
-        }
         public ToolType Type => ToolType.Transparency;
         public FrameworkElement Icon { get; } = new TransparencyIcon();
         public IToolButton Button { get; } = new TransparencyButton();
-        public Page Page => this._transparencyPage;
-        TransparencyPage _transparencyPage { get; } = new TransparencyPage();
+        public IToolPage Page { get; } = new TransparencyPage();
 
         public void Starting(Vector2 point)
         {

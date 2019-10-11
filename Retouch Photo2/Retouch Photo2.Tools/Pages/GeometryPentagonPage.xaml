@@ -18,9 +18,15 @@
             Points
         </TextBlock>
         <tools:TouchbarButton x:Name="PointsTouchbarButton"
-                      GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
                       Number="{x:Bind SelectionViewModel.GeometryPentagonPoints,Mode=OneWay}"
-                      />
+                       >
+            <tools:TouchbarButton.TouchbarSlider>
+                <tools:TouchbarSlider x:Name="PointsTouchbarSlider" 
+                             Number="{x:Bind SelectionViewModel.GeometryPentagonPoints,Mode=OneWay}"
+                             Value="{x:Bind PointsValueConverter(SelectionViewModel.GeometryPentagonPoints),Mode=OneWay}"
+                             />
+            </tools:TouchbarButton.TouchbarSlider>
+        </tools:TouchbarButton>
 
         <ContentControl Width="4"/>
         

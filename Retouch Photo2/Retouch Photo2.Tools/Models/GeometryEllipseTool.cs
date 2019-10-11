@@ -33,11 +33,9 @@ namespace Retouch_Photo2.Tools.Models
             },
         };
 
-        public override bool IsSelected { set => this.Button.IsSelected = value; }
         public override ToolType Type => ToolType.GeometryEllipse;
         public override FrameworkElement Icon { get; } = new GeometryEllipseIcon();
         public override IToolButton Button { get; } = new EllipseButton();
-        public override Page Page => this._ellipsePage;
-        GeometryEllipsePage _ellipsePage { get; } = new GeometryEllipsePage();
+        public override IToolPage Page { get; } = new GeometryEllipsePage();
     }
 }

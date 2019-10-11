@@ -11,7 +11,7 @@ namespace Retouch_Photo2.Tools.Pages
     /// <summary>
     /// Page of <see cref = "PenTool"/>.
     /// </summary>
-    public sealed partial class PenPage : Page
+    public sealed partial class PenPage : Page, IToolPage
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
@@ -19,8 +19,11 @@ namespace Retouch_Photo2.Tools.Pages
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         GeometryCurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
-        
+
         //@Content
+        public FrameworkElement Self => this;
+        public bool IsSelected { private get; set; }
+
         /// <summary> PenPage's Flyout. </summary>
         public PenFlyout PenFlyout => this._penFlyout;
         
@@ -56,5 +59,8 @@ namespace Retouch_Photo2.Tools.Pages
                 this.ViewModel.Invalidate();//Invalidate
             };
         }
+
+        public void OnNavigatedTo() { }
+        public void OnNavigatedFrom() { }
     }
 }

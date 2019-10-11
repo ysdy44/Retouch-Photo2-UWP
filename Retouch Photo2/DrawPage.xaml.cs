@@ -95,7 +95,7 @@ namespace Retouch_Photo2
 
         UIElementCollection TooLeft => this.DrawLayout.LeftPaneChildren;
         object LeftIcon { set => this.DrawLayout.LeftIcon = value; }
-        Page FootPage { set => this.DrawLayout.FootPage = value; }
+        FrameworkElement FootPage { set => this.DrawLayout.FootPage = value; }
 
         ToolButtonType _tempToolButtonType;
  
@@ -131,7 +131,7 @@ namespace Retouch_Photo2
                     this.ToolGroupType(tool.Type);
 
                     this.LeftIcon = tool.Icon;
-                    this.FootPage = tool.Page;
+                    this.FootPage = tool.Page.Self;
                     this.TipViewModel.Tool = tool;
                 };
 
@@ -155,13 +155,13 @@ namespace Retouch_Photo2
                 if (tool != null)
                 {
                     bool isSelected = (tool.Type == groupType);
-                    tool.IsSelected = isSelected;
+
+                    tool.Button.IsSelected = isSelected;
+                    tool.Page.IsSelected = isSelected;
                 }
             }
 
             this.ViewModel.Invalidate();//Invalidate
-
-            this.TipViewModel.TouchbarType = TouchbarType.None;//Touchbar
         }
 
 

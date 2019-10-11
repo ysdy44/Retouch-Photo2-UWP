@@ -18,9 +18,15 @@
             Center Point
         </TextBlock>
         <tools:TouchbarButton x:Name="CenterTouchbarButton"
-                      GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
                       Number="{x:Bind CenterNumberConverter(SelectionViewModel.GeometryTriangleCenter),Mode=OneWay}"
-                      />
+                        >
+            <tools:TouchbarButton.TouchbarSlider>
+                <tools:TouchbarSlider x:Name="CenterTouchbarSlider" 
+                             Number="{x:Bind CenterNumberConverter(SelectionViewModel.GeometryTriangleCenter),Mode=OneWay}"
+                             Value="{x:Bind CenterValueConverter(SelectionViewModel.GeometryTriangleCenter),Mode=OneWay}"
+                             />
+            </tools:TouchbarButton.TouchbarSlider>
+        </tools:TouchbarButton>
 
         <ContentControl Width="4"/>
 
@@ -31,6 +37,8 @@
         <Button x:Name="MirrorButton" Style="{StaticResource AppCircleButtonStyle}">
             <FontIcon Glyph="&#xE13C;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
         </Button>
+
+        <ContentControl Width="4"/>
 
         <toolsElements:MoreCreateButton/>
 

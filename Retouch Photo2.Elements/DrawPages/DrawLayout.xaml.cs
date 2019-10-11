@@ -28,13 +28,13 @@ namespace Retouch_Photo2.Elements
         /// <summary> TouchbarBorder's Child. </summary>
         public UIElement Touchbar { get => this.TouchbarBorder.Child; set => this.TouchbarBorder.Child = value; }
         /// <summary> Gets or sets FootScrollViewer's content. </summary>
-        public Page FootPage
+        public FrameworkElement FootPage
         {
             get => this.footPage;
             set
             {
                 //If you choose a different tool, PhoneState will hided.
-                Page oldPage = this.footPage;
+                FrameworkElement oldPage = this.footPage;
 
                 if (value != oldPage)
                 {
@@ -49,7 +49,7 @@ namespace Retouch_Photo2.Elements
                 this.footPage=value;
             }
         }
-        private Page footPage;
+        private FrameworkElement footPage;
         
         
         /// <summary> HeadLeftBorder's Child. </summary>

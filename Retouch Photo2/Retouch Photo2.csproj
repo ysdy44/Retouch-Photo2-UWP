@@ -191,6 +191,7 @@
     <Compile Include="Retouch Photo2.Tools\Buttons\AcrylicButton.xaml.cs">
       <DependentUpon>AcrylicButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Tools\Buttons\NoneButton.cs" />
     <Compile Include="Retouch Photo2.Tools\Buttons\TransparencyButton.xaml.cs">
       <DependentUpon>TransparencyButton.xaml</DependentUpon>
     </Compile>
@@ -297,29 +298,9 @@
     <Compile Include="Retouch Photo2.Tools\Pages\CropPage.xaml.cs">
       <DependentUpon>CropPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Tools\Pages\NonePage.cs" />
     <Compile Include="Retouch Photo2.Tools\Pages\TransparencyPage.xaml.cs">
       <DependentUpon>TransparencyPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Touchbars\AcrylicBlurAmountTouchbar.xaml.cs">
-      <DependentUpon>AcrylicBlurAmountTouchbar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Touchbars\AcrylicTintOpacityTouchbar.xaml.cs">
-      <DependentUpon>AcrylicTintOpacityTouchbar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Touchbars\GeometryRoundRectCornerTouchbar.xaml.cs">
-      <DependentUpon>GeometryRoundRectCornerTouchbar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Touchbars\GeometryStarInnerRadiusTouchbar.xaml.cs">
-      <DependentUpon>GeometryStarInnerRadiusTouchbar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Touchbars\GeometryPentagonPointsTouchbar.xaml.cs">
-      <DependentUpon>GeometryPentagonPointsTouchbar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Touchbars\GeometryStarPointsTouchbar.xaml.cs">
-      <DependentUpon>GeometryStarPointsTouchbar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Touchbars\StrokeWidthTouchbar.xaml.cs">
-      <DependentUpon>StrokeWidthTouchbar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Models\ICreateTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\AcrylicTool.cs" />
@@ -355,15 +336,6 @@
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Pages\ViewPage.xaml.cs">
       <DependentUpon>ViewPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Touchbars\GeometryTriangleCenterTouchbar.xaml.cs">
-      <DependentUpon>GeometryTriangleCenterTouchbar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Touchbars\ViewRadianTouchbar.xaml.cs">
-      <DependentUpon>ViewRadianTouchbar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Touchbars\ViewScaleTouchbar.xaml.cs">
-      <DependentUpon>ViewScaleTouchbar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\TransformerTool.cs" />
     <Compile Include="Retouch Photo2.Tools\TransformerTool.Select.cs" />
@@ -639,6 +611,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Retouch Photo2.Tools\Elements\StrokeWidthSlider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Retouch Photo2.Tools\Pages\GeometryArrowPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -687,34 +663,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Touchbars\AcrylicBlurAmountTouchbar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Touchbars\AcrylicTintOpacityTouchbar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Touchbars\GeometryRoundRectCornerTouchbar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Touchbars\GeometryStarInnerRadiusTouchbar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Touchbars\GeometryPentagonPointsTouchbar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Touchbars\GeometryStarPointsTouchbar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Touchbars\StrokeWidthTouchbar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Retouch Photo2.Tools\Pages\AcrylicPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -746,18 +694,6 @@
     <Page Include="Retouch Photo2.Tools\Pages\ViewPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Touchbars\GeometryTriangleCenterTouchbar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Touchbars\ViewRadianTouchbar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Touchbars\ViewScaleTouchbar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SettingPage.xaml">
       <SubType>Designer</SubType>

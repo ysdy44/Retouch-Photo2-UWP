@@ -4,6 +4,7 @@ using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.Storage.Pickers;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Pages
@@ -11,25 +12,32 @@ namespace Retouch_Photo2.Tools.Pages
     /// <summary> 
     /// Page of <see cref = "ImagePage"/>.
     /// </summary>
-    public sealed partial class ImagePage : Page
+    public sealed partial class ImagePage : Page, IToolPage
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        
+
+        //@Content
+        public FrameworkElement Self => this;
+        public bool IsSelected { private get; set; }
+
+        /// <summary> Tip. </summary>
+        public void TipSelect() => this.EaseStoryboard.Begin();//Storyboard
+
         //@Construct
         public ImagePage()
         {
             this.InitializeComponent();
 
-            this.ClearButton.Tapped += (s, e) => this.SelectionViewModel.ImageRe =null;//ImageRe
+            this.ClearButton.Tapped += (s, e) => this.SelectionViewModel.ImageRe = null;//ImageRe
             this.SelectButton.Tapped += async (s, e) =>
             {
                 //imageRe
                 ImageRe imageRe = await ImageRe.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, PickerLocationId.PicturesLibrary);
                 if (imageRe == null) return;
-                
+
                 //Images
                 this.ViewModel.DuplicateChecking(imageRe);
 
@@ -41,7 +49,7 @@ namespace Retouch_Photo2.Tools.Pages
                 //imageRe
                 ImageRe imageRe = await ImageRe.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, PickerLocationId.PicturesLibrary);
                 if (imageRe == null) return;
-                
+
                 //Images
                 this.ViewModel.DuplicateChecking(imageRe);
 
@@ -60,7 +68,7 @@ namespace Retouch_Photo2.Tools.Pages
 
                 this.ViewModel.Invalidate();//Invalidate
             };
-            this.StackButton.Tapped +=   (s, e) => 
+            this.StackButton.Tapped += (s, e) =>
             {
                 this.ListView.ItemsSource = null;
                 this.ListView.ItemsSource = this.ViewModel.Images;
@@ -76,13 +84,7 @@ namespace Retouch_Photo2.Tools.Pages
             };
         }
 
-        /// <summary>
-        /// Tip.
-        /// </summary>
-        public void TipSelect()
-        {
-            //Storyboard
-            this.EaseStoryboard.Begin();
-        }
+        public void OnNavigatedTo() { }
+        public void OnNavigatedFrom() { }
     }
 }

@@ -23,6 +23,6 @@ namespace Retouch_Photo2.Tools
         public override ToolType Type => ToolType.GeometryRoundRect;
         public override FrameworkElement Icon { get; } = new GeometryRoundRectIcon();
         public override IToolButton Button { get; } = new GeometryRoundRectButton();
-        public override Page Page { get; } = new GeometryRoundRectPage();
+        public override IToolPage Page { get; } = new GeometryRoundRectPage();
     }
 }

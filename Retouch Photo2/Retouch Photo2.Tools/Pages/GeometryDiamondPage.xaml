@@ -5,12 +5,40 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:tools="using:Retouch_Photo2.Tools"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
     >
 
     <StackPanel Orientation="Horizontal">
+
+        <!--Mid-->
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Mid Point
+        </TextBlock>
+        <tools:TouchbarButton x:Name="MidTouchbarButton"
+                      Number="{x:Bind MidNumberConverter(SelectionViewModel.GeometryDiamondMid),Mode=OneWay}"
+                      >
+            <tools:TouchbarButton.TouchbarSlider>
+                <tools:TouchbarSlider x:Name="MidTouchbarSlider" 
+                             Number="{x:Bind MidNumberConverter(SelectionViewModel.GeometryDiamondMid),Mode=OneWay}"
+                             Value="{x:Bind MidValueConverter(SelectionViewModel.GeometryDiamondMid),Mode=OneWay}"
+                             />
+            </tools:TouchbarButton.TouchbarSlider>
+        </tools:TouchbarButton>
+
+        <ContentControl Width="4"/>
+
+        <!--Mirror-->
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Mirror
+        </TextBlock>
+        <Button x:Name="MirrorButton" Style="{StaticResource AppCircleButtonStyle}">
+            <FontIcon Glyph="&#xE13C;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+        </Button>
+
+        <ContentControl Width="4"/>
 
         <toolsElements:MoreCreateButton/>
 

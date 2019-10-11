@@ -34,18 +34,9 @@ namespace Retouch_Photo2.Tools.Models
             };
         }
 
-        public override bool IsSelected
-        {
-            set
-            {
-                this.Button.IsSelected = value;
-                this._acrylicPage.IsSelected = value;
-            }
-        }
         public override ToolType Type => ToolType.Acrylic;
         public override FrameworkElement Icon { get; } = new AcrylicIcon();
         public override IToolButton Button { get; } = new AcrylicButton();
-        public override Page Page => this._acrylicPage;
-        AcrylicPage _acrylicPage { get; } = new AcrylicPage();
+        public override IToolPage Page { get; } = new AcrylicPage();
     }
 }

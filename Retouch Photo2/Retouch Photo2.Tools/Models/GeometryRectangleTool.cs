@@ -37,11 +37,9 @@ namespace Retouch_Photo2.Tools.Models
             };
         }
 
-        public override bool IsSelected { set => this.Button.IsSelected = value; }
         public override ToolType Type => ToolType.GeometryRectangle;
         public override FrameworkElement Icon { get; } = new GeometryRectangleIcon();
         public override IToolButton Button { get; } = new RectangleButton();
-        public override Page Page => this._rectanglePage;
-        GeometryRectanglePage _rectanglePage { get; } = new GeometryRectanglePage();
+        public override IToolPage Page { get; } = new GeometryRectanglePage();
     }
 }

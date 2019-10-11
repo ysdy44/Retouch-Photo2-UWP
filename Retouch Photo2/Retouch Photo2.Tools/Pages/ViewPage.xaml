@@ -34,10 +34,15 @@
             Radian
         </TextBlock>
         <tools:TouchbarButton x:Name="RadianTouchbarButton"
-                      GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
                       Number="{x:Bind RadianNumberConverter(ViewModel.CanvasTransformerRadian),Mode=OneWay}"
-                      />
-
+                        >
+            <tools:TouchbarButton.TouchbarSlider>
+                <tools:TouchbarSlider x:Name="RadianTouchbarSlider" 
+                Number="{x:Bind RadianNumberConverter(ViewModel.CanvasTransformerRadian),Mode=OneWay}"
+                Value="{x:Bind RadianValueConverter(ViewModel.CanvasTransformerRadian),Mode=OneWay}"
+                />
+            </tools:TouchbarButton.TouchbarSlider>
+        </tools:TouchbarButton>
         <ContentControl Width="4"/>
 
         <Button x:Name="RadianClearButton" Style="{StaticResource AppCircleButtonStyle}">
@@ -58,10 +63,15 @@
             Scale
         </TextBlock>
         <tools:TouchbarButton x:Name="ScaleTouchbarButton"
-                      GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
                       Number="{x:Bind ScaleNumberConverter(ViewModel.CanvasTransformerScale),Mode=OneWay}"
-                       />
-
+                       >
+            <tools:TouchbarButton.TouchbarSlider>
+                <tools:TouchbarSlider x:Name="ScaleTouchbarSlider"
+                Number="{x:Bind ScaleNumberConverter(ViewModel.CanvasTransformerScale),Mode=OneWay}"
+                Value="{x:Bind ScaleValueConverter(ViewModel.CanvasTransformerScale),Mode=OneWay}"
+                  />
+            </tools:TouchbarButton.TouchbarSlider>
+        </tools:TouchbarButton>
         <ContentControl Width="4"/>
 
         <Button x:Name="ScaleClearButton" Style="{StaticResource AppCircleButtonStyle}">

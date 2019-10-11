@@ -1,10 +1,14 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools
 {
     public sealed partial class TouchbarButton : UserControl
     {
+        //@Delegate  
+        public EventHandler<bool> Toggle;
+
 
         //@VisualState
         bool _vsIsSelected;
@@ -30,33 +34,19 @@ namespace Retouch_Photo2.Tools
         #region DependencyProperty
 
 
-        /// <summary> Gets or sets the type of <see cref = "TouchbarButton" />. </summary>
-        public TouchbarType Type
-        {
-            get { return (TouchbarType)GetValue(TypeProperty); }
-            set { SetValue(TypeProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "TouchbarButton.Type" /> dependency property. </summary>
-        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(TouchbarType), typeof(TouchbarSlider), new PropertyMetadata(TouchbarType.None));
+        /// <summary> Gets or sets the slider of <see cref = "TouchbarButton" />. </summary>
+        public TouchbarSlider TouchbarSlider { get; set; }
 
-
-        /// <summary> Gets or sets the group type of <see cref = "TouchbarButton" />. </summary>
-        public TouchbarType GroupType
+        /// <summary> Gets or sets the selected state of <see cref = "TouchbarButton" />. </summary>
+        public bool IsSelected
         {
-            get { return (TouchbarType)GetValue(GroupTypeProperty); }
-            set { SetValue(GroupTypeProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "TouchbarButton.GroupType" /> dependency property. </summary>
-        public static readonly DependencyProperty GroupTypeProperty = DependencyProperty.Register(nameof(GroupType), typeof(TouchbarType), typeof(TouchbarSlider), new PropertyMetadata(TouchbarType.None, (sender, e) =>
-        {
-            TouchbarButton con = (TouchbarButton)sender;
-
-            if (e.NewValue is TouchbarType value)
+            get => this._vsIsSelected;
+            set
             {
-                con._vsIsSelected = (value == con.Type);
-                con.VisualState = con.VisualState;//State
+                this._vsIsSelected=value;
+                this.VisualState = this.VisualState;//State
             }
-        }));
+        }
 
 
         /// <summary> Get or set the string Unit for range elements. </summary>
@@ -102,6 +92,11 @@ namespace Retouch_Photo2.Tools
                 this._vsClickMode = ClickMode.Press;
                 this.VisualState = this.VisualState;//State
             };
+            this.RootBorder.PointerReleased += (s, e) =>
+            {
+                this._vsClickMode = ClickMode.Release;
+                this.VisualState = this.VisualState;//State
+            };
             this.RootBorder.PointerExited += (s, e) =>
             {
                 this._vsClickMode = ClickMode.Release;
@@ -112,11 +107,11 @@ namespace Retouch_Photo2.Tools
             {
                 if (this._vsIsSelected)
                 {
-                    this.GroupType = TouchbarType.None;
+                    this.Toggle?.Invoke(this, false);//Delegate
                 }
                 else
                 {
-                    this.GroupType = this.Type;
+                    this.Toggle?.Invoke(this, true);//Delegate
                 }
             };
         }

@@ -25,11 +25,9 @@ namespace Retouch_Photo2.ViewModels
                 {
                     this.GeometryRoundRectCorner = roundRectLayer.Corner;
                 }
-
             }
         }
-
-
+        
 
         /// <summary> GeometryRoundRectLayer's corner. </summary>     
         public float GeometryRoundRectCorner
@@ -43,8 +41,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private float geometryRoundRectCorner = 0.12f;
-
-
+        
 
         /// <summary> GeometryTriangle's center-point. </summary>     
         public float GeometryTriangleCenter
@@ -60,6 +57,19 @@ namespace Retouch_Photo2.ViewModels
         private float geometryTriangleCenter = 0.5f;
 
 
+        /// <summary> GeometryDiamond's mid-point. </summary>     
+        public float GeometryDiamondMid
+        {
+            get => this.geometryDiamondMid;
+            set
+            {
+                if (this.geometryDiamondMid == value) return;
+                this.geometryDiamondMid = value;
+                this.OnPropertyChanged(nameof(this.GeometryDiamondMid));//Notify 
+            }
+        }
+        private float geometryDiamondMid = 0.5f;
+
 
         /// <summary> GeometryPentagon's points </summary>     
         public int GeometryPentagonPoints
@@ -73,8 +83,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private int geometryPentagonPoints = 5;
-
-
+        
 
         /// <summary> GeometryStar's points </summary>     
         public int GeometryStarPoints
@@ -88,7 +97,6 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private int geometryStarPoints = 5;
-
         /// <summary> GeometryStar's inner-radius </summary>     
         public float GeometryStarInnerRadius
         {

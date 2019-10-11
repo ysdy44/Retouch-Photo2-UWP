@@ -29,7 +29,7 @@
         <TextBlock Style="{StaticResource AppTextBlock}">
             StrokeWidth
         </TextBlock>
-        <toolsElements:StrokeWidthButton/>
+        <toolsElements:StrokeWidthButton x:Name="StrokeWidthButton"/>
 
         <ContentControl Width="4"/>
 

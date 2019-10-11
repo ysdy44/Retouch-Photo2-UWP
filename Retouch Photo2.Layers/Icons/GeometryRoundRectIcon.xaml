@@ -1,4 +1,5 @@
 ﻿<UserControl
+    x:Name="UserControl"
     x:Class="Retouch_Photo2.Layers.Icons.GeometryRoundRectIcon"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,6 +10,6 @@
     d:DesignWidth="50"
     >
 
-    <Rectangle RadiusX="6" RadiusY="6" Width="22" Height="22"/>
+    <Rectangle RadiusX="6" RadiusY="6" Width="22" Height="22" Fill="{x:Bind UserControl.Foreground}"/>
 
 </UserControl>

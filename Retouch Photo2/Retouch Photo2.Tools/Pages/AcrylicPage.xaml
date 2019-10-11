@@ -4,14 +4,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:tools="using:Retouch_Photo2.Tools"
     xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
     >
-        
 
     <StackPanel Orientation="Horizontal">        
         
@@ -28,9 +26,15 @@
             TintOpacity
         </TextBlock>
         <tools:TouchbarButton x:Name="TintOpacityTouchbarButton"
-                      GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
                       Number="{x:Bind TintOpacityNumberConverter(SelectionViewModel.AcrylicTintOpacity),Mode=OneWay}"
-                      />
+                      >
+            <tools:TouchbarButton.TouchbarSlider>
+                <tools:TouchbarSlider x:Name="TintOpacityTouchbarSlider"
+                    Number="{x:Bind TintOpacityNumberConverter(SelectionViewModel.AcrylicTintOpacity),Mode=OneWay}"
+                    Value="{x:Bind TintOpacityValueConverter(SelectionViewModel.AcrylicTintOpacity), Mode=OneWay}" 
+                     />
+            </tools:TouchbarButton.TouchbarSlider>
+        </tools:TouchbarButton>
 
         <ContentControl Width="4"/>
 
@@ -39,9 +43,15 @@
             BlurAmount
         </TextBlock>
         <tools:TouchbarButton x:Name="BlurAmountTouchbarButton"
-                      GroupType ="{x:Bind TipViewModel.TouchbarType,Mode=TwoWay}"
                       Number="{x:Bind BlurAmountNumberConverter(SelectionViewModel.AcrylicBlurAmount),Mode=OneWay}"
-                      />
+                      >
+            <tools:TouchbarButton.TouchbarSlider>
+                <tools:TouchbarSlider x:Name="BlurAmountTouchbarSlider" 
+                             Number="{x:Bind BlurAmountNumberConverter(SelectionViewModel.AcrylicBlurAmount),Mode=OneWay}"
+                             Value="{x:Bind BlurAmountValueConverter(SelectionViewModel.AcrylicBlurAmount),Mode=OneWay}"
+                             />
+            </tools:TouchbarButton.TouchbarSlider>
+        </tools:TouchbarButton>
 
         <ContentControl Width="4"/>
 

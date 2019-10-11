@@ -26,8 +26,6 @@ namespace Retouch_Photo2.Tools.Elements
 
             this.RootGrid.Tapped += (s, e) =>
             {
-                this.TipViewModel.TouchbarType = TouchbarType.None;//Touchbar
-
                 if (this.Parent is FrameworkElement placementTarget)
                 {
                     this.Flyout.ShowAt(placementTarget);

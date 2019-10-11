@@ -25,11 +25,10 @@ namespace Retouch_Photo2.Tools.Models
         GeometryCurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
         NodeCollection NodeCollection => this.CurveLayer.NodeCollection;
         
-        public bool IsSelected { set => this.Button.IsSelected = value; }
         public ToolType Type => ToolType.Pen;
         public FrameworkElement Icon { get; } = new PenIcon();
         public IToolButton Button { get; } = new PenButton();
-        public Page Page => this._penPage;
+        public IToolPage Page => this._penPage;
         PenPage _penPage { get; } = new PenPage();
 
         //Pen

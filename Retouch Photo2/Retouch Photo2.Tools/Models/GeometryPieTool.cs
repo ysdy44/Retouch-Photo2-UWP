@@ -23,6 +23,6 @@ namespace Retouch_Photo2.Tools
         public override ToolType Type => ToolType.GeometryPie;
         public override FrameworkElement Icon { get; } = new GeometryPieIcon();
         public override IToolButton Button { get; } = new GeometryPieButton();
-        public override Page Page { get; } = new GeometryPiePage();
+        public override IToolPage Page { get; } = new GeometryPiePage();
     }
 }

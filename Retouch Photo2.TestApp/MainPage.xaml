@@ -13,8 +13,11 @@
 
 
     <Page.Resources>
-        
-        
+        <Flyout x:Name="aaa">
+            <Border x:Name="aaaaaa" Width="333" Height="122" Background="Red">
+                <Slider />
+            </Border>
+        </Flyout>
     </Page.Resources>
 
 
@@ -22,8 +25,8 @@
 
             
         <AppBarSeparator/>
-        <Button x:Name="Button01" Content="00001" Tapped="Button_Tapped"/>
-        <Button x:Name="Button02" Content="00002" Tapped="Button02_Tapped"/>
+        <Button x:Name="Button01" MinWidth="100" MinHeight="100" Content="00001" Tapped="Button_Tapped"/>
+        <Button x:Name="Button02" MinWidth="100" MinHeight="100" Content="00002" Tapped="Button02_Tapped"/>
 
     </StackPanel>
     </Page>

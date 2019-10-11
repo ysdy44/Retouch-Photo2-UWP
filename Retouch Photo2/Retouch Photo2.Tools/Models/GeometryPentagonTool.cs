@@ -23,6 +23,6 @@ namespace Retouch_Photo2.Tools
         public override ToolType Type => ToolType.GeometryPentagon;
         public override FrameworkElement Icon { get; } = new GeometryPentagonIcon();
         public override IToolButton Button { get; } = new GeometryPentagonButton();
-        public override Page Page { get; } = new GeometryPentagonPage();
+        public override IToolPage Page { get; } = new GeometryPentagonPage();
     }
 }
