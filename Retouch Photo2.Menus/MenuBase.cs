@@ -127,12 +127,6 @@ namespace Retouch_Photo2.Menus
                         this.Button.Self.Tapped += (s, e) => this.State = MenuBase.GetState(this.State);
                     }
                     break;
-                case MenuButtonType.ToolButton:
-                    {
-                        this.Flyout.Placement = FlyoutPlacementMode.Right;
-                        this.Button.Self.Tapped += (s, e) => this.State = MenuBase.GetState(this.State);
-                    }
-                    break;
                 case MenuButtonType.LayersControlIndicator:
                     {
                         this.Flyout.Placement = FlyoutPlacementMode.Left;

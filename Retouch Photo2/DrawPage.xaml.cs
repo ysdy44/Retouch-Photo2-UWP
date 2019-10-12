@@ -73,7 +73,8 @@ namespace Retouch_Photo2
             {
                 this.ConstructTool(tool);
             }
-
+            this.TooLeft.Add(this.MoreToolButton);
+            
             //Menu
             foreach (IMenu menu in this.TipViewModel.Menus)
             {
@@ -81,17 +82,17 @@ namespace Retouch_Photo2
             }
 
 
-            //LayersAdd
+            //Layers
             this.LayersControl.PhotoButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.PicturesLibrary);
             this.LayersControl.DestopButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.Desktop);
-            this.LayersControl.PadButton.Tapped += (s, e) => this.DrawLayout.IsPadLayersControlWidth = !this.DrawLayout.IsPadLayersControlWidth;
+            this.LayersControl.WidthButton.Tapped += (s, e) => this.DrawLayout.IsPadLayersControlWidth = !this.DrawLayout.IsPadLayersControlWidth;
         }
 
 
         #region Tool
 
-        //@Static
-        public static ObservableCollection<UIElement> GeometryTools = new ObservableCollection<UIElement>();
+
+        MoreToolButton MoreToolButton = new MoreToolButton();
 
         UIElementCollection TooLeft => this.DrawLayout.LeftPaneChildren;
         object LeftIcon { set => this.DrawLayout.LeftIcon = value; }
@@ -116,8 +117,8 @@ namespace Retouch_Photo2
                     case ToolButtonType.None:
                         this.TooLeft.Add(rectangle);
                         break;
-                    case ToolButtonType.Geometry:
-                        DrawPage.GeometryTools.Add(rectangle);
+                    case ToolButtonType.Second:
+                        this.MoreToolButton.StackPanel.Children.Add(rectangle);
                         break;
                 }
                 return;
@@ -141,8 +142,8 @@ namespace Retouch_Photo2
                     case ToolButtonType.None:
                         this.TooLeft.Add(button.Self);
                         break;
-                    case ToolButtonType.Geometry:
-                        DrawPage.GeometryTools.Add(button.Self);
+                    case ToolButtonType.Second:
+                        this.MoreToolButton.StackPanel.Children.Add(button.Self);
                         break;
                 }
             }
@@ -196,7 +197,6 @@ namespace Retouch_Photo2
             switch (menuButton.Type)
             {
                 case MenuButtonType.None: this.MenuHead.Add(menuButton.Self); break;
-                case MenuButtonType.ToolButton: this.TooLeft.Add(menuButton.Self); break;
                 case MenuButtonType.LayersControlIndicator: this.MenuLayersIndicator = menuButton.Self; break;
             }
         }

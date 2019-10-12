@@ -15,7 +15,7 @@
     <UserControl.Resources>
         <!--Flyout-->
         <Flyout x:Name="Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel x:Name="SecondStackPanel" Orientation="Vertical">
+            <StackPanel x:Name="SecondStackPanel" Width="200">
                 <!--Second-->
             </StackPanel>
         </Flyout>

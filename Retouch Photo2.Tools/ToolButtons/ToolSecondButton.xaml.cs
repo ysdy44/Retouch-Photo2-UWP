@@ -6,7 +6,7 @@ namespace Retouch_Photo2.Tools
     /// <summary>
     /// Retouch_Photo2 Tools 's Button.
     /// </summary>
-    public sealed partial class GeometryToolButton : UserControl
+    public sealed partial class ToolSecondButton : UserControl
     {
         //@Content
         /// <summary> Button's IsSelected. </summary>
@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Tools
         public object CenterContent { set => this.ContentPresenter.Content = value; get => this.ContentPresenter.Content; }
         /// <summary> TextBlock' Text. </summary>
         public string Text { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
-
+        
 
         //@VisualState
         bool _vsIsSelected;
@@ -48,7 +48,7 @@ namespace Retouch_Photo2.Tools
 
 
         //@Construct
-        public GeometryToolButton()
+        public ToolSecondButton()
         {
             this.InitializeComponent();
             this.ContentPresenter.PointerEntered += (s, e) =>

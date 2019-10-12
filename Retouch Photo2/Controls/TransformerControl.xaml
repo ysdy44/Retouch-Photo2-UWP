@@ -152,10 +152,15 @@
                 </ToolTipService.ToolTip>
             </transformers:IndicatorControl>
 
-            <Button x:Name="RemoteButton" Grid.ColumnSpan="3" Grid.Row="7" Margin="2" Tag="Position Remote" Style="{StaticResource AppTagRoundedButton}">
-                <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-            </Button>
-                        
+            <Border Grid.ColumnSpan="3" Grid.Row="7" Margin="2" Style="{StaticResource AppRoundedBorderStyle}">
+                <Button x:Name="RemoteButton" Style="{StaticResource AppTagRoundedButton}">
+                    <Button.Tag>                     
+                        Position Remote
+                    </Button.Tag>
+                    <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                </Button>
+            </Border>
+
         </Grid>
 
 

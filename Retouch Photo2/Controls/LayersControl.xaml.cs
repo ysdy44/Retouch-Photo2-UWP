@@ -25,15 +25,19 @@ namespace Retouch_Photo2.Controls
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
+
         //@Content
         /// <summary> IndicatorBorder's Child. </summary>
         public UIElement IndicatorChild { get => this.IndicatorBorder.Child; set => this.IndicatorBorder.Child = value; }
+
         /// <summary> PhotoButton. </summary>
         public Button PhotoButton => this._PhotoButton;
         /// <summary> DestopButton. </summary>
         public Button DestopButton => this._DestopButton;
-        /// <summary> PadButton. </summary>
-        public Button PadButton => this._PadButton;
+
+        /// <summary> WidthButton. </summary>
+        public Button WidthButton => this._WidthButton;
+
 
         //LayerCollection
         ILayer DragSourceLayer;
@@ -41,19 +45,23 @@ namespace Retouch_Photo2.Controls
         SelectMode DragLayerSelectMode;
         OverlayMode DragLayerOverlayMode;
 
+
         //@Construct
         public LayersControl()
         {
             this.InitializeComponent();
             this.ItemsControl.ItemsSource = this.ViewModel.Layers.RootControls;
 
-            //Slider
-            this.ControlHeightSlider.ValueChanged += (s, e) =>
+            //Size
+            this.HeightSlider.ValueChanged += (s, e) =>
             {
                 if (e.NewValue == e.OldValue) return;
                 int controlHeight = (int)e.NewValue;
-                this.ViewModel.Layers.SetControlHeight(controlHeight); 
+                this.ViewModel.Layers.SetControlHeight(controlHeight);
             };
+            //Layout
+            this.LayoutButton.Tapped += (s, e) => this.ShowLayerMenu();
+
             this.Tapped += (s, e) =>
             {
                 foreach (ILayer child in this.ViewModel.Layers.RootLayers)
@@ -64,16 +72,8 @@ namespace Retouch_Photo2.Controls
                 this.SelectionViewModel.SetModeNone();//Selection
                 this.ViewModel.Invalidate();
             };
-            this.RightTapped += (s, e) =>
-            {
-                //Menu
-                this.TipViewModel.SetMenuState(MenuType.Layer, MenuState.FlyoutHide, MenuState.FlyoutShow);
-            };
-            this.Holding += (s, e) =>
-            {
-                //Menu
-                this.TipViewModel.SetMenuState(MenuType.Layer, MenuState.FlyoutHide, MenuState.FlyoutShow);
-            };
+            this.RightTapped += (s, e) => this.ShowLayerMenu();
+            this.Holding += (s, e) => this.ShowLayerMenu();
             this.AddButton.Tapped += (s, e) =>
             {
                 this.AddImageFlyout.ShowAt(this.AddButton);
@@ -83,7 +83,7 @@ namespace Retouch_Photo2.Controls
 
             #region LayerCollection
 
-             LayerCollection.ItemClick += (layer) =>
+            LayerCollection.ItemClick += (layer) =>
             {
                 if (layer.SelectMode == SelectMode.Selected)
                 {
@@ -111,10 +111,7 @@ namespace Retouch_Photo2.Controls
                     this.ViewModel.Invalidate();
                 }
             };
-            LayerCollection.RightTapped += (layer) =>
-            {
-                this.ShowLayerMenu(layer);
-            };
+            LayerCollection.RightTapped += (layer) => this.ShowLayerMenu(layer);
             LayerCollection.SelectChanged += () =>
             {
                 this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
@@ -149,15 +146,17 @@ namespace Retouch_Photo2.Controls
 
         }
 
-
+        private void ShowLayerMenu()
+        {
+            this.TipViewModel.SetMenuState(MenuType.Layer, MenuState.FlyoutHide, MenuState.FlyoutShow);
+        }
         private void ShowLayerMenu(ILayer layer)
         {
             Point rootGridPosition = layer.Control.Self.TransformToVisual(this).TransformPoint(new Point());
             Canvas.SetTop(this.IndicatorBorder, rootGridPosition.Y);
 
-            //Menu
-            this.TipViewModel.SetMenuState(MenuType.Layer, MenuState.FlyoutHide, MenuState.FlyoutShow);
+            this.ShowLayerMenu();
         }
-                 
+
     }
 }

@@ -69,7 +69,7 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Auto" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="StackPanel" Storyboard.TargetProperty="HorizontalAlignment">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Left" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Stretch" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlockBorder" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
@@ -87,7 +87,7 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Auto" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="StackPanel" Storyboard.TargetProperty="HorizontalAlignment">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Left" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Stretch" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlockBorder" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
@@ -108,7 +108,7 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Auto" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="StackPanel" Storyboard.TargetProperty="HorizontalAlignment">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Left" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Stretch" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlockBorder" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
@@ -127,12 +127,18 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <StackPanel x:Name="StackPanel" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Border x:Name="TextBlockBorder" Padding="4,0" Visibility="Collapsed" Width="120">
+        <Grid x:Name="StackPanel" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <Border x:Name="TextBlockBorder" Padding="4,0" Visibility="Collapsed">
                 <TextBlock x:Name="TextBlock" Style="{StaticResource AppTextBlock}"/>
             </Border>
-            <ContentPresenter x:Name="ContentPresenter" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{StaticResource UnCheckColor}"/>
-        </StackPanel>
+            
+            <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{StaticResource UnCheckColor}"/>
+        </Grid>
 
     </Border>
     

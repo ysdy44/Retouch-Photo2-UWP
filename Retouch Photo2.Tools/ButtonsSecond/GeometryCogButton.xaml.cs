@@ -4,17 +4,17 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Tools.Buttons
 {
     /// <summary> 
-    /// Button of <see cref = "GeometryHeartTool"/>.
+    /// Button of <see cref = "GeometryCogTool"/>.
     /// </summary>
-    public sealed partial class GeometryHeartButton : UserControl, IToolButton
+    public sealed partial class GeometryCogButton : UserControl, IToolButton
     {
         //@Content
         public bool IsSelected { set => this.Button.IsSelected = value; }
         public FrameworkElement Self => this;
-        public ToolButtonType Type => ToolButtonType.Geometry;
+        public ToolButtonType Type => ToolButtonType.Second;
 
         //@Construct
-        public GeometryHeartButton()
+        public GeometryCogButton()
         {
             this.InitializeComponent();
         }

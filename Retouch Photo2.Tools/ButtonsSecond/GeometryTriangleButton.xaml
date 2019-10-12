@@ -11,13 +11,13 @@
     d:DesignWidth="200"
     >
 
-    <tools:GeometryToolButton x:Name="Button">
-        <tools:GeometryToolButton.Text>
+    <tools:ToolSecondButton x:Name="Button">
+        <tools:ToolSecondButton.Text>
             Triangle
-        </tools:GeometryToolButton.Text>
-        <tools:GeometryToolButton.CenterContent>
+        </tools:ToolSecondButton.Text>
+        <tools:ToolSecondButton.CenterContent>
             <toolsIcons:GeometryTriangleIcon/>
-        </tools:GeometryToolButton.CenterContent>
-    </tools:GeometryToolButton>
+        </tools:ToolSecondButton.CenterContent>
+    </tools:ToolSecondButton>
 
 </UserControl>

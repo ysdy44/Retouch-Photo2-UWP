@@ -120,9 +120,6 @@
     <Compile Include="Controls\SelectionControl.xaml.cs">
       <DependentUpon>SelectionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToolControl.xaml.cs">
-      <DependentUpon>ToolControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\TransformerControl.xaml.cs">
       <DependentUpon>TransformerControl.xaml</DependentUpon>
     </Compile>
@@ -145,7 +142,6 @@
     <Compile Include="Retouch Photo2.Menus\Buttons\SelectionButton.xaml.cs">
       <DependentUpon>SelectionButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\Buttons\ToolButton.cs" />
     <Compile Include="Retouch Photo2.Menus\Buttons\TransformerButton.xaml.cs">
       <DependentUpon>TransformerButton.xaml</DependentUpon>
     </Compile>
@@ -160,9 +156,6 @@
     </Compile>
     <Compile Include="Retouch Photo2.Menus\Layouts\EffectLayout.xaml.cs">
       <DependentUpon>EffectLayout.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Menus\Layouts\ToolLayout.xaml.cs">
-      <DependentUpon>ToolLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Menus\Layouts\LayerLayout.xaml.cs">
       <DependentUpon>LayerLayout.xaml</DependentUpon>
@@ -183,7 +176,6 @@
     <Compile Include="Retouch Photo2.Menus\Models\ColorMenu.cs" />
     <Compile Include="Retouch Photo2.Menus\Models\DebugMenu.cs" />
     <Compile Include="Retouch Photo2.Menus\Models\EffectMenu.cs" />
-    <Compile Include="Retouch Photo2.Menus\Models\ToolMenu.cs" />
     <Compile Include="Retouch Photo2.Menus\Models\LayerMenu.cs" />
     <Compile Include="Retouch Photo2.Menus\Models\OperateMenu.cs" />
     <Compile Include="Retouch Photo2.Menus\Models\SelectionMenu.cs" />
@@ -250,46 +242,46 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Retouch Photo2.Tools\Pages\GeometryArrowPage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\PagesSecond\GeometryArrowPage.xaml.cs">
       <DependentUpon>GeometryArrowPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Pages\GeometryCapsulePage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\PagesSecond\GeometryCapsulePage.xaml.cs">
       <DependentUpon>GeometryCapsulePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Pages\GeometryCogPage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\PagesSecond\GeometryCogPage.xaml.cs">
       <DependentUpon>GeometryCogPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Pages\GeometryDiamondPage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\PagesSecond\GeometryDiamondPage.xaml.cs">
       <DependentUpon>GeometryDiamondPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Pages\GeometryHeartPage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\PagesSecond\GeometryHeartPage.xaml.cs">
       <DependentUpon>GeometryHeartPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Pages\GeometryPentagonPage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\PagesSecond\GeometryPentagonPage.xaml.cs">
       <DependentUpon>GeometryPentagonPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Pages\GeometryPiePage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\PagesSecond\GeometryPiePage.xaml.cs">
       <DependentUpon>GeometryPiePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Pages\GeometryRoundRectPage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\PagesSecond\GeometryRoundRectPage.xaml.cs">
       <DependentUpon>GeometryRoundRectPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Pages\GeometryStarPage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\PagesSecond\GeometryStarPage.xaml.cs">
       <DependentUpon>GeometryStarPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Pages\GeometryTrianglePage.xaml.cs">
+    <Compile Include="Retouch Photo2.Tools\PagesSecond\GeometryTrianglePage.xaml.cs">
       <DependentUpon>GeometryTrianglePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Models\GeometryRoundRectTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\GeometryTriangleTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\GeometryDiamondTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\GeometryPentagonTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\GeometryStarTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\GeometryPieTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\GeometryCogTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\GeometryArrowTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\GeometryCapsuleTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\GeometryHeartTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\ModelsSecond\GeometryRoundRectTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\ModelsSecond\GeometryTriangleTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\ModelsSecond\GeometryDiamondTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\ModelsSecond\GeometryPentagonTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\ModelsSecond\GeometryStarTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\ModelsSecond\GeometryPieTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\ModelsSecond\GeometryCogTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\ModelsSecond\GeometryArrowTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\ModelsSecond\GeometryCapsuleTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\ModelsSecond\GeometryHeartTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\IGeometryTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\TransparencyTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\CropTool.cs" />
@@ -455,10 +447,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ToolControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\TransformerControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -508,10 +496,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Retouch Photo2.Menus\Layouts\EffectLayout.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Menus\Layouts\ToolLayout.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -611,47 +595,43 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Elements\StrokeWidthSlider.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Pages\GeometryArrowPage.xaml">
+    <Page Include="Retouch Photo2.Tools\PagesSecond\GeometryArrowPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Pages\GeometryCapsulePage.xaml">
+    <Page Include="Retouch Photo2.Tools\PagesSecond\GeometryCapsulePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Pages\GeometryCogPage.xaml">
+    <Page Include="Retouch Photo2.Tools\PagesSecond\GeometryCogPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Pages\GeometryDiamondPage.xaml">
+    <Page Include="Retouch Photo2.Tools\PagesSecond\GeometryDiamondPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Pages\GeometryHeartPage.xaml">
+    <Page Include="Retouch Photo2.Tools\PagesSecond\GeometryHeartPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Pages\GeometryPentagonPage.xaml">
+    <Page Include="Retouch Photo2.Tools\PagesSecond\GeometryPentagonPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Pages\GeometryPiePage.xaml">
+    <Page Include="Retouch Photo2.Tools\PagesSecond\GeometryPiePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Pages\GeometryRoundRectPage.xaml">
+    <Page Include="Retouch Photo2.Tools\PagesSecond\GeometryRoundRectPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Pages\GeometryStarPage.xaml">
+    <Page Include="Retouch Photo2.Tools\PagesSecond\GeometryStarPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Pages\GeometryTrianglePage.xaml">
+    <Page Include="Retouch Photo2.Tools\PagesSecond\GeometryTrianglePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

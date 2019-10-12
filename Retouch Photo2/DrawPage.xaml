@@ -28,10 +28,9 @@
         <!--Extension-->
         <elements:ApplicationViewTitleBarBackgroundExtension x:Key="AVTBBE" TitleBarColor="{ThemeResource AppForegroundColor}"/>
     </Page.Resources>
-    
-    
-    <Grid>
 
+
+    <Grid>        
         <elements:DrawLayout x:Name="DrawLayout" 
                Touchbar="{x:Bind TipViewModel.TouchbarControl,Mode=OneWay}"                                             
                Theme="{x:Bind RequestedTheme, Mode=OneWay}"
@@ -64,7 +63,7 @@
 
                         <elements:ExpandAppbarButton x:Name="SaveButton">
                             <ToolTipService.ToolTip>
-                                <ToolTip Content="Save" Placement="Bottom" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip Content="Save" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
                                 <FontIcon Glyph="&#xE105;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -78,7 +77,7 @@
 
                         <elements:ExpandAppbarButton x:Name="UndoButton">
                             <ToolTipService.ToolTip>
-                                <ToolTip Content="Undo" VerticalOffset="40" Placement="Bottom" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip Content="Undo" VerticalOffset="40" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
                                 <FontIcon Glyph="&#xE10E;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -92,7 +91,7 @@
 
                         <elements:ExpandAppbarButton x:Name="RedoButton">
                             <ToolTipService.ToolTip>
-                                <ToolTip Content="Redo" Placement="Bottom" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip Content="Redo" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
                                 <FontIcon Glyph="&#xE10D;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -106,7 +105,7 @@
 
                         <elements:ExpandAppbarButton x:Name="ThemeButton">
                             <ToolTipService.ToolTip>
-                                <ToolTip Content="Theme" VerticalOffset="40" Placement="Bottom" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip Content="Theme" VerticalOffset="40" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
                                 <elements:ThemeControl x:Name="ThemeControl" Foreground="{ThemeResource AppText}"/>
@@ -120,7 +119,7 @@
 
                         <elements:ExpandAppbarToggleButton IsChecked="{x:Bind ViewModel.CanvasRulerVisible,Mode=TwoWay}">
                             <ToolTipService.ToolTip>
-                                <ToolTip Content="Ruler" Placement="Bottom" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip Content="Ruler" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarToggleButton.CenterContent>
                                 <FontIcon Glyph="&#xE80A;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -134,7 +133,7 @@
 
                         <elements:ExpandAppbarButton x:Name="FullScreenButton">
                             <ToolTipService.ToolTip>
-                                <ToolTip Content="Full Screen" VerticalOffset="40" Placement="Bottom" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip Content="Full Screen" VerticalOffset="40" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
                                 <FontIcon Glyph="&#xE1D9;" FontSize="16" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -167,12 +166,12 @@
 
         <!--FullScreen-->
         <Button x:Name="UnFullScreenButton" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AppCircleButtonStyle}"
-                                     Visibility="{x:Bind BoolToVisibilityConverter(DrawLayout.IsFullScreen), Mode=OneWay}">
+                Visibility="{x:Bind BoolToVisibilityConverter(DrawLayout.IsFullScreen), Mode=OneWay}">
                 <FontIcon Glyph="&#xE1D8;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
         </Button>
         
         <!--Tip-->
-        <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,70,0,0" HorizontalAlignment="Center">
+        <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" HorizontalAlignment="Center">
             <ToolTip Style="{StaticResource AppToolTip}">
                 <TextBlock Text="{x:Bind ViewModel.Text, Mode=OneWay}"/>
             </ToolTip>

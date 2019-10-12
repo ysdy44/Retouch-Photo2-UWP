@@ -192,12 +192,22 @@
         </ListView>
 
         <!--Foot-->
-        <Button x:Name="AddButton" Grid.Row="3" Margin="2" Tag="Add Adjustment" Style="{StaticResource AppTagRoundedButton}">
-            <FontIcon FontSize="18" Glyph="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-        </Button>
-        <Button x:Name="FilterButton" Grid.Row="4" Margin="2" Tag="Default Filters" Style="{StaticResource AppTagRoundedButton}">
-            <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-        </Button>        
+        <Border Grid.Row="3" Margin="2" Style="{StaticResource AppRoundedBorderStyle}">
+            <Button x:Name="AddButton" Style="{StaticResource AppTagRoundedButton}">
+                <Button.Tag>
+                    Add Adjustment
+                </Button.Tag>
+                <FontIcon FontSize="18" Glyph="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            </Button>
+        </Border>
+        <Border Grid.Row="4" Margin="2" Style="{StaticResource AppRoundedBorderStyle}">
+            <Button x:Name="FilterButton" Style="{StaticResource AppTagRoundedButton}">
+                <Button.Tag>
+                    Default Filters
+                </Button.Tag>
+                <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            </Button>
+        </Border>
 
     </Grid>
     

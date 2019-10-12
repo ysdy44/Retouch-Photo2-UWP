@@ -12,53 +12,56 @@
     <UserControl.Resources>
         <!--Flyout-->
         <Flyout x:Name="AddImageFlyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel>
-                
-                <TextBlock Style="{StaticResource AppTextBlock}">
-                    Add new ImageLayer
+            <StackPanel Width="200">
+
+                <TextBlock FontSize="22" FontWeight="Light" Style="{StaticResource AppTextBlock}">
+                    Add
                 </TextBlock>
                 
+                <Button x:Name="_PhotoButton" Style="{StaticResource AppTagRoundedButton}">
+                    <Button.Tag>
+                        From Pictures
+                    </Button.Tag>
+                    <FontIcon Grid.Column="1" Glyph="&#xEB9F;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
+                </Button>
+
+                <Button x:Name="_DestopButton" Style="{StaticResource AppTagRoundedButton}">
+                    <Button.Tag>
+                        From Destop
+                    </Button.Tag>
+                    <FontIcon Grid.Column="1" Glyph="&#xEC4E;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
+                </Button>
+
                 <Rectangle Height="1" Fill="{StaticResource AppBorderBrush}"/>
 
-                <Button x:Name="_PhotoButton" Height="40" Padding="0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch">
-                    <StackPanel Orientation="Horizontal">
-                        <Border Padding="4,0" Width="120">
-                            <TextBlock Style="{StaticResource AppTextBlock}">
-                                From Pictures
-                            </TextBlock>
-                        </Border>
-                        <Border Width="40">
-                            <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
-                        </Border>                   
-                    </StackPanel>
-                </Button>
+                <TextBlock FontSize="22" FontWeight="Light" Style="{StaticResource AppTextBlock}">
+                    Size
+                </TextBlock>
                 
-                <Button x:Name="_DestopButton" Height="40" Padding="0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch">
-                    <StackPanel Orientation="Horizontal">
-                        <Border Padding="4,0" Width="120">
-                            <TextBlock Style="{StaticResource AppTextBlock}">
-                            From Destop
-                            </TextBlock>
-                        </Border>
-                        <Border Width="40">
-                            <FontIcon Glyph="&#xEC4E;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
-                        </Border>
-                    </StackPanel>
+                <Button x:Name="_WidthButton" Style="{StaticResource AppTagRoundedButton}">
+                    <Button.Tag>
+                        Change Width
+                    </Button.Tag>
+                    <FontIcon Grid.Column="1" Glyph="&#xE746;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
                 </Button>
-                
-                <Rectangle Height="1" Fill="{StaticResource AppBorderBrush}"/>
+                                             
+                <Slider x:Name="HeightSlider" Margin="2" Minimum="40" Maximum="80" StepFrequency="10" Style="{StaticResource AppOpacitySliderStyle}">
+                    <Slider.Header>
+                        <TextBlock Margin="6,0" Style="{StaticResource AppTextBlock}">
+                            Change Height
+                        </TextBlock>
+                    </Slider.Header>
+                </Slider>
 
-                <Button x:Name="_PadButton" Height="40" Padding="0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch">
-                    <StackPanel Orientation="Horizontal">
-                        <Border Padding="4,0" Width="120">
-                            <TextBlock Style="{StaticResource AppTextBlock}">
-                                Change Width
-                            </TextBlock>
-                        </Border>
-                        <Border Width="40">
-                            <FontIcon Glyph="&#xE746;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
-                        </Border>
-                    </StackPanel>
+                <TextBlock FontSize="22" FontWeight="Light" Style="{StaticResource AppTextBlock}">
+                    Layout
+                </TextBlock>
+                
+                <Button x:Name="LayoutButton" Style="{StaticResource AppTagRoundedButton}">
+                    <Button.Tag>
+                        Show Menu Layout
+                    </Button.Tag>
+                    <FontIcon Grid.Column="1" Glyph="&#xE81E;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
                 </Button>
 
             </StackPanel>
@@ -70,11 +73,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
-        <Button x:Name="AddButton" Height="42" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"/>
-        <Slider x:Name="ControlHeightSlider" Margin="4,0" Grid.Row="3" Minimum="40" Maximum="80" StepFrequency="10" VerticalAlignment="Center"/>
+
+        <Button x:Name="AddButton" Height="42" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+            <FontIcon Glyph="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+        </Button>
 
         <Canvas Grid.Row="1">
             <Border x:Name="IndicatorBorder" MinWidth="50" Height="40"/>

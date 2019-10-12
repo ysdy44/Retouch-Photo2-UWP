@@ -7,8 +7,6 @@
     {
         /// <summary> Normal. </summary>
         None,
-        /// <summary> Tool button. </summary>
-        ToolButton,
         /// <summary> LayersControl's indicator bar. </summary>
         LayersControlIndicator,
     }

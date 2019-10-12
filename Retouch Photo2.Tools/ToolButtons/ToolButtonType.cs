@@ -8,7 +8,7 @@
         /// <summary> Normal. </summary>
         None,
 
-        /// <summary> Geometry. </summary>
-        Geometry,
+        /// <summary> Second. </summary>
+        Second,
     }
 }

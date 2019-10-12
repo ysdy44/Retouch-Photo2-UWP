@@ -87,7 +87,6 @@ namespace Retouch_Photo2
                 new EffectMenu(),
                 new TransformerMenu(),
                 new ColorMenu(),
-                new ToolMenu(),
                 new LayerMenu(),
             },
         };

@@ -39,7 +39,7 @@
         <Setter Property="Background" Value="{ThemeResource AppForeground}"/>
         <Setter Property="MinWidth" Value="40"/>
         <Setter Property="MinHeight" Value="32"/>
-        <Setter Property="Height" Value="40"/>
+        <Setter Property="MaxHeight" Value="40"/>
     </Style>
     <Style x:Key="AppCircleBorderStyle" TargetType="Border">
         <Setter Property="Width" Value="40"/>
@@ -739,13 +739,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border x:Name="RootGrid" 
-                            CornerRadius="4"
-                            Padding="{TemplateBinding Padding}" 
-                            BorderThickness="1" 
-                            BorderBrush="{ThemeResource AppBorderBrush}" 
-                            Background="{ThemeResource AppForeground}" 
-                        >
+                    <Grid x:Name="RootGrid" Padding="{TemplateBinding Padding}" Background="Transparent">
 
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
@@ -794,7 +788,6 @@
 
                         </VisualStateManager.VisualStateGroups>
 
-                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
@@ -803,7 +796,7 @@
 
                             <ContentControl x:Name="ContentControl"
                               Content="{TemplateBinding Tag}" 
-                              Foreground="{ThemeResource ButtonForegroundDisabled}"
+                              Foreground="{ThemeResource AppText}"
                               VerticalAlignment="Center"
                                />
 
@@ -814,9 +807,7 @@
                             ContentTemplate="{TemplateBinding ContentTemplate}"
                              AutomationProperties.AccessibilityView="Raw" />
 
-                        </Grid>
-
-                    </Border>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>    
