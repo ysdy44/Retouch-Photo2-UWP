@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Tools
             return new GeometryHeartLayer();
         }
         public override ToolType Type => ToolType.GeometryHeart;
-        public override FrameworkElement Icon { get; } = new HeartIcon();
+        public override FrameworkElement Icon { get; } = new GeometryHeartIcon();
         public override IToolButton Button { get; } = new GeometryHeartButton();
         public override IToolPage Page { get; } = new GeometryHeartPage();
     }

@@ -85,7 +85,7 @@ namespace Retouch_Photo2
             //Layers
             this.LayersControl.PhotoButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.PicturesLibrary);
             this.LayersControl.DestopButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.Desktop);
-            this.LayersControl.WidthButton.Tapped += (s, e) => this.DrawLayout.IsPadLayersControlWidth = !this.DrawLayout.IsPadLayersControlWidth;
+            this.LayersControl.WidthButton.Tapped += (s, e) => this.DrawLayout.PadChangeLayersWidth();
         }
 
 
@@ -93,10 +93,9 @@ namespace Retouch_Photo2
 
 
         MoreToolButton MoreToolButton = new MoreToolButton();
+        UIElementCollection MoreTool => this.MoreToolButton.StackPanel.Children;
 
         UIElementCollection TooLeft => this.DrawLayout.LeftPaneChildren;
-        object LeftIcon { set => this.DrawLayout.LeftIcon = value; }
-        FrameworkElement FootPage { set => this.DrawLayout.FootPage = value; }
 
         ToolButtonType _tempToolButtonType;
  
@@ -118,7 +117,7 @@ namespace Retouch_Photo2
                         this.TooLeft.Add(rectangle);
                         break;
                     case ToolButtonType.Second:
-                        this.MoreToolButton.StackPanel.Children.Add(rectangle);
+                        this.MoreTool.Add(rectangle);
                         break;
                 }
                 return;
@@ -128,12 +127,13 @@ namespace Retouch_Photo2
             if (button!=null)
             {
                 button.Self.Tapped += (s, e) =>
-                {
-                    this.ToolGroupType(tool.Type);
+                {                    
+                    this.ToolGroupType(tool.Type);//Tools
+                    this.TipViewModel.Tool = tool;//Tool
 
-                    this.LeftIcon = tool.Icon;
-                    this.FootPage = tool.Page.Self;
-                    this.TipViewModel.Tool = tool;
+                    //DrawLayout
+                    this.DrawLayout.LeftIcon = tool.Icon;
+                    this.DrawLayout.FootPage = tool.Page.Self;
                 };
 
                 this._tempToolButtonType = button.Type;
@@ -143,7 +143,7 @@ namespace Retouch_Photo2
                         this.TooLeft.Add(button.Self);
                         break;
                     case ToolButtonType.Second:
-                        this.MoreToolButton.StackPanel.Children.Add(button.Self);
+                        this.MoreTool.Add(button.Self);
                         break;
                 }
             }

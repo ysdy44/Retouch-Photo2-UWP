@@ -5,10 +5,10 @@ namespace Retouch_Photo2.Tools.Icons
     /// <summary>
     /// Icon of <see cref = "GeometryHeartTool"/>.
     /// </summary>
-    public sealed partial class HeartIcon : UserControl
+    public sealed partial class GeometryHeartIcon : UserControl
     {
         //@Construct
-        public HeartIcon()
+        public GeometryHeartIcon()
         {
             this.InitializeComponent();
         }

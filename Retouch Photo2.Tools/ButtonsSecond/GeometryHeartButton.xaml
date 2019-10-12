@@ -16,7 +16,7 @@
             Heart
         </tools:ToolSecondButton.Text>
         <tools:ToolSecondButton.CenterContent>
-            <toolsIcons:HeartIcon/>
+            <toolsIcons:GeometryHeartIcon/>
         </tools:ToolSecondButton.CenterContent>
     </tools:ToolSecondButton>
 

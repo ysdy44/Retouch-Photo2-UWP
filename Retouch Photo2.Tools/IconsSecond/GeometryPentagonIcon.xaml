@@ -9,6 +9,6 @@
     d:DesignWidth="50"
     >
     
-    <FontIcon FontFamily="Segoe UI Symbol" Glyph="&#x2B1F;" FontSize="28" Foreground="#439EFB"/>
+    <Polygon Points="10,0 20,9 16,20 4,20 0,9" StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="#439EFB"/>
 
 </UserControl>

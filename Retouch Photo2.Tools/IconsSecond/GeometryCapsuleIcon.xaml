@@ -9,6 +9,6 @@
     d:DesignWidth="50"
     >
 
-    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEC11;" FontSize="26" Foreground="#439EFB"/>
+    <Rectangle RadiusX="6" RadiusY="6" Width="26" Height="12" StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="#439EFB"/>
 
 </UserControl>

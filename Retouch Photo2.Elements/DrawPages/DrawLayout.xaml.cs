@@ -33,18 +33,6 @@ namespace Retouch_Photo2.Elements
             get => this.footPage;
             set
             {
-                //If you choose a different tool, PhoneState will hided.
-                FrameworkElement oldPage = this.footPage;
-
-                if (value != oldPage)
-                {
-                    if (this._vsPhoneType != PhoneLayoutType.Hided)
-                    {
-                        this._vsPhoneType = PhoneLayoutType.Hided;
-                        this.VisualState = this.VisualState;//State
-                    }
-                }
-
                 this.FootScrollViewer.Content = value;
                 this.footPage=value;
             }
@@ -102,20 +90,27 @@ namespace Retouch_Photo2.Elements
 
 
         private bool isPadLayersControlWidth;
-        public bool IsPadLayersControlWidth
+        public void PadChangeLayersWidth()
         {
-            get => this.isPadLayersControlWidth;
-            set
+            if (this._vsActualWidthType == DeviceLayoutType.Pad)
             {
-                if (this._vsActualWidthType== DeviceLayoutType.Pad)
-                {
-                    double width = value ? 220 : 70;
-                    this.RightGridLenght.Width = new GridLength(width);
-                }
-
+                bool value=!this.isPadLayersControlWidth;
                 this.isPadLayersControlWidth = value;
+
+                double width = value ? 220 : 70;
+                this.RightGridLenght.Width = new GridLength(width);
             }
         }
+
+        public void PhoneHideLeftPanel()
+        {
+            if (this._vsPhoneType == PhoneLayoutType.ShowLeft)
+            {
+                this._vsPhoneType = PhoneLayoutType.Hided;
+                this.VisualState = this.VisualState;//State
+            }
+        }
+
 
         //@VisualState
         bool _vsIsFullScreen;
