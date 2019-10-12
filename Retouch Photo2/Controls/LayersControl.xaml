@@ -18,14 +18,14 @@
                     Add
                 </TextBlock>
                 
-                <Button x:Name="_PhotoButton" Style="{StaticResource AppTagRoundedButton}">
+                <Button x:Name="PhotoButton" Style="{StaticResource AppTagRoundedButton}">
                     <Button.Tag>
                         From Pictures
                     </Button.Tag>
                     <FontIcon Grid.Column="1" Glyph="&#xEB9F;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
                 </Button>
 
-                <Button x:Name="_DestopButton" Style="{StaticResource AppTagRoundedButton}">
+                <Button x:Name="DestopButton" Style="{StaticResource AppTagRoundedButton}">
                     <Button.Tag>
                         From Destop
                     </Button.Tag>
@@ -80,7 +80,7 @@
         </Button>
 
         <Canvas Grid.Row="1">
-            <Border x:Name="IndicatorBorder" MinWidth="50" Height="40"/>
+            <Border x:Name="_IndicatorBorder" MinWidth="50" Height="40"/>
         </Canvas>
 
         <ScrollViewer Grid.Row="1"

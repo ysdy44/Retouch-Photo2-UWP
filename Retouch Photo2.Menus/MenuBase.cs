@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Numerics;
-using Windows.UI;
+using Windows.Foundation;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.Menus
 {
@@ -16,135 +14,50 @@ namespace Retouch_Photo2.Menus
     {
         //@Delegate
         public EventHandler<UIElement> Move { get; set; }
-          
+        public EventHandler<object> Closed { get; set; }
+        public EventHandler<object> Opened { get; set; }
+
         //@Content
         public abstract IMenuLayout Layout { get; }
         public abstract IMenuButton Button { get; }
 
-        public UIElement Overlay => this._overlay;
-        private readonly Border _overlay = new Border();
-        
-        public FlyoutBase Flyout => this._flyout;
-        private readonly Flyout _flyout = new Flyout
-        {
-            FlyoutPresenterStyle = new Style
-            {
-                TargetType = typeof(FlyoutPresenter),
-                Setters =
-                {
-                    new Setter
-                    {
-                        Property = FlyoutPresenter.PaddingProperty,
-                        Value = new Thickness(0,0,0,0),
-                    },
-                    new Setter
-                    {
-                        Property = FlyoutPresenter.MarginProperty,
-                        Value = new Thickness(0,0,0,0),
-                    },
-                    new Setter
-                    {
-                        Property = FlyoutPresenter.BorderThicknessProperty,
-                        Value = new Thickness(0,0,0,0),
-                    },
-                    new Setter
-                    {
-                        Property = FlyoutPresenter.BorderBrushProperty,
-                        Value = new SolidColorBrush(Colors.Transparent),
-                    },
-                    new Setter
-                    {
-                        Property = FlyoutPresenter.BackgroundProperty,
-                        Value = new SolidColorBrush(Colors.Transparent),
-                    },
-                }
-            }
-        };
-        
+        Point _postion;
 
-        readonly MenuOverlaySize _size = new MenuOverlaySize();
-
-               
         /// <summary> State of MenuBase. </summary>
         public MenuState State
         {
             get => this.state;
             set
             {
-                if (this.Button != null) this.Button.State = value;
-                if (this.Layout != null) this.Layout.State = value;
+                this.Button.State = value;
+                this.Layout.State = value;
 
-                switch (value)
+                if (value == MenuState.FlyoutShow)
                 {
-                    case MenuState.FlyoutHide:
-                    case MenuState.FlyoutShow:
-                        {
-                            this._overlay.Child = null;
-                            this._flyout.Content = this.Layout.Self;
-                            this._overlay.Visibility = Visibility.Collapsed;
-                        }
-                        break;
-                    case MenuState.OverlayExpanded:
-                    case MenuState.OverlayNotExpanded:
-                        {
-                            this._flyout.Content = null;
-                            this._overlay.Child = this.Layout.Self;
-                            this._overlay.Visibility = Visibility.Visible;
-                        }
-                        break;
+                    FlyoutPlacementMode placement = (this.Button.Type == MenuButtonType.None) ? FlyoutPlacementMode.Bottom : FlyoutPlacementMode.Left;
+                    Point postion = MenuHelper.GetFlyoutPostion(this.Button.Self, this.Layout.Self, placement);
+                    Point postion2 = MenuHelper.GetBoundPostion(postion, this.Button.Self);
+                    MenuHelper.SetOverlayPostion(this.Layout.Self, postion2);
+                    this.Move?.Invoke(this, this.Layout.Self); //Delegate
+
+                    if (this.state == MenuState.FlyoutHide) this.Opened?.Invoke(this, null); //Delegate 
                 }
-                
-                switch (value)
+                else
                 {
-                    case MenuState.FlyoutHide:
-                    case MenuState.OverlayExpanded:
-                    case MenuState.OverlayNotExpanded:
-                        this._flyout.Hide();
-                        break;
-                    case MenuState.FlyoutShow:
-                        if (this.Button == null) break;
-                        this._flyout.ShowAt(this.Button.Self);
-                        break;
+                    if (this.state == MenuState.FlyoutShow) this.Closed?.Invoke(this, null); //Delegate
                 }
+
+                this.Layout.Self.Visibility = (value == MenuState.FlyoutHide) ? Visibility.Collapsed : Visibility.Visible;
 
                 this.state = value;
             }
         }
         private MenuState state;
-         
 
         //@Construct  
         public MenuBase()
         {
             this.State = MenuState.FlyoutHide;
-
-            //MenuButtonType
-            switch (this.Button.Type)
-            {
-                case MenuButtonType.None:
-                    {
-                        this.Flyout.Placement = FlyoutPlacementMode.Bottom;
-                        this.Button.Self.Tapped += (s, e) => this.State = MenuBase.GetState(this.State);
-                    }
-                    break;
-                case MenuButtonType.LayersControlIndicator:
-                    {
-                        this.Flyout.Placement = FlyoutPlacementMode.Left;
-                    }
-                    break;
-            }
-            
-            //Layout
-            this._overlay.SizeChanged += (s, e) => this._size.Size = e.NewSize;
-
-            //State
-            this._flyout.Closed += (s, e) =>
-            {
-                if (this.State == MenuState.FlyoutShow)
-                {
-                    this.State = MenuState.FlyoutHide;
-                }
-            };
 
             //Button
             this.Layout.CloseButton.Tapped += (s, e) => this.State = MenuState.FlyoutHide;
@@ -154,8 +67,9 @@ namespace Retouch_Photo2.Menus
                 else if (this.State == MenuState.OverlayNotExpanded) this.State = MenuState.OverlayExpanded;
                 else
                 {
-                    Vector2 postion = MenuOverlaySize.GetElementVisualPostion(this.Layout.TitlePanel);
-                    MenuOverlaySize.SetElementCanvasPostion(this.Overlay, postion, this._size.Size);
+                    Point postion = MenuHelper.GetVisualPostion(this.Layout.TitlePanel);
+                    Point postion2 = MenuHelper.GetBoundPostion(postion, this.Button.Self);
+                    MenuHelper.SetOverlayPostion(this.Layout.Self, postion2);
 
                     this.State = MenuState.OverlayExpanded;
                 }
@@ -165,39 +79,19 @@ namespace Retouch_Photo2.Menus
             this.Layout.TitlePanel.ManipulationMode = ManipulationModes.All;
             this.Layout.TitlePanel.ManipulationStarted += (s, e) =>
             {
-                this._size.Postion = MenuOverlaySize.GetElementVisualPostion(this.Overlay);
-                this.Move?.Invoke(this, this.Overlay); //Delegate
+                this._postion = MenuHelper.GetVisualPostion(this.Layout.Self);
+                this.Move?.Invoke(this, this.Layout.Self); //Delegate
             };
             this.Layout.TitlePanel.ManipulationDelta += (s, e) =>
             {
-                if (this.State == MenuState.FlyoutShow) return;
-                this._size.Postion += e.Delta.Translation.ToVector2();
-                MenuOverlaySize.SetElementCanvasPostion(this.Overlay, this._size.Postion, this._size.Size);
+                if (this.State != MenuState.FlyoutShow)
+                {
+                    this._postion.X += e.Delta.Translation.X;
+                    this._postion.Y += e.Delta.Translation.Y;
+                    Point postion2 = MenuHelper.GetBoundPostion(this._postion, this.Layout.Self);
+                    MenuHelper.SetOverlayPostion(this.Layout.Self, postion2);
+                }
             };
-        }
-
-
-        //@Static
-        /// <summary>
-        /// Get the corresponding status. 
-        /// </summary>
-        /// <param name="state"> The source state. </param>
-        /// <returns> The destination state. </returns>
-        private static MenuState GetState(MenuState state)
-        {
-            switch (state)
-            {
-                case MenuState.FlyoutHide:
-                    return MenuState.FlyoutShow;
-                case MenuState.FlyoutShow:
-                    return MenuState.FlyoutHide;
-
-                case MenuState.OverlayExpanded:
-                    return MenuState.OverlayNotExpanded;
-                case MenuState.OverlayNotExpanded:
-                    return MenuState.OverlayExpanded;
-            }
-            return MenuState.FlyoutShow;
         }
     }
 }

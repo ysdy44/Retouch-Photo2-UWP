@@ -11,6 +11,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Retouch_Photo2.Controls
 {
@@ -27,14 +28,8 @@ namespace Retouch_Photo2.Controls
 
 
         //@Content
-        /// <summary> IndicatorBorder's Child. </summary>
-        public UIElement IndicatorChild { get => this.IndicatorBorder.Child; set => this.IndicatorBorder.Child = value; }
-
-        /// <summary> PhotoButton. </summary>
-        public Button PhotoButton => this._PhotoButton;
-        /// <summary> DestopButton. </summary>
-        public Button DestopButton => this._DestopButton;
-
+        /// <summary> IndicatorBorder. </summary>
+        public Border IndicatorBorder => this._IndicatorBorder; 
         /// <summary> WidthButton. </summary>
         public Button WidthButton => this._WidthButton;
 
@@ -52,15 +47,28 @@ namespace Retouch_Photo2.Controls
             this.InitializeComponent();
             this.ItemsControl.ItemsSource = this.ViewModel.Layers.RootControls;
 
-            //Size
+
+            #region Add
+
+
             this.HeightSlider.ValueChanged += (s, e) =>
             {
                 if (e.NewValue == e.OldValue) return;
                 int controlHeight = (int)e.NewValue;
                 this.ViewModel.Layers.SetControlHeight(controlHeight);
             };
-            //Layout
+
+            this.PhotoButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.PicturesLibrary);
+            this.DestopButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.Desktop);
+
             this.LayoutButton.Tapped += (s, e) => this.ShowLayerMenu();
+
+
+            #endregion
+
+
+            #region This
+
 
             this.Tapped += (s, e) =>
             {
@@ -81,7 +89,11 @@ namespace Retouch_Photo2.Controls
             };
 
 
+            #endregion
+
+
             #region LayerCollection
+
 
             LayerCollection.ItemClick += (layer) =>
             {
@@ -143,7 +155,6 @@ namespace Retouch_Photo2.Controls
 
 
             #endregion
-
         }
 
         private void ShowLayerMenu()
@@ -153,10 +164,45 @@ namespace Retouch_Photo2.Controls
         private void ShowLayerMenu(ILayer layer)
         {
             Point rootGridPosition = layer.Control.Self.TransformToVisual(this).TransformPoint(new Point());
-            Canvas.SetTop(this.IndicatorBorder, rootGridPosition.Y);
+            Canvas.SetTop(this._IndicatorBorder, rootGridPosition.Y);
 
             this.ShowLayerMenu();
         }
 
+               
+        private async Task AddImage(PickerLocationId location)
+        {
+            //ImageRe
+            ImageRe imageRe = await ImageRe.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, location);
+            if (imageRe == null) return;
+
+            //Images
+            this.ViewModel.DuplicateChecking(imageRe);
+
+            //Transformer
+            Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
+
+            //Layer
+            ImageLayer imageLayer = new ImageLayer
+            {
+                SelectMode = SelectMode.Selected,
+                TransformManager = new TransformManager(transformerSource),
+
+                ImageRe = imageRe,
+            };
+
+            //Selection
+            this.SelectionViewModel.SetValue((layer) =>
+            {
+                layer.SelectMode = SelectMode.UnSelected;
+            });
+
+            //Mezzanine
+            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(imageLayer);
+            this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+
+            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+            this.ViewModel.Invalidate();//Invalidate
+        }
     }
 }

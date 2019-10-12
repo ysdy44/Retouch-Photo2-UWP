@@ -104,7 +104,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Column="0" Style="{StaticResource AppRoundedBorderStyle}">
+                <Border Grid.Column="0" Height="40" Style="{StaticResource AppRoundedBorderStyle}">
                     <Grid>
                         <Grid.ColumnDefinitions >
                             <ColumnDefinition Width="1*"/>
@@ -138,7 +138,7 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Column="2" Style="{StaticResource AppRoundedBorderStyle}">
+                <Border Grid.Column="2" Height="40" Style="{StaticResource AppRoundedBorderStyle}">
                     <Grid>
                         <Grid.ColumnDefinitions >
                             <ColumnDefinition Width="1*"/>
@@ -179,7 +179,7 @@
             <TextBlock Style="{StaticResource AppTextBlock}">
                 Arrange
             </TextBlock>
-            <Border Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
+            <Border Margin="2,0" Height="40" Style="{StaticResource AppRoundedBorderStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions >
                         <ColumnDefinition Width="1*"/>
@@ -250,7 +250,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Column="0" Style="{StaticResource AppRoundedBorderStyle}">
+                <Border Grid.Column="0" Height="40" Style="{StaticResource AppRoundedBorderStyle}">
                     <Grid>
                         <Grid.ColumnDefinitions >
                             <ColumnDefinition Width="1*"/>
@@ -297,7 +297,7 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Column="2" Style="{StaticResource AppRoundedBorderStyle}">
+                <Border Grid.Column="2" Height="40" Style="{StaticResource AppRoundedBorderStyle}">
 
                     <operates:OperateButton x:Name="AlignSymmetryHorizontallyButton" Grid.Column="3" IsEnabled="False">
                         <ToolTipService.ToolTip>
@@ -327,7 +327,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Column="0" Style="{StaticResource AppRoundedBorderStyle}">
+                <Border Grid.Column="0" Height="40" Style="{StaticResource AppRoundedBorderStyle}">
                     <Grid>
                         <Grid.ColumnDefinitions >
                             <ColumnDefinition Width="1*"/>
@@ -374,7 +374,7 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Column="2" Style="{StaticResource AppRoundedBorderStyle}">
+                <Border Grid.Column="2" Height="40" Style="{StaticResource AppRoundedBorderStyle}">
 
                     <operates:OperateButton x:Name="AlignSymmetryVerticallyButton" IsEnabled="False">
                         <ToolTipService.ToolTip>

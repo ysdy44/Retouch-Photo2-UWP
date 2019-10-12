@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Shapes;
 using Windows.Foundation.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Windows.UI;
 
 namespace Retouch_Photo2
 {
@@ -66,6 +67,10 @@ namespace Retouch_Photo2
             //FullScreen
             this.UnFullScreenButton.Tapped += (s, e) => this.DrawLayout.IsFullScreen = !DrawLayout.IsFullScreen;
             this.FullScreenButton.Tapped += (s, e) => this.DrawLayout.IsFullScreen = !this.DrawLayout.IsFullScreen;
+     
+            
+            //Layers
+            this.LayersControl.WidthButton.Tapped += (s, e) => this.DrawLayout.PadChangeLayersWidth();
 
 
             //Tool
@@ -74,18 +79,16 @@ namespace Retouch_Photo2
                 this.ConstructTool(tool);
             }
             this.TooLeft.Add(this.MoreToolButton);
-            
+
             //Menu
-            foreach (IMenu menu in this.TipViewModel.Menus)
-            {
-                this.ConstructMenu(menu);
-            }
+            MenuHelper.ConstructMenus
+            (
+                this.TipViewModel.Menus,
+                this.OverlayCanvas,
+                this.DrawLayout.HeadRightChildren,
+                this.LayersControl.IndicatorBorder
+             );
 
-
-            //Layers
-            this.LayersControl.PhotoButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.PicturesLibrary);
-            this.LayersControl.DestopButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.Desktop);
-            this.LayersControl.WidthButton.Tapped += (s, e) => this.DrawLayout.PadChangeLayersWidth();
         }
 
 
@@ -167,43 +170,7 @@ namespace Retouch_Photo2
 
 
         #endregion
-
-
-        #region Menu
-
-
-        UIElementCollection MenuOverlay => this.OverlayCanvas.Children;
-        UIElementCollection MenuHead => this.DrawLayout.HeadRightChildren;
-        UIElement MenuLayersIndicator { set => this.LayersControl.IndicatorChild = value; }
-
         
-        private void ConstructMenu(IMenu menu)
-        {
-            if (menu == null) return;
-            
-            //MenuOverlay
-            UIElement overlay = menu.Overlay;
-            this.MenuOverlay.Add(overlay);
-
-            menu.Move += (s, e) =>
-            {
-                int index = this.MenuOverlay.IndexOf(menu.Overlay);
-                int count = this.MenuOverlay.Count;
-                this.MenuOverlay.Move((uint)index, (uint)count - 1);
-            };
-
-            //MenuButton
-            IMenuButton menuButton = menu.Button;
-            switch (menuButton.Type)
-            {
-                case MenuButtonType.None: this.MenuHead.Add(menuButton.Self); break;
-                case MenuButtonType.LayersControlIndicator: this.MenuLayersIndicator = menuButton.Self; break;
-            }
-        }
-
-
-        #endregion
-
 
         //The current page becomes the active page
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -243,42 +210,6 @@ namespace Retouch_Photo2
         //The current page no longer becomes an active page
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-        }
-
-
-        private async Task AddImage(PickerLocationId location)
-        { 
-            //ImageRe
-            ImageRe imageRe = await ImageRe.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, location);
-            if (imageRe == null) return;
-
-            //Images
-            this.ViewModel.DuplicateChecking(imageRe);
-
-            //Transformer
-            Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
-
-            //Layer
-            ImageLayer imageLayer = new ImageLayer
-            {
-                SelectMode = SelectMode.Selected,
-                TransformManager = new TransformManager(transformerSource),
-
-                ImageRe = imageRe,
-            };
-
-            //Selection
-            this.SelectionViewModel.SetValue((layer) =>
-            {
-                layer.SelectMode =  SelectMode.UnSelected;
-            });
-
-            //Mezzanine
-            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(imageLayer);
-            this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
-
-            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
-            this.ViewModel.Invalidate();//Invalidate
         }
     }
 }
