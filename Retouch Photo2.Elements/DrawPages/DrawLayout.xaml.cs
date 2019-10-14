@@ -1,4 +1,7 @@
-﻿using Windows.Devices.Input;
+﻿using System;
+using System.Numerics;
+using Windows.Devices.Input;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -44,7 +47,9 @@ namespace Retouch_Photo2.Elements
         public UIElement HeadLeftPane { get => this.HeadLeftBorder.Child; set => this.HeadLeftBorder.Child = value; }
         /// <summary> HeadRightStackPane's Children. </summary>
         public UIElementCollection HeadRightChildren => this.HeadRightStackPane.Children;
-               
+
+        //@Delegate 
+        public TypedEventHandler<bool, Vector2> FullScreenChanged;
 
         #region DependencyProperty
 
@@ -82,6 +87,15 @@ namespace Retouch_Photo2.Elements
             {
                 con._vsIsFullScreen = value;
                 con.VisualState = con.VisualState;//State
+
+                if (con._vsActualWidthType == DeviceLayoutType.PC)
+                {
+                    con.FullScreenChanged?.Invoke(value, new Vector2(70, 50)); //Delegate
+                }
+                else
+                {
+                    con.FullScreenChanged?.Invoke(value, new Vector2(0, 50)); //Delegate}
+                }
             }
         }));
 

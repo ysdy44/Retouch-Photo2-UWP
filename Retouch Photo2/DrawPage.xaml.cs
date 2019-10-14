@@ -69,7 +69,16 @@ namespace Retouch_Photo2
             //FullScreen
             this.UnFullScreenButton.Tapped += (s, e) => this.DrawLayout.IsFullScreen = !DrawLayout.IsFullScreen;
             this.FullScreenButton.Tapped += (s, e) => this.DrawLayout.IsFullScreen = !this.DrawLayout.IsFullScreen;
-     
+            this.DrawLayout.FullScreenChanged += (isFullScreen, vector) =>
+            {
+                if (isFullScreen)
+                    this.ViewModel.CanvasTransformer.Position += vector;
+                else
+                    this.ViewModel.CanvasTransformer.Position -= vector;
+
+                this.ViewModel.CanvasTransformer.ReloadMatrix();
+            };
+
             
             //Layers
             this.LayersControl.WidthButton.Tapped += (s, e) => this.DrawLayout.PadChangeLayersWidth();
