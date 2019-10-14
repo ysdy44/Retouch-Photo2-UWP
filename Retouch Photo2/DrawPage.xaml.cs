@@ -18,6 +18,8 @@ using Windows.Foundation.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Windows.UI;
+using System.Linq;
+using Windows.Foundation;
 
 namespace Retouch_Photo2
 {
@@ -87,8 +89,8 @@ namespace Retouch_Photo2
             {
                 this.ConstructMenu(menu);
             }
-            this.OverlayCanvas.Tapped += (s, e) => this.MenusHide();
-            this.OverlayCanvas.SizeChanged += (s, e) => this.MenusHideAndCrop();
+            this.OverlayCanvas.Tapped += (s, e) => this.MenusHideAndCrop(isCrop: false);
+            this.OverlayCanvas.SizeChanged += (s, e) => this.MenusHideAndCrop(isCrop: true);
         }
 
 
@@ -120,6 +122,8 @@ namespace Retouch_Photo2
             {
                 type = tool.Button.Type;
                 button = tool.Button.Self;
+
+                this._tempToolButtonType = tool.Button.Type;
                 tool.Button.Self.Tapped += (s, e) =>
                 {
                     this.ToolChanged(tool);
@@ -136,7 +140,6 @@ namespace Retouch_Photo2
                     this.MoreToolButton.Add(button);
                     break;
             }
-            this._tempToolButtonType = tool.Button.Type;
         }
 
         private void ToolChanged(ITool tool)
@@ -180,6 +183,7 @@ namespace Retouch_Photo2
 
         #region Menu
 
+        UIElementCollection MennuHead => this.DrawLayout.HeadRightChildren;
 
         public void ConstructMenu(IMenu menu)
         {
@@ -201,7 +205,7 @@ namespace Retouch_Photo2
             switch (menu.Button.Type)
             {
                 case MenuButtonType.None:
-                    this.DrawLayout.HeadRightChildren.Add(menu.Button.Self);
+                    this.MennuHead.Add(menu.Button.Self);
                     break;
                 case MenuButtonType.LayersControlIndicator:
                     this.LayersControl.IndicatorBorder.Child = menu.Button.Self;
@@ -209,20 +213,25 @@ namespace Retouch_Photo2
             }
         }
 
-        private void MenusHide()
+        private void MenusHideAndCrop( bool isCrop)
         {
-            foreach (IMenu other in this.TipViewModel.Menus)
+            foreach (IMenu menu in this.TipViewModel.Menus)
             {
-                other.Hide();
-            }
-            this.OverlayCanvas.Background = null;
-        }
-        private void MenusHideAndCrop()
-        {
-            foreach (IMenu other in this.TipViewModel.Menus)
-            {
-                other.Hide();
-                other.Crop();
+                switch (menu.State)
+                {
+                    case MenuState.FlyoutShow:
+                        menu.State = MenuState.FlyoutHide;
+                        break;
+                    case MenuState.OverlayExpanded:
+                    case MenuState.OverlayNotExpanded:
+                        if (isCrop)
+                        {
+                            Point postion = MenuHelper.GetOverlayPostion(menu.Layout.Self);
+                            Point postion2 = MenuHelper.GetBoundPostion(postion, menu.Layout.Self);
+                            MenuHelper.SetOverlayPostion(menu.Layout.Self, postion2);
+                        }
+                        break;
+                }
             }
             this.OverlayCanvas.Background = null;
         }

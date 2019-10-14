@@ -119,10 +119,12 @@
             <TextBlock Style="{StaticResource AppTextBlock}">
                 Blend Mode
             </TextBlock>
-            <Button x:Name="BlendButton" Margin="2,0" Style="{StaticResource AppTagRoundedButton}"
+            <Border Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">                
+            <Button x:Name="BlendButton" Style="{StaticResource AppTagRoundedButton}"
                     Tag="{x:Bind SelectionViewModel.BlendType,Mode=OneWay}">
                 <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
+            </Border>
 
             <ContentControl Height="4"/>
 

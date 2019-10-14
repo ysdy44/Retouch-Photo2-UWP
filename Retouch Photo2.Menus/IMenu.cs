@@ -27,10 +27,5 @@ namespace Retouch_Photo2.Menus
         IMenuLayout Layout { get; }
         /// <summary> Gets IMenu's button. </summary>
         IMenuButton Button { get; }
-
-        /// <summary> Hide the "flyout". </summary>
-        void Hide();
-        /// <summary> Keep layout out of bounds. </summary>
-        void Crop();
     }
 }

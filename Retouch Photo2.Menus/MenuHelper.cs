@@ -49,6 +49,9 @@ namespace Retouch_Photo2.Menus
             double X;
             double Y;
 
+            if (width < 222) width = 222;
+            if (height < 222) height = 222;
+
             if (postion.X < 0) X = 0;
             else if (width > Window.Current.Bounds.Width) X = 0;
             else if (postion.X > (Window.Current.Bounds.Width - width)) X = Window.Current.Bounds.Width - width;
@@ -91,10 +94,10 @@ namespace Retouch_Photo2.Menus
         public static Point GetFlyoutPostion(FrameworkElement button, FrameworkElement layout, FlyoutPlacementMode placement)
         {
             double layoutWidth = layout.ActualWidth;
-            if (layoutWidth < 200) layoutWidth = 200;
+            if (layoutWidth < 222) layoutWidth = 222;
 
             double layoutHeight = layout.ActualHeight;
-            if (layoutHeight < 200) layoutHeight = 200;
+            if (layoutHeight < 222) layoutHeight = 222;
 
             return MenuHelper.GetFlyoutPostion(
                 MenuHelper.GetVisualPostion(button),

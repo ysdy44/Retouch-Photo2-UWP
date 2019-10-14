@@ -39,7 +39,7 @@ namespace Retouch_Photo2.Menus
         }
 
         Point _postion;
-
+        public static Action<string> dsfsdfsdfsd;
         /// <summary> State of MenuBase. </summary>
         public MenuState State
         {
@@ -48,6 +48,8 @@ namespace Retouch_Photo2.Menus
             {
                 this.Button.State = value;
                 this.Layout.State = value;
+
+                this.Layout.Self.Visibility = (value == MenuState.FlyoutHide) ? Visibility.Collapsed : Visibility.Visible;
 
                 if (value == MenuState.FlyoutShow)
                 {
@@ -63,8 +65,6 @@ namespace Retouch_Photo2.Menus
                 {
                     if (this.state == MenuState.FlyoutShow) this.Closed?.Invoke(); //Delegate
                 }
-
-                this.Layout.Self.Visibility = (value == MenuState.FlyoutHide) ? Visibility.Collapsed : Visibility.Visible;
 
                 this.state = value;
             }
@@ -85,7 +85,7 @@ namespace Retouch_Photo2.Menus
             }
 
             //Button
-            this.Layout.CloseButton.Tapped += (s, e) => this.Hide();
+            this.Layout.CloseButton.Tapped += (s, e) => this.State = MenuState.FlyoutHide;
             this.Layout.StateButton.Tapped += (s, e) => this.State = this.GetState2(this.State);
 
             //Postion 
@@ -106,25 +106,7 @@ namespace Retouch_Photo2.Menus
                 }
             };
         }
-
-        public void Hide()
-        {
-            if (this.State == MenuState.FlyoutShow)
-            {
-                this.State = MenuState.FlyoutHide;
-            }
-        }
-        public void Crop()
-        {
-            if (this.State == MenuState.FlyoutHide) return;
-            if (this.State == MenuState.FlyoutShow) return;
-
-            Point postion = MenuHelper.GetOverlayPostion(this.Layout.Self);
-            Point postion2 = MenuHelper.GetBoundPostion(postion, this.Layout.Self);
-            MenuHelper.SetOverlayPostion(this.Layout.Self, postion2);
-        }
-
-
+        
         private MenuState GetState(MenuState state)
         {
             switch (state)

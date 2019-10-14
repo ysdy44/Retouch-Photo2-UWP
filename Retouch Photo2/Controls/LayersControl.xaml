@@ -12,57 +12,77 @@
     <UserControl.Resources>
         <!--Flyout-->
         <Flyout x:Name="Flyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel Width="200">
+            <StackPanel Width="190">
 
-                <TextBlock FontSize="22" FontWeight="Light" Style="{StaticResource AppTextBlock}">
-                    Add
+                <TextBlock Style="{StaticResource AppTextBlock}">
+                    Add Image
                 </TextBlock>
-                
-                <Button x:Name="PhotoButton" Style="{StaticResource AppTagRoundedButton}">
-                    <Button.Tag>
-                        From Pictures
-                    </Button.Tag>
-                    <FontIcon Grid.Column="1" Glyph="&#xEB9F;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
-                </Button>
 
-                <Button x:Name="DestopButton" Style="{StaticResource AppTagRoundedButton}">
-                    <Button.Tag>
-                        From Destop
-                    </Button.Tag>
-                    <FontIcon Grid.Column="1" Glyph="&#xEC4E;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
-                </Button>
+                <Grid Margin="2,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}">
+                        Pictures
+                    </TextBlock>
+                    <Button x:Name="PhotoButton" Grid.Column="1" Style="{StaticResource AppCircleButtonStyle}">
+                        <FontIcon Glyph="&#xEB9F;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
+                    </Button>
+                </Grid>
 
-                <Rectangle Height="1" Fill="{StaticResource AppBorderBrush}"/>
+                <ContentControl Height="2"/>
 
-                <TextBlock FontSize="22" FontWeight="Light" Style="{StaticResource AppTextBlock}">
-                    Size
+                <Grid Margin="2,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}">
+                        Destop
+                    </TextBlock>
+                    <Button x:Name="DestopButton" Grid.Column="1" Style="{StaticResource AppCircleButtonStyle}">
+                        <FontIcon Glyph="&#xEC4E;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
+                    </Button>
+                </Grid>
+
+                <Rectangle Width="Auto" Height="1" Margin="2,4" HorizontalAlignment="Stretch" Fill="{ThemeResource AppForeground}"/>
+
+                <TextBlock Style="{StaticResource AppTextBlock}">
+                    Change Height
                 </TextBlock>
-                
-                <Button x:Name="_WidthButton" Style="{StaticResource AppTagRoundedButton}">
-                    <Button.Tag>
-                        Change Width
-                    </Button.Tag>
-                    <FontIcon Grid.Column="1" Glyph="&#xE746;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
-                </Button>
-                                             
-                <Slider x:Name="HeightSlider" Margin="2" Minimum="40" Maximum="80" StepFrequency="10" Style="{StaticResource AppOpacitySliderStyle}">
-                    <Slider.Header>
-                        <TextBlock Margin="6,0" Style="{StaticResource AppTextBlock}">
-                            Change Height
-                        </TextBlock>
-                    </Slider.Header>
-                </Slider>
 
-                <TextBlock FontSize="22" FontWeight="Light" Style="{StaticResource AppTextBlock}">
-                    Layout
-                </TextBlock>
-                
-                <Button x:Name="LayoutButton" Style="{StaticResource AppTagRoundedButton}">
-                    <Button.Tag>
-                        Show Menu Layout
-                    </Button.Tag>
-                    <FontIcon Grid.Column="1" Glyph="&#xE81E;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
-                </Button>
+                <Slider x:Name="HeightSlider" Margin="2" Minimum="40" Maximum="80" StepFrequency="10" Style="{StaticResource AppOpacitySliderStyle}"/>
+
+                <ContentControl Height="2"/>
+
+                <Grid Margin="2,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}">
+                       Change Width
+                    </TextBlock>
+                    <Button x:Name="_WidthButton" Grid.Column="1" Style="{StaticResource AppCircleButtonStyle}">
+                        <FontIcon Glyph="&#xE746;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
+                    </Button>
+                </Grid>
+
+                <Rectangle Width="Auto" Height="1" Margin="2,4" HorizontalAlignment="Stretch" Fill="{ThemeResource AppForeground}"/>
+
+                <Grid Margin="2,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}">
+                        Show Menu
+                    </TextBlock>
+                    <Button x:Name="LayoutButton" Grid.Column="1" Style="{StaticResource AppCircleButtonStyle}">
+                        <FontIcon  Glyph="&#xE81E;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
+                    </Button>
+                </Grid>
 
             </StackPanel>
         </Flyout>

@@ -22,9 +22,7 @@
 
         /// <summary> Color. </summary>
         Color,
-
-        /// <summary> Tool. </summary>
-        Tool,
+        
         /// <summary> Layer. </summary>
         Layer,
     }

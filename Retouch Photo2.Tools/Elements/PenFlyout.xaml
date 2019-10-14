@@ -29,23 +29,21 @@
             Mode
         </TextBlock>
         <Border Height="Auto" Style="{ThemeResource AppRoundedBorderStyle}">
-            <ScrollViewer>
-                <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal">
 
-                    <RadioButton x:Name="MirroredRadioButton"  Tag="Mirrored" Style="{StaticResource AppTapRadioButtonStyle}">
-                        <toolElements:PenMirroredIcon/>
-                    </RadioButton>
+                <RadioButton x:Name="MirroredRadioButton"  Tag="Mirrored" Style="{StaticResource AppTapRadioButtonStyle}">
+                    <toolElements:PenMirroredIcon/>
+                </RadioButton>
 
-                    <RadioButton x:Name="DisconnectedRadioButton" Tag="Disconnected" Style="{StaticResource AppTapRadioButtonStyle}">
-                        <toolElements:PenDisconnectedIcon/>
-                    </RadioButton>
+                <RadioButton x:Name="DisconnectedRadioButton" Tag="Disconnected" Style="{StaticResource AppTapRadioButtonStyle}">
+                    <toolElements:PenDisconnectedIcon/>
+                </RadioButton>
 
-                    <RadioButton x:Name="AsymmetricRadioButton" Tag="Asymmetric" Style="{StaticResource AppTapRadioButtonStyle}">
-                        <toolElements:PenAsymmetricIcon/>
-                    </RadioButton>
+                <RadioButton x:Name="AsymmetricRadioButton" Tag="Asymmetric" Style="{StaticResource AppTapRadioButtonStyle}">
+                    <toolElements:PenAsymmetricIcon/>
+                </RadioButton>
 
-                </StackPanel>
-            </ScrollViewer>
+            </StackPanel>
         </Border>
 
     </StackPanel>

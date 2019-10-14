@@ -113,9 +113,6 @@
     </Compile>
     <Compile Include="ApplicationViewTitleBarBackgroundExtension.cs" />
     <Compile Include="DrawPages\DeviceLayoutType.cs" />
-    <Compile Include="DrawPages\LayersAddDialog.xaml.cs">
-      <DependentUpon>LayersAddDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ExpandAppbars\ExpandAppbar.xaml.cs">
       <DependentUpon>ExpandAppbar.xaml</DependentUpon>
     </Compile>
@@ -219,10 +216,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="CompositeModes\CompositeModeControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DrawPages\LayersAddDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
