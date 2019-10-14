@@ -82,28 +82,28 @@ namespace Retouch_Photo2.Tools
         public TouchbarButton()
         {
             this.InitializeComponent();
-            this.RootBorder.PointerEntered += (s, e) =>
+            this.PointerEntered += (s, e) =>
             {
                 this._vsClickMode = ClickMode.Hover;
                 this.VisualState = this.VisualState;//State
             };
-            this.RootBorder.PointerPressed += (s, e) =>
+            this.PointerPressed += (s, e) =>
             {
                 this._vsClickMode = ClickMode.Press;
                 this.VisualState = this.VisualState;//State
             };
-            this.RootBorder.PointerReleased += (s, e) =>
+            this.PointerReleased += (s, e) =>
             {
                 this._vsClickMode = ClickMode.Release;
                 this.VisualState = this.VisualState;//State
             };
-            this.RootBorder.PointerExited += (s, e) =>
+            this.PointerExited += (s, e) =>
             {
                 this._vsClickMode = ClickMode.Release;
                 this.VisualState = this.VisualState;//State
             };
                        
-            this.RootBorder.Tapped += (s, e) =>
+            this.Tapped += (s, e) =>
             {
                 if (this._vsIsSelected)
                 {

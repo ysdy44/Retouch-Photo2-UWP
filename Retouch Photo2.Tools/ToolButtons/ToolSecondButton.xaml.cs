@@ -51,17 +51,17 @@ namespace Retouch_Photo2.Tools
         public ToolSecondButton()
         {
             this.InitializeComponent();
-            this.ContentPresenter.PointerEntered += (s, e) =>
+            this.PointerEntered += (s, e) =>
             {
                 this._vsClickMode = ClickMode.Hover;
                 this.VisualState = this.VisualState;//State
             };
-            this.ContentPresenter.PointerPressed += (s, e) =>
+            this.PointerPressed += (s, e) =>
             {
                 this._vsClickMode = ClickMode.Press;
                 this.VisualState = this.VisualState;//State
             };
-            this.ContentPresenter.PointerExited += (s, e) =>
+            this.PointerExited += (s, e) =>
             {
                 this._vsClickMode = ClickMode.Release;
                 this.VisualState = this.VisualState;//State

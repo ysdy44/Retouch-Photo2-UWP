@@ -88,7 +88,7 @@ namespace Retouch_Photo2.Controls
             this.Holding += (s, e) => this.ShowLayerMenu();
             this.AddButton.Tapped += (s, e) =>
             {
-                this.AddImageFlyout.ShowAt(this.AddButton);
+                this.Flyout.ShowAt(this.AddButton);
                 e.Handled = true;
             };
 

@@ -79,6 +79,8 @@ namespace Retouch_Photo2
                 this.ConstructTool(tool);
             }
             this.TooLeft.Add(this.MoreToolButton);
+            this.ToolFirst();
+
 
             //Menu
             foreach (IMenu menu in this.TipViewModel.Menus)
@@ -94,80 +96,87 @@ namespace Retouch_Photo2
 
 
         MoreToolButton MoreToolButton = new MoreToolButton();
-        UIElementCollection MoreTool => this.MoreToolButton.StackPanel.Children;
-
         UIElementCollection TooLeft => this.DrawLayout.LeftPaneChildren;
 
         ToolButtonType _tempToolButtonType;
  
         private void ConstructTool(ITool tool)
         {
+            ToolButtonType type;
+            UIElement button = null;
+
             if (tool == null)
             {
-                Rectangle rectangle = new Rectangle
+                type = this._tempToolButtonType;
+                button = new Rectangle
                 {
-                    Fill = new SolidColorBrush(Windows.UI.Colors.Gray),
+                    Fill = new SolidColorBrush(Colors.Gray),
                     Height = 1,
                     Opacity = 0.2,
                     Margin = new Thickness(4, 0, 4, 0),
                 };
-
-                switch (this._tempToolButtonType)
-                {
-                    case ToolButtonType.None:
-                        this.TooLeft.Add(rectangle);
-                        break;
-                    case ToolButtonType.Second:
-                        this.MoreTool.Add(rectangle);
-                        break;
-                }
-                return;
             }
-            IToolButton button = tool.Button;
-
-            if (button!=null)
+            else
             {
-                button.Self.Tapped += (s, e) =>
-                {                    
-                    this.ToolGroupType(tool.Type);//Tools
-                    this.TipViewModel.Tool = tool;//Tool
-
-                    //DrawLayout
-                    this.DrawLayout.LeftIcon = tool.Icon;
-                    this.DrawLayout.FootPage = tool.Page.Self;
-                };
-
-                this._tempToolButtonType = button.Type;
-                switch (button.Type)
+                type = tool.Button.Type;
+                button = tool.Button.Self;
+                tool.Button.Self.Tapped += (s, e) =>
                 {
-                    case ToolButtonType.None:
-                        this.TooLeft.Add(button.Self);
-                        break;
-                    case ToolButtonType.Second:
-                        this.MoreTool.Add(button.Self);
-                        break;
-                }
+                    this.ToolChanged(tool);
+                    this.ToolGroupType(tool.Type);
+                };
             }
+
+            switch (type)
+            {
+                case ToolButtonType.None:
+                    this.TooLeft.Add(button);
+                    break;
+                case ToolButtonType.Second:
+                    this.MoreToolButton.Add(button);
+                    break;
+            }
+            this._tempToolButtonType = tool.Button.Type;
         }
 
-        private void ToolGroupType(ToolType groupType)
+        private void ToolChanged(ITool tool)
+        {
+            this.TipViewModel.Tool = tool;
+            
+            this.DrawLayout.LeftIcon = tool.Icon;
+            this.DrawLayout.FootPage = tool.Page.Self;
+
+            this.ViewModel.Invalidate();//Invalidate
+        }
+
+        private void ToolGroupType(ToolType currentType)
         {
             foreach (ITool tool in this.TipViewModel.Tools)
             {
                 if (tool != null)
                 {
-                    bool isSelected = (tool.Type == groupType);
+                    bool isSelected = (tool.Type == currentType);
 
                     tool.Button.IsSelected = isSelected;
                     tool.Page.IsSelected = isSelected;
                 }
             }
+        }
 
-            this.ViewModel.Invalidate();//Invalidate
+        private void ToolFirst()
+        {
+            ITool tool = this.TipViewModel.Tools.FirstOrDefault();
+            if (tool != null)
+            {
+                this.ToolChanged(tool);
+                tool.Button.IsSelected = true;
+                tool.Page.IsSelected = true;
+            }
         }
 
 
         #endregion
+
 
         #region Menu
 
