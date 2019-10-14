@@ -13,13 +13,30 @@ namespace Retouch_Photo2.Menus
     public abstract class MenuBase
     {
         //@Delegate
-        public EventHandler<UIElement> Move { get; set; }
-        public EventHandler<object> Closed { get; set; }
-        public EventHandler<object> Opened { get; set; }
+        public Action Move { get; set; }
+        public Action Closed { get; set; }
+        public Action Opened { get; set; }
 
         //@Content
         public abstract IMenuLayout Layout { get; }
         public abstract IMenuButton Button { get; }
+        public bool IsHitTestVisible
+        {
+            set
+            {
+                if (value)
+                {
+                    this.Layout.Self.IsHitTestVisible = true;
+                }
+                else
+                {
+                    if (this.State == MenuState.FlyoutHide) return;
+                    if (this.State == MenuState.FlyoutShow) return;
+
+                    this.Layout.Self.IsHitTestVisible = false;
+                }
+            }
+        }
 
         Point _postion;
 
@@ -36,15 +53,15 @@ namespace Retouch_Photo2.Menus
                 {
                     FlyoutPlacementMode placement = (this.Button.Type == MenuButtonType.None) ? FlyoutPlacementMode.Bottom : FlyoutPlacementMode.Left;
                     Point postion = MenuHelper.GetFlyoutPostion(this.Button.Self, this.Layout.Self, placement);
-                    Point postion2 = MenuHelper.GetBoundPostion(postion, this.Button.Self);
+                    Point postion2 = MenuHelper.GetBoundPostion(postion, this.Layout.Self);
                     MenuHelper.SetOverlayPostion(this.Layout.Self, postion2);
-                    this.Move?.Invoke(this, this.Layout.Self); //Delegate
+                    this.Move?.Invoke(); //Delegate
 
-                    if (this.state == MenuState.FlyoutHide) this.Opened?.Invoke(this, null); //Delegate 
+                    if (this.state == MenuState.FlyoutHide) this.Opened?.Invoke(); //Delegate 
                 }
                 else
                 {
-                    if (this.state == MenuState.FlyoutShow) this.Closed?.Invoke(this, null); //Delegate
+                    if (this.state == MenuState.FlyoutShow) this.Closed?.Invoke(); //Delegate
                 }
 
                 this.Layout.Self.Visibility = (value == MenuState.FlyoutHide) ? Visibility.Collapsed : Visibility.Visible;
@@ -59,28 +76,24 @@ namespace Retouch_Photo2.Menus
         {
             this.State = MenuState.FlyoutHide;
 
-            //Button
-            this.Layout.CloseButton.Tapped += (s, e) => this.State = MenuState.FlyoutHide;
-            this.Layout.StateButton.Tapped += (s, e) =>
+            if (this.Button.Type == MenuButtonType.None)
             {
-                if (this.State == MenuState.OverlayExpanded) this.State = MenuState.OverlayNotExpanded;
-                else if (this.State == MenuState.OverlayNotExpanded) this.State = MenuState.OverlayExpanded;
-                else
+                this.Button.Self.Tapped += (s, e) =>
                 {
-                    Point postion = MenuHelper.GetVisualPostion(this.Layout.TitlePanel);
-                    Point postion2 = MenuHelper.GetBoundPostion(postion, this.Button.Self);
-                    MenuHelper.SetOverlayPostion(this.Layout.Self, postion2);
+                    this.State = this.GetState(this.State);
+                };
+            }
 
-                    this.State = MenuState.OverlayExpanded;
-                }
-            };
+            //Button
+            this.Layout.CloseButton.Tapped += (s, e) => this.Hide();
+            this.Layout.StateButton.Tapped += (s, e) => this.State = this.GetState2(this.State);
 
             //Postion 
             this.Layout.TitlePanel.ManipulationMode = ManipulationModes.All;
             this.Layout.TitlePanel.ManipulationStarted += (s, e) =>
             {
                 this._postion = MenuHelper.GetVisualPostion(this.Layout.Self);
-                this.Move?.Invoke(this, this.Layout.Self); //Delegate
+                this.Move?.Invoke(); //Delegate
             };
             this.Layout.TitlePanel.ManipulationDelta += (s, e) =>
             {
@@ -92,6 +105,46 @@ namespace Retouch_Photo2.Menus
                     MenuHelper.SetOverlayPostion(this.Layout.Self, postion2);
                 }
             };
+        }
+
+        public void Hide()
+        {
+            if (this.State == MenuState.FlyoutShow)
+            {
+                this.State = MenuState.FlyoutHide;
+            }
+        }
+        public void Crop()
+        {
+            if (this.State == MenuState.FlyoutHide) return;
+            if (this.State == MenuState.FlyoutShow) return;
+
+            Point postion = MenuHelper.GetOverlayPostion(this.Layout.Self);
+            Point postion2 = MenuHelper.GetBoundPostion(postion, this.Layout.Self);
+            MenuHelper.SetOverlayPostion(this.Layout.Self, postion2);
+        }
+
+
+        private MenuState GetState(MenuState state)
+        {
+            switch (state)
+            {
+                case MenuState.FlyoutHide: return MenuState.FlyoutShow;
+                case MenuState.FlyoutShow: return MenuState.FlyoutHide;
+
+                case MenuState.OverlayExpanded: return MenuState.OverlayNotExpanded;
+                case MenuState.OverlayNotExpanded: return MenuState.OverlayExpanded;
+            }
+            return MenuState.FlyoutShow;
+        }
+        private MenuState GetState2(MenuState state)
+        {
+            switch (state)
+            {
+                case MenuState.OverlayExpanded: return MenuState.OverlayNotExpanded;
+                case MenuState.OverlayNotExpanded: return MenuState.OverlayExpanded;
+            }
+            return MenuState.OverlayExpanded;
         }
     }
 }

@@ -18,7 +18,7 @@
 
     <!--Visibility:Hide-->
     <animations:Implicit.HideAnimations>
-        <animations:OpacityAnimation Duration="0:0:0.2" From="1.0" To="0.0"/>
+        <animations:OpacityAnimation Duration="0:0:0.4" From="1.0" To="0.0"/>
     </animations:Implicit.HideAnimations>
 
     

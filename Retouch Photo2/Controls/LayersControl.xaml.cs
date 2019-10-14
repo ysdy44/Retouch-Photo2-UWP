@@ -29,7 +29,7 @@ namespace Retouch_Photo2.Controls
 
         //@Content
         /// <summary> IndicatorBorder. </summary>
-        public Border IndicatorBorder => this._IndicatorBorder; 
+        public Border IndicatorBorder => this._IndicatorBorder;
         /// <summary> WidthButton. </summary>
         public Button WidthButton => this._WidthButton;
 
@@ -61,7 +61,11 @@ namespace Retouch_Photo2.Controls
             this.PhotoButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.PicturesLibrary);
             this.DestopButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.Desktop);
 
-            this.LayoutButton.Tapped += (s, e) => this.ShowLayerMenu();
+            this.LayoutButton.Tapped += (s, e) =>
+            {
+                this.Flyout.Hide();
+                this.ShowLayerMenu();
+            };
 
 
             #endregion

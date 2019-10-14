@@ -41,7 +41,6 @@ namespace Retouch_Photo2
                 new ImageTool(),
                 new RectangleTool(),
                 new CropTool(),
-                 */
                 
                  new CursorTool(),
                  null,
@@ -70,7 +69,8 @@ namespace Retouch_Photo2
                  new GeometryArrowTool(),
                  new GeometryCapsuleTool(),
                  new GeometryHeartTool(),
-
+                 
+                 */
             },
             
             //Menu

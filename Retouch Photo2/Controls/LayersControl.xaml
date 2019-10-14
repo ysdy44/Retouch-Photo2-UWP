@@ -11,7 +11,7 @@
 
     <UserControl.Resources>
         <!--Flyout-->
-        <Flyout x:Name="AddImageFlyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="Flyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <StackPanel Width="200">
 
                 <TextBlock FontSize="22" FontWeight="Light" Style="{StaticResource AppTextBlock}">

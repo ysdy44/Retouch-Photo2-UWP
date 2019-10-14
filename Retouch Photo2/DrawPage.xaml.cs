@@ -81,14 +81,12 @@ namespace Retouch_Photo2
             this.TooLeft.Add(this.MoreToolButton);
 
             //Menu
-            MenuHelper.ConstructMenus
-            (
-                this.TipViewModel.Menus,
-                this.OverlayCanvas,
-                this.DrawLayout.HeadRightChildren,
-                this.LayersControl.IndicatorBorder
-             );
-
+            foreach (IMenu menu in this.TipViewModel.Menus)
+            {
+                this.ConstructMenu(menu);
+            }
+            this.OverlayCanvas.Tapped += (s, e) => this.MenusHide();
+            this.OverlayCanvas.SizeChanged += (s, e) => this.MenusHideAndCrop();
         }
 
 
@@ -170,7 +168,78 @@ namespace Retouch_Photo2
 
 
         #endregion
-        
+
+        #region Menu
+
+
+        public void ConstructMenu(IMenu menu)
+        {
+            if (menu == null) return;
+
+            this.OverlayCanvas.Children.Add(menu.Layout.Self);
+
+            menu.Move += () =>
+            {
+                //Move to top
+                int index = this.OverlayCanvas.Children.IndexOf(menu.Layout.Self);
+                int count = this.OverlayCanvas.Children.Count;
+                this.OverlayCanvas.Children.Move((uint)index, (uint)count - 1);
+            };
+            menu.Opened += () => this.MenusDisable(menu);//Menus is disable
+            menu.Closed += () => this.MenusEnable();//Menus is enable
+
+            //MenuButton
+            switch (menu.Button.Type)
+            {
+                case MenuButtonType.None:
+                    this.DrawLayout.HeadRightChildren.Add(menu.Button.Self);
+                    break;
+                case MenuButtonType.LayersControlIndicator:
+                    this.LayersControl.IndicatorBorder.Child = menu.Button.Self;
+                    break;
+            }
+        }
+
+        private void MenusHide()
+        {
+            foreach (IMenu other in this.TipViewModel.Menus)
+            {
+                other.Hide();
+            }
+            this.OverlayCanvas.Background = null;
+        }
+        private void MenusHideAndCrop()
+        {
+            foreach (IMenu other in this.TipViewModel.Menus)
+            {
+                other.Hide();
+                other.Crop();
+            }
+            this.OverlayCanvas.Background = null;
+        }
+
+        private void MenusDisable(IMenu currentMenu)
+        {
+            foreach (IMenu menu in this.TipViewModel.Menus)
+            {
+                if (menu.Type != currentMenu.Type)
+                {
+                    menu.IsHitTestVisible = false;
+                }
+            }
+            this.OverlayCanvas.Background = new SolidColorBrush(Colors.Transparent);
+        }
+        private void MenusEnable()
+        {
+            foreach (IMenu menu in this.TipViewModel.Menus)
+            {
+                menu.IsHitTestVisible = true;
+            }
+            this.OverlayCanvas.Background = null;
+        }
+
+
+        #endregion
 
         //The current page becomes the active page
         protected override void OnNavigatedTo(NavigationEventArgs e)

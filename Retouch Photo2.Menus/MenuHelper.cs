@@ -15,105 +15,6 @@ namespace Retouch_Photo2.Menus
     {
 
         /// <summary>
-        /// Construct menus.
-        /// </summary>
-        /// <param name="menus"> The source menus. </param>
-        /// <param name="overlayCanvas"> The overlay-canvas. </param>
-        /// <param name="headChildren"> The head-children. </param>
-        /// <param name="indicatorBorder"> The indicator-border. </param>
-        public static void ConstructMenus(IList<IMenu> menus, Canvas overlayCanvas, UIElementCollection headChildren, Border indicatorBorder)
-        {
-            foreach (IMenu menu in menus)
-            {
-                if (menu == null) continue;
-
-                FrameworkElement layout = menu.Layout.Self;
-                overlayCanvas.Children.Add(layout);
-
-                //Move to top
-                menu.Move += (s, e) =>
-                {
-                    int index = overlayCanvas.Children.IndexOf(menu.Layout.Self);
-                    int count = overlayCanvas.Children.Count;
-                    overlayCanvas.Children.Move((uint)index, (uint)count - 1);
-                };
-                //Menus is disable
-                menu.Opened += (s, e) =>
-                {
-                    foreach (IMenu other in menus)
-                    {
-                        if (other != menu)
-                        {
-                            other.Layout.Self.IsHitTestVisible = false;
-                        }
-                    }
-                    overlayCanvas.Background = new SolidColorBrush(Colors.Transparent);
-                };
-                //Menus is enable
-                menu.Closed += (s, e) =>
-                {
-                    foreach (IMenu other in menus)
-                    {
-                        other.Layout.Self.IsHitTestVisible = true;
-                    }
-                    overlayCanvas.Background = null;
-                };
-
-                //MenuButton
-                IMenuButton menuButton = menu.Button;
-                switch (menuButton.Type)
-                {
-                    case MenuButtonType.None:
-                        headChildren.Add(menuButton.Self);
-                        menu.Button.Self.Tapped += (s, e) => menu.State = MenuHelper.GetState(menu.State);
-                        break;
-                    case MenuButtonType.LayersControlIndicator:
-                        indicatorBorder.Child = menuButton.Self;
-                        break;
-                }
-            }
-
-            overlayCanvas.Tapped += (s, e) => menusHide();
-            overlayCanvas.SizeChanged += (s, e) => menusHide();
-
-            void menusHide()
-            {
-                foreach (IMenu other in menus)
-                {
-                    if (other.State == MenuState.FlyoutShow)
-                    {
-                        other.State = MenuState.FlyoutHide;
-                    }
-                }
-                overlayCanvas.Background = null;
-            }
-        }
-
-
-        /// <summary>
-        /// Get the corresponding status. 
-        /// </summary>
-        /// <param name="state"> The source state. </param>
-        /// <returns> The destination state. </returns>
-        public static MenuState GetState(MenuState state)
-        {
-            switch (state)
-            {
-                case MenuState.FlyoutHide:
-                    return MenuState.FlyoutShow;
-                case MenuState.FlyoutShow:
-                    return MenuState.FlyoutHide;
-
-                case MenuState.OverlayExpanded:
-                    return MenuState.OverlayNotExpanded;
-                case MenuState.OverlayNotExpanded:
-                    return MenuState.OverlayExpanded;
-            }
-            return MenuState.FlyoutShow;
-        }
-
-
-        /// <summary>
         /// Gets visual-postion in windows.
         /// </summary>
         /// <param name="element"> The element. </param>
@@ -246,6 +147,5 @@ namespace Retouch_Photo2.Menus
 
             return new Point(X, Y);
         }
-
     }
 }
