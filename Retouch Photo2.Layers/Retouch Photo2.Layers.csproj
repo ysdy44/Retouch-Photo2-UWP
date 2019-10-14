@@ -106,50 +106,50 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Icons\GeometryArrowIcon.xaml.cs">
+    <Compile Include="IconsSecond\GeometryArrowIcon.xaml.cs">
       <DependentUpon>GeometryArrowIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\GeometryCapsuleIcon.xaml.cs">
+    <Compile Include="IconsSecond\GeometryCapsuleIcon.xaml.cs">
       <DependentUpon>GeometryCapsuleIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\GeometryCogIcon.xaml.cs">
+    <Compile Include="IconsSecond\GeometryCogIcon.xaml.cs">
       <DependentUpon>GeometryCogIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\GeometryDiamondIcon.xaml.cs">
+    <Compile Include="IconsSecond\GeometryDiamondIcon.xaml.cs">
       <DependentUpon>GeometryDiamondIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\GeometryHeartIcon.xaml.cs">
+    <Compile Include="IconsSecond\GeometryHeartIcon.xaml.cs">
       <DependentUpon>GeometryHeartIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\GeometryPentagonIcon.xaml.cs">
+    <Compile Include="IconsSecond\GeometryPentagonIcon.xaml.cs">
       <DependentUpon>GeometryPentagonIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\GeometryPieIcon.xaml.cs">
+    <Compile Include="IconsSecond\GeometryPieIcon.xaml.cs">
       <DependentUpon>GeometryPieIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\GeometryRoundRectIcon.xaml.cs">
+    <Compile Include="IconsSecond\GeometryRoundRectIcon.xaml.cs">
       <DependentUpon>GeometryRoundRectIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\GeometryStarIcon.xaml.cs">
+    <Compile Include="IconsSecond\GeometryStarIcon.xaml.cs">
       <DependentUpon>GeometryStarIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\GeometryTriangleIcon.xaml.cs">
+    <Compile Include="IconsSecond\GeometryTriangleIcon.xaml.cs">
       <DependentUpon>GeometryTriangleIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\GeometryArrowLayer.cs" />
-    <Compile Include="Models\GeometryCapsuleLayer.cs" />
-    <Compile Include="Models\GeometryCogLayer.cs" />
-    <Compile Include="Models\GeometryDiamondLayer.cs" />
-    <Compile Include="Models\GeometryHeartLayer.cs" />
-    <Compile Include="Models\GeometryPentagonLayer.cs" />
-    <Compile Include="Models\GeometryPieLayer.cs" />
-    <Compile Include="Models\GeometryRoundRectLayer.cs" />
-    <Compile Include="Models\GeometryStarLayer.cs" />
-    <Compile Include="Models\GeometryTriangleLayer.cs" />
+    <Compile Include="ModelsSecond\GeometryArrowLayer.cs" />
+    <Compile Include="ModelsSecond\GeometryCapsuleLayer.cs" />
+    <Compile Include="ModelsSecond\GeometryCogLayer.cs" />
+    <Compile Include="ModelsSecond\GeometryDiamondLayer.cs" />
+    <Compile Include="ModelsSecond\GeometryHeartLayer.cs" />
+    <Compile Include="ModelsSecond\GeometryPentagonLayer.cs" />
+    <Compile Include="ModelsSecond\GeometryPieLayer.cs" />
+    <Compile Include="ModelsSecond\GeometryRoundRectLayer.cs" />
+    <Compile Include="ModelsSecond\GeometryStarLayer.cs" />
+    <Compile Include="ModelsSecond\GeometryTriangleLayer.cs" />
     <Compile Include="Icons\AcrylicIcon.xaml.cs">
       <DependentUpon>AcrylicIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\GeometryCurveIcon.xaml.cs">
+    <Compile Include="IconsSecond\GeometryCurveIcon.xaml.cs">
       <DependentUpon>GeometryCurveIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icons\GeometryEllipseIcon.xaml.cs">
@@ -194,9 +194,9 @@
     <Compile Include="Layers\LayerBase.Control.cs" />
     <Compile Include="Layers\LayerBase.Render.cs" />
     <Compile Include="Layers\LayerBase.Property.cs" />
-    <Compile Include="Models\GeometryUtil.cs" />
+    <Compile Include="ModelsSecond\GeometryUtil.cs" />
     <Compile Include="TransformManager.cs" />
-    <Compile Include="Models\GeometryCurveLayer.cs" />
+    <Compile Include="ModelsSecond\GeometryCurveLayer.cs" />
     <Compile Include="Models\IGeometryLayer.cs" />
     <Compile Include="ImageRe.cs" />
     <Compile Include="Models\AcrylicLayer.cs" />
@@ -219,43 +219,43 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Icons\GeometryArrowIcon.xaml">
+    <Page Include="IconsSecond\GeometryArrowIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Icons\GeometryCapsuleIcon.xaml">
+    <Page Include="IconsSecond\GeometryCapsuleIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Icons\GeometryCogIcon.xaml">
+    <Page Include="IconsSecond\GeometryCogIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Icons\GeometryDiamondIcon.xaml">
+    <Page Include="IconsSecond\GeometryDiamondIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Icons\GeometryHeartIcon.xaml">
+    <Page Include="IconsSecond\GeometryHeartIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Icons\GeometryPentagonIcon.xaml">
+    <Page Include="IconsSecond\GeometryPentagonIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Icons\GeometryPieIcon.xaml">
+    <Page Include="IconsSecond\GeometryPieIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Icons\GeometryRoundRectIcon.xaml">
+    <Page Include="IconsSecond\GeometryRoundRectIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Icons\GeometryStarIcon.xaml">
+    <Page Include="IconsSecond\GeometryStarIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Icons\GeometryTriangleIcon.xaml">
+    <Page Include="IconsSecond\GeometryTriangleIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -263,7 +263,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Icons\GeometryCurveIcon.xaml">
+    <Page Include="IconsSecond\GeometryCurveIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
