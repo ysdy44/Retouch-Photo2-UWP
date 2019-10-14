@@ -106,11 +106,11 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="IFilterFactory.cs" />
-    <Compile Include="FilterFactory.cs" />
+    <Compile Include="Filters\IFilterFactory.cs" />
+    <Compile Include="Filters\FilterFactory.cs" />
     <Compile Include="IAdjustment.cs" />
     <Compile Include="IAdjustmentPage.cs" />
-    <Compile Include="Filter.cs" />
+    <Compile Include="Filters\Filter.cs" />
     <Compile Include="AdjustmentManager.cs" />
     <Compile Include="AdjustmentType.cs" />
     <Compile Include="Icons\BrightnessIcon.xaml.cs">
@@ -149,7 +149,7 @@
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IFilter.cs" />
+    <Compile Include="Filters\IFilter.cs" />
     <Compile Include="Models\BrightnessAdjustment.cs" />
     <Compile Include="Models\ContrastAdjustment.cs" />
     <Compile Include="Models\ExposureAdjustment.cs" />
