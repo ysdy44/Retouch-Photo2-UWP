@@ -155,7 +155,7 @@
                         <TextBlock Style="{StaticResource TitleTextBlockStyle}">
                             Theme
                         </TextBlock>
-                        <Border Height="Auto" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border MaxHeight="100" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel Orientation="Horizontal">
 
                                 <RadioButton x:Name="LightRadioButton" Tag="Light" Style="{StaticResource AppTapRadioButtonStyle}">
@@ -179,7 +179,7 @@
                         <TextBlock Style="{StaticResource TitleTextBlockStyle}">
                             Layout
                         </TextBlock>
-                        <Border Height="Auto" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border MaxHeight="100" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel Orientation="Horizontal">
 
                                 <RadioButton x:Name="PhoneButton" Tag="Phone" Style="{StaticResource AppTapRadioButtonStyle}">

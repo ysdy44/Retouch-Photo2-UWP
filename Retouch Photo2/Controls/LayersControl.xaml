@@ -84,6 +84,8 @@
                     </Button>
                 </Grid>
 
+                <ContentControl Height="2"/>
+
             </StackPanel>
         </Flyout>
     </UserControl.Resources>

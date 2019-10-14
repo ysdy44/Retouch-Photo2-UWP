@@ -816,7 +816,7 @@
     <Style x:Key="AppTagAccentLineCircleButton" TargetType="Button">
         <Setter Property="Height" Value="40" />
         <Setter Property="Margin" Value="0,6" />
-        <Setter Property="Padding" Value="12,0" />
+        <Setter Property="Padding" Value="6,0" />
         <Setter Property="MinWidth" Value="40"/>
         <Setter Property="MinHeight" Value="32"/>
         <Setter Property="HorizontalAlignment" Value="Center" />
@@ -880,19 +880,6 @@
 
                         </VisualStateManager.VisualStateGroups>
 
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <ContentControl x:Name="ContentControl"
-                              Content="{TemplateBinding Tag}"
-                              VerticalAlignment="Center"
-
-                              Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"
-                              AutomationProperties.AccessibilityView="Raw" />
-
                             <ContentPresenter x:Name="ContentPresenter" Grid.Column="2"
                               Margin="{TemplateBinding Padding}"
                               Content="{TemplateBinding Content}" 
@@ -902,7 +889,6 @@
                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                               Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"
                                />
-                        </Grid>
 
                     </Border>
                 </ControlTemplate>

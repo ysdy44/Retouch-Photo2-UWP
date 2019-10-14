@@ -138,26 +138,35 @@
                 <ContentControl Height="6"/>
 
                 <Button x:Name="AddButton" Style="{StaticResource AppTagAccentLineCircleButton}">
-                    <Button.Tag>
+                    <StackPanel Orientation="Horizontal">
                         <FontIcon Glyph="&#xE109;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                    </Button.Tag>                
-                    Add New Project
+                        <ContentControl Width="8"/>
+                        <TextBlock>
+                            Add New Project
+                        </TextBlock>
+                    </StackPanel>                    
                 </Button>
                 
                 <Rectangle Height="1" Fill="{ThemeResource AppBorderBrush}" HorizontalAlignment="Stretch"/>
 
                 <Button x:Name="PhotoButton" Style="{StaticResource AppTagAccentLineCircleButton}">
-                    <Button.Tag>
+                    <StackPanel Orientation="Horizontal">
                         <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                    </Button.Tag>                
-                    New Project From Pictures
+                        <ContentControl Width="8"/>
+                        <TextBlock>                    
+                            New Project From Pictures
+                        </TextBlock>
+                    </StackPanel>
                 </Button>
                 
                 <Button x:Name="DestopButton" Style="{StaticResource AppTagAccentLineCircleButton}">
-                    <Button.Tag>
+                    <StackPanel Orientation="Horizontal">
                         <FontIcon Glyph="&#xEC4E;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                    </Button.Tag>                
-                    New Project From Destop
+                        <ContentControl Width="8"/>
+                        <TextBlock>                    
+                            New Project From Destop
+                        </TextBlock>
+                    </StackPanel>
                 </Button>
                 
             </StackPanel.Children>
