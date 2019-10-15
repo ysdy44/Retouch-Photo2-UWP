@@ -7,6 +7,7 @@ using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.Tools.Models;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Retouch_Photo2.ViewModels;
 
 namespace Retouch_Photo2.Tools
 {
@@ -15,10 +16,19 @@ namespace Retouch_Photo2.Tools
     /// </summary>
     public class GeometryCogTool : IGeometryTool
     {
+        //@ViewModel
+        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+
         //@Override
         public override IGeometryLayer CreateGeometryLayer(Transformer transformer)
         {
-            return new GeometryCogLayer();
+            return new GeometryCogLayer
+            {
+                Count = this.SelectionViewModel.GeometryCogCount,
+                InnerRadius = this.SelectionViewModel.GeometryCogInnerRadius,
+                Tooth = this.SelectionViewModel.GeometryCogTooth,
+                Notch = this.SelectionViewModel.GeometryCogNotch,
+            };
         }
         public override ToolType Type => ToolType.GeometryCog;
         public override FrameworkElement Icon { get; } = new GeometryCogIcon();

@@ -137,6 +137,57 @@ namespace Retouch_Photo2.ViewModels
         private float geometryPieSweepAngle = FanKit.Math.Pi / 2f;
 
 
+        /// <summary> GeometryCog's count. </summary>     
+        public int GeometryCogCount
+        {
+            get => this.geometryCogCount;
+            set
+            {
+                if (this.geometryCogCount == value) return;
+                this.geometryCogCount = value;
+                this.OnPropertyChanged(nameof(this.GeometryCogCount));//Notify 
+            }
+        }
+        private int geometryCogCount = 8;
+        /// <summary> GeometryCog's inner-radius. </summary>     
+        public float GeometryCogInnerRadius
+        {
+            get => this.geometryCogInnerRadius;
+            set
+            {
+                if (this.geometryCogInnerRadius == value) return;
+                this.geometryCogInnerRadius = value;
+                this.OnPropertyChanged(nameof(this.GeometryCogInnerRadius));//Notify 
+            }
+        }
+        private float geometryCogInnerRadius = 0.7f;
+        /// <summary> GeometryCog's tooth. </summary>     
+        public float GeometryCogTooth
+        {
+            get => this.geometryCogTooth;
+            set
+            {
+                if (this.geometryCogTooth == value) return;
+                this.geometryCogTooth = value;
+                this.OnPropertyChanged(nameof(this.GeometryCogTooth));//Notify 
+            }
+        }
+        private float geometryCogTooth = 0.3f;
+        /// <summary> GeometryCog's notch. </summary>     
+        public float GeometryCogNotch
+        {
+            get => this.geometryCogNotch;
+            set
+            {
+                if (this.geometryCogNotch == value) return;
+                this.geometryCogNotch = value;
+                this.OnPropertyChanged(nameof(this.GeometryCogNotch));//Notify 
+            }
+        }
+        private float geometryCogNotch = 0.6f;
+
+
+
 
 
     }

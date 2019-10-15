@@ -5,12 +5,81 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:tools="using:Retouch_Photo2.Tools"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
     >
 
     <StackPanel Orientation="Horizontal">
+
+        <!--Count-->
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Count
+        </TextBlock>
+        <tools:TouchbarButton x:Name="CountTouchbarButton"
+                      Number="{x:Bind SelectionViewModel.GeometryCogCount,Mode=OneWay}"
+                      >
+            <tools:TouchbarButton.TouchbarSlider>
+                <tools:TouchbarSlider x:Name="CountTouchbarSlider" 
+                             Number="{x:Bind SelectionViewModel.GeometryCogCount,Mode=OneWay}"
+                             Value="{x:Bind CountValueConverter(SelectionViewModel.GeometryCogCount),Mode=OneWay}"
+                             />
+            </tools:TouchbarButton.TouchbarSlider>
+        </tools:TouchbarButton>
+
+        <ContentControl Width="4"/>
+        
+        <!--InnerRadius-->
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Inner Radius
+        </TextBlock>
+        <tools:TouchbarButton x:Name="InnerRadiusTouchbarButton"
+                      Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryCogInnerRadius),Mode=OneWay}"
+                       >
+            <tools:TouchbarButton.TouchbarSlider>
+                <tools:TouchbarSlider x:Name="InnerRadiusTouchbarSlider"
+                    Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryCogInnerRadius),Mode=OneWay}"
+                    Value="{x:Bind InnerRadiusValueConverter(SelectionViewModel.GeometryCogInnerRadius), Mode=OneWay}" 
+                     />
+            </tools:TouchbarButton.TouchbarSlider>
+        </tools:TouchbarButton>
+
+        <ContentControl Width="4"/>
+
+        <!--Tooth-->
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Tooth
+        </TextBlock>
+        <tools:TouchbarButton x:Name="ToothTouchbarButton"
+                      Number="{x:Bind ToothNumberConverter(SelectionViewModel.GeometryCogTooth),Mode=OneWay}"
+                       >
+            <tools:TouchbarButton.TouchbarSlider>
+                <tools:TouchbarSlider x:Name="ToothTouchbarSlider"
+                    Number="{x:Bind ToothNumberConverter(SelectionViewModel.GeometryCogTooth),Mode=OneWay}"
+                    Value="{x:Bind ToothValueConverter(SelectionViewModel.GeometryCogTooth), Mode=OneWay}" 
+                     />
+            </tools:TouchbarButton.TouchbarSlider>
+        </tools:TouchbarButton>
+
+        <ContentControl Width="4"/>
+        
+        <!--Notch-->
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Notch
+        </TextBlock>
+        <tools:TouchbarButton x:Name="NotchTouchbarButton"
+                      Number="{x:Bind NotchNumberConverter(SelectionViewModel.GeometryCogNotch),Mode=OneWay}"
+                       >
+            <tools:TouchbarButton.TouchbarSlider>
+                <tools:TouchbarSlider x:Name="NotchTouchbarSlider"
+                    Number="{x:Bind NotchNumberConverter(SelectionViewModel.GeometryCogNotch),Mode=OneWay}"
+                    Value="{x:Bind NotchValueConverter(SelectionViewModel.GeometryCogNotch), Mode=OneWay}" 
+                     />
+            </tools:TouchbarButton.TouchbarSlider>
+        </tools:TouchbarButton>
+
+        <ContentControl Width="4"/>
 
         <toolsElements:MoreCreateButton/>
         
