@@ -92,12 +92,12 @@ namespace Retouch_Photo2.Layers
 
             destination.TransformManager = source.TransformManager.Clone();
             destination.EffectManager = source.EffectManager.Clone();
-
             foreach (IAdjustment adjustment in source.AdjustmentManager.Adjustments)
             {
                 IAdjustment clone = adjustment.Clone();
                 destination.AdjustmentManager.Adjustments.Add(clone);
             }
+
             foreach (ILayer layer in source.Children)
             {
                 ILayer clone = layer.Clone(resourceCreator);

@@ -26,7 +26,8 @@
                     </menus:MenuTitle.Text>
                 </menus:MenuTitle>
 
-                <hsvColorPicker:ColorPicker x:Name="ColorPicker" Grid.Row="1" Background="Transparent"
+                <hsvColorPicker:ColorPicker x:Name="ColorPicker" 
+                     Grid.Row="1" Width="Auto" Background="Transparent"
                      Color="{x:Bind SelectionViewModel.Color,Mode=OneWay}"
                      FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
                 

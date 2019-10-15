@@ -5,12 +5,47 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:tools="using:Retouch_Photo2.Tools"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
     >
 
     <StackPanel Orientation="Horizontal">
+
+        <!--InnerRadius-->
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Inner Radius
+        </TextBlock>
+        <tools:TouchbarButton x:Name="InnerRadiusTouchbarButton"
+                      Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryPieInnerRadius),Mode=OneWay}"
+                       >
+            <tools:TouchbarButton.TouchbarSlider>
+                <tools:TouchbarSlider x:Name="InnerRadiusTouchbarSlider"
+                    Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryPieInnerRadius),Mode=OneWay}"
+                    Value="{x:Bind InnerRadiusValueConverter(SelectionViewModel.GeometryPieInnerRadius), Mode=OneWay}" 
+                     />
+            </tools:TouchbarButton.TouchbarSlider>
+        </tools:TouchbarButton>
+
+        <ContentControl Width="4"/>
+
+        <!--SweepAngle-->
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Sweep Angle
+        </TextBlock>
+        <tools:TouchbarButton x:Name="SweepAngleTouchbarButton"
+                      Number="{x:Bind SweepAngleNumberConverter(SelectionViewModel.GeometryPieSweepAngle),Mode=OneWay}"
+                       >
+            <tools:TouchbarButton.TouchbarSlider>
+                <tools:TouchbarSlider x:Name="SweepAngleTouchbarSlider"
+                    Number="{x:Bind SweepAngleNumberConverter(SelectionViewModel.GeometryPieSweepAngle),Mode=OneWay}"
+                    Value="{x:Bind SweepAngleValueConverter(SelectionViewModel.GeometryPieSweepAngle), Mode=OneWay}" 
+                     />
+            </tools:TouchbarButton.TouchbarSlider>
+        </tools:TouchbarButton>
+
+        <ContentControl Width="4"/>
 
         <toolsElements:MoreCreateButton/>
 

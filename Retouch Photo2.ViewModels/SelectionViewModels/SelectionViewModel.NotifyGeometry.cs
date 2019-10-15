@@ -71,7 +71,7 @@ namespace Retouch_Photo2.ViewModels
         private float geometryDiamondMid = 0.5f;
 
 
-        /// <summary> GeometryPentagon's points </summary>     
+        /// <summary> GeometryPentagon's points. </summary>     
         public int GeometryPentagonPoints
         {
             get => this.geometryPentagonPoints;
@@ -85,7 +85,7 @@ namespace Retouch_Photo2.ViewModels
         private int geometryPentagonPoints = 5;
         
 
-        /// <summary> GeometryStar's points </summary>     
+        /// <summary> GeometryStar's points. </summary>     
         public int GeometryStarPoints
         {
             get => this.geometryStarPoints;
@@ -97,7 +97,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private int geometryStarPoints = 5;
-        /// <summary> GeometryStar's inner-radius </summary>     
+        /// <summary> GeometryStar's inner-radius. </summary>     
         public float GeometryStarInnerRadius
         {
             get => this.geometryStarInnerRadius;
@@ -109,6 +109,34 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private float geometryStarInnerRadius = 0.4f;
+        
+
+        /// <summary> GeometryPie's inner-radius. </summary>     
+        public float GeometryPieInnerRadius
+        {
+            get => this.geometryPieInnerRadius;
+            set
+            {
+                if (this.geometryPieInnerRadius == value) return;
+                this.geometryPieInnerRadius = value;
+                this.OnPropertyChanged(nameof(this.GeometryPieInnerRadius));//Notify 
+            }
+        }
+        private float geometryPieInnerRadius = 0.5f;
+        /// <summary> GeometryPie's sweep-angle. </summary>     
+        public float GeometryPieSweepAngle
+        {
+            get => this.geometryPieSweepAngle;
+            set
+            {
+                if (this.geometryPieSweepAngle == value) return;
+                this.geometryPieSweepAngle = value;
+                this.OnPropertyChanged(nameof(this.GeometryPieSweepAngle));//Notify 
+            }
+        }
+        private float geometryPieSweepAngle = FanKit.Math.Pi / 2f;
+
+
 
 
     }
