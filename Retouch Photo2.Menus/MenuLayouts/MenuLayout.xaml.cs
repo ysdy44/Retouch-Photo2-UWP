@@ -16,6 +16,9 @@ namespace Retouch_Photo2.Menus
         {
             this.InitializeComponent();
 
+            //Stop the Tapped events on OverlayCanvas in DrawPage.
+            this.Tapped += (s, e) => e.Handled = true;
+
             //Storyboard
             this.StoryboardBorder.SizeChanged += (s, e) =>
             {

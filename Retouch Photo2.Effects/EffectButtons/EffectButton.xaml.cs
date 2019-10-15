@@ -15,8 +15,8 @@ namespace Retouch_Photo2.Effects
 
 
         //@VisualState
-        bool _vsIsEnabled;
-        bool _vsIsOn;
+        bool _vsIsEnabled => this._ToggleSwitch.IsEnabled;
+        bool _vsIsOn => this._ToggleSwitch.IsOn;
         ClickMode _vsClickMode;
         public VisualState VisualState
         {
@@ -41,11 +41,9 @@ namespace Retouch_Photo2.Effects
         public EffectButton()
         {
             this.InitializeComponent();
-            this.Loaded += (s, e) =>
-            {
-                this._vsIsEnabled = base.IsEnabled;
-                this.VisualState = this.VisualState;//State
-            };
+            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this._ToggleSwitch.IsEnabledChanged += (s, e) => this.VisualState = this.VisualState;//State
+            this._ToggleSwitch.Toggled += (s, e) => this.VisualState = this.VisualState;//State
 
             this.PointerEntered += (s, e) =>
             {
@@ -62,19 +60,6 @@ namespace Retouch_Photo2.Effects
                 this._vsClickMode = ClickMode.Release;
                 this.VisualState = this.VisualState;//State
             };
-            
-            this._ToggleSwitch.IsEnabledChanged += (s, e) =>
-            {
-                this._vsIsEnabled = this._ToggleSwitch.IsEnabled;
-                this._vsClickMode = ClickMode.Release;//State
-                this.VisualState = this.VisualState;//State
-            };
-            this._ToggleSwitch.Toggled += (s, e) =>
-            {
-                this._vsIsOn = this._ToggleSwitch.IsOn;
-                this._vsClickMode = ClickMode.Release;//State
-                this.VisualState = this.VisualState;//State
-            };
-        } 
+         }
     }
 }

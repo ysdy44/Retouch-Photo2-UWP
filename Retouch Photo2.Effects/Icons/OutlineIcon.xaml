@@ -8,5 +8,11 @@
    d:DesignHeight="50"
    d:DesignWidth="50"
     >
- 
+
+    <PathIcon>
+        <PathIcon.Data>
+            M19.992,0l0,14.193l-19.992,0l0,-14.193l19.992,0Zm-1.715,1.71l-16.562,0l0,10.774l16.562,0l0,-10.774Z
+        </PathIcon.Data>
+    </PathIcon>
+    
 </UserControl>

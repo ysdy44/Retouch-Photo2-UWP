@@ -122,7 +122,7 @@ namespace Retouch_Photo2.ViewModels
                 this.OnPropertyChanged(nameof(this.GeometryPieInnerRadius));//Notify 
             }
         }
-        private float geometryPieInnerRadius = 0.5f;
+        private float geometryPieInnerRadius = 0.0f;
         /// <summary> GeometryPie's sweep-angle. </summary>     
         public float GeometryPieSweepAngle
         {
