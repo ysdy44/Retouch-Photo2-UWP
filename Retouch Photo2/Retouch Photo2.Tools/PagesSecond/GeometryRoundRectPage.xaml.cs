@@ -56,7 +56,7 @@ namespace Retouch_Photo2.Tools.Pages
                 //Number
                 this.CornerTouchbarSlider.Unit = "%";
                 this.CornerTouchbarSlider.NumberMinimum = 0;
-                this.CornerTouchbarSlider.NumberMaximum = 100;
+                this.CornerTouchbarSlider.NumberMaximum = 50;
                 this.CornerTouchbarSlider.NumberChange += (sender, number) =>
                 {
                     float corner = number / 100.0f;
@@ -65,7 +65,7 @@ namespace Retouch_Photo2.Tools.Pages
 
                 //Value
                 this.CornerTouchbarSlider.Minimum = 0d;
-                this.CornerTouchbarSlider.Maximum = 100d;
+                this.CornerTouchbarSlider.Maximum = 50d;
                 this.CornerTouchbarSlider.ValueChangeStarted += (sender, value) => { };
                 this.CornerTouchbarSlider.ValueChangeDelta += (sender, value) =>
                 {
@@ -79,7 +79,7 @@ namespace Retouch_Photo2.Tools.Pages
         private void CornerChange(float corner)
         {
             if (corner < 0.0f) corner = 0.0f;
-            if (corner > 1.0f) corner = 1.0f;
+            if (corner > 0.5f) corner = 0.5f;
 
             this.SelectionViewModel.GeometryRoundRectCorner = corner;
 

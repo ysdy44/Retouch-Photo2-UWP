@@ -99,7 +99,6 @@ namespace Retouch_Photo2.Brushs
                 {
                     switch (this.brushType)
                     {
-                        case BrushType.Disabled:
                         case BrushType.None:
                             {
                                 args.DrawingSession.Clear(Colors.White);//ClearColor

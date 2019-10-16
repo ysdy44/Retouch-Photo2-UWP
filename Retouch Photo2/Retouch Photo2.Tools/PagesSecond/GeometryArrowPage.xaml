@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:tools="using:Retouch_Photo2.Tools"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -12,6 +13,66 @@
 
     <StackPanel Orientation="Horizontal">
 
+        <!--Width-->
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Width
+        </TextBlock>
+        <tools:TouchbarButton x:Name="ValueTouchbarButton"
+                      Number="{x:Bind ValueNumberConverter(SelectionViewModel.GeometryArrowValue),Mode=OneWay}"
+                       >
+            <tools:TouchbarButton.TouchbarSlider>
+                <tools:TouchbarSlider x:Name="ValueTouchbarSlider"
+                    Number="{x:Bind ValueNumberConverter(SelectionViewModel.GeometryArrowValue),Mode=OneWay}"
+                    Value="{x:Bind ValueValueConverter(SelectionViewModel.GeometryArrowValue), Mode=OneWay}" 
+                     />
+            </tools:TouchbarButton.TouchbarSlider>
+        </tools:TouchbarButton>
+
+        <ContentControl Width="4"/>
+        
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Left Tail
+        </TextBlock>
+        <Border Style="{StaticResource AppRoundedBorderStyle}">
+            <ComboBox x:Name="LeftTailComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
+                  SelectedIndex="{x:Bind TailToIndexConverter(SelectionViewModel.GeometryArrowLeftTail),Mode=OneWay}" 
+                  >
+                <ComboBoxItem>
+                    <TextBlock>
+                        None
+                    </TextBlock>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <TextBlock>
+                        Arrow
+                    </TextBlock>
+                </ComboBoxItem>
+            </ComboBox>
+        </Border>
+
+        <ContentControl Width="4"/>
+        
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Right Tail
+        </TextBlock>
+        <Border Style="{StaticResource AppRoundedBorderStyle}">
+            <ComboBox x:Name="RightTailComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
+                  SelectedIndex="{x:Bind TailToIndexConverter(SelectionViewModel.GeometryArrowRightTail),Mode=OneWay}" 
+                  >
+                <ComboBoxItem>
+                    <TextBlock>
+                        None
+                    </TextBlock>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <TextBlock>
+                        Arrow
+                    </TextBlock>
+                </ComboBoxItem>
+            </ComboBox>
+        </Border>
+
+        <ContentControl Width="4"/>
         
         <toolsElements:MoreCreateButton/>
         

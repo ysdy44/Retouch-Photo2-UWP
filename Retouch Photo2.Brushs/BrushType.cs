@@ -20,8 +20,5 @@
 
         /// <summary> Image brush. </summary>
         Image,
-
-        /// <summary> Disabled brush. </summary>
-        Disabled,
     }
 }

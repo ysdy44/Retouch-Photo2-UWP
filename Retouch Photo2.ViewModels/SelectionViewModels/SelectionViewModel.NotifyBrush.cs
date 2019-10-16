@@ -11,7 +11,7 @@ namespace Retouch_Photo2.ViewModels
     {
 
         /// <summary> Brush's Fill or Stroke. </summary>     
-        public FillOrStroke FillOrStroke { get; set; }
+        public FillOrStroke FillOrStroke = FillOrStroke.Fill;
 
 
         /// <summary> Brush's type. </summary>     
@@ -20,11 +20,12 @@ namespace Retouch_Photo2.ViewModels
             get => this.brushType;
             set
             {
+                if (this.brushType == value) return;
                 this.brushType = value;
                 this.OnPropertyChanged(nameof(this.BrushType));//Notify 
             }
         }
-        private BrushType brushType = BrushType.Disabled;
+        private BrushType brushType = BrushType.None;
 
         /// <summary> Brush's gradient stops. </summary>     
         public CanvasGradientStop[] BrushArray

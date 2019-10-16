@@ -23,96 +23,92 @@ namespace Retouch_Photo2.Tools.Pages
 
         //@Converter
         private int FillOrStrokeToIndexConverter(FillOrStroke fillOrStroke) => (int)fillOrStroke;
-        private int BrushTypeToIndexConverter(BrushType brushType)
-        {
-            switch (brushType)
-            {
-                case BrushType.Disabled: return 000;
-                case BrushType.None: return 000;
-                case BrushType.Color: return 001;
-                case BrushType.LinearGradient: return 002;
-                case BrushType.RadialGradient: return 003;
-                case BrushType.EllipticalGradient: return 004;
-                case BrushType.Image: return 005;
-            }
-            return 000;
-        }
-        private bool BrushTypeToIsEnabledConverter(BrushType brushType) => (brushType != BrushType.Disabled);
+        private int BrushTypeToIndexConverter(BrushType brushType) => (int)brushType;
 
         private bool IsOpenConverter(bool isOpen) => isOpen && this.IsSelected;
-        
+
+        bool _isOpened;
+
         //@Construct
         public BrushPage()
         {
             this.InitializeComponent();
 
             //FillOrStroke
+            this.FillOrStrokeComboBox.SelectionChanged += (s, e) =>
             {
-                this.FillComboBoxItem.Tapped += (s, e) =>
-                {
-                    this.SelectionViewModel.FillOrStroke = FillOrStroke.Fill;
-                    this.SetFillOrStroke(FillOrStroke.Fill);
-                    this.ViewModel.Invalidate();//Invalidate
-                };
-                this.StrokeComboBoxItem.Tapped += (s, e) =>
-                {
-                    this.SelectionViewModel.FillOrStroke = FillOrStroke.Stroke;
-                    this.SetFillOrStroke(FillOrStroke.Stroke);
-                    this.ViewModel.Invalidate();//Invalidate
-                };
-            }
+                FillOrStroke fillOrStroke = (FillOrStroke)this.FillOrStrokeComboBox.SelectedIndex;
+                if (this.SelectionViewModel.FillOrStroke == fillOrStroke) return;
+
+                this.SelectionViewModel.FillOrStroke = fillOrStroke;
+                this.SetFillOrStroke(fillOrStroke);
+                this.ViewModel.Invalidate();//Invalidate
+            };
 
 
             //GradientBrushType
+            this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Linear);//ComboBox
+            this.BrushTypeComboBox.SelectionChanged += (s, e) =>
             {
-                this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Linear);//ComboBox
+                BrushType brushType = (BrushType)this.BrushTypeComboBox.SelectedIndex;
+                if (this.SelectionViewModel.BrushType == brushType) return;
 
-                this.NoneComboBoxItem.Tapped += (s, e) => this.ToBrushTypeNone();
-                this.ColorComboBoxItem.Tapped += (s, e) => this.ToBrushTypeColor();
-                this.LinearGradientComboBoxItem.Tapped += (s, e) =>
+                switch (brushType)
                 {
-                    this.ToBrushTypeLinearGradient(isResetBrushArray: true);
-                    this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Linear);//ComboBox
-                };
-                this.RadialGradientComboBoxItem.Tapped += (s, e) =>
-                {
-                    this.ToBrushTypeRadialGradient(isResetBrushArray: true);
-                    this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Radial);//ComboBox
-                };
-                this.EllipticalGradientComboBoxItem.Tapped += (s, e) =>
-                {
-                    this.ToBrushTypeEllipticalGradient(isResetBrushArray: true);
-                    this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Elliptical);//ComboBox
-                };
-                this.ImageComboBoxItem.Tapped += (s, e) => this.ToBrushTypeImage();
-            }
+                    case BrushType.None:
+                        this.ToBrushTypeNone();
+                        break;
+                    case BrushType.Color:
+                        this.ToBrushTypeColor();
+                        break;
+                    case BrushType.LinearGradient:
+                        this.ToBrushTypeLinearGradient(isResetBrushArray: true);
+                        this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Linear);//ComboBox
+                        break;
+                    case BrushType.RadialGradient:
+                        this.ToBrushTypeRadialGradient(isResetBrushArray: true);
+                        this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Radial);//ComboBox
+                        break;
+                    case BrushType.EllipticalGradient:
+                        this.ToBrushTypeEllipticalGradient(isResetBrushArray: true);
+                        this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Elliptical);//ComboBox
+                        break;
+                    case BrushType.Image:
+                        this.ToBrushTypeImage();
+                        break;
+                }
+            };
 
 
-            //BrushType
+            //BrushType   
+            this.StopsPicker.ComboBox.SelectionChanged += (s, e) =>
             {
-                this.StopsPicker.LinearGradientItem.Tapped += (s, e) =>
+                if (this._isOpened == false) return;
+                GradientBrushType gradientBrushType = (GradientBrushType)this.StopsPicker.ComboBox.SelectedIndex;
+
+                switch (gradientBrushType)
                 {
-                    this.ToBrushTypeLinearGradient(isResetBrushArray: false);
-                    this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.LinearGradient);//ComboBox
-                    this.EaseStoryboard.Begin();//Storyboard
-                };
-                this.StopsPicker.RadialGradientItem.Tapped += (s, e) =>
-                {
-                    this.ToBrushTypeRadialGradient(isResetBrushArray: false);
-                    this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.RadialGradient);//ComboBox
-                    this.EaseStoryboard.Begin();//Storyboard
-                };
-                this.StopsPicker.EllipticalGradientItem.Tapped += (s, e) =>
-                {
-                    this.ToBrushTypeEllipticalGradient(isResetBrushArray: false);
-                    this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.EllipticalGradient);//ComboBox
-                    this.EaseStoryboard.Begin();//Storyboard
-                };
-            }
+                    case GradientBrushType.Linear:
+                        this.ToBrushTypeLinearGradient(isResetBrushArray: false);
+                        this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.LinearGradient);//ComboBox
+                        break;
+                    case GradientBrushType.Radial:
+                        this.ToBrushTypeRadialGradient(isResetBrushArray: false);
+                        this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.RadialGradient);//ComboBox
+                        break;
+                    case GradientBrushType.Elliptical:
+                        this.ToBrushTypeEllipticalGradient(isResetBrushArray: false);
+                        this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.EllipticalGradient);//ComboBox
+                        break;
+                }
+                this.EaseStoryboard.Begin();//Storyboard
+            };
 
 
             //Show
             {
+                this.StopsFlyout.Opened += (s, e) => this._isOpened = true;
+                this.StopsFlyout.Closed += (s, e) => this._isOpened = false;
                 this.ShowControl.Tapped += (s, e) =>
                 {
                     switch (this.SelectionViewModel.BrushType)

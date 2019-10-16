@@ -6,7 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hSVColorPickers="using:HSVColorPickers"
     xmlns:brushs="using:Retouch_Photo2.Brushs"
-    xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -44,8 +43,16 @@
             <ComboBox x:Name="FillOrStrokeComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
                   SelectedIndex="{x:Bind FillOrStrokeToIndexConverter(SelectionViewModel.FillOrStroke),Mode=OneWay}" 
                   >
-                <ComboBoxItem x:Name="FillComboBoxItem" Content="Fill"/>
-                <ComboBoxItem x:Name="StrokeComboBoxItem" Content="Stroke"/>
+                <ComboBoxItem>
+                    <TextBlock>
+                        Fill
+                    </TextBlock>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <TextBlock>
+                        Stroke
+                    </TextBlock>
+                </ComboBoxItem>
             </ComboBox>
         </Border>
 
@@ -60,14 +67,37 @@
             </Border.BorderBrush>
             <ComboBox x:Name="BrushTypeComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
                   SelectedIndex="{x:Bind BrushTypeToIndexConverter(SelectionViewModel.BrushType),Mode=OneWay}" 
-                  IsEnabled="{x:Bind BrushTypeToIsEnabledConverter(SelectionViewModel.BrushType),Mode=OneWay}" 
                  >
-                <ComboBoxItem x:Name="NoneComboBoxItem" Content="None"/>
-                <ComboBoxItem x:Name="ColorComboBoxItem" Content="Color"/>
-                <ComboBoxItem x:Name="LinearGradientComboBoxItem" Content="Linear"/>
-                <ComboBoxItem x:Name="RadialGradientComboBoxItem" Content="Radial"/>
-                <ComboBoxItem x:Name="EllipticalGradientComboBoxItem" Content="Elliptical"/>
-                <ComboBoxItem x:Name="ImageComboBoxItem" Content="Image"/>
+                <ComboBoxItem>
+                    <TextBlock>
+                        None
+                    </TextBlock>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <TextBlock>
+                        Color
+                    </TextBlock>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <TextBlock>
+                        Linear
+                    </TextBlock>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <TextBlock>
+                        Radial
+                    </TextBlock>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <TextBlock>
+                        Elliptical
+                    </TextBlock>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <TextBlock>
+                        Image
+                    </TextBlock>
+                </ComboBoxItem>
             </ComboBox>
         </Border>
 

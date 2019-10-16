@@ -210,10 +210,11 @@ namespace Retouch_Photo2.ViewModels
                         this.SetBrush(geometryLayer.StrokeBrush);
                         break;
                 }
-                return;
             }
-
-            this.BrushType = BrushType.Disabled;
+            else
+            {
+                this.BrushType = BrushType.None;
+            }
         }
 
 

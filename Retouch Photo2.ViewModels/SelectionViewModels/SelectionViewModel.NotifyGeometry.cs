@@ -187,6 +187,42 @@ namespace Retouch_Photo2.ViewModels
         private float geometryCogNotch = 0.6f;
 
 
+        /// <summary> GeometryArrow's value. </summary>     
+        public float GeometryArrowValue
+        {
+            get => this.geometryArrowValue;
+            set
+            {
+                if (this.geometryArrowValue == value) return;
+                this.geometryArrowValue = value;
+                this.OnPropertyChanged(nameof(this.GeometryArrowValue));//Notify 
+            }
+        }
+        private float geometryArrowValue = 0.5f;
+        /// <summary> GeometryArrow's left-tail. </summary>     
+        public GeometryArrowTailType GeometryArrowLeftTail
+        {
+            get => this.geometryArrowLeftTail;
+            set
+            {
+                if (this.geometryArrowLeftTail == value) return;
+                this.geometryArrowLeftTail = value;
+                this.OnPropertyChanged(nameof(this.GeometryArrowLeftTail));//Notify 
+            }
+        }
+        private GeometryArrowTailType geometryArrowLeftTail = GeometryArrowTailType.None;
+        /// <summary> GeometryArrow's right-tail. </summary>     
+        public GeometryArrowTailType GeometryArrowRightTail
+        {
+            get => this.geometryArrowRightTail;
+            set
+            {
+                if (this.geometryArrowRightTail == value) return;
+                this.geometryArrowRightTail = value;
+                this.OnPropertyChanged(nameof(this.GeometryArrowRightTail));//Notify 
+            }
+        }
+        private GeometryArrowTailType geometryArrowRightTail = GeometryArrowTailType.Arrow;
 
 
 

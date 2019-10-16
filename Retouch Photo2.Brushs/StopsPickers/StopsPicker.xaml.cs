@@ -19,12 +19,6 @@ namespace Retouch_Photo2.Brushs
 
         //@Content        
         public ComboBox ComboBox => this._ComboBox;
-        /// <summary> ComboBox's item. </summary>
-        public ComboBoxItem LinearGradientItem => this._LinearGradientItem;
-        /// <summary> ComboBox's item. </summary>
-        public ComboBoxItem RadialGradientItem => this._RadialGradientItem;
-        /// <summary> ComboBox's item. </summary>
-        public ComboBoxItem EllipticalGradientItem => this._EllipticalGradientItem;
 
         //Background
         CanvasRenderTarget GrayAndWhiteBackground;
