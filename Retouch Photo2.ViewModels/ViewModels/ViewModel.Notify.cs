@@ -19,6 +19,8 @@ namespace Retouch_Photo2.ViewModels
             get => this.canvasRulerVisible;
             set
             {
+                this.Invalidate();//Invalidate
+
                 this.canvasRulerVisible = value;
                 this.OnPropertyChanged(nameof(this.CanvasRulerVisible));//Notify 
             }

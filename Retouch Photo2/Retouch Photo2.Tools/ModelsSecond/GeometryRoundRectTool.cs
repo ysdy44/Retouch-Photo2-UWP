@@ -7,7 +7,8 @@ using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.Tools.Models;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-
+using Retouch_Photo2.ViewModels;
+          
 namespace Retouch_Photo2.Tools
 {
     /// <summary>
@@ -15,10 +16,16 @@ namespace Retouch_Photo2.Tools
     /// </summary>
     public class GeometryRoundRectTool : IGeometryTool
     {
+        //@ViewModel
+        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+
         //@Override
         public override IGeometryLayer CreateGeometryLayer(Transformer transformer)
         {
-            return new GeometryRoundRectLayer();
+            return new GeometryRoundRectLayer
+            {
+                Corner = this.SelectionViewModel.GeometryRoundRectCorner,
+            };
         }
         public override ToolType Type => ToolType.GeometryRoundRect;
         public override FrameworkElement Icon { get; } = new GeometryRoundRectIcon();

@@ -20,6 +20,7 @@ using System.Collections.ObjectModel;
 using Windows.UI;
 using System.Linq;
 using Windows.Foundation;
+using Retouch_Photo2.Tools.Elements;
 
 namespace Retouch_Photo2
 {
@@ -44,6 +45,8 @@ namespace Retouch_Photo2
         public DrawPage()
         {
             this.InitializeComponent();
+            MoreTransformButton.Flyout = this.MoreTransformFlyout;
+            MoreCreateButton.Flyout = this.MoreCreateFlyout;
 
             //Appbar
             this.DrawLayout.BackButton.Tapped += (s, e) => this.Frame.GoBack();
@@ -135,8 +138,14 @@ namespace Retouch_Photo2
                 this._tempToolButtonType = tool.Button.Type;
                 tool.Button.Self.Tapped += (s, e) =>
                 {
-                    this.ToolChanged(tool);
+                    //Group
                     this.ToolGroupType(tool.Type);
+
+                    //Changed
+                    this.TipViewModel.Tool = tool;
+                    this.DrawLayout.LeftIcon = tool.Icon;
+
+                    this.ViewModel.Invalidate();//Invalidate
                 };
             }
 
@@ -151,15 +160,6 @@ namespace Retouch_Photo2
             }
         }
 
-        private void ToolChanged(ITool tool)
-        {
-            this.TipViewModel.Tool = tool;
-            
-            this.DrawLayout.LeftIcon = tool.Icon;
-            this.DrawLayout.FootPage = tool.Page.Self;
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
 
         private void ToolGroupType(ToolType currentType)
         {
@@ -180,9 +180,15 @@ namespace Retouch_Photo2
             ITool tool = this.TipViewModel.Tools.FirstOrDefault();
             if (tool != null)
             {
-                this.ToolChanged(tool);
+                //Group
                 tool.Button.IsSelected = true;
                 tool.Page.IsSelected = true;
+
+                //Changed
+                this.TipViewModel.Tool = tool;
+                this.DrawLayout.LeftIcon = tool.Icon;
+                                
+                this.FootPageControl.Content = tool.Page.Self;//FootPage
             }
         }
 

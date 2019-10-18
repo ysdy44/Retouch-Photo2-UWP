@@ -49,9 +49,9 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         /// <param name="mode"> invalidate mode </param>
         public void Invalidate(InvalidateMode mode = InvalidateMode.None) => this.InvalidateAction?.Invoke(mode);
-      
-        /// <summary> <see cref = "Action" /> of the <see cref = "ViewModel.Invalidate" />. </summary>
-        public Action<InvalidateMode> InvalidateAction { private get; set; }
+
+        /// <summary> Occurs when the canvas invalidated. </summary>
+        public Action<InvalidateMode> InvalidateAction { get; set; }
 
 
         #endregion

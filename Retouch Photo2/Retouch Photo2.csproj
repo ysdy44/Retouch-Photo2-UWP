@@ -105,15 +105,15 @@
     <Compile Include="Controls\EffectControl.xaml.cs">
       <DependentUpon>EffectControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FootPageControl.cs" />
     <Compile Include="Controls\LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\LayersControl.xaml.cs">
       <DependentUpon>LayersControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MainCanvasControl.xaml.cs">
-      <DependentUpon>MainCanvasControl.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Controls\MainCanvasControl.Construct.cs" />
+    <Compile Include="Controls\MainCanvasControl.cs" />
     <Compile Include="Controls\OperateControl.xaml.cs">
       <DependentUpon>OperateControl.xaml</DependentUpon>
     </Compile>
@@ -432,10 +432,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\LayersControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\MainCanvasControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

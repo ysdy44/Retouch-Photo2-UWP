@@ -8,6 +8,7 @@
     xmlns:controls="using:Retouch_Photo2.Controls"
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:layers="using:Retouch_Photo2.Layers"
+    xmlns:toolElements="using:Retouch_Photo2.Tools.Elements"
     NavigationCacheMode="Enabled"    
     mc:Ignorable="d"
     >
@@ -30,12 +31,30 @@
     </Page.Resources>
 
 
-    <Grid>        
+    <Grid>
+        <Grid.Resources>
+            <Flyout x:Name="MoreTransformFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <toolElements:MoreTransformControl/>
+            </Flyout>         
+            <Flyout x:Name="MoreCreateFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <toolElements:MoreCreateControl/>
+            </Flyout>
+        </Grid.Resources>        
+        
         <elements:DrawLayout x:Name="DrawLayout" 
                Touchbar="{x:Bind TipViewModel.TouchbarControl,Mode=OneWay}"                                             
                Theme="{x:Bind RequestedTheme, Mode=OneWay}"
                IsFullScreen="{x:Bind KeyboardViewModel.IsFullScreen,Mode=OneWay}" 
                >
+
+            <!--FootPage-->
+            <elements:DrawLayout.FootPage>
+                <controls:FootPageControl x:Name="FootPageControl"       
+                    Tool="{x:Bind TipViewModel.Tool,Mode=OneWay}"                         
+                    Type="{x:Bind SelectionViewModel.Type,Mode=OneWay}"                         
+                    Mode="{x:Bind SelectionViewModel.SelectionMode,Mode=OneWay}"                    
+                    />
+            </elements:DrawLayout.FootPage>
 
             <!--RightIcon-->
             <elements:DrawLayout.RightIcon>
@@ -52,7 +71,6 @@
                 <controls:MainCanvasControl 
                     AccentColor="{ThemeResource SystemAccentColor}" 
                     ShadowColor="{ThemeResource AppStrokeColor}" 
-                    RulerVisible="{x:Bind ViewModel.CanvasRulerVisible,Mode=OneWay}"
                     />
             </elements:DrawLayout.CenterChild>
 

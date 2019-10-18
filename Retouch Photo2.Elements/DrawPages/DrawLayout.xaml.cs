@@ -30,19 +30,10 @@ namespace Retouch_Photo2.Elements
 
         /// <summary> TouchbarBorder's Child. </summary>
         public UIElement Touchbar { get => this.TouchbarBorder.Child; set => this.TouchbarBorder.Child = value; }
-        /// <summary> Gets or sets FootScrollViewer's content. </summary>
-        public FrameworkElement FootPage
-        {
-            get => this.footPage;
-            set
-            {
-                this.FootScrollViewer.Content = value;
-                this.footPage=value;
-            }
-        }
-        private FrameworkElement footPage;
-        
-        
+        /// <summary> Gets or sets RadiusAnimaPanel's content. </summary>
+        public FrameworkElement FootPage { set { this.RadiusAnimaPanel.CenterContent = value; } }
+
+
         /// <summary> HeadLeftBorder's Child. </summary>
         public UIElement HeadLeftPane { get => this.HeadLeftBorder.Child; set => this.HeadLeftBorder.Child = value; }
         /// <summary> HeadRightStackPane's Children. </summary>

@@ -9,26 +9,25 @@ namespace Retouch_Photo2.Tools.Elements
     /// </summary>
     public sealed partial class MoreCreateButton : UserControl
     {
-        //@ViewModel
-        TipViewModel TipViewModel => App.TipViewModel;
-       
         //@Static
-        public static MoreCreateControl MoreCreateControl = new MoreCreateControl();
-        Flyout Flyout => MoreCreateButton.MoreCreateControl.Flyout;
+        public static Flyout Flyout;
 
         //@Construct
         public MoreCreateButton()
         {
             this.InitializeComponent();
+
             this.Button.Tapped += (s, e) =>
             {
+                if (MoreCreateButton.Flyout == null) return;
+
                 if (this.Parent is FrameworkElement placementTarget)
                 {
-                    this.Flyout.ShowAt(placementTarget);
+                    MoreCreateButton.Flyout.ShowAt(placementTarget);
                 }
                 else
                 {
-                    this.Flyout.ShowAt(this);
+                    MoreCreateButton.Flyout.ShowAt(this);
                 }
             };
         }

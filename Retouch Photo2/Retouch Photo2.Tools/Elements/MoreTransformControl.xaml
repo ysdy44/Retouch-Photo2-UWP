@@ -6,30 +6,26 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
-    d:DesignHeight="50"
-    d:DesignWidth="50"
+    d:DesignHeight="200"
+    d:DesignWidth="200"
     >
-    
-    <UserControl.Resources>
-        <Flyout x:Name="_Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel Padding="2" MinWidth="300">
 
-                <!--Ratio-->
-                <TextBlock Style="{StaticResource AppTextBlock}">
-                    Ratio Scaling
-                </TextBlock>
-                <elements:OnOffSwitch OnContent="None" OffContent="Ratio" IsOn="{x:Bind KeyboardViewModel.IsRatio,Mode=TwoWay}"/>
+    <StackPanel Padding="2" MinWidth="300">
 
-                <ContentControl Width="4"/>
+        <!--Ratio-->
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Ratio Scaling
+        </TextBlock>
+        <elements:OnOffSwitch OnContent="None" OffContent="Ratio" IsOn="{x:Bind KeyboardViewModel.IsRatio,Mode=TwoWay}"/>
 
-                <!--Center-->
-                <TextBlock Style="{StaticResource AppTextBlock}">
-                    Center Scaling
-                </TextBlock>
-                <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}"/>
+        <ContentControl Width="4"/>
 
-            </StackPanel>
-        </Flyout>
-    </UserControl.Resources>
-    
+        <!--Center-->
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Center Scaling
+        </TextBlock>
+        <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}"/>
+
+    </StackPanel>
+
 </UserControl>

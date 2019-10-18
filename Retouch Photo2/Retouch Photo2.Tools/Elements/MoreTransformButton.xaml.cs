@@ -9,26 +9,25 @@ namespace Retouch_Photo2.Tools.Elements
     /// </summary>
     public sealed partial class MoreTransformButton : UserControl
     {
-        //@ViewModel
-        TipViewModel TipViewModel => App.TipViewModel;
-       
         //@Static
-        public static MoreTransformControl MoreTransformControl = new MoreTransformControl();
-        Flyout Flyout => MoreTransformButton.MoreTransformControl.Flyout;
+        public static Flyout Flyout;
 
         //@Construct
         public MoreTransformButton()
         {
             this.InitializeComponent();
+
             this.Button.Tapped += (s, e) =>
             {
+                if (MoreTransformButton.Flyout == null) return;
+
                 if (this.Parent is FrameworkElement placementTarget)
                 {
-                   this.Flyout.ShowAt(placementTarget);
+                    MoreTransformButton.Flyout.ShowAt(placementTarget);
                 }
                 else
                 {
-                    this.Flyout.ShowAt(this);
+                    MoreTransformButton.Flyout.ShowAt(this);
                 }
             };
         }

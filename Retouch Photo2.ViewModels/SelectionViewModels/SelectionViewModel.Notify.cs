@@ -14,6 +14,19 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public partial class SelectionViewModel : INotifyPropertyChanged
     {
+               
+        /// <summary> <see cref = "SelectionViewModel" />'s layer type. </summary>
+        public string Type
+        {
+            get => this.type;
+            set
+            {
+                this.type = value;
+                this.OnPropertyChanged(nameof(this.Type));//Notify 
+            }
+        }
+        private string type;
+
 
         /// <summary> <see cref = "SelectionViewModel" />'s opacity. </summary>
         public float Opacity { get; set; }

@@ -14,7 +14,7 @@ namespace Retouch_Photo2.ViewModels
     {
         //@Delegate  
         /// <summary> Occurs when the canvas position moved. </summary>
-        public EventHandler<Vector2> Move;
+        public Action<Vector2> Move { get; set; }
 
         //@Construct
         public KeyboardViewModel()
@@ -55,16 +55,16 @@ namespace Retouch_Photo2.ViewModels
                     break;
 
                 case VirtualKey.Left:
-                    this.Move?.Invoke(this, new Vector2(50, 0));//Delegate
+                    this.Move?.Invoke(new Vector2(50, 0));//Delegate
                     break;
                 case VirtualKey.Up:
-                    this.Move?.Invoke(this, new Vector2(0, 50));//Delegate
+                    this.Move?.Invoke(new Vector2(0, 50));//Delegate
                     break;
                 case VirtualKey.Right:
-                    this.Move?.Invoke(this, new Vector2(-50, 0));//Delegate
+                    this.Move?.Invoke(new Vector2(-50, 0));//Delegate
                     break;
                 case VirtualKey.Down:
-                    this.Move?.Invoke(this, new Vector2(0, -50));//Delegate
+                    this.Move?.Invoke(new Vector2(0, -50));//Delegate
                     break;
 
 

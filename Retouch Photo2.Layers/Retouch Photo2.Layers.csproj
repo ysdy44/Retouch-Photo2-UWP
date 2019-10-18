@@ -197,7 +197,7 @@
     <Compile Include="Layers\LayerBase.Property.cs" />
     <Compile Include="ModelsSecond\GeometryUtil.cs" />
     <Compile Include="TransformManager.cs" />
-    <Compile Include="ModelsSecond\GeometryCurveLayer.cs" />
+    <Compile Include="Models\GeometryCurveLayer.cs" />
     <Compile Include="Models\IGeometryLayer.cs" />
     <Compile Include="ImageRe.cs" />
     <Compile Include="Models\AcrylicLayer.cs" />
