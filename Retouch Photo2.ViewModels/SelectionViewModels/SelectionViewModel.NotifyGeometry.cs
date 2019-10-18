@@ -225,6 +225,20 @@ namespace Retouch_Photo2.ViewModels
         private GeometryArrowTailType geometryArrowRightTail = GeometryArrowTailType.Arrow;
 
 
+        /// <summary> GeometryArrow's spread. </summary>     
+        public float GeometryHeartSpread
+        {
+            get => this.geometryHeartSpread;
+            set
+            {
+                if (this.geometryHeartSpread == value) return;
+                this.geometryHeartSpread = value;
+                this.OnPropertyChanged(nameof(this.GeometryHeartSpread));//Notify 
+            }
+        }
+        private float geometryHeartSpread = 0.8f;
+
+
 
     }
 }

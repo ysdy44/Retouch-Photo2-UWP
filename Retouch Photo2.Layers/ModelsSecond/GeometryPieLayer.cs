@@ -9,11 +9,11 @@ namespace Retouch_Photo2.Layers.Models
     /// <summary>
     /// <see cref="IGeometryLayer"/>'s GeometryPieLayer .
     /// </summary>
-    public class GeometryPieLayer : IGeometryLayer
+    public partial class GeometryPieLayer : IGeometryLayer
     {
         public float InnerRadius = 0.0f;
         public float SweepAngle = FanKit.Math.Pi / 2f;
-        
+
         //@Construct
         public GeometryPieLayer()
         {
@@ -26,16 +26,42 @@ namespace Retouch_Photo2.Layers.Models
         public override string Type => "Pie";
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
-        {                       
-            Matrix3x2 oneMatrix = Transformer.FindHomography(GeometryUtil.OneTransformer, base.TransformManager.Destination);
-            Matrix3x2 matrix = oneMatrix * canvasToVirtualMatrix;
-            
-            CanvasPathBuilder pathBuilder = (this.InnerRadius == 0.0f) ?              
-                this._getCirle(resourceCreator) :           
-                this._getPie(resourceCreator);
+        {
+            PieType pieType = this.GetPieType(this.InnerRadius == 0, this.SweepAngle == 0);
 
-            CanvasGeometry pie = CanvasGeometry.CreatePath(pathBuilder);
-            return pie.Transform(matrix);
+            switch (pieType)
+            {
+                case PieType.Cirle:
+                    {
+                        Transformer transformer = base.TransformManager.Destination;
+                        return transformer.ToEllipse(resourceCreator, canvasToVirtualMatrix);
+                    }
+                case PieType.Donut:
+                    {
+                        return this._getDonut(resourceCreator, this.InnerRadius, canvasToVirtualMatrix);
+                    }
+                case PieType.Pie:
+                    {
+                        Matrix3x2 oneMatrix = Transformer.FindHomography(GeometryUtil.OneTransformer, base.TransformManager.Destination);
+                        Matrix3x2 matrix = oneMatrix * canvasToVirtualMatrix;
+
+                        CanvasPathBuilder pie = this._getPie(resourceCreator, this.SweepAngle);
+                        return CanvasGeometry.CreatePath(pie).Transform(matrix);
+                    }
+                case PieType.DonutAndPie:
+                    {
+                        Matrix3x2 oneMatrix = Transformer.FindHomography(GeometryUtil.OneTransformer, base.TransformManager.Destination);
+                        Matrix3x2 matrix = oneMatrix * canvasToVirtualMatrix;
+
+                        CanvasPathBuilder donutAndPie = this._getDonutAndPie(resourceCreator, this.InnerRadius, this.SweepAngle);
+                        return CanvasGeometry.CreatePath(donutAndPie).Transform(matrix);
+                    }
+            }
+
+            {
+                Transformer transformer = base.TransformManager.Destination;
+                return transformer.ToEllipse(resourceCreator, canvasToVirtualMatrix);
+            }
         }
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
@@ -48,58 +74,6 @@ namespace Retouch_Photo2.Layers.Models
 
             LayerBase.CopyWith(resourceCreator, PieLayer, this);
             return PieLayer;
-        }
-
-        private CanvasPathBuilder _getCirle(ICanvasResourceCreator resourceCreator)
-        {
-            //start tooth
-            Vector2 startTooth = new Vector2(1, 0);
-
-            //end tooth
-            Vector2 endTooth = new Vector2((float)System.Math.Cos(this.SweepAngle), (float)System.Math.Sin(this.SweepAngle));
-
-            CanvasPathBuilder pathBuilder = new CanvasPathBuilder(resourceCreator);
-            {
-                pathBuilder.BeginFigure(Vector2.Zero);
-
-                //end notch point
-                pathBuilder.AddLine(endTooth);
-
-                CanvasArcSize canvasArcSize = (this.SweepAngle < System.Math.PI) ? CanvasArcSize.Large : CanvasArcSize.Small;
-                //end tooth point
-                pathBuilder.AddArc(startTooth, 1, 1, this.SweepAngle, CanvasSweepDirection.Clockwise, canvasArcSize);
-            }
-            pathBuilder.EndFigure(CanvasFigureLoop.Closed);
-            return pathBuilder;
-        }
-        private CanvasPathBuilder _getPie(ICanvasResourceCreator resourceCreator)
-        {
-            //start tooth
-            Vector2 startTooth = new Vector2(1, 0);
-            //start notch
-            Vector2 startNotch = startTooth * this.InnerRadius;
-
-            //end tooth
-            Vector2 endTooth = new Vector2((float)System.Math.Cos(this.SweepAngle), (float)System.Math.Sin(this.SweepAngle));
-            //end notch
-            Vector2 endNotch = endTooth * this.InnerRadius;
-
-            CanvasPathBuilder pathBuilder = new CanvasPathBuilder(resourceCreator);
-            {
-                CanvasArcSize canvasArcSize = (this.SweepAngle < System.Math.PI) ? CanvasArcSize.Large : CanvasArcSize.Small;
-
-                //start tooth point
-                pathBuilder.BeginFigure(startNotch);
-                //start notch point
-                pathBuilder.AddArc(endNotch, this.InnerRadius, this.InnerRadius, this.SweepAngle, CanvasSweepDirection.CounterClockwise, canvasArcSize);
-
-                //end notch point
-                pathBuilder.AddLine(endTooth);
-                //end tooth point
-                pathBuilder.AddArc(startTooth, 1, 1, this.SweepAngle, CanvasSweepDirection.Clockwise, canvasArcSize);
-            }
-            pathBuilder.EndFigure(CanvasFigureLoop.Closed);
-            return pathBuilder;
-        }
+        }        
     }
 }

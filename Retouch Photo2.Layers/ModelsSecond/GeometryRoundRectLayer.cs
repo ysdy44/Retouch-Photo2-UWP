@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Layers.Models
         {
             Transformer transformer = base.TransformManager.Destination;
 
-
+            //LTRB
             Vector2 leftTop = Vector2.Transform(transformer.LeftTop, canvasToVirtualMatrix);
             Vector2 rightTop = Vector2.Transform(transformer.RightTop, canvasToVirtualMatrix);
             Vector2 rightBottom = Vector2.Transform(transformer.RightBottom, canvasToVirtualMatrix);
@@ -50,36 +50,36 @@ namespace Retouch_Photo2.Layers.Models
             Vector2 verticalUnit = vertical / verticalLength;
 
 
+            //Control
             float minLength = System.Math.Min(horizontalLength, verticalLength);
             float minLength2 = this.Corner * minLength;
 
             Vector2 horizontal2 = minLength2 * horizontalUnit;
-            Vector2 horizontal276 = horizontal2 *  0.448f;// vector / (1 - 4 * 0.552f)
+            Vector2 horizontal448 = horizontal2 *  0.448f;// vector / (1 - 4 * 0.552f)
             Vector2 vertical2 = minLength2 * verticalUnit;
-            Vector2 vertical276 = vertical2 *  0.448f;// vector /  (1 - 4 * 0.552f)
+            Vector2 vertical448 = vertical2 *  0.448f;// vector /  (1 - 4 * 0.552f)
 
 
             Vector2 leftTop_Left = leftTop + vertical2;
-            Vector2 leftTop_Left2= leftTop + vertical276;
+            Vector2 leftTop_Left2= leftTop + vertical448;
             Vector2 leftTop_Top = leftTop + horizontal2;
-            Vector2 leftTop_Top1 = leftTop + horizontal276;
+            Vector2 leftTop_Top1 = leftTop + horizontal448;
 
             Vector2 rightTop_Top = rightTop - horizontal2;
-            Vector2 rightTop_Top2 = rightTop - horizontal276;
+            Vector2 rightTop_Top2 = rightTop - horizontal448;
             Vector2 rightTop_Right = rightTop + vertical2;
-            Vector2 rightTop_Right1 = rightTop + vertical276;
+            Vector2 rightTop_Right1 = rightTop + vertical448;
 
             Vector2 rightBottom_Right = rightBottom - vertical2;
-            Vector2 rightBottom_Right2 = rightBottom - vertical276;
+            Vector2 rightBottom_Right2 = rightBottom - vertical448;
             Vector2 rightBottom_Bottom = rightBottom - horizontal2;
-            Vector2 rightBottom_Bottom1 = rightBottom - horizontal276;
+            Vector2 rightBottom_Bottom1 = rightBottom - horizontal448;
 
             Vector2 leftBottom_Bottom = leftBottom + horizontal2;
-            Vector2 leftBottom_Bottom2 = leftBottom + horizontal276;
+            Vector2 leftBottom_Bottom2 = leftBottom + horizontal448;
             Vector2 leftBottom_Left = leftBottom - vertical2;
-            Vector2 leftBottom_Left1 = leftBottom - vertical276;
-
-             
+            Vector2 leftBottom_Left1 = leftBottom - vertical448;
+                         
 
             //Path
             CanvasPathBuilder pathBuilder = new CanvasPathBuilder(resourceCreator);

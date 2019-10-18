@@ -142,6 +142,7 @@
     <Compile Include="ModelsSecond\GeometryDiamondLayer.cs" />
     <Compile Include="ModelsSecond\GeometryHeartLayer.cs" />
     <Compile Include="ModelsSecond\GeometryPentagonLayer.cs" />
+    <Compile Include="ModelsSecond\GeometryPieLayer.Geometry.cs" />
     <Compile Include="ModelsSecond\GeometryPieLayer.cs" />
     <Compile Include="ModelsSecond\GeometryRoundRectLayer.cs" />
     <Compile Include="ModelsSecond\GeometryStarLayer.cs" />
