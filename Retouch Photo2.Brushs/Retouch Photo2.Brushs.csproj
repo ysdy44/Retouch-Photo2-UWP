@@ -108,6 +108,7 @@
   <ItemGroup>
     <Compile Include="Brush.cs" />
     <Compile Include="Brush.ICanvasBrush.cs" />
+    <Compile Include="Brush.Transform.cs" />
     <Compile Include="BrushPoints.cs" />
     <Compile Include="StopsPickers\StopsPicker.xaml.Set.cs" />
     <Compile Include="StopsPickers\SliderControl.xaml.cs">

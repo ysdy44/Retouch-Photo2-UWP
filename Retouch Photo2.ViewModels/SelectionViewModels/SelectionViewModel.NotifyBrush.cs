@@ -1,6 +1,9 @@
-﻿using Microsoft.Graphics.Canvas.Brushes;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Layers;
 using System.ComponentModel;
+using System.Numerics;
 using Windows.UI;
 
 namespace Retouch_Photo2.ViewModels
@@ -74,14 +77,13 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Retouch_Photo2's the only stroke-width. </summary>
         public float StrokeWidth
         {
-            get => this.strokeWidth;
+            get => this.StyleManager.StrokeWidth;
             set
             {
-                this.strokeWidth = value;
+                this.StyleManager.StrokeWidth = value;
                 this.OnPropertyChanged(nameof(this.StrokeWidth));//Notify 
             }
         }
-        private float strokeWidth = 1;
 
 
         #endregion
@@ -155,30 +157,33 @@ namespace Retouch_Photo2.ViewModels
 
 
         #endregion
-        
-        
+
+
+        /// <summary>
+        /// Points turn to _oldPoints in Transformer.One.
+        /// </summary>
+        public void OneBrushPoints()
+        {
+            Transformer transformer = this.Transformer;
+            this.StyleManager.FillBrush.OneBrushPoints(transformer);
+            this.StyleManager.StrokeBrush.OneBrushPoints(transformer);
+        }
+        /// <summary>
+        /// _oldPoints turn to Points in Transformer Destination.
+        /// </summary>
+        /// <param name="layer"> The source layer. </param>
+        public void DeliverBrushPoints(ILayer layer)
+        {
+            Transformer transformer = layer.TransformManager.Destination;
+            layer.StyleManager.FillBrush.DeliverBrushPoints(transformer);
+            layer.StyleManager.StrokeBrush.DeliverBrushPoints(transformer);
+        }
+
+
         /// <summary> Sets FillOrStroke. </summary>  
         public void SetFillOrStroke(FillOrStroke fillOrStroke)
         {
             this.FillOrStroke = fillOrStroke;
-
-            this.OnPropertyChanged(nameof(this.BrushType));//Notify 
-            this.OnPropertyChanged(nameof(this.BrushArray));//Notify 
-            this.OnPropertyChanged(nameof(this.BrushPoints));//Notify 
-        }
-
-        /// <summary> Sets GeometryLayer's brush. </summary>     
-        public void SetBrush(Brush brush)
-        {
-            switch (this.FillOrStroke)
-            {
-                case FillOrStroke.Fill:
-                    this.StyleManager.FillBrush.CopyWith(brush);
-                    break;
-                case FillOrStroke.Stroke:
-                    this.StyleManager.StrokeBrush.CopyWith(brush);
-                    break;
-            }
 
             this.OnPropertyChanged(nameof(this.BrushType));//Notify 
             this.OnPropertyChanged(nameof(this.BrushArray));//Notify 

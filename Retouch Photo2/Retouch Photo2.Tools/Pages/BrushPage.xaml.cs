@@ -1,4 +1,5 @@
-﻿using Microsoft.Graphics.Canvas.Brushes;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Models;

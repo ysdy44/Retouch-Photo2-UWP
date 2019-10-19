@@ -86,6 +86,7 @@ namespace Retouch_Photo2.Tools.Pages
             };
             this.Gradient(GradientBrushType.Linear, brushPoints, isResetBrushArray: isResetBrushArray);
 
+            this.SelectionViewModel.OneBrushPoints();
             this.ViewModel.Invalidate();//Invalidate
         }
 
@@ -102,6 +103,7 @@ namespace Retouch_Photo2.Tools.Pages
             };
             this.Gradient(GradientBrushType.Radial, brushPoints, isResetBrushArray: isResetBrushArray);
 
+            this.SelectionViewModel.OneBrushPoints();
             this.ViewModel.Invalidate();//Invalidate
         }
 
@@ -120,6 +122,7 @@ namespace Retouch_Photo2.Tools.Pages
             };
             this.Gradient(GradientBrushType.Elliptical, brushPoints, isResetBrushArray: isResetBrushArray);
 
+            this.SelectionViewModel.OneBrushPoints();
             this.ViewModel.Invalidate();//Invalidate
         }
 
@@ -128,6 +131,7 @@ namespace Retouch_Photo2.Tools.Pages
             //BrushType
             this.SelectionViewModel.BrushType = BrushType.Image;
 
+            this.SelectionViewModel.OneBrushPoints();
             this.ViewModel.Invalidate();//Invalidate
         }
 
@@ -175,6 +179,5 @@ namespace Retouch_Photo2.Tools.Pages
                 }
             });
         }
-
     }
 }

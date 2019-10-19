@@ -111,7 +111,9 @@ namespace Retouch_Photo2.Tools.Models
             if (this.Mode == ListViewSelectionMode.None) return;
 
             this.OperateMode = BrushOperateMode.None;
-            
+
+            this.SelectionViewModel.OneBrushPoints();
+
             if (isSingleStarted == false)
             {
                 //TransformerTool

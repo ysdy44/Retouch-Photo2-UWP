@@ -51,16 +51,14 @@ namespace Retouch_Photo2.Tools.Models
             );
 
             //Mezzanine
-            ILayer mezzanineLayer = this.CreateLayer(transformer);
-            mezzanineLayer = this.CreateLayer(transformer);
+            this.ViewModel.MezzanineLayer = this.CreateLayer(transformer);
+            this.ViewModel.MezzanineLayer.StyleManager = this.SelectionViewModel.StyleManager.Clone();
+            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.ViewModel.MezzanineLayer);
 
-            mezzanineLayer.StyleManager = this.SelectionViewModel.StyleManager.Clone();
-         //   mezzanineLayer.StyleManager.CacheTransform();
+            //Selection
+            this.SelectionViewModel.Transformer = transformer;
+            this.SelectionViewModel.DeliverBrushPoints(this.ViewModel.MezzanineLayer);
 
-            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(mezzanineLayer);
-            this.ViewModel.MezzanineLayer = mezzanineLayer;
-
-            this.SelectionViewModel.Transformer = transformer;//Selection
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
@@ -81,7 +79,13 @@ namespace Retouch_Photo2.Tools.Models
             this.ViewModel.MezzanineLayer.TransformManager.Source = transformer;
             this.ViewModel.MezzanineLayer.TransformManager.Destination = transformer;
 
-            this.SelectionViewModel.Transformer = transformer;//Selection
+            //DeliverBrushPoints
+            this.ViewModel.MezzanineLayer.StyleManager.FillBrush.DeliverBrushPoints(transformer);
+            this.ViewModel.MezzanineLayer.StyleManager.StrokeBrush.DeliverBrushPoints(transformer);
+
+            //Selection
+            this.SelectionViewModel.Transformer = transformer;
+            this.SelectionViewModel.DeliverBrushPoints(this.ViewModel.MezzanineLayer);
 
             this.ViewModel.Invalidate();//Invalidate
         }
