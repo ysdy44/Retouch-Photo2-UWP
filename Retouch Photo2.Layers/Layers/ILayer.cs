@@ -2,9 +2,11 @@
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
+using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Effects;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Xml.Linq;
 using Windows.UI;
 using Windows.UI.Xaml;
 
@@ -41,13 +43,15 @@ namespace Retouch_Photo2.Layers
         EffectManager EffectManager { get; set; }
         /// <summary> Gets or sets ILayer's adjustment manager. </summary>
         AdjustmentManager AdjustmentManager { get; set; }
+        /// <summary> Gets or sets ILayer's style manager. </summary>
+        StyleManager StyleManager { get; set; }
+
+
+        /// <summary> Gets or sets ILayer's children layers. </summary>
+        IList<ILayer> Children { get; set; }
+        /// <summary> Gets or sets ILayer's parent layer. </summary>
+        ILayer Parents { get; set; }
         
-
-        /// <summary> Gets or sets ILayer's fill-color. </summary>
-        Color? FillColor { get; set; }
-        /// <summary> Gets or sets ILayer's stroke-color. </summary>
-        Color? StrokeColor { get; set; }
-
 
         /// <summary>
         /// Get ILayer own copy.
@@ -56,35 +60,11 @@ namespace Retouch_Photo2.Layers
         /// <returns> The cloned ILayer. </returns>
         ILayer Clone(ICanvasResourceCreator resourceCreator);
 
-
-        #endregion
-
-
-        #region Children
-
-
-        /// <summary> Gets or sets ILayer's children layers. </summary>
-        IList<ILayer> Children { get; set; }
-        /// <summary> Gets or sets ILayer's parent layer. </summary>
-        ILayer Parents { get; set; }
-
-
         /// <summary>
-        /// Add a layer into children.
+        ///  Saves the entire ILayer to a XElement with the specified ILayer name.
         /// </summary>
-        /// <param name="layer"> The source layer. </param>
-        void Add(ILayer layer);
-        /// <summary>
-        /// Add some layers into children.
-        /// </summary>
-        /// <param name="layers"> The source layers. </param>
-        void AddRange(IList<ILayer> layers);
-
-        /// <summary>
-        /// As a child, to disengage with your parents.
-        /// </summary>
-        /// <param name="layerCollection"> The layer collection. </param>
-        void Disengage(LayerCollection layerCollection);
+        /// <returns> The saved XElement. </returns>
+        XElement Save();
 
 
         #endregion

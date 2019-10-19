@@ -3,25 +3,29 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Numerics;
+using System.Xml.Linq;
 
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
     /// <see cref="IGeometryLayer"/>'s GeometryRoundRectLayer .
     /// </summary>
-    public class GeometryRoundRectLayer : IGeometryLayer
+    public class GeometryRoundRectLayer : IGeometryLayer, ILayer
     {
+        //@Content       
+        public string Type => "GeometryRoundRectLayer";
+
         public float Corner = 0.25f;
 
         //@Construct
         public GeometryRoundRectLayer()
         {
-            base.Control.Icon = new GeometryRoundRectIcon();
-            base.Control.Text = "RoundRect";
+            base.Control = new LayerControl(this)
+            {
+                Icon = new GeometryRoundRectIcon(),
+                Text = "RoundRect",
+            };
         }
-
-        //@Override       
-        public override string Type => "RoundRect";
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -103,16 +107,23 @@ namespace Retouch_Photo2.Layers.Models
             return CanvasGeometry.CreatePath(pathBuilder);
         }
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryRoundRectLayer RoundRectLayer = new GeometryRoundRectLayer
-            {
-                FillBrush = base.FillBrush,
-                StrokeBrush = base.StrokeBrush,
-            };
+            GeometryRoundRectLayer RoundRectLayer = new GeometryRoundRectLayer();
 
             LayerBase.CopyWith(resourceCreator, RoundRectLayer, this);
             return RoundRectLayer;
         }
+
+        public XElement Save()
+        {
+            XElement element = new XElement("GeometryRoundRectLayer");
+            
+            element.Add(new XElement("Corner", this.Corner));
+
+            LayerBase.SaveWidth(element, this);
+            return element;
+        }
+
     }
 }

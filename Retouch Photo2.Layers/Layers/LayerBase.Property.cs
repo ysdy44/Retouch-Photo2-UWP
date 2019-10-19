@@ -2,8 +2,10 @@
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
+using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Effects;
 using Retouch_Photo2.Layers.Models;
+using System.Collections.Generic;
 using System.Numerics;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -13,11 +15,10 @@ namespace Retouch_Photo2.Layers
     /// <summary>
     /// Represents a layer that can have render properties. Provides a rendering method.
     /// </summary>
-    public abstract partial class LayerBase : ILayer
+    public abstract partial class LayerBase
     {
 
         //@Abstract
-        public abstract string Type { get; }
         public string Name { get; set; } = string.Empty;
         public float Opacity { get; set; } = 1.0f;
         public BlendType BlendType { get; set; } = BlendType.None;
@@ -29,12 +30,27 @@ namespace Retouch_Photo2.Layers
         public TransformManager TransformManager { get; set; } = new TransformManager();
         public EffectManager EffectManager { get; set; } = new EffectManager();
         public AdjustmentManager AdjustmentManager { get; set; } = new AdjustmentManager();
-
-
-        //@Virtual
-        public virtual Color? FillColor { get; set; } = null;
-        public virtual Color? StrokeColor { get; set; } = null;
+        public StyleManager StyleManager { get; set; } = new StyleManager();
         
+        private ILayer parents;
+        public ILayer Parents
+        {
+            get => this.parents;
+            set
+            {
+                int depth = (value == null) ? 0 : value.Control.Depth + 1; //+1
+
+                this.Control.Depth = depth;
+                foreach (ILayer child in this.Children)
+                {
+                    child.Control.Depth = depth + 1; //+1
+                }
+
+                this.parents = value;
+            }
+        }
+        public IList<ILayer> Children { get; set; } = new List<ILayer>();
+
 
         //@Virtual
         public virtual void CacheTransform()
@@ -51,29 +67,31 @@ namespace Retouch_Photo2.Layers
             foreach (ILayer child in this.Children)
             {
                 child.TransformManager.CacheTransform();
+                child.StyleManager.CacheTransform();
             }
             this.TransformManager.CacheTransform();
+            this.StyleManager.CacheTransform();
         }
         public virtual void TransformMultiplies(Matrix3x2 matrix)
         {
             foreach (ILayer child in this.Children)
             {
                 child.TransformManager.TransformMultiplies(matrix);
+                child.StyleManager.TransformMultiplies(matrix);
             }
             this.TransformManager.TransformMultiplies(matrix);
+            this.StyleManager.TransformMultiplies(matrix);
         }
         public virtual void TransformAdd(Vector2 vector)
         {
             foreach (ILayer child in this.Children)
             {
                 child.TransformManager.TransformAdd(vector);
+                child.StyleManager.TransformAdd(vector);
             }
             this.TransformManager.TransformAdd(vector);
+            this.StyleManager.TransformAdd(vector);
         }
-
-
-        //@Abstract
-        public abstract ILayer Clone(ICanvasResourceCreator resourceCreator);
 
 
         //@Static

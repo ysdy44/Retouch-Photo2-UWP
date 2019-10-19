@@ -21,6 +21,24 @@ using Windows.UI;
 using System.Linq;
 using Windows.Foundation;
 using Retouch_Photo2.Tools.Elements;
+using System;
+using System.Linq;
+using System.Xml.Linq;
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
+using Windows.System;
+using Windows.Storage;
+using Windows.Storage.Streams;
+using Microsoft.Toolkit.Uwp.UI.Animations;
+using Windows.ApplicationModel.DataTransfer;
+using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
+using System.Numerics;
+using System.Threading.Tasks;
+using Microsoft.Toolkit.Uwp.UI.Controls;
 
 namespace Retouch_Photo2
 {
@@ -50,7 +68,37 @@ namespace Retouch_Photo2
 
             //Appbar
             this.DrawLayout.BackButton.Tapped += (s, e) => this.Frame.GoBack();
-            this.SaveButton.Tapped += (s, e) => this.Frame.GoBack();
+            this.SaveButton.Tapped += (s, e) =>
+            {
+                //1、创建一个XDocument对象  
+                XDocument xDoc = new XDocument
+                {
+                    Declaration = new XDeclaration("1.0", "utf-8", "no"),//设置xml的文档定义  
+                };
+
+                //2、创建一个根部
+                XElement root = new XElement("Root");
+                xDoc.Add(root);
+
+                //3、宽高
+                root.Add(new XElement("Width", this.ViewModel.CanvasTransformer.Width));
+                root.Add(new XElement("Height", this.ViewModel.CanvasTransformer.Height));
+
+                //4、图层
+                XElement layers = new XElement("Layers");
+                root.Add(layers);
+                {
+                    foreach (ILayer layer in this.ViewModel.Layers.RootLayers)
+                    {
+                        XElement element = layer.Save();
+                        layers.Add(element);
+                    }
+                }
+                
+                //5、保存
+                string path = ApplicationData.Current.LocalFolder.Path + "/" + "Unsdasd" + ".photo2"; //将XML文件加载进来
+                xDoc.Save(path);
+            };
 
             this.ThemeButton.Loaded += (s, e) =>
             {

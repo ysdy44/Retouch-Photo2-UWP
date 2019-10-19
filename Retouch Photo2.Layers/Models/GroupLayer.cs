@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Layers.Icons;
 using System.Numerics;
+using System.Xml.Linq;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers.Models
@@ -9,18 +10,21 @@ namespace Retouch_Photo2.Layers.Models
     /// <summary>
     /// <see cref="LayerBase"/>'s GroupLayer .
     /// </summary>
-    public class GroupLayer : LayerBase
+    public class GroupLayer : LayerBase, ILayer
     {
+        //@Content
+        public string Type => "GroupLayer";
 
         //@Construct
-        public GroupLayer() 
+        public GroupLayer()
         {
-            base.Control.Icon = new GroupIcon();
-            base.Control.Text = "Group";
+            base.Control = new LayerControl(this)
+            {
+                Icon = new GroupIcon(),
+                Text = "Group",
+            };
         }
 
-        //@Override
-        public override string Type => "Group";
 
         public override Transformer GetActualDestinationWithRefactoringTransformer
         {
@@ -39,7 +43,7 @@ namespace Retouch_Photo2.Layers.Models
             }
         }
         
-        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
+        public ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         { 
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
@@ -56,12 +60,21 @@ namespace Retouch_Photo2.Layers.Models
             }
             return command;
         }
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+
+        public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GroupLayer groupLayer = new GroupLayer();
 
             LayerBase.CopyWith(resourceCreator, groupLayer, this);
             return groupLayer;
+        }
+
+        public XElement Save()
+        {
+            XElement element = new XElement("GroupLayer");
+
+            LayerBase.SaveWidth(element, this);
+            return element;
         }
 
     }

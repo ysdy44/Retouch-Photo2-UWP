@@ -3,6 +3,7 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Numerics;
+using System.Xml.Linq;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -15,10 +16,13 @@ namespace Retouch_Photo2.Layers.Models
     /// <summary>
     /// <see cref="IGeometryLayer"/>'s ArrowLayer .
     /// </summary>
-    public class GeometryArrowLayer : IGeometryLayer
+    public class GeometryArrowLayer : IGeometryLayer, ILayer
     {
+        //@Content       
+        public string Type => "GeometryArrowLayer";
+
         public bool IsAbsolute = false;
-        public float WIdth = 10;
+        public float Width = 10;
         public float Value = 0.5f;
 
         public GeometryArrowTailType LeftTail = GeometryArrowTailType.None;
@@ -27,12 +31,12 @@ namespace Retouch_Photo2.Layers.Models
         //@Construct
         public GeometryArrowLayer()
         {
-            base.Control.Icon = new GeometryArrowIcon();
-            base.Control.Text = "Arrow";
+            base.Control = new LayerControl(this)
+            {
+                Icon = new GeometryArrowIcon(),
+                Text = "Arrow",
+            };
         }
-
-        //@Override       
-        public override string Type => "Arrow";
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -57,7 +61,7 @@ namespace Retouch_Photo2.Layers.Models
             float verticalLength = vertical.Length();
 
 
-            float width = this.IsAbsolute ? this.WIdth : this.Value * verticalLength;
+            float width = this.IsAbsolute ? this.Width : this.Value * verticalLength;
             Vector2 widthVector = vertical * (width / verticalLength) / 2;
             Vector2 widthVectorTransform = Vector2.Transform(widthVector + base.TransformManager.Destination.Center, canvasToVirtualMatrix) - center;
 
@@ -147,16 +151,25 @@ namespace Retouch_Photo2.Layers.Models
             return CanvasGeometry.CreatePolygon(resourceCreator, points);
         }
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryArrowLayer ArrowLayer = new GeometryArrowLayer
-            {
-                FillBrush = base.FillBrush,
-                StrokeBrush = base.StrokeBrush,
-            };
+            GeometryArrowLayer ArrowLayer = new GeometryArrowLayer();
 
             LayerBase.CopyWith(resourceCreator, ArrowLayer, this);
             return ArrowLayer;
         }
+
+        public XElement Save()
+        {
+            XElement element = new XElement("GeometryArrowLayer");
+            
+            element.Add(new XElement("IsAbsolute", this.IsAbsolute));
+            element.Add(new XElement("Width", this.Width));
+            element.Add(new XElement("Value", this.Value));
+
+            LayerBase.SaveWidth(element, this);
+            return element;
+        }
+
     }
 }

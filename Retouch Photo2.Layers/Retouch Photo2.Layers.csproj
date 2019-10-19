@@ -136,6 +136,8 @@
     <Compile Include="IconsSecond\GeometryTriangleIcon.xaml.cs">
       <DependentUpon>GeometryTriangleIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LayerCollections\LayerCollection.Add_Disengage.cs" />
+    <Compile Include="Layers\LayerBase.XElement.cs" />
     <Compile Include="ModelsSecond\GeometryArrowLayer.cs" />
     <Compile Include="ModelsSecond\GeometryCapsuleLayer.cs" />
     <Compile Include="ModelsSecond\GeometryCogLayer.cs" />
@@ -191,7 +193,6 @@
     <Compile Include="LayerMode\LayerExtensions.cs" />
     <Compile Include="LayerMode\OverlayMode.cs" />
     <Compile Include="LayerMode\SelectMode.cs" />
-    <Compile Include="Layers\LayerBase.Children.cs" />
     <Compile Include="Layers\LayerBase.Control.cs" />
     <Compile Include="Layers\LayerBase.Render.cs" />
     <Compile Include="Layers\LayerBase.Property.cs" />

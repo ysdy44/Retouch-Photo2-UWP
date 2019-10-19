@@ -3,25 +3,29 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Numerics;
+using System.Xml.Linq;
 
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
     /// <see cref="IGeometryLayer"/>'s GeometryPentagonLayer .
     /// </summary>
-    public class GeometryPentagonLayer : IGeometryLayer
+    public class GeometryPentagonLayer : IGeometryLayer, ILayer
     {
+        //@Content       
+        public string Type => "GeometryPentagonLayer";
+
         public int Points = 5;
 
         //@Construct
         public GeometryPentagonLayer()
         {
-            base.Control.Icon = new GeometryPentagonIcon();
-            base.Control.Text = "Pentagon";
+            base.Control = new LayerControl(this)
+            {
+                Icon = new GeometryPentagonIcon(),
+                Text = "Pentagon",
+            };
         }
-
-        //@Override       
-        public override string Type => "Pentagon";
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -45,18 +49,26 @@ namespace Retouch_Photo2.Layers.Models
             return CanvasGeometry.CreatePolygon(resourceCreator, points);
         }
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryPentagonLayer PentagonLayer = new GeometryPentagonLayer
             {
-                FillBrush = base.FillBrush,
-                StrokeBrush = base.StrokeBrush,
-
                 Points = this.Points,
             };
 
             LayerBase.CopyWith(resourceCreator, PentagonLayer, this);
             return PentagonLayer;
         }
+
+        public XElement Save()
+        {
+            XElement element = new XElement("GeometryPentagonLayer");
+
+            element.Add(new XElement("Points", this.Points));
+
+            LayerBase.SaveWidth(element, this);
+            return element;
+        }
+
     }
 }

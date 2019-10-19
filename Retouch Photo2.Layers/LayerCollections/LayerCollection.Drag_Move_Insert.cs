@@ -35,15 +35,15 @@ namespace Retouch_Photo2.Layers
                                 this.Move(destination, source, isBottomInsert: false);
                             else
                             {
-                                source.Disengage(this);
+                                LayerCollection.Disengage(source, this);
                                 this.Insert(destination, source, isBottomInsert: false);
                             }
                         }
                         break;
                     case OverlayMode.Center:
                         {
-                            source.Disengage(this);
-                            destination.Add(source);
+                            LayerCollection.Disengage(source, this);
+                            LayerCollection.Add(destination, source);
                         }
                         break;
                     case OverlayMode.Bottom:
@@ -52,7 +52,7 @@ namespace Retouch_Photo2.Layers
                                 this.Move(destination, source, isBottomInsert: true);
                             else
                             {
-                                source.Disengage(this);
+                                LayerCollection.Disengage(source, this);
                                 this.Insert(destination, source, isBottomInsert: true);
                             }
                             break;
@@ -64,7 +64,7 @@ namespace Retouch_Photo2.Layers
                 IList<ILayer> selectedLayers = this.GetAllSelectedLayers();
                 foreach (ILayer child in selectedLayers)
                 {
-                    child.Disengage(this);
+                    LayerCollection.Disengage(child, this);
                 }
 
                 switch (destinationOverlayMode)
@@ -73,7 +73,7 @@ namespace Retouch_Photo2.Layers
                         this.InsertRange(destination, selectedLayers, isBottomInsert: false);
                         break;
                     case OverlayMode.Center:
-                        destination.AddRange(selectedLayers);
+                        LayerCollection.AddRange(destination, selectedLayers);
                         break;
                     case OverlayMode.Bottom:
                         this.InsertRange(destination, selectedLayers, isBottomInsert: true);

@@ -77,10 +77,7 @@ namespace Retouch_Photo2.Tools.Elements
             this.SelectionViewModel.StrokeWidth = strokeWidth;
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is IGeometryLayer geometryLayer)
-                {
-                    geometryLayer.StrokeWidth = strokeWidth;
-                }
+                layer.StyleManager.StrokeWidth = strokeWidth;
             });
 
             this.ViewModel.Invalidate();//Invalidate

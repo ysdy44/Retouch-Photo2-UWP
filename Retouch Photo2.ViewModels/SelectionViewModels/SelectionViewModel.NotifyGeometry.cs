@@ -18,16 +18,51 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Sets all IGeometryLayer. </summary>     
         private void SetIGeometryLayer(ILayer layer)
         {
-            if (layer is IGeometryLayer geometryLayer)
+            if (layer is GeometryRoundRectLayer roundRectLayer)
             {
-
-                if (layer is GeometryRoundRectLayer  roundRectLayer)
-                {
-                    this.GeometryRoundRectCorner = roundRectLayer.Corner;
-                }
+                this.GeometryRoundRectCorner = roundRectLayer.Corner;
+            }
+            if (layer is GeometryTriangleLayer triangleLayer)
+            {
+                this.GeometryTriangleCenter = triangleLayer.Center;
+            }
+            if (layer is GeometryDiamondLayer diamondLayer)
+            {
+                this.GeometryDiamondMid = diamondLayer.Mid;
+            }
+            if (layer is GeometryPentagonLayer pentagonLayer)
+            {
+                this.GeometryPentagonPoints = pentagonLayer.Points;
+            }
+            if (layer is GeometryStarLayer starLayer)
+            {
+                this.GeometryStarPoints = starLayer.Points;
+                this.GeometryStarInnerRadius = starLayer.InnerRadius;
+            }
+            if (layer is GeometryPieLayer pieLayer)
+            {
+                this.GeometryPieInnerRadius = pieLayer.InnerRadius;
+                this.GeometryPieSweepAngle = pieLayer.SweepAngle;
+            }
+            if (layer is GeometryCogLayer cogLayer)
+            {
+                this.GeometryCogCount = cogLayer.Count;
+                this.GeometryCogInnerRadius = cogLayer.InnerRadius;
+                this.GeometryCogTooth = cogLayer.Tooth;
+                this.GeometryCogNotch = cogLayer.Notch;
+            }
+            if (layer is GeometryArrowLayer arrowLayer)
+            {
+                this.GeometryArrowValue = arrowLayer.Value;
+                this.GeometryArrowLeftTail = arrowLayer.LeftTail;
+                this.GeometryArrowRightTail = arrowLayer.RightTail;
+            }
+            if (layer is GeometryHeartLayer heartLayer)
+            {
+                this.GeometryHeartSpread = heartLayer.Spread;
             }
         }
-        
+
 
         /// <summary> GeometryRoundRectLayer's corner. </summary>     
         public float GeometryRoundRectCorner

@@ -3,74 +3,78 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Numerics;
+using System.Xml.Linq;
 
 namespace Retouch_Photo2.Layers.Models
 {
+    internal static class _heartUtil
+    {
+        public static Vector2 _topSpread(float spread)
+        {
+            //Rang
+            //   x: 0~1
+            //   y: 1.0~-0.8
+            //  y=1-1.8x
+            float topSpread = 1f - spread * 1.8f;
+            return new Vector2(0, topSpread);
+        }
+
+        public static Vector2 _bottom = new Vector2(0, 1);
+
+        public static Vector2 _leftBottom = new Vector2(-0.84f, 0.178f);
+        public static Vector2 _leftBottom1 = _leftBottom + new Vector2(-0.2f, -0.2f);
+
+        public static Vector2 _leftTop = new Vector2(-0.84f, -0.6f);
+        public static Vector2 _leftTop1 = _leftTop + new Vector2(0.2f, -0.2f);
+        public static Vector2 _leftTop2 = _leftTop + new Vector2(-0.2f, 0.2f);
+
+        public static Vector2 _top1 = new Vector2(0.2f, -0.8f);
+        public static Vector2 _top2 = new Vector2(-0.2f, -0.8f);
+
+        public static Vector2 _rightTop = new Vector2(0.84f, -0.6f);
+        public static Vector2 _rightTop1 = _rightTop + new Vector2(0.2f, 0.2f);
+        public static Vector2 _rightTop2 = _rightTop + new Vector2(-0.2f, -0.2f);
+
+        public static Vector2 _rightBottom = new Vector2(0.84f, 0.178f);
+        public static Vector2 _rightBottom2 = _rightBottom + new Vector2(0.2f, -0.2f);
+    }
     /// <summary>
     /// <see cref="IGeometryLayer"/>'s GeometryHeartLayer .
     /// </summary>
-    public class GeometryHeartLayer : IGeometryLayer
+    public class GeometryHeartLayer : IGeometryLayer, ILayer
     {
-        //@Static
-
-        static Vector2 _bottom = new Vector2(0, 1);
-
-        static Vector2 _leftBottom = new Vector2(-0.84f, 0.178f);
-        static Vector2 _leftBottom1 = _leftBottom + new Vector2(-0.2f, -0.2f);
-
-        static Vector2 _leftTop = new Vector2(-0.84f, -0.6f);
-        static Vector2 _leftTop1 = _leftTop + new Vector2(0.2f, -0.2f);
-        static Vector2 _leftTop2 = _leftTop + new Vector2(-0.2f, 0.2f);
-
-        static Vector2 _top1 = new Vector2(0.2f, -0.8f);
-        static Vector2 _top2 = new Vector2(-0.2f, -0.8f);
-
-        static Vector2 _rightTop = new Vector2(0.84f, -0.6f);
-        static Vector2 _rightTop1 = _rightTop + new Vector2(0.2f, 0.2f);
-        static Vector2 _rightTop2 = _rightTop + new Vector2(-0.2f, -0.2f);
-
-        static Vector2 _rightBottom = new Vector2(0.84f, 0.178f);
-        static Vector2 _rightBottom2 = _rightBottom + new Vector2(0.2f, -0.2f);
-
+        //@Content       
+        public string Type => "GeometryHeartLayer";
 
         public float Spread = 0.8f;
 
         //@Construct
         public GeometryHeartLayer()
         {
-            base.Control.Icon = new GeometryHeartIcon();
-            base.Control.Text = "Heart";
+            base.Control = new LayerControl(this)
+            {
+                Icon = new GeometryHeartIcon(),
+                Text = "Heart",
+            };
         }
-
-        //@Override       
-        public override string Type => "Heart";
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
             Matrix3x2 oneMatrix = Transformer.FindHomography(GeometryUtil.OneTransformer, base.TransformManager.Destination);
             Matrix3x2 matrix = oneMatrix * canvasToVirtualMatrix;
-
-
-            //Rang
-            //   x: 0~1
-            //   y: 1.0~-0.8
-            //  y=1-1.8x
-            float spread = 1f - this.Spread * 1.8f;
-            Vector2 topSpread = new Vector2(0, spread);
-
-
+            
             //Path
             CanvasPathBuilder pathBuilder = new CanvasPathBuilder(resourceCreator);
-            pathBuilder.BeginFigure(_bottom);
+            pathBuilder.BeginFigure(_heartUtil._bottom);
             {
-                pathBuilder.AddLine(_leftBottom);
+                pathBuilder.AddLine(_heartUtil._leftBottom);
 
-                pathBuilder.AddCubicBezier(GeometryHeartLayer._leftBottom1, GeometryHeartLayer._leftTop2, GeometryHeartLayer._leftTop);
+                pathBuilder.AddCubicBezier(_heartUtil._leftBottom1, _heartUtil._leftTop2, _heartUtil._leftTop);
 
-                pathBuilder.AddCubicBezier(GeometryHeartLayer._leftTop1, GeometryHeartLayer._top2, topSpread);
-                pathBuilder.AddCubicBezier(GeometryHeartLayer._top1, GeometryHeartLayer._rightTop2, GeometryHeartLayer._rightTop);
+                pathBuilder.AddCubicBezier(_heartUtil._leftTop1, _heartUtil._top2, _heartUtil._topSpread(this.Spread));
+                pathBuilder.AddCubicBezier(_heartUtil._top1, _heartUtil._rightTop2, _heartUtil._rightTop);
 
-                pathBuilder.AddCubicBezier(GeometryHeartLayer._rightTop1, GeometryHeartLayer._rightBottom2, GeometryHeartLayer._rightBottom);
+                pathBuilder.AddCubicBezier(_heartUtil._rightTop1, _heartUtil._rightBottom2, _heartUtil._rightBottom);
             }
 
             pathBuilder.EndFigure(CanvasFigureLoop.Closed);
@@ -79,16 +83,23 @@ namespace Retouch_Photo2.Layers.Models
             return CanvasGeometry.CreatePath(pathBuilder).Transform(matrix);
         }
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryHeartLayer HeartLayer = new GeometryHeartLayer
-            {
-                FillBrush = base.FillBrush,
-                StrokeBrush = base.StrokeBrush,
-            };
+            GeometryHeartLayer HeartLayer = new GeometryHeartLayer();
 
             LayerBase.CopyWith(resourceCreator, HeartLayer, this);
             return HeartLayer;
         }
+
+        public XElement Save()
+        {
+            XElement element = new XElement("GeometryHeartLayer");
+            
+            element.Add(new XElement("Spread", this.Spread));
+
+            LayerBase.SaveWidth(element, this);
+            return element;
+        }
+
     }
 }

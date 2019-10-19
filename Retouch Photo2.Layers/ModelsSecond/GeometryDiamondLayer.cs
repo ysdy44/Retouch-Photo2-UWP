@@ -3,25 +3,29 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Numerics;
+using System.Xml.Linq;
 
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
     /// <see cref="IGeometryLayer"/>'s GeometryDiamondLayer .
     /// </summary>
-    public class GeometryDiamondLayer : IGeometryLayer
+    public class GeometryDiamondLayer : IGeometryLayer, ILayer
     {
+        //@Content       
+        public string Type => "GeometryDiamondLayer";
+
         public float Mid = 0.5f;
 
         //@Construct
         public GeometryDiamondLayer()
         {
-            base.Control.Icon = new GeometryDiamondIcon();
-            base.Control.Text = "Diamond";
+            base.Control = new LayerControl(this)
+            {
+                Icon = new GeometryDiamondIcon(),
+                Text = "Diamond",
+            };
         }
-
-        //@Override       
-        public override string Type => "Diamond";
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -51,16 +55,23 @@ namespace Retouch_Photo2.Layers.Models
             return CanvasGeometry.CreatePolygon(resourceCreator, points);
         }
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryDiamondLayer DiamondLayer = new GeometryDiamondLayer
-            {
-                FillBrush = base.FillBrush,
-                StrokeBrush = base.StrokeBrush,
-            };
+            GeometryDiamondLayer DiamondLayer = new GeometryDiamondLayer();
 
             LayerBase.CopyWith(resourceCreator, DiamondLayer, this);
             return DiamondLayer;
         }
+
+        public XElement Save()
+        {
+            XElement element = new XElement("GeometryDiamondLayer");
+            
+            element.Add(new XElement("Mid", this.Mid));
+
+            LayerBase.SaveWidth(element, this);
+            return element;
+        }
+
     }
 }

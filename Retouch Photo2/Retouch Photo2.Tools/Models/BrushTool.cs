@@ -89,18 +89,15 @@ namespace Retouch_Photo2.Tools.Models
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    if (layer is IGeometryLayer geometryLayer)
+                    //FillOrStroke
+                    switch (this.SelectionViewModel.FillOrStroke)
                     {
-                        //FillOrStroke
-                        switch (this.SelectionViewModel.FillOrStroke)
-                        {
-                            case FillOrStroke.Fill:
-                                geometryLayer.FillBrush.Points = brushPoints;
-                                break;
-                            case FillOrStroke.Stroke:
-                                geometryLayer.StrokeBrush.Points = brushPoints;
-                                break;
-                        }
+                        case FillOrStroke.Fill:
+                            layer.StyleManager.FillBrush.Points = brushPoints;
+                            break;
+                        case FillOrStroke.Stroke:
+                            layer.StyleManager.StrokeBrush.Points = brushPoints;
+                            break;
                     }
                 });
 
@@ -114,7 +111,7 @@ namespace Retouch_Photo2.Tools.Models
             if (this.Mode == ListViewSelectionMode.None) return;
 
             this.OperateMode = BrushOperateMode.None;
-
+            
             if (isSingleStarted == false)
             {
                 //TransformerTool
@@ -135,11 +132,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void OnNavigatedTo()
-        {
-            FillOrStroke fillOrStroke = this.SelectionViewModel.FillOrStroke;
-            this._brushPage.SetFillOrStroke(fillOrStroke);
-        }
+        public void OnNavigatedTo() { }
         public void OnNavigatedFrom() { }
     }
 }

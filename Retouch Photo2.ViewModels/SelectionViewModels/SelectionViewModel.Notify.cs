@@ -203,33 +203,7 @@ namespace Retouch_Photo2.ViewModels
                 this.IsImageLayer = false;
             }
         }
-
-
-        /// <summary> Sets GeometryLayer. </summary>     
-        private void SetGeometryLayer(ILayer layer)
-        {
-            if (layer is IGeometryLayer geometryLayer)
-            {
-                this.FillColor = geometryLayer.FillBrush.Color;
-                this.StrokeColor = geometryLayer.StrokeBrush.Color;
-                this.StrokeWidth = geometryLayer.StrokeWidth;
-
-                switch (this.FillOrStroke)
-                {
-                    case FillOrStroke.Fill:
-                        this.SetBrush(geometryLayer.FillBrush);
-                        break;
-                    case FillOrStroke.Stroke:
-                        this.SetBrush(geometryLayer.StrokeBrush);
-                        break;
-                }
-            }
-            else
-            {
-                this.BrushType = BrushType.None;
-            }
-        }
-
+        
 
         /// <summary> Sets PenTool nodes mode. </summary>     
         public bool IsPenToolNodesMode

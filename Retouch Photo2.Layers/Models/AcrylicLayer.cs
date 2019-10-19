@@ -3,6 +3,7 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Layers.Icons;
 using System.Numerics;
+using System.Xml.Linq;
 using Windows.Foundation;
 using Windows.UI;
 
@@ -11,34 +12,26 @@ namespace Retouch_Photo2.Layers.Models
     /// <summary>
     /// <see cref="LayerBase"/>'s AcrylicLayer .
     /// </summary>
-    public class AcrylicLayer : LayerBase
+    public class AcrylicLayer : LayerBase, ILayer
     {
+        //@Content       
+        public string Type => "AcrylicLayer";
+
         public float TintOpacity = 0.5f;
         public Color TintColor = Color.FromArgb(255, 255, 255, 255);
         public float BlurAmount = 12.0f;
 
         //@Construct
-        public AcrylicLayer() 
+        public AcrylicLayer()
         {
-            base.Control.Icon = new AcrylicIcon();
-            base.Control.Text = "Acrylic";
-        }
-
-        //@Override
-        public override string Type => "Acrylic";
-        public override Color? FillColor
-        {
-            get => this.TintColor;
-            set
+            base.Control = new LayerControl(this)
             {
-                if (value is Color color)
-                {
-                    this.TintColor = color;
-                }
-            }
+                Icon = new AcrylicIcon(),
+                Text = "Acrylic",
+            };
         }
 
-        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
+        public ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         {
             Transformer transformer = base.TransformManager.Destination;
 
@@ -70,7 +63,7 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             AcrylicLayer acrylicLayer = new AcrylicLayer
             {
@@ -81,6 +74,18 @@ namespace Retouch_Photo2.Layers.Models
 
             LayerBase.CopyWith(resourceCreator, acrylicLayer, this);
             return acrylicLayer;
+        }
+        
+        public XElement Save()
+        {
+            XElement element = new XElement("AcrylicLayer");
+
+            element.Add(new XElement("TintOpacity", this.TintOpacity));
+            element.Add(new XElement("TintColor", this.TintColor));
+            element.Add(new XElement("BlurAmount", this.BlurAmount));
+
+            LayerBase.SaveWidth(element, this);
+            return element;
         }
     }
 }

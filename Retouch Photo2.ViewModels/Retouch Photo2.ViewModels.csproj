@@ -112,7 +112,6 @@
     <Compile Include="Photo.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SelectionViewModels\SelectionViewModel.NotifyColor.cs" />
     <Compile Include="SelectionViewModels\SelectionViewModel.cs" />
     <Compile Include="SelectionViewModels\SelectionViewModel.NotifyBrush.cs" />
     <Compile Include="SelectionViewModels\SelectionViewModel.Notify.cs" />

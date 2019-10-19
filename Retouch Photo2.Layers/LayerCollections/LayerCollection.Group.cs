@@ -94,7 +94,7 @@ namespace Retouch_Photo2.Layers
                 child.SelectMode = SelectMode.None;
                 child.SelectMode = SelectMode.ParentsSelected;
 
-                child.Disengage(this);
+                LayerCollection.Disengage(child, this);
                 child.Parents = groupLayer;
 
                 groupLayer.Children.Add(child);

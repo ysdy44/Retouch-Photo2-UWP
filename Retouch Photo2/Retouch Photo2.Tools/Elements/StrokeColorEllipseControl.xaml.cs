@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.ViewModels;
+﻿using Retouch_Photo2.Brushs;
+using Retouch_Photo2.ViewModels;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Elements
@@ -29,7 +30,8 @@ namespace Retouch_Photo2.Tools.Elements
                 this.SelectionViewModel.StrokeColor = value;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.StrokeColor = value;
+                    layer.StyleManager.StrokeBrush.Type = BrushType.Color;
+                    layer.StyleManager.StrokeBrush.Color = value;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate

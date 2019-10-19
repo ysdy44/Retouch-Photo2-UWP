@@ -282,10 +282,8 @@
     <Compile Include="Retouch Photo2.Tools\ModelsSecond\GeometryArrowTool.cs" />
     <Compile Include="Retouch Photo2.Tools\ModelsSecond\GeometryCapsuleTool.cs" />
     <Compile Include="Retouch Photo2.Tools\ModelsSecond\GeometryHeartTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\IGeometryTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\TransparencyTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\CropTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Pages\BrushPage.xaml.Public.cs" />
     <Compile Include="Retouch Photo2.Tools\Pages\BrushPage.xaml.BrushType.cs" />
     <Compile Include="Retouch Photo2.Tools\Pages\CropPage.xaml.cs">
       <DependentUpon>CropPage.xaml</DependentUpon>

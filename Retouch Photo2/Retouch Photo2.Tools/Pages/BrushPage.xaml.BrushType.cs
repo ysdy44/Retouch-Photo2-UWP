@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using HSVColorPickers;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Models;
@@ -19,22 +20,19 @@ namespace Retouch_Photo2.Tools.Pages
             this.SelectionViewModel.BrushType = BrushType.None;
 
             //Selection
-            this.SelectionViewModel.SetValue(((layer) =>
+            this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is IGeometryLayer geometryLayer)
+                //FillOrStroke
+                switch (this.SelectionViewModel.FillOrStroke)
                 {
-                    //FillOrStroke
-                    switch (this.SelectionViewModel.FillOrStroke)
-                    {
-                        case FillOrStroke.Fill:
-                            geometryLayer.FillBrush.Type = BrushType.None;
-                            break;
-                        case FillOrStroke.Stroke:
-                            geometryLayer.StrokeBrush.Type = BrushType.None;
-                            break;
-                    }
+                    case FillOrStroke.Fill:
+                        layer.StyleManager.FillBrush.Type = BrushType.None;
+                        break;
+                    case FillOrStroke.Stroke:
+                        layer.StyleManager.StrokeBrush.Type = BrushType.None;
+                        break;
                 }
-            }));
+            });
 
             this.ViewModel.Invalidate();//Invalidate
         }
@@ -56,24 +54,21 @@ namespace Retouch_Photo2.Tools.Pages
             }
 
             //Selection
-            this.SelectionViewModel.SetValue(((layer) =>
+            this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is IGeometryLayer geometryLayer)
+                //FillOrStroke
+                switch (this.SelectionViewModel.FillOrStroke)
                 {
-                    //FillOrStroke
-                    switch (this.SelectionViewModel.FillOrStroke)
-                    {
-                        case FillOrStroke.Fill:
-                            geometryLayer.FillBrush.Type = BrushType.Color;
-                            geometryLayer.FillBrush.Color = this.SelectionViewModel.FillColor;
-                            break;
-                        case FillOrStroke.Stroke:
-                            geometryLayer.StrokeBrush.Type = BrushType.Color;
-                            geometryLayer.StrokeBrush.Color = this.SelectionViewModel.StrokeColor;
-                            break;
-                    }
+                    case FillOrStroke.Fill:
+                        layer.StyleManager.FillBrush.Type = BrushType.Color;
+                        layer.StyleManager.FillBrush.Color = this.SelectionViewModel.FillColor;
+                        break;
+                    case FillOrStroke.Stroke:
+                        layer.StyleManager.StrokeBrush.Type = BrushType.Color;
+                        layer.StyleManager.StrokeBrush.Color = this.SelectionViewModel.StrokeColor;
+                        break;
                 }
-            }));
+            });
 
             this.ViewModel.Invalidate();//Invalidate
         }
@@ -134,6 +129,51 @@ namespace Retouch_Photo2.Tools.Pages
             this.SelectionViewModel.BrushType = BrushType.Image;
 
             this.ViewModel.Invalidate();//Invalidate
+        }
+
+
+
+        /// <summary>
+        /// To a gradient brush.
+        /// </summary>
+        /// <param name="brushPoints"> The brush-points </param>
+        public void Gradient(GradientBrushType gradientBrushType, BrushPoints brushPoints, bool isResetBrushArray)
+        {
+            //GradientBrushType
+            BrushType brushType = BrushType.LinearGradient;
+            switch (gradientBrushType)
+            {
+                case GradientBrushType.Linear: brushType = BrushType.LinearGradient; break;
+                case GradientBrushType.Radial: brushType = BrushType.RadialGradient; break;
+                case GradientBrushType.Elliptical: brushType = BrushType.EllipticalGradient; break;
+            }
+
+            //Brush
+            this.SelectionViewModel.BrushType = brushType;
+            if (isResetBrushArray) this.SelectionViewModel.BrushArray = GreyWhiteMeshHelpher.GetGradientStopArray();
+            this.SelectionViewModel.BrushPoints = brushPoints;
+
+            //Selection
+            this.SelectionViewModel.SetValue((layer) =>
+            {
+                //FillOrStroke
+                switch (this.SelectionViewModel.FillOrStroke)
+                {
+                    case FillOrStroke.Stroke:
+                        layer.StyleManager.StrokeBrush.Type = brushType;
+                        if (isResetBrushArray)
+                            layer.StyleManager.StrokeBrush.Array = GreyWhiteMeshHelpher.GetGradientStopArray();
+                        layer.StyleManager.StrokeBrush.Points = brushPoints;
+                        break;
+
+                    case FillOrStroke.Fill:
+                        layer.StyleManager.FillBrush.Type = brushType;
+                        if (isResetBrushArray)
+                            layer.StyleManager.FillBrush.Array = GreyWhiteMeshHelpher.GetGradientStopArray();
+                        layer.StyleManager.FillBrush.Points = brushPoints;
+                        break;
+                }
+            });
         }
 
     }

@@ -3,23 +3,27 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Numerics;
+using System.Xml.Linq;
 
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
     /// <see cref="IGeometryLayer"/>'s GeometryCapsuleLayer .
     /// </summary>
-    public class GeometryCapsuleLayer : IGeometryLayer
+    public class GeometryCapsuleLayer : IGeometryLayer, ILayer
     {
+        //@Content       
+        public string Type => "GeometryCapsuleLayer";
+
         //@Construct
         public GeometryCapsuleLayer()
         {
-            base.Control.Icon = new GeometryCapsuleIcon();
-            base.Control.Text = "Capsule";
+            base.Control = new LayerControl(this)
+            {
+                Icon = new GeometryCapsuleIcon(),
+                Text = "Capsule",
+            };
         }
-
-        //@Override       
-        public override string Type => "Capsule";
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -99,16 +103,21 @@ namespace Retouch_Photo2.Layers.Models
             }
         }
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryCapsuleLayer CapsuleLayer = new GeometryCapsuleLayer
-            {
-                FillBrush = base.FillBrush,
-                StrokeBrush = base.StrokeBrush,
-            };
+            GeometryCapsuleLayer CapsuleLayer = new GeometryCapsuleLayer();
 
             LayerBase.CopyWith(resourceCreator, CapsuleLayer, this);
             return CapsuleLayer;
         }
+
+        public XElement Save()
+        {
+            XElement element = new XElement("GeometryCapsuleLayer");
+            
+            LayerBase.SaveWidth(element, this);
+            return element;
+        }
+
     }
 }

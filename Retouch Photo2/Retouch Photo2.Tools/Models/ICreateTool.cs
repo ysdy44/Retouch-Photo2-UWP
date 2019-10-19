@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Tools.Models
         ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
         bool IsCenter => this.KeyboardViewModel.IsCenter;
         bool IsSquare => this.KeyboardViewModel.IsSquare;
-
+        
         //@Abstract
         /// <summary>
         /// Create a specific layer.
@@ -51,11 +51,16 @@ namespace Retouch_Photo2.Tools.Models
             );
 
             //Mezzanine
-            this.ViewModel.MezzanineLayer = this.CreateLayer(transformer);
-            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.ViewModel.MezzanineLayer);
+            ILayer mezzanineLayer = this.CreateLayer(transformer);
+            mezzanineLayer = this.CreateLayer(transformer);
+
+            mezzanineLayer.StyleManager = this.SelectionViewModel.StyleManager.Clone();
+         //   mezzanineLayer.StyleManager.CacheTransform();
+
+            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(mezzanineLayer);
+            this.ViewModel.MezzanineLayer = mezzanineLayer;
 
             this.SelectionViewModel.Transformer = transformer;//Selection
-
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)

@@ -14,13 +14,13 @@ namespace Retouch_Photo2.Tools
     /// <summary>
     /// <see cref="ITool"/>'s GeometryArrowTool.
     /// </summary>
-    public class GeometryArrowTool : IGeometryTool
+    public class GeometryArrowTool : ICreateTool
     {
         //@ViewModel
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Override
-        public override IGeometryLayer CreateGeometryLayer(Transformer transformer)
+        public override ILayer CreateLayer(Transformer transformer)
         {
             return new GeometryArrowLayer
             {

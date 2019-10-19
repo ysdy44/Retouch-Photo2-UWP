@@ -78,13 +78,6 @@ namespace Retouch_Photo2.Tools.Models
             {
                 SelectMode = SelectMode.Selected,
                 TransformManager = new TransformManager(transformer),
-
-                StrokeWidth = 1,
-                StrokeBrush = new Brush
-                {
-                    Type = BrushType.Color,
-                    Color = this.SelectionViewModel.FillColor,
-                },
             };
 
             //Selection

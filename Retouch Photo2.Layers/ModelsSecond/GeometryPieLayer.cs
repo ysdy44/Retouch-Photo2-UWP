@@ -3,27 +3,30 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Numerics;
+using System.Xml.Linq;
 
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
     /// <see cref="IGeometryLayer"/>'s GeometryPieLayer .
     /// </summary>
-    public partial class GeometryPieLayer : IGeometryLayer
+    public partial class GeometryPieLayer : IGeometryLayer, ILayer
     {
+        //@Content       
+        public string Type => "GeometryPieLayer";
+
         public float InnerRadius = 0.0f;
         public float SweepAngle = FanKit.Math.Pi / 2f;
 
         //@Construct
         public GeometryPieLayer()
         {
-            base.Control.Icon = new GeometryPieIcon();
-            base.Control.Text = "Pie";
+            base.Control = new LayerControl(this)
+            {
+                Icon = new GeometryPieIcon(),
+                Text = "Pie",
+            };
         }
-        public static float sadasdasd = FanKit.Math.Pi * 2f;
-
-        //@Override       
-        public override string Type => "Pie";
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -64,16 +67,24 @@ namespace Retouch_Photo2.Layers.Models
             }
         }
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryPieLayer PieLayer = new GeometryPieLayer
-            {
-                FillBrush = base.FillBrush,
-                StrokeBrush = base.StrokeBrush,
-            };
+            GeometryPieLayer PieLayer = new GeometryPieLayer();
 
             LayerBase.CopyWith(resourceCreator, PieLayer, this);
             return PieLayer;
-        }        
+        }
+
+        public XElement Save()
+        {
+            XElement element = new XElement("GeometryPieLayer");
+            
+            element.Add(new XElement("InnerRadius", this.InnerRadius));
+            element.Add(new XElement("SweepAngle", this.SweepAngle));
+
+            LayerBase.SaveWidth(element, this);
+            return element;
+        }
+
     }
 }

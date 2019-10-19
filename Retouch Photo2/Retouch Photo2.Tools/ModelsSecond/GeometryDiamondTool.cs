@@ -14,13 +14,13 @@ namespace Retouch_Photo2.Tools
     /// <summary>
     /// <see cref="ITool"/>'s GeometryDiamondTool.
     /// </summary>
-    public class GeometryDiamondTool : IGeometryTool
+    public class GeometryDiamondTool : ICreateTool
     {
         //@ViewModel
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Override
-        public override IGeometryLayer CreateGeometryLayer(Transformer transformer)
+        public override ILayer CreateLayer(Transformer transformer)
         {
             return new GeometryDiamondLayer
             {

@@ -13,10 +13,10 @@ namespace Retouch_Photo2.Tools
     /// <summary>
     /// <see cref="ITool"/>'s GeometryCapsuleTool.
     /// </summary>
-    public class GeometryCapsuleTool : IGeometryTool
+    public class GeometryCapsuleTool : ICreateTool
     {
         //@Override
-        public override IGeometryLayer CreateGeometryLayer(Transformer transformer)
+        public override ILayer CreateLayer(Transformer transformer)
         {
             return new GeometryCapsuleLayer();
         }

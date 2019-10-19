@@ -3,27 +3,30 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Numerics;
+using System.Xml.Linq;
 
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
     /// <see cref="IGeometryLayer"/>'s GeometryStarLayer .
     /// </summary>
-    public class GeometryStarLayer : IGeometryLayer
+    public class GeometryStarLayer : IGeometryLayer, ILayer
     {
-        //@Static
+        //@Content       
+        public string Type => "GeometryStarLayer";
+
         public int Points = 5;
         public float InnerRadius = 0.38f;
 
         //@Construct
         public GeometryStarLayer()
         {
-            base.Control.Icon = new GeometryStarIcon();
-            base.Control.Text = "Star";
+            base.Control = new LayerControl(this)
+            {
+                Icon = new GeometryStarIcon(),
+                Text = "Star",
+            };
         }
-
-        //@Override       
-        public override string Type => "Star";
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -52,13 +55,10 @@ namespace Retouch_Photo2.Layers.Models
             return CanvasGeometry.CreatePolygon(resourceCreator, points);
         }
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryStarLayer StarLayer = new GeometryStarLayer
             {
-                FillBrush = base.FillBrush,
-                StrokeBrush = base.StrokeBrush,
-
                 Points=this.Points,
                 InnerRadius= this.InnerRadius,
             };
@@ -66,5 +66,17 @@ namespace Retouch_Photo2.Layers.Models
             LayerBase.CopyWith(resourceCreator, StarLayer, this);
             return StarLayer;
         }
+
+        public XElement Save()
+        {
+            XElement element = new XElement("GeometryStarLayer");
+            
+            element.Add(new XElement("Points", this.Points));
+            element.Add(new XElement("InnerRadius", this.InnerRadius));
+
+            LayerBase.SaveWidth(element, this);
+            return element;
+        }
+
     }
 }

@@ -3,14 +3,18 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Numerics;
+using System.Xml.Linq;
 
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
     /// <see cref="IGeometryLayer"/>'s GeometryCogLayer .
     /// </summary>
-    public class GeometryCogLayer : IGeometryLayer
+    public class GeometryCogLayer : IGeometryLayer, ILayer
     {
+        //@Content       
+        public string Type => "GeometryCogLayer";
+
         public int Count = 8;
         public float InnerRadius = 0.7f;
         public float Tooth;
@@ -19,12 +23,12 @@ namespace Retouch_Photo2.Layers.Models
         //@Construct
         public GeometryCogLayer()
         {
-            base.Control.Icon = new GeometryCogIcon();
-            base.Control.Text = "Cog";
+            base.Control = new LayerControl(this)
+            {
+                Icon = new GeometryCogIcon(),
+                Text = "Cog",
+            };
         }
-
-        //@Override       
-        public override string Type => "Cog";
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -72,16 +76,26 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryCogLayer CogLayer = new GeometryCogLayer
-            {
-                FillBrush = base.FillBrush,
-                StrokeBrush = base.StrokeBrush,
-            };
+            GeometryCogLayer CogLayer = new GeometryCogLayer();
 
             LayerBase.CopyWith(resourceCreator, CogLayer, this);
             return CogLayer;
         }
+
+        public XElement Save()
+        {
+            XElement element = new XElement("GeometryCogLayer");
+            
+            element.Add(new XElement("Count", this.Count));
+            element.Add(new XElement("InnerRadius", this.InnerRadius));
+            element.Add(new XElement("Tooth", this.Tooth));
+            element.Add(new XElement("Notch", this.Notch));
+
+            LayerBase.SaveWidth(element, this);
+            return element;
+        }
+
     }
 }

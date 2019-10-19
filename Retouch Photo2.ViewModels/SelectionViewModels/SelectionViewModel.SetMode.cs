@@ -77,7 +77,6 @@ namespace Retouch_Photo2.ViewModels
             this.SetGroupLayer(null);
             this.SetAcrylicLayer(null);
             this.SetImageLayer(null);
-            this.SetGeometryLayer(null);
             this.SetCurveLayer(null);
 
             //////////////////////////
@@ -126,27 +125,11 @@ namespace Retouch_Photo2.ViewModels
             this.SetGroupLayer(layer);
             this.SetAcrylicLayer(layer);
             this.SetImageLayer(layer);
-            this.SetGeometryLayer(layer);
             this.SetCurveLayer(layer);
 
             //////////////////////////
 
             this.SetIGeometryLayer(layer);
-
-            //////////////////////////
-
-            if (layer.FillColor is Color color)
-            {
-                switch (this.FillOrStroke)
-                {
-                    case Brushs.FillOrStroke.Fill:
-                        this.FillColor = color;
-                        break;
-                    case Brushs.FillOrStroke.Stroke:
-                        this.StrokeColor = color;
-                        break;
-                }
-            }
         }
 
 
@@ -187,6 +170,7 @@ namespace Retouch_Photo2.ViewModels
             this.IsCrop = layers.Any(layer => (layer.TransformManager.IsCrop && (layer.TransformManager.DisabledRadian == false)));
             //this.EffectManager = layer.EffectManager;
             this.AdjustmentManager = null;
+            //this.SetStyleManager(null);
 
             //////////////////////////
 

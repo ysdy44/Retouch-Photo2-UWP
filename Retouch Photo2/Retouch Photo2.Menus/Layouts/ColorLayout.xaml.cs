@@ -57,10 +57,10 @@ namespace Retouch_Photo2.Menus.Layouts
                         switch (this.SelectionViewModel.FillOrStroke)
                         {
                             case FillOrStroke.Fill:
-                                layer.FillColor = value;
+                                layer.StyleManager.FillBrush.Color = value;
                                 break;
                             case FillOrStroke.Stroke:
-                                layer.StrokeColor = value;
+                                layer.StyleManager.StrokeBrush.Color = value;
                                 break;
                         }
                     });

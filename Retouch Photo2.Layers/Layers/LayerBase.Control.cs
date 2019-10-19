@@ -6,16 +6,11 @@ namespace Retouch_Photo2.Layers
     /// <summary>
     /// Represents a layer that can have render properties. Provides a rendering method.
     /// </summary>
-    public abstract partial class LayerBase : ILayer
+    public abstract partial class LayerBase 
     {
 
-        public ILayerControl Control { get; private set; }
+        public ILayerControl Control { get; set; }
 
-        //@Constructs
-        public LayerBase()
-        {
-            this.Control = new LayerControl(this);
-        }
 
         #region TagType
 

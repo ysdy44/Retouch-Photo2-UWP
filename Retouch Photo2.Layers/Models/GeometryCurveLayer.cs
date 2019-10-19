@@ -5,29 +5,32 @@ using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Xml.Linq;
 
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
     /// <see cref="IGeometryLayer"/>'s GeometryCurveLayer .
     /// </summary>
-    public class GeometryCurveLayer : IGeometryLayer
+    public class GeometryCurveLayer : IGeometryLayer, ILayer
     {
-        //@Override       
-        public override string Type => "Curve";
+        //@Content       
+        public string Type => "GeometryCurveLayer";
 
         public NodeCollection NodeCollection { get; private set; }
-
-
+        
         //@Construct
         /// <summary>
         /// Construct a curve layer.
         /// </summary>
         /// <param name="nodes"> The source nodes. </param>
-        public GeometryCurveLayer(IEnumerable<Node> nodes) 
+        public GeometryCurveLayer(IEnumerable<Node> nodes)
         {
-            base.Control.Icon = new GeometryCurveIcon();
-            base.Control.Text = "Curve";
+            base.Control = new LayerControl(this)
+            {
+                Icon = new GeometryCurveIcon(),
+                Text = "Curve",
+            };
 
             this.NodeCollection = new NodeCollection(nodes); 
         }
@@ -36,10 +39,13 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         /// <param name="left"> The first source vector. </param>
         /// <param name="right"> The second source vector. </param>
-        public GeometryCurveLayer(Vector2 left, Vector2 right) 
+        public GeometryCurveLayer(Vector2 left, Vector2 right)
         {
-            base.Control.Icon = new GeometryCurveIcon();
-            base.Control.Text = "Curve";
+            base.Control = new LayerControl(this)
+            {
+                Icon = new GeometryCurveIcon(),
+                Text = "Curve",
+            };
 
             this.NodeCollection = new NodeCollection(left, right);
         }
@@ -88,17 +94,25 @@ namespace Retouch_Photo2.Layers.Models
             return this.NodeCollection.CreateGeometry(resourceCreator).Transform(canvasToVirtualMatrix);
         }
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryCurveLayer curveLayer = new GeometryCurveLayer( this.NodeCollection)
             {
-                FillBrush = base.FillBrush,
-                StrokeBrush = base.StrokeBrush,
                 NodeCollection = new NodeCollection(from node in this.NodeCollection select node)
             };
 
             LayerBase.CopyWith(resourceCreator, curveLayer, this);
             return curveLayer;
+        }
+
+        public XElement Save()
+        {
+            XElement element = new XElement("GeometryCurveLayer");
+            
+            element.Add(new XElement("NodeCollection", this.NodeCollection));
+
+            LayerBase.SaveWidth(element, this);
+            return element;
         }
 
     }

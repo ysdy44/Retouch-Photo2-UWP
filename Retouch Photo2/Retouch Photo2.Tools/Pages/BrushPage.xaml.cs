@@ -40,8 +40,7 @@ namespace Retouch_Photo2.Tools.Pages
                 FillOrStroke fillOrStroke = (FillOrStroke)this.FillOrStrokeComboBox.SelectedIndex;
                 if (this.SelectionViewModel.FillOrStroke == fillOrStroke) return;
 
-                this.SelectionViewModel.FillOrStroke = fillOrStroke;
-                this.SetFillOrStroke(fillOrStroke);
+                this.SelectionViewModel.SetFillOrStroke(fillOrStroke);
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -159,10 +158,10 @@ namespace Retouch_Photo2.Tools.Pages
                         switch (this.SelectionViewModel.FillOrStroke)
                         {
                             case FillOrStroke.Fill:
-                                layer.FillColor = value;
+                                layer.StyleManager.FillBrush.Color = value;
                                 break;
                             case FillOrStroke.Stroke:
-                                layer.StrokeColor = value;
+                                layer.StyleManager.StrokeBrush.Color = value;
                                 break;
                         }
                     });
@@ -175,22 +174,19 @@ namespace Retouch_Photo2.Tools.Pages
                     //Selection
                     this.SelectionViewModel.BrushArray = (CanvasGradientStop[])array.Clone();
 
-                    this.SelectionViewModel.SetValue(((layer) =>
+                    this.SelectionViewModel.SetValue((layer) =>
                     {
-                        if (layer is IGeometryLayer geometryLayer)
+                        //FillOrStroke
+                        switch (this.SelectionViewModel.FillOrStroke)
                         {
-                            //FillOrStroke
-                            switch (this.SelectionViewModel.FillOrStroke)
-                            {
-                                case FillOrStroke.Fill:
-                                    geometryLayer.FillBrush.Array = (CanvasGradientStop[])array.Clone();
-                                    break;
-                                case FillOrStroke.Stroke:
-                                    geometryLayer.StrokeBrush.Array = (CanvasGradientStop[])array.Clone();
-                                    break;
-                            }
+                            case FillOrStroke.Fill:
+                                layer.StyleManager.FillBrush.Array = (CanvasGradientStop[])array.Clone();
+                                break;
+                            case FillOrStroke.Stroke:
+                                layer.StyleManager.StrokeBrush.Array = (CanvasGradientStop[])array.Clone();
+                                break;
                         }
-                    }));
+                    });
 
                     this.ViewModel.Invalidate();//Invalidate
                 };

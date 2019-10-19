@@ -13,10 +13,10 @@ namespace Retouch_Photo2.Tools
     /// <summary>
     /// <see cref="ITool"/>'s GeometryPentagonTool.
     /// </summary>
-    public class GeometryPentagonTool : IGeometryTool
+    public class GeometryPentagonTool : ICreateTool
     {
         //@Override
-        public override IGeometryLayer CreateGeometryLayer(Transformer transformer)
+        public override ILayer CreateLayer(Transformer transformer)
         {
             return new GeometryPentagonLayer();
         }

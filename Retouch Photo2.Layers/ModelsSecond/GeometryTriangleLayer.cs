@@ -3,25 +3,29 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Numerics;
+using System.Xml.Linq;
 
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
     /// <see cref="IGeometryLayer"/>'s GeometryTriangleLayer .
     /// </summary>
-    public class GeometryTriangleLayer : IGeometryLayer
+    public class GeometryTriangleLayer : IGeometryLayer, ILayer
     {
+        //@Content       
+        public string Type => "GeometryTriangleLayer";
+
         public float Center = 0.5f;
 
         //@Construct
         public GeometryTriangleLayer()
         {
-            base.Control.Icon = new GeometryTriangleIcon();
-            base.Control.Text = "Triangle";
+            base.Control = new LayerControl(this)
+            {
+                Icon = new GeometryTriangleIcon(),
+                Text = "Triangle",
+            };
         }
-
-        //@Override       
-        public override string Type => "Triangle";
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -46,18 +50,26 @@ namespace Retouch_Photo2.Layers.Models
             return CanvasGeometry.CreatePolygon(resourceCreator, points);
         }
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryTriangleLayer TriangleLayer = new GeometryTriangleLayer
             {
-                FillBrush = base.FillBrush,
-                StrokeBrush = base.StrokeBrush,
-
                 Center = this.Center,
             };
 
             LayerBase.CopyWith(resourceCreator, TriangleLayer, this);
             return TriangleLayer;
         }
+
+        public XElement Save()
+        {
+            XElement element = new XElement("GeometryTriangleLayer");
+
+            element.Add(new XElement("Center", this.Center));
+
+            LayerBase.SaveWidth(element, this);
+            return element;
+        }
+
     }
 }
