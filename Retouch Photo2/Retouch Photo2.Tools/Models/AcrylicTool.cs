@@ -29,8 +29,6 @@ namespace Retouch_Photo2.Tools.Models
                 {
                     DisabledRadian = true//DisabledRadian
                 },
-
-                TintColor = this.SelectionViewModel.FillColor,
             };
         }
 

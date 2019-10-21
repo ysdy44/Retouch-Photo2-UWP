@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo2.Tools;
+using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
 using System.Linq;
 using Windows.UI.Xaml;
@@ -17,43 +18,29 @@ namespace Retouch_Photo2.Controls
         
         //@VisualState
         bool _isLoaded;
-        ITool _vsTool;
-        ListViewSelectionMode _vsMode;
-        string _vsType;
-        public FrameworkElement VisualState
+        private IToolPage toolPage = new NonePage();
+        public IToolPage ToolPage 
         {
-            get
-            {
-                if (this._isLoaded == false) return null; 
-                if (this._vsTool == null) return null;
-
-                if (this._vsTool.Type == ToolType.Cursor)
-                {
-                    if (this._vsMode == ListViewSelectionMode.Single)
-                    {
-                        //Tool
-                        ToolType toolType = this.LayerToTool(this._vsType);
-                        ITool layerToTool = this.TipViewModel.Tools.FirstOrDefault(e => e != null && e.Type == toolType);
-                        if (layerToTool != null) return layerToTool.Page.Self;
-
-                        //Cursor
-                        ITool cursorTool = this.TipViewModel.Tools.FirstOrDefault();
-                        if (layerToTool == null) return null;
-                        return cursorTool.Page.Self;
-                    }
-                }
-
-                return this._vsTool.Page.Self;
-            }
+            get => this.toolPage ;
             set
             {
-                if (this.Content != value)
-                {
-                    this.Content = value;
-                }
+                if (value == null) return;
+
+                //The current page becomes the active page.
+                IToolPage oldToolPage = this.toolPage ;
+                oldToolPage.OnNavigatedFrom();
+
+                //The current page does not become an active page.
+                IToolPage newToolPage = value;
+                newToolPage.OnNavigatedTo();
+
+                this.Content = null;
+                this.Content = value.Self;
+                this.toolPage  = value;
             }
         }
-        
+
+
         #region DependencyProperty
 
 
@@ -67,11 +54,11 @@ namespace Retouch_Photo2.Controls
         public static readonly DependencyProperty ShadowIToolProperty = DependencyProperty.Register(nameof(Tool), typeof(ITool), typeof(FootPageControl), new PropertyMetadata(null, (sender, e) =>
         {
             FootPageControl con = (FootPageControl)sender;
+            if (con._isLoaded == false) return;
 
             if (e.NewValue is ITool value)
             {
-                con._vsTool = value;
-                con.VisualState = con.VisualState;//State
+                con.ToolPage = con.GetPage(value, con.Mode, con.Type);
             }
         }));
 
@@ -86,11 +73,11 @@ namespace Retouch_Photo2.Controls
         public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(ListViewSelectionMode), typeof(FootPageControl), new PropertyMetadata(ListViewSelectionMode.None, (sender, e) =>
         {
             FootPageControl con = (FootPageControl)sender;
+            if (con._isLoaded == false) return;
 
             if (e.NewValue is ListViewSelectionMode value)
             {
-                con._vsMode = value;
-                con.VisualState = con.VisualState;//State
+                con.ToolPage = con.GetPage(con.Tool, value, con.Type);
             }
         }));
 
@@ -105,11 +92,11 @@ namespace Retouch_Photo2.Controls
         public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(string), typeof(FootPageControl), new PropertyMetadata(string.Empty, (sender, e) =>
         {
             FootPageControl con = (FootPageControl)sender;
+            if (con._isLoaded == false) return;
 
             if (e.NewValue is string value)
             {
-                con._vsType = value;
-                con.VisualState = con.VisualState;//State
+                con.ToolPage = con.GetPage(con.Tool, con.Mode, value);
             }
         }));
 
@@ -123,9 +110,33 @@ namespace Retouch_Photo2.Controls
             {
                 this._isLoaded = true;
 
-                this.VisualState = null;
-                this.VisualState = this.VisualState;//State
+                this.ToolPage = null;
+                this.ToolPage = this.ToolPage;//State
             };
+        }
+
+
+        private IToolPage GetPage(ITool tool, ListViewSelectionMode mode, string type)
+        {
+            if (tool == null) return null;
+
+            if (tool.Type == ToolType.Cursor)
+            {
+                if (mode == ListViewSelectionMode.Single)
+                {
+                    //Tool
+                    ToolType toolType = this.LayerToTool(type);
+                    ITool layerToTool = this.TipViewModel.Tools.FirstOrDefault(e => e != null && e.Type == toolType);
+                    if (layerToTool != null) return layerToTool.Page;
+
+                    //Cursor
+                    ITool cursorTool = this.TipViewModel.Tools.FirstOrDefault();
+                    if (layerToTool == null) return null;
+                    return cursorTool.Page;
+                }
+            }
+
+            return tool.Page;
         }
 
 

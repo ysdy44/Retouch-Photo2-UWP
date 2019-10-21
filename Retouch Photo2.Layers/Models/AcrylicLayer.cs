@@ -18,12 +18,12 @@ namespace Retouch_Photo2.Layers.Models
         public string Type => "AcrylicLayer";
 
         public float TintOpacity = 0.5f;
-        public Color TintColor = Color.FromArgb(255, 255, 255, 255);
         public float BlurAmount = 12.0f;
 
         //@Construct
         public AcrylicLayer()
         {
+            base.StyleManager.FillBrush.Color = Color.FromArgb(255, 255, 255, 255);
             base.Control = new LayerControl(this)
             {
                 Icon = new AcrylicIcon(),
@@ -55,7 +55,7 @@ namespace Retouch_Photo2.Layers.Models
                             Opacity = this.TintOpacity,
                             Source = new ColorSourceEffect
                             {
-                                Color = this.TintColor
+                                Color = base.StyleManager.FillBrush.Color
                              }
                          }
                     }
@@ -68,7 +68,6 @@ namespace Retouch_Photo2.Layers.Models
             AcrylicLayer acrylicLayer = new AcrylicLayer
             {
                 TintOpacity = this.TintOpacity,
-                TintColor = this.TintColor,
                 BlurAmount = this.BlurAmount,
             };
 
@@ -81,7 +80,6 @@ namespace Retouch_Photo2.Layers.Models
             XElement element = new XElement("AcrylicLayer");
 
             element.Add(new XElement("TintOpacity", this.TintOpacity));
-            element.Add(new XElement("TintColor", this.TintColor));
             element.Add(new XElement("BlurAmount", this.BlurAmount));
 
             LayerBase.SaveWidth(element, this);

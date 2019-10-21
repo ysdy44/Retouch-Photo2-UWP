@@ -170,21 +170,21 @@ namespace Retouch_Photo2.Brushs
                         Vector2 startPoint = Vector2.Transform(brushPoints.LinearGradientStartPoint, matrix);
                         Vector2 endPoint = Vector2.Transform(brushPoints.LinearGradientEndPoint, matrix);
 
-                        //Line
+                        //Line: white
                         drawingSession.DrawLine(startPoint, endPoint, Windows.UI.Colors.White, 4);
 
-                        //Circle
+                        //Circle: white
                         drawingSession.FillCircle(startPoint, 10, Windows.UI.Colors.White);
                         drawingSession.FillCircle(endPoint, 10, Windows.UI.Colors.White);
 
-                        //Line
+                        //Line: accent
                         drawingSession.DrawLine(startPoint, endPoint, accentColor, 2);
 
-                        //Circle
                         foreach (CanvasGradientStop stop in brushArray)
                         {
                             Vector2 position = startPoint * (1.0f - stop.Position) + endPoint * stop.Position;
 
+                            //Circle: stop
                             drawingSession.FillCircle(position, 8, accentColor);
                             drawingSession.FillCircle(position, 6, stop.Color);
                         }
@@ -194,12 +194,24 @@ namespace Retouch_Photo2.Brushs
                     {
                         Vector2 center = Vector2.Transform(brushPoints.RadialGradientCenter, matrix);
                         Vector2 point2 = Vector2.Transform(brushPoints.RadialGradientPoint, matrix);
-                        drawingSession.DrawThickLine(center, point2);
+
+                        //Line: white
+                        drawingSession.DrawLine(center, point2, Windows.UI.Colors.White, 4);
+
+                        //Circle: white
+                        drawingSession.FillCircle(center, 10, Windows.UI.Colors.White);
+                        drawingSession.FillCircle(point2, 10, Windows.UI.Colors.White);
+
+                        //Line: accent
+                        drawingSession.DrawLine(center, point2, accentColor, 2);
 
                         foreach (CanvasGradientStop stop in brushArray)
                         {
                             Vector2 position = center * (1.0f - stop.Position) + point2 * stop.Position;
-                            drawingSession.DrawNode2(position, stop.Color);
+
+                            //Circle: stop
+                            drawingSession.FillCircle(position, 8, accentColor);
+                            drawingSession.FillCircle(position, 6, stop.Color);
                         }
                     }
                     break;
@@ -208,14 +220,29 @@ namespace Retouch_Photo2.Brushs
                         Vector2 center = Vector2.Transform(brushPoints.EllipticalGradientCenter, matrix);
                         Vector2 xPoint = Vector2.Transform(brushPoints.EllipticalGradientXPoint, matrix);
                         Vector2 yPoint = Vector2.Transform(brushPoints.EllipticalGradientYPoint, matrix);
-                        drawingSession.DrawThickLine(center, xPoint);
-                        drawingSession.DrawThickLine(center, yPoint);
+
+                        //Line: white
+                        drawingSession.DrawLine(center, xPoint, Windows.UI.Colors.White, 4);
+                        drawingSession.DrawLine(center, yPoint, Windows.UI.Colors.White, 4);
+
+                        //Circle: white
+                        drawingSession.FillCircle(center, 10, Windows.UI.Colors.White);
+                        drawingSession.FillCircle(yPoint, 10, Windows.UI.Colors.White);
+
+                        //Line: accent
+                        drawingSession.DrawLine(center, xPoint, accentColor, 2);
+                        drawingSession.DrawLine(center, yPoint, accentColor, 2);
 
                         foreach (CanvasGradientStop stop in brushArray)
                         {
                             Vector2 position = center * (1.0f - stop.Position) + yPoint * stop.Position;
-                            drawingSession.DrawNode2(position, stop.Color);
+
+                            //Circle: stop
+                            drawingSession.FillCircle(position, 8, accentColor);
+                            drawingSession.FillCircle(position, 6, stop.Color);
                         }
+
+                        //Circle: node
                         drawingSession.DrawNode2(xPoint);
                     }
                     break;

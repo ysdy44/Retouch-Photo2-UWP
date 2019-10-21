@@ -19,12 +19,10 @@ namespace Retouch_Photo2.ViewModels
                 //The current tool becomes the active tool.
                 ITool oldTool = this.tool;
                 oldTool.OnNavigatedFrom();
-                oldTool.Page.OnNavigatedFrom();
 
-                //The current page does not become an active page.
+                //The current tool does not become an active tool.
                 ITool newTool = value;
                 newTool.OnNavigatedTo();
-                newTool.Page.OnNavigatedTo();
 
                 this.tool = value;
                 this.OnPropertyChanged(nameof(this.Tool));//Notify 

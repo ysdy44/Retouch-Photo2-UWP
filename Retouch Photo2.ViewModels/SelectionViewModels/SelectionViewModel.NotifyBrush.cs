@@ -5,6 +5,7 @@ using Retouch_Photo2.Layers;
 using System.ComponentModel;
 using System.Numerics;
 using Windows.UI;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -95,65 +96,38 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Brush's type. </summary>     
         public BrushType BrushType
         {
-            get
-            {
-                if (this.FillOrStroke == FillOrStroke.Fill)
-                    return this.StyleManager.FillBrush.Type;
-                else
-                    return this.StyleManager.StrokeBrush.Type;
-            }
+            get => this.brushType;
             set
             {
-                if (this.FillOrStroke == FillOrStroke.Fill)
-                    this.StyleManager.FillBrush.Type = value;
-                else
-                    this.StyleManager.StrokeBrush.Type = value;
-
+                this.brushType = value;
                 this.OnPropertyChanged(nameof(this.BrushType));//Notify 
             }
         }
+        private BrushType brushType;
 
         /// <summary> Brush's gradient stops. </summary>     
         public CanvasGradientStop[] BrushArray
         {
-            get
-            {
-                if (this.FillOrStroke == FillOrStroke.Fill)
-                    return this.StyleManager.FillBrush.Array;
-                else
-                    return this.StyleManager.StrokeBrush.Array;
-            }
+            get => this.brushArray;
             set
             {
-                if (this.FillOrStroke == FillOrStroke.Fill)
-                    this.StyleManager.FillBrush.Array = value;
-                else
-                    this.StyleManager.StrokeBrush.Array = value;
-
+                this.brushArray = value;
                 this.OnPropertyChanged(nameof(this.BrushArray));//Notify 
             }
         }
+        private CanvasGradientStop[] brushArray;
 
         /// <summary> Brush points. </summary>     
         public BrushPoints BrushPoints
         {
-            get
-            {
-                if (this.FillOrStroke == FillOrStroke.Fill)
-                    return this.StyleManager.FillBrush.Points;
-                else
-                    return this.StyleManager.StrokeBrush.Points;
-            }
+            get => this.brushPoints;
             set
             {
-                if (this.FillOrStroke == FillOrStroke.Fill)
-                    this.StyleManager.FillBrush.Points = value;
-                else
-                    this.StyleManager.StrokeBrush.Points = value;
-
+                this.brushPoints = value;
                 this.OnPropertyChanged(nameof(this.BrushPoints));//Notify 
             }
         }
+        private BrushPoints brushPoints;
 
 
         #endregion
@@ -185,10 +159,55 @@ namespace Retouch_Photo2.ViewModels
         {
             this.FillOrStroke = fillOrStroke;
 
-            this.OnPropertyChanged(nameof(this.BrushType));//Notify 
-            this.OnPropertyChanged(nameof(this.BrushArray));//Notify 
-            this.OnPropertyChanged(nameof(this.BrushPoints));//Notify 
+            switch (fillOrStroke)
+            {
+                case FillOrStroke.Fill: this.SetBrush(this.StyleManager.FillBrush, FillOrStroke.Fill); break;
+                case FillOrStroke.Stroke: this.SetBrush(this.StyleManager.StrokeBrush, FillOrStroke.Stroke); break;
+            }
         }
+        /// <summary> Sets brush. </summary>  
+        public void SetBrush(Brush brush, FillOrStroke fillOrStroke)
+        {
+            BrushType brushType = brush.Type;
+            this.BrushType = brushType;
 
+            switch (brushType)
+            {
+                case BrushType.None: break;
+                case BrushType.Color:
+                    this.Color = brush.Color;
+                    switch (fillOrStroke)
+                    {
+                        case FillOrStroke.Fill: this.FillColor = color; break;
+                        case FillOrStroke.Stroke: this.StrokeColor = color; break;
+                    }
+                    break;
+                case BrushType.LinearGradient:
+                case BrushType.RadialGradient:
+                case BrushType.EllipticalGradient:
+                    this.BrushArray = brush.Array;
+                    this.BrushPoints = brush.Points;
+                    break;
+                case BrushType.Image: break;
+            }
+        }
+        /// <summary> Sets style-manager. </summary>  
+        public void SetStyleManager(StyleManager styleManager)
+        {
+            if (styleManager == null)
+            {
+                this.BrushType = BrushType.None;
+                return;
+            }
+
+            switch (this.FillOrStroke)
+            {
+                case FillOrStroke.Fill: this.SetBrush(styleManager.FillBrush, FillOrStroke.Fill); break;
+                case FillOrStroke.Stroke: this.SetBrush(styleManager.StrokeBrush, FillOrStroke.Stroke); break;
+            }
+
+            this.StyleManager.CopyWith(StyleManager);
+        }
+        
     }
 }

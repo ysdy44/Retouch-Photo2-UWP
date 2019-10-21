@@ -133,5 +133,14 @@ namespace Retouch_Photo2.Brushs
                 StrokeWidth = this.StrokeWidth,
             };
         }
+        /// <summary>
+        /// Copy a StyleManager with self.
+        /// </summary>
+        public void CopyWith(StyleManager styleManager)
+        {
+            this.FillBrush = styleManager.FillBrush.Clone();
+            this.StrokeBrush = styleManager.StrokeBrush.Clone();
+            this.StrokeWidth = styleManager.StrokeWidth;
+        }
     }
 }
