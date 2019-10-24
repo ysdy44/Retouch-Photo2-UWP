@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
+using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 
@@ -12,20 +13,31 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryPentagonLayer : IGeometryLayer, ILayer
     {
-        //@Content       
-        public string Type => "GeometryPentagonLayer";
-
+        //@Static     
+        public const string ID = "GeometryPentagonLayer";
+         
+        //@Content
         public int Points = 5;
 
-        //@Construct
+        //@Construct   
+        /// <summary>
+        /// Construct a pentagon-layer.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
+        public GeometryPentagonLayer(XElement element) : this() => this.Load(element);
+        /// <summary>
+        /// Construct a pentagon-layer.
+        /// </summary>
         public GeometryPentagonLayer()
         {
+            base.Type = GeometryPentagonLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryPentagonIcon(),
                 Text = "Pentagon",
             };
         }
+
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -49,6 +61,7 @@ namespace Retouch_Photo2.Layers.Models
             return CanvasGeometry.CreatePolygon(resourceCreator, points);
         }
 
+
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryPentagonLayer PentagonLayer = new GeometryPentagonLayer
@@ -60,6 +73,7 @@ namespace Retouch_Photo2.Layers.Models
             return PentagonLayer;
         }
 
+
         public XElement Save()
         {
             XElement element = new XElement("GeometryPentagonLayer");
@@ -68,6 +82,11 @@ namespace Retouch_Photo2.Layers.Models
 
             LayerBase.SaveWidth(element, this);
             return element;
+        }
+        public void Load(XElement element)
+        {
+            this.Points = (int)element.Element("Points");
+            LayerBase.LoadWith(element, this);
         }
 
     }

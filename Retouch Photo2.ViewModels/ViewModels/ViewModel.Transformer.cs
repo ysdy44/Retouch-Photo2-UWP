@@ -18,7 +18,7 @@ namespace Retouch_Photo2.ViewModels
         Vector2 _destinationPosition;
         float _destinationScale;
 
-
+        //TODO: Transformers
         public void TransitionSource(Point postion, double actualWidth, double actualHeight)
         {
             float left = (float)postion.X;
@@ -32,6 +32,7 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
+        //TODO: Transformers
         public void TransitionDestination(Vector2 offset, float controlWidth, float controlHeight)
         {
             this._destinationPosition.X = offset.X + controlWidth / 2.0f;
@@ -40,6 +41,7 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
+        //TODO: Transformers
         private float _getTransitionScale(float width, float height)
         {
             float widthScale = width / this.CanvasTransformer.Width;
@@ -49,6 +51,7 @@ namespace Retouch_Photo2.ViewModels
             return scale;
         }
 
+        //TODO: Transformers
         public void Transition(float value)
         {
             if (value == 0.0f)

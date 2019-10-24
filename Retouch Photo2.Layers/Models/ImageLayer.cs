@@ -11,22 +11,33 @@ namespace Retouch_Photo2.Layers.Models
     /// <see cref="LayerBase"/>'s ImageLayer .
     /// </summary>
     public class ImageLayer : LayerBase, ILayer
-    {   
+    {
+        //@Static     
+        public const string ID = "ImageLayer";
+         
         //@Content
-        public string Type => "ImageLayer";
-        
         /// <summary> <see cref = "ImageLayer" />'s image. </summary>
         public ImageRe ImageRe { get; set; }
 
-        //@Construct
+        //@Construct   
+        /// <summary>
+        /// Construct a image-layer.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
+        public ImageLayer(XElement element) : this() => this.Load(element);
+        /// <summary>
+        /// Construct a image-layer.
+        /// </summary>
         public ImageLayer()
         {
+            base.Type = ImageLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new ImageIcon(),
                 Text = "Image",
             };
         }
+
 
         public ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -50,14 +61,22 @@ namespace Retouch_Photo2.Layers.Models
             return imageLayer;
         }
 
+
         public XElement Save()
         {
             XElement element = new XElement("ImageLayer");
 
-            element.Add(new XElement("ImageRe", this.ImageRe));
+            //TODO: ImageRe
+            //element.Add(new XElement("ImageRe", this.ImageRe));
 
             LayerBase.SaveWidth(element, this);
             return element;
+        }
+        public void Load(XElement element)
+        {
+            //TODO: ImageRe
+           // this.BlurAmount = (float)element.Descendants("BlurAmount").Single();
+            LayerBase.LoadWith(element, this);
         }
 
     }

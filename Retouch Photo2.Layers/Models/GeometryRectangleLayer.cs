@@ -12,12 +12,22 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryRectangleLayer : IGeometryLayer, ILayer
     {
-        //@Content      
-        public string Type => "GeometryRectangleLayer";
+        //@Static     
+        public const string ID = "GeometryRectangleLayer";
 
         //@Construct
+        /// <summary>
+        /// Construct a rectangle-layer.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
+        public GeometryRectangleLayer(XElement element) : this() => this.Load(element);
+        /// <summary>
+        /// Construct a rectangle-layer.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
         public GeometryRectangleLayer()
         {
+            base.Type = GeometryRectangleLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryRectangleIcon(),
@@ -25,6 +35,7 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
         
+
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
             Transformer transformer = base.TransformManager.Destination;
@@ -40,12 +51,17 @@ namespace Retouch_Photo2.Layers.Models
             return rectangleLayer;
         }
 
+
         public XElement Save()
         {
             XElement element = new XElement("GeometryRectangleLayer");
 
             LayerBase.SaveWidth(element, this);
             return element;
+        }
+        public void Load(XElement element)
+        {
+            LayerBase.LoadWith(element, this);
         }
 
     }

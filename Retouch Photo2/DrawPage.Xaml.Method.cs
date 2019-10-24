@@ -1,26 +1,14 @@
 ﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.Menus;
-using Retouch_Photo2.Tools;
-using Retouch_Photo2.ViewModels;
-using System;
-using System.Numerics;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using FanKit.Transformers;
 
 namespace Retouch_Photo2
 {
     public sealed partial class DrawPage : Page
     {
-
 
         private void ConstructViewModel()
         {
@@ -39,7 +27,7 @@ namespace Retouch_Photo2
                     this.TipWRun.Text = width.ToString();
                     this.TipHRun.Text = height.ToString();
                 }
-                
+
                 //Width Height
                 {
                     Vector2 offset = this.DrawLayout.FullScreenOffset;
@@ -82,40 +70,7 @@ namespace Retouch_Photo2
                 };
             }
         }
-        
 
-        private void XElementSave(string path)
-        {
-            //1.Create an XDocument object.
-            XDocument xDoc = new XDocument
-            {
-                //Set the document definition for xml.
-                Declaration = new XDeclaration("1.0", "utf-8", "no"),
-            };
-
-            //2.Create a root
-            XElement root = new XElement("Root");
-            xDoc.Add(root);
-
-            //3.WIdth and height.
-            root.Add(new XElement("Width", this.ViewModel.CanvasTransformer.Width));
-            root.Add(new XElement("Height", this.ViewModel.CanvasTransformer.Height));
-
-            //4.Layers
-            XElement layers = new XElement("Layers");
-            root.Add(layers);
-            {
-                foreach (ILayer layer in this.ViewModel.Layers.RootLayers)
-                {
-                    XElement element = layer.Save();
-                    layers.Add(element);
-                }
-            }
-
-            //5.Save
-            xDoc.Save(path);
-        }
-                 
 
         private void NavigatedTo()
         {
@@ -147,6 +102,10 @@ namespace Retouch_Photo2
         }
         private async void NavigatedFrom()
         {
+            this.SelectionViewModel.SetModeNone();
+            this.ViewModel.Layers.RootLayers.Clear();
+            this.ViewModel.Layers.RootControls.Clear();
+
             this.IsFullScreen = true;
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 

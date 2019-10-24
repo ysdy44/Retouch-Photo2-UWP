@@ -14,60 +14,57 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryCurveLayer : IGeometryLayer, ILayer
     {
-        //@Content       
-        public string Type => "GeometryCurveLayer";
+        //@Static     
+        public const string ID = "GeometryCurveLayer";
 
+        //@Content 
         public NodeCollection NodeCollection { get; private set; }
-        
+
         //@Construct
         /// <summary>
-        /// Construct a curve layer.
+        /// Construct a curve-layer.
         /// </summary>
-        /// <param name="nodes"> The source nodes. </param>
-        public GeometryCurveLayer(IEnumerable<Node> nodes)
+        /// <param name="element"> The source XElement. </param>
+        public GeometryCurveLayer(XElement element) : this() => this.Load(element);
+        /// <summary>
+        /// Construct a curve-layer.
+        /// </summary>
+        public GeometryCurveLayer()
         {
+            base.Type = GeometryCurveLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryCurveIcon(),
                 Text = "Curve",
             };
-
-            this.NodeCollection = new NodeCollection(nodes); 
         }
         /// <summary>
-        /// Construct a curve layer from a line.
+        /// Construct a curve-layer.
+        /// </summary>
+        /// <param name="nodes"> The source nodes. </param>
+        public GeometryCurveLayer(IEnumerable<Node> nodes) : this() => this.NodeCollection = new NodeCollection(nodes);
+        /// <summary>
+        /// Construct a curve-layer from a line.
         /// </summary>
         /// <param name="left"> The first source vector. </param>
         /// <param name="right"> The second source vector. </param>
-        public GeometryCurveLayer(Vector2 left, Vector2 right)
-        {
-            base.Control = new LayerControl(this)
-            {
-                Icon = new GeometryCurveIcon(),
-                Text = "Curve",
-            };
-
-            this.NodeCollection = new NodeCollection(left, right);
-        }
+        public GeometryCurveLayer(Vector2 left, Vector2 right) : this() => this.NodeCollection = new NodeCollection(left, right);
 
 
         //@Override
         public override void CacheTransform()
         {
             base.CacheTransform();
-
             this.NodeCollection.CacheTransform();
         }
         public override void TransformMultiplies(Matrix3x2 matrix)
         {
             base.TransformMultiplies(matrix);
-
             this.NodeCollection.TransformMultiplies(matrix);
         }
         public override void TransformAdd(Vector2 vector)
         {
             base.TransformAdd(vector);
-
             this.NodeCollection.TransformAdd(vector);
         }
 
@@ -94,6 +91,7 @@ namespace Retouch_Photo2.Layers.Models
             return this.NodeCollection.CreateGeometry(resourceCreator).Transform(canvasToVirtualMatrix);
         }
 
+
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryCurveLayer curveLayer = new GeometryCurveLayer( this.NodeCollection)
@@ -105,14 +103,22 @@ namespace Retouch_Photo2.Layers.Models
             return curveLayer;
         }
 
+
         public XElement Save()
         {
             XElement element = new XElement("GeometryCurveLayer");
-            
-            element.Add(new XElement("NodeCollection", this.NodeCollection));
+
+            //TODO: NodeCollection
+            //element.Add(new XElement("NodeCollection", this.NodeCollection));
 
             LayerBase.SaveWidth(element, this);
             return element;
+        }
+        public void Load(XElement element)
+        {
+            //TODO: NodeCollection
+        //    this.NodeCollection = (float)element.Descendants("NodeCollection").Single();
+            LayerBase.LoadWith(element, this);
         }
 
     }

@@ -1,18 +1,8 @@
-﻿using FanKit.Transformers;
-using Retouch_Photo2.Elements;
+﻿using Retouch_Photo2.Elements;
 using Retouch_Photo2.Elements.MainPages;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Numerics;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Graphics.Imaging;
-using Windows.Storage;
+using System.Xml.Linq;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -32,80 +22,6 @@ namespace Retouch_Photo2
         IList<Photo> PhotoFileList = new List<Photo>();
         static bool _isLoaded;
 
-        //Loading
-        private bool IsLoading { set => this.LoadingControl.IsActive = value; }
-        /// <summary> State of <see cref="MainPage"/>. </summary>
-        public MainPageState State
-        {
-            get => this.state;
-            set
-            {
-                if (value == MainPageState.None)
-                {
-                    this.InitialControl.Visibility = Visibility.Visible;
-
-                    this.GridView.Visibility = Visibility.Collapsed;
-                    this.RadiusAnimaPanel.Visibility = Visibility.Collapsed;
-                    this.RadiusAnimaPanel.CenterContent = null;
-                }
-                else
-                {
-                    this.InitialControl.Visibility = Visibility.Collapsed;
-
-                    this.GridView.Visibility = Visibility.Visible;
-                    this.RadiusAnimaPanel.Visibility = Visibility.Visible;
-
-                    switch (value)
-                    {
-                        case MainPageState.Main:
-                            this.RadiusAnimaPanel.CenterContent = this.MainControl;
-                            break;
-                        //case MainPageState.Loading:
-                        //break;
-
-                        //case MainPageState.Add:
-                        //break;
-                        case MainPageState.Pictures:
-                            this.RadiusAnimaPanel.CenterContent = this.PicturesControl;
-                            break;
-
-                        case MainPageState.Save:
-                            this.RadiusAnimaPanel.CenterContent = this.SaveControl;
-                            break;
-                        case MainPageState.Share:
-                            this.RadiusAnimaPanel.CenterContent = this.ShareControl;
-                            break;
-
-                        case MainPageState.Delete:
-                            this.RadiusAnimaPanel.CenterContent = this.DeleteControl;
-                            break;
-                        case MainPageState.Duplicate:
-                            this.RadiusAnimaPanel.CenterContent = this.DuplicateControl;
-                            break;
-
-                        //case MainPageState.Folder:
-                        //break;
-                        //case MainPageState.Move:
-                        //break;
-
-                        default:
-                            break;
-                    }
-                }
-
-
-                this.state = value;
-            }
-        }
-        private MainPageState state;
-
-        MainControl MainControl = new MainControl();
-        PicturesControl PicturesControl = new PicturesControl();
-        SaveControl SaveControl = new SaveControl();
-        ShareControl ShareControl = new ShareControl();
-        DeleteControl DeleteControl = new DeleteControl();
-        DuplicateControl DuplicateControl = new DuplicateControl();
-
         //@Construct
         public MainPage()
         {
@@ -115,7 +31,7 @@ namespace Retouch_Photo2
                 if (MainPage._isLoaded == false)
                 {
                     MainPage._isLoaded = true;
-                    await this.LoadSettingViewModel();
+                    await this.ConstructSettingViewModel();
                     await this.Refresh();
                 }
             };
@@ -131,14 +47,7 @@ namespace Retouch_Photo2
                     switch (photo.SelectMode)
                     {
                         case null:
-                            if (this.State == MainPageState.Main)
-                            {
-                                if (s is FrameworkElement element)
-                                {
-                                    this.NavigatedFrom(element);
-                                }
-                                this.Frame.Navigate(typeof(DrawPage));//Navigate     
-                            }
+                            this.NewProjectFromPhoto(s, photo);
                             break;
                         case false:
                             photo.SelectMode = true;
@@ -158,40 +67,40 @@ namespace Retouch_Photo2
 
             //Main
             this.MainControl.AddButton.Tapped += (s, e) => this.AddDialogShow();
-            this.MainControl.PicturesButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Pictures);
-            this.MainControl.SaveButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Save);
-            this.MainControl.ShareButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Share);
-            this.MainControl.DeleteButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Delete);
-            this.MainControl.DuplicateButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Duplicate);
+            this.MainControl.PicturesButton.Tapped += (s, e) => this.State = MainPageState.Pictures;
+            this.MainControl.SaveButton.Tapped += (s, e) => this.State = MainPageState.Save;
+            this.MainControl.ShareButton.Tapped += (s, e) => this.State = MainPageState.Share;
+            this.MainControl.DeleteButton.Tapped += (s, e) => this.State = MainPageState.Delete;
+            this.MainControl.DuplicateButton.Tapped += (s, e) => this.State = MainPageState.Duplicate;
             this.MainControl.FolderButton.Tapped += (s, e) => this.FolderDialogShow();
-            this.MainControl.MoveButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Move);
+            this.MainControl.MoveButton.Tapped += (s, e) => this.State = MainPageState.Move;
 
             //Second
             this.MainControl.SecondAddButton.Tapped += (s, e) => this.AddDialogShow();
-            this.MainControl.SecondPicturesButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Pictures);
-            this.MainControl.SecondSaveButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Save);
-            this.MainControl.SecondShareButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Share);
-            this.MainControl.SecondDeleteButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Delete);
-            this.MainControl.SecondDuplicateButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Duplicate);
+            this.MainControl.SecondPicturesButton.Tapped += (s, e) => this.State = MainPageState.Pictures;
+            this.MainControl.SecondSaveButton.Tapped += (s, e) => this.State = MainPageState.Save;
+            this.MainControl.SecondShareButton.Tapped += (s, e) => this.State = MainPageState.Share;
+            this.MainControl.SecondDeleteButton.Tapped += (s, e) => this.State = MainPageState.Delete;
+            this.MainControl.SecondDuplicateButton.Tapped += (s, e) => this.State = MainPageState.Duplicate;
             this.MainControl.SecondFolderButton.Tapped += (s, e) => this.FolderDialogShow();
-            this.MainControl.SecondMoveButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Move);
+            this.MainControl.SecondMoveButton.Tapped += (s, e) => this.State = MainPageState.Move;
             
             //Pictures
             this.PicturesControl.PhotoButton.Tapped += async (s, e) => await this.NewProjectFromPictures(PickerLocationId.PicturesLibrary);
             this.PicturesControl.DestopButton.Tapped += async (s, e) => await this.NewProjectFromPictures(PickerLocationId.Desktop);
-            this.PicturesControl.CancelButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Main);
+            this.PicturesControl.CancelButton.Tapped += (s, e) => this.State = MainPageState.Main;
 
             //Save
-            this.SaveControl.CancelButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Main);
+            this.SaveControl.CancelButton.Tapped += (s, e) => this.State = MainPageState.Main;
 
             //Share
-            this.ShareControl.CancelButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Main);
+            this.ShareControl.CancelButton.Tapped += (s, e) => this.State = MainPageState.Main;
 
             //Delete
-            this.DeleteControl.CancelButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Main);
+            this.DeleteControl.CancelButton.Tapped += (s, e) => this.State = MainPageState.Main;
 
             //Duplicate
-            this.DuplicateControl.CancelButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Main);
+            this.DuplicateControl.CancelButton.Tapped += (s, e) => this.State = MainPageState.Main;
         }
 
         //The current page becomes the active page

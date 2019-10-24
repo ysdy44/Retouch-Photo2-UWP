@@ -49,17 +49,17 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <StackPanel Margin="8" VerticalAlignment="Center">
-            <TextBlock FontWeight="Bold">
+        <TextBlock Margin="8,2">
+            <Run FontWeight="Bold">
                 Dupliate Projects
-            </TextBlock>
-            <TextBlock FontSize="12" Style="{ThemeResource AppTextBlock}">
+            </Run>
+            <LineBreak/>
+            <Run FontSize="12" Foreground="{ThemeResource AppText}">
                 Select project(s) to be duplicated.
-            </TextBlock>
-        </StackPanel>
+            </Run>
+        </TextBlock>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <AppBarSeparator/>
+        <StackPanel Orientation="Horizontal" Margin="8,0" HorizontalAlignment="Right">
             <local:MainPageButton x:Name="_OKButton" Glyph="&#xE10B;">
                 <local:MainPageButton.Text>
                     OK

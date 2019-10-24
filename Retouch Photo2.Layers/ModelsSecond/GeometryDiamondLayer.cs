@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
+using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 
@@ -12,14 +13,24 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryDiamondLayer : IGeometryLayer, ILayer
     {
-        //@Content       
-        public string Type => "GeometryDiamondLayer";
-
+        //@Static     
+        public const string ID = "GeometryDiamondLayer";
+         
+        //@Content
         public float Mid = 0.5f;
 
         //@Construct
+        /// <summary>
+        /// Construct a diamond-layer.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
+        public GeometryDiamondLayer(XElement element) : this() => this.Load(element);
+        /// <summary>
+        /// Construct a diamond-layer.
+        /// </summary>
         public GeometryDiamondLayer()
         {
+            base.Type = GeometryDiamondLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryDiamondIcon(),
@@ -55,6 +66,7 @@ namespace Retouch_Photo2.Layers.Models
             return CanvasGeometry.CreatePolygon(resourceCreator, points);
         }
 
+
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryDiamondLayer DiamondLayer = new GeometryDiamondLayer();
@@ -62,6 +74,7 @@ namespace Retouch_Photo2.Layers.Models
             LayerBase.CopyWith(resourceCreator, DiamondLayer, this);
             return DiamondLayer;
         }
+
 
         public XElement Save()
         {
@@ -72,6 +85,12 @@ namespace Retouch_Photo2.Layers.Models
             LayerBase.SaveWidth(element, this);
             return element;
         }
+        public void Load(XElement element)
+        {
+            this.Mid = (float)element.Element("Mid");
+            LayerBase.LoadWith(element, this);
+        }
+
 
     }
 }

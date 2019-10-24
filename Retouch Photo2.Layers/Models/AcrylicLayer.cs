@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Layers.Icons;
+using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.Foundation;
@@ -14,22 +15,34 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class AcrylicLayer : LayerBase, ILayer
     {
-        //@Content       
-        public string Type => "AcrylicLayer";
 
+        //@Static     
+        public const string ID = "AcrylicLayer";
+
+        //@Content       
         public float TintOpacity = 0.5f;
         public float BlurAmount = 12.0f;
 
         //@Construct
+        /// <summary>
+        /// Construct a acrylic-layer.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
+        public AcrylicLayer(XElement element) : this() => this.Load(element);
+        /// <summary>
+        /// Construct a acrylic-layer.
+        /// </summary>
         public AcrylicLayer()
         {
+            base.Type = AcrylicLayer.ID;
             base.StyleManager.FillBrush.Color = Color.FromArgb(255, 255, 255, 255);
             base.Control = new LayerControl(this)
             {
                 Icon = new AcrylicIcon(),
                 Text = "Acrylic",
             };
-        }
+        }   
+
 
         public ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -75,6 +88,7 @@ namespace Retouch_Photo2.Layers.Models
             return acrylicLayer;
         }
         
+
         public XElement Save()
         {
             XElement element = new XElement("AcrylicLayer");
@@ -85,5 +99,12 @@ namespace Retouch_Photo2.Layers.Models
             LayerBase.SaveWidth(element, this);
             return element;
         }
+        public void Load(XElement element)
+        {
+            this.TintOpacity = (float)element.Element("TintOpacity");
+            this.BlurAmount = (float)element.Element("BlurAmount");
+            LayerBase.LoadWith(element, this);
+        }
+
     }
 }

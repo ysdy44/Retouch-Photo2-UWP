@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
+using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 
@@ -12,17 +13,27 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryCogLayer : IGeometryLayer, ILayer
     {
-        //@Content       
-        public string Type => "GeometryCogLayer";
-
+        //@Static     
+        public const string ID = "GeometryCogLayer";
+         
+        //@Content
         public int Count = 8;
         public float InnerRadius = 0.7f;
         public float Tooth;
         public float Notch;
 
-        //@Construct
+        //@Construct      
+        /// <summary>
+        /// Construct a cog-layer.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
+        public GeometryCogLayer(XElement element) : this() => this.Load(element);
+        /// <summary>
+        /// Construct a cog-layer.
+        /// </summary>
         public GeometryCogLayer()
         {
+            base.Type = GeometryCogLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryCogIcon(),
@@ -84,6 +95,7 @@ namespace Retouch_Photo2.Layers.Models
             return CogLayer;
         }
 
+
         public XElement Save()
         {
             XElement element = new XElement("GeometryCogLayer");
@@ -95,6 +107,15 @@ namespace Retouch_Photo2.Layers.Models
 
             LayerBase.SaveWidth(element, this);
             return element;
+        }
+        public void Load(XElement element)
+        {
+            this.Count = (int)element.Element("Count");
+            this.InnerRadius = (float)element.Element("InnerRadius");
+            this.Tooth = (float)element.Element("Tooth");
+            this.Notch = (float)element.Element("Notch");
+
+            LayerBase.LoadWith(element, this);
         }
 
     }

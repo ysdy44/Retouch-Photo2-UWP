@@ -32,7 +32,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
-            <RowDefinition x:Name="FootRowDefinition" Height="100"/>
+            <RowDefinition x:Name="FootRowDefinition" Height="Auto" MinHeight="60"/>
         </Grid.RowDefinitions>
 
         <!--Developer-->
@@ -56,7 +56,7 @@
                 <FontIcon FontSize="20" Glyph="&#xE117;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
             </Button>
 
-            <TextBlock x:Name="aaaaaaaaaaa" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
+            <TextBlock Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
                 <TextBlock.Transitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromHorizontalOffset="50" FromVerticalOffset="0"/>

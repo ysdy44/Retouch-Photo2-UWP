@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
+using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 
@@ -12,20 +13,31 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryRoundRectLayer : IGeometryLayer, ILayer
     {
-        //@Content       
-        public string Type => "GeometryRoundRectLayer";
-
+        //@Static     
+        public const string ID = "GeometryRoundRectLayer";
+         
+        //@Content
         public float Corner = 0.25f;
 
-        //@Construct
+        //@Construct   
+        /// <summary>
+        /// Construct a roundRect-layer.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
+        public GeometryRoundRectLayer(XElement element) : this() => this.Load(element);
+        /// <summary>
+        /// Construct a roundRect-layer.
+        /// </summary>
         public GeometryRoundRectLayer()
         {
+            base.Type = GeometryRoundRectLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryRoundRectIcon(),
                 Text = "RoundRect",
             };
         }
+
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -107,6 +119,7 @@ namespace Retouch_Photo2.Layers.Models
             return CanvasGeometry.CreatePath(pathBuilder);
         }
 
+
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryRoundRectLayer RoundRectLayer = new GeometryRoundRectLayer();
@@ -114,6 +127,7 @@ namespace Retouch_Photo2.Layers.Models
             LayerBase.CopyWith(resourceCreator, RoundRectLayer, this);
             return RoundRectLayer;
         }
+
 
         public XElement Save()
         {
@@ -124,6 +138,11 @@ namespace Retouch_Photo2.Layers.Models
             LayerBase.SaveWidth(element, this);
             return element;
         }
-
+        public void Load(XElement element)
+        {
+            this.Corner = (float)element.Element("Corner");
+            LayerBase.LoadWith(element, this);
+        }
+        
     }
 }

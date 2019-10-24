@@ -48,7 +48,7 @@ namespace Retouch_Photo2.ViewModels
             }
             this._setModeNone();//None
         }
-        public void _setModeNone()
+        private void _setModeNone()
         {
             this.Transformer = new Transformer();
             this.DsabledRadian = false;//DisabledRadian

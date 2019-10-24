@@ -12,12 +12,22 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryEllipseLayer : IGeometryLayer, ILayer
     {
-        //@Content       
-        public string Type => "GeometryEllipseLayer";
+        //@Static     
+        public const string ID = "GeometryEllipseLayer";
 
         //@Construct
+        /// <summary>
+        /// Construct a ellipse-layer.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
+        public GeometryEllipseLayer(XElement element) : this() => this.Load(element);
+        /// <summary>
+        /// Construct a ellipse-layer.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
         public GeometryEllipseLayer()
         {
+            base.Type = GeometryEllipseLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryEllipseIcon(),
@@ -25,6 +35,7 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
                 
+
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
             Transformer transformer = base.TransformManager.Destination;
@@ -40,12 +51,17 @@ namespace Retouch_Photo2.Layers.Models
             return ellipseLayer;
         }
 
+
         public XElement Save()
         {
             XElement element = new XElement("GeometryEllipseLayer");
 
             LayerBase.SaveWidth(element, this);
             return element;
+        }
+        public void Load(XElement element)
+        {
+            LayerBase.LoadWith(element, this);
         }
 
     }

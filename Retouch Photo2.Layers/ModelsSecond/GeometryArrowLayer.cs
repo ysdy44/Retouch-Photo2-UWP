@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
+using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 
@@ -18,9 +19,10 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryArrowLayer : IGeometryLayer, ILayer
     {
-        //@Content       
-        public string Type => "GeometryArrowLayer";
+        //@Static     
+        public const string ID = "GeometryArrowLayer";
 
+        //@Content       
         public bool IsAbsolute = false;
         public float Width = 10;
         public float Value = 0.5f;
@@ -28,9 +30,18 @@ namespace Retouch_Photo2.Layers.Models
         public GeometryArrowTailType LeftTail = GeometryArrowTailType.None;
         public GeometryArrowTailType RightTail = GeometryArrowTailType.Arrow;
 
-        //@Construct
+        //@Construct       
+        /// <summary>
+        /// Construct a arrow-layer.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
+        public GeometryArrowLayer(XElement element) : this() => this.Load(element);
+        /// <summary>
+        /// Construct a arrow-layer.
+        /// </summary>
         public GeometryArrowLayer()
         {
+            base.Type = GeometryArrowLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryArrowIcon(),
@@ -151,6 +162,7 @@ namespace Retouch_Photo2.Layers.Models
             return CanvasGeometry.CreatePolygon(resourceCreator, points);
         }
 
+
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryArrowLayer ArrowLayer = new GeometryArrowLayer();
@@ -158,6 +170,7 @@ namespace Retouch_Photo2.Layers.Models
             LayerBase.CopyWith(resourceCreator, ArrowLayer, this);
             return ArrowLayer;
         }
+
 
         public XElement Save()
         {
@@ -167,8 +180,24 @@ namespace Retouch_Photo2.Layers.Models
             element.Add(new XElement("Width", this.Width));
             element.Add(new XElement("Value", this.Value));
 
+            //TODO: GeometryArrowTailType
+           // element.Add(new XElement("LeftTail", this.LeftTail));
+        //    element.Add(new XElement("RightTail", this.RightTail));
+
             LayerBase.SaveWidth(element, this);
             return element;
+        }
+        public void Load(XElement element)
+        {
+            this.IsAbsolute = (bool)element.Element("IsAbsolute");
+            this.Width = (float)element.Element("Width");
+            this.Value = (float)element.Element("Value");
+
+            //TODO: GeometryArrowTailType
+            //    this.LeftTail = (GeometryArrowTailType)element.Element("LeftTail").Single();
+            //    this.RightTail = (GeometryArrowTailType)element.Element("RightTail");
+
+            LayerBase.LoadWith(element, this);
         }
 
     }

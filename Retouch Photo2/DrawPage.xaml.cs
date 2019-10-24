@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Media.Animation;
 using System.Numerics;
+using System.Xml.Linq;
 
 namespace Retouch_Photo2
 {
@@ -103,8 +104,10 @@ namespace Retouch_Photo2
             this.FullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = true;
             this.SaveButton.Tapped += (s, e) =>
             {
+                XDocument xDocument = this.ViewModel.XElementSave();
                 string path = ApplicationData.Current.LocalFolder.Path + "/" + "Unsdasd" + ".photo2";
-                this.XElementSave(path);
+                             
+                xDocument.Save(path);                
             };
             this.ThemeButton.Tapped += (s, e) =>
             {

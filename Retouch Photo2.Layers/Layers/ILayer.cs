@@ -68,6 +68,12 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         /// <returns> The saved XElement. </returns>
         XElement Save();
+        /// <summary>
+        ///  Loads a ILayer from an XElement.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
+        /// <returns> The loaded ILayer. </returns>
+        void Load(XElement element);
 
 
         #endregion

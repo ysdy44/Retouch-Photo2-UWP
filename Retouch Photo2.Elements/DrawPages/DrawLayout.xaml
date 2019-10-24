@@ -205,11 +205,7 @@
                         <!--Touchbar-->
                         <Setter Target = "TouchbarBorder.(Grid.Column)" Value="1"/>
                         <Setter Target = "TouchbarBorder.(Grid.ColumnSpan)" Value="1"/>
-                        
-                        <!--Foot-->
-                        <Setter Target = "FootRowDefinition.Height" Value="84"/>
-                        <Setter Target = "RadiusAnimaPanel.Margin" Value="8"/>
-                        
+
                     </VisualState.Setters>
                 </VisualState>
 
@@ -249,10 +245,6 @@
                         <Setter Target = "TouchbarBorder.(Grid.Column)" Value="1"/>
                         <Setter Target = "TouchbarBorder.(Grid.ColumnSpan)" Value="1"/>
 
-                        <!--Foot-->
-                        <Setter Target = "FootRowDefinition.Height" Value="106"/>
-                        <Setter Target = "RadiusAnimaPanel.Margin" Value="14"/>
-
                         <!--GridLenght-->
                         <Setter Target = "RightGridLenght.Width" Value="220"/>
 
@@ -271,7 +263,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
-            <RowDefinition x:Name="FootRowDefinition" Height="60"/>
+            <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
 
 
@@ -316,7 +308,7 @@
         <!--Touchbar-->
         <Border x:Name="TouchbarBorder" Grid.ColumnSpan="3" Grid.Row="1" Margin="12,0" MinWidth="200" MaxWidth="800" VerticalAlignment="Bottom"/>
         <!--Foot-->
-        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Column="1" Grid.Row="2" Margin="0,2" 
+        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Column="1" Grid.Row="2"
                                    ShadowOpacity="0.9"
                                    ShadowColor="{ThemeResource AppStrokeColor}"
                                    Background="{ThemeResource AppBackground}"

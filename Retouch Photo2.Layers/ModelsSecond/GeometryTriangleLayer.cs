@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
+using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 
@@ -12,20 +13,31 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryTriangleLayer : IGeometryLayer, ILayer
     {
-        //@Content       
-        public string Type => "GeometryTriangleLayer";
+        //@Static     
+        public const string ID = "GeometryTriangleLayer";
 
+        //@Content
         public float Center = 0.5f;
 
-        //@Construct
+        //@Construct     
+        /// <summary>
+        /// Construct a triangle-layer.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
+        public GeometryTriangleLayer(XElement element) : this() => this.Load(element);
+        /// <summary>
+        /// Construct a triangle-layer.
+        /// </summary>
         public GeometryTriangleLayer()
         {
+            base.Type = GeometryTriangleLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryTriangleIcon(),
                 Text = "Triangle",
             };
         }
+
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -50,6 +62,7 @@ namespace Retouch_Photo2.Layers.Models
             return CanvasGeometry.CreatePolygon(resourceCreator, points);
         }
 
+
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryTriangleLayer TriangleLayer = new GeometryTriangleLayer
@@ -61,6 +74,7 @@ namespace Retouch_Photo2.Layers.Models
             return TriangleLayer;
         }
 
+
         public XElement Save()
         {
             XElement element = new XElement("GeometryTriangleLayer");
@@ -69,6 +83,11 @@ namespace Retouch_Photo2.Layers.Models
 
             LayerBase.SaveWidth(element, this);
             return element;
+        }
+        public void Load(XElement element)
+        {
+            this.Center = (float)element.Element("Center");
+            LayerBase.LoadWith(element, this);
         }
 
     }

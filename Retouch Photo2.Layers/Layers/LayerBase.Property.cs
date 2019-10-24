@@ -19,6 +19,7 @@ namespace Retouch_Photo2.Layers
     {
 
         //@Abstract
+        public string Type { get; set; }
         public string Name { get; set; } = string.Empty;
         public float Opacity { get; set; } = 1.0f;
         public BlendType BlendType { get; set; } = BlendType.None;
@@ -111,36 +112,6 @@ namespace Retouch_Photo2.Layers
             }
             this.TransformManager.TransformAdd(vector);
             this.StyleManager.TransformAdd(vector);
-        }
-
-
-        //@Static
-        /// <summary>
-        /// Copy a layer with self.
-        /// </summary>
-        /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="source"> The source ILayer. </param>
-        /// <param name="destination"> The destination ILayer. </param>
-        public static void CopyWith(ICanvasResourceCreator resourceCreator, ILayer destination, ILayer source)
-        {
-            destination.Name = source.Name;
-            destination.Opacity = source.Opacity;
-            destination.BlendType = source.BlendType;
-            destination.Visibility = source.Visibility;
-
-            destination.TransformManager = source.TransformManager.Clone();
-            destination.EffectManager = source.EffectManager.Clone();
-            foreach (IAdjustment adjustment in source.AdjustmentManager.Adjustments)
-            {
-                IAdjustment clone = adjustment.Clone();
-                destination.AdjustmentManager.Adjustments.Add(clone);
-            }
-
-            foreach (ILayer layer in source.Children)
-            {
-                ILayer clone = layer.Clone(resourceCreator);
-                destination.Children.Add(clone);
-            }
         }
 
     }

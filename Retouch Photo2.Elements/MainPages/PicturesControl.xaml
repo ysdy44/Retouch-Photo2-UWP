@@ -9,7 +9,7 @@
     d:DesignHeight="50"
     d:DesignWidth="800">
 
-    <StackPanel Orientation="Horizontal">
+    <StackPanel Orientation="Horizontal" Margin="8,0">
         <local:MainPageButton x:Name="_PhotoButton" Glyph="&#xEB9F;">
             <local:MainPageButton.Text>
                 Library

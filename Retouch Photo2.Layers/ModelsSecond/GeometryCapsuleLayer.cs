@@ -12,12 +12,21 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryCapsuleLayer : IGeometryLayer, ILayer
     {
-        //@Content       
-        public string Type => "GeometryCapsuleLayer";
+        //@Static     
+        public const string ID = "GeometryCapsuleLayer";
 
-        //@Construct
+        //@Construct   
+        /// <summary>
+        /// Construct a capsule-layer.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
+        public GeometryCapsuleLayer(XElement element) : this() => this.Load(element);
+        /// <summary>
+        /// Construct a capsule-layer.
+        /// </summary>
         public GeometryCapsuleLayer()
         {
+            base.Type = GeometryCapsuleLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryCapsuleIcon(),
@@ -103,6 +112,7 @@ namespace Retouch_Photo2.Layers.Models
             }
         }
 
+
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryCapsuleLayer CapsuleLayer = new GeometryCapsuleLayer();
@@ -111,12 +121,17 @@ namespace Retouch_Photo2.Layers.Models
             return CapsuleLayer;
         }
 
+
         public XElement Save()
         {
             XElement element = new XElement("GeometryCapsuleLayer");
             
             LayerBase.SaveWidth(element, this);
             return element;
+        }
+        public void Load(XElement element)
+        {
+            LayerBase.LoadWith(element, this);
         }
 
     }

@@ -49,27 +49,37 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <StackPanel Margin="8" VerticalAlignment="Center">
-            <TextBlock FontWeight="Bold">
+        <TextBlock Margin="8,2">
+            <Run FontWeight="Bold">
                 Share
-            </TextBlock>
-            <TextBlock FontSize="12" Style="{ThemeResource AppTextBlock}">
+            </Run>
+            <LineBreak/>
+            <Run FontSize="12" Foreground="{ThemeResource AppText}">
                 Select project(s) to be shared.
-            </TextBlock>
-        </StackPanel>
+            </Run>
+        </TextBlock>
 
-        <Border MinWidth="90" Margin="4" CornerRadius="2" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}">
+        <Border MinWidth="90" CornerRadius="2" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}">
             <ComboBox x:Name="ComboBox" SelectedIndex="0" BorderThickness="0" HorizontalAlignment="Stretch">
-                <ComboBoxItem Content="JPEG"/>
-                <ComboBoxItem Content="PNG" BorderBrush="{ThemeResource MenuFlyoutItemPointerOverBackgroundThemeBrush}" BorderThickness="0,0,0,2"/>
-                <ComboBoxItem Content="BMP"/>
-                <ComboBoxItem Content="GIF"/>
-                <ComboBoxItem Content="TIFF"/>
+                <ComboBoxItem>
+                    JPEG
+                </ComboBoxItem>
+                <ComboBoxItem BorderThickness="0,0,0,1" BorderBrush="{ThemeResource MenuFlyoutItemPointerOverBackgroundThemeBrush}">
+                    PNG
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    BMP
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    GIF
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    TIFF
+                </ComboBoxItem>
             </ComboBox>
         </Border>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <AppBarSeparator/>
+        <StackPanel Orientation="Horizontal" Margin="8,0" HorizontalAlignment="Right">
             <local:MainPageButton x:Name="_OKButton" Glyph="&#xE10B;">
                 <local:MainPageButton.Text>
                     OK

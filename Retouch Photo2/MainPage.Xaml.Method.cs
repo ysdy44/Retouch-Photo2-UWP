@@ -6,17 +6,15 @@ using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Windows.Foundation;
-using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 
 namespace Retouch_Photo2
 {
@@ -25,8 +23,8 @@ namespace Retouch_Photo2
     /// </summary>
     public sealed partial class MainPage : Page
     {
-
-        private async Task LoadSettingViewModel()
+        
+        private async Task ConstructSettingViewModel()
         {
             //Setting
             SettingViewModel setting = null;
@@ -46,6 +44,28 @@ namespace Retouch_Photo2
 
             ElementTheme theme = this.SettingViewModel.ElementTheme;
             ApplicationViewTitleBarBackgroundExtension.SetTheme(theme);
+        }
+
+
+        private void NewProjectFromPhoto(object sender, Photo photo)
+        {
+            if (this.State != MainPageState.Main) return;
+
+            if (sender is FrameworkElement element)
+            {
+                this.NavigatedFrom(element);
+            }
+
+            if (photo.Path != null)
+            {
+                //Create an XDocument object.
+                string path = photo.Path;
+                XDocument xDocument = XDocument.Load(path);
+
+                this.ViewModel.XElementLoad(xDocument);
+            }
+
+            this.Frame.Navigate(typeof(DrawPage));//Navigate     
         }
         private async Task NewProjectFromPictures(PickerLocationId location)
         {
@@ -70,7 +90,7 @@ namespace Retouch_Photo2
             Project project = new Project(imageLayer);
             this.Frame.Navigate(typeof(DrawPage), project);//Navigate       
         }
-
+        
 
         private async Task Refresh()
         {
@@ -102,60 +122,6 @@ namespace Retouch_Photo2
                 MainPageState.None :
                 MainPageState.Main;//State
         }
-
-
-        #region MainPageState
-
-
-        private void SetMainPageState(MainPageState state)
-        {
-            this.State = state;
-            bool? selectMode = (state == MainPageState.Main) ? (bool?)null : (bool?)false;
-
-            foreach (Photo item in this.PhotoFileList)
-            {
-                item.SelectMode = selectMode;
-            }
-        }
-
-
-        private async void AddDialogShow()
-        {
-            AddDialog addDialog = new AddDialog();
-            Grid.SetRow(addDialog, 1);
-            Grid.SetRowSpan(addDialog, 2);
-
-            this.RootGrid.Children.Add(addDialog);
-
-            //Add
-            addDialog.CloseButtonClick += (sender, args) =>
-            {
-                addDialog.Hide();
-                this.RootGrid.Children.Remove(addDialog);
-            };
-            addDialog.PrimaryButtonClick += (sender, args) =>
-            {
-                addDialog.Hide();
-                this.RootGrid.Children.Remove(addDialog);
-
-                this.IsLoading = true;//Loading
-
-                BitmapSize pixels = addDialog.Size;
-                Project project = new Project((int)pixels.Width, (int)pixels.Height);//Project
-                this.Frame.Navigate(typeof(DrawPage), project);//Navigate    
-
-                this.IsLoading = false;//Loading
-            };
-
-            await addDialog.ShowAsync(ContentDialogPlacement.InPlace);
-        }
-
-        private async void FolderDialogShow()
-        {
-        }
-
-
-        #endregion
 
 
         private void NavigatedTo()

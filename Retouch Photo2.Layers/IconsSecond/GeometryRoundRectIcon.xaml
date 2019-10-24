@@ -10,6 +10,6 @@
     d:DesignWidth="50"
     >
 
-    <Rectangle RadiusX="6" RadiusY="6" Width="22" Height="22" Fill="{x:Bind UserControl.Foreground}"/>
+    <Rectangle RadiusX="6" RadiusY="6" Width="22" Height="22" Fill="{x:Bind UserControl.Foreground, Mode=OneWay}"/>
 
 </UserControl>

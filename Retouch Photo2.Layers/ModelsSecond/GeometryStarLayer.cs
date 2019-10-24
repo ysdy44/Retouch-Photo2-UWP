@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
+using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 
@@ -12,21 +13,32 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryStarLayer : IGeometryLayer, ILayer
     {
-        //@Content       
-        public string Type => "GeometryStarLayer";
+        //@Static     
+        public const string ID = "GeometryStarLayer";
 
+        //@Content       
         public int Points = 5;
         public float InnerRadius = 0.38f;
 
         //@Construct
+        /// <summary>
+        /// Construct a star-layer.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
+        public GeometryStarLayer(XElement element) : this() => this.Load(element);
+        /// <summary>
+        /// Construct a star-layer.
+        /// </summary>
         public GeometryStarLayer()
         {
+            base.Type = GeometryStarLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryStarIcon(),
                 Text = "Star",
             };
         }
+
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -55,6 +67,7 @@ namespace Retouch_Photo2.Layers.Models
             return CanvasGeometry.CreatePolygon(resourceCreator, points);
         }
 
+
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryStarLayer StarLayer = new GeometryStarLayer
@@ -67,6 +80,7 @@ namespace Retouch_Photo2.Layers.Models
             return StarLayer;
         }
 
+
         public XElement Save()
         {
             XElement element = new XElement("GeometryStarLayer");
@@ -77,6 +91,12 @@ namespace Retouch_Photo2.Layers.Models
             LayerBase.SaveWidth(element, this);
             return element;
         }
-
+        public void Load(XElement element)
+        {
+            this.Points = (int)element.Element("Points");
+            this.InnerRadius = (float)element.Element("InnerRadius");
+            LayerBase.LoadWith(element, this);
+        }
+        
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
+using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 
@@ -43,20 +44,31 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryHeartLayer : IGeometryLayer, ILayer
     {
-        //@Content       
-        public string Type => "GeometryHeartLayer";
-
+        //@Static     
+        public const string ID = "GeometryHeartLayer";
+         
+        //@Content
         public float Spread = 0.8f;
 
-        //@Construct
+        //@Construct  
+        /// <summary>
+        /// Construct a heart-layer.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
+        public GeometryHeartLayer(XElement element) : this() => this.Load(element);
+        /// <summary>
+        /// Construct a heart-layer.
+        /// </summary>
         public GeometryHeartLayer()
         {
+            base.Type = GeometryHeartLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryHeartIcon(),
                 Text = "Heart",
             };
         }
+
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -83,6 +95,7 @@ namespace Retouch_Photo2.Layers.Models
             return CanvasGeometry.CreatePath(pathBuilder).Transform(matrix);
         }
 
+
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryHeartLayer HeartLayer = new GeometryHeartLayer();
@@ -90,6 +103,7 @@ namespace Retouch_Photo2.Layers.Models
             LayerBase.CopyWith(resourceCreator, HeartLayer, this);
             return HeartLayer;
         }
+
 
         public XElement Save()
         {
@@ -99,6 +113,11 @@ namespace Retouch_Photo2.Layers.Models
 
             LayerBase.SaveWidth(element, this);
             return element;
+        }
+        public void Load(XElement element)
+        {
+            this.Spread = (float)element.Element("Spread");
+            LayerBase.LoadWith(element, this);
         }
 
     }
