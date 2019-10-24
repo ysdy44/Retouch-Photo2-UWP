@@ -6,6 +6,15 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Retouch_Photo2.Layers;
+using Retouch_Photo2.Menus;
+using Retouch_Photo2.Tools;
+using Retouch_Photo2.ViewModels;
+using System;
+using System.Numerics;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using FanKit.Transformers;
 
 namespace Retouch_Photo2
 {
@@ -16,6 +25,38 @@ namespace Retouch_Photo2
         private void ConstructViewModel()
         {
             this.MainCanvasControl.ConstructViewModel();
+
+            this.ViewModel.TipWidthHeight += (transformer, point, invalidateMode) =>
+            {
+                //Text
+                {
+                    Vector2 horizontal = transformer.Horizontal;
+                    Vector2 vertical = transformer.Vertical;
+
+                    int width = (int)horizontal.Length();
+                    int height = (int)vertical.Length();
+
+                    this.TipWRun.Text = width.ToString();
+                    this.TipHRun.Text = height.ToString();
+                }
+                
+                //Width Height
+                {
+                    Vector2 offset = this.DrawLayout.FullScreenOffset;
+                    double x = offset.X + point.X + 10;
+                    double y = offset.Y + point.Y - 50;
+
+                    Canvas.SetLeft(this.TipToolTip, x);
+                    Canvas.SetTop(this.TipToolTip, y);
+                }
+
+                switch (invalidateMode)
+                {
+                    case InvalidateMode.None: break;
+                    case InvalidateMode.Thumbnail: this.TipToolTip.Visibility = Visibility.Collapsed; break;
+                    case InvalidateMode.HD: this.TipToolTip.Visibility = Visibility.Visible; break;
+                }
+            };
         }
 
         private void ConstructKeyboardViewModel()

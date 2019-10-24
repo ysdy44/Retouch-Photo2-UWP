@@ -50,11 +50,7 @@ namespace Retouch_Photo2.Layers
             }
         }
 
-
-        public Button ExpanedButton => this._ExpanedButton;
-        public Button SelectedButton => this._SelectedButton;
-
-
+        
         //@Construct
         public LayerControl(ILayer layer)
         {
@@ -64,6 +60,14 @@ namespace Retouch_Photo2.Layers
 
             //LayerCollection
             {
+                this.Loaded += (s, e) =>
+                {
+                    if (layer.ExpandMode == ExpandMode.None)
+                        layer.ExpandMode = ExpandMode.NoChildren;
+                    if (layer.SelectMode == SelectMode.None)
+                        layer.SelectMode = SelectMode.UnSelected;
+                };
+
                 this.Tapped += (s, e) =>
                 {
                     LayerCollection.ItemClick?.Invoke(layer);//Delegate
@@ -74,12 +78,10 @@ namespace Retouch_Photo2.Layers
                     LayerCollection.RightTapped?.Invoke(layer);//Delegate
                     e.Handled = true;
                 };
-                this.Loaded += (s, e) =>
+                this.VisualButton.Tapped += (s, e) =>
                 {
-                    if (layer.ExpandMode == ExpandMode.None)
-                        layer.ExpandMode = ExpandMode.NoChildren;
-                    if (layer.SelectMode == SelectMode.None)
-                        layer.SelectMode = SelectMode.UnSelected;
+                    LayerCollection.VisualChanged?.Invoke(layer);//Delegate
+                    e.Handled = true;
                 };
             }
 
@@ -138,6 +140,26 @@ namespace Retouch_Photo2.Layers
                 this.PointerExited += (s, e) => layer.OverlayMode = OverlayMode.None;
                 this.PointerReleased += (s, e) => layer.OverlayMode = OverlayMode.None;
             }
+        }
+
+
+        public void SetVisibility(Visibility value)
+        {
+            switch (value)
+            {
+                case Visibility.Visible:
+                    this.VisualFontIcon.Opacity = 1.0;
+                    break;
+                case Visibility.Collapsed:
+                    this.VisualFontIcon.Opacity = 0.5;
+                    break;
+            }
+        }
+        public void SetTagType(TagType value)
+        {
+            this.TagColor.Color = (value == TagType.None) ?
+            Colors.Transparent :
+            this.TagColor.Color = TagControl.TagConverter(value);
         }
 
     }

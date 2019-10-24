@@ -11,6 +11,7 @@ namespace Retouch_Photo2.Layers
     {
         public static Action<ILayer> ItemClick;
         public static Action<ILayer> RightTapped;
+        public static Action<ILayer> VisualChanged;
         public static Action SelectChanged;
 
         //Overlay

@@ -13,10 +13,11 @@ namespace Retouch_Photo2.Layers
         int ControlHeight { get; set; }
         int Depth { get; set; }
 
-        Button ExpanedButton { get; }
-        Button SelectedButton { get; }
-
+        //Property
+        void SetVisibility(Visibility value);
         void SetTagType(TagType value);
+
+        //Control
         void SetExpandMode(ExpandMode value);
         void SetSelectMode(SelectMode value);
         void SetOverlayMode(OverlayMode value);

@@ -57,5 +57,6 @@ namespace Retouch_Photo2.ViewModels
             if (this.Text.Length > 44) this.Text = string.Empty;
             else this.Text += "O";
         }
+
     }
 }

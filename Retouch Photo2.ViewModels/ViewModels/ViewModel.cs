@@ -1,8 +1,10 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Layers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Numerics;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -56,6 +58,8 @@ namespace Retouch_Photo2.ViewModels
 
         #endregion
 
+        /// <summary> Occurs when create layer. </summary>
+        public Action<Transformer, Vector2, InvalidateMode> TipWidthHeight { get; set; }
 
         #region ImageRe
 

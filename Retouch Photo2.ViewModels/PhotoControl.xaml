@@ -21,11 +21,58 @@
         <!--Foreground-->
         <SolidColorBrush x:Name="CheckColor" Color="{ThemeResource SystemAccentColor}"/>
         <SolidColorBrush x:Name="UnCheckColor" Color="White"/>
-    
+        <SolidColorBrush x:Name="HighlightColor" Color="Black"/>
+
     </UserControl.Resources>
 
-    
+
     <Grid x:Name="RootGrid" Background="Transparent">
+
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
+
+                <!--UnSelected-->
+                <VisualState x:Name="UnSelected">
+                    <VisualState.Setters >
+
+                        <!--RootGrid-->
+                        <Setter Target = "RootGrid.Background" Value="{StaticResource UnAccentColor}"/>
+                        <Setter Target = "BackgroundGrid.BorderThickness" Value="1"/>
+                       
+                        <!--RootGrid-->
+                        <Setter Target = "SelectedBorder.Visibility" Value="Visible"/>
+                        <Setter Target = "SelectedBorder.Background" Value="{StaticResource UnCheckColor}"/>
+                        <Setter Target = "SelectedBorder.BorderBrush" Value="{StaticResource HighlightColor}"/>
+                        <Setter Target = "SelectedFontIcon.Visibility" Value="Collapsed"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Selected-->
+                <VisualState x:Name="Selected">
+                    <VisualState.Setters >
+
+                        <!--RootGrid-->
+                        <Setter Target = "RootGrid.Background" Value="{StaticResource AccentColor}"/>
+                        <Setter Target = "BackgroundGrid.BorderThickness" Value="1"/>
+
+                        <!--RootGrid-->
+                        <Setter Target = "SelectedBorder.Visibility" Value="Visible"/>
+                        <Setter Target = "SelectedBorder.Background" Value="{StaticResource CheckColor}"/>
+                        <Setter Target = "SelectedBorder.BorderBrush" Value="{StaticResource CheckColor}"/>
+                        <Setter Target = "SelectedFontIcon.Visibility" Value="Visible"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="2"/>
@@ -43,18 +90,18 @@
             <Grid x:Name="BackgroundGrid"
                           MaxWidth="200" Margin="6"                      
                           BorderThickness="0"     
-                          BorderBrush="White"
+                          BorderBrush="{ThemeResource SystemAccentColor}"
                           Background="White">
 
                 <!--Image-->
                 <controls:ImageEx x:Name="ImageEx" MinWidth="60" MinHeight="60" IsCacheEnabled="True" />
 
                 <Border x:Name="SelectedBorder" Visibility="Collapsed"
-                        CornerRadius="10" Width="22" Height="22" 
-                        BorderThickness="1" BorderBrush="White"
+                        CornerRadius="10" Width="20" Height="20" 
+                        BorderThickness="1"
                         HorizontalAlignment="Right" VerticalAlignment="Bottom"
                         >
-                    <FontIcon Glyph="&#xE10B;" FontSize="12" FontFamily="Segoe UI Symbol" Foreground="White"/>
+                    <FontIcon x:Name="SelectedFontIcon" Glyph="&#xE10B;" FontSize="12" FontFamily="Segoe UI Symbol" Foreground="White"/>
                 </Border>
                 
             </Grid>

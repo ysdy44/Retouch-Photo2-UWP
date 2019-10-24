@@ -22,7 +22,27 @@ namespace Retouch_Photo2.Layers
         public string Name { get; set; } = string.Empty;
         public float Opacity { get; set; } = 1.0f;
         public BlendType BlendType { get; set; } = BlendType.None;
-        public Visibility Visibility { get; set; }
+
+        private Visibility visibility;
+        public Visibility Visibility
+        {
+            get => this.visibility;
+            set
+            {
+                this.Control.SetVisibility(value);
+                this.visibility = value;
+            }
+        }
+        private TagType tagType;
+        public TagType TagType
+        {
+            get => this.tagType;
+            set
+            {
+                this.Control.SetTagType(value);
+                this.tagType = value;
+            }
+        }
 
         public bool IsRefactoringTransformer { get; set; }
         public virtual Transformer GetActualDestinationWithRefactoringTransformer => this.TransformManager.IsCrop ? this.TransformManager.CropDestination : this.TransformManager.Destination;

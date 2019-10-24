@@ -45,6 +45,8 @@ namespace Retouch_Photo2.Controls
         public LayersControl()
         {
             this.InitializeComponent();
+            //LayerCollection
+            this.ConstructLayerCollection();
             this.ItemsControl.ItemsSource = this.ViewModel.Layers.RootControls;
 
 
@@ -94,88 +96,7 @@ namespace Retouch_Photo2.Controls
 
 
             #endregion
-
-
-            #region LayerCollection
-
-            if (LayerCollection.ItemClick == null)
-            {
-                LayerCollection.ItemClick += (layer) =>
-                {
-                    if (layer.SelectMode == SelectMode.Selected)
-                    {
-                        this.ShowLayerMenu(layer);
-                        return;
-                    }
-
-                    //Is it independent of other layers?
-                    bool isfreedom = this.KeyboardViewModel.IsCenter;
-                    //Is select successively?
-                    bool isLinear = this.KeyboardViewModel.IsSquare;
-
-                    //Select a layer.
-                    if (isfreedom) layer.Selected();
-                    else if (isLinear) this.ViewModel.Layers.ShiftSelectCurrentLayer(layer);
-                    else
-                    {
-                        foreach (ILayer child in this.ViewModel.Layers.RootLayers)
-                        {
-                            child.SelectMode = SelectMode.UnSelected;
-                        }
-
-                        layer.SelectMode = SelectMode.Selected;
-                        this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
-                        this.ViewModel.Invalidate();
-                    }
-                };
-            }
-            if (LayerCollection.RightTapped == null)
-            {
-                LayerCollection.RightTapped += (layer) => this.ShowLayerMenu(layer);
-            }
-            if (LayerCollection.SelectChanged == null)
-            {
-                LayerCollection.SelectChanged += () =>
-                {
-                    this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
-                    this.ViewModel.Invalidate();
-                };
-            }
-
-            if (LayerCollection.DragItemsStarted == null)
-            {
-                LayerCollection.DragItemsStarted += (layer, selectMode) =>
-                {
-                    this.DragSourceLayer = layer;
-                    this.DragLayerSelectMode = selectMode;
-                };
-            }
-            if (LayerCollection.DragItemsDelta == null)
-            {
-                LayerCollection.DragItemsDelta += (layer, overlayMode) =>
-                {
-                    this.DragDestinationLayer = layer;
-                    this.DragLayerOverlayMode = overlayMode;
-                };
-            }
-            if (LayerCollection.DragItemsCompleted == null)
-            {
-                LayerCollection.DragItemsCompleted += () =>
-                {
-                    this.ViewModel.Layers.DragComplete(this.DragDestinationLayer, this.DragSourceLayer, this.DragLayerOverlayMode, this.DragLayerSelectMode);
-                    this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
-                    this.ViewModel.Layers.ArrangeLayersParents();
-
-                    this.DragSourceLayer = null;
-                    this.DragDestinationLayer = null;
-                    this.DragLayerSelectMode = SelectMode.None;
-                    this.DragLayerOverlayMode = OverlayMode.None;
-                };
-            }
-
-
-            #endregion
-
+            
         }
 
         private void ShowLayerMenu()
@@ -189,41 +110,6 @@ namespace Retouch_Photo2.Controls
 
             this.ShowLayerMenu();
         }
-
-
-        private async Task AddImage(PickerLocationId location)
-        {
-            //ImageRe
-            ImageRe imageRe = await ImageRe.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, location);
-            if (imageRe == null) return;
-
-            //Images
-            this.ViewModel.DuplicateChecking(imageRe);
-
-            //Transformer
-            Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
-
-            //Layer
-            ImageLayer imageLayer = new ImageLayer
-            {
-                SelectMode = SelectMode.Selected,
-                TransformManager = new TransformManager(transformerSource),
-
-                ImageRe = imageRe,
-            };
-
-            //Selection
-            this.SelectionViewModel.SetValue((layer) =>
-            {
-                layer.SelectMode = SelectMode.UnSelected;
-            });
-
-            //Mezzanine
-            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(imageLayer);
-            this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
-
-            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
-            this.ViewModel.Invalidate();//Invalidate
-        }
+        
     }
 }

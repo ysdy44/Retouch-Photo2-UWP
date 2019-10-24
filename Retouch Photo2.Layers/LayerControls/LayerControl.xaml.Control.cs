@@ -9,13 +9,6 @@ namespace Retouch_Photo2.Layers
     public partial class LayerControl : UserControl, ILayerControl
     {
 
-
-        public void SetTagType(TagType value)
-        {
-            this.TagColor.Color = (value == TagType.None) ?
-            Colors.Transparent :
-            this.TagColor.Color = TagControl.TagConverter(value);
-        }
         public void SetExpandMode(ExpandMode value)
         {
             this.ExpanedButton.Visibility = (value == ExpandMode.NoChildren) ? Visibility.Collapsed : Visibility.Visible;
@@ -31,7 +24,9 @@ namespace Retouch_Photo2.Layers
                 this.IconContentControl.Foreground =
                     this.TextBlock.Foreground =
                     this.ExpanedFontIcon.Foreground =
-                    this.SelectedFontIcon.Foreground = this.CheckColor;
+                    this.SelectedFontIcon.Foreground =
+                    this.VisualFontIcon.Foreground =
+                    this.CheckColor;
                 this.SelectedFontIcon.Glyph = "\xEC61";
             }
             else
@@ -40,7 +35,9 @@ namespace Retouch_Photo2.Layers
                 this.IconContentControl.Foreground =
                     this.TextBlock.Foreground =
                     this.ExpanedFontIcon.Foreground =
-                    this.SelectedFontIcon.Foreground = this.UnCheckColor;
+                    this.SelectedFontIcon.Foreground =
+                    this.VisualFontIcon.Foreground =
+                    this.UnCheckColor;
                 this.SelectedFontIcon.Glyph = "\xECCA";
             }
         }

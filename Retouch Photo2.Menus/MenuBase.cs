@@ -92,6 +92,7 @@ namespace Retouch_Photo2.Menus
             this.Layout.TitlePanel.ManipulationMode = ManipulationModes.All;
             this.Layout.TitlePanel.ManipulationStarted += (s, e) =>
             {
+                this.Layout.Self.Opacity = 0.6d;
                 this._postion = MenuHelper.GetVisualPostion(this.Layout.Self);
                 this.Move?.Invoke(); //Delegate
             };
@@ -105,8 +106,12 @@ namespace Retouch_Photo2.Menus
                     MenuHelper.SetOverlayPostion(this.Layout.Self, postion2);
                 }
             };
+            this.Layout.TitlePanel.ManipulationCompleted += (s, e) =>
+            {
+                this.Layout.Self.Opacity = 1.0d;
+            };
         }
-        
+
         private MenuState GetState(MenuState state)
         {
             switch (state)

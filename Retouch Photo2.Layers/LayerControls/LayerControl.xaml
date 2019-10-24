@@ -40,11 +40,10 @@
             <ColumnDefinition Width="30"/>
             <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
 
         <!--Selected-->
-        <Button x:Name="_SelectedButton" Grid.Column="1" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+        <Button x:Name="SelectedButton" Grid.Column="1" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
             <FontIcon x:Name="SelectedFontIcon" Glyph="&#xE001;" FontSize="18" Foreground="{StaticResource UnCheckColor}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
         </Button>
 
@@ -54,14 +53,25 @@
         <!--Text-->
         <TextBlock x:Name="TextBlock" Grid.Column="3" Margin="8,0" VerticalAlignment="Center"/>
 
-        <!--Expaned-->
-        <Button x:Name="_ExpanedButton" Grid.Column="4" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-            <FontIcon x:Name="ExpanedFontIcon" FontSize="14" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-        </Button>
-       
+        
+        <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right">
+
+            <!--Visual-->
+            <Button x:Name="VisualButton" Width="30" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                <FontIcon x:Name="VisualFontIcon" Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}" />
+            </Button>
+            
+            <!--Expaned-->
+            <Button x:Name="ExpanedButton" Width="30" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                <FontIcon x:Name="ExpanedFontIcon" FontSize="14" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            </Button>
+            
+        </StackPanel>
+
+
         <!--Line-->
         <Rectangle IsHitTestVisible="False" Grid.Column="0" Fill="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
-        <Rectangle IsHitTestVisible="False" Grid.Column="1" Grid.ColumnSpan="4" Height="1" VerticalAlignment="Bottom" Fill="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
+        <Rectangle IsHitTestVisible="False" Grid.Column="1" Grid.ColumnSpan="3" Height="1" VerticalAlignment="Bottom" Fill="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
         <Rectangle IsHitTestVisible="False" Grid.Column="1" Margin="0,2" Width="2" HorizontalAlignment="Left" VerticalAlignment="Stretch">
             <Rectangle.Fill>
                 <SolidColorBrush x:Name="TagColor" Color="Transparent"/>
@@ -69,9 +79,9 @@
         </Rectangle>
 
         <!--Overlay-->
-        <Border x:Name="OverlayShowTopBorder" Grid.Column="0" Grid.ColumnSpan="6" Height="14.3" VerticalAlignment="Top" Style="{StaticResource OverlayStyle}"/>
-        <Border x:Name="OverlayShowCenterBorder" Grid.Column="1" Grid.ColumnSpan="4" Height="21.4" VerticalAlignment="Center" Style="{StaticResource OverlayStyle}"/>
-        <Border x:Name="OverlayShowBottomBorder" Grid.Column="0" Grid.ColumnSpan="6" Height="14.3" VerticalAlignment="Bottom" Style="{StaticResource OverlayStyle}"/>
+        <Border x:Name="OverlayShowTopBorder" Grid.Column="0" Grid.ColumnSpan="4" Height="14.3" VerticalAlignment="Top" Style="{StaticResource OverlayStyle}"/>
+        <Border x:Name="OverlayShowCenterBorder" Grid.Column="1" Grid.ColumnSpan="3" Height="21.4" VerticalAlignment="Center" Style="{StaticResource OverlayStyle}"/>
+        <Border x:Name="OverlayShowBottomBorder" Grid.Column="0" Grid.ColumnSpan="4" Height="14.3" VerticalAlignment="Bottom" Style="{StaticResource OverlayStyle}"/>
 
     </Grid>
 </UserControl>

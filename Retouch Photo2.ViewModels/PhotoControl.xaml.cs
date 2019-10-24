@@ -18,34 +18,22 @@ namespace Retouch_Photo2.ViewModels
     public sealed partial class PhotoControl : UserControl
     {
 
-
-        public void SetSelectMode(bool? value)
+        //@VisualState
+        bool? _vsSelectMode = null;
+        public VisualState VisualState
         {
-            switch (value)
+            get
             {
-                case null:
-                    this.RootGrid.Background = this.UnAccentColor;
-                    this.BackgroundGrid.BorderThickness = new Thickness(0);
-
-                    this.SelectedBorder.Visibility = Visibility.Collapsed;
-                    break;
-                case false:
-                    this.RootGrid.Background = this.UnAccentColor;
-                    this.BackgroundGrid.BorderThickness = new Thickness(1);
-
-                    this.SelectedBorder.Visibility = Visibility.Visible;
-                    this.SelectedBorder.Background = this.UnCheckColor;
-                    break;
-                case true:
-                    this.RootGrid.Background = this.AccentColor;
-                    this.BackgroundGrid.BorderThickness = new Thickness(1);
-                    
-                    this.SelectedBorder.Visibility = Visibility.Visible;
-                    this.SelectedBorder.Background = this.CheckColor;
-                    break;
+                switch (this._vsSelectMode)
+                {
+                    case null: return this.Normal;
+                    case false: return this.UnSelected;
+                    case true: return this.Selected;
+                }
+                return this.Normal;
             }
+            set => VisualStateManager.GoToState(this, value.Name, false);
         }
-
 
         //@Construct
         public PhotoControl(Photo photo)
@@ -59,6 +47,12 @@ namespace Retouch_Photo2.ViewModels
             {
                 Photo.ItemClick?.Invoke(this.BackgroundGrid, photo);//Delegate
             };
+        }
+
+        public void SetSelectMode(bool? value)
+        {
+            this._vsSelectMode = value;
+            this.VisualState = this.VisualState;//State
         }
 
     }

@@ -50,6 +50,9 @@ namespace Retouch_Photo2.Tools.Models
                  this.IsSquare
             );
 
+            //Tip
+            this.ViewModel.TipWidthHeight?.Invoke(transformer, point, InvalidateMode.HD); //Delegate
+
             //Mezzanine
             this.ViewModel.MezzanineLayer = this.CreateLayer(transformer);
             this.ViewModel.MezzanineLayer.StyleManager = this.SelectionViewModel.StyleManager.Clone();
@@ -74,6 +77,9 @@ namespace Retouch_Photo2.Tools.Models
                  this.IsCenter,
                  this.IsSquare
             );
+
+            //Tip
+            this.ViewModel.TipWidthHeight?.Invoke(transformer, point, InvalidateMode.None); //Delegate
 
             //Mezzanine
             this.ViewModel.MezzanineLayer.TransformManager.Source = transformer;
@@ -104,6 +110,9 @@ namespace Retouch_Photo2.Tools.Models
                      this.IsCenter,
                      this.IsSquare
                 );
+
+                //Tip
+                this.ViewModel.TipWidthHeight?.Invoke(transformer, point, InvalidateMode.Thumbnail); //Delegate
 
                 //Mezzanine
                 this.ViewModel.MezzanineLayer.TransformManager.Source = transformer;

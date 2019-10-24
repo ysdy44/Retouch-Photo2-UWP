@@ -192,13 +192,21 @@
 
 
         <!--Menu-->
-        <Canvas x:Name="OverlayCanvas" IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}"/>
+        <Canvas x:Name="OverlayCanvas" IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}">
+            <ToolTip x:Name="TipToolTip" IsHitTestVisible="False" Visibility="Collapsed" Style="{StaticResource AppToolTip}">
+                <TextBlock>
+                    W <Run x:Name="TipWRun">0</Run> px
+                    <LineBreak/>
+                    H <Run x:Name="TipHRun">0</Run> px
+                </TextBlock>
+            </ToolTip>
+        </Canvas>
 
         <!--FullScreen-->
         <Button x:Name="UnFullScreenButton" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AppCircleButtonStyle}">
-                <FontIcon Glyph="&#xE1D8;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            <FontIcon Glyph="&#xE1D8;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
         </Button>
-        
+
         <!--Tip-->
         <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" HorizontalAlignment="Center">
             <ToolTip Style="{StaticResource AppToolTip}">

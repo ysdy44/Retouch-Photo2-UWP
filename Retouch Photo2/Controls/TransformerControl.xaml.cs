@@ -325,7 +325,7 @@ namespace Retouch_Photo2.Controls
 
         #endregion
 
-        
+        bool _isLoaded;
         Transformer oldTransformer;
         IndicatorMode IndicatorMode = IndicatorMode.LeftTop;
 
@@ -334,7 +334,7 @@ namespace Retouch_Photo2.Controls
         public TransformerControl()
         {
             this.InitializeComponent();
-
+            this.Loaded += (s, e) => this._isLoaded = true;
             this._MenuTitle.ResetButton.Visibility = Visibility.Collapsed;
             this._MenuTitle.BackButton.Tapped += (s, e) =>
             {
@@ -413,8 +413,11 @@ namespace Retouch_Photo2.Controls
                     VerticalAlignment newVertical = this.GetVerticalAlignmentFormIndicatorMode(mode);
                     VerticalAlignment oldVertical = this.GetVerticalAlignmentFormIndicatorMode(startingMode);
 
-                    if (newHorizontal != oldHorizontal) this.XEaseStoryboard.Begin();//Storyboard
-                    if (newVertical != oldVertical) this.YEaseStoryboard.Begin();//Storyboard
+                    if (this._isLoaded)
+                    {
+                        if (newHorizontal != oldHorizontal) this.XEaseStoryboard.Begin();//Storyboard
+                        if (newVertical != oldVertical) this.YEaseStoryboard.Begin();//Storyboard
+                    }
                 }
 
                 this.IndicatorMode = mode;//IndicatorMode
