@@ -98,67 +98,84 @@ namespace Retouch_Photo2.Controls
 
             #region LayerCollection
 
-
-            LayerCollection.ItemClick += (layer) =>
+            if (LayerCollection.ItemClick == null)
             {
-                if (layer.SelectMode == SelectMode.Selected)
+                LayerCollection.ItemClick += (layer) =>
                 {
-                    this.ShowLayerMenu(layer);
-                    return;
-                }
-
-                //Is it independent of other layers?
-                bool isfreedom = this.KeyboardViewModel.IsCenter;
-                //Is select successively?
-                bool isLinear = this.KeyboardViewModel.IsSquare;
-
-                //Select a layer.
-                if (isfreedom) layer.Selected();
-                else if (isLinear) this.ViewModel.Layers.ShiftSelectCurrentLayer(layer);
-                else
-                {
-                    foreach (ILayer child in this.ViewModel.Layers.RootLayers)
+                    if (layer.SelectMode == SelectMode.Selected)
                     {
-                        child.SelectMode = SelectMode.UnSelected;
+                        this.ShowLayerMenu(layer);
+                        return;
                     }
 
-                    layer.SelectMode = SelectMode.Selected;
+                    //Is it independent of other layers?
+                    bool isfreedom = this.KeyboardViewModel.IsCenter;
+                    //Is select successively?
+                    bool isLinear = this.KeyboardViewModel.IsSquare;
+
+                    //Select a layer.
+                    if (isfreedom) layer.Selected();
+                    else if (isLinear) this.ViewModel.Layers.ShiftSelectCurrentLayer(layer);
+                    else
+                    {
+                        foreach (ILayer child in this.ViewModel.Layers.RootLayers)
+                        {
+                            child.SelectMode = SelectMode.UnSelected;
+                        }
+
+                        layer.SelectMode = SelectMode.Selected;
+                        this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+                        this.ViewModel.Invalidate();
+                    }
+                };
+            }
+            if (LayerCollection.RightTapped == null)
+            {
+                LayerCollection.RightTapped += (layer) => this.ShowLayerMenu(layer);
+            }
+            if (LayerCollection.SelectChanged == null)
+            {
+                LayerCollection.SelectChanged += () =>
+                {
                     this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
                     this.ViewModel.Invalidate();
-                }
-            };
-            LayerCollection.RightTapped += (layer) => this.ShowLayerMenu(layer);
-            LayerCollection.SelectChanged += () =>
-            {
-                this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
-                this.ViewModel.Invalidate();
-            };
+                };
+            }
 
+            if (LayerCollection.DragItemsStarted == null)
+            {
+                LayerCollection.DragItemsStarted += (layer, selectMode) =>
+                {
+                    this.DragSourceLayer = layer;
+                    this.DragLayerSelectMode = selectMode;
+                };
+            }
+            if (LayerCollection.DragItemsDelta == null)
+            {
+                LayerCollection.DragItemsDelta += (layer, overlayMode) =>
+                {
+                    this.DragDestinationLayer = layer;
+                    this.DragLayerOverlayMode = overlayMode;
+                };
+            }
+            if (LayerCollection.DragItemsCompleted == null)
+            {
+                LayerCollection.DragItemsCompleted += () =>
+                {
+                    this.ViewModel.Layers.DragComplete(this.DragDestinationLayer, this.DragSourceLayer, this.DragLayerOverlayMode, this.DragLayerSelectMode);
+                    this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+                    this.ViewModel.Layers.ArrangeLayersParents();
 
-            LayerCollection.DragItemsStarted += (layer, selectMode) =>
-            {
-                this.DragSourceLayer = layer;
-                this.DragLayerSelectMode = selectMode;
-            };
-            LayerCollection.DragItemsDelta += (layer, overlayMode) =>
-            {
-                this.DragDestinationLayer = layer;
-                this.DragLayerOverlayMode = overlayMode;
-            };
-            LayerCollection.DragItemsCompleted += () =>
-            {
-                this.ViewModel.Layers.DragComplete(this.DragDestinationLayer, this.DragSourceLayer, this.DragLayerOverlayMode, this.DragLayerSelectMode);
-                this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
-                this.ViewModel.Layers.ArrangeLayersParents();
-
-                this.DragSourceLayer = null;
-                this.DragDestinationLayer = null;
-                this.DragLayerSelectMode = SelectMode.None;
-                this.DragLayerOverlayMode = OverlayMode.None;
-            };
+                    this.DragSourceLayer = null;
+                    this.DragDestinationLayer = null;
+                    this.DragLayerSelectMode = SelectMode.None;
+                    this.DragLayerOverlayMode = OverlayMode.None;
+                };
+            }
 
 
             #endregion
+
         }
 
         private void ShowLayerMenu()
@@ -173,7 +190,7 @@ namespace Retouch_Photo2.Controls
             this.ShowLayerMenu();
         }
 
-               
+
         private async Task AddImage(PickerLocationId location)
         {
             //ImageRe

@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Tools.Models
         TipViewModel TipViewModel => App.TipViewModel;
 
         ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
-        CompositeMode CompositeMode => this.KeyboardViewModel.CompositeMode;
+        MarqueeCompositeMode CompositeMode => this.KeyboardViewModel.CompositeMode;
         
         //Box
         bool _isBox;
@@ -131,18 +131,18 @@ namespace Retouch_Photo2.Tools.Models
 
                 switch (this.CompositeMode)
                 {
-                    case CompositeMode.New:
+                    case MarqueeCompositeMode.New:
                         layer.SelectMode = contained?
                             SelectMode.Selected: 
                             SelectMode.UnSelected;
                         break;
-                    case CompositeMode.Add:
+                    case MarqueeCompositeMode.Add:
                         if (contained) layer.SelectMode = SelectMode.Selected;
                         break;
-                    case CompositeMode.Subtract:
+                    case MarqueeCompositeMode.Subtract:
                         if (contained) layer.SelectMode = SelectMode.UnSelected;
                         break;
-                    case CompositeMode.Intersect:
+                    case MarqueeCompositeMode.Intersect:
                         if (contained == false) layer.SelectMode = SelectMode.UnSelected;
                         break;
                 }

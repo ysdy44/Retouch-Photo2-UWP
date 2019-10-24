@@ -1,0 +1,67 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.ViewModels.PhotoControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="200"
+    d:DesignWidth="200"
+    Width="140"
+    Height="140"
+    >
+    
+    <UserControl.Resources>
+        
+        <!--Background-->
+        <SolidColorBrush x:Name="AccentColor" Color="{ThemeResource AppFillColor}"/>
+        <SolidColorBrush x:Name="UnAccentColor" Color="Transparent"/>
+
+        <!--Foreground-->
+        <SolidColorBrush x:Name="CheckColor" Color="{ThemeResource SystemAccentColor}"/>
+        <SolidColorBrush x:Name="UnCheckColor" Color="White"/>
+    
+    </UserControl.Resources>
+
+    
+    <Grid x:Name="RootGrid" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+
+        <controls:DropShadowPanel 
+                    HorizontalAlignment="Center"
+                    BlurRadius="20" 
+                    OffsetX="8" 
+                    OffsetY="8" 
+                    ShadowOpacity="0.8" 
+                    Color="{ThemeResource AppStrokeColor}">
+            <Grid x:Name="BackgroundGrid"
+                          MaxWidth="200" Margin="6"                      
+                          BorderThickness="0"     
+                          BorderBrush="White"
+                          Background="White">
+
+                <!--Image-->
+                <controls:ImageEx x:Name="ImageEx" MinWidth="60" MinHeight="60" IsCacheEnabled="True" />
+
+                <Border x:Name="SelectedBorder" Visibility="Collapsed"
+                        CornerRadius="10" Width="22" Height="22" 
+                        BorderThickness="1" BorderBrush="White"
+                        HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                        >
+                    <FontIcon Glyph="&#xE10B;" FontSize="12" FontFamily="Segoe UI Symbol" Foreground="White"/>
+                </Border>
+                
+            </Grid>
+        </controls:DropShadowPanel>
+
+        <TextBlock x:Name="TextBlock" Grid.Row="2" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Foreground="{ThemeResource AppBarSeparatorForegroundThemeBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+    </Grid>
+
+</UserControl>

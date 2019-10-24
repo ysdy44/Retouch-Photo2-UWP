@@ -22,10 +22,12 @@ namespace Retouch_Photo2.Controls
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
-
         bool _isSingleStarted;
         Vector2 _singleStartingPoint;
 
+        public CanvasControl CanvasControl { get; private set; }
+        public CanvasOperator CanvasOperator { get; private set; }
+        public bool IsHD { get; private set; }
 
         #region DependencyProperty
 
@@ -44,7 +46,7 @@ namespace Retouch_Photo2.Controls
             if (e.NewValue is Color value)
             {
                 con.ViewModel.AccentColor = value;
-                con.ViewModel.Invalidate();//Invalidate
+                con.CanvasControl.Invalidate();//Invalidate
             }
         }));
 
@@ -62,7 +64,7 @@ namespace Retouch_Photo2.Controls
 
             if (e.NewValue is Color value)
             {
-                con.ViewModel.Invalidate();//Invalidate
+                con.CanvasControl.Invalidate();//Invalidate
             }
         }));
 
@@ -70,39 +72,29 @@ namespace Retouch_Photo2.Controls
         #endregion
 
 
-        private void ConstructViewModel(CanvasControl canvasControl)
+
+        public void ConstructViewModel()
         {
-            // if (this.ViewModel.InvalidateAction == null)
+            if (this.ViewModel.InvalidateAction == null)
             {
-                this.ViewModel.InvalidateAction = (mode) =>
+                this.ViewModel.InvalidateAction += (invalidateMode) =>
                 {
-                    switch (mode)
+                    switch (invalidateMode)
                     {
                         case InvalidateMode.Thumbnail:
-                            canvasControl.DpiScale = 0.5f;
+                            this.IsHD = false;
+                            this.CanvasControl.DpiScale = 0.5f;
                             break;
                         case InvalidateMode.HD:
-                            canvasControl.DpiScale = 1.0f;
+                            this.IsHD = true;
+                            this.CanvasControl.DpiScale = 1.0f;
                             break;
                     }
 
-                    canvasControl.Invalidate();//Invalidate
+                    this.CanvasControl.Invalidate();//Invalidate
                 };
             }
         }
-        private void ConstructKeyboardViewModel()
-        {
-            if (this.KeyboardViewModel.Move == null)
-            {
-                this.KeyboardViewModel.Move += (value) =>
-                {
-                    this.ViewModel.CanvasTransformer.Position += value;
-                    this.ViewModel.CanvasTransformer.ReloadMatrix();
-                    this.ViewModel.Invalidate();//Invalidate
-                };
-            }
-        }
-
 
         private void _drawRenderAndCrad(CanvasDrawingSession drawingSession)
         {

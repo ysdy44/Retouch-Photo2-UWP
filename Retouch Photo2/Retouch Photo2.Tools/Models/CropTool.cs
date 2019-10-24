@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Tools.Models
         TipViewModel TipViewModel => App.TipViewModel;
 
         ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
-        CompositeMode CompositeMode => this.KeyboardViewModel.CompositeMode;
+        MarqueeCompositeMode CompositeMode => this.KeyboardViewModel.CompositeMode;
         bool IsRatio => this.KeyboardViewModel.IsRatio;
         bool IsCenter => this.KeyboardViewModel.IsCenter;
         bool IsStepFrequency => this.KeyboardViewModel.IsStepFrequency;

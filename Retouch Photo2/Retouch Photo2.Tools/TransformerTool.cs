@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Tools
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
-        CompositeMode CompositeMode => this.KeyboardViewModel.CompositeMode;
+        MarqueeCompositeMode CompositeMode => this.KeyboardViewModel.CompositeMode;
         bool IsRatio => this.KeyboardViewModel.IsRatio;
         bool IsCenter => this.KeyboardViewModel.IsCenter;
         bool IsStepFrequency => this.KeyboardViewModel.IsStepFrequency;
@@ -137,7 +137,7 @@ namespace Retouch_Photo2.Tools
                     {
                         switch (this.CompositeMode)
                         {
-                            case CompositeMode.New:
+                            case MarqueeCompositeMode.New:
                                 {
                                     if (this._transformerMode == TransformerMode.None)
                                     {
@@ -153,9 +153,9 @@ namespace Retouch_Photo2.Tools
                                     }
                                 }
                                 break;
-                            case CompositeMode.Add: break;
-                            case CompositeMode.Subtract: break;
-                            case CompositeMode.Intersect: break;
+                            case MarqueeCompositeMode.Add: break;
+                            case MarqueeCompositeMode.Subtract: break;
+                            case MarqueeCompositeMode.Intersect: break;
                         }
                     }
                     break;

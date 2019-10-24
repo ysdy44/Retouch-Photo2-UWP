@@ -92,9 +92,9 @@ namespace Retouch_Photo2.Brushs
                     drawingSession.DrawImage(extendMesh);
                 }
             };
-            
-                   
-    this.CanvasControl.Draw += (sender, args) =>
+
+
+            this.CanvasControl.Draw += (sender, args) =>
             {
                 {
                     switch (this.brushType)

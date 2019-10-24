@@ -109,9 +109,8 @@ namespace Retouch_Photo2.Controls
             this.Loaded += (s, e) =>
             {
                 this._isLoaded = true;
-
-                this.ToolPage = null;
-                this.ToolPage = this.ToolPage;//State
+                
+                this.ToolPage = this.GetPage(this.Tool, this.Mode, this.Type);
             };
         }
 

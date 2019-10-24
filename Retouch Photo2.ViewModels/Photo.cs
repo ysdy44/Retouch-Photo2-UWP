@@ -1,119 +1,82 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary>
     /// MainPage items's Model Class .
     /// </summary>
-    public class Photo : INotifyPropertyChanged
+    public class Photo
     {
 
         /// <summary> <see cref = "Photo" />'s name. </summary>
-        public string Name
-        {
-            get => this.name;
-            set
-            {
-                this.name = value;
-                this.OnPropertyChanged(nameof(this.Name));//Notify
-            }
-        }
-        private string name;
-
+        public string Name { get; private set; }
         /// <summary> <see cref = "Photo" />'s describe. </summary>
-        public string Describe
-        {
-            get => this.describe;
-            set
-            {
-                this.describe = value;
-                this.OnPropertyChanged(nameof(this.Describe));//Notify
-            }
-        }
-        private string describe;
-
-
+        public string Describe { get; private set; }
         /// <summary> <see cref = "Photo" />'s thumbnail uri. </summary>
-        public Uri Uri
-        {
-            get => this.uri;
-            set
-            {
-                this.uri = value;
-                this.OnPropertyChanged(nameof(this.Uri));//Notify
-            }
-        }
-        private Uri uri;
-
+        public Uri Uri { get; private set; }
         /// <summary> <see cref = "Photo" />'s file path. </summary>
-        public string Path
-        {
-            get => this.path;
-            set
-            {
-                this.path = value;
-                this.OnPropertyChanged(nameof(this.Path));//Notify
-            }
-        }
-        private string path;
-
+        public string Path { get; private set; }
         /// <summary> <see cref = "Photo" />'s file date. </summary>
-        public DateTimeOffset Time
+        public DateTimeOffset Time { get; private set; }
+
+
+        public bool? SelectMode
         {
-            get => this.time;
+            get => this.selectMode;
             set
             {
-                this.time = value;
-                this.OnPropertyChanged(nameof(this.Time));//Notify
+                this.Instance.SetSelectMode(value);
+                this.selectMode = value;
             }
         }
-        private DateTimeOffset time;
+        private bool? selectMode = null;
 
-
-        /// <summary> Darken the <see cref = "Photo" /> mask's visibility. </summary>
-        public Visibility DarkenVisibility
+        /// <summary> Instance control. </summary>
+        public PhotoControl Instance
         {
-            get => this.darkenVisibility;
-            set
+            get
             {
-                this.darkenVisibility = value;
-                this.OnPropertyChanged(nameof(this.DarkenVisibility));//Notify
+                if (this.instance == null) this.instance = new PhotoControl(this);
+
+                return this.instance;
             }
+            private set => this.instance = value;
         }
-        private Visibility darkenVisibility = Visibility.Collapsed;
+        private PhotoControl instance;
 
-        /// <summary> Darken the <see cref = "Photo" /> mask's visibility. </summary>
-        public void Entered(object sender, PointerRoutedEventArgs e) => this.DarkenVisibility = Visibility.Visible;
-        public void Exited(object sender, PointerRoutedEventArgs e) => this.DarkenVisibility = Visibility.Collapsed;
 
+        //@Construct
+        public Photo()
+        {
+        }
 
         //@Static
+        /// <summary> Occurs when tapped the RootGrid. </summary>
+        public static EventHandler<Photo> ItemClick;
         /// <summary>
         /// Create a <see cref = "Photo" /> from <see cref = "StorageFile" />.
         /// </summary>
         /// <param name="flie">Photo's File</param>
-        /// <param name="FolderPath">Path</param>
+        /// <param name="folderPath">Path</param>
         /// <returns> photo </returns>
-        public static Photo CreatePhoto(StorageFile flie, string FolderPath)
+        public static Photo CreatePhoto(StorageFile flie, string folderPath)
         {
-            if (flie.FileType == ".photo")
+            if (flie.FileType == ".photo2")
             {
                 DateTimeOffset time = flie.DateCreated;
 
                 //add a photo class
-                return new Photo()
+                return new Photo
                 {
                     Name = flie.DisplayName,
                     Time = time,
-                    Describe =  time.Year.ToString() + "." + time.Month.ToString() + "." + time.Day.ToString(),
-                    Uri = new Uri(FolderPath + "/" + flie.DisplayName + ".png", UriKind.Relative),
+                    Describe = $"{time.Year}.{time.Month}.{time.Day}",
+                    Uri = new Uri($"{folderPath}/{flie.DisplayName}.png", UriKind.Relative),
                     Path = flie.Path,
                 };
             }
@@ -135,17 +98,6 @@ namespace Retouch_Photo2.ViewModels
 
             return orderedFiles;
         }
-
-
-
-        //@Notify 
-        /// <summary> Multicast event for property change notifications. </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        /// <summary>
-        /// Notifies listeners that a property value has changed.
-        /// </summary>
-        /// <param name="propertyName"> Name of the property used to notify listeners. </param>
-        protected void OnPropertyChanged(string propertyName) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
     }
 }

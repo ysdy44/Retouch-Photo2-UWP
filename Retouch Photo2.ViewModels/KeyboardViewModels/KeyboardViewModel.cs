@@ -4,6 +4,7 @@ using System.ComponentModel;
 using Retouch_Photo2.Elements;
 using System;
 using System.Numerics;
+using FanKit.Transformers;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -15,6 +16,8 @@ namespace Retouch_Photo2.ViewModels
         //@Delegate  
         /// <summary> Occurs when the canvas position moved. </summary>
         public Action<Vector2> Move { get; set; }
+        /// <summary> Occurs when the IsFullScreen changed. </summary>
+        public Action<bool> FullScreenChanged { get; set; }
 
         //@Construct
         public KeyboardViewModel()
@@ -95,13 +98,13 @@ namespace Retouch_Photo2.ViewModels
         private void KeyUpAndDown(VirtualKey key)
         {
             if (this.KeyCtrl == false && this.KeyShift == false)
-                this.CompositeMode = CompositeMode.New;//CompositeMode
+                this.CompositeMode = MarqueeCompositeMode.New;//CompositeMode
             else if (this.KeyCtrl == false && this.KeyShift)
-                this.CompositeMode = CompositeMode.Add;//CompositeMode
+                this.CompositeMode = MarqueeCompositeMode.Add;//CompositeMode
             else if (this.KeyCtrl && this.KeyShift == false)
-                this.CompositeMode = CompositeMode.Subtract;//CompositeMode
+                this.CompositeMode = MarqueeCompositeMode.Subtract;//CompositeMode
             else //if (this.KeyCtrl && this.KeyShift)       
-                this.CompositeMode = CompositeMode.Intersect;//CompositeMode
+                this.CompositeMode = MarqueeCompositeMode.Intersect;//CompositeMode
         }
 
 

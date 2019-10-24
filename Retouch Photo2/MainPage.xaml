@@ -17,6 +17,7 @@
    xmlns:elementsMainpages="using:Retouch_Photo2.Elements.MainPages"
    mc:Ignorable="d"
 
+   NavigationCacheMode="Required"    
    Background="{ThemeResource AppBackground}"
    >
 
@@ -27,61 +28,15 @@
     </Page.Resources>
 
 
-    <Grid>
-
-        <Grid.Resources>
-            <!--DataTemplate-->
-            <DataTemplate x:Name="DataTemplate" x:DataType="viewModels:Photo">
-                <Grid >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="2"/>
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="10"/>
-                    </Grid.RowDefinitions>
-
-                    <controls:DropShadowPanel 
-                    HorizontalAlignment="Center"
-                    BlurRadius="20" 
-                    OffsetX="8" 
-                    OffsetY="8" 
-                    ShadowOpacity="0.8" 
-                    Color="{ThemeResource AppStrokeColor}">
-                        <Grid MaxWidth="200" Margin="6"                      
-                          BorderThickness="1"                     
-                          apiContractNotPresent5:BorderBrush="{ThemeResource SystemControlBackgroundBaseLowBrush}"                     
-                          apiContractPresent5:BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"                          
-                          Background="{ThemeResource AppForeground}"
-                          
-                          PointerEntered="{x:Bind Entered}"         
-                          PointerExited="{x:Bind Exited}"            
-                          PointerPressed="{x:Bind Entered}"           
-                          PointerReleased="{x:Bind Exited}"            
-                          PointerCanceled="{x:Bind Exited}"            
-                          PointerCaptureLost="{x:Bind Exited}">
-
-                            <!--Image-->
-                            <controls:ImageEx Source="{x:Bind Uri,Mode=OneWay}" MinWidth="60" MinHeight="60" IsCacheEnabled="True" />
-
-                            <!--Draken-->
-                            <Rectangle Opacity="0.4" Fill="{ThemeResource AppStroke}" Visibility="{x:Bind DarkenVisibility,Mode=OneWay}"/>
-
-                        </Grid>
-                    </controls:DropShadowPanel>
-
-                    <TextBlock Grid.Row="2" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Text="{x:Bind Name,Mode=OneWay}" Foreground="{ThemeResource AppBarSeparatorForegroundThemeBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-
-                </Grid>
-            </DataTemplate>
-        </Grid.Resources>
-        
+    <Grid x:Name="RootGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
+            <RowDefinition x:Name="FootRowDefinition" Height="100"/>
         </Grid.RowDefinitions>
 
         <!--Developer-->
-        <developerTools:AlignmentGrid Grid.Row="1" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="Gray"/>
+        <developerTools:AlignmentGrid Grid.Row="1" Grid.RowSpan="2" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="Gray"/>
 
         
         <!--Head-->
@@ -101,7 +56,7 @@
                 <FontIcon FontSize="20" Glyph="&#xE117;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
             </Button>
 
-            <TextBlock Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
+            <TextBlock x:Name="aaaaaaaaaaa" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
                 <TextBlock.Transitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromHorizontalOffset="50" FromVerticalOffset="0"/>
@@ -123,7 +78,7 @@
 
         
         <!--Body-->
-        <StackPanel x:Name="InitialControl" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel x:Name="InitialControl" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel.ChildrenTransitions>
                 <TransitionCollection>
                     <EntranceThemeTransition IsStaggeringEnabled="True"/>
@@ -172,32 +127,27 @@
             </StackPanel.Children>
 
         </StackPanel>
-        
-        <GridView x:Name="GridView"        
-                    Grid.Row="1"
-                    AllowDrop="True"              
-                    CanReorderItems="True"            
-                    CanDragItems="True"             
-                    CanDrag="True"                        
-                    ItemsSource="{x:Bind PhotoFileList}"     
-                    IsItemClickEnabled="True"                                         
-                    ItemTemplate="{StaticResource DataTemplate}"  
-                    ItemContainerStyle="{StaticResource AppMainPageItemContainerStyle}"      
-                    Style="{StaticResource AppMainPageGridViewStyle}"                    
-                    animations:ReorderGridAnimation.Duration="300"
-                    />
-        
-        
+
+        <controls:WrapPanel x:Name="GridView"     
+                       Grid.Row="1" Visibility="Collapsed"                         
+                    >
+            <controls:WrapPanel.ChildrenTransitions>
+                <TransitionCollection>
+                    <AddDeleteThemeTransition />
+                    <ContentThemeTransition />
+                    <ReorderThemeTransition />
+                    <EntranceThemeTransition IsStaggeringEnabled="False" />
+                </TransitionCollection>
+            </controls:WrapPanel.ChildrenTransitions>
+        </controls:WrapPanel>
+
+
         <!--Foot-->
-        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Row="1" ShadowColor="{ThemeResource AppStrokeColor}"/>
+        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Row="2" Visibility="Collapsed" ShadowColor="{ThemeResource AppStrokeColor}"/>
 
         
         <!--Loading-->
         <elements:LoadingControl x:Name="LoadingControl" Grid.RowSpan="3"/>
-
-        <!--Dialog-->
-        <elementsMainpages:AddDialog x:Name="AddDialog" Grid.Row="1" />
-        <elementsMainpages:AddDialog x:Name="FolderDialog" Grid.Row="1"/>
 
     </Grid>
 </Page>

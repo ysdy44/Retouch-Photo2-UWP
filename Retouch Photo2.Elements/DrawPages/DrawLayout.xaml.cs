@@ -1,7 +1,5 @@
-﻿using System;
-using System.Numerics;
+﻿using System.Numerics;
 using Windows.Devices.Input;
-using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -38,14 +36,9 @@ namespace Retouch_Photo2.Elements
         public UIElement HeadLeftPane { get => this.HeadLeftBorder.Child; set => this.HeadLeftBorder.Child = value; }
         /// <summary> HeadRightStackPane's Children. </summary>
         public UIElementCollection HeadRightChildren => this.HeadRightStackPane.Children;
+        
 
-        //@Delegate 
-        public TypedEventHandler<bool, Vector2> FullScreenChanged;
-
-        #region DependencyProperty
-
-
-        /// <summary> Backgroud's Color. </summary>
+        /// <summary> Sets the backgroud's Color. </summary>
         public ElementTheme Theme
         {
             set
@@ -61,64 +54,19 @@ namespace Retouch_Photo2.Elements
                 }
             }
         }
-
-
-        /// <summary> Sets or Gets the page layout is full screen. </summary>
+        /// <summary> Sets the page layout is full-screen. </summary>
         public bool IsFullScreen
         {
-            get { return (bool)GetValue(IsFullScreenProperty); }
-            set { SetValue(IsFullScreenProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "DrawLayout.IsFullScreen" /> dependency property. </summary>
-        public static readonly DependencyProperty IsFullScreenProperty = DependencyProperty.Register(nameof(IsFullScreen), typeof(bool), typeof(DrawLayout), new PropertyMetadata(false, (sender, e) =>
-        {
-            DrawLayout con = (DrawLayout)sender;
-
-            if (e.NewValue is bool value)
+            set
             {
-                con._vsIsFullScreen = value;
-                con.VisualState = con.VisualState;//State
-
-                if (con._vsActualWidthType == DeviceLayoutType.PC)
-                {
-                    con.FullScreenChanged?.Invoke(value, new Vector2(70, 50)); //Delegate
-                }
-                else
-                {
-                    con.FullScreenChanged?.Invoke(value, new Vector2(0, 50)); //Delegate}
-                }
-            }
-        }));
-
-
-        #endregion
-
-
-        private bool isPadLayersControlWidth;
-        public void PadChangeLayersWidth()
-        {
-            if (this._vsActualWidthType == DeviceLayoutType.Pad)
-            {
-                bool value=!this.isPadLayersControlWidth;
-                this.isPadLayersControlWidth = value;
-
-                double width = value ? 220 : 70;
-                this.RightGridLenght.Width = new GridLength(width);
-            }
-        }
-
-        public void PhoneHideLeftPanel()
-        {
-            if (this._vsPhoneType == PhoneLayoutType.ShowLeft)
-            {
-                this._vsPhoneType = PhoneLayoutType.Hided;
+                this._vsIsFullScreen = value;
                 this.VisualState = this.VisualState;//State
             }
         }
 
 
         //@VisualState
-        bool _vsIsFullScreen;
+        bool _vsIsFullScreen = true;
         PhoneLayoutType _vsPhoneType = PhoneLayoutType.Hided;
         DeviceLayoutType _vsActualWidthType = DeviceLayoutType.Adaptive;
 
@@ -217,5 +165,68 @@ namespace Retouch_Photo2.Elements
                 }
             };
         }
+        
+               
+        private bool isPadLayersControlWidth;
+        /// <summary>
+        /// Chnage RightBorder width.
+        /// </summary>
+        public void PadChangeLayersWidth()
+        {
+            if (this._vsActualWidthType == DeviceLayoutType.Pad)
+            {
+                bool value = !this.isPadLayersControlWidth;
+                this.isPadLayersControlWidth = value;
+
+                double width = value ? 220 : 70;
+                this.RightGridLenght.Width = new GridLength(width);
+            }
+        }
+
+
+        /// <summary>
+        /// Gets the offset of full-screen statue layout.
+        /// </summary>
+        /// <returns></returns>
+        public Vector2 FullScreenOffset
+        {
+            get
+            {
+                if (this._vsActualWidthType == DeviceLayoutType.PC)
+                    return new Vector2(70, 50);
+                else
+                    return new Vector2(0, 50);
+            }
+        }
+        /// <summary> Gets the CenterChild width. </summary>
+        public float CenterChildWidth
+        {
+            get
+            {
+                float rootWidth = (float)Window.Current.Bounds.Width;
+
+                switch (this.VisualStateDeviceType)
+                {
+                    case DeviceLayoutType.PC: return rootWidth - 70 - 220;
+                    case DeviceLayoutType.Adaptive:
+                        switch (this._vsActualWidthType)
+                        {
+                            case DeviceLayoutType.PC: return rootWidth - 70 - 220;
+                        }
+                        break;
+                }
+                return rootWidth;
+            }
+        }
+        /// <summary> Gets the CenterChild height. </summary>
+        public float CenterChildHeight
+        {
+            get
+            {
+                float rootHeight = (float)Window.Current.Bounds.Height;
+                return rootHeight - 50;
+            }
+        }
+        
     }     
 }

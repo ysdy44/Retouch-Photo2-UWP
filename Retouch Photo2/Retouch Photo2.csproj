@@ -123,6 +123,9 @@
     <Compile Include="Controls\TransformerControl.xaml.cs">
       <DependentUpon>TransformerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DrawPage.Xaml.Construct.cs" />
+    <Compile Include="DrawPage.Xaml.Method.cs" />
+    <Compile Include="MainPage.Xaml.Method.cs" />
     <Compile Include="Retouch Photo2.Menus\Buttons\AdjustmentButton.xaml.cs">
       <DependentUpon>AdjustmentButton.xaml</DependentUpon>
     </Compile>

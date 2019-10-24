@@ -112,20 +112,34 @@ namespace Retouch_Photo2.Tools.Pages
         {
             this.InitializeComponent();
 
-            //Radian
+            //Radian: 
+            //  Binding own DependencyProperty to the Storyboard
             Storyboard.SetTarget(this.RadianKeyFrames, this);
+            this.RadianStoryboard.Completed += (s, e) =>
+            {
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            };
             this.RadianClearButton.Tapped += (s, e) =>
             {
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+
                 this.Radian = this.ViewModel.CanvasTransformer.Radian;
-                this.RadianStoryboard.Begin();
+                this.RadianStoryboard.Begin();//Storyboard
             };
 
-            //Scale
+            //Scale: 
+            //  Binding own DependencyProperty to the Storyboard
             Storyboard.SetTarget(this.ScaleKeyFrames, this);
+            this.ScaleStoryboard.Completed += (s, e) =>
+            {
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            };
             this.ScaleClearButton.Tapped += (s, e) =>
             {
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+
                 this.Scale = this.ViewModel.CanvasTransformer.Scale;
-                this.ScaleStoryboard.Begin();
+                this.ScaleStoryboard.Begin();//Storyboard
             };
 
             //Radian

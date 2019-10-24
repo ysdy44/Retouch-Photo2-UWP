@@ -19,8 +19,8 @@ namespace Retouch_Photo2.Tools
         {
             switch (this.CompositeMode)
             {
-                case CompositeMode.New:
-                case CompositeMode.Intersect:
+                case MarqueeCompositeMode.New:
+                case MarqueeCompositeMode.Intersect:
                     {
                         if (transformerMode == TransformerMode.None)
                         {
@@ -29,20 +29,20 @@ namespace Retouch_Photo2.Tools
                         }
                     }
                     break;
-                case CompositeMode.Add:
+                case MarqueeCompositeMode.Add:
                     {
                         if (transformerMode == TransformerMode.None || transformerMode == TransformerMode.Translation)
                         {
-                            bool isAdd = this.AddOrSubtractLayer(point, CompositeMode.Add);
+                            bool isAdd = this.AddOrSubtractLayer(point, MarqueeCompositeMode.Add);
                             return isAdd;
                         }
                     }
                     break;
-                case CompositeMode.Subtract:
+                case MarqueeCompositeMode.Subtract:
                     {
                         if (transformerMode == TransformerMode.None || transformerMode == TransformerMode.Translation)
                         {
-                            bool isSubtract = this.AddOrSubtractLayer(point, CompositeMode.Subtract);
+                            bool isSubtract = this.AddOrSubtractLayer(point, MarqueeCompositeMode.Subtract);
                             return isSubtract;
                         }
                     }
@@ -103,7 +103,7 @@ namespace Retouch_Photo2.Tools
         /// <param name="point"> The point. </param>
         /// <param name="mode"> <see cref = "CompositeMode.Add" /> or <see cref = "CompositeMode.Subtract" /> </param>
         /// <returns> Return **false** if you do not select to any layer. </returns>
-        private bool AddOrSubtractLayer(Vector2 point, CompositeMode mode)
+        private bool AddOrSubtractLayer(Vector2 point, MarqueeCompositeMode mode)
         {
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
@@ -124,10 +124,10 @@ namespace Retouch_Photo2.Tools
             if (selectedLayer == null) return false;
             switch (mode)
             {
-                case CompositeMode.Add:
+                case MarqueeCompositeMode.Add:
                     selectedLayer.SelectMode = SelectMode.Selected;
                     break;
-                case CompositeMode.Subtract:
+                case MarqueeCompositeMode.Subtract:
                     selectedLayer.SelectMode = SelectMode.UnSelected;
                     break;
             }

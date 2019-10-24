@@ -8,7 +8,7 @@
     xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     Background="{ThemeResource AppBackground}"
-    NavigationCacheMode="Enabled"    
+    NavigationCacheMode="Required"    
     >
 
 

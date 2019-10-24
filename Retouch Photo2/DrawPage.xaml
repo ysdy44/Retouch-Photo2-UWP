@@ -5,11 +5,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:controls="using:Retouch_Photo2.Controls"
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:layers="using:Retouch_Photo2.Layers"
     xmlns:toolElements="using:Retouch_Photo2.Tools.Elements"
-    NavigationCacheMode="Enabled"    
+    NavigationCacheMode="Required"    
     mc:Ignorable="d"
     >
 
@@ -35,16 +36,27 @@
         <Grid.Resources>
             <Flyout x:Name="MoreTransformFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                 <toolElements:MoreTransformControl/>
-            </Flyout>         
+            </Flyout>
             <Flyout x:Name="MoreCreateFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                 <toolElements:MoreCreateControl/>
             </Flyout>
-        </Grid.Resources>        
-        
+
+            <!--Transition-->
+            <Storyboard x:Name="TransitionStoryboard">
+                <DoubleAnimationUsingKeyFrames x:Name="TransitionKeyFrames" Storyboard.TargetProperty="Transition" EnableDependentAnimation ="True">
+                    <EasingDoubleKeyFrame KeyTime="00:00:0.8" Value="1.0">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <QuinticEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+
+        </Grid.Resources>
+
         <elements:DrawLayout x:Name="DrawLayout" 
                Touchbar="{x:Bind TipViewModel.TouchbarControl,Mode=OneWay}"                                             
                Theme="{x:Bind RequestedTheme, Mode=OneWay}"
-               IsFullScreen="{x:Bind KeyboardViewModel.IsFullScreen,Mode=OneWay}" 
                >
 
             <!--FootPage-->
@@ -68,7 +80,7 @@
 
             <!--Canvas-->
             <elements:DrawLayout.CenterChild>
-                <controls:MainCanvasControl 
+                <controls:MainCanvasControl x:Name="MainCanvasControl"
                     AccentColor="{ThemeResource SystemAccentColor}" 
                     ShadowColor="{ThemeResource AppStrokeColor}" 
                     />
@@ -183,15 +195,14 @@
         <Canvas x:Name="OverlayCanvas" IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}"/>
 
         <!--FullScreen-->
-        <Button x:Name="UnFullScreenButton" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AppCircleButtonStyle}"
-                Visibility="{x:Bind BoolToVisibilityConverter(DrawLayout.IsFullScreen), Mode=OneWay}">
+        <Button x:Name="UnFullScreenButton" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AppCircleButtonStyle}">
                 <FontIcon Glyph="&#xE1D8;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
         </Button>
         
         <!--Tip-->
         <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" HorizontalAlignment="Center">
             <ToolTip Style="{StaticResource AppToolTip}">
-                <TextBlock Text="{x:Bind ViewModel.Text, Mode=OneWay}"/>
+                <TextBlock Text="{x:Bind ViewModel.Text, Mode=OneWay}" TextWrapping="Wrap"/>
             </ToolTip>
         </ContentControl>
 
@@ -200,7 +211,7 @@
             <elements:LoadingControl.Text>
                 Saving...
             </elements:LoadingControl.Text>
-        </elements:LoadingControl>
+        </elements:LoadingControl> 
 
     </Grid>
 </Page>

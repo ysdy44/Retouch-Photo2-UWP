@@ -5,10 +5,12 @@ using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -27,8 +29,8 @@ namespace Retouch_Photo2
         ViewModel ViewModel => App.ViewModel;
         SettingViewModel SettingViewModel { get => App.SettingViewModel; set => App.SettingViewModel = value; }
 
-        ObservableCollection<Photo> PhotoFileList = new ObservableCollection<Photo>();
-
+        IList<Photo> PhotoFileList = new List<Photo>();
+        static bool _isLoaded;
 
         //Loading
         private bool IsLoading { set => this.LoadingControl.IsActive = value; }
@@ -97,204 +99,116 @@ namespace Retouch_Photo2
         }
         private MainPageState state;
 
-
         MainControl MainControl = new MainControl();
-
-        //AddDialog AddDialog = new AddDialog();
         PicturesControl PicturesControl = new PicturesControl();
-
         SaveControl SaveControl = new SaveControl();
         ShareControl ShareControl = new ShareControl();
-
         DeleteControl DeleteControl = new DeleteControl();
         DuplicateControl DuplicateControl = new DuplicateControl();
-
-        //FolderDialog FolderDialog = new FolderDialog();
-
 
         //@Construct
         public MainPage()
         {
-            this.InitializeComponent();
-
-
+            this.InitializeComponent();            
             this.Loaded += async (s, e) =>
             {
-                //Setting
-                SettingViewModel setting = null;
-
-                try
+                if (MainPage._isLoaded == false)
                 {
-                    setting = await SettingViewModel.CreateFromLocalFile();
+                    MainPage._isLoaded = true;
+                    await this.LoadSettingViewModel();
+                    await this.Refresh();
                 }
-                catch (Exception)
-                {
-                }
-
-                if (setting != null)
-                {
-                    this.SettingViewModel = setting;
-                }
-
-                ElementTheme theme = this.SettingViewModel.ElementTheme;
-                ApplicationViewTitleBarBackgroundExtension.SetTheme(theme);
-
-
-                if (this.PhotoFileList.Count == 0)
-                    this.State = MainPageState.None;//State   
-                else
-                    this.State = MainPageState.Main;//State      
-
-                //Project project = new Project(1024, 1024);//Project
-                //this.Frame.Navigate(typeof(DrawPage), project);//Navigate    
             };
+            this.RefreshButton.Tapped += async (s, e) => await this.Refresh();
+            this.SettingButton.Tapped += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
 
-            this.SettingButton.Tapped += (s, e) =>
+
+            //Photo
+            if (Photo.ItemClick == null)
             {
-                this.Frame.Navigate(typeof(SettingPage));//Navigate     
-            };
-
-            this.GridView.ItemClick += (s, e) =>
-            {
-                if (this.State != MainPageState.None) return;
-
-                if (e.ClickedItem is Photo photo)
+                Photo.ItemClick += (object s, Photo photo) =>
                 {
-                    this.IsLoading = true;//Loading
+                    switch (photo.SelectMode)
+                    {
+                        case null:
+                            if (this.State == MainPageState.Main)
+                            {
+                                if (s is FrameworkElement element)
+                                {
+                                    this.NavigatedFrom(element);
+                                }
+                                this.Frame.Navigate(typeof(DrawPage));//Navigate     
+                            }
+                            break;
+                        case false:
+                            photo.SelectMode = true;
+                            break;
+                        case true:
+                            photo.SelectMode = false;
+                            break;
+                    }
+                };
+            }
 
-                    Project project = new Project(1024, 1024);
-                    this.Frame.Navigate(typeof(DrawPage), project);//Navigate     
-
-                    this.IsLoading = false;//Loading
-                }
-            };
 
             //Initial
-            this.AddButton.Tapped += async (s, e) => await this.AddDialog.ShowAsync(ContentDialogPlacement.InPlace);
+            this.AddButton.Tapped += (s, e) => this.AddDialogShow();
             this.PhotoButton.Tapped += async (s, e) => await this.NewProjectFromPictures(PickerLocationId.PicturesLibrary);
             this.DestopButton.Tapped += async (s, e) => await this.NewProjectFromPictures(PickerLocationId.Desktop);
 
             //Main
-            this.MainControl.AddButton.Tapped += async (s, e) => await this.AddDialog.ShowAsync(ContentDialogPlacement.InPlace);
-            this.MainControl.PicturesButton.Tapped += (s, e) => this.State = MainPageState.Pictures;
-            this.MainControl.SaveButton.Tapped += (s, e) => this.State = MainPageState.Save;
-            this.MainControl.ShareButton.Tapped += (s, e) => this.State = MainPageState.Share;
-            this.MainControl.DeleteButton.Tapped += (s, e) => this.State = MainPageState.Delete;
-            this.MainControl.DuplicateButton.Tapped += (s, e) => this.State = MainPageState.Duplicate;
-            this.MainControl.FolderButton.Tapped += async (s, e) => await this.FolderDialog.ShowAsync(ContentDialogPlacement.InPlace);
-            this.MainControl.MoveButton.Tapped += (s, e) => this.State = MainPageState.Move;
+            this.MainControl.AddButton.Tapped += (s, e) => this.AddDialogShow();
+            this.MainControl.PicturesButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Pictures);
+            this.MainControl.SaveButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Save);
+            this.MainControl.ShareButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Share);
+            this.MainControl.DeleteButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Delete);
+            this.MainControl.DuplicateButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Duplicate);
+            this.MainControl.FolderButton.Tapped += (s, e) => this.FolderDialogShow();
+            this.MainControl.MoveButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Move);
 
             //Second
-            this.MainControl.SecondAddButton.Tapped += async (s, e) => await this.AddDialog.ShowAsync(ContentDialogPlacement.InPlace);
-            this.MainControl.SecondPicturesButton.Tapped += (s, e) => this.State = MainPageState.Pictures;
-            this.MainControl.SecondSaveButton.Tapped += (s, e) => this.State = MainPageState.Save;
-            this.MainControl.SecondShareButton.Tapped += (s, e) => this.State = MainPageState.Share;
-            this.MainControl.SecondDeleteButton.Tapped += (s, e) => this.State = MainPageState.Delete;
-            this.MainControl.SecondDuplicateButton.Tapped += (s, e) => this.State = MainPageState.Duplicate;
-            this.MainControl.SecondFolderButton.Tapped += async (s, e) => await this.FolderDialog.ShowAsync(ContentDialogPlacement.InPlace);
-            this.MainControl.SecondMoveButton.Tapped += (s, e) => this.State = MainPageState.Move;
-
-            //Add
-            this.AddDialog.PrimaryButtonClick += (sender, args) =>
-            {
-                this.AddDialog.Hide();
-
-                this.IsLoading = true;//Loading
-
-                BitmapSize pixels = this.AddDialog.Size;
-                Project project = new Project((int)pixels.Width, (int)pixels.Height);//Project
-                this.Frame.Navigate(typeof(DrawPage), project);//Navigate    
-
-                this.IsLoading = false;//Loading
-            };
-
+            this.MainControl.SecondAddButton.Tapped += (s, e) => this.AddDialogShow();
+            this.MainControl.SecondPicturesButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Pictures);
+            this.MainControl.SecondSaveButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Save);
+            this.MainControl.SecondShareButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Share);
+            this.MainControl.SecondDeleteButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Delete);
+            this.MainControl.SecondDuplicateButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Duplicate);
+            this.MainControl.SecondFolderButton.Tapped += (s, e) => this.FolderDialogShow();
+            this.MainControl.SecondMoveButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Move);
+            
             //Pictures
             this.PicturesControl.PhotoButton.Tapped += async (s, e) => await this.NewProjectFromPictures(PickerLocationId.PicturesLibrary);
             this.PicturesControl.DestopButton.Tapped += async (s, e) => await this.NewProjectFromPictures(PickerLocationId.Desktop);
-            this.PicturesControl.CancelButton.Tapped += (s, e) => this.State = MainPageState.Main;
+            this.PicturesControl.CancelButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Main);
 
             //Save
-            this.SaveControl.CancelButton.Tapped += (s, e) => this.State = MainPageState.Main;
+            this.SaveControl.CancelButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Main);
 
             //Share
-            this.ShareControl.CancelButton.Tapped += (s, e) => this.State = MainPageState.Main;
+            this.ShareControl.CancelButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Main);
 
             //Delete
-            this.DeleteControl.CancelButton.Tapped += (s, e) => this.State = MainPageState.Main;
+            this.DeleteControl.CancelButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Main);
 
             //Duplicate
-            this.DuplicateControl.CancelButton.Tapped += (s, e) => this.State = MainPageState.Main;
-
-            //Folder
-            this.FolderDialog.PrimaryButtonClick += (s, e) =>
-            {
-                this.FolderDialog.Hide();
-
-                this.IsLoading = true;//Loading
-
-                //......
-
-                this.IsLoading = false;//Loading
-            };
+            this.DuplicateControl.CancelButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Main);
         }
-
-
 
         //The current page becomes the active page
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //Theme
-            ElementTheme theme = this.SettingViewModel.ElementTheme;
-            this.RequestedTheme = theme;
-            ApplicationViewTitleBarBackgroundExtension.SetTheme(theme);
+            if (MainPage._isLoaded)
+            {
+                //Theme
+                ElementTheme theme = this.SettingViewModel.ElementTheme;
+                this.RequestedTheme = theme;
+                ApplicationViewTitleBarBackgroundExtension.SetTheme(theme);
+            }
         }
         //The current page no longer becomes an active page
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-
         }
 
-
-        private async Task NewProjectFromPictures(PickerLocationId location)
-        {
-            //ImageRe
-            ImageRe imageRe = await ImageRe.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, location);
-            if (imageRe == null) return;
-
-            //Images
-            this.ViewModel.DuplicateChecking(imageRe);
-
-            //Transformer
-            Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
-
-            //Layer
-            ImageLayer imageLayer = new ImageLayer
-            {
-                TransformManager = new TransformManager(transformerSource),
-                ImageRe = imageRe,
-            };
-
-            //Project
-            Project project = new Project(imageLayer);
-            this.Frame.Navigate(typeof(DrawPage), project);//Navigate       
-        }
-
-        private async void Refresh()
-        {
-            this.PhotoFileList.Clear(); //Notify
-
-            // Get files from the destination folder.
-            IOrderedEnumerable<StorageFile> storageFiles = await Photo.CreatePhotoFilesFromStorageFolder(ApplicationData.Current.LocalFolder).ConfigureAwait(false);
-
-            foreach (StorageFile storageFile in storageFiles)
-            {
-                // [StorageFile] --> [Photo]
-                Photo photo = Photo.CreatePhoto(storageFile, ApplicationData.Current.LocalFolder.Path);
-
-                if (photo == null) break;
-
-                this.PhotoFileList.Add(photo); //Notify
-            }
-        }
     }
 }

@@ -23,6 +23,21 @@ namespace Retouch_Photo2.Elements
         }
 
 
+        bool _isShowStoryboard = true;
+        private void Storyboard(bool isSelected)
+        {
+            if (this._isShowStoryboard != isSelected)
+            {
+                this._isShowStoryboard = isSelected;
+
+                if (isSelected)
+                    this.ShowStoryboard.Begin();//Storyboard
+                else
+                    this.HideStoryboard.Begin();//Storyboard
+            }
+        }
+
+
         //@VisualState
         bool _vsIsSelected;
         bool _vsIsSecondPage;        
@@ -32,7 +47,7 @@ namespace Retouch_Photo2.Elements
             {
                 if (this._vsIsSelected)
                 {
-                    this.ShowStoryboard.Begin();//Storyboard
+                    this.Storyboard(true);
 
                     if (this._vsIsSecondPage == false)
                         return this.Selected;
@@ -41,7 +56,7 @@ namespace Retouch_Photo2.Elements
                 }
                 else
                 {
-                    this.HideStoryboard.Begin();//Storyboard
+                    this.Storyboard(false);
 
                     if (this._vsIsSecondPage == false)
                         return this.UnSelected;

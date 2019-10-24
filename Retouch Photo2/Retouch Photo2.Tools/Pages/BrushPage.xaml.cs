@@ -47,7 +47,7 @@ namespace Retouch_Photo2.Tools.Pages
 
 
             //GradientBrushType
-            this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Linear);//ComboBox
+            this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Linear);//DependencyObject
             this.BrushTypeComboBox.SelectionChanged += (s, e) =>
             {
                 BrushType brushType = (BrushType)this.BrushTypeComboBox.SelectedIndex;
@@ -63,15 +63,15 @@ namespace Retouch_Photo2.Tools.Pages
                         break;
                     case BrushType.LinearGradient:
                         this.ToBrushTypeLinearGradient(isResetBrushArray: true);
-                        this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Linear);//ComboBox
+                        this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Linear);//DependencyObject
                         break;
                     case BrushType.RadialGradient:
                         this.ToBrushTypeRadialGradient(isResetBrushArray: true);
-                        this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Radial);//ComboBox
+                        this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Radial);//DependencyObject
                         break;
                     case BrushType.EllipticalGradient:
                         this.ToBrushTypeEllipticalGradient(isResetBrushArray: true);
-                        this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Elliptical);//ComboBox
+                        this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Elliptical);//DependencyObject
                         break;
                     case BrushType.Image:
                         this.ToBrushTypeImage();
@@ -90,15 +90,15 @@ namespace Retouch_Photo2.Tools.Pages
                 {
                     case GradientBrushType.Linear:
                         this.ToBrushTypeLinearGradient(isResetBrushArray: false);
-                        this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.LinearGradient);//ComboBox
+                        this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.LinearGradient);//DependencyObject
                         break;
                     case GradientBrushType.Radial:
                         this.ToBrushTypeRadialGradient(isResetBrushArray: false);
-                        this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.RadialGradient);//ComboBox
+                        this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.RadialGradient);//DependencyObject
                         break;
                     case GradientBrushType.Elliptical:
                         this.ToBrushTypeEllipticalGradient(isResetBrushArray: false);
-                        this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.EllipticalGradient);//ComboBox
+                        this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.EllipticalGradient);//DependencyObject
                         break;
                 }
                 this.EaseStoryboard.Begin();//Storyboard
