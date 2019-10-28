@@ -13,8 +13,9 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryTriangleLayer : IGeometryLayer, ILayer
     {
-        //@Static     
-        public const string ID = "GeometryTriangleLayer";
+
+        //@Override     
+        public override LayerType Type => LayerType.GeometryTriangle;
 
         //@Content
         public float Center = 0.5f;
@@ -30,7 +31,6 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryTriangleLayer()
         {
-            base.Type = GeometryTriangleLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryTriangleIcon(),

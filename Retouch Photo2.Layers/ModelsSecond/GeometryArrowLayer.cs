@@ -13,8 +13,9 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryArrowLayer : IGeometryLayer, ILayer
     {
-        //@Static     
-        public const string ID = "GeometryArrowLayer";
+
+        //@Override     
+        public override LayerType Type => LayerType.GeometryArrow;
 
         //@Content       
         public bool IsAbsolute = false;
@@ -35,7 +36,6 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryArrowLayer()
         {
-            base.Type = GeometryArrowLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryArrowIcon(),

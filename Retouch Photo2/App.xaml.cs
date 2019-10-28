@@ -46,15 +46,18 @@ namespace Retouch_Photo2
                 
                  new CursorTool(),
                  null,
+
                  new ViewTool(),
                  new BrushTool(),
                  new TransparencyTool(),
                  null,
+
                  //Geometry0
                  new GeometryRectangleTool(),
                  new GeometryEllipseTool(),
                  new PenTool(),
                  null,
+
                  new ImageTool(),
                  new AcrylicTool(),
                  new CropTool(),
@@ -65,17 +68,20 @@ namespace Retouch_Photo2
                  new GeometryTriangleTool(),
                  new GeometryDiamondTool(),
                  null,
+
                  //Geometry2
                  new GeometryPentagonTool(),
                  new GeometryStarTool(),
+                 new GeometryCogTool(),
                  null,
+
                  //Geometry3
                  new GeometryDountTool(),
                  new GeometryPieTool(),
                  new GeometryCookieTool(),
                  null,
+
                  //Geometry4
-                 new GeometryCogTool(),
                  new GeometryArrowTool(),
                  new GeometryCapsuleTool(),
                  new GeometryHeartTool(),

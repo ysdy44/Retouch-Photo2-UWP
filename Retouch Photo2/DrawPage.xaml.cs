@@ -121,9 +121,11 @@ namespace Retouch_Photo2
                 ElementTheme theme = this.ThemeControl.Theme;
                 theme = (theme == ElementTheme.Dark) ? ElementTheme.Light : ElementTheme.Dark;
 
-                this.RequestedTheme = theme;
                 this.ThemeControl.Theme = theme;
                 ApplicationViewTitleBarBackgroundExtension.SetTheme(theme);
+
+                this.SettingViewModel.ElementTheme = theme;
+                this.SettingViewModel.WriteToLocalFolder();//Write
             };
 
 
@@ -151,6 +153,15 @@ namespace Retouch_Photo2
         //The current page becomes the active page
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            //Theme
+            ElementTheme theme = this.SettingViewModel.ElementTheme;
+            this.ThemeControl.Theme = theme;
+
+            //Layout
+            this.DrawLayout.VisualStateDeviceType = this.SettingViewModel.LayoutDeviceType;
+            this.DrawLayout.VisualStatePhoneMaxWidth = this.SettingViewModel.LayoutPhoneMaxWidth;
+            this.DrawLayout.VisualStatePadMaxWidth = this.SettingViewModel.LayoutPadMaxWidth;
+            
             if (DrawPage._isLoaded)
             {
                 this.NavigatedTo();

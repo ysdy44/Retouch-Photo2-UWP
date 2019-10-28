@@ -74,25 +74,21 @@ namespace Retouch_Photo2
 
         private void NavigatedTo()
         {
-            //Theme
-            ElementTheme theme = this.SettingViewModel.ElementTheme;
-            this.RequestedTheme = theme;
-            this.ThemeControl.Theme = theme;
-            ApplicationViewTitleBarBackgroundExtension.SetTheme(theme);
-
-            //Layout
-            this.DrawLayout.VisualStateDeviceType = this.SettingViewModel.LayoutDeviceType;
-            this.DrawLayout.VisualStatePhoneMaxWidth = this.SettingViewModel.LayoutPhoneMaxWidth;
-            this.DrawLayout.VisualStatePadMaxWidth = this.SettingViewModel.LayoutPadMaxWidth;
-
             //Transition
             Vector2 offset = this.DrawLayout.FullScreenOffset;
             float width = this.DrawLayout.CenterChildWidth;
             float height = this.DrawLayout.CenterChildHeight;
             this.ViewModel.CanvasTransformer.TransitionDestination(offset, width, height);
 
-            this.Transition = 0;
-            this.TransitionStoryboard.Begin();//Storyboard
+            if (this.ViewModel.IsTransition == false)
+            {
+                this.NavigatedToComplete();
+            }
+            else
+            {
+                this.Transition = 0;
+                this.TransitionStoryboard.Begin();//Storyboard
+            }
         }
         private void NavigatedToComplete()
         {

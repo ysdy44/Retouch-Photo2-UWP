@@ -21,8 +21,8 @@ namespace Retouch_Photo2.Layers
         #region Property
 
 
-        /// <summary> Gets ILayer's type name. </summary>
-        string Type { get; }
+        /// <summary> Gets ILayer's type. </summary>
+        LayerType Type { get; }
         /// <summary> Gets or sets ILayer's name. </summary>
         string Name { get; set; }
         /// <summary> Gets or sets ILayer's opacity. </summary>

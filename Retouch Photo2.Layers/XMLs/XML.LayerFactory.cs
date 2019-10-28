@@ -19,26 +19,34 @@ namespace Retouch_Photo2.Layers
         {
             switch (type)
             {
-                case GeometryRectangleLayer.ID: return new GeometryRectangleLayer();
-                case GeometryEllipseLayer.ID: return new GeometryEllipseLayer();
-                case GeometryCurveLayer.ID: return new GeometryCurveLayer(element);
+                //Geometry0
+                case "GeometryRectangle": return new GeometryRectangleLayer();
+                case "GeometryEllipse": return new GeometryEllipseLayer();
+                case "GeometryCurve": return new GeometryCurveLayer(element);
 
-                case ImageLayer.ID: return new ImageLayer(element);
-                case AcrylicLayer.ID: return new AcrylicLayer(element);
-                case GroupLayer.ID: return new GroupLayer();
+                case "Image": return new ImageLayer(element);
+                case "Acrylic": return new AcrylicLayer(element);
+                case "Group": return new GroupLayer();
 
-                case GeometryRoundRectLayer.ID: return new GeometryRoundRectLayer(element);
-                case GeometryTriangleLayer.ID: return new GeometryTriangleLayer(element);
+                //Geometry1
+                case "GeometryRoundRect": return new GeometryRoundRectLayer(element);
+                case "GeometryTriangle": return new GeometryTriangleLayer(element);
+                case "GeometryDiamond": return new GeometryDiamondLayer(element);
 
-                case GeometryDiamondLayer.ID: return new GeometryDiamondLayer(element);
-                case GeometryPentagonLayer.ID: return new GeometryPentagonLayer(element);
-                case GeometryStarLayer.ID: return new GeometryStarLayer(element);
-                case GeometryPieLayer.ID: return new GeometryPieLayer(element);
+                //Geometry2
+                case "GeometryPentagon": return new GeometryPentagonLayer(element);
+                case "GeometryStar": return new GeometryStarLayer(element);
+                case "GeometryCog": return new GeometryCogLayer(element);
 
-                case GeometryCogLayer.ID: return new GeometryCogLayer(element);
-                case GeometryArrowLayer.ID: return new GeometryArrowLayer(element);
-                case GeometryCapsuleLayer.ID: return new GeometryCapsuleLayer();
-                case GeometryHeartLayer.ID: return new GeometryHeartLayer(element);
+                //Geometry3
+                case "GeometryDount": return new GeometryPieLayer(element);
+                case "GeometryPie": return new GeometryPieLayer(element);
+                case "GeometryCookie": return new GeometryPieLayer(element);
+
+                //Geometry4
+                case "GeometryArrow": return new GeometryArrowLayer(element);
+                case "GeometryCapsule": return new GeometryCapsuleLayer();
+                case "GeometryHeart": return new GeometryHeartLayer(element);
 
                 default: return null;
             }

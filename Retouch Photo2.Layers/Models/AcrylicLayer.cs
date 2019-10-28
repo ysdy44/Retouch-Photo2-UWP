@@ -16,8 +16,8 @@ namespace Retouch_Photo2.Layers.Models
     public class AcrylicLayer : LayerBase, ILayer
     {
 
-        //@Static     
-        public const string ID = "AcrylicLayer";
+        //@Override     
+        public override LayerType Type => LayerType.Acrylic;
 
         //@Content       
         public float TintOpacity = 0.5f;
@@ -34,7 +34,6 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public AcrylicLayer()
         {
-            base.Type = AcrylicLayer.ID;
             base.StyleManager.FillBrush.Color = Color.FromArgb(255, 255, 255, 255);
             base.Control = new LayerControl(this)
             {

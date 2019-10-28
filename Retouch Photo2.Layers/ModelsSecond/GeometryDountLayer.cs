@@ -13,9 +13,10 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public partial class GeometryDountLayer : IGeometryLayer, ILayer
     {
-        //@Static     
-        public const string ID = "GeometryDountLayer";
-         
+
+        //@Override     
+        public override LayerType Type => LayerType.GeometryDount;
+
         //@Content       
         public float HoleRadius = 0.5f;
 
@@ -30,7 +31,6 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryDountLayer()
         {
-            base.Type = GeometryDountLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryDountIcon(),

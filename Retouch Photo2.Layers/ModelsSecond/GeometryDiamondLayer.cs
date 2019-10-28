@@ -13,9 +13,10 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryDiamondLayer : IGeometryLayer, ILayer
     {
-        //@Static     
-        public const string ID = "GeometryDiamondLayer";
-         
+
+        //@Override     
+        public override LayerType Type => LayerType.GeometryDiamond;
+
         //@Content
         public float Mid = 0.5f;
 
@@ -30,7 +31,6 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryDiamondLayer()
         {
-            base.Type = GeometryDiamondLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryDiamondIcon(),

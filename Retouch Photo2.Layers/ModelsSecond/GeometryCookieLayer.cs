@@ -13,9 +13,10 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public partial class GeometryCookieLayer : IGeometryLayer, ILayer
     {
-        //@Static     
-        public const string ID = "GeometryCookieLayer";
-         
+
+        //@Override     
+        public override LayerType Type => LayerType.GeometryCookie;
+
         //@Content       
         public float InnerRadius = 0.5f;
         public float SweepAngle = FanKit.Math.Pi / 2f;
@@ -31,7 +32,6 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryCookieLayer()
         {
-            base.Type = GeometryCookieLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryCookieIcon(),

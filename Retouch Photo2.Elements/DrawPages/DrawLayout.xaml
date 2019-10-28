@@ -57,7 +57,7 @@
 
     <Grid x:Name="RootGrid">
         <Grid.Background>
-            <SolidColorBrush x:Name="RootGridBackground" Color="{ThemeResource AppForegroundColor}"/>
+            <SolidColorBrush x:Name="RootGridBackground" Color="{ThemeResource AppBackgroundColor}"/>
         </Grid.Background>
 
         <!--VisualState-->
@@ -389,7 +389,7 @@
 
         <!--Left-->
         <Border x:Name="LeftBorder" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" MinHeight="200" BorderBrush="{ThemeResource AppStroke}"
-                CornerRadius="0" VerticalAlignment="Center" BorderThickness="0,1,1,1" Visibility="Visible" Margin="0" Background="{ThemeResource AppBackground}">
+                CornerRadius="0" VerticalAlignment="Center" BorderThickness="0,1,1,1" Visibility="Visible" Margin="0" Background="{ThemeResource AppForeground}">
 
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>
@@ -412,7 +412,7 @@
         </Border>
         <!--Right-->
         <Border x:Name="RightBorder" Grid.Column="2" MinHeight="200" BorderBrush="{ThemeResource AppStroke}"
-               Width="220" Grid.Row ="1" Grid.RowSpan="2" CornerRadius="0" HorizontalAlignment="Stretch" BorderThickness="1,1,0,1" Visibility="Visible" Background="{ThemeResource AppBackground}">
+               Width="220" Grid.Row ="1" Grid.RowSpan="2" CornerRadius="0" HorizontalAlignment="Stretch" BorderThickness="1,1,0,1" Visibility="Visible" Background="{ThemeResource AppForeground}">
 
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>

@@ -28,11 +28,12 @@ namespace Retouch_Photo2
             this.InitializeComponent();            
             this.Loaded += async (s, e) =>
             {
+                await this.ConstructSettingViewModel();
+
                 if (MainPage._isLoaded == false)
                 {
                     MainPage._isLoaded = true;
-                    await this.ConstructSettingViewModel();
-                    await this.Refresh();
+                    this.NavigatedTo();
                 }
             };
             this.RefreshButton.Tapped += async (s, e) => await this.Refresh();
@@ -108,10 +109,7 @@ namespace Retouch_Photo2
         {
             if (MainPage._isLoaded)
             {
-                //Theme
-                ElementTheme theme = this.SettingViewModel.ElementTheme;
-                this.RequestedTheme = theme;
-                ApplicationViewTitleBarBackgroundExtension.SetTheme(theme);
+                this.NavigatedTo();
             }
         }
         //The current page no longer becomes an active page

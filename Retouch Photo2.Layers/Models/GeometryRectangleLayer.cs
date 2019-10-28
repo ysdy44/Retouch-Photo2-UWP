@@ -12,8 +12,9 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryRectangleLayer : IGeometryLayer, ILayer
     {
-        //@Static     
-        public const string ID = "GeometryRectangleLayer";
+
+        //@Override     
+        public override LayerType Type => LayerType.GeometryRectangle;
 
         //@Construct
         /// <summary>
@@ -22,7 +23,6 @@ namespace Retouch_Photo2.Layers.Models
         /// <param name="element"> The source XElement. </param>
         public GeometryRectangleLayer()
         {
-            base.Type = GeometryRectangleLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryRectangleIcon(),

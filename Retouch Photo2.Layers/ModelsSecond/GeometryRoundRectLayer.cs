@@ -13,9 +13,10 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryRoundRectLayer : IGeometryLayer, ILayer
     {
-        //@Static     
-        public const string ID = "GeometryRoundRectLayer";
-         
+
+        //@Override     
+        public override LayerType Type => LayerType.GeometryRoundRect;
+
         //@Content
         public float Corner = 0.25f;
 
@@ -30,7 +31,6 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryRoundRectLayer()
         {
-            base.Type = GeometryRoundRectLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryRoundRectIcon(),

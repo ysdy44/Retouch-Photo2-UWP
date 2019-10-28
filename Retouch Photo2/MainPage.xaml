@@ -32,11 +32,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
-            <RowDefinition x:Name="FootRowDefinition" Height="Auto" MinHeight="60"/>
+            <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
 
         <!--Developer-->
-        <developerTools:AlignmentGrid Grid.Row="1" Grid.RowSpan="2" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="Gray"/>
+        <developerTools:AlignmentGrid Grid.RowSpan="3" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="Gray"/>
 
         
         <!--Head-->
@@ -143,9 +143,25 @@
 
 
         <!--Foot-->
-        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Row="2" Visibility="Collapsed" ShadowColor="{ThemeResource AppStrokeColor}"/>
+        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Row="2" Visibility="Collapsed" 
+                                   ShadowOpacity="0.9"
+                                   ShadowColor="{ThemeResource AppStrokeColor}"
+                                   Background="{ThemeResource AppForeground}"
+                                  >
 
-        
+            <!--Visibility:Show-->
+            <animations:Implicit.ShowAnimations>
+                <animations:TranslationAnimation Duration="0:0:0.4" From="0,100,0" To="0,0,0"/>
+            </animations:Implicit.ShowAnimations>
+
+            <!--Visibility:Hide-->
+            <animations:Implicit.HideAnimations>
+                <animations:TranslationAnimation Duration="0:0:0.4" From="0,0,0" To="0,100,0"/>
+            </animations:Implicit.HideAnimations>
+
+            <!--Foot-->
+            
+        </elements:RadiusAnimaPanel>
         <!--Loading-->
         <elements:LoadingControl x:Name="LoadingControl" Grid.RowSpan="3"/>
 

@@ -16,7 +16,7 @@ namespace Retouch_Photo2.ViewModels
     {
                
         /// <summary> <see cref = "SelectionViewModel" />'s layer type. </summary>
-        public string Type
+        public LayerType Type
         {
             get => this.type;
             set
@@ -25,7 +25,7 @@ namespace Retouch_Photo2.ViewModels
                 this.OnPropertyChanged(nameof(this.Type));//Notify 
             }
         }
-        private string type;
+        private LayerType type;
 
 
         /// <summary> <see cref = "SelectionViewModel" />'s opacity. </summary>

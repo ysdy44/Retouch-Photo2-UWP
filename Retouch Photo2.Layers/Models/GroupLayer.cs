@@ -12,8 +12,9 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GroupLayer : LayerBase, ILayer
     {
-        //@Static     
-        public const string ID = "GroupLayer";
+
+        //@Override     
+        public override LayerType Type => LayerType.Group;
 
         //@Construct
         /// <summary>
@@ -21,7 +22,6 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GroupLayer()
         {
-            base.Type = GroupLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GroupIcon(),

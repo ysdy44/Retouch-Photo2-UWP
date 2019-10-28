@@ -13,8 +13,9 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryStarLayer : IGeometryLayer, ILayer
     {
-        //@Static     
-        public const string ID = "GeometryStarLayer";
+
+        //@Override     
+        public override LayerType Type => LayerType.GeometryStar;
 
         //@Content       
         public int Points = 5;
@@ -31,7 +32,6 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryStarLayer()
         {
-            base.Type = GeometryStarLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryStarIcon(),

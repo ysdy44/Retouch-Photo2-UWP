@@ -13,9 +13,10 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public partial class GeometryPieLayer : IGeometryLayer, ILayer
     {
-        //@Static     
-        public const string ID = "GeometryPieLayer";
-         
+
+        //@Override     
+        public override LayerType Type => LayerType.GeometryPie;
+
         //@Content       
         public float SweepAngle = FanKit.Math.Pi / 2f;
 
@@ -30,7 +31,6 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryPieLayer()
         {
-            base.Type = GeometryPieLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryPieIcon(),

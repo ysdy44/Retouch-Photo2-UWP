@@ -13,9 +13,10 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryPentagonLayer : IGeometryLayer, ILayer
     {
-        //@Static     
-        public const string ID = "GeometryPentagonLayer";
-         
+
+        //@Override     
+        public override LayerType Type => LayerType.GeometryPentagon;
+
         //@Content
         public int Points = 5;
 
@@ -30,7 +31,6 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryPentagonLayer()
         {
-            base.Type = GeometryPentagonLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryPentagonIcon(),

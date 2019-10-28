@@ -14,8 +14,9 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryCurveLayer : IGeometryLayer, ILayer
     {
-        //@Static     
-        public const string ID = "GeometryCurveLayer";
+
+        //@Override     
+        public override LayerType Type => LayerType.GeometryCurve;
 
         //@Content 
         public NodeCollection Nodes { get; private set; }
@@ -31,7 +32,6 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         private GeometryCurveLayer()
         {
-            base.Type = GeometryCurveLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryCurveIcon(),

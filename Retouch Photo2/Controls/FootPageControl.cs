@@ -144,25 +144,33 @@ namespace Retouch_Photo2.Controls
         {
             switch (type)
             {
-                case GeometryRectangleLayer.ID: return ToolType.GeometryRectangle;
-                case GeometryEllipseLayer.ID: return ToolType.GeometryEllipse;
-                case GeometryCurveLayer.ID: return ToolType.Pen;
+                //Geometry0
+                case "GeometryRectangle": return ToolType.GeometryRectangle;
+                case "GeometryEllipse": return ToolType.GeometryEllipse;
+                case "GeometryCurve": return ToolType.Pen;
 
-                case ImageLayer.ID: return ToolType.Image;
-                case AcrylicLayer.ID: return ToolType.Acrylic;
+                case "Image": return ToolType.Image;
+                case "Acrylic": return ToolType.Acrylic;
 
-                case GeometryRoundRectLayer.ID: return ToolType.GeometryRoundRect;
-                case GeometryTriangleLayer.ID: return ToolType.GeometryTriangle;
+                //Geometry1
+                case "GeometryRoundRect": return ToolType.GeometryRoundRect;
+                case "GeometryTriangle": return ToolType.GeometryTriangle;
+                case "GeometryDiamond": return ToolType.GeometryDiamond;
 
-                case GeometryDiamondLayer.ID: return ToolType.GeometryDiamond;
-                case GeometryPentagonLayer.ID: return ToolType.GeometryPentagon;
-                case GeometryStarLayer.ID: return ToolType.GeometryStar;
-                case GeometryPieLayer.ID: return ToolType.GeometryPie;
+                //Geometry2
+                case "GeometryPentagon": return ToolType.GeometryPentagon;
+                case "GeometryStar": return ToolType.GeometryStar;
+                case "GeometryCog": return ToolType.GeometryCog;
 
-                case GeometryCogLayer.ID: return ToolType.GeometryCog;
-                case GeometryArrowLayer.ID: return ToolType.GeometryArrow;
-                case GeometryCapsuleLayer.ID: return ToolType.GeometryCapsule;
-                case GeometryHeartLayer.ID: return ToolType.GeometryHeart;
+                //Geometry3
+                case "GeometryDount": return ToolType.GeometryDount;
+                case "GeometryPie": return ToolType.GeometryPie;
+                case "GeometryCookie": return ToolType.GeometryCookie;
+
+                //Geometry4
+                case "GeometryArrow": return ToolType.GeometryArrow;
+                case "GeometryCapsule": return ToolType.GeometryCapsule;
+                case "GeometryHeart": return ToolType.GeometryHeart;
             }
             return ToolType.None;
         }

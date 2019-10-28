@@ -13,9 +13,10 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryHeartLayer : IGeometryLayer, ILayer
     {
-        //@Static     
-        public const string ID = "GeometryHeartLayer";
-         
+
+        //@Override     
+        public override LayerType Type => LayerType.GeometryHeart;
+
         //@Content
         public float Spread = 0.8f;
 
@@ -30,7 +31,6 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryHeartLayer()
         {
-            base.Type = GeometryHeartLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryHeartIcon(),

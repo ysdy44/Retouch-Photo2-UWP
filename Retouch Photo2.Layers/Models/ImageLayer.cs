@@ -12,9 +12,10 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class ImageLayer : LayerBase, ILayer
     {
-        //@Static     
-        public const string ID = "ImageLayer";
-         
+
+        //@Override     
+        public override LayerType Type => LayerType.Image;
+
         //@Content
         /// <summary> <see cref = "ImageLayer" />'s image. </summary>
         public ImageRe ImageRe { get; set; }
@@ -30,7 +31,6 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public ImageLayer()
         {
-            base.Type = ImageLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new ImageIcon(),

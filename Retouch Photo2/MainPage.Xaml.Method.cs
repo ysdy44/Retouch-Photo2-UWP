@@ -50,6 +50,9 @@ namespace Retouch_Photo2
 
         private void NewProjectFromSize(BitmapSize pixels)
         {
+            //Transition
+            this.ViewModel.IsTransition = false;
+
             Project project = new Project((int)pixels.Width, (int)pixels.Height);//Project
             this.ViewModel.LoadFromProject(project);
 
@@ -61,7 +64,16 @@ namespace Retouch_Photo2
 
             if (sender is FrameworkElement element)
             {
-                this.NavigatedFrom(element);
+                this.ViewModel.CanvasTransformer.Size = new Size(this.ActualWidth, this.ActualHeight - 50);
+
+                //Transition
+                this.ViewModel.IsTransition = true;
+                this.ViewModel.CanvasTransformer.Transition(0.0f);
+
+                Point postion = Retouch_Photo2.Menus.MenuHelper.GetVisualPostion(element);
+                float width = (float)element.ActualWidth;
+                float height = (float)element.ActualHeight;
+                this.ViewModel.CanvasTransformer.TransitionSource(postion, width, height);
             }
 
             if (photo.Path != null)
@@ -95,6 +107,9 @@ namespace Retouch_Photo2
                 ImageRe = imageRe,
             };
 
+            //Transition
+            this.ViewModel.IsTransition = false;
+
             //Project
             Project project = new Project(imageLayer);
             this.Frame.Navigate(typeof(DrawPage), project);//Navigate       
@@ -110,19 +125,24 @@ namespace Retouch_Photo2
 
             //Sort by Time
             IOrderedEnumerable<StorageFile> orderedFiles = files.OrderByDescending(file => file.DateCreated);
+            IEnumerable<StorageFile> orderedPhotos = from flie in orderedFiles where flie.FileType == ".photo2" select flie;
 
-            this.PhotoFileList.Clear(); //Notify
-            this.GridView.Children.Clear();
-
-            foreach (StorageFile storageFile in orderedFiles)
+            //Refresh, when the count is not equal.
+            if (orderedPhotos.Count() != this.PhotoFileList.Count)
             {
-                // [StorageFile] --> [Photo]
-                Photo photo = Photo.CreatePhoto(storageFile, ApplicationData.Current.LocalFolder.Path);
+                this.PhotoFileList.Clear(); //Notify
+                this.GridView.Children.Clear();
 
-                if (photo != null)
+                foreach (StorageFile storageFile in orderedPhotos)
                 {
-                    this.PhotoFileList.Add(photo); //Notify
-                    this.GridView.Children.Add(photo.Instance);
+                    // [StorageFile] --> [Photo]
+                    Photo photo = Photo.CreatePhoto(storageFile, ApplicationData.Current.LocalFolder.Path);
+
+                    if (photo != null)
+                    {
+                        this.PhotoFileList.Add(photo); //Notify
+                        this.GridView.Children.Add(photo.Instance);
+                    }
                 }
             }
 
@@ -133,20 +153,12 @@ namespace Retouch_Photo2
         }
 
 
-        private void NavigatedTo()
+        private async void NavigatedTo()
         {
+            await this.Refresh();
         }
         private void NavigatedFrom(FrameworkElement element)
         {
-            this.ViewModel.CanvasTransformer.Size = new Size(this.ActualWidth, this.ActualHeight - 50);
-
-            //Transition
-            this.ViewModel.CanvasTransformer.Transition(0.0f);
-
-            Point postion = Retouch_Photo2.Menus.MenuHelper.GetVisualPostion(element);
-            float width = (float)element.ActualWidth;
-            float height = (float)element.ActualHeight;
-            this.ViewModel.CanvasTransformer.TransitionSource(postion, width, height);
         }
 
     }

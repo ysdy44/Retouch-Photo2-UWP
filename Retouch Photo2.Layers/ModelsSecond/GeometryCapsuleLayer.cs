@@ -12,8 +12,9 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryCapsuleLayer : IGeometryLayer, ILayer
     {
-        //@Static     
-        public const string ID = "GeometryCapsuleLayer";
+
+        //@Override     
+        public override LayerType Type => LayerType.GeometryCapsule;
 
         //@Construct
         /// <summary>
@@ -21,7 +22,6 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryCapsuleLayer()
         {
-            base.Type = GeometryCapsuleLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryCapsuleIcon(),

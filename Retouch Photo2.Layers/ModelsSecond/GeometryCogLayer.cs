@@ -13,8 +13,9 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryCogLayer : IGeometryLayer, ILayer
     {
-        //@Static     
-        public const string ID = "GeometryCogLayer";
+
+        //@Override     
+        public override LayerType Type => LayerType.GeometryCog;
 
         //@Content
         public int Count = 8;
@@ -33,7 +34,6 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryCogLayer()
         {
-            base.Type = GeometryCogLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryCogIcon(),

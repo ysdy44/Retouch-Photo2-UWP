@@ -49,12 +49,7 @@ namespace Retouch_Photo2.ViewModels
         }
         private PhotoControl instance;
 
-
-        //@Construct
-        public Photo()
-        {
-        }
-
+        
         //@Static
         /// <summary> Occurs when tapped the RootGrid. </summary>
         public static EventHandler<Photo> ItemClick;
@@ -66,38 +61,18 @@ namespace Retouch_Photo2.ViewModels
         /// <returns> photo </returns>
         public static Photo CreatePhoto(StorageFile flie, string folderPath)
         {
-            if (flie.FileType == ".photo2")
-            {
-                DateTimeOffset time = flie.DateCreated;
+            DateTimeOffset time = flie.DateCreated;
 
-                //add a photo class
-                return new Photo
-                {
-                    Name = flie.DisplayName,
-                    Time = time,
-                    Describe = $"{time.Year}.{time.Month}.{time.Day}",
-                    Uri = new Uri($"{folderPath}/{flie.DisplayName}.png", UriKind.Relative),
-                    Path = flie.Path,
-                };
-            }
-            else return null;
+            //add a photo class
+            return new Photo
+            {
+                Name = flie.DisplayName,
+                Time = time,
+                Describe = $"{time.Year}.{time.Month}.{time.Day}",
+                Uri = new Uri($"{folderPath}/{flie.DisplayName}.png", UriKind.Relative),
+                Path = flie.Path,
+            };
         }
         
-        /// <summary>
-        /// Get <see cref = "StorageFile" /> from the destination <see cref = "StorageFolder" />.
-        /// </summary>
-        /// <param name="folder"> Destination Folder </param>
-        /// <returns> files </returns>
-        public async static Task<IOrderedEnumerable<StorageFile>> CreatePhotoFilesFromStorageFolder(StorageFolder folder)
-        {
-            //get all file.
-            IReadOnlyList<StorageFile> files = await folder.GetFilesAsync();
-
-            //Sort by Time
-            IOrderedEnumerable<StorageFile> orderedFiles = files.OrderByDescending(file => file.DateCreated);
-
-            return orderedFiles;
-        }
-
     }
 }

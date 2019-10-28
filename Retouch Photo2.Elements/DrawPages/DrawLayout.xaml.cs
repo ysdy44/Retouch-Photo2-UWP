@@ -192,10 +192,16 @@ namespace Retouch_Photo2.Elements
         {
             get
             {
-                if (this._vsActualWidthType == DeviceLayoutType.PC)
+                if (this.VisualStateDeviceType == DeviceLayoutType.Adaptive)
+                {
+                    if (this._vsActualWidthType == DeviceLayoutType.PC)
+                        return new Vector2(70, 50);
+                }
+
+                if (this.VisualStateDeviceType == DeviceLayoutType.PC)
                     return new Vector2(70, 50);
-                else
-                    return new Vector2(0, 50);
+
+                return new Vector2(0, 50);
             }
         }
         /// <summary> Gets the CenterChild width. </summary>

@@ -34,35 +34,35 @@
 
 
         //Geometry1
-        /// <summary> 圆角矩形. </summary>
+        /// <summary> Create round-rect, geometry. </summary>
         GeometryRoundRect,
-        /// <summary> 三角形. </summary>
+        /// <summary> Create triangle geometry. </summary>
         GeometryTriangle,
-        /// <summary> 菱形. </summary>
+        /// <summary> Create diamond geometry. </summary>
         GeometryDiamond,
 
         //Geometry2
-        /// <summary> 多边形. </summary>
+        /// <summary> Create pentagon geometry. </summary>
         GeometryPentagon,
-        /// <summary> 星星. </summary>
+        /// <summary> Create star geometry. </summary>
         GeometryStar,
-        /// <summary> 齿轮. </summary>
+        /// <summary> Create cog geometry. </summary>
         GeometryCog,
 
         //Geometry3
-        /// <summary> 甜甜圈. </summary>
+        /// <summary> Create dount geometry. </summary>
         GeometryDount,
-        /// <summary> 饼图. </summary>
+        /// <summary> Create pie geometry. </summary>
         GeometryPie,
-        /// <summary> 曲奇饼. </summary>
+        /// <summary> Create cookie geometry. </summary>
         GeometryCookie,
 
         //Geometry4
-        /// <summary> 箭头. </summary>
+        /// <summary> Create arrow geometry. </summary>
         GeometryArrow,
-        /// <summary> 胶囊. </summary>
+        /// <summary> Create caopsule geometry. </summary>
         GeometryCapsule,
-        /// <summary> 心型. </summary>
+        /// <summary> Create heart geometry. </summary>
         GeometryHeart,
 
     }

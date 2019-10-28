@@ -60,7 +60,7 @@
     </Page.Resources>
 
 
-    <StackPanel Orientation="Horizontal">
+    <StackPanel Orientation="Horizontal" Margin="8,0">
 
 
         <!--VisualState-->

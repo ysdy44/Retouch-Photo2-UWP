@@ -12,8 +12,9 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public class GeometryEllipseLayer : IGeometryLayer, ILayer
     {
-        //@Static     
-        public const string ID = "GeometryEllipseLayer";
+
+        //@Override     
+        public override LayerType Type => LayerType.GeometryEllipse;
 
         //@Construct
         /// <summary>
@@ -22,7 +23,6 @@ namespace Retouch_Photo2.Layers.Models
         /// <param name="element"> The source XElement. </param>
         public GeometryEllipseLayer()
         {
-            base.Type = GeometryEllipseLayer.ID;
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryEllipseIcon(),
