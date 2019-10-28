@@ -48,7 +48,7 @@ namespace Retouch_Photo2.Layers
             currentImage = EffectManager.Render(currentLayer.EffectManager, currentImage);
 
             //Adjustment
-            currentImage = AdjustmentManager.Render(currentLayer.AdjustmentManager, currentImage);
+            currentImage = AdjustmentManager.GetRender(currentLayer.AdjustmentManager, currentImage);
 
             //Opacity
             if (currentLayer.Opacity < 1.0)

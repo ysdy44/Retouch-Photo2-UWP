@@ -41,6 +41,16 @@ namespace Retouch_Photo2.Elements
                 return null;
             }
         }
+        /// <summary>
+        /// To know if a file exists.
+        /// </summary>
+        /// <param name="fileName"> The source file name. </param>
+        /// <returns> The exists. </returns>
+        public static async Task<bool> IsFileExistsInLocalFolder(string fileName)
+        {
+            IStorageItem item = await ApplicationData.Current.LocalFolder.TryGetItemAsync(fileName);
+            return item != null;
+        }
 
         /// <summary>
         /// Write file to Local Folder. 

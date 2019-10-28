@@ -20,11 +20,6 @@ namespace Retouch_Photo2.Layers.Models
         /// Construct a rectangle-layer.
         /// </summary>
         /// <param name="element"> The source XElement. </param>
-        public GeometryRectangleLayer(XElement element) : this() => this.Load(element);
-        /// <summary>
-        /// Construct a rectangle-layer.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
         public GeometryRectangleLayer()
         {
             base.Type = GeometryRectangleLayer.ID;
@@ -52,17 +47,7 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public XElement Save()
-        {
-            XElement element = new XElement("GeometryRectangleLayer");
-
-            LayerBase.SaveWidth(element, this);
-            return element;
-        }
-        public void Load(XElement element)
-        {
-            LayerBase.LoadWith(element, this);
-        }
+        public void SaveWith(XElement element) { }
 
     }
 }

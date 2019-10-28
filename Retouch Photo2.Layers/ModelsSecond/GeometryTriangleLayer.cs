@@ -43,23 +43,7 @@ namespace Retouch_Photo2.Layers.Models
         {
             Transformer transformer = base.TransformManager.Destination;
 
-            Vector2 leftTop = Vector2.Transform(transformer.LeftTop, canvasToVirtualMatrix);
-            Vector2 rightTop = Vector2.Transform(transformer.RightTop, canvasToVirtualMatrix);
-            Vector2 rightBottom = Vector2.Transform(transformer.RightBottom, canvasToVirtualMatrix);
-            Vector2 leftBottom = Vector2.Transform(transformer.LeftBottom, canvasToVirtualMatrix);
-
-            Vector2 center = leftTop * (1.0f - this.Center) + rightTop * this.Center;
-
-            //Points
-            Vector2[] points = new Vector2[]
-            {
-                leftBottom,
-                center,
-                rightBottom,
-            };
-
-            //Geometry
-            return CanvasGeometry.CreatePolygon(resourceCreator, points);
+            return TransformerGeometry.CreateTriangle(resourceCreator, transformer, canvasToVirtualMatrix, this.Center);
         }
 
 
@@ -75,19 +59,13 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public XElement Save()
+        public void SaveWith(XElement element)
         {
-            XElement element = new XElement("GeometryTriangleLayer");
-
             element.Add(new XElement("Center", this.Center));
-
-            LayerBase.SaveWidth(element, this);
-            return element;
         }
         public void Load(XElement element)
         {
             this.Center = (float)element.Element("Center");
-            LayerBase.LoadWith(element, this);
         }
 
     }

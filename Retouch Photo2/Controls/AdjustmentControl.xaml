@@ -36,7 +36,7 @@
 
         <!--DataTemplate-->
         <DataTemplate x:Key="DataTemplate" x:DataType="adjustments:IAdjustment">
-            <Border Margin="2" Style="{StaticResource AppRoundedBorderStyle}">
+            <Border Margin="2,0,2,1" Height="36" Style="{StaticResource AppRoundedBorderStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -81,8 +81,8 @@
                         
                         <Setter Target = "AddButton.IsEnabled" Value="false"/>
                         <Setter Target = "FilterButton.IsEnabled" Value="false"/>
-                        
-                        <Setter Target = "TextBlock.Visibility" Value="Visible"/>
+
+                        <Setter Target = "DisableTextBlock.Visibility" Value="Visible"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -92,8 +92,8 @@
                 <VisualState x:Name="ZeroAdjustments">
                     <VisualState.Setters >
 
-                        
-                        <Setter Target = "TextBlock.Visibility" Value="Visible"/>
+
+                        <Setter Target = "ZeroTextBlock.Visibility" Value="Visible"/>
                         
                     </VisualState.Setters>
                 </VisualState>
@@ -117,8 +117,8 @@
 
                         <Setter Target = "AdjustmentPageBorder.Visibility" Value="Visible"/>
                         
-                        <Setter Target = "AddButton.Visibility" Value="Collapsed"/>
-                        <Setter Target = "FilterButton.Visibility" Value="Collapsed"/>
+                        <Setter Target = "AddBorder.Visibility" Value="Collapsed"/>
+                        <Setter Target = "FilterBorder.Visibility" Value="Collapsed"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -131,8 +131,8 @@
                         
                         <Setter Target = "FilterListView.Visibility" Value="Visible"/>
 
-                        <Setter Target = "AddButton.Visibility" Value="Collapsed"/>
-                        <Setter Target = "FilterButton.Visibility" Value="Collapsed"/>
+                        <Setter Target = "AddBorder.Visibility" Value="Collapsed"/>
+                        <Setter Target = "FilterBorder.Visibility" Value="Collapsed"/>
                      
                     </VisualState.Setters>
                 </VisualState>
@@ -158,9 +158,14 @@
 
         <!--Body-->
         <ItemsControl x:Name="ItemsControl" Visibility="Collapsed" Grid.Row="1" VerticalAlignment="Top" ItemTemplate="{StaticResource DataTemplate}"/>
-        <TextBlock x:Name="TextBlock" Visibility="Collapsed" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlock}">
+        <TextBlock x:Name="ZeroTextBlock" Visibility="Collapsed" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlock}">
             No Adjustment
         </TextBlock>
+        <TextBlock x:Name="DisableTextBlock" Visibility="Collapsed" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlock}">
+            Please select a layer
+        </TextBlock>
+        
+
         <Border x:Name="AdjustmentPageBorder" Visibility="Collapsed" Grid.Row="1" Background="Transparent">
 
             <!--Visibility:Show-->
@@ -192,7 +197,7 @@
         </ListView>
 
         <!--Foot-->
-        <Border Grid.Row="3" Margin="2" Style="{StaticResource AppRoundedBorderStyle}">
+        <Border x:Name="AddBorder" Grid.Row="3" Margin="2" Style="{StaticResource AppRoundedBorderStyle}">
             <Button x:Name="AddButton" Style="{StaticResource AppTagRoundedButton}">
                 <Button.Tag>
                     Add Adjustment
@@ -200,7 +205,7 @@
                 <FontIcon FontSize="18" Glyph="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
         </Border>
-        <Border Grid.Row="4" Margin="2" Style="{StaticResource AppRoundedBorderStyle}">
+        <Border x:Name="FilterBorder" Grid.Row="4" Margin="2" Style="{StaticResource AppRoundedBorderStyle}">
             <Button x:Name="FilterButton" Style="{StaticResource AppTagRoundedButton}">
                 <Button.Tag>
                     Default Filters

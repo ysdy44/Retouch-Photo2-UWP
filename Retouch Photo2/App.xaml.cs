@@ -50,6 +50,7 @@ namespace Retouch_Photo2
                  new BrushTool(),
                  new TransparencyTool(),
                  null,
+                 //Geometry0
                  new GeometryRectangleTool(),
                  new GeometryEllipseTool(),
                  new PenTool(),
@@ -57,22 +58,29 @@ namespace Retouch_Photo2
                  new ImageTool(),
                  new AcrylicTool(),
                  new CropTool(),
-
-
+                 
+                 
+                 //Geometry1
                  new GeometryRoundRectTool(),
                  new GeometryTriangleTool(),
-                 null,
                  new GeometryDiamondTool(),
+                 null,
+                 //Geometry2
                  new GeometryPentagonTool(),
                  new GeometryStarTool(),
-                 new GeometryPieTool(),
                  null,
+                 //Geometry3
+                 new GeometryDountTool(),
+                 new GeometryPieTool(),
+                 new GeometryCookieTool(),
+                 null,
+                 //Geometry4
                  new GeometryCogTool(),
                  new GeometryArrowTool(),
                  new GeometryCapsuleTool(),
                  new GeometryHeartTool(),
             },
-            
+
             //Menu
             Menus = new List<IMenu>
             {

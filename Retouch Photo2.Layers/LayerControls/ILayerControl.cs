@@ -1,5 +1,5 @@
-﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+﻿using Retouch_Photo2.Blends;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers
 {

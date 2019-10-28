@@ -1,62 +1,57 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments.Icons;
+using System.Xml.Linq;
 using Windows.UI.Xaml;
-using Newtonsoft.Json;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
     /// <summary>
     /// <see cref="IAdjustment"/>'s GammaTransferAdjustment.
     /// </summary>
-    [JsonObject(MemberSerialization.OptIn)]
     public class GammaTransferAdjustment : IAdjustment
     {
-        [JsonProperty]
-        public string TypeName { get; } = AdjustmentType.GammaTransfer.ToString();
+
         public AdjustmentType Type => AdjustmentType.GammaTransfer;
         public FrameworkElement Icon { get; } = new GammaTransferIcon();
         public Visibility PageVisibility => Visibility.Visible;
 
 
-        [JsonProperty]
-        public bool ClampOutput;
+        public bool ClampOutput= false;
 
-        [JsonProperty]
-        public bool AlphaDisable;
-        [JsonProperty]
-        public float AlphaOffset;
-        [JsonProperty]
-        public float AlphaExponent;
-        [JsonProperty]
-        public float AlphaAmplitude;
+        public bool AlphaDisable = true;
+        public float AlphaOffset = 0.0f;
+        public float AlphaExponent = 1.0f;
+        public float AlphaAmplitude = 1.0f;
 
-        [JsonProperty]
-        public bool RedDisable;
-        [JsonProperty]
-        public float RedOffset;
-        [JsonProperty]
-        public float RedExponent;
-        [JsonProperty]
-        public float RedAmplitude;
+        public bool RedDisable = true;
+        public float RedOffset = 0.0f;
+        public float RedExponent = 1.0f;
+        public float RedAmplitude = 1.0f;
 
-        [JsonProperty]
-        public bool GreenDisable;
-        [JsonProperty]
-        public float GreenOffset;
-        [JsonProperty]
-        public float GreenExponent;
-        [JsonProperty]
-        public float GreenAmplitude;
+        public bool GreenDisable = true;
+        public float GreenOffset = 0.0f;
+        public float GreenExponent = 1.0f;
+        public float GreenAmplitude = 1.0f;
 
-        [JsonProperty]
-        public bool BlueDisable;
-        [JsonProperty]
-        public float BlueOffset;
-        [JsonProperty]
-        public float BlueExponent;
-        [JsonProperty]
-        public float BlueAmplitude;
+        public bool BlueDisable = true;
+        public float BlueOffset = 0.0f;
+        public float BlueExponent = 1.0f;
+        public float BlueAmplitude = 1.0f;
+
+
+        //@Construct
+        /// <summary>
+        /// Construct a gammaTransfer-adjustment.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
+        public GammaTransferAdjustment(XElement element) : this() => this.Load(element);
+        /// <summary>
+        /// Construct a gammaTransfer-adjustment.
+        /// </summary>
+        public GammaTransferAdjustment()
+        {
+        }
 
 
         public void Reset()
@@ -83,6 +78,125 @@ namespace Retouch_Photo2.Adjustments.Models
             this.BlueExponent = 1;
             this.BlueAmplitude = 1;
         }
+        public IAdjustment Clone()
+        {
+            return new GammaTransferAdjustment
+            {
+                ClampOutput = this.ClampOutput,
+
+                AlphaDisable = this.AlphaDisable,
+                AlphaOffset = this.AlphaOffset,
+                AlphaExponent = this.AlphaExponent,
+                AlphaAmplitude = this.AlphaAmplitude,
+
+                RedDisable = this.RedDisable,
+                RedOffset = this.RedOffset,
+                RedExponent = this.RedExponent,
+                RedAmplitude = this.RedAmplitude,
+
+                GreenDisable = this.GreenDisable,
+                GreenOffset = this.GreenOffset,
+                GreenExponent = this.GreenExponent,
+                GreenAmplitude = this.GreenAmplitude,
+
+                BlueDisable = this.BlueDisable,
+                BlueOffset = this.BlueOffset,
+                BlueExponent = this.BlueExponent,
+                BlueAmplitude = this.BlueAmplitude,
+            };
+        }
+
+        public XElement Save()
+        {
+            XElement element = new XElement
+            (
+                "GammaTransfer",
+                new XAttribute("ClampOutput", this.ClampOutput)
+            );
+
+            if (this.AlphaDisable) element.Add(new XAttribute("AlphaDisable", false));
+            else
+            {
+                element.Add(new XAttribute("AlphaDisable", true));
+                element.Add(new XAttribute("AlphaOffset", this.AlphaOffset));
+                element.Add(new XAttribute("AlphaExponent", this.AlphaExponent));
+                element.Add(new XAttribute("AlphaAmplitude", this.AlphaAmplitude));
+            }
+
+            if (this.RedDisable) element.Add(new XAttribute("RedDisable", false));
+            else
+            {
+                element.Add(new XAttribute("RedDisable", true));
+                element.Add(new XAttribute("RedOffset", this.RedOffset));
+                element.Add(new XAttribute("RedExponent", this.RedExponent));
+                element.Add(new XAttribute("RedAmplitude", this.RedAmplitude));
+            }
+
+            if (this.GreenDisable) element.Add(new XAttribute("GreenDisable", false));
+            else
+            {
+                element.Add(new XAttribute("GreenDisable", true));
+                element.Add(new XAttribute("GreenOffset", this.GreenOffset));
+                element.Add(new XAttribute("GreenExponent", this.GreenExponent));
+                element.Add(new XAttribute("GreenAmplitude", this.GreenAmplitude));
+            }
+
+            if (this.BlueDisable) element.Add(new XAttribute("BlueDisable", false));
+            else
+            {
+                element.Add(new XAttribute("BlueDisable", true));
+                element.Add(new XAttribute("BlueOffset", this.BlueOffset));
+                element.Add(new XAttribute("BlueExponent", this.BlueExponent));
+                element.Add(new XAttribute("BlueAmplitude", this.BlueAmplitude));
+            }
+
+            return element;
+        }
+        public void Load(XElement element)
+        {
+            this.ClampOutput = (bool)element.Attribute("ClampOutput");
+
+            bool alphaDisable = (bool)element.Attribute("AlphaDisable");
+            if (alphaDisable) this.AlphaDisable = true;
+            else
+            {
+                this.AlphaDisable = false;
+                this.AlphaOffset = (float)element.Attribute("AlphaOffset");
+                this.AlphaExponent = (float)element.Attribute("AlphaExponent");
+                this.AlphaAmplitude = (float)element.Attribute("AlphaAmplitude");
+            }
+
+            bool redDisable = (bool)element.Attribute("RedDisable");
+            if (redDisable) this.RedDisable = true;
+            else
+            {
+                this.RedDisable = false;
+                this.RedOffset = (float)element.Attribute("RedOffset");
+                this.RedExponent = (float)element.Attribute("RedExponent");
+                this.RedAmplitude = (float)element.Attribute("RedAmplitude");
+            }
+
+            bool greenDisable = (bool)element.Attribute("GreenDisable");
+            if (greenDisable) this.GreenDisable = true;
+            else
+            {
+                this.GreenDisable = false;
+                this.GreenOffset = (float)element.Attribute("GreenOffset");
+                this.GreenExponent = (float)element.Attribute("GreenExponent");
+                this.GreenAmplitude = (float)element.Attribute("GreenAmplitude");
+            }
+
+            bool blueDisable = (bool)element.Attribute("BlueDisable");
+            if (blueDisable) this.BlueDisable = true;
+            else
+            {
+                this.BlueDisable = false;
+                this.BlueOffset = (float)element.Attribute("BlueOffset");
+                this.BlueExponent = (float)element.Attribute("BlueExponent");
+                this.BlueAmplitude = (float)element.Attribute("BlueAmplitude");
+            }
+        }
+
         public ICanvasImage GetRender(ICanvasImage image)
         {
             return new GammaTransferEffect
@@ -110,33 +224,6 @@ namespace Retouch_Photo2.Adjustments.Models
                 BlueAmplitude = this.BlueAmplitude,
 
                 Source = image
-            };
-        }
-        public IAdjustment Clone()
-        {
-            return new GammaTransferAdjustment
-            {
-                ClampOutput = this.ClampOutput,
-
-                AlphaDisable = this.AlphaDisable,
-                AlphaOffset = this.AlphaOffset,
-                AlphaExponent = this.AlphaExponent,
-                AlphaAmplitude = this.AlphaAmplitude,
-
-                RedDisable = this.RedDisable,
-                RedOffset = this.RedOffset,
-                RedExponent = this.RedExponent,
-                RedAmplitude = this.RedAmplitude,
-
-                GreenDisable = this.GreenDisable,
-                GreenOffset = this.GreenOffset,
-                GreenExponent = this.GreenExponent,
-                GreenAmplitude = this.GreenAmplitude,
-
-                BlueDisable = this.BlueDisable,
-                BlueOffset = this.BlueOffset,
-                BlueExponent = this.BlueExponent,
-                BlueAmplitude = this.BlueAmplitude,
             };
         }
     }

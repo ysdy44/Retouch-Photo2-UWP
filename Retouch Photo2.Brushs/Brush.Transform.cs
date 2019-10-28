@@ -8,18 +8,15 @@ namespace Retouch_Photo2.Brushs
     /// </summary>
     public partial class Brush : ICacheTransform
     {
-        
-        //TODO: Transformer.One
-        public static readonly Transformer OneTransformer = new Transformer(2f, 2f, new Vector2(-1f, -1f));
 
+        //ICreateTool
         /// <summary>
         /// Points turn to _oldPoints in Transformer.One.
         /// </summary>
         /// <param name="transformer"> The Transformer about Points. </param>
         public void OneBrushPoints(Transformer transformer)
         {
-            //TODO: Transformer.One
-            Matrix3x2 matrix = Transformer.FindHomography(transformer, OneTransformer);
+            Matrix3x2 matrix = Transformer.FindHomography(transformer, Transformer.One);
 
             switch (this.Type)
             {
@@ -43,14 +40,15 @@ namespace Retouch_Photo2.Brushs
                     break;
             }
         }
+
+        //ICreateTool
         /// <summary>
         /// _oldPoints turn to Points in Transformer Destination.
         /// </summary>
         /// <param name="transformer"> The Transformer about _oldPoints. </param>
         public void DeliverBrushPoints(Transformer transformer)
         {
-            //TODO: Transformer.One
-            Matrix3x2 matrix = Transformer.FindHomography(OneTransformer, transformer);
+            Matrix3x2 matrix = Transformer.FindHomography(Transformer.One, transformer);
 
             switch (this.Type)
             {

@@ -62,21 +62,15 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public XElement Save()
+        public void SaveWith(XElement element)
         {
-            XElement element = new XElement("ImageLayer");
-
             //TODO: ImageRe
             //element.Add(new XElement("ImageRe", this.ImageRe));
-
-            LayerBase.SaveWidth(element, this);
-            return element;
         }
         public void Load(XElement element)
         {
             //TODO: ImageRe
-           // this.BlurAmount = (float)element.Descendants("BlurAmount").Single();
-            LayerBase.LoadWith(element, this);
+            // this.ImageRe = (float)element.Descendants("ImageRe").Single();
         }
 
     }

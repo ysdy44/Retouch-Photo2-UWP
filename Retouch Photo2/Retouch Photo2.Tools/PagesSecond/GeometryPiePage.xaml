@@ -13,23 +13,6 @@
 
     <StackPanel Orientation="Horizontal">
 
-        <!--InnerRadius-->
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            Inner Radius
-        </TextBlock>
-        <tools:TouchbarButton x:Name="InnerRadiusTouchbarButton"
-                      Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryPieInnerRadius),Mode=OneWay}"
-                       >
-            <tools:TouchbarButton.TouchbarSlider>
-                <tools:TouchbarSlider x:Name="InnerRadiusTouchbarSlider"
-                    Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryPieInnerRadius),Mode=OneWay}"
-                    Value="{x:Bind InnerRadiusValueConverter(SelectionViewModel.GeometryPieInnerRadius), Mode=OneWay}" 
-                     />
-            </tools:TouchbarButton.TouchbarSlider>
-        </tools:TouchbarButton>
-
-        <ContentControl Width="4"/>
-
         <!--SweepAngle-->
         <TextBlock Style="{StaticResource AppTextBlock}">
             Sweep Angle

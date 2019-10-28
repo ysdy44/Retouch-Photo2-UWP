@@ -111,32 +111,27 @@ namespace Retouch_Photo2.Controls
             //Crad
             drawingSession.DrawCrad(previousImage, this.ViewModel.CanvasTransformer, this.ShadowColor);
         }
-        private void _drawToolAndBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession)
+        private void _drawToolAndBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, bool isHD)
         {
+            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+            
             if (this.ViewModel.MezzanineLayer != null)
             {
-                Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
                 drawingSession.DrawBound(this.SelectionViewModel.Transformer, matrix);
+                return;
             }
-            else
+
+            //Bound
+            foreach (ILayer layer in this.ViewModel.Layers.RootLayers)
             {
-                Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-
-                //Bound
-                foreach (ILayer layer in this.ViewModel.Layers.RootLayers)
+                if (layer.SelectMode.ToBool())
                 {
-                    if (layer.SelectMode.ToBool())
-                    {
-                        layer.DrawBound(resourceCreator, drawingSession, matrix, this.ViewModel.AccentColor);
-                    }
+                    layer.DrawBound(resourceCreator, drawingSession, matrix, this.ViewModel.AccentColor);
                 }
-
-                //Tool
-                this.TipViewModel.Tool.Draw(drawingSession);
             }
 
-
-
+            //Tool
+            this.TipViewModel.Tool.Draw(drawingSession);
         }
 
     }

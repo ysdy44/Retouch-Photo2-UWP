@@ -223,7 +223,7 @@ namespace Retouch_Photo2.ViewModels
         {
             if (layer is GeometryCurveLayer curveLayer)
             {
-                this.IsPenToolNodesMode = (curveLayer.NodeCollection.Count != 2);
+                this.IsPenToolNodesMode = (curveLayer.Nodes.Count != 2);
                 this.CurveLayer = curveLayer;
             }
             else

@@ -89,14 +89,14 @@ namespace Retouch_Photo2
             Vector2 offset = this.DrawLayout.FullScreenOffset;
             float width = this.DrawLayout.CenterChildWidth;
             float height = this.DrawLayout.CenterChildHeight;
-            this.ViewModel.TransitionDestination(offset, width, height);
+            this.ViewModel.CanvasTransformer.TransitionDestination(offset, width, height);
 
             this.Transition = 0;
             this.TransitionStoryboard.Begin();//Storyboard
         }
         private void NavigatedToComplete()
         {
-            this.ViewModel.Transition(1.0f);
+            this.ViewModel.CanvasTransformer.Transition(1.0f);
             this.IsFullScreen = false;
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }

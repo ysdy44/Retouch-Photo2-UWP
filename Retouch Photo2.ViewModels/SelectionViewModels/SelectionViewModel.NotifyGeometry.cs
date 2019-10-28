@@ -18,51 +18,90 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Sets all IGeometryLayer. </summary>     
         private void SetIGeometryLayer(ILayer layer)
         {
-            if (layer is GeometryRoundRectLayer roundRectLayer)
+            //Geometry0
             {
-                this.GeometryRoundRectCorner = roundRectLayer.Corner;
+                //if (layer is GeometryRectangleLayer rectangleLayer)
+                {
+                }
+                //if (layer is GeometryEllipseLayer ellipseLayer)
+                {
+                }
             }
-            if (layer is GeometryTriangleLayer triangleLayer)
-            {
-                this.GeometryTriangleCenter = triangleLayer.Center;
+
+                //Geometry1
+                {
+                    if (layer is GeometryRoundRectLayer roundRectLayer)
+                {
+                    this.GeometryRoundRectCorner = roundRectLayer.Corner;
+                }
+                if (layer is GeometryTriangleLayer triangleLayer)
+                {
+                    this.GeometryTriangleCenter = triangleLayer.Center;
+                }
+                if (layer is GeometryDiamondLayer diamondLayer)
+                {
+                    this.GeometryDiamondMid = diamondLayer.Mid;
+                }
             }
-            if (layer is GeometryDiamondLayer diamondLayer)
+
+            //Geometry12
             {
-                this.GeometryDiamondMid = diamondLayer.Mid;
+                if (layer is GeometryPentagonLayer pentagonLayer)
+                {
+                    this.GeometryPentagonPoints = pentagonLayer.Points;
+                }
+                if (layer is GeometryStarLayer starLayer)
+                {
+                    this.GeometryStarPoints = starLayer.Points;
+                    this.GeometryStarInnerRadius = starLayer.InnerRadius;
+                }
+                if (layer is GeometryCogLayer cogLayer)
+                {
+                    this.GeometryCogCount = cogLayer.Count;
+                    this.GeometryCogInnerRadius = cogLayer.InnerRadius;
+                    this.GeometryCogTooth = cogLayer.Tooth;
+                    this.GeometryCogNotch = cogLayer.Notch;
+                }
             }
-            if (layer is GeometryPentagonLayer pentagonLayer)
+
+            //Geometry3
             {
-                this.GeometryPentagonPoints = pentagonLayer.Points;
+                if (layer is GeometryDountLayer dountLayer)
+                {
+                    this.GeometryDountHoleRadius = dountLayer.HoleRadius;
+                }
+                if (layer is GeometryPieLayer pieLayer)
+                {
+                    this.GeometryPieSweepAngle = pieLayer.SweepAngle;
+                }
+                if (layer is GeometryCookieLayer cookieLayer)
+                {
+                    this.GeometryCookieInnerRadius = cookieLayer.InnerRadius;
+                    this.GeometryCookieSweepAngle = cookieLayer.SweepAngle;
+                }
             }
-            if (layer is GeometryStarLayer starLayer)
+
+            //Geometry4
             {
-                this.GeometryStarPoints = starLayer.Points;
-                this.GeometryStarInnerRadius = starLayer.InnerRadius;
-            }
-            if (layer is GeometryPieLayer pieLayer)
-            {
-                this.GeometryPieInnerRadius = pieLayer.InnerRadius;
-                this.GeometryPieSweepAngle = pieLayer.SweepAngle;
-            }
-            if (layer is GeometryCogLayer cogLayer)
-            {
-                this.GeometryCogCount = cogLayer.Count;
-                this.GeometryCogInnerRadius = cogLayer.InnerRadius;
-                this.GeometryCogTooth = cogLayer.Tooth;
-                this.GeometryCogNotch = cogLayer.Notch;
-            }
-            if (layer is GeometryArrowLayer arrowLayer)
-            {
-                this.GeometryArrowValue = arrowLayer.Value;
-                this.GeometryArrowLeftTail = arrowLayer.LeftTail;
-                this.GeometryArrowRightTail = arrowLayer.RightTail;
-            }
-            if (layer is GeometryHeartLayer heartLayer)
-            {
-                this.GeometryHeartSpread = heartLayer.Spread;
+                if (layer is GeometryArrowLayer arrowLayer)
+                {
+                    this.GeometryArrowValue = arrowLayer.Value;
+                    this.GeometryArrowLeftTail = arrowLayer.LeftTail;
+                    this.GeometryArrowRightTail = arrowLayer.RightTail;
+                }
+                //if (layer is GeometryCapsuleLayer capsuleLayer)
+                {
+                }
+                if (layer is GeometryHeartLayer heartLayer)
+                {
+                    this.GeometryHeartSpread = heartLayer.Spread;
+                }
             }
         }
 
+
+        #region Geometry1
+        
 
         /// <summary> GeometryRoundRectLayer's corner. </summary>     
         public float GeometryRoundRectCorner
@@ -76,7 +115,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private float geometryRoundRectCorner = 0.12f;
-        
+
 
         /// <summary> GeometryTriangle's center-point. </summary>     
         public float GeometryTriangleCenter
@@ -106,6 +145,12 @@ namespace Retouch_Photo2.ViewModels
         private float geometryDiamondMid = 0.5f;
 
 
+        #endregion
+        
+
+        #region Geometry2
+
+
         /// <summary> GeometryPentagon's points. </summary>     
         public int GeometryPentagonPoints
         {
@@ -118,7 +163,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private int geometryPentagonPoints = 5;
-        
+
 
         /// <summary> GeometryStar's points. </summary>     
         public int GeometryStarPoints
@@ -144,34 +189,8 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private float geometryStarInnerRadius = 0.4f;
-        
 
-        /// <summary> GeometryPie's inner-radius. </summary>     
-        public float GeometryPieInnerRadius
-        {
-            get => this.geometryPieInnerRadius;
-            set
-            {
-                if (this.geometryPieInnerRadius == value) return;
-                this.geometryPieInnerRadius = value;
-                this.OnPropertyChanged(nameof(this.GeometryPieInnerRadius));//Notify 
-            }
-        }
-        private float geometryPieInnerRadius = 0.0f;
-        /// <summary> GeometryPie's sweep-angle. </summary>     
-        public float GeometryPieSweepAngle
-        {
-            get => this.geometryPieSweepAngle;
-            set
-            {
-                if (this.geometryPieSweepAngle == value) return;
-                this.geometryPieSweepAngle = value;
-                this.OnPropertyChanged(nameof(this.GeometryPieSweepAngle));//Notify 
-            }
-        }
-        private float geometryPieSweepAngle = FanKit.Math.Pi / 2f;
-
-
+                          
         /// <summary> GeometryCog's count. </summary>     
         public int GeometryCogCount
         {
@@ -220,6 +239,71 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private float geometryCogNotch = 0.6f;
+
+
+        #endregion
+
+
+
+        #region Geometry3
+
+
+        /// <summary> GeometryPie's sweep-angle. </summary>     
+        public float GeometryPieSweepAngle
+        {
+            get => this.geometryPieSweepAngle;
+            set
+            {
+                if (this.geometryPieSweepAngle == value) return;
+                this.geometryPieSweepAngle = value;
+                this.OnPropertyChanged(nameof(this.GeometryPieSweepAngle));//Notify 
+            }
+        }
+        private float geometryPieSweepAngle = FanKit.Math.Pi / 2f;
+
+
+
+        /// <summary> GeometryDount's hole-radius. </summary>     
+        public float GeometryDountHoleRadius
+        {
+            get => this.geometryDountHoleRadius;
+            set
+            {
+                if (this.geometryDountHoleRadius == value) return;
+                this.geometryDountHoleRadius = value;
+                this.OnPropertyChanged(nameof(this.GeometryDountHoleRadius));//Notify 
+            }
+        }
+        private float geometryDountHoleRadius = 0.5f;
+
+
+        /// <summary> GeometryCookie's inner-radius. </summary>     
+        public float GeometryCookieInnerRadius
+        {
+            get => this.geometryCookieInnerRadius;
+            set
+            {
+                if (this.geometryCookieInnerRadius == value) return;
+                this.geometryCookieInnerRadius = value;
+                this.OnPropertyChanged(nameof(this.GeometryCookieInnerRadius));//Notify 
+            }
+        }
+        private float geometryCookieInnerRadius = 0.5f;
+        /// <summary> GeometryCookie's sweep-angle. </summary>     
+        public float GeometryCookieSweepAngle
+        {
+            get => this.geometryCookieSweepAngle;
+            set
+            {
+                if (this.geometryCookieSweepAngle == value) return;
+                this.geometryCookieSweepAngle = value;
+                this.OnPropertyChanged(nameof(this.GeometryCookieSweepAngle));//Notify 
+            }
+        }
+        private float geometryCookieSweepAngle = FanKit.Math.Pi / 2f;
+                     
+
+        #endregion
 
 
         /// <summary> GeometryArrow's value. </summary>     

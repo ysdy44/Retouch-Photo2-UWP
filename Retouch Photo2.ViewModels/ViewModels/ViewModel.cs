@@ -22,14 +22,21 @@ namespace Retouch_Photo2.ViewModels
         {
             if (project == null) return;
 
+            //Width Height
             this.CanvasTransformer.Width = project.Width;
             this.CanvasTransformer.Height = project.Height;
 
+            //layers
             this.Layers.RootLayers.Clear();
             foreach (ILayer layer in project.Layers)
             {
-                this.Layers.RootLayers.Add(layer);
+                if (layer != null)
+                {
+                    this.Layers.RootLayers.Add(layer);
+                }
             }
+            this.Layers.ArrangeLayersControlsWithClearAndAdd();
+            this.Layers.ArrangeLayersParents();
         }
 
 

@@ -8,12 +8,6 @@ using System.Xml.Linq;
 
 namespace Retouch_Photo2.Layers.Models
 {
-    public enum GeometryArrowTailType
-    {
-        None,
-        Arrow,
-        //   Round,
-    }
     /// <summary>
     /// <see cref="IGeometryLayer"/>'s ArrowLayer .
     /// </summary>
@@ -52,140 +46,46 @@ namespace Retouch_Photo2.Layers.Models
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
             Transformer transformer = base.TransformManager.Destination;
+            return TransformerGeometry.CreateArrow
+            (
+                resourceCreator,
+                transformer,
+                canvasToVirtualMatrix,
 
+                this.IsAbsolute,
+                this.Width,
+                this.Value,
 
-            Vector2 leftTop = Vector2.Transform(transformer.LeftTop, canvasToVirtualMatrix);
-            Vector2 rightTop = Vector2.Transform(transformer.RightTop, canvasToVirtualMatrix);
-            Vector2 rightBottom = Vector2.Transform(transformer.RightBottom, canvasToVirtualMatrix);
-            Vector2 leftBottom = Vector2.Transform(transformer.LeftBottom, canvasToVirtualMatrix);
-
-            Vector2 center = Vector2.Transform(transformer.Center, canvasToVirtualMatrix);
-            Vector2 centerLeft = Vector2.Transform(transformer.CenterLeft, canvasToVirtualMatrix);
-            Vector2 centerRight = Vector2.Transform(transformer.CenterRight, canvasToVirtualMatrix);
-
-
-            //horizontal
-            Vector2 horizontal = transformer.Horizontal;
-            float horizontalLength = horizontal.Length();
-            //vertical
-            Vector2 vertical = transformer.Vertical;
-            float verticalLength = vertical.Length();
-
-
-            float width = this.IsAbsolute ? this.Width : this.Value * verticalLength;
-            Vector2 widthVector = vertical * (width / verticalLength) / 2;
-            Vector2 widthVectorTransform = Vector2.Transform(widthVector + base.TransformManager.Destination.Center, canvasToVirtualMatrix) - center;
-
-            Vector2 focusVector = (verticalLength < horizontalLength) ?
-              0.5f * (verticalLength / horizontalLength) * horizontal :
-              0.5f * horizontal;
-
-            Vector2[] points;
-
-
-            if (this.LeftTail == GeometryArrowTailType.Arrow && this.RightTail == GeometryArrowTailType.Arrow)
-            {
-                Vector2 leftFocusTransform = Vector2.Transform(base.TransformManager.Destination.CenterLeft + focusVector, canvasToVirtualMatrix);
-                Vector2 leftVector = leftFocusTransform - centerLeft;
-
-                Vector2 rightFocusTransform = Vector2.Transform(base.TransformManager.Destination.CenterRight - focusVector, canvasToVirtualMatrix);
-                Vector2 rightVector = rightFocusTransform - centerRight;
-
-                points = new Vector2[10]
-                {
-                    centerLeft,//L
-
-                    leftTop+leftVector,//LT
-                    leftFocusTransform-widthVectorTransform,//C LT
-
-                    rightFocusTransform-widthVectorTransform,//C RT
-                    rightTop+rightVector,//RT
-
-                    centerRight,//R
-
-                    rightBottom+rightVector,//RB
-                    rightFocusTransform+widthVectorTransform,//C RB
-
-                    leftFocusTransform+widthVectorTransform,//C LB
-                    leftBottom+leftVector,//LB
-                };
-            }
-            else if (this.LeftTail == GeometryArrowTailType.Arrow && this.RightTail == GeometryArrowTailType.None)
-            {
-                Vector2 leftFocusTransform = Vector2.Transform(base.TransformManager.Destination.CenterLeft + focusVector, canvasToVirtualMatrix);
-                Vector2 leftVector = leftFocusTransform - centerLeft;
-
-                points = new Vector2[7]
-                {
-                    centerLeft,//L
-
-                    leftTop+leftVector,//LT
-                    leftFocusTransform-widthVectorTransform,//C LT
-                    
-                    centerRight-widthVectorTransform,//RT
-                    centerRight+widthVectorTransform,//RB
-
-                    leftFocusTransform+widthVectorTransform,//C LB
-                    leftBottom+leftVector,//LB
-                };
-            }
-            else if (this.LeftTail == GeometryArrowTailType.None && this.RightTail == GeometryArrowTailType.Arrow)
-            {
-                Vector2 rightFocusTransform = Vector2.Transform(base.TransformManager.Destination.CenterRight - focusVector, canvasToVirtualMatrix);
-                Vector2 rightVector = rightFocusTransform - centerRight;
-
-                points = new Vector2[7]
-                {
-                    centerRight,//R
-
-                    rightTop+rightVector,//RT
-                    rightFocusTransform-widthVectorTransform,//C RT
-
-                    centerLeft-widthVectorTransform,//LT
-                    centerLeft+widthVectorTransform,//LB
-
-                    rightFocusTransform+widthVectorTransform,//C RB
-                    rightBottom+rightVector,//RB
-                };
-            }
-            else
-            {
-                points = new Vector2[4]
-                {
-                    centerLeft+widthVectorTransform,//LB
-                    centerLeft-widthVectorTransform,//LT
-                    centerRight-widthVectorTransform,//RT
-                    centerRight+widthVectorTransform,//RB
-                };
-            }
-
-            return CanvasGeometry.CreatePolygon(resourceCreator, points);
+                this.LeftTail, this.RightTail
+           );
         }
 
 
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryArrowLayer ArrowLayer = new GeometryArrowLayer();
+            GeometryArrowLayer ArrowLayer = new GeometryArrowLayer
+            {
+                IsAbsolute = this.IsAbsolute,
+                Width = this.Width,
+                Value = this.Value,
+
+                LeftTail = this.LeftTail,
+                RightTail = this.RightTail,
+            };
 
             LayerBase.CopyWith(resourceCreator, ArrowLayer, this);
             return ArrowLayer;
         }
 
 
-        public XElement Save()
-        {
-            XElement element = new XElement("GeometryArrowLayer");
-            
+        public void SaveWith(XElement element)
+        {            
             element.Add(new XElement("IsAbsolute", this.IsAbsolute));
             element.Add(new XElement("Width", this.Width));
             element.Add(new XElement("Value", this.Value));
 
-            //TODO: GeometryArrowTailType
-           // element.Add(new XElement("LeftTail", this.LeftTail));
-        //    element.Add(new XElement("RightTail", this.RightTail));
-
-            LayerBase.SaveWidth(element, this);
-            return element;
+            element.Add(new XElement("LeftTail", this.LeftTail));
+            element.Add(new XElement("RightTail", this.RightTail));
         }
         public void Load(XElement element)
         {
@@ -193,12 +93,19 @@ namespace Retouch_Photo2.Layers.Models
             this.Width = (float)element.Element("Width");
             this.Value = (float)element.Element("Value");
 
-            //TODO: GeometryArrowTailType
-            //    this.LeftTail = (GeometryArrowTailType)element.Element("LeftTail").Single();
-            //    this.RightTail = (GeometryArrowTailType)element.Element("RightTail");
-
-            LayerBase.LoadWith(element, this);
+            this.LeftTail = this._load(element.Element("LeftTail"));
+            this.RightTail = this._load(element.Element("RightTail"));
         }
+        private GeometryArrowTailType _load(XElement element)
+        {
+            switch (element.Value)
+            {
+                case "None": return GeometryArrowTailType.None;
+                case "Arrow": return GeometryArrowTailType.Arrow;
+            }
+            return GeometryArrowTailType.None;
+        }
+
 
     }
 }

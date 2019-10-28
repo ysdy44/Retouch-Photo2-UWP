@@ -43,7 +43,7 @@ namespace Retouch_Photo2
 
             if (e.NewValue is float value)
             {
-                con.ViewModel.Transition(value);
+                con.ViewModel.CanvasTransformer.Transition(value);
                 con.ViewModel.Invalidate();//Invalidate
             }
         }));      
@@ -104,10 +104,16 @@ namespace Retouch_Photo2
             this.FullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = true;
             this.SaveButton.Tapped += (s, e) =>
             {
-                XDocument xDocument = this.ViewModel.XElementSave();
+                Project project = new Project
+                {
+                    Width = this.ViewModel.CanvasTransformer.Width,
+                    Height = this.ViewModel.CanvasTransformer.Height,
+                    Layers = this.ViewModel.Layers.RootLayers
+                };
+                XDocument document = Retouch_Photo2.ViewModels.XML.SaveProject(project);
+
                 string path = ApplicationData.Current.LocalFolder.Path + "/" + "Unsdasd" + ".photo2";
-                             
-                xDocument.Save(path);                
+                document.Save(path);                
             };
             this.ThemeButton.Tapped += (s, e) =>
             {

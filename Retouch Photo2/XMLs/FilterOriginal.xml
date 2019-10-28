@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Root>
+
+  <Filter Name="Original">
+    <Gray />
+    <Invert />
+    <Exposure Exposure="0" />
+    <Brightness WhiteLight="1" WhiteDark="1" BlackLight="0" BlackDark="0" />
+    <Saturation Saturation="1" />
+    <HueRotation Angle="0" />
+    <Contrast Contrast="0" />
+    <Temperature Temperature="0" Tint="0" />
+    <HighlightsAndShadows Shadows="0" Highlights="0" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
+    <GammaTransfer ClampOutput="false" AlphaDisable="true" AlphaOffset="0" AlphaExponent="1" AlphaAmplitude="1" RedDisable="true" RedOffset="0" RedExponent="1" RedAmplitude="1" GreenDisable="true" GreenOffset="0" GreenExponent="1" GreenAmplitude="1" BlueDisable="true" BlueOffset="0" BlueExponent="1" BlueAmplitude="1" />
+    <Vignette Amount="0" Curve="0">
+      <Color A="255" R="0" G="0" B="0" />
+    </Vignette>
+  </Filter>
+
+</Root>

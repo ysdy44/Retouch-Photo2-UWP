@@ -6,9 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:blends="using:Retouch_Photo2.Blends"
-    xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:menus="using:Retouch_Photo2.Menus"
-    xmlns:layers="using:Retouch_Photo2.Layers"    
     mc:Ignorable="d"
     d:DesignHeight="400"
     d:DesignWidth="200"
@@ -219,9 +217,9 @@
 
             <!--Layer-->
             <TextBlock Style="{StaticResource AppTextBlock}">
-                Tag
+                Tag Type
             </TextBlock>
-            <layers:TagControl x:Name="TagControl" TagType="{x:Bind SelectionViewModel.TagType,Mode=OneWay}" />
+            <blends:TagControl x:Name="TagControl" TagType="{x:Bind SelectionViewModel.TagType,Mode=OneWay}" />
 
             <ContentControl Height="2"/>
         </StackPanel>

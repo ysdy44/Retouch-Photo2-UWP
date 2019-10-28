@@ -19,11 +19,6 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Construct a group-layer.
         /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public GroupLayer(XElement element) : this() => this.Load(element);
-        /// <summary>
-        /// Construct a group-layer.
-        /// </summary>
         public GroupLayer()
         {
             base.Type = GroupLayer.ID;
@@ -80,16 +75,9 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public XElement Save()
+        public void SaveWith(XElement element)
         {
-            XElement element = new XElement("GroupLayer");
-
-            LayerBase.SaveWidth(element, this);
-            return element;
-        }
-        public void Load(XElement element)
-        {
-            LayerBase.LoadWith(element, this);
+            element.Add( new XElement("GroupLayer"));
         }
 
     }

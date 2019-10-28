@@ -2,61 +2,52 @@
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments.Icons;
 using System.Numerics;
+using System.Xml.Linq;
 using Windows.UI.Xaml;
-using Newtonsoft.Json;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
     /// <summary>
     /// <see cref="IAdjustment"/>'s BrightnessAdjustment.
     /// </summary>
-    [JsonObject(MemberSerialization.OptIn)]
     public class BrightnessAdjustment : IAdjustment
     {
-        [JsonProperty]
-        public string TypeName { get; } = AdjustmentType.Brightness.ToString();
+
         public AdjustmentType Type => AdjustmentType.Brightness;
         public FrameworkElement Icon { get; } = new BrightnessIcon();
         public Visibility PageVisibility => Visibility.Visible;
 
         /// <summary> Interval 1.0->0.5 . </summary>
-        [JsonProperty]
-        public float WhiteLight;
+        public float WhiteLight = 1.0f;
         /// <summary> Interval 1.0->0.5 . </summary>
-        [JsonProperty]
-        public float WhiteDark;
+        public float WhiteDark = 1.0f;
 
         /// <summary> Interval 0.0->0.5 . </summary>
-        [JsonProperty]
-        public float BlackLight;
+        public float BlackLight = 0.0f;
         /// <summary> Interval 0.0->0.5 . </summary>
-        [JsonProperty]
-        public float BlackDark;
+        public float BlackDark = 0.0f;
+
+
+        //@Construct
+        /// <summary>
+        /// Construct a brightness-adjustment.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
+        public BrightnessAdjustment(XElement element) : this() => this.Load(element);
+        /// <summary>
+        /// Construct a brightness-adjustment.
+        /// </summary>
+        public BrightnessAdjustment()
+        {
+        }
 
 
         public void Reset()
         {
             this.WhiteLight = 1.0f;
             this.WhiteDark = 1.0f;
-            this.BlackLight = 1.0f;
-            this.BlackDark = 1.0f;
-        }
-        public ICanvasImage GetRender(ICanvasImage image)
-        {
-            return new BrightnessEffect
-            {
-                WhitePoint = new Vector2
-                (
-                    x: this.WhiteLight,
-                    y: this.WhiteDark
-                ),
-                BlackPoint = new Vector2
-                (
-                    x: this.BlackDark,
-                    y: this.BlackLight
-                ),
-                Source = image
-            };
+            this.BlackLight = 0.0f;
+            this.BlackDark = 0.0f;
         }
         public IAdjustment Clone()
         {
@@ -68,5 +59,35 @@ namespace Retouch_Photo2.Adjustments.Models
                 BlackDark = this.BlackDark,
             };
         }
+
+        public XElement Save()
+        {
+            return new XElement
+             (
+                "Brightness",
+                new XAttribute("WhiteLight", this.WhiteLight),
+                new XAttribute("WhiteDark", this.WhiteDark),
+                new XAttribute("BlackLight", this.BlackLight),
+                new XAttribute("BlackDark", this.BlackDark)
+             );
+        }
+        public void Load(XElement element)
+        {
+            this.WhiteLight = (float)element.Attribute("WhiteLight");
+            this.WhiteDark = (float)element.Attribute("WhiteDark");
+            this.BlackLight = (float)element.Attribute("BlackLight");
+            this.BlackDark = (float)element.Attribute("BlackDark");
+        }
+
+        public ICanvasImage GetRender(ICanvasImage image)
+        {
+            return new BrightnessEffect
+            {
+                WhitePoint = new Vector2(this.WhiteLight, this.WhiteDark),
+                BlackPoint = new Vector2(this.BlackDark, this.BlackLight),
+                Source = image
+            };
+        }
+
     }
 }

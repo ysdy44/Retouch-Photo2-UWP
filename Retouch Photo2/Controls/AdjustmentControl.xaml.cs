@@ -4,10 +4,14 @@ using Retouch_Photo2.Elements;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
+using System;
 using System.Linq;
+using System.Xml.Linq;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using System.IO;
 
 namespace Retouch_Photo2.Controls
 {
@@ -125,18 +129,29 @@ namespace Retouch_Photo2.Controls
 
                 if (this.FilterListView.ItemsSource == null)
                 {
-                    string json = await ApplicationLocalTextFileUtility.ReadFromLocalFolder("Filter.json");
+                    StorageFile file = null;
+                    bool isLocalFilterExists = await ApplicationLocalTextFileUtility.IsFileExistsInLocalFolder("Filter.xml");
 
-                    if (json == null)
+                    if (isLocalFilterExists)
                     {
-                        json = await ApplicationLocalTextFileUtility.ReadFromApplicationPackage("ms-appx:///Json/Filter.json");
-                        await ApplicationLocalTextFileUtility.WriteToLocalFolder(json, "Filter.json");
+                        //Read the file from the local folder.
+                        file = await ApplicationData.Current.LocalFolder.GetFileAsync("Filter.xml");
+                    }
+                    else
+                    {
+                        //Read the file from the package.
+                        file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///XMLs/Filter.xml"));
+
+                        //Copy to the local folder.
+                        await file.CopyAsync(ApplicationData.Current.LocalFolder);
                     }
 
-                    if (json != null)
+                    if (file != null)
                     {
-                        IFilterFactory filterFactory = new FilterFactory();
-                        IEnumerable<Filter> source = filterFactory.CreateFilters(json);
+                        Stream stream = await file.OpenStreamForReadAsync();
+                        XDocument document = XDocument.Load(stream);
+
+                        IEnumerable<Filter> source = Retouch_Photo2.Adjustments.XML.LoadFilters(document);
                         this.FilterListView.ItemsSource = source.ToList();
                     }
                 }

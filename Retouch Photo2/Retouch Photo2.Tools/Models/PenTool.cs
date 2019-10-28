@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Tools.Models
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         GeometryCurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
-        NodeCollection NodeCollection => this.CurveLayer.NodeCollection;
+        NodeCollection Nodes => this.CurveLayer.Nodes;
         
         public ToolType Type => ToolType.Pen;
         public FrameworkElement Icon { get; } = new PenIcon();
@@ -51,7 +51,7 @@ namespace Retouch_Photo2.Tools.Models
             else if (this.SelectionViewModel.IsPenToolNodesMode == false)
                 this.Mode = NodeCollectionMode.Add;
             else
-                this.Mode = NodeCollection.ContainsNodeCollectionMode(point, this.NodeCollection, matrix);
+                this.Mode = NodeCollection.ContainsNodeCollectionMode(point, this.Nodes, matrix);
 
             switch (this.Mode)
             {
@@ -71,21 +71,21 @@ namespace Retouch_Photo2.Tools.Models
                             IsSmooth = false,
                         };
                         this._addEndNode = node;
-                        this._addLastNode = this.CurveLayer.NodeCollection.Last();
+                        this._addLastNode = this.CurveLayer.Nodes.Last();
                     }
                     break;
                 case NodeCollectionMode.Move:
-                    this.NodeCollection.CacheTransform(isOnlySelected: true);
+                    this.Nodes.CacheTransform(isOnlySelected: true);
                     break;
                 case NodeCollectionMode.MoveSingleNodePoint:
-                    this.NodeCollection.SelectionOnlyOne(this.NodeCollection.Index);
-                    this._oldNode = this.NodeCollection[this.NodeCollection.Index];
+                    this.Nodes.SelectionOnlyOne(this.Nodes.Index);
+                    this._oldNode = this.Nodes[this.Nodes.Index];
                     break;
                 case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
-                    this._oldNode = this.NodeCollection[this.NodeCollection.Index];
+                    this._oldNode = this.Nodes[this.Nodes.Index];
                     break;
                 case NodeCollectionMode.MoveSingleNodeRightControlPoint:
-                    this._oldNode = this.NodeCollection[this.NodeCollection.Index];
+                    this._oldNode = this.Nodes[this.Nodes.Index];
                     break;
                 case NodeCollectionMode.RectChoose:
                     this._transformerRect = new TransformerRect(canvasPoint, canvasPoint);
@@ -132,23 +132,23 @@ namespace Retouch_Photo2.Tools.Models
                     case NodeCollectionMode.Move:
                         {
                             Vector2 vector = canvasPoint - canvasStartingPoint;
-                            this.NodeCollection.TransformAdd(vector, isOnlySelected: true);
+                            this.Nodes.TransformAdd(vector, isOnlySelected: true);
                         }
                         break;
                     case NodeCollectionMode.MoveSingleNodePoint:
-                        this.NodeCollection[this.NodeCollection.Index] = this._oldNode.Move(canvasPoint);
+                        this.Nodes[this.Nodes.Index] = this._oldNode.Move(canvasPoint);
                         break;
                     case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
-                        this.NodeCollection[this.NodeCollection.Index] = this._penPage.PenFlyout.Controller(canvasPoint, this._oldNode, isLeftControlPoint: true);
+                        this.Nodes[this.Nodes.Index] = this._penPage.PenFlyout.Controller(canvasPoint, this._oldNode, isLeftControlPoint: true);
                         break;
                     case NodeCollectionMode.MoveSingleNodeRightControlPoint:
-                        this.NodeCollection[this.NodeCollection.Index] = this._penPage.PenFlyout.Controller(canvasPoint, this._oldNode, isLeftControlPoint: false);
+                        this.Nodes[this.Nodes.Index] = this._penPage.PenFlyout.Controller(canvasPoint, this._oldNode, isLeftControlPoint: false);
                         break;
                     case NodeCollectionMode.RectChoose:
                         {
                             TransformerRect transformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
                             this._transformerRect = transformerRect;
-                            this.NodeCollection.RectChoose(transformerRect);
+                            this.Nodes.RectChoose(transformerRect);
                         }
                         break;
                 }
@@ -181,7 +181,7 @@ namespace Retouch_Photo2.Tools.Models
                         IsChecked = false,
                         IsSmooth = false,
                     };
-                    this.NodeCollection.Add(node);
+                    this.Nodes.Add(node);
                 }
                 else if (isSingleStarted)
                 {
@@ -190,17 +190,17 @@ namespace Retouch_Photo2.Tools.Models
                         case NodeCollectionMode.Move:
                             {
                                 Vector2 vector = canvasPoint - canvasStartingPoint;
-                                this.NodeCollection.TransformAdd(vector, isOnlySelected: true);
+                                this.Nodes.TransformAdd(vector, isOnlySelected: true);
                             }
                             break;
                         case NodeCollectionMode.MoveSingleNodePoint:
-                            this.NodeCollection[this.NodeCollection.Index] = this._oldNode.Move(canvasPoint);
+                            this.Nodes[this.Nodes.Index] = this._oldNode.Move(canvasPoint);
                             break;
                         case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
-                            this.NodeCollection[this.NodeCollection.Index] = this._penPage.PenFlyout.Controller(canvasPoint, this._oldNode, isLeftControlPoint: true);
+                            this.Nodes[this.Nodes.Index] = this._penPage.PenFlyout.Controller(canvasPoint, this._oldNode, isLeftControlPoint: true);
                             break;
                         case NodeCollectionMode.MoveSingleNodeRightControlPoint:
-                            this.NodeCollection[this.NodeCollection.Index] = this._penPage.PenFlyout.Controller(canvasPoint, this._oldNode, isLeftControlPoint: false);
+                            this.Nodes[this.Nodes.Index] = this._penPage.PenFlyout.Controller(canvasPoint, this._oldNode, isLeftControlPoint: false);
                             break;
                         case NodeCollectionMode.RectChoose:
                             this._transformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
@@ -248,7 +248,7 @@ namespace Retouch_Photo2.Tools.Models
                     break;
             }
 
-            drawingSession.DrawNodeCollection(this.NodeCollection, matrix);
+            drawingSession.DrawNodeCollection(this.Nodes, matrix);
         }
 
 

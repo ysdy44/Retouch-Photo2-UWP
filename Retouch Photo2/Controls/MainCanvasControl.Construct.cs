@@ -45,10 +45,7 @@ namespace Retouch_Photo2.Controls
                 this._drawRenderAndCrad(args.DrawingSession);
 
                 //Tool & Bound     
-                if (this.IsHD)
-                {
-                    this._drawToolAndBound(sender, args.DrawingSession);
-                }
+                this._drawToolAndBound(sender, args.DrawingSession, this.IsHD);
 
                 //Ruler
                 if (this.ViewModel.CanvasRulerVisible)

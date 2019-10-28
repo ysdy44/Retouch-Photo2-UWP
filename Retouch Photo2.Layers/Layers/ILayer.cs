@@ -64,16 +64,10 @@ namespace Retouch_Photo2.Layers
         ILayer Clone(ICanvasResourceCreator resourceCreator);
 
         /// <summary>
-        ///  Saves the entire ILayer to a XElement with the specified ILayer name.
+        /// Saves the entire <see cref="ILayer"/> to a XElement.
         /// </summary>
-        /// <returns> The saved XElement. </returns>
-        XElement Save();
-        /// <summary>
-        ///  Loads a ILayer from an XElement.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        /// <returns> The loaded ILayer. </returns>
-        void Load(XElement element);
+        /// <param name="element"> The destination XElement. </param>
+        void SaveWith(XElement element);
 
 
         #endregion

@@ -89,21 +89,15 @@ namespace Retouch_Photo2.Layers.Models
         }
         
 
-        public XElement Save()
+        public void SaveWith(XElement element)
         {
-            XElement element = new XElement("AcrylicLayer");
-
             element.Add(new XElement("TintOpacity", this.TintOpacity));
             element.Add(new XElement("BlurAmount", this.BlurAmount));
-
-            LayerBase.SaveWidth(element, this);
-            return element;
         }
         public void Load(XElement element)
         {
             this.TintOpacity = (float)element.Element("TintOpacity");
             this.BlurAmount = (float)element.Element("BlurAmount");
-            LayerBase.LoadWith(element, this);
         }
 
     }

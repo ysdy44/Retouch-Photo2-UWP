@@ -5,7 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace Retouch_Photo2.Layers
+namespace Retouch_Photo2.Blends
 {
     public sealed partial class TagControl : UserControl
     {
@@ -54,7 +54,7 @@ namespace Retouch_Photo2.Layers
             foreach (TagType tagType in tagTypes)
             {              
                 int index = (int)tagType;
-                Color color= TagControl.TagConverter(tagType);
+                Color color= TagTypeHelper.TagConverter(tagType);
 
                 RadioButton radioButton = new RadioButton
                 {
@@ -71,33 +71,6 @@ namespace Retouch_Photo2.Layers
                 this.StackPanel.Children.Add(radioButton);
             }
         }
-
-        //@Static
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="tagType"></param>
-        /// <returns></returns>
-        public static Color TagConverter(TagType tagType)
-        { 
-            switch (tagType)
-            {
-                case TagType.Red:
-                    return Colors.LightCoral;
-                case TagType.Orange:
-                    return Colors.Orange;
-                case TagType.Yellow:
-                    return Colors.Yellow;
-                case TagType.Green:
-                    return Colors.YellowGreen;
-                case TagType.Blue:
-                    return Colors.SkyBlue;
-                case TagType.Purple:
-                    return Colors.Plum;
-                default:
-                    return Colors.LightGray;
-            }
-        }
-
+        
     }
 }

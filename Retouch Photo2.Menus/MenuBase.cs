@@ -92,23 +92,22 @@ namespace Retouch_Photo2.Menus
             this.Layout.TitlePanel.ManipulationMode = ManipulationModes.All;
             this.Layout.TitlePanel.ManipulationStarted += (s, e) =>
             {
-                this.Layout.Self.Opacity = 0.6d;
+                if (this.State == MenuState.FlyoutShow) return;
+
                 this._postion = MenuHelper.GetVisualPostion(this.Layout.Self);
                 this.Move?.Invoke(); //Delegate
             };
             this.Layout.TitlePanel.ManipulationDelta += (s, e) =>
             {
-                if (this.State != MenuState.FlyoutShow)
-                {
-                    this._postion.X += e.Delta.Translation.X;
-                    this._postion.Y += e.Delta.Translation.Y;
-                    Point postion2 = MenuHelper.GetBoundPostion(this._postion, this.Layout.Self);
-                    MenuHelper.SetOverlayPostion(this.Layout.Self, postion2);
-                }
+                if (this.State == MenuState.FlyoutShow) return;
+
+                this._postion.X += e.Delta.Translation.X;
+                this._postion.Y += e.Delta.Translation.Y;
+                Point postion2 = MenuHelper.GetBoundPostion(this._postion, this.Layout.Self);
+                MenuHelper.SetOverlayPostion(this.Layout.Self, postion2);
             };
             this.Layout.TitlePanel.ManipulationCompleted += (s, e) =>
             {
-                this.Layout.Self.Opacity = 1.0d;
             };
         }
 

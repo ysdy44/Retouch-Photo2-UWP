@@ -17,7 +17,6 @@ namespace Retouch_Photo2.Layers.Models
         public const string ID = "GeometryPieLayer";
          
         //@Content       
-        public float InnerRadius = 0.0f;
         public float SweepAngle = FanKit.Math.Pi / 2f;
 
         //@Construct        
@@ -42,41 +41,9 @@ namespace Retouch_Photo2.Layers.Models
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
-            PieType pieType = this.GetPieType(this.InnerRadius == 0, this.SweepAngle == 0);
+            Transformer transformer = base.TransformManager.Destination;
 
-            switch (pieType)
-            {
-                case PieType.Cirle:
-                    {
-                        Transformer transformer = base.TransformManager.Destination;
-                        return transformer.ToEllipse(resourceCreator, canvasToVirtualMatrix);
-                    }
-                case PieType.Donut:
-                    {
-                        return this._getDonut(resourceCreator, this.InnerRadius, canvasToVirtualMatrix);
-                    }
-                case PieType.Pie:
-                    {
-                        Matrix3x2 oneMatrix = Transformer.FindHomography(GeometryUtil.OneTransformer, base.TransformManager.Destination);
-                        Matrix3x2 matrix = oneMatrix * canvasToVirtualMatrix;
-
-                        CanvasPathBuilder pie = this._getPie(resourceCreator, this.SweepAngle);
-                        return CanvasGeometry.CreatePath(pie).Transform(matrix);
-                    }
-                case PieType.DonutAndPie:
-                    {
-                        Matrix3x2 oneMatrix = Transformer.FindHomography(GeometryUtil.OneTransformer, base.TransformManager.Destination);
-                        Matrix3x2 matrix = oneMatrix * canvasToVirtualMatrix;
-
-                        CanvasPathBuilder donutAndPie = this._getDonutAndPie(resourceCreator, this.InnerRadius, this.SweepAngle);
-                        return CanvasGeometry.CreatePath(donutAndPie).Transform(matrix);
-                    }
-            }
-
-            {
-                Transformer transformer = base.TransformManager.Destination;
-                return transformer.ToEllipse(resourceCreator, canvasToVirtualMatrix);
-            }
+            return TransformerGeometry.CreatePie(resourceCreator, transformer, canvasToVirtualMatrix, this.SweepAngle);
         }
 
 
@@ -89,21 +56,13 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public XElement Save()
-        {
-            XElement element = new XElement("GeometryPieLayer");
-            
-            element.Add(new XElement("InnerRadius", this.InnerRadius));
+        public void SaveWith(XElement element)
+        {            
             element.Add(new XElement("SweepAngle", this.SweepAngle));
-
-            LayerBase.SaveWidth(element, this);
-            return element;
         }
         public void Load(XElement element)
         {
-            this.InnerRadius = (float)element.Element("InnerRadius");
             this.SweepAngle = (float)element.Element("SweepAngle");
-            LayerBase.LoadWith(element, this);
         }
 
     }

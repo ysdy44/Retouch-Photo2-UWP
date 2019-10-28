@@ -36,7 +36,7 @@
 
         <ContentControl Width="4"/>
 
-        <toolsElements:MoreCreateButton/>
+        <toolsElements:MoreTransformButton/>
 
     </StackPanel>
 </Page>

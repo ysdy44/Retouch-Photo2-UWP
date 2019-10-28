@@ -247,6 +247,8 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Retouch Photo2.Tools\ModelsSecond\GeometryCookieTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\ModelsSecond\GeometryDountTool.cs" />
     <Compile Include="Retouch Photo2.Tools\PagesSecond\GeometryArrowPage.xaml.cs">
       <DependentUpon>GeometryArrowPage.xaml</DependentUpon>
     </Compile>
@@ -264,6 +266,12 @@
     </Compile>
     <Compile Include="Retouch Photo2.Tools\PagesSecond\GeometryPentagonPage.xaml.cs">
       <DependentUpon>GeometryPentagonPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\PagesSecond\GeometryCookiePage.xaml.cs">
+      <DependentUpon>GeometryCookiePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\PagesSecond\GeometryDountPage.xaml.cs">
+      <DependentUpon>GeometryDountPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\PagesSecond\GeometryPiePage.xaml.cs">
       <DependentUpon>GeometryPiePage.xaml</DependentUpon>
@@ -354,8 +362,8 @@
     <Content Include="Icons\2Logo-Wide.png" />
     <Content Include="Icons\2Logo.png" />
     <Content Include="Icons\GrayAndWhite.jpg" />
-    <Content Include="Json\Filter.json" />
-    <None Include="Json\FilterOriginal.json" />
+    <Content Include="XMLs\Filter.xml" />
+    <Content Include="XMLs\FilterOriginal.xml" />
     <None Include="Retouch Photo_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -618,6 +626,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Retouch Photo2.Tools\PagesSecond\GeometryCookiePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\PagesSecond\GeometryDountPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Retouch Photo2.Tools\PagesSecond\GeometryPiePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -688,9 +704,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FanKit.Transformers">
-      <Version>1.3.5</Version>
-    </PackageReference>
     <PackageReference Include="HSVColorPickers">
       <Version>1.3.4</Version>
     </PackageReference>

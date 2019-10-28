@@ -1,43 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Adjustments;
-using Retouch_Photo2.Blends;
-using Retouch_Photo2.Effects;
-using System.Linq;
-using System.Numerics;
+﻿using Retouch_Photo2.Layers.Models;
 using System.Xml.Linq;
-using Windows.UI.Xaml;
-using Retouch_Photo2.Layers.Models;
 
 namespace Retouch_Photo2.Layers
 {
-    public static class ILayerFactory
+    /// <summary>
+    /// Provide constant and static methods for XElement.
+    /// </summary>
+    public static partial class XML
     {
-        
-        /// <summary>
-        ///  Create a ILayer from an XElement.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        /// <returns> The loaded ILayer. </returns>
-        public static ILayer CreateILayer(XElement element)
-        {
-            string type = (string)element.Element("LayerType");
 
+        /// <summary>
+        /// Create a Layer from an string and XElement.
+        /// </summary>
+        /// <param name="type"> The source string. </param>
+        /// <param name="element"> The source XElement. </param>
+        /// <returns> The created Layer. </returns>
+        public static ILayer CreateLayer(string type, XElement element)
+        {
             switch (type)
             {
-                case GeometryRectangleLayer.ID: return new GeometryRectangleLayer(element);
-                case GeometryEllipseLayer.ID: return new GeometryEllipseLayer(element);
+                case GeometryRectangleLayer.ID: return new GeometryRectangleLayer();
+                case GeometryEllipseLayer.ID: return new GeometryEllipseLayer();
                 case GeometryCurveLayer.ID: return new GeometryCurveLayer(element);
 
                 case ImageLayer.ID: return new ImageLayer(element);
                 case AcrylicLayer.ID: return new AcrylicLayer(element);
-                    
+                case GroupLayer.ID: return new GroupLayer();
 
                 case GeometryRoundRectLayer.ID: return new GeometryRoundRectLayer(element);
                 case GeometryTriangleLayer.ID: return new GeometryTriangleLayer(element);
@@ -49,12 +37,12 @@ namespace Retouch_Photo2.Layers
 
                 case GeometryCogLayer.ID: return new GeometryCogLayer(element);
                 case GeometryArrowLayer.ID: return new GeometryArrowLayer(element);
-                case GeometryCapsuleLayer.ID: return new GeometryCapsuleLayer(element);
+                case GeometryCapsuleLayer.ID: return new GeometryCapsuleLayer();
                 case GeometryHeartLayer.ID: return new GeometryHeartLayer(element);
 
                 default: return null;
             }
         }
-        
+
     }
 }

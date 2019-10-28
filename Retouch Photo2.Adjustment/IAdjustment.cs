@@ -1,5 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Newtonsoft.Json;
+using System.Xml.Linq;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Adjustments
@@ -7,13 +7,8 @@ namespace Retouch_Photo2.Adjustments
     /// <summary> 
     /// Provides icon and data for adjustments.
     /// </summary>
-    [JsonObject(MemberSerialization.OptIn)]
     public interface IAdjustment
     {
-        /// <summary> Gets adjustment's type name. </summary>
-        [JsonProperty]
-        string TypeName { get; }
-
         /// <summary> Gets IAdjustment's type. </summary>
         AdjustmentType Type { get; }
         /// <summary> Gets IAdjustment's icon. </summary>
@@ -23,6 +18,16 @@ namespace Retouch_Photo2.Adjustments
         
         /// <summary> Reset the adjustment data. </summary>
         void Reset();
+        /// <summary>
+        /// Get IAdjustment own copy.
+        /// </summary>
+        /// <returns> The cloned IAdjustment. </returns>
+        IAdjustment Clone();
+        /// <summary>
+        /// Saves the entire IAdjustment to a XElement.
+        /// </summary>
+        /// <returns> The saved IAdjustment. </returns>
+        XElement Save();
 
         /// <summary>
         /// Gets a specific rended-image.
@@ -30,21 +35,5 @@ namespace Retouch_Photo2.Adjustments
         /// <param name="image"> previousImage </param>
         /// <returns> The rendered adjustment. </returns>
         ICanvasImage GetRender(ICanvasImage image);
-        /// <summary>
-        /// Get IAdjustment own copy.
-        /// </summary>
-        /// <returns> The cloned IAdjustment. </returns>
-        IAdjustment Clone();
-    }
-    
-    /// <summary> 
-    /// <see cref = "IAdjustment" />'s substitute. 
-    /// </summary>
-    [JsonObject(MemberSerialization.OptIn)]
-    public class Adjustment2
-    {
-        /// <summary> Gets or sets adjustment's type name. </summary>
-        [JsonProperty]
-        public string TypeName { get; set; }
     }
 }

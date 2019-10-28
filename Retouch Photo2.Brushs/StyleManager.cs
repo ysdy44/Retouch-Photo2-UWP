@@ -9,7 +9,7 @@ namespace Retouch_Photo2.Brushs
     /// <summary>
     /// Define the object used to draw geometry.
     /// </summary>
-    public class StyleManager : ICacheTransform
+    public partial class StyleManager : ICacheTransform
     {
         /// <summary> Gets or sets Style's fill-brush. </summary>
         public Brush FillBrush = new Brush();

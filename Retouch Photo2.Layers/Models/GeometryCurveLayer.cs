@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Layers.Models
         public const string ID = "GeometryCurveLayer";
 
         //@Content 
-        public NodeCollection NodeCollection { get; private set; }
+        public NodeCollection Nodes { get; private set; }
 
         //@Construct
         /// <summary>
@@ -29,7 +29,7 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Construct a curve-layer.
         /// </summary>
-        public GeometryCurveLayer()
+        private GeometryCurveLayer()
         {
             base.Type = GeometryCurveLayer.ID;
             base.Control = new LayerControl(this)
@@ -42,30 +42,30 @@ namespace Retouch_Photo2.Layers.Models
         /// Construct a curve-layer.
         /// </summary>
         /// <param name="nodes"> The source nodes. </param>
-        public GeometryCurveLayer(IEnumerable<Node> nodes) : this() => this.NodeCollection = new NodeCollection(nodes);
+        public GeometryCurveLayer(IEnumerable<Node> nodes) : this() => this.Nodes = new NodeCollection(nodes);
         /// <summary>
         /// Construct a curve-layer from a line.
         /// </summary>
         /// <param name="left"> The first source vector. </param>
         /// <param name="right"> The second source vector. </param>
-        public GeometryCurveLayer(Vector2 left, Vector2 right) : this() => this.NodeCollection = new NodeCollection(left, right);
+        public GeometryCurveLayer(Vector2 left, Vector2 right) : this() => this.Nodes = new NodeCollection(left, right);
 
 
         //@Override
         public override void CacheTransform()
         {
             base.CacheTransform();
-            this.NodeCollection.CacheTransform();
+            this.Nodes.CacheTransform();
         }
         public override void TransformMultiplies(Matrix3x2 matrix)
         {
             base.TransformMultiplies(matrix);
-            this.NodeCollection.TransformMultiplies(matrix);
+            this.Nodes.TransformMultiplies(matrix);
         }
         public override void TransformAdd(Vector2 vector)
         {
             base.TransformAdd(vector);
-            this.NodeCollection.TransformAdd(vector);
+            this.Nodes.TransformAdd(vector);
         }
 
 
@@ -75,7 +75,7 @@ namespace Retouch_Photo2.Layers.Models
             {
                 if (this.IsRefactoringTransformer)
                 {
-                    Transformer transformer = LayerCollection.RefactoringTransformer(this.NodeCollection);
+                    Transformer transformer = LayerCollection.RefactoringTransformer(this.Nodes);
                     this.TransformManager.Source = transformer;
                     this.TransformManager.Destination = transformer;
 
@@ -88,37 +88,41 @@ namespace Retouch_Photo2.Layers.Models
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
-            return this.NodeCollection.CreateGeometry(resourceCreator).Transform(canvasToVirtualMatrix);
+            return this.Nodes.CreateGeometry(resourceCreator).Transform(canvasToVirtualMatrix);
         }
 
 
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryCurveLayer curveLayer = new GeometryCurveLayer( this.NodeCollection)
+            GeometryCurveLayer curveLayer = new GeometryCurveLayer
             {
-                NodeCollection = new NodeCollection(from node in this.NodeCollection select node)
+                Nodes = this.Nodes.Clone()
             };
 
             LayerBase.CopyWith(resourceCreator, curveLayer, this);
             return curveLayer;
         }
 
-
-        public XElement Save()
+        public void SaveWith(XElement element)
         {
-            XElement element = new XElement("GeometryCurveLayer");
-
-            //TODO: NodeCollection
-            //element.Add(new XElement("NodeCollection", this.NodeCollection));
-
-            LayerBase.SaveWidth(element, this);
-            return element;
+            element.Add(new XElement
+            (
+                "Nodes",
+                from n
+                in this.Nodes
+                select FanKit.Transformers.XML.SaveNode("Node", n)
+            ));
         }
         public void Load(XElement element)
         {
-            //TODO: NodeCollection
-        //    this.NodeCollection = (float)element.Descendants("NodeCollection").Single();
-            LayerBase.LoadWith(element, this);
+            XElement node = element.Element("Nodes");
+
+            this.Nodes = new NodeCollection
+            (
+                from n
+                in node.Elements()
+                select FanKit.Transformers.XML.LoadNode(n)
+            );
         }
 
     }

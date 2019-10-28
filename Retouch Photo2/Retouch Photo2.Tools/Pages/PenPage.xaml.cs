@@ -36,26 +36,26 @@ namespace Retouch_Photo2.Tools.Pages
             this.RemoveButton.Tapped += (s, e) =>
             {
                 if (this.CurveLayer == null) return;
-                NodeCollection.RemoveCheckedNodes(this.CurveLayer.NodeCollection);
+                NodeCollection.RemoveCheckedNodes(this.CurveLayer.Nodes);
                 this.ViewModel.Invalidate();//Invalidate
             };
             this.AddButton.Tapped += (s, e) =>
             {
                 if (this.CurveLayer == null) return;
-                NodeCollection.Interpolation(this.CurveLayer.NodeCollection);
+                NodeCollection.Interpolation(this.CurveLayer.Nodes);
                 this.ViewModel.Invalidate();//Invalidate
             };
 
             this.SharpButton.Tapped += (s, e) =>
             {
                 if (this.CurveLayer == null) return;
-                NodeCollection.SharpCheckedNodes(this.CurveLayer.NodeCollection);
+                NodeCollection.SharpCheckedNodes(this.CurveLayer.Nodes);
                 this.ViewModel.Invalidate();//Invalidate
             };
             this.SmoothButton.Tapped += (s, e) =>
             {
                 if (this.CurveLayer == null) return;
-                NodeCollection.SmoothCheckedNodes(this.CurveLayer.NodeCollection);
+                NodeCollection.SmoothCheckedNodes(this.CurveLayer.Nodes);
                 this.ViewModel.Invalidate();//Invalidate
             };
         }

@@ -1,25 +1,35 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments.Icons;
+using System.Xml.Linq;
 using Windows.UI.Xaml;
-using Newtonsoft.Json;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
     /// <summary>
     /// <see cref="IAdjustment"/>'s InvertAdjustment.
     /// </summary>
-    [JsonObject(MemberSerialization.OptIn)]
     public class InvertAdjustment : IAdjustment
     {
-        [JsonProperty]
-        public string TypeName { get; } = AdjustmentType.Invert.ToString();
+
         public AdjustmentType Type => AdjustmentType.Invert;
         public FrameworkElement Icon { get; } = new InvertIcon();
         public Visibility PageVisibility => Visibility.Visible;
 
 
         public void Reset() { }
+        public IAdjustment Clone()
+        {
+            return new InvertAdjustment();
+        }
+        public XElement Save()
+        {
+            return new XElement
+            (
+                "Invert"
+            );
+        }
+
         public ICanvasImage GetRender(ICanvasImage image)
         {
             return new InvertEffect
@@ -27,9 +37,6 @@ namespace Retouch_Photo2.Adjustments.Models
                 Source = image
             };
         }
-        public IAdjustment Clone()
-        {
-            return new InvertAdjustment();
-        }
+
     }
 }

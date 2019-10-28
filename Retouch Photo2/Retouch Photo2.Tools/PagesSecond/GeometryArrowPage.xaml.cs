@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Layers.Models;
+﻿using FanKit.Transformers;
+using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

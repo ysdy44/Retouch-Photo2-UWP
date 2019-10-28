@@ -1,4 +1,5 @@
-﻿using Windows.Foundation;
+﻿using Retouch_Photo2.Blends;
+using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -159,7 +160,7 @@ namespace Retouch_Photo2.Layers
         {
             this.TagColor.Color = (value == TagType.None) ?
             Colors.Transparent :
-            this.TagColor.Color = TagControl.TagConverter(value);
+            this.TagColor.Color = TagTypeHelper.TagConverter(value);
         }
 
     }

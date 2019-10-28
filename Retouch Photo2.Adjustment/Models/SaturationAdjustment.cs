@@ -2,38 +2,41 @@
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments.Icons;
 using Windows.UI.Xaml;
-using Newtonsoft.Json;
+using System.Xml.Linq;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
     /// <summary>
     /// <see cref="IAdjustment"/>'s SaturationAdjustment.
     /// </summary>
-    [JsonObject(MemberSerialization.OptIn)]
     public class SaturationAdjustment : IAdjustment
     {
-        [JsonProperty]
-        public string TypeName { get; } = AdjustmentType.Saturation.ToString();
+
         public AdjustmentType Type => AdjustmentType.Saturation;
         public FrameworkElement Icon { get; } = new SaturationIcon();
         public Visibility PageVisibility => Visibility.Visible;
 
+        /// <summary> Gets or sets the saturation intensity for effect. </summary>
+        public float Saturation = 1.0f;
 
-        [JsonProperty]
-        public float Saturation;
+
+        //@Construct
+        /// <summary>
+        /// Construct a saturation-adjustment.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
+        public SaturationAdjustment(XElement element) : this() => this.Load(element);
+        /// <summary>
+        /// Construct a saturation-adjustment.
+        /// </summary>
+        public SaturationAdjustment()
+        {
+        }
 
 
         public void Reset()
         {
             this.Saturation = 1.0f;
-        }
-        public ICanvasImage GetRender(ICanvasImage image)
-        {
-            return new SaturationEffect
-            {
-                Saturation = this.Saturation,
-                Source = image
-            };
         }
         public IAdjustment Clone()
         {
@@ -42,5 +45,28 @@ namespace Retouch_Photo2.Adjustments.Models
                 Saturation = this.Saturation,
             };
         }
+
+        public XElement Save()
+        {
+            return new XElement
+            (
+                "Saturation",
+                new XAttribute("Saturation", this.Saturation)
+            );
+        }
+        public void Load(XElement element)
+        {
+            this.Saturation = (float)element.Attribute("Saturation");
+        }
+
+        public ICanvasImage GetRender(ICanvasImage image)
+        {
+            return new SaturationEffect
+            {
+                Saturation = this.Saturation,
+                Source = image
+            };
+        }
+
     }
 }

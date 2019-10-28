@@ -11,12 +11,24 @@ namespace Retouch_Photo2.Adjustments
     public class AdjustmentManager
     {
         //@Static
+        /// <summary>
+        /// Indicates that the contents of the CanvasControl need to be redrawn.
+        /// </summary>
         public static Action Invalidate;
 
+        /// <summary>
+        /// The source data.
+        /// </summary>
         public List<IAdjustment> Adjustments { get; set; } = new List<IAdjustment>();
 
         //@Static
-        public static ICanvasImage Render(AdjustmentManager manager, ICanvasImage image)
+        /// <summary>
+        /// Gets a specific rended-layer.
+        /// </summary>
+        /// <param name="manager"> The adjustment-manager. </param>
+        /// <param name="image"> The source image. </param>
+        /// <returns> The rendered image. </returns>
+        public static ICanvasImage GetRender(AdjustmentManager manager, ICanvasImage image)
         {
             if (manager.Adjustments.Count == 0) return image;
             if (manager.Adjustments.Count == 1) return manager.Adjustments.Single().GetRender(image);
@@ -27,5 +39,6 @@ namespace Retouch_Photo2.Adjustments
             }
             return image;
         }
+
     }
 }

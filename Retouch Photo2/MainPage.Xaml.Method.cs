@@ -11,6 +11,7 @@ using System.Numerics;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Foundation;
+using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
@@ -47,6 +48,13 @@ namespace Retouch_Photo2
         }
 
 
+        private void NewProjectFromSize(BitmapSize pixels)
+        {
+            Project project = new Project((int)pixels.Width, (int)pixels.Height);//Project
+            this.ViewModel.LoadFromProject(project);
+
+            this.Frame.Navigate(typeof(DrawPage));//Navigate   
+        }
         private void NewProjectFromPhoto(object sender, Photo photo)
         {
             if (this.State != MainPageState.Main) return;
@@ -60,9 +68,10 @@ namespace Retouch_Photo2
             {
                 //Create an XDocument object.
                 string path = photo.Path;
-                XDocument xDocument = XDocument.Load(path);
+                XDocument document = XDocument.Load(path);
 
-                this.ViewModel.XElementLoad(xDocument);
+                Project project = Retouch_Photo2.ViewModels.XML.LoadProject(document);
+                this.ViewModel.LoadFromProject(project);
             }
 
             this.Frame.Navigate(typeof(DrawPage));//Navigate     
@@ -132,12 +141,12 @@ namespace Retouch_Photo2
             this.ViewModel.CanvasTransformer.Size = new Size(this.ActualWidth, this.ActualHeight - 50);
 
             //Transition
-            this.ViewModel.Transition(0.0f);
+            this.ViewModel.CanvasTransformer.Transition(0.0f);
 
             Point postion = Retouch_Photo2.Menus.MenuHelper.GetVisualPostion(element);
             float width = (float)element.ActualWidth;
             float height = (float)element.ActualHeight;
-            this.ViewModel.TransitionSource(postion, width, height);
+            this.ViewModel.CanvasTransformer.TransitionSource(postion, width, height);
         }
 
     }

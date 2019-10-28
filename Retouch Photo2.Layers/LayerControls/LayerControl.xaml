@@ -71,7 +71,6 @@
 
         <!--Line-->
         <Rectangle IsHitTestVisible="False" Grid.Column="0" Fill="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
-        <Rectangle IsHitTestVisible="False" Grid.Column="1" Grid.ColumnSpan="3" Height="1" VerticalAlignment="Bottom" Fill="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
         <Rectangle IsHitTestVisible="False" Grid.Column="1" Margin="0,2" Width="2" HorizontalAlignment="Left" VerticalAlignment="Stretch">
             <Rectangle.Fill>
                 <SolidColorBrush x:Name="TagColor" Color="Transparent"/>

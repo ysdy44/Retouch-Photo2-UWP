@@ -41,24 +41,9 @@ namespace Retouch_Photo2.Layers.Models
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
-            Matrix3x2 oneMatrix = Transformer.FindHomography(GeometryUtil.OneTransformer, base.TransformManager.Destination);
-            Matrix3x2 matrix = oneMatrix * canvasToVirtualMatrix;
+            Transformer transformer = base.TransformManager.Destination;
 
-            float rotation = GeometryUtil.StartingRotation;
-            float angle = FanKit.Math.Pi * 2.0f / this.Points;
-
-            Vector2[] points = new Vector2[this.Points];
-            for (int i = 0; i < this.Points; i++)
-            {
-                int index = i;
-
-                //Outer
-                Vector2 outer = GeometryUtil.GetRotationVector(rotation);
-                points[index] = Vector2.Transform(outer, matrix);
-                rotation += angle;
-            }
-
-            return CanvasGeometry.CreatePolygon(resourceCreator, points);
+            return TransformerGeometry.CreatePentagon(resourceCreator, transformer, canvasToVirtualMatrix, this.Points);
         }
 
 
@@ -74,19 +59,13 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public XElement Save()
+        public void SaveWith(XElement element)
         {
-            XElement element = new XElement("GeometryPentagonLayer");
-
             element.Add(new XElement("Points", this.Points));
-
-            LayerBase.SaveWidth(element, this);
-            return element;
         }
         public void Load(XElement element)
         {
             this.Points = (int)element.Element("Points");
-            LayerBase.LoadWith(element, this);
         }
 
     }

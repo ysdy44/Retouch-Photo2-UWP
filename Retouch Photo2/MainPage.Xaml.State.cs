@@ -137,13 +137,8 @@ namespace Retouch_Photo2
                 addDialog.Hide();
                 this.RootGrid.Children.Remove(addDialog);
 
-                this.IsLoading = true;//Loading
-
                 BitmapSize pixels = addDialog.Size;
-                Project project = new Project((int)pixels.Width, (int)pixels.Height);//Project
-                this.Frame.Navigate(typeof(DrawPage), project);//Navigate    
-
-                this.IsLoading = false;//Loading
+                this.NewProjectFromSize(pixels);
             };
 
             await addDialog.ShowAsync(ContentDialogPlacement.InPlace);

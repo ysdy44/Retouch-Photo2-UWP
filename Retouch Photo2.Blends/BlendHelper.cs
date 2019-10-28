@@ -6,8 +6,9 @@ namespace Retouch_Photo2.Blends
     /// <summary>
     /// Provides static blend rendering method.
     /// </summary>
-    public class BlendHelper
+    public static class BlendHelper
     {
+
         //@Static
         /// <summary>
         /// Render images and blend together.
@@ -38,7 +39,7 @@ namespace Retouch_Photo2.Blends
             };
         } 
 
-        private static BlendEffectMode GetMode(BlendType type)
+        public static BlendEffectMode GetMode(BlendType type)
         {
             switch (type)
             {

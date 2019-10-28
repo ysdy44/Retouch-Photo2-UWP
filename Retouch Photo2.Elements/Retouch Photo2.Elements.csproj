@@ -195,7 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FanKit.Transformers">
-      <Version>1.3.5</Version>
+      <Version>1.3.7</Version>
     </PackageReference>
     <PackageReference Include="HsvColorPickers">
       <Version>1.3.4</Version>

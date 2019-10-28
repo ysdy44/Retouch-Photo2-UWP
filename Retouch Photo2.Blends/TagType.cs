@@ -1,4 +1,4 @@
-﻿namespace Retouch_Photo2.Layers
+﻿namespace Retouch_Photo2.Blends
 {
     public enum TagType
     {

@@ -72,7 +72,34 @@ namespace Retouch_Photo2.Layers
         }
         public IList<ILayer> Children { get; set; } = new List<ILayer>();
 
+        /// <summary>
+        /// Copy a layer with self.
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="source"> The source ILayer. </param>
+        /// <param name="destination"> The destination ILayer. </param>
+        public static void CopyWith(ICanvasResourceCreator resourceCreator, ILayer destination, ILayer source)
+        {
+            destination.Name = source.Name;
+            destination.Opacity = source.Opacity;
+            destination.BlendType = source.BlendType;
+            destination.Visibility = source.Visibility;
 
+            destination.TransformManager = source.TransformManager.Clone();
+            destination.EffectManager = source.EffectManager.Clone();
+            foreach (IAdjustment adjustment in source.AdjustmentManager.Adjustments)
+            {
+                IAdjustment clone = adjustment.Clone();
+                destination.AdjustmentManager.Adjustments.Add(clone);
+            }
+
+            foreach (ILayer layer in source.Children)
+            {
+                ILayer clone = layer.Clone(resourceCreator);
+                destination.Children.Add(clone);
+            }
+        }
+        
         //@Virtual
         public virtual void CacheTransform()
         {
@@ -87,8 +114,7 @@ namespace Retouch_Photo2.Layers
 
             foreach (ILayer child in this.Children)
             {
-                child.TransformManager.CacheTransform();
-                child.StyleManager.CacheTransform();
+                child.CacheTransform();
             }
             this.TransformManager.CacheTransform();
             this.StyleManager.CacheTransform();
@@ -97,8 +123,7 @@ namespace Retouch_Photo2.Layers
         {
             foreach (ILayer child in this.Children)
             {
-                child.TransformManager.TransformMultiplies(matrix);
-                child.StyleManager.TransformMultiplies(matrix);
+                child.TransformMultiplies(matrix);
             }
             this.TransformManager.TransformMultiplies(matrix);
             this.StyleManager.TransformMultiplies(matrix);
@@ -107,8 +132,7 @@ namespace Retouch_Photo2.Layers
         {
             foreach (ILayer child in this.Children)
             {
-                child.TransformManager.TransformAdd(vector);
-                child.StyleManager.TransformAdd(vector);
+                child.TransformAdd(vector);
             }
             this.TransformManager.TransformAdd(vector);
             this.StyleManager.TransformAdd(vector);

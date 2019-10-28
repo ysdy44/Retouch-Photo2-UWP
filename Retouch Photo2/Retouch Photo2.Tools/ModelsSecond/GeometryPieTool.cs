@@ -24,7 +24,6 @@ namespace Retouch_Photo2.Tools
         {
             return new GeometryPieLayer
             {
-                InnerRadius = this.SelectionViewModel.GeometryPieInnerRadius,
                 SweepAngle = this.SelectionViewModel.GeometryPieSweepAngle,
             };
         }

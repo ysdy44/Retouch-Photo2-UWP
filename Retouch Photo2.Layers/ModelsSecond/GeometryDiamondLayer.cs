@@ -42,55 +42,30 @@ namespace Retouch_Photo2.Layers.Models
         {
             Transformer transformer = base.TransformManager.Destination;
 
-            Vector2 leftTop = Vector2.Transform(transformer.LeftTop, canvasToVirtualMatrix);
-            Vector2 rightTop = Vector2.Transform(transformer.RightTop, canvasToVirtualMatrix);
-            Vector2 rightBottom = Vector2.Transform(transformer.RightBottom, canvasToVirtualMatrix);
-            Vector2 leftBottom = Vector2.Transform(transformer.LeftBottom, canvasToVirtualMatrix);
-
-            Vector2 centerLeft = Vector2.Transform(transformer.CenterLeft, canvasToVirtualMatrix);
-            Vector2 centerRight = Vector2.Transform(transformer.CenterRight, canvasToVirtualMatrix);
-
-            Vector2 top = leftTop * (1.0f - this.Mid) + rightTop * this.Mid;
-            Vector2 bottom = leftBottom * (1.0f - this.Mid) + rightBottom * this.Mid;
-
-            //Points
-            Vector2[] points = new Vector2[]
-            {
-                centerLeft,
-                top,
-                centerRight,
-                bottom,
-            };
-
-            //Geometry
-            return CanvasGeometry.CreatePolygon(resourceCreator, points);
+            return TransformerGeometry.CreateDiamond(resourceCreator, transformer, canvasToVirtualMatrix, this.Mid);
         }
 
 
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryDiamondLayer DiamondLayer = new GeometryDiamondLayer();
+            GeometryDiamondLayer DiamondLayer = new GeometryDiamondLayer
+            {
+                Mid = this.Mid
+            };
 
             LayerBase.CopyWith(resourceCreator, DiamondLayer, this);
             return DiamondLayer;
         }
 
 
-        public XElement Save()
-        {
-            XElement element = new XElement("GeometryDiamondLayer");
-            
+        public void SaveWith(XElement element)
+        {            
             element.Add(new XElement("Mid", this.Mid));
-
-            LayerBase.SaveWidth(element, this);
-            return element;
         }
         public void Load(XElement element)
         {
             this.Mid = (float)element.Element("Mid");
-            LayerBase.LoadWith(element, this);
         }
-
-
+        
     }
 }

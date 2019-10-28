@@ -126,12 +126,12 @@
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.Notify.cs" />
     <Compile Include="ViewModels\ViewModel.Transformer.cs" />
-    <Compile Include="ViewModels\ViewModel.XElement.cs" />
+    <Compile Include="XMLs\XML.Project.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.ViewModels.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FanKit.Transformers">
-      <Version>1.3.5</Version>
+      <Version>1.3.7</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.5</Version>

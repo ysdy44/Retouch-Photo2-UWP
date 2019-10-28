@@ -20,11 +20,6 @@ namespace Retouch_Photo2.Layers.Models
         /// Construct a ellipse-layer.
         /// </summary>
         /// <param name="element"> The source XElement. </param>
-        public GeometryEllipseLayer(XElement element) : this() => this.Load(element);
-        /// <summary>
-        /// Construct a ellipse-layer.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
         public GeometryEllipseLayer()
         {
             base.Type = GeometryEllipseLayer.ID;
@@ -52,17 +47,7 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public XElement Save()
-        {
-            XElement element = new XElement("GeometryEllipseLayer");
-
-            LayerBase.SaveWidth(element, this);
-            return element;
-        }
-        public void Load(XElement element)
-        {
-            LayerBase.LoadWith(element, this);
-        }
+        public void SaveWith(XElement element) { }
 
     }
 }
