@@ -24,6 +24,7 @@ namespace Retouch_Photo2.ViewModels
                 new XElement
                 (
                     "Root",
+                    new XElement("Name", project.Name),
                     new XElement("Width", project.Width),
                     new XElement("Height", project.Height),
                     new XElement
@@ -49,6 +50,7 @@ namespace Retouch_Photo2.ViewModels
 
             return new Project
             {
+                Name = root.Element("Name").Value,
                 Width = (int)root.Element("Width"),
                 Height = (int)root.Element("Height"),
                 Layers =

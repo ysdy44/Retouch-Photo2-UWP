@@ -1,7 +1,10 @@
 ﻿using Retouch_Photo2.Elements.MainPages;
 using Retouch_Photo2.ViewModels;
 using System;
-using Windows.Graphics.Imaging;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -104,48 +107,56 @@ namespace Retouch_Photo2
         {
             if (isSelect)
             {
-                foreach (Photo item in this.PhotoFileList)
+                foreach (Photo item in this.Photos)
                 {
                     item.SelectMode = null;
                 }
             }
             else
             {
-                foreach (Photo item in this.PhotoFileList)
+                foreach (Photo item in this.Photos)
                 {
                     item.SelectMode = false;
                 }
             }
         }
 
-        private async void AddDialogShow()
+
+
+        private async Task Refresh()
         {
-            AddDialog addDialog = new AddDialog();
-            Grid.SetRow(addDialog, 1);
-            Grid.SetRowSpan(addDialog, 2);
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
 
-            this.RootGrid.Children.Add(addDialog);
+            //get all file.
+            IReadOnlyList<StorageFile> files = await folder.GetFilesAsync();
 
-            //Add
-            addDialog.CloseButtonClick += (sender, args) =>
+            //Sort by Time
+            IOrderedEnumerable<StorageFile> orderedFiles = files.OrderByDescending(file => file.DateCreated);
+            IEnumerable<StorageFile> orderedPhotos = from flie in orderedFiles where flie.FileType == ".photo2" select flie;
+
+            //Refresh, when the count is not equal.
+            if (orderedPhotos.Count() != this.Photos.Count)
             {
-                addDialog.Hide();
-                this.RootGrid.Children.Remove(addDialog);
-            };
-            addDialog.PrimaryButtonClick += (sender, args) =>
-            {
-                addDialog.Hide();
-                this.RootGrid.Children.Remove(addDialog);
+                this.Photos.Clear(); //Notify
+                this.GridView.Children.Clear();
 
-                BitmapSize pixels = addDialog.Size;
-                this.NewProjectFromSize(pixels);
-            };
+                foreach (StorageFile storageFile in orderedPhotos)
+                {
+                    // [StorageFile] --> [Photo]
+                    Photo photo = Photo.CreatePhoto(storageFile, ApplicationData.Current.LocalFolder.Path);
 
-            await addDialog.ShowAsync(ContentDialogPlacement.InPlace);
-        }
+                    if (photo != null)
+                    {
+                        this.Photos.Add(photo); //Notify
+                        this.GridView.Children.Add(photo.Instance);
+                    }
+                }
+            }
 
-        private void FolderDialogShow()
-        {
+            bool isZero = (this.Photos.Count == 0);
+            this.State = isZero ?
+                MainPageState.None :
+                MainPageState.Main;//State
         }
 
     }

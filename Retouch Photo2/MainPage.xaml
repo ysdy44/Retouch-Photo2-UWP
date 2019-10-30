@@ -15,7 +15,9 @@
     
    xmlns:viewModels="using:Retouch_Photo2.ViewModels"
    xmlns:elementsMainpages="using:Retouch_Photo2.Elements.MainPages"
-   mc:Ignorable="d"
+    xmlns:elementDialog="using:Retouch_Photo2.Elements.Dialogs"
+    xmlns:hSVColorPickers="using:HSVColorPickers"
+    mc:Ignorable="d"
 
    NavigationCacheMode="Required"    
    Background="{ThemeResource AppBackground}"
@@ -165,5 +167,50 @@
         <!--Loading-->
         <elements:LoadingControl x:Name="LoadingControl" Grid.RowSpan="3"/>
 
+        <!--Dialog-->
+        <elementDialog:DialogBase x:Name="AddDialog" Grid.Row="1" Grid.RowSpan="2">
+            <elementDialog:DialogBase.Title>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="ExpanedButton" VerticalAlignment="Center" Style="{ThemeResource TextBlockButtonStyle}">
+                        <FontIcon Glyph="&#xE96E;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                    </Button>
+                    <TextBlock VerticalAlignment="Center" FontSize="20">
+                        Add New Project
+                    </TextBlock>
+                </StackPanel>
+            </elementDialog:DialogBase.Title>
+            <elementDialog:DialogBase.CenterContent>
+                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="6"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="1" VerticalAlignment="Center">
+                        Width
+                    </TextBlock>
+                    <TextBlock Grid.Row="3" VerticalAlignment="Center">
+                        Height
+                    </TextBlock>
+
+                    <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource AppRoundedBorderStyle}">
+                        <hSVColorPickers:NumberPicker x:Name="WidthNumberPicker" Width="Auto" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="3" Style="{StaticResource AppRoundedBorderStyle}">
+                        <hSVColorPickers:NumberPicker x:Name="HeighNumberPicker" Width="Auto" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                    </Border>
+
+                </Grid>
+
+            </elementDialog:DialogBase.CenterContent>
+        </elementDialog:DialogBase>
+        
     </Grid>
 </Page>

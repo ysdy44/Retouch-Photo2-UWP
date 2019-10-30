@@ -10,6 +10,8 @@
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:layers="using:Retouch_Photo2.Layers"
     xmlns:toolElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:mainpages="using:Retouch_Photo2.Elements.MainPages"
+    xmlns:elementDialog="using:Retouch_Photo2.Elements.Dialogs"    
     NavigationCacheMode="Required"    
     mc:Ignorable="d"
     >
@@ -32,7 +34,7 @@
     </Page.Resources>
 
 
-    <Grid>
+    <Grid x:Name="RootGrid">
         <Grid.Resources>
             <Flyout x:Name="MoreTransformFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                 <toolElements:MoreTransformControl/>
@@ -219,7 +221,28 @@
             <elements:LoadingControl.Text>
                 Saving...
             </elements:LoadingControl.Text>
-        </elements:LoadingControl> 
+        </elements:LoadingControl>
+
+        <!--Dialog-->
+        <elementDialog:DialogBase x:Name="RenameDialog">
+            <elementDialog:DialogBase.Title>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="ExpanedButton" VerticalAlignment="Center" Style="{ThemeResource TextBlockButtonStyle}">
+                        <FontIcon Glyph="&#xE96E;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                    </Button>
+                    <TextBlock VerticalAlignment="Center" FontSize="20">
+                        Rename Current Project
+                    </TextBlock>
+                </StackPanel>
+            </elementDialog:DialogBase.Title>
+            <elementDialog:DialogBase.CenterContent>
+                <TextBox x:Name="TextBox" VerticalAlignment="Top">
+                    <TextBox.Text>
+                        Unsdasd
+                    </TextBox.Text>
+                </TextBox>
+            </elementDialog:DialogBase.CenterContent>
+        </elementDialog:DialogBase>
 
     </Grid>
 </Page>

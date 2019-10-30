@@ -143,6 +143,7 @@
       <DependentUpon>GeometryTriangleIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="LayerCollections\LayerCollection.Add_Disengage.cs" />
+    <Compile Include="LayerCollections\LayerCollection.Arrange_Children_Expand.cs" />
     <Compile Include="LayerFactory.cs" />
     <Compile Include="LayerType.cs" />
     <Compile Include="ModelsSecond\GeometryArrowLayer.cs" />

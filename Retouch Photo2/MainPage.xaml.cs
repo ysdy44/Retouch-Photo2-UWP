@@ -19,13 +19,18 @@ namespace Retouch_Photo2
         ViewModel ViewModel => App.ViewModel;
         SettingViewModel SettingViewModel { get => App.SettingViewModel; set => App.SettingViewModel = value; }
 
-        IList<Photo> PhotoFileList = new List<Photo>();
+        IList<Photo> Photos => this.ViewModel.Photos;
+
         static bool _isLoaded;
 
         //@Construct
         public MainPage()
         {
-            this.InitializeComponent();            
+            this.InitializeComponent();
+
+            //Dialog
+            this.ConstructAddDialog();
+
             this.Loaded += async (s, e) =>
             {
                 await this.ConstructSettingViewModel();
@@ -62,28 +67,28 @@ namespace Retouch_Photo2
 
 
             //Initial
-            this.AddButton.Tapped += (s, e) => this.AddDialogShow();
+            this.AddButton.Tapped += (s, e) => this.ShowAddDialog();
             this.PhotoButton.Tapped += async (s, e) => await this.NewProjectFromPictures(PickerLocationId.PicturesLibrary);
             this.DestopButton.Tapped += async (s, e) => await this.NewProjectFromPictures(PickerLocationId.Desktop);
 
             //Main
-            this.MainControl.AddButton.Tapped += (s, e) => this.AddDialogShow();
+            this.MainControl.AddButton.Tapped += (s, e) => this.ShowAddDialog();
             this.MainControl.PicturesButton.Tapped += (s, e) => this.State = MainPageState.Pictures;
             this.MainControl.SaveButton.Tapped += (s, e) => this.State = MainPageState.Save;
             this.MainControl.ShareButton.Tapped += (s, e) => this.State = MainPageState.Share;
             this.MainControl.DeleteButton.Tapped += (s, e) => this.State = MainPageState.Delete;
             this.MainControl.DuplicateButton.Tapped += (s, e) => this.State = MainPageState.Duplicate;
-            this.MainControl.FolderButton.Tapped += (s, e) => this.FolderDialogShow();
+            this.MainControl.FolderButton.Tapped += (s, e) => this.ShowFolderDialog();
             this.MainControl.MoveButton.Tapped += (s, e) => this.State = MainPageState.Move;
 
             //Second
-            this.MainControl.SecondAddButton.Tapped += (s, e) => this.AddDialogShow();
+            this.MainControl.SecondAddButton.Tapped += (s, e) => this.ShowAddDialog();
             this.MainControl.SecondPicturesButton.Tapped += (s, e) => this.State = MainPageState.Pictures;
             this.MainControl.SecondSaveButton.Tapped += (s, e) => this.State = MainPageState.Save;
             this.MainControl.SecondShareButton.Tapped += (s, e) => this.State = MainPageState.Share;
             this.MainControl.SecondDeleteButton.Tapped += (s, e) => this.State = MainPageState.Delete;
             this.MainControl.SecondDuplicateButton.Tapped += (s, e) => this.State = MainPageState.Duplicate;
-            this.MainControl.SecondFolderButton.Tapped += (s, e) => this.FolderDialogShow();
+            this.MainControl.SecondFolderButton.Tapped += (s, e) => this.ShowFolderDialog();
             this.MainControl.SecondMoveButton.Tapped += (s, e) => this.State = MainPageState.Move;
             
             //Pictures

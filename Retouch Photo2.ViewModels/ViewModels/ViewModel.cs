@@ -22,11 +22,14 @@ namespace Retouch_Photo2.ViewModels
         {
             if (project == null) return;
 
+            //Name
+            this.Name = project.Name;
+
             //Width Height
             this.CanvasTransformer.Width = project.Width;
             this.CanvasTransformer.Height = project.Height;
 
-            //layers
+            //Layers
             this.Layers.RootLayers.Clear();
             foreach (ILayer layer in project.Layers)
             {
@@ -37,7 +40,14 @@ namespace Retouch_Photo2.ViewModels
             }
             this.Layers.ArrangeLayersControlsWithClearAndAdd();
             this.Layers.ArrangeLayersParents();
+            this.Layers.ArrangeChildrenExpand();
         }
+
+
+        /// <summary> Retouch_Photo2's the photo list. </summary>
+        public IList<Photo> Photos { get;  } = new List<Photo>();
+        /// <summary> Retouch_Photo2's the current project name. </summary>
+        public string Name = null;
 
 
         /// <summary> Retouch_Photo2's the only ILayers. </summary>
@@ -65,8 +75,10 @@ namespace Retouch_Photo2.ViewModels
 
         #endregion
 
+
         /// <summary> Occurs when create layer. </summary>
         public Action<Transformer, Vector2, InvalidateMode> TipWidthHeight { get; set; }
+
 
         #region ImageRe
 

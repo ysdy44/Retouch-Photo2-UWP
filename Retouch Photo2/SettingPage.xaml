@@ -158,13 +158,13 @@
                         <Border MaxHeight="100" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel Orientation="Horizontal">
 
-                                <RadioButton x:Name="LightRadioButton" Tag="Light" Style="{StaticResource AppTapRadioButtonStyle}">
+                                <RadioButton x:Name="LightRadioButton" Tag="Light" GroupName="Theme" Style="{StaticResource AppTapRadioButtonStyle}">
                                     <FontIcon FontSize="20" Glyph="&#xE708;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </RadioButton>
-                                <RadioButton x:Name="DarkRadioButton" Tag="Dark" Style="{StaticResource AppTapRadioButtonStyle}">
+                                <RadioButton x:Name="DarkRadioButton" Tag="Dark" GroupName="Theme" Style="{StaticResource AppTapRadioButtonStyle}">
                                     <FontIcon FontSize="26" Glyph="&#xE706;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </RadioButton>
-                                <RadioButton x:Name="DefaultRadioButton" Tag="Use System" Style="{StaticResource AppTapRadioButtonStyle}">
+                                <RadioButton x:Name="DefaultRadioButton" Tag="Use System" GroupName="Theme" Style="{StaticResource AppTapRadioButtonStyle}">
                                     <FontIcon FontSize="22" Glyph="&#xE7E8;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </RadioButton>
 
@@ -182,17 +182,17 @@
                         <Border MaxHeight="100" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel Orientation="Horizontal">
 
-                                <RadioButton x:Name="PhoneButton" Tag="Phone" Style="{StaticResource AppTapRadioButtonStyle}">
+                                <RadioButton x:Name="PhoneButton" Tag="Phone" GroupName="Layout" Style="{StaticResource AppTapRadioButtonStyle}">
                                     <FontIcon FontSize="22" Glyph="&#xE8EA;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </RadioButton>
-                                    <RadioButton x:Name="PadButton" Tag="Pad" Style="{StaticResource AppTapRadioButtonStyle}">
+                                <RadioButton x:Name="PadButton" Tag="Pad" GroupName="Layout" Style="{StaticResource AppTapRadioButtonStyle}">
                                     <FontIcon FontSize="22" Glyph="&#xE70A;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </RadioButton>
-                                <RadioButton x:Name="PCButton" Tag="PC" Style="{StaticResource AppTapRadioButtonStyle}">
+                                <RadioButton x:Name="PCButton" Tag="PC" GroupName="Layout" Style="{StaticResource AppTapRadioButtonStyle}">
                                     <FontIcon FontSize="22" Glyph="&#xF71E;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </RadioButton>
                                 <Rectangle Width="1" Fill="{ThemeResource AppBorderBrush}"/>
-                                <RadioButton x:Name="AdaptiveButton" Tag="Adaptive" Style="{StaticResource AppTapRadioButtonStyle}">
+                                <RadioButton x:Name="AdaptiveButton" Tag="Adaptive" GroupName="Layout" Style="{StaticResource AppTapRadioButtonStyle}">
                                     <FontIcon FontSize="32" Glyph="&#xEBC6;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </RadioButton>
 

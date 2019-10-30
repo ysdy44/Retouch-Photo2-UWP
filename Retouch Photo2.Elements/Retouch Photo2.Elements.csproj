@@ -111,6 +111,12 @@
       <DependentUpon>CompositeModeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ApplicationViewTitleBarBackgroundExtension.cs" />
+    <Compile Include="DialogBase.xaml.cs">
+      <DependentUpon>DialogBase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DrawPages\RenmaeDialog.xaml.cs">
+      <DependentUpon>RenmaeDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DrawPages\DeviceLayoutType.cs" />
     <Compile Include="ExpandAppbars\ExpandAppbar.xaml.cs">
       <DependentUpon>ExpandAppbar.xaml</DependentUpon>
@@ -135,9 +141,6 @@
     <Compile Include="ExpandAppbars\ExpandAppBarSapce.cs" />
     <Compile Include="ExpandAppbars\ExpandAppBarSeparator.cs" />
     <Compile Include="ExpandAppbars\IExpandAppbarElement.cs" />
-    <Compile Include="MainPages\AddDialog.xaml.cs">
-      <DependentUpon>AddDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainPages\MainPageButton.xaml.cs">
       <DependentUpon>MainPageButton.xaml</DependentUpon>
     </Compile>
@@ -221,6 +224,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DialogBase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DrawPages\RenmaeDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ExpandAppbars\ExpandAppbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -244,10 +255,6 @@
     <Page Include="ExpandAppbars\ExpandAppbarButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainPages\AddDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainPages\MainPageButton.xaml">
       <Generator>MSBuild:Compile</Generator>

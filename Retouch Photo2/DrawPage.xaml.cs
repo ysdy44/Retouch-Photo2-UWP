@@ -79,6 +79,9 @@ namespace Retouch_Photo2
             this.ConstructViewModel();
             this.ConstructKeyboardViewModel();
 
+            //Dialog
+            this.ConstructRenameDialog();
+
             //MoreButton
             MoreTransformButton.Flyout = this.MoreTransformFlyout;
             MoreCreateButton.Flyout = this.MoreCreateFlyout;
@@ -104,16 +107,10 @@ namespace Retouch_Photo2
             this.FullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = true;
             this.SaveButton.Tapped += (s, e) =>
             {
-                Project project = new Project
-                {
-                    Width = this.ViewModel.CanvasTransformer.Width,
-                    Height = this.ViewModel.CanvasTransformer.Height,
-                    Layers = this.ViewModel.Layers.RootLayers
-                };
-                XDocument document = Retouch_Photo2.ViewModels.XML.SaveProject(project);
-
-                string path = ApplicationData.Current.LocalFolder.Path + "/" + "Unsdasd" + ".photo2";
-                document.Save(path);                
+                if (this.ViewModel.Name==null)
+                    this.ShowRenameDialog();
+                else
+                    this.Save();
             };
             this.ThemeButton.Tapped += (s, e) =>
             {

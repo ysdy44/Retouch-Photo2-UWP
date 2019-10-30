@@ -114,43 +114,52 @@ namespace Retouch_Photo2
             Project project = new Project(imageLayer);
             this.Frame.Navigate(typeof(DrawPage), project);//Navigate       
         }
+                     
+
+
+        private void ConstructAddDialog()
+        {
+            this.WidthNumberPicker.Unit = "px";
+            this.HeighNumberPicker.Unit = "px";
+            this.WidthNumberPicker.Minimum = 16;
+            this.HeighNumberPicker.Minimum = 16;
+            this.WidthNumberPicker.Maximum = 16384;
+            this.HeighNumberPicker.Maximum = 16384;
+            this.WidthNumberPicker.Value = 1024;
+            this.HeighNumberPicker.Value = 1024;
+
+            this.AddDialog.CloseButton.Click += (sender, args) =>
+            {
+                this.AddDialog.Hide();
+            };
+            this.AddDialog.PrimaryButton.Click += (sender, args) =>
+            {
+                this.AddDialog.Hide();
+
+                BitmapSize pixels = new BitmapSize()
+                {
+                    Width = (uint)this.WidthNumberPicker.Value,
+                    Height = (uint)this.HeighNumberPicker.Value
+                };
+
+                this.NewProjectFromSize(pixels);
+            };
+        }
+
+        private void ShowAddDialog()
+        {
+            this.AddDialog.Show();
+        }
         
 
-        private async Task Refresh()
+        private void ConstructFolderDialog()
         {
-            StorageFolder folder = ApplicationData.Current.LocalFolder;
-
-            //get all file.
-            IReadOnlyList<StorageFile> files = await folder.GetFilesAsync();
-
-            //Sort by Time
-            IOrderedEnumerable<StorageFile> orderedFiles = files.OrderByDescending(file => file.DateCreated);
-            IEnumerable<StorageFile> orderedPhotos = from flie in orderedFiles where flie.FileType == ".photo2" select flie;
-
-            //Refresh, when the count is not equal.
-            if (orderedPhotos.Count() != this.PhotoFileList.Count)
-            {
-                this.PhotoFileList.Clear(); //Notify
-                this.GridView.Children.Clear();
-
-                foreach (StorageFile storageFile in orderedPhotos)
-                {
-                    // [StorageFile] --> [Photo]
-                    Photo photo = Photo.CreatePhoto(storageFile, ApplicationData.Current.LocalFolder.Path);
-
-                    if (photo != null)
-                    {
-                        this.PhotoFileList.Add(photo); //Notify
-                        this.GridView.Children.Add(photo.Instance);
-                    }
-                }
-            }
-
-            bool isZero = (this.PhotoFileList.Count == 0);
-            this.State = isZero ?
-                MainPageState.None :
-                MainPageState.Main;//State
         }
+
+        private void ShowFolderDialog()
+        {
+        }
+
 
 
         private async void NavigatedTo()

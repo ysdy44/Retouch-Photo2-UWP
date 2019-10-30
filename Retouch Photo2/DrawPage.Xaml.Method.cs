@@ -1,7 +1,11 @@
-﻿using Retouch_Photo2.Elements;
+﻿using Retouch_Photo2.Elements.MainPages;
 using Retouch_Photo2.ViewModels;
+using System;
+using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -69,6 +73,56 @@ namespace Retouch_Photo2
                     this.ViewModel.Invalidate();//Invalidate
                 };
             }
+        }
+
+
+        private void ConstructRenameDialog()
+        {
+            this.RenameDialog.CloseButton.Click += (sender, args) =>
+            {
+                this.RenameDialog.Hide();
+            };
+            this.RenameDialog.PrimaryButton.Click += (_, __) =>
+            {
+                string name = this.TextBox.Text;
+
+                if (name != null)
+                {
+                    if (name != string.Empty)
+                    {
+                        bool isExist = this.ViewModel.Photos.Any(p => p.Name == name);
+
+                        if (isExist == false)
+                        {
+                            this.ViewModel.Name = name;
+                            this.Save();
+
+                            this.RenameDialog.Hide();
+                            return;
+                        }
+                    }
+                }
+            };
+        }
+        
+        private void ShowRenameDialog()
+        {
+            this.RenameDialog.Show();
+        }
+
+        private void Save()
+        {
+            Project project = new Project
+            {
+                Name = this.ViewModel.Name,
+                Width = this.ViewModel.CanvasTransformer.Width,
+                Height = this.ViewModel.CanvasTransformer.Height,
+                Layers = this.ViewModel.Layers.RootLayers
+            };
+            XDocument document = Retouch_Photo2.ViewModels.XML.SaveProject(project);
+
+            string path = $"{ApplicationData.Current.LocalFolder.Path}/{this.ViewModel.Name}.photo2";
+            document.Save(path);
         }
 
 
