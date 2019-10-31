@@ -125,15 +125,8 @@ namespace Retouch_Photo2
 
         private async Task Refresh()
         {
-            StorageFolder folder = ApplicationData.Current.LocalFolder;
-
-            //get all file.
-            IReadOnlyList<StorageFile> files = await folder.GetFilesAsync();
-
-            //Sort by Time
-            IOrderedEnumerable<StorageFile> orderedFiles = files.OrderByDescending(file => file.DateCreated);
-            IEnumerable<StorageFile> orderedPhotos = from flie in orderedFiles where flie.FileType == ".photo2" select flie;
-
+            IEnumerable<StorageFile> orderedPhotos =await FileUtil.FindPhoto2pkFile();
+           
             //Refresh, when the count is not equal.
             if (orderedPhotos.Count() != this.Photos.Count)
             {
@@ -143,7 +136,7 @@ namespace Retouch_Photo2
                 foreach (StorageFile storageFile in orderedPhotos)
                 {
                     // [StorageFile] --> [Photo]
-                    Photo photo = Photo.CreatePhoto(storageFile, ApplicationData.Current.LocalFolder.Path);
+                    Photo photo = new Photo(storageFile, ApplicationData.Current.LocalFolder.Path);
 
                     if (photo != null)
                     {
@@ -154,9 +147,7 @@ namespace Retouch_Photo2
             }
 
             bool isZero = (this.Photos.Count == 0);
-            this.State = isZero ?
-                MainPageState.None :
-                MainPageState.Main;//State
+            this.State = isZero ? MainPageState.None : MainPageState.Main;//State
         }
 
     }

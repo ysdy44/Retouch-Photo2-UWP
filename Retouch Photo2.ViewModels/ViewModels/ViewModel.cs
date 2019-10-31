@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Numerics;
+using Windows.Storage;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -28,16 +29,21 @@ namespace Retouch_Photo2.ViewModels
             //Width Height
             this.CanvasTransformer.Width = project.Width;
             this.CanvasTransformer.Height = project.Height;
-
+            
             //Layers
             this.Layers.RootLayers.Clear();
-            foreach (ILayer layer in project.Layers)
+            if (project.Layers != null)
             {
-                if (layer != null)
+                foreach (ILayer layer in project.Layers)
                 {
-                    this.Layers.RootLayers.Add(layer);
+                    if (layer != null)
+                    {
+                        this.Layers.RootLayers.Add(layer);
+                    }
                 }
             }
+
+            //Arrange
             this.Layers.ArrangeLayersControlsWithClearAndAdd();
             this.Layers.ArrangeLayersParents();
             this.Layers.ArrangeChildrenExpand();
@@ -79,35 +85,6 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Occurs when create layer. </summary>
         public Action<Transformer, Vector2, InvalidateMode> TipWidthHeight { get; set; }
 
-
-        #region ImageRe
-
-
-        /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.Layers.Models.ImageLayer" />'s images. </summary>
-        public Stack<ImageRe> Images = new Stack<ImageRe>();
-        
-        /// <summary>
-        /// Check duplicate ImageRe.
-        /// If it exists, replace it, or insert it into the Images.
-        /// </summary>
-        /// <param name="imageRe"> The source ImageRe. </param>
-        public void DuplicateChecking(ImageRe imageRe)
-        {
-            foreach (ImageRe imageRe2 in Images)
-            {
-                if (imageRe2.Key == imageRe.Key)
-                {
-                    imageRe= imageRe2;
-                    return;
-                }
-            }
-
-            this.Images.Push(imageRe);//Images
-        }
-
-
-        #endregion
-        
 
         //@Notify 
         /// <summary> Multicast event for property change notifications. </summary>

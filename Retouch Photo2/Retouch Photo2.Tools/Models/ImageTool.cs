@@ -33,15 +33,13 @@ namespace Retouch_Photo2.Tools.Models
         public void Starting(Vector2 point) { }
         public void Started(Vector2 startingPoint, Vector2 point)
         {
-            ImageRe imageRe = this.SelectionViewModel.ImageRe;
+            ImageStr imageStr = this.SelectionViewModel.ImageStr;
+            if (imageStr.FolderRelativeId == null) { this._imagePage.TipSelect(); return; }
 
-            //ImageRe
-            if (imageRe == null)
-            {
-                this._imagePage.TipSelect();
-                return;
-            }
-            
+            ImageRe imageRe = ImageRe.FindFirstImage(imageStr);
+            if (imageRe == null) { this._imagePage.TipSelect(); return; }
+
+
             //Transformer
             this._sizeWidth = imageRe.Width;
             this._sizeHeight = imageRe.Height;
@@ -54,7 +52,7 @@ namespace Retouch_Photo2.Tools.Models
                 SelectMode = SelectMode.Selected,
                 TransformManager = new TransformManager(transformerSource, transformerDestination),
 
-                ImageRe = imageRe,
+                ImageStr = imageStr
             };
             this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.ViewModel.MezzanineLayer);
 

@@ -17,12 +17,11 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> <see cref = "Project" />'s width. </summary>
         public int Width { set; get; }
         /// <summary> <see cref = "Project" />'s height. </summary>
-        public int Height { set; get; }
-
+        public int Height { set; get; }        
         /// <summary> <see cref = "Project" />'s layers. </summary>
         public IEnumerable<ILayer> Layers;
 
-
+        
         //@Construct
         public Project()
         {
@@ -33,14 +32,14 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="imageLayer"> ImageLayer </param>
         public Project(ImageLayer imageLayer)
         {
-            CanvasBitmap bitmap = imageLayer.ImageRe.Source;
+            CanvasBitmap bitmap = ImageRe.FindFirstImageRe(imageLayer.ImageStr).Source;
 
             int width = (int)bitmap.SizeInPixels.Width;
             int height = (int)bitmap.SizeInPixels.Height;
 
             this.Width = width;
             this.Height = height;
-            this.Layers = new List<ILayer>()
+            this.Layers = new List<ILayer>
             {
                  imageLayer
             };

@@ -179,24 +179,24 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private bool isImageLayer;
-        /// <summary> <see cref = "SelectionViewModel" />'s ImageRe. </summary>
-        public ImageRe ImageRe
+        /// <summary> <see cref = "SelectionViewModel" />'s ImageStr. </summary>
+        public ImageStr ImageStr
         {
             get => this.imageRe;
             set
             {
                 this.imageRe = value;
-                this.OnPropertyChanged(nameof(this.ImageRe));//Notify 
+                this.OnPropertyChanged(nameof(this.ImageStr));//Notify 
             }
         }
-        private ImageRe imageRe;
+        private ImageStr imageRe;
         /// <summary> Sets ImageLayer. </summary>     
         private void SetImageLayer(ILayer layer)
         {
             if (layer is ImageLayer imageLayer)
             {
                 this.IsImageLayer = true;
-                this.ImageRe = imageLayer.ImageRe;
+                this.ImageStr = imageLayer.ImageStr;
             }
             else
             {

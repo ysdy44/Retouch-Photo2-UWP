@@ -46,7 +46,8 @@ namespace Retouch_Photo2.ViewModels
         public static Project LoadProject(XDocument document)
         {
             XElement root = document.Element("Root");
-            XElement rootLayer = root.Element("Layers");
+            XElement rootImages = root.Element("Images");
+            XElement rootLayers = root.Element("Layers");
 
             return new Project
             {
@@ -55,7 +56,7 @@ namespace Retouch_Photo2.ViewModels
                 Height = (int)root.Element("Height"),
                 Layers =
                     from layer
-                    in rootLayer.Elements()
+                    in rootLayers.Elements()
                     select Retouch_Photo2.Layers.XML.LoadILayer(layer)
             };
         }

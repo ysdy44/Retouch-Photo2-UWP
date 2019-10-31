@@ -119,11 +119,11 @@ namespace Retouch_Photo2.Controls
         private async Task AddImage(PickerLocationId location)
         {
             //ImageRe
-            ImageRe imageRe = await ImageRe.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, location);
+            ImageRe imageRe = await FileUtil.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, location);
             if (imageRe == null) return;
 
             //Images
-            this.ViewModel.DuplicateChecking(imageRe);
+            ImageRe.DuplicateChecking(imageRe);
 
             //Transformer
             Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
@@ -134,7 +134,7 @@ namespace Retouch_Photo2.Controls
                 SelectMode = SelectMode.Selected,
                 TransformManager = new TransformManager(transformerSource),
 
-                ImageRe = imageRe,
+                ImageStr = imageRe.ToImageStr(),
             };
 
             //Selection

@@ -148,11 +148,13 @@ namespace Retouch_Photo2.Controls
 
                     if (file != null)
                     {
-                        Stream stream = await file.OpenStreamForReadAsync();
-                        XDocument document = XDocument.Load(stream);
+                        using (Stream stream = await file.OpenStreamForReadAsync())
+                        {
+                            XDocument document = XDocument.Load(stream);
 
-                        IEnumerable<Filter> source = Retouch_Photo2.Adjustments.XML.LoadFilters(document);
-                        this.FilterListView.ItemsSource = source.ToList();
+                            IEnumerable<Filter> source = Retouch_Photo2.Adjustments.XML.LoadFilters(document);
+                            this.FilterListView.ItemsSource = source.ToList();
+                        }
                     }
                 }
             };

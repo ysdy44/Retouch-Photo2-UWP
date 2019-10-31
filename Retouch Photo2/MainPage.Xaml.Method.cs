@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Elements.MainPages;
 using Retouch_Photo2.Layers;
@@ -6,6 +7,8 @@ using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
@@ -52,13 +55,14 @@ namespace Retouch_Photo2
         {
             //Transition
             this.ViewModel.IsTransition = false;
+            this.ViewModel.CanvasTransformer.Transition(0.0f);
 
             Project project = new Project((int)pixels.Width, (int)pixels.Height);//Project
             this.ViewModel.LoadFromProject(project);
 
             this.Frame.Navigate(typeof(DrawPage));//Navigate   
         }
-        private void NewProjectFromPhoto(object sender, Photo photo)
+        private async void NewProjectFromPhoto(object sender, Photo photo)
         {
             if (this.State != MainPageState.Main) return;
 
@@ -68,6 +72,7 @@ namespace Retouch_Photo2
 
                 //Transition
                 this.ViewModel.IsTransition = true;
+                this.ViewModel.SetCanvasTransformerRadian(0.0f);
                 this.ViewModel.CanvasTransformer.Transition(0.0f);
 
                 Point postion = Retouch_Photo2.Menus.MenuHelper.GetVisualPostion(element);
@@ -76,13 +81,14 @@ namespace Retouch_Photo2
                 this.ViewModel.CanvasTransformer.TransitionSource(postion, width, height);
             }
 
-            if (photo.Path != null)
+            if (photo.ZipFilePath != null)
             {
-                //Create an XDocument object.
-                string path = photo.Path;
-                XDocument document = XDocument.Load(path);
+                await FileUtil.DeleteCacheAsync();
 
-                Project project = Retouch_Photo2.ViewModels.XML.LoadProject(document);
+                await FileUtil.ExtractToDirectory(photo.ZipFilePath);
+                await FileUtil.LoadImageRes(this.ViewModel.CanvasDevice);
+                Project project = FileUtil.LoadProject(this.ViewModel.CanvasDevice);
+
                 this.ViewModel.LoadFromProject(project);
             }
 
@@ -91,11 +97,11 @@ namespace Retouch_Photo2
         private async Task NewProjectFromPictures(PickerLocationId location)
         {
             //ImageRe
-            ImageRe imageRe = await ImageRe.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, location);
+            ImageRe imageRe = await FileUtil.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, location);
             if (imageRe == null) return;
 
             //Images
-            this.ViewModel.DuplicateChecking(imageRe);
+            ImageRe.DuplicateChecking(imageRe);
 
             //Transformer
             Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
@@ -104,7 +110,7 @@ namespace Retouch_Photo2
             ImageLayer imageLayer = new ImageLayer
             {
                 TransformManager = new TransformManager(transformerSource),
-                ImageRe = imageRe,
+                ImageStr = imageRe.ToImageStr(),
             };
 
             //Transition

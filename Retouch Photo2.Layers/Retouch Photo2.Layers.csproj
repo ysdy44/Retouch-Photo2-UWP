@@ -142,6 +142,8 @@
     <Compile Include="IconsSecond\GeometryTriangleIcon.xaml.cs">
       <DependentUpon>GeometryTriangleIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ImageRe.Instance.cs" />
+    <Compile Include="ImageStr.cs" />
     <Compile Include="LayerCollections\LayerCollection.Add_Disengage.cs" />
     <Compile Include="LayerCollections\LayerCollection.Arrange_Children_Expand.cs" />
     <Compile Include="LayerFactory.cs" />
@@ -211,6 +213,8 @@
     <Compile Include="Models\ImageLayer.cs" />
     <Compile Include="Models\GeometryRectangleLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XMLs\XML.ImageStr.cs" />
+    <Compile Include="XMLs\XML.ImageRe.cs" />
     <Compile Include="XMLs\XML.ILayer.cs" />
     <Compile Include="XMLs\XML.LayerFactory.cs" />
     <Compile Include="XMLs\XML.TransformManager.cs" />

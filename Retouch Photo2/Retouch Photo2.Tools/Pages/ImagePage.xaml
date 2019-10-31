@@ -33,7 +33,7 @@
 
     <StackPanel Orientation="Horizontal">
 
-        <TextBlock Text="{x:Bind SelectionViewModel.ImageRe,Mode=OneWay}" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock Text="{x:Bind SelectionViewModel.ImageStr,Mode=OneWay}" Style="{StaticResource AppTextBlock}"/>
 
         <ContentControl Width="4"/>
 

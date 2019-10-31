@@ -1,11 +1,9 @@
-﻿using Retouch_Photo2.Elements.MainPages;
+﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
-using System.Xml.Linq;
-using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -78,10 +76,8 @@ namespace Retouch_Photo2
 
         private void ConstructRenameDialog()
         {
-            this.RenameDialog.CloseButton.Click += (sender, args) =>
-            {
-                this.RenameDialog.Hide();
-            };
+            this.RenameDialog.CloseButton.Click += (sender, args) => this.RenameDialog.Hide();
+            
             this.RenameDialog.PrimaryButton.Click += (_, __) =>
             {
                 string name = this.TextBox.Text;
@@ -110,19 +106,18 @@ namespace Retouch_Photo2
             this.RenameDialog.Show();
         }
 
-        private void Save()
+        private async void Save()
         {
-            Project project = new Project
-            {
-                Name = this.ViewModel.Name,
-                Width = this.ViewModel.CanvasTransformer.Width,
-                Height = this.ViewModel.CanvasTransformer.Height,
-                Layers = this.ViewModel.Layers.RootLayers
-            };
-            XDocument document = Retouch_Photo2.ViewModels.XML.SaveProject(project);
+            string name = this.ViewModel.Name;
+            int width = this.ViewModel.CanvasTransformer.Width;
+            int height = this.ViewModel.CanvasTransformer.Height;
 
-            string path = $"{ApplicationData.Current.LocalFolder.Path}/{this.ViewModel.Name}.photo2";
-            document.Save(path);
+            await FileUtil.SaveImageRes();
+            await FileUtil.SaveProject(this.ViewModel.Layers.RootLayers, name, width, height);
+            await FileUtil.CreateFromDirectory(name);
+
+            Func<Matrix3x2, ICanvasImage> renderAction = this.MainCanvasControl.Render;
+            FileUtil.SaveThumbnailAsync(this.ViewModel.CanvasDevice, renderAction, name, width, height);
         }
 
 
@@ -152,6 +147,8 @@ namespace Retouch_Photo2
         }
         private async void NavigatedFrom()
         {
+            await FileUtil.DeleteCacheAsync();
+
             this.SelectionViewModel.SetModeNone();
             this.ViewModel.Layers.RootLayers.Clear();
             this.ViewModel.Layers.RootControls.Clear();

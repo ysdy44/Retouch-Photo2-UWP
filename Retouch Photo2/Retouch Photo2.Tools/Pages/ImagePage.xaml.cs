@@ -31,27 +31,27 @@ namespace Retouch_Photo2.Tools.Pages
         {
             this.InitializeComponent();
 
-            this.ClearButton.Tapped += (s, e) => this.SelectionViewModel.ImageRe = null;//ImageRe
+            this.ClearButton.Tapped += (s, e) => this.SelectionViewModel.ImageStr = new ImageStr();//ImageRe
             this.SelectButton.Tapped += async (s, e) =>
             {
                 //imageRe
-                ImageRe imageRe = await ImageRe.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, PickerLocationId.PicturesLibrary);
+                ImageRe imageRe = await FileUtil.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, PickerLocationId.PicturesLibrary);
                 if (imageRe == null) return;
 
                 //Images
-                this.ViewModel.DuplicateChecking(imageRe);
+                ImageRe.DuplicateChecking(imageRe);
 
-                this.SelectionViewModel.ImageRe = imageRe;//ImageRe
+                this.SelectionViewModel.ImageStr = imageRe.ToImageStr();//ImageRe
             };
 
             this.ReplaceButton.Tapped += async (s, e) =>
             {
                 //imageRe
-                ImageRe imageRe = await ImageRe.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, PickerLocationId.PicturesLibrary);
+                ImageRe imageRe = await FileUtil.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, PickerLocationId.PicturesLibrary);
                 if (imageRe == null) return;
 
                 //Images
-                this.ViewModel.DuplicateChecking(imageRe);
+                ImageRe.DuplicateChecking(imageRe);
 
                 //Transformer
                 Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
@@ -61,7 +61,7 @@ namespace Retouch_Photo2.Tools.Pages
                 {
                     if (layer is ImageLayer imageLayer)
                     {
-                        imageLayer.ImageRe = imageRe;
+                        imageLayer.ImageStr = imageRe.ToImageStr();
                         imageLayer.TransformManager.Source = transformerSource;
                     }
                 });
@@ -71,7 +71,7 @@ namespace Retouch_Photo2.Tools.Pages
             this.StackButton.Tapped += (s, e) =>
             {
                 this.ListView.ItemsSource = null;
-                this.ListView.ItemsSource = this.ViewModel.Images;
+                this.ListView.ItemsSource = ImageRe.Instances;
                 this.Flyout.ShowAt(this);//this.StackButton
             };
 
@@ -79,7 +79,7 @@ namespace Retouch_Photo2.Tools.Pages
             {
                 if (e.ClickedItem is ImageRe imageRe)
                 {
-                    this.SelectionViewModel.ImageRe = imageRe;//ImageRe
+                    this.SelectionViewModel.ImageStr = imageRe.ToImageStr();//ImageRe
                 }
             };
         }

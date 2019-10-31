@@ -96,16 +96,33 @@ namespace Retouch_Photo2.Controls
             }
         }
 
-        private void _drawRenderAndCrad(CanvasDrawingSession drawingSession)
+        /// <summary>
+        /// Render.
+        /// </summary>
+        /// <returns> The render image. </returns>
+        public ICanvasImage Render(Matrix3x2 canvasToVirtualMatrix)
         {
             ICanvasImage previousImage = new ColorSourceEffect { Color = Colors.White };
-
-            Matrix3x2 canvasToVirtualMatrix = this.ViewModel.CanvasTransformer.GetMatrix(MatrixTransformerMode.CanvasToVirtual);
 
             for (int i = this.ViewModel.Layers.RootLayers.Count - 1; i >= 0; i--)
             {
                 ILayer currentLayer = this.ViewModel.Layers.RootLayers[i];
                 previousImage = LayerBase.Render(this.ViewModel.CanvasDevice, currentLayer, previousImage, canvasToVirtualMatrix);
+            }
+
+            return previousImage;
+        }
+        private void _drawRenderAndCrad(CanvasDrawingSession drawingSession)
+        {
+            Matrix3x2 canvasToVirtualMatrix = this.ViewModel.CanvasTransformer.GetMatrix(MatrixTransformerMode.CanvasToVirtual);
+       //     ICanvasImage previousImage = this.Render(canvasToVirtualMatrix);
+            ICanvasImage previousImage = new ColorSourceEffect { Color = Colors.White };
+
+         for (int i = this.ViewModel.Layers.RootLayers.Count - 1; i >= 0; i--)
+           {
+               ILayer currentLayer = this.ViewModel.Layers.RootLayers[i];
+               ICanvasImage ss = LayerBase.Render(this.ViewModel.CanvasDevice, currentLayer, previousImage, canvasToVirtualMatrix);
+               if (ss != null) previousImage = ss;
             }
 
             //Crad
