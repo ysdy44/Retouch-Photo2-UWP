@@ -146,6 +146,7 @@
     <Compile Include="ImageStr.cs" />
     <Compile Include="LayerCollections\LayerCollection.Add_Disengage.cs" />
     <Compile Include="LayerCollections\LayerCollection.Arrange_Children_Expand.cs" />
+    <Compile Include="LayerCollections\LayerCollection.ControlHeight.cs" />
     <Compile Include="LayerFactory.cs" />
     <Compile Include="LayerType.cs" />
     <Compile Include="ModelsSecond\GeometryArrowLayer.cs" />
@@ -186,7 +187,6 @@
     <Compile Include="LayerControls\LayerControl.xaml.Control.cs" />
     <Compile Include="Layers\ILayer.cs" />
     <Compile Include="LayerCollections\LayerCollection.Arrange_Parents_Controls.cs" />
-    <Compile Include="LayerCollections\LayerCollection.ControlHeight.cs" />
     <Compile Include="LayerCollections\LayerCollection.cs" />
     <Compile Include="LayerCollections\LayerCollection.Drag_Move_Insert.cs" />
     <Compile Include="LayerCollections\LayerCollection.Group.cs" />

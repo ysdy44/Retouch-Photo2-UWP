@@ -1,6 +1,8 @@
 ﻿using FanKit.Transformers;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
+using System.Collections.Generic;
 using System.Numerics;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -66,56 +68,37 @@ namespace Retouch_Photo2.Controls
                     case ListViewSelectionMode.None:
                         {
                             //Transform
-                            con.FlipHorizontalButton.IsEnabled = false;
-                            con.FlipVerticalButton.IsEnabled = false;
-                            con.RotateLeftButton.IsEnabled = false;
-                            con.RotateRightButton.IsEnabled = false;
-
-                            //Align Horizontal
-                            con.AlignLeftButton.IsEnabled = false;
-                            con.AlignCenterButton.IsEnabled = false;
-                            con.AlignRightButton.IsEnabled = false;
-                            con.AlignSymmetryHorizontallyButton.IsEnabled = false;
-
-                            //Align Vertical
-                            con.AlignTopButton.IsEnabled = false;
-                            con.AlignMiddleButton.IsEnabled = false;
-                            con.AlignBottomButton.IsEnabled = false;
-                            con.AlignSymmetryVerticallyButton.IsEnabled = false;
-
+                            con.FlipHorizontalButton.IsEnabled = con.FlipVerticalButton.IsEnabled = con.RotateLeftButton.IsEnabled = con.RotateRightButton.IsEnabled = false;
                             //Arrange
-                            con.ArrangeMoveBackButton.IsEnabled = false;
-                            con.ArrangeBackOneButton.IsEnabled = false;
-                            con.ArrangeForwardOneButton.IsEnabled = false;
-                            con.ArrangeMoveFrontButton.IsEnabled = false;
+                            con.ArrangeMoveBackButton.IsEnabled = con.ArrangeBackOneButton.IsEnabled = con.ArrangeForwardOneButton.IsEnabled = con.ArrangeMoveFrontButton.IsEnabled = false;
+                            //Align Horizontal
+                            con.AlignLeftButton.IsEnabled = con.AlignCenterButton.IsEnabled = con.AlignRightButton.IsEnabled = con.AlignSymmetryHorizontallyButton.IsEnabled = false;
+                            //Align Vertical
+                            con.AlignTopButton.IsEnabled = con.AlignMiddleButton.IsEnabled = con.AlignBottomButton.IsEnabled = con.AlignSymmetryVerticallyButton.IsEnabled = false;
                         }
                         break;
                     case ListViewSelectionMode.Single:
+                        {
+                            //Transform
+                            con.FlipHorizontalButton.IsEnabled = con.FlipVerticalButton.IsEnabled = con.RotateLeftButton.IsEnabled = con.RotateRightButton.IsEnabled = true;
+                            //Arrange
+                            con.ArrangeMoveBackButton.IsEnabled = con.ArrangeBackOneButton.IsEnabled = con.ArrangeForwardOneButton.IsEnabled = con.ArrangeMoveFrontButton.IsEnabled = true;
+                            //Align Horizontal
+                            con.AlignLeftButton.IsEnabled = con.AlignCenterButton.IsEnabled = con.AlignRightButton.IsEnabled = con.AlignSymmetryHorizontallyButton.IsEnabled = true;
+                            //Align Vertical
+                            con.AlignTopButton.IsEnabled = con.AlignMiddleButton.IsEnabled = con.AlignBottomButton.IsEnabled = con.AlignSymmetryVerticallyButton.IsEnabled = true;
+                        }
+                        break;
                     case ListViewSelectionMode.Multiple:
                         {
                             //Transform
-                            con.FlipHorizontalButton.IsEnabled = true;
-                            con.FlipVerticalButton.IsEnabled = true;
-                            con.RotateLeftButton.IsEnabled = true;
-                            con.RotateRightButton.IsEnabled = true;
-
-                            //Align Horizontal
-                            con.AlignLeftButton.IsEnabled = true;
-                            con.AlignCenterButton.IsEnabled = true;
-                            con.AlignRightButton.IsEnabled = true;
-                            con.AlignSymmetryHorizontallyButton.IsEnabled = true;
-
-                            //Align Vertical
-                            con.AlignTopButton.IsEnabled = true;
-                            con.AlignMiddleButton.IsEnabled = true;
-                            con.AlignBottomButton.IsEnabled = true;
-                            con.AlignSymmetryVerticallyButton.IsEnabled = true;
-
+                            con.FlipHorizontalButton.IsEnabled = con.FlipVerticalButton.IsEnabled = con.RotateLeftButton.IsEnabled = con.RotateRightButton.IsEnabled = true;
                             //Arrange
-                            con.ArrangeMoveBackButton.IsEnabled = true;
-                            con.ArrangeBackOneButton.IsEnabled = true;
-                            con.ArrangeForwardOneButton.IsEnabled = true;
-                            con.ArrangeMoveFrontButton.IsEnabled = true;
+                            con.ArrangeMoveBackButton.IsEnabled = con.ArrangeBackOneButton.IsEnabled = con.ArrangeForwardOneButton.IsEnabled = con.ArrangeMoveFrontButton.IsEnabled = false;
+                            //Align Horizontal
+                            con.AlignLeftButton.IsEnabled = con.AlignCenterButton.IsEnabled = con.AlignRightButton.IsEnabled = con.AlignSymmetryHorizontallyButton.IsEnabled = true;
+                            //Align Vertical
+                            con.AlignTopButton.IsEnabled = con.AlignMiddleButton.IsEnabled = con.AlignBottomButton.IsEnabled = con.AlignSymmetryVerticallyButton.IsEnabled = true;
                         }
                         break;
                 }
@@ -204,6 +187,91 @@ namespace Retouch_Photo2.Controls
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
+            };
+
+
+            #endregion
+
+
+            #region Arrange
+
+
+            this.ArrangeMoveBackButton.Tapped += (s, e) =>
+            {
+                if (this.SelectionViewModel.SelectionMode== ListViewSelectionMode.Single)
+                {
+                    ILayer destination = this.SelectionViewModel.Layer;
+
+                    IList<ILayer> parentsChildren = (destination.Parents == null) ?
+                        this.ViewModel.Layers.RootLayers :
+                        destination.Parents.Children;
+
+                    parentsChildren.Remove(destination);
+                    parentsChildren.Add(destination);
+
+                    this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+                    this.ViewModel.Invalidate();//Invalidate
+                }
+            };
+
+            this.ArrangeBackOneButton.Tapped += (s, e) =>
+            {
+                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
+                {
+                    ILayer destination = this.SelectionViewModel.Layer;
+
+                    IList<ILayer> parentsChildren = (destination.Parents == null) ?
+                        this.ViewModel.Layers.RootLayers :
+                        destination.Parents.Children;
+
+                    int index = parentsChildren.IndexOf(destination);
+                    index++;
+
+                    parentsChildren.Remove(destination);
+                    parentsChildren.Insert(index, destination);
+
+                    this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+                    this.ViewModel.Invalidate();//Invalidate
+                }
+            };
+
+            this.ArrangeForwardOneButton.Tapped += (s, e) =>
+            {
+                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
+                {
+                    ILayer destination = this.SelectionViewModel.Layer;
+
+                    IList<ILayer> parentsChildren = (destination.Parents == null) ?
+                        this.ViewModel.Layers.RootLayers :
+                        destination.Parents.Children;
+
+                    int index = parentsChildren.IndexOf(destination);
+                    index--;
+
+                    parentsChildren.Remove(destination);
+                    parentsChildren.Insert(index, destination);
+
+                    this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+                    this.ViewModel.Invalidate();//Invalidate
+                }
+            };
+
+            this.ArrangeMoveFrontButton.Tapped += (s, e) =>
+            {
+                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
+                {
+                    ILayer destination = this.SelectionViewModel.Layer;
+
+                    IList<ILayer> parentsChildren = (destination.Parents == null) ?
+                        this.ViewModel.Layers.RootLayers :
+                        destination.Parents.Children;
+
+                    parentsChildren.Remove(destination);
+                    parentsChildren.Insert(0, destination);
+
+                    this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+                    this.ViewModel.Invalidate();//Invalidate
+                }
             };
 
 
@@ -327,33 +395,6 @@ namespace Retouch_Photo2.Controls
                 this._vsIsVertically = true;
                 this.VisualState = this.VisualState;//State
             };
-
-            #endregion
-
-
-            #region Arrange
-
-
-            this.ArrangeMoveBackButton.Tapped += (s, e) =>
-            {
-
-            };
-
-            this.ArrangeBackOneButton.Tapped += (s, e) =>
-            {
-
-            };
-
-            this.ArrangeForwardOneButton.Tapped += (s, e) =>
-            {
-
-            };
-
-            this.ArrangeMoveFrontButton.Tapped += (s, e) =>
-            {
-
-            };
-
 
             #endregion
 

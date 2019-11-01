@@ -86,6 +86,8 @@ namespace Retouch_Photo2.Controls
                     this.DragDestinationLayer = null;
                     this.DragLayerSelectMode = SelectMode.None;
                     this.DragLayerOverlayMode = OverlayMode.None;
+
+                    this.ViewModel.Invalidate();//Invalidate
                 };
             }
         }

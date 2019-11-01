@@ -28,7 +28,7 @@
         <TextBlock Style="{StaticResource AppTextBlock}">
             Mode
         </TextBlock>
-        <Border Height="Auto" Style="{ThemeResource AppRoundedBorderStyle}">
+        <Border Height="Auto" MaxHeight="120" Style="{ThemeResource AppRoundedBorderStyle}">
             <StackPanel Orientation="Horizontal">
 
                 <RadioButton x:Name="MirroredRadioButton"  Tag="Mirrored" Style="{StaticResource AppTapRadioButtonStyle}">
