@@ -1,9 +1,11 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
+using Windows.Graphics.Imaging;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -12,6 +14,7 @@ namespace Retouch_Photo2
     public sealed partial class DrawPage : Page
     {
 
+        //ViewModel
         private void ConstructViewModel()
         {
             this.MainCanvasControl.ConstructViewModel();
@@ -48,7 +51,7 @@ namespace Retouch_Photo2
                 }
             };
         }
-
+        //KeyboardViewModel
         private void ConstructKeyboardViewModel()
         {
             //Move
@@ -74,6 +77,53 @@ namespace Retouch_Photo2
         }
 
 
+        //File
+        private void ConstructFileButton()
+        {
+            this.HomeButton.Tapped += (s, e) =>
+            {
+                this.Flyout.Hide();
+                this.NavigatedFrom();
+            };
+            this.SaveButton.Tapped += (s, e) =>
+            {
+                this.Flyout.Hide();
+                if (this.ViewModel.Name == null)
+                    this.ShowRenameDialog();
+                else
+                    this.Save();
+            };
+            this.RenameButton.Tapped += (s, e) =>
+            {
+                this.Flyout.Hide();
+                this.ShowRenameDialog();
+            };
+            this.ExportButton.Tapped += (s, e) =>
+            {
+                this.Flyout.Hide();
+                this.ShowExportDialog();
+            };
+            this.ShareButton.Tapped += (s, e) =>
+            {
+                this.Flyout.Hide();
+                this.ShowShareDialog();
+            };
+            this.SetupButton.Tapped += (s, e) =>
+            {
+                this.Flyout.Hide();
+                this.ShowSetupDialog();
+            };
+        }
+        private void ConstructFileDialog()
+        {
+            this.ConstructRenameDialog();
+            this.ConstructExportDialog();
+            this.ConstructShareDialog();
+            this.ConstructSetupDialog();
+        }
+
+
+        //Rename
         private void ConstructRenameDialog()
         {
             this.RenameDialog.CloseButton.Click += (sender, args) => this.RenameDialog.Hide();
@@ -92,20 +142,75 @@ namespace Retouch_Photo2
                         {
                             this.ViewModel.Name = name;
                             this.Save();
-
                             this.RenameDialog.Hide();
                             return;
                         }
                     }
                 }
             };
-        }
-        
+        }        
         private void ShowRenameDialog()
         {
             this.RenameDialog.Show();
         }
 
+        //Export
+        private void ConstructExportDialog()
+        {
+            this.ExportDialog.CloseButton.Click += (sender, args) => this.ExportDialog.Hide();
+
+            this.ExportDialog.PrimaryButton.Click += async (_, __) =>
+            {
+                FormatType type = this.ExportFormatComboBox.Format;
+
+                this.Export(type);
+            };
+        }
+        private void ShowExportDialog()
+        {
+            this.ExportDialog.Show();
+        }
+
+        //Share
+        private void ConstructShareDialog()
+        {
+            this.ShareDialog.CloseButton.Click += (sender, args) => this.ShareDialog.Hide();
+
+            this.ShareDialog.PrimaryButton.Click += async (_, __) =>
+            {
+                FormatType type = this.ShareFormatComboBox.Format;
+
+                this.Share(type);
+            };
+        }
+        private void ShowShareDialog()
+        {
+            this.ShareDialog.Show();
+        }
+
+        //Setup
+        private void ConstructSetupDialog()
+        {
+            this.SetupDialog.CloseButton.Click += (sender, args) => this.SetupDialog.Hide();
+
+            this.SetupDialog.PrimaryButton.Click += (_, __) =>
+            {
+                this.SetupDialog.Hide();
+
+                BitmapSize size = this.SetupSizePicker.Size;
+
+                this.ViewModel.CanvasTransformer.Width = (int)size.Width;
+                this.ViewModel.CanvasTransformer.Height = (int)size.Height;
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+        private void ShowSetupDialog()
+        {
+            this.SetupDialog.Show();
+        }
+
+        //Save
         private async void Save()
         {
             string name = this.ViewModel.Name;
@@ -119,8 +224,49 @@ namespace Retouch_Photo2
             Func<Matrix3x2, ICanvasImage> renderAction = this.MainCanvasControl.Render;
             FileUtil.SaveThumbnailAsync(this.ViewModel.CanvasDevice, renderAction, name, width, height);
         }
+        //Export
+        private async void Export(FormatType type)
+        {
+            /*        
+            CanvasBitmap cb=null;
+            IStorageFolder Folder = Application.Current.Exit;
 
 
+            StorageFile file = await Folder.CreateFileAsync(Name + ".jpg", CreationCollisionOption.GenerateUniqueName);
+            using (var fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                await cb.SaveAsync(fileStream, CanvasBitmapFileFormat.Jpeg);
+            }
+             */
+
+
+            switch (type)
+            {
+                case FormatType.JPEG:
+                    break;
+                case FormatType.PNG:
+                    break;
+                case FormatType.BMP:
+                    break;
+                case FormatType.GIF:
+                    break;
+                case FormatType.TIFF:
+                    break;
+            }
+        }
+        //Share
+        private async void Share(FormatType type)
+        {
+
+        }
+        //Setup
+        private void Setup(int width, int height)
+        {
+
+        }
+
+
+        //Navigated
         private void NavigatedTo()
         {
             //Transition

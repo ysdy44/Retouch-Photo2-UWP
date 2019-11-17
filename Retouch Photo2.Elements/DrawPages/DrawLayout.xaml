@@ -283,9 +283,9 @@
                 <ColumnDefinition Width="10*" MaxWidth="420"/>
             </Grid.ColumnDefinitions>
 
-            <!--Back-->
-            <Button x:Name="_BackButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
-                <FontIcon Glyph="&#xE0D5;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+            <!--File-->
+            <Button x:Name="_FileButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
+                <FontIcon Glyph="&#xE700;" FontSize="24" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
             </Button>
 
             <!--HeadLeft-->

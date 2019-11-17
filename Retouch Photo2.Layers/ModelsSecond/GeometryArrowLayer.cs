@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
@@ -59,7 +60,20 @@ namespace Retouch_Photo2.Layers.Models
                 this.LeftTail, this.RightTail
            );
         }
+               
 
+        public IEnumerable<IEnumerable<Node>> ConvertToCurves()
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.ConvertToCurvesFromArrow(transformer,
+
+                this.IsAbsolute,
+                this.Width,
+                this.Value,
+
+                this.LeftTail, this.RightTail);
+        }
 
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
@@ -76,8 +90,7 @@ namespace Retouch_Photo2.Layers.Models
             LayerBase.CopyWith(resourceCreator, ArrowLayer, this);
             return ArrowLayer;
         }
-
-
+        
         public void SaveWith(XElement element)
         {            
             element.Add(new XElement("IsAbsolute", this.IsAbsolute));
@@ -93,19 +106,9 @@ namespace Retouch_Photo2.Layers.Models
             this.Width = (float)element.Element("Width");
             this.Value = (float)element.Element("Value");
 
-            this.LeftTail = this._load(element.Element("LeftTail"));
-            this.RightTail = this._load(element.Element("RightTail"));
+            this.LeftTail = FanKit.Transformers.XML.CreateGeometryArrowTailType(element.Element("LeftTail").Value);
+            this.RightTail = FanKit.Transformers.XML.CreateGeometryArrowTailType(element.Element("RightTail").Value);
         }
-        private GeometryArrowTailType _load(XElement element)
-        {
-            switch (element.Value)
-            {
-                case "None": return GeometryArrowTailType.None;
-                case "Arrow": return GeometryArrowTailType.Arrow;
-            }
-            return GeometryArrowTailType.None;
-        }
-
 
     }
 }

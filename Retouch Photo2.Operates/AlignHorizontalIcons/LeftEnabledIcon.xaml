@@ -10,9 +10,13 @@
     >
 
     <Canvas Width="40" Height="40" >
-        <Rectangle Canvas.Left="5" Canvas.Top="2" Width="3"  Height="35" Fill="LimeGreen"/>
-        <Rectangle Canvas.Left="10" Canvas.Top="10" Width="17"  Height="8" Fill="Gray"/>
-        <Rectangle Canvas.Left="10" Canvas.Top="22" Width="25"  Height="8" Fill="Gray"/>
+        <Rectangle Canvas.Left="5" Canvas.Top="2" Width="3" Height="35" Fill="LimeGreen"/>
+        <Rectangle Canvas.Left="10" Canvas.Top="10" Width="17" Height="8" 
+                   RadiusX="2" RadiusY="2"
+                   Fill="Gray"/>
+        <Rectangle Canvas.Left="10" Canvas.Top="22" Width="25" Height="8" 
+                   RadiusX="2" RadiusY="2"
+                   Fill="Gray"/>
     </Canvas>
     
 </UserControl>

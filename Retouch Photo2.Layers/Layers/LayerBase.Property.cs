@@ -48,10 +48,10 @@ namespace Retouch_Photo2.Layers
         public bool IsRefactoringTransformer { get; set; }
         public virtual Transformer GetActualDestinationWithRefactoringTransformer => this.TransformManager.IsCrop ? this.TransformManager.CropDestination : this.TransformManager.Destination;
 
+        public StyleManager StyleManager { get; set; } = new StyleManager();
         public TransformManager TransformManager { get; set; } = new TransformManager();
         public EffectManager EffectManager { get; set; } = new EffectManager();
         public AdjustmentManager AdjustmentManager { get; set; } = new AdjustmentManager();
-        public StyleManager StyleManager { get; set; } = new StyleManager();
         
         private ILayer parents;
         public ILayer Parents
@@ -85,6 +85,7 @@ namespace Retouch_Photo2.Layers
             destination.BlendType = source.BlendType;
             destination.Visibility = source.Visibility;
 
+            destination.StyleManager = source.StyleManager.Clone();
             destination.TransformManager = source.TransformManager.Clone();
             destination.EffectManager = source.EffectManager.Clone();
             foreach (IAdjustment adjustment in source.AdjustmentManager.Adjustments)
@@ -103,6 +104,14 @@ namespace Retouch_Photo2.Layers
         //@Virtual
         public virtual void CacheTransform()
         {
+            this.StyleManager.CacheTransform();
+            this.TransformManager.CacheTransform();
+
+            foreach (ILayer child in this.Children)
+            {
+                child.CacheTransform();
+            }
+
             //RefactoringTransformer
             if (this.parents != null)
             {
@@ -111,31 +120,26 @@ namespace Retouch_Photo2.Layers
                     groupLayer.IsRefactoringTransformer = true;
                 }
             }
-
-            foreach (ILayer child in this.Children)
-            {
-                child.CacheTransform();
-            }
-            this.TransformManager.CacheTransform();
-            this.StyleManager.CacheTransform();
         }
         public virtual void TransformMultiplies(Matrix3x2 matrix)
         {
+            this.StyleManager.TransformMultiplies(matrix);
+            this.TransformManager.TransformMultiplies(matrix);
+
             foreach (ILayer child in this.Children)
             {
                 child.TransformMultiplies(matrix);
             }
-            this.TransformManager.TransformMultiplies(matrix);
-            this.StyleManager.TransformMultiplies(matrix);
         }
         public virtual void TransformAdd(Vector2 vector)
         {
+            this.StyleManager.TransformAdd(vector);
+            this.TransformManager.TransformAdd(vector);
+
             foreach (ILayer child in this.Children)
             {
                 child.TransformAdd(vector);
             }
-            this.TransformManager.TransformAdd(vector);
-            this.StyleManager.TransformAdd(vector);
         }
 
     }

@@ -5,13 +5,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:controls="using:Retouch_Photo2.Controls"
     xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:elementDialog="using:Retouch_Photo2.Elements.Dialogs"
     xmlns:layers="using:Retouch_Photo2.Layers"
     xmlns:toolElements="using:Retouch_Photo2.Tools.Elements"
-    xmlns:mainpages="using:Retouch_Photo2.Elements.MainPages"
-    xmlns:elementDialog="using:Retouch_Photo2.Elements.Dialogs"    
     NavigationCacheMode="Required"    
     mc:Ignorable="d"
     >
@@ -54,9 +52,76 @@
                 </DoubleAnimationUsingKeyFrames>
             </Storyboard>
 
+            <!--Flyout-->
+            <Flyout x:Name="Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <StackPanel Width="190">
+
+                    <elements:IconButton x:Name="HomeButton">
+                        <elements:IconButton.Icon>
+                            <FontIcon Glyph="&#xE80F;" FontSize="23" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        </elements:IconButton.Icon>
+                        <elements:IconButton.Text>
+                            Home
+                        </elements:IconButton.Text>
+                    </elements:IconButton>
+                    
+                    <Rectangle Width="Auto" Height="1" Margin="40,0,4,0" HorizontalAlignment="Stretch" Fill="{ThemeResource AppBorderBrush}"/>
+
+                    <elements:IconButton x:Name="SaveButton">
+                        <elements:IconButton.Icon>
+                            <FontIcon Glyph="&#xE105;" FontSize="22" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </elements:IconButton.Icon>
+                        <elements:IconButton.Text>
+                            Save
+                        </elements:IconButton.Text>
+                    </elements:IconButton>
+                    <elements:IconButton x:Name="RenameButton">
+                        <elements:IconButton.Icon>
+                            <FontIcon Glyph="&#xE104;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </elements:IconButton.Icon>
+                        <elements:IconButton.Text>
+                            Rename
+                        </elements:IconButton.Text>
+                    </elements:IconButton>
+                    
+                    <Rectangle Width="Auto" Height="1" Margin="40,0,4,0" HorizontalAlignment="Stretch" Fill="{ThemeResource AppBorderBrush}"/>
+
+                    <elements:IconButton x:Name="ExportButton">
+                        <elements:IconButton.Icon>
+                            <FontIcon Glyph="&#xE17C;" FontSize="24" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </elements:IconButton.Icon>
+                        <elements:IconButton.Text>
+                            Export
+                        </elements:IconButton.Text>
+                    </elements:IconButton>
+
+                    <elements:IconButton x:Name="ShareButton">
+                        <elements:IconButton.Icon>
+                            <FontIcon Glyph="&#xE72D;" FontSize="22" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </elements:IconButton.Icon>
+                        <elements:IconButton.Text>
+                            Share
+                        </elements:IconButton.Text>
+                    </elements:IconButton>
+
+                    <Rectangle Width="Auto" Height="1" Margin="40,0,4,0" HorizontalAlignment="Stretch" Fill="{ThemeResource AppBorderBrush}"/>
+
+                    <elements:IconButton x:Name="SetupButton">
+                        <elements:IconButton.Icon>
+                            <FontIcon Glyph="&#xE123;" FontSize="22" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </elements:IconButton.Icon>
+                        <elements:IconButton.Text>
+                            Document Setup
+                        </elements:IconButton.Text>
+                    </elements:IconButton>
+
+                </StackPanel>
+            </Flyout>
+
         </Grid.Resources>
 
         <elements:DrawLayout x:Name="DrawLayout" 
+               LeftIcon="{x:Bind IconConverter(TipViewModel.Tool),Mode=OneWay}"
                Touchbar="{x:Bind TipViewModel.TouchbarControl,Mode=OneWay}"                                             
                Theme="{x:Bind RequestedTheme, Mode=OneWay}"
                >
@@ -92,20 +157,6 @@
             <elements:DrawLayout.HeadLeftPane>
                 <elements:ExpandAppbar x:Name="ExpandAppbar">
                     <elements:ExpandAppbar.Children>
-
-                        <elements:ExpandAppbarButton x:Name="SaveButton">
-                            <ToolTipService.ToolTip>
-                                <ToolTip Content="Save" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
-                            </ToolTipService.ToolTip>
-                            <elements:ExpandAppbarButton.CenterContent>
-                                <FontIcon Glyph="&#xE105;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                            </elements:ExpandAppbarButton.CenterContent>
-                            <elements:ExpandAppbarButton.Text>
-                                Save
-                            </elements:ExpandAppbarButton.Text>
-                        </elements:ExpandAppbarButton>
-
-                        <elements:ExpandAppBarSapce/>
 
                         <elements:ExpandAppbarButton x:Name="UndoButton">
                             <ToolTipService.ToolTip>
@@ -223,26 +274,59 @@
             </elements:LoadingControl.Text>
         </elements:LoadingControl>
 
-        <!--Dialog-->
+        <!--#region Dialog-->
+
+
         <elementDialog:DialogBase x:Name="RenameDialog">
             <elementDialog:DialogBase.Title>
-                <StackPanel Orientation="Horizontal">
-                    <Button x:Name="ExpanedButton" VerticalAlignment="Center" Style="{ThemeResource TextBlockButtonStyle}">
-                        <FontIcon Glyph="&#xE96E;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                    </Button>
-                    <TextBlock VerticalAlignment="Center" FontSize="20">
-                        Rename Current Project
-                    </TextBlock>
-                </StackPanel>
+                <TextBlock FontSize="22" Style="{StaticResource SubheaderTextBlockStyle}">
+                    Rename Current Project
+                </TextBlock>
             </elementDialog:DialogBase.Title>
             <elementDialog:DialogBase.CenterContent>
-                <TextBox x:Name="TextBox" VerticalAlignment="Top">
+                <TextBox x:Name="TextBox" VerticalAlignment="Center" BorderThickness="1">
                     <TextBox.Text>
                         Unsdasd
                     </TextBox.Text>
                 </TextBox>
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>
+
+        <elementDialog:DialogBase x:Name="ExportDialog">
+            <elementDialog:DialogBase.Title>
+                <TextBlock FontSize="22" Style="{StaticResource SubheaderTextBlockStyle}">
+                    Export Settings
+                </TextBlock>
+            </elementDialog:DialogBase.Title>
+            <elementDialog:DialogBase.CenterContent>
+                <elements:FormatComboBox x:Name="ExportFormatComboBox"/>
+            </elementDialog:DialogBase.CenterContent>
+        </elementDialog:DialogBase>
+
+        <elementDialog:DialogBase x:Name="ShareDialog">
+            <elementDialog:DialogBase.Title>
+                <TextBlock FontSize="22" Style="{StaticResource SubheaderTextBlockStyle}">
+                    Share
+                </TextBlock>
+            </elementDialog:DialogBase.Title>
+            <elementDialog:DialogBase.CenterContent>
+                <elements:FormatComboBox x:Name="ShareFormatComboBox"/>
+            </elementDialog:DialogBase.CenterContent>
+        </elementDialog:DialogBase>
+
+        <elementDialog:DialogBase x:Name="SetupDialog">
+            <elementDialog:DialogBase.Title>
+                <TextBlock FontSize="22" Style="{StaticResource SubheaderTextBlockStyle}">
+                   Document Setup
+                </TextBlock>
+            </elementDialog:DialogBase.Title>
+            <elementDialog:DialogBase.CenterContent>
+                <elements:SizePicker x:Name="SetupSizePicker"/>
+            </elementDialog:DialogBase.CenterContent>
+        </elementDialog:DialogBase>
+
+
+        <!--#endregion-->
 
     </Grid>
 </Page>

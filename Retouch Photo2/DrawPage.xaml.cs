@@ -26,7 +26,11 @@ namespace Retouch_Photo2
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         static bool _isLoaded;
-        
+
+        //@Converter
+        private FrameworkElement IconConverter(ITool tool) => tool.Icon;
+
+
         #region DependencyProperty
 
 
@@ -79,13 +83,21 @@ namespace Retouch_Photo2
             this.ConstructViewModel();
             this.ConstructKeyboardViewModel();
 
-            //Dialog
-            this.ConstructRenameDialog();
+            //Layers
+            this.LayersControl.WidthButton.Tapped += (s, e) => this.DrawLayout.PadChangeLayersWidth();
+
+            // File button flyout.
+            this.DrawLayout.FileButton.Tapped += (s, e) => this.Flyout.ShowAt(this.DrawLayout.FileButton);
+            this.ConstructFileButton();
+            this.ConstructFileDialog();
+
+            // Binding own DependencyProperty to the Storyboard
+            Storyboard.SetTarget(this.TransitionKeyFrames, this);
+            this.TransitionKeyFrames.Completed += (s, e) => this.NavigatedToComplete();
 
             //MoreButton
             MoreTransformButton.Flyout = this.MoreTransformFlyout;
             MoreCreateButton.Flyout = this.MoreCreateFlyout;
-
             this.Loaded += (s, e) =>
             {
                 if (DrawPage._isLoaded == false)
@@ -93,25 +105,12 @@ namespace Retouch_Photo2
                     DrawPage._isLoaded = true;
                     this.NavigatedTo();
                 }
-            };
-
-
-            // Binding own DependencyProperty to the Storyboard
-            Storyboard.SetTarget(this.TransitionKeyFrames, this);
-            this.TransitionKeyFrames.Completed += (s, e) => this.NavigatedToComplete();
-            this.DrawLayout.BackButton.Tapped += (s, e) => this.NavigatedFrom();
-
+            };          
+            
 
             //Button
             this.UnFullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = false;
             this.FullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = true;
-            this.SaveButton.Tapped += (s, e) =>
-            {
-                if (this.ViewModel.Name==null)
-                    this.ShowRenameDialog();
-                else
-                    this.Save();
-            };
             this.ThemeButton.Tapped += (s, e) =>
             {
                 //Trigger switching theme.
@@ -125,11 +124,7 @@ namespace Retouch_Photo2
                 this.SettingViewModel.WriteToLocalFolder();//Write
             };
 
-
-            //Layers
-            this.LayersControl.WidthButton.Tapped += (s, e) => this.DrawLayout.PadChangeLayersWidth();
-
-
+                       
             //Tool
             foreach (ITool tool in this.TipViewModel.Tools)
             {

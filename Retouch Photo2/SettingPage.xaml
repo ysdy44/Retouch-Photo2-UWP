@@ -224,13 +224,21 @@
                         <ToggleButton Tag="IsStepFrequency" Content="Space" IsChecked="{x:Bind KeyboardViewModel.IsStepFrequency, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
 
                         <ToggleButton Tag="FullScreen" Content="Esc" IsChecked="{x:Bind KeyboardViewModel.IsFullScreen, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
-                      
-                        
+
+
                         <!--Local-->
                         <TextBlock Style="{StaticResource TitleTextBlockStyle}">
                             Local Folder
                         </TextBlock>
-                        <Button x:Name="LocalFolderButton" Content="Open" Width="100" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}"/>
+                        <Button x:Name="LocalFolderButton" HorizontalAlignment="Left" Style="{ThemeResource AppTagLineCircleButton}">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xE17C;" FontSize="24" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                <ContentControl Width="8"/>
+                                <TextBlock VerticalAlignment="Center">
+                                    Open
+                                </TextBlock>
+                            </StackPanel>
+                        </Button>
 
 
                         <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseFooter}"/>

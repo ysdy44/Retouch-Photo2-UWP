@@ -4,49 +4,40 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignHeight="800"
     d:DesignWidth="200"
     >
-
+    
     <UserControl.Resources>
         <!--Flyout-->
-        <Flyout x:Name="Flyout" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <StackPanel Width="190">
 
                 <TextBlock Style="{StaticResource AppTextBlock}">
                     Add Image
                 </TextBlock>
 
-                <Grid Margin="2,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}">
-                        Pictures
-                    </TextBlock>
-                    <Button x:Name="PhotoButton" Grid.Column="1" Style="{StaticResource AppCircleButtonStyle}">
+                <elements:IconButton x:Name="PhotoButton">
+                    <elements:IconButton.Icon>
                         <FontIcon Glyph="&#xEB9F;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
-                    </Button>
-                </Grid>
+                    </elements:IconButton.Icon>
+                    <elements:IconButton.Text>
+                        Pictures
+                    </elements:IconButton.Text>
+                </elements:IconButton>
 
-                <ContentControl Height="2"/>
-
-                <Grid Margin="2,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}">
-                        Destop
-                    </TextBlock>
-                    <Button x:Name="DestopButton" Grid.Column="1" Style="{StaticResource AppCircleButtonStyle}">
+                <elements:IconButton x:Name="DestopButton">
+                    <elements:IconButton.Icon>
                         <FontIcon Glyph="&#xEC4E;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
-                    </Button>
-                </Grid>
+                    </elements:IconButton.Icon>
+                    <elements:IconButton.Text>
+                        Destop
+                    </elements:IconButton.Text>
+                </elements:IconButton>
 
-                <Rectangle Width="Auto" Height="1" Margin="2,4" HorizontalAlignment="Stretch" Fill="{ThemeResource AppForeground}"/>
+                <Rectangle Width="Auto" Height="1" Margin="40,0,4,0" HorizontalAlignment="Stretch" Fill="{ThemeResource AppBorderBrush}"/>
 
                 <TextBlock Style="{StaticResource AppTextBlock}">
                     Change Height
@@ -54,39 +45,29 @@
 
                 <Slider x:Name="HeightSlider" Margin="2" Minimum="40" Maximum="80" StepFrequency="10" Style="{StaticResource AppOpacitySliderStyle}"/>
 
-                <ContentControl Height="2"/>
-
-                <Grid Margin="2,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}">
-                       Change Width
-                    </TextBlock>
-                    <Button x:Name="_WidthButton" Grid.Column="1" Style="{StaticResource AppCircleButtonStyle}">
+                <elements:IconButton x:Name="_WidthButton">
+                    <elements:IconButton.Icon>
                         <FontIcon Glyph="&#xE746;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
-                    </Button>
-                </Grid>
+                    </elements:IconButton.Icon>
+                    <elements:IconButton.Text>
+                        Change Width
+                    </elements:IconButton.Text>
+                </elements:IconButton>
 
-                <Rectangle Width="Auto" Height="1" Margin="2,4" HorizontalAlignment="Stretch" Fill="{ThemeResource AppForeground}"/>
+                <Rectangle Width="Auto" Height="1" Margin="40,0,4,0" HorizontalAlignment="Stretch" Fill="{ThemeResource AppBorderBrush}"/>
 
-                <Grid Margin="2,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}">
-                        Show Menu
-                    </TextBlock>
-                    <Button x:Name="LayoutButton" Grid.Column="1" Style="{StaticResource AppCircleButtonStyle}">
+                <elements:IconButton x:Name="LayoutButton">
+                    <elements:IconButton.Icon>
                         <FontIcon  Glyph="&#xE81E;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
-                    </Button>
-                </Grid>
-
-                <ContentControl Height="2"/>
+                    </elements:IconButton.Icon>
+                    <elements:IconButton.Text>
+                        Show Menu
+                    </elements:IconButton.Text>
+                </elements:IconButton>
 
             </StackPanel>
+
+
         </Flyout>
     </UserControl.Resources>
 

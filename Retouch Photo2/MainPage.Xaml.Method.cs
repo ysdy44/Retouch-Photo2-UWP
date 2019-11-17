@@ -125,15 +125,6 @@ namespace Retouch_Photo2
 
         private void ConstructAddDialog()
         {
-            this.WidthNumberPicker.Unit = "px";
-            this.HeighNumberPicker.Unit = "px";
-            this.WidthNumberPicker.Minimum = 16;
-            this.HeighNumberPicker.Minimum = 16;
-            this.WidthNumberPicker.Maximum = 16384;
-            this.HeighNumberPicker.Maximum = 16384;
-            this.WidthNumberPicker.Value = 1024;
-            this.HeighNumberPicker.Value = 1024;
-
             this.AddDialog.CloseButton.Click += (sender, args) =>
             {
                 this.AddDialog.Hide();
@@ -142,13 +133,9 @@ namespace Retouch_Photo2
             {
                 this.AddDialog.Hide();
 
-                BitmapSize pixels = new BitmapSize()
-                {
-                    Width = (uint)this.WidthNumberPicker.Value,
-                    Height = (uint)this.HeighNumberPicker.Value
-                };
+                BitmapSize size = this.AddSizePicker.Size;
 
-                this.NewProjectFromSize(pixels);
+                this.NewProjectFromSize(size);
             };
         }
 

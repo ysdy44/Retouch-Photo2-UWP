@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
@@ -46,6 +47,13 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
+        public IEnumerable<IEnumerable<Node>> ConvertToCurves()
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.ConvertToCurvesFromDiamond(transformer, this.Mid);
+        }
+
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryDiamondLayer DiamondLayer = new GeometryDiamondLayer
@@ -56,8 +64,7 @@ namespace Retouch_Photo2.Layers.Models
             LayerBase.CopyWith(resourceCreator, DiamondLayer, this);
             return DiamondLayer;
         }
-
-
+        
         public void SaveWith(XElement element)
         {            
             element.Add(new XElement("Mid", this.Mid));

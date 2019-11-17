@@ -9,12 +9,20 @@
         None,
 
         //Geometry0            
-        /// <summary> Geometry rectangle. </summary>                           
+        /// <summary> Rectangle geometry. </summary>                           
         GeometryRectangle,
-        /// <summary> Geometry ellipse. </summary>
+        /// <summary> Rllipse geometry. </summary>
         GeometryEllipse,
-        /// <summary> Geometry curve. </summary>
+
+        /// <summary> Curve geometry. </summary>
         GeometryCurve,
+        /// <summary> Multi-curve geometry. </summary>
+        GeometryCurveMulti,
+
+        /// <summary> Frame Text. </summary>
+        TextFrame,
+        /// <summary> Artistic Text. </summary>
+        TextArtistic,
 
         /// <summary> Image. </summary>
         Image,
@@ -24,35 +32,35 @@
         Group,
 
         //Geometry1
-        /// <summary> Geometry round-rect. </summary>
+        /// <summary> Round-rect geometry. </summary>
         GeometryRoundRect,
-        /// <summary> Geometry triangle. </summary>
+        /// <summary> Triangle geometry. </summary>
         GeometryTriangle,
-        /// <summary> Geometry diamond. </summary>
+        /// <summary> Diamond geometry. </summary>
         GeometryDiamond,
 
         //Geometry2
-        /// <summary> Geometry pentagon. </summary>
+        /// <summary> Pentagon geometry. </summary>
         GeometryPentagon,
-        /// <summary> Geometry star. </summary>
+        /// <summary> Star geometry. </summary>
         GeometryStar,
-        /// <summary> Geometry cog. </summary>
+        /// <summary> Cog geometry. </summary>
         GeometryCog,
 
         //Geometry3
-        /// <summary> Geometry dount. </summary>
+        /// <summary> Dount geometry. </summary>
         GeometryDount,
-        /// <summary> Geometry pie. </summary>
+        /// <summary> Pie geometry. </summary>
         GeometryPie,
-        /// <summary> Geometry cookie. </summary>
+        /// <summary> Cookie geometry. </summary>
         GeometryCookie,
 
         //Geometry4
-        /// <summary> Geometry arrow. </summary>
+        /// <summary> Arrow geometry. </summary>
         GeometryArrow,
-        /// <summary> Geometry capsule. </summary>
+        /// <summary> Capsule geometry. </summary>
         GeometryCapsule,
-        /// <summary> Geometry heart,. </summary>
+        /// <summary> Heart geometry,. </summary>
         GeometryHeart,
     }
 }

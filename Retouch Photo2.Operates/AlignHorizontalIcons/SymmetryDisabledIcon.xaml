@@ -10,9 +10,9 @@
     >
 
     <Canvas Width="40" Height="40" >
-        <Rectangle Canvas.Left="18.5" Canvas.Top="2.5" Width="3"  Height="35" Fill="Gray" Opacity="0.5"/>
-        <Rectangle Canvas.Left="6" Canvas.Top="7" Width="9"  Height="25" Fill="Gray" Opacity="0.5"/>
-        <Rectangle Canvas.Left="25" Canvas.Top="12" Width="8"  Height="17" Fill="Gray" Opacity="0.5"/>
+        <Rectangle Canvas.Left="3.5" Canvas.Top="2.5" Width="3" Height="35" Fill="Gray" Opacity="0.5"/>
+        <Rectangle Canvas.Left="14" Canvas.Top="7" Width="9" Height="25" Fill="Gray" Opacity="0.5"/>
+        <Rectangle Canvas.Left="31.5" Canvas.Top="2.5" Width="3" Height="35" Fill="Gray" Opacity="0.5"/>
     </Canvas>
-    
+
 </UserControl>

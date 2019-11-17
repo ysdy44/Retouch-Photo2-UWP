@@ -11,7 +11,7 @@
 
     <Canvas Width="40" Height="40" >
         <Polygon Points="35,4 35,23 27,23 27,12 16,12 16,4" Fill="Gray" />
-        <Rectangle Canvas.Left="4" Canvas.Top="14" Width="21"  Height="21" Fill="#E2A747" />
+        <Rectangle Canvas.Left="4" Canvas.Top="14" Width="21" Height="21" Fill="#E2A747" />
     </Canvas>
     
 </UserControl>

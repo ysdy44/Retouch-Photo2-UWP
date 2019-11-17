@@ -1,7 +1,9 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
+using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
@@ -47,6 +49,18 @@ namespace Retouch_Photo2.Layers.Models
         {
             Transformer transformer = base.TransformManager.Destination;
 
+            if (base.Parents!=null)
+            {
+                CanvasCommandList command = new CanvasCommandList(resourceCreator);
+                using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
+                {
+                    CanvasGeometry geometry = transformer.ToRectangle(resourceCreator, canvasToVirtualMatrix);
+                    //Fill
+                    this.StyleManager.FillGeometry(resourceCreator, drawingSession, geometry, canvasToVirtualMatrix);
+                }
+                return command;
+            }
+
             Vector2 leftTop = Vector2.Transform(transformer.LeftTop, canvasToVirtualMatrix);
             Vector2 rightBottom = Vector2.Transform(transformer.RightBottom, canvasToVirtualMatrix);
 
@@ -75,6 +89,9 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
 
+
+        public IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;
+
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             AcrylicLayer acrylicLayer = new AcrylicLayer
@@ -87,7 +104,6 @@ namespace Retouch_Photo2.Layers.Models
             return acrylicLayer;
         }
         
-
         public void SaveWith(XElement element)
         {
             element.Add(new XElement("TintOpacity", this.TintOpacity));

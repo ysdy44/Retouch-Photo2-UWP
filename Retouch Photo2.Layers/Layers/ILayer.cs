@@ -40,21 +40,27 @@ namespace Retouch_Photo2.Layers
         /// <summary> Gets ILayer's actually transformer. </summary>
         Transformer GetActualDestinationWithRefactoringTransformer { get; }
 
+        /// <summary> Gets or sets ILayer's style manager. </summary>
+        StyleManager StyleManager { get; set; }
         /// <summary> Gets or sets ILayer's transformer. </summary>
         TransformManager TransformManager { get; set; }
         /// <summary> Gets or sets ILayer's effect manager. </summary>
         EffectManager EffectManager { get; set; }
         /// <summary> Gets or sets ILayer's adjustment manager. </summary>
         AdjustmentManager AdjustmentManager { get; set; }
-        /// <summary> Gets or sets ILayer's style manager. </summary>
-        StyleManager StyleManager { get; set; }
 
 
         /// <summary> Gets or sets ILayer's children layers. </summary>
         IList<ILayer> Children { get; set; }
         /// <summary> Gets or sets ILayer's parent layer. </summary>
         ILayer Parents { get; set; }
-        
+
+
+        /// <summary>
+        ///  Convert to curves.
+        /// </summary>
+        /// <returns> The product curves. </returns>
+        IEnumerable<IEnumerable<Node>> ConvertToCurves();
 
         /// <summary>
         /// Get ILayer own copy.

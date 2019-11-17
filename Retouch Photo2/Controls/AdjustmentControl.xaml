@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:adjustments="using:Retouch_Photo2.Adjustments"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:menus="using:Retouch_Photo2.Menus"
     mc:Ignorable="d"
     d:DesignWidth="200"
@@ -117,8 +118,8 @@
 
                         <Setter Target = "AdjustmentPageBorder.Visibility" Value="Visible"/>
                         
-                        <Setter Target = "AddBorder.Visibility" Value="Collapsed"/>
-                        <Setter Target = "FilterBorder.Visibility" Value="Collapsed"/>
+                        <Setter Target = "AddButton.Visibility" Value="Collapsed"/>
+                        <Setter Target = "FilterButton.Visibility" Value="Collapsed"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -131,8 +132,8 @@
                         
                         <Setter Target = "FilterListView.Visibility" Value="Visible"/>
 
-                        <Setter Target = "AddBorder.Visibility" Value="Collapsed"/>
-                        <Setter Target = "FilterBorder.Visibility" Value="Collapsed"/>
+                        <Setter Target = "AddButton.Visibility" Value="Collapsed"/>
+                        <Setter Target = "FilterButton.Visibility" Value="Collapsed"/>
                      
                     </VisualState.Setters>
                 </VisualState>
@@ -197,23 +198,23 @@
         </ListView>
 
         <!--Foot-->
-        <Border x:Name="AddBorder" Grid.Row="3" Margin="2" Style="{StaticResource AppRoundedBorderStyle}">
-            <Button x:Name="AddButton" Style="{StaticResource AppTagRoundedButton}">
-                <Button.Tag>
-                    Add Adjustment
-                </Button.Tag>
+        <elements:IconRoundedBorderButton x:Name="AddButton" Grid.Row="3" Margin="2">
+            <elements:IconRoundedBorderButton.Text>
+                Add Adjustment
+            </elements:IconRoundedBorderButton.Text>
+            <elements:IconRoundedBorderButton.Icon>
                 <FontIcon FontSize="18" Glyph="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-            </Button>
-        </Border>
-        <Border x:Name="FilterBorder" Grid.Row="4" Margin="2" Style="{StaticResource AppRoundedBorderStyle}">
-            <Button x:Name="FilterButton" Style="{StaticResource AppTagRoundedButton}">
-                <Button.Tag>
-                    Default Filters
-                </Button.Tag>
+            </elements:IconRoundedBorderButton.Icon>
+        </elements:IconRoundedBorderButton>
+        <elements:IconRoundedBorderButton x:Name="FilterButton" Grid.Row="4" Margin="2">
+            <elements:IconRoundedBorderButton.Text>
+                Default Filters
+            </elements:IconRoundedBorderButton.Text>
+            <elements:IconRoundedBorderButton.Icon>
                 <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-            </Button>
-        </Border>
-
+            </elements:IconRoundedBorderButton.Icon>
+        </elements:IconRoundedBorderButton>
+        
     </Grid>
     
 </UserControl>

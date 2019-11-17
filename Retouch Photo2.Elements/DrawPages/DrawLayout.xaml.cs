@@ -11,8 +11,8 @@ namespace Retouch_Photo2.Elements
     public sealed partial class DrawLayout : UserControl
     {
         //@Content
-        /// <summary> BackButton. </summary>
-        public Button BackButton => this._BackButton;
+        /// <summary> FileButton. </summary>
+        public Button FileButton => this._FileButton;
         /// <summary> CenterBorder's Child. </summary>
         public UIElement CenterChild { get => this.CenterBorder.Child; set => this.CenterBorder.Child = value; }
 

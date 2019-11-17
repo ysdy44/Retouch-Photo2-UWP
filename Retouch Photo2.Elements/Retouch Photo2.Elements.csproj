@@ -111,6 +111,13 @@
       <DependentUpon>CompositeModeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ApplicationViewTitleBarBackgroundExtension.cs" />
+    <Compile Include="Controls\FormatComboBox.xaml.cs">
+      <DependentUpon>FormatComboBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FormatType.cs" />
+    <Compile Include="Controls\SizePicker.xaml.cs">
+      <DependentUpon>SizePicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DialogBase.xaml.cs">
       <DependentUpon>DialogBase.xaml</DependentUpon>
     </Compile>
@@ -141,6 +148,9 @@
     <Compile Include="ExpandAppbars\ExpandAppBarSapce.cs" />
     <Compile Include="ExpandAppbars\ExpandAppBarSeparator.cs" />
     <Compile Include="ExpandAppbars\IExpandAppbarElement.cs" />
+    <Compile Include="IconButtons\IconRoundedBorderButton.xaml.cs">
+      <DependentUpon>IconRoundedBorderButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPages\MainPageButton.xaml.cs">
       <DependentUpon>MainPageButton.xaml</DependentUpon>
     </Compile>
@@ -182,6 +192,9 @@
     <Compile Include="Controls\ThemeControl.xaml.cs">
       <DependentUpon>ThemeControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IconButtons\IconButton.xaml.cs">
+      <DependentUpon>IconButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingPages\AdaptiveWidthGrid.xaml.cs">
       <DependentUpon>AdaptiveWidthGrid.xaml</DependentUpon>
     </Compile>
@@ -197,9 +210,6 @@
     <EmbeddedResource Include="Properties\Retouch_Photo.Elements.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FanKit.Transformers">
-      <Version>1.3.7</Version>
-    </PackageReference>
     <PackageReference Include="HsvColorPickers">
       <Version>1.3.4</Version>
     </PackageReference>
@@ -221,6 +231,14 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="CompositeModeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FormatComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SizePicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -253,6 +271,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ExpandAppbars\ExpandAppbarButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="IconButtons\IconRoundedBorderButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -308,6 +330,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="IconButtons\IconButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SettingPages\AdaptiveWidthGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -325,6 +351,13 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\FanKit.Transformers\FanKit.Transformers\FanKit.Transformers.csproj">
+      <Project>{a98a4671-07f5-46c7-bad2-9fa0242d2855}</Project>
+      <Name>FanKit.Transformers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -5,6 +5,7 @@
     xmlns:local="using:Retouch_Photo2.Elements.MainPages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="800">
@@ -59,25 +60,7 @@
             </Run>
         </TextBlock>
 
-        <Border MinWidth="90" CornerRadius="2" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}">
-            <ComboBox x:Name="ComboBox" SelectedIndex="0" BorderThickness="0" HorizontalAlignment="Stretch">
-                <ComboBoxItem>
-                    JPEG
-                </ComboBoxItem>
-                <ComboBoxItem BorderThickness="0,0,0,1" BorderBrush="{ThemeResource MenuFlyoutItemPointerOverBackgroundThemeBrush}">
-                    PNG
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    BMP
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    GIF
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    TIFF
-                </ComboBoxItem>
-            </ComboBox>
-        </Border>
+        <elements:FormatComboBox x:Name="_ComboBox"/>
 
         <StackPanel Orientation="Horizontal" Margin="8,0" HorizontalAlignment="Right">
             <local:MainPageButton x:Name="_OKButton" Glyph="&#xE10B;">

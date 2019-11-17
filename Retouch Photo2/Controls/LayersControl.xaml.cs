@@ -31,7 +31,7 @@ namespace Retouch_Photo2.Controls
         /// <summary> IndicatorBorder. </summary>
         public Border IndicatorBorder => this._IndicatorBorder;
         /// <summary> WidthButton. </summary>
-        public Button WidthButton => this._WidthButton;
+        public Control WidthButton => this._WidthButton;
 
 
         //LayerCollection

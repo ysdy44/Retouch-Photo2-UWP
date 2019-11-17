@@ -10,7 +10,7 @@
     >
 
     <Canvas Width="40" Height="40" >
-        <Rectangle Canvas.Left="10" Canvas.Top="10" Width="20"  Height="20" Fill="#E2A747" />
+        <Rectangle Canvas.Left="10" Canvas.Top="10" Width="20" Height="20" Fill="#E2A747" />
         <Polygon Points="35,5 35,17 31,17 31,9 23,9 23,5" Fill="Gray" />
         <Polygon Points="9,31 17,31 17,35 5,35 5,23 9,23" Fill="Gray" />
     </Canvas>

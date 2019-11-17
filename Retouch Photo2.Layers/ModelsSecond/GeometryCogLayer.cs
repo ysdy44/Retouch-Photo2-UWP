@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
@@ -58,7 +59,19 @@ namespace Retouch_Photo2.Layers.Models
                 this.Notch
            );
         }
+        
 
+        public IEnumerable<IEnumerable<Node>> ConvertToCurves()
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.ConvertToCurvesFromCog(transformer,
+                this.Count,
+                this.InnerRadius,
+
+                this.Tooth,
+                this.Notch);
+        }
 
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
@@ -73,8 +86,7 @@ namespace Retouch_Photo2.Layers.Models
             LayerBase.CopyWith(resourceCreator, cogLayer, this);
             return cogLayer;
         }
-
-
+        
         public void SaveWith(XElement element)
         {            
             element.Add(new XElement("Count", this.Count));

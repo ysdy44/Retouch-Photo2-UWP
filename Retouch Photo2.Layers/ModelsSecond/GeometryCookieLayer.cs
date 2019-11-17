@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
@@ -39,7 +40,6 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
 
-
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
             Transformer transformer = base.TransformManager.Destination;
@@ -48,14 +48,20 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public IEnumerable<IEnumerable<Node>> ConvertToCurves()
         {
-            GeometryCookieLayer CookieLayer = new GeometryCookieLayer();
+            Transformer transformer = base.TransformManager.Destination;
 
-            LayerBase.CopyWith(resourceCreator, CookieLayer, this);
-            return CookieLayer;
+            return TransformerGeometry.ConvertToCurvesFromCookie(transformer, this.InnerRadius, this.SweepAngle);
         }
 
+        public ILayer Clone(ICanvasResourceCreator resourceCreator)
+        {
+            GeometryCookieLayer cookieLayer = new GeometryCookieLayer();
+
+            LayerBase.CopyWith(resourceCreator, cookieLayer, this);
+            return cookieLayer;
+        }
 
         public void SaveWith(XElement element)
         {            

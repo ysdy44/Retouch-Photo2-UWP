@@ -58,6 +58,10 @@ namespace Retouch_Photo2
                  new PenTool(),
                  null,
 
+                 new TextArtisticTool(),
+                 new TextFrameTool(),
+                 null,
+
                  new ImageTool(),
                  new AcrylicTool(),
                  new CropTool(),

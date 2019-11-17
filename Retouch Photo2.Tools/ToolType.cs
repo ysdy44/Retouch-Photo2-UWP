@@ -25,6 +25,11 @@
         /// <summary> Pen curve tool. </summary>
         Pen,
 
+        /// <summary> Create frame text. </summary>
+        TextFrame,
+        /// <summary> Create artistic text. </summary>
+        TextArtistic,
+
         /// <summary> Create image layer. </summary>
         Image,
         /// <summary> Create acrylic layer. </summary>

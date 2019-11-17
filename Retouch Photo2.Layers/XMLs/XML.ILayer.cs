@@ -32,10 +32,10 @@ namespace Retouch_Photo2.Layers
                 element.Add(new XElement("Visibility", layer.Visibility));
                 element.Add(new XElement("TagType", layer.TagType));
 
+                element.Add(Retouch_Photo2.Brushs.XML.SaveStyleManager("StyleManager", layer.StyleManager));
                 element.Add(XML.SaveTransformManager("TransformManager", layer.TransformManager));
                 element.Add(Retouch_Photo2.Effects.XML.SaveEffectManager("EffectManager", layer.EffectManager));
                 element.Add(Retouch_Photo2.Adjustments.XML.SaveAdjustmentManager("AdjustmentManager", layer.AdjustmentManager));
-                element.Add(Retouch_Photo2.Brushs.XML.SaveStyleManager("StyleManager", layer.StyleManager));
 
                 element.Add(new XElement
                 (
@@ -68,10 +68,10 @@ namespace Retouch_Photo2.Layers
                 layer.Visibility = XML.CreateVisibility(element.Element("Visibility").Value);
                 layer.TagType = Retouch_Photo2.Blends.XML.CreateTagType(element.Element("TagType").Value);
 
+                layer.StyleManager = Retouch_Photo2.Brushs.XML.LoadStyleManager(element.Element("StyleManager"));
                 layer.TransformManager = XML.LoadTransformManager(element.Element("TransformManager"));
                 layer.EffectManager = Retouch_Photo2.Effects.XML.LoadEffectManager(element.Element("EffectManager"));
                 layer.AdjustmentManager = Retouch_Photo2.Adjustments.XML.LoadAdjustmentManager(element.Element("AdjustmentManager"));
-                layer.StyleManager = Retouch_Photo2.Brushs.XML.LoadStyleManager(element.Element("StyleManager"));
 
                 XElement children = element.Element("Children");
                 foreach (XElement child in children.Elements())

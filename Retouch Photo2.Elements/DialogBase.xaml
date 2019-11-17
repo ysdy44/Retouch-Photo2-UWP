@@ -97,7 +97,7 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="2"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="_CloseButton" Grid.Column="1" HorizontalAlignment="Stretch" Style="{StaticResource AppTagAccentLineCircleButton}">
+                <Button x:Name="_CloseButton" Grid.Column="1" HorizontalAlignment="Stretch" Style="{StaticResource AppTagLineCircleButton}">
                     <TextBlock>
                         Cancel
                     </TextBlock>

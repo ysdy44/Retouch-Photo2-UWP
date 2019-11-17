@@ -44,9 +44,16 @@
                      />
             </tools:TouchbarButton.TouchbarSlider>
         </tools:TouchbarButton>
-        
+
         <ContentControl Width="4"/>
-        
+
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Convert to curves
+        </TextBlock>
+        <toolsElements:ConvertToCurvesButton/>
+
+        <ContentControl Width="4"/>
+
         <toolsElements:MoreCreateButton/>
 
     </StackPanel>

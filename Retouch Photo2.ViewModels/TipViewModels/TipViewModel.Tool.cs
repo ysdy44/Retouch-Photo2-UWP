@@ -36,6 +36,23 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Tools. </summary>
         public IList<ITool> Tools { get; set; } = new List<ITool>();
 
+        /// <summary>
+        /// Change tools group value.
+        /// </summary>
+        /// <param name="currentType"> The current type. </param>
+        public void ToolGroupType(ToolType currentType)
+        {
+            foreach (ITool tool in this.Tools)
+            {
+                if (tool != null)
+                {
+                    bool isSelected = (tool.Type == currentType);
+
+                    tool.Button.IsSelected = isSelected;
+                    tool.Page.IsSelected = isSelected;
+                }
+            }
+        }
 
         /// <summary> Touchbar's control. </summary>
         public UIElement TouchbarControl

@@ -92,6 +92,8 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
+        public IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;
+
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryCurveLayer curveLayer = new GeometryCurveLayer
@@ -105,24 +107,14 @@ namespace Retouch_Photo2.Layers.Models
 
         public void SaveWith(XElement element)
         {
-            element.Add(new XElement
+            element.Add
             (
-                "Nodes",
-                from n
-                in this.Nodes
-                select FanKit.Transformers.XML.SaveNode("Node", n)
-            ));
+                FanKit.Transformers.XML.SaveNodeCollection("Nodes", "Node", this.Nodes)
+            );
         }
         public void Load(XElement element)
         {
-            XElement node = element.Element("Nodes");
-
-            this.Nodes = new NodeCollection
-            (
-                from n
-                in node.Elements()
-                select FanKit.Transformers.XML.LoadNode(n)
-            );
+            this.Nodes = FanKit.Transformers.XML.LoadNodeCollection("Node", element.Element("Nodes"));
         }
 
     }

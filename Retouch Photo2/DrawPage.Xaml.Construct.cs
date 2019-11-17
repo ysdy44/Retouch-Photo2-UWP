@@ -45,12 +45,9 @@ namespace Retouch_Photo2
                 this._tempToolButtonType = tool.Button.Type;
                 tool.Button.Self.Tapped += (s, e) =>
                 {
-                    //Group
-                    this.ToolGroupType(tool.Type);
+                    this.TipViewModel.ToolGroupType(tool.Type);
 
-                    //Changed
                     this.TipViewModel.Tool = tool;
-                    this.DrawLayout.LeftIcon = tool.Icon;
 
                     this.ViewModel.Invalidate();//Invalidate
                 };
@@ -67,20 +64,6 @@ namespace Retouch_Photo2
             }
         }
 
-
-        private void ToolGroupType(ToolType currentType)
-        {
-            foreach (ITool tool in this.TipViewModel.Tools)
-            {
-                if (tool != null)
-                {
-                    bool isSelected = (tool.Type == currentType);
-
-                    tool.Button.IsSelected = isSelected;
-                    tool.Page.IsSelected = isSelected;
-                }
-            }
-        }
 
         private void ToolFirst()
         {

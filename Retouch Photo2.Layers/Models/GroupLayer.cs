@@ -1,6 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Layers.Icons;
+using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
@@ -74,11 +75,13 @@ namespace Retouch_Photo2.Layers.Models
             return groupLayer;
         }
 
+        public IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;
 
         public void SaveWith(XElement element)
         {
             element.Add( new XElement("GroupLayer"));
         }
+        //public void Load(XElement element) { }
 
     }
 }

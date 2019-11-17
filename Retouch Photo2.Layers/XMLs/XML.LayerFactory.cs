@@ -24,6 +24,9 @@ namespace Retouch_Photo2.Layers
                 case "GeometryEllipse": return new GeometryEllipseLayer();
                 case "GeometryCurve": return new GeometryCurveLayer(element);
 
+                case "TextArtistic": return new TextArtisticLayer(element);
+                case "TextFrame": return new TextFrameLayer(element);
+
                 case "Image": return new ImageLayer(element);
                 case "Acrylic": return new AcrylicLayer(element);
                 case "Group": return new GroupLayer();
@@ -39,9 +42,9 @@ namespace Retouch_Photo2.Layers
                 case "GeometryCog": return new GeometryCogLayer(element);
 
                 //Geometry3
-                case "GeometryDount": return new GeometryPieLayer(element);
+                case "GeometryDount": return new GeometryDountLayer(element);
                 case "GeometryPie": return new GeometryPieLayer(element);
-                case "GeometryCookie": return new GeometryPieLayer(element);
+                case "GeometryCookie": return new GeometryCookieLayer(element);
 
                 //Geometry4
                 case "GeometryArrow": return new GeometryArrowLayer(element);

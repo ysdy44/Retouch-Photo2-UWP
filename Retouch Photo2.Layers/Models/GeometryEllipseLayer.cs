@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
+using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
 
@@ -38,6 +39,14 @@ namespace Retouch_Photo2.Layers.Models
             return transformer.ToEllipse(resourceCreator, canvasToVirtualMatrix);
         }
 
+
+        public IEnumerable<IEnumerable<Node>> ConvertToCurves()
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.ConvertToCurvesFromEllipse(transformer);
+        }
+
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryEllipseLayer ellipseLayer = new GeometryEllipseLayer();
@@ -46,8 +55,8 @@ namespace Retouch_Photo2.Layers.Models
             return ellipseLayer;
         }
 
-
         public void SaveWith(XElement element) { }
+        //public void Load(XElement element) { }
 
     }
 }

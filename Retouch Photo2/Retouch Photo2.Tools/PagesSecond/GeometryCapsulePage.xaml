@@ -12,6 +12,13 @@
 
     <StackPanel Orientation="Horizontal">
 
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Convert to curves
+        </TextBlock>
+        <toolsElements:ConvertToCurvesButton/>
+
+        <ContentControl Width="4"/>
+
         <toolsElements:MoreCreateButton/>
         
     </StackPanel>

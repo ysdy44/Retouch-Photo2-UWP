@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>
         /// <param name="canvasToVirtualMatrix"> The canvas-to-virtual matrix. </param>
-        /// <returns> geometry </returns>
+        /// <returns> The product geometry. </returns>
         public abstract CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix);
                 
 

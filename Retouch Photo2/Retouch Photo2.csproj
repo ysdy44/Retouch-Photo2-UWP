@@ -192,6 +192,12 @@
       <DependentUpon>AcrylicButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Buttons\NoneButton.cs" />
+    <Compile Include="Retouch Photo2.Tools\Buttons\TextArtisticButton.xaml.cs">
+      <DependentUpon>TextArtisticButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\Buttons\TextFrameButton.xaml.cs">
+      <DependentUpon>TextFrameButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Tools\Buttons\TransparencyButton.xaml.cs">
       <DependentUpon>TransparencyButton.xaml</DependentUpon>
     </Compile>
@@ -250,8 +256,13 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Retouch Photo2.Tools\Elements\ConvertToCurvesButton.xaml.cs">
+      <DependentUpon>ConvertToCurvesButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Tools\ModelsSecond\GeometryCookieTool.cs" />
     <Compile Include="Retouch Photo2.Tools\ModelsSecond\GeometryDountTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\TextArtisticTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\TextFrameTool.cs" />
     <Compile Include="Retouch Photo2.Tools\PagesSecond\GeometryArrowPage.xaml.cs">
       <DependentUpon>GeometryArrowPage.xaml</DependentUpon>
     </Compile>
@@ -305,6 +316,12 @@
       <DependentUpon>CropPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Pages\NonePage.cs" />
+    <Compile Include="Retouch Photo2.Tools\Pages\TextArtisticPage.xaml.cs">
+      <DependentUpon>TextArtisticPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\Pages\TextFramePage.xaml.cs">
+      <DependentUpon>TextFramePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Tools\Pages\TransparencyPage.xaml.cs">
       <DependentUpon>TransparencyPage.xaml</DependentUpon>
     </Compile>
@@ -529,6 +546,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Retouch Photo2.Tools\Buttons\TextArtisticButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\Buttons\TextFrameButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Retouch Photo2.Tools\Buttons\TransparencyButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -605,6 +630,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Retouch Photo2.Tools\Elements\ConvertToCurvesButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Retouch Photo2.Tools\PagesSecond\GeometryArrowPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -656,6 +685,14 @@
     <Page Include="Retouch Photo2.Tools\Pages\CropPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\Pages\TextArtisticPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\Pages\TextFramePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Retouch Photo2.Tools\Pages\TransparencyPage.xaml">
       <SubType>Designer</SubType>
@@ -731,6 +768,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\..\FanKit.Transformers\FanKit.Transformers\FanKit.Transformers.csproj">
+      <Project>{a98a4671-07f5-46c7-bad2-9fa0242d2855}</Project>
+      <Name>FanKit.Transformers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Adjustment\Retouch Photo2.Adjustments.csproj">
       <Project>{7256c005-0e5d-4c38-9115-e4eef9978233}</Project>
       <Name>Retouch Photo2.Adjustments</Name>

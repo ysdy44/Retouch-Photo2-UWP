@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
@@ -37,8 +38,7 @@ namespace Retouch_Photo2.Layers.Models
                 Text = "Pentagon",
             };
         }
-
-
+        
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
             Transformer transformer = base.TransformManager.Destination;
@@ -46,6 +46,13 @@ namespace Retouch_Photo2.Layers.Models
             return TransformerGeometry.CreatePentagon(resourceCreator, transformer, canvasToVirtualMatrix, this.Points);
         }
 
+
+        public IEnumerable<IEnumerable<Node>> ConvertToCurves()
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.ConvertToCurvesFromPentagon(transformer, this.Points);
+        }
 
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
@@ -57,7 +64,6 @@ namespace Retouch_Photo2.Layers.Models
             LayerBase.CopyWith(resourceCreator, PentagonLayer, this);
             return PentagonLayer;
         }
-
 
         public void SaveWith(XElement element)
         {

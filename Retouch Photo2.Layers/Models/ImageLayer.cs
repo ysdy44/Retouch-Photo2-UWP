@@ -4,6 +4,7 @@ using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Layers.Icons;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
@@ -104,6 +105,9 @@ namespace Retouch_Photo2.Layers.Models
             return command;
         }
 
+
+        public IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;
+
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             ImageLayer imageLayer= new ImageLayer
@@ -114,8 +118,7 @@ namespace Retouch_Photo2.Layers.Models
             LayerBase.CopyWith(resourceCreator, imageLayer, this);
             return imageLayer;
         }
-
-
+        
         public void SaveWith(XElement element)
         {
             element.Add(XML.SaveImageStr("ImageStr", this.ImageStr));
