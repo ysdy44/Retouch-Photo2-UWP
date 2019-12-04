@@ -8,7 +8,7 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 
-namespace Retouch_Photo2.Layers
+namespace Retouch_Photo2.Elements
 {
     /// <summary>
     /// Image of <see cref="ImageRe">.

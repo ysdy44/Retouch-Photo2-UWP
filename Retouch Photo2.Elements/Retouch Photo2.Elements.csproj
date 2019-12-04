@@ -151,6 +151,9 @@
     <Compile Include="IconButtons\IconRoundedBorderButton.xaml.cs">
       <DependentUpon>IconRoundedBorderButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Images\ImageRe.cs" />
+    <Compile Include="Images\ImageRe.Instance.cs" />
+    <Compile Include="Images\ImageStr.cs" />
     <Compile Include="MainPages\MainPageButton.xaml.cs">
       <DependentUpon>MainPageButton.xaml</DependentUpon>
     </Compile>
@@ -207,6 +210,8 @@
     <Compile Include="SettingPages\PhoneLayout.xaml.cs">
       <DependentUpon>PhoneLayout.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XMLs\XML.ImageRe.cs" />
+    <Compile Include="XMLs\XML.ImageStr.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo.Elements.rd.xml" />
   </ItemGroup>
   <ItemGroup>

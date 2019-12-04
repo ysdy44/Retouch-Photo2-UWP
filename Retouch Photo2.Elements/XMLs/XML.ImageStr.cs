@@ -1,9 +1,6 @@
-﻿using Retouch_Photo2.Blends;
-using System.Linq;
-using System.Xml.Linq;
-using Windows.UI.Xaml;
+﻿using System.Xml.Linq;
 
-namespace Retouch_Photo2.Layers
+namespace Retouch_Photo2.Elements
 {
     /// <summary>
     /// Provide constant and static methods for XElement.

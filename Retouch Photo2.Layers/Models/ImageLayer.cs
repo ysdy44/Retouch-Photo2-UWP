@@ -3,6 +3,7 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,29 +16,11 @@ namespace Retouch_Photo2.Layers.Models
     /// <summary>
     /// <see cref="LayerBase"/>'s ImageLayer .
     /// </summary>
-    public class ImageLayer : LayerBase, ILayer
+    public class ImageLayer : IGeometryLayer, ILayer
     {
 
         //@Override     
         public override LayerType Type => LayerType.Image;
-
-        //@Content
-        /// <summary> <see cref = "ImageLayer" />'s image. </summary>
-        public ImageStr ImageStr { get; set; }
-
-        public CanvasBitmap CanvasBitmap
-        {
-            get
-            {
-                if (this.canvasBitmap == null)
-                {
-                    //Find the first image.
-                    this.canvasBitmap = ImageRe.FindFirstImageRe(this.ImageStr).Source;
-                }
-                return this.canvasBitmap;
-            }
-        }
-        private CanvasBitmap canvasBitmap;
 
 
         //@Construct   
@@ -59,61 +42,24 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
-        {
-            if (base.StyleManager.FillBrush.Type == BrushType.None)
-            {
-                if (base.StyleManager.StrokeBrush.Type == BrushType.None)
-                {
-                    return this._getImage(canvasToVirtualMatrix);
-                }
-            }
-
-            return new CompositeEffect
-            {
-                Sources =
-                {
-                    this._getRectangle(resourceCreator ,canvasToVirtualMatrix),
-                    this._getImage(canvasToVirtualMatrix),
-                }
-            };
-        }
-        private ICanvasImage _getImage(Matrix3x2 canvasToVirtualMatrix)
-        {
-            Matrix3x2 matrix = base.TransformManager.GetMatrix();
-
-            return new Transform2DEffect
-            {
-                Source = this.CanvasBitmap,
-                TransformMatrix = matrix * canvasToVirtualMatrix
-            };
-        }
-        private ICanvasImage _getRectangle(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
             Transformer transformer = base.TransformManager.Destination;
 
-            CanvasCommandList command = new CanvasCommandList(resourceCreator);
-            using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
-            {
-                CanvasGeometry geometry = transformer.ToRectangle(resourceCreator, canvasToVirtualMatrix);
-
-                //Fill
-                this.StyleManager.FillGeometry(resourceCreator, drawingSession, geometry, canvasToVirtualMatrix);
-                //Stroke
-                this.StyleManager.DrawGeometry(resourceCreator, drawingSession, geometry, canvasToVirtualMatrix);
-            }
-            return command;
+            return transformer.ToRectangle(resourceCreator, canvasToVirtualMatrix);
         }
 
 
-        public IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;
+        public IEnumerable<IEnumerable<Node>> ConvertToCurves()
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.ConvertToCurvesFromRectangle(transformer);
+        }
 
         public ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            ImageLayer imageLayer= new ImageLayer
-            {
-                ImageStr = this.ImageStr,
-            };
+            ImageLayer imageLayer = new ImageLayer();
 
             LayerBase.CopyWith(resourceCreator, imageLayer, this);
             return imageLayer;
@@ -121,11 +67,9 @@ namespace Retouch_Photo2.Layers.Models
         
         public void SaveWith(XElement element)
         {
-            element.Add(XML.SaveImageStr("ImageStr", this.ImageStr));
         }
         public void Load(XElement element)
         {
-            this.ImageStr = XML.LoadImageStr(element.Element("ImageStr"));
         }
 
     }

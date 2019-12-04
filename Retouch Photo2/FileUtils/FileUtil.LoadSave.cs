@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System;
@@ -69,7 +70,7 @@ namespace Retouch_Photo2
             string path = $"{ApplicationData.Current.TemporaryFolder.Path}/imageRes.xml";
             XDocument document = XDocument.Load(path);
 
-            IEnumerable<ImageRe> imageRes = Retouch_Photo2.Layers.XML.LoadImageRes(document);
+            IEnumerable<ImageRe> imageRes = Retouch_Photo2.Elements.XML.LoadImageRes(document);
 
             //Load all images.
             ImageRe.Instances.Clear();
@@ -89,7 +90,7 @@ namespace Retouch_Photo2
         public static async Task SaveImageRes()
         {
             IEnumerable<ImageRe> imageRes = ImageRe.Instances;
-            XDocument document = Retouch_Photo2.Layers.XML.SaveImageRes(imageRes);
+            XDocument document = Retouch_Photo2.Elements.XML.SaveImageRes(imageRes);
             
             //Save the project xml file.      
             StorageFile file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync("imageRes.xml", CreationCollisionOption.ReplaceExisting);

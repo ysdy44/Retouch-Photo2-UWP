@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
@@ -61,8 +62,8 @@ namespace Retouch_Photo2.Tools.Pages
                 {
                     if (layer is ImageLayer imageLayer)
                     {
-                        imageLayer.ImageStr = imageRe.ToImageStr();
                         imageLayer.TransformManager.Source = transformerSource;
+                        imageLayer.StyleManager.FillBrush.ImageStr = imageRe.ToImageStr();
                     }
                 });
 

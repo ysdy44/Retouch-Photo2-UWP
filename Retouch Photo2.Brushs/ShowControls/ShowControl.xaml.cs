@@ -145,6 +145,11 @@ namespace Retouch_Photo2.Brushs
                                 return;
                             }
                         case BrushType.Image:
+                            {
+                                args.DrawingSession.Clear(Colors.White);//ClearColor
+                                args.DrawingSession.DrawLine(0, 0, this.SizeWidth, this.SizeHeight, Colors.Red);
+                                args.DrawingSession.DrawLine(0, this.SizeHeight, this.SizeWidth, 0, Colors.Red);
+                            }
                             return;
                     }
                 }

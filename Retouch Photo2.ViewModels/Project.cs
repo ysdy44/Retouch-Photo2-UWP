@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using System.Collections.Generic;
@@ -32,7 +33,8 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="imageLayer"> ImageLayer </param>
         public Project(ImageLayer imageLayer)
         {
-            CanvasBitmap bitmap = ImageRe.FindFirstImageRe(imageLayer.ImageStr).Source;
+            ImageStr imageStr = imageLayer.StyleManager.FillBrush.ImageStr;
+            CanvasBitmap bitmap = ImageRe.FindFirstImageRe(imageStr).Source;
 
             int width = (int)bitmap.SizeInPixels.Width;
             int height = (int)bitmap.SizeInPixels.Height;

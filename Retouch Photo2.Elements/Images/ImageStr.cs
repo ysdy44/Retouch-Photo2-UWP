@@ -1,5 +1,10 @@
-﻿namespace Retouch_Photo2.Layers
+﻿using Windows.Storage;
+
+namespace Retouch_Photo2.Elements
 {
+    /// <summary>
+    /// ID of <see cref="ImageRe"/>.
+    /// </summary>
     public struct ImageStr
     {     
         /// <summary> Gets or sets <see cref="StorageFile.Name"/>. </summary>

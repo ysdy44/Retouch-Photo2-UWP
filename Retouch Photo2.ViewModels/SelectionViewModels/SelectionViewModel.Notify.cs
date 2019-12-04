@@ -2,6 +2,7 @@
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Effects;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using System.ComponentModel;
@@ -196,7 +197,7 @@ namespace Retouch_Photo2.ViewModels
             if (layer is ImageLayer imageLayer)
             {
                 this.IsImageLayer = true;
-                this.ImageStr = imageLayer.ImageStr;
+                this.ImageStr = imageLayer.StyleManager.FillBrush.ImageStr;
             }
             else
             {

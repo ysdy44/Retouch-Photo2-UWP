@@ -151,8 +151,6 @@
     <Compile Include="Icons\TextFrameIcon.xaml.cs">
       <DependentUpon>TextFrameIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ImageRe.Instance.cs" />
-    <Compile Include="ImageStr.cs" />
     <Compile Include="LayerCollections\LayerCollection.Add_Disengage.cs" />
     <Compile Include="LayerCollections\LayerCollection.Arrange_Children_Expand.cs" />
     <Compile Include="LayerCollections\LayerCollection.ControlHeight.cs" />
@@ -217,15 +215,12 @@
     <Compile Include="TransformManager.cs" />
     <Compile Include="Models\GeometryCurveLayer.cs" />
     <Compile Include="Models\IGeometryLayer.cs" />
-    <Compile Include="ImageRe.cs" />
     <Compile Include="Models\AcrylicLayer.cs" />
     <Compile Include="Models\GeometryEllipseLayer.cs" />
     <Compile Include="Models\GroupLayer.cs" />
     <Compile Include="Models\ImageLayer.cs" />
     <Compile Include="Models\GeometryRectangleLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XMLs\XML.ImageStr.cs" />
-    <Compile Include="XMLs\XML.ImageRe.cs" />
     <Compile Include="XMLs\XML.ILayer.cs" />
     <Compile Include="XMLs\XML.LayerFactory.cs" />
     <Compile Include="XMLs\XML.TransformManager.cs" />
@@ -354,6 +349,10 @@
     <ProjectReference Include="..\Retouch Photo2.Effects\Retouch Photo2.Effects.csproj">
       <Project>{c14d4618-e234-4d91-8ced-49cbd9f6f3c7}</Project>
       <Name>Retouch Photo2.Effects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Elements\Retouch Photo2.Elements.csproj">
+      <Project>{0e5ac58e-36bf-44fe-877e-830f024b7109}</Project>
+      <Name>Retouch Photo2.Elements</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

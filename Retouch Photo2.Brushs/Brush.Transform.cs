@@ -24,17 +24,17 @@ namespace Retouch_Photo2.Brushs
                 case BrushType.Color:
                     break;
                 case BrushType.LinearGradient:
-                    this._oldPoints.LinearGradientStartPoint = Vector2.Transform(this.Points.LinearGradientStartPoint, matrix);
-                    this._oldPoints.LinearGradientEndPoint = Vector2.Transform(this.Points.LinearGradientEndPoint, matrix);
+                    this._startingPoints.LinearGradientStartPoint = Vector2.Transform(this.Points.LinearGradientStartPoint, matrix);
+                    this._startingPoints.LinearGradientEndPoint = Vector2.Transform(this.Points.LinearGradientEndPoint, matrix);
                     break;
                 case BrushType.RadialGradient:
-                    this._oldPoints.RadialGradientCenter = Vector2.Transform(this.Points.RadialGradientCenter, matrix);
-                    this._oldPoints.RadialGradientPoint = Vector2.Transform(this.Points.RadialGradientPoint, matrix);
+                    this._startingPoints.RadialGradientCenter = Vector2.Transform(this.Points.RadialGradientCenter, matrix);
+                    this._startingPoints.RadialGradientPoint = Vector2.Transform(this.Points.RadialGradientPoint, matrix);
                     break;
                 case BrushType.EllipticalGradient:
-                    this._oldPoints.EllipticalGradientCenter = Vector2.Transform(this.Points.EllipticalGradientCenter, matrix);
-                    this._oldPoints.EllipticalGradientXPoint = Vector2.Transform(this.Points.EllipticalGradientXPoint, matrix);
-                    this._oldPoints.EllipticalGradientYPoint = Vector2.Transform(this.Points.EllipticalGradientYPoint, matrix);
+                    this._startingPoints.EllipticalGradientCenter = Vector2.Transform(this.Points.EllipticalGradientCenter, matrix);
+                    this._startingPoints.EllipticalGradientXPoint = Vector2.Transform(this.Points.EllipticalGradientXPoint, matrix);
+                    this._startingPoints.EllipticalGradientYPoint = Vector2.Transform(this.Points.EllipticalGradientYPoint, matrix);
                     break;
                 case BrushType.Image:
                     break;
@@ -56,17 +56,17 @@ namespace Retouch_Photo2.Brushs
                 case BrushType.Color:
                     break;
                 case BrushType.LinearGradient:
-                    this.Points.LinearGradientStartPoint = Vector2.Transform(this._oldPoints.LinearGradientStartPoint, matrix);
-                    this.Points.LinearGradientEndPoint = Vector2.Transform(this._oldPoints.LinearGradientEndPoint, matrix);
+                    this.Points.LinearGradientStartPoint = Vector2.Transform(this._startingPoints.LinearGradientStartPoint, matrix);
+                    this.Points.LinearGradientEndPoint = Vector2.Transform(this._startingPoints.LinearGradientEndPoint, matrix);
                     break;
                 case BrushType.RadialGradient:
-                    this.Points.RadialGradientCenter = Vector2.Transform(this._oldPoints.RadialGradientCenter, matrix);
-                    this.Points.RadialGradientPoint = Vector2.Transform(this._oldPoints.RadialGradientPoint, matrix);
+                    this.Points.RadialGradientCenter = Vector2.Transform(this._startingPoints.RadialGradientCenter, matrix);
+                    this.Points.RadialGradientPoint = Vector2.Transform(this._startingPoints.RadialGradientPoint, matrix);
                     break;
                 case BrushType.EllipticalGradient:
-                    this.Points.EllipticalGradientCenter = Vector2.Transform(this._oldPoints.EllipticalGradientCenter, matrix);
-                    this.Points.EllipticalGradientXPoint = Vector2.Transform(this._oldPoints.EllipticalGradientXPoint, matrix);
-                    this.Points.EllipticalGradientYPoint = Vector2.Transform(this._oldPoints.EllipticalGradientYPoint, matrix);
+                    this.Points.EllipticalGradientCenter = Vector2.Transform(this._startingPoints.EllipticalGradientCenter, matrix);
+                    this.Points.EllipticalGradientXPoint = Vector2.Transform(this._startingPoints.EllipticalGradientXPoint, matrix);
+                    this.Points.EllipticalGradientYPoint = Vector2.Transform(this._startingPoints.EllipticalGradientYPoint, matrix);
                     break;
                 case BrushType.Image:
                     break;
@@ -87,19 +87,20 @@ namespace Retouch_Photo2.Brushs
                 case BrushType.Color:
                     break;
                 case BrushType.LinearGradient:
-                    this._oldPoints.LinearGradientStartPoint = this.Points.LinearGradientStartPoint;
-                    this._oldPoints.LinearGradientEndPoint = this.Points.LinearGradientEndPoint;
+                    this._startingPoints.LinearGradientStartPoint = this.Points.LinearGradientStartPoint;
+                    this._startingPoints.LinearGradientEndPoint = this.Points.LinearGradientEndPoint;
                     break;
                 case BrushType.RadialGradient:
-                    this._oldPoints.RadialGradientCenter = this.Points.RadialGradientCenter;
-                    this._oldPoints.RadialGradientPoint = this.Points.RadialGradientPoint;
+                    this._startingPoints.RadialGradientCenter = this.Points.RadialGradientCenter;
+                    this._startingPoints.RadialGradientPoint = this.Points.RadialGradientPoint;
                     break;
                 case BrushType.EllipticalGradient:
-                    this._oldPoints.EllipticalGradientCenter = this.Points.EllipticalGradientCenter;
-                    this._oldPoints.EllipticalGradientXPoint = this.Points.EllipticalGradientXPoint;
-                    this._oldPoints.EllipticalGradientYPoint = this.Points.EllipticalGradientYPoint;
+                    this._startingPoints.EllipticalGradientCenter = this.Points.EllipticalGradientCenter;
+                    this._startingPoints.EllipticalGradientXPoint = this.Points.EllipticalGradientXPoint;
+                    this._startingPoints.EllipticalGradientYPoint = this.Points.EllipticalGradientYPoint;
                     break;
                 case BrushType.Image:
+                    this._startingDestination = this.ImageDestination;
                     break;
             }
         }
@@ -116,19 +117,20 @@ namespace Retouch_Photo2.Brushs
                 case BrushType.Color:
                     break;
                 case BrushType.LinearGradient:
-                    this.Points.LinearGradientStartPoint = Vector2.Transform(this._oldPoints.LinearGradientStartPoint, matrix);
-                    this.Points.LinearGradientEndPoint = Vector2.Transform(this._oldPoints.LinearGradientEndPoint, matrix);
+                    this.Points.LinearGradientStartPoint = Vector2.Transform(this._startingPoints.LinearGradientStartPoint, matrix);
+                    this.Points.LinearGradientEndPoint = Vector2.Transform(this._startingPoints.LinearGradientEndPoint, matrix);
                     break;
                 case BrushType.RadialGradient:
-                    this.Points.RadialGradientCenter = Vector2.Transform(this._oldPoints.RadialGradientCenter, matrix);
-                    this.Points.RadialGradientPoint = Vector2.Transform(this._oldPoints.RadialGradientPoint, matrix);
+                    this.Points.RadialGradientCenter = Vector2.Transform(this._startingPoints.RadialGradientCenter, matrix);
+                    this.Points.RadialGradientPoint = Vector2.Transform(this._startingPoints.RadialGradientPoint, matrix);
                     break;
                 case BrushType.EllipticalGradient:
-                    this.Points.EllipticalGradientCenter = Vector2.Transform(this._oldPoints.EllipticalGradientCenter, matrix);
-                    this.Points.EllipticalGradientXPoint = Vector2.Transform(this._oldPoints.EllipticalGradientXPoint, matrix);
-                    this.Points.EllipticalGradientYPoint = Vector2.Transform(this._oldPoints.EllipticalGradientYPoint, matrix);
+                    this.Points.EllipticalGradientCenter = Vector2.Transform(this._startingPoints.EllipticalGradientCenter, matrix);
+                    this.Points.EllipticalGradientXPoint = Vector2.Transform(this._startingPoints.EllipticalGradientXPoint, matrix);
+                    this.Points.EllipticalGradientYPoint = Vector2.Transform(this._startingPoints.EllipticalGradientYPoint, matrix);
                     break;
                 case BrushType.Image:
+                    this.ImageDestination = this._startingDestination * matrix;
                     break;
             }
         }
@@ -145,19 +147,20 @@ namespace Retouch_Photo2.Brushs
                 case BrushType.Color:
                     break;
                 case BrushType.LinearGradient:
-                    this.Points.LinearGradientStartPoint = Vector2.Add(this._oldPoints.LinearGradientStartPoint, vector);
-                    this.Points.LinearGradientEndPoint = Vector2.Add(this._oldPoints.LinearGradientEndPoint, vector);
+                    this.Points.LinearGradientStartPoint = Vector2.Add(this._startingPoints.LinearGradientStartPoint, vector);
+                    this.Points.LinearGradientEndPoint = Vector2.Add(this._startingPoints.LinearGradientEndPoint, vector);
                     break;
                 case BrushType.RadialGradient:
-                    this.Points.RadialGradientCenter = Vector2.Add(this._oldPoints.RadialGradientCenter, vector);
-                    this.Points.RadialGradientPoint = Vector2.Add(this._oldPoints.RadialGradientPoint, vector);
+                    this.Points.RadialGradientCenter = Vector2.Add(this._startingPoints.RadialGradientCenter, vector);
+                    this.Points.RadialGradientPoint = Vector2.Add(this._startingPoints.RadialGradientPoint, vector);
                     break;
                 case BrushType.EllipticalGradient:
-                    this.Points.EllipticalGradientCenter = Vector2.Add(this._oldPoints.EllipticalGradientCenter, vector);
-                    this.Points.EllipticalGradientXPoint = Vector2.Add(this._oldPoints.EllipticalGradientXPoint, vector);
-                    this.Points.EllipticalGradientYPoint = Vector2.Add(this._oldPoints.EllipticalGradientYPoint, vector);
+                    this.Points.EllipticalGradientCenter = Vector2.Add(this._startingPoints.EllipticalGradientCenter, vector);
+                    this.Points.EllipticalGradientXPoint = Vector2.Add(this._startingPoints.EllipticalGradientXPoint, vector);
+                    this.Points.EllipticalGradientYPoint = Vector2.Add(this._startingPoints.EllipticalGradientYPoint, vector);
                     break;
                 case BrushType.Image:
+                    this.ImageDestination = this._startingDestination + vector;
                     break;
             }
         }

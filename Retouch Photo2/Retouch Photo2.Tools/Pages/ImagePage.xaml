@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:layers="using:Retouch_Photo2.Layers"
     xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -75,6 +76,13 @@
         <Button x:Name="StackButton" Style="{StaticResource AppCircleButtonStyle}">
             <FontIcon Glyph="&#xE14C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
         </Button>
+
+        <ContentControl Width="4"/>
+
+        <TextBlock Style="{StaticResource AppTextBlock}">
+            Convert to curves
+        </TextBlock>
+        <toolsElements:ConvertToCurvesButton/>
 
     </StackPanel>
 </Page>

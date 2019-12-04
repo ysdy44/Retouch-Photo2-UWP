@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
+using Retouch_Photo2.Elements;
 using System.Numerics;
 
 namespace Retouch_Photo2.Brushs
@@ -17,6 +18,23 @@ namespace Retouch_Photo2.Brushs
         public Brush StrokeBrush = new Brush();
         /// <summary> Gets or sets Style's stroke-width. </summary>
         public float StrokeWidth = 1;
+
+
+        //@Construct
+        /// <summary>
+        /// Construct a style-manager.
+        /// </summary>
+        public StyleManager() { }
+        /// <summary>
+        /// Construct a style-manager.
+        /// </summary>
+        public StyleManager(Transformer Source, Transformer Destination, ImageStr ImageStr)
+        {
+            this.FillBrush.Type = BrushType.Image;
+            this.FillBrush.Source = Source;
+            this.FillBrush.ImageDestination = Destination;
+            this.FillBrush.ImageStr = ImageStr;
+        }
 
 
         //@Interface
@@ -77,6 +95,11 @@ namespace Retouch_Photo2.Brushs
                     drawingSession.FillGeometry(geometry, ellipticalGradientBrush);
                     break;
                 case BrushType.Image:
+                    ICanvasBrush imageBrush = this.FillBrush.GetImageBrush(resourceCreator, canvasToVirtualMatrix);
+                    if (imageBrush != null)
+                    {
+                        drawingSession.FillGeometry(geometry, imageBrush);
+                    }
                     break;
                 default:
                     break;

@@ -157,7 +157,7 @@ namespace Retouch_Photo2.Brushs
         }
         
 
-        public static void Draw(CanvasDrawingSession drawingSession, BrushType brushType, BrushPoints brushPoints, CanvasGradientStop[] brushArray, Matrix3x2 matrix, Windows.UI.Color accentColor)
+        public static void Draw(CanvasDrawingSession drawingSession, BrushType brushType, BrushPoints brushPoints, CanvasGradientStop[] brushArray, Transformer imageDestination, Matrix3x2 matrix, Windows.UI.Color accentColor)
         {
             switch (brushType)
             {
@@ -165,6 +165,7 @@ namespace Retouch_Photo2.Brushs
                     break;
                 case BrushType.Color:
                     break;
+
                 case BrushType.LinearGradient:
                     {
                         Vector2 startPoint = Vector2.Transform(brushPoints.LinearGradientStartPoint, matrix);
@@ -244,6 +245,12 @@ namespace Retouch_Photo2.Brushs
 
                         //Circle: node
                         drawingSession.DrawNode2(xPoint);
+                    }
+                    break;
+
+                case BrushType.Image:
+                    {
+                        drawingSession.DrawBoundNodes(imageDestination * matrix);                        
                     }
                     break;
             }

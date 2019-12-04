@@ -1,9 +1,12 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
+using System.Numerics;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -109,7 +112,7 @@ namespace Retouch_Photo2.Tools.Pages
             {
                 this.StopsFlyout.Opened += (s, e) => this._isOpened = true;
                 this.StopsFlyout.Closed += (s, e) => this._isOpened = false;
-                this.ShowControl.Tapped += (s, e) =>
+                this.ShowControl.Tapped += async (s, e) =>
                 {
                     switch (this.SelectionViewModel.BrushType)
                     {
@@ -140,7 +143,42 @@ namespace Retouch_Photo2.Tools.Pages
                             }
                             break;
 
-                        case BrushType.Image: break;
+                        case BrushType.Image:
+                            {
+                                Transformer transformer = this.SelectionViewModel.Transformer;
+
+                                //imageRe
+                                ImageRe imageRe = await FileUtil.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, PickerLocationId.PicturesLibrary);
+                                if (imageRe == null) return;
+
+                                //Images
+                                ImageRe.DuplicateChecking(imageRe);
+
+                                //Transformer
+                                Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
+
+                                //Selection
+                                this.SelectionViewModel.SetValue((layer) =>
+                                {
+                                    switch (this.SelectionViewModel.FillOrStroke)
+                                    {
+                                        case FillOrStroke.Fill:
+                                            layer.StyleManager.FillBrush.Source = transformerSource;
+                                            layer.StyleManager.FillBrush.ImageDestination = transformer;
+                                            layer.StyleManager.FillBrush.ImageStr = imageRe.ToImageStr();
+                                            break;
+                                        case FillOrStroke.Stroke:
+                                            layer.StyleManager.StrokeBrush.Source = transformerSource;
+                                            layer.StyleManager.StrokeBrush.ImageDestination = transformer;
+                                            layer.StyleManager.StrokeBrush.ImageStr = imageRe.ToImageStr();
+                                            break;
+                                    }
+                                });
+
+                                this.SelectionViewModel.BrushImageDestination = transformer;//Selection
+                                this.ViewModel.Invalidate();//Invalidate
+                            }
+                            break;
                     }
                 };
 

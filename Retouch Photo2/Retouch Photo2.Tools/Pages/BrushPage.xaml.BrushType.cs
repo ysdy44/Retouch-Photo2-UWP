@@ -131,7 +131,21 @@ namespace Retouch_Photo2.Tools.Pages
             //BrushType
             this.SelectionViewModel.BrushType = BrushType.Image;
 
-            this.SelectionViewModel.OneBrushPoints();
+            //Selection
+            this.SelectionViewModel.SetValue((layer) =>
+            {
+                //FillOrStroke
+                switch (this.SelectionViewModel.FillOrStroke)
+                {
+                    case FillOrStroke.Fill:
+                        layer.StyleManager.FillBrush.Type = BrushType.Image;
+                        break;
+                    case FillOrStroke.Stroke:
+                        layer.StyleManager.StrokeBrush.Type = BrushType.Image;
+                        break;
+                }
+            });
+
             this.ViewModel.Invalidate();//Invalidate
         }
 

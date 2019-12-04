@@ -20,19 +20,16 @@
         <TextBlock Style="{StaticResource AppTextBlock}">
             Radius
         </TextBlock>
-        <TextBlock Style="{StaticResource AppTextBlock}"/>
         <Slider x:Name="RadiusSlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
 
         <TextBlock Style="{StaticResource AppTextBlock}">
             Opacity
         </TextBlock>
-        <TextBlock Style="{StaticResource AppTextBlock}"/>
         <Slider x:Name="OpacitySlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
 
         <TextBlock Style="{StaticResource AppTextBlock}">
             Offset
         </TextBlock>
-        <TextBlock Style="{StaticResource AppTextBlock}"/>
         <Slider x:Name="OffsetSlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
 
         <Grid>

@@ -1,6 +1,8 @@
 ﻿using FanKit.Transformers;
 using HSVColorPickers;
 using Microsoft.Graphics.Canvas.Brushes;
+using Retouch_Photo2.Elements;
+using System.Numerics;
 using Windows.UI;
 
 namespace Retouch_Photo2.Brushs
@@ -21,7 +23,17 @@ namespace Retouch_Photo2.Brushs
 
         /// <summary> <see cref="Brush">'s points. </summary>
         public BrushPoints Points;
-        private BrushPoints _oldPoints;
+        private BrushPoints _startingPoints;
+        
+
+        /// <summary> <see cref = "Brush" />'s image. </summary>
+        public ImageStr ImageStr { get; set; }
+        
+        /// <summary> The source transformer. </summary>
+        public Transformer Source { get; set; }
+        /// <summary> The destination transformer. </summary>
+        public Transformer ImageDestination { get; set; }
+        Transformer _startingDestination;
 
 
         /// <summary>
@@ -73,10 +85,13 @@ namespace Retouch_Photo2.Brushs
                 case BrushType.EllipticalGradient:
                     brush.Array = (CanvasGradientStop[])this.Array.Clone();
                     brush.Points = this.Points;
-                    brush._oldPoints = this._oldPoints;
+                    brush._startingPoints = this._startingPoints;
                     break;
 
                 case BrushType.Image:
+                    brush.ImageStr = this.ImageStr;
+                    brush.Source = this.Source;
+                    brush.ImageDestination = this.ImageDestination;
                     break;
             }
 

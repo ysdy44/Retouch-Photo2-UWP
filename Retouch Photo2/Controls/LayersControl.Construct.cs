@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using System.Numerics;
@@ -126,6 +127,7 @@ namespace Retouch_Photo2.Controls
 
             //Images
             ImageRe.DuplicateChecking(imageRe);
+            ImageStr imageStr = imageRe.ToImageStr();
 
             //Transformer
             Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
@@ -135,8 +137,7 @@ namespace Retouch_Photo2.Controls
             {
                 SelectMode = SelectMode.Selected,
                 TransformManager = new TransformManager(transformerSource),
-
-                ImageStr = imageRe.ToImageStr(),
+                StyleManager = new Brushs.StyleManager(transformerSource, transformerSource, imageStr),
             };
 
             //Selection

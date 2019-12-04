@@ -129,6 +129,18 @@ namespace Retouch_Photo2.ViewModels
         }
         private BrushPoints brushPoints;
 
+        /// <summary> Brush destination transformer. </summary>
+        public Transformer BrushImageDestination
+        {
+            get => this.brushImageDestination;
+            set
+            {
+                this.brushImageDestination = value;
+                this.OnPropertyChanged(nameof(this.BrushImageDestination));//Notify 
+            }
+        }
+        private Transformer brushImageDestination;
+
 
         #endregion
 

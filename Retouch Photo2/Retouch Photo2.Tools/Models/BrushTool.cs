@@ -1,6 +1,8 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Buttons;
 using Retouch_Photo2.Tools.Icons;
@@ -127,14 +129,38 @@ namespace Retouch_Photo2.Tools.Models
             BrushType brushType = this.BrushType;
             BrushPoints brushPoints = this.SelectionViewModel.BrushPoints;
             CanvasGradientStop[] brushArray = this.SelectionViewModel.BrushArray;
+            Transformer imageDestination = this.SelectionViewModel.BrushImageDestination;
+
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             Windows.UI.Color accentColor = this.ViewModel.AccentColor;
 
-            BrushOperateHelper.Draw(drawingSession, brushType, brushPoints, brushArray, matrix, accentColor);
+            BrushOperateHelper.Draw(drawingSession, brushType, brushPoints, brushArray, imageDestination, matrix, accentColor);
         }
 
 
-        public void OnNavigatedTo() { }
+        public void OnNavigatedTo()
+        {
+            switch (this.SelectionViewModel.SelectionMode)
+            {
+                case ListViewSelectionMode.Single:
+                    ILayer layer = this.SelectionViewModel.Layer;
+
+                    switch (this.SelectionViewModel.FillOrStroke)
+                    {
+                        case FillOrStroke.Fill:
+                            this.SelectionViewModel.BrushType = layer.StyleManager.FillBrush.Type;
+                            this.SelectionViewModel.BrushPoints = layer.StyleManager.FillBrush.Points;
+                            this.SelectionViewModel.BrushImageDestination = layer.StyleManager.FillBrush.ImageDestination;
+                            break;
+                        case FillOrStroke.Stroke:
+                            this.SelectionViewModel.BrushType = layer.StyleManager.StrokeBrush.Type;
+                            this.SelectionViewModel.BrushPoints = layer.StyleManager.StrokeBrush.Points;
+                            this.SelectionViewModel.BrushImageDestination = layer.StyleManager.StrokeBrush.ImageDestination;
+                            break;
+                    }
+                    break;
+            }
+        }
         public void OnNavigatedFrom() { }
     }
 }

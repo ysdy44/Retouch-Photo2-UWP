@@ -1,5 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Buttons;
@@ -51,8 +53,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 SelectMode = SelectMode.Selected,
                 TransformManager = new TransformManager(transformerSource, transformerDestination),
-
-                ImageStr = imageStr
+                StyleManager = new StyleManager(transformerSource, transformerDestination, imageStr),
             };
             this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.ViewModel.MezzanineLayer);
 
@@ -66,6 +67,7 @@ namespace Retouch_Photo2.Tools.Models
 
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
             this.ViewModel.MezzanineLayer.TransformManager.Destination = transformerDestination;
+            this.ViewModel.MezzanineLayer.StyleManager.FillBrush.ImageDestination = transformerDestination;
             this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
             this.ViewModel.Invalidate();//Invalidate

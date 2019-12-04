@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Retouch_Photo2.Layers
+namespace Retouch_Photo2.Elements
 {
     /// <summary>
     /// Image of <see cref="ImageRe">.

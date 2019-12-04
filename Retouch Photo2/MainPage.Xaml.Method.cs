@@ -19,6 +19,7 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Retouch_Photo2.Brushs;
 
 namespace Retouch_Photo2
 {
@@ -102,6 +103,7 @@ namespace Retouch_Photo2
 
             //Images
             ImageRe.DuplicateChecking(imageRe);
+            ImageStr imageStr = imageRe.ToImageStr();
 
             //Transformer
             Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
@@ -110,7 +112,7 @@ namespace Retouch_Photo2
             ImageLayer imageLayer = new ImageLayer
             {
                 TransformManager = new TransformManager(transformerSource),
-                ImageStr = imageRe.ToImageStr(),
+                StyleManager = new StyleManager(transformerSource, transformerSource, imageStr)
             };
 
             //Transition

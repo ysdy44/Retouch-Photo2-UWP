@@ -1,6 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
+using Retouch_Photo2.Elements;
 using System.Numerics;
 
 namespace Retouch_Photo2.Brushs
@@ -126,6 +127,33 @@ namespace Retouch_Photo2.Brushs
                 RadiusX = radiusX,
                 RadiusY = radiusY,
                 Center = center
+            };
+        }
+
+
+        /// <summary>
+        /// Gets image brush.
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="matrix"> The matrix. </param>
+        /// <returns> The provided brush. </returns>
+        public ICanvasBrush GetImageBrush(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix)
+        {
+            ImageStr imageStr = this.ImageStr;
+
+            if (imageStr.Name==null)
+            {
+                return null;
+            }
+
+            ImageRe imageRe = ImageRe.FindFirstImageRe(imageStr);
+            CanvasBitmap bitmap = imageRe.Source;
+
+            Matrix3x2 matrix2 = Transformer.FindHomography(this.Source, this.ImageDestination);
+
+            return new CanvasImageBrush(resourceCreator, bitmap)
+            {
+                Transform = matrix2 * matrix
             };
         }
 
