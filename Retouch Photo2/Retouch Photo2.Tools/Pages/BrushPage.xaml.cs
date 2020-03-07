@@ -163,12 +163,12 @@ namespace Retouch_Photo2.Tools.Pages
                                     switch (this.SelectionViewModel.FillOrStroke)
                                     {
                                         case FillOrStroke.Fill:
-                                            layer.StyleManager.FillBrush.Source = transformerSource;
+                                            layer.StyleManager.FillBrush.ImageSource = transformerSource;
                                             layer.StyleManager.FillBrush.ImageDestination = transformer;
                                             layer.StyleManager.FillBrush.ImageStr = imageRe.ToImageStr();
                                             break;
                                         case FillOrStroke.Stroke:
-                                            layer.StyleManager.StrokeBrush.Source = transformerSource;
+                                            layer.StyleManager.StrokeBrush.ImageSource = transformerSource;
                                             layer.StyleManager.StrokeBrush.ImageDestination = transformer;
                                             layer.StyleManager.StrokeBrush.ImageStr = imageRe.ToImageStr();
                                             break;

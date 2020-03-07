@@ -1,10 +1,12 @@
 ﻿using FanKit.Transformers;
+using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Buttons;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.Tools.Pages;
 using Retouch_Photo2.ViewModels;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -25,10 +27,20 @@ namespace Retouch_Photo2.Tools.Models
             return new TextFrameLayer
             {
                 SelectMode = SelectMode.Selected,
-                TransformManager = new TransformManager(transformer)
+                TransformManager = new TransformManager(transformer),
+                StyleManager = new StyleManager
                 {
-                    DisabledRadian = true//DisabledRadian
-                },
+                    FillBrush = new Brush
+                    {
+                        Type = BrushType.Color,
+                        Color = Colors.Black,
+                    },
+                    StrokeBrush = new Brush
+                    {
+                        Type = BrushType.None,
+                    },
+                    StrokeWidth = 0,
+                }
             };
         }
 

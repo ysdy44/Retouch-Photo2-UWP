@@ -55,7 +55,6 @@ namespace Retouch_Photo2.Tools.Models
 
             //Mezzanine
             this.ViewModel.MezzanineLayer = this.CreateLayer(transformer);
-            this.ViewModel.MezzanineLayer.StyleManager = this.SelectionViewModel.StyleManager.Clone();
             this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.ViewModel.MezzanineLayer);
 
             //Selection

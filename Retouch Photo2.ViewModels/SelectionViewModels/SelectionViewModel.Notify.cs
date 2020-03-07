@@ -235,6 +235,45 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
+        /// <summary> Sets text FontFamily. </summary>     
+        public string TextFontFamily
+        {
+            get => this.textFontFamily;
+            set
+            {
+                this.textFontFamily = value;
+                this.OnPropertyChanged(nameof(this.TextFontFamily));//Notify 
+            }
+        }
+        private string textFontFamily = "Arial";
+
+        /// <summary> Sets text FontSize. </summary>     
+        public int TextFontSize
+        {
+            get => this.textFontSize;
+            set
+            {
+                this.textFontSize = value;
+                this.OnPropertyChanged(nameof(this.TextFontSize));//Notify 
+            }
+        }
+        private int textFontSize = 22;
+
+        /// <summary> <see cref = "SelectionViewModel" />'s FrameLayer. </summary>
+        public TextFrameLayer TextFrameLayer { get; set; }
+        /// <summary> Sets FrameLayer. </summary>     
+        private void SetTextFrameLayer(ILayer layer)
+        {
+            if (layer is TextFrameLayer frameLayer)
+            {
+                this.TextFrameLayer = frameLayer;
+            }
+            else
+            {
+                this.TextFrameLayer = null;
+            }
+        }
+
 
     }
 }

@@ -79,7 +79,8 @@ namespace Retouch_Photo2.ViewModels
             this.SetAcrylicLayer(null);
             this.SetImageLayer(null);
             this.SetCurveLayer(null);
-
+            this.SetTextFrameLayer(null);
+            
             //////////////////////////
 
             this.SetIGeometryLayer(null);            
@@ -128,6 +129,7 @@ namespace Retouch_Photo2.ViewModels
             this.SetAcrylicLayer(layer);
             this.SetImageLayer(layer);
             this.SetCurveLayer(layer);
+            this.SetTextFrameLayer(layer);
 
             //////////////////////////
 
@@ -181,6 +183,7 @@ namespace Retouch_Photo2.ViewModels
             //this.SetImageLayer(layer);
             //this.SetGeometryLayer(null);
             this.SetCurveLayer(null);
+            this.SetTextFrameLayer(null);
 
             //////////////////////////
 

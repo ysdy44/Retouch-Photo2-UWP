@@ -31,7 +31,7 @@ namespace Retouch_Photo2.Brushs
         public StyleManager(Transformer Source, Transformer Destination, ImageStr ImageStr)
         {
             this.FillBrush.Type = BrushType.Image;
-            this.FillBrush.Source = Source;
+            this.FillBrush.ImageSource = Source;
             this.FillBrush.ImageDestination = Destination;
             this.FillBrush.ImageStr = ImageStr;
         }
@@ -136,6 +136,11 @@ namespace Retouch_Photo2.Brushs
                     drawingSession.DrawGeometry(geometry, ellipticalGradientBrush, strokeWidth);
                     break;
                 case BrushType.Image:
+                    ICanvasBrush imageBrush = this.FillBrush.GetImageBrush(resourceCreator, canvasToVirtualMatrix);
+                    if (imageBrush != null)
+                    {
+                        drawingSession.DrawGeometry(geometry, imageBrush);
+                    }
                     break;
                 default:
                     break;

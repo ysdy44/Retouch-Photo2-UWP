@@ -30,7 +30,7 @@ namespace Retouch_Photo2.Brushs
         public ImageStr ImageStr { get; set; }
         
         /// <summary> The source transformer. </summary>
-        public Transformer Source { get; set; }
+        public Transformer ImageSource { get; set; }
         /// <summary> The destination transformer. </summary>
         public Transformer ImageDestination { get; set; }
         Transformer _startingDestination;
@@ -90,7 +90,7 @@ namespace Retouch_Photo2.Brushs
 
                 case BrushType.Image:
                     brush.ImageStr = this.ImageStr;
-                    brush.Source = this.Source;
+                    brush.ImageSource = this.ImageSource;
                     brush.ImageDestination = this.ImageDestination;
                     break;
             }

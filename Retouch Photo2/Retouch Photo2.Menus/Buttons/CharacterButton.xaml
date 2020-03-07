@@ -1,0 +1,29 @@
+﻿<UserControl
+    x:Name="UserControl"
+    x:Class="Retouch_Photo2.Menus.Buttons.CharacterButton"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Retouch_Photo2.Menus.Buttons"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:menus="using:Retouch_Photo2.Menus"
+    d:DesignHeight="50"
+    d:DesignWidth="50"
+    Width="60" 
+    mc:Ignorable="d"
+    >
+
+    <ToolTipService.ToolTip>
+        <ToolTip Content="Character" VerticalOffset="40" Placement="Bottom" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+    </ToolTipService.ToolTip>
+
+
+    <menus:MenuButton x:Name="Button">
+        <menus:MenuButton.CenterContent>
+            <TextBlock FontSize="32" Foreground="{x:Bind UserControl.Foreground, Mode=OneWay}">
+                T
+            </TextBlock>
+        </menus:MenuButton.CenterContent>
+    </menus:MenuButton>
+
+</UserControl>

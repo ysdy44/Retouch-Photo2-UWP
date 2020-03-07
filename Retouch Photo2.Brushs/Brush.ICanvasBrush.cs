@@ -149,7 +149,7 @@ namespace Retouch_Photo2.Brushs
             ImageRe imageRe = ImageRe.FindFirstImageRe(imageStr);
             CanvasBitmap bitmap = imageRe.Source;
 
-            Matrix3x2 matrix2 = Transformer.FindHomography(this.Source, this.ImageDestination);
+            Matrix3x2 matrix2 = Transformer.FindHomography(this.ImageSource, this.ImageDestination);
 
             return new CanvasImageBrush(resourceCreator, bitmap)
             {

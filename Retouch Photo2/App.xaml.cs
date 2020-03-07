@@ -36,13 +36,14 @@ namespace Retouch_Photo2
             //Tool
             Tools = new List<ITool>
             {
-                /*
+
                 new CursorTool(),
-                new ImageTool(),
-                new RectangleTool(),
-                new CropTool(),
+                 new ViewTool(),
+                 new TextArtisticTool(),
+                 new TextFrameTool(),
                  
-                 */
+                /*
+
                 
                  new CursorTool(),
                  null,
@@ -89,15 +90,16 @@ namespace Retouch_Photo2
                  new GeometryArrowTool(),
                  new GeometryCapsuleTool(),
                  new GeometryHeartTool(),
+                                  */
             },
 
             //Menu
             Menus = new List<IMenu>
             {
-                /*
                 new LayerMenu(),
-                 */
+                new CharacterMenu(),
 
+                /*
                 new DebugMenu(),
                 new SelectionMenu(),
                 new OperateMenu(),
@@ -105,7 +107,9 @@ namespace Retouch_Photo2
                 new EffectMenu(),
                 new TransformerMenu(),
                 new ColorMenu(),
-                new LayerMenu(),
+                new LayerMenu(),      
+                                */
+
             },
         };
 

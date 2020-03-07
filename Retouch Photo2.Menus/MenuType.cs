@@ -20,6 +20,11 @@
         /// <summary> Transformer. </summary>
         Transformer,
 
+        /// <summary> Character. </summary>
+        Character,
+        /// <summary> Paragraph. </summary>
+        //Paragraph,
+
         /// <summary> Color. </summary>
         Color,
         

@@ -10,6 +10,9 @@ using System.Numerics;
 using System.Xml.Linq;
 using Windows.Foundation;
 using Windows.UI;
+using Windows.UI.Text;
+using Microsoft.Graphics.Canvas.Text;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -24,6 +27,15 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Content       
         public string Text = string.Empty;
+        public float FontSize = 22;
+        public string FontFamily = "Arial";
+
+        public CanvasHorizontalAlignment HorizontalAlignment = CanvasHorizontalAlignment.Left;
+        public FontStyle FontStyle = FontStyle.Normal;
+        public FontWeight FontWeight = new FontWeight
+        {
+            Weight = 100,
+        };
 
         //@Construct
         /// <summary>
@@ -36,7 +48,6 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public TextFrameLayer()
         {
-            base.StyleManager.FillBrush.Color = Color.FromArgb(255, 0, 0, 0);
             base.Control = new LayerControl(this)
             {
                 Icon = new TextFrameIcon(),
@@ -52,8 +63,24 @@ namespace Retouch_Photo2.Layers.Models
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
             {
-                CanvasTextLayout textLayout = new CanvasTextLayout(resourceCreator, this.Text, new CanvasTextFormat(), 0, 0);
-                CanvasGeometry geometry = CanvasGeometry.CreateText(textLayout);
+                float scale = (canvasToVirtualMatrix.M11 + canvasToVirtualMatrix.M22) / 2;
+                CanvasTextFormat textFormat = new CanvasTextFormat
+                {
+                    FontSize = this.FontSize * scale,
+                    FontFamily = this.FontFamily,
+
+                    HorizontalAlignment = this.HorizontalAlignment,
+                    FontStyle= this.FontStyle,
+                    FontWeight =this.FontWeight,
+                };
+
+                float width = transformer.Horizontal.Length() * scale;
+                float height = transformer.Vertical.Length() * scale;
+                TransformerRect rect = new TransformerRect(width, height, Vector2.Zero);
+                Matrix3x2 matrix = Transformer.FindHomography(rect, transformer) * canvasToVirtualMatrix;
+
+                CanvasTextLayout textLayout = new CanvasTextLayout(resourceCreator, this.Text, textFormat, width, height);
+                CanvasGeometry geometry = CanvasGeometry.CreateText(textLayout).Transform(matrix);
 
                 //Fill
                 this.StyleManager.FillGeometry(resourceCreator, drawingSession, geometry, canvasToVirtualMatrix);

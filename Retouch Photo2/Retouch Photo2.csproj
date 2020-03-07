@@ -99,6 +99,9 @@
     <Compile Include="Controls\AdjustmentControl.xaml.cs">
       <DependentUpon>AdjustmentControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CharacterControl.xaml.cs">
+      <DependentUpon>CharacterControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DebugControl.xaml.cs">
       <DependentUpon>DebugControl.xaml</DependentUpon>
     </Compile>
@@ -134,6 +137,9 @@
     <Compile Include="Retouch Photo2.Menus\Buttons\AdjustmentButton.xaml.cs">
       <DependentUpon>AdjustmentButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Menus\Buttons\CharacterButton.xaml.cs">
+      <DependentUpon>CharacterButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Menus\Buttons\ColorButton.xaml.cs">
       <DependentUpon>ColorButton.xaml</DependentUpon>
     </Compile>
@@ -155,6 +161,9 @@
     </Compile>
     <Compile Include="Retouch Photo2.Menus\Layouts\AdjustmentLayout.xaml.cs">
       <DependentUpon>AdjustmentLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Menus\Layouts\CharacterLayout.xaml.cs">
+      <DependentUpon>CharacterLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Menus\Layouts\ColorLayout.xaml.cs">
       <DependentUpon>ColorLayout.xaml</DependentUpon>
@@ -181,6 +190,7 @@
     <Compile Include="DrawPage.xaml.cs">
       <DependentUpon>DrawPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Menus\Models\CharacterMenu.cs" />
     <Compile Include="Retouch Photo2.Menus\Models\ColorMenu.cs" />
     <Compile Include="Retouch Photo2.Menus\Models\DebugMenu.cs" />
     <Compile Include="Retouch Photo2.Menus\Models\EffectMenu.cs" />
@@ -450,6 +460,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\CharacterControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\DebugControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -482,6 +496,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Retouch Photo2.Menus\Buttons\CharacterButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Retouch Photo2.Menus\Buttons\ColorButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -513,6 +531,10 @@
     <Page Include="DrawPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Menus\Layouts\CharacterLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Retouch Photo2.Menus\Layouts\ColorLayout.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -731,6 +753,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SettingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\Style.Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
