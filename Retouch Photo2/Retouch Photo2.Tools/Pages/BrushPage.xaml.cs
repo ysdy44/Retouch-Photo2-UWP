@@ -145,38 +145,7 @@ namespace Retouch_Photo2.Tools.Pages
 
                         case BrushType.Image:
                             {
-                                Transformer transformer = this.SelectionViewModel.Transformer;
-
-                                //imageRe
-                                ImageRe imageRe = await FileUtil.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, PickerLocationId.PicturesLibrary);
-                                if (imageRe == null) return;
-
-                                //Images
-                                ImageRe.DuplicateChecking(imageRe);
-
-                                //Transformer
-                                Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
-
-                                //Selection
-                                this.SelectionViewModel.SetValue((layer) =>
-                                {
-                                    switch (this.SelectionViewModel.FillOrStroke)
-                                    {
-                                        case FillOrStroke.Fill:
-                                            layer.StyleManager.FillBrush.ImageSource = transformerSource;
-                                            layer.StyleManager.FillBrush.ImageDestination = transformer;
-                                            layer.StyleManager.FillBrush.ImageStr = imageRe.ToImageStr();
-                                            break;
-                                        case FillOrStroke.Stroke:
-                                            layer.StyleManager.StrokeBrush.ImageSource = transformerSource;
-                                            layer.StyleManager.StrokeBrush.ImageDestination = transformer;
-                                            layer.StyleManager.StrokeBrush.ImageStr = imageRe.ToImageStr();
-                                            break;
-                                    }
-                                });
-
-                                this.SelectionViewModel.BrushImageDestination = transformer;//Selection
-                                this.ViewModel.Invalidate();//Invalidate
+                                await this.SetImage();
                             }
                             break;
                     }
@@ -184,50 +153,12 @@ namespace Retouch_Photo2.Tools.Pages
 
                 this.ColorPicker.ColorChange += (s, value) =>
                 {
-                    this.SelectionViewModel.Color = value;
-
-                    //Brush
-                    this.SelectionViewModel.BrushType = BrushType.Color;
-
-                    //Selection
-                    this.SelectionViewModel.FillColor = value;
-                    this.SelectionViewModel.SetValue((layer) =>
-                    { 
-                        //FillOrStroke
-                        switch (this.SelectionViewModel.FillOrStroke)
-                        {
-                            case FillOrStroke.Fill:
-                                layer.StyleManager.FillBrush.Color = value;
-                                break;
-                            case FillOrStroke.Stroke:
-                                layer.StyleManager.StrokeBrush.Color = value;
-                                break;
-                        }
-                    });
-
-                    this.ViewModel.Invalidate();//Invalidate
+                    this.SetColor(value);
                 };
 
                 this.StopsPicker.StopsChanged += (s, array) =>
                 {
-                    //Selection
-                    this.SelectionViewModel.BrushArray = (CanvasGradientStop[])array.Clone();
-
-                    this.SelectionViewModel.SetValue((layer) =>
-                    {
-                        //FillOrStroke
-                        switch (this.SelectionViewModel.FillOrStroke)
-                        {
-                            case FillOrStroke.Fill:
-                                layer.StyleManager.FillBrush.Array = (CanvasGradientStop[])array.Clone();
-                                break;
-                            case FillOrStroke.Stroke:
-                                layer.StyleManager.StrokeBrush.Array = (CanvasGradientStop[])array.Clone();
-                                break;
-                        }
-                    });
-
-                    this.ViewModel.Invalidate();//Invalidate
+                    this.SetArray(array);
                 };
             }
         }

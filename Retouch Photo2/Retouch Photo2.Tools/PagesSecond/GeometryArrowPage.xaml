@@ -11,78 +11,80 @@
     d:DesignWidth="400"
     >
 
-    <StackPanel Orientation="Horizontal">
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+        <StackPanel Orientation="Horizontal">
 
-        <!--Width-->
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <!--Width-->
+            <TextBlock Style="{StaticResource AppTextBlock}">
             Width
-        </TextBlock>
-        <tools:TouchbarButton x:Name="ValueTouchbarButton"
+            </TextBlock>
+            <tools:TouchbarButton x:Name="ValueTouchbarButton"
                       Number="{x:Bind ValueNumberConverter(SelectionViewModel.GeometryArrowValue),Mode=OneWay}"
                        >
-            <tools:TouchbarButton.TouchbarSlider>
-                <tools:TouchbarSlider x:Name="ValueTouchbarSlider"
+                <tools:TouchbarButton.TouchbarSlider>
+                    <tools:TouchbarSlider x:Name="ValueTouchbarSlider"
                     Number="{x:Bind ValueNumberConverter(SelectionViewModel.GeometryArrowValue),Mode=OneWay}"
                     Value="{x:Bind ValueValueConverter(SelectionViewModel.GeometryArrowValue), Mode=OneWay}" 
                      />
-            </tools:TouchbarButton.TouchbarSlider>
-        </tools:TouchbarButton>
+                </tools:TouchbarButton.TouchbarSlider>
+            </tools:TouchbarButton>
 
-        <ContentControl Width="4"/>
-        
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <ContentControl Width="4"/>
+
+            <TextBlock Style="{StaticResource AppTextBlock}">
             Left Tail
-        </TextBlock>
-        <Border Style="{StaticResource AppRoundedBorderStyle}">
-            <ComboBox x:Name="LeftTailComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
+            </TextBlock>
+            <Border Style="{StaticResource AppRoundedBorderStyle}">
+                <ComboBox x:Name="LeftTailComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
                   SelectedIndex="{x:Bind TailToIndexConverter(SelectionViewModel.GeometryArrowLeftTail),Mode=OneWay}" 
                   >
-                <ComboBoxItem>
-                    <TextBlock>
+                    <ComboBoxItem>
+                        <TextBlock>
                         None
-                    </TextBlock>
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    <TextBlock>
+                        </TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock>
                         Arrow
-                    </TextBlock>
-                </ComboBoxItem>
-            </ComboBox>
-        </Border>
+                        </TextBlock>
+                    </ComboBoxItem>
+                </ComboBox>
+            </Border>
 
-        <ContentControl Width="4"/>
-        
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <ContentControl Width="4"/>
+
+            <TextBlock Style="{StaticResource AppTextBlock}">
             Right Tail
-        </TextBlock>
-        <Border Style="{StaticResource AppRoundedBorderStyle}">
-            <ComboBox x:Name="RightTailComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
+            </TextBlock>
+            <Border Style="{StaticResource AppRoundedBorderStyle}">
+                <ComboBox x:Name="RightTailComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
                   SelectedIndex="{x:Bind TailToIndexConverter(SelectionViewModel.GeometryArrowRightTail),Mode=OneWay}" 
                   >
-                <ComboBoxItem>
-                    <TextBlock>
+                    <ComboBoxItem>
+                        <TextBlock>
                         None
-                    </TextBlock>
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    <TextBlock>
+                        </TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock>
                         Arrow
-                    </TextBlock>
-                </ComboBoxItem>
-            </ComboBox>
-        </Border>
+                        </TextBlock>
+                    </ComboBoxItem>
+                </ComboBox>
+            </Border>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <TextBlock Style="{StaticResource AppTextBlock}">
             Convert to curves
-        </TextBlock>
-        <toolsElements:ConvertToCurvesButton/>
+            </TextBlock>
+            <toolsElements:ConvertToCurvesButton/>
 
-        <ContentControl Width="4"/>
-        
-        <toolsElements:MoreCreateButton/>
-        
-    </StackPanel>
-    
+            <ContentControl Width="4"/>
+
+            <toolsElements:MoreCreateButton/>
+
+        </StackPanel>
+    </ScrollViewer>
+
 </Page>

@@ -394,6 +394,7 @@
     <Content Include="Icons\GrayAndWhite.jpg" />
     <Content Include="XMLs\Filter.xml" />
     <Content Include="XMLs\FilterOriginal.xml" />
+    <Compile Include="Retouch Photo2.Tools\Pages\BrushPage.xaml.Set.cs" />
     <None Include="Retouch Photo_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -753,10 +754,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SettingPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Style\Style.Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -11,34 +11,36 @@
     d:DesignWidth="400"
     >
 
-    <StackPanel Orientation="Horizontal">
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+        <StackPanel Orientation="Horizontal">
 
-        <!--Spread-->
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <!--Spread-->
+            <TextBlock Style="{StaticResource AppTextBlock}">
             Spread
-        </TextBlock>
-        <tools:TouchbarButton x:Name="SpreadTouchbarButton"
+            </TextBlock>
+            <tools:TouchbarButton x:Name="SpreadTouchbarButton"
                       Number="{x:Bind SpreadNumberConverter(SelectionViewModel.GeometryHeartSpread),Mode=OneWay}"
                         >
-            <tools:TouchbarButton.TouchbarSlider>
-                <tools:TouchbarSlider x:Name="SpreadTouchbarSlider" 
+                <tools:TouchbarButton.TouchbarSlider>
+                    <tools:TouchbarSlider x:Name="SpreadTouchbarSlider" 
                              Number="{x:Bind SpreadNumberConverter(SelectionViewModel.GeometryHeartSpread),Mode=OneWay}"
                              Value="{x:Bind SpreadValueConverter(SelectionViewModel.GeometryHeartSpread),Mode=OneWay}"
                              />
-            </tools:TouchbarButton.TouchbarSlider>
-        </tools:TouchbarButton>
+                </tools:TouchbarButton.TouchbarSlider>
+            </tools:TouchbarButton>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <TextBlock Style="{StaticResource AppTextBlock}">
             Convert to curves
-        </TextBlock>
-        <toolsElements:ConvertToCurvesButton/>
+            </TextBlock>
+            <toolsElements:ConvertToCurvesButton/>
 
-        <ContentControl Width="4"/>
-        
-        <toolsElements:MoreCreateButton/>
+            <ContentControl Width="4"/>
 
-    </StackPanel>
-    
+            <toolsElements:MoreCreateButton/>
+
+        </StackPanel>
+    </ScrollViewer>
+
 </Page>

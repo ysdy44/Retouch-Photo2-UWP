@@ -1,5 +1,4 @@
 ﻿<UserControl
-    x:Name="UserControl"
     x:Class="Retouch_Photo2.Menus.Buttons.CharacterButton"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -20,7 +19,7 @@
 
     <menus:MenuButton x:Name="Button">
         <menus:MenuButton.CenterContent>
-            <TextBlock FontSize="32" Foreground="{x:Bind UserControl.Foreground, Mode=OneWay}">
+            <TextBlock FontSize="32">
                 T
             </TextBlock>
         </menus:MenuButton.CenterContent>

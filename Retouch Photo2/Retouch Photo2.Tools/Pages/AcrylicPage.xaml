@@ -11,51 +11,53 @@
     d:DesignWidth="400"
     >
 
-    <StackPanel Orientation="Horizontal">        
-        
-        <!--TintColor-->
-        <TextBlock Style="{StaticResource AppTextBlock}">
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+        <StackPanel Orientation="Horizontal">
+
+            <!--TintColor-->
+            <TextBlock Style="{StaticResource AppTextBlock}">
             TintColor
-        </TextBlock>
-        <toolsElements:FillColorEllipseButton/>
+            </TextBlock>
+            <toolsElements:FillColorEllipseButton/>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <!--TintOpacity-->
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <!--TintOpacity-->
+            <TextBlock Style="{StaticResource AppTextBlock}">
             TintOpacity
-        </TextBlock>
-        <tools:TouchbarButton x:Name="TintOpacityTouchbarButton"
+            </TextBlock>
+            <tools:TouchbarButton x:Name="TintOpacityTouchbarButton"
                       Number="{x:Bind TintOpacityNumberConverter(SelectionViewModel.AcrylicTintOpacity),Mode=OneWay}"
                       >
-            <tools:TouchbarButton.TouchbarSlider>
-                <tools:TouchbarSlider x:Name="TintOpacityTouchbarSlider"
+                <tools:TouchbarButton.TouchbarSlider>
+                    <tools:TouchbarSlider x:Name="TintOpacityTouchbarSlider"
                     Number="{x:Bind TintOpacityNumberConverter(SelectionViewModel.AcrylicTintOpacity),Mode=OneWay}"
                     Value="{x:Bind TintOpacityValueConverter(SelectionViewModel.AcrylicTintOpacity), Mode=OneWay}" 
                      />
-            </tools:TouchbarButton.TouchbarSlider>
-        </tools:TouchbarButton>
+                </tools:TouchbarButton.TouchbarSlider>
+            </tools:TouchbarButton>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <!--BlurAmount-->
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <!--BlurAmount-->
+            <TextBlock Style="{StaticResource AppTextBlock}">
             BlurAmount
-        </TextBlock>
-        <tools:TouchbarButton x:Name="BlurAmountTouchbarButton"
+            </TextBlock>
+            <tools:TouchbarButton x:Name="BlurAmountTouchbarButton"
                       Number="{x:Bind BlurAmountNumberConverter(SelectionViewModel.AcrylicBlurAmount),Mode=OneWay}"
                       >
-            <tools:TouchbarButton.TouchbarSlider>
-                <tools:TouchbarSlider x:Name="BlurAmountTouchbarSlider" 
+                <tools:TouchbarButton.TouchbarSlider>
+                    <tools:TouchbarSlider x:Name="BlurAmountTouchbarSlider" 
                              Number="{x:Bind BlurAmountNumberConverter(SelectionViewModel.AcrylicBlurAmount),Mode=OneWay}"
                              Value="{x:Bind BlurAmountValueConverter(SelectionViewModel.AcrylicBlurAmount),Mode=OneWay}"
                              />
-            </tools:TouchbarButton.TouchbarSlider>
-        </tools:TouchbarButton>
+                </tools:TouchbarButton.TouchbarSlider>
+            </tools:TouchbarButton>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <toolsElements:MoreCreateButton/>
+            <toolsElements:MoreCreateButton/>
 
-    </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

@@ -11,34 +11,36 @@
     d:DesignWidth="400"
     >
 
-    <StackPanel Orientation="Horizontal">
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+        <StackPanel Orientation="Horizontal">
 
-        <!--HoleRadius-->
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <!--HoleRadius-->
+            <TextBlock Style="{StaticResource AppTextBlock}">
             Hole Radius
-        </TextBlock>
-        <tools:TouchbarButton x:Name="HoleRadiusTouchbarButton"
+            </TextBlock>
+            <tools:TouchbarButton x:Name="HoleRadiusTouchbarButton"
                       Number="{x:Bind HoleRadiusNumberConverter(SelectionViewModel.GeometryDountHoleRadius),Mode=OneWay}"
                        >
-            <tools:TouchbarButton.TouchbarSlider>
-                <tools:TouchbarSlider x:Name="HoleRadiusTouchbarSlider"
+                <tools:TouchbarButton.TouchbarSlider>
+                    <tools:TouchbarSlider x:Name="HoleRadiusTouchbarSlider"
                     Number="{x:Bind HoleRadiusNumberConverter(SelectionViewModel.GeometryDountHoleRadius),Mode=OneWay}"
                     Value="{x:Bind HoleRadiusValueConverter(SelectionViewModel.GeometryDountHoleRadius), Mode=OneWay}" 
                      />
-            </tools:TouchbarButton.TouchbarSlider>
-        </tools:TouchbarButton>
+                </tools:TouchbarButton.TouchbarSlider>
+            </tools:TouchbarButton>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <TextBlock Style="{StaticResource AppTextBlock}">
             Convert to curves
-        </TextBlock>
-        <toolsElements:ConvertToCurvesButton/>
+            </TextBlock>
+            <toolsElements:ConvertToCurvesButton/>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <toolsElements:MoreCreateButton/>
+            <toolsElements:MoreCreateButton/>
 
-    </StackPanel>
-    
+        </StackPanel>
+    </ScrollViewer>
+
 </Page>

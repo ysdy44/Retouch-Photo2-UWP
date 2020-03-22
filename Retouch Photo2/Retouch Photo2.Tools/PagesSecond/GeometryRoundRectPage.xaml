@@ -11,35 +11,37 @@
     d:DesignWidth="400"
     >
 
-    <StackPanel Orientation="Horizontal">
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+        <StackPanel Orientation="Horizontal">
 
-        <!--Corner-->
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <!--Corner-->
+            <TextBlock Style="{StaticResource AppTextBlock}">
             Corner
-        </TextBlock>
-        <tools:TouchbarButton x:Name="CornerTouchbarButton"
+            </TextBlock>
+            <tools:TouchbarButton x:Name="CornerTouchbarButton"
                       Number="{x:Bind CornerNumberConverter(SelectionViewModel.GeometryRoundRectCorner),Mode=OneWay}"
                       >
-            <tools:TouchbarButton.TouchbarSlider>
+                <tools:TouchbarButton.TouchbarSlider>
 
-                <tools:TouchbarSlider x:Name="CornerTouchbarSlider" 
+                    <tools:TouchbarSlider x:Name="CornerTouchbarSlider" 
                              Number="{x:Bind CornerNumberConverter(SelectionViewModel.GeometryRoundRectCorner),Mode=OneWay}"
                              Value="{x:Bind CornerValueConverter(SelectionViewModel.GeometryRoundRectCorner),Mode=OneWay}"
                              />
-            </tools:TouchbarButton.TouchbarSlider>
-        </tools:TouchbarButton>
+                </tools:TouchbarButton.TouchbarSlider>
+            </tools:TouchbarButton>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <TextBlock Style="{StaticResource AppTextBlock}">
             Convert to curves
-        </TextBlock>
-        <toolsElements:ConvertToCurvesButton/>
+            </TextBlock>
+            <toolsElements:ConvertToCurvesButton/>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <toolsElements:MoreCreateButton/>
+            <toolsElements:MoreCreateButton/>
 
-    </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
 
 </Page>

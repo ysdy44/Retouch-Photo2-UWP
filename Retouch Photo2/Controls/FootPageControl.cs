@@ -142,6 +142,8 @@ namespace Retouch_Photo2.Controls
 
         private ToolType LayerToTool(string type)
         {
+            //@Debug:临时返回，建议删掉
+            return ToolType.None;
             switch (type)
             {
                 //Geometry0

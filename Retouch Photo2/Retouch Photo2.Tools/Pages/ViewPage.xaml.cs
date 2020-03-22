@@ -22,7 +22,7 @@ namespace Retouch_Photo2.Tools.Pages
     /// Page of <see cref = "ViewTool"/>.
     /// </summary>
     public sealed partial class ViewPage : Page, IToolPage
-    {   
+    {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
@@ -114,33 +114,33 @@ namespace Retouch_Photo2.Tools.Pages
 
             //Radian: 
             //  Binding own DependencyProperty to the Storyboard
-            Storyboard.SetTarget(this.RadianKeyFrames, this);
-            this.RadianStoryboard.Completed += (s, e) =>
             {
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-            };
-            this.RadianClearButton.Tapped += (s, e) =>
-            {
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                Storyboard.SetTarget(this.RadianKeyFrames, this);
+                Storyboard.SetTargetProperty(this.RadianKeyFrames, "Radian");
+                this.RadianStoryboard.Completed += (s, e) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                this.RadianClearButton.Tapped += (s, e) =>
+                {
+                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
-                this.Radian = this.ViewModel.CanvasTransformer.Radian;
-                this.RadianStoryboard.Begin();//Storyboard
-            };
+                    this.Radian = this.ViewModel.CanvasTransformer.Radian;
+                    this.RadianStoryboard.Begin();//Storyboard
+                };
+            }
 
             //Scale: 
             //  Binding own DependencyProperty to the Storyboard
-            Storyboard.SetTarget(this.ScaleKeyFrames, this);
-            this.ScaleStoryboard.Completed += (s, e) =>
             {
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-            };
-            this.ScaleClearButton.Tapped += (s, e) =>
-            {
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                Storyboard.SetTarget(this.ScaleKeyFrames, this);
+                Storyboard.SetTargetProperty(this.ScaleKeyFrames, "Scale");
+                this.ScaleStoryboard.Completed += (s, e) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                this.ScaleClearButton.Tapped += (s, e) =>
+                {
+                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
-                this.Scale = this.ViewModel.CanvasTransformer.Scale;
-                this.ScaleStoryboard.Begin();//Storyboard
-            };
+                    this.Scale = this.ViewModel.CanvasTransformer.Scale;
+                    this.ScaleStoryboard.Begin();//Storyboard
+                };
+            }
 
             //Radian
             {
@@ -210,7 +210,7 @@ namespace Retouch_Photo2.Tools.Pages
                 this.ScaleTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
             }
         }
-        
+
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {

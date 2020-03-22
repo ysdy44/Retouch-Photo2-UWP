@@ -4,6 +4,17 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     >
 
+    
+    <!--ScrollViewer-->
+    <Style x:Key="AppHorizontalScrollViewer" TargetType="ScrollViewer">
+        <Setter Property="IsHorizontalRailEnabled" Value="True"/>
+        <Setter Property="IsVerticalRailEnabled" Value="False"/>
+        <Setter Property="HorizontalScrollMode" Value="Enabled"/>
+        <Setter Property="HorizontalScrollBarVisibility" Value="Hidden"/>
+        <Setter Property="VerticalScrollMode" Value="Disabled"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
+    </Style>
+    
 
     <!--ToolTip-->
     <Style x:Key="AppToolTip" TargetType="ToolTip">

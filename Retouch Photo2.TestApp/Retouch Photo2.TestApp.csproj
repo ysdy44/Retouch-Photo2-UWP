@@ -153,6 +153,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\FanKit.Transformers\FanKit.Transformers\FanKit.Transformers.csproj">
+      <Project>{a98a4671-07f5-46c7-bad2-9fa0242d2855}</Project>
+      <Name>FanKit.Transformers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Adjustment\Retouch Photo2.Adjustments.csproj">
       <Project>{7256c005-0e5d-4c38-9115-e4eef9978233}</Project>
       <Name>Retouch Photo2.Adjustments</Name>

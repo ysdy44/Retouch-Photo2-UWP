@@ -11,9 +11,9 @@
     d:DesignWidth="400"
     >
 
-    
+
     <Page.Resources>
-        
+
         <!--Flyout-->
         <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <hSVColorPickers:ColorPicker x:Name="ColorPicker" Width="222" Background="Transparent" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" />
@@ -21,7 +21,7 @@
         <Flyout x:Name="StopsFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <brushs:StopsPicker x:Name="StopsPicker" Width="320"/>
         </Flyout>
-        
+
         <!--Storyboard-->
         <Storyboard x:Name="EaseStoryboard">
             <ColorAnimation From="{ThemeResource SystemBaseHighColor}" To="{ThemeResource AppBorderBrushColor}" Storyboard.TargetProperty="Color" Storyboard.TargetName="BrushTypeBorderBorderBrush" d:IsOptimized="True">
@@ -30,87 +30,90 @@
                 </ColorAnimation.EasingFunction>
             </ColorAnimation>
         </Storyboard>
-        
+
     </Page.Resources>
-    
 
-    <StackPanel Orientation="Horizontal">
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+        <StackPanel Orientation="Horizontal">
+
+            <TextBlock Style="{StaticResource AppTextBlock}">
             Fill or Stroke
-        </TextBlock>
-        <Border Style="{StaticResource AppRoundedBorderStyle}">
-            <ComboBox x:Name="FillOrStrokeComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
+            </TextBlock>
+            <Border Style="{StaticResource AppRoundedBorderStyle}">
+                <ComboBox x:Name="FillOrStrokeComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
                   SelectedIndex="{x:Bind FillOrStrokeToIndexConverter(SelectionViewModel.FillOrStroke),Mode=OneWay}" 
                   >
-                <ComboBoxItem>
-                    <TextBlock>
+                    <ComboBoxItem>
+                        <TextBlock>
                         Fill
-                    </TextBlock>
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    <TextBlock>
+                        </TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock>
                         Stroke
-                    </TextBlock>
-                </ComboBoxItem>
-            </ComboBox>
-        </Border>
+                        </TextBlock>
+                    </ComboBoxItem>
+                </ComboBox>
+            </Border>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <TextBlock Style="{StaticResource AppTextBlock}">
             BrushType
-        </TextBlock>
-        <Border Style="{StaticResource AppRoundedBorderStyle}">
-            <Border.BorderBrush>
-                <SolidColorBrush x:Name="BrushTypeBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
-            </Border.BorderBrush>
-            <ComboBox x:Name="BrushTypeComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
+            </TextBlock>
+            <Border Style="{StaticResource AppRoundedBorderStyle}">
+                <Border.BorderBrush>
+                    <SolidColorBrush x:Name="BrushTypeBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
+                </Border.BorderBrush>
+                <ComboBox x:Name="BrushTypeComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
                   SelectedIndex="{x:Bind BrushTypeToIndexConverter(SelectionViewModel.BrushType),Mode=OneWay}" 
                  >
-                <ComboBoxItem>
-                    <TextBlock>
+                    <ComboBoxItem>
+                        <TextBlock>
                         None
-                    </TextBlock>
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    <TextBlock>
+                        </TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock>
                         Color
-                    </TextBlock>
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    <TextBlock>
+                        </TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock>
                         Linear
-                    </TextBlock>
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    <TextBlock>
+                        </TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock>
                         Radial
-                    </TextBlock>
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    <TextBlock>
+                        </TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock>
                         Elliptical
-                    </TextBlock>
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    <TextBlock>
+                        </TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock>
                         Image
-                    </TextBlock>
-                </ComboBoxItem>
-            </ComboBox>
-        </Border>
+                        </TextBlock>
+                    </ComboBoxItem>
+                </ComboBox>
+            </Border>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <TextBlock Style="{StaticResource AppTextBlock}">
             Brush
-        </TextBlock>
-        <brushs:ShowControl x:Name="ShowControl" 
+            </TextBlock>
+            <brushs:ShowControl x:Name="ShowControl" 
                                  Color="{x:Bind SelectionViewModel.Color,Mode=OneWay}"
                                  BrushType="{x:Bind SelectionViewModel.BrushType,Mode=OneWay}"
                                  BrushArray="{x:Bind SelectionViewModel.BrushArray,Mode=OneWay}"
                                  />
-        
-    </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+
 </Page>

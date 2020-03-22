@@ -10,37 +10,40 @@
     d:DesignWidth="400"
     >
 
-    <StackPanel Orientation="Horizontal">
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+        <StackPanel Orientation="Horizontal">
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <TextBlock Style="{StaticResource AppTextBlock}">
             FillColor
-        </TextBlock>
-        <toolsElements:FillColorEllipseButton/>
+            </TextBlock>
+            <toolsElements:FillColorEllipseButton/>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <TextBlock Style="{StaticResource AppTextBlock}">
             StrokeColor
-        </TextBlock>
-        <toolsElements:StrokeColorEllipseButton/>
+            </TextBlock>
+            <toolsElements:StrokeColorEllipseButton/>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <TextBlock Style="{StaticResource AppTextBlock}">
             StrokeWidth
-        </TextBlock>
-        <toolsElements:StrokeWidthButton x:Name="StrokeWidthButton"/>
+            </TextBlock>
+            <toolsElements:StrokeWidthButton x:Name="StrokeWidthButton"/>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <TextBlock Style="{StaticResource AppTextBlock}">
             Convert to curves
-        </TextBlock>
-        <toolsElements:ConvertToCurvesButton/>
+            </TextBlock>
+            <toolsElements:ConvertToCurvesButton/>
 
-        <ContentControl Width="4"/>
-        
-        <toolsElements:MoreCreateButton/>
+            <ContentControl Width="4"/>
 
-    </StackPanel>
+            <toolsElements:MoreCreateButton/>
+
+        </StackPanel>
+    </ScrollViewer>
+
 </Page>

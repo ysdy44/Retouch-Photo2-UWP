@@ -10,17 +10,19 @@
     d:DesignWidth="400"
     >
 
-    <StackPanel Orientation="Horizontal">
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+        <StackPanel Orientation="Horizontal">
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            Convert to curves
-        </TextBlock>
-        <toolsElements:ConvertToCurvesButton/>
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                Convert to curves
+            </TextBlock>
+            <toolsElements:ConvertToCurvesButton/>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <toolsElements:MoreCreateButton/>
-        
-    </StackPanel>
-    
+            <toolsElements:MoreCreateButton/>
+
+        </StackPanel>
+    </ScrollViewer>
+
 </Page>

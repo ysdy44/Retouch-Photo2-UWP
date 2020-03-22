@@ -37,13 +37,14 @@ namespace Retouch_Photo2
             Tools = new List<ITool>
             {
 
+                /*
+
                 new CursorTool(),
                  new ViewTool(),
                  new TextArtisticTool(),
                  new TextFrameTool(),
                  
-                /*
-
+                                                  */
                 
                  new CursorTool(),
                  null,
@@ -90,25 +91,25 @@ namespace Retouch_Photo2
                  new GeometryArrowTool(),
                  new GeometryCapsuleTool(),
                  new GeometryHeartTool(),
-                                  */
             },
 
             //Menu
             Menus = new List<IMenu>
-            {
+            {               
+                 /*
                 new LayerMenu(),
                 new CharacterMenu(),
+                                */
 
-                /*
                 new DebugMenu(),
                 new SelectionMenu(),
                 new OperateMenu(),
                 new AdjustmentMenu(),
                 new EffectMenu(),
                 new TransformerMenu(),
+                new CharacterMenu(),
                 new ColorMenu(),
                 new LayerMenu(),      
-                                */
 
             },
         };

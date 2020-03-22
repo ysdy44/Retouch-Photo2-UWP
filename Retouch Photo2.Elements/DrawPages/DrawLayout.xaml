@@ -293,10 +293,7 @@
 
             <!--HeadRight-->
             <ScrollViewer Grid.Column="2" HorizontalAlignment="Right"
-                      IsHorizontalRailEnabled="True" IsVerticalRailEnabled="False"
-                      HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" 
-                      VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled"
-                      >
+                           Style="{StaticResource AppHorizontalScrollViewer}">
                 <StackPanel x:Name="HeadRightStackPane" Orientation="Horizontal">
                     <!--HeadRight-->
                 </StackPanel>

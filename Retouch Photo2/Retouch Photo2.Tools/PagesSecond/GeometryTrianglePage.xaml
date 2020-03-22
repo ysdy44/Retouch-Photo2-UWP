@@ -11,44 +11,46 @@
     d:DesignWidth="400"
     >
 
-    <StackPanel Orientation="Horizontal">
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+        <StackPanel Orientation="Horizontal">
 
-        <!--Center-->
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            Center Point
-        </TextBlock>
-        <tools:TouchbarButton x:Name="CenterTouchbarButton"
+            <!--Center-->
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                Center Point
+            </TextBlock>
+            <tools:TouchbarButton x:Name="CenterTouchbarButton"
                       Number="{x:Bind CenterNumberConverter(SelectionViewModel.GeometryTriangleCenter),Mode=OneWay}"
                         >
-            <tools:TouchbarButton.TouchbarSlider>
-                <tools:TouchbarSlider x:Name="CenterTouchbarSlider" 
+                <tools:TouchbarButton.TouchbarSlider>
+                    <tools:TouchbarSlider x:Name="CenterTouchbarSlider" 
                              Number="{x:Bind CenterNumberConverter(SelectionViewModel.GeometryTriangleCenter),Mode=OneWay}"
                              Value="{x:Bind CenterValueConverter(SelectionViewModel.GeometryTriangleCenter),Mode=OneWay}"
                              />
-            </tools:TouchbarButton.TouchbarSlider>
-        </tools:TouchbarButton>
+                </tools:TouchbarButton.TouchbarSlider>
+            </tools:TouchbarButton>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <!--Mirror-->
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            Mirror
-        </TextBlock>
-        <Button x:Name="MirrorButton" Style="{StaticResource AppCircleButtonStyle}">
-            <FontIcon Glyph="&#xE13C;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
-        </Button>
+            <!--Mirror-->
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                Mirror
+            </TextBlock>
+            <Button x:Name="MirrorButton" Style="{StaticResource AppCircleButtonStyle}">
+                <FontIcon Glyph="&#xE13C;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+            </Button>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            Convert to curves
-        </TextBlock>
-        <toolsElements:ConvertToCurvesButton/>
+            <TextBlock Style="{StaticResource AppTextBlock}">
+                Convert to curves
+            </TextBlock>
+            <toolsElements:ConvertToCurvesButton/>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <toolsElements:MoreCreateButton/>
+            <toolsElements:MoreCreateButton/>
 
-    </StackPanel>
-    
+        </StackPanel>
+    </ScrollViewer>
+
 </Page>

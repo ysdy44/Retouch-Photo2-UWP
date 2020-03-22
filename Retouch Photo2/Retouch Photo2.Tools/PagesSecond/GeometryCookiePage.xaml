@@ -11,7 +11,8 @@
     d:DesignWidth="400"
     >
 
-    <StackPanel Orientation="Horizontal">
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+      <StackPanel Orientation="Horizontal">
 
         <!--InnerRadius-->
         <TextBlock Style="{StaticResource AppTextBlock}">
@@ -57,5 +58,6 @@
         <toolsElements:MoreCreateButton/>
 
     </StackPanel>
+    </ScrollViewer>
     
 </Page>

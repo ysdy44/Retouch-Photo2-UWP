@@ -54,7 +54,10 @@ namespace Retouch_Photo2.Tools.Models
             this.ViewModel.TipWidthHeight?.Invoke(transformer, point, InvalidateMode.HD); //Delegate
 
             //Mezzanine
-            this.ViewModel.MezzanineLayer = this.CreateLayer(transformer);
+            ILayer layer = this.CreateLayer(transformer);
+            layer.StyleManager = this.SelectionViewModel.StyleManager.Clone();
+
+            this.ViewModel.MezzanineLayer = layer;
             this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.ViewModel.MezzanineLayer);
 
             //Selection

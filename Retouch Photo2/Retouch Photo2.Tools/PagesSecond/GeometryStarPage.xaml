@@ -4,58 +4,60 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     xmlns:tools="using:Retouch_Photo2.Tools"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
     >
 
-    <StackPanel Orientation="Horizontal">
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+        <StackPanel Orientation="Horizontal">
 
-        <!--Points-->
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <!--Points-->
+            <TextBlock Style="{StaticResource AppTextBlock}">
             Points
-        </TextBlock>
-        <tools:TouchbarButton x:Name="PointsTouchbarButton"
+            </TextBlock>
+            <tools:TouchbarButton x:Name="PointsTouchbarButton"
                       Number="{x:Bind SelectionViewModel.GeometryStarPoints,Mode=OneWay}"
                       >
-            <tools:TouchbarButton.TouchbarSlider>
-                <tools:TouchbarSlider x:Name="PointsTouchbarSlider" 
+                <tools:TouchbarButton.TouchbarSlider>
+                    <tools:TouchbarSlider x:Name="PointsTouchbarSlider" 
                              Number="{x:Bind SelectionViewModel.GeometryStarPoints,Mode=OneWay}"
                              Value="{x:Bind PointsValueConverter(SelectionViewModel.GeometryStarPoints),Mode=OneWay}"
                              />
-            </tools:TouchbarButton.TouchbarSlider>
-        </tools:TouchbarButton>
+                </tools:TouchbarButton.TouchbarSlider>
+            </tools:TouchbarButton>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <!--InnerRadius-->
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <!--InnerRadius-->
+            <TextBlock Style="{StaticResource AppTextBlock}">
             Inner Radius
-        </TextBlock>
-        <tools:TouchbarButton x:Name="InnerRadiusTouchbarButton"
+            </TextBlock>
+            <tools:TouchbarButton x:Name="InnerRadiusTouchbarButton"
                       Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryStarInnerRadius),Mode=OneWay}"
                        >
-            <tools:TouchbarButton.TouchbarSlider>
-                <tools:TouchbarSlider x:Name="InnerRadiusTouchbarSlider"
+                <tools:TouchbarButton.TouchbarSlider>
+                    <tools:TouchbarSlider x:Name="InnerRadiusTouchbarSlider"
                     Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryStarInnerRadius),Mode=OneWay}"
                     Value="{x:Bind InnerRadiusValueConverter(SelectionViewModel.GeometryStarInnerRadius), Mode=OneWay}" 
                      />
-            </tools:TouchbarButton.TouchbarSlider>
-        </tools:TouchbarButton>
+                </tools:TouchbarButton.TouchbarSlider>
+            </tools:TouchbarButton>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
+            <TextBlock Style="{StaticResource AppTextBlock}">
             Convert to curves
-        </TextBlock>
-        <toolsElements:ConvertToCurvesButton/>
+            </TextBlock>
+            <toolsElements:ConvertToCurvesButton/>
 
-        <ContentControl Width="4"/>
+            <ContentControl Width="4"/>
 
-        <toolsElements:MoreCreateButton/>
+            <toolsElements:MoreCreateButton/>
 
-    </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
 
 </Page>
