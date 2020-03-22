@@ -1,9 +1,10 @@
-﻿using System.Numerics;
+﻿using Retouch_Photo2.Elements;
+using System.Numerics;
 using Windows.Devices.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Elements
+namespace Retouch_Photo2.Elements.DrawPages
 {
     /// <summary> 
     /// <see cref = "DrawPage" />'s layout. 

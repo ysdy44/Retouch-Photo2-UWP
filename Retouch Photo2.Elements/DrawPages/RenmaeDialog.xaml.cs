@@ -1,6 +1,6 @@
 ﻿using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Elements
+namespace Retouch_Photo2.Elements.DrawPages
 {
     /// <summary>
     /// <see cref = "DrawPage" /> Appbar's <see cref = "RenameDialog" />.

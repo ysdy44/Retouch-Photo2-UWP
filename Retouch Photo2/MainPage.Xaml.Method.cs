@@ -1,7 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.Elements.MainPages;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
@@ -20,6 +19,7 @@ using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Elements.MainPages;
 
 namespace Retouch_Photo2
 {

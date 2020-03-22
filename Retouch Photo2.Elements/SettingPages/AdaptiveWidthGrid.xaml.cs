@@ -2,7 +2,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Elements
+namespace Retouch_Photo2.Elements.SettingPages
 {
     /// <summary>
     /// Grid control that display and adjust parameters for adaptive width.

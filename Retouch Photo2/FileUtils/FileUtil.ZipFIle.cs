@@ -37,7 +37,7 @@ namespace Retouch_Photo2
             {
                 //Unzip to temporary folder
                 ZipArchive archive = new ZipArchive(stream);
-                archive.ExtractToDirectory(ApplicationData.Current.TemporaryFolder.Path, true);
+                archive.ExtractToDirectory(ApplicationData.Current.TemporaryFolder.Path);
             }
         }
 

@@ -8,6 +8,7 @@
     xmlns:controls="using:Retouch_Photo2.Controls"
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:elementDialog="using:Retouch_Photo2.Elements.Dialogs"
+    xmlns:elementDrawPages="using:Retouch_Photo2.Elements.DrawPages"
     xmlns:layers="using:Retouch_Photo2.Layers"
     xmlns:toolElements="using:Retouch_Photo2.Tools.Elements"
     NavigationCacheMode="Required"    
@@ -120,41 +121,41 @@
 
         </Grid.Resources>
 
-        <elements:DrawLayout x:Name="DrawLayout" 
+        <elementDrawPages:DrawLayout x:Name="DrawLayout" 
                LeftIcon="{x:Bind IconConverter(TipViewModel.Tool),Mode=OneWay}"
                Touchbar="{x:Bind TipViewModel.TouchbarControl,Mode=OneWay}"                                             
                Theme="{x:Bind RequestedTheme, Mode=OneWay}"
                >
 
             <!--FootPage-->
-            <elements:DrawLayout.FootPage>
+            <elementDrawPages:DrawLayout.FootPage>
                 <controls:FootPageControl x:Name="FootPageControl"       
                     Tool="{x:Bind TipViewModel.Tool,Mode=OneWay}"                         
                     Type="{x:Bind SelectionViewModel.Type,Mode=OneWay}"                         
                     Mode="{x:Bind SelectionViewModel.SelectionMode,Mode=OneWay}"                    
                     />
-            </elements:DrawLayout.FootPage>
+            </elementDrawPages:DrawLayout.FootPage>
 
             <!--RightIcon-->
-            <elements:DrawLayout.RightIcon>
+            <elementDrawPages:DrawLayout.RightIcon>
                 <layers:Icon/>
-            </elements:DrawLayout.RightIcon>
+            </elementDrawPages:DrawLayout.RightIcon>
 
             <!--RightPane-->
-            <elements:DrawLayout.RightPane>
+            <elementDrawPages:DrawLayout.RightPane>
                 <controls:LayersControl x:Name="LayersControl"/>
-            </elements:DrawLayout.RightPane>
+            </elementDrawPages:DrawLayout.RightPane>
 
             <!--Canvas-->
-            <elements:DrawLayout.CenterChild>
+            <elementDrawPages:DrawLayout.CenterChild>
                 <controls:MainCanvasControl x:Name="MainCanvasControl"
                     AccentColor="{ThemeResource SystemAccentColor}" 
                     ShadowColor="{ThemeResource AppStrokeColor}" 
                     />
-            </elements:DrawLayout.CenterChild>
+            </elementDrawPages:DrawLayout.CenterChild>
 
             <!--HeadLeft-->
-            <elements:DrawLayout.HeadLeftPane>
+            <elementDrawPages:DrawLayout.HeadLeftPane>
                 <elements:ExpandAppbar x:Name="ExpandAppbar">
                     <elements:ExpandAppbar.Children>
 
@@ -239,9 +240,9 @@
 
                     </elements:ExpandAppbar.Children>
                 </elements:ExpandAppbar>
-            </elements:DrawLayout.HeadLeftPane>
+            </elementDrawPages:DrawLayout.HeadLeftPane>
 
-        </elements:DrawLayout>
+        </elementDrawPages:DrawLayout>
 
 
         <!--Menu-->

@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.Elements.SettingPages;
 using Retouch_Photo2.ViewModels;
 using System;
 using Windows.Storage;

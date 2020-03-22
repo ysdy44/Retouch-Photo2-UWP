@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
     xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:elementsSettingPages="using:Retouch_Photo2.Elements.SettingPages"
     mc:Ignorable="d"
     Background="{ThemeResource AppBackground}"
     NavigationCacheMode="Required"    
@@ -207,7 +208,7 @@
                         <TextBlock x:Name="AdaptiveTextBlock" Style="{StaticResource TitleTextBlockStyle}">
                             Adaptive Width
                         </TextBlock>
-                        <elements:AdaptiveWidthGrid x:Name="AdaptiveGrid"/>
+                        <elementsSettingPages:AdaptiveWidthGrid x:Name="AdaptiveGrid"/>
                         <HyperlinkButton x:Name="AdaptiveResetButton" Content="Reset adaptive width"/>
 
                         

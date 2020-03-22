@@ -1,4 +1,4 @@
-﻿namespace Retouch_Photo2.Elements
+﻿namespace Retouch_Photo2.Elements.DrawPages
 {
     /// <summary>
     /// Phone layout type.
