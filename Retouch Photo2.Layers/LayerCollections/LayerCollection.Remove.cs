@@ -5,13 +5,13 @@ namespace Retouch_Photo2.Layers
 {
     public partial class LayerCollection
     {
-        
+
 
         #region Remove
 
 
         /// <summary>
-        /// Remove
+        /// Remove all selected layers.
         /// </summary>
         public void RemoveAllSelectedLayers() => this._removeAllSelectedLayers(this.RootLayers);
 

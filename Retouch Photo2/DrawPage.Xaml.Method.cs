@@ -82,12 +82,12 @@ namespace Retouch_Photo2
         {
             this.HomeButton.Tapped += (s, e) =>
             {
-                this.Flyout.Hide();
+                this.FileFlyout.Hide();
                 this.NavigatedFrom();
             };
             this.SaveButton.Tapped += (s, e) =>
             {
-                this.Flyout.Hide();
+                this.FileFlyout.Hide();
                 if (this.ViewModel.Name == null)
                     this.ShowRenameDialog();
                 else
@@ -95,22 +95,22 @@ namespace Retouch_Photo2
             };
             this.RenameButton.Tapped += (s, e) =>
             {
-                this.Flyout.Hide();
+                this.FileFlyout.Hide();
                 this.ShowRenameDialog();
             };
             this.ExportButton.Tapped += (s, e) =>
             {
-                this.Flyout.Hide();
+                this.FileFlyout.Hide();
                 this.ShowExportDialog();
             };
             this.ShareButton.Tapped += (s, e) =>
             {
-                this.Flyout.Hide();
+                this.FileFlyout.Hide();
                 this.ShowShareDialog();
             };
             this.SetupButton.Tapped += (s, e) =>
             {
-                this.Flyout.Hide();
+                this.FileFlyout.Hide();
                 this.ShowSetupDialog();
             };
         }

@@ -1,5 +1,8 @@
 ﻿namespace Retouch_Photo2.Layers
 {
+    /// <summary> 
+    /// Select mode of <see cref="ILayer"/>.
+    /// </summary>
     public enum SelectMode
     {
         /// <summary> Normal. </summary>

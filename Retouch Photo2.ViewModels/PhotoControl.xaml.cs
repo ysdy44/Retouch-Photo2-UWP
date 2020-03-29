@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Uwp.UI.Controls;
+using Retouch_Photo2.Layers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,45 +17,52 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Retouch_Photo2.ViewModels
 {
+    /// <summary> 
+    /// MainPagr's the only <see cref = "ViewModels.PhotoControl" />. 
+    /// </summary>
     public sealed partial class PhotoControl : UserControl
     {
 
         //@VisualState
-        bool? _vsSelectMode = null;
+        PhotoSelectMode _vsSelectMode = PhotoSelectMode.None;
         public VisualState VisualState
         {
             get
             {
                 switch (this._vsSelectMode)
                 {
-                    case null: return this.Normal;
-                    case false: return this.UnSelected;
-                    case true: return this.Selected;
+                    case PhotoSelectMode.None: return this.Normal;
+                    case PhotoSelectMode.UnSelected: return this.UnSelected;
+                    case PhotoSelectMode.Selected: return this.Selected;
                 }
                 return this.Normal;
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
 
+        //@Content
+        /// <summary> TextBlock's tittle. </summary>
+        public String Titlle { set => this.TextBlock.Text = value; }
+        /// <summary> ImageEx's source. </summary>
+        public object ImageSource { set => this.ImageEx.Source = value; }
+
+        /// <summary>
+        /// Gets or sets the select-mode.
+        /// </summary>
+        public PhotoSelectMode SelectMode
+        {
+            get => this._vsSelectMode;
+            set
+            {
+                this._vsSelectMode = value;
+                this.VisualState = this.VisualState;//State
+            }
+        }
+
         //@Construct
-        public PhotoControl(Photo photo)
+        public PhotoControl()
         {
             this.InitializeComponent();
-
-            this.TextBlock.Text = photo.Name;
-            this.ImageEx.Source = photo.Uri;
-
-            this.RootGrid.Tapped += (s, e) =>
-            {
-                Photo.ItemClick?.Invoke(this.BackgroundGrid, photo);//Delegate
-            };
         }
-
-        public void SetSelectMode(bool? value)
-        {
-            this._vsSelectMode = value;
-            this.VisualState = this.VisualState;//State
-        }
-
     }
 }

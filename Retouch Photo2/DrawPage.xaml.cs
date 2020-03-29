@@ -86,12 +86,12 @@ namespace Retouch_Photo2
             //Layers
             this.LayersControl.WidthButton.Tapped += (s, e) => this.DrawLayout.PadChangeLayersWidth();
 
-            // File button flyout.
-            this.DrawLayout.FileButton.Tapped += (s, e) => this.Flyout.ShowAt(this.DrawLayout.FileButton);
+            //File button flyout.
+            this.DrawLayout.FileButton.Tapped += (s, e) => this.FileFlyout.ShowAt(this.DrawLayout.FileButton);
             this.ConstructFileButton();
             this.ConstructFileDialog();
 
-            // Binding own DependencyProperty to the Storyboard
+            //Binding own DependencyProperty to the Storyboard
             Storyboard.SetTarget(this.TransitionKeyFrames, this);
             this.TransitionKeyFrames.Completed += (s, e) => this.NavigatedToComplete();
 
@@ -109,8 +109,16 @@ namespace Retouch_Photo2
             
 
             //Button
-            this.UnFullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = false;
-            this.FullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = true;
+            this.UnFullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = !this.KeyboardViewModel.IsFullScreen;
+            this.FullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = !this.KeyboardViewModel.IsFullScreen;
+            /*
+             this.UndoButton.Tapped += (s, e) =>
+            {
+            };
+            this.RedoButton.Tapped += (s, e) =>
+            {
+            };
+            */
             this.ThemeButton.Tapped += (s, e) =>
             {
                 //Trigger switching theme.

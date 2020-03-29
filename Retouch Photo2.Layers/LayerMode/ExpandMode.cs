@@ -1,5 +1,8 @@
 ﻿namespace Retouch_Photo2.Layers
 {
+    /// <summary> 
+    /// Expand mode of <see cref="ILayer"/>.
+    /// </summary>
     public enum ExpandMode
     {
         /// <summary> Normal. </summary>

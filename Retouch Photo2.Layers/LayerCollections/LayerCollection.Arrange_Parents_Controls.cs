@@ -4,24 +4,20 @@ namespace Retouch_Photo2.Layers
 {
     public partial class LayerCollection
     {
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public void ArrangeLayersParents() => LayerCollection.ArrangeLayersParents(this.RootLayers);
-        
 
         /// <summary>
-        /// 
+        /// Arrange parent-layer for root-layers.
         /// </summary>
-        public static void ArrangeLayersParents(IList<ILayer> layers)
+        public void ArrangeLayersParents() => LayerCollection._arrangeLayersParents(this.RootLayers);
+               
+        private static void _arrangeLayersParents(IList<ILayer> layers)
         {
             foreach (ILayer layer in layers)
             {
                 LayerCollection._arrangeLayersParents(layer, layer.Children);
             }
         }
-        public static void _arrangeLayersParents(ILayer parents, IList<ILayer> layers)
+        private static void _arrangeLayersParents(ILayer parents, IList<ILayer> layers)
         {
             foreach (ILayer layer in layers)
             {
@@ -32,7 +28,8 @@ namespace Retouch_Photo2.Layers
 
 
         /// <summary>
-        /// 
+        /// Clear and arrange all root-controls by root-layers.
+        /// (Call it when root-layers is cleared or added.)
         /// </summary>
         public void ArrangeLayersControlsWithClearAndAdd()
         {

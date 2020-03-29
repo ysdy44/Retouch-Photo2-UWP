@@ -1,25 +1,21 @@
 ﻿using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Elements.MainPages;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using Windows.Foundation;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Elements.MainPages;
 
 namespace Retouch_Photo2
 {
@@ -28,27 +24,56 @@ namespace Retouch_Photo2
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        
-        private async Task ConstructSettingViewModel()
+
+        /// <summary>
+        /// Refresh the GridView children.
+        /// </summary>
+        private async Task RefreshWrapGrid()
         {
-            //Setting
-            SettingViewModel setting = null;
+            IEnumerable<StorageFile> orderedPhotos = await FileUtil.FindPhoto2pkFile();
 
-            try
+            //Refresh, when the count is not equal.
+            if (orderedPhotos.Count() != this.Photos.Count)
             {
-                setting = await SettingViewModel.CreateFromLocalFile();
-            }
-            catch (Exception)
-            {
+                this.Photos.Clear(); //Notify
+                this.GridView.Children.Clear();
+
+                foreach (StorageFile storageFile in orderedPhotos)
+                {
+                    // [StorageFile] --> [Photo]
+                    Photo photo = new Photo(storageFile, ApplicationData.Current.LocalFolder.Path);
+
+                    if (photo != null)
+                    {
+                        this.Photos.Add(photo); //Notify
+                        this.GridView.Children.Add(photo.Control);
+                    }
+                }
             }
 
-            if (setting != null)
-            {
-                this.SettingViewModel = setting;
-            }
+            this._vsIsInitialVisibility = (this.Photos.Count == 0);
+            this._vsState = MainPageState.Main;
+            this.VisualState = this.VisualState;//State
+        }
 
-            ElementTheme theme = this.SettingViewModel.ElementTheme;
-            ApplicationViewTitleBarBackgroundExtension.SetTheme(theme);
+        /// <summary>
+        /// Refresh the selected count.
+        /// </summary>
+        private void RefreshSelectCountRun()
+        {
+            int count = this.Photos.Count(p => p.Control.SelectMode == PhotoSelectMode.Selected);
+            this.SelectCountRun.Text = count.ToString();
+        }
+
+        /// <summary>
+        /// Refresh all photos select-mode.
+        /// </summary>
+        private void RefreshPhotosSelectMode(PhotoSelectMode selectMode)
+        {
+            foreach (Photo item in this.Photos)
+            {
+                item.Control.SelectMode = selectMode;
+            }
         }
 
 
@@ -63,11 +88,9 @@ namespace Retouch_Photo2
 
             this.Frame.Navigate(typeof(DrawPage));//Navigate   
         }
-        private async void NewProjectFromPhoto(object sender, Photo photo)
+        private async void NewProjectFromPhoto(Photo photo)
         {
-            if (this.State != MainPageState.Main) return;
-
-            if (sender is FrameworkElement element)
+            if (photo.Control is FrameworkElement element)
             {
                 this.ViewModel.CanvasTransformer.Size = new Size(this.ActualWidth, this.ActualHeight - 50);
 
@@ -121,48 +144,6 @@ namespace Retouch_Photo2
             //Project
             Project project = new Project(imageLayer);
             this.Frame.Navigate(typeof(DrawPage), project);//Navigate       
-        }
-                     
-
-
-        private void ConstructAddDialog()
-        {
-            this.AddDialog.CloseButton.Click += (sender, args) =>
-            {
-                this.AddDialog.Hide();
-            };
-            this.AddDialog.PrimaryButton.Click += (sender, args) =>
-            {
-                this.AddDialog.Hide();
-
-                BitmapSize size = this.AddSizePicker.Size;
-
-                this.NewProjectFromSize(size);
-            };
-        }
-
-        private void ShowAddDialog()
-        {
-            this.AddDialog.Show();
-        }
-        
-
-        private void ConstructFolderDialog()
-        {
-        }
-
-        private void ShowFolderDialog()
-        {
-        }
-
-
-
-        private async void NavigatedTo()
-        {
-            await this.Refresh();
-        }
-        private void NavigatedFrom(FrameworkElement element)
-        {
         }
 
     }

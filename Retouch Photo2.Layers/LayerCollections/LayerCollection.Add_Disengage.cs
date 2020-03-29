@@ -11,7 +11,7 @@ namespace Retouch_Photo2.Layers
     {
 
         /// <summary>
-        /// Add a layer into children.
+        /// Add a current-layer into source-layer's children.
         /// </summary>
         /// <param name="currentLayer"> The current layers. </param>
         /// <param name="layer"> The source layer. </param>

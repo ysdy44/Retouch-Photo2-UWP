@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Menus;
+﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.Menus;
 using Retouch_Photo2.Tools;
 using System.Linq;
 using Windows.Foundation;
@@ -25,17 +26,11 @@ namespace Retouch_Photo2
         {
             ToolButtonType type;
             UIElement button = null;
-
+            
             if (tool == null)
             {
                 type = this._tempToolButtonType;
-                button = new Rectangle
-                {
-                    Fill = new SolidColorBrush(Colors.Gray),
-                    Height = 1,
-                    Opacity = 0.2,
-                    Margin = new Thickness(4, 0, 4, 0),
-                };
+                button = new RectangleSeparator();
             }
             else
             {

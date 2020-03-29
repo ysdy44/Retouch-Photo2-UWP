@@ -4,13 +4,18 @@ namespace Retouch_Photo2.Layers
 {
     public partial class LayerCollection
     {
-
-
+        
         /// <summary>
-        /// Mezzanine
+        /// Mezzanine on the first selected layer.
         /// </summary>
+        /// <param name="mezzanineLayer"> The mezzanine layer. </param>
         public void MezzanineOnFirstSelectedLayer(ILayer mezzanineLayer) => this._mezzanineOnFirstSelectedLayer(mezzanineLayer, null);
+        /// <summary>
+        /// Mezzanine range on first selected layer
+        /// </summary>
+        /// <param name="mezzanineLayers"> The mezzanine layers. </param>
         public void MezzanineRangeOnFirstSelectedLayer(IList<ILayer> mezzanineLayers) => this._mezzanineOnFirstSelectedLayer(null, mezzanineLayers);
+
         private void _mezzanineOnFirstSelectedLayer(ILayer mezzanineLayer, IList<ILayer> mezzanineLayers)
         {
             int firstIndex=-1; 
@@ -76,7 +81,7 @@ namespace Retouch_Photo2.Layers
 
 
         /// <summary>
-        /// Mezzanine
+        /// Remove the mezzanine layer.
         /// </summary>
         public void RemoveMezzanineLayer(ILayer mezzanineLayer)
         {

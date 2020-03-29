@@ -37,7 +37,7 @@
                     </elements:IconButton.Text>
                 </elements:IconButton>
 
-                <Rectangle Width="Auto" Height="1" Margin="40,0,4,0" HorizontalAlignment="Stretch" Fill="{ThemeResource AppBorderBrush}"/>
+                <elements:RectangleSeparator/>
 
                 <TextBlock Style="{StaticResource AppTextBlock}">
                     Change Height
@@ -54,7 +54,7 @@
                     </elements:IconButton.Text>
                 </elements:IconButton>
 
-                <Rectangle Width="Auto" Height="1" Margin="40,0,4,0" HorizontalAlignment="Stretch" Fill="{ThemeResource AppBorderBrush}"/>
+                <elements:RectangleSeparator/>
 
                 <elements:IconButton x:Name="LayoutButton">
                     <elements:IconButton.Icon>

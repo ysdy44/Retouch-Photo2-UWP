@@ -1,5 +1,5 @@
 ﻿<Page
-   x:Class="Retouch_Photo2.MainPage"
+    x:Class="Retouch_Photo2.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -11,6 +11,7 @@
     
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:elementDialog="using:Retouch_Photo2.Elements.Dialogs"
+    xmlns:mainpages="using:Retouch_Photo2.Elements.MainPages"
     mc:Ignorable="d"
 
    NavigationCacheMode="Required"    
@@ -25,10 +26,189 @@
 
 
     <Grid x:Name="RootGrid">
+        <Grid.Resources>
+            <!--Flyout-->
+            <Flyout x:Name="RightFlyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <StackPanel Width="190">
+
+                    <elements:IconButton x:Name="RightSaveButton">
+                        <elements:IconButton.Icon>
+                            <FontIcon Glyph="&#xE105;" FontSize="22" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        </elements:IconButton.Icon>
+                        <elements:IconButton.Text>
+                            Save
+                        </elements:IconButton.Text>
+                    </elements:IconButton>
+                    <elements:IconButton x:Name="RightShareButton">
+                        <elements:IconButton.Icon>
+                            <FontIcon Glyph="&#xE72D;" FontSize="22" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </elements:IconButton.Icon>
+                        <elements:IconButton.Text>
+                            Share
+                        </elements:IconButton.Text>
+                    </elements:IconButton>
+
+                    <elements:RectangleSeparator/>
+
+                    <elements:IconButton x:Name="RightDeleteButton">
+                        <elements:IconButton.Icon>
+                            <FontIcon Glyph="&#xE107;" FontSize="22" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </elements:IconButton.Icon>
+                        <elements:IconButton.Text>
+                            Delete
+                        </elements:IconButton.Text>
+                    </elements:IconButton>
+                    <elements:IconButton x:Name="RightDuplicateButton">
+                        <elements:IconButton.Icon>
+                            <FontIcon Glyph="&#xE16F;" FontSize="22" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </elements:IconButton.Icon>
+                        <elements:IconButton.Text>
+                            Duplicate
+                        </elements:IconButton.Text>
+                    </elements:IconButton>
+
+                </StackPanel>
+            </Flyout>
+        </Grid.Resources>
+
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
+
+                <!--Initial-->
+                <VisualState x:Name="Initial">
+                    <VisualState.Setters>
+
+                        <!--Head-->
+                        <Setter Target = "RefreshButton.Visibility" Value="Visible"/>
+                        <Setter Target = "SettingButton.Visibility" Value="Visible"/>
+
+                        <!--Body-->
+                        <Setter Target = "InitialControl.Visibility" Value="Visible"/>
+                        <Setter Target = "GridView.Visibility" Value="Collapsed"/>
+
+                        <!--Foot-->
+                        <Setter Target = "RadiusAnimaPanel.Visibility" Value="Collapsed"/>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Main-->
+                <VisualState x:Name="Main">
+                    <VisualState.Setters>
+
+                        <!--Head-->
+                        <Setter Target = "RefreshButton.Visibility" Value="Visible"/>
+                        <Setter Target = "SettingButton.Visibility" Value="Visible"/>
+
+                        <!--Foot-->
+                        <Setter Target = "MainControl.Visibility" Value="Visible"/>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Add-->
+                <VisualState x:Name="Add">
+                    <VisualState.Setters>
+                        
+                        <!--Foot-->
+                        <Setter Target = "RadiusAnimaPanel.Visibility" Value="Collapsed"/>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Pictures-->
+                <VisualState x:Name="Pictures">
+                    <VisualState.Setters>
+                        
+                        <!--Foot-->
+                        <Setter Target = "PicturesControl.Visibility" Value="Visible"/>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Save-->
+                <VisualState x:Name="Save">
+                    <VisualState.Setters>
+                        
+                        <!--SelectMode-->
+                        <Setter Target = "SelectCheckBox.IsChecked" Value="true"/>
+                        <Setter Target = "SelectGrid.Visibility" Value="Visible"/>
+                        <Setter Target = "SelectCountRun.Text" Value=""/>
+                        
+                        <!--Foot-->
+                        <Setter Target = "SaveControl.Visibility" Value="Visible"/>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Share-->
+                <VisualState x:Name="Share">
+                    <VisualState.Setters>
+                        
+                        <!--SelectMode-->
+                        <Setter Target = "SelectCheckBox.IsChecked" Value="true"/>
+                        <Setter Target = "SelectGrid.Visibility" Value="Visible"/>
+                        <Setter Target = "SelectCountRun.Text" Value=""/>
+
+                        <!--Foot-->
+                        <Setter Target = "ShareControl.Visibility" Value="Visible"/>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Delete-->
+                <VisualState x:Name="Delete">
+                    <VisualState.Setters>
+                        
+                        <!--SelectMode-->
+                        <Setter Target = "SelectCheckBox.IsChecked" Value="true"/>
+                        <Setter Target = "SelectGrid.Visibility" Value="Visible"/>
+                        <Setter Target = "SelectCountRun.Text" Value=""/>
+
+                        <!--Foot-->
+                        <Setter Target = "DeleteControl.Visibility" Value="Visible"/>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Duplicate-->
+                <VisualState x:Name="Duplicate">
+                    <VisualState.Setters>
+                                                
+                        <!--SelectMode-->
+                        <Setter Target = "SelectCheckBox.IsChecked" Value="true"/>
+                        <Setter Target = "SelectGrid.Visibility" Value="Visible"/>
+                        <Setter Target = "SelectCountRun.Text" Value=""/>
+                        
+                        <!--Foot-->
+                        <Setter Target = "DuplicateControl.Visibility" Value="Visible"/>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Move-->
+                <VisualState x:Name="Move">
+                    <VisualState.Setters>
+                        
+                        <!--SelectMode-->
+                        <Setter Target = "SelectCheckBox.IsChecked" Value="true"/>
+                        <Setter Target = "SelectGrid.Visibility" Value="Visible"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="Auto" MinHeight="70"/>
         </Grid.RowDefinitions>
 
         <!--Developer-->
@@ -42,8 +222,8 @@
                 <ColumnDefinition Width="6*"/>
                 <ColumnDefinition Width="1*" MinWidth="50" MaxWidth="80"/>
             </Grid.ColumnDefinitions>
-
-            <Button x:Name="RefreshButton" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
+            
+            <Button x:Name="RefreshButton" Grid.Column="0" Visibility="Collapsed" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
                 <Button.Transitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
@@ -52,7 +232,7 @@
                 <FontIcon FontSize="20" Glyph="&#xE117;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
             </Button>
 
-            <TextBlock Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
+            <TextBlock x:Name="TittleTextBlock" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
                 <TextBlock.Transitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromHorizontalOffset="50" FromVerticalOffset="0"/>
@@ -61,7 +241,7 @@
                 Retouh Photo2
             </TextBlock>
 
-            <Button x:Name="SettingButton" Grid.Column="2" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
+            <Button x:Name="SettingButton" Grid.Column="2" Visibility="Collapsed"  Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
                 <Button.Transitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
@@ -71,8 +251,22 @@
             </Button>
 
         </Grid>
+        <Grid  x:Name="SelectGrid" Visibility="Collapsed" HorizontalAlignment="Stretch" Background="{ThemeResource AppBorderBrush}">
 
-        
+            <CheckBox x:Name="SelectCheckBox" Margin="12, 0" IsHitTestVisible="False" HorizontalAlignment="Left">
+                <TextBlock>
+                     Click to select items:
+                    <Run x:Name="SelectCountRun">0</Run>
+                </TextBlock>
+            </CheckBox>
+
+            <Button x:Name="SelectAllButton" Padding="8,0" HorizontalAlignment="Right" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                Select All
+            </Button>
+
+        </Grid>
+
+
         <!--Body-->
         <StackPanel x:Name="InitialControl" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel.ChildrenTransitions>
@@ -124,9 +318,7 @@
 
         </StackPanel>
 
-        <controls:WrapPanel x:Name="GridView"     
-                       Grid.Row="1" Visibility="Collapsed"                         
-                    >
+        <controls:WrapPanel x:Name="GridView" Grid.Row="1">
             <controls:WrapPanel.ChildrenTransitions>
                 <TransitionCollection>
                     <AddDeleteThemeTransition />
@@ -139,7 +331,7 @@
 
 
         <!--Foot-->
-        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Row="2" Visibility="Collapsed" 
+        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Row="2"
                                    ShadowOpacity="0.9"
                                    ShadowColor="{ThemeResource AppStrokeColor}"
                                    Background="{ThemeResource AppForeground}"
@@ -155,7 +347,16 @@
                 <animations:TranslationAnimation Duration="0:0:0.4" From="0,0,0" To="0,100,0"/>
             </animations:Implicit.HideAnimations>
 
-            <!--Foot-->
+            <elements:RadiusAnimaPanel.CenterContent>
+                <Grid>
+                    <mainpages:MainControl x:Name="MainControl" Visibility="Collapsed"/>
+                    <mainpages:PicturesControl x:Name="PicturesControl" Visibility="Collapsed"/>
+                    <mainpages:SaveControl x:Name="SaveControl" Visibility="Collapsed"/>
+                    <mainpages:ShareControl x:Name="ShareControl" Visibility="Collapsed"/>
+                    <mainpages:DeleteControl x:Name="DeleteControl" Visibility="Collapsed"/>
+                    <mainpages:DuplicateControl x:Name="DuplicateControl" Visibility="Collapsed"/>
+                </Grid>
+            </elements:RadiusAnimaPanel.CenterContent>
             
         </elements:RadiusAnimaPanel>
         <!--Loading-->
@@ -172,6 +373,6 @@
                 <elements:SizePicker x:Name="AddSizePicker"/>
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>
-        
+
     </Grid>
 </Page>

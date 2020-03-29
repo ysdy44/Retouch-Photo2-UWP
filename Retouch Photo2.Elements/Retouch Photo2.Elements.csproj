@@ -198,6 +198,9 @@
     <Compile Include="MainPages\ShareControl.xaml.cs">
       <DependentUpon>ShareControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RectangleSeparator.xaml.cs">
+      <DependentUpon>RectangleSeparator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingPages\AdaptiveWidthGrid.xaml.cs">
       <DependentUpon>AdaptiveWidthGrid.xaml</DependentUpon>
     </Compile>
@@ -338,6 +341,10 @@
     <Page Include="MainPages\ShareControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RectangleSeparator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SettingPages\AdaptiveWidthGrid.xaml">
       <Generator>MSBuild:Compile</Generator>

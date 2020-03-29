@@ -1,11 +1,13 @@
 ﻿<UserControl 
+    x:Name="UserControl"
     x:Class="Retouch_Photo2.Tools.ToolSecondButton"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    MinWidth="50"
     Height="40"
-    MinWidth="100"
+    Padding="4,0"
     HorizontalAlignment="Stretch"
     Background="Transparent"
     d:DesignHeight="50"
@@ -30,8 +32,8 @@
 
     </UserControl.Resources>
 
-    
-    <Grid x:Name="RootGrid" Background="Transparent">
+
+    <Grid x:Name="RootGrid" Padding="{x:Bind UserControl.Padding, Mode=OneWay}" Background="Transparent">
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
@@ -78,7 +80,7 @@
         </VisualStateManager.VisualStateGroups>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -87,7 +89,7 @@
                       VerticalAlignment="Center" 
                       Background="Transparent"/>
 
-        <TextBlock x:Name="TextBlock" Grid.Column="1" VerticalAlignment="Center" Foreground="{StaticResource UnCheckColor}"/>
+        <TextBlock x:Name="TextBlock" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource UnCheckColor}"/>
 
     </Grid>
 </UserControl>

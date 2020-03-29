@@ -7,6 +7,7 @@
     {
         /// <summary> Normal. </summary>
         None,
+        
 
         /// <summary> Main. </summary>
         Main,
@@ -14,7 +15,7 @@
         //Loading,
 
         /// <summary> Add a blank project. </summary>
-        //Add,
+        Add,
         /// <summary> Add a pictures project. </summary>
         Pictures,
 

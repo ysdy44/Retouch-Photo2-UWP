@@ -114,6 +114,7 @@
     <Compile Include="PhotoControl.xaml.cs">
       <DependentUpon>PhotoControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PhotoSelectMode.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectionViewModels\SelectionViewModel.cs" />

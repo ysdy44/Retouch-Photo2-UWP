@@ -32,11 +32,15 @@ namespace Retouch_Photo2.Layers
 
             return addLayers;
         }
-               
+
 
         #region ShiftSelect
 
 
+        /// <summary>
+        /// Select the current layer (hold **Shift** at the same time).
+        /// </summary>
+        /// <param name="currentLayer"> The current layer. </param>
         public void ShiftSelectCurrentLayer(ILayer currentLayer)
         {
             IList<ILayer> parentsChildren = (currentLayer.Parents == null) ?

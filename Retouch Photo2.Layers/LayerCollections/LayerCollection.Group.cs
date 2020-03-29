@@ -12,7 +12,7 @@ namespace Retouch_Photo2.Layers
 
 
         /// <summary>
-        /// 
+        /// Group all selected layers.
         /// </summary>
         public void GroupAllSelectedLayers()
         {

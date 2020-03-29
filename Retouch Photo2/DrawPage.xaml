@@ -34,7 +34,10 @@
 
 
     <Grid x:Name="RootGrid">
+
         <Grid.Resources>
+
+            <!--Flyout-->
             <Flyout x:Name="MoreTransformFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                 <toolElements:MoreTransformControl/>
             </Flyout>
@@ -54,7 +57,7 @@
             </Storyboard>
 
             <!--Flyout-->
-            <Flyout x:Name="Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <Flyout x:Name="FileFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                 <StackPanel Width="190">
 
                     <elements:IconButton x:Name="HomeButton">
@@ -65,8 +68,8 @@
                             Home
                         </elements:IconButton.Text>
                     </elements:IconButton>
-                    
-                    <Rectangle Width="Auto" Height="1" Margin="40,0,4,0" HorizontalAlignment="Stretch" Fill="{ThemeResource AppBorderBrush}"/>
+
+                    <elements:RectangleSeparator/>
 
                     <elements:IconButton x:Name="SaveButton">
                         <elements:IconButton.Icon>
@@ -84,8 +87,8 @@
                             Rename
                         </elements:IconButton.Text>
                     </elements:IconButton>
-                    
-                    <Rectangle Width="Auto" Height="1" Margin="40,0,4,0" HorizontalAlignment="Stretch" Fill="{ThemeResource AppBorderBrush}"/>
+
+                    <elements:RectangleSeparator/>
 
                     <elements:IconButton x:Name="ExportButton">
                         <elements:IconButton.Icon>
@@ -105,7 +108,7 @@
                         </elements:IconButton.Text>
                     </elements:IconButton>
 
-                    <Rectangle Width="Auto" Height="1" Margin="40,0,4,0" HorizontalAlignment="Stretch" Fill="{ThemeResource AppBorderBrush}"/>
+                    <elements:RectangleSeparator/>
 
                     <elements:IconButton x:Name="SetupButton">
                         <elements:IconButton.Icon>
@@ -120,6 +123,7 @@
             </Flyout>
 
         </Grid.Resources>
+        
 
         <elementDrawPages:DrawLayout x:Name="DrawLayout" 
                LeftIcon="{x:Bind IconConverter(TipViewModel.Tool),Mode=OneWay}"
@@ -159,6 +163,7 @@
                 <elements:ExpandAppbar x:Name="ExpandAppbar">
                     <elements:ExpandAppbar.Children>
 
+                        <!--
                         <elements:ExpandAppbarButton x:Name="UndoButton">
                             <ToolTipService.ToolTip>
                                 <ToolTip Content="Undo" VerticalOffset="40" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
@@ -186,6 +191,7 @@
                         </elements:ExpandAppbarButton>
 
                         <elements:ExpandAppBarSeparator/>
+                        -->
 
                         <elements:ExpandAppbarButton x:Name="ThemeButton">
                             <ToolTipService.ToolTip>
@@ -275,8 +281,8 @@
             </elements:LoadingControl.Text>
         </elements:LoadingControl>
 
-        <!--#region Dialog-->
 
+        <!--Dialog-->
 
         <elementDialog:DialogBase x:Name="RenameDialog">
             <elementDialog:DialogBase.Title>
@@ -326,8 +332,6 @@
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>
 
-
-        <!--#endregion-->
 
     </Grid>
 </Page>

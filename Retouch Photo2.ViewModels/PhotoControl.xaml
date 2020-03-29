@@ -26,7 +26,7 @@
     </UserControl.Resources>
 
 
-    <Grid x:Name="RootGrid" Background="Transparent">
+    <Grid x:Name="_RootGrid" Background="Transparent">
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
@@ -40,7 +40,7 @@
                     <VisualState.Setters >
 
                         <!--RootGrid-->
-                        <Setter Target = "RootGrid.Background" Value="{StaticResource UnAccentColor}"/>
+                        <Setter Target = "_RootGrid.Background" Value="{StaticResource UnAccentColor}"/>
                         <Setter Target = "BackgroundGrid.BorderThickness" Value="1"/>
                        
                         <!--RootGrid-->
@@ -57,7 +57,7 @@
                     <VisualState.Setters >
 
                         <!--RootGrid-->
-                        <Setter Target = "RootGrid.Background" Value="{StaticResource AccentColor}"/>
+                        <Setter Target = "_RootGrid.Background" Value="{StaticResource AccentColor}"/>
                         <Setter Target = "BackgroundGrid.BorderThickness" Value="1"/>
 
                         <!--RootGrid-->
@@ -107,7 +107,10 @@
             </Grid>
         </controls:DropShadowPanel>
 
-        <TextBlock x:Name="TextBlock" Grid.Row="2" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Foreground="{ThemeResource AppBarSeparatorForegroundThemeBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock x:Name="TextBlock" Grid.Row="2" 
+                   TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" 
+                   Foreground="{ThemeResource AppText}" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center" />
 
     </Grid>
 

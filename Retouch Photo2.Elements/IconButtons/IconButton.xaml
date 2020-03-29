@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     MinWidth="50"
     Height="40"
-    Padding="8,0"
+    Padding="4,0"
     Background="Transparent"
     d:DesignHeight="50"
     d:DesignWidth="50"
@@ -69,14 +69,13 @@
         </VisualStateManager.VisualStateGroups>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="8"/>
+            <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <Border x:Name="Border" Width="26" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-        <TextBlock x:Name="TextBlock" Grid.Column="2" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Foreground="{StaticResource CheckColor}"/>
+        <TextBlock x:Name="TextBlock" Grid.Column="1" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource CheckColor}"/>
 
     </Grid>
 

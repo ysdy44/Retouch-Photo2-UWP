@@ -47,7 +47,7 @@ namespace Retouch_Photo2.Controls
 
                     layer.Visibility = value;
 
-                    this.ViewModel.Invalidate();
+                    this.ViewModel.Invalidate();//Invalidate
                 };
             }
             if (LayerCollection.SelectChanged == null)
@@ -55,7 +55,7 @@ namespace Retouch_Photo2.Controls
                 LayerCollection.SelectChanged += () =>
                 {
                     this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
-                    this.ViewModel.Invalidate();
+                    this.ViewModel.Invalidate();//Invalidate
                 };
             }
 
