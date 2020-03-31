@@ -13,9 +13,9 @@
         Main,
         /// <summary> Loading. </summary>
         //Loading,
+        /// <summary> Dialog. </summary>
+        Dialog,
 
-        /// <summary> Add a blank project. </summary>
-        Add,
         /// <summary> Add a pictures project. </summary>
         Pictures,
 

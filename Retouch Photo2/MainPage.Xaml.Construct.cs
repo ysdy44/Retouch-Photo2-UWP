@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo2.Elements;
 using Retouch_Photo2.Elements.MainPages;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Linq;
@@ -46,8 +47,8 @@ namespace Retouch_Photo2
         {
             //Initial
             this.AddButton.Tapped += (s, e) => this.ShowAddDialog();
-            this.PhotoButton.Tapped += async (s, e) => await this.NewProjectFromPictures(PickerLocationId.PicturesLibrary);
-            this.DestopButton.Tapped += async (s, e) => await this.NewProjectFromPictures(PickerLocationId.Desktop);
+            this.PhotoButton.Tapped += async (s, e) => await this.NewFromPicture(PickerLocationId.PicturesLibrary);
+            this.DestopButton.Tapped += async (s, e) => await this.NewFromPicture(PickerLocationId.Desktop);
 
             //Main
             this.MainControl.AddButton.Tapped += (s, e) => this.ShowAddDialog();
@@ -70,8 +71,8 @@ namespace Retouch_Photo2
             this.MainControl.SecondMoveButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Move);
 
             //Pictures
-            this.PicturesControl.PhotoButton.Tapped += async (s, e) => await this.NewProjectFromPictures(PickerLocationId.PicturesLibrary);
-            this.PicturesControl.DestopButton.Tapped += async (s, e) => await this.NewProjectFromPictures(PickerLocationId.Desktop);
+            this.PicturesControl.PhotoButton.Tapped += async (s, e) => await this.NewFromPicture(PickerLocationId.PicturesLibrary);
+            this.PicturesControl.DestopButton.Tapped += async (s, e) => await this.NewFromPicture(PickerLocationId.Desktop);
             this.PicturesControl.CancelButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Main);
 
             //Save
@@ -92,52 +93,78 @@ namespace Retouch_Photo2
             this._vsState = pageState;
             this.VisualState = this.VisualState;//State
         }
-         
 
-        //RightFlyout
-        int _tempRightIndex;   
-        private void ConstructRightFlyout()
+
+        //ContextFlyout
+        private string ContextText { get => this.ContextTextBlock.Text; set => this.ContextTextBlock.Text = value; }
+        private void ConstructContextFlyout()
         {
-            this.RightSaveButton.Tapped += (s, e) => this.SetRightFlyoutState(MainPageState.Save);
-            this.RightShareButton.Tapped += (s, e) => this.SetRightFlyoutState(MainPageState.Share);
-            this.RightDeleteButton.Tapped += (s, e) => this.SetRightFlyoutState(MainPageState.Delete);
-            this.RightDuplicateButton.Tapped += (s, e) => this.SetRightFlyoutState(MainPageState.Duplicate);
+            this.ConstructRenameDialog();
+            this.ContextRenameButton.Tapped += (s, e) => this.ShowRenameDialog();
 
-            this.RightFlyout.Closed += (s, e) =>
+            this.ContextSaveButton.Tapped += (s, e) => this.SetContextFlyoutState(MainPageState.Save);
+            this.ContextShareButton.Tapped += (s, e) => this.SetContextFlyoutState(MainPageState.Share);
+
+            this.ContextDeleteButton.Tapped += (s, e) => this.SetContextFlyoutState(MainPageState.Delete);
+            this.ContextDuplicateButton.Tapped += (s, e) => this.SetContextFlyoutState(MainPageState.Duplicate);
+
+            this.ContextFlyout.Closed += (s, e) =>
             {
-                int temp = this._tempRightIndex;
-                this._tempRightIndex = -1;
+                ProjectViewItem item = this.ProjectViewItems.FirstOrDefault(p => p.Tittle == this.ContextText);
+                this.ContextText = string.Empty;
 
-                if (temp >= 0)
+                if (item == null) return;
+
+                switch (this._vsState)
                 {
-                    if (temp < this.Photos.Count)
-                    {
-                        switch (this._vsState)
-                        {
-                            case MainPageState.Save:
-                            case MainPageState.Share:
-                            case MainPageState.Delete:
-                            case MainPageState.Duplicate:
-                                this.Photos[temp].Control.SelectMode = PhotoSelectMode.Selected;
-                                break;
-
-                            default:
-                                this.Photos[temp].Control.SelectMode = PhotoSelectMode.None;
-                                break;
-                        }
-                    }
+                    case MainPageState.Save:
+                    case MainPageState.Share:
+                    case MainPageState.Delete:
+                    case MainPageState.Duplicate:
+                        item.SelectMode = SelectMode.Selected;
+                        break;
+                    default:
+                        item.SelectMode = SelectMode.None;
+                        break;
                 }
             };
         }
-        private void SetRightFlyoutState(MainPageState state)
+        private void SetContextFlyoutState(MainPageState state)
         {
             this._vsIsInitialVisibility = false;
             this._vsState = state;
             this.VisualState = this.VisualState;//State
 
-            this.RightFlyout.Hide();
+            this.ContextFlyout.Hide();
         }
 
+
+        //RenameDialog
+        private void ConstructRenameDialog()
+        {
+            this.RenameDialog.CloseButton.Click += (sender, args) =>
+            {
+                this.SetMainPageState(MainPageState.Main);
+
+                this.RenameDialog.Hide();
+            };
+
+            this.RenameDialog.PrimaryButton.Click += (sender, args) =>
+            {
+                this.SetMainPageState(MainPageState.Main);
+
+                this.RenameDialog.Hide();
+            };
+        }
+        private void ShowRenameDialog()
+        {
+            this._vsIsInitialVisibility = false;
+            this._vsState = MainPageState.Dialog;
+            this.VisualState = this.VisualState;//State
+
+            this.ContextFlyout.Hide();
+            this.RenameDialog.Show();
+        }
 
         //AddDialog
         private void ConstructAddDialog()
@@ -157,13 +184,13 @@ namespace Retouch_Photo2
 
                 BitmapSize size = this.AddSizePicker.Size;
 
-                this.NewProjectFromSize(size);
+                this.NewFromSize(size);
             };
         }
         private void ShowAddDialog()
         {
             this._vsIsInitialVisibility = false;
-            this._vsState = MainPageState.Add;
+            this._vsState = MainPageState.Dialog;
             this.VisualState = this.VisualState;//State
 
             this.AddDialog.Show();

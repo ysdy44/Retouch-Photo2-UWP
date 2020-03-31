@@ -1,7 +1,4 @@
-﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.Layers.Models;
+﻿using Retouch_Photo2.Layers;
 using System.Collections.Generic;
 
 namespace Retouch_Photo2.ViewModels
@@ -11,7 +8,6 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public class Project
     {
-
         /// <summary> <see cref = "Project" />'s name. </summary>
         public string Name { set; get; }
 
@@ -21,42 +17,5 @@ namespace Retouch_Photo2.ViewModels
         public int Height { set; get; }        
         /// <summary> <see cref = "Project" />'s layers. </summary>
         public IEnumerable<ILayer> Layers;
-
-        
-        //@Construct
-        public Project()
-        {
-        }
-        /// <summary>
-        /// Construct a project from <see cref = "ImageLayer" />.
-        /// </summary>
-        /// <param name="imageLayer"> ImageLayer </param>
-        public Project(ImageLayer imageLayer)
-        {
-            ImageStr imageStr = imageLayer.StyleManager.FillBrush.ImageStr;
-            CanvasBitmap bitmap = ImageRe.FindFirstImageRe(imageStr).Source;
-
-            int width = (int)bitmap.SizeInPixels.Width;
-            int height = (int)bitmap.SizeInPixels.Height;
-
-            this.Width = width;
-            this.Height = height;
-            this.Layers = new List<ILayer>
-            {
-                 imageLayer
-            };
-        }
-
-        /// <summary>
-        /// Construct a project.
-        /// </summary>
-        /// <param name="width"> width </param>
-        /// <param name="height"> height </param>
-        public Project(int width, int height)
-        {
-            this.Width = width;
-            this.Height = height;
-            this.Layers = new List<ILayer>();
-        }
     }
 }

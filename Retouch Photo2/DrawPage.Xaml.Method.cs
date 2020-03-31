@@ -76,118 +76,7 @@ namespace Retouch_Photo2
             }
         }
 
-
-        //File
-        private void ConstructFileButton()
-        {
-            this.HomeButton.Tapped += (s, e) =>
-            {
-                this.FileFlyout.Hide();
-                this.NavigatedFrom();
-            };
-            this.SaveButton.Tapped += (s, e) =>
-            {
-                this.FileFlyout.Hide();
-                if (this.ViewModel.Name == null)
-                    this.ShowRenameDialog();
-                else
-                    this.Save();
-            };
-            this.RenameButton.Tapped += (s, e) =>
-            {
-                this.FileFlyout.Hide();
-                this.ShowRenameDialog();
-            };
-            this.ExportButton.Tapped += (s, e) =>
-            {
-                this.FileFlyout.Hide();
-                this.ShowExportDialog();
-            };
-            this.ShareButton.Tapped += (s, e) =>
-            {
-                this.FileFlyout.Hide();
-                this.ShowShareDialog();
-            };
-            this.SetupButton.Tapped += (s, e) =>
-            {
-                this.FileFlyout.Hide();
-                this.ShowSetupDialog();
-            };
-        }
-        private void ConstructFileDialog()
-        {
-            this.ConstructRenameDialog();
-            this.ConstructExportDialog();
-            this.ConstructShareDialog();
-            this.ConstructSetupDialog();
-        }
-
-
-        //Rename
-        private void ConstructRenameDialog()
-        {
-            this.RenameDialog.CloseButton.Click += (sender, args) => this.RenameDialog.Hide();
-            
-            this.RenameDialog.PrimaryButton.Click += (_, __) =>
-            {
-                string name = this.TextBox.Text;
-
-                if (name != null)
-                {
-                    if (name != string.Empty)
-                    {
-                        bool isExist = this.ViewModel.Photos.Any(p => p.Name == name);
-
-                        if (isExist == false)
-                        {
-                            this.ViewModel.Name = name;
-                            this.Save();
-                            this.RenameDialog.Hide();
-                            return;
-                        }
-                    }
-                }
-            };
-        }        
-        private void ShowRenameDialog()
-        {
-            this.RenameDialog.Show();
-        }
-
-        //Export
-        private void ConstructExportDialog()
-        {
-            this.ExportDialog.CloseButton.Click += (sender, args) => this.ExportDialog.Hide();
-
-            this.ExportDialog.PrimaryButton.Click += async (_, __) =>
-            {
-                FormatType type = this.ExportFormatComboBox.Format;
-
-                this.Export(type);
-            };
-        }
-        private void ShowExportDialog()
-        {
-            this.ExportDialog.Show();
-        }
-
-        //Share
-        private void ConstructShareDialog()
-        {
-            this.ShareDialog.CloseButton.Click += (sender, args) => this.ShareDialog.Hide();
-
-            this.ShareDialog.PrimaryButton.Click += async (_, __) =>
-            {
-                FormatType type = this.ShareFormatComboBox.Format;
-
-                this.Share(type);
-            };
-        }
-        private void ShowShareDialog()
-        {
-            this.ShareDialog.Show();
-        }
-
+        
         //Setup
         private void ConstructSetupDialog()
         {
@@ -205,13 +94,9 @@ namespace Retouch_Photo2
                 this.ViewModel.Invalidate();//Invalidate
             };
         }
-        private void ShowSetupDialog()
-        {
-            this.SetupDialog.Show();
-        }
 
         //Save
-        private async void Save()
+        private async Task Save()
         {
             string name = this.ViewModel.Name;
             int width = this.ViewModel.CanvasTransformer.Width;
@@ -224,46 +109,6 @@ namespace Retouch_Photo2
             Func<Matrix3x2, ICanvasImage> renderAction = this.MainCanvasControl.Render;
             FileUtil.SaveThumbnailAsync(this.ViewModel.CanvasDevice, renderAction, name, width, height);
         }
-        //Export
-        private async void Export(FormatType type)
-        {
-            /*        
-            CanvasBitmap cb=null;
-            IStorageFolder Folder = Application.Current.Exit;
-
-
-            StorageFile file = await Folder.CreateFileAsync(Name + ".jpg", CreationCollisionOption.GenerateUniqueName);
-            using (var fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
-            {
-                await cb.SaveAsync(fileStream, CanvasBitmapFileFormat.Jpeg);
-            }
-             */
-
-
-            switch (type)
-            {
-                case FormatType.JPEG:
-                    break;
-                case FormatType.PNG:
-                    break;
-                case FormatType.BMP:
-                    break;
-                case FormatType.GIF:
-                    break;
-                case FormatType.TIFF:
-                    break;
-            }
-        }
-        //Share
-        private async void Share(FormatType type)
-        {
-
-        }
-        //Setup
-        private void Setup(int width, int height)
-        {
-
-        }
 
 
         //Navigated
@@ -275,26 +120,28 @@ namespace Retouch_Photo2
             float height = this.DrawLayout.CenterChildHeight;
             this.ViewModel.CanvasTransformer.TransitionDestination(offset, width, height);
 
-            if (this.ViewModel.IsTransition == false)
-            {
-                this.NavigatedToComplete();
-            }
-            else
+            if (this.ViewModel.IsTransition)
             {
                 this.Transition = 0;
                 this.TransitionStoryboard.Begin();//Storyboard
+               
             }
+            else this.NavigatedToComplete();
         }
         private void NavigatedToComplete()
         {
+            //Transition
             this.ViewModel.CanvasTransformer.Transition(1.0f);
+
             this.IsFullScreen = false;
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
-        private async void NavigatedFrom()
+        private async Task NavigatedFrom()
         {
+            //FileUtil
             await FileUtil.DeleteCacheAsync();
 
+            //Clear
             this.SelectionViewModel.SetModeNone();
             this.ViewModel.Layers.RootLayers.Clear();
             this.ViewModel.Layers.RootControls.Clear();

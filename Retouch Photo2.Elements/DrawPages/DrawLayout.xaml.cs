@@ -12,8 +12,8 @@ namespace Retouch_Photo2.Elements.DrawPages
     public sealed partial class DrawLayout : UserControl
     {
         //@Content
-        /// <summary> FileButton. </summary>
-        public Button FileButton => this._FileButton;
+        /// <summary> DocumentBorder's Child. </summary>
+        public UIElement DocumentChild { get => this._DocumentBorder.Child; set => this._DocumentBorder.Child = value; }
         /// <summary> CenterBorder's Child. </summary>
         public UIElement CenterChild { get => this.CenterBorder.Child; set => this.CenterBorder.Child = value; }
 

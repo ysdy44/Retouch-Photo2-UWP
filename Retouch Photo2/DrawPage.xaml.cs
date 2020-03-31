@@ -10,6 +10,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Media.Animation;
 using System.Numerics;
 using System.Xml.Linq;
+using System;
 
 namespace Retouch_Photo2
 {
@@ -86,11 +87,6 @@ namespace Retouch_Photo2
             //Layers
             this.LayersControl.WidthButton.Tapped += (s, e) => this.DrawLayout.PadChangeLayersWidth();
 
-            //File button flyout.
-            this.DrawLayout.FileButton.Tapped += (s, e) => this.FileFlyout.ShowAt(this.DrawLayout.FileButton);
-            this.ConstructFileButton();
-            this.ConstructFileDialog();
-
             //Binding own DependencyProperty to the Storyboard
             Storyboard.SetTarget(this.TransitionKeyFrames, this);
             this.TransitionKeyFrames.Completed += (s, e) => this.NavigatedToComplete();
@@ -105,8 +101,14 @@ namespace Retouch_Photo2
                     DrawPage._isLoaded = true;
                     this.NavigatedTo();
                 }
-            };          
+            };
             
+            //Document
+            this.DocumentButton.Tapped +=async (s, e) =>
+            {
+                await this.Save();
+                await this.NavigatedFrom();
+            };
 
             //Button
             this.UnFullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = !this.KeyboardViewModel.IsFullScreen;
@@ -119,9 +121,13 @@ namespace Retouch_Photo2
             {
             };
             */
+
+            this.ConstructSetupDialog();
+            this.SetupButton.Tapped += (s, e) =>this.SetupDialog.Show();
+
             this.ThemeButton.Tapped += (s, e) =>
             {
-                //Trigger switching theme.
+                // Trigger switching theme.
                 ElementTheme theme = this.ThemeControl.Theme;
                 theme = (theme == ElementTheme.Dark) ? ElementTheme.Light : ElementTheme.Dark;
 

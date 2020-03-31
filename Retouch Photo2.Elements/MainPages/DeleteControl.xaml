@@ -6,8 +6,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="using:Retouch_Photo2.Elements.MainPages"
     mc:Ignorable="d"
-    d:DesignHeight="50"
-    d:DesignWidth="800">
+    d:DesignHeight="100"
+    d:DesignWidth="400"
+    >
 
 
     <StackPanel x:Name="StackPanel" MinWidth="260">

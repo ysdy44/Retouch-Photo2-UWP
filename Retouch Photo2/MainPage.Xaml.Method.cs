@@ -33,25 +33,25 @@ namespace Retouch_Photo2
             IEnumerable<StorageFile> orderedPhotos = await FileUtil.FindPhoto2pkFile();
 
             //Refresh, when the count is not equal.
-            if (orderedPhotos.Count() != this.Photos.Count)
+            if (orderedPhotos.Count() != this.ProjectViewItems.Count)
             {
-                this.Photos.Clear(); //Notify
+                this.ProjectViewItems.Clear(); //Notify
                 this.GridView.Children.Clear();
 
                 foreach (StorageFile storageFile in orderedPhotos)
                 {
-                    // [StorageFile] --> [Photo]
-                    Photo photo = new Photo(storageFile, ApplicationData.Current.LocalFolder.Path);
+                    // [StorageFile] --> [projectViewItem]
+                    ProjectViewItem projectViewItem = new ProjectViewItem(storageFile, ApplicationData.Current.LocalFolder.Path);
 
-                    if (photo != null)
+                    if (projectViewItem != null)
                     {
-                        this.Photos.Add(photo); //Notify
-                        this.GridView.Children.Add(photo.Control);
+                        this.ProjectViewItems.Add(projectViewItem); //Notify
+                        this.GridView.Children.Add(projectViewItem);
                     }
                 }
             }
 
-            this._vsIsInitialVisibility = (this.Photos.Count == 0);
+            this._vsIsInitialVisibility = (this.ProjectViewItems.Count == 0);
             this._vsState = MainPageState.Main;
             this.VisualState = this.VisualState;//State
         }
@@ -61,90 +61,181 @@ namespace Retouch_Photo2
         /// </summary>
         private void RefreshSelectCountRun()
         {
-            int count = this.Photos.Count(p => p.Control.SelectMode == PhotoSelectMode.Selected);
+            int count = this.ProjectViewItems.Count(p => p.SelectMode == SelectMode.Selected);
             this.SelectCountRun.Text = count.ToString();
         }
 
         /// <summary>
         /// Refresh all photos select-mode.
         /// </summary>
-        private void RefreshPhotosSelectMode(PhotoSelectMode selectMode)
+        private void RefreshPhotosSelectMode(SelectMode selectMode)
         {
-            foreach (Photo item in this.Photos)
+            foreach (ProjectViewItem item in this.ProjectViewItems)
             {
-                item.Control.SelectMode = selectMode;
+                item.SelectMode = selectMode;
             }
         }
 
 
-        private void NewProjectFromSize(BitmapSize pixels)
+
+        /// <summary>
+        /// New from size.
+        /// </summary>
+        /// <param name="pixels"> The bitmap size. </param>
+        private void NewFromSize(BitmapSize pixels)
+        {
+            {
+                //Transition
+                this.ViewModel.IsTransition = false;
+                this.ViewModel.CanvasTransformer.Transition(0.0f);
+            }
+
+            string name = this.RenameByRecursive("Untitled");
+            int width = (int)pixels.Width;
+            int height = (int)pixels.Height;
+                
+            //Project
+            {
+                Project project = new Project
+                {
+                    Name = name,
+                    Width = width,
+                    Height = height,
+                };
+                this.ViewModel.LoadFromProject(project);
+                this.Frame.Navigate(typeof(DrawPage));//Navigate   
+            }
+        }
+
+        /// <summary>
+        /// Open from ProjectViewItem.
+        /// </summary>
+        /// <param name="projectViewItem"> The ProjectViewItem. </param>
+        private async void OpenFromProjectViewItem(ProjectViewItem projectViewItem)
         {
             //Transition
-            this.ViewModel.IsTransition = false;
-            this.ViewModel.CanvasTransformer.Transition(0.0f);
-
-            Project project = new Project((int)pixels.Width, (int)pixels.Height);//Project
-            this.ViewModel.LoadFromProject(project);
-
-            this.Frame.Navigate(typeof(DrawPage));//Navigate   
-        }
-        private async void NewProjectFromPhoto(Photo photo)
-        {
-            if (photo.Control is FrameworkElement element)
             {
-                this.ViewModel.CanvasTransformer.Size = new Size(this.ActualWidth, this.ActualHeight - 50);
+                //Get the position of the image element relative to the screen.   
+                FrameworkElement image = projectViewItem.ImageEx;
+                float imageWidth = (float)image.ActualWidth;
+                float imageHeight = (float)image.ActualHeight;
+                Point postion = Retouch_Photo2.Menus.MenuHelper.GetVisualPostion(image);
 
-                //Transition
                 this.ViewModel.IsTransition = true;
                 this.ViewModel.SetCanvasTransformerRadian(0.0f);
                 this.ViewModel.CanvasTransformer.Transition(0.0f);
-
-                Point postion = Retouch_Photo2.Menus.MenuHelper.GetVisualPostion(element);
-                float width = (float)element.ActualWidth;
-                float height = (float)element.ActualHeight;
-                this.ViewModel.CanvasTransformer.TransitionSource(postion, width, height);
+                this.ViewModel.CanvasTransformer.TransitionSource(postion, imageWidth, imageHeight);
+                this.ViewModel.CanvasTransformer.Size = new Size(this.ActualWidth, this.ActualHeight - 50);
             }
 
-            if (photo.ZipFilePath != null)
+            //FileUtil
             {
+                if (projectViewItem.ZipFilePath == null) return;
+
                 await FileUtil.DeleteCacheAsync();
 
-                await FileUtil.ExtractToDirectory(photo.ZipFilePath);
+                await FileUtil.ExtractToDirectory(projectViewItem.ZipFilePath);
                 await FileUtil.LoadImageRes(this.ViewModel.CanvasDevice);
-                Project project = FileUtil.LoadProject(this.ViewModel.CanvasDevice);
-
-                this.ViewModel.LoadFromProject(project);
             }
 
-            this.Frame.Navigate(typeof(DrawPage));//Navigate     
+            //Project
+            {
+                Project project = FileUtil.LoadProject(this.ViewModel.CanvasDevice);
+                this.ViewModel.LoadFromProject(project);
+                this.Frame.Navigate(typeof(DrawPage));//Navigate   
+            }
         }
-        private async Task NewProjectFromPictures(PickerLocationId location)
+
+        /// <summary>
+        /// New from Picture.
+        /// </summary>
+        /// <param name="pixels"> The picker locationId. </param>
+        private async Task NewFromPicture(PickerLocationId location)
         {
+            //Transition
+            {
+                this.ViewModel.IsTransition = false;
+                this.ViewModel.CanvasTransformer.Transition(0.0f);
+            }
+
+
             //ImageRe
             ImageRe imageRe = await FileUtil.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, location);
             if (imageRe == null) return;
 
-            //Images
+            //Images            
             ImageRe.DuplicateChecking(imageRe);
             ImageStr imageStr = imageRe.ToImageStr();
 
             //Transformer
-            Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
+            string name = this.RenameByRecursive($"{imageRe.Name}");
+            int width = (int)imageRe.Width;
+            int height = (int)imageRe.Height;
+            Transformer transformerSource = new Transformer(width, height, Vector2.Zero);
 
-            //Layer
+            //ImageLayer 
             ImageLayer imageLayer = new ImageLayer
             {
                 TransformManager = new TransformManager(transformerSource),
                 StyleManager = new StyleManager(transformerSource, transformerSource, imageStr)
             };
 
-            //Transition
-            this.ViewModel.IsTransition = false;
 
             //Project
-            Project project = new Project(imageLayer);
-            this.Frame.Navigate(typeof(DrawPage), project);//Navigate       
+            {                
+                Project project = new Project
+                {
+                    Name = name,
+                    Width = width,
+                    Height = height,
+                    Layers = new List<ILayer>
+                    {
+                         imageLayer
+                    }
+                };
+                this.ViewModel.LoadFromProject(project);
+                this.Frame.Navigate(typeof(DrawPage));//Navigate  
+            }
         }
+
+
+
+        /// <summary>
+        /// Get a name that doesn't have a rename.
+        /// If there are, add the number.
+        /// [Untitled] --> [Untitled1]   
+        /// </summary>
+        /// <param name="name"> The previous name. </param>
+        /// <returns> The new name. </returns>
+        private string RenameByRecursive(string name)
+        {
+            if (this._renamed(name) == false) return name;
+
+            int num = 0;
+            string newName;
+
+            do
+            {
+                num++;
+                newName = $"{name}{num}";
+            }
+            while (this._renamed(newName) == false);
+
+            return newName;
+        }
+        // Is there a re-named item?
+        private bool _renamed(string name)
+        {
+            foreach (ProjectViewItem item in this.ProjectViewItems)
+            {
+                if (name == item.Name)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
 
     }
 }

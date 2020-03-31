@@ -12,7 +12,7 @@ namespace Retouch_Photo2.Elements
         //@Static
         /// <summary> Static images instances. </summary>
         public static Stack<ImageRe> Instances = new Stack<ImageRe>();
-
+        /// <summary> FInd a ImageRe form a ImageStr. </summary>
         public static ImageRe FindFirstImageRe(ImageStr imageStr)=> ImageRe.Instances.FirstOrDefault(i => i.FolderRelativeId == imageStr.FolderRelativeId);
 
 

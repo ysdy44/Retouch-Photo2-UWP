@@ -5,8 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="50"
-    d:DesignWidth="100">
+    d:DesignHeight="100"
+    d:DesignWidth="400"
+    >
 
     <Button x:Name="_RootButton" Width="Auto" Height="46" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
         <Grid>

@@ -5,6 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using System.Linq;
+using Retouch_Photo2.Layers;
 
 namespace Retouch_Photo2
 {
@@ -20,7 +21,7 @@ namespace Retouch_Photo2
         ViewModel ViewModel => App.ViewModel;
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
         SettingViewModel SettingViewModel { get => App.SettingViewModel; set => App.SettingViewModel = value; }
-        IList<Photo> Photos => this.ViewModel.Photos;
+        IList<ProjectViewItem> ProjectViewItems => this.ViewModel.ProjectControls;
         
         //@VisualState
         bool _vsIsInitialVisibility = false;
@@ -35,7 +36,7 @@ namespace Retouch_Photo2
                 {
                     case MainPageState.None: return this.Normal;
                     case MainPageState.Main: return this.Main;
-                    case MainPageState.Add: return this.Add;
+                    case MainPageState.Dialog: return this.Dialog;
                     case MainPageState.Pictures: return this.Pictures;
                     case MainPageState.Save: return this.Save;
                     case MainPageState.Share: return this.Share;
@@ -54,7 +55,7 @@ namespace Retouch_Photo2
             this.InitializeComponent();
 
             this.ConstructMainPage();
-            this.ConstructRightFlyout();            
+            this.ConstructContextFlyout();            
             this.ConstructAddDialog();
             this.Loaded += async (s, e) =>
             {
@@ -74,39 +75,40 @@ namespace Retouch_Photo2
             this.SettingButton.Tapped += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
 
             //Select
-            this.SelectCheckBox.Checked += (s, e) => this.RefreshPhotosSelectMode(PhotoSelectMode.UnSelected);
-            this.SelectCheckBox.Unchecked += (s, e) => this.RefreshPhotosSelectMode(PhotoSelectMode.None);
-            this.SelectAllButton.Tapped += (s, e) => this.RefreshPhotosSelectMode(this.Photos.Any(p => p.Control.SelectMode == PhotoSelectMode.UnSelected) ? PhotoSelectMode.Selected : PhotoSelectMode.UnSelected);
+            this.SelectCheckBox.Checked += (s, e) => this.RefreshPhotosSelectMode(SelectMode.UnSelected);
+            this.SelectCheckBox.Unchecked += (s, e) => this.RefreshPhotosSelectMode(SelectMode.None);
+            this.SelectAllButton.Tapped += (s, e) => this.RefreshPhotosSelectMode(this.ProjectViewItems.Any(p => p.SelectMode == SelectMode.UnSelected) ? SelectMode.Selected : SelectMode.UnSelected);
 
             //Photo
-            Photo.ItemClick += (photo) =>
+            ProjectViewItem.ItemClick += (item) =>
             {
-                switch (photo.Control.SelectMode)
+                switch (item.SelectMode)
                 {
-                    case PhotoSelectMode.None:
-                        this.NewProjectFromPhoto(photo);
+                    case SelectMode.None:
+                        this.OpenFromProjectViewItem(item);
                         break;
-                    case PhotoSelectMode.UnSelected:
-                        photo.Control.SelectMode = PhotoSelectMode.Selected;
+                    case SelectMode.UnSelected:
+                        item.SelectMode = SelectMode.Selected;
                         this.RefreshSelectCountRun();
                         break;
-                    case PhotoSelectMode.Selected:
-                        photo.Control.SelectMode = PhotoSelectMode.UnSelected;
+                    case SelectMode.Selected:
+                        item.SelectMode = SelectMode.UnSelected;
                         this.RefreshSelectCountRun();
                         break;
                 }
             };
-            Photo.RightTapped += (photo) =>
+            ProjectViewItem.RightTapped += (item) =>
             {
-                if (photo.Control.SelectMode == PhotoSelectMode.None)
+                if (item.SelectMode == SelectMode.None)
                 {
-                    photo.Control.SelectMode = PhotoSelectMode.Selected;
-
-                    this._tempRightIndex = this.Photos.IndexOf(photo);
-                    this.RightFlyout.ShowAt(photo.Control);
+                    item.SelectMode = SelectMode.Selected;
+                                        
+                    // Notify TextBlock of the name of the ProjectViewItem.
+                    this.ContextText = item.Tittle;
+                    this.ContextFlyout.ShowAt(item);//Context
                 }
             };
-
+            
         }
 
         //The current page becomes the active page

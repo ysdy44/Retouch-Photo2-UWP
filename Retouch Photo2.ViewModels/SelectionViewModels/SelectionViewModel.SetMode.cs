@@ -36,14 +36,14 @@ namespace Retouch_Photo2.ViewModels
         {
             if (this.Layer!=null)
             {
-                this.Layer.SelectMode = SelectMode.UnSelected;
+                this.Layer.SelectMode = Retouch_Photo2.Layers.SelectMode.UnSelected;
             }
 
             if (this.Layers != null)
             {
                 foreach (ILayer child in this.Layers)
                 {
-                    child.SelectMode = SelectMode.UnSelected;
+                    child.SelectMode = Retouch_Photo2.Layers.SelectMode.UnSelected;
                 }
             }
             this._setModeNone();//None
@@ -93,7 +93,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 foreach (ILayer child in this.Layers)
                 {
-                    child.SelectMode = SelectMode.UnSelected;
+                    child.SelectMode = Retouch_Photo2.Layers.SelectMode.UnSelected;
                 }
             }
             this._setModeSingle(layer);//Single
@@ -141,7 +141,7 @@ namespace Retouch_Photo2.ViewModels
         {
             if (this.Layer != null)
             {
-                this.Layer.SelectMode = SelectMode.UnSelected;
+                this.Layer.SelectMode = Retouch_Photo2.Layers.SelectMode.UnSelected;
             }
             this._setModeMultiple(layers);//Multiple
         }

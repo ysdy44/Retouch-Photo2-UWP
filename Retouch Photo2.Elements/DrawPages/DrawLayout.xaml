@@ -278,15 +278,15 @@
               Grid.ColumnSpan="3">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="1*" MinWidth="50"/>
                 <ColumnDefinition Width="10*" MaxWidth="420"/>
             </Grid.ColumnDefinitions>
 
-            <!--File-->
-            <Button x:Name="_FileButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
-                <FontIcon Glyph="&#xE700;" FontSize="24" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
-            </Button>
+            <!--Document-->
+            <Border x:Name="_DocumentBorder" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <!--DocumentChild-->
+            </Border>
 
             <!--HeadLeft-->
             <Border x:Name="HeadLeftBorder" Grid.Column="1" HorizontalAlignment="Stretch"/>

@@ -28,10 +28,23 @@
     <Grid x:Name="RootGrid">
         <Grid.Resources>
             <!--Flyout-->
-            <Flyout x:Name="RightFlyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <Flyout x:Name="ContextFlyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                 <StackPanel Width="190">
 
-                    <elements:IconButton x:Name="RightSaveButton">
+                    <TextBlock x:Name="ContextTextBlock" Margin="8,2" Style="{StaticResource SubheaderTextBlockStyle}"/>
+
+                    <elements:IconButton x:Name="ContextRenameButton">
+                        <elements:IconButton.Icon>
+                            <FontIcon Glyph="&#xE104;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        </elements:IconButton.Icon>
+                        <elements:IconButton.Text>
+                            Rename
+                        </elements:IconButton.Text>
+                    </elements:IconButton>
+                    
+                    <elements:RectangleSeparator/>
+                    
+                    <elements:IconButton x:Name="ContextSaveButton">
                         <elements:IconButton.Icon>
                             <FontIcon Glyph="&#xE105;" FontSize="22" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
                         </elements:IconButton.Icon>
@@ -39,7 +52,7 @@
                             Save
                         </elements:IconButton.Text>
                     </elements:IconButton>
-                    <elements:IconButton x:Name="RightShareButton">
+                    <elements:IconButton x:Name="ContextShareButton">
                         <elements:IconButton.Icon>
                             <FontIcon Glyph="&#xE72D;" FontSize="22" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </elements:IconButton.Icon>
@@ -50,7 +63,7 @@
 
                     <elements:RectangleSeparator/>
 
-                    <elements:IconButton x:Name="RightDeleteButton">
+                    <elements:IconButton x:Name="ContextDeleteButton">
                         <elements:IconButton.Icon>
                             <FontIcon Glyph="&#xE107;" FontSize="22" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </elements:IconButton.Icon>
@@ -58,7 +71,7 @@
                             Delete
                         </elements:IconButton.Text>
                     </elements:IconButton>
-                    <elements:IconButton x:Name="RightDuplicateButton">
+                    <elements:IconButton x:Name="ContextDuplicateButton">
                         <elements:IconButton.Icon>
                             <FontIcon Glyph="&#xE16F;" FontSize="22" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </elements:IconButton.Icon>
@@ -110,8 +123,8 @@
                     </VisualState.Setters>
                 </VisualState>
 
-                <!--Add-->
-                <VisualState x:Name="Add">
+                <!--Dialog-->
+                <VisualState x:Name="Dialog">
                     <VisualState.Setters>
                         
                         <!--Foot-->
@@ -232,7 +245,7 @@
                 <FontIcon FontSize="20" Glyph="&#xE117;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
             </Button>
 
-            <TextBlock x:Name="TittleTextBlock" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
+            <TextBlock Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
                 <TextBlock.Transitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromHorizontalOffset="50" FromVerticalOffset="0"/>
@@ -251,8 +264,19 @@
             </Button>
 
         </Grid>
-        <Grid  x:Name="SelectGrid" Visibility="Collapsed" HorizontalAlignment="Stretch" Background="{ThemeResource AppBorderBrush}">
+     
+        <Grid x:Name="SelectGrid" Visibility="Collapsed" HorizontalAlignment="Stretch" Background="{ThemeResource AppBorderBrush}">
 
+            <!--Visibility:Show-->
+            <animations:Implicit.ShowAnimations>
+                <animations:TranslationAnimation Duration="0:0:0.4" From="0,-50,0" To="0,0,0"/>
+            </animations:Implicit.ShowAnimations>
+
+            <!--Visibility:Hide-->
+            <animations:Implicit.HideAnimations>
+                <animations:TranslationAnimation Duration="0:0:0.4" From="0,0,0" To="0,-50,0"/>
+            </animations:Implicit.HideAnimations>
+            
             <CheckBox x:Name="SelectCheckBox" Margin="12, 0" IsHitTestVisible="False" HorizontalAlignment="Left">
                 <TextBlock>
                      Click to select items:
@@ -260,7 +284,7 @@
                 </TextBlock>
             </CheckBox>
 
-            <Button x:Name="SelectAllButton" Padding="8,0" HorizontalAlignment="Right" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+            <Button x:Name="SelectAllButton" Padding="8,0" HorizontalAlignment="Right" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
                 Select All
             </Button>
 
@@ -363,6 +387,20 @@
         <elements:LoadingControl x:Name="LoadingControl" Grid.RowSpan="3"/>
 
         <!--Dialog-->
+        <elementDialog:DialogBase x:Name="RenameDialog" Grid.Row="1" Grid.RowSpan="2">
+            <elementDialog:DialogBase.Title>
+                <TextBlock FontSize="22" Style="{StaticResource SubheaderTextBlockStyle}">
+                    Rename Current Project
+                </TextBlock>
+            </elementDialog:DialogBase.Title>
+            <elementDialog:DialogBase.CenterContent>
+                <TextBox x:Name="TextBox" VerticalAlignment="Center" BorderThickness="1">
+                    <TextBox.Text>
+                        Unsdasd
+                    </TextBox.Text>
+                </TextBox>
+            </elementDialog:DialogBase.CenterContent>
+        </elementDialog:DialogBase>
         <elementDialog:DialogBase x:Name="AddDialog" Grid.Row="1" Grid.RowSpan="2">
             <elementDialog:DialogBase.Title>
                 <TextBlock FontSize="22" Style="{StaticResource SubheaderTextBlockStyle}">
