@@ -24,7 +24,6 @@ namespace Retouch_Photo2.ViewModels
                 new XElement
                 (
                     "Root",
-                    new XElement("Name", project.Name),
                     new XElement("Width", project.Width),
                     new XElement("Height", project.Height),
                     new XElement
@@ -42,8 +41,9 @@ namespace Retouch_Photo2.ViewModels
         ///  Loads a <see cref="Project"/> from an XDocument.
         /// </summary>
         /// <param name="document"> The source XDocument. </param>
+        /// <param name="name"> The name. </param>
         /// <returns> The loaded <see cref="Project"/>. </returns>
-        public static Project LoadProject(XDocument document)
+        public static Project LoadProject(string name, XDocument document)
         {
             XElement root = document.Element("Root");
             XElement rootImages = root.Element("Images");
@@ -51,7 +51,7 @@ namespace Retouch_Photo2.ViewModels
 
             return new Project
             {
-                Name = root.Element("Name").Value,
+                Name = name,
                 Width = (int)root.Element("Width"),
                 Height = (int)root.Element("Height"),
                 Layers =

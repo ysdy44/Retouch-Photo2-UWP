@@ -1,64 +1,19 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 
 namespace Retouch_Photo2
 {
     public static partial class FileUtil
     {
-
-        /// <summary>
-        /// Load <see cref="Project"/> from temporary folder.
-        /// </summary>
-        /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <returns> The loaded project. </returns>
-        public static Project LoadProject(ICanvasResourceCreator resourceCreator)
-        {
-            //Create an XDocument object.
-            string path = $"{ApplicationData.Current.TemporaryFolder.Path}/config.xml";
-            XDocument document = XDocument.Load(path);
-
-            Project project = Retouch_Photo2.ViewModels.XML.LoadProject(document);
-            return project;
-        }
-        /// <summary>
-        /// Save <see cref="Project"/> to temporary folder.
-        /// </summary>
-        /// <param name="layers"></param>
-        /// <param name="name"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        public static async Task SaveProject(IEnumerable<ILayer> layers, string name = "untitled", int width = 256, int height = 256)
-        {
-            Project project = new Project
-            {
-                Name = name,
-                Width = width,
-                Height = height,
-                Layers = layers,
-            };
-            XDocument document = Retouch_Photo2.ViewModels.XML.SaveProject(project);
-
-            //Save the project xml file.      
-            StorageFile file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync("config.xml", CreationCollisionOption.ReplaceExisting);
-            using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
-            {
-                using (Stream stream = fileStream.AsStream())
-                {
-                    document.Save(stream);
-                }
-            }
-        }
-
-
+        
         /// <summary>
         /// Load <see cref="ImageRe"/>s from temporary folder.
         /// </summary>
@@ -84,6 +39,7 @@ namespace Retouch_Photo2
                 }
             }
         }
+
         /// <summary>
         /// Save <see cref="ImageRe"/>s to temporary folder.
         /// </summary>
@@ -107,14 +63,55 @@ namespace Retouch_Photo2
             {
                 try
                 {
-                    string Path = $"{ApplicationData.Current.TemporaryFolder.Path}/{imageRe.Name}{imageRe.FileType}";
+                    string Path = $"{ApplicationData.Current.TemporaryFolder.Path}\\{imageRe.Name}{imageRe.FileType}";
                     CanvasBitmap canvasBitmap = imageRe.Source;
                     await canvasBitmap.SaveAsync(Path);
                 }
                 catch (Exception) { }
             }
         }
+        
 
+        /// <summary>
+        /// Create a ImageRe form a LocationId.
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="location"> The destination LocationId. </param>
+        /// <returns> The product ImageRe. </returns>
+        public async static Task<ImageRe> CreateFromLocationIdAsync(ICanvasResourceCreator resourceCreator, PickerLocationId location)
+        {
+            //Picker
+            FileOpenPicker openPicker = new FileOpenPicker
+            {
+                ViewMode = PickerViewMode.Thumbnail,
+                SuggestedStartLocation = location,
+                FileTypeFilter =
+                {
+                    ".jpg",
+                    ".jpeg",
+                    ".png",
+                    ".bmp"
+                }
+            };
+
+            //File
+            StorageFile file = await openPicker.PickSingleFileAsync();
+            if (file == null) return null;
+
+            //ImageRe
+            using (IRandomAccessStream stream = await file.OpenReadAsync())
+            {
+                CanvasBitmap bitmap = await CanvasBitmap.LoadAsync(resourceCreator, stream);
+
+                return new ImageRe
+                {
+                    Source = bitmap,
+                    Name = file.DisplayName,
+                    FileType = file.FileType,
+                    FolderRelativeId = file.FolderRelativeId,
+                };
+            }
+        }
 
     }
 }

@@ -8,21 +8,16 @@ namespace Retouch_Photo2.Elements
         //@Content
         /// <summary> TextBlock's Text </summary>
         public string Text { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
+        /// <summary> ContentPresenter's Content </summary>
         public object CenterContent { get => this.ContentPresenter.Content; set => this.ContentPresenter.Content = value; }
+        /// <summary> Gets element width. </summary>
         public double ExpandWidth => 40.0d;
+        /// <summary> Gets it yourself. </summary>
         public FrameworkElement Self => this;
-        public bool IsSecondPage
-        {
-            set
-            {
-                this._vsIsSecondPage = value;
-                this.VisualState = this.VisualState;//State
-            }
-        }
 
 
         //@VisualState
-        bool _vsIsSelected;
+        bool _vsIsChecked;
         ClickMode _vsClickMode;
         bool _vsIsSecondPage;
         public VisualState VisualState
@@ -31,7 +26,7 @@ namespace Retouch_Photo2.Elements
             {
                 if (this._vsIsSecondPage == false)
                 {
-                    if (this._vsIsSelected) return this.Selected;
+                    if (this._vsIsChecked) return this.Selected;
 
                     switch (this._vsClickMode)
                     {
@@ -43,7 +38,7 @@ namespace Retouch_Photo2.Elements
                 }
                 else
                 {
-                    if (this._vsIsSelected) return this.SecondSelected;
+                    if (this._vsIsChecked) return this.SecondSelected;
 
                     switch (this._vsClickMode)
                     {
@@ -56,7 +51,24 @@ namespace Retouch_Photo2.Elements
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
-        
+
+        private ClickMode ClickMode
+        {
+            set
+            {
+                this._vsClickMode = value;
+                this.VisualState = this.VisualState;//State
+            }
+        }
+        public bool IsSecondPage
+        {
+            set
+            {
+                this._vsIsSecondPage = value;
+                this.VisualState = this.VisualState;//State
+            }
+        }
+
 
         #region DependencyProperty
 
@@ -73,13 +85,13 @@ namespace Retouch_Photo2.Elements
 
             if (e.NewValue is bool value)
             {
-                con._vsIsSelected = value;
+                con._vsIsChecked = value;
                 con.VisualState = con.VisualState;//State
             }
         }));
 
         #endregion
-
+        
 
         //@Construct
         public ExpandAppbarToggleButton()
@@ -87,31 +99,14 @@ namespace Retouch_Photo2.Elements
             this.InitializeComponent();
             this.Loaded += (s, e) =>
             {
-                this._vsIsSelected = this.IsChecked;
+                this._vsIsChecked = this.IsChecked;
                 this.VisualState = this.VisualState;//State
             };
             this.Tapped += (s, e) => this.IsChecked = !this.IsChecked;
 
-            this.PointerEntered += (s, e) =>
-            {
-                this._vsClickMode = ClickMode.Hover;
-                this.VisualState = this.VisualState;//State
-            };
-            this.PointerPressed += (s, e) =>
-            {
-                this._vsClickMode = ClickMode.Press;
-                this.VisualState = this.VisualState;//State
-            };
-            this.PointerPressed += (s, e) =>
-            {
-                this._vsClickMode = ClickMode.Hover;
-                this.VisualState = this.VisualState;//State
-            };
-            this.PointerExited += (s, e) =>
-            {
-                this._vsClickMode = ClickMode.Release;
-                this.VisualState = this.VisualState;//State
-            };
+            this.PointerEntered += (s, e) => this.ClickMode = ClickMode.Hover;
+            this.PointerPressed += (s, e) => this.ClickMode = ClickMode.Press;
+            this.PointerExited += (s, e) => this.ClickMode = ClickMode.Release;
         }
     }
 }

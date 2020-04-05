@@ -4,6 +4,10 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools
 {
+    /// <summary>
+    /// Represents the TouchBar that is used to adjust value.
+    /// The Button.
+    /// </summary>
     public sealed partial class TouchbarButton : UserControl
     {
         //@Delegate  
@@ -30,6 +34,15 @@ namespace Retouch_Photo2.Tools
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
 
+        private ClickMode ClickMode
+        {
+            set
+            {
+                this._vsClickMode = value;
+                this.VisualState = this.VisualState;//State
+            }
+        }
+
 
         #region DependencyProperty
 
@@ -49,28 +62,15 @@ namespace Retouch_Photo2.Tools
         }
 
 
-        /// <summary> Get or set the string Unit for range elements. </summary>
-        public string Unit
+        /// <summary> Get or set the content. </summary>
+        public object CenterContent
         {
-            get { return (string)GetValue(UnitProperty); }
-            set { SetValue(UnitProperty, value); }
+            get { return (object)GetValue(CenterContentProperty); }
+            set { SetValue(CenterContentProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "TouchbarButton.Unit" /> dependency property. </summary>
-        public static readonly DependencyProperty UnitProperty = DependencyProperty.Register(nameof(Unit), typeof(string), typeof(TouchbarSlider), new PropertyMetadata(string.Empty));
-
-
-        /// <summary> Get or set the current value for a TouchbarButton. </summary>
-        public int Number
-        {
-            get => this.number;
-            set
-            {
-                this.TextBlock.Text = $"{value} {this.Unit}";
-                this.number = value;
-            }
-        }
-        private int number;
-
+        /// <summary> Identifies the <see cref = "TouchbarButton.CenterContent" /> dependency property. </summary>
+        public static readonly DependencyProperty CenterContentProperty = DependencyProperty.Register(nameof(CenterContent), typeof(object), typeof(TouchbarSlider), new PropertyMetadata(null));
+        
 
         #endregion
 
@@ -82,27 +82,11 @@ namespace Retouch_Photo2.Tools
         public TouchbarButton()
         {
             this.InitializeComponent();
-            this.PointerEntered += (s, e) =>
-            {
-                this._vsClickMode = ClickMode.Hover;
-                this.VisualState = this.VisualState;//State
-            };
-            this.PointerPressed += (s, e) =>
-            {
-                this._vsClickMode = ClickMode.Press;
-                this.VisualState = this.VisualState;//State
-            };
-            this.PointerReleased += (s, e) =>
-            {
-                this._vsClickMode = ClickMode.Release;
-                this.VisualState = this.VisualState;//State
-            };
-            this.PointerExited += (s, e) =>
-            {
-                this._vsClickMode = ClickMode.Release;
-                this.VisualState = this.VisualState;//State
-            };
-                       
+            this.PointerEntered += (s, e) => this.ClickMode = ClickMode.Hover;
+            this.PointerPressed += (s, e) => this.ClickMode = ClickMode.Press;
+            this.PointerReleased += (s, e) => this.ClickMode = ClickMode.Release;
+            this.PointerExited += (s, e) => this.ClickMode = ClickMode.Release;
+
             this.Tapped += (s, e) =>
             {
                 if (this._vsIsSelected)

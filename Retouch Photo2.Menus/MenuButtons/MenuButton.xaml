@@ -124,7 +124,7 @@
 
         <ContentPresenter x:Name="ContentPresenter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{StaticResource HighlightColor}"/>
 
-        <Rectangle x:Name="TipRectangle" IsHitTestVisible="False" Visibility="Collapsed" Height="2" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="{StaticResource HighlightColor}"/>
+        <Rectangle x:Name="TipRectangle" IsHitTestVisible="False" Visibility="Collapsed" Height="3" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="{StaticResource HighlightColor}"/>
       
     </Grid>
 

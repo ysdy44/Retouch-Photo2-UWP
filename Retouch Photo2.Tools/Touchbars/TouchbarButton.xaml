@@ -51,7 +51,7 @@
                 <VisualState x:Name="Pressed">
                     <Storyboard>
                         <PointerDownThemeAnimation TargetName="RootBorder" />
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Foreground">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckColor}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootBorder" Storyboard.TargetProperty="Background">
@@ -63,7 +63,7 @@
 
                 <VisualState x:Name="Selected">
                     <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Foreground">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckColor}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootBorder" Storyboard.TargetProperty="Background">
@@ -76,11 +76,17 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <TextBlock x:Name="TextBlock" 
+        <Grid>
+
+            <ContentPresenter x:Name="ContentPresenter" Margin="14,0"
                    HorizontalAlignment="Center" 
-                   VerticalAlignment="Center"                             
+                   VerticalAlignment="Center" 
+                   Content="{x:Bind CenterContent, Mode=OneWay}"
                    Foreground="{StaticResource UnCheckColor}"
                    />
-        
+
+            <Rectangle x:Name="TipRectangle" IsHitTestVisible="False" Margin="18, 0" Height="3" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="{StaticResource AccentColor}"/>
+
+        </Grid>
     </Border>
 </UserControl>

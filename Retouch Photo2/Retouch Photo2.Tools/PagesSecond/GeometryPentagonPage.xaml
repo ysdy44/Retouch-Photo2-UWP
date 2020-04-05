@@ -15,12 +15,10 @@
         <StackPanel Orientation="Horizontal">
 
             <!--Points-->
-            <TextBlock Style="{StaticResource AppTextBlock}">
-            Points
-            </TextBlock>
-            <tools:TouchbarButton x:Name="PointsTouchbarButton"
-                      Number="{x:Bind SelectionViewModel.GeometryPentagonPoints,Mode=OneWay}"
-                       >
+            <tools:TouchbarButton x:Name="PointsTouchbarButton">
+                <tools:TouchbarButton.CenterContent>
+                    Points
+                </tools:TouchbarButton.CenterContent>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="PointsTouchbarSlider" 
                              Number="{x:Bind SelectionViewModel.GeometryPentagonPoints,Mode=OneWay}"

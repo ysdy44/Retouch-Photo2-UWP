@@ -24,7 +24,7 @@
 
         <!--Storyboard-->
         <Storyboard x:Name="EaseStoryboard">
-            <ColorAnimation From="{ThemeResource SystemBaseHighColor}" To="{ThemeResource AppBorderBrushColor}" Storyboard.TargetProperty="Color" Storyboard.TargetName="BrushTypeBorderBorderBrush" d:IsOptimized="True">
+            <ColorAnimation Duration="1000" From="{ThemeResource SystemBaseHighColor}" To="{ThemeResource AppBorderBrushColor}" Storyboard.TargetProperty="Color" Storyboard.TargetName="BrushTypeBorderBorderBrush" d:IsOptimized="True">
                 <ColorAnimation.EasingFunction>
                     <BounceEase EasingMode="EaseOut"/>
                 </ColorAnimation.EasingFunction>

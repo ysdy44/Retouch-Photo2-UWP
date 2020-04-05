@@ -14,22 +14,19 @@
         <StackPanel Orientation="Horizontal">
 
             <TextBlock Style="{StaticResource AppTextBlock}">
-            FillColor
+            Fill
             </TextBlock>
             <toolsElements:FillColorEllipseButton/>
 
             <ContentControl Width="4"/>
 
             <TextBlock Style="{StaticResource AppTextBlock}">
-            StrokeColor
+            Stroke
             </TextBlock>
             <toolsElements:StrokeColorEllipseButton/>
 
             <ContentControl Width="4"/>
 
-            <TextBlock Style="{StaticResource AppTextBlock}">
-            StrokeWidth
-            </TextBlock>
             <toolsElements:StrokeWidthButton x:Name="StrokeWidthButton"/>
 
             <ContentControl Width="4"/>

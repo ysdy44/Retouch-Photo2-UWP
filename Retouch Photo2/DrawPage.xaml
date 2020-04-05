@@ -94,7 +94,7 @@
 
             <!--Document-->
             <elementDrawPages:DrawLayout.DocumentChild>
-                <Button x:Name="DocumentButton" Width="Auto" Padding="8, 0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
+                <Button x:Name="DocumentButton" Width="Auto" Padding="10, 0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Foreground="{ThemeResource AppText}">
                     Document
                 </Button>
             </elementDrawPages:DrawLayout.DocumentChild>
@@ -210,13 +210,7 @@
 
         <!--Menu-->
         <Canvas x:Name="OverlayCanvas" IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}">
-            <ToolTip x:Name="TipToolTip" IsHitTestVisible="False" Visibility="Collapsed" Style="{StaticResource AppToolTip}">
-                <TextBlock>
-                    W <Run x:Name="TipWRun">0</Run> px
-                    <LineBreak/>
-                    H <Run x:Name="TipHRun">0</Run> px
-                </TextBlock>
-            </ToolTip>
+            <!--MenuLayout-->
         </Canvas>
 
         <!--FullScreen-->
@@ -225,7 +219,8 @@
         </Button>
 
         <!--Tip-->
-        <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" HorizontalAlignment="Center">
+        <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" HorizontalAlignment="Center" 
+                        Visibility="{x:Bind ViewModel.TextVisibility, Mode=OneWay}">
             <ToolTip Style="{StaticResource AppToolTip}">
                 <TextBlock Text="{x:Bind ViewModel.Text, Mode=OneWay}" TextWrapping="Wrap"/>
             </ToolTip>

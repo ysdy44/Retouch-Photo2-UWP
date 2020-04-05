@@ -145,7 +145,6 @@ namespace Retouch_Photo2.Tools.Pages
             //Radian
             {
                 //Button
-                this.RadianTouchbarButton.Unit = "º";
                 this.RadianTouchbarButton.Toggle += (s, value) =>
                 {
                     if (value)
@@ -179,7 +178,6 @@ namespace Retouch_Photo2.Tools.Pages
             //Scale
             {
                 //Button
-                this.ScaleTouchbarButton.Unit = "%";
                 this.ScaleTouchbarButton.Toggle += (s, value) =>
                 {
                     if (value)

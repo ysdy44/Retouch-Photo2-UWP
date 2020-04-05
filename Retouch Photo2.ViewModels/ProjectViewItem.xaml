@@ -1,33 +1,21 @@
 ﻿<UserControl
+    x:Name="UserControl"
     x:Class="Retouch_Photo2.ViewModels.ProjectViewItem"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    mc:Ignorable="d"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"  
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     d:DesignHeight="200"
     d:DesignWidth="200"
     Width="140"
     Height="140"
+    mc:Ignorable="d"
     >
-    
-    <UserControl.Resources>
         
-        <!--Background-->
-        <SolidColorBrush x:Name="AccentColor" Color="{ThemeResource AppFillColor}"/>
-        <SolidColorBrush x:Name="UnAccentColor" Color="Transparent"/>
-
-        <!--Foreground-->
-        <SolidColorBrush x:Name="CheckColor" Color="{ThemeResource SystemAccentColor}"/>
-        <SolidColorBrush x:Name="UnCheckColor" Color="White"/>
-        <SolidColorBrush x:Name="HighlightColor" Color="Black"/>
-
-    </UserControl.Resources>
-
 
     <Grid x:Name="_RootGrid" Background="Transparent">
-
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
@@ -38,34 +26,20 @@
                 <!--UnSelected-->
                 <VisualState x:Name="UnSelected">
                     <VisualState.Setters >
-
-                        <!--RootGrid-->
-                        <Setter Target = "_RootGrid.Background" Value="{StaticResource UnAccentColor}"/>
-                        <Setter Target = "BackgroundGrid.BorderThickness" Value="1"/>
-                       
-                        <!--RootGrid-->
-                        <Setter Target = "SelectedBorder.Visibility" Value="Visible"/>
-                        <Setter Target = "SelectedBorder.Background" Value="{StaticResource UnCheckColor}"/>
-                        <Setter Target = "SelectedBorder.BorderBrush" Value="{StaticResource HighlightColor}"/>
-                        <Setter Target = "SelectedFontIcon.Visibility" Value="Collapsed"/>
-
+                        <Setter Target = "UnSelectedBorder.Visibility" Value="Visible"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Selected-->
                 <VisualState x:Name="Selected">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_RootGrid" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppFill}" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
                     <VisualState.Setters >
-
-                        <!--RootGrid-->
-                        <Setter Target = "_RootGrid.Background" Value="{StaticResource AccentColor}"/>
-                        <Setter Target = "BackgroundGrid.BorderThickness" Value="1"/>
-
-                        <!--RootGrid-->
+                        <Setter Target = "UnSelectedBorder.Visibility" Value="Visible"/>
                         <Setter Target = "SelectedBorder.Visibility" Value="Visible"/>
-                        <Setter Target = "SelectedBorder.Background" Value="{StaticResource CheckColor}"/>
-                        <Setter Target = "SelectedBorder.BorderBrush" Value="{StaticResource CheckColor}"/>
-                        <Setter Target = "SelectedFontIcon.Visibility" Value="Visible"/>
-
                     </VisualState.Setters>
                 </VisualState>
 
@@ -80,34 +54,40 @@
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
 
-        <controls:DropShadowPanel 
-                    HorizontalAlignment="Center"
-                    BlurRadius="20" 
-                    OffsetX="8" 
-                    OffsetY="8" 
-                    ShadowOpacity="0.8" 
-                    Color="{ThemeResource AppStrokeColor}">
-            <Grid x:Name="BackgroundGrid"
-                          MaxWidth="200" Margin="6"                      
-                          BorderThickness="0"     
-                          BorderBrush="{ThemeResource SystemAccentColor}"
-                          Background="White">
+        <controls:DropShadowPanel HorizontalAlignment="Center" BlurRadius="20" OffsetX="8" OffsetY="8" ShadowOpacity="0.8" Color="{ThemeResource AppStrokeColor}">
+            <Border CornerRadius="4" MaxWidth="200" Margin="6" Background="White">
+                <Grid>
 
-                <!--Image-->
-                <controls:ImageEx x:Name="_ImageEx" MinWidth="60" MinHeight="60" IsCacheEnabled="True" />
+                    <!--Image-->
+                    <controls:ImageEx x:Name="_ImageEx" Background="White" MinWidth="60" MinHeight="60" IsCacheEnabled="True" />
 
-                <Border x:Name="SelectedBorder" Visibility="Collapsed"
-                        CornerRadius="10" Width="20" Height="20" 
-                        BorderThickness="1"
-                        HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                        >
-                    <FontIcon x:Name="SelectedFontIcon" Glyph="&#xE10B;" FontSize="12" FontFamily="Segoe UI Symbol" Foreground="White"/>
-                </Border>
-                
-            </Grid>
+                    <!--Selected-->
+                    <Border x:Name="UnSelectedBorder" Visibility="Collapsed" CornerRadius="2" BorderThickness="1" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}">
+                        <Border CornerRadius="16" Width="32" Height="32" Background="#44000000" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        </Border>
+                    </Border>
+                    <Border x:Name="SelectedBorder" Visibility="Collapsed" CornerRadius="2" BorderThickness="2" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}">
+
+                        <!--Visibility:Show-->
+                        <animations:Implicit.ShowAnimations>
+                            <animations:OpacityAnimation Duration="0:0:0.2" From="0.0" To="1.0"/>
+                        </animations:Implicit.ShowAnimations>
+
+                        <!--Visibility:Hide-->
+                        <animations:Implicit.HideAnimations>
+                            <animations:OpacityAnimation Duration="0:0:0.2" From="1.0" To="0.0"/>
+                        </animations:Implicit.HideAnimations>
+
+                        <Border CornerRadius="16" Width="32" Height="32" Background="{ThemeResource SystemControlBackgroundAccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <FontIcon Glyph="&#xE10B;" FontSize="18" FontFamily="Segoe UI Symbol" Foreground="White"/>
+                        </Border>
+                    </Border>
+
+                </Grid>
+            </Border>
         </controls:DropShadowPanel>
 
-        <TextBlock x:Name="TextBlock" Grid.Row="2" 
+        <TextBlock Grid.Row="2" Text="{x:Bind UserControl.Name, Mode=OneWay}"
                    TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" 
                    Foreground="{ThemeResource AppText}" 
                    HorizontalAlignment="Center" VerticalAlignment="Center" />

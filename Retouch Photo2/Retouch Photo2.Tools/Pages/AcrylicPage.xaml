@@ -23,12 +23,10 @@
             <ContentControl Width="4"/>
 
             <!--TintOpacity-->
-            <TextBlock Style="{StaticResource AppTextBlock}">
-            TintOpacity
-            </TextBlock>
-            <tools:TouchbarButton x:Name="TintOpacityTouchbarButton"
-                      Number="{x:Bind TintOpacityNumberConverter(SelectionViewModel.AcrylicTintOpacity),Mode=OneWay}"
-                      >
+            <tools:TouchbarButton x:Name="TintOpacityTouchbarButton">
+                <tools:TouchbarButton.CenterContent>
+                    TintOpacity
+                </tools:TouchbarButton.CenterContent>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="TintOpacityTouchbarSlider"
                     Number="{x:Bind TintOpacityNumberConverter(SelectionViewModel.AcrylicTintOpacity),Mode=OneWay}"
@@ -40,12 +38,10 @@
             <ContentControl Width="4"/>
 
             <!--BlurAmount-->
-            <TextBlock Style="{StaticResource AppTextBlock}">
-            BlurAmount
-            </TextBlock>
-            <tools:TouchbarButton x:Name="BlurAmountTouchbarButton"
-                      Number="{x:Bind BlurAmountNumberConverter(SelectionViewModel.AcrylicBlurAmount),Mode=OneWay}"
-                      >
+            <tools:TouchbarButton x:Name="BlurAmountTouchbarButton">
+                <tools:TouchbarButton.CenterContent>
+                    BlurAmount
+                </tools:TouchbarButton.CenterContent>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="BlurAmountTouchbarSlider" 
                              Number="{x:Bind BlurAmountNumberConverter(SelectionViewModel.AcrylicBlurAmount),Mode=OneWay}"

@@ -11,7 +11,6 @@ using System.Xml.Linq;
 using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Text;
-using Microsoft.Graphics.Canvas.Text;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Layers.Models

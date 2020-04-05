@@ -15,12 +15,10 @@
         <StackPanel Orientation="Horizontal">
 
             <!--Mid-->
-            <TextBlock Style="{StaticResource AppTextBlock}">
-            Mid Point
-            </TextBlock>
-            <tools:TouchbarButton x:Name="MidTouchbarButton"
-                      Number="{x:Bind MidNumberConverter(SelectionViewModel.GeometryDiamondMid),Mode=OneWay}"
-                      >
+            <tools:TouchbarButton x:Name="MidTouchbarButton">
+                <tools:TouchbarButton.CenterContent>
+                    Mid Point
+                </tools:TouchbarButton.CenterContent>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="MidTouchbarSlider" 
                              Number="{x:Bind MidNumberConverter(SelectionViewModel.GeometryDiamondMid),Mode=OneWay}"

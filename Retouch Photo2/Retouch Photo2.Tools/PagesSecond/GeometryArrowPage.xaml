@@ -15,12 +15,10 @@
         <StackPanel Orientation="Horizontal">
 
             <!--Width-->
-            <TextBlock Style="{StaticResource AppTextBlock}">
-            Width
-            </TextBlock>
-            <tools:TouchbarButton x:Name="ValueTouchbarButton"
-                      Number="{x:Bind ValueNumberConverter(SelectionViewModel.GeometryArrowValue),Mode=OneWay}"
-                       >
+            <tools:TouchbarButton x:Name="ValueTouchbarButton">
+                <tools:TouchbarButton.CenterContent>
+                    Width
+                </tools:TouchbarButton.CenterContent>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="ValueTouchbarSlider"
                     Number="{x:Bind ValueNumberConverter(SelectionViewModel.GeometryArrowValue),Mode=OneWay}"

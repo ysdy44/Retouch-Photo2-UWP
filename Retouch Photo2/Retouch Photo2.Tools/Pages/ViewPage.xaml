@@ -32,12 +32,10 @@
         <StackPanel Orientation="Horizontal">
 
             <!--Radian-->
-            <TextBlock Style="{StaticResource AppTextBlock}">
-              Radian
-            </TextBlock>
-            <tools:TouchbarButton x:Name="RadianTouchbarButton"
-                      Number="{x:Bind RadianNumberConverter(ViewModel.CanvasTransformerRadian),Mode=OneWay}"
-                        >
+            <tools:TouchbarButton x:Name="RadianTouchbarButton">
+                <tools:TouchbarButton.CenterContent>
+                    Radian
+                </tools:TouchbarButton.CenterContent>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="RadianTouchbarSlider" 
                 Number="{x:Bind RadianNumberConverter(ViewModel.CanvasTransformerRadian),Mode=OneWay}"
@@ -61,12 +59,10 @@
             <elements:ExpandAppBarSeparator/>
 
             <!--Scale-->
-            <TextBlock Style="{StaticResource AppTextBlock}">
-              Scale
-            </TextBlock>
-            <tools:TouchbarButton x:Name="ScaleTouchbarButton"
-                      Number="{x:Bind ScaleNumberConverter(ViewModel.CanvasTransformerScale),Mode=OneWay}"
-                       >
+            <tools:TouchbarButton x:Name="ScaleTouchbarButton">
+                <tools:TouchbarButton.CenterContent>
+                    Scale
+                </tools:TouchbarButton.CenterContent>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="ScaleTouchbarSlider"
                 Number="{x:Bind ScaleNumberConverter(ViewModel.CanvasTransformerScale),Mode=OneWay}"

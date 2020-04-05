@@ -15,12 +15,10 @@
         <StackPanel Orientation="Horizontal">
 
             <!--Count-->
-            <TextBlock Style="{StaticResource AppTextBlock}">
-            Count
-            </TextBlock>
-            <tools:TouchbarButton x:Name="CountTouchbarButton"
-                      Number="{x:Bind SelectionViewModel.GeometryCogCount,Mode=OneWay}"
-                      >
+            <tools:TouchbarButton x:Name="CountTouchbarButton">
+                <tools:TouchbarButton.CenterContent>
+                    Count
+                </tools:TouchbarButton.CenterContent>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="CountTouchbarSlider" 
                              Number="{x:Bind SelectionViewModel.GeometryCogCount,Mode=OneWay}"
@@ -32,12 +30,10 @@
             <ContentControl Width="4"/>
 
             <!--InnerRadius-->
-            <TextBlock Style="{StaticResource AppTextBlock}">
-            Inner Radius
-            </TextBlock>
-            <tools:TouchbarButton x:Name="InnerRadiusTouchbarButton"
-                      Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryCogInnerRadius),Mode=OneWay}"
-                       >
+            <tools:TouchbarButton x:Name="InnerRadiusTouchbarButton">
+                <tools:TouchbarButton.CenterContent>
+                    Inner Radius
+                </tools:TouchbarButton.CenterContent>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="InnerRadiusTouchbarSlider"
                     Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryCogInnerRadius),Mode=OneWay}"
@@ -49,12 +45,10 @@
             <ContentControl Width="4"/>
 
             <!--Tooth-->
-            <TextBlock Style="{StaticResource AppTextBlock}">
-            Tooth
-            </TextBlock>
-            <tools:TouchbarButton x:Name="ToothTouchbarButton"
-                      Number="{x:Bind ToothNumberConverter(SelectionViewModel.GeometryCogTooth),Mode=OneWay}"
-                       >
+            <tools:TouchbarButton x:Name="ToothTouchbarButton">
+                <tools:TouchbarButton.CenterContent>
+                    Tooth
+                </tools:TouchbarButton.CenterContent>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="ToothTouchbarSlider"
                     Number="{x:Bind ToothNumberConverter(SelectionViewModel.GeometryCogTooth),Mode=OneWay}"
@@ -66,12 +60,10 @@
             <ContentControl Width="4"/>
 
             <!--Notch-->
-            <TextBlock Style="{StaticResource AppTextBlock}">
-            Notch
-            </TextBlock>
-            <tools:TouchbarButton x:Name="NotchTouchbarButton"
-                      Number="{x:Bind NotchNumberConverter(SelectionViewModel.GeometryCogNotch),Mode=OneWay}"
-                       >
+            <tools:TouchbarButton x:Name="NotchTouchbarButton">
+                <tools:TouchbarButton.CenterContent>
+                    Notch
+                </tools:TouchbarButton.CenterContent>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="NotchTouchbarSlider"
                     Number="{x:Bind NotchNumberConverter(SelectionViewModel.GeometryCogNotch),Mode=OneWay}"

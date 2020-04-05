@@ -51,9 +51,9 @@ namespace Retouch_Photo2
                 con.ViewModel.CanvasTransformer.Transition(value);
                 con.ViewModel.Invalidate();//Invalidate
             }
-        }));      
-        
-        
+        }));
+
+
         /// <summary> Sets the page layout is full-screen. </summary>
         public bool IsFullScreen
         {
@@ -86,6 +86,10 @@ namespace Retouch_Photo2
 
             //Layers
             this.LayersControl.WidthButton.Tapped += (s, e) => this.DrawLayout.PadChangeLayersWidth();
+           
+
+            #region Navigated & More
+
 
             //Binding own DependencyProperty to the Storyboard
             Storyboard.SetTarget(this.TransitionKeyFrames, this);
@@ -94,6 +98,7 @@ namespace Retouch_Photo2
             //MoreButton
             MoreTransformButton.Flyout = this.MoreTransformFlyout;
             MoreCreateButton.Flyout = this.MoreCreateFlyout;
+
             this.Loaded += (s, e) =>
             {
                 if (DrawPage._isLoaded == false)
@@ -102,9 +107,13 @@ namespace Retouch_Photo2
                     this.NavigatedTo();
                 }
             };
-            
+
+
+            #endregion
+
+
             //Document
-            this.DocumentButton.Tapped +=async (s, e) =>
+            this.DocumentButton.Tapped += async (s, e) =>
             {
                 await this.Save();
                 await this.NavigatedFrom();
@@ -113,17 +122,11 @@ namespace Retouch_Photo2
             //Button
             this.UnFullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = !this.KeyboardViewModel.IsFullScreen;
             this.FullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = !this.KeyboardViewModel.IsFullScreen;
-            /*
-             this.UndoButton.Tapped += (s, e) =>
-            {
-            };
-            this.RedoButton.Tapped += (s, e) =>
-            {
-            };
-            */
+            //this.UndoButton.Tapped += (s, e) => { };
+            //this.RedoButton.Tapped += (s, e) => { };
 
             this.ConstructSetupDialog();
-            this.SetupButton.Tapped += (s, e) =>this.SetupDialog.Show();
+            this.SetupButton.Tapped += (s, e) => this.SetupDialog.Show();
 
             this.ThemeButton.Tapped += (s, e) =>
             {
@@ -138,7 +141,10 @@ namespace Retouch_Photo2
                 this.SettingViewModel.WriteToLocalFolder();//Write
             };
 
-                       
+
+            #region Tool & Menu
+
+
             //Tool
             foreach (ITool tool in this.TipViewModel.Tools)
             {
@@ -147,6 +153,12 @@ namespace Retouch_Photo2
             this.TooLeft.Add(this.MoreToolButton);
             this.ToolFirst();
 
+
+            //MoreButton
+            MoreTransformButton.Flyout = this.MoreTransformFlyout;
+            MoreCreateButton.Flyout = this.MoreCreateFlyout;
+
+
             //Menu
             foreach (IMenu menu in this.TipViewModel.Menus)
             {
@@ -154,6 +166,10 @@ namespace Retouch_Photo2
             }
             this.OverlayCanvas.Tapped += (s, e) => this.MenusHideAndCrop(isCrop: false);
             this.OverlayCanvas.SizeChanged += (s, e) => this.MenusHideAndCrop(isCrop: true);
+
+
+            #endregion
+
         }
 
         //The current page becomes the active page
@@ -167,7 +183,7 @@ namespace Retouch_Photo2
             this.DrawLayout.VisualStateDeviceType = this.SettingViewModel.LayoutDeviceType;
             this.DrawLayout.VisualStatePhoneMaxWidth = this.SettingViewModel.LayoutPhoneMaxWidth;
             this.DrawLayout.VisualStatePadMaxWidth = this.SettingViewModel.LayoutPadMaxWidth;
-            
+
             if (DrawPage._isLoaded)
             {
                 this.NavigatedTo();

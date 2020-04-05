@@ -15,13 +15,11 @@
       <StackPanel Orientation="Horizontal">
 
         <!--InnerRadius-->
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            Inner Radius
-        </TextBlock>
-        <tools:TouchbarButton x:Name="InnerRadiusTouchbarButton"
-                      Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryCookieInnerRadius),Mode=OneWay}"
-                       >
-            <tools:TouchbarButton.TouchbarSlider>
+            <tools:TouchbarButton x:Name="InnerRadiusTouchbarButton">
+                <tools:TouchbarButton.CenterContent>
+                    Inner Radius
+                </tools:TouchbarButton.CenterContent>
+                <tools:TouchbarButton.TouchbarSlider>
                 <tools:TouchbarSlider x:Name="InnerRadiusTouchbarSlider"
                     Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryCookieInnerRadius),Mode=OneWay}"
                     Value="{x:Bind InnerRadiusValueConverter(SelectionViewModel.GeometryCookieInnerRadius), Mode=OneWay}" 
@@ -32,13 +30,11 @@
         <ContentControl Width="4"/>
 
         <!--SweepAngle-->
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            Sweep Angle
-        </TextBlock>
-        <tools:TouchbarButton x:Name="SweepAngleTouchbarButton"
-                      Number="{x:Bind SweepAngleNumberConverter(SelectionViewModel.GeometryCookieSweepAngle),Mode=OneWay}"
-                       >
-            <tools:TouchbarButton.TouchbarSlider>
+            <tools:TouchbarButton x:Name="SweepAngleTouchbarButton">
+                <tools:TouchbarButton.CenterContent>
+                    Sweep Angle
+                </tools:TouchbarButton.CenterContent>
+                <tools:TouchbarButton.TouchbarSlider>
                 <tools:TouchbarSlider x:Name="SweepAngleTouchbarSlider"
                     Number="{x:Bind SweepAngleNumberConverter(SelectionViewModel.GeometryCookieSweepAngle),Mode=OneWay}"
                     Value="{x:Bind SweepAngleValueConverter(SelectionViewModel.GeometryCookieSweepAngle), Mode=OneWay}" 

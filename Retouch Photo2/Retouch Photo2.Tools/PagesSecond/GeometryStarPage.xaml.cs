@@ -30,7 +30,9 @@ namespace Retouch_Photo2.Tools.Pages
         //@Content
         public FrameworkElement Self => this;
         public bool IsSelected { private get; set; }
-        GeometryStarMode _mode
+
+        //@TouchBar  
+        internal GeometryStarMode TouchBarMode
         {
             set
             {
@@ -72,9 +74,9 @@ namespace Retouch_Photo2.Tools.Pages
                 this.PointsTouchbarButton.Toggle += (s, value) =>
                 {
                     if (value)
-                        this._mode = GeometryStarMode.Points;
+                        this.TouchBarMode = GeometryStarMode.Points;
                     else
-                        this._mode = GeometryStarMode.None;
+                        this.TouchBarMode = GeometryStarMode.None;
                 };
 
                 //Number
@@ -101,13 +103,12 @@ namespace Retouch_Photo2.Tools.Pages
             //InnerRadius
             {
                 //Button
-                this.InnerRadiusTouchbarButton.Unit = "%";
                 this.InnerRadiusTouchbarButton.Toggle += (s, value) =>
                 {
                     if (value)
-                        this._mode = GeometryStarMode.InnerRadius;
+                        this.TouchBarMode = GeometryStarMode.InnerRadius;
                     else
-                        this._mode = GeometryStarMode.None;
+                        this.TouchBarMode = GeometryStarMode.None;
                 };
 
                 //Number
@@ -171,7 +172,7 @@ namespace Retouch_Photo2.Tools.Pages
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
-            this._mode = GeometryStarMode.None;
+            this.TouchBarMode = GeometryStarMode.None;
         }
     }
 }

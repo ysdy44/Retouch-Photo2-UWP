@@ -12,10 +12,9 @@
     VerticalAlignment="Center" 
     MinWidth="140"
     Height="34"   
-    Opacity="0.6" 
     BorderBrush="Black"
     Foreground="White"
-    Background="White"
+    Background="#AAFFFFFF"
     d:DesignHeight="50"
     d:DesignWidth="200"
     >
@@ -27,11 +26,9 @@
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
 
-        
-        <Border CornerRadius="4" BorderThickness="1" Background="White" BorderBrush="Black">
-            <hsvColorPickers:NumberPicker x:Name="NumberPicker" Foreground="Black" Width="Auto" HorizontalAlignment="Stretch"
-                                          FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                                          />
+
+        <Border CornerRadius="4" BorderThickness="1" Background="{x:Bind UserControl.Background, Mode=OneWay}" BorderBrush="{x:Bind UserControl.BorderBrush, Mode=OneWay}">
+            <hsvColorPickers:NumberPicker x:Name="NumberPicker" Foreground="Black" Width="Auto" HorizontalAlignment="Stretch" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
         </Border>
 
 

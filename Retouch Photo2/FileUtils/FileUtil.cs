@@ -1,14 +1,9 @@
-﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
-using Retouch_Photo2.Layers;
+﻿using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using System.Threading.Tasks;
 using Windows.Storage;
-using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
 
 namespace Retouch_Photo2
 {
@@ -16,10 +11,93 @@ namespace Retouch_Photo2
     {
 
         /// <summary>
-        /// Find all photo file.
+        /// Rename zip file and thumbnail.
+        /// </summary>
+        /// <param name="item"> The old item.</param>
+        /// <param name="newName"> The new name.</param>
+        /// <returns> (New name, New zip File name, New thumbnail name). </returns>
+        public static async Task RenameZipFileAndThumbnail(ProjectViewItem item, string newName)
+        {
+            //Rename zip file.
+            StorageFile zipFile = await StorageFile.GetFileFromPathAsync(item.Photo2pkFilePath);
+            await zipFile.RenameAsync($"{newName}.photo2pk");
+
+            //Rename thumbnail image.
+            StorageFile thumbnail = await StorageFile.GetFileFromPathAsync(item.ThumbnailPath);
+            await thumbnail.RenameAsync($"{newName}.png");
+
+            item.Rename(newName, zipFile.Path, thumbnail.Path);
+        }
+
+        /// <summary>
+        /// Duplicate zip file and thumbnail.
+        /// </summary>
+        /// <param name="oldName"> The old name.</param>
+        /// <param name="newName"> The new name.</param>
+        public static async Task<StorageFile> DuplicateZipFileAndThumbnail(string oldName, string newName)
+        {
+            StorageFile zipFile = null;
+
+            try
+            {
+                //Duplicate zip file.
+                zipFile = await ApplicationData.Current.LocalFolder.GetFileAsync($"{oldName}.photo2pk");
+                await zipFile.CopyAsync(ApplicationData.Current.LocalFolder, $"{newName}.photo2pk", NameCollisionOption.ReplaceExisting);
+            }
+            catch (Exception) { }
+
+            try
+            {
+                //Duplicate thumbnail image.
+                StorageFile thumbnail = await ApplicationData.Current.LocalFolder.GetFileAsync($"{oldName}.png");
+                await thumbnail.CopyAsync(ApplicationData.Current.LocalFolder, $"{newName}.png", NameCollisionOption.ReplaceExisting);
+            }
+            catch (Exception) { }
+
+            return zipFile;
+        }
+
+        /// <summary>
+        /// Delete zip file and thumbnail.
+        /// </summary>
+        /// <param name="name"> The name.</param>
+        public static async Task DeleteZipFileAndThumbnail(string name)
+        {
+            try
+            {
+                //Delete zip file.
+                StorageFile zipFile = await ApplicationData.Current.LocalFolder.GetFileAsync($"{name}.photo2pk");
+                if (zipFile != null) await zipFile.DeleteAsync();
+            }
+            catch (Exception) { }
+
+            try
+            {
+                //Delete thumbnail image.
+                StorageFile thumbnail = await ApplicationData.Current.LocalFolder.GetFileAsync($"{name}.png");
+                if (thumbnail != null) await thumbnail.DeleteAsync();
+            }
+            catch (Exception) { }
+        }
+
+
+        /// <summary>
+        /// Delete all files in temp folder.
+        /// </summary>
+        public static async Task DeleteAllInTemporaryFolder()
+        {
+            IReadOnlyList<StorageFile> items = await ApplicationData.Current.TemporaryFolder.GetFilesAsync();
+            foreach (StorageFile item in items)
+            {
+                await item.DeleteAsync();
+            }
+        }
+
+        /// <summary>
+        /// Find all zip file in local folder.
         /// </summary>
         /// <returns> The all project file. </returns>
-        public static async Task<IEnumerable<StorageFile>> FindPhoto2pkFile()
+        public static async Task<IEnumerable<StorageFile>> FIndFilesInLocalFolder()
         {
             //get all file.
             IReadOnlyList<StorageFile> files = await ApplicationData.Current.LocalFolder.GetFilesAsync();
@@ -32,91 +110,6 @@ namespace Retouch_Photo2
             return orderedPhotos;
         }
 
-        /// <summary>
-        /// Save thumbnail file to local folder.
-        /// </summary>
-        /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="renderAction"> The render-action. </param>
-        /// <param name="name"> The file name.</param>
-        /// <param name="width"> The thumbnail width.</param>
-        /// <param name="height"> The thumbnail height.</param>
-        public static async void SaveThumbnailAsync(ICanvasResourceCreator resourceCreator, Func<Matrix3x2, ICanvasImage> renderAction, string name = "untitled", int width = 256, int height = 256)
-        {
-            float scale = 1;
-            int thumbnailWidth = 256;
-            int thumbnailHeight = 256;
-            if (width > height)
-            {
-                scale = 256.0f / width;
-                thumbnailHeight = (int)(scale * height);
-            }
-            else
-            {
-                scale = 256.0f / height;
-                thumbnailWidth = (int)(scale * width);
-            }
-
-            //Thumbnail
-            CanvasRenderTarget thumbnail = new CanvasRenderTarget(resourceCreator, thumbnailWidth, thumbnailHeight, 96);
-            {
-                Matrix3x2 matrix = Matrix3x2.CreateScale(scale);
-                ICanvasImage previousImage = renderAction(matrix);
-
-                using (CanvasDrawingSession drawingSession = thumbnail.CreateDrawingSession())
-                {
-                    drawingSession.DrawImage(previousImage);
-                }
-            }
-
-            //File
-            StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync($"{name}.png", CreationCollisionOption.ReplaceExisting);
-            using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
-            {
-                await thumbnail.SaveAsync(fileStream, CanvasBitmapFileFormat.Png);
-            }
-        }
-
-        /// <summary>
-        /// Create a Image form a LocationId.
-        /// </summary>
-        /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="location"> The destination LocationId. </param>
-        /// <returns> The product ImageRe. </returns>
-        public async static Task<ImageRe> CreateFromLocationIdAsync(ICanvasResourceCreator resourceCreator, PickerLocationId location)
-        {
-            //Picker
-            FileOpenPicker openPicker = new FileOpenPicker
-            {
-                ViewMode = PickerViewMode.Thumbnail,
-                SuggestedStartLocation = location,
-                FileTypeFilter =
-                {
-                    ".jpg",
-                    ".jpeg",
-                    ".png",
-                    ".bmp"
-                }
-            };
-
-            //File
-            StorageFile file = await openPicker.PickSingleFileAsync();
-            if (file == null) return null;
-
-            //ImageRe
-            using (IRandomAccessStream stream = await file.OpenReadAsync())
-            {
-                CanvasBitmap bitmap = await CanvasBitmap.LoadAsync(resourceCreator, stream);
-
-                return new ImageRe
-                {
-                    Source = bitmap,
-                    Name = file.DisplayName,
-                    FileType = file.FileType,
-                    FolderRelativeId = file.FolderRelativeId,
-                };
-            }
-        }
-
-
+        
     }
 }

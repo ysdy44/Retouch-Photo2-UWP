@@ -42,7 +42,6 @@ namespace Retouch_Photo2.Tools.Elements
             //StrokeWidth
             {
                 //Button
-                this.StrokeWidthTouchbarButton.Unit = "%";
                 this.StrokeWidthTouchbarButton.Toggle += (s, value) =>
                 {
                     this._mode = value;

@@ -44,31 +44,24 @@ namespace Retouch_Photo2.Tools
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
 
-               
+        private ClickMode ClickMode
+        {
+            set
+            {
+                this._vsClickMode = value;
+                this.VisualState = this.VisualState;//State
+            }
+        }
+
+
         //@Construct
         public ToolButton()
         {
             this.InitializeComponent();
-            this.PointerEntered += (s, e) =>
-            {
-                this._vsClickMode = ClickMode.Hover;
-                this.VisualState = this.VisualState;//State
-            };
-            this.PointerPressed += (s, e) =>
-            {
-                this._vsClickMode = ClickMode.Press;
-                this.VisualState = this.VisualState;//State
-            };
-            this.PointerReleased += (s, e) =>
-            {
-                this._vsClickMode = ClickMode.Release;
-                this.VisualState = this.VisualState;//State
-            };
-            this.PointerExited += (s, e) =>
-            {
-                this._vsClickMode = ClickMode.Release;
-                this.VisualState = this.VisualState;//State
-            };
+            this.PointerEntered += (s, e) => this.ClickMode = ClickMode.Hover;
+            this.PointerPressed += (s, e) => this.ClickMode = ClickMode.Press;
+            this.PointerReleased += (s, e) => this.ClickMode = ClickMode.Release;
+            this.PointerExited += (s, e) => this.ClickMode = ClickMode.Release;
         }
     }
 }

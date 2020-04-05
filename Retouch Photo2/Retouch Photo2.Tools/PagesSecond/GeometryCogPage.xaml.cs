@@ -36,7 +36,9 @@ namespace Retouch_Photo2.Tools.Pages
         //@Content
         public FrameworkElement Self => this;
         public bool IsSelected { private get; set; }
-        GeometryCogMode _mode
+
+        //@TouchBar
+        internal GeometryCogMode TouchBarMode
         {
             set
             {
@@ -104,9 +106,9 @@ namespace Retouch_Photo2.Tools.Pages
                 this.CountTouchbarButton.Toggle += (s, value) =>
                 {
                     if (value)
-                        this._mode = GeometryCogMode.Count;
+                        this.TouchBarMode = GeometryCogMode.Count;
                     else
-                        this._mode = GeometryCogMode.None;
+                        this.TouchBarMode = GeometryCogMode.None;
                 };
 
                 //Number
@@ -133,13 +135,12 @@ namespace Retouch_Photo2.Tools.Pages
             //InnerRadius
             {
                 //Button
-                this.InnerRadiusTouchbarButton.Unit = "%";
                 this.InnerRadiusTouchbarButton.Toggle += (s, value) =>
                 {
                     if (value)
-                        this._mode = GeometryCogMode.InnerRadius;
+                        this.TouchBarMode = GeometryCogMode.InnerRadius;
                     else
-                        this._mode = GeometryCogMode.None;
+                        this.TouchBarMode = GeometryCogMode.None;
                 };
 
                 //Number
@@ -167,13 +168,12 @@ namespace Retouch_Photo2.Tools.Pages
             //Tooth
             {
                 //Button
-                this.ToothTouchbarButton.Unit = "%";
                 this.ToothTouchbarButton.Toggle += (s, value) =>
                 {
                     if (value)
-                        this._mode = GeometryCogMode.Tooth;
+                        this.TouchBarMode = GeometryCogMode.Tooth;
                     else
-                        this._mode = GeometryCogMode.None;
+                        this.TouchBarMode = GeometryCogMode.None;
                 };
 
                 //Number
@@ -201,13 +201,12 @@ namespace Retouch_Photo2.Tools.Pages
             //Notch
             {
                 //Button
-                this.NotchTouchbarButton.Unit = "%";
                 this.NotchTouchbarButton.Toggle += (s, value) =>
                 {
                     if (value)
-                        this._mode = GeometryCogMode.Notch;
+                        this.TouchBarMode = GeometryCogMode.Notch;
                     else
-                        this._mode = GeometryCogMode.None;
+                        this.TouchBarMode = GeometryCogMode.None;
                 };
 
                 //Number
@@ -300,7 +299,7 @@ namespace Retouch_Photo2.Tools.Pages
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
-            this._mode = GeometryCogMode.None;
+            this.TouchBarMode = GeometryCogMode.None;
         }
     }
 }

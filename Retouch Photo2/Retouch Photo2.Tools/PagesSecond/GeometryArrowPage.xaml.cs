@@ -31,7 +31,9 @@ namespace Retouch_Photo2.Tools.Pages
         //@Content
         public FrameworkElement Self => this;
         public bool IsSelected { private get; set; }
-        GeometryArrowMode _mode
+
+        //@TouchBar
+        internal GeometryArrowMode TouchBarMode
         {
             set
             {
@@ -80,13 +82,12 @@ namespace Retouch_Photo2.Tools.Pages
             //Value
             {
                 //Button
-                this.ValueTouchbarButton.Unit = "%";
                 this.ValueTouchbarButton.Toggle += (s, value) =>
                 {
                     if (value)
-                        this._mode = GeometryArrowMode.Value;
+                        this.TouchBarMode = GeometryArrowMode.Value;
                     else
-                        this._mode = GeometryArrowMode.None;
+                        this.TouchBarMode = GeometryArrowMode.None;
                 };
 
                 //Number
@@ -153,7 +154,7 @@ namespace Retouch_Photo2.Tools.Pages
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
-            this._mode = GeometryArrowMode.None;
+            this.TouchBarMode = GeometryArrowMode.None;
         }
     }
 }

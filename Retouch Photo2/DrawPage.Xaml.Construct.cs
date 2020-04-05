@@ -3,16 +3,66 @@ using Retouch_Photo2.Menus;
 using Retouch_Photo2.Tools;
 using System.Linq;
 using Windows.Foundation;
+using Windows.Graphics.Imaging;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Shapes;
 
 namespace Retouch_Photo2
 {
     public sealed partial class DrawPage : Page
     {
+
+        //ViewModel
+        private void ConstructViewModel()
+        {
+            this.MainCanvasControl.ConstructViewModel();
+        }
+        //KeyboardViewModel
+        private void ConstructKeyboardViewModel()
+        {
+            //Move
+            if (this.KeyboardViewModel.Move == null)
+            {
+                this.KeyboardViewModel.Move += (value) =>
+                {
+                    this.ViewModel.CanvasTransformer.Position += value;
+                    this.ViewModel.CanvasTransformer.ReloadMatrix();
+                    this.ViewModel.Invalidate();//Invalidate
+                };
+            }
+
+            //FullScreen
+            if (this.KeyboardViewModel.FullScreenChanged == null)
+            {
+                this.KeyboardViewModel.FullScreenChanged += (isFullScreen) =>
+                {
+                    this.IsFullScreen = isFullScreen;
+                    this.ViewModel.Invalidate();//Invalidate
+                };
+            }
+        }
+
+
+        //Setup
+        private void ConstructSetupDialog()
+        {
+            this.SetupDialog.CloseButton.Click += (sender, args) => this.SetupDialog.Hide();
+
+            this.SetupDialog.PrimaryButton.Click += (_, __) =>
+            {
+                this.SetupDialog.Hide();
+
+                BitmapSize size = this.SetupSizePicker.Size;
+
+                this.ViewModel.CanvasTransformer.Width = (int)size.Width;
+                this.ViewModel.CanvasTransformer.Height = (int)size.Height;
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+
 
         #region Tool
 

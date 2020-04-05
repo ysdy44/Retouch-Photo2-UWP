@@ -15,12 +15,10 @@
         <StackPanel Orientation="Horizontal">
 
             <!--Points-->
-            <TextBlock Style="{StaticResource AppTextBlock}">
-            Points
-            </TextBlock>
-            <tools:TouchbarButton x:Name="PointsTouchbarButton"
-                      Number="{x:Bind SelectionViewModel.GeometryStarPoints,Mode=OneWay}"
-                      >
+            <tools:TouchbarButton x:Name="PointsTouchbarButton">
+                <tools:TouchbarButton.CenterContent>
+                    Points
+                </tools:TouchbarButton.CenterContent>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="PointsTouchbarSlider" 
                              Number="{x:Bind SelectionViewModel.GeometryStarPoints,Mode=OneWay}"
@@ -32,12 +30,10 @@
             <ContentControl Width="4"/>
 
             <!--InnerRadius-->
-            <TextBlock Style="{StaticResource AppTextBlock}">
-            Inner Radius
-            </TextBlock>
-            <tools:TouchbarButton x:Name="InnerRadiusTouchbarButton"
-                      Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryStarInnerRadius),Mode=OneWay}"
-                       >
+            <tools:TouchbarButton x:Name="InnerRadiusTouchbarButton">
+                <tools:TouchbarButton.CenterContent>
+                    Inner Radius
+                </tools:TouchbarButton.CenterContent>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="InnerRadiusTouchbarSlider"
                     Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryStarInnerRadius),Mode=OneWay}"

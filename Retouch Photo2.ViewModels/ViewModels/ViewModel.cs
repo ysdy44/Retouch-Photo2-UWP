@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Numerics;
 using Windows.Storage;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -50,8 +51,6 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
-        /// <summary> Retouch_Photo2's the project-control list. </summary>
-        public IList<ProjectViewItem> ProjectControls { get;  } = new List<ProjectViewItem>();
         /// <summary> Retouch_Photo2's the current project name. </summary>
         public string Name = null;
 
@@ -81,11 +80,7 @@ namespace Retouch_Photo2.ViewModels
 
         #endregion
 
-
-        /// <summary> Occurs when create layer. </summary>
-        public Action<Transformer, Vector2, InvalidateMode> TipWidthHeight { get; set; }
-
-
+        
         //@Notify 
         /// <summary> Multicast event for property change notifications. </summary>
         public event PropertyChangedEventHandler PropertyChanged;

@@ -7,31 +7,24 @@
     {
         /// <summary> Normal. </summary>
         None,
-        
 
-        /// <summary> Main. </summary>
+        /// <summary> Initial page( 0 project). </summary>
+        Initial,
+
+        /// <summary> Main page. </summary>
         Main,
-        /// <summary> Loading. </summary>
-        //Loading,
-        /// <summary> Dialog. </summary>
+
+        /// <summary> Show dialog. </summary>
         Dialog,
 
         /// <summary> Add a pictures project. </summary>
         Pictures,
-
-        /// <summary> Save project(s). </summary>
-        Save,
-        /// <summary> Share project(s). </summary>
-        Share,
+        /// <summary> Rename a project. </summary>
+        Rename,
 
         /// <summary> Delete project(s). </summary>
         Delete,
         /// <summary> Duplicate project(s). </summary>
         Duplicate,
-
-        /// <summary> Create a new Folder. </summary>
-        //Folder,
-        /// <summary> Move a project into a folder. </summary>
-        Move,
     }
 }

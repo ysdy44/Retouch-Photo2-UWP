@@ -3,9 +3,11 @@ using Retouch_Photo2.Elements.MainPages;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Graphics.Imaging;
+using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -42,164 +44,134 @@ namespace Retouch_Photo2
         }
 
 
-        //MainPage
-        private void ConstructMainPage()
+        //InitialControl
+        private void ConstructInitialControl()
         {
-            //Initial
-            this.AddButton.Tapped += (s, e) => this.ShowAddDialog();
-            this.PhotoButton.Tapped += async (s, e) => await this.NewFromPicture(PickerLocationId.PicturesLibrary);
-            this.DestopButton.Tapped += async (s, e) => await this.NewFromPicture(PickerLocationId.Desktop);
-
-            //Main
-            this.MainControl.AddButton.Tapped += (s, e) => this.ShowAddDialog();
-            this.MainControl.PicturesButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Pictures);
-            this.MainControl.SaveButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Save);
-            this.MainControl.ShareButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Share);
-            this.MainControl.DeleteButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Delete);
-            this.MainControl.DuplicateButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Duplicate);
-            this.MainControl.FolderButton.Tapped += (s, e) => this.ShowFolderDialog();
-            this.MainControl.MoveButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Move);
-
-            //Second
-            this.MainControl.SecondAddButton.Tapped += (s, e) => this.ShowAddDialog();
-            this.MainControl.SecondPicturesButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Pictures);
-            this.MainControl.SecondSaveButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Save);
-            this.MainControl.SecondShareButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Share);
-            this.MainControl.SecondDeleteButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Delete);
-            this.MainControl.SecondDuplicateButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Duplicate);
-            this.MainControl.SecondFolderButton.Tapped += (s, e) => this.ShowFolderDialog();
-            this.MainControl.SecondMoveButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Move);
-
-            //Pictures
-            this.PicturesControl.PhotoButton.Tapped += async (s, e) => await this.NewFromPicture(PickerLocationId.PicturesLibrary);
-            this.PicturesControl.DestopButton.Tapped += async (s, e) => await this.NewFromPicture(PickerLocationId.Desktop);
-            this.PicturesControl.CancelButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Main);
-
-            //Save
-            this.SaveControl.CancelButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Main);
-
-            //Share
-            this.ShareControl.CancelButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Main);
-
-            //Delete
-            this.DeleteControl.CancelButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Main);
-
-            //Duplicate
-            this.DuplicateControl.CancelButton.Tapped += (s, e) => this.SetMainPageState(MainPageState.Main);
-        }
-        private void SetMainPageState(MainPageState pageState)
-        {
-            this._vsIsInitialVisibility = false;
-            this._vsState = pageState;
-            this.VisualState = this.VisualState;//State
+            this.InitialAddButton.Tapped += (s, e) => this.ShowAddDialog();
+            this.InitialPhotoButton.Tapped += async (s, e) => await this.NewFromPicture(PickerLocationId.PicturesLibrary);
+            this.InitialDestopButton.Tapped += async (s, e) => await this.NewFromPicture(PickerLocationId.Desktop);
         }
 
 
-        //ContextFlyout
-        private string ContextText { get => this.ContextTextBlock.Text; set => this.ContextTextBlock.Text = value; }
-        private void ConstructContextFlyout()
+        //Head & Select
+        private void ConstructSelectHead()
         {
-            this.ConstructRenameDialog();
-            this.ContextRenameButton.Tapped += (s, e) => this.ShowRenameDialog();
+            //Head
+            this.MainLayout.RefreshButton.Tapped += async (s, e) => await this.RefreshWrapGrid();
+            this.MainLayout.SettingButton.Tapped += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
 
-            this.ContextSaveButton.Tapped += (s, e) => this.SetContextFlyoutState(MainPageState.Save);
-            this.ContextShareButton.Tapped += (s, e) => this.SetContextFlyoutState(MainPageState.Share);
-
-            this.ContextDeleteButton.Tapped += (s, e) => this.SetContextFlyoutState(MainPageState.Delete);
-            this.ContextDuplicateButton.Tapped += (s, e) => this.SetContextFlyoutState(MainPageState.Duplicate);
-
-            this.ContextFlyout.Closed += (s, e) =>
+            //Select
+            this.MainLayout.SelectCheckBox.Unchecked += (s, e) => this.RefreshPhotosSelectMode(SelectMode.None);
+            this.MainLayout.SelectCheckBox.Checked += (s, e) =>
             {
-                ProjectViewItem item = this.ProjectViewItems.FirstOrDefault(p => p.Tittle == this.ContextText);
-                this.ContextText = string.Empty;
+                this.RefreshPhotosSelectMode(SelectMode.UnSelected);
 
-                if (item == null) return;
+                this.RefreshSelectCount();
+            };
+            this.MainLayout.SelectAllButton.Tapped += (s, e) =>
+            {
+                bool isAnyUnSelected = this.ProjectViewItems.Any(p => p.SelectMode == SelectMode.UnSelected);
+                SelectMode mode = isAnyUnSelected ? SelectMode.Selected : SelectMode.UnSelected;
+                this.RefreshPhotosSelectMode(mode);
 
-                switch (this._vsState)
-                {
-                    case MainPageState.Save:
-                    case MainPageState.Share:
-                    case MainPageState.Delete:
-                    case MainPageState.Duplicate:
-                        item.SelectMode = SelectMode.Selected;
-                        break;
-                    default:
-                        item.SelectMode = SelectMode.None;
-                        break;
-                }
+                this.RefreshSelectCount();
             };
         }
-        private void SetContextFlyoutState(MainPageState state)
-        {
-            this._vsIsInitialVisibility = false;
-            this._vsState = state;
-            this.VisualState = this.VisualState;//State
 
-            this.ContextFlyout.Hide();
-        }
-
-
-        //RenameDialog
-        private void ConstructRenameDialog()
-        {
-            this.RenameDialog.CloseButton.Click += (sender, args) =>
-            {
-                this.SetMainPageState(MainPageState.Main);
-
-                this.RenameDialog.Hide();
-            };
-
-            this.RenameDialog.PrimaryButton.Click += (sender, args) =>
-            {
-                this.SetMainPageState(MainPageState.Main);
-
-                this.RenameDialog.Hide();
-            };
-        }
-        private void ShowRenameDialog()
-        {
-            this._vsIsInitialVisibility = false;
-            this._vsState = MainPageState.Dialog;
-            this.VisualState = this.VisualState;//State
-
-            this.ContextFlyout.Hide();
-            this.RenameDialog.Show();
-        }
 
         //AddDialog
         private void ConstructAddDialog()
         {
-            this.AddDialog.CloseButton.Click += (sender, args) =>
-            {
-                this.SetMainPageState(MainPageState.Main);
-
-                this.AddDialog.Hide();
-            };
-
+            this.AddDialog.CloseButton.Click += (sender, args) => this.HideAddDialog();
             this.AddDialog.PrimaryButton.Click += (sender, args) =>
             {
-                this.SetMainPageState(MainPageState.Main);
-
-                this.AddDialog.Hide();
+                this.HideAddDialog();
 
                 BitmapSize size = this.AddSizePicker.Size;
-
                 this.NewFromSize(size);
             };
         }
         private void ShowAddDialog()
         {
-            this._vsIsInitialVisibility = false;
-            this._vsState = MainPageState.Dialog;
-            this.VisualState = this.VisualState;//State
-
+            this.MainLayout.MainPageState = MainPageState.Dialog;
             this.AddDialog.Show();
+        }
+        private void HideAddDialog()
+        {
+            this.MainLayout.MainPageState = MainPageState.Main;
+            this.AddDialog.Hide();
         }
 
 
-        //FolderDialog
-        private void ConstructFolderDialog() { }
-        private void ShowFolderDialog() { }
-               
+        //PicturesControl
+        private void ConstructPicturesControl()
+        {
+            this.PicturesPhotoButton.Tapped += async (s, e) => await this.NewFromPicture(PickerLocationId.PicturesLibrary);
+            this.PicturesDestopButton.Tapped += async (s, e) => await this.NewFromPicture(PickerLocationId.Desktop);
+            this.PicturesCancelButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Main;
+        }
+
+
+        //RenameDialog
+        private void ShowRenameDialog(ProjectViewItem item)
+        {
+            this.MainLayout.MainPageState = MainPageState.Dialog;
+
+            this.RenameDialog.Show();
+
+            this.RenameTextBox.Text = item.Name;
+            this.RenameDialog.PrimaryButton.Click -= async (sender, args) => await this.RenameProjectViewItem(item);
+            this.RenameDialog.PrimaryButton.Click += async (sender, args) => await this.RenameProjectViewItem(item);
+        }
+        private void HideRenameDialog()
+        {
+            this.RenameTipTextBlock.Visibility = Visibility.Collapsed;
+
+            this.MainLayout.MainPageState = MainPageState.Rename;
+
+            this.RenameDialog.Hide();
+        }
+
+
+        //DeleteControl
+        private void ConstructDeleteControl()
+        {
+            //Delete
+            this.DeleteCancelButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Main;
+            this.DeleteOKButton.Tapped += async (s, e) =>
+            {
+                this.LoadingControl.IsActive = true;
+
+                IEnumerable<ProjectViewItem> items = from i in this.ProjectViewItems where i.SelectMode == SelectMode.Selected select i;
+                await this.DeleteProjectViewItems(items.ToList());
+
+                this.LoadingControl.IsActive = false;
+
+                if (this.ProjectViewItems.Count == 0)
+                    this.MainLayout.MainPageState = MainPageState.Initial;
+                else
+                    this.MainLayout.MainPageState = MainPageState.Main;
+            };
+        }
+
+
+        //DuplicateControl
+        private void ConstructDuplicateControl()
+        {
+            //Duplicate
+            this.DuplicateCancelButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Main;
+            this.DuplicateOKButton.Tapped += async (s, e) =>
+            {
+                this.LoadingControl.IsActive = true;
+
+                IEnumerable<ProjectViewItem> items = from i in this.ProjectViewItems where i.SelectMode == SelectMode.Selected select i;
+                await this.DuplicateProjectViewItems(items.ToList());
+
+                this.LoadingControl.IsActive = false;
+
+                this.MainLayout.MainPageState = MainPageState.Main;
+            };
+        }
+
     }
 }

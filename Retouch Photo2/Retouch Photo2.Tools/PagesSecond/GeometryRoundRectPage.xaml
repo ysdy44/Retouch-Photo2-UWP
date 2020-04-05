@@ -15,14 +15,11 @@
         <StackPanel Orientation="Horizontal">
 
             <!--Corner-->
-            <TextBlock Style="{StaticResource AppTextBlock}">
-            Corner
-            </TextBlock>
-            <tools:TouchbarButton x:Name="CornerTouchbarButton"
-                      Number="{x:Bind CornerNumberConverter(SelectionViewModel.GeometryRoundRectCorner),Mode=OneWay}"
-                      >
+            <tools:TouchbarButton x:Name="CornerTouchbarButton">
+                <tools:TouchbarButton.CenterContent>
+                    Corner
+                </tools:TouchbarButton.CenterContent>
                 <tools:TouchbarButton.TouchbarSlider>
-
                     <tools:TouchbarSlider x:Name="CornerTouchbarSlider" 
                              Number="{x:Bind CornerNumberConverter(SelectionViewModel.GeometryRoundRectCorner),Mode=OneWay}"
                              Value="{x:Bind CornerValueConverter(SelectionViewModel.GeometryRoundRectCorner),Mode=OneWay}"

@@ -36,6 +36,11 @@ namespace Retouch_Photo2.Elements
         }
 
 
+        /// <summary>
+        /// Find the first ImageRe by ImageStr.
+        /// </summary>
+        /// <param name="imageStr"> The source ImageStr</param>
+        /// <returns> The ImageRe. </returns>
         public static ImageRe FindFirstImage(ImageStr imageStr)
         {
             string id = imageStr.FolderRelativeId;

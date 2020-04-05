@@ -15,12 +15,10 @@
         <StackPanel Orientation="Horizontal">
 
             <!--SweepAngle-->
-            <TextBlock Style="{StaticResource AppTextBlock}">
-            Sweep Angle
-            </TextBlock>
-            <tools:TouchbarButton x:Name="SweepAngleTouchbarButton"
-                      Number="{x:Bind SweepAngleNumberConverter(SelectionViewModel.GeometryPieSweepAngle),Mode=OneWay}"
-                       >
+            <tools:TouchbarButton x:Name="SweepAngleTouchbarButton">
+                <tools:TouchbarButton.CenterContent>
+                    Sweep Angle
+                </tools:TouchbarButton.CenterContent>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="SweepAngleTouchbarSlider"
                     Number="{x:Bind SweepAngleNumberConverter(SelectionViewModel.GeometryPieSweepAngle),Mode=OneWay}"

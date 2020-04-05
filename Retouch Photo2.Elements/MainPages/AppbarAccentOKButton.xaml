@@ -1,0 +1,26 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Elements.MainPages.AppbarAccentOKButton"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="50"
+    d:DesignWidth="50"
+    Width="60"
+    Height="50"
+    mc:Ignorable="d"
+    >
+
+    <Button x:Name="_RootButton" Width="Auto" Height="Auto" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ContentPresenter  Width="40" Height="26" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}">
+                <FontIcon Glyph="&#xE10B;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            </ContentPresenter>
+            <TextBlock Text="OK" FontSize="12" FontFamily="Microsoft YaHei UI" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ContentControl Height="4"/>
+        </StackPanel>
+
+    </Button>
+        
+</UserControl>

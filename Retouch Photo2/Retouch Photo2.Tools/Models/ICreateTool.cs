@@ -50,8 +50,9 @@ namespace Retouch_Photo2.Tools.Models
                  this.IsSquare
             );
 
-            //Tip
-            this.ViewModel.TipWidthHeight?.Invoke(transformer, point, InvalidateMode.HD); //Delegate
+            //Text
+            this.ViewModel.SetTextWidthHeight(transformer);
+            this.ViewModel.TextVisibility = Visibility.Visible;
 
             //Mezzanine
             ILayer layer = this.CreateLayer(transformer);
@@ -80,8 +81,8 @@ namespace Retouch_Photo2.Tools.Models
                  this.IsSquare
             );
 
-            //Tip
-            this.ViewModel.TipWidthHeight?.Invoke(transformer, point, InvalidateMode.None); //Delegate
+            //Text
+            this.ViewModel.SetTextWidthHeight(transformer);
 
             //Mezzanine
             this.ViewModel.MezzanineLayer.TransformManager.Source = transformer;
@@ -112,9 +113,9 @@ namespace Retouch_Photo2.Tools.Models
                      this.IsCenter,
                      this.IsSquare
                 );
-
-                //Tip
-                this.ViewModel.TipWidthHeight?.Invoke(transformer, point, InvalidateMode.Thumbnail); //Delegate
+                
+                //Text
+                this.ViewModel.TextVisibility = Visibility.Collapsed;
 
                 //Mezzanine
                 this.ViewModel.MezzanineLayer.TransformManager.Source = transformer;

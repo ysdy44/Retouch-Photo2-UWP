@@ -15,12 +15,10 @@
         <StackPanel Orientation="Horizontal">
 
             <!--Spread-->
-            <TextBlock Style="{StaticResource AppTextBlock}">
-            Spread
-            </TextBlock>
-            <tools:TouchbarButton x:Name="SpreadTouchbarButton"
-                      Number="{x:Bind SpreadNumberConverter(SelectionViewModel.GeometryHeartSpread),Mode=OneWay}"
-                        >
+            <tools:TouchbarButton x:Name="SpreadTouchbarButton">
+                <tools:TouchbarButton.CenterContent>
+                    Spread
+                </tools:TouchbarButton.CenterContent>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="SpreadTouchbarSlider" 
                              Number="{x:Bind SpreadNumberConverter(SelectionViewModel.GeometryHeartSpread),Mode=OneWay}"

@@ -32,7 +32,9 @@ namespace Retouch_Photo2.Tools.Pages
         //@Content
         public FrameworkElement Self => this;
         public bool IsSelected { private get; set; }
-        AcrylicMode _mode
+        
+        //@TouchBar
+        internal AcrylicMode TouchBarMode
         {
             set
             {
@@ -75,13 +77,12 @@ namespace Retouch_Photo2.Tools.Pages
             //BlurAmount
             {
                 //Button
-                this.BlurAmountTouchbarButton.Unit = "dp";
                 this.BlurAmountTouchbarButton.Toggle += (s, value) =>
                 {
                     if (value)
-                        this._mode = AcrylicMode.BlurAmount;
+                        this.TouchBarMode = AcrylicMode.BlurAmount;
                     else
-                        this._mode = AcrylicMode.None;
+                        this.TouchBarMode = AcrylicMode.None;
                 };
 
                 //Number
@@ -109,13 +110,12 @@ namespace Retouch_Photo2.Tools.Pages
             //TintOpacity
             {
                 //Button
-                this.TintOpacityTouchbarButton.Unit = "%";
                 this.TintOpacityTouchbarButton.Toggle += (s, value) =>
                 {
                     if (value)
-                        this._mode = AcrylicMode.TintOpacity;
+                        this.TouchBarMode = AcrylicMode.TintOpacity;
                     else
-                        this._mode = AcrylicMode.None;
+                        this.TouchBarMode = AcrylicMode.None;
                 };
 
                 //Number
@@ -179,7 +179,7 @@ namespace Retouch_Photo2.Tools.Pages
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
-            this._mode = AcrylicMode.None;
+            this.TouchBarMode = AcrylicMode.None;
         }
     }
 }

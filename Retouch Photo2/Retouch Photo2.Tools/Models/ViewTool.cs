@@ -25,16 +25,26 @@ namespace Retouch_Photo2.Tools.Models
         public void Starting(Vector2 point) { }
         public void Started(Vector2 startingPoint, Vector2 point)
         {
+            //Text
+            this.ViewModel.SetTextPosition();
+            this.ViewModel.TextVisibility = Visibility.Visible;
+
             this.ViewModel.CanvasTransformer.CacheMove(startingPoint);
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
+            //Text
+            this.ViewModel.SetTextPosition();
+
             this.ViewModel.CanvasTransformer.Move(point);
             this.ViewModel.Invalidate();//Invalidate
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
         {
+            //Text
+            this.ViewModel.TextVisibility = Visibility.Collapsed;
+
             if (isSingleStarted) this.ViewModel.CanvasTransformer.Move(point);
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }

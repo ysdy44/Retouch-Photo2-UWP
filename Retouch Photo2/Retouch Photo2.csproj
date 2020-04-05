@@ -130,7 +130,9 @@
     <Compile Include="DrawPage.Xaml.Construct.cs" />
     <Compile Include="DrawPage.Xaml.Method.cs" />
     <Compile Include="FileUtils\FileUtil.cs" />
-    <Compile Include="FileUtils\FileUtil.LoadSave.cs" />
+    <Compile Include="FileUtils\FileUtil.ImageRes.cs" />
+    <Compile Include="FileUtils\FileUtil.Project.cs" />
+    <Compile Include="FileUtils\FileUtil.Thumbnail.cs" />
     <Compile Include="FileUtils\FileUtil.ZipFIle.cs" />
     <Compile Include="MainPage.Xaml.Construct.cs" />
     <Compile Include="MainPage.Xaml.Method.cs" />

@@ -1,7 +1,6 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
-using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.Layers.Models;
 using Windows.UI.Xaml;
 
@@ -20,7 +19,9 @@ namespace Retouch_Photo2.Tools.Pages
         //@Content
         public FrameworkElement Self => this;
         public bool IsSelected { private get; set; }
-        bool _mode
+
+        //@TouchBar  
+        internal bool TouchBarMode
         {
             set
             {
@@ -49,10 +50,9 @@ namespace Retouch_Photo2.Tools.Pages
             //Mid
             {
                 //Button
-                this.MidTouchbarButton.Unit = "%";
                 this.MidTouchbarButton.Toggle += (s, value) =>
                 {
-                    this._mode = value;
+                    this.TouchBarMode = value;
                 };
 
                 //Number
@@ -119,7 +119,7 @@ namespace Retouch_Photo2.Tools.Pages
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
-            this._mode = false;
+            this.TouchBarMode = false;
         }
     }
 }

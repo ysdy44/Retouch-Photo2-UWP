@@ -1,11 +1,12 @@
 ﻿using Retouch_Photo2.Elements.MainPages;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
-using Windows.UI.Xaml;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using System.Linq;
-using Retouch_Photo2.Layers;
 
 namespace Retouch_Photo2
 {
@@ -17,46 +18,21 @@ namespace Retouch_Photo2
         //@Static
         static bool _isLoaded;
 
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
         SettingViewModel SettingViewModel { get => App.SettingViewModel; set => App.SettingViewModel = value; }
-        IList<ProjectViewItem> ProjectViewItems => this.ViewModel.ProjectControls;
-        
-        //@VisualState
-        bool _vsIsInitialVisibility = false;
-        MainPageState _vsState = MainPageState.Main;
-        public VisualState VisualState
-        {
-            get
-            {
-                if (this._vsIsInitialVisibility) return this.Initial;
-                
-                switch (this._vsState)
-                {
-                    case MainPageState.None: return this.Normal;
-                    case MainPageState.Main: return this.Main;
-                    case MainPageState.Dialog: return this.Dialog;
-                    case MainPageState.Pictures: return this.Pictures;
-                    case MainPageState.Save: return this.Save;
-                    case MainPageState.Share: return this.Share;
-                    case MainPageState.Delete: return this.Delete;
-                    case MainPageState.Duplicate: return this.Duplicate;
-                    case MainPageState.Move: return this.Move;
-                    default: return this.Normal;
-                }
-            }
-            set => VisualStateManager.GoToState(this, value.Name, false);
-        }
-        
+
+        ObservableCollection<ProjectViewItem> ProjectViewItems = new ObservableCollection<ProjectViewItem>();
+
+                       
         //@Construct
         public MainPage()
         {
             this.InitializeComponent();
-
-            this.ConstructMainPage();
-            this.ConstructContextFlyout();            
-            this.ConstructAddDialog();
+            this.ConstructInitialControl();
+            this.ConstructSelectHead();
             this.Loaded += async (s, e) =>
             {
                 await this.ConstructSettingViewModel();
@@ -67,45 +43,54 @@ namespace Retouch_Photo2
                     await this.RefreshWrapGrid();
                 }
 
-                this.VisualState = this.VisualState;//State
+                this.MainLayout.ItemsSource = this.ProjectViewItems;
             };
 
-            //Head
-            this.RefreshButton.Tapped += async (s, e) => await this.RefreshWrapGrid();
-            this.SettingButton.Tapped += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
+                       
+            #region Foot
 
-            //Select
-            this.SelectCheckBox.Checked += (s, e) => this.RefreshPhotosSelectMode(SelectMode.UnSelected);
-            this.SelectCheckBox.Unchecked += (s, e) => this.RefreshPhotosSelectMode(SelectMode.None);
-            this.SelectAllButton.Tapped += (s, e) => this.RefreshPhotosSelectMode(this.ProjectViewItems.Any(p => p.SelectMode == SelectMode.UnSelected) ? SelectMode.Selected : SelectMode.UnSelected);
 
-            //Photo
+            this.ConstructAddDialog();
+            this.AddButton.Tapped += (s, e) => this.ShowAddDialog();
+
+            this.ConstructPicturesControl();
+            this.PicturesButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Pictures;
+
+            this.RenameCancelButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Main;
+            this.RenameButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Rename;
+            this.RenameDialog.CloseButton.Click += (sender, args) => this.HideRenameDialog();
+
+            this.ConstructDeleteControl();
+            this.DeleteButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Delete;
+
+            this.ConstructDuplicateControl();
+            this.DuplicateButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Duplicate;
+
+
+            #endregion
+
+
+            //ProjectViewItem
             ProjectViewItem.ItemClick += (item) =>
             {
-                switch (item.SelectMode)
+                switch (this.MainLayout.MainPageState)
                 {
-                    case SelectMode.None:
+                    case MainPageState.Main:
                         this.OpenFromProjectViewItem(item);
                         break;
-                    case SelectMode.UnSelected:
-                        item.SelectMode = SelectMode.Selected;
-                        this.RefreshSelectCountRun();
+
+                    case MainPageState.Rename:
+                        this.ShowRenameDialog(item);
                         break;
-                    case SelectMode.Selected:
-                        item.SelectMode = SelectMode.UnSelected;
-                        this.RefreshSelectCountRun();
+                        
+                    case MainPageState.Delete:
+                    case MainPageState.Duplicate:
+                        item.SwitchState();
+                        this.RefreshSelectCount();
                         break;
-                }
-            };
-            ProjectViewItem.RightTapped += (item) =>
-            {
-                if (item.SelectMode == SelectMode.None)
-                {
-                    item.SelectMode = SelectMode.Selected;
-                                        
-                    // Notify TextBlock of the name of the ProjectViewItem.
-                    this.ContextText = item.Tittle;
-                    this.ContextFlyout.ShowAt(item);//Context
+
+                    default:
+                        break;
                 }
             };
             

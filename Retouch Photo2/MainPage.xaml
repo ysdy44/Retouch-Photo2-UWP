@@ -4,19 +4,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-   
-    xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
-    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    
+       
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:elementDialog="using:Retouch_Photo2.Elements.Dialogs"
-    xmlns:mainpages="using:Retouch_Photo2.Elements.MainPages"
+    xmlns:elementMainPages="using:Retouch_Photo2.Elements.MainPages"
     mc:Ignorable="d"
 
-   NavigationCacheMode="Required"    
-   Background="{ThemeResource AppBackground}"
-   >
+    NavigationCacheMode="Required"    
+    Background="{ThemeResource AppBackground}"
+    >
 
 
     <Page.Resources>
@@ -26,191 +22,40 @@
 
 
     <Grid x:Name="RootGrid">
-        <Grid.Resources>
-            <!--Flyout-->
-            <Flyout x:Name="ContextFlyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <StackPanel Width="190">
-
-                    <TextBlock x:Name="ContextTextBlock" Margin="8,2" Style="{StaticResource SubheaderTextBlockStyle}"/>
-
-                    <elements:IconButton x:Name="ContextRenameButton">
-                        <elements:IconButton.Icon>
-                            <FontIcon Glyph="&#xE104;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
-                        </elements:IconButton.Icon>
-                        <elements:IconButton.Text>
-                            Rename
-                        </elements:IconButton.Text>
-                    </elements:IconButton>
-                    
-                    <elements:RectangleSeparator/>
-                    
-                    <elements:IconButton x:Name="ContextSaveButton">
-                        <elements:IconButton.Icon>
-                            <FontIcon Glyph="&#xE105;" FontSize="22" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
-                        </elements:IconButton.Icon>
-                        <elements:IconButton.Text>
-                            Save
-                        </elements:IconButton.Text>
-                    </elements:IconButton>
-                    <elements:IconButton x:Name="ContextShareButton">
-                        <elements:IconButton.Icon>
-                            <FontIcon Glyph="&#xE72D;" FontSize="22" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </elements:IconButton.Icon>
-                        <elements:IconButton.Text>
-                            Share
-                        </elements:IconButton.Text>
-                    </elements:IconButton>
-
-                    <elements:RectangleSeparator/>
-
-                    <elements:IconButton x:Name="ContextDeleteButton">
-                        <elements:IconButton.Icon>
-                            <FontIcon Glyph="&#xE107;" FontSize="22" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </elements:IconButton.Icon>
-                        <elements:IconButton.Text>
-                            Delete
-                        </elements:IconButton.Text>
-                    </elements:IconButton>
-                    <elements:IconButton x:Name="ContextDuplicateButton">
-                        <elements:IconButton.Icon>
-                            <FontIcon Glyph="&#xE16F;" FontSize="22" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </elements:IconButton.Icon>
-                        <elements:IconButton.Text>
-                            Duplicate
-                        </elements:IconButton.Text>
-                    </elements:IconButton>
-
-                </StackPanel>
-            </Flyout>
-        </Grid.Resources>
-
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup">
+            <VisualStateGroup>
 
-                <!--Normal-->
-                <VisualState x:Name="Normal"/>
-
-                <!--Initial-->
-                <VisualState x:Name="Initial">
+                <!--Phone-->
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
                     <VisualState.Setters>
-
-                        <!--Head-->
-                        <Setter Target = "RefreshButton.Visibility" Value="Visible"/>
-                        <Setter Target = "SettingButton.Visibility" Value="Visible"/>
-
-                        <!--Body-->
-                        <Setter Target = "InitialControl.Visibility" Value="Visible"/>
-                        <Setter Target = "GridView.Visibility" Value="Collapsed"/>
-
-                        <!--Foot-->
-                        <Setter Target = "RadiusAnimaPanel.Visibility" Value="Collapsed"/>
-                        
+                        <Setter Target="DeleteStackPanel.Orientation" Value="Vertical"/>
+                        <Setter Target="DuplicateStackPanel.Orientation" Value="Vertical"/>
                     </VisualState.Setters>
                 </VisualState>
 
-                <!--Main-->
-                <VisualState x:Name="Main">
+                <!--Pad-->
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600"/>
+                    </VisualState.StateTriggers>
                     <VisualState.Setters>
-
-                        <!--Head-->
-                        <Setter Target = "RefreshButton.Visibility" Value="Visible"/>
-                        <Setter Target = "SettingButton.Visibility" Value="Visible"/>
-
-                        <!--Foot-->
-                        <Setter Target = "MainControl.Visibility" Value="Visible"/>
-                        
+                        <Setter Target="DeleteStackPanel.Orientation" Value="Horizontal"/>
+                        <Setter Target="DuplicateStackPanel.Orientation" Value="Horizontal"/>
                     </VisualState.Setters>
                 </VisualState>
 
-                <!--Dialog-->
-                <VisualState x:Name="Dialog">
+                <!--PC-->
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900"/>
+                    </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        
-                        <!--Foot-->
-                        <Setter Target = "RadiusAnimaPanel.Visibility" Value="Collapsed"/>
-                        
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Pictures-->
-                <VisualState x:Name="Pictures">
-                    <VisualState.Setters>
-                        
-                        <!--Foot-->
-                        <Setter Target = "PicturesControl.Visibility" Value="Visible"/>
-                        
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Save-->
-                <VisualState x:Name="Save">
-                    <VisualState.Setters>
-                        
-                        <!--SelectMode-->
-                        <Setter Target = "SelectCheckBox.IsChecked" Value="true"/>
-                        <Setter Target = "SelectGrid.Visibility" Value="Visible"/>
-                        <Setter Target = "SelectCountRun.Text" Value=""/>
-                        
-                        <!--Foot-->
-                        <Setter Target = "SaveControl.Visibility" Value="Visible"/>
-                        
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Share-->
-                <VisualState x:Name="Share">
-                    <VisualState.Setters>
-                        
-                        <!--SelectMode-->
-                        <Setter Target = "SelectCheckBox.IsChecked" Value="true"/>
-                        <Setter Target = "SelectGrid.Visibility" Value="Visible"/>
-                        <Setter Target = "SelectCountRun.Text" Value=""/>
-
-                        <!--Foot-->
-                        <Setter Target = "ShareControl.Visibility" Value="Visible"/>
-                        
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Delete-->
-                <VisualState x:Name="Delete">
-                    <VisualState.Setters>
-                        
-                        <!--SelectMode-->
-                        <Setter Target = "SelectCheckBox.IsChecked" Value="true"/>
-                        <Setter Target = "SelectGrid.Visibility" Value="Visible"/>
-                        <Setter Target = "SelectCountRun.Text" Value=""/>
-
-                        <!--Foot-->
-                        <Setter Target = "DeleteControl.Visibility" Value="Visible"/>
-                        
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Duplicate-->
-                <VisualState x:Name="Duplicate">
-                    <VisualState.Setters>
-                                                
-                        <!--SelectMode-->
-                        <Setter Target = "SelectCheckBox.IsChecked" Value="true"/>
-                        <Setter Target = "SelectGrid.Visibility" Value="Visible"/>
-                        <Setter Target = "SelectCountRun.Text" Value=""/>
-                        
-                        <!--Foot-->
-                        <Setter Target = "DuplicateControl.Visibility" Value="Visible"/>
-                        
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Move-->
-                <VisualState x:Name="Move">
-                    <VisualState.Setters>
-                        
-                        <!--SelectMode-->
-                        <Setter Target = "SelectCheckBox.IsChecked" Value="true"/>
-                        <Setter Target = "SelectGrid.Visibility" Value="Visible"/>
-
+                        <Setter Target="DeleteStackPanel.Orientation" Value="Horizontal"/>
+                        <Setter Target="DuplicateStackPanel.Orientation" Value="Horizontal"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -218,187 +63,242 @@
         </VisualStateManager.VisualStateGroups>
         
         
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto" MinHeight="70"/>
-        </Grid.RowDefinitions>
+        <elementMainPages:MainLayout x:Name="MainLayout">
 
-        <!--Developer-->
-        <developerTools:AlignmentGrid Grid.RowSpan="3" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="Gray"/>
+            <!--InitialChild-->
+            <elementMainPages:MainLayout.InitialChild>
+                <StackPanel>
+                    <StackPanel.ChildrenTransitions>
+                        <TransitionCollection>
+                            <EntranceThemeTransition IsStaggeringEnabled="True"/>
+                        </TransitionCollection>
+                    </StackPanel.ChildrenTransitions>
+
+                    <StackPanel.Children>
+
+                        <TextBlock HorizontalAlignment="Center" Foreground="{ThemeResource AppText}">
+                            No projects? You could...
+                        </TextBlock>
+                        <ContentControl Height="6"/>
+
+                        <Button x:Name="InitialAddButton" Style="{StaticResource AppTagAccentLineCircleButton}">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xE109;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                <ContentControl Width="8"/>
+                                <TextBlock VerticalAlignment="Center">
+                                    Add New Project
+                                </TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Rectangle Height="1" Fill="{ThemeResource AppBorderBrush}" HorizontalAlignment="Stretch"/>
+
+                        <Button x:Name="InitialPhotoButton" Style="{StaticResource AppTagAccentLineCircleButton}">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                <ContentControl Width="8"/>
+                                <TextBlock VerticalAlignment="Center">
+                                    New Project From Pictures
+                                </TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="InitialDestopButton" Style="{StaticResource AppTagAccentLineCircleButton}">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xEC4E;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                <ContentControl Width="8"/>
+                                <TextBlock VerticalAlignment="Center">
+                                    New Project From Destop
+                                </TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                    </StackPanel.Children>
+
+                </StackPanel>
+            </elementMainPages:MainLayout.InitialChild>
+
+            <!--MainChild-->
+            <elementMainPages:MainLayout.MainChild>
+                <StackPanel Orientation="Horizontal" Margin="8,0" HorizontalAlignment="Center">
+
+                    <elementMainPages:AppbarAccentButton x:Name="AddButton">
+                        <elementMainPages:AppbarAccentButton.CenterContent>
+                            <FontIcon Glyph="&#xE109;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </elementMainPages:AppbarAccentButton.CenterContent>
+                        <elementMainPages:AppbarAccentButton.Text>
+                            Add
+                        </elementMainPages:AppbarAccentButton.Text>
+                    </elementMainPages:AppbarAccentButton>
+
+                    <elementMainPages:AppbarAccentButton x:Name="PicturesButton">
+                        <elementMainPages:AppbarAccentButton.CenterContent>
+                            <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </elementMainPages:AppbarAccentButton.CenterContent>
+                        <elementMainPages:AppbarAccentButton.Text>
+                            Pictures
+                        </elementMainPages:AppbarAccentButton.Text>
+                    </elementMainPages:AppbarAccentButton>
+
+                    <elements:ExpandAppBarSeparator/>
+
+                    <elementMainPages:AppbarAccentButton x:Name="RenameButton">
+                        <elementMainPages:AppbarAccentButton.CenterContent>
+                            <FontIcon Glyph="&#xE104;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </elementMainPages:AppbarAccentButton.CenterContent>
+                        <elementMainPages:AppbarAccentButton.Text>
+                            Rename
+                        </elementMainPages:AppbarAccentButton.Text>
+                    </elementMainPages:AppbarAccentButton>
+
+                    <elements:ExpandAppBarSeparator/>
+
+                    <elementMainPages:AppbarAccentButton x:Name="DeleteButton">
+                        <elementMainPages:AppbarAccentButton.CenterContent>
+                            <FontIcon Glyph="&#xE107;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </elementMainPages:AppbarAccentButton.CenterContent>
+                        <elementMainPages:AppbarAccentButton.Text>
+                            Delete
+                        </elementMainPages:AppbarAccentButton.Text>
+                    </elementMainPages:AppbarAccentButton>
+
+                    <elementMainPages:AppbarAccentButton x:Name="DuplicateButton">
+                        <elementMainPages:AppbarAccentButton.CenterContent>
+                            <FontIcon Glyph="&#xE16F;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </elementMainPages:AppbarAccentButton.CenterContent>
+                        <elementMainPages:AppbarAccentButton.Text>
+                            Duplicate
+                        </elementMainPages:AppbarAccentButton.Text>
+                    </elementMainPages:AppbarAccentButton>
+
+                </StackPanel>
+            </elementMainPages:MainLayout.MainChild>
+
+            <!--PicturesChild-->
+            <elementMainPages:MainLayout.PicturesChild>
+                <StackPanel Orientation="Horizontal" Margin="8,0">
+
+                    <elementMainPages:AppbarAccentButton x:Name="PicturesPhotoButton">
+                        <elementMainPages:AppbarAccentButton.CenterContent>
+                            <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </elementMainPages:AppbarAccentButton.CenterContent>
+                        <elementMainPages:AppbarAccentButton.Text>
+                            Library
+                        </elementMainPages:AppbarAccentButton.Text>
+                    </elementMainPages:AppbarAccentButton>
+
+                    <elementMainPages:AppbarAccentButton x:Name="PicturesDestopButton">
+                        <elementMainPages:AppbarAccentButton.CenterContent>
+                            <FontIcon Glyph="&#xEC4E;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </elementMainPages:AppbarAccentButton.CenterContent>
+                        <elementMainPages:AppbarAccentButton.Text>
+                            Destop
+                        </elementMainPages:AppbarAccentButton.Text>
+                    </elementMainPages:AppbarAccentButton>
+
+                    <elements:ExpandAppBarSeparator/>
+
+                    <elementMainPages:AppbarAccentCancelButton x:Name="PicturesCancelButton"/>
+
+                </StackPanel>
+            </elementMainPages:MainLayout.PicturesChild>
+
+            <!--RenameChild-->
+            <elementMainPages:MainLayout.RenameChild>
+                <StackPanel Orientation="Horizontal" Margin="8,0">
+
+                    <TextBlock Margin="8,2">         
+                        <Run FontWeight="Bold">             
+                            Rename Project           
+                        </Run>            
+                        <LineBreak/>           
+                        <Run FontSize="12" Foreground="{ThemeResource AppText}">             
+                            Select project to be renamed.          
+                        </Run>
+                    </TextBlock>
+
+                    <elementMainPages:AppbarAccentCancelButton x:Name="RenameCancelButton"/>
+
+                </StackPanel>
+            </elementMainPages:MainLayout.RenameChild>
+
+            <!--DeleteChild-->
+            <elementMainPages:MainLayout.DeleteChild>
+                <StackPanel x:Name="DeleteStackPanel" MinWidth="260">
+
+                    <TextBlock Margin="8,2">
+                        <Run FontWeight="Bold">
+                            Delete Projects
+                        </Run>
+                        <LineBreak/>
+                        <Run FontSize="12" Foreground="{ThemeResource AppText}">
+                            Select project(s) to be deleted.
+                        </Run>
+                    </TextBlock>
+
+                    <StackPanel Orientation="Horizontal" Margin="8,0" HorizontalAlignment="Right">
+                        <elementMainPages:AppbarAccentOKButton x:Name="DeleteOKButton"/>
+                        <elementMainPages:AppbarAccentCancelButton x:Name="DeleteCancelButton"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </elementMainPages:MainLayout.DeleteChild>
+
+            <!--DuplicateChild-->
+            <elementMainPages:MainLayout.DuplicateChild>
+                <StackPanel x:Name="DuplicateStackPanel" MinWidth="260">
+
+                    <TextBlock Margin="8,2">
+                         <Run FontWeight="Bold">
+                             Dupliate Projects
+                         </Run>
+                         <LineBreak/>
+                         <Run FontSize="12" Foreground="{ThemeResource AppText}">
+                             Select project(s) to be duplicated.
+                         </Run>
+                    </TextBlock>
+
+                    <StackPanel Orientation="Horizontal" Margin="8,0" HorizontalAlignment="Right">
+                        <elementMainPages:AppbarAccentOKButton x:Name="DuplicateOKButton"/>
+                        <elementMainPages:AppbarAccentCancelButton x:Name="DuplicateCancelButton"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </elementMainPages:MainLayout.DuplicateChild>
+
+        </elementMainPages:MainLayout>
 
         
-        <!--Head-->
-        <Grid HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" MinWidth="50" MaxWidth="80"/>
-                <ColumnDefinition Width="6*"/>
-                <ColumnDefinition Width="1*" MinWidth="50" MaxWidth="80"/>
-            </Grid.ColumnDefinitions>
-            
-            <Button x:Name="RefreshButton" Grid.Column="0" Visibility="Collapsed" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
-                <Button.Transitions>
-                    <TransitionCollection>
-                        <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
-                    </TransitionCollection>
-                </Button.Transitions>
-                <FontIcon FontSize="20" Glyph="&#xE117;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
-            </Button>
-
-            <TextBlock Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
-                <TextBlock.Transitions>
-                    <TransitionCollection>
-                        <EntranceThemeTransition FromHorizontalOffset="50" FromVerticalOffset="0"/>
-                    </TransitionCollection>
-                </TextBlock.Transitions>
-                Retouh Photo2
-            </TextBlock>
-
-            <Button x:Name="SettingButton" Grid.Column="2" Visibility="Collapsed"  Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
-                <Button.Transitions>
-                    <TransitionCollection>
-                        <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
-                    </TransitionCollection>
-                </Button.Transitions>
-                <FontIcon FontSize="22" Glyph="&#xE115;" FontFamily="Segoe UI Symbol" />
-            </Button>
-
-        </Grid>
-     
-        <Grid x:Name="SelectGrid" Visibility="Collapsed" HorizontalAlignment="Stretch" Background="{ThemeResource AppBorderBrush}">
-
-            <!--Visibility:Show-->
-            <animations:Implicit.ShowAnimations>
-                <animations:TranslationAnimation Duration="0:0:0.4" From="0,-50,0" To="0,0,0"/>
-            </animations:Implicit.ShowAnimations>
-
-            <!--Visibility:Hide-->
-            <animations:Implicit.HideAnimations>
-                <animations:TranslationAnimation Duration="0:0:0.4" From="0,0,0" To="0,-50,0"/>
-            </animations:Implicit.HideAnimations>
-            
-            <CheckBox x:Name="SelectCheckBox" Margin="12, 0" IsHitTestVisible="False" HorizontalAlignment="Left">
-                <TextBlock>
-                     Click to select items:
-                    <Run x:Name="SelectCountRun">0</Run>
-                </TextBlock>
-            </CheckBox>
-
-            <Button x:Name="SelectAllButton" Padding="8,0" HorizontalAlignment="Right" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
-                Select All
-            </Button>
-
-        </Grid>
-
-
-        <!--Body-->
-        <StackPanel x:Name="InitialControl" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <StackPanel.ChildrenTransitions>
-                <TransitionCollection>
-                    <EntranceThemeTransition IsStaggeringEnabled="True"/>
-                </TransitionCollection>
-            </StackPanel.ChildrenTransitions>
-
-            <StackPanel.Children>
-
-                <TextBlock HorizontalAlignment="Center" Foreground="{ThemeResource AppText}">
-                    No projects? You could...
-                </TextBlock>
-                <ContentControl Height="6"/>
-
-                <Button x:Name="AddButton" Style="{StaticResource AppTagAccentLineCircleButton}">
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon Glyph="&#xE109;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                        <ContentControl Width="8"/>
-                        <TextBlock VerticalAlignment="Center">
-                            Add New Project
-                        </TextBlock>
-                    </StackPanel>                    
-                </Button>
-                
-                <Rectangle Height="1" Fill="{ThemeResource AppBorderBrush}" HorizontalAlignment="Stretch"/>
-
-                <Button x:Name="PhotoButton" Style="{StaticResource AppTagAccentLineCircleButton}">
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                        <ContentControl Width="8"/>
-                        <TextBlock VerticalAlignment="Center">
-                            New Project From Pictures
-                        </TextBlock>
-                    </StackPanel>
-                </Button>
-                
-                <Button x:Name="DestopButton" Style="{StaticResource AppTagAccentLineCircleButton}">
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon Glyph="&#xEC4E;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                        <ContentControl Width="8"/>
-                        <TextBlock VerticalAlignment="Center">
-                            New Project From Destop
-                        </TextBlock>
-                    </StackPanel>
-                </Button>
-                
-            </StackPanel.Children>
-
-        </StackPanel>
-
-        <controls:WrapPanel x:Name="GridView" Grid.Row="1">
-            <controls:WrapPanel.ChildrenTransitions>
-                <TransitionCollection>
-                    <AddDeleteThemeTransition />
-                    <ContentThemeTransition />
-                    <ReorderThemeTransition />
-                    <EntranceThemeTransition IsStaggeringEnabled="False" />
-                </TransitionCollection>
-            </controls:WrapPanel.ChildrenTransitions>
-        </controls:WrapPanel>
-
-
-        <!--Foot-->
-        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Row="2"
-                                   ShadowOpacity="0.9"
-                                   ShadowColor="{ThemeResource AppStrokeColor}"
-                                   Background="{ThemeResource AppForeground}"
-                                  >
-
-            <!--Visibility:Show-->
-            <animations:Implicit.ShowAnimations>
-                <animations:TranslationAnimation Duration="0:0:0.4" From="0,100,0" To="0,0,0"/>
-            </animations:Implicit.ShowAnimations>
-
-            <!--Visibility:Hide-->
-            <animations:Implicit.HideAnimations>
-                <animations:TranslationAnimation Duration="0:0:0.4" From="0,0,0" To="0,100,0"/>
-            </animations:Implicit.HideAnimations>
-
-            <elements:RadiusAnimaPanel.CenterContent>
-                <Grid>
-                    <mainpages:MainControl x:Name="MainControl" Visibility="Collapsed"/>
-                    <mainpages:PicturesControl x:Name="PicturesControl" Visibility="Collapsed"/>
-                    <mainpages:SaveControl x:Name="SaveControl" Visibility="Collapsed"/>
-                    <mainpages:ShareControl x:Name="ShareControl" Visibility="Collapsed"/>
-                    <mainpages:DeleteControl x:Name="DeleteControl" Visibility="Collapsed"/>
-                    <mainpages:DuplicateControl x:Name="DuplicateControl" Visibility="Collapsed"/>
-                </Grid>
-            </elements:RadiusAnimaPanel.CenterContent>
-            
-        </elements:RadiusAnimaPanel>
         <!--Loading-->
-        <elements:LoadingControl x:Name="LoadingControl" Grid.RowSpan="3"/>
+        <elements:LoadingControl x:Name="LoadingControl" Grid.RowSpan="3" IsActive="False">
+            <elements:LoadingControl.Text>
+                Loading...
+            </elements:LoadingControl.Text>
+        </elements:LoadingControl>
 
         <!--Dialog-->
         <elementDialog:DialogBase x:Name="RenameDialog" Grid.Row="1" Grid.RowSpan="2">
             <elementDialog:DialogBase.Title>
                 <TextBlock FontSize="22" Style="{StaticResource SubheaderTextBlockStyle}">
-                    Rename Current Project
+                    Rename Project
                 </TextBlock>
             </elementDialog:DialogBase.Title>
             <elementDialog:DialogBase.CenterContent>
-                <TextBox x:Name="TextBox" VerticalAlignment="Center" BorderThickness="1">
-                    <TextBox.Text>
-                        Unsdasd
-                    </TextBox.Text>
-                </TextBox>
+                <StackPanel>
+
+                    <ContentControl Height="2"/>
+
+                    <TextBox x:Name="RenameTextBox" Margin="0" VerticalAlignment="Center" BorderThickness="0">
+                        <TextBox.PlaceholderText>
+                            Enter a name here.
+                        </TextBox.PlaceholderText>
+                    </TextBox>
+
+                    <TextBlock x:Name="RenameTipTextBlock" Visibility="Collapsed" FontSize="14" Foreground="{ThemeResource AppText}">                    
+                        The name is already occupied !
+                    </TextBlock>
+
+                </StackPanel>
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>
         <elementDialog:DialogBase x:Name="AddDialog" Grid.Row="1" Grid.RowSpan="2">
@@ -411,6 +311,7 @@
                 <elements:SizePicker x:Name="AddSizePicker"/>
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>
-
+        
+        
     </Grid>
 </Page>

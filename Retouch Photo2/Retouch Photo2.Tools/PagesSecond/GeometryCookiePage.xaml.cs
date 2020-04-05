@@ -29,8 +29,10 @@ namespace Retouch_Photo2.Tools.Pages
 
         //@Content
         public FrameworkElement Self => this;
-        public bool IsSelected { private get; set; }
-        GeometryCookieMode _mode
+        public bool IsSelected { private get; set; }   
+        
+        //@TouchBar  
+        internal GeometryCookieMode TouchBarMode
         {
             set
             {
@@ -70,13 +72,12 @@ namespace Retouch_Photo2.Tools.Pages
             //InnerRadius
             {
                 //Button
-                this.InnerRadiusTouchbarButton.Unit = "%";
                 this.InnerRadiusTouchbarButton.Toggle += (s, value) =>
                 {
                     if (value)
-                        this._mode = GeometryCookieMode.InnerRadius;
+                        this.TouchBarMode = GeometryCookieMode.InnerRadius;
                     else
-                        this._mode = GeometryCookieMode.None;
+                        this.TouchBarMode = GeometryCookieMode.None;
                 };
 
                 //Number
@@ -104,13 +105,12 @@ namespace Retouch_Photo2.Tools.Pages
             //SweepAngle
             {
                 //Button
-                this.SweepAngleTouchbarButton.Unit = "º";
                 this.SweepAngleTouchbarButton.Toggle += (s, value) =>
                 {
                     if (value)
-                        this._mode = GeometryCookieMode.SweepAngle;
+                        this.TouchBarMode = GeometryCookieMode.SweepAngle;
                     else
-                        this._mode = GeometryCookieMode.None;
+                        this.TouchBarMode = GeometryCookieMode.None;
                 };
 
                 //Number
@@ -170,7 +170,7 @@ namespace Retouch_Photo2.Tools.Pages
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
-            this._mode = GeometryCookieMode.None;
+            this.TouchBarMode = GeometryCookieMode.None;
         }
 }
 }

@@ -1,6 +1,5 @@
 ﻿using FanKit.Transformers;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using System;
 using System.Collections.Generic;

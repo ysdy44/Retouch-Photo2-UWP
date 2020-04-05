@@ -10,17 +10,12 @@ namespace Retouch_Photo2.Elements
         //@Content
         /// <summary> TextBlock's Text </summary>
         public string Text { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
+        /// <summary> ContentPresenter's Content </summary>
         public object CenterContent { get => this.ContentPresenter.Content; set => this.ContentPresenter.Content = value; }
-        public double ExpandWidth => 40.0d;
+        /// <summary> Gets element width. </summary>
+        public double ExpandWidth => 50.0d;
+        /// <summary> Gets it yourself. </summary>
         public FrameworkElement Self => this;
-        public bool IsSecondPage
-        {
-            set
-            {
-                this._vsIsSecondPage = value;
-                this.VisualState = this.VisualState;//State
-            }
-        }
 
 
         bool _isShowStoryboard = true;
@@ -72,6 +67,15 @@ namespace Retouch_Photo2.Elements
             }
         }
 
+        public bool IsSecondPage
+        {
+            set
+            {
+                this._vsIsSecondPage = value;
+                this.VisualState = this.VisualState;//State
+            }
+        }
+        
 
         #region DependencyProperty
 

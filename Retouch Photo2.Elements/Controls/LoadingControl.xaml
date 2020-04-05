@@ -5,23 +5,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    mc:Ignorable="d"
     Visibility="Collapsed"
     d:DesignHeight="400"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    mc:Ignorable="d"
+    >
 
     <!--Root-->
-    <Border Background="{ThemeResource AppStroke}">
-        <Border VerticalAlignment="Center" HorizontalAlignment="Center"   >
+    <Border Background="Transparent">
+        <Border VerticalAlignment="Center" HorizontalAlignment="Center">
 
             <!--Root-->
-            <controls:DropShadowPanel 
-                    HorizontalAlignment="Center" BlurRadius="20"  OffsetX="8" OffsetY="8" ShadowOpacity="0.8" Color="{ThemeResource AppStrokeColor}">
-                <Border CornerRadius="3" Width="140" Height="120" Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
+            <controls:DropShadowPanel HorizontalAlignment="Center" BlurRadius="20"  OffsetX="8" OffsetY="8" ShadowOpacity="0.8" Color="{ThemeResource AppStrokeColor}">
+                <Border CornerRadius="3" Width="140" Height="120" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}">
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                         <ContentControl Height="6"/>
                         <ProgressRing x:Name="ProgressRing" Width="40" Height="40" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"/>
-                        <TextBlock x:Name="TextBlock" HorizontalAlignment="Center"/>
+                        <ContentControl Height="6"/>
+                        <TextBlock x:Name="TextBlock" HorizontalAlignment="Center" Foreground="{ThemeResource AppText}"/>
                     </StackPanel>
                 </Border>
             </controls:DropShadowPanel>

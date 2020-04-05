@@ -15,12 +15,10 @@
         <StackPanel Orientation="Horizontal">
 
             <!--Center-->
-            <TextBlock Style="{StaticResource AppTextBlock}">
-                Center Point
-            </TextBlock>
-            <tools:TouchbarButton x:Name="CenterTouchbarButton"
-                      Number="{x:Bind CenterNumberConverter(SelectionViewModel.GeometryTriangleCenter),Mode=OneWay}"
-                        >
+            <tools:TouchbarButton x:Name="CenterTouchbarButton">
+                <tools:TouchbarButton.CenterContent>
+                    Center Point
+                </tools:TouchbarButton.CenterContent>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="CenterTouchbarSlider" 
                              Number="{x:Bind CenterNumberConverter(SelectionViewModel.GeometryTriangleCenter),Mode=OneWay}"

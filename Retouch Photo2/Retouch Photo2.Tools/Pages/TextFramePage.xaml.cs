@@ -4,10 +4,7 @@ using Windows.UI.Xaml.Controls;
 using FanKit.Transformers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Elements;
-using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.Menus;
 
 namespace Retouch_Photo2.Tools.Pages

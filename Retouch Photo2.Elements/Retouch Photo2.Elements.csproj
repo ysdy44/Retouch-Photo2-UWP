@@ -121,6 +121,15 @@
     <Compile Include="DialogBase.xaml.cs">
       <DependentUpon>DialogBase.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainPages\AppbarAccentButton.xaml.cs">
+      <DependentUpon>AppbarAccentButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainPages\AppbarAccentCancelButton.xaml.cs">
+      <DependentUpon>AppbarAccentCancelButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainPages\AppbarAccentOKButton.xaml.cs">
+      <DependentUpon>AppbarAccentOKButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ExpandAppbars\ExpandAppbar.xaml.cs">
       <DependentUpon>ExpandAppbar.xaml</DependentUpon>
     </Compile>
@@ -145,6 +154,9 @@
     <Compile Include="Images\ImageRe.cs" />
     <Compile Include="Images\ImageRe.Instance.cs" />
     <Compile Include="Images\ImageStr.cs" />
+    <Compile Include="MainPages\MainLayout.xaml.cs">
+      <DependentUpon>MainLayout.xaml</DependentUpon>
+    </Compile>
     <Compile Include="OnOffSwitch.xaml.cs">
       <DependentUpon>OnOffSwitch.xaml</DependentUpon>
     </Compile>
@@ -170,34 +182,10 @@
     <Compile Include="DrawPages\RenmaeDialog.xaml.cs">
       <DependentUpon>RenmaeDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPages\DeleteControl.xaml.cs">
-      <DependentUpon>DeleteControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainPages\DuplicateControl.xaml.cs">
-      <DependentUpon>DuplicateControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainPages\FolderDialog.xaml.cs">
-      <DependentUpon>FolderDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainPages\MainControl.xaml.cs">
-      <DependentUpon>MainControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainPages\MainPageButton.xaml.cs">
       <DependentUpon>MainPageButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPages\MainPageState.cs" />
-    <Compile Include="MainPages\PicturesControl.xaml.cs">
-      <DependentUpon>PicturesControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainPages\SaveControl.xaml.cs">
-      <DependentUpon>SaveControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainPages\SecondButton.xaml.cs">
-      <DependentUpon>SecondButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainPages\ShareControl.xaml.cs">
-      <DependentUpon>ShareControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="RectangleSeparator.xaml.cs">
       <DependentUpon>RectangleSeparator.xaml</DependentUpon>
     </Compile>
@@ -254,6 +242,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MainPages\AppbarAccentButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainPages\AppbarAccentCancelButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainPages\AppbarAccentOKButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ExpandAppbars\ExpandAppbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -275,6 +275,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="IconButtons\IconRoundedBorderButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainPages\MainLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -306,39 +310,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainPages\DeleteControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MainPages\DuplicateControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MainPages\FolderDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MainPages\MainControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="MainPages\MainPageButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MainPages\PicturesControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MainPages\SaveControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MainPages\SecondButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MainPages\ShareControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
