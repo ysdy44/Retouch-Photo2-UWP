@@ -17,9 +17,9 @@ namespace Retouch_Photo2.ViewModels
     {
 
         /// <summary>
-        /// Reload <see cref = "ViewModel" />  from project.
+        /// Load from a project.
         /// </summary>
-        /// <param name="project"> project </param>
+        /// <param name="project"> The project. </param>
         public void LoadFromProject(Project project)
         {
             if (project == null) return;

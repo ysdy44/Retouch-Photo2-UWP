@@ -72,7 +72,7 @@ namespace Retouch_Photo2.Controls
         #endregion
 
 
-
+        //ViewModel
         public void ConstructViewModel()
         {
             if (this.ViewModel.InvalidateAction == null)
@@ -95,6 +95,7 @@ namespace Retouch_Photo2.Controls
                 };
             }
         }
+
 
         /// <summary>
         /// Render.
@@ -142,6 +143,43 @@ namespace Retouch_Photo2.Controls
             //Tool
             this.TipViewModel.Tool.Draw(drawingSession);
         }
+        
+        /// <summary>
+        /// Render thumbnail image.
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="width"> The thumbnail width.</param>
+        /// <param name="height"> The thumbnail height.</param>
+        /// <returns> The thumbnail image. </returns>
+        public CanvasRenderTarget RenderThumbnail(ICanvasResourceCreator resourceCreator, int width = 256, int height = 256)
+        {
+            float scale = 1;
+            int thumbnailWidth = 256;
+            int thumbnailHeight = 256;
+            if (width > height)
+            {
+                scale = 256.0f / width;
+                thumbnailHeight = (int)(scale * height);
+            }
+            else
+            {
+                scale = 256.0f / height;
+                thumbnailWidth = (int)(scale * width);
+            }
 
+            //Thumbnail
+            CanvasRenderTarget thumbnail = new CanvasRenderTarget(resourceCreator, thumbnailWidth, thumbnailHeight, 96);
+            {
+                Matrix3x2 matrix = Matrix3x2.CreateScale(scale);
+                ICanvasImage previousImage = this.Render(matrix);
+
+                using (CanvasDrawingSession drawingSession = thumbnail.CreateDrawingSession())
+                {
+                    drawingSession.DrawImage(previousImage);
+                }
+            }
+            return thumbnail;
+        }
+        
     }
 }

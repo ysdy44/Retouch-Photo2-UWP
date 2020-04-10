@@ -41,6 +41,8 @@
             <Setter Property="RadiusY" Value="25"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="Width" Value="50"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="Stroke" Value="{ThemeResource AppBorderBrush}"/>
             <Setter Property="Fill" Value="{ThemeResource AppBackground}"/>
         </Style>
 
@@ -202,6 +204,8 @@
                         <Setter Target = "RightBorder.CornerRadius" Value="8,0,0,8"/>
                         <Setter Target = "RightBorder.BorderThickness" Value="1,1,0,1"/>
 
+                        <Setter Target = "WidthButton.Visibility" Value="Visible"/>
+                        
                         <!--Touchbar-->
                         <Setter Target = "TouchbarBorder.(Grid.Column)" Value="1"/>
                         <Setter Target = "TouchbarBorder.(Grid.ColumnSpan)" Value="1"/>
@@ -294,7 +298,7 @@
             <!--HeadRight-->
             <ScrollViewer Grid.Column="2" HorizontalAlignment="Right"
                            Style="{StaticResource AppHorizontalScrollViewer}">
-                <StackPanel x:Name="HeadRightStackPane" Orientation="Horizontal">
+                <StackPanel x:Name="HeadRightStackPanel" Orientation="Horizontal">
                     <!--HeadRight-->
                 </StackPanel>
             </ScrollViewer>
@@ -403,6 +407,18 @@
             <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch">
                 <StackPanel x:Name="LeftStackPanel" HorizontalAlignment="Stretch">
                     <!--Content-->
+                    
+                    <Button Height="42" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                        <Button.Flyout>
+                            <Flyout Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                                <StackPanel x:Name="LeftMoreStackPanel" Width="200" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <!--Tools-->
+                                </StackPanel>
+                            </Flyout>
+                        </Button.Flyout>
+                        <FontIcon Glyph="&#xE10C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                    </Button>
+                    
                 </StackPanel>
             </ScrollViewer >
             
@@ -422,7 +438,27 @@
                 <animations:TranslationAnimation Duration="0:0:0.2" From="0,0,0" To="100,0,0"/>
                 <animations:OpacityAnimation Duration="0:0:0.2" From="1.0" To="0.0"/>
             </animations:Implicit.HideAnimations>
+          
+            <Grid>
 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="_RightAddButton" Height="42" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                    <FontIcon Glyph="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                </Button>
+
+                <Border x:Name="RightCenterBorder" Grid.Row="1"/>
+
+                <Button x:Name="WidthButton" Visibility="Collapsed" Grid.Row="2" Height="42" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                    <FontIcon Glyph="&#xE146;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                </Button>
+                
+            </Grid>
+            
         </Border>
 
 

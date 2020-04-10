@@ -5,6 +5,7 @@ using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
+using System;
 using System.Numerics;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
@@ -20,6 +21,9 @@ namespace Retouch_Photo2.Tools.Pages
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+
+        //@Static
+        public static Action Image;
 
         //@Content
         public FrameworkElement Self => this;
@@ -78,6 +82,7 @@ namespace Retouch_Photo2.Tools.Pages
                         break;
                     case BrushType.Image:
                         this.ToBrushTypeImage();
+                        BrushPage.Image?.Invoke();
                         break;
                 }
             };
@@ -112,7 +117,7 @@ namespace Retouch_Photo2.Tools.Pages
             {
                 this.StopsFlyout.Opened += (s, e) => this._isOpened = true;
                 this.StopsFlyout.Closed += (s, e) => this._isOpened = false;
-                this.ShowControl.Tapped += async (s, e) =>
+                this.ShowControl.Tapped += (s, e) =>
                 {
                     switch (this.SelectionViewModel.BrushType)
                     {
@@ -144,9 +149,7 @@ namespace Retouch_Photo2.Tools.Pages
                             break;
 
                         case BrushType.Image:
-                            {
-                                await this.SetImage();
-                            }
+                            BrushPage.Image?.Invoke();
                             break;
                     }
                 };

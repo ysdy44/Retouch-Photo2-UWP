@@ -1,16 +1,11 @@
 ﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.Menus;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.Tools.Elements;
 using Retouch_Photo2.ViewModels;
-using Windows.Storage;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Windows.UI.Xaml.Media.Animation;
-using System.Numerics;
-using System.Xml.Linq;
-using System;
 
 namespace Retouch_Photo2
 {
@@ -26,105 +21,55 @@ namespace Retouch_Photo2
         SettingViewModel SettingViewModel => App.SettingViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
-        static bool _isLoaded;
-
         //@Converter
         private FrameworkElement IconConverter(ITool tool) => tool.Icon;
-
-
-        #region DependencyProperty
-
-
-        /// <summary> Gets or sets the canvas transition. </summary>
-        public float Transition
-        {
-            get { return (float)GetValue(TransitionProperty); }
-            set { SetValue(TransitionProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "DrawPage.Transition" /> dependency property. </summary>
-        public static readonly DependencyProperty TransitionProperty = DependencyProperty.Register(nameof(Transition), typeof(float), typeof(DrawPage), new PropertyMetadata(0.0f, (sender, e) =>
-        {
-            DrawPage con = (DrawPage)sender;
-
-            if (e.NewValue is float value)
-            {
-                con.ViewModel.CanvasTransformer.Transition(value);
-                con.ViewModel.Invalidate();//Invalidate
-            }
-        }));
-
-
-        /// <summary> Sets the page layout is full-screen. </summary>
-        public bool IsFullScreen
-        {
-            set
-            {
-                this.UnFullScreenButton.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
-                this.DrawLayout.IsFullScreen = value;
-
-                Vector2 offset = this.DrawLayout.FullScreenOffset;
-                if (value)
-                    this.ViewModel.CanvasTransformer.Position += offset;
-                else
-                    this.ViewModel.CanvasTransformer.Position -= offset;
-
-                this.ViewModel.CanvasTransformer.ReloadMatrix();
-            }
-        }
-
-
-        #endregion
-
+                
         //@Construct
         public DrawPage()
         {
             this.InitializeComponent();
+            this.ConstructTransition();
+            this.ConstructToolAndMenu();
+
+            this.Loaded += (s, e) => this._lockLoaded();
 
             //ViewModel
             this.ConstructViewModel();
             this.ConstructKeyboardViewModel();
 
-            //Layers
-            this.LayersControl.WidthButton.Tapped += (s, e) => this.DrawLayout.PadChangeLayersWidth();
-           
 
-            #region Navigated & More
-
-
-            //Binding own DependencyProperty to the Storyboard
-            Storyboard.SetTarget(this.TransitionKeyFrames, this);
-            this.TransitionKeyFrames.Completed += (s, e) => this.NavigatedToComplete();
+            //ImageRes
+            this.DrawLayout.RightAddButton.Tapped += (s, e) =>
+            {
+                e.Handled = true;
+                this.Frame.Navigate(typeof(ImageResPage), ImageResPageMode.AddImageLayer);//Navigate   
+            };
+            Retouch_Photo2.Tools.Pages.ImagePage.Select += () => this.Frame.Navigate(typeof(ImageResPage), ImageResPageMode.ImageToolSelect);//Navigate   
+            Retouch_Photo2.Tools.Pages.ImagePage.Replace += () => this.Frame.Navigate(typeof(ImageResPage), ImageResPageMode.ImageToolReplace);//Navigate   
+            Retouch_Photo2.Tools.Pages.BrushPage.Image += () => this.Frame.Navigate(typeof(ImageResPage), ImageResPageMode.BrushToolImage);//Navigate   
 
             //MoreButton
-            MoreTransformButton.Flyout = this.MoreTransformFlyout;
-            MoreCreateButton.Flyout = this.MoreCreateFlyout;
-
-            this.Loaded += (s, e) =>
-            {
-                if (DrawPage._isLoaded == false)
-                {
-                    DrawPage._isLoaded = true;
-                    this.NavigatedTo();
-                }
-            };
+            Retouch_Photo2.Tools.Elements.MoreTransformButton.Flyout = this.MoreTransformFlyout;
+            Retouch_Photo2.Tools.Elements.MoreCreateButton.Flyout = this.MoreCreateFlyout;
 
 
-            #endregion
+            #region ExpandAppbar
 
 
-            //Document
             this.DocumentButton.Tapped += async (s, e) =>
             {
                 await this.Save();
-                await this.NavigatedFrom();
+                await Task.Delay(400);
+                this.Frame.GoBack();
             };
 
-            //Button
-            this.UnFullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = !this.KeyboardViewModel.IsFullScreen;
-            this.FullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = !this.KeyboardViewModel.IsFullScreen;
+
+            this.ConstructExportDialog();
+            this.ExportButton.Tapped += (s, e) => this.ExportDialog.Show();
+
             //this.UndoButton.Tapped += (s, e) => { };
             //this.RedoButton.Tapped += (s, e) => { };
-
+            
             this.ConstructSetupDialog();
             this.SetupButton.Tapped += (s, e) => this.SetupDialog.Show();
 
@@ -142,30 +87,8 @@ namespace Retouch_Photo2
             };
 
 
-            #region Tool & Menu
-
-
-            //Tool
-            foreach (ITool tool in this.TipViewModel.Tools)
-            {
-                this.ConstructTool(tool);
-            }
-            this.TooLeft.Add(this.MoreToolButton);
-            this.ToolFirst();
-
-
-            //MoreButton
-            MoreTransformButton.Flyout = this.MoreTransformFlyout;
-            MoreCreateButton.Flyout = this.MoreCreateFlyout;
-
-
-            //Menu
-            foreach (IMenu menu in this.TipViewModel.Menus)
-            {
-                this.ConstructMenu(menu);
-            }
-            this.OverlayCanvas.Tapped += (s, e) => this.MenusHideAndCrop(isCrop: false);
-            this.OverlayCanvas.SizeChanged += (s, e) => this.MenusHideAndCrop(isCrop: true);
+            this.UnFullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = !this.KeyboardViewModel.IsFullScreen;
+            this.FullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = !this.KeyboardViewModel.IsFullScreen;
 
 
             #endregion
@@ -179,14 +102,14 @@ namespace Retouch_Photo2
             ElementTheme theme = this.SettingViewModel.ElementTheme;
             this.ThemeControl.Theme = theme;
 
-            //Layout
+            //SettingViewModel
             this.DrawLayout.VisualStateDeviceType = this.SettingViewModel.LayoutDeviceType;
             this.DrawLayout.VisualStatePhoneMaxWidth = this.SettingViewModel.LayoutPhoneMaxWidth;
             this.DrawLayout.VisualStatePadMaxWidth = this.SettingViewModel.LayoutPadMaxWidth;
 
-            if (DrawPage._isLoaded)
+            if (e.Parameter is TransitionData data)
             {
-                this.NavigatedTo();
+                this._lockOnNavigatedTo(data);
             }
         }
         //The current page no longer becomes an active page

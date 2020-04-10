@@ -99,9 +99,8 @@ namespace Retouch_Photo2
                  /*
                 new LayerMenu(),
                 new CharacterMenu(),
-                                */
+                 */
 
-                new DebugMenu(),
                 new SelectionMenu(),
                 new OperateMenu(),
                 new AdjustmentMenu(),

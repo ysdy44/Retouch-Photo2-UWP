@@ -25,6 +25,9 @@ namespace Retouch_Photo2.Elements
 
         /// <summary> The source bitmap. </summary>
         public CanvasBitmap Source;
+        /// <summary> The image file path. </summary>
+        public string ImageFilePath;
+
         /// <summary> Gets or sets <see cref="StorageFile.Name"/>. </summary>
         public string Name;
         /// <summary> Gets or sets <see cref="StorageFile.FileType"/>. </summary>

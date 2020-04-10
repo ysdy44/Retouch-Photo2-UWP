@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Graphics.Imaging;
-using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -56,23 +55,24 @@ namespace Retouch_Photo2
         //Head & Select
         private void ConstructSelectHead()
         {
-            //Head
-            this.MainLayout.RefreshButton.Tapped += async (s, e) => await this.RefreshWrapGrid();
-            this.MainLayout.SettingButton.Tapped += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
-
-            //Select
-            this.MainLayout.SelectCheckBox.Unchecked += (s, e) => this.RefreshPhotosSelectMode(SelectMode.None);
+            this.MainLayout.SelectCheckBox.Unchecked += (s, e) => this.SelectAllProjectViewItems(SelectMode.None);
             this.MainLayout.SelectCheckBox.Checked += (s, e) =>
             {
-                this.RefreshPhotosSelectMode(SelectMode.UnSelected);
+                this.SelectAllProjectViewItems(SelectMode.UnSelected);
 
                 this.RefreshSelectCount();
             };
-            this.MainLayout.SelectAllButton.Tapped += (s, e) =>
+
+            //Head
+            this.RefreshButton.Tapped += async (s, e) => await this.LoadAllProjectViewItems();
+            this.SettingButton.Tapped += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
+
+            //Select
+            this.SelectAllButton.Tapped += (s, e) =>
             {
                 bool isAnyUnSelected = this.ProjectViewItems.Any(p => p.SelectMode == SelectMode.UnSelected);
                 SelectMode mode = isAnyUnSelected ? SelectMode.Selected : SelectMode.UnSelected;
-                this.RefreshPhotosSelectMode(mode);
+                this.SelectAllProjectViewItems(mode);
 
                 this.RefreshSelectCount();
             };
@@ -98,7 +98,11 @@ namespace Retouch_Photo2
         }
         private void HideAddDialog()
         {
-            this.MainLayout.MainPageState = MainPageState.Main;
+            if (this.ProjectViewItems.Count == 0)
+                this.MainLayout.MainPageState = MainPageState.Initial;
+            else
+                this.MainLayout.MainPageState = MainPageState.Main;
+
             this.AddDialog.Hide();
         }
 

@@ -22,24 +22,20 @@ namespace Retouch_Photo2.Elements.MainPages
     public sealed partial class MainLayout : UserControl
     {
 
-        //@Content
-        /// <summary> RefreshButton. </summary>
-        public Button RefreshButton => this._RefreshButton;
-        /// <summary> SettingButton. </summary>
-        public Button SettingButton => this._SettingButton;
-        
-        /// <summary> SelectCheckBox. </summary>
-        public CheckBox SelectCheckBox => this._SelectCheckBox;
-        /// <summary> Select's Text. </summary>
-        public string SelectText { set => this.SelectCountRun.Text = value; }
-        /// <summary> SelectAllButton. </summary>
-        public Button SelectAllButton => this._SelectAllButton;
-        
+        //@Content     
         /// <summary> InitialBorder's Child. </summary>
         public UIElement InitialChild { get => this.InitialBorder.Child; set => this.InitialBorder.Child = value; }
         /// <summary> GridView's ItemsSource. </summary>
         public object ItemsSource { get => this.GridView.ItemsSource; set => this.GridView.ItemsSource = value; }
 
+        /// <summary> HeadBorder's Child. </summary>
+        public UIElement HeadChild { get => this.HeadBorder.Child; set => this.HeadBorder.Child = value; }
+        /// <summary> SelectBorder's Child. </summary>
+        public UIElement SelectChild { get => this.SelectBorder.Child; set => this.SelectBorder.Child = value; }
+
+        /// <summary> SelectCheckBox. </summary>
+        public CheckBox SelectCheckBox => this._SelectCheckBox;
+        
         /// <summary> MainBorder's Child. </summary>
         public UIElement MainChild { get => this.MainBorder.Child; set => this.MainBorder.Child = value; }
         /// <summary> PicturesBorder's Child. </summary>

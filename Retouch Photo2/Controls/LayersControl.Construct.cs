@@ -1,10 +1,4 @@
-﻿using FanKit.Transformers;
-using Retouch_Photo2.Elements;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.Layers.Models;
-using System.Numerics;
-using System.Threading.Tasks;
-using Windows.Storage.Pickers;
+﻿using Retouch_Photo2.Layers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -116,42 +110,6 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();//Invalidate
             }
 
-        }
-
-
-        private async Task AddImage(PickerLocationId location)
-        {
-            //ImageRe
-            ImageRe imageRe = await FileUtil.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, location);
-            if (imageRe == null) return;
-
-            //Images
-            ImageRe.DuplicateChecking(imageRe);
-            ImageStr imageStr = imageRe.ToImageStr();
-
-            //Transformer
-            Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
-
-            //Layer
-            ImageLayer imageLayer = new ImageLayer
-            {
-                SelectMode = SelectMode.Selected,
-                TransformManager = new TransformManager(transformerSource),
-                StyleManager = new Brushs.StyleManager(transformerSource, transformerSource, imageStr),
-            };
-
-            //Selection
-            this.SelectionViewModel.SetValue((layer) =>
-            {
-                layer.SelectMode = SelectMode.UnSelected;
-            });
-
-            //Mezzanine
-            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(imageLayer);
-            this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
-
-            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
-            this.ViewModel.Invalidate();//Invalidate
         }
 
     }

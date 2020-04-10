@@ -24,11 +24,6 @@
             </ColorAnimation>
         </Storyboard>
 
-        <!--Flyout-->
-        <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <ListView x:Name="ListView" SelectionMode="None" IsItemClickEnabled="True"/>
-        </Flyout>
-
     </Page.Resources>
 
 
@@ -72,11 +67,6 @@
             </Button>
 
             <ContentControl Width="4"/>
-
-            <!--Stack-->
-            <Button x:Name="StackButton" Style="{StaticResource AppCircleButtonStyle}">
-                <FontIcon Glyph="&#xE14C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-            </Button>
 
             <ContentControl Width="4"/>
 

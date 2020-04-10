@@ -9,7 +9,6 @@
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     
     xmlns:elements="using:Retouch_Photo2.Elements"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     d:DesignHeight="800"
     d:DesignWidth="800"
     mc:Ignorable="d"
@@ -28,7 +27,10 @@
                 <!--Initial-->
                 <VisualState x:Name="Initial">
                     <VisualState.Setters>
-
+                        
+                        <!--Select-->
+                        <Setter Target = "_SelectCheckBox.Content" Value="Initial"/>
+                        
                         <!--Body-->
                         <Setter Target = "InitialBorder.Visibility" Value="Visible"/>
                         <Setter Target = "ScrollViewer.Visibility" Value="Collapsed"/>
@@ -43,6 +45,9 @@
                 <VisualState x:Name="Main">
                     <VisualState.Setters>
 
+                        <!--Select-->
+                        <Setter Target = "_SelectCheckBox.Content" Value="Main"/>
+
                         <!--Foot-->
                         <Setter Target = "MainBorder.Visibility" Value="Visible"/>
 
@@ -52,6 +57,9 @@
                 <!--Dialog-->
                 <VisualState x:Name="Dialog">
                     <VisualState.Setters>
+
+                        <!--Select-->
+                        <Setter Target = "_SelectCheckBox.Content" Value="Dialog"/>
 
                         <!--Head-->
                         <Setter Target = "HeadBorder.Visibility" Value="Collapsed"/>
@@ -66,6 +74,9 @@
                 <VisualState x:Name="Pictures">
                     <VisualState.Setters>
 
+                        <!--Select-->
+                        <Setter Target = "_SelectCheckBox.Content" Value="Pictures"/>
+
                         <!--Foot-->
                         <Setter Target = "PicturesBorder.Visibility" Value="Visible"/>
 
@@ -75,6 +86,11 @@
                 <!--Rename-->
                 <VisualState x:Name="Rename">
                     <VisualState.Setters>
+
+                        <!--Select-->
+                        <Setter Target = "_SelectCheckBox.IsChecked" Value="{x:Null}"/>
+                        <Setter Target = "_SelectCheckBox.IsThreeState" Value="True"/>
+                        <Setter Target = "_SelectCheckBox.Content" Value="Rename"/>
 
                         <!--Head-->
                         <Setter Target = "HeadBorder.Visibility" Value="Collapsed"/>
@@ -91,8 +107,8 @@
 
                         <!--Select-->
                         <Setter Target = "_SelectCheckBox.IsChecked" Value="true"/>
-                        <Setter Target = "SelectGrid.Visibility" Value="Visible"/>
-                        <Setter Target = "SelectCountRun.Text" Value=""/>
+                        <Setter Target = "SelectBorder.Visibility" Value="Visible"/>
+                        <Setter Target = "_SelectCheckBox.Content" Value="Save"/>
 
                         <!--Foot-->
                         <Setter Target = "SaveBorder.Visibility" Value="Visible"/>
@@ -106,8 +122,8 @@
 
                         <!--Select-->
                         <Setter Target = "_SelectCheckBox.IsChecked" Value="true"/>
-                        <Setter Target = "SelectGrid.Visibility" Value="Visible"/>
-                        <Setter Target = "SelectCountRun.Text" Value=""/>
+                        <Setter Target = "SelectBorder.Visibility" Value="Visible"/>
+                        <Setter Target = "_SelectCheckBox.Content" Value="Share"/>
 
                         <!--Foot-->
                         <Setter Target = "ShareBorder.Visibility" Value="Visible"/>
@@ -121,8 +137,8 @@
 
                         <!--Select-->
                         <Setter Target = "_SelectCheckBox.IsChecked" Value="true"/>
-                        <Setter Target = "SelectGrid.Visibility" Value="Visible"/>
-                        <Setter Target = "SelectCountRun.Text" Value=""/>
+                        <Setter Target = "SelectBorder.Visibility" Value="Visible"/>
+                        <Setter Target = "_SelectCheckBox.Content" Value="Delete"/>
 
                         <!--Foot-->
                         <Setter Target = "DeleteBorder.Visibility" Value="Visible"/>
@@ -136,21 +152,11 @@
 
                         <!--Select-->
                         <Setter Target = "_SelectCheckBox.IsChecked" Value="true"/>
-                        <Setter Target = "SelectGrid.Visibility" Value="Visible"/>
-                        <Setter Target = "SelectCountRun.Text" Value=""/>
+                        <Setter Target = "SelectBorder.Visibility" Value="Visible"/>
+                        <Setter Target = "_SelectCheckBox.Content" Value="Duplicate"/>
 
                         <!--Foot-->
                         <Setter Target = "DuplicateBorder.Visibility" Value="Visible"/>
-
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Move-->
-                <VisualState x:Name="Move">
-                    <VisualState.Setters>
-
-                        <!--Select-->
-                        <Setter Target = "SelectGrid.Visibility" Value="Visible"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -168,76 +174,20 @@
         <!--Developer-->
         <developerTools:AlignmentGrid Grid.RowSpan="3" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="Gray"/>
 
-
-        <!--Head-->
-        <Grid x:Name="HeadBorder" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" MinWidth="50" MaxWidth="80"/>
-                <ColumnDefinition Width="6*"/>
-                <ColumnDefinition Width="1*" MinWidth="50" MaxWidth="80"/>
-            </Grid.ColumnDefinitions>
-
-            <Button x:Name="_RefreshButton" Grid.Column="0" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
-                <Button.Transitions>
-                    <TransitionCollection>
-                        <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
-                    </TransitionCollection>
-                </Button.Transitions>
-                <FontIcon FontSize="20" Glyph="&#xE117;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
-            </Button>
-
-            <TextBlock Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
-                <TextBlock.Transitions>
-                    <TransitionCollection>
-                        <EntranceThemeTransition FromHorizontalOffset="50" FromVerticalOffset="0"/>
-                    </TransitionCollection>
-                </TextBlock.Transitions>
-                        Retouh Photo2
-            </TextBlock>
-
-            <Button x:Name="_SettingButton" Grid.Column="2" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
-                <Button.Transitions>
-                    <TransitionCollection>
-                        <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
-                    </TransitionCollection>
-                </Button.Transitions>
-                <FontIcon FontSize="22" Glyph="&#xE115;" FontFamily="Segoe UI Symbol" />
-            </Button>
-
-        </Grid>
-
-        <Grid x:Name="SelectGrid" Visibility="Collapsed" HorizontalAlignment="Stretch" Background="{ThemeResource AppBorderBrush}">
-
-            <!--Visibility:Show-->
-            <animations:Implicit.ShowAnimations>
-                <animations:TranslationAnimation Duration="0:0:0.4" From="0,-50,0" To="0,0,0"/>
-            </animations:Implicit.ShowAnimations>
-
-            <!--Visibility:Hide-->
-            <animations:Implicit.HideAnimations>
-                <animations:TranslationAnimation Duration="0:0:0.4" From="0,0,0" To="0,-50,0"/>
-            </animations:Implicit.HideAnimations>
-
-            <CheckBox x:Name="_SelectCheckBox" Margin="12, 0" IsHitTestVisible="False" HorizontalAlignment="Left">
-                <TextBlock>                        
-                    Click to select items:                         
-                    <Run x:Name="SelectCountRun">0</Run>
-                </TextBlock>
-            </CheckBox>
-
-            <Button x:Name="_SelectAllButton" Padding="8,0" HorizontalAlignment="Right" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
-                Select All
-            </Button>
-            
-        </Grid>
-
-
+        
         <!--Body-->
         <Border x:Name="InitialBorder" Grid.Row="1" Grid.RowSpan="2" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
         </Border>
 
-        <ScrollViewer x:Name="ScrollViewer" Grid.Row="1" Grid.RowSpan="2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer x:Name="ScrollViewer" Grid.Row="0" Grid.RowSpan="3" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <GridView x:Name="GridView" ReorderMode="Disabled" SelectionMode="None">
+
+                <GridView.Header>
+                    <Border Height="50">
+                        <CheckBox x:Name="_SelectCheckBox" HorizontalAlignment="Center" />
+                    </Border>
+                </GridView.Header>
+                
                 <GridView.ItemContainerTransitions>
                     <TransitionCollection>
                         <AddDeleteThemeTransition />
@@ -246,11 +196,12 @@
                         <EntranceThemeTransition IsStaggeringEnabled="False" />
                     </TransitionCollection>
                 </GridView.ItemContainerTransitions>
+                
             </GridView>
         </ScrollViewer>
 
 
-        <!--Foot-->
+        <!--Foot-->        
         <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Row="2"
                                    ShadowOpacity="0.9"
                                    ShadowColor="{ThemeResource AppStrokeColor}"
@@ -280,7 +231,28 @@
             </elements:RadiusAnimaPanel.CenterContent>
 
         </elements:RadiusAnimaPanel>
-        
+
+
+        <!--Head-->
+        <Border x:Name="HeadBorder" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
+        </Border>
+
+        <Border x:Name="SelectBorder" Visibility="Collapsed" HorizontalAlignment="Stretch" Background="{ThemeResource AppBorderBrush}">
+
+            <!--Visibility:Show-->
+            <animations:Implicit.ShowAnimations>
+                <animations:TranslationAnimation Duration="0:0:0.4" From="0,-50,0" To="0,0,0"/>
+            </animations:Implicit.ShowAnimations>
+
+            <!--Visibility:Hide-->
+            <animations:Implicit.HideAnimations>
+                <animations:TranslationAnimation Duration="0:0:0.4" From="0,0,0" To="0,-50,0"/>
+            </animations:Implicit.HideAnimations>
+
+            
+        </Border>
+
+
     </Grid>
 
 </UserControl>

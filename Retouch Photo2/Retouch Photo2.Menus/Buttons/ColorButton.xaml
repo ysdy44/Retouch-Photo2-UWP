@@ -11,7 +11,7 @@
     >
 
     <ToolTipService.ToolTip>
-        <ToolTip Content="Color" Placement="Bottom" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
+        <ToolTip Content="Color" VerticalOffset="40" Placement="Bottom" IsOpen="{x:Bind TipViewModel.IsOpen,Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
     </ToolTipService.ToolTip>
 
 

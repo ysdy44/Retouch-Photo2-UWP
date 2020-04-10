@@ -30,8 +30,6 @@ namespace Retouch_Photo2.Controls
         //@Content
         /// <summary> IndicatorBorder. </summary>
         public Border IndicatorBorder => this._IndicatorBorder;
-        /// <summary> WidthButton. </summary>
-        public Control WidthButton => this._WidthButton;
 
 
         //LayerCollection
@@ -50,32 +48,6 @@ namespace Retouch_Photo2.Controls
             this.ItemsControl.ItemsSource = this.ViewModel.Layers.RootControls;
 
 
-            #region Add
-
-
-            this.HeightSlider.ValueChanged += (s, e) =>
-            {
-                if (e.NewValue == e.OldValue) return;
-                int controlHeight = (int)e.NewValue;
-                this.ViewModel.Layers.SetControlHeight(controlHeight);
-            };
-
-            this.PhotoButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.PicturesLibrary);
-            this.DestopButton.Tapped += async (s, e) => await this.AddImage(PickerLocationId.Desktop);
-
-            this.LayoutButton.Tapped += (s, e) =>
-            {
-                this.Flyout.Hide();
-                this.ShowLayerMenu();
-            };
-
-
-            #endregion
-
-
-            #region This
-
-
             this.Tapped += (s, e) =>
             {
                 foreach (ILayer child in this.ViewModel.Layers.RootLayers)
@@ -87,16 +59,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();
             };
             this.RightTapped += (s, e) => this.ShowLayerMenu();
-            this.Holding += (s, e) => this.ShowLayerMenu();
-            this.AddButton.Tapped += (s, e) =>
-            {
-                this.Flyout.ShowAt(this.AddButton);
-                e.Handled = true;
-            };
-
-
-            #endregion
-            
+            this.Holding += (s, e) => this.ShowLayerMenu();            
         }
 
         private void ShowLayerMenu()

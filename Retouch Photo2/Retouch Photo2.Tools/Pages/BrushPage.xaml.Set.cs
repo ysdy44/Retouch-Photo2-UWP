@@ -75,50 +75,6 @@ namespace Retouch_Photo2.Tools.Pages
             this.ViewModel.Invalidate();//Invalidate
         }
 
-        private async Task SetImage()
-        {
-            Transformer transformer = this.SelectionViewModel.Transformer;
-
-            //imageRe
-            ImageRe imageRe = await FileUtil.CreateFromLocationIdAsync(this.ViewModel.CanvasDevice, PickerLocationId.PicturesLibrary);
-            if (imageRe == null) return;
-
-            //Images
-            ImageRe.DuplicateChecking(imageRe);
-
-            //Transformer
-            Transformer transformerSource = new Transformer(imageRe.Width, imageRe.Height, Vector2.Zero);
-
-            //Selection
-            this.SelectionViewModel.SetValue((layer) =>
-            {
-                switch (this.SelectionViewModel.FillOrStroke)
-                {
-                    case FillOrStroke.Fill:
-                        layer.StyleManager.FillBrush.ImageSource = transformerSource;
-                        layer.StyleManager.FillBrush.ImageDestination = transformer;
-                        layer.StyleManager.FillBrush.ImageStr = imageRe.ToImageStr();
-                        //Selection
-                        this.SelectionViewModel.StyleManager.FillBrush.ImageSource = transformerSource;
-                        this.SelectionViewModel.StyleManager.FillBrush.ImageDestination = transformer;
-                        this.SelectionViewModel.StyleManager.FillBrush.ImageStr = imageRe.ToImageStr();
-                        break;
-                    case FillOrStroke.Stroke:
-                        layer.StyleManager.StrokeBrush.ImageSource = transformerSource;
-                        layer.StyleManager.StrokeBrush.ImageDestination = transformer;
-                        layer.StyleManager.StrokeBrush.ImageStr = imageRe.ToImageStr();
-                        //Selection
-                        this.SelectionViewModel.StyleManager.StrokeBrush.ImageSource = transformerSource;
-                        this.SelectionViewModel.StyleManager.StrokeBrush.ImageDestination = transformer;
-                        this.SelectionViewModel.StyleManager.StrokeBrush.ImageStr = imageRe.ToImageStr();
-                        break;
-                }
-            });
-
-            this.SelectionViewModel.BrushImageDestination = transformer;//Selection
-            this.ViewModel.Invalidate();//Invalidate
-        }
-
 
         /// <summary>
         /// To a gradient brush.

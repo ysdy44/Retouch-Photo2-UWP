@@ -1,115 +1,120 @@
-﻿using Retouch_Photo2.ViewModels;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers;
+using Retouch_Photo2.Layers.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
+using System.IO.Compression;
+using System.Numerics;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
 
 namespace Retouch_Photo2
 {
     public static partial class FileUtil
     {
 
+        #region ZipFile: Extract & Create
+
+
         /// <summary>
-        /// Rename zip file and thumbnail.
+        ///  Extract zip file from local folder to temporary folder.
         /// </summary>
-        /// <param name="item"> The old item.</param>
-        /// <param name="newName"> The new name.</param>
-        /// <returns> (New name, New zip File name, New thumbnail name). </returns>
-        public static async Task RenameZipFileAndThumbnail(ProjectViewItem item, string newName)
+        /// <param name="zipFilePath"> The path of zip file. </param>
+        /// <returns> The extract project. </returns>
+        public static async Task ExtractZipFile(string zipFilePath)
         {
-            //Rename zip file.
-            StorageFile zipFile = await StorageFile.GetFileFromPathAsync(item.Photo2pkFilePath);
-            await zipFile.RenameAsync($"{newName}.photo2pk");
-
-            //Rename thumbnail image.
-            StorageFile thumbnail = await StorageFile.GetFileFromPathAsync(item.ThumbnailPath);
-            await thumbnail.RenameAsync($"{newName}.png");
-
-            item.Rename(newName, zipFile.Path, thumbnail.Path);
+            //Read the file stream
+            StorageFile file = await StorageFile.GetFileFromPathAsync(zipFilePath);
+            using (Stream stream = await file.OpenStreamForReadAsync())
+            {
+                //Unzip to temporary folder
+                ZipArchive archive = new ZipArchive(stream);
+                archive.ExtractToDirectory(ApplicationData.Current.TemporaryFolder.Path);
+            }
         }
 
         /// <summary>
-        /// Duplicate zip file and thumbnail.
+        /// Create a zip file from temporary folder to local folder.
         /// </summary>
-        /// <param name="oldName"> The old name.</param>
-        /// <param name="newName"> The new name.</param>
-        public static async Task<StorageFile> DuplicateZipFileAndThumbnail(string oldName, string newName)
+        /// <param name="name"> The zip file name. </param>
+        public static async Task CreateZipFile(string name)
         {
-            StorageFile zipFile = null;
-
+            //Delete if it exists in local folder.
             try
             {
-                //Duplicate zip file.
-                zipFile = await ApplicationData.Current.LocalFolder.GetFileAsync($"{oldName}.photo2pk");
-                await zipFile.CopyAsync(ApplicationData.Current.LocalFolder, $"{newName}.photo2pk", NameCollisionOption.ReplaceExisting);
+                StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync($"{name}.photo2pk");
+                if (file != null) await file.DeleteAsync();
             }
             catch (Exception) { }
 
-            try
-            {
-                //Duplicate thumbnail image.
-                StorageFile thumbnail = await ApplicationData.Current.LocalFolder.GetFileAsync($"{oldName}.png");
-                await thumbnail.CopyAsync(ApplicationData.Current.LocalFolder, $"{newName}.png", NameCollisionOption.ReplaceExisting);
-            }
-            catch (Exception) { }
-
-            return zipFile;
+            //Zip all file in temporary folder to local folder.
+            string path = $"{ApplicationData.Current.LocalFolder.Path}\\{name}.photo2pk";
+            ZipFile.CreateFromDirectory(ApplicationData.Current.TemporaryFolder.Path, path);
         }
 
-        /// <summary>
-        /// Delete zip file and thumbnail.
-        /// </summary>
-        /// <param name="name"> The name.</param>
-        public static async Task DeleteZipFileAndThumbnail(string name)
-        {
-            try
-            {
-                //Delete zip file.
-                StorageFile zipFile = await ApplicationData.Current.LocalFolder.GetFileAsync($"{name}.photo2pk");
-                if (zipFile != null) await zipFile.DeleteAsync();
-            }
-            catch (Exception) { }
 
-            try
-            {
-                //Delete thumbnail image.
-                StorageFile thumbnail = await ApplicationData.Current.LocalFolder.GetFileAsync($"{name}.png");
-                if (thumbnail != null) await thumbnail.DeleteAsync();
-            }
-            catch (Exception) { }
-        }
+        #endregion
 
 
         /// <summary>
-        /// Delete all files in temp folder.
+        /// The file picker is displayed so that the user can select a file.
+        /// Then copy to the temporary folder, and return the copy
         /// </summary>
-        public static async Task DeleteAllInTemporaryFolder()
+        /// <param name="location"> The destination LocationId. </param>
+        /// <returns> The product file. </returns>
+        public async static Task<StorageFile> PickAndCopySingleImageFileAsync(PickerLocationId location)
         {
-            IReadOnlyList<StorageFile> items = await ApplicationData.Current.TemporaryFolder.GetFilesAsync();
-            foreach (StorageFile item in items)
+            //Picker
+            FileOpenPicker openPicker = new FileOpenPicker
             {
-                await item.DeleteAsync();
-            }
+                ViewMode = PickerViewMode.Thumbnail,
+                SuggestedStartLocation = location,
+                FileTypeFilter =
+                {
+                    ".jpg",
+                    ".jpeg",
+                    ".png",
+                    ".bmp"
+                }
+            };
+
+            //File
+            StorageFile file = await openPicker.PickSingleFileAsync();
+            if (file == null) return null;
+
+            StorageFile copyFile = await file.CopyAsync(ApplicationData.Current.TemporaryFolder, file.Name,  NameCollisionOption.ReplaceExisting);
+            return copyFile;
         }
 
         /// <summary>
-        /// Find all zip file in local folder.
+        /// Create a ImageRe form a copy which in the temporary folder.
         /// </summary>
-        /// <returns> The all project file. </returns>
-        public static async Task<IEnumerable<StorageFile>> FIndFilesInLocalFolder()
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="copyFile"> The copy file. </param>
+        /// <returns> The product ImageRe. </returns>
+        public async static Task<ImageRe> CreateImageReFromCopyFileAsync(ICanvasResourceCreator resourceCreator, StorageFile copyFile)
         {
-            //get all file.
-            IReadOnlyList<StorageFile> files = await ApplicationData.Current.LocalFolder.GetFilesAsync();
+            //ImageRe
+            using (IRandomAccessStream stream = await copyFile.OpenReadAsync())
+            {
+                CanvasBitmap bitmap = await CanvasBitmap.LoadAsync(resourceCreator, stream);
 
-            //Sort by Time
-            IOrderedEnumerable<StorageFile> orderedFiles = files.OrderByDescending(file => file.DateCreated);
+                return new ImageRe
+                {
+                    Source = bitmap,
+                    ImageFilePath = copyFile.Path,
 
-            //Ordered
-            IEnumerable<StorageFile> orderedPhotos = from flie in orderedFiles where flie.FileType == ".photo2pk" select flie;
-            return orderedPhotos;
+                    Name = copyFile.DisplayName,
+                    FileType = copyFile.FileType,
+                    FolderRelativeId = copyFile.FolderRelativeId,
+                };
+            }
         }
 
-        
     }
 }

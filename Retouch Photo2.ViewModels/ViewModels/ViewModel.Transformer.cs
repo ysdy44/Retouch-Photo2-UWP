@@ -9,9 +9,7 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public partial class ViewModel
     {
-
-        /// <summary> Whether the page transitions when the page navigate. </summary>
-        public bool IsTransition { get; set; } = false;
+        
         /// <summary> Retouch_Photo2's the only <see cref = "FanKit.Transformers.CanvasTransformer" />. </summary>
         public CanvasTransformer CanvasTransformer { get; } = new CanvasTransformer();
 

@@ -118,6 +118,63 @@
                 </StackPanel>
             </elementMainPages:MainLayout.InitialChild>
 
+
+            <!--HeadChild-->
+            <elementMainPages:MainLayout.HeadChild>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" MinWidth="50" MaxWidth="80"/>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="1*" MinWidth="50" MaxWidth="80"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="RefreshButton" Grid.Column="0" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
+                        <Button.Transitions>
+                            <TransitionCollection>
+                                <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
+                            </TransitionCollection>
+                        </Button.Transitions>
+                        <FontIcon FontSize="20" Glyph="&#xE117;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                    </Button>
+
+                    <TextBlock Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
+                        <TextBlock.Transitions>
+                            <TransitionCollection>
+                                <EntranceThemeTransition FromHorizontalOffset="50" FromVerticalOffset="0"/>
+                            </TransitionCollection>
+                        </TextBlock.Transitions>
+                        Retouh Photo2
+                    </TextBlock>
+
+                    <Button x:Name="SettingButton" Grid.Column="2" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
+                        <Button.Transitions>
+                            <TransitionCollection>
+                                <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
+                            </TransitionCollection>
+                        </Button.Transitions>
+                        <FontIcon FontSize="22" Glyph="&#xE115;" FontFamily="Segoe UI Symbol" />
+                    </Button>
+
+                </Grid>
+            </elementMainPages:MainLayout.HeadChild>
+
+            <!--SelectChild-->
+            <elementMainPages:MainLayout.SelectChild>
+                <Grid x:Name="SelectGrid">
+
+                    <TextBlock Margin="12, 0" IsHitTestVisible="False" HorizontalAlignment="Left" VerticalAlignment="Center">                        
+                        Click to select items:                         
+                        <Run x:Name="SelectCountRun">0</Run>
+                    </TextBlock>
+
+                    <Button x:Name="SelectAllButton" Padding="8,0" HorizontalAlignment="Right" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
+                        Select All
+                    </Button>
+
+                </Grid>
+            </elementMainPages:MainLayout.SelectChild>
+            
+            
             <!--MainChild-->
             <elementMainPages:MainLayout.MainChild>
                 <StackPanel Orientation="Horizontal" Margin="8,0" HorizontalAlignment="Center">

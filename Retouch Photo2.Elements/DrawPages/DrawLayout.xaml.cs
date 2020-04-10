@@ -17,15 +17,22 @@ namespace Retouch_Photo2.Elements.DrawPages
         /// <summary> CenterBorder's Child. </summary>
         public UIElement CenterChild { get => this.CenterBorder.Child; set => this.CenterBorder.Child = value; }
 
-        /// <summary> RightBorder's Child. </summary>
-        public UIElement RightPane { get => this.RightBorder.Child; set => this.RightBorder.Child = value; }
+
+        /// <summary> RightCenterBorder's Child. </summary>
+        public UIElement RightCenterPanel { get => this.RightCenterBorder.Child; set => this.RightCenterBorder.Child = value; }
+        /// <summary> RightAddButton. </summary>   
+        public Button RightAddButton => this._RightAddButton;
         /// <summary> LeftBorder's Child. </summary>
-        public UIElementCollection LeftPaneChildren => this.LeftStackPanel.Children;
+        public UIElementCollection LeftPanelChildren => this.LeftStackPanel.Children;
+        /// <summary> LeftMoreStackPanel's Child. </summary>
+        public UIElementCollection LeftMorePanelChildren => this.LeftMoreStackPanel.Children;
+        
 
         /// <summary> IconLeftContentControl's Content. </summary>
         public object LeftIcon { get => this.IconLeftContentControl.Content; set => this.IconLeftContentControl.Content = value; }
         /// <summary> IconRightContentControl's Content. </summary>
         public object RightIcon { get => this.IconRightContentControl.Content; set => this.IconRightContentControl.Content = value; }
+
 
         /// <summary> TouchbarBorder's Child. </summary>
         public UIElement Touchbar { get => this.TouchbarBorder.Child; set => this.TouchbarBorder.Child = value; }
@@ -34,9 +41,9 @@ namespace Retouch_Photo2.Elements.DrawPages
 
 
         /// <summary> HeadLeftBorder's Child. </summary>
-        public UIElement HeadLeftPane { get => this.HeadLeftBorder.Child; set => this.HeadLeftBorder.Child = value; }
-        /// <summary> HeadRightStackPane's Children. </summary>
-        public UIElementCollection HeadRightChildren => this.HeadRightStackPane.Children;
+        public UIElement HeadLeftPanel { get => this.HeadLeftBorder.Child; set => this.HeadLeftBorder.Child = value; }
+        /// <summary> HeadRightStackPanel's Children. </summary>
+        public UIElementCollection HeadRightChildren => this.HeadRightStackPanel.Children;
         
 
         /// <summary> Sets the backgroud's Color. </summary>
@@ -58,6 +65,7 @@ namespace Retouch_Photo2.Elements.DrawPages
         /// <summary> Sets the page layout is full-screen. </summary>
         public bool IsFullScreen
         {
+            get => this._vsIsFullScreen;
             set
             {
                 this._vsIsFullScreen = value;
@@ -111,6 +119,18 @@ namespace Retouch_Photo2.Elements.DrawPages
             }
             return this.Normal;
         }
+        
+        private PhoneLayoutType PhoneType
+        {
+            set
+            {
+                this._vsPhoneType = value;
+                this.VisualState = this.VisualState;//State
+            }
+        }
+
+
+        private bool isPadLayersControlWidth;
 
 
         //@Construct
@@ -130,60 +150,41 @@ namespace Retouch_Photo2.Elements.DrawPages
                 this.VisualState = this.VisualState;//State
             };
 
-            //DismissOverlay
-            this.IconDismissOverlay.PointerPressed += (s, e) =>
+            this.WidthButton.Tapped += (s, e) =>
             {
-                this._vsPhoneType = PhoneLayoutType.Hided;
-                this.VisualState = this.VisualState;//State
+                if (this._vsActualWidthType == DeviceLayoutType.Pad)
+                {
+                    bool value = !this.isPadLayersControlWidth;
+                    this.isPadLayersControlWidth = value;
+
+                    double width = value ? 220 : 70;
+                    this.RightGridLenght.Width = new GridLength(width);
+                }
             };
 
+            //DismissOverlay
+            this.IconDismissOverlay.PointerPressed += (s, e) => this.PhoneType = PhoneLayoutType.Hided;
+
             //IconLeft
-            this.IconLeftGrid.Tapped += (s, e) =>
-            {
-                this._vsPhoneType = PhoneLayoutType.ShowLeft;
-                this.VisualState = this.VisualState;//State
-            };
+            this.IconLeftGrid.Tapped += (s, e) => this.PhoneType = PhoneLayoutType.ShowLeft;
             this.IconLeftGrid.PointerEntered += (s, e) =>
             {
                 if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
                 {
-                    this._vsPhoneType = PhoneLayoutType.ShowLeft;
-                    this.VisualState = this.VisualState;//State
+                    this.PhoneType = PhoneLayoutType.ShowLeft;
                 }
             };
             //IconRight
-            this.IconRightGrid.Tapped += (s, e) =>
-            {
-                this._vsPhoneType = PhoneLayoutType.ShowRight;
-                this.VisualState = this.VisualState;//State
-            };
+            this.IconRightGrid.Tapped += (s, e) => this.PhoneType = PhoneLayoutType.ShowRight;
             this.IconRightGrid.PointerEntered += (s, e) =>
             {
                 if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
                 {
-                    this._vsPhoneType = PhoneLayoutType.ShowRight;
-                    this.VisualState = this.VisualState;//State
+                    this.PhoneType = PhoneLayoutType.ShowRight;
                 }
             };
         }
-        
-               
-        private bool isPadLayersControlWidth;
-        /// <summary>
-        /// Chnage RightBorder width.
-        /// </summary>
-        public void PadChangeLayersWidth()
-        {
-            if (this._vsActualWidthType == DeviceLayoutType.Pad)
-            {
-                bool value = !this.isPadLayersControlWidth;
-                this.isPadLayersControlWidth = value;
-
-                double width = value ? 220 : 70;
-                this.RightGridLenght.Width = new GridLength(width);
-            }
-        }
-
+         
 
         /// <summary>
         /// Gets the offset of full-screen statue layout.

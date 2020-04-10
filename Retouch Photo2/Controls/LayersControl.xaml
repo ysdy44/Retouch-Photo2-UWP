@@ -4,89 +4,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignHeight="800"
     d:DesignWidth="200"
     >
     
-    <UserControl.Resources>
-        <!--Flyout-->
-        <Flyout x:Name="Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel Width="190">
-
-                <TextBlock Style="{StaticResource AppTextBlock}">
-                    Add Image
-                </TextBlock>
-
-                <elements:IconButton x:Name="PhotoButton">
-                    <elements:IconButton.Icon>
-                        <FontIcon Glyph="&#xEB9F;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
-                    </elements:IconButton.Icon>
-                    <elements:IconButton.Text>
-                        Pictures
-                    </elements:IconButton.Text>
-                </elements:IconButton>
-
-                <elements:IconButton x:Name="DestopButton">
-                    <elements:IconButton.Icon>
-                        <FontIcon Glyph="&#xEC4E;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
-                    </elements:IconButton.Icon>
-                    <elements:IconButton.Text>
-                        Destop
-                    </elements:IconButton.Text>
-                </elements:IconButton>
-
-                <elements:RectangleSeparator/>
-
-                <TextBlock Style="{StaticResource AppTextBlock}">
-                    Change Height
-                </TextBlock>
-
-                <Slider x:Name="HeightSlider" Margin="2" Minimum="40" Maximum="80" StepFrequency="10" Style="{StaticResource AppOpacitySliderStyle}"/>
-
-                <elements:IconButton x:Name="_WidthButton">
-                    <elements:IconButton.Icon>
-                        <FontIcon Glyph="&#xE746;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
-                    </elements:IconButton.Icon>
-                    <elements:IconButton.Text>
-                        Change Width
-                    </elements:IconButton.Text>
-                </elements:IconButton>
-
-                <elements:RectangleSeparator/>
-
-                <elements:IconButton x:Name="LayoutButton">
-                    <elements:IconButton.Icon>
-                        <FontIcon  Glyph="&#xE81E;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
-                    </elements:IconButton.Icon>
-                    <elements:IconButton.Text>
-                        Show Menu
-                    </elements:IconButton.Text>
-                </elements:IconButton>
-
-            </StackPanel>
-
-
-        </Flyout>
-    </UserControl.Resources>
-
     
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
 
-        <Button x:Name="AddButton" Height="42" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-            <FontIcon Glyph="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-        </Button>
-
-        <Canvas Grid.Row="1">
+        <Canvas>
             <Border x:Name="_IndicatorBorder" MinWidth="50" Height="40"/>
         </Canvas>
 
-        <ScrollViewer Grid.Row="1"
+        <ScrollViewer
                       HorizontalScrollBarVisibility="Disabled"
                       VerticalScrollBarVisibility="Hidden"
                       >

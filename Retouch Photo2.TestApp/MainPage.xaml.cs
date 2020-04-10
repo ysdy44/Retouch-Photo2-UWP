@@ -35,11 +35,7 @@ namespace Retouch_Photo2.TestApp.Pages
 
         private void Button_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            if (aaaaaa.Parent is ContentControl contentControl)
-            {
-                contentControl.Content = null;
-            }
-                this.Button01.Content = aaaaaa;
+            this.Frame.Navigate(typeof(ImagesPage));
         }
 
         private void Button02_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)

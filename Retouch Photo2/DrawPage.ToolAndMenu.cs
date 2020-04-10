@@ -3,7 +3,6 @@ using Retouch_Photo2.Menus;
 using Retouch_Photo2.Tools;
 using System.Linq;
 using Windows.Foundation;
-using Windows.Graphics.Imaging;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -11,75 +10,53 @@ using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2
 {
+    /// <summary> 
+    /// Retouch_Photo2's the only <see cref = "DrawPage" />. 
+    /// </summary>
     public sealed partial class DrawPage : Page
     {
 
-        //ViewModel
-        private void ConstructViewModel()
+        //Tool & Menu
+        private void ConstructToolAndMenu()
         {
-            this.MainCanvasControl.ConstructViewModel();
-        }
-        //KeyboardViewModel
-        private void ConstructKeyboardViewModel()
-        {
-            //Move
-            if (this.KeyboardViewModel.Move == null)
+            //Tool
+            foreach (ITool tool in this.TipViewModel.Tools)
             {
-                this.KeyboardViewModel.Move += (value) =>
-                {
-                    this.ViewModel.CanvasTransformer.Position += value;
-                    this.ViewModel.CanvasTransformer.ReloadMatrix();
-                    this.ViewModel.Invalidate();//Invalidate
-                };
+                this.ConstructTool(tool);
             }
+            UIElement moreButton = this.ToolLeft.First();
+            this.ToolLeft.Remove(moreButton);
+            this.ToolLeft.Add(moreButton);
+            this.ToolFirst();
+            
 
-            //FullScreen
-            if (this.KeyboardViewModel.FullScreenChanged == null)
+            //Menu
+            foreach (IMenu menu in this.TipViewModel.Menus)
             {
-                this.KeyboardViewModel.FullScreenChanged += (isFullScreen) =>
-                {
-                    this.IsFullScreen = isFullScreen;
-                    this.ViewModel.Invalidate();//Invalidate
-                };
+                this.ConstructMenu(menu);
             }
+            this.OverlayCanvas.Tapped += (s, e) => this.MenusHide();
+            this.OverlayCanvas.SizeChanged += (s, e) => this.MenusHideAndCrop();
         }
 
 
-        //Setup
-        private void ConstructSetupDialog()
-        {
-            this.SetupDialog.CloseButton.Click += (sender, args) => this.SetupDialog.Hide();
+        /// <summary> what is last? </summary>
+        ToolButtonType _lockToolButtonType;
+        
+        /// <summary> Left panel of Tool. </summary>
+        UIElementCollection ToolLeft => this.DrawLayout.LeftPanelChildren;
+        /// <summary> Left more panel of Tool. </summary>
+        UIElementCollection ToolLeftMore => this.DrawLayout.LeftMorePanelChildren;
 
-            this.SetupDialog.PrimaryButton.Click += (_, __) =>
-            {
-                this.SetupDialog.Hide();
-
-                BitmapSize size = this.SetupSizePicker.Size;
-
-                this.ViewModel.CanvasTransformer.Width = (int)size.Width;
-                this.ViewModel.CanvasTransformer.Height = (int)size.Height;
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-        }
-
-
-        #region Tool
-
-
-        MoreToolButton MoreToolButton = new MoreToolButton();
-        UIElementCollection TooLeft => this.DrawLayout.LeftPaneChildren;
-
-        ToolButtonType _tempToolButtonType;
-
+        //Tool
         private void ConstructTool(ITool tool)
         {
             ToolButtonType type;
             UIElement button = null;
-            
+
             if (tool == null)
             {
-                type = this._tempToolButtonType;
+                type = this._lockToolButtonType;
                 button = new RectangleSeparator();
             }
             else
@@ -87,7 +64,7 @@ namespace Retouch_Photo2
                 type = tool.Button.Type;
                 button = tool.Button.Self;
 
-                this._tempToolButtonType = tool.Button.Type;
+                this._lockToolButtonType = tool.Button.Type;
                 tool.Button.Self.Tapped += (s, e) =>
                 {
                     this.TipViewModel.ToolGroupType(tool.Type);
@@ -101,15 +78,20 @@ namespace Retouch_Photo2
             switch (type)
             {
                 case ToolButtonType.None:
-                    this.TooLeft.Add(button);
+                    this.ToolLeft.Add(button);
                     break;
                 case ToolButtonType.Second:
-                    this.MoreToolButton.Add(button);
+                    this.ToolLeftMore.Add(button);
                     break;
             }
         }
 
+        #region Tool
 
+
+        /// <summary>
+        /// Select the first Tool by default. 
+        /// </summary>
         private void ToolFirst()
         {
             ITool tool = this.TipViewModel.Tools.FirstOrDefault();
@@ -130,11 +112,11 @@ namespace Retouch_Photo2
 
         #endregion
 
-
-        #region Menu
-
-        UIElementCollection MennuHead => this.DrawLayout.HeadRightChildren;
-
+        
+        /// <summary> Head panel of Menu. </summary>
+        UIElementCollection MenuHead => this.DrawLayout.HeadRightChildren;
+        
+        //Menu
         public void ConstructMenu(IMenu menu)
         {
             if (menu == null) return;
@@ -155,15 +137,28 @@ namespace Retouch_Photo2
             switch (menu.Button.Type)
             {
                 case MenuButtonType.None:
-                    this.MennuHead.Add(menu.Button.Self);
+                    this.MenuHead.Add(menu.Button.Self);
                     break;
                 case MenuButtonType.LayersControlIndicator:
                     this.LayersControl.IndicatorBorder.Child = menu.Button.Self;
                     break;
             }
         }
+        
+        #region Menu
 
-        private void MenusHideAndCrop(bool isCrop)
+
+        /// <summary>
+        /// Hide all Menus.
+        /// </summary>
+        private void MenusHide() => this._menusHideAndCrop(false);
+
+        /// <summary>
+        /// Hide all Menus, and crop the limiting bound.
+        /// </summary>
+        private void MenusHideAndCrop() => this._menusHideAndCrop(true);
+
+        private void _menusHideAndCrop(bool isCrop)
         {
             foreach (IMenu menu in this.TipViewModel.Menus)
             {
@@ -186,6 +181,11 @@ namespace Retouch_Photo2
             this.OverlayCanvas.Background = null;
         }
 
+
+        /// <summary>
+        /// Disable all menus, except the current menu.
+        /// </summary>
+        /// <param name="currentMenu"> The current menu. </param>
         private void MenusDisable(IMenu currentMenu)
         {
             foreach (IMenu menu in this.TipViewModel.Menus)
@@ -197,6 +197,9 @@ namespace Retouch_Photo2
             }
             this.OverlayCanvas.Background = new SolidColorBrush(Colors.Transparent);
         }
+        /// <summary>
+        /// Enable all menus.
+        /// </summary>
         private void MenusEnable()
         {
             foreach (IMenu menu in this.TipViewModel.Menus)

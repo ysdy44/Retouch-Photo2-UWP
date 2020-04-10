@@ -260,7 +260,7 @@
                 <ColumnDefinition Width="1*" MinWidth="50" MaxWidth="80"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="BackButton" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+            <Button x:Name="BackButton" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
                 <Button.Transitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>

@@ -15,9 +15,6 @@ namespace Retouch_Photo2
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        //@Static
-        static bool _isLoaded;
-
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
@@ -33,20 +30,16 @@ namespace Retouch_Photo2
             this.InitializeComponent();
             this.ConstructInitialControl();
             this.ConstructSelectHead();
+
+            this.MainLayout.ItemsSource = this.ProjectViewItems;
+
             this.Loaded += async (s, e) =>
             {
                 await this.ConstructSettingViewModel();
-
-                if (MainPage._isLoaded == false)
-                {
-                    MainPage._isLoaded = true;
-                    await this.RefreshWrapGrid();
-                }
-
-                this.MainLayout.ItemsSource = this.ProjectViewItems;
+                await this._lockLoaded();
             };
 
-                       
+
             #region Foot
 
 
@@ -99,10 +92,7 @@ namespace Retouch_Photo2
         //The current page becomes the active page
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (MainPage._isLoaded)
-            {
-                await this.RefreshWrapGrid();
-            }
+            await this._lockOnNavigatedTo();
         }
         //The current page no longer becomes an active page
         protected override void OnNavigatedFrom(NavigationEventArgs e)

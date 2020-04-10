@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Retouch_Photo2.Elements
@@ -10,8 +11,8 @@ namespace Retouch_Photo2.Elements
     {
 
         //@Static
-        /// <summary> Static images instances. </summary>
-        public static Stack<ImageRe> Instances = new Stack<ImageRe>();
+        /// <summary> Collection images instances. </summary>
+        public static ObservableCollection<ImageRe> Instances = new ObservableCollection<ImageRe>();
         /// <summary> FInd a ImageRe form a ImageStr. </summary>
         public static ImageRe FindFirstImageRe(ImageStr imageStr)=> ImageRe.Instances.FirstOrDefault(i => i.FolderRelativeId == imageStr.FolderRelativeId);
 
@@ -32,7 +33,7 @@ namespace Retouch_Photo2.Elements
                 }
             }
 
-            ImageRe.Instances.Push(imageRe);//Images
+            ImageRe.Instances.Add(imageRe);//Images
         }
 
 
