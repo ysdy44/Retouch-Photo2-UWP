@@ -11,11 +11,12 @@
     xmlns:elementDrawPages="using:Retouch_Photo2.Elements.DrawPages"
     xmlns:layers="using:Retouch_Photo2.Layers"
     xmlns:toolElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:models="using:Retouch_Photo2.Menus.Models"
     NavigationCacheMode="Required"    
     mc:Ignorable="d"
     >
 
-    
+
     <Page.Transitions>
         <TransitionCollection>
             <NavigationThemeTransition>
@@ -57,7 +58,7 @@
             </Storyboard>
 
         </Grid.Resources>
-        
+
 
         <elementDrawPages:DrawLayout x:Name="DrawLayout" 
                LeftIcon="{x:Bind IconConverter(TipViewModel.Tool),Mode=OneWay}"
@@ -94,11 +95,9 @@
 
             <!--Document-->
             <elementDrawPages:DrawLayout.DocumentChild>
-                <Button x:Name="DocumentButton" Width="Auto" Padding="10, 0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Foreground="{ThemeResource AppText}">
-                    Document
-                </Button>
+                <Button x:Name="DocumentButton" Width="Auto" Padding="10, 0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Foreground="{ThemeResource AppText}"/>
             </elementDrawPages:DrawLayout.DocumentChild>
-            
+
             <!--HeadLeft-->
             <elementDrawPages:DrawLayout.HeadLeftPanel>
                 <elements:ExpandAppbar x:Name="ExpandAppbar">
@@ -107,43 +106,34 @@
 
                         <elements:ExpandAppbarButton x:Name="ExportButton">
                             <ToolTipService.ToolTip>
-                                <ToolTip Content="Export" VerticalOffset="40" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip x:Name="ExportToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
                                 <FontIcon Glyph="&#xE105;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarButton.CenterContent>
-                            <elements:ExpandAppbarButton.Text>
-                                Export
-                            </elements:ExpandAppbarButton.Text>
                         </elements:ExpandAppbarButton>
 
                         <elements:ExpandAppBarSapce/>
-                        
+
                         <!--
                         <elements:ExpandAppbarButton x:Name="UndoButton">
                             <ToolTipService.ToolTip>
-                                <ToolTip Content="Undo" VerticalOffset="40" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip x:Name="SetupToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
                                 <FontIcon Glyph="&#xE10E;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarButton.CenterContent>
-                            <elements:ExpandAppbarButton.Text>
-                                Undo
-                            </elements:ExpandAppbarButton.Text>
                         </elements:ExpandAppbarButton>
 
                         <elements:ExpandAppBarSapce/>
 
                         <elements:ExpandAppbarButton x:Name="RedoButton">
                             <ToolTipService.ToolTip>
-                                <ToolTip Content="Redo" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip x:Name="RedoToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
                                 <FontIcon Glyph="&#xE10D;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarButton.CenterContent>
-                            <elements:ExpandAppbarButton.Text>
-                                Redo
-                            </elements:ExpandAppbarButton.Text>
                         </elements:ExpandAppbarButton>
 
                         <elements:ExpandAppBarSeparator/>
@@ -151,67 +141,52 @@
 
                         <elements:ExpandAppbarButton x:Name="SetupButton">
                             <ToolTipService.ToolTip>
-                                <ToolTip Content="Setup" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip x:Name="SetupToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
                                 <FontIcon Glyph="&#xE123;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarButton.CenterContent>
-                            <elements:ExpandAppbarButton.Text>
-                                Setup
-                            </elements:ExpandAppbarButton.Text>
                         </elements:ExpandAppbarButton>
 
                         <elements:ExpandAppBarSapce/>
-                        
+
                         <elements:ExpandAppbarButton x:Name="ThemeButton">
                             <ToolTipService.ToolTip>
-                                <ToolTip Content="Theme" VerticalOffset="40" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip x:Name="ThemeToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
                                 <elements:ThemeControl x:Name="ThemeControl" Foreground="{ThemeResource AppText}"/>
                             </elements:ExpandAppbarButton.CenterContent>
-                            <elements:ExpandAppbarButton.Text>
-                                Theme
-                            </elements:ExpandAppbarButton.Text>
                         </elements:ExpandAppbarButton>
 
                         <elements:ExpandAppBarSapce/>
 
-                        <elements:ExpandAppbarToggleButton IsChecked="{x:Bind ViewModel.CanvasRulerVisible,Mode=TwoWay}">
+                        <elements:ExpandAppbarToggleButton x:Name="RulerButton" IsChecked="{x:Bind ViewModel.CanvasRulerVisible,Mode=TwoWay}">
                             <ToolTipService.ToolTip>
-                                <ToolTip Content="Ruler" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip x:Name="RulerToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarToggleButton.CenterContent>
                                 <FontIcon Glyph="&#xE80A;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarToggleButton.CenterContent>
-                            <elements:ExpandAppbarToggleButton.Text>
-                                Ruler
-                            </elements:ExpandAppbarToggleButton.Text>
                         </elements:ExpandAppbarToggleButton>
 
                         <elements:ExpandAppBarSapce/>
 
                         <elements:ExpandAppbarButton x:Name="FullScreenButton">
                             <ToolTipService.ToolTip>
-                                <ToolTip Content="Full Screen" VerticalOffset="40" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip x:Name="FullScreenToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
                                 <FontIcon Glyph="&#xE1D9;" FontSize="16" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarButton.CenterContent>
-                            <elements:ExpandAppbarButton.Text>
-                                FullScreen
-                            </elements:ExpandAppbarButton.Text>
                         </elements:ExpandAppbarButton>
 
                         <elements:ExpandAppBarSapce/>
 
-                        <elements:ExpandAppbarRepeatButton IsChecked="{x:Bind TipViewModel.IsOpen,Mode=TwoWay}">
+                        <elements:ExpandAppbarRepeatButton x:Name="TipButton" IsChecked="{x:Bind TipViewModel.IsOpen,Mode=TwoWay}">
                             <elements:ExpandAppbarRepeatButton.CenterContent>
                                 <FontIcon Glyph="&#xE897;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarRepeatButton.CenterContent>
-                            <elements:ExpandAppbarRepeatButton.Text>
-                                Tip
-                            </elements:ExpandAppbarRepeatButton.Text>
                         </elements:ExpandAppbarRepeatButton>
 
                     </elements:ExpandAppbar.Children>
@@ -224,6 +199,21 @@
         <!--Menu-->
         <Canvas x:Name="OverlayCanvas" IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}">
             <!--MenuLayout-->
+
+            <models:SelectionMenu x:Name="SelectionMenu" Mode="{x:Bind SelectionViewModel.SelectionMode,Mode=OneWay}"/>
+            <models:OperateMenu x:Name="OperateMenu" Mode="{x:Bind SelectionViewModel.SelectionMode,Mode=OneWay}"/>
+            <models:AdjustmentMenu x:Name="AdjustmentMenu" AdjustmentManager="{x:Bind SelectionViewModel.AdjustmentManager,Mode=OneWay}"/>
+            <models:EffectMenu x:Name="EffectMenu" EffectManager="{x:Bind SelectionViewModel.EffectManager,Mode=OneWay}"/>
+            <models:TransformerMenu x:Name="TransformerMenu" 
+                           Tool="{x:Bind TipViewModel.Tool,Mode=OneWay}"
+                           DisabledRadian="{x:Bind SelectionViewModel.DsabledRadian,Mode=OneWay}"
+                           Mode="{x:Bind SelectionViewModel.SelectionMode,Mode=OneWay}"
+                           Transformer="{x:Bind SelectionViewModel.Transformer,Mode=OneWay}" />
+            <models:CharacterMenu x:Name="CharacterMenu"/>
+            <models:ColorMenu x:Name="ColorMenu"/>
+            <models:LayerMenu x:Name="LayerMenu" Mode="{x:Bind SelectionViewModel.SelectionMode,Mode=OneWay}"
+                           IsGroupLayer="{x:Bind SelectionViewModel.IsGroupLayer,Mode=OneWay}"/>
+            
         </Canvas>
 
         <!--FullScreen-->
@@ -240,30 +230,16 @@
         </ContentControl>
 
         <!--Load-->
-        <elements:LoadingControl x:Name="LoadingControl">
-            <elements:LoadingControl.Text>
-                Saving...
-            </elements:LoadingControl.Text>
-        </elements:LoadingControl>
+        <elements:LoadingControl x:Name="LoadingControl"/>
 
 
         <!--Dialog-->
         <elementDialog:DialogBase x:Name="SetupDialog">
-            <elementDialog:DialogBase.Title>
-                <TextBlock FontSize="22" Style="{StaticResource SubheaderTextBlockStyle}">
-                   Document Setup
-                </TextBlock>
-            </elementDialog:DialogBase.Title>
             <elementDialog:DialogBase.CenterContent>
                 <elements:SizePicker x:Name="SetupSizePicker"/>
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>
         <elementDialog:DialogBase x:Name="ExportDialog">
-            <elementDialog:DialogBase.Title>
-                <TextBlock FontSize="22" Style="{StaticResource SubheaderTextBlockStyle}">
-                   Export To...
-                </TextBlock>
-            </elementDialog:DialogBase.Title>
             <elementDialog:DialogBase.CenterContent>
                 <elements:FormatComboBox x:Name="ExportComboBox"/>
             </elementDialog:DialogBase.CenterContent>

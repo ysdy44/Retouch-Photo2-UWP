@@ -1,6 +1,7 @@
 ﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using System;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Adjustments.Pages
@@ -10,50 +11,47 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// </summary>
     public sealed partial class HueRotationPage : IAdjustmentPage
     {
+        public HueRotationAdjustment Adjustment;
 
-        public HueRotationAdjustment HueRotationAdjustment;
-
+        //@Content
         public AdjustmentType Type { get; } = AdjustmentType.HueRotation;
         public FrameworkElement Icon { get; } = new HueRotationIcon();
-        public FrameworkElement Page => this;
-               
+        public FrameworkElement Self => this;
+        public string Text { get; private set; }
+
         //@Construct
         public HueRotationPage()
         {
             this.InitializeComponent();
+            this.ConstructStrings();
 
             this.HueRotationSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.HueRotationAdjustment == null) return;
-                this.HueRotationAdjustment.Angle = (float)(value * Math.PI / 180);
+                if (this.Adjustment == null) return;
+                this.Adjustment.Angle = (float)(value * Math.PI / 180);
                 AdjustmentManager.Invalidate?.Invoke();
             };
         }
 
-        
+
         public IAdjustment GetNewAdjustment() => new HueRotationAdjustment();
-        public void SetAdjustment(IAdjustment value)
-        {
-            if (value is HueRotationAdjustment adjustment)
-            {
-                this.HueRotationAdjustment = adjustment;
-                this.Invalidate(adjustment);
-            }
-        }
 
-        public void Close() => this.HueRotationAdjustment = null;
-        public void Reset()
-        {
-            if (this.HueRotationAdjustment == null) return;
-
-            this.HueRotationAdjustment.Reset();
-            this.Invalidate(this.HueRotationAdjustment);
-        }
-
-        public void Invalidate(HueRotationAdjustment adjustment)
+        public void Follow(HueRotationAdjustment adjustment)
         {
             this.HueRotationSlider.Value = adjustment.Angle * 180 / Math.PI;
         }
+
+
+        //Strings
+        public void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Text = resource.GetString("/Adjustments/HueRotation");
+
+            this.AngleTextBlock.Text = resource.GetString("/Adjustments/HueRotation_Angle");
+        }
+
     }
 }
 

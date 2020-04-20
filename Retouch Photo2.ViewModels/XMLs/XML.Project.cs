@@ -46,7 +46,6 @@ namespace Retouch_Photo2.ViewModels
         public static Project LoadProject(string name, XDocument document)
         {
             XElement root = document.Element("Root");
-            XElement rootImages = root.Element("Images");
             XElement rootLayers = root.Element("Layers");
 
             return new Project

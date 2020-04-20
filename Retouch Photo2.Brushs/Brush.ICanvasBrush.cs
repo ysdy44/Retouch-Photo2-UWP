@@ -139,17 +139,17 @@ namespace Retouch_Photo2.Brushs
         /// <returns> The provided brush. </returns>
         public ICanvasBrush GetImageBrush(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix)
         {
-            ImageStr imageStr = this.ImageStr;
+            Photocopier photocopier = this.Photocopier;
 
-            if (imageStr.Name==null)
+            if (photocopier.Name==null)
             {
                 return null;
             }
 
-            ImageRe imageRe = ImageRe.FindFirstImageRe(imageStr);
-            CanvasBitmap bitmap = imageRe.Source;
+            Photo photo = Photo.FindFirstPhotocopier(photocopier);
+            CanvasBitmap bitmap = photo.Source;
 
-            Matrix3x2 matrix2 = Transformer.FindHomography(this.ImageSource, this.ImageDestination);
+            Matrix3x2 matrix2 = Transformer.FindHomography(this.PhotoSource, this.PhotoDestination);
 
             return new CanvasImageBrush(resourceCreator, bitmap)
             {

@@ -8,6 +8,7 @@
     MinWidth="50"
     Height="40"
     Padding="8,0"
+    IsEnabled="False"
     Background="Transparent"
     d:DesignHeight="50"
     d:DesignWidth="50"

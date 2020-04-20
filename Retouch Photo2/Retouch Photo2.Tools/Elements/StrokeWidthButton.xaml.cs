@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Elements
@@ -38,38 +39,39 @@ namespace Retouch_Photo2.Tools.Elements
         public StrokeWidthButton()
         {
             this.InitializeComponent();
-
-            //StrokeWidth
-            {
-                //Button
-                this.StrokeWidthTouchbarButton.Toggle += (s, value) =>
-                {
-                    this._mode = value;
-                };
-
-                //Number
-                this.StrokeWidthTouchbarSlider.Unit = "%";
-                this.StrokeWidthTouchbarSlider.NumberMinimum = 0;
-                this.StrokeWidthTouchbarSlider.NumberMaximum = 10000;
-                this.StrokeWidthTouchbarSlider.NumberChange += (sender, value) =>
-                {
-                    float strokeWidth = value / 100f;
-                    this.StrokeWidthChange(strokeWidth);
-                };
-
-                //Value
-                this.StrokeWidthTouchbarSlider.Minimum = 0d;
-                this.StrokeWidthTouchbarSlider.Maximum = 10d;
-                this.StrokeWidthTouchbarSlider.ValueChangeStarted += (sender, value) => { };
-                this.StrokeWidthTouchbarSlider.ValueChangeDelta += (sender, value) =>
-                {
-                    float strokeWidth = (float)value;
-                    this.StrokeWidthChange(strokeWidth);
-                };
-                this.StrokeWidthTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
-            }
+            this.ConstructStrings();
+            this.ConstructStrokeWidth();
         }
 
+        private void ConstructStrokeWidth()
+        {
+            //Button
+            this.StrokeWidthTouchbarButton.Toggle += (s, value) =>
+            {
+                this._mode = value;
+            };
+
+            //Number
+            this.StrokeWidthTouchbarSlider.Unit = "%";
+            this.StrokeWidthTouchbarSlider.NumberMinimum = 0;
+            this.StrokeWidthTouchbarSlider.NumberMaximum = 10000;
+            this.StrokeWidthTouchbarSlider.NumberChange += (sender, value) =>
+            {
+                float strokeWidth = value / 100f;
+                this.StrokeWidthChange(strokeWidth);
+            };
+
+            //Value
+            this.StrokeWidthTouchbarSlider.Minimum = 0d;
+            this.StrokeWidthTouchbarSlider.Maximum = 10d;
+            this.StrokeWidthTouchbarSlider.ValueChangeStarted += (sender, value) => { };
+            this.StrokeWidthTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            {
+                float strokeWidth = (float)value;
+                this.StrokeWidthChange(strokeWidth);
+            };
+            this.StrokeWidthTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
+        }
         private void StrokeWidthChange(float strokeWidth)
         {
             //Selection
@@ -81,5 +83,14 @@ namespace Retouch_Photo2.Tools.Elements
 
             this.ViewModel.Invalidate();//Invalidate
         }
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.StrokeWidthTouchbarButton.CenterContent = resource.GetString("/ToolElements/StrokeWidth");
+        }
+
     }
 }

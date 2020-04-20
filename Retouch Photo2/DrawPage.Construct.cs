@@ -1,17 +1,8 @@
-﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.ViewModels;
-using System.Collections.Generic;
-using System.Numerics;
-using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Windows.ApplicationModel.Resources;
 using Windows.Graphics.Imaging;
-using Windows.Storage;
-using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.Storage.Streams;
 
 namespace Retouch_Photo2
 {
@@ -21,25 +12,40 @@ namespace Retouch_Photo2
     public sealed partial class DrawPage : Page
     {
 
-        /// <summary> 
-        /// Sets the page layout is full-screen. 
-        /// </summary>
-        public bool IsFullScreen
+        //Strings
+        private void ConstructStrings()
         {
-            get => this.DrawLayout.IsFullScreen;
-            set
-            {
-                this.UnFullScreenButton.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
-                this.DrawLayout.IsFullScreen = value;
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+            
+            this.LoadingControl.Text = resource.GetString("/$DrawPage/Loading");
 
-                Vector2 offset = this.DrawLayout.FullScreenOffset;
-                if (value)
-                    this.ViewModel.CanvasTransformer.Position += offset;
-                else
-                    this.ViewModel.CanvasTransformer.Position -= offset;
+            this.DocumentButton.Content = resource.GetString("/$DrawPage/Document");
 
-                this.ViewModel.CanvasTransformer.ReloadMatrix();
-            }
+            this.ExportButton.Text = resource.GetString("/$DrawPage/Export");
+            this.ExportToolTip.Content = resource.GetString("/$DrawPage/Export_ToolTip");
+            //this.UndoButton.Text = resourceLoader.GetString("/$DrawPage/Undo");
+            //this.UndoToolTip.Content = resourceLoader.GetString("/$DrawPage/Undo_ToolTip");
+            //this.RedoButton.Text = resourceLoader.GetString("/$DrawPage/Redo");
+            //this.RedoToolTip.Content = resourceLoader.GetString("/$DrawPage/Redo_ToolTip");
+            this.SetupButton.Text = resource.GetString("/$DrawPage/Setup");
+            this.SetupToolTip.Content = resource.GetString("/$DrawPage/Setup_ToolTip");
+            this.ThemeButton.Text = resource.GetString("/$DrawPage/Theme");
+            this.ThemeToolTip.Content = resource.GetString("/$DrawPage/Theme_ToolTip");
+            this.RulerButton.Text = resource.GetString("/$DrawPage/Ruler");
+            this.RulerToolTip.Content = resource.GetString("/$DrawPage/Ruler_ToolTip");
+            this.FullScreenButton.Text = resource.GetString("/$DrawPage/FullScreen");
+            this.FullScreenToolTip.Content = resource.GetString("/$DrawPage/FullScreen_ToolTip");
+            this.TipButton.Text = resource.GetString("/$DrawPage/Tip");
+
+            this.SetupDialog.Title = resource.GetString("/$DrawPage/SetupDialog_Title");
+            this.SetupDialog.CloseButton.Content = resource.GetString("/$DrawPage/SetupDialog_Close");
+            this.SetupDialog.PrimaryButton.Content = resource.GetString("/$DrawPage/SetupDialog_Primary");
+            this.SetupSizePicker.WidthText = resource.GetString("/$DrawPage/SetupSizePicker_Width");
+            this.SetupSizePicker.HeightText = resource.GetString("/$DrawPage/SetupSizePicker_Height");
+            
+            this.ExportDialog.Title = resource.GetString("/$DrawPage/ExportDialog_Title");
+            this.ExportDialog.CloseButton.Content = resource.GetString("/$DrawPage/ExportDialog_Close");
+            this.ExportDialog.PrimaryButton.Content = resource.GetString("/$DrawPage/ExportDialog_Primary");
         }
 
 
@@ -111,108 +117,6 @@ namespace Retouch_Photo2
 
                 this.ViewModel.Invalidate();//Invalidate
             };
-        }
-
-
-        /// <summary>
-        /// Export to ...
-        /// </summary>
-        private async Task<bool> Export()
-        {
-            //CanvasRenderTarget
-            float width = this.ViewModel.CanvasTransformer.Width;
-            float height = this.ViewModel.CanvasTransformer.Height;
-            ICanvasResourceCreatorWithDpi resourceCreator = this.MainCanvasControl.CanvasControl;
-            CanvasRenderTarget renderTarget = new CanvasRenderTarget(resourceCreator, width, height);
-
-
-            //Render
-            Matrix3x2 matrix = Matrix3x2.CreateScale(1.0f, 1.0f);
-            ICanvasImage canvasImage = this.MainCanvasControl.Render(matrix);
-            using (CanvasDrawingSession drawingSession = renderTarget.CreateDrawingSession())
-            {
-                drawingSession.DrawImage(canvasImage);
-            }
-
-
-            //FileSavePicker
-            string fileChoices = this.ExportComboBox.FileChoices;
-            string suggestedFileName = this.ViewModel.Name;
-            FileSavePicker savePicker = new FileSavePicker
-            {
-                SuggestedStartLocation = PickerLocationId.Desktop,
-                SuggestedFileName = suggestedFileName,
-            };
-            savePicker.FileTypeChoices.Add("DB", new[] { fileChoices });
-
-
-            //PickSaveFileAsync
-            StorageFile file = await savePicker.PickSaveFileAsync();
-            if (file == null) return false;
-
-            try
-            {
-                CanvasBitmapFileFormat fileFormat = this.ExportComboBox.FileFormat;
-                float quality = 1.0f;
-
-                using (IRandomAccessStream accessStream = await file.OpenAsync(FileAccessMode.ReadWrite))
-                {
-                    await renderTarget.SaveAsync(accessStream, fileFormat, quality);
-                }
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-
-        /// <summary>
-        /// Save the current Project.
-        /// </summary>
-        private async Task Save()
-        {
-            string name = this.ViewModel.Name;
-            int width = this.ViewModel.CanvasTransformer.Width;
-            int height = this.ViewModel.CanvasTransformer.Height;
-            IEnumerable<ILayer> layers = this.ViewModel.Layers.RootLayers;
-
-            Project project = new Project
-            {
-                Name = name,
-                Width = width,
-                Height = height,
-                Layers = layers
-            };
-
-            //Save thumbnail image.
-            CanvasRenderTarget thumbnail = this.MainCanvasControl.RenderThumbnail(this.ViewModel.CanvasDevice, width, height);
-            FileUtil.SaveThumbnailAsync(thumbnail, name);
-
-            {
-                //ImageResFile
-                IEnumerable<ImageRe> imageRes = ImageRe.Instances;//@Debug
-                await FileUtil.SaveImageResFile(imageRes);
-                ImageRe.Instances.Clear();
-
-                //Save project to zip file.
-                await FileUtil.SaveProject(project);
-                await FileUtil.CreateZipFile(name);
-
-                //FileUtil
-                await FileUtil.DeleteAllInTemporaryFolder();
-            }
-
-            {
-                //Clear
-                this.SelectionViewModel.SetModeNone();
-                this.ViewModel.Layers.RootLayers.Clear();
-                this.ViewModel.Layers.RootControls.Clear();
-
-                this.IsFullScreen = true;
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
-            }
         }
 
     }

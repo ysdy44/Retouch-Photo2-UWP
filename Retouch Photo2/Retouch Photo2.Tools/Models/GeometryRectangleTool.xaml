@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="Retouch_Photo2.Tools.Models.GeometryRectangleTool"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="400"
+    >
+
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+        <StackPanel Orientation="Horizontal">
+
+            <TextBlock x:Name="FillTextBlock" Style="{StaticResource AppTextBlock}"/>
+            <toolsElements:FillColorEllipseButton/>
+
+            <ContentControl Width="4"/>
+
+            <TextBlock x:Name="StrokeTextBlock" Style="{StaticResource AppTextBlock}"/>
+            <toolsElements:StrokeColorEllipseButton/>
+
+            <ContentControl Width="4"/>
+
+            <toolsElements:StrokeWidthButton x:Name="StrokeWidthButton"/>
+
+            <ContentControl Width="4"/>
+
+            <TextBlock x:Name="ConvertTextBlock" Style="{StaticResource AppTextBlock}"/>
+            <toolsElements:ConvertToCurvesButton/>
+
+            <ContentControl Width="4"/>
+
+            <toolsElements:MoreCreateButton/>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</Page>

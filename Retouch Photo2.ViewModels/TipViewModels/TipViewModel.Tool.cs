@@ -48,8 +48,7 @@ namespace Retouch_Photo2.ViewModels
                 {
                     bool isSelected = (tool.Type == currentType);
 
-                    tool.Button.IsSelected = isSelected;
-                    tool.Page.IsSelected = isSelected;
+                    tool.IsSelected = isSelected;
                 }
             }
         }

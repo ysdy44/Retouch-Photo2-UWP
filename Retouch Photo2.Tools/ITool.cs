@@ -14,13 +14,15 @@ namespace Retouch_Photo2.Tools
         ToolType Type { get; }
         /// <summary> Gets IITool's icon. </summary>
         FrameworkElement Icon { get; }
+        /// <summary> Sets IITool's IsSelected. </summary>
+        bool IsSelected { get; set; }
 
         /// <summary> Gets IITool's button. </summary>
-        IToolButton Button { get; }
+        FrameworkElement Button { get; }
         /// <summary> Gets IITool's page. </summary>
-        IToolPage Page { get; }
+        FrameworkElement Page { get; }
 
-
+        
         /// <summary>
         /// Occurs the first time an action processor is created.
         /// </summary>

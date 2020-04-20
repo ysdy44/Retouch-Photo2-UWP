@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Brushs;
@@ -22,7 +23,7 @@ namespace Retouch_Photo2.Layers
         public abstract LayerType Type { get; }
         public string Name { get; set; } = string.Empty;
         public float Opacity { get; set; } = 1.0f;
-        public BlendType BlendType { get; set; } = BlendType.None;
+        public BlendEffectMode? BlendType { get; set; } = null;
 
         private Visibility visibility;
         public Visibility Visibility

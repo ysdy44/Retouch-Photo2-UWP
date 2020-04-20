@@ -11,9 +11,6 @@
     >
 
     <tools:TouchbarButton x:Name="StrokeWidthTouchbarButton">
-        <tools:TouchbarButton.CenterContent>
-            StrokeWidth
-        </tools:TouchbarButton.CenterContent>
         <tools:TouchbarButton.TouchbarSlider>
             <tools:TouchbarSlider x:Name="StrokeWidthTouchbarSlider" 
                              Number="{x:Bind StrokeWidthNumberConverter(SelectionViewModel.StrokeWidth), Mode=OneWay}"

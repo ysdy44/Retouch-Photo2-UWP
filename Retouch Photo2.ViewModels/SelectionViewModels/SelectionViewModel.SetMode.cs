@@ -62,7 +62,7 @@ namespace Retouch_Photo2.ViewModels
 
             this.Type = LayerType.None;
             this.SetOpacity(1.0f);
-            this.BlendType = BlendType.None;
+            this.BlendType = null;
             this.Visibility = Visibility.Collapsed;
             this.TagType = TagType.None;
 

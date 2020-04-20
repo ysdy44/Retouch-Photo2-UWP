@@ -4,9 +4,11 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    Background="{ThemeResource SystemControlBackgroundAltHighBrush}"
+    BorderBrush="{ThemeResource AppBorderBrush}"
+    Background="{ThemeResource AppBackground}"
     HorizontalAlignment="Center"
     VerticalAlignment="Center"
     mc:Ignorable="d"
@@ -14,25 +16,32 @@
     d:DesignWidth="400"
     >
 
+    <!--Visibility:Show-->
+    <animations:Implicit.ShowAnimations>
+        <animations:TranslationAnimation Duration="0:0:0.4" From="0,100,0" To="0,0,0"/>
+    </animations:Implicit.ShowAnimations>
 
-    <Grid 
-            Margin="{x:Bind UserControl.Margin,Mode=OneWay}" 
-            HorizontalAlignment="{x:Bind UserControl.HorizontalAlignment,Mode=OneWay}" 
-            VerticalAlignment="{x:Bind UserControl.VerticalAlignment,Mode=OneWay}" 
-        >
+    <!--Visibility:Hide-->
+    <animations:Implicit.HideAnimations>
+        <animations:TranslationAnimation Duration="0:0:0.4" From="0,0,0" To="0,100,0"/>
+    </animations:Implicit.HideAnimations>
 
-        <!--Animation-->
-        <Grid.Resources>
-            <Storyboard x:Name="Storyboard">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Width)"   Storyboard.TargetName="Rectangle" EnableDependentAnimation ="True">
-                    <SplineDoubleKeyFrame x:Name="Frame" KeyTime="0:0:0.2" Value="200" KeySpline="0.5,1,1,1"/>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-        </Grid.Resources>
+    
+    <UserControl.Resources>
+        <!--Storyboard-->
+        <Storyboard x:Name="Storyboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Width)"   Storyboard.TargetName="Rectangle" EnableDependentAnimation ="True">
+                <SplineDoubleKeyFrame x:Name="Frame" KeyTime="0:0:0.2" Value="200" KeySpline="0.5,1,1,1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+
+
+    <Grid Background="Transparent" Margin="{x:Bind UserControl.Margin,Mode=OneWay}" HorizontalAlignment="{x:Bind UserControl.HorizontalAlignment,Mode=OneWay}" VerticalAlignment="{x:Bind UserControl.VerticalAlignment,Mode=OneWay}">
 
         <!--Shadow-->
         <controls:DropShadowPanel OffsetY="3" ShadowOpacity="{x:Bind ShadowOpacity,Mode=OneWay}" Color="{x:Bind ShadowColor,Mode=OneWay}">
-            <Rectangle x:Name="Rectangle" RadiusX="25" RadiusY="25" StrokeThickness="1" Stroke="{ThemeResource AppBorderBrush}" Fill="{x:Bind UserControl.Background,Mode=OneWay}"/>
+            <Rectangle x:Name="Rectangle" RadiusX="25" RadiusY="25" StrokeThickness="1" Stroke="{x:Bind UserControl.BorderBrush, Mode=OneWay}" Fill="{x:Bind UserControl.Background,Mode=OneWay}"/>
         </controls:DropShadowPanel>
 
         <!--Content-->

@@ -28,18 +28,18 @@
         <!--Extensions-->
         <elements:ApplicationViewTitleBarBackgroundExtension x:Key="AVTBBE" TitleBarColor="{ThemeResource AppForegroundColor}"/>
     </Page.Resources>
-    
-    
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <!--Developer-->
         <developerTools:AlignmentGrid Grid.Row="1" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="Gray"/>
 
-        
+
         <!--Body-->
         <ScrollViewer x:Name="ScrollViewer" Grid.RowSpan="2">
             <Border>
@@ -130,7 +130,7 @@
                             </Setter>
                         </Style>
                     </StackPanel.Resources>
-                    
+
                     <StackPanel.ChildrenTransitions>
                         <TransitionCollection>
                             <EntranceThemeTransition IsStaggeringEnabled="True"/>
@@ -142,7 +142,7 @@
 
                         <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseHeader}"/>
 
-                        
+
                         <ContentControl Height="12"/>
 
 
@@ -150,94 +150,88 @@
                         <Border x:Name="LayoutBorder" Width="330" Height="210" Background="White" HorizontalAlignment="Left">
                             <!--Layout-->
                         </Border>
-                        
-                        
+
+
+                        <ContentControl Height="12"/>
+
+
                         <!--Theme-->
-                        <TextBlock Style="{StaticResource TitleTextBlockStyle}">
-                            Theme
-                        </TextBlock>
+                        <TextBlock x:Name="ThemeTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
                         <Border MaxHeight="100" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel Orientation="Horizontal">
 
-                                <RadioButton x:Name="LightRadioButton" Tag="Light" GroupName="Theme" Style="{StaticResource AppTapRadioButtonStyle}">
+                                <RadioButton x:Name="LightRadioButton" GroupName="Theme" Style="{StaticResource AppTapRadioButtonStyle}">
                                     <FontIcon FontSize="20" Glyph="&#xE708;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </RadioButton>
-                                <RadioButton x:Name="DarkRadioButton" Tag="Dark" GroupName="Theme" Style="{StaticResource AppTapRadioButtonStyle}">
+                                <RadioButton x:Name="DarkRadioButton" GroupName="Theme" Style="{StaticResource AppTapRadioButtonStyle}">
                                     <FontIcon FontSize="26" Glyph="&#xE706;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </RadioButton>
-                                <RadioButton x:Name="DefaultRadioButton" Tag="Use System" GroupName="Theme" Style="{StaticResource AppTapRadioButtonStyle}">
+                                <RadioButton x:Name="DefaultRadioButton" GroupName="Theme" Style="{StaticResource AppTapRadioButtonStyle}">
                                     <FontIcon FontSize="22" Glyph="&#xE7E8;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </RadioButton>
 
                             </StackPanel>
                         </Border>
 
-                        
+
                         <ContentControl Height="12"/>
 
-                        
+
                         <!--Layout-->
-                        <TextBlock Style="{StaticResource TitleTextBlockStyle}">
-                            Layout
-                        </TextBlock>
+                        <TextBlock x:Name="LayoutTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
                         <Border MaxHeight="100" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel Orientation="Horizontal">
 
-                                <RadioButton x:Name="PhoneButton" Tag="Phone" GroupName="Layout" Style="{StaticResource AppTapRadioButtonStyle}">
+                                <RadioButton x:Name="PhoneButton" GroupName="Layout" Style="{StaticResource AppTapRadioButtonStyle}">
                                     <FontIcon FontSize="22" Glyph="&#xE8EA;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </RadioButton>
-                                <RadioButton x:Name="PadButton" Tag="Pad" GroupName="Layout" Style="{StaticResource AppTapRadioButtonStyle}">
+                                <RadioButton x:Name="PadButton" GroupName="Layout" Style="{StaticResource AppTapRadioButtonStyle}">
                                     <FontIcon FontSize="22" Glyph="&#xE70A;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </RadioButton>
-                                <RadioButton x:Name="PCButton" Tag="PC" GroupName="Layout" Style="{StaticResource AppTapRadioButtonStyle}">
+                                <RadioButton x:Name="PCButton" GroupName="Layout" Style="{StaticResource AppTapRadioButtonStyle}">
                                     <FontIcon FontSize="22" Glyph="&#xF71E;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </RadioButton>
                                 <Rectangle Width="1" Fill="{ThemeResource AppBorderBrush}"/>
-                                <RadioButton x:Name="AdaptiveButton" Tag="Adaptive" GroupName="Layout" Style="{StaticResource AppTapRadioButtonStyle}">
+                                <RadioButton x:Name="AdaptiveButton" GroupName="Layout" Style="{StaticResource AppTapRadioButtonStyle}">
                                     <FontIcon FontSize="32" Glyph="&#xEBC6;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </RadioButton>
 
                             </StackPanel>
                         </Border>
-                        
-                        
+
+
                         <ContentControl Height="12"/>
 
 
                         <!--Adaptive-->
-                        <TextBlock x:Name="AdaptiveTextBlock" Style="{StaticResource TitleTextBlockStyle}">
-                            Adaptive Width
-                        </TextBlock>
+                        <TextBlock x:Name="AdaptiveTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
                         <elementsSettingPages:AdaptiveWidthGrid x:Name="AdaptiveGrid"/>
-                        <HyperlinkButton x:Name="AdaptiveResetButton" Content="Reset adaptive width"/>
+                        <HyperlinkButton x:Name="AdaptiveResetButton"/>
 
-                        
+
                         <ContentControl Height="12"/>
 
 
                         <!--Key-->
-                        <TextBlock Style="{StaticResource TitleTextBlockStyle}">
-                            Shortcuts
-                        </TextBlock>
-                        <ToggleButton Tag="IsCenter" Content="Ctrl" IsChecked="{x:Bind KeyboardViewModel.IsCenter, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
-                        <ToggleButton Tag="IsRatio" Content="Shift" IsChecked="{x:Bind KeyboardViewModel.IsRatio, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
-                        <ToggleButton Tag="IsSquare" Content="Shift" IsChecked="{x:Bind KeyboardViewModel.IsSquare, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
-                        <ToggleButton Tag="IsStepFrequency" Content="Space" IsChecked="{x:Bind KeyboardViewModel.IsStepFrequency, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+                        <TextBlock x:Name="KeyTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <ToggleButton x:Name="IsCenterToggleButton" Content="Ctrl" IsChecked="{x:Bind KeyboardViewModel.IsCenter, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+                        <ToggleButton x:Name="IsRatioToggleButton" Content="Shift" IsChecked="{x:Bind KeyboardViewModel.IsRatio, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+                        <ToggleButton x:Name="IsSquareToggleButton" Content="Shift" IsChecked="{x:Bind KeyboardViewModel.IsSquare, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+                        <ToggleButton x:Name="IsStepFrequencyToggleButton" Content="Space" IsChecked="{x:Bind KeyboardViewModel.IsStepFrequency, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
 
-                        <ToggleButton Tag="FullScreen" Content="Esc" IsChecked="{x:Bind KeyboardViewModel.IsFullScreen, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+                        <ToggleButton x:Name="FullScreenToggleButton" Content="Esc" IsChecked="{x:Bind KeyboardViewModel.IsFullScreen, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+
+
+                        <ContentControl Height="12"/>
 
 
                         <!--Local-->
-                        <TextBlock Style="{StaticResource TitleTextBlockStyle}">
-                            Local Folder
-                        </TextBlock>
-                        <Button x:Name="LocalFolderButton" HorizontalAlignment="Left" Style="{ThemeResource AppTagLineCircleButton}">
+                        <TextBlock x:Name="LocalTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Button x:Name="LocalButton" HorizontalAlignment="Left" Style="{ThemeResource AppTagLineCircleButton}">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xE17C;" FontSize="24" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 <ContentControl Width="8"/>
-                                <TextBlock VerticalAlignment="Center">
-                                    Open
-                                </TextBlock>
+                                <TextBlock x:Name="LocalOpenTextBlock" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
 
@@ -269,13 +263,12 @@
                 <FontIcon Glyph="&#xE0D5;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
             </Button>
 
-            <TextBlock Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
+            <TextBlock x:Name="TitleTextBlock" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
                 <TextBlock.Transitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromHorizontalOffset="50" FromVerticalOffset="0"/>
                     </TransitionCollection>
                 </TextBlock.Transitions>
-                Setting
             </TextBlock>
 
         </Grid>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments.Icons;
+using Retouch_Photo2.Adjustments.Pages;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
@@ -12,10 +13,15 @@ namespace Retouch_Photo2.Adjustments.Models
     /// </summary>
     public class BrightnessAdjustment : IAdjustment
     {
+        //@Static
+        public static readonly BrightnessPage BrightnessPage = new BrightnessPage();
 
+        //@Content
         public AdjustmentType Type => AdjustmentType.Brightness;
         public FrameworkElement Icon { get; } = new BrightnessIcon();
         public Visibility PageVisibility => Visibility.Visible;
+        public IAdjustmentPage Page => BrightnessAdjustment.BrightnessPage;
+        public string Text { get; private set; }
 
         /// <summary> Interval 1.0->0.5 . </summary>
         public float WhiteLight = 1.0f;
@@ -32,13 +38,9 @@ namespace Retouch_Photo2.Adjustments.Models
         /// <summary>
         /// Construct a brightness-adjustment.
         /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public BrightnessAdjustment(XElement element) : this() => this.Load(element);
-        /// <summary>
-        /// Construct a brightness-adjustment.
-        /// </summary>
         public BrightnessAdjustment()
         {
+            this.Text = BrightnessAdjustment.BrightnessPage.Text;
         }
 
 
@@ -48,7 +50,23 @@ namespace Retouch_Photo2.Adjustments.Models
             this.WhiteDark = 1.0f;
             this.BlackLight = 0.0f;
             this.BlackDark = 0.0f;
+
+            if (BrightnessAdjustment.BrightnessPage.Adjustment==this)
+            {
+                BrightnessAdjustment.BrightnessPage.Follow(this);
+            }
         }
+        public void Follow()
+        {
+            BrightnessAdjustment.BrightnessPage.Adjustment = this;
+            BrightnessAdjustment.BrightnessPage.Follow(this);
+        }
+        public void Close()
+        {
+            BrightnessAdjustment.BrightnessPage.Adjustment = null;
+        }
+
+
         public IAdjustment Clone()
         {
             return new BrightnessAdjustment
@@ -59,6 +77,7 @@ namespace Retouch_Photo2.Adjustments.Models
                 BlackDark = this.BlackDark,
             };
         }
+
 
         public XElement Save()
         {
@@ -78,6 +97,7 @@ namespace Retouch_Photo2.Adjustments.Models
             this.BlackLight = (float)element.Attribute("BlackLight");
             this.BlackDark = (float)element.Attribute("BlackDark");
         }
+
 
         public ICanvasImage GetRender(ICanvasImage image)
         {

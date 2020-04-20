@@ -13,7 +13,7 @@
     <Grid>
 
         <Canvas>
-            <Border x:Name="_IndicatorBorder" MinWidth="50" Height="40"/>
+            <Border x:Name="_IndicatorBorder" MinWidth="50" Height="40" />
         </Canvas>
 
         <ScrollViewer

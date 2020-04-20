@@ -106,27 +106,6 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Buttons\DirectionalBlurButton.xaml.cs">
-      <DependentUpon>DirectionalBlurButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Buttons\EmbossButton.xaml.cs">
-      <DependentUpon>EmbossButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Buttons\GaussianBlurButton.xaml.cs">
-      <DependentUpon>GaussianBlurButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Buttons\OuterShadowButton.xaml.cs">
-      <DependentUpon>OuterShadowButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Buttons\OutlineButton.xaml.cs">
-      <DependentUpon>OutlineButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Buttons\SharpenButton.xaml.cs">
-      <DependentUpon>SharpenButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Buttons\StraightenButton.xaml.cs">
-      <DependentUpon>StraightenButton.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Icons\SharpenIcon.xaml.cs">
       <DependentUpon>SharpenIcon.xaml</DependentUpon>
     </Compile>
@@ -156,36 +135,6 @@
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EffectButtons\IEffectButton.cs" />
-    <Compile Include="EffectPages\IEffectPage.cs" />
-    <Compile Include="Models\DirectionalBlurEffect.cs" />
-    <Compile Include="Models\EmbossEffect.cs" />
-    <Compile Include="Models\GaussianBlurEffect.cs" />
-    <Compile Include="Models\OuterShadowEffect.cs" />
-    <Compile Include="Models\OutlineEffect.cs" />
-    <Compile Include="Models\SharpenEffect.cs" />
-    <Compile Include="Models\StraightenEffect.cs" />
-    <Compile Include="Pages\DirectionalBlurPage.xaml.cs">
-      <DependentUpon>DirectionalBlurPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\EmbossPage.xaml.cs">
-      <DependentUpon>EmbossPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\GaussianBlurPage.xaml.cs">
-      <DependentUpon>GaussianBlurPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\OuterShadowPage.xaml.cs">
-      <DependentUpon>OuterShadowPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\OutlinePage.xaml.cs">
-      <DependentUpon>OutlinePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\SharpenPage.xaml.cs">
-      <DependentUpon>SharpenPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\StraightenPage.xaml.cs">
-      <DependentUpon>StraightenPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="EffectType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XMLs\XML.EffectManager.cs" />
@@ -203,34 +152,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Buttons\DirectionalBlurButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Buttons\EmbossButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Buttons\GaussianBlurButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Buttons\OuterShadowButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Buttons\OutlineButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Buttons\SharpenButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Buttons\StraightenButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Icons\DirectionalBlurIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -266,34 +187,6 @@
     <Page Include="Icon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\DirectionalBlurPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\EmbossPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\GaussianBlurPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\OuterShadowPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\OutlinePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\SharpenPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\StraightenPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

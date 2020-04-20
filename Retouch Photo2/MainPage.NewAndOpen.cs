@@ -24,14 +24,16 @@ namespace Retouch_Photo2
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        
+        private string Untitled = "Untitled";
+
         /// <summary>
         /// New from size.
         /// </summary>
         /// <param name="pixels"> The bitmap size. </param>
         private void NewFromSize(BitmapSize pixels)
         {
-            string name = this.RenameByRecursive("Untitled");
+            string untitled = this.Untitled;
+            string name = this.RenameByRecursive(untitled);
             int width = (int)pixels.Width;
             int height = (int)pixels.Height;
                 
@@ -77,13 +79,13 @@ namespace Retouch_Photo2
                 await FileUtil.DeleteAllInTemporaryFolder();
                 await FileUtil.ExtractZipFile(projectViewItem.Photo2pkFilePath);
 
-                //Load all images. 
-                IEnumerable<ImageRe> imageRes = FileUtil.LoadImageResFile();
-                ImageRe.Instances.Clear();
-                foreach (ImageRe imageRe in imageRes)
+                //Load all photos. 
+                IEnumerable<Photo> photos = FileUtil.LoadPhotoFile();
+                Photo.Instances.Clear();
+                foreach (Photo p in photos)
                 {
-                    await FileUtil.ConstructImageReAndPushInstances(this.ViewModel.CanvasDevice, imageRe);
-                    ImageRe.Instances.Add(imageRe);
+                    await FileUtil.ConstructPhotoAndPushInstances(this.ViewModel.CanvasDevice, p);
+                    Photo.Instances.Add(p);
                 }
             }
 
@@ -103,24 +105,24 @@ namespace Retouch_Photo2
         /// </summary>
         /// <param name="pixels"> The picker locationId. </param>
         private async Task NewFromPicture(PickerLocationId location)
-        {            
-            //ImageRe
+        {
+            //Photo
             StorageFile copyFile = await FileUtil.PickAndCopySingleImageFileAsync(location);
-            ImageRe imageRe = await FileUtil.CreateImageReFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
-            ImageRe.DuplicateChecking(imageRe);
+            Photo photo = await FileUtil.CreatePhotoFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
+            Photo.DuplicateChecking(photo);
 
             //Transformer
-            string name = this.RenameByRecursive($"{imageRe.Name}");
-            int width = (int)imageRe.Width;
-            int height = (int)imageRe.Height;
+            string name = this.RenameByRecursive($"{photo.Name}");
+            int width = (int)photo.Width;
+            int height = (int)photo.Height;
             Transformer transformerSource = new Transformer(width, height, Vector2.Zero);
 
             //ImageLayer 
-            ImageStr imageStr = imageRe.ToImageStr();
+            Photocopier photocopier = photo.ToPhotocopier();
             ImageLayer imageLayer = new ImageLayer
             {
                 TransformManager = new TransformManager(transformerSource),
-                StyleManager = new StyleManager(transformerSource, transformerSource, imageStr)
+                StyleManager = new StyleManager(transformerSource, transformerSource, photocopier)
             };
 
             //Project

@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Layers
 
                 element.Add(new XElement("Name", layer.Name));
                 element.Add(new XElement("Opacity", layer.Opacity));
-                element.Add(new XElement("BlendType", layer.BlendType));
+                element.Add(Retouch_Photo2.Blends.XML.SaveBlendType("BlendType", layer.BlendType));
 
                 element.Add(new XElement("Visibility", layer.Visibility));
                 element.Add(new XElement("TagType", layer.TagType));

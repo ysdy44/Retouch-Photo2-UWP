@@ -4,6 +4,7 @@ using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers.Models
@@ -26,7 +27,7 @@ namespace Retouch_Photo2.Layers.Models
             base.Control = new LayerControl(this)
             {
                 Icon = new GroupIcon(),
-                Text = "Group",
+                Text = this.ConstructStrings(),
             };
         }
         
@@ -79,9 +80,17 @@ namespace Retouch_Photo2.Layers.Models
 
         public void SaveWith(XElement element)
         {
-            element.Add( new XElement("GroupLayer"));
+            element.Add(new XElement("GroupLayer"));
         }
-        //public void Load(XElement element) { }
+        public void Load(XElement element) { }
+
+        //Strings
+        private string ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            return resource.GetString("/Layers/Group");
+        }
 
     }
 }

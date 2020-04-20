@@ -10,6 +10,10 @@ namespace Retouch_Photo2.Elements
     {
 
         //@Content
+        /// <summary> WidthTextBlock's Text. </summary>
+        public string WidthText { get => this.WidthTextBlock.Text; set => this.WidthTextBlock.Text = value; }
+        /// <summary> HeightTextBlock's Text. </summary>
+        public string HeightText { get => this.HeightTextBlock.Text; set => this.HeightTextBlock.Text = value; }
         /// <summary> Size. </summary>
         public BitmapSize Size => new BitmapSize()
         {

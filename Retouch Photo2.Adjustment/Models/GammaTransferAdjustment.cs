@@ -1,6 +1,7 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments.Icons;
+using Retouch_Photo2.Adjustments.Pages;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
 
@@ -11,11 +12,14 @@ namespace Retouch_Photo2.Adjustments.Models
     /// </summary>
     public class GammaTransferAdjustment : IAdjustment
     {
+        //@Static
+        public static readonly GammaTransferPage GammaTransferPage = new GammaTransferPage();
 
         public AdjustmentType Type => AdjustmentType.GammaTransfer;
         public FrameworkElement Icon { get; } = new GammaTransferIcon();
         public Visibility PageVisibility => Visibility.Visible;
-
+        public IAdjustmentPage Page => GammaTransferAdjustment.GammaTransferPage;
+        public string Text { get; private set; }
 
         public bool ClampOutput= false;
 
@@ -44,13 +48,9 @@ namespace Retouch_Photo2.Adjustments.Models
         /// <summary>
         /// Construct a gammaTransfer-adjustment.
         /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public GammaTransferAdjustment(XElement element) : this() => this.Load(element);
-        /// <summary>
-        /// Construct a gammaTransfer-adjustment.
-        /// </summary>
         public GammaTransferAdjustment()
         {
+            this.Text = GammaTransferAdjustment.GammaTransferPage.Text;
         }
 
 
@@ -77,7 +77,23 @@ namespace Retouch_Photo2.Adjustments.Models
             this.BlueOffset = 0;
             this.BlueExponent = 1;
             this.BlueAmplitude = 1;
+
+            if (GammaTransferAdjustment.GammaTransferPage.Adjustment == this)
+            {
+                GammaTransferAdjustment.GammaTransferPage.Follow(this);
+            }
         }
+        public void Follow()
+        {
+            GammaTransferAdjustment.GammaTransferPage.Adjustment = this;
+            GammaTransferAdjustment.GammaTransferPage.Follow(this);
+        }
+        public void Close()
+        {
+            GammaTransferAdjustment.GammaTransferPage.Adjustment = null;
+        }
+        
+
         public IAdjustment Clone()
         {
             return new GammaTransferAdjustment
@@ -105,6 +121,7 @@ namespace Retouch_Photo2.Adjustments.Models
                 BlueAmplitude = this.BlueAmplitude,
             };
         }
+
 
         public XElement Save()
         {
@@ -196,6 +213,7 @@ namespace Retouch_Photo2.Adjustments.Models
                 this.BlueAmplitude = (float)element.Attribute("BlueAmplitude");
             }
         }
+
 
         public ICanvasImage GetRender(ICanvasImage image)
         {

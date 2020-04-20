@@ -106,22 +106,15 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MenuButtons\MenuButton.xaml.cs">
-      <DependentUpon>MenuButton.xaml</DependentUpon>
+    <Compile Include="Icons\CharacterIcon.xaml.cs">
+      <DependentUpon>CharacterIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="IMenu.cs" />
-    <Compile Include="MenuButtons\IMenuButton.cs" />
-    <Compile Include="MenuLayouts\IMenuLayout.cs" />
-    <Compile Include="MenuBase.cs" />
-    <Compile Include="MenuButtons\MenuButtonType.cs" />
-    <Compile Include="MenuLayouts\MenuLayout.xaml.cs">
-      <DependentUpon>MenuLayout.xaml</DependentUpon>
+    <Compile Include="MenuButtons\MenuExpander.xaml.cs">
+      <DependentUpon>MenuExpander.xaml</DependentUpon>
     </Compile>
     <Compile Include="MenuHelper.cs" />
     <Compile Include="MenuState.cs" />
-    <Compile Include="MenuTitles\MenuTitle.xaml.cs">
-      <DependentUpon>MenuTitle.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MenuType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.Menus.rd.xml" />
@@ -138,17 +131,13 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="MenuButtons\MenuButton.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Icons\CharacterIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="MenuLayouts\MenuLayout.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="MenuButtons\MenuExpander.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MenuTitles\MenuTitle.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup />

@@ -17,20 +17,25 @@ namespace Retouch_Photo2.Adjustments
         public static IAdjustment CreateAdjustment(XElement element)
         {
             string type = element.Name.LocalName;
-
+            IAdjustment adjustment = XML._createAdjustment(type);
+            adjustment.Load(element);
+            return adjustment;
+        }
+        private static IAdjustment _createAdjustment(string type)
+        {
             switch (type)
             {
                 case "Gray": return new GrayAdjustment();
                 case "Invert": return new InvertAdjustment();
-                case "Exposure": return new ExposureAdjustment(element);
-                case "Brightness": return new BrightnessAdjustment(element);
-                case "Saturation": return new SaturationAdjustment(element);
-                case "HueRotation": return new HueRotationAdjustment(element);
-                case "Contrast": return new ContrastAdjustment(element);
-                case "Temperature": return new TemperatureAdjustment(element);
-                case "HighlightsAndShadows": return new HighlightsAndShadowsAdjustment(element);
-                case "GammaTransfer": return new GammaTransferAdjustment(element);
-                case "Vignette": return new VignetteAdjustment(element);
+                case "Exposure": return new ExposureAdjustment();
+                case "Brightness": return new BrightnessAdjustment();
+                case "Saturation": return new SaturationAdjustment();
+                case "HueRotation": return new HueRotationAdjustment();
+                case "Contrast": return new ContrastAdjustment();
+                case "Temperature": return new TemperatureAdjustment();
+                case "HighlightsAndShadows": return new HighlightsAndShadowsAdjustment();
+                case "GammaTransfer": return new GammaTransferAdjustment();
+                case "Vignette": return new VignetteAdjustment();
                 default: return new GrayAdjustment();
             }
         }

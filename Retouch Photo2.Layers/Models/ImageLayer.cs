@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers.Models
@@ -37,7 +38,7 @@ namespace Retouch_Photo2.Layers.Models
             base.Control = new LayerControl(this)
             {
                 Icon = new ImageIcon(),
-                Text = "Image",
+                Text = this.ConstructStrings(),
             };
         }
 
@@ -64,12 +65,16 @@ namespace Retouch_Photo2.Layers.Models
             LayerBase.CopyWith(resourceCreator, imageLayer, this);
             return imageLayer;
         }
-        
-        public void SaveWith(XElement element)
+
+        public void SaveWith(XElement element) { }
+        public void Load(XElement element) { }
+
+        //Strings
+        private string ConstructStrings()
         {
-        }
-        public void Load(XElement element)
-        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            return resource.GetString("/Layers/Image");
         }
 
     }

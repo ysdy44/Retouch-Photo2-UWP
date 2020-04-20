@@ -8,6 +8,7 @@
         /// <summary> Normal. </summary>
         None,
 
+
         /// <summary> Cursor tool. </summary>
         Cursor,
         /// <summary> Drag and move the canvas. </summary>
@@ -36,6 +37,10 @@
         Acrylic,
         /// <summary> Vector crop tool. </summary>
         Crop,
+
+
+        /// <summary> More second geometry. </summary>
+        More,
 
 
         //Geometry1

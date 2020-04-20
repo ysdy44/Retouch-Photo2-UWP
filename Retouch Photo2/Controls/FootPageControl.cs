@@ -1,6 +1,5 @@
-﻿using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Tools;
-using Retouch_Photo2.Tools.Pages;
+﻿using Retouch_Photo2.Tools;
+using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using System.Linq;
 using Windows.UI.Xaml;
@@ -19,8 +18,8 @@ namespace Retouch_Photo2.Controls
         
         //@VisualState
         bool _isLoaded;
-        private IToolPage toolPage = new NonePage();
-        public IToolPage ToolPage 
+        private ITool toolPage = new NoneTool();
+        public ITool ToolPage 
         {
             get => this.toolPage ;
             set
@@ -28,15 +27,15 @@ namespace Retouch_Photo2.Controls
                 if (value == null) return;
 
                 //The current page becomes the active page.
-                IToolPage oldToolPage = this.toolPage ;
+                ITool oldToolPage = this.toolPage ;
                 oldToolPage.OnNavigatedFrom();
 
                 //The current page does not become an active page.
-                IToolPage newToolPage = value;
+                ITool newToolPage = value;
                 newToolPage.OnNavigatedTo();
 
                 this.Content = null;
-                this.Content = value.Self;
+                this.Content = value.Page;
                 this.toolPage  = value;
             }
         }
@@ -116,8 +115,10 @@ namespace Retouch_Photo2.Controls
         }
 
 
-        private IToolPage GetPage(ITool tool, ListViewSelectionMode mode, string type)
+        private ITool GetPage(ITool tool, ListViewSelectionMode mode, string type)
         {
+            return tool;//@Debug:临时返回，建议删掉
+            
             if (tool == null) return null;
 
             if (tool.Type == ToolType.Cursor)
@@ -127,23 +128,21 @@ namespace Retouch_Photo2.Controls
                     //Tool
                     ToolType toolType = this.LayerToTool(type);
                     ITool layerToTool = this.TipViewModel.Tools.FirstOrDefault(e => e != null && e.Type == toolType);
-                    if (layerToTool != null) return layerToTool.Page;
+                    if (layerToTool != null) return layerToTool;
 
                     //Cursor
                     ITool cursorTool = this.TipViewModel.Tools.FirstOrDefault();
                     if (layerToTool == null) return null;
-                    return cursorTool.Page;
+                    return cursorTool;
                 }
             }
 
-            return tool.Page;
+            return tool;
         }
 
 
         private ToolType LayerToTool(string type)
         {
-            //@Debug:临时返回，建议删掉
-            return ToolType.None;
             switch (type)
             {
                 //Geometry0

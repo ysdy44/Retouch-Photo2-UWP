@@ -1,0 +1,81 @@
+﻿<Page
+    x:Class="Retouch_Photo2.Tools.Models.BrushTool"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hSVColorPickers="using:HSVColorPickers"
+    xmlns:brushs="using:Retouch_Photo2.Brushs"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="400"
+    >
+
+
+    <Page.Resources>
+
+        <!--Flyout-->
+        <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <hSVColorPickers:ColorPicker x:Name="ColorPicker" Width="222" Background="Transparent" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" />
+        </Flyout>
+        <Flyout x:Name="StopsFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <brushs:StopsPicker x:Name="StopsPicker" Width="320"/>
+        </Flyout>
+
+        <!--Storyboard-->
+        <Storyboard x:Name="EaseStoryboard">
+            <ColorAnimation Duration="1000" From="{ThemeResource SystemBaseHighColor}" To="{ThemeResource AppBorderBrushColor}" Storyboard.TargetProperty="Color" Storyboard.TargetName="BrushTypeBorderBorderBrush" d:IsOptimized="True">
+                <ColorAnimation.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </ColorAnimation.EasingFunction>
+            </ColorAnimation>
+        </Storyboard>
+
+    </Page.Resources>
+
+
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+        <StackPanel Orientation="Horizontal">
+
+            <TextBlock x:Name="FillOrStrokeTextBlock" Style="{StaticResource AppTextBlock}"/>
+            <Border Style="{StaticResource AppRoundedBorderStyle}">
+                <ComboBox x:Name="FillOrStrokeComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
+                  SelectedIndex="{x:Bind FillOrStrokeToIndexConverter(SelectionViewModel.FillOrStroke),Mode=OneWay}" 
+                  >
+                    <ComboBoxItem x:Name="FillComboBoxItem"/>
+                    <ComboBoxItem x:Name="StrokeComboBoxItem"/>
+                </ComboBox>
+            </Border>
+
+            <ContentControl Width="4"/>
+
+            <TextBlock x:Name="BrushTypeTextBlock" Style="{StaticResource AppTextBlock}"/>
+            <Border Style="{StaticResource AppRoundedBorderStyle}">
+                <Border.BorderBrush>
+                    <SolidColorBrush x:Name="BrushTypeBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
+                </Border.BorderBrush>
+                <ComboBox x:Name="BrushTypeComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
+                  SelectedIndex="{x:Bind BrushTypeToIndexConverter(SelectionViewModel.BrushType),Mode=OneWay}" 
+                 >
+                    <ComboBoxItem x:Name="NoneComboBoxItem"/>
+                    <ComboBoxItem x:Name="ColorComboBoxItem"/>
+                    <ComboBoxItem x:Name="LinearComboBoxItem"/>
+                    <ComboBoxItem x:Name="RadialComboBoxItem"/>
+                    <ComboBoxItem x:Name="EllipticalComboBoxItem"/>
+                    <ComboBoxItem x:Name="ImageComboBoxItem"/>
+                </ComboBox>
+            </Border>
+
+            <ContentControl Width="4"/>
+
+            <TextBlock x:Name="BrushTextBlock" Style="{StaticResource AppTextBlock}"/>
+            <brushs:ShowControl x:Name="ShowControl" 
+                                 Color="{x:Bind SelectionViewModel.Color,Mode=OneWay}"
+                                 BrushType="{x:Bind SelectionViewModel.BrushType,Mode=OneWay}"
+                                 BrushArray="{x:Bind SelectionViewModel.BrushArray,Mode=OneWay}"
+                                 />
+
+        </StackPanel>
+    </ScrollViewer>
+
+</Page>

@@ -9,7 +9,7 @@ namespace Retouch_Photo2.Effects
         /// <summary> Viewbox's icon. </summary>
         public UIElement Icon { get => this.Viewbox.Child; set => this.Viewbox.Child = value; }
         /// <summary> TextBlock' text. </summary>
-        public string Label { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
+        public string Text { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
         /// <summary> EffectButton' ToggleSwitch. </summary>
         public ToggleSwitch ToggleSwitch => this._ToggleSwitch;
 

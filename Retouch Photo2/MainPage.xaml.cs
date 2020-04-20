@@ -23,11 +23,12 @@ namespace Retouch_Photo2
 
         ObservableCollection<ProjectViewItem> ProjectViewItems = new ObservableCollection<ProjectViewItem>();
 
-                       
+
         //@Construct
         public MainPage()
         {
             this.InitializeComponent();
+            this.ConstructStrings();
             this.ConstructInitialControl();
             this.ConstructSelectHead();
 
@@ -49,7 +50,7 @@ namespace Retouch_Photo2
             this.ConstructPicturesControl();
             this.PicturesButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Pictures;
 
-            this.RenameCancelButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Main;
+            this.RenameCloseButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Main;
             this.RenameButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Rename;
             this.RenameDialog.CloseButton.Click += (sender, args) => this.HideRenameDialog();
 
@@ -75,7 +76,7 @@ namespace Retouch_Photo2
                     case MainPageState.Rename:
                         this.ShowRenameDialog(item);
                         break;
-                        
+
                     case MainPageState.Delete:
                     case MainPageState.Duplicate:
                         item.SwitchState();
@@ -86,7 +87,7 @@ namespace Retouch_Photo2
                         break;
                 }
             };
-            
+
         }
 
         //The current page becomes the active page
@@ -98,6 +99,6 @@ namespace Retouch_Photo2
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
         }
-        
+
     }
 }

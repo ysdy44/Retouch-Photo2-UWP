@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Adjustments.Pages
@@ -9,57 +10,55 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// </summary>
     public sealed partial class TemperaturePage : IAdjustmentPage
     {
+        public TemperatureAdjustment Adjustment;
 
-        public TemperatureAdjustment TemperatureAdjustment;
-
+        //@Content
         public AdjustmentType Type { get; } = AdjustmentType.Temperature;
         public FrameworkElement Icon { get; } = new TemperatureIcon();
-        public FrameworkElement Page => this;
-               
+        public FrameworkElement Self => this;
+        public string Text { get; private set; }
+
         //@Construct
         public TemperaturePage()
         {
             this.InitializeComponent();
+            this.ConstructStrings();
 
             this.TemperatureSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.TemperatureAdjustment == null) return;
-                this.TemperatureAdjustment.Temperature = (float)(value / 100);
+                if (this.Adjustment == null) return;
+                this.Adjustment.Temperature = (float)(value / 100);
                 AdjustmentManager.Invalidate?.Invoke();
             };
             this.TintSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.TemperatureAdjustment == null) return;
-                this.TemperatureAdjustment.Tint = (float)(value / 100);
+                if (this.Adjustment == null) return;
+                this.Adjustment.Tint = (float)(value / 100);
                 AdjustmentManager.Invalidate?.Invoke();
             };
         }
 
-        
+
         public IAdjustment GetNewAdjustment() => new TemperatureAdjustment();
-        public void SetAdjustment(IAdjustment value)
-        {
-            if (value is TemperatureAdjustment adjustment)
-            {
-                this.TemperatureAdjustment = adjustment;
-                this.Invalidate(adjustment);
-            }
-        }
 
-        public void Close() => this.TemperatureAdjustment = null;
-        public void Reset()
-        {
-            if (this.TemperatureAdjustment == null) return;
-
-            this.TemperatureAdjustment.Reset();
-            this.Invalidate(this.TemperatureAdjustment);
-        }
-
-        public void Invalidate(TemperatureAdjustment adjustment)
+        public void Follow(TemperatureAdjustment adjustment)
         {
             this.TemperatureSlider.Value = adjustment.Temperature * 100;
             this.TintSlider.Value = adjustment.Tint * 100;
         }
+
+
+        //Strings
+        public void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Text = resource.GetString("/Adjustments/Temperature");
+
+            this.TemperatureTextBlock.Text = resource.GetString("/Adjustments/Temperature_Temperature");
+            this.TintTextBlock.Text = resource.GetString("/Adjustments/Temperature_Tint");
+        }
+
     }
 }
 

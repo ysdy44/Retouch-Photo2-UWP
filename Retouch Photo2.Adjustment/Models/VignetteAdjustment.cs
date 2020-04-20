@@ -1,6 +1,7 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments.Icons;
+using Retouch_Photo2.Adjustments.Pages;
 using System.Xml.Linq;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -12,11 +13,15 @@ namespace Retouch_Photo2.Adjustments.Models
     /// </summary>
     public class VignetteAdjustment : IAdjustment
     {
+        //@Static
+        public static readonly VignettePage VignettePage = new VignettePage();
 
+        //@Content
         public AdjustmentType Type => AdjustmentType.Vignette;
         public FrameworkElement Icon { get; } = new VignetteIcon();
         public Visibility PageVisibility => Visibility.Visible;
-
+        public IAdjustmentPage Page => VignetteAdjustment.VignettePage;
+        public string Text { get; private set; }
 
         /// <summary> Specifies the size of the vignette region as a percentage of the full image. </summary>
         public float Amount = 0.0f;
@@ -28,15 +33,11 @@ namespace Retouch_Photo2.Adjustments.Models
 
         //@Construct
         /// <summary>
-        /// Construct a vignette-adjustment.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public VignetteAdjustment(XElement element) : this() => this.Load(element);
-        /// <summary>
-        /// Construct a vignette-adjustment.
+        /// Construct a Vignette-adjustment.
         /// </summary>
         public VignetteAdjustment()
         {
+            this.Text = VignetteAdjustment.VignettePage.Text;
         }
 
 
@@ -45,7 +46,23 @@ namespace Retouch_Photo2.Adjustments.Models
             this.Amount = 0.0f;
             this.Curve = 0.0f;
             this.Color = Colors.Black;
+
+            if (VignetteAdjustment.VignettePage.Adjustment == this)
+            {
+                VignetteAdjustment.VignettePage.Follow(this);
+            }
         }
+        public void Follow()
+        {
+            VignetteAdjustment.VignettePage.Adjustment = this;
+            VignetteAdjustment.VignettePage.Follow(this);
+        }
+        public void Close()
+        {
+            VignetteAdjustment.VignettePage.Adjustment = null;
+        }
+
+
         public IAdjustment Clone()
         {
             return new VignetteAdjustment
@@ -55,6 +72,7 @@ namespace Retouch_Photo2.Adjustments.Models
                 Color = this.Color,
             };
         }
+
 
         public XElement Save()
         {
@@ -72,6 +90,7 @@ namespace Retouch_Photo2.Adjustments.Models
             this.Curve = (float)element.Attribute("Curve");
             this.Color = FanKit.Transformers.XML.LoadColor(element.Element("Color"));
         }
+
 
         public ICanvasImage GetRender(ICanvasImage image)
         {

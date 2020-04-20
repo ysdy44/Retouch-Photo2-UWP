@@ -115,6 +115,9 @@
       <DependentUpon>FormatComboBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\FormatType.cs" />
+    <Compile Include="Controls\RadiusAnimaIcon.xaml.cs">
+      <DependentUpon>RadiusAnimaIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SizePicker.xaml.cs">
       <DependentUpon>SizePicker.xaml</DependentUpon>
     </Compile>
@@ -124,11 +127,11 @@
     <Compile Include="MainPages\AppbarAccentButton.xaml.cs">
       <DependentUpon>AppbarAccentButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPages\AppbarAccentCancelButton.xaml.cs">
-      <DependentUpon>AppbarAccentCancelButton.xaml</DependentUpon>
+    <Compile Include="MainPages\AppbarAccentCloseButton.xaml.cs">
+      <DependentUpon>AppbarAccentCloseButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPages\AppbarAccentOKButton.xaml.cs">
-      <DependentUpon>AppbarAccentOKButton.xaml</DependentUpon>
+    <Compile Include="MainPages\AppbarAccentPrimaryButton.xaml.cs">
+      <DependentUpon>AppbarAccentPrimaryButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExpandAppbars\ExpandAppbar.xaml.cs">
       <DependentUpon>ExpandAppbar.xaml</DependentUpon>
@@ -151,9 +154,9 @@
     <Compile Include="IconButtons\IconRoundedBorderButton.xaml.cs">
       <DependentUpon>IconRoundedBorderButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Images\ImageRe.cs" />
-    <Compile Include="Images\ImageRe.Instance.cs" />
-    <Compile Include="Images\ImageStr.cs" />
+    <Compile Include="Photos\Photo.cs" />
+    <Compile Include="Photos\Photo.Instance.cs" />
+    <Compile Include="Photos\Photocopier.cs" />
     <Compile Include="MainPages\MainLayout.xaml.cs">
       <DependentUpon>MainLayout.xaml</DependentUpon>
     </Compile>
@@ -186,9 +189,6 @@
       <DependentUpon>MainPageButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPages\MainPageState.cs" />
-    <Compile Include="RectangleSeparator.xaml.cs">
-      <DependentUpon>RectangleSeparator.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SettingPages\AdaptiveWidthGrid.xaml.cs">
       <DependentUpon>AdaptiveWidthGrid.xaml</DependentUpon>
     </Compile>
@@ -201,8 +201,8 @@
     <Compile Include="SettingPages\PhoneLayout.xaml.cs">
       <DependentUpon>PhoneLayout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="XMLs\XML.ImageRe.cs" />
-    <Compile Include="XMLs\XML.ImageStr.cs" />
+    <Compile Include="XMLs\XML.Photo.cs" />
+    <Compile Include="XMLs\XML.Photocopier.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo.Elements.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -234,6 +234,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\RadiusAnimaIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\SizePicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -246,11 +250,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPages\AppbarAccentCancelButton.xaml">
+    <Page Include="MainPages\AppbarAccentCloseButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPages\AppbarAccentOKButton.xaml">
+    <Page Include="MainPages\AppbarAccentPrimaryButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -313,10 +317,6 @@
     <Page Include="MainPages\MainPageButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="RectangleSeparator.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SettingPages\AdaptiveWidthGrid.xaml">
       <Generator>MSBuild:Compile</Generator>

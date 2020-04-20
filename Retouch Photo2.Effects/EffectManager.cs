@@ -11,23 +11,13 @@ namespace Retouch_Photo2.Effects
     /// </summary>
     public class EffectManager
     {
-        //@Static
-        /// <summary>
-        /// Indicates that the contents of the CanvasControl need to be redrawn.
-        /// </summary>
-        /// <param name="mode"> invalidate mode </param>
-        public static void Invalidate(Action<EffectManager> action) => EffectManager.InvalidateAction?.Invoke(action);
-        /// <summary> <see cref = "Action" /> of the <see cref = "EffectManager" />. </summary>
-        public static Action<Action<EffectManager>> InvalidateAction { private get; set; }
-
-
         //GaussianBlur
         public bool GaussianBlur_IsOn;
-        public float GaussianBlur_BlurAmount = 0;
+        public float GaussianBlur_Radius = 0;
 
         //DirectionalBlur
         public bool DirectionalBlur_IsOn;
-        public float DirectionalBlur_BlurAmount = 0;
+        public float DirectionalBlur_Radius = 0;
         public float DirectionalBlur_Angle = 0;
 
         //Sharpen
@@ -85,7 +75,7 @@ namespace Retouch_Photo2.Effects
 
         //Emboss
         public bool Emboss_IsOn;
-        public float Emboss_Amount = 1;
+        public float Emboss_Radius = 1;
         public float Emboss_Angle = 0;
 
         //Straighten
@@ -102,11 +92,11 @@ namespace Retouch_Photo2.Effects
             {
                 //GaussianBlur
                 GaussianBlur_IsOn = this.GaussianBlur_IsOn,
-                GaussianBlur_BlurAmount = this.GaussianBlur_BlurAmount,
+                GaussianBlur_Radius = this.GaussianBlur_Radius,
 
                 //DirectionalBlur
                 DirectionalBlur_IsOn = this.DirectionalBlur_IsOn,
-                DirectionalBlur_BlurAmount = this.DirectionalBlur_BlurAmount,
+                DirectionalBlur_Radius = this.DirectionalBlur_Radius,
                 DirectionalBlur_Angle = this.DirectionalBlur_Angle,
 
                 //Sharpen
@@ -129,7 +119,7 @@ namespace Retouch_Photo2.Effects
 
                 //Emboss
                 Emboss_IsOn = this.Emboss_IsOn,
-                Emboss_Amount = this.Emboss_Amount,
+                Emboss_Radius = this.Emboss_Radius,
                 Emboss_Angle = this.Emboss_Angle,
 
                 //Straighten
@@ -147,7 +137,7 @@ namespace Retouch_Photo2.Effects
                 image = new Microsoft.Graphics.Canvas.Effects.GaussianBlurEffect
                 {
                     Source = image,
-                    BlurAmount = effectManager.GaussianBlur_BlurAmount
+                    BlurAmount = effectManager.GaussianBlur_Radius
                 };
             }
 
@@ -157,7 +147,7 @@ namespace Retouch_Photo2.Effects
                 image = new Microsoft.Graphics.Canvas.Effects.DirectionalBlurEffect
                 {
                     Source = image,
-                    BlurAmount = effectManager.DirectionalBlur_BlurAmount,
+                    BlurAmount = effectManager.DirectionalBlur_Radius,
                     Angle = -effectManager.DirectionalBlur_Angle,
                 };
             }
@@ -216,7 +206,7 @@ namespace Retouch_Photo2.Effects
                 image = new Microsoft.Graphics.Canvas.Effects.EmbossEffect
                 {
                     Source = image,
-                    Amount = effectManager.Emboss_Amount,
+                    Amount = effectManager.Emboss_Radius,
                     Angle = -effectManager.Emboss_Angle,
                 };
             }

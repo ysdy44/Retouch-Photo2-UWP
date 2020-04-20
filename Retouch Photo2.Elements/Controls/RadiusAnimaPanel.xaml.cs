@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Elements
             set { SetValue(ShadowOpacityProperty, value); }
         }
         /// <summary> Identifies the <see cref = "RadiusAnimaPanel.ShadowOpacity" /> dependency property. </summary>
-        public static readonly DependencyProperty ShadowOpacityProperty = DependencyProperty.Register(nameof(ShadowOpacity), typeof(double), typeof(RadiusAnimaPanel), new PropertyMetadata(0.3d));
+        public static readonly DependencyProperty ShadowOpacityProperty = DependencyProperty.Register(nameof(ShadowOpacity), typeof(double), typeof(RadiusAnimaPanel), new PropertyMetadata(0.9d));
 
 
 

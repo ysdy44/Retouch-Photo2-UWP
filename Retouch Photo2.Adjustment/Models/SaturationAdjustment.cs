@@ -1,8 +1,9 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments.Icons;
-using Windows.UI.Xaml;
+using Retouch_Photo2.Adjustments.Pages;
 using System.Xml.Linq;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
@@ -11,10 +12,15 @@ namespace Retouch_Photo2.Adjustments.Models
     /// </summary>
     public class SaturationAdjustment : IAdjustment
     {
+        //@Static
+        public static readonly SaturationPage SaturationPage = new SaturationPage();
 
+        //@Content
         public AdjustmentType Type => AdjustmentType.Saturation;
         public FrameworkElement Icon { get; } = new SaturationIcon();
         public Visibility PageVisibility => Visibility.Visible;
+        public IAdjustmentPage Page => SaturationAdjustment.SaturationPage;
+        public string Text { get; private set; }
 
         /// <summary> Gets or sets the saturation intensity for effect. </summary>
         public float Saturation = 1.0f;
@@ -22,22 +28,34 @@ namespace Retouch_Photo2.Adjustments.Models
 
         //@Construct
         /// <summary>
-        /// Construct a saturation-adjustment.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public SaturationAdjustment(XElement element) : this() => this.Load(element);
-        /// <summary>
-        /// Construct a saturation-adjustment.
+        /// Construct a Saturation-adjustment.
         /// </summary>
         public SaturationAdjustment()
         {
+            this.Text = SaturationAdjustment.SaturationPage.Text;
         }
 
 
         public void Reset()
         {
             this.Saturation = 1.0f;
+
+            if (SaturationAdjustment.SaturationPage.Adjustment == this)
+            {
+                SaturationAdjustment.SaturationPage.Follow(this);
+            }
         }
+        public void Follow()
+        {
+            SaturationAdjustment.SaturationPage.Adjustment = this;
+            SaturationAdjustment.SaturationPage.Follow(this);
+        }
+        public void Close()
+        {
+            SaturationAdjustment.SaturationPage.Adjustment = null;
+        }
+
+
         public IAdjustment Clone()
         {
             return new SaturationAdjustment
@@ -45,6 +63,7 @@ namespace Retouch_Photo2.Adjustments.Models
                 Saturation = this.Saturation,
             };
         }
+
 
         public XElement Save()
         {
@@ -58,6 +77,7 @@ namespace Retouch_Photo2.Adjustments.Models
         {
             this.Saturation = (float)element.Attribute("Saturation");
         }
+
 
         public ICanvasImage GetRender(ICanvasImage image)
         {

@@ -12,6 +12,7 @@ namespace Retouch_Photo2.Tools
         /// <summary> Button's IsSelected. </summary>
         public bool IsSelected
         {
+            get => this._vsIsSelected;
             set
             {
                 if (this._vsIsSelected == value) return;
@@ -64,5 +65,10 @@ namespace Retouch_Photo2.Tools
             this.PointerPressed += (s, e) => this.ClickMode = ClickMode.Press;
             this.PointerExited += (s, e) => this.ClickMode = ClickMode.Release;
         }
+        public ToolSecondButton(object centerContent) : this()
+        {
+            this.ContentPresenter.Content = centerContent;
+        }
+
     }
 }

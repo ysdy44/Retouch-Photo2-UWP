@@ -61,8 +61,8 @@
 
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        
-        
+
+
         <elementMainPages:MainLayout x:Name="MainLayout">
 
             <!--InitialChild-->
@@ -76,18 +76,14 @@
 
                     <StackPanel.Children>
 
-                        <TextBlock HorizontalAlignment="Center" Foreground="{ThemeResource AppText}">
-                            No projects? You could...
-                        </TextBlock>
+                        <TextBlock x:Name="InitialTextBlock" HorizontalAlignment="Center" Foreground="{ThemeResource AppText}"/>
                         <ContentControl Height="6"/>
 
                         <Button x:Name="InitialAddButton" Style="{StaticResource AppTagAccentLineCircleButton}">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xE109;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 <ContentControl Width="8"/>
-                                <TextBlock VerticalAlignment="Center">
-                                    Add New Project
-                                </TextBlock>
+                                <TextBlock x:Name="InitialAddTextBlock" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
 
@@ -97,9 +93,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 <ContentControl Width="8"/>
-                                <TextBlock VerticalAlignment="Center">
-                                    New Project From Pictures
-                                </TextBlock>
+                                <TextBlock x:Name="InitialPhotoTextBlock" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
 
@@ -107,9 +101,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xEC4E;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 <ContentControl Width="8"/>
-                                <TextBlock VerticalAlignment="Center">
-                                    New Project From Destop
-                                </TextBlock>
+                                <TextBlock x:Name="InitialDestopTextBlock" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
 
@@ -137,13 +129,12 @@
                         <FontIcon FontSize="20" Glyph="&#xE117;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
                     </Button>
 
-                    <TextBlock Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
+                    <TextBlock x:Name="TitleTextBlock" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
                         <TextBlock.Transitions>
                             <TransitionCollection>
                                 <EntranceThemeTransition FromHorizontalOffset="50" FromVerticalOffset="0"/>
                             </TransitionCollection>
                         </TextBlock.Transitions>
-                        Retouh Photo2
                     </TextBlock>
 
                     <Button x:Name="SettingButton" Grid.Column="2" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
@@ -173,8 +164,8 @@
 
                 </Grid>
             </elementMainPages:MainLayout.SelectChild>
-            
-            
+
+
             <!--MainChild-->
             <elementMainPages:MainLayout.MainChild>
                 <StackPanel Orientation="Horizontal" Margin="8,0" HorizontalAlignment="Center">
@@ -183,18 +174,12 @@
                         <elementMainPages:AppbarAccentButton.CenterContent>
                             <FontIcon Glyph="&#xE109;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </elementMainPages:AppbarAccentButton.CenterContent>
-                        <elementMainPages:AppbarAccentButton.Text>
-                            Add
-                        </elementMainPages:AppbarAccentButton.Text>
                     </elementMainPages:AppbarAccentButton>
 
                     <elementMainPages:AppbarAccentButton x:Name="PicturesButton">
                         <elementMainPages:AppbarAccentButton.CenterContent>
                             <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </elementMainPages:AppbarAccentButton.CenterContent>
-                        <elementMainPages:AppbarAccentButton.Text>
-                            Pictures
-                        </elementMainPages:AppbarAccentButton.Text>
                     </elementMainPages:AppbarAccentButton>
 
                     <elements:ExpandAppBarSeparator/>
@@ -203,9 +188,6 @@
                         <elementMainPages:AppbarAccentButton.CenterContent>
                             <FontIcon Glyph="&#xE104;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </elementMainPages:AppbarAccentButton.CenterContent>
-                        <elementMainPages:AppbarAccentButton.Text>
-                            Rename
-                        </elementMainPages:AppbarAccentButton.Text>
                     </elementMainPages:AppbarAccentButton>
 
                     <elements:ExpandAppBarSeparator/>
@@ -214,18 +196,12 @@
                         <elementMainPages:AppbarAccentButton.CenterContent>
                             <FontIcon Glyph="&#xE107;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </elementMainPages:AppbarAccentButton.CenterContent>
-                        <elementMainPages:AppbarAccentButton.Text>
-                            Delete
-                        </elementMainPages:AppbarAccentButton.Text>
                     </elementMainPages:AppbarAccentButton>
 
                     <elementMainPages:AppbarAccentButton x:Name="DuplicateButton">
                         <elementMainPages:AppbarAccentButton.CenterContent>
                             <FontIcon Glyph="&#xE16F;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </elementMainPages:AppbarAccentButton.CenterContent>
-                        <elementMainPages:AppbarAccentButton.Text>
-                            Duplicate
-                        </elementMainPages:AppbarAccentButton.Text>
                     </elementMainPages:AppbarAccentButton>
 
                 </StackPanel>
@@ -239,23 +215,17 @@
                         <elementMainPages:AppbarAccentButton.CenterContent>
                             <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </elementMainPages:AppbarAccentButton.CenterContent>
-                        <elementMainPages:AppbarAccentButton.Text>
-                            Library
-                        </elementMainPages:AppbarAccentButton.Text>
                     </elementMainPages:AppbarAccentButton>
 
                     <elementMainPages:AppbarAccentButton x:Name="PicturesDestopButton">
                         <elementMainPages:AppbarAccentButton.CenterContent>
                             <FontIcon Glyph="&#xEC4E;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </elementMainPages:AppbarAccentButton.CenterContent>
-                        <elementMainPages:AppbarAccentButton.Text>
-                            Destop
-                        </elementMainPages:AppbarAccentButton.Text>
                     </elementMainPages:AppbarAccentButton>
 
                     <elements:ExpandAppBarSeparator/>
 
-                    <elementMainPages:AppbarAccentCancelButton x:Name="PicturesCancelButton"/>
+                    <elementMainPages:AppbarAccentCloseButton x:Name="PicturesCloseButton"/>
 
                 </StackPanel>
             </elementMainPages:MainLayout.PicturesChild>
@@ -265,16 +235,12 @@
                 <StackPanel Orientation="Horizontal" Margin="8,0">
 
                     <TextBlock Margin="8,2">         
-                        <Run FontWeight="Bold">             
-                            Rename Project           
-                        </Run>            
+                        <Run x:Name="RenameRunTitle" FontWeight="Bold"/>   
                         <LineBreak/>           
-                        <Run FontSize="12" Foreground="{ThemeResource AppText}">             
-                            Select project to be renamed.          
-                        </Run>
+                        <Run x:Name="RenameRunContent" FontSize="12" Foreground="{ThemeResource AppText}"/>
                     </TextBlock>
 
-                    <elementMainPages:AppbarAccentCancelButton x:Name="RenameCancelButton"/>
+                    <elementMainPages:AppbarAccentCloseButton x:Name="RenameCloseButton"/>
 
                 </StackPanel>
             </elementMainPages:MainLayout.RenameChild>
@@ -284,18 +250,14 @@
                 <StackPanel x:Name="DeleteStackPanel" MinWidth="260">
 
                     <TextBlock Margin="8,2">
-                        <Run FontWeight="Bold">
-                            Delete Projects
-                        </Run>
+                        <Run x:Name="DeleteRunTitle" FontWeight="Bold"/>
                         <LineBreak/>
-                        <Run FontSize="12" Foreground="{ThemeResource AppText}">
-                            Select project(s) to be deleted.
-                        </Run>
+                        <Run x:Name="DeleteRunContent" FontSize="12" Foreground="{ThemeResource AppText}"/>
                     </TextBlock>
 
                     <StackPanel Orientation="Horizontal" Margin="8,0" HorizontalAlignment="Right">
-                        <elementMainPages:AppbarAccentOKButton x:Name="DeleteOKButton"/>
-                        <elementMainPages:AppbarAccentCancelButton x:Name="DeleteCancelButton"/>
+                        <elementMainPages:AppbarAccentPrimaryButton x:Name="DeletePrimaryButton"/>
+                        <elementMainPages:AppbarAccentCloseButton x:Name="DeleteCloseButton"/>
                     </StackPanel>
 
                 </StackPanel>
@@ -306,18 +268,14 @@
                 <StackPanel x:Name="DuplicateStackPanel" MinWidth="260">
 
                     <TextBlock Margin="8,2">
-                         <Run FontWeight="Bold">
-                             Dupliate Projects
-                         </Run>
-                         <LineBreak/>
-                         <Run FontSize="12" Foreground="{ThemeResource AppText}">
-                             Select project(s) to be duplicated.
-                         </Run>
+                        <Run x:Name="DuplicateRunTitle" FontWeight="Bold"/>
+                        <LineBreak/>
+                        <Run x:Name="DuplicateRunContent" FontSize="12" Foreground="{ThemeResource AppText}"/>
                     </TextBlock>
 
                     <StackPanel Orientation="Horizontal" Margin="8,0" HorizontalAlignment="Right">
-                        <elementMainPages:AppbarAccentOKButton x:Name="DuplicateOKButton"/>
-                        <elementMainPages:AppbarAccentCancelButton x:Name="DuplicateCancelButton"/>
+                        <elementMainPages:AppbarAccentPrimaryButton x:Name="DuplicatePrimaryButton"/>
+                        <elementMainPages:AppbarAccentCloseButton x:Name="DuplicateCloseButton"/>
                     </StackPanel>
 
                 </StackPanel>
@@ -325,50 +283,26 @@
 
         </elementMainPages:MainLayout>
 
-        
+
         <!--Loading-->
-        <elements:LoadingControl x:Name="LoadingControl" Grid.RowSpan="3" IsActive="False">
-            <elements:LoadingControl.Text>
-                Loading...
-            </elements:LoadingControl.Text>
-        </elements:LoadingControl>
+        <elements:LoadingControl x:Name="LoadingControl" Grid.RowSpan="3" IsActive="False"/>
 
         <!--Dialog-->
         <elementDialog:DialogBase x:Name="RenameDialog" Grid.Row="1" Grid.RowSpan="2">
-            <elementDialog:DialogBase.Title>
-                <TextBlock FontSize="22" Style="{StaticResource SubheaderTextBlockStyle}">
-                    Rename Project
-                </TextBlock>
-            </elementDialog:DialogBase.Title>
             <elementDialog:DialogBase.CenterContent>
                 <StackPanel>
-
                     <ContentControl Height="2"/>
-
-                    <TextBox x:Name="RenameTextBox" Margin="0" VerticalAlignment="Center" BorderThickness="0">
-                        <TextBox.PlaceholderText>
-                            Enter a name here.
-                        </TextBox.PlaceholderText>
-                    </TextBox>
-
-                    <TextBlock x:Name="RenameTipTextBlock" Visibility="Collapsed" FontSize="14" Foreground="{ThemeResource AppText}">                    
-                        The name is already occupied !
-                    </TextBlock>
-
+                    <TextBox x:Name="RenameTextBox" Margin="0" VerticalAlignment="Center" BorderThickness="0"/>
+                    <TextBlock x:Name="RenameTipTextBlock" Visibility="Collapsed" FontSize="14" Foreground="{ThemeResource AppText}"/>
                 </StackPanel>
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>
         <elementDialog:DialogBase x:Name="AddDialog" Grid.Row="1" Grid.RowSpan="2">
-            <elementDialog:DialogBase.Title>
-                <TextBlock FontSize="22" Style="{StaticResource SubheaderTextBlockStyle}">
-                    Add New Project
-                </TextBlock>
-            </elementDialog:DialogBase.Title>
             <elementDialog:DialogBase.CenterContent>
                 <elements:SizePicker x:Name="AddSizePicker"/>
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>
-        
-        
+
+
     </Grid>
 </Page>

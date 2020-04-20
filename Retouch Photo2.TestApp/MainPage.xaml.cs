@@ -35,16 +35,27 @@ namespace Retouch_Photo2.TestApp.Pages
 
         private void Button_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(ImagesPage));
-        }
+            hhhhhhhhhhh.Height = 200;
+         }
 
         private void Button02_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            if (aaaaaa.Parent is ContentControl contentControl)
-            {
-                contentControl.Content = null;
-            }
-                this.Button02.Content = aaaaaa;
+            hhhhhhhhhhh.Height = 900;
+        }
+
+        private void BBBB_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            hhhhhhhhhhh.Visibility = Visibility.Collapsed;
+        }
+
+        private void CCC_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            hhhhhhhhhhh.Visibility = Visibility.Visible;
+        }
+
+        private void hhhhhhhhhhh_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            sssssss.Text = e.NewSize.Height.ToString();
         }
     }
 }

@@ -4,6 +4,7 @@ using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.Menus
@@ -11,7 +12,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Represents a class that calculates the position.
     /// </summary>
-    public class MenuHelper
+    public partial class MenuHelper
     {
 
         /// <summary>
@@ -150,5 +151,83 @@ namespace Retouch_Photo2.Menus
 
             return new Point(X, Y);
         }
+    }
+    
+    /// <summary>
+    /// Represents a class that calculates the position.
+    /// </summary>
+    public static partial class MenuHelper
+    {
+
+        public static void SetMenuState(MenuState value, IMenu menu)
+        {
+            if (value == MenuState.FlyoutShow)
+            {
+                FlyoutPlacementMode placement = menu.PlacementMode;
+                Point flyoutPostion = MenuHelper.GetFlyoutPostion(menu.Button, menu.Layout, placement);
+                Point boundPostion = MenuHelper.GetBoundPostion(flyoutPostion, menu.Layout);
+                MenuHelper.SetOverlayPostion(menu.Layout, boundPostion);
+                menu.Move?.Invoke(); //Delegate
+
+                if (menu.State == MenuState.Hide) menu.Opened?.Invoke(); //Delegate 
+            }
+            else
+            {
+                if (menu.State == MenuState.FlyoutShow) menu.Closed?.Invoke(); //Delegate
+            }
+        }
+
+        public static void ConstructTitleGrid(FrameworkElement titleGrid, IMenu menu)
+        {
+            //Postion 
+            titleGrid.ManipulationMode = ManipulationModes.All;
+            titleGrid.ManipulationStarted += (s, e) =>
+            {
+                if (menu.State == MenuState.FlyoutShow) return;
+
+                menu.Postion = MenuHelper.GetVisualPostion(menu.Layout);
+                menu.Move?.Invoke(); //Delegate
+            };
+            titleGrid.ManipulationDelta += (s, e) =>
+            {
+                if (menu.State == MenuState.FlyoutShow) return;
+
+                Point point = menu.Postion;
+                point.X += e.Delta.Translation.X;
+                point.Y += e.Delta.Translation.Y;
+                menu.Postion = point;
+
+                Point postion2 = MenuHelper.GetBoundPostion(point, menu.Layout);
+                MenuHelper.SetOverlayPostion(menu.Layout, postion2);
+            };
+            titleGrid.ManipulationCompleted += (s, e) =>
+            {
+                menu.Postion = MenuHelper.GetVisualPostion(menu.Layout);
+            };
+        }
+
+
+        public static MenuState GetState(MenuState state)
+        {
+            switch (state)
+            {
+                case MenuState.Hide: return MenuState.FlyoutShow;
+                case MenuState.FlyoutShow: return MenuState.Hide;
+
+                case MenuState.Overlay: return MenuState.OverlayNotExpanded;
+                case MenuState.OverlayNotExpanded: return MenuState.Overlay;
+            }
+            return MenuState.FlyoutShow;
+        }
+        public static MenuState GetState2(MenuState state)
+        {
+            switch (state)
+            {
+                case MenuState.Overlay: return MenuState.OverlayNotExpanded;
+                case MenuState.OverlayNotExpanded: return MenuState.Overlay;
+            }
+            return MenuState.Overlay;
+        }
+
     }
 }

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.UI;
 
@@ -40,7 +41,7 @@ namespace Retouch_Photo2.Layers.Models
             base.Control = new LayerControl(this)
             {
                 Icon = new AcrylicIcon(),
-                Text = "Acrylic",
+                Text = this.ConstructStrings(),
             };
         }   
 
@@ -113,6 +114,14 @@ namespace Retouch_Photo2.Layers.Models
         {
             this.TintOpacity = (float)element.Element("TintOpacity");
             this.BlurAmount = (float)element.Element("BlurAmount");
+        }
+
+        //Strings
+        private string ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            return resource.GetString("/Layers/Acrylic");
         }
 
     }

@@ -6,23 +6,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="50"
-    d:DesignWidth="200"
+    d:DesignWidth="50"
     >
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="36"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <Canvas Width="24" Height="20">
+
+        <Polygon Points="0,10 10,0 12,2 14,0 24,10 14,20 12,18 10,20" StrokeThickness="2" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="White"/>
 
         <Polygon Points="0,10 10,0 12,2 4,10 12,18 10,20" Fill="Gray"/>
         <Polygon Points="4,10 12,2 20,10 12,18" Fill="Chocolate"/>
         <Polygon Points="20,10 12,2 14,0 24,10 14,20 12,18" Fill="OrangeRed"/>
-        
-        <TextBlock Grid.Column="1" VerticalAlignment="Center">
-            Color
-        </TextBlock>
 
-    </Grid>
-    
+    </Canvas>
+
 </UserControl>

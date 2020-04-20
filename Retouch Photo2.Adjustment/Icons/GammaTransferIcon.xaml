@@ -6,29 +6,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="50"
-    d:DesignWidth="200"
+    d:DesignWidth="50"
     >
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="36"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        
-        <Ellipse Width="24" Height="24">
-            <Ellipse.Fill>
-                <LinearGradientBrush StartPoint=" 0,0.5" EndPoint="1,0.5">
-                    <GradientStop Color="#F8906B" Offset="0.2"/>
-                    <GradientStop Color="#5DC8A5" Offset="0.5"/>
-                    <GradientStop Color="#1376F7" Offset="0.8"/>
-                </LinearGradientBrush>
-            </Ellipse.Fill>
-        </Ellipse>
+    <Ellipse Width="24" Height="24">
+        <Ellipse.Fill>
+            <LinearGradientBrush StartPoint=" 0,0.5" EndPoint="1,0.5">
+                <GradientStop Color="#F8906B" Offset="0.2"/>
+                <GradientStop Color="#5DC8A5" Offset="0.5"/>
+                <GradientStop Color="#1376F7" Offset="0.8"/>
+            </LinearGradientBrush>
+        </Ellipse.Fill>
+    </Ellipse>
 
-        <TextBlock Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center">
-            Gamma Transfer
-        </TextBlock>
-        
-    </Grid>
-    
 </UserControl>

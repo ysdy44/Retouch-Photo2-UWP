@@ -23,11 +23,12 @@ namespace Retouch_Photo2
 
         //@Converter
         private FrameworkElement IconConverter(ITool tool) => tool.Icon;
-                
+
         //@Construct
         public DrawPage()
         {
             this.InitializeComponent();
+            this.ConstructStrings();
             this.ConstructTransition();
             this.ConstructToolAndMenu();
 
@@ -38,15 +39,15 @@ namespace Retouch_Photo2
             this.ConstructKeyboardViewModel();
 
 
-            //ImageRes
+            //Photos
             this.DrawLayout.RightAddButton.Tapped += (s, e) =>
             {
                 e.Handled = true;
-                this.Frame.Navigate(typeof(ImageResPage), ImageResPageMode.AddImageLayer);//Navigate   
+                this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.AddImageLayer);//Navigate   
             };
-            Retouch_Photo2.Tools.Pages.ImagePage.Select += () => this.Frame.Navigate(typeof(ImageResPage), ImageResPageMode.ImageToolSelect);//Navigate   
-            Retouch_Photo2.Tools.Pages.ImagePage.Replace += () => this.Frame.Navigate(typeof(ImageResPage), ImageResPageMode.ImageToolReplace);//Navigate   
-            Retouch_Photo2.Tools.Pages.BrushPage.Image += () => this.Frame.Navigate(typeof(ImageResPage), ImageResPageMode.BrushToolImage);//Navigate   
+            Retouch_Photo2.Tools.Models.ImageTool.Select += () => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.ImageToolSelect);//Navigate   
+            Retouch_Photo2.Tools.Models.ImageTool.Replace += () => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.ImageToolReplace);//Navigate   
+            Retouch_Photo2.Tools.Models.BrushTool.Image += () => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.BrushToolImage);//Navigate   
 
             //MoreButton
             Retouch_Photo2.Tools.Elements.MoreTransformButton.Flyout = this.MoreTransformFlyout;
@@ -69,7 +70,7 @@ namespace Retouch_Photo2
 
             //this.UndoButton.Tapped += (s, e) => { };
             //this.RedoButton.Tapped += (s, e) => { };
-            
+
             this.ConstructSetupDialog();
             this.SetupButton.Tapped += (s, e) => this.SetupDialog.Show();
 

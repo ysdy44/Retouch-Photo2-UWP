@@ -103,8 +103,8 @@ namespace Retouch_Photo2
             this.SelectCountRun.Text = $"{count}";
 
             bool isEnable = (count != 0);
-            this.DeleteOKButton.IsEnabled = isEnable;
-            this.DuplicateOKButton.IsEnabled = isEnable;
+            this.DeletePrimaryButton.IsEnabled = isEnable;
+            this.DuplicatePrimaryButton.IsEnabled = isEnable;
         }
 
 

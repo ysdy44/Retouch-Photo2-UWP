@@ -1,0 +1,23 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Menus.Models.ColorMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:menus="using:Retouch_Photo2.Menus"
+    xmlns:hsvColorPicker="using:HSVColorPickers"
+    mc:Ignorable="d"
+    d:DesignWidth="200"
+    d:DesignHeight="400"
+    >
+
+    <menus:MenuExpander x:Name="_Expander">
+        <menus:MenuExpander.MainPage>
+            <hsvColorPicker:ColorPicker x:Name="ColorPicker" 
+                     Width="Auto" Background="Transparent"
+                     Color="{x:Bind SelectionViewModel.Color,Mode=OneWay}"
+                     FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        </menus:MenuExpander.MainPage>
+    </menus:MenuExpander>
+
+</UserControl>

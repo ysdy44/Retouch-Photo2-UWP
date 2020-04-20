@@ -17,7 +17,7 @@ namespace Retouch_Photo2.Tools
 
         private bool StartingFromTransformerMode(Vector2 point, TransformerMode transformerMode)
         {
-            switch (this.CompositeMode)
+            switch (this.MarqueeCompositeMode)
             {
                 case MarqueeCompositeMode.New:
                 case MarqueeCompositeMode.Intersect:

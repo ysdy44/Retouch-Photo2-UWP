@@ -27,33 +27,33 @@ namespace Retouch_Photo2
         }
 
 
-        #region ImageRes: Load & Save
+        #region Photo: Load & Save
 
 
         /// <summary>
-        /// Load <see cref="ImageRe"/>s file from temporary folder.
+        /// Load <see cref="Photo"/>s file from temporary folder.
         /// </summary>
-        /// <returns> The product ImageRes. </returns>
-        public static IEnumerable<ImageRe> LoadImageResFile()
+        /// <returns> The product photos. </returns>
+        public static IEnumerable<Photo> LoadPhotoFile()
         {
             //Create an XDocument object.
-            string path = $"{ApplicationData.Current.TemporaryFolder.Path}/imageRes.xml";
+            string path = $"{ApplicationData.Current.TemporaryFolder.Path}/photos.xml";
             XDocument document = XDocument.Load(path);
 
-            IEnumerable<ImageRe> imageRes = Retouch_Photo2.Elements.XML.LoadImageRes(document);
-            return imageRes;
+            IEnumerable<Photo> photos = Retouch_Photo2.Elements.XML.LoadPhotos(document);
+            return photos;
         }
 
         /// <summary>
-        /// Save <see cref="ImageRe"/>s file to temporary folder.
+        /// Save <see cref="Photo"/>s file to temporary folder.
         /// </summary>
-        /// <param name="imageRes"> The source imageRes. </param>
-        public static async Task SaveImageResFile(IEnumerable<ImageRe> imageRes)
+        /// <param name="photos"> The source photos. </param>
+        public static async Task SavePhotoFile(IEnumerable<Photo> photos)
         {
-            XDocument document = Retouch_Photo2.Elements.XML.SaveImageRes(imageRes);
+            XDocument document = Retouch_Photo2.Elements.XML.SavePhotos(photos);
 
             //Save the project xml file.      
-            StorageFile file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync("imageRes.xml", CreationCollisionOption.ReplaceExisting);
+            StorageFile file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync("photos.xml", CreationCollisionOption.ReplaceExisting);
             using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
             {
                 using (Stream stream = fileStream.AsStream())
@@ -65,18 +65,18 @@ namespace Retouch_Photo2
 
 
         /// <summary>
-        /// Construct a ImageRe(Source and ImageFilePath).
+        /// Construct a <see cref="Photo"/>(Source and ImageFilePath).
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="imageRe"> The source imageRe. </param>
-        public static async Task ConstructImageReAndPushInstances(ICanvasResourceCreator resourceCreator, ImageRe imageRe)
+        /// <param name="photo"> The source photo. </param>
+        public static async Task ConstructPhotoAndPushInstances(ICanvasResourceCreator resourceCreator, Photo photo)
         {
-            string path = $"{ApplicationData.Current.TemporaryFolder.Path}\\{imageRe.Name}{imageRe.FileType}";
+            string path = $"{ApplicationData.Current.TemporaryFolder.Path}\\{photo.Name}{photo.FileType}";
             StorageFile file = await StorageFile.GetFileFromPathAsync(path);
             using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
             {
-                imageRe.Source = await CanvasBitmap.LoadAsync(resourceCreator, fileStream);
-                imageRe.ImageFilePath = path;
+                photo.Source = await CanvasBitmap.LoadAsync(resourceCreator, fileStream);
+                photo.ImageFilePath = path;
             }
         }
 

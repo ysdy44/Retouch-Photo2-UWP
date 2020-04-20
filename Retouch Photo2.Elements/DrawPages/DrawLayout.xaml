@@ -3,64 +3,27 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-   
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"   
     xmlns:apiContractNotPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,5)"
     xmlns:apiContractPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
-       
     xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
-    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
-    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-        
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"        
     xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     >
 
 
     <UserControl.Resources>
-
-        <!--Background-->
-        <SolidColorBrush x:Name="AccentColor" Color="{ThemeResource SystemAccentColor}"/>
-        <SolidColorBrush x:Name="UnAccentColor" Color="{ThemeResource AppBackgroundColor}"/>
-        <!--Foreground-->
-        <SolidColorBrush x:Name="CheckColor" Color="White"/>
-        <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource SystemBaseHighColor}"/>
-
-        <!--Style-->
-        <Style x:Key="DropShadowPanelStyle" TargetType="controls:DropShadowPanel">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="OffsetY" Value="4"/>
-            <Setter Property="BlurRadius" Value="20"/>
-            <Setter Property="ShadowOpacity" Value="0.8"/>
-            <Setter Property="Color" Value="{ThemeResource AppStrokeColor}"/>
-        </Style>
-        <Style x:Key="RectangleStyle" TargetType="Rectangle">
-            <Setter Property="RadiusX" Value="25"/>
-            <Setter Property="RadiusY" Value="25"/>
-            <Setter Property="Height" Value="50"/>
-            <Setter Property="Width" Value="50"/>
-            <Setter Property="StrokeThickness" Value="1"/>
-            <Setter Property="Stroke" Value="{ThemeResource AppBorderBrush}"/>
-            <Setter Property="Fill" Value="{ThemeResource AppBackground}"/>
-        </Style>
-
         <!--Storyboard-->
-        <Storyboard x:Name="LightStoryboard">
-            <ColorAnimation Storyboard.TargetName="RootGridBackground" Storyboard.TargetProperty="Color" To="#F8F8F8" Duration="0:0:0.2"/>
+        <Storyboard x:Name="WidthStoryboard" >
+            <DoubleAnimationUsingKeyFrames x:Name="WidthKeyFrames" EnableDependentAnimation ="True">
+                <SplineDoubleKeyFrame x:Name="WidthFrame" KeyTime="0:0:0.1" KeySpline="0.5,1,1,1"/>
+            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Name="DarkStoryboard">
-            <ColorAnimation Storyboard.TargetName="RootGridBackground" Storyboard.TargetProperty="Color" To="#191919" Duration="0:0:0.2"/>
-        </Storyboard>
-
     </UserControl.Resources>
 
 
-    <Grid x:Name="RootGrid">
-        <Grid.Background>
-            <SolidColorBrush x:Name="RootGridBackground" Color="{ThemeResource AppBackgroundColor}"/>
-        </Grid.Background>
+    <Grid x:Name="RootGrid" Background="{ThemeResource AppBackground}">
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
@@ -69,56 +32,40 @@
                 <!--Normal-->
                 <VisualState x:Name="Normal"/>
 
+
                 <!--FullScreen-->
                 <VisualState x:Name="FullScreen">
                     <VisualState.Setters>
+
+                        <!--Body-->
+                        <Setter Target = "CenterBorder.(Grid.Row)" Value="0"/>
+                        <Setter Target = "CenterBorder.(Grid.RowSpan)" Value="2"/>
+
+                        <!--Foot-->
+                        <Setter Target = "RadiusAnimaPanel.Visibility" Value="Collapsed"/>
+                        <Setter Target = "LeftRadiusAnimaIcon.Visibility" Value="Collapsed"/>
+                        <Setter Target = "RightRadiusAnimaIcon.Visibility" Value="Collapsed"/>
 
                         <!--Head-->
                         <Setter Target = "HeadGrid.Visibility" Value="Collapsed"/>
 
                         <!--Left-->
                         <Setter Target = "LeftBorder.Visibility" Value="Collapsed"/>
-
                         <!--Right-->
                         <Setter Target = "RightBorder.Visibility" Value="Collapsed"/>
 
-                        <!--CenterContent-->
-                        <Setter Target = "CenterBorder.(Grid.Row)" Value="0"/>
-                        <Setter Target = "CenterBorder.(Grid.RowSpan)" Value="3"/>
-
-                        <!--Foot-->
-                        <Setter Target = "TouchbarBorder.Visibility" Value="Collapsed"/>
-
-                        <!--RadiusAnimaPanel-->
-                        <Setter Target = "RadiusAnimaPanel.Visibility" Value="Collapsed"/>
-
                     </VisualState.Setters>
                 </VisualState>
+
 
                 <!--Phone-->
                 <VisualState x:Name="Phone">
                     <VisualState.Setters>
 
                         <!--Left-->
-                        <Setter Target = "LeftBorder.Margin" Value="0,20"/>
                         <Setter Target = "LeftBorder.Visibility" Value="Collapsed"/>
-                        <!--IconLeft-->
-                        <Setter Target = "IconLeftGrid.Visibility" Value="Visible"/>
-
                         <!--Right-->
-                        <Setter Target = "RightBorder.HorizontalAlignment" Value="Right"/>
-                        <Setter Target = "RightBorder.(Grid.Column)" Value="1"/>
-                        <Setter Target = "RightBorder.(Grid.ColumnSpan)" Value="2"/>
-                        
-                        <Setter Target = "RightBorder.(Grid.Row)" Value="0"/>
-                        <Setter Target = "RightBorder.(Grid.RowSpan)" Value="3"/>
-                        <Setter Target = "RightBorder.BorderThickness" Value="1,1,0,1"/>
                         <Setter Target = "RightBorder.Visibility" Value="Collapsed"/>
-                        <!--IconRight-->
-                        <Setter Target = "IconRightGrid.Visibility" Value="Visible"/>
-
-                        <!--GridLenght-->
-                        <Setter Target = "RightGridLenght.Width" Value="70"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -126,31 +73,13 @@
                 <VisualState x:Name="PhoneShowLeft">
                     <VisualState.Setters >
 
+                        <!--Foot-->
+                        <Setter Target = "LeftRadiusAnimaIcon.Background" Value="{ThemeResource SystemAccentColor}"/>
+
                         <!--DismissOverlay-->
-                        <Setter Target = "IconDismissOverlay.Visibility" Value="Visible"/>
-
-                        <!--Left-->
-                        <Setter Target = "LeftBorder.Margin" Value="0,20"/>
-                        <!--IconLeft-->
-                        <Setter Target = "IconLeftGrid.Visibility" Value="Visible"/>
-                        <Setter Target = "IconLeftRectangle.Fill" Value="{StaticResource AccentColor}"/>
-                        <Setter Target = "IconLeftContentControl.Foreground" Value="{StaticResource CheckColor}"/>
-
+                        <Setter Target = "DismissOverlay.Visibility" Value="Visible"/>
                         <!--Right-->
-                        <Setter Target = "RightBorder.HorizontalAlignment" Value="Right"/>
-                        <Setter Target = "RightBorder.(Grid.Column)" Value="1"/>
-                        <Setter Target = "RightBorder.(Grid.ColumnSpan)" Value="2"/>
-                        
-                        <Setter Target = "RightBorder.(Grid.Row)" Value="0"/>
-                        <Setter Target = "RightBorder.(Grid.RowSpan)" Value="3"/>
                         <Setter Target = "RightBorder.Visibility" Value="Collapsed"/>
-                        <!--IconRight-->
-                        <Setter Target = "IconRightGrid.Visibility" Value="Visible"/>
-                        <Setter Target = "IconRightRectangle.Fill" Value="{StaticResource UnAccentColor}"/>
-                        <Setter Target = "IconRightContentControl.Foreground" Value="{StaticResource UnCheckColor}"/>
-
-                        <!--GridLenght-->
-                        <Setter Target = "RightGridLenght.Width" Value="70"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -158,99 +87,74 @@
                 <VisualState x:Name="PhoneShowRight">
                     <VisualState.Setters>
 
+                        <!--Foot-->
+                        <Setter Target = "RightRadiusAnimaIcon.Background" Value="{ThemeResource SystemAccentColor}"/>
+
                         <!--DismissOverlay-->
-                        <Setter Target = "IconDismissOverlay.Visibility" Value="Visible"/>
-
+                        <Setter Target = "DismissOverlay.Visibility" Value="Visible"/>
                         <!--Left-->
-                        <Setter Target = "LeftBorder.Margin" Value="0,20"/>
                         <Setter Target = "LeftBorder.Visibility" Value="Collapsed"/>
-                        <!--IconLeft-->
-                        <Setter Target = "IconLeftGrid.Visibility" Value="Visible"/>
-                        <Setter Target = "IconLeftRectangle.Fill" Value="{StaticResource UnAccentColor}"/>
-                        <Setter Target = "IconLeftContentControl.Foreground" Value="{StaticResource UnCheckColor}"/>
-
-                        <!--Right-->
-                        <Setter Target = "RightBorder.HorizontalAlignment" Value="Right"/>
-                        <Setter Target = "RightBorder.(Grid.Column)" Value="1"/>
-                        <Setter Target = "RightBorder.(Grid.ColumnSpan)" Value="2"/>
-                        
-                        <Setter Target = "RightBorder.(Grid.Row)" Value="0"/>
-                        <Setter Target = "RightBorder.(Grid.RowSpan)" Value="3"/>
-
-                        <!--IconRight-->
-                        <Setter Target = "IconRightGrid.Visibility" Value="Visible"/>
-                        <Setter Target = "IconRightRectangle.Fill" Value="{StaticResource AccentColor}"/>
-                        <Setter Target = "IconRightContentControl.Foreground" Value="{StaticResource CheckColor}"/>
-
-                        <!--GridLenght-->
-                        <Setter Target = "RightGridLenght.Width" Value="70"/>
 
                     </VisualState.Setters>
                 </VisualState>
+
 
                 <!--Pad-->
                 <VisualState x:Name="Pad">
                     <VisualState.Setters>
-                        
+
+                        <!--Foot-->
+                        <Setter Target = "LeftRadiusAnimaIcon.Visibility" Value="Collapsed"/>
+                        <Setter Target = "RightRadiusAnimaIcon.Visibility" Value="Collapsed"/>
+
                         <!--Left-->
                         <Setter Target = "LeftBorder.(Grid.Row)" Value="1"/>
-                        <Setter Target = "LeftBorder.(Grid.RowSpan)" Value="2"/>
+                        <Setter Target = "LeftBorder.(Grid.RowSpan)" Value="1"/>
                         <Setter Target = "LeftBorder.CornerRadius" Value="0,8,8,0"/>
                         <Setter Target = "LeftBorder.Margin" Value="0,20"/>
-
+                        <Setter Target = "LeftBorder.BorderThickness" Value="0,1,1,1"/>
                         <!--Right-->
-                        <Setter Target = "RightBorder.Width" Value="Auto"/>
-                        <Setter Target = "RightBorder.Margin" Value="0,20"/>
+                        <Setter Target = "RightBorder.Width" Value="70"/>
+                        <Setter Target = "RightBorder.(Grid.Row)" Value="1"/>
+                        <Setter Target = "RightBorder.(Grid.RowSpan)" Value="1"/>
                         <Setter Target = "RightBorder.CornerRadius" Value="8,0,0,8"/>
+                        <Setter Target = "RightBorder.Margin" Value="0,20"/>
                         <Setter Target = "RightBorder.BorderThickness" Value="1,1,0,1"/>
 
                         <Setter Target = "WidthButton.Visibility" Value="Visible"/>
-                        
-                        <!--Touchbar-->
-                        <Setter Target = "TouchbarBorder.(Grid.Column)" Value="1"/>
-                        <Setter Target = "TouchbarBorder.(Grid.ColumnSpan)" Value="1"/>
 
                     </VisualState.Setters>
                 </VisualState>
+
 
                 <!--PC-->
                 <VisualState x:Name="PC">
                     <VisualState.Setters >
 
+                        <!--Foot-->
+                        <Setter Target = "RadiusAnimaPanel.(Grid.Column)" Value="0"/>
+                        <Setter Target = "RadiusAnimaPanel.(Grid.ColumnSpan)" Value="3"/>
+                        <Setter Target = "LeftRadiusAnimaIcon.Visibility" Value="Collapsed"/>
+                        <Setter Target = "RightRadiusAnimaIcon.Visibility" Value="Collapsed"/>
+
                         <!--Head-->
+                        <Setter Target = "HeadGrid.(Grid.Column)" Value="0"/>
                         <Setter Target = "HeadGrid.(Grid.ColumnSpan)" Value="2"/>
 
-                        <!--CenterBorder-->
-                        <Setter Target = "CenterBorder.(Grid.Column)" Value="1"/>
-                        <Setter Target = "CenterBorder.(Grid.ColumnSpan)" Value="1"/>
-
                         <!--Left-->
+                        <Setter Target = "LeftBorder.(Grid.Column)" Value="0"/>
                         <Setter Target = "LeftBorder.(Grid.Row)" Value="1"/>
-                        <Setter Target = "LeftBorder.(Grid.RowSpan)" Value="2"/>
-                        <Setter Target = "LeftBorder.BorderThickness" Value="0,0,1,0"/>
-                        <Setter Target = "LeftBorder.VerticalAlignment" Value="Stretch"/>
+                        <Setter Target = "LeftBorder.(Grid.RowSpan)" Value="1"/>
                         <Setter Target = "LeftBorder.Background"
-                        apiContractNotPresent5:Value="{ThemeResource AppForeground}"
-                        apiContractPresent5:Value="{ThemeResource SystemControlAcrylicWindowBrush}"
+                             apiContractNotPresent5:Value="{ThemeResource AppForeground}"
+                             apiContractPresent5:Value="{ThemeResource SystemControlAcrylicWindowBrush}"
                         />
-
                         <!--Right-->
-                        <Setter Target = "RightBorder.Width" Value="Auto"/>
-                        
-                        <Setter Target = "RightBorder.(Grid.Row)" Value="0"/>
-                        <Setter Target = "RightBorder.(Grid.RowSpan)" Value="3"/>
-                        <Setter Target = "RightBorder.BorderThickness" Value="1,0,0,0"/>
+                        <Setter Target = "RightBorder.(Grid.Column)" Value="2"/>
                         <Setter Target = "RightBorder.Background"
-                        apiContractNotPresent5:Value="{ThemeResource AppForeground}"
-                        apiContractPresent5:Value="{ThemeResource SystemControlAcrylicWindowBrush}"
+                             apiContractNotPresent5:Value="{ThemeResource AppForeground}"
+                             apiContractPresent5:Value="{ThemeResource SystemControlAcrylicWindowBrush}"
                         />
-
-                        <!--Touchbar-->
-                        <Setter Target = "TouchbarBorder.(Grid.Column)" Value="1"/>
-                        <Setter Target = "TouchbarBorder.(Grid.ColumnSpan)" Value="1"/>
-
-                        <!--GridLenght-->
-                        <Setter Target = "RightGridLenght.Width" Value="220"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -260,137 +164,64 @@
 
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition x:Name="RightGridLenght" Width="70"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto" MinHeight="70"/>
         </Grid.RowDefinitions>
-
 
         <!--AlignmentGrid-->
         <developerTools:AlignmentGrid Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="Gray"/>
-        <!--CenterChildt-->
-        <Border x:Name="CenterBorder" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="2"/>
 
-     
-        <!--Head-->
-        <Grid x:Name="HeadGrid" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppLinearBrush}"
-              Grid.ColumnSpan="3">
 
+        <!--Body-->
+        <Border x:Name="CenterBorder" Grid.Column="1" Grid.Row="1"/>
+
+
+        <!--Touchbar-->
+        <Border x:Name="TouchbarBorder" Grid.Column="1" Grid.Row="1" Margin="12,0,12,70" MinWidth="200" MaxWidth="800" VerticalAlignment="Bottom"/>
+        <!--Foot-->
+        <Grid MinHeight="70" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="70"/>
+            </Grid.ColumnDefinitions>
+
+            <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Column="1" ShadowColor="{ThemeResource AppStrokeColor}"/>
+            <elements:RadiusAnimaIcon x:Name="LeftRadiusAnimaIcon" Grid.Column="0" ShadowColor="{ThemeResource AppStrokeColor}"/>
+            <elements:RadiusAnimaIcon x:Name="RightRadiusAnimaIcon" Grid.Column="2" ShadowColor="{ThemeResource AppStrokeColor}"/>
+
+        </Grid>
+
+
+        <!--Head-->
+        <Grid x:Name="HeadGrid" Grid.Column="1" Grid.ColumnSpan="1" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppLinearBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="70"/>
                 <ColumnDefinition Width="1*" MinWidth="50"/>
                 <ColumnDefinition Width="10*" MaxWidth="420"/>
             </Grid.ColumnDefinitions>
 
             <!--Document-->
-            <Border x:Name="_DocumentBorder" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <!--DocumentChild-->
-            </Border>
-
+            <Border x:Name="_DocumentBorder" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             <!--HeadLeft-->
             <Border x:Name="HeadLeftBorder" Grid.Column="1" HorizontalAlignment="Stretch"/>
 
             <!--HeadRight-->
-            <ScrollViewer Grid.Column="2" HorizontalAlignment="Right"
-                           Style="{StaticResource AppHorizontalScrollViewer}">
-                <StackPanel x:Name="HeadRightStackPanel" Orientation="Horizontal">
-                    <!--HeadRight-->
-                </StackPanel>
+            <ScrollViewer Grid.Column="2" HorizontalAlignment="Right" Style="{StaticResource AppHorizontalScrollViewer}">
+                <StackPanel x:Name="HeadRightStackPanel" Orientation="Horizontal"/>
             </ScrollViewer>
-
         </Grid>
-     
-        
-        <!--Touchbar-->
-        <Border x:Name="TouchbarBorder" Grid.ColumnSpan="3" Grid.Row="1" Margin="12,0" MinWidth="200" MaxWidth="800" VerticalAlignment="Bottom"/>
-        <!--Foot-->
-        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Column="1" Grid.Row="2"
-                                   ShadowOpacity="0.9"
-                                   ShadowColor="{ThemeResource AppStrokeColor}"
-                                   Background="{ThemeResource AppBackground}"
-                                   >
-
-            <!--Visibility:Show-->
-            <animations:Implicit.ShowAnimations>
-                <animations:TranslationAnimation Duration="0:0:0.4" From="0,100,0" To="0,0,0"/>
-            </animations:Implicit.ShowAnimations>
-
-            <!--Visibility:Hide-->
-            <animations:Implicit.HideAnimations>
-                <animations:TranslationAnimation Duration="0:0:0.4" From="0,0,0" To="0,100,0"/>
-            </animations:Implicit.HideAnimations>
-
-            <!--Foot-->
-
-        </elements:RadiusAnimaPanel>
 
 
         <!--DismissOverlay-->
-        <Border x:Name="IconDismissOverlay" Visibility="Collapsed" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{ThemeResource AppStroke}">
-
-            <!--Visibility:Show-->
-            <animations:Implicit.ShowAnimations>
-                <animations:OpacityAnimation Duration="0:0:0.2" From="0.0" To="1.0"/>
-            </animations:Implicit.ShowAnimations>
-
-            <!--Visibility:Hide-->
-            <animations:Implicit.HideAnimations>
-                <animations:OpacityAnimation Duration="0:0:0.2" From="1.0" To="0.0"/>
-            </animations:Implicit.HideAnimations>
-
-        </Border>
-        <!--IconLeft-->
-        <Grid x:Name="IconLeftGrid" Visibility="Collapsed" Grid.Column="0" Grid.Row="2" Width="50" Height="50"
-              extensions:VisualExtensions.CenterPoint="25,25,0">
-
-            <!--Visibility:Show-->
-            <animations:Implicit.ShowAnimations>
-                <animations:Vector3Animation Target="Scale" Duration="0:0:0.2" From="0" To="1"/>
-            </animations:Implicit.ShowAnimations>
-
-            <!--Visibility:Hide-->
-            <animations:Implicit.HideAnimations>
-                <animations:Vector3Animation Target="Scale" Duration="0:0:0.2" From="1" To="0"/>
-            </animations:Implicit.HideAnimations>
-
-            <controls:DropShadowPanel Style="{StaticResource DropShadowPanelStyle}">
-                <Rectangle x:Name="IconLeftRectangle" Style="{StaticResource RectangleStyle}"/>
-            </controls:DropShadowPanel>
-
-            <ContentControl x:Name="IconLeftContentControl" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-        </Grid>
-        <!--IconRight-->
-        <Grid x:Name="IconRightGrid" Visibility="Collapsed" Grid.Column="2" Grid.Row="2" Width="50" Height="50" 
-              extensions:VisualExtensions.CenterPoint="25,25,0">
-
-            <!--Visibility:Show-->
-            <animations:Implicit.ShowAnimations>
-                <animations:Vector3Animation Target="Scale" Duration="0:0:0.2" From="0" To="1"/>
-            </animations:Implicit.ShowAnimations>
-
-            <!--Visibility:Hide-->
-            <animations:Implicit.HideAnimations>
-                <animations:Vector3Animation Target="Scale" Duration="0:0:0.2" From="1" To="0"/>
-            </animations:Implicit.HideAnimations>
-
-            <controls:DropShadowPanel Style="{StaticResource DropShadowPanelStyle}">
-                <Rectangle x:Name="IconRightRectangle" Style="{StaticResource RectangleStyle}"/>
-            </controls:DropShadowPanel>
-
-            <ContentControl x:Name="IconRightContentControl" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-        </Grid>
-
-
+        <Border x:Name="DismissOverlay" Visibility="Collapsed" Grid.Column="1" Grid.RowSpan="2" Background="{ThemeResource AppStroke}"/>
         <!--Left-->
-        <Border x:Name="LeftBorder" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" MinHeight="200" BorderBrush="{ThemeResource AppStroke}"
-                CornerRadius="0" VerticalAlignment="Center" BorderThickness="0,1,1,1" Visibility="Visible" Margin="0" Background="{ThemeResource AppForeground}">
+        <Border x:Name="LeftBorder" Width="70" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Left" BorderThickness="0,0,1,0" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
 
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>
@@ -405,27 +236,12 @@
             </animations:Implicit.HideAnimations>
 
             <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch">
-                <StackPanel x:Name="LeftStackPanel" HorizontalAlignment="Stretch">
-                    <!--Content-->
-                    
-                    <Button Height="42" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                        <Button.Flyout>
-                            <Flyout Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                                <StackPanel x:Name="LeftMoreStackPanel" Width="200" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                    <!--Tools-->
-                                </StackPanel>
-                            </Flyout>
-                        </Button.Flyout>
-                        <FontIcon Glyph="&#xE10C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                    </Button>
-                    
-                </StackPanel>
+                <StackPanel x:Name="LeftStackPanel" HorizontalAlignment="Stretch"/>
             </ScrollViewer >
-            
+
         </Border>
         <!--Right-->
-        <Border x:Name="RightBorder" Grid.Column="2" MinHeight="200" BorderBrush="{ThemeResource AppStroke}"
-               Width="220" Grid.Row ="1" Grid.RowSpan="2" CornerRadius="0" HorizontalAlignment="Stretch" BorderThickness="1,1,0,1" Visibility="Visible" Background="{ThemeResource AppForeground}">
+        <Border x:Name="RightBorder" Width="220" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Right" BorderThickness="1,0,0,0" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
 
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>
@@ -438,29 +254,25 @@
                 <animations:TranslationAnimation Duration="0:0:0.2" From="0,0,0" To="100,0,0"/>
                 <animations:OpacityAnimation Duration="0:0:0.2" From="1.0" To="0.0"/>
             </animations:Implicit.HideAnimations>
-          
-            <Grid>
 
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-
                 <Button x:Name="_RightAddButton" Height="42" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                     <FontIcon Glyph="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                 </Button>
-
                 <Border x:Name="RightCenterBorder" Grid.Row="1"/>
-
                 <Button x:Name="WidthButton" Visibility="Collapsed" Grid.Row="2" Height="42" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                    <FontIcon Glyph="&#xE146;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                    <FontIcon x:Name="WidthIcon" Glyph="&#xE127;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                 </Button>
-                
             </Grid>
-            
+
         </Border>
 
-
+        
     </Grid>
+
 </UserControl>

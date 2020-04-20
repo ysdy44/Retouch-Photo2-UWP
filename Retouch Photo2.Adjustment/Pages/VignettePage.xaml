@@ -4,52 +4,50 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pic="using:HSVColorPickers"
+    xmlns:hsvColorPickers="using:HSVColorPickers"
     mc:Ignorable="d"
-    d:DesignHeight="300"
+    d:DesignHeight="400"
     d:DesignWidth="200"
     >
 
     <Page.Resources>
         <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <pic:ColorPicker x:Name="ColorPicker" Width="200"/>
+            <hsvColorPickers:ColorPicker x:Name="ColorPicker" Width="200"/>
         </Flyout>
     </Page.Resources>
 
     <StackPanel>
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            Amount
-        </TextBlock>
-        <pic:TouchSlider x:Name="AmountSlider" Minimum="0" Maximum="100">
-            <pic:TouchSlider.SliderBrush>
+
+        <!--Amount-->
+        <TextBlock x:Name="AmountTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <hsvColorPickers:TouchSlider x:Name="AmountSlider" Minimum="0" Maximum="100">
+            <hsvColorPickers:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
                     <GradientStop Color="Gray" Offset="0"/>
                     <GradientStop x:Name="AmountRight" Offset="1"/>
                 </LinearGradientBrush>
-            </pic:TouchSlider.SliderBrush>
-        </pic:TouchSlider>
+            </hsvColorPickers:TouchSlider.SliderBrush>
+        </hsvColorPickers:TouchSlider>
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            Curve
-        </TextBlock>
-        <pic:TouchSlider x:Name="CurveSlider" Minimum="0" Maximum="100">
-            <pic:TouchSlider.SliderBrush>
+        <!--Curve-->
+        <TextBlock x:Name="CurveTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <hsvColorPickers:TouchSlider x:Name="CurveSlider" Minimum="0" Maximum="100">
+            <hsvColorPickers:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
                     <GradientStop Color="Gray" Offset="0"/>
                     <GradientStop x:Name="CurveRight" Offset="1"/>
                 </LinearGradientBrush>
-            </pic:TouchSlider.SliderBrush>
-        </pic:TouchSlider>
+            </hsvColorPickers:TouchSlider.SliderBrush>
+        </hsvColorPickers:TouchSlider>
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            Color
-        </TextBlock>
+        <!--Color-->
+        <TextBlock x:Name="ColorTextBlock" Style="{StaticResource AppTextBlock}"/>
         <Border x:Name="ColorButton" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource AppCircleBorderStyle}">
             <Border.Background>
-                <SolidColorBrush  x:Name="SolidColorBrush"/>
+                <SolidColorBrush x:Name="SolidColorBrush"/>
             </Border.Background>
         </Border>
 
-        <ContentControl Height="12"/>
+        <ContentControl Height="8"/>
     </StackPanel>
 </Page>

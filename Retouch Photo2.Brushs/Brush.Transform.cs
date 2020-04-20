@@ -100,7 +100,7 @@ namespace Retouch_Photo2.Brushs
                     this._startingPoints.EllipticalGradientYPoint = this.Points.EllipticalGradientYPoint;
                     break;
                 case BrushType.Image:
-                    this._startingDestination = this.ImageDestination;
+                    this._startingDestination = this.PhotoDestination;
                     break;
             }
         }
@@ -130,7 +130,7 @@ namespace Retouch_Photo2.Brushs
                     this.Points.EllipticalGradientYPoint = Vector2.Transform(this._startingPoints.EllipticalGradientYPoint, matrix);
                     break;
                 case BrushType.Image:
-                    this.ImageDestination = this._startingDestination * matrix;
+                    this.PhotoDestination = this._startingDestination * matrix;
                     break;
             }
         }
@@ -160,7 +160,7 @@ namespace Retouch_Photo2.Brushs
                     this.Points.EllipticalGradientYPoint = Vector2.Add(this._startingPoints.EllipticalGradientYPoint, vector);
                     break;
                 case BrushType.Image:
-                    this.ImageDestination = this._startingDestination + vector;
+                    this.PhotoDestination = this._startingDestination + vector;
                     break;
             }
         }

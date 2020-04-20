@@ -24,15 +24,15 @@ namespace Retouch_Photo2.Brushs
         /// <summary> <see cref="Brush">'s points. </summary>
         public BrushPoints Points;
         private BrushPoints _startingPoints;
-        
 
-        /// <summary> <see cref = "Brush" />'s image. </summary>
-        public ImageStr ImageStr { get; set; }
+
+        /// <summary> <see cref = "Brush" />'s photocopier. </summary>
+        public Photocopier Photocopier { get; set; }
         
         /// <summary> The source transformer. </summary>
-        public Transformer ImageSource { get; set; }
+        public Transformer PhotoSource { get; set; }
         /// <summary> The destination transformer. </summary>
-        public Transformer ImageDestination { get; set; }
+        public Transformer PhotoDestination { get; set; }
         Transformer _startingDestination;
 
 
@@ -89,9 +89,9 @@ namespace Retouch_Photo2.Brushs
                     break;
 
                 case BrushType.Image:
-                    brush.ImageStr = this.ImageStr;
-                    brush.ImageSource = this.ImageSource;
-                    brush.ImageDestination = this.ImageDestination;
+                    brush.Photocopier = this.Photocopier;
+                    brush.PhotoSource = this.PhotoSource;
+                    brush.PhotoDestination = this.PhotoDestination;
                     break;
             }
 

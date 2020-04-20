@@ -24,12 +24,17 @@ namespace Retouch_Photo2
             {
                 this.ConstructTool(tool);
             }
-            UIElement moreButton = this.ToolLeft.First();
-            this.ToolLeft.Remove(moreButton);
-            this.ToolLeft.Add(moreButton);
             this.ToolFirst();
-            
 
+
+            this.TipViewModel.Menus.Add(this.SelectionMenu);
+            this.TipViewModel.Menus.Add(this.OperateMenu);
+            this.TipViewModel.Menus.Add(this.AdjustmentMenu);
+            this.TipViewModel.Menus.Add(this.EffectMenu);
+            this.TipViewModel.Menus.Add(this.TransformerMenu);
+            this.TipViewModel.Menus.Add(this.CharacterMenu);
+            this.TipViewModel.Menus.Add(this.ColorMenu);
+            this.TipViewModel.Menus.Add(this.LayerMenu);
             //Menu
             foreach (IMenu menu in this.TipViewModel.Menus)
             {
@@ -40,49 +45,54 @@ namespace Retouch_Photo2
         }
 
 
-        /// <summary> what is last? </summary>
-        ToolButtonType _lockToolButtonType;
-        
         /// <summary> Left panel of Tool. </summary>
         UIElementCollection ToolLeft => this.DrawLayout.LeftPanelChildren;
-        /// <summary> Left more panel of Tool. </summary>
-        UIElementCollection ToolLeftMore => this.DrawLayout.LeftMorePanelChildren;
+        /// <summary> Left more button's flyout panel's children. </summary>
+        UIElementCollection ToolLeftMore = null;
 
         //Tool
         private void ConstructTool(ITool tool)
         {
-            ToolButtonType type;
-            UIElement button = null;
-
             if (tool == null)
             {
-                type = this._lockToolButtonType;
-                button = new RectangleSeparator();
+                if (this.ToolLeftMore == null)
+                    this.ToolLeft.Add(new ToolSeparator());
+                else
+                    this.ToolLeftMore.Add(new ToolSeparator());
+
+                return;
+            }
+            else if (tool.Type == ToolType.None)
+            {
+                return;
+            }
+            else if (tool.Type == ToolType.More)
+            {
+                if (tool.Button is ToolMoreButton moreButton)
+                {
+                    this.ToolLeft.Add(moreButton);
+                    this.ToolLeftMore = moreButton.Children;
+                }
+                return;
             }
             else
             {
-                type = tool.Button.Type;
-                button = tool.Button.Self;
-
-                this._lockToolButtonType = tool.Button.Type;
-                tool.Button.Self.Tapped += (s, e) =>
+                if (tool.Button is FrameworkElement element)
                 {
-                    this.TipViewModel.ToolGroupType(tool.Type);
+                    if (this.ToolLeftMore == null)
+                        this.ToolLeft.Add(element);
+                    else
+                        this.ToolLeftMore.Add(element);
 
-                    this.TipViewModel.Tool = tool;
+                    element.Tapped += (s, e) =>
+                    {
+                        this.TipViewModel.ToolGroupType(tool.Type);
 
-                    this.ViewModel.Invalidate();//Invalidate
-                };
-            }
+                        this.TipViewModel.Tool = tool;
 
-            switch (type)
-            {
-                case ToolButtonType.None:
-                    this.ToolLeft.Add(button);
-                    break;
-                case ToolButtonType.Second:
-                    this.ToolLeftMore.Add(button);
-                    break;
+                        this.ViewModel.Invalidate();//Invalidate
+                    };
+                }
             }
         }
 
@@ -97,36 +107,30 @@ namespace Retouch_Photo2
             ITool tool = this.TipViewModel.Tools.FirstOrDefault();
             if (tool != null)
             {
-                //Group
-                tool.Button.IsSelected = true;
-                tool.Page.IsSelected = true;
+                this.TipViewModel.ToolGroupType(tool.Type);
 
-                //Changed
                 this.TipViewModel.Tool = tool;
-                this.DrawLayout.LeftIcon = tool.Icon;
-
-                this.FootPageControl.Content = tool.Page.Self;//FootPage
             }
         }
 
 
         #endregion
 
-        
+
         /// <summary> Head panel of Menu. </summary>
         UIElementCollection MenuHead => this.DrawLayout.HeadRightChildren;
-        
+
         //Menu
         public void ConstructMenu(IMenu menu)
         {
             if (menu == null) return;
 
-            this.OverlayCanvas.Children.Add(menu.Layout.Self);
+            // this.OverlayCanvas.Children.Add(menu.Layout);
 
             menu.Move += () =>
             {
                 //Move to top
-                int index = this.OverlayCanvas.Children.IndexOf(menu.Layout.Self);
+                int index = this.OverlayCanvas.Children.IndexOf(menu.Layout);
                 int count = this.OverlayCanvas.Children.Count;
                 this.OverlayCanvas.Children.Move((uint)index, (uint)count - 1);
             };
@@ -134,17 +138,16 @@ namespace Retouch_Photo2
             menu.Closed += () => this.MenusEnable();//Menus is enable
 
             //MenuButton
-            switch (menu.Button.Type)
+            if (menu.Type == MenuType.Layer)
             {
-                case MenuButtonType.None:
-                    this.MenuHead.Add(menu.Button.Self);
-                    break;
-                case MenuButtonType.LayersControlIndicator:
-                    this.LayersControl.IndicatorBorder.Child = menu.Button.Self;
-                    break;
+                this.LayersControl.IndicatorBorder.Child = menu.Button;
+            }
+            else
+            {
+                this.MenuHead.Add(menu.Button);
             }
         }
-        
+
         #region Menu
 
 
@@ -165,15 +168,15 @@ namespace Retouch_Photo2
                 switch (menu.State)
                 {
                     case MenuState.FlyoutShow:
-                        menu.State = MenuState.FlyoutHide;
+                        menu.State = MenuState.Hide;
                         break;
-                    case MenuState.OverlayExpanded:
+                    case MenuState.Overlay:
                     case MenuState.OverlayNotExpanded:
                         if (isCrop)
                         {
-                            Point postion = MenuHelper.GetOverlayPostion(menu.Layout.Self);
-                            Point postion2 = MenuHelper.GetBoundPostion(postion, menu.Layout.Self);
-                            MenuHelper.SetOverlayPostion(menu.Layout.Self, postion2);
+                            Point postion = MenuHelper.GetOverlayPostion(menu.Layout);
+                            Point postion2 = MenuHelper.GetBoundPostion(postion, menu.Layout);
+                            MenuHelper.SetOverlayPostion(menu.Layout, postion2);
                         }
                         break;
                 }

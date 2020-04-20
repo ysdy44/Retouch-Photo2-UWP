@@ -1,0 +1,47 @@
+﻿<Page
+    x:Class="Retouch_Photo2.Tools.Models.GeometryTriangleTool"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:tools="using:Retouch_Photo2.Tools"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="400"
+    >
+
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+        <StackPanel Orientation="Horizontal">
+
+            <!--Center-->
+            <tools:TouchbarButton x:Name="CenterTouchbarButton">
+                <tools:TouchbarButton.TouchbarSlider>
+                    <tools:TouchbarSlider x:Name="CenterTouchbarSlider" 
+                             Number="{x:Bind CenterNumberConverter(SelectionViewModel.GeometryTriangleCenter),Mode=OneWay}"
+                             Value="{x:Bind CenterValueConverter(SelectionViewModel.GeometryTriangleCenter),Mode=OneWay}"
+                             />
+                </tools:TouchbarButton.TouchbarSlider>
+            </tools:TouchbarButton>
+
+            <ContentControl Width="4"/>
+
+            <!--Mirror-->
+            <TextBlock x:Name="MirrorTextBlock" Style="{StaticResource AppTextBlock}"/>
+            <Button x:Name="MirrorButton" Style="{StaticResource AppCircleButtonStyle}">
+                <FontIcon Glyph="&#xE13C;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+            </Button>
+
+            <ContentControl Width="4"/>
+
+            <TextBlock x:Name="ConvertTextBlock" Style="{StaticResource AppTextBlock}"/>
+            <toolsElements:ConvertToCurvesButton/>
+
+            <ContentControl Width="4"/>
+
+            <toolsElements:MoreCreateButton/>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</Page>

@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Adjustments;
+﻿using Microsoft.Graphics.Canvas.Effects;
+using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Effects;
@@ -41,7 +42,7 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary> <see cref = "SelectionViewModel" />'s blend type. </summary>
-        public BlendType BlendType
+        public BlendEffectMode? BlendType
         {
             get => this.blendType;
             set
@@ -50,7 +51,7 @@ namespace Retouch_Photo2.ViewModels
                 this.OnPropertyChanged(nameof(this.BlendType));//Notify 
             }
         }
-        private BlendType blendType;
+        private BlendEffectMode? blendType;
 
 
         /// <summary> <see cref = "SelectionViewModel" />'s visibility. </summary>
@@ -180,24 +181,24 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private bool isImageLayer;
-        /// <summary> <see cref = "SelectionViewModel" />'s ImageStr. </summary>
-        public ImageStr ImageStr
+        /// <summary> <see cref = "SelectionViewModel" />'s Photocopier. </summary>
+        public Photocopier Photocopier
         {
-            get => this.imageRe;
+            get => this.photocopier;
             set
             {
-                this.imageRe = value;
-                this.OnPropertyChanged(nameof(this.ImageStr));//Notify 
+                this.photocopier = value;
+                this.OnPropertyChanged(nameof(this.Photocopier));//Notify 
             }
         }
-        private ImageStr imageRe;
+        private Photocopier photocopier;
         /// <summary> Sets ImageLayer. </summary>     
         private void SetImageLayer(ILayer layer)
         {
             if (layer is ImageLayer imageLayer)
             {
                 this.IsImageLayer = true;
-                this.ImageStr = imageLayer.StyleManager.FillBrush.ImageStr;
+                this.Photocopier = imageLayer.StyleManager.FillBrush.Photocopier;
             }
             else
             {

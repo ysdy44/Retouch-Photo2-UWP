@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
+using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -36,7 +37,7 @@ namespace Retouch_Photo2.Layers.Models
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryStarIcon(),
-                Text = "Star",
+                Text = this.ConstructStrings(),
             };
         }
         
@@ -77,6 +78,14 @@ namespace Retouch_Photo2.Layers.Models
             this.Points = (int)element.Element("Points");
             this.InnerRadius = (float)element.Element("InnerRadius");
         }
-        
+
+        //Strings
+        private string ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            return resource.GetString("/Layers/GeometryStar");
+        }
+
     }
 }

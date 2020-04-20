@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Tools
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
-        MarqueeCompositeMode CompositeMode => this.KeyboardViewModel.CompositeMode;
+        MarqueeCompositeMode MarqueeCompositeMode => this.KeyboardViewModel.CompositeMode;
         bool IsRatio => this.KeyboardViewModel.IsRatio;
         bool IsCenter => this.KeyboardViewModel.IsCenter;
         bool IsStepFrequency => this.KeyboardViewModel.IsStepFrequency;
@@ -135,7 +135,7 @@ namespace Retouch_Photo2.Tools
                 case ListViewSelectionMode.Single:
                 case ListViewSelectionMode.Multiple:
                     {
-                        switch (this.CompositeMode)
+                        switch (this.MarqueeCompositeMode)
                         {
                             case MarqueeCompositeMode.New:
                                 {

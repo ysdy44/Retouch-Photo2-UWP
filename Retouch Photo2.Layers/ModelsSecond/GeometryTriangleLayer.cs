@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
+using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -35,7 +36,7 @@ namespace Retouch_Photo2.Layers.Models
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryTriangleIcon(),
-                Text = "Triangle",
+                Text = this.ConstructStrings(),
             };
         }
         
@@ -72,6 +73,14 @@ namespace Retouch_Photo2.Layers.Models
         public void Load(XElement element)
         {
             this.Center = (float)element.Element("Center");
+        }
+
+        //Strings
+        private string ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            return resource.GetString("/Layers/GeometryTriangle");
         }
 
     }

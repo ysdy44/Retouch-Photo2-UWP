@@ -28,12 +28,12 @@ namespace Retouch_Photo2.Brushs
         /// <summary>
         /// Construct a style-manager.
         /// </summary>
-        public StyleManager(Transformer Source, Transformer Destination, ImageStr ImageStr)
+        public StyleManager(Transformer Source, Transformer Destination, Photocopier photocopier)
         {
             this.FillBrush.Type = BrushType.Image;
-            this.FillBrush.ImageSource = Source;
-            this.FillBrush.ImageDestination = Destination;
-            this.FillBrush.ImageStr = ImageStr;
+            this.FillBrush.PhotoSource = Source;
+            this.FillBrush.PhotoDestination = Destination;
+            this.FillBrush.Photocopier = photocopier;
         }
 
 

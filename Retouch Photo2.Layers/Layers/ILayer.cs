@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Brushs;
@@ -28,7 +29,7 @@ namespace Retouch_Photo2.Layers
         /// <summary> Gets or sets ILayer's opacity. </summary>
         float Opacity { get; set; }
         /// <summary> Gets or sets ILayer's blend type. </summary>
-        BlendType BlendType { get; set; }
+        BlendEffectMode? BlendType { get; set; }
 
         /// <summary> Gets or sets ILayer's visibility. </summary>
         Visibility Visibility { get; set; }
@@ -74,6 +75,11 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         /// <param name="element"> The destination XElement. </param>
         void SaveWith(XElement element);
+        /// <summary>
+        /// Load the entire <see cref="ILayer"/> form a XElement.
+        /// </summary>
+        /// <param name="element"> The destination XElement. </param>
+        void Load(XElement element);
 
 
         #endregion

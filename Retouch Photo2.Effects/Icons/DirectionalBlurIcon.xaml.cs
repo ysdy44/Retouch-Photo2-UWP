@@ -1,5 +1,4 @@
-﻿using Retouch_Photo2.Effects.Models;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Effects.Icons
 {

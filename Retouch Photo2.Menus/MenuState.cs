@@ -5,16 +5,16 @@
     /// </summary>
     public enum MenuState
     {
-        /// <summary> Flyout hided. </summary>
-        FlyoutHide,
+        /// <summary> Hided. </summary>
+        Hide,
 
         /// <summary> Flyout showed. </summary>
         FlyoutShow,
 
-        /// <summary> Overlay expanded. </summary>
-        OverlayExpanded,
-
         /// <summary> Overlay not expanded. </summary>
-        OverlayNotExpanded
+        OverlayNotExpanded,
+
+        /// <summary> Overlay expanded. </summary>
+        Overlay,
     }
 }

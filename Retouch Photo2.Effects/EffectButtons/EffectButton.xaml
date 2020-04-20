@@ -21,8 +21,8 @@
         <SolidColorBrush x:Name="PointerOverColor" Color="{ThemeResource SystemBaseLowColor}"/>
         <SolidColorBrush x:Name="PressedColor" Color="{ThemeResource SystemBaseMediumLowColor}"/>
 
-        <SolidColorBrush x:Name="CheckColor" Color="{ThemeResource AppTextColor}"/>
-        <SolidColorBrush x:Name="UnCheckColor" Opacity="0.3" Color="{ThemeResource AppTextColor}"/>
+        <SolidColorBrush x:Name="CheckColor" Color="{ThemeResource SystemBaseHighColor}"/>
+        <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource AppTextColor}"/>
     </UserControl.Resources>
 
 
@@ -43,13 +43,11 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PointerOverColor}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                     </Storyboard>
                 </VisualState>
 
                 <VisualState x:Name="Pressed">
                     <Storyboard>
-                        <PointerDownThemeAnimation TargetName="RootGrid" />
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PressedColor}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -100,7 +98,7 @@
         <Viewbox x:Name="Viewbox" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <TextBlock x:Name="TextBlock" Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Foreground="{StaticResource CheckColor}"/>
-
+        
         <!--ToggleSwitch-->
         <ToggleSwitch x:Name="_ToggleSwitch" Grid.Column="2" IsOn="False" IsEnabled="False">
             <ToggleSwitch.Clip>

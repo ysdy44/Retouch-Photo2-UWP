@@ -1,0 +1,71 @@
+﻿<Page
+    x:Class="Retouch_Photo2.Tools.Models.ImageTool"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="400"
+    >
+
+
+    <Page.Resources>
+
+        <!--Storyboard-->
+        <Storyboard x:Name="EaseStoryboard">
+            <ColorAnimation From="{ThemeResource SystemBaseHighColor}" To="{ThemeResource AppBorderBrushColor}" Storyboard.TargetProperty="Color" Storyboard.TargetName="SelectBorderBorderBrush" d:IsOptimized="True">
+                <ColorAnimation.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </ColorAnimation.EasingFunction>
+            </ColorAnimation>
+        </Storyboard>
+
+    </Page.Resources>
+
+
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+        <StackPanel Orientation="Horizontal">
+
+            <TextBlock Text="{x:Bind SelectionViewModel.Photocopier,Mode=OneWay}" Style="{StaticResource AppTextBlock}"/>
+
+            <ContentControl Width="4"/>
+
+            <!--Select-->
+            <TextBlock x:Name="SelectTextBlock" Style="{StaticResource AppTextBlock}"/>
+            <Button x:Name="SelectButton" Style="{StaticResource AppCircleButtonStyle}">
+                <Button.BorderBrush>
+                    <SolidColorBrush x:Name="SelectBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
+                </Button.BorderBrush>
+                <FontIcon Glyph="&#xE109;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
+            </Button>
+
+            <ContentControl Width="4"/>
+
+            <!--Replace-->
+            <TextBlock x:Name="ReplaceTextBlock" Style="{StaticResource AppTextBlock}"/>
+            <Button x:Name="ReplaceButton" Style="{StaticResource AppCircleButtonStyle}"
+                 IsEnabled="{x:Bind SelectionViewModel.IsImageLayer,Mode=OneWay}">
+                <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
+            </Button>
+
+            <AppBarSeparator/>
+
+            <!--Select-->
+            <TextBlock x:Name="ClearTextBlock" Style="{StaticResource AppTextBlock}"/>
+            <Button x:Name="ClearButton" Style="{StaticResource AppCircleButtonStyle}">
+                <FontIcon Glyph="&#xE106;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            </Button>
+
+            <ContentControl Width="4"/>
+
+            <ContentControl Width="4"/>
+
+            <TextBlock x:Name="ConvertTextBlock" Style="{StaticResource AppTextBlock}"/>
+            <toolsElements:ConvertToCurvesButton/>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</Page>

@@ -68,7 +68,10 @@ namespace Retouch_Photo2
                  new AcrylicTool(),
                  new CropTool(),
                  
+
+                 new MoreTool(),
                  
+
                  //Geometry1
                  new GeometryRoundRectTool(),
                  new GeometryTriangleTool(),
@@ -99,7 +102,6 @@ namespace Retouch_Photo2
                  /*
                 new LayerMenu(),
                 new CharacterMenu(),
-                 */
 
                 new SelectionMenu(),
                 new OperateMenu(),
@@ -110,6 +112,7 @@ namespace Retouch_Photo2
                 new ColorMenu(),
                 new LayerMenu(),      
 
+                 */
             },
         };
 

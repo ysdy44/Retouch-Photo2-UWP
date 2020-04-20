@@ -9,7 +9,6 @@
     d:DesignWidth="50"
     >
     
-    <FontIcon  FontFamily="Segoe MDL2 Assets" Glyph="&#xE113;" FontSize="24" 
-            />
+    <FontIcon  FontFamily="Segoe MDL2 Assets" Glyph="&#xE113;" FontSize="24"/>
 
 </UserControl>

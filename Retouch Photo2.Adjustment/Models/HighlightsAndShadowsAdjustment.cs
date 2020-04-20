@@ -1,6 +1,7 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments.Icons;
+using Retouch_Photo2.Adjustments.Pages;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
 
@@ -11,10 +12,15 @@ namespace Retouch_Photo2.Adjustments.Models
     /// </summary>
     public class HighlightsAndShadowsAdjustment : IAdjustment
     {
+        //@Static
+        public static readonly HighlightsAndShadowsPage HighlightsAndShadowsPage = new HighlightsAndShadowsPage();
 
+        //@Content
         public AdjustmentType Type => AdjustmentType.HighlightsAndShadows;
         public FrameworkElement Icon { get; } = new HighlightsAndShadowsIcon();
         public Visibility PageVisibility => Visibility.Visible;
+        public IAdjustmentPage Page => HighlightsAndShadowsAdjustment.HighlightsAndShadowsPage;
+        public string Text { get; private set; }
 
         /// <summary> How much to increase or decrease the darker parts of the image.Default value 0, range -1 to 1. </summary>
         public float Shadows = 0.0f;
@@ -30,18 +36,14 @@ namespace Retouch_Photo2.Adjustments.Models
 
         //@Construct
         /// <summary>
-        /// Construct a highlightsAndShadows-adjustment.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public HighlightsAndShadowsAdjustment(XElement element) : this() => this.Load(element);
-        /// <summary>
-        /// Construct a highlightsAndShadows-adjustment.
+        /// Construct a HighlightsAndShadows-adjustment.
         /// </summary>
         public HighlightsAndShadowsAdjustment()
         {
+            this.Text = HighlightsAndShadowsAdjustment.HighlightsAndShadowsPage.Text;
         }
 
-        
+
         public void Reset()
         {
             this.Shadows = 0.0f;
@@ -49,7 +51,23 @@ namespace Retouch_Photo2.Adjustments.Models
             this.Clarity = 0.0f;
             this.MaskBlurAmount = 1.25f;
             this.SourceIsLinearGamma = false;
+
+            if (HighlightsAndShadowsAdjustment.HighlightsAndShadowsPage.Adjustment == this)
+            {
+                HighlightsAndShadowsAdjustment.HighlightsAndShadowsPage.Follow(this);
+            }
         }
+        public void Follow()
+        {
+            HighlightsAndShadowsAdjustment.HighlightsAndShadowsPage.Adjustment = this;
+            HighlightsAndShadowsAdjustment.HighlightsAndShadowsPage.Follow(this);
+        }
+        public void Close()
+        {
+            HighlightsAndShadowsAdjustment.HighlightsAndShadowsPage.Adjustment = null;
+        }
+
+
         public IAdjustment Clone()
         {
             return new HighlightsAndShadowsAdjustment
@@ -62,17 +80,18 @@ namespace Retouch_Photo2.Adjustments.Models
             };
         }
 
+
         public XElement Save()
         {
             return new XElement
-            (
+             (
                 "HighlightsAndShadows",
                 new XAttribute("Shadows", this.Shadows),
                 new XAttribute("Highlights", this.Highlights),
                 new XAttribute("Clarity", this.Clarity),
                 new XAttribute("MaskBlurAmount", this.MaskBlurAmount),
                 new XAttribute("SourceIsLinearGamma", this.SourceIsLinearGamma)
-            );
+             );
         }
         public void Load(XElement element)
         {
@@ -82,6 +101,7 @@ namespace Retouch_Photo2.Adjustments.Models
             this.MaskBlurAmount = (float)element.Attribute("MaskBlurAmount");
             this.SourceIsLinearGamma = (bool)element.Attribute("SourceIsLinearGamma");
         }
+
 
         public ICanvasImage GetRender(ICanvasImage image)
         {

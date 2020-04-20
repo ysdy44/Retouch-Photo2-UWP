@@ -1,6 +1,7 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments.Icons;
+using Retouch_Photo2.Adjustments.Pages;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
 
@@ -11,10 +12,15 @@ namespace Retouch_Photo2.Adjustments.Models
     /// </summary>
     public class HueRotationAdjustment : IAdjustment
     {
+        //@Static
+        public static readonly HueRotationPage HueRotationPage = new HueRotationPage();
 
+        //@Content
         public AdjustmentType Type => AdjustmentType.HueRotation;
         public FrameworkElement Icon { get; } = new HueRotationIcon();
         public Visibility PageVisibility => Visibility.Visible;
+        public IAdjustmentPage Page => HueRotationAdjustment.HueRotationPage;
+        public string Text { get; private set; }
 
         /// <summary> Angle to rotate the hue, in radians. Default value 0, range 0 to 2*pi. </summary>
         public float Angle = 0.0f;
@@ -22,22 +28,34 @@ namespace Retouch_Photo2.Adjustments.Models
 
         //@Construct
         /// <summary>
-        /// Construct a hueRotation-adjustment.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public HueRotationAdjustment(XElement element) : this() => this.Load(element);
-        /// <summary>
-        /// Construct a hueRotation-adjustment.
+        /// Construct a HueRotation-adjustment.
         /// </summary>
         public HueRotationAdjustment()
-        {            
+        {
+            this.Text = HueRotationAdjustment.HueRotationPage.Text;
         }
 
-    
+
         public void Reset()
         {
             this.Angle = 0.0f;
+
+            if (HueRotationAdjustment.HueRotationPage.Adjustment == this)
+            {
+                HueRotationAdjustment.HueRotationPage.Follow(this);
+            }
         }
+        public void Follow()
+        {
+            HueRotationAdjustment.HueRotationPage.Adjustment = this;
+            HueRotationAdjustment.HueRotationPage.Follow(this);
+        }
+        public void Close()
+        {
+            HueRotationAdjustment.HueRotationPage.Adjustment = null;
+        }
+
+
         public IAdjustment Clone()
         {
             return new HueRotationAdjustment
@@ -45,6 +63,7 @@ namespace Retouch_Photo2.Adjustments.Models
                 Angle = this.Angle,
             };
         }
+
 
         public XElement Save()
         {
@@ -58,6 +77,7 @@ namespace Retouch_Photo2.Adjustments.Models
         {
             this.Angle = (float)element.Attribute("Angle");
         }
+
 
         public ICanvasImage GetRender(ICanvasImage image)
         {

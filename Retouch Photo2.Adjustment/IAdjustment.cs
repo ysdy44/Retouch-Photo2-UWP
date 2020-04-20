@@ -15,20 +15,35 @@ namespace Retouch_Photo2.Adjustments
         FrameworkElement Icon { get; }
         /// <summary> Gets whether page is visible. </summary>
         Visibility PageVisibility { get; }
-        
-        /// <summary> Reset the adjustment data. </summary>
-        void Reset();
-        /// <summary>
-        /// Get IAdjustment own copy.
-        /// </summary>
-        /// <returns> The cloned IAdjustment. </returns>
-        IAdjustment Clone();
-        /// <summary>
-        /// Saves the entire IAdjustment to a XElement.
-        /// </summary>
-        /// <returns> The saved IAdjustment. </returns>
-        XElement Save();
+        /// <summary> Gets IAdjustment's page. </summary>
+        IAdjustmentPage Page { get; }
+        /// <summary> Gets IAdjustment's text. </summary>
+        string Text { get; }
 
+        /// <summary> Reset the adjustment. </summary>
+        void Reset();
+        /// <summary> Follow the adjustment for page. </summary>
+        void Follow();
+        /// <summary> Close the adjustment's page. </summary>
+        void Close();
+
+        /// <summary>
+        /// Get own copy.
+        /// </summary>
+        /// <returns> The cloned <see cref="IAdjustment"/>. </returns>
+        IAdjustment Clone();
+
+        /// <summary>
+        /// Saves the entire <see cref="IAdjustment"/> to a XElement.
+        /// </summary>
+        /// <returns> The saved XElement. </returns>
+        XElement Save();
+        /// <summary>
+        /// Load the entire <see cref="IAdjustment"/> by a XElement.
+        /// </summary>
+        /// <param name="element"> The source XElement. </param>
+        void Load(XElement element);
+       
         /// <summary>
         /// Gets a specific rended-image.
         /// </summary>

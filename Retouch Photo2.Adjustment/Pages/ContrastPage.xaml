@@ -4,19 +4,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:adjustments="using:Retouch_Photo2.Adjustments"
-    xmlns:pic="using:HSVColorPickers"
+    xmlns:hsvColorPickers="using:HSVColorPickers"
     mc:Ignorable="d"
-    d:DesignHeight="300"
+    d:DesignHeight="400"
     d:DesignWidth="200"
     >
 
+
     <StackPanel >
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            Contrast
-        </TextBlock>
-        <pic:TouchSlider x:Name="ContrastSlider" Minimum="-100" Maximum="100">
-            <pic:TouchSlider.SliderBrush>
+
+        <!--Contrast-->
+        <TextBlock x:Name="ContrastTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <hsvColorPickers:TouchSlider x:Name="ContrastSlider" Minimum="-100" Maximum="100">
+            <hsvColorPickers:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
                     <GradientStop Color="#888888" Offset="0"/>
 
@@ -29,7 +29,8 @@
                     <GradientStop Color="#000000" Offset="0.8"/>
                     <GradientStop Color="#FFFFFF" Offset="1"/>
                 </LinearGradientBrush>
-            </pic:TouchSlider.SliderBrush>
-        </pic:TouchSlider>
+            </hsvColorPickers:TouchSlider.SliderBrush>
+        </hsvColorPickers:TouchSlider>
+        
     </StackPanel>
 </Page>

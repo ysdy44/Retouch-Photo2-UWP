@@ -83,7 +83,7 @@
             </Grid.RowDefinitions>
 
             <!--Head-->
-            <ContentControl x:Name="ContentControl"/>
+            <ContentControl x:Name="ContentControl" FontSize="22" FontWeight="Light"/>
 
             <!--Body-->
             <ContentPresenter x:Name="ContentPresenter" Grid.Row="2"/>

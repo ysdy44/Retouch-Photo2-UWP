@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Adjustments.Pages
@@ -9,49 +10,47 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// </summary>
     public sealed partial class ExposurePage : IAdjustmentPage
     {
+        public ExposureAdjustment Adjustment;
 
-        public ExposureAdjustment ExposureAdjustment;
-
+        //@Content
         public AdjustmentType Type { get; } = AdjustmentType.Exposure;
         public FrameworkElement Icon { get; } = new ExposureIcon();
-        public FrameworkElement Page => this;
+        public FrameworkElement Self => this;
+        public string Text { get; private set; }
 
         //@Construct
         public ExposurePage()
         {
             this.InitializeComponent();
+            this.ConstructStrings();
 
-            this.ExposureSlider.ValueChangeDelta+=(s, value)=>
+            this.ExposureSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.ExposureAdjustment == null) return;
-                this.ExposureAdjustment.Exposure = (float)(value / 100);
+                if (this.Adjustment == null) return;
+                this.Adjustment.Exposure = (float)(value / 100);
                 AdjustmentManager.Invalidate?.Invoke();
             };
         }
 
-        
+
         public IAdjustment GetNewAdjustment() => new ExposureAdjustment();
-        public void SetAdjustment(IAdjustment value)
-        {
-            if (value is ExposureAdjustment adjustment)
-            {
-                this.ExposureAdjustment = adjustment;
-                this.Invalidate(adjustment);
-            }
-        }
-        
-        public void Close() => this.ExposureAdjustment = null;
-        public void Reset()
-        {
-            if (this.ExposureAdjustment == null) return;
 
-            this.ExposureAdjustment.Reset();
-            this.Invalidate(this.ExposureAdjustment);
-        }
-
-        public void Invalidate(ExposureAdjustment adjustment)
+        public void Follow(ExposureAdjustment adjustment)
         {
             this.ExposureSlider.Value = adjustment.Exposure * 100;
         }
+
+
+        //Strings
+        public void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Text = resource.GetString("/Adjustments/Exposure");
+
+            this.ExposureTextBlock.Text = resource.GetString("/Adjustments/Exposure_Exposure");
+        }
+
     }
 }
+

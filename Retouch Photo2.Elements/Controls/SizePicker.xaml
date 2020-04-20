@@ -24,10 +24,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" VerticalAlignment="Center">
+        <TextBlock x:Name="WidthTextBlock" Grid.Row="1" VerticalAlignment="Center">
             Width
         </TextBlock>
-        <TextBlock Grid.Row="3" VerticalAlignment="Center">
+        <TextBlock x:Name="HeightTextBlock" Grid.Row="3" VerticalAlignment="Center">
             Height
         </TextBlock>
 

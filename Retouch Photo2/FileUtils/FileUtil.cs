@@ -92,19 +92,18 @@ namespace Retouch_Photo2
         }
 
         /// <summary>
-        /// Create a ImageRe form a copy which in the temporary folder.
+        /// Create a <see cref="Photo"/> form a copy which in the temporary folder.
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>
         /// <param name="copyFile"> The copy file. </param>
-        /// <returns> The product ImageRe. </returns>
-        public async static Task<ImageRe> CreateImageReFromCopyFileAsync(ICanvasResourceCreator resourceCreator, StorageFile copyFile)
+        /// <returns> The product photo. </returns>
+        public async static Task<Photo> CreatePhotoFromCopyFileAsync(ICanvasResourceCreator resourceCreator, StorageFile copyFile)
         {
-            //ImageRe
             using (IRandomAccessStream stream = await copyFile.OpenReadAsync())
             {
                 CanvasBitmap bitmap = await CanvasBitmap.LoadAsync(resourceCreator, stream);
 
-                return new ImageRe
+                return new Photo
                 {
                     Source = bitmap,
                     ImageFilePath = copyFile.Path,

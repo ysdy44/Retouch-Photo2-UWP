@@ -64,7 +64,7 @@ namespace Retouch_Photo2.Controls
 
         private void ShowLayerMenu()
         {
-            this.TipViewModel.SetMenuState(MenuType.Layer, MenuState.FlyoutHide, MenuState.FlyoutShow);
+            this.TipViewModel.SetMenuState(MenuType.Layer, MenuState.Hide, MenuState.FlyoutShow);
         }
         private void ShowLayerMenu(ILayer layer)
         {

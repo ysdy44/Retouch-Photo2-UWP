@@ -13,18 +13,14 @@
     <StackPanel Padding="2" MinWidth="300">
 
         <!--Square-->
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            Equal width and height
-        </TextBlock>
-        <elements:OnOffSwitch OnContent="None" OffContent="Square" IsOn="{x:Bind KeyboardViewModel.IsSquare,Mode=TwoWay}"/>
+        <TextBlock x:Name="SquareTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <elements:OnOffSwitch x:Name="SquareOnOffSwitch" IsOn="{x:Bind KeyboardViewModel.IsSquare,Mode=TwoWay}"/>
 
         <ContentControl Width="4"/>
 
         <!--Center-->
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            Center Scaling
-        </TextBlock>
-        <elements:OnOffSwitch OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}"/>
+        <TextBlock x:Name="CenterTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <elements:OnOffSwitch x:Name="CenterOnOffSwitch" OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}"/>
 
     </StackPanel>
 

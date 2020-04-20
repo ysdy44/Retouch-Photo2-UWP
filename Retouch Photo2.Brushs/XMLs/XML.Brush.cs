@@ -60,9 +60,9 @@ namespace Retouch_Photo2.Brushs
                     (
                        elementName,
                        new XElement("Type", BrushType.Image),
-                       Retouch_Photo2.Elements.XML.SaveImageStr("ImageStr", brush.ImageStr),
-                       FanKit.Transformers.XML.SaveTransformer("ImageSource", brush.ImageSource),
-                       FanKit.Transformers.XML.SaveTransformer("ImageDestination", brush.ImageDestination)
+                       Retouch_Photo2.Elements.XML.SavePhotocopier("Photocopier", brush.Photocopier),
+                       FanKit.Transformers.XML.SaveTransformer("PhotoSource", brush.PhotoSource),
+                       FanKit.Transformers.XML.SaveTransformer("PhotoDestination", brush.PhotoDestination)
                     );
                 default:
                     return new XElement
@@ -118,9 +118,9 @@ namespace Retouch_Photo2.Brushs
                     return new Brush
                     {
                         Type = BrushType.Image,
-                        ImageStr = Retouch_Photo2.Elements.XML.LoadImageStr(element.Element("ImageStr")),
-                        ImageSource = FanKit.Transformers.XML.LoadTransformer(element.Element("ImageSource")),
-                        ImageDestination = FanKit.Transformers.XML.LoadTransformer(element.Element("ImageDestination")),
+                        Photocopier = Retouch_Photo2.Elements.XML.LoadPhotocopier(element.Element("Photocopier")),
+                        PhotoSource = FanKit.Transformers.XML.LoadTransformer(element.Element("PhotoSource")),
+                        PhotoDestination = FanKit.Transformers.XML.LoadTransformer(element.Element("PhotoDestination")),
                     };
                 default:
                     return new Brush

@@ -18,47 +18,74 @@ namespace Retouch_Photo2.Effects
         {
             XElement element = new XElement(elementName);
 
-            if (effectManager.GaussianBlur_IsOn) element.Add(new XElement
-            (
-                "GaussianBlur",
-                new XAttribute("BlurAmount", effectManager.GaussianBlur_BlurAmount)
-             ));
-            if (effectManager.DirectionalBlur_IsOn) element.Add(new XElement
-            (
-               "DirectionalBlur",
-               new XAttribute("BlurAmount", effectManager.DirectionalBlur_BlurAmount),
-               new XAttribute("Angle", effectManager.DirectionalBlur_Angle)
-            ));
-            if (effectManager.Sharpen_IsOn) element.Add(new XElement
-            (
-                "Sharpen",
-                new XAttribute("Amount", effectManager.Sharpen_Amount)
-             ));
-            if (effectManager.OuterShadow_IsOn) element.Add(new XElement
-            (
-                "OuterShadow",
-                new XAttribute("Radius", effectManager.OuterShadow_Radius),
-                new XAttribute("Opacity", effectManager.OuterShadow_Opacity),
-                FanKit.Transformers.XML.SaveColor("Color", effectManager.OuterShadow_Color),
-                new XAttribute("Offset", effectManager.OuterShadow_Offset),
-                new XAttribute("Angle", effectManager.OuterShadow_Angle)
-             ));
-            if (effectManager.Outline_IsOn) element.Add(new XElement
-            (
-               "Outline",
-               new XAttribute("Size", effectManager.Outline_Size)
-            ));
-            if (effectManager.Emboss_IsOn) element.Add(new XElement
-            (
-               "Emboss",
-               new XAttribute("Amount", effectManager.Emboss_Amount),
-               new XAttribute("Angle", effectManager.Emboss_Angle)
-            ));
-            if (effectManager.Straighten_IsOn) element.Add(new XElement
-            (
-               "Straighten",
-               new XAttribute("Angle", effectManager.Straighten_Angle)
-            ));
+            if (effectManager.GaussianBlur_IsOn)
+            {
+                element.Add(new XElement
+               (
+                   "GaussianBlur",
+                   new XAttribute("Radius", effectManager.GaussianBlur_Radius)
+                ));
+            }
+
+            if (effectManager.DirectionalBlur_IsOn)
+            {
+                element.Add(new XElement
+               (
+                   "DirectionalBlur",
+                   new XAttribute("Radius", effectManager.DirectionalBlur_Radius),
+                   new XAttribute("Angle", effectManager.DirectionalBlur_Angle)
+               ));
+            }
+
+            if (effectManager.Sharpen_IsOn)
+            {
+                element.Add(new XElement
+                (
+                   "Sharpen",
+                   new XAttribute("Amount", effectManager.Sharpen_Amount)
+                ));
+            }
+
+            if (effectManager.OuterShadow_IsOn)
+            { 
+                element.Add(new XElement
+                (
+                   "OuterShadow",
+                   new XAttribute("Radius", effectManager.OuterShadow_Radius),
+                   new XAttribute("Opacity", effectManager.OuterShadow_Opacity),
+                   FanKit.Transformers.XML.SaveColor("Color", effectManager.OuterShadow_Color),
+                   new XAttribute("Offset", effectManager.OuterShadow_Offset),
+                   new XAttribute("Angle", effectManager.OuterShadow_Angle)
+                ));
+            }
+
+            if (effectManager.Outline_IsOn)
+            {
+                element.Add(new XElement
+                (
+                   "Outline",
+                   new XAttribute("Size", effectManager.Outline_Size)
+                ));
+            }
+
+            if (effectManager.Emboss_IsOn)
+            { 
+                element.Add(new XElement
+                (
+                   "Emboss",
+                   new XAttribute("Radius", effectManager.Emboss_Radius),
+                   new XAttribute("Angle", effectManager.Emboss_Angle)
+                ));
+            }
+
+            if (effectManager.Straighten_IsOn)
+            {
+                element.Add(new XElement
+                (
+                   "Straighten",
+                   new XAttribute("Angle", effectManager.Straighten_Angle)
+                ));
+            }
 
             return element;
         }
@@ -75,12 +102,12 @@ namespace Retouch_Photo2.Effects
             if (element.Element("GaussianBlur") is XElement gaussianBlur)
             {
                 effectManager.GaussianBlur_IsOn = true;
-                effectManager.GaussianBlur_BlurAmount = (float)gaussianBlur.Attribute("BlurAmount");
+                effectManager.GaussianBlur_Radius = (float)gaussianBlur.Attribute("Radius");
             }
             if (element.Element("DirectionalBlur") is XElement directionalBlur)
             {
                 effectManager.DirectionalBlur_IsOn = true;
-                effectManager.DirectionalBlur_BlurAmount = (float)directionalBlur.Attribute("BlurAmount");
+                effectManager.DirectionalBlur_Radius = (float)directionalBlur.Attribute("Radius");
                 effectManager.DirectionalBlur_Angle = (float)directionalBlur.Attribute("Angle");
             }
             if (element.Element("Sharpen") is XElement sharpen)
@@ -105,7 +132,7 @@ namespace Retouch_Photo2.Effects
             if (element.Element("Emboss") is XElement emboss)
             {
                 effectManager.Emboss_IsOn = true;
-                effectManager.Emboss_Amount = (float)emboss.Element("Amount");
+                effectManager.Emboss_Radius = (float)emboss.Element("Radius");
                 effectManager.Emboss_Angle = (float)emboss.Element("Angle");
             }
             if (element.Element("Straighten") is XElement straighten)

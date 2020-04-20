@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
+using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -30,12 +31,12 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Construct a curve-layer.
         /// </summary>
-        private GeometryCurveLayer()
+        public GeometryCurveLayer()
         {
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryCurveIcon(),
-                Text = "Curve",
+                Text = this.ConstructStrings(),
             };
         }
         /// <summary>
@@ -115,6 +116,14 @@ namespace Retouch_Photo2.Layers.Models
         public void Load(XElement element)
         {
             this.Nodes = FanKit.Transformers.XML.LoadNodeCollection("Node", element.Element("Nodes"));
+        }
+
+        //Strings
+        private string ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            return resource.GetString("/Layers/Curve");
         }
 
     }

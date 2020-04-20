@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
+using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -35,7 +36,7 @@ namespace Retouch_Photo2.Layers.Models
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryDiamondIcon(),
-                Text = "Diamond",
+                Text = this.ConstructStrings(),
             };
         }
 
@@ -73,6 +74,14 @@ namespace Retouch_Photo2.Layers.Models
         {
             this.Mid = (float)element.Element("Mid");
         }
-        
+
+        //Strings
+        private string ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            return resource.GetString("/Layers/GeometryDiamond");
+        }
+
     }
 }

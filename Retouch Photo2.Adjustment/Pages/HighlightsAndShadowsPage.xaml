@@ -4,56 +4,53 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pic="using:HSVColorPickers"
+    xmlns:hsvColorPickers="using:HSVColorPickers"
     mc:Ignorable="d"
-    d:DesignHeight="300"
+    d:DesignHeight="400"
     d:DesignWidth="200"
     >
 
     <StackPanel >
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            Shadows
-        </TextBlock>
-        <pic:TouchSlider x:Name="ShadowsSlider" Minimum="-100" Maximum="100">
-            <pic:TouchSlider.SliderBrush>
+        <!--Shadows-->
+        <TextBlock x:Name="ShadowsTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <hsvColorPickers:TouchSlider x:Name="ShadowsSlider" Minimum="-100" Maximum="100">
+            <hsvColorPickers:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
                     <GradientStop Color="Black" Offset="0"/>
                     <GradientStop Color="Gray" Offset="1"/>
                 </LinearGradientBrush>
-            </pic:TouchSlider.SliderBrush>
-        </pic:TouchSlider>
+            </hsvColorPickers:TouchSlider.SliderBrush>
+        </hsvColorPickers:TouchSlider>
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            Highlights
-        </TextBlock>
-        <pic:TouchSlider x:Name="HighlightsSlider" Minimum="-100" Maximum="100">
-            <pic:TouchSlider.SliderBrush>
+        <!--Highlights-->
+        <TextBlock x:Name="HighlightsTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <hsvColorPickers:TouchSlider x:Name="HighlightsSlider" Minimum="-100" Maximum="100">
+            <hsvColorPickers:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
                     <GradientStop Color="Gray" Offset="0"/>
                     <GradientStop Color="White" Offset="1"/>
                 </LinearGradientBrush>
-            </pic:TouchSlider.SliderBrush>
-        </pic:TouchSlider>
+            </hsvColorPickers:TouchSlider.SliderBrush>
+        </hsvColorPickers:TouchSlider>
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            Clarity
-        </TextBlock>
-        <pic:TouchSlider x:Name="ClaritySlider" Minimum="-100" Maximum="100">
-            <pic:TouchSlider.SliderBrush>
+        <!--Clarity-->
+        <TextBlock x:Name="ClarityTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <hsvColorPickers:TouchSlider x:Name="ClaritySlider" Minimum="-100" Maximum="100">
+            <hsvColorPickers:TouchSlider.SliderBrush>
             <SolidColorBrush Color="{ThemeResource AppBorderBrushColor}"/>
-            </pic:TouchSlider.SliderBrush>
-        </pic:TouchSlider>
+            </hsvColorPickers:TouchSlider.SliderBrush>
+        </hsvColorPickers:TouchSlider>
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            MaskBlurAmount
-        </TextBlock>
-        <pic:TouchSlider x:Name="MaskBlurAmountSlider" Minimum="0" Maximum="100">
-            <pic:TouchSlider.SliderBrush>
+        <!--MaskBlurAmount-->
+        <TextBlock x:Name="MaskBlurAmountTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <hsvColorPickers:TouchSlider x:Name="MaskBlurAmountSlider" Minimum="0" Maximum="100">
+            <hsvColorPickers:TouchSlider.SliderBrush>
                 <SolidColorBrush Color="{ThemeResource AppBorderBrushColor}"/>
-            </pic:TouchSlider.SliderBrush>
-        </pic:TouchSlider>
+            </hsvColorPickers:TouchSlider.SliderBrush>
+        </hsvColorPickers:TouchSlider>
 
-        <ContentControl Height="12"/>
+        <ContentControl Height="8"/>
     </StackPanel>
+    
 </Page>

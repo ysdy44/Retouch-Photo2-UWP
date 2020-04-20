@@ -4,23 +4,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pic="using:HSVColorPickers"
+    xmlns:hsvColorPickers="using:HSVColorPickers"
     mc:Ignorable="d"
-    d:DesignHeight="300"
+    d:DesignHeight="400"
     d:DesignWidth="200"
     >
 
     <StackPanel>
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            Exposure
-        </TextBlock>
-        <pic:TouchSlider x:Name="ExposureSlider" Minimum="-200" Maximum="200">
-            <pic:TouchSlider.SliderBrush>
+        
+        <!--Exposure-->
+        <TextBlock x:Name="ExposureTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <hsvColorPickers:TouchSlider x:Name="ExposureSlider" Minimum="-200" Maximum="200">
+            <hsvColorPickers:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
                     <GradientStop Offset="0" Color="Black"/>
                     <GradientStop Offset="1" Color="White"/>
                 </LinearGradientBrush>
-            </pic:TouchSlider.SliderBrush>
-        </pic:TouchSlider>
+            </hsvColorPickers:TouchSlider.SliderBrush>
+        </hsvColorPickers:TouchSlider>
+        
     </StackPanel>
 </Page>

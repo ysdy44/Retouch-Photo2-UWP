@@ -25,9 +25,16 @@
 
             
         <AppBarSeparator/>
-        <Button x:Name="Button01" MinWidth="100" MinHeight="100" Content="00001" Tapped="Button_Tapped"/>
-        <Button x:Name="Button02" MinWidth="100" MinHeight="100" Content="00002" Tapped="Button02_Tapped"/>
+        <TextBlock x:Name="sssssss"/>
+        <Button x:Name="BBBB" Content="C" Tapped="BBBB_Tapped"/>
+        <Button x:Name="CCC" Content="V" Tapped="CCC_Tapped"/>
+        <Button x:Name="Button01" MinWidth="100" MinHeight="100" Content="200" Tapped="Button_Tapped"/>
+        <Button x:Name="Button02" MinWidth="100" MinHeight="100" Content="900" Tapped="Button02_Tapped"/>
 
+
+        <Grid x:Name="hhhhhhhhhhh" Background="Red" Height="900" SizeChanged="hhhhhhhhhhh_SizeChanged">
+            
+        </Grid>
     </StackPanel>
     </Page>
     

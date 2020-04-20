@@ -107,10 +107,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="IAdjustment.cs" />
-    <Compile Include="IAdjustmentPage.cs" />
     <Compile Include="Filter.cs" />
     <Compile Include="AdjustmentManager.cs" />
     <Compile Include="AdjustmentType.cs" />
+    <Compile Include="IAdjustmentPage.cs" />
     <Compile Include="Icons\BrightnessIcon.xaml.cs">
       <DependentUpon>BrightnessIcon.xaml</DependentUpon>
     </Compile>
@@ -170,18 +170,14 @@
     <Compile Include="Pages\GammaTransferPage.xaml.cs">
       <DependentUpon>GammaTransferPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\GrayPage.xaml.cs">
-      <DependentUpon>GrayPage.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Pages\GrayPage.cs" />
     <Compile Include="Pages\HighlightsAndShadowsPage.xaml.cs">
       <DependentUpon>HighlightsAndShadowsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\HueRotationPage.xaml.cs">
       <DependentUpon>HueRotationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\InvertPage.xaml.cs">
-      <DependentUpon>InvertPage.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Pages\InvertPage.cs" />
     <Compile Include="Pages\SaturationPage.xaml.cs">
       <DependentUpon>SaturationPage.xaml</DependentUpon>
     </Compile>
@@ -273,10 +269,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\GrayPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\HighlightsAndShadowsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -284,10 +276,6 @@
     <Page Include="Pages\HueRotationPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\InvertPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SaturationPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -312,6 +300,7 @@
       <Name>Retouch Photo2.Elements</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
