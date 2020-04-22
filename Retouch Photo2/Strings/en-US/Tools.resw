@@ -117,94 +117,151 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Brightness" xml:space="preserve">
-    <value>亮度</value>
+  <data name="Acrylic" xml:space="preserve">
+    <value>Acrylic Tool</value>
   </data>
-  <data name="Brightness_BlackToDark" xml:space="preserve">
-    <value>黑转暗</value>
+  <data name="Acrylic_BlurAmount" xml:space="preserve">
+    <value>BlurAmount</value>
   </data>
-  <data name="Brightness_BlackToLight" xml:space="preserve">
-    <value>黑转亮</value>
+  <data name="Acrylic_TintColor" xml:space="preserve">
+    <value>TintColor</value>
   </data>
-  <data name="Brightness_WhiteToDark" xml:space="preserve">
-    <value>白转暗</value>
+  <data name="Acrylic_TintOpacity" xml:space="preserve">
+    <value>TintOpacity</value>
   </data>
-  <data name="Brightness_WhiteToLight" xml:space="preserve">
-    <value>白转亮</value>
+  <data name="Brush" xml:space="preserve">
+    <value>Brush Tool</value>
   </data>
-  <data name="Contrast" xml:space="preserve">
-    <value>对比度</value>
+  <data name="Brush_Brush" xml:space="preserve">
+    <value>Brush</value>
   </data>
-  <data name="Contrast_Contrast" xml:space="preserve">
-    <value>对比度</value>
+  <data name="Brush_FillOrStroke" xml:space="preserve">
+    <value>Fill or Stroke</value>
   </data>
-  <data name="Exposure" xml:space="preserve">
-    <value>曝光</value>
+  <data name="Brush_Type" xml:space="preserve">
+    <value>Type</value>
   </data>
-  <data name="GammaTransfer" xml:space="preserve">
-    <value>伽马传递</value>
+  <data name="Brush_TypeColor" xml:space="preserve">
+    <value>Color</value>
   </data>
-  <data name="GammaTransfer_Amplitude" xml:space="preserve">
-    <value>振幅</value>
+  <data name="Brush_TypeElliptical" xml:space="preserve">
+    <value>Elliptical</value>
   </data>
-  <data name="GammaTransfer_Exponent" xml:space="preserve">
-    <value>指数</value>
+  <data name="Brush_TypeImage" xml:space="preserve">
+    <value>Image</value>
   </data>
-  <data name="GammaTransfer_Offset" xml:space="preserve">
-    <value>位移</value>
+  <data name="Brush_TypeLinear" xml:space="preserve">
+    <value>Linear</value>
   </data>
-  <data name="Gray" xml:space="preserve">
-    <value>黑白</value>
+  <data name="Brush_TypeNone" xml:space="preserve">
+    <value>None</value>
   </data>
-  <data name="HighlightsAndShadows" xml:space="preserve">
-    <value>高光阴影</value>
+  <data name="Brush_TypeRadial" xml:space="preserve">
+    <value>Radial</value>
   </data>
-  <data name="HighlightsAndShadows_Clarity" xml:space="preserve">
-    <value>清晰</value>
+  <data name="Crop" xml:space="preserve">
+    <value>Vector crop Tool</value>
   </data>
-  <data name="HighlightsAndShadows_Highlights" xml:space="preserve">
-    <value>高光</value>
+  <data name="Crop_Fit" xml:space="preserve">
+    <value>Fit Crop</value>
   </data>
-  <data name="HighlightsAndShadows_MaskBlurAmount" xml:space="preserve">
-    <value>模糊</value>
+  <data name="Crop_Reset" xml:space="preserve">
+    <value>Reset Crop</value>
   </data>
-  <data name="HighlightsAndShadows_Shadows" xml:space="preserve">
-    <value>阴影</value>
+  <data name="Cursor" xml:space="preserve">
+    <value>Cursor Tool</value>
   </data>
-  <data name="HueRotation" xml:space="preserve">
-    <value>色相旋转</value>
+  <data name="Cursor_MultiMode_ToolTip" xml:space="preserve">
+    <value>Multi-Mode</value>
   </data>
-  <data name="HueRotation_Angle" xml:space="preserve">
-    <value>角度</value>
+  <data name="Cursor_StepFrequency_ToolTip" xml:space="preserve">
+    <value>Step Frequency</value>
   </data>
-  <data name="Invert" xml:space="preserve">
-    <value>反色</value>
+  <data name="Ellipse" xml:space="preserve">
+    <value>Ellipse Tool</value>
   </data>
-  <data name="Saturation" xml:space="preserve">
-    <value>饱和度</value>
+  <data name="Image" xml:space="preserve">
+    <value>Image Tool</value>
   </data>
-  <data name="Saturation_Saturation" xml:space="preserve">
-    <value>饱和度</value>
+  <data name="Image_Clear" xml:space="preserve">
+    <value>Clear</value>
   </data>
-  <data name="Temperature" xml:space="preserve">
-    <value>冷暖</value>
+  <data name="Image_Replace" xml:space="preserve">
+    <value>Replace</value>
   </data>
-  <data name="Temperature_Temperature" xml:space="preserve">
-    <value>冷暖</value>
+  <data name="Image_Select" xml:space="preserve">
+    <value>Select</value>
   </data>
-  <data name="Temperature_Tint" xml:space="preserve">
-    <value>色彩增强</value>
+  <data name="Pen" xml:space="preserve">
+    <value>Pen Tool</value>
   </data>
-  <data name="Vignette" xml:space="preserve">
-    <value>装饰图案</value>
+  <data name="PenFlyout_Mode" xml:space="preserve">
+    <value>Mode</value>
   </data>
-  <data name="Vignette_Amount" xml:space="preserve">
-    <value>量</value>
+  <data name="PenFlyout_Mode_Asymmetric" xml:space="preserve">
+    <value>Asymmetric</value>
   </data>
-  <data name="Vignette_Color" xml:space="preserve">
-    <value>颜色</value>
+  <data name="PenFlyout_Mode_Disconnected" xml:space="preserve">
+    <value>Disconnected</value>
   </data>
-  <data name="Vignette_Curve" xml:space="preserve">
-    <value>曲线</value>
+  <data name="PenFlyout_Mode_Mirrored" xml:space="preserve">
+    <value>Mirrored</value>
+  </data>
+  <data name="PenFlyout_Restriction" xml:space="preserve">
+    <value>Restriction</value>
+  </data>
+  <data name="PenFlyout_Restriction_Angle" xml:space="preserve">
+    <value>Angle</value>
+  </data>
+  <data name="PenFlyout_Restriction_Length" xml:space="preserve">
+    <value>Length</value>
+  </data>
+  <data name="Pen_AddOrMoveOff" xml:space="preserve">
+    <value>Move</value>
+  </data>
+  <data name="Pen_AddOrMoveOn" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Pen_Insert" xml:space="preserve">
+    <value>Insert</value>
+  </data>
+  <data name="Pen_Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Pen_Sharp" xml:space="preserve">
+    <value>Sharp</value>
+  </data>
+  <data name="Pen_Smooth" xml:space="preserve">
+    <value>Smooth</value>
+  </data>
+  <data name="Rectangle" xml:space="preserve">
+    <value>Rectangle Tool</value>
+  </data>
+  <data name="TextArtistic" xml:space="preserve">
+    <value>Artistic Text Tool</value>
+  </data>
+  <data name="TextFrame" xml:space="preserve">
+    <value>Frame Text Tool</value>
+  </data>
+  <data name="TextFrame_PlaceholderText" xml:space="preserve">
+    <value>Input Text...</value>
+  </data>
+  <data name="Transparency" xml:space="preserve">
+    <value>Transparency Tool</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View Tool</value>
+  </data>
+  <data name="View_Radian" xml:space="preserve">
+    <value>Radian</value>
+  </data>
+  <data name="View_RadianClear_ToolTip" xml:space="preserve">
+    <value>Reset the rotation radian</value>
+  </data>
+  <data name="View_Scale" xml:space="preserve">
+    <value>Scale</value>
+  </data>
+  <data name="View_ScaleClear_ToolTip" xml:space="preserve">
+    <value>Reset the scale</value>
   </data>
 </root>

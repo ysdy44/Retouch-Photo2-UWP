@@ -111,14 +111,14 @@
       <DependentUpon>CompositeModeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ApplicationViewTitleBarBackgroundExtension.cs" />
-    <Compile Include="Controls\FormatComboBox.xaml.cs">
+    <Compile Include="FormatComboBox.xaml.cs">
       <DependentUpon>FormatComboBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FormatType.cs" />
-    <Compile Include="Controls\RadiusAnimaIcon.xaml.cs">
+    <Compile Include="FormatType.cs" />
+    <Compile Include="RadiusAnimaIcon.xaml.cs">
       <DependentUpon>RadiusAnimaIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SizePicker.xaml.cs">
+    <Compile Include="SizePicker.xaml.cs">
       <DependentUpon>SizePicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="DialogBase.xaml.cs">
@@ -136,7 +136,7 @@
     <Compile Include="ExpandAppbars\ExpandAppbar.xaml.cs">
       <DependentUpon>ExpandAppbar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LoadingControl.xaml.cs">
+    <Compile Include="LoadingControl.xaml.cs">
       <DependentUpon>LoadingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExpandAppbars\ExpandAppbarRepeatButton.xaml.cs">
@@ -167,10 +167,10 @@
     <Compile Include="RadiansPicker.xaml.cs">
       <DependentUpon>RadiansPicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RadiusAnimaPanel.xaml.cs">
+    <Compile Include="RadiusAnimaPanel.xaml.cs">
       <DependentUpon>RadiusAnimaPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ThemeControl.xaml.cs">
+    <Compile Include="ThemeControl.xaml.cs">
       <DependentUpon>ThemeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="IconButtons\IconButton.xaml.cs">
@@ -230,15 +230,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\FormatComboBox.xaml">
+    <Page Include="FormatComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\RadiusAnimaIcon.xaml">
+    <Page Include="RadiusAnimaIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\SizePicker.xaml">
+    <Page Include="SizePicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -262,7 +262,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\LoadingControl.xaml">
+    <Page Include="LoadingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -294,11 +294,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\RadiusAnimaPanel.xaml">
+    <Page Include="RadiusAnimaPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ThemeControl.xaml">
+    <Page Include="ThemeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

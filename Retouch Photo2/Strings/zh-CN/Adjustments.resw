@@ -118,93 +118,96 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Brightness" xml:space="preserve">
-    <value>Brightness</value>
+    <value>亮度</value>
   </data>
   <data name="Brightness_BlackToDark" xml:space="preserve">
-    <value>Black to Dark</value>
+    <value>黑转暗</value>
   </data>
   <data name="Brightness_BlackToLight" xml:space="preserve">
-    <value>Black to Light</value>
+    <value>黑转亮</value>
   </data>
   <data name="Brightness_WhiteToDark" xml:space="preserve">
-    <value>White to Dark</value>
+    <value>白转暗</value>
   </data>
   <data name="Brightness_WhiteToLight" xml:space="preserve">
-    <value>White to Light</value>
+    <value>白转亮</value>
   </data>
   <data name="Contrast" xml:space="preserve">
-    <value>Contrast</value>
+    <value>对比度</value>
   </data>
   <data name="Contrast_Contrast" xml:space="preserve">
-    <value>Contrast</value>
+    <value>对比度</value>
   </data>
   <data name="Exposure" xml:space="preserve">
-    <value>Exposure</value>
+    <value>曝光</value>
+  </data>
+  <data name="Exposure_Exposure" xml:space="preserve">
+    <value>曝光</value>
   </data>
   <data name="GammaTransfer" xml:space="preserve">
-    <value>GammaTransfer</value>
+    <value>伽马传递</value>
   </data>
   <data name="GammaTransfer_Amplitude" xml:space="preserve">
-    <value>Amplitude</value>
+    <value>振幅</value>
   </data>
   <data name="GammaTransfer_Exponent" xml:space="preserve">
-    <value>Exponent</value>
+    <value>指数</value>
   </data>
   <data name="GammaTransfer_Offset" xml:space="preserve">
-    <value>Offset</value>
+    <value>位移</value>
   </data>
   <data name="Gray" xml:space="preserve">
-    <value>Gray</value>
+    <value>黑白</value>
   </data>
   <data name="HighlightsAndShadows" xml:space="preserve">
-    <value>HighlightsAndShadows</value>
+    <value>高光阴影</value>
   </data>
   <data name="HighlightsAndShadows_Clarity" xml:space="preserve">
-    <value>Clarity</value>
+    <value>清晰</value>
   </data>
   <data name="HighlightsAndShadows_Highlights" xml:space="preserve">
-    <value>Highlights</value>
+    <value>高光</value>
   </data>
   <data name="HighlightsAndShadows_MaskBlurAmount" xml:space="preserve">
-    <value>MaskBlurAmount</value>
+    <value>模糊</value>
   </data>
   <data name="HighlightsAndShadows_Shadows" xml:space="preserve">
-    <value>Shadows</value>
+    <value>阴影</value>
   </data>
   <data name="HueRotation" xml:space="preserve">
-    <value>HueRotation</value>
+    <value>色相旋转</value>
   </data>
   <data name="HueRotation_Angle" xml:space="preserve">
-    <value>Angle</value>
+    <value>角度</value>
   </data>
   <data name="Invert" xml:space="preserve">
-    <value>Invert</value>
+    <value>反色</value>
   </data>
   <data name="Saturation" xml:space="preserve">
-    <value>Saturation</value>
+    <value>饱和度</value>
   </data>
   <data name="Saturation_Saturation" xml:space="preserve">
-    <value>Saturation</value>
+    <value>饱和度</value>
   </data>
   <data name="Temperature" xml:space="preserve">
-    <value>Temperature</value>
+    <value>冷暖</value>
   </data>
   <data name="Temperature_Temperature" xml:space="preserve">
-    <value>Temperature</value>
+    <value>冷暖</value>
   </data>
   <data name="Temperature_Tint" xml:space="preserve">
-    <value>Tint</value>
+    <value>色彩增强</value>
   </data>
   <data name="Vignette" xml:space="preserve">
-    <value>Vignette</value>
+    <value>装饰图案</value>
   </data>
   <data name="Vignette_Amount" xml:space="preserve">
-    <value>Amount</value>
+    <value>量</value>
   </data>
   <data name="Vignette_Color" xml:space="preserve">
-    <value>Color</value>
+    <value>颜色</value>
   </data>
   <data name="Vignette_Curve" xml:space="preserve">
-    <value>Curve</value>
+    <value>曲线</value>
   </data>
 </root>

@@ -20,7 +20,6 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="{StaticResource AppText}"/>
         </Style>
     </UserControl.Resources>
 
@@ -77,7 +76,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="2"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="44"/>
                     </Grid.ColumnDefinitions>
 
                     <Border Style="{StaticResource AppRoundedBorderStyle}">
@@ -135,7 +134,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="2"/>
-                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="44"/>
                     </Grid.ColumnDefinitions>
 
                     <Border Style="{ThemeResource AppRoundedBorderStyle}">

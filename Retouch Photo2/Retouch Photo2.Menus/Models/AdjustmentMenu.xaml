@@ -161,7 +161,7 @@
         <menus:MenuExpander.SecondPage>
             <Grid MinHeight="165" MaxHeight="300">
 
-                <Border x:Name="AdjustmentPageBorder" Visibility="Collapsed" Grid.Row="1" Background="Transparent">
+                <Border x:Name="AdjustmentPageBorder" Padding="2,0" Visibility="Collapsed" Grid.Row="1" Background="Transparent">
                     <!--Frame-->
                 </Border>
 

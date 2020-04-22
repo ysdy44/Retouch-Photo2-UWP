@@ -25,21 +25,21 @@
                     <SolidColorBrush x:Key="AppForeground" Color="{ThemeResource AppForegroundColor}"/>
                     <Color x:Key="AppBackgroundColor" >#F0F0F2</Color>
                     <SolidColorBrush x:Key="AppBackground" Color="{ThemeResource AppBackgroundColor}"/>
-                    <Color x:Key="AppBorderBrushColor" >#CECEDE</Color>
+                    <Color x:Key="AppBorderBrushColor" >#BEBCC7</Color>  
                     <SolidColorBrush x:Key="AppBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
 
                     <Color x:Key="AppFillColor" >#FFFFFF</Color>
                     <SolidColorBrush x:Key="AppFill" Color="{ThemeResource AppFillColor}"/>
                     <Color x:Key="AppStrokeColor" >#666b6791</Color>
                     <SolidColorBrush x:Key="AppStroke" Color="{ThemeResource AppStrokeColor}"/>
-                    <Color x:Key="AppTextColor" >#88000000</Color>
+                    <Color x:Key="AppTextColor" >#99000000</Color>
                     <SolidColorBrush x:Key="AppText" Color="{ThemeResource AppTextColor}"/>
 
                     <LinearGradientBrush x:Key="AppLinearBrush" StartPoint="0.5,0" EndPoint="0.5,1">
                         <GradientStop Color="#FFFFFF" Offset="0"/>
                         <GradientStop Color="#f7f7f7" Offset="0.25"/>
                         <GradientStop Color="#f5f5f5" Offset="0.5"/>
-                        <GradientStop Color="#f2f2f2" Offset="0.75"/>
+                        <GradientStop Color="#EEEEEE" Offset="0.75"/>
                         <GradientStop Color="#E0E0E0" Offset="1"/>
                     </LinearGradientBrush>
 

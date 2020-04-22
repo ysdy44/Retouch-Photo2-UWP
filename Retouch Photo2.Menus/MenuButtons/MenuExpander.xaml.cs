@@ -9,7 +9,7 @@ namespace Retouch_Photo2.Menus
     /// </summary>
     public partial class MenuExpander : UserControl
     {
-        
+
         //@Content
         /// <summary> TextBlock's Text. </summary>
         public string Title { set => this.TitleTextBlock.Text = value; get => this.TitleTextBlock.Text; }
@@ -47,13 +47,13 @@ namespace Retouch_Photo2.Menus
                     case MenuState.FlyoutShow:
                         {
                             if (this._vsIsSecondPage) return this.FlyoutShowSecondPage;
-                            return this.FlyoutShow ;
+                            return this.FlyoutShow;
                         }
 
                     case MenuState.OverlayNotExpanded:
                         return this.OverlayNotExpanded;
 
-                    case MenuState.Overlay: 
+                    case MenuState.Overlay:
                         {
                             if (this._vsIsSecondPage) return this.OverlaySecondPage;
                             return this.Overlay;
@@ -67,20 +67,20 @@ namespace Retouch_Photo2.Menus
 
                 VisualStateManager.GoToState(this, value.Name, false);
 
-                if (value==this.Hide)
+                if (value == this.Hide)
                 {
                     this.HeightFrame.Value = 0;
                     this.HeightStoryboard.Begin();//Storyboard
                 }
             }
         }
-        
+
         public MenuState State
         {
             get => this._vsState;
             set
             {
-                if (value== MenuState.OverlayNotExpanded)
+                if (value == MenuState.OverlayNotExpanded)
                 {
                     this.HeightFrame.Value = 0;
                     this.HeightStoryboard.Begin();//Storyboard
@@ -105,8 +105,39 @@ namespace Retouch_Photo2.Menus
         public MenuExpander()
         {
             this.InitializeComponent();
+            this.ConstructWidthStoryboard();
             this.ConstructHeightStoryboard();
             this.Tapped += (s, e) => e.Handled = true;
+        }
+
+        MenuWidthMode WidthMode
+        {
+            set
+            {
+                this.WidthFlyoutItem222.IsChecked = (value == MenuWidthMode.Width222);
+                this.WidthFlyoutItem272.IsChecked = (value == MenuWidthMode.Width272);
+                this.WidthFlyoutItem322.IsChecked = (value == MenuWidthMode.Width322);
+                this.WidthFlyoutItem372.IsChecked = (value == MenuWidthMode.Width372);
+
+                this.WidthFrame.Value = (int)value;
+                this.WidthStoryboard.Begin();//Storyboard
+            }
+        }
+
+        private void ConstructWidthStoryboard()
+        {
+            // Binding own DependencyProperty to the Storyboard
+            Storyboard.SetTarget(this.WidthKeyFrames, this.RootGrid);
+            Storyboard.SetTargetProperty(this.WidthKeyFrames, "(UIElement.Width)");
+
+            this.WidthFlyoutItem222.IsChecked = true;
+            this.WidthFlyoutItem222.Click += (s, e) => this.WidthMode = MenuWidthMode.Width222;
+            this.WidthFlyoutItem272.Click += (s, e) => this.WidthMode = MenuWidthMode.Width272;
+            this.WidthFlyoutItem322.Click += (s, e) => this.WidthMode = MenuWidthMode.Width322;
+            this.WidthFlyoutItem372.Click += (s, e) => this.WidthMode = MenuWidthMode.Width372;
+            
+            this._TitleGrid.RightTapped += (s, e) => this.WidthMenuFlyout.ShowAt(this._TitleGrid);
+            this._TitleGrid.Holding += (s, e) => this.WidthMenuFlyout.ShowAt(this._TitleGrid);
         }
 
         private double HeightBegin

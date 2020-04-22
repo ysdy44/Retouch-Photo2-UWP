@@ -1,7 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Layers.Icons;
 using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;

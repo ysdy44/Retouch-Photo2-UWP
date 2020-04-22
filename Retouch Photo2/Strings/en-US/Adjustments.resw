@@ -117,130 +117,97 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Acrylic" xml:space="preserve">
-    <value>亚克力工具</value>
+  <data name="Brightness" xml:space="preserve">
+    <value>Brightness</value>
   </data>
-  <data name="Acrylic_BlurAmount" xml:space="preserve">
-    <value>模糊值</value>
+  <data name="Brightness_BlackToDark" xml:space="preserve">
+    <value>Black to Dark</value>
   </data>
-  <data name="Acrylic_TintColor" xml:space="preserve">
-    <value>色调</value>
+  <data name="Brightness_BlackToLight" xml:space="preserve">
+    <value>Black to Light</value>
   </data>
-  <data name="Acrylic_TintOpacity" xml:space="preserve">
-    <value>透明度</value>
+  <data name="Brightness_WhiteToDark" xml:space="preserve">
+    <value>White to Dark</value>
   </data>
-  <data name="Brush" xml:space="preserve">
-    <value>笔刷工具</value>
+  <data name="Brightness_WhiteToLight" xml:space="preserve">
+    <value>White to Light</value>
   </data>
-  <data name="Brush_Brush" xml:space="preserve">
-    <value>笔刷</value>
+  <data name="Contrast" xml:space="preserve">
+    <value>Contrast</value>
   </data>
-  <data name="Brush_FillOrStroke" xml:space="preserve">
-    <value>填充或描边</value>
+  <data name="Contrast_Contrast" xml:space="preserve">
+    <value>Contrast</value>
   </data>
-  <data name="Brush_Type" xml:space="preserve">
-    <value>类型</value>
+  <data name="Exposure" xml:space="preserve">
+    <value>Exposure</value>
   </data>
-  <data name="Brush_TypeColor" xml:space="preserve">
-    <value>颜色</value>
+  <data name="Exposure_Exposure" xml:space="preserve">
+    <value>Exposure</value>
   </data>
-  <data name="Brush_TypeElliptical" xml:space="preserve">
-    <value>椭圆形</value>
+  <data name="GammaTransfer" xml:space="preserve">
+    <value>GammaTransfer</value>
   </data>
-  <data name="Brush_TypeImage" xml:space="preserve">
-    <value>图像</value>
+  <data name="GammaTransfer_Amplitude" xml:space="preserve">
+    <value>Amplitude</value>
   </data>
-  <data name="Brush_TypeLinear" xml:space="preserve">
-    <value>线性</value>
+  <data name="GammaTransfer_Exponent" xml:space="preserve">
+    <value>Exponent</value>
   </data>
-  <data name="Brush_TypeNone" xml:space="preserve">
-    <value>无</value>
+  <data name="GammaTransfer_Offset" xml:space="preserve">
+    <value>Offset</value>
   </data>
-  <data name="Brush_TypeRadial" xml:space="preserve">
-    <value>径向</value>
+  <data name="Gray" xml:space="preserve">
+    <value>Gray</value>
   </data>
-  <data name="Crop" xml:space="preserve">
-    <value>矢量裁剪工具</value>
+  <data name="HighlightsAndShadows" xml:space="preserve">
+    <value>HighlightsAndShadows</value>
   </data>
-  <data name="Crop_Fit" xml:space="preserve">
-    <value>适合裁剪</value>
+  <data name="HighlightsAndShadows_Clarity" xml:space="preserve">
+    <value>Clarity</value>
   </data>
-  <data name="Crop_Reset" xml:space="preserve">
-    <value>重置裁剪</value>
+  <data name="HighlightsAndShadows_Highlights" xml:space="preserve">
+    <value>Highlights</value>
   </data>
-  <data name="Cursor" xml:space="preserve">
-    <value>光标工具</value>
+  <data name="HighlightsAndShadows_MaskBlurAmount" xml:space="preserve">
+    <value>MaskBlurAmount</value>
   </data>
-  <data name="Cursor_MultiMode_ToolTip" xml:space="preserve">
-    <value>多选模式</value>
+  <data name="HighlightsAndShadows_Shadows" xml:space="preserve">
+    <value>Shadows</value>
   </data>
-  <data name="Cursor_StepFrequency_ToolTip" xml:space="preserve">
-    <value>步频</value>
+  <data name="HueRotation" xml:space="preserve">
+    <value>HueRotation</value>
   </data>
-  <data name="Ellipse" xml:space="preserve">
-    <value>椭圆工具</value>
+  <data name="HueRotation_Angle" xml:space="preserve">
+    <value>Angle</value>
   </data>
-  <data name="Image" xml:space="preserve">
-    <value>图像工具</value>
+  <data name="Invert" xml:space="preserve">
+    <value>Invert</value>
   </data>
-  <data name="Image_Clear" xml:space="preserve">
-    <value>清除</value>
+  <data name="Saturation" xml:space="preserve">
+    <value>Saturation</value>
   </data>
-  <data name="Image_Replace" xml:space="preserve">
-    <value>替换</value>
+  <data name="Saturation_Saturation" xml:space="preserve">
+    <value>Saturation</value>
   </data>
-  <data name="Image_Select" xml:space="preserve">
-    <value>选择</value>
+  <data name="Temperature" xml:space="preserve">
+    <value>Temperature</value>
   </data>
-  <data name="Pen" xml:space="preserve">
-    <value>钢笔工具</value>
+  <data name="Temperature_Temperature" xml:space="preserve">
+    <value>Temperature</value>
   </data>
-  <data name="Pen_AddOrMoveOff" xml:space="preserve">
-    <value>移动</value>
+  <data name="Temperature_Tint" xml:space="preserve">
+    <value>Tint</value>
   </data>
-  <data name="Pen_AddOrMoveOn" xml:space="preserve">
-    <value>添加</value>
+  <data name="Vignette" xml:space="preserve">
+    <value>Vignette</value>
   </data>
-  <data name="Pen_Insert" xml:space="preserve">
-    <value>插入</value>
+  <data name="Vignette_Amount" xml:space="preserve">
+    <value>Amount</value>
   </data>
-  <data name="Pen_Remove" xml:space="preserve">
-    <value>移除</value>
+  <data name="Vignette_Color" xml:space="preserve">
+    <value>Color</value>
   </data>
-  <data name="Pen_Sharp" xml:space="preserve">
-    <value>尖锐</value>
-  </data>
-  <data name="Pen_Smooth" xml:space="preserve">
-    <value>平滑</value>
-  </data>
-  <data name="Rectangle" xml:space="preserve">
-    <value>矩形工具</value>
-  </data>
-  <data name="TextArtistic" xml:space="preserve">
-    <value>艺术文本工具</value>
-  </data>
-  <data name="TextFrame" xml:space="preserve">
-    <value>框架文本工具</value>
-  </data>
-  <data name="TextFrame_PlaceholderText" xml:space="preserve">
-    <value>输入文本...</value>
-  </data>
-  <data name="Transparency" xml:space="preserve">
-    <value>透明度工具</value>
-  </data>
-  <data name="View" xml:space="preserve">
-    <value>视图工具</value>
-  </data>
-  <data name="View_Radian" xml:space="preserve">
-    <value>弧度</value>
-  </data>
-  <data name="View_RadianClear_ToolTip" xml:space="preserve">
-    <value>重置旋转弧度</value>
-  </data>
-  <data name="View_Scale" xml:space="preserve">
-    <value>比例</value>
-  </data>
-  <data name="View_ScaleClear_ToolTip" xml:space="preserve">
-    <value>重置比例</value>
+  <data name="Vignette_Curve" xml:space="preserve">
+    <value>Curve</value>
   </data>
 </root>

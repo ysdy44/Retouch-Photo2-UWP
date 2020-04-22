@@ -13,33 +13,31 @@
 
     <StackPanel Padding="2" MinWidth="300">
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            Restriction
-        </TextBlock>
+        <!--Restriction-->
+        <TextBlock x:Name="RestrictionTextBlock" Style="{StaticResource AppTextBlock}"/>
         <Border Height="Auto" HorizontalAlignment="Left" Style="{ThemeResource AppRoundedBorderStyle}">
             <StackPanel Orientation="Horizontal" Padding="8,0">
-                <CheckBox x:Name="AngleCheckBox" Content="Angle" MinWidth="100"/>
-                <CheckBox x:Name="LengthCheckBox" Content="Length" MinWidth="100"/>
+                <CheckBox x:Name="AngleCheckBox" MinWidth="100"/>
+                <CheckBox x:Name="LengthCheckBox" MinWidth="100"/>
             </StackPanel>
         </Border>
 
         <ContentControl Height="8"/>
 
-        <TextBlock Style="{StaticResource AppTextBlock}">
-            Mode
-        </TextBlock>
+        <!--Mode-->
+        <TextBlock x:Name="ModeTextBlock" Style="{StaticResource AppTextBlock}"/>
         <Border Height="Auto" MaxHeight="120" Style="{ThemeResource AppRoundedBorderStyle}">
             <StackPanel Orientation="Horizontal">
 
-                <RadioButton x:Name="MirroredRadioButton"  Tag="Mirrored" Style="{StaticResource AppTapRadioButtonStyle}">
+                <RadioButton x:Name="MirroredRadioButton" Style="{StaticResource AppTapRadioButtonStyle}">
                     <toolElements:PenMirroredIcon/>
                 </RadioButton>
 
-                <RadioButton x:Name="DisconnectedRadioButton" Tag="Disconnected" Style="{StaticResource AppTapRadioButtonStyle}">
+                <RadioButton x:Name="DisconnectedRadioButton" Style="{StaticResource AppTapRadioButtonStyle}">
                     <toolElements:PenDisconnectedIcon/>
                 </RadioButton>
 
-                <RadioButton x:Name="AsymmetricRadioButton" Tag="Asymmetric" Style="{StaticResource AppTapRadioButtonStyle}">
+                <RadioButton x:Name="AsymmetricRadioButton" Style="{StaticResource AppTapRadioButtonStyle}">
                     <toolElements:PenAsymmetricIcon/>
                 </RadioButton>
 

@@ -96,24 +96,6 @@ namespace Retouch_Photo2
                  new GeometryHeartTool(),
             },
 
-            //Menu
-            Menus = new List<IMenu>
-            {               
-                 /*
-                new LayerMenu(),
-                new CharacterMenu(),
-
-                new SelectionMenu(),
-                new OperateMenu(),
-                new AdjustmentMenu(),
-                new EffectMenu(),
-                new TransformerMenu(),
-                new CharacterMenu(),
-                new ColorMenu(),
-                new LayerMenu(),      
-
-                 */
-            },
         };
 
 

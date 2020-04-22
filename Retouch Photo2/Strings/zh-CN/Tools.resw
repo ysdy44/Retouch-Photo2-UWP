@@ -118,129 +118,150 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Acrylic" xml:space="preserve">
-    <value>Acrylic Tool</value>
+    <value>亚克力工具</value>
   </data>
   <data name="Acrylic_BlurAmount" xml:space="preserve">
-    <value>BlurAmount</value>
+    <value>模糊值</value>
   </data>
   <data name="Acrylic_TintColor" xml:space="preserve">
-    <value>TintColor</value>
+    <value>色调</value>
   </data>
   <data name="Acrylic_TintOpacity" xml:space="preserve">
-    <value>TintOpacity</value>
+    <value>透明度</value>
   </data>
   <data name="Brush" xml:space="preserve">
-    <value>Brush Tool</value>
+    <value>笔刷工具</value>
   </data>
   <data name="Brush_Brush" xml:space="preserve">
-    <value>Brush</value>
+    <value>笔刷</value>
   </data>
   <data name="Brush_FillOrStroke" xml:space="preserve">
-    <value>Fill or Stroke</value>
+    <value>填充或描边</value>
   </data>
   <data name="Brush_Type" xml:space="preserve">
-    <value>Type</value>
+    <value>类型</value>
   </data>
   <data name="Brush_TypeColor" xml:space="preserve">
-    <value>Color</value>
+    <value>颜色</value>
   </data>
   <data name="Brush_TypeElliptical" xml:space="preserve">
-    <value>Elliptical</value>
+    <value>椭圆形</value>
   </data>
   <data name="Brush_TypeImage" xml:space="preserve">
-    <value>Image</value>
+    <value>图像</value>
   </data>
   <data name="Brush_TypeLinear" xml:space="preserve">
-    <value>Linear</value>
+    <value>线性</value>
   </data>
   <data name="Brush_TypeNone" xml:space="preserve">
-    <value>None</value>
+    <value>无</value>
   </data>
   <data name="Brush_TypeRadial" xml:space="preserve">
-    <value>Radial</value>
+    <value>径向</value>
   </data>
   <data name="Crop" xml:space="preserve">
-    <value>Vector crop Tool</value>
+    <value>矢量裁剪工具</value>
   </data>
   <data name="Crop_Fit" xml:space="preserve">
-    <value>Fit Crop</value>
+    <value>适合裁剪</value>
   </data>
   <data name="Crop_Reset" xml:space="preserve">
-    <value>Reset Crop</value>
+    <value>重置裁剪</value>
   </data>
   <data name="Cursor" xml:space="preserve">
-    <value>Cursor Tool</value>
+    <value>光标工具</value>
   </data>
   <data name="Cursor_MultiMode_ToolTip" xml:space="preserve">
-    <value>Multi-Mode</value>
+    <value>多选模式</value>
   </data>
   <data name="Cursor_StepFrequency_ToolTip" xml:space="preserve">
-    <value>Step Frequency</value>
+    <value>步频</value>
   </data>
   <data name="Ellipse" xml:space="preserve">
-    <value>Ellipse Tool</value>
+    <value>椭圆工具</value>
   </data>
   <data name="Image" xml:space="preserve">
-    <value>Image Tool</value>
+    <value>图像工具</value>
   </data>
   <data name="Image_Clear" xml:space="preserve">
-    <value>Clear</value>
+    <value>清除</value>
   </data>
   <data name="Image_Replace" xml:space="preserve">
-    <value>Replace</value>
+    <value>替换</value>
   </data>
   <data name="Image_Select" xml:space="preserve">
-    <value>Select</value>
+    <value>选择</value>
   </data>
   <data name="Pen" xml:space="preserve">
-    <value>Pen Tool</value>
+    <value>钢笔工具</value>
+  </data>
+  <data name="PenFlyout_Mode" xml:space="preserve">
+    <value>模式</value>
+  </data>
+  <data name="PenFlyout_Mode_Asymmetric" xml:space="preserve">
+    <value>非对称</value>
+  </data>
+  <data name="PenFlyout_Mode_Disconnected" xml:space="preserve">
+    <value>断开</value>
+  </data>
+  <data name="PenFlyout_Mode_Mirrored" xml:space="preserve">
+    <value>对称</value>
+  </data>
+  <data name="PenFlyout_Restriction" xml:space="preserve">
+    <value>限制</value>
+  </data>
+  <data name="PenFlyout_Restriction_Angle" xml:space="preserve">
+    <value>角度</value>
+  </data>
+  <data name="PenFlyout_Restriction_Length" xml:space="preserve">
+    <value>长度</value>
   </data>
   <data name="Pen_AddOrMoveOff" xml:space="preserve">
-    <value>Move</value>
+    <value>移动</value>
   </data>
   <data name="Pen_AddOrMoveOn" xml:space="preserve">
-    <value>Add</value>
+    <value>添加</value>
   </data>
   <data name="Pen_Insert" xml:space="preserve">
-    <value>Insert</value>
+    <value>插入</value>
   </data>
   <data name="Pen_Remove" xml:space="preserve">
-    <value>Remove</value>
+    <value>移除</value>
   </data>
   <data name="Pen_Sharp" xml:space="preserve">
-    <value>Sharp</value>
+    <value>尖锐</value>
   </data>
   <data name="Pen_Smooth" xml:space="preserve">
-    <value>Smooth</value>
+    <value>平滑</value>
   </data>
   <data name="Rectangle" xml:space="preserve">
-    <value>Rectangle Tool</value>
+    <value>矩形工具</value>
   </data>
   <data name="TextArtistic" xml:space="preserve">
-    <value>Artistic Text Tool</value>
+    <value>艺术文本工具</value>
   </data>
   <data name="TextFrame" xml:space="preserve">
-    <value>Frame Text Tool</value>
+    <value>框架文本工具</value>
   </data>
   <data name="TextFrame_PlaceholderText" xml:space="preserve">
-    <value>Input Text...</value>
+    <value>输入文本...</value>
   </data>
   <data name="Transparency" xml:space="preserve">
-    <value>Transparency Tool</value>
+    <value>透明度工具</value>
   </data>
   <data name="View" xml:space="preserve">
-    <value>View Tool</value>
+    <value>视图工具</value>
   </data>
   <data name="View_Radian" xml:space="preserve">
-    <value>Radian</value>
+    <value>弧度</value>
   </data>
   <data name="View_RadianClear_ToolTip" xml:space="preserve">
-    <value>Reset the rotation radian</value>
+    <value>重置旋转弧度</value>
   </data>
   <data name="View_Scale" xml:space="preserve">
-    <value>Scale</value>
+    <value>比例</value>
   </data>
   <data name="View_ScaleClear_ToolTip" xml:space="preserve">
-    <value>Reset the scale</value>
+    <value>重置比例</value>
   </data>
 </root>

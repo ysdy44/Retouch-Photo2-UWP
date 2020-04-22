@@ -25,7 +25,20 @@
 
     <UserControl.Resources>
 
+        <!--Flyout-->
+        <MenuFlyout x:Name="WidthMenuFlyout">
+            <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem222" Text="200" MinWidth="140"/>
+            <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem272" Text="250" MinWidth="140"/>
+            <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem322" Text="300" MinWidth="140"/>
+            <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem372" Text="350" MinWidth="140"/>
+        </MenuFlyout>
+        
         <!--Storyboard-->
+        <Storyboard x:Name="WidthStoryboard" >
+            <DoubleAnimationUsingKeyFrames x:Name="WidthKeyFrames" EnableDependentAnimation ="True">
+                <SplineDoubleKeyFrame x:Name="WidthFrame" KeyTime="0:0:0.1" KeySpline="0.5,1,1,1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
         <Storyboard x:Name="HeightStoryboard" >
             <DoubleAnimationUsingKeyFrames x:Name="HeightKeyFrames" EnableDependentAnimation ="True">
                 <SplineDoubleKeyFrame x:Name="HeightFrame" KeyTime="0:0:0.2" Value="200" KeySpline="0.5,1,1,1"/>

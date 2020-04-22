@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using System.Numerics;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Elements
@@ -9,6 +10,8 @@ namespace Retouch_Photo2.Tools.Elements
     /// </summary>
     public sealed partial class PenFlyout : UserControl
     {
+
+        //@Content
         private SelfControlPointMode selfMode;
         public SelfControlPointMode SelfMode
         {
@@ -49,13 +52,23 @@ namespace Retouch_Photo2.Tools.Elements
         public EachControlPointLengthMode EachLengthMode = EachControlPointLengthMode.Equal;
         public EachControlPointAngleMode EachAngleMode = EachControlPointAngleMode.Asymmetric;
 
-        /// <summary> Controllers for control points. </summary>
-        public Node Controller(Vector2 point, Node startingNode, bool isLeftControlPoint) => Node.Controller(this.SelfMode, this.EachLengthMode, this.EachAngleMode, point, startingNode, isLeftControlPoint);
+
+        /// <summary> 
+        /// Controllers for control points. 
+        /// </summary>
+        public Node Controller(Vector2 point, Node startingNode, bool isLeftControlPoint)
+        {
+            return Node.Controller(this.SelfMode, this.EachLengthMode, this.EachAngleMode, point, startingNode, isLeftControlPoint);
+        }
+
 
         //@Construct
         public PenFlyout()
         {
             this.InitializeComponent();
+            this.ConstructStrings();
+            this.ConstructSelfMode();
+            this.ConstructEachMode();
             this.Loaded += (s, e) =>
             {
                 this.MirroredRadioButton.IsChecked = true;
@@ -63,8 +76,12 @@ namespace Retouch_Photo2.Tools.Elements
                 this.EachLengthMode = EachControlPointLengthMode.Equal;
                 this.EachAngleMode = EachControlPointAngleMode.Asymmetric;
             };
+        }
 
-            //SelfMode
+
+        //SelfMode
+        private void ConstructSelfMode()
+        {
             this.AngleCheckBox.Tapped += (s, e) =>
             {
                 switch (this.SelfMode)
@@ -85,8 +102,11 @@ namespace Retouch_Photo2.Tools.Elements
                     case SelfControlPointMode.Disable: this.SelfMode = SelfControlPointMode.None; break;
                 }
             };
+        }
 
-            //EachMode
+        //EachMode
+        private void ConstructEachMode()
+        {
             this.MirroredRadioButton.Tapped += (s, e) =>
             {
                 this.EachLengthMode = EachControlPointLengthMode.Equal;
@@ -103,5 +123,22 @@ namespace Retouch_Photo2.Tools.Elements
                 this.EachAngleMode = EachControlPointAngleMode.Asymmetric;
             };
         }
+
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.RestrictionTextBlock.Text = resource.GetString("/Tools/PenFlyout_Restriction");
+            this.AngleCheckBox.Content = resource.GetString("/Tools/PenFlyout_Restriction_Angle");
+            this.LengthCheckBox.Content = resource.GetString("/Tools/PenFlyout_Restriction_Length");
+
+            this.ModeTextBlock.Text = resource.GetString("/Tools/PenFlyout_Mode");
+            this.MirroredRadioButton.Tag = resource.GetString("/Tools/PenFlyout_Mode_Mirrored");
+            this.DisconnectedRadioButton.Tag = resource.GetString("/Tools/PenFlyout_Mode_Disconnected");
+            this.AsymmetricRadioButton.Tag = resource.GetString("/Tools/PenFlyout_Mode_Asymmetric");
+        }
+
     }
 }

@@ -151,6 +151,9 @@
     <Compile Include="Retouch Photo2.Menus\Models\EffectMenu.xaml.cs">
       <DependentUpon>EffectMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Menus\Models\KeyboardMenu.xaml.cs">
+      <DependentUpon>KeyboardMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Menus\Models\LayerMenu.xaml.cs">
       <DependentUpon>LayerMenu.xaml</DependentUpon>
     </Compile>
@@ -311,39 +314,39 @@
     <Content Include="XMLs\Filter.xml" />
     <Content Include="XMLs\FilterOriginal.xml" />
     <None Include="Retouch Photo_TemporaryKey.pfx" />
-    <PRIResource Include="Strings\en\Characters.resw" />
-    <PRIResource Include="Strings\en\Blends.resw" />
-    <PRIResource Include="Strings\en\Adjustments.resw" />
-    <PRIResource Include="Strings\en\%24SettingPage.resw" />
-    <PRIResource Include="Strings\en\%24PhotosPage.resw" />
-    <PRIResource Include="Strings\en\%24MainPage.resw" />
-    <PRIResource Include="Strings\en\%24DrawPage.resw" />
-    <PRIResource Include="Strings\en\ToolsSecond.resw" />
-    <PRIResource Include="Strings\en\Tools.resw" />
-    <PRIResource Include="Strings\en\ToolElements.resw" />
-    <PRIResource Include="Strings\en\Operates.resw" />
-    <PRIResource Include="Strings\en\Menus.resw" />
-    <PRIResource Include="Strings\en\Layers.resw" />
-    <PRIResource Include="Strings\en\Effects.resw" />
-    <PRIResource Include="Strings\zh\Layers.resw" />
-    <PRIResource Include="Strings\zh\Blends.resw" />
-    <PRIResource Include="Strings\zh\Adjustments.resw" />
-    <PRIResource Include="Strings\zh\Effects.resw" />
-    <PRIResource Include="Strings\zh\Operates.resw" />
-    <PRIResource Include="Strings\zh\Characters.resw" />
-    <PRIResource Include="Strings\zh\Menus.resw" />
-    <PRIResource Include="Strings\zh\ToolsSecond.resw" />
-    <PRIResource Include="Strings\zh\Tools.resw" />
-    <PRIResource Include="Strings\zh\ToolElements.resw" />
-    <PRIResource Include="Strings\zh\%24PhotosPage.resw" />
-    <PRIResource Include="Strings\zh\%24DrawPage.resw" />
-    <PRIResource Include="Strings\zh\%24SettingPage.resw" />
-    <PRIResource Include="Strings\zh\%24MainPage.resw" />
-    <PRIResource Include="Strings\zh\resources.resw" />
+    <PRIResource Include="Strings\en-US\Characters.resw" />
+    <PRIResource Include="Strings\en-US\Blends.resw" />
+    <PRIResource Include="Strings\en-US\Adjustments.resw" />
+    <PRIResource Include="Strings\en-US\%24SettingPage.resw" />
+    <PRIResource Include="Strings\en-US\%24PhotosPage.resw" />
+    <PRIResource Include="Strings\en-US\%24MainPage.resw" />
+    <PRIResource Include="Strings\en-US\%24DrawPage.resw" />
+    <PRIResource Include="Strings\en-US\ToolsSecond.resw" />
+    <PRIResource Include="Strings\en-US\Tools.resw" />
+    <PRIResource Include="Strings\en-US\ToolElements.resw" />
+    <PRIResource Include="Strings\en-US\Operates.resw" />
+    <PRIResource Include="Strings\en-US\Menus.resw" />
+    <PRIResource Include="Strings\en-US\Layers.resw" />
+    <PRIResource Include="Strings\en-US\Effects.resw" />
+    <PRIResource Include="Strings\zh-CN\Layers.resw" />
+    <PRIResource Include="Strings\zh-CN\Blends.resw" />
+    <PRIResource Include="Strings\zh-CN\Adjustments.resw" />
+    <PRIResource Include="Strings\zh-CN\Effects.resw" />
+    <PRIResource Include="Strings\zh-CN\Operates.resw" />
+    <PRIResource Include="Strings\zh-CN\Characters.resw" />
+    <PRIResource Include="Strings\zh-CN\Menus.resw" />
+    <PRIResource Include="Strings\zh-CN\ToolsSecond.resw" />
+    <PRIResource Include="Strings\zh-CN\Tools.resw" />
+    <PRIResource Include="Strings\zh-CN\ToolElements.resw" />
+    <PRIResource Include="Strings\zh-CN\%24PhotosPage.resw" />
+    <PRIResource Include="Strings\zh-CN\%24DrawPage.resw" />
+    <PRIResource Include="Strings\zh-CN\%24SettingPage.resw" />
+    <PRIResource Include="Strings\zh-CN\%24MainPage.resw" />
+    <PRIResource Include="Strings\zh-CN\resources.resw" />
     <PRIResource Include="Strings\dimensions\dimensions.resw" />
-    <PRIResource Include="Strings\ja\resources.resw" />
-    <PRIResource Include="Strings\fr\resources.resw" />
-    <PRIResource Include="Strings\en\resources.resw" />
+    <PRIResource Include="Strings\ja-JP\resources.resw" />
+    <PRIResource Include="Strings\fr-FR\resources.resw" />
+    <PRIResource Include="Strings\en-US\resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\BadgeLogo.scale-100.png" />
@@ -472,6 +475,10 @@
     <Page Include="Retouch Photo2.Menus\Models\EffectMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Menus\Models\KeyboardMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Retouch Photo2.Menus\Models\LayerMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
