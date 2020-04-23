@@ -17,6 +17,8 @@ namespace Retouch_Photo2.Blends
         //@Delegate
         public EventHandler<BlendEffectMode?> BlendTypeChanged;
 
+        //Buttons
+        private IList<BlendButton> Buttons = new List<BlendButton>();
 
         #region DependencyProperty
 
@@ -55,59 +57,18 @@ namespace Retouch_Photo2.Blends
 
         #endregion
 
-        //NormalButton
-        private BlendButton NormalButton;
-        //Buttons
-        private IList<BlendButton> Buttons;
-
 
         //@Construct
         public BlendControl()
         {
-            this.ConstructStrings();
             this.InitializeComponent();
-
+            this.ConstructStrings();
+             
             this.NormalButton.IsSelected = true;
             this.Title = this.NormalButton.Text;
         }
 
-
-        private void InitializeComponent()
-        {
-            StackPanel stackPanel = new StackPanel();
-
-            this.Content = new ScrollViewer
-            {
-                Content = stackPanel
-            };
-
-            //NormalButton
-            {
-                stackPanel.Children.Add(this.NormalButton);
-                this.NormalButton.Tapped += (s, e) =>
-                {
-                    this.BlendTypeChanged?.Invoke(this, null);//Delegate
-                };
-            }
-
-            //Buttons
-            foreach (BlendButton item in this.Buttons)
-            {
-                if (item == null)
-                {
-                    stackPanel.Children.Add(new BlendSeparator());
-                }
-                else
-                {
-                    stackPanel.Children.Add(item);
-                    item.Tapped += (s, e) =>
-                    {
-                        this.BlendTypeChanged?.Invoke(this, item.BlendType);//Delegate
-                    };
-                }
-            }
-        }
-
+         
         //NormalButton
         private void SelectedNormalButton()
         {
@@ -116,7 +77,6 @@ namespace Retouch_Photo2.Blends
 
             foreach (BlendButton item in this.Buttons)
             {
-                if (item == null) continue;
                 item.IsSelected = false;
             }
         }
@@ -127,8 +87,6 @@ namespace Retouch_Photo2.Blends
 
             foreach (BlendButton item in this.Buttons)
             {
-                if (item == null) continue;
-
                 bool isSelected = (item.BlendType == value);
 
                 if (isSelected)
@@ -156,201 +114,166 @@ namespace Retouch_Photo2.Blends
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            //NormalButton
-            this.NormalButton = new BlendButton
-            {
-                Text = resource.GetString("/Blends/Normal"),
-                CenterContent = new NormalIcon(),
-                BlendType = null,
-            };
+            this.NormalButton.Text = resource.GetString("/Blends/Normal");
+            this.NormalButton.CenterContent = new NormalIcon();
+            this.NormalButton.BlendType = null;
+            this.NormalButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, null);//Delegate
 
-            //Buttons
-            this.Buttons = new List<BlendButton>
-            {
+            this.MultiplyButton.Text = resource.GetString("/Blends/Multiply");
+            this.MultiplyButton.CenterContent = new MultiplyIcon();
+            this.MultiplyButton.BlendType = BlendEffectMode.Multiply;
+            this.MultiplyButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.Multiply);//Delegate
+            this.Buttons.Add(this.MultiplyButton);
 
-                null,
+            this.ScreenButton.Text = resource.GetString("/Blends/Screen");
+            this.ScreenButton.CenterContent = new ScreenIcon();
+            this.ScreenButton.BlendType = BlendEffectMode.Screen;
+            this.ScreenButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.Screen);//Delegate
+            this.Buttons.Add(this.ScreenButton);
 
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/Multiply"),
-                    CenterContent = new MultiplyIcon(),
-                    BlendType = BlendEffectMode.Multiply,
-                },
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/Screen"),
-                    CenterContent = new ScreenIcon(),
-                    BlendType = BlendEffectMode.Screen,
-                },
+            this.DarkenButton.Text = resource.GetString("/Blends/Darken");
+            this.DarkenButton.CenterContent = new DarkenIcon();
+            this.DarkenButton.BlendType = BlendEffectMode.Darken;
+            this.DarkenButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.Darken);//Delegate
+            this.Buttons.Add(this.DarkenButton);
 
-                null,
+            this.LightenButton.Text = resource.GetString("/Blends/Lighten");
+            this.LightenButton.CenterContent = new LightenIcon();
+            this.LightenButton.BlendType = BlendEffectMode.Lighten;
+            this.LightenButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.Lighten);//Delegate
+            this.Buttons.Add(this.LightenButton);
 
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/Darken"),
-                    CenterContent = new DarkenIcon(),
-                    BlendType = BlendEffectMode.Darken,
-                },
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/Lighten"),
-                    CenterContent = new LightenIcon(),
-                    BlendType = BlendEffectMode.Lighten,
-                },
+            this.DissolveButton.Text = resource.GetString("/Blends/Dissolve");
+            this.DissolveButton.CenterContent = new DissolveIcon();
+            this.DissolveButton.BlendType = BlendEffectMode.Dissolve;
+            this.DissolveButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.Dissolve);//Delegate
+            this.Buttons.Add(this.DissolveButton);
 
-                null,
+            this.ColorBurnButton.Text = resource.GetString("/Blends/ColorBurn");
+            this.ColorBurnButton.CenterContent = new ColorBurnIcon();
+            this.ColorBurnButton.BlendType = BlendEffectMode.ColorBurn;
+            this.ColorBurnButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.ColorBurn);//Delegate
+            this.Buttons.Add(this.ColorBurnButton);
 
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/Dissolve"),
-                    CenterContent = new DissolveIcon(),
-                    BlendType = BlendEffectMode.Dissolve,
-                },
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/ColorBurn"),
-                    CenterContent = new ColorBurnIcon(),
-                    BlendType = BlendEffectMode.ColorBurn,
-                },
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/LinearBurn"),
-                    CenterContent = new LinearBurnIcon(),
-                    BlendType = BlendEffectMode.LinearBurn,
-                },
+            this.LinearBurnButton.Text = resource.GetString("/Blends/LinearBurn");
+            this.LinearBurnButton.CenterContent = new LinearBurnIcon();
+            this.LinearBurnButton.BlendType = BlendEffectMode.LinearBurn;
+            this.LinearBurnButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.LinearBurn);//Delegate
+            this.Buttons.Add(this.LinearBurnButton);
 
-                null,
+            this.DarkerColorButton.Text = resource.GetString("/Blends/DarkerColor");
+            this.DarkerColorButton.CenterContent = new DarkerColorIcon();
+            this.DarkerColorButton.BlendType = BlendEffectMode.DarkerColor;
+            this.DarkerColorButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.DarkerColor);//Delegate
+            this.Buttons.Add(this.DarkerColorButton);
 
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/DarkerColor"),
-                    CenterContent = new DarkerColorIcon(),
-                    BlendType = BlendEffectMode.DarkerColor,
-                },
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/LighterColor"),
-                    CenterContent = new LighterColorIcon(),
-                    BlendType = BlendEffectMode.LighterColor,
-                },
+            this.LighterColorButton.Text = resource.GetString("/Blends/LighterColor");
+            this.LighterColorButton.CenterContent = new LighterColorIcon();
+            this.LighterColorButton.BlendType = BlendEffectMode.LighterColor;
+            this.LighterColorButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.LighterColor);//Delegate
+            this.Buttons.Add(this.LighterColorButton);
 
-                null,
+            this.ColorDodgeButton.Text = resource.GetString("/Blends/ColorDodge");
+            this.ColorDodgeButton.CenterContent = new ColorDodgeIcon();
+            this.ColorDodgeButton.BlendType = BlendEffectMode.ColorDodge;
+            this.ColorDodgeButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.ColorDodge);//Delegate
+            this.Buttons.Add(this.ColorDodgeButton);
 
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/ColorDodge"),
-                    CenterContent = new ColorDodgeIcon(),
-                    BlendType = BlendEffectMode.ColorDodge,
-                },
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/LinearDodge"),
-                    CenterContent = new LinearDodgeIcon(),
-                    BlendType = BlendEffectMode.LinearDodge,
-                },
+            this.LinearDodgeButton.Text = resource.GetString("/Blends/LinearDodge");
+            this.LinearDodgeButton.CenterContent = new LinearDodgeIcon();
+            this.LinearDodgeButton.BlendType = BlendEffectMode.LinearDodge;
+            this.LinearDodgeButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.LinearDodge);//Delegate
+            this.Buttons.Add(this.LinearDodgeButton);
 
-                null,
+            this.OverlayButton.Text = resource.GetString("/Blends/Overlay");
+            this.OverlayButton.CenterContent = new OverlayIcon();
+            this.OverlayButton.BlendType = BlendEffectMode.Overlay;
+            this.OverlayButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.Overlay);//Delegate
+            this.Buttons.Add(this.OverlayButton);
 
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/Overlay"),
-                    CenterContent = new OverlayIcon(),
-                    BlendType = BlendEffectMode.Overlay,
-                },
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/SoftLight"),
-                    CenterContent = new SoftLightIcon(),
-                    BlendType = BlendEffectMode.SoftLight,
-                },
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/HardLight"),
-                    CenterContent = new HardLightIcon(),
-                    BlendType = BlendEffectMode.HardLight,
-                },
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/VividLight"),
-                    CenterContent = new VividLightIcon(),
-                    BlendType = BlendEffectMode.VividLight,
-                },
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/LinearLight"),
-                    CenterContent = new LinearLightIcon(),
-                    BlendType = BlendEffectMode.LinearLight,
-                },
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/PinLight"),
-                    CenterContent = new PinLightIcon(),
-                    BlendType = BlendEffectMode.PinLight,
-                },
+            this.SoftLightButton.Text = resource.GetString("/Blends/SoftLight");
+            this.SoftLightButton.CenterContent = new SoftLightIcon();
+            this.SoftLightButton.BlendType = BlendEffectMode.SoftLight;
+            this.SoftLightButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.SoftLight);//Delegate
+            this.Buttons.Add(this.SoftLightButton);
 
-                null,
+            this.HardLightButton.Text = resource.GetString("/Blends/HardLight");
+            this.HardLightButton.CenterContent = new HardLightIcon();
+            this.HardLightButton.BlendType = BlendEffectMode.HardLight;
+            this.HardLightButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.HardLight);//Delegate
+            this.Buttons.Add(this.HardLightButton);
+            
+            this.VividLightButton.Text = resource.GetString("/Blends/VividLight");
+            this.VividLightButton.CenterContent = new VividLightIcon();
+            this.VividLightButton.BlendType = BlendEffectMode.VividLight;
+            this.VividLightButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.VividLight);//Delegate
+            this.Buttons.Add(this.VividLightButton);
 
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/HardMix"),
-                    CenterContent = new HardMixIcon(),
-                    BlendType = BlendEffectMode.HardMix,
-                },
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/Difference"),
-                    CenterContent = new DifferenceIcon(),
-                    BlendType = BlendEffectMode.Difference,
-                },
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/Exclusion"),
-                    CenterContent = new ExclusionIcon(),
-                    BlendType = BlendEffectMode.Exclusion,
-                },
+            this.LinearLightButton.Text = resource.GetString("/Blends/LinearLight");
+            this.LinearLightButton.CenterContent = new LinearLightIcon();
+            this.LinearLightButton.BlendType = BlendEffectMode.LinearLight;
+            this.LinearLightButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.LinearLight);//Delegate
+            this.Buttons.Add(this.LinearLightButton);
 
-                null,
+            this.PinLightButton.Text = resource.GetString("/Blends/PinLight");
+            this.PinLightButton.CenterContent = new PinLightIcon();
+            this.PinLightButton.BlendType = BlendEffectMode.PinLight;
+            this.PinLightButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.PinLight);//Delegate
+            this.Buttons.Add(this.PinLightButton);
 
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/Hue"),
-                    CenterContent = new HueIcon(),
-                    BlendType = BlendEffectMode.Hue,
-                },
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/Saturation"),
-                    CenterContent = new SaturationIcon(),
-                    BlendType = BlendEffectMode.Saturation,
-                },
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/Color"),
-                    CenterContent = new ColorIcon(),
-                    BlendType = BlendEffectMode.Color,
-                },
+            this.HardMixButton.Text = resource.GetString("/Blends/HardMix");
+            this.HardMixButton.CenterContent = new HardMixIcon();
+            this.HardMixButton.BlendType = BlendEffectMode.HardMix;
+            this.HardMixButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.HardMix);//Delegate
+            this.Buttons.Add(this.HardMixButton);
 
-                null,
+            this.DifferenceButton.Text = resource.GetString("/Blends/Difference");
+            this.DifferenceButton.CenterContent = new DifferenceIcon();
+            this.DifferenceButton.BlendType = BlendEffectMode.Difference;
+            this.DifferenceButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.Difference);//Delegate
+            this.Buttons.Add(this.DifferenceButton);
 
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/Luminosity"),
-                    CenterContent = new LuminosityIcon(),
-                    BlendType = BlendEffectMode.Luminosity,
-                },
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/Subtract"),
-                    CenterContent = new SubtractIcon(),
-                    BlendType = BlendEffectMode.Subtract,
-                },
-                new BlendButton
-                {
-                    Text = resource.GetString("/Blends/Division"),
-                    CenterContent = new DivisionIcon(),
-                    BlendType = BlendEffectMode.Division,
-                },
-            };
+            this.ExclusionButton.Text = resource.GetString("/Blends/Exclusion");
+            this.ExclusionButton.CenterContent = new ExclusionIcon();
+            this.ExclusionButton.BlendType = BlendEffectMode.Exclusion;
+            this.ExclusionButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.Exclusion);//Delegate
+            this.Buttons.Add(this.ExclusionButton);
+
+            this.HueButton.Text = resource.GetString("/Blends/Hue");
+            this.HueButton.CenterContent = new HueIcon();
+            this.HueButton.BlendType = BlendEffectMode.Hue;
+            this.HueButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.Hue);//Delegate
+            this.Buttons.Add(this.HueButton);
+
+            this.SaturationButton.Text = resource.GetString("/Blends/Saturation");
+            this.SaturationButton.CenterContent = new SaturationIcon();
+            this.SaturationButton.BlendType = BlendEffectMode.Saturation;
+            this.SaturationButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.Saturation);//Delegate
+            this.Buttons.Add(this.SaturationButton);
+
+            this.ColorButton.Text = resource.GetString("/Blends/Color");
+            this.ColorButton.CenterContent = new ColorIcon();
+            this.ColorButton.BlendType = BlendEffectMode.Color;
+            this.ColorButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.Color);//Delegate
+            this.Buttons.Add(this.ColorButton);
+
+            this.LuminosityButton.Text = resource.GetString("/Blends/Luminosity");
+            this.LuminosityButton.CenterContent = new LuminosityIcon();
+            this.LuminosityButton.BlendType = BlendEffectMode.Luminosity;
+            this.LuminosityButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.Luminosity);//Delegate
+            this.Buttons.Add(this.LuminosityButton);
+
+            this.SubtractButton.Text = resource.GetString("/Blends/Subtract");
+            this.SubtractButton.CenterContent = new SubtractIcon();
+            this.SubtractButton.BlendType = BlendEffectMode.Subtract;
+            this.SubtractButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.Subtract);//Delegate
+            this.Buttons.Add(this.SubtractButton);
+
+            this.DivisionButton.Text = resource.GetString("/Blends/Division");
+            this.DivisionButton.CenterContent = new DivisionIcon();
+            this.DivisionButton.BlendType = BlendEffectMode.Division;
+            this.DivisionButton.Tapped += (s, e) => this.BlendTypeChanged?.Invoke(this, BlendEffectMode.Division);//Delegate            
+            this.Buttons.Add(this.DivisionButton);
         }
 
     }

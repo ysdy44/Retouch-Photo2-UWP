@@ -123,13 +123,10 @@ namespace Retouch_Photo2.Adjustments.Models
         }
 
 
-        public XElement Save()
+        public void SaveWith(XElement element)
         {
-            XElement element = new XElement
-            (
-                "GammaTransfer",
-                new XAttribute("ClampOutput", this.ClampOutput)
-            );
+            element.Add(new XElement("ClampOutput", this.ClampOutput));
+            
 
             if (this.AlphaDisable) element.Add(new XAttribute("AlphaDisable", false));
             else
@@ -166,8 +163,6 @@ namespace Retouch_Photo2.Adjustments.Models
                 element.Add(new XAttribute("BlueExponent", this.BlueExponent));
                 element.Add(new XAttribute("BlueAmplitude", this.BlueAmplitude));
             }
-
-            return element;
         }
         public void Load(XElement element)
         {

@@ -44,22 +44,16 @@ namespace Retouch_Photo2.Layers
         /// <returns> The loaded <see cref="TransformManager"/>. </returns>
         private static TransformManager LoadTransformManager(XElement element)
         {
-            TransformManager transformManager= new TransformManager
-            {
-                Source = FanKit.Transformers.XML.LoadTransformer(element.Element("Source")),
-                Destination = FanKit.Transformers.XML.LoadTransformer(element.Element("Destination")),
-                DisabledRadian = (bool)element.Element("DisabledRadian"),
-            };
+            TransformManager transformManager = new TransformManager();
 
-            bool isCrop = (bool)element.Element("IsCrop");
-            if (isCrop)
+            if (element.Element("Source") is XElement source) transformManager.Source = FanKit.Transformers.XML.LoadTransformer(source);
+            if (element.Element("Destination") is XElement destination) transformManager.Destination = FanKit.Transformers.XML.LoadTransformer(destination);
+            if (element.Element("DisabledRadian") is XElement disabledRadian) transformManager.DisabledRadian = (bool)disabledRadian;
+
+            if (element.Element("IsCrop") is XElement isCrop) transformManager.IsCrop = (bool)isCrop;
+            if (transformManager.IsCrop)
             {
-                transformManager.IsCrop = true;
-                transformManager.CropDestination = FanKit.Transformers.XML.LoadTransformer(element.Element("CropDestination"));
-            }
-            else
-            {
-                transformManager.IsCrop = false;
+                if (element.Element("CropDestination") is XElement cropDestination) transformManager.CropDestination = FanKit.Transformers.XML.LoadTransformer(cropDestination);
             }
 
             return transformManager;

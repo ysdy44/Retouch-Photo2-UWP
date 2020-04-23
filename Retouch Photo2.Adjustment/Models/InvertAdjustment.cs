@@ -44,13 +44,7 @@ namespace Retouch_Photo2.Adjustments.Models
         }
 
 
-        public XElement Save()
-        {
-            return new XElement
-            (
-                "Invert"
-            );
-        }
+        public void SaveWith(XElement element) { }
         public void Load(XElement element) { }
 
 

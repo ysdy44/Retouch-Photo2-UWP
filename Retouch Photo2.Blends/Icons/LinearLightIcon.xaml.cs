@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Blends.Icons
 {
     /// <summary>
-    /// Icon of <see cref="BlendEffectMode.LinearLightBlend">.
+    /// Icon of <see cref="BlendEffectMode.LinearLight">.
     /// </summary>
     public sealed partial class LinearLightIcon : UserControl
     {

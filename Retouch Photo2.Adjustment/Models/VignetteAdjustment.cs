@@ -74,15 +74,11 @@ namespace Retouch_Photo2.Adjustments.Models
         }
 
 
-        public XElement Save()
+        public void SaveWith(XElement element)
         {
-            return new XElement
-            (
-                "Vignette",
-                new XAttribute("Amount", this.Amount),
-                new XAttribute("Curve", this.Curve),
-                FanKit.Transformers.XML.SaveColor("Color", this.Color)
-            );
+            element.Add(new XAttribute("Amount", this.Amount));
+            element.Add(new XAttribute("Curve", this.Curve));
+            element.Add(FanKit.Transformers.XML.SaveColor("Color", this.Color));
         }
         public void Load(XElement element)
         {

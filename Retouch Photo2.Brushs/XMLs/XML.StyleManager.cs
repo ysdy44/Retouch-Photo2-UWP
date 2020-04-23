@@ -32,12 +32,13 @@ namespace Retouch_Photo2.Brushs
         /// <returns> The loaded <see cref="StyleManager"/>. </returns>
         public static StyleManager LoadStyleManager(XElement element)
         {
-            return new StyleManager
-            {
-                FillBrush = XML.LoadBrush(element.Element("FillBrush")),
-                StrokeBrush = XML.LoadBrush(element.Element("StrokeBrush")),
-                StrokeWidth = (float)element.Element("StrokeWidth"),
-            };
+            StyleManager styleManager = new StyleManager();
+
+            if (element.Element("FillBrush") is XElement fillBrush) styleManager.FillBrush = XML.LoadBrush(fillBrush);
+            if (element.Element("StrokeBrush") is XElement strokeBrush) styleManager.StrokeBrush = XML.LoadBrush(strokeBrush);
+            if (element.Element("StrokeWidth") is XElement strokeWidth) styleManager.StrokeWidth = (float)strokeWidth;
+
+            return styleManager;
         }
 
     }

@@ -17,9 +17,7 @@ namespace Retouch_Photo2.Layers
         {
             switch (type)
             {
-                case "Visible": return Visibility.Visible;
                 case "Collapsed": return Visibility.Collapsed;
-
                 default: return Visibility.Visible;
             }
         }

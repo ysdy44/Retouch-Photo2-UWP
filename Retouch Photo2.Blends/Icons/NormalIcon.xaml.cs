@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Blends.Icons
 {
     /// <summary>
-    /// Icon of <see cref="BlendEffectMode.NormalBlend">.
+    /// Icon of <see cref="BlendEffectMode.Normal">.
     /// </summary>
     public sealed partial class NormalIcon : UserControl
     {

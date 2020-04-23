@@ -65,13 +65,9 @@ namespace Retouch_Photo2.Adjustments.Models
         }
 
 
-        public XElement Save()
+        public void SaveWith(XElement element)
         {
-            return new XElement
-            (
-                "HueRotation",
-                new XAttribute("Angle", this.Angle)
-            );
+            element.Add(new XAttribute("Angle", this.Angle));
         }
         public void Load(XElement element)
         {

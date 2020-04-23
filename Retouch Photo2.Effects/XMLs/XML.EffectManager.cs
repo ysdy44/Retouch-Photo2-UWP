@@ -102,43 +102,43 @@ namespace Retouch_Photo2.Effects
             if (element.Element("GaussianBlur") is XElement gaussianBlur)
             {
                 effectManager.GaussianBlur_IsOn = true;
-                effectManager.GaussianBlur_Radius = (float)gaussianBlur.Attribute("Radius");
+                if (gaussianBlur.Attribute("Radius") is XAttribute radius) effectManager.GaussianBlur_Radius = (float)radius;
             }
             if (element.Element("DirectionalBlur") is XElement directionalBlur)
             {
                 effectManager.DirectionalBlur_IsOn = true;
-                effectManager.DirectionalBlur_Radius = (float)directionalBlur.Attribute("Radius");
-                effectManager.DirectionalBlur_Angle = (float)directionalBlur.Attribute("Angle");
+                if (directionalBlur.Attribute("Radius") is XAttribute radius) effectManager.DirectionalBlur_Radius = (float)radius;
+                if (directionalBlur.Attribute("Angle") is XAttribute angle) effectManager.DirectionalBlur_Angle = (float)angle;
             }
             if (element.Element("Sharpen") is XElement sharpen)
             {
                 effectManager.Sharpen_IsOn = true;
-                effectManager.Sharpen_Amount = (float)sharpen.Attribute("Amount");
+                if (sharpen.Attribute("Amount") is XAttribute amout) effectManager.Sharpen_Amount = (float)amout;
             }
             if (element.Element("OuterShadow") is XElement outerShadow)
             {
                 effectManager.OuterShadow_IsOn = true;
-                effectManager.OuterShadow_Radius = (float)outerShadow.Attribute("Radius");
-                effectManager.OuterShadow_Opacity = (float)outerShadow.Attribute("Opacity");
-                effectManager.OuterShadow_Color = FanKit.Transformers.XML.LoadColor(outerShadow.Element("Color"));
-                effectManager.OuterShadow_Offset = (float)outerShadow.Attribute("Offset");
-                effectManager.OuterShadow_Angle = (float)outerShadow.Attribute("Angle");
+                if (outerShadow.Attribute("Radius") is XAttribute radius) effectManager.OuterShadow_Radius = (float)radius;
+                if (outerShadow.Attribute("Opacity") is XAttribute opacity) effectManager.OuterShadow_Opacity = (float)opacity;
+                if (outerShadow.Element("Color") is XElement color) effectManager.OuterShadow_Color = FanKit.Transformers.XML.LoadColor(color);
+                if (outerShadow.Attribute("Offset") is XAttribute offset) effectManager.OuterShadow_Offset = (float)offset;
+                if (outerShadow.Attribute("Angle") is XAttribute angle) effectManager.OuterShadow_Angle = (float)angle;
             }
             if (element.Element("Outline") is XElement outline)
             {
                 effectManager.Outline_IsOn = true;
-                effectManager.Outline_Size = (int)outline.Element("Size");
+                if (outline.Attribute("Size") is XAttribute size) effectManager.Outline_Size = (int)size;
             }
             if (element.Element("Emboss") is XElement emboss)
             {
                 effectManager.Emboss_IsOn = true;
-                effectManager.Emboss_Radius = (float)emboss.Element("Radius");
-                effectManager.Emboss_Angle = (float)emboss.Element("Angle");
+                if (emboss.Attribute("Radius") is XAttribute radius) effectManager.Emboss_Radius = (float)radius;
+                if (emboss.Attribute("Angle") is XAttribute angle) effectManager.Emboss_Angle = (float)angle;
             }
             if (element.Element("Straighten") is XElement straighten)
             {
                 effectManager.Straighten_IsOn = true;
-                effectManager.Straighten_Angle = (int)straighten.Element("Angle");
+                if (straighten.Attribute("Angle") is XAttribute angle) effectManager.Straighten_Angle = (float)angle;
             }
 
             return effectManager;

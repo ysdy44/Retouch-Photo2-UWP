@@ -32,12 +32,12 @@ namespace Retouch_Photo2.Adjustments
         /// </summary>
         /// <returns> The cloned <see cref="IAdjustment"/>. </returns>
         IAdjustment Clone();
-
+        
         /// <summary>
         /// Saves the entire <see cref="IAdjustment"/> to a XElement.
         /// </summary>
-        /// <returns> The saved XElement. </returns>
-        XElement Save();
+        /// <returns> The destination XElement. </returns>
+        void SaveWith(XElement element);
         /// <summary>
         /// Load the entire <see cref="IAdjustment"/> by a XElement.
         /// </summary>

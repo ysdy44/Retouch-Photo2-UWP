@@ -1,23 +1,11 @@
 ﻿using Retouch_Photo2.Brushs;
 using Retouch_Photo2.ViewModels;
 using System;
-using Windows.Foundation;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using FanKit.Transformers;
-using Retouch_Photo2.Tools;
-using Retouch_Photo2.ViewModels;
-using System;
-using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Input;
-using Retouch_Photo2.Blends.Icons;
 
 namespace Retouch_Photo2.Menus.Models
 {

@@ -57,26 +57,29 @@ namespace Retouch_Photo2.Layers
         {
             string type = element.Element("Type").Value;
 
-            //SaveWith
-            ILayer layer = XML.CreateLayer(type, element);
+            //Load
+            ILayer layer = XML.CreateLayer(type);
+            layer.Load(element);
             {
-                //layer.Type = element.Element("Type").Value;
-                layer.Name = element.Element("Name").Value;
-                layer.Opacity = (float)element.Element("Opacity");
-                layer.BlendType = Retouch_Photo2.Blends.XML.CreateBlendType(element.Element("BlendType").Value);
+                //if (element.Element("Type") is XElement type) layer.Type = type.Value;
+                if (element.Element("Name") is XElement name) layer.Name = name.Value;
+                if (element.Element("Opacity") is XElement opacity) layer.Opacity = (float)opacity;
+                if (element.Element("BlendType") is XElement blendType) layer.BlendType = Retouch_Photo2.Blends.XML.CreateBlendType(blendType.Value);
 
-                layer.Visibility = XML.CreateVisibility(element.Element("Visibility").Value);
-                layer.TagType = Retouch_Photo2.Blends.XML.CreateTagType(element.Element("TagType").Value);
+                if (element.Element("Visibility") is XElement visibility) layer.Visibility = XML.CreateVisibility(visibility.Value);
+                if (element.Element("TagType") is XElement tagType) layer.TagType = Retouch_Photo2.Blends.XML.CreateTagType(tagType.Value);
 
-                layer.StyleManager = Retouch_Photo2.Brushs.XML.LoadStyleManager(element.Element("StyleManager"));
-                layer.TransformManager = XML.LoadTransformManager(element.Element("TransformManager"));
-                layer.EffectManager = Retouch_Photo2.Effects.XML.LoadEffectManager(element.Element("EffectManager"));
-                layer.AdjustmentManager = Retouch_Photo2.Adjustments.XML.LoadAdjustmentManager(element.Element("AdjustmentManager"));
+                if (element.Element("StyleManager") is XElement styleManager) layer.StyleManager = Retouch_Photo2.Brushs.XML.LoadStyleManager(styleManager);
+                if (element.Element("TransformManager") is XElement transformManager) layer.TransformManager = XML.LoadTransformManager(transformManager);
+                if (element.Element("EffectManager") is XElement effectManager) layer.EffectManager = Retouch_Photo2.Effects.XML.LoadEffectManager(effectManager);
+                if (element.Element("AdjustmentManager") is XElement adjustmentManager) layer.AdjustmentManager = Retouch_Photo2.Adjustments.XML.LoadAdjustmentManager(adjustmentManager);
 
-                XElement children = element.Element("Children");
-                foreach (XElement child in children.Elements())
+                if (element.Element("Children") is XElement children)
                 {
-                    layer.Children.Add(XML.LoadILayer(child));
+                    foreach (XElement child in children.Elements())
+                    {
+                        layer.Children.Add(XML.LoadILayer(child));
+                    }
                 }
             }
             return layer;

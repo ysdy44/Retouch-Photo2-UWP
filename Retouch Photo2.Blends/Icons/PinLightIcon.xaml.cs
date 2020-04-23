@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Blends.Icons
 {
     /// <summary>
-    /// Icon of <see cref="BlendEffectMode.PinLightBlend">.
+    /// Icon of <see cref="BlendEffectMode.PinLight">.
     /// </summary>
     public sealed partial class PinLightIcon : UserControl
     {

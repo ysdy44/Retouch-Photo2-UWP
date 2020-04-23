@@ -22,7 +22,7 @@ namespace Retouch_Photo2.Adjustments
                 elementName,
                     from a
                     in adjustmentManager.Adjustments
-                    select a.Save()
+                    select XML.SaveIAdjustment("Adjustment", a)
             );
         }
 
@@ -39,7 +39,7 @@ namespace Retouch_Photo2.Adjustments
                 (
                     from a
                     in element.Elements()
-                    select XML.CreateAdjustment(a)
+                    select XML.LoadIAdjustment(a)
                 ).ToList()
             };
         }

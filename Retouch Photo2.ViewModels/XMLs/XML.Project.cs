@@ -47,17 +47,20 @@ namespace Retouch_Photo2.ViewModels
         {
             XElement root = document.Element("Root");
             XElement rootLayers = root.Element("Layers");
-
-            return new Project
+                       
+            Project project =new Project
             {
                 Name = name,
-                Width = (int)root.Element("Width"),
-                Height = (int)root.Element("Height"),
                 Layers =
                     from layer
                     in rootLayers.Elements()
                     select Retouch_Photo2.Layers.XML.LoadILayer(layer)
             };
+
+            if (root.Element("Width") is XElement width) project.Width = (int)width;
+            if (root.Element("Height") is XElement height) project.Height = (int)height;
+
+            return project;
         }
 
     }

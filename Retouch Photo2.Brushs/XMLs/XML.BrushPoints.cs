@@ -52,28 +52,26 @@ namespace Retouch_Photo2.Brushs
         /// <returns> The loaded <see cref="BrushPoints"/>. </returns>
         private static BrushPoints LoadBrushPoints(XElement element, GradientBrushType type)
         {
+            BrushPoints points = new BrushPoints();
+
             switch (type)
             {
                 case GradientBrushType.Linear:
-                    return new BrushPoints
-                    {
-                        LinearGradientStartPoint = FanKit.Transformers.XML.LoadVector2(element.Element("LinearGradientStartPoint")),
-                        LinearGradientEndPoint = FanKit.Transformers.XML.LoadVector2(element.Element("LinearGradientEndPoint"))
-                    };
+                    if (element.Element("LinearGradientStartPoint") is XElement lgsp) points.LinearGradientStartPoint = FanKit.Transformers.XML.LoadVector2(lgsp);
+                    if (element.Element("LinearGradientEndPoint") is XElement lgep) points.LinearGradientEndPoint = FanKit.Transformers.XML.LoadVector2(lgep);
+                    break;
                 case GradientBrushType.Radial:
-                    return new BrushPoints
-                    {
-                        RadialGradientCenter = FanKit.Transformers.XML.LoadVector2(element.Element("RadialGradientCenter")),
-                        RadialGradientPoint = FanKit.Transformers.XML.LoadVector2(element.Element("RadialGradientPoint"))
-                    };
+                    if (element.Element("RadialGradientCenter") is XElement rgc) points.RadialGradientCenter = FanKit.Transformers.XML.LoadVector2(rgc);
+                    if (element.Element("RadialGradientPoint") is XElement rgp) points.RadialGradientPoint = FanKit.Transformers.XML.LoadVector2(rgp);
+                    break;
                 default: //Elliptical
-                    return new BrushPoints
-                    {
-                        EllipticalGradientCenter = FanKit.Transformers.XML.LoadVector2(element.Element("EllipticalGradientCenter")),
-                        EllipticalGradientXPoint = FanKit.Transformers.XML.LoadVector2(element.Element("EllipticalGradientXPoint")),
-                        EllipticalGradientYPoint = FanKit.Transformers.XML.LoadVector2(element.Element("EllipticalGradientYPoint"))
-                    };
+                    if (element.Element("EllipticalGradientCenter") is XElement egc) points.EllipticalGradientCenter = FanKit.Transformers.XML.LoadVector2(egc);
+                    if (element.Element("EllipticalGradientXPoint") is XElement egxp) points.EllipticalGradientXPoint = FanKit.Transformers.XML.LoadVector2(egxp);
+                    if (element.Element("EllipticalGradientYPoint") is XElement egyp) points.EllipticalGradientYPoint = FanKit.Transformers.XML.LoadVector2(egyp);
+                    break;
             }
+
+            return points;
         }
 
     }

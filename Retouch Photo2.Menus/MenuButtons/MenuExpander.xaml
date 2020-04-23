@@ -27,6 +27,14 @@
 
         <!--Flyout-->
         <MenuFlyout x:Name="WidthMenuFlyout">
+            <MenuFlyout.MenuFlyoutPresenterStyle>
+                <Style TargetType="MenuFlyoutPresenter">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="Background" Value="{ThemeResource AppBackground}"/>
+                    <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}"/>
+                </Style>
+            </MenuFlyout.MenuFlyoutPresenterStyle>
             <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem222" Text="200" MinWidth="140"/>
             <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem272" Text="250" MinWidth="140"/>
             <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem322" Text="300" MinWidth="140"/>

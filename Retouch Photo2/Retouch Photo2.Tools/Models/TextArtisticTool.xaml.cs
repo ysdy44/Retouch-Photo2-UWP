@@ -5,9 +5,8 @@ using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
-using Windows.UI.Xaml;
 using Windows.ApplicationModel.Resources;
-using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models

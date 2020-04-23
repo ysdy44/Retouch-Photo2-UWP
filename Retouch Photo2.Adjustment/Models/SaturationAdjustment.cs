@@ -65,13 +65,9 @@ namespace Retouch_Photo2.Adjustments.Models
         }
 
 
-        public XElement Save()
+        public void SaveWith(XElement element)
         {
-            return new XElement
-            (
-                "Saturation",
-                new XAttribute("Saturation", this.Saturation)
-            );
+            element.Add(new XAttribute("Saturation", this.Saturation));
         }
         public void Load(XElement element)
         {

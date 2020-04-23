@@ -1,5 +1,4 @@
 ﻿using Retouch_Photo2.Adjustments.Models;
-using System.Xml.Linq;
 
 namespace Retouch_Photo2.Adjustments
 {
@@ -11,17 +10,10 @@ namespace Retouch_Photo2.Adjustments
 
         /// <summary>
         /// Create a IAdjustment from the string.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
+        /// </summary>    
+       /// <param name="type"> The source string. </param>
         /// <returns> The created IAdjustment. </returns>
-        public static IAdjustment CreateAdjustment(XElement element)
-        {
-            string type = element.Name.LocalName;
-            IAdjustment adjustment = XML._createAdjustment(type);
-            adjustment.Load(element);
-            return adjustment;
-        }
-        private static IAdjustment _createAdjustment(string type)
+        private static IAdjustment CreateAdjustment(string type)
         {
             switch (type)
             {

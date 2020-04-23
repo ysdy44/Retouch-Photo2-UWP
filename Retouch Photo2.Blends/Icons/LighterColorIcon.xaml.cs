@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Blends.Icons
 {
     /// <summary>
-    /// Icon of <see cref="BlendEffectMode.LighterColorBlend">.
+    /// Icon of <see cref="BlendEffectMode.LighterColor">.
     /// </summary>
     public sealed partial class LighterColorIcon : UserControl
     {

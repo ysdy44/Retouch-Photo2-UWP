@@ -200,7 +200,7 @@
     <Compile Include="BlendButtons\BlendSeparator.xaml.cs">
       <DependentUpon>BlendSeparator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="XMLs\XML.BlendFactory.cs" />
+    <Compile Include="XMLs\XML.BlendTypeFactory.cs" />
     <Compile Include="XMLs\XML.TagTypeFactory.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo.Blends.rd.xml" />
   </ItemGroup>
@@ -213,6 +213,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="BlendControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Icons\ColorBurnIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

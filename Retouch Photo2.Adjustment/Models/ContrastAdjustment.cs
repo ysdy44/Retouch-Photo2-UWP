@@ -65,13 +65,9 @@ namespace Retouch_Photo2.Adjustments.Models
         }
 
 
-        public XElement Save()
+        public void SaveWith(XElement element)
         {
-            return new XElement
-            (
-                "Contrast",
-                new XAttribute("Contrast", this.Contrast)
-            );
+            element.Add(new XAttribute("Contrast", this.Contrast));
         }
         public void Load(XElement element)
         {

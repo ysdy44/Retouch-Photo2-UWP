@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Blends.Icons
 {
     /// <summary>
-    /// Icon of <see cref="BlendEffectMode.ExclusionBlend">.
+    /// Icon of <see cref="BlendEffectMode.Exclusion">.
     /// </summary>
     public sealed partial class ExclusionIcon : UserControl
     {

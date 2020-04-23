@@ -1,0 +1,74 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Blends.BlendControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Retouch_Photo2.Blends"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="200"
+    >
+
+    <ScrollViewer>
+        <StackPanel x:Name="StackPanel">
+            
+            <local:BlendButton x:Name="NormalButton"/>
+
+            <local:BlendSeparator/>
+
+            <local:BlendButton x:Name="MultiplyButton"/>
+            <local:BlendButton x:Name = "ScreenButton" />
+            
+            <local:BlendSeparator/>
+
+            <local:BlendButton x:Name = "DarkenButton" />
+            <local:BlendButton x:Name = "LightenButton" />
+
+            <local:BlendSeparator />
+
+            <local:BlendButton x:Name = "DissolveButton" />
+            <local:BlendButton x:Name = "ColorBurnButton" />
+            <local:BlendButton x:Name = "LinearBurnButton" />
+
+            <local:BlendSeparator />
+
+            <local:BlendButton x:Name = "DarkerColorButton" />
+            <local:BlendButton x:Name = "LighterColorButton" />
+
+            <local:BlendSeparator />
+
+            <local:BlendButton x:Name = "ColorDodgeButton" />
+            <local:BlendButton x:Name = "LinearDodgeButton" />
+
+            <local:BlendSeparator />
+
+            <local:BlendButton x:Name = "OverlayButton" />
+            <local:BlendButton x:Name = "SoftLightButton" />
+            <local:BlendButton x:Name = "HardLightButton" />
+            <local:BlendButton x:Name = "VividLightButton" />
+            <local:BlendButton x:Name = "LinearLightButton" />
+            <local:BlendButton x:Name = "PinLightButton" />
+
+            <local:BlendSeparator />
+
+            <local:BlendButton x:Name = "HardMixButton" />
+            <local:BlendButton x:Name = "DifferenceButton" />
+            <local:BlendButton x:Name = "ExclusionButton" />
+
+            <local:BlendSeparator />
+
+            <local:BlendButton x:Name = "HueButton" />
+            <local:BlendButton x:Name = "SaturationButton" />
+            <local:BlendButton x:Name = "ColorButton" />
+
+            <local:BlendSeparator />
+
+            <local:BlendButton x:Name = "LuminosityButton" />
+            <local:BlendButton x:Name = "SubtractButton" />
+            <local:BlendButton x:Name = "DivisionButton" />
+
+        </StackPanel>
+    </ScrollViewer>
+    
+</UserControl>

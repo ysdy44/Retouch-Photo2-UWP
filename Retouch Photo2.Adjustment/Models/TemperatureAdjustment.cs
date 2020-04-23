@@ -68,14 +68,10 @@ namespace Retouch_Photo2.Adjustments.Models
         }
 
 
-        public XElement Save()
+        public void SaveWith(XElement element)
         {
-            return new XElement
-            (
-                "Temperature",
-                new XAttribute("Temperature", this.Temperature),
-                new XAttribute("Tint", this.Tint)
-            );
+            element.Add(new XAttribute("Temperature", this.Temperature));
+            element.Add(new XAttribute("Tint", this.Tint));
         }
         public void Load(XElement element)
         {

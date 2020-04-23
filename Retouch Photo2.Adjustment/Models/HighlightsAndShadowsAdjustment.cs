@@ -81,17 +81,13 @@ namespace Retouch_Photo2.Adjustments.Models
         }
 
 
-        public XElement Save()
+        public void SaveWith(XElement element)
         {
-            return new XElement
-             (
-                "HighlightsAndShadows",
-                new XAttribute("Shadows", this.Shadows),
-                new XAttribute("Highlights", this.Highlights),
-                new XAttribute("Clarity", this.Clarity),
-                new XAttribute("MaskBlurAmount", this.MaskBlurAmount),
-                new XAttribute("SourceIsLinearGamma", this.SourceIsLinearGamma)
-             );
+            element.Add(new XAttribute("Shadows", this.Shadows));
+            element.Add(new XAttribute("Highlights", this.Highlights));
+            element.Add(new XAttribute("Clarity", this.Clarity));
+            element.Add(new XAttribute("MaskBlurAmount", this.MaskBlurAmount));
+            element.Add(new XAttribute("SourceIsLinearGamma", this.SourceIsLinearGamma));
         }
         public void Load(XElement element)
         {

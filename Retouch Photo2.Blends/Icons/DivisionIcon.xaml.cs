@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Blends.Icons
 {
     /// <summary>
-    /// Icon of <see cref="BlendEffectMode.DivisionBlend">.
+    /// Icon of <see cref="BlendEffectMode.Division">.
     /// </summary>
     public sealed partial class DivisionIcon : UserControl
     {

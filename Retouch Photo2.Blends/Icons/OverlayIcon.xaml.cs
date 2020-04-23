@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Blends.Icons
 {
     /// <summary>
-    /// Icon of <see cref="BlendEffectMode.OverlayBlend">.
+    /// Icon of <see cref="BlendEffectMode.Overlay">.
     /// </summary>
     public sealed partial class OverlayIcon : UserControl
     {

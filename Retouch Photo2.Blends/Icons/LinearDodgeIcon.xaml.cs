@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Blends.Icons
 {
     /// <summary>
-    /// Icon of <see cref="BlendEffectMode.LinearDodgeBlend">.
+    /// Icon of <see cref="BlendEffectMode.LinearDodge">.
     /// </summary>
     public sealed partial class LinearDodgeIcon : UserControl
     {

@@ -65,13 +65,9 @@ namespace Retouch_Photo2.Adjustments.Models
         }
 
 
-        public XElement Save()
+        public void SaveWith(XElement element)
         {
-            return new XElement
-            (
-                "Exposure",
-                new XAttribute("Exposure", this.Exposure)
-            );
+            element.Add(new XAttribute("Exposure", this.Exposure));
         }
         public void Load(XElement element)
         {

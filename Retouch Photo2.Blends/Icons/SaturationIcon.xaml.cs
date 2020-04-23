@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Blends.Icons
 {
     /// <summary>
-    /// Icon of <see cref="BlendEffectMode.SaturationBlend">.
+    /// Icon of <see cref="BlendEffectMode.Saturation">.
     /// </summary>
     public sealed partial class SaturationIcon : UserControl
     {

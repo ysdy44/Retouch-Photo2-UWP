@@ -79,16 +79,12 @@ namespace Retouch_Photo2.Adjustments.Models
         }
 
 
-        public XElement Save()
+        public void SaveWith(XElement element)
         {
-            return new XElement
-             (
-                "Brightness",
-                new XAttribute("WhiteLight", this.WhiteLight),
-                new XAttribute("WhiteDark", this.WhiteDark),
-                new XAttribute("BlackLight", this.BlackLight),
-                new XAttribute("BlackDark", this.BlackDark)
-             );
+            element.Add(new XAttribute("WhiteLight", this.WhiteLight));
+            element.Add(new XAttribute("WhiteDark", this.WhiteDark));
+            element.Add(new XAttribute("BlackLight", this.BlackLight));
+            element.Add(new XAttribute("BlackDark", this.BlackDark));
         }
         public void Load(XElement element)
         {
