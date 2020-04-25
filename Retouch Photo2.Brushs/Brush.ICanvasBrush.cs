@@ -146,7 +146,7 @@ namespace Retouch_Photo2.Brushs
                 return null;
             }
 
-            Photo photo = Photo.FindFirstPhotocopier(photocopier);
+            Photo photo = Photo.FindFirstPhoto(photocopier);
             CanvasBitmap bitmap = photo.Source;
 
             Matrix3x2 matrix2 = Transformer.FindHomography(this.PhotoSource, this.PhotoDestination);

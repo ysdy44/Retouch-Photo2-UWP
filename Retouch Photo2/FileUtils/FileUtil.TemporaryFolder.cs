@@ -109,7 +109,8 @@ namespace Retouch_Photo2
         /// <param name="name"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        public static async Task SaveProject(Project project)
+        /// <returns> The saved XDocument. </returns>
+        public static async Task<XDocument> SaveProject(Project project)
         {
             XDocument document = Retouch_Photo2.ViewModels.XML.SaveProject(project);
 
@@ -122,6 +123,8 @@ namespace Retouch_Photo2
                     document.Save(stream);
                 }
             }
+
+            return document;
         }
 
 

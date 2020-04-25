@@ -115,6 +115,7 @@
       <DependentUpon>FormatComboBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="FormatType.cs" />
+    <Compile Include="Photos\Photo.SaveXMLPhotocopter.cs" />
     <Compile Include="RadiusAnimaIcon.xaml.cs">
       <DependentUpon>RadiusAnimaIcon.xaml</DependentUpon>
     </Compile>

@@ -13,8 +13,6 @@ namespace Retouch_Photo2.Elements
         //@Static
         /// <summary> Collection <see cref="Photo"/>s instances. </summary>
         public static ObservableCollection<Photo> Instances = new ObservableCollection<Photo>();
-        /// <summary> FInd a <see cref="Photo"/> form a <see cref="Photocopier"/>. </summary>
-        public static Photo FindFirstPhotocopier(Photocopier photocopier)=> Photo.Instances.FirstOrDefault(i => i.FolderRelativeId == photocopier.FolderRelativeId);
 
 
         /// <summary>

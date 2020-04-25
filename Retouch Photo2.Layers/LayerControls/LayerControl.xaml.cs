@@ -88,11 +88,6 @@ namespace Retouch_Photo2.Layers
 
             //Mode
             {
-                this.DoubleTapped += (s, e) =>
-                {
-                    layer.Expaned();
-                    e.Handled = true;
-                };
                 this.ExpanedButton.Tapped += (s, e) =>
                 {
                     layer.Expaned();

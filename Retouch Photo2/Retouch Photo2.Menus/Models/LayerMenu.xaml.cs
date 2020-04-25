@@ -3,6 +3,7 @@ using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.UI.Xaml;
@@ -262,8 +263,10 @@ namespace Retouch_Photo2.Menus.Models
             //Duplicate
             this.DuplicateButton.Tapped += (s, e) =>
             {
-                var layers = this.ViewModel.Layers.GetAllSelectedLayers();
-                this.ViewModel.Layers.MezzanineRangeOnFirstSelectedLayer(layers);
+                IList<ILayer> layers = this.ViewModel.Layers.GetAllSelectedLayers();
+                IEnumerable<ILayer> duplicateLayers = from i in layers select i.Clone(this.ViewModel.CanvasDevice);
+
+                this.ViewModel.Layers.MezzanineRangeOnFirstSelectedLayer(duplicateLayers.ToList());
                 this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
 
                 this.SelectionViewModel.SetMode(this.ViewModel.Layers);

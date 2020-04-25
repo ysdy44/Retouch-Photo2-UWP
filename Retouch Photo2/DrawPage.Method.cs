@@ -12,6 +12,7 @@ using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.Storage.Streams;
+using System.Linq;
 
 namespace Retouch_Photo2
 {
@@ -120,29 +121,46 @@ namespace Retouch_Photo2
             CanvasRenderTarget thumbnail = this.MainCanvasControl.RenderThumbnail(this.ViewModel.CanvasDevice, width, height);
             FileUtil.SaveThumbnailAsync(thumbnail, name);
 
-            {
-                //Photos File
-                IEnumerable<Photo> photos = Photo.Instances;//@Debug
-                await FileUtil.SavePhotoFile(photos);
-                Photo.Instances.Clear();
 
-                //Save project to zip file.
+            //Photos File
+            //Save project to zip file.
+
+            {
                 await FileUtil.SaveProject(project);
-                await FileUtil.CreateZipFile(name);
+
+                //@SavePhoto
+                {
+                    //Save Photo whitch "HasSavePhotocopier" is ""True"".            
+                    /// <see cref="Retouch_Photo2.Elements.XML.SavePhotocopier"/>
+                    IEnumerable<Photo> savedPhotos = from p in Photo.Instances where p.HasSavePhotocopier select p;
+                    await FileUtil.SavePhotoFile(savedPhotos);
+
+                    //Delete othors.
+                    IEnumerable<Photo> unSavedPhotos = from p in Photo.Instances where p.HasSavePhotocopier == false select p;
+                    foreach (Photo unSave in unSavedPhotos)
+                    {
+                        StorageFile item = await StorageFile.GetFileFromPathAsync(unSave.ImageFilePath);
+                        await item.DeleteAsync();
+                    }
+
+                    //Clear
+                    Photo.Instances.Clear();
+                }
 
                 //FileUtil
+                await FileUtil.CreateZipFile(name);
+
                 await FileUtil.DeleteAllInTemporaryFolder();
             }
 
-            {
-                //Clear
-                this.SelectionViewModel.SetModeNone();
-                this.ViewModel.Layers.RootLayers.Clear();
-                this.ViewModel.Layers.RootControls.Clear();
 
-                this.IsFullScreen = true;
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
-            }
+            //Clear
+            this.SelectionViewModel.SetModeNone();
+            this.ViewModel.Layers.RootLayers.Clear();
+            this.ViewModel.Layers.RootControls.Clear();
+
+            this.IsFullScreen = true;
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
         }
 
     }
