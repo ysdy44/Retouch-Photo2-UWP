@@ -191,30 +191,33 @@
                         <Run x:Name="BoldRun" FontSize="16" FontWeight="Normal"/>
                         <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   700</Run>
                     </TextBlock>
+                    
                     <TextBlock FontWeight="ExtraBlack">
                         <Run x:Name="ExtraBlackRun" FontSize="16" FontWeight="Normal"/>
-                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   900</Run>
+                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   950</Run>
                     </TextBlock>
                     <TextBlock FontWeight="ExtraBold">
                         <Run x:Name="ExtraBoldRun" FontSize="16" FontWeight="Normal"/>
-                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   900</Run>
+                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   800</Run>
                     </TextBlock>
                     <TextBlock FontWeight="ExtraLight">
                         <Run x:Name="ExtraLightRun" FontSize="16" FontWeight="Normal"/>
-                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   300</Run>
+                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   200</Run>
                     </TextBlock>
+                    
                     <TextBlock FontWeight="Light">
                         <Run x:Name="LightRun" FontSize="16" FontWeight="Normal"/>
                         <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   300</Run>
                     </TextBlock>
                     <TextBlock FontWeight="Medium">
                         <Run x:Name="MediumRun" FontSize="16" FontWeight="Normal"/>
-                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   600</Run>
+                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   500</Run>
                     </TextBlock>
                     <TextBlock FontWeight="Normal">
                         <Run x:Name="NormalRun" FontSize="16" FontWeight="Normal"/>
                         <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   400</Run>
                     </TextBlock>
+                    
                     <TextBlock FontWeight="SemiBold">
                         <Run x:Name="SemiBoldRun" FontSize="16" FontWeight="Normal"/>
                         <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   600</Run>
@@ -223,9 +226,10 @@
                         <Run x:Name="SemiLightRun" FontSize="16" FontWeight="Normal"/>
                         <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   350</Run>
                     </TextBlock>
+                    
                     <TextBlock FontWeight="Thin">
                         <Run x:Name="ThinRun" FontSize="16" FontWeight="Normal"/>
-                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   300</Run>
+                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   100</Run>
                     </TextBlock>
 
                 </ListView>

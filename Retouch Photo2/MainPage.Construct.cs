@@ -29,6 +29,9 @@ namespace Retouch_Photo2
             this.TitleTextBlock.Text = resource.GetString("/$MainPage/Title");
             this.LoadingControl.Text = resource.GetString("/$MainPage/Loading");
 
+            this.SelectItemsTextBlock.Text = resource.GetString("/$MainPage/Select_Items");
+            this.SelectAllButton.Content = resource.GetString("/$MainPage/Select_All");
+
             this.InitialTextBlock.Text = resource.GetString("/$MainPage/Initial_Tip");
             this.InitialAddTextBlock.Text = resource.GetString("/$MainPage/Initial_Add");
             this.InitialPhotoTextBlock.Text = resource.GetString("/$MainPage/Initial_Photo");

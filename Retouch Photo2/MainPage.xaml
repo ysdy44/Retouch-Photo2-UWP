@@ -154,13 +154,11 @@
                 <Grid x:Name="SelectGrid">
 
                     <TextBlock Margin="12, 0" IsHitTestVisible="False" HorizontalAlignment="Left" VerticalAlignment="Center">                        
-                        Click to select items:                         
+                        <Run x:Name="SelectItemsTextBlock"/>
                         <Run x:Name="SelectCountRun">0</Run>
                     </TextBlock>
 
-                    <Button x:Name="SelectAllButton" Padding="8,0" HorizontalAlignment="Right" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
-                        Select All
-                    </Button>
+                    <Button x:Name="SelectAllButton" Padding="8,0" HorizontalAlignment="Right" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent"/>
 
                 </Grid>
             </elementMainPages:MainLayout.SelectChild>

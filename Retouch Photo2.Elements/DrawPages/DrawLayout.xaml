@@ -106,7 +106,8 @@
                         <!--Foot-->
                         <Setter Target = "LeftRadiusAnimaIcon.Visibility" Value="Collapsed"/>
                         <Setter Target = "RightRadiusAnimaIcon.Visibility" Value="Collapsed"/>
-
+                        <Setter Target = "TouchbarBorder.Margin" Value="82,0,82,70"/>
+                        
                         <!--Left-->
                         <Setter Target = "LeftBorder.(Grid.Row)" Value="1"/>
                         <Setter Target = "LeftBorder.(Grid.RowSpan)" Value="1"/>
@@ -194,6 +195,12 @@
             <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Column="1" ShadowColor="{ThemeResource AppStrokeColor}"/>
             <elements:RadiusAnimaIcon x:Name="LeftRadiusAnimaIcon" Grid.Column="0" ShadowColor="{ThemeResource AppStrokeColor}"/>
             <elements:RadiusAnimaIcon x:Name="RightRadiusAnimaIcon" Grid.Column="2" ShadowColor="{ThemeResource AppStrokeColor}"/>
+            
+            <!--
+            <Border Grid.Column="0" BorderThickness="1" BorderBrush="Yellow"/>
+            <Border Grid.Column="1" BorderThickness="1" BorderBrush="Yellow"/>
+            <Border Grid.Column="2" BorderThickness="1" BorderBrush="Yellow"/>
+            -->
 
         </Grid>
 
@@ -272,6 +279,15 @@
 
         </Border>
 
+
+        <!--
+        <Border Grid.Column="0" BorderThickness="1" BorderBrush="Red"/>
+        <Border Grid.Column="1" BorderThickness="1" BorderBrush="Red"/>
+        <Border Grid.Column="2" BorderThickness="1" BorderBrush="Red"/>
+        <Border Grid.Column="0" Grid.Row="1" BorderThickness="1" BorderBrush="Red"/>
+        <Border Grid.Column="1" Grid.Row="1" BorderThickness="1" BorderBrush="Red"/>
+        <Border Grid.Column="2" Grid.Row="1" BorderThickness="1" BorderBrush="Red"/>
+            -->
         
     </Grid>
 

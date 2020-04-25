@@ -228,15 +228,11 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.FrameLayer == null) return;
 
                 //Whether the judgment is small or large.
-                bool isBold = this.FrameLayer.FontWeight.Weight > 500;
+                bool isBold = this.FrameLayer.FontWeight.Weight == FontWeights.Bold.Weight;
 
                 // isBold ? ""Normal"" : ""Bold""
-                ushort weight = isBold ? (ushort)400 : (ushort)700;
+                this.FrameLayer.FontWeight = isBold ? FontWeights.Normal : FontWeights.Bold;
 
-                this.FrameLayer.FontWeight = new FontWeight
-                {
-                    Weight = weight
-                };
                 this.ViewModel.Invalidate();//Invalidate
             };
 

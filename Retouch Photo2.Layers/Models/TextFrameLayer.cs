@@ -98,6 +98,12 @@ namespace Retouch_Photo2.Layers.Models
             TextFrameLayer textFrameLayer = new TextFrameLayer
             {
                 Text = this.Text,
+                FontSize = this.FontSize,
+                FontFamily = this.FontFamily,
+
+                HorizontalAlignment = this.HorizontalAlignment,
+                FontStyle = this.FontStyle,
+                FontWeight = this.FontWeight,
             };
 
             LayerBase.CopyWith(resourceCreator, textFrameLayer, this);
@@ -107,10 +113,45 @@ namespace Retouch_Photo2.Layers.Models
         public void SaveWith(XElement element)
         {
             element.Add(new XElement("Text", this.Text));
+            element.Add(new XElement("FontSize", this.FontSize));
+            element.Add(new XElement("FontFamily", this.FontFamily));
+
+            element.Add(new XElement("HorizontalAlignment", this.HorizontalAlignment));
+            element.Add(new XElement("FontStyle", this.FontStyle));
+            element.Add(new XElement("FontWeight", this.FontWeight.Weight));
         }
         public void Load(XElement element)
         {
-            this.Text = element.Element("Text").Value;
+            if (element.Element("Text") is XElement text) this.Text = text.Value;
+            if (element.Element("FontSize") is XElement fontSize) this.FontSize = (float)fontSize;
+            if (element.Element("FontFamily") is XElement fontFamily) this.FontFamily = fontFamily.Value;
+
+            if (element.Element("HorizontalAlignment") is XElement horizontalAlignment)
+            {
+                switch (horizontalAlignment.Value)
+                {
+                    case "Left": this.HorizontalAlignment = CanvasHorizontalAlignment.Left; break;
+                    case "Right": this.HorizontalAlignment = CanvasHorizontalAlignment.Right; break;
+                    case "Center": this.HorizontalAlignment = CanvasHorizontalAlignment.Center; break;
+                    default: this.HorizontalAlignment = CanvasHorizontalAlignment.Justified; break;
+                }
+            }
+            if (element.Element("FontStyle") is XElement fontStyle)
+            {
+                switch (fontStyle.Value)
+                {
+                    case "Normal": this.FontStyle = FontStyle.Normal; break;
+                    case "Oblique": this.FontStyle = FontStyle.Oblique; break;
+                    default: this.FontStyle = FontStyle.Italic; break;
+                }
+            }
+            if (element.Element("FontWeight") is XElement fontWeight)
+            {
+                this.FontWeight = new FontWeight
+                {
+                    Weight = (ushort)(int)fontWeight
+                };
+            }
         }
 
         //Strings

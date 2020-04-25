@@ -303,7 +303,6 @@ namespace Retouch_Photo2.Menus.Models
                         IList<ILayer> parentChildren = (parent == null) ? this.ViewModel.Layers.RootLayers : parent.Children;
 
                         int index = parentChildren.IndexOf(groupLayer);
-                        parentChildren.Remove(groupLayer);
 
                         foreach (ILayer child in groupLayer.Children)
                         {
@@ -311,6 +310,8 @@ namespace Retouch_Photo2.Menus.Models
                             child.SelectMode = SelectMode.Selected;
                             parentChildren.Insert(index, child);
                         }
+                        groupLayer.Children.Clear();
+                        parentChildren.Remove(groupLayer);
 
                         this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
 

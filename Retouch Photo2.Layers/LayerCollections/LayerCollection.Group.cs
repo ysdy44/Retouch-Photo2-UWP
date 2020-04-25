@@ -89,8 +89,10 @@ namespace Retouch_Photo2.Layers
 
         private void _addLayersToGroupLayer(ILayer groupLayer, IList<ILayer> tempGrouplayers)
         {
-            foreach (ILayer child in tempGrouplayers)
+            for (int i = tempGrouplayers.Count - 1; i >= 0; i--)
             {
+                ILayer child = tempGrouplayers[i];
+
                 child.SelectMode = SelectMode.None;
                 child.SelectMode = SelectMode.ParentsSelected;
 
