@@ -133,42 +133,7 @@ namespace Retouch_Photo2.ViewModels
             this.IsGroupLayer = layer is GroupLayer;
             this.OnPropertyChanged(nameof(this.IsGroupLayer));//Notify 
         }
-
-
-        /// <summary> AcrylicLayer's TintOpacity. </summary>     
-        public float AcrylicTintOpacity
-        {
-            get => this.acrylicTintOpacity;
-            set
-            {
-                if (this.acrylicTintOpacity == value) return;
-                this.acrylicTintOpacity = value;
-                this.OnPropertyChanged(nameof(this.AcrylicTintOpacity));//Notify 
-            }
-        }
-        private float acrylicTintOpacity = 0.5f;
-        /// <summary> AcrylicLayer's BlurAmount. </summary>     
-        public float AcrylicBlurAmount
-        {
-            get => this.acrylicBlurAmount;
-            set
-            {
-                if (this.acrylicBlurAmount == value) return;
-                this.acrylicBlurAmount = value;
-                this.OnPropertyChanged(nameof(this.AcrylicBlurAmount));//Notify 
-            }
-        }
-        private float acrylicBlurAmount = 12.0f;
-        /// <summary> Sets AcrylicLayer. </summary>     
-        private void SetAcrylicLayer(ILayer layer)
-        {
-            if (layer is AcrylicLayer acrylicLayer)
-            {
-                this.AcrylicTintOpacity = acrylicLayer.TintOpacity;
-                this.AcrylicBlurAmount = acrylicLayer.BlurAmount;
-            }
-        }
-
+        
 
         /// <summary> ImageLayer's Exist. </summary>      
         public bool IsImageLayer

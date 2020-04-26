@@ -41,8 +41,8 @@
                 <!--Select-->
                 <StackPanel Grid.Column="2">
 
-                    <selections:SelectionButton x:Name="AllButton"/>
-                    <selections:SelectionButton x:Name="DeselectButton"/>
+                    <selections:SelectionButton x:Name="AllButton" IsEnabled="True"/>
+                    <selections:SelectionButton x:Name="DeselectButton" IsEnabled="True"/>
                     <selections:SelectionButton x:Name="PixelButton"/>
                     <selections:SelectionButton x:Name="InvertButton"/>
 

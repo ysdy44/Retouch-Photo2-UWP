@@ -163,9 +163,6 @@
     <Compile Include="Elements\PenMirroredIcon.xaml.cs">
       <DependentUpon>PenMirroredIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\AcrylicIcon.xaml.cs">
-      <DependentUpon>AcrylicIcon.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Icons\BrushIcon.xaml.cs">
       <DependentUpon>BrushIcon.xaml</DependentUpon>
     </Compile>
@@ -299,10 +296,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Elements\PenMirroredIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Icons\AcrylicIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

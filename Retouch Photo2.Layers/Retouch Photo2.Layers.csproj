@@ -215,7 +215,6 @@
     <Compile Include="TransformManager.cs" />
     <Compile Include="Models\GeometryCurveLayer.cs" />
     <Compile Include="Models\IGeometryLayer.cs" />
-    <Compile Include="Models\AcrylicLayer.cs" />
     <Compile Include="Models\GeometryEllipseLayer.cs" />
     <Compile Include="Models\GroupLayer.cs" />
     <Compile Include="Models\ImageLayer.cs" />

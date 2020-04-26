@@ -76,7 +76,6 @@ namespace Retouch_Photo2.ViewModels
             //////////////////////////
 
             this.SetGroupLayer(null);
-            this.SetAcrylicLayer(null);
             this.SetImageLayer(null);
             this.SetCurveLayer(null);
             this.SetTextFrameLayer(null);
@@ -101,7 +100,6 @@ namespace Retouch_Photo2.ViewModels
         private void _setModeSingle(ILayer layer)
         {
             this.Transformer = layer.GetActualDestinationWithRefactoringTransformer;
-            this.DsabledRadian = layer.TransformManager.DisabledRadian;//DisabledRadian
             
             this.Layer = layer;
             this.Layers = null;
@@ -118,7 +116,7 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
-            this.IsCrop = (layer.TransformManager.IsCrop && (layer.TransformManager.DisabledRadian == false));
+            this.IsCrop = layer.TransformManager.IsCrop;
             this.EffectManager = layer.EffectManager;
             this.AdjustmentManager = layer.AdjustmentManager;
             this.SetStyleManager(layer.StyleManager);
@@ -126,7 +124,6 @@ namespace Retouch_Photo2.ViewModels
             //////////////////////////
 
             this.SetGroupLayer(layer);
-            this.SetAcrylicLayer(layer);
             this.SetImageLayer(layer);
             this.SetCurveLayer(layer);
             this.SetTextFrameLayer(layer);
@@ -171,7 +168,7 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
-            this.IsCrop = layers.Any(layer => (layer.TransformManager.IsCrop && (layer.TransformManager.DisabledRadian == false)));
+            this.IsCrop = layers.Any(layer => layer.TransformManager.IsCrop);
             //this.EffectManager = layer.EffectManager;
             this.AdjustmentManager = null;
             //this.SetStyleManager(null);
@@ -179,7 +176,6 @@ namespace Retouch_Photo2.ViewModels
             //////////////////////////
 
             this.SetGroupLayer(null);
-            this.SetAcrylicLayer(null);
             //this.SetImageLayer(layer);
             //this.SetGeometryLayer(null);
             this.SetCurveLayer(null);

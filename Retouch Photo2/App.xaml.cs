@@ -65,7 +65,6 @@ namespace Retouch_Photo2
                  null,
 
                  new ImageTool(),
-                 new AcrylicTool(),
                  new CropTool(),
                  
 

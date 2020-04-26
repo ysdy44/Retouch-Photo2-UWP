@@ -89,7 +89,6 @@ namespace Retouch_Photo2.Menus.Models
                     case ToolType.View:
                     case ToolType.GeometryRectangle:
                     case ToolType.GeometryEllipse:
-                    case ToolType.Acrylic:
                         {
                             con._vsDisabledTool = false;
                             con.VisualState = con.VisualState;//State

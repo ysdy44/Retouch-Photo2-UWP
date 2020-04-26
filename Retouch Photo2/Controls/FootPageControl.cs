@@ -151,7 +151,6 @@ namespace Retouch_Photo2.Controls
                 case "GeometryCurve": return ToolType.Pen;
 
                 case "Image": return ToolType.Image;
-                case "Acrylic": return ToolType.Acrylic;
 
                 case "TextArtistic": return ToolType.TextArtistic;
                 case "TextFrame": return ToolType.TextFrame;

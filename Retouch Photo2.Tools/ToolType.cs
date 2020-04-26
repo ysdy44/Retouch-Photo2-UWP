@@ -33,8 +33,6 @@
 
         /// <summary> Create image layer. </summary>
         Image,
-        /// <summary> Create acrylic layer. </summary>
-        Acrylic,
         /// <summary> Vector crop tool. </summary>
         Crop,
 

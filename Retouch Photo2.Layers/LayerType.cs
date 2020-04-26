@@ -26,8 +26,6 @@
 
         /// <summary> Image. </summary>
         Image,
-        /// <summary> Acrylic. </summary>
-        Acrylic,
         /// <summary> Group. </summary>
         Group,
 

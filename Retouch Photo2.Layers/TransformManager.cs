@@ -19,8 +19,6 @@ namespace Retouch_Photo2.Layers
         /// <summary> The destination transformer. </summary>
         public Transformer Destination { get; set; }
         Transformer _startingDestination;
-        /// <summary> Is disable rotate radian? Defult **false**. </summary>
-        public bool DisabledRadian { get; set; }
         
 
         /// <summary> Is cropped? </summary>
@@ -72,7 +70,6 @@ namespace Retouch_Photo2.Layers
             {
                 Source = this.Source,
                 Destination = this.Destination,
-                DisabledRadian = this.DisabledRadian,
 
                 IsCrop = this.IsCrop,
                 CropDestination = this.CropDestination,

@@ -147,7 +147,6 @@ namespace Retouch_Photo2.Tools.Models
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
             if (this._layer == null) return;
-            if (this._layer.TransformManager.DisabledRadian) return;
             if (this._transformerMode == TransformerMode.None) return;
 
             bool isTranslation = (this._transformerMode == TransformerMode.Translation);
@@ -210,11 +209,8 @@ namespace Retouch_Photo2.Tools.Models
             {
                 if (layer.SelectMode.ToBool())
                 {
-                    if (layer.TransformManager.DisabledRadian == false)
-                    {
-                        Transformer transformer = layer.GetActualDestinationWithRefactoringTransformer;
-                        drawingSession.DrawCrop(transformer, matrix, Colors.BlueViolet);
-                    }
+                    Transformer transformer = layer.GetActualDestinationWithRefactoringTransformer;
+                    drawingSession.DrawCrop(transformer, matrix, Colors.BlueViolet);
                 }
             }
         }

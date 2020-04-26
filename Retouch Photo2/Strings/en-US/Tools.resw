@@ -117,18 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Acrylic" xml:space="preserve">
-    <value>Acrylic Tool</value>
-  </data>
-  <data name="Acrylic_BlurAmount" xml:space="preserve">
-    <value>BlurAmount</value>
-  </data>
-  <data name="Acrylic_TintColor" xml:space="preserve">
-    <value>TintColor</value>
-  </data>
-  <data name="Acrylic_TintOpacity" xml:space="preserve">
-    <value>TintOpacity</value>
-  </data>
   <data name="Brush" xml:space="preserve">
     <value>Brush Tool</value>
   </data>

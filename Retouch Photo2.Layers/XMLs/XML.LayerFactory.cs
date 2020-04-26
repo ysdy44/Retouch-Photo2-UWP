@@ -27,7 +27,6 @@ namespace Retouch_Photo2.Layers
                 case "TextFrame": return new TextFrameLayer();
 
                 case "Image": return new ImageLayer();
-                case "Acrylic": return new AcrylicLayer();
                 case "Group": return new GroupLayer();
 
                 //Geometry1

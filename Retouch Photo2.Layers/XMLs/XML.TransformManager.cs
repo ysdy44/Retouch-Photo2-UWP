@@ -20,8 +20,7 @@ namespace Retouch_Photo2.Layers
             (
                 elementName,
                 FanKit.Transformers.XML.SaveTransformer("Source", transformManager.Source),
-                FanKit.Transformers.XML.SaveTransformer("Destination", transformManager.Destination),
-                new XElement("DisabledRadian", transformManager.DisabledRadian)
+                FanKit.Transformers.XML.SaveTransformer("Destination", transformManager.Destination)
             );
 
             if (transformManager.IsCrop)
@@ -48,7 +47,6 @@ namespace Retouch_Photo2.Layers
 
             if (element.Element("Source") is XElement source) transformManager.Source = FanKit.Transformers.XML.LoadTransformer(source);
             if (element.Element("Destination") is XElement destination) transformManager.Destination = FanKit.Transformers.XML.LoadTransformer(destination);
-            if (element.Element("DisabledRadian") is XElement disabledRadian) transformManager.DisabledRadian = (bool)disabledRadian;
 
             if (element.Element("IsCrop") is XElement isCrop) transformManager.IsCrop = (bool)isCrop;
             if (transformManager.IsCrop)
