@@ -110,10 +110,8 @@
     <Compile Include="Brush.ICanvasBrush.cs" />
     <Compile Include="Brush.Transform.cs" />
     <Compile Include="BrushPoints.cs" />
-    <Compile Include="StopsPickers\StopsPicker.xaml.Set.cs" />
-    <Compile Include="StopsPickers\SliderControl.xaml.cs">
-      <DependentUpon>SliderControl.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="StopsPickers\StopsPicker.Construct.cs" />
+    <Compile Include="StopsPickers\StopsPicker.Method.cs" />
     <Compile Include="StopsPickersHelper\GradientBrushType.cs" />
     <Compile Include="BrushType.cs" />
     <Compile Include="ShowControls\ShowControl.xaml.cs">
@@ -148,10 +146,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="ShowControls\ShowControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="StopsPickers\SliderControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -73,20 +73,7 @@ namespace Retouch_Photo2
 
             this.ConstructSetupDialog();
             this.SetupButton.Tapped += (s, e) => this.SetupDialog.Show();
-
-            this.ThemeButton.Tapped += (s, e) =>
-            {
-                // Trigger switching theme.
-                ElementTheme theme = this.ThemeControl.Theme;
-                theme = (theme == ElementTheme.Dark) ? ElementTheme.Light : ElementTheme.Dark;
-
-                this.ThemeControl.Theme = theme;
-                ApplicationViewTitleBarBackgroundExtension.SetTheme(theme);
-
-                this.SettingViewModel.ElementTheme = theme;
-                this.SettingViewModel.WriteToLocalFolder();//Write
-            };
-
+            
 
             this.UnFullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = !this.KeyboardViewModel.IsFullScreen;
             this.FullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = !this.KeyboardViewModel.IsFullScreen;
@@ -99,10 +86,6 @@ namespace Retouch_Photo2
         //The current page becomes the active page
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //Theme
-            ElementTheme theme = this.SettingViewModel.ElementTheme;
-            this.ThemeControl.Theme = theme;
-
             //SettingViewModel
             this.DrawLayout.VisualStateDeviceType = this.SettingViewModel.LayoutDeviceType;
             this.DrawLayout.VisualStatePhoneMaxWidth = this.SettingViewModel.LayoutPhoneMaxWidth;

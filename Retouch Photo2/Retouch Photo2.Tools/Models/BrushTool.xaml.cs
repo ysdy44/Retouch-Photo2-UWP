@@ -66,9 +66,6 @@ namespace Retouch_Photo2.Tools.Models
         //BrushType
         private void ConstructBrushType()
         {
-            this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Linear);//DependencyObject
-
-
             this.BrushTypeComboBox.SelectionChanged += (s, e) =>
             {
                 BrushType brushType = (BrushType)this.BrushTypeComboBox.SelectedIndex;
@@ -76,54 +73,18 @@ namespace Retouch_Photo2.Tools.Models
 
                 switch (brushType)
                 {
-                    case BrushType.None:
-                        this.ToBrushTypeNone();
-                        break;
-                    case BrushType.Color:
-                        this.ToBrushTypeColor();
-                        break;
-                    case BrushType.LinearGradient:
-                        this.ToBrushTypeLinearGradient(isResetBrushArray: true);
-                        this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Linear);//DependencyObject
-                        break;
-                    case BrushType.RadialGradient:
-                        this.ToBrushTypeRadialGradient(isResetBrushArray: true);
-                        this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Radial);//DependencyObject
-                        break;
-                    case BrushType.EllipticalGradient:
-                        this.ToBrushTypeEllipticalGradient(isResetBrushArray: true);
-                        this.StopsPicker.ComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)GradientBrushType.Elliptical);//DependencyObject
-                        break;
+                    case BrushType.None: this.ToBrushTypeNone(); break;
+                    case BrushType.Color: this.ToBrushTypeColor(); break;
+                    case BrushType.LinearGradient: this.ToBrushTypeLinearGradient(isResetBrushArray: true); break;
+                    case BrushType.RadialGradient: this.ToBrushTypeRadialGradient(isResetBrushArray: true); break;
+                    case BrushType.EllipticalGradient: this.ToBrushTypeEllipticalGradient(isResetBrushArray: true); break;
                     case BrushType.Image:
                         this.ToBrushTypeImage();
                         BrushTool.Image?.Invoke();
                         break;
                 }
             };
-
-
-            this.StopsPicker.ComboBox.SelectionChanged += (s, e) =>
-            {
-                if (this._isStopsFlyoutShowed == false) return;
-                GradientBrushType gradientBrushType = (GradientBrushType)this.StopsPicker.ComboBox.SelectedIndex;
-
-                switch (gradientBrushType)
-                {
-                    case GradientBrushType.Linear:
-                        this.ToBrushTypeLinearGradient(isResetBrushArray: false);
-                        this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.LinearGradient);//DependencyObject
-                        break;
-                    case GradientBrushType.Radial:
-                        this.ToBrushTypeRadialGradient(isResetBrushArray: false);
-                        this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.RadialGradient);//DependencyObject
-                        break;
-                    case GradientBrushType.Elliptical:
-                        this.ToBrushTypeEllipticalGradient(isResetBrushArray: false);
-                        this.BrushTypeComboBox.SetValue(ComboBox.SelectedIndexProperty, (int)BrushType.EllipticalGradient);//DependencyObject
-                        break;
-                }
-                this.EaseStoryboard.Begin();//Storyboard
-            };
+            
         }
 
 

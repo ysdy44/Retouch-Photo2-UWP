@@ -125,16 +125,7 @@ namespace Retouch_Photo2.Menus.Models
 
 
         #endregion
-
-        public bool HorizontallyOrVertically
-        {
-            set
-            {
-                this.HorizontallyStackPanel.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
-                this.VerticallyStackPanel.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
-            }
-        }
-
+        
 
         //@Construct
         public OperateMenu()
@@ -375,6 +366,8 @@ namespace Retouch_Photo2.Menus.Models
                         this.ViewModel.Layers.RootLayers :
                         destination.Parents.Children;
 
+                    if (parentsChildren.Count < 2) return;
+
                     parentsChildren.Remove(destination);
                     parentsChildren.Add(destination);
 
@@ -392,6 +385,8 @@ namespace Retouch_Photo2.Menus.Models
                     IList<ILayer> parentsChildren = (destination.Parents == null) ?
                         this.ViewModel.Layers.RootLayers :
                         destination.Parents.Children;
+
+                    if (parentsChildren.Count < 2) return;
 
                     int index = parentsChildren.IndexOf(destination);
                     index++;
@@ -414,6 +409,8 @@ namespace Retouch_Photo2.Menus.Models
                         this.ViewModel.Layers.RootLayers :
                         destination.Parents.Children;
 
+                    if (parentsChildren.Count < 2) return;
+
                     int index = parentsChildren.IndexOf(destination);
                     index--;
 
@@ -434,6 +431,8 @@ namespace Retouch_Photo2.Menus.Models
                     IList<ILayer> parentsChildren = (destination.Parents == null) ?
                         this.ViewModel.Layers.RootLayers :
                         destination.Parents.Children;
+
+                    if (parentsChildren.Count < 2) return;
 
                     parentsChildren.Remove(destination);
                     parentsChildren.Insert(0, destination);
@@ -499,7 +498,6 @@ namespace Retouch_Photo2.Menus.Models
 
             this.HorizontallySymmetryButton.Tapped += (s, e) =>
             {
-                this.HorizontallyOrVertically = true;
                 this._Expander.IsSecondPage = true;
             };
 
@@ -559,7 +557,6 @@ namespace Retouch_Photo2.Menus.Models
 
             this.VerticallySymmetryButton.Tapped += (s, e) =>
             {
-                this.HorizontallyOrVertically = false;
                 this._Expander.IsSecondPage = true;
             };
 

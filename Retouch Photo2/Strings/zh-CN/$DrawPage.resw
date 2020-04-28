@@ -177,12 +177,6 @@
   <data name="Setup_ToolTip" xml:space="preserve">
     <value>设定</value>
   </data>
-  <data name="Theme" xml:space="preserve">
-    <value>主题</value>
-  </data>
-  <data name="Theme_ToolTip" xml:space="preserve">
-    <value>主题</value>
-  </data>
   <data name="Tip" xml:space="preserve">
     <value>提示</value>
   </data>

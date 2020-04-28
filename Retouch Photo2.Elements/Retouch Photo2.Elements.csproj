@@ -171,9 +171,6 @@
     <Compile Include="RadiusAnimaPanel.xaml.cs">
       <DependentUpon>RadiusAnimaPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ThemeControl.xaml.cs">
-      <DependentUpon>ThemeControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="IconButtons\IconButton.xaml.cs">
       <DependentUpon>IconButton.xaml</DependentUpon>
     </Compile>
@@ -296,10 +293,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="RadiusAnimaPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ThemeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

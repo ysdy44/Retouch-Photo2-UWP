@@ -27,14 +27,21 @@
             <Setter Property="IsHitTestVisible" Value="False"/>
             <Setter Property="Visibility" Value="Collapsed"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="{StaticResource AccentColor}"/>
-            <Setter Property="Background" Value="{StaticResource ThreeStateColor}"/>
+            <Setter Property="BorderBrush" Value="BlueViolet"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Opacity="0.4" Color="BlueViolet"/>
+                </Setter.Value>
+            </Setter>
         </Style>
 
     </UserControl.Resources>
 
 
-    <Grid x:Name="RootGrid">
+    <Grid x:Name="RootGrid" BorderThickness="0,0,0,1">
+        <Grid.BorderBrush>
+            <SolidColorBrush Opacity="0.4" Color="Gray"/>
+        </Grid.BorderBrush>
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="DepthColumn" Width="0"/>
             <ColumnDefinition Width="30"/>
@@ -69,7 +76,7 @@
         </StackPanel>
 
 
-        <!--Line-->
+        <!--TagType-->
         <Rectangle IsHitTestVisible="False" Grid.Column="0" Fill="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
         <Rectangle IsHitTestVisible="False" Grid.Column="1" Margin="0,2" Width="2" HorizontalAlignment="Left" VerticalAlignment="Stretch">
             <Rectangle.Fill>
@@ -78,9 +85,15 @@
         </Rectangle>
 
         <!--Overlay-->
-        <Border x:Name="OverlayShowTopBorder" Grid.Column="0" Grid.ColumnSpan="4" Height="14.3" VerticalAlignment="Top" Style="{StaticResource OverlayStyle}"/>
-        <Border x:Name="OverlayShowCenterBorder" Grid.Column="1" Grid.ColumnSpan="3" Height="21.4" VerticalAlignment="Center" Style="{StaticResource OverlayStyle}"/>
-        <Border x:Name="OverlayShowBottomBorder" Grid.Column="0" Grid.ColumnSpan="4" Height="14.3" VerticalAlignment="Bottom" Style="{StaticResource OverlayStyle}"/>
+        <Border x:Name="OverlayShowTopBorder" Grid.Column="0" Grid.ColumnSpan="4" Height="14.3" VerticalAlignment="Top" Style="{StaticResource OverlayStyle}">
+            <FontIcon Glyph="&#x25B2;" FontSize="18" FontFamily="Segoe UI Symbol"/>
+        </Border>
+        <Border x:Name="OverlayShowCenterBorder" Grid.Column="1" Grid.ColumnSpan="3" Height="21.4" VerticalAlignment="Center" Style="{StaticResource OverlayStyle}">
+            <FontIcon Glyph="&#x25B6;" FontFamily="Segoe UI Symbol"/>
+        </Border>
+        <Border x:Name="OverlayShowBottomBorder" Grid.Column="0" Grid.ColumnSpan="4" Height="14.3" VerticalAlignment="Bottom" Style="{StaticResource OverlayStyle}">
+            <FontIcon Glyph="&#x25BC;" FontSize="18" FontFamily="Segoe UI Symbol"/>
+        </Border>
 
     </Grid>
 </UserControl>

@@ -152,6 +152,126 @@ namespace Retouch_Photo2.Brushs
             };
         }
 
+
+        /// <summary>
+        /// Copy a stop to the right.
+        /// </summary>
+        /// <returns> The new stop offset. </returns>
+        public CanvasGradientStop CopyStopOnRight()
+        {
+            if (this.IsLeft)
+            {
+                if (this.Stops.Count==0)
+                {
+                    CanvasGradientStop stop = new CanvasGradientStop
+                    {
+                        Position = 0.5f,
+                        Color = this.LeftColor
+                    };
+                    
+                    this.Stops.Add(stop);
+                    this.IsLeft = false;
+                    this.IsRight = false;
+                    this.Index = 0;
+                    return stop;
+                }
+                else
+                {
+                    float offset = this.Stops.First().Position / 2;
+                    CanvasGradientStop stop = new CanvasGradientStop
+                    {
+                        Position = offset,
+                        Color = this.LeftColor
+                    };
+                    
+                    this.Stops.Insert(0, stop);
+                    this.IsLeft = false;
+                    this.IsRight = false;
+                    this.Index = 0;
+                    return stop;
+                }
+            }
+
+
+            if (this.IsRight)
+            {
+                if (this.Stops.Count == 0)
+                {
+                    CanvasGradientStop stop = new CanvasGradientStop
+                    {
+                        Position = 0.5f,
+                        Color = this.RightColor
+                    };
+                    
+                    this.Stops.Add(stop);
+                    this.IsLeft = false;
+                    this.IsRight = false;
+                    this.Index = 0;
+                    return stop;
+                }
+                else
+                {
+                    float offset = this.Stops.Last().Position / 2;
+                    CanvasGradientStop stop = new CanvasGradientStop
+                    {
+                        Position = offset,
+                        Color = this.LeftColor
+                    };
+                    
+                    this.Stops.Add(stop);
+                    this.IsLeft = false;
+                    this.IsRight = false;
+                    this.Index = this.Stops.Count - 1;
+                    return stop;
+                }
+            }
+
+
+            if (this.Stops.Count == 0)
+            {
+                return new CanvasGradientStop();
+            }
+
+
+            if (this.Index == this.Stops.Count - 1)
+            {
+                CanvasGradientStop current = this.Stops[this.Index];
+                float offset = (current.Position + 1.0f) / 2;
+
+                CanvasGradientStop stop = new CanvasGradientStop
+                {
+                    Position = offset,
+                    Color = current.Color
+                };
+
+                this.Stops.Add(stop);
+                this.IsLeft = false;
+                this.IsRight = false;
+                this.Index = this.Stops.Count - 1;
+                return stop;
+            }
+
+
+            {
+                int index = this.Index;
+                CanvasGradientStop current = this.Stops[index];
+                CanvasGradientStop previous = this.Stops[index + 1];
+                float offset = (current.Position + previous.Position) / 2;
+
+                CanvasGradientStop stop = new CanvasGradientStop
+                {
+                    Position = offset,
+                    Color = current.Color
+                };
+
+                this.Stops.Insert(index+1, stop);
+                this.IsLeft = false;
+                this.IsRight = false;
+                this.Index = index + 1;
+                return stop;
+            }
+        }
+
         /// <summary>
         /// Reverse all manager's data.
         /// </summary>
@@ -177,6 +297,37 @@ namespace Retouch_Photo2.Brushs
                 };
             }
         }
-        
+
+        /// <summary>
+        /// Remove cureent stop.
+        /// </summary>
+        /// <returns> The new stop color. </returns>
+        public Color Remove()
+        {
+            this.Stops.RemoveAt(this.Index);
+
+            if (this.Stops.Count == 0)
+            {
+                this.IsLeft = true;
+                this.IsRight = false;
+                this.Index = -1;
+
+                return this.LeftColor;
+            }
+            else
+            {
+                this.Index--;
+
+                if (this.Index > this.Stops.Count - 1)
+                    this.Index = this.Stops.Count - 1;
+                else if (this.Index < 0)
+                    this.Index = 0;
+
+                CanvasGradientStop stop = this.Stops[this.Index];
+
+                return stop.Color;
+            }
+        }
+
     }
 }

@@ -177,12 +177,6 @@
   <data name="Setup_ToolTip" xml:space="preserve">
     <value>Setup</value>
   </data>
-  <data name="Theme" xml:space="preserve">
-    <value>Theme</value>
-  </data>
-  <data name="Theme_ToolTip" xml:space="preserve">
-    <value>Theme</value>
-  </data>
   <data name="Tip" xml:space="preserve">
     <value>Tip</value>
   </data>

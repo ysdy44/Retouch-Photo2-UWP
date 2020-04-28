@@ -199,9 +199,7 @@
     <Compile Include="ToolButtons\ToolSecondButton.xaml.cs">
       <DependentUpon>ToolSecondButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ToolButtons\ToolSeparator.xaml.cs">
-      <DependentUpon>ToolSeparator.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="ToolButtons\ToolSeparator.cs" />
     <Compile Include="ToolType.cs" />
     <Compile Include="Touchbars\TouchbarButton.xaml.cs">
       <DependentUpon>TouchbarButton.xaml</DependentUpon>
@@ -342,10 +340,6 @@
     <Page Include="ToolButtons\ToolSecondButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ToolButtons\ToolSeparator.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Touchbars\TouchbarButton.xaml">
       <Generator>MSBuild:Compile</Generator>

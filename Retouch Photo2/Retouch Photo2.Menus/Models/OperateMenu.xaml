@@ -120,7 +120,7 @@
                         </ToolTipService.ToolTip>
                     </operates:OperateButton>
 
-                    <Border Grid.Column="5" Style="{StaticResource AppRoundedBorderStyle}">
+                    <Border Visibility="Collapsed" Grid.Column="5" Style="{StaticResource AppRoundedBorderStyle}">
                         <operates:OperateButton x:Name="HorizontallySymmetryButton" Grid.Column="3" IsEnabled="{x:Bind HorizontallyIsEnabled, Mode=OneWay}">
                             <ToolTipService.ToolTip>
                                 <ToolTip x:Name="HorizontallySymmetryToolTip" Placement="Right" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
@@ -159,7 +159,7 @@
                         </ToolTipService.ToolTip>
                     </operates:OperateButton>
 
-                    <Border Grid.Column="4" Height="40" Style="{StaticResource AppRoundedBorderStyle}">
+                    <Border Visibility="Collapsed" Grid.Column="4" Height="40" Style="{StaticResource AppRoundedBorderStyle}">
                         <operates:OperateButton x:Name="VerticallySymmetryButton" IsEnabled="{x:Bind VerticallyIsEnabled, Mode=OneWay}">
                             <ToolTipService.ToolTip>
                                 <ToolTip x:Name="VerticallySymmetryToolTip" Placement="Right" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
@@ -174,42 +174,6 @@
 
             </StackPanel>
         </menus:MenuExpander.MainPage>
-
-
-        <menus:MenuExpander.SecondPage>
-            <Grid>
-
-                <!--Horizontally-->
-                <StackPanel x:Name="HorizontallyStackPanel" Margin="2,0" Visibility="Collapsed">
-                    <TextBlock Style="{StaticResource AppTextBlock}">
-                        Symmetry Horizontally
-                    </TextBlock>
-                    <Slider Style="{StaticResource AppOpacitySliderStyle}"/>
-                    <Grid Margin="0,2">
-                        <CheckBox Content="Space"/>
-                        <Button HorizontalAlignment="Right" Style="{StaticResource AppCircleButtonStyle}">
-                            <FontIcon Glyph="&#xE10B;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </Button>
-                    </Grid>
-                </StackPanel>
-
-
-                <!--Vertically-->
-                <StackPanel x:Name="VerticallyStackPanel" Margin="2,0" Visibility="Collapsed">
-                    <TextBlock Style="{StaticResource AppTextBlock}">
-                        Symmetry Vertically
-                    </TextBlock>
-                    <Slider Style="{StaticResource AppOpacitySliderStyle}"/>
-                    <Grid Margin="0,2">
-                        <CheckBox Content="Space"/>
-                        <Button HorizontalAlignment="Right" Style="{StaticResource AppCircleButtonStyle}">
-                            <FontIcon Glyph="&#xE10B;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </Button>
-                    </Grid>
-                </StackPanel>
-
-            </Grid>
-        </menus:MenuExpander.SecondPage>
 
 
     </menus:MenuExpander>

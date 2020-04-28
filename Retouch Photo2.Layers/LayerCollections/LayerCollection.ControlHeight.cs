@@ -8,7 +8,7 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Gets layer controls height.
         /// </summary>
-        public static int ControlsHeight { get; private set; } = 40;
+        public static int ControlsHeight { get; private set; } = 50;
 
         /// <summary>
         /// Sets all layer controls height.

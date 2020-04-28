@@ -17,9 +17,6 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Occurs when the stops changes. </summary>
         public event EventHandler<CanvasGradientStop[]> StopsChanged;
 
-        //@Content        
-        public ComboBox ComboBox => this._ComboBox;
-
         //Background
         CanvasRenderTarget GrayAndWhiteBackground;
 
@@ -49,217 +46,40 @@ namespace Retouch_Photo2.Brushs
         public StopsPicker()
         {
             this.InitializeComponent();
+            this.ConstructStrings();
+            this.ConstructCanvas();
+            this.ConstructCanvasOperator();
 
-            //Canvas
+            this.ConstructStop();
+
+
+            //Color      
+            this.ColorPicker.ColorChange += (s, color) => this.SetColor(color);
+            this.ColorButton.Tapped += (s, e) =>
             {
-                this.CanvasControl.SizeChanged += (s, e) =>
+                if (this.array == null) return;
+
+                if (this.Manager.IsLeft || this.Manager.IsRight || this.Manager.Index >= 0)
                 {
-                    if (e.NewSize == e.PreviousSize) return;
-                    this.Size.SIzeChange((float)e.NewSize.Width, (float)e.NewSize.Height);
-                };
-                this.CanvasControl.CreateResources += (sender, args) =>
-                {
-                    float width = (float)sender.ActualWidth;
-                    float height = (float)sender.ActualHeight;
-                    this.GrayAndWhiteBackground = new CanvasRenderTarget(sender, width, height);
-
-                    using (CanvasDrawingSession drawingSession = this.GrayAndWhiteBackground.CreateDrawingSession())
-                    {
-                        CanvasBitmap bitmap = GreyWhiteMeshHelpher.GetGreyWhiteMesh(sender);
-                        ICanvasImage extendMesh = GreyWhiteMeshHelpher.GetBorderExtendMesh(height / 4, bitmap);
-                        drawingSession.DrawImage(extendMesh);
-                    }
-                };
-
-                this.CanvasControl.Draw += (sender, args) =>
-                {
-                    if (this.array == null) return;
-
-                    //Background
-                    args.DrawingSession.DrawImage(this.GrayAndWhiteBackground);
-
-                    //LinearGradient
-                    this.Size.DrawLinearGradient(args.DrawingSession, this.CanvasControl, this.array);
-
-                    //Lines
-                    this.Size.DrawLines(args.DrawingSession);
-
-                    //Nodes
-                    this.Size.DrawNodes(args.DrawingSession, this.Manager);
-                };
-            }
-
-                //CanvasOperator
-                {
-                    this.CanvasOperator.Single_Start += (point) =>
-                    {
-                        if (this.array == null) return;
-
-                        this.Manager.Index = -1;
-                        this.Manager.IsLeft = false;
-                        this.Manager.IsRight = false;
-
-                        //Stops
-                        for (int i = this.Manager.Count - 1; i >= 0; i--)
-                        {
-                            float x = this.Size.OffsetToPosition(this.Manager.Stops[i].Position);
-                            if (Math.Abs(x - point.X) < StopsSize.Radius)
-                            {
-                                this.Manager.Index = i;
-                                CanvasGradientStop stop = this.Manager.Stops[i];
-                                this.StopChanged(stop.Color, (int)(stop.Position * 100), true);//Delegate
-                                return;
-                            }
-                        }
-
-                        //Left
-                        bool isLeft = (Math.Abs(this.Size.Left - point.X) < StopsSize.Radius);
-                        if (isLeft)
-                        {
-                            this.Manager.IsLeft = true;
-                            this.StopChanged(this.Manager.LeftColor, 0, false);//Delegate
-                            return;
-                        }
-
-                        //Right
-                        bool isRight = (Math.Abs(this.Size.Right - point.X) < StopsSize.Radius);
-                        if (isRight)
-                        {
-                            this.Manager.IsRight = true;
-                            this.StopChanged(this.Manager.RightColor, 100, false);//Delegate
-                            return;
-                        }
-
-
-                        //Add
-                        float offset = this.Size.PositionToOffset(point.X);
-                        CanvasGradientStop addStop = this.Manager.InsertNewStepByOffset(offset);
-
-                        this.Manager.Stops.Add(addStop);
-                        this.Manager.Index = this.Manager.Count - 1;
-
-                        CanvasGradientStop[] array = this.Manager.GenerateArrayFromDate();
-                        this.SetArray(array);
-
-                        this.StopChanged(addStop.Color, (int)(addStop.Position * 100), true);//Delegate
-                        return;
-                    };
-                    this.CanvasOperator.Single_Delta += (point) =>
-                    {
-                        if (this.array == null) return;
-
-                        if (this.Manager.IsLeft) return;
-                        if (this.Manager.IsRight) return;
-
-                        float offset = this.Size.PositionToOffset(point.X);
-                        this.SetOffset(offset);
-
-                        this.OffsetChanged(offset);
-
-                        this.CanvasControl.Invalidate();
-                        this.StopsChanged?.Invoke(this, this.array);//Delegate
-                    };
-                    this.CanvasControl.PointerReleased += (s, e) =>
-                    {
-                        if (this.array == null) return;
-
-                        this.CanvasControl.Invalidate();
-                        this.StopsChanged?.Invoke(this, this.array);//Delegate
-                    };
+                    this.ColorPicker.Color = this.SolidColorBrush.Color;
+                    this.ColorFlyout.ShowAt(this.ColorButton);//Flyout
                 }
+            };
 
 
-                //Color      
-                {
-                    this.ColorPicker.ColorChange += (s, color) => this.SetColor(color);
-                    this.StrawPicker.ColorChange += (s, color) => this.SetColor(color);
-                    this.ColorButton.Tapped += (s, e) =>
-                    {
-                        if (this.array == null) return;
-
-                        if (this.Manager.IsLeft || this.Manager.IsRight || this.Manager.Index >= 0)
-                        {
-                            this.ColorPicker.Color = this.SolidColorBrush.Color;
-                            this.ColorFlyout.ShowAt(this.ColorButton);//Flyout
-                        }
-                    };
-                }
-
-
-                //SliderControl     
-                {
-                    //Alpha
-                    this.SliderControl.APicker.ValueChange += (s, value) =>
-                    {
-                        this.SliderControl.ASlider.Value = value;
-                        this.SetColor(Color.FromArgb((byte)value, this.SolidColorBrush.Color.R, this.SolidColorBrush.Color.G, this.SolidColorBrush.Color.B));
-                    };
-                    this.SliderControl.ASlider.ValueChangeDelta += (s, value) =>
-                    {
-                        this.SliderControl.APicker.Value = (int)value;
-                        this.SetColor(Color.FromArgb((byte)value, this.SolidColorBrush.Color.R, this.SolidColorBrush.Color.G, this.SolidColorBrush.Color.B));
-                    };
-
-                    //Offset         
-                    this.SliderControl.OPicker.ValueChange += (s, value) =>
-                    {
-                        this.SetOffset(value / 100.0f);
-                    };
-                }
-
-
-                //Button
-                {
-                    // Reserve all stops. 
-                    this.ReserveButton.Tapped += (s, e) =>
-                    {
-                        if (this.array == null) return;
-
-                        this.Manager.Reserve();
-                        this.Manager.Copy(this.array);
-
-                        this.CanvasControl.Invalidate();
-                        this.StopsChanged?.Invoke(this, this.array);//Delegate
-                    };
-
-                    // Remove current stop.
-                    this.RemoveButton.Tapped += (s, e) =>
-                    {
-                        if (this.array == null) return;
-
-                        if (this.Manager.IsLeft) return;
-                        if (this.Manager.IsRight) return;
-
-                        this.Manager.Stops.RemoveAt(this.Manager.Index);
-
-                        if (this.Manager.Stops.Count == 0)
-                        {
-                            this.Manager.IsLeft = true;
-                            this.Manager.IsRight = false;
-                            this.Manager.Index = -1;
-
-                            this.StopChanged(this.Manager.LeftColor, 0, false);
-                        }
-                        else
-                        {
-                            this.Manager.Index--;
-
-                            if (this.Manager.Index > this.Manager.Stops.Count - 1)
-                                this.Manager.Index = this.Manager.Stops.Count - 1;
-                            else if (this.Manager.Index < 0)
-                                this.Manager.Index = 0;
-
-                            CanvasGradientStop stop = this.Manager.Stops[this.Manager.Index];
-                            this.StopChanged(stop.Color, 0, false);
-                        }
-
-                        this.array = this.Manager.GenerateArrayFromDate();
-
-                        this.CanvasControl.Invalidate();
-                        this.StopsChanged?.Invoke(this, this.array);//Delegate
-                    };
-                }
-
-            }
+            //Offset         
+            this.OffsetPicker.ValueChange += (s, value) =>
+            {
+                float offset = value / 100.0f;
+                this.SetOffset(offset);
+            };
+            //Alpha
+            this.AlphaPicker.ValueChange += (s, value) =>
+            {
+                Color color = this.SolidColorBrush.Color;
+                color.A = (byte)value;
+                this.SetColor(color);
+            };
         }
+    }
 }

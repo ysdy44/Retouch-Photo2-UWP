@@ -29,8 +29,6 @@ namespace Retouch_Photo2
             //this.RedoToolTip.Content = resourceLoader.GetString("/$DrawPage/Redo_ToolTip");
             this.SetupButton.Text = resource.GetString("/$DrawPage/Setup");
             this.SetupToolTip.Content = resource.GetString("/$DrawPage/Setup_ToolTip");
-            this.ThemeButton.Text = resource.GetString("/$DrawPage/Theme");
-            this.ThemeToolTip.Content = resource.GetString("/$DrawPage/Theme_ToolTip");
             this.RulerButton.Text = resource.GetString("/$DrawPage/Ruler");
             this.RulerToolTip.Content = resource.GetString("/$DrawPage/Ruler_ToolTip");
             this.FullScreenButton.Text = resource.GetString("/$DrawPage/FullScreen");

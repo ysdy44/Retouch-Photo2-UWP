@@ -17,8 +17,6 @@ namespace Retouch_Photo2.Brushs
         private void OffsetChanged(float offset)
         {
             int o = (int)(offset * 100);
-
-            this.SliderControl.OPicker.Value = o;
         }
         /// <summary>
         ///  Occur when the stop changed.
@@ -30,14 +28,13 @@ namespace Retouch_Photo2.Brushs
         {
             this.SolidColorBrush.Color = color;
 
-            this.SliderControl.APicker.Value = color.A;
-            this.SliderControl.ASlider.Value = color.A;
+            this.AlphaPicker.Value = color.A;
 
-            this.SliderControl.OPicker.Value = offset;
+            this.OffsetPicker.Value = offset;
 
             //IsEnabled
             this.RemoveButton.IsEnabled = isEnabled;
-            this.SliderControl.OPicker.IsEnabled = isEnabled;
+            this.OffsetPicker.IsEnabled = isEnabled;
         }
 
 

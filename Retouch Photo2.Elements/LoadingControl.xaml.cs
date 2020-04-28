@@ -9,7 +9,7 @@ namespace Retouch_Photo2.Elements
     public sealed partial class LoadingControl : UserControl
     {
         //@Content
-        /// <summary> <see cref = "Windows.UI.Xaml.Controls.TextBlock" /> s Text. </summary>
+        /// <summary> TextBlock's Text. </summary>
         public string Text { set => this.TextBlock.Text = value; get => this.TextBlock.Text; }
         
         #region DependencyProperty
@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Elements
             set { SetValue(IsActiveProperty, value); }
         }       
         /// <summary> Identifies the <see cref = "LoadingControl.IsActive" /> dependency property. </summary>
-        public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(nameof(IsActive), typeof(bool), typeof(ThemeControl), new PropertyMetadata(false, (sender, e) =>
+        public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(nameof(IsActive), typeof(bool), typeof(LoadingControl), new PropertyMetadata(false, (sender, e) =>
         {
             LoadingControl con = (LoadingControl)sender;
 

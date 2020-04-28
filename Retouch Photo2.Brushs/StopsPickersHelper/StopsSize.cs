@@ -86,18 +86,18 @@ namespace Retouch_Photo2.Brushs
             {
                 CanvasGradientStop stop = manager.Stops[i];
                 Vector2 position = new Vector2(this.OffsetToPosition(stop.Position), this.Center);
-                if (manager.Index == i) drawingSession.FillCircle(position, 10, Colors.Black);
+                if (manager.Index == i) drawingSession.FillCircle(position, 11, Colors.Black);
                 drawingSession.DrawNode2(position, stop.Color);
             }
 
             //Left
             Vector2 left = new Vector2(this.Left, this.Center);
-            if (manager.IsLeft) drawingSession.FillCircle(left, 10, Colors.Black);
+            if (manager.IsLeft) drawingSession.FillCircle(left, 11, Colors.Black);
             drawingSession.DrawNode2(left, manager.LeftColor);
 
             //Right
             Vector2 right = new Vector2(this.Right, this.Center);
-            if (manager.IsLeft) drawingSession.FillCircle(right, 10, Colors.Black);
+            if (manager.IsRight) drawingSession.FillCircle(right, 11, Colors.Black);
             drawingSession.DrawNode2(right, manager.RightColor);
         }
     }

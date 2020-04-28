@@ -150,15 +150,6 @@
 
                         <elements:ExpandAppBarSapce/>
 
-                        <elements:ExpandAppbarButton x:Name="ThemeButton">
-                            <ToolTipService.ToolTip>
-                                <ToolTip x:Name="ThemeToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
-                            </ToolTipService.ToolTip>
-                            <elements:ExpandAppbarButton.CenterContent>
-                                <elements:ThemeControl x:Name="ThemeControl" Foreground="{ThemeResource AppText}"/>
-                            </elements:ExpandAppbarButton.CenterContent>
-                        </elements:ExpandAppbarButton>
-
                         <elements:ExpandAppBarSapce/>
 
                         <elements:ExpandAppbarToggleButton x:Name="RulerButton" IsChecked="{x:Bind ViewModel.CanvasRulerVisible,Mode=TwoWay}">
