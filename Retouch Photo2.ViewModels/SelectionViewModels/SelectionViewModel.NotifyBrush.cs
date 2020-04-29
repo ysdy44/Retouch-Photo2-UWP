@@ -17,23 +17,7 @@ namespace Retouch_Photo2.ViewModels
 
         /// <summary> Brush's Fill or Stroke. </summary>     
         public FillOrStroke FillOrStroke { get; private set; } = FillOrStroke.Fill;
-
-        /// <summary> Gets StyleManager. </summary>
-        public StyleManager StyleManager { get; } = new StyleManager
-        {
-            FillBrush = new Brush
-            {
-                Type = BrushType.Color,
-                Color = Color.FromArgb(255, 214, 214, 214),
-            },
-            StrokeBrush = new Brush
-            {
-                Type = BrushType.Color,
-                Color = Color.FromArgb(255, 0, 0, 0),
-            },
-            StrokeWidth = 1,
-        };
-
+        
 
         #region Color
 
@@ -78,13 +62,15 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Retouch_Photo2's the only stroke-width. </summary>
         public float StrokeWidth
         {
-            get => this.StyleManager.StrokeWidth;
+            get => this.strokeWidth;
             set
             {
-                this.StyleManager.StrokeWidth = value;
+                this.strokeWidth = value;
                 this.OnPropertyChanged(nameof(this.StrokeWidth));//Notify 
             }
         }
+        private float strokeWidth = 1;
+
 
 
         #endregion
@@ -144,37 +130,22 @@ namespace Retouch_Photo2.ViewModels
 
         #endregion
 
-
-        /// <summary>
-        /// Points turn to _oldPoints in Transformer.One.
-        /// </summary>
-        public void OneBrushPoints()
-        {
-            Transformer transformer = this.Transformer;
-            this.StyleManager.FillBrush.OneBrushPoints(transformer);
-            this.StyleManager.StrokeBrush.OneBrushPoints(transformer);
-        }
-        /// <summary>
-        /// _oldPoints turn to Points in Transformer Destination.
-        /// </summary>
-        /// <param name="layer"> The source layer. </param>
-        public void DeliverBrushPoints(ILayer layer)
-        {
-            Transformer transformer = layer.TransformManager.Destination;
-            layer.StyleManager.FillBrush.DeliverBrushPoints(transformer);
-            layer.StyleManager.StrokeBrush.DeliverBrushPoints(transformer);
-        }
-
+        
 
         /// <summary> Sets FillOrStroke. </summary>  
         public void SetFillOrStroke(FillOrStroke fillOrStroke)
         {
             this.FillOrStroke = fillOrStroke;
 
-            switch (fillOrStroke)
+            if (this.SelectionMode== ListViewSelectionMode.Single)
             {
-                case FillOrStroke.Fill: this.SetBrush(this.StyleManager.FillBrush, FillOrStroke.Fill); break;
-                case FillOrStroke.Stroke: this.SetBrush(this.StyleManager.StrokeBrush, FillOrStroke.Stroke); break;
+                StyleManager styleManager = this.Layer.StyleManager;
+
+                switch (fillOrStroke)
+                {
+                    case FillOrStroke.Fill: this.SetBrush(styleManager.FillBrush, FillOrStroke.Fill); break;
+                    case FillOrStroke.Stroke: this.SetBrush(styleManager.StrokeBrush, FillOrStroke.Stroke); break;
+                }
             }
         }
         /// <summary> Sets brush. </summary>  
@@ -217,8 +188,6 @@ namespace Retouch_Photo2.ViewModels
                 case FillOrStroke.Fill: this.SetBrush(styleManager.FillBrush, FillOrStroke.Fill); break;
                 case FillOrStroke.Stroke: this.SetBrush(styleManager.StrokeBrush, FillOrStroke.Stroke); break;
             }
-
-            this.StyleManager.CopyWith(StyleManager);
         }
         
     }

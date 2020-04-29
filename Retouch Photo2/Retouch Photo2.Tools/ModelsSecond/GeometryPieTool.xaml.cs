@@ -1,5 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
@@ -51,17 +53,6 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
             this.ConstructSweepAngle();
-
-            this.CreateTool = new CreateTool
-            {
-                CreateLayer = (Transformer transformer) =>
-                {
-                    return new GeometryPieLayer
-                    {
-                        SweepAngle = this.SelectionViewModel.GeometryPieSweepAngle,
-                    };
-                }
-            };
         }
 
 
@@ -152,15 +143,30 @@ namespace Retouch_Photo2.Tools.Models
         readonly FrameworkElement _icon = new GeometryPieIcon();
         readonly ToolSecondButton _button = new ToolSecondButton(new GeometryPieIcon());
 
-        readonly CreateTool CreateTool;
+        private ILayer CreateLayer(Transformer transformer)
+        {
+            return new GeometryPieLayer
+            {
+                SweepAngle = this.SelectionViewModel.GeometryPieSweepAngle,
+                TransformManager = new TransformManager(transformer),
+                StyleManager = new StyleManager
+                {
+                    FillBrush = new Brush
+                    {
+                        Type = BrushType.Color,
+                        Color = this.SelectionViewModel.FillColor,
+                    }
+                }
+            };
+        }
 
 
-        public void Starting(Vector2 point) => this.CreateTool.Starting(point);
-        public void Started(Vector2 startingPoint, Vector2 point) => this.CreateTool.Started(startingPoint, point);
-        public void Delta(Vector2 startingPoint, Vector2 point) => this.CreateTool.Delta(startingPoint, point);
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted) => this.CreateTool.Complete(startingPoint, point, isSingleStarted);
+        public void Starting(Vector2 point) => this.TipViewModel.CreateTool.Starting(point);
+        public void Started(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Started(this.CreateLayer, startingPoint, point);
+        public void Delta(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Delta(startingPoint, point);
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted) => this.TipViewModel.CreateTool.Complete(startingPoint, point, isSingleStarted);
 
-        public void Draw(CanvasDrawingSession drawingSession) => this.CreateTool.Draw(drawingSession);
+        public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
 
     }
 }

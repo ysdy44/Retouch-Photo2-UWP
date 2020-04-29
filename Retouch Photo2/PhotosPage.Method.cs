@@ -77,20 +77,12 @@ namespace Retouch_Photo2
                     case FillOrStroke.Fill:
                         layer.StyleManager.FillBrush.PhotoSource = transformerSource;
                         layer.StyleManager.FillBrush.PhotoDestination = transformer;
-                        layer.StyleManager.FillBrush.Photocopier = photo.ToPhotocopier();
-                        //Selection
-                        this.SelectionViewModel.StyleManager.FillBrush.PhotoSource = transformerSource;
-                        this.SelectionViewModel.StyleManager.FillBrush.PhotoDestination = transformer;
-                        this.SelectionViewModel.StyleManager.FillBrush.Photocopier = photo.ToPhotocopier();
+                        layer.StyleManager.FillBrush.Photocopier = photo.ToPhotocopier();                        
                         break;
                     case FillOrStroke.Stroke:
                         layer.StyleManager.StrokeBrush.PhotoSource = transformerSource;
                         layer.StyleManager.StrokeBrush.PhotoDestination = transformer;
-                        layer.StyleManager.StrokeBrush.Photocopier = photo.ToPhotocopier();
-                        //Selection
-                        this.SelectionViewModel.StyleManager.StrokeBrush.PhotoSource = transformerSource;
-                        this.SelectionViewModel.StyleManager.StrokeBrush.PhotoDestination = transformer;
-                        this.SelectionViewModel.StyleManager.StrokeBrush.Photocopier = photo.ToPhotocopier();
+                        layer.StyleManager.StrokeBrush.Photocopier = photo.ToPhotocopier();                      
                         break;
                 }
             });

@@ -1,5 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
@@ -46,43 +48,18 @@ namespace Retouch_Photo2.Tools.Models
         {
             set
             {
+                this.CountTouchbarButton.IsSelected = (value == GeometryCogMode.Count);
+                this.InnerRadiusTouchbarButton.IsSelected = (value == GeometryCogMode.InnerRadius);
+                this.ToothTouchbarButton.IsSelected = (value == GeometryCogMode.Tooth);
+                this.NotchTouchbarButton.IsSelected = (value == GeometryCogMode.Notch);
+
                 switch (value)
                 {
-                    case GeometryCogMode.None:
-                        this.CountTouchbarButton.IsSelected = false;
-                        this.InnerRadiusTouchbarButton.IsSelected = false;
-                        this.ToothTouchbarButton.IsSelected = false;
-                        this.NotchTouchbarButton.IsSelected = false;
-                        this.TipViewModel.TouchbarControl = null;
-                        break;
-                    case GeometryCogMode.Count:
-                        this.CountTouchbarButton.IsSelected = true;
-                        this.InnerRadiusTouchbarButton.IsSelected = false;
-                        this.ToothTouchbarButton.IsSelected = false;
-                        this.NotchTouchbarButton.IsSelected = false;
-                        this.TipViewModel.TouchbarControl = this.CountTouchbarSlider;
-                        break;
-                    case GeometryCogMode.InnerRadius:
-                        this.CountTouchbarButton.IsSelected = false;
-                        this.InnerRadiusTouchbarButton.IsSelected = true;
-                        this.ToothTouchbarButton.IsSelected = false;
-                        this.NotchTouchbarButton.IsSelected = false;
-                        this.TipViewModel.TouchbarControl = this.InnerRadiusTouchbarSlider;
-                        break;
-                    case GeometryCogMode.Tooth:
-                        this.CountTouchbarButton.IsSelected = false;
-                        this.InnerRadiusTouchbarButton.IsSelected = false;
-                        this.ToothTouchbarButton.IsSelected = true;
-                        this.NotchTouchbarButton.IsSelected = false;
-                        this.TipViewModel.TouchbarControl = this.ToothTouchbarSlider;
-                        break;
-                    case GeometryCogMode.Notch:
-                        this.CountTouchbarButton.IsSelected = false;
-                        this.InnerRadiusTouchbarButton.IsSelected = false;
-                        this.ToothTouchbarButton.IsSelected = false;
-                        this.NotchTouchbarButton.IsSelected = true;
-                        this.TipViewModel.TouchbarControl = this.NotchTouchbarSlider;
-                        break;
+                    case GeometryCogMode.None: this.TipViewModel.TouchbarControl = null; break;
+                    case GeometryCogMode.Count: this.TipViewModel.TouchbarControl = this.CountTouchbarSlider; break;
+                    case GeometryCogMode.InnerRadius: this.TipViewModel.TouchbarControl = this.InnerRadiusTouchbarSlider; break;
+                    case GeometryCogMode.Tooth: this.TipViewModel.TouchbarControl = this.ToothTouchbarSlider; break;
+                    case GeometryCogMode.Notch: this.TipViewModel.TouchbarControl = this.NotchTouchbarSlider; break;
                 }
             }
         }
@@ -110,20 +87,6 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructInnerRadius();
             this.ConstructTooth();
             this.ConstructNotch();
-
-            this.CreateTool = new CreateTool
-            {
-                CreateLayer = (Transformer transformer) =>
-                {
-                    return new GeometryCogLayer
-                    {
-                        Count = this.SelectionViewModel.GeometryCogCount,
-                        InnerRadius = this.SelectionViewModel.GeometryCogInnerRadius,
-                        Tooth = this.SelectionViewModel.GeometryCogTooth,
-                        Notch = this.SelectionViewModel.GeometryCogNotch,
-                    };
-                }
-            };
         }
 
 
@@ -366,15 +329,33 @@ namespace Retouch_Photo2.Tools.Models
         readonly FrameworkElement _icon = new GeometryCogIcon();
         readonly ToolSecondButton _button = new ToolSecondButton(new GeometryCogIcon());
 
-        readonly CreateTool CreateTool;
+        private ILayer CreateLayer(Transformer transformer)
+        {
+            return new GeometryCogLayer
+            {
+                Count = this.SelectionViewModel.GeometryCogCount,
+                InnerRadius = this.SelectionViewModel.GeometryCogInnerRadius,
+                Tooth = this.SelectionViewModel.GeometryCogTooth,
+                Notch = this.SelectionViewModel.GeometryCogNotch,
+                TransformManager = new TransformManager(transformer),
+                StyleManager = new StyleManager
+                {
+                    FillBrush = new Brush
+                    {
+                        Type = BrushType.Color,
+                        Color = this.SelectionViewModel.FillColor,
+                    }
+                }
+            };
+        }
 
 
-        public void Starting(Vector2 point) => this.CreateTool.Starting(point);
-        public void Started(Vector2 startingPoint, Vector2 point) => this.CreateTool.Started(startingPoint, point);
-        public void Delta(Vector2 startingPoint, Vector2 point) => this.CreateTool.Delta(startingPoint, point);
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted) => this.CreateTool.Complete(startingPoint, point, isSingleStarted);
+        public void Starting(Vector2 point) => this.TipViewModel.CreateTool.Starting(point);
+        public void Started(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Started(this.CreateLayer, startingPoint, point);
+        public void Delta(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Delta(startingPoint, point);
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted) => this.TipViewModel.CreateTool.Complete(startingPoint, point, isSingleStarted);
 
-        public void Draw(CanvasDrawingSession drawingSession) => this.CreateTool.Draw(drawingSession);
+        public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
 
     }
 }

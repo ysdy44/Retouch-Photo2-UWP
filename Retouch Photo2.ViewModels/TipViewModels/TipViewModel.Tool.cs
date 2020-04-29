@@ -31,7 +31,10 @@ namespace Retouch_Photo2.ViewModels
         private ITool tool;
 
         /// <summary> TransformerTool. </summary>
-        public ITransformerTool TransformerTool { get; set; } 
+        public ITransformerTool TransformerTool { get; private set; }
+
+        /// <summary> CreateTool. </summary>
+        public ICreateTool CreateTool { get; private set; }
 
         /// <summary> Tools. </summary>
         public IList<ITool> Tools { get; set; } = new List<ITool>();

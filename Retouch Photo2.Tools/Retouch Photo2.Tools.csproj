@@ -190,6 +190,7 @@
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ICreateTool.cs" />
     <Compile Include="ITool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ITransformerTool.cs" />
@@ -354,6 +355,10 @@
     <ProjectReference Include="..\..\FanKit.Transformers\FanKit.Transformers\FanKit.Transformers.csproj">
       <Project>{a98a4671-07f5-46c7-bad2-9fa0242d2855}</Project>
       <Name>FanKit.Transformers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Layers\Retouch Photo2.Layers.csproj">
+      <Project>{15cbf0a7-0953-49f5-b541-f8bcaab40053}</Project>
+      <Name>Retouch Photo2.Layers</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

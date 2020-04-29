@@ -10,9 +10,11 @@ namespace Retouch_Photo2.ViewModels
     {
 
         //@Construct
-        public TipViewModel(ITool noneTool)
+        public TipViewModel(ITool noneTool, ITransformerTool transformerTool, ICreateTool createTool)
         {
             this.tool = noneTool;
+            this.TransformerTool = transformerTool;
+            this.CreateTool = createTool;
         }
 
 

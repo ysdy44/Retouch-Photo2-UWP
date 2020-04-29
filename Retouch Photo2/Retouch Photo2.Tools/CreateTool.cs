@@ -9,9 +9,9 @@ using Windows.UI.Xaml;
 namespace Retouch_Photo2.Tools
 {
     /// <summary>
-    /// <see cref="ITool"/>'s ICreateTool.
+    /// <see cref="ICreateTool"/>'s CreateTool.
     /// </summary>
-    public class CreateTool
+    public class CreateTool : ICreateTool
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
@@ -22,30 +22,24 @@ namespace Retouch_Photo2.Tools
         ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
         bool IsCenter => this.KeyboardViewModel.IsCenter;
         bool IsSquare => this.KeyboardViewModel.IsSquare;
+               
 
+        public void Starting(Vector2 point) { }
+
+        
+        /// <summary>
+        /// Occurs when the operation begins. 
+        /// </summary>
+        /// <param name="createLayer">
         /// <summary>
         /// Function of how to crate a layer.
         /// </summary>
         /// <param name="transformer"> The source transformer. </param>
         /// <returns> The created layer. </returns>
-        public Func<Transformer, ILayer> CreateLayer;
-
-
-        //@Construct      
-        /// <summary>
-        /// Construct a  <see cref="CreateTool"/>
-        /// </summary>
-        public CreateTool() { }
-        /// <summary>
-        /// Construct a  <see cref="CreateTool"/>
-        /// </summary>
-        /// <param name="createLayer"> Create a specific layer. </param>
-        public CreateTool(Func<Transformer, ILayer> createLayer) => this.CreateLayer = createLayer;
-
-
-
-        public void Starting(Vector2 point) { }
-        public void Started(Vector2 startingPoint, Vector2 point)
+        /// </param>
+        /// <param name="startingPoint"> The starting pointer. </param>
+        /// <param name="point"> The pointer. </param>
+        public void Started(Func<Transformer, ILayer> createLayer, Vector2 startingPoint, Vector2 point)
         {
             if (this.TransformerTool.Started(startingPoint, point, isSetTransformerMode: true)) return;//TransformerTool
 
@@ -64,15 +58,13 @@ namespace Retouch_Photo2.Tools
             this.ViewModel.TextVisibility = Visibility.Visible;
 
             //Mezzanine
-            ILayer layer = this.CreateLayer(transformer);
-            layer.StyleManager = this.SelectionViewModel.StyleManager.Clone();
+            ILayer layer = createLayer(transformer);
 
             this.ViewModel.MezzanineLayer = layer;
             this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.ViewModel.MezzanineLayer);
 
             //Selection
             this.SelectionViewModel.Transformer = transformer;
-            this.SelectionViewModel.DeliverBrushPoints(this.ViewModel.MezzanineLayer);
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
@@ -103,7 +95,6 @@ namespace Retouch_Photo2.Tools
 
             //Selection
             this.SelectionViewModel.Transformer = transformer;
-            this.SelectionViewModel.DeliverBrushPoints(this.ViewModel.MezzanineLayer);
 
             this.ViewModel.Invalidate();//Invalidate
         }

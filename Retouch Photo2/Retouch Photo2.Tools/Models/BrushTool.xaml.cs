@@ -288,8 +288,6 @@ namespace Retouch_Photo2.Tools.Models
 
             this._operateMode = BrushOperateMode.None;
 
-            this.SelectionViewModel.OneBrushPoints();
-
             if (isSingleStarted == false)
             {
                 //TransformerTool
@@ -335,13 +333,9 @@ namespace Retouch_Photo2.Tools.Models
                 {
                     case FillOrStroke.Fill:
                         layer.StyleManager.FillBrush.Color = value;
-                        //Selection
-                        this.SelectionViewModel.StyleManager.FillBrush.Color = value;
                         break;
                     case FillOrStroke.Stroke:
                         layer.StyleManager.StrokeBrush.Color = value;
-                        //Selection
-                        this.SelectionViewModel.StyleManager.StrokeBrush.Color = value;
                         break;
                 }
             });
@@ -361,13 +355,9 @@ namespace Retouch_Photo2.Tools.Models
                 {
                     case FillOrStroke.Fill:
                         layer.StyleManager.FillBrush.Array = (CanvasGradientStop[])array.Clone();
-                        //Selection
-                        this.SelectionViewModel.StyleManager.FillBrush.Array = (CanvasGradientStop[])array.Clone();
                         break;
                     case FillOrStroke.Stroke:
                         layer.StyleManager.StrokeBrush.Array = (CanvasGradientStop[])array.Clone();
-                        //Selection
-                        this.SelectionViewModel.StyleManager.StrokeBrush.Array = (CanvasGradientStop[])array.Clone();
                         break;
                 }
             });
@@ -440,13 +430,9 @@ namespace Retouch_Photo2.Tools.Models
                 {
                     case FillOrStroke.Fill:
                         layer.StyleManager.FillBrush.Type = BrushType.None;
-                        //Selection
-                        this.SelectionViewModel.StyleManager.FillBrush.Type = BrushType.None;
                         break;
                     case FillOrStroke.Stroke:
                         layer.StyleManager.StrokeBrush.Type = BrushType.None;
-                        //Selection
-                        this.SelectionViewModel.StyleManager.StrokeBrush.Type = BrushType.None;
                         break;
                 }
             });
@@ -479,16 +465,10 @@ namespace Retouch_Photo2.Tools.Models
                     case FillOrStroke.Fill:
                         layer.StyleManager.FillBrush.Type = BrushType.Color;
                         layer.StyleManager.FillBrush.Color = this.SelectionViewModel.FillColor;
-                        //Selection
-                        this.SelectionViewModel.StyleManager.FillBrush.Type = BrushType.Color;
-                        this.SelectionViewModel.StyleManager.FillBrush.Color = this.SelectionViewModel.FillColor;
                         break;
                     case FillOrStroke.Stroke:
                         layer.StyleManager.StrokeBrush.Type = BrushType.Color;
                         layer.StyleManager.StrokeBrush.Color = this.SelectionViewModel.StrokeColor;
-                        //Selection
-                        this.SelectionViewModel.StyleManager.StrokeBrush.Type = BrushType.Color;
-                        this.SelectionViewModel.StyleManager.StrokeBrush.Color = this.SelectionViewModel.StrokeColor;
                         break;
                 }
             });
@@ -509,7 +489,6 @@ namespace Retouch_Photo2.Tools.Models
             };
             this.Gradient(GradientBrushType.Linear, brushPoints, isResetBrushArray: isResetBrushArray);
 
-            this.SelectionViewModel.OneBrushPoints();
             this.ViewModel.Invalidate();//Invalidate
         }
 
@@ -526,7 +505,6 @@ namespace Retouch_Photo2.Tools.Models
             };
             this.Gradient(GradientBrushType.Radial, brushPoints, isResetBrushArray: isResetBrushArray);
 
-            this.SelectionViewModel.OneBrushPoints();
             this.ViewModel.Invalidate();//Invalidate
         }
 
@@ -545,7 +523,6 @@ namespace Retouch_Photo2.Tools.Models
             };
             this.Gradient(GradientBrushType.Elliptical, brushPoints, isResetBrushArray: isResetBrushArray);
 
-            this.SelectionViewModel.OneBrushPoints();
             this.ViewModel.Invalidate();//Invalidate
         }
 

@@ -37,7 +37,6 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public TextArtisticLayer()
         {
-            base.StyleManager.FillBrush.Color = Color.FromArgb(255, 0, 0, 0);
             base.Control = new LayerControl(this)
             {
                 Icon = new TextArtisticIcon(),

@@ -94,38 +94,30 @@ namespace Retouch_Photo2.Tools.Models
         readonly FrameworkElement _icon = new TextFrameIcon();
         readonly ToolButton _button = new ToolButton(new TextFrameIcon());
 
-        readonly CreateTool CreateTool = new CreateTool
+        private ILayer CreateLayer(Transformer transformer)
         {
-            CreateLayer = (Transformer transformer) =>
+            return new TextFrameLayer
             {
-                return new TextFrameLayer
+                SelectMode = SelectMode.Selected,
+                TransformManager = new TransformManager(transformer),
+                StyleManager = new StyleManager
                 {
-                    SelectMode = SelectMode.Selected,
-                    TransformManager = new TransformManager(transformer),
-                    StyleManager = new StyleManager
+                    FillBrush = new Brush
                     {
-                        FillBrush = new Brush
-                        {
-                            Type = BrushType.Color,
-                            Color = Colors.Black,
-                        },
-                        StrokeBrush = new Brush
-                        {
-                            Type = BrushType.None,
-                        },
-                        StrokeWidth = 0,
+                        Type = BrushType.Color,
+                        Color = Colors.Black,
                     }
-                };
-            }
-        };
+                }
+            };
+        }
 
 
-        public void Starting(Vector2 point) => this.CreateTool.Starting(point);
-        public void Started(Vector2 startingPoint, Vector2 point) => this.CreateTool.Started(startingPoint, point);
-        public void Delta(Vector2 startingPoint, Vector2 point) => this.CreateTool.Delta(startingPoint, point);
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted) => this.CreateTool.Complete(startingPoint, point, isSingleStarted);
+        public void Starting(Vector2 point) => this.TipViewModel.CreateTool.Starting(point);
+        public void Started(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Started(this.CreateLayer, startingPoint, point);
+        public void Delta(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Delta(startingPoint, point);
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted) => this.TipViewModel.CreateTool.Complete(startingPoint, point, isSingleStarted);
 
-        public void Draw(CanvasDrawingSession drawingSession) => this.CreateTool.Draw(drawingSession);
+        public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
 
     }
 }
