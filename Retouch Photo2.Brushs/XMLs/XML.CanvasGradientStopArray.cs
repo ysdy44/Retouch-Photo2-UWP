@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Brushs
         /// <param name="elementName"> The element name. </param>
         /// <param name="array"> The source data. </param>
         /// <returns> The saved XElement. </returns>
-        private static XElement SaveCanvasGradientStopArray(string elementName, CanvasGradientStop[] array)
+        public static XElement SaveCanvasGradientStopArray(string elementName, CanvasGradientStop[] array)
         {
             return new XElement
             (
@@ -37,7 +37,7 @@ namespace Retouch_Photo2.Brushs
         /// </summary>
         /// <param name="element"> The source XElement. </param>
         /// <returns> The loaded <see cref="CanvasGradientStop[]"/>. </returns>
-        private static CanvasGradientStop[] LoadCanvasGradientStopArray(XElement element)
+        public static CanvasGradientStop[] LoadCanvasGradientStopArray(XElement element)
         {
             return
             (

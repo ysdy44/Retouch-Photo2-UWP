@@ -120,14 +120,17 @@
   <data name="AddImageLayer" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="BrushToolImage" xml:space="preserve">
-    <value>Brush</value>
+  <data name="FillBrushToImage" xml:space="preserve">
+    <value>FillBrush</value>
   </data>
-  <data name="ImageToolReplace" xml:space="preserve">
+  <data name="ReplaceImage" xml:space="preserve">
     <value>Replace</value>
   </data>
-  <data name="ImageToolSelect" xml:space="preserve">
+  <data name="SelectImage" xml:space="preserve">
     <value>Select</value>
+  </data>
+  <data name="StrokeBrushToImage" xml:space="preserve">
+    <value>StrokeBrush</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Gallery</value>

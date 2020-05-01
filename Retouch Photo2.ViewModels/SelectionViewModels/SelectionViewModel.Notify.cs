@@ -1,7 +1,7 @@
 ﻿using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
-using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Brushs.Models;
 using Retouch_Photo2.Effects;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
@@ -16,22 +16,13 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public partial class SelectionViewModel : INotifyPropertyChanged
     {
-               
+
         /// <summary> <see cref = "SelectionViewModel" />'s layer type. </summary>
-        public LayerType Type
-        {
-            get => this.type;
-            set
-            {
-                this.type = value;
-                this.OnPropertyChanged(nameof(this.Type));//Notify 
-            }
-        }
-        private LayerType type;
+        public LayerType Type { get; set; } = LayerType.None;
 
 
         /// <summary> <see cref = "SelectionViewModel" />'s opacity. </summary>
-        public float Opacity { get; set; }
+        public float Opacity { get; set; } = 1.0f;
         /// <summary> Sets the <see cref = "SelectionViewModel.Opacity" />. </summary>
         public void SetOpacity(float value)
         {
@@ -41,43 +32,37 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
-        /// <summary> <see cref = "SelectionViewModel" />'s blend type. </summary>
-        public BlendEffectMode? BlendType
+        /// <summary> <see cref = "SelectionViewModel" />'s blend mode. </summary>
+        public BlendEffectMode? BlendMode = null;
+        /// <summary> Sets the <see cref = "SelectionViewModel.BlendMode" />. </summary>
+        public void SetBlendMode(BlendEffectMode? value)
         {
-            get => this.blendType;
-            set
-            {
-                this.blendType = value;
-                this.OnPropertyChanged(nameof(this.BlendType));//Notify 
-            }
+            if (this.BlendMode == value) return;
+            this.BlendMode = value;
+            this.OnPropertyChanged(nameof(this.BlendMode));//Notify 
         }
-        private BlendEffectMode? blendType;
 
 
         /// <summary> <see cref = "SelectionViewModel" />'s visibility. </summary>
-        public Visibility Visibility
+        public Visibility Visibility { get; set; } = Visibility.Visible;
+        /// <summary> Sets the <see cref = "SelectionViewModel.Visibility" />. </summary>
+        public void SetVisibility(Visibility value)
         {
-            get => this.visibility;
-            set
-            {
-                this.visibility = value;
-                this.OnPropertyChanged(nameof(this.Visibility));//Notify 
-            }
+            if (this.Visibility == value) return;
+            this.Visibility = value;
+            this.OnPropertyChanged(nameof(this.Visibility));//Notify 
         }
-        private Visibility visibility;
+
 
         /// <summary> <see cref = "SelectionViewModel" />'s tag type. </summary>
-        public TagType TagType
+        public TagType TagType { get; set; } = TagType.None;
+        /// <summary> Sets the <see cref = "SelectionViewModel.TagType" />. </summary>
+        public void SetTagType(TagType value)
         {
-            get => this.tagType;
-            set
-            {
-                if (this.tagType == value) return;
-                this.tagType = value;
-                this.OnPropertyChanged(nameof(this.TagType));//Notify 
-            }
+            if (this.TagType == value) return;
+            this.TagType = value;
+            this.OnPropertyChanged(nameof(this.TagType));//Notify 
         }
-        private TagType tagType;
 
 
         //////////////////////////
@@ -133,7 +118,7 @@ namespace Retouch_Photo2.ViewModels
             this.IsGroupLayer = layer is GroupLayer;
             this.OnPropertyChanged(nameof(this.IsGroupLayer));//Notify 
         }
-        
+
 
         /// <summary> ImageLayer's Exist. </summary>      
         public bool IsImageLayer
@@ -163,14 +148,18 @@ namespace Retouch_Photo2.ViewModels
             if (layer is ImageLayer imageLayer)
             {
                 this.IsImageLayer = true;
-                this.Photocopier = imageLayer.StyleManager.FillBrush.Photocopier;
+
+                if (imageLayer.StyleManager.FillBrush is ImageBrush imageBrush)
+                {
+                    this.Photocopier = imageBrush.Photocopier;
+                }
             }
             else
             {
                 this.IsImageLayer = false;
             }
         }
-        
+
 
         /// <summary> Sets PenTool nodes mode. </summary>     
         public bool IsPenToolNodesMode

@@ -17,6 +17,7 @@ namespace Retouch_Photo2.Blends
         {
             switch (tagType)
             {
+                case TagType.None: return Colors.LightGray;
                 case TagType.Red: return Colors.LightCoral;
                 case TagType.Orange: return Colors.Orange;
                 case TagType.Yellow: return Colors.Yellow;

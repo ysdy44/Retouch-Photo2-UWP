@@ -106,26 +106,28 @@
                         </Grid>
                     </Border>
 
-                    <elements:IconRoundedBorderButton x:Name="FontWeightButton" Grid.Column="2">
+                    <Border Grid.Column="2" Style="{StaticResource AppRoundedBorderStyle}">
                         <ToolTipService.ToolTip>
                             <ToolTip x:Name="FontWeightToolTip" Placement="Right" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
                         </ToolTipService.ToolTip>
-                        <elements:IconRoundedBorderButton.Icon>
-                            <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </elements:IconRoundedBorderButton.Icon>
-                    </elements:IconRoundedBorderButton>
+                        <Button x:Name="FontWeightButton" Height="36" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <FontIcon Margin="4,0" FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                        </Button>
+                    </Border>
 
                 </Grid>
 
 
                 <!--FontFamily-->
                 <TextBlock x:Name="FontFamilyTextBlock" Style="{StaticResource AppTextBlock}"/>
-                <elements:IconRoundedBorderButton x:Name="FontFamilyButton" Margin="2,0" 
-                     Text="{x:Bind SelectionViewModel.TextFontFamily, Mode=OneWay}">
-                    <elements:IconRoundedBorderButton.Icon>
-                        <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                    </elements:IconRoundedBorderButton.Icon>
-                </elements:IconRoundedBorderButton>
+                <Border Margin="2" Style="{StaticResource AppRoundedBorderStyle}">
+                    <Button x:Name="FontFamilyButton" Height="36" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <RelativePanel>
+                            <TextBlock Text="{x:Bind SelectionViewModel.TextFontFamily,Mode=OneWay}" TextTrimming="CharacterEllipsis" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignLeftWithPanel="True"/>
+                            <FontIcon Margin="4,0" FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                        </RelativePanel>
+                    </Button>
+                </Border>
 
 
                 <!--FontSize-->
@@ -143,11 +145,11 @@
                              Width="Auto" MaxWidth="200" HorizontalAlignment="Stretch"/>
                     </Border>
 
-                    <elements:IconRoundedBorderButton x:Name="FontSizeButton" Grid.Column="2">
-                        <elements:IconRoundedBorderButton.Icon>
-                            <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </elements:IconRoundedBorderButton.Icon>
-                    </elements:IconRoundedBorderButton>
+                    <Border Grid.Column="2" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Button x:Name="FontSizeButton" Height="36" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <FontIcon Margin="4,0" FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                        </Button>
+                    </Border>
 
                 </Grid>
 

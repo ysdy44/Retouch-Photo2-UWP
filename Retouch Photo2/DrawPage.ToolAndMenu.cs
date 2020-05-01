@@ -56,9 +56,9 @@ namespace Retouch_Photo2
             if (tool == null)
             {
                 if (this.ToolLeftMore == null)
-                    this.ToolLeft.Add(new ToolSeparator());
+                    this.ToolLeft.Add(new ComboBoxSeparator());
                 else
-                    this.ToolLeftMore.Add(new ToolSeparator());
+                    this.ToolLeftMore.Add(new ComboBoxSeparator());
 
                 return;
             }

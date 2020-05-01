@@ -1,8 +1,7 @@
 ﻿using HSVColorPickers;
 using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Brushes;
+using Retouch_Photo2.Brushs.Models;
 using System.Numerics;
-using Windows.UI;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Brushs
@@ -13,57 +12,56 @@ namespace Retouch_Photo2.Brushs
     public sealed partial class ShowControl : UserControl
     {
         //Size
-        float SizeWidth;
-        float SizeHeight;
-        Vector2 Center;
+        float SizeWidth = 100;
+        float SizeHeight = 50;
+        Vector2 SizeCenter = new Vector2(25, 50);
 
         //Background
         CanvasRenderTarget GrayAndWhiteBackground;
 
 
         #region DependencyProperty
+        
 
-
-        /// <summary> Sets or Gets brush type. </summary>
-        public BrushType BrushType
+        /// <summary> Gets or sets the fill or stroke. </summary>
+        public FillOrStroke FillOrStroke
         {
-            get => this.brushType;
             set
             {
-                this.brushType = value;
-                this.CanvasControl.Invalidate();//Invalidate
+                this._vsFillOrStroke = value;
+                this.Invalidate();//State
             }
         }
-        private BrushType brushType;
 
-
-        /// <summary> Sets or Gets brush color. </summary>
-        public Color Color
+        /// <summary> Gets or sets the fill-brush. </summary>
+        public IBrush FillBrush
         {
-            get => this.color;
             set
             {
-                this.color = value;
-                this.CanvasControl.Invalidate();//Invalidate
+                this._vsFillBrush = value;
+                this.Invalidate();//State
             }
         }
-        private Color color;
 
-
-        /// <summary> Sets or Gets gradient colors. </summary>
-        public CanvasGradientStop[] BrushArray
+        /// <summary> Gets or sets the stroke-brush. </summary>
+        public IBrush StrokeBrush
         {
-            get => this.brushArray;
             set
             {
-                this.brushArray = value;
-                this.CanvasControl.Invalidate();//Invalidate
+                this._vsStrokeBrush = value;
+                this.Invalidate();//State
             }
         }
-        private CanvasGradientStop[] brushArray;
 
 
         #endregion
+        
+
+        //@VisualState
+        FillOrStroke _vsFillOrStroke;
+        IBrush _vsFillBrush;
+        IBrush _vsStrokeBrush;
+        public void Invalidate() => this.CanvasControl.Invalidate();//State
 
 
         //@Construct
@@ -77,13 +75,13 @@ namespace Retouch_Photo2.Brushs
                 if (e.NewSize == e.PreviousSize) return;
                 this.SizeWidth = (float)e.NewSize.Width;
                 this.SizeHeight = (float)e.NewSize.Height;
-                this.Center = new Vector2(this.SizeWidth / 2, this.SizeHeight / 2);
+                this.SizeCenter = new Vector2(this.SizeWidth / 2, this.SizeHeight / 2);
             };
             this.CanvasControl.CreateResources += (sender, args) =>
             {
                 float width = (float)sender.ActualWidth;
                 float height = (float)sender.ActualHeight;
-                this.GrayAndWhiteBackground  = new CanvasRenderTarget(sender, width, height);
+                this.GrayAndWhiteBackground = new CanvasRenderTarget(sender, width, height);
 
                 using (CanvasDrawingSession drawingSession = this.GrayAndWhiteBackground.CreateDrawingSession())
                 {
@@ -96,66 +94,29 @@ namespace Retouch_Photo2.Brushs
 
             this.CanvasControl.Draw += (sender, args) =>
             {
+                switch (this._vsFillOrStroke)
                 {
-                    switch (this.brushType)
-                    {
-                        case BrushType.None:
-                            {
-                                args.DrawingSession.Clear(Colors.White);//ClearColor
-                                args.DrawingSession.DrawLine(0, 0, this.SizeWidth, this.SizeHeight, Colors.DodgerBlue);
-                                args.DrawingSession.DrawLine(0, this.SizeHeight, this.SizeWidth, 0, Colors.DodgerBlue);
-                            }
-                            break;
-                        case BrushType.Color:
-                            {
-                                args.DrawingSession.DrawImage(this.GrayAndWhiteBackground);//Background
-                                args.DrawingSession.Clear(this.color);//ClearColor
-                                return;
-                            }
-                        case BrushType.LinearGradient:
-                            {
-                                args.DrawingSession.DrawImage(this.GrayAndWhiteBackground);//Background
-                                args.DrawingSession.FillRectangle(0, 0, this.SizeWidth, this.SizeHeight, new CanvasLinearGradientBrush(this.CanvasControl, this.brushArray)
-                                {
-                                    StartPoint = new Vector2(0, this.Center.Y),
-                                    EndPoint = new Vector2(this.SizeWidth, this.Center.Y),
-                                });
-                                return;
-                            }
-                        case BrushType.RadialGradient:
-                            {
-                                args.DrawingSession.DrawImage(this.GrayAndWhiteBackground);//Background
-                                args.DrawingSession.FillRectangle(0, 0, this.SizeWidth, this.SizeHeight, new CanvasRadialGradientBrush(this.CanvasControl, this.brushArray)
-                                {
-                                    Center = this.Center,
-                                    RadiusX = this.Center.Y,
-                                    RadiusY = this.Center.Y,
-                                });
-                                return;
-                            }
-                        case BrushType.EllipticalGradient:
-                            {
-                                args.DrawingSession.DrawImage(this.GrayAndWhiteBackground);//Background
-                                args.DrawingSession.FillRectangle(0, 0, this.SizeWidth, this.SizeHeight, new CanvasRadialGradientBrush(this.CanvasControl, this.brushArray)
-                                {
-                                    Center = this.Center,
-                                    RadiusX = this.Center.X,
-                                    RadiusY = this.Center.Y,
-                                });
-                                return;
-                            }
-                        case BrushType.Image:
-                            {
-                                args.DrawingSession.Clear(Colors.White);//ClearColor
-                                args.DrawingSession.DrawLine(0, 0, this.SizeWidth, this.SizeHeight, Colors.Red);
-                                args.DrawingSession.DrawLine(0, this.SizeHeight, this.SizeWidth, 0, Colors.Red);
-                            }
-                            return;
-                    }
+                    case FillOrStroke.Fill:
+                        this.Draw(this._vsFillBrush, args.DrawingSession);
+                        break;
+                    case FillOrStroke.Stroke:
+                        this.Draw(this._vsStrokeBrush, args.DrawingSession);
+                        break;
                 }
             };
         }
 
+        private void Draw(IBrush brush, CanvasDrawingSession drawingSession)
+        {
+            float sizeWidth = this.SizeWidth;
+            float sizeHeight = this.SizeHeight;
+            Vector2 sizeCenter = this.SizeCenter;
 
+            if (this._vsFillBrush == null)
+                NoneBrush.Show(drawingSession, sizeWidth, sizeHeight);
+            else
+                this._vsFillBrush.Show(this.CanvasControl, drawingSession, sizeWidth, sizeHeight, sizeCenter, this.GrayAndWhiteBackground);
+        }
+        
     }
 }

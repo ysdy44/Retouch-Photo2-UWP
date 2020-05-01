@@ -207,28 +207,28 @@ namespace Retouch_Photo2.Menus.Models
             };
 
 
-            //Blend
-            this.BlendButton.Tapped += (s, e) =>
+            //Blend Mode
+            this.BlendModeButton.Tapped += (s, e) =>
             {
-                this.BlendControl.BlendType = this.SelectionViewModel.BlendType;
+                this.BlendModeControl.Mode = this.SelectionViewModel.BlendMode;
 
                 this._Expander.IsSecondPage = true;
             };
-            this.BlendControl.BlendTypeChanged += (s, blendType) =>
+            this.BlendModeControl.ModeChanged += (s, mode) =>
             {
                 //Selection
-                this.SelectionViewModel.BlendType = blendType;
+                this.SelectionViewModel.BlendMode = mode;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.BlendType = blendType;
+                    layer.BlendMode = mode;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
             };
 
 
-            //Visual
-            this.VisualButton.Tapped += (s, e) =>
+            //Visibility
+            this.VisibilityButton.Tapped += (s, e) =>
             {
                 Visibility value = (this.SelectionViewModel.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
 
@@ -243,14 +243,14 @@ namespace Retouch_Photo2.Menus.Models
             };
 
 
-            //TagType
-            this.TagControl.TagTypeChanged += (s, tagType) =>
+            //Tag Type
+            this.TagTypeControl.TypeChanged += (s, type) =>
             {
                 //Selection
-                this.SelectionViewModel.TagType = tagType;
+                this.SelectionViewModel.TagType = type;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.TagType = tagType;
+                    layer.TagType = type;
                 });
             };
 

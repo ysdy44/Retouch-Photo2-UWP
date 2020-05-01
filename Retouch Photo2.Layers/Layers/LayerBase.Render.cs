@@ -61,13 +61,13 @@ namespace Retouch_Photo2.Layers
             }
 
             //Blend
-            if (currentLayer.BlendType is BlendEffectMode blendType)
+            if (currentLayer.BlendMode is BlendEffectMode blendMode)
             {
                 currentImage = new BlendEffect
                 {
                     Background = currentImage,
                     Foreground = previousImage,
-                    Mode = blendType
+                    Mode = blendMode
                 };
             }
 

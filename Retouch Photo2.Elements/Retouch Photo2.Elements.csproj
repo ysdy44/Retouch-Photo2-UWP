@@ -107,6 +107,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ApplicationLocalTextFileProvider.cs" />
+    <Compile Include="ComboBoxButtons\ComboBoxButton.xaml.cs">
+      <DependentUpon>ComboBoxButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ComboBoxButtons\ComboBoxSeparator.xaml.cs">
+      <DependentUpon>ComboBoxSeparator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CompositeModeControl.xaml.cs">
       <DependentUpon>CompositeModeControl.xaml</DependentUpon>
     </Compile>
@@ -152,9 +158,6 @@
     <Compile Include="ExpandAppbars\ExpandAppBarSapce.cs" />
     <Compile Include="ExpandAppbars\ExpandAppBarSeparator.cs" />
     <Compile Include="ExpandAppbars\IExpandAppbarElement.cs" />
-    <Compile Include="IconButtons\IconRoundedBorderButton.xaml.cs">
-      <DependentUpon>IconRoundedBorderButton.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Photos\Photo.cs" />
     <Compile Include="Photos\Photo.Instance.cs" />
     <Compile Include="Photos\Photocopier.cs" />
@@ -170,9 +173,6 @@
     </Compile>
     <Compile Include="RadiusAnimaPanel.xaml.cs">
       <DependentUpon>RadiusAnimaPanel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="IconButtons\IconButton.xaml.cs">
-      <DependentUpon>IconButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="DeviceLayoutType.cs" />
     <Compile Include="DrawPages\DrawLayout.xaml.cs">
@@ -224,6 +224,14 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="ComboBoxButtons\ComboBoxButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ComboBoxButtons\ComboBoxSeparator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CompositeModeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -276,10 +284,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="IconButtons\IconRoundedBorderButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainPages\MainLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -295,10 +299,6 @@
     <Page Include="RadiusAnimaPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="IconButtons\IconButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="DrawPages\DrawLayout.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -1,6 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -139,21 +140,14 @@ namespace Retouch_Photo2.Tools.Models
         public FrameworkElement Page => this;
 
         readonly FrameworkElement _icon = new GeometryPentagonIcon();
-        readonly ToolSecondButton _button = new ToolSecondButton(new GeometryPentagonIcon());
+        readonly ComboBoxButton _button = new ComboBoxButton(new GeometryPentagonIcon());
         
         private ILayer CreateLayer(Transformer transformer)
         {
             return new GeometryPentagonLayer
             {
                 TransformManager = new TransformManager(transformer),
-                StyleManager = new StyleManager
-                {
-                    FillBrush = new Brush
-                    {
-                        Type = BrushType.Color,
-                        Color = this.SelectionViewModel.FillColor,
-                    }
-                }
+                StyleManager = this.SelectionViewModel.GetStyleManager()
             };
         }
 

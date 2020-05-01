@@ -1,4 +1,6 @@
 ﻿using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Brushs.Models;
+using Retouch_Photo2.Controls;
 using Retouch_Photo2.ViewModels;
 using System;
 using Windows.ApplicationModel.Resources;
@@ -25,49 +27,34 @@ namespace Retouch_Photo2.Menus.Models
             this.InitializeComponent();
             this.ConstructStrings();
             this.ConstructMenu();
+                       
+            this._button.CenterContent = new ColorEllipse
+            (
+                 dataContext: this.SelectionViewModel,
+                 path: nameof(this.SelectionViewModel.Color),
+                 dp: ColorEllipse.ColorProperty
+            );
 
             this.ColorPicker.ColorChange += (s, value) =>
             {
-                //FillOrStroke
+                //Color
                 this.SelectionViewModel.Color = value;
+
                 switch (this.SelectionViewModel.FillOrStroke)
                 {
                     case FillOrStroke.Fill:
-                        this.SelectionViewModel.FillColor = value;
+                        this.SelectionViewModel.SetFillColor(value);
                         break;
                     case FillOrStroke.Stroke:
-                        this.SelectionViewModel.StrokeColor = value;
+                        this.SelectionViewModel.SetStrokeColor(value);
                         break;
                 }
 
-                if (this.SelectionViewModel.SelectionMode != ListViewSelectionMode.None)
-                {
-                    //Selection
-                    this.SelectionViewModel.BrushType = BrushType.Color;
-                    this.SelectionViewModel.SetValue((layer) =>
-                    {
-                        //FillOrStroke
-                        switch (this.SelectionViewModel.FillOrStroke)
-                        {
-                            case FillOrStroke.Fill:
-                                layer.StyleManager.FillBrush.Type = BrushType.Color;
-                                layer.StyleManager.FillBrush.Color = value;
-                                break;
-                            case FillOrStroke.Stroke:
-                                layer.StyleManager.StrokeBrush.Type = BrushType.Color;
-                                layer.StyleManager.StrokeBrush.Color = value;
-                                break;
-                        }
-                    });
-
-                    this.ViewModel.Invalidate();//Invalidate
-                }
+                this.ViewModel.Invalidate();//Invalidate
             };
         }
     }
-
-
-
+        
     /// <summary> 
     /// Retouch_Photo2's the only <see cref = "TransformerMenu" />. 
     /// </summary>
@@ -94,10 +81,7 @@ namespace Retouch_Photo2.Menus.Models
         public Point Postion { get; set; }
         public FrameworkElement Layout => this;
         public FrameworkElement Button => this._button;
-        private MenuButton _button = new MenuButton
-        {
-            CenterContent = new Retouch_Photo2.Menus.Icons.ColorIcon()
-        };
+        private MenuButton _button = new MenuButton();
         
         public MenuState State
         {

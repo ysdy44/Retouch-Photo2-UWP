@@ -12,6 +12,7 @@
     xmlns:layers="using:Retouch_Photo2.Layers"
     xmlns:toolElements="using:Retouch_Photo2.Tools.Elements"
     xmlns:models="using:Retouch_Photo2.Menus.Models"
+    xmlns:hsvColorPicker="using:HSVColorPickers"
     NavigationCacheMode="Required"    
     mc:Ignorable="d"
     >
@@ -39,12 +40,19 @@
         <Grid.Resources>
 
             <!--Flyout-->
+            <Flyout x:Name="FillColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <hsvColorPicker:ColorPicker x:Name="FillColorPicker" Background="Transparent" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+            </Flyout>
+            <Flyout x:Name="StrokeColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <hsvColorPicker:ColorPicker x:Name="StrokeColorPicker" Background="Transparent" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+            </Flyout>
             <Flyout x:Name="MoreTransformFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                 <toolElements:MoreTransformControl/>
             </Flyout>
             <Flyout x:Name="MoreCreateFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                 <toolElements:MoreCreateControl/>
             </Flyout>
+            
 
             <!--Transition-->
             <Storyboard x:Name="TransitionStoryboard">

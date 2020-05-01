@@ -1,11 +1,7 @@
-﻿using FanKit.Transformers;
-using Microsoft.Graphics.Canvas.Brushes;
-using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Layers;
+﻿using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Brushs.Models;
 using System.ComponentModel;
-using System.Numerics;
 using Windows.UI;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -16,10 +12,18 @@ namespace Retouch_Photo2.ViewModels
     {
 
         /// <summary> Brush's Fill or Stroke. </summary>     
-        public FillOrStroke FillOrStroke { get; private set; } = FillOrStroke.Fill;
-        
+        public FillOrStroke FillOrStroke
+        {
+            get => this.fillOrStroke;
+            set
+            {
+                if (this.fillOrStroke == value) return;
+                this.fillOrStroke = value;
+                this.OnPropertyChanged(nameof(this.FillOrStroke));//Notify 
+            }
+        }
+        private FillOrStroke fillOrStroke = FillOrStroke.Fill;
 
-        #region Color
 
 
         /// <summary> Retouch_Photo2's the only color. </summary>
@@ -32,33 +36,53 @@ namespace Retouch_Photo2.ViewModels
                 this.OnPropertyChanged(nameof(this.Color));//Notify 
             }
         }
-        private Color color = Color.FromArgb(255, 214, 214, 214);
-
-        /// <summary> Retouch_Photo2's the only fill-color. </summary>
-        public Color FillColor
+        private Color color = Colors.LightGray;
+        
+        public void SetFillColor(Color color)
         {
-            get => this.fillColor;
+            //Selection
+            this.FillBrush = new ColorBrush(color);
+            this.SetValue((layer) =>
+            {
+                layer.StyleManager.FillBrush = new ColorBrush(color);
+            });
+        }
+        public void SetStrokeColor(Color color)
+        {
+            //Selection
+            this.StrokeBrush = new ColorBrush(color);
+            this.SetValue((layer) =>
+            {
+                layer.StyleManager.StrokeBrush = new ColorBrush(color);
+            });
+        }
+
+
+
+        /// <summary> Retouch_Photo2's the only fill-brush. </summary>
+        public IBrush FillBrush
+        {
+            get => this.fillBrush; 
             set
             {
-                this.fillColor = value;
-                this.OnPropertyChanged(nameof(this.FillColor));//Notify 
+                this.fillBrush = value;
+                this.OnPropertyChanged(nameof(this.FillBrush));//Notify 
             }
         }
-        private Color fillColor = Color.FromArgb(255, 214, 214, 214);
+        private IBrush fillBrush = new ColorBrush(Colors.LightGray);
 
-        /// <summary> Retouch_Photo2's the only stroke-color. </summary>
-        public Color StrokeColor
+        /// <summary> Retouch_Photo2's the only stroke-brush. </summary>
+        public IBrush StrokeBrush
         {
-            get => this.strokeColor;
+            get => this.strokeBrush;
             set
             {
-                this.strokeColor = value;
-                this.OnPropertyChanged(nameof(this.StrokeColor));//Notify 
+                this.strokeBrush = value;
+                this.OnPropertyChanged(nameof(this.StrokeBrush));//Notify 
             }
         }
-        private Color strokeColor = Color.FromArgb(255, 0, 0, 0);
-
-
+        private IBrush strokeBrush = new ColorBrush(Colors.Black);
+        
         /// <summary> Retouch_Photo2's the only stroke-width. </summary>
         public float StrokeWidth
         {
@@ -70,125 +94,41 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private float strokeWidth = 1;
-
-
-
-        #endregion
-
-
-        #region Brush
-
-
-        /// <summary> Brush's type. </summary>     
-        public BrushType BrushType
-        {
-            get => this.brushType;
-            set
-            {
-                this.brushType = value;
-                this.OnPropertyChanged(nameof(this.BrushType));//Notify 
-            }
-        }
-        private BrushType brushType;
-
-        /// <summary> Brush's gradient stops. </summary>     
-        public CanvasGradientStop[] BrushArray
-        {
-            get => this.brushArray;
-            set
-            {
-                this.brushArray = value;
-                this.OnPropertyChanged(nameof(this.BrushArray));//Notify 
-            }
-        }
-        private CanvasGradientStop[] brushArray;
-
-        /// <summary> Brush points. </summary>     
-        public BrushPoints BrushPoints
-        {
-            get => this.brushPoints;
-            set
-            {
-                this.brushPoints = value;
-                this.OnPropertyChanged(nameof(this.BrushPoints));//Notify 
-            }
-        }
-        private BrushPoints brushPoints;
-
-        /// <summary> Brush destination transformer. </summary>
-        public Transformer BrushImageDestination
-        {
-            get => this.brushImageDestination;
-            set
-            {
-                this.brushImageDestination = value;
-                this.OnPropertyChanged(nameof(this.BrushImageDestination));//Notify 
-            }
-        }
-        private Transformer brushImageDestination;
-
-
-        #endregion
-
         
 
-        /// <summary> Sets FillOrStroke. </summary>  
-        public void SetFillOrStroke(FillOrStroke fillOrStroke)
+
+        /// <summary> Gets style-manager. </summary>  
+        public StyleManager GetStyleManager()
         {
-            this.FillOrStroke = fillOrStroke;
-
-            if (this.SelectionMode== ListViewSelectionMode.Single)
+            return new StyleManager
             {
-                StyleManager styleManager = this.Layer.StyleManager;
-
-                switch (fillOrStroke)
-                {
-                    case FillOrStroke.Fill: this.SetBrush(styleManager.FillBrush, FillOrStroke.Fill); break;
-                    case FillOrStroke.Stroke: this.SetBrush(styleManager.StrokeBrush, FillOrStroke.Stroke); break;
-                }
-            }
-        }
-        /// <summary> Sets brush. </summary>  
-        public void SetBrush(Brush brush, FillOrStroke fillOrStroke)
-        {
-            BrushType brushType = brush.Type;
-            this.BrushType = brushType;
-
-            switch (brushType)
-            {
-                case BrushType.None: break;
-                case BrushType.Color:
-                    this.Color = brush.Color;
-                    switch (fillOrStroke)
-                    {
-                        case FillOrStroke.Fill: this.FillColor = color; break;
-                        case FillOrStroke.Stroke: this.StrokeColor = color; break;
-                    }
-                    break;
-                case BrushType.LinearGradient:
-                case BrushType.RadialGradient:
-                case BrushType.EllipticalGradient:
-                    this.BrushArray = brush.Array;
-                    this.BrushPoints = brush.Points;
-                    break;
-                case BrushType.Image: break;
-            }
+                FillBrush = this.FillBrush.Clone(),
+                StrokeBrush = this.StrokeBrush.Clone(),
+                StrokeWidth = this.StrokeWidth
+            };
         }
         /// <summary> Sets style-manager. </summary>  
         public void SetStyleManager(StyleManager styleManager)
         {
-            if (styleManager == null)
-            {
-                this.BrushType = BrushType.None;
-                return;
-            }
+            if (styleManager == null) return;
+
+            this.FillBrush = styleManager.FillBrush;
+            this.StrokeBrush = styleManager.StrokeBrush;
+            this.StrokeWidth = styleManager.StrokeWidth;
 
             switch (this.FillOrStroke)
             {
-                case FillOrStroke.Fill: this.SetBrush(styleManager.FillBrush, FillOrStroke.Fill); break;
-                case FillOrStroke.Stroke: this.SetBrush(styleManager.StrokeBrush, FillOrStroke.Stroke); break;
+                case FillOrStroke.Fill:
+                    if (styleManager.FillBrush.Type == BrushType.Color)
+                        this.Color = styleManager.FillBrush.Color;
+                    break;
+                case FillOrStroke.Stroke:
+                    if (styleManager.StrokeBrush.Type == BrushType.Color)
+                        this.Color = styleManager.StrokeBrush.Color;
+                    break;
             }
         }
-        
+
+
     }
 }

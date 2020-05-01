@@ -1,0 +1,74 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Blends.BlendModeControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:elements="using:Retouch_Photo2.Elements"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="200"
+    >
+
+    <ScrollViewer>
+        <StackPanel>
+
+            <elements:ComboBoxButton x:Name="NormalButton"/>
+
+            <elements:ComboBoxSeparator/>
+
+            <elements:ComboBoxButton x:Name = "MultiplyButton"/>
+            <elements:ComboBoxButton x:Name = "ScreenButton" />
+
+            <elements:ComboBoxSeparator/>
+
+            <elements:ComboBoxButton x:Name = "DarkenButton" />
+            <elements:ComboBoxButton x:Name = "LightenButton" />
+
+            <elements:ComboBoxSeparator/>
+
+            <elements:ComboBoxButton x:Name = "DissolveButton" />
+            <elements:ComboBoxButton x:Name = "ColorBurnButton" />
+            <elements:ComboBoxButton x:Name = "LinearBurnButton" />
+
+            <elements:ComboBoxSeparator/>
+
+            <elements:ComboBoxButton x:Name = "DarkerColorButton" />
+            <elements:ComboBoxButton x:Name = "LighterColorButton" />
+
+            <elements:ComboBoxSeparator/>
+
+            <elements:ComboBoxButton x:Name = "ColorDodgeButton" />
+            <elements:ComboBoxButton x:Name = "LinearDodgeButton" />
+
+            <elements:ComboBoxSeparator/>
+
+            <elements:ComboBoxButton x:Name = "OverlayButton" />
+            <elements:ComboBoxButton x:Name = "SoftLightButton" />
+            <elements:ComboBoxButton x:Name = "HardLightButton" />
+            <elements:ComboBoxButton x:Name = "VividLightButton" />
+            <elements:ComboBoxButton x:Name = "LinearLightButton" />
+            <elements:ComboBoxButton x:Name = "PinLightButton" />
+
+            <elements:ComboBoxSeparator/>
+
+            <elements:ComboBoxButton x:Name = "HardMixButton" />
+            <elements:ComboBoxButton x:Name = "DifferenceButton" />
+            <elements:ComboBoxButton x:Name = "ExclusionButton" />
+
+            <elements:ComboBoxSeparator/>
+
+            <elements:ComboBoxButton x:Name = "HueButton" />
+            <elements:ComboBoxButton x:Name = "SaturationButton" />
+            <elements:ComboBoxButton x:Name = "ColorButton" />
+
+            <elements:ComboBoxSeparator/>
+
+            <elements:ComboBoxButton x:Name = "LuminosityButton" />
+            <elements:ComboBoxButton x:Name = "SubtractButton" />
+            <elements:ComboBoxButton x:Name = "DivisionButton" />
+
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>

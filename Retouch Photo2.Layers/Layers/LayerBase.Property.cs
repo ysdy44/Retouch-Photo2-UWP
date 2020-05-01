@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Layers
         public abstract LayerType Type { get; }
         public string Name { get; set; } = string.Empty;
         public float Opacity { get; set; } = 1.0f;
-        public BlendEffectMode? BlendType { get; set; } = null;
+        public BlendEffectMode? BlendMode { get; set; } = null;
 
         private Visibility visibility;
         public Visibility Visibility
@@ -83,7 +83,7 @@ namespace Retouch_Photo2.Layers
         {
             destination.Name = source.Name;
             destination.Opacity = source.Opacity;
-            destination.BlendType = source.BlendType;
+            destination.BlendMode = source.BlendMode;
             destination.Visibility = source.Visibility;
 
             destination.StyleManager = source.StyleManager.Clone();

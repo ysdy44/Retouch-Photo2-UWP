@@ -150,19 +150,19 @@
   <data name="Brush_TypeColor" xml:space="preserve">
     <value>颜色</value>
   </data>
-  <data name="Brush_TypeElliptical" xml:space="preserve">
+  <data name="Brush_TypeEllipticalGradient" xml:space="preserve">
     <value>椭圆形</value>
   </data>
   <data name="Brush_TypeImage" xml:space="preserve">
     <value>图像</value>
   </data>
-  <data name="Brush_TypeLinear" xml:space="preserve">
+  <data name="Brush_TypeLinearGradient" xml:space="preserve">
     <value>线性</value>
   </data>
   <data name="Brush_TypeNone" xml:space="preserve">
     <value>无</value>
   </data>
-  <data name="Brush_TypeRadial" xml:space="preserve">
+  <data name="Brush_TypeRadialGradient" xml:space="preserve">
     <value>径向</value>
   </data>
   <data name="Crop" xml:space="preserve">

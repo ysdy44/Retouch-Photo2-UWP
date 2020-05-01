@@ -106,13 +106,47 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Brush.cs" />
-    <Compile Include="Brush.ICanvasBrush.cs" />
-    <Compile Include="Brush.Transform.cs" />
-    <Compile Include="BrushPoints.cs" />
+    <Compile Include="BrushOperateMode.cs" />
+    <Compile Include="BrushTypeControls\BrushTypeControl.xaml.cs">
+      <DependentUpon>BrushTypeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BrushTypeIcons\ColorIcon.xaml.cs">
+      <DependentUpon>ColorIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BrushTypeIcons\EllipticalGradientIcon.xaml.cs">
+      <DependentUpon>EllipticalGradientIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BrushTypeIcons\ImageIcon.xaml.cs">
+      <DependentUpon>ImageIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BrushTypeIcons\LinearGradientIcon.xaml.cs">
+      <DependentUpon>LinearGradientIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BrushTypeIcons\NoneIcon.xaml.cs">
+      <DependentUpon>NoneIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BrushTypeIcons\RadialGradientIcon.xaml.cs">
+      <DependentUpon>RadialGradientIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FillOrStrokeControls\FillOrStrokeControl.xaml.cs">
+      <DependentUpon>FillOrStrokeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FillOrStrokeIcons\StrokeIcon.xaml.cs">
+      <DependentUpon>StrokeIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FillOrStrokeIcons\FillIcon.xaml.cs">
+      <DependentUpon>FillIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IBrush.cs" />
+    <Compile Include="Models\EllipticalGradientBrush.cs" />
+    <Compile Include="Models\ImageBrush.cs" />
+    <Compile Include="Models\LinearGradientBrush.cs" />
+    <Compile Include="Models\NoneBrush.cs" />
+    <Compile Include="Models\RadialGradientBrush.cs" />
+    <Compile Include="Models\ColorBrush.cs" />
     <Compile Include="StopsPickers\StopsPicker.Construct.cs" />
     <Compile Include="StopsPickers\StopsPicker.Method.cs" />
-    <Compile Include="StopsPickersHelper\GradientBrushType.cs" />
+    <Compile Include="GradientBrushType.cs" />
     <Compile Include="BrushType.cs" />
     <Compile Include="ShowControls\ShowControl.xaml.cs">
       <DependentUpon>ShowControl.xaml</DependentUpon>
@@ -121,15 +155,13 @@
       <DependentUpon>StopsPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="FillOrStroke.cs" />
-    <Compile Include="BrushOperates\BrushOperateHelper.cs" />
-    <Compile Include="BrushOperates\BrushOperateMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StopsPickersHelper\StopsManager.cs" />
-    <Compile Include="StopsPickersHelper\StopsSize.cs" />
+    <Compile Include="StopsPickers\StopsManager.cs" />
+    <Compile Include="StopsPickers\StopsSize.cs" />
     <Compile Include="StyleManager.cs" />
-    <Compile Include="XMLs\XML.Brush.cs" />
-    <Compile Include="XMLs\XML.BrushPoints.cs" />
     <Compile Include="XMLs\XML.CanvasGradientStopArray.cs" />
+    <Compile Include="XMLs\XML.IBrush.cs" />
+    <Compile Include="XMLs\XML.BrushFactory.cs" />
     <Compile Include="XMLs\XML.StyleManager.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo.Brushs.rd.xml" />
   </ItemGroup>
@@ -145,6 +177,46 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="BrushTypeControls\BrushTypeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BrushTypeIcons\ColorIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BrushTypeIcons\EllipticalGradientIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BrushTypeIcons\ImageIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BrushTypeIcons\LinearGradientIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BrushTypeIcons\NoneIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BrushTypeIcons\RadialGradientIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FillOrStrokeControls\FillOrStrokeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FillOrStrokeIcons\StrokeIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FillOrStrokeIcons\FillIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ShowControls\ShowControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -164,6 +236,7 @@
       <Name>Retouch Photo2.Elements</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

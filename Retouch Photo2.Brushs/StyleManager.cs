@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
+using Retouch_Photo2.Brushs.Models;
 using Retouch_Photo2.Elements;
 using System.Numerics;
 
@@ -13,9 +14,9 @@ namespace Retouch_Photo2.Brushs
     public partial class StyleManager : ICacheTransform
     {
         /// <summary> Gets or sets Style's fill-brush. </summary>
-        public Brush FillBrush = new Brush();
+        public IBrush FillBrush = new NoneBrush();
         /// <summary> Gets or sets Style's stroke-brush. </summary>
-        public Brush StrokeBrush = new Brush();
+        public IBrush StrokeBrush = new NoneBrush();
         /// <summary> Gets or sets Style's stroke-width. </summary>
         public float StrokeWidth = 1;
 
@@ -30,10 +31,12 @@ namespace Retouch_Photo2.Brushs
         /// </summary>
         public StyleManager(Transformer Source, Transformer Destination, Photocopier photocopier)
         {
-            this.FillBrush.Type = BrushType.Image;
-            this.FillBrush.PhotoSource = Source;
-            this.FillBrush.PhotoDestination = Destination;
-            this.FillBrush.Photocopier = photocopier;
+            this.FillBrush = new ImageBrush
+            {
+                Photocopier = photocopier,
+                Source = Source,
+                Destination = Destination,
+            };
         }
 
 
@@ -75,35 +78,10 @@ namespace Retouch_Photo2.Brushs
         /// <param name="canvasToVirtualMatrix"> The canvas-virtual-matrix. </param>
         public void FillGeometry(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, CanvasGeometry geometry, Matrix3x2 canvasToVirtualMatrix)
         {
-            switch (this.FillBrush.Type)
-            {
-                case BrushType.None:
-                    break;
-                case BrushType.Color:
-                    drawingSession.FillGeometry(geometry, this.FillBrush.Color);
-                    break;
-                case BrushType.LinearGradient:
-                    ICanvasBrush linearGradient = this.FillBrush.GetLinearGradient(resourceCreator, canvasToVirtualMatrix);
-                    drawingSession.FillGeometry(geometry, linearGradient);
-                    break;
-                case BrushType.RadialGradient:
-                    ICanvasBrush radialGradientBrush = this.FillBrush.GetRadialGradientBrush(resourceCreator, canvasToVirtualMatrix);
-                    drawingSession.FillGeometry(geometry, radialGradientBrush);
-                    break;
-                case BrushType.EllipticalGradient:
-                    ICanvasBrush ellipticalGradientBrush = this.FillBrush.GetEllipticalGradientBrush(resourceCreator, canvasToVirtualMatrix);
-                    drawingSession.FillGeometry(geometry, ellipticalGradientBrush);
-                    break;
-                case BrushType.Image:
-                    ICanvasBrush imageBrush = this.FillBrush.GetImageBrush(resourceCreator, canvasToVirtualMatrix);
-                    if (imageBrush != null)
-                    {
-                        drawingSession.FillGeometry(geometry, imageBrush);
-                    }
-                    break;
-                default:
-                    break;
-            }
+            ICanvasBrush canvasBrush = this.FillBrush.GetICanvasBrush(resourceCreator, canvasToVirtualMatrix);
+            if (canvasBrush == null) return;
+
+            drawingSession.FillGeometry(geometry, canvasBrush);
         }
         /// <summary>
         /// Draw a geometry with style.
@@ -114,37 +92,11 @@ namespace Retouch_Photo2.Brushs
         /// <param name="canvasToVirtualMatrix"> The canvas-virtual-matrix. </param>
         public void DrawGeometry(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, CanvasGeometry geometry, Matrix3x2 canvasToVirtualMatrix)
         {
-            float strokeWidth = this.StrokeWidth * (canvasToVirtualMatrix.M11 + canvasToVirtualMatrix.M22) / 2;
+            ICanvasBrush canvasBrush = this.FillBrush.GetICanvasBrush(resourceCreator, canvasToVirtualMatrix);
+            if (canvasBrush == null) return;
 
-            switch (this.StrokeBrush.Type)
-            {
-                case BrushType.None:
-                    break;
-                case BrushType.Color:
-                    drawingSession.DrawGeometry(geometry, this.StrokeBrush.Color, strokeWidth);
-                    break;
-                case BrushType.LinearGradient:
-                    ICanvasBrush linearGradient = this.StrokeBrush.GetLinearGradient(resourceCreator, canvasToVirtualMatrix);
-                    drawingSession.DrawGeometry(geometry, linearGradient, strokeWidth);
-                    break;
-                case BrushType.RadialGradient:
-                    ICanvasBrush radialGradientBrush = this.StrokeBrush.GetRadialGradientBrush(resourceCreator, canvasToVirtualMatrix);
-                    drawingSession.DrawGeometry(geometry, radialGradientBrush, strokeWidth);
-                    break;
-                case BrushType.EllipticalGradient:
-                    ICanvasBrush ellipticalGradientBrush = this.StrokeBrush.GetEllipticalGradientBrush(resourceCreator, canvasToVirtualMatrix);
-                    drawingSession.DrawGeometry(geometry, ellipticalGradientBrush, strokeWidth);
-                    break;
-                case BrushType.Image:
-                    ICanvasBrush imageBrush = this.FillBrush.GetImageBrush(resourceCreator, canvasToVirtualMatrix);
-                    if (imageBrush != null)
-                    {
-                        drawingSession.DrawGeometry(geometry, imageBrush);
-                    }
-                    break;
-                default:
-                    break;
-            }
+            float strokeWidth = this.StrokeWidth * (canvasToVirtualMatrix.M11 + canvasToVirtualMatrix.M22) / 2;
+            drawingSession.DrawGeometry(geometry, canvasBrush, strokeWidth);
         }
 
 
@@ -161,14 +113,6 @@ namespace Retouch_Photo2.Brushs
                 StrokeWidth = this.StrokeWidth,
             };
         }
-        /// <summary>
-        /// Copy a StyleManager with self.
-        /// </summary>
-        public void CopyWith(StyleManager styleManager)
-        {
-            this.FillBrush = styleManager.FillBrush.Clone();
-            this.StrokeBrush = styleManager.StrokeBrush.Clone();
-            this.StrokeWidth = styleManager.StrokeWidth;
-        }
+
     }
 }

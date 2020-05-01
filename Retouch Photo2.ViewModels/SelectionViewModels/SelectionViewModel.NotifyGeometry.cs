@@ -17,90 +17,95 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Sets all IGeometryLayer. </summary>     
         private void SetIGeometryLayer(ILayer layer)
         {
-            //Geometry0
+            if (layer is IGeometryLayer geometryLayer)
             {
-                //if (layer is GeometryRectangleLayer rectangleLayer)
+
+                //Geometry0
                 {
+                    //if (geometryLayer is GeometryRectangleLayer rectangleLayer)
+                    {
+                    }
+                    //if (geometryLayer is GeometryEllipseLayer ellipseLayer)
+                    {
+                    }
                 }
-                //if (layer is GeometryEllipseLayer ellipseLayer)
-                {
-                }
-            }
 
                 //Geometry1
                 {
-                    if (layer is GeometryRoundRectLayer roundRectLayer)
-                {
-                    this.GeometryRoundRectCorner = roundRectLayer.Corner;
+                    if (geometryLayer is GeometryRoundRectLayer roundRectLayer)
+                    {
+                        this.GeometryRoundRectCorner = roundRectLayer.Corner;
+                    }
+                    if (geometryLayer is GeometryTriangleLayer triangleLayer)
+                    {
+                        this.GeometryTriangleCenter = triangleLayer.Center;
+                    }
+                    if (geometryLayer is GeometryDiamondLayer diamondLayer)
+                    {
+                        this.GeometryDiamondMid = diamondLayer.Mid;
+                    }
                 }
-                if (layer is GeometryTriangleLayer triangleLayer)
-                {
-                    this.GeometryTriangleCenter = triangleLayer.Center;
-                }
-                if (layer is GeometryDiamondLayer diamondLayer)
-                {
-                    this.GeometryDiamondMid = diamondLayer.Mid;
-                }
-            }
 
-            //Geometry12
-            {
-                if (layer is GeometryPentagonLayer pentagonLayer)
+                //Geometry12
                 {
-                    this.GeometryPentagonPoints = pentagonLayer.Points;
+                    if (geometryLayer is GeometryPentagonLayer pentagonLayer)
+                    {
+                        this.GeometryPentagonPoints = pentagonLayer.Points;
+                    }
+                    if (geometryLayer is GeometryStarLayer starLayer)
+                    {
+                        this.GeometryStarPoints = starLayer.Points;
+                        this.GeometryStarInnerRadius = starLayer.InnerRadius;
+                    }
+                    if (geometryLayer is GeometryCogLayer cogLayer)
+                    {
+                        this.GeometryCogCount = cogLayer.Count;
+                        this.GeometryCogInnerRadius = cogLayer.InnerRadius;
+                        this.GeometryCogTooth = cogLayer.Tooth;
+                        this.GeometryCogNotch = cogLayer.Notch;
+                    }
                 }
-                if (layer is GeometryStarLayer starLayer)
-                {
-                    this.GeometryStarPoints = starLayer.Points;
-                    this.GeometryStarInnerRadius = starLayer.InnerRadius;
-                }
-                if (layer is GeometryCogLayer cogLayer)
-                {
-                    this.GeometryCogCount = cogLayer.Count;
-                    this.GeometryCogInnerRadius = cogLayer.InnerRadius;
-                    this.GeometryCogTooth = cogLayer.Tooth;
-                    this.GeometryCogNotch = cogLayer.Notch;
-                }
-            }
 
-            //Geometry3
-            {
-                if (layer is GeometryDountLayer dountLayer)
+                //Geometry3
                 {
-                    this.GeometryDountHoleRadius = dountLayer.HoleRadius;
+                    if (geometryLayer is GeometryDountLayer dountLayer)
+                    {
+                        this.GeometryDountHoleRadius = dountLayer.HoleRadius;
+                    }
+                    if (geometryLayer is GeometryPieLayer pieLayer)
+                    {
+                        this.GeometryPieSweepAngle = pieLayer.SweepAngle;
+                    }
+                    if (geometryLayer is GeometryCookieLayer cookieLayer)
+                    {
+                        this.GeometryCookieInnerRadius = cookieLayer.InnerRadius;
+                        this.GeometryCookieSweepAngle = cookieLayer.SweepAngle;
+                    }
                 }
-                if (layer is GeometryPieLayer pieLayer)
-                {
-                    this.GeometryPieSweepAngle = pieLayer.SweepAngle;
-                }
-                if (layer is GeometryCookieLayer cookieLayer)
-                {
-                    this.GeometryCookieInnerRadius = cookieLayer.InnerRadius;
-                    this.GeometryCookieSweepAngle = cookieLayer.SweepAngle;
-                }
-            }
 
-            //Geometry4
-            {
-                if (layer is GeometryArrowLayer arrowLayer)
+                //Geometry4
                 {
-                    this.GeometryArrowValue = arrowLayer.Value;
-                    this.GeometryArrowLeftTail = arrowLayer.LeftTail;
-                    this.GeometryArrowRightTail = arrowLayer.RightTail;
+                    if (geometryLayer is GeometryArrowLayer arrowLayer)
+                    {
+                        this.GeometryArrowValue = arrowLayer.Value;
+                        this.GeometryArrowLeftTail = arrowLayer.LeftTail;
+                        this.GeometryArrowRightTail = arrowLayer.RightTail;
+                    }
+                    //if (geometryLayer is GeometryCapsuleLayer capsuleLayer)
+                    {
+                    }
+                    if (geometryLayer is GeometryHeartLayer heartLayer)
+                    {
+                        this.GeometryHeartSpread = heartLayer.Spread;
+                    }
                 }
-                //if (layer is GeometryCapsuleLayer capsuleLayer)
-                {
-                }
-                if (layer is GeometryHeartLayer heartLayer)
-                {
-                    this.GeometryHeartSpread = heartLayer.Spread;
-                }
+
             }
         }
 
 
         #region Geometry1
-        
+
 
         /// <summary> GeometryRoundRectLayer's corner. </summary>     
         public float GeometryRoundRectCorner

@@ -194,13 +194,6 @@
     <Compile Include="ITool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ITransformerTool.cs" />
-    <Compile Include="ToolButtons\ToolMoreButton.xaml.cs">
-      <DependentUpon>ToolMoreButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ToolButtons\ToolSecondButton.xaml.cs">
-      <DependentUpon>ToolSecondButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ToolButtons\ToolSeparator.cs" />
     <Compile Include="ToolType.cs" />
     <Compile Include="Touchbars\TouchbarButton.xaml.cs">
       <DependentUpon>TouchbarButton.xaml</DependentUpon>
@@ -333,14 +326,6 @@
     <Page Include="Icon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ToolButtons\ToolMoreButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ToolButtons\ToolSecondButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Touchbars\TouchbarButton.xaml">
       <Generator>MSBuild:Compile</Generator>

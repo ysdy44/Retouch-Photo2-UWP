@@ -1,4 +1,8 @@
-﻿using Retouch_Photo2.Elements;
+﻿using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Brushs.Models;
+using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
@@ -16,16 +20,18 @@ namespace Retouch_Photo2
         /// <summary> Normal. </summary>
         None,
 
-        /// <summary> Add a ImageLayer. </summary>
+        /// <summary> Add a <see cref="ImageLayer"/>. </summary>
         AddImageLayer,
 
-        /// <summary> To ImageBrush in BrushTool. </summary>
-        BrushToolImage,
-
-        /// <summary> Select in ImageTool. </summary>
-        ImageToolSelect,
-        /// <summary> Replace in ImageTool. </summary>
-        ImageToolReplace
+        /// <summary> Make <see cref="StyleManager.FillBrush"/> to <see cref="ImageBrush"/> in <see cref="BrushTool"/>. </summary>
+        FillBrushToImage,
+        /// <summary> Make <see cref="StyleManager.StrokeBrush"/> to <see cref="ImageBrush"/> in <see cref="BrushTool"/>. </summary>
+        StrokeBrushToImage,
+        
+        /// <summary> Select a image in <see cref= "ImageTool" />. </summary>
+        SelectImage,
+        /// <summary> Replace a image in <see cref= "ImageTool" />. </summary>
+        ReplaceImage
     }
 
     /// <summary> 
@@ -38,7 +44,7 @@ namespace Retouch_Photo2
         KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-
+        
 
         //@VisualState
         Photo _vsPhoto = null;
@@ -51,10 +57,14 @@ namespace Retouch_Photo2
                 switch (this._vsMode)
                 {
                     case PhotosPageMode.None: return this.Normal;
+
                     case PhotosPageMode.AddImageLayer: return this.AddImageLayer;
-                    case PhotosPageMode.BrushToolImage: return this.BrushToolImage;
-                    case PhotosPageMode.ImageToolSelect: return this.ImageToolSelect;
-                    case PhotosPageMode.ImageToolReplace: return this.ImageToolReplace;
+
+                    case PhotosPageMode.FillBrushToImage: return this.FillBrushToImage;
+                    case PhotosPageMode.StrokeBrushToImage: return this.StrokeBrushToImage;
+
+                    case PhotosPageMode.SelectImage: return this.SelectImage;
+                    case PhotosPageMode.ReplaceImage: return this.ReplaceImage;
                 }
                 return this.Normal;
             }
@@ -95,9 +105,12 @@ namespace Retouch_Photo2
 
 
             this.AddImageLayerButton.Tapped += (s, e) => this.Add();
-            this.BrushToolImageButton.Tapped += (s, e) => this.Image();
-            this.ImageToolSelectButton.Tapped += (s, e) => this.Select();
-            this.ImageToolReplaceButton.Tapped += (s, e) => this.Replace();
+
+            this.FillBrushToImageButton.Tapped += (s, e) => this.Fill();
+            this.StrokeBrushToImageButton.Tapped += (s, e) => this.Stroke();
+
+            this.SelectImageButton.Tapped += (s, e) => this.Select();
+            this.ReplaceImageButton.Tapped += (s, e) => this.Replace();
         }
 
         //The current page becomes the active page
@@ -129,9 +142,12 @@ namespace Retouch_Photo2
             this.TitleTextBlock.Text = resource.GetString("/$PhotosPage/Title");
 
             this.AddImageLayerButton.Content = resource.GetString("/$PhotosPage/AddImageLayer");
-            this.BrushToolImageButton.Content = resource.GetString("/$PhotosPage/BrushToolImage");
-            this.ImageToolSelectButton.Content = resource.GetString("/$PhotosPage/ImageToolSelect");
-            this.ImageToolReplaceButton.Content = resource.GetString("/$PhotosPage/ImageToolReplace");
+
+            this.FillBrushToImageButton.Content = resource.GetString("/$PhotosPage/FillBrushToImage");
+            this.StrokeBrushToImageButton.Content = resource.GetString("/$PhotosPage/StrokeBrushToImage");
+
+            this.SelectImageButton.Content = resource.GetString("/$PhotosPage/SelectImage");
+            this.ReplaceImageButton.Content = resource.GetString("/$PhotosPage/ReplaceImage");
         }
 
     }

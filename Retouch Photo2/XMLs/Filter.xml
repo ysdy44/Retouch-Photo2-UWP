@@ -2,135 +2,135 @@
 <Root>
 
   <Filter Name="Memory">
-    <Exposure Exposure="0.27" />
-    <Saturation Saturation="1.33" />
-    <Contrast Contrast="1" />
-    <Temperature Temperature="0.49" Tint="0" />
-    <HighlightsAndShadows Shadows="-0.375" Highlights="0.455" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
-    <GammaTransfer ClampOutput="false" AlphaDisable="true" RedDisable="true" GreenDisable="false" GreenOffset="08" GreenExponent="1" GreenAmplitude="1" BlueDisable="false" BlueOffset="0.19" BlueExponent="1" BlueAmplitude="1" />
+    <Adjustment Type="Exposure" Exposure="0.27" />
+    <Adjustment Type="Saturation" Saturation="1.33" />
+    <Adjustment Type="Contrast" Contrast="1" />
+    <Adjustment Type="Temperature" Temperature="0.49" Tint="0" />
+    <Adjustment Type="HighlightsAndShadows" Shadows="-0.375" Highlights="0.455" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
+    <Adjustment Type="GammaTransfer" ClampOutput="false" AlphaDisable="true" RedDisable="true" GreenDisable="false" GreenOffset="08" GreenExponent="1" GreenAmplitude="1" BlueDisable="false" BlueOffset="0.19" BlueExponent="1" BlueAmplitude="1" />
   </Filter>
 
   <Filter Name="Old">
-    <Exposure Exposure="0.05" />
-    <Brightness WhiteLight="1" WhiteDark="1" BlackLight="0" BlackDark="0.13" />
-    <Saturation Saturation="0.52" />
-    <HueRotation Angle="3.66" />
-    <Contrast Contrast="0.31" />
-    <Temperature Temperature="0.39" Tint="0" />
-    <HighlightsAndShadows Shadows="0.015" Highlights="0" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
-    <Vignette Amount="0.66" Curve="0">
+    <Adjustment Type="Exposure" Exposure="0.05" />
+    <Adjustment Type="Brightness" WhiteLight="1" WhiteDark="1" BlackLight="0" BlackDark="0.13" />
+    <Adjustment Type="Saturation" Saturation="0.52" />
+    <Adjustment Type="HueRotation" Angle="3.66" />
+    <Adjustment Type="Contrast" Contrast="0.31" />
+    <Adjustment Type="Temperature" Temperature="0.39" Tint="0" />
+    <Adjustment Type="HighlightsAndShadows" Shadows="0.015" Highlights="0" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
+    <Adjustment Type="Vignette" Amount="0.66" Curve="0">
       <Color A="255" R="0" G="0" B="0" />
-    </Vignette>
+    </Adjustment>
   </Filter>
 
   <Filter Name="Childhood">
-    <Exposure Exposure="0.34" />
-    <Brightness WhiteLight="0.99" WhiteDark="1" BlackLight="0" BlackDark="0" />
-    <Saturation Saturation="1.06" />
-    <HueRotation Angle="0" />
-    <Contrast Contrast="0.75" />
-    <Temperature Temperature="0" Tint="0.11" />
-    <HighlightsAndShadows Shadows="-0.45" Highlights="0.035" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
-    <GammaTransfer ClampOutput="false" AlphaDisable="true" RedDisable="false" RedOffset="0.32" RedExponent="1" RedAmplitude="1" GreenDisable="false" GreenOffset="0.14" GreenExponent="1" GreenAmplitude="1" BlueDisable="false" BlueOffset="0.17" BlueExponent="1" BlueAmplitude="1" />
+    <Adjustment Type="Exposure" Exposure="0.34" />
+    <Adjustment Type="Brightness" WhiteLight="0.99" WhiteDark="1" BlackLight="0" BlackDark="0" />
+    <Adjustment Type="Saturation" Saturation="1.06" />
+    <Adjustment Type="HueRotation" Angle="0" />
+    <Adjustment Type="Contrast" Contrast="0.75" />
+    <Adjustment Type="Temperature" Temperature="0" Tint="0.11" />
+    <Adjustment Type="HighlightsAndShadows" Shadows="-0.45" Highlights="0.035" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
+    <Adjustment Type="GammaTransfer" ClampOutput="false" AlphaDisable="true" RedDisable="false" RedOffset="0.32" RedExponent="1" RedAmplitude="1" GreenDisable="false" GreenOffset="0.14" GreenExponent="1" GreenAmplitude="1" BlueDisable="false" BlueOffset="0.17" BlueExponent="1" BlueAmplitude="1" />
   </Filter>
 
   <Filter Name="Morning">
-    <Brightness WhiteLight="0.73" WhiteDark="1" BlackLight="0" BlackDark="0" />
-    <Saturation Saturation="1.21" />
-    <Contrast Contrast="0.205" />
-    <HighlightsAndShadows Shadows="-0.04" Highlights="0.22" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
-    <GammaTransfer ClampOutput="false" AlphaDisable="true" RedDisable="false" RedOffset="0.12" RedExponent="1" RedAmplitude="1" GreenDisable="true" BlueDisable="false" BlueOffset="0.05" BlueExponent="1" BlueAmplitude="1" />
+    <Adjustment Type="Brightness" WhiteLight="0.73" WhiteDark="1" BlackLight="0" BlackDark="0" />
+    <Adjustment Type="Saturation" Saturation="1.21" />
+    <Adjustment Type="Contrast" Contrast="0.205" />
+    <Adjustment Type="HighlightsAndShadows" Shadows="-0.04" Highlights="0.22" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
+    <Adjustment Type="GammaTransfer" ClampOutput="false" AlphaDisable="true" RedDisable="false" RedOffset="0.12" RedExponent="1" RedAmplitude="1" GreenDisable="true" BlueDisable="false" BlueOffset="0.05" BlueExponent="1" BlueAmplitude="1" />
   </Filter>
 
   <Filter Name="Shadow">
-    <Exposure Exposure="0.25" />
-    <Brightness WhiteLight="0.97" WhiteDark="1" BlackLight="0" BlackDark="0" />
-    <Saturation Saturation="0.44" />
-    <Contrast Contrast="0.145" />
-    <Temperature Temperature="0.08" Tint="0" />
-    <HighlightsAndShadows Shadows="-0.095" Highlights="0.3" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
-    <Vignette Amount="0.56" Curve="0">
+    <Adjustment Type="Exposure" Exposure="0.25" />
+    <Adjustment Type="Brightness" WhiteLight="0.97" WhiteDark="1" BlackLight="0" BlackDark="0" />
+    <Adjustment Type="Saturation" Saturation="0.44" />
+    <Adjustment Type="Contrast" Contrast="0.145" />
+    <Adjustment Type="Temperature" Temperature="0.08" Tint="0" />
+    <Adjustment Type="HighlightsAndShadows" Shadows="-0.095" Highlights="0.3" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
+    <Adjustment Type="Vignette" Amount="0.56" Curve="0">
       <Color A="255" R="0" G="0" B="0" />
-    </Vignette>
+    </Adjustment>
   </Filter>
 
   <Filter Name="Dusk">
-    <Exposure Exposure="-0.02" />
-    <Brightness WhiteLight="0.48" WhiteDark="1" BlackLight="0" BlackDark="0" />
-    <Saturation Saturation="1.56" />
-    <Contrast Contrast="0.025" />
-    <Temperature Temperature="0.075" Tint="0" />
+    <Adjustment Type="Exposure" Exposure="-0.02" />
+    <Adjustment Type="Brightness" WhiteLight="0.48" WhiteDark="1" BlackLight="0" BlackDark="0" />
+    <Adjustment Type="Saturation" Saturation="1.56" />
+    <Adjustment Type="Contrast" Contrast="0.025" />
+    <Adjustment Type="Temperature" Temperature="0.075" Tint="0" />
   </Filter>
 
   <Filter Name="Pure">
-    <Exposure Exposure="0.51" />
-    <Saturation Saturation="1.26" />
-    <Contrast Contrast="0.08" />
-    <Temperature Temperature="-0.195" Tint="0" />
-    <HighlightsAndShadows Shadows="-0.195" Highlights="0.88" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
+    <Adjustment Type="Exposure" Exposure="0.51" />
+    <Adjustment Type="Saturation" Saturation="1.26" />
+    <Adjustment Type="Contrast" Contrast="0.08" />
+    <Adjustment Type="Temperature" Temperature="-0.195" Tint="0" />
+    <Adjustment Type="HighlightsAndShadows" Shadows="-0.195" Highlights="0.88" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
   </Filter>
 
   <Filter Name="Cowboy">
-    <Exposure Exposure="0.32" />
-    <Contrast Contrast="0.375" />
-    <Temperature Temperature="0.34" Tint="0" />
-    <HighlightsAndShadows Shadows="0.03" Highlights="0.275" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
+    <Adjustment Type="Exposure" Exposure="0.32" />
+    <Adjustment Type="Contrast" Contrast="0.375" />
+    <Adjustment Type="Temperature" Temperature="0.34" Tint="0" />
+    <Adjustment Type="HighlightsAndShadows" Shadows="0.03" Highlights="0.275" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
   </Filter>
 
   <Filter Name="Tranquil">
-    <Exposure Exposure="0.38" />
-    <HighlightsAndShadows Shadows="0" Highlights="0.115" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
-    <GammaTransfer ClampOutput="false" AlphaDisable="true" RedDisable="false" RedOffset="0.13" RedExponent="1" RedAmplitude="1" GreenDisable="true" BlueDisable="true" />
+    <Adjustment Type="Exposure" Exposure="0.38" />
+    <Adjustment Type="HighlightsAndShadows" Shadows="0" Highlights="0.115" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
+    <Adjustment Type="GammaTransfer" ClampOutput="false" AlphaDisable="true" RedDisable="false" RedOffset="0.13" RedExponent="1" RedAmplitude="1" GreenDisable="true" BlueDisable="true" />
   </Filter>
 
   <Filter Name="Unreal">
-    <Exposure Exposure="0.16" />
-    <Brightness WhiteLight="0.94" WhiteDark="1" BlackLight="0" BlackDark="0" />
-    <Saturation Saturation="1.38" />
-    <Contrast Contrast="0.895" />
-    <HighlightsAndShadows Shadows="-0.14" Highlights="1" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
-    <GammaTransfer ClampOutput="false" AlphaDisable="true" RedDisable="false" RedOffset="0.19" RedExponent="1" RedAmplitude="1" GreenDisable="false" GreenOffset="0.27" GreenExponent="1" GreenAmplitude="1" BlueDisable="false" BlueOffset="0.28" BlueExponent="1" BlueAmplitude="1" />
+    <Adjustment Type="Exposure" Exposure="0.16" />
+    <Adjustment Type="Brightness" WhiteLight="0.94" WhiteDark="1" BlackLight="0" BlackDark="0" />
+    <Adjustment Type="Saturation" Saturation="1.38" />
+    <Adjustment Type="Contrast" Contrast="0.895" />
+    <Adjustment Type="HighlightsAndShadows" Shadows="-0.14" Highlights="1" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
+    <Adjustment Type="GammaTransfer" ClampOutput="false" AlphaDisable="true" RedDisable="false" RedOffset="0.19" RedExponent="1" RedAmplitude="1" GreenDisable="false" GreenOffset="0.27" GreenExponent="1" GreenAmplitude="1" BlueDisable="false" BlueOffset="0.28" BlueExponent="1" BlueAmplitude="1" />
   </Filter>
 
   <Filter Name="Blues">
-    <Exposure Exposure="0.16" />
-    <Brightness WhiteLight="0.94" WhiteDark="1" BlackLight="0" BlackDark="0" />
-    <Saturation Saturation="1.38" />
-    <HueRotation Angle="6.0" />
-    <Contrast Contrast="0.5" />
-    <HighlightsAndShadows Shadows="-0.29" Highlights="-0.055" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
-    <GammaTransfer ClampOutput="false" AlphaDisable="true" RedDisable="true" GreenDisable="false" GreenOffset="0.04" GreenExponent="1" GreenAmplitude="1" BlueDisable="false" BlueOffset="0.09" BlueExponent="1" BlueAmplitude="1" />
-    <Vignette Amount="1" Curve="0">
+    <Adjustment Type="Exposure" Exposure="0.16" />
+    <Adjustment Type="Brightness" WhiteLight="0.94" WhiteDark="1" BlackLight="0" BlackDark="0" />
+    <Adjustment Type="Saturation" Saturation="1.38" />
+    <Adjustment Type="HueRotation" Angle="6.0" />
+    <Adjustment Type="Contrast" Contrast="0.5" />
+    <Adjustment Type="HighlightsAndShadows" Shadows="-0.29" Highlights="-0.055" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
+    <Adjustment Type="GammaTransfer" ClampOutput="false" AlphaDisable="true" RedDisable="true" GreenDisable="false" GreenOffset="0.04" GreenExponent="1" GreenAmplitude="1" BlueDisable="false" BlueOffset="0.09" BlueExponent="1" BlueAmplitude="1" />
+    <Adjustment Type="Vignette" Amount="1" Curve="0">
       <Color A="255" R="0" G="0" B="0" />
-    </Vignette>
+    </Adjustment>
   </Filter>
 
   <Filter Name="Handsome">
-    <Exposure Exposure="-0.1" />
-    <Contrast Contrast="0.775" />
-    <Temperature Temperature="0.165" Tint="0" />
-    <HighlightsAndShadows Shadows="-0.06" Highlights="0.555" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
-    <GammaTransfer ClampOutput="false" AlphaDisable="false" AlphaOffset="0.34" AlphaExponent="1" AlphaAmplitude="1" RedDisable="true" GreenDisable="true" BlueDisable="false" BlueOffset="0.08" BlueExponent="1" BlueAmplitude="1" />
+    <Adjustment Type="Exposure" Exposure="-0.1" />
+    <Adjustment Type="Contrast" Contrast="0.775" />
+    <Adjustment Type="Temperature" Temperature="0.165" Tint="0" />
+    <Adjustment Type="HighlightsAndShadows" Shadows="-0.06" Highlights="0.555" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
+    <Adjustment Type="GammaTransfer" ClampOutput="false" AlphaDisable="false" AlphaOffset="0.34" AlphaExponent="1" AlphaAmplitude="1" RedDisable="true" GreenDisable="true" BlueDisable="false" BlueOffset="0.08" BlueExponent="1" BlueAmplitude="1" />
   </Filter>
 
   <Filter Name="Sentimental">
-    <Exposure Exposure="0.13" />
-    <Brightness WhiteLight="1" WhiteDark="1" BlackLight="0" BlackDark="0.02" />
-    <Contrast Contrast="0.72" />
-    <Temperature Temperature="0.19" Tint="0" />
-    <HighlightsAndShadows Shadows="-0.365" Highlights="-0.815" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
-    <GammaTransfer ClampOutput="false" AlphaDisable="false" AlphaOffset="0.34" AlphaExponent="1" AlphaAmplitude="1" RedDisable="false" RedOffset="0.11" RedExponent="1" RedAmplitude="1" GreenDisable="false" GreenOffset="0.12" GreenExponent="1" GreenAmplitude="1" BlueDisable="false" BlueOffset="0.18" BlueExponent="1" BlueAmplitude="1" />
+    <Adjustment Type="Exposure" Exposure="0.13" />
+    <Adjustment Type="Brightness" WhiteLight="1" WhiteDark="1" BlackLight="0" BlackDark="0.02" />
+    <Adjustment Type="Contrast" Contrast="0.72" />
+    <Adjustment Type="Temperature" Temperature="0.19" Tint="0" />
+    <Adjustment Type="HighlightsAndShadows" Shadows="-0.365" Highlights="-0.815" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
+    <Adjustment Type="GammaTransfer" ClampOutput="false" AlphaDisable="false" AlphaOffset="0.34" AlphaExponent="1" AlphaAmplitude="1" RedDisable="false" RedOffset="0.11" RedExponent="1" RedAmplitude="1" GreenDisable="false" GreenOffset="0.12" GreenExponent="1" GreenAmplitude="1" BlueDisable="false" BlueOffset="0.18" BlueExponent="1" BlueAmplitude="1" />
   </Filter>
 
   <Filter Name="Personality">
-    <Exposure Exposure="-0.14" />
-    <Saturation Saturation="1.48" />
-    <Contrast Contrast="1" />
-    <Temperature Temperature="0.155" Tint="0" />
-    <HighlightsAndShadows Shadows="0.685" Highlights="0" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
-    <Vignette Amount="0.455" Curve="0">
+    <Adjustment Type="Exposure" Exposure="-0.14" />
+    <Adjustment Type="Saturation" Saturation="1.48" />
+    <Adjustment Type="Contrast" Contrast="1" />
+    <Adjustment Type="Temperature" Temperature="0.155" Tint="0" />
+    <Adjustment Type="HighlightsAndShadows" Shadows="0.685" Highlights="0" Clarity="0" MaskBlurAmount="1.25" SourceIsLinearGamma="false" />
+    <Adjustment Type="Vignette" Amount="0.455" Curve="0">
       <Color A="255" R="0" G="0" B="0" />
-    </Vignette>
+    </Adjustment>
   </Filter>
 
 </Root>

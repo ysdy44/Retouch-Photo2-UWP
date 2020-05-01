@@ -18,6 +18,25 @@ namespace Retouch_Photo2.ViewModels
     {
 
         /// <summary>
+        /// Get the selected layer.
+        /// <see cref="ListViewSelectionMode.None"/>: null;
+        /// <see cref="ListViewSelectionMode.Single"/>: layer;
+        /// <see cref="ListViewSelectionMode.Multiple"/>: first layer;
+        /// </summary>
+        /// <returns> The selected layer. </returns>
+        public ILayer GetFirstLayer()
+        {
+            switch (this.SelectionMode)
+            {
+                case ListViewSelectionMode.None: return null;
+                case ListViewSelectionMode.Single: return this.Layer;
+                case ListViewSelectionMode.Multiple: return this.Layers.FirstOrDefault();
+                default: return null;
+            }
+        }
+
+        
+        /// <summary>
         ///  Sets and notify all properties.
         /// </summary>
         /// <param name="layerCollection"> The layer-collection. </param>
@@ -31,6 +50,7 @@ namespace Retouch_Photo2.ViewModels
             else if (count >= 2) this._setModeMultiple(checkedLayers);//Multiple
         }
 
+        //////////////////////////
 
         public void SetModeNone()
         {
@@ -62,9 +82,9 @@ namespace Retouch_Photo2.ViewModels
 
             this.Type = LayerType.None;
             this.SetOpacity(1.0f);
-            this.BlendType = null;
-            this.Visibility = Visibility.Collapsed;
-            this.TagType = TagType.None;
+            this.SetBlendMode(null);
+            this.SetVisibility(Visibility.Collapsed);
+            this.SetTagType(TagType.None);
 
             //////////////////////////
 
@@ -85,6 +105,7 @@ namespace Retouch_Photo2.ViewModels
             this.SetIGeometryLayer(null);            
         }
 
+        //////////////////////////
 
         public void SetModeSingle(ILayer layer)
         {
@@ -110,9 +131,9 @@ namespace Retouch_Photo2.ViewModels
 
             this.Type = layer.Type;
             this.SetOpacity(layer.Opacity);
-            this.BlendType = layer.BlendType;
-            this.Visibility = layer.Visibility;
-            this.TagType = layer.TagType;
+            this.SetBlendMode(layer.BlendMode);
+            this.SetVisibility(layer.Visibility);
+            this.SetTagType(layer.TagType);
 
             //////////////////////////
 
@@ -133,6 +154,7 @@ namespace Retouch_Photo2.ViewModels
             this.SetIGeometryLayer(layer);
         }
 
+        //////////////////////////
 
         public void SetModeMultiple(IList<ILayer> layers)
         {
@@ -160,30 +182,31 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
-            this.Type = LayerType.None;
-            //this.SetOpacity(0);
-            //this.SetBlendType( BlendType.Normal);
-            //this.Visibility = Visibility.Collapsed;
-            //this.TagType = TagType.None;
+            ILayer firstLayer = layers.First();
+
+            this.Type = firstLayer.Type;
+            this.SetOpacity(firstLayer.Opacity);
+            this.SetBlendMode(firstLayer.BlendMode);
+            this.SetVisibility(firstLayer.Visibility);
+            this.SetTagType(firstLayer.TagType);
 
             //////////////////////////
 
             this.IsCrop = layers.Any(layer => layer.TransformManager.IsCrop);
-            //this.EffectManager = layer.EffectManager;
+            this.EffectManager = firstLayer.EffectManager;
             this.AdjustmentManager = null;
-            //this.SetStyleManager(null);
+            this.SetStyleManager(firstLayer.StyleManager);
 
             //////////////////////////
 
             this.SetGroupLayer(null);
-            //this.SetImageLayer(layer);
-            //this.SetGeometryLayer(null);
+            this.SetImageLayer(firstLayer);
             this.SetCurveLayer(null);
             this.SetTextFrameLayer(null);
 
             //////////////////////////
 
-            //this.SetIGeometryLayer(null);
+            this.SetIGeometryLayer(firstLayer);
         }
 
     }

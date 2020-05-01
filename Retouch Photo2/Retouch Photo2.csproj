@@ -96,6 +96,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ColorEllipse.xaml.cs">
+      <DependentUpon>ColorEllipse.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FootPageControl.cs" />
     <Compile Include="Controls\LayersControl.Construct.cs" />
     <Compile Include="Controls\LayersControl.xaml.cs">
@@ -103,6 +106,7 @@
     </Compile>
     <Compile Include="Controls\MainCanvasControl.Construct.cs" />
     <Compile Include="Controls\MainCanvasControl.cs" />
+    <Compile Include="DrawPage.FlyoutTool.cs" />
     <Compile Include="DrawPage.xaml.cs">
       <DependentUpon>DrawPage.xaml</DependentUpon>
     </Compile>
@@ -132,9 +136,6 @@
     </Compile>
     <Compile Include="Retouch Photo2.Effects\Models\StraightenEffect.xaml.cs">
       <DependentUpon>StraightenEffect.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Menus\Icons\ColorIcon.xaml.cs">
-      <DependentUpon>ColorIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Menus\MenuButtons\MenuButton.xaml.cs">
       <DependentUpon>MenuButton.xaml</DependentUpon>
@@ -166,6 +167,10 @@
     <Compile Include="Retouch Photo2.Menus\Models\TransformerMenu.xaml.cs">
       <DependentUpon>TransformerMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Tools\Elements\FillColorEllipseButton.cs" />
+    <Compile Include="Retouch Photo2.Tools\Elements\StrokeColorEllipseButton.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\BrushTool.Fill.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\BrushTool.Stroke.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\CursorTool.xaml.cs">
       <DependentUpon>CursorTool.xaml</DependentUpon>
     </Compile>
@@ -174,6 +179,9 @@
     <Compile Include="Retouch Photo2.Tools\Models\ViewScaleConverter.cs" />
     <Compile Include="Retouch Photo2.Tools\ToolButtons\ToolButton.xaml.cs">
       <DependentUpon>ToolButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\ToolButtons\ToolMoreButton.xaml.cs">
+      <DependentUpon>ToolMoreButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
@@ -195,23 +203,11 @@
     <Compile Include="Retouch Photo2.Tools\Elements\MoreCreateControl.xaml.cs">
       <DependentUpon>MoreCreateControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Elements\FillColorEllipseButton.xaml.cs">
-      <DependentUpon>FillColorEllipseButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Elements\FillColorEllipseControl.xaml.cs">
-      <DependentUpon>FillColorEllipseControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Retouch Photo2.Tools\Elements\MoreTransformButton.xaml.cs">
       <DependentUpon>MoreTransformButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Elements\MoreTransformControl.xaml.cs">
       <DependentUpon>MoreTransformControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Elements\StrokeColorEllipseButton.xaml.cs">
-      <DependentUpon>StrokeColorEllipseButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Elements\StrokeColorEllipseControl.xaml.cs">
-      <DependentUpon>StrokeColorEllipseControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Elements\StrokeWidthButton.xaml.cs">
       <DependentUpon>StrokeWidthButton.xaml</DependentUpon>
@@ -405,6 +401,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\ColorEllipse.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\LayersControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -448,10 +448,6 @@
     <Page Include="Retouch Photo2.Effects\Models\StraightenEffect.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Menus\Icons\ColorIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Retouch Photo2.Menus\MenuButtons\MenuButton.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -501,6 +497,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Retouch Photo2.Tools\ToolButtons\ToolMoreButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SettingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -513,27 +513,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Elements\FillColorEllipseButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Elements\FillColorEllipseControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Retouch Photo2.Tools\Elements\MoreTransformButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Retouch Photo2.Tools\Elements\MoreTransformControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Elements\StrokeColorEllipseButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Elements\StrokeColorEllipseControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

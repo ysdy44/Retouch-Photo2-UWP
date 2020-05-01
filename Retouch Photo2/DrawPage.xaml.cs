@@ -1,6 +1,4 @@
-﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.Tools;
-using Retouch_Photo2.Tools.Elements;
+﻿using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
@@ -45,14 +43,17 @@ namespace Retouch_Photo2
                 e.Handled = true;
                 this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.AddImageLayer);//Navigate   
             };
-            Retouch_Photo2.Tools.Models.ImageTool.Select += () => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.ImageToolSelect);//Navigate   
-            Retouch_Photo2.Tools.Models.ImageTool.Replace += () => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.ImageToolReplace);//Navigate   
-            Retouch_Photo2.Tools.Models.BrushTool.Image += () => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.BrushToolImage);//Navigate   
+            Retouch_Photo2.Tools.Models.ImageTool.Select += () => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.SelectImage);//Navigate   
+            Retouch_Photo2.Tools.Models.ImageTool.Replace += () => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.ReplaceImage);//Navigate   
+            Retouch_Photo2.Tools.Models.BrushTool.FillImage += () => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.FillBrushToImage);//Navigate   
+            Retouch_Photo2.Tools.Models.BrushTool.StrokeImage += () => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.StrokeBrushToImage);//Navigate   
 
-            //MoreButton
+
+            //FlyoutTool
+            this.ConstructColorFlyout(); 
             Retouch_Photo2.Tools.Elements.MoreTransformButton.Flyout = this.MoreTransformFlyout;
             Retouch_Photo2.Tools.Elements.MoreCreateButton.Flyout = this.MoreCreateFlyout;
-
+             
 
             #region ExpandAppbar
 

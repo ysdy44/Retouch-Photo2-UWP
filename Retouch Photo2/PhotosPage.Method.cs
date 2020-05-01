@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Brushs.Models;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
@@ -25,6 +26,7 @@ namespace Retouch_Photo2
             Photo photo = await FileUtil.CreatePhotoFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
             Photo.DuplicateChecking(photo);
         }
+
 
         private void Add()
         {
@@ -59,38 +61,53 @@ namespace Retouch_Photo2
             this.Frame.GoBack();
         }
 
-        private void Image()
+
+        private void Fill()
+        {
+            ImageBrush imageBrush = this._getImageBrush();
+            if (imageBrush == null) return;
+
+            //Selection
+            this.SelectionViewModel.SetValue((layer) =>
+            {
+                layer.StyleManager.FillBrush = imageBrush.Clone();
+            });
+            this.SelectionViewModel.FillBrush = imageBrush;
+
+            this.Frame.GoBack();
+        }
+        private void Stroke()
+        {
+            ImageBrush imageBrush = this._getImageBrush();
+            if (imageBrush == null) return;
+
+            //Selection
+            this.SelectionViewModel.SetValue((layer) =>
+            {
+                layer.StyleManager.StrokeBrush = imageBrush.Clone();
+            });
+            this.SelectionViewModel.StrokeBrush = imageBrush;
+
+            this.Frame.GoBack();
+        }
+        private ImageBrush _getImageBrush()
         {
             //Photo
             Photo photo = this._vsPhoto;
-            if (photo == null) return;
+            if (photo == null) return null;
 
             //Transformer
             Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
             Transformer transformer = this.SelectionViewModel.Transformer;
 
-            //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            return new ImageBrush
             {
-                switch (this.SelectionViewModel.FillOrStroke)
-                {
-                    case FillOrStroke.Fill:
-                        layer.StyleManager.FillBrush.PhotoSource = transformerSource;
-                        layer.StyleManager.FillBrush.PhotoDestination = transformer;
-                        layer.StyleManager.FillBrush.Photocopier = photo.ToPhotocopier();                        
-                        break;
-                    case FillOrStroke.Stroke:
-                        layer.StyleManager.StrokeBrush.PhotoSource = transformerSource;
-                        layer.StyleManager.StrokeBrush.PhotoDestination = transformer;
-                        layer.StyleManager.StrokeBrush.Photocopier = photo.ToPhotocopier();                      
-                        break;
-                }
-            });
-
-            this.SelectionViewModel.BrushImageDestination = transformer;//Selection
-
-            this.Frame.GoBack();
+                Source = transformerSource,
+                Destination = transformer,
+                Photocopier = photo.ToPhotocopier(),
+            };
         }
+
 
         private void Select()
         {
@@ -111,14 +128,19 @@ namespace Retouch_Photo2
 
             //Transformer
             Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
-
+     
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
                 if (layer is ImageLayer imageLayer)
                 {
                     imageLayer.TransformManager.Source = transformerSource;
-                    imageLayer.StyleManager.FillBrush.Photocopier = photo.ToPhotocopier();
+
+                    if (imageLayer.StyleManager.FillBrush is ImageBrush imageBrush)
+                    {
+                        imageBrush.Photocopier = photo.ToPhotocopier();
+                        imageBrush.Source = transformerSource;
+                    }
                 }
             });
 

@@ -41,24 +41,29 @@
                     </VisualState.Setters>
                 </VisualState>
 
-                <!--BrushToolImage-->
-                <VisualState x:Name="BrushToolImage">
+                <!--FillBrushToImage-->
+                <VisualState x:Name="FillBrushToImage">
                     <VisualState.Setters>
-                        <Setter Target = "BrushToolImageButton.Visibility" Value="Visible"/>
+                        <Setter Target = "FillBrushToImageButton.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--StrokeBrushToImage-->
+                <VisualState x:Name="StrokeBrushToImage">
+                    <VisualState.Setters>
+                        <Setter Target = "StrokeBrushToImageButton.Visibility" Value="Visible"/>
                     </VisualState.Setters>
                 </VisualState>
 
-                <!--ImageToolSelect-->
-                <VisualState x:Name="ImageToolSelect">
+                <!--SelectImage-->
+                <VisualState x:Name="SelectImage">
                     <VisualState.Setters>
-                        <Setter Target = "ImageToolSelectButton.Visibility" Value="Visible"/>
+                        <Setter Target = "SelectImageButton.Visibility" Value="Visible"/>
                     </VisualState.Setters>
                 </VisualState>
-
-                <!--ImageToolReplace-->
-                <VisualState x:Name="ImageToolReplace">
+                <!--ReplaceImage-->
+                <VisualState x:Name="ReplaceImage">
                     <VisualState.Setters>
-                        <Setter Target = "ImageToolReplaceButton.Visibility" Value="Visible"/>
+                        <Setter Target = "ReplaceImageButton.Visibility" Value="Visible"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -116,9 +121,12 @@
                     <TextBlock x:Name="TextBlock" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}"/>
 
                     <Button x:Name="AddImageLayerButton" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Stretch" BorderThickness="1" Style="{ThemeResource AccentButtonStyle}"/>
-                    <Button x:Name="BrushToolImageButton" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Stretch" BorderThickness="1" Style="{ThemeResource AccentButtonStyle}"/>
-                    <Button x:Name="ImageToolSelectButton" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Stretch" BorderThickness="1" Style="{ThemeResource AccentButtonStyle}"/>
-                    <Button x:Name="ImageToolReplaceButton" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Stretch" BorderThickness="1" Style="{ThemeResource AccentButtonStyle}"/>
+
+                    <Button x:Name="FillBrushToImageButton" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Stretch" BorderThickness="1" Style="{ThemeResource AccentButtonStyle}"/>
+                    <Button x:Name="StrokeBrushToImageButton" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Stretch" BorderThickness="1" Style="{ThemeResource AccentButtonStyle}"/>
+ 
+                    <Button x:Name="SelectImageButton" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Stretch" BorderThickness="1" Style="{ThemeResource AccentButtonStyle}"/>
+                    <Button x:Name="ReplaceImageButton" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Stretch" BorderThickness="1" Style="{ThemeResource AccentButtonStyle}"/>
 
                 </Grid>
             </elements:RadiusAnimaPanel.CenterContent>

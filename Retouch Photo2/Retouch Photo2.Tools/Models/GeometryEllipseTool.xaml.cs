@@ -73,14 +73,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 SelectMode = SelectMode.Selected,
                 TransformManager = new TransformManager(transformer),
-                StyleManager = new StyleManager
-                {
-                    FillBrush = new Brush
-                    {
-                        Type = BrushType.Color,
-                        Color = this.SelectionViewModel.FillColor,
-                    }
-                }
+                StyleManager = this.SelectionViewModel.GetStyleManager()
             };
         }
 

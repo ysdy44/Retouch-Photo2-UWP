@@ -28,8 +28,8 @@ namespace Retouch_Photo2.Layers
         string Name { get; set; }
         /// <summary> Gets or sets ILayer's opacity. </summary>
         float Opacity { get; set; }
-        /// <summary> Gets or sets ILayer's blend type. </summary>
-        BlendEffectMode? BlendType { get; set; }
+        /// <summary> Gets or sets ILayer's blend mode. </summary>
+        BlendEffectMode? BlendMode { get; set; }
 
         /// <summary> Gets or sets ILayer's visibility. </summary>
         Visibility Visibility { get; set; }

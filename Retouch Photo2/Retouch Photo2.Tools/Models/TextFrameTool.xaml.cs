@@ -1,6 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Brushs.Models;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Menus;
@@ -102,9 +103,8 @@ namespace Retouch_Photo2.Tools.Models
                 TransformManager = new TransformManager(transformer),
                 StyleManager = new StyleManager
                 {
-                    FillBrush = new Brush
+                    FillBrush = new ColorBrush
                     {
-                        Type = BrushType.Color,
                         Color = Colors.Black,
                     }
                 }

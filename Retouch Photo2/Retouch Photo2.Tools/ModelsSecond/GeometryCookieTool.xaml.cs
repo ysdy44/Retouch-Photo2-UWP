@@ -1,6 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -217,7 +218,7 @@ namespace Retouch_Photo2.Tools.Models
         public FrameworkElement Page => this;
 
         readonly FrameworkElement _icon = new GeometryCookieIcon();
-        readonly ToolSecondButton _button = new ToolSecondButton(new GeometryCookieIcon());
+        readonly ComboBoxButton _button = new ComboBoxButton(new GeometryCookieIcon());
         
         private ILayer CreateLayer(Transformer transformer)
         {
@@ -226,14 +227,7 @@ namespace Retouch_Photo2.Tools.Models
                 InnerRadius = this.SelectionViewModel.GeometryCookieInnerRadius,
                 SweepAngle = this.SelectionViewModel.GeometryCookieSweepAngle,
                 TransformManager = new TransformManager(transformer),
-                StyleManager = new StyleManager
-                {
-                    FillBrush = new Brush
-                    {
-                        Type = BrushType.Color,
-                        Color = this.SelectionViewModel.FillColor,
-                    }
-                }
+                StyleManager = this.SelectionViewModel.GetStyleManager()
             };
         }
 

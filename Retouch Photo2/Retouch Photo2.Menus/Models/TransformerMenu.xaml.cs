@@ -222,7 +222,7 @@ namespace Retouch_Photo2.Menus.Models
             this.YTextBlock.Text = resource.GetString("/Menus/Transformer_Y");
 
             this.IndicatorToolTip.Content = resource.GetString("/Menus/Transformer_Indicator");
-            this.RemoteButton.Text = resource.GetString("/Menus/Transformer_Remote");
+            this.RemoteTextBlock.Text = resource.GetString("/Menus/Transformer_Remote");
         }
 
         //ToolTip

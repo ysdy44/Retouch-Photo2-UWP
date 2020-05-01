@@ -4,7 +4,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:blends="using:Retouch_Photo2.Blends"
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:menus="using:Retouch_Photo2.Menus"
@@ -28,9 +27,9 @@
                     <VisualState.Setters>
 
                         <Setter Target = "OpacitySlider.IsEnabled" Value="false"/>
-                        <Setter Target = "BlendButton.IsEnabled" Value="false"/>
+                        <Setter Target = "BlendModeButton.IsEnabled" Value="false"/>
 
-                        <Setter Target = "VisualButton.IsEnabled" Value="false"/>
+                        <Setter Target = "VisibilityButton.IsEnabled" Value="false"/>
                         <Setter Target = "DuplicateButton.IsEnabled" Value="false"/>
                         <Setter Target = "RemoveButton.IsEnabled" Value="false"/>
                         <Setter Target = "GroupButton.IsEnabled" Value="false"/>
@@ -72,12 +71,15 @@
 
                 <!--Blend Mode-->
                 <TextBlock x:Name="BlendModeTextBlock" Grid.Column="0" Grid.Row="0" Style="{StaticResource AppTextBlock}"/>
-                <elements:IconRoundedBorderButton x:Name="BlendButton" Margin="2,0" 
-                             Text="{x:Bind BlendControl.Title,Mode=OneWay}">
-                    <elements:IconRoundedBorderButton.Icon>
-                        <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                    </elements:IconRoundedBorderButton.Icon>
-                </elements:IconRoundedBorderButton>
+                <Border Margin="2" Style="{StaticResource AppRoundedBorderStyle}">
+                    <Button x:Name="BlendModeButton" Height="36" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <RelativePanel>
+                            <TextBlock Text="{x:Bind BlendModeControl.Title,Mode=OneWay}" TextTrimming="CharacterEllipsis" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignLeftWithPanel="True"/>
+                            <FontIcon Margin="4,0" FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                        </RelativePanel>
+                    </Button>
+                </Border>
+                
                 <ContentControl Height="4"/>
 
 
@@ -90,8 +92,8 @@
 
                     <TextBlock x:Name="LayersTextBlock" Grid.Column="0" Grid.Row="0" Style="{StaticResource AppTextBlock}"/>
 
-                    <!--Visual-->
-                    <ToggleButton x:Name="VisualButton" Grid.Column="1" Style="{StaticResource AppCircleToggleButtonStyle}"
+                    <!--Visibility-->
+                    <ToggleButton x:Name="VisibilityButton" Grid.Column="1" Style="{StaticResource AppCircleToggleButtonStyle}"
                                   IsChecked="{x:Bind VisibilityToBoolConverter(SelectionViewModel.Visibility),Mode=OneWay}" >
                         <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}" />
                     </ToggleButton>
@@ -124,7 +126,7 @@
 
                 <!--Tag Type-->
                 <TextBlock x:Name="TagTypeTextBlock" Grid.Column="0" Grid.Row="0" Style="{StaticResource AppTextBlock}"/>
-                <blends:TagControl x:Name="TagControl" TagType="{x:Bind SelectionViewModel.TagType,Mode=OneWay}" />
+                <blends:TagTypeControl x:Name="TagTypeControl" Type="{x:Bind SelectionViewModel.TagType,Mode=OneWay}" />
                 <ContentControl Height="2"/>
 
             </StackPanel>
@@ -132,7 +134,7 @@
 
 
         <menus:MenuExpander.SecondPage>
-            <blends:BlendControl x:Name="BlendControl" MaxHeight="300" Background="Transparent" BlendType="{x:Bind SelectionViewModel.BlendType, Mode=OneWay}"/>
+            <blends:BlendModeControl x:Name="BlendModeControl" MaxHeight="300" Background="Transparent" Mode="{x:Bind SelectionViewModel.BlendMode, Mode=OneWay}"/>
         </menus:MenuExpander.SecondPage>
 
 

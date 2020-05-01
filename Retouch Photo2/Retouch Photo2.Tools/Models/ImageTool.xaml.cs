@@ -1,6 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Brushs.Models;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
@@ -125,11 +126,25 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
-            if (this.ViewModel.MezzanineLayer == null) return;
+            //ILayer
+            ILayer mezzanineLayer = this.ViewModel.MezzanineLayer;
+            if (mezzanineLayer == null) return;
 
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
-            this.ViewModel.MezzanineLayer.TransformManager.Destination = transformerDestination;
-            this.ViewModel.MezzanineLayer.StyleManager.FillBrush.PhotoDestination = transformerDestination;
+            mezzanineLayer.TransformManager.Destination = transformerDestination;
+
+
+            //IBrush
+            IBrush brush = mezzanineLayer.StyleManager.FillBrush;
+            if (brush == null) return;
+
+            if (brush.Type == BrushType.Image)
+            {
+                brush.Destination = transformerDestination;
+            }
+
+
+            //Selection
             this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
             this.ViewModel.Invalidate();//Invalidate

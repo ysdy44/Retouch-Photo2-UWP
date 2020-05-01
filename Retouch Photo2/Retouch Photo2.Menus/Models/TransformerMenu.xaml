@@ -112,11 +112,14 @@
                 </transformers:IndicatorControl>
 
                 <!--RemoteButton-->
-                <elements:IconRoundedBorderButton x:Name="RemoteButton" Margin="2" Grid.ColumnSpan="3" Grid.Row="7">
-                    <elements:IconRoundedBorderButton.Icon>
-                        <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                    </elements:IconRoundedBorderButton.Icon>
-                </elements:IconRoundedBorderButton>
+                <Border Margin="2" Grid.ColumnSpan="3" Grid.Row="7" Style="{StaticResource AppRoundedBorderStyle}">
+                    <Button x:Name="RemoteButton" Height="36" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <RelativePanel>
+                            <TextBlock x:Name="RemoteTextBlock" TextTrimming="CharacterEllipsis" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignLeftWithPanel="True"/>
+                            <FontIcon Margin="4,0" FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                        </RelativePanel>
+                    </Button>
+                </Border>
 
             </Grid>
         </menus:MenuExpander.MainPage>
