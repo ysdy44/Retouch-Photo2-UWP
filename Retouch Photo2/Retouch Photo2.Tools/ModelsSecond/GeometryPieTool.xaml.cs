@@ -126,7 +126,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Text = resource.GetString("/ToolsSecond/GeometryPie");
+            this._button.Content = resource.GetString("/ToolsSecond/GeometryPie");
+            this._button.Style = this.IconSelectedButtonStyle;
 
             this.SweepAngleTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryPie_SweepAngle");
 
@@ -137,13 +138,13 @@ namespace Retouch_Photo2.Tools.Models
         //@Content
         public ToolType Type => ToolType.GeometryPie;
         public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
+        public bool IsSelected { get => !this._button.IsEnabled; set => this._button.IsEnabled = !value; }
 
         public FrameworkElement Button => this._button;
         public FrameworkElement Page => this;
 
         readonly FrameworkElement _icon = new GeometryPieIcon();
-        readonly ComboBoxButton _button = new ComboBoxButton(new GeometryPieIcon());
+        readonly Button _button = new Button { Tag = new GeometryPieIcon()};
 
         private ILayer CreateLayer(Transformer transformer)
         {

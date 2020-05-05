@@ -147,24 +147,6 @@
   <data name="Brush_Type" xml:space="preserve">
     <value>Type</value>
   </data>
-  <data name="Brush_TypeColor" xml:space="preserve">
-    <value>Color</value>
-  </data>
-  <data name="Brush_TypeEllipticalGradient" xml:space="preserve">
-    <value>Elliptical</value>
-  </data>
-  <data name="Brush_TypeImage" xml:space="preserve">
-    <value>Image</value>
-  </data>
-  <data name="Brush_TypeLinearGradient" xml:space="preserve">
-    <value>Linear</value>
-  </data>
-  <data name="Brush_TypeNone" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="Brush_TypeRadialGradient" xml:space="preserve">
-    <value>Radial</value>
-  </data>
   <data name="Crop" xml:space="preserve">
     <value>Vector crop Tool</value>
   </data>
@@ -177,10 +159,7 @@
   <data name="Cursor" xml:space="preserve">
     <value>Cursor Tool</value>
   </data>
-  <data name="Cursor_MultiMode_ToolTip" xml:space="preserve">
-    <value>Multi-Mode</value>
-  </data>
-  <data name="Cursor_StepFrequency_ToolTip" xml:space="preserve">
+  <data name="Cursor_StepFrequency" xml:space="preserve">
     <value>Step Frequency</value>
   </data>
   <data name="Ellipse" xml:space="preserve">
@@ -200,27 +179,6 @@
   </data>
   <data name="Pen" xml:space="preserve">
     <value>Pen Tool</value>
-  </data>
-  <data name="PenFlyout_Mode" xml:space="preserve">
-    <value>Mode</value>
-  </data>
-  <data name="PenFlyout_Mode_Asymmetric" xml:space="preserve">
-    <value>Asymmetric</value>
-  </data>
-  <data name="PenFlyout_Mode_Disconnected" xml:space="preserve">
-    <value>Disconnected</value>
-  </data>
-  <data name="PenFlyout_Mode_Mirrored" xml:space="preserve">
-    <value>Mirrored</value>
-  </data>
-  <data name="PenFlyout_Restriction" xml:space="preserve">
-    <value>Restriction</value>
-  </data>
-  <data name="PenFlyout_Restriction_Angle" xml:space="preserve">
-    <value>Angle</value>
-  </data>
-  <data name="PenFlyout_Restriction_Length" xml:space="preserve">
-    <value>Length</value>
   </data>
   <data name="Pen_AddOrMoveOff" xml:space="preserve">
     <value>Move</value>
@@ -261,13 +219,13 @@
   <data name="View_Radian" xml:space="preserve">
     <value>Radian</value>
   </data>
-  <data name="View_RadianClear_ToolTip" xml:space="preserve">
+  <data name="View_RadianClear" xml:space="preserve">
     <value>Reset the rotation radian</value>
   </data>
   <data name="View_Scale" xml:space="preserve">
     <value>Scale</value>
   </data>
-  <data name="View_ScaleClear_ToolTip" xml:space="preserve">
+  <data name="View_ScaleClear" xml:space="preserve">
     <value>Reset the scale</value>
   </data>
 </root>

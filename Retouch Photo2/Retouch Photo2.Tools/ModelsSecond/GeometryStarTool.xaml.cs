@@ -202,7 +202,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Text = resource.GetString("/ToolsSecond/GeometryStar");
+            this._button.Content = resource.GetString("/ToolsSecond/GeometryStar");
+            this._button.Style = this.IconSelectedButtonStyle;
 
             this.PointsTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryStar_Points");
             this.InnerRadiusTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryStar_InnerRadius");
@@ -214,13 +215,13 @@ namespace Retouch_Photo2.Tools.Models
         //@Content
         public ToolType Type => ToolType.GeometryStar;
         public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
+        public bool IsSelected { get => !this._button.IsEnabled; set => this._button.IsEnabled = !value; }
 
         public FrameworkElement Button => this._button;
         public FrameworkElement Page => this;
 
         readonly FrameworkElement _icon = new GeometryStarIcon();
-        readonly ComboBoxButton _button = new ComboBoxButton(new GeometryStarIcon());
+        readonly Button _button = new Button { Tag = new GeometryStarIcon()};
 
         private ILayer CreateLayer(Transformer transformer)
         {

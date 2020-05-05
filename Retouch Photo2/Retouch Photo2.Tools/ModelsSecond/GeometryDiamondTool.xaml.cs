@@ -144,7 +144,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Text = resource.GetString("/ToolsSecond/GeometryDiamond");
+            this._button.Content = resource.GetString("/ToolsSecond/GeometryDiamond");
+            this._button.Style = this.IconSelectedButtonStyle;
 
             this.MirrorTextBlock.Text = resource.GetString("/ToolsSecond/GeometryDiamond_Mirror");
             this.MidTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryDiamond_Mid");
@@ -156,13 +157,13 @@ namespace Retouch_Photo2.Tools.Models
         //@Content
         public ToolType Type => ToolType.GeometryDiamond;
         public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
+        public bool IsSelected { get => !this._button.IsEnabled; set => this._button.IsEnabled = !value; }
 
         public FrameworkElement Button => this._button;
         public FrameworkElement Page => this;
 
         readonly FrameworkElement _icon = new GeometryDiamondIcon();
-        readonly ComboBoxButton _button = new ComboBoxButton(new GeometryDiamondIcon());
+        readonly Button _button = new Button { Tag = new GeometryDiamondIcon()};
 
         private ILayer CreateLayer(Transformer transformer)
         {

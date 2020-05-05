@@ -50,9 +50,15 @@ namespace Retouch_Photo2
         //ViewModel
         private void ConstructViewModel()
         {
-            this.MainCanvasControl.ConstructViewModel();
+            if (this.ViewModel.InvalidateAction == null)
+            {
+                this.ViewModel.InvalidateAction += (invalidateMode) =>
+                {
+                    //Invalidate: Dpi and IsHD
+                    this.MainCanvasControl.Invalidate(invalidateMode);
+                };
+            };
         }
-        //KeyboardViewModel
         private void ConstructKeyboardViewModel()
         {
             //Move

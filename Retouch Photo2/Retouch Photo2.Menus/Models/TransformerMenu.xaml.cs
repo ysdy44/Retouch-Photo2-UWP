@@ -8,6 +8,7 @@ using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
 
 namespace Retouch_Photo2.Menus.Models
 {
@@ -79,6 +80,7 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Identifies the <see cref = "TransformerMenu.Tool" /> dependency property. </summary>
         public static readonly DependencyProperty ToolProperty = DependencyProperty.Register(nameof(Tool), typeof(ITool), typeof(TransformerMenu), new PropertyMetadata(null, (sender, e) =>
         {
+            return;
             TransformerMenu con = (TransformerMenu)sender;
 
             if (e.NewValue is ITool value)
@@ -181,6 +183,22 @@ namespace Retouch_Photo2.Menus.Models
         public TransformerMenu()
         {
             this.InitializeComponent();
+            this.DataContext = this.SelectionViewModel;
+            this.ConstructDataContext
+            (
+                 path: nameof(this.SelectionViewModel.SelectionMode),
+                 dp: TransformerMenu.ModeProperty
+            );
+            this.ConstructDataContext
+            (
+                 path: nameof(this.SelectionViewModel.DisabledRadian),
+                 dp: TransformerMenu.DisabledRadianProperty
+            );
+            this.ConstructDataContext
+            (
+                 path: nameof(this.SelectionViewModel.Transformer),
+                 dp: TransformerMenu.TransformerProperty
+            );
             this.ConstructStrings();
             this.ConstructToolTip();
             this.ConstructMenu();
@@ -203,6 +221,20 @@ namespace Retouch_Photo2.Menus.Models
     /// </summary>
     public sealed partial class TransformerMenu : UserControl, IMenu
     {
+        //DataContext
+        public void ConstructDataContext(string path, DependencyProperty dp)
+        {
+            // Create the binding description.
+            Binding binding = new Binding
+            {
+                Mode = BindingMode.OneWay,
+                Path = new PropertyPath(path)
+            };
+
+            // Attach the binding to the target.
+            this.SetBinding(dp, binding);
+        }
+
         //Strings
         private void ConstructStrings()
         {
@@ -222,7 +254,7 @@ namespace Retouch_Photo2.Menus.Models
             this.YTextBlock.Text = resource.GetString("/Menus/Transformer_Y");
 
             this.IndicatorToolTip.Content = resource.GetString("/Menus/Transformer_Indicator");
-            this.RemoteTextBlock.Text = resource.GetString("/Menus/Transformer_Remote");
+            this.RemoteButton.Content = resource.GetString("/Menus/Transformer_Remote");
         }
 
         //ToolTip

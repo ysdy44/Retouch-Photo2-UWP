@@ -17,7 +17,7 @@
         <TextBlock x:Name="ResetTextBlock" Style="{StaticResource AppTextBlock}"/>
         <Button x:Name="ResetButton" Style="{StaticResource AppCircleButtonStyle}"
                  IsEnabled="{x:Bind SelectionViewModel.IsCrop, Mode=OneWay}">
-            <FontIcon Glyph="&#xF617;" FontSize="24" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+            <FontIcon Glyph="&#xF617;" FontSize="24" FontWeight="Bold" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
         </Button>
 
         <ContentControl Width="4"/>
@@ -26,7 +26,7 @@
         <TextBlock x:Name="FitTextBlock" Style="{StaticResource AppTextBlock}"/>
         <Button x:Name="FitButton" Style="{StaticResource AppCircleButtonStyle}"
                  IsEnabled="{x:Bind SelectionViewModel.IsCrop, Mode=OneWay}">
-            <FontIcon Glyph="&#xE9A6;" FontSize="22" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource AppText}"/>
+            <FontIcon Glyph="&#xE9A6;" FontSize="22" FontWeight="Bold" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource AppText}"/>
         </Button>
 
         <ContentControl Width="4"/>

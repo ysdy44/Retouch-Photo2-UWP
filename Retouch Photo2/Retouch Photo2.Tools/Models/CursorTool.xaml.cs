@@ -82,8 +82,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this._button.ToolTip.Content = resource.GetString("/Tools/Cursor");
 
-            this.StepFrequencyToolTip.Content = resource.GetString("/Tools/Cursor_StepFrequency_ToolTip");
-            this.MultiModeToolTip.Content = resource.GetString("/Tools/Cursor_MultiMode_ToolTip");
+            this.StepFrequencyToolTip.Content = resource.GetString("/Tools/Cursor_StepFrequency");
         }
 
         //ToolTip
@@ -94,13 +93,15 @@ namespace Retouch_Photo2.Tools.Models
                 if (this.IsSelected)
                 {
                     this.StepFrequencyToolTip.IsOpen = true;
-                    this.MultiModeToolTip.IsOpen = true;
+
+                    this.ModeControl.IsOpen = true;
                 }
             };
             this._button.ToolTip.Closed += (s, e) =>
             {
                 this.StepFrequencyToolTip.IsOpen = false;
-                this.MultiModeToolTip.IsOpen = false;
+
+                this.ModeControl.IsOpen = false;
             };
         }
 

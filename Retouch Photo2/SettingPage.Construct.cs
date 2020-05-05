@@ -19,25 +19,25 @@ namespace Retouch_Photo2
             this.TitleTextBlock.Text = resource.GetString("/$SettingPage/Title");
 
             this.ThemeTextBlock.Text = resource.GetString("/$SettingPage/Theme");
-            this.LightRadioButton.Tag = resource.GetString("/$SettingPage/Theme_Light");
-            this.DarkRadioButton.Tag = resource.GetString("/$SettingPage/Theme_Dark");
-            this.DefaultRadioButton.Tag = resource.GetString("/$SettingPage/Theme_UseSystem");
+            this.LightRadioButton.Content = resource.GetString("/$SettingPage/Theme_Light");
+            this.DarkRadioButton.Content = resource.GetString("/$SettingPage/Theme_Dark");
+            this.DefaultRadioButton.Content = resource.GetString("/$SettingPage/Theme_UseSystem");
 
             this.LayoutTextBlock.Text = resource.GetString("/$SettingPage/Layout");
-            this.PhoneButton.Tag = resource.GetString("/$SettingPage/Layout_Phone");
-            this.PadButton.Tag = resource.GetString("/$SettingPage/Layout_Pad");
-            this.PCButton.Tag = resource.GetString("/$SettingPage/Layout_PC");
-            this.AdaptiveButton.Tag = resource.GetString("/$SettingPage/Layout_Adaptive");
+            this.PhoneButton.Content = resource.GetString("/$SettingPage/Layout_Phone");
+            this.PadButton.Content = resource.GetString("/$SettingPage/Layout_Pad");
+            this.PCButton.Content = resource.GetString("/$SettingPage/Layout_PC");
+            this.AdaptiveButton.Content = resource.GetString("/$SettingPage/Layout_Adaptive");
 
             this.AdaptiveTextBlock.Text = resource.GetString("/$SettingPage/Layout_AdaptiveWidth");
             this.AdaptiveResetButton.Content = resource.GetString("/$SettingPage/Layout_ResetAdaptiveWidth");
 
             this.KeyTextBlock.Text = resource.GetString("/$SettingPage/Key");
-            this.IsCenterToggleButton.Tag = resource.GetString("/$SettingPage/Key_IsCenter");
-            this.IsRatioToggleButton.Tag = resource.GetString("/$SettingPage/Key_IsRatio");
-            this.IsSquareToggleButton.Tag = resource.GetString("/$SettingPage/Key_IsSquare");
-            this.IsStepFrequencyToggleButton.Tag = resource.GetString("/$SettingPage/Key_IsStepFrequency");
-            this.FullScreenToggleButton.Tag = resource.GetString("/$SettingPage/Key_FullScreen");
+            this.IsCenterToggleButton.Content = resource.GetString("/$SettingPage/Key_IsCenter");
+            this.IsRatioToggleButton.Content = resource.GetString("/$SettingPage/Key_IsRatio");
+            this.IsSquareToggleButton.Content = resource.GetString("/$SettingPage/Key_IsSquare");
+            this.IsStepFrequencyToggleButton.Content = resource.GetString("/$SettingPage/Key_IsStepFrequency");
+            this.FullScreenToggleButton.Content = resource.GetString("/$SettingPage/Key_FullScreen");
 
             this.LocalTextBlock.Text = resource.GetString("/$SettingPage/Local");
             this.LocalOpenTextBlock.Text = resource.GetString("/$SettingPage/Local_Open");

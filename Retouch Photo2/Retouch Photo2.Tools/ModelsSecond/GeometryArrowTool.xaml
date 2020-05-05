@@ -11,6 +11,11 @@
     d:DesignWidth="400"
     >
 
+    <Page.Resources>
+        <Style x:Name="IconSelectedButtonStyle" TargetType="Button" BasedOn="{StaticResource AppIconSelectedButton}"/>
+    </Page.Resources>
+    
+
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
         <StackPanel Orientation="Horizontal">
 
@@ -26,27 +31,19 @@
 
             <ContentControl Width="4"/>
 
+            <!--LeftTail-->
             <TextBlock x:Name="LeftTailTextBlock" Style="{StaticResource AppTextBlock}"/>
-            <Border Style="{StaticResource AppRoundedBorderStyle}">
-                <ComboBox x:Name="LeftTailComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
-                  SelectedIndex="{x:Bind TailToIndexConverter(SelectionViewModel.GeometryArrowLeftTail),Mode=OneWay}" 
-                  >
-                    <ComboBoxItem x:Name="LeftTailNoneComboBoxItem"/>
-                    <ComboBoxItem x:Name="LeftTailArrowComboBoxItem"/>
-                </ComboBox>
-            </Border>
+            <toolsElements:ArrowTailTypeControl x:Name="LeftArrowTailTypeControl"
+                 ArrowTailType="{x:Bind SelectionViewModel.GeometryArrowLeftTail, Mode=OneWay}"
+                />
 
             <ContentControl Width="4"/>
 
+            <!--RightTail-->
             <TextBlock x:Name="RightTailTextBlock" Style="{StaticResource AppTextBlock}"/>
-            <Border Style="{StaticResource AppRoundedBorderStyle}">
-                <ComboBox x:Name="RightTailComboBox" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
-                  SelectedIndex="{x:Bind TailToIndexConverter(SelectionViewModel.GeometryArrowRightTail),Mode=OneWay}" 
-                  >
-                    <ComboBoxItem x:Name="RightTailNoneComboBoxItem"/>
-                    <ComboBoxItem x:Name="RightTailArrowComboBoxItem"/>
-                </ComboBox>
-            </Border>
+            <toolsElements:ArrowTailTypeControl x:Name="RightArrowTailTypeControl"
+                 ArrowTailType="{x:Bind SelectionViewModel.GeometryArrowRightTail, Mode=OneWay}"
+                />
 
             <ContentControl Width="4"/>
 

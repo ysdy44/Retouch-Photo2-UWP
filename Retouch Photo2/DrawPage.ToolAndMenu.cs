@@ -17,24 +17,8 @@ namespace Retouch_Photo2
     {
 
         //Tool & Menu
-        private void ConstructToolAndMenu()
+        private void ConstructMenus()
         {
-            //Tool
-            foreach (ITool tool in this.TipViewModel.Tools)
-            {
-                this.ConstructTool(tool);
-            }
-            this.ToolFirst();
-
-
-            this.TipViewModel.Menus.Add(this.SelectionMenu);
-            this.TipViewModel.Menus.Add(this.OperateMenu);
-            this.TipViewModel.Menus.Add(this.AdjustmentMenu);
-            this.TipViewModel.Menus.Add(this.EffectMenu);
-            this.TipViewModel.Menus.Add(this.TransformerMenu);
-            this.TipViewModel.Menus.Add(this.CharacterMenu);
-            this.TipViewModel.Menus.Add(this.ColorMenu);
-            this.TipViewModel.Menus.Add(this.LayerMenu);
             //Menu
             foreach (IMenu menu in this.TipViewModel.Menus)
             {
@@ -45,78 +29,6 @@ namespace Retouch_Photo2
         }
 
 
-        /// <summary> Left panel of Tool. </summary>
-        UIElementCollection ToolLeft => this.DrawLayout.LeftPanelChildren;
-        /// <summary> Left more button's flyout panel's children. </summary>
-        UIElementCollection ToolLeftMore = null;
-
-        //Tool
-        private void ConstructTool(ITool tool)
-        {
-            if (tool == null)
-            {
-                if (this.ToolLeftMore == null)
-                    this.ToolLeft.Add(new ComboBoxSeparator());
-                else
-                    this.ToolLeftMore.Add(new ComboBoxSeparator());
-
-                return;
-            }
-            else if (tool.Type == ToolType.None)
-            {
-                return;
-            }
-            else if (tool.Type == ToolType.More)
-            {
-                if (tool.Button is ToolMoreButton moreButton)
-                {
-                    this.ToolLeft.Add(moreButton);
-                    this.ToolLeftMore = moreButton.Children;
-                }
-                return;
-            }
-            else
-            {
-                if (tool.Button is FrameworkElement element)
-                {
-                    if (this.ToolLeftMore == null)
-                        this.ToolLeft.Add(element);
-                    else
-                        this.ToolLeftMore.Add(element);
-
-                    element.Tapped += (s, e) =>
-                    {
-                        this.TipViewModel.ToolGroupType(tool.Type);
-
-                        this.TipViewModel.Tool = tool;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    };
-                }
-            }
-        }
-
-        #region Tool
-
-
-        /// <summary>
-        /// Select the first Tool by default. 
-        /// </summary>
-        private void ToolFirst()
-        {
-            ITool tool = this.TipViewModel.Tools.FirstOrDefault();
-            if (tool != null)
-            {
-                this.TipViewModel.ToolGroupType(tool.Type);
-
-                this.TipViewModel.Tool = tool;
-            }
-        }
-
-
-        #endregion
-
-
         /// <summary> Head panel of Menu. </summary>
         UIElementCollection MenuHead => this.DrawLayout.HeadRightChildren;
 
@@ -125,7 +37,7 @@ namespace Retouch_Photo2
         {
             if (menu == null) return;
 
-            // this.OverlayCanvas.Children.Add(menu.Layout);
+            this.OverlayCanvas.Children.Add(menu.Layout);
 
             menu.Move += () =>
             {

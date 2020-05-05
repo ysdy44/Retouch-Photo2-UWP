@@ -1,7 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -46,18 +44,14 @@ namespace Retouch_Photo2.Tools.Models
                 switch (value)
                 {
                     case GeometryArrowMode.None:
-                        //this.InnerRadiusTouchbarButton.IsSelected = false;
                         this.ValueTouchbarButton.IsSelected = false;
                         this.TipViewModel.TouchbarControl = null;
                         break;
                     case GeometryArrowMode.Width:
-                        //this.InnerRadiusTouchbarButton.IsSelected = true;
                         this.ValueTouchbarButton.IsSelected = false;
                         this.TipViewModel.TouchbarControl = null;
-                        //this.InnerRadiusTouchbarSlider;
                         break;
                     case GeometryArrowMode.Value:
-                        //this.InnerRadiusTouchbarButton.IsSelected = false;
                         this.ValueTouchbarButton.IsSelected = true;
                         this.TipViewModel.TouchbarControl = this.ValueTouchbarSlider;
                         break;
@@ -69,8 +63,6 @@ namespace Retouch_Photo2.Tools.Models
         //@Converter
         private int ValueNumberConverter(float value) => (int)(value * 100.0f);
         private double ValueValueConverter(float value) => value * 100d;
-
-        private int TailToIndexConverter(GeometryArrowTailType tailType) => (int)tailType;
         
 
         //@Construct
@@ -79,7 +71,8 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
             this.ConstructValue();
-            this.ConstructTail();
+            this.ConstructLeftTail();
+            this.ConstructRightTail();
         }
 
 
@@ -131,41 +124,45 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate();//Invalidate
         }
-        
-        //Tail
-        private void ConstructTail()
+
+        //LeftTail
+        private void ConstructLeftTail()
         {
-            this.LeftTailComboBox.SelectionChanged += (s, e) =>
+            this.LeftArrowTailTypeControl.ArrowTailTypeChanged += (s, tailType) =>
             {
-                GeometryArrowTailType tailType = (GeometryArrowTailType)this.LeftTailComboBox.SelectedIndex;
-                this.TailTypeChange(tailType, isLeft: true);
-            };
-            this.RightTailComboBox.SelectionChanged += (s, e) =>
-            {
-                GeometryArrowTailType tailType = (GeometryArrowTailType)this.RightTailComboBox.SelectedIndex;
-                this.TailTypeChange(tailType, isLeft: false);
+                this.SelectionViewModel.GeometryArrowLeftTail = tailType;
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    if (layer is GeometryArrowLayer geometryArrowLayer)
+                    {
+                        geometryArrowLayer.LeftTail = tailType;
+                    }
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
             };
         }
-        private void TailTypeChange(GeometryArrowTailType tailType, bool isLeft)
+
+        //RightTail
+        private void ConstructRightTail()
         {
-            if (isLeft)
-                this.SelectionViewModel.GeometryArrowLeftTail = tailType;
-            else
+            this.RightArrowTailTypeControl.ArrowTailTypeChanged += (s, tailType) =>
+            {
                 this.SelectionViewModel.GeometryArrowRightTail = tailType;
 
-            //Selection
-            this.SelectionViewModel.SetValue((layer) =>
-            {
-                if (layer is GeometryArrowLayer geometryArrowLayer)
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
                 {
-                    if (isLeft)
-                        geometryArrowLayer.LeftTail = tailType;
-                    else
+                    if (layer is GeometryArrowLayer geometryArrowLayer)
+                    {
                         geometryArrowLayer.RightTail = tailType;
-                }
-            });
+                    }
+                });
 
-            this.ViewModel.Invalidate();//Invalidate
+                this.ViewModel.Invalidate();//Invalidate
+            };
         }
 
 
@@ -187,17 +184,14 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Text = resource.GetString("/ToolsSecond/GeometryArrow");
+            this._button.Content = resource.GetString("/ToolsSecond/GeometryArrow");
+            this._button.Style = this.IconSelectedButtonStyle;
 
             this.ValueTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryArrow_Value");
 
             this.LeftTailTextBlock.Text = resource.GetString("/ToolsSecond/GeometryArrow_LeftTail");
-            this.LeftTailNoneComboBoxItem.Content = resource.GetString("/ToolsSecond/GeometryArrow_LeftTailNone");
-            this.LeftTailArrowComboBoxItem.Content = resource.GetString("/ToolsSecond/GeometryArrow_LeftTailArrow");
 
             this.RightTailTextBlock.Text = resource.GetString("/ToolsSecond/GeometryArrow_RightTail");
-            this.RightTailNoneComboBoxItem.Content = resource.GetString("/ToolsSecond/GeometryArrow_RightTailNone");
-            this.RightTailArrowComboBoxItem.Content = resource.GetString("/ToolsSecond/GeometryArrow_RightTailArrow");
 
             this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
         }
@@ -206,13 +200,13 @@ namespace Retouch_Photo2.Tools.Models
         //@Content
         public ToolType Type => ToolType.GeometryArrow;
         public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
+        public bool IsSelected { get => !this._button.IsEnabled; set => this._button.IsEnabled = !value; }
 
         public FrameworkElement Button => this._button;
         public FrameworkElement Page => this;
 
         readonly FrameworkElement _icon = new GeometryArrowIcon();
-        readonly ComboBoxButton _button = new ComboBoxButton(new GeometryArrowIcon());
+        readonly Button _button = new Button { Tag = new GeometryArrowIcon()};
 
         private ILayer CreateLayer(Transformer transformer)
         {

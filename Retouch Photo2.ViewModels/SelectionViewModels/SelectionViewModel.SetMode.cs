@@ -71,7 +71,7 @@ namespace Retouch_Photo2.ViewModels
         private void _setModeNone()
         {
             this.Transformer = new Transformer();
-            this.DsabledRadian = false;//DisabledRadian
+            this.DisabledRadian = false;//DisabledRadian
 
             this.Layer = null;
             this.Layers = null;
@@ -173,7 +173,7 @@ namespace Retouch_Photo2.ViewModels
         private void _setModeMultipleWithTransformer(IEnumerable<ILayer> layers, Transformer transformer, bool disabledRadian)
         {
             this.Transformer = transformer;
-            this.DsabledRadian = disabledRadian;
+            this.DisabledRadian = disabledRadian;
 
             this.Layer = null;
             this.Layers = layers;

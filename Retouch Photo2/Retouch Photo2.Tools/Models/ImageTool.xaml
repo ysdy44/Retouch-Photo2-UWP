@@ -38,7 +38,7 @@
                 <Button.BorderBrush>
                     <SolidColorBrush x:Name="SelectBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
                 </Button.BorderBrush>
-                <FontIcon Glyph="&#xE109;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
+                <FontIcon Glyph="&#xE109;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
             </Button>
 
             <ContentControl Width="4"/>
@@ -47,7 +47,7 @@
             <TextBlock x:Name="ReplaceTextBlock" Style="{StaticResource AppTextBlock}"/>
             <Button x:Name="ReplaceButton" Style="{StaticResource AppCircleButtonStyle}"
                  IsEnabled="{x:Bind SelectionViewModel.IsImageLayer,Mode=OneWay}">
-                <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
+                <FontIcon Glyph="&#xEB9F;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"  Foreground="{ThemeResource AppText}"/>
             </Button>
 
             <AppBarSeparator/>
@@ -55,7 +55,7 @@
             <!--Select-->
             <TextBlock x:Name="ClearTextBlock" Style="{StaticResource AppTextBlock}"/>
             <Button x:Name="ClearButton" Style="{StaticResource AppCircleButtonStyle}">
-                <FontIcon Glyph="&#xE106;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                <FontIcon Glyph="&#xE106;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
 
             <ContentControl Width="4"/>

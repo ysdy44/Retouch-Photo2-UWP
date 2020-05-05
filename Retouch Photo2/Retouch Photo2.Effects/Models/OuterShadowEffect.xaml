@@ -4,8 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pic="using:HSVColorPickers"
-    xmlns:element="using:Retouch_Photo2.Elements"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignWidth="200"
     d:DesignHeight="400"
@@ -13,7 +12,7 @@
 
     <Page.Resources>
         <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <pic:ColorPicker x:Name="ColorPicker" Width="222"/>
+            <elements:ColorPicker2 x:Name="ColorPicker" Width="222"/>
         </Flyout>
     </Page.Resources>
 
@@ -43,7 +42,7 @@
 
             <!--Angle-->
             <TextBlock x:Name="AngleTextBlock" Style="{StaticResource AppTextBlock}"/>
-            <element:RadiansPicker x:Name="AnglePicker" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"
+            <elements:RadiansPicker x:Name="AnglePicker" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"
                                BorderBrush="{ThemeResource AppBorderBrush}"
                                Background="{ThemeResource AppForeground}"
                                />

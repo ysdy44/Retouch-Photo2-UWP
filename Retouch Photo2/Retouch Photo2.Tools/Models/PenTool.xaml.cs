@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Tools.Models
         NodeCollection Nodes => this.CurveLayer.Nodes;
 
         /// <summary> PenPage's Flyout. </summary>
-        public PenFlyout PenFlyout => this._penFlyout;
+        public PenModeControl PenFlyout => this._penFlyout;
         
 
         //@Construct

@@ -9,7 +9,7 @@
    d:DesignWidth="50"
     >
 
-    <PathIcon>
+    <PathIcon Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}">
         <PathIcon.Data>
             M19.992,14.193l-14.897,0l14.897,-14.093l0,14.093Zm-19.992,-14.193l14.896,0l-14.896,14.094l0,-14.094Zm18.289,12.49l0,-8.303l-9.107,8.303l9.107,0Zm-16.586,-10.787l9.106,0l-9.106,8.304l0,-8.304Z
         </PathIcon.Data>

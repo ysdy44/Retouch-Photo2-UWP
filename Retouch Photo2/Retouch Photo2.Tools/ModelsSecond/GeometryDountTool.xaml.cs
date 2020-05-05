@@ -124,7 +124,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Text = resource.GetString("/ToolsSecond/GeometryDount");
+            this._button.Content = resource.GetString("/ToolsSecond/GeometryDount");
+            this._button.Style = this.IconSelectedButtonStyle;
 
             this.HoleRadiusTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryDount_HoleRadius");
 
@@ -135,13 +136,13 @@ namespace Retouch_Photo2.Tools.Models
         //@Content
         public ToolType Type => ToolType.GeometryDount;
         public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
+        public bool IsSelected { get => !this._button.IsEnabled; set => this._button.IsEnabled = !value; }
 
         public FrameworkElement Button => this._button;
         public FrameworkElement Page => this;
 
         readonly FrameworkElement _icon = new GeometryDountIcon();
-        readonly ComboBoxButton _button = new ComboBoxButton(new GeometryDountIcon());
+        readonly Button _button = new Button { Tag = new GeometryDountIcon()};
 
         private ILayer CreateLayer(Transformer transformer)
         {

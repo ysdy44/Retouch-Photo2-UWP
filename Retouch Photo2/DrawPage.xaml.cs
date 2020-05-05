@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Tools;
+﻿using Retouch_Photo2.Menus;
+using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
@@ -28,8 +29,8 @@ namespace Retouch_Photo2
             this.InitializeComponent();
             this.ConstructStrings();
             this.ConstructTransition();
-            this.ConstructToolAndMenu();
-
+            this.ConstructMenus();
+            
             this.Loaded += (s, e) => this._lockLoaded();
 
             //ViewModel
@@ -81,7 +82,7 @@ namespace Retouch_Photo2
 
 
             #endregion
-
+            
         }
 
         //The current page becomes the active page

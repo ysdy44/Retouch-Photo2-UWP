@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="62b7e78c-fbd8-47bc-ab98-bdbdec4f3a80"
+    Name="f17934de-8e52-4af9-b329-286056ce115b"
     Publisher="CN=于梦凡"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="62b7e78c-fbd8-47bc-ab98-bdbdec4f3a80" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="f17934de-8e52-4af9-b329-286056ce115b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Retouch Photo2.TestApp</DisplayName>

@@ -106,104 +106,53 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Arrange\BackOneDisabledIcon.xaml.cs">
-      <DependentUpon>BackOneDisabledIcon.xaml</DependentUpon>
+    <Compile Include="Arrange\BackOneIcon.xaml.cs">
+      <DependentUpon>BackOneIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Arrange\BackOneEnabledIcon.xaml.cs">
-      <DependentUpon>BackOneEnabledIcon.xaml</DependentUpon>
+    <Compile Include="Arrange\ForwardOneIcon.xaml.cs">
+      <DependentUpon>ForwardOneIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Arrange\ForwardOneDisabledIcon.xaml.cs">
-      <DependentUpon>ForwardOneDisabledIcon.xaml</DependentUpon>
+    <Compile Include="Arrange\MoveBackIcon.xaml.cs">
+      <DependentUpon>MoveBackIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Arrange\ForwardOneEnabledIcon.xaml.cs">
-      <DependentUpon>ForwardOneEnabledIcon.xaml</DependentUpon>
+    <Compile Include="Arrange\MoveFrontIcon.xaml.cs">
+      <DependentUpon>MoveFrontIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Arrange\MoveBackDisabledIcon.xaml.cs">
-      <DependentUpon>MoveBackDisabledIcon.xaml</DependentUpon>
+    <Compile Include="Horizontally\CenterIcon.xaml.cs">
+      <DependentUpon>CenterIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Arrange\MoveBackEnabledIcon.xaml.cs">
-      <DependentUpon>MoveBackEnabledIcon.xaml</DependentUpon>
+    <Compile Include="Horizontally\LeftIcon.xaml.cs">
+      <DependentUpon>LeftIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Arrange\MoveFrontDisabledIcon.xaml.cs">
-      <DependentUpon>MoveFrontDisabledIcon.xaml</DependentUpon>
+    <Compile Include="Horizontally\RightIcon.xaml.cs">
+      <DependentUpon>RightIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Arrange\MoveFrontEnabledIcon.xaml.cs">
-      <DependentUpon>MoveFrontEnabledIcon.xaml</DependentUpon>
+    <Compile Include="Horizontally\HorizontallySymmetryIcon.xaml.cs">
+      <DependentUpon>HorizontallySymmetryIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Horizontally\CenterDisabledIcon.xaml.cs">
-      <DependentUpon>CenterDisabledIcon.xaml</DependentUpon>
+    <Compile Include="Transform\FlipVerticalIcon.xaml.cs">
+      <DependentUpon>FlipVerticalIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Horizontally\CenterEnabledIcon.xaml.cs">
-      <DependentUpon>CenterEnabledIcon.xaml</DependentUpon>
+    <Compile Include="Transform\FlipHorizontalIcon.xaml.cs">
+      <DependentUpon>FlipHorizontalIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Horizontally\LeftDisabledIcon.xaml.cs">
-      <DependentUpon>LeftDisabledIcon.xaml</DependentUpon>
+    <Compile Include="Transform\RotateRightIcon.xaml.cs">
+      <DependentUpon>RotateRightIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Horizontally\LeftEnabledIcon.xaml.cs">
-      <DependentUpon>LeftEnabledIcon.xaml</DependentUpon>
+    <Compile Include="Transform\RotateLeftIcon.xaml.cs">
+      <DependentUpon>RotateLeftIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Horizontally\RightDisabledIcon.xaml.cs">
-      <DependentUpon>RightDisabledIcon.xaml</DependentUpon>
+    <Compile Include="Vertically\BottomIcon.xaml.cs">
+      <DependentUpon>BottomIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Horizontally\RightEnabledIcon.xaml.cs">
-      <DependentUpon>RightEnabledIcon.xaml</DependentUpon>
+    <Compile Include="Vertically\MiddleIcon.xaml.cs">
+      <DependentUpon>MiddleIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Horizontally\HorizontallySymmetryDisabledIcon.xaml.cs">
-      <DependentUpon>HorizontallySymmetryDisabledIcon.xaml</DependentUpon>
+    <Compile Include="Vertically\VerticallySymmetryIcon.xaml.cs">
+      <DependentUpon>VerticallySymmetryIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Horizontally\HorizontallySymmetryEnabledIcon.xaml.cs">
-      <DependentUpon>HorizontallySymmetryEnabledIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Transform\FlipHorizontalDisabledIcon.xaml.cs">
-      <DependentUpon>FlipHorizontalDisabledIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Transform\FlipHorizontalEnabledIcon.xaml.cs">
-      <DependentUpon>FlipHorizontalEnabledIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Transform\FlipVerticalDisabledIcon.xaml.cs">
-      <DependentUpon>FlipVerticalDisabledIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Transform\FlipVerticalEnabledIcon.xaml.cs">
-      <DependentUpon>FlipVerticalEnabledIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Transform\RotateLeftDisabledIcon.xaml.cs">
-      <DependentUpon>RotateLeftDisabledIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Transform\RotateLeftEnabledIcon.xaml.cs">
-      <DependentUpon>RotateLeftEnabledIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Transform\RotateRightDisabledIcon.xaml.cs">
-      <DependentUpon>RotateRightDisabledIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Transform\RotateRightEnabledIcon.xaml.cs">
-      <DependentUpon>RotateRightEnabledIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Vertically\BottomDisabledIcon.xaml.cs">
-      <DependentUpon>BottomDisabledIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Vertically\BottomEnabledIcon.xaml.cs">
-      <DependentUpon>BottomEnabledIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Vertically\MiddleDisabledIcon.xaml.cs">
-      <DependentUpon>MiddleDisabledIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Vertically\MiddleEnabledIcon.xaml.cs">
-      <DependentUpon>MiddleEnabledIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Vertically\VerticallySymmetryDisabledIcon.xaml.cs">
-      <DependentUpon>VerticallySymmetryDisabledIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Vertically\VerticallySymmetryEnabledIcon.xaml.cs">
-      <DependentUpon>VerticallySymmetryEnabledIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Vertically\TopDisabledIcon.xaml.cs">
-      <DependentUpon>TopDisabledIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Vertically\TopEnabledIcon.xaml.cs">
-      <DependentUpon>TopEnabledIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="OperateButton.xaml.cs">
-      <DependentUpon>OperateButton.xaml</DependentUpon>
+    <Compile Include="Vertically\TopIcon.xaml.cs">
+      <DependentUpon>TopIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
@@ -217,135 +166,67 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Arrange\BackOneDisabledIcon.xaml">
+    <Page Include="Arrange\BackOneIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Arrange\BackOneEnabledIcon.xaml">
+    <Page Include="Arrange\ForwardOneIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Arrange\ForwardOneDisabledIcon.xaml">
+    <Page Include="Arrange\MoveBackIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Arrange\ForwardOneEnabledIcon.xaml">
+    <Page Include="Arrange\MoveFrontIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Arrange\MoveBackDisabledIcon.xaml">
+    <Page Include="Horizontally\CenterIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Arrange\MoveBackEnabledIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Arrange\MoveFrontDisabledIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Arrange\MoveFrontEnabledIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Horizontally\CenterDisabledIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Horizontally\CenterEnabledIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Horizontally\LeftDisabledIcon.xaml">
+    <Page Include="Horizontally\LeftIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Horizontally\LeftEnabledIcon.xaml">
+    <Page Include="Horizontally\RightIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Horizontally\RightDisabledIcon.xaml">
+    <Page Include="Horizontally\HorizontallySymmetryIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Horizontally\RightEnabledIcon.xaml">
+    <Page Include="Transform\FlipVerticalIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Horizontally\HorizontallySymmetryDisabledIcon.xaml">
+    <Page Include="Transform\FlipHorizontalIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Horizontally\HorizontallySymmetryEnabledIcon.xaml">
+    <Page Include="Transform\RotateRightIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Transform\FlipHorizontalDisabledIcon.xaml">
+    <Page Include="Transform\RotateLeftIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Transform\FlipHorizontalEnabledIcon.xaml">
+    <Page Include="Vertically\BottomIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Transform\FlipVerticalDisabledIcon.xaml">
+    <Page Include="Vertically\MiddleIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Transform\FlipVerticalEnabledIcon.xaml">
+    <Page Include="Vertically\VerticallySymmetryIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Transform\RotateLeftDisabledIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Transform\RotateLeftEnabledIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Transform\RotateRightDisabledIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Transform\RotateRightEnabledIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Vertically\BottomDisabledIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Vertically\BottomEnabledIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Vertically\MiddleDisabledIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Vertically\MiddleEnabledIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Vertically\VerticallySymmetryDisabledIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Vertically\VerticallySymmetryEnabledIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Vertically\TopDisabledIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Vertically\TopEnabledIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="OperateButton.xaml">
+    <Page Include="Vertically\TopIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -47,7 +47,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Text = resource.GetString("/ToolsSecond/GeometryCapsule");
+            this._button.Content = resource.GetString("/ToolsSecond/GeometryCapsule");
+            this._button.Style = this.IconSelectedButtonStyle;
 
             this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
         }
@@ -56,13 +57,13 @@ namespace Retouch_Photo2.Tools.Models
         //@Content
         public ToolType Type => ToolType.GeometryCapsule;
         public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
+        public bool IsSelected { get => !this._button.IsEnabled; set => this._button.IsEnabled = !value; }
 
         public FrameworkElement Button => this._button;
         public FrameworkElement Page => this;
 
         readonly FrameworkElement _icon = new GeometryCapsuleIcon();
-        readonly ComboBoxButton _button = new ComboBoxButton(new GeometryCapsuleIcon());
+        readonly Button _button = new Button { Tag = new GeometryCapsuleIcon()};
 
         private ILayer CreateLayer(Transformer transformer)
         {

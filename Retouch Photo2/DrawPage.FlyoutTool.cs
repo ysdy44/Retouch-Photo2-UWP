@@ -1,9 +1,5 @@
 ﻿using Retouch_Photo2.Brushs;
 using System;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Resources;
-using Windows.Graphics.Imaging;
-using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -75,8 +71,6 @@ namespace Retouch_Photo2
 
 
         #endregion
-
-
-
+               
     }
 }

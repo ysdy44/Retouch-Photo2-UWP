@@ -47,7 +47,7 @@ namespace Retouch_Photo2.Tools
                         //Transformer
                         Transformer transformer = this.Transformer;
                         Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                        bool dsabledRadian = this.SelectionViewModel.DsabledRadian;
+                        bool dsabledRadian = this.SelectionViewModel.DisabledRadian;
                         TransformerMode transformerMode = Transformer.ContainsNodeMode
                         (
                              point,
@@ -73,7 +73,7 @@ namespace Retouch_Photo2.Tools
             {
                 //Transformer
                 Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                bool dsabledRadian = this.SelectionViewModel.DsabledRadian;
+                bool dsabledRadian = this.SelectionViewModel.DisabledRadian;
                 TransformerMode transformerMode = Transformer.ContainsNodeMode
                 (
                     startingPoint,
@@ -180,7 +180,7 @@ namespace Retouch_Photo2.Tools
                         Transformer transformer = this.Transformer;
                         Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
                         Color accentColor = this.ViewModel.AccentColor;
-                        bool dsabledRadian = this.SelectionViewModel.DsabledRadian;
+                        bool dsabledRadian = this.SelectionViewModel.DisabledRadian;
                         drawingSession.DrawBoundNodes
                         (
                             transformer, 

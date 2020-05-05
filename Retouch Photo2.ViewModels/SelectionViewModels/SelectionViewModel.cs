@@ -51,13 +51,13 @@ namespace Retouch_Photo2.ViewModels
         private Transformer transformer;
 
         /// <summary> Is disable rotate radian? Defult **false**. </summary>
-        public bool DsabledRadian
+        public bool DisabledRadian
         {
             get => this.disabledRadian;
             set
             {
                 this.disabledRadian = value;
-                this.OnPropertyChanged(nameof(this.DsabledRadian));//Notify 
+                this.OnPropertyChanged(nameof(this.DisabledRadian));//Notify 
             }
         }
         private bool disabledRadian;

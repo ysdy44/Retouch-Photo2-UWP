@@ -12,33 +12,45 @@
     >
 
 
-    <UserControl.Resources>
-        <!--Background-->
-        <SolidColorBrush x:Name="AccentColor"  Color="{ThemeResource SystemAccentColor}"/>
-        <SolidColorBrush x:Name="UnAccentColor" Color="Transparent"/>
-        <!--Foreground-->
-        <SolidColorBrush x:Name="CheckColor" Color="White"/>
-        <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource AppTextColor}"/>
-    </UserControl.Resources>
+    <StackPanel Orientation="Horizontal">
 
-    
-    <Border Style="{StaticResource AppRoundedBorderStyle}">
-        <StackPanel Orientation="Horizontal">
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
 
-            <!--On-->
-            <ContentPresenter x:Name="OnSegmented" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                              Background="{x:Bind FalseToBackgroundConverter(IsOn),Mode=OneWay}"
-                              Foreground="{x:Bind FalseToForegroundConverter(IsOn),Mode=OneWay}"
-                              Content="{x:Bind OnContent,Mode=OneWay}"
-                              />
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
 
-            <!--Off-->
-            <ContentPresenter x:Name="OffSegmented" Width="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"    
-                              Background="{x:Bind TrueToBackgroundConverter(IsOn),Mode=OneWay}"
-                              Foreground="{x:Bind TrueToForegroundConverter(IsOn),Mode=OneWay}"
-                              Content="{x:Bind OffContent,Mode=OneWay}"
-                             />
+                <!--Off-->
+                <VisualState x:Name="Off">
+                    <VisualState.Setters>
+                        <Setter Target = "OffBorder.Background" Value="{ThemeResource SystemAccentColor}"/>
+                        <Setter Target = "OffTextBlock.Foreground" Value="White"/>
+                    </VisualState.Setters>
+                </VisualState>
 
-        </StackPanel>
-    </Border>
+                <!--On-->
+                <VisualState x:Name="On">
+                    <VisualState.Setters>
+                        <Setter Target = "OnBorder.Background" Value="{ThemeResource SystemAccentColor}"/>
+                        <Setter Target = "OnTextBlock.Foreground" Value="White"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+
+        <!--Off-->
+        <Border x:Name="OffBorder" MinWidth="60" Style="{StaticResource AppRoundedBorderLeftStyle}">
+            <TextBlock x:Name="OffTextBlock" Text="{x:Bind OffContent}" Foreground="{ThemeResource AppText}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+
+        <!--On-->
+        <Border x:Name="OnBorder" MinWidth="60" Style="{StaticResource AppRoundedBorderRightStyle}">
+            <TextBlock x:Name="OnTextBlock" Text="{x:Bind OnContent}" Foreground="{ThemeResource AppText}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+
+    </StackPanel>
+
 </UserControl>

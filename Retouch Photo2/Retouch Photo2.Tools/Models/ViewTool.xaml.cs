@@ -241,10 +241,10 @@ namespace Retouch_Photo2.Tools.Models
             this._button.ToolTip.Content = resource.GetString("/Tools/View");
 
             this.RadianTouchbarButton.CenterContent = resource.GetString("/Tools/View_Radian");
-            this.RadianClearToolTip.Content = resource.GetString("/Tools/View_RadianClear_ToolTip");
+            this.RadianClearToolTip.Content = resource.GetString("/Tools/View_RadianClear");
 
             this.ScaleTouchbarButton.CenterContent = resource.GetString("/Tools/View_Scale");
-            this.ScaleClearToolTip.Content = resource.GetString("/Tools/View_ScaleClear_ToolTip");
+            this.ScaleClearToolTip.Content = resource.GetString("/Tools/View_ScaleClear");
         }
 
         //ToolTip

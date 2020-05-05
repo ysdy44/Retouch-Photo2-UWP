@@ -29,11 +29,7 @@
             <ContentControl Width="4"/>
 
             <!--Multi-Mode-->
-            <elements:CompositeModeControl Mode="{x:Bind KeyboardViewModel.CompositeMode,Mode=TwoWay}">
-                <ToolTipService.ToolTip>
-                    <ToolTip x:Name="MultiModeToolTip" Placement="Top" Style="{StaticResource AppToolTip}"/>
-                </ToolTipService.ToolTip>
-            </elements:CompositeModeControl>
+            <elements:CompositeModeControl x:Name="ModeControl" Mode="{x:Bind KeyboardViewModel.CompositeMode,Mode=TwoWay}"/>
 
             <ContentControl Width="4"/>
 

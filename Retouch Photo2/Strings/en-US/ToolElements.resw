@@ -117,6 +117,66 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ArrowTail_Arrow" xml:space="preserve">
+    <value>Arrow</value>
+  </data>
+  <data name="ArrowTail_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="BrushType_Color" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="BrushType_EllipticalGradient" xml:space="preserve">
+    <value>Elliptical</value>
+  </data>
+  <data name="BrushType_Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="BrushType_LinearGradient" xml:space="preserve">
+    <value>Linear</value>
+  </data>
+  <data name="BrushType_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="BrushType_RadialGradient" xml:space="preserve">
+    <value>Radial</value>
+  </data>
+  <data name="Color_Circle" xml:space="preserve">
+    <value>Circle</value>
+  </data>
+  <data name="Color_HSV" xml:space="preserve">
+    <value>HSV</value>
+  </data>
+  <data name="Color_PaletteHue" xml:space="preserve">
+    <value>Palette-Hue</value>
+  </data>
+  <data name="Color_PaletteSaturation" xml:space="preserve">
+    <value>Palette-Saturation</value>
+  </data>
+  <data name="Color_PaletteValue" xml:space="preserve">
+    <value>Palette-Value</value>
+  </data>
+  <data name="Color_RGB" xml:space="preserve">
+    <value>RGB</value>
+  </data>
+  <data name="Color_Swatches" xml:space="preserve">
+    <value>Swatches</value>
+  </data>
+  <data name="Color_Wheel" xml:space="preserve">
+    <value>Wheel</value>
+  </data>
+  <data name="CompositeMode_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="CompositeMode_Intersect" xml:space="preserve">
+    <value>Intersect</value>
+  </data>
+  <data name="CompositeMode_New" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="CompositeMode_Subtract" xml:space="preserve">
+    <value>Subtract</value>
+  </data>
   <data name="Convert" xml:space="preserve">
     <value>Convert to curves</value>
   </data>
@@ -127,37 +187,58 @@
     <value>Center Scaling</value>
   </data>
   <data name="MoreCreate_CenterOff" xml:space="preserve">
-    <value>Center</value>
+    <value>None</value>
   </data>
   <data name="MoreCreate_CenterOn" xml:space="preserve">
-    <value>None</value>
+    <value>Center</value>
   </data>
   <data name="MoreCreate_Square" xml:space="preserve">
     <value>Equal width and height</value>
   </data>
   <data name="MoreCreate_SquareOff" xml:space="preserve">
-    <value>Square</value>
+    <value>None</value>
   </data>
   <data name="MoreCreate_SquareOn" xml:space="preserve">
-    <value>None</value>
+    <value>Square</value>
   </data>
   <data name="MoreTransform_Center" xml:space="preserve">
     <value>Center Scaling</value>
   </data>
   <data name="MoreTransform_CenterOff" xml:space="preserve">
-    <value>Center</value>
+    <value>None</value>
   </data>
   <data name="MoreTransform_CenterOn" xml:space="preserve">
-    <value>None</value>
+    <value>Center</value>
   </data>
   <data name="MoreTransform_Ratio" xml:space="preserve">
     <value>Ratio Scaling</value>
   </data>
   <data name="MoreTransform_RatioOff" xml:space="preserve">
-    <value>Ratio</value>
+    <value>None</value>
   </data>
   <data name="MoreTransform_RatioOn" xml:space="preserve">
-    <value>None</value>
+    <value>Ratio</value>
+  </data>
+  <data name="PenMode_Mode" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="PenMode_Mode_Asymmetric" xml:space="preserve">
+    <value>Asymmetric</value>
+  </data>
+  <data name="PenMode_Mode_Disconnected" xml:space="preserve">
+    <value>Disconnected</value>
+  </data>
+  <data name="PenMode_Mode_Mirrored" xml:space="preserve">
+    <value>Mirrored</value>
+  </data>
+  <data name="PenMode_Restriction" xml:space="preserve">
+    <value>Restriction</value>
+  </data>
+  <data name="PenMode_Restriction_Angle" xml:space="preserve">
+    <value>Angle</value>
+  </data>
+  <data name="PenMode_Restriction_Length" xml:space="preserve">
+    <value>Length</value>
   </data>
   <data name="Stroke" xml:space="preserve">
     <value>Stroke</value>

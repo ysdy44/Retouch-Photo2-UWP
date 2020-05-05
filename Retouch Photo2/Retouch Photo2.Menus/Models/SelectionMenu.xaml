@@ -13,6 +13,31 @@
 
 
     <menus:MenuExpander x:Name="_Expander">
+
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
+
+                <!--Disable-->
+                <VisualState x:Name="Disable">
+                    <VisualState.Setters>
+
+                        <Setter Target = "CutButton.IsEnabled" Value="false"/>
+                        <Setter Target = "CopyButton.IsEnabled" Value="false"/>
+                        <Setter Target = "ClearButton.IsEnabled" Value="false"/>
+
+                        <Setter Target = "InvertButton.IsEnabled" Value="false"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
+        
         <menus:MenuExpander.MainPage>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -24,15 +49,15 @@
                 <!--Edit-->
                 <StackPanel Grid.Column="0">
 
-                    <selections:SelectionButton x:Name="CutButton"/>
-                    <selections:SelectionButton x:Name="CopyButton"/>
-                    <selections:SelectionButton x:Name="PasteButton"/>
-                    <selections:SelectionButton x:Name="ClearButton"/>
+                    <Button x:Name="CutButton" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="CopyButton" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="PasteButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="ClearButton" Style="{StaticResource AppIconButton}"/>
 
-                    <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
+                    <Rectangle Style="{ThemeResource AppSeparatorRectangle}" />
 
-                    <selections:SelectionButton x:Name="ExtractButton"/>
-                    <selections:SelectionButton x:Name="MergeButton"/>
+                    <Button x:Name="ExtractButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="MergeButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
 
                 </StackPanel>
 
@@ -41,15 +66,15 @@
                 <!--Select-->
                 <StackPanel Grid.Column="2">
 
-                    <selections:SelectionButton x:Name="AllButton" IsEnabled="True"/>
-                    <selections:SelectionButton x:Name="DeselectButton" IsEnabled="True"/>
-                    <selections:SelectionButton x:Name="PixelButton"/>
-                    <selections:SelectionButton x:Name="InvertButton"/>
+                    <Button x:Name="AllButton" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="DeselectButton" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="PixelButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="InvertButton" Style="{StaticResource AppIconButton}"/>
 
                     <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
 
-                    <selections:SelectionButton x:Name="FeatherButton"/>
-                    <selections:SelectionButton x:Name="TransformButton"/>
+                    <Button x:Name="FeatherButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="TransformButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
 
                 </StackPanel>
 

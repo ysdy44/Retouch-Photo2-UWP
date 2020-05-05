@@ -1,40 +1,19 @@
 ﻿<Page
-   x:Class="Retouch_Photo2.TestApp.Pages.MainPage"
-   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-   xmlns:local="using:Retouch_Photo2.TestApp.Pages"
-   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
-    xmlns:transformers="using:FanKit.Transformers"
-    xmlns:layers="using:Retouch_Photo2.Layers"
-    Background="{ThemeResource AppBarItemBackgroundThemeBrush}"
-     >
+    x:Class="Retouch_Photo2.TestApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Retouch_Photo2.TestApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Grid>
+        <StackPanel>
+            <Button x:Name="AAA" Width="200" Content="AAA" Tapped="AAA_Tapped"/>
+            <Button x:Name="BBB" Width="200" Content="BBB" Tapped="BBB_Tapped"/>
+            <ContentControl x:Name="ContentControl"/>
 
-    <Page.Resources>
-        <Flyout x:Name="aaa">
-            <Border x:Name="aaaaaa" Width="333" Height="122" Background="Red">
-                <Slider />
-            </Border>
-        </Flyout>
-    </Page.Resources>
-
-
-        <StackPanel x:Name="StackPanel" Orientation="Vertical" Padding="111">
-
-            
-        <AppBarSeparator/>
-        <TextBlock x:Name="sssssss"/>
-        <Button x:Name="BBBB" Content="C" Tapped="BBBB_Tapped"/>
-        <Button x:Name="CCC" Content="V" Tapped="CCC_Tapped"/>
-        <Button x:Name="Button01" MinWidth="100" MinHeight="100" Content="200" Tapped="Button_Tapped"/>
-        <Button x:Name="Button02" MinWidth="100" MinHeight="100" Content="900" Tapped="Button02_Tapped"/>
-
-
-        <Grid x:Name="hhhhhhhhhhh" Background="Red" Height="900" SizeChanged="hhhhhhhhhhh_SizeChanged">
-            
-        </Grid>
-    </StackPanel>
-    </Page>
-    
+        </StackPanel>
+    </Grid>
+</Page>

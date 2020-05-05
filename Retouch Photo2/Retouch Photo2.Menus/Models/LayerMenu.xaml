@@ -61,44 +61,35 @@
 
 
         <menus:MenuExpander.MainPage>
-            <StackPanel MinHeight="165">
+            <StackPanel MinHeight="165" Padding="1,2">
 
                 <!--Opacity-->
-                <TextBlock x:Name="OpacityTextBlock" Grid.Column="0" Grid.Row="0" Style="{StaticResource AppTextBlock}"/>
+                <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlock}"/>
                 <Slider x:Name="OpacitySlider" Margin="2,0" TickFrequency="25" TickPlacement="Inline" Style="{StaticResource AppOpacitySliderStyle}" 
                             Value="{x:Bind OpacityToValueConverter(SelectionViewModel.Opacity),Mode=OneWay}"/>
 
 
                 <!--Blend Mode-->
-                <TextBlock x:Name="BlendModeTextBlock" Grid.Column="0" Grid.Row="0" Style="{StaticResource AppTextBlock}"/>
-                <Border Margin="2" Style="{StaticResource AppRoundedBorderStyle}">
-                    <Button x:Name="BlendModeButton" Height="36" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
-                        <RelativePanel>
-                            <TextBlock Text="{x:Bind BlendModeControl.Title,Mode=OneWay}" TextTrimming="CharacterEllipsis" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignLeftWithPanel="True"/>
-                            <FontIcon Margin="4,0" FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
-                        </RelativePanel>
-                    </Button>
-                </Border>
+                <TextBlock x:Name="BlendModeTextBlock" Style="{StaticResource AppTextBlock}"/>
+                <Button x:Name="BlendModeButton" Style="{StaticResource AppIconRoundedButtonStyle}"
+                        Content="{x:Bind BlendModeControl.Title,Mode=OneWay}">
+                    <Button.Tag>
+                        <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                    </Button.Tag>
+                </Button>
                 
                 <ContentControl Height="4"/>
 
 
                 <!--Layers-->
-                <Grid Padding="2,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock x:Name="LayersTextBlock" Grid.Column="0" Grid.Row="0" Style="{StaticResource AppTextBlock}"/>
-
+                <RelativePanel Padding="2,0">
+                    <TextBlock x:Name="LayersTextBlock" Style="{StaticResource AppTextBlock}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
                     <!--Visibility-->
-                    <ToggleButton x:Name="VisibilityButton" Grid.Column="1" Style="{StaticResource AppCircleToggleButtonStyle}"
+                    <ToggleButton x:Name="VisibilityButton" Style="{StaticResource AppCircleToggleButtonStyle}" RelativePanel.AlignRightWithPanel="True"
                                   IsChecked="{x:Bind VisibilityToBoolConverter(SelectionViewModel.Visibility),Mode=OneWay}" >
                         <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}" />
                     </ToggleButton>
-
-                </Grid>
+                </RelativePanel>
 
                 <Grid Padding="2,0">
                     <Grid.ColumnDefinitions>
@@ -106,28 +97,24 @@
                         <ColumnDefinition Width="4"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="RemoveButton" Grid.Column="0" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-                    <Button x:Name="DuplicateButton" Grid.Column="2" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-                </Grid>
-                <ContentControl Height="4"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="4"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <Button x:Name="RemoveButton" Grid.Column="0" Grid.Row="0" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                    <Button x:Name="DuplicateButton" Grid.Column="2" Grid.Row="0" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 
-
-                <!--Group-->
-                <Grid Padding="2,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="4"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Button x:Name="GroupButton" Grid.Column="0" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-                    <Button x:Name="UnGroupButton" Grid.Column="2" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                    <Button x:Name="GroupButton" Grid.Column="0" Grid.Row="2" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                    <Button x:Name="UnGroupButton" Grid.Column="2" Grid.Row="2" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                
                 </Grid>
 
 
                 <!--Tag Type-->
                 <TextBlock x:Name="TagTypeTextBlock" Grid.Column="0" Grid.Row="0" Style="{StaticResource AppTextBlock}"/>
                 <blends:TagTypeControl x:Name="TagTypeControl" Type="{x:Bind SelectionViewModel.TagType,Mode=OneWay}" />
-                <ContentControl Height="2"/>
 
             </StackPanel>
         </menus:MenuExpander.MainPage>

@@ -22,7 +22,7 @@
 
 
         <menus:MenuExpander.SecondPage>
-            <Border x:Name="EffectBoder" MinHeight="165">
+            <Border x:Name="EffectBoder" Padding="2" MinHeight="165">
                 <!--Frame-->
             </Border>
         </menus:MenuExpander.SecondPage>

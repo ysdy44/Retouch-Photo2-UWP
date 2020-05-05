@@ -11,13 +11,16 @@
     HorizontalAlignment="Stretch"
     VerticalAlignment="Center" 
     MinWidth="140"
-    Height="34"   
-    BorderBrush="Black"
-    Foreground="White"
-    Background="#AAFFFFFF"
+    Height="36"   
     d:DesignHeight="50"
-    d:DesignWidth="200"
+    d:DesignWidth="400"
     >
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="ColorBorderBrush" Color="Black"/>
+        <SolidColorBrush x:Key="ColorBackground" Color="#88888888"/>
+        <SolidColorBrush x:Key="ColorForeground" Color="White"/>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -27,19 +30,27 @@
         </Grid.ColumnDefinitions>
 
 
-        <Border CornerRadius="4" BorderThickness="1" Background="{x:Bind UserControl.Background, Mode=OneWay}" BorderBrush="{x:Bind UserControl.BorderBrush, Mode=OneWay}">
-            <hsvColorPickers:NumberPicker x:Name="NumberPicker" Foreground="Black" Width="Auto" HorizontalAlignment="Stretch" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-        </Border>
+        <hsvColorPickers:NumberPicker x:Name="NumberPicker" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <hsvColorPickers:NumberPicker.ButtonStyle>
+                <Style TargetType="Button" BasedOn="{StaticResource AppRoundedButtonStyle}">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource ColorBorderBrush}"/>
+                    <Setter Property="Background" Value="{StaticResource ColorBackground}"/>
+                    <Setter Property="Foreground" Value="{StaticResource ColorForeground}"/>
+                </Style>
+            </hsvColorPickers:NumberPicker.ButtonStyle>
+        </hsvColorPickers:NumberPicker>
 
 
         <Grid Grid.Column="2">
 
-            <Border Height="32" Margin="1,0" Padding="0" CornerRadius="15" BorderThickness="3" BorderBrush="{x:Bind UserControl.Background, Mode=OneWay}"/>
-            <Border Height="34" Margin="0" Padding="0" CornerRadius="16" BorderThickness="1" BorderBrush="{x:Bind UserControl.BorderBrush, Mode=OneWay}"/>
-            <Border Height="26" Margin="4,0" Padding="0" CornerRadius="13" BorderThickness="1" BorderBrush="{x:Bind UserControl.BorderBrush, Mode=OneWay}"/>
+            <Border Height="32" Margin="1,0" Padding="0" CornerRadius="15" BorderThickness="3" BorderBrush="{StaticResource ColorBackground}"/>
+            <Border Height="34" Margin="0" Padding="0" CornerRadius="16" BorderThickness="1" BorderBrush="{StaticResource ColorBorderBrush}"/>
+            <Border Height="26" Margin="4,0" Padding="0" CornerRadius="13" BorderThickness="1" BorderBrush="{StaticResource ColorBorderBrush}"/>
 
             <Canvas x:Name="Canvas" Height="24" Margin="6,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                <Ellipse x:Name="Ellipse" Width="24" Height="24" StrokeThickness="1" Stroke="{x:Bind UserControl.BorderBrush, Mode=OneWay}" Fill="{x:Bind UserControl.Foreground, Mode=OneWay}"/>
+                <Ellipse x:Name="Ellipse" Width="24" Height="24" StrokeThickness="1" Stroke="{StaticResource ColorBorderBrush}" Fill="{StaticResource ColorForeground}"/>
             </Canvas>
 
             <Thumb x:Name="Thumb" ManipulationMode="TranslateX" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

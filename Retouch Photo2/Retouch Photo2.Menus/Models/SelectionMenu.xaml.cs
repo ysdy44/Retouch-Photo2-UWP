@@ -1,5 +1,4 @@
 ﻿using Retouch_Photo2.Layers;
-using Retouch_Photo2.Selections.Edit2Icons;
 using Retouch_Photo2.Selections.EditIcons;
 using Retouch_Photo2.Selections.Select2Icons;
 using Retouch_Photo2.Selections.SelectIcons;
@@ -47,49 +46,47 @@ namespace Retouch_Photo2.Menus.Models
 
             if (e.NewValue is ListViewSelectionMode value)
             {
-                switch (value)
-                {
-                    case ListViewSelectionMode.None:
-                        {
-                            //Edit
-                            con.CutButton.IsEnabled = false;
-                            con.CopyButton.IsEnabled = false;
-                            con.ClearButton.IsEnabled = false;
-
-                            //Select
-                            con.InvertButton.IsEnabled = false;
-                        }
-                        break;
-                    case ListViewSelectionMode.Single:
-                    case ListViewSelectionMode.Multiple:
-                        {
-                            //Edit
-                            con.CutButton.IsEnabled = true;
-                            con.CopyButton.IsEnabled = true;
-                            con.ClearButton.IsEnabled = true;
-
-                            //Select
-                            con.InvertButton.IsEnabled = true;
-                        }
-                        break;
-                }
+                con._vsMode = value;
+                con.VisualState = con.VisualState;//State;
             }
         }));
 
         #endregion
 
 
+        //@VisualState
+        ListViewSelectionMode _vsMode;
+        public VisualState VisualState
+        {
+            get
+            {
+                switch (this._vsMode)
+                {
+                    case ListViewSelectionMode.None:
+                        return this.Disable;
+                    default:
+                        return this.Normal;
+                }
+            }
+            set => VisualStateManager.GoToState(this, value.Name, false);
+        }
         //@Construct
         public SelectionMenu()
         {
             this.InitializeComponent();
+            this.Loaded+=(s,e) => this.VisualState = this.VisualState;//State;
+            this.ConstructDataContext
+            (
+                 dataContext: this.SelectionViewModel,
+                 path: nameof(this.SelectionViewModel.SelectionMode),
+                 dp: SelectionMenu.ModeProperty
+            );
             this.ConstructStrings();
             this.ConstructMenu();
             
             this.ConstructEdit();
-            this.ConstructSelect();
+            this.ConstructSelect();           
         }
-
     }
 
     /// <summary> 
@@ -97,6 +94,22 @@ namespace Retouch_Photo2.Menus.Models
     /// </summary>
     public sealed partial class SelectionMenu : UserControl, IMenu
     {
+        //DataContext
+        public void ConstructDataContext(object dataContext, string path, DependencyProperty dp)
+        {
+            this.DataContext = dataContext;
+
+            // Create the binding description.
+            Binding binding = new Binding
+            {
+                Mode = BindingMode.OneWay,
+                Path = new PropertyPath(path)
+            };
+
+            // Attach the binding to the target.
+            this.SetBinding(dp, binding);
+        }
+
         //Strings
         private void ConstructStrings()
         {
@@ -105,45 +118,33 @@ namespace Retouch_Photo2.Menus.Models
             this._button.ToolTip.Content = resource.GetString("/Menus/Selection");
             this._Expander.Title = resource.GetString("/Menus/Selection");
 
-            this.CutButton.Text = resource.GetString("/Menus/Selection_Cut");
-            this.CutButton.EnabledIcon = new CutEnabledIcon();
-            this.CutButton.DisabledIcon = new CutDisabledIcon();
-            this.CopyButton.Text = resource.GetString("/Menus/Selection_Copy");
-            this.CopyButton.EnabledIcon = new CopyEnabledIcon();
-            this.CopyButton.DisabledIcon = new CopyDisabledIcon();
-            this.PasteButton.Text = resource.GetString("/Menus/Selection_Paste");
-            this.PasteButton.EnabledIcon = new PasteEnabledIcon();
-            this.PasteButton.DisabledIcon = new PasteDisabledIcon();
-            this.ClearButton.Text = resource.GetString("/Menus/Selection_Clear");
-            this.ClearButton.EnabledIcon = new ClearEnabledIcon();
-            this.ClearButton.DisabledIcon = new ClearDisabledIcon();
+            this.CutButton.Content = resource.GetString("/Menus/Selection_Cut");
+            this.CutButton.Tag = new CutIcon();
+            this.CopyButton.Content = resource.GetString("/Menus/Selection_Copy");
+            this.CopyButton.Tag = new CopyIcon();
+            this.PasteButton.Content = resource.GetString("/Menus/Selection_Paste");
+            this.PasteButton.Tag = new PasteIcon();
+            this.ClearButton.Content = resource.GetString("/Menus/Selection_Clear");
+            this.ClearButton.Tag = new ClearIcon();
 
-            this.ExtractButton.Text = "Extract";// resource.GetString("/Menus/Selection_Extract");
-            this.ExtractButton.EnabledIcon = new ExtractEnabledIcon();
-            this.ExtractButton.DisabledIcon = new ExtractDisabledIcon();
-            this.MergeButton.Text = "Merge";// resource.GetString("/Menus/Selection_Merge");
-            this.MergeButton.EnabledIcon = new MergeEnabledIcon();
-            this.MergeButton.DisabledIcon = new MergeDisabledIcon();
+            this.ExtractButton.Content = "Extract";// resource.GetString("/Menus/Selection_Extract");
+            this.ExtractButton.Tag = new ExtractIcon();
+            this.MergeButton.Content = "Merge";// resource.GetString("/Menus/Selection_Merge");
+            this.MergeButton.Tag = new MergeIcon();
 
-            this.AllButton.Text = resource.GetString("/Menus/Selection_All");
-            this.AllButton.EnabledIcon = new AllEnabledIcon();
-            this.AllButton.DisabledIcon = new AllDisabledIcon();
-            this.DeselectButton.Text = resource.GetString("/Menus/Selection_Deselect");
-            this.DeselectButton.EnabledIcon = new DeselectEnabledIcon();
-            this.DeselectButton.DisabledIcon = new DeselectDisabledIcon();
-            this.PixelButton.Text = "Pixel";// resource.GetString("/Menus/Selection_Pixel");
-            this.PixelButton.EnabledIcon = new PixelEnabledIcon();
-            this.PixelButton.DisabledIcon = new PixelDisabledIcon();
-            this.InvertButton.Text = resource.GetString("/Menus/Selection_Invert");
-            this.InvertButton.EnabledIcon = new InvertEnabledIcon();
-            this.InvertButton.DisabledIcon = new InvertDisabledIcon();
+            this.AllButton.Content = resource.GetString("/Menus/Selection_All");
+            this.AllButton.Tag = new AllIcon();
+            this.DeselectButton.Content = resource.GetString("/Menus/Selection_Deselect");
+            this.DeselectButton.Tag = new DeselectIcon();
+            this.PixelButton.Content = "Pixel";// resource.GetString("/Menus/Selection_Pixel");
+            this.PixelButton.Tag = new PixelIcon();
+            this.InvertButton.Content = resource.GetString("/Menus/Selection_Invert");
+            this.InvertButton.Tag = new InvertIcon();
 
-            this.FeatherButton.Text = "Feather";// resource.GetString("/Menus/Selection_Feather");
-            this.FeatherButton.EnabledIcon = new FeatherEnabledIcon();
-            this.FeatherButton.DisabledIcon = new FeatherDisabledIcon();
-            this.TransformButton.Text = "Transform";// resource.GetString("/Menus/Selection_Transform");
-            this.TransformButton.EnabledIcon = new TransformEnabledIcon();
-            this.TransformButton.DisabledIcon = new TransformDisabledIcon();
+            this.FeatherButton.Content = "Feather";// resource.GetString("/Menus/Selection_Feather");
+            this.FeatherButton.Tag = new FeatherEnabledIcon();
+            this.TransformButton.Content = "Transform";// resource.GetString("/Menus/Selection_Transform");
+            this.TransformButton.Tag = new TransformEnabledIcon();
         }
 
         //@Delegate

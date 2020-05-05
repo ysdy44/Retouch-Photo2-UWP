@@ -10,7 +10,7 @@
     >
 
     
-    <Border MinWidth="90" CornerRadius="2" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}">
+    <Border MinWidth="90" CornerRadius="2" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
         <ComboBox x:Name="ComboBox" SelectedIndex="0" BorderThickness="0" HorizontalAlignment="Stretch">
             <ComboBoxItem>
                 JPEG

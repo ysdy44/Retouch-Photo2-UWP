@@ -12,7 +12,7 @@
 
     <Grid x:Name="RootGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
 
-        <Ellipse x:Name="Ellipse" Width="100" Height="100" StrokeThickness="1" Stroke="{ThemeResource AppStroke}" Fill="{ThemeResource AppFill}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Ellipse x:Name="Ellipse" Width="100" Height="100" StrokeThickness="1" Stroke="{ThemeResource AppBorderBrush}" Fill="{ThemeResource AppForeground}" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
         <Line x:Name="BlackLine" StrokeThickness="4" Stroke="{ThemeResource AppBorderBrush}"/>
         <Line x:Name="WhiteLine" StrokeThickness="2" Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}"/>

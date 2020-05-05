@@ -8,7 +8,7 @@
 ## Function description
 ![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/Retouch_Designer/ScreenShot/2019-7-12-Retouch_Photo2.jpg)
 
-Vector Graphics Editing Tool, you can transform, fill graphics, support layers, graphics combination.
+Vector Graphics Editing Tool, you can transform, fill graphics, support adjustment, effect, blend. brush,geometry, layers. If you think that the AI is too complex might as well try.
 
 
 ## Development environment

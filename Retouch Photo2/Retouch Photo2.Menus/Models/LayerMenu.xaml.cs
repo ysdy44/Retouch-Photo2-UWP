@@ -39,7 +39,7 @@ namespace Retouch_Photo2.Menus.Models
         {
             get
             {
-                switch (this.Mode)
+                switch (this._vsMode)
                 {
                     case ListViewSelectionMode.None:
                         return this.Disable;
@@ -106,6 +106,17 @@ namespace Retouch_Photo2.Menus.Models
         public LayerMenu()
         {
             this.InitializeComponent();
+            this.DataContext = this.SelectionViewModel;
+            this.ConstructDataContext
+            (
+                 path: nameof(this.SelectionViewModel.SelectionMode),
+                 dp: LayerMenu.ModeProperty
+            );
+            this.ConstructDataContext
+            (
+                 path: nameof(this.SelectionViewModel.IsGroupLayer),
+                 dp: LayerMenu.IsGroupLayerProperty
+            );
             this.ConstructStrings();
             this.ConstructMenu();
 
@@ -120,6 +131,20 @@ namespace Retouch_Photo2.Menus.Models
     /// </summary>
     public sealed partial class LayerMenu : UserControl, IMenu
     {
+        //DataContext
+        public void ConstructDataContext(string path, DependencyProperty dp)
+        {
+            // Create the binding description.
+            Binding binding = new Binding
+            {
+                Mode = BindingMode.OneWay,
+                Path = new PropertyPath(path)
+            };
+
+            // Attach the binding to the target.
+            this.SetBinding(dp, binding);
+        }
+
         //Strings
         private void ConstructStrings()
         {

@@ -106,7 +106,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BlendModeControls\BlendModeControl.xaml.cs">
+    <Compile Include="BlendModeControl.xaml.cs">
       <DependentUpon>BlendModeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icons\ColorBurnIcon.xaml.cs">
@@ -191,7 +191,7 @@
       <DependentUpon>VividLightIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TagTypeControls\TagTypeControl.xaml.cs">
+    <Compile Include="TagTypeControl.xaml.cs">
       <DependentUpon>TagTypeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="TagTypeHelper.cs" />
@@ -209,7 +209,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="BlendModeControls\BlendModeControl.xaml">
+    <Page Include="BlendModeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -321,7 +321,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="TagTypeControls\TagTypeControl.xaml">
+    <Page Include="TagTypeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

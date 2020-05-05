@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Controls
 
         public CanvasControl CanvasControl { get; private set; }
         public CanvasOperator CanvasOperator { get; private set; }
-        public bool IsHD { get; private set; }
+
 
         #region DependencyProperty
 
@@ -72,28 +72,24 @@ namespace Retouch_Photo2.Controls
         #endregion
 
 
-        //ViewModel
-        public void ConstructViewModel()
+        /// <summary>
+        /// CanvasControl Invalidate();
+        /// (Dpi and IsHD by InvalidateMode)
+        /// </summary>
+        /// <param name="invalidateMode"></param>
+        public void Invalidate(InvalidateMode invalidateMode)
         {
-            if (this.ViewModel.InvalidateAction == null)
+            switch (invalidateMode)
             {
-                this.ViewModel.InvalidateAction += (invalidateMode) =>
-                {
-                    switch (invalidateMode)
-                    {
-                        case InvalidateMode.Thumbnail:
-                            this.IsHD = false;
-                            this.CanvasControl.DpiScale = 0.5f;
-                            break;
-                        case InvalidateMode.HD:
-                            this.IsHD = true;
-                            this.CanvasControl.DpiScale = 1.0f;
-                            break;
-                    }
-
-                    this.CanvasControl.Invalidate();//Invalidate
-                };
+                case InvalidateMode.Thumbnail:
+                    this.CanvasControl.DpiScale = 0.5f;
+                    break;
+                case InvalidateMode.HD:
+                    this.CanvasControl.DpiScale = 1.0f;
+                    break;
             }
+
+            this.CanvasControl.Invalidate();//Invalidate
         }
 
 
@@ -121,7 +117,7 @@ namespace Retouch_Photo2.Controls
             //Card
             drawingSession.DrawCard(previousImage, this.ViewModel.CanvasTransformer, this.ShadowColor);
         }
-        private void _drawToolAndBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, bool isHD)
+        private void _drawToolAndBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession)
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             

@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -11,7 +12,8 @@ namespace Retouch_Photo2.Elements
     {
 
         #region DependencyProperty
-        
+
+
         /// <summary> Mode of <see cref = "CompositeModeControl" />. </summary>
         public MarqueeCompositeMode Mode
         {
@@ -25,40 +27,67 @@ namespace Retouch_Photo2.Elements
 
             if (e.NewValue is MarqueeCompositeMode value)
             {
-                con.ModeChanged(value);
+                con._vsIMode = value;
+                con.VisualState = con.VisualState;//State
             }
         }));
+               
 
-        private void ModeChanged(MarqueeCompositeMode mode)
+        /// <summary> IsOpen of <see cref = "CompositeModeControl" />. </summary>
+        public bool IsOpen
         {
-            bool isNew = (mode == MarqueeCompositeMode.New);
-            this.NewSegmented.Background = isNew ? this.AccentColor : this.UnAccentColor;
-            this.NewSegmented.Foreground = isNew ? this.CheckColor : this.UnCheckColor;
-
-            bool isAdd = (mode == MarqueeCompositeMode.Add);
-            this.AddSegmented.Background = isAdd ? this.AccentColor : this.UnAccentColor;
-            this.AddSegmented.Foreground = isAdd ? this.CheckColor : this.UnCheckColor;
-
-            bool isSubtract = (mode == MarqueeCompositeMode.Subtract);
-            this.SubtractSegmented.Background = isSubtract ? this.AccentColor : this.UnAccentColor;
-            this.SubtractSegmented.Foreground = isSubtract ? this.CheckColor : this.UnCheckColor;
-
-            bool isIntersect = (mode == MarqueeCompositeMode.Intersect);
-            this.IntersectSegmented.Background = isIntersect ? this.AccentColor : this.UnAccentColor;
-            this.IntersectSegmented.Foreground = isIntersect ? this.CheckColor : this.UnCheckColor;
+            get { return (bool)GetValue(IsOpenProperty); }
+            set { SetValue(IsOpenProperty, value); }
         }
+        /// <summary> Identifies the <see cref = "CompositeModeControl.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(CompositeModeControl), new PropertyMetadata(false));
+
 
         #endregion
-        
+
+
+        //@VisualState
+        MarqueeCompositeMode _vsIMode;
+        public VisualState VisualState
+        {
+            get
+            {
+                switch (this._vsIMode)
+                {
+                    case MarqueeCompositeMode.New: return this.New;
+                    case MarqueeCompositeMode.Add: return this.Add;
+                    case MarqueeCompositeMode.Subtract: return this.Subtract;
+                    case MarqueeCompositeMode.Intersect: return this.Intersect;
+                    default: return this.Normal;
+                }
+            }
+            set => VisualStateManager.GoToState(this, value.Name, false);
+        }
+
+
         //@Construct
         public CompositeModeControl()
         {
             this.InitializeComponent();
+            this.ConstructStrings();
+            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
 
-            this.NewSegmented.Tapped += (s, e) => this.Mode = MarqueeCompositeMode.New;
-            this.AddSegmented.Tapped += (s, e) => this.Mode = MarqueeCompositeMode.Add;
-            this.SubtractSegmented.Tapped += (s, e) => this.Mode = MarqueeCompositeMode.Subtract;
-            this.IntersectSegmented.Tapped += (s, e) => this.Mode = MarqueeCompositeMode.Intersect;
-        }         
+            this.NewBorder.Tapped += (s, e) => this.Mode = MarqueeCompositeMode.New;
+            this.AddBorder.Tapped += (s, e) => this.Mode = MarqueeCompositeMode.Add;
+            this.SubtractBorder.Tapped += (s, e) => this.Mode = MarqueeCompositeMode.Subtract;
+            this.IntersectBorder.Tapped += (s, e) => this.Mode = MarqueeCompositeMode.Intersect;
+        }
+        
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.NewToolTip.Content = resource.GetString("/ToolElements/CompositeMode_New");
+            this.AddToolTip.Content = resource.GetString("/ToolElements/CompositeMode_Add");
+            this.SubtractToolTip.Content = resource.GetString("/ToolElements/CompositeMode_Subtract");
+            this.IntersectToolTip.Content = resource.GetString("/ToolElements/CompositeMode_Intersect");
+        }
+
     }
 }

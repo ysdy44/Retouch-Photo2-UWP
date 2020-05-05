@@ -106,22 +106,21 @@
 
                                             </VisualStateManager.VisualStateGroups>
 
-                                            <ContentControl 
-                            MinWidth="200"
-                                Margin="4,0"                                                  
-                                Content="{TemplateBinding Tag}"
-                                Foreground="{TemplateBinding Foreground}"                                            
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"                                                   
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"                                                  
-                                />
+                                            <ContentPresenter x:Name="ContentPresenter"  
+                                                 MinWidth="200"
+                                                 Margin="4,0"                                                  
+                                                 Content="{TemplateBinding Content}"        
+                                                 ContentTemplate="{TemplateBinding ContentTemplate}"  
+                                                 ContentTransitions="{TemplateBinding ContentTransitions}"      
+                                                 Foreground="{TemplateBinding Foreground}"                                            
+                                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"                                                   
+                                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                             <Border x:Name="Border" Width="60" HorizontalAlignment="Left" Background="{ThemeResource SystemControlBackgroundAccentBrush}" Style="{StaticResource AppRoundedBorderStyle}">
-                                                <ContentPresenter x:Name="ContentPresenter" Content="{TemplateBinding Content}"                       
-                                                  ContentTemplate="{TemplateBinding ContentTemplate}"  
-                                                  ContentTransitions="{TemplateBinding ContentTransitions}"                        
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"                       
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
-                                                  Foreground="White"
-                                                  />
+                                                <ContentControl 
+                                                      Content="{TemplateBinding Tag}"                     
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"                       
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                                      Foreground="White"/>
                                             </Border>
                                         </StackPanel>
 
@@ -157,17 +156,23 @@
 
                         <!--Theme-->
                         <TextBlock x:Name="ThemeTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border MaxHeight="100" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel Orientation="Horizontal">
 
-                                <RadioButton x:Name="LightRadioButton" GroupName="Theme" Style="{StaticResource AppTapRadioButtonStyle}">
-                                    <FontIcon FontSize="20" Glyph="&#xE708;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                <RadioButton x:Name="LightRadioButton" GroupName="Theme" Style="{StaticResource AppIconRadioButtonStyle}">
+                                    <RadioButton.Tag>
+                                        <FontIcon FontSize="20" Glyph="&#xE708;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                    </RadioButton.Tag>
                                 </RadioButton>
-                                <RadioButton x:Name="DarkRadioButton" GroupName="Theme" Style="{StaticResource AppTapRadioButtonStyle}">
-                                    <FontIcon FontSize="26" Glyph="&#xE706;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                <RadioButton x:Name="DarkRadioButton" GroupName="Theme" Style="{StaticResource AppIconRadioButtonStyle}">
+                                    <RadioButton.Tag>
+                                        <FontIcon FontSize="26" Glyph="&#xE706;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                    </RadioButton.Tag>
                                 </RadioButton>
-                                <RadioButton x:Name="DefaultRadioButton" GroupName="Theme" Style="{StaticResource AppTapRadioButtonStyle}">
-                                    <FontIcon FontSize="22" Glyph="&#xE7E8;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                <RadioButton x:Name="DefaultRadioButton" GroupName="Theme" Style="{StaticResource AppIconRadioButtonStyle}">
+                                    <RadioButton.Tag>
+                                        <FontIcon FontSize="22" Glyph="&#xE7E8;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                    </RadioButton.Tag>
                                 </RadioButton>
 
                             </StackPanel>
@@ -179,21 +184,29 @@
 
                         <!--Layout-->
                         <TextBlock x:Name="LayoutTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border MaxHeight="100" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel Orientation="Horizontal">
 
-                                <RadioButton x:Name="PhoneButton" GroupName="Layout" Style="{StaticResource AppTapRadioButtonStyle}">
-                                    <FontIcon FontSize="22" Glyph="&#xE8EA;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                <RadioButton x:Name="PhoneButton" GroupName="Layout" Style="{StaticResource AppIconRadioButtonStyle}">
+                                    <RadioButton.Tag>
+                                        <FontIcon FontSize="22" Glyph="&#xE8EA;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                    </RadioButton.Tag>
                                 </RadioButton>
-                                <RadioButton x:Name="PadButton" GroupName="Layout" Style="{StaticResource AppTapRadioButtonStyle}">
-                                    <FontIcon FontSize="22" Glyph="&#xE70A;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                <RadioButton x:Name="PadButton" GroupName="Layout" Style="{StaticResource AppIconRadioButtonStyle}">
+                                    <RadioButton.Tag>
+                                        <FontIcon FontSize="22" Glyph="&#xE70A;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                    </RadioButton.Tag>
                                 </RadioButton>
-                                <RadioButton x:Name="PCButton" GroupName="Layout" Style="{StaticResource AppTapRadioButtonStyle}">
-                                    <FontIcon FontSize="22" Glyph="&#xF71E;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                <RadioButton x:Name="PCButton" GroupName="Layout" Style="{StaticResource AppIconRadioButtonStyle}">
+                                    <RadioButton.Tag>
+                                        <FontIcon FontSize="22" Glyph="&#xF71E;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                    </RadioButton.Tag>
                                 </RadioButton>
                                 <Rectangle Width="1" Fill="{ThemeResource AppBorderBrush}"/>
-                                <RadioButton x:Name="AdaptiveButton" GroupName="Layout" Style="{StaticResource AppTapRadioButtonStyle}">
-                                    <FontIcon FontSize="32" Glyph="&#xEBC6;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                <RadioButton x:Name="AdaptiveButton" GroupName="Layout" Style="{StaticResource AppIconRadioButtonStyle}">
+                                    <RadioButton.Tag>
+                                        <FontIcon FontSize="32" Glyph="&#xEBC6;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                    </RadioButton.Tag>
                                 </RadioButton>
 
                             </StackPanel>
@@ -214,12 +227,12 @@
 
                         <!--Key-->
                         <TextBlock x:Name="KeyTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <ToggleButton x:Name="IsCenterToggleButton" Content="Ctrl" IsChecked="{x:Bind KeyboardViewModel.IsCenter, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
-                        <ToggleButton x:Name="IsRatioToggleButton" Content="Shift" IsChecked="{x:Bind KeyboardViewModel.IsRatio, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
-                        <ToggleButton x:Name="IsSquareToggleButton" Content="Shift" IsChecked="{x:Bind KeyboardViewModel.IsSquare, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
-                        <ToggleButton x:Name="IsStepFrequencyToggleButton" Content="Space" IsChecked="{x:Bind KeyboardViewModel.IsStepFrequency, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+                        <ToggleButton x:Name="IsCenterToggleButton" Tag="Ctrl" IsChecked="{x:Bind KeyboardViewModel.IsCenter, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+                        <ToggleButton x:Name="IsRatioToggleButton" Tag="Shift" IsChecked="{x:Bind KeyboardViewModel.IsRatio, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+                        <ToggleButton x:Name="IsSquareToggleButton" Tag="Shift" IsChecked="{x:Bind KeyboardViewModel.IsSquare, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+                        <ToggleButton x:Name="IsStepFrequencyToggleButton" Tag="Space" IsChecked="{x:Bind KeyboardViewModel.IsStepFrequency, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
 
-                        <ToggleButton x:Name="FullScreenToggleButton" Content="Esc" IsChecked="{x:Bind KeyboardViewModel.IsFullScreen, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+                        <ToggleButton x:Name="FullScreenToggleButton" Tag="Esc" IsChecked="{x:Bind KeyboardViewModel.IsFullScreen, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
 
 
                         <ContentControl Height="12"/>
@@ -227,7 +240,7 @@
 
                         <!--Local-->
                         <TextBlock x:Name="LocalTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Button x:Name="LocalButton" HorizontalAlignment="Left" Style="{ThemeResource AppTagLineCircleButton}">
+                        <Button x:Name="LocalButton" HorizontalAlignment="Left" Style="{ThemeResource AppIconLineCircleButton}">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xE17C;" FontSize="24" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 <ContentControl Width="8"/>

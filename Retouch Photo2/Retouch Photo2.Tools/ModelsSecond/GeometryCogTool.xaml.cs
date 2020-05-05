@@ -308,7 +308,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Text = resource.GetString("/ToolsSecond/GeometryCog");
+            this._button.Content = resource.GetString("/ToolsSecond/GeometryCog");
+            this._button.Style = this.IconSelectedButtonStyle;
 
             this.CountTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCog_Count");
             this.InnerRadiusTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCog_InnerRadius");
@@ -322,13 +323,13 @@ namespace Retouch_Photo2.Tools.Models
         //@Content
         public ToolType Type => ToolType.GeometryCog;
         public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
+        public bool IsSelected { get => !this._button.IsEnabled; set => this._button.IsEnabled = !value; }
 
         public FrameworkElement Button => this._button;
         public FrameworkElement Page => this;
 
         readonly FrameworkElement _icon = new GeometryCogIcon();
-        readonly ComboBoxButton _button = new ComboBoxButton(new GeometryCogIcon());
+        readonly Button _button = new Button { Tag = new GeometryCogIcon()};
 
         private ILayer CreateLayer(Transformer transformer)
         {

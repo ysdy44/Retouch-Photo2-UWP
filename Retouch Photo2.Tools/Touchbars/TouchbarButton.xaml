@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="50"
-    d:DesignWidth="50"
+    d:DesignWidth="100"
     >
 
 
@@ -22,7 +22,7 @@
         
         <!--Foreground-->
         <SolidColorBrush x:Name="CheckColor" Color="White"/>
-        <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource AppTextColor}"/>
+        <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource SystemBaseHighColor}"/>
         
     </UserControl.Resources>
 
@@ -68,6 +68,9 @@
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootBorder" Storyboard.TargetProperty="Background">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AccentColor}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TipRectangle" Storyboard.TargetProperty="Fill">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckColor}" />
                         </ObjectAnimationUsingKeyFrames>
                         <PointerUpThemeAnimation Storyboard.TargetName="RootBorder" />
                     </Storyboard>

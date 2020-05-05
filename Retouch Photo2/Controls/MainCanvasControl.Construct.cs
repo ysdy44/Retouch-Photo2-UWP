@@ -44,8 +44,11 @@ namespace Retouch_Photo2.Controls
                 //Render & Crad
                 this._drawRenderAndCrad(args.DrawingSession);
 
-                //Tool & Bound     
-                this._drawToolAndBound(sender, args.DrawingSession, this.IsHD);
+                //Tool & Bound
+                if (this.ViewModel.CanvasHitTestVisible || this._isSingleStarted)
+                {
+                    this._drawToolAndBound(sender, args.DrawingSession);
+                }
 
                 //Ruler
                 if (this.ViewModel.CanvasRulerVisible)
@@ -94,6 +97,8 @@ namespace Retouch_Photo2.Controls
             };
             this.CanvasOperator.Single_Complete += (point) =>
             {
+                this._isSingleStarted = false;
+
                 //Tool
                 this.TipViewModel.Tool.Complete(this._singleStartingPoint, point, this._isSingleStarted);//Complete
 

@@ -15,6 +15,7 @@ using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Menus.Models
@@ -127,6 +128,12 @@ namespace Retouch_Photo2.Menus.Models
         public AdjustmentMenu()
         {
             this.InitializeComponent();
+            this.ConstructDataContext
+            (
+                 dataContext: this.SelectionViewModel,
+                 path: nameof(this.SelectionViewModel.AdjustmentManager),
+                 dp: AdjustmentMenu.AdjustmentManagerProperty
+            );
             this.ConstructStrings();
             this.ConstructMenu();
 
@@ -343,7 +350,23 @@ namespace Retouch_Photo2.Menus.Models
     /// Retouch_Photo2's the only <see cref = "AdjustmentMenu" />. 
     /// </summary>
     public sealed partial class AdjustmentMenu : UserControl, IMenu
-    {
+    {    
+        //DataContext
+        public void ConstructDataContext(object dataContext, string path, DependencyProperty dp)
+        {
+            this.DataContext = dataContext;
+
+            // Create the binding description.
+            Binding binding = new Binding
+            {
+                Mode = BindingMode.OneWay,
+                Path = new PropertyPath(path)
+            };
+
+            // Attach the binding to the target.
+            this.SetBinding(dp, binding);
+        }
+
         //Strings
         private void ConstructStrings()
         {

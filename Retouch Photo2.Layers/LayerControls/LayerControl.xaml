@@ -21,6 +21,7 @@
         <!--Foreground-->
         <SolidColorBrush x:Name="CheckColor" Color="White"/>
         <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource SystemBaseHighColor}"/>
+        <SolidColorBrush x:Name="HighlightColor" Color="{ThemeResource AppTextColor}"/>
 
         <!--Style-->
         <Style x:Key="OverlayStyle" TargetType="Border">
@@ -65,12 +66,12 @@
 
             <!--Visual-->
             <Button x:Name="VisualButton" Width="30" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                <FontIcon x:Name="VisualFontIcon" Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}" />
+                <FontIcon x:Name="VisualFontIcon" Glyph="&#xE7B3;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}" />
             </Button>
             
             <!--Expaned-->
             <Button x:Name="ExpanedButton" Width="30" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                <FontIcon x:Name="ExpanedFontIcon" FontSize="14" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                <FontIcon x:Name="ExpanedFontIcon" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
             
         </StackPanel>

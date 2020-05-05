@@ -117,6 +117,66 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ArrowTail_Arrow" xml:space="preserve">
+    <value>箭头</value>
+  </data>
+  <data name="ArrowTail_None" xml:space="preserve">
+    <value>无</value>
+  </data>
+  <data name="BrushType_Color" xml:space="preserve">
+    <value>颜色</value>
+  </data>
+  <data name="BrushType_EllipticalGradient" xml:space="preserve">
+    <value>椭圆形</value>
+  </data>
+  <data name="BrushType_Image" xml:space="preserve">
+    <value>图像</value>
+  </data>
+  <data name="BrushType_LinearGradient" xml:space="preserve">
+    <value>线性</value>
+  </data>
+  <data name="BrushType_None" xml:space="preserve">
+    <value>无</value>
+  </data>
+  <data name="BrushType_RadialGradient" xml:space="preserve">
+    <value>径向</value>
+  </data>
+  <data name="Color_Circle" xml:space="preserve">
+    <value>色环</value>
+  </data>
+  <data name="Color_HSV" xml:space="preserve">
+    <value>HSV</value>
+  </data>
+  <data name="Color_PaletteHue" xml:space="preserve">
+    <value>调色板-色相</value>
+  </data>
+  <data name="Color_PaletteSaturation" xml:space="preserve">
+    <value>调色板-饱和度</value>
+  </data>
+  <data name="Color_PaletteValue" xml:space="preserve">
+    <value>调色板-值</value>
+  </data>
+  <data name="Color_RGB" xml:space="preserve">
+    <value>RGB</value>
+  </data>
+  <data name="Color_Swatches" xml:space="preserve">
+    <value>预设</value>
+  </data>
+  <data name="Color_Wheel" xml:space="preserve">
+    <value>色轮</value>
+  </data>
+  <data name="CompositeMode_Add" xml:space="preserve">
+    <value>增加</value>
+  </data>
+  <data name="CompositeMode_Intersect" xml:space="preserve">
+    <value>相交</value>
+  </data>
+  <data name="CompositeMode_New" xml:space="preserve">
+    <value>新建</value>
+  </data>
+  <data name="CompositeMode_Subtract" xml:space="preserve">
+    <value>减去</value>
+  </data>
   <data name="Convert" xml:space="preserve">
     <value>转换为曲线</value>
   </data>
@@ -127,37 +187,58 @@
     <value>中心缩放</value>
   </data>
   <data name="MoreCreate_CenterOff" xml:space="preserve">
-    <value>中心</value>
+    <value>无</value>
   </data>
   <data name="MoreCreate_CenterOn" xml:space="preserve">
-    <value>无</value>
+    <value>中心</value>
   </data>
   <data name="MoreCreate_Square" xml:space="preserve">
     <value>宽高相等</value>
   </data>
   <data name="MoreCreate_SquareOff" xml:space="preserve">
-    <value>正方形</value>
+    <value>无</value>
   </data>
   <data name="MoreCreate_SquareOn" xml:space="preserve">
-    <value>无</value>
+    <value>正方形</value>
   </data>
   <data name="MoreTransform_Center" xml:space="preserve">
     <value>中心缩放</value>
   </data>
   <data name="MoreTransform_CenterOff" xml:space="preserve">
-    <value>中心</value>
+    <value>无</value>
   </data>
   <data name="MoreTransform_CenterOn" xml:space="preserve">
-    <value>无</value>
+    <value>中心</value>
   </data>
   <data name="MoreTransform_Ratio" xml:space="preserve">
     <value>等比例缩放</value>
   </data>
   <data name="MoreTransform_RatioOff" xml:space="preserve">
-    <value>等比例</value>
+    <value>无</value>
   </data>
   <data name="MoreTransform_RatioOn" xml:space="preserve">
-    <value>无</value>
+    <value>等比例</value>
+  </data>
+  <data name="PenMode_Mode" xml:space="preserve">
+    <value>模式</value>
+  </data>
+  <data name="PenMode_Mode_Asymmetric" xml:space="preserve">
+    <value>非对称</value>
+  </data>
+  <data name="PenMode_Mode_Disconnected" xml:space="preserve">
+    <value>断开</value>
+  </data>
+  <data name="PenMode_Mode_Mirrored" xml:space="preserve">
+    <value>对称</value>
+  </data>
+  <data name="PenMode_Restriction" xml:space="preserve">
+    <value>限制</value>
+  </data>
+  <data name="PenMode_Restriction_Angle" xml:space="preserve">
+    <value>角度</value>
+  </data>
+  <data name="PenMode_Restriction_Length" xml:space="preserve">
+    <value>长度</value>
   </data>
   <data name="Stroke" xml:space="preserve">
     <value>描边</value>

@@ -179,11 +179,7 @@
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="adjustments:Filter">
-                            <StackPanel Orientation="Horizontal">
-                                <adjustments:Icon Opacity="0.3"/>
-                                <ContentControl Width="10"/>
-                                <TextBlock Text="{x:Bind Name}"/>
-                            </StackPanel>
+                            <TextBlock Text="{x:Bind Name}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

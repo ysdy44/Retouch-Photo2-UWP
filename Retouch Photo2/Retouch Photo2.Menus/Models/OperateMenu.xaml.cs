@@ -10,6 +10,7 @@ using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
 
 namespace Retouch_Photo2.Menus.Models
 {
@@ -131,6 +132,12 @@ namespace Retouch_Photo2.Menus.Models
         public OperateMenu()
         {
             this.InitializeComponent();
+            this.ConstructDataContext
+            (
+                 dataContext: this.SelectionViewModel,
+                 path: nameof(this.SelectionViewModel.SelectionMode),
+                 dp: OperateMenu.ModeProperty
+            );
             this.ConstructStrings();
             this.ConstructToolTip();
             this.ConstructMenu();
@@ -147,6 +154,22 @@ namespace Retouch_Photo2.Menus.Models
     /// </summary>
     public sealed partial class OperateMenu : UserControl, IMenu
     {
+        //DataContext
+        public void ConstructDataContext(object dataContext, string path, DependencyProperty dp)
+        {
+            this.DataContext = dataContext;
+
+            // Create the binding description.
+            Binding binding = new Binding
+            {
+                Mode = BindingMode.OneWay,
+                Path = new PropertyPath(path)
+            };
+
+            // Attach the binding to the target.
+            this.SetBinding(dp, binding);
+        }
+
         //Strings
         private void ConstructStrings()
         {
@@ -157,59 +180,43 @@ namespace Retouch_Photo2.Menus.Models
 
             this.TransformTextBlock.Text = resource.GetString("/Operates/Transform");
             this.FlipHorizontalToolTip.Content = resource.GetString("/Operates/Transform_FlipHorizontal");
-            this.FlipHorizontalButton.EnabledIcon = new FlipHorizontalEnabledIcon();
-            this.FlipHorizontalButton.DisabledIcon = new FlipHorizontalDisabledIcon();
+            this.FlipHorizontalButton.Content = new FlipHorizontalIcon();
             this.FlipVerticalToolTip.Content = resource.GetString("/Operates/Transform_FlipVertical");
-            this.FlipVerticalButton.EnabledIcon = new FlipVerticalEnabledIcon();
-            this.FlipVerticalButton.DisabledIcon = new FlipVerticalDisabledIcon();
+            this.FlipVerticalButton.Content = new FlipVerticalIcon();
             this.RotateLeftToolTip.Content = resource.GetString("/Operates/Transform_RotateLeft");
-            this.RotateLeftButton.EnabledIcon = new RotateLeftEnabledIcon();
-            this.RotateLeftButton.DisabledIcon = new RotateLeftDisabledIcon();
+            this.RotateLeftButton.Content = new RotateLeftIcon();
             this.RotateRightToolTip.Content = resource.GetString("/Operates/Transform_RotateRight");
-            this.RotateRightButton.EnabledIcon = new RotateRightEnabledIcon();
-            this.RotateRightButton.DisabledIcon = new RotateRightDisabledIcon();
+            this.RotateRightButton.Content = new RotateRightIcon();
 
             this.ArrangeTextBlock.Text = resource.GetString("/Operates/Arrange");
             this.MoveBackToolTip.Content = resource.GetString("/Operates/Arrange_MoveBack");
-            this.MoveBackButton.EnabledIcon = new MoveBackEnabledIcon();
-            this.MoveBackButton.DisabledIcon = new MoveBackDisabledIcon();
+            this.MoveBackButton.Content = new MoveBackIcon();
             this.BackOneToolTip.Content = resource.GetString("/Operates/Arrange_BackOne");
-            this.BackOneButton.EnabledIcon = new BackOneEnabledIcon();
-            this.BackOneButton.DisabledIcon = new BackOneDisabledIcon();
+            this.BackOneButton.Content = new BackOneIcon();
             this.ForwardOneToolTip.Content = resource.GetString("/Operates/Arrange_ForwardOne");
-            this.ForwardOneButton.EnabledIcon = new ForwardOneEnabledIcon();
-            this.ForwardOneButton.DisabledIcon = new ForwardOneDisabledIcon();
+            this.ForwardOneButton.Content = new ForwardOneIcon();
             this.MoveFrontToolTip.Content = resource.GetString("/Operates/Arrange_MoveFront");
-            this.MoveFrontButton.EnabledIcon = new MoveFrontEnabledIcon();
-            this.MoveFrontButton.DisabledIcon = new MoveFrontDisabledIcon();
+            this.MoveFrontButton.Content = new MoveFrontIcon();
 
             this.HorizontallyTextBlock.Text = resource.GetString("/Operates/Horizontally");
             this.LeftToolTip.Content = resource.GetString("/Operates/Horizontally_Left");
-            this.LeftButton.EnabledIcon = new LeftEnabledIcon();
-            this.LeftButton.DisabledIcon = new LeftDisabledIcon();
+            this.LeftButton.Content = new LeftIcon();
             this.CenterToolTip.Content = resource.GetString("/Operates/Horizontally_Center");
-            this.CenterButton.EnabledIcon = new CenterEnabledIcon();
-            this.CenterButton.DisabledIcon = new CenterDisabledIcon();
+            this.CenterButton.Content = new CenterIcon();
             this.RightToolTip.Content = resource.GetString("/Operates/Horizontally_Right");
-            this.RightButton.EnabledIcon = new RightEnabledIcon();
-            this.RightButton.DisabledIcon = new RightDisabledIcon();
+            this.RightButton.Content = new RightIcon();
             this.HorizontallySymmetryToolTip.Content = resource.GetString("/Operates/Horizontally_Symmetry");
-            this.HorizontallySymmetryButton.EnabledIcon = new HorizontallySymmetryEnabledIcon();
-            this.HorizontallySymmetryButton.DisabledIcon = new HorizontallySymmetryDisabledIcon();
+            this.HorizontallySymmetryButton.Content = new HorizontallySymmetryIcon();
 
             this.VerticallyTextBlock.Text = resource.GetString("/Operates/Vertically");
             this.TopToolTip.Content = resource.GetString("/Operates/Vertically_Top");
-            this.TopButton.EnabledIcon = new TopEnabledIcon();
-            this.TopButton.DisabledIcon = new TopDisabledIcon();
+            this.TopButton.Content = new TopIcon();
             this.MiddleToolTip.Content = resource.GetString("/Operates/Vertically_Middle");
-            this.MiddleButton.EnabledIcon = new MiddleEnabledIcon();
-            this.MiddleButton.DisabledIcon = new MiddleDisabledIcon();
+            this.MiddleButton.Content = new MiddleIcon();
             this.BottomToolTip.Content = resource.GetString("/Operates/Vertically_Bottom");
-            this.BottomButton.EnabledIcon = new BottomEnabledIcon();
-            this.BottomButton.DisabledIcon = new BottomDisabledIcon();
+            this.BottomButton.Content = new BottomIcon();
             this.VerticallySymmetryToolTip.Content = resource.GetString("/Operates/Vertically_Symmetry");
-            this.VerticallySymmetryButton.EnabledIcon = new VerticallySymmetryEnabledIcon();
-            this.VerticallySymmetryButton.DisabledIcon = new VerticallySymmetryDisabledIcon();
+            this.VerticallySymmetryButton.Content = new VerticallySymmetryIcon();
         }
 
         //ToolTip

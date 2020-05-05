@@ -8,6 +8,7 @@
     xmlns:transformers="using:FanKit.Transformers"
     xmlns:hSVColorPickers="using:HSVColorPickers"
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     Padding="0"
     Width="480" 
     Height="Auto"
@@ -28,7 +29,7 @@
         <transformers:CanvasOperator x:Name="CanvasOperator" DestinationControl="{x:Bind CanvasControl}"/>
         <!--Flyout-->
         <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <hSVColorPickers:ColorPicker x:Name="ColorPicker" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+            <elements:ColorPicker2 x:Name="ColorPicker"/>
         </Flyout>
     </UserControl.Resources>
 
@@ -84,16 +85,14 @@
 
             <!--Offset-->
             <TextBlock x:Name="OffsetTextBlock" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" Style="{StaticResource AppTextBlock}"/>
-            <Border Grid.Column="1" Grid.Row="0" Style="{StaticResource AppRoundedBorderStyle}">
-                <hSVColorPickers:NumberPicker x:Name="OffsetPicker" Width="Auto" Minimum="0" Maximum="100" Unit="%" HorizontalAlignment="Stretch" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-            </Border>
+            <hSVColorPickers:NumberPicker x:Name="OffsetPicker" Grid.Column="1" Grid.Row="0" Minimum="0" Maximum="100" Unit="%" 
+                         ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
 
 
             <!--A-->
             <TextBlock x:Name="AlphaTextBlock" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" Style="{StaticResource AppTextBlock}"/>
-            <Border Grid.Column="1" Grid.Row="2" Style="{StaticResource AppRoundedBorderStyle}">
-                <hSVColorPickers:NumberPicker x:Name="AlphaPicker" Width="Auto" Minimum="0" Maximum="255" HorizontalAlignment="Stretch" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-            </Border>
+            <hSVColorPickers:NumberPicker x:Name="AlphaPicker" Grid.Column="1" Grid.Row="2" Minimum="0" Maximum="255"
+                         ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
             
             
             <!--Color-->

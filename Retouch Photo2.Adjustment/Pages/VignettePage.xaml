@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hsvColorPickers="using:HSVColorPickers"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignHeight="400"
     d:DesignWidth="200"
@@ -12,7 +13,7 @@
 
     <Page.Resources>
         <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <hsvColorPickers:ColorPicker x:Name="ColorPicker" Width="200"/>
+            <elements:ColorPicker2 x:Name="ColorPicker" Width="200"/>
         </Flyout>
     </Page.Resources>
 

@@ -227,11 +227,11 @@
                 <ToggleButton x:Name="TitleToggleButton" Visibility="Collapsed" Grid.Column="1" HorizontalAlignment="Stretch" Background="Red"/> 
 
                 <Button x:Name="_CloseButton" Visibility="Collapsed" Grid.Column="2" Style="{StaticResource ButtonStyle}">
-                    <FontIcon Glyph="&#xE10A;" FontSize="18" FontFamily="{StaticResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+                    <FontIcon Glyph="&#xE10A;" FontSize="18" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                 </Button>
 
                 <Button x:Name="_StateButton" Visibility="Collapsed" Grid.Column="3" Style="{StaticResource ButtonStyle}">
-                    <FontIcon x:Name="StateIcon" Glyph="&#xE840;" FontSize="18" FontFamily="{StaticResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+                    <FontIcon x:Name="StateIcon" Glyph="&#xE840;" FontWeight="Bold" FontSize="18" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                 </Button>
 
                 <Button x:Name="_BackButton" Visibility="Collapsed" Grid.Column="0" Style="{StaticResource ButtonStyle}">
@@ -241,13 +241,13 @@
                         <animations:TranslationAnimation Duration="0:0:0.4" From="25,0,0" To="0,0,0"/>
                         <animations:OpacityAnimation Duration="0:0:0.5" From="0.0" To="1.0"/>
                     </animations:Implicit.ShowAnimations>
-                    
-                    <FontIcon Glyph="&#xE0A6;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+
+                    <FontIcon Glyph="&#xE0A6;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
                 </Button>
 
                 <Border x:Name="ResetBorder" Visibility="Collapsed" Grid.Column="3">
                     <Button x:Name="_ResetButton" Visibility="Visible" Style="{StaticResource ButtonStyle}">
-                        <FontIcon Glyph="&#xE149;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+                        <FontIcon Glyph="&#xE149;" FontSize="18" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                     </Button>
                 </Border>
 

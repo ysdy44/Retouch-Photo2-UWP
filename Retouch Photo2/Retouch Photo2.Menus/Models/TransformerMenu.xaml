@@ -6,7 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:transformers="using:FanKit.Transformers"
     xmlns:pickers="using:HSVColorPickers"
-    xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:menus="using:Retouch_Photo2.Menus"
     mc:Ignorable="d"
     d:DesignWidth="200"
@@ -38,90 +37,88 @@
         
         
         <menus:MenuExpander.MainPage>
-            <Grid MinHeight="165">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="2"/>
-                </Grid.RowDefinitions>
-
-                <!--Width Height-->
-                <TextBlock x:Name="WidthTextBlock" Grid.Column="0" Grid.Row="0" Style="{StaticResource AppTextBlock}"/>
-                <Border Grid.Column="0" Grid.Row="1" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
-                    <pickers:NumberPicker x:Name="WPicker" Width="Auto" Height="Auto" Unit="dp" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-                </Border>
-                <TextBlock x:Name="HeightTextBlock" Grid.Column="2" Grid.Row="0" Style="{StaticResource AppTextBlock}"/>
-                <Border Grid.Column="2" Grid.Row="1" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
-                    <pickers:NumberPicker x:Name="HPicker" Width="Auto" Height="Auto" Unit="dp" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-                </Border>
+            <StackPanel MinHeight="165" Padding="1,4">
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="44"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
 
 
-                <!--Ratio-->
-                <ToggleButton x:Name="RatioToggleControl" Grid.Column="1" Grid.Row="1" IsChecked="{x:Bind IsRatio,Mode=TwoWay}" Style="{StaticResource AppCircleToggleButtonStyle}">
-                    <ToolTipService.ToolTip>
-                        <ToolTip x:Name="RatioScalingToolTip" Placement="Top" Style="{StaticResource AppToolTip}"/>
-                    </ToolTipService.ToolTip>
-                    <FontIcon Glyph="&#x1F512;" FontSize="18" FontFamily="Segoe UI Symbol"/>
-                </ToggleButton>
+                    <!--Ratio-->
+                    <ToggleButton x:Name="RatioToggleControl" Grid.Column="1" Margin="0,26" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource AppCircleToggleButtonStyle}"
+                                  IsChecked="{x:Bind IsRatio,Mode=TwoWay}" >
+                        <ToolTipService.ToolTip>
+                            <ToolTip x:Name="RatioScalingToolTip" Placement="Top" Style="{StaticResource AppToolTip}"/>
+                        </ToolTipService.ToolTip>
+                        <FontIcon Glyph="&#x1F512;" FontSize="18" FontFamily="Segoe UI Symbol"/>
+                    </ToggleButton>
+                    
+                    
+                    <StackPanel Grid.Column="0">
+                       
+                        <!--Width-->
+                        <TextBlock x:Name="WidthTextBlock" Style="{StaticResource AppTextBlock}"/>
+                        <pickers:NumberPicker x:Name="WPicker" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                       
+                        <!--Rotate-->
+                        <TextBlock x:Name="RotateTextBlock" Style="{StaticResource AppTextBlock}"/>
+                        <pickers:NumberPicker x:Name="RPicker" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                        
+                        <!--X-->
+                        <TextBlock x:Name="XTextBlock"  Style="{StaticResource AppTextBlock}"/>
+                        <pickers:NumberPicker x:Name="XPicker" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                            <pickers:NumberPicker.BorderBrush>
+                                <SolidColorBrush x:Name="XBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
+                            </pickers:NumberPicker.BorderBrush>
+                        </pickers:NumberPicker>
+
+                    </StackPanel>
 
 
-                <!--Rotate Skew-->
-                <TextBlock x:Name="RotateTextBlock" Grid.Column="0" Grid.Row="2" Style="{StaticResource AppTextBlock}"/>
-                <Border Grid.Column="0" Grid.Row="3" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
-                    <pickers:NumberPicker x:Name="RPicker" Width="Auto" Height="Auto" Unit="º" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-                </Border>
-                <TextBlock x:Name="SkewTextBlock" Grid.Column="2" Grid.Row="2" Style="{StaticResource AppTextBlock}"/>
-                <Border Grid.Column="2" Grid.Row="3" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
-                    <pickers:NumberPicker x:Name="SPicker" Width="Auto" Height="Auto" Unit="º" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-                </Border>
+                    <StackPanel Grid.Column="2">
+                        
+                        <!--Height-->
+                        <TextBlock x:Name="HeightTextBlock" Style="{StaticResource AppTextBlock}"/>
+                        <pickers:NumberPicker x:Name="HPicker" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
 
+                        <!--Skew-->
+                        <TextBlock x:Name="SkewTextBlock" Style="{StaticResource AppTextBlock}"/>
+                        <pickers:NumberPicker x:Name="SPicker" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
 
-                <!--X Y-->
-                <TextBlock x:Name="XTextBlock" Grid.Column="0" Grid.Row="4" Style="{StaticResource AppTextBlock}"/>
-                <Border Grid.Column="0" Grid.Row="5" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
-                    <Border.BorderBrush>
-                        <SolidColorBrush x:Name="XBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
-                    </Border.BorderBrush>
-                    <pickers:NumberPicker x:Name="XPicker" Width="Auto" Height="Auto" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-                </Border>
-                <TextBlock x:Name="YTextBlock" Grid.Column="2" Grid.Row="4" Style="{StaticResource AppTextBlock}"/>
-                <Border Grid.Column="2" Grid.Row="5" Margin="2,0" Style="{StaticResource AppRoundedBorderStyle}">
-                    <Border.BorderBrush>
-                        <SolidColorBrush x:Name="YBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
-                    </Border.BorderBrush>
-                    <pickers:NumberPicker x:Name="YPicker" Width="Auto" Height="Auto" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-                </Border>
+                        <!--Y-->
+                        <TextBlock x:Name="YTextBlock" Style="{StaticResource AppTextBlock}"/>
+                        <pickers:NumberPicker x:Name="YPicker" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                            <pickers:NumberPicker.BorderBrush>
+                                <SolidColorBrush x:Name="YBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
+                            </pickers:NumberPicker.BorderBrush>
+                        </pickers:NumberPicker>
+
+                    </StackPanel>
+                    
+
+                </Grid>
 
 
                 <!--IndicatorControl-->
-                <transformers:IndicatorControl x:Name="IndicatorControl" Grid.Row="6" Grid.ColumnSpan="3" Background="{ThemeResource AppFill}" BorderBrush="{ThemeResource AppStroke}">
+                <transformers:IndicatorControl x:Name="IndicatorControl" Background="{ThemeResource AppForeground}" BorderBrush="{ThemeResource AppStroke}">
                     <ToolTipService.ToolTip>
                         <ToolTip x:Name="IndicatorToolTip" Placement="Top" Style="{StaticResource AppToolTip}"/>
                     </ToolTipService.ToolTip>
                 </transformers:IndicatorControl>
 
-                <!--RemoteButton-->
-                <Border Margin="2" Grid.ColumnSpan="3" Grid.Row="7" Style="{StaticResource AppRoundedBorderStyle}">
-                    <Button x:Name="RemoteButton" Height="36" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
-                        <RelativePanel>
-                            <TextBlock x:Name="RemoteTextBlock" TextTrimming="CharacterEllipsis" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignLeftWithPanel="True"/>
-                            <FontIcon Margin="4,0" FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
-                        </RelativePanel>
-                    </Button>
-                </Border>
 
-            </Grid>
+                <!--RemoteButton-->
+                <Button x:Name="RemoteButton" Style="{StaticResource AppIconRoundedButtonStyle}">
+                    <Button.Tag>
+                        <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                    </Button.Tag>
+                </Button>
+                
+
+            </StackPanel>
         </menus:MenuExpander.MainPage>
 
 

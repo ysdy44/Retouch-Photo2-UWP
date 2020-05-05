@@ -167,9 +167,6 @@
     <Compile Include="ModelsSecond\GeometryRoundRectLayer.cs" />
     <Compile Include="ModelsSecond\GeometryStarLayer.cs" />
     <Compile Include="ModelsSecond\GeometryTriangleLayer.cs" />
-    <Compile Include="Icons\AcrylicIcon.xaml.cs">
-      <DependentUpon>AcrylicIcon.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Icons\GeometryCurveIcon.xaml.cs">
       <DependentUpon>GeometryCurveIcon.xaml</DependentUpon>
     </Compile>
@@ -282,10 +279,6 @@
     <Page Include="IconsSecond\GeometryTriangleIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Icons\AcrylicIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Icons\GeometryCurveIcon.xaml">
       <SubType>Designer</SubType>

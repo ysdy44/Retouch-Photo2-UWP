@@ -34,7 +34,7 @@
                 <VisualState x:Name="Selected">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_RootGrid" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppFill}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppForeground}" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                     <VisualState.Setters >

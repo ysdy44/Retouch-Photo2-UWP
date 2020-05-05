@@ -10,9 +10,8 @@
     xmlns:elementDialog="using:Retouch_Photo2.Elements.Dialogs"
     xmlns:elementDrawPages="using:Retouch_Photo2.Elements.DrawPages"
     xmlns:layers="using:Retouch_Photo2.Layers"
-    xmlns:toolElements="using:Retouch_Photo2.Tools.Elements"
     xmlns:models="using:Retouch_Photo2.Menus.Models"
-    xmlns:hsvColorPicker="using:HSVColorPickers"
+    xmlns:toolElements="using:Retouch_Photo2.Tools.Elements"
     NavigationCacheMode="Required"    
     mc:Ignorable="d"
     >
@@ -41,10 +40,10 @@
 
             <!--Flyout-->
             <Flyout x:Name="FillColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <hsvColorPicker:ColorPicker x:Name="FillColorPicker" Background="Transparent" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                <elements:ColorPicker2 x:Name="FillColorPicker"/>
             </Flyout>
             <Flyout x:Name="StrokeColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <hsvColorPicker:ColorPicker x:Name="StrokeColorPicker" Background="Transparent" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                <elements:ColorPicker2 x:Name="StrokeColorPicker"/>
             </Flyout>
             <Flyout x:Name="MoreTransformFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                 <toolElements:MoreTransformControl/>
@@ -65,22 +64,21 @@
                 </DoubleAnimationUsingKeyFrames>
             </Storyboard>
 
+
         </Grid.Resources>
 
 
         <elementDrawPages:DrawLayout x:Name="DrawLayout" 
                LeftIcon="{x:Bind IconConverter(TipViewModel.Tool),Mode=OneWay}"
                Touchbar="{x:Bind TipViewModel.TouchbarControl,Mode=OneWay}"                                             
-               Theme="{x:Bind RequestedTheme, Mode=OneWay}"
-               >
+               Theme="{x:Bind RequestedTheme, Mode=OneWay}">
 
             <!--FootPage-->
             <elementDrawPages:DrawLayout.FootPage>
                 <controls:FootPageControl x:Name="FootPageControl"       
                     Tool="{x:Bind TipViewModel.Tool,Mode=OneWay}"                         
                     Type="{x:Bind SelectionViewModel.Type,Mode=OneWay}"                         
-                    Mode="{x:Bind SelectionViewModel.SelectionMode,Mode=OneWay}"                    
-                    />
+                    Mode="{x:Bind SelectionViewModel.SelectionMode,Mode=OneWay}" />
             </elementDrawPages:DrawLayout.FootPage>
 
             <!--RightIcon-->
@@ -95,15 +93,17 @@
 
             <!--Canvas-->
             <elementDrawPages:DrawLayout.CenterChild>
-                <controls:MainCanvasControl x:Name="MainCanvasControl"
-                    AccentColor="{ThemeResource SystemAccentColor}" 
-                    ShadowColor="{ThemeResource AppStrokeColor}" 
-                    />
+                <controls:MainCanvasControl x:Name="MainCanvasControl"  AccentColor="{ThemeResource SystemAccentColor}" ShadowColor="{ThemeResource AppStrokeColor}"/>
             </elementDrawPages:DrawLayout.CenterChild>
+            
+            <!--LeftPanel-->
+            <elementDrawPages:DrawLayout.LeftPanel>
+                <controls:ToolsControl/>
+            </elementDrawPages:DrawLayout.LeftPanel>
 
             <!--Document-->
             <elementDrawPages:DrawLayout.DocumentChild>
-                <Button x:Name="DocumentButton" Width="Auto" Padding="10, 0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Foreground="{ThemeResource AppText}"/>
+                <Button x:Name="DocumentButton" Width="Auto" FontWeight="Bold" Padding="10, 0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Foreground="{ThemeResource AppText}"/>
             </elementDrawPages:DrawLayout.DocumentChild>
 
             <!--HeadLeft-->
@@ -117,7 +117,7 @@
                                 <ToolTip x:Name="ExportToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
-                                <FontIcon Glyph="&#xE105;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                <FontIcon Glyph="&#xE105;" FontSize="20" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarButton.CenterContent>
                         </elements:ExpandAppbarButton>
 
@@ -129,7 +129,7 @@
                                 <ToolTip x:Name="SetupToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
-                                <FontIcon Glyph="&#xE10E;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                <FontIcon Glyph="&#xE10E;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarButton.CenterContent>
                         </elements:ExpandAppbarButton>
 
@@ -140,7 +140,7 @@
                                 <ToolTip x:Name="RedoToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
-                                <FontIcon Glyph="&#xE10D;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                <FontIcon Glyph="&#xE10D;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarButton.CenterContent>
                         </elements:ExpandAppbarButton>
 
@@ -152,7 +152,7 @@
                                 <ToolTip x:Name="SetupToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
-                                <FontIcon Glyph="&#xE123;" FontSize="20" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                <FontIcon Glyph="&#xE123;" FontSize="20" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarButton.CenterContent>
                         </elements:ExpandAppbarButton>
 
@@ -165,7 +165,7 @@
                                 <ToolTip x:Name="RulerToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarToggleButton.CenterContent>
-                                <FontIcon Glyph="&#xE80A;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                <FontIcon Glyph="&#xE80A;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarToggleButton.CenterContent>
                         </elements:ExpandAppbarToggleButton>
 
@@ -176,7 +176,7 @@
                                 <ToolTip x:Name="FullScreenToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
-                                <FontIcon Glyph="&#xE1D9;" FontSize="16" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                <FontIcon Glyph="&#xE1D9;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarButton.CenterContent>
                         </elements:ExpandAppbarButton>
 
@@ -184,7 +184,7 @@
 
                         <elements:ExpandAppbarRepeatButton x:Name="TipButton" IsChecked="{x:Bind TipViewModel.IsOpen,Mode=TwoWay}">
                             <elements:ExpandAppbarRepeatButton.CenterContent>
-                                <FontIcon Glyph="&#xE897;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                <FontIcon Glyph="&#xE897;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarRepeatButton.CenterContent>
                         </elements:ExpandAppbarRepeatButton>
 
@@ -196,24 +196,8 @@
 
 
         <!--Menu-->
-        <Canvas x:Name="OverlayCanvas" IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}">
-            <!--MenuLayout-->
+        <Canvas x:Name="OverlayCanvas" IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}"/>
 
-            <models:SelectionMenu x:Name="SelectionMenu" Mode="{x:Bind SelectionViewModel.SelectionMode,Mode=OneWay}"/>
-            <models:OperateMenu x:Name="OperateMenu" Mode="{x:Bind SelectionViewModel.SelectionMode,Mode=OneWay}"/>
-            <models:AdjustmentMenu x:Name="AdjustmentMenu" AdjustmentManager="{x:Bind SelectionViewModel.AdjustmentManager,Mode=OneWay}"/>
-            <models:EffectMenu x:Name="EffectMenu" EffectManager="{x:Bind SelectionViewModel.EffectManager,Mode=OneWay}"/>
-            <models:TransformerMenu x:Name="TransformerMenu" 
-                           Tool="{x:Bind TipViewModel.Tool,Mode=OneWay}"
-                           DisabledRadian="{x:Bind SelectionViewModel.DsabledRadian,Mode=OneWay}"
-                           Mode="{x:Bind SelectionViewModel.SelectionMode,Mode=OneWay}"
-                           Transformer="{x:Bind SelectionViewModel.Transformer,Mode=OneWay}" />
-            <models:CharacterMenu x:Name="CharacterMenu"/>
-            <models:ColorMenu x:Name="ColorMenu"/>
-            <models:LayerMenu x:Name="LayerMenu" Mode="{x:Bind SelectionViewModel.SelectionMode,Mode=OneWay}"
-                           IsGroupLayer="{x:Bind SelectionViewModel.IsGroupLayer,Mode=OneWay}"/>
-            
-        </Canvas>
 
         <!--FullScreen-->
         <Button x:Name="UnFullScreenButton" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AppCircleButtonStyle}">

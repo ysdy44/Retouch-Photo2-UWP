@@ -123,20 +123,8 @@
   <data name="GeometryArrow_LeftTail" xml:space="preserve">
     <value>左端</value>
   </data>
-  <data name="GeometryArrow_LeftTailArrow" xml:space="preserve">
-    <value>箭头</value>
-  </data>
-  <data name="GeometryArrow_LeftTailNone" xml:space="preserve">
-    <value>无</value>
-  </data>
   <data name="GeometryArrow_RightTail" xml:space="preserve">
     <value>右端</value>
-  </data>
-  <data name="GeometryArrow_RightTailArrow" xml:space="preserve">
-    <value>箭头</value>
-  </data>
-  <data name="GeometryArrow_RightTailNone" xml:space="preserve">
-    <value>无</value>
   </data>
   <data name="GeometryArrow_Value" xml:space="preserve">
     <value>宽度</value>

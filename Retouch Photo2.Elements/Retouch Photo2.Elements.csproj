@@ -107,11 +107,32 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ApplicationLocalTextFileProvider.cs" />
-    <Compile Include="ComboBoxButtons\ComboBoxButton.xaml.cs">
-      <DependentUpon>ComboBoxButton.xaml</DependentUpon>
+    <Compile Include="ColorPicker2.xaml.cs">
+      <DependentUpon>ColorPicker2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ComboBoxButtons\ComboBoxSeparator.xaml.cs">
-      <DependentUpon>ComboBoxSeparator.xaml</DependentUpon>
+    <Compile Include="ColorPicker2Icons\CircleIcon.xaml.cs">
+      <DependentUpon>CircleIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ColorPicker2Icons\HSVIcon.xaml.cs">
+      <DependentUpon>HSVIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ColorPicker2Icons\PaletteHueIcon.xaml.cs">
+      <DependentUpon>PaletteHueIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ColorPicker2Icons\PaletteSaturationIcon.xaml.cs">
+      <DependentUpon>PaletteSaturationIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ColorPicker2Icons\PaletteValueIcon.xaml.cs">
+      <DependentUpon>PaletteValueIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ColorPicker2Icons\RGBIcon.xaml.cs">
+      <DependentUpon>RGBIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ColorPicker2Icons\SwatchesIcon.xaml.cs">
+      <DependentUpon>SwatchesIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ColorPicker2Icons\WheelIcon.xaml.cs">
+      <DependentUpon>WheelIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="CompositeModeControl.xaml.cs">
       <DependentUpon>CompositeModeControl.xaml</DependentUpon>
@@ -131,13 +152,13 @@
     <Compile Include="DialogBase.xaml.cs">
       <DependentUpon>DialogBase.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPages\AppbarAccentButton.xaml.cs">
+    <Compile Include="%24MainPages\AppbarAccentButton.xaml.cs">
       <DependentUpon>AppbarAccentButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPages\AppbarAccentCloseButton.xaml.cs">
+    <Compile Include="%24MainPages\AppbarAccentCloseButton.xaml.cs">
       <DependentUpon>AppbarAccentCloseButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPages\AppbarAccentPrimaryButton.xaml.cs">
+    <Compile Include="%24MainPages\AppbarAccentPrimaryButton.xaml.cs">
       <DependentUpon>AppbarAccentPrimaryButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExpandAppbars\ExpandAppbar.xaml.cs">
@@ -161,7 +182,7 @@
     <Compile Include="Photos\Photo.cs" />
     <Compile Include="Photos\Photo.Instance.cs" />
     <Compile Include="Photos\Photocopier.cs" />
-    <Compile Include="MainPages\MainLayout.xaml.cs">
+    <Compile Include="%24MainPages\MainLayout.xaml.cs">
       <DependentUpon>MainLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="OnOffSwitch.xaml.cs">
@@ -175,28 +196,22 @@
       <DependentUpon>RadiusAnimaPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="DeviceLayoutType.cs" />
-    <Compile Include="DrawPages\DrawLayout.xaml.cs">
+    <Compile Include="%24DrawPages\DrawLayout.xaml.cs">
       <DependentUpon>DrawLayout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DrawPages\DrawLayoutState.cs" />
-    <Compile Include="DrawPages\PhoneLayoutType.cs" />
-    <Compile Include="DrawPages\RenmaeDialog.xaml.cs">
-      <DependentUpon>RenmaeDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainPages\MainPageButton.xaml.cs">
-      <DependentUpon>MainPageButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainPages\MainPageState.cs" />
-    <Compile Include="SettingPages\AdaptiveWidthGrid.xaml.cs">
+    <Compile Include="%24DrawPages\DrawLayoutState.cs" />
+    <Compile Include="%24DrawPages\PhoneLayoutType.cs" />
+    <Compile Include="%24MainPages\MainPageState.cs" />
+    <Compile Include="%24SettingPages\AdaptiveWidthGrid.xaml.cs">
       <DependentUpon>AdaptiveWidthGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingPages\PadLayout.xaml.cs">
+    <Compile Include="%24SettingPages\PadLayout.xaml.cs">
       <DependentUpon>PadLayout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingPages\PCLayout.xaml.cs">
+    <Compile Include="%24SettingPages\PCLayout.xaml.cs">
       <DependentUpon>PCLayout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingPages\PhoneLayout.xaml.cs">
+    <Compile Include="%24SettingPages\PhoneLayout.xaml.cs">
       <DependentUpon>PhoneLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="XMLs\XML.Photo.cs" />
@@ -204,8 +219,8 @@
     <EmbeddedResource Include="Properties\Retouch_Photo.Elements.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="HsvColorPickers">
-      <Version>1.3.4</Version>
+    <PackageReference Include="HSVColorPickers">
+      <Version>1.3.5</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.7</Version>
@@ -224,11 +239,39 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ComboBoxButtons\ComboBoxButton.xaml">
+    <Page Include="ColorPicker2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ComboBoxButtons\ComboBoxSeparator.xaml">
+    <Page Include="ColorPicker2Icons\CircleIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ColorPicker2Icons\HSVIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ColorPicker2Icons\PaletteHueIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ColorPicker2Icons\PaletteSaturationIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ColorPicker2Icons\PaletteValueIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ColorPicker2Icons\RGBIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ColorPicker2Icons\SwatchesIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ColorPicker2Icons\WheelIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -252,15 +295,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPages\AppbarAccentButton.xaml">
+    <Page Include="%24MainPages\AppbarAccentButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPages\AppbarAccentCloseButton.xaml">
+    <Page Include="%24MainPages\AppbarAccentCloseButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPages\AppbarAccentPrimaryButton.xaml">
+    <Page Include="%24MainPages\AppbarAccentPrimaryButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -284,7 +327,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPages\MainLayout.xaml">
+    <Page Include="%24MainPages\MainLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -300,31 +343,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DrawPages\DrawLayout.xaml">
+    <Page Include="%24DrawPages\DrawLayout.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="DrawPages\RenmaeDialog.xaml">
+    <Page Include="%24SettingPages\AdaptiveWidthGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainPages\MainPageButton.xaml">
+    <Page Include="%24SettingPages\PadLayout.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SettingPages\AdaptiveWidthGrid.xaml">
+    <Page Include="%24SettingPages\PCLayout.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SettingPages\PadLayout.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SettingPages\PCLayout.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SettingPages\PhoneLayout.xaml">
+    <Page Include="%24SettingPages\PhoneLayout.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

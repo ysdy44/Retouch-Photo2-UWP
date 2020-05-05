@@ -106,7 +106,11 @@
     </Compile>
     <Compile Include="Controls\MainCanvasControl.Construct.cs" />
     <Compile Include="Controls\MainCanvasControl.cs" />
+    <Compile Include="Controls\ToolsControl.xaml.cs">
+      <DependentUpon>ToolsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DrawPage.FlyoutTool.cs" />
+    <Compile Include="DrawPage.ToolAndMenu.cs" />
     <Compile Include="DrawPage.xaml.cs">
       <DependentUpon>DrawPage.xaml</DependentUpon>
     </Compile>
@@ -188,7 +192,6 @@
     </Compile>
     <Compile Include="DrawPage.Construct.cs" />
     <Compile Include="DrawPage.Method.cs" />
-    <Compile Include="DrawPage.ToolAndMenu.cs" />
     <Compile Include="DrawPage.Transition.cs" />
     <Compile Include="FileUtils\FileUtil.cs" />
     <Compile Include="FileUtils\FileUtil.LocalFolder.cs" />
@@ -307,6 +310,8 @@
     <Content Include="XMLs\Filter.xml" />
     <Content Include="XMLs\FilterOriginal.xml" />
     <None Include="Retouch Photo_TemporaryKey.pfx" />
+    <PRIResource Include="Strings\zh-CN\Elements.resw" />
+    <PRIResource Include="Strings\en-US\Elements.resw" />
     <PRIResource Include="Strings\en-US\Characters.resw" />
     <PRIResource Include="Strings\en-US\Blends.resw" />
     <PRIResource Include="Strings\en-US\Adjustments.resw" />
@@ -408,6 +413,10 @@
     <Page Include="Controls\LayersControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ToolsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DrawPage.xaml">
       <SubType>Designer</SubType>
@@ -617,6 +626,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Style\Style.Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Style\Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -627,9 +640,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="HSVColorPickers">
-      <Version>1.3.4</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.7</Version>
     </PackageReference>

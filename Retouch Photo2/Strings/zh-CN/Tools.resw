@@ -147,24 +147,6 @@
   <data name="Brush_Type" xml:space="preserve">
     <value>类型</value>
   </data>
-  <data name="Brush_TypeColor" xml:space="preserve">
-    <value>颜色</value>
-  </data>
-  <data name="Brush_TypeEllipticalGradient" xml:space="preserve">
-    <value>椭圆形</value>
-  </data>
-  <data name="Brush_TypeImage" xml:space="preserve">
-    <value>图像</value>
-  </data>
-  <data name="Brush_TypeLinearGradient" xml:space="preserve">
-    <value>线性</value>
-  </data>
-  <data name="Brush_TypeNone" xml:space="preserve">
-    <value>无</value>
-  </data>
-  <data name="Brush_TypeRadialGradient" xml:space="preserve">
-    <value>径向</value>
-  </data>
   <data name="Crop" xml:space="preserve">
     <value>矢量裁剪工具</value>
   </data>
@@ -177,10 +159,7 @@
   <data name="Cursor" xml:space="preserve">
     <value>光标工具</value>
   </data>
-  <data name="Cursor_MultiMode_ToolTip" xml:space="preserve">
-    <value>多选模式</value>
-  </data>
-  <data name="Cursor_StepFrequency_ToolTip" xml:space="preserve">
+  <data name="Cursor_StepFrequency" xml:space="preserve">
     <value>步频</value>
   </data>
   <data name="Ellipse" xml:space="preserve">
@@ -200,27 +179,6 @@
   </data>
   <data name="Pen" xml:space="preserve">
     <value>钢笔工具</value>
-  </data>
-  <data name="PenFlyout_Mode" xml:space="preserve">
-    <value>模式</value>
-  </data>
-  <data name="PenFlyout_Mode_Asymmetric" xml:space="preserve">
-    <value>非对称</value>
-  </data>
-  <data name="PenFlyout_Mode_Disconnected" xml:space="preserve">
-    <value>断开</value>
-  </data>
-  <data name="PenFlyout_Mode_Mirrored" xml:space="preserve">
-    <value>对称</value>
-  </data>
-  <data name="PenFlyout_Restriction" xml:space="preserve">
-    <value>限制</value>
-  </data>
-  <data name="PenFlyout_Restriction_Angle" xml:space="preserve">
-    <value>角度</value>
-  </data>
-  <data name="PenFlyout_Restriction_Length" xml:space="preserve">
-    <value>长度</value>
   </data>
   <data name="Pen_AddOrMoveOff" xml:space="preserve">
     <value>移动</value>
@@ -261,13 +219,13 @@
   <data name="View_Radian" xml:space="preserve">
     <value>弧度</value>
   </data>
-  <data name="View_RadianClear_ToolTip" xml:space="preserve">
+  <data name="View_RadianClear" xml:space="preserve">
     <value>重置旋转弧度</value>
   </data>
   <data name="View_Scale" xml:space="preserve">
     <value>比例</value>
   </data>
-  <data name="View_ScaleClear_ToolTip" xml:space="preserve">
+  <data name="View_ScaleClear" xml:space="preserve">
     <value>重置比例</value>
   </data>
 </root>

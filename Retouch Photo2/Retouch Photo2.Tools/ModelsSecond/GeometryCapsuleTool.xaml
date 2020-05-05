@@ -10,6 +10,11 @@
     d:DesignWidth="400"
     >
 
+    <Page.Resources>
+        <Style x:Name="IconSelectedButtonStyle" TargetType="Button" BasedOn="{StaticResource AppIconSelectedButton}"/>
+    </Page.Resources>
+
+
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
         <StackPanel Orientation="Horizontal">
 

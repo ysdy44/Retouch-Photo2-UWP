@@ -57,6 +57,19 @@ namespace Retouch_Photo2.Controls
         public ColorEllipse(object dataContext, string path, DependencyProperty dp)
         {
             this.InitializeComponent();
+            this.ConstructDataContext(dataContext, path, dp);
+        }
+               
+
+        //DataContext
+        /// <summary>
+        /// Construct a DataContext. 
+        /// </summary>
+        /// <param name="dataContext">  Gets or sets the data context for FrameworkElement to participate in data binding. </param>
+        /// <param name="path"> The path string that constructs the path of the binding source property. </param>
+        /// <param name="dp"> The dependency property identifier for the property that is bound by the data. </param>
+        public void ConstructDataContext(object dataContext, string path, DependencyProperty dp)
+        {
             this.DataContext = dataContext;
 
             // Create the binding description.

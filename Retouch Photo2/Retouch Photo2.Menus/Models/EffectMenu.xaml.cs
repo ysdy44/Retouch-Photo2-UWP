@@ -8,6 +8,7 @@ using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
 
 namespace Retouch_Photo2.Menus.Models
 {
@@ -94,6 +95,12 @@ namespace Retouch_Photo2.Menus.Models
         public EffectMenu()
         {
             this.InitializeComponent();
+            this.ConstructDataContext
+            (
+                 dataContext: this.SelectionViewModel,
+                 path: nameof(this.SelectionViewModel.EffectManager),
+                 dp: EffectMenu.EffectManagerProperty
+            );
             this.ConstructStrings();
             this.ConstructMenu();
 
@@ -178,6 +185,22 @@ namespace Retouch_Photo2.Menus.Models
     /// </summary>
     public sealed partial class EffectMenu : UserControl, IMenu
     {
+        //DataContext
+        public void ConstructDataContext(object dataContext, string path, DependencyProperty dp)
+        {
+            this.DataContext = dataContext;
+
+            // Create the binding description.
+            Binding binding = new Binding
+            {
+                Mode = BindingMode.OneWay,
+                Path = new PropertyPath(path)
+            };
+
+            // Attach the binding to the target.
+            this.SetBinding(dp, binding);
+        }
+
         //Strings
         private void ConstructStrings()
         {

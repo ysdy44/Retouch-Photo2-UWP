@@ -107,7 +107,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BrushOperateMode.cs" />
-    <Compile Include="BrushTypeControls\BrushTypeControl.xaml.cs">
+    <Compile Include="BrushTypeControl.xaml.cs">
       <DependentUpon>BrushTypeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="BrushTypeIcons\ColorIcon.xaml.cs">
@@ -128,7 +128,7 @@
     <Compile Include="BrushTypeIcons\RadialGradientIcon.xaml.cs">
       <DependentUpon>RadialGradientIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FillOrStrokeControls\FillOrStrokeControl.xaml.cs">
+    <Compile Include="FillOrStrokeControl.xaml.cs">
       <DependentUpon>FillOrStrokeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="FillOrStrokeIcons\StrokeIcon.xaml.cs">
@@ -148,7 +148,7 @@
     <Compile Include="StopsPickers\StopsPicker.Method.cs" />
     <Compile Include="GradientBrushType.cs" />
     <Compile Include="BrushType.cs" />
-    <Compile Include="ShowControls\ShowControl.xaml.cs">
+    <Compile Include="ShowControl.xaml.cs">
       <DependentUpon>ShowControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="StopsPickers\StopsPicker.xaml.cs">
@@ -166,9 +166,6 @@
     <EmbeddedResource Include="Properties\Retouch_Photo.Brushs.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="HSVColorPickers">
-      <Version>1.3.4</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.7</Version>
     </PackageReference>
@@ -177,7 +174,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="BrushTypeControls\BrushTypeControl.xaml">
+    <Page Include="BrushTypeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -205,7 +202,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FillOrStrokeControls\FillOrStrokeControl.xaml">
+    <Page Include="FillOrStrokeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -217,7 +214,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ShowControls\ShowControl.xaml">
+    <Page Include="ShowControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

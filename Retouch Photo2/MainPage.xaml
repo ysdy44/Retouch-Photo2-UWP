@@ -22,6 +22,7 @@
 
 
     <Grid x:Name="RootGrid">
+        
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
@@ -79,7 +80,7 @@
                         <TextBlock x:Name="InitialTextBlock" HorizontalAlignment="Center" Foreground="{ThemeResource AppText}"/>
                         <ContentControl Height="6"/>
 
-                        <Button x:Name="InitialAddButton" Style="{StaticResource AppTagAccentLineCircleButton}">
+                        <Button x:Name="InitialAddButton" Style="{StaticResource AppIconAccentLineCircleButton}">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xE109;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 <ContentControl Width="8"/>
@@ -89,7 +90,7 @@
 
                         <Rectangle Height="1" Fill="{ThemeResource AppBorderBrush}" HorizontalAlignment="Stretch"/>
 
-                        <Button x:Name="InitialPhotoButton" Style="{StaticResource AppTagAccentLineCircleButton}">
+                        <Button x:Name="InitialPhotoButton" Style="{StaticResource AppIconAccentLineCircleButton}">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 <ContentControl Width="8"/>
@@ -97,7 +98,7 @@
                             </StackPanel>
                         </Button>
 
-                        <Button x:Name="InitialDestopButton" Style="{StaticResource AppTagAccentLineCircleButton}">
+                        <Button x:Name="InitialDestopButton" Style="{StaticResource AppIconAccentLineCircleButton}">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xEC4E;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 <ContentControl Width="8"/>

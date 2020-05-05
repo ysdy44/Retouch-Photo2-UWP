@@ -20,7 +20,7 @@
 
         <!--Center-->
         <TextBlock x:Name="CenterTextBlock" Style="{StaticResource AppTextBlock}"/>
-        <elements:OnOffSwitch x:Name="CenterOnOffSwitch" OnContent="None" OffContent="Center" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}"/>
+        <elements:OnOffSwitch x:Name="CenterOnOffSwitch" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}"/>
 
     </StackPanel>
 

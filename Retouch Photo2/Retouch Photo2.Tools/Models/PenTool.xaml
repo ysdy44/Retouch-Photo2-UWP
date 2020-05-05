@@ -12,7 +12,7 @@
     <Page.Resources>
         <!--Flyout-->
         <Flyout x:Name="Flyout" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <toolElements:PenFlyout x:Name="_penFlyout"/>
+            <toolElements:PenModeControl x:Name="_penFlyout"/>
         </Flyout>
     </Page.Resources>
 
@@ -38,7 +38,7 @@
 
             <TextBlock x:Name="InsertTextBlock" Style="{StaticResource AppTextBlock}"/>
             <Button x:Name="AddButton" Style="{StaticResource AppCircleButtonStyle}">
-                <FontIcon Glyph="&#xE109;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+                <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
             </Button>
 
             <AppBarSeparator/>

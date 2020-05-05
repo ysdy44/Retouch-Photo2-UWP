@@ -123,7 +123,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Text = resource.GetString("/ToolsSecond/GeometryRoundRect");
+            this._button.Content = resource.GetString("/ToolsSecond/GeometryRoundRect");
+            this._button.Style = this.IconSelectedButtonStyle;
 
             this.CornerTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryRoundRect_Corner");
             this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
@@ -133,13 +134,13 @@ namespace Retouch_Photo2.Tools.Models
         //@Content
         public ToolType Type => ToolType.GeometryRoundRect;
         public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
+        public bool IsSelected { get => !this._button.IsEnabled; set => this._button.IsEnabled = !value; }
 
         public FrameworkElement Button => this._button;
         public FrameworkElement Page => this;
 
         readonly FrameworkElement _icon = new GeometryRoundRectIcon();
-        readonly ComboBoxButton _button = new ComboBoxButton(new GeometryRoundRectIcon());
+        readonly Button _button = new Button { Tag = new GeometryRoundRectIcon()};
 
         private ILayer CreateLayer(Transformer transformer)
         {

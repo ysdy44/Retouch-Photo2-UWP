@@ -13,7 +13,6 @@
                 AppBackground: Background Color,
                 AppBorderBrush: Border Color,
             
-                AppFill: Highlight Color,
                 AppStroke: Shadow Color,
                 AppLinearBrush: Linear Brush,
             -->
@@ -28,8 +27,6 @@
                     <Color x:Key="AppBorderBrushColor" >#BEBCC7</Color>  
                     <SolidColorBrush x:Key="AppBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
 
-                    <Color x:Key="AppFillColor" >#FFFFFF</Color>
-                    <SolidColorBrush x:Key="AppFill" Color="{ThemeResource AppFillColor}"/>
                     <Color x:Key="AppStrokeColor" >#666b6791</Color>
                     <SolidColorBrush x:Key="AppStroke" Color="{ThemeResource AppStrokeColor}"/>
                     <Color x:Key="AppTextColor" >#99000000</Color>
@@ -54,8 +51,6 @@
                     <Color x:Key="AppBorderBrushColor" >#202020</Color>
                     <SolidColorBrush x:Key="AppBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
 
-                    <Color x:Key="AppFillColor" >#2B2B2B</Color>
-                    <SolidColorBrush x:Key="AppFill" Color="{ThemeResource AppFillColor}"/>
                     <Color x:Key="AppStrokeColor" >#AA000000</Color>
                     <SolidColorBrush x:Key="AppStroke" Color="{ThemeResource AppStrokeColor}"/>
                     <Color x:Key="AppTextColor" >#BBFFFFFF</Color>
@@ -76,6 +71,7 @@
             <!--Merged-->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ms-appx:///Style/Style.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Style/Style.Button.xaml"/>
                 <ResourceDictionary Source="ms-appx:///Style/Template.xaml"/>
 
                 <!--Version-->

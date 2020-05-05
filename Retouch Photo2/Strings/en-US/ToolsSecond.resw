@@ -123,20 +123,8 @@
   <data name="GeometryArrow_LeftTail" xml:space="preserve">
     <value>Left Tail</value>
   </data>
-  <data name="GeometryArrow_LeftTailArrow" xml:space="preserve">
-    <value>Arrow</value>
-  </data>
-  <data name="GeometryArrow_LeftTailNone" xml:space="preserve">
-    <value>None</value>
-  </data>
   <data name="GeometryArrow_RightTail" xml:space="preserve">
     <value>Right Tail</value>
-  </data>
-  <data name="GeometryArrow_RightTailArrow" xml:space="preserve">
-    <value>Arrow</value>
-  </data>
-  <data name="GeometryArrow_RightTailNone" xml:space="preserve">
-    <value>None</value>
   </data>
   <data name="GeometryArrow_Value" xml:space="preserve">
     <value>Width</value>

@@ -144,7 +144,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Text = resource.GetString("/ToolsSecond/GeometryTriangle");
+            this._button.Content = resource.GetString("/ToolsSecond/GeometryTriangle");
+            this._button.Style = this.IconSelectedButtonStyle;
 
             this.CenterTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryTriangle_Center");
             this.MirrorTextBlock.Text = resource.GetString("/ToolsSecond/GeometryTriangle_Mirror");
@@ -156,13 +157,13 @@ namespace Retouch_Photo2.Tools.Models
         //@Content
         public ToolType Type => ToolType.GeometryTriangle;
         public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
+        public bool IsSelected { get => !this._button.IsEnabled; set => this._button.IsEnabled = !value; }
 
         public FrameworkElement Button => this._button;
         public FrameworkElement Page => this;
 
         readonly FrameworkElement _icon = new GeometryTriangleIcon();
-        readonly ComboBoxButton _button = new ComboBoxButton(new GeometryTriangleIcon());
+        readonly Button _button = new Button { Tag = new GeometryTriangleIcon()};
 
         private ILayer CreateLayer(Transformer transformer)
         {

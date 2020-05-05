@@ -21,24 +21,24 @@ namespace Retouch_Photo2.Layers
             if (value.ToBool())
             {
                 this.ManipulationMode = ManipulationModes.TranslateY;
-                this.IconContentControl.Foreground =
-                    this.TextBlock.Foreground =
+                this.IconContentControl.Foreground = this.CheckColor;
+                this.SelectedFontIcon.Glyph = "\xEC61";
+                this.TextBlock.Foreground =
                     this.ExpanedFontIcon.Foreground =
                     this.SelectedFontIcon.Foreground =
                     this.VisualFontIcon.Foreground =
                     this.CheckColor;
-                this.SelectedFontIcon.Glyph = "\xEC61";
             }
             else
             {
                 this.ManipulationMode = ManipulationModes.System;
-                this.IconContentControl.Foreground =
+                this.IconContentControl.Foreground = this.HighlightColor;
+                this.SelectedFontIcon.Glyph = "\xECCA";
                     this.TextBlock.Foreground =
                     this.ExpanedFontIcon.Foreground =
                     this.SelectedFontIcon.Foreground =
                     this.VisualFontIcon.Foreground =
                     this.UnCheckColor;
-                this.SelectedFontIcon.Glyph = "\xECCA";
             }
         }
         public void SetOverlayMode(OverlayMode value)
