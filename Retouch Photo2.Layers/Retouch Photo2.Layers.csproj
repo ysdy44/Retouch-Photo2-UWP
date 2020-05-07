@@ -151,6 +151,7 @@
     <Compile Include="Icons\TextFrameIcon.xaml.cs">
       <DependentUpon>TextFrameIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LayerCollections\LayerCollection.Photocopier.cs" />
     <Compile Include="Layers\ITextLayer.cs" />
     <Compile Include="LayerCollections\LayerCollection.Add_Disengage.cs" />
     <Compile Include="LayerCollections\LayerCollection.Arrange_Children_Expand.cs" />

@@ -43,8 +43,7 @@ namespace Retouch_Photo2.Layers
         /// <param name="currentLayer"> The current layer. </param>
         public void ShiftSelectCurrentLayer(ILayer currentLayer)
         {
-            IList<ILayer> parentsChildren = (currentLayer.Parents == null) ?
-                this.RootLayers : currentLayer.Parents.Children;
+            IList<ILayer> parentsChildren = this.GetParentsChildren(currentLayer);
 
             //Recursive
             bool isFind = this._findShiftSelectedLayer(currentLayer, parentsChildren);

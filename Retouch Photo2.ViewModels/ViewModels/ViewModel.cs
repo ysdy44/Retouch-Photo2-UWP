@@ -65,29 +65,18 @@ namespace Retouch_Photo2.ViewModels
         #region Invalidate
 
 
-        /// <summary> Retouch_Photo2's the only <see cref = "Microsoft.Graphics.Canvas.UI.Xaml.CanvasControl" />. </summary>
-        public CanvasControl CanvasDevice { get; } = new CanvasControl();
+        /// <summary> Retouch_Photo2's the only <see cref = "Microsoft.Graphics.Canvas.UI.Xaml.CanvasDevice" />. </summary>
+        public CanvasDevice CanvasDevice { get; } = new CanvasDevice();
 
 
         /// <summary>
         /// Indicates that the contents of the CanvasControl need to be redrawn.
         /// </summary>
-        /// <param name="mode"> The invalidate mode </param>
-        public void Invalidate(InvalidateMode mode = InvalidateMode.None)
-        {
-            switch (mode)
-            {
-                case InvalidateMode.Thumbnail:
-                    this.CanvasDevice.DpiScale = 0.5f;
-                    break;
-                case InvalidateMode.HD:
-                    this.CanvasDevice.DpiScale = 1.0f;
-                    break;
-            }
+        /// <param name="mode"> invalidate mode </param>
+        public void Invalidate(InvalidateMode mode = InvalidateMode.None) => this.InvalidateAction?.Invoke(mode);
+        /// <summary> <see cref = "Action" /> of the <see cref = "ViewModel.Invalidate" />. </summary>
+        public Action<InvalidateMode> InvalidateAction { get; set; }
 
-            this.CanvasDevice.Invalidate();//Invalidate
-        }
-        
 
         #endregion
 

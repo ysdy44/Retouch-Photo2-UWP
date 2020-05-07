@@ -33,6 +33,32 @@ namespace Retouch_Photo2.Brushs.Models
         Transformer _startingDestination;
 
 
+        //@Construct
+        /// <summary>
+        /// Constructs a <see cref = "ImageBrush" />.
+        /// </summary>
+        public ImageBrush() { }
+        /// <summary>
+        /// Constructs a <see cref = "ImageBrush" />.
+        /// </summary>
+        /// <param name="transformer"> The transformer. </param>
+        public ImageBrush(Transformer transformer)
+        {
+            this.Source = transformer;
+            this.Destination = transformer;
+        }
+        /// <summary>
+        /// Constructs a <see cref = "ImageBrush" />.
+        /// </summary>
+        /// <param name="source"> The source transformer. </param>
+        /// <param name="destination"> The destination transformer. </param>
+        public ImageBrush(Transformer source, Transformer destination)
+        {
+            this.Source = source;
+            this.Destination = destination;
+        }
+
+
         public ICanvasBrush GetICanvasBrush(ICanvasResourceCreator resourceCreator)
         {         
             Photocopier photocopier = this.Photocopier;

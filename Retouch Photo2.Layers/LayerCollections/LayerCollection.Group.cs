@@ -17,17 +17,17 @@ namespace Retouch_Photo2.Layers
         public void GroupAllSelectedLayers()
         {
             //Layers
-            ILayer outermostLayerParents = this._findOutermostSelectedLayerParents();
-            IList<ILayer> outermostLayers = (outermostLayerParents == null) ? this.RootLayers : outermostLayerParents.Children;
+            ILayer parents = this._findOutermostSelectedLayerParents();
+            IList<ILayer> parentsChildren  = this.GetParentsChildren(parents);
 
             //Insert
-            ILayer insertIayer = outermostLayers.FirstOrDefault(e => e.SelectMode == SelectMode.Selected);
+            ILayer insertIayer = parentsChildren .FirstOrDefault(e => e.SelectMode == SelectMode.Selected);
             if (insertIayer == null) return;
-            int insertIndex = outermostLayers.IndexOf(insertIayer);
+            int insertIndex = parentsChildren .IndexOf(insertIayer);
 
             //GroupLayer
             ILayer groupLayer = this._createGroupLayer(insertIayer);
-            groupLayer.Parents = outermostLayerParents;
+            groupLayer.Parents = parents;
 
             //Temp
             {
@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Layers
             {
                 this._noneAllLayers(this.RootLayers);
 
-                outermostLayers.Insert(insertIndex, groupLayer);
+                parentsChildren .Insert(insertIndex, groupLayer);
                 groupLayer.SelectMode = SelectMode.Selected;
                 groupLayer.ExpandMode = ExpandMode.UnExpand;
             }

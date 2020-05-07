@@ -28,9 +28,7 @@ namespace Retouch_Photo2.Tools.Elements
                     IEnumerable<IEnumerable<Node>> nodess = destination.ConvertToCurves();
                     if (nodess == null) return;
                     {
-                        IList<ILayer> parentsChildren = (destination.Parents == null) ?
-                            this.ViewModel.Layers.RootLayers :
-                            destination.Parents.Children;
+                        IList<ILayer> parentsChildren = this.ViewModel.Layers.GetParentsChildren(destination);
 
                         int index = parentsChildren.IndexOf(destination);
 
@@ -50,9 +48,9 @@ namespace Retouch_Photo2.Tools.Elements
 
                         //Change tools group value.
                         {
-                            ITool penTool = this.TipViewModel.Tools.First(t => t != null && t.Type == ToolType.Pen);
-                            this.TipViewModel.Tool = penTool;
-                            this.TipViewModel.ToolGroupType(ToolType.Pen);
+                            ITool nodeTool = this.TipViewModel.Tools.First(t => t != null && t.Type == ToolType.Node);
+                            this.TipViewModel.Tool = nodeTool;
+                            this.TipViewModel.ToolGroupType(ToolType.Node);
                         }
 
                         this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();

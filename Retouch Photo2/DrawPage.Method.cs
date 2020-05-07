@@ -59,9 +59,10 @@ namespace Retouch_Photo2
             float scaleX = fileWidth / canvasWidth;
             float scaleY = fileHeight / canvasHeight;
             Matrix3x2 matrix = Matrix3x2.CreateScale(scaleX, scaleY);
-         
+
             //Render
-            CanvasRenderTarget renderTarget = new CanvasRenderTarget(this.ViewModel.CanvasDevice, fileWidth, fileHeight);
+            ICanvasResourceCreatorWithDpi canvasResource = this.MainCanvasControl.CanvasResourceCreatorWithDpi;
+            CanvasRenderTarget renderTarget = new CanvasRenderTarget(canvasResource, fileWidth, fileHeight);
             ICanvasImage canvasImage = this.MainCanvasControl.Render(matrix);
             using (CanvasDrawingSession drawingSession = renderTarget.CreateDrawingSession())
             {
@@ -90,52 +91,34 @@ namespace Retouch_Photo2
             string name = this.ViewModel.Name;
             int width = this.ViewModel.CanvasTransformer.Width;
             int height = this.ViewModel.CanvasTransformer.Height;
-            IEnumerable<ILayer> layers = this.ViewModel.Layers.RootLayers;
 
+            //Save Project File.
             Project project = new Project
             {
                 Name = name,
                 Width = width,
                 Height = height,
-                Layers = layers
+                Layers = this.ViewModel.Layers.RootLayers
             };
-
-            //Save thumbnail image.
+            await FileUtil.SaveProject(project);
+            
+            //Save Thumbnail Image.
             CanvasRenderTarget thumbnail = this.MainCanvasControl.RenderThumbnail(this.ViewModel.CanvasDevice, width, height);
             FileUtil.SaveThumbnailAsync(thumbnail, name);
+            
+            //Save Photos File and Delete useless.
+            IEnumerable<Photocopier> savedPhotocopiers = this.ViewModel.Layers.GetPhotocopiers();
+            IEnumerable<Photo> savedPhotos = FileUtil.GetPhotosAndDeleteUseless(Photo.Instances, savedPhotocopiers);
+            await FileUtil.SavePhotoFile(savedPhotos);
 
+            //Clear Photos
+            Photo.Instances.Clear();
+            
 
-            //Photos File
-            //Save project to zip file.
-
-            {
-                await FileUtil.SaveProject(project);
-
-                //@SavePhoto
-                {
-                    //Save Photo whitch "HasSavePhotocopier" is ""True"".            
-                    /// <see cref="Retouch_Photo2.Elements.XML.SavePhotocopier"/>
-                    IEnumerable<Photo> savedPhotos = from p in Photo.Instances where p.HasSavePhotocopier select p;
-                    await FileUtil.SavePhotoFile(savedPhotos);
-
-                    //Delete othors.
-                    IEnumerable<Photo> unSavedPhotos = from p in Photo.Instances where p.HasSavePhotocopier == false select p;
-                    foreach (Photo unSave in unSavedPhotos)
-                    {
-                        StorageFile item = await StorageFile.GetFileFromPathAsync(unSave.ImageFilePath);
-                        await item.DeleteAsync();
-                    }
-
-                    //Clear
-                    Photo.Instances.Clear();
-                }
-
-                //FileUtil
-                await FileUtil.CreateZipFile(name);
-
-                await FileUtil.DeleteAllInTemporaryFolder();
-            }
-
+            //FileUtil
+            await FileUtil.CreateZipFile(name);
+            await FileUtil.DeleteAllInTemporaryFolder();
+            
 
             //Clear
             this.SelectionViewModel.SetModeNone();

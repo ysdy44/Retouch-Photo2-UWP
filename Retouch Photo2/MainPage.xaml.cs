@@ -38,6 +38,9 @@ namespace Retouch_Photo2
             {
                 await this.ConstructSettingViewModel();
                 await this._lockLoaded();
+                
+                //FileUtil
+                await FileUtil.DeleteAllInTemporaryFolder();
             };
 
 

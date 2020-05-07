@@ -52,6 +52,19 @@ namespace Retouch_Photo2.Elements
 
 
         /// <summary>
+        /// Returns a boolean indicating whether the given <see cref="Photocopier"/> is equal to this <see cref="Photo"/> instance.
+        /// </summary>
+        /// <param name="other"> The <see cref="Photocopier"/> to compare this instance to. </param>
+        /// <returns> True if the other <see cref="Photocopier"/> is equal to this instance; False otherwise. </returns>
+        public bool Equals(Photocopier other)
+        {
+            if (this.Name != other.Name) return false;
+            if (this.FileType != other.FileType) return false;
+            if (this.FolderRelativeId != other.FolderRelativeId) return false;
+
+            return true;
+        }
+        /// <summary>
         /// Returns a boolean indicating whether the given <see cref="Photo"/> is equal to this <see cref="Photo"/> instance.
         /// </summary>
         /// <param name="other"> The <see cref="Photo"/> to compare this instance to. </param>

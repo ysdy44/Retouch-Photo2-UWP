@@ -25,7 +25,14 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Construct a image-layer.
         /// </summary>
-        public ImageLayer() { }
+        public ImageLayer()
+        {
+            base.Control = new LayerControl(this)
+            {
+                Icon = new ImageIcon(),
+                Text = this.ConstructStrings(),
+            };
+        }
         /// <summary>
         /// Construct a image-layer.
         /// </summary>
@@ -41,13 +48,13 @@ namespace Retouch_Photo2.Layers.Models
 
             base.StyleManager = new StyleManager
             {
-                FillBrush = new ImageBrush
+                FillBrush = new ImageBrush(transformer)
                 {
-                    Photocopier = photocopier,
-                    Source = transformer,
-                    Destination = transformer,
+                    Photocopier = photocopier
                 }
             };
+
+            base.TransformManager = new TransformManager(transformer);
         }
 
 

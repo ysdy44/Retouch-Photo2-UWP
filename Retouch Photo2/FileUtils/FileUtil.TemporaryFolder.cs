@@ -4,6 +4,7 @@ using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Storage;
@@ -65,7 +66,8 @@ namespace Retouch_Photo2
 
 
         /// <summary>
-        /// Construct a <see cref="Photo"/>(Source and ImageFilePath).
+        /// Construct a <see cref="Photo"/>
+        /// (Source and ImageFilePath).
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>
         /// <param name="photo"> The source photo. </param>
@@ -79,6 +81,45 @@ namespace Retouch_Photo2
                 photo.ImageFilePath = path;
             }
         }
+
+        /// <summary>
+        /// Get useful <see cref="Photo"/>s and Delete useless
+        /// (A <see cref="Photo"/> would be useless if it could't be found in saved <see cref="Photocopier"/>s).
+        /// </summary>
+        /// <param name="allPhotos"> The all photos. </param>
+        /// <param name="savedPhotocopiers"> The saved photocopiers. </param>
+        /// <returns> The useful photos. </returns>
+        public static IEnumerable<Photo> GetPhotosAndDeleteUseless(IEnumerable<Photo> allPhotos, IEnumerable<Photocopier> savedPhotocopiers)
+        {
+            foreach (Photo photo in allPhotos)
+            {
+                bool isAnyEquals = savedPhotocopiers.Any(p => photo.Equals(p));
+
+                if (isAnyEquals)
+                {
+                    //Get saved Photo
+                    yield return photo;
+                }
+                else
+                {
+                    //Delete useless.
+                    FileUtil.DeletePhotoImageFilePath(photo);
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Delete <see cref="Photo"/> ImageFilePath
+        /// </summary>
+        /// <param name="photo"> The source photo. </param>
+        public static async void DeletePhotoImageFilePath(Photo photo)
+        {
+            string path = photo.ImageFilePath;
+            StorageFile item = await StorageFile.GetFileFromPathAsync(path);
+            await item.DeleteAsync();
+        }
+
 
 
         #endregion

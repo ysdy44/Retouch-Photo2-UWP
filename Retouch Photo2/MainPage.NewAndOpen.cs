@@ -34,7 +34,7 @@ namespace Retouch_Photo2
         private void NewFromSize(BitmapSize pixels)
         {
             string untitled = this.Untitled;
-            string name = this.RenameByRecursive(untitled);
+            string name = this.UntitledRenameByRecursive(untitled);
             int width = (int)pixels.Width;
             int height = (int)pixels.Height;
                 
@@ -113,7 +113,7 @@ namespace Retouch_Photo2
             Photo.DuplicateChecking(photo);
 
             //Transformer
-            string name = this.RenameByRecursive($"{photo.Name}");
+            string name = this.UntitledRenameByRecursive($"{photo.Name}");
             int width = (int)photo.Width;
             int height = (int)photo.Height;
             Transformer transformerSource = new Transformer(width, height, Vector2.Zero);
@@ -145,7 +145,7 @@ namespace Retouch_Photo2
         /// </summary>
         /// <param name="name"> The previous name. </param>
         /// <returns> The new name. </returns>
-        private string RenameByRecursive(string name)
+        private string UntitledRenameByRecursive(string name)
         {
             if (this._renamed(name) == false) return name;
 

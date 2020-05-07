@@ -11,9 +11,9 @@ namespace Retouch_Photo2.Layers
         /// </summary>      
         public void RemoveLayer(ILayer removeLayer)
         {
-            IList<ILayer> layers = (removeLayer.Parents == null) ? this.RootLayers : removeLayer.Parents.Children;
+            IList<ILayer> parentsChildren = this.GetParentsChildren(removeLayer);
 
-            this._removeLayer(removeLayer, layers);
+            this._removeLayer(removeLayer, parentsChildren);
         }
 
         /// <summary>

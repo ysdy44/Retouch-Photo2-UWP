@@ -48,5 +48,13 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         public ObservableCollection<UIElement> RootControls { get; private set; } = new ObservableCollection<UIElement>();
 
+
+        /// <summary>
+        /// Get a layer parents children( or root layers when it has not parents).
+        /// </summary>
+        /// <param name="layer"></param>
+        /// <returns></returns>
+        public IList<ILayer> GetParentsChildren(ILayer layer) => (layer.Parents == null) ? this.RootLayers : layer.Parents.Children;
+
     }
 }

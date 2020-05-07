@@ -15,14 +15,6 @@ namespace Retouch_Photo2.Elements
         /// <param name="photocopier"> The destination <see cref="Photocopier"/>. </param>
         public static XElement SavePhotocopier(string elementName, Photocopier photocopier)
         {
-
-            {
-                //@SavePhoto
-                // Avoid unwanted pictures being saved.
-                Photo photo = Photo.FindFirstPhoto(photocopier);
-                photo.HasSavePhotocopier = true;
-            }
-
             return new XElement
             (
                 elementName,

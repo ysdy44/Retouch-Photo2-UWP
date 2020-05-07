@@ -157,7 +157,7 @@ namespace Retouch_Photo2
             foreach (ProjectViewItem item in items)
             {
                 string oldName = item.Name;
-                string newName = this.RenameByRecursive(oldName);
+                string newName = this.UntitledRenameByRecursive(oldName);
                 StorageFile storageFile = await FileUtil.DuplicateZipFileAndThumbnail(oldName, newName);
 
                 string zipFile = storageFile.Path;

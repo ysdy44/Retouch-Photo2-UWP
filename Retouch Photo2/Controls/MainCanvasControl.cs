@@ -25,8 +25,6 @@ namespace Retouch_Photo2.Controls
         Vector2 _singleStartingPoint;
         InputDevice _inputDevice = InputDevice.None;
 
-        public CanvasOperator CanvasOperator { get; private set; }
-
 
         #region DependencyProperty
 

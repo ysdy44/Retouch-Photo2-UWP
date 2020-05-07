@@ -87,8 +87,7 @@ namespace Retouch_Photo2.Layers
         {
             if (mezzanineLayer == null) return;
      
-            IList<ILayer> parentsChildren = (mezzanineLayer.Parents == null) ?
-                this.RootLayers : mezzanineLayer.Parents.Children;
+            IList<ILayer> parentsChildren = this.GetParentsChildren(mezzanineLayer);
 
             parentsChildren.Remove(mezzanineLayer);
         }
