@@ -1,7 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
 using System.Numerics;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools
 {
@@ -45,8 +44,12 @@ namespace Retouch_Photo2.Tools
         /// </summary>
         /// <param name="startingPoint"> The starting pointer. </param>
         /// <param name="point"> The pointer. </param>
-        /// <param name="isSingleStarted"> Whether the Started method was triggered. </param>
-        void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted);
+        /// <param name="isOutNodeDistance"> Whether the distance'LengthSquared exceeds [NodeDistance].. </param>
+        void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance);
+        /// <summary>
+        /// Occurs when the canvas is clicked.
+        /// </summary>
+        void Clicke(Vector2 point);
 
         /// <summary>
         /// Occurs when the canvas is drawn.

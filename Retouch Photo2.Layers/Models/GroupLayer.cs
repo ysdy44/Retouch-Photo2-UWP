@@ -1,16 +1,16 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
 using System.Numerics;
-using System.Xml.Linq;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="LayerBase"/>'s GroupLayer .
+    /// <see cref="ILayer"/>'s GroupLayer .
     /// </summary>
     public class GroupLayer : LayerBase, ILayer
     {
@@ -49,8 +49,46 @@ namespace Retouch_Photo2.Layers.Models
             }
         }
         
-        public ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
-        { 
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        {
+            GroupLayer groupLayer = new GroupLayer();
+
+            LayerBase.CopyWith(resourceCreator, groupLayer, this);
+            return groupLayer;
+        }
+
+
+        public override void CacheTransform()
+        {
+            base.CacheTransform();
+
+            foreach (ILayer child in this.Children)
+            {
+                child.CacheTransform();
+            }
+        }
+        public override void TransformMultiplies(Matrix3x2 matrix)
+        {
+            base.TransformMultiplies(matrix);
+
+            foreach (ILayer child in this.Children)
+            {
+                child.TransformMultiplies(matrix);
+            }
+        }
+        public override void TransformAdd(Vector2 vector)
+        {
+            base.TransformAdd(vector);
+
+            foreach (ILayer child in this.Children)
+            {
+                child.TransformAdd(vector);
+            }
+        }
+
+
+        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
+        {
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
             {
@@ -66,23 +104,10 @@ namespace Retouch_Photo2.Layers.Models
             }
             return command;
         }
-        
 
-        public ILayer Clone(ICanvasResourceCreator resourceCreator)
-        {
-            GroupLayer groupLayer = new GroupLayer();
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)=> null;
+        public override IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;
 
-            LayerBase.CopyWith(resourceCreator, groupLayer, this);
-            return groupLayer;
-        }
-
-        public IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;
-
-        public void SaveWith(XElement element)
-        {
-            element.Add(new XElement("GroupLayer"));
-        }
-        public void Load(XElement element) { }
 
         //Strings
         private string ConstructStrings()

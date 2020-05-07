@@ -36,7 +36,7 @@ namespace Retouch_Photo2.ViewModels
         
         /// <summary> The all checked layers. </summary>
         public IEnumerable<ILayer> Layers { get; private set; }
-
+        
 
         /// <summary> Transformer of selection layers. </summary>
         public Transformer Transformer
@@ -62,30 +62,6 @@ namespace Retouch_Photo2.ViewModels
         }
         private bool disabledRadian;
         
-        /// <summary>
-        /// Sets all selection layer(s).
-        /// </summary>
-        /// <param name="action"> action </param>
-        public void SetValue(Action<ILayer> action)
-        {
-            switch (this.SelectionMode)
-            {
-                case ListViewSelectionMode.None:
-                    break;
-
-                case ListViewSelectionMode.Single:
-                    action(this.Layer);
-                    break;
-
-                case ListViewSelectionMode.Multiple:
-                    foreach (ILayer child in this.Layers)
-                    {
-                        action(child);
-                    }
-                    break;
-            }
-        }
-
 
         //@Notify 
         /// <summary> Multicast event for property change notifications. </summary>

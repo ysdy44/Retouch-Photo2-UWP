@@ -28,7 +28,7 @@
     </Page.Resources>
 
 
-    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
         <StackPanel Orientation="Horizontal">
 
             <!--Radian-->
@@ -44,7 +44,7 @@
 
             <Button x:Name="RadianClearButton" Style="{StaticResource AppCircleButtonStyle}">
                 <ToolTipService.ToolTip>
-                    <ToolTip x:Name="RadianClearToolTip" Placement="Top" Style="{StaticResource AppToolTip}"/>
+                    <ToolTip x:Name="RadianClearToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
                 <PathIcon>
                     <PathIcon.Data>
@@ -68,7 +68,7 @@
 
             <Button x:Name="ScaleClearButton" Style="{StaticResource AppCircleButtonStyle}">
                 <ToolTipService.ToolTip>
-                    <ToolTip x:Name="ScaleClearToolTip" Placement="Top" Style="{StaticResource AppToolTip}"/>
+                    <ToolTip x:Name="ScaleClearToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
                 <PathIcon>
                     <PathIcon.Data>

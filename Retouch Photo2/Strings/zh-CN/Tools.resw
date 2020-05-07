@@ -180,12 +180,6 @@
   <data name="Pen" xml:space="preserve">
     <value>钢笔工具</value>
   </data>
-  <data name="Pen_AddOrMoveOff" xml:space="preserve">
-    <value>移动</value>
-  </data>
-  <data name="Pen_AddOrMoveOn" xml:space="preserve">
-    <value>添加</value>
-  </data>
   <data name="Pen_Insert" xml:space="preserve">
     <value>插入</value>
   </data>
@@ -207,7 +201,7 @@
   <data name="TextFrame" xml:space="preserve">
     <value>框架文本工具</value>
   </data>
-  <data name="TextFrame_PlaceholderText" xml:space="preserve">
+  <data name="Text_PlaceholderText" xml:space="preserve">
     <value>输入文本...</value>
   </data>
   <data name="Transparency" xml:space="preserve">

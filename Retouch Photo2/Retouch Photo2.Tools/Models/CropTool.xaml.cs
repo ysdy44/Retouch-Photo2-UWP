@@ -193,12 +193,17 @@ namespace Retouch_Photo2.Tools.Models
             this.SelectionViewModel.IsCrop = true;//Selection
             this.ViewModel.Invalidate();//Invalidate
         }
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
             this._layer = null;
             this._transformerMode = TransformerMode.None;
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+        }
+        public void Clicke(Vector2 point)
+        {
+            //Select single layer
+            this.TipViewModel.TransformerTool.SelectSingleLayer(point);
         }
 
         public void Draw(CanvasDrawingSession drawingSession)

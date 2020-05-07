@@ -55,6 +55,7 @@ namespace Retouch_Photo2
                  new GeometryRectangleTool(),
                  new GeometryEllipseTool(),
                  new PenTool(),
+                 new NodeTool(),
                  null,
 
                  new TextArtisticTool(),

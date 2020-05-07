@@ -13,7 +13,7 @@
     <StackPanel>
 
         <!--Angle-->
-        <TextBlock x:Name="AngleTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="AngleTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <hsvColorPickers:TouchSlider x:Name="HueRotationSlider" Minimum="0" Maximum="360">
             <hsvColorPickers:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">

@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.UI.Xaml;
 using Retouch_Photo2.Layers;
 using System;
 using System.Collections.Generic;
@@ -64,23 +65,33 @@ namespace Retouch_Photo2.ViewModels
         #region Invalidate
 
 
-        /// <summary> Retouch_Photo2's the only <see cref = "Microsoft.Graphics.Canvas.CanvasDevice" />. </summary>
-        public CanvasDevice CanvasDevice { get; } = new CanvasDevice();
-                 
-        
+        /// <summary> Retouch_Photo2's the only <see cref = "Microsoft.Graphics.Canvas.UI.Xaml.CanvasControl" />. </summary>
+        public CanvasControl CanvasDevice { get; } = new CanvasControl();
+
+
         /// <summary>
         /// Indicates that the contents of the CanvasControl need to be redrawn.
         /// </summary>
-        /// <param name="mode"> invalidate mode </param>
-        public void Invalidate(InvalidateMode mode = InvalidateMode.None) => this.InvalidateAction?.Invoke(mode);
+        /// <param name="mode"> The invalidate mode </param>
+        public void Invalidate(InvalidateMode mode = InvalidateMode.None)
+        {
+            switch (mode)
+            {
+                case InvalidateMode.Thumbnail:
+                    this.CanvasDevice.DpiScale = 0.5f;
+                    break;
+                case InvalidateMode.HD:
+                    this.CanvasDevice.DpiScale = 1.0f;
+                    break;
+            }
 
-        /// <summary> Occurs when the canvas invalidated. </summary>
-        public Action<InvalidateMode> InvalidateAction { get; set; }
-
+            this.CanvasDevice.Invalidate();//Invalidate
+        }
+        
 
         #endregion
 
-        
+
         //@Notify 
         /// <summary> Multicast event for property change notifications. </summary>
         public event PropertyChangedEventHandler PropertyChanged;

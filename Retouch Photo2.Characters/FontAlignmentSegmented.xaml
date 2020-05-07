@@ -1,0 +1,94 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Characters.FontAlignmentSegmented"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="200"
+    >
+
+    <Grid>
+
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
+
+                <!--Left-->
+                <VisualState x:Name="Left">
+                    <VisualState.Setters>
+                        <Setter Target = "LeftButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Center-->
+                <VisualState x:Name="Center">
+                    <VisualState.Setters>
+                        <Setter Target = "CenterButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Right-->
+                <VisualState x:Name="Right">
+                    <VisualState.Setters>
+                        <Setter Target = "RightButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Justified-->
+                <VisualState x:Name="Justified">
+                    <VisualState.Setters>
+                        <Setter Target = "JustifiedButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Left-->
+        <Button x:Name="LeftButton" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip x:Name="LeftToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+            <FontIcon Glyph="&#xE8E4;" FontSize="18" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
+        </Button>
+
+        <!--Center-->
+        <Button x:Name="CenterButton" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip x:Name="CenterToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+            <FontIcon Glyph="&#xE8E3;" FontSize="18" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
+        </Button>
+
+        <!--Right-->
+        <Button x:Name="RightButton" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip x:Name="RightToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+            <FontIcon Glyph="&#xE8E2;" FontSize="18" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
+        </Button>
+
+        <!--Justified-->
+        <Button x:Name="JustifiedButton" Grid.Column="3" Style="{StaticResource AppRoundedSelectedButtonStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip x:Name="JustifiedToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+            <FontIcon Glyph="&#xE700;" FontSize="18" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
+        </Button>
+
+    </Grid>
+
+</UserControl>

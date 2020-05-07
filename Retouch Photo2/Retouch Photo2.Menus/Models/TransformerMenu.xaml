@@ -49,26 +49,26 @@
 
                     <!--Ratio-->
                     <ToggleButton x:Name="RatioToggleControl" Grid.Column="1" Margin="0,26" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource AppCircleToggleButtonStyle}"
-                                  IsChecked="{x:Bind IsRatio,Mode=TwoWay}" >
+                                  IsChecked="{x:Bind KeyboardViewModel.IsRatio,Mode=TwoWay}" >
                         <ToolTipService.ToolTip>
-                            <ToolTip x:Name="RatioScalingToolTip" Placement="Top" Style="{StaticResource AppToolTip}"/>
+                            <ToolTip x:Name="RatioScalingToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
                         </ToolTipService.ToolTip>
-                        <FontIcon Glyph="&#x1F512;" FontSize="18" FontFamily="Segoe UI Symbol"/>
+                        <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
                     </ToggleButton>
                     
                     
                     <StackPanel Grid.Column="0">
                        
                         <!--Width-->
-                        <TextBlock x:Name="WidthTextBlock" Style="{StaticResource AppTextBlock}"/>
+                        <TextBlock x:Name="WidthTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                         <pickers:NumberPicker x:Name="WPicker" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
                        
                         <!--Rotate-->
-                        <TextBlock x:Name="RotateTextBlock" Style="{StaticResource AppTextBlock}"/>
+                        <TextBlock x:Name="RotateTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                         <pickers:NumberPicker x:Name="RPicker" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
                         
                         <!--X-->
-                        <TextBlock x:Name="XTextBlock"  Style="{StaticResource AppTextBlock}"/>
+                        <TextBlock x:Name="XTextBlock"  Style="{StaticResource AppTextBlockStyle}"/>
                         <pickers:NumberPicker x:Name="XPicker" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                             <pickers:NumberPicker.BorderBrush>
                                 <SolidColorBrush x:Name="XBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
@@ -81,15 +81,15 @@
                     <StackPanel Grid.Column="2">
                         
                         <!--Height-->
-                        <TextBlock x:Name="HeightTextBlock" Style="{StaticResource AppTextBlock}"/>
+                        <TextBlock x:Name="HeightTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                         <pickers:NumberPicker x:Name="HPicker" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
 
                         <!--Skew-->
-                        <TextBlock x:Name="SkewTextBlock" Style="{StaticResource AppTextBlock}"/>
+                        <TextBlock x:Name="SkewTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                         <pickers:NumberPicker x:Name="SPicker" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
 
                         <!--Y-->
-                        <TextBlock x:Name="YTextBlock" Style="{StaticResource AppTextBlock}"/>
+                        <TextBlock x:Name="YTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                         <pickers:NumberPicker x:Name="YPicker" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                             <pickers:NumberPicker.BorderBrush>
                                 <SolidColorBrush x:Name="YBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
@@ -105,7 +105,7 @@
                 <!--IndicatorControl-->
                 <transformers:IndicatorControl x:Name="IndicatorControl" Background="{ThemeResource AppForeground}" BorderBrush="{ThemeResource AppStroke}">
                     <ToolTipService.ToolTip>
-                        <ToolTip x:Name="IndicatorToolTip" Placement="Top" Style="{StaticResource AppToolTip}"/>
+                        <ToolTip x:Name="IndicatorToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>
                 </transformers:IndicatorControl>
 
@@ -113,7 +113,7 @@
                 <!--RemoteButton-->
                 <Button x:Name="RemoteButton" Style="{StaticResource AppIconRoundedButtonStyle}">
                     <Button.Tag>
-                        <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                     </Button.Tag>
                 </Button>
                 

@@ -1,0 +1,114 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Brushs.BrushTypeComboBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="200"
+    d:DesignWidth="200"
+    >
+
+    <UserControl.Resources>
+
+        <!--Storyboard-->
+        <Storyboard x:Name="_EaseStoryboard">
+            <ColorAnimation From="{ThemeResource SystemBaseHighColor}" To="{ThemeResource AppBorderBrushColor}" Storyboard.TargetProperty="Color" Storyboard.TargetName="ButtonBorderBrush" d:IsOptimized="True">
+                <ColorAnimation.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </ColorAnimation.EasingFunction>
+            </ColorAnimation>
+        </Storyboard>
+        
+        <!--Flyout-->
+        <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+               
+                <Button x:Name="NoneButton" Style="{StaticResource AppIconSelectedButton}"/>
+                
+                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+               
+                <Button x:Name="ColorButton" Style="{StaticResource AppIconSelectedButton}"/>
+                
+                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                
+                <Button x:Name="LinearGradientButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="RadialGradientButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="EllipticalGradientButton" Style="{StaticResource AppIconSelectedButton}"/>
+               
+                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+              
+                <Button x:Name="ImageButton" Style="{StaticResource AppIconSelectedButton}"/>
+
+            </StackPanel>
+        </Flyout>
+    </UserControl.Resources>
+
+
+    <Button x:Name="Button" Style="{StaticResource AppIconRoundedButtonStyle}">
+        <Button.BorderBrush>
+            <SolidColorBrush x:Name="ButtonBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
+        </Button.BorderBrush>
+        
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
+
+                <!--None-->
+                <VisualState x:Name="None">
+                    <VisualState.Setters>
+                        <Setter Target = "NoneButton.IsEnabled" Value="False"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind NoneButton.Content}"/>
+                    </VisualState.Setters>
+                </VisualState>
+                
+                <!--Color-->
+                <VisualState x:Name="Color">
+                    <VisualState.Setters>
+                        <Setter Target = "ColorButton.IsEnabled" Value="False"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind ColorButton.Content}"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--LinearGradient-->
+                <VisualState x:Name="LinearGradient">
+                    <VisualState.Setters>
+                        <Setter Target = "LinearGradientButton.IsEnabled" Value="False"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind LinearGradientButton.Content}"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--RadialGradient-->
+                <VisualState x:Name="RadialGradient">
+                    <VisualState.Setters>
+                        <Setter Target = "RadialGradientButton.IsEnabled" Value="False"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind RadialGradientButton.Content}"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--EllipticalGradient-->
+                <VisualState x:Name="EllipticalGradient">
+                    <VisualState.Setters>
+                        <Setter Target = "EllipticalGradientButton.IsEnabled" Value="False"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind EllipticalGradientButton.Content}"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Image-->
+                <VisualState x:Name="Image">
+                    <VisualState.Setters>
+                        <Setter Target = "ImageButton.IsEnabled" Value="False"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind ImageButton.Content}"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Button.Tag>
+            <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+        </Button.Tag>
+    </Button>
+
+</UserControl>

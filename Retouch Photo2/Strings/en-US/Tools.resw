@@ -180,12 +180,6 @@
   <data name="Pen" xml:space="preserve">
     <value>Pen Tool</value>
   </data>
-  <data name="Pen_AddOrMoveOff" xml:space="preserve">
-    <value>Move</value>
-  </data>
-  <data name="Pen_AddOrMoveOn" xml:space="preserve">
-    <value>Add</value>
-  </data>
   <data name="Pen_Insert" xml:space="preserve">
     <value>Insert</value>
   </data>
@@ -207,7 +201,7 @@
   <data name="TextFrame" xml:space="preserve">
     <value>Frame Text Tool</value>
   </data>
-  <data name="TextFrame_PlaceholderText" xml:space="preserve">
+  <data name="Text_PlaceholderText" xml:space="preserve">
     <value>Input Text...</value>
   </data>
   <data name="Transparency" xml:space="preserve">

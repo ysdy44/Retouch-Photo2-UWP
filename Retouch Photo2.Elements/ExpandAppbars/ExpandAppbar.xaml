@@ -35,7 +35,7 @@
 
         <!--More-->
         <Button x:Name="MoreButton" Grid.Column="1" Style="{StaticResource AppCircleButtonStyle}">
-            <FontIcon Glyph="&#xE10C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
         </Button>
 
     </Grid>

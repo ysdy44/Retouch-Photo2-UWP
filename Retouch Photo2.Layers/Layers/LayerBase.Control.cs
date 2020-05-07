@@ -9,7 +9,8 @@ namespace Retouch_Photo2.Layers
     public abstract partial class LayerBase 
     {
 
-        public ILayerControl Control { get; set; }
+        /// <summary> Gets or sets <see cref = "LayerBase" />'s control. </summary>
+        public ILayerControl Control { get; protected set; }
 
 
         #region OverlayMode

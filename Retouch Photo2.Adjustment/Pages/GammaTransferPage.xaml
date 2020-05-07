@@ -10,12 +10,7 @@
     d:DesignWidth="200"
     >
 
-
     <Page.Resources>
-
-        <!--Background-->
-        <SolidColorBrush x:Name="AccentColor"  Color="{ThemeResource AppStrokeColor}"/>
-        <SolidColorBrush x:Name="UnAccentColor" Color="#00000000"/>
 
         <!--Alpha-->
         <Color x:Key="AlphaLeft" >#DDDDDD</Color>
@@ -100,10 +95,175 @@
     </Page.Resources>
 
 
-    <StackPanel >
+    <Grid>
 
-        <!--Segmented-->
-        <Grid Height="40" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
+
+                
+                <!--Alpha-->
+                <VisualState x:Name="AlphaEnable">
+                    <VisualState.Setters>
+
+                        <Setter Target = "AlphaButton.IsEnabled" Value="False"/>
+                        <Setter Target = "AlphaCheckBox.Visibility" Value="Visible"/>
+
+                        <Setter Target = "AlphaOffsetSlider.Visibility" Value="Visible"/>
+                        <Setter Target = "AlphaExponentSlider.Visibility" Value="Visible"/>
+                        <Setter Target = "AlphaAmplitudeSlider.Visibility" Value="Visible"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="AlphaDisable">
+                    <VisualState.Setters>
+                        
+                        <Setter Target = "AlphaButton.IsEnabled" Value="False"/>
+                        <Setter Target = "AlphaCheckBox.Visibility" Value="Visible"/>
+
+                        <Setter Target = "AlphaOffsetSlider.Visibility" Value="Visible"/>
+                        <Setter Target = "AlphaExponentSlider.Visibility" Value="Visible"/>
+                        <Setter Target = "AlphaAmplitudeSlider.Visibility" Value="Visible"/>
+
+                        <Setter Target = "AlphaOffsetSlider.IsEnabled" Value="False"/>
+                        <Setter Target = "AlphaExponentSlider.IsEnabled" Value="False"/>
+                        <Setter Target = "AlphaAmplitudeSlider.IsEnabled" Value="False"/>
+
+                        <Setter Target = "AlphaOffsetSlider.Opacity" Value="0.5"/>
+                        <Setter Target = "AlphaExponentSlider.Opacity" Value="0.5"/>
+                        <Setter Target = "AlphaAmplitudeSlider.Opacity" Value="0.5"/>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+
+
+                <!--Red-->
+                <VisualState x:Name="RedEnable">
+                    <VisualState.Setters>
+
+                        <Setter Target = "RedButton.IsEnabled" Value="False"/>
+                        <Setter Target = "RedCheckBox.Visibility" Value="Visible"/>
+
+                        <Setter Target = "RedOffsetSlider.Visibility" Value="Visible"/>
+                        <Setter Target = "RedExponentSlider.Visibility" Value="Visible"/>
+                        <Setter Target = "RedAmplitudeSlider.Visibility" Value="Visible"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="RedDisable">
+                    <VisualState.Setters>
+
+                        <Setter Target = "RedButton.IsEnabled" Value="False"/>
+                        <Setter Target = "RedCheckBox.Visibility" Value="Visible"/>
+
+                        <Setter Target = "RedOffsetSlider.Visibility" Value="Visible"/>
+                        <Setter Target = "RedExponentSlider.Visibility" Value="Visible"/>
+                        <Setter Target = "RedAmplitudeSlider.Visibility" Value="Visible"/>
+
+                        <Setter Target = "RedOffsetSlider.IsEnabled" Value="False"/>
+                        <Setter Target = "RedExponentSlider.IsEnabled" Value="False"/>
+                        <Setter Target = "RedAmplitudeSlider.IsEnabled" Value="False"/>
+
+                        <Setter Target = "RedOffsetSlider.Opacity" Value="0.5"/>
+                        <Setter Target = "RedExponentSlider.Opacity" Value="0.5"/>
+                        <Setter Target = "RedAmplitudeSlider.Opacity" Value="0.5"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+
+
+                <!--Green-->
+                <VisualState x:Name="GreenEnable">
+                    <VisualState.Setters>
+
+                        <Setter Target = "GreenButton.IsEnabled" Value="False"/>
+                        <Setter Target = "GreenCheckBox.Visibility" Value="Visible"/>
+
+                        <Setter Target = "GreenOffsetSlider.Visibility" Value="Visible"/>
+                        <Setter Target = "GreenExponentSlider.Visibility" Value="Visible"/>
+                        <Setter Target = "GreenAmplitudeSlider.Visibility" Value="Visible"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="GreenDisable">
+                    <VisualState.Setters>
+
+                        <Setter Target = "GreenButton.IsEnabled" Value="False"/>
+                        <Setter Target = "GreenCheckBox.Visibility" Value="Visible"/>
+
+                        <Setter Target = "GreenOffsetSlider.Visibility" Value="Visible"/>
+                        <Setter Target = "GreenExponentSlider.Visibility" Value="Visible"/>
+                        <Setter Target = "GreenAmplitudeSlider.Visibility" Value="Visible"/>
+
+                        <Setter Target = "GreenOffsetSlider.IsEnabled" Value="False"/>
+                        <Setter Target = "GreenExponentSlider.IsEnabled" Value="False"/>
+                        <Setter Target = "GreenAmplitudeSlider.IsEnabled" Value="False"/>
+
+                        <Setter Target = "GreenOffsetSlider.Opacity" Value="0.5"/>
+                        <Setter Target = "GreenExponentSlider.Opacity" Value="0.5"/>
+                        <Setter Target = "GreenAmplitudeSlider.Opacity" Value="0.5"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+
+
+                <!--Blue-->
+                <VisualState x:Name="BlueEnable">
+                    <VisualState.Setters>
+
+                        <Setter Target = "BlueButton.IsEnabled" Value="False"/>
+                        <Setter Target = "BlueCheckBox.Visibility" Value="Visible"/>
+
+                        <Setter Target = "BlueOffsetSlider.Visibility" Value="Visible"/>
+                        <Setter Target = "BlueExponentSlider.Visibility" Value="Visible"/>
+                        <Setter Target = "BlueAmplitudeSlider.Visibility" Value="Visible"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="BlueDisable">
+                    <VisualState.Setters>
+
+                        <Setter Target = "BlueButton.IsEnabled" Value="False"/>
+                        <Setter Target = "BlueCheckBox.Visibility" Value="Visible"/>
+
+                        <Setter Target = "BlueOffsetSlider.Visibility" Value="Visible"/>
+                        <Setter Target = "BlueExponentSlider.Visibility" Value="Visible"/>
+                        <Setter Target = "BlueAmplitudeSlider.Visibility" Value="Visible"/>
+
+                        <Setter Target = "BlueOffsetSlider.IsEnabled" Value="False"/>
+                        <Setter Target = "BlueExponentSlider.IsEnabled" Value="False"/>
+                        <Setter Target = "BlueAmplitudeSlider.IsEnabled" Value="False"/>
+
+                        <Setter Target = "BlueOffsetSlider.Opacity" Value="0.5"/>
+                        <Setter Target = "BlueExponentSlider.Opacity" Value="0.5"/>
+                        <Setter Target = "BlueAmplitudeSlider.Opacity" Value="0.5"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+
+                
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
+
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!--Button-->
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
@@ -111,59 +271,61 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <ContentPresenter x:Name="AlphaSegmented" Grid.Column="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Button x:Name="AlphaButton" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
                 <Ellipse Width="20" Height="20" StrokeThickness="1" Stroke="White" Fill="{ThemeResource AlphaTopBrush}"/>
-            </ContentPresenter>
-            <ContentPresenter x:Name="RedSegmented" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            </Button>
+            <Button x:Name="RedButton" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
                 <Ellipse Width="20" Height="20" StrokeThickness="1" Stroke="White" Fill="{StaticResource RedTopBrush}"/>
-            </ContentPresenter>
-            <ContentPresenter x:Name="GreenSegmented" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            </Button>
+            <Button x:Name="GreenButton" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
                 <Ellipse Width="20" Height="20" StrokeThickness="1" Stroke="White" Fill="{StaticResource GreenTopBrush}"/>
-            </ContentPresenter>
-            <ContentPresenter x:Name="BlueSegmented" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            </Button>
+            <Button x:Name="BlueButton" Grid.Column="3" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
                 <Ellipse Width="20" Height="20" StrokeThickness="1" Stroke="White" Fill="{StaticResource BlueTopBrush}"/>
-            </ContentPresenter>
+            </Button>
 
         </Grid>
 
-        <!--GammaTransfer Alpha-->
-        <ToggleSwitch x:Name="AlphaCheckBox" Margin="12,0"/>
 
-        <TextBlock x:Name="AlphaOffsetTextBlock" Style="{StaticResource AppTextBlock}"/>
-        <hsvColorPickers:TouchSlider x:Name="AlphaOffsetSlider" Value="0" Minimum="0" Maximum="100" SliderBrush="{StaticResource AlphaLeftBrush}"/>
-        <TextBlock x:Name="AlphaExponentTextBlock" Style="{StaticResource AppTextBlock}"/>
-        <hsvColorPickers:TouchSlider x:Name="AlphaExponentSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource AlphaRightBrush}" />
-        <TextBlock x:Name="AlphaAmplitudeTextBlock" Style="{StaticResource AppTextBlock}"/>
-        <hsvColorPickers:TouchSlider x:Name="AlphaAmplitudeSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource AlphaCenterBrush}"/>
+        <TextBlock x:Name="OffsetTextBlock" Grid.Row="2" Style="{StaticResource AppTextBlockStyle}"/>
+        <TextBlock x:Name="ExponentTextBlock" Grid.Row="4" Style="{StaticResource AppTextBlockStyle}"/>
+        <TextBlock x:Name="AmplitudeTextBlock" Grid.Row="6" Style="{StaticResource AppTextBlockStyle}"/>
+        
+        
+        <!--Alpha-->
+        <ToggleSwitch x:Name="AlphaCheckBox" Grid.Row="1" Margin="12,0" Visibility="Collapsed"/>
 
-        <!--GammaTransfer Red-->
-        <ToggleSwitch x:Name="RedCheckBox" Margin="12,0"/>
+        <hsvColorPickers:TouchSlider x:Name="AlphaOffsetSlider" Grid.Row="3" Visibility="Collapsed" Value="0" Minimum="0" Maximum="100" SliderBrush="{StaticResource AlphaLeftBrush}"/>
+        <hsvColorPickers:TouchSlider x:Name="AlphaExponentSlider" Grid.Row="5" Visibility="Collapsed" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource AlphaRightBrush}" />
+        <hsvColorPickers:TouchSlider x:Name="AlphaAmplitudeSlider" Grid.Row="7" Visibility="Collapsed" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource AlphaCenterBrush}"/>
 
-        <TextBlock x:Name="RedOffsetTextBlock" Style="{StaticResource AppTextBlock}"/>
-        <hsvColorPickers:TouchSlider x:Name="RedOffsetSlider" Value="0" Minimum="0" Maximum="100" SliderBrush="{StaticResource RedLeftBrush}"/>
-        <TextBlock x:Name="RedExponentTextBlock" Style="{StaticResource AppTextBlock}"/>
-        <hsvColorPickers:TouchSlider x:Name="RedExponentSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource RedRightBrush}"/>
-        <TextBlock x:Name="RedAmplitudeTextBlock" Style="{StaticResource AppTextBlock}"/>
-        <hsvColorPickers:TouchSlider x:Name="RedAmplitudeSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource RedCenterBrush}"/>
+        
+        <!--Red-->
+        <ToggleSwitch x:Name="RedCheckBox" Grid.Row="1" Margin="12,0" Visibility="Collapsed" />
 
-        <!--GammaTransfer Green-->
-        <ToggleSwitch x:Name="GreenCheckBox" Margin="12,0"/>
-        <TextBlock x:Name="GreenOffsetTextBlock" Style="{StaticResource AppTextBlock}"/>
-        <hsvColorPickers:TouchSlider x:Name="GreenOffsetSlider" Value="0" Minimum="0" Maximum="100" SliderBrush="{StaticResource GreenLeftBrush}"/>
-        <TextBlock x:Name="GreenExponentTextBlock" Style="{StaticResource AppTextBlock}"/>
-        <hsvColorPickers:TouchSlider x:Name="GreenExponentSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource GreenRightBrush}"/>
-        <TextBlock x:Name="GreenAmplitudeTextBlock" Style="{StaticResource AppTextBlock}"/>
-        <hsvColorPickers:TouchSlider x:Name="GreenAmplitudeSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource GreenCenterBrush}"/>
+        <hsvColorPickers:TouchSlider x:Name="RedOffsetSlider" Grid.Row="3" Visibility="Collapsed" Value="0" Minimum="0" Maximum="100" SliderBrush="{StaticResource RedLeftBrush}"/>
+        <hsvColorPickers:TouchSlider x:Name="RedExponentSlider" Grid.Row="5" Visibility="Collapsed" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource RedRightBrush}"/>
+        <hsvColorPickers:TouchSlider x:Name="RedAmplitudeSlider" Grid.Row="7" Visibility="Collapsed" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource RedCenterBrush}"/>
 
-        <!--GammaTransfer Blue-->
-        <ToggleSwitch x:Name="BlueCheckBox" Margin="12,0"/>
-        <TextBlock x:Name="BlueOffsetTextBlock" Style="{StaticResource AppTextBlock}"/>
-        <hsvColorPickers:TouchSlider x:Name="BlueOffsetSlider" Value="0" Minimum="0" Maximum="100" SliderBrush="{StaticResource BlueLeftBrush}"/>
-        <TextBlock x:Name="BlueExponentTextBlock" Style="{StaticResource AppTextBlock}"/>
-        <hsvColorPickers:TouchSlider x:Name="BlueExponentSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource BlueRightBrush}"/>
-        <TextBlock x:Name="BlueAmplitudeTextBlock" Style="{StaticResource AppTextBlock}"/>
-        <hsvColorPickers:TouchSlider x:Name="BlueAmplitudeSlider" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource BlueCenterBrush}"/>
+        
+        <!--Green-->
+        <ToggleSwitch x:Name="GreenCheckBox" Grid.Row="1" Margin="12,0" Visibility="Collapsed" />
 
+        <hsvColorPickers:TouchSlider x:Name="GreenOffsetSlider" Grid.Row="3" Visibility="Collapsed" Value="0" Minimum="0" Maximum="100" SliderBrush="{StaticResource GreenLeftBrush}"/>
+        <hsvColorPickers:TouchSlider x:Name="GreenExponentSlider" Grid.Row="5" Visibility="Collapsed" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource GreenRightBrush}"/>
+        <hsvColorPickers:TouchSlider x:Name="GreenAmplitudeSlider" Grid.Row="7" Visibility="Collapsed" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource GreenCenterBrush}"/>
+
+        
+        <!--Blue-->
+        <ToggleSwitch x:Name="BlueCheckBox" Grid.Row="1" Margin="12,0" Visibility="Collapsed" />
+
+        <hsvColorPickers:TouchSlider x:Name="BlueOffsetSlider" Grid.Row="3" Visibility="Collapsed" Value="0" Minimum="0" Maximum="100" SliderBrush="{StaticResource BlueLeftBrush}"/>
+        <hsvColorPickers:TouchSlider x:Name="BlueExponentSlider" Grid.Row="5" Visibility="Collapsed" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource BlueRightBrush}"/>
+        <hsvColorPickers:TouchSlider x:Name="BlueAmplitudeSlider" Grid.Row="7" Visibility="Collapsed" Value="100" Minimum="0" Maximum="100" SliderBrush="{StaticResource BlueCenterBrush}"/>
+
+        
         <ContentControl Height="12"/>
-    </StackPanel>
+        
+    </Grid>
+    
 </Page>

@@ -174,7 +174,7 @@
   <data name="Multiply" xml:space="preserve">
     <value>正片叠底</value>
   </data>
-  <data name="Normal" xml:space="preserve">
+  <data name="None" xml:space="preserve">
     <value>正常</value>
   </data>
   <data name="Overlay" xml:space="preserve">

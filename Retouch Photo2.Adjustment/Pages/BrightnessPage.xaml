@@ -13,7 +13,7 @@
     <StackPanel >
 
         <!--White to Light-->
-        <TextBlock x:Name="WhiteToLightTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="WhiteToLightTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <hsvColorPickers:TouchSlider x:Name="WhiteLightSlider" Minimum="50" Maximum="100">
             <hsvColorPickers:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
@@ -24,7 +24,7 @@
         </hsvColorPickers:TouchSlider>
 
         <!--White to Dark-->
-        <TextBlock x:Name="WhiteToDarkTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="WhiteToDarkTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <hsvColorPickers:TouchSlider x:Name="WhiteDarkSlider" Minimum="50" Maximum="100">
             <hsvColorPickers:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
@@ -35,7 +35,7 @@
         </hsvColorPickers:TouchSlider>
 
         <!--Black to Light-->
-        <TextBlock x:Name="BlackToLightTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="BlackToLightTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <hsvColorPickers:TouchSlider x:Name="BlackLightSlider" Minimum="0" Maximum="50">
             <hsvColorPickers:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
@@ -46,7 +46,7 @@
         </hsvColorPickers:TouchSlider>
 
         <!--Black to Dark-->
-        <TextBlock x:Name="BlackToDarkTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="BlackToDarkTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <hsvColorPickers:TouchSlider x:Name="BlackDarkSlider" Minimum="0" Maximum="50">
             <hsvColorPickers:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">

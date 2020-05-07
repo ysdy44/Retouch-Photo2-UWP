@@ -3,7 +3,6 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.ApplicationModel.Resources;
@@ -11,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="IGeometryLayer"/>'s GeometryStarLayer .
+    /// <see cref="ILayer"/>'s GeometryStarLayer .
     /// </summary>
-    public class GeometryStarLayer : IGeometryLayer, ILayer
+    public class GeometryStarLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -27,11 +26,6 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Construct a star-layer.
         /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public GeometryStarLayer(XElement element) : this() => this.Load(element);
-        /// <summary>
-        /// Construct a star-layer.
-        /// </summary>
         public GeometryStarLayer()
         {
             base.Control = new LayerControl(this)
@@ -40,23 +34,9 @@ namespace Retouch_Photo2.Layers.Models
                 Text = this.ConstructStrings(),
             };
         }
-        
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
-        {
-            Transformer transformer = base.TransformManager.Destination;
-
-            return TransformerGeometry.CreateStar(resourceCreator, transformer, canvasToVirtualMatrix, this.Points, this.InnerRadius);
-        }
 
 
-        public IEnumerable<IEnumerable<Node>> ConvertToCurves()
-        {
-            Transformer transformer = base.TransformManager.Destination;
-
-            return TransformerGeometry.ConvertToCurvesFromStar(transformer, this.Points, this.InnerRadius);
-        }
-
-        public ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryStarLayer StarLayer = new GeometryStarLayer
             {
@@ -68,16 +48,31 @@ namespace Retouch_Photo2.Layers.Models
             return StarLayer;
         }
         
-        public void SaveWith(XElement element)
+        public override void SaveWith(XElement element)
         {            
             element.Add(new XElement("Points", this.Points));
             element.Add(new XElement("InnerRadius", this.InnerRadius));
         }
-        public void Load(XElement element)
+        public override void Load(XElement element)
         {
             this.Points = (int)element.Element("Points");
             this.InnerRadius = (float)element.Element("InnerRadius");
         }
+
+
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.CreateStar(resourceCreator, transformer, canvasToVirtualMatrix, this.Points, this.InnerRadius);
+        }
+        public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.ConvertToCurvesFromStar(transformer, this.Points, this.InnerRadius);
+        }
+
 
         //Strings
         private string ConstructStrings()

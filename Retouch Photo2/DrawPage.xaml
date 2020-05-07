@@ -10,7 +10,6 @@
     xmlns:elementDialog="using:Retouch_Photo2.Elements.Dialogs"
     xmlns:elementDrawPages="using:Retouch_Photo2.Elements.DrawPages"
     xmlns:layers="using:Retouch_Photo2.Layers"
-    xmlns:models="using:Retouch_Photo2.Menus.Models"
     xmlns:toolElements="using:Retouch_Photo2.Tools.Elements"
     NavigationCacheMode="Required"    
     mc:Ignorable="d"
@@ -114,7 +113,7 @@
 
                         <elements:ExpandAppbarButton x:Name="ExportButton">
                             <ToolTipService.ToolTip>
-                                <ToolTip x:Name="ExportToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip x:Name="ExportToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
                                 <FontIcon Glyph="&#xE105;" FontSize="20" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -126,7 +125,7 @@
                         <!--
                         <elements:ExpandAppbarButton x:Name="UndoButton">
                             <ToolTipService.ToolTip>
-                                <ToolTip x:Name="SetupToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip x:Name="SetupToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
                                 <FontIcon Glyph="&#xE10E;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -137,7 +136,7 @@
 
                         <elements:ExpandAppbarButton x:Name="RedoButton">
                             <ToolTipService.ToolTip>
-                                <ToolTip x:Name="RedoToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip x:Name="RedoToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
                                 <FontIcon Glyph="&#xE10D;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -149,7 +148,7 @@
 
                         <elements:ExpandAppbarButton x:Name="SetupButton">
                             <ToolTipService.ToolTip>
-                                <ToolTip x:Name="SetupToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip x:Name="SetupToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
                                 <FontIcon Glyph="&#xE123;" FontSize="20" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -162,7 +161,7 @@
 
                         <elements:ExpandAppbarToggleButton x:Name="RulerButton" IsChecked="{x:Bind ViewModel.CanvasRulerVisible,Mode=TwoWay}">
                             <ToolTipService.ToolTip>
-                                <ToolTip x:Name="RulerToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip x:Name="RulerToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarToggleButton.CenterContent>
                                 <FontIcon Glyph="&#xE80A;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -173,7 +172,7 @@
 
                         <elements:ExpandAppbarButton x:Name="FullScreenButton">
                             <ToolTipService.ToolTip>
-                                <ToolTip x:Name="FullScreenToolTip" Placement="Bottom" Style="{StaticResource AppToolTip}"/>
+                                <ToolTip x:Name="FullScreenToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
                                 <FontIcon Glyph="&#xE1D9;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -207,7 +206,7 @@
         <!--Tip-->
         <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" HorizontalAlignment="Center" 
                         Visibility="{x:Bind ViewModel.TextVisibility, Mode=OneWay}">
-            <ToolTip Style="{StaticResource AppToolTip}">
+            <ToolTip Style="{StaticResource AppToolTipStyle}">
                 <TextBlock Text="{x:Bind ViewModel.Text, Mode=OneWay}" TextWrapping="Wrap"/>
             </ToolTip>
         </ContentControl>
@@ -224,7 +223,7 @@
         </elementDialog:DialogBase>
         <elementDialog:DialogBase x:Name="ExportDialog">
             <elementDialog:DialogBase.CenterContent>
-                <elements:FormatComboBox x:Name="ExportComboBox"/>
+                <elements:FileFormatComboBox x:Name="ExportComboBox"/>
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>
 

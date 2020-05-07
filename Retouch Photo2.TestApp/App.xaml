@@ -4,4 +4,70 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Retouch_Photo2.TestApp">
 
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <!--Theme-->
+            <!--           
+                AppForeground: Foreground Color,
+                AppBackground: Background Color,
+                AppBorderBrush: Border Color,
+            
+                AppStroke: Shadow Color,
+                AppLinearBrush: Linear Brush,
+            -->
+            <ResourceDictionary.ThemeDictionaries>
+
+                <ResourceDictionary x:Key="Light">
+
+                    <Color x:Key="AppForegroundColor" >#F8F8F8</Color>
+                    <SolidColorBrush x:Key="AppForeground" Color="{ThemeResource AppForegroundColor}"/>
+                    <Color x:Key="AppBackgroundColor" >#F0F0F2</Color>
+                    <SolidColorBrush x:Key="AppBackground" Color="{ThemeResource AppBackgroundColor}"/>
+                    <Color x:Key="AppBorderBrushColor" >#BEBCC7</Color>
+                    <SolidColorBrush x:Key="AppBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
+
+                    <Color x:Key="AppStrokeColor" >#666b6791</Color>
+                    <SolidColorBrush x:Key="AppStroke" Color="{ThemeResource AppStrokeColor}"/>
+                    <Color x:Key="AppTextColor" >#99000000</Color>
+                    <SolidColorBrush x:Key="AppText" Color="{ThemeResource AppTextColor}"/>
+
+                    <LinearGradientBrush x:Key="AppLinearBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Color="#FFFFFF" Offset="0"/>
+                        <GradientStop Color="#f7f7f7" Offset="0.25"/>
+                        <GradientStop Color="#f5f5f5" Offset="0.5"/>
+                        <GradientStop Color="#EEEEEE" Offset="0.75"/>
+                        <GradientStop Color="#E0E0E0" Offset="1"/>
+                    </LinearGradientBrush>
+
+                </ResourceDictionary>
+
+                <ResourceDictionary x:Key="Dark">
+
+                    <Color x:Key="AppForegroundColor" >#191919</Color>
+                    <SolidColorBrush x:Key="AppForeground" Color="{ThemeResource AppForegroundColor}"/>
+                    <Color x:Key="AppBackgroundColor" >#0E0E0E</Color>
+                    <SolidColorBrush x:Key="AppBackground" Color="{ThemeResource AppBackgroundColor}"/>
+                    <Color x:Key="AppBorderBrushColor" >#202020</Color>
+                    <SolidColorBrush x:Key="AppBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
+
+                    <Color x:Key="AppStrokeColor" >#AA000000</Color>
+                    <SolidColorBrush x:Key="AppStroke" Color="{ThemeResource AppStrokeColor}"/>
+                    <Color x:Key="AppTextColor" >#BBFFFFFF</Color>
+                    <SolidColorBrush x:Key="AppText" Color="{ThemeResource AppTextColor}"/>
+
+                    <LinearGradientBrush x:Key="AppLinearBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Color="#232323" Offset="0"/>
+                        <GradientStop Color="#212121" Offset="0.25"/>
+                        <GradientStop Color="#202020" Offset="0.5"/>
+                        <GradientStop Color="#1F1F1F" Offset="0.75"/>
+                        <GradientStop Color="#1C1C1C" Offset="1"/>
+                    </LinearGradientBrush>
+
+                </ResourceDictionary>
+
+            </ResourceDictionary.ThemeDictionaries>
+
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

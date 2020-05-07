@@ -112,11 +112,11 @@ namespace Retouch_Photo2.Brushs
             float sizeHeight = this.SizeHeight;
             Vector2 sizeCenter = this.SizeCenter;
 
-            if (this._vsFillBrush == null)
+            if (brush == null)
                 NoneBrush.Show(drawingSession, sizeWidth, sizeHeight);
             else
-                this._vsFillBrush.Show(this.CanvasControl, drawingSession, sizeWidth, sizeHeight, sizeCenter, this.GrayAndWhiteBackground);
+                brush.Show(this.CanvasControl, drawingSession, sizeWidth, sizeHeight, sizeCenter, this.GrayAndWhiteBackground);
         }
-        
+
     }
 }

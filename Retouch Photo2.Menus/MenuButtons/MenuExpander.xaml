@@ -227,7 +227,7 @@
                 <ToggleButton x:Name="TitleToggleButton" Visibility="Collapsed" Grid.Column="1" HorizontalAlignment="Stretch" Background="Red"/> 
 
                 <Button x:Name="_CloseButton" Visibility="Collapsed" Grid.Column="2" Style="{StaticResource ButtonStyle}">
-                    <FontIcon Glyph="&#xE10A;" FontSize="18" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                    <FontIcon Glyph="&#xF78A;" FontSize="18" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                 </Button>
 
                 <Button x:Name="_StateButton" Visibility="Collapsed" Grid.Column="3" Style="{StaticResource ButtonStyle}">

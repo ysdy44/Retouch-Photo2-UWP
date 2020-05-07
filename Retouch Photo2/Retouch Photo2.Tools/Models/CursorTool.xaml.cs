@@ -162,14 +162,14 @@ namespace Retouch_Photo2.Tools.Models
 
             this.TransformerTool.Delta(startingPoint, point);//TransformerTool
         }
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
             //Box
             if (this._isBox)
             {
                 this._isBox = false;
 
-                if (isSingleStarted)
+                if (isOutNodeDistance)
                 {
                     //Select a layer of the same depth
                     bool isChildSingle = (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single
@@ -182,11 +182,16 @@ namespace Retouch_Photo2.Tools.Models
 
                     this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
                     this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    return;
                 }
+                return;
             }
 
-            this.TransformerTool.Complete(startingPoint, point, isSingleStarted); //TransformerTool
+            this.TransformerTool.Complete(startingPoint, point); //TransformerTool
+        }
+        public void Clicke(Vector2 point)
+        {
+            //Select single layer
+            this.TipViewModel.TransformerTool.SelectSingleLayer(point);
         }
 
         public void Draw(CanvasDrawingSession drawingSession)

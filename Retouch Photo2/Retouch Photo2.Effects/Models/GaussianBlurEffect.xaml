@@ -13,7 +13,7 @@
     <StackPanel>
 
         <!--Radius-->
-        <TextBlock x:Name="RadiusTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="RadiusTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <Slider x:Name="RadiusSlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
 
     </StackPanel>

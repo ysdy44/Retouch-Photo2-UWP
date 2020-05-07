@@ -11,7 +11,7 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         /// <param name="nodes"> The nodes. </param>
         /// <returns> The transformer. </returns>
-        public static Transformer RefactoringTransformer(IList<Node> nodes)
+        public static Transformer RefactoringTransformer(IEnumerable<Node> nodes)
         {
             float left = float.MaxValue;
             float top = float.MaxValue;
@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Layers
         /// </summary>      
         /// <param name="layers"> The layers. </param>
         /// <returns> The transformer. </returns>
-        public static Transformer RefactoringTransformer(IList<ILayer> layers)
+        public static Transformer RefactoringTransformer(IEnumerable<ILayer> layers)
         {
             float left = float.MaxValue;
             float top = float.MaxValue;

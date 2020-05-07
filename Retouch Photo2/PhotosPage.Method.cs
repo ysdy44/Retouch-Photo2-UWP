@@ -39,11 +39,9 @@ namespace Retouch_Photo2
 
             //Layer
             Photocopier photocopier = photo.ToPhotocopier();
-            ImageLayer imageLayer = new ImageLayer
+            ImageLayer imageLayer = new ImageLayer(transformerSource, photocopier)
             {
                 SelectMode = SelectMode.Selected,
-                TransformManager = new TransformManager(transformerSource),
-                StyleManager = new Brushs.StyleManager(transformerSource, transformerSource, photocopier),
             };
 
             //Selection

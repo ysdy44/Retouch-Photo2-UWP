@@ -16,7 +16,7 @@
     </Page.Resources>
 
 
-    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
         <StackPanel Orientation="Horizontal">
 
             <!--Center-->
@@ -32,14 +32,14 @@
             <ContentControl Width="4"/>
 
             <!--Mirror-->
-            <TextBlock x:Name="MirrorTextBlock" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock x:Name="MirrorTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <Button x:Name="MirrorButton" Style="{StaticResource AppCircleButtonStyle}">
-                <FontIcon Glyph="&#xE13C;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+                <FontIcon Glyph="&#xE13C;" FontWeight="Bold" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
             </Button>
 
             <ContentControl Width="4"/>
 
-            <TextBlock x:Name="ConvertTextBlock" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock x:Name="ConvertTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <toolsElements:ConvertToCurvesButton/>
 
             <ContentControl Width="4"/>

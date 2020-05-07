@@ -1,23 +1,20 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Brushs.Models;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Xml.Linq;
 using Windows.ApplicationModel.Resources;
-using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="LayerBase"/>'s ImageLayer .
+    /// <see cref="ILayer"/>'s ImageLayer .
     /// </summary>
-    public class ImageLayer : IGeometryLayer, ILayer
+    public class ImageLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -28,18 +25,38 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Construct a image-layer.
         /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public ImageLayer(XElement element) : this() => this.Load(element);
+        public ImageLayer() { }
         /// <summary>
         /// Construct a image-layer.
         /// </summary>
-        public ImageLayer()
+        /// <param name="transformer"> The transformer. </param>
+        /// <param name="photocopier"> The fill-brush photocopier. </param>
+        public ImageLayer(Transformer transformer, Photocopier photocopier)
         {
             base.Control = new LayerControl(this)
             {
                 Icon = new ImageIcon(),
                 Text = this.ConstructStrings(),
             };
+
+            base.StyleManager = new StyleManager
+            {
+                FillBrush = new ImageBrush
+                {
+                    Photocopier = photocopier,
+                    Source = transformer,
+                    Destination = transformer,
+                }
+            };
+        }
+
+
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        {
+            ImageLayer imageLayer = new ImageLayer();
+
+            LayerBase.CopyWith(resourceCreator, imageLayer, this);
+            return imageLayer;
         }
 
 
@@ -49,25 +66,13 @@ namespace Retouch_Photo2.Layers.Models
 
             return transformer.ToRectangle(resourceCreator, canvasToVirtualMatrix);
         }
-
-
-        public IEnumerable<IEnumerable<Node>> ConvertToCurves()
+        public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
         {
             Transformer transformer = base.TransformManager.Destination;
 
             return TransformerGeometry.ConvertToCurvesFromRectangle(transformer);
         }
 
-        public ILayer Clone(ICanvasResourceCreator resourceCreator)
-        {
-            ImageLayer imageLayer = new ImageLayer();
-
-            LayerBase.CopyWith(resourceCreator, imageLayer, this);
-            return imageLayer;
-        }
-
-        public void SaveWith(XElement element) { }
-        public void Load(XElement element) { }
 
         //Strings
         private string ConstructStrings()

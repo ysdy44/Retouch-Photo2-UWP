@@ -34,7 +34,6 @@ namespace Retouch_Photo2
             this.Loaded += (s, e) => this._lockLoaded();
 
             //ViewModel
-            this.ConstructViewModel();
             this.ConstructKeyboardViewModel();
 
 

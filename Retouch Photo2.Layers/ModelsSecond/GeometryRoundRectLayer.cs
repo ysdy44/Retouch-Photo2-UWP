@@ -11,9 +11,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="IGeometryLayer"/>'s GeometryRoundRectLayer .
+    /// <see cref="ILayer"/>'s GeometryRoundRectLayer .
     /// </summary>
-    public class GeometryRoundRectLayer : IGeometryLayer, ILayer
+    public class GeometryRoundRectLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -22,12 +22,7 @@ namespace Retouch_Photo2.Layers.Models
         //@Content
         public float Corner = 0.25f;
 
-        //@Construct   
-        /// <summary>
-        /// Construct a roundRect-layer.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public GeometryRoundRectLayer(XElement element) : this() => this.Load(element);
+        //@Construct
         /// <summary>
         /// Construct a roundRect-layer.
         /// </summary>
@@ -40,22 +35,8 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
         
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
-        {
-            Transformer transformer = base.TransformManager.Destination;
 
-            return TransformerGeometry.CreateRoundRect(resourceCreator, transformer, canvasToVirtualMatrix, this.Corner);
-        }
-
-
-        public IEnumerable<IEnumerable<Node>> ConvertToCurves()
-        {
-            Transformer transformer = base.TransformManager.Destination;
-
-            return TransformerGeometry.ConvertToCurvesFromRoundRect(transformer, this.Corner);
-        }
-
-        public ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryRoundRectLayer RoundRectLayer = new GeometryRoundRectLayer
             {
@@ -66,14 +47,29 @@ namespace Retouch_Photo2.Layers.Models
             return RoundRectLayer;
         }
         
-        public void SaveWith(XElement element)
+        public override void SaveWith(XElement element)
         {            
             element.Add(new XElement("Corner", this.Corner));
         }
-        public void Load(XElement element)
+        public override void Load(XElement element)
         {
             this.Corner = (float)element.Element("Corner");
         }
+
+
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.CreateRoundRect(resourceCreator, transformer, canvasToVirtualMatrix, this.Corner);
+        }
+        public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.ConvertToCurvesFromRoundRect(transformer, this.Corner);
+        }
+
 
         //Strings
         private string ConstructStrings()

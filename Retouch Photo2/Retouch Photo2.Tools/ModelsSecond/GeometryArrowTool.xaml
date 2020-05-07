@@ -16,7 +16,7 @@
     </Page.Resources>
     
 
-    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
         <StackPanel Orientation="Horizontal">
 
             <!--Width-->
@@ -32,7 +32,7 @@
             <ContentControl Width="4"/>
 
             <!--LeftTail-->
-            <TextBlock x:Name="LeftTailTextBlock" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock x:Name="LeftTailTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <toolsElements:ArrowTailTypeControl x:Name="LeftArrowTailTypeControl"
                  ArrowTailType="{x:Bind SelectionViewModel.GeometryArrowLeftTail, Mode=OneWay}"
                 />
@@ -40,14 +40,14 @@
             <ContentControl Width="4"/>
 
             <!--RightTail-->
-            <TextBlock x:Name="RightTailTextBlock" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock x:Name="RightTailTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <toolsElements:ArrowTailTypeControl x:Name="RightArrowTailTypeControl"
                  ArrowTailType="{x:Bind SelectionViewModel.GeometryArrowRightTail, Mode=OneWay}"
                 />
 
             <ContentControl Width="4"/>
 
-            <TextBlock x:Name="ConvertTextBlock" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock x:Name="ConvertTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <toolsElements:ConvertToCurvesButton/>
 
             <ContentControl Width="4"/>

@@ -22,7 +22,7 @@
                 </StackPanel>
             </Flyout>
         </Button.Flyout>
-        <FontIcon Glyph="&#xE10C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+        <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
     </Button>
 
 </UserControl>

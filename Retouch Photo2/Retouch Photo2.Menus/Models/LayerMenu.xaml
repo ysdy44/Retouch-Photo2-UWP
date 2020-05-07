@@ -26,14 +26,14 @@
                 <VisualState x:Name="Disable">
                     <VisualState.Setters>
 
-                        <Setter Target = "OpacitySlider.IsEnabled" Value="false"/>
-                        <Setter Target = "BlendModeButton.IsEnabled" Value="false"/>
+                        <Setter Target = "OpacitySlider.IsEnabled" Value="False"/>
+                        <Setter Target = "BlendModeButton.IsEnabled" Value="False"/>
 
-                        <Setter Target = "VisibilityButton.IsEnabled" Value="false"/>
-                        <Setter Target = "DuplicateButton.IsEnabled" Value="false"/>
-                        <Setter Target = "RemoveButton.IsEnabled" Value="false"/>
-                        <Setter Target = "GroupButton.IsEnabled" Value="false"/>
-                        <Setter Target = "UnGroupButton.IsEnabled" Value="false"/>
+                        <Setter Target = "VisibilityButton.IsEnabled" Value="False"/>
+                        <Setter Target = "DuplicateButton.IsEnabled" Value="False"/>
+                        <Setter Target = "RemoveButton.IsEnabled" Value="False"/>
+                        <Setter Target = "GroupButton.IsEnabled" Value="False"/>
+                        <Setter Target = "UnGroupButton.IsEnabled" Value="False"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -45,14 +45,14 @@
                 <!--SingleLayerWithoutChildren-->
                 <VisualState x:Name="SingleLayerWithoutChildren">
                     <VisualState.Setters>
-                        <Setter Target = "UnGroupButton.IsEnabled" Value="false"/>
+                        <Setter Target = "UnGroupButton.IsEnabled" Value="False"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--MultipleLayer-->
                 <VisualState x:Name="MultipleLayer">
                     <VisualState.Setters>
-                        <Setter Target = "UnGroupButton.IsEnabled" Value="false"/>
+                        <Setter Target = "UnGroupButton.IsEnabled" Value="False"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -64,17 +64,17 @@
             <StackPanel MinHeight="165" Padding="1,2">
 
                 <!--Opacity-->
-                <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlock}"/>
+                <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <Slider x:Name="OpacitySlider" Margin="2,0" TickFrequency="25" TickPlacement="Inline" Style="{StaticResource AppOpacitySliderStyle}" 
                             Value="{x:Bind OpacityToValueConverter(SelectionViewModel.Opacity),Mode=OneWay}"/>
 
 
                 <!--Blend Mode-->
-                <TextBlock x:Name="BlendModeTextBlock" Style="{StaticResource AppTextBlock}"/>
+                <TextBlock x:Name="BlendModeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <Button x:Name="BlendModeButton" Style="{StaticResource AppIconRoundedButtonStyle}"
-                        Content="{x:Bind BlendModeControl.Title,Mode=OneWay}">
+                        Content="{x:Bind BlendModeComboBox.Tag, Mode=OneWay}">
                     <Button.Tag>
-                        <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                        <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
                     </Button.Tag>
                 </Button>
                 
@@ -83,7 +83,7 @@
 
                 <!--Layers-->
                 <RelativePanel Padding="2,0">
-                    <TextBlock x:Name="LayersTextBlock" Style="{StaticResource AppTextBlock}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
+                    <TextBlock x:Name="LayersTextBlock" Style="{StaticResource AppTextBlockStyle}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
                     <!--Visibility-->
                     <ToggleButton x:Name="VisibilityButton" Style="{StaticResource AppCircleToggleButtonStyle}" RelativePanel.AlignRightWithPanel="True"
                                   IsChecked="{x:Bind VisibilityToBoolConverter(SelectionViewModel.Visibility),Mode=OneWay}" >
@@ -113,7 +113,7 @@
 
 
                 <!--Tag Type-->
-                <TextBlock x:Name="TagTypeTextBlock" Grid.Column="0" Grid.Row="0" Style="{StaticResource AppTextBlock}"/>
+                <TextBlock x:Name="TagTypeTextBlock" Grid.Column="0" Grid.Row="0" Style="{StaticResource AppTextBlockStyle}"/>
                 <blends:TagTypeControl x:Name="TagTypeControl" Type="{x:Bind SelectionViewModel.TagType,Mode=OneWay}" />
 
             </StackPanel>
@@ -121,7 +121,9 @@
 
 
         <menus:MenuExpander.SecondPage>
-            <blends:BlendModeControl x:Name="BlendModeControl" MaxHeight="300" Background="Transparent" Mode="{x:Bind SelectionViewModel.BlendMode, Mode=OneWay}"/>
+            <ScrollViewer MaxHeight="300">
+                <blends:BlendModeComboBox x:Name="BlendModeComboBox" Mode="{x:Bind SelectionViewModel.BlendMode, Mode=OneWay}"/>
+            </ScrollViewer>
         </menus:MenuExpander.SecondPage>
 
 

@@ -11,13 +11,13 @@
     d:DesignWidth="400"
     >
 
-    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
         <StackPanel Orientation="Horizontal">
 
             <!--StepFrequency-->
             <ToggleButton IsChecked="{x:Bind KeyboardViewModel.IsStepFrequency,Mode=TwoWay}" Style="{StaticResource AppCircleToggleButtonStyle}">
                 <ToolTipService.ToolTip>
-                    <ToolTip x:Name="StepFrequencyToolTip" Placement="Top" Style="{StaticResource AppToolTip}"/>
+                    <ToolTip x:Name="StepFrequencyToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
                 <PathIcon>
                     <PathIcon.Data>
@@ -29,7 +29,7 @@
             <ContentControl Width="4"/>
 
             <!--Multi-Mode-->
-            <elements:CompositeModeControl x:Name="ModeControl" Mode="{x:Bind KeyboardViewModel.CompositeMode,Mode=TwoWay}"/>
+            <elements:CompositeModeSegmented x:Name="ModeControl" Mode="{x:Bind KeyboardViewModel.CompositeMode,Mode=TwoWay}"/>
 
             <ContentControl Width="4"/>
 

@@ -20,7 +20,7 @@
     <StackPanel>
 
         <!--Amount-->
-        <TextBlock x:Name="AmountTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="AmountTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <hsvColorPickers:TouchSlider x:Name="AmountSlider" Minimum="0" Maximum="100">
             <hsvColorPickers:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
@@ -31,7 +31,7 @@
         </hsvColorPickers:TouchSlider>
 
         <!--Curve-->
-        <TextBlock x:Name="CurveTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="CurveTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <hsvColorPickers:TouchSlider x:Name="CurveSlider" Minimum="0" Maximum="100">
             <hsvColorPickers:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
@@ -42,7 +42,7 @@
         </hsvColorPickers:TouchSlider>
 
         <!--Color-->
-        <TextBlock x:Name="ColorTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="ColorTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <Border x:Name="ColorButton" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource AppCircleBorderStyle}">
             <Border.Background>
                 <SolidColorBrush x:Name="SolidColorBrush"/>

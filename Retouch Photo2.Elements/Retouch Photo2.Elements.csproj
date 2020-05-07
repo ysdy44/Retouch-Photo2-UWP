@@ -106,6 +106,10 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="%24MainPages\ProjectViewItem.xaml.cs">
+      <DependentUpon>ProjectViewItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="%24MainPages\SelectMode.cs" />
     <Compile Include="ApplicationLocalTextFileProvider.cs" />
     <Compile Include="ColorPicker2.xaml.cs">
       <DependentUpon>ColorPicker2.xaml</DependentUpon>
@@ -134,14 +138,13 @@
     <Compile Include="ColorPicker2Icons\WheelIcon.xaml.cs">
       <DependentUpon>WheelIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CompositeModeControl.xaml.cs">
-      <DependentUpon>CompositeModeControl.xaml</DependentUpon>
+    <Compile Include="CompositeModeSegmented.xaml.cs">
+      <DependentUpon>CompositeModeSegmented.xaml</DependentUpon>
     </Compile>
     <Compile Include="ApplicationViewTitleBarBackgroundExtension.cs" />
-    <Compile Include="FormatComboBox.xaml.cs">
-      <DependentUpon>FormatComboBox.xaml</DependentUpon>
+    <Compile Include="FileFormatComboBox.xaml.cs">
+      <DependentUpon>FileFormatComboBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FormatType.cs" />
     <Compile Include="Photos\Photo.SaveXMLPhotocopter.cs" />
     <Compile Include="RadiusAnimaIcon.xaml.cs">
       <DependentUpon>RadiusAnimaIcon.xaml</DependentUpon>
@@ -151,15 +154,6 @@
     </Compile>
     <Compile Include="DialogBase.xaml.cs">
       <DependentUpon>DialogBase.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="%24MainPages\AppbarAccentButton.xaml.cs">
-      <DependentUpon>AppbarAccentButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="%24MainPages\AppbarAccentCloseButton.xaml.cs">
-      <DependentUpon>AppbarAccentCloseButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="%24MainPages\AppbarAccentPrimaryButton.xaml.cs">
-      <DependentUpon>AppbarAccentPrimaryButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExpandAppbars\ExpandAppbar.xaml.cs">
       <DependentUpon>ExpandAppbar.xaml</DependentUpon>
@@ -184,9 +178,6 @@
     <Compile Include="Photos\Photocopier.cs" />
     <Compile Include="%24MainPages\MainLayout.xaml.cs">
       <DependentUpon>MainLayout.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="OnOffSwitch.xaml.cs">
-      <DependentUpon>OnOffSwitch.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RadiansPicker.xaml.cs">
@@ -239,6 +230,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="%24MainPages\ProjectViewItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ColorPicker2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -275,11 +270,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CompositeModeControl.xaml">
+    <Page Include="CompositeModeSegmented.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FormatComboBox.xaml">
+    <Page Include="FileFormatComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -292,18 +287,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DialogBase.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="%24MainPages\AppbarAccentButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="%24MainPages\AppbarAccentCloseButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="%24MainPages\AppbarAccentPrimaryButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -328,10 +311,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="%24MainPages\MainLayout.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="OnOffSwitch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

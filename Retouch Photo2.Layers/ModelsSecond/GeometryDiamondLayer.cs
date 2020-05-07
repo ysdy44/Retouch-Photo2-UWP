@@ -3,7 +3,6 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.ApplicationModel.Resources;
@@ -11,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="IGeometryLayer"/>'s GeometryDiamondLayer .
+    /// <see cref="ILayer"/>'s GeometryDiamondLayer .
     /// </summary>
-    public class GeometryDiamondLayer : IGeometryLayer, ILayer
+    public class GeometryDiamondLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -26,11 +25,6 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Construct a diamond-layer.
         /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public GeometryDiamondLayer(XElement element) : this() => this.Load(element);
-        /// <summary>
-        /// Construct a diamond-layer.
-        /// </summary>
         public GeometryDiamondLayer()
         {
             base.Control = new LayerControl(this)
@@ -40,22 +34,8 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
 
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
-        {
-            Transformer transformer = base.TransformManager.Destination;
-
-            return TransformerGeometry.CreateDiamond(resourceCreator, transformer, canvasToVirtualMatrix, this.Mid);
-        }
-
-
-        public IEnumerable<IEnumerable<Node>> ConvertToCurves()
-        {
-            Transformer transformer = base.TransformManager.Destination;
-
-            return TransformerGeometry.ConvertToCurvesFromDiamond(transformer, this.Mid);
-        }
-
-        public ILayer Clone(ICanvasResourceCreator resourceCreator)
+       
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryDiamondLayer DiamondLayer = new GeometryDiamondLayer
             {
@@ -66,14 +46,29 @@ namespace Retouch_Photo2.Layers.Models
             return DiamondLayer;
         }
         
-        public void SaveWith(XElement element)
+        public override void SaveWith(XElement element)
         {            
             element.Add(new XElement("Mid", this.Mid));
         }
-        public void Load(XElement element)
+        public override void Load(XElement element)
         {
             this.Mid = (float)element.Element("Mid");
         }
+
+
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.CreateDiamond(resourceCreator, transformer, canvasToVirtualMatrix, this.Mid);
+        }
+        public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.ConvertToCurvesFromDiamond(transformer, this.Mid);
+        }
+
 
         //Strings
         private string ConstructStrings()

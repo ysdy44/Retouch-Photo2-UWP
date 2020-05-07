@@ -3,7 +3,6 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.ApplicationModel.Resources;
@@ -11,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="IGeometryLayer"/>'s GeometryPieLayer .
+    /// <see cref="ILayer"/>'s GeometryPieLayer .
     /// </summary>
-    public partial class GeometryPieLayer : IGeometryLayer, ILayer
+    public partial class GeometryPieLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -22,12 +21,7 @@ namespace Retouch_Photo2.Layers.Models
         //@Content       
         public float SweepAngle = FanKit.Math.Pi / 2f;
 
-        //@Construct        
-        /// <summary>
-        /// Construct a pie-layer.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public GeometryPieLayer(XElement element) : this() => this.Load(element);
+        //@Construct
         /// <summary>
         /// Construct a pie-layer.
         /// </summary>
@@ -40,22 +34,8 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
         
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
-        {
-            Transformer transformer = base.TransformManager.Destination;
 
-            return TransformerGeometry.CreatePie(resourceCreator, transformer, canvasToVirtualMatrix, this.SweepAngle);
-        }
-
-
-        public IEnumerable<IEnumerable<Node>> ConvertToCurves()
-        {
-            Transformer transformer = base.TransformManager.Destination;
-
-            return TransformerGeometry.ConvertToCurvesFromPie(transformer,  this.SweepAngle);
-        }
-
-        public ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryPieLayer PieLayer = new GeometryPieLayer();
 
@@ -63,14 +43,29 @@ namespace Retouch_Photo2.Layers.Models
             return PieLayer;
         }
 
-        public void SaveWith(XElement element)
+        public override void SaveWith(XElement element)
         {            
             element.Add(new XElement("SweepAngle", this.SweepAngle));
         }
-        public void Load(XElement element)
+        public override void Load(XElement element)
         {
             this.SweepAngle = (float)element.Element("SweepAngle");
         }
+
+
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.CreatePie(resourceCreator, transformer, canvasToVirtualMatrix, this.SweepAngle);
+        }
+        public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.ConvertToCurvesFromPie(transformer, this.SweepAngle);
+        }
+
 
         //Strings
         private string ConstructStrings()

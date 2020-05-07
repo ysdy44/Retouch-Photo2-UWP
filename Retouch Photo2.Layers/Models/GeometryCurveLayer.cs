@@ -3,7 +3,6 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.ApplicationModel.Resources;
@@ -11,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="IGeometryLayer"/>'s GeometryCurveLayer .
+    /// <see cref="ILayer"/>'s GeometryCurveLayer .
     /// </summary>
-    public class GeometryCurveLayer : IGeometryLayer, ILayer
+    public class GeometryCurveLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -23,11 +22,6 @@ namespace Retouch_Photo2.Layers.Models
         public NodeCollection Nodes { get; private set; }
 
         //@Construct
-        /// <summary>
-        /// Construct a curve-layer.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public GeometryCurveLayer(XElement element) : this() => this.Load(element);
         /// <summary>
         /// Construct a curve-layer.
         /// </summary>
@@ -52,24 +46,6 @@ namespace Retouch_Photo2.Layers.Models
         public GeometryCurveLayer(Vector2 left, Vector2 right) : this() => this.Nodes = new NodeCollection(left, right);
 
 
-        //@Override
-        public override void CacheTransform()
-        {
-            base.CacheTransform();
-            this.Nodes.CacheTransform();
-        }
-        public override void TransformMultiplies(Matrix3x2 matrix)
-        {
-            base.TransformMultiplies(matrix);
-            this.Nodes.TransformMultiplies(matrix);
-        }
-        public override void TransformAdd(Vector2 vector)
-        {
-            base.TransformAdd(vector);
-            this.Nodes.TransformAdd(vector);
-        }
-
-
         public override Transformer GetActualDestinationWithRefactoringTransformer
         {
             get
@@ -87,15 +63,24 @@ namespace Retouch_Photo2.Layers.Models
             }
         }
 
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        public override void CacheTransform()
         {
-            return this.Nodes.CreateGeometry(resourceCreator).Transform(canvasToVirtualMatrix);
+            base.CacheTransform();
+            this.Nodes.CacheTransform();
         }
+        public override void TransformMultiplies(Matrix3x2 matrix)
+        {
+            base.TransformMultiplies(matrix);
+            this.Nodes.TransformMultiplies(matrix);
+        }
+        public override void TransformAdd(Vector2 vector)
+        {
+            base.TransformAdd(vector);
+            this.Nodes.TransformAdd(vector);
+        }
+        
 
-
-        public IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;
-
-        public ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryCurveLayer curveLayer = new GeometryCurveLayer
             {
@@ -106,17 +91,22 @@ namespace Retouch_Photo2.Layers.Models
             return curveLayer;
         }
 
-        public void SaveWith(XElement element)
+        public override void SaveWith(XElement element)
         {
-            element.Add
-            (
-                FanKit.Transformers.XML.SaveNodeCollection("Nodes", "Node", this.Nodes)
-            );
+            element.Add(FanKit.Transformers.XML.SaveNodeCollection("Nodes", "Node", this.Nodes));
         }
-        public void Load(XElement element)
+        public override void Load(XElement element)
         {
             this.Nodes = FanKit.Transformers.XML.LoadNodeCollection("Node", element.Element("Nodes"));
         }
+
+
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        {
+            return this.Nodes.CreateGeometry(resourceCreator).Transform(canvasToVirtualMatrix);
+        }
+        public override IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;
+
 
         //Strings
         private string ConstructStrings()

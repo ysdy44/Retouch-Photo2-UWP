@@ -14,11 +14,11 @@
     <StackPanel>
 
         <!--Radius-->
-        <TextBlock x:Name="RadiusTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="RadiusTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <Slider x:Name="RadiusSlider" Minimum="0" Maximum="10" Style="{ThemeResource AppOpacitySliderStyle}"/>
 
         <!--Angle-->
-        <TextBlock x:Name="AngleTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="AngleTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <element:RadiansPicker x:Name="AnglePicker" HorizontalAlignment="Left" VerticalAlignment="Top"
                                BorderBrush="{ThemeResource AppBorderBrush}"
                                Background="{ThemeResource AppForeground}"

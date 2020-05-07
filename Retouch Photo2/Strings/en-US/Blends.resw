@@ -174,7 +174,7 @@
   <data name="Multiply" xml:space="preserve">
     <value>Multiply</value>
   </data>
-  <data name="Normal" xml:space="preserve">
+  <data name="None" xml:space="preserve">
     <value>Normal</value>
   </data>
   <data name="Overlay" xml:space="preserve">

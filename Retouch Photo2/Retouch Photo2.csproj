@@ -173,10 +173,24 @@
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Elements\FillColorEllipseButton.cs" />
     <Compile Include="Retouch Photo2.Tools\Elements\StrokeColorEllipseButton.cs" />
+    <Compile Include="Retouch Photo2.Tools\GeometryTool.xaml.cs">
+      <DependentUpon>GeometryTool.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Tools\Models\BrushTool.Fill.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\BrushTool.Stroke.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\CursorTool.xaml.cs">
       <DependentUpon>CursorTool.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\Models\GeometryRectangleTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\GeometryEllipseTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\NodeTool.xaml.cs">
+      <DependentUpon>NodeTool.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\Models\PenTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\TextFrameTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\TextArtisticTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\TextTool.xaml.cs">
+      <DependentUpon>TextTool.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Models\MoreTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\ViewRadianConverter.cs" />
@@ -258,12 +272,6 @@
     <Compile Include="Retouch Photo2.Tools\Models\CropTool.xaml.cs">
       <DependentUpon>CropTool.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Models\TextArtisticTool.xaml.cs">
-      <DependentUpon>TextArtisticTool.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Models\TextFrameTool.xaml.cs">
-      <DependentUpon>TextFrameTool.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Retouch Photo2.Tools\Models\TransparencyTool.xaml.cs">
       <DependentUpon>TransparencyTool.xaml</DependentUpon>
     </Compile>
@@ -272,17 +280,8 @@
     <Compile Include="Retouch Photo2.Tools\Models\BrushTool.xaml.cs">
       <DependentUpon>BrushTool.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Models\GeometryEllipseTool.xaml.cs">
-      <DependentUpon>GeometryEllipseTool.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Retouch Photo2.Tools\Models\ImageTool.xaml.cs">
       <DependentUpon>ImageTool.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Models\PenTool.xaml.cs">
-      <DependentUpon>PenTool.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Models\GeometryRectangleTool.xaml.cs">
-      <DependentUpon>GeometryRectangleTool.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Models\ViewTool.xaml.cs">
       <DependentUpon>ViewTool.xaml</DependentUpon>
@@ -498,7 +497,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Retouch Photo2.Tools\GeometryTool.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Retouch Photo2.Tools\Models\CursorTool.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\Models\NodeTool.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\TextTool.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -590,14 +601,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Models\TextArtisticTool.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Models\TextFrameTool.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Retouch Photo2.Tools\Models\TransparencyTool.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -606,21 +609,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Retouch Photo2.Tools\Models\GeometryEllipseTool.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Retouch Photo2.Tools\Models\ImageTool.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Models\PenTool.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Models\GeometryRectangleTool.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Retouch Photo2.Tools\Models\ViewTool.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -676,6 +667,10 @@
     <ProjectReference Include="..\Retouch Photo2.Brushs\Retouch Photo2.Brushs.csproj">
       <Project>{00e87876-1aa4-4b48-af1c-f1db75fbf587}</Project>
       <Name>Retouch Photo2.Brushs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Characters\Retouch Photo2.Characters.csproj">
+      <Project>{73ef3e4b-968b-4d54-83d2-5d7e8cd02caf}</Project>
+      <Name>Retouch Photo2.Characters</Name>
     </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Effects\Retouch Photo2.Effects.csproj">
       <Project>{c14d4618-e234-4d91-8ced-49cbd9f6f3c7}</Project>

@@ -50,52 +50,35 @@ namespace Retouch_Photo2
         /// </summary>
         private async Task<bool> Export()
         {
-            //CanvasRenderTarget
-            float width = this.ViewModel.CanvasTransformer.Width;
-            float height = this.ViewModel.CanvasTransformer.Height;
-            ICanvasResourceCreatorWithDpi resourceCreator = this.MainCanvasControl.CanvasControl;
-            CanvasRenderTarget renderTarget = new CanvasRenderTarget(resourceCreator, width, height);
+            float canvasWidth = this.ViewModel.CanvasTransformer.Width;
+            float canvasHeight = this.ViewModel.CanvasTransformer.Height;
+            
+            float fileWidth = this.ViewModel.CanvasTransformer.Width;//@Debug
+            float fileHeight = this.ViewModel.CanvasTransformer.Height;//@Debug
 
-
+            float scaleX = fileWidth / canvasWidth;
+            float scaleY = fileHeight / canvasHeight;
+            Matrix3x2 matrix = Matrix3x2.CreateScale(scaleX, scaleY);
+         
             //Render
-            Matrix3x2 matrix = Matrix3x2.CreateScale(1.0f, 1.0f);
+            CanvasRenderTarget renderTarget = new CanvasRenderTarget(this.ViewModel.CanvasDevice, fileWidth, fileHeight);
             ICanvasImage canvasImage = this.MainCanvasControl.Render(matrix);
             using (CanvasDrawingSession drawingSession = renderTarget.CreateDrawingSession())
             {
                 drawingSession.DrawImage(canvasImage);
             }
 
+            //Export
+            return await FileUtil.ExportStorageFile
+            (
+                renderTarget: renderTarget,
 
-            //FileSavePicker
-            string fileChoices = this.ExportComboBox.FileChoices;
-            string suggestedFileName = this.ViewModel.Name;
-            FileSavePicker savePicker = new FileSavePicker
-            {
-                SuggestedStartLocation = PickerLocationId.Desktop,
-                SuggestedFileName = suggestedFileName,
-            };
-            savePicker.FileTypeChoices.Add("DB", new[] { fileChoices });
+                fileChoices: this.ExportComboBox.FileChoices,
+                suggestedFileName: this.ViewModel.Name,
 
-
-            //PickSaveFileAsync
-            StorageFile file = await savePicker.PickSaveFileAsync();
-            if (file == null) return false;
-
-            try
-            {
-                CanvasBitmapFileFormat fileFormat = this.ExportComboBox.FileFormat;
-                float quality = 1.0f;
-
-                using (IRandomAccessStream accessStream = await file.OpenAsync(FileAccessMode.ReadWrite))
-                {
-                    await renderTarget.SaveAsync(accessStream, fileFormat, quality);
-                }
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+                fileFormat: this.ExportComboBox.FileFormat,
+                quality: 1.0f
+            );
         }
 
 

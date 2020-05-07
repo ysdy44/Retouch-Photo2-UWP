@@ -186,38 +186,14 @@
   <data name="MoreCreate_Center" xml:space="preserve">
     <value>Center Scaling</value>
   </data>
-  <data name="MoreCreate_CenterOff" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="MoreCreate_CenterOn" xml:space="preserve">
-    <value>Center</value>
-  </data>
   <data name="MoreCreate_Square" xml:space="preserve">
     <value>Equal width and height</value>
-  </data>
-  <data name="MoreCreate_SquareOff" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="MoreCreate_SquareOn" xml:space="preserve">
-    <value>Square</value>
   </data>
   <data name="MoreTransform_Center" xml:space="preserve">
     <value>Center Scaling</value>
   </data>
-  <data name="MoreTransform_CenterOff" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="MoreTransform_CenterOn" xml:space="preserve">
-    <value>Center</value>
-  </data>
   <data name="MoreTransform_Ratio" xml:space="preserve">
     <value>Ratio Scaling</value>
-  </data>
-  <data name="MoreTransform_RatioOff" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="MoreTransform_RatioOn" xml:space="preserve">
-    <value>Ratio</value>
   </data>
   <data name="PenMode_Mode" xml:space="preserve">
     <value>Mode</value>

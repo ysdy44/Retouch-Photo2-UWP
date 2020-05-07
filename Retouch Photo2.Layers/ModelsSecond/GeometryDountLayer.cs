@@ -3,7 +3,6 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.ApplicationModel.Resources;
@@ -11,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="IGeometryLayer"/>'s GeometryDountLayer .
+    /// <see cref="ILayer"/>'s GeometryDountLayer .
     /// </summary>
-    public partial class GeometryDountLayer : IGeometryLayer, ILayer
+    public partial class GeometryDountLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -22,12 +21,7 @@ namespace Retouch_Photo2.Layers.Models
         //@Content       
         public float HoleRadius = 0.5f;
 
-        //@Construct        
-        /// <summary>
-        /// Construct a pie-layer.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public GeometryDountLayer(XElement element) : this() => this.Load(element);
+        //@Construct
         /// <summary>
         /// Construct a pie-layer.
         /// </summary>
@@ -40,22 +34,8 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
         
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
-        {
-            Transformer transformer = base.TransformManager.Destination;
 
-            return TransformerGeometry.CreateDount(resourceCreator, transformer, canvasToVirtualMatrix, this.HoleRadius);
-        }
-
-
-        public IEnumerable<IEnumerable<Node>> ConvertToCurves()
-        {
-            Transformer transformer = base.TransformManager.Destination;
-
-            return TransformerGeometry.ConvertToCurvesFromDount(transformer, this.HoleRadius);
-        }        
-
-        public ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryDountLayer DountLayer = new GeometryDountLayer();
 
@@ -63,14 +43,29 @@ namespace Retouch_Photo2.Layers.Models
             return DountLayer;
         }
         
-        public void SaveWith(XElement element)
+        public override void SaveWith(XElement element)
         {            
             element.Add(new XElement("HoleRadius", this.HoleRadius));
         }
-        public void Load(XElement element)
+        public override void Load(XElement element)
         {
             this.HoleRadius = (float)element.Element("HoleRadius");
         }
+
+
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.CreateDount(resourceCreator, transformer, canvasToVirtualMatrix, this.HoleRadius);
+        }
+        public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.ConvertToCurvesFromDount(transformer, this.HoleRadius);
+        }
+
 
         //Strings
         private string ConstructStrings()

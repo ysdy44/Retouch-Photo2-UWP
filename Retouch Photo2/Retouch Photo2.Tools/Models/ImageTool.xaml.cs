@@ -111,12 +111,10 @@ namespace Retouch_Photo2.Tools.Models
             Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, photo.Width, photo.Height);
 
-            //Mezzanine
-            this.ViewModel.MezzanineLayer = new ImageLayer
+            //Mezzanine         
+            this.ViewModel.MezzanineLayer = new ImageLayer(transformerSource, photocopier)
             {
                 SelectMode = SelectMode.Selected,
-                TransformManager = new TransformManager(transformerSource, transformerDestination),
-                StyleManager = new StyleManager(transformerSource, transformerDestination, photocopier),
             };
             this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.ViewModel.MezzanineLayer);
 
@@ -149,11 +147,11 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate();//Invalidate
         }
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
             if (this.ViewModel.MezzanineLayer == null) return;
 
-            if (isSingleStarted)
+            if (isOutNodeDistance)
             {
                 Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
                 this.ViewModel.MezzanineLayer.TransformManager.Destination = transformerDestination;
@@ -173,6 +171,11 @@ namespace Retouch_Photo2.Tools.Models
             this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+        }
+        public void Clicke(Vector2 point)
+        {
+            //Select single layer
+            this.TipViewModel.TransformerTool.SelectSingleLayer(point);
         }
 
 

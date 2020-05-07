@@ -235,11 +235,11 @@ namespace Retouch_Photo2.Menus.Models
             //Blend Mode
             this.BlendModeButton.Tapped += (s, e) =>
             {
-                this.BlendModeControl.Mode = this.SelectionViewModel.BlendMode;
+                this.BlendModeComboBox.Mode = this.SelectionViewModel.BlendMode;
 
                 this._Expander.IsSecondPage = true;
             };
-            this.BlendModeControl.ModeChanged += (s, mode) =>
+            this.BlendModeComboBox.ModeChanged += (s, mode) =>
             {
                 //Selection
                 this.SelectionViewModel.BlendMode = mode;

@@ -61,7 +61,8 @@ namespace Retouch_Photo2.Tools.Models
         public void Starting(Vector2 point) { }
         public void Started(Vector2 startingPoint, Vector2 point) { }
         public void Delta(Vector2 startingPoint, Vector2 point) { }
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted) { }
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) { }
+        public void Clicke(Vector2 point) { }
 
         public void Draw(CanvasDrawingSession drawingSession) { }
 

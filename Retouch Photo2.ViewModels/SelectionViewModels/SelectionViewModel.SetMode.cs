@@ -18,26 +18,7 @@ namespace Retouch_Photo2.ViewModels
     {
 
         /// <summary>
-        /// Get the selected layer.
-        /// <see cref="ListViewSelectionMode.None"/>: null;
-        /// <see cref="ListViewSelectionMode.Single"/>: layer;
-        /// <see cref="ListViewSelectionMode.Multiple"/>: first layer;
-        /// </summary>
-        /// <returns> The selected layer. </returns>
-        public ILayer GetFirstLayer()
-        {
-            switch (this.SelectionMode)
-            {
-                case ListViewSelectionMode.None: return null;
-                case ListViewSelectionMode.Single: return this.Layer;
-                case ListViewSelectionMode.Multiple: return this.Layers.FirstOrDefault();
-                default: return null;
-            }
-        }
-
-        
-        /// <summary>
-        ///  Sets and notify all properties.
+        ///  Sets the mode and notify all properties.
         /// </summary>
         /// <param name="layerCollection"> The layer-collection. </param>
         public void SetMode(LayerCollection layerCollection)
@@ -45,13 +26,21 @@ namespace Retouch_Photo2.ViewModels
             IList<ILayer> checkedLayers = layerCollection.GetAllSelectedLayers();
             int count = checkedLayers.Count();
 
-            if (count == 0) this._setModeNone();//None
-            else if (count == 1) this._setModeSingle(checkedLayers.Single());//Single
-            else if (count >= 2) this._setModeMultiple(checkedLayers);//Multiple
+            if (count == 0)
+                this._setModeNone();//None
+            else if (count == 1)
+                this._setModeSingle(checkedLayers.Single());//Single
+            else if (count >= 2)
+                this._setModeMultiple(checkedLayers);//Multiple
         }
+        
 
         //////////////////////////
 
+
+        /// <summary>
+        ///  Sets the mode to None.
+        /// </summary>
         public void SetModeNone()
         {
             if (this.Layer!=null)
@@ -70,19 +59,19 @@ namespace Retouch_Photo2.ViewModels
         }
         private void _setModeNone()
         {
+            this.SelectionMode = ListViewSelectionMode.None;
+
             this.Transformer = new Transformer();
-            this.DisabledRadian = false;//DisabledRadian
+            this.DisabledRadian = false;
 
             this.Layer = null;
             this.Layers = null;
-
-            this.SelectionMode = ListViewSelectionMode.None;
 
             //////////////////////////
 
             this.Type = LayerType.None;
             this.SetOpacity(1.0f);
-            this.SetBlendMode(null);
+            this.BlendMode = null;
             this.SetVisibility(Visibility.Collapsed);
             this.SetTagType(TagType.None);
 
@@ -98,15 +87,20 @@ namespace Retouch_Photo2.ViewModels
             this.SetGroupLayer(null);
             this.SetImageLayer(null);
             this.SetCurveLayer(null);
-            this.SetTextFrameLayer(null);
+            this.SetFontLayer(null);
             
             //////////////////////////
 
             this.SetIGeometryLayer(null);            
         }
 
+
         //////////////////////////
 
+        /// <summary>
+        ///  Sets the mode to Single.
+        /// </summary>
+        /// <param name="layer"> The single layer. </param>
         public void SetModeSingle(ILayer layer)
         {
             if (this.Layers != null)
@@ -120,18 +114,19 @@ namespace Retouch_Photo2.ViewModels
         }
         private void _setModeSingle(ILayer layer)
         {
+            this.SelectionMode = ListViewSelectionMode.Single;
+
             this.Transformer = layer.GetActualDestinationWithRefactoringTransformer;
-            
+            this.DisabledRadian = false;
+
             this.Layer = layer;
             this.Layers = null;
-
-            this.SelectionMode = ListViewSelectionMode.Single;
 
             //////////////////////////
 
             this.Type = layer.Type;
             this.SetOpacity(layer.Opacity);
-            this.SetBlendMode(layer.BlendMode);
+            this.BlendMode = layer.BlendMode;
             this.SetVisibility(layer.Visibility);
             this.SetTagType(layer.TagType);
 
@@ -147,15 +142,21 @@ namespace Retouch_Photo2.ViewModels
             this.SetGroupLayer(layer);
             this.SetImageLayer(layer);
             this.SetCurveLayer(layer);
-            this.SetTextFrameLayer(layer);
+            this.SetFontLayer(layer);
 
             //////////////////////////
 
             this.SetIGeometryLayer(layer);
         }
 
+
         //////////////////////////
 
+
+        /// <summary>
+        ///  Sets the mode to Multiple.
+        /// </summary>
+        /// <param name="layer"> The multiple layer. </param>
         public void SetModeMultiple(IList<ILayer> layers)
         {
             if (this.Layer != null)
@@ -166,19 +167,13 @@ namespace Retouch_Photo2.ViewModels
         }
         private void _setModeMultiple(IList<ILayer> layers)
         {
-            Transformer transformer = LayerCollection.RefactoringTransformer(layers);
-            this._setModeMultipleWithTransformer(layers, transformer, false);
-        }
-
-        private void _setModeMultipleWithTransformer(IEnumerable<ILayer> layers, Transformer transformer, bool disabledRadian)
-        {
-            this.Transformer = transformer;
-            this.DisabledRadian = disabledRadian;
+            this.SelectionMode = ListViewSelectionMode.Multiple;//Transformer     
 
             this.Layer = null;
             this.Layers = layers;
 
-            this.SelectionMode = ListViewSelectionMode.Multiple;//Transformer      
+            this.Transformer = LayerCollection.RefactoringTransformer(layers);
+            this.DisabledRadian = false;
 
             //////////////////////////
 
@@ -186,7 +181,7 @@ namespace Retouch_Photo2.ViewModels
 
             this.Type = firstLayer.Type;
             this.SetOpacity(firstLayer.Opacity);
-            this.SetBlendMode(firstLayer.BlendMode);
+            this.BlendMode = firstLayer.BlendMode;
             this.SetVisibility(firstLayer.Visibility);
             this.SetTagType(firstLayer.TagType);
 
@@ -202,7 +197,7 @@ namespace Retouch_Photo2.ViewModels
             this.SetGroupLayer(null);
             this.SetImageLayer(firstLayer);
             this.SetCurveLayer(null);
-            this.SetTextFrameLayer(null);
+            this.SetFontLayer(null);
 
             //////////////////////////
 

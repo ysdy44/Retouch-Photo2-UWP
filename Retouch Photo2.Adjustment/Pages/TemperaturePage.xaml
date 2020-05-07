@@ -13,7 +13,7 @@
     <StackPanel>
 
         <!--Temperature-->
-        <TextBlock x:Name="TemperatureTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="TemperatureTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <hsvColorPickers:TouchSlider x:Name="TemperatureSlider" Minimum="-100" Maximum="100">
             <hsvColorPickers:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
@@ -25,7 +25,7 @@
         </hsvColorPickers:TouchSlider>
 
         <!--Tint-->
-        <TextBlock x:Name="TintTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="TintTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <hsvColorPickers:TouchSlider x:Name="TintSlider" Minimum="-100" Maximum="100">
             <hsvColorPickers:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">

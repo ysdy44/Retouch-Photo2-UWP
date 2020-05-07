@@ -11,7 +11,7 @@
 
     <UserControl.Resources>
         <!--Style-->
-        <Style x:Name="SeparatorRectangle" TargetType="Rectangle" BasedOn="{StaticResource AppSeparatorRectangle}"/>
+        <Style x:Name="SeparatorRectangle" TargetType="Rectangle" BasedOn="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
     </UserControl.Resources>
 
 

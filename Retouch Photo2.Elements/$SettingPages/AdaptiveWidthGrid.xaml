@@ -123,7 +123,7 @@
             <Grid>
                 <Rectangle x:Name="PhoneRectangle" StrokeDashArray="1 2" Stroke="{ThemeResource SystemAccentColor}" Style="{StaticResource RectangleStyle}"/>
                 <Border Padding="4,0" HorizontalAlignment="Center" Background="{ThemeResource AppForeground}">
-                    <FontIcon x:Name="PhoneIcon" FontSize="22" Glyph="&#xE8EA;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                    <FontIcon x:Name="PhoneIcon" Glyph="&#xE8EA;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                 </Border>
             </Grid>
         </Border>      
@@ -131,7 +131,7 @@
             <Grid>
                 <Rectangle x:Name="PadRectangle" StrokeDashArray="1 2" Stroke="{ThemeResource SystemAccentColor}" Style="{StaticResource RectangleStyle}"/>
                 <Border Padding="4,0" HorizontalAlignment="Center" Background="{ThemeResource AppForeground}">
-                    <FontIcon x:Name="PadIcon" FontSize="22" Glyph="&#xE70A;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                    <FontIcon x:Name="PadIcon" Glyph="&#xE70A;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                 </Border>
             </Grid>
         </Border>
@@ -139,7 +139,7 @@
             <Grid>
                 <Rectangle x:Name="PCRectangle" StrokeDashArray="1 2" Stroke="{ThemeResource SystemAccentColor}" Style="{StaticResource RectangleStyle}"/>
                 <Border Padding="4,0" HorizontalAlignment="Center" Background="{ThemeResource AppForeground}">
-                    <FontIcon x:Name="PCIcon" FontSize="22" Glyph="&#xF71E;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                    <FontIcon x:Name="PCIcon" Glyph="&#xF71E;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                 </Border>
             </Grid>
         </Border>
@@ -151,15 +151,15 @@
      
 
         <!--Bottom-->
-        <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" Style="{StaticResource AppTextBlock}">
+        <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" Style="{StaticResource AppTextBlockStyle}">
             Phone
         </TextBlock>
         <TextBlock x:Name="PhoneTextBlock" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center"/>
-        <TextBlock Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" Style="{StaticResource AppTextBlock}">
+        <TextBlock Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" Style="{StaticResource AppTextBlockStyle}">
             Pad
         </TextBlock>
         <TextBlock x:Name="PadTextBlock" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center"/>
-        <TextBlock Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" Style="{StaticResource AppTextBlock}">
+        <TextBlock Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" Style="{StaticResource AppTextBlockStyle}">
             PC
         </TextBlock>
         

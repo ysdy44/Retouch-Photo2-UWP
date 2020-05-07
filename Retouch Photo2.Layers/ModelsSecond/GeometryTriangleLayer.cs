@@ -3,7 +3,6 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.ApplicationModel.Resources;
@@ -11,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="IGeometryLayer"/>'s GeometryTriangleLayer .
+    /// <see cref="ILayer"/>'s GeometryTriangleLayer .
     /// </summary>
-    public class GeometryTriangleLayer : IGeometryLayer, ILayer
+    public class GeometryTriangleLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -22,12 +21,7 @@ namespace Retouch_Photo2.Layers.Models
         //@Content
         public float Center = 0.5f;
 
-        //@Construct     
-        /// <summary>
-        /// Construct a triangle-layer.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public GeometryTriangleLayer(XElement element) : this() => this.Load(element);
+        //@Construct
         /// <summary>
         /// Construct a triangle-layer.
         /// </summary>
@@ -40,22 +34,8 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
         
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
-        {
-            Transformer transformer = base.TransformManager.Destination;
 
-            return TransformerGeometry.CreateTriangle(resourceCreator, transformer, canvasToVirtualMatrix, this.Center);
-        }
-
-        
-        public IEnumerable<IEnumerable<Node>> ConvertToCurves()
-        {
-            Transformer transformer = base.TransformManager.Destination;
-
-            return TransformerGeometry.ConvertToCurvesFromTriangle(transformer, this.Center);
-        }
-
-        public ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryTriangleLayer TriangleLayer = new GeometryTriangleLayer
             {
@@ -66,14 +46,29 @@ namespace Retouch_Photo2.Layers.Models
             return TriangleLayer;
         }
         
-        public void SaveWith(XElement element)
+        public override void SaveWith(XElement element)
         {
             element.Add(new XElement("Center", this.Center));
         }
-        public void Load(XElement element)
+        public override void Load(XElement element)
         {
             this.Center = (float)element.Element("Center");
         }
+
+
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.CreateTriangle(resourceCreator, transformer, canvasToVirtualMatrix, this.Center);
+        }
+        public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.ConvertToCurvesFromTriangle(transformer, this.Center);
+        }
+
 
         //Strings
         private string ConstructStrings()

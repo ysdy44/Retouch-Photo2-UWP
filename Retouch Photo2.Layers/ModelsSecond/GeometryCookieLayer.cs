@@ -3,7 +3,6 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.ApplicationModel.Resources;
@@ -11,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="IGeometryLayer"/>'s GeometryCookieLayer .
+    /// <see cref="ILayer"/>'s GeometryCookieLayer .
     /// </summary>
-    public partial class GeometryCookieLayer : IGeometryLayer, ILayer
+    public partial class GeometryCookieLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -23,11 +22,7 @@ namespace Retouch_Photo2.Layers.Models
         public float InnerRadius = 0.5f;
         public float SweepAngle = FanKit.Math.Pi / 2f;
 
-        //@Construct        
-        /// <summary>
-        /// Construct a pie-layer.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
+        //@Construct
         public GeometryCookieLayer(XElement element) : this() => this.Load(element);
         /// <summary>
         /// Construct a pie-layer.
@@ -41,22 +36,8 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
 
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
-        {
-            Transformer transformer = base.TransformManager.Destination;
 
-            return TransformerGeometry.CreateCookie(resourceCreator, transformer, canvasToVirtualMatrix, this.InnerRadius, this.SweepAngle);
-        }
-
-
-        public IEnumerable<IEnumerable<Node>> ConvertToCurves()
-        {
-            Transformer transformer = base.TransformManager.Destination;
-
-            return TransformerGeometry.ConvertToCurvesFromCookie(transformer, this.InnerRadius, this.SweepAngle);
-        }
-
-        public ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryCookieLayer cookieLayer = new GeometryCookieLayer();
 
@@ -64,16 +45,31 @@ namespace Retouch_Photo2.Layers.Models
             return cookieLayer;
         }
 
-        public void SaveWith(XElement element)
+        public override void SaveWith(XElement element)
         {            
             element.Add(new XElement("InnerRadius", this.InnerRadius));
             element.Add(new XElement("SweepAngle", this.SweepAngle));
         }
-        public void Load(XElement element)
+        public override void Load(XElement element)
         {
             this.InnerRadius = (float)element.Element("InnerRadius");
             this.SweepAngle = (float)element.Element("SweepAngle");
         }
+
+
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.CreateCookie(resourceCreator, transformer, canvasToVirtualMatrix, this.InnerRadius, this.SweepAngle);
+        }
+        public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.ConvertToCurvesFromCookie(transformer, this.InnerRadius, this.SweepAngle);
+        }
+
 
         //Strings
         private string ConstructStrings()

@@ -22,7 +22,7 @@
 
 
     <Grid x:Name="RootGrid">
-        
+
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
@@ -127,7 +127,7 @@
                                 <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
                             </TransitionCollection>
                         </Button.Transitions>
-                        <FontIcon FontSize="20" Glyph="&#xE117;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon FontSize="20" Glyph="&#xE117;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
                     </Button>
 
                     <TextBlock x:Name="TitleTextBlock" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
@@ -144,7 +144,7 @@
                                 <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
                             </TransitionCollection>
                         </Button.Transitions>
-                        <FontIcon FontSize="22" Glyph="&#xE115;" FontFamily="Segoe UI Symbol" />
+                        <FontIcon FontSize="22" Glyph="&#xE115;" FontWeight="Bold" FontFamily="Segoe UI Symbol" />
                     </Button>
 
                 </Grid>
@@ -169,39 +169,39 @@
             <elementMainPages:MainLayout.MainChild>
                 <StackPanel Orientation="Horizontal" Margin="8,0" HorizontalAlignment="Center">
 
-                    <elementMainPages:AppbarAccentButton x:Name="AddButton">
-                        <elementMainPages:AppbarAccentButton.CenterContent>
-                            <FontIcon Glyph="&#xE109;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </elementMainPages:AppbarAccentButton.CenterContent>
-                    </elementMainPages:AppbarAccentButton>
+                    <Button x:Name="AddButton" Style="{StaticResource AppTabButtonStyle}">
+                        <Button.Tag>
+                            <FontIcon Glyph="&#xE109;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </Button.Tag>
+                    </Button>
 
-                    <elementMainPages:AppbarAccentButton x:Name="PicturesButton">
-                        <elementMainPages:AppbarAccentButton.CenterContent>
-                            <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </elementMainPages:AppbarAccentButton.CenterContent>
-                    </elementMainPages:AppbarAccentButton>
+                    <Button x:Name="PicturesButton" Style="{StaticResource AppTabButtonStyle}">
+                        <Button.Tag>
+                            <FontIcon Glyph="&#xEB9F;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </Button.Tag>
+                    </Button>
 
-                    <elements:ExpandAppBarSeparator/>
+                    <Rectangle Margin="4" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-                    <elementMainPages:AppbarAccentButton x:Name="RenameButton">
-                        <elementMainPages:AppbarAccentButton.CenterContent>
-                            <FontIcon Glyph="&#xE104;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </elementMainPages:AppbarAccentButton.CenterContent>
-                    </elementMainPages:AppbarAccentButton>
+                    <Button x:Name="RenameButton" Style="{StaticResource AppTabButtonStyle}">
+                        <Button.Tag>
+                            <FontIcon Glyph="&#xE104;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </Button.Tag>
+                    </Button>
 
-                    <elements:ExpandAppBarSeparator/>
+                    <Rectangle Margin="4" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-                    <elementMainPages:AppbarAccentButton x:Name="DeleteButton">
-                        <elementMainPages:AppbarAccentButton.CenterContent>
-                            <FontIcon Glyph="&#xE107;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </elementMainPages:AppbarAccentButton.CenterContent>
-                    </elementMainPages:AppbarAccentButton>
+                    <Button x:Name="DeleteButton" Style="{StaticResource AppTabButtonStyle}">
+                        <Button.Tag>
+                            <FontIcon Glyph="&#xE107;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </Button.Tag>
+                    </Button>
 
-                    <elementMainPages:AppbarAccentButton x:Name="DuplicateButton">
-                        <elementMainPages:AppbarAccentButton.CenterContent>
-                            <FontIcon Glyph="&#xE16F;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </elementMainPages:AppbarAccentButton.CenterContent>
-                    </elementMainPages:AppbarAccentButton>
+                    <Button x:Name="DuplicateButton" Style="{StaticResource AppTabButtonStyle}">
+                        <Button.Tag>
+                            <FontIcon Glyph="&#xE16F;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </Button.Tag>
+                    </Button>
 
                 </StackPanel>
             </elementMainPages:MainLayout.MainChild>
@@ -210,21 +210,25 @@
             <elementMainPages:MainLayout.PicturesChild>
                 <StackPanel Orientation="Horizontal" Margin="8,0">
 
-                    <elementMainPages:AppbarAccentButton x:Name="PicturesPhotoButton">
-                        <elementMainPages:AppbarAccentButton.CenterContent>
-                            <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </elementMainPages:AppbarAccentButton.CenterContent>
-                    </elementMainPages:AppbarAccentButton>
+                    <Button x:Name="PicturesPhotoButton" Style="{StaticResource AppTabButtonStyle}">
+                        <Button.Tag>
+                            <FontIcon Glyph="&#xEB9F;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </Button.Tag>
+                    </Button>
 
-                    <elementMainPages:AppbarAccentButton x:Name="PicturesDestopButton">
-                        <elementMainPages:AppbarAccentButton.CenterContent>
-                            <FontIcon Glyph="&#xEC4E;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </elementMainPages:AppbarAccentButton.CenterContent>
-                    </elementMainPages:AppbarAccentButton>
+                    <Button x:Name="PicturesDestopButton" Style="{StaticResource AppTabButtonStyle}">
+                        <Button.Tag>
+                            <FontIcon Glyph="&#xEC4E;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </Button.Tag>
+                    </Button>
 
-                    <elements:ExpandAppBarSeparator/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-                    <elementMainPages:AppbarAccentCloseButton x:Name="PicturesCloseButton"/>
+                    <Button x:Name="PicturesCloseButton" Style="{StaticResource AppTabButtonStyle}">
+                        <Button.Tag>
+                            <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </Button.Tag>
+                    </Button>
 
                 </StackPanel>
             </elementMainPages:MainLayout.PicturesChild>
@@ -239,7 +243,11 @@
                         <Run x:Name="RenameRunContent" FontSize="12" Foreground="{ThemeResource AppText}"/>
                     </TextBlock>
 
-                    <elementMainPages:AppbarAccentCloseButton x:Name="RenameCloseButton"/>
+                    <Button x:Name="RenameCloseButton" Style="{StaticResource AppTabButtonStyle}">
+                        <Button.Tag>
+                            <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </Button.Tag>
+                    </Button>
 
                 </StackPanel>
             </elementMainPages:MainLayout.RenameChild>
@@ -248,15 +256,23 @@
             <elementMainPages:MainLayout.DeleteChild>
                 <StackPanel x:Name="DeleteStackPanel" MinWidth="260">
 
-                    <TextBlock Margin="8,2">
+                    <TextBlock Margin="14,2">
                         <Run x:Name="DeleteRunTitle" FontWeight="Bold"/>
                         <LineBreak/>
                         <Run x:Name="DeleteRunContent" FontSize="12" Foreground="{ThemeResource AppText}"/>
                     </TextBlock>
 
                     <StackPanel Orientation="Horizontal" Margin="8,0" HorizontalAlignment="Right">
-                        <elementMainPages:AppbarAccentPrimaryButton x:Name="DeletePrimaryButton"/>
-                        <elementMainPages:AppbarAccentCloseButton x:Name="DeleteCloseButton"/>
+                        <Button x:Name="DeletePrimaryButton" Style="{StaticResource AppTabButtonStyle}">
+                            <Button.Tag>
+                                <FontIcon Glyph="&#xF78C;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </Button.Tag>
+                        </Button>
+                        <Button x:Name="DeleteCloseButton" Style="{StaticResource AppTabButtonStyle}">
+                            <Button.Tag>
+                                <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </Button.Tag>
+                        </Button>
                     </StackPanel>
 
                 </StackPanel>
@@ -266,15 +282,23 @@
             <elementMainPages:MainLayout.DuplicateChild>
                 <StackPanel x:Name="DuplicateStackPanel" MinWidth="260">
 
-                    <TextBlock Margin="8,2">
+                    <TextBlock Margin="14,2">
                         <Run x:Name="DuplicateRunTitle" FontWeight="Bold"/>
                         <LineBreak/>
                         <Run x:Name="DuplicateRunContent" FontSize="12" Foreground="{ThemeResource AppText}"/>
                     </TextBlock>
 
                     <StackPanel Orientation="Horizontal" Margin="8,0" HorizontalAlignment="Right">
-                        <elementMainPages:AppbarAccentPrimaryButton x:Name="DuplicatePrimaryButton"/>
-                        <elementMainPages:AppbarAccentCloseButton x:Name="DuplicateCloseButton"/>
+                        <Button x:Name="DuplicatePrimaryButton" Style="{StaticResource AppTabButtonStyle}">
+                            <Button.Tag>
+                                <FontIcon Glyph="&#xF78C;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </Button.Tag>
+                        </Button>
+                        <Button x:Name="DuplicateCloseButton" Style="{StaticResource AppTabButtonStyle}">
+                            <Button.Tag>
+                                <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </Button.Tag>
+                        </Button>
                     </StackPanel>
 
                 </StackPanel>

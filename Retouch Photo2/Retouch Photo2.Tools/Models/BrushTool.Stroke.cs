@@ -32,6 +32,8 @@ namespace Retouch_Photo2.Tools.Models
                 case BrushType.None:
                 case BrushType.Color:
                     {
+                        this.BrushTypeComboBox.EaseStoryboard.Begin();
+
                         Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
                         LinearGradientBrush linearGradientBrush = new LinearGradientBrush(startingPoint, point, inverseMatrix);
 

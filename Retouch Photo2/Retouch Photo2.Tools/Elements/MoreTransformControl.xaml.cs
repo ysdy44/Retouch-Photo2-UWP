@@ -26,12 +26,8 @@ namespace Retouch_Photo2.Tools.Elements
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.RatioTextBlock.Text = resource.GetString("/ToolElements/MoreTransform_Ratio ");
-            this.RatioOnOffSwitch.OnContent = resource.GetString("/ToolElements/MoreTransform_RatioOn");
-            this.RatioOnOffSwitch.OffContent = resource.GetString("/ToolElements/MoreTransform_RatioOff");
 
             this.CenterTextBlock.Text = resource.GetString("/ToolElements/MoreTransform_Center");
-            this.CenterOnOffSwitch.OnContent = resource.GetString("/ToolElements/MoreTransform_CenterOn");
-            this.CenterOnOffSwitch.OffContent = resource.GetString("/ToolElements/MoreTransform_CenterOff");
         }
 
     }

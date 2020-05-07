@@ -3,7 +3,6 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.ApplicationModel.Resources;
@@ -11,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="IGeometryLayer"/>'s GeometryPentagonLayer .
+    /// <see cref="ILayer"/>'s GeometryPentagonLayer .
     /// </summary>
-    public class GeometryPentagonLayer : IGeometryLayer, ILayer
+    public class GeometryPentagonLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -22,12 +21,7 @@ namespace Retouch_Photo2.Layers.Models
         //@Content
         public int Points = 5;
 
-        //@Construct   
-        /// <summary>
-        /// Construct a pentagon-layer.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public GeometryPentagonLayer(XElement element) : this() => this.Load(element);
+        //@Construct
         /// <summary>
         /// Construct a pentagon-layer.
         /// </summary>
@@ -39,23 +33,9 @@ namespace Retouch_Photo2.Layers.Models
                 Text = this.ConstructStrings(),
             };
         }
-        
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
-        {
-            Transformer transformer = base.TransformManager.Destination;
-
-            return TransformerGeometry.CreatePentagon(resourceCreator, transformer, canvasToVirtualMatrix, this.Points);
-        }
 
 
-        public IEnumerable<IEnumerable<Node>> ConvertToCurves()
-        {
-            Transformer transformer = base.TransformManager.Destination;
-
-            return TransformerGeometry.ConvertToCurvesFromPentagon(transformer, this.Points);
-        }
-
-        public ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryPentagonLayer PentagonLayer = new GeometryPentagonLayer
             {
@@ -66,14 +46,29 @@ namespace Retouch_Photo2.Layers.Models
             return PentagonLayer;
         }
 
-        public void SaveWith(XElement element)
+        public override void SaveWith(XElement element)
         {
             element.Add(new XElement("Points", this.Points));
         }
-        public void Load(XElement element)
+        public override void Load(XElement element)
         {
             this.Points = (int)element.Element("Points");
         }
+
+
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.CreatePentagon(resourceCreator, transformer, canvasToVirtualMatrix, this.Points);
+        }
+        public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.ConvertToCurvesFromPentagon(transformer, this.Points);
+        }
+
 
         //Strings
         private string ConstructStrings()

@@ -109,15 +109,14 @@
     <Compile Include="Enums\InvalidateMode.cs" />
     <Compile Include="KeyboardViewModels\KeyboardViewModel.cs" />
     <Compile Include="KeyboardViewModels\KeyboardViewModel.Notify.cs" />
-    <Compile Include="ProjectViewItem.xaml.cs">
-      <DependentUpon>ProjectViewItem.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectionViewModels\SelectionViewModel.cs" />
     <Compile Include="SelectionViewModels\SelectionViewModel.NotifyBrush.cs" />
     <Compile Include="SelectionViewModels\SelectionViewModel.Notify.cs" />
+    <Compile Include="SelectionViewModels\SelectionViewModel.NotifyText.cs" />
     <Compile Include="SelectionViewModels\SelectionViewModel.SetMode.cs" />
+    <Compile Include="SelectionViewModels\SelectionViewModel.SetValue.cs" />
     <Compile Include="SettingViewModels\SettingViewModel.cs" />
     <Compile Include="TipViewModels\TipViewModel.cs" />
     <Compile Include="TipViewModels\TipViewModel.Menu.cs" />
@@ -176,12 +175,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SelectionViewModels\SelectionViewModel.NotifyGeometry.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="ProjectViewItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

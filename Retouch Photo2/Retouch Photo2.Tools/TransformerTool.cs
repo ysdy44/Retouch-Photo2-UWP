@@ -1,6 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
@@ -127,7 +126,7 @@ namespace Retouch_Photo2.Tools
             this.ViewModel.Invalidate();//Invalidate
             return true;
         }
-        public bool Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
+        public bool Complete(Vector2 startingPoint, Vector2 point)
         {
             switch (this.Mode)
             {

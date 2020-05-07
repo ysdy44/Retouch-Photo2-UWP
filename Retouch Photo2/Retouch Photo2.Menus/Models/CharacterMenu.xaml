@@ -5,123 +5,95 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hsvcolorpickers="using:HSVColorPickers"
+    xmlns:characters="using:Retouch_Photo2.Characters"
     xmlns:menus="using:Retouch_Photo2.Menus"
     mc:Ignorable="d"
     d:DesignWidth="200"
     d:DesignHeight="400"
     >
 
-    <UserControl.Resources>
-        <Style x:Key="TransparentButton" TargetType="Button">
-            <Setter Property="Width" Value="Auto"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="VerticalAlignment" Value="Stretch"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="Background" Value="Transparent"/>
-        </Style>
-    </UserControl.Resources>
-
-
     <menus:MenuExpander x:Name="_Expander">
 
 
         <menus:MenuExpander.MainPage>
-            <Grid MinHeight="165" Padding="1,4">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+            <StackPanel MinHeight="165" Padding="1,4">
 
 
                 <!--Align-->
-                <TextBlock x:Name="AlignTextBlock" Grid.ColumnSpan="4" Grid.Row="0" Style="{StaticResource AppTextBlock}"/>
-                <Button x:Name="LeftButton" Grid.Column="0" Grid.Row="1" Style="{StaticResource AppRoundedButtonLeftStyle}">
-                    <ToolTipService.ToolTip>
-                        <ToolTip x:Name="LeftToolTip" Placement="Left" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-                    </ToolTipService.ToolTip>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8E4;" FontSize="18" />
-                </Button>
-                <Button x:Name="CenterButton" Grid.Column="1" Grid.Row="1" Style="{StaticResource AppRoundedButtonCenterStyle}">
-                    <ToolTipService.ToolTip>
-                        <ToolTip x:Name="CenterToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-                    </ToolTipService.ToolTip>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8E3;" FontSize="18" />
-                </Button>
-                <Button x:Name="RightButton" Grid.Column="2" Grid.Row="1" Style="{StaticResource AppRoundedButtonRightStyle}">
-                    <ToolTipService.ToolTip>
-                        <ToolTip x:Name="RightToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-                    </ToolTipService.ToolTip>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8E2;" FontSize="18" />
-                </Button>
-                <Button x:Name="JustifiedButton" Grid.Column="60" Grid.Row="1" Style="{StaticResource AppRoundedButtonStyle}">
-                    <ToolTipService.ToolTip>
-                        <ToolTip x:Name="JustifiedToolTip" Placement="Right" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-                    </ToolTipService.ToolTip>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" FontSize="18" />
-                </Button>
+                <TextBlock x:Name="FontAlignmentTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <characters:FontAlignmentSegmented x:Name="FontAlignmentSegmented" Alignment="{x:Bind SelectionViewModel.FontAlignment, Mode=OneWay}"/>
 
 
                 <!--FontStyle-->
-                <TextBlock x:Name="FontStyleTextBlock" Grid.ColumnSpan="4" Grid.Row="2" Style="{StaticResource AppTextBlock}"/>
-                <Button x:Name="BoldButton" Grid.Column="0" Grid.Row="3" Style="{StaticResource AppRoundedButtonLeftStyle}">
-                    <ToolTipService.ToolTip>
-                        <ToolTip x:Name="BoldToolTip" Placement="Left" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-                    </ToolTipService.ToolTip>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8DD;" FontSize="18" />
-                </Button>
-                <Button x:Name="ItalicButton" Grid.Column="1" Grid.Row="3" Style="{StaticResource AppRoundedButtonCenterStyle}">
-                    <ToolTipService.ToolTip>
-                        <ToolTip x:Name="ItalicToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-                    </ToolTipService.ToolTip>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE199;" FontSize="18" />
-                </Button>
-                <Button x:Name="UnderLineButton" IsEnabled="False" Grid.Column="2" Grid.Row="3" Style="{StaticResource AppRoundedButtonRightStyle}">
-                    <ToolTipService.ToolTip>
-                        <ToolTip x:Name="UnderLineToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-                    </ToolTipService.ToolTip>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE19A;" FontSize="18" />
-                </Button>
-                <Button x:Name="FontWeightButton" Grid.Column="3" Grid.Row="3" Style="{StaticResource AppRoundedButtonStyle}">
-                    <ToolTipService.ToolTip>
-                        <ToolTip x:Name="FontWeightToolTip" Placement="Right" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTip}"/>
-                    </ToolTipService.ToolTip>
-                    <FontIcon Margin="4,0" FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
-                </Button>
+                <TextBlock x:Name="FontStyleTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
 
+                    <Button x:Name="BoldButton" Grid.Column="0" Style="{StaticResource AppRoundedButtonLeftStyle}">
+                        <ToolTipService.ToolTip>
+                            <ToolTip x:Name="BoldToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                        </ToolTipService.ToolTip>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8DD;" FontSize="18" FontWeight="Bold" />
+                    </Button>
 
+                    <Button x:Name="ItalicButton" Grid.Column="1" Style="{StaticResource AppRoundedButtonCenterStyle}">
+                        <ToolTipService.ToolTip>
+                            <ToolTip x:Name="ItalicToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                        </ToolTipService.ToolTip>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE199;" FontSize="18" FontWeight="Bold" />
+                    </Button>
+
+                    <Button x:Name="UnderLineButton" IsEnabled="False" Grid.Column="2" Style="{StaticResource AppRoundedButtonRightStyle}">
+                        <ToolTipService.ToolTip>
+                            <ToolTip x:Name="UnderLineToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                        </ToolTipService.ToolTip>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE19A;" FontSize="18" FontWeight="Bold" />
+                    </Button>
+
+                    <Button x:Name="FontWeightButton" Grid.Column="3" Style="{StaticResource AppRoundedButtonStyle}">
+                        <ToolTipService.ToolTip>
+                            <ToolTip x:Name="FontWeightToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                        </ToolTipService.ToolTip>
+                        <FontIcon Margin="4,0" Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                    </Button>
+
+                </Grid>
+
+                
                 <!--FontFamily-->
-                <TextBlock x:Name="FontFamilyTextBlock" Grid.ColumnSpan="4" Grid.Row="4" Style="{StaticResource AppTextBlock}"/>
-                <Button x:Name="FontFamilyButton" Grid.ColumnSpan="4" Grid.Row="5" Style="{StaticResource AppIconRoundedButtonStyle}"
-                        Content="{x:Bind SelectionViewModel.TextFontFamily,Mode=OneWay}">
+                <TextBlock x:Name="FontFamilyTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <Button x:Name="FontFamilyButton" Style="{StaticResource AppIconRoundedButtonStyle}"
+                        Content="{x:Bind SelectionViewModel.FontFamily,Mode=OneWay}">
                     <Button.Tag>
-                        <FontIcon FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        <FontIcon Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                     </Button.Tag>
                 </Button>
 
 
                 <!--FontSize-->
-                <TextBlock x:Name="FontSizeTextBlock" Grid.ColumnSpan="4" Grid.Row="6" Style="{StaticResource AppTextBlock}"/>
-                <hsvcolorpickers:NumberPicker x:Name="FontSizePicker" Grid.ColumnSpan="3" Grid.Row="7" Minimum="4" Maximum="1000" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                             Value="{x:Bind SelectionViewModel.TextFontSize, Mode=OneWay}" />
-                <Button x:Name="FontSizeButton" Grid.Column="3" Grid.Row="7" Style="{StaticResource AppRoundedButtonStyle}">
-                    <FontIcon Margin="4,0" FontSize="14" Glyph="&#xE09B;" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
-                </Button>
+                <TextBlock x:Name="FontSizeTextBlock" Grid.ColumnSpan="4" Grid.Row="6" Style="{StaticResource AppTextBlockStyle}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <hsvcolorpickers:NumberPicker x:Name="FontSizePicker" Minimum="4" Maximum="1000" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                             Value="{x:Bind FontSizeConverter(SelectionViewModel.FontSize), Mode=OneWay}" />
+
+                    <Button x:Name="FontSizeButton" Grid.Column="1" Style="{StaticResource AppRoundedButtonStyle}">
+                        <FontIcon Margin="4,0" Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                    </Button>
+
+                </Grid>
 
 
-            </Grid>
+            </StackPanel>
         </menus:MenuExpander.MainPage>
 
 
@@ -132,7 +104,7 @@
                 <ListView x:Name="FontFamilyListView" Visibility="Collapsed" IsItemClickEnabled="True" SelectionMode="Single">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="x:String">
-                            <TextBlock FontFamily="{x:Bind}" Text="{x:Bind}"/>
+                            <TextBlock FontFamily="{x:Bind}" Text="{x:Bind}" FontWeight="Medium"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -141,7 +113,7 @@
                 <ListView x:Name="FontSizeListView" Visibility="Collapsed" IsItemClickEnabled="True" SelectionMode="Single">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="x:Int32">
-                            <TextBlock>
+                            <TextBlock FontWeight="Medium">
                                 <Run Text="{x:Bind}"/>
                                 <Run> px</Run>
                             </TextBlock>
@@ -150,58 +122,9 @@
                 </ListView>
 
                 <!--FontWeight-->
-                <ListView x:Name="FontWeightListView" Visibility="Collapsed" IsItemClickEnabled="True" SelectionMode="Single">
-
-                    <TextBlock FontWeight="Black">
-                        <Run x:Name="BlackRun" FontSize="16" FontWeight="Normal"/>
-                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   900</Run>
-                    </TextBlock>
-                    <TextBlock FontWeight="Bold">
-                        <Run x:Name="BoldRun" FontSize="16" FontWeight="Normal"/>
-                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   700</Run>
-                    </TextBlock>
-
-                    <TextBlock FontWeight="ExtraBlack">
-                        <Run x:Name="ExtraBlackRun" FontSize="16" FontWeight="Normal"/>
-                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   950</Run>
-                    </TextBlock>
-                    <TextBlock FontWeight="ExtraBold">
-                        <Run x:Name="ExtraBoldRun" FontSize="16" FontWeight="Normal"/>
-                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   800</Run>
-                    </TextBlock>
-                    <TextBlock FontWeight="ExtraLight">
-                        <Run x:Name="ExtraLightRun" FontSize="16" FontWeight="Normal"/>
-                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   200</Run>
-                    </TextBlock>
-
-                    <TextBlock FontWeight="Light">
-                        <Run x:Name="LightRun" FontSize="16" FontWeight="Normal"/>
-                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   300</Run>
-                    </TextBlock>
-                    <TextBlock FontWeight="Medium">
-                        <Run x:Name="MediumRun" FontSize="16" FontWeight="Normal"/>
-                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   500</Run>
-                    </TextBlock>
-                    <TextBlock FontWeight="Normal">
-                        <Run x:Name="NormalRun" FontSize="16" FontWeight="Normal"/>
-                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   400</Run>
-                    </TextBlock>
-
-                    <TextBlock FontWeight="SemiBold">
-                        <Run x:Name="SemiBoldRun" FontSize="16" FontWeight="Normal"/>
-                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   600</Run>
-                    </TextBlock>
-                    <TextBlock FontWeight="SemiLight">
-                        <Run x:Name="SemiLightRun" FontSize="16" FontWeight="Normal"/>
-                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   350</Run>
-                    </TextBlock>
-
-                    <TextBlock FontWeight="Thin">
-                        <Run x:Name="ThinRun" FontSize="16" FontWeight="Normal"/>
-                        <Run FontWeight="Normal" Foreground="{ThemeResource AppText}">   100</Run>
-                    </TextBlock>
-
-                </ListView>
+                <ScrollViewer x:Name="FontWeightScrollViewer" Visibility="Collapsed">
+                    <characters:FontWeightComboBox x:Name="FontWeightControl" FontWeight2="{x:Bind SelectionViewModel.FontWeight, Mode=OneWay}"/>
+                </ScrollViewer>
 
             </Grid>
         </menus:MenuExpander.SecondPage>

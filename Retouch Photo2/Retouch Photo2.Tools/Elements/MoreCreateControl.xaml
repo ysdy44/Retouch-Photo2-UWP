@@ -4,23 +4,28 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignHeight="200"
     d:DesignWidth="200"
     >
     
-    <StackPanel Padding="2" MinWidth="300">
+    <StackPanel Padding="2" MinWidth="300" Orientation="Vertical">
 
         <!--Square-->
-        <TextBlock x:Name="SquareTextBlock" Style="{StaticResource AppTextBlock}"/>
-        <elements:OnOffSwitch x:Name="SquareOnOffSwitch" IsOn="{x:Bind KeyboardViewModel.IsSquare,Mode=TwoWay}"/>
+        <TextBlock x:Name="SquareTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <ToggleButton HorizontalAlignment="Left" Margin="12,0" Style="{StaticResource AppCircleToggleButtonStyle}"
+            IsChecked="{x:Bind KeyboardViewModel.IsSquare,Mode=TwoWay}">
+            <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+        </ToggleButton>
 
         <ContentControl Width="4"/>
 
         <!--Center-->
-        <TextBlock x:Name="CenterTextBlock" Style="{StaticResource AppTextBlock}"/>
-        <elements:OnOffSwitch x:Name="CenterOnOffSwitch" IsOn="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}"/>
+        <TextBlock x:Name="CenterTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <ToggleButton HorizontalAlignment="Left" Margin="12,0" Style="{StaticResource AppCircleToggleButtonStyle}"
+            IsChecked="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}">
+            <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+        </ToggleButton>
 
     </StackPanel>
 

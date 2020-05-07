@@ -1,7 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Microsoft.Graphics.Canvas.UI.Xaml;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
@@ -24,8 +23,8 @@ namespace Retouch_Photo2.Controls
 
         bool _isSingleStarted;
         Vector2 _singleStartingPoint;
+        InputDevice _inputDevice = InputDevice.None;
 
-        public CanvasControl CanvasControl { get; private set; }
         public CanvasOperator CanvasOperator { get; private set; }
 
 
@@ -46,7 +45,7 @@ namespace Retouch_Photo2.Controls
             if (e.NewValue is Color value)
             {
                 con.ViewModel.AccentColor = value;
-                con.CanvasControl.Invalidate();//Invalidate
+                con.ViewModel.Invalidate();//Invalidate
             }
         }));
 
@@ -64,35 +63,14 @@ namespace Retouch_Photo2.Controls
 
             if (e.NewValue is Color value)
             {
-                con.CanvasControl.Invalidate();//Invalidate
+                con.ViewModel.Invalidate();//Invalidate
             }
         }));
 
 
         #endregion
 
-
-        /// <summary>
-        /// CanvasControl Invalidate();
-        /// (Dpi and IsHD by InvalidateMode)
-        /// </summary>
-        /// <param name="invalidateMode"></param>
-        public void Invalidate(InvalidateMode invalidateMode)
-        {
-            switch (invalidateMode)
-            {
-                case InvalidateMode.Thumbnail:
-                    this.CanvasControl.DpiScale = 0.5f;
-                    break;
-                case InvalidateMode.HD:
-                    this.CanvasControl.DpiScale = 1.0f;
-                    break;
-            }
-
-            this.CanvasControl.Invalidate();//Invalidate
-        }
-
-
+               
         /// <summary>
         /// Render.
         /// </summary>

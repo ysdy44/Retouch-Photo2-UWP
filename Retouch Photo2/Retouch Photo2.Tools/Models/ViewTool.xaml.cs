@@ -296,14 +296,15 @@ namespace Retouch_Photo2.Tools.Models
             this.ViewModel.CanvasTransformer.Move(point);
             this.ViewModel.Invalidate();//Invalidate
         }
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
             //Text
             this.ViewModel.TextVisibility = Visibility.Collapsed;
 
-            if (isSingleStarted) this.ViewModel.CanvasTransformer.Move(point);
+            if (isOutNodeDistance) this.ViewModel.CanvasTransformer.Move(point);
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
+        public void Clicke(Vector2 point) => this.TipViewModel.TransformerTool.SelectSingleLayer(point);//Select single layer
 
         public void Draw(CanvasDrawingSession drawingSession) { }
                               

@@ -106,8 +106,8 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BlendModeControl.xaml.cs">
-      <DependentUpon>BlendModeControl.xaml</DependentUpon>
+    <Compile Include="BlendModeComboBox.xaml.cs">
+      <DependentUpon>BlendModeComboBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icons\ColorBurnIcon.xaml.cs">
       <DependentUpon>ColorBurnIcon.xaml</DependentUpon>
@@ -166,8 +166,8 @@
     <Compile Include="Icons\MultiplyIcon.xaml.cs">
       <DependentUpon>MultiplyIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\NormalIcon.xaml.cs">
-      <DependentUpon>NormalIcon.xaml</DependentUpon>
+    <Compile Include="Icons\NoneIcon.xaml.cs">
+      <DependentUpon>NoneIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icons\OverlayIcon.xaml.cs">
       <DependentUpon>OverlayIcon.xaml</DependentUpon>
@@ -209,7 +209,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="BlendModeControl.xaml">
+    <Page Include="BlendModeComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -289,7 +289,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Icons\NormalIcon.xaml">
+    <Page Include="Icons\NoneIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

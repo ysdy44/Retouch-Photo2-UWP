@@ -1,10 +1,12 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
+using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Effects;
+using Retouch_Photo2.Elements;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
@@ -58,12 +60,6 @@ namespace Retouch_Photo2.Layers
 
 
         /// <summary>
-        ///  Convert to curves.
-        /// </summary>
-        /// <returns> The product curves. </returns>
-        IEnumerable<IEnumerable<Node>> ConvertToCurves();
-
-        /// <summary>
         /// Get ILayer own copy.
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>
@@ -104,11 +100,11 @@ namespace Retouch_Photo2.Layers
         SelectMode SelectMode { get; set; }
         /// <summary> Changed the select-mode. </summary>
         void Selected();
-        
+
 
         #endregion
-               
-
+        
+        
         #region Render
 
 
@@ -120,7 +116,7 @@ namespace Retouch_Photo2.Layers
         /// <param name="canvasToVirtualMatrix"> The canvas-to-virtual matrix. </param>
         /// <returns> The rendered layer. </returns>
         ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix);
-   
+
         /// <summary>
         /// Draw lines on bound.
         /// </summary>
@@ -129,9 +125,24 @@ namespace Retouch_Photo2.Layers
         /// <param name="matrix"> The matrix. </param>
         /// <param name="accentColor"> The accent color. </param>
         void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor);
+        
+      
+        /// <summary>
+        /// Create a specific geometry.
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="canvasToVirtualMatrix"> The canvas-to-virtual matrix. </param>
+        /// <returns> The product geometry. </returns>   
+        CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix);
+     
+        /// <summary>
+        ///  Convert to curves.
+        /// </summary>
+        /// <returns> The product curves. </returns>
+        IEnumerable<IEnumerable<Node>> ConvertToCurves();
 
 
         #endregion
-        
+
     }
 }

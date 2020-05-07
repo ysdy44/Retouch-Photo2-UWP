@@ -14,19 +14,19 @@
     <StackPanel Orientation="Horizontal">
 
         <!--Reset-->
-        <TextBlock x:Name="ResetTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="ResetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <Button x:Name="ResetButton" Style="{StaticResource AppCircleButtonStyle}"
                  IsEnabled="{x:Bind SelectionViewModel.IsCrop, Mode=OneWay}">
-            <FontIcon Glyph="&#xF617;" FontSize="24" FontWeight="Bold" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+            <FontIcon Glyph="&#xF617;" FontSize="24" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
         </Button>
 
         <ContentControl Width="4"/>
 
         <!--Fit-->
-        <TextBlock x:Name="FitTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="FitTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <Button x:Name="FitButton" Style="{StaticResource AppCircleButtonStyle}"
                  IsEnabled="{x:Bind SelectionViewModel.IsCrop, Mode=OneWay}">
-            <FontIcon Glyph="&#xE9A6;" FontSize="22" FontWeight="Bold" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource AppText}"/>
+            <FontIcon Glyph="&#xE9A6;" FontSize="22" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
         </Button>
 
         <ContentControl Width="4"/>

@@ -27,91 +27,35 @@ namespace Retouch_Photo2.Adjustments.Pages
         public string Text { get; private set; }
 
 
+        //@VisualState
+        bool _vsAlphaDisable  = true;
+        bool _vsRedDisable = true;
+        bool _vsGreenDisable = true;
+        bool _vsBlueDisable = true;
+        GammaTransferPageState _vsState= GammaTransferPageState.Alpha;
+        public VisualState VisualState
+        {
+            get
+            {
+                switch (this._vsState)
+                {
+                    case GammaTransferPageState.Alpha: return this._vsAlphaDisable  ? this.AlphaDisable : this.AlphaEnable; 
+                    case GammaTransferPageState.Red: return this._vsRedDisable ? this.RedDisable : this.RedEnable; 
+                    case GammaTransferPageState.Green: return this._vsGreenDisable ? this.GreenDisable : this.GreenEnable; 
+                    case GammaTransferPageState.Blue: return this._vsBlueDisable ? this.BlueDisable : this.BlueDisable; 
+                    default: return this.Normal;
+                }
+            }
+            set => VisualStateManager.GoToState(this, value.Name, false);
+        }
+
         //State
         public GammaTransferPageState State
         {
             set
-            {
-                //Alpha
-                bool alpha = (value == GammaTransferPageState.Alpha);
-                this.AlphaSegmented.Background = alpha ? this.AccentColor : this.UnAccentColor;
-                this.AlphaCheckBox.Visibility = this.AlphaOffsetTextBlock.Visibility = this.AlphaOffsetSlider.Visibility = this.AlphaExponentTextBlock.Visibility = this.AlphaExponentSlider.Visibility = this.AlphaAmplitudeTextBlock.Visibility = this.AlphaAmplitudeSlider.Visibility = alpha ? Visibility.Visible : Visibility.Collapsed;
-                if (alpha)
-                {
-                    this.AlphaOffsetSlider.Value = this.Adjustment.AlphaOffset * 100.0f;
-                    this.AlphaExponentSlider.Value = this.Adjustment.AlphaExponent * 100.0f;
-                    this.AlphaAmplitudeSlider.Value = this.Adjustment.AlphaAmplitude * 100.0f;
-                }
-
-                //Red
-                bool red = (value == GammaTransferPageState.Red);
-                this.RedSegmented.Background = red ? this.AccentColor : this.UnAccentColor;
-                this.RedCheckBox.Visibility = this.RedOffsetTextBlock.Visibility = this.RedOffsetSlider.Visibility = this.RedExponentTextBlock.Visibility = this.RedExponentSlider.Visibility = this.RedAmplitudeTextBlock.Visibility = this.RedAmplitudeSlider.Visibility = red ? Visibility.Visible : Visibility.Collapsed;
-                if (red)
-                {
-                    this.RedOffsetSlider.Value = this.Adjustment.RedOffset * 100.0f;
-                    this.RedExponentSlider.Value = this.Adjustment.RedExponent * 100.0f;
-                    this.RedAmplitudeSlider.Value = this.Adjustment.RedAmplitude * 100.0f;
-                }
-
-                //Green
-                bool green = (value == GammaTransferPageState.Green);
-                this.GreenSegmented.Background = green ? this.AccentColor : this.UnAccentColor;
-                this.GreenCheckBox.Visibility = this.GreenOffsetTextBlock.Visibility = this.GreenOffsetSlider.Visibility = this.GreenExponentTextBlock.Visibility = this.GreenExponentSlider.Visibility = this.GreenAmplitudeTextBlock.Visibility = this.GreenAmplitudeSlider.Visibility = green ? Visibility.Visible : Visibility.Collapsed;
-                if (green)
-                {
-                    this.GreenOffsetSlider.Value = this.Adjustment.GreenOffset * 100.0f;
-                    this.GreenExponentSlider.Value = this.Adjustment.GreenExponent * 100.0f;
-                    this.GreenAmplitudeSlider.Value = this.Adjustment.GreenAmplitude * 100.0f;
-                }
-
-                //Blue
-                bool blue = (value == GammaTransferPageState.Blue);
-                this.BlueSegmented.Background = blue ? this.AccentColor : this.UnAccentColor;
-                this.BlueCheckBox.Visibility = this.BlueOffsetTextBlock.Visibility = this.BlueOffsetSlider.Visibility = this.BlueExponentTextBlock.Visibility = this.BlueExponentSlider.Visibility = this.BlueAmplitudeTextBlock.Visibility = this.BlueAmplitudeSlider.Visibility = blue ? Visibility.Visible : Visibility.Collapsed;
-                if (blue)
-                {
-                    this.BlueOffsetSlider.Value = this.Adjustment.BlueOffset * 100.0f;
-                    this.BlueExponentSlider.Value = this.Adjustment.BlueExponent * 100.0f;
-                    this.BlueAmplitudeSlider.Value = this.Adjustment.BlueAmplitude * 100.0f;
-                }
-            }
-        }
-
-        //Alpha
-        public bool AlphaDisable
-        {
-            set
-            {
-                this.AlphaOffsetSlider.IsEnabled = this.AlphaExponentSlider.IsEnabled = this.AlphaAmplitudeSlider.IsEnabled = !value;
-                this.AlphaOffsetSlider.Opacity = this.AlphaExponentSlider.Opacity = this.AlphaAmplitudeSlider.Opacity = value ? 0.5 : 1.0;
-            }
-        }
-        //Red
-        public bool RedDisable
-        {
-            set
-            {
-                this.RedOffsetSlider.IsEnabled = this.RedExponentSlider.IsEnabled = this.RedAmplitudeSlider.IsEnabled = !value;
-                this.RedOffsetSlider.Opacity = this.RedExponentSlider.Opacity = this.RedAmplitudeSlider.Opacity = value ? 0.5 : 1.0;
-            }
-        }
-        //Green
-        public bool GreenDisable
-        {
-            set
-            {
-                this.GreenOffsetSlider.IsEnabled = this.GreenExponentSlider.IsEnabled = this.GreenAmplitudeSlider.IsEnabled = !value;
-                this.GreenOffsetSlider.Opacity = this.GreenExponentSlider.Opacity = this.GreenAmplitudeSlider.Opacity = value ? 0.5 : 1.0;
-            }
-        }
-        //Blue   
-        public bool BlueDisable
-        {
-            set
-            {
-                this.BlueOffsetSlider.IsEnabled = this.BlueExponentSlider.IsEnabled = this.BlueAmplitudeSlider.IsEnabled = !value;
-                this.BlueOffsetSlider.Opacity = this.BlueExponentSlider.Opacity = this.BlueAmplitudeSlider.Opacity = value ? 0.5 : 1.0;
+            {                
+                this._vsState = value;
+                this.VisualState = this.VisualState;//State
             }
         }
 
@@ -121,26 +65,66 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
 
-            this.Loaded += (s, e) =>
-            {
-                this.State = GammaTransferPageState.Alpha;
-                this.AlphaDisable = this.RedDisable = this.GreenDisable = this.BlueDisable = true;
-            };
 
-            //Index
-            this.AlphaSegmented.Tapped += (s, e) => this.State = GammaTransferPageState.Alpha;
-            this.RedSegmented.Tapped += (s, e) => this.State = GammaTransferPageState.Red;
-            this.GreenSegmented.Tapped += (s, e) => this.State = GammaTransferPageState.Green;
-            this.BlueSegmented.Tapped += (s, e) => this.State = GammaTransferPageState.Blue;
+            this.AlphaButton.Tapped += (s, e) => this.State = GammaTransferPageState.Alpha;
+            this.RedButton.Tapped += (s, e) => this.State = GammaTransferPageState.Red;
+            this.GreenButton.Tapped += (s, e) => this.State = GammaTransferPageState.Green;
+            this.BlueButton.Tapped += (s, e) => this.State = GammaTransferPageState.Blue;
 
-            //Alpha
+
             this.AlphaCheckBox.Toggled += (s, e) =>
             {
+                bool alphaDisable = !this.AlphaCheckBox.IsOn;
+
+                if (this._vsAlphaDisable == alphaDisable) return;
+                this._vsAlphaDisable = alphaDisable;
+                this.VisualState = this.VisualState;//State 
+
                 if (this.Adjustment == null) return;
-                this.AlphaDisable = this.Adjustment.AlphaDisable = !this.AlphaCheckBox.IsOn;
+                this.Adjustment.AlphaDisable = alphaDisable;
                 AdjustmentManager.Invalidate?.Invoke();
             };
+            this.RedCheckBox.Toggled += (s, e) =>
+            {
+                bool redDisable = !this.RedCheckBox.IsOn;
+
+                if (this._vsRedDisable == redDisable) return;
+                this._vsRedDisable = redDisable;
+                this.VisualState = this.VisualState;//State 
+
+                if (this.Adjustment == null) return;
+                this.Adjustment.AlphaDisable = redDisable;
+                AdjustmentManager.Invalidate?.Invoke();
+            };
+            this.GreenCheckBox.Toggled += (s, e) =>
+            {
+                bool greenDisable = !this.GreenCheckBox.IsOn;
+
+                if (this._vsGreenDisable == greenDisable) return;
+                this._vsGreenDisable = greenDisable;
+                this.VisualState = this.VisualState;//State 
+
+                if (this.Adjustment == null) return;
+                this.Adjustment.GreenDisable = greenDisable;
+                AdjustmentManager.Invalidate?.Invoke();
+            };
+            this.BlueCheckBox.Toggled += (s, e) =>
+            {
+                bool blueDisable = !this.BlueCheckBox.IsOn;
+
+                if (this._vsBlueDisable == blueDisable) return;
+                this._vsBlueDisable = blueDisable;
+                this.VisualState = this.VisualState;//State 
+
+                if (this.Adjustment == null) return;
+                this.Adjustment.BlueDisable = blueDisable;
+                AdjustmentManager.Invalidate?.Invoke();
+            };
+
+            
+            //Alpha
             this.AlphaOffsetSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.Adjustment == null) return;
@@ -161,12 +145,6 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
 
             //Red
-            this.RedCheckBox.Toggled += (s, e) =>
-            {
-                if (this.Adjustment == null) return;
-                this.RedDisable = this.Adjustment.RedDisable = !this.RedCheckBox.IsOn;
-                AdjustmentManager.Invalidate?.Invoke();
-            };
             this.RedOffsetSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.Adjustment == null) return;
@@ -187,12 +165,6 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
 
             //Green
-            this.GreenCheckBox.Toggled += (s, e) =>
-            {
-                if (this.Adjustment == null) return;
-                this.GreenDisable = this.Adjustment.GreenDisable = !this.GreenCheckBox.IsOn;
-                AdjustmentManager.Invalidate?.Invoke();
-            };
             this.GreenOffsetSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.Adjustment == null) return;
@@ -213,13 +185,6 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
 
             //Blue
-            this.BlueCheckBox.Toggled += (s, e) =>
-            {
-                if (this.Adjustment == null) return;
-                this.BlueDisable = this.Adjustment.BlueDisable = !this.BlueCheckBox.IsOn;
-                AdjustmentManager.Invalidate?.Invoke();
-            };
-
             this.BlueOffsetSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.Adjustment == null) return;
@@ -244,26 +209,31 @@ namespace Retouch_Photo2.Adjustments.Pages
         public IAdjustment GetNewAdjustment() => new GammaTransferAdjustment();
         public void Follow(GammaTransferAdjustment adjustment)
         {
+            this._vsAlphaDisable = adjustment.AlphaDisable;
+            this._vsRedDisable = adjustment.RedDisable;
+            this._vsGreenDisable = adjustment.GreenDisable;
+            this._vsBlueDisable = adjustment.BlueDisable;
+
             //Alpha
-            this.AlphaDisable = this.AlphaCheckBox.IsOn = !adjustment.AlphaDisable;
+            this.AlphaCheckBox.IsOn = !adjustment.AlphaDisable;
             this.AlphaOffsetSlider.Value = adjustment.AlphaOffset * 100.0f;
             this.AlphaExponentSlider.Value = adjustment.AlphaExponent * 100.0f;
             this.AlphaAmplitudeSlider.Value = adjustment.AlphaAmplitude * 100.0f;
 
             //Red
-            this.RedDisable = this.RedCheckBox.IsOn = !adjustment.RedDisable;
+            this.RedCheckBox.IsOn = !adjustment.RedDisable;
             this.RedOffsetSlider.Value = adjustment.RedOffset * 100.0f;
             this.RedExponentSlider.Value = adjustment.RedExponent * 100.0f;
             this.RedAmplitudeSlider.Value = adjustment.RedAmplitude * 100.0f;
 
             //Green
-            this.GreenDisable = this.GreenCheckBox.IsOn = !adjustment.GreenDisable;
+            this.GreenCheckBox.IsOn = !adjustment.GreenDisable;
             this.GreenOffsetSlider.Value = adjustment.GreenOffset * 100.0f;
             this.GreenExponentSlider.Value = adjustment.GreenExponent * 100.0f;
             this.GreenAmplitudeSlider.Value = adjustment.GreenAmplitude * 100.0f;
 
             //Blue
-            this.BlueDisable = this.BlueCheckBox.IsOn = !adjustment.BlueDisable;
+            this.BlueCheckBox.IsOn = !adjustment.BlueDisable;
             this.BlueOffsetSlider.Value = adjustment.BlueOffset * 100.0f;
             this.BlueExponentSlider.Value = adjustment.BlueExponent * 100.0f;
             this.BlueAmplitudeSlider.Value = adjustment.BlueAmplitude * 100.0f;
@@ -277,21 +247,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.Text = resource.GetString("/Adjustments/GammaTransfer");
 
-            this.AlphaOffsetTextBlock.Text = resource.GetString("/Adjustments/GammaTransfer_Offset");
-            this.AlphaExponentTextBlock.Text = resource.GetString("/Adjustments/GammaTransfer_Exponent");
-            this.AlphaAmplitudeTextBlock.Text = resource.GetString("/Adjustments/GammaTransfer_Amplitude");
-
-            this.RedOffsetTextBlock.Text = resource.GetString("/Adjustments/GammaTransfer_Offset");
-            this.RedExponentTextBlock.Text = resource.GetString("/Adjustments/GammaTransfer_Exponent");
-            this.RedAmplitudeTextBlock.Text = resource.GetString("/Adjustments/GammaTransfer_Amplitude");
-
-            this.GreenOffsetTextBlock.Text = resource.GetString("/Adjustments/GammaTransfer_Offset");
-            this.GreenExponentTextBlock.Text = resource.GetString("/Adjustments/GammaTransfer_Exponent");
-            this.GreenAmplitudeTextBlock.Text = resource.GetString("/Adjustments/GammaTransfer_Amplitude");
-
-            this.BlueOffsetTextBlock.Text = resource.GetString("/Adjustments/GammaTransfer_Offset");
-            this.BlueExponentTextBlock.Text = resource.GetString("/Adjustments/GammaTransfer_Exponent");
-            this.BlueAmplitudeTextBlock.Text = resource.GetString("/Adjustments/GammaTransfer_Amplitude");
+            this.OffsetTextBlock.Text = resource.GetString("/Adjustments/GammaTransfer_Offset");
+            this.ExponentTextBlock.Text = resource.GetString("/Adjustments/GammaTransfer_Exponent");
+            this.AmplitudeTextBlock.Text = resource.GetString("/Adjustments/GammaTransfer_Amplitude");
         }
 
     }

@@ -98,11 +98,11 @@ namespace Retouch_Photo2.Tools
 
             this.ViewModel.Invalidate();//Invalidate
         }
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
-            if (this.TransformerTool.Complete(startingPoint, point, isSingleStarted)) return;//TransformerTool
+            if (this.TransformerTool.Complete(startingPoint, point)) return;//TransformerTool
 
-            if (isSingleStarted)
+            if (isOutNodeDistance)
             {
                 //Transformer
                 Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();

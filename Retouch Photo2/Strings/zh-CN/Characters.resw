@@ -117,19 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Align" xml:space="preserve">
+  <data name="FontAlignment" xml:space="preserve">
     <value>对齐</value>
   </data>
-  <data name="Align_Center" xml:space="preserve">
+  <data name="FontAlignment_Center" xml:space="preserve">
     <value>居中对齐</value>
   </data>
-  <data name="Align_Justified" xml:space="preserve">
+  <data name="FontAlignment_Justified" xml:space="preserve">
     <value>对齐</value>
   </data>
-  <data name="Align_Left" xml:space="preserve">
+  <data name="FontAlignment_Left" xml:space="preserve">
     <value>左对齐</value>
   </data>
-  <data name="Align_Right" xml:space="preserve">
+  <data name="FontAlignment_Right" xml:space="preserve">
     <value>右对齐</value>
   </data>
   <data name="FontFamily" xml:space="preserve">

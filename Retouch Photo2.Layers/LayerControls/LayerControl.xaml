@@ -90,7 +90,7 @@
             <FontIcon Glyph="&#x25B2;" FontSize="18" FontFamily="Segoe UI Symbol"/>
         </Border>
         <Border x:Name="OverlayShowCenterBorder" Grid.Column="1" Grid.ColumnSpan="3" Height="21.4" VerticalAlignment="Center" Style="{StaticResource OverlayStyle}">
-            <FontIcon Glyph="&#x25B6;" FontFamily="Segoe UI Symbol"/>
+            <FontIcon Glyph="&#x25B6;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
         </Border>
         <Border x:Name="OverlayShowBottomBorder" Grid.Column="0" Grid.ColumnSpan="4" Height="14.3" VerticalAlignment="Bottom" Style="{StaticResource OverlayStyle}">
             <FontIcon Glyph="&#x25BC;" FontSize="18" FontFamily="Segoe UI Symbol"/>

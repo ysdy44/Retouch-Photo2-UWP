@@ -11,7 +11,7 @@
     d:DesignWidth="400"
     >
 
-    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
         <StackPanel Orientation="Horizontal">
 
         </StackPanel>

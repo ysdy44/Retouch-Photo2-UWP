@@ -15,10 +15,10 @@
     </Page.Resources>
 
 
-    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewer}">
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
         <StackPanel Orientation="Horizontal">
 
-            <TextBlock x:Name="ConvertTextBlock" Style="{StaticResource AppTextBlock}"/>
+            <TextBlock x:Name="ConvertTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <toolsElements:ConvertToCurvesButton/>
 
             <ContentControl Width="4"/>

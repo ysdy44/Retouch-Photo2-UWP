@@ -118,7 +118,7 @@
                         <ColumnDefinition Width="90"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock x:Name="TextBlock" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlock}"/>
+                    <TextBlock x:Name="TextBlock" TextTrimming="CharacterEllipsis" Style="{StaticResource AppTextBlockStyle}"/>
 
                     <Button x:Name="AddImageLayerButton" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Stretch" BorderThickness="1" Style="{ThemeResource AccentButtonStyle}"/>
 
@@ -148,7 +148,7 @@
                         <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
                     </TransitionCollection>
                 </Button.Transitions>
-                <FontIcon Glyph="&#xE106;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                <FontIcon Glyph="&#xE106;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
             </Button>
 
             <TextBlock x:Name="TitleTextBlock" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
@@ -165,7 +165,7 @@
                         <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
                     </TransitionCollection>
                 </Button.Transitions>
-                <FontIcon Glyph="&#xE109;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                <FontIcon Glyph="&#xE109;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
             </Button>
 
         </Grid>

@@ -115,5 +115,46 @@ namespace Retouch_Photo2
             }
         }
 
+        /// <summary>
+        /// Saves the entire bitmap to the specified stream with the specified file format and quality level.
+        /// </summary>
+        /// <param name="renderTarget"> The render target.</param>
+        /// <param name="fileChoices"> The file choices. </param>
+        /// <param name="suggestedFileName"> The suggested name of file. </param>
+        /// <param name="fileFormat"> The file format. </param>
+        /// <param name="quality"> The file quality. </param>
+        /// <returns> Saved successful? </returns>
+        public static async Task<bool> ExportStorageFile(CanvasRenderTarget renderTarget , string fileChoices = ".Jpeg", string suggestedFileName = "Untitled", CanvasBitmapFileFormat fileFormat = CanvasBitmapFileFormat.Jpeg, float quality = 1.0f)
+        {
+            //FileSavePicker
+            FileSavePicker savePicker = new FileSavePicker
+            {
+                SuggestedStartLocation = PickerLocationId.Desktop,
+                SuggestedFileName = suggestedFileName,
+            };
+            savePicker.FileTypeChoices.Add("DB", new[] { fileChoices });
+
+
+            //PickSaveFileAsync
+            StorageFile file = await savePicker.PickSaveFileAsync();
+            if (file == null) return false;
+
+            try
+            {
+                using (IRandomAccessStream accessStream = await file.OpenAsync(FileAccessMode.ReadWrite))
+                {
+                    await renderTarget.SaveAsync(accessStream, fileFormat, quality);
+                }
+
+                renderTarget.Dispose();
+                return true;
+            }
+            catch (Exception)
+            {
+                renderTarget.Dispose();
+                return false;
+            }
+        }
+
     }
 }

@@ -161,17 +161,17 @@
 
                                 <RadioButton x:Name="LightRadioButton" GroupName="Theme" Style="{StaticResource AppIconRadioButtonStyle}">
                                     <RadioButton.Tag>
-                                        <FontIcon FontSize="20" Glyph="&#xE708;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                        <FontIcon Glyph="&#xE708;" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                     </RadioButton.Tag>
                                 </RadioButton>
                                 <RadioButton x:Name="DarkRadioButton" GroupName="Theme" Style="{StaticResource AppIconRadioButtonStyle}">
                                     <RadioButton.Tag>
-                                        <FontIcon FontSize="26" Glyph="&#xE706;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                        <FontIcon Glyph="&#xE706;" FontSize="26" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                     </RadioButton.Tag>
                                 </RadioButton>
                                 <RadioButton x:Name="DefaultRadioButton" GroupName="Theme" Style="{StaticResource AppIconRadioButtonStyle}">
                                     <RadioButton.Tag>
-                                        <FontIcon FontSize="22" Glyph="&#xE7E8;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                        <FontIcon Glyph="&#xE7E8;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                     </RadioButton.Tag>
                                 </RadioButton>
 
@@ -189,23 +189,23 @@
 
                                 <RadioButton x:Name="PhoneButton" GroupName="Layout" Style="{StaticResource AppIconRadioButtonStyle}">
                                     <RadioButton.Tag>
-                                        <FontIcon FontSize="22" Glyph="&#xE8EA;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                        <FontIcon Glyph="&#xE8EA;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                     </RadioButton.Tag>
                                 </RadioButton>
                                 <RadioButton x:Name="PadButton" GroupName="Layout" Style="{StaticResource AppIconRadioButtonStyle}">
                                     <RadioButton.Tag>
-                                        <FontIcon FontSize="22" Glyph="&#xE70A;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                        <FontIcon Glyph="&#xE70A;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                     </RadioButton.Tag>
                                 </RadioButton>
                                 <RadioButton x:Name="PCButton" GroupName="Layout" Style="{StaticResource AppIconRadioButtonStyle}">
                                     <RadioButton.Tag>
-                                        <FontIcon FontSize="22" Glyph="&#xF71E;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                        <FontIcon Glyph="&#xF71E;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                     </RadioButton.Tag>
                                 </RadioButton>
                                 <Rectangle Width="1" Fill="{ThemeResource AppBorderBrush}"/>
                                 <RadioButton x:Name="AdaptiveButton" GroupName="Layout" Style="{StaticResource AppIconRadioButtonStyle}">
                                     <RadioButton.Tag>
-                                        <FontIcon FontSize="32" Glyph="&#xEBC6;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                        <FontIcon FontSize="32" Glyph="&#xEBC6;" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                     </RadioButton.Tag>
                                 </RadioButton>
 
@@ -273,7 +273,7 @@
                         <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
                     </TransitionCollection>
                 </Button.Transitions>
-                <FontIcon Glyph="&#xE0D5;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                <FontIcon Glyph="&#xE0D5;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
             </Button>
 
             <TextBlock x:Name="TitleTextBlock" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">

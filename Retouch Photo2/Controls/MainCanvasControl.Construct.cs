@@ -15,16 +15,14 @@ namespace Retouch_Photo2.Controls
         //@Construct
         public MainCanvasControl()
         {
-            this.CanvasControl = new CanvasControl
-            {
-                UseSharedDevice = true,
-                CustomDevice = this.ViewModel.CanvasDevice,
-            };
-            this.Content = this.CanvasControl;
+            CanvasControl canvasControl = this.ViewModel.CanvasDevice;
+            if (canvasControl == null) return;
 
-             this.CanvasOperator = new CanvasOperator
-             {
-                 DestinationControl = this.CanvasControl
+            this.Content = canvasControl;
+
+            this.CanvasOperator = new CanvasOperator
+            {
+                DestinationControl = canvasControl
              };
 
             this.SizeChanged += (s, e) =>
@@ -39,21 +37,26 @@ namespace Retouch_Photo2.Controls
 
 
             //Draw
-            this.CanvasControl.Draw += (sender, args) =>
+            canvasControl.Draw += (sender, args) =>
             {
                 //Render & Crad
                 this._drawRenderAndCrad(args.DrawingSession);
 
-                //Tool & Bound
-                if (this.ViewModel.CanvasHitTestVisible || this._isSingleStarted)
+                switch (this._inputDevice)
                 {
-                    this._drawToolAndBound(sender, args.DrawingSession);
-                }
+                    case InputDevice.None:
+                    case InputDevice.Single:
+                        {
+                            //Tool & Bound
+                            this._drawToolAndBound(sender, args.DrawingSession);
 
-                //Ruler
-                if (this.ViewModel.CanvasRulerVisible)
-                {
-                    args.DrawingSession.DrawRuler(this.ViewModel.CanvasTransformer);
+                            //Ruler
+                            if (this.ViewModel.CanvasRulerVisible)
+                            {
+                                args.DrawingSession.DrawRuler(this.ViewModel.CanvasTransformer);
+                            }
+                        }
+                        break;
                 }
             };
 
@@ -67,6 +70,7 @@ namespace Retouch_Photo2.Controls
             //Single
             this.CanvasOperator.Single_Start += (point) =>
             {
+                this._inputDevice = InputDevice.None;
                 this._isSingleStarted = false;
                 this._singleStartingPoint = point;
 
@@ -89,6 +93,7 @@ namespace Retouch_Photo2.Controls
                 //Started
                 if (FanKit.Math.OutNodeDistance(this._singleStartingPoint, point))
                 {
+                    this._inputDevice = InputDevice.Single;
                     this._isSingleStarted = true;
 
                     //Tool
@@ -97,10 +102,19 @@ namespace Retouch_Photo2.Controls
             };
             this.CanvasOperator.Single_Complete += (point) =>
             {
-                this._isSingleStarted = false;
+                this._inputDevice = InputDevice.None;
 
-                //Tool
-                this.TipViewModel.Tool.Complete(this._singleStartingPoint, point, this._isSingleStarted);//Complete
+                if (this._isSingleStarted==false)
+                {
+                    //Tool
+                    this.TipViewModel.Tool.Clicke(this._singleStartingPoint);//Complete
+                }
+                else
+                {
+                    //Tool
+                    bool isOutNodeDistance = FanKit.Math.OutNodeDistance(this._singleStartingPoint, point);
+                    this.TipViewModel.Tool.Complete(this._singleStartingPoint, point, isOutNodeDistance);//Complete
+                }
 
                 this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible
             };
@@ -109,8 +123,11 @@ namespace Retouch_Photo2.Controls
             //Right
             this.CanvasOperator.Right_Start += (point) =>
             {
+                this._inputDevice = InputDevice.Right;
+
                 this.ViewModel.CanvasTransformer.CacheMove(point);
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+
                 this.ViewModel.CanvasHitTestVisible = false;//IsHitTestVisible
             };
             this.CanvasOperator.Right_Delta += (point) =>
@@ -120,8 +137,11 @@ namespace Retouch_Photo2.Controls
             };
             this.CanvasOperator.Right_Complete += (point) =>
             {
+                this._inputDevice = InputDevice.None;
+
                 this.ViewModel.CanvasTransformer.Move(point);
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+
                 this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible
             };
 
@@ -129,6 +149,8 @@ namespace Retouch_Photo2.Controls
             //Double
             this.CanvasOperator.Double_Start += (center, space) =>
             {
+                this._inputDevice = InputDevice.Double;
+
                 this.ViewModel.CanvasTransformer.CachePinch(center, space);
 
                 this.ViewModel.NotifyCanvasTransformerScale();//Notify
@@ -145,6 +167,8 @@ namespace Retouch_Photo2.Controls
             };
             this.CanvasOperator.Double_Complete += (center, space) =>
             {
+                this._inputDevice = InputDevice.None;
+
                 this.ViewModel.NotifyCanvasTransformerScale();//Notify
                 this.ViewModel.Invalidate(InvalidateMode.HD);
 

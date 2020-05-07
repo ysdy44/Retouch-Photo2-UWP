@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Elements.MainPages;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
@@ -119,11 +120,7 @@ namespace Retouch_Photo2
 
             //ImageLayer 
             Photocopier photocopier = photo.ToPhotocopier();
-            ImageLayer imageLayer = new ImageLayer
-            {
-                TransformManager = new TransformManager(transformerSource),
-                StyleManager = new StyleManager(transformerSource, transformerSource, photocopier)
-            };
+            ImageLayer imageLayer = new ImageLayer(transformerSource, photocopier);
 
             //Project
             Project project = new Project

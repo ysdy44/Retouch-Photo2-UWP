@@ -1,10 +1,7 @@
 ﻿using FanKit.Transformers;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -17,89 +14,52 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Sets all IGeometryLayer. </summary>     
         private void SetIGeometryLayer(ILayer layer)
         {
-            if (layer is IGeometryLayer geometryLayer)
-            {
+            if (layer == null) return;
 
+            switch (layer.Type)
+            {
                 //Geometry0
-                {
-                    //if (geometryLayer is GeometryRectangleLayer rectangleLayer)
-                    {
-                    }
-                    //if (geometryLayer is GeometryEllipseLayer ellipseLayer)
-                    {
-                    }
-                }
+                case LayerType.GeometryRectangle: break;
+                case LayerType.GeometryEllipse: break;
 
                 //Geometry1
-                {
-                    if (geometryLayer is GeometryRoundRectLayer roundRectLayer)
-                    {
-                        this.GeometryRoundRectCorner = roundRectLayer.Corner;
-                    }
-                    if (geometryLayer is GeometryTriangleLayer triangleLayer)
-                    {
-                        this.GeometryTriangleCenter = triangleLayer.Center;
-                    }
-                    if (geometryLayer is GeometryDiamondLayer diamondLayer)
-                    {
-                        this.GeometryDiamondMid = diamondLayer.Mid;
-                    }
-                }
+                case LayerType.GeometryRoundRect: this.GeometryRoundRectCorner = ((GeometryRoundRectLayer)layer).Corner; break;
+                case LayerType.GeometryTriangle: this.GeometryTriangleCenter = ((GeometryTriangleLayer)layer).Center; break;
+                case LayerType.GeometryDiamond: this.GeometryDiamondMid = ((GeometryDiamondLayer)layer).Mid; break;
 
                 //Geometry12
-                {
-                    if (geometryLayer is GeometryPentagonLayer pentagonLayer)
-                    {
-                        this.GeometryPentagonPoints = pentagonLayer.Points;
-                    }
-                    if (geometryLayer is GeometryStarLayer starLayer)
-                    {
-                        this.GeometryStarPoints = starLayer.Points;
-                        this.GeometryStarInnerRadius = starLayer.InnerRadius;
-                    }
-                    if (geometryLayer is GeometryCogLayer cogLayer)
-                    {
-                        this.GeometryCogCount = cogLayer.Count;
-                        this.GeometryCogInnerRadius = cogLayer.InnerRadius;
-                        this.GeometryCogTooth = cogLayer.Tooth;
-                        this.GeometryCogNotch = cogLayer.Notch;
-                    }
-                }
+                case LayerType.GeometryPentagon: this.GeometryPentagonPoints = ((GeometryPentagonLayer)layer).Points; break;
+                case LayerType.GeometryStar:
+                    GeometryStarLayer starLayer = (GeometryStarLayer)layer;
+                    this.GeometryStarPoints = starLayer.Points;
+                    this.GeometryStarInnerRadius = starLayer.InnerRadius;
+                    break;
+                case LayerType.GeometryCog:
+                    GeometryCogLayer cogLayer = (GeometryCogLayer)layer;
+                    this.GeometryCogCount = cogLayer.Count;
+                    this.GeometryCogInnerRadius = cogLayer.InnerRadius;
+                    this.GeometryCogTooth = cogLayer.Tooth;
+                    this.GeometryCogNotch = cogLayer.Notch;
+                    break;
 
                 //Geometry3
-                {
-                    if (geometryLayer is GeometryDountLayer dountLayer)
-                    {
-                        this.GeometryDountHoleRadius = dountLayer.HoleRadius;
-                    }
-                    if (geometryLayer is GeometryPieLayer pieLayer)
-                    {
-                        this.GeometryPieSweepAngle = pieLayer.SweepAngle;
-                    }
-                    if (geometryLayer is GeometryCookieLayer cookieLayer)
-                    {
-                        this.GeometryCookieInnerRadius = cookieLayer.InnerRadius;
-                        this.GeometryCookieSweepAngle = cookieLayer.SweepAngle;
-                    }
-                }
+                case LayerType.GeometryDount: this.GeometryDountHoleRadius = ((GeometryDountLayer)layer).HoleRadius; break;
+                case LayerType.GeometryPie: this.GeometryPieSweepAngle = ((GeometryPieLayer)layer).SweepAngle; break;
+                case LayerType.GeometryCookie:
+                    GeometryCookieLayer cookieLayer = (GeometryCookieLayer)layer;
+                    this.GeometryCookieInnerRadius = cookieLayer.InnerRadius;
+                    this.GeometryCookieSweepAngle = cookieLayer.SweepAngle;
+                    break;
 
                 //Geometry4
-                {
-                    if (geometryLayer is GeometryArrowLayer arrowLayer)
-                    {
-                        this.GeometryArrowValue = arrowLayer.Value;
-                        this.GeometryArrowLeftTail = arrowLayer.LeftTail;
-                        this.GeometryArrowRightTail = arrowLayer.RightTail;
-                    }
-                    //if (geometryLayer is GeometryCapsuleLayer capsuleLayer)
-                    {
-                    }
-                    if (geometryLayer is GeometryHeartLayer heartLayer)
-                    {
-                        this.GeometryHeartSpread = heartLayer.Spread;
-                    }
-                }
-
+                case LayerType.GeometryArrow:
+                    GeometryArrowLayer arrowLayer = (GeometryArrowLayer)layer;
+                    this.GeometryArrowValue = arrowLayer.Value;
+                    this.GeometryArrowLeftTail = arrowLayer.LeftTail;
+                    this.GeometryArrowRightTail = arrowLayer.RightTail;
+                    break;
+                case LayerType.GeometryCapsule: break;
+                case LayerType.GeometryHeart: this.GeometryHeartSpread = ((GeometryHeartLayer)layer).Spread; break;
             }
         }
 
@@ -150,7 +110,7 @@ namespace Retouch_Photo2.ViewModels
 
 
         #endregion
-        
+
 
         #region Geometry2
 
@@ -194,7 +154,7 @@ namespace Retouch_Photo2.ViewModels
         }
         private float geometryStarInnerRadius = 0.4f;
 
-                          
+
         /// <summary> GeometryCog's count. </summary>     
         public int GeometryCogCount
         {
@@ -248,7 +208,6 @@ namespace Retouch_Photo2.ViewModels
         #endregion
 
 
-
         #region Geometry3
 
 
@@ -264,8 +223,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private float geometryPieSweepAngle = FanKit.Math.Pi / 2f;
-
-
+        
 
         /// <summary> GeometryDount's hole-radius. </summary>     
         public float GeometryDountHoleRadius
@@ -305,9 +263,12 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private float geometryCookieSweepAngle = FanKit.Math.Pi / 2f;
-                     
+
 
         #endregion
+
+
+        #region Geometry4
 
 
         /// <summary> GeometryArrow's value. </summary>     
@@ -362,6 +323,7 @@ namespace Retouch_Photo2.ViewModels
         private float geometryHeartSpread = 0.8f;
 
 
+        #endregion
 
     }
 }

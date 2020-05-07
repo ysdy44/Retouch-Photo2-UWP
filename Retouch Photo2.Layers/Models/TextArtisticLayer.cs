@@ -1,37 +1,49 @@
-﻿using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Effects;
-using Microsoft.Graphics.Canvas.Geometry;
-using Microsoft.Graphics.Canvas.Text;
+﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Layers.Icons;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Xml.Linq;
 using Windows.ApplicationModel.Resources;
-using Windows.Foundation;
-using Windows.UI;
 
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="LayerBase"/>'s TextArtisticLayer .
+    /// <see cref="TextLayerBase"/>'s TextArtisticLayer .
     /// </summary>
-    public class TextArtisticLayer : LayerBase, ILayer
+    public class TextArtisticLayer : TextLayerBase, ILayer, ITextLayer
     {
 
         //@Override     
         public override LayerType Type => LayerType.TextArtistic;
 
-        //@Content       
-        public string Text = string.Empty;
+        public override float FontSize
+        {
+            get => this.GetFontSize();
+            set => this.SetFontSize(value);
+        }
+
+        private float fontSize;
+        private void SetFontSize(float value)
+        {
+            float scale = value / this.fontSize;
+
+            Vector2 leftTop = this.TransformManager.Destination.LeftTop;
+            Matrix3x2 matrix =
+                Matrix3x2.CreateTranslation(-leftTop)
+                * Matrix3x2.CreateScale(scale)
+                * Matrix3x2.CreateTranslation(leftTop);
+
+            base.CacheTransform();
+            base.TransformMultiplies(matrix);
+        }
+        private float GetFontSize()
+        {
+            float height = base.TransformManager.Destination.Vertical.Length();
+            this.fontSize = height;
+
+            return this.fontSize;
+        }
+
 
         //@Construct
-        /// <summary>
-        /// Construct a TextArtistic-layer.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public TextArtisticLayer(XElement element) : this() => this.Load(element);
         /// <summary>
         /// Construct a TextArtistic-layer.
         /// </summary>
@@ -44,47 +56,30 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
 
-
-        public ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
+        
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            Transformer transformer = base.TransformManager.Destination;
-
-            CanvasCommandList command = new CanvasCommandList(resourceCreator);
-            using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
-            {
-                CanvasTextLayout textLayout = new CanvasTextLayout(resourceCreator, this.Text, new CanvasTextFormat(), 0, 0);
-                CanvasGeometry geometry = CanvasGeometry.CreateText(textLayout);
-
-                //Fill
-                this.StyleManager.FillGeometry(resourceCreator, drawingSession, geometry, canvasToVirtualMatrix);
-                //Stroke
-                this.StyleManager.DrawGeometry(resourceCreator, drawingSession, geometry, canvasToVirtualMatrix);
-            }
-            return command;
+            TextArtisticLayer artisticLayer = new TextArtisticLayer();
+         
+            TextLayerBase.FontCopyWith(artisticLayer, this);
+            LayerBase.CopyWith(resourceCreator, artisticLayer, this);
+            return artisticLayer;
         }
 
 
-        public IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;
-
-        public ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override void CacheTransform()
         {
-            TextArtisticLayer textArtisticLayer = new TextArtisticLayer
-            {
-                Text = this.Text,
-            };
-
-            LayerBase.CopyWith(resourceCreator, textArtisticLayer, this);
-            return textArtisticLayer;
+            base.CacheTransform();
+        }
+        public override void TransformMultiplies(Matrix3x2 matrix)
+        {
+            base.TransformMultiplies(matrix);
+        }
+        public override void TransformAdd(Vector2 vector)
+        {
+            base.TransformAdd(vector);
         }
 
-        public void SaveWith(XElement element)
-        {
-            element.Add(new XElement("Text", this.Text));
-        }
-        public void Load(XElement element)
-        {
-            this.Text = element.Element("Text").Value;
-        }
 
         //Strings
         private string ConstructStrings()

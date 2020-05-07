@@ -26,12 +26,8 @@ namespace Retouch_Photo2.Tools.Elements
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.SquareTextBlock.Text = resource.GetString("/ToolElements/MoreCreate_Square");
-            this.SquareOnOffSwitch.OnContent = resource.GetString("/ToolElements/MoreCreate_SquareOn");
-            this.SquareOnOffSwitch.OffContent = resource.GetString("/ToolElements/MoreCreate_SquareOff");
 
             this.CenterTextBlock.Text = resource.GetString("/ToolElements/MoreCreate_Center");
-            this.CenterOnOffSwitch.OnContent = resource.GetString("/ToolElements/MoreCreate_CenterOn");
-            this.CenterOnOffSwitch.OffContent = resource.GetString("/ToolElements/MoreCreate_CenterOff");
         }
 
     }

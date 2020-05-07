@@ -139,7 +139,7 @@
                 </Grid.ColumnDefinitions>
                 
                 <Border x:Name="TextBlockBorder" Padding="4,0" Visibility="Collapsed">
-                    <TextBlock x:Name="TextBlock" Style="{StaticResource AppTextBlock}"/>
+                    <TextBlock x:Name="TextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 </Border>
                 
                 <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{StaticResource UnCheckColor}"/>

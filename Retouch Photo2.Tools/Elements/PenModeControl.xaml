@@ -14,7 +14,7 @@
     <StackPanel Padding="2" MinWidth="300">
 
         <!--Restriction-->
-        <TextBlock x:Name="RestrictionTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="RestrictionTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <Border Height="Auto" HorizontalAlignment="Left" Style="{ThemeResource AppRoundedBorderStyle}">
             <StackPanel Orientation="Horizontal" Padding="8,0">
                 <CheckBox x:Name="AngleCheckBox" MinWidth="100"/>
@@ -25,7 +25,7 @@
         <ContentControl Height="8"/>
 
         <!--Mode-->
-        <TextBlock x:Name="ModeTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="ModeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <Border Height="Auto" MaxHeight="120" Style="{ThemeResource AppRoundedBorderStyle}">
             <StackPanel Orientation="Horizontal">
                 <RadioButton x:Name="MirroredRadioButton" Style="{StaticResource AppIconRadioButtonStyle}"/>

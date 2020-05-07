@@ -49,7 +49,7 @@
         </VisualStateManager.VisualStateGroups>
         
         <Button.Tag>
-            <FontIcon FontSize="14" Glyph="&#xE099;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+            <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
         </Button.Tag>        
     </Button>
 

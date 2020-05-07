@@ -12,35 +12,8 @@ namespace Retouch_Photo2.Blends
     /// </summary>
     public sealed partial class TagTypeControl : UserControl
     {
-
         //@Delegate
         public EventHandler<TagType> TypeChanged;
-        
-
-        #region DependencyProperty
-
-
-        /// <summary> Gets or sets the tag type. </summary>
-        public TagType Type
-        {
-            get { return (TagType)GetValue(TypeProperty); }
-            set { SetValue(TypeProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "TagTypeControl.Type" /> dependency property. </summary>
-        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(TagType), typeof(TagTypeControl), new PropertyMetadata(TagType.None, (sender, e) =>
-        {
-            TagTypeControl con = (TagTypeControl)sender;
-
-            if (e.NewValue is TagType value)
-            {
-                con._vsTagType = value;
-                con.VisualState=con.VisualState;//State
-            }
-        }));
-
-
-        #endregion
-
 
         //@VisualState
         TagType _vsTagType;
@@ -62,6 +35,30 @@ namespace Retouch_Photo2.Blends
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
+        
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets the tag type. </summary>
+        public TagType Type
+        {
+            get { return (TagType)GetValue(TypeProperty); }
+            set { SetValue(TypeProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "TagTypeControl.Type" /> dependency property. </summary>
+        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(TagType), typeof(TagTypeControl), new PropertyMetadata(TagType.None, (sender, e) =>
+        {
+            TagTypeControl con = (TagTypeControl)sender;
+
+            if (e.NewValue is TagType value)
+            {
+                con._vsTagType = value;
+                con.VisualState = con.VisualState;//State
+            }
+        }));
+
+
+        #endregion
 
 
         //@Construct
@@ -83,10 +80,8 @@ namespace Retouch_Photo2.Blends
 
         private void ConstructRadioButton(RadioButton radioButton, TagType tagType)
         {
-            int index = (int)tagType;
             Color color = TagTypeHelper.TagConverter(tagType);
 
-            radioButton.TabIndex = index;
             radioButton.Background = new SolidColorBrush(color);
             radioButton.Tapped += (s, e) =>
             {

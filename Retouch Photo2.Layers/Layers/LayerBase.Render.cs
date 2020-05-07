@@ -1,9 +1,11 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
+using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Effects;
+using System.Collections.Generic;
 using System.Numerics;
 using Windows.UI.Xaml;
 
@@ -16,12 +18,30 @@ namespace Retouch_Photo2.Layers
     {
         
         //@Abstract
+        public virtual ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
+        {
+            CanvasCommandList command = new CanvasCommandList(resourceCreator);
+            using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
+            {
+                CanvasGeometry geometry = this.CreateGeometry(resourceCreator, canvasToVirtualMatrix);
+                //Fill
+                this.StyleManager.FillGeometry(resourceCreator, drawingSession, geometry, canvasToVirtualMatrix);
+                //Stroke
+                this.StyleManager.DrawGeometry(resourceCreator, drawingSession, geometry, canvasToVirtualMatrix);
+            }
+            return command;
+        }
+
         public virtual void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
         {
-            Transformer transformer = this.GetActualDestinationWithRefactoringTransformer;
-
-            drawingSession.DrawBound(transformer, matrix, accentColor);
+            CanvasGeometry geometry = this.CreateGeometry(resourceCreator, matrix);
+            drawingSession.DrawGeometry(geometry, accentColor);
         }
+
+
+        public abstract CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix);
+        
+        public abstract IEnumerable<IEnumerable<Node>> ConvertToCurves();
 
 
         //@Static
@@ -80,6 +100,6 @@ namespace Retouch_Photo2.Layers
                 }
             };
         }
-
+        
     }
 }

@@ -107,8 +107,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BrushOperateMode.cs" />
-    <Compile Include="BrushTypeControl.xaml.cs">
-      <DependentUpon>BrushTypeControl.xaml</DependentUpon>
+    <Compile Include="BrushTypeComboBox.xaml.cs">
+      <DependentUpon>BrushTypeComboBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="BrushTypeIcons\ColorIcon.xaml.cs">
       <DependentUpon>ColorIcon.xaml</DependentUpon>
@@ -128,8 +128,8 @@
     <Compile Include="BrushTypeIcons\RadialGradientIcon.xaml.cs">
       <DependentUpon>RadialGradientIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FillOrStrokeControl.xaml.cs">
-      <DependentUpon>FillOrStrokeControl.xaml</DependentUpon>
+    <Compile Include="FillOrStrokeComboBox.xaml.cs">
+      <DependentUpon>FillOrStrokeComboBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="FillOrStrokeIcons\StrokeIcon.xaml.cs">
       <DependentUpon>StrokeIcon.xaml</DependentUpon>
@@ -174,7 +174,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="BrushTypeControl.xaml">
+    <Page Include="BrushTypeComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -202,7 +202,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FillOrStrokeControl.xaml">
+    <Page Include="FillOrStrokeComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

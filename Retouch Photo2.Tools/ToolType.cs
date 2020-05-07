@@ -25,6 +25,8 @@
         GeometryEllipse,
         /// <summary> Pen curve tool. </summary>
         Pen,
+        /// <summary> Node curve tool. </summary>
+        Node,
 
         /// <summary> Create frame text. </summary>
         TextFrame,

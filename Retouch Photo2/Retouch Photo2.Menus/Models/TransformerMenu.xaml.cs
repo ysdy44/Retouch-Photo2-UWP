@@ -36,7 +36,9 @@ namespace Retouch_Photo2.Menus.Models
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
 
+        bool IsRatio => this.KeyboardViewModel.IsRatio;
         Transformer SelectionTransformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
                
 
@@ -104,17 +106,7 @@ namespace Retouch_Photo2.Menus.Models
             return;
         }));
 
-
-        /// <summary> Gets or sets <see cref = "TransformerMenu" />'s IsRatio. </summary>
-        public bool IsRatio
-        {
-            get { return (bool)GetValue(IsRatioProperty); }
-            set { SetValue(IsRatioProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "TransformerMenu.IsRatio" /> dependency property. </summary>
-        public static readonly DependencyProperty IsRatioProperty = DependencyProperty.Register(nameof(IsRatio), typeof(bool), typeof(TransformerMenu), new PropertyMetadata(false));
-
-
+        
         /// <summary> Gets or sets <see cref = "TransformerMenu" />'s selection mode. </summary>
         public ListViewSelectionMode Mode
         {

@@ -13,7 +13,7 @@
     <StackPanel>
 
         <!--Saturation-->
-        <TextBlock x:Name="SaturationTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="SaturationTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <hsvColorPickers:TouchSlider x:Name="SaturationSlider" Minimum="0" Maximum="200">
             <hsvColorPickers:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">

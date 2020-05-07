@@ -38,7 +38,7 @@ namespace Retouch_Photo2.Tools.Models
         //FillOrStroke
         private void ConstructFillOrStroke()
         {
-            this.FillOrStrokeControl.FillOrStrokeChanged += (s, fillOrStroke) =>
+            this.FillOrStrokeComboBox.FillOrStrokeChanged += (s, fillOrStroke) =>
             {
                 this.FillOrStroke = fillOrStroke;
                 this.ViewModel.Invalidate(); //Invalidate
@@ -49,8 +49,8 @@ namespace Retouch_Photo2.Tools.Models
         //BrushType
         private void ConstructBrushType()
         {
-            this.BrushTypeControl.FillTypeChanged += (s, brushType) => this.FillTypeChanged(brushType);
-            this.BrushTypeControl.StrokeTypeChanged += (s, brushType) => this.StrokeTypeChanged(brushType);
+            this.BrushTypeComboBox.FillTypeChanged += (s, brushType) => this.FillTypeChanged(brushType);
+            this.BrushTypeComboBox.StrokeTypeChanged += (s, brushType) => this.StrokeTypeChanged(brushType);
         }
 
 
@@ -157,20 +157,18 @@ namespace Retouch_Photo2.Tools.Models
                     break;
             }
         }
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isSingleStarted)
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
             //Selection
             if (this.Mode == ListViewSelectionMode.None) return;
 
             this._operateMode = BrushOperateMode.None;
-            this.ViewModel.Invalidate(ViewModels.InvalidateMode.HD);//Invalidate
-
+            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+        }
+        public void Clicke(Vector2 point)
+        {
             //Select single layer
-            if (isSingleStarted == false)
-            {
-                ITransformerTool transformerTool = this.TipViewModel.TransformerTool;
-                transformerTool.SelectSingleLayer(startingPoint);
-            }
+            this.TipViewModel.TransformerTool.SelectSingleLayer(point);
         }
 
         public void Draw(CanvasDrawingSession drawingSession)

@@ -11,9 +11,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="IGeometryLayer"/>'s GeometryCurveMultiLayer .
+    /// <see cref="ILayer"/>'s GeometryCurveMultiLayer .
     /// </summary>
-    public class GeometryCurveMultiLayer : IGeometryLayer, ILayer
+    public class GeometryCurveMultiLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -23,12 +23,7 @@ namespace Retouch_Photo2.Layers.Models
         public IList<NodeCollection> Nodess { get; private set; }
 
         //@Construct
-        /// <summary>
-        /// Construct a multi-curve-layer.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public GeometryCurveMultiLayer(XElement element) : this() => this.Load(element);
-        /// <summary>
+      /// <summary>
         /// Construct a multi-curve-layer.
         /// </summary>
         private GeometryCurveMultiLayer()
@@ -38,8 +33,7 @@ namespace Retouch_Photo2.Layers.Models
                 Icon = new GeometryCurveMultiIcon(),
                 Text = this.ConstructStrings(),
             };
-        }
-    
+        }    
         /// <summary>
         /// Construct a multi-curve-layer.
         /// </summary>
@@ -60,7 +54,24 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        //@Override
+        public override Transformer GetActualDestinationWithRefactoringTransformer
+        {
+            get
+            {
+                //TODO: GeometryCurveMultiLayer
+                //   if (this.IsRefactoringTransformer)
+                //  {
+                //      Transformer transformer = LayerCollection.RefactoringTransformer(this.Nodes);
+                //        this.TransformManager.Source = transformer;
+                //       this.TransformManager.Destination = transformer;
+                //
+                //       this.IsRefactoringTransformer = false;
+                //   }
+
+                return base.GetActualDestinationWithRefactoringTransformer;
+            }
+        }
+
         public override void CacheTransform()
         {
             base.CacheTransform();
@@ -87,38 +98,7 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public override Transformer GetActualDestinationWithRefactoringTransformer
-        {
-            get
-            {
-                //TODO: GeometryCurveMultiLayer
-                //   if (this.IsRefactoringTransformer)
-                //  {
-                //      Transformer transformer = LayerCollection.RefactoringTransformer(this.Nodes);
-                //        this.TransformManager.Source = transformer;
-                //       this.TransformManager.Destination = transformer;
-                //
-                //       this.IsRefactoringTransformer = false;
-                //   }
-
-                return base.GetActualDestinationWithRefactoringTransformer;
-            }
-        }
-
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
-        {
-            IEnumerable<CanvasGeometry> geometrys =
-                 from nodes
-                 in this.Nodess
-                 select nodes.CreateGeometry(resourceCreator).Transform(canvasToVirtualMatrix);
-
-            return CanvasGeometry.CreateGroup(resourceCreator, geometrys.ToArray());
-        }
-
-
-        public IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;
-
-        public ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryCurveMultiLayer CurveMultiLayer = new GeometryCurveMultiLayer
             {
@@ -129,7 +109,7 @@ namespace Retouch_Photo2.Layers.Models
             return CurveMultiLayer;
         }
 
-        public void SaveWith(XElement element)
+        public override void SaveWith(XElement element)
         {
             element.Add(new XElement
             (
@@ -139,7 +119,7 @@ namespace Retouch_Photo2.Layers.Models
                 select FanKit.Transformers.XML.SaveNodeCollection("Nodes", "Node", nodes)
             ));
         }
-        public void Load(XElement element)
+        public override void Load(XElement element)
         {
             XElement nodess = element.Element("Nodess");
 
@@ -150,7 +130,20 @@ namespace Retouch_Photo2.Layers.Models
                 select FanKit.Transformers.XML.LoadNodeCollection("Node", nodes.Element("Nodes"))
            ).ToList();
         }
-      
+
+
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        {
+            IEnumerable<CanvasGeometry> geometrys =
+                 from nodes
+                 in this.Nodess
+                 select nodes.CreateGeometry(resourceCreator).Transform(canvasToVirtualMatrix);
+
+            return CanvasGeometry.CreateGroup(resourceCreator, geometrys.ToArray());
+        }        
+        public override IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;
+
+
         //Strings
         private string ConstructStrings()
         {

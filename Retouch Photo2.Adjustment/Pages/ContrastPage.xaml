@@ -14,7 +14,7 @@
     <StackPanel >
 
         <!--Contrast-->
-        <TextBlock x:Name="ContrastTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="ContrastTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <hsvColorPickers:TouchSlider x:Name="ContrastSlider" Minimum="-100" Maximum="100">
             <hsvColorPickers:TouchSlider.SliderBrush>
                 <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">

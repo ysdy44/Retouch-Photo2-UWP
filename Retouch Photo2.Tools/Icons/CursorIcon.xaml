@@ -9,10 +9,10 @@
     d:DesignWidth="50"
     >
 
-    <Path StrokeThickness="1" Stroke="White" Fill="Black">
-        <Path.Data>
-            M0,0l15.249,15.095l-9.486,0l-5.763,7.819l0,-22.914Z
-        </Path.Data>
-    </Path>
-
+    <Polygon StrokeThickness="1" Stroke="White" Fill="Black">
+        <Polygon.Points>
+            0,0 0,23 6,16 16,15
+        </Polygon.Points>
+    </Polygon>
+    
 </UserControl>

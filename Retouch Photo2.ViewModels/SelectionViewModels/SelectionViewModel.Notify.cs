@@ -1,7 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
-using Retouch_Photo2.Brushs.Models;
 using Retouch_Photo2.Effects;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
@@ -32,16 +31,18 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
-        /// <summary> <see cref = "SelectionViewModel" />'s blend mode. </summary>
-        public BlendEffectMode? BlendMode = null;
-        /// <summary> Sets the <see cref = "SelectionViewModel.BlendMode" />. </summary>
-        public void SetBlendMode(BlendEffectMode? value)
+        /// <summary> <see cref = "SelectionViewModel" />'s blend-mode. </summary>
+        public BlendEffectMode? BlendMode
         {
-            if (this.BlendMode == value) return;
-            this.BlendMode = value;
-            this.OnPropertyChanged(nameof(this.BlendMode));//Notify 
+            get => this.blendMode;
+            set
+            {
+                this.blendMode = value;
+                this.OnPropertyChanged(nameof(this.BlendMode));//Notify 
+            }
         }
-
+        private BlendEffectMode? blendMode = null;
+        
 
         /// <summary> <see cref = "SelectionViewModel" />'s visibility. </summary>
         public Visibility Visibility { get; set; } = Visibility.Visible;
@@ -111,12 +112,27 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary> GroupLayer's Exist. </summary>     
-        public bool IsGroupLayer { get; set; }
+        public bool IsGroupLayer
+        {
+            get => this.isGroupLayer;
+            set
+            {
+                this.isGroupLayer=value;
+                this.OnPropertyChanged(nameof(this.IsGroupLayer));//Notify 
+            }
+        }
+        private bool isGroupLayer;
         /// <summary> Sets GroupLayer. </summary>     
         private void SetGroupLayer(ILayer layer)
         {
-            this.IsGroupLayer = layer is GroupLayer;
-            this.OnPropertyChanged(nameof(this.IsGroupLayer));//Notify 
+            if (layer == null)
+            {
+                this.IsGroupLayer = false;
+            }
+            else
+            {
+                this.IsGroupLayer = (layer.Type == LayerType.Group);
+            }
         }
 
 
@@ -145,87 +161,42 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Sets ImageLayer. </summary>     
         private void SetImageLayer(ILayer layer)
         {
-            if (layer is ImageLayer imageLayer)
-            {
-                this.IsImageLayer = true;
-
-                if (imageLayer.StyleManager.FillBrush is ImageBrush imageBrush)
-                {
-                    this.Photocopier = imageBrush.Photocopier;
-                }
-            }
+            if (layer == null) this.IsImageLayer = false;
             else
             {
-                this.IsImageLayer = false;
+                if (layer.Type == LayerType.Image)
+                {
+                    this.IsImageLayer = true;
+                    this.Photocopier = layer.StyleManager.FillBrush.Photocopier;
+                }
+                else this.IsImageLayer = false;
             }
         }
 
-
-        /// <summary> Sets PenTool nodes mode. </summary>     
-        public bool IsPenToolNodesMode
-        {
-            get => this.isPenToolNodesMode;
-            set
-            {
-                this.isPenToolNodesMode = value;
-                this.OnPropertyChanged(nameof(this.IsPenToolNodesMode));//Notify 
-            }
-        }
-        private bool isPenToolNodesMode;
+        
         /// <summary> <see cref = "SelectionViewModel" />'s CurveLayer. </summary>
         public GeometryCurveLayer CurveLayer { get; set; }
         /// <summary> Sets CurveLayer. </summary>     
         private void SetCurveLayer(ILayer layer)
         {
-            if (layer is GeometryCurveLayer curveLayer)
+            if (layer==null)
             {
-                this.IsPenToolNodesMode = (curveLayer.Nodes.Count != 2);
-                this.CurveLayer = curveLayer;
-            }
-            else
-            {
-                this.IsPenToolNodesMode = false;
                 this.CurveLayer = null;
+                return;
             }
-        }
 
+            switch (layer.Type)
+            {
+                case LayerType.GeometryCurve:
+                    this.CurveLayer = (GeometryCurveLayer)layer;
+                    break;
 
-        /// <summary> Sets text FontFamily. </summary>     
-        public string TextFontFamily
-        {
-            get => this.textFontFamily;
-            set
-            {
-                this.textFontFamily = value;
-                this.OnPropertyChanged(nameof(this.TextFontFamily));//Notify 
-            }
-        }
-        private string textFontFamily = "Arial";
+                case LayerType.GeometryCurveMulti:
+                    break;
 
-        /// <summary> Sets text FontSize. </summary>     
-        public int TextFontSize
-        {
-            get => this.textFontSize;
-            set
-            {
-                this.textFontSize = value;
-                this.OnPropertyChanged(nameof(this.TextFontSize));//Notify 
-            }
-        }
-        private int textFontSize = 22;
-
-        /// <summary> <see cref = "SelectionViewModel" />'s FrameLayer. </summary>
-        public TextFrameLayer TextFrameLayer { get; set; }
-        /// <summary> Sets FrameLayer. </summary>     
-        private void SetTextFrameLayer(ILayer layer)
-        {
-            if (layer is TextFrameLayer frameLayer)
-            {
-                this.TextFrameLayer = frameLayer;
-            }
-            else
-            {
-                this.TextFrameLayer = null;
+                default:
+                    this.CurveLayer = null;
+                    break;
             }
         }
 

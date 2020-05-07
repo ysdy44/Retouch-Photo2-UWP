@@ -19,26 +19,7 @@ namespace Retouch_Photo2.Brushs
         public IBrush StrokeBrush = new NoneBrush();
         /// <summary> Gets or sets Style's stroke-width. </summary>
         public float StrokeWidth = 1;
-
-
-        //@Construct
-        /// <summary>
-        /// Construct a style-manager.
-        /// </summary>
-        public StyleManager() { }
-        /// <summary>
-        /// Construct a style-manager.
-        /// </summary>
-        public StyleManager(Transformer Source, Transformer Destination, Photocopier photocopier)
-        {
-            this.FillBrush = new ImageBrush
-            {
-                Photocopier = photocopier,
-                Source = Source,
-                Destination = Destination,
-            };
-        }
-
+        
 
         //@Interface
         /// <summary>

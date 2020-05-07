@@ -4,9 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:adjustments="using:Retouch_Photo2.Adjustments"
-    xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:menus="using:Retouch_Photo2.Menus"
     mc:Ignorable="d"
     d:DesignWidth="200"
@@ -50,13 +48,13 @@
                     <!--Edit-->
                     <Button x:Name="EditButton" Grid.Column="1" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                    Visibility="{x:Bind PageVisibility}" Tapped="EditButton_Tapped">
-                        <FontIcon FontSize="16" Glyph="&#xE104;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+                        <FontIcon FontSize="16" Glyph="&#xE104;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
                     </Button>
 
                     <!--Remove-->
                     <Button x:Name="RemoveButton" Grid.Column="2" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                            Tapped="RemoveButton_Tapped">
-                        <FontIcon FontSize="14" Glyph="&#xE8BB;" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+                        <FontIcon FontSize="14" Glyph="&#xE8BB;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
                     </Button>
 
                 </Grid>
@@ -79,8 +77,8 @@
                 <VisualState x:Name="Disable">
                     <VisualState.Setters>
 
-                        <Setter Target = "AddButton.IsEnabled" Value="false"/>
-                        <Setter Target = "FiltersButton.IsEnabled" Value="false"/>
+                        <Setter Target = "AddButton.IsEnabled" Value="False"/>
+                        <Setter Target = "FiltersButton.IsEnabled" Value="False"/>
 
                         <Setter Target = "DisableTextBlock.Visibility" Value="Visible"/>
 
@@ -135,8 +133,8 @@
                 <!--Body-->
                 <Border Background="{ThemeResource AppForeground}"/>
                 <ItemsControl x:Name="ItemsControl" Visibility="Collapsed" Margin="0,2" VerticalAlignment="Top" ItemTemplate="{StaticResource DataTemplate}"/>
-                <TextBlock x:Name="ZeroTextBlock" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlock}"/>
-                <TextBlock x:Name="DisableTextBlock" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlock}"/>
+                <TextBlock x:Name="ZeroTextBlock" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"/>
+                <TextBlock x:Name="DisableTextBlock" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"/>
 
 
                 <!--Foot-->
@@ -148,7 +146,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="4"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="TextBlock" Margin="12,0" Style="{StaticResource AppTextBlock}"/>
+                    <TextBlock x:Name="TextBlock" Margin="12,0" Style="{StaticResource AppTextBlockStyle}"/>
                     <Button x:Name="AddButton" Grid.Column="1" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
                     <Button x:Name="FiltersButton" Grid.Column="3" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
                 </Grid>

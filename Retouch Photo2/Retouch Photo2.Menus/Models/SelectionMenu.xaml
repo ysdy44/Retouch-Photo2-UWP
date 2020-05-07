@@ -25,11 +25,11 @@
                 <VisualState x:Name="Disable">
                     <VisualState.Setters>
 
-                        <Setter Target = "CutButton.IsEnabled" Value="false"/>
-                        <Setter Target = "CopyButton.IsEnabled" Value="false"/>
-                        <Setter Target = "ClearButton.IsEnabled" Value="false"/>
+                        <Setter Target = "CutButton.IsEnabled" Value="False"/>
+                        <Setter Target = "CopyButton.IsEnabled" Value="False"/>
+                        <Setter Target = "ClearButton.IsEnabled" Value="False"/>
 
-                        <Setter Target = "InvertButton.IsEnabled" Value="false"/>
+                        <Setter Target = "InvertButton.IsEnabled" Value="False"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -54,7 +54,7 @@
                     <Button x:Name="PasteButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
                     <Button x:Name="ClearButton" Style="{StaticResource AppIconButton}"/>
 
-                    <Rectangle Style="{ThemeResource AppSeparatorRectangle}" />
+                    <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
 
                     <Button x:Name="ExtractButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
                     <Button x:Name="MergeButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>

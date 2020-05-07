@@ -30,7 +30,7 @@
         </VisualStateManager.VisualStateGroups>
 
 
-        <FontIcon x:Name="FontIcon" Glyph="&#xE149;" FontFamily="Segoe UI Symbol" Foreground="Gray"/>
+        <FontIcon x:Name="FontIcon" Glyph="&#xE149;" FontWeight="Bold" FontFamily="Segoe UI Symbol" Foreground="Gray"/>
 
     </Border>
     

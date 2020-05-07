@@ -186,38 +186,14 @@
   <data name="MoreCreate_Center" xml:space="preserve">
     <value>中心缩放</value>
   </data>
-  <data name="MoreCreate_CenterOff" xml:space="preserve">
-    <value>无</value>
-  </data>
-  <data name="MoreCreate_CenterOn" xml:space="preserve">
-    <value>中心</value>
-  </data>
   <data name="MoreCreate_Square" xml:space="preserve">
     <value>宽高相等</value>
-  </data>
-  <data name="MoreCreate_SquareOff" xml:space="preserve">
-    <value>无</value>
-  </data>
-  <data name="MoreCreate_SquareOn" xml:space="preserve">
-    <value>正方形</value>
   </data>
   <data name="MoreTransform_Center" xml:space="preserve">
     <value>中心缩放</value>
   </data>
-  <data name="MoreTransform_CenterOff" xml:space="preserve">
-    <value>无</value>
-  </data>
-  <data name="MoreTransform_CenterOn" xml:space="preserve">
-    <value>中心</value>
-  </data>
   <data name="MoreTransform_Ratio" xml:space="preserve">
     <value>等比例缩放</value>
-  </data>
-  <data name="MoreTransform_RatioOff" xml:space="preserve">
-    <value>无</value>
-  </data>
-  <data name="MoreTransform_RatioOn" xml:space="preserve">
-    <value>等比例</value>
   </data>
   <data name="PenMode_Mode" xml:space="preserve">
     <value>模式</value>

@@ -1,0 +1,159 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Characters.FontWeightComboBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="200"
+    d:DesignWidth="200"
+    >
+
+    <UserControl.Resources>
+        <!--Style-->
+        <Style x:Name="ContentControlStyle" TargetType="ContentControl">
+            <Setter Property="MinWidth" Value="26"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="2,0"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+                        <Border x:Name="RootGrid"
+                                CornerRadius="2"
+                                BorderThickness="{TemplateBinding BorderThickness}"                               
+                                BorderBrush="{TemplateBinding BorderBrush}"                               
+                                Background="{TemplateBinding Background}"                               
+                                >
+                            <ContentPresenter x:Name="ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      Margin="{TemplateBinding Padding}"
+                                      FontSize="{TemplateBinding FontSize}"
+                                      Foreground="{TemplateBinding Foreground}" 
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
+
+    <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
+
+                <!--Black-->
+                <VisualState x:Name="Black">
+                    <VisualState.Setters>
+                        <Setter Target = "BlackButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--Bold-->
+                <VisualState x:Name="Bold">
+                    <VisualState.Setters>
+                        <Setter Target = "BoldButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--ExtraBlack-->
+                <VisualState x:Name="ExtraBlack">
+                    <VisualState.Setters>
+                        <Setter Target = "ExtraBlackButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--ExtraBold-->
+                <VisualState x:Name="ExtraBold">
+                    <VisualState.Setters>
+                        <Setter Target = "ExtraBoldButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--ExtraLight-->
+                <VisualState x:Name="ExtraLight">
+                    <VisualState.Setters>
+                        <Setter Target = "ExtraLightButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Light-->
+                <VisualState x:Name="Light">
+                    <VisualState.Setters>
+                        <Setter Target = "LightButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--Medium-->
+                <VisualState x:Name="Medium">
+                    <VisualState.Setters>
+                        <Setter Target = "MediumButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--None-->
+                <VisualState x:Name="None">
+                    <VisualState.Setters>
+                        <Setter Target = "NormalButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--SemiBold-->
+                <VisualState x:Name="SemiBold">
+                    <VisualState.Setters>
+                        <Setter Target = "SemiBoldButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--SemiLight-->
+                <VisualState x:Name="SemiLight">
+                    <VisualState.Setters>
+                        <Setter Target = "SemiLightButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Thin-->
+                <VisualState x:Name="Thin">
+                    <VisualState.Setters>
+                        <Setter Target = "ThinButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Button x:Name="BlackButton" Style="{StaticResource AppIconSelectedButton}"/>
+        <Button x:Name="BoldButton" Style="{StaticResource AppIconSelectedButton}"/>
+
+        <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+        <Button x:Name="ExtraBlackButton" Style="{StaticResource AppIconSelectedButton}"/>
+        <Button x:Name="ExtraBoldButton" Style="{StaticResource AppIconSelectedButton}"/>
+        <Button x:Name="ExtraLightButton" Style="{StaticResource AppIconSelectedButton}"/>
+
+        <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+        <Button x:Name="LightButton" Style="{StaticResource AppIconSelectedButton}"/>
+        <Button x:Name="MediumButton" Style="{StaticResource AppIconSelectedButton}"/>
+        <Button x:Name="NormalButton" Style="{StaticResource AppIconSelectedButton}"/>
+
+        <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+        <Button x:Name="SemiBoldButton" Style="{StaticResource AppIconSelectedButton}"/>
+        <Button x:Name="SemiLightButton" Style="{StaticResource AppIconSelectedButton}"/>
+
+        <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+        <Button x:Name="ThinButton" Style="{StaticResource AppIconSelectedButton}"/>
+
+    </StackPanel>
+
+</UserControl>

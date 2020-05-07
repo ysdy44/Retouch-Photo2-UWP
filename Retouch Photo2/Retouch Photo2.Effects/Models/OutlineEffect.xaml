@@ -12,7 +12,7 @@
     <StackPanel>
 
         <!--Size-->
-        <TextBlock x:Name="SizeTextBlock" Style="{StaticResource AppTextBlock}"/>
+        <TextBlock x:Name="SizeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <Slider x:Name="SizeSlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
 
     </StackPanel>

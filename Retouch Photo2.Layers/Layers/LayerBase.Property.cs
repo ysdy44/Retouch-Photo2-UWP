@@ -8,6 +8,7 @@ using Retouch_Photo2.Effects;
 using Retouch_Photo2.Layers.Models;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Xml.Linq;
 using Windows.UI;
 using Windows.UI.Xaml;
 
@@ -73,6 +74,41 @@ namespace Retouch_Photo2.Layers
         }
         public IList<ILayer> Children { get; set; } = new List<ILayer>();
 
+
+        public abstract ILayer Clone(ICanvasResourceCreator resourceCreator);
+
+        public virtual void SaveWith(XElement element) { }
+        public virtual void Load(XElement element) { }
+
+
+        public virtual void CacheTransform()
+        {
+            this.StyleManager.CacheTransform();
+            this.TransformManager.CacheTransform();
+
+            //RefactoringTransformer
+            if (this.parents != null)
+            {
+                if (this.parents.Type  == LayerType.Group)
+                {
+                    GroupLayer groupLayer = (GroupLayer)this.parents;
+                    groupLayer.IsRefactoringTransformer = true;
+                }
+            }
+        }
+        public virtual void TransformMultiplies(Matrix3x2 matrix)
+        {
+            this.StyleManager.TransformMultiplies(matrix);
+            this.TransformManager.TransformMultiplies(matrix);
+        }
+        public virtual void TransformAdd(Vector2 vector)
+        {
+            this.StyleManager.TransformAdd(vector);
+            this.TransformManager.TransformAdd(vector);
+        }
+        
+
+        //@Static
         /// <summary>
         /// Copy a layer with self.
         /// </summary>
@@ -99,47 +135,6 @@ namespace Retouch_Photo2.Layers
             {
                 ILayer clone = layer.Clone(resourceCreator);
                 destination.Children.Add(clone);
-            }
-        }
-        
-        //@Virtual
-        public virtual void CacheTransform()
-        {
-            this.StyleManager.CacheTransform();
-            this.TransformManager.CacheTransform();
-
-            foreach (ILayer child in this.Children)
-            {
-                child.CacheTransform();
-            }
-
-            //RefactoringTransformer
-            if (this.parents != null)
-            {
-                if (this.parents is GroupLayer groupLayer)
-                {
-                    groupLayer.IsRefactoringTransformer = true;
-                }
-            }
-        }
-        public virtual void TransformMultiplies(Matrix3x2 matrix)
-        {
-            this.StyleManager.TransformMultiplies(matrix);
-            this.TransformManager.TransformMultiplies(matrix);
-
-            foreach (ILayer child in this.Children)
-            {
-                child.TransformMultiplies(matrix);
-            }
-        }
-        public virtual void TransformAdd(Vector2 vector)
-        {
-            this.StyleManager.TransformAdd(vector);
-            this.TransformManager.TransformAdd(vector);
-
-            foreach (ILayer child in this.Children)
-            {
-                child.TransformAdd(vector);
             }
         }
 

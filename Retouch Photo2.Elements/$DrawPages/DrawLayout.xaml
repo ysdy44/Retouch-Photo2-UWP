@@ -219,7 +219,7 @@
             <Border x:Name="HeadLeftBorder" Grid.Column="1" HorizontalAlignment="Stretch"/>
 
             <!--HeadRight-->
-            <ScrollViewer Grid.Column="2" HorizontalAlignment="Right" Style="{StaticResource AppHorizontalScrollViewer}">
+            <ScrollViewer Grid.Column="2" HorizontalAlignment="Right" Style="{StaticResource AppHorizontalScrollViewerStyle}">
                 <StackPanel x:Name="HeadRightStackPanel" Orientation="Horizontal"/>
             </ScrollViewer>
         </Grid>
@@ -265,7 +265,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Button x:Name="_RightAddButton" Height="42" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                    <FontIcon Glyph="&#xE109;" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                    <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                 </Button>
                 <Border x:Name="RightCenterBorder" Grid.Row="1"/>
                 <Button x:Name="WidthButton" Visibility="Collapsed" Grid.Row="2" Height="42" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">

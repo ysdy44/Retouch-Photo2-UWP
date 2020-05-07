@@ -153,8 +153,6 @@ namespace Retouch_Photo2.Layers
         }
         public void SetTagType(TagType value)
         {
-            this.TagColor.Color = (value == TagType.None) ?
-            Colors.Transparent :
             this.TagColor.Color = TagTypeHelper.TagConverter(value);
         }
 

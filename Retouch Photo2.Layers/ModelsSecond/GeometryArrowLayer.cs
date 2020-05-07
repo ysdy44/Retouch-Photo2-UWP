@@ -3,7 +3,6 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.ApplicationModel.Resources;
@@ -11,12 +10,12 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="IGeometryLayer"/>'s ArrowLayer .
+    /// <see cref="ILayer"/>'s ArrowLayer .
     /// </summary>
-    public class GeometryArrowLayer : IGeometryLayer, ILayer
+    public class GeometryArrowLayer : LayerBase, ILayer
     {
 
-        //@Override     
+        //@Override
         public override LayerType Type => LayerType.GeometryArrow;
 
         //@Content       
@@ -27,12 +26,7 @@ namespace Retouch_Photo2.Layers.Models
         public GeometryArrowTailType LeftTail = GeometryArrowTailType.None;
         public GeometryArrowTailType RightTail = GeometryArrowTailType.Arrow;
 
-        //@Construct       
-        /// <summary>
-        /// Construct a arrow-layer.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public GeometryArrowLayer(XElement element) : this() => this.Load(element);
+        //@Construct
         /// <summary>
         /// Construct a arrow-layer.
         /// </summary>
@@ -45,38 +39,8 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
 
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
-        {
-            Transformer transformer = base.TransformManager.Destination;
-            return TransformerGeometry.CreateArrow
-            (
-                resourceCreator,
-                transformer,
-                canvasToVirtualMatrix,
 
-                this.IsAbsolute,
-                this.Width,
-                this.Value,
-
-                this.LeftTail, this.RightTail
-           );
-        }
-               
-
-        public IEnumerable<IEnumerable<Node>> ConvertToCurves()
-        {
-            Transformer transformer = base.TransformManager.Destination;
-
-            return TransformerGeometry.ConvertToCurvesFromArrow(transformer,
-
-                this.IsAbsolute,
-                this.Width,
-                this.Value,
-
-                this.LeftTail, this.RightTail);
-        }
-
-        public ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GeometryArrowLayer ArrowLayer = new GeometryArrowLayer
             {
@@ -92,7 +56,7 @@ namespace Retouch_Photo2.Layers.Models
             return ArrowLayer;
         }
         
-        public void SaveWith(XElement element)
+        public override void SaveWith(XElement element)
         {            
             element.Add(new XElement("IsAbsolute", this.IsAbsolute));
             element.Add(new XElement("Width", this.Width));
@@ -101,7 +65,7 @@ namespace Retouch_Photo2.Layers.Models
             element.Add(new XElement("LeftTail", this.LeftTail));
             element.Add(new XElement("RightTail", this.RightTail));
         }
-        public void Load(XElement element)
+        public override void Load(XElement element)
         {
             this.IsAbsolute = (bool)element.Element("IsAbsolute");
             this.Width = (float)element.Element("Width");
@@ -110,6 +74,25 @@ namespace Retouch_Photo2.Layers.Models
             this.LeftTail = FanKit.Transformers.XML.CreateGeometryArrowTailType(element.Element("LeftTail").Value);
             this.RightTail = FanKit.Transformers.XML.CreateGeometryArrowTailType(element.Element("RightTail").Value);
         }
+
+
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.CreateArrow(resourceCreator, transformer, canvasToVirtualMatrix,
+                this.IsAbsolute, this.Width, this.Value,
+                this.LeftTail, this.RightTail);
+        }
+        public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
+        {
+            Transformer transformer = base.TransformManager.Destination;
+
+            return TransformerGeometry.ConvertToCurvesFromArrow(transformer,
+                this.IsAbsolute, this.Width, this.Value,
+                this.LeftTail, this.RightTail);
+        }
+
 
         //Strings
         private string ConstructStrings()
