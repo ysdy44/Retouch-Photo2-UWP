@@ -19,22 +19,16 @@
 
 
     <UserControl.Resources>
-
         <!--Pointer -->
         <SolidColorBrush x:Name="PointerOverColor" Color="{ThemeResource SystemBaseLowColor}"/>
         <SolidColorBrush x:Name="PressedColor" Color="{ThemeResource SystemBaseMediumLowColor}"/>
-
         <!--Background-->
         <SolidColorBrush x:Name="AccentColor" Color="{ThemeResource SystemAccentColor}"/>
         <SolidColorBrush x:Name="UnAccentColor" Color="Transparent"/>
-
     </UserControl.Resources>
     
 
-    <ContentPresenter x:Name="ContentPresenter"
-                      HorizontalContentAlignment="Center" 
-                      VerticalContentAlignment="Center" 
-                      Background="Transparent">
+    <Border x:Name="RootBorder" CornerRadius="{StaticResource AppCornerRadius}" Background="Transparent">
         
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
@@ -42,41 +36,45 @@
 
                 <VisualState x:Name="Normal">
                     <Storyboard>
-                        <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
+                        <PointerUpThemeAnimation Storyboard.TargetName="RootBorder" />
                     </Storyboard>
                 </VisualState>
 
                 <VisualState x:Name="PointerOver">
                     <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootBorder" Storyboard.TargetProperty="Background">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PointerOverColor}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
+                        <PointerUpThemeAnimation Storyboard.TargetName="RootBorder" />
                     </Storyboard>
                 </VisualState>
 
                 <VisualState x:Name="Pressed">
                     <Storyboard>
-                        <PointerDownThemeAnimation TargetName="ContentPresenter" />
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootBorder" Storyboard.TargetProperty="Background">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PressedColor}" />
                         </ObjectAnimationUsingKeyFrames>
+                        <PointerDownThemeAnimation TargetName="RootBorder" />
                     </Storyboard>
                 </VisualState>
 
 
                 <VisualState x:Name="Selected">
                     <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootBorder" Storyboard.TargetProperty="Background">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AccentColor}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
+                        <PointerUpThemeAnimation Storyboard.TargetName="RootBorder" />
                     </Storyboard>
                 </VisualState>
 
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
+
+        <ContentPresenter x:Name="ContentPresenter"               
+        HorizontalContentAlignment="Center"                      
+        VerticalContentAlignment="Center"/>
         
-    </ContentPresenter>
+    </Border>
 
 </UserControl>

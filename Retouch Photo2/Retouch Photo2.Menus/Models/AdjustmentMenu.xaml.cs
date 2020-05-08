@@ -49,7 +49,11 @@ namespace Retouch_Photo2.Menus.Models
                 {
                     return this.ZeroAdjustments;
                 }
-                else return this.Adjustments;
+                else
+                {
+                    this.InvalidateItemsControl();//Invalidate
+                    return this.Adjustments;
+                }
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
@@ -164,7 +168,10 @@ namespace Retouch_Photo2.Menus.Models
                 }
 
                 if (this.FiltersListView.ItemsSource == null)
-                    await this.ConstructFilter();
+                {
+                    IEnumerable<Filter> source = await FileUtil.ConstructFilterFile();
+                    this.FiltersListView.ItemsSource = source.ToList();
+                }
 
                 this.VisualState = this.VisualState;//State
             };
@@ -234,37 +241,6 @@ namespace Retouch_Photo2.Menus.Models
             };
         }
 
-
-        private async Task ConstructFilter()
-        {
-            StorageFile file = null;
-            bool isLocalFilterExists = await ApplicationLocalTextFileUtility.IsFileExistsInLocalFolder("Filter.xml");
-
-            if (isLocalFilterExists)
-            {
-                //Read the file from the local folder.
-                file = await ApplicationData.Current.LocalFolder.GetFileAsync("Filter.xml");
-            }
-            else
-            {
-                //Read the file from the package.
-                file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///XMLs/Filter.xml"));
-
-                //Copy to the local folder.
-                await file.CopyAsync(ApplicationData.Current.LocalFolder);
-            }
-
-            if (file != null)
-            {
-                using (Stream stream = await file.OpenStreamForReadAsync())
-                {
-                    XDocument document = XDocument.Load(stream);
-
-                    IEnumerable<Filter> source = Retouch_Photo2.Adjustments.XML.LoadFilters(document);
-                    this.FiltersListView.ItemsSource = source.ToList();
-                }
-            }
-        }
 
         private void Reset()
         {

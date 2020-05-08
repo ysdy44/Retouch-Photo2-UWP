@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Brushs
         /// <param name="isEnabled"> Control enabled. </param>
         private void StopChanged(Color color, int offset, bool isEnabled)
         {
-            this.SolidColorBrush.Color = color;
+            this.ColorEllipse.Color = color;
 
             this.AlphaPicker.Value = color.A;
 
@@ -76,7 +76,7 @@ namespace Retouch_Photo2.Brushs
         /// <param name="color"> The source stop color. </param>
         public void SetColor(Color color)
         {
-            this.SolidColorBrush.Color = color;
+            this.ColorEllipse.Color = color;
 
             if (this.array == null) return;
 

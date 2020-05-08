@@ -1,8 +1,8 @@
-﻿using HSVColorPickers;
-using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Brushs.Models;
-using System.Numerics;
+﻿using Microsoft.Graphics.Canvas.Brushes;
+using Retouch_Photo2.Elements;
+using System;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.Brushs
 {
@@ -11,17 +11,9 @@ namespace Retouch_Photo2.Brushs
     /// </summary>
     public sealed partial class ShowControl : UserControl
     {
-        //Size
-        float SizeWidth = 100;
-        float SizeHeight = 50;
-        Vector2 SizeCenter = new Vector2(25, 50);
-
-        //Background
-        CanvasRenderTarget GrayAndWhiteBackground;
-
 
         #region DependencyProperty
-        
+
 
         /// <summary> Gets or sets the fill or stroke. </summary>
         public FillOrStroke FillOrStroke
@@ -29,7 +21,7 @@ namespace Retouch_Photo2.Brushs
             set
             {
                 this._vsFillOrStroke = value;
-                this.Invalidate();//State
+                this.Invalidate();//Invalidate
             }
         }
 
@@ -39,7 +31,7 @@ namespace Retouch_Photo2.Brushs
             set
             {
                 this._vsFillBrush = value;
-                this.Invalidate();//State
+                this.Invalidate();//Invalidate
             }
         }
 
@@ -49,73 +41,97 @@ namespace Retouch_Photo2.Brushs
             set
             {
                 this._vsStrokeBrush = value;
-                this.Invalidate();//State
+                this.Invalidate();//Invalidate
             }
         }
 
 
         #endregion
         
-
         //@VisualState
         FillOrStroke _vsFillOrStroke;
         IBrush _vsFillBrush;
         IBrush _vsStrokeBrush;
-        public void Invalidate() => this.CanvasControl.Invalidate();//State
+        public void Invalidate()
+        {
+            switch (this._vsFillOrStroke)
+            {
+                case FillOrStroke.Fill:
+                    this.Draw(this._vsFillBrush);
+                    break;
+                case FillOrStroke.Stroke:
+                    this.Draw(this._vsStrokeBrush);
+                    break;
+            }
+        }
 
 
         //@Construct
         public ShowControl()
         {
             this.InitializeComponent();
-
-            //Canvas
-            this.CanvasControl.SizeChanged += (s, e) =>
-            {
-                if (e.NewSize == e.PreviousSize) return;
-                this.SizeWidth = (float)e.NewSize.Width;
-                this.SizeHeight = (float)e.NewSize.Height;
-                this.SizeCenter = new Vector2(this.SizeWidth / 2, this.SizeHeight / 2);
-            };
-            this.CanvasControl.CreateResources += (sender, args) =>
-            {
-                float width = (float)sender.ActualWidth;
-                float height = (float)sender.ActualHeight;
-                this.GrayAndWhiteBackground = new CanvasRenderTarget(sender, width, height);
-
-                using (CanvasDrawingSession drawingSession = this.GrayAndWhiteBackground.CreateDrawingSession())
-                {
-                    CanvasBitmap bitmap = GreyWhiteMeshHelpher.GetGreyWhiteMesh(sender);
-                    ICanvasImage extendMesh = GreyWhiteMeshHelpher.GetBorderExtendMesh(height / 4, bitmap);
-                    drawingSession.DrawImage(extendMesh);
-                }
-            };
-
-
-            this.CanvasControl.Draw += (sender, args) =>
-            {
-                switch (this._vsFillOrStroke)
-                {
-                    case FillOrStroke.Fill:
-                        this.Draw(this._vsFillBrush, args.DrawingSession);
-                        break;
-                    case FillOrStroke.Stroke:
-                        this.Draw(this._vsStrokeBrush, args.DrawingSession);
-                        break;
-                }
-            };
         }
 
-        private void Draw(IBrush brush, CanvasDrawingSession drawingSession)
+        private void Draw(IBrush brush)
         {
-            float sizeWidth = this.SizeWidth;
-            float sizeHeight = this.SizeHeight;
-            Vector2 sizeCenter = this.SizeCenter;
+            if (brush==null)
+            {
+                this.Rectangle.Fill = this.NoneBrush;
+                return;
+            }
 
-            if (brush == null)
-                NoneBrush.Show(drawingSession, sizeWidth, sizeHeight);
-            else
-                brush.Show(this.CanvasControl, drawingSession, sizeWidth, sizeHeight, sizeCenter, this.GrayAndWhiteBackground);
+            switch (brush.Type)
+            {
+                case BrushType.None:
+                    this.Rectangle.Fill = this.NoneBrush;
+                    break;
+
+                case BrushType.Color:
+                    this.ColorBrush.Color = brush.Color;
+                    this.Rectangle.Fill = this.ColorBrush;
+                    break;
+
+                case BrushType.LinearGradient:
+                    this.LinearGradientBrush.GradientStops = this.GetStops(brush.Array);
+                    this.Rectangle.Fill = this.LinearGradientBrush;
+                    break;
+
+                case BrushType.RadialGradient:
+                    this.RadialGradientBrush.GradientStops = this.GetStops(brush.Array);
+                    this.Rectangle.Fill = this.RadialGradientBrush;
+                    break;
+
+                case BrushType.EllipticalGradient:
+                    this.EllipticalGradientBrush.GradientStops = this.GetStops(brush.Array);
+                    this.Rectangle.Fill = this.EllipticalGradientBrush;
+                    break;
+
+                case BrushType.Image:
+                    Photo photo = Photo.FindFirstPhoto(brush.Photocopier);
+                    this.BitmapImage.UriSource = new Uri(photo.ImageFilePath);
+                    this.Rectangle.Fill = this.ImageBrush;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private GradientStopCollection GetStops(CanvasGradientStop[] stops)
+        {
+            GradientStopCollection gradientStops = new GradientStopCollection();
+
+            foreach (CanvasGradientStop stop in stops)
+            {
+                GradientStop gradientStop = new GradientStop
+                {
+                    Color = stop.Color,
+                    Offset = stop.Position,
+                };
+                gradientStops.Add(gradientStop);
+            }
+
+            return gradientStops;
         }
 
     }

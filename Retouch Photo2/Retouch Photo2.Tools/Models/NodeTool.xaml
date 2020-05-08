@@ -31,11 +31,11 @@
             <ContentControl Width="4"/>
 
             <TextBlock x:Name="InsertTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="AddButton" Style="{StaticResource AppCircleButtonStyle}">
+            <Button x:Name="InsertButton" Style="{StaticResource AppCircleButtonStyle}">
                 <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
             </Button>
 
-            <AppBarSeparator/>
+            <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
             <TextBlock x:Name="SharpTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <Button x:Name="SharpButton" Style="{StaticResource AppCircleButtonStyle}">

@@ -17,7 +17,7 @@ namespace Retouch_Photo2.Brushs.Models
         //@Content
         public BrushType Type => BrushType.LinearGradient;
                 
-        public CanvasGradientStop[] Array { get; set; }
+        public CanvasGradientStop[] Array { get; set; } = GreyWhiteMeshHelpher.GetGradientStopArray();
         public Color Color { get; set; }
         public Transformer Destination { set { } }
         public Photocopier Photocopier { get => new Photocopier(); }
@@ -44,7 +44,6 @@ namespace Retouch_Photo2.Brushs.Models
         /// <param name="endPoint"> The end point. </param>
         public LinearGradientBrush(Vector2 startPoint, Vector2 endPoint)
         {
-            this.Array = GreyWhiteMeshHelpher.GetGradientStopArray();
             this.StartPoint = startPoint;
             this.EndPoint = endPoint;
         }
@@ -57,7 +56,6 @@ namespace Retouch_Photo2.Brushs.Models
             Vector2 startPoint = transformer.CenterTop;
             Vector2 endPoint = transformer.CenterBottom;
 
-            this.Array = GreyWhiteMeshHelpher.GetGradientStopArray();
             this.StartPoint = startPoint;
             this.EndPoint = endPoint;
         }
@@ -72,7 +70,6 @@ namespace Retouch_Photo2.Brushs.Models
             Vector2 startPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 endPoint = Vector2.Transform(point, inverseMatrix);
 
-            this.Array = GreyWhiteMeshHelpher.GetGradientStopArray();
             this.StartPoint = startPoint;
             this.EndPoint = endPoint;
         }
@@ -99,19 +96,6 @@ namespace Retouch_Photo2.Brushs.Models
                 StartPoint = startPoint,
                 EndPoint = endPoint,
             };
-        }
-
-        public void Show(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, float sizeWidth, float sizeHeight, Vector2 sizeCenter, CanvasRenderTarget grayAndWhiteBackground)
-        {
-            CanvasGradientStop[] array = this.Array;
-            ICanvasBrush canvasBrush = new CanvasLinearGradientBrush(resourceCreator, array)
-            {
-                StartPoint = new Vector2(0, sizeCenter.Y),
-                EndPoint = new Vector2(sizeWidth, sizeCenter.Y)
-            };
-
-            drawingSession.DrawImage(grayAndWhiteBackground);//Background
-            drawingSession.FillRectangle(0, 0, sizeWidth, sizeHeight, canvasBrush);
         }
 
 

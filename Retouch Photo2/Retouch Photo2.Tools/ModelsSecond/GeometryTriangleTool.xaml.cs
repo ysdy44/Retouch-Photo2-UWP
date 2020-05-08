@@ -97,8 +97,9 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is GeometryTriangleLayer geometryTriangleLayer)
+                if (layer.Type == LayerType.GeometryTriangle)
                 {
+                    GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
                     geometryTriangleLayer.Center = center;
                 }
             });
@@ -115,8 +116,9 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is GeometryTriangleLayer geometryTriangleLayer)
+                if (layer.Type == LayerType.GeometryTriangle)
                 {
+                    GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
                     float center = 1.0f - geometryTriangleLayer.Center;
                     geometryTriangleLayer.Center = center;
                 }

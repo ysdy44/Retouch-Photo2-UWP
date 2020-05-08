@@ -19,10 +19,10 @@ namespace Retouch_Photo2.Brushs
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.StopsTextBlock.Text = resource.GetString("/Tools/BrushFlyout_Stop");
-            this.CopyButton.Content = resource.GetString("/Tools/BrushFlyout_Stop_Copy");
-            this.RemoveButton.Content = resource.GetString("/Tools/BrushFlyout_Stop_Remove");
-            this.ReserveButton.Content = resource.GetString("/Tools/BrushFlyout_Stop_Reverse");
+            //this.StopsTextBlock.Text = resource.GetString("/Tools/BrushFlyout_Stop");
+            this.CopyTextBlock.Text = resource.GetString("/Tools/BrushFlyout_Stop_Copy");
+            this.RemoveTextBlock.Text = resource.GetString("/Tools/BrushFlyout_Stop_Remove");
+            this.ReserveTextBlock.Text = resource.GetString("/Tools/BrushFlyout_Stop_Reverse");
 
             this.AlphaTextBlock.Text = resource.GetString("/Tools/BrushFlyout_Alpha");
             this.OffsetTextBlock.Text = resource.GetString("/Tools/BrushFlyout_Offset");

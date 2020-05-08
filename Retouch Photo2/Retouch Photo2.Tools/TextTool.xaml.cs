@@ -39,8 +39,9 @@ namespace Retouch_Photo2.Tools
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    if (layer is ITextLayer textLayer)
+                    if (layer.Type == LayerType.TextArtistic || layer.Type == LayerType.TextFrame)
                     {
+                        ITextLayer textLayer = (ITextLayer)layer;
                         textLayer.FontText = fontText;
                     }
                 });

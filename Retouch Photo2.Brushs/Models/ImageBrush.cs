@@ -88,23 +88,6 @@ namespace Retouch_Photo2.Brushs.Models
             };
         }
 
-        public void Show(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, float sizeWidth, float sizeHeight, Vector2 sizeCenter, CanvasRenderTarget grayAndWhiteBackground)
-        {
-            Photocopier photocopier = this.Photocopier;
-            Photo photo = Photo.FindFirstPhoto(photocopier);
-            CanvasBitmap canvasBitmap = photo.Source;
-
-            float scaleX = (float)canvasBitmap.Size.Width / sizeWidth;
-            float scaleY = (float)canvasBitmap.Size.Height / sizeHeight;
-            ICanvasImage canvasImage = new Transform2DEffect
-            {
-                Source = canvasBitmap,
-                TransformMatrix = Matrix3x2.CreateScale(new Vector2(scaleX, scaleY))
-            };
-
-            drawingSession.DrawImage(canvasImage);
-        }
-
 
         public BrushOperateMode ContainsOperateMode(Vector2 point, Matrix3x2 matrix)
         {

@@ -95,8 +95,9 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is GeometryPentagonLayer geometryPentagonLayer)
+                if (layer.Type == LayerType.GeometryPentagon)
                 {
+                    GeometryPentagonLayer geometryPentagonLayer = (GeometryPentagonLayer)layer;
                     geometryPentagonLayer.Points = points;
                 }
             });

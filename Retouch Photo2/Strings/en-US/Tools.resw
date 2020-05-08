@@ -177,6 +177,9 @@
   <data name="Image_Select" xml:space="preserve">
     <value>Select</value>
   </data>
+  <data name="Node" xml:space="preserve">
+    <value>Node Tool</value>
+  </data>
   <data name="Pen" xml:space="preserve">
     <value>Pen Tool</value>
   </data>

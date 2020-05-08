@@ -1,5 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas.Text;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -183,8 +184,9 @@ namespace Retouch_Photo2.Menus.Models
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    if (layer is ITextLayer textLayer)
+                    if (layer.Type == LayerType.TextArtistic || layer.Type == LayerType.TextFrame)
                     {
+                        ITextLayer textLayer = (ITextLayer)layer;
                         textLayer.FontAlignment = fontAlignment;
                     }
                 });
@@ -208,8 +210,9 @@ namespace Retouch_Photo2.Menus.Models
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    if (layer is ITextLayer textLayer)
+                    if (layer.Type == LayerType.TextArtistic || layer.Type == LayerType.TextFrame)
                     {
+                        ITextLayer textLayer = (ITextLayer)layer;
                         textLayer.FontWeight = fontWeight;
                     }
                 });
@@ -228,8 +231,9 @@ namespace Retouch_Photo2.Menus.Models
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    if (layer is ITextLayer textLayer)
+                    if (layer.Type == LayerType.TextArtistic || layer.Type == LayerType.TextFrame)
                     {
+                        ITextLayer textLayer = (ITextLayer)layer;
                         textLayer.FontStyle = fontStyle;
                     }
                 });
@@ -264,8 +268,9 @@ namespace Retouch_Photo2.Menus.Models
                     //Selection
                     this.SelectionViewModel.SetValue((layer) =>
                     {
-                        if (layer is ITextLayer textLayer)
+                        if (layer.Type == LayerType.TextArtistic || layer.Type == LayerType.TextFrame)
                         {
+                            ITextLayer textLayer = (ITextLayer)layer;
                             textLayer.FontFamily = value;
                         }
                     });
@@ -309,8 +314,9 @@ namespace Retouch_Photo2.Menus.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is ITextLayer textLayer)
+                if (layer.Type == LayerType.TextArtistic || layer.Type == LayerType.TextFrame)
                 {
+                    ITextLayer textLayer = (ITextLayer)layer;
                     textLayer.FontSize = value;
                 }
             });
@@ -334,8 +340,9 @@ namespace Retouch_Photo2.Menus.Models
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    if (layer is ITextLayer textLayer)
+                    if (layer.Type == LayerType.TextArtistic || layer.Type == LayerType.TextFrame)
                     {
+                        ITextLayer textLayer = (ITextLayer)layer;
                         textLayer.FontWeight = fontWeight;
                     }
                 });

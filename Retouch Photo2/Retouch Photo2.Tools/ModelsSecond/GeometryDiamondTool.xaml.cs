@@ -98,8 +98,9 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is GeometryDiamondLayer geometryDiamondLayer)
+                if (layer.Type == LayerType.GeometryDiamond)
                 {
+                    GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
                     geometryDiamondLayer.Mid = mid;
                 }
             });
@@ -115,8 +116,9 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is GeometryDiamondLayer geometryDiamondLayer)
+                if (layer.Type == LayerType.GeometryDiamond)
                 {
+                    GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
                     float mid = 1.0f - geometryDiamondLayer.Mid;
                     geometryDiamondLayer.Mid = mid;
                 }

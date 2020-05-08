@@ -116,8 +116,9 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is GeometryArrowLayer geometryArrowLayer)
+                if (layer.Type == LayerType.GeometryArrow)
                 {
+                    GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
                     geometryArrowLayer.Value = value;
                 }
             });
@@ -135,8 +136,9 @@ namespace Retouch_Photo2.Tools.Models
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    if (layer is GeometryArrowLayer geometryArrowLayer)
+                    if (layer.Type == LayerType.GeometryArrow)
                     {
+                        GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
                         geometryArrowLayer.LeftTail = tailType;
                     }
                 });
@@ -155,8 +157,9 @@ namespace Retouch_Photo2.Tools.Models
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    if (layer is GeometryArrowLayer geometryArrowLayer)
+                    if (layer.Type == LayerType.GeometryArrow)
                     {
+                        GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
                         geometryArrowLayer.RightTail = tailType;
                     }
                 });

@@ -8,7 +8,26 @@ namespace Retouch_Photo2.Layers
     public partial class LayerCollection
     {
 
-        #region Group
+        /// <summary>
+        /// Un group a group layer
+        /// </summary>
+        /// <param name="groupLayer"> The group layer. </param>
+        public void UnGroupLayer(ILayer groupLayer)
+        {
+            ILayer parent = groupLayer.Parents;
+            IList<ILayer> parentChildren = this.GetParentsChildren(groupLayer);
+
+            int index = parentChildren.IndexOf(groupLayer);
+
+            foreach (ILayer child in groupLayer.Children)
+            {
+                child.Parents = parent;
+                child.SelectMode = SelectMode.Selected;
+                parentChildren.Insert(index, child);
+            }
+            groupLayer.Children.Clear();
+            parentChildren.Remove(groupLayer);
+        }
 
 
         /// <summary>
@@ -144,8 +163,6 @@ namespace Retouch_Photo2.Layers
             }
         }
 
-
-        #endregion
 
     }
 }

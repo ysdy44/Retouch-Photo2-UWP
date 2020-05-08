@@ -181,7 +181,7 @@
                         </Button.Tag>
                     </Button>
 
-                    <Rectangle Margin="4" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
                     <Button x:Name="RenameButton" Style="{StaticResource AppTabButtonStyle}">
                         <Button.Tag>
@@ -189,7 +189,7 @@
                         </Button.Tag>
                     </Button>
 
-                    <Rectangle Margin="4" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
                     <Button x:Name="DeleteButton" Style="{StaticResource AppTabButtonStyle}">
                         <Button.Tag>

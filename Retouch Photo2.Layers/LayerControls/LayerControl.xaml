@@ -39,10 +39,7 @@
     </UserControl.Resources>
 
 
-    <Grid x:Name="RootGrid" BorderThickness="0,0,0,1">
-        <Grid.BorderBrush>
-            <SolidColorBrush Opacity="0.4" Color="Gray"/>
-        </Grid.BorderBrush>
+    <Grid x:Name="RootGrid" Margin="0,1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="DepthColumn" Width="0"/>
             <ColumnDefinition Width="30"/>
@@ -70,7 +67,7 @@
             </Button>
             
             <!--Expaned-->
-            <Button x:Name="ExpanedButton" Width="30" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+            <Button x:Name="ExpanedButton" Width="30" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
                 <FontIcon x:Name="ExpanedFontIcon" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
             

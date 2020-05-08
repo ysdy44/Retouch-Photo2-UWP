@@ -96,8 +96,9 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is GeometryHeartLayer geometryHeartLayer)
+                if (layer.Type == LayerType.GeometryHeart)
                 {
+                    GeometryHeartLayer geometryHeartLayer = (GeometryHeartLayer)layer;
                     geometryHeartLayer.Spread = spread;
                 }
             });

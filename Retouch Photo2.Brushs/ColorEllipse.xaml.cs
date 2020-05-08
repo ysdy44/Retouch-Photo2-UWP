@@ -1,10 +1,9 @@
-﻿using Retouch_Photo2.Brushs;
-using Windows.UI;
+﻿using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 
-namespace Retouch_Photo2.Controls
+namespace Retouch_Photo2.Brushs
 {
     /// <summary>
     /// Represents a ellipse used to display a color.
@@ -51,12 +50,18 @@ namespace Retouch_Photo2.Controls
         /// <summary>
         /// Construct a ColorEllipse. 
         /// </summary>
+        public ColorEllipse()
+        {
+            this.InitializeComponent();
+        }
+        /// <summary>
+        /// Construct a ColorEllipse. 
+        /// </summary>
         /// <param name="dataContext">  Gets or sets the data context for FrameworkElement to participate in data binding. </param>
         /// <param name="path"> The path string that constructs the path of the binding source property. </param>
         /// <param name="dp"> The dependency property identifier for the property that is bound by the data. </param>
-        public ColorEllipse(object dataContext, string path, DependencyProperty dp)
+        public ColorEllipse(object dataContext, string path, DependencyProperty dp) : this()
         {
-            this.InitializeComponent();
             this.ConstructDataContext(dataContext, path, dp);
         }
                

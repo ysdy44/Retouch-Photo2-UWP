@@ -55,14 +55,14 @@ namespace Retouch_Photo2.Brushs
 
             //Color      
             this.ColorPicker.ColorChange += (s, color) => this.SetColor(color);
-            this.ColorButton.Tapped += (s, e) =>
+            this.ColorEllipse.Tapped += (s, e) =>
             {
                 if (this.array == null) return;
 
                 if (this.Manager.IsLeft || this.Manager.IsRight || this.Manager.Index >= 0)
                 {
-                    this.ColorPicker.Color = this.SolidColorBrush.Color;
-                    this.ColorFlyout.ShowAt(this.ColorButton);//Flyout
+                    this.ColorPicker.Color = this.ColorEllipse.Color;
+                    this.ColorFlyout.ShowAt(this.ColorEllipse);//Flyout
                 }
             };
 
@@ -76,7 +76,7 @@ namespace Retouch_Photo2.Brushs
             //Alpha
             this.AlphaPicker.ValueChange += (s, value) =>
             {
-                Color color = this.SolidColorBrush.Color;
+                Color color = this.ColorEllipse.Color;
                 color.A = (byte)value;
                 this.SetColor(color);
             };

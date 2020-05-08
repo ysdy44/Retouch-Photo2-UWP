@@ -22,7 +22,7 @@ namespace Retouch_Photo2.Menus.Models
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-         
+        
 
         //@Converter
         private double OpacityToValueConverter(float opacity) => opacity * 100.0d;
@@ -323,30 +323,18 @@ namespace Retouch_Photo2.Menus.Models
             //UnGroup
             this.UnGroupButton.Tapped += (s, e) =>
             {
-                if (this.SelectionViewModel.Layer != null)
+                this.SelectionViewModel.SetValue((layer) =>
                 {
-                    if (this.SelectionViewModel.Layer is GroupLayer groupLayer)
+                    if (layer.Type == LayerType.Group)
                     {
-                        ILayer parent = groupLayer.Parents;
-                        IList<ILayer> parentChildren = (parent == null) ? this.ViewModel.Layers.RootLayers : parent.Children;
-
-                        int index = parentChildren.IndexOf(groupLayer);
-
-                        foreach (ILayer child in groupLayer.Children)
-                        {
-                            child.Parents = parent;
-                            child.SelectMode = SelectMode.Selected;
-                            parentChildren.Insert(index, child);
-                        }
-                        groupLayer.Children.Clear();
-                        parentChildren.Remove(groupLayer);
-
-                        this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
-
-                        this.SelectionViewModel.SetMode(this.ViewModel.Layers);
-                        this.ViewModel.Invalidate();//Invalidate
+                        this.ViewModel.Layers.UnGroupLayer(layer);
                     }
-                }
+                });
+
+                this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+
+                this.SelectionViewModel.SetMode(this.ViewModel.Layers);
+                this.ViewModel.Invalidate();//Invalidate
             };
 
         }

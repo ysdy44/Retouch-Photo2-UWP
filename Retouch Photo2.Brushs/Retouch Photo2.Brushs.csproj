@@ -128,6 +128,9 @@
     <Compile Include="BrushTypeIcons\RadialGradientIcon.xaml.cs">
       <DependentUpon>RadialGradientIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ColorEllipse.xaml.cs">
+      <DependentUpon>ColorEllipse.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FillOrStrokeComboBox.xaml.cs">
       <DependentUpon>FillOrStrokeComboBox.xaml</DependentUpon>
     </Compile>
@@ -144,13 +147,13 @@
     <Compile Include="Models\NoneBrush.cs" />
     <Compile Include="Models\RadialGradientBrush.cs" />
     <Compile Include="Models\ColorBrush.cs" />
+    <Compile Include="ShowControl.xaml.cs">
+      <DependentUpon>ShowControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StopsPickers\StopsPicker.Construct.cs" />
     <Compile Include="StopsPickers\StopsPicker.Method.cs" />
     <Compile Include="GradientBrushType.cs" />
     <Compile Include="BrushType.cs" />
-    <Compile Include="ShowControl.xaml.cs">
-      <DependentUpon>ShowControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="StopsPickers\StopsPicker.xaml.cs">
       <DependentUpon>StopsPicker.xaml</DependentUpon>
     </Compile>
@@ -201,6 +204,10 @@
     <Page Include="BrushTypeIcons\RadialGradientIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ColorEllipse.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="FillOrStrokeComboBox.xaml">
       <SubType>Designer</SubType>

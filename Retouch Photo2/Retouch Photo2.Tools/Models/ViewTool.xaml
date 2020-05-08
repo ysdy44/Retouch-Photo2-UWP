@@ -40,6 +40,7 @@
                 />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>
+            
             <ContentControl Width="4"/>
 
             <Button x:Name="RadianClearButton" Style="{StaticResource AppCircleButtonStyle}">
@@ -53,7 +54,7 @@
                 </PathIcon>
             </Button>
 
-            <elements:ExpandAppBarSeparator/>
+            <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
             <!--Scale-->
             <tools:TouchbarButton x:Name="ScaleTouchbarButton">
@@ -64,6 +65,7 @@
                   />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>
+            
             <ContentControl Width="4"/>
 
             <Button x:Name="ScaleClearButton" Style="{StaticResource AppCircleButtonStyle}">

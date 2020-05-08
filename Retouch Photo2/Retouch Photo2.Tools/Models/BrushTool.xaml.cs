@@ -59,7 +59,11 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructShowControl()
         {
             this.StopsFlyout.Opened += (s, e) => this._isStopsFlyoutShowed = true;
-            this.StopsFlyout.Closed += (s, e) => this._isStopsFlyoutShowed = false;
+            this.StopsFlyout.Closed += (s, e) =>
+            {
+                this._isStopsFlyoutShowed = false;
+                this.ShowControl.Invalidate();
+            };
             this.ShowControl.Tapped += (s, e) =>
             {
                 switch (this.FillOrStroke)

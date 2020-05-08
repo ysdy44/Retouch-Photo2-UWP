@@ -49,7 +49,7 @@ namespace Retouch_Photo2.Tools.Models
 
                 this.ViewModel.Invalidate();//Invalidate
             };
-            this.AddButton.Tapped += (s, e) =>
+            this.InsertButton.Tapped += (s, e) =>
             {
                 if (this.CurveLayer == null) return;
                 NodeCollection.Interpolation(this.CurveLayer.Nodes);

@@ -42,13 +42,7 @@ namespace Retouch_Photo2.Brushs.Models
         {
             return new CanvasSolidColorBrush(resourceCreator, this.Color);
         }
-
-        public void Show(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, float sizeWidth, float sizeHeight, Vector2 sizeCenter, CanvasRenderTarget grayAndWhiteBackground)
-        {
-            drawingSession.DrawImage(grayAndWhiteBackground);//Background
-            drawingSession.Clear(this.Color);//ClearColor
-        }
-
+        
 
         public BrushOperateMode ContainsOperateMode(Vector2 point, Matrix3x2 matrix)
         {

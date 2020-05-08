@@ -42,17 +42,6 @@ namespace Retouch_Photo2.Brushs
         /// <returns> The provided <see cref="ICanvasBrush"/>. </returns>
         ICanvasBrush GetICanvasBrush(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix);
 
-        /// <summary>
-        ///  Draw a thumbnail on the show control.
-        /// </summary>
-        /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="drawingSession"> The drawing-session. </param>
-        /// <param name="sizeWidth"> The size width. </param>
-        /// <param name="sizeHeight"> The size height. </param>
-        /// <param name="sizeCenter"> The size center. </param>
-        /// <param name="grayAndWhiteBackground"> The background. </param>
-        void Show(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, float sizeWidth, float sizeHeight, Vector2 sizeCenter, CanvasRenderTarget grayAndWhiteBackground);
-
 
         /// <summary>
         /// Gets the all points by the brush contains the specified point. 

@@ -133,8 +133,9 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is GeometryCogLayer geometryCogLayer)
+                if (layer.Type == LayerType.GeometryCog)
                 {
+                    GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
                     geometryCogLayer.Count = count;
                 }
             });
@@ -182,8 +183,9 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is GeometryCogLayer geometryCogLayer)
+                if (layer.Type == LayerType.GeometryCog)
                 {
+                    GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
                     geometryCogLayer.InnerRadius = innerRadius;
                 }
             });
@@ -231,8 +233,9 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is GeometryCogLayer geometryCogLayer)
+                if (layer.Type == LayerType.GeometryCog)
                 {
+                    GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
                     geometryCogLayer.Tooth = tooth;
                 }
             });
@@ -280,8 +283,9 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is GeometryCogLayer geometryCogLayer)
+                if (layer.Type == LayerType.GeometryCog)
                 {
+                    GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
                     geometryCogLayer.Notch = notch;
                 }
             });

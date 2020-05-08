@@ -68,6 +68,7 @@
 
 
         <elementDrawPages:DrawLayout x:Name="DrawLayout" 
+               CanvasHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}"
                LeftIcon="{x:Bind IconConverter(TipViewModel.Tool),Mode=OneWay}"
                Touchbar="{x:Bind TipViewModel.TouchbarControl,Mode=OneWay}"                                             
                Theme="{x:Bind RequestedTheme, Mode=OneWay}">
@@ -92,7 +93,7 @@
 
             <!--Canvas-->
             <elementDrawPages:DrawLayout.CenterChild>
-                <controls:MainCanvasControl x:Name="MainCanvasControl"  AccentColor="{ThemeResource SystemAccentColor}" ShadowColor="{ThemeResource AppStrokeColor}"/>
+                <controls:MainCanvasControl x:Name="MainCanvasControl" AccentColor="{ThemeResource SystemAccentColor}" ShadowColor="{ThemeResource AppStrokeColor}"/>
             </elementDrawPages:DrawLayout.CenterChild>
             
             <!--LeftPanel-->

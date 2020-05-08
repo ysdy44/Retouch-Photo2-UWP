@@ -9,12 +9,13 @@
     xmlns:hSVColorPickers="using:HSVColorPickers"
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:brushs="using:Retouch_Photo2.Brushs"
     Padding="0"
     Width="480" 
     Height="Auto"
     MinWidth="300" 
     MaxWidth="600" 
-    MinHeight="160" 
+    MinHeight="60" 
     MaxHeight="280"
     d:DesignHeight="200"
     d:DesignWidth="400"
@@ -23,8 +24,6 @@
 
 
     <UserControl.Resources>
-        <!--Color-->
-        <SolidColorBrush x:Name="SolidColorBrush"/>
         <!--CanvasOperator-->
         <transformers:CanvasOperator x:Name="CanvasOperator" DestinationControl="{x:Bind CanvasControl}"/>
         <!--Flyout-->
@@ -34,84 +33,81 @@
     </UserControl.Resources>
 
 
-    <StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="54"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="4"/>
+        </Grid.RowDefinitions>
 
-        
+
         <!--Canvas-->
-        <canvas:CanvasControl x:Name="CanvasControl" Height="80"/>
+        <canvas:CanvasControl x:Name="CanvasControl" Grid.Row="0" Grid.ColumnSpan="2"/>
 
-        
-        <ContentControl Height="4"/>
 
-        
-        <!--Title-->
-        <Grid Grid.Row="2">
+        <!--Color-->
+        <brushs:ColorEllipse x:Name="ColorEllipse" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Color="White"/>
+
+
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" MinWidth="60"/>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="4"/>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="4"/>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="53"/>
             </Grid.ColumnDefinitions>
-            
-            <TextBlock x:Name="StopsTextBlock" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
-          
-            <Button x:Name="CopyButton" Grid.Column="1" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-            <Button x:Name="RemoveButton" Grid.Column="3" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-            <Button x:Name="ReserveButton" Grid.Column="5" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-            
-        </Grid>
-
-        
-        <ContentControl Height="4"/>
-
-        
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" MinWidth="60"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="12"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="12"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="32"/>
-                <RowDefinition Height="4"/>
-                <RowDefinition Height="32"/>
-            </Grid.RowDefinitions>
 
             <!--Offset-->
-            <TextBlock x:Name="OffsetTextBlock" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
-            <hSVColorPickers:NumberPicker x:Name="OffsetPicker" Grid.Column="1" Grid.Row="0" Minimum="0" Maximum="100" Unit="%" 
-                         ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-
+            <TextBlock x:Name="OffsetTextBlock" Grid.Column="0" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
+            <hSVColorPickers:NumberPicker x:Name="OffsetPicker" Grid.Column="1" Minimum="0" Maximum="100" Unit="%" 
+                         ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
 
             <!--A-->
-            <TextBlock x:Name="AlphaTextBlock" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
-            <hSVColorPickers:NumberPicker x:Name="AlphaPicker" Grid.Column="1" Grid.Row="2" Minimum="0" Maximum="255"
-                         ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-            
-            
-            <!--Color-->
-            <Border Grid.Column="4" Grid.RowSpan="3">
-                <Grid x:Name="ColorButton" Grid.Row="1" Width="48" Height="48" Background="Transparent">
-                    <Ellipse IsHitTestVisible="False" StrokeThickness="1" Stroke="{ThemeResource AppText}">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="ms-appx:///Icons\GrayAndWhite.jpg"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <Ellipse IsHitTestVisible="False" Margin="1" Fill="{StaticResource SolidColorBrush}"/>
-                </Grid>
-            </Border>
+            <TextBlock x:Name="AlphaTextBlock" Grid.Column="2" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
+            <hSVColorPickers:NumberPicker x:Name="AlphaPicker" Grid.Column="3" Minimum="0" Maximum="255" 
+                         ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
 
         </Grid>
 
-        
-        <ContentControl Height="2"/>
-        
 
-    </StackPanel>
+        <ScrollViewer Grid.Row="2"  Style="{StaticResource AppHorizontalScrollViewerStyle}">
+            <StackPanel Orientation="Horizontal">
+
+                <ContentControl Width="4"/>
+               
+                <TextBlock x:Name="RemoveTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <Button x:Name="RemoveButton" Style="{StaticResource AppCircleButtonStyle}">
+                    <PathIcon>
+                        <PathIcon.Data>
+                            M17.28,4.56l0,13.92c0,0.509 -0.202,0.998 -0.562,1.358c-0.36,0.36 -0.849,0.562 -1.358,0.562c-2.275,0 -5.76,0 -5.76,0c0,0 -3.374,0 -5.577,0c-1.038,0 -2.128,-0.825 -2.159,-1.862c-0.127,-4.186 -0.184,-13.978 -0.184,-13.978l-1.68,0l0,-1.68l5.52,0c0,0 0,-0.72 0,-1.44c0,-0.382 0.152,-0.748 0.422,-1.018c0.27,-0.27 0.636,-0.422 1.018,-0.422c1.598,0 4.162,0 5.76,0c0.382,0 0.748,0.152 1.018,0.422c0.27,0.27 0.422,0.636 0.422,1.018l0,1.44l4.8,0l0,1.68l-1.68,0Zm-4.68,3.84l0,10.56c0,0 1.325,0 2.28,0c0.255,0 0.499,-0.101 0.679,-0.281c0.18,-0.18 0.281,-0.424 0.281,-0.679l0,-13.44l-12.48,0l0,13.451c0,0.252 0.1,0.493 0.278,0.671c0.178,0.178 0.419,0.278 0.671,0.278c0.956,0 2.291,0 2.291,0l0,-10.56l1.56,0l0,10.56l2.88,0l0,-10.56l1.56,0Zm0.24,-5.52c0,0 0,-0.703 0,-1.2c0,-0.127 -0.051,-0.249 -0.141,-0.339c-0.09,-0.09 -0.212,-0.141 -0.339,-0.141c-1.124,0 -3.916,0 -5.04,0c-0.127,0 -0.249,0.051 -0.339,0.141c-0.09,0.09 -0.141,0.212 -0.141,0.339l0,1.2l6,0l0,0Z
+                        </PathIcon.Data>
+                    </PathIcon>
+                </Button>
+
+                <ContentControl Width="4"/>
+
+                <TextBlock x:Name="CopyTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <Button x:Name="CopyButton" Style="{StaticResource AppCircleButtonStyle}">
+                    <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
+                </Button>
+
+                <ContentControl Width="4"/>
+
+                <TextBlock x:Name="ReserveTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <Button x:Name="ReserveButton" Style="{StaticResource AppCircleButtonStyle}">
+                    <FontIcon Glyph="&#xE13C;" FontWeight="Bold" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+                </Button>
+
+            </StackPanel>
+        </ScrollViewer>
+
+
+    </Grid>
+
 </UserControl>

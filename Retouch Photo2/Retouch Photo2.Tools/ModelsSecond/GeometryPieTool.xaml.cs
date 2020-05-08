@@ -98,8 +98,9 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is GeometryPieLayer geometryPieLayer)
+                if (layer.Type == LayerType.GeometryPie)
                 {
+                    GeometryPieLayer geometryPieLayer = (GeometryPieLayer)layer;
                     geometryPieLayer.SweepAngle = sweepAngle;
                 }
             });

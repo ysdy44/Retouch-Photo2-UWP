@@ -197,8 +197,9 @@
         </VisualStateManager.VisualStateGroups>
 
 
-        <Grid x:Name="RootGrid" Width="222" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="Transparent">
-            <Grid.RowDefinitions>
+        <Border x:Name="RootGrid" CornerRadius="{StaticResource AppCornerRadius}" Width="222" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="Transparent">
+            <Grid>
+                <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
@@ -254,8 +255,9 @@
             </Grid>
 
 
-        </Grid>
-        
+            </Grid>
+        </Border>
+
     </controls:DropShadowPanel>
 
 </UserControl>

@@ -95,9 +95,10 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is GeometryRoundRectLayer roundRectLayer)
+                if (layer.Type == LayerType.GeometryRoundRect)
                 {
-                    roundRectLayer.Corner = corner;
+                    GeometryRoundRectLayer geometryRoundRectLayer = (GeometryRoundRectLayer)layer;
+                    geometryRoundRectLayer.Corner = corner;
                 }
             });
 

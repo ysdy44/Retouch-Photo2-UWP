@@ -96,9 +96,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ColorEllipse.xaml.cs">
-      <DependentUpon>ColorEllipse.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\FootPageControl.cs" />
     <Compile Include="Controls\LayersControl.Construct.cs" />
     <Compile Include="Controls\LayersControl.xaml.cs">
@@ -114,6 +111,7 @@
     <Compile Include="DrawPage.xaml.cs">
       <DependentUpon>DrawPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FileUtils\FileUtil.Filter.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -306,8 +304,8 @@
     <Content Include="Icons\2Logo-Wide.png" />
     <Content Include="Icons\2Logo.png" />
     <Content Include="Icons\GrayAndWhite.jpg" />
-    <Content Include="XMLs\Filter.xml" />
-    <Content Include="XMLs\FilterOriginal.xml" />
+    <Content Include="FileUtils\Filter.xml" />
+    <Content Include="FileUtils\FilterOriginal.xml" />
     <None Include="Retouch Photo_TemporaryKey.pfx" />
     <PRIResource Include="Strings\zh-CN\Elements.resw" />
     <PRIResource Include="Strings\en-US\Elements.resw" />
@@ -392,6 +390,8 @@
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="Icons\GrayAndWhite2.jpg" />
+    <Content Include="Icons\GrayAndWhite3.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -405,10 +405,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\ColorEllipse.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\LayersControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

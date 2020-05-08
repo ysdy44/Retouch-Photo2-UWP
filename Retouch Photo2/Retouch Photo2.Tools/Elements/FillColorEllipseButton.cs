@@ -1,4 +1,4 @@
-﻿using Retouch_Photo2.Controls;
+﻿using Retouch_Photo2.Brushs;
 using Retouch_Photo2.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

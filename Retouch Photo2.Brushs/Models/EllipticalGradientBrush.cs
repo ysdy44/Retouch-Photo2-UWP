@@ -16,8 +16,8 @@ namespace Retouch_Photo2.Brushs.Models
     {
         //@Content
         public BrushType Type => BrushType.EllipticalGradient;
-        
-        public CanvasGradientStop[] Array { get; set; }
+
+        public CanvasGradientStop[] Array { get; set; } = GreyWhiteMeshHelpher.GetGradientStopArray();
         public Color Color { get; set; }
         public Transformer Destination { set { } }
         public Photocopier Photocopier { get => new Photocopier(); }
@@ -49,8 +49,7 @@ namespace Retouch_Photo2.Brushs.Models
             Vector2 center = transformer.Center;
             Vector2 xPoint = transformer.CenterRight;
             Vector2 yPoint = transformer.CenterBottom;
-
-            this.Array = GreyWhiteMeshHelpher.GetGradientStopArray();
+                       
             this.Center = center;
             this.XPoint = xPoint;
             this.YPoint = yPoint;
@@ -88,20 +87,6 @@ namespace Retouch_Photo2.Brushs.Models
                 RadiusY = radiusY,
                 Center = center
             };
-        }
-
-        public void Show(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, float sizeWidth, float sizeHeight, Vector2 sizeCenter, CanvasRenderTarget grayAndWhiteBackground)
-        {
-            CanvasGradientStop[] array = this.Array;
-            ICanvasBrush canvasBrush = new CanvasRadialGradientBrush(resourceCreator, array)
-            {
-                Center = sizeCenter,
-                RadiusX = sizeCenter.X,
-                RadiusY = sizeCenter.Y,
-            };
-
-            drawingSession.DrawImage(grayAndWhiteBackground);//Background
-            drawingSession.FillRectangle(0, 0, sizeWidth, sizeHeight, canvasBrush);
         }
 
 

@@ -96,8 +96,9 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is GeometryDountLayer geometryDountLayer)
+                if (layer.Type == LayerType.GeometryDount)
                 {
+                    GeometryDountLayer geometryDountLayer = (GeometryDountLayer)layer;
                     geometryDountLayer.HoleRadius = innerRadius;
                 }
             });

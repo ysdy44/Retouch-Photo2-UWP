@@ -130,12 +130,15 @@ namespace Retouch_Photo2
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is ImageLayer imageLayer)
+                if (layer.Type == LayerType.Image)
                 {
+                    ImageLayer imageLayer = (ImageLayer)layer;
                     imageLayer.TransformManager.Source = transformerSource;
 
-                    if (imageLayer.StyleManager.FillBrush is ImageBrush imageBrush)
+                    if (imageLayer.StyleManager.FillBrush.Type == BrushType.Image)
                     {
+                        ImageBrush imageBrush = (ImageBrush)imageLayer.StyleManager.FillBrush;
+
                         imageBrush.Photocopier = photo.ToPhotocopier();
                         imageBrush.Source = transformerSource;
                     }

@@ -31,11 +31,6 @@ namespace Retouch_Photo2.Brushs.Models
             return null;
         }
 
-        public void Show(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, float sizeWidth, float sizeHeight, Vector2 sizeCenter, CanvasRenderTarget grayAndWhiteBackground)
-        {
-            NoneBrush.Show(drawingSession, sizeWidth, sizeHeight);
-        }
-
 
         public BrushOperateMode ContainsOperateMode(Vector2 point, Matrix3x2 matrix)
         {

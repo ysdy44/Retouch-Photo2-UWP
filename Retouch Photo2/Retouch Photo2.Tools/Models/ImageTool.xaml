@@ -48,7 +48,7 @@
                 <FontIcon Glyph="&#xEB9F;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
 
-            <AppBarSeparator/>
+            <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
             <!--Select-->
             <TextBlock x:Name="ClearTextBlock" Style="{StaticResource AppTextBlockStyle}"/>

@@ -242,6 +242,25 @@ namespace Retouch_Photo2.Elements.DrawPages
         }
 
 
+
+        /// <summary>
+        /// Sets or Gets the on state of the IsHitTestVisible on the canvas. 
+        /// </summary>
+        public bool CanvasHitTestVisible
+        {
+            set
+            {
+                this.LeftBorder.IsHitTestVisible = value;
+                this.RightBorder.IsHitTestVisible = value;
+
+                this.TouchbarBorder.IsHitTestVisible = value;
+                this.RadiusAnimaPanel.IsHitTestVisible = value;
+                this.LeftRadiusAnimaIcon.IsHitTestVisible = value;
+                this.RightRadiusAnimaIcon.IsHitTestVisible = value;
+            }
+        }
+
+
         /*
         private void FullScreenButton_Tapped(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.FullScreen.Name, false);
         private void PhoneButton_Tapped(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.Phone.Name, false);

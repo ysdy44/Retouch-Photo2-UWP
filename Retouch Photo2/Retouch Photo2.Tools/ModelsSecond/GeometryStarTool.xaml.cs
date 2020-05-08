@@ -124,8 +124,9 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is GeometryStarLayer geometryStarLayer)
+                if (layer.Type == LayerType.GeometryStar)
                 {
+                    GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
                     geometryStarLayer.Points = points;
                 }
             });
@@ -174,8 +175,9 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is GeometryStarLayer geometryStarLayer)
+                if (layer.Type == LayerType.GeometryStar)
                 {
+                    GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
                     geometryStarLayer.InnerRadius = innerRadius;
                 }
             });

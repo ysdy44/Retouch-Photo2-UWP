@@ -32,7 +32,7 @@
     </UserControl.Resources>
 
     
-    <Grid x:Name="RootGrid" Background="Transparent">
+    <Border x:Name="RootGrid" CornerRadius="{StaticResource AppCornerRadius}" Background="Transparent">
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
@@ -127,10 +127,11 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <ContentPresenter x:Name="ContentPresenter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{StaticResource HighlightColor}"/>
+        <Grid>
+            <ContentPresenter x:Name="ContentPresenter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{StaticResource HighlightColor}"/>
+            <Rectangle x:Name="TipRectangle" IsHitTestVisible="False" Visibility="Collapsed" Height="3" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="{StaticResource HighlightColor}"/>
+        </Grid>
 
-        <Rectangle x:Name="TipRectangle" IsHitTestVisible="False" Visibility="Collapsed" Height="3" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="{StaticResource HighlightColor}"/>
-      
-    </Grid>
+    </Border>
 
 </UserControl>

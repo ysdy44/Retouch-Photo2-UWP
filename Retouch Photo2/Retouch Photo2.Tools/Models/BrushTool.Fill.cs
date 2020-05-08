@@ -135,7 +135,10 @@ namespace Retouch_Photo2.Tools.Models
                 case BrushType.LinearGradient:
                     {
                         Transformer transformer = this.SelectionViewModel.Transformer;
-                        LinearGradientBrush linearGradientBrush = new LinearGradientBrush(transformer);
+                        LinearGradientBrush linearGradientBrush = this.FillBrush.Array == null ? new LinearGradientBrush(transformer) : new LinearGradientBrush(transformer)
+                        {
+                            Array = this.FillBrush.Array
+                        };
 
                         //Selection
                         this.FillBrush = linearGradientBrush;
@@ -150,7 +153,10 @@ namespace Retouch_Photo2.Tools.Models
                 case BrushType.RadialGradient:
                     {
                         Transformer transformer = this.SelectionViewModel.Transformer;
-                        RadialGradientBrush radialGradientBrush = new RadialGradientBrush(transformer);
+                        RadialGradientBrush radialGradientBrush = this.FillBrush.Array == null ? new RadialGradientBrush(transformer) : new RadialGradientBrush(transformer)
+                        {
+                            Array = this.FillBrush.Array
+                        };
 
                         //Selection                       
                         this.FillBrush = radialGradientBrush;
@@ -165,7 +171,10 @@ namespace Retouch_Photo2.Tools.Models
                 case BrushType.EllipticalGradient:
                     {
                         Transformer transformer = this.SelectionViewModel.Transformer;
-                        EllipticalGradientBrush ellipticalGradientBrush = new EllipticalGradientBrush(transformer);
+                        EllipticalGradientBrush ellipticalGradientBrush = this.FillBrush.Array == null ? new EllipticalGradientBrush(transformer) : new EllipticalGradientBrush(transformer)
+                        {
+                            Array = this.FillBrush.Array
+                        };
 
                         //Selection                       
                         this.FillBrush = ellipticalGradientBrush;

@@ -69,8 +69,6 @@ namespace Retouch_Photo2.Tools.Models
 
         //Pen
         public NodeCollectionMode Mode = NodeCollectionMode.None;
-        Node _oldNode;
-        TransformerRect _transformerRect;
 
         //Add
         Node _addEndNode;

@@ -123,8 +123,9 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is GeometryCookieLayer geometryCookieLayer)
+                if (layer.Type == LayerType.GeometryCookie)
                 {
+                    GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
                     geometryCookieLayer.InnerRadius = innerRadius;
                 }
             });
@@ -172,8 +173,9 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer is GeometryCookieLayer geometryCookieLayer)
+                if (layer.Type == LayerType.GeometryCookie)
                 {
+                    GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
                     geometryCookieLayer.SweepAngle = sweepAngle;
                 }
             });
