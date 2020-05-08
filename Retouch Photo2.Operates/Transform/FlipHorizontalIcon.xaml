@@ -21,7 +21,7 @@
                 <!--Disabled-->
                 <VisualState x:Name="Disabled">
                     <VisualState.Setters>
-                        <Setter Target = "Canvas.Opacity" Value="0.5"/>
+                        <Setter Target = "Grid.Opacity" Value="0.5"/>
                         <Setter Target = "DodgerBluePolygon.Fill" Value="Gray"/>
                         <Setter Target = "GrayPolygon.Fill" Value="Gray"/>
                     </VisualState.Setters>
@@ -31,10 +31,21 @@
         </VisualStateManager.VisualStateGroups>
 
 
-        <Canvas x:Name="Canvas" Width="40" Height="40" >
-            <Polygon x:Name="DodgerBluePolygon" Points="4,6 18,19 4,32" Fill="DodgerBlue"/>
-            <Polygon x:Name="GrayPolygon" Points="36,6 22,19 36,32" Fill="Gray"/>
-        </Canvas>
+        <Grid x:Name="Grid" Width="40" Height="40" >
+
+            <Polygon x:Name="DodgerBluePolygon" Fill="DodgerBlue">
+                <Polygon.Points>
+                    4,6 18,19 4,32
+                </Polygon.Points>
+            </Polygon>
+
+            <Polygon x:Name="GrayPolygon" Fill="Gray">
+                <Polygon.Points>
+                    36,6 22,19 36,32
+                </Polygon.Points>
+            </Polygon>
+
+        </Grid>
 
     </Viewbox>
 

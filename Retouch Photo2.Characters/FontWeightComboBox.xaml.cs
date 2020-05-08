@@ -11,60 +11,45 @@ namespace Retouch_Photo2.Characters
     /// </summary>
     public sealed partial class FontWeightComboBox : UserControl
     {
-        
+
         //@Delegate
-        public EventHandler<FontWeight> FontWeightChanged;
+        public EventHandler<FontWeight> WeightChanged;
 
-
-        //@VisualState
-        FontWeight _vsFontWeight;
-        public VisualState VisualState
-        {
-            get
-            {
-                ushort weight = this._vsFontWeight.Weight;
-
-                if (weight == FontWeights.Black.Weight) return this.Black;
-                if (weight == FontWeights.Bold.Weight) return this.Bold;
-
-                if (weight == FontWeights.ExtraBlack.Weight) return this.ExtraBlack;
-                if (weight == FontWeights.ExtraBold.Weight) return this.ExtraBold;
-                if (weight == FontWeights.ExtraLight.Weight) return this.ExtraLight;
-                if (weight == FontWeights.Light.Weight) return this.Light;
-                if (weight == FontWeights.Medium.Weight) return this.Medium;
-                if (weight == FontWeights.Normal.Weight) return this.None;
-                if (weight == FontWeights.SemiBold.Weight) return this.SemiBold;
-                if (weight == FontWeights.SemiLight.Weight) return this.SemiLight;
-                if (weight == FontWeights.Thin.Weight) return this.Thin;
-                return this.Normal;
-             }
-            set => VisualStateManager.GoToState(this, value.Name, false);
-        }
+        //@Group
+        private EventHandler<FontWeight> Group;
 
         #region DependencyProperty
 
 
         /// <summary> Gets or sets the fontvweight. </summary>
-        public FontWeight FontWeight2
+        public FontWeight Weight
         {
             get { return (FontWeight)GetValue(FontWeight2Property); }
             set { SetValue(FontWeight2Property, value); }
         }
-        /// <summary> Identifies the <see cref = "FontWeightComboBox.FontWeight2" /> dependency property. </summary>
-        public static readonly DependencyProperty FontWeight2Property = DependencyProperty.Register(nameof(FontWeight2), typeof(FontWeight), typeof(FontWeightComboBox), new PropertyMetadata(FontWeights.Normal, (sender, e) =>
+        /// <summary> Identifies the <see cref = "FontWeightComboBox.Weight" /> dependency property. </summary>
+        public static readonly DependencyProperty FontWeight2Property = DependencyProperty.Register(nameof(Weight), typeof(FontWeight), typeof(FontWeightComboBox), new PropertyMetadata(FontWeights.Normal, (sender, e) =>
         {
             FontWeightComboBox con = (FontWeightComboBox)sender;
 
             if (e.NewValue is FontWeight value)
             {
-                con._vsFontWeight = value;
-                con.VisualState = con.VisualState;//State
+                con.Group?.Invoke(con, value);//Delegate
             }
         }));
 
 
-        #endregion
+        /// <summary> Gets or sets the title. </summary>
+        public object Title
+        {
+            get { return (object)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "FontWeightComboBox.Title" /> dependency property. </summary>
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title), typeof(object), typeof(FontWeightComboBox), new PropertyMetadata(null));
 
+
+        #endregion
 
 
         //@Construct
@@ -72,44 +57,66 @@ namespace Retouch_Photo2.Characters
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
 
+    }
+
+    /// <summary>
+    /// Represents the combo box that is used to select font weight.
+    /// </summary>
+    public sealed partial class FontWeightComboBox : UserControl
+    {
 
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.ConstructButton(this.BlackButton, resource.GetString("/Characters/FontWeight_Black"), FontWeights.Black);
-            this.ConstructButton(this.BoldButton, resource.GetString("/Characters/FontWeight_Bold"), FontWeights.Bold);
+            this.ConstructGroup(this.BlackButton, resource.GetString("/Characters/FontWeight_Black"), FontWeights.Black);
+            this.ConstructGroup(this.BoldButton, resource.GetString("/Characters/FontWeight_Bold"), FontWeights.Bold);
 
-            this.ConstructButton(this.ExtraBlackButton, resource.GetString("/Characters/FontWeight_ExtraBlack"), FontWeights.ExtraBlack);
-            this.ConstructButton(this.ExtraBoldButton, resource.GetString("/Characters/FontWeight_ExtraBold"), FontWeights.ExtraBold);
-            this.ConstructButton(this.ExtraLightButton, resource.GetString("/Characters/FontWeight_ExtraLight"), FontWeights.ExtraLight);
+            this.ConstructGroup(this.ExtraBlackButton, resource.GetString("/Characters/FontWeight_ExtraBlack"), FontWeights.ExtraBlack);
+            this.ConstructGroup(this.ExtraBoldButton, resource.GetString("/Characters/FontWeight_ExtraBold"), FontWeights.ExtraBold);
+            this.ConstructGroup(this.ExtraLightButton, resource.GetString("/Characters/FontWeight_ExtraLight"), FontWeights.ExtraLight);
 
-            this.ConstructButton(this.LightButton, resource.GetString("/Characters/FontWeight_Light"), FontWeights.Light);
-            this.ConstructButton(this.MediumButton, resource.GetString("/Characters/FontWeight_Medium"), FontWeights.Medium);
-            this.ConstructButton(this.NormalButton, resource.GetString("/Characters/FontWeight_Normal"), FontWeights.Normal);
+            this.ConstructGroup(this.LightButton, resource.GetString("/Characters/FontWeight_Light"), FontWeights.Light);
+            this.ConstructGroup(this.MediumButton, resource.GetString("/Characters/FontWeight_Medium"), FontWeights.Medium);
+            this.ConstructGroup(this.NormalButton, resource.GetString("/Characters/FontWeight_Normal"), FontWeights.Normal);
 
-            this.ConstructButton(this.SemiBoldButton, resource.GetString("/Characters/FontWeight_SemiBold"), FontWeights.SemiBold);
-            this.ConstructButton(this.SemiLightButton, resource.GetString("/Characters/FontWeight_SemiLight"), FontWeights.SemiLight);
+            this.ConstructGroup(this.SemiBoldButton, resource.GetString("/Characters/FontWeight_SemiBold"), FontWeights.SemiBold);
+            this.ConstructGroup(this.SemiLightButton, resource.GetString("/Characters/FontWeight_SemiLight"), FontWeights.SemiLight);
 
-            this.ConstructButton(this.ThinButton, resource.GetString("/Characters/FontWeight_Thin"), FontWeights.Thin);
+            this.ConstructGroup(this.ThinButton, resource.GetString("/Characters/FontWeight_Thin"), FontWeights.Thin);
         }
 
-        private void ConstructButton(Button button, string text, FontWeight fontWeight)
+        //Group
+        private void ConstructGroup(Button button, string text, FontWeight weight)
         {
+            void group(FontWeight groupWeight)
+            {
+                if (groupWeight.Weight == weight.Weight)
+                {
+                    button.IsEnabled = false;
+
+                    this.Title = text;
+                }
+                else button.IsEnabled = true;
+            }
+
+            //NoneButton
+            group(this.Weight);
+
+            //Buttons
+            button.Content = text;
             button.Tag = new ContentControl
             {
-                Content = fontWeight.Weight,
-                Style = this.ContentControlStyle,
+                Content = weight.Weight,
+                Style = this.ContentControlStyle
             };
-            button.Content = text;
-            button.Tapped += (s, e) =>
-            {
-                this.FontWeightChanged?.Invoke(this, fontWeight);//Delegate
-            };
+            button.Tapped += (s, e) => this.WeightChanged?.Invoke(this, weight);//Delegate
+
+            //Group
+            this.Group += (s, e) => group(e);
         }
 
     }

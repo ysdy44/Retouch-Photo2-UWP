@@ -15,6 +15,8 @@ namespace Retouch_Photo2.Brushs
         //@Delegate
         public EventHandler<FillOrStroke> FillOrStrokeChanged;
 
+        //@Group
+        private EventHandler<FillOrStroke> Group;
 
         #region DependencyProperty
 
@@ -32,30 +34,12 @@ namespace Retouch_Photo2.Brushs
 
             if (e.NewValue is FillOrStroke value)
             {
-                con._vsFillOrStroke = value;
-                con.VisualState = con.VisualState;//State
+                con.Group?.Invoke(con, value);
             }
         }));
 
 
         #endregion
-
-
-        //@VisualState
-        FillOrStroke _vsFillOrStroke;
-        public VisualState VisualState
-        {
-            get
-            {
-                switch (this._vsFillOrStroke)
-                {
-                    case FillOrStroke.Fill: return this.Fill;
-                    case FillOrStroke.Stroke: return this.Stroke;
-                    default: return this.Normal;
-                }
-            }
-            set => VisualStateManager.GoToState(this, value.Name, false);
-        }
 
 
         //@Construct
@@ -64,30 +48,53 @@ namespace Retouch_Photo2.Brushs
             this.InitializeComponent();
             this.ConstructStrings();
             this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this);
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
 
-        
+    }
+
+    /// <summary>
+    /// Represents the combo box that is used to select fill or stroke.
+    /// </summary>
+    public sealed partial class FillOrStrokeComboBox : UserControl
+    {
+
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.FillButton.Content = resource.GetString("/ToolElements/Fill");
-            this.FillButton.Tag = new FillIcon();
-            this.FillButton.Tapped += (s, e) =>
+            this.ConstructGroup(this.FillButton, resource.GetString("/ToolElements/Fill"), new FillIcon(), FillOrStroke.Fill);
+            this.ConstructGroup(this.StrokeButton, resource.GetString("/ToolElements/Stroke"), new StrokeIcon(), FillOrStroke.Stroke);
+        }
+
+        //Group
+        private void ConstructGroup(Button button, string text, UserControl icon, FillOrStroke fillOrStroke)
+        {
+            void group(FillOrStroke groupFillOrStroke)
             {
-                this.FillOrStrokeChanged?.Invoke(this, FillOrStroke.Fill); //Delegate
+                if (groupFillOrStroke == fillOrStroke)
+                {
+                    button.IsEnabled = false;
+
+                    this.Button.Content = text;
+                }
+                else button.IsEnabled = true;
+            }
+
+            //NoneButton
+            group(this.FillOrStroke);
+
+            //Buttons
+            button.Content = text;
+            button.Tag = icon;
+            button.Tapped += (s, e) =>
+            {
+                this.FillOrStrokeChanged?.Invoke(this, fillOrStroke); //Delegate
                 this.Flyout.Hide();
             };
 
-            this.StrokeButton.Content = resource.GetString("/ToolElements/Stroke");
-            this.StrokeButton.Tag = new StrokeIcon();
-            this.StrokeButton.Tapped += (s, e) =>
-            {
-                this.FillOrStrokeChanged?.Invoke(this, FillOrStroke.Stroke); //Delegate
-                this.Flyout.Hide();
-            };
+            //Group
+            this.Group += (s, e) => group(e);
         }
 
     }

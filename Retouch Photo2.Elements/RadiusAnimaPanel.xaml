@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    BorderBrush="{ThemeResource AppBorderBrush}"
-    Background="{ThemeResource AppBackground}"
+    xmlns:apiContractNotPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,5)"
+    xmlns:apiContractPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
     HorizontalAlignment="Center"
     VerticalAlignment="Center"
     mc:Ignorable="d"
@@ -39,9 +39,16 @@
 
     <Grid Background="Transparent" Margin="{x:Bind UserControl.Margin,Mode=OneWay}" HorizontalAlignment="{x:Bind UserControl.HorizontalAlignment,Mode=OneWay}" VerticalAlignment="{x:Bind UserControl.VerticalAlignment,Mode=OneWay}">
 
+        <!--@Acrylic-->
         <!--Shadow-->
         <controls:DropShadowPanel OffsetY="3" ShadowOpacity="{x:Bind ShadowOpacity,Mode=OneWay}" Color="{x:Bind ShadowColor,Mode=OneWay}">
-            <Rectangle x:Name="Rectangle" RadiusX="25" RadiusY="25" StrokeThickness="1" Stroke="{x:Bind UserControl.BorderBrush, Mode=OneWay}" Fill="{x:Bind UserControl.Background,Mode=OneWay}"/>
+            <Rectangle x:Name="Rectangle" RadiusX="25" RadiusY="25" 
+                       StrokeThickness="1" 
+                       Stroke="{ThemeResource AppBorderBrush}"                        
+                               
+                        apiContractNotPresent5:Fill="{ThemeResource AppBackground}"
+                        apiContractPresent5:Fill="{ThemeResource SystemControlAltLowAcrylicElementBrush}"
+                        />
         </controls:DropShadowPanel>
 
         <!--Content-->

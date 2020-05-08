@@ -15,64 +15,22 @@
 
     <menus:MenuExpander x:Name="_Expander">
 
-        <!--VisualState-->
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup">
-
-                <!--Normal-->
-                <VisualState x:Name="Normal"/>
-
-                <!--Disable-->
-                <VisualState x:Name="Disable">
-                    <VisualState.Setters>
-
-                        <Setter Target = "OpacitySlider.IsEnabled" Value="False"/>
-                        <Setter Target = "BlendModeButton.IsEnabled" Value="False"/>
-
-                        <Setter Target = "VisibilityButton.IsEnabled" Value="False"/>
-                        <Setter Target = "DuplicateButton.IsEnabled" Value="False"/>
-                        <Setter Target = "RemoveButton.IsEnabled" Value="False"/>
-                        <Setter Target = "GroupButton.IsEnabled" Value="False"/>
-                        <Setter Target = "UnGroupButton.IsEnabled" Value="False"/>
-
-                    </VisualState.Setters>
-                </VisualState>
-
-
-                <!--SingleLayerWithChildren-->
-                <VisualState x:Name="SingleLayerWithChildren"/>
-
-                <!--SingleLayerWithoutChildren-->
-                <VisualState x:Name="SingleLayerWithoutChildren">
-                    <VisualState.Setters>
-                        <Setter Target = "UnGroupButton.IsEnabled" Value="False"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--MultipleLayer-->
-                <VisualState x:Name="MultipleLayer">
-                    <VisualState.Setters>
-                        <Setter Target = "UnGroupButton.IsEnabled" Value="False"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
-
+        
         <menus:MenuExpander.MainPage>
             <StackPanel MinHeight="165" Padding="1,2">
 
                 <!--Opacity-->
                 <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <Slider x:Name="OpacitySlider" Margin="2,0" TickFrequency="25" TickPlacement="Inline" Style="{StaticResource AppOpacitySliderStyle}" 
-                            Value="{x:Bind OpacityToValueConverter(SelectionViewModel.Opacity),Mode=OneWay}"/>
+                           IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
+                           Value="{x:Bind OpacityToValueConverter(SelectionViewModel.Opacity),Mode=OneWay}"/>
 
 
                 <!--Blend Mode-->
                 <TextBlock x:Name="BlendModeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <Button x:Name="BlendModeButton" Style="{StaticResource AppIconRoundedButtonStyle}"
-                        Content="{x:Bind BlendModeComboBox.Tag, Mode=OneWay}">
+                        IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
+                        Content="{x:Bind BlendModeComboBox.Title, Mode=OneWay}">
                     <Button.Tag>
                         <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
                     </Button.Tag>
@@ -86,7 +44,8 @@
                     <TextBlock x:Name="LayersTextBlock" Style="{StaticResource AppTextBlockStyle}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
                     <!--Visibility-->
                     <ToggleButton x:Name="VisibilityButton" Style="{StaticResource AppCircleToggleButtonStyle}" RelativePanel.AlignRightWithPanel="True"
-                                  IsChecked="{x:Bind VisibilityToBoolConverter(SelectionViewModel.Visibility),Mode=OneWay}" >
+                               IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
+                               IsChecked="{x:Bind VisibilityToBoolConverter(SelectionViewModel.Visibility),Mode=OneWay}" >
                         <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}" />
                     </ToggleButton>
                 </RelativePanel>
@@ -97,18 +56,12 @@
                         <ColumnDefinition Width="4"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="4"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    
-                    <Button x:Name="RemoveButton" Grid.Column="0" Grid.Row="0" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-                    <Button x:Name="DuplicateButton" Grid.Column="2" Grid.Row="0" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 
-                    <Button x:Name="GroupButton" Grid.Column="0" Grid.Row="2" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-                    <Button x:Name="UnGroupButton" Grid.Column="2" Grid.Row="2" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-                
+                    <Button x:Name="RemoveButton" Grid.Column="0" Grid.Row="0" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" />
+                    <Button x:Name="DuplicateButton" Grid.Column="2" Grid.Row="0" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" />
+
                 </Grid>
 
 

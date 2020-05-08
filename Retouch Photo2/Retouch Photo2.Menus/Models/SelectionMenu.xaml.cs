@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo2.Layers;
 using Retouch_Photo2.Selections.EditIcons;
+using Retouch_Photo2.Selections.GroupIcons;
 using Retouch_Photo2.Selections.Select2Icons;
 using Retouch_Photo2.Selections.SelectIcons;
 using Retouch_Photo2.ViewModels;
@@ -26,66 +27,20 @@ namespace Retouch_Photo2.Menus.Models
 
         /// <summary> The single copyed layer. </summary>
         public ILayer Layer;
-
         /// <summary> The all copyed layers. </summary> 
         public List<ILayer> Layers = new List<ILayer>();
 
 
-        #region DependencyProperty
-
-        /// <summary> Gets or sets <see cref = "SelectionMenu" />'s selection mode. </summary>
-        public ListViewSelectionMode Mode
-        {
-            get { return (ListViewSelectionMode)GetValue(ModeProperty); }
-            set { SetValue(ModeProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "SelectionMenu.Mode" /> dependency property. </summary>
-        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(ListViewSelectionMode), typeof(SelectionMenu), new PropertyMetadata(ListViewSelectionMode.None, (sender, e) =>
-        {
-            SelectionMenu con = (SelectionMenu)sender;
-
-            if (e.NewValue is ListViewSelectionMode value)
-            {
-                con._vsMode = value;
-                con.VisualState = con.VisualState;//State;
-            }
-        }));
-
-        #endregion
-
-
-        //@VisualState
-        ListViewSelectionMode _vsMode;
-        public VisualState VisualState
-        {
-            get
-            {
-                switch (this._vsMode)
-                {
-                    case ListViewSelectionMode.None:
-                        return this.Disable;
-                    default:
-                        return this.Normal;
-                }
-            }
-            set => VisualStateManager.GoToState(this, value.Name, false);
-        }
         //@Construct
         public SelectionMenu()
         {
             this.InitializeComponent();
-            this.Loaded+=(s,e) => this.VisualState = this.VisualState;//State;
-            this.ConstructDataContext
-            (
-                 dataContext: this.SelectionViewModel,
-                 path: nameof(this.SelectionViewModel.SelectionMode),
-                 dp: SelectionMenu.ModeProperty
-            );
             this.ConstructStrings();
             this.ConstructMenu();
             
             this.ConstructEdit();
-            this.ConstructSelect();           
+            this.ConstructSelect();
+            this.ConstructGroup();
         }
     }
 
@@ -94,21 +49,6 @@ namespace Retouch_Photo2.Menus.Models
     /// </summary>
     public sealed partial class SelectionMenu : UserControl, IMenu
     {
-        //DataContext
-        public void ConstructDataContext(object dataContext, string path, DependencyProperty dp)
-        {
-            this.DataContext = dataContext;
-
-            // Create the binding description.
-            Binding binding = new Binding
-            {
-                Mode = BindingMode.OneWay,
-                Path = new PropertyPath(path)
-            };
-
-            // Attach the binding to the target.
-            this.SetBinding(dp, binding);
-        }
 
         //Strings
         private void ConstructStrings()
@@ -117,34 +57,29 @@ namespace Retouch_Photo2.Menus.Models
 
             this._button.ToolTip.Content = resource.GetString("/Menus/Selection");
             this._Expander.Title = resource.GetString("/Menus/Selection");
-
-            this.CutButton.Content = resource.GetString("/Menus/Selection_Cut");
+            
+            this.EditTextBlock.Text = resource.GetString("/Selections/Edit");
+            this.CutButton.Content = resource.GetString("/Selections/Edit_Cut");
             this.CutButton.Tag = new CutIcon();
-            this.CopyButton.Content = resource.GetString("/Menus/Selection_Copy");
+            this.CopyButton.Content = resource.GetString("/Selections/Edit_Copy");
             this.CopyButton.Tag = new CopyIcon();
-            this.PasteButton.Content = resource.GetString("/Menus/Selection_Paste");
+            this.PasteButton.Content = resource.GetString("/Selections/Edit_Paste");
             this.PasteButton.Tag = new PasteIcon();
-            this.ClearButton.Content = resource.GetString("/Menus/Selection_Clear");
+            this.ClearButton.Content = resource.GetString("/Selections/Edit_Clear");
             this.ClearButton.Tag = new ClearIcon();
 
-            this.ExtractButton.Content = "Extract";// resource.GetString("/Menus/Selection_Extract");
-            this.ExtractButton.Tag = new ExtractIcon();
-            this.MergeButton.Content = "Merge";// resource.GetString("/Menus/Selection_Merge");
-            this.MergeButton.Tag = new MergeIcon();
+            this.GroupTextBlock.Text = resource.GetString("/Selections/Group");
+            this.GroupButton.Content = resource.GetString("/Selections/Group_Group");
+            this.GroupButton.Tag = new GroupIcon();
+            this.UnGroupButton.Content = resource.GetString("/Selections/Group_UnGroup");
+            this.UnGroupButton.Tag = new UnGroupIcon();
 
-            this.AllButton.Content = resource.GetString("/Menus/Selection_All");
+            this.SelectTextBlock.Text = resource.GetString("/Selections/Select");
+            this.AllButton.Content = resource.GetString("/Selections/Select_All");
             this.AllButton.Tag = new AllIcon();
-            this.DeselectButton.Content = resource.GetString("/Menus/Selection_Deselect");
+            this.DeselectButton.Content = resource.GetString("/Selections/Select_Deselect");
             this.DeselectButton.Tag = new DeselectIcon();
-            this.PixelButton.Content = "Pixel";// resource.GetString("/Menus/Selection_Pixel");
-            this.PixelButton.Tag = new PixelIcon();
-            this.InvertButton.Content = resource.GetString("/Menus/Selection_Invert");
-            this.InvertButton.Tag = new InvertIcon();
 
-            this.FeatherButton.Content = "Feather";// resource.GetString("/Menus/Selection_Feather");
-            this.FeatherButton.Tag = new FeatherEnabledIcon();
-            this.TransformButton.Content = "Transform";// resource.GetString("/Menus/Selection_Transform");
-            this.TransformButton.Tag = new TransformEnabledIcon();
         }
 
         //@Delegate
@@ -240,6 +175,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
                 this.ViewModel.Invalidate();//Invalidate
             };
+
             this.CopyButton.Tapped += (s, e) =>
             {
                 //Selection
@@ -273,6 +209,7 @@ namespace Retouch_Photo2.Menus.Models
 
                 this.PasteButton.IsEnabled = (this.Layer != null || this.Layers != null);//PasteButton
             };
+
             this.PasteButton.Tapped += (s, e) =>
             {
                 if (this.Layer == null && this.Layers == null)//None
@@ -307,6 +244,7 @@ namespace Retouch_Photo2.Menus.Models
                     this.ViewModel.Invalidate();//Invalidate        
                 }
             };
+
             this.ClearButton.Tapped += (s, e) =>
             {
                 int count = this.ViewModel.Layers.RootLayers.Count;
@@ -319,6 +257,7 @@ namespace Retouch_Photo2.Menus.Models
             };
 
         }
+
 
         //Select
         private void ConstructSelect()
@@ -338,6 +277,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
                 this.ViewModel.Invalidate();//Invalidate
             };
+
             this.DeselectButton.Tapped += (s, e) =>
             {
                 int count = this.ViewModel.Layers.RootLayers.Count;
@@ -352,10 +292,37 @@ namespace Retouch_Photo2.Menus.Models
                 this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
                 this.ViewModel.Invalidate();//Invalidate
             };
+            
+        }
 
 
-            this.InvertButton.Tapped += (s, e) =>
+        //Group
+        private void ConstructGroup()
+        {
+
+            this.GroupButton.Tapped += (s, e) =>
             {
+                this.ViewModel.Layers.GroupAllSelectedLayers();
+                this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+
+                this.SelectionViewModel.SetMode(this.ViewModel.Layers);
+                this.ViewModel.Invalidate();//Invalidate
+            };
+
+            this.UnGroupButton.Tapped += (s, e) =>
+            {
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    if (layer.Type == LayerType.Group)
+                    {
+                        this.ViewModel.Layers.UnGroupLayer(layer);
+                    }
+                });
+
+                this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+
+                this.SelectionViewModel.SetMode(this.ViewModel.Layers);
+                this.ViewModel.Invalidate();//Invalidate
             };
 
         }

@@ -60,7 +60,7 @@
             <ContentControl Width="4"/>
 
             <Button x:Name="MoreButton" Style="{StaticResource AppCircleButtonStyle}">
-                <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
             </Button>
 
         </StackPanel>

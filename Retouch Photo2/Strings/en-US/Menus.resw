@@ -153,9 +153,6 @@
   <data name="Layer_Duplicate" xml:space="preserve">
     <value>Duplicate</value>
   </data>
-  <data name="Layer_Group" xml:space="preserve">
-    <value>Group</value>
-  </data>
   <data name="Layer_Layers" xml:space="preserve">
     <value>Layers</value>
   </data>
@@ -168,35 +165,11 @@
   <data name="Layer_TagType" xml:space="preserve">
     <value>Tag Type</value>
   </data>
-  <data name="Layer_UnGroup" xml:space="preserve">
-    <value>UnGroup</value>
-  </data>
   <data name="Operate" xml:space="preserve">
     <value>Operate</value>
   </data>
   <data name="Selection" xml:space="preserve">
     <value>Selection</value>
-  </data>
-  <data name="Selection_All" xml:space="preserve">
-    <value>All</value>
-  </data>
-  <data name="Selection_Clear" xml:space="preserve">
-    <value>Clear</value>
-  </data>
-  <data name="Selection_Copy" xml:space="preserve">
-    <value>Copy</value>
-  </data>
-  <data name="Selection_Cut" xml:space="preserve">
-    <value>Cut</value>
-  </data>
-  <data name="Selection_Deselect" xml:space="preserve">
-    <value>Deselect</value>
-  </data>
-  <data name="Selection_Invert" xml:space="preserve">
-    <value>Invert</value>
-  </data>
-  <data name="Selection_Paste" xml:space="preserve">
-    <value>Paste</value>
   </data>
   <data name="Transformer" xml:space="preserve">
     <value>Transformer</value>

@@ -5,7 +5,9 @@ using Retouch_Photo2.Effects;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.ViewModels
@@ -123,17 +125,11 @@ namespace Retouch_Photo2.ViewModels
         }
         private bool isGroupLayer;
         /// <summary> Sets GroupLayer. </summary>     
-        private void SetGroupLayer(ILayer layer)
-        {
-            if (layer == null)
-            {
-                this.IsGroupLayer = false;
-            }
-            else
-            {
-                this.IsGroupLayer = (layer.Type == LayerType.Group);
-            }
-        }
+        private void SetGroupLayer() => this.IsGroupLayer = false;
+        /// <summary> Sets GroupLayer. </summary>     
+        private void SetGroupLayer(ILayer layer) => this.IsGroupLayer = layer.Type == LayerType.Group;
+        /// <summary> Sets GroupLayer. </summary>     
+        private void SetGroupLayer(IList<ILayer> layers) => this.IsGroupLayer = layers.Any(layer => layer.Type == LayerType.Group);
 
 
         /// <summary> ImageLayer's Exist. </summary>      

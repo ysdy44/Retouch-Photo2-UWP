@@ -23,100 +23,16 @@ namespace Retouch_Photo2.Menus.Models
         TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         
-
         //@Converter
         private double OpacityToValueConverter(float opacity) => opacity * 100.0d;
         private float ValueToOpacityConverter(double value) => (float)value / 100.0f;
-
         private bool VisibilityToBoolConverter(Visibility visibility) => visibility == Visibility.Visible;
-        private bool GroupLayerToboolConverter(GroupLayer groupLayer) => (groupLayer == null) ? false : true;
-        
-
-        //@VisualState
-        bool _vsIsGroupLayer;
-        ListViewSelectionMode _vsMode;
-        public VisualState VisualState
-        {
-            get
-            {
-                switch (this._vsMode)
-                {
-                    case ListViewSelectionMode.None:
-                        return this.Disable;
-                    case ListViewSelectionMode.Single:
-                        {
-                            return this._vsIsGroupLayer ?
-                                this.SingleLayerWithChildren :
-                                this.SingleLayerWithoutChildren;
-                        }
-                    case ListViewSelectionMode.Multiple:
-                        return this.MultipleLayer;
-                }
-
-                return this.Normal;
-            }
-            set => VisualStateManager.GoToState(this, value.Name, false);
-        }
-        
-        #region DependencyProperty
-
-
-        /// <summary> Gets or sets the selection mode. </summary>
-        public ListViewSelectionMode Mode
-        {
-            get { return (ListViewSelectionMode)GetValue(ModeProperty); }
-            set { SetValue(ModeProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "LayerMenu.Mode" /> dependency property. </summary>
-        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(ListViewSelectionMode), typeof(LayerMenu), new PropertyMetadata(ListViewSelectionMode.None, (sender, e) =>
-        {
-            LayerMenu con = (LayerMenu)sender;
-
-            if (e.NewValue is ListViewSelectionMode value)
-            {
-                con._vsMode = value;
-                con.VisualState = con.VisualState;//State
-            }
-        }));
-
-
-        /// <summary> Gets or sets the current layer is GroupLayer. </summary>
-        public bool IsGroupLayer
-        {
-            get { return (bool)GetValue(IsGroupLayerProperty); }
-            set { SetValue(IsGroupLayerProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "LayerMenu.IsGroupLayer" /> dependency property. </summary>
-        public static readonly DependencyProperty IsGroupLayerProperty = DependencyProperty.Register(nameof(IsGroupLayer), typeof(bool), typeof(LayerMenu), new PropertyMetadata(false, (sender, e) =>
-        {
-            LayerMenu con = (LayerMenu)sender;
-
-            if (e.NewValue is bool value)
-            {
-                con._vsIsGroupLayer = value;
-                con.VisualState = con.VisualState;//State
-            }
-        }));
-
-
-        #endregion
-         
+                 
 
         //@Construct
         public LayerMenu()
         {
             this.InitializeComponent();
-            this.DataContext = this.SelectionViewModel;
-            this.ConstructDataContext
-            (
-                 path: nameof(this.SelectionViewModel.SelectionMode),
-                 dp: LayerMenu.ModeProperty
-            );
-            this.ConstructDataContext
-            (
-                 path: nameof(this.SelectionViewModel.IsGroupLayer),
-                 dp: LayerMenu.IsGroupLayerProperty
-            );
             this.ConstructStrings();
             this.ConstructMenu();
 
@@ -161,9 +77,6 @@ namespace Retouch_Photo2.Menus.Models
             this.RemoveButton.Content = resource.GetString("/Menus/Layer_Remove");
             this.DuplicateButton.Content = resource.GetString("/Menus/Layer_Duplicate");
 
-            this.GroupButton.Content = resource.GetString("/Menus/Layer_Group");
-            this.UnGroupButton.Content = resource.GetString("/Menus/Layer_UnGroup");
-
             this.TagTypeTextBlock.Text = resource.GetString("/Menus/Layer_TagType");
         }
         
@@ -203,7 +116,6 @@ namespace Retouch_Photo2.Menus.Models
             this._Expander.BackButton.Tapped += (s, e) => this._Expander.IsSecondPage = false;
             MenuHelper.ConstructTitleGrid(this._Expander.TitleGrid, this);
         }
-
 
     }
 
@@ -297,7 +209,6 @@ namespace Retouch_Photo2.Menus.Models
                 this.SelectionViewModel.SetMode(this.ViewModel.Layers);
                 this.ViewModel.Invalidate();//Invalidate
             };
-
             //Remove
             this.RemoveButton.Tapped += (s, e) =>
             {
@@ -307,36 +218,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.SelectionViewModel.SetMode(this.ViewModel.Layers);
                 this.ViewModel.Invalidate();//Invalidate
             };
-
-
-            //Group
-            this.GroupButton.Tapped += (s, e) =>
-            {
-                this.ViewModel.Layers.GroupAllSelectedLayers();
-                this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
-
-                this.SelectionViewModel.SetMode(this.ViewModel.Layers);
-                this.ViewModel.Invalidate();//Invalidate
-            };
-
-
-            //UnGroup
-            this.UnGroupButton.Tapped += (s, e) =>
-            {
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    if (layer.Type == LayerType.Group)
-                    {
-                        this.ViewModel.Layers.UnGroupLayer(layer);
-                    }
-                });
-
-                this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
-
-                this.SelectionViewModel.SetMode(this.ViewModel.Layers);
-                this.ViewModel.Invalidate();//Invalidate
-            };
-
+            
         }
 
     }

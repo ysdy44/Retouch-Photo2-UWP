@@ -5,7 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:menus="using:Retouch_Photo2.Menus"
-    xmlns:selections="using:Retouch_Photo2.Selections"
     mc:Ignorable="d"
     d:DesignWidth="200"
     d:DesignHeight="400"
@@ -13,29 +12,6 @@
 
 
     <menus:MenuExpander x:Name="_Expander">
-
-        <!--VisualState-->
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup">
-
-                <!--Normal-->
-                <VisualState x:Name="Normal"/>
-
-                <!--Disable-->
-                <VisualState x:Name="Disable">
-                    <VisualState.Setters>
-
-                        <Setter Target = "CutButton.IsEnabled" Value="False"/>
-                        <Setter Target = "CopyButton.IsEnabled" Value="False"/>
-                        <Setter Target = "ClearButton.IsEnabled" Value="False"/>
-
-                        <Setter Target = "InvertButton.IsEnabled" Value="False"/>
-
-                    </VisualState.Setters>
-                </VisualState>
-
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
         
         
         <menus:MenuExpander.MainPage>
@@ -48,33 +24,31 @@
 
                 <!--Edit-->
                 <StackPanel Grid.Column="0">
-
-                    <Button x:Name="CutButton" Style="{StaticResource AppIconButton}"/>
-                    <Button x:Name="CopyButton" Style="{StaticResource AppIconButton}"/>
-                    <Button x:Name="PasteButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
-                    <Button x:Name="ClearButton" Style="{StaticResource AppIconButton}"/>
+                    
+                    <TextBlock x:Name="EditTextBlock" Text="Edit" Style="{StaticResource AppTextBlockStyle}"/>
+                    <Button x:Name="CutButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="CopyButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="PasteButton" Padding="0" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="ClearButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
 
                     <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
 
-                    <Button x:Name="ExtractButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
-                    <Button x:Name="MergeButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
+                    <TextBlock x:Name="GroupTextBlock" Text="Group" Style="{StaticResource AppTextBlockStyle}"/>
+                    <Button x:Name="GroupButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="UnGroupButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.IsGroupLayer, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
 
                 </StackPanel>
 
-                <Rectangle Grid.Column="1" Width="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
+                <Rectangle Grid.Column="1" Margin="0" Style="{ThemeResource AppSeparatorRectangleHorizontalStyle}" />
 
                 <!--Select-->
                 <StackPanel Grid.Column="2">
 
-                    <Button x:Name="AllButton" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
-                    <Button x:Name="DeselectButton" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
-                    <Button x:Name="PixelButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
-                    <Button x:Name="InvertButton" Style="{StaticResource AppIconButton}"/>
-
-                    <Rectangle Margin="12,0" Height="1" StrokeDashArray="2 2" Stroke="{ThemeResource AppBorderBrush}" />
-
-                    <Button x:Name="FeatherButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
-                    <Button x:Name="TransformButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
+                    <TextBlock x:Name="SelectTextBlock" Text="Select" Style="{StaticResource AppTextBlockStyle}"/>
+                    <Button x:Name="AllButton" Padding="0" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="DeselectButton" Padding="0" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
+                  
+                    <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
 
                 </StackPanel>
 

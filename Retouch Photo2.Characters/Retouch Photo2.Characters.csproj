@@ -112,6 +112,9 @@
     <Compile Include="FontAlignmentSegmented.xaml.cs">
       <DependentUpon>FontAlignmentSegmented.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Icon.xaml.cs">
+      <DependentUpon>Icon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.Characters.rd.xml" />
   </ItemGroup>
@@ -131,6 +134,10 @@
     <Page Include="FontAlignmentSegmented.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Icon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

@@ -50,62 +50,6 @@
             <SolidColorBrush x:Name="ButtonBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
         </Button.BorderBrush>
         
-        <!--VisualState-->
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup">
-
-                <!--Normal-->
-                <VisualState x:Name="Normal"/>
-
-                <!--None-->
-                <VisualState x:Name="None">
-                    <VisualState.Setters>
-                        <Setter Target = "NoneButton.IsEnabled" Value="False"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind NoneButton.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-                
-                <!--Color-->
-                <VisualState x:Name="Color">
-                    <VisualState.Setters>
-                        <Setter Target = "ColorButton.IsEnabled" Value="False"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind ColorButton.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--LinearGradient-->
-                <VisualState x:Name="LinearGradient">
-                    <VisualState.Setters>
-                        <Setter Target = "LinearGradientButton.IsEnabled" Value="False"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind LinearGradientButton.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-                <!--RadialGradient-->
-                <VisualState x:Name="RadialGradient">
-                    <VisualState.Setters>
-                        <Setter Target = "RadialGradientButton.IsEnabled" Value="False"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind RadialGradientButton.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-                <!--EllipticalGradient-->
-                <VisualState x:Name="EllipticalGradient">
-                    <VisualState.Setters>
-                        <Setter Target = "EllipticalGradientButton.IsEnabled" Value="False"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind EllipticalGradientButton.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Image-->
-                <VisualState x:Name="Image">
-                    <VisualState.Setters>
-                        <Setter Target = "ImageButton.IsEnabled" Value="False"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind ImageButton.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
         <Button.Tag>
             <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
         </Button.Tag>

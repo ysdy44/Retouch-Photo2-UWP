@@ -104,6 +104,14 @@ namespace Retouch_Photo2.Layers.Models
             }
             return command;
         }
+        public override void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
+        {
+            foreach (ILayer child in this.Children)
+            {
+                Transformer transformer = child.GetActualDestinationWithRefactoringTransformer;
+                drawingSession.DrawBound(transformer, matrix);
+            }
+        }
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)=> null;
         public override IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;

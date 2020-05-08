@@ -30,7 +30,36 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private ListViewSelectionMode selectionMode;
+
+        /// <summary>
+        /// Gets selection-mode is not ""None"". 
+        /// </summary>
+        public bool SelectionUnNone
+        {
+            get => this.selectionUnNone;
+            private set
+            {
+                this.selectionUnNone = value;
+                this.OnPropertyChanged(nameof(this.SelectionUnNone));//Notify 
+            }
+        }
+        private bool selectionUnNone;
+
+        /// <summary>
+        /// Gets selection-mode is ""Single"". 
+        /// </summary>
+        public bool SelectionSingle
+        {
+            get => this.selectionSingle;
+            private set
+            {
+                this.selectionSingle = value;
+                this.OnPropertyChanged(nameof(this.SelectionSingle));//Notify 
+            }
+        }
+        private bool selectionSingle;
         
+
         /// <summary> The single checked layer. </summary>
         public ILayer Layer { get; private set; }
         

@@ -8,8 +8,8 @@
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
-    BorderBrush="{ThemeResource AppBorderBrush}"
-    Background="{ThemeResource AppBackground}"
+    xmlns:apiContractNotPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,5)"
+    xmlns:apiContractPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
     mc:Ignorable="d"
     Width="70" 
     Height="70" 
@@ -31,9 +31,16 @@
 
     <Grid x:Name="RootGrid" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
 
+        <!--@Acrylic-->
         <!--Shadow-->
         <controls:DropShadowPanel OffsetY="3" ShadowOpacity="{x:Bind ShadowOpacity,Mode=OneWay}" Color="{x:Bind ShadowColor,Mode=OneWay}">
-            <Rectangle x:Name="Rectangle" RadiusX="25" RadiusY="25" Width="50" Height="50" StrokeThickness="1" Stroke="{x:Bind UserControl.BorderBrush, Mode=OneWay}" Fill="{x:Bind UserControl.Background,Mode=OneWay}"/>
+            <Rectangle x:Name="Rectangle" RadiusX="25" RadiusY="25" Width="50" Height="50" 
+                       StrokeThickness="1" 
+                       Stroke="{ThemeResource AppBorderBrush}"                        
+                                             
+                        apiContractNotPresent5:Fill="{ThemeResource AppBackground}"
+                        apiContractPresent5:Fill="{ThemeResource SystemControlAltLowAcrylicElementBrush}"
+                        />
         </controls:DropShadowPanel>
 
         <!--Content-->

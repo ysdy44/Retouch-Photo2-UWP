@@ -55,15 +55,18 @@
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE19A;" FontSize="18" FontWeight="Bold" />
                     </Button>
 
-                    <Button x:Name="FontWeightButton" Grid.Column="3" Style="{StaticResource AppRoundedButtonStyle}">
-                        <ToolTipService.ToolTip>
-                            <ToolTip x:Name="FontWeightToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-                        </ToolTipService.ToolTip>
-                        <FontIcon Margin="4,0" Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
-                    </Button>
-
                 </Grid>
 
+                
+                <!--FontWeight-->
+                <TextBlock x:Name="FontWeightTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <Button x:Name="FontWeightButton" Style="{StaticResource AppIconRoundedButtonStyle}"
+                        Content="{x:Bind FontWeightControl.Title, Mode=OneWay}">
+                    <Button.Tag>
+                        <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                    </Button.Tag>
+                </Button>
+                
                 
                 <!--FontFamily-->
                 <TextBlock x:Name="FontFamilyTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
@@ -123,7 +126,7 @@
 
                 <!--FontWeight-->
                 <ScrollViewer x:Name="FontWeightScrollViewer" Visibility="Collapsed">
-                    <characters:FontWeightComboBox x:Name="FontWeightControl" FontWeight2="{x:Bind SelectionViewModel.FontWeight, Mode=OneWay}"/>
+                    <characters:FontWeightComboBox x:Name="FontWeightControl" Weight="{x:Bind SelectionViewModel.FontWeight, Mode=OneWay}"/>
                 </ScrollViewer>
 
             </Grid>

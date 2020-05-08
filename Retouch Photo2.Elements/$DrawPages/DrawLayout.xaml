@@ -142,6 +142,7 @@
                         <Setter Target = "HeadGrid.(Grid.Column)" Value="0"/>
                         <Setter Target = "HeadGrid.(Grid.ColumnSpan)" Value="2"/>
 
+                        <!--@Acrylic-->
                         <!--Left-->
                         <Setter Target = "LeftBorder.(Grid.Column)" Value="0"/>
                         <Setter Target = "LeftBorder.(Grid.Row)" Value="1"/>
@@ -150,6 +151,7 @@
                              apiContractNotPresent5:Value="{ThemeResource AppForeground}"
                              apiContractPresent5:Value="{ThemeResource SystemControlAcrylicWindowBrush}"
                         />
+                        <!--@Acrylic-->
                         <!--Right-->
                         <Setter Target = "RightBorder.(Grid.Column)" Value="2"/>
                         <Setter Target = "RightBorder.Background"

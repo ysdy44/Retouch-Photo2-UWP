@@ -34,7 +34,7 @@ namespace Retouch_Photo2.Menus
         {
             get
             {
-                if (this._vsMenuState == MenuState.FlyoutShow) return this.Flyout;
+                if (this._vsMenuState == MenuState.FlyoutShow) return this.FlyoutShow;
 
                 if (this._vsMenuState == MenuState.Hide)
                 {

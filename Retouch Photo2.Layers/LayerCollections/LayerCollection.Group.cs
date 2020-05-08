@@ -37,7 +37,7 @@ namespace Retouch_Photo2.Layers
         {
             //Layers
             ILayer parents = this._findOutermostSelectedLayerParents();
-            IList<ILayer> parentsChildren  = this.GetParentsChildren(parents);
+            IList<ILayer> parentsChildren = (parents == null) ? this.RootLayers : parents.Children;
 
             //Insert
             ILayer insertIayer = parentsChildren .FirstOrDefault(e => e.SelectMode == SelectMode.Selected);
@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Layers
             int insertIndex = parentsChildren .IndexOf(insertIayer);
 
             //GroupLayer
-            ILayer groupLayer = this._createGroupLayer(insertIayer);
+            GroupLayer groupLayer = this._createGroupLayer(insertIayer);
             groupLayer.Parents = parents;
 
             //Temp
@@ -68,11 +68,11 @@ namespace Retouch_Photo2.Layers
             }
         }
 
-        private ILayer _createGroupLayer(ILayer insertIayer)
+        private GroupLayer _createGroupLayer(ILayer insertIayer)
         {
             ILayer insertParents = insertIayer.Parents;
 
-            ILayer groupLayer = new GroupLayer
+            GroupLayer groupLayer = new GroupLayer
             {
                 Parents = insertParents,
             };  

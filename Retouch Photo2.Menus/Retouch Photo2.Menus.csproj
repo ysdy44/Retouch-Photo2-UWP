@@ -106,12 +106,6 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Icons\CharacterIcon.xaml.cs">
-      <DependentUpon>CharacterIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\KeyboardIcon.xaml.cs">
-      <DependentUpon>KeyboardIcon.xaml</DependentUpon>
-    </Compile>
     <Compile Include="IMenu.cs" />
     <Compile Include="MenuButtons\MenuExpander.xaml.cs">
       <DependentUpon>MenuExpander.xaml</DependentUpon>
@@ -135,14 +129,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Icons\CharacterIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Icons\KeyboardIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MenuButtons\MenuExpander.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

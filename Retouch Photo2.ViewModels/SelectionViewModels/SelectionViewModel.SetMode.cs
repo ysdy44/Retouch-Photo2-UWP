@@ -60,7 +60,9 @@ namespace Retouch_Photo2.ViewModels
         private void _setModeNone()
         {
             this.SelectionMode = ListViewSelectionMode.None;
-
+            this.SelectionUnNone = false;
+            this.SelectionSingle = false;
+            
             this.Transformer = new Transformer();
             this.DisabledRadian = false;
 
@@ -84,7 +86,7 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
-            this.SetGroupLayer(null);
+            this.SetGroupLayer();
             this.SetImageLayer(null);
             this.SetCurveLayer(null);
             this.SetFontLayer(null);
@@ -115,6 +117,8 @@ namespace Retouch_Photo2.ViewModels
         private void _setModeSingle(ILayer layer)
         {
             this.SelectionMode = ListViewSelectionMode.Single;
+            this.SelectionUnNone = true;
+            this.SelectionSingle = true;
 
             this.Transformer = layer.GetActualDestinationWithRefactoringTransformer;
             this.DisabledRadian = false;
@@ -168,6 +172,8 @@ namespace Retouch_Photo2.ViewModels
         private void _setModeMultiple(IList<ILayer> layers)
         {
             this.SelectionMode = ListViewSelectionMode.Multiple;//Transformer     
+            this.SelectionUnNone = true;
+            this.SelectionSingle = false;
 
             this.Layer = null;
             this.Layers = layers;
@@ -194,7 +200,7 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
-            this.SetGroupLayer(null);
+            this.SetGroupLayer(layers);
             this.SetImageLayer(firstLayer);
             this.SetCurveLayer(null);
             this.SetFontLayer(null);

@@ -33,7 +33,6 @@ namespace Retouch_Photo2.Menus.Models
         public FrameworkElement Button => this._button;
         private MenuButton _button = new MenuButton
         {
-            CenterContent = new Retouch_Photo2.Menus.Icons.KeyboardIcon()
         };
 
         public MenuState State

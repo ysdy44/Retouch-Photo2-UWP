@@ -71,9 +71,9 @@ namespace Retouch_Photo2.Menus.Models
 
             this.ConstructAlign();
             this.ConstructFontStyle();
+            this.ConstructFontWeight();
             this.ConstructFontFamily();
             this.ConstructFontSize();
-            this.ConstructFontWeight();
         }
     }
 
@@ -96,12 +96,12 @@ namespace Retouch_Photo2.Menus.Models
             this.BoldToolTip.Content = resource.GetString("/Characters/FontStyle_Bold");
             this.ItalicToolTip.Content = resource.GetString("/Characters/FontStyle_Italic");
             this.UnderLineToolTip.Content = resource.GetString("/Characters/FontStyle_UnderLine");
+
+            this.FontWeightTextBlock.Text = resource.GetString("/Characters/FontWeight");
             
             this.FontFamilyTextBlock.Text = resource.GetString("/Characters/FontFamily");
 
             this.FontSizeTextBlock.Text = resource.GetString("/Characters/FontSize");
-
-            this.FontWeightToolTip.Content = resource.GetString("/Characters/FontWeight");
         }
 
         //ToolTip
@@ -138,7 +138,7 @@ namespace Retouch_Photo2.Menus.Models
         public FrameworkElement Button => this._button;
         private MenuButton _button = new MenuButton
         {
-            CenterContent = new Retouch_Photo2.Menus.Icons.CharacterIcon()
+            CenterContent = new Retouch_Photo2.Characters.Icon()
         };
 
         public MenuState State
@@ -248,6 +248,34 @@ namespace Retouch_Photo2.Menus.Models
         }
 
 
+        //FontWeight
+        private void ConstructFontWeight()
+        {
+            this.FontWeightButton.Tapped += (s, e) =>
+            {
+                this.CharacterState = CharacterState.FontWeight;
+                this._Expander.IsSecondPage = true;
+            };
+
+            this.FontWeightControl.WeightChanged += (s, fontWeight) =>
+            {
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    if (layer.Type == LayerType.TextArtistic || layer.Type == LayerType.TextFrame)
+                    {
+                        ITextLayer textLayer = (ITextLayer)layer;
+                        textLayer.FontWeight = fontWeight;
+                    }
+                });
+                this.SelectionViewModel.FontWeight = fontWeight;
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+
+        }
+
+
         //FontFamily
         private void ConstructFontFamily()
         {
@@ -324,33 +352,6 @@ namespace Retouch_Photo2.Menus.Models
 
             this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();//Refactoring
             this.ViewModel.Invalidate();//Invalidate
-        }
-
-        //FontWeight
-        private void ConstructFontWeight()
-        {
-            this.FontWeightButton.Tapped += (s, e) =>
-            {
-                this.CharacterState = CharacterState.FontWeight;
-                this._Expander.IsSecondPage = true;
-            };
-
-            this.FontWeightControl.FontWeightChanged += (s, fontWeight) =>
-            {
-                //Selection
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    if (layer.Type == LayerType.TextArtistic || layer.Type == LayerType.TextFrame)
-                    {
-                        ITextLayer textLayer = (ITextLayer)layer;
-                        textLayer.FontWeight = fontWeight;
-                    }
-                });
-                this.SelectionViewModel.FontWeight = fontWeight;
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-
         }
 
     }

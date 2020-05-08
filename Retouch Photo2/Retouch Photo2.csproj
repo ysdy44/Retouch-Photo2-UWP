@@ -307,6 +307,8 @@
     <Content Include="FileUtils\Filter.xml" />
     <Content Include="FileUtils\FilterOriginal.xml" />
     <None Include="Retouch Photo_TemporaryKey.pfx" />
+    <PRIResource Include="Strings\en-US\Selections.resw" />
+    <PRIResource Include="Strings\zh-CN\Selections.resw" />
     <PRIResource Include="Strings\zh-CN\Elements.resw" />
     <PRIResource Include="Strings\en-US\Elements.resw" />
     <PRIResource Include="Strings\en-US\Characters.resw" />

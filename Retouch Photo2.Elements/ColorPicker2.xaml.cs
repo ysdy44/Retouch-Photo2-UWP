@@ -1,5 +1,6 @@
 ﻿using HSVColorPickers;
 using Retouch_Photo2.Elements.ColorPicker2Icons;
+using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
 using Windows.UI;
@@ -29,13 +30,6 @@ namespace Retouch_Photo2.Elements
         Circle,
     }
 
-    internal class ColorPicker2Item
-    {
-        public ColorPicker2Mode Mode;
-        public Button Button;
-        public IColorPicker ColorPicker;
-    };
-
     /// <summary>
     /// Color picker (ง •̀_•́)ง
     /// </summary>
@@ -48,7 +42,9 @@ namespace Retouch_Photo2.Elements
         public event AlphaChangeHandler AlphaChange;
 
 
-        private IList<ColorPicker2Item> Items = new List<ColorPicker2Item>();
+        //@Group
+        private EventHandler<ColorPicker2Mode> Group;
+        private EventHandler<Color> ChangeColor;
 
 
         #region DependencyProperty
@@ -67,7 +63,7 @@ namespace Retouch_Photo2.Elements
 
             if (e.NewValue is ColorPicker2Mode value)
             {
-                con.ColorPickerGroupType(value);
+                con.Group?.Invoke(con, value);
             }
         }));
 
@@ -90,7 +86,7 @@ namespace Retouch_Photo2.Elements
                     this.Alpha = value.A;
                 }
 
-                this.SetCurrentColorPickerColor(this.Mode, Color.FromArgb(255, value.R, value.G, value.B));
+                this.ChangeColor?.Invoke(this, Color.FromArgb(255, value.R, value.G, value.B));
 
                 this.R = value.R;
                 this.G = value.G;
@@ -155,7 +151,6 @@ namespace Retouch_Photo2.Elements
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.Loaded += (s, e) => this.ColorPickerGroupType(this.Mode);
             this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this.Button);
 
             //Alpha
@@ -168,7 +163,7 @@ namespace Retouch_Photo2.Elements
             {
                 this._Color = color;
 
-                this.SetCurrentColorPickerColor(this.Mode, color);
+                this.ChangeColor?.Invoke(this, color);
 
                 this.StrawPicker.Color = color;
             };
@@ -178,51 +173,10 @@ namespace Retouch_Photo2.Elements
             {
                 this._Color = color;
 
-                this.SetCurrentColorPickerColor(this.Mode, color);
+                this.ChangeColor?.Invoke(this, color);
 
                 this.HexPicker.Color = color;
             };
-        }
-
-        
-        //Items
-        private void ColorPickerGroupType(ColorPicker2Mode value)
-        {
-            foreach (ColorPicker2Item item in this.Items)
-            {
-                Button button = item.Button;
-                IColorPicker colorPicker = item.ColorPicker;
-
-                bool isSelected = (item.Mode == value);
-
-                if (isSelected)
-                {
-                    this.Button.Content = button.Content;
-                    button.IsEnabled = false;
-                    colorPicker.Self.Visibility = Visibility.Visible;
-                    colorPicker.Color = this.Color;
-                }
-                else
-                {
-                    button.IsEnabled = true;
-                    colorPicker.Self.Visibility = Visibility.Collapsed;
-                }
-            }
-        }
-
-        private void SetCurrentColorPickerColor(ColorPicker2Mode value, Color color)
-        {
-            foreach (ColorPicker2Item item in this.Items)
-            {
-                IColorPicker colorPicker = item.ColorPicker;
-
-                bool isSelected = (item.Mode == value);
-
-                if (isSelected)
-                {
-                    colorPicker.Color = this.Color;
-                }
-            }
         }
 
     }
@@ -238,37 +192,60 @@ namespace Retouch_Photo2.Elements
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             //Swatches
-            this.ConstructButton(this.SwatchesButton, this.SwatchesPicker, resource.GetString("/ToolElements/Color_Swatches"), new SwatchesIcon(), ColorPicker2Mode.Swatches);
+            this.ConstructGroup(this.SwatchesButton, this.SwatchesPicker, resource.GetString("/ToolElements/Color_Swatches"), new SwatchesIcon(), ColorPicker2Mode.Swatches);
 
             //Wheel
-            this.ConstructButton(this.WheelButton, this.WheelPicker, resource.GetString("/ToolElements/Color_Wheel"), new WheelIcon(), ColorPicker2Mode.Wheel);
+            this.ConstructGroup(this.WheelButton, this.WheelPicker, resource.GetString("/ToolElements/Color_Wheel"), new WheelIcon(), ColorPicker2Mode.Wheel);
 
             //RGB          
-            this.ConstructButton(this.RGBButton, this.RGBPicker, resource.GetString("/ToolElements/Color_RGB"), new RGBIcon(), ColorPicker2Mode.RGB);
+            this.ConstructGroup(this.RGBButton, this.RGBPicker, resource.GetString("/ToolElements/Color_RGB"), new RGBIcon(), ColorPicker2Mode.RGB);
             //HSV
-            this.ConstructButton(this.HSVButton, this.HSVPicker, resource.GetString("/ToolElements/Color_HSV"), new HSVIcon(), ColorPicker2Mode.HSV);
+            this.ConstructGroup(this.HSVButton, this.HSVPicker, resource.GetString("/ToolElements/Color_HSV"), new HSVIcon(), ColorPicker2Mode.HSV);
 
             //PaletteHue
-            this.ConstructButton(this.PaletteHueButton, this.PaletteHuePicker, resource.GetString("/ToolElements/Color_PaletteHue"), new PaletteHueIcon(), ColorPicker2Mode.PaletteHue);
+            this.ConstructGroup(this.PaletteHueButton, this.PaletteHuePicker, resource.GetString("/ToolElements/Color_PaletteHue"), new PaletteHueIcon(), ColorPicker2Mode.PaletteHue);
             //PaletteSaturation
-            this.ConstructButton(this.PaletteSaturationButton, this.PaletteSaturationPicker, resource.GetString("/ToolElements/Color_PaletteSaturation"), new PaletteSaturationIcon(), ColorPicker2Mode.PaletteSaturation);
+            this.ConstructGroup(this.PaletteSaturationButton, this.PaletteSaturationPicker, resource.GetString("/ToolElements/Color_PaletteSaturation"), new PaletteSaturationIcon(), ColorPicker2Mode.PaletteSaturation);
             //PaletteValue
-            this.ConstructButton(this.PaletteValueButton, this.PaletteValuePicker, resource.GetString("/ToolElements/Color_PaletteValue"), new PaletteValueIcon(), ColorPicker2Mode.PaletteValue);
+            this.ConstructGroup(this.PaletteValueButton, this.PaletteValuePicker, resource.GetString("/ToolElements/Color_PaletteValue"), new PaletteValueIcon(), ColorPicker2Mode.PaletteValue);
 
             //Circle
-            this.ConstructButton(this.CircleButton, this.CirclePicker, resource.GetString("/ToolElements/Color_Circle"), new CircleIcon(), ColorPicker2Mode.Circle);
+            this.ConstructGroup(this.CircleButton, this.CirclePicker, resource.GetString("/ToolElements/Color_Circle"), new CircleIcon(), ColorPicker2Mode.Circle);
         }
 
-        private void ConstructButton(Button button, IColorPicker colorPicker, string text, UserControl icon, ColorPicker2Mode mode)
-        {          
+        //Group
+        private void ConstructGroup(Button button, IColorPicker colorPicker, string text, UserControl icon, ColorPicker2Mode mode)
+        {
+            void group(ColorPicker2Mode groupMode)
+            {
+                if (groupMode == mode)
+                {
+                    button.IsEnabled = false;
+                    colorPicker.Self.Opacity = 1.0;
+                    colorPicker.Self.IsHitTestVisible = true;
+
+                    colorPicker.Color = this.Color;
+                    this.Button.Content = text;
+                }
+                else
+                {
+                    button.IsEnabled = true;
+                    colorPicker.Self.Opacity = 0.0;
+                    colorPicker.Self.IsHitTestVisible = false;
+                }
+            }
+            
+            //NoneButton
+            group(this.Mode);
+
+            //Buttons
             button.Content = text;
             button.Tag = icon;
             button.Tapped += (s, e) =>
             {
-                this.Mode = mode;
+                this.Group?.Invoke(this, mode);//Delegate
                 this.Flyout.Hide();
             };
-
             colorPicker.ColorChange += (s, value) =>
             {
                 this._Color = value;
@@ -277,12 +254,15 @@ namespace Retouch_Photo2.Elements
                 this.StrawPicker.Color = value;
             };
 
-            this.Items.Add(new ColorPicker2Item
+            //Change
+            this.Group += (s, e) => group(e);
+            this.ChangeColor += (s, color) =>
             {
-                Mode = mode,
-                Button = button,
-                ColorPicker = colorPicker,
-            });
+                if (this.Mode == mode)
+                {
+                    colorPicker.Color = color;
+                }
+            };
         }
 
     }

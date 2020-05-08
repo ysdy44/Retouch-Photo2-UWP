@@ -30,91 +30,6 @@ namespace Retouch_Photo2.Menus.Models
         #region DependencyProperty
 
 
-        /// <summary> Gets or sets <see cref = "OperateMenu" />'s Mode. </summary>
-        public ListViewSelectionMode Mode
-        {
-            get { return (ListViewSelectionMode)GetValue(ModeProperty); }
-            set { SetValue(ModeProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "OperateMenu.Mode" /> dependency property. </summary>
-        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(ListViewSelectionMode), typeof(OperateMenu), new PropertyMetadata(ListViewSelectionMode.None, (sender, e) =>
-        {
-            OperateMenu con = (OperateMenu)sender;
-
-                if (e.NewValue is ListViewSelectionMode value)
-                {
-                    switch (value)
-                    {
-                    case ListViewSelectionMode.None:
-                        {
-                            con.TransformIsEnabled = false;//Transform                                                           
-                            con.ArrangeIsEnabled = false;//Arrange                            
-                            con.HorizontallyIsEnabled = false;//Horizontally                            
-                            con.VerticallyIsEnabled = false;//Vertically
-                        }
-                        break;
-                    case ListViewSelectionMode.Single:
-                        {
-                            con.TransformIsEnabled = true;//Transform                                                           
-                            con.ArrangeIsEnabled = true;//Arrange                            
-                            con.HorizontallyIsEnabled = true;//Horizontally                            
-                            con.VerticallyIsEnabled = true;//Vertically
-                        }
-                        break;
-                    case ListViewSelectionMode.Multiple:
-                        {
-                            con.TransformIsEnabled = true;//Transform                                                           
-                            con.ArrangeIsEnabled = false;//Arrange                            
-                            con.HorizontallyIsEnabled = true;//Horizontally                            
-                            con.VerticallyIsEnabled = true;//Vertically
-                        }
-                        break;
-                }
-            }
-
-        }));
-
-
-        /// <summary> Gets or sets <see cref = "OperateMenu" />'s TransformIsEnabled. </summary>
-        public bool TransformIsEnabled
-        {
-            get { return (bool)GetValue(TransformIsEnabledProperty); }
-            set { SetValue(TransformIsEnabledProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "OperateMenu.TransformIsEnabled" /> dependency property. </summary>
-        public static readonly DependencyProperty TransformIsEnabledProperty = DependencyProperty.Register(nameof(TransformIsEnabled), typeof(bool), typeof(OperateMenu), new PropertyMetadata(false));
-
-
-        /// <summary> Gets or sets <see cref = "OperateMenu" />'s ArrangeIsEnabled. </summary>
-        public bool ArrangeIsEnabled
-        {
-            get { return (bool)GetValue(ArrangeIsEnabledProperty); }
-            set { SetValue(ArrangeIsEnabledProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "OperateMenu.ArrangeIsEnabled" /> dependency property. </summary>
-        public static readonly DependencyProperty ArrangeIsEnabledProperty = DependencyProperty.Register(nameof(ArrangeIsEnabled), typeof(bool), typeof(OperateMenu), new PropertyMetadata(false));
-
-
-        /// <summary> Gets or sets <see cref = "OperateMenu" />'s HorizontallyIsEnabled. </summary>
-        public bool HorizontallyIsEnabled
-        {
-            get { return (bool)GetValue(HorizontallyIsEnabledProperty); }
-            set { SetValue(HorizontallyIsEnabledProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "OperateMenu.HorizontallyIsEnabled" /> dependency property. </summary>
-        public static readonly DependencyProperty HorizontallyIsEnabledProperty = DependencyProperty.Register(nameof(HorizontallyIsEnabled), typeof(bool), typeof(OperateMenu), new PropertyMetadata(false));
-
-        
-        /// <summary> Gets or sets <see cref = "OperateMenu" />'s VerticallyIsEnabled. </summary>
-        public bool VerticallyIsEnabled
-        {
-            get { return (bool)GetValue(VerticallyIsEnabledProperty); }
-            set { SetValue(VerticallyIsEnabledProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "OperateMenu.VerticallyIsEnabled" /> dependency property. </summary>
-        public static readonly DependencyProperty VerticallyIsEnabledProperty = DependencyProperty.Register(nameof(VerticallyIsEnabled), typeof(bool), typeof(OperateMenu), new PropertyMetadata(false));
-
-
         /// <summary> Gets or sets <see cref = "OperateMenu" />'s IsOpen. </summary>
         public bool IsOpen
         {
@@ -132,12 +47,6 @@ namespace Retouch_Photo2.Menus.Models
         public OperateMenu()
         {
             this.InitializeComponent();
-            this.ConstructDataContext
-            (
-                 dataContext: this.SelectionViewModel,
-                 path: nameof(this.SelectionViewModel.SelectionMode),
-                 dp: OperateMenu.ModeProperty
-            );
             this.ConstructStrings();
             this.ConstructToolTip();
             this.ConstructMenu();

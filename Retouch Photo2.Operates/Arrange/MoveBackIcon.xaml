@@ -22,7 +22,7 @@
                 <!--Disabled-->
                 <VisualState x:Name="Disabled">
                     <VisualState.Setters>
-                        <Setter Target = "Canvas.Opacity" Value="0.5"/>
+                        <Setter Target = "Grid.Opacity" Value="0.5"/>
                         <Setter Target = "YellowPolygon.Fill" Value="Gray"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -31,11 +31,26 @@
         </VisualStateManager.VisualStateGroups>
 
 
-        <Canvas x:Name="Canvas" Width="40" Height="40" >
-            <Rectangle Canvas.Left="24" Canvas.Top="4" Width="12" Height="12" Fill="Gray" />
-            <Polygon x:Name="YellowPolygon" Points="18,22 10,22 10,10 23,10 23,17 30,17 30,30 18,30" Fill="#E2A747" />
-            <Rectangle Canvas.Left="5" Canvas.Top="23" Width="12" Height="12" Fill="Gray" />
-        </Canvas>
+        <Grid x:Name="Grid" Width="40" Height="40" >
+
+            <Polygon Fill="Gray">
+                <Polygon.Points>
+                    24,4 36,4 36,16 24,16 
+                </Polygon.Points>
+            </Polygon>
+
+            <Polygon x:Name="YellowPolygon" Fill="#E2A747">
+                <Polygon.Points>
+                    18,22 10,22 10,10 23,10 23,17 30,17 30,30 18,30</Polygon.Points>
+            </Polygon>
+            
+            <Polygon Fill="Gray">
+                <Polygon.Points>
+                    5,23 17,23 17,35 5,35
+                </Polygon.Points>
+            </Polygon>
+            
+        </Grid>
 
     </Viewbox>
 

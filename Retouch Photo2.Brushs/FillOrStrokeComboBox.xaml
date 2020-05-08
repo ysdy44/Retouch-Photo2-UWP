@@ -21,33 +21,6 @@
 
 
     <Button x:Name="Button" Style="{StaticResource AppIconRoundedButtonStyle}">
-
-        <!--VisualState-->
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup">
-
-                <!--Normal-->
-                <VisualState x:Name="Normal"/>
-
-                <!--Fill-->
-                <VisualState x:Name="Fill">
-                    <VisualState.Setters>
-                        <Setter Target = "FillButton.IsEnabled" Value="False"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind FillButton.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Stroke-->
-                <VisualState x:Name="Stroke">
-                    <VisualState.Setters>
-                        <Setter Target = "StrokeButton.IsEnabled" Value="False"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind StrokeButton.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-        
         <Button.Tag>
             <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
         </Button.Tag>        

@@ -176,7 +176,7 @@
                                 <ToolTip x:Name="FullScreenToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
                             <elements:ExpandAppbarButton.CenterContent>
-                                <FontIcon Glyph="&#xE1D9;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                <FontIcon Glyph="&#xE92D;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </elements:ExpandAppbarButton.CenterContent>
                         </elements:ExpandAppbarButton>
 
@@ -201,9 +201,9 @@
 
         <!--FullScreen-->
         <Button x:Name="UnFullScreenButton" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AppCircleButtonStyle}">
-            <FontIcon Glyph="&#xE1D8;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            <FontIcon Glyph="&#xE92C;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
         </Button>
-
+        
         <!--Tip-->
         <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" HorizontalAlignment="Center" 
                         Visibility="{x:Bind ViewModel.TextVisibility, Mode=OneWay}">
