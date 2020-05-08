@@ -14,6 +14,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+// https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
+
 namespace Retouch_Photo2.TestApp
 {
     /// <summary>
@@ -25,25 +27,6 @@ namespace Retouch_Photo2.TestApp
         {
             this.InitializeComponent();
             this.ContentControl.Content = new BackOneIcon();
-
-
-            //   1.
-            //     ToolTipService.SetToolTip(this.Button, "OOOOOO");
-
-
-            //   2.
-            ToolTip ToolTip = new ToolTip()
-            {
-                Content = "OOOOOO",
-                Placement = PlacementMode.Right,
-                Style = this.pToolTipStyle
-            };
-
-            ToolTipService.SetToolTip(this.Button, ToolTip);
-
-
-
-
         }
 
         private void AAA_Tapped(object sender, TappedRoutedEventArgs e)
@@ -54,7 +37,5 @@ namespace Retouch_Photo2.TestApp
         {
             this.ContentControl.IsEnabled = false;
         }
-
-
     }
 }

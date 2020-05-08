@@ -98,9 +98,6 @@
     <Compile Include="BackOneIcon.xaml.cs">
       <DependentUpon>BackOneIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InvertIcon.xaml.cs">
-      <DependentUpon>InvertIcon.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -128,10 +125,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="BackOneIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="InvertIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
