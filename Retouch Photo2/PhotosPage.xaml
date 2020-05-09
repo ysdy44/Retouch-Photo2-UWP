@@ -109,7 +109,7 @@
         </ScrollViewer>
 
         <!--Foot-->
-        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Row="2" Visibility="Collapsed" ShadowColor="{ThemeResource AppStrokeColor}" Background="{ThemeResource AppForeground}">
+        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Row="2" Visibility="Collapsed" Background="{ThemeResource AppForeground}">
 
             <elements:RadiusAnimaPanel.CenterContent>
                 <Grid Height="40" Margin="4,0">

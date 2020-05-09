@@ -198,7 +198,7 @@
         <!--Menu-->
         <Canvas x:Name="OverlayCanvas" IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}"/>
 
-
+        
         <!--FullScreen-->
         <Button x:Name="UnFullScreenButton" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AppCircleButtonStyle}">
             <FontIcon Glyph="&#xE92C;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>

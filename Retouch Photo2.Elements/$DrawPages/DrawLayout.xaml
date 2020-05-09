@@ -149,14 +149,14 @@
                         <Setter Target = "LeftBorder.(Grid.RowSpan)" Value="1"/>
                         <Setter Target = "LeftBorder.Background"
                              apiContractNotPresent5:Value="{ThemeResource AppForeground}"
-                             apiContractPresent5:Value="{ThemeResource SystemControlAcrylicWindowBrush}"
+                             apiContractPresent5:Value="{ThemeResource AppAcrylicWindowBrush}"
                         />
                         <!--@Acrylic-->
                         <!--Right-->
                         <Setter Target = "RightBorder.(Grid.Column)" Value="2"/>
                         <Setter Target = "RightBorder.Background"
                              apiContractNotPresent5:Value="{ThemeResource AppForeground}"
-                             apiContractPresent5:Value="{ThemeResource SystemControlAcrylicWindowBrush}"
+                             apiContractPresent5:Value="{ThemeResource AppAcrylicWindowBrush}"
                         />
 
                     </VisualState.Setters>
@@ -194,10 +194,10 @@
                 <ColumnDefinition Width="70"/>
             </Grid.ColumnDefinitions>
 
-            <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Column="1" ShadowColor="{ThemeResource AppStrokeColor}"/>
-            <elements:RadiusAnimaIcon x:Name="LeftRadiusAnimaIcon" Grid.Column="0" ShadowColor="{ThemeResource AppStrokeColor}"/>
-            <elements:RadiusAnimaIcon x:Name="RightRadiusAnimaIcon" Grid.Column="2" ShadowColor="{ThemeResource AppStrokeColor}"/>
-            
+            <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Column="1"/>
+            <elements:RadiusAnimaIcon x:Name="LeftRadiusAnimaIcon" Grid.Column="0"/>
+            <elements:RadiusAnimaIcon x:Name="RightRadiusAnimaIcon" Grid.Column="2"/>
+
             <!--
             <Border Grid.Column="0" BorderThickness="1" BorderBrush="Yellow"/>
             <Border Grid.Column="1" BorderThickness="1" BorderBrush="Yellow"/>

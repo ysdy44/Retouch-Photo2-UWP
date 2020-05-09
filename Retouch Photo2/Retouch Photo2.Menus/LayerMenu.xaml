@@ -1,0 +1,84 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Menus.Models.LayerMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:blends="using:Retouch_Photo2.Blends"
+    xmlns:elements="using:Retouch_Photo2.Elements"
+    mc:Ignorable="d"
+    d:DesignWidth="200"
+    d:DesignHeight="400"
+    >
+
+
+    <elements:Expander x:Name="_Expander">
+
+        
+        <elements:Expander.MainPage>
+            <StackPanel MinHeight="165" Padding="1,2">
+
+                <!--Opacity-->
+                <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <Slider x:Name="OpacitySlider" Margin="2,0" TickFrequency="25" TickPlacement="Inline" Style="{StaticResource AppOpacitySliderStyle}" 
+                           IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
+                           Value="{x:Bind OpacityToValueConverter(SelectionViewModel.Opacity),Mode=OneWay}"/>
+
+
+                <!--Blend Mode-->
+                <TextBlock x:Name="BlendModeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <Button x:Name="BlendModeButton" Style="{StaticResource AppIconRoundedButtonStyle}"
+                        IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
+                        Content="{x:Bind BlendModeComboBox.Title, Mode=OneWay}">
+                    <Button.Tag>
+                        <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                    </Button.Tag>
+                </Button>
+                
+                <ContentControl Height="4"/>
+
+
+                <!--Layers-->
+                <RelativePanel Padding="2,0">
+                    <TextBlock x:Name="LayersTextBlock" Style="{StaticResource AppTextBlockStyle}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
+                    <!--Visibility-->
+                    <ToggleButton x:Name="VisibilityButton" Style="{StaticResource AppCircleToggleButtonStyle}" RelativePanel.AlignRightWithPanel="True"
+                               IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
+                               IsChecked="{x:Bind VisibilityToBoolConverter(SelectionViewModel.Visibility),Mode=OneWay}" >
+                        <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}" />
+                    </ToggleButton>
+                </RelativePanel>
+
+                <Grid Padding="2,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="4"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="RemoveButton" Grid.Column="0" Grid.Row="0" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" />
+                    <Button x:Name="DuplicateButton" Grid.Column="2" Grid.Row="0" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" />
+
+                </Grid>
+
+
+                <!--Tag Type-->
+                <TextBlock x:Name="TagTypeTextBlock" Grid.Column="0" Grid.Row="0" Style="{StaticResource AppTextBlockStyle}"/>
+                <blends:TagTypeControl x:Name="TagTypeControl" Type="{x:Bind SelectionViewModel.TagType,Mode=OneWay}" />
+
+            </StackPanel>
+        </elements:Expander.MainPage>
+
+
+        <elements:Expander.SecondPage>
+            <ScrollViewer MaxHeight="300">
+                <blends:BlendModeComboBox x:Name="BlendModeComboBox" Mode="{x:Bind SelectionViewModel.BlendMode, Mode=OneWay}"/>
+            </ScrollViewer>
+        </elements:Expander.SecondPage>
+
+
+    </elements:Expander>
+
+</UserControl>

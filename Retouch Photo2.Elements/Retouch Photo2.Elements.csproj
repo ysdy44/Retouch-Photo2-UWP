@@ -111,44 +111,58 @@
     </Compile>
     <Compile Include="%24MainPages\SelectMode.cs" />
     <Compile Include="ApplicationLocalTextFileProvider.cs" />
-    <Compile Include="ColorPicker2.xaml.cs">
+    <Compile Include="Expanders\IExpander.cs" />
+    <Compile Include="Expanders\IExpanderButton.cs" />
+    <Compile Include="Pickers\CirclePicker.xaml.cs">
+      <DependentUpon>CirclePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pickers\ColorPicker2.xaml.cs">
       <DependentUpon>ColorPicker2.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ColorPicker2Icons\CircleIcon.xaml.cs">
-      <DependentUpon>CircleIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ColorPicker2Icons\HSVIcon.xaml.cs">
-      <DependentUpon>HSVIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ColorPicker2Icons\PaletteHueIcon.xaml.cs">
-      <DependentUpon>PaletteHueIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ColorPicker2Icons\PaletteSaturationIcon.xaml.cs">
-      <DependentUpon>PaletteSaturationIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ColorPicker2Icons\PaletteValueIcon.xaml.cs">
-      <DependentUpon>PaletteValueIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ColorPicker2Icons\RGBIcon.xaml.cs">
-      <DependentUpon>RGBIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ColorPicker2Icons\SwatchesIcon.xaml.cs">
-      <DependentUpon>SwatchesIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ColorPicker2Icons\WheelIcon.xaml.cs">
-      <DependentUpon>WheelIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="CompositeModeSegmented.xaml.cs">
       <DependentUpon>CompositeModeSegmented.xaml</DependentUpon>
     </Compile>
     <Compile Include="ApplicationViewTitleBarBackgroundExtension.cs" />
+    <Compile Include="Expanders\Expander.xaml.cs">
+      <DependentUpon>Expander.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Expanders\ExpanderState.cs" />
+    <Compile Include="Expanders\ExpanderWidth.cs" />
     <Compile Include="FileFormatComboBox.xaml.cs">
       <DependentUpon>FileFormatComboBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RadiusAnimaIcon.xaml.cs">
+    <Compile Include="Pickers\ColorPicker2Icons\CircleIcon.xaml.cs">
+      <DependentUpon>CircleIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pickers\ColorPicker2Icons\HSVIcon.xaml.cs">
+      <DependentUpon>HSVIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pickers\ColorPicker2Icons\PaletteHueIcon.xaml.cs">
+      <DependentUpon>PaletteHueIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pickers\ColorPicker2Icons\PaletteSaturationIcon.xaml.cs">
+      <DependentUpon>PaletteSaturationIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pickers\ColorPicker2Icons\PaletteValueIcon.xaml.cs">
+      <DependentUpon>PaletteValueIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pickers\ColorPicker2Icons\RGBIcon.xaml.cs">
+      <DependentUpon>RGBIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pickers\ColorPicker2Icons\SwatchesIcon.xaml.cs">
+      <DependentUpon>SwatchesIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pickers\ColorPicker2Icons\WheelIcon.xaml.cs">
+      <DependentUpon>WheelIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pickers\ColorPicker2Mode.cs" />
+    <Compile Include="Pickers\WheelPicker.xaml.cs">
+      <DependentUpon>WheelPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RadiusAnimas\RadiusAnimaIcon.xaml.cs">
       <DependentUpon>RadiusAnimaIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SizePicker.xaml.cs">
+    <Compile Include="Pickers\SizePicker.xaml.cs">
       <DependentUpon>SizePicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="DialogBase.xaml.cs">
@@ -179,10 +193,10 @@
       <DependentUpon>MainLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RadiansPicker.xaml.cs">
+    <Compile Include="Pickers\RadiansPicker.xaml.cs">
       <DependentUpon>RadiansPicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RadiusAnimaPanel.xaml.cs">
+    <Compile Include="RadiusAnimas\RadiusAnimaPanel.xaml.cs">
       <DependentUpon>RadiusAnimaPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="DeviceLayoutType.cs" />
@@ -204,6 +218,7 @@
     <Compile Include="%24SettingPages\PhoneLayout.xaml.cs">
       <DependentUpon>PhoneLayout.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VisualUIElementHelper.cs" />
     <Compile Include="XMLs\XML.Photo.cs" />
     <Compile Include="XMLs\XML.Photocopier.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo.Elements.rd.xml" />
@@ -233,39 +248,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ColorPicker2.xaml">
+    <Page Include="Pickers\CirclePicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ColorPicker2Icons\CircleIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ColorPicker2Icons\HSVIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ColorPicker2Icons\PaletteHueIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ColorPicker2Icons\PaletteSaturationIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ColorPicker2Icons\PaletteValueIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ColorPicker2Icons\RGBIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ColorPicker2Icons\SwatchesIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ColorPicker2Icons\WheelIcon.xaml">
+    <Page Include="Pickers\ColorPicker2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -273,15 +260,55 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Expanders\Expander.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FileFormatComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RadiusAnimaIcon.xaml">
+    <Page Include="Pickers\ColorPicker2Icons\CircleIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\ColorPicker2Icons\HSVIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\ColorPicker2Icons\PaletteHueIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\ColorPicker2Icons\PaletteSaturationIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\ColorPicker2Icons\PaletteValueIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\ColorPicker2Icons\RGBIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\ColorPicker2Icons\SwatchesIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\ColorPicker2Icons\WheelIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\WheelPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SizePicker.xaml">
+    <Page Include="RadiusAnimas\RadiusAnimaIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pickers\SizePicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -313,11 +340,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RadiansPicker.xaml">
+    <Page Include="Pickers\RadiansPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="RadiusAnimaPanel.xaml">
+    <Page Include="RadiusAnimas\RadiusAnimaPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

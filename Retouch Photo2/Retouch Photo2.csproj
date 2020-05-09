@@ -118,55 +118,55 @@
     <Compile Include="PhotosPage.xaml.cs">
       <DependentUpon>PhotosPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Effects\Models\DirectionalBlurEffect.xaml.cs">
+    <Compile Include="Retouch Photo2.Effects\DirectionalBlurEffect.xaml.cs">
       <DependentUpon>DirectionalBlurEffect.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Effects\Models\EmbossEffect.xaml.cs">
+    <Compile Include="Retouch Photo2.Effects\EmbossEffect.xaml.cs">
       <DependentUpon>EmbossEffect.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Effects\Models\GaussianBlurEffect.xaml.cs">
+    <Compile Include="Retouch Photo2.Effects\GaussianBlurEffect.xaml.cs">
       <DependentUpon>GaussianBlurEffect.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Effects\Models\OuterShadowEffect.xaml.cs">
+    <Compile Include="Retouch Photo2.Effects\OuterShadowEffect.xaml.cs">
       <DependentUpon>OuterShadowEffect.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Effects\Models\OutlineEffect.xaml.cs">
+    <Compile Include="Retouch Photo2.Effects\OutlineEffect.xaml.cs">
       <DependentUpon>OutlineEffect.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Effects\Models\SharpenEffect.xaml.cs">
+    <Compile Include="Retouch Photo2.Effects\SharpenEffect.xaml.cs">
       <DependentUpon>SharpenEffect.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Effects\Models\StraightenEffect.xaml.cs">
+    <Compile Include="Retouch Photo2.Effects\StraightenEffect.xaml.cs">
       <DependentUpon>StraightenEffect.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Menus\MenuButtons\MenuButton.xaml.cs">
       <DependentUpon>MenuButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\Models\AdjustmentMenu.xaml.cs">
+    <Compile Include="Retouch Photo2.Menus\AdjustmentMenu.xaml.cs">
       <DependentUpon>AdjustmentMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\Models\CharacterMenu.xaml.cs">
+    <Compile Include="Retouch Photo2.Menus\CharacterMenu.xaml.cs">
       <DependentUpon>CharacterMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\Models\ColorMenu.xaml.cs">
+    <Compile Include="Retouch Photo2.Menus\ColorMenu.xaml.cs">
       <DependentUpon>ColorMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\Models\EffectMenu.xaml.cs">
+    <Compile Include="Retouch Photo2.Menus\EffectMenu.xaml.cs">
       <DependentUpon>EffectMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\Models\KeyboardMenu.xaml.cs">
+    <Compile Include="Retouch Photo2.Menus\KeyboardMenu.xaml.cs">
       <DependentUpon>KeyboardMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\Models\LayerMenu.xaml.cs">
+    <Compile Include="Retouch Photo2.Menus\LayerMenu.xaml.cs">
       <DependentUpon>LayerMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\Models\OperateMenu.xaml.cs">
+    <Compile Include="Retouch Photo2.Menus\OperateMenu.xaml.cs">
       <DependentUpon>OperateMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\Models\SelectionMenu.xaml.cs">
+    <Compile Include="Retouch Photo2.Menus\SelectionMenu.xaml.cs">
       <DependentUpon>SelectionMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\Models\TransformerMenu.xaml.cs">
+    <Compile Include="Retouch Photo2.Menus\TransformerMenu.xaml.cs">
       <DependentUpon>TransformerMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Elements\FillColorEllipseButton.cs" />
@@ -303,6 +303,7 @@
     <Content Include="Icons\2Logo-Small.png" />
     <Content Include="Icons\2Logo-Wide.png" />
     <Content Include="Icons\2Logo.png" />
+    <Content Include="Icons\Circle.jpg" />
     <Content Include="Icons\GrayAndWhite.jpg" />
     <Content Include="FileUtils\Filter.xml" />
     <Content Include="FileUtils\FilterOriginal.xml" />
@@ -394,6 +395,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Icons\GrayAndWhite2.jpg" />
     <Content Include="Icons\GrayAndWhite3.jpg" />
+    <Content Include="Icons\Wheel.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -427,31 +429,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Retouch Photo2.Effects\Models\DirectionalBlurEffect.xaml">
+    <Page Include="Retouch Photo2.Effects\DirectionalBlurEffect.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Effects\Models\EmbossEffect.xaml">
+    <Page Include="Retouch Photo2.Effects\EmbossEffect.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Effects\Models\GaussianBlurEffect.xaml">
+    <Page Include="Retouch Photo2.Effects\GaussianBlurEffect.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Effects\Models\OuterShadowEffect.xaml">
+    <Page Include="Retouch Photo2.Effects\OuterShadowEffect.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Effects\Models\OutlineEffect.xaml">
+    <Page Include="Retouch Photo2.Effects\OutlineEffect.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Effects\Models\SharpenEffect.xaml">
+    <Page Include="Retouch Photo2.Effects\SharpenEffect.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Effects\Models\StraightenEffect.xaml">
+    <Page Include="Retouch Photo2.Effects\StraightenEffect.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -459,39 +461,39 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Menus\Models\AdjustmentMenu.xaml">
+    <Page Include="Retouch Photo2.Menus\AdjustmentMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Menus\Models\CharacterMenu.xaml">
+    <Page Include="Retouch Photo2.Menus\CharacterMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Menus\Models\ColorMenu.xaml">
+    <Page Include="Retouch Photo2.Menus\ColorMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Menus\Models\EffectMenu.xaml">
+    <Page Include="Retouch Photo2.Menus\EffectMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Menus\Models\KeyboardMenu.xaml">
+    <Page Include="Retouch Photo2.Menus\KeyboardMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Retouch Photo2.Menus\Models\LayerMenu.xaml">
+    <Page Include="Retouch Photo2.Menus\LayerMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Menus\Models\OperateMenu.xaml">
+    <Page Include="Retouch Photo2.Menus\OperateMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Menus\Models\SelectionMenu.xaml">
+    <Page Include="Retouch Photo2.Menus\SelectionMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Menus\Models\TransformerMenu.xaml">
+    <Page Include="Retouch Photo2.Menus\TransformerMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -629,6 +631,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="HSVColorPickers">
+      <Version>1.3.5</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.7</Version>
     </PackageReference>
@@ -677,10 +682,6 @@
     <ProjectReference Include="..\Retouch Photo2.Layers\Retouch Photo2.Layers.csproj">
       <Project>{15cbf0a7-0953-49f5-b541-f8bcaab40053}</Project>
       <Name>Retouch Photo2.Layers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Menus\Retouch Photo2.Menus.csproj">
-      <Project>{b1ed78fd-fc8e-423f-aa65-c9b50757554f}</Project>
-      <Name>Retouch Photo2.Menus</Name>
     </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Selections\Retouch Photo2.Selections.csproj">
       <Project>{448fcfb4-cb3c-4874-b157-3f0dfff044bc}</Project>

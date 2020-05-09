@@ -1,0 +1,132 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Menus.Models.TransformerMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:transformers="using:FanKit.Transformers"
+    xmlns:hSVColorPickers="using:HSVColorPickers"
+    xmlns:elements="using:Retouch_Photo2.Elements"
+    mc:Ignorable="d"
+    d:DesignWidth="200"
+    d:DesignHeight="400"
+    >
+
+    <UserControl.Resources>
+        
+        <!--Storyboard-->
+        <Storyboard x:Name="XEaseStoryboard">
+            <ColorAnimation From="{ThemeResource SystemBaseHighColor}" To="{ThemeResource AppBorderBrushColor}" Storyboard.TargetProperty="Color" Storyboard.TargetName="XBorderBorderBrush" d:IsOptimized="True">
+                <ColorAnimation.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </ColorAnimation.EasingFunction>
+            </ColorAnimation>
+        </Storyboard>
+        <Storyboard x:Name="YEaseStoryboard">
+            <ColorAnimation From="{ThemeResource SystemBaseHighColor}" To="{ThemeResource AppBorderBrushColor}" Storyboard.TargetProperty="Color" Storyboard.TargetName="YBorderBorderBrush" d:IsOptimized="True">
+                <ColorAnimation.EasingFunction>
+                    <BounceEase EasingMode="EaseOut"/>
+                </ColorAnimation.EasingFunction>
+            </ColorAnimation>
+        </Storyboard>
+        
+    </UserControl.Resources>
+
+
+    <elements:Expander x:Name="_Expander">
+        
+        
+        <elements:Expander.MainPage>
+            <StackPanel MinHeight="165" Padding="1,4">
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="44"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <!--Ratio-->
+                    <ToggleButton x:Name="RatioToggleControl" Grid.Column="1" Margin="0,26" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource AppCircleToggleButtonStyle}"
+                                  IsChecked="{x:Bind KeyboardViewModel.IsRatio,Mode=TwoWay}" >
+                        <ToolTipService.ToolTip>
+                            <ToolTip x:Name="RatioScalingToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
+                        </ToolTipService.ToolTip>
+                        <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+                    </ToggleButton>
+                    
+                    
+                    <StackPanel Grid.Column="0">
+                       
+                        <!--Width-->
+                        <TextBlock x:Name="WidthTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                        <hSVColorPickers:NumberPicker x:Name="WPicker" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                       
+                        <!--Rotate-->
+                        <TextBlock x:Name="RotateTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                        <hSVColorPickers:NumberPicker x:Name="RPicker" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                        
+                        <!--X-->
+                        <TextBlock x:Name="XTextBlock"  Style="{StaticResource AppTextBlockStyle}"/>
+                        <hSVColorPickers:NumberPicker x:Name="XPicker" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                            <hSVColorPickers:NumberPicker.BorderBrush>
+                                <SolidColorBrush x:Name="XBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
+                            </hSVColorPickers:NumberPicker.BorderBrush>
+                        </hSVColorPickers:NumberPicker>
+
+                    </StackPanel>
+
+
+                    <StackPanel Grid.Column="2">
+                        
+                        <!--Height-->
+                        <TextBlock x:Name="HeightTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                        <hSVColorPickers:NumberPicker x:Name="HPicker" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+
+                        <!--Skew-->
+                        <TextBlock x:Name="SkewTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                        <hSVColorPickers:NumberPicker x:Name="SPicker" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+
+                        <!--Y-->
+                        <TextBlock x:Name="YTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                        <hSVColorPickers:NumberPicker x:Name="YPicker" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                            <hSVColorPickers:NumberPicker.BorderBrush>
+                                <SolidColorBrush x:Name="YBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
+                            </hSVColorPickers:NumberPicker.BorderBrush>
+                        </hSVColorPickers:NumberPicker>
+
+                    </StackPanel>
+                    
+
+                </Grid>
+
+
+                <!--IndicatorControl-->
+                <transformers:IndicatorControl x:Name="IndicatorControl" Background="{ThemeResource AppForeground}" BorderBrush="{ThemeResource AppStroke}">
+                    <ToolTipService.ToolTip>
+                        <ToolTip x:Name="IndicatorToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
+                    </ToolTipService.ToolTip>
+                </transformers:IndicatorControl>
+
+
+                <!--RemoteButton-->
+                <Button x:Name="RemoteButton" Style="{StaticResource AppIconRoundedButtonStyle}">
+                    <Button.Tag>
+                        <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                    </Button.Tag>
+                </Button>
+                
+
+            </StackPanel>
+        </elements:Expander.MainPage>
+
+
+        <elements:Expander.SecondPage> 
+            <transformers:RemoteControl x:Name="RemoteControl" Margin="2" Width="Auto" Height="Auto" Background="{ThemeResource AppForeground}" BorderBrush="{ThemeResource AppBorderBrush}" Foreground="{ThemeResource AppText}"/>
+        </elements:Expander.SecondPage>
+
+
+    </elements:Expander>
+
+</UserControl>

@@ -32,12 +32,22 @@ namespace Retouch_Photo2
         {
             DrawPage.FillColorShowAt += (FrameworkElement placementTarget) =>
             {
-                this.FillColorPicker.Color = this.SelectionViewModel.FillBrush.Color;
+                switch (this.SelectionViewModel.FillBrush.Type)
+                {
+                    case BrushType.Color:
+                        this.FillColorPicker.Color = this.SelectionViewModel.FillBrush.Color;
+                        break;
+                }
                 this.FillColorFlyout.ShowAt(placementTarget);
             };
             DrawPage.StrokeColorShowAt += (FrameworkElement placementTarget) =>
             {
-                this.StrokeColorPicker.Color = this.SelectionViewModel.StrokeBrush.Color;
+                switch (this.SelectionViewModel.StrokeBrush.Type)
+                {
+                    case BrushType.Color:
+                        this.StrokeColorPicker.Color = this.SelectionViewModel.StrokeBrush.Color;
+                        break;
+                }
                 this.StrokeColorFlyout.ShowAt(placementTarget);
             };
 

@@ -1,10 +1,7 @@
 ﻿using Retouch_Photo2.Elements;
 using Retouch_Photo2.Menus;
-using Retouch_Photo2.Tools;
-using System.Linq;
 using Windows.Foundation;
 using Windows.UI;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
@@ -16,7 +13,24 @@ namespace Retouch_Photo2
     public sealed partial class DrawPage : Page
     {
 
-        //Tool & Menu
+        /// <summary>
+        /// True if lightweight elimination is enabled for this control;
+        /// </summary>
+        bool IsOverlayDismiss
+        {
+            set
+            {
+                if (value)
+                    this.OverlayCanvas.Background = new SolidColorBrush(Colors.Transparent);
+                else
+                    this.OverlayCanvas.Background = null;
+            }
+        }
+
+        /// <summary> Head panel of Menu. </summary>
+        UIElementCollection MenuHead => this.DrawLayout.HeadRightChildren;
+
+        //Menu
         private void ConstructMenus()
         {
             //Menu
@@ -27,40 +41,35 @@ namespace Retouch_Photo2
             this.OverlayCanvas.Tapped += (s, e) => this.MenusHide();
             this.OverlayCanvas.SizeChanged += (s, e) => this.MenusHideAndCrop();
         }
-
-
-        /// <summary> Head panel of Menu. </summary>
-        UIElementCollection MenuHead => this.DrawLayout.HeadRightChildren;
-
+               
         //Menu
         public void ConstructMenu(IMenu menu)
         {
             if (menu == null) return;
 
-            this.OverlayCanvas.Children.Add(menu.Layout);
+            this.OverlayCanvas.Children.Add(menu.Self);
 
-            menu.Move += () =>
+            menu.Expander.Move += () =>
             {
                 //Move to top
-                int index = this.OverlayCanvas.Children.IndexOf(menu.Layout);
+                int index = this.OverlayCanvas.Children.IndexOf(menu.Self);
                 int count = this.OverlayCanvas.Children.Count;
                 this.OverlayCanvas.Children.Move((uint)index, (uint)count - 1);
             };
-            menu.Opened += () => this.MenusDisable(menu);//Menus is disable
-            menu.Closed += () => this.MenusEnable();//Menus is enable
+            menu.Expander.Show += () => this.IsOverlayDismiss = true;
+            menu.Expander.Opened += () => this.MenusDisable(menu);//Menus is disable
+            menu.Expander.Closed += () => this.MenusEnable();//Menus is enable
 
             //MenuButton
             if (menu.Type == MenuType.Layer)
             {
-                this.LayersControl.IndicatorBorder.Child = menu.Button;
+                this.LayersControl.IndicatorBorder.Child = menu.Button.Self;
             }
             else
             {
-                this.MenuHead.Add(menu.Button);
+                this.MenuHead.Add(menu.Button.Self);
             }
         }
-
-        #region Menu
 
 
         /// <summary>
@@ -77,23 +86,24 @@ namespace Retouch_Photo2
         {
             foreach (IMenu menu in this.TipViewModel.Menus)
             {
-                switch (menu.State)
+                switch (menu.Expander.State)
                 {
-                    case MenuState.FlyoutShow:
-                        menu.State = MenuState.Hide;
+                    case ExpanderState.FlyoutShow:
+                        menu.State = ExpanderState.Hide;
                         break;
-                    case MenuState.Overlay:
-                    case MenuState.OverlayNotExpanded:
+                    case ExpanderState.Overlay:
+                    case ExpanderState.OverlayNotExpanded:
                         if (isCrop)
                         {
-                            Point postion = MenuHelper.GetOverlayPostion(menu.Layout);
-                            Point postion2 = MenuHelper.GetBoundPostion(postion, menu.Layout);
-                            MenuHelper.SetOverlayPostion(menu.Layout, postion2);
+                            Point postion = VisualUIElementHelper.GetOverlayPostion(menu.Self);
+                            Point postion2 = VisualUIElementHelper.GetBoundPostion(postion, menu.Self);
+                            VisualUIElementHelper.SetOverlayPostion(menu.Self, postion2);
                         }
                         break;
                 }
             }
-            this.OverlayCanvas.Background = null;
+
+            this.IsOverlayDismiss = false;
         }
 
 
@@ -110,7 +120,8 @@ namespace Retouch_Photo2
                     menu.IsHitTestVisible = false;
                 }
             }
-            this.OverlayCanvas.Background = new SolidColorBrush(Colors.Transparent);
+
+            this.IsOverlayDismiss = true;
         }
         /// <summary>
         /// Enable all menus.
@@ -124,8 +135,6 @@ namespace Retouch_Photo2
             this.OverlayCanvas.Background = null;
         }
 
-
-        #endregion
 
     }
 }

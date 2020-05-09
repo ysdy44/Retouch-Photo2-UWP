@@ -1,42 +1,39 @@
-﻿using Retouch_Photo2.ViewModels;
+﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.ViewModels;
+using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus
 {
     /// <summary>
-    /// Retouch_Photo2 Tools 's Button.
+    /// Retouch_Photo2 Menu 's Button.
     /// </summary>
-    public sealed partial class MenuButton : UserControl
+    public sealed partial class MenuButton : UserControl, IExpanderButton
     {
         //@ViewModel
         TipViewModel TipViewModel => App.TipViewModel;
+        
 
-        //@Content 
-        /// <summary> ContentPresenter's Content. </summary>
+        //@Delegate
+        public Action<ExpanderState> StateChanged { get; set; }
+        
         public object CenterContent { set => this.ContentPresenter.Content = value; get => this.ContentPresenter.Content; }
-        /// <summary> MenuButton's MenuState. </summary>
-        public MenuState State
-        {
-            set
-            {
-                this._vsMenuState = value;
-                this.VisualState = this.VisualState;//State         
-            }
-        }
-        /// <summary> ToolTip. </summary>
         public ToolTip ToolTip => this._ToolTip;
 
+        public FrameworkElement Self => this;
+
+
         //@VisualState
-        MenuState _vsMenuState;
         ClickMode _vsClickMode;
+        ExpanderState _vsMenuState = ExpanderState.Hide;
         public VisualState VisualState
         {
             get
             {
-                if (this._vsMenuState == MenuState.FlyoutShow) return this.FlyoutShow;
+                if (this._vsMenuState == ExpanderState.FlyoutShow) return this.FlyoutShow;
 
-                if (this._vsMenuState == MenuState.Hide)
+                if (this._vsMenuState == ExpanderState.Hide)
                 {
                     switch (this._vsClickMode)
                     {
@@ -46,7 +43,7 @@ namespace Retouch_Photo2.Menus
                     }
                 }
 
-                if (this._vsMenuState == MenuState.Overlay || this._vsMenuState == MenuState.OverlayNotExpanded)
+                if (this._vsMenuState == ExpanderState.Overlay || this._vsMenuState == ExpanderState.OverlayNotExpanded)
                 {
                     switch (this._vsClickMode)
                     {
@@ -59,7 +56,7 @@ namespace Retouch_Photo2.Menus
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
-
+        
         private ClickMode ClickMode
         {
             set
@@ -68,20 +65,45 @@ namespace Retouch_Photo2.Menus
                 this.VisualState = this.VisualState;//State
             }
         }
-        
+
+        public ExpanderState State
+        {
+            set
+            {
+                this._vsMenuState = value;
+                this.VisualState = this.VisualState;//State         
+            }
+        }
+
 
         //@Construct
         public MenuButton()
         {
             this.InitializeComponent();
+            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State 
+
             this.PointerEntered += (s, e) => this.ClickMode = ClickMode.Hover;
             this.PointerPressed += (s, e) => this.ClickMode = ClickMode.Press;
             this.PointerExited += (s, e) => this.ClickMode = ClickMode.Release;
-        }
-        public MenuButton(object centerContent) : this()
-        {
-            this.ContentPresenter.Content = centerContent;
+
+            this.Tapped += (s, e) =>
+            {
+                ExpanderState state = this.GetState(this._vsMenuState);
+                this.StateChanged?.Invoke(state);
+            };
         }
 
+        private ExpanderState GetState(ExpanderState state)
+        {
+            switch (state)
+            {
+                case ExpanderState.Hide: return ExpanderState.FlyoutShow;
+                case ExpanderState.FlyoutShow: return ExpanderState.Hide;
+
+                case ExpanderState.Overlay: return ExpanderState.OverlayNotExpanded;
+                case ExpanderState.OverlayNotExpanded: return ExpanderState.Overlay;
+            }
+            return ExpanderState.FlyoutShow;
+        }
     }
 }

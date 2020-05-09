@@ -62,7 +62,7 @@ namespace Retouch_Photo2
             //Transition
             //Get the position of the image element relative to the screen.   
             FrameworkElement source = projectViewItem.ImageEx;
-            Point sourcePostion = Retouch_Photo2.Menus.MenuHelper.GetVisualPostion(source);
+            Point sourcePostion = VisualUIElementHelper.GetVisualPostion(source);
             Size sourceSize = new Size(source.ActualWidth, source.ActualHeight);
             Rect sourceRect = new Rect(sourcePostion, sourceSize);
             Size pageSize = new Size(this.ActualWidth, this.ActualHeight - 50);

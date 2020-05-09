@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using System.Linq;
 using System.Threading.Tasks;
+using Retouch_Photo2.Elements;
 
 namespace Retouch_Photo2.Controls
 {
@@ -64,7 +65,7 @@ namespace Retouch_Photo2.Controls
 
         private void ShowLayerMenu()
         {
-            this.TipViewModel.SetMenuState(MenuType.Layer, MenuState.Hide, MenuState.FlyoutShow);
+            this.TipViewModel.ShowMenu(MenuType.Layer);
         }
         private void ShowLayerMenu(ILayer layer)
         {

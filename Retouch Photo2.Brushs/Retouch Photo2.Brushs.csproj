@@ -107,37 +107,37 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BrushOperateMode.cs" />
-    <Compile Include="BrushTypeComboBox.xaml.cs">
+    <Compile Include="BrushTypes\BrushTypeComboBox.xaml.cs">
       <DependentUpon>BrushTypeComboBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BrushTypeIcons\ColorIcon.xaml.cs">
+    <Compile Include="BrushTypes\BrushTypeIcons\ColorIcon.xaml.cs">
       <DependentUpon>ColorIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BrushTypeIcons\EllipticalGradientIcon.xaml.cs">
+    <Compile Include="BrushTypes\BrushTypeIcons\EllipticalGradientIcon.xaml.cs">
       <DependentUpon>EllipticalGradientIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BrushTypeIcons\ImageIcon.xaml.cs">
+    <Compile Include="BrushTypes\BrushTypeIcons\ImageIcon.xaml.cs">
       <DependentUpon>ImageIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BrushTypeIcons\LinearGradientIcon.xaml.cs">
+    <Compile Include="BrushTypes\BrushTypeIcons\LinearGradientIcon.xaml.cs">
       <DependentUpon>LinearGradientIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BrushTypeIcons\NoneIcon.xaml.cs">
+    <Compile Include="BrushTypes\BrushTypeIcons\NoneIcon.xaml.cs">
       <DependentUpon>NoneIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BrushTypeIcons\RadialGradientIcon.xaml.cs">
+    <Compile Include="BrushTypes\BrushTypeIcons\RadialGradientIcon.xaml.cs">
       <DependentUpon>RadialGradientIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="ColorEllipse.xaml.cs">
       <DependentUpon>ColorEllipse.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FillOrStrokeComboBox.xaml.cs">
+    <Compile Include="FillOrStrokes\FillOrStrokeComboBox.xaml.cs">
       <DependentUpon>FillOrStrokeComboBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FillOrStrokeIcons\StrokeIcon.xaml.cs">
+    <Compile Include="FillOrStrokes\FillOrStrokeIcons\StrokeIcon.xaml.cs">
       <DependentUpon>StrokeIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FillOrStrokeIcons\FillIcon.xaml.cs">
+    <Compile Include="FillOrStrokes\FillOrStrokeIcons\FillIcon.xaml.cs">
       <DependentUpon>FillIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="IBrush.cs" />
@@ -152,12 +152,12 @@
     </Compile>
     <Compile Include="StopsPickers\StopsPicker.Construct.cs" />
     <Compile Include="StopsPickers\StopsPicker.Method.cs" />
-    <Compile Include="GradientBrushType.cs" />
-    <Compile Include="BrushType.cs" />
+    <Compile Include="BrushTypes\GradientBrushType.cs" />
+    <Compile Include="BrushTypes\BrushType.cs" />
     <Compile Include="StopsPickers\StopsPicker.xaml.cs">
       <DependentUpon>StopsPicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FillOrStroke.cs" />
+    <Compile Include="FillOrStrokes\FillOrStroke.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StopsPickers\StopsManager.cs" />
     <Compile Include="StopsPickers\StopsSize.cs" />
@@ -177,31 +177,31 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="BrushTypeComboBox.xaml">
+    <Page Include="BrushTypes\BrushTypeComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BrushTypeIcons\ColorIcon.xaml">
+    <Page Include="BrushTypes\BrushTypeIcons\ColorIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BrushTypeIcons\EllipticalGradientIcon.xaml">
+    <Page Include="BrushTypes\BrushTypeIcons\EllipticalGradientIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BrushTypeIcons\ImageIcon.xaml">
+    <Page Include="BrushTypes\BrushTypeIcons\ImageIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BrushTypeIcons\LinearGradientIcon.xaml">
+    <Page Include="BrushTypes\BrushTypeIcons\LinearGradientIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BrushTypeIcons\NoneIcon.xaml">
+    <Page Include="BrushTypes\BrushTypeIcons\NoneIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BrushTypeIcons\RadialGradientIcon.xaml">
+    <Page Include="BrushTypes\BrushTypeIcons\RadialGradientIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -209,15 +209,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="FillOrStrokeComboBox.xaml">
+    <Page Include="FillOrStrokes\FillOrStrokeComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FillOrStrokeIcons\StrokeIcon.xaml">
+    <Page Include="FillOrStrokes\FillOrStrokeIcons\StrokeIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="FillOrStrokeIcons\FillIcon.xaml">
+    <Page Include="FillOrStrokes\FillOrStrokeIcons\FillIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

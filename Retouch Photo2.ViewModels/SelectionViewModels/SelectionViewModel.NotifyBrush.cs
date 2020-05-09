@@ -44,7 +44,14 @@ namespace Retouch_Photo2.ViewModels
             this.FillBrush = new ColorBrush(color);
             this.SetValue((layer) =>
             {
-                layer.StyleManager.FillBrush = new ColorBrush(color);
+                switch (layer.StyleManager.FillBrush.Type)
+                {
+                    case BrushType.Image:
+                        break;
+                    default:
+                        layer.StyleManager.FillBrush = new ColorBrush(color);
+                        break;
+                }
             });
         }
         public void SetStrokeColor(Color color)
@@ -53,7 +60,14 @@ namespace Retouch_Photo2.ViewModels
             this.StrokeBrush = new ColorBrush(color);
             this.SetValue((layer) =>
             {
-                layer.StyleManager.StrokeBrush = new ColorBrush(color);
+                switch (layer.StyleManager.StrokeBrush.Type)
+                {
+                    case BrushType.Image:
+                        break;
+                    default:
+                        layer.StyleManager.StrokeBrush = new ColorBrush(color);
+                        break;
+                }
             });
         }
 

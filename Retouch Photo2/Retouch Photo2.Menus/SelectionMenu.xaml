@@ -1,0 +1,59 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Menus.Models.SelectionMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:elements="using:Retouch_Photo2.Elements"
+    mc:Ignorable="d"
+    d:DesignWidth="200"
+    d:DesignHeight="400"
+    >
+
+
+    <elements:Expander x:Name="_Expander">
+        
+        
+        <elements:Expander.MainPage>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Edit-->
+                <StackPanel Grid.Column="0">
+                    
+                    <TextBlock x:Name="EditTextBlock" Text="Edit" Style="{StaticResource AppTextBlockStyle}"/>
+                    <Button x:Name="CutButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="CopyButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="PasteButton" Padding="0" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="ClearButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+
+                    <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
+
+                    <TextBlock x:Name="GroupTextBlock" Text="Group" Style="{StaticResource AppTextBlockStyle}"/>
+                    <Button x:Name="GroupButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="UnGroupButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.IsGroupLayer, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+
+                </StackPanel>
+
+                <Rectangle Grid.Column="1" Margin="0" Style="{ThemeResource AppSeparatorRectangleHorizontalStyle}" />
+
+                <!--Select-->
+                <StackPanel Grid.Column="2">
+
+                    <TextBlock x:Name="SelectTextBlock" Text="Select" Style="{StaticResource AppTextBlockStyle}"/>
+                    <Button x:Name="AllButton" Padding="0" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="DeselectButton" Padding="0" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
+                  
+                    <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
+
+                </StackPanel>
+
+            </Grid>
+        </elements:Expander.MainPage>
+    </elements:Expander>
+
+</UserControl>

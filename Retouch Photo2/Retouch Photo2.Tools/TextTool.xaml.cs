@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Layers;
+﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
@@ -52,7 +53,7 @@ namespace Retouch_Photo2.Tools
 
             this.CharacterButton.Tapped += (s, e) =>
             {
-                this.TipViewModel.SetMenuState(MenuType.Character, MenuState.Hide, MenuState.FlyoutShow);
+                this.TipViewModel.ShowMenu(MenuType.Character);
             };
             this.FullScreenButton.Tapped += (s, e) =>
             {

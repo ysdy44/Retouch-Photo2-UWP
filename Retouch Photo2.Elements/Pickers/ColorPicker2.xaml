@@ -1,0 +1,92 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Elements.ColorPicker2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hsvColorPickers="using:HSVColorPickers"
+    xmlns:local="using:Retouch_Photo2.Elements"
+    Width="230"
+    d:DesignHeight="400"
+    d:DesignWidth="200"
+    mc:Ignorable="d"
+    >
+
+    <UserControl.Resources>
+        <!--Flyout-->
+        <Flyout x:Name="Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <StackPanel x:Name="FlyoutStackPanel">
+
+                <Button x:Name="SwatchesButton" Style="{StaticResource AppIconSelectedButton}"/>
+
+                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+                <Button x:Name="WheelButton" Style="{StaticResource AppIconSelectedButton}"/>
+
+                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+                <Button x:Name="RGBButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="HSVButton" Style="{StaticResource AppIconSelectedButton}"/>
+
+                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+                <Button x:Name="PaletteHueButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="PaletteSaturationButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="PaletteValueButton" Style="{StaticResource AppIconSelectedButton}"/>
+
+                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+                <Button x:Name="CircleButton" Style="{StaticResource AppIconSelectedButton}"/>
+
+            </StackPanel>
+        </Flyout>
+    </UserControl.Resources>
+
+
+    <StackPanel Padding="2,0">
+
+        <!--Head-->
+        <Grid x:Name="HeadGrid" Height="40">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <hsvColorPickers:HexPicker x:Name="HexPicker" Grid.Column="1" Height="28" Background="Transparent"/>
+            <hsvColorPickers:StrawPicker x:Name="StrawPicker" Grid.Column="3" Width="74" Background="{ThemeResource AppForeground}"/>
+        </Grid>
+
+        <!--Group-->
+        <Button x:Name="Button" Style="{StaticResource AppIconRoundedButtonStyle}">
+            <Button.Tag>
+                <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+            </Button.Tag>
+        </Button>
+
+        <ContentControl Height="4"/>
+
+        <!--Body-->
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+            <hsvColorPickers:SwatchesPicker x:Name="SwatchesPicker"/>
+
+            <local:WheelPicker x:Name="WheelPicker"/>
+
+            <hsvColorPickers:RGBPicker x:Name="RGBPicker" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" ButtonStyle="{StaticResource AppNumberButtonStyle}"/>
+            <hsvColorPickers:HSVPicker x:Name="HSVPicker" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" ButtonStyle="{StaticResource AppNumberButtonStyle}"/>
+
+            <hsvColorPickers:PaletteHuePicker x:Name="PaletteHuePicker"/>
+            <hsvColorPickers:PaletteSaturationPicker x:Name="PaletteSaturationPicker"/>
+            <hsvColorPickers:PaletteValuePicker x:Name="PaletteValuePicker"/>
+            <local:CirclePicker x:Name="CirclePicker"/>
+      
+        </Grid>
+
+        <!--Alpha-->
+        <hsvColorPickers:AlphaPicker x:Name="AlphaPicker" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" ButtonStyle="{StaticResource AppNumberButtonStyle}"/>
+
+        <ContentControl Height="4"/>
+
+    </StackPanel>
+</UserControl>

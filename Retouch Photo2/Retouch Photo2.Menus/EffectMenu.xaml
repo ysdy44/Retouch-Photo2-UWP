@@ -1,0 +1,33 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Menus.Models.EffectMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:elements="using:Retouch_Photo2.Elements"
+    mc:Ignorable="d"
+    d:DesignWidth="200"
+    d:DesignHeight="400"
+    >
+
+
+    <elements:Expander x:Name="_Expander">
+
+
+        <elements:Expander.MainPage>
+            <StackPanel x:Name="EffectsStackPanel" MinHeight="165">
+                <!--Effects-->
+            </StackPanel>
+        </elements:Expander.MainPage>
+
+
+        <elements:Expander.SecondPage>
+            <Border x:Name="EffectBoder" Padding="2" MinHeight="165">
+                <!--Frame-->
+            </Border>
+        </elements:Expander.SecondPage>
+
+
+    </elements:Expander>
+
+</UserControl>
