@@ -1,7 +1,9 @@
 ﻿using System;
+using Windows.Foundation;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.Elements.MainPages
 {
@@ -90,7 +92,7 @@ namespace Retouch_Photo2.Elements.MainPages
 
             this._ImageEx.Source = new Uri(thumbnail, UriKind.Relative);
         }
-        
+
         /// <summary>
         /// Switch the state.
         /// </summary>
@@ -115,6 +117,25 @@ namespace Retouch_Photo2.Elements.MainPages
             object url = this._ImageEx.Source;
             this._ImageEx.Source = null;
             this._ImageEx.Source = url;
+        }
+
+
+        /// <summary>
+        /// Get the position and size of the image element relative to the visual element. 
+        /// </summary>
+        /// <returns> The calculated rect. </returns>
+        public Rect GetVisualRect(UIElement visual)
+        {
+            GeneralTransform transform = this.ImageEx.TransformToVisual(visual);
+            Point sourcePostion = transform.TransformPoint(new Point());
+
+            return new Rect
+            {
+                X= sourcePostion.X,
+                Y= sourcePostion.Y,
+                Width= this.ImageEx.ActualWidth,
+                Height= this.ImageEx.ActualHeight
+            };
         }
 
     }

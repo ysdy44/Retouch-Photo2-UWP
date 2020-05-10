@@ -80,29 +80,22 @@
                 <!--Hide-->
                 <VisualState x:Name="Hide">
                     <VisualState.Setters >
-
                         <Setter Target = "UserControl.Visibility" Value="Collapsed"/>
-
-                        <!--Title-->
-                        <Setter Target = "TitleToggleButton.Content" Value="Hide"/>
-                        <Setter Target = "TitleToggleButton.IsChecked" Value="{x:Null}"/>
-
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--FlyoutShow-->
                 <VisualState x:Name="FlyoutShow">
                     <VisualState.Setters >
-
+                        
                         <!--Title-->
-                        <Setter Target = "TitleToggleButton.Content" Value="FlyoutShow"/>
-                        <Setter Target = "TitleToggleButton.IsChecked" Value="False"/>
                         <Setter Target = "TitleGrid.Background" Value="{ThemeResource AppBackground}"/>
                         <Setter Target = "TitleTextBlock.Visibility" Value="Visible"/>
 
                         <!--Button-->
                         <Setter Target = "StateButton.Visibility" Value="Visible"/>
-
+                        <Setter Target = "ResetButton.Visibility" Value="Collapsed"/>
+                        
                         <!--Body-->
                         <Setter Target = "MainPageBorder.Visibility" Value="Visible"/>
 
@@ -114,8 +107,6 @@
                     <VisualState.Setters >
 
                         <!--Title-->
-                        <Setter Target = "TitleToggleButton.Content" Value="FlyoutShowSecondPage"/>
-                        <Setter Target = "TitleToggleButton.IsChecked" Value="True"/>
                         <Setter Target = "TitleGrid.Background" Value="{ThemeResource AppBackground}"/>
 
                         <!--Button-->
@@ -132,8 +123,6 @@
                     <VisualState.Setters >
 
                         <!--Title-->
-                        <Setter Target = "TitleToggleButton.Content" Value="OverlayNotExpanded"/>
-                        <Setter Target = "TitleToggleButton.IsChecked" Value="{x:Null}"/>
                         <Setter Target = "TitleGrid.Background" Value="{ThemeResource AppLinearBrush}"/>
                         <Setter Target = "TitleTextBlock.Visibility" Value="Visible"/>
 
@@ -141,6 +130,7 @@
                         <Setter Target = "CloseButton.Visibility" Value="Visible"/>
                         <Setter Target = "StateButton.Visibility" Value="Visible"/>
                         <Setter Target = "StateIcon.Glyph" Value="&#xE196;"/>
+                        <Setter Target = "ResetButton.Visibility" Value="Collapsed"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -150,13 +140,12 @@
                     <VisualState.Setters >
 
                         <!--Title-->
-                        <Setter Target = "TitleToggleButton.Content" Value="Overlay"/>
-                        <Setter Target = "TitleToggleButton.IsChecked" Value="False"/>
                         <Setter Target = "TitleTextBlock.Visibility" Value="Visible"/>
 
                         <!--Button-->
                         <Setter Target = "CloseButton.Visibility" Value="Visible"/>
                         <Setter Target = "StateButton.Visibility" Value="Visible"/>
+                        <Setter Target = "ResetButton.Visibility" Value="Collapsed"/>
 
                         <!--Body-->
                         <Setter Target = "MainPageBorder.Visibility" Value="Visible"/>
@@ -168,10 +157,6 @@
                 <VisualState x:Name="OverlaySecondPage">
                     <VisualState.Setters >
 
-                        <!--Title-->
-                        <Setter Target = "TitleToggleButton.Content" Value="OverlaySecondPage"/>
-                        <Setter Target = "TitleToggleButton.IsChecked" Value="True"/>
-
                         <!--Button-->
                         <Setter Target = "BackButton.Visibility" Value="Visible"/>
 
@@ -181,7 +166,7 @@
                     </VisualState.Setters>
                 </VisualState>
 
-            </VisualStateGroup>
+            </VisualStateGroup> 
         </VisualStateManager.VisualStateGroups>
 
 
@@ -195,7 +180,7 @@
 
                 <!--@Acrylic-->
                 <!--Body-->
-                <Rectangle x:Name="HeightStoryboardRectangle" Height="Auto" Grid.Row="1" VerticalAlignment="Top"
+                <Rectangle x:Name="HeightRectangle" Grid.Row="1" Height="Auto" VerticalAlignment="Stretch"
                           apiContractNotPresent5:Fill="{ThemeResource AppBackground}"
                           apiContractPresent5:Fill="{ThemeResource AppAcrylicElementBrush}"  />
                 <Border x:Name="MainPageBorder" Visibility="Collapsed" Height="Auto" Grid.Row="1" VerticalAlignment="Top">
@@ -219,7 +204,6 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock x:Name="TitleTextBlock" Visibility="Collapsed" Grid.ColumnSpan="3" Margin="12,0,12,0" TextTrimming="CharacterEllipsis" FontSize="24" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
-                    <ToggleButton x:Name="TitleToggleButton" Visibility="Collapsed" Grid.Column="1" HorizontalAlignment="Stretch" Background="Red"/>
 
                     <Button x:Name="CloseButton" Visibility="Collapsed" Grid.Column="2" Style="{StaticResource ButtonStyle}">
                         <FontIcon Glyph="&#xF78A;" FontSize="18" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>

@@ -111,6 +111,9 @@
     </Compile>
     <Compile Include="%24MainPages\SelectMode.cs" />
     <Compile Include="ApplicationLocalTextFileProvider.cs" />
+    <Compile Include="Expanders\Expander.Content.cs" />
+    <Compile Include="Expanders\Expander.Construct.cs" />
+    <Compile Include="Expanders\Expander.Menthon.cs" />
     <Compile Include="Expanders\IExpander.cs" />
     <Compile Include="Expanders\IExpanderButton.cs" />
     <Compile Include="Pickers\CirclePicker.xaml.cs">
@@ -127,7 +130,6 @@
       <DependentUpon>Expander.xaml</DependentUpon>
     </Compile>
     <Compile Include="Expanders\ExpanderState.cs" />
-    <Compile Include="Expanders\ExpanderWidth.cs" />
     <Compile Include="FileFormatComboBox.xaml.cs">
       <DependentUpon>FileFormatComboBox.xaml</DependentUpon>
     </Compile>
@@ -218,7 +220,6 @@
     <Compile Include="%24SettingPages\PhoneLayout.xaml.cs">
       <DependentUpon>PhoneLayout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VisualUIElementHelper.cs" />
     <Compile Include="XMLs\XML.Photo.cs" />
     <Compile Include="XMLs\XML.Photocopier.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo.Elements.rd.xml" />

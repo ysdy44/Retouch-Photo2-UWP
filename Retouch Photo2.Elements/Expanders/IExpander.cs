@@ -15,7 +15,9 @@ namespace Retouch_Photo2.Elements
         Action Closed { get; set; }
         /// <summary> Occurs when the flyout opened. </summary>
         Action Opened { get; set; }
-                               
+        /// <summary> Occurs when the flyout overlaid. </summary>
+        Action Overlaid { get; set; }
+        
         /// <summary> Gets or sets the state. </summary>
         ExpanderState State { get; set; }        
         /// <summary> Gets IMenu's placement mode. </summary>

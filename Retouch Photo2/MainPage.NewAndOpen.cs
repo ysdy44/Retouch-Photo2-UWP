@@ -33,13 +33,15 @@ namespace Retouch_Photo2
         /// <param name="pixels"> The bitmap size. </param>
         private void NewFromSize(BitmapSize pixels)
         {
-            string untitled = this.Untitled;
-            string name = this.UntitledRenameByRecursive(untitled);
-            int width = (int)pixels.Width;
-            int height = (int)pixels.Height;
-                
+            this.LoadingControl.IsActive = true;
+
             //Project
             {
+                string untitled = this.Untitled;
+                string name = this.UntitledRenameByRecursive(untitled);
+                int width = (int)pixels.Width;
+                int height = (int)pixels.Height;
+
                 Project project = new Project
                 {
                     Name = name,
@@ -47,8 +49,16 @@ namespace Retouch_Photo2
                     Height = height,
                 };
                 this.ViewModel.LoadFromProject(project);
-                this.Frame.Navigate(typeof(DrawPage), new TransitionData { Type = TransitionType.Size });//Navigate  
             }
+
+            //Transition
+            TransitionData data = new TransitionData
+            {
+                Type = TransitionType.Size
+            };
+
+            this.LoadingControl.IsActive = false;
+            this.Frame.Navigate(typeof(DrawPage), data);//Navigate
         }
 
         /// <summary>
@@ -58,20 +68,6 @@ namespace Retouch_Photo2
         private async void OpenFromProjectViewItem(ProjectViewItem projectViewItem)
         {
             this.LoadingControl.IsActive = true;
-
-            //Transition
-            //Get the position of the image element relative to the screen.   
-            FrameworkElement source = projectViewItem.ImageEx;
-            Point sourcePostion = VisualUIElementHelper.GetVisualPostion(source);
-            Size sourceSize = new Size(source.ActualWidth, source.ActualHeight);
-            Rect sourceRect = new Rect(sourcePostion, sourceSize);
-            Size pageSize = new Size(this.ActualWidth, this.ActualHeight - 50);
-            TransitionData data = new TransitionData
-            {
-                Type = TransitionType.Transition,
-                SourceRect = sourceRect,
-                PageSize = pageSize
-            };
 
             //FileUtil
             {
@@ -97,9 +93,18 @@ namespace Retouch_Photo2
                 this.ViewModel.LoadFromProject(project);
             }
 
+            //Transition
+            TransitionData data = new TransitionData
+            {
+                Type = TransitionType.Transition,
+                SourceRect = projectViewItem.GetVisualRect(Window.Current.Content),
+                PageSize = new Size(this.ActualWidth, this.ActualHeight - 50)
+            };
+
             this.LoadingControl.IsActive = false;
             this.Frame.Navigate(typeof(DrawPage), data);//Navigate   
         }
+
 
         /// <summary>
         /// New from Picture.
@@ -107,6 +112,8 @@ namespace Retouch_Photo2
         /// <param name="pixels"> The picker locationId. </param>
         private async Task NewFromPicture(PickerLocationId location)
         {
+            this.LoadingControl.IsActive = true;
+
             //Photo
             StorageFile copyFile = await FileUtil.PickAndCopySingleImageFileAsync(location);
             Photo photo = await FileUtil.CreatePhotoFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
@@ -123,18 +130,28 @@ namespace Retouch_Photo2
             ImageLayer imageLayer = new ImageLayer(transformerSource, photocopier);
 
             //Project
-            Project project = new Project
             {
-                Name = name,
-                Width = width,
-                Height = height,
-                Layers = new List<ILayer>
+                Project project = new Project
                 {
-                     imageLayer
-                }
+                    Name = name,
+                    Width = width,
+                    Height = height,
+                    Layers = new List<ILayer>
+                    {
+                         imageLayer
+                    }
+                };
+                this.ViewModel.LoadFromProject(project);
+            }
+
+            //Transition
+            TransitionData data = new TransitionData
+            {
+                Type = TransitionType.Size
             };
-            this.ViewModel.LoadFromProject(project);
-            this.Frame.Navigate(typeof(DrawPage), new TransitionData { Type = TransitionType.Size });//Navigate  
+
+            this.LoadingControl.IsActive = false;
+            this.Frame.Navigate(typeof(DrawPage), data);//Navigate
         }
 
 

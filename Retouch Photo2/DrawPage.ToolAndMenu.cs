@@ -1,6 +1,4 @@
-﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.Menus;
-using Windows.Foundation;
+﻿using Retouch_Photo2.Menus;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -81,9 +79,7 @@ namespace Retouch_Photo2
             if (menu == null) return;
             FrameworkElement layout = menu.Expander.Layout;
 
-            this.OverlayCanvas.Children.Add(layout);
-
-
+            
             //Move the menu to top.
             menu.Expander.Move += () =>
             {
@@ -97,8 +93,11 @@ namespace Retouch_Photo2
             {
                 foreach (IMenu m in this.TipViewModel.Menus)
                 {
-                    if (m.Type != menu.Type) m.Expander.Layout.IsHitTestVisible = false;
+                     m.Expander.Layout.IsHitTestVisible = false;
                 }
+                menu.Expander.Layout.IsHitTestVisible = true;
+
+                this.OverlayCanvas.Children.Add(layout);
                 this.IsOverlayDismiss = true;
             };
 
@@ -109,6 +108,19 @@ namespace Retouch_Photo2
                 {
                     m.Expander.Layout.IsHitTestVisible = true;
                 }
+
+                this.OverlayCanvas.Children.Remove(layout);
+                this.IsOverlayDismiss = false;
+            };
+
+            //Enable all menus.
+            menu.Expander.Overlaid += () =>
+            {
+                foreach (IMenu m in this.TipViewModel.Menus)
+                {
+                    m.Expander.Layout.IsHitTestVisible = true;
+                }
+
                 this.IsOverlayDismiss = false;
             };
         }

@@ -142,11 +142,11 @@ namespace Retouch_Photo2.Menus.Models
 
         //Menu
         public MenuType Type => MenuType.Effect;
+        public IExpander Expander => this._Expander;
         MenuButton _button { get; } = new MenuButton
         {
             CenterContent = new Retouch_Photo2.Effects.Icon()
         };
-        public IExpander Expander => this._Expander;
 
         public void ConstructMenu()
         {
