@@ -17,7 +17,7 @@
     <apiContractPresent5:AcrylicBrush x:Key="AppAcrylicElementBrush" BackgroundSource="Backdrop" 
          TintColor="{ThemeResource AppBackgroundColor}" TintOpacity="0.8" FallbackColor="{ThemeResource AppBackgroundColor}" />
     <apiContractPresent5:AcrylicBrush x:Key="AppAcrylicWindowBrush" BackgroundSource="HostBackdrop" 
-         TintColor="{ThemeResource AppBackgroundColor}" TintOpacity="0.7" FallbackColor="{ThemeResource AppBackgroundColor}" />
+         TintColor="{ThemeResource AppBackgroundColor}" TintOpacity="0.7" FallbackColor="{ThemeResource AppForegroundColor}" />
 
     
     <!--ScrollViewer-->

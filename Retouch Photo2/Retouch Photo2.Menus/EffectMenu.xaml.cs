@@ -77,7 +77,7 @@ namespace Retouch_Photo2.Menus.Models
                     effect.FollowEffectManager(value);
                 }
 
-                con.Expander.IsSecondPage = false;
+                con._Expander.IsSecondPage = false;
             }
             else
             {
@@ -86,7 +86,7 @@ namespace Retouch_Photo2.Menus.Models
                     effect.ToggleSwitch.IsEnabled = false;
                 }
  
-                con.Expander.IsSecondPage = false;
+                con._Expander.IsSecondPage = false;
             }
         }));
 
@@ -136,33 +136,24 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.ToolTip.Content = resource.GetString("/Menus/Effect");
-            this.Expander.Title = resource.GetString("/Menus/Effect");
+            this._button.ToolTip.Content = resource.GetString("/Menus/Effect");
+            this._Expander.Title = resource.GetString("/Menus/Effect");
         }
 
         //Menu
         public MenuType Type => MenuType.Effect;
-        public IExpanderButton Button { get; } = new MenuButton
+        MenuButton _button { get; } = new MenuButton
         {
             CenterContent = new Retouch_Photo2.Effects.Icon()
         };
         public IExpander Expander => this._Expander;
-        public ExpanderState State
-        {
-            set
-            {
-                this.Button.State = value;
-                this.Expander.State = value;
-            }
-        }
-        public FrameworkElement Self => this;
 
         public void ConstructMenu()
         {
-            this._Expander.Button = this.Button.Self;
-
-            this.Button.StateChanged += (state) => this.State = state;
-            this.Expander.StateChanged += (state) => this.State = state;
+            this._Expander.Layout = this;
+            this._Expander.Button = this._button;
+            this._Expander.Reset = this.Reset;
+            this._Expander.Initialize();
         }
     }
 
@@ -234,7 +225,8 @@ namespace Retouch_Photo2.Menus.Models
                 return;
             });
 
-            this.Expander.IsSecondPage = true;
+            this._Expander.IsSecondPage = true;
+            this._Expander.ResetButtonVisibility = Visibility.Visible;
         }
     }
 }

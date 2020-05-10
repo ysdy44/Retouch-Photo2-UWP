@@ -15,57 +15,9 @@ namespace Retouch_Photo2.Elements
     {
         //@Delegate
         public Action Move { get; set; }
-        public Action Show { get; set; }
         public Action Closed { get; set; }
         public Action Opened { get; set; }
 
-        public Action<ExpanderState> StateChanged { get; set; }
-
-
-        //@Content
-        public string Title { set => this.TitleTextBlock.Text = value; get => this.TitleTextBlock.Text; }
-        public FrameworkElement TitleGrid => this._TitleGrid;
-
-        public FrameworkElement ResetButton => this._ResetButton;
-
-        public UIElement MainPage { set => this.MainPageBorder.Child = value; get => this.MainPageBorder.Child; }
-        public UIElement SecondPage { set => this.SecondPageBorder.Child = value; get => this.SecondPageBorder.Child; }
-
-
-        //@VisualState
-        bool _vsIsSecondPage = false;
-        ExpanderState _vsState = ExpanderState.Hide;
-        public VisualState VisualState
-        {
-            get
-            {
-                switch (this._vsState)
-                {
-                    case ExpanderState.Hide: return this.Hide;
-                    case ExpanderState.FlyoutShow: return this._vsIsSecondPage ? this.FlyoutShowSecondPage : this.FlyoutShow;
-                    case ExpanderState.OverlayNotExpanded: return this.OverlayNotExpanded;
-                    case ExpanderState.Overlay: return this._vsIsSecondPage ? this.OverlaySecondPage : this.Overlay;
-                    default: return this.Normal;
-                }
-            }
-            set=>VisualStateManager.GoToState(this, value.Name, false);
-        }
-         
-        public bool IsSecondPage
-        {
-            get => this._vsIsSecondPage;
-            set
-            {
-                if (value == false)
-                {
-                    this._ResetButton.Visibility = Visibility.Collapsed;
-                }
-
-                this._vsIsSecondPage = value;
-                this.VisualState = this.VisualState; //State
-            }
-        }
-        
 
         //@Content
         public ExpanderState State
@@ -85,11 +37,10 @@ namespace Retouch_Photo2.Elements
                     case ExpanderState.FlyoutShow:
                         {
                             FlyoutPlacementMode placement = this.PlacementMode;
-                            Point flyoutPostion = VisualUIElementHelper.GetFlyoutPostion(this.Button, this.Layout, placement);
+                            Point flyoutPostion = VisualUIElementHelper.GetFlyoutPostion(this.Button.Self, this.Layout, placement);
                             Point boundPostion = VisualUIElementHelper.GetBoundPostion(flyoutPostion, this.Layout);
                             VisualUIElementHelper.SetOverlayPostion(this.Layout, boundPostion);
                             this.Move?.Invoke(); //Delegate
-                            this.Show?.Invoke(); //Delegate
 
                             if (this._vsState == ExpanderState.Hide)
                                 this.Opened?.Invoke(); //Delegate 
@@ -111,19 +62,61 @@ namespace Retouch_Photo2.Elements
                         break;
                 }
 
+                this.Button.State = value;
                 this._vsState = value;
                 this.VisualState = this.VisualState; //State
             }
         }
-
         public FlyoutPlacementMode PlacementMode { get; set; } = FlyoutPlacementMode.Bottom;
-        public Point Postion { get; set; }
+        public FrameworkElement Layout { get; set; }
+        public IExpanderButton Button { get; set; }
 
-        public FrameworkElement Layout;
-        public FrameworkElement Button { get; set; } 
+        public Action Reset { get; set; }
 
 
-        //@Construct
+        public string Title { set => this.TitleTextBlock.Text = value; get => this.TitleTextBlock.Text; }
+        public UIElement MainPage { set => this.MainPageBorder.Child = value; get => this.MainPageBorder.Child; }
+        public UIElement SecondPage { set => this.SecondPageBorder.Child = value; get => this.SecondPageBorder.Child; }
+        public bool IsSecondPage
+        {
+            get => this._vsIsSecondPage;
+            set
+            {
+                if (value == false)
+                {
+                    this.ResetButton.Visibility = Visibility.Collapsed;
+                }
+
+                this._vsIsSecondPage = value;
+                this.VisualState = this.VisualState; //State
+            }
+        }
+        public Visibility ResetButtonVisibility { set => this.ResetButton.Visibility = value; get => this.ResetButton.Visibility; }
+
+
+        //@VisualState
+        bool _vsIsSecondPage = false;
+        ExpanderState _vsState = ExpanderState.Hide;
+        public VisualState VisualState
+        {
+            get
+            {
+                switch (this._vsState)
+                {
+                    case ExpanderState.Hide: return this.Hide;
+                    case ExpanderState.FlyoutShow: return this._vsIsSecondPage ? this.FlyoutShowSecondPage : this.FlyoutShow;
+                    case ExpanderState.OverlayNotExpanded: return this.OverlayNotExpanded;
+                    case ExpanderState.Overlay: return this._vsIsSecondPage ? this.OverlaySecondPage : this.Overlay;
+                    default: return this.Normal;
+                }
+            }
+            set => VisualStateManager.GoToState(this, value.Name, false);
+        }
+
+        Point _postion;
+
+
+        //@Construct     
         public Expander()
         {
             this.InitializeComponent();
@@ -131,25 +124,27 @@ namespace Retouch_Photo2.Elements
             this.ConstructWidthStoryboard();
             this.ConstructHeightStoryboard();
             this.Tapped += (s, e) => e.Handled = true;
-            this.Loaded += (s, e) =>
-            {
-                this.VisualState = this.VisualState;//State 
+        }
 
-                if (this.Parent is FrameworkElement element)
-                {
-                    this.Layout = element;
-                }
-                else
-                {
-                    this.Layout = this;
-                }
-            };
 
-            this._CloseButton.Tapped += (s, e) => this.StateChanged?.Invoke(ExpanderState.Hide);
-            this._StateButton.Tapped += (s, e) => this.StateChanged?.Invoke(this.GetState(this.State));
+        /// <summary>
+        /// Initialize
+        /// </summary>
+        public void Initialize()
+        {
+            this.VisualState = this.VisualState;//State 
 
-            this._BackButton.Tapped += (s, e) => this.IsSecondPage = false;
+            /////////////////////////////////
 
+            this.Button.Self.Tapped += (s, e) => this.State = this.GetButtonState(this.State);
+
+            this.CloseButton.Tapped += (s, e) => this.State = ExpanderState.Hide;
+            this.StateButton.Tapped += (s, e) => this.State = this.GetState(this.State);
+
+            this.BackButton.Tapped += (s, e) => this.IsSecondPage = false;
+            if (this.Reset != null) this.ResetButton.Tapped += (s, e) => this.Reset();
+
+            /////////////////////////////////
 
             //Postion 
             this.TitleGrid.ManipulationMode = ManipulationModes.All;
@@ -157,24 +152,22 @@ namespace Retouch_Photo2.Elements
             {
                 if (this.State == ExpanderState.FlyoutShow) return;
 
-                this.Postion = VisualUIElementHelper.GetVisualPostion(this.Layout);
+                this._postion = VisualUIElementHelper.GetVisualPostion(this.Layout);
                 this.Move?.Invoke(); //Delegate
             };
             this.TitleGrid.ManipulationDelta += (s, e) =>
             {
                 if (this.State == ExpanderState.FlyoutShow) return;
 
-                Point point = this.Postion;
-                point.X += e.Delta.Translation.X;
-                point.Y += e.Delta.Translation.Y;
-                this.Postion = point;
+                this._postion.X += e.Delta.Translation.X;
+                this._postion.Y += e.Delta.Translation.Y;
 
-                Point postion2 = VisualUIElementHelper.GetBoundPostion(point, this.Layout);
+                Point postion2 = VisualUIElementHelper.GetBoundPostion(this._postion, this.Layout);
                 VisualUIElementHelper.SetOverlayPostion(this.Layout, postion2);
             };
             this.TitleGrid.ManipulationCompleted += (s, e) =>
             {
-                this.Postion = VisualUIElementHelper.GetVisualPostion(this.Layout);
+                this._postion = VisualUIElementHelper.GetVisualPostion(this.Layout);
             };
         }
 
@@ -187,6 +180,18 @@ namespace Retouch_Photo2.Elements
                 case ExpanderState.OverlayNotExpanded: return ExpanderState.Overlay;
             }
             return ExpanderState.Overlay;
+        }
+        private ExpanderState GetButtonState(ExpanderState state)
+        {
+            switch (state)
+            {
+                case ExpanderState.Hide: return ExpanderState.FlyoutShow;
+                case ExpanderState.FlyoutShow: return ExpanderState.Hide;
+
+                case ExpanderState.Overlay: return ExpanderState.OverlayNotExpanded;
+                case ExpanderState.OverlayNotExpanded: return ExpanderState.Overlay;
+            }
+            return ExpanderState.FlyoutShow;
         }
 
 
@@ -217,8 +222,8 @@ namespace Retouch_Photo2.Elements
             this.WidthFlyoutItem322.Click += (s, e) => this.WidthMode = ExpanderWidth.Width322;
             this.WidthFlyoutItem372.Click += (s, e) => this.WidthMode = ExpanderWidth.Width372;
 
-            this._TitleGrid.RightTapped += (s, e) => this.WidthMenuFlyout.ShowAt(this._TitleGrid);
-            this._TitleGrid.Holding += (s, e) => this.WidthMenuFlyout.ShowAt(this._TitleGrid);
+            this.TitleGrid.RightTapped += (s, e) => this.WidthMenuFlyout.ShowAt(this.TitleGrid);
+            this.TitleGrid.Holding += (s, e) => this.WidthMenuFlyout.ShowAt(this.TitleGrid);
         }
 
 
@@ -248,6 +253,39 @@ namespace Retouch_Photo2.Elements
             this.MainPageBorder.SizeChanged += (s, e) => this.HeightBegin = e.NewSize.Height;
             this.SecondPageBorder.SizeChanged += (s, e) => this.HeightBegin = e.NewSize.Height;
         }
+
+
+        public void HideLayout()
+        {
+            switch (this.State)
+            {
+                case ExpanderState.FlyoutShow:
+                    this.State = ExpanderState.Hide;
+                    break;
+            }
+
+            this.Layout.IsHitTestVisible = true;
+        }
+
+        public void CropLayout()
+        {
+            switch (this.State)
+            {
+                case ExpanderState.FlyoutShow:
+                    this.State = ExpanderState.Hide;
+                    break;
+                case ExpanderState.Overlay:
+                case ExpanderState.OverlayNotExpanded:
+                    {
+                        Point postion = VisualUIElementHelper.GetOverlayPostion(this.Layout);
+                        Point postion2 = VisualUIElementHelper.GetBoundPostion(postion, this.Layout);
+                        VisualUIElementHelper.SetOverlayPostion(this.Layout, postion2);
+                    }
+                    break;
+            }
+        }
+
+
 
     }
 }

@@ -198,7 +198,7 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructMenu();
 
             this.Loaded += (s, e) => this._isLoaded = true;
-            this.RemoteButton.Tapped += (s, e) => this.Expander.IsSecondPage = true;
+            this.RemoteButton.Tapped += (s, e) => this._Expander.IsSecondPage = true;
             
             this.ConstructRemoteControl();
             this.ConstructIndicatorControl();
@@ -234,8 +234,8 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.ToolTip.Content = resource.GetString("/Menus/Transformer");
-            this.Expander.Title = resource.GetString("/Menus/Transformer");
+            this._button.ToolTip.Content = resource.GetString("/Menus/Transformer");
+            this._Expander.Title = resource.GetString("/Menus/Transformer");
 
             this.WidthTextBlock.Text = resource.GetString("/Menus/Transformer_Height");
             this.HeightTextBlock.Text = resource.GetString("/Menus/Transformer_Width");
@@ -254,9 +254,9 @@ namespace Retouch_Photo2.Menus.Models
         //ToolTip
         private void ConstructToolTip()
         {
-            this.Button.ToolTip.Opened += (s, e) =>
+            this._button.ToolTip.Opened += (s, e) =>
             {
-                if (this.Expander.IsSecondPage) return;
+                if (this._Expander.IsSecondPage) return;
 
                 if (this.Expander.State == ExpanderState.Overlay)
                 {
@@ -264,7 +264,7 @@ namespace Retouch_Photo2.Menus.Models
                     this.IndicatorToolTip.IsOpen = true;
                 }
             };
-            this.Button.ToolTip.Closed += (s, e) =>
+            this._button.ToolTip.Closed += (s, e) =>
             {
                 this.RatioScalingToolTip.IsOpen = false;
                 this.IndicatorToolTip.IsOpen = false;
@@ -273,27 +273,17 @@ namespace Retouch_Photo2.Menus.Models
 
         //Menu
         public MenuType Type => MenuType.Transformer;
-        public IExpanderButton Button { get; } = new MenuButton
+        public IExpander Expander => this._Expander;
+        MenuButton _button = new MenuButton
         {
             CenterContent = new FanKit.Transformers.Icon()
         };
-        public IExpander Expander => this._Expander;
-        public ExpanderState State
-        {
-            set
-            {
-                this.Button.State = value;
-                this.Expander.State = value;
-            }
-        }
-        public FrameworkElement Self => this;
 
         public void ConstructMenu()
         {
-            this._Expander.Button = this.Button.Self;
-
-            this.Button.StateChanged += (state) => this.State = state;
-            this.Expander.StateChanged += (state) => this.State = state;
+            this._Expander.Layout = this;
+            this._Expander.Button = this._button;
+            this._Expander.Initialize();
         }
     }
 

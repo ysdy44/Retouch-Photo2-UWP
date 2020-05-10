@@ -2,6 +2,7 @@
 using Retouch_Photo2.Menus;
 using Windows.Foundation;
 using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
@@ -33,108 +34,84 @@ namespace Retouch_Photo2
         //Menu
         private void ConstructMenus()
         {
-            //Menu
             foreach (IMenu menu in this.TipViewModel.Menus)
             {
-                this.ConstructMenu(menu);
+                this.ConstructMenuButton(menu);
+                this.ConstructMenuLayout(menu);
             }
-            this.OverlayCanvas.Tapped += (s, e) => this.MenusHide();
-            this.OverlayCanvas.SizeChanged += (s, e) => this.MenusHideAndCrop();
+
+            this.OverlayCanvas.Tapped += (s, e) =>
+            {
+                foreach (IMenu menu in this.TipViewModel.Menus)
+                {
+                    menu.Expander.HideLayout();
+                }
+                this.IsOverlayDismiss = false;
+            };
+
+            this.OverlayCanvas.SizeChanged += (s, e) =>
+            {
+                foreach (IMenu menu in this.TipViewModel.Menus)
+                {
+                    menu.Expander.CropLayout();
+                }
+                this.IsOverlayDismiss = false;
+            };
         }
-               
+
+
         //Menu
-        public void ConstructMenu(IMenu menu)
+        public void ConstructMenuButton(IMenu menu)
         {
             if (menu == null) return;
+            UIElement button = menu.Expander.Button.Self;
 
-            this.OverlayCanvas.Children.Add(menu.Self);
-
-            menu.Expander.Move += () =>
-            {
-                //Move to top
-                int index = this.OverlayCanvas.Children.IndexOf(menu.Self);
-                int count = this.OverlayCanvas.Children.Count;
-                this.OverlayCanvas.Children.Move((uint)index, (uint)count - 1);
-            };
-            menu.Expander.Show += () => this.IsOverlayDismiss = true;
-            menu.Expander.Opened += () => this.MenusDisable(menu);//Menus is disable
-            menu.Expander.Closed += () => this.MenusEnable();//Menus is enable
-
-            //MenuButton
             if (menu.Type == MenuType.Layer)
             {
-                this.LayersControl.IndicatorBorder.Child = menu.Button.Self;
+                this.LayersControl.IndicatorBorder.Child = button;
             }
             else
             {
-                this.MenuHead.Add(menu.Button.Self);
+                this.MenuHead.Add(button);
             }
         }
 
-
-        /// <summary>
-        /// Hide all Menus.
-        /// </summary>
-        private void MenusHide() => this._menusHideAndCrop(false);
-
-        /// <summary>
-        /// Hide all Menus, and crop the limiting bound.
-        /// </summary>
-        private void MenusHideAndCrop() => this._menusHideAndCrop(true);
-
-        private void _menusHideAndCrop(bool isCrop)
+        public void ConstructMenuLayout(IMenu menu)
         {
-            foreach (IMenu menu in this.TipViewModel.Menus)
+            if (menu == null) return;
+            FrameworkElement layout = menu.Expander.Layout;
+
+            this.OverlayCanvas.Children.Add(layout);
+
+
+            //Move the menu to top.
+            menu.Expander.Move += () =>
             {
-                switch (menu.Expander.State)
+                int index = this.OverlayCanvas.Children.IndexOf(layout);
+                int count = this.OverlayCanvas.Children.Count;
+                this.OverlayCanvas.Children.Move((uint)index, (uint)count - 1);
+            };
+
+            //Disable all menus, except the current menu.
+            menu.Expander.Opened += () =>
+            {
+                foreach (IMenu m in this.TipViewModel.Menus)
                 {
-                    case ExpanderState.FlyoutShow:
-                        menu.State = ExpanderState.Hide;
-                        break;
-                    case ExpanderState.Overlay:
-                    case ExpanderState.OverlayNotExpanded:
-                        if (isCrop)
-                        {
-                            Point postion = VisualUIElementHelper.GetOverlayPostion(menu.Self);
-                            Point postion2 = VisualUIElementHelper.GetBoundPostion(postion, menu.Self);
-                            VisualUIElementHelper.SetOverlayPostion(menu.Self, postion2);
-                        }
-                        break;
+                    if (m.Type != menu.Type) m.Expander.Layout.IsHitTestVisible = false;
                 }
-            }
+                this.IsOverlayDismiss = true;
+            };
 
-            this.IsOverlayDismiss = false;
-        }
-
-
-        /// <summary>
-        /// Disable all menus, except the current menu.
-        /// </summary>
-        /// <param name="currentMenu"> The current menu. </param>
-        private void MenusDisable(IMenu currentMenu)
-        {
-            foreach (IMenu menu in this.TipViewModel.Menus)
+            //Enable all menus.
+            menu.Expander.Closed += () =>
             {
-                if (menu.Type != currentMenu.Type)
+                foreach (IMenu m in this.TipViewModel.Menus)
                 {
-                    menu.IsHitTestVisible = false;
+                    m.Expander.Layout.IsHitTestVisible = true;
                 }
-            }
-
-            this.IsOverlayDismiss = true;
+                this.IsOverlayDismiss = false;
+            };
         }
-        /// <summary>
-        /// Enable all menus.
-        /// </summary>
-        private void MenusEnable()
-        {
-            foreach (IMenu menu in this.TipViewModel.Menus)
-            {
-                menu.IsHitTestVisible = true;
-            }
-            this.OverlayCanvas.Background = null;
-        }
-
 
     }
 }

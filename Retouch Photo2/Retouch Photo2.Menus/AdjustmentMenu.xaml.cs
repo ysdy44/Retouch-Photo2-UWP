@@ -101,7 +101,7 @@ namespace Retouch_Photo2.Menus.Models
         {
             AdjustmentMenu con = (AdjustmentMenu)sender;
 
-            con.Expander.IsSecondPage = false;
+            con._Expander.IsSecondPage = false;
 
             if (e.NewValue is AdjustmentManager value)
             {
@@ -180,7 +180,7 @@ namespace Retouch_Photo2.Menus.Models
             this.FiltersButton.Tapped += (s, e) =>
             {
                 this.AdjustmentPageOrFilters = false;
-                this.Expander.IsSecondPage = true;
+                this._Expander.IsSecondPage = true;
             };
         }
         
@@ -195,8 +195,8 @@ namespace Retouch_Photo2.Menus.Models
             if (adjustment.PageVisibility == Visibility.Collapsed) return;
 
             this.AdjustmentPageOrFilters = true;
-            this.Expander.IsSecondPage = true;
-            this.Expander.ResetButton.Visibility = Visibility.Visible;
+            this._Expander.IsSecondPage = true;
+            this._Expander.ResetButtonVisibility = Visibility.Visible;
 
             this.Adjustment = adjustment;
         }
@@ -247,8 +247,8 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.ToolTip.Content = resource.GetString("/Menus/Adjustment");
-            this.Expander.Title = resource.GetString("/Menus/Adjustment");
+            this._button.ToolTip.Content = resource.GetString("/Menus/Adjustment");
+            this._Expander.Title = resource.GetString("/Menus/Adjustment");
 
             this.ZeroTextBlock.Text = resource.GetString("/Menus/Adjustment_ZeroTip");
             this.DisableTextBlock.Text = resource.GetString("/Menus/Adjustment_DisableTip");
@@ -259,28 +259,18 @@ namespace Retouch_Photo2.Menus.Models
 
         //Menu
         public MenuType Type => MenuType.Adjustment;
-        public IExpanderButton Button { get; } = new MenuButton
+        public IExpander Expander => this._Expander;
+        MenuButton _button = new MenuButton
         {
             CenterContent = new Retouch_Photo2.Adjustments.Icon()
         };
-        public IExpander Expander => this._Expander;
-        public ExpanderState State
-        {
-            set
-            {
-                this.Button.State = value;
-                this.Expander.State = value;
-            }
-        }
-        public FrameworkElement Self => this;
 
         public void ConstructMenu()
         {
-            this._Expander.Button = this.Button.Self;
-
-            this.Button.StateChanged += (state) => this.State = state;
-            this.Expander.StateChanged += (state) => this.State = state;
-            this.Expander.ResetButton.Tapped += (s, e) => this.Reset();
+            this._Expander.Layout = this;
+            this._Expander.Button = this._button;
+            this._Expander.Reset = this.Reset;
+            this._Expander.Initialize();
         }
     }
 

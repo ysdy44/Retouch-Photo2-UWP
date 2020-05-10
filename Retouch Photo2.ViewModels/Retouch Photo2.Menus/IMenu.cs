@@ -13,16 +13,5 @@ namespace Retouch_Photo2.Menus
 
         /// <summary> Gets IMenu's expander. </summary>
         IExpander Expander { get; }
-        /// <summary> Gets IMenu's button. </summary>
-        IExpanderButton Button { get; }
-
-        /// <summary> Gets IMenu's button. </summary>
-        ExpanderState State { set; }
-
-        /// <summary> Sets IMenu's layer IsHitTestVisible. </summary>
-        bool IsHitTestVisible { set; }
-
-        /// <summary> Self. </summary>
-        FrameworkElement Self { get; }
     }
 }

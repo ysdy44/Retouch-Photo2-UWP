@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Menus.Models
         public ColorMenu()
         {
             this.InitializeComponent();
-            this.Button.CenterContent = new ColorEllipse
+            this._button.CenterContent = new ColorEllipse
              (
                   dataContext: this.SelectionViewModel,
                   path: nameof(this.SelectionViewModel.Color),
@@ -46,30 +46,20 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.ToolTip.Content = resource.GetString("/Menus/Color");
-            this.Expander.Title = resource.GetString("/Menus/Color");
+            this._button.ToolTip.Content = resource.GetString("/Menus/Color");
+            this._Expander.Title = resource.GetString("/Menus/Color");
         }
 
         //Menu
         public MenuType Type => MenuType.Transformer;
-        public IExpanderButton Button { get; } = new MenuButton();
         public IExpander Expander => this._Expander;
-        public ExpanderState State
-        {
-            set
-            {
-                this.Button.State = value;
-                this.Expander.State = value;
-            }
-        }
-        public FrameworkElement Self => this;
+        MenuButton _button = new MenuButton();
 
         public void ConstructMenu()
         {
-            this._Expander.Button = this.Button.Self;
-
-            this.Button.StateChanged += (state) => this.State = state;
-            this.Expander.StateChanged += (state) => this.State = state;
+            this._Expander.Layout = this;
+            this._Expander.Button = this._button;
+            this._Expander.Initialize();
         }
     }
 }

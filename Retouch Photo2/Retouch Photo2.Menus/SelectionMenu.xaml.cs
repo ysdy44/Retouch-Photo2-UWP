@@ -55,8 +55,8 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.ToolTip.Content = resource.GetString("/Menus/Selection");
-            this.Expander.Title = resource.GetString("/Menus/Selection");
+            this._button.ToolTip.Content = resource.GetString("/Menus/Selection");
+            this._Expander.Title = resource.GetString("/Menus/Selection");
             
             this.EditTextBlock.Text = resource.GetString("/Selections/Edit");
             this.CutButton.Content = resource.GetString("/Selections/Edit_Cut");
@@ -83,27 +83,17 @@ namespace Retouch_Photo2.Menus.Models
 
         //Menu
         public MenuType Type => MenuType.Selection;
-        public IExpanderButton Button { get; } = new MenuButton
+        public IExpander Expander => this._Expander;
+        MenuButton _button = new MenuButton
         {
             CenterContent = new Retouch_Photo2.Selections.Icon()
         };
-        public IExpander Expander => this._Expander;
-        public ExpanderState State
-        {
-            set
-            {
-                this.Button.State = value;
-                this.Expander.State = value;
-            }
-        }
-        public FrameworkElement Self => this;
 
         public void ConstructMenu()
         {
-            this._Expander.Button = this.Button.Self;
-
-            this.Button.StateChanged += (state) => this.State = state;
-            this.Expander.StateChanged += (state) => this.State = state;
+            this._Expander.Layout = this;
+            this._Expander.Button = this._button;
+            this._Expander.Initialize();
         }
     }
 

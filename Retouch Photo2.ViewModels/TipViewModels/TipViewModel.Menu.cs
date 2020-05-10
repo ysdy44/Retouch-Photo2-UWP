@@ -26,7 +26,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (menu.Type == type)
                 {
-                    menu.State = ExpanderState.FlyoutShow;
+                    menu.Expander.State = ExpanderState.FlyoutShow;
                     break;
                 }
             }

@@ -22,33 +22,22 @@ namespace Retouch_Photo2.Menus.Models
         {
             //ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Expander.Title = "Keyboard";//resource.GetString("/Menus/Keyboard");
+            this._Expander.Title = "Keyboard";//resource.GetString("/Menus/Keyboard");
         }
 
         //Menu
         public MenuType Type => MenuType.Debug;
-        public IExpanderButton Button { get; } = new MenuButton
+        public IExpander Expander => this._Expander;
+        MenuButton _button = new MenuButton
         {
             CenterContent = "Key"
         };
-        public IExpander Expander => this._Expander;
-        public ExpanderState State
-        {
-            set
-            {
-                this.Button.State = value;
-                this.Expander.State = value;
-            }
-        }
-        public FrameworkElement Self => this;
 
         public void ConstructMenu()
         {
-            this._Expander.Button = this.Button.Self;
-
-            this.Button.StateChanged += (state) => this.State = state;
-            this.Expander.StateChanged += (state) => this.State = state;
+            this._Expander.Layout = this;
+            this._Expander.Button = this._button;
+            this._Expander.Initialize();
         }
-
     }
 }

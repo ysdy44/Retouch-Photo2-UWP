@@ -97,11 +97,11 @@
                         <!--Title-->
                         <Setter Target = "TitleToggleButton.Content" Value="FlyoutShow"/>
                         <Setter Target = "TitleToggleButton.IsChecked" Value="False"/>
-                        <Setter Target = "_TitleGrid.Background" Value="{ThemeResource AppBackground}"/>
+                        <Setter Target = "TitleGrid.Background" Value="{ThemeResource AppBackground}"/>
                         <Setter Target = "TitleTextBlock.Visibility" Value="Visible"/>
 
                         <!--Button-->
-                        <Setter Target = "_StateButton.Visibility" Value="Visible"/>
+                        <Setter Target = "StateButton.Visibility" Value="Visible"/>
 
                         <!--Body-->
                         <Setter Target = "MainPageBorder.Visibility" Value="Visible"/>
@@ -116,10 +116,10 @@
                         <!--Title-->
                         <Setter Target = "TitleToggleButton.Content" Value="FlyoutShowSecondPage"/>
                         <Setter Target = "TitleToggleButton.IsChecked" Value="True"/>
-                        <Setter Target = "_TitleGrid.Background" Value="{ThemeResource AppBackground}"/>
+                        <Setter Target = "TitleGrid.Background" Value="{ThemeResource AppBackground}"/>
 
                         <!--Button-->
-                        <Setter Target = "_BackButton.Visibility" Value="Visible"/>
+                        <Setter Target = "BackButton.Visibility" Value="Visible"/>
 
                         <!--Body-->
                         <Setter Target = "SecondPageBorder.Visibility" Value="Visible"/>
@@ -134,12 +134,12 @@
                         <!--Title-->
                         <Setter Target = "TitleToggleButton.Content" Value="OverlayNotExpanded"/>
                         <Setter Target = "TitleToggleButton.IsChecked" Value="{x:Null}"/>
-                        <Setter Target = "_TitleGrid.Background" Value="{ThemeResource AppLinearBrush}"/>
+                        <Setter Target = "TitleGrid.Background" Value="{ThemeResource AppLinearBrush}"/>
                         <Setter Target = "TitleTextBlock.Visibility" Value="Visible"/>
 
                         <!--Button-->
-                        <Setter Target = "_CloseButton.Visibility" Value="Visible"/>
-                        <Setter Target = "_StateButton.Visibility" Value="Visible"/>
+                        <Setter Target = "CloseButton.Visibility" Value="Visible"/>
+                        <Setter Target = "StateButton.Visibility" Value="Visible"/>
                         <Setter Target = "StateIcon.Glyph" Value="&#xE196;"/>
 
                     </VisualState.Setters>
@@ -155,8 +155,8 @@
                         <Setter Target = "TitleTextBlock.Visibility" Value="Visible"/>
 
                         <!--Button-->
-                        <Setter Target = "_CloseButton.Visibility" Value="Visible"/>
-                        <Setter Target = "_StateButton.Visibility" Value="Visible"/>
+                        <Setter Target = "CloseButton.Visibility" Value="Visible"/>
+                        <Setter Target = "StateButton.Visibility" Value="Visible"/>
 
                         <!--Body-->
                         <Setter Target = "MainPageBorder.Visibility" Value="Visible"/>
@@ -173,7 +173,7 @@
                         <Setter Target = "TitleToggleButton.IsChecked" Value="True"/>
 
                         <!--Button-->
-                        <Setter Target = "_BackButton.Visibility" Value="Visible"/>
+                        <Setter Target = "BackButton.Visibility" Value="Visible"/>
 
                         <!--Body-->
                         <Setter Target = "SecondPageBorder.Visibility" Value="Visible"/>
@@ -208,7 +208,7 @@
 
                 <!--@Acrylic-->
                 <!--Head-->
-                <Grid x:Name="_TitleGrid"
+                <Grid x:Name="TitleGrid"
                           apiContractNotPresent5:Background="{ThemeResource AppBackground}"
                           apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
                     <Grid.ColumnDefinitions>
@@ -221,15 +221,15 @@
                     <TextBlock x:Name="TitleTextBlock" Visibility="Collapsed" Grid.ColumnSpan="3" Margin="12,0,12,0" TextTrimming="CharacterEllipsis" FontSize="24" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
                     <ToggleButton x:Name="TitleToggleButton" Visibility="Collapsed" Grid.Column="1" HorizontalAlignment="Stretch" Background="Red"/>
 
-                    <Button x:Name="_CloseButton" Visibility="Collapsed" Grid.Column="2" Style="{StaticResource ButtonStyle}">
+                    <Button x:Name="CloseButton" Visibility="Collapsed" Grid.Column="2" Style="{StaticResource ButtonStyle}">
                         <FontIcon Glyph="&#xF78A;" FontSize="18" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                     </Button>
 
-                    <Button x:Name="_StateButton" Visibility="Collapsed" Grid.Column="3" Style="{StaticResource ButtonStyle}">
+                    <Button x:Name="StateButton" Visibility="Collapsed" Grid.Column="3" Style="{StaticResource ButtonStyle}">
                         <FontIcon x:Name="StateIcon" Glyph="&#xE840;" FontWeight="Bold" FontSize="18" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                     </Button>
 
-                    <Button x:Name="_BackButton" Visibility="Collapsed" Grid.Column="0" Style="{StaticResource ButtonStyle}">
+                    <Button x:Name="BackButton" Visibility="Collapsed" Grid.Column="0" Style="{StaticResource ButtonStyle}">
 
                         <!--Visibility:Show-->
                         <animations:Implicit.ShowAnimations>
@@ -237,10 +237,10 @@
                             <animations:OpacityAnimation Duration="0:0:0.5" From="0.0" To="1.0"/>
                         </animations:Implicit.ShowAnimations>
 
-                        <FontIcon Glyph="&#xE0A6;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+                        <FontIcon Glyph="&#xE0A6;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                     </Button>
 
-                    <Button x:Name="_ResetButton" Visibility="Collapsed" Grid.Column="3" Style="{StaticResource ButtonStyle}">
+                    <Button x:Name="ResetButton" Visibility="Collapsed" Grid.Column="3" Style="{StaticResource ButtonStyle}">
                         <FontIcon Glyph="&#xE149;" FontSize="18" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                     </Button>
 

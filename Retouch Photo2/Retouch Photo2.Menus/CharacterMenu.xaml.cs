@@ -89,8 +89,8 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.ToolTip.Content = resource.GetString("/Menus/Character");
-            this.Expander.Title = resource.GetString("/Menus/Character");
+            this._button.ToolTip.Content = resource.GetString("/Menus/Character");
+            this._Expander.Title = resource.GetString("/Menus/Character");
 
             this.FontAlignmentTextBlock.Text = resource.GetString("/Characters/FontAlignment");
                         
@@ -109,9 +109,9 @@ namespace Retouch_Photo2.Menus.Models
         //ToolTip
         private void ConstructToolTip()
         {
-            this.Button.ToolTip.Opened += (s, e) =>
+            this._button.ToolTip.Opened += (s, e) =>
             {
-                if (this.Expander.IsSecondPage==false)
+                if (this._Expander.IsSecondPage==false)
                 {
                     if (this.Expander.State == ExpanderState.Overlay)
                     {
@@ -120,36 +120,26 @@ namespace Retouch_Photo2.Menus.Models
                     }
                 }
             };
-            this.Button.ToolTip.Closed += (s, e) =>
+            this._button.ToolTip.Closed += (s, e) =>
             {
                 this.IsOpen = false;
                 this.FontAlignmentSegmented.IsOpen = false;
             };
         }
 
-        //Menu
+        //Menu  
         public MenuType Type => MenuType.Character;
-        public IExpanderButton Button { get; } = new MenuButton
+        public IExpander Expander => this._Expander;
+        MenuButton _button = new MenuButton
         {
             CenterContent = new Retouch_Photo2.Characters.Icon()
         };
-        public IExpander Expander => this._Expander;
-        public ExpanderState State
-        {
-            set
-            {
-                this.Button.State = value;
-                this.Expander.State = value;
-            }
-        }
-        public FrameworkElement Self => this;
 
         public void ConstructMenu()
         {
-            this._Expander.Button = this.Button.Self;
-
-            this.Button.StateChanged += (state) => this.State = state;
-            this.Expander.StateChanged += (state) => this.State = state;
+            this._Expander.Layout = this;
+            this._Expander.Button = this._button;
+            this._Expander.Initialize();
         }
     }
 
@@ -237,7 +227,7 @@ namespace Retouch_Photo2.Menus.Models
             this.FontWeightButton.Tapped += (s, e) =>
             {
                 this.CharacterState = CharacterState.FontWeight;
-                this.Expander.IsSecondPage = true;
+                this._Expander.IsSecondPage = true;
             };
 
             this.FontWeightControl.WeightChanged += (s, fontWeight) =>
@@ -269,7 +259,7 @@ namespace Retouch_Photo2.Menus.Models
             this.FontFamilyButton.Tapped += (s, e) =>
             {
                 this.CharacterState = CharacterState.FontFamily;
-                this.Expander.IsSecondPage = true;
+                this._Expander.IsSecondPage = true;
             };
             
             this.FontFamilyListView.ItemClick += (s, e) =>
@@ -306,7 +296,7 @@ namespace Retouch_Photo2.Menus.Models
             this.FontSizeButton.Tapped += (s, e) =>
             {
                 this.CharacterState = CharacterState.FontSize;
-                this.Expander.IsSecondPage = true;
+                this._Expander.IsSecondPage = true;
             };
             
             this.FontSizePicker.ValueChange += (s, value) => this.SetFontSize(value);

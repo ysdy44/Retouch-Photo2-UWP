@@ -86,8 +86,8 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.ToolTip.Content = resource.GetString("/Menus/Operate");
-            this.Expander.Title = resource.GetString("/Menus/Operate");
+            this._button.ToolTip.Content = resource.GetString("/Menus/Operate");
+            this._Expander.Title = resource.GetString("/Menus/Operate");
 
             this.TransformTextBlock.Text = resource.GetString("/Operates/Transform");
             this.FlipHorizontalToolTip.Content = resource.GetString("/Operates/Transform_FlipHorizontal");
@@ -133,9 +133,9 @@ namespace Retouch_Photo2.Menus.Models
         //ToolTip
         private void ConstructToolTip()
         {
-            this.Button.ToolTip.Opened += (s, e) =>
+            this._button.ToolTip.Opened += (s, e) =>
             {
-                if (this.Expander.IsSecondPage==false)
+                if (this._Expander.IsSecondPage==false)
                 {
                     if (this.Expander.State == ExpanderState.Overlay)
                     {
@@ -143,7 +143,7 @@ namespace Retouch_Photo2.Menus.Models
                     }
                 }
             };
-            this.Button.ToolTip.Closed += (s, e) =>
+            this._button.ToolTip.Closed += (s, e) =>
             {
                 this.IsOpen = false;
             };
@@ -152,27 +152,17 @@ namespace Retouch_Photo2.Menus.Models
 
         //Menu
         public MenuType Type => MenuType.Operate;
-        public IExpanderButton Button { get; } = new MenuButton
+        public IExpander Expander => this._Expander;
+        MenuButton _button = new MenuButton
         {
             CenterContent = new Retouch_Photo2.Operates.Icon()
         };
-        public IExpander Expander => this._Expander;
-        public ExpanderState State
-        {
-            set
-            {
-                this.Button.State = value;
-                this.Expander.State = value;
-            }
-        }
-        public FrameworkElement Self => this;
 
         public void ConstructMenu()
         {
-            this._Expander.Button = this.Button.Self;
-
-            this.Button.StateChanged += (state) => this.State = state;
-            this.Expander.StateChanged += (state) => this.State = state;
+            this._Expander.Layout = this;
+            this._Expander.Button = this._button;
+            this._Expander.Initialize();
         }
     }
 
@@ -398,7 +388,7 @@ namespace Retouch_Photo2.Menus.Models
 
             this.HorizontallySymmetryButton.Tapped += (s, e) =>
             {
-                this.Expander.IsSecondPage = true;
+                this._Expander.IsSecondPage = true;
             };
 
         }
@@ -457,7 +447,7 @@ namespace Retouch_Photo2.Menus.Models
 
             this.VerticallySymmetryButton.Tapped += (s, e) =>
             {
-                this.Expander.IsSecondPage = true;
+                this._Expander.IsSecondPage = true;
             };
 
         }

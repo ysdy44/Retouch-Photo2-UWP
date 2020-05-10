@@ -67,7 +67,7 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Expander.Title = resource.GetString("/Menus/Layer");
+            this._Expander.Title = resource.GetString("/Menus/Layer");
             
             this.OpacityTextBlock.Text = resource.GetString("/Menus/Layer_Opacity");
 
@@ -84,25 +84,15 @@ namespace Retouch_Photo2.Menus.Models
 
         //Menu
         public MenuType Type => MenuType.Layer;
-        public IExpanderButton Button { get; } = new MenuButton();
         public IExpander Expander => this._Expander;
-        public ExpanderState State
-        {
-            set
-            {
-                this.Button.State = value;
-                this.Expander.State = value;
-            }
-        }
-        public FrameworkElement Self => this;
+        MenuButton _button = new MenuButton();
 
         public void ConstructMenu()
         {
-            this._Expander.Button = this.Button.Self;
-
-            this.Button.StateChanged += (state) => this.State = state;
-            this.Expander.StateChanged += (state) => this.State = state;
-            this.Expander.PlacementMode = FlyoutPlacementMode.Left;
+            this._Expander.Layout = this;
+            this._Expander.Button = this._button;
+            this._Expander.PlacementMode = FlyoutPlacementMode.Left;
+            this._Expander.Initialize();
         }
     }
 
@@ -136,7 +126,7 @@ namespace Retouch_Photo2.Menus.Models
             {
                 this.BlendModeComboBox.Mode = this.SelectionViewModel.BlendMode;
 
-                this.Expander.IsSecondPage = true;
+                this._Expander.IsSecondPage = true;
             };
             this.BlendModeComboBox.ModeChanged += (s, mode) =>
             {
