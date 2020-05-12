@@ -10,6 +10,9 @@
     d:DesignWidth="50"
     >
 
-    <Rectangle RadiusX="2" RadiusY="2" Width="20" Height="20" Fill="{x:Bind UserControl.Foreground, Mode=OneWay}"/>
+    <Grid>
+        <Rectangle RadiusX="2" RadiusY="2" Width="20" Height="20" Fill="{x:Bind UserControl.Foreground, Mode=OneWay}" Opacity="0.5"/>
+        <Rectangle RadiusX="2" RadiusY="2" Width="20" Height="20" StrokeThickness="1" Stroke="{x:Bind UserControl.Foreground, Mode=OneWay}"/>
+    </Grid>
 
 </UserControl>

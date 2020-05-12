@@ -14,10 +14,10 @@
         /// <summary> Rllipse geometry. </summary>
         GeometryEllipse,
 
-        /// <summary> Curve geometry. </summary>
-        GeometryCurve,
-        /// <summary> Multi-curve geometry. </summary>
-        GeometryCurveMulti,
+        /// <summary> Curve. </summary>
+        Curve,
+        /// <summary> Multi-curve. </summary>
+        CurveMulti,
 
         /// <summary> Frame Text. </summary>
         TextFrame,

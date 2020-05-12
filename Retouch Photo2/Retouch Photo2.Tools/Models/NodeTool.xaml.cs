@@ -22,7 +22,7 @@ namespace Retouch_Photo2.Tools.Models
         TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
-        GeometryCurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
+        CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
         NodeCollection Nodes => this.CurveLayer.Nodes;
 
         /// <summary> PenPage's Flyout. </summary>

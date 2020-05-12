@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Tools.Models
         TipViewModel TipViewModel => App.TipViewModel;
         GeometryTool GeometryTool = new GeometryTool();
 
-        GeometryCurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
+        CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
         NodeCollection Nodes => this.CurveLayer.Nodes;
 
         //@Construct
@@ -284,10 +284,11 @@ namespace Retouch_Photo2.Tools.Models
             Transformer transformer = new Transformer(canvasPoint, canvasStartingPoint);
 
             //Layer
-            GeometryCurveLayer curveLayer = new GeometryCurveLayer(canvasStartingPoint, canvasPoint)
+            CurveLayer curveLayer = new CurveLayer(canvasStartingPoint, canvasPoint)
             {
                 SelectMode = SelectMode.Selected,
                 TransformManager = new TransformManager(transformer),
+                StyleManager = this.SelectionViewModel.GetStyleManagerCurve(),
             };
 
             //Selection

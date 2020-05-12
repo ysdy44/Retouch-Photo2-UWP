@@ -17,6 +17,21 @@
         <Flyout x:Name="StopsFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <brushs:StopsPicker x:Name="StopsPicker" Width="320"/>
         </Flyout>
+        <Flyout x:Name="ImageFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <StackPanel Padding="2"  MinWidth="300">
+
+                <!--Extend-->
+                <TextBlock x:Name="ExtendTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <brushs:ExtendComboBox x:Name="ExtendComboBox" MinWidth="150" MaxWidth="200" HorizontalAlignment="Left"/>
+               
+                <!--Replace-->
+                <TextBlock x:Name="ReplaceTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <Button x:Name="ReplaceButton" Style="{StaticResource AppCircleButtonStyle}">
+                    <FontIcon Glyph="&#xEB9F;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                </Button>
+                                
+            </StackPanel>
+        </Flyout>
 
     </Page.Resources>
 
@@ -47,7 +62,7 @@
                      FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
                      FillBrush="{x:Bind SelectionViewModel.FillBrush,Mode=OneWay}" 
                      StrokeBrush="{x:Bind SelectionViewModel.StrokeBrush,Mode=OneWay}" />
-
+            
         </StackPanel>
     </ScrollViewer>
 

@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Tools;
+﻿using Retouch_Photo2.Layers;
+using Retouch_Photo2.Tools;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using System.Linq;
@@ -18,27 +19,6 @@ namespace Retouch_Photo2.Controls
         
         //@VisualState
         bool _isLoaded;
-        private ITool toolPage = new NoneTool();
-        public ITool ToolPage 
-        {
-            get => this.toolPage ;
-            set
-            {
-                if (value == null) return;
-
-                //The current page becomes the active page.
-                ITool oldToolPage = this.toolPage ;
-                oldToolPage.OnNavigatedFrom();
-
-                //The current page does not become an active page.
-                ITool newToolPage = value;
-                newToolPage.OnNavigatedTo();
-
-                this.Content = null;
-                this.Content = value.Page;
-                this.toolPage  = value;
-            }
-        }
 
 
         #region DependencyProperty
@@ -58,7 +38,8 @@ namespace Retouch_Photo2.Controls
 
             if (e.NewValue is ITool value)
             {
-                con.ToolPage = con.GetPage(value, con.Mode, con.Type);
+                con._vsTool = value;
+                con.VisualState = con.VisualState;//State
             }
         }));
 
@@ -77,105 +58,122 @@ namespace Retouch_Photo2.Controls
 
             if (e.NewValue is ListViewSelectionMode value)
             {
-                con.ToolPage = con.GetPage(con.Tool, value, con.Type);
+                con._vsMode = value;
+                con.VisualState = con.VisualState;//State
             }
         }));
 
 
-        /// <summary> Gets or sets <see cref = "FootPageControl" />'s layer string. </summary>
-        public string Type
+        /// <summary> Gets or sets <see cref = "FootPageControl" />'s layer type. </summary>
+        public LayerType Type
         {
-            get { return (string)GetValue(TypeProperty); }
+            get { return (LayerType)GetValue(TypeProperty); }
             set { SetValue(TypeProperty, value); }
         }
         /// <summary> Identifies the <see cref = "FootPageControl.Type" /> dependency property. </summary>
-        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(string), typeof(FootPageControl), new PropertyMetadata(string.Empty, (sender, e) =>
+        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(LayerType), typeof(FootPageControl), new PropertyMetadata(LayerType.None, (sender, e) =>
         {
             FootPageControl con = (FootPageControl)sender;
             if (con._isLoaded == false) return;
 
-            if (e.NewValue is string value)
+            if (e.NewValue is LayerType value)
             {
-                con.ToolPage = con.GetPage(con.Tool, con.Mode, value);
+                con._vsType = value;
+                con.VisualState = con.VisualState;//State
             }
         }));
 
 
         #endregion
-        
+
+
+        //@VisualState
+        ITool _vsTool;
+        ListViewSelectionMode _vsMode;
+        LayerType _vsType;
+        public UIElement VisualState
+        {
+            get
+            {
+                if (this._vsTool == null) return this.TipViewModel.Tools.FirstOrDefault(tool => tool.Type == ToolType.Cursor).Page;
+
+                return this._vsTool.Page;//@Debug:临时返回，建议删掉
+
+                if (this._vsTool.Type == ToolType.Cursor)
+                {
+                    if (this._vsMode == ListViewSelectionMode.Single)
+                    {
+                        //Tool
+                        ToolType toolType = this.LayerToTool(this._vsType);
+                        ITool layerToTool = this.TipViewModel.Tools.FirstOrDefault(e => e != null && e.Type == toolType);
+                        if (layerToTool != null) return layerToTool.Page;
+
+                        //Cursor
+                        ITool cursorTool = this.TipViewModel.Tools.FirstOrDefault();
+                        if (layerToTool == null) return null;
+                        return cursorTool.Page;
+                    }
+                }
+
+                return this._vsTool.Page;
+            }
+            set
+            {
+                if (this.Content == value) return;
+
+                this.Content = value;
+            }
+        }
+
+
         //@Construct
         public FootPageControl()
         {
             this.Loaded += (s, e) =>
             {
                 this._isLoaded = true;
-                
-                this.ToolPage = this.GetPage(this.Tool, this.Mode, this.Type);
+
+                this.VisualState = this.VisualState;//State
             };
-        }
+        } 
 
 
-        private ITool GetPage(ITool tool, ListViewSelectionMode mode, string type)
-        {
-            return tool;//@Debug:临时返回，建议删掉
-            
-            if (tool == null) return null;
-
-            if (tool.Type == ToolType.Cursor)
-            {
-                if (mode == ListViewSelectionMode.Single)
-                {
-                    //Tool
-                    ToolType toolType = this.LayerToTool(type);
-                    ITool layerToTool = this.TipViewModel.Tools.FirstOrDefault(e => e != null && e.Type == toolType);
-                    if (layerToTool != null) return layerToTool;
-
-                    //Cursor
-                    ITool cursorTool = this.TipViewModel.Tools.FirstOrDefault();
-                    if (layerToTool == null) return null;
-                    return cursorTool;
-                }
-            }
-
-            return tool;
-        }
-
-
-        private ToolType LayerToTool(string type)
+        private ToolType LayerToTool(LayerType type)
         {
             switch (type)
             {
                 //Geometry0
-                case "GeometryRectangle": return ToolType.GeometryRectangle;
-                case "GeometryEllipse": return ToolType.GeometryEllipse;
-                case "GeometryCurve": return ToolType.Pen;
+                case LayerType.GeometryRectangle: return ToolType.GeometryRectangle;
+                case LayerType.GeometryEllipse: return ToolType.GeometryEllipse;
+                case LayerType.Curve: return ToolType.Node;
 
-                case "Image": return ToolType.Image;
+                case LayerType.Image: return ToolType.Image;
 
-                case "TextArtistic": return ToolType.TextArtistic;
-                case "TextFrame": return ToolType.TextFrame;
+                case LayerType.TextArtistic: return ToolType.TextArtistic;
+                case LayerType.TextFrame: return ToolType.TextFrame;
 
                 //Geometry1
-                case "GeometryRoundRect": return ToolType.GeometryRoundRect;
-                case "GeometryTriangle": return ToolType.GeometryTriangle;
-                case "GeometryDiamond": return ToolType.GeometryDiamond;
+                case LayerType.GeometryRoundRect: return ToolType.GeometryRoundRect;
+                case LayerType.GeometryTriangle: return ToolType.GeometryTriangle;
+                case LayerType.GeometryDiamond: return ToolType.GeometryDiamond;
 
                 //Geometry2
-                case "GeometryPentagon": return ToolType.GeometryPentagon;
-                case "GeometryStar": return ToolType.GeometryStar;
-                case "GeometryCog": return ToolType.GeometryCog;
+                case LayerType.GeometryPentagon: return ToolType.GeometryPentagon;
+                case LayerType.GeometryStar: return ToolType.GeometryStar;
+                case LayerType.GeometryCog: return ToolType.GeometryCog;
 
                 //Geometry3
-                case "GeometryDount": return ToolType.GeometryDount;
-                case "GeometryPie": return ToolType.GeometryPie;
-                case "GeometryCookie": return ToolType.GeometryCookie;
+                case LayerType.GeometryDount: return ToolType.GeometryDount;
+                case LayerType.GeometryPie: return ToolType.GeometryPie;
+                case LayerType.GeometryCookie: return ToolType.GeometryCookie;
 
                 //Geometry4
-                case "GeometryArrow": return ToolType.GeometryArrow;
-                case "GeometryCapsule": return ToolType.GeometryCapsule;
-                case "GeometryHeart": return ToolType.GeometryHeart;
+                case LayerType.GeometryArrow: return ToolType.GeometryArrow;
+                case LayerType.GeometryCapsule: return ToolType.GeometryCapsule;
+                case LayerType.GeometryHeart: return ToolType.GeometryHeart;
             }
             return ToolType.None;
         }
+
     }
 }

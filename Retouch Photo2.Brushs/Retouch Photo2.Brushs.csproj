@@ -131,6 +131,18 @@
     <Compile Include="ColorEllipse.xaml.cs">
       <DependentUpon>ColorEllipse.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ExtendComboBoxs\ExtendComboBox.xaml.cs">
+      <DependentUpon>ExtendComboBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExtendComboBoxs\ExtendIcons\ClampIcon.xaml.cs">
+      <DependentUpon>ClampIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExtendComboBoxs\ExtendIcons\WrapIcon.xaml.cs">
+      <DependentUpon>WrapIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExtendComboBoxs\ExtendIcons\MirrorIcon.xaml.cs">
+      <DependentUpon>MirrorIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FillOrStrokes\FillOrStrokeComboBox.xaml.cs">
       <DependentUpon>FillOrStrokeComboBox.xaml</DependentUpon>
     </Compile>
@@ -165,6 +177,7 @@
     <Compile Include="XMLs\XML.CanvasGradientStopArray.cs" />
     <Compile Include="XMLs\XML.IBrush.cs" />
     <Compile Include="XMLs\XML.BrushFactory.cs" />
+    <Compile Include="XMLs\XML.ExtendFactory.cs" />
     <Compile Include="XMLs\XML.StyleManager.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo.Brushs.rd.xml" />
   </ItemGroup>
@@ -206,6 +219,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ColorEllipse.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ExtendComboBoxs\ExtendComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ExtendComboBoxs\ExtendIcons\ClampIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ExtendComboBoxs\ExtendIcons\WrapIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ExtendComboBoxs\ExtendIcons\MirrorIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

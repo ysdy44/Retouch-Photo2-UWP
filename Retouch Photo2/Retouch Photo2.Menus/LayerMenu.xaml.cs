@@ -141,6 +141,21 @@ namespace Retouch_Photo2.Menus.Models
             };
 
 
+            //Follow
+            this.FollowToggleControl.Tapped += (s, e) =>
+            {
+                bool value = (this.SelectionViewModel.IsFollowTransform) ? false : true;
+
+                //Selection
+                this.SelectionViewModel.IsFollowTransform = value;
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.StyleManager.IsFollowTransform = value;
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+
             //Visibility
             this.VisibilityButton.Tapped += (s, e) =>
             {

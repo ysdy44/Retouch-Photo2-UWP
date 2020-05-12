@@ -4,12 +4,12 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Layers.Icons
 {
     /// <summary>
-    /// Icon of <see cref = "GeometryCurveMultiLayer"/>.
+    /// Icon of <see cref = "CurveLayer"/>.
     /// </summary>
-    public sealed partial class GeometryCurveMultiIcon : UserControl
+    public sealed partial class CurveIcon : UserControl
     {
         //@Construct
-        public GeometryCurveMultiIcon()
+        public CurveIcon()
         {
             this.InitializeComponent();
         }

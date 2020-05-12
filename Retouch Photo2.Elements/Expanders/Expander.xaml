@@ -44,15 +44,76 @@
         </MenuFlyout>
 
         <!--Storyboard-->
-        <Storyboard x:Name="WidthStoryboard" >
-            <DoubleAnimationUsingKeyFrames x:Name="WidthKeyFrames" EnableDependentAnimation ="True">
-                <SplineDoubleKeyFrame x:Name="WidthFrame" KeyTime="0:0:0.1" KeySpline="0.5,1,1,1"/>
-            </DoubleAnimationUsingKeyFrames>
+        <Storyboard x:Name="WidthStoryboard222" >
+            <DoubleAnimation x:Name="WidthKeyFrames222" To="222" Duration="0:0:0.1" EnableDependentAnimation ="True">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
         </Storyboard>
-        <Storyboard x:Name="HeightStoryboard" >
-            <DoubleAnimationUsingKeyFrames x:Name="HeightKeyFrames" EnableDependentAnimation ="True">
-                <SplineDoubleKeyFrame x:Name="HeightFrame" KeyTime="0:0:0.2" Value="200" KeySpline="0.5,1,1,1"/>
-            </DoubleAnimationUsingKeyFrames>
+        <Storyboard x:Name="WidthStoryboard272" >
+            <DoubleAnimation x:Name="WidthKeyFrames272" To="272" Duration="0:0:0.1" EnableDependentAnimation ="True">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="WidthStoryboard322" >
+            <DoubleAnimation x:Name="WidthKeyFrames322" To="322" Duration="0:0:0.1" EnableDependentAnimation ="True">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="WidthStoryboard372" >
+            <DoubleAnimation x:Name="WidthKeyFrames372" To="372" Duration="0:0:0.1" EnableDependentAnimation ="True">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Name="HeightStoryboardZeroToMain" >
+            <DoubleAnimation x:Name="HeightKeyFramesZeroToMain" Duration="0:0:0.2" EnableDependentAnimation ="True">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="HeightStoryboardZeroToSecond" >
+            <DoubleAnimation x:Name="HeightKeyFramesZeroToSecond" Duration="0:0:0.2" EnableDependentAnimation ="True">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="HeightStoryboardMainToZero" >
+            <DoubleAnimation x:Name="HeightKeyFramesMainToZero" Duration="0:0:0.2" EnableDependentAnimation ="True">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="HeightStoryboardSecondToZero" >
+            <DoubleAnimation x:Name="HeightKeyFramesSecondToZero" Duration="0:0:0.2" EnableDependentAnimation ="True">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="HeightStoryboardMainToSecond" >
+            <DoubleAnimation x:Name="HeightKeyFramesMainToSecond" Duration="0:0:0.2" EnableDependentAnimation ="True">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="HeightStoryboardSecondToMain" >
+            <DoubleAnimation x:Name="HeightKeyFramesSecondToMain" Duration="0:0:0.2" EnableDependentAnimation ="True">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
         </Storyboard>
 
         <!--Style-->
@@ -87,7 +148,7 @@
                 <!--FlyoutShow-->
                 <VisualState x:Name="FlyoutShow">
                     <VisualState.Setters >
-                        
+
                         <!--Title-->
                         <Setter Target = "TitleGrid.Background" Value="{ThemeResource AppBackground}"/>
                         <Setter Target = "TitleTextBlock.Visibility" Value="Visible"/>
@@ -95,7 +156,7 @@
                         <!--Button-->
                         <Setter Target = "StateButton.Visibility" Value="Visible"/>
                         <Setter Target = "ResetButton.Visibility" Value="Collapsed"/>
-                        
+
                         <!--Body-->
                         <Setter Target = "MainPageBorder.Visibility" Value="Visible"/>
 
@@ -166,7 +227,7 @@
                     </VisualState.Setters>
                 </VisualState>
 
-            </VisualStateGroup> 
+            </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
 
@@ -221,7 +282,7 @@
                             <animations:OpacityAnimation Duration="0:0:0.5" From="0.0" To="1.0"/>
                         </animations:Implicit.ShowAnimations>
 
-                        <FontIcon Glyph="&#xE0A6;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        <FontIcon Glyph="&#xE830;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                     </Button>
 
                     <Button x:Name="ResetButton" Visibility="Collapsed" Grid.Column="3" Style="{StaticResource ButtonStyle}">

@@ -232,7 +232,7 @@ namespace Retouch_Photo2.Tools.Models
                 Points = this.SelectionViewModel.GeometryStarPoints,
                 InnerRadius = this.SelectionViewModel.GeometryStarInnerRadius,
                 TransformManager = new TransformManager(transformer),
-                StyleManager = this.SelectionViewModel.GetStyleManager()
+                StyleManager = this.SelectionViewModel.GetStyleManagerGeometry()
             };
         }
 

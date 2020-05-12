@@ -19,6 +19,7 @@ namespace Retouch_Photo2.Brushs
             return new XElement
             (
                  elementName,
+                 new XElement("IsFollowTransform", styleManager.IsFollowTransform),
                  XML.SaveBrush("FillBrush", styleManager.FillBrush),
                  XML.SaveBrush("StrokeBrush", styleManager.StrokeBrush),
                  new XElement("StrokeWidth", styleManager.StrokeWidth)
@@ -32,8 +33,9 @@ namespace Retouch_Photo2.Brushs
         /// <returns> The loaded <see cref="StyleManager"/>. </returns>
         public static StyleManager LoadStyleManager(XElement element)
         {
-            StyleManager styleManager = new StyleManager();
+            StyleManager styleManager = new StyleManager(); 
 
+            if (element.Element("IsFollowTransform") is XElement isFollowTransform) styleManager.IsFollowTransform = (bool)isFollowTransform;
             if (element.Element("FillBrush") is XElement fillBrush) styleManager.FillBrush = XML.LoadBrush(fillBrush);
             if (element.Element("StrokeBrush") is XElement strokeBrush) styleManager.StrokeBrush = XML.LoadBrush(strokeBrush);
             if (element.Element("StrokeWidth") is XElement strokeWidth) styleManager.StrokeWidth = (float)strokeWidth;

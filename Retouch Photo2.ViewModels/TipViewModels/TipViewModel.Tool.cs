@@ -16,6 +16,9 @@ namespace Retouch_Photo2.ViewModels
             get => this.tool ;
             set
             {
+                if (value == null) return;
+                if (this.tool == value) return;
+
                 //The current tool becomes the active tool.
                 ITool oldTool = this.tool;
                 oldTool.OnNavigatedFrom();

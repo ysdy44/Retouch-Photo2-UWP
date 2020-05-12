@@ -21,6 +21,7 @@ namespace Retouch_Photo2.Brushs.Models
         public Color Color { get; set; }
         //public Transformer Destination { set { } }
         //public Photocopier Photocopier { get => new Photocopier(); }
+        //public CanvasEdgeBehavior Extend { get => CanvasEdgeBehavior.Clamp; set { } }
 
 
         /// <summary> <see cref = "ImageBrush" />'s photocopier. </summary>
@@ -32,6 +33,9 @@ namespace Retouch_Photo2.Brushs.Models
         public Transformer Destination { get; set; }
         Transformer _startingDestination;
 
+        /// <summary> The edge behavior. </summary>
+        public CanvasEdgeBehavior Extend { get; set; }
+
 
         //@Construct
         /// <summary>
@@ -42,20 +46,24 @@ namespace Retouch_Photo2.Brushs.Models
         /// Constructs a <see cref = "ImageBrush" />.
         /// </summary>
         /// <param name="transformer"> The transformer. </param>
-        public ImageBrush(Transformer transformer)
+        /// <param name="extend"> The edge behavior. </param>
+        public ImageBrush(Transformer transformer, CanvasEdgeBehavior extend = CanvasEdgeBehavior.Clamp)
         {
             this.Source = transformer;
             this.Destination = transformer;
+            this.Extend = extend;
         }
         /// <summary>
         /// Constructs a <see cref = "ImageBrush" />.
         /// </summary>
         /// <param name="source"> The source transformer. </param>
         /// <param name="destination"> The destination transformer. </param>
-        public ImageBrush(Transformer source, Transformer destination)
+        /// <param name="extend"> The edge behavior. </param>
+        public ImageBrush(Transformer source, Transformer destination, CanvasEdgeBehavior extend = CanvasEdgeBehavior.Clamp)
         {
             this.Source = source;
             this.Destination = destination;
+            this.Extend = extend;
         }
 
 
@@ -70,7 +78,9 @@ namespace Retouch_Photo2.Brushs.Models
             Matrix3x2 matrix2 = Transformer.FindHomography(this.Source, this.Destination);
             return new CanvasImageBrush(resourceCreator, bitmap)
             {
-                Transform = matrix2
+                Transform = matrix2,
+                ExtendX = this.Extend,
+                ExtendY = this.Extend,
             };
         }
         public ICanvasBrush GetICanvasBrush(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix)
@@ -84,16 +94,25 @@ namespace Retouch_Photo2.Brushs.Models
             Matrix3x2 matrix2 = Transformer.FindHomography(this.Source, this.Destination);
             return new CanvasImageBrush(resourceCreator, bitmap)
             {
-                Transform = matrix2 * matrix
+                Transform = matrix2 * matrix,
+                ExtendX = this.Extend,
+                ExtendY = this.Extend,
             };
         }
 
 
         public BrushOperateMode ContainsOperateMode(Vector2 point, Matrix3x2 matrix)
         {
-            return BrushOperateMode.None;
+            TransformerMode transformerMode = Transformer.ContainsNodeMode(point, this.Destination, matrix);
+
+            return this.Converter(transformerMode);
         }
-        public void Controller(BrushOperateMode mode, Vector2 point) { }
+        public void Controller(BrushOperateMode mode, Vector2 startingPoint, Vector2 point)
+        {
+            TransformerMode transformerMode = this.Converter(mode);
+
+            this.Destination = Transformer.Controller(transformerMode, startingPoint, point, this._startingDestination);
+        }
 
         public void Draw(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Color accentColor)
         {
@@ -108,6 +127,7 @@ namespace Retouch_Photo2.Brushs.Models
                 Photocopier = this.Photocopier,
                 Source = this.Source,
                 Destination = this.Destination,
+                Extend = this.Extend,
             };
         }
 
@@ -116,12 +136,14 @@ namespace Retouch_Photo2.Brushs.Models
             element.Add(Retouch_Photo2.Elements.XML.SavePhotocopier("Photocopier", this.Photocopier));
             element.Add(FanKit.Transformers.XML.SaveTransformer("Source", this.Source));
             element.Add(FanKit.Transformers.XML.SaveTransformer("Destination", this.Destination));
+            element.Add(new XAttribute("Extend", this.Extend));
         }
         public void Load(XElement element)
         {
             if (element.Element("Photocopier") is XElement photocopier) this.Photocopier = Retouch_Photo2.Elements.XML.LoadPhotocopier(photocopier);
             if (element.Element("Source") is XElement source) this.Source = FanKit.Transformers.XML.LoadTransformer(source);
             if (element.Element("Destination") is XElement destination) this.Destination = FanKit.Transformers.XML.LoadTransformer(destination);
+            if (element.Element("Extend") is XElement extend) this.Extend = Retouch_Photo2.Brushs.XML.CreateExtend(extend.Value);
         }
 
 
@@ -151,6 +173,62 @@ namespace Retouch_Photo2.Brushs.Models
         public void TransformAdd(Vector2 vector)
         {
             this.Destination = Transformer.Add(this._startingDestination, vector);
+        }
+
+
+        private BrushOperateMode Converter(TransformerMode mode)
+        {
+            switch (mode)
+            {
+                case TransformerMode.None: return BrushOperateMode.None;
+
+                case TransformerMode.Translation: return BrushOperateMode.ImageTranslation;
+                case TransformerMode.Rotation: return BrushOperateMode.ImageRotation;
+
+                case TransformerMode.SkewLeft: return BrushOperateMode.ImageSkewLeft;
+                case TransformerMode.SkewTop: return BrushOperateMode.ImageSkewTop;
+                case TransformerMode.SkewRight: return BrushOperateMode.ImageSkewRight;
+                case TransformerMode.SkewBottom: return BrushOperateMode.ImageSkewBottom;
+
+                case TransformerMode.ScaleLeft: return BrushOperateMode.ImageScaleLeft;
+                case TransformerMode.ScaleTop: return BrushOperateMode.ImageScaleTop;
+                case TransformerMode.ScaleRight: return BrushOperateMode.ImageScaleRight;
+                case TransformerMode.ScaleBottom: return BrushOperateMode.ImageScaleBottom;
+
+                case TransformerMode.ScaleLeftTop: return BrushOperateMode.ImageScaleLeftTop;
+                case TransformerMode.ScaleRightTop: return BrushOperateMode.ImageScaleRightTop;
+                case TransformerMode.ScaleRightBottom: return BrushOperateMode.ImageScaleRightBottom;
+                case TransformerMode.ScaleLeftBottom: return BrushOperateMode.ImageScaleLeftBottom;
+
+                default: return BrushOperateMode.None;
+            }
+        }
+        private TransformerMode Converter(BrushOperateMode mode)
+        {
+            switch (mode)
+            {
+                case BrushOperateMode.None: return TransformerMode.None;
+
+                case BrushOperateMode.ImageTranslation: return TransformerMode.Translation;
+                case BrushOperateMode.ImageRotation: return TransformerMode.Rotation;
+
+                case BrushOperateMode.ImageSkewLeft: return TransformerMode.SkewLeft;
+                case BrushOperateMode.ImageSkewTop: return TransformerMode.SkewTop;
+                case BrushOperateMode.ImageSkewRight: return TransformerMode.SkewRight;
+                case BrushOperateMode.ImageSkewBottom: return TransformerMode.SkewBottom;
+
+                case BrushOperateMode.ImageScaleLeft: return TransformerMode.ScaleLeft;
+                case BrushOperateMode.ImageScaleTop: return TransformerMode.ScaleTop;
+                case BrushOperateMode.ImageScaleRight: return TransformerMode.ScaleRight;
+                case BrushOperateMode.ImageScaleBottom: return TransformerMode.ScaleBottom;
+
+                case BrushOperateMode.ImageScaleLeftTop: return TransformerMode.ScaleLeftTop;
+                case BrushOperateMode.ImageScaleRightTop: return TransformerMode.ScaleRightTop;
+                case BrushOperateMode.ImageScaleRightBottom: return TransformerMode.ScaleRightBottom;
+                case BrushOperateMode.ImageScaleLeftBottom: return TransformerMode.ScaleLeftBottom;
+
+                default: return TransformerMode.None;
+            }
         }
 
     }

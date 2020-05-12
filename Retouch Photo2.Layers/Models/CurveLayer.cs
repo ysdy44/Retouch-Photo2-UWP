@@ -10,13 +10,13 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="ILayer"/>'s GeometryCurveLayer .
+    /// <see cref="ILayer"/>'s CurveLayer .
     /// </summary>
-    public class GeometryCurveLayer : LayerBase, ILayer
+    public class CurveLayer : LayerBase, ILayer
     {
 
         //@Override     
-        public override LayerType Type => LayerType.GeometryCurve;
+        public override LayerType Type => LayerType.Curve;
 
         //@Content 
         public NodeCollection Nodes { get; private set; }
@@ -25,11 +25,11 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Construct a curve-layer.
         /// </summary>
-        public GeometryCurveLayer()
+        public CurveLayer()
         {
             base.Control = new LayerControl(this)
             {
-                Icon = new GeometryCurveIcon(),
+                Icon = new CurveIcon(),
                 Text = this.ConstructStrings(),
             };
         }
@@ -37,13 +37,13 @@ namespace Retouch_Photo2.Layers.Models
         /// Construct a curve-layer.
         /// </summary>
         /// <param name="nodes"> The source nodes. </param>
-        public GeometryCurveLayer(IEnumerable<Node> nodes) : this() => this.Nodes = new NodeCollection(nodes);
+        public CurveLayer(IEnumerable<Node> nodes) : this() => this.Nodes = new NodeCollection(nodes);
         /// <summary>
         /// Construct a curve-layer from a line.
         /// </summary>
         /// <param name="left"> The first source vector. </param>
         /// <param name="right"> The second source vector. </param>
-        public GeometryCurveLayer(Vector2 left, Vector2 right) : this() => this.Nodes = new NodeCollection(left, right);
+        public CurveLayer(Vector2 left, Vector2 right) : this() => this.Nodes = new NodeCollection(left, right);
 
 
         public override Transformer GetActualDestinationWithRefactoringTransformer
@@ -82,7 +82,7 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryCurveLayer curveLayer = new GeometryCurveLayer
+            CurveLayer curveLayer = new CurveLayer
             {
                 Nodes = this.Nodes.Clone()
             };

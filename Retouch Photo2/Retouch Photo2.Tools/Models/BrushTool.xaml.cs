@@ -1,5 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
@@ -29,31 +30,21 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructFillOrStroke();
-            this.ConstructBrushType();
             this.ConstructShowControl();
-        }
 
-
-        //FillOrStroke
-        private void ConstructFillOrStroke()
-        {
+            //FillOrStroke
             this.FillOrStrokeComboBox.FillOrStrokeChanged += (s, fillOrStroke) =>
             {
                 this.FillOrStroke = fillOrStroke;
                 this.ViewModel.Invalidate(); //Invalidate
             };
-        }
 
-
-        //BrushType
-        private void ConstructBrushType()
-        {
+            //BrushType
             this.BrushTypeComboBox.FillTypeChanged += (s, brushType) => this.FillTypeChanged(brushType);
             this.BrushTypeComboBox.StrokeTypeChanged += (s, brushType) => this.StrokeTypeChanged(brushType);
         }
 
-
+        
         //ShowControl
         private bool _isStopsFlyoutShowed;
         private void ConstructShowControl()
@@ -77,6 +68,7 @@ namespace Retouch_Photo2.Tools.Models
                 }
             };
            
+
             this.StopsPicker.StopsChanged += (s, array) =>
             {
                 switch (this.FillOrStroke)
@@ -89,10 +81,38 @@ namespace Retouch_Photo2.Tools.Models
                         break;
                 }
             };
-        }
-        
 
-        public void OnNavigatedTo() { }
+
+            this.ExtendComboBox.ExtendChanged += (s, extend) =>
+            {
+                switch (this.FillOrStroke)
+                {
+                    case FillOrStroke.Fill:
+                        this.FillExtendChanged(extend);
+                        break;
+                    case FillOrStroke.Stroke:
+                        this.StrokeExtendChanged(extend);
+                        break;
+                }
+            };
+
+
+            this.ReplaceButton.Tapped += (s, e) =>
+            {
+                switch (this.FillOrStroke)
+                {
+                    case FillOrStroke.Fill:
+                        BrushTool.FillImage?.Invoke();
+                        break;
+                    case FillOrStroke.Stroke:
+                        BrushTool.StrokeImage?.Invoke();
+                        break;
+                }
+            };
+        }
+
+
+        public void OnNavigatedTo() => this.SelectionViewModel.SetModeStyleManager();
         public void OnNavigatedFrom() { }
 
     }
@@ -112,6 +132,9 @@ namespace Retouch_Photo2.Tools.Models
             this.FillOrStrokeTextBlock.Text = resource.GetString("/Tools/Brush_FillOrStroke");
             this.BrushTypeTextBlock.Text = resource.GetString("/Tools/Brush_Type");
             this.BrushTextBlock.Text = resource.GetString("/Tools/Brush_Brush");
+            
+            this.ReplaceTextBlock.Text = resource.GetString("/Tools/Brush_Image_Replace");
+            this.ExtendTextBlock.Text = resource.GetString("/Tools/Brush_Image_Extend");
         }
 
 

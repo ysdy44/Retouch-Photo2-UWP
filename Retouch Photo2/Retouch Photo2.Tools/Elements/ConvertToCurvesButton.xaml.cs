@@ -36,8 +36,8 @@ namespace Retouch_Photo2.Tools.Elements
                         {
                             ILayer curveLayer =
                                 nodess.Count() == 1 ?
-                                (ILayer)new GeometryCurveLayer(nodess.Single()) :
-                                (ILayer)new GeometryCurveMultiLayer(nodess);
+                                (ILayer)new CurveLayer(nodess.Single()) :
+                                (ILayer)new CurveMultiLayer(nodess);
 
                             LayerBase.CopyWith(this.ViewModel.CanvasDevice, curveLayer, destination);
                             parentsChildren[index] = curveLayer;

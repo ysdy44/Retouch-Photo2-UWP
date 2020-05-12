@@ -11,20 +11,6 @@ namespace Retouch_Photo2.Elements
         Width322 = 322,
         Width372 = 372,
     }
-    
-    internal enum ExpanderHeight
-    {
-        Stretch,
-
-        ZeroToMain,
-        ZeroToSecond,
-
-        MainToZero,
-        SecondToZero,
-
-        MainToSecond,
-        SecondToMain,
-    }
 
     /// <summary> 
     /// Represents the control that a drawer can be folded.
@@ -37,21 +23,44 @@ namespace Retouch_Photo2.Elements
         {
             set
             {
-                this.WidthFlyoutItem222.IsChecked = (value == ExpanderWidth.Width222);
-                this.WidthFlyoutItem272.IsChecked = (value == ExpanderWidth.Width272);
-                this.WidthFlyoutItem322.IsChecked = (value == ExpanderWidth.Width322);
-                this.WidthFlyoutItem372.IsChecked = (value == ExpanderWidth.Width372);
+                this.WidthFlyoutItem222.IsChecked = false;
+                this.WidthFlyoutItem272.IsChecked = false;
+                this.WidthFlyoutItem322.IsChecked = false;
+                this.WidthFlyoutItem372.IsChecked = false;
 
-                this.WidthFrame.Value = (int)value;
-                this.WidthStoryboard.Begin();//Storyboard
+                switch (value)
+                {
+                    case ExpanderWidth.Width222:
+                        this.WidthFlyoutItem222.IsChecked = true;
+                        this.WidthStoryboard222.Begin();//Storyboard
+                        break;
+                    case ExpanderWidth.Width272:
+                        this.WidthFlyoutItem272.IsChecked = true;
+                        this.WidthStoryboard272.Begin();//Storyboard
+                        break;
+                    case ExpanderWidth.Width322:
+                        this.WidthFlyoutItem322.IsChecked = true;
+                        this.WidthStoryboard322.Begin();//Storyboard
+                        break;
+                    case ExpanderWidth.Width372:
+                        this.WidthFlyoutItem372.IsChecked = true;
+                        this.WidthStoryboard372.Begin();//Storyboard
+                        break;
+                }
             }
         }
 
         private void ConstructWidthStoryboard()
         {
             // Binding own DependencyProperty to the Storyboard
-            Storyboard.SetTarget(this.WidthKeyFrames, this.RootGrid);
-            Storyboard.SetTargetProperty(this.WidthKeyFrames, "(UIElement.Width)");
+            Storyboard.SetTarget(this.WidthKeyFrames222, this.RootGrid);
+            Storyboard.SetTargetProperty(this.WidthKeyFrames222, "(UIElement.Width)");
+            Storyboard.SetTarget(this.WidthStoryboard272, this.RootGrid);
+            Storyboard.SetTargetProperty(this.WidthKeyFrames272, "(UIElement.Width)");
+            Storyboard.SetTarget(this.WidthKeyFrames322, this.RootGrid);
+            Storyboard.SetTargetProperty(this.WidthKeyFrames322, "(UIElement.Width)");
+            Storyboard.SetTarget(this.WidthKeyFrames372, this.RootGrid);
+            Storyboard.SetTargetProperty(this.WidthKeyFrames372, "(UIElement.Width)");
 
             this.WidthFlyoutItem222.IsChecked = true;
             this.WidthFlyoutItem222.Click += (s, e) => this.WidthMode = ExpanderWidth.Width222;
@@ -64,111 +73,48 @@ namespace Retouch_Photo2.Elements
         }
 
 
-        //Height
-        private ExpanderHeight HeightBegin
-        {
-            set
-            {
-                if (value == ExpanderHeight.Stretch)
-                {
-                    this.HeightRectangle.VerticalAlignment = VerticalAlignment.Stretch;
-                    this.HeightRectangle.Height = double.NaN;
-                }
-                else
-                {
-                    this.HeightRectangle.VerticalAlignment = VerticalAlignment.Top;
-                    this.HeightRectangle.Height = this.HeightRectangleHeight(value);
-
-                    this.HeightFrame.Value = this.HeightFrameValue(value);
-                    this.HeightStoryboard.Begin();//Storyboard
-                }
-            }
-        }
-
-        private double HeightRectangleHeight(ExpanderHeight height)
-        {
-            switch (height)
-            {
-                case ExpanderHeight.ZeroToSecond:
-                case ExpanderHeight.ZeroToMain:
-                    return 0;
-
-                case ExpanderHeight.MainToZero:
-                case ExpanderHeight.MainToSecond:
-                    return this.MainPageHeight;
-
-                case ExpanderHeight.SecondToZero:
-                case ExpanderHeight.SecondToMain:
-                    return this.SecondPageHeight;
-
-                default: return 0;
-            }
-        }
-        private double HeightFrameValue(ExpanderHeight height)
-        {
-            switch (height)
-            {
-                case ExpanderHeight.MainToZero:
-                case ExpanderHeight.SecondToZero:
-                    return 0;
-
-                case ExpanderHeight.ZeroToMain:
-                case ExpanderHeight.SecondToMain:
-                    return this.MainPageHeight;
-
-                case ExpanderHeight.ZeroToSecond:
-                case ExpanderHeight.MainToSecond:
-                    return this.SecondPageHeight;
-
-                default: return 0;
-            }
-        }
-
-        double MainPageHeight = 0;
-        double SecondPageHeight = 0;
+        //Height        
         private void ConstructHeightStoryboard()
         {
             // Binding own DependencyProperty to the Storyboard
-            Storyboard.SetTarget(this.HeightKeyFrames, this.HeightRectangle);
-            Storyboard.SetTargetProperty(this.HeightKeyFrames, "(UIElement.Height)");
+            Storyboard.SetTarget(this.HeightKeyFramesZeroToMain, this.HeightRectangle);
+            Storyboard.SetTargetProperty(this.HeightKeyFramesZeroToMain, "(UIElement.Height)");
+            Storyboard.SetTarget(this.HeightKeyFramesZeroToSecond, this.HeightRectangle);
+            Storyboard.SetTargetProperty(this.HeightKeyFramesZeroToSecond, "(UIElement.Height)");
+            Storyboard.SetTarget(this.HeightKeyFramesMainToZero, this.HeightRectangle);
+            Storyboard.SetTargetProperty(this.HeightKeyFramesMainToZero, "(UIElement.Height)");
+            Storyboard.SetTarget(this.HeightKeyFramesSecondToZero, this.HeightRectangle);
+            Storyboard.SetTargetProperty(this.HeightKeyFramesSecondToZero, "(UIElement.Height)");
+            Storyboard.SetTarget(this.HeightKeyFramesMainToSecond, this.HeightRectangle);
+            Storyboard.SetTargetProperty(this.HeightKeyFramesMainToSecond, "(UIElement.Height)");
+            Storyboard.SetTarget(this.HeightKeyFramesSecondToMain, this.HeightRectangle);
+            Storyboard.SetTargetProperty(this.HeightKeyFramesSecondToMain, "(UIElement.Height)");
+
+            this.HeightKeyFramesZeroToMain.From = 0;
+            this.HeightKeyFramesZeroToSecond.From = 0;
+            this.HeightKeyFramesMainToZero.To = 0;
+            this.HeightKeyFramesSecondToZero.To = 0;
 
             this.MainPageBorder.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
-                this.MainPageHeight = e.NewSize.Height;
+
+                double height = e.NewSize.Height;
+                this.HeightKeyFramesZeroToMain.To = height;
+                this.HeightKeyFramesMainToZero.From = height;
+                this.HeightKeyFramesMainToSecond.From = height;
+                this.HeightKeyFramesSecondToMain.To = height;
             };
             this.SecondPageBorder.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
-                this.SecondPageHeight = e.NewSize.Height;
 
-                this._lockLoaded();
+                double height = e.NewSize.Height;
+                this.HeightKeyFramesZeroToSecond.From = height;
+                this.HeightKeyFramesSecondToZero.To = height;
+                this.HeightKeyFramesMainToSecond.To = height;
+                this.HeightKeyFramesSecondToMain.From = height;
             };
         }
-        
-
-        /// <summary> Is this Loaded? </summary>
-        bool _lockIsLoaded = false;
-        /// <summary>
-        /// Loaded.
-        /// </summary>
-        private void _lockLoaded()
-        {
-            if (this._lockIsLoaded == false)
-            {
-                this._lockIsLoaded = true;
-
-                this.HeightBegin = ExpanderHeight.MainToSecond;
-            }
-        }
-        /// <summary>
-        /// OnNavigatedTo.
-        /// </summary>
-        /// <param name="data"> The data. </param>
-        private void _lockOnNavigatedTo(bool value)
-        {
-            this.HeightBegin = (value && this._lockIsLoaded) ? ExpanderHeight.MainToSecond : ExpanderHeight.SecondToMain;
-        }
-
     }
 }

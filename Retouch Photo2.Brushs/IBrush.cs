@@ -26,6 +26,8 @@ namespace Retouch_Photo2.Brushs
         Transformer Destination { set; }
         /// <summary> <see cref="ImageBrush"/>'s Photocopier. </summary>
         Photocopier Photocopier { get; }
+        /// <summary> <see cref="ImageBrush"/>'s Extend. </summary>
+        CanvasEdgeBehavior Extend { get; set; }
 
 
         /// <summary>
@@ -54,9 +56,10 @@ namespace Retouch_Photo2.Brushs
         /// It controls the transformation of brush.
         /// </summary>
         /// <param name="mode"> The mode. </param>
+        /// <param name="startingPoint"> The starting point. </param>
         /// <param name="point"> The point. </param>
-        void Controller(BrushOperateMode mode, Vector2 point);
-        
+        void Controller(BrushOperateMode mode, Vector2 startingPoint, Vector2 point);
+
         /// <summary>
         /// Draw stops and lines between all control points.
         /// </summary>

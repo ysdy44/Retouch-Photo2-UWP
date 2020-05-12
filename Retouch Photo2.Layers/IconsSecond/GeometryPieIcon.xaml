@@ -10,10 +10,17 @@
     d:DesignWidth="50"
     >
 
-    <Path Fill="{x:Bind UserControl.Foreground, Mode=OneWay}">
-        <Path.Data>
-            M11.072,22.144c-6.115,0 -11.072,-4.957 -11.072,-11.072c0,-6.111 4.961,-11.072 11.072,-11.072c6.115,0 11.072,4.957 11.072,11.072l-11.072,0l0,11.072Z
-        </Path.Data>
-    </Path>
+    <Grid>
+        <Path Fill="{x:Bind UserControl.Foreground, Mode=OneWay}" Opacity="0.5">
+            <Path.Data>
+                M11.072,22.144c-6.115,0 -11.072,-4.957 -11.072,-11.072c0,-6.111 4.961,-11.072 11.072,-11.072c6.115,0 11.072,4.957 11.072,11.072l-11.072,0l0,11.072Z
+            </Path.Data>
+        </Path>
+        <Path StrokeThickness="1" Stroke="{x:Bind UserControl.Foreground, Mode=OneWay}">
+            <Path.Data>
+                M11.072,22.144c-6.115,0 -11.072,-4.957 -11.072,-11.072c0,-6.111 4.961,-11.072 11.072,-11.072c6.115,0 11.072,4.957 11.072,11.072l-11.072,0l0,11.072Z
+            </Path.Data>
+        </Path>
+    </Grid>
 
 </UserControl>

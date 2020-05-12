@@ -69,14 +69,8 @@ namespace Retouch_Photo2.Tools.Models
             {
                 FontText = "AAA",
                 SelectMode = SelectMode.Selected,
-                TransformManager = new TransformManager(transformer),
-                StyleManager = new StyleManager
-                {
-                    FillBrush = new ColorBrush
-                    {
-                        Color = Colors.Black,
-                    }
-                }
+                TransformManager = new TransformManager(transformer),      
+                StyleManager = this.SelectionViewModel.GetStyleManagerText(),
             };
         }
 

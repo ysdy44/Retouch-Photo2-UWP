@@ -1,0 +1,20 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Brushs.ExtendIcons.MirrorIcon"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="50"
+    >
+
+    <Border CornerRadius="22" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{ThemeResource AppStroke}" Background="#00A5FF">
+        <Path Fill="White">
+            <Path.Data>
+                M11.072,0c6.111,0 11.072,4.961 11.072,11.072c0,6.111 -4.961,11.072 -11.072,11.072c-6.111,0 -11.072,-4.961 -11.072,-11.072c0,-6.111 4.961,-11.072 11.072,-11.072Zm8.414,14.47c0.425,-1.05 0.659,-2.197 0.659,-3.398c0,-5.008 -4.066,-9.073 -9.073,-9.073c-5.008,0 -9.073,4.065 -9.073,9.073c0,2.266 0.833,4.339 2.208,5.93l8.156,-8.241c0.184,-0.187 0.436,-0.292 0.699,-0.293c0.263,-0.001 0.515,0.103 0.701,0.289l5.723,5.713Zm-12.395,-8.387c1.107,0 2.006,0.899 2.006,2.006c0,1.108 -0.899,2.007 -2.006,2.007c-1.108,0 -2.007,-0.899 -2.007,-2.007c0,-1.107 0.899,-2.006 2.007,-2.006Z
+            </Path.Data>
+        </Path>
+    </Border>
+
+</UserControl>

@@ -9,7 +9,18 @@
     d:DesignHeight="50"
     d:DesignWidth="50"
     >
-
-    <TextBlock Text="T" FontSize="22" Foreground="{x:Bind UserControl.Foreground, Mode=OneWay}"/>
+    
+    <Grid>
+        <Polygon Fill="{x:Bind UserControl.Foreground, Mode=OneWay}" Opacity="0.5">
+            <Polygon.Points>
+                0,6 0,2 16,2 16,6 10,6 10,21 6,21 6,6
+            </Polygon.Points>
+        </Polygon>
+        <Polygon StrokeThickness="1" Stroke="{x:Bind UserControl.Foreground, Mode=OneWay}">
+            <Polygon.Points>
+                0,6 0,2 16,2 16,6 10,6 10,21 6,21 6,6
+            </Polygon.Points>
+        </Polygon>
+    </Grid>
 
 </UserControl>

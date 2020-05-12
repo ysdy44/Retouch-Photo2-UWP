@@ -113,7 +113,7 @@
                 <!--RemoteButton-->
                 <Button x:Name="RemoteButton" Style="{StaticResource AppIconRoundedButtonStyle}">
                     <Button.Tag>
-                        <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        <FontIcon FontSize="14" Glyph="&#xE970;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                     </Button.Tag>
                 </Button>
                 

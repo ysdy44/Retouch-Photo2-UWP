@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Brushs.Models;
@@ -38,11 +39,11 @@ namespace Retouch_Photo2.Tools.Models
                         LinearGradientBrush linearGradientBrush = new LinearGradientBrush(startingPoint, point, inverseMatrix);
 
                         //Selection          
+                        this.StrokeBrush = linearGradientBrush;
                         this.SelectionViewModel.SetValue((layer) =>
                         {
                             layer.StyleManager.StrokeBrush = linearGradientBrush.Clone();
                         });
-                        this.StrokeBrush = linearGradientBrush;
 
                         this._operateMode = BrushOperateMode.LinearEndPoint;
                         this.ViewModel.Invalidate(ViewModels.InvalidateMode.Thumbnail);//Invalidate
@@ -56,10 +57,12 @@ namespace Retouch_Photo2.Tools.Models
 
                         if (this._operateMode != BrushOperateMode.None)
                         {
-                            //Selection
+                            //Selection          
+                            this.StrokeBrush.CacheTransform();
                             this.SelectionViewModel.SetValue((layer) =>
                             {
                                 layer.StyleManager.StrokeBrush = this.StrokeBrush.Clone();
+                                layer.StyleManager.StrokeBrush.CacheTransform();
                             });
 
                             this.ViewModel.Invalidate(ViewModels.InvalidateMode.Thumbnail);//Invalidate
@@ -83,13 +86,14 @@ namespace Retouch_Photo2.Tools.Models
                     {
                         Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
 
-                        Vector2 point2 = Vector2.Transform(point, inverseMatrix);
-
+                        Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+                        Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+                        
                         //Selection
-                        this.StrokeBrush.Controller(this._operateMode, point2);
+                        this.StrokeBrush.Controller(this._operateMode, canvasStartingPoint, canvasPoint);
                         this.SelectionViewModel.SetValue((layer) =>
                         {
-                            layer.StyleManager.StrokeBrush.Controller(this._operateMode, point2);
+                            layer.StyleManager.StrokeBrush.Controller(this._operateMode, canvasStartingPoint, canvasPoint);
                         });
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -214,7 +218,8 @@ namespace Retouch_Photo2.Tools.Models
                     break;
 
                 case BrushType.Image:
-                    BrushTool.StrokeImage?.Invoke();
+                    this.ExtendComboBox.Extend = this.StrokeBrush.Extend;
+                    this.ImageFlyout.ShowAt(this);//Flyout
                     break;
             }
         }
@@ -231,6 +236,20 @@ namespace Retouch_Photo2.Tools.Models
             this.SelectionViewModel.SetValue((layer) =>
             {
                 layer.StyleManager.StrokeBrush.Array = (CanvasGradientStop[])array.Clone();
+            });
+
+            this.ViewModel.Invalidate();//Invalidate
+        }
+
+        public void StrokeExtendChanged(CanvasEdgeBehavior extend)
+        {
+            this.ExtendComboBox.Extend = extend;
+
+            //Selection
+            this.StrokeBrush.Extend = extend;
+            this.SelectionViewModel.SetValue((layer) =>
+            {
+                layer.StyleManager.StrokeBrush.Extend = extend;
             });
 
             this.ViewModel.Invalidate();//Invalidate

@@ -9,6 +9,10 @@
     d:DesignWidth="50"
     >
 
-    <Polygon Points="12,0 14.9,9 24,9 16.6,14.8 19.6,24 12,18.2 4.7,24 7.4,14.7 0,9 9,9" StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="#439EFB"/>
-
+    <Polygon StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="#439EFB">
+        <Polygon.Points>
+            12,0 14.9,9 24,9 16.6,14.8 19.6,24 12,18.2 4.7,24 7.4,14.7 0,9 9,9
+        </Polygon.Points>
+    </Polygon>
+    
 </UserControl>

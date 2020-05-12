@@ -20,7 +20,11 @@ namespace Retouch_Photo2.Elements
             get => this._vsIsSecondPage;
             set
             {
-                if (this._vsIsSecondPage != value) this._lockOnNavigatedTo(value);
+                if (this._vsIsSecondPage != value)
+                {
+                    this.HeightRectangle.VerticalAlignment = VerticalAlignment.Top;
+                    (value ? this.HeightStoryboardMainToSecond : this.HeightStoryboardSecondToMain).Begin();//Storyboard
+                }
 
                 this._vsIsSecondPage = value;
                 this.VisualState = this.VisualState; //State
@@ -52,7 +56,7 @@ namespace Retouch_Photo2.Elements
         double _postionY;
         public double PostionX { get => Canvas.GetLeft(this.Layout); set => Canvas.SetLeft(this.Layout, value); }
         public double PostionY { get => Canvas.GetTop(this.Layout); set => Canvas.SetTop(this.Layout, value); }
-        
+
         //@Construct     
         public Expander()
         {
@@ -61,7 +65,7 @@ namespace Retouch_Photo2.Elements
             this.ConstructHeightStoryboard();
             this.Tapped += (s, e) => e.Handled = true;
         }
-        
+
         /// <summary>
         /// Initialize
         /// </summary>
@@ -111,7 +115,7 @@ namespace Retouch_Photo2.Elements
                 this._postionY = point.Y;
             };
         }
-        
+
         private ExpanderState GetState(ExpanderState state)
         {
             switch (state)

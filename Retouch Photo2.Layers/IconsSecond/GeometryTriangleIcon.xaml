@@ -1,4 +1,5 @@
 ﻿<UserControl
+    x:Name="UserControl"
     x:Class="Retouch_Photo2.Layers.Icons.GeometryTriangleIcon"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,6 +10,17 @@
     d:DesignWidth="50"
     >
 
-    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF139;" FontSize="20" />
+    <Grid>
+        <Polygon Fill="{x:Bind UserControl.Foreground, Mode=OneWay}" Opacity="0.5">
+            <Polygon.Points>
+                10,0 0,20 20,20
+            </Polygon.Points>
+        </Polygon>
+        <Polygon StrokeThickness="1" Stroke="{x:Bind UserControl.Foreground, Mode=OneWay}">
+            <Polygon.Points>
+                10,0 0,20 20,20
+            </Polygon.Points>
+        </Polygon>
+    </Grid>
 
 </UserControl>

@@ -41,12 +41,29 @@
                 <!--Layers-->
                 <RelativePanel Padding="2,0">
                     <TextBlock x:Name="LayersTextBlock" Style="{StaticResource AppTextBlockStyle}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
-                    <!--Visibility-->
-                    <ToggleButton x:Name="VisibilityButton" Style="{StaticResource AppCircleToggleButtonStyle}" RelativePanel.AlignRightWithPanel="True"
+
+                    <StackPanel Orientation="Horizontal" RelativePanel.AlignRightWithPanel="True">
+
+                        <ToggleButton Style="{StaticResource AppCircleToggleButtonStyle}">
+                            <FontIcon Glyph="&#xE9E9;" FontFamily="Segoe MDL2 Assets"/>
+                        </ToggleButton>
+                        
+                        <!--Follow-->
+                        <ToggleButton x:Name="FollowToggleControl" Style="{StaticResource AppCircleToggleButtonStyle}"
+                                  IsChecked="{x:Bind SelectionViewModel.IsFollowTransform,Mode=OneWay}" >
+                            <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+                        </ToggleButton>
+
+                        <ContentControl Width="4"/>
+
+                        <!--Visibility-->
+                        <ToggleButton x:Name="VisibilityButton" Style="{StaticResource AppCircleToggleButtonStyle}"
                                IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                                IsChecked="{x:Bind VisibilityToBoolConverter(SelectionViewModel.Visibility),Mode=OneWay}" >
-                        <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}" />
-                    </ToggleButton>
+                            <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}" />
+                        </ToggleButton>
+
+                    </StackPanel>
                 </RelativePanel>
 
                 <Grid Padding="2,0">

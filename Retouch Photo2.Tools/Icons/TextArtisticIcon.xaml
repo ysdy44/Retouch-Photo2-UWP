@@ -9,6 +9,10 @@
     d:DesignWidth="50"
     >
 
-    <Polygon Points="0,6 0,2 16,2 16,6 10,6 10,21 6,21 6,6" StrokeThickness="1" Stroke="White" Fill="Black"/>
+    <Polygon StrokeThickness="1" Stroke="White" Fill="Black">
+        <Polygon.Points>
+            0,6 0,2 16,2 16,6 10,6 10,21 6,21 6,6
+        </Polygon.Points>
+    </Polygon>
 
 </UserControl>

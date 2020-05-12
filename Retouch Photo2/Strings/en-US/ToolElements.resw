@@ -180,6 +180,15 @@
   <data name="Convert" xml:space="preserve">
     <value>Convert to curves</value>
   </data>
+  <data name="Extend_Clamp" xml:space="preserve">
+    <value>Clamp</value>
+  </data>
+  <data name="Extend_Mirror" xml:space="preserve">
+    <value>Mirror</value>
+  </data>
+  <data name="Extend_Wrap" xml:space="preserve">
+    <value>Wrap</value>
+  </data>
   <data name="Fill" xml:space="preserve">
     <value>Fill</value>
   </data>

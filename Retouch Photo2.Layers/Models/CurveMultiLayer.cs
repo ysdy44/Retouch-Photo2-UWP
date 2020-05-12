@@ -11,46 +11,46 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="ILayer"/>'s GeometryCurveMultiLayer .
+    /// <see cref="ILayer"/>'s CurveMultiLayer .
     /// </summary>
-    public class GeometryCurveMultiLayer : LayerBase, ILayer
+    public class CurveMultiLayer : LayerBase, ILayer
     {
 
         //@Override     
-        public override LayerType Type => LayerType.GeometryCurveMulti;
+        public override LayerType Type => LayerType.CurveMulti;
 
         //@Content 
         public IList<NodeCollection> Nodess { get; private set; }
 
         //@Construct
-      /// <summary>
+        /// <summary>
         /// Construct a multi-curve-layer.
         /// </summary>
-        private GeometryCurveMultiLayer()
+        public CurveMultiLayer()
         {
             base.Control = new LayerControl(this)
             {
-                Icon = new GeometryCurveMultiIcon(),
+                Icon = new CurveMultiIcon(),
                 Text = this.ConstructStrings(),
             };
-        }    
+        }
         /// <summary>
         /// Construct a multi-curve-layer.
         /// </summary>
         /// <param name="nodess"> The source nodes. </param>
-        public GeometryCurveMultiLayer(IList<NodeCollection> nodess) : this() => this.Nodess = nodess;
+        public CurveMultiLayer(IList<NodeCollection> nodess) : this() => this.Nodess = nodess;
         /// <summary>
         /// Construct a multi-curve-layer.
         /// </summary>
         /// <param name="nodess"> The source nodes. </param>
-        public GeometryCurveMultiLayer(IEnumerable<IEnumerable<Node>> nodess) : this()
+        public CurveMultiLayer(IEnumerable<IEnumerable<Node>> nodess) : this()
         {
             this.Nodess =
             (
                 from nodes
                 in nodess
                 select new NodeCollection(nodes)
-            ).ToList();                            
+            ).ToList();
         }
 
 
@@ -100,7 +100,7 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryCurveMultiLayer CurveMultiLayer = new GeometryCurveMultiLayer
+            CurveMultiLayer CurveMultiLayer = new CurveMultiLayer
             {
                 Nodess = (from nodes in this.Nodess select nodes.Clone()).ToList()
             };
@@ -140,7 +140,7 @@ namespace Retouch_Photo2.Layers.Models
                  select nodes.CreateGeometry(resourceCreator).Transform(canvasToVirtualMatrix);
 
             return CanvasGeometry.CreateGroup(resourceCreator, geometrys.ToArray());
-        }        
+        }
         public override IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;
 
 

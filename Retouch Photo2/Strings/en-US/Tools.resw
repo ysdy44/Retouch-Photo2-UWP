@@ -120,29 +120,32 @@
   <data name="Brush" xml:space="preserve">
     <value>Brush Tool</value>
   </data>
-  <data name="BrushFlyout_Alpha" xml:space="preserve">
-    <value>Alpha</value>
-  </data>
-  <data name="BrushFlyout_Offset" xml:space="preserve">
-    <value>Offset</value>
-  </data>
-  <data name="BrushFlyout_Stop" xml:space="preserve">
-    <value>Stops</value>
-  </data>
-  <data name="BrushFlyout_Stop_Copy" xml:space="preserve">
-    <value>Copy</value>
-  </data>
-  <data name="BrushFlyout_Stop_Remove" xml:space="preserve">
-    <value>Remove</value>
-  </data>
-  <data name="BrushFlyout_Stop_Reverse" xml:space="preserve">
-    <value>Reserve</value>
-  </data>
   <data name="Brush_Brush" xml:space="preserve">
     <value>Brush</value>
   </data>
   <data name="Brush_FillOrStroke" xml:space="preserve">
     <value>Fill or Stroke</value>
+  </data>
+  <data name="Brush_Image_Extend" xml:space="preserve">
+    <value>Extend</value>
+  </data>
+  <data name="Brush_Image_Replace" xml:space="preserve">
+    <value>Replac</value>
+  </data>
+  <data name="Brush_Stop_Alpha" xml:space="preserve">
+    <value>Alpha</value>
+  </data>
+  <data name="Brush_Stop_Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="Brush_Stop_Offset" xml:space="preserve">
+    <value>Offset</value>
+  </data>
+  <data name="Brush_Stop_Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Brush_Stop_Reverse" xml:space="preserve">
+    <value>Reserve</value>
   </data>
   <data name="Brush_Type" xml:space="preserve">
     <value>Type</value>

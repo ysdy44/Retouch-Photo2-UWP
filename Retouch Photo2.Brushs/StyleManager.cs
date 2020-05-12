@@ -13,13 +13,16 @@ namespace Retouch_Photo2.Brushs
     /// </summary>
     public partial class StyleManager : ICacheTransform
     {
+        /// <summary> Gets or sets whether the style follows the transform. </summary>
+        public bool IsFollowTransform = true;
+
         /// <summary> Gets or sets Style's fill-brush. </summary>
         public IBrush FillBrush = new NoneBrush();
         /// <summary> Gets or sets Style's stroke-brush. </summary>
         public IBrush StrokeBrush = new NoneBrush();
         /// <summary> Gets or sets Style's stroke-width. </summary>
         public float StrokeWidth = 1;
-        
+
 
         //@Interface
         /// <summary>
@@ -27,8 +30,11 @@ namespace Retouch_Photo2.Brushs
         /// </summary>
         public void CacheTransform()
         {
-            this.FillBrush.CacheTransform();
-            this.StrokeBrush.CacheTransform();
+            if (this.IsFollowTransform)
+            {
+                this.FillBrush.CacheTransform();
+                this.StrokeBrush.CacheTransform();
+            }
         }
         /// <summary>
         ///  Transforms the style by the given matrix.
@@ -36,8 +42,11 @@ namespace Retouch_Photo2.Brushs
         /// <param name="matrix"> The sestination matrix. </param>
         public void TransformMultiplies(Matrix3x2 matrix)
         {
-            this.FillBrush.TransformMultiplies(matrix);
-            this.StrokeBrush.TransformMultiplies(matrix);
+            if (this.IsFollowTransform)
+            {
+                this.FillBrush.TransformMultiplies(matrix);
+                this.StrokeBrush.TransformMultiplies(matrix);
+            }
         }
         /// <summary>
         ///  Transforms the style by the given vector.
@@ -45,8 +54,11 @@ namespace Retouch_Photo2.Brushs
         /// <param name="vector"> The sestination vector. </param>
         public void TransformAdd(Vector2 vector)
         {
-            this.FillBrush.TransformAdd(vector);
-            this.StrokeBrush.TransformAdd(vector);
+            if (this.IsFollowTransform)
+            {
+                this.FillBrush.TransformAdd(vector);
+                this.StrokeBrush.TransformAdd(vector);
+            }
         }
 
 
@@ -73,7 +85,7 @@ namespace Retouch_Photo2.Brushs
         /// <param name="canvasToVirtualMatrix"> The canvas-virtual-matrix. </param>
         public void DrawGeometry(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, CanvasGeometry geometry, Matrix3x2 canvasToVirtualMatrix)
         {
-            ICanvasBrush canvasBrush = this.FillBrush.GetICanvasBrush(resourceCreator, canvasToVirtualMatrix);
+            ICanvasBrush canvasBrush = this.StrokeBrush.GetICanvasBrush(resourceCreator, canvasToVirtualMatrix);
             if (canvasBrush == null) return;
 
             float strokeWidth = this.StrokeWidth * (canvasToVirtualMatrix.M11 + canvasToVirtualMatrix.M22) / 2;

@@ -142,8 +142,8 @@
     <Compile Include="IconsSecond\GeometryTriangleIcon.xaml.cs">
       <DependentUpon>GeometryTriangleIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\GeometryCurveMultiIcon.xaml.cs">
-      <DependentUpon>GeometryCurveMultiIcon.xaml</DependentUpon>
+    <Compile Include="Icons\CurveMultiIcon.xaml.cs">
+      <DependentUpon>CurveMultiIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icons\TextArtisticIcon.xaml.cs">
       <DependentUpon>TextArtisticIcon.xaml</DependentUpon>
@@ -169,8 +169,8 @@
     <Compile Include="ModelsSecond\GeometryRoundRectLayer.cs" />
     <Compile Include="ModelsSecond\GeometryStarLayer.cs" />
     <Compile Include="ModelsSecond\GeometryTriangleLayer.cs" />
-    <Compile Include="Icons\GeometryCurveIcon.xaml.cs">
-      <DependentUpon>GeometryCurveIcon.xaml</DependentUpon>
+    <Compile Include="Icons\CurveIcon.xaml.cs">
+      <DependentUpon>CurveIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icons\GeometryEllipseIcon.xaml.cs">
       <DependentUpon>GeometryEllipseIcon.xaml</DependentUpon>
@@ -208,12 +208,12 @@
     <Compile Include="Layers\LayerBase.Control.cs" />
     <Compile Include="Layers\LayerBase.Render.cs" />
     <Compile Include="Layers\LayerBase.Property.cs" />
-    <Compile Include="Models\GeometryCurveMultiLayer.cs" />
+    <Compile Include="Models\CurveMultiLayer.cs" />
     <Compile Include="Layers\TextLayerBase.cs" />
     <Compile Include="Models\TextArtisticLayer.cs" />
     <Compile Include="Models\TextFrameLayer.cs" />
     <Compile Include="TransformManager.cs" />
-    <Compile Include="Models\GeometryCurveLayer.cs" />
+    <Compile Include="Models\CurveLayer.cs" />
     <Compile Include="Models\GeometryEllipseLayer.cs" />
     <Compile Include="Models\GroupLayer.cs" />
     <Compile Include="Models\ImageLayer.cs" />
@@ -282,11 +282,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Icons\GeometryCurveIcon.xaml">
+    <Page Include="Icons\CurveIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Icons\GeometryCurveMultiIcon.xaml">
+    <Page Include="Icons\CurveMultiIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

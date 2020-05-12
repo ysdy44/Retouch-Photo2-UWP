@@ -151,7 +151,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 Spread = this.SelectionViewModel.GeometryHeartSpread,
                 TransformManager = new TransformManager(transformer),
-                StyleManager = this.SelectionViewModel.GetStyleManager()
+                StyleManager = this.SelectionViewModel.GetStyleManagerGeometry()
             };
         }
 

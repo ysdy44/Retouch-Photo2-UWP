@@ -10,8 +10,17 @@
     d:DesignWidth="50"
     >
 
-    <Border Width="22" Height="22" BorderThickness="1" BorderBrush="Gray">
-        <TextBlock Text="T" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{x:Bind UserControl.Foreground, Mode=OneWay}"/>
-    </Border>
+    <Grid Width="22" Height="22" BorderThickness="1" BorderBrush="{x:Bind UserControl.Foreground, Mode=OneWay}">
+        <Polygon Fill="{x:Bind UserControl.Foreground, Mode=OneWay}" HorizontalAlignment="Center" Opacity="0.5">
+            <Polygon.Points>
+                0,6 0,3 12,3 12,6 7.5,6 7.5,18 4.5,18 4.5,6
+            </Polygon.Points>
+        </Polygon>
+        <Polygon StrokeThickness="1" Stroke="{x:Bind UserControl.Foreground, Mode=OneWay}" HorizontalAlignment="Center">
+            <Polygon.Points>
+                0,6 0,3 12,3 12,6 7.5,6 7.5,18 4.5,18 4.5,6
+            </Polygon.Points>
+        </Polygon>
+    </Grid>
     
 </UserControl>

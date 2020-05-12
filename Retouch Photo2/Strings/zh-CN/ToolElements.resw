@@ -180,6 +180,15 @@
   <data name="Convert" xml:space="preserve">
     <value>转换为曲线</value>
   </data>
+  <data name="Extend_Clamp" xml:space="preserve">
+    <value>重复</value>
+  </data>
+  <data name="Extend_Mirror" xml:space="preserve">
+    <value>镜像</value>
+  </data>
+  <data name="Extend_Wrap" xml:space="preserve">
+    <value>换行</value>
+  </data>
   <data name="Fill" xml:space="preserve">
     <value>填充</value>
   </data>

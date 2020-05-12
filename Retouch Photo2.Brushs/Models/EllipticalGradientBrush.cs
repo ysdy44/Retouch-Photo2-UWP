@@ -21,6 +21,7 @@ namespace Retouch_Photo2.Brushs.Models
         public Color Color { get; set; }
         public Transformer Destination { set { } }
         public Photocopier Photocopier { get => new Photocopier(); }
+        public CanvasEdgeBehavior Extend { get => CanvasEdgeBehavior.Clamp; set { } }
 
 
         /// <summary> <see cref="EllipticalGradientBrush"/>'s center point. </summary>
@@ -121,7 +122,7 @@ namespace Retouch_Photo2.Brushs.Models
 
             return BrushOperateMode.None;
         }
-        public void Controller(BrushOperateMode mode, Vector2 point)
+        public void Controller(BrushOperateMode mode, Vector2 startingPoint, Vector2 point)
         {
             switch (mode)
             {

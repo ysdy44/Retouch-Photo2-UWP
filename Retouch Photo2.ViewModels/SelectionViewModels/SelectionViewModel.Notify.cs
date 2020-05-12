@@ -19,7 +19,16 @@ namespace Retouch_Photo2.ViewModels
     {
 
         /// <summary> <see cref = "SelectionViewModel" />'s layer type. </summary>
-        public LayerType Type { get; set; } = LayerType.None;
+        public LayerType Type
+        {
+            get => this.type;
+            set
+            {
+                this.type = value;
+                this.OnPropertyChanged(nameof(this.Type));//Notify 
+            }
+        }
+        private LayerType type = LayerType.None;
 
 
         /// <summary> <see cref = "SelectionViewModel" />'s opacity. </summary>
@@ -171,7 +180,7 @@ namespace Retouch_Photo2.ViewModels
 
         
         /// <summary> <see cref = "SelectionViewModel" />'s CurveLayer. </summary>
-        public GeometryCurveLayer CurveLayer { get; set; }
+        public CurveLayer CurveLayer { get; set; }
         /// <summary> Sets CurveLayer. </summary>     
         private void SetCurveLayer(ILayer layer)
         {
@@ -183,11 +192,11 @@ namespace Retouch_Photo2.ViewModels
 
             switch (layer.Type)
             {
-                case LayerType.GeometryCurve:
-                    this.CurveLayer = (GeometryCurveLayer)layer;
+                case LayerType.Curve:
+                    this.CurveLayer = (CurveLayer)layer;
                     break;
 
-                case LayerType.GeometryCurveMulti:
+                case LayerType.CurveMulti:
                     break;
 
                 default:

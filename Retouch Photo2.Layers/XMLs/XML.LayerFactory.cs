@@ -21,7 +21,9 @@ namespace Retouch_Photo2.Layers
                 //Geometry0
                 case "GeometryRectangle": return new GeometryRectangleLayer();
                 case "GeometryEllipse": return new GeometryEllipseLayer();
-                case "GeometryCurve": return new GeometryCurveLayer();
+
+                case "Curve": return new CurveLayer();
+                case "CurveMulti": return new CurveMultiLayer();
 
                 case "TextArtistic": return new TextArtisticLayer();
                 case "TextFrame": return new TextFrameLayer();
@@ -49,7 +51,7 @@ namespace Retouch_Photo2.Layers
                 case "GeometryCapsule": return new GeometryCapsuleLayer();
                 case "GeometryHeart": return new GeometryHeartLayer();
 
-                default: return null;
+                default: return new GroupLayer();
             }
         }
 

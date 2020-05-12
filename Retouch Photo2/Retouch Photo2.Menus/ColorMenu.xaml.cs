@@ -33,6 +33,24 @@ namespace Retouch_Photo2.Menus.Models
              );
             this.ConstructStrings();
             this.ConstructMenu();
+
+            this.ColorPicker.ColorChange += (s, value) =>
+            {
+                //Color
+                this.SelectionViewModel.Color = value;
+
+                switch (this.SelectionViewModel.FillOrStroke)
+                {
+                    case FillOrStroke.Fill:
+                        this.SelectionViewModel.SetFillColor(value);
+                        break;
+                    case FillOrStroke.Stroke:
+                        this.SelectionViewModel.SetStrokeColor(value);
+                        break;
+                }
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
         }
     }
         

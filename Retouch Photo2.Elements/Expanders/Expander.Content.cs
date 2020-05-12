@@ -27,26 +27,30 @@ namespace Retouch_Photo2.Elements
                 switch (value)
                 {
                     case ExpanderState.Hide:
-                        this.HeightBegin = ExpanderHeight.Stretch;
+                        this.HeightRectangle.VerticalAlignment = VerticalAlignment.Stretch;
+                        this.HeightRectangle.Height = double.NaN;
 
                         this.Closed?.Invoke(); //Delegate
                         break;
 
                     case ExpanderState.FlyoutShow:
-                        this.HeightBegin = ExpanderHeight.Stretch;
+                        this.HeightRectangle.VerticalAlignment = VerticalAlignment.Stretch;
+                        this.HeightRectangle.Height = double.NaN;
 
                         this.ShowLayout();
                         if (this._vsState == ExpanderState.Hide) this.Opened?.Invoke(); //Delegate 
                         break;
 
                     case ExpanderState.OverlayNotExpanded:
-                        this.HeightBegin = this.IsSecondPage ? ExpanderHeight.SecondToZero : ExpanderHeight.MainToZero;
+                        this.HeightRectangle.VerticalAlignment = VerticalAlignment.Top;
+                        (this.IsSecondPage ? this.HeightStoryboardSecondToZero : this.HeightStoryboardMainToZero).Begin();//Storyboard
                         break;
 
                     case ExpanderState.Overlay:
                         if (this._vsState == ExpanderState.OverlayNotExpanded)
                         {
-                            this.HeightBegin = this.IsSecondPage ? ExpanderHeight.ZeroToSecond : ExpanderHeight.ZeroToMain;
+                            this.HeightRectangle.VerticalAlignment = VerticalAlignment.Top;
+                            (this.IsSecondPage ? this.HeightStoryboardZeroToSecond : this.HeightStoryboardZeroToMain).Begin();//Storyboard
                         }
 
                         this.Overlaid?.Invoke(); //Delegate 
@@ -65,7 +69,7 @@ namespace Retouch_Photo2.Elements
         public FrameworkElement Layout { get; set; }
         public IExpanderButton Button { get; set; }
 
-        
+
         public void ShowLayout()
         {
             double flyoutPostionX = this.GetFlyoutPostionX();

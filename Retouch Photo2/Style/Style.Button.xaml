@@ -103,6 +103,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
     <Style x:Key="CircleButtonBase" TargetType="ButtonBase" BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="BorderThickness" Value="{StaticResource AppThickness}"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}"/>
         <Setter Property="Background" Value="{ThemeResource AppForeground}"/>
