@@ -120,6 +120,9 @@
   <data name="Document" xml:space="preserve">
     <value>Document</value>
   </data>
+  <data name="DocumentUnSave" xml:space="preserve">
+    <value>UnSave and Back</value>
+  </data>
   <data name="Export" xml:space="preserve">
     <value>Export</value>
   </data>

@@ -120,6 +120,9 @@
   <data name="Document" xml:space="preserve">
     <value>文档</value>
   </data>
+  <data name="DocumentUnSave" xml:space="preserve">
+    <value>不保存并返回</value>
+  </data>
   <data name="Export" xml:space="preserve">
     <value>导出</value>
   </data>

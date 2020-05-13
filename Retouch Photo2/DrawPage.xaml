@@ -38,12 +38,22 @@
         <Grid.Resources>
 
             <!--Flyout-->
+            <Flyout x:Name="DocumentFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <Button x:Name="DocumentUnSaveButton" Width="180" Style="{StaticResource AppIconButton}">
+                    <Button.Tag>
+                        <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                    </Button.Tag>
+                </Button>
+            </Flyout>
+            
+            
             <Flyout x:Name="FillColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                 <elements:ColorPicker2 x:Name="FillColorPicker"/>
             </Flyout>
             <Flyout x:Name="StrokeColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                 <elements:ColorPicker2 x:Name="StrokeColorPicker"/>
             </Flyout>
+            
             <Flyout x:Name="MoreTransformFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                 <toolElements:MoreTransformControl/>
             </Flyout>

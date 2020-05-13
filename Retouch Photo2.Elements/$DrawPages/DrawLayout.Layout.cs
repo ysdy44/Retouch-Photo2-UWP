@@ -45,10 +45,7 @@ namespace Retouch_Photo2.Elements.DrawPages
             {
                 if (this._vsIsFullScreen) return this.FullScreen;
 
-                DeviceLayoutType type =
-                    (this._vsDeviceLayout.IsAdaptive) ?
-                    this._vsDeviceLayoutType :
-                    this._vsDeviceLayout.FallBackType;
+                DeviceLayoutType type = (this._vsDeviceLayout.IsAdaptive) ? this._vsDeviceLayoutType : this._vsDeviceLayout.FallBackType;
 
                 switch (type)
                 {

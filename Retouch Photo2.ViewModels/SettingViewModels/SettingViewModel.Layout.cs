@@ -81,17 +81,16 @@ namespace Retouch_Photo2.ViewModels
         public Vector2 FullScreenOffset
         {
             get
-            {
-                if (this.DeviceLayout.IsAdaptive)
+            { 
+                DeviceLayoutType type = (this.DeviceLayout.IsAdaptive) ? this.DeviceLayoutType : this.DeviceLayout.FallBackType;
+        
+                switch (type)
                 {
-                    if (this.DeviceLayoutType == DeviceLayoutType.PC)
+                    case DeviceLayoutType.PC:
                         return new Vector2(70, 50);
+                    default:
+                        return new Vector2(0, 50);
                 }
-
-                if (this.DeviceLayout.FallBackType == DeviceLayoutType.PC)
-                    return new Vector2(70, 50);
-
-                return new Vector2(0, 50);
             }
         }
         /// <summary> Gets the CenterChild width. </summary>
@@ -101,22 +100,15 @@ namespace Retouch_Photo2.ViewModels
             {
                 float rootWidth = (float)Window.Current.Bounds.Width;
 
-                if (this.DeviceLayout.IsAdaptive)
-                {
-                    switch (this.DeviceLayoutType)
-                    {
-                        case DeviceLayoutType.PC:
-                            return rootWidth - 70 - 220;
-                    }
-                }
-                
-                switch (this.DeviceLayout.FallBackType)
+                DeviceLayoutType type = (this.DeviceLayout.IsAdaptive) ? this.DeviceLayoutType : this.DeviceLayout.FallBackType;
+
+                switch (type)
                 {
                     case DeviceLayoutType.PC:
                         return rootWidth - 70 - 220;
+                    default:
+                        return rootWidth;
                 }
-
-                return rootWidth;
             }
         }
         /// <summary> Gets the CenterChild height. </summary>

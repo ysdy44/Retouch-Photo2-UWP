@@ -101,9 +101,6 @@ namespace Retouch_Photo2
             this.SelectionViewModel.SetModeNone();
             this.ViewModel.Layers.RootLayers.Clear();
             this.ViewModel.Layers.RootControls.Clear();
-
-            this.SettingViewModel.IsFullScreen = true;
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
         }
 
     }

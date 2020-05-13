@@ -60,17 +60,32 @@ namespace Retouch_Photo2
             this.ConstructColorFlyout(); 
             Retouch_Photo2.Tools.Elements.MoreTransformButton.Flyout = this.MoreTransformFlyout;
             Retouch_Photo2.Tools.Elements.MoreCreateButton.Flyout = this.MoreCreateFlyout;
-             
-
-            #region ExpandAppbar
 
 
+            //Document
             this.DocumentButton.Tapped += async (s, e) =>
             {
                 await this.Save();
+                this.SettingViewModel.IsFullScreen = true;
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
+
                 await Task.Delay(400);
                 this.Frame.GoBack();
             };
+            this.DocumentButton.Holding += (s, e) => this.DocumentFlyout.ShowAt(this.DocumentButton);
+            this.DocumentButton.RightTapped += (s, e) => this.DocumentFlyout.ShowAt(this.DocumentButton);
+            this.DocumentUnSaveButton.Tapped += async (s, e) =>
+            {
+                this.DocumentFlyout.Hide();
+                this.SettingViewModel.IsFullScreen = true;
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
+
+                await Task.Delay(400);
+                this.Frame.GoBack();
+            };
+ 
+            
+            #region ExpandAppbar
 
 
             this.ConstructExportDialog();

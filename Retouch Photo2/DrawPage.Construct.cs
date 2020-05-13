@@ -20,6 +20,7 @@ namespace Retouch_Photo2
             this.LoadingControl.Text = resource.GetString("/$DrawPage/Loading");
 
             this.DocumentButton.Content = resource.GetString("/$DrawPage/Document");
+            this.DocumentUnSaveButton.Content = resource.GetString("/$DrawPage/DocumentUnSave");
 
             this.ExportButton.Text = resource.GetString("/$DrawPage/Export");
             this.ExportToolTip.Content = resource.GetString("/$DrawPage/Export_ToolTip");
