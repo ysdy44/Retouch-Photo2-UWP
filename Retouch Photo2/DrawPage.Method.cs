@@ -47,7 +47,7 @@ namespace Retouch_Photo2
             }
 
             //Export
-            return await FileUtil.ExportStorageFile
+            return await FileUtil.SaveCanvasBitmapFile
             (
                 renderTarget: renderTarget,
 
@@ -68,8 +68,10 @@ namespace Retouch_Photo2
             string name = this.ViewModel.Name;
             int width = this.ViewModel.CanvasTransformer.Width;
             int height = this.ViewModel.CanvasTransformer.Height;
+            StorageFolder zipFolder = await FileUtil.DeleteAllAndReturn(name);
 
-            //Save Project File.
+
+            //Save project file.
             Project project = new Project
             {
                 Name = name,
@@ -77,24 +79,26 @@ namespace Retouch_Photo2
                 Height = height,
                 Layers = this.ViewModel.Layers.RootLayers
             };
-            await FileUtil.SaveProject(project);
-            
-            //Save Thumbnail Image.
+            await Retouch_Photo2. XML.SaveProjectFile(zipFolder, project);
+
+            //Save thumbnail file.
             CanvasRenderTarget thumbnail = this.MainCanvasControl.RenderThumbnail(this.ViewModel.CanvasDevice, width, height);
-            FileUtil.SaveThumbnailAsync(thumbnail, name);
-            
-            //Save Photos File and Delete useless.
+            await FileUtil.SaveThumbnailFile(zipFolder, thumbnail);
+
+            //Save photos file and Move photo file.
             IEnumerable<Photocopier> savedPhotocopiers = this.ViewModel.Layers.GetPhotocopiers();
-            IEnumerable<Photo> savedPhotos = FileUtil.GetPhotosAndDeleteUseless(Photo.Instances, savedPhotocopiers);
-            await FileUtil.SavePhotoFile(savedPhotos);
+            IEnumerable<Photo> savedPhotos = from photo in Photo.Instances where savedPhotocopiers.Any(p => photo.Equals(p)) select photo;
+            await XML.SavePhotoFile(zipFolder, savedPhotos);
+            foreach (Photo photo in savedPhotos)
+            {
+                await photo.MoveFile(zipFolder);
+            }
 
             //Clear Photos
-            Photo.Instances.Clear();
-            
+            Photo.Instances.Clear();            
 
             //FileUtil
-            await FileUtil.CreateZipFile(name);
-            await FileUtil.DeleteAllInTemporaryFolder();
+            await FileUtil.DeleteInTemporaryFolder();
             
 
             //Clear

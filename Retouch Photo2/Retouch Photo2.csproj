@@ -111,8 +111,10 @@
     <Compile Include="DrawPage.xaml.cs">
       <DependentUpon>DrawPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FileUtils.XML\FileUtil.Setting.cs" />
-    <Compile Include="FileUtils.XML\FileUtil.Filter.cs" />
+    <Compile Include="XMLs\XML.FiltersFactory.cs" />
+    <Compile Include="XMLs\XML.PhotosFile.cs" />
+    <Compile Include="XMLs\XML.ProjectFile.cs" />
+    <Compile Include="XMLs\XML.SettingFactory.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -207,8 +209,6 @@
     <Compile Include="DrawPage.Method.cs" />
     <Compile Include="DrawPage.Transition.cs" />
     <Compile Include="FileUtils\FileUtil.cs" />
-    <Compile Include="FileUtils\FileUtil.LocalFolder.cs" />
-    <Compile Include="FileUtils\FileUtil.TemporaryFolder.cs" />
     <Compile Include="PhotosPage.Method.cs" />
     <Compile Include="MainPage.Construct.cs" />
     <Compile Include="MainPage.NewAndOpen.cs" />
@@ -306,8 +306,9 @@
     <Content Include="Icons\2Logo.png" />
     <Content Include="Icons\Circle.jpg" />
     <Content Include="Icons\GrayAndWhite.jpg" />
-    <Content Include="FileUtils.XML\Filter.xml" />
-    <Content Include="FileUtils.XML\FilterOriginal.xml" />
+    <Content Include="XMLs\Filters.xml" />
+    <Content Include="XMLs\FilterOriginal.xml" />
+    <Compile Include="FileUtils\FileUtil.ZipFolder.cs" />
     <None Include="Retouch Photo_TemporaryKey.pfx" />
     <PRIResource Include="Strings\en-US\Selections.resw" />
     <PRIResource Include="Strings\zh-CN\Selections.resw" />

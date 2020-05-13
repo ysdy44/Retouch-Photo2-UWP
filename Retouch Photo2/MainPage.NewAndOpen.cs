@@ -72,25 +72,27 @@ namespace Retouch_Photo2
 
             //FileUtil
             {
-                if (projectViewItem.Photo2pkFilePath == null) return;
+                string name = projectViewItem.Name;
+                if (name == null) return;
+                if (name == string.Empty) return;
 
-                await FileUtil.DeleteAllInTemporaryFolder();
-                await FileUtil.ExtractZipFile(projectViewItem.Photo2pkFilePath);
+                await FileUtil.DeleteInTemporaryFolder();
+                await FileUtil.MoveAll(name);
 
                 //Load all photos. 
-                IEnumerable<Photo> photos = FileUtil.LoadPhotoFile();
+                IEnumerable<Photo> photos = XML.LoadPhotosFile();
                 Photo.Instances.Clear();
-                foreach (Photo p in photos)
+                foreach (Photo photo in photos)
                 {
-                    await FileUtil.ConstructPhotoAndPushInstances(this.ViewModel.CanvasDevice, p);
-                    Photo.Instances.Add(p);
+                    await photo.ConstructPhotoSource(this.ViewModel.CanvasDevice);
+                    Photo.Instances.Add(photo);
                 }
             }
 
             //Project
             {
                 string name = projectViewItem.Name;
-                Project project = FileUtil.LoadProject(name);
+                Project project = XML.LoadProjectFile(name);
                 this.ViewModel.LoadFromProject(project);
             }
 
@@ -117,7 +119,7 @@ namespace Retouch_Photo2
 
             //Photo
             StorageFile copyFile = await FileUtil.PickAndCopySingleImageFileAsync(location);
-            Photo photo = await FileUtil.CreatePhotoFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
+            Photo photo = await Photo.CreatePhotoFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
             Photo.DuplicateChecking(photo);
 
             //Transformer

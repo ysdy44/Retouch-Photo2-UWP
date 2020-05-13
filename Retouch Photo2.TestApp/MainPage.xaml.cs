@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
@@ -26,6 +27,8 @@ namespace Retouch_Photo2.TestApp
         public MainPage()
         {
             this.InitializeComponent();
+
+            ZipArchive archive;
             this.ContentControl.Content = new BackOneIcon();
         }
 

@@ -9,9 +9,9 @@ using Windows.Storage.Streams;
 
 namespace Retouch_Photo2
 {
-    public static partial class FileUtil
+    public static partial class XML
     {
-
+        
         /// <summary>
         /// Construct <see cref="Setting"/>s File (Open from Defult, Save from LocalFolder)
         /// </summary>
@@ -31,7 +31,7 @@ namespace Retouch_Photo2
                 Setting setting = new Setting();
 
                 //Save to the local folder.
-                await FileUtil.SaveSettingFile(setting);
+                await XML.SaveSettingFile(setting);
 
                 return setting;
             }
@@ -48,7 +48,7 @@ namespace Retouch_Photo2
             }
             return null;
         }
-        
+
         /// <summary>
         /// Save <see cref="Setting"/> to local folder.
         /// </summary>

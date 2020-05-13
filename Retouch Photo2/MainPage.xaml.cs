@@ -39,7 +39,7 @@ namespace Retouch_Photo2
                 await this._lockLoaded();
                 
                 //FileUtil
-                await FileUtil.DeleteAllInTemporaryFolder();
+                await FileUtil.DeleteInTemporaryFolder();
             };
 
 

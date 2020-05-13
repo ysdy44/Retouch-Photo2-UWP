@@ -26,7 +26,7 @@ namespace Retouch_Photo2
         /// <summary>
         /// Loaded.
         /// </summary>
-        private async Task  _lockLoaded()
+        private async Task _lockLoaded()
         {
             if (MainPage._lockIsLoaded == false)
             {
@@ -56,21 +56,17 @@ namespace Retouch_Photo2
         /// </summary>
         private async Task LoadAllProjectViewItems()
         {
-            IEnumerable<StorageFile> orderedPhotos = await FileUtil.FIndFilesInLocalFolder();
-
+            IEnumerable<StorageFolder> zipFolders = await FileUtil.FIndZipFolders();
+             
             //Refresh, when the count is not equal.
-            if (orderedPhotos.Count() != this.ProjectViewItems.Count)
+            if (zipFolders.Count() != this.ProjectViewItems.Count)
             {
                 this.ProjectViewItems.Clear(); //Notify
 
-                foreach (StorageFile storageFile in orderedPhotos)
+                foreach (StorageFolder folder in zipFolders)
                 {
-                    // [StorageFile] --> [projectViewItem]
-                    string name = storageFile.DisplayName;
-                    string zipFile = storageFile.Path;
-                    string thumbnail = $"{ApplicationData.Current.LocalFolder.Path}\\{name}.png";
-                    ProjectViewItem item = new ProjectViewItem(name, zipFile, thumbnail);
-
+                    // [StorageFolder] --> [projectViewItem]
+                    ProjectViewItem item = FileUtil.ConstructProjectViewItem(folder);
                     if (item != null) this.ProjectViewItems.Add(item); //Notify
                 }
             }
@@ -113,6 +109,7 @@ namespace Retouch_Photo2
         /// <param name="item"> The ProjectViewItem. </param>
         private async Task RenameProjectViewItem(ProjectViewItem item)
         {
+            //Same name.
             string oldName = item.Name;
             string newName = this.RenameTextBox.Text;
             if (oldName == newName)
@@ -121,15 +118,17 @@ namespace Retouch_Photo2
                 return;
             }
 
-            ProjectViewItem hasRenamed = this.ProjectViewItems.FirstOrDefault(p => p.Name == newName);
-            if (hasRenamed != null)
+            //Name is already occupied.
+            bool hasRenamed = this.ProjectViewItems.Any(p => p.Name == newName);
+            if (hasRenamed)
             {
                 this.RenameTipTextBlock.Visibility = Visibility.Visible;
                 return;
             }
 
             //Rename
-            await FileUtil.RenameZipFileAndThumbnail(item, newName);
+            await FileUtil.RenameZipFolder(oldName, newName, item);
+
             this.HideRenameDialog();
         }
 
@@ -140,7 +139,9 @@ namespace Retouch_Photo2
         {
             foreach (ProjectViewItem item in items)
             {
-                await FileUtil.DeleteZipFileAndThumbnail(item.Name);
+                //Delete
+                string name = item.Name;
+                await FileUtil.DeleteZipFolder(name);
 
                 item.Visibility = Visibility.Collapsed;
                 this.ProjectViewItems.Remove(item);//Notify
@@ -158,15 +159,12 @@ namespace Retouch_Photo2
             {
                 string oldName = item.Name;
                 string newName = this.UntitledRenameByRecursive(oldName);
-                StorageFile storageFile = await FileUtil.DuplicateZipFileAndThumbnail(oldName, newName);
+                StorageFolder storageFolder = await FileUtil.DuplicateZipFolder(oldName, newName);
 
-                string zipFile = storageFile.Path;
-                string thumbnail = $"{ApplicationData.Current.LocalFolder.Path}\\{newName}.png";
-                ProjectViewItem newItem = new ProjectViewItem(newName, zipFile, thumbnail);
-
+                ProjectViewItem newItem = FileUtil.ConstructProjectViewItem(newName, storageFolder);
                 this.ProjectViewItems.Add(newItem);//Notify
             }
         }
-                
+
     }
 }

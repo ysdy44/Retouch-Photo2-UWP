@@ -169,7 +169,7 @@ namespace Retouch_Photo2.Menus.Models
 
                 if (this.FiltersListView.ItemsSource == null)
                 {
-                    IEnumerable<Filter> source = await FileUtil.ConstructFilterFile();
+                    IEnumerable<Filter> source = await XML.ConstructFilterFile();
                     this.FiltersListView.ItemsSource = source.ToList();
                 }
 

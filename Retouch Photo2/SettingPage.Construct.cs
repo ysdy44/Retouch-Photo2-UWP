@@ -152,7 +152,7 @@ namespace Retouch_Photo2
 
         private async Task WriteToLocalFolder()
         {
-            await FileUtil.SaveSettingFile(new Setting
+            await XML.SaveSettingFile(new Setting
             {
                 Theme = this.SettingViewModel.Theme,
                 DeviceLayout = this.SettingViewModel.DeviceLayout

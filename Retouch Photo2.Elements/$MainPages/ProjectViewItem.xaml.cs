@@ -48,49 +48,31 @@ namespace Retouch_Photo2.Elements.MainPages
         }
 
 
-        //@Content
-        /// <summary> ImageEx. </summary>
-        public FrameworkElement ImageEx => this._ImageEx;
-        /// <summary> Gets the name. </summary>
-        //public string Name { get; private set; }
-        /// <summary> Gets the zip file path. </summary>
-        public string Photo2pkFilePath { get; private set; }
-        /// <summary> Gets the thumbnail path. </summary>
-        public string ThumbnailPath { get; private set; }
-
-
         //@Construct
         /// <summary>
-        /// Construct a ProjectControl from <see cref = "StorageFile" />.
+        /// Construct a ProjectViewItem from <see cref = "StorageFolder" />.
         /// </summary>
         /// <param name="name"> The name. </param>
-        /// <param name="zipFile"> The zip file name. </param>
-        /// <param name="thumbnail"> The thumbnail name. </param>
-        public ProjectViewItem(string name, string zipFile, string thumbnail)
+        /// <param name="thumbnail"> The thumbnail path. </param>
+        public ProjectViewItem(string name, string thumbnail)
         {
             this.InitializeComponent();
 
-            //Content    
             this.Name = name;
-            this.Photo2pkFilePath = zipFile;
-            this.ThumbnailPath = thumbnail;
+            this.ImageEx.Source = new Uri(thumbnail, UriKind.Relative);
 
-            this._ImageEx.Source = new Uri(thumbnail, UriKind.Relative);
-
-            //Static
             this._RootGrid.Tapped += (s, e) => ProjectViewItem.ItemClick?.Invoke(this);//Delegate
         }
 
         /// <summary>
-        /// Rename image source.
+        /// Rename.
         /// </summary>
-        public void Rename(string name, string zipFile, string thumbnail)
+        /// <param name="name"> The name. </param>
+        /// <param name="thumbnail"> The thumbnail path. </param>
+        public void Rename(string name,  string thumbnail)
         {
             this.Name = name;
-            this.Photo2pkFilePath = zipFile;
-            this.ThumbnailPath = thumbnail;
-
-            this._ImageEx.Source = new Uri(thumbnail, UriKind.Relative);
+            this.ImageEx.Source = new Uri(thumbnail, UriKind.Relative);
         }
 
         /// <summary>
@@ -114,9 +96,9 @@ namespace Retouch_Photo2.Elements.MainPages
         /// </summary>
         public void RefreshImageSource()
         {
-            object url = this._ImageEx.Source;
-            this._ImageEx.Source = null;
-            this._ImageEx.Source = url;
+            object url = this.ImageEx.Source;
+            this.ImageEx.Source = null;
+            this.ImageEx.Source = url;
         }
 
 

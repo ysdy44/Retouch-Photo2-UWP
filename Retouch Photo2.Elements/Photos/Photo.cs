@@ -1,12 +1,5 @@
-﻿using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
-using System;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Threading.Tasks;
+﻿using Microsoft.Graphics.Canvas;
 using Windows.Storage;
-using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
 
 namespace Retouch_Photo2.Elements
 {

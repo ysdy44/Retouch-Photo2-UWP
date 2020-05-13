@@ -38,7 +38,7 @@ namespace Retouch_Photo2
         public static IEnumerable<Photo> LoadPhotoFile()
         {
             //Create an XDocument object.
-            string path = $"{ApplicationData.Current.TemporaryFolder.Path}/photos.xml";
+            string path = $"{ApplicationData.Current.TemporaryFolder.Path}/Photos.xml";
             XDocument document = XDocument.Load(path);
 
             IEnumerable<Photo> photos = Retouch_Photo2.Elements.XML.LoadPhotos(document);
@@ -54,7 +54,7 @@ namespace Retouch_Photo2
             XDocument document = Retouch_Photo2.Elements.XML.SavePhotos(photos);
 
             //Save the project xml file.      
-            StorageFile file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync("photos.xml", CreationCollisionOption.ReplaceExisting);
+            StorageFile file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync("Photos.xml", CreationCollisionOption.ReplaceExisting);
             using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
             {
                 using (Stream stream = fileStream.AsStream())
@@ -136,7 +136,7 @@ namespace Retouch_Photo2
         public static Project LoadProject(string name)
         {
             //Create an XDocument object.
-            string path = $"{ApplicationData.Current.TemporaryFolder.Path}\\config.xml";
+            string path = $"{ApplicationData.Current.TemporaryFolder.Path}\\Project.xml";
             XDocument document = XDocument.Load(path);
 
             Project project = Retouch_Photo2.ViewModels.XML.LoadProject(name, document);
@@ -152,7 +152,7 @@ namespace Retouch_Photo2
             XDocument document = Retouch_Photo2.ViewModels.XML.SaveProject(project);
 
             //Save the project xml file.      
-            StorageFile file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync("config.xml", CreationCollisionOption.ReplaceExisting);
+            StorageFile file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync("Project.xml", CreationCollisionOption.ReplaceExisting);
             using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
             {
                 using (Stream stream = fileStream.AsStream())

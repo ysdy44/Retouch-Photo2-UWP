@@ -75,7 +75,7 @@ namespace Retouch_Photo2
         //Setting
         private async Task ConstructSetting()
         {
-            Setting setting = await FileUtil.ConstructSettingFile();
+            Setting setting = await XML.ConstructSettingFile();
 
             if (setting != null)
             {

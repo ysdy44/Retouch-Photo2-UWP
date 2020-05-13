@@ -10,7 +10,7 @@ using Windows.Storage.Streams;
 
 namespace Retouch_Photo2
 {
-    public static partial class FileUtil
+    public static partial class XML
     {
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Retouch_Photo2
             else
             {
                 //Read the file from the package.
-                file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///FileUtils.XML/Filter.xml"));
+                file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///XMLs/Filters.xml"));
 
                 //Copy to the local folder.
                 await file.CopyAsync(ApplicationData.Current.LocalFolder);
@@ -48,7 +48,7 @@ namespace Retouch_Photo2
             }
             return null;
         }
-        
+
         /// <summary>
         /// Save <see cref="Filter"/> to local folder.
         /// </summary>

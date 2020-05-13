@@ -23,7 +23,7 @@ namespace Retouch_Photo2
             //Photo
             StorageFile copyFile = await FileUtil.PickAndCopySingleImageFileAsync(PickerLocationId.Desktop);
             if (copyFile == null) return;
-            Photo photo = await FileUtil.CreatePhotoFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
+            Photo photo = await Photo.CreatePhotoFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
             Photo.DuplicateChecking(photo);
         }
 

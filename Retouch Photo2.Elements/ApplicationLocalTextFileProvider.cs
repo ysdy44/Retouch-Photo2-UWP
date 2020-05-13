@@ -51,6 +51,11 @@ namespace Retouch_Photo2.Elements
             IStorageItem item = await ApplicationData.Current.LocalFolder.TryGetItemAsync(fileName);
             return item != null;
         }
+        public static async Task<bool> IsFileExistsInTemporaryFolder(string fileName)
+        {
+            IStorageItem item = await ApplicationData.Current.TemporaryFolder.TryGetItemAsync(fileName);
+            return item != null;
+        }
 
         /// <summary>
         /// Write file to Local Folder. 
