@@ -20,12 +20,12 @@ namespace Retouch_Photo2
         public static async Task<IEnumerable<Filter>> ConstructFilterFile()
         {
             StorageFile file = null;
-            bool isLocalFilterExists = await ApplicationLocalTextFileUtility.IsFileExistsInLocalFolder("Filter.xml");
+            bool isLocalFilterExists = await FileUtil.IsFileExistsInLocalFolder("Filters.xml");
 
             if (isLocalFilterExists)
             {
                 //Read the file from the local folder.
-                file = await ApplicationData.Current.LocalFolder.GetFileAsync("Filter.xml");
+                file = await ApplicationData.Current.LocalFolder.GetFileAsync("Filters.xml");
             }
             else
             {

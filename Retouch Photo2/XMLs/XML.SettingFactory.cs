@@ -19,7 +19,7 @@ namespace Retouch_Photo2
         public static async Task<Setting> ConstructSettingFile()
         {
             StorageFile file = null;
-            bool isLocalSettingExists = await ApplicationLocalTextFileUtility.IsFileExistsInLocalFolder("Setting.xml");
+            bool isLocalSettingExists = await FileUtil.IsFileExistsInLocalFolder("Setting.xml");
 
             if (isLocalSettingExists)
             {

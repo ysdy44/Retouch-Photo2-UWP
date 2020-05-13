@@ -153,5 +153,31 @@ namespace Retouch_Photo2
         }
 
 
+        #region Exists
+
+
+        /// <summary>
+        /// To know if a file exists.
+        /// </summary>
+        /// <param name="fileName"> The file name. </param>
+        /// <returns> The exists. </returns>
+        public static async Task<bool> IsFileExistsInLocalFolder(string fileName)
+        {
+            IStorageItem item = await ApplicationData.Current.LocalFolder.TryGetItemAsync(fileName);
+            return item != null;
+        }
+        /// <summary>
+        /// To know if a file exists.
+        /// </summary>
+        /// <param name="fileName"> The file name. </param>
+        /// <returns> The exists. </returns>
+        public static async Task<bool> IsFileExistsInTemporaryFolder(string fileName)
+        {
+            IStorageItem item = await ApplicationData.Current.TemporaryFolder.TryGetItemAsync(fileName);
+            return item != null;
+        }
+
+
+        #endregion
     }
 }
