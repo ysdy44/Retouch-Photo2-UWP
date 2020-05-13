@@ -9,18 +9,16 @@ using FanKit.Transformers;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "KeyboardViewModel" />. 
+    /// Retouch_Photo2's the only <see cref = "SettingViewModel" />. 
     /// </summary>
-    public partial class KeyboardViewModel : INotifyPropertyChanged
+    public partial class SettingViewModel : INotifyPropertyChanged
     {
         //@Delegate  
         /// <summary> Occurs when the canvas position moved. </summary>
         public Action<Vector2> Move { get; set; }
-        /// <summary> Occurs when the IsFullScreen changed. </summary>
-        public Action<bool> FullScreenChanged { get; set; }
 
         //@Construct
-        public KeyboardViewModel()
+        public void ConstructKey()
         {
             Window.Current.CoreWindow.KeyUp += (s, e) =>
             {

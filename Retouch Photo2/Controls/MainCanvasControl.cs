@@ -18,7 +18,6 @@ namespace Retouch_Photo2.Controls
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         bool _isSingleStarted;

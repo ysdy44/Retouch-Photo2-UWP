@@ -8,6 +8,7 @@ using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 using Windows.Foundation;
@@ -164,7 +165,9 @@ namespace Retouch_Photo2
         /// <returns> The new name. </returns>
         private string UntitledRenameByRecursive(string name)
         {
-            if (this._renamed(name) == false) return name;
+            // Is there a re-named item?
+            if (this.ProjectViewItems.All(i => i.Name != name))
+                return name;
 
             int num = 0;
             string newName;
@@ -174,21 +177,10 @@ namespace Retouch_Photo2
                 num++;
                 newName = $"{name}{num}";
             }
-            while (this._renamed(newName));
+            // Is there a re-named item?
+            while (this.ProjectViewItems.Any(i => i.Name == newName));
 
             return newName;
-        }
-        // Is there a re-named item?
-        private bool _renamed(string name)
-        {
-            foreach (ProjectViewItem item in this.ProjectViewItems)
-            {
-                if (name == item.Name)
-                {
-                    return true;
-                }
-            }
-            return false;
         }
 
     }

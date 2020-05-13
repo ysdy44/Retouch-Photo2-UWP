@@ -121,8 +121,6 @@ namespace Retouch_Photo2
         //Transition
         private void Transition(TransitionData data)
         {
-            if (this.IsFullScreen == false) return;
-
             this._transitionStaring();
             this._transitionStaringDestination();
 
@@ -158,9 +156,9 @@ namespace Retouch_Photo2
         private void _transitionStaringDestination()
         {
             //Transition
-            Vector2 destinationPostion = this.DrawLayout.FullScreenOffset;
-            float destinationWidth = this.DrawLayout.CenterChildWidth;
-            float destinationHeight = this.DrawLayout.CenterChildHeight;
+            Vector2 destinationPostion = this.SettingViewModel.FullScreenOffset;
+            float destinationWidth = this.SettingViewModel.CenterChildWidth;
+            float destinationHeight = this.SettingViewModel.CenterChildHeight;
             this.ViewModel.CanvasTransformer.TransitionDestination(destinationPostion, destinationWidth, destinationHeight);
         }
         private void _transitionStaringSource(Rect sourceRect,Size pageSize)
@@ -179,7 +177,7 @@ namespace Retouch_Photo2
             //Transition
             this.ViewModel.CanvasTransformer.Transition(1.0f);
 
-            this.IsFullScreen = false;
+            this.SettingViewModel.IsFullScreen = false;
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
 

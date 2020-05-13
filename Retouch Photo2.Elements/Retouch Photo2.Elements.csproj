@@ -106,6 +106,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="%24DrawPages\DrawLayout.Layout.cs" />
     <Compile Include="%24MainPages\ProjectViewItem.xaml.cs">
       <DependentUpon>ProjectViewItem.xaml</DependentUpon>
     </Compile>
@@ -116,6 +117,7 @@
     <Compile Include="Expanders\Expander.Menthon.cs" />
     <Compile Include="Expanders\IExpander.cs" />
     <Compile Include="Expanders\IExpanderButton.cs" />
+    <Compile Include="DeviceLayout.cs" />
     <Compile Include="Pickers\CirclePicker.xaml.cs">
       <DependentUpon>CirclePicker.xaml</DependentUpon>
     </Compile>
@@ -206,7 +208,6 @@
       <DependentUpon>DrawLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="%24DrawPages\DrawLayoutState.cs" />
-    <Compile Include="%24DrawPages\PhoneLayoutType.cs" />
     <Compile Include="%24MainPages\MainPageState.cs" />
     <Compile Include="%24SettingPages\AdaptiveWidthGrid.xaml.cs">
       <DependentUpon>AdaptiveWidthGrid.xaml</DependentUpon>
@@ -220,8 +221,11 @@
     <Compile Include="%24SettingPages\PhoneLayout.xaml.cs">
       <DependentUpon>PhoneLayout.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XMLs\XML.ThemeFactory.cs" />
     <Compile Include="XMLs\XML.Photo.cs" />
+    <Compile Include="XMLs\XML.DeviceLayout.cs" />
     <Compile Include="XMLs\XML.Photocopier.cs" />
+    <Compile Include="XMLs\XML.DeviceLayoutTypeFactory.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo.Elements.rd.xml" />
   </ItemGroup>
   <ItemGroup>

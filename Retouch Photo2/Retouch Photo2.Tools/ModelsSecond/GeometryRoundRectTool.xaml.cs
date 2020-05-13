@@ -22,7 +22,6 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
        
         //@TouchBar  
         internal bool TouchBarMode

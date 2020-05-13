@@ -1,5 +1,4 @@
-﻿using Retouch_Photo2.ViewModels;
-using System.Linq;
+﻿using System.Linq;
 using System.Xml.Linq;
 
 namespace Retouch_Photo2.ViewModels

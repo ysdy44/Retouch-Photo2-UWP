@@ -147,11 +147,7 @@ namespace Retouch_Photo2
         /// Save <see cref="Project"/> to temporary folder.
         /// </summary>
         /// <param name="project"> The project. </param>
-        /// <param name="name"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        /// <returns> The saved XDocument. </returns>
-        public static async Task<XDocument> SaveProject(Project project)
+        public static async Task SaveProject(Project project)
         {
             XDocument document = Retouch_Photo2.ViewModels.XML.SaveProject(project);
 
@@ -164,8 +160,6 @@ namespace Retouch_Photo2
                     document.Save(stream);
                 }
             }
-
-            return document;
         }
 
 

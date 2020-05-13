@@ -47,32 +47,6 @@ namespace Retouch_Photo2
         }
 
 
-        //ViewModel
-        private void ConstructKeyboardViewModel()
-        {
-            //Move
-            if (this.KeyboardViewModel.Move == null)
-            {
-                this.KeyboardViewModel.Move += (value) =>
-                {
-                    this.ViewModel.CanvasTransformer.Position += value;
-                    this.ViewModel.CanvasTransformer.ReloadMatrix();
-                    this.ViewModel.Invalidate();//Invalidate
-                };
-            }
-
-            //FullScreen
-            if (this.KeyboardViewModel.FullScreenChanged == null)
-            {
-                this.KeyboardViewModel.FullScreenChanged += (isFullScreen) =>
-                {
-                    this.IsFullScreen = isFullScreen;
-                    this.ViewModel.Invalidate();//Invalidate
-                };
-            }
-        }
-
-
         //Save
         private void ConstructExportDialog()
         {

@@ -1,6 +1,7 @@
 ﻿using Retouch_Photo2.Menus;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
+using System.Numerics;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -15,13 +16,13 @@ namespace Retouch_Photo2
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel ;
         TipViewModel TipViewModel => App.TipViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Converter
         private FrameworkElement IconConverter(ITool tool) => tool.Icon;
+        private Visibility BoolToVisibilityConverter(bool boolean) => boolean ? Visibility.Visible : Visibility.Collapsed;
 
         //@Construct
         public DrawPage()
@@ -29,19 +30,25 @@ namespace Retouch_Photo2
             this.InitializeComponent();
             this.ConstructStrings();
             this.ConstructTransition();
-            this.ConstructMenus();
-            
+            this.ConstructMenus();            
             this.Loaded += (s, e) => this._lockLoaded();
-
-            //ViewModel
-            this.ConstructKeyboardViewModel();
-
 
             //Photos
             this.DrawLayout.RightAddButton.Tapped += (s, e) =>
             {
                 e.Handled = true;
                 this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.AddImageLayer);//Navigate   
+            };
+            this.DrawLayout.IsFullScreenChanged += (isFullScreen) =>
+            {
+                Vector2 offset = this.SettingViewModel.FullScreenOffset;
+
+                if (isFullScreen)
+                    this.ViewModel.CanvasTransformer.Position += offset;
+                else
+                    this.ViewModel.CanvasTransformer.Position -= offset;
+
+                this.ViewModel.CanvasTransformer.ReloadMatrix();
             };
             Retouch_Photo2.Tools.Models.ImageTool.Select += () => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.SelectImage);//Navigate   
             Retouch_Photo2.Tools.Models.ImageTool.Replace += () => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.ReplaceImage);//Navigate   
@@ -76,8 +83,8 @@ namespace Retouch_Photo2
             this.SetupButton.Tapped += (s, e) => this.SetupDialog.Show();
             
 
-            this.UnFullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = !this.KeyboardViewModel.IsFullScreen;
-            this.FullScreenButton.Tapped += (s, e) => this.KeyboardViewModel.IsFullScreen = !this.KeyboardViewModel.IsFullScreen;
+            this.UnFullScreenButton.Tapped += (s, e) => this.SettingViewModel.IsFullScreen = !this.SettingViewModel.IsFullScreen;
+            this.FullScreenButton.Tapped += (s, e) => this.SettingViewModel.IsFullScreen = !this.SettingViewModel.IsFullScreen;
 
 
             #endregion
@@ -87,11 +94,6 @@ namespace Retouch_Photo2
         //The current page becomes the active page
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //SettingViewModel
-            this.DrawLayout.VisualStateDeviceType = this.SettingViewModel.LayoutDeviceType;
-            this.DrawLayout.VisualStatePhoneMaxWidth = this.SettingViewModel.LayoutPhoneMaxWidth;
-            this.DrawLayout.VisualStatePadMaxWidth = this.SettingViewModel.LayoutPadMaxWidth;
-
             if (e.Parameter is TransitionData data)
             {
                 this._lockOnNavigatedTo(data);

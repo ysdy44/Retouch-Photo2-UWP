@@ -108,8 +108,8 @@
   <ItemGroup>
     <Compile Include="Enums\InvalidateMode.cs" />
     <Compile Include="Retouch Photo2.Menus\IMenu.cs" />
-    <Compile Include="KeyboardViewModels\KeyboardViewModel.cs" />
-    <Compile Include="KeyboardViewModels\KeyboardViewModel.Notify.cs" />
+    <Compile Include="SettingViewModels\SettingViewModel.Key.cs" />
+    <Compile Include="SettingViewModels\SettingViewModel.cs" />
     <Compile Include="Retouch Photo2.Menus\MenuType.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -119,14 +119,16 @@
     <Compile Include="SelectionViewModels\SelectionViewModel.NotifyText.cs" />
     <Compile Include="SelectionViewModels\SelectionViewModel.SetMode.cs" />
     <Compile Include="SelectionViewModels\SelectionViewModel.SetValue.cs" />
-    <Compile Include="SettingViewModels\SettingViewModel.cs" />
+    <Compile Include="Setting.cs" />
     <Compile Include="TipViewModels\TipViewModel.cs" />
     <Compile Include="TipViewModels\TipViewModel.Menu.cs" />
     <Compile Include="TipViewModels\TipViewModel.Tool.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.Notify.cs" />
+    <Compile Include="SettingViewModels\SettingViewModel.Layout.cs" />
     <Compile Include="ViewModels\ViewModel.Transformer.cs" />
     <Compile Include="XMLs\XML.Project.cs" />
+    <Compile Include="XMLs\XML.Setting.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.ViewModels.rd.xml" />
   </ItemGroup>
   <ItemGroup>

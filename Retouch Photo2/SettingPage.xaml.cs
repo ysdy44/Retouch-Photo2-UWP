@@ -16,28 +16,26 @@ namespace Retouch_Photo2
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel ;
 
         //Layout
         PhoneLayout PhoneLayout = new PhoneLayout();
         PadLayout PadLayout = new PadLayout();
         PCLayout PCLayout = new PCLayout();
-        DeviceLayoutType DeviceLayoutType
+        DeviceLayout DeviceLayout
         {
             set
             {
                 //Layout
-                switch (value)
+                switch (value.FallBackType)
                 {
-                    case DeviceLayoutType.Adaptive: this.LayoutBorder.Child = this.PCLayout; break;
                     case DeviceLayoutType.Phone: this.LayoutBorder.Child = this.PhoneLayout; break;
                     case DeviceLayoutType.Pad: this.LayoutBorder.Child = this.PadLayout; break;
                     case DeviceLayoutType.PC: this.LayoutBorder.Child = this.PCLayout; break;
                 }
 
                 //Adaptive
-                bool isAdaptive = (value == DeviceLayoutType.Adaptive);
+                bool isAdaptive = value.IsAdaptive;
                 this.AdaptiveTextBlock.Opacity = isAdaptive ? 1.0 : 0.6;
                 this.AdaptiveGrid.IsEnabled = isAdaptive;
                 this.AdaptiveResetButton.IsEnabled = isAdaptive;
@@ -68,13 +66,13 @@ namespace Retouch_Photo2
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             //Theme
-            this.NavigatedTheme();
+            this.NavigatedTheme(this.SettingViewModel.Theme);
 
             //Layout
-            this.NavigatedLayout();
+            this.NavigatedLayout(this.SettingViewModel.DeviceLayout);
 
             //Adaptive            
-            this.NavigatedLayoutAdaptive();
+            this.NavigatedLayoutAdaptive(this.SettingViewModel.DeviceLayout);
         }
         //The current page no longer becomes an active page
         protected override void OnNavigatedFrom(NavigationEventArgs e)

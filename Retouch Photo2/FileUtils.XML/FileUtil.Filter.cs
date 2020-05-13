@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Storage;
+using Windows.Storage.Streams;
 
 namespace Retouch_Photo2
 {
@@ -13,9 +14,9 @@ namespace Retouch_Photo2
     {
 
         /// <summary>
-        /// Construct Filter File (Open from Application, Save from LocalFolder)
+        /// Construct <see cref="Filter"/>s File (Open from Application, Save from LocalFolder)
         /// </summary>
-        /// <returns> The product filters. </returns>
+        /// <returns> The product <see cref="Filter"/>s. </returns>
         public static async Task<IEnumerable<Filter>> ConstructFilterFile()
         {
             StorageFile file = null;
@@ -29,7 +30,7 @@ namespace Retouch_Photo2
             else
             {
                 //Read the file from the package.
-                file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///FileUtils/Filter.xml"));
+                file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///FileUtils.XML/Filter.xml"));
 
                 //Copy to the local folder.
                 await file.CopyAsync(ApplicationData.Current.LocalFolder);
@@ -47,7 +48,25 @@ namespace Retouch_Photo2
             }
             return null;
         }
+        
+        /// <summary>
+        /// Save <see cref="Filter"/> to local folder.
+        /// </summary>
+        /// <param name="filters"> The Filters. </param>
+        public static async Task SaveFilterFile(IEnumerable<Filter> filters)
+        {
+            XDocument document = Retouch_Photo2.Adjustments.XML.SaveFilters(filters);
 
+            //Save the Setting xml file.      
+            StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("Setting.xml", CreationCollisionOption.ReplaceExisting);
+            using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                using (Stream stream = fileStream.AsStream())
+                {
+                    document.Save(stream);
+                }
+            }
+        }
 
     }
 }

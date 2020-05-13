@@ -1,54 +1,88 @@
-﻿using Newtonsoft.Json;
-using Retouch_Photo2.Elements;
-using System.Threading.Tasks;
-using Windows.UI.Xaml;
+﻿using FanKit.Transformers;
+using System.ComponentModel;
 
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
     /// Retouch_Photo2's the only <see cref = "SettingViewModel" />. 
     /// </summary>
-    [JsonObject(MemberSerialization.OptIn)]
-    public class SettingViewModel
+    public partial class SettingViewModel : INotifyPropertyChanged
     {
-        public const int DefaultLayoutPhoneMaxWidth = 600;
-        public const int DefaultLayoutPadMaxWidth = 900;
-
-
-        //Theme
-        [JsonProperty]
-        public ElementTheme ElementTheme { get; set; } = ElementTheme.Default;
-
-
-        //Layout
-        [JsonProperty]
-        public DeviceLayoutType LayoutDeviceType { get; set; } = DeviceLayoutType.Adaptive;
-
-        [JsonProperty]
-        public int LayoutPhoneMaxWidth { get; set; } = 600;
-
-        [JsonProperty]
-        public int LayoutPadMaxWidth { get; set; } = 900;
-
-
-        public static async Task<SettingViewModel> CreateFromLocalFile()
+               
+        /// <summary> Scaling around the center. </summary>
+        public bool IsCenter
         {
-            string json = await ApplicationLocalTextFileUtility.ReadFromLocalFolder("Setting.json");
-            
-            if (json != null)
+            get => this.isCenter;
+            set
             {
-                SettingViewModel setting = JsonConvert.DeserializeObject<SettingViewModel>(json);
-                return setting;
+                this.isCenter = value;
+                this.OnPropertyChanged(nameof(this.IsCenter));//Notify 
             }
-
-            return null;
         }
+        private bool isCenter;
 
-        public async void WriteToLocalFolder()
+        /// <summary> Maintain a ratio when scaling. </summary>
+        public bool IsRatio
         {
-            string json = JsonConvert.SerializeObject(this);
-            await ApplicationLocalTextFileUtility.WriteToLocalFolder(json, "Setting.json");
+            get => this.isRatio;
+            set
+            {
+                this.isRatio = value;
+                this.OnPropertyChanged(nameof(this.IsRatio));//Notify 
+            }
         }
+        private bool isRatio;
+
+        /// <summary> Equal width and height. </summary>
+        public bool IsSquare
+        {
+            get => this.isSquare;
+            set
+            {
+                this.isSquare = value;
+                this.OnPropertyChanged(nameof(this.IsSquare));//Notify 
+            }
+        }
+        private bool isSquare;
+
+        /// <summary> Step Frequency when spinning. </summary>
+        public bool IsStepFrequency
+        {
+            get => this.isStepFrequency;
+            set
+            {
+                this.isStepFrequency = value;
+                this.OnPropertyChanged(nameof(this.IsStepFrequency));//Notify 
+            }
+        }
+        private bool isStepFrequency;
+
+        /// <summary> Mode of composite between layers. </summary>
+        public MarqueeCompositeMode CompositeMode
+        {
+            get => this.compositeMode;
+            set
+            {
+                if (this.compositeMode == value) return;
+                this.compositeMode = value;              
+                this.OnPropertyChanged(nameof(this.CompositeMode));//Notify 
+            }
+        }
+        private MarqueeCompositeMode compositeMode;
+
+
+        /// <summary> Sets or Gets the page layout is full screen. </summary>
+        public bool IsFullScreen
+        {
+            get => this.isFullScreen;
+            set
+            {
+                this.isFullScreen = value;
+                this.OnPropertyChanged(nameof(this.IsFullScreen));//Notify 
+            }
+        }
+        private bool isFullScreen;
+
 
     }
 }

@@ -18,8 +18,7 @@ namespace Retouch_Photo2
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
-        SettingViewModel SettingViewModel { get => App.SettingViewModel; set => App.SettingViewModel = value; }
+        SettingViewModel SettingViewModel => App.SettingViewModel ;
 
         ObservableCollection<ProjectViewItem> ProjectViewItems = new ObservableCollection<ProjectViewItem>();
 
@@ -36,7 +35,7 @@ namespace Retouch_Photo2
 
             this.Loaded += async (s, e) =>
             {
-                await this.ConstructSettingViewModel();
+                await this.ConstructSetting();
                 await this._lockLoaded();
                 
                 //FileUtil

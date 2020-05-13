@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Tools.Elements
 {
     /// <summary>
-    /// Button of <see cref = "KeyboardViewModel.IsSquare" /> and <see cref = "KeyboardViewModel.IsCenter" />.
+    /// Button of <see cref = "SettingViewModel.IsSquare" /> and <see cref = "SettingViewModel.IsCenter" />.
     /// </summary>
     public sealed partial class MoreTransformButton : UserControl
     {

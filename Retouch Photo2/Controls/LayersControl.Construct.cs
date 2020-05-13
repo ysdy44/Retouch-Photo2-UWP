@@ -91,9 +91,9 @@ namespace Retouch_Photo2.Controls
         private void ItemClick(ILayer layer)
         {
             //Is it independent of other layers?
-            bool isfreedom = this.KeyboardViewModel.KeyCtrl;
+            bool isfreedom = this.SettingViewModel.KeyCtrl;
             //Is select successively?
-            bool isLinear = this.KeyboardViewModel.KeyShift;
+            bool isLinear = this.SettingViewModel.KeyShift;
 
             //Select a layer.
             if (isfreedom) layer.Selected();

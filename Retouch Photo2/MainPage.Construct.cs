@@ -72,27 +72,33 @@ namespace Retouch_Photo2
         }
 
 
-        //SettingViewModel
-        private async Task ConstructSettingViewModel()
+        //Setting
+        private async Task ConstructSetting()
         {
-            //Setting
-            SettingViewModel setting = null;
-
-            try
-            {
-                setting = await SettingViewModel.CreateFromLocalFile();
-            }
-            catch (Exception)
-            {
-            }
+            Setting setting = await FileUtil.ConstructSettingFile();
 
             if (setting != null)
             {
-                this.SettingViewModel = setting;
+                this.SettingViewModel.Theme = setting.Theme;
+                this.SettingViewModel.DeviceLayout = setting.DeviceLayout;
             }
 
-            ElementTheme theme = this.SettingViewModel.ElementTheme;
-            ApplicationViewTitleBarBackgroundExtension.SetTheme(theme);
+
+            //Layout
+            this.SettingViewModel.ConstructLayout();
+
+
+            //Key
+            this.SettingViewModel.ConstructKey();
+            if (this.SettingViewModel.Move == null)
+            {
+                this.SettingViewModel.Move += (value) =>
+                {
+                    this.ViewModel.CanvasTransformer.Position += value;
+                    this.ViewModel.CanvasTransformer.ReloadMatrix();
+                    this.ViewModel.Invalidate();//Invalidate
+                };
+            }
         }
 
 

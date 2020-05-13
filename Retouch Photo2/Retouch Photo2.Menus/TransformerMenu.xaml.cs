@@ -38,9 +38,9 @@ namespace Retouch_Photo2.Menus.Models
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel ;
 
-        bool IsRatio => this.KeyboardViewModel.IsRatio;
+        bool IsRatio => this.SettingViewModel.IsRatio;
         Transformer SelectionTransformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
                
 

@@ -49,7 +49,7 @@
 
                     <!--Ratio-->
                     <ToggleButton x:Name="RatioToggleControl" Grid.Column="1" Margin="0,26" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource AppCircleToggleButtonStyle}"
-                                  IsChecked="{x:Bind KeyboardViewModel.IsRatio,Mode=TwoWay}" >
+                                  IsChecked="{x:Bind SettingViewModel.IsRatio,Mode=TwoWay}" >
                         <ToolTipService.ToolTip>
                             <ToolTip x:Name="RatioScalingToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
                         </ToolTipService.ToolTip>

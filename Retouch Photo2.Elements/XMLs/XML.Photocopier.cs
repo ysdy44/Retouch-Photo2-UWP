@@ -31,12 +31,13 @@ namespace Retouch_Photo2.Elements
         /// <returns> The loaded <see cref="Photocopier"/>. </returns>
         public static Photocopier LoadPhotocopier(XElement element)
         {
-            return new Photocopier
-            {
-                Name = element.Element("Name").Value,
-                FileType = element.Element("FileType").Value,
-                FolderRelativeId = element.Element("FolderRelativeId").Value,
-            };
+            Photocopier photocopier = new Photocopier();
+
+            if (element.Element("Name") is XElement name) photocopier.Name = name.Value;
+            if (element.Element("FileType") is XElement fileType) photocopier.FileType = fileType.Value;
+            if (element.Element("FolderRelativeId") is XElement folderRelativeId) photocopier.FolderRelativeId = folderRelativeId.Value;
+
+            return photocopier;
         }
 
     }

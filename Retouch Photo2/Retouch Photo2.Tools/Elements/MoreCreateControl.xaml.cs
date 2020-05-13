@@ -5,13 +5,13 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Tools.Elements
 {
     /// <summary>
-    /// Control of <see cref = "KeyboardViewModel.IsSquare" /> and <see cref = "KeyboardViewModel.IsCenter" />.
+    /// Control of <see cref = "SettingViewModel.IsSquare" /> and <see cref = "SettingViewModel.IsCenter" />.
     /// </summary>
     public sealed partial class MoreCreateControl : UserControl
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
         //@Construct
         public MoreCreateControl()

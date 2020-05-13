@@ -16,14 +16,14 @@ namespace Retouch_Photo2.Tools
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel ;
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
-        MarqueeCompositeMode MarqueeCompositeMode => this.KeyboardViewModel.CompositeMode;
-        bool IsRatio => this.KeyboardViewModel.IsRatio;
-        bool IsCenter => this.KeyboardViewModel.IsCenter;
-        bool IsStepFrequency => this.KeyboardViewModel.IsStepFrequency;
+        MarqueeCompositeMode MarqueeCompositeMode => this.SettingViewModel.CompositeMode;
+        bool IsRatio => this.SettingViewModel.IsRatio;
+        bool IsCenter => this.SettingViewModel.IsCenter;
+        bool IsStepFrequency => this.SettingViewModel.IsStepFrequency;
          
 
         Transformer _oldTransformer;

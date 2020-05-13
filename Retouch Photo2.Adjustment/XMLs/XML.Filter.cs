@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Xml.Linq;
 
 namespace Retouch_Photo2.Adjustments
@@ -9,23 +8,7 @@ namespace Retouch_Photo2.Adjustments
     /// </summary>
     public static partial class XML
     {
-
-        /// <summary>
-        ///  Loads a <see cref="Filter"/>s from an XElement.
-        /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        /// <returns> The loaded <see cref="Filter"/>s. </returns>
-        public static IEnumerable<Filter> LoadFilters(XDocument document)
-        {
-            XElement root = document.Element("Root");
-
-            return
-                from filter
-                in root.Elements()
-                select XML.LoadFilter(filter);
-        }
-
-
+        
         /// <summary>
         /// Saves the entire <see cref="Filter"/> to a XElement.
         /// </summary>

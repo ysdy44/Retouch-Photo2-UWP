@@ -1,6 +1,6 @@
 ﻿using FanKit.Transformers;
+using System;
 using System.Numerics;
-using Windows.Foundation;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -9,7 +9,7 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public partial class ViewModel
     {
-        
+
         /// <summary> Retouch_Photo2's the only <see cref = "FanKit.Transformers.CanvasTransformer" />. </summary>
         public CanvasTransformer CanvasTransformer { get; } = new CanvasTransformer();
 

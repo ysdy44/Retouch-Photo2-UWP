@@ -20,11 +20,11 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel ;
         TipViewModel TipViewModel => App.TipViewModel;
 
         ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
-        MarqueeCompositeMode MarqueeCompositeMode => this.KeyboardViewModel.CompositeMode;
+        MarqueeCompositeMode MarqueeCompositeMode => this.SettingViewModel.CompositeMode;
 
 
         //@Construct

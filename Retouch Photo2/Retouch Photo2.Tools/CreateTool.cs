@@ -16,12 +16,12 @@ namespace Retouch_Photo2.Tools
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
         ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
-        bool IsCenter => this.KeyboardViewModel.IsCenter;
-        bool IsSquare => this.KeyboardViewModel.IsSquare;
+        bool IsCenter => this.SettingViewModel.IsCenter;
+        bool IsSquare => this.SettingViewModel.IsSquare;
                
 
         public void Starting(Vector2 point) { }

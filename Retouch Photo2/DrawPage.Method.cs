@@ -20,30 +20,7 @@ namespace Retouch_Photo2
     /// Retouch_Photo2's the only <see cref = "DrawPage" />. 
     /// </summary>
     public sealed partial class DrawPage : Page
-    {
-
-
-        /// <summary> 
-        /// Sets the page layout is full-screen. 
-        /// </summary>
-        public bool IsFullScreen
-        {
-            get => this.DrawLayout.IsFullScreen;
-            set
-            {
-                this.UnFullScreenButton.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
-                this.DrawLayout.IsFullScreen = value;
-
-                Vector2 offset = this.DrawLayout.FullScreenOffset;
-                if (value)
-                    this.ViewModel.CanvasTransformer.Position += offset;
-                else
-                    this.ViewModel.CanvasTransformer.Position -= offset;
-
-                this.ViewModel.CanvasTransformer.ReloadMatrix();
-            }
-        }
-
+    {        
 
         /// <summary>
         /// Export to ...
@@ -125,7 +102,7 @@ namespace Retouch_Photo2
             this.ViewModel.Layers.RootLayers.Clear();
             this.ViewModel.Layers.RootControls.Clear();
 
-            this.IsFullScreen = true;
+            this.SettingViewModel.IsFullScreen = true;
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
         }
 

@@ -65,13 +65,15 @@
 
 
         </Grid.Resources>
-
-
+        
+        
         <elementDrawPages:DrawLayout x:Name="DrawLayout" 
                CanvasHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}"
                LeftIcon="{x:Bind IconConverter(TipViewModel.Tool),Mode=OneWay}"
                Touchbar="{x:Bind TipViewModel.TouchbarControl,Mode=OneWay}"                                             
-               Theme="{x:Bind RequestedTheme, Mode=OneWay}">
+               DeviceLayout="{x:Bind SettingViewModel.DeviceLayout, Mode=OneWay}"
+               DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
+               IsFullScreen="{x:Bind SettingViewModel.IsFullScreen, Mode=OneWay}">
 
             <!--FootPage-->
             <elementDrawPages:DrawLayout.FootPage>
@@ -198,12 +200,14 @@
         <!--Menu-->
         <Canvas x:Name="OverlayCanvas" IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}"/>
 
-        
+
         <!--FullScreen-->
-        <Button x:Name="UnFullScreenButton" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AppCircleButtonStyle}">
+        <Button x:Name="UnFullScreenButton" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AppCircleButtonStyle}"
+                Visibility="{x:Bind BoolToVisibilityConverter(SettingViewModel.IsFullScreen), Mode=OneWay}">
             <FontIcon Glyph="&#xE92C;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
         </Button>
-        
+
+
         <!--Tip-->
         <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" HorizontalAlignment="Center" 
                         Visibility="{x:Bind ViewModel.TextVisibility, Mode=OneWay}">

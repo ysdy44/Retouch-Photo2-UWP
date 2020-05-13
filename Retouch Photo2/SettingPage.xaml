@@ -227,12 +227,12 @@
 
                         <!--Key-->
                         <TextBlock x:Name="KeyTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <ToggleButton x:Name="IsCenterToggleButton" Tag="Ctrl" IsChecked="{x:Bind KeyboardViewModel.IsCenter, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
-                        <ToggleButton x:Name="IsRatioToggleButton" Tag="Shift" IsChecked="{x:Bind KeyboardViewModel.IsRatio, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
-                        <ToggleButton x:Name="IsSquareToggleButton" Tag="Shift" IsChecked="{x:Bind KeyboardViewModel.IsSquare, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
-                        <ToggleButton x:Name="IsStepFrequencyToggleButton" Tag="Space" IsChecked="{x:Bind KeyboardViewModel.IsStepFrequency, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+                        <ToggleButton x:Name="IsCenterToggleButton" Tag="Ctrl" IsChecked="{x:Bind SettingViewModel.IsCenter, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+                        <ToggleButton x:Name="IsRatioToggleButton" Tag="Shift" IsChecked="{x:Bind SettingViewModel.IsRatio, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+                        <ToggleButton x:Name="IsSquareToggleButton" Tag="Shift" IsChecked="{x:Bind SettingViewModel.IsSquare, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+                        <ToggleButton x:Name="IsStepFrequencyToggleButton" Tag="Space" IsChecked="{x:Bind SettingViewModel.IsStepFrequency, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
 
-                        <ToggleButton x:Name="FullScreenToggleButton" Tag="Esc" IsChecked="{x:Bind KeyboardViewModel.IsFullScreen, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
+                        <ToggleButton x:Name="FullScreenToggleButton" Tag="Esc" IsChecked="{x:Bind SettingViewModel.IsFullScreen, Mode=OneWay}" Style="{StaticResource KetButtonStyle}"/>
 
 
                         <ContentControl Height="12"/>

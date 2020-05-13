@@ -14,7 +14,7 @@
         <!--Square-->
         <TextBlock x:Name="SquareTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <ToggleButton HorizontalAlignment="Left" Margin="12,0" Style="{StaticResource AppCircleToggleButtonStyle}"
-            IsChecked="{x:Bind KeyboardViewModel.IsSquare,Mode=TwoWay}">
+            IsChecked="{x:Bind SettingViewModel.IsSquare,Mode=TwoWay}">
             <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
         </ToggleButton>
 
@@ -23,7 +23,7 @@
         <!--Center-->
         <TextBlock x:Name="CenterTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <ToggleButton HorizontalAlignment="Left" Margin="12,0" Style="{StaticResource AppCircleToggleButtonStyle}"
-            IsChecked="{x:Bind KeyboardViewModel.IsCenter,Mode=TwoWay}">
+            IsChecked="{x:Bind SettingViewModel.IsCenter,Mode=TwoWay}">
             <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
         </ToggleButton>
 

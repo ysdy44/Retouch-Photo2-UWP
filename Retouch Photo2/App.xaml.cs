@@ -18,14 +18,11 @@ namespace Retouch_Photo2
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.ViewModel" />. </summary>
         public static ViewModel ViewModel = new ViewModel();
 
-        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.KeyboardViewModel" />. </summary>
-        public static KeyboardViewModel KeyboardViewModel= new KeyboardViewModel();
+        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.SettingViewModel" />. </summary>
+        public static SettingViewModel SettingViewModel = new SettingViewModel();
 
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.SelectionViewModel" />. </summary>
         public static SelectionViewModel SelectionViewModel= new SelectionViewModel();
-
-        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.SettingViewModel" />. </summary>
-        public static SettingViewModel SettingViewModel = new SettingViewModel();
 
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.TipViewModel" />. </summary>
         public static TipViewModel TipViewModel = new TipViewModel(new NoneTool(), new TransformerTool(), new CreateTool())

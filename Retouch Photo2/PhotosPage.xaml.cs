@@ -41,8 +41,6 @@ namespace Retouch_Photo2
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        KeyboardViewModel KeyboardViewModel => App.KeyboardViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         
 
