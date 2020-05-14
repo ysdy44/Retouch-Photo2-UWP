@@ -118,17 +118,17 @@ namespace Retouch_Photo2.Tools.Models
         public NodeCollectionMode Mode = NodeCollectionMode.None;
         Node _oldNode;
         TransformerRect _transformerRect;
-        
-        public void Starting(Vector2 point)
+
+        public void Started(Vector2 startingPoint, Vector2 point)
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+            Vector2 canvasPoint = Vector2.Transform(startingPoint, inverseMatrix);
 
             if (this.CurveLayer == null)
                 this.Mode = NodeCollectionMode.None;
             else
-                this.Mode = NodeCollection.ContainsNodeCollectionMode(point, this.Nodes, matrix);
+                this.Mode = NodeCollection.ContainsNodeCollectionMode(startingPoint, this.Nodes, matrix);
 
             switch (this.Mode)
             {
@@ -154,7 +154,6 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate();//Invalidate
         }
-        public void Started(Vector2 startingPoint, Vector2 point) { }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
             if (this.CurveLayer == null) return;
@@ -236,8 +235,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             if (this.CurveLayer == null)
             {
-                //Select single layer
-                this.TipViewModel.TransformerTool.SelectSingleLayer(point);
+                this.TipViewModel.TransformerTool.Clicke(point);
             }
         }
 

@@ -35,11 +35,11 @@ namespace Retouch_Photo2.Brushs.Models
 
         //@Construct
         /// <summary>
-        /// Construct a LinearGradientBrush.
+        /// Initializes a LinearGradientBrush.
         /// </summary>
         public LinearGradientBrush() { }
         /// <summary>
-        /// Construct a LinearGradientBrush.
+        /// Initializes a LinearGradientBrush.
         /// </summary>
         /// <param name="startPoint"> The start point. </param>
         /// <param name="endPoint"> The end point. </param>
@@ -49,7 +49,7 @@ namespace Retouch_Photo2.Brushs.Models
             this.EndPoint = endPoint;
         }
         /// <summary>
-        /// Construct a LinearGradientBrush.
+        /// Initializes a LinearGradientBrush.
         /// </summary>       
         /// <param name="transformer"> The transformer. </param>
         public LinearGradientBrush(Transformer transformer)
@@ -61,7 +61,7 @@ namespace Retouch_Photo2.Brushs.Models
             this.EndPoint = endPoint;
         }
         /// <summary>
-        /// Construct a LinearGradientBrush.
+        /// Initializes a LinearGradientBrush.
         /// </summary>
         /// <param name="startPoint"> The starting point. </param>
         /// <param name="endPoint"> The point. </param>   

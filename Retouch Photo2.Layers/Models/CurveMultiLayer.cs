@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Construct
         /// <summary>
-        /// Construct a multi-curve-layer.
+        /// Initializes a multi-curve-layer.
         /// </summary>
         public CurveMultiLayer()
         {
@@ -35,12 +35,12 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
         /// <summary>
-        /// Construct a multi-curve-layer.
+        /// Initializes a multi-curve-layer.
         /// </summary>
         /// <param name="nodess"> The source nodes. </param>
         public CurveMultiLayer(IList<NodeCollection> nodess) : this() => this.Nodess = nodess;
         /// <summary>
-        /// Construct a multi-curve-layer.
+        /// Initializes a multi-curve-layer.
         /// </summary>
         /// <param name="nodess"> The source nodes. </param>
         public CurveMultiLayer(IEnumerable<IEnumerable<Node>> nodess) : this()

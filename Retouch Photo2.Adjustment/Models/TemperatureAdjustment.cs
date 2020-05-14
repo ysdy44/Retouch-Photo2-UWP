@@ -30,7 +30,7 @@ namespace Retouch_Photo2.Adjustments.Models
 
         //@Construct
         /// <summary>
-        /// Construct a Temperature-adjustment.
+        /// Initializes a Temperature-adjustment.
         /// </summary>
         public TemperatureAdjustment()
         {

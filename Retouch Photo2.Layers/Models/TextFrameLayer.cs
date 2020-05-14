@@ -17,7 +17,7 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Construct
         /// <summary>
-        /// Construct a TextFrame-layer.
+        /// Initializes a TextFrame-layer.
         /// </summary>
         public TextFrameLayer()
         {

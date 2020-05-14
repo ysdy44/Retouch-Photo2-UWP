@@ -95,7 +95,6 @@ namespace Retouch_Photo2.Tools.Models
         float _sizeWidth;
         float _sizeHeight;
 
-        public void Starting(Vector2 point) { }
         public void Started(Vector2 startingPoint, Vector2 point)
         {
             Photocopier photocopier = this.SelectionViewModel.Photocopier;
@@ -172,12 +171,8 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
-        public void Clicke(Vector2 point)
-        {
-            //Select single layer
-            this.TipViewModel.TransformerTool.SelectSingleLayer(point);
-        }
-
+        public void Clicke(Vector2 point) => this.TipViewModel.TransformerTool.Clicke(point);
+        
 
         public void Draw(CanvasDrawingSession drawingSession) { }
                

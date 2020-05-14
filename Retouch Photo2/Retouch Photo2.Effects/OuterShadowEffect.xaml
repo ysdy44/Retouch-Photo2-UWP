@@ -20,15 +20,15 @@
 
         <!--Radius-->
         <TextBlock x:Name="RadiusTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <Slider x:Name="RadiusSlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
+        <elements:SilderPicker x:Name="RadiusSlider"/>
 
         <!--Opacity-->
         <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <Slider x:Name="OpacitySlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
+        <elements:SilderPicker x:Name="OpacitySlider"/>
 
         <!--Offset-->
         <TextBlock x:Name="OffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <Slider x:Name="OffsetSlider" Minimum="0" Maximum="100" Style="{ThemeResource AppOpacitySliderStyle}"/>
+        <elements:SilderPicker x:Name="OffsetSlider"/>
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -38,14 +38,12 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="12"/>
             </Grid.RowDefinitions>
 
             <!--Angle-->
             <TextBlock x:Name="AngleTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <elements:RadiansPicker x:Name="AnglePicker" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"
-                               BorderBrush="{ThemeResource AppBorderBrush}"
-                               Background="{ThemeResource AppForeground}"
-                               />
+            <elements:RadiansPicker x:Name="AnglePicker" Grid.Row="1" />
 
             <!--Color-->
             <TextBlock x:Name="ColorTextBlock" Grid.Column="1" Style="{StaticResource AppTextBlockStyle}"/>

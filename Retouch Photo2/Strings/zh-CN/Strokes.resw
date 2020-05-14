@@ -117,4 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Cap" xml:space="preserve">
+    <value>端点</value>
+  </data>
+  <data name="Cap_Flat" xml:space="preserve">
+    <value>平面</value>
+  </data>
+  <data name="Cap_Round" xml:space="preserve">
+    <value>圆形</value>
+  </data>
+  <data name="Cap_Square" xml:space="preserve">
+    <value>正方形</value>
+  </data>
+  <data name="Cap_Triangle" xml:space="preserve">
+    <value>三角形</value>
+  </data>
+  <data name="Dash" xml:space="preserve">
+    <value>破折</value>
+  </data>
+  <data name="Dash_Dash" xml:space="preserve">
+    <value>破折</value>
+  </data>
+  <data name="Dash_DashDot" xml:space="preserve">
+    <value>破折 点</value>
+  </data>
+  <data name="Dash_Dot" xml:space="preserve">
+    <value>点</value>
+  </data>
+  <data name="Dash_Solid" xml:space="preserve">
+    <value>固体</value>
+  </data>
+  <data name="Join" xml:space="preserve">
+    <value>拐角</value>
+  </data>
+  <data name="Join_Bevel" xml:space="preserve">
+    <value>斜角</value>
+  </data>
+  <data name="Join_Miter" xml:space="preserve">
+    <value>尖角</value>
+  </data>
+  <data name="Join_MiterOrBevel" xml:space="preserve">
+    <value>尖角和斜角</value>
+  </data>
+  <data name="Join_Round" xml:space="preserve">
+    <value>圆角</value>
+  </data>
+  <data name="Offset" xml:space="preserve">
+    <value>偏移</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>宽度</value>
+  </data>
 </root>

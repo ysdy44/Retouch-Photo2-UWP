@@ -48,14 +48,14 @@ namespace Retouch_Photo2.Brushs
 
         //@Construct
         /// <summary>
-        /// Construct a ColorEllipse. 
+        /// Initializes a ColorEllipse. 
         /// </summary>
         public ColorEllipse()
         {
             this.InitializeComponent();
         }
         /// <summary>
-        /// Construct a ColorEllipse. 
+        /// Initializes a ColorEllipse. 
         /// </summary>
         /// <param name="dataContext">  Gets or sets the data context for FrameworkElement to participate in data binding. </param>
         /// <param name="path"> The path string that constructs the path of the binding source property. </param>
@@ -64,11 +64,11 @@ namespace Retouch_Photo2.Brushs
         {
             this.ConstructDataContext(dataContext, path, dp);
         }
-               
+
 
         //DataContext
         /// <summary>
-        /// Construct a DataContext. 
+        /// Initializes a DataContext. 
         /// </summary>
         /// <param name="dataContext">  Gets or sets the data context for FrameworkElement to participate in data binding. </param>
         /// <param name="path"> The path string that constructs the path of the binding source property. </param>

@@ -23,11 +23,6 @@ namespace Retouch_Photo2.Tools
 
         
         /// <summary>
-        /// Occurs the first time an action processor is created.
-        /// </summary>
-        /// <param name="point"> The pointer. </param>
-        void Starting(Vector2 point);
-        /// <summary>
         /// Occurs when the operation begins. 
         /// </summary>
         /// <param name="startingPoint"> The starting pointer. </param>

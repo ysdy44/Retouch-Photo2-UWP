@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Construct
         /// <summary>
-        /// Construct a pie-layer.
+        /// Initializes a pie-layer.
         /// </summary>
         public GeometryDountLayer()
         {

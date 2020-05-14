@@ -111,7 +111,7 @@ namespace Retouch_Photo2.Elements
 
         //@Construct
         /// <summary>
-        /// Construct a WheelPicker.
+        /// Initializes a WheelPicker.
         /// </summary>
         public WheelPicker()
         {

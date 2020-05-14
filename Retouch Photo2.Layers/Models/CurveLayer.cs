@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Construct
         /// <summary>
-        /// Construct a curve-layer.
+        /// Initializes a curve-layer.
         /// </summary>
         public CurveLayer()
         {
@@ -34,12 +34,12 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
         /// <summary>
-        /// Construct a curve-layer.
+        /// Initializes a curve-layer.
         /// </summary>
         /// <param name="nodes"> The source nodes. </param>
         public CurveLayer(IEnumerable<Node> nodes) : this() => this.Nodes = new NodeCollection(nodes);
         /// <summary>
-        /// Construct a curve-layer from a line.
+        /// Initializes a curve-layer from a line.
         /// </summary>
         /// <param name="left"> The first source vector. </param>
         /// <param name="right"> The second source vector. </param>

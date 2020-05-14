@@ -19,23 +19,6 @@ namespace Retouch_Photo2
             
             this.LoadingControl.Text = resource.GetString("/$DrawPage/Loading");
 
-            this.DocumentButton.Content = resource.GetString("/$DrawPage/Document");
-            this.DocumentUnSaveButton.Content = resource.GetString("/$DrawPage/DocumentUnSave");
-
-            this.ExportButton.Text = resource.GetString("/$DrawPage/Export");
-            this.ExportToolTip.Content = resource.GetString("/$DrawPage/Export_ToolTip");
-            //this.UndoButton.Text = resourceLoader.GetString("/$DrawPage/Undo");
-            //this.UndoToolTip.Content = resourceLoader.GetString("/$DrawPage/Undo_ToolTip");
-            //this.RedoButton.Text = resourceLoader.GetString("/$DrawPage/Redo");
-            //this.RedoToolTip.Content = resourceLoader.GetString("/$DrawPage/Redo_ToolTip");
-            this.SetupButton.Text = resource.GetString("/$DrawPage/Setup");
-            this.SetupToolTip.Content = resource.GetString("/$DrawPage/Setup_ToolTip");
-            this.RulerButton.Text = resource.GetString("/$DrawPage/Ruler");
-            this.RulerToolTip.Content = resource.GetString("/$DrawPage/Ruler_ToolTip");
-            this.FullScreenButton.Text = resource.GetString("/$DrawPage/FullScreen");
-            this.FullScreenToolTip.Content = resource.GetString("/$DrawPage/FullScreen_ToolTip");
-            this.TipButton.Text = resource.GetString("/$DrawPage/Tip");
-
             this.SetupDialog.Title = resource.GetString("/$DrawPage/SetupDialog_Title");
             this.SetupDialog.CloseButton.Content = resource.GetString("/$DrawPage/SetupDialog_Close");
             this.SetupDialog.PrimaryButton.Content = resource.GetString("/$DrawPage/SetupDialog_Primary");

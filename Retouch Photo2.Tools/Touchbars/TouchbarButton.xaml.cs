@@ -70,14 +70,14 @@ namespace Retouch_Photo2.Tools
         }
         /// <summary> Identifies the <see cref = "TouchbarButton.CenterContent" /> dependency property. </summary>
         public static readonly DependencyProperty CenterContentProperty = DependencyProperty.Register(nameof(CenterContent), typeof(object), typeof(TouchbarSlider), new PropertyMetadata(null));
-        
+
 
         #endregion
 
 
         //@Construct
         /// <summary>
-        /// Construct a TouchbarButton.
+        /// Initializes a TouchbarButton.
         /// </summary>
         public TouchbarButton()
         {

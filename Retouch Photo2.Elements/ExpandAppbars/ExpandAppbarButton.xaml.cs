@@ -17,6 +17,7 @@ namespace Retouch_Photo2.Elements
 
 
         //@VisualState
+        bool _vsIsEnabled = true;
         ClickMode _vsClickMode;
         bool _vsIsSecondPage;
         public VisualState VisualState
@@ -25,6 +26,8 @@ namespace Retouch_Photo2.Elements
             {
                 if (this._vsIsSecondPage==false)
                 {
+                    if (this._vsIsEnabled == false) return this.Disabled;
+
                     switch (this._vsClickMode)
                     {
                         case ClickMode.Release: return this.Normal;
@@ -34,6 +37,8 @@ namespace Retouch_Photo2.Elements
                 }
                 else
                 {
+                    if (this._vsIsEnabled == false) return this.SecondDisabled;
+
                     switch (this._vsClickMode)
                     {
                         case ClickMode.Release: return this.Second;
@@ -59,6 +64,14 @@ namespace Retouch_Photo2.Elements
             set
             {
                 this._vsIsSecondPage = value;
+                this.VisualState = this.VisualState;//State
+            }
+        }
+        public bool IsEnabledChange
+        {
+            set
+            {
+                this._vsIsEnabled = value;
                 this.VisualState = this.VisualState;//State
             }
         }

@@ -32,7 +32,7 @@ namespace Retouch_Photo2.Brushs
             get { return (FillOrStroke)GetValue(FillOrStrokeProperty); }
             set { SetValue(FillOrStrokeProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "BrushTypeComboBox.Mode" /> dependency property. </summary>
+        /// <summary> Identifies the <see cref = "BrushTypeComboBox.FillOrStroke" /> dependency property. </summary>
         public static readonly DependencyProperty FillOrStrokeProperty = DependencyProperty.Register(nameof(FillOrStroke), typeof(FillOrStroke), typeof(BrushTypeComboBox), new PropertyMetadata(FillOrStroke.Fill, (sender, e) =>
         {
             BrushTypeComboBox con = (BrushTypeComboBox)sender;

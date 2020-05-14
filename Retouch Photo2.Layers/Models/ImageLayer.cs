@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Construct   
         /// <summary>
-        /// Construct a image-layer.
+        /// Initializes a image-layer.
         /// </summary>
         public ImageLayer()
         {
@@ -34,7 +34,7 @@ namespace Retouch_Photo2.Layers.Models
             };
         }
         /// <summary>
-        /// Construct a image-layer.
+        /// Initializes a image-layer.
         /// </summary>
         /// <param name="transformer"> The transformer. </param>
         /// <param name="photocopier"> The fill-brush photocopier. </param>

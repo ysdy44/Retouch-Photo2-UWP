@@ -11,7 +11,13 @@ namespace Retouch_Photo2.Elements
     {
         //@Content
         /// <summary> Gets and sets children elements. </summary>
-        public IList<IExpandAppbarElement> Children { get; set; } = new List<IExpandAppbarElement>();
+        public List<UIElement> Children { get; set; } = new List<UIElement>();
+
+        IList<IExpandAppbarElement> _elements { get; set; } = new List<IExpandAppbarElement>();
+
+        //@Static
+        /// <summary> Is this Loaded? </summary>
+        static bool _lockIsLoaded = false;
 
         #region Mode
 
@@ -32,7 +38,7 @@ namespace Retouch_Photo2.Elements
                 {
                     case HorizontalAlignment.Left:
                         {
-                            foreach (IExpandAppbarElement element in this.Children)
+                            foreach (IExpandAppbarElement element in this._elements)
                             {
                                 element.IsSecondPage = false;
                                 this.StackPanel.Children.Add(element.Self);
@@ -43,9 +49,9 @@ namespace Retouch_Photo2.Elements
                     case HorizontalAlignment.Center:
                         {
                             {
-                                for (int i = 0; i < this.Children.Count; i++)
+                                for (int i = 0; i < this._elements.Count; i++)
                                 {
-                                    IExpandAppbarElement element = this.Children[i];
+                                    IExpandAppbarElement element = this._elements[i];
 
                                     if (i < this.Index)
                                     {
@@ -64,7 +70,7 @@ namespace Retouch_Photo2.Elements
                         break;
                     case HorizontalAlignment.Right:
                         {
-                            foreach (IExpandAppbarElement element in this.Children)
+                            foreach (IExpandAppbarElement element in this._elements)
                             {
                                 element.IsSecondPage = true;
                                 this.SecondStackPanel.Children.Add(element.Self);
@@ -84,16 +90,24 @@ namespace Retouch_Photo2.Elements
             this.InitializeComponent();
             this.Loaded += (s, e) =>
             {
-                if (this.Children != null)
+                if (ExpandAppbar._lockIsLoaded) return;
+                ExpandAppbar._lockIsLoaded = true;
+                
+                foreach (UIElement element in this.Children)
                 {
-                    //Width
-                    double width = this.ActualWidth - 50;
-                    int index = ExpandAppbar.Measure(width, this.Children);
-
-                    //Index
-                    this.Index = index;
-                    this.Mode = ExpandAppbar.Arrange(index, this.Children.Count);
+                    if (element is IExpandAppbarElement appbarElement)
+                    {
+                        this._elements.Add(appbarElement);
+                    }
                 }
+                
+                //Width
+                double width = this.ActualWidth - 50;
+                int index = ExpandAppbar.Measure(width, this._elements);
+
+                //Index
+                this.Index = index;
+                this.Mode = ExpandAppbar.Arrange(index, this._elements.Count);
             };
             this.SizeChanged += (s, e) =>
             {
@@ -101,13 +115,13 @@ namespace Retouch_Photo2.Elements
 
                 //Width
                 double width = e.NewSize.Width - 40;
-                int index = ExpandAppbar.Measure(width, this.Children);
+                int index = ExpandAppbar.Measure(width, this._elements);
 
                 //Index
                 if (this.Index != index)
                 {
                     this.Index = index;
-                    this.Mode = ExpandAppbar.Arrange(index, this.Children.Count);
+                    this.Mode = ExpandAppbar.Arrange(index, this._elements.Count);
                 }
             };
             this.MoreButton.Tapped += (s, e) => this.Flyout.ShowAt(this.MoreButton);
@@ -147,5 +161,6 @@ namespace Retouch_Photo2.Elements
                 return HorizontalAlignment.Center;
             }
         }
+
     }
 }

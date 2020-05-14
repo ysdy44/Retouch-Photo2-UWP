@@ -54,7 +54,12 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         /// <param name="layer"></param>
         /// <returns></returns>
-        public IList<ILayer> GetParentsChildren(ILayer layer) => (layer.Parents == null) ? this.RootLayers : layer.Parents.Children;
+        public IList<ILayer> GetParentsChildren(ILayer layer)
+        {
+            if (layer == null) return this.RootLayers;
+            if (layer.Parents == null) return this.RootLayers;
+            return layer.Parents.Children;
+        }
 
     }
 }

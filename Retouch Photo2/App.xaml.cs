@@ -103,8 +103,10 @@ namespace Retouch_Photo2
                 new EffectMenu(),
                 new TransformerMenu(),
                 new CharacterMenu(),
-                new LayerMenu(),
+                new StrokeMenu(),
+                new HistoryMenu(),
                 new ColorMenu(),
+                new LayerMenu(),
             },
         };
 

@@ -14,15 +14,17 @@
 
     <elements:Expander x:Name="_Expander">
 
-        
+
         <elements:Expander.MainPage>
             <StackPanel MinHeight="165" Padding="1,2">
 
                 <!--Opacity-->
                 <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <Slider x:Name="OpacitySlider" Margin="2,0" TickFrequency="25" TickPlacement="Inline" Style="{StaticResource AppOpacitySliderStyle}" 
+                <Border Style="{StaticResource AppRoundedBorderStyle}">
+                    <elements:SilderPicker x:Name="OpacitySlider"
                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
-                           Value="{x:Bind OpacityToValueConverter(SelectionViewModel.Opacity),Mode=OneWay}"/>
+                           Value="{x:Bind SelectionViewModel.Opacity,Mode=OneWay}"/>
+                </Border>
 
 
                 <!--Blend Mode-->
@@ -34,7 +36,7 @@
                         <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
                     </Button.Tag>
                 </Button>
-                
+
                 <ContentControl Height="4"/>
 
 
@@ -47,7 +49,7 @@
                         <ToggleButton Style="{StaticResource AppCircleToggleButtonStyle}">
                             <FontIcon Glyph="&#xE9E9;" FontFamily="Segoe MDL2 Assets"/>
                         </ToggleButton>
-                        
+
                         <!--Follow-->
                         <ToggleButton x:Name="FollowToggleControl" Style="{StaticResource AppCircleToggleButtonStyle}"
                                   IsChecked="{x:Bind SelectionViewModel.IsFollowTransform,Mode=OneWay}" >

@@ -124,7 +124,7 @@ namespace Retouch_Photo2.Elements
 
         //@Construct
         /// <summary>
-        /// Construct a ColorPicker2.
+        /// Initializes a ColorPicker2.
         /// </summary>
         public ColorPicker2()
         {

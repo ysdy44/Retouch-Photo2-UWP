@@ -18,15 +18,17 @@ namespace Retouch_Photo2.Layers
         public Transformer Source { get; set; }
         /// <summary> The destination transformer. </summary>
         public Transformer Destination { get; set; }
-        Transformer _startingDestination;
-        
+        /// <summary> The cache of <see cref="TransformManager.Destination"/>. </summary>
+        public Transformer StartingDestination { get; private set; }
+
 
         /// <summary> Is cropped? </summary>
         public bool IsCrop { get; set; }
         /// <summary> The cropped destination transformer. </summary>
         public Transformer CropDestination { get; set; }
-        Transformer _startingCropDestination;
-      
+        /// <summary> The cache of <see cref="TransformManager.CropDestination"/>. </summary>
+        public Transformer StartingCropDestination { get; private set; }
+
 
         //@Construct
         /// <summary>
@@ -80,18 +82,18 @@ namespace Retouch_Photo2.Layers
         //@Abstract
         public void CacheTransform()
         {
-            this._startingDestination = this.Destination;
-            this._startingCropDestination = this.CropDestination;
+            this.StartingDestination = this.Destination;
+            this.StartingCropDestination = this.CropDestination;
         }
         public void TransformMultiplies(Matrix3x2 matrix)
         {
-            this.Destination = this._startingDestination * matrix;
-            this.CropDestination = this._startingCropDestination * matrix;
+            this.Destination = this.StartingDestination * matrix;
+            this.CropDestination = this.StartingCropDestination * matrix;
         }
         public void TransformAdd(Vector2 vector)
         {
-            this.Destination = this._startingDestination + vector;
-            this.CropDestination = this._startingCropDestination + vector;
+            this.Destination = this.StartingDestination + vector;
+            this.CropDestination = this.StartingCropDestination + vector;
         }
                        
 

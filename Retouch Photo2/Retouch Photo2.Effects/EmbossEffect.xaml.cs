@@ -21,18 +21,30 @@ namespace Retouch_Photo2.Effects.Models
             this.InitializeComponent();
             this.ConstructString();
 
-            this.RadiusSlider.ValueChanged += (s, e) =>
+
+            //Radius
+            this.RadiusSlider.ValueChangeStarted += (s, value) => { };
+            this.RadiusSlider.ValueChangeDelta += (s, value) =>
             {
+                float radius = (float)value;
+
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.EffectManager.Emboss_Radius = (float)e.NewValue;
+                    layer.EffectManager.Emboss_Radius = radius;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
             };
-            this.AnglePicker.RadiansChange += (s, radians) =>
+            this.RadiusSlider.ValueChangeCompleted += (s, value) => { };
+
+
+            //Angle
+            this.AnglePicker.ValueChangeStarted += (s, value) => { };
+            this.AnglePicker.ValueChangeDelta += (s, value) =>
             {
+                float radians = (float)value;
+
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
@@ -41,6 +53,7 @@ namespace Retouch_Photo2.Effects.Models
 
                 this.ViewModel.Invalidate();//Invalidate
             };
+            this.AnglePicker.ValueChangeCompleted += (s, value) => { };
         }
     }
 

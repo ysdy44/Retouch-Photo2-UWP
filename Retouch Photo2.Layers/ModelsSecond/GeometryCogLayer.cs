@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Construct
         /// <summary>
-        /// Construct a cog-layer.
+        /// Initializes a cog-layer.
         /// </summary>
         public GeometryCogLayer()
         {

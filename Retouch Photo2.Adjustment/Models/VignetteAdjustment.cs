@@ -33,7 +33,7 @@ namespace Retouch_Photo2.Adjustments.Models
 
         //@Construct
         /// <summary>
-        /// Construct a Vignette-adjustment.
+        /// Initializes a Vignette-adjustment.
         /// </summary>
         public VignetteAdjustment()
         {

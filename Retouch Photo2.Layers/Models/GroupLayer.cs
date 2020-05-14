@@ -20,7 +20,7 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Construct
         /// <summary>
-        /// Construct a group-layer.
+        /// Initializes a group-layer.
         /// </summary>
         public GroupLayer()
         {

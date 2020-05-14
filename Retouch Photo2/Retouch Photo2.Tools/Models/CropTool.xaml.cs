@@ -109,7 +109,6 @@ namespace Retouch_Photo2.Tools.Models
         TransformerMode _transformerMode;
         Transformer _startingActualDestination => this._startingIsCrop ? this._startingCropDestination : this._startingDestination;
 
-        public void Starting(Vector2 point) { }
         public void Started(Vector2 startingPoint, Vector2 point)
         {
             //Selection
@@ -200,11 +199,8 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
-        public void Clicke(Vector2 point)
-        {
-            //Select single layer
-            this.TipViewModel.TransformerTool.SelectSingleLayer(point);
-        }
+        public void Clicke(Vector2 point) => this.TipViewModel.TransformerTool.Clicke(point);
+
 
         public void Draw(CanvasDrawingSession drawingSession)
         {

@@ -31,12 +31,8 @@ namespace Retouch_Photo2.Elements.DrawPages
         public object RightIcon { get => this.RightRadiusAnimaIcon.CenterContent; set => this.RightRadiusAnimaIcon.CenterContent = value; }
 
         //Head
-        /// <summary> DocumentBorder's Child. </summary>
-        public UIElement DocumentChild { get => this._DocumentBorder.Child; set => this._DocumentBorder.Child = value; }
-        /// <summary> HeadLeftBorder's Child. </summary>
-        public UIElement HeadLeftPanel { get => this.HeadLeftBorder.Child; set => this.HeadLeftBorder.Child = value; }
-        /// <summary> HeadRightStackPanel's Children. </summary>
-        public UIElementCollection HeadRightChildren => this.HeadRightStackPanel.Children;
+        /// <summary> HeadBorder's Child. </summary>
+        public UIElement HeadChild { get => this.HeadBorder.Child; set => this.HeadBorder.Child = value; }
 
         //Left
         /// <summary> LeftBorder's Child. </summary>
@@ -54,7 +50,7 @@ namespace Retouch_Photo2.Elements.DrawPages
             this.InitializeComponent();
             this.ConstructWidthStoryboard();
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
-
+            
             //Foot
             this.LeftRadiusAnimaIcon.Toggled += (s, e) => this.PhoneType = PhoneLayoutType.ShowLeft;
             this.RightRadiusAnimaIcon.Toggled += (s, e) => this.PhoneType = PhoneLayoutType.ShowRight;

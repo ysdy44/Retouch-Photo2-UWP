@@ -27,7 +27,7 @@ namespace Retouch_Photo2
         }
 
         /// <summary> Head panel of Menu. </summary>
-        UIElementCollection MenuHead => this.DrawLayout.HeadRightChildren;
+        UIElementCollection MenuHead => this.HeadBarControl.RightChildren;
 
         //Menu
         private void ConstructMenus()

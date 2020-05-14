@@ -61,7 +61,7 @@ namespace Retouch_Photo2.Menus.Models
             get { return (EffectManager)GetValue(EffectManagerProperty); }
             set { SetValue(EffectManagerProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "EffectMenu.Mode" /> dependency property. </summary>
+        /// <summary> Identifies the <see cref = "EffectMenu.EffectManager" /> dependency property. </summary>
         public static readonly DependencyProperty EffectManagerProperty = DependencyProperty.Register(nameof(EffectManager), typeof(EffectManager), typeof(EffectMenu), new PropertyMetadata(null, (sender, e) =>
         {
             EffectMenu con = (EffectMenu)sender;

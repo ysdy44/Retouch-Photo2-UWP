@@ -1,0 +1,94 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Strokes.JoinSegmented"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="200"
+    >
+
+    <Grid>
+
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
+
+                <!--Miter-->
+                <VisualState x:Name="Miter">
+                    <VisualState.Setters>
+                        <Setter Target = "MiterButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Bevel-->
+                <VisualState x:Name="Bevel">
+                    <VisualState.Setters>
+                        <Setter Target = "BevelButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Round-->
+                <VisualState x:Name="Round">
+                    <VisualState.Setters>
+                        <Setter Target = "RoundButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--MiterOrBevel-->
+                <VisualState x:Name="MiterOrBevel">
+                    <VisualState.Setters>
+                        <Setter Target = "MiterOrBevelButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Miter-->
+        <Button x:Name="MiterButton" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip x:Name="MiterToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+            <Polyline Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Miter" Stroke="{ThemeResource SystemBaseHighColor}"/>
+        </Button>
+
+        <!--Bevel-->
+        <Button x:Name="BevelButton" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip x:Name="BevelToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+            <Polyline Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Bevel" Stroke="{ThemeResource SystemBaseHighColor}"/>
+        </Button>
+
+        <!--Round-->
+        <Button x:Name="RoundButton" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip x:Name="RoundToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+            <Polyline Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Round" Stroke="{ThemeResource SystemBaseHighColor}"/>
+        </Button>
+
+        <!--MiterOrBevel-->
+        <Button x:Name="MiterOrBevelButton" Grid.Column="3" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip x:Name="MiterOrBevelToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+            <Polyline Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Bevel" Stroke="{ThemeResource SystemBaseHighColor}"/>
+        </Button>
+
+    </Grid>
+
+</UserControl>

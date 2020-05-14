@@ -1,0 +1,110 @@
+﻿using Microsoft.Graphics.Canvas.Geometry;
+using System;
+using Windows.ApplicationModel.Resources;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+
+namespace Retouch_Photo2.Strokes
+{
+    /// <summary>
+    /// Represents the segmented that is used to select dash style.
+    /// </summary>
+    public sealed partial class DashSegmented : UserControl
+    {
+
+        //@Delegate
+        public EventHandler<CanvasDashStyle> DashChanged;
+
+        //@VisualState
+        CanvasDashStyle _vsDash;
+        public VisualState VisualState
+        {
+            get
+            {
+                switch (this._vsDash)
+                {
+                    case CanvasDashStyle.Solid: return this.Solid;
+                    case CanvasDashStyle.Dash: return this.Dash2;
+                    case CanvasDashStyle.Dot: return this.Dot;
+                    case CanvasDashStyle.DashDot: return this.DashDot;
+                    default: return this.Normal;
+                }
+            }
+            set => VisualStateManager.GoToState(this, value.Name, false);
+        }
+
+        #region DependencyProperty
+
+
+        /// <summary> Dash style of <see cref = "DashSegmented" />. </summary>
+        public CanvasDashStyle Dash
+        {
+            get { return (CanvasDashStyle)GetValue(DashProperty); }
+            set { SetValue(DashProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "DashSegmented.Dash" /> dependency property. </summary>
+        public static readonly DependencyProperty DashProperty = DependencyProperty.Register(nameof(Dash), typeof(CanvasDashStyle), typeof(DashSegmented), new PropertyMetadata(CanvasDashStyle.Solid, (sender, e) =>
+        {
+            DashSegmented con = (DashSegmented)sender;
+
+            if (e.NewValue is CanvasDashStyle value)
+            {
+                con._vsDash = value;
+                con.VisualState = con.VisualState;//State
+            }
+        }));
+
+
+        /// <summary> IsOpen of <see cref = "DashSegmented" />. </summary>
+        public bool IsOpen
+        {
+            get { return (bool)GetValue(IsOpenProperty); }
+            set { SetValue(IsOpenProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "DashSegmented.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(DashSegmented), new PropertyMetadata(false));
+
+
+        #endregion
+
+
+        //@Construct
+        public DashSegmented()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+        }
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.SolidToolTip.Content = resource.GetString("/Strokes/Dash_Solid");
+            this.SolidButton.Tapped += (s, e) =>
+            {
+                this.DashChanged?.Invoke(this, CanvasDashStyle.Solid);//Delegate
+            };
+
+            this.DashToolTip.Content = resource.GetString("/Strokes/Dash_Dash");
+            this.DashButton.Tapped += (s, e) =>
+            {
+                this.DashChanged?.Invoke(this, CanvasDashStyle.Dash);//Delegate
+            };
+
+            this.DotToolTip.Content = resource.GetString("/Strokes/Dash_Dot");
+            this.DotButton.Tapped += (s, e) =>
+            {
+                this.DashChanged?.Invoke(this, CanvasDashStyle.Dot);//Delegate
+            };
+
+            this.DashDotToolTip.Content = resource.GetString("/Strokes/Dash_DashDot");
+            this.DashDotButton.Tapped += (s, e) =>
+            {
+                this.DashChanged?.Invoke(this, CanvasDashStyle.DashDot);//Delegate
+            };
+        }
+
+    }
+}

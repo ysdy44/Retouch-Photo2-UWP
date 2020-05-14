@@ -46,7 +46,7 @@ namespace Retouch_Photo2.Adjustments.Models
 
         //@Construct
         /// <summary>
-        /// Construct a gammaTransfer-adjustment.
+        /// Initializes a gammaTransfer-adjustment.
         /// </summary>
         public GammaTransferAdjustment()
         {

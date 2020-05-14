@@ -26,8 +26,17 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (menu.Type == type)
                 {
-                    menu.Expander.State = ExpanderState.FlyoutShow;
-                    break;
+                    switch (menu.Expander.State)
+                    {
+                        case ExpanderState.Hide:
+                            menu.Expander.State = ExpanderState.FlyoutShow;
+                            break;
+                        case ExpanderState.OverlayNotExpanded:
+                            menu.Expander.State = ExpanderState.Overlay;
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }

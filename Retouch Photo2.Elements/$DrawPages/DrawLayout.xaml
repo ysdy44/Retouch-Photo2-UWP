@@ -47,7 +47,7 @@
                         <Setter Target = "RightRadiusAnimaIcon.Visibility" Value="Collapsed"/>
 
                         <!--Head-->
-                        <Setter Target = "HeadGrid.Visibility" Value="Collapsed"/>
+                        <Setter Target = "HeadBorder.Visibility" Value="Collapsed"/>
 
                         <!--Left-->
                         <Setter Target = "LeftBorder.Visibility" Value="Collapsed"/>
@@ -139,8 +139,8 @@
                         <Setter Target = "RightRadiusAnimaIcon.Visibility" Value="Collapsed"/>
 
                         <!--Head-->
-                        <Setter Target = "HeadGrid.(Grid.Column)" Value="0"/>
-                        <Setter Target = "HeadGrid.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target = "HeadBorder.(Grid.Column)" Value="0"/>
+                        <Setter Target = "HeadBorder.(Grid.ColumnSpan)" Value="2"/>
 
                         <!--@Acrylic-->
                         <!--Left-->
@@ -208,23 +208,9 @@
 
 
         <!--Head-->
-        <Grid x:Name="HeadGrid" Grid.Column="1" Grid.ColumnSpan="1" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppLinearBrush}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" MinWidth="70"/>
-                <ColumnDefinition Width="1*" MinWidth="50"/>
-                <ColumnDefinition Width="10*" MaxWidth="420"/>
-            </Grid.ColumnDefinitions>
-
-            <!--Document-->
-            <Border x:Name="_DocumentBorder" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-            <!--HeadLeft-->
-            <Border x:Name="HeadLeftBorder" Grid.Column="1" HorizontalAlignment="Stretch"/>
-
-            <!--HeadRight-->
-            <ScrollViewer Grid.Column="2" HorizontalAlignment="Right" Style="{StaticResource AppHorizontalScrollViewerStyle}">
-                <StackPanel x:Name="HeadRightStackPanel" Orientation="Horizontal"/>
-            </ScrollViewer>
-        </Grid>
+        <Border x:Name="HeadBorder" Grid.Column="1" Grid.ColumnSpan="1" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppLinearBrush}">
+           
+        </Border>
 
 
         <!--DismissOverlay-->

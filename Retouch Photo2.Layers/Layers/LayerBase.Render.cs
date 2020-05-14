@@ -43,6 +43,18 @@ namespace Retouch_Photo2.Layers
         
         public abstract IEnumerable<IEnumerable<Node>> ConvertToCurves();
 
+        
+        public virtual bool FillContainsPoint(Vector2 point)
+        {
+            if (this.Visibility == Visibility.Collapsed) return false;
+
+            Transformer transformer = this.GetActualDestinationWithRefactoringTransformer;
+
+            bool isFillContainsPoint = transformer.FillContainsPoint(point);
+            return isFillContainsPoint;
+        }
+
+
 
         //@Static
         /// <summary>

@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Adjustments.Models
 
         //@Construct
         /// <summary>
-        /// Construct a Exposure-adjustment.
+        /// Initializes a Exposure-adjustment.
         /// </summary>
         public ExposureAdjustment()
         {

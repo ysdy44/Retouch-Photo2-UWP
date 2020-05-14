@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:element="using:Retouch_Photo2.Elements"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignWidth="200"
     d:DesignHeight="400"
@@ -14,11 +14,8 @@
         
         <!--Angle-->
         <TextBlock x:Name="AngleTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <element:RadiansPicker x:Name="AnglePicker" HorizontalAlignment="Left" VerticalAlignment="Top"
-                               BorderBrush="{ThemeResource AppBorderBrush}"
-                               Background="{ThemeResource AppForeground}"
-                              />
-
+        <elements:RadiansPicker x:Name="AnglePicker"/>
+        
     </StackPanel>
     
 </Page>

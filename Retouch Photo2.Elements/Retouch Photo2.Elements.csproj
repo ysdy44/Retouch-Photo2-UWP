@@ -159,6 +159,9 @@
       <DependentUpon>WheelIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pickers\ColorPicker2Mode.cs" />
+    <Compile Include="Pickers\SilderPicker.xaml.cs">
+      <DependentUpon>SilderPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pickers\WheelPicker.xaml.cs">
       <DependentUpon>WheelPicker.xaml</DependentUpon>
     </Compile>
@@ -303,6 +306,10 @@
     <Page Include="Pickers\ColorPicker2Icons\WheelIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pickers\SilderPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pickers\WheelPicker.xaml">
       <SubType>Designer</SubType>

@@ -50,7 +50,7 @@ namespace Retouch_Photo2.Elements.MainPages
 
         //@Construct
         /// <summary>
-        /// Construct a ProjectViewItem from <see cref = "StorageFolder" />.
+        /// Initializes a ProjectViewItem from <see cref = "StorageFolder" />.
         /// </summary>
         /// <param name="name"> The name. </param>
         /// <param name="thumbnail"> The thumbnail path. </param>

@@ -278,7 +278,6 @@ namespace Retouch_Photo2.Tools.Models
         readonly ToolButton _button = new ToolButton(new ViewIcon());
 
 
-        public void Starting(Vector2 point) { }
         public void Started(Vector2 startingPoint, Vector2 point)
         {
             //Text
@@ -304,7 +303,7 @@ namespace Retouch_Photo2.Tools.Models
             if (isOutNodeDistance) this.ViewModel.CanvasTransformer.Move(point);
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
-        public void Clicke(Vector2 point) => this.TipViewModel.TransformerTool.SelectSingleLayer(point);//Select single layer
+        public void Clicke(Vector2 point) => this.TipViewModel.TransformerTool.Clicke(point);
 
         public void Draw(CanvasDrawingSession drawingSession) { }
                               

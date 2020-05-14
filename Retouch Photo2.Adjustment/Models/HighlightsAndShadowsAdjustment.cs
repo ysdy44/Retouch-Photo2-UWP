@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Adjustments.Models
 
         //@Construct
         /// <summary>
-        /// Construct a HighlightsAndShadows-adjustment.
+        /// Initializes a HighlightsAndShadows-adjustment.
         /// </summary>
         public HighlightsAndShadowsAdjustment()
         {

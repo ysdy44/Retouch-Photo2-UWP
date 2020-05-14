@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Layers.Models
         //@Construct
         public GeometryCookieLayer(XElement element) : this() => this.Load(element);
         /// <summary>
-        /// Construct a pie-layer.
+        /// Initializes a pie-layer.
         /// </summary>
         public GeometryCookieLayer()
         {

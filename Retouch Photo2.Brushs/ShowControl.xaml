@@ -8,32 +8,32 @@
     mc:Ignorable="d"
     Width="70"
     Height="34" 
+    d:DesignWidth="100"
     d:DesignHeight="50"
-    d:DesignWidth="50"
     >
-    
+
     <UserControl.Resources>
 
         <!--Brush-->
         <ImageBrush x:Name="NoneBrush" ImageSource="ms-appx:///Icons\GrayAndWhite3.jpg"/>
 
         <SolidColorBrush x:Name="ColorBrush" Color="White"/>
-        
+
         <LinearGradientBrush x:Name="LinearGradientBrush" StartPoint="0,0.5" EndPoint="1,0.5">
             <GradientStop Color="White" Offset="0"/>
             <GradientStop Color="Gray" Offset="1"/>
         </LinearGradientBrush>
-        
+
         <media:RadialGradientBrush x:Name="RadialGradientBrush" Center="0.5,0.5" GradientOrigin="0.5,0.5" RadiusX="0.2" RadiusY="0.6">
             <GradientStop Color="White" Offset="0" />
             <GradientStop Color="Gray" Offset="1" />
         </media:RadialGradientBrush>
-        
+
         <media:RadialGradientBrush x:Name="EllipticalGradientBrush" Center="0.5,0.5" GradientOrigin="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
             <GradientStop Color="White" Offset="0" />
             <GradientStop Color="Gray" Offset="1" />
         </media:RadialGradientBrush>
-        
+
         <ImageBrush x:Name="ImageBrush">
             <ImageBrush.ImageSource>
                 <BitmapImage x:Name="BitmapImage">
@@ -46,7 +46,7 @@
 
     </UserControl.Resources>
 
-    
+
     <Grid x:Name="RootGrid" Background="Transparent">
         <Rectangle RadiusX="4" RadiusY="4" IsHitTestVisible="False" StrokeThickness="1" Stroke="{ThemeResource AppText}">
             <Rectangle.Fill>
@@ -57,5 +57,5 @@
         <Rectangle x:Name="Rectangle" RadiusX="4" RadiusY="4" IsHitTestVisible="False" Margin="1">
         </Rectangle>
     </Grid>
-    
+
 </UserControl>

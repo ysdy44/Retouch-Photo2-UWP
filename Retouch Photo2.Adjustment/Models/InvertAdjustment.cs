@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Adjustments.Models
 
         //@Construct
         /// <summary>
-        /// Construct a Invert-adjustment.
+        /// Initializes a Invert-adjustment.
         /// </summary>
         public InvertAdjustment()
         {

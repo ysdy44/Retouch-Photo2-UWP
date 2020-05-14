@@ -39,11 +39,11 @@ namespace Retouch_Photo2.Brushs.Models
 
         //@Construct
         /// <summary>
-        /// Construct a EllipticalGradientBrush.
+        /// Initializes a EllipticalGradientBrush.
         /// </summary>
         public EllipticalGradientBrush() { }
         /// <summary>
-        /// Construct a EllipticalGradientBrush.
+        /// Initializes a EllipticalGradientBrush.
         /// </summary>
         public EllipticalGradientBrush(Transformer transformer)
         {

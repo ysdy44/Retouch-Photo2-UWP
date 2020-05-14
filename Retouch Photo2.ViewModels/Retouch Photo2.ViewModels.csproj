@@ -107,6 +107,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Enums\InvalidateMode.cs" />
+    <Compile Include="Retouch Photo2.Historys\Icon.xaml.cs">
+      <DependentUpon>Icon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Historys\IHistory.cs" />
+    <Compile Include="Retouch Photo2.Historys\HistoryType.cs" />
+    <Compile Include="Retouch Photo2.Historys\Models\LayerHistory.cs" />
+    <Compile Include="Retouch Photo2.Historys\Models\LayersHistory.cs" />
+    <Compile Include="Retouch Photo2.Historys\Models\TransformHistory.cs" />
     <Compile Include="Retouch Photo2.Menus\IMenu.cs" />
     <Compile Include="SettingViewModels\SettingViewModel.Key.cs" />
     <Compile Include="SettingViewModels\SettingViewModel.cs" />
@@ -127,6 +135,7 @@
     <Compile Include="ViewModels\ViewModel.Notify.cs" />
     <Compile Include="SettingViewModels\SettingViewModel.Layout.cs" />
     <Compile Include="ViewModels\ViewModel.Transformer.cs" />
+    <Compile Include="ViewModels\ViewModel.History.cs" />
     <Compile Include="XMLs\XML.Project.cs" />
     <Compile Include="XMLs\XML.Setting.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.ViewModels.rd.xml" />
@@ -172,9 +181,19 @@
       <Project>{3f4ae427-651f-4791-a176-678a00a93b1e}</Project>
       <Name>Retouch Photo2.Tools</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Retouch_Photo2.Strokes\Retouch_Photo2.Strokes.csproj">
+      <Project>{01d8ec32-95e9-4700-9c99-e0ffa246b2a4}</Project>
+      <Name>Retouch_Photo2.Strokes</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SelectionViewModels\SelectionViewModel.NotifyGeometry.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Retouch Photo2.Historys\Icon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -144,6 +144,12 @@
   <data name="Effect" xml:space="preserve">
     <value>特效</value>
   </data>
+  <data name="History" xml:space="preserve">
+    <value>历史</value>
+  </data>
+  <data name="Keyboard" xml:space="preserve">
+    <value>Keyboard</value>
+  </data>
   <data name="Layer" xml:space="preserve">
     <value>图层</value>
   </data>
@@ -170,6 +176,9 @@
   </data>
   <data name="Selection" xml:space="preserve">
     <value>选择</value>
+  </data>
+  <data name="Stroke" xml:space="preserve">
+    <value>描边</value>
   </data>
   <data name="Transformer" xml:space="preserve">
     <value>变换</value>

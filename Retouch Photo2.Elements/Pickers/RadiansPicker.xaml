@@ -7,16 +7,61 @@
  mc:Ignorable="d"
  Width="100"
  Height="100"
+ Background="Transparent"
  d:DesignHeight="100"
- d:DesignWidth="100">
+ d:DesignWidth="100"
+ >
 
-    <Grid x:Name="RootGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
 
-        <Ellipse x:Name="Ellipse" Width="100" Height="100" StrokeThickness="1" Stroke="{ThemeResource AppBorderBrush}" Fill="{ThemeResource AppForeground}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    <Canvas x:Name="RootGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
 
-        <Line x:Name="BlackLine" StrokeThickness="4" Stroke="{ThemeResource AppBorderBrush}"/>
-        <Line x:Name="WhiteLine" StrokeThickness="2" Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}"/>
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
 
-    </Grid>
+                <VisualState x:Name="Normal"/>
+
+                <VisualState x:Name="PointerOver">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Ellipse" Storyboard.TargetProperty="StrokeThickness">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="3" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+
+                <VisualState x:Name="Pressed">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Ellipse" Storyboard.TargetProperty="StrokeThickness">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="3" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+
+                <VisualState x:Name="Disabled">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Ellipse" Storyboard.TargetProperty="Stroke">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Gray" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Thumb1" Storyboard.TargetProperty="Fill">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Gray" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+
+        <Ellipse x:Name="Ellipse" Width="100" Height="100" StrokeThickness="2" Stroke="{ThemeResource SystemAccentColor}" Fill="Transparent"/>
+
+        <!--
+        <Line x:Name="BlackLine" StrokeThickness="2" Stroke="Black"/>
+        <Line x:Name="WhiteLine" StrokeThickness="1" Stroke="White"/>
+        -->
+
+        <Ellipse x:Name="Thumb2" Width="20" Height="20" Fill="Black"/>
+        <Ellipse x:Name="Thumb1" Width="18" Height="18" Fill="White"/>
+
+    </Canvas>
 
 </UserControl>

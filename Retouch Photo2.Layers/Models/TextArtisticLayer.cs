@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Construct
         /// <summary>
-        /// Construct a TextArtistic-layer.
+        /// Initializes a TextArtistic-layer.
         /// </summary>
         public TextArtisticLayer()
         {

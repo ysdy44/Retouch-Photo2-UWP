@@ -41,7 +41,7 @@ namespace Retouch_Photo2.Controls
                 switch (mode)
                 {
                     case InvalidateMode.Thumbnail:
-                        canvasControl.DpiScale = 0.5f;
+                        canvasControl.DpiScale = 0.4f;
                         break;
                     case InvalidateMode.HD:
                         canvasControl.DpiScale = 1.0f;
@@ -92,9 +92,6 @@ namespace Retouch_Photo2.Controls
                 this._inputDevice = InputDevice.None;
                 this._isSingleStarted = false;
                 this._singleStartingPoint = point;
-
-                //Tool
-                this.TipViewModel.Tool.Starting(point);//Starting
 
                 this.ViewModel.CanvasHitTestVisible = false;//IsHitTestVisible
             };

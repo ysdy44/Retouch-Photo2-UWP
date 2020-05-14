@@ -5,6 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:strokes="using:Retouch_Photo2.Strokes"
+    xmlns:brushs="using:Retouch_Photo2.Brushs"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -14,16 +16,16 @@
         <StackPanel Orientation="Horizontal">
 
             <TextBlock x:Name="FillTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <toolsElements:FillColorEllipseButton/>
+            <brushs:ColorEllipse x:Name="FillColorEllipse" Brush="{x:Bind SelectionViewModel.FillBrush, Mode=OneWay}"/>
 
             <ContentControl Width="4"/>
 
             <TextBlock x:Name="StrokeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <toolsElements:StrokeColorEllipseButton/>
+            <brushs:ColorEllipse x:Name="StrokeColorEllipse" Brush="{x:Bind SelectionViewModel.StrokeBrush, Mode=OneWay}"/>
 
             <ContentControl Width="4"/>
 
-            <toolsElements:StrokeWidthButton x:Name="StrokeWidthButton"/>
+            <strokes:ShowControl x:Name="StrokeShowControl" StrokeStyle="{x:Bind SelectionViewModel.StrokeStyle, Mode=OneWay}"/>
 
             <ContentControl Width="4"/>
 

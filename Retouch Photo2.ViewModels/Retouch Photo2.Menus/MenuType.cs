@@ -25,6 +25,12 @@
         /// <summary> Paragraph. </summary>
         //Paragraph,
 
+        /// <summary> Stroke. </summary>
+        Stroke,
+
+        /// <summary> History. </summary>
+        History,
+
         /// <summary> Color. </summary>
         Color,
         

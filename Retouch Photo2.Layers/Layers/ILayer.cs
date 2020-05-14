@@ -28,10 +28,15 @@ namespace Retouch_Photo2.Layers
         LayerType Type { get; }
         /// <summary> Gets or sets ILayer's name. </summary>
         string Name { get; set; }
-        /// <summary> Gets or sets ILayer's opacity. </summary>
-        float Opacity { get; set; }
         /// <summary> Gets or sets ILayer's blend mode. </summary>
         BlendEffectMode? BlendMode { get; set; }
+        
+        /// <summary> Gets or sets ILayer's opacity. </summary>
+        float Opacity { get; set; }
+        /// <summary> The cache of <see cref="ILayer.Opacity"/>. </summary>
+        float StartingOpacity { get; }
+        /// <summary> Cache the <see cref="ILayer.Opacity"/>. </summary>
+        void CacheOpacity();
 
         /// <summary> Gets or sets ILayer's visibility. </summary>
         Visibility Visibility { get; set; }
@@ -140,6 +145,12 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         /// <returns> The product curves. </returns>
         IEnumerable<IEnumerable<Node>> ConvertToCurves();
+
+
+        /// <summary>
+        /// Returns whether the area filled by the layer contains the specified point.
+        /// </summary>
+        bool FillContainsPoint(Vector2 point);
 
 
         #endregion

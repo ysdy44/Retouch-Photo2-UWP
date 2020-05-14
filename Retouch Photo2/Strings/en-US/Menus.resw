@@ -144,6 +144,12 @@
   <data name="Effect" xml:space="preserve">
     <value>Effect</value>
   </data>
+  <data name="History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="Keyboard" xml:space="preserve">
+    <value>Keyboard</value>
+  </data>
   <data name="Layer" xml:space="preserve">
     <value>Layer</value>
   </data>
@@ -170,6 +176,9 @@
   </data>
   <data name="Selection" xml:space="preserve">
     <value>Selection</value>
+  </data>
+  <data name="Stroke" xml:space="preserve">
+    <value>Stroke</value>
   </data>
   <data name="Transformer" xml:space="preserve">
     <value>Transformer</value>

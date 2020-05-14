@@ -66,7 +66,7 @@ namespace Retouch_Photo2
 
 
         /// <summary>
-        /// Construct a <see cref="Photo"/>
+        Initializes <see cref="Photo"/>
         /// (Source and ImageFilePath).
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>

@@ -97,6 +97,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\FootPageControl.cs" />
+    <Compile Include="Controls\HeadBarControl.xaml.cs">
+      <DependentUpon>HeadBarControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LayersControl.Construct.cs" />
     <Compile Include="Controls\LayersControl.xaml.cs">
       <DependentUpon>LayersControl.xaml</DependentUpon>
@@ -111,6 +114,14 @@
     <Compile Include="DrawPage.xaml.cs">
       <DependentUpon>DrawPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Menus\HistoryMenu.xaml.cs">
+      <DependentUpon>HistoryMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Menus\StrokeMenu.xaml.cs">
+      <DependentUpon>StrokeMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Tools\TransformerTool.Clicke.cs" />
+    <Compile Include="Retouch Photo2.Tools\TransformerTool.cs" />
     <Compile Include="XMLs\XML.FiltersFactory.cs" />
     <Compile Include="XMLs\XML.PhotosFile.cs" />
     <Compile Include="XMLs\XML.ProjectFile.cs" />
@@ -172,8 +183,6 @@
     <Compile Include="Retouch Photo2.Menus\TransformerMenu.xaml.cs">
       <DependentUpon>TransformerMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Elements\FillColorEllipseButton.cs" />
-    <Compile Include="Retouch Photo2.Tools\Elements\StrokeColorEllipseButton.cs" />
     <Compile Include="Retouch Photo2.Tools\GeometryTool.xaml.cs">
       <DependentUpon>GeometryTool.xaml</DependentUpon>
     </Compile>
@@ -224,9 +233,6 @@
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Elements\MoreTransformControl.xaml.cs">
       <DependentUpon>MoreTransformControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Elements\StrokeWidthButton.xaml.cs">
-      <DependentUpon>StrokeWidthButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Retouch Photo2.Tools\Elements\ConvertToCurvesButton.xaml.cs">
@@ -285,8 +291,6 @@
     <Compile Include="Retouch Photo2.Tools\Models\ViewTool.xaml.cs">
       <DependentUpon>ViewTool.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\TransformerTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\TransformerTool.Select.cs" />
     <Compile Include="SettingPage.Construct.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -310,10 +314,10 @@
     <Content Include="XMLs\FilterOriginal.xml" />
     <Compile Include="FileUtils\FileUtil.ZipFolder.cs" />
     <None Include="Retouch Photo_TemporaryKey.pfx" />
+    <PRIResource Include="Strings\zh-CN\Strokes.resw" />
+    <PRIResource Include="Strings\en-US\Strokes.resw" />
     <PRIResource Include="Strings\en-US\Selections.resw" />
     <PRIResource Include="Strings\zh-CN\Selections.resw" />
-    <PRIResource Include="Strings\zh-CN\Elements.resw" />
-    <PRIResource Include="Strings\en-US\Elements.resw" />
     <PRIResource Include="Strings\en-US\Characters.resw" />
     <PRIResource Include="Strings\en-US\Blends.resw" />
     <PRIResource Include="Strings\en-US\Adjustments.resw" />
@@ -411,6 +415,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\HeadBarControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\LayersControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -459,6 +467,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Retouch Photo2.Menus\HistoryMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Retouch Photo2.Menus\MenuButtons\MenuButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -494,6 +506,10 @@
     <Page Include="Retouch Photo2.Menus\SelectionMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Menus\StrokeMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Retouch Photo2.Menus\TransformerMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -542,10 +558,6 @@
     <Page Include="Retouch Photo2.Tools\Elements\MoreTransformControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Elements\StrokeWidthButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Retouch Photo2.Tools\Elements\ConvertToCurvesButton.xaml">
       <SubType>Designer</SubType>
@@ -704,6 +716,10 @@
     <ProjectReference Include="..\Retouch Photo2.ViewModels\Retouch Photo2.ViewModels.csproj">
       <Project>{d4571a00-4303-4ddb-b63b-6d741c82f73f}</Project>
       <Name>Retouch Photo2.ViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch_Photo2.Strokes\Retouch_Photo2.Strokes.csproj">
+      <Project>{01d8ec32-95e9-4700-9c99-e0ffa246b2a4}</Project>
+      <Name>Retouch_Photo2.Strokes</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

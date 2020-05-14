@@ -54,26 +54,14 @@ namespace Retouch_Photo2
             this.FillColorPicker.ColorChange += (s, value) =>
             {
                 //Selection
-                this.SelectionViewModel.SetFillColor(value);
-                switch (this.SelectionViewModel.FillOrStroke)
-                {
-                    case FillOrStroke.Fill:
-                        this.SelectionViewModel.Color = value;
-                        break;
-                }
+                this.SelectionViewModel.SetColor(value, FillOrStroke.Fill);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
             this.StrokeColorPicker.ColorChange += (s, value) =>
             {
                 //Selection
-                this.SelectionViewModel.SetStrokeColor(value);
-                switch (this.SelectionViewModel.FillOrStroke)
-                {
-                    case FillOrStroke.Stroke:
-                        this.SelectionViewModel.Color = value;
-                        break;
-                }
+                this.SelectionViewModel.SetColor(value, FillOrStroke.Stroke);
 
                 this.ViewModel.Invalidate();//Invalidate
             };

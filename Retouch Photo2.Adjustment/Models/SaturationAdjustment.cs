@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Adjustments.Models
 
         //@Construct
         /// <summary>
-        /// Construct a Saturation-adjustment.
+        /// Initializes a Saturation-adjustment.
         /// </summary>
         public SaturationAdjustment()
         {

@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Construct
         /// <summary>
-        /// Construct a ellipse-layer.
+        /// Initializes a ellipse-layer.
         /// </summary>
         /// <param name="element"> The source XElement. </param>
         public GeometryEllipseLayer()

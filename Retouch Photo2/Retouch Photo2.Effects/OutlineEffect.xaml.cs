@@ -21,16 +21,24 @@ namespace Retouch_Photo2.Effects.Models
             this.InitializeComponent();
             this.ConstructString();
 
-            this.SizeSlider.ValueChanged += (sender, e) =>
+
+            //Radius
+            this.SizeSlider.ValueChangeStarted += (s, value) => { };
+            this.SizeSlider.ValueChangeDelta += (s, value) =>
             {
+                int size = (int)value;
+
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.EffectManager.Outline_Size = (int)e.NewValue;
+                    layer.EffectManager.Outline_Size = size;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
             };
+            this.SizeSlider.ValueChangeCompleted += (s, value) => { };
+            
+
         }
     }
 

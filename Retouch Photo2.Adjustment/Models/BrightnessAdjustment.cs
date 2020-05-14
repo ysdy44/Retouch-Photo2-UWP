@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Adjustments.Models
 
         //@Construct
         /// <summary>
-        /// Construct a brightness-adjustment.
+        /// Initializes a brightness-adjustment.
         /// </summary>
         public BrightnessAdjustment()
         {

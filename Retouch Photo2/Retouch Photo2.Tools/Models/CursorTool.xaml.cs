@@ -65,8 +65,14 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void OnNavigatedTo() { }
-        public void OnNavigatedFrom() { }
+        public void OnNavigatedTo()
+        {
+            this._isBox = false;
+        }
+        public void OnNavigatedFrom()
+        {
+            this._isBox = false;
+        }
 
     }
     
@@ -122,19 +128,15 @@ namespace Retouch_Photo2.Tools.Models
         bool _isBox;
         TransformerRect _boxCanvasRect;
 
-        public void Starting(Vector2 point)
-        {
-            this._isBox = false; //Box
-
-            if (this.TransformerTool.Starting(point)) return; //TransformerTool
-
-            this._isBox = true; //Box
-        }
         public void Started(Vector2 startingPoint, Vector2 point)
         {
+            bool isTransformer = this.TransformerTool.Started(startingPoint, point);//TransformerTool
+
             //Box
-            if (this._isBox)
+            if (isTransformer)
             {
+                this._isBox = false;
+
                 Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
                 Vector2 pointA = Vector2.Transform(startingPoint, inverseMatrix);
                 Vector2 pointB = Vector2.Transform(point, inverseMatrix);
@@ -143,8 +145,7 @@ namespace Retouch_Photo2.Tools.Models
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
                 return;
             }
-
-            this.TransformerTool.Started(startingPoint, point, isSetTransformerMode: false);//TransformerTool
+            else this._isBox = true;
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
@@ -183,16 +184,12 @@ namespace Retouch_Photo2.Tools.Models
                     this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
                     this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                 }
-                return;
             }
 
             this.TransformerTool.Complete(startingPoint, point); //TransformerTool
         }
-        public void Clicke(Vector2 point)
-        {
-            //Select single layer
-            this.TipViewModel.TransformerTool.SelectSingleLayer(point);
-        }
+        public void Clicke(Vector2 point) => this.TipViewModel.TransformerTool.Clicke(point);
+
 
         public void Draw(CanvasDrawingSession drawingSession)
         {

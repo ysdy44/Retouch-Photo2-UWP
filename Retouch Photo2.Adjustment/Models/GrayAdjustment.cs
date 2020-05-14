@@ -21,11 +21,11 @@ namespace Retouch_Photo2.Adjustments.Models
         public Visibility PageVisibility => Visibility.Collapsed;
         public IAdjustmentPage Page => GrayAdjustment.GrayPage;
         public string Text { get; private set; }
-        
+
 
         //@Construct
         /// <summary>
-        /// Construct a Gray-adjustment.
+        /// Initializes a Gray-adjustment.
         /// </summary>
         public GrayAdjustment()
         {

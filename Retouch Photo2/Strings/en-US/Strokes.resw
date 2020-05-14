@@ -117,4 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Cap" xml:space="preserve">
+    <value>Cap</value>
+  </data>
+  <data name="Cap_Flat" xml:space="preserve">
+    <value>Flat</value>
+  </data>
+  <data name="Cap_Round" xml:space="preserve">
+    <value>Round</value>
+  </data>
+  <data name="Cap_Square" xml:space="preserve">
+    <value>Square</value>
+  </data>
+  <data name="Cap_Triangle" xml:space="preserve">
+    <value>Triangle</value>
+  </data>
+  <data name="Dash" xml:space="preserve">
+    <value>Dash</value>
+  </data>
+  <data name="Dash_Dash" xml:space="preserve">
+    <value>Dash</value>
+  </data>
+  <data name="Dash_DashDot" xml:space="preserve">
+    <value>Dash Dot</value>
+  </data>
+  <data name="Dash_Dot" xml:space="preserve">
+    <value>Dot</value>
+  </data>
+  <data name="Dash_Solid" xml:space="preserve">
+    <value>Solid</value>
+  </data>
+  <data name="Join" xml:space="preserve">
+    <value>Join</value>
+  </data>
+  <data name="Join_Bevel" xml:space="preserve">
+    <value>Bevel</value>
+  </data>
+  <data name="Join_Miter" xml:space="preserve">
+    <value>Miter</value>
+  </data>
+  <data name="Join_MiterOrBevel" xml:space="preserve">
+    <value>Miter or Bevel</value>
+  </data>
+  <data name="Join_Round" xml:space="preserve">
+    <value>Round</value>
+  </data>
+  <data name="Offset" xml:space="preserve">
+    <value>Offset</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>Width</value>
+  </data>
 </root>

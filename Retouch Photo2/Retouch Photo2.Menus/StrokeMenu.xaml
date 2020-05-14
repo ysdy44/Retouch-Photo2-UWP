@@ -1,0 +1,61 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Menus.Models.StrokeMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:strokes="using:Retouch_Photo2.Strokes"
+    mc:Ignorable="d"
+    d:DesignWidth="200"
+    d:DesignHeight="400"
+    >
+
+
+    <elements:Expander x:Name="_Expander">
+
+
+        <elements:Expander.MainPage>
+            <StackPanel MinHeight="165" Padding="1,4">
+
+
+                <!--Dash-->
+                <TextBlock x:Name="DashTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <strokes:DashSegmented x:Name="DashSegmented"
+                         Dash="{x:Bind DashConverter(SelectionViewModel.StrokeStyle), Mode=OneWay}"/>
+
+
+                <!--Width-->
+                <TextBlock x:Name="WidthTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <Border Style="{StaticResource AppRoundedBorderStyle}">
+                    <elements:SilderPicker x:Name="WidthPicker"
+                             Value="{x:Bind SelectionViewModel.StrokeWidth, Mode=OneWay}"/>
+                </Border>
+                
+
+                <!--Cap-->
+                <TextBlock x:Name="CapTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <strokes:CapSegmented x:Name="CapSegmented"
+                         Cap="{x:Bind CapConverter(SelectionViewModel.StrokeStyle), Mode=OneWay}"/>
+
+
+                <!--Join-->
+                <TextBlock x:Name="JoinTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <strokes:JoinSegmented x:Name="JoinSegmented"
+                         Join="{x:Bind JoinConverter(SelectionViewModel.StrokeStyle), Mode=OneWay}"/>
+                
+                
+                <!--Offset-->
+                <TextBlock x:Name="OffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <Border Style="{StaticResource AppRoundedBorderStyle}">
+                    <elements:SilderPicker x:Name="OffsetPicker"
+                             Value="{x:Bind OffsetConverter(SelectionViewModel.StrokeStyle), Mode=OneWay}"/>
+                </Border>
+
+            </StackPanel>
+        </elements:Expander.MainPage>
+
+
+    </elements:Expander>
+
+</UserControl>

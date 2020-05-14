@@ -22,7 +22,8 @@ namespace Retouch_Photo2.Brushs
         public IBrush StrokeBrush = new NoneBrush();
         /// <summary> Gets or sets Style's stroke-width. </summary>
         public float StrokeWidth = 1;
-
+        /// <summary> Gets or sets Style's stroke-style. </summary>
+        public CanvasStrokeStyle StrokeStyle = new CanvasStrokeStyle();
 
         //@Interface
         /// <summary>
@@ -89,7 +90,7 @@ namespace Retouch_Photo2.Brushs
             if (canvasBrush == null) return;
 
             float strokeWidth = this.StrokeWidth * (canvasToVirtualMatrix.M11 + canvasToVirtualMatrix.M22) / 2;
-            drawingSession.DrawGeometry(geometry, canvasBrush, strokeWidth);
+            drawingSession.DrawGeometry(geometry, canvasBrush, strokeWidth, this.StrokeStyle);
         }
 
 
@@ -104,6 +105,10 @@ namespace Retouch_Photo2.Brushs
                 FillBrush = this.FillBrush.Clone(),
                 StrokeBrush = this.StrokeBrush.Clone(),
                 StrokeWidth = this.StrokeWidth,
+                StrokeStyle = new CanvasStrokeStyle
+                {
+
+                }
             };
         }
 

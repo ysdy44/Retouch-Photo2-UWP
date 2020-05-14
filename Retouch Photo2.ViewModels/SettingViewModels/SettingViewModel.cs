@@ -81,7 +81,7 @@ namespace Retouch_Photo2.ViewModels
                 this.OnPropertyChanged(nameof(this.IsFullScreen));//Notify 
             }
         }
-        private bool isFullScreen;
+        private bool isFullScreen = true;
 
 
     }

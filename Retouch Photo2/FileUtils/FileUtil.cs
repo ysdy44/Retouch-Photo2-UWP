@@ -29,7 +29,7 @@ namespace Retouch_Photo2
 
 
         /// <summary>
-        /// Construct a ProjectViewItem by zip folder.
+        /// Initializes ProjectViewItem by zip folder.
         /// </summary>
         /// <param name="folder"> The zip folder. </param>
         /// <returns> The product ProjectViewItem. </returns>
@@ -40,7 +40,7 @@ namespace Retouch_Photo2
             return FileUtil.ConstructProjectViewItem(name, folder);
         }
         /// <summary>
-        /// Construct a ProjectViewItem by zip folder.
+        /// Initializes a ProjectViewItem by zip folder.
         /// </summary>
         /// <param name="name"> The name. </param>
         /// <param name="folder"> The zip folder. </param>

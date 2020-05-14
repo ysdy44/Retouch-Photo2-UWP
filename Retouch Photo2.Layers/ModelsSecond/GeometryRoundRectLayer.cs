@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Construct
         /// <summary>
-        /// Construct a roundRect-layer.
+        /// Initializes a roundRect-layer.
         /// </summary>
         public GeometryRoundRectLayer()
         {

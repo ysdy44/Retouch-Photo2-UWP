@@ -123,7 +123,7 @@ namespace Retouch_Photo2.Tools
 
         //@Construct
         /// <summary>
-        /// Construct a TouchbarSlider.
+        /// Initializes a TouchbarSlider.
         /// </summary>
         public TouchbarSlider()
         {

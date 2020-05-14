@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Construct
         /// <summary>
-        /// Construct a star-layer.
+        /// Initializes a star-layer.
         /// </summary>
         public GeometryStarLayer()
         {

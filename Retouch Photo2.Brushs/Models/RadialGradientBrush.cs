@@ -36,11 +36,11 @@ namespace Retouch_Photo2.Brushs.Models
 
         //@Construct
         /// <summary>
-        /// Construct a RadialGradientBrush.
+        /// Initializes a RadialGradientBrush.
         /// </summary>
         public RadialGradientBrush() { }
         /// <summary>
-        /// Construct a RadialGradientBrush.
+        /// Initializes a RadialGradientBrush.
         /// </summary>
         public RadialGradientBrush(Transformer transformer)
         {

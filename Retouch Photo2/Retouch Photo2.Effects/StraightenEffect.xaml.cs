@@ -21,8 +21,12 @@ namespace Retouch_Photo2.Effects.Models
             this.InitializeComponent();
             this.ConstructString();
             
-            this.AnglePicker.RadiansChange += (s, radians) =>
+            //Angle
+            this.AnglePicker.ValueChangeStarted += (s, value) => { };
+            this.AnglePicker.ValueChangeDelta += (s, value) =>
             {
+                float radians = (float)value;
+
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
@@ -31,6 +35,7 @@ namespace Retouch_Photo2.Effects.Models
 
                 this.ViewModel.Invalidate();//Invalidate
             };
+            this.AnglePicker.ValueChangeCompleted += (s, value) => { };
         }
     }
 

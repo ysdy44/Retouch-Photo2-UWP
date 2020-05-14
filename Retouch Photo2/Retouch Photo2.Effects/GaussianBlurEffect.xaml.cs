@@ -21,16 +21,23 @@ namespace Retouch_Photo2.Effects.Models
             this.InitializeComponent();
             this.ConstructString();
 
-            this.RadiusSlider.ValueChanged += (s, e) =>
+
+            //Radius
+            this.RadiusSlider.ValueChangeStarted += (s, value) => { };
+            this.RadiusSlider.ValueChangeDelta += (s, value) =>
             {
+                float radius = (float)value;
+
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.EffectManager.GaussianBlur_Radius = (float)e.NewValue;
+                    layer.EffectManager.GaussianBlur_Radius = radius;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
             };
+            this.RadiusSlider.ValueChangeCompleted += (s, value) => { };
+            
         }
     }
 

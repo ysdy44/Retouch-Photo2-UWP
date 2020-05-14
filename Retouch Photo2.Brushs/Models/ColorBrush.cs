@@ -25,11 +25,11 @@ namespace Retouch_Photo2.Brushs.Models
 
         //@Construct
         /// <summary>
-        /// Construct a ColorBrush.
+        /// Initializes a ColorBrush.
         /// </summary>
         public ColorBrush() { }
         /// <summary>
-        /// Construct a ColorBrush.
+        /// Initializes a ColorBrush.
         /// </summary>
         /// <param name="color"> The color. </param>
         public ColorBrush(Color color) => this.Color = color;

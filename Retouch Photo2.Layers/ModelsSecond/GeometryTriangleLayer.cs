@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Construct
         /// <summary>
-        /// Construct a triangle-layer.
+        /// Initializes a triangle-layer.
         /// </summary>
         public GeometryTriangleLayer()
         {

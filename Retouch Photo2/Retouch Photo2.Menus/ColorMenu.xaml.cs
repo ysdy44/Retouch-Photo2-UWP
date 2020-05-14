@@ -37,17 +37,7 @@ namespace Retouch_Photo2.Menus.Models
             this.ColorPicker.ColorChange += (s, value) =>
             {
                 //Color
-                this.SelectionViewModel.Color = value;
-
-                switch (this.SelectionViewModel.FillOrStroke)
-                {
-                    case FillOrStroke.Fill:
-                        this.SelectionViewModel.SetFillColor(value);
-                        break;
-                    case FillOrStroke.Stroke:
-                        this.SelectionViewModel.SetStrokeColor(value);
-                        break;
-                }
+                this.SelectionViewModel.SetColor(value, this.SelectionViewModel.FillOrStroke);
 
                 this.ViewModel.Invalidate();//Invalidate
             };

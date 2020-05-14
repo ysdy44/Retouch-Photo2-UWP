@@ -21,16 +21,24 @@ namespace Retouch_Photo2.Effects.Models
             this.InitializeComponent();
             this.ConstructString();
 
-            this.AmountSlider.ValueChanged += (s, e) =>
+
+            //Radius
+            this.AmountSlider.Maximum = 10;
+            this.AmountSlider.ValueChangeStarted += (s, value) => { };
+            this.AmountSlider.ValueChangeDelta += (s, value) =>
             {
+                float amount = (float)value;
+                 
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.EffectManager.Sharpen_Amount = (float)e.NewValue / 10.0f;
+                    layer.EffectManager.Sharpen_Amount = amount;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
             };
+            this.AmountSlider.ValueChangeCompleted += (s, value) => { };
+
         }
     }
 
@@ -70,7 +78,7 @@ namespace Retouch_Photo2.Effects.Models
         }
         public void FollowEffectManager(EffectManager effectManager)
         {
-            this.AmountSlider.Value = effectManager.Sharpen_Amount * 10.0f;
+            this.AmountSlider.Value = effectManager.Sharpen_Amount;
 
             this.ToggleSwitch.IsOn = effectManager.Sharpen_IsOn;
         }

@@ -74,15 +74,15 @@ namespace Retouch_Photo2.Tools.Models
         Node _addEndNode;
         Node _addLastNode;
 
-        public void Starting(Vector2 point)
+        public void Started(Vector2 startingPoint, Vector2 point)
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+            Vector2 canvasPoint = Vector2.Transform(startingPoint, inverseMatrix);
 
             if (this.CurveLayer == null)
                 this.Mode = NodeCollectionMode.Preview;
-            else 
+            else
                 this.Mode = NodeCollectionMode.Add;
 
             switch (this.Mode)
@@ -110,7 +110,6 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate();//Invalidate
         }
-        public void Started(Vector2 startingPoint, Vector2 point) { }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();

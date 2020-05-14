@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Construct
         /// <summary>
-        /// Construct a arrow-layer.
+        /// Initializes a arrow-layer.
         /// </summary>
         public GeometryArrowLayer()
         {

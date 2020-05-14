@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Construct
         /// <summary>
-        /// Construct a capsule-layer.
+        /// Initializes a capsule-layer.
         /// </summary>
         public GeometryCapsuleLayer()
         {

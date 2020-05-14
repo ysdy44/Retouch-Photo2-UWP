@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Adjustments.Models
 
         //@Construct
         /// <summary>
-        /// Construct a HueRotation-adjustment.
+        /// Initializes a HueRotation-adjustment.
         /// </summary>
         public HueRotationAdjustment()
         {

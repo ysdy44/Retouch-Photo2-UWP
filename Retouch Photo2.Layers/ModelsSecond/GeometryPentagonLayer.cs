@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Construct
         /// <summary>
-        /// Construct a pentagon-layer.
+        /// Initializes a pentagon-layer.
         /// </summary>
         public GeometryPentagonLayer()
         {

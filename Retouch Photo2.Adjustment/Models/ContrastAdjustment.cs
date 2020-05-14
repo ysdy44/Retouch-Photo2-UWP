@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Adjustments.Models
 
         //@Construct
         /// <summary>
-        /// Construct a contrast-adjustment.
+        /// Initializes a contrast-adjustment.
         /// </summary>
         public ContrastAdjustment()
         {

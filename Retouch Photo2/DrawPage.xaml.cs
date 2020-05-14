@@ -23,6 +23,7 @@ namespace Retouch_Photo2
         //@Converter
         private FrameworkElement IconConverter(ITool tool) => tool.Icon;
         private Visibility BoolToVisibilityConverter(bool boolean) => boolean ? Visibility.Visible : Visibility.Collapsed;
+        
 
         //@Construct
         public DrawPage()
@@ -60,55 +61,67 @@ namespace Retouch_Photo2
             this.ConstructColorFlyout(); 
             Retouch_Photo2.Tools.Elements.MoreTransformButton.Flyout = this.MoreTransformFlyout;
             Retouch_Photo2.Tools.Elements.MoreCreateButton.Flyout = this.MoreCreateFlyout;
+            
+
+            #region Document
 
 
-            //Document
-            this.DocumentButton.Tapped += async (s, e) =>
+            this.HeadBarControl.DocumentButton.Tapped += async (s, e) =>
             {
                 await this.Save();
+
                 this.SettingViewModel.IsFullScreen = true;
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
-
-                await Task.Delay(400);
                 this.Frame.GoBack();
             };
-            this.DocumentButton.Holding += (s, e) => this.DocumentFlyout.ShowAt(this.DocumentButton);
-            this.DocumentButton.RightTapped += (s, e) => this.DocumentFlyout.ShowAt(this.DocumentButton);
-            this.DocumentUnSaveButton.Tapped += async (s, e) =>
+            this.HeadBarControl.DocumentUnSaveButton.Tapped += async (s, e) =>
             {
-                this.DocumentFlyout.Hide();
+                this.HeadBarControl.DocumentFlyout.Hide();
+
                 this.SettingViewModel.IsFullScreen = true;
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
-
-                await Task.Delay(400);
                 this.Frame.GoBack();
             };
- 
-            
+
+
+            #endregion
+
+
             #region ExpandAppbar
 
 
             this.ConstructExportDialog();
-            this.ExportButton.Tapped += (s, e) => this.ExportDialog.Show();
+            this.HeadBarControl.ExportButton.Tapped += (s, e) => this.ExportDialog.Show();
 
-            //this.UndoButton.Tapped += (s, e) => { };
+            this.HeadBarControl.UndoButton.Tapped += (s, e) =>
+            {
+                bool isUndo = this.ViewModel.Undo();//History
+
+                if (isUndo)
+                {
+                    this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+                    this.ViewModel.Invalidate();//Invalidate
+                }
+            };
             //this.RedoButton.Tapped += (s, e) => { };
 
             this.ConstructSetupDialog();
-            this.SetupButton.Tapped += (s, e) => this.SetupDialog.Show();
-            
+            this.HeadBarControl.SetupButton.Tapped += (s, e) => this.SetupDialog.Show();
+
 
             this.UnFullScreenButton.Tapped += (s, e) => this.SettingViewModel.IsFullScreen = !this.SettingViewModel.IsFullScreen;
-            this.FullScreenButton.Tapped += (s, e) => this.SettingViewModel.IsFullScreen = !this.SettingViewModel.IsFullScreen;
+            this.HeadBarControl.FullScreenButton.Tapped += (s, e) => this.SettingViewModel.IsFullScreen = !this.SettingViewModel.IsFullScreen;
 
 
             #endregion
-            
+
         }
 
         //The current page becomes the active page
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (this.SettingViewModel.IsFullScreen == false) return;
+
             if (e.Parameter is TransitionData data)
             {
                 this._lockOnNavigatedTo(data);

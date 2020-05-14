@@ -34,19 +34,11 @@
 
 
     <Grid x:Name="RootGrid">
-
+        
+        
         <Grid.Resources>
 
-            <!--Flyout-->
-            <Flyout x:Name="DocumentFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <Button x:Name="DocumentUnSaveButton" Width="180" Style="{StaticResource AppIconButton}">
-                    <Button.Tag>
-                        <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                    </Button.Tag>
-                </Button>
-            </Flyout>
-            
-            
+            <!--Flyout-->           
             <Flyout x:Name="FillColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                 <elements:ColorPicker2 x:Name="FillColorPicker"/>
             </Flyout>
@@ -113,96 +105,10 @@
                 <controls:ToolsControl/>
             </elementDrawPages:DrawLayout.LeftPanel>
 
-            <!--Document-->
-            <elementDrawPages:DrawLayout.DocumentChild>
-                <Button x:Name="DocumentButton" Width="Auto" FontWeight="Bold" Padding="10, 0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Foreground="{ThemeResource AppText}"/>
-            </elementDrawPages:DrawLayout.DocumentChild>
-
-            <!--HeadLeft-->
-            <elementDrawPages:DrawLayout.HeadLeftPanel>
-                <elements:ExpandAppbar x:Name="ExpandAppbar">
-                    <elements:ExpandAppbar.Children>
-
-
-                        <elements:ExpandAppbarButton x:Name="ExportButton">
-                            <ToolTipService.ToolTip>
-                                <ToolTip x:Name="ExportToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                            </ToolTipService.ToolTip>
-                            <elements:ExpandAppbarButton.CenterContent>
-                                <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                            </elements:ExpandAppbarButton.CenterContent>
-                        </elements:ExpandAppbarButton>
-
-                        <elements:ExpandAppBarSapce/>
-
-                        <!--
-                        <elements:ExpandAppbarButton x:Name="UndoButton">
-                            <ToolTipService.ToolTip>
-                                <ToolTip x:Name="SetupToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                            </ToolTipService.ToolTip>
-                            <elements:ExpandAppbarButton.CenterContent>
-                                <FontIcon Glyph="&#xE10E;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                            </elements:ExpandAppbarButton.CenterContent>
-                        </elements:ExpandAppbarButton>
-
-                        <elements:ExpandAppBarSapce/>
-
-                        <elements:ExpandAppbarButton x:Name="RedoButton">
-                            <ToolTipService.ToolTip>
-                                <ToolTip x:Name="RedoToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                            </ToolTipService.ToolTip>
-                            <elements:ExpandAppbarButton.CenterContent>
-                                <FontIcon Glyph="&#xE10D;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                            </elements:ExpandAppbarButton.CenterContent>
-                        </elements:ExpandAppbarButton>
-
-                        <elements:ExpandAppBarSeparator/>
-                        -->
-
-                        <elements:ExpandAppbarButton x:Name="SetupButton">
-                            <ToolTipService.ToolTip>
-                                <ToolTip x:Name="SetupToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                            </ToolTipService.ToolTip>
-                            <elements:ExpandAppbarButton.CenterContent>
-                                <FontIcon Glyph="&#xE123;" FontSize="20" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                            </elements:ExpandAppbarButton.CenterContent>
-                        </elements:ExpandAppbarButton>
-
-                        <elements:ExpandAppBarSapce/>
-
-                        <elements:ExpandAppBarSapce/>
-
-                        <elements:ExpandAppbarToggleButton x:Name="RulerButton" IsChecked="{x:Bind ViewModel.CanvasRulerVisible,Mode=TwoWay}">
-                            <ToolTipService.ToolTip>
-                                <ToolTip x:Name="RulerToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                            </ToolTipService.ToolTip>
-                            <elements:ExpandAppbarToggleButton.CenterContent>
-                                <FontIcon Glyph="&#xE80A;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                            </elements:ExpandAppbarToggleButton.CenterContent>
-                        </elements:ExpandAppbarToggleButton>
-
-                        <elements:ExpandAppBarSapce/>
-
-                        <elements:ExpandAppbarButton x:Name="FullScreenButton">
-                            <ToolTipService.ToolTip>
-                                <ToolTip x:Name="FullScreenToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                            </ToolTipService.ToolTip>
-                            <elements:ExpandAppbarButton.CenterContent>
-                                <FontIcon Glyph="&#xE92D;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                            </elements:ExpandAppbarButton.CenterContent>
-                        </elements:ExpandAppbarButton>
-
-                        <elements:ExpandAppBarSapce/>
-
-                        <elements:ExpandAppbarRepeatButton x:Name="TipButton" IsChecked="{x:Bind TipViewModel.IsOpen,Mode=TwoWay}">
-                            <elements:ExpandAppbarRepeatButton.CenterContent>
-                                <FontIcon Glyph="&#xE897;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                            </elements:ExpandAppbarRepeatButton.CenterContent>
-                        </elements:ExpandAppbarRepeatButton>
-
-                    </elements:ExpandAppbar.Children>
-                </elements:ExpandAppbar>
-            </elementDrawPages:DrawLayout.HeadLeftPanel>
+            <!--Head-->
+            <elementDrawPages:DrawLayout.HeadChild>
+                <controls:HeadBarControl x:Name="HeadBarControl"/>
+            </elementDrawPages:DrawLayout.HeadChild>
 
         </elementDrawPages:DrawLayout>
 

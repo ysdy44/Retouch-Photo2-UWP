@@ -110,7 +110,7 @@ namespace Retouch_Photo2.Elements
 
         //@Construct
         /// <summary>
-        /// Construct a CirclePicker.
+        /// Initializes a CirclePicker.
         /// </summary>
         public CirclePicker()
         {

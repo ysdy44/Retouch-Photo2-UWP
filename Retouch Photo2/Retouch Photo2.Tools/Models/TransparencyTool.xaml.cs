@@ -58,7 +58,6 @@ namespace Retouch_Photo2.Tools.Models
         readonly ToolButton _button = new ToolButton(new TransparencyIcon());
 
 
-        public void Starting(Vector2 point) { }
         public void Started(Vector2 startingPoint, Vector2 point) { }
         public void Delta(Vector2 startingPoint, Vector2 point) { }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) { }

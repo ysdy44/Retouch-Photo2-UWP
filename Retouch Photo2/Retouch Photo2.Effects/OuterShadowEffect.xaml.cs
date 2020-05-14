@@ -21,38 +21,66 @@ namespace Retouch_Photo2.Effects.Models
             this.InitializeComponent();
             this.ConstructString();
 
-            this.RadiusSlider.ValueChanged += (s, e) =>
+
+            //Radius
+            this.RadiusSlider.ValueChangeStarted += (s, value) => { };
+            this.RadiusSlider.ValueChangeDelta += (s, value) =>
             {
+                float radius = (float)value;
+
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.EffectManager.OuterShadow_Radius = (float)e.NewValue;
+                    layer.EffectManager.OuterShadow_Radius = radius;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
             };
-            this.OpacitySlider.ValueChanged += (s, e) =>
+            this.RadiusSlider.ValueChangeCompleted += (s, value) => { };
+
+
+            //Opacity
+            this.OpacitySlider.Maximum = 1;
+            this.OpacitySlider.ValueChangeStarted += (s, value) => { };
+            this.OpacitySlider.ValueChangeDelta += (s, value) =>
             {
+                float radius = (float)value;
+
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.EffectManager.OuterShadow_Opacity = (float)(e.NewValue / 100.0f);
+                    layer.EffectManager.OuterShadow_Opacity = radius;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
             };
-            this.OffsetSlider.ValueChanged += (s, e) =>
+            this.OpacitySlider.ValueChangeCompleted += (s, value) => { };
+
+
+
+            //Radius
+            this.OffsetSlider.ValueChangeStarted += (s, value) => { };
+            this.OffsetSlider.ValueChangeDelta += (s, value) =>
             {
+                float radius = (float)value;
+
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.EffectManager.OuterShadow_Offset = (float)e.NewValue;
+                    layer.EffectManager.OuterShadow_Offset = radius;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
             };
-            this.AnglePicker.RadiansChange += (s, radians) =>
-            {  
+            this.OffsetSlider.ValueChangeCompleted += (s, value) => { };
+                       
+
+            //Angle
+            this.AnglePicker.ValueChangeStarted += (s, value) => { };
+            this.AnglePicker.ValueChangeDelta += (s, value) =>
+            {
+                float radians = (float)value;
+
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
@@ -61,6 +89,8 @@ namespace Retouch_Photo2.Effects.Models
 
                 this.ViewModel.Invalidate();//Invalidate
             };
+            this.AnglePicker.ValueChangeCompleted += (s, value) => { };
+            
 
             this.ColorButton.Tapped += (s, e) =>
             {
@@ -116,7 +146,7 @@ namespace Retouch_Photo2.Effects.Models
         public void Reset()
         {
             this.RadiusSlider.Value = 0;
-            this.OpacitySlider.Value = 50f;
+            this.OpacitySlider.Value = 0.5f;
             this.SolidColorBrush.Color = Windows.UI.Colors.Black;
 
             this.OffsetSlider.Value = 0;
@@ -134,7 +164,7 @@ namespace Retouch_Photo2.Effects.Models
         public void FollowEffectManager(EffectManager effectManager)
         {
             this.RadiusSlider.Value = effectManager.OuterShadow_Radius;
-            this.OpacitySlider.Value = effectManager.OuterShadow_Opacity * 100.0f;
+            this.OpacitySlider.Value = effectManager.OuterShadow_Opacity;
             this.SolidColorBrush.Color = effectManager.OuterShadow_Color;
 
             this.OffsetSlider.Value = effectManager.OuterShadow_Offset;

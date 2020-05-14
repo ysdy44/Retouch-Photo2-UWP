@@ -228,7 +228,4 @@
   <data name="Stroke" xml:space="preserve">
     <value>描边</value>
   </data>
-  <data name="StrokeWidth" xml:space="preserve">
-    <value>描边宽度</value>
-  </data>
 </root>
