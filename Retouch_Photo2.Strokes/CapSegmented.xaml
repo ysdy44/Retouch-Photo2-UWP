@@ -8,7 +8,7 @@
     d:DesignHeight="50"
     d:DesignWidth="200"
     >
-
+    
     <Grid>
 
         <!--VisualState-->
@@ -22,6 +22,7 @@
                 <VisualState x:Name="Flat">
                     <VisualState.Setters>
                         <Setter Target = "FlatButton.IsEnabled" Value="False"/>
+                        <Setter Target = "FlatIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -29,6 +30,7 @@
                 <VisualState x:Name="Square">
                     <VisualState.Setters>
                         <Setter Target = "SquareButton.IsEnabled" Value="False"/>
+                        <Setter Target = "SquareIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -36,6 +38,7 @@
                 <VisualState x:Name="Round">
                     <VisualState.Setters>
                         <Setter Target = "RoundButton.IsEnabled" Value="False"/>
+                        <Setter Target = "RoundIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -43,9 +46,10 @@
                 <VisualState x:Name="Triangle">
                     <VisualState.Setters>
                         <Setter Target = "TriangleButton.IsEnabled" Value="False"/>
+                        <Setter Target = "TriangleIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
-
+                
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
@@ -62,23 +66,23 @@
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="FlatToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Line X1="5" Y1="8" X2="25" Y2="8" StrokeThickness="12" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <Line x:Name="FlatIcon" X1="5" Y1="8" X2="25" Y2="8" StrokeThickness="10" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Stroke="{ThemeResource SystemBaseHighColor}"/>
         </Button>
-
+        
         <!--Square-->
         <Button x:Name="SquareButton" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="SquareToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Line X1="5" Y1="8" X2="25" Y2="8" StrokeThickness="12" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <Line x:Name="SquareIcon" X1="5" Y1="8" X2="25" Y2="8" StrokeThickness="10" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Stroke="{ThemeResource SystemBaseHighColor}"/>
         </Button>
-
+        
         <!--Round-->
         <Button x:Name="RoundButton" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="RoundToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Line X1="5" Y1="8" X2="25" Y2="8" StrokeThickness="12" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <Line x:Name="RoundIcon" X1="5" Y1="8" X2="25" Y2="8" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="{ThemeResource SystemBaseHighColor}"/>
         </Button>
 
         <!--Triangle-->
@@ -86,7 +90,7 @@
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="TriangleToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Line X1="5" Y1="8" X2="25" Y2="8" StrokeThickness="12" StrokeStartLineCap="Triangle" StrokeEndLineCap="Triangle" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <Line x:Name="TriangleIcon" X1="5" Y1="8" X2="25" Y2="8" StrokeThickness="10" StrokeStartLineCap="Triangle" StrokeEndLineCap="Triangle" Stroke="{ThemeResource SystemBaseHighColor}"/>
         </Button>
 
     </Grid>

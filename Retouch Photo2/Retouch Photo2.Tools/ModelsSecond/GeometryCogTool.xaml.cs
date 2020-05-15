@@ -344,7 +344,7 @@ namespace Retouch_Photo2.Tools.Models
                 Tooth = this.SelectionViewModel.GeometryCogTooth,
                 Notch = this.SelectionViewModel.GeometryCogNotch,
                 TransformManager = new TransformManager(transformer),
-                StyleManager = this.SelectionViewModel.GetStyleManagerGeometry()
+                StyleManager = this.SelectionViewModel.GeometryStyle
             };
         }
 

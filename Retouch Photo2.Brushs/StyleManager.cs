@@ -3,7 +3,6 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs.Models;
-using Retouch_Photo2.Elements;
 using System.Numerics;
 
 namespace Retouch_Photo2.Brushs
@@ -105,11 +104,23 @@ namespace Retouch_Photo2.Brushs
                 FillBrush = this.FillBrush.Clone(),
                 StrokeBrush = this.StrokeBrush.Clone(),
                 StrokeWidth = this.StrokeWidth,
-                StrokeStyle = new CanvasStrokeStyle
-                {
-
-                }
+                StrokeStyle = this.StrokeStyle.Clone()
             };
+        }
+
+
+        public Transformer _startingDestination;
+        public void CacheBrush(Transformer startingTransformer)
+        {
+            this._startingDestination = startingTransformer;
+            this.FillBrush.CacheTransform();
+            this.StrokeBrush.CacheTransform();
+        }
+        public void TransformBrush(Transformer transformer)
+        {
+            Matrix3x2 matrix = Transformer.FindHomography(this._startingDestination, transformer);
+            this.FillBrush.TransformMultiplies(matrix);
+            this.StrokeBrush.TransformMultiplies(matrix);
         }
 
     }

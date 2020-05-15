@@ -15,7 +15,7 @@ namespace Retouch_Photo2.Brushs.Models
     {
         //@Content
         public BrushType Type => BrushType.None;
-        
+
         public CanvasGradientStop[] Array { get => null; set { } }
         public Color Color { get; set; }
         public Transformer Destination { set { } }
@@ -49,10 +49,6 @@ namespace Retouch_Photo2.Brushs.Models
 
         public void SaveWith(XElement element) { }
         public void Load(XElement element) { }
-
-
-        public void OneBrushPoints(Transformer transformer) { }
-        public void DeliverBrushPoints(Transformer transformer) { }
 
 
         //@Interface

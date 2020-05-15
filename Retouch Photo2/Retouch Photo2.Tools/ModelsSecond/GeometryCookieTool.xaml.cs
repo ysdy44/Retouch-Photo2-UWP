@@ -230,7 +230,7 @@ namespace Retouch_Photo2.Tools.Models
                 InnerRadius = this.SelectionViewModel.GeometryCookieInnerRadius,
                 SweepAngle = this.SelectionViewModel.GeometryCookieSweepAngle,
                 TransformManager = new TransformManager(transformer),
-                StyleManager = this.SelectionViewModel.GetStyleManagerGeometry()
+                StyleManager = this.SelectionViewModel.GeometryStyle
             };
         }
 

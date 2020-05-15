@@ -15,9 +15,9 @@ namespace Retouch_Photo2.Brushs.Models
     {
         //@Content
         public BrushType Type => BrushType.Color;
-        
+
         public CanvasGradientStop[] Array { get => null; set { } }
-        public Color Color { get; set; } 
+        public Color Color { get; set; }
         public Transformer Destination { set { } }
         public Photocopier Photocopier { get => new Photocopier(); }
         public CanvasEdgeBehavior Extend { get => CanvasEdgeBehavior.Clamp; set { } }
@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Brushs.Models
         {
             return new CanvasSolidColorBrush(resourceCreator, this.Color);
         }
-        
+
 
         public BrushOperateMode ContainsOperateMode(Vector2 point, Matrix3x2 matrix)
         {
@@ -67,10 +67,6 @@ namespace Retouch_Photo2.Brushs.Models
         {
             if (element.Element("Color") is XElement color) this.Color = FanKit.Transformers.XML.LoadColor(color);
         }
-
-
-        public void OneBrushPoints(Transformer transformer) { }
-        public void DeliverBrushPoints(Transformer transformer) { }
 
 
         //@Interface

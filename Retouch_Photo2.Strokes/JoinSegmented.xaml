@@ -22,6 +22,7 @@
                 <VisualState x:Name="Miter">
                     <VisualState.Setters>
                         <Setter Target = "MiterButton.IsEnabled" Value="False"/>
+                        <Setter Target = "MiterIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -29,6 +30,7 @@
                 <VisualState x:Name="Bevel">
                     <VisualState.Setters>
                         <Setter Target = "BevelButton.IsEnabled" Value="False"/>
+                        <Setter Target = "BevelIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -36,6 +38,7 @@
                 <VisualState x:Name="Round">
                     <VisualState.Setters>
                         <Setter Target = "RoundButton.IsEnabled" Value="False"/>
+                        <Setter Target = "RoundIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -43,6 +46,7 @@
                 <VisualState x:Name="MiterOrBevel">
                     <VisualState.Setters>
                         <Setter Target = "MiterOrBevelButton.IsEnabled" Value="False"/>
+                        <Setter Target = "MiterOrBevelIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -62,7 +66,7 @@
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="MiterToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Polyline Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Miter" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <Polyline x:Name="MiterIcon" Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Miter" Stroke="{ThemeResource SystemBaseHighColor}"/>
         </Button>
 
         <!--Bevel-->
@@ -70,7 +74,7 @@
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="BevelToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Polyline Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Bevel" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <Polyline x:Name="BevelIcon" Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Bevel" Stroke="{ThemeResource SystemBaseHighColor}"/>
         </Button>
 
         <!--Round-->
@@ -78,7 +82,7 @@
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="RoundToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Polyline Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Round" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <Polyline x:Name="RoundIcon" Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Round" Stroke="{ThemeResource SystemBaseHighColor}"/>
         </Button>
 
         <!--MiterOrBevel-->
@@ -86,7 +90,7 @@
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="MiterOrBevelToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Polyline Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Bevel" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <Polyline x:Name="MiterOrBevelIcon" Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Bevel" Stroke="{ThemeResource SystemBaseHighColor}"/>
         </Button>
 
     </Grid>

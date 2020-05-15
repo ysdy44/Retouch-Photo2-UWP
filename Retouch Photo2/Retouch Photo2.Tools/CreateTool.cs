@@ -22,11 +22,8 @@ namespace Retouch_Photo2.Tools
         ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
         bool IsCenter => this.SettingViewModel.IsCenter;
         bool IsSquare => this.SettingViewModel.IsSquare;
-               
 
-        public void Starting(Vector2 point) { }
 
-        
         /// <summary>
         /// Occurs when the operation begins. 
         /// </summary>
@@ -58,9 +55,8 @@ namespace Retouch_Photo2.Tools
             this.ViewModel.TextVisibility = Visibility.Visible;
 
             //Mezzanine
-            ILayer layer = createLayer(transformer);
-
-            this.ViewModel.MezzanineLayer = layer;
+            this.ViewModel.MezzanineLayer = createLayer(transformer);
+            this.ViewModel.MezzanineLayer.StyleManager.CacheTransform();
             this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.ViewModel.MezzanineLayer);
 
             //Selection
@@ -86,12 +82,10 @@ namespace Retouch_Photo2.Tools
             this.ViewModel.SetTextWidthHeight(transformer);
 
             //Mezzanine
-            this.ViewModel.MezzanineLayer.TransformManager.Source = transformer;
-            this.ViewModel.MezzanineLayer.TransformManager.Destination = transformer;
+            this.ViewModel.MezzanineLayer.TransformManager = new TransformManager(transformer);
 
-            //DeliverBrushPoints
-            this.ViewModel.MezzanineLayer.StyleManager.FillBrush.DeliverBrushPoints(transformer);
-            this.ViewModel.MezzanineLayer.StyleManager.StrokeBrush.DeliverBrushPoints(transformer);
+            //TransformBrush
+            this.ViewModel.MezzanineLayer.StyleManager.TransformBrush(transformer);
 
             //Selection
             this.SelectionViewModel.Transformer = transformer;
@@ -118,8 +112,7 @@ namespace Retouch_Photo2.Tools
                 this.ViewModel.TextVisibility = Visibility.Collapsed;
 
                 //Mezzanine
-                this.ViewModel.MezzanineLayer.TransformManager.Source = transformer;
-                this.ViewModel.MezzanineLayer.TransformManager.Destination = transformer;
+                this.ViewModel.MezzanineLayer.TransformManager = new TransformManager(transformer); 
 
                 foreach (ILayer child in this.ViewModel.Layers.RootLayers)
                 {

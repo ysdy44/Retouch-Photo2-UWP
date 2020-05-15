@@ -69,6 +69,7 @@ namespace Retouch_Photo2
             this.SelectionViewModel.SetValue((layer) =>
             {
                 layer.StyleManager.FillBrush = imageBrush.Clone();
+                this.SelectionViewModel.StyleLayer = layer;
             });
             this.SelectionViewModel.FillBrush = imageBrush;
 
@@ -83,6 +84,7 @@ namespace Retouch_Photo2
             this.SelectionViewModel.SetValue((layer) =>
             {
                 layer.StyleManager.StrokeBrush = imageBrush.Clone();
+                this.SelectionViewModel.StyleLayer = layer;
             });
             this.SelectionViewModel.StrokeBrush = imageBrush;
 
@@ -126,22 +128,24 @@ namespace Retouch_Photo2
 
             //Transformer
             Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
-     
+
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
                 if (layer.Type == LayerType.Image)
                 {
-                    ImageLayer imageLayer = (ImageLayer)layer;
-                    imageLayer.TransformManager.Source = transformerSource;
 
-                    if (imageLayer.StyleManager.FillBrush.Type == BrushType.Image)
+                    layer.TransformManager = new TransformManager
                     {
-                        ImageBrush imageBrush = (ImageBrush)imageLayer.StyleManager.FillBrush;
+                        Source = transformerSource,
+                        Destination = layer.TransformManager.Destination,
+                    };
+                    layer.StyleManager.FillBrush = new ImageBrush(transformerSource)
+                    {
+                        Photocopier = photo.ToPhotocopier()
+                    };
+                    this.SelectionViewModel.StyleLayer = layer;
 
-                        imageBrush.Photocopier = photo.ToPhotocopier();
-                        imageBrush.Source = transformerSource;
-                    }
                 }
             });
 

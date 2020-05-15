@@ -109,7 +109,6 @@
     <Compile Include="Controls\ToolsControl.xaml.cs">
       <DependentUpon>ToolsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DrawPage.FlyoutTool.cs" />
     <Compile Include="DrawPage.ToolAndMenu.cs" />
     <Compile Include="DrawPage.xaml.cs">
       <DependentUpon>DrawPage.xaml</DependentUpon>

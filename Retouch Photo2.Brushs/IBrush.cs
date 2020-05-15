@@ -86,17 +86,5 @@ namespace Retouch_Photo2.Brushs
         /// <param name="element"> The destination XElement. </param>
         void Load(XElement element);
 
-
-        /// <summary>
-        /// Points turn to _oldPoints in Transformer.One.
-        /// </summary>
-        /// <param name="transformer"> The Transformer about Points. </param>
-        void OneBrushPoints(Transformer transformer);
-        /// <summary>
-        /// _oldPoints turn to Points in Transformer Destination.
-        /// </summary>
-        /// <param name="transformer"> The Transformer about _oldPoints. </param>
-        void DeliverBrushPoints(Transformer transformer);
-
     }
 }

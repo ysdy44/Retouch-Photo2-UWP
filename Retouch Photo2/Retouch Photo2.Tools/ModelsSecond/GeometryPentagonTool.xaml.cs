@@ -149,7 +149,7 @@ namespace Retouch_Photo2.Tools.Models
             return new GeometryPentagonLayer
             {
                 TransformManager = new TransformManager(transformer),
-                StyleManager = this.SelectionViewModel.GetStyleManagerGeometry()
+                StyleManager = this.SelectionViewModel.GeometryStyle
             };
         }
 

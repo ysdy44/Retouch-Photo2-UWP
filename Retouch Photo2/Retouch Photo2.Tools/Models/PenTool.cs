@@ -287,7 +287,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 SelectMode = SelectMode.Selected,
                 TransformManager = new TransformManager(transformer),
-                StyleManager = this.SelectionViewModel.GetStyleManagerCurve(),
+                StyleManager = this.SelectionViewModel.CurveStyle,
             };
 
             //Selection

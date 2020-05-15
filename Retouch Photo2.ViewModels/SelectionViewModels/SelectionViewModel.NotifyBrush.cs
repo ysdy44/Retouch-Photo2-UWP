@@ -1,4 +1,5 @@
-﻿using Microsoft.Graphics.Canvas.Geometry;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Brushs.Models;
 using Retouch_Photo2.Layers;
@@ -67,6 +68,7 @@ namespace Retouch_Photo2.ViewModels
                     this.SetValue((layer) =>
                     {
                         layer.StyleManager.FillBrush = new ColorBrush(color);
+                        this.StyleLayer = layer;
                     });
                     break;
 
@@ -75,10 +77,14 @@ namespace Retouch_Photo2.ViewModels
                     this.SetValue((layer) =>
                     {
                         layer.StyleManager.StrokeBrush = new ColorBrush(color);
+                        this.StyleLayer = layer;
                     });
                     break;
             }
         }
+
+
+        //////////////////////////
 
 
         /// <summary> Retouch_Photo2's the only fill-brush. </summary>
@@ -87,35 +93,11 @@ namespace Retouch_Photo2.ViewModels
             get => this.fillBrush;
             set
             {
-                if (this._isSetGeometryCurveText)
-                {
-                    switch (this.Type)
-                    {
-                        case LayerType.Curve:
-                        case LayerType.CurveMulti:
-                            this.fillBrushCurve = value.Clone();
-                            break;
-
-                        case LayerType.TextFrame:
-                        case LayerType.TextArtistic:
-                            this.fillBrushText = value.Clone();
-                            break;
-
-                        default:
-                            this.fillBrushGeometry = value.Clone();
-                            break;
-                    }
-
-                }
-
                 this.fillBrush = value;
                 this.OnPropertyChanged(nameof(this.FillBrush));//Notify 
             }
         }
         private IBrush fillBrush = new ColorBrush(Colors.LightGray);
-        private IBrush fillBrushGeometry = new ColorBrush(Colors.LightGray);
-        private IBrush fillBrushCurve = new NoneBrush();
-        private IBrush fillBrushText = new ColorBrush(Colors.Black);
 
         /// <summary> Retouch_Photo2's the only stroke-brush. </summary>
         public IBrush StrokeBrush
@@ -123,35 +105,11 @@ namespace Retouch_Photo2.ViewModels
             get => this.strokeBrush;
             set
             {
-                if (this._isSetGeometryCurveText)
-                {
-                    switch (this.Type)
-                    {
-                        case LayerType.Curve:
-                        case LayerType.CurveMulti:
-                            this.strokeBrushCurve = value.Clone();
-                            break;
-
-                        case LayerType.TextFrame:
-                        case LayerType.TextArtistic:
-                            this.strokeBrushText = value.Clone();
-                            break;
-
-                        default:
-                            this.strokeBrushGeometry = value.Clone();
-                            break;
-                    }
-
-                }
-
                 this.strokeBrush = value;
                 this.OnPropertyChanged(nameof(this.StrokeBrush));//Notify 
             }
         }
         private IBrush strokeBrush = new NoneBrush();
-        private IBrush strokeBrushGeometry = new NoneBrush();
-        private IBrush strokeBrushCurve = new ColorBrush(Colors.Black);
-        private IBrush strokeBrushText = new NoneBrush();
 
         /// <summary> Retouch_Photo2's the only stroke-width. </summary>
         public float StrokeWidth
@@ -159,80 +117,27 @@ namespace Retouch_Photo2.ViewModels
             get => this.strokeWidth;
             set
             {
-                if (this._isSetGeometryCurveText)
-                {
-                    switch (this.Type)
-                    {
-                        case LayerType.Curve:
-                        case LayerType.CurveMulti:
-                            this.strokeWidthCurve = value;
-                            break;
-
-                        case LayerType.TextFrame:
-                        case LayerType.TextArtistic:
-                            this.strokeWidthText = value;
-                            break;
-
-                        default:
-                            this.strokeWidthGeometry = value;
-                            break;
-                    }
-                }
-
                 this.strokeWidth = value;
                 this.OnPropertyChanged(nameof(this.StrokeWidth));//Notify 
             }
         }
-        private float strokeWidth = 0;
-        private float strokeWidthGeometry = 0;
-        private float strokeWidthCurve = 1;
-        private float strokeWidthText = 0;
-
+        private float strokeWidth = 1;
+        
         /// <summary> Retouch_Photo2's the only stroke-style. </summary>
         public CanvasStrokeStyle StrokeStyle
         {
             get => this.strokeStyle;
             set
             {
-                if (this._isSetGeometryCurveText)
-                {
-                    switch (this.Type)
-                    {
-                        case LayerType.Curve:
-                        case LayerType.CurveMulti:
-                            this.strokeStyleCurve = value.Clone();
-                            break;
-
-                        case LayerType.TextFrame:
-                        case LayerType.TextArtistic:
-                            this.strokeStyleText = value.Clone();
-                            break;
-
-                        default:
-                            this.strokeStyleGeometry = value.Clone();
-                            break;
-                    }
-
-                }
-
                 this.strokeStyle = value;
                 this.OnPropertyChanged(nameof(this.StrokeStyle));//Notify 
             }
         }
         private CanvasStrokeStyle strokeStyle = new CanvasStrokeStyle();
-        private CanvasStrokeStyle strokeStyleGeometry = new CanvasStrokeStyle();
-        private CanvasStrokeStyle strokeStyleCurve = new CanvasStrokeStyle();
-        private CanvasStrokeStyle strokeStyleText = new CanvasStrokeStyle();
 
-
-
-        bool _isSetGeometryCurveText = true;
         /// <summary> Sets style-manager. </summary>  
-        public void SetStyleManager(StyleManager styleManager)
+        private void SetStyleManager(StyleManager styleManager)
         {
-            this._isSetGeometryCurveText = false;
-
-
             if (styleManager == null)
             {
                 this.IsFollowTransform = true;
@@ -261,48 +166,8 @@ namespace Retouch_Photo2.ViewModels
                         break;
                 }
             }
-
-
-            this._isSetGeometryCurveText = true;
         }
-
-        /// <summary> Gets style-manager. </summary>  
-        public StyleManager GetStyleManagerGeometry()
-        {
-            return new StyleManager
-            {
-                IsFollowTransform = this.isFollowTransform,
-                FillBrush = this.fillBrushGeometry.Clone(),
-                StrokeBrush = this.strokeBrushGeometry.Clone(),
-                StrokeWidth = this.strokeWidthGeometry,
-                StrokeStyle = this.strokeStyleGeometry.Clone()
-            };
-        }
-        public StyleManager GetStyleManagerCurve()
-        {
-            return new StyleManager
-            {
-                IsFollowTransform = this.isFollowTransform,
-                FillBrush = this.fillBrushCurve.Clone(),
-                StrokeBrush = this.strokeBrushCurve.Clone(),
-                StrokeWidth = this.strokeWidthCurve,
-                StrokeStyle = this.strokeStyleCurve.Clone()
-            };
-        }
-        public StyleManager GetStyleManagerText()
-        {
-            return new StyleManager
-            {
-                IsFollowTransform = this.isFollowTransform,
-                FillBrush = this.fillBrushText.Clone(),
-                StrokeBrush = this.strokeBrushText.Clone(),
-                StrokeWidth = this.strokeWidthText,
-                StrokeStyle = this.strokeStyleText.Clone()
-            };
-        }
-
-
-
+                     
         /// <summary> Set mode. </summary>  
         public void SetModeStyleManager()
         {
@@ -320,6 +185,129 @@ namespace Retouch_Photo2.ViewModels
                     break;
             }
         }
+
+
+        //////////////////////////
+
+
+        /// <summary>
+        /// Sets the <see cref="StyleManager"/>,
+        /// switch by <see cref="LayerType"/> to
+        /// <see cref="SelectionViewModel.GeometryStyle"/>
+        /// <see cref="SelectionViewModel.CurveStyle"/>
+        /// <see cref="SelectionViewModel.TextStyle"/>
+        /// </summary>
+        public ILayer StyleLayer
+        {
+            set
+            {                
+                //Switch
+                switch (value.Type)
+                {
+                    case LayerType.Curve:
+                    case LayerType.CurveMulti:
+                        if (value != curveStyleLayer)
+                            this.curveStyleLayer = value;
+                        break;
+
+                    case LayerType.TextFrame:
+                    case LayerType.TextArtistic:
+                        if (value != textStyleLayer)
+                            this.textStyleLayer = value;
+                        break;
+
+                    default:
+                        if (value != geometryStylelayer)
+                            this.geometryStylelayer = value;
+                        break;
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Gets the geometry style.
+        /// </summary>
+        public StyleManager GeometryStyle
+        {
+            get
+            {
+                if (this.geometryStylelayer != null)
+                {
+                    //CacheBrush
+                    Transformer transformer = this.geometryStylelayer.TransformManager.Destination;
+                    StyleManager styleManager = this.geometryStylelayer.StyleManager.Clone();
+                    styleManager.CacheBrush(transformer);
+                    return styleManager;
+                }
+
+                return new StyleManager
+                {
+                    IsFollowTransform = true,
+                    FillBrush = new ColorBrush(Colors.LightGray),
+                    StrokeBrush = new NoneBrush(),
+                    StrokeWidth = 0,
+                    StrokeStyle = new CanvasStrokeStyle(),
+                };
+            }
+        }
+        private ILayer geometryStylelayer;
+        
+        /// <summary>
+        /// Gets the curve style.
+        /// </summary>
+        public StyleManager CurveStyle
+        {
+            get
+            {
+                if (this.curveStyleLayer != null)
+                {
+                    //CacheBrush
+                    Transformer transformer = this.curveStyleLayer.TransformManager.Destination;
+                    StyleManager styleManager = this.curveStyleLayer.StyleManager.Clone();
+                    styleManager.CacheBrush(transformer);
+                    return styleManager;
+                }
+
+                return new StyleManager
+                {
+                    IsFollowTransform = true,
+                    FillBrush = new NoneBrush(),
+                    StrokeBrush = new ColorBrush(Colors.Black),
+                    StrokeWidth = 3,
+                    StrokeStyle = new CanvasStrokeStyle(),
+                };
+            }
+        }
+        private ILayer curveStyleLayer;
+        
+        /// <summary>
+        /// Gets the text style.
+        /// </summary>
+        public StyleManager TextStyle
+        {
+            get
+            {
+                if (this.textStyleLayer != null)
+                {
+                    //CacheBrush
+                    Transformer transformer = this.textStyleLayer.TransformManager.Destination;
+                    StyleManager styleManager = this.textStyleLayer.StyleManager.Clone();
+                    styleManager.CacheBrush(transformer);
+                    return styleManager;
+                }
+
+                return new StyleManager
+                {
+                    IsFollowTransform = true,
+                    FillBrush = new ColorBrush(Colors.Black),
+                    StrokeBrush = new NoneBrush(),
+                    StrokeWidth = 0,
+                    StrokeStyle = new CanvasStrokeStyle(),
+                };
+            }
+        }
+        private ILayer textStyleLayer;
 
     }
 }

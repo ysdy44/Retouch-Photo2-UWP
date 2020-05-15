@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Brushs.Models
     {
         //@Content
         public BrushType Type => BrushType.Image;
-        
+
         public CanvasGradientStop[] Array { get => null; set { } }
         public Color Color { get; set; }
         //public Transformer Destination { set { } }
@@ -31,7 +31,7 @@ namespace Retouch_Photo2.Brushs.Models
         public Transformer Source { get; set; }
         /// <summary> The destination transformer. </summary>
         public Transformer Destination { get; set; }
-        Transformer _startingDestination;
+        public Transformer StartingDestination;
 
         /// <summary> The edge behavior. </summary>
         public CanvasEdgeBehavior Extend { get; set; }
@@ -68,9 +68,9 @@ namespace Retouch_Photo2.Brushs.Models
 
 
         public ICanvasBrush GetICanvasBrush(ICanvasResourceCreator resourceCreator)
-        {         
+        {
             Photocopier photocopier = this.Photocopier;
-            if (photocopier.Name == null)  return null;
+            if (photocopier.Name == null) return null;
 
             Photo photo = Photo.FindFirstPhoto(photocopier);
             CanvasBitmap bitmap = photo.Source;
@@ -86,7 +86,7 @@ namespace Retouch_Photo2.Brushs.Models
         public ICanvasBrush GetICanvasBrush(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix)
         {
             Photocopier photocopier = this.Photocopier;
-            if (photocopier.Name == null)return null;
+            if (photocopier.Name == null) return null;
 
             Photo photo = Photo.FindFirstPhoto(photocopier);
             CanvasBitmap bitmap = photo.Source;
@@ -111,7 +111,7 @@ namespace Retouch_Photo2.Brushs.Models
         {
             TransformerMode transformerMode = this.Converter(mode);
 
-            this.Destination = Transformer.Controller(transformerMode, startingPoint, point, this._startingDestination);
+            this.Destination = Transformer.Controller(transformerMode, startingPoint, point, this.StartingDestination);
         }
 
         public void Draw(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Color accentColor)
@@ -147,32 +147,18 @@ namespace Retouch_Photo2.Brushs.Models
         }
 
 
-        public void OneBrushPoints(Transformer transformer)
-        {
-            Matrix3x2 oneMatrix = Transformer.FindHomography(transformer, Transformer.One);
-
-            this._startingDestination = Transformer.Multiplies(this.Destination, oneMatrix);
-        }
-        public void DeliverBrushPoints(Transformer transformer)
-        {
-            Matrix3x2 matrix = Transformer.FindHomography(Transformer.One, transformer);
-
-            this.Destination = Transformer.Multiplies(this._startingDestination, matrix);
-        }
-
-
         //@Interface
         public void CacheTransform()
         {
-            this._startingDestination = this.Destination;
+            this.StartingDestination = this.Destination;
         }
         public void TransformMultiplies(Matrix3x2 matrix)
         {
-            this.Destination = Transformer.Multiplies(this._startingDestination, matrix);
+            this.Destination = Transformer.Multiplies(this.StartingDestination, matrix);
         }
         public void TransformAdd(Vector2 vector)
         {
-            this.Destination = Transformer.Add(this._startingDestination, vector);
+            this.Destination = Transformer.Add(this.StartingDestination, vector);
         }
 
 

@@ -80,6 +80,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.StyleManager.StrokeStyle.DashStyle = dash;
+                    this.SelectionViewModel.StyleLayer = layer;
                 });
                 CanvasStrokeStyle strokeStyle = this.SelectionViewModel.StrokeStyle;
                 strokeStyle.DashStyle = dash;
@@ -106,6 +107,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.StyleManager.StrokeWidth = width;
+                    this.SelectionViewModel.StyleLayer = layer;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
@@ -137,6 +139,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.StyleManager.StrokeStyle.DashOffset = offset;
+                    this.SelectionViewModel.StyleLayer = layer;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
@@ -166,6 +169,7 @@ namespace Retouch_Photo2.Menus.Models
                     layer.StyleManager.StrokeStyle.DashCap = cap;
                     layer.StyleManager.StrokeStyle.StartCap = cap;
                     layer.StyleManager.StrokeStyle.EndCap = cap;
+                    this.SelectionViewModel.StyleLayer = layer;
                 });
                 CanvasStrokeStyle strokeStyle = this.SelectionViewModel.StrokeStyle;
                 strokeStyle.DashCap = cap;
@@ -188,6 +192,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.StyleManager.StrokeStyle.LineJoin = join;
+                    this.SelectionViewModel.StyleLayer = layer;
                 });
                 CanvasStrokeStyle strokeStyle = this.SelectionViewModel.StrokeStyle;
                 strokeStyle.LineJoin = join;

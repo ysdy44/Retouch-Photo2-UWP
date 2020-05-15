@@ -173,7 +173,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 Center = this.SelectionViewModel.GeometryTriangleCenter,
                 TransformManager = new TransformManager(transformer),
-                StyleManager = this.SelectionViewModel.GetStyleManagerGeometry()
+                StyleManager = this.SelectionViewModel.GeometryStyle
             };
         }
 

@@ -68,7 +68,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 SelectMode = SelectMode.Selected,
                 TransformManager = new TransformManager(transformer),
-                StyleManager = this.SelectionViewModel.GetStyleManagerGeometry()
+                StyleManager = this.SelectionViewModel.GeometryStyle
             };
         }
 

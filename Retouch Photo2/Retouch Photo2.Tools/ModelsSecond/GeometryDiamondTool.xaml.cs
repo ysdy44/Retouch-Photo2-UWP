@@ -173,7 +173,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 Mid = this.SelectionViewModel.GeometryDiamondMid,
                 TransformManager = new TransformManager(transformer),
-                StyleManager = this.SelectionViewModel.GetStyleManagerGeometry()
+                StyleManager = this.SelectionViewModel.GeometryStyle
             };
         }
 

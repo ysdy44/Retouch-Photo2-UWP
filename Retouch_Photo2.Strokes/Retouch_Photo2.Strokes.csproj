@@ -122,7 +122,6 @@
     <Compile Include="ShowControl.xaml.cs">
       <DependentUpon>ShowControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StrokeExtensions.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.Strokes.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +153,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Retouch Photo2.Brushs\Retouch Photo2.Brushs.csproj">
+      <Project>{00E87876-1AA4-4B48-AF1C-F1DB75FBF587}</Project>
+      <Name>Retouch Photo2.Brushs</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -173,6 +173,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StopsPickers\StopsManager.cs" />
     <Compile Include="StopsPickers\StopsSize.cs" />
+    <Compile Include="StrokeExtensions.cs" />
     <Compile Include="StyleManager.cs" />
     <Compile Include="XMLs\XML.CanvasGradientStopArray.cs" />
     <Compile Include="XMLs\XML.IBrush.cs" />

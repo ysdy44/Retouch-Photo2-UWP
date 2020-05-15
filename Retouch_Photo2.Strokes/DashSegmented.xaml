@@ -9,6 +9,12 @@
     d:DesignWidth="200"
     >
 
+    <UserControl.Resources>
+        <SolidColorBrush x:Name="CheckBrush" Color="White"/>
+        <SolidColorBrush x:Name="UnCheckBrush" Color="{ThemeResource SystemBaseHighColor}"/>
+    </UserControl.Resources>
+
+
     <Grid>
 
         <!--VisualState-->
@@ -22,6 +28,7 @@
                 <VisualState x:Name="Solid">
                     <VisualState.Setters>
                         <Setter Target = "SolidButton.IsEnabled" Value="False"/>
+                        <Setter Target = "SolidIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -29,6 +36,7 @@
                 <VisualState x:Name="Dash2">
                     <VisualState.Setters>
                         <Setter Target = "DashButton.IsEnabled" Value="False"/>
+                        <Setter Target = "DashIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -36,6 +44,7 @@
                 <VisualState x:Name="Dot">
                     <VisualState.Setters>
                         <Setter Target = "DotButton.IsEnabled" Value="False"/>
+                        <Setter Target = "DotIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -43,6 +52,7 @@
                 <VisualState x:Name="DashDot">
                     <VisualState.Setters>
                         <Setter Target = "DashDotButton.IsEnabled" Value="False"/>
+                        <Setter Target = "DashDotIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -62,7 +72,7 @@
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="SolidToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Line X1="22" X2="0" Y1="22" Y2="0" StrokeThickness="2" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <Line x:Name="SolidIcon" X1="22" X2="0" Y1="22" Y2="0" StrokeThickness="3" Stroke="{ThemeResource SystemBaseHighColor}"/>
         </Button>
 
         <!--Dash-->
@@ -70,7 +80,7 @@
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="DashToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Line X1="22" X2="0" Y1="22" Y2="0" StrokeDashArray="3 1" StrokeThickness="2" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <Line x:Name="DashIcon" X1="22" X2="0" Y1="22" Y2="0" StrokeDashArray="3 1" StrokeThickness="3" Stroke="{ThemeResource SystemBaseHighColor}"/>
         </Button>
 
         <!--Dot-->
@@ -78,7 +88,7 @@
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="DotToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Line X1="22" X2="0" Y1="22" Y2="0" StrokeDashArray="1 3" StrokeThickness="2" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <Line x:Name="DotIcon" X1="22" X2="0" Y1="22" Y2="0" StrokeDashArray="1 3" StrokeThickness="3" Stroke="{ThemeResource SystemBaseHighColor}"/>
         </Button>
 
         <!--DashDot-->
@@ -86,7 +96,7 @@
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="DashDotToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Line X1="22" X2="0" Y1="22" Y2="0" StrokeDashArray="1 2 1" StrokeThickness="2" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <Line x:Name="DashDotIcon" X1="22" X2="0" Y1="22" Y2="0" StrokeDashArray="1 2 1" StrokeThickness="3" Stroke="{ThemeResource SystemBaseHighColor}"/>
         </Button>
 
     </Grid>

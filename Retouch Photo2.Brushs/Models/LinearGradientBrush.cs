@@ -184,22 +184,6 @@ namespace Retouch_Photo2.Brushs.Models
         }
 
 
-        public void OneBrushPoints(Transformer transformer)
-        {
-            Matrix3x2 oneMatrix = Transformer.FindHomography(transformer, Transformer.One);
-
-            this._startingStartPoint = Vector2.Transform(this.StartPoint, oneMatrix);
-            this._startingEndPoint = Vector2.Transform(this.EndPoint, oneMatrix);
-        }
-        public void DeliverBrushPoints(Transformer transformer)
-        {
-            Matrix3x2 matrix = Transformer.FindHomography(Transformer.One, transformer);
-
-            this.StartPoint = Vector2.Transform(this._startingStartPoint, matrix);
-            this.EndPoint = Vector2.Transform(this._startingEndPoint, matrix);
-        }
-
-
         //@Interface
         public void CacheTransform()
         {

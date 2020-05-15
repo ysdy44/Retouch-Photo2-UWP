@@ -151,7 +151,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 HoleRadius = this.SelectionViewModel.GeometryDountHoleRadius,
                 TransformManager = new TransformManager(transformer),
-                StyleManager = this.SelectionViewModel.GetStyleManagerGeometry()
+                StyleManager = this.SelectionViewModel.GeometryStyle
             };
         }
 

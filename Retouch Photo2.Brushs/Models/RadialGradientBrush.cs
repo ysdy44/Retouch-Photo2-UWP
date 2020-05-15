@@ -81,18 +81,18 @@ namespace Retouch_Photo2.Brushs.Models
 
         public BrushOperateMode ContainsOperateMode(Vector2 point, Matrix3x2 matrix)
         {
+            Vector2 point2 = Vector2.Transform(this.Point, matrix);
+            if (FanKit.Math.InNodeRadius(point, point2))
+            {
+                return BrushOperateMode.RadialPoint;
+            }
+
             Vector2 center = Vector2.Transform(this.Center, matrix);
             if (FanKit.Math.InNodeRadius(point, center))
             {
                 this._startingPoint = this.Point;
                 this._startingCenter = this.Center;
                 return BrushOperateMode.RadialCenter;
-            }
-
-            Vector2 point2 = Vector2.Transform(this.Point, matrix);
-            if (FanKit.Math.InNodeRadius(point, point2))
-            {
-                return BrushOperateMode.RadialPoint;
             }
 
             return BrushOperateMode.None;
@@ -113,7 +113,7 @@ namespace Retouch_Photo2.Brushs.Models
                 case BrushOperateMode.RadialPoint:
                     this.Point = point;
                     break;
-            }    
+            }
         }
 
         public void Draw(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Color accentColor)
@@ -167,22 +167,6 @@ namespace Retouch_Photo2.Brushs.Models
             if (element.Element("Array") is XElement array) this.Array = XML.LoadCanvasGradientStopArray(array);
             if (element.Element("Center") is XElement center) this.Center = FanKit.Transformers.XML.LoadVector2(center);
             if (element.Element("Point") is XElement point) this.Point = FanKit.Transformers.XML.LoadVector2(point);
-        }
-
-
-        public void OneBrushPoints(Transformer transformer)
-        {
-            Matrix3x2 oneMatrix = Transformer.FindHomography(transformer, Transformer.One);
-
-            this._startingCenter = Vector2.Transform(this.Center, oneMatrix);
-            this._startingPoint = Vector2.Transform(this.Point, oneMatrix);
-        }
-        public void DeliverBrushPoints(Transformer transformer)
-        {
-            Matrix3x2 matrix = Transformer.FindHomography(Transformer.One, transformer);
-
-            this.Center = Vector2.Transform(this._startingCenter, matrix);
-            this.Point = Vector2.Transform(this._startingPoint, matrix);
         }
 
 

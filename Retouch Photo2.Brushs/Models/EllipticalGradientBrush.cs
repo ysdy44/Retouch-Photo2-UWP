@@ -50,7 +50,7 @@ namespace Retouch_Photo2.Brushs.Models
             Vector2 center = transformer.Center;
             Vector2 xPoint = transformer.CenterRight;
             Vector2 yPoint = transformer.CenterBottom;
-                       
+
             this.Center = center;
             this.XPoint = xPoint;
             this.YPoint = yPoint;
@@ -207,7 +207,7 @@ namespace Retouch_Photo2.Brushs.Models
                 Array = (CanvasGradientStop[])this.Array.Clone(),
 
                 Center = this.Center,
-                _startingCenter= this._startingCenter,
+                _startingCenter = this._startingCenter,
 
                 XPoint = this.XPoint,
                 _startingXPoint = this._startingXPoint,
@@ -230,24 +230,6 @@ namespace Retouch_Photo2.Brushs.Models
             if (element.Element("Center") is XElement center) this.Center = FanKit.Transformers.XML.LoadVector2(center);
             if (element.Element("XPoint") is XElement xPoint) this.XPoint = FanKit.Transformers.XML.LoadVector2(xPoint);
             if (element.Element("YPoint") is XElement yPoint) this.YPoint = FanKit.Transformers.XML.LoadVector2(yPoint);
-        }
-
-
-        public void OneBrushPoints(Transformer transformer)
-        {
-            Matrix3x2 oneMatrix = Transformer.FindHomography(transformer, Transformer.One);
-
-            this._startingCenter = Vector2.Transform(this.Center, oneMatrix);
-            this._startingXPoint = Vector2.Transform(this.XPoint, oneMatrix);
-            this._startingYPoint = Vector2.Transform(this.YPoint, oneMatrix);
-        }
-        public void DeliverBrushPoints(Transformer transformer)
-        {
-            Matrix3x2 matrix = Transformer.FindHomography(Transformer.One, transformer);
-
-            this.Center = Vector2.Transform(this._startingCenter, matrix);
-            this.XPoint = Vector2.Transform(this._startingXPoint, matrix);
-            this.YPoint = Vector2.Transform(this._startingYPoint, matrix);
         }
 
 
