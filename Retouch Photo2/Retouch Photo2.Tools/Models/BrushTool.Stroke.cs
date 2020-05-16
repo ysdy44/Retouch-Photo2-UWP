@@ -1,7 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Brushs.Models;
 using Retouch_Photo2.Historys;
 using System;
 using System.Numerics;
@@ -33,7 +32,7 @@ namespace Retouch_Photo2.Tools.Models
             this._operateMode = this.Stroke.ContainsOperateMode(startingPoint, matrix);
 
             //InitializeController
-            if (this._operateMode == BrushOperateMode.InitializeController)
+            if (this._operateMode == BrushOperateMode.None)
             {
                 switch (this.Stroke.Type)
                 {
@@ -45,7 +44,7 @@ namespace Retouch_Photo2.Tools.Models
                             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
                             //Selection          
-                            this.Stroke = new LinearGradientBrush(canvasStartingPoint, canvasPoint);
+                            this.Stroke = BrushBase.LinearGradientBrush(canvasStartingPoint, canvasPoint);
                         }
                         break;
                 }
@@ -75,7 +74,7 @@ namespace Retouch_Photo2.Tools.Models
             switch (this._operateMode)
             {
                 //InitializeController
-                case BrushOperateMode.InitializeController:
+                case BrushOperateMode.None:
                     {
                         //Selection
                         this.Stroke.InitializeController(canvasStartingPoint, canvasPoint);
@@ -180,7 +179,7 @@ namespace Retouch_Photo2.Tools.Models
                 case BrushType.LinearGradient:
                 case BrushType.RadialGradient:
                 case BrushType.EllipticalGradient:
-                    this.StopsPicker.SetArray(this.Stroke.Array);
+                    this.StopsPicker.SetArray(this.Stroke.Stops);
                     this.StopsFlyout.ShowAt(this);//Flyout
                     break;
 
@@ -197,12 +196,12 @@ namespace Retouch_Photo2.Tools.Models
         {
             if (this._isStopsFlyoutShowed == false) return;
 
-            this.Stroke.Array = (CanvasGradientStop[])array.Clone();
+            this.Stroke.Stops = (CanvasGradientStop[])array.Clone();
 
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                layer.Style.Stroke.Array = (CanvasGradientStop[])array.Clone();
+                layer.Style.Stroke.Stops = (CanvasGradientStop[])array.Clone();
                 this.SelectionViewModel.StyleLayer = layer;
             });
 

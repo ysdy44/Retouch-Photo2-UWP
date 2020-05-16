@@ -85,15 +85,15 @@ namespace Retouch_Photo2.Brushs
                   return this.ColorBrush;
 
                 case BrushType.LinearGradient:
-                    this.LinearGradientBrush.GradientStops = brush.Array.ToStops();
+                    this.LinearGradientBrush.GradientStops = brush.Stops.ToStops();
                     return this.LinearGradientBrush;
 
                 case BrushType.RadialGradient:
-                    this.RadialGradientBrush.GradientStops = brush.Array.ToStops();
+                    this.RadialGradientBrush.GradientStops = brush.Stops.ToStops();
                     return this.RadialGradientBrush;
 
                 case BrushType.EllipticalGradient:
-                    this.EllipticalGradientBrush.GradientStops = brush.Array.ToStops();
+                    this.EllipticalGradientBrush.GradientStops = brush.Stops.ToStops();
                     return this.EllipticalGradientBrush;
 
                 case BrushType.Image:

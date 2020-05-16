@@ -1,7 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Brushs.Models;
 using Retouch_Photo2.Layers;
 using System.ComponentModel;
 using System.Linq;
@@ -64,19 +63,19 @@ namespace Retouch_Photo2.ViewModels
             switch (fillOrStroke)
             {
                 case FillOrStroke.Fill:
-                    this.Fill = new ColorBrush(color);
+                    this.Fill = BrushBase.ColorBrush(color);
                     this.SetValue((layer) =>
                     {
-                        layer.Style.Fill = new ColorBrush(color);
+                        layer.Style.Fill = BrushBase.ColorBrush(color);
                         this.StyleLayer = layer;
                     });
                     break;
 
                 case FillOrStroke.Stroke:
-                    this.Stroke = new ColorBrush(color);
+                    this.Stroke = BrushBase.ColorBrush(color);
                     this.SetValue((layer) =>
                     {
-                        layer.Style.Stroke = new ColorBrush(color);
+                        layer.Style.Stroke = BrushBase.ColorBrush(color);
                         this.StyleLayer = layer;
                     });
                     break;
@@ -97,7 +96,7 @@ namespace Retouch_Photo2.ViewModels
                 this.OnPropertyChanged(nameof(this.Fill));//Notify 
             }
         }
-        private IBrush fill = new ColorBrush(Colors.LightGray);
+        private IBrush fill = BrushBase.ColorBrush(Colors.LightGray);
 
         /// <summary> Retouch_Photo2's the only stroke. </summary>
         public IBrush Stroke
@@ -109,7 +108,7 @@ namespace Retouch_Photo2.ViewModels
                 this.OnPropertyChanged(nameof(this.Stroke));//Notify 
             }
         }
-        private IBrush stroke = new NoneBrush();
+        private IBrush stroke = new BrushBase();
 
         /// <summary> Retouch_Photo2's the only stroke-width. </summary>
         public float StrokeWidth
@@ -141,8 +140,8 @@ namespace Retouch_Photo2.ViewModels
             if (style == null)
             {
                 this.IsFollowTransform = true;
-                this.Fill = new NoneBrush();
-                this.Stroke = new NoneBrush();
+                this.Fill = new BrushBase();
+                this.Stroke = new BrushBase();
                 this.StrokeWidth = 0;
                 this.StrokeStyle = new CanvasStrokeStyle();
             }
@@ -243,8 +242,8 @@ namespace Retouch_Photo2.ViewModels
 
                 return new Style
                 {
-                    Fill = new ColorBrush(Colors.LightGray),
-                    Stroke = new NoneBrush(),
+                    Fill = BrushBase.ColorBrush(Colors.LightGray),
+                    Stroke = new BrushBase(),
                     StrokeWidth = 0,
                     StrokeStyle = new CanvasStrokeStyle(),
                 };
@@ -270,8 +269,8 @@ namespace Retouch_Photo2.ViewModels
 
                 return new Style
                 {
-                    Fill = new NoneBrush(),
-                    Stroke = new ColorBrush(Colors.Black),
+                    Fill = new BrushBase(),
+                    Stroke = BrushBase.ColorBrush(Colors.Black),
                     StrokeWidth = 3,
                     StrokeStyle = new CanvasStrokeStyle(),
                 };
@@ -297,8 +296,8 @@ namespace Retouch_Photo2.ViewModels
 
                 return new Style
                 {
-                    Fill = new ColorBrush(Colors.Black),
-                    Stroke = new NoneBrush(),
+                    Fill = BrushBase.ColorBrush(Colors.Black),
+                    Stroke = new BrushBase(),
                     StrokeWidth = 0,
                     StrokeStyle = new CanvasStrokeStyle(),
                 };

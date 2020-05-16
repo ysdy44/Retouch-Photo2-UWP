@@ -3,7 +3,6 @@ using HSVColorPickers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Brushs.Models;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
@@ -122,27 +121,18 @@ namespace Retouch_Photo2.Tools.Models
 
             switch (brushType)
             {
-                case BrushType.None: return new NoneBrush();
+                case BrushType.None: return new BrushBase();
 
-                case BrushType.Color: return new ColorBrush(Colors.LightGray);
+                case BrushType.Color: return BrushBase.ColorBrush(Colors.LightGray);
 
                 case BrushType.LinearGradient:
-                    return new LinearGradientBrush(transformer)
-                    {
-                        Array = (brush.Array == null) ? GreyWhiteMeshHelpher.GetGradientStopArray() : (CanvasGradientStop[])brush.Array.Clone()
-                    };
+                    return BrushBase.LinearGradientBrush(transformer, (brush.Stops == null) ? GreyWhiteMeshHelpher.GetGradientStopArray() : (CanvasGradientStop[])brush.Stops.Clone());
 
                 case BrushType.RadialGradient:
-                    return new RadialGradientBrush(transformer)
-                    {
-                        Array = (brush.Array == null) ? GreyWhiteMeshHelpher.GetGradientStopArray() : (CanvasGradientStop[])brush.Array.Clone()
-                    };
+                    return BrushBase.RadialGradientBrush(transformer, (brush.Stops == null) ? GreyWhiteMeshHelpher.GetGradientStopArray() : (CanvasGradientStop[])brush.Stops.Clone());
 
                 case BrushType.EllipticalGradient:
-                    return new EllipticalGradientBrush(transformer)
-                    {
-                        Array = (brush.Array == null) ? GreyWhiteMeshHelpher.GetGradientStopArray() : (CanvasGradientStop[])brush.Array.Clone()
-                    };
+                    return BrushBase.EllipticalGradientBrush(transformer, (brush.Stops == null) ? GreyWhiteMeshHelpher.GetGradientStopArray() : (CanvasGradientStop[])brush.Stops.Clone());
 
                 case BrushType.Image: return null;
 
@@ -189,7 +179,7 @@ namespace Retouch_Photo2.Tools.Models
         readonly ToolButton _button = new ToolButton(new BrushIcon());
 
 
-        BrushOperateMode _operateMode = BrushOperateMode.InitializeController;
+        BrushOperateMode _operateMode = BrushOperateMode.None;
 
 
         public void Started(Vector2 startingPoint, Vector2 point)
@@ -231,7 +221,7 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             if (this.Mode == ListViewSelectionMode.None) return;
 
-            this._operateMode = BrushOperateMode.InitializeController;
+            this._operateMode = BrushOperateMode.None;
 
             switch (this.FillOrStroke)
             {

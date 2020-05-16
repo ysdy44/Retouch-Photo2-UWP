@@ -1,8 +1,8 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Brushs.Models;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
@@ -19,6 +19,10 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Override     
         public override LayerType Type => LayerType.Image;
+
+
+        /// <summary> <see cref = "ImageLayer" />'s photocopier. </summary>
+        public Photocopier Photocopier { get; set; }
 
 
         //@Construct   
@@ -45,25 +49,39 @@ namespace Retouch_Photo2.Layers.Models
                 Icon = new ImageIcon(),
                 Text = this.ConstructStrings(),
             };
-
-            base.Style = new Style
-            {
-                Fill = new ImageBrush(transformer)
-                {
-                    Photocopier = photocopier
-                }
-            };
+            this.Photocopier = photocopier;
         }
 
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            ImageLayer imageLayer = new ImageLayer();
+            ImageLayer imageLayer = new ImageLayer()
+            {
+                Photocopier = this.Photocopier,
+            };
 
             LayerBase.CopyWith(resourceCreator, imageLayer, this);
             return imageLayer;
         }
 
+
+        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
+        {
+            Photocopier photocopier = this.Photocopier;
+            if (photocopier.Name == null) return null;
+
+            Photo photo = Photo.FindFirstPhoto(photocopier);
+            CanvasBitmap bitmap = photo.Source;
+
+            Matrix3x2 matrix2 = base.Transform.GetMatrix();
+            return new Transform2DEffect
+            {
+                TransformMatrix = matrix2 * canvasToVirtualMatrix,
+                Source = bitmap,
+                //TODO:  Enmu
+                //InterpolationMode= CanvasImageInterpolation.Cubic
+            };
+        }
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
@@ -85,6 +103,17 @@ namespace Retouch_Photo2.Layers.Models
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             return resource.GetString("/Layers/Image");
+        }
+
+        /// <summary>
+        /// Convert to image brush.
+        /// </summary>
+        /// <returns> The product brush. </returns>
+        public IBrush ToBrush()
+        {
+            Photocopier photocopier = this.Photocopier;
+            Transformer transformer = this.Transform.Destination;
+            return BrushBase.ImageBrush(transformer, photocopier);
         }
 
     }

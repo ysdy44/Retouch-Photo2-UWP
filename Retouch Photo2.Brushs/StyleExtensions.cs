@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Brushs
                     {
                         StartPoint = new Point(0, 0.5),
                         EndPoint = new Point(1, 0.5),
-                        GradientStops = brush.Array.ToStops()
+                        GradientStops = brush.Stops.ToStops()
                     };
 
                 case BrushType.RadialGradient: return new RadialGradientBrush
@@ -34,7 +34,7 @@ namespace Retouch_Photo2.Brushs
                         GradientOrigin = new Point(0.5, 0.5),
                         RadiusX = 0.2,
                         RadiusY = 0.6,
-                        GradientStops = brush.Array.ToStops()
+                        GradientStops = brush.Stops.ToStops()
                     };
 
                 case BrushType.EllipticalGradient: return new RadialGradientBrush
@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Brushs
                         GradientOrigin = new Point(0.5, 0.5),
                         RadiusX = 0.5,
                         RadiusY = 0.5,
-                        GradientStops = brush.Array.ToStops()
+                        GradientStops = brush.Stops.ToStops()
                     };
 
                 default: return null;

@@ -1,10 +1,4 @@
-﻿using Retouch_Photo2.Brushs.Models;
-using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Brushs.ExtendIcons;
-using System;
-using Windows.ApplicationModel.Resources;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+﻿using Microsoft.Graphics.Canvas;
 
 namespace Retouch_Photo2.Brushs
 {

@@ -2,7 +2,6 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Brushs.Models;
 using System.Numerics;
 
 namespace Retouch_Photo2.Brushs
@@ -16,14 +15,14 @@ namespace Retouch_Photo2.Brushs
         public bool IsFollowTransform = true;
 
         /// <summary> Gets or sets Style's fill. </summary>
-        public IBrush Fill = new NoneBrush();
+        public IBrush Fill = new BrushBase();
         /// <summary> The cache of <see cref="Style.Fill"/>. </summary>
         public IBrush StartingFill { get; private set; }
         /// <summary> Cache the <see cref="Style.Fill"/>. </summary>
         public void CacheFill() => this.StartingFill = this.Fill.Clone();
         
         /// <summary> Gets or sets Style's stroke. </summary>
-        public IBrush Stroke = new NoneBrush();
+        public IBrush Stroke = new BrushBase();
         /// <summary> The cache of <see cref="Style.Stroke"/>. </summary>
         public IBrush StartingStroke { get; private set; }
         /// <summary> Cache the <see cref="Style.Stroke"/>. </summary>

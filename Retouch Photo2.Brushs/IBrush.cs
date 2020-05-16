@@ -1,10 +1,8 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
-using Retouch_Photo2.Brushs.Models;
 using Retouch_Photo2.Elements;
 using System.Numerics;
-using System.Xml.Linq;
 using Windows.UI;
 
 namespace Retouch_Photo2.Brushs
@@ -15,27 +13,28 @@ namespace Retouch_Photo2.Brushs
     public interface IBrush: ICacheTransform
     {
 
-        /// <summary> <see cref="IBrush">'s type. </summary>
-        BrushType Type { get; }
+        /// <summary> Gets of sets the type. </summary>
+        BrushType Type { get; set; }
 
-        /// <summary> Gets <see cref="GradientBrush">'s array. </summary>
-        CanvasGradientStop[] Array { get; set; }
-        /// <summary> <see cref="ColorBrush"/>'s Color. </summary>
+        /// <summary> Gets of sets the color. </summary>
         Color Color { get; set; }
-        /// <summary> <see cref="ImageBrush"/>'s Destination. </summary>
-        Transformer Destination { set; }
-        /// <summary> <see cref="ImageBrush"/>'s Photocopier. </summary>
-        Photocopier Photocopier { get; }
-        /// <summary> <see cref="ImageBrush"/>'s Extend. </summary>
+
+        /// <summary> Gets of sets the stops. </summary>
+        CanvasGradientStop[] Stops { get; set; }
+
+        /// <summary> Gets of sets the photocopier. </summary>
+        Photocopier Photocopier { get; set; }
+        /// <summary> Gets of sets the extend. </summary>
         CanvasEdgeBehavior Extend { get; set; }
 
+        /// <summary> Gets of sets the center point. </summary>
+        Vector2 Center { get; set; }
+        /// <summary> Gets of sets the x-point. </summary>
+        Vector2 XPoint { get; set; }
+        /// <summary> Gets of sets the y-point. </summary>
+        Vector2 YPoint { get; set; }
 
-        /// <summary>
-        /// Gets <see cref="ICanvasBrush"/>.
-        /// </summary>
-        /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <returns> The provided <see cref="ICanvasBrush"/>. </returns>
-        ICanvasBrush GetICanvasBrush(ICanvasResourceCreator resourceCreator);
+        
         /// <summary>
         /// Gets <see cref="ICanvasBrush"/>.
         /// </summary>
@@ -80,17 +79,6 @@ namespace Retouch_Photo2.Brushs
         /// </summary>
         /// <returns> The cloned <see cref="IBrush"/>. </returns>
         IBrush Clone();
-
-        /// <summary>
-        /// Saves the entire <see cref="IBrush"/> to a XElement.
-        /// </summary>
-        /// <param name="element"> The destination XElement. </param>
-        void SaveWith(XElement element);
-        /// <summary>
-        /// Load the entire <see cref="IBrush"/> form a XElement.
-        /// </summary>
-        /// <param name="element"> The destination XElement. </param>
-        void Load(XElement element);
 
     }
 }

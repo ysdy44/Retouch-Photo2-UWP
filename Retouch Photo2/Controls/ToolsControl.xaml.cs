@@ -77,12 +77,11 @@ namespace Retouch_Photo2.Controls
 
                     element.Tapped += (s, e) =>
                     {
+                        this.TipViewModel.Tool = tool;
                         this.TipViewModel.ToolGroupType(tool.Type);
 
-                        this.TipViewModel.Tool = tool;
-
                         this.ViewModel.Invalidate();//Invalidate
-                };
+                    };
                 }
             }
         }
@@ -98,14 +97,13 @@ namespace Retouch_Photo2.Controls
             ITool tool = this.TipViewModel.Tools.FirstOrDefault();
             if (tool != null)
             {
-                this.TipViewModel.ToolGroupType(tool.Type);
-
                 this.TipViewModel.Tool = tool;
+                this.TipViewModel.ToolGroupType(tool.Type);
             }
         }
 
 
         #endregion
-               
+
     }
 }

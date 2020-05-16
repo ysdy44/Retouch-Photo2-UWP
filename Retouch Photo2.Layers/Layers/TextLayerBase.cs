@@ -37,7 +37,7 @@ namespace Retouch_Photo2.Layers.Models
 
             element.Add(new XElement("HorizontalAlignment", this.FontAlignment));
             element.Add(new XElement("FontStyle", this.FontStyle));
-            element.Add(new XElement("FontWeight", this.FontWeight.Weight));
+            element.Add(new XElement("FontWeight", this.FontWeight));//TODO:?
         }
         public override void Load(XElement element)
         {
@@ -45,34 +45,11 @@ namespace Retouch_Photo2.Layers.Models
             if (element.Element("FontSize") is XElement fontSize) this.FontSize = (float)fontSize;
             if (element.Element("FontFamily") is XElement fontFamily) this.FontFamily = fontFamily.Value;
 
-            if (element.Element("HorizontalAlignment") is XElement horizontalAlignment)
-            {
-                switch (horizontalAlignment.Value)
-                {
-                    case "Left": this.FontAlignment = CanvasHorizontalAlignment.Left; break;
-                    case "Right": this.FontAlignment = CanvasHorizontalAlignment.Right; break;
-                    case "Center": this.FontAlignment = CanvasHorizontalAlignment.Center; break;
-                    default: this.FontAlignment = CanvasHorizontalAlignment.Justified; break;
-                }
-            }
-            if (element.Element("FontStyle") is XElement fontStyle)
-            {
-                switch (fontStyle.Value)
-                {
-                    case "Normal": this.FontStyle = FontStyle.Normal; break;
-                    case "Oblique": this.FontStyle = FontStyle.Oblique; break;
-                    default: this.FontStyle = FontStyle.Italic; break;
-                }
-            }
-            if (element.Element("FontWeight") is XElement fontWeight)
-            {
-                this.FontWeight = new FontWeight
-                {
-                    Weight = (ushort)(int)fontWeight
-                };
-            }
+            if (element.Element("HorizontalAlignment") is XElement horizontalAlignment) this.FontAlignment = Retouch_Photo2.Characters.XML.CreateHorizontalAlignment(horizontalAlignment.Value);
+            if (element.Element("FontStyle") is XElement fontStyle) this.FontStyle = Retouch_Photo2.Characters.XML.CreateFontStyle(fontStyle.Value);
+            if (element.Element("FontWeight") is XElement fontWeight) this.FontWeight= Retouch_Photo2.Characters.XML.CreateFontWeight(fontWeight.Value);
         }
-
+        
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {

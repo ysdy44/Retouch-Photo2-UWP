@@ -1,6 +1,4 @@
-﻿using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Brushs.Models;
-using Retouch_Photo2.Elements;
+﻿using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;

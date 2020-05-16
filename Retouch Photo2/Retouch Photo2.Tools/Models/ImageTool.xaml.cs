@@ -1,7 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Brushs.Models;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
@@ -134,18 +132,7 @@ namespace Retouch_Photo2.Tools.Models
 
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
             mezzanineLayer.Transform.Destination = transformerDestination;
-
-
-            //IBrush
-            IBrush brush = mezzanineLayer.Style.Fill;
-            if (brush == null) return;
-
-            if (brush.Type == BrushType.Image)
-            {
-                brush.Destination = transformerDestination;
-            }
-
-
+                       
             //Selection
             this.SelectionViewModel.Transformer = transformerDestination;//Selection
 

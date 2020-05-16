@@ -1,15 +1,15 @@
 ﻿namespace Retouch_Photo2.Brushs
 {
     /// <summary>
-    /// Mode of <see cref="Brush"> operate.
+    /// Mode of <see cref="BrushHandle">.
     /// </summary>
-    public enum BrushOperateMode
+    public enum BrushHandleMode
     {
+        /// <summary> Normal. </summary>
         None,
 
         Center,
-        
         XPoint,
         YPoint,
-    }    
+    }
 }

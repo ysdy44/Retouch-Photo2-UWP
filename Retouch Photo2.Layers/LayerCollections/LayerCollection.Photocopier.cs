@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers.Models;
 using System.Collections.Generic;
 
 namespace Retouch_Photo2.Layers
@@ -19,6 +20,13 @@ namespace Retouch_Photo2.Layers
                 foreach (Photocopier photocopier in this._getPhotocopiers(child.Children))
                 {
                     yield return photocopier;
+                }
+
+                //ImageLayer
+                if (child.Type== LayerType.Image)
+                {
+                    ImageLayer imageLayer = (ImageLayer)child;
+                    yield return imageLayer.Photocopier;
                 }
 
                 //Fill

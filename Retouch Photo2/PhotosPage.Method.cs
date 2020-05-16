@@ -1,6 +1,5 @@
 ﻿using FanKit.Transformers;
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Brushs.Models;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
@@ -64,7 +63,7 @@ namespace Retouch_Photo2
 
         private void Fill()
         {
-            ImageBrush imageBrush = this._getImageBrush();
+            IBrush imageBrush = this._getImageBrush();
             if (imageBrush == null) return;
 
             //History
@@ -89,7 +88,7 @@ namespace Retouch_Photo2
         }
         private void Stroke()
         {
-            ImageBrush imageBrush = this._getImageBrush();
+            IBrush imageBrush = this._getImageBrush();
             if (imageBrush == null) return;
 
             //History
@@ -112,22 +111,18 @@ namespace Retouch_Photo2
 
             this.Frame.GoBack();
         }
-        private ImageBrush _getImageBrush()
+        private IBrush _getImageBrush()
         {
             //Photo
             Photo photo = this._vsPhoto;
             if (photo == null) return null;
+            Photocopier photocopier = photo.ToPhotocopier();
 
             //Transformer
             Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
             Transformer transformer = this.SelectionViewModel.Transformer;
 
-            return new ImageBrush
-            {
-                Source = transformerSource,
-                Destination = transformer,
-                Photocopier = photo.ToPhotocopier(),
-            };
+            return BrushBase.ImageBrush(transformer, photocopier);
         }
 
 
@@ -147,6 +142,7 @@ namespace Retouch_Photo2
             //Photo
             Photo photo = this._vsPhoto;
             if (photo == null) return;
+            Photocopier photocopier = photo.ToPhotocopier();
 
             //Transformer
             Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
@@ -156,18 +152,15 @@ namespace Retouch_Photo2
             {
                 if (layer.Type == LayerType.Image)
                 {
-
-                    layer.Transform = new Transform
+                    ImageLayer imageLayer = (ImageLayer)layer;
+                    imageLayer.Photocopier = photocopier;
+                    imageLayer.Transform = new Transform
                     {
                         Source = transformerSource,
                         Destination = layer.Transform.Destination,
                     };
-                    layer.Style.Fill = new ImageBrush(transformerSource)
-                    {
-                        Photocopier = photo.ToPhotocopier()
-                    };
-                    this.SelectionViewModel.StyleLayer = layer;
 
+                    this.SelectionViewModel.StyleLayer = layer;
                 }
             });
 

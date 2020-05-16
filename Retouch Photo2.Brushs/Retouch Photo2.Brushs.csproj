@@ -106,6 +106,10 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Models\BrushBase222222.cs" />
+    <Compile Include="Models\BrushHandle.cs" />
+    <Compile Include="Models\BrushHandleMode.cs" />
+    <Compile Include="Models\BrushHandle.EllipticalGradient.cs" />
     <Compile Include="BrushOperateMode.cs" />
     <Compile Include="BrushTypes\BrushTypeComboBox.xaml.cs">
       <DependentUpon>BrushTypeComboBox.xaml</DependentUpon>
@@ -153,12 +157,7 @@
       <DependentUpon>FillIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="IBrush.cs" />
-    <Compile Include="Models\EllipticalGradientBrush.cs" />
-    <Compile Include="Models\ImageBrush.cs" />
-    <Compile Include="Models\LinearGradientBrush.cs" />
-    <Compile Include="Models\NoneBrush.cs" />
-    <Compile Include="Models\RadialGradientBrush.cs" />
-    <Compile Include="Models\ColorBrush.cs" />
+    <Compile Include="Models\BrushBase.cs" />
     <Compile Include="Retouch Photo2.Styles\Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
@@ -200,9 +199,9 @@
     <Compile Include="StopsPickers\StopsSize.cs" />
     <Compile Include="StyleExtensions.cs" />
     <Compile Include="Style.cs" />
-    <Compile Include="XMLs\XML.CanvasGradientStopArray.cs" />
+    <Compile Include="XMLs\XML.GradientStop.cs" />
     <Compile Include="XMLs\XML.IBrush.cs" />
-    <Compile Include="XMLs\XML.BrushFactory.cs" />
+    <Compile Include="XMLs\XML.BrushTypeFactory.cs" />
     <Compile Include="XMLs\XML.ExtendFactory.cs" />
     <Compile Include="XMLs\XML.Style.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo.Brushs.rd.xml" />

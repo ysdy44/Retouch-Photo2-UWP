@@ -1,4 +1,4 @@
-﻿using Retouch_Photo2.Brushs.Models;
+﻿using System.Linq;
 using System.Xml.Linq;
 
 namespace Retouch_Photo2.Brushs
@@ -18,11 +18,23 @@ namespace Retouch_Photo2.Brushs
         {
             XElement element = new XElement(elementName);
             element.Add(new XAttribute("Type", brush.Type));
+            element.Add(FanKit.Transformers.XML.SaveColor("Color", brush.Color));
 
-            //SaveWith
-            {
-                brush.SaveWith(element);
-            }
+            if (brush.Stops != null) element.Add(new XElement
+            (
+                "Stops",
+                from stop
+                in brush.Stops
+                select XML.SaveStop("Stop", stop)
+            ));
+            
+            element.Add(Retouch_Photo2.Elements.XML.SavePhotocopier("Photocopier", brush.Photocopier));
+            element.Add(new XAttribute("Extend", brush.Extend));
+
+            element.Add(FanKit.Transformers.XML.SaveVector2("Center", brush.Center));
+            element.Add(FanKit.Transformers.XML.SaveVector2("XPoint", brush.XPoint));
+            element.Add(FanKit.Transformers.XML.SaveVector2("YPoint", brush.YPoint));
+
             return element;
         }
 
@@ -33,18 +45,26 @@ namespace Retouch_Photo2.Brushs
         /// <returns> The loaded <see cref="IBrush"/>. </returns>
         public static IBrush LoadBrush(XElement element)
         {
-            if (element.Attribute("Type") is XAttribute type2)
-            {
-                string type = type2.Value;
+            BrushBase brush = new BrushBase();
+            if (element.Attribute("Type") is XAttribute type) brush.Type = XML.CreateBrushType(type.Value);
 
-                //Load
-                IBrush brush = XML.CreateBrush(type);
-                {
-                    brush.Load(element);
-                }
-                return brush;
-            }
-            else return new NoneBrush();
+            if (element.Element("Color") is XElement color) brush.Color = FanKit.Transformers.XML.LoadColor(color);
+
+            if (element.Element("Stops") is XElement stops) brush.Stops =
+            (
+                from stop
+                in stops.Elements()
+                select XML.LoadStop(stop)
+            ).ToArray();
+
+            if (element.Element("Photocopier") is XElement photocopier) brush.Photocopier = Retouch_Photo2.Elements.XML.LoadPhotocopier(photocopier);
+            if (element.Element("Extend") is XElement extend) brush.Extend = Retouch_Photo2.Brushs.XML.CreateExtend(extend.Value);
+
+            if (element.Element("Center") is XElement center) brush.Center = FanKit.Transformers.XML.LoadVector2(center);
+            if (element.Element("XPoint") is XElement xPoint) brush.XPoint = FanKit.Transformers.XML.LoadVector2(xPoint);
+            if (element.Element("YPoint") is XElement yPoint) brush.YPoint = FanKit.Transformers.XML.LoadVector2(yPoint);
+
+            return brush;
         }
 
     }
