@@ -81,9 +81,15 @@ namespace Retouch_Photo2
                 this.SettingViewModel.Setting = setting;
             }
 
-            //Layout
-            this.SettingViewModel.ConstructLayout();
-            
+            //Theme
+            this.SettingViewModel.ConstructTheme();
+
+            //DeviceLayout
+            this.SettingViewModel.ConstructDeviceLayout();
+
+            //MenuType
+            this.SettingViewModel.ConstructMenuType(this.TipViewModel.Menus);
+
             //Key
             this.SettingViewModel.ConstructKey();
             if (this.SettingViewModel.Move == null)

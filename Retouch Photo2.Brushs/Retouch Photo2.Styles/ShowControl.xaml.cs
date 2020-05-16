@@ -26,8 +26,8 @@ namespace Retouch_Photo2.Styles
 
             if (e.NewValue is Brushs.Style value)
             {
-                con.Shape.Fill = value.FillBrush.ToBrush();
-                con.Shape.Stroke = value.StrokeBrush.ToBrush();
+                con.Shape.Fill = value.Fill.ToBrush();
+                con.Shape.Stroke = value.Stroke.ToBrush();
                 con.Shape.StrokeThickness = value.StrokeWidth;
 
                 con.Shape.SetStrokeStyle(value.StrokeStyle);

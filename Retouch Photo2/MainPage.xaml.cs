@@ -18,8 +18,9 @@ namespace Retouch_Photo2
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel ;
-
+        SettingViewModel SettingViewModel => App.SettingViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
+        
         ObservableCollection<ProjectViewItem> ProjectViewItems = new ObservableCollection<ProjectViewItem>();
 
 

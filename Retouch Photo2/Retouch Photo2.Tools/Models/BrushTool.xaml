@@ -51,8 +51,8 @@
             <TextBlock x:Name="BrushTypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <brushs:BrushTypeComboBox x:Name="BrushTypeComboBox" 
                  FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
-                 FillBrush="{x:Bind SelectionViewModel.FillBrush,Mode=OneWay}" 
-                 StrokeBrush="{x:Bind SelectionViewModel.StrokeBrush,Mode=OneWay}" />
+                 Fill="{x:Bind SelectionViewModel.Fill,Mode=OneWay}" 
+                 Stroke="{x:Bind SelectionViewModel.Stroke,Mode=OneWay}" />
            
             <ContentControl Width="4"/>
 
@@ -60,8 +60,8 @@
             <TextBlock x:Name="BrushTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <brushs:ShowControl x:Name="ShowControl" 
                      FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
-                     FillBrush="{x:Bind SelectionViewModel.FillBrush,Mode=OneWay}" 
-                     StrokeBrush="{x:Bind SelectionViewModel.StrokeBrush,Mode=OneWay}" />
+                     Fill="{x:Bind SelectionViewModel.Fill,Mode=OneWay}" 
+                     Stroke="{x:Bind SelectionViewModel.Stroke,Mode=OneWay}" />
             
         </StackPanel>
     </ScrollViewer>

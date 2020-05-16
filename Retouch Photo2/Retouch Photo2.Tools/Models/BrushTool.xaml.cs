@@ -1,6 +1,9 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using FanKit.Transformers;
+using HSVColorPickers;
+using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Layers;
+using Retouch_Photo2.Brushs.Models;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
@@ -20,10 +23,10 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        
+
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
         FillOrStroke FillOrStroke { get => this.SelectionViewModel.FillOrStroke; set => this.SelectionViewModel.FillOrStroke = value; }
-      
+
 
         //@Construct
         public BrushTool()
@@ -44,7 +47,7 @@ namespace Retouch_Photo2.Tools.Models
             this.BrushTypeComboBox.StrokeTypeChanged += (s, brushType) => this.StrokeTypeChanged(brushType);
         }
 
-        
+
         //ShowControl
         private bool _isStopsFlyoutShowed;
         private void ConstructShowControl()
@@ -67,7 +70,7 @@ namespace Retouch_Photo2.Tools.Models
                         break;
                 }
             };
-           
+
 
             this.StopsPicker.StopsChanged += (s, array) =>
             {
@@ -112,6 +115,42 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
+        //BrushType
+        private IBrush GetTypeBrush(IBrush brush, BrushType brushType)
+        {
+            Transformer transformer = this.SelectionViewModel.Transformer;
+
+            switch (brushType)
+            {
+                case BrushType.None: return new NoneBrush();
+
+                case BrushType.Color: return new ColorBrush(Colors.LightGray);
+
+                case BrushType.LinearGradient:
+                    return new LinearGradientBrush(transformer)
+                    {
+                        Array = (brush.Array == null) ? GreyWhiteMeshHelpher.GetGradientStopArray() : (CanvasGradientStop[])brush.Array.Clone()
+                    };
+
+                case BrushType.RadialGradient:
+                    return new RadialGradientBrush(transformer)
+                    {
+                        Array = (brush.Array == null) ? GreyWhiteMeshHelpher.GetGradientStopArray() : (CanvasGradientStop[])brush.Array.Clone()
+                    };
+
+                case BrushType.EllipticalGradient:
+                    return new EllipticalGradientBrush(transformer)
+                    {
+                        Array = (brush.Array == null) ? GreyWhiteMeshHelpher.GetGradientStopArray() : (CanvasGradientStop[])brush.Array.Clone()
+                    };
+
+                case BrushType.Image: return null;
+
+                default: return null;
+            }
+        }
+
+
         public void OnNavigatedTo() => this.SelectionViewModel.SetModeStyle();
         public void OnNavigatedFrom() { }
 
@@ -132,7 +171,7 @@ namespace Retouch_Photo2.Tools.Models
             this.FillOrStrokeTextBlock.Text = resource.GetString("/Tools/Brush_FillOrStroke");
             this.BrushTypeTextBlock.Text = resource.GetString("/Tools/Brush_Type");
             this.BrushTextBlock.Text = resource.GetString("/Tools/Brush_Brush");
-            
+
             this.ReplaceTextBlock.Text = resource.GetString("/Tools/Brush_Image_Replace");
             this.ExtendTextBlock.Text = resource.GetString("/Tools/Brush_Image_Extend");
         }
@@ -150,7 +189,7 @@ namespace Retouch_Photo2.Tools.Models
         readonly ToolButton _button = new ToolButton(new BrushIcon());
 
 
-        BrushOperateMode _operateMode = BrushOperateMode.None;
+        BrushOperateMode _operateMode = BrushOperateMode.InitializeController;
 
 
         public void Started(Vector2 startingPoint, Vector2 point)
@@ -167,6 +206,8 @@ namespace Retouch_Photo2.Tools.Models
                     this.StrokeStarted(startingPoint, point);
                     break;
             }
+
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
@@ -182,13 +223,26 @@ namespace Retouch_Photo2.Tools.Models
                     this.StrokeDelta(startingPoint, point);
                     break;
             }
+
+            this.ViewModel.Invalidate();//Invalidate
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
             //Selection
             if (this.Mode == ListViewSelectionMode.None) return;
 
-            this._operateMode = BrushOperateMode.None;
+            this._operateMode = BrushOperateMode.InitializeController;
+
+            switch (this.FillOrStroke)
+            {
+                case FillOrStroke.Fill:
+                    this.FillComplete(startingPoint, point);
+                    break;
+                case FillOrStroke.Stroke:
+                    this.StrokeComplete(startingPoint, point);
+                    break;
+            }
+
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
         public void Clicke(Vector2 point) => this.TipViewModel.TransformerTool.Clicke(point);
@@ -206,10 +260,10 @@ namespace Retouch_Photo2.Tools.Models
             switch (this.FillOrStroke)
             {
                 case FillOrStroke.Fill:
-                    this.FillBrush.Draw(drawingSession, matrix, accentColor);
+                    this.Fill.Draw(drawingSession, matrix, accentColor);
                     break;
                 case FillOrStroke.Stroke:
-                    this.StrokeBrush.Draw(drawingSession, matrix, accentColor);
+                    this.Stroke.Draw(drawingSession, matrix, accentColor);
                     break;
             }
         }

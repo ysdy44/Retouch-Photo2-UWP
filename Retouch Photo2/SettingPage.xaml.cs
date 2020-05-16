@@ -28,11 +28,11 @@ namespace Retouch_Photo2
             this.ConstructStrings();
             this.BackButton.Tapped += (s, e) => this.Frame.GoBack();
 
-            this.ConstructTheme(this.SettingViewModel.Setting.Theme);
+            this.ConstructTheme();
 
-            this.ConstructDeviceLayout(this.SettingViewModel.Setting.DeviceLayout);
+            this.ConstructDeviceLayout();
 
-            this.ConstructMenuType(this.SettingViewModel.Setting.MenuTypes);
+            this.ConstructMenuType();
 
             this.LocalButton.Tapped += async (s, e) =>
             {

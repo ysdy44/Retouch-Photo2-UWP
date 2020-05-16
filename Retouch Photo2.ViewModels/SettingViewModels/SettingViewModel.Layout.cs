@@ -14,7 +14,7 @@ namespace Retouch_Photo2.ViewModels
     {
 
         //@Construct
-        public void ConstructLayout()
+        public void ConstructDeviceLayout()
         {
             Window.Current.SizeChanged += (s, e) =>
             {

@@ -113,6 +113,10 @@ namespace Retouch_Photo2.Brushs.Models
 
             this.Destination = Transformer.Controller(transformerMode, startingPoint, point, this.StartingDestination);
         }
+        public void InitializeController(Vector2 startingPoint, Vector2 point)
+        {
+            this.Destination = new Transformer(startingPoint, point);
+        }
 
         public void Draw(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Color accentColor)
         {
@@ -166,7 +170,7 @@ namespace Retouch_Photo2.Brushs.Models
         {
             switch (mode)
             {
-                case TransformerMode.None: return BrushOperateMode.None;
+                case TransformerMode.None: return BrushOperateMode.InitializeController;
 
                 case TransformerMode.Translation: return BrushOperateMode.ImageTranslation;
                 case TransformerMode.Rotation: return BrushOperateMode.ImageRotation;
@@ -186,14 +190,14 @@ namespace Retouch_Photo2.Brushs.Models
                 case TransformerMode.ScaleRightBottom: return BrushOperateMode.ImageScaleRightBottom;
                 case TransformerMode.ScaleLeftBottom: return BrushOperateMode.ImageScaleLeftBottom;
 
-                default: return BrushOperateMode.None;
+                default: return BrushOperateMode.InitializeController;
             }
         }
         private TransformerMode Converter(BrushOperateMode mode)
         {
             switch (mode)
             {
-                case BrushOperateMode.None: return TransformerMode.None;
+                case BrushOperateMode.InitializeController: return TransformerMode.None;
 
                 case BrushOperateMode.ImageTranslation: return TransformerMode.Translation;
                 case BrushOperateMode.ImageRotation: return TransformerMode.Rotation;

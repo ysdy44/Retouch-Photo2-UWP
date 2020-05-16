@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Retouch_Photo2.Historys;
-using Retouch_Photo2.Historys.Models;
+using Retouch_Photo2.Blends;
 
 namespace Retouch_Photo2.Menus.Models
 {
@@ -141,18 +141,21 @@ namespace Retouch_Photo2.Menus.Models
                 float opacity = (float)value;
 
                 //History
-                OpacityHistory history = new OpacityHistory();
-                this.ViewModel.Push(history);
+                IHistoryBase history = new IHistoryBase("Set opacity");
 
                 //Selection
                 this.SelectionViewModel.Opacity = opacity;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     //History
-                    history.Add(layer, layer.StartingOpacity, opacity);
+                    var previous = layer.StartingOpacity;
+                    history.Undos.Push(() => layer.Opacity = previous);
 
                     layer.Opacity = opacity;
                 });
+
+                //History
+                this.ViewModel.Push(history);
 
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             };
@@ -171,18 +174,21 @@ namespace Retouch_Photo2.Menus.Models
             this.BlendModeComboBox.ModeChanged += (s, mode) =>
             {
                 //History
-                BlendModeHistory history = new BlendModeHistory();
-                this.ViewModel.Push(history);
+                IHistoryBase history = new IHistoryBase("Set blend mode");
 
                 //Selection
                 this.SelectionViewModel.BlendMode = mode;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     //History
-                    history.Add(layer, layer.BlendMode, mode);
+                    var previous = layer.BlendMode;
+                    history.Undos.Push(() => layer.BlendMode = previous);
 
                     layer.BlendMode = mode;
                 });
+
+                //History
+                this.ViewModel.Push(history);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -196,18 +202,21 @@ namespace Retouch_Photo2.Menus.Models
                 Visibility value = (this.SelectionViewModel.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
 
                 //History
-                VisibilityHistory history = new VisibilityHistory();
-                this.ViewModel.Push(history);
+                IHistoryBase history = new IHistoryBase("Set visibility");
 
                 //Selection
                 this.SelectionViewModel.Visibility = value;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     //History
-                    history.Add(layer, layer.Visibility, value);
+                    var previous = layer.Visibility;
+                    history.Undos.Push(() => layer.Visibility = previous);
 
                     layer.Visibility = value;
                 });
+
+                //History
+                this.ViewModel.Push(history);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -219,18 +228,21 @@ namespace Retouch_Photo2.Menus.Models
             this.TagTypeControl.TypeChanged += (s, type) =>
             {
                 //History
-                TagTypeHistory history = new TagTypeHistory();
-                this.ViewModel.Push(history);
+                IHistoryBase history = new IHistoryBase("Set tag type");
 
                 //Selection
                 this.SelectionViewModel.TagType = type;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     //History
-                    history.Add(layer, layer.TagType, type);
+                    var previous = layer.TagType;
+                    history.Undos.Push(() => layer.TagType = previous);
 
                     layer.TagType = type;
                 });
+
+                //History
+                this.ViewModel.Push(history);
             };
         }
 

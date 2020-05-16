@@ -1,5 +1,5 @@
 ﻿using FanKit.Transformers;
-using Retouch_Photo2.Historys.Models;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,8 +41,7 @@ namespace Retouch_Photo2.Tools
         public void ClickeNone()
         {
             //History
-            SelectModeHistory history = new SelectModeHistory();
-            this.ViewModel.Push(history);
+            IHistoryBase history = new IHistoryBase("Set select mode");
 
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
@@ -50,11 +49,15 @@ namespace Retouch_Photo2.Tools
                 if (layer.SelectMode.ToBool())
                 {
                     //History
-                    history.Add(layer, layer.SelectMode, SelectMode.UnSelected);
+                    var previous = layer.SelectMode;
+                    history.Undos.Push(() => layer.SelectMode = SelectMode.UnSelected);
 
                     layer.SelectMode = SelectMode.UnSelected;
                 }
             });
+
+            //History
+            this.ViewModel.Push(history);
 
             this.SelectionViewModel.SetModeNone();//Selection
             this.ViewModel.Invalidate();//Invalidate     
@@ -63,13 +66,13 @@ namespace Retouch_Photo2.Tools
         public void ClickeNew(ILayer selectedLayer)
         {
             //History
-            SelectModeHistory history = new SelectModeHistory();
-            this.ViewModel.Push(history);
+            IHistoryBase history = new IHistoryBase("Set select mode");
 
             if (selectedLayer.SelectMode.ToBool() == false)
             {
                 //History
-                history.Add(selectedLayer, selectedLayer.SelectMode, SelectMode.Selected);
+                var previous = selectedLayer.SelectMode;
+                history.Undos.Push(() => selectedLayer.SelectMode = SelectMode.Selected);
 
                 selectedLayer.SelectMode = SelectMode.Selected;
             }
@@ -82,12 +85,16 @@ namespace Retouch_Photo2.Tools
                     if (layer.SelectMode.ToBool())
                     {
                         //History
-                        history.Add(layer, layer.SelectMode, SelectMode.UnSelected);
+                        var previous = layer.SelectMode;
+                        history.Undos.Push(() => layer.SelectMode = SelectMode.UnSelected);
 
                         layer.SelectMode = SelectMode.UnSelected;
                     }
                 }
             });
+            
+            //History
+            this.ViewModel.Push(history);
 
             this.SelectionViewModel.SetModeSingle(selectedLayer);//Selection
             this.ViewModel.Invalidate();//Invalidate     
@@ -96,16 +103,19 @@ namespace Retouch_Photo2.Tools
         public void ClickeAdd(ILayer selectedLayer)
         {
             //History
-            SelectModeHistory history = new SelectModeHistory();
-            this.ViewModel.Push(history);
+            IHistoryBase history = new IHistoryBase("Set select mode");
 
             if (selectedLayer.SelectMode.ToBool() == false)
             {
                 //History
-                history.Add(selectedLayer, selectedLayer.SelectMode, SelectMode.Selected);
+                var previous = selectedLayer.SelectMode;
+                history.Undos.Push(() => selectedLayer.SelectMode = SelectMode.Selected);
 
                 selectedLayer.SelectMode = SelectMode.Selected;
             }
+
+            //History
+            this.ViewModel.Push(history);
 
             this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
             this.ViewModel.Invalidate();//Invalidate
@@ -114,16 +124,19 @@ namespace Retouch_Photo2.Tools
         public void ClickeSubtract(ILayer selectedLayer)
         {
             //History
-            SelectModeHistory history = new SelectModeHistory();
-            this.ViewModel.Push(history);
+            IHistoryBase history = new IHistoryBase("Set select mode");
 
             if (selectedLayer.SelectMode != SelectMode.UnSelected)
             {
                 //History
-                history.Add(selectedLayer, selectedLayer.SelectMode, SelectMode.UnSelected);
+                var previous = selectedLayer.SelectMode;
+                history.Undos.Push(() => selectedLayer.SelectMode = SelectMode.UnSelected);
 
                 selectedLayer.SelectMode = SelectMode.UnSelected;
             }
+
+            //History
+            this.ViewModel.Push(history);
 
             this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
             this.ViewModel.Invalidate();//Invalidate
@@ -132,8 +145,7 @@ namespace Retouch_Photo2.Tools
         public void ClickeIntersect(ILayer selectedLayer)
         {
             //History
-            SelectModeHistory history = new SelectModeHistory();
-            this.ViewModel.Push(history);
+            IHistoryBase history = new IHistoryBase("Set select mode");
 
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
@@ -143,12 +155,16 @@ namespace Retouch_Photo2.Tools
                     if (layer.SelectMode != SelectMode.UnSelected)
                     {
                         //History
-                        history.Add(layer, layer.SelectMode, SelectMode.UnSelected);
+                        var previous = layer.SelectMode;
+                        history.Undos.Push(() => layer.SelectMode = SelectMode.UnSelected);
 
                         layer.SelectMode = SelectMode.UnSelected;
                     }
                 }
             });
+
+            //History
+            this.ViewModel.Push(history);
 
             this.SelectionViewModel.SetModeSingle(selectedLayer);//Selection
             this.ViewModel.Invalidate();//Invalidate

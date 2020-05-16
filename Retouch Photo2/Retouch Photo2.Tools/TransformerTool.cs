@@ -1,6 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Historys.Models;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
@@ -75,16 +75,18 @@ namespace Retouch_Photo2.Tools
             if (this._transformerMode == TransformerMode.None) return false;
 
             //History
-            DestinationHistory history = new DestinationHistory();
-            this.ViewModel.Push(history);
+            IHistoryBase history = new IHistoryBase("Transform");
 
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
                 //History
-                Transform m = layer.Transform;
-                history.Add(m, m.StartingDestination, m.Destination);
+                var previous = layer.Transform.StartingDestination;
+                history.Undos.Push(() => layer.Transform.Destination = previous);
             });
+
+            //History
+            this.ViewModel.Push(history);
 
             this._transformerMode = TransformerMode.None;//TransformerMode
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate

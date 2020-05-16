@@ -54,8 +54,9 @@ namespace Retouch_Photo2
 
 
         //Theme
-        private void ConstructTheme(ElementTheme theme)
+        private void ConstructTheme()
         {
+            ElementTheme theme = this.SettingViewModel.Setting.Theme;
             this.LightRadioButton.IsChecked = (theme == ElementTheme.Light);
             this.DarkRadioButton.IsChecked = (theme == ElementTheme.Dark);
             this.DefaultRadioButton.IsChecked = (theme == ElementTheme.Default);
@@ -63,16 +64,9 @@ namespace Retouch_Photo2
 
             async Task setTheme(ElementTheme theme2)
             {
-                if (Window.Current.Content is FrameworkElement frameworkElement)
-                {
-                    if (frameworkElement.RequestedTheme != theme2)
-                    {
-                        frameworkElement.RequestedTheme = theme2;
-                    }
-                }
-
                 //Setting
                 this.SettingViewModel.Setting.Theme = theme2;
+                this.SettingViewModel.ConstructTheme();//Construct
                 await this.Write();//Write
             };
 
@@ -112,8 +106,9 @@ namespace Retouch_Photo2
 
 
         //DeviceLayout
-        private void ConstructDeviceLayout(DeviceLayout deviceLayout)
+        private void ConstructDeviceLayout()
         {
+            DeviceLayout deviceLayout = this.SettingViewModel.Setting.DeviceLayout;
             this.ConstructDeviceLayoutType(deviceLayout.FallBackType, deviceLayout.IsAdaptive);
             this.ConstructDeviceLayoutAdaptive(deviceLayout.PhoneMaxWidth, deviceLayout.PadMaxWidth);
         }
@@ -162,11 +157,13 @@ namespace Retouch_Photo2
             };
             this.AdaptiveGrid.PhoneWidthChanged += async (s, value) =>
             {
+                //Setting
                 this.SettingViewModel.Setting.DeviceLayout.PhoneMaxWidth = value;
                 await this.Write();
             };
             this.AdaptiveGrid.PadWidthChanged += async (s, value) =>
             {
+                //Setting
                 this.SettingViewModel.Setting.DeviceLayout.PadMaxWidth = value;
                 await this.Write();
             };
@@ -192,14 +189,14 @@ namespace Retouch_Photo2
 
 
         //MenuType
-        private void ConstructMenuType(IList<MenuType> menuTypes)
+        private void ConstructMenuType()
         {
             bool isParity = false;
+            IList<MenuType> menuTypes = this.SettingViewModel.Setting.MenuTypes;
             
             foreach (IMenu menu in this.TipViewModel.Menus)
             {
                 bool isVisible = menuTypes.Any(m => m == menu.Type);
-                menu.Expander.Button.Self.Visibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
 
 
                 CheckBox checkBox = new CheckBox
@@ -209,19 +206,20 @@ namespace Retouch_Photo2
                 };
                 checkBox.Checked += async (s, e) =>
                 {
-                    menuTypes.Add(menu.Type);
-                    menu.Expander.Button.Self.Visibility = Visibility.Visible;
+                    //Setting
+                    this.SettingViewModel.Setting.MenuTypes.Add(menu.Type);
+                    this.SettingViewModel.ConstructMenuType(this.TipViewModel.Menus);
                     await this.Write();
                 };
                 checkBox.Unchecked += async (s, e) =>
                 {
+                    //Setting
                     do
                     {
-                        menuTypes.Remove(menu.Type);
+                        this.SettingViewModel.Setting.MenuTypes.Remove(menu.Type);
                     }
-                    while (menuTypes.Contains(menu.Type));
-
-                    menu.Expander.Button.Self.Visibility = Visibility.Collapsed;
+                    while (this.SettingViewModel.Setting.MenuTypes.Contains(menu.Type));
+                    this.SettingViewModel.ConstructMenuType(this.TipViewModel.Menus);
                     await this.Write();
                 };
 

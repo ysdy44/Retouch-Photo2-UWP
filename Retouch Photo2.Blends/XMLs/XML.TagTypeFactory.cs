@@ -10,7 +10,7 @@
         /// Create a TagType from an string and XElement.
         /// </summary>
         /// <param name="type"> The source string. </param>
-        /// <returns> The created TagType. </returns>
+        /// <returns> The created <see cref="TagType"/>. </returns>
         public static TagType CreateTagType(string type)
         {
             switch (type)

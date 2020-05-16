@@ -137,7 +137,7 @@ namespace Retouch_Photo2.Tools.Models
 
 
             //IBrush
-            IBrush brush = mezzanineLayer.Style.FillBrush;
+            IBrush brush = mezzanineLayer.Style.Fill;
             if (brush == null) return;
 
             if (brush.Type == BrushType.Image)

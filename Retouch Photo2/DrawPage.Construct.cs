@@ -95,20 +95,20 @@ namespace Retouch_Photo2
         {
             DrawPage.FillColorShowAt += (FrameworkElement placementTarget) =>
             {
-                switch (this.SelectionViewModel.FillBrush.Type)
+                switch (this.SelectionViewModel.Fill.Type)
                 {
                     case BrushType.Color:
-                        this.FillColorPicker.Color = this.SelectionViewModel.FillBrush.Color;
+                        this.FillColorPicker.Color = this.SelectionViewModel.Fill.Color;
                         break;
                 }
                 this.FillColorFlyout.ShowAt(placementTarget);
             };
             DrawPage.StrokeColorShowAt += (FrameworkElement placementTarget) =>
             {
-                switch (this.SelectionViewModel.StrokeBrush.Type)
+                switch (this.SelectionViewModel.Stroke.Type)
                 {
                     case BrushType.Color:
-                        this.StrokeColorPicker.Color = this.SelectionViewModel.StrokeBrush.Color;
+                        this.StrokeColorPicker.Color = this.SelectionViewModel.Stroke.Color;
                         break;
                 }
                 this.StrokeColorFlyout.ShowAt(placementTarget);

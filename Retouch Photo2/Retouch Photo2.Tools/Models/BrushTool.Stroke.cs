@@ -1,11 +1,10 @@
-﻿using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
+﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Brushs.Models;
+using Retouch_Photo2.Historys;
 using System;
 using System.Numerics;
-using Windows.UI;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
@@ -17,190 +16,150 @@ namespace Retouch_Photo2.Tools.Models
     {
 
         //@ViewModel
-        IBrush StrokeBrush { get => this.SelectionViewModel.StrokeBrush; set => this.SelectionViewModel.StrokeBrush = value; }
+        IBrush Stroke { get => this.SelectionViewModel.Stroke; set => this.SelectionViewModel.Stroke = value; }
 
         //@Static
         /// <summary> Navigate to <see cref="PhotosPage"/> </summary>
         public static Action StrokeImage;
 
 
+
         public void StrokeStarted(Vector2 startingPoint, Vector2 point)
         {
-            if (this.StrokeBrush == null) return;
+            if (this.Stroke == null) return;
 
-            switch (this.StrokeBrush.Type)
+            //Contains Operate Mode
+            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+            this._operateMode = this.Stroke.ContainsOperateMode(startingPoint, matrix);
+
+            //InitializeController
+            if (this._operateMode == BrushOperateMode.InitializeController)
             {
-                case BrushType.None:
-                case BrushType.Color:
-                    {
-                        this.BrushTypeComboBox.EaseStoryboard.Begin();
-
-                        Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-                        LinearGradientBrush linearGradientBrush = new LinearGradientBrush(startingPoint, point, inverseMatrix);
-
-                        //Selection          
-                        this.StrokeBrush = linearGradientBrush;
-                        this.SelectionViewModel.SetValue((layer) =>
+                switch (this.Stroke.Type)
+                {
+                    case BrushType.None:
+                    case BrushType.Color:
                         {
-                            layer.Style.StrokeBrush = linearGradientBrush.Clone();
-                            this.SelectionViewModel.StyleLayer = layer;
-                        });
+                            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+                            Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+                            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-                        this._operateMode = BrushOperateMode.LinearEndPoint;
-                        this.ViewModel.Invalidate(ViewModels.InvalidateMode.Thumbnail);//Invalidate
-                    }
-                    break;
-
-                default:
-                    {
-                        Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                        this._operateMode = this.StrokeBrush.ContainsOperateMode(startingPoint, matrix);
-
-                        if (this._operateMode != BrushOperateMode.None)
-                        {
                             //Selection          
-                            this.StrokeBrush.CacheTransform();
-                            this.SelectionViewModel.SetValue((layer) =>
-                            {
-                                layer.Style.StrokeBrush = this.StrokeBrush.Clone();
-                                layer.Style.StrokeBrush.CacheTransform();
-                                this.SelectionViewModel.StyleLayer = layer;
-                            });
-
-                            this.ViewModel.Invalidate(ViewModels.InvalidateMode.Thumbnail);//Invalidate
+                            this.Stroke = new LinearGradientBrush(canvasStartingPoint, canvasPoint);
                         }
-                    }
-                    break;
+                        break;
+                }
             }
+
+            //Selection
+            this.Stroke.CacheTransform();
+            this.SelectionViewModel.SetValue((layer) =>
+            {
+                layer.Style.CacheStroke();
+
+                layer.Style.Stroke = this.Stroke.Clone();
+                layer.Style.Stroke.CacheTransform();
+            });
         }
+
         public void StrokeDelta(Vector2 startingPoint, Vector2 point)
         {
             //Selection
-            if (this.Mode == ListViewSelectionMode.None) return;
+            if (this.Stroke == null) return;
 
-            if (this.StrokeBrush == null) return;
+
+            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+            Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
             switch (this._operateMode)
             {
-                case BrushOperateMode.None: break;
-
-                default:
+                //InitializeController
+                case BrushOperateMode.InitializeController:
                     {
-                        Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-
-                        Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
-                        Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
-                        
                         //Selection
-                        this.StrokeBrush.Controller(this._operateMode, canvasStartingPoint, canvasPoint);
+                        this.Stroke.InitializeController(canvasStartingPoint, canvasPoint);
                         this.SelectionViewModel.SetValue((layer) =>
                         {
-                            layer.Style.StrokeBrush.Controller(this._operateMode, canvasStartingPoint, canvasPoint);
-                            this.SelectionViewModel.StyleLayer = layer;
+                            layer.Style.Stroke.InitializeController(canvasStartingPoint, canvasPoint);
                         });
-
                         this.ViewModel.Invalidate();//Invalidate
+                    }
+                    break;
+
+                //Controller
+                default:
+                    {
+                        //Selection
+                        this.Stroke.Controller(this._operateMode, canvasStartingPoint, canvasPoint);
+                        this.SelectionViewModel.SetValue((layer) =>
+                        {
+                            layer.Style.Stroke.Controller(this._operateMode, canvasStartingPoint, canvasPoint);
+                        });
                     }
                     break;
             }
         }
+
+        public void StrokeComplete(Vector2 startingPoint, Vector2 point)
+        {
+            //Selection
+            if (this.Stroke == null) return;
+
+            //History
+            IHistoryBase history = new IHistoryBase("Set stroke");
+
+            //Selection
+            this.SelectionViewModel.SetValue((layer) =>
+            {
+                //History
+                var previous = layer.Style.Stroke.Clone();
+                history.Undos.Push(() => layer.Style.Stroke = previous.Clone());
+
+                this.SelectionViewModel.StyleLayer = layer;
+            });
+
+            //History
+            this.ViewModel.Push(history);
+        }
+
 
 
         public void StrokeTypeChanged(BrushType brushType)
         {
-            if (this.StrokeBrush.Type == brushType) return;
+            if (this.Stroke.Type == brushType) return;
 
             switch (brushType)
             {
-                case BrushType.None:
-                    {
-                        //Selection
-                        this.StrokeBrush = new NoneBrush();
-                        this.SelectionViewModel.SetValue((layer) =>
-                        {
-                            layer.Style.StrokeBrush = new NoneBrush();
-                            this.SelectionViewModel.StyleLayer = layer;
-                        });
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                    break;
-
-                case BrushType.Color:
-                    {
-                        //Selection
-                        this.SelectionViewModel.Color = Colors.LightGray;
-                        this.StrokeBrush = new ColorBrush(Colors.LightGray);
-                        this.SelectionViewModel.SetValue((layer) =>
-                        {
-                            layer.Style.StrokeBrush = new ColorBrush(Colors.LightGray);
-                            this.SelectionViewModel.StyleLayer = layer;
-                        });
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                    break;
-
-                case BrushType.LinearGradient:
-                    {
-                        Transformer transformer = this.SelectionViewModel.Transformer;
-                        LinearGradientBrush linearGradientBrush = this.StrokeBrush.Array == null ? new LinearGradientBrush(transformer) : new LinearGradientBrush(transformer)
-                        {
-                            Array = this.StrokeBrush.Array
-                        };
-
-                        //Selection
-                        this.StrokeBrush = linearGradientBrush;
-                        this.SelectionViewModel.SetValue((layer) =>
-                        {
-                            layer.Style.StrokeBrush = linearGradientBrush.Clone();
-                            this.SelectionViewModel.StyleLayer = layer;
-                        });
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                    break;
-                case BrushType.RadialGradient:
-                    {
-                        Transformer transformer = this.SelectionViewModel.Transformer;
-                        RadialGradientBrush radialGradientBrush = this.StrokeBrush.Array == null ? new RadialGradientBrush(transformer) : new RadialGradientBrush(transformer)
-                        {
-                            Array = this.StrokeBrush.Array
-                        };
-
-                        //Selection                       
-                        this.StrokeBrush = radialGradientBrush;
-                        this.SelectionViewModel.SetValue((layer) =>
-                        {
-                            layer.Style.StrokeBrush = radialGradientBrush.Clone();
-                            this.SelectionViewModel.StyleLayer = layer;
-                        });
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                    break;
-                case BrushType.EllipticalGradient:
-                    {
-                        Transformer transformer = this.SelectionViewModel.Transformer;
-                        EllipticalGradientBrush ellipticalGradientBrush = this.StrokeBrush.Array == null ? new EllipticalGradientBrush(transformer) : new EllipticalGradientBrush(transformer)
-                        {
-                            Array = this.StrokeBrush.Array
-                        };
-
-                        //Selection                       
-                        this.StrokeBrush = ellipticalGradientBrush;
-                        this.SelectionViewModel.SetValue((layer) =>
-                        {
-                            layer.Style.StrokeBrush = ellipticalGradientBrush.Clone();
-                            this.SelectionViewModel.StyleLayer = layer;
-                        });
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                    break;
                 case BrushType.Image:
+                    BrushTool.StrokeImage?.Invoke();
+                    break;
+
+                default:
                     {
-                        BrushTool.StrokeImage?.Invoke();
+                        //History
+                        IHistoryBase history = new IHistoryBase("Set stroke type");
+
+                        IBrush brush = this.GetTypeBrush(this.Stroke, brushType);
+                        if (brushType == BrushType.Color) this.SelectionViewModel.Color = brush.Color;
+
+
+                        //Selection
+                        this.Stroke = brush;
+                        this.SelectionViewModel.SetValue((layer) =>
+                        {
+                            //History
+                            var previous = layer.Style.Stroke.Clone();
+                            history.Undos.Push(() => layer.Style.Stroke = previous.Clone());
+
+                            layer.Style.Stroke = brush.Clone();
+                            this.SelectionViewModel.StyleLayer = layer;
+                        });
+
+                        //History
+                        this.ViewModel.Push(history);
+
+                        this.ViewModel.Invalidate();//Invalidate
                     }
                     break;
             }
@@ -208,9 +167,9 @@ namespace Retouch_Photo2.Tools.Models
 
         public void StrokeShow()
         {
-            if (this.StrokeBrush == null) return;
+            if (this.Stroke == null) return;
 
-            switch (this.StrokeBrush.Type)
+            switch (this.Stroke.Type)
             {
                 case BrushType.None: break;
 
@@ -221,29 +180,29 @@ namespace Retouch_Photo2.Tools.Models
                 case BrushType.LinearGradient:
                 case BrushType.RadialGradient:
                 case BrushType.EllipticalGradient:
-                    this.StopsPicker.SetArray(this.StrokeBrush.Array);
+                    this.StopsPicker.SetArray(this.Stroke.Array);
                     this.StopsFlyout.ShowAt(this);//Flyout
                     break;
 
                 case BrushType.Image:
-                    this.ExtendComboBox.Extend = this.StrokeBrush.Extend;
+                    this.ExtendComboBox.Extend = this.Stroke.Extend;
                     this.ImageFlyout.ShowAt(this);//Flyout
                     break;
             }
         }
 
-        
+
 
         public void StrokeStopsChanged(CanvasGradientStop[] array)
         {
             if (this._isStopsFlyoutShowed == false) return;
 
-            this.StrokeBrush.Array = (CanvasGradientStop[])array.Clone();
+            this.Stroke.Array = (CanvasGradientStop[])array.Clone();
 
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                layer.Style.StrokeBrush.Array = (CanvasGradientStop[])array.Clone();
+                layer.Style.Stroke.Array = (CanvasGradientStop[])array.Clone();
                 this.SelectionViewModel.StyleLayer = layer;
             });
 
@@ -255,10 +214,10 @@ namespace Retouch_Photo2.Tools.Models
             this.ExtendComboBox.Extend = extend;
 
             //Selection
-            this.StrokeBrush.Extend = extend;
+            this.Stroke.Extend = extend;
             this.SelectionViewModel.SetValue((layer) =>
             {
-                layer.Style.StrokeBrush.Extend = extend;
+                layer.Style.Stroke.Extend = extend;
                 this.SelectionViewModel.StyleLayer = layer;
             });
 

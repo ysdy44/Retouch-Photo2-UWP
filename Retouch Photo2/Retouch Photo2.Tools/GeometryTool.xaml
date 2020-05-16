@@ -16,12 +16,12 @@
         <StackPanel Orientation="Horizontal">
 
             <TextBlock x:Name="FillTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <brushs:ColorEllipse x:Name="FillColorEllipse" Brush="{x:Bind SelectionViewModel.FillBrush, Mode=OneWay}"/>
+            <brushs:ColorEllipse x:Name="FillColorEllipse" Brush="{x:Bind SelectionViewModel.Fill, Mode=OneWay}"/>
 
             <ContentControl Width="4"/>
 
             <TextBlock x:Name="StrokeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <brushs:ColorEllipse x:Name="StrokeColorEllipse" Brush="{x:Bind SelectionViewModel.StrokeBrush, Mode=OneWay}"/>
+            <brushs:ColorEllipse x:Name="StrokeColorEllipse" Brush="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}"/>
 
             <ContentControl Width="4"/>
 

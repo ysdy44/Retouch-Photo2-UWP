@@ -111,10 +111,6 @@
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Historys\IHistory.cs" />
-    <Compile Include="Retouch Photo2.Historys\HistoryType.cs" />
-    <Compile Include="Retouch Photo2.Historys\Models\LayerHistory.cs" />
-    <Compile Include="Retouch Photo2.Historys\Models\LayersHistory.cs" />
-    <Compile Include="Retouch Photo2.Historys\Models\TransformHistory.cs" />
     <Compile Include="Retouch Photo2.Menus\IMenu.cs" />
     <Compile Include="SettingViewModels\SettingViewModel.Key.cs" />
     <Compile Include="SettingViewModels\SettingViewModel.cs" />

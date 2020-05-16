@@ -52,14 +52,14 @@ namespace Retouch_Photo2.Brushs
         }));
 
 
-        /// <summary> Gets or sets the fill-brush. </summary>
-        public IBrush FillBrush
+        /// <summary> Gets or sets the fill. </summary>
+        public IBrush Fill
         {
-            get { return (IBrush)GetValue(FillBrushProperty); }
-            set { SetValue(FillBrushProperty, value); }
+            get { return (IBrush)GetValue(FillProperty); }
+            set { SetValue(FillProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "BrushTypeComboBox.FillBrush" /> dependency property. </summary>
-        public static readonly DependencyProperty FillBrushProperty = DependencyProperty.Register(nameof(FillBrush), typeof(IBrush), typeof(BrushTypeComboBox), new PropertyMetadata(null, (sender, e) =>
+        /// <summary> Identifies the <see cref = "BrushTypeComboBox.Fill" /> dependency property. </summary>
+        public static readonly DependencyProperty FillProperty = DependencyProperty.Register(nameof(Fill), typeof(IBrush), typeof(BrushTypeComboBox), new PropertyMetadata(null, (sender, e) =>
         {
             BrushTypeComboBox con = (BrushTypeComboBox)sender;
 
@@ -90,14 +90,14 @@ namespace Retouch_Photo2.Brushs
         private BrushType fillType = BrushType.None;
 
 
-        /// <summary> Gets or sets the stroke-brush. </summary>
-        public IBrush StrokeBrush
+        /// <summary> Gets or sets the stroke. </summary>
+        public IBrush Stroke
         {
-            get { return (IBrush)GetValue(StrokeBrushProperty); }
-            set { SetValue(StrokeBrushProperty, value); }
+            get { return (IBrush)GetValue(StrokeProperty); }
+            set { SetValue(StrokeProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "BrushTypeComboBox.StrokeBrush" /> dependency property. </summary>
-        public static readonly DependencyProperty StrokeBrushProperty = DependencyProperty.Register(nameof(StrokeBrush), typeof(IBrush), typeof(BrushTypeComboBox), new PropertyMetadata(null, (sender, e) =>
+        /// <summary> Identifies the <see cref = "BrushTypeComboBox.Stroke" /> dependency property. </summary>
+        public static readonly DependencyProperty StrokeProperty = DependencyProperty.Register(nameof(Stroke), typeof(IBrush), typeof(BrushTypeComboBox), new PropertyMetadata(null, (sender, e) =>
         {
             BrushTypeComboBox con = (BrushTypeComboBox)sender;
 

@@ -1,6 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
+using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Brushs;
@@ -84,6 +85,12 @@ namespace Retouch_Photo2.Layers
         public virtual void Load(XElement element) { }
 
 
+        public virtual void Fill(IBrush brush) { }
+        public virtual void Stroke(IBrush brush) { }
+        public virtual void StrokeWidth(float width) { }
+        public virtual void StrokeStyle(CanvasStrokeStyle strokeStyle) { }
+
+
         public virtual void CacheTransform()
         {
             this.Style.CacheTransform();
@@ -94,7 +101,7 @@ namespace Retouch_Photo2.Layers
             {
                 if (this.parents.Type  == LayerType.Group)
                 {
-                    GroupLayer groupLayer = (GroupLayer)this.parents;
+                    ILayer groupLayer =this.parents;
                     groupLayer.IsRefactoringTransformer = true;
                 }
             }

@@ -20,9 +20,10 @@ namespace Retouch_Photo2.Brushs
             (
                  elementName,
                  new XElement("IsFollowTransform", style.IsFollowTransform),
-                 XML.SaveBrush("FillBrush", style.FillBrush),
-                 XML.SaveBrush("StrokeBrush", style.StrokeBrush),
-                 new XElement("StrokeWidth", style.StrokeWidth)
+                 XML.SaveBrush("Fill", style.Fill),
+                 XML.SaveBrush("Stroke", style.Stroke),
+                 new XElement("StrokeWidth", style.StrokeWidth),
+                 Retouch_Photo2.Strokes.XML.SaveStrokeStyle("StrokeStyle", style.StrokeStyle)
             );
         }
 
@@ -36,9 +37,10 @@ namespace Retouch_Photo2.Brushs
             Style style = new Style(); 
 
             if (element.Element("IsFollowTransform") is XElement isFollowTransform) style.IsFollowTransform = (bool)isFollowTransform;
-            if (element.Element("FillBrush") is XElement fillBrush) style.FillBrush = XML.LoadBrush(fillBrush);
-            if (element.Element("StrokeBrush") is XElement strokeBrush) style.StrokeBrush = XML.LoadBrush(strokeBrush);
+            if (element.Element("Fill") is XElement fill) style.Fill = XML.LoadBrush(fill);
+            if (element.Element("Stroke") is XElement stroke) style.Stroke = XML.LoadBrush(stroke);
             if (element.Element("StrokeWidth") is XElement strokeWidth) style.StrokeWidth = (float)strokeWidth;
+            if (element.Element("StrokeStyle") is XElement strokeStyle) style.StrokeStyle = Retouch_Photo2.Strokes.XML.LoadStrokeStyle(strokeStyle);
 
             return style;
         }

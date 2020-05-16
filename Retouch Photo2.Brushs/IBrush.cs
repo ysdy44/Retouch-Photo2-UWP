@@ -59,7 +59,13 @@ namespace Retouch_Photo2.Brushs
         /// <param name="startingPoint"> The starting point. </param>
         /// <param name="point"> The point. </param>
         void Controller(BrushOperateMode mode, Vector2 startingPoint, Vector2 point);
-
+        /// <summary>
+        /// It initialize and controls the transformation of brush.
+        /// </summary>
+        /// <param name="startingPoint"> The starting point. </param>
+        /// <param name="point"> The point. </param>
+        void InitializeController(Vector2 startingPoint, Vector2 point);
+        
         /// <summary>
         /// Draw stops and lines between all control points.
         /// </summary>

@@ -165,21 +165,25 @@
     <Compile Include="Retouch Photo2.Styles\ShowControl.xaml.cs">
       <DependentUpon>ShowControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch_Photo2.Strokes\CapSegmented.xaml.cs">
+    <Compile Include="Retouch Photo2.Strokes\CapSegmented.xaml.cs">
       <DependentUpon>CapSegmented.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch_Photo2.Strokes\DashSegmented.xaml.cs">
+    <Compile Include="Retouch Photo2.Strokes\DashSegmented.xaml.cs">
       <DependentUpon>DashSegmented.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch_Photo2.Strokes\Icon.xaml.cs">
+    <Compile Include="Retouch Photo2.Strokes\Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch_Photo2.Strokes\JoinSegmented.xaml.cs">
+    <Compile Include="Retouch Photo2.Strokes\JoinSegmented.xaml.cs">
       <DependentUpon>JoinSegmented.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch_Photo2.Strokes\ShowControl.xaml.cs">
+    <Compile Include="Retouch Photo2.Strokes\ShowControl.xaml.cs">
       <DependentUpon>ShowControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Strokes\XMLs\XML.DashFactory.cs" />
+    <Compile Include="Retouch Photo2.Strokes\XMLs\XML.CapFactory.cs" />
+    <Compile Include="Retouch Photo2.Strokes\XMLs\XML.JoinFactory.cs" />
+    <Compile Include="Retouch Photo2.Strokes\XMLs\XML.StrokeStyle.cs" />
     <Compile Include="ShowControl.xaml.cs">
       <DependentUpon>ShowControl.xaml</DependentUpon>
     </Compile>
@@ -280,23 +284,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch_Photo2.Strokes\CapSegmented.xaml">
+    <Page Include="Retouch Photo2.Strokes\CapSegmented.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch_Photo2.Strokes\DashSegmented.xaml">
+    <Page Include="Retouch Photo2.Strokes\DashSegmented.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch_Photo2.Strokes\Icon.xaml">
+    <Page Include="Retouch Photo2.Strokes\Icon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch_Photo2.Strokes\JoinSegmented.xaml">
+    <Page Include="Retouch Photo2.Strokes\JoinSegmented.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch_Photo2.Strokes\ShowControl.xaml">
+    <Page Include="Retouch Photo2.Strokes\ShowControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -60,20 +60,6 @@ namespace Retouch_Photo2.Brushs.Models
             this.StartPoint = startPoint;
             this.EndPoint = endPoint;
         }
-        /// <summary>
-        /// Initializes a LinearGradientBrush.
-        /// </summary>
-        /// <param name="startPoint"> The starting point. </param>
-        /// <param name="endPoint"> The point. </param>   
-        /// <param name="inverseMatrix"> The inverse matrix. </param>
-        public LinearGradientBrush(Vector2 startingPoint, Vector2 point, Matrix3x2 inverseMatrix)
-        {
-            Vector2 startPoint = Vector2.Transform(startingPoint, inverseMatrix);
-            Vector2 endPoint = Vector2.Transform(point, inverseMatrix);
-
-            this.StartPoint = startPoint;
-            this.EndPoint = endPoint;
-        }
 
 
         public ICanvasBrush GetICanvasBrush(ICanvasResourceCreator resourceCreator)
@@ -114,7 +100,7 @@ namespace Retouch_Photo2.Brushs.Models
                 return BrushOperateMode.LinearEndPoint;
             }
 
-            return BrushOperateMode.None;
+            return BrushOperateMode.InitializeController;
         }
         public void Controller(BrushOperateMode mode, Vector2 startingPoint, Vector2 point)
         {
@@ -128,6 +114,11 @@ namespace Retouch_Photo2.Brushs.Models
                     this.EndPoint = point;
                     break;
             }
+        }
+        public void InitializeController(Vector2 startingPoint, Vector2 point)
+        {
+            this.StartPoint = startingPoint;
+            this.EndPoint = point;
         }
 
         public void Draw(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Color accentColor)

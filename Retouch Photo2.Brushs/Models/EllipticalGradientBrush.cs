@@ -120,52 +120,42 @@ namespace Retouch_Photo2.Brushs.Models
                 return BrushOperateMode.EllipticalCenter;
             }
 
-            return BrushOperateMode.None;
+            return BrushOperateMode.InitializeController;
         }
         public void Controller(BrushOperateMode mode, Vector2 startingPoint, Vector2 point)
         {
             switch (mode)
             {
                 case BrushOperateMode.EllipticalCenter:
-                    {
-                        Vector2 center = point;
-                        Vector2 xPoint = center + this._startingXPoint - this._startingCenter;
-                        Vector2 yPoint = center + this._startingYPoint - this._startingCenter;
-
-                        this.Center = center;
-                        this.XPoint = xPoint;
-                        this.YPoint = yPoint;
-                    }
+                    Vector2 offset = point - this._startingCenter;
+                    this.Center = point;
+                    this.XPoint = offset + this._startingXPoint;
+                    this.YPoint = offset + this._startingYPoint;
                     break;
-
                 case BrushOperateMode.EllipticalXPoint:
-                    {
-                        Vector2 xPoint = point;
-
-                        Vector2 normalize = Vector2.Normalize(xPoint - this._startingCenter);
-                        float radiusY = Vector2.Distance(this._startingYPoint, this._startingCenter);
-                        Vector2 reflect = new Vector2(-normalize.Y, normalize.X);
-                        Vector2 yPoint = radiusY * reflect + this._startingCenter;
-
-                        this.XPoint = xPoint;
-                        this.YPoint = yPoint;
-                    }
+                    this.XPoint = point;
+                    this.YPoint = this._controllerAPoint(this._startingCenter, this._startingYPoint, point);
                     break;
-
                 case BrushOperateMode.EllipticalYPoint:
-                    {
-                        Vector2 yPoint = point;
-
-                        Vector2 normalize = Vector2.Normalize(yPoint - this._startingCenter);
-                        float radiusX = Vector2.Distance(this._startingXPoint, this._startingCenter);
-                        Vector2 reflect = new Vector2(normalize.Y, -normalize.X);
-                        Vector2 xPoint = radiusX * reflect + this._startingCenter;
-
-                        this.XPoint = xPoint;
-                        this.YPoint = yPoint;
-                    }
+                    this.YPoint = point;
+                    this.XPoint = this._controllerAPoint(this._startingCenter, this._startingXPoint, point);
                     break;
             }
+        }
+        public void InitializeController(Vector2 startingPoint, Vector2 point)
+        {
+            this.Center = startingPoint;
+            this.YPoint = point;
+            this.XPoint = this._controllerAPoint(startingPoint, point, point);
+        }
+        private Vector2 _controllerAPoint(Vector2 center, Vector2 distancePoint, Vector2 bPoint)
+        {
+            Vector2 normalize = Vector2.Normalize(bPoint - center);
+            float radius = Vector2.Distance(distancePoint, center);
+            Vector2 reflect = new Vector2(normalize.Y, -normalize.X);
+            Vector2 aPoint = radius * reflect + center;
+
+            return aPoint;
         }
 
         public void Draw(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Color accentColor)
@@ -175,12 +165,12 @@ namespace Retouch_Photo2.Brushs.Models
             Vector2 yPoint = Vector2.Transform(this.YPoint, matrix);
 
             //Line: white
-            drawingSession.DrawLine(center, xPoint, Windows.UI.Colors.White, 4);
-            drawingSession.DrawLine(center, yPoint, Windows.UI.Colors.White, 4);
+            drawingSession.DrawLine(center, xPoint, Colors.White, 4);
+            drawingSession.DrawLine(center, yPoint, Colors.White, 4);
 
             //Circle: white
-            drawingSession.FillCircle(center, 10, Windows.UI.Colors.White);
-            drawingSession.FillCircle(yPoint, 10, Windows.UI.Colors.White);
+            drawingSession.FillCircle(center, 10, Colors.White);
+            drawingSession.FillCircle(yPoint, 10, Colors.White);
 
             //Line: accent
             drawingSession.DrawLine(center, xPoint, accentColor, 2);

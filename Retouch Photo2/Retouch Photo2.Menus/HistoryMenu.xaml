@@ -22,7 +22,7 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="historys:IHistory">
-                        <TextBlock Text="{x:Bind Type, Mode=OneTime}"/>
+                        <TextBlock Text="{x:Bind Title, Mode=OneTime}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
 

@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Brushs
         /// Create a Extend from an string and XElement.
         /// </summary>
         /// <param name="type"> The source string. </param>
-        /// <returns> The created Layer. </returns>
+        /// <returns> The created <see cref="CanvasEdgeBehavior"/>. </returns>
         public static CanvasEdgeBehavior CreateExtend(string type)
         {
             switch (type)

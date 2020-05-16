@@ -37,7 +37,7 @@ namespace Retouch_Photo2.Layers.Models
         /// Initializes a image-layer.
         /// </summary>
         /// <param name="transformer"> The transformer. </param>
-        /// <param name="photocopier"> The fill-brush photocopier. </param>
+        /// <param name="photocopier"> The fill photocopier. </param>
         public ImageLayer(Transformer transformer, Photocopier photocopier)
         {
             base.Control = new LayerControl(this)
@@ -48,7 +48,7 @@ namespace Retouch_Photo2.Layers.Models
 
             base.Style = new Style
             {
-                FillBrush = new ImageBrush(transformer)
+                Fill = new ImageBrush(transformer)
                 {
                     Photocopier = photocopier
                 }

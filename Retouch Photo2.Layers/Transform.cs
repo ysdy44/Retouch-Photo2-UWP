@@ -2,16 +2,15 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using System.Numerics;
-using System.Xml.Linq;
 using Windows.Foundation;
 using Windows.UI;
 
 namespace Retouch_Photo2.Layers
 {
-    /// <summary> 
-    /// <see cref = "Transformer" />'s manager. 
+    /// <summary>
+    /// Represents a brush that provides an <see cref="Matrix3x2"/>.
     /// </summary>
-    public partial class Transform : ICacheTransform
+    public class Transform : ICacheTransform
     {
 
         /// <summary> The source transformer. </summary>

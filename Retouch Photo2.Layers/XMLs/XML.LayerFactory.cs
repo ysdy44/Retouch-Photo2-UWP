@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Layers
         /// Create a Layer from an string and XElement.
         /// </summary>
         /// <param name="type"> The source string. </param>
-        /// <returns> The created Layer. </returns>
+        /// <returns> The created <see cref="ILayer"/>. </returns>
         public static ILayer CreateLayer(string type)
         {
             switch (type)

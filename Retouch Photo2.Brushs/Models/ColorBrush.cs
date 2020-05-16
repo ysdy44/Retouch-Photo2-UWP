@@ -35,21 +35,13 @@ namespace Retouch_Photo2.Brushs.Models
         public ColorBrush(Color color) => this.Color = color;
 
 
-        public ICanvasBrush GetICanvasBrush(ICanvasResourceCreator resourceCreator)
-        {
-            return new CanvasSolidColorBrush(resourceCreator, this.Color);
-        }
-        public ICanvasBrush GetICanvasBrush(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix)
-        {
-            return new CanvasSolidColorBrush(resourceCreator, this.Color);
-        }
+        public ICanvasBrush GetICanvasBrush(ICanvasResourceCreator resourceCreator) => new CanvasSolidColorBrush(resourceCreator, this.Color);
+        public ICanvasBrush GetICanvasBrush(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix) => new CanvasSolidColorBrush(resourceCreator, this.Color);
 
 
-        public BrushOperateMode ContainsOperateMode(Vector2 point, Matrix3x2 matrix)
-        {
-            return BrushOperateMode.None;
-        }
+        public BrushOperateMode ContainsOperateMode(Vector2 point, Matrix3x2 matrix) => BrushOperateMode.InitializeController;
         public void Controller(BrushOperateMode mode, Vector2 startingPoint, Vector2 point) { }
+        public void InitializeController(Vector2 startingPoint, Vector2 point) { }
 
         public void Draw(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Color accentColor) { }
 

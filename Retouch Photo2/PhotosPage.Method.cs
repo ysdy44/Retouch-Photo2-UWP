@@ -2,6 +2,7 @@
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Brushs.Models;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using System.Numerics;
@@ -66,13 +67,23 @@ namespace Retouch_Photo2
             ImageBrush imageBrush = this._getImageBrush();
             if (imageBrush == null) return;
 
+            //History
+            IHistoryBase history = new IHistoryBase("Set fill");
+
             //Selection
+            this.SelectionViewModel.Fill = imageBrush;
             this.SelectionViewModel.SetValue((layer) =>
             {
-                layer.Style.FillBrush = imageBrush.Clone();
+                //History
+                var previous = layer.Style.Fill.Clone();
+                history.Undos.Push(() => layer.Style.Fill = previous.Clone());
+
+                layer.Style.Fill = imageBrush.Clone();
                 this.SelectionViewModel.StyleLayer = layer;
             });
-            this.SelectionViewModel.FillBrush = imageBrush;
+
+            //History
+            this.ViewModel.Push(history);
 
             this.Frame.GoBack();
         }
@@ -81,13 +92,23 @@ namespace Retouch_Photo2
             ImageBrush imageBrush = this._getImageBrush();
             if (imageBrush == null) return;
 
+            //History
+            IHistoryBase history = new IHistoryBase("Set stroke");
+
             //Selection
+            this.SelectionViewModel.Stroke = imageBrush;
             this.SelectionViewModel.SetValue((layer) =>
             {
-                layer.Style.StrokeBrush = imageBrush.Clone();
+                //History
+                var previous = layer.Style.Stroke.Clone();
+                history.Undos.Push(() => layer.Style.Stroke = previous.Clone());
+
+                layer.Style.Stroke = imageBrush.Clone();
                 this.SelectionViewModel.StyleLayer = layer;
             });
-            this.SelectionViewModel.StrokeBrush = imageBrush;
+
+            //History
+            this.ViewModel.Push(history);
 
             this.Frame.GoBack();
         }
@@ -141,7 +162,7 @@ namespace Retouch_Photo2
                         Source = transformerSource,
                         Destination = layer.Transform.Destination,
                     };
-                    layer.Style.FillBrush = new ImageBrush(transformerSource)
+                    layer.Style.Fill = new ImageBrush(transformerSource)
                     {
                         Photocopier = photo.ToPhotocopier()
                     };

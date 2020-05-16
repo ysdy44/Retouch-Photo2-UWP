@@ -25,22 +25,22 @@ namespace Retouch_Photo2.Brushs
             }
         }
 
-        /// <summary> Gets or sets the fill-brush. </summary>
-        public IBrush FillBrush
+        /// <summary> Gets or sets the fill. </summary>
+        public IBrush Fill
         {
             set
             {
-                this._vsFillBrush = value;
+                this._vsFill = value;
                 this.Invalidate();//Invalidate
             }
         }
 
-        /// <summary> Gets or sets the stroke-brush. </summary>
-        public IBrush StrokeBrush
+        /// <summary> Gets or sets the stroke. </summary>
+        public IBrush Stroke
         {
             set
             {
-                this._vsStrokeBrush = value;
+                this._vsStroke = value;
                 this.Invalidate();//Invalidate
             }
         }
@@ -50,17 +50,17 @@ namespace Retouch_Photo2.Brushs
         
         //@VisualState
         FillOrStroke _vsFillOrStroke;
-        IBrush _vsFillBrush;
-        IBrush _vsStrokeBrush;
+        IBrush _vsFill;
+        IBrush _vsStroke;
         public void Invalidate()
         {
             switch (this._vsFillOrStroke)
             {
                 case FillOrStroke.Fill:
-                    this.Rectangle.Fill = this.ToBrush(this._vsFillBrush);
+                    this.Rectangle.Fill = this.ToBrush(this._vsFill);
                     break;
                 case FillOrStroke.Stroke:
-                    this.Rectangle.Fill = this.ToBrush(this._vsStrokeBrush);
+                    this.Rectangle.Fill = this.ToBrush(this._vsStroke);
                     break;
             }
         }

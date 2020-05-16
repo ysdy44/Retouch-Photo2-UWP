@@ -11,18 +11,20 @@ namespace Retouch_Photo2.Historys
     /// </summary>
     public interface IHistory
     {
-        /// <summary> Gets IHistory's type. </summary>
-        HistoryType Type { get; }
+        string Title { get; set; }
 
-        /// <summary> Gets IHistory's undo. </summary>
-        Stack<Action> Undos { get; set; }
-        /// <summary> Gets IHistory's redo. </summary>
-        //Stack<Action> Redos { get; set; }        
+        Stack<Action> Undos { get; set; }    
     }
 
-    public class IHistoryBase
+    public class IHistoryBase : IHistory
     {
+        public string Title { get; set; }
+
         public Stack<Action> Undos { get; set; } = new Stack<Action>();
-        //public Stack<Action> Redos { get; set; } = new Stack<Action>();
+
+        public IHistoryBase(string title)
+        {
+            this.Title = title;
+        }
     }
 }

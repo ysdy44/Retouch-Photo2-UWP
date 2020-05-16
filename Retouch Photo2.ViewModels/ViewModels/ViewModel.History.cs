@@ -33,17 +33,6 @@ namespace Retouch_Photo2.ViewModels
         }
         private bool isUndoEnabled;
 
-        //public bool IsRedoEnabled
-        //{
-        //    get => this.isRedoEnabled;
-        //    set
-        //    {
-         //       this.isRedoEnabled = value;
-         //       this.OnPropertyChanged(nameof(this.IsRedoEnabled));//Notify 
-         //   }
-       // }
-       // private bool isRedoEnabled;
-
 
 
         public bool Undo()
@@ -65,11 +54,11 @@ namespace Retouch_Photo2.ViewModels
 
             return false;
         }
-        //public bool Undo()
-        // {
-        //}
+
         public void Push(IHistory history)
         {
+            if (history.Undos.Count == 0) return;
+
             this.Historys.Add(history);
             if (this.Historys.Count > this.HistorysLimit) this.Historys.RemoveAt(0);
 
@@ -91,6 +80,7 @@ namespace Retouch_Photo2.ViewModels
                 this.IsUndoEnabled = true;
             }
         }
+        
 
     }
 }

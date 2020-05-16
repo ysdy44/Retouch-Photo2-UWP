@@ -23,10 +23,10 @@ namespace Retouch_Photo2
         /// <summary> Add a <see cref="ImageLayer"/>. </summary>
         AddImageLayer,
 
-        /// <summary> Make <see cref="Brushs.Style.FillBrush"/> to <see cref="ImageBrush"/> in <see cref="BrushTool"/>. </summary>
-        FillBrushToImage,
-        /// <summary> Make <see cref="Brushs.Style.StrokeBrush"/> to <see cref="ImageBrush"/> in <see cref="BrushTool"/>. </summary>
-        StrokeBrushToImage,
+        /// <summary> Make <see cref="Brushs.Style.Fill"/> to <see cref="ImageBrush"/> in <see cref="BrushTool"/>. </summary>
+        FillToImage,
+        /// <summary> Make <see cref="Brushs.Style.Stroke"/> to <see cref="ImageBrush"/> in <see cref="BrushTool"/>. </summary>
+        StrokeToImage,
         
         /// <summary> Select a image in <see cref= "ImageTool" />. </summary>
         SelectImage,
@@ -58,8 +58,8 @@ namespace Retouch_Photo2
 
                     case PhotosPageMode.AddImageLayer: return this.AddImageLayer;
 
-                    case PhotosPageMode.FillBrushToImage: return this.FillBrushToImage;
-                    case PhotosPageMode.StrokeBrushToImage: return this.StrokeBrushToImage;
+                    case PhotosPageMode.FillToImage: return this.FillToImage;
+                    case PhotosPageMode.StrokeToImage: return this.StrokeToImage;
 
                     case PhotosPageMode.SelectImage: return this.SelectImage;
                     case PhotosPageMode.ReplaceImage: return this.ReplaceImage;
@@ -104,8 +104,8 @@ namespace Retouch_Photo2
 
             this.AddImageLayerButton.Tapped += (s, e) => this.Add();
 
-            this.FillBrushToImageButton.Tapped += (s, e) => this.Fill();
-            this.StrokeBrushToImageButton.Tapped += (s, e) => this.Stroke();
+            this.FillToImageButton.Tapped += (s, e) => this.Fill();
+            this.StrokeToImageButton.Tapped += (s, e) => this.Stroke();
 
             this.SelectImageButton.Tapped += (s, e) => this.Select();
             this.ReplaceImageButton.Tapped += (s, e) => this.Replace();
@@ -141,8 +141,8 @@ namespace Retouch_Photo2
 
             this.AddImageLayerButton.Content = resource.GetString("/$PhotosPage/AddImageLayer");
 
-            this.FillBrushToImageButton.Content = resource.GetString("/$PhotosPage/FillBrushToImage");
-            this.StrokeBrushToImageButton.Content = resource.GetString("/$PhotosPage/StrokeBrushToImage");
+            this.FillToImageButton.Content = resource.GetString("/$PhotosPage/FillToImage");
+            this.StrokeToImageButton.Content = resource.GetString("/$PhotosPage/StrokeToImage");
 
             this.SelectImageButton.Content = resource.GetString("/$PhotosPage/SelectImage");
             this.ReplaceImageButton.Content = resource.GetString("/$PhotosPage/ReplaceImage");

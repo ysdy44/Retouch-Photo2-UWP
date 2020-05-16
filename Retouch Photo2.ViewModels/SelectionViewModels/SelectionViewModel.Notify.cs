@@ -172,7 +172,7 @@ namespace Retouch_Photo2.ViewModels
                 if (layer.Type == LayerType.Image)
                 {
                     this.IsImageLayer = true;
-                    this.Photocopier = layer.Style.FillBrush.Photocopier;
+                    this.Photocopier = layer.Style.Fill.Photocopier;
                 }
                 else this.IsImageLayer = false;
             }

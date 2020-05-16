@@ -8,7 +8,7 @@ namespace Retouch_Photo2.Brushs
     public enum BrushOperateMode
     {
         /// <summary> Normal. </summary>
-        None,
+        InitializeController,
 
         /// <summary> Operate <see cref="LinearGradientBrush.StartPoint"/>. </summary>
         LinearStartPoint,

@@ -56,7 +56,7 @@ namespace Retouch_Photo2.ViewModels
         }
         private Color color = Colors.LightGray;
 
-        /// <summary> Sets color (width fill-brush and stroke-brush). </summary>  
+        /// <summary> Sets color (width fill and stroke). </summary>  
         public void SetColor(Color color, FillOrStroke fillOrStroke)
         {
             if (this.FillOrStroke == fillOrStroke) this.Color = color;
@@ -64,19 +64,19 @@ namespace Retouch_Photo2.ViewModels
             switch (fillOrStroke)
             {
                 case FillOrStroke.Fill:
-                    this.FillBrush = new ColorBrush(color);
+                    this.Fill = new ColorBrush(color);
                     this.SetValue((layer) =>
                     {
-                        layer.Style.FillBrush = new ColorBrush(color);
+                        layer.Style.Fill = new ColorBrush(color);
                         this.StyleLayer = layer;
                     });
                     break;
 
                 case FillOrStroke.Stroke:
-                    this.StrokeBrush = new ColorBrush(color);
+                    this.Stroke = new ColorBrush(color);
                     this.SetValue((layer) =>
                     {
-                        layer.Style.StrokeBrush = new ColorBrush(color);
+                        layer.Style.Stroke = new ColorBrush(color);
                         this.StyleLayer = layer;
                     });
                     break;
@@ -87,29 +87,29 @@ namespace Retouch_Photo2.ViewModels
         //////////////////////////
 
 
-        /// <summary> Retouch_Photo2's the only fill-brush. </summary>
-        public IBrush FillBrush
+        /// <summary> Retouch_Photo2's the only fill. </summary>
+        public IBrush Fill
         {
-            get => this.fillBrush;
+            get => this.fill;
             set
             {
-                this.fillBrush = value;
-                this.OnPropertyChanged(nameof(this.FillBrush));//Notify 
+                this.fill = value;
+                this.OnPropertyChanged(nameof(this.Fill));//Notify 
             }
         }
-        private IBrush fillBrush = new ColorBrush(Colors.LightGray);
+        private IBrush fill = new ColorBrush(Colors.LightGray);
 
-        /// <summary> Retouch_Photo2's the only stroke-brush. </summary>
-        public IBrush StrokeBrush
+        /// <summary> Retouch_Photo2's the only stroke. </summary>
+        public IBrush Stroke
         {
-            get => this.strokeBrush;
+            get => this.stroke;
             set
             {
-                this.strokeBrush = value;
-                this.OnPropertyChanged(nameof(this.StrokeBrush));//Notify 
+                this.stroke = value;
+                this.OnPropertyChanged(nameof(this.Stroke));//Notify 
             }
         }
-        private IBrush strokeBrush = new NoneBrush();
+        private IBrush stroke = new NoneBrush();
 
         /// <summary> Retouch_Photo2's the only stroke-width. </summary>
         public float StrokeWidth
@@ -141,28 +141,28 @@ namespace Retouch_Photo2.ViewModels
             if (style == null)
             {
                 this.IsFollowTransform = true;
-                this.FillBrush = new NoneBrush();
-                this.StrokeBrush = new NoneBrush();
+                this.Fill = new NoneBrush();
+                this.Stroke = new NoneBrush();
                 this.StrokeWidth = 0;
                 this.StrokeStyle = new CanvasStrokeStyle();
             }
             else
             {
                 this.IsFollowTransform = style.IsFollowTransform;
-                this.FillBrush = style.FillBrush;
-                this.StrokeBrush = style.StrokeBrush;
+                this.Fill = style.Fill;
+                this.Stroke = style.Stroke;
                 this.StrokeWidth = style.StrokeWidth;
                 this.StrokeStyle = style.StrokeStyle;
 
                 switch (this.FillOrStroke)
                 {
                     case FillOrStroke.Fill:
-                        if (style.FillBrush.Type == BrushType.Color)
-                            this.Color = style.FillBrush.Color;
+                        if (style.Fill.Type == BrushType.Color)
+                            this.Color = style.Fill.Color;
                         break;
                     case FillOrStroke.Stroke:
-                        if (style.StrokeBrush.Type == BrushType.Color)
-                            this.Color = style.StrokeBrush.Color;
+                        if (style.Stroke.Type == BrushType.Color)
+                            this.Color = style.Stroke.Color;
                         break;
                 }
             }
@@ -243,8 +243,8 @@ namespace Retouch_Photo2.ViewModels
 
                 return new Style
                 {
-                    FillBrush = new ColorBrush(Colors.LightGray),
-                    StrokeBrush = new NoneBrush(),
+                    Fill = new ColorBrush(Colors.LightGray),
+                    Stroke = new NoneBrush(),
                     StrokeWidth = 0,
                     StrokeStyle = new CanvasStrokeStyle(),
                 };
@@ -270,8 +270,8 @@ namespace Retouch_Photo2.ViewModels
 
                 return new Style
                 {
-                    FillBrush = new NoneBrush(),
-                    StrokeBrush = new ColorBrush(Colors.Black),
+                    Fill = new NoneBrush(),
+                    Stroke = new ColorBrush(Colors.Black),
                     StrokeWidth = 3,
                     StrokeStyle = new CanvasStrokeStyle(),
                 };
@@ -297,8 +297,8 @@ namespace Retouch_Photo2.ViewModels
 
                 return new Style
                 {
-                    FillBrush = new ColorBrush(Colors.Black),
-                    StrokeBrush = new NoneBrush(),
+                    Fill = new ColorBrush(Colors.Black),
+                    Stroke = new NoneBrush(),
                     StrokeWidth = 0,
                     StrokeStyle = new CanvasStrokeStyle(),
                 };

@@ -12,7 +12,7 @@ namespace Retouch_Photo2.Brushs
         /// Create a Brush from an string and XElement.
         /// </summary>
         /// <param name="type"> The source string. </param>
-        /// <returns> The created Layer. </returns>
+        /// <returns> The created <see cref="IBrush"/>. </returns>
         public static IBrush CreateBrush(string type)
         {
             switch (type)

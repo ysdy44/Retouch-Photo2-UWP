@@ -15,14 +15,34 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Gets or sets whether the style follows the transform. </summary>
         public bool IsFollowTransform = true;
 
-        /// <summary> Gets or sets Style's fill-brush. </summary>
-        public IBrush FillBrush = new NoneBrush();
-        /// <summary> Gets or sets Style's stroke-brush. </summary>
-        public IBrush StrokeBrush = new NoneBrush();
+        /// <summary> Gets or sets Style's fill. </summary>
+        public IBrush Fill = new NoneBrush();
+        /// <summary> The cache of <see cref="Style.Fill"/>. </summary>
+        public IBrush StartingFill { get; private set; }
+        /// <summary> Cache the <see cref="Style.Fill"/>. </summary>
+        public void CacheFill() => this.StartingFill = this.Fill.Clone();
+        
+        /// <summary> Gets or sets Style's stroke. </summary>
+        public IBrush Stroke = new NoneBrush();
+        /// <summary> The cache of <see cref="Style.Stroke"/>. </summary>
+        public IBrush StartingStroke { get; private set; }
+        /// <summary> Cache the <see cref="Style.Stroke"/>. </summary>
+        public void CacheStroke() => this.StartingStroke = this.Stroke.Clone();
+        
         /// <summary> Gets or sets Style's stroke-width. </summary>
         public float StrokeWidth = 1;
+        /// <summary> The cache of <see cref="Style.StrokeWidth"/>. </summary>
+        public float StartingStrokeWidth { get; private set; }
+        /// <summary> Cache the <see cref="Style.StrokeWidth"/>. </summary>
+        void CacheStrokeWidth() => this.StartingStrokeWidth = this.StrokeWidth;
+        
         /// <summary> Gets or sets Style's stroke-style. </summary>
         public CanvasStrokeStyle StrokeStyle = new CanvasStrokeStyle();
+        /// <summary> The cache of <see cref="Style.StrokeStyle"/>. </summary>
+        public CanvasStrokeStyle StartingStrokeStyle { get; private set; }
+        /// <summary> Cache the <see cref="Style.StrokeStyle"/>. </summary>
+        void CacheStrokeStyle() => this.StartingStrokeStyle = this.StrokeStyle.Clone();
+
 
         //@Interface
         /// <summary>
@@ -32,8 +52,8 @@ namespace Retouch_Photo2.Brushs
         {
             if (this.IsFollowTransform)
             {
-                this.FillBrush.CacheTransform();
-                this.StrokeBrush.CacheTransform();
+                this.Fill.CacheTransform();
+                this.Stroke.CacheTransform();
             }
         }
         /// <summary>
@@ -44,8 +64,8 @@ namespace Retouch_Photo2.Brushs
         {
             if (this.IsFollowTransform)
             {
-                this.FillBrush.TransformMultiplies(matrix);
-                this.StrokeBrush.TransformMultiplies(matrix);
+                this.Fill.TransformMultiplies(matrix);
+                this.Stroke.TransformMultiplies(matrix);
             }
         }
         /// <summary>
@@ -56,8 +76,8 @@ namespace Retouch_Photo2.Brushs
         {
             if (this.IsFollowTransform)
             {
-                this.FillBrush.TransformAdd(vector);
-                this.StrokeBrush.TransformAdd(vector);
+                this.Fill.TransformAdd(vector);
+                this.Stroke.TransformAdd(vector);
             }
         }
 
@@ -71,9 +91,9 @@ namespace Retouch_Photo2.Brushs
         /// <param name="canvasToVirtualMatrix"> The canvas-virtual-matrix. </param>
         public void FillGeometry(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, CanvasGeometry geometry, Matrix3x2 canvasToVirtualMatrix)
         {
-            ICanvasBrush canvasBrush = this.FillBrush.GetICanvasBrush(resourceCreator, canvasToVirtualMatrix);
-            if (canvasBrush == null) return;
+            if (this.Fill.Type == BrushType.None) return;
 
+            ICanvasBrush canvasBrush = this.Fill.GetICanvasBrush(resourceCreator, canvasToVirtualMatrix);
             drawingSession.FillGeometry(geometry, canvasBrush);
         }
         /// <summary>
@@ -85,9 +105,10 @@ namespace Retouch_Photo2.Brushs
         /// <param name="canvasToVirtualMatrix"> The canvas-virtual-matrix. </param>
         public void DrawGeometry(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, CanvasGeometry geometry, Matrix3x2 canvasToVirtualMatrix)
         {
-            ICanvasBrush canvasBrush = this.StrokeBrush.GetICanvasBrush(resourceCreator, canvasToVirtualMatrix);
-            if (canvasBrush == null) return;
+            if (this.Stroke.Type == BrushType.None) return;
+            if (this.StrokeWidth == 0) return;
 
+            ICanvasBrush canvasBrush = this.Stroke.GetICanvasBrush(resourceCreator, canvasToVirtualMatrix);
             float strokeWidth = this.StrokeWidth * (canvasToVirtualMatrix.M11 + canvasToVirtualMatrix.M22) / 2;
             drawingSession.DrawGeometry(geometry, canvasBrush, strokeWidth, this.StrokeStyle);
         }
@@ -101,15 +122,14 @@ namespace Retouch_Photo2.Brushs
         {
             return new Style
             {
-                FillBrush = this.FillBrush.Clone(),
-                StrokeBrush = this.StrokeBrush.Clone(),
+                Fill = this.Fill.Clone(),
+                Stroke = this.Stroke.Clone(),
                 StrokeWidth = this.StrokeWidth,
                 StrokeStyle = this.StrokeStyle.Clone()
             };
         }
 
-
-
+        
         /// <summary>
         /// Convert all brush points
         /// from starting transformer
@@ -118,15 +138,15 @@ namespace Retouch_Photo2.Brushs
         /// <param name="startingTransformer"> The starting transformer. </param>
         public void OneBrushPoints(Transformer startingTransformer)
         {
-            this.FillBrush.CacheTransform();
-            this.StrokeBrush.CacheTransform();
+            this.Fill.CacheTransform();
+            this.Stroke.CacheTransform();
 
             Matrix3x2 oneMatrix = Transformer.FindHomography(startingTransformer, Transformer.One);
-            this.FillBrush.TransformMultiplies(oneMatrix);
-            this.StrokeBrush.TransformMultiplies(oneMatrix);
+            this.Fill.TransformMultiplies(oneMatrix);
+            this.Stroke.TransformMultiplies(oneMatrix);
 
-            this.StrokeBrush.CacheTransform();
-            this.FillBrush.CacheTransform();
+            this.Stroke.CacheTransform();
+            this.Fill.CacheTransform();
         }
         /// <summary>
         /// Convert all brush points
@@ -138,8 +158,8 @@ namespace Retouch_Photo2.Brushs
         {
             Matrix3x2 matrix = Transformer.FindHomography(Transformer.One, transformer);
 
-            this.FillBrush.TransformMultiplies(matrix);
-            this.StrokeBrush.TransformMultiplies(matrix);
+            this.Fill.TransformMultiplies(matrix);
+            this.Stroke.TransformMultiplies(matrix);
         }
 
     }
