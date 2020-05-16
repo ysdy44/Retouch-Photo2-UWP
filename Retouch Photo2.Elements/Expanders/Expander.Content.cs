@@ -1,7 +1,9 @@
 ﻿using System;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace Retouch_Photo2.Elements
 {
@@ -37,20 +39,21 @@ namespace Retouch_Photo2.Elements
                         this.HeightRectangle.VerticalAlignment = VerticalAlignment.Stretch;
                         this.HeightRectangle.Height = double.NaN;
 
-                        this.ShowLayout();
                         if (this._vsState == ExpanderState.Hide) this.Opened?.Invoke(); //Delegate 
                         break;
 
                     case ExpanderState.OverlayNotExpanded:
                         this.HeightRectangle.VerticalAlignment = VerticalAlignment.Top;
-                        (this.IsSecondPage ? this.HeightStoryboardSecondToZero : this.HeightStoryboardMainToZero).Begin();//Storyboard
+                        if (this.IsSecondPage) this.HeightStoryboardSecondToZero.Begin();//Storyboard
+                        else this.HeightStoryboardMainToZero.Begin();//Storyboard
                         break;
 
                     case ExpanderState.Overlay:
                         if (this._vsState == ExpanderState.OverlayNotExpanded)
                         {
                             this.HeightRectangle.VerticalAlignment = VerticalAlignment.Top;
-                            (this.IsSecondPage ? this.HeightStoryboardZeroToSecond : this.HeightStoryboardZeroToMain).Begin();//Storyboard
+                            if (this.IsSecondPage) this.HeightStoryboardZeroToSecond.Begin();//Storyboard
+                            else this.HeightStoryboardZeroToMain.Begin();//Storyboard
                         }
 
                         this.Overlaid?.Invoke(); //Delegate 
@@ -68,15 +71,19 @@ namespace Retouch_Photo2.Elements
         public FlyoutPlacementMode PlacementMode { get; set; } = FlyoutPlacementMode.Bottom;
         public FrameworkElement Layout { get; set; }
         public IExpanderButton Button { get; set; }
+        
 
-
-        public void ShowLayout()
+        public void CalculatePostion(FrameworkElement placementTarget, FlyoutPlacementMode placementMode)
         {
-            double flyoutPostionX = this.GetFlyoutPostionX();
-            double flyoutPostionY = this.GetFlyoutPostionY();
+            //Gets visual-postion in windows.
+            Point buttonPostion = placementTarget.TransformToVisual(Window.Current.Content).TransformPoint(new Point());//@VisualPostion
+            double flyoutPostionX = this.GetFlyoutPostionX(buttonPostion.X, placementTarget.ActualWidth, placementMode);
+            double flyoutPostionY = this.GetFlyoutPostionY(buttonPostion.Y, placementTarget.ActualHeight, placementMode);
+
             this.PostionX = this.GetBoundPostionX(flyoutPostionX);
             this.PostionY = this.GetBoundPostionY(flyoutPostionY);
         }
+
         public void HideLayout()
         {
             switch (this.State)
@@ -88,6 +95,7 @@ namespace Retouch_Photo2.Elements
 
             this.Layout.IsHitTestVisible = true;
         }
+
         public void CropLayout()
         {
             switch (this.State)

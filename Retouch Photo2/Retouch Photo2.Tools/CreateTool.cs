@@ -56,7 +56,7 @@ namespace Retouch_Photo2.Tools
 
             //Mezzanine
             this.ViewModel.MezzanineLayer = createLayer(transformer);
-            this.ViewModel.MezzanineLayer.StyleManager.CacheTransform();
+            this.ViewModel.MezzanineLayer.Style.CacheTransform();
             this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.ViewModel.MezzanineLayer);
 
             //Selection
@@ -82,10 +82,10 @@ namespace Retouch_Photo2.Tools
             this.ViewModel.SetTextWidthHeight(transformer);
 
             //Mezzanine
-            this.ViewModel.MezzanineLayer.TransformManager = new TransformManager(transformer);
+            this.ViewModel.MezzanineLayer.Transform = new Transform(transformer);
 
             //TransformBrush
-            this.ViewModel.MezzanineLayer.StyleManager.TransformBrush(transformer);
+            this.ViewModel.MezzanineLayer.Style.DeliverBrushPoints(transformer);
 
             //Selection
             this.SelectionViewModel.Transformer = transformer;
@@ -112,7 +112,7 @@ namespace Retouch_Photo2.Tools
                 this.ViewModel.TextVisibility = Visibility.Collapsed;
 
                 //Mezzanine
-                this.ViewModel.MezzanineLayer.TransformManager = new TransformManager(transformer); 
+                this.ViewModel.MezzanineLayer.Transform = new Transform(transformer); 
 
                 foreach (ILayer child in this.ViewModel.Layers.RootLayers)
                 {

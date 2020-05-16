@@ -70,7 +70,7 @@ namespace Retouch_Photo2.Brushs
 
 
         /// <summary>
-        /// Get <see cref="IBrush"/> own copy.
+        /// Get own copy.
         /// </summary>
         /// <returns> The cloned <see cref="IBrush"/>. </returns>
         IBrush Clone();

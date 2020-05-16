@@ -4,9 +4,9 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Effects
 {
     /// <summary>
-    /// Represents a special effect that adds effects to layers
+    /// Represents a special effect page that adds effects to layers
     /// </summary>
-    public interface IEffect
+    public interface IEffectPage
     {
         /// <summary> Gets IEffect's name. </summary>
         EffectType Type { get; }
@@ -19,23 +19,23 @@ namespace Retouch_Photo2.Effects
         ToggleSwitch ToggleSwitch { get; }
 
         /// <summary>
-        /// Reset the <see cref="IEffect"/>'s value.
+        /// Reset the <see cref="IEffectPage"/>'s value.
         /// </summary>
         void Reset();
         /// <summary>
-        /// Reset the <see cref="EffectManager"/>'s data.
+        /// Reset the <see cref="Effect"/>'s data.
         /// </summary>
-        /// <param name="effectManager"> The effect-manager. </param>
-        void ResetEffectManager(EffectManager effectManager);
+        /// <param name="effect"> The effect. </param>
+        void ResetEffect(Effect effect);
         /// <summary>
-        /// <see cref="IEffect"/>'s value follows the <see cref="EffectManager"/>.
+        /// <see cref="IEffectPage"/>'s value follows the <see cref="Effect"/>.
         /// </summary>
-        /// <param name="effectManager"> The effect-manager. </param>
-        void FollowEffectManager(EffectManager effectManager);
+        /// <param name="effect"> The effect. </param>
+        void FollowEffect(Effect effect);
         /// <summary>
-        /// Overwriting the <see cref="EffectManager"/> according to ToggleSwitch's IsOn
+        /// Overwriting the <see cref="Effect"/> according to ToggleSwitch's IsOn
         /// </summary>
-        /// <param name="effectManager"> The effect-manager. </param>
-        void OverwritingEffectManager(EffectManager effectManager);
+        /// <param name="effect"> The effect. </param>
+        void OverwritingEffect(Effect effect);
     }    
 }

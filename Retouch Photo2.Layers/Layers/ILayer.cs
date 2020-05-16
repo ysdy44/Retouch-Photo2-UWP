@@ -4,13 +4,10 @@ using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
-using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Effects;
-using Retouch_Photo2.Elements;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
-using Windows.UI;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers
@@ -27,7 +24,7 @@ namespace Retouch_Photo2.Layers
         /// <summary> Gets ILayer's type. </summary>
         LayerType Type { get; }
         /// <summary> Gets or sets ILayer's name. </summary>
-        string Name { get; set; }
+        string Name { get; set; } 
         /// <summary> Gets or sets ILayer's blend mode. </summary>
         BlendEffectMode? BlendMode { get; set; }
         
@@ -48,14 +45,14 @@ namespace Retouch_Photo2.Layers
         /// <summary> Gets ILayer's actually transformer. </summary>
         Transformer GetActualDestinationWithRefactoringTransformer { get; }
 
-        /// <summary> Gets or sets ILayer's style manager. </summary>
-        StyleManager StyleManager { get; set; }
-        /// <summary> Gets or sets ILayer's transformer. </summary>
-        TransformManager TransformManager { get; set; }
-        /// <summary> Gets or sets ILayer's effect manager. </summary>
-        EffectManager EffectManager { get; set; }
-        /// <summary> Gets or sets ILayer's adjustment manager. </summary>
-        AdjustmentManager AdjustmentManager { get; set; }
+        /// <summary> Gets or sets ILayer's style. </summary>
+        Retouch_Photo2.Brushs.Style Style { get; set; }
+        /// <summary> Gets or sets ILayer's transform. </summary>
+        Transform Transform { get; set; }
+        /// <summary> Gets or sets ILayer's effect. </summary>
+        Effect Effect { get; set; }
+        /// <summary> Gets or sets ILayer's filter. </summary>
+        Filter Filter { get; set; }
 
 
         /// <summary> Gets or sets ILayer's children layers. </summary>
@@ -65,7 +62,7 @@ namespace Retouch_Photo2.Layers
 
 
         /// <summary>
-        /// Get ILayer own copy.
+        /// Get own copy.
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>
         /// <returns> The cloned ILayer. </returns>

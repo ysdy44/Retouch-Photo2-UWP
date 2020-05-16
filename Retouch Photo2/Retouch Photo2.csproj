@@ -116,41 +116,48 @@
     <Compile Include="Retouch Photo2.Menus\HistoryMenu.xaml.cs">
       <DependentUpon>HistoryMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Menus\ParagraphMenu.xaml.cs">
+      <DependentUpon>ParagraphMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Menus\StrokeMenu.xaml.cs">
       <DependentUpon>StrokeMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Menus\StyleMenu.xaml.cs">
+      <DependentUpon>StyleMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Tools\TransformerTool.Clicke.cs" />
     <Compile Include="Retouch Photo2.Tools\TransformerTool.cs" />
-    <Compile Include="XMLs\XML.FiltersFactory.cs" />
+    <Compile Include="XMLs\XML.Bitmap.cs" />
+    <Compile Include="XMLs\XML.FilterFile.cs" />
     <Compile Include="XMLs\XML.PhotosFile.cs" />
     <Compile Include="XMLs\XML.ProjectFile.cs" />
-    <Compile Include="XMLs\XML.SettingFactory.cs" />
+    <Compile Include="XMLs\XML.SettingFile.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PhotosPage.xaml.cs">
       <DependentUpon>PhotosPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Effects\DirectionalBlurEffect.xaml.cs">
-      <DependentUpon>DirectionalBlurEffect.xaml</DependentUpon>
+    <Compile Include="Retouch Photo2.Effects\DirectionalBlurEffectPage.xaml.cs">
+      <DependentUpon>DirectionalBlurEffectPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Effects\EmbossEffect.xaml.cs">
-      <DependentUpon>EmbossEffect.xaml</DependentUpon>
+    <Compile Include="Retouch Photo2.Effects\EmbossEffectPage.xaml.cs">
+      <DependentUpon>EmbossEffectPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Effects\GaussianBlurEffect.xaml.cs">
-      <DependentUpon>GaussianBlurEffect.xaml</DependentUpon>
+    <Compile Include="Retouch Photo2.Effects\GaussianBlurEffectPage.xaml.cs">
+      <DependentUpon>GaussianBlurEffectPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Effects\OuterShadowEffect.xaml.cs">
-      <DependentUpon>OuterShadowEffect.xaml</DependentUpon>
+    <Compile Include="Retouch Photo2.Effects\OuterShadowEffectPage.xaml.cs">
+      <DependentUpon>OuterShadowEffectPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Effects\OutlineEffect.xaml.cs">
-      <DependentUpon>OutlineEffect.xaml</DependentUpon>
+    <Compile Include="Retouch Photo2.Effects\OutlineEffectPage.xaml.cs">
+      <DependentUpon>OutlineEffectPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Effects\SharpenEffect.xaml.cs">
-      <DependentUpon>SharpenEffect.xaml</DependentUpon>
+    <Compile Include="Retouch Photo2.Effects\SharpenEffectPage.xaml.cs">
+      <DependentUpon>SharpenEffectPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Effects\StraightenEffect.xaml.cs">
-      <DependentUpon>StraightenEffect.xaml</DependentUpon>
+    <Compile Include="Retouch Photo2.Effects\StraightenEffectPage.xaml.cs">
+      <DependentUpon>StraightenEffectPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Menus\MenuButtons\MenuButton.xaml.cs">
       <DependentUpon>MenuButton.xaml</DependentUpon>
@@ -309,10 +316,14 @@
     <Content Include="Icons\2Logo.png" />
     <Content Include="Icons\Circle.jpg" />
     <Content Include="Icons\GrayAndWhite.jpg" />
+    <Content Include="Icons\LoadFaill.jpg" />
+    <Content Include="XMLs\Styles.xml" />
     <Content Include="XMLs\Filters.xml" />
     <Content Include="XMLs\FilterOriginal.xml" />
     <Compile Include="FileUtils\FileUtil.ZipFolder.cs" />
     <None Include="Retouch Photo_TemporaryKey.pfx" />
+    <PRIResource Include="Strings\zh-CN\%24Loading.resw" />
+    <PRIResource Include="Strings\en-US\%24Loading.resw" />
     <PRIResource Include="Strings\zh-CN\Strokes.resw" />
     <PRIResource Include="Strings\en-US\Strokes.resw" />
     <PRIResource Include="Strings\en-US\Selections.resw" />
@@ -438,31 +449,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Retouch Photo2.Effects\DirectionalBlurEffect.xaml">
+    <Page Include="Retouch Photo2.Effects\DirectionalBlurEffectPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Effects\EmbossEffect.xaml">
+    <Page Include="Retouch Photo2.Effects\EmbossEffectPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Effects\GaussianBlurEffect.xaml">
+    <Page Include="Retouch Photo2.Effects\GaussianBlurEffectPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Effects\OuterShadowEffect.xaml">
+    <Page Include="Retouch Photo2.Effects\OuterShadowEffectPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Effects\OutlineEffect.xaml">
+    <Page Include="Retouch Photo2.Effects\OutlineEffectPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Effects\SharpenEffect.xaml">
+    <Page Include="Retouch Photo2.Effects\SharpenEffectPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Effects\StraightenEffect.xaml">
+    <Page Include="Retouch Photo2.Effects\StraightenEffectPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -502,11 +513,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Retouch Photo2.Menus\ParagraphMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Retouch Photo2.Menus\SelectionMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Retouch Photo2.Menus\StrokeMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Retouch Photo2.Menus\StyleMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -715,10 +734,6 @@
     <ProjectReference Include="..\Retouch Photo2.ViewModels\Retouch Photo2.ViewModels.csproj">
       <Project>{d4571a00-4303-4ddb-b63b-6d741c82f73f}</Project>
       <Name>Retouch Photo2.ViewModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch_Photo2.Strokes\Retouch_Photo2.Strokes.csproj">
-      <Project>{01d8ec32-95e9-4700-9c99-e0ffa246b2a4}</Project>
-      <Name>Retouch_Photo2.Strokes</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

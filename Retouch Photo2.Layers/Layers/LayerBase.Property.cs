@@ -51,12 +51,12 @@ namespace Retouch_Photo2.Layers
         }
 
         public bool IsRefactoringTransformer { get; set; }
-        public virtual Transformer GetActualDestinationWithRefactoringTransformer => this.TransformManager.IsCrop ? this.TransformManager.CropDestination : this.TransformManager.Destination;
+        public virtual Transformer GetActualDestinationWithRefactoringTransformer => this.Transform.IsCrop ? this.Transform.CropDestination : this.Transform.Destination;
 
-        public StyleManager StyleManager { get; set; } = new StyleManager();
-        public TransformManager TransformManager { get; set; } = new TransformManager();
-        public EffectManager EffectManager { get; set; } = new EffectManager();
-        public AdjustmentManager AdjustmentManager { get; set; } = new AdjustmentManager();
+        public Retouch_Photo2.Brushs.Style Style { get; set; } = new Retouch_Photo2.Brushs.Style();
+        public Transform Transform { get; set; } = new Transform();
+        public Effect Effect { get; set; } = new Effect();
+        public Filter Filter { get; set; } = new Filter();
         
         private ILayer parents;
         public ILayer Parents
@@ -86,8 +86,8 @@ namespace Retouch_Photo2.Layers
 
         public virtual void CacheTransform()
         {
-            this.StyleManager.CacheTransform();
-            this.TransformManager.CacheTransform();
+            this.Style.CacheTransform();
+            this.Transform.CacheTransform();
 
             //RefactoringTransformer
             if (this.parents != null)
@@ -101,13 +101,13 @@ namespace Retouch_Photo2.Layers
         }
         public virtual void TransformMultiplies(Matrix3x2 matrix)
         {
-            this.StyleManager.TransformMultiplies(matrix);
-            this.TransformManager.TransformMultiplies(matrix);
+            this.Style.TransformMultiplies(matrix);
+            this.Transform.TransformMultiplies(matrix);
         }
         public virtual void TransformAdd(Vector2 vector)
         {
-            this.StyleManager.TransformAdd(vector);
-            this.TransformManager.TransformAdd(vector);
+            this.Style.TransformAdd(vector);
+            this.Transform.TransformAdd(vector);
         }
         
 
@@ -125,13 +125,13 @@ namespace Retouch_Photo2.Layers
             destination.BlendMode = source.BlendMode;
             destination.Visibility = source.Visibility;
 
-            destination.StyleManager = source.StyleManager.Clone();
-            destination.TransformManager = source.TransformManager.Clone();
-            destination.EffectManager = source.EffectManager.Clone();
-            foreach (IAdjustment adjustment in source.AdjustmentManager.Adjustments)
+            destination.Style = source.Style.Clone();
+            destination.Transform = source.Transform.Clone();
+            destination.Effect = source.Effect.Clone();
+            foreach (IAdjustment adjustment in source.Filter.Adjustments)
             {
                 IAdjustment clone = adjustment.Clone();
-                destination.AdjustmentManager.Adjustments.Add(clone);
+                destination.Filter.Adjustments.Add(clone);
             }
 
             foreach (ILayer layer in source.Children)

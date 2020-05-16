@@ -55,13 +55,13 @@ namespace Retouch_Photo2.Layers.Models
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
-            Transformer transformer = base.TransformManager.Destination;
+            Transformer transformer = base.Transform.Destination;
 
             return TransformerGeometry.CreateDount(resourceCreator, transformer, canvasToVirtualMatrix, this.HoleRadius);
         }
         public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
         {
-            Transformer transformer = base.TransformManager.Destination;
+            Transformer transformer = base.Transform.Destination;
 
             return TransformerGeometry.ConvertToCurvesFromDount(transformer, this.HoleRadius);
         }

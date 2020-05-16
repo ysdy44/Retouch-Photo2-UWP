@@ -41,7 +41,6 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource UnCheckColor}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                     </Storyboard>
                 </VisualState>
 
@@ -53,7 +52,6 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource UnCheckColor}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                     </Storyboard>
                 </VisualState>
 
@@ -65,16 +63,11 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckColor}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <PointerDownThemeAnimation TargetName="RootGrid" />
                     </Storyboard>
                 </VisualState>
 
 
-                <VisualState x:Name="FlyoutShow">
-                    <Storyboard>
-                        <PointerDownThemeAnimation TargetName="RootGrid" />
-                    </Storyboard>
-                </VisualState>
+                <VisualState x:Name="FlyoutShow"/>
 
 
                 <VisualState x:Name="Overlay">
@@ -85,7 +78,6 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundAltHighBrush}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                     </Storyboard>
                 </VisualState>
 
@@ -97,7 +89,6 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundAltHighBrush}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                     </Storyboard>
                 </VisualState>
 
@@ -109,7 +100,6 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundAltHighBrush}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                     </Storyboard>
                 </VisualState>
 

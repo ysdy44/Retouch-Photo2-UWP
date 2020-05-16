@@ -79,7 +79,7 @@ namespace Retouch_Photo2.Menus.Models
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.StyleManager.StrokeStyle.DashStyle = dash;
+                    layer.Style.StrokeStyle.DashStyle = dash;
                     this.SelectionViewModel.StyleLayer = layer;
                 });
                 CanvasStrokeStyle strokeStyle = this.SelectionViewModel.StrokeStyle;
@@ -106,7 +106,7 @@ namespace Retouch_Photo2.Menus.Models
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.StyleManager.StrokeWidth = width;
+                    layer.Style.StrokeWidth = width;
                     this.SelectionViewModel.StyleLayer = layer;
                 });
 
@@ -138,7 +138,7 @@ namespace Retouch_Photo2.Menus.Models
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.StyleManager.StrokeStyle.DashOffset = offset;
+                    layer.Style.StrokeStyle.DashOffset = offset;
                     this.SelectionViewModel.StyleLayer = layer;
                 });
 
@@ -166,9 +166,9 @@ namespace Retouch_Photo2.Menus.Models
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.StyleManager.StrokeStyle.DashCap = cap;
-                    layer.StyleManager.StrokeStyle.StartCap = cap;
-                    layer.StyleManager.StrokeStyle.EndCap = cap;
+                    layer.Style.StrokeStyle.DashCap = cap;
+                    layer.Style.StrokeStyle.StartCap = cap;
+                    layer.Style.StrokeStyle.EndCap = cap;
                     this.SelectionViewModel.StyleLayer = layer;
                 });
                 CanvasStrokeStyle strokeStyle = this.SelectionViewModel.StrokeStyle;
@@ -191,7 +191,7 @@ namespace Retouch_Photo2.Menus.Models
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.StyleManager.StrokeStyle.LineJoin = join;
+                    layer.Style.StrokeStyle.LineJoin = join;
                     this.SelectionViewModel.StyleLayer = layer;
                 });
                 CanvasStrokeStyle strokeStyle = this.SelectionViewModel.StrokeStyle;

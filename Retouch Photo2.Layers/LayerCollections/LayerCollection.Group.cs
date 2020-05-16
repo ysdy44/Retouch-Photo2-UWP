@@ -55,7 +55,7 @@ namespace Retouch_Photo2.Layers
                 this._addLayersToGroupLayer(groupLayer, tempGrouplayers);
 
                 Transformer transformer = LayerCollection.RefactoringTransformer(tempGrouplayers);
-                groupLayer.TransformManager = new TransformManager(transformer);
+                groupLayer.Transform = new Transform(transformer);
             }
 
             //Arrange

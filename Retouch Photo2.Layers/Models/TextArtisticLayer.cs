@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Layers.Models
         {
             float scale = value / this.fontSize;
 
-            Vector2 leftTop = this.TransformManager.Destination.LeftTop;
+            Vector2 leftTop = this.Transform.Destination.LeftTop;
             Matrix3x2 matrix =
                 Matrix3x2.CreateTranslation(-leftTop)
                 * Matrix3x2.CreateScale(scale)
@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Layers.Models
         }
         private float GetFontSize()
         {
-            float height = base.TransformManager.Destination.Vertical.Length();
+            float height = base.Transform.Destination.Vertical.Length();
             this.fontSize = height;
 
             return this.fontSize;

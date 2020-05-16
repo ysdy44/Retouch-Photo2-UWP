@@ -57,10 +57,10 @@ namespace Retouch_Photo2.Brushs
             switch (this._vsFillOrStroke)
             {
                 case FillOrStroke.Fill:
-                    this.Draw(this._vsFillBrush);
+                    this.Rectangle.Fill = this.ToBrush(this._vsFillBrush);
                     break;
                 case FillOrStroke.Stroke:
-                    this.Draw(this._vsStrokeBrush);
+                    this.Rectangle.Fill = this.ToBrush(this._vsStrokeBrush);
                     break;
             }
         }
@@ -72,66 +72,37 @@ namespace Retouch_Photo2.Brushs
             this.InitializeComponent();
         }
 
-        private void Draw(IBrush brush)
+        private Brush ToBrush(IBrush brush)
         {
-            if (brush==null)
-            {
-                this.Rectangle.Fill = this.NoneBrush;
-                return;
-            }
+            if (brush==null) return this.NoneBrush;
 
             switch (brush.Type)
             {
-                case BrushType.None:
-                    this.Rectangle.Fill = this.NoneBrush;
-                    break;
+                case BrushType.None: return this.NoneBrush;
 
                 case BrushType.Color:
                     this.ColorBrush.Color = brush.Color;
-                    this.Rectangle.Fill = this.ColorBrush;
-                    break;
+                  return this.ColorBrush;
 
                 case BrushType.LinearGradient:
-                    this.LinearGradientBrush.GradientStops = this.GetStops(brush.Array);
-                    this.Rectangle.Fill = this.LinearGradientBrush;
-                    break;
+                    this.LinearGradientBrush.GradientStops = brush.Array.ToStops();
+                    return this.LinearGradientBrush;
 
                 case BrushType.RadialGradient:
-                    this.RadialGradientBrush.GradientStops = this.GetStops(brush.Array);
-                    this.Rectangle.Fill = this.RadialGradientBrush;
-                    break;
+                    this.RadialGradientBrush.GradientStops = brush.Array.ToStops();
+                    return this.RadialGradientBrush;
 
                 case BrushType.EllipticalGradient:
-                    this.EllipticalGradientBrush.GradientStops = this.GetStops(brush.Array);
-                    this.Rectangle.Fill = this.EllipticalGradientBrush;
-                    break;
+                    this.EllipticalGradientBrush.GradientStops = brush.Array.ToStops();
+                    return this.EllipticalGradientBrush;
 
                 case BrushType.Image:
                     Photo photo = Photo.FindFirstPhoto(brush.Photocopier);
                     this.BitmapImage.UriSource = new Uri(photo.ImageFilePath);
-                    this.Rectangle.Fill = this.ImageBrush;
-                    break;
+                    return this.ImageBrush;
 
-                default:
-                    break;
+                default: return this.NoneBrush;
             }
-        }
-
-        private GradientStopCollection GetStops(CanvasGradientStop[] stops)
-        {
-            GradientStopCollection gradientStops = new GradientStopCollection();
-
-            foreach (CanvasGradientStop stop in stops)
-            {
-                GradientStop gradientStop = new GradientStop
-                {
-                    Color = stop.Color,
-                    Offset = stop.Position,
-                };
-                gradientStops.Add(gradientStop);
-            }
-
-            return gradientStops;
         }
 
     }

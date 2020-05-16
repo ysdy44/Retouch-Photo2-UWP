@@ -2,6 +2,7 @@
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Elements
@@ -23,7 +24,8 @@ namespace Retouch_Photo2.Elements
                 if (this._vsIsSecondPage != value)
                 {
                     this.HeightRectangle.VerticalAlignment = VerticalAlignment.Top;
-                    (value ? this.HeightStoryboardMainToSecond : this.HeightStoryboardSecondToMain).Begin();//Storyboard
+                    if (value) this.HeightStoryboardMainToSecond.Begin();//Storyboard
+                    else this.HeightStoryboardSecondToMain.Begin();//Storyboard
                 }
 
                 this._vsIsSecondPage = value;
@@ -32,6 +34,7 @@ namespace Retouch_Photo2.Elements
         }
         public Visibility ResetButtonVisibility { set => this.ResetButton.Visibility = value; get => this.ResetButton.Visibility; }
         public Action Reset { get; set; }
+
 
         //@VisualState
         bool _vsIsSecondPage = false;
@@ -42,20 +45,31 @@ namespace Retouch_Photo2.Elements
             {
                 switch (this._vsState)
                 {
-                    case ExpanderState.Hide: return this.Hide;
-                    case ExpanderState.FlyoutShow: return this._vsIsSecondPage ? this.FlyoutShowSecondPage : this.FlyoutShow;
-                    case ExpanderState.OverlayNotExpanded: return this.OverlayNotExpanded;
-                    case ExpanderState.Overlay: return this._vsIsSecondPage ? this.OverlaySecondPage : this.Overlay;
-                    default: return this.Normal;
+                    case ExpanderState.Hide:
+                        return this.Hide;
+
+                    case ExpanderState.FlyoutShow:
+                        return this._vsIsSecondPage ? this.FlyoutShowSecondPage : this.FlyoutShow;
+
+                    case ExpanderState.OverlayNotExpanded:
+                        return this.OverlayNotExpanded;
+
+                    case ExpanderState.Overlay:
+                        return this._vsIsSecondPage ? this.OverlaySecondPage : this.Overlay;
+
+                    default:
+                        return this.Normal;
                 }
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
 
+
         double _postionX;
         double _postionY;
         public double PostionX { get => Canvas.GetLeft(this.Layout); set => Canvas.SetLeft(this.Layout, value); }
         public double PostionY { get => Canvas.GetTop(this.Layout); set => Canvas.SetTop(this.Layout, value); }
+
 
         //@Construct     
         public Expander()
@@ -75,7 +89,12 @@ namespace Retouch_Photo2.Elements
 
             /////////////////////////////////
 
-            this.Button.Self.Tapped += (s, e) => this.State = this.GetButtonState(this.State);
+            this.Button.Self.Tapped += (s, e) =>
+            {
+                if (this.State== ExpanderState.Hide) this.CalculatePostion(this.Button.Self, this.PlacementMode);
+                        
+                this.State = this.GetButtonState(this.State);
+            };
 
             this.CloseButton.Tapped += (s, e) => this.State = ExpanderState.Hide;
             this.StateButton.Tapped += (s, e) => this.State = this.GetState(this.State);
@@ -92,9 +111,8 @@ namespace Retouch_Photo2.Elements
             {
                 if (this.State == ExpanderState.FlyoutShow) return;
 
-                Point point = this.GetVisualPostion(this.Layout);
-                this._postionX = point.X;
-                this._postionY = point.Y;
+                this._postionX = this.PostionX;
+                this._postionY = this.PostionY;
 
                 this.Move?.Invoke(); //Delegate
             };
@@ -110,33 +128,11 @@ namespace Retouch_Photo2.Elements
             };
             this.TitleGrid.ManipulationCompleted += (s, e) =>
             {
-                Point point = this.GetVisualPostion(this.Layout);
-                this._postionX = point.X;
-                this._postionY = point.Y;
+                this._postionX = this.PostionX;
+                this._postionY = this.PostionY;
             };
         }
 
-        private ExpanderState GetState(ExpanderState state)
-        {
-            switch (state)
-            {
-                case ExpanderState.Overlay: return ExpanderState.OverlayNotExpanded;
-                case ExpanderState.OverlayNotExpanded: return ExpanderState.Overlay;
-            }
-            return ExpanderState.Overlay;
-        }
-        private ExpanderState GetButtonState(ExpanderState state)
-        {
-            switch (state)
-            {
-                case ExpanderState.Hide: return ExpanderState.FlyoutShow;
-                case ExpanderState.FlyoutShow: return ExpanderState.Hide;
-
-                case ExpanderState.Overlay: return ExpanderState.OverlayNotExpanded;
-                case ExpanderState.OverlayNotExpanded: return ExpanderState.Overlay;
-            }
-            return ExpanderState.FlyoutShow;
-        }
 
     }
 }

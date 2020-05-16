@@ -150,8 +150,8 @@ namespace Retouch_Photo2.Tools.Models
             return new GeometryHeartLayer
             {
                 Spread = this.SelectionViewModel.GeometryHeartSpread,
-                TransformManager = new TransformManager(transformer),
-                StyleManager = this.SelectionViewModel.GeometryStyle
+                Transform = new Transform(transformer),
+                Style = this.SelectionViewModel.GeometryStyle
             };
         }
 

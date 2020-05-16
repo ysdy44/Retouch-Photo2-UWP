@@ -1,4 +1,6 @@
-﻿using System.Xml.Linq;
+﻿using Retouch_Photo2.Menus;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -23,7 +25,13 @@ namespace Retouch_Photo2.ViewModels
                 (
                     "Root",
                      new XElement("Theme", setting.Theme),
-                     Retouch_Photo2.Elements.XML.SaveDeviceLayout("DeviceLayout", setting.DeviceLayout)
+                     Retouch_Photo2.Elements.XML.SaveDeviceLayout("DeviceLayout", setting.DeviceLayout),
+                     new XElement("MenuTypes", 
+                     (
+                         from menuType
+                         in setting.MenuTypes
+                         select new XElement("MenuType", menuType)
+                     ))
                 )
             );
         }
@@ -41,6 +49,15 @@ namespace Retouch_Photo2.ViewModels
 
             if (root.Element("Theme") is XElement theme) setting.Theme = Retouch_Photo2.Elements.XML.CreateTheme(theme.Value);
             if (root.Element("DeviceLayout") is XElement deviceLayout) setting.DeviceLayout = Retouch_Photo2.Elements.XML.LoadDeviceLayout(deviceLayout);
+            if (root.Element("MenuTypes") is XElement menuTypes)
+            {
+                setting.MenuTypes =
+                (
+                    from menuType
+                    in menuTypes.Elements()
+                    select XML.CreateMenuType(menuType.Value.ToString())
+                ).ToList();
+            }
 
             return setting;
         }

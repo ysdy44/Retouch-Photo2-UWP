@@ -2,15 +2,11 @@
 using Retouch_Photo2.Effects.Models;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.ViewModels;
-using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
-using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Menus.Models
 {
@@ -22,65 +18,65 @@ namespace Retouch_Photo2.Menus.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        
 
-        private IEffect effect;
-        public IEffect Effect
+        
+        private IEffectPage currentEffect;
+        public IEffectPage CurrentEffect
         {
-            get => this.effect;
+            get => this.currentEffect;
             set
             {
-                if (this.effect == value) return;
+                if (this.currentEffect == value) return;
 
                 if (value == null)
                     this.EffectBoder.Child = null;
                 else
                     this.EffectBoder.Child = value.Page;
 
-                this.effect = value;
+                this.currentEffect = value;
             }
         }
-        public List<IEffect> Effects = new List<IEffect>
+        public List<IEffectPage> Effects = new List<IEffectPage>
         {
-            new GaussianBlurEffect(),
-            new DirectionalBlurEffect(),
-            new SharpenEffect(),
-            new OuterShadowEffect(),
+            new GaussianBlurEffectPage(),
+            new DirectionalBlurEffectPage(),
+            new SharpenEffectPage(),
+            new OuterShadowEffectPage(),
 
-            new OutlineEffect(),
+            new OutlineEffectPage(),
 
-            new EmbossEffect(),
-            new StraightenEffect(),
+            new EmbossEffectPage(),
+            new StraightenEffectPage(),
         };
 
         #region DependencyProperty
 
-        /// <summary> Gets or sets <see cref = "EffectMenu" />'s EffectManager. </summary>
-        public EffectManager EffectManager
+        /// <summary> Gets or sets <see cref = "EffectMenu" />'s Effect. </summary>
+        public Effect Effect
         {
-            get { return (EffectManager)GetValue(EffectManagerProperty); }
-            set { SetValue(EffectManagerProperty, value); }
+            get { return (Effect)GetValue(EffectProperty); }
+            set { SetValue(EffectProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "EffectMenu.EffectManager" /> dependency property. </summary>
-        public static readonly DependencyProperty EffectManagerProperty = DependencyProperty.Register(nameof(EffectManager), typeof(EffectManager), typeof(EffectMenu), new PropertyMetadata(null, (sender, e) =>
+        /// <summary> Identifies the <see cref = "EffectMenu.Effect" /> dependency property. </summary>
+        public static readonly DependencyProperty EffectProperty = DependencyProperty.Register(nameof(Effect), typeof(Effect), typeof(EffectMenu), new PropertyMetadata(null, (sender, e) =>
         {
             EffectMenu con = (EffectMenu)sender;
 
-            if (e.NewValue is EffectManager value)
+            if (e.NewValue is Effect value)
             {
-                foreach (IEffect effect in con.Effects)
+                foreach (IEffectPage effect in con.Effects)
                 {
                     effect.ToggleSwitch.IsEnabled = true;
 
                     //IsOn
-                    effect.FollowEffectManager(value);
+                    effect.FollowEffect(value);
                 }
 
                 con._Expander.IsSecondPage = false;
             }
             else
             {
-                foreach (IEffect effect in con.Effects)
+                foreach (IEffectPage effect in con.Effects)
                 {
                     effect.ToggleSwitch.IsEnabled = false;
                 }
@@ -99,8 +95,8 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructDataContext
             (
                  dataContext: this.SelectionViewModel,
-                 path: nameof(this.SelectionViewModel.EffectManager),
-                 dp: EffectMenu.EffectManagerProperty
+                 path: nameof(this.SelectionViewModel.Effect),
+                 dp: EffectMenu.EffectProperty
             );
             this.ConstructStrings();
             this.ConstructMenu();
@@ -164,7 +160,7 @@ namespace Retouch_Photo2.Menus.Models
         //Effects
         private void ConstructEffects()
         {
-            foreach (IEffect effect in this.Effects)
+            foreach (IEffectPage effect in this.Effects)
             {
                 this.EffectsStackPanel.Children.Add(effect.Button);
 
@@ -177,22 +173,22 @@ namespace Retouch_Photo2.Menus.Models
         //Reset
         private void Reset()
         {
-            if (this.Effect == null) return;
+            if (this.CurrentEffect == null) return;
 
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                EffectManager effectManager = layer.EffectManager;
+                Effect effect = layer.Effect;
 
-                this.Effect.Reset();
-                this.Effect.ResetEffectManager(effectManager);
+                this.CurrentEffect.Reset();
+                this.CurrentEffect.ResetEffect(effect);
             });
 
             this.ViewModel.Invalidate();//Invalidate
         }
 
         //Overwriting
-        public void Overwriting(IEffect effect)
+        public void Overwriting(IEffectPage effect)
         {
             if (effect == null) return;
             if (effect.ToggleSwitch.IsEnabled == false) return;
@@ -200,26 +196,26 @@ namespace Retouch_Photo2.Menus.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                EffectManager effectManager = layer.EffectManager;
-                effect.OverwritingEffectManager(effectManager);
+                Effect effect2 = layer.Effect;
+                effect.OverwritingEffect(effect2);
             });
             this.ViewModel.Invalidate();//Invalidate
         }
 
         //Navigate
-        public void Navigate(IEffect effect)
+        public void Navigate(IEffectPage effect)
         {
             if (effect == null) return;
             if (effect.ToggleSwitch.IsEnabled == false) return;
             if (effect.ToggleSwitch.IsOn == false) return;
 
-            this.Effect = effect;
+            this.CurrentEffect = effect;
 
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                EffectManager effectManager = layer.EffectManager;
-                effect.FollowEffectManager(effectManager);
+                Effect effect2 = layer.Effect;
+                effect.FollowEffect(effect2);
 
                 return;
             });

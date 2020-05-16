@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Elements;
 using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
@@ -19,8 +20,6 @@ namespace Retouch_Photo2
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
             
-            this.LoadingControl.Text = resource.GetString("/$DrawPage/Loading");
-
             this.SetupDialog.Title = resource.GetString("/$DrawPage/SetupDialog_Title");
             this.SetupDialog.CloseButton.Content = resource.GetString("/$DrawPage/SetupDialog_Close");
             this.SetupDialog.PrimaryButton.Content = resource.GetString("/$DrawPage/SetupDialog_Primary");
@@ -42,14 +41,16 @@ namespace Retouch_Photo2
             {
                 this.ExportDialog.Hide();
 
+                this.LoadingControl.State = LoadingState.Saving;
                 this.LoadingControl.IsActive = true;
-                bool isSuccesful = await this.Export();
-                this.LoadingControl.IsActive = false;
 
-                this.ViewModel.TextVisibility = Visibility.Visible;
-                this.ViewModel.Text = isSuccesful ? "  ✔  " : "  ❌  ";
-                await Task.Delay(2000);
-                this.ViewModel.TextVisibility = Visibility.Collapsed;
+                bool isSuccesful = await this.Export();
+
+                this.LoadingControl.State = isSuccesful ? LoadingState.SaveSuccess : LoadingState.SaveFailed;
+                await Task.Delay(1000);
+
+                this.LoadingControl.IsActive = false;
+                this.LoadingControl.State = LoadingState.None;
             };
         }
 

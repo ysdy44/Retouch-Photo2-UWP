@@ -150,7 +150,6 @@
                     <VisualState.Setters >
 
                         <!--Title-->
-                        <Setter Target = "TitleGrid.Background" Value="{ThemeResource AppBackground}"/>
                         <Setter Target = "TitleTextBlock.Visibility" Value="Visible"/>
 
                         <!--Button-->
@@ -167,9 +166,6 @@
                 <VisualState x:Name="FlyoutShowSecondPage">
                     <VisualState.Setters >
 
-                        <!--Title-->
-                        <Setter Target = "TitleGrid.Background" Value="{ThemeResource AppBackground}"/>
-
                         <!--Button-->
                         <Setter Target = "BackButton.Visibility" Value="Visible"/>
 
@@ -184,7 +180,6 @@
                     <VisualState.Setters >
 
                         <!--Title-->
-                        <Setter Target = "TitleGrid.Background" Value="{ThemeResource AppLinearBrush}"/>
                         <Setter Target = "TitleTextBlock.Visibility" Value="Visible"/>
 
                         <!--Button-->

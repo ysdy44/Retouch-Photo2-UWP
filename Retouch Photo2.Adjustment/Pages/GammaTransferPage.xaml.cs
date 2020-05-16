@@ -84,7 +84,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                 if (this.Adjustment == null) return;
                 this.Adjustment.AlphaDisable = alphaDisable;
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
             this.RedCheckBox.Toggled += (s, e) =>
             {
@@ -96,7 +96,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                 if (this.Adjustment == null) return;
                 this.Adjustment.AlphaDisable = redDisable;
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
             this.GreenCheckBox.Toggled += (s, e) =>
             {
@@ -108,7 +108,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                 if (this.Adjustment == null) return;
                 this.Adjustment.GreenDisable = greenDisable;
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
             this.BlueCheckBox.Toggled += (s, e) =>
             {
@@ -120,7 +120,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                 if (this.Adjustment == null) return;
                 this.Adjustment.BlueDisable = blueDisable;
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
 
             
@@ -129,19 +129,19 @@ namespace Retouch_Photo2.Adjustments.Pages
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.AlphaOffset = (float)(value / 100.0f);
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
             this.AlphaExponentSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.AlphaExponent = (float)(value / 100.0f);
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
             this.AlphaAmplitudeSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.AlphaAmplitude = (float)(value / 100.0f);
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
 
             //Red
@@ -149,19 +149,19 @@ namespace Retouch_Photo2.Adjustments.Pages
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.RedOffset = (float)(value / 100.0f);
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
             this.RedExponentSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.RedExponent = (float)(value / 100.0f);
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
             this.RedAmplitudeSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.RedAmplitude = (float)(value / 100.0f);
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
 
             //Green
@@ -169,19 +169,19 @@ namespace Retouch_Photo2.Adjustments.Pages
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.GreenOffset = (float)(value / 100.0f);
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
             this.GreenExponentSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.GreenExponent = (float)(value / 100.0f);
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
             this.GreenAmplitudeSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.GreenAmplitude = (float)(value / 100.0f);
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
 
             //Blue
@@ -189,19 +189,19 @@ namespace Retouch_Photo2.Adjustments.Pages
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.BlueOffset = (float)(value / 100.0f);
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
             this.BlueExponentSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.BlueExponent = (float)(value / 100.0f);
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
             this.BlueAmplitudeSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.BlueAmplitude = (float)(value / 100.0f);
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
         }
 

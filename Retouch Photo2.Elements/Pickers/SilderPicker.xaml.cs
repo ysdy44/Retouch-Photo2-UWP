@@ -86,7 +86,12 @@ namespace Retouch_Photo2.Elements
                 }
                 else
                 {
-                    this._V = (value - this.Minimum) / (this.Maximum - this.Minimum);
+                    float v = (value - this.Minimum) / (this.Maximum - this.Minimum);
+
+                    if (v < 0) this._V = 0;
+                    else if (v > 1) this._V = 1;
+                    else this._V = v;
+
                     this.value = value;
                 }
             }
@@ -131,7 +136,6 @@ namespace Retouch_Photo2.Elements
         public SilderPicker()
         {
             this.InitializeComponent();
-
             this.IsEnabledChanged += (s, e) =>
             {
                 this._vsIsEnabled = this.IsEnabled;

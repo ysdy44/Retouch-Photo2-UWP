@@ -1,4 +1,6 @@
 ﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.Menus;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Numerics;
 using Windows.UI.Xaml;
@@ -16,52 +18,17 @@ namespace Retouch_Photo2.ViewModels
         {
             Window.Current.SizeChanged += (s, e) =>
             {
+                //Width
                 double width = e.Size.Width;
-
-                this.DeviceLayoutType = this.DeviceLayout.GetActualType(width);
+                this.DeviceLayoutType = this.Setting.DeviceLayout.GetActualType(width);
             };
 
-            {
-                double width = Window.Current.Bounds.Width;
-
-                this.DeviceLayoutType = this.DeviceLayout.GetActualType(width);
-            }
+            //Width
+            double width2 = Window.Current.Bounds.Width;
+            this.DeviceLayoutType = this.Setting.DeviceLayout.GetActualType(width2);
         }
-
-
-        /// <summary> Retouch_Photo2's the only Theme. </summary>
-        public ElementTheme Theme
-        {
-            get => this.theme;
-            set
-            {
-                if (Window.Current.Content is FrameworkElement frameworkElement)
-                {
-                    if (frameworkElement.RequestedTheme != value)
-                    {
-                        frameworkElement.RequestedTheme = value;
-                    }
-                }
-
-                this.theme = value;
-                this.OnPropertyChanged(nameof(this.Theme));//Notify 
-            }
-        }
-        private ElementTheme theme = ElementTheme.Default;
-
-
-        /// <summary> Retouch_Photo2's the only device layout. </summary>
-        public DeviceLayout DeviceLayout
-        {
-            get => this.deviceLayout;
-            set
-            {
-                this.deviceLayout = value;
-                this.OnPropertyChanged(nameof(this.DeviceLayout));//Notify 
-            }
-        }
-        private DeviceLayout deviceLayout = DeviceLayout.Default;
         
+
         /// <summary> Retouch_Photo2's the only device layout type. </summary>
         public DeviceLayoutType DeviceLayoutType
         {
@@ -74,6 +41,7 @@ namespace Retouch_Photo2.ViewModels
         }
         private DeviceLayoutType deviceLayoutType = DeviceLayoutType.PC;
 
+
         /// <summary>
         /// Gets the offset of full-screen statue layout.
         /// </summary>
@@ -81,9 +49,9 @@ namespace Retouch_Photo2.ViewModels
         public Vector2 FullScreenOffset
         {
             get
-            { 
-                DeviceLayoutType type = (this.DeviceLayout.IsAdaptive) ? this.DeviceLayoutType : this.DeviceLayout.FallBackType;
-        
+            {
+                DeviceLayoutType type = this.DeviceLayoutType;
+                
                 switch (type)
                 {
                     case DeviceLayoutType.PC:
@@ -100,7 +68,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 float rootWidth = (float)Window.Current.Bounds.Width;
 
-                DeviceLayoutType type = (this.DeviceLayout.IsAdaptive) ? this.DeviceLayoutType : this.DeviceLayout.FallBackType;
+                DeviceLayoutType type = this.DeviceLayoutType;
 
                 switch (type)
                 {

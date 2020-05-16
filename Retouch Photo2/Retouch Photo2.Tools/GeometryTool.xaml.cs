@@ -51,7 +51,7 @@ namespace Retouch_Photo2.Tools
 
             this.StrokeShowControl.Tapped += (s, e) =>
             {
-                this.TipViewModel.ShowMenu(MenuType.Stroke);
+                this.TipViewModel.ShowMenuLayoutAt(MenuType.Stroke, this.StrokeShowControl);
             };
         }
 

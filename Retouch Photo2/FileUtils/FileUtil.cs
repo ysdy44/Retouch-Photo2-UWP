@@ -161,19 +161,24 @@ namespace Retouch_Photo2
         /// </summary>
         /// <param name="fileName"> The file name. </param>
         /// <returns> The exists. </returns>
-        public static async Task<bool> IsFileExistsInLocalFolder(string fileName)
-        {
-            IStorageItem item = await ApplicationData.Current.LocalFolder.TryGetItemAsync(fileName);
-            return item != null;
-        }
+        public static async Task<bool> IsFileExistsInLocalFolder(string fileName) => await FileUtil.IsFileExists(fileName, ApplicationData.Current.LocalFolder);
+
         /// <summary>
         /// To know if a file exists.
         /// </summary>
         /// <param name="fileName"> The file name. </param>
         /// <returns> The exists. </returns>
-        public static async Task<bool> IsFileExistsInTemporaryFolder(string fileName)
+        public static async Task<bool> IsFileExistsInTemporaryFolder(string fileName) => await FileUtil.IsFileExists(fileName, ApplicationData.Current.TemporaryFolder);
+
+        /// <summary>
+        /// To know if a file exists.
+        /// </summary>
+        /// <param name="fileName"> The file name. </param>
+        /// <param name="folder"> The folder. </param>
+        /// <returns> The exists. </returns>
+        public static async Task<bool> IsFileExists(string fileName, StorageFolder folder)
         {
-            IStorageItem item = await ApplicationData.Current.TemporaryFolder.TryGetItemAsync(fileName);
+            IStorageItem item = await folder.TryGetItemAsync(fileName);
             return item != null;
         }
 

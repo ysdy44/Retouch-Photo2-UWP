@@ -28,30 +28,30 @@ namespace Retouch_Photo2.Historys.Models
     public class SourceHistory : IHistoryBase, IHistory
     {
         public HistoryType Type => HistoryType.Source;
-        public void Add(TransformManager transformManager, Transformer previous, Transformer subsequent)
+        public void Add(Transform transform, Transformer previous, Transformer subsequent)
         {
-            this.Undos.Push(() => transformManager.Source = previous);
-            //this.Redos.Push(() => transformManager.Source = subsequent);
+            this.Undos.Push(() => transform.Source = previous);
+            //this.Redos.Push(() => transform.Source = subsequent);
         }
     }
 
     public class DestinationHistory : IHistoryBase, IHistory
     {
         public HistoryType Type => HistoryType.Destination;
-        public void Add(TransformManager transformManager, Transformer previous, Transformer subsequent)
+        public void Add(Transform transform, Transformer previous, Transformer subsequent)
         {
-            this.Undos.Push(() => transformManager.Destination = previous);
-            //this.Redos.Push(() => transformManager.Destination = subsequent);
+            this.Undos.Push(() => transform.Destination = previous);
+            //this.Redos.Push(() => transform.Destination = subsequent);
         }
     }
 
     public class ICropHistory : IHistoryBase, IHistory
     {
         public HistoryType Type => HistoryType.Destination;
-        public void Add(TransformManager transformManager, bool previous, bool subsequent)
+        public void Add(Transform transform, bool previous, bool subsequent)
         {
-            this.Undos.Push(() => transformManager.IsCrop = previous);
-            //this.Redos.Push(() => transformManager.IsCrop = subsequent);
+            this.Undos.Push(() => transform.IsCrop = previous);
+            //this.Redos.Push(() => transform.IsCrop = subsequent);
         }
     }
 

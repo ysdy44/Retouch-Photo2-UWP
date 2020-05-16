@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Menus.Models
         }
 
         //Menu
-        public MenuType Type => MenuType.Debug;
+        public MenuType Type => MenuType.Keyboard;
         public IExpander Expander => this._Expander;
         MenuButton _button = new MenuButton
         {

@@ -17,6 +17,7 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Occurs when the canvas position moved. </summary>
         public Action<Vector2> Move { get; set; }
 
+
         //@Construct
         public void ConstructKey()
         {
@@ -142,15 +143,5 @@ namespace Retouch_Photo2.ViewModels
             this.OnPropertyChanged(nameof(this.KeyAlt));//Notify 
         }
                     
-
-
-        //Notify 
-        /// <summary> Multicast event for property change notifications. </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        /// <summary>
-        /// Notifies listeners that a property value has changed.
-        /// </summary>
-        /// <param name="propertyName"> Name of the property used to notify listeners. </param>
-        protected void OnPropertyChanged(string propertyName) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

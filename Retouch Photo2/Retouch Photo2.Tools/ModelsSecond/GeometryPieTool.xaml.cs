@@ -152,8 +152,8 @@ namespace Retouch_Photo2.Tools.Models
             return new GeometryPieLayer
             {
                 SweepAngle = this.SelectionViewModel.GeometryPieSweepAngle,
-                TransformManager = new TransformManager(transformer),
-                StyleManager = this.SelectionViewModel.GeometryStyle
+                Transform = new Transform(transformer),
+                Style = this.SelectionViewModel.GeometryStyle
             };
         }
 

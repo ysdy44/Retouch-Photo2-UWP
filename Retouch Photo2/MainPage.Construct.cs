@@ -26,7 +26,6 @@ namespace Retouch_Photo2
             this.Untitled = resource.GetString("/$MainPage/Untitled");
 
             this.TitleTextBlock.Text = resource.GetString("/$MainPage/Title");
-            this.LoadingControl.Text = resource.GetString("/$MainPage/Loading");
 
             this.SelectItemsTextBlock.Text = resource.GetString("/$MainPage/Select_Items");
             this.SelectAllButton.Content = resource.GetString("/$MainPage/Select_All");
@@ -75,19 +74,16 @@ namespace Retouch_Photo2
         //Setting
         private async Task ConstructSetting()
         {
+            //Setting
             Setting setting = await XML.ConstructSettingFile();
-
             if (setting != null)
             {
-                this.SettingViewModel.Theme = setting.Theme;
-                this.SettingViewModel.DeviceLayout = setting.DeviceLayout;
+                this.SettingViewModel.Setting = setting;
             }
-
 
             //Layout
             this.SettingViewModel.ConstructLayout();
-
-
+            
             //Key
             this.SettingViewModel.ConstructKey();
             if (this.SettingViewModel.Move == null)

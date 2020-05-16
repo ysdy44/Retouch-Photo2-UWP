@@ -180,6 +180,9 @@
   <data name="Stroke" xml:space="preserve">
     <value>Stroke</value>
   </data>
+  <data name="Style" xml:space="preserve">
+    <value>Style</value>
+  </data>
   <data name="Transformer" xml:space="preserve">
     <value>Transformer</value>
   </data>

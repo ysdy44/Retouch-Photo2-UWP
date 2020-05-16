@@ -183,9 +183,6 @@
   <data name="Initial_Tip" xml:space="preserve">
     <value>没有项目？你可以...</value>
   </data>
-  <data name="Loading" xml:space="preserve">
-    <value>加载...</value>
-  </data>
   <data name="Pictures" xml:space="preserve">
     <value>图片</value>
   </data>

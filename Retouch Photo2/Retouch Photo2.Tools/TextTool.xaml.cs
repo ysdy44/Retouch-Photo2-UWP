@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Tools
 
             this.CharacterButton.Tapped += (s, e) =>
             {
-                this.TipViewModel.ShowMenu(MenuType.Character);
+                this.TipViewModel.ShowMenuLayoutAt(MenuType.Character, this.CharacterButton);
             };
             this.FullScreenButton.Tapped += (s, e) =>
             {

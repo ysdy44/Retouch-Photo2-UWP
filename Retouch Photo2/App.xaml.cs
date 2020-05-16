@@ -93,20 +93,25 @@ namespace Retouch_Photo2
             //Menu
             Menus = new List<IMenu>
             {
-                /*
                 new KeyboardMenu(),
-                 */
 
                 new SelectionMenu(),
                 new OperateMenu(),
+
                 new AdjustmentMenu(),
                 new EffectMenu(),
-                new TransformerMenu(),
+
                 new CharacterMenu(),
+                new ParagraphMenu(),
+
                 new StrokeMenu(),
+                new StyleMenu(),
+
                 new HistoryMenu(),
-                new ColorMenu(),
+                new TransformerMenu(),
+
                 new LayerMenu(),
+                new ColorMenu(),
             },
         };
 

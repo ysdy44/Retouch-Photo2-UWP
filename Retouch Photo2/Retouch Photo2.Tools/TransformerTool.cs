@@ -35,6 +35,7 @@ namespace Retouch_Photo2.Tools
 
         public bool Started(Vector2 startingPoint, Vector2 point)
         {
+            if (this.Mode == ListViewSelectionMode.None) return false;
             this._transformerMode = this._getTransformerMode(startingPoint);
             if (this._transformerMode == TransformerMode.None) return false;
 
@@ -81,7 +82,7 @@ namespace Retouch_Photo2.Tools
             this.SelectionViewModel.SetValue((layer) =>
             {
                 //History
-                TransformManager m = layer.TransformManager;
+                Transform m = layer.Transform;
                 history.Add(m, m.StartingDestination, m.Destination);
             });
 

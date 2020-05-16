@@ -107,6 +107,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="%24DrawPages\DrawLayout.Layout.cs" />
+    <Compile Include="%24Loading\LoadingState.cs" />
     <Compile Include="%24MainPages\ProjectViewItem.xaml.cs">
       <DependentUpon>ProjectViewItem.xaml</DependentUpon>
     </Compile>
@@ -177,7 +178,7 @@
     <Compile Include="ExpandAppbars\ExpandAppbar.xaml.cs">
       <DependentUpon>ExpandAppbar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LoadingControl.xaml.cs">
+    <Compile Include="%24Loading\LoadingControl.xaml.cs">
       <DependentUpon>LoadingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExpandAppbars\ExpandAppbarRepeatButton.xaml.cs">
@@ -331,7 +332,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoadingControl.xaml">
+    <Page Include="%24Loading\LoadingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

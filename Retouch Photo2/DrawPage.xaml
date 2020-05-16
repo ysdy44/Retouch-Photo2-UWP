@@ -73,7 +73,6 @@
                CanvasHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}"
                LeftIcon="{x:Bind IconConverter(TipViewModel.Tool),Mode=OneWay}"
                Touchbar="{x:Bind TipViewModel.TouchbarControl,Mode=OneWay}"                                             
-               DeviceLayout="{x:Bind SettingViewModel.DeviceLayout, Mode=OneWay}"
                DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
                IsFullScreen="{x:Bind SettingViewModel.IsFullScreen, Mode=OneWay}">
 

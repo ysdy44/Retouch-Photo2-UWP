@@ -5,8 +5,8 @@
     /// </summary>
     public enum MenuType
     {
-        /// <summary> Debug. </summary>
-        Debug,
+        /// <summary> Keyboard. </summary>
+        Keyboard,
 
         /// <summary> Selection. </summary>
         Selection,
@@ -17,24 +17,25 @@
         Adjustment,
         /// <summary> Effect. </summary>
         Effect,
-        /// <summary> Transformer. </summary>
-        Transformer,
 
         /// <summary> Character. </summary>
         Character,
         /// <summary> Paragraph. </summary>
-        //Paragraph,
+        Paragraph,
 
         /// <summary> Stroke. </summary>
         Stroke,
-
+        /// <summary> Style. </summary>
+        Style,
+        
         /// <summary> History. </summary>
         History,
+        /// <summary> Transformer. </summary>
+        Transformer,
 
-        /// <summary> Color. </summary>
-        Color,
-        
         /// <summary> Layer. </summary>
         Layer,
+        /// <summary> Color. </summary>
+        Color,        
     }
 }

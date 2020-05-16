@@ -343,8 +343,8 @@ namespace Retouch_Photo2.Tools.Models
                 InnerRadius = this.SelectionViewModel.GeometryCogInnerRadius,
                 Tooth = this.SelectionViewModel.GeometryCogTooth,
                 Notch = this.SelectionViewModel.GeometryCogNotch,
-                TransformManager = new TransformManager(transformer),
-                StyleManager = this.SelectionViewModel.GeometryStyle
+                Transform = new Transform(transformer),
+                Style = this.SelectionViewModel.GeometryStyle
             };
         }
 

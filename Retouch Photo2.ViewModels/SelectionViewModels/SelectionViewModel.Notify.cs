@@ -93,30 +93,30 @@ namespace Retouch_Photo2.ViewModels
         private bool isCrop;
 
 
-        /// <summary> <see cref = "SelectionViewModel" />'s EffectManager. </summary>
-        public EffectManager EffectManager
+        /// <summary> <see cref = "SelectionViewModel" />'s effect. </summary>
+        public Effect Effect
         {
-            get => this.effectManager;
+            get => this.effect;
             set
             {
-                this.effectManager = value;
-                this.OnPropertyChanged(nameof(this.EffectManager));//Notify 
+                this.effect = value;
+                this.OnPropertyChanged(nameof(this.Effect));//Notify 
             }
         }
-        private EffectManager effectManager;
+        private Effect effect;
 
 
-        /// <summary> <see cref = "SelectionViewModel" />'s AdjustmentManager. </summary>
-        public AdjustmentManager AdjustmentManager
+        /// <summary> <see cref = "SelectionViewModel" />'s filter. </summary>
+        public Filter Filter
         {
-            get => this.adjustmentManager;
+            get => this.filter;
             set
             {
-                this.adjustmentManager = value;
-                this.OnPropertyChanged(nameof(this.AdjustmentManager));//Notify 
+                this.filter = value;
+                this.OnPropertyChanged(nameof(this.Filter));//Notify 
             }
         }
-        private AdjustmentManager adjustmentManager;
+        private Filter filter;
 
 
         //////////////////////////
@@ -172,7 +172,7 @@ namespace Retouch_Photo2.ViewModels
                 if (layer.Type == LayerType.Image)
                 {
                     this.IsImageLayer = true;
-                    this.Photocopier = layer.StyleManager.FillBrush.Photocopier;
+                    this.Photocopier = layer.Style.FillBrush.Photocopier;
                 }
                 else this.IsImageLayer = false;
             }

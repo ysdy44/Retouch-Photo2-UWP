@@ -60,7 +60,8 @@
                 <Grid>
 
                     <!--Image-->
-                    <controls:ImageEx x:Name="ImageEx" Background="White" MinWidth="60" MinHeight="60" IsCacheEnabled="True" />
+                    <controls:ImageEx x:Name="ImageEx" Background="White" MinWidth="60" MinHeight="60"
+                            PlaceholderStretch="Uniform" PlaceholderSource="ms-appx:///Icons\LoadFaill.jpg" />
 
                     <!--Selected-->
                     <Border x:Name="UnSelectedBorder" Visibility="Collapsed" CornerRadius="2" BorderThickness="1" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}">

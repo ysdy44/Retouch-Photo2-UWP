@@ -5,7 +5,24 @@ using System.Numerics;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers;
+using Retouch_Photo2.ViewModels;
+using System.Collections.Generic;
+using System.Numerics;
+using System;
+using System.Threading.Tasks;
+using Windows.Graphics.Imaging;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.Storage.Streams;
+using System.Linq;
 using Windows.UI.Xaml.Navigation;
+using System.Xml.Linq;
+using System.IO;
 
 namespace Retouch_Photo2
 {
@@ -69,6 +86,7 @@ namespace Retouch_Photo2
             this.HeadBarControl.DocumentButton.Tapped += async (s, e) =>
             {
                 await this.Save();
+                await this.Exit();
 
                 this.SettingViewModel.IsFullScreen = true;
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
@@ -77,6 +95,7 @@ namespace Retouch_Photo2
             this.HeadBarControl.DocumentUnSaveButton.Tapped += async (s, e) =>
             {
                 this.HeadBarControl.DocumentFlyout.Hide();
+                await this.Exit();
 
                 this.SettingViewModel.IsFullScreen = true;
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}

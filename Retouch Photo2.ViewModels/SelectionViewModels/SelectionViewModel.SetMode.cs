@@ -80,9 +80,9 @@ namespace Retouch_Photo2.ViewModels
             //////////////////////////
 
             this.IsCrop = false;
-            this.EffectManager = null;
-            this.AdjustmentManager = null;
-            this.SetStyleManager(null);
+            this.Effect = null;
+            this.Filter = null;
+            this.SetStyle(null);
 
             //////////////////////////
 
@@ -136,10 +136,10 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
-            this.IsCrop = layer.TransformManager.IsCrop;
-            this.EffectManager = layer.EffectManager;
-            this.AdjustmentManager = layer.AdjustmentManager;
-            this.SetStyleManager(layer.StyleManager);
+            this.IsCrop = layer.Transform.IsCrop;
+            this.Effect = layer.Effect;
+            this.Filter = layer.Filter;
+            this.SetStyle(layer.Style);
 
             //////////////////////////
 
@@ -193,10 +193,10 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
-            this.IsCrop = layers.Any(layer => layer.TransformManager.IsCrop);
-            this.EffectManager = firstLayer.EffectManager;
-            this.AdjustmentManager = null;
-            this.SetStyleManager(firstLayer.StyleManager);
+            this.IsCrop = layers.Any(layer => layer.Transform.IsCrop);
+            this.Effect = firstLayer.Effect;
+            this.Filter = null;
+            this.SetStyle(firstLayer.Style);
 
             //////////////////////////
 

@@ -23,9 +23,9 @@ namespace Retouch_Photo2
         /// <summary> Add a <see cref="ImageLayer"/>. </summary>
         AddImageLayer,
 
-        /// <summary> Make <see cref="StyleManager.FillBrush"/> to <see cref="ImageBrush"/> in <see cref="BrushTool"/>. </summary>
+        /// <summary> Make <see cref="Brushs.Style.FillBrush"/> to <see cref="ImageBrush"/> in <see cref="BrushTool"/>. </summary>
         FillBrushToImage,
-        /// <summary> Make <see cref="StyleManager.StrokeBrush"/> to <see cref="ImageBrush"/> in <see cref="BrushTool"/>. </summary>
+        /// <summary> Make <see cref="Brushs.Style.StrokeBrush"/> to <see cref="ImageBrush"/> in <see cref="BrushTool"/>. </summary>
         StrokeBrushToImage,
         
         /// <summary> Select a image in <see cref= "ImageTool" />. </summary>

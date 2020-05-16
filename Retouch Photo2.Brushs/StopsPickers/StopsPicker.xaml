@@ -101,7 +101,7 @@
 
                 <TextBlock x:Name="ReserveTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <Button x:Name="ReserveButton" Style="{StaticResource AppCircleButtonStyle}">
-                    <FontIcon Glyph="&#xE13C;" FontWeight="Bold" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"/>
+                    <FontIcon Glyph="&#xF1CB;" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
                 </Button>
 
             </StackPanel>

@@ -78,7 +78,7 @@ namespace Retouch_Photo2.Layers.Models
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
-            Transformer transformer = base.TransformManager.Destination;
+            Transformer transformer = base.Transform.Destination;
 
             return TransformerGeometry.CreateArrow(resourceCreator, transformer, canvasToVirtualMatrix,
                 this.IsAbsolute, this.Width, this.Value,
@@ -86,7 +86,7 @@ namespace Retouch_Photo2.Layers.Models
         }
         public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
         {
-            Transformer transformer = base.TransformManager.Destination;
+            Transformer transformer = base.Transform.Destination;
 
             return TransformerGeometry.ConvertToCurvesFromArrow(transformer,
                 this.IsAbsolute, this.Width, this.Value,

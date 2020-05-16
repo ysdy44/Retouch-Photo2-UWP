@@ -90,20 +90,20 @@ namespace Retouch_Photo2.Menus.Models
         #region DependencyProperty
 
 
-        /// <summary> Gets or sets <see cref = "AdjustmentMenu" />'s adjustment manager. </summary>
-        public AdjustmentManager AdjustmentManager
+        /// <summary> Gets or sets <see cref = "AdjustmentMenu" />'s filter. </summary>
+        public Filter Filter
         {
-            get { return (AdjustmentManager)GetValue(AdjustmentManagerProperty); }
-            set { SetValue(AdjustmentManagerProperty, value); }
+            get { return (Filter)GetValue(FilterProperty); }
+            set { SetValue(FilterProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "AdjustmentMenu.AdjustmentManager" /> dependency property. </summary>
-        public static readonly DependencyProperty AdjustmentManagerProperty = DependencyProperty.Register(nameof(AdjustmentManager), typeof(AdjustmentManager), typeof(AdjustmentMenu), new PropertyMetadata(null, (sender, e) =>
+        /// <summary> Identifies the <see cref = "AdjustmentMenu.Filter" /> dependency property. </summary>
+        public static readonly DependencyProperty FilterProperty = DependencyProperty.Register(nameof(Filter), typeof(Filter), typeof(AdjustmentMenu), new PropertyMetadata(null, (sender, e) =>
         {
             AdjustmentMenu con = (AdjustmentMenu)sender;
 
             con._Expander.IsSecondPage = false;
 
-            if (e.NewValue is AdjustmentManager value)
+            if (e.NewValue is Filter value)
             {
                 con._vsAdjustments = value.Adjustments;
             }
@@ -135,13 +135,13 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructDataContext
             (
                  dataContext: this.SelectionViewModel,
-                 path: nameof(this.SelectionViewModel.AdjustmentManager),
-                 dp: AdjustmentMenu.AdjustmentManagerProperty
+                 path: nameof(this.SelectionViewModel.Filter),
+                 dp: AdjustmentMenu.FilterProperty
             );
             this.ConstructStrings();
             this.ConstructMenu();
 
-            AdjustmentManager.Invalidate += () => this.ViewModel.Invalidate();
+            Filter.Invalidate += () => this.ViewModel.Invalidate();
             this.ConstructAdjustmentPageListView();
             this.ConstructFilterListView();
 
@@ -169,8 +169,16 @@ namespace Retouch_Photo2.Menus.Models
 
                 if (this.FiltersListView.ItemsSource == null)
                 {
-                    IEnumerable<Filter> source = await XML.ConstructFilterFile();
-                    this.FiltersListView.ItemsSource = source.ToList();
+                    IEnumerable<FilterCategory> filterCategorys = await XML.ConstructFiltersFile();
+                    if (filterCategorys != null)
+                    {
+                        FilterCategory filterCategory = filterCategorys.FirstOrDefault();
+                        if (filterCategory != null)
+                        {
+                            IEnumerable<Filter> filters = filterCategory.Filters;
+                            this.FiltersListView.ItemsSource = filters.ToList();
+                        }
+                    }
                 }
 
                 this.VisualState = this.VisualState;//State
@@ -206,17 +214,17 @@ namespace Retouch_Photo2.Menus.Models
             AdjustmentMenu.GetGridDataContext(sender, out IAdjustment adjustment);
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.SelectionViewModel.SetValue((Action<Layers.ILayer>)((layer) =>
             {
-                layer.AdjustmentManager.Adjustments.Remove(adjustment);//Remove
+                layer.Filter.Adjustments.Remove(adjustment);//Remove
 
-                this._vsAdjustments = layer.AdjustmentManager.Adjustments;
+                this._vsAdjustments = layer.Filter.Adjustments;
                 this.VisualState = this.VisualState;//State
 
                 this.InvalidateItemsControl();//Invalidate
                 this.ViewModel.Invalidate();//Invalidate   
                 return;
-            });
+            }));
         }
 
     }
@@ -289,18 +297,18 @@ namespace Retouch_Photo2.Menus.Models
                 if (e.ClickedItem is IAdjustmentPage item)
                 {
                     //Selection
-                    this.SelectionViewModel.SetValue((layer) =>
+                    this.SelectionViewModel.SetValue((Action<Layers.ILayer>)((layer) =>
                     {
                         IAdjustment _new = item.GetNewAdjustment();
-                        layer.AdjustmentManager.Adjustments.Add(_new);//Add
+                        layer.Filter.Adjustments.Add(_new);//Add
 
-                        this._vsAdjustments = layer.AdjustmentManager.Adjustments;
+                        this._vsAdjustments = layer.Filter.Adjustments;
                         this.VisualState = this.VisualState;//State
 
                         this.InvalidateItemsControl();//Invalidate
                         this.ViewModel.Invalidate();//Invalidate
                         return;
-                    });
+                    }));
                 }
             };
         }
@@ -316,10 +324,10 @@ namespace Retouch_Photo2.Menus.Models
                     //Selection
                     this.SelectionViewModel.SetValue((layer) =>
                     {
-                        layer.AdjustmentManager.Adjustments.Clear();//Clear
-                        layer.AdjustmentManager.Adjustments.AddRange(clones);//Add
+                        layer.Filter.Adjustments.Clear();//Clear
+                        layer.Filter.Adjustments.AddRange(clones);//Add
 
-                        this._vsAdjustments = layer.AdjustmentManager.Adjustments;
+                        this._vsAdjustments = layer.Filter.Adjustments;
                         this.VisualState = this.VisualState;//State
 
                         this.InvalidateItemsControl();//Invalidate

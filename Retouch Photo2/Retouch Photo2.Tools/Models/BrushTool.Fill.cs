@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Tools.Models
                         this.FillBrush = linearGradientBrush;
                         this.SelectionViewModel.SetValue((layer) =>
                         {
-                            layer.StyleManager.FillBrush = linearGradientBrush.Clone();
+                            layer.Style.FillBrush = linearGradientBrush.Clone();
                             this.SelectionViewModel.StyleLayer = layer;
                         });
 
@@ -62,8 +62,8 @@ namespace Retouch_Photo2.Tools.Models
                             this.FillBrush.CacheTransform();
                             this.SelectionViewModel.SetValue((layer) =>
                             {
-                                layer.StyleManager.FillBrush = this.FillBrush.Clone();
-                                layer.StyleManager.FillBrush.CacheTransform();
+                                layer.Style.FillBrush = this.FillBrush.Clone();
+                                layer.Style.FillBrush.CacheTransform();
                                 this.SelectionViewModel.StyleLayer = layer;
                             });
 
@@ -95,7 +95,7 @@ namespace Retouch_Photo2.Tools.Models
                         this.FillBrush.Controller(this._operateMode, canvasStartingPoint, canvasPoint);
                         this.SelectionViewModel.SetValue((layer) =>
                         {
-                            layer.StyleManager.FillBrush.Controller(this._operateMode, canvasStartingPoint, canvasPoint);
+                            layer.Style.FillBrush.Controller(this._operateMode, canvasStartingPoint, canvasPoint);
                             this.SelectionViewModel.StyleLayer = layer;
                         });
 
@@ -118,7 +118,7 @@ namespace Retouch_Photo2.Tools.Models
                         this.FillBrush = new NoneBrush();
                         this.SelectionViewModel.SetValue((layer) =>
                         {
-                            layer.StyleManager.FillBrush = new NoneBrush();
+                            layer.Style.FillBrush = new NoneBrush();
                             this.SelectionViewModel.StyleLayer = layer;
                         });
 
@@ -133,7 +133,7 @@ namespace Retouch_Photo2.Tools.Models
                         this.FillBrush = new ColorBrush(Colors.LightGray);
                         this.SelectionViewModel.SetValue((layer) =>
                         {
-                            layer.StyleManager.FillBrush = new ColorBrush(Colors.LightGray);
+                            layer.Style.FillBrush = new ColorBrush(Colors.LightGray);
                             this.SelectionViewModel.StyleLayer = layer;
                         });
 
@@ -153,7 +153,7 @@ namespace Retouch_Photo2.Tools.Models
                         this.FillBrush = linearGradientBrush;
                         this.SelectionViewModel.SetValue((layer) =>
                         {
-                            layer.StyleManager.FillBrush = linearGradientBrush.Clone();
+                            layer.Style.FillBrush = linearGradientBrush.Clone();
                             this.SelectionViewModel.StyleLayer = layer;
                         });
 
@@ -172,7 +172,7 @@ namespace Retouch_Photo2.Tools.Models
                         this.FillBrush = radialGradientBrush;
                         this.SelectionViewModel.SetValue((layer) =>
                         {
-                            layer.StyleManager.FillBrush = radialGradientBrush.Clone();
+                            layer.Style.FillBrush = radialGradientBrush.Clone();
                             this.SelectionViewModel.StyleLayer = layer;
                         });
 
@@ -191,7 +191,7 @@ namespace Retouch_Photo2.Tools.Models
                         this.FillBrush = ellipticalGradientBrush;
                         this.SelectionViewModel.SetValue((layer) =>
                         {
-                            layer.StyleManager.FillBrush = ellipticalGradientBrush.Clone();
+                            layer.Style.FillBrush = ellipticalGradientBrush.Clone();
                             this.SelectionViewModel.StyleLayer = layer;
                         });
 
@@ -243,7 +243,7 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                layer.StyleManager.FillBrush.Array = (CanvasGradientStop[])array.Clone();
+                layer.Style.FillBrush.Array = (CanvasGradientStop[])array.Clone();
                 this.SelectionViewModel.StyleLayer = layer;
             });
 
@@ -258,7 +258,7 @@ namespace Retouch_Photo2.Tools.Models
             this.FillBrush.Extend = extend;
             this.SelectionViewModel.SetValue((layer) =>
             {
-                layer.StyleManager.FillBrush.Extend = extend;
+                layer.Style.FillBrush.Extend = extend;
                 this.SelectionViewModel.StyleLayer = layer;
             });
 

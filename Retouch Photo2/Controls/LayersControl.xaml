@@ -8,22 +8,12 @@
     d:DesignHeight="800"
     d:DesignWidth="200"
     >
-    
-    
-    <Grid>
 
-        <Canvas>
-            <Border x:Name="_IndicatorBorder" MinWidth="50" Height="40" />
-        </Canvas>
 
-        <ScrollViewer
-                      HorizontalScrollBarVisibility="Disabled"
-                      VerticalScrollBarVisibility="Hidden"
-                      >
-            <ItemsControl x:Name="ItemsControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <!--Layers-->
-            </ItemsControl>
-        </ScrollViewer>
-        
-    </Grid>
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+        <ItemsControl x:Name="ItemsControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <!--Layers-->
+        </ItemsControl>
+    </ScrollViewer>
+    
 </UserControl>

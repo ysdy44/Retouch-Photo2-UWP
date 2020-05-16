@@ -46,6 +46,7 @@
                 <StackPanel Padding="20,0" MaxWidth="600">
 
                     <StackPanel.Resources>
+                        
                         <!--Style-->
                         <Style x:Name="KetButtonStyle" TargetType="ToggleButton">
                             <Setter Property="IsHitTestVisible" Value="False" />
@@ -128,6 +129,19 @@
                                 </Setter.Value>
                             </Setter>
                         </Style>
+
+                        <Style x:Name="MenuBorderStyle1" TargetType="Border">
+                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                            <Setter Property="Height" Value="44"/>
+                            <Setter Property="Padding" Value="12,0"/>
+                        </Style>
+                        <Style x:Name="MenuBorderStyle2" TargetType="Border">
+                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                            <Setter Property="Height" Value="44"/>
+                            <Setter Property="Padding" Value="12,0"/>
+                            <Setter Property="Background" Value="{ThemeResource AppBackground}"/>
+                        </Style>
+
                     </StackPanel.Resources>
 
                     <StackPanel.ChildrenTransitions>
@@ -183,7 +197,7 @@
 
 
                         <!--Layout-->
-                        <TextBlock x:Name="LayoutTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock x:Name="DeviceLayoutTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
                         <Border Height="Auto" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel Orientation="Horizontal">
 
@@ -220,6 +234,19 @@
                         <TextBlock x:Name="AdaptiveTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
                         <elementsSettingPages:AdaptiveWidthGrid x:Name="AdaptiveGrid"/>
                         <HyperlinkButton x:Name="AdaptiveResetButton"/>
+
+
+                        <ContentControl Height="12"/>
+
+
+                        <!--Menu-->
+                        <TextBlock x:Name="MenuTypeTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Height="Auto" Style="{StaticResource AppRoundedBorderStyle}">
+                            <StackPanel x:Name="MenusStackPanel" >
+
+                            </StackPanel>
+                        </Border>
+                        <TextBlock x:Name="MenuTypeTipTextBlock" Margin="0,8" Style="{StaticResource AppTextBlockStyle}"/>
 
 
                         <ContentControl Height="12"/>

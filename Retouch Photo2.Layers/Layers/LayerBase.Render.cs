@@ -25,9 +25,9 @@ namespace Retouch_Photo2.Layers
             {
                 CanvasGeometry geometry = this.CreateGeometry(resourceCreator, canvasToVirtualMatrix);
                 //Fill
-                this.StyleManager.FillGeometry(resourceCreator, drawingSession, geometry, canvasToVirtualMatrix);
+                this.Style.FillGeometry(resourceCreator, drawingSession, geometry, canvasToVirtualMatrix);
                 //Stroke
-                this.StyleManager.DrawGeometry(resourceCreator, drawingSession, geometry, canvasToVirtualMatrix);
+                this.Style.DrawGeometry(resourceCreator, drawingSession, geometry, canvasToVirtualMatrix);
             }
             return command;
         }
@@ -74,13 +74,13 @@ namespace Retouch_Photo2.Layers
             ICanvasImage currentImage = currentLayer.GetRender(resourceCreator, previousImage, canvasToVirtualMatrix);
 
             //Transform
-            currentImage = TransformManager.Render(currentLayer.TransformManager, resourceCreator, currentImage, canvasToVirtualMatrix);
+            currentImage = Transform.Render(currentLayer.Transform, resourceCreator, currentImage, canvasToVirtualMatrix);
 
             //Effect
-            currentImage = EffectManager.Render(currentLayer.EffectManager, currentImage);
+            currentImage = Effect.Render(currentLayer.Effect, currentImage);
 
             //Adjustment
-            currentImage = AdjustmentManager.GetRender(currentLayer.AdjustmentManager, currentImage);
+            currentImage = Filter.GetRender(currentLayer.Filter, currentImage);
 
             //Opacity
             if (currentLayer.Opacity < 1.0)

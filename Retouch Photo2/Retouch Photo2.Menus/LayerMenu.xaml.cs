@@ -92,14 +92,13 @@ namespace Retouch_Photo2.Menus.Models
         public IExpander Expander => this._Expander;
         MenuButton _button = new MenuButton
         {
-            Visibility = Visibility.Collapsed
+            CenterContent = new Retouch_Photo2.Layers.Icon()
         };
 
         public void ConstructMenu()
         {
             this._Expander.Layout = this;
             this._Expander.Button = this._button;
-            this._Expander.PlacementMode = FlyoutPlacementMode.Left;
             this._Expander.Initialize();
         }
     }
@@ -253,7 +252,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.SelectionViewModel.IsFollowTransform = value;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.StyleManager.IsFollowTransform = value;
+                    layer.Style.IsFollowTransform = value;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate

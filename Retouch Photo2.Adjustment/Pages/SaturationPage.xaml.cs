@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.Saturation = (float)(value / 100);
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
         }
 

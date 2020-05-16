@@ -180,6 +180,9 @@
   <data name="Stroke" xml:space="preserve">
     <value>描边</value>
   </data>
+  <data name="Style" xml:space="preserve">
+    <value>样式</value>
+  </data>
   <data name="Transformer" xml:space="preserve">
     <value>变换</value>
   </data>

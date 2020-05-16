@@ -144,9 +144,6 @@
   <data name="FullScreen_ToolTip" xml:space="preserve">
     <value>全屏</value>
   </data>
-  <data name="Loading" xml:space="preserve">
-    <value>保存中...</value>
-  </data>
   <data name="Redo" xml:space="preserve">
     <value>重做</value>
   </data>

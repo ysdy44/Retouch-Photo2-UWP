@@ -2,6 +2,7 @@
 using Retouch_Photo2.Elements.SettingPages;
 using Retouch_Photo2.ViewModels;
 using System;
+using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.System;
 using Windows.UI.Xaml.Controls;
@@ -16,31 +17,8 @@ namespace Retouch_Photo2
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel ;
-
-        //Layout
-        PhoneLayout PhoneLayout = new PhoneLayout();
-        PadLayout PadLayout = new PadLayout();
-        PCLayout PCLayout = new PCLayout();
-        DeviceLayout DeviceLayout
-        {
-            set
-            {
-                //Layout
-                switch (value.FallBackType)
-                {
-                    case DeviceLayoutType.Phone: this.LayoutBorder.Child = this.PhoneLayout; break;
-                    case DeviceLayoutType.Pad: this.LayoutBorder.Child = this.PadLayout; break;
-                    case DeviceLayoutType.PC: this.LayoutBorder.Child = this.PCLayout; break;
-                }
-
-                //Adaptive
-                bool isAdaptive = value.IsAdaptive;
-                this.AdaptiveTextBlock.Opacity = isAdaptive ? 1.0 : 0.6;
-                this.AdaptiveGrid.IsEnabled = isAdaptive;
-                this.AdaptiveResetButton.IsEnabled = isAdaptive;
-            }
-        }
+        SettingViewModel SettingViewModel => App.SettingViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
 
 
         //@Construct
@@ -50,9 +28,11 @@ namespace Retouch_Photo2
             this.ConstructStrings();
             this.BackButton.Tapped += (s, e) => this.Frame.GoBack();
 
-            this.ConstructTheme();
-            this.ConstructLayout();
-            this.ConstructLayoutAdaptive();
+            this.ConstructTheme(this.SettingViewModel.Setting.Theme);
+
+            this.ConstructDeviceLayout(this.SettingViewModel.Setting.DeviceLayout);
+
+            this.ConstructMenuType(this.SettingViewModel.Setting.MenuTypes);
 
             this.LocalButton.Tapped += async (s, e) =>
             {
@@ -63,20 +43,14 @@ namespace Retouch_Photo2
 
 
         //The current page becomes the active page
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            //Theme
-            this.NavigatedTheme(this.SettingViewModel.Theme);
-
-            //Layout
-            this.NavigatedLayout(this.SettingViewModel.DeviceLayout);
-
-            //Adaptive            
-            this.NavigatedLayoutAdaptive(this.SettingViewModel.DeviceLayout);
-        }
+        protected override void OnNavigatedTo(NavigationEventArgs e) { }
         //The current page no longer becomes an active page
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e) { }
+
+
+        private async Task Write()
         {
+            await XML.SaveSettingFile(this.SettingViewModel.Setting);
         }
 
     }

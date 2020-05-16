@@ -46,15 +46,13 @@ namespace Retouch_Photo2.Layers.Models
                 Text = this.ConstructStrings(),
             };
 
-            base.StyleManager = new StyleManager
+            base.Style = new Style
             {
                 FillBrush = new ImageBrush(transformer)
                 {
                     Photocopier = photocopier
                 }
             };
-
-            base.TransformManager = new TransformManager(transformer);
         }
 
 
@@ -69,13 +67,13 @@ namespace Retouch_Photo2.Layers.Models
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
-            Transformer transformer = base.TransformManager.Destination;
+            Transformer transformer = base.Transform.Destination;
 
             return transformer.ToRectangle(resourceCreator, canvasToVirtualMatrix);
         }
         public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
         {
-            Transformer transformer = base.TransformManager.Destination;
+            Transformer transformer = base.Transform.Destination;
 
             return TransformerGeometry.ConvertToCurvesFromRectangle(transformer);
         }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Retouch_Photo2.Adjustments.Models;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace Retouch_Photo2.Adjustments
@@ -17,12 +18,11 @@ namespace Retouch_Photo2.Adjustments
         public static XElement SaveIAdjustment(string elementName, IAdjustment adjustment)
         {
             XElement element = new XElement(elementName);
-
             element.Add(new XAttribute("Type", adjustment.Type));
-
-            //SaveWith
-            adjustment.SaveWith(element);
-
+            {
+                //SaveWith
+                adjustment.SaveWith(element);
+            }
             return element;
         }
 
@@ -33,13 +33,18 @@ namespace Retouch_Photo2.Adjustments
         /// <returns> The loaded <see cref="IAdjustment"/>. </returns>
         public static IAdjustment LoadIAdjustment(XElement element)
         {
-            string type = element.Attribute("Type").Value;
+            if (element.Attribute("Type") is XAttribute type2)
+            {
+                string type = type2.Value;
 
-            //Load
-            IAdjustment adjustment = XML.CreateAdjustment(type);
-            adjustment.Load(element);
-
-            return adjustment;
+                //Load
+                IAdjustment adjustment = XML.CreateAdjustment(type);
+                {
+                    adjustment.Load(element);
+                }
+                return adjustment;
+            }
+            else return new GrayAdjustment();
         }
 
     }

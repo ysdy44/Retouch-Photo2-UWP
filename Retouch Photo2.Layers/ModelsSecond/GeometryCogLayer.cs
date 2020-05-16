@@ -71,7 +71,7 @@ namespace Retouch_Photo2.Layers.Models
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
-            Transformer transformer = base.TransformManager.Destination;
+            Transformer transformer = base.Transform.Destination;
 
             return TransformerGeometry.CreateCog(resourceCreator, transformer, canvasToVirtualMatrix,
                 this.Count, this.InnerRadius,
@@ -79,7 +79,7 @@ namespace Retouch_Photo2.Layers.Models
         }
         public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
         {
-            Transformer transformer = base.TransformManager.Destination;
+            Transformer transformer = base.Transform.Destination;
 
             return TransformerGeometry.ConvertToCurvesFromCog(transformer,
                 this.Count, this.InnerRadius,

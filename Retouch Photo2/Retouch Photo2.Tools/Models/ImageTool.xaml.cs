@@ -101,7 +101,11 @@ namespace Retouch_Photo2.Tools.Models
             if (photocopier.FolderRelativeId == null) { this.TipSelect(); return; }
 
             Photo photo = Photo.FindFirstPhoto(photocopier);
-            if (photo == null) { this.TipSelect(); return; }
+            if (photo == null)
+            {
+                this.TipSelect();
+                return;
+            }
 
 
             //Transformer
@@ -114,6 +118,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ViewModel.MezzanineLayer = new ImageLayer(transformerSource, photocopier)
             {
                 SelectMode = SelectMode.Selected,
+                Transform = new Transform(transformerSource, transformerDestination)
             };
             this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.ViewModel.MezzanineLayer);
 
@@ -128,11 +133,11 @@ namespace Retouch_Photo2.Tools.Models
             if (mezzanineLayer == null) return;
 
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
-            mezzanineLayer.TransformManager.Destination = transformerDestination;
+            mezzanineLayer.Transform.Destination = transformerDestination;
 
 
             //IBrush
-            IBrush brush = mezzanineLayer.StyleManager.FillBrush;
+            IBrush brush = mezzanineLayer.Style.FillBrush;
             if (brush == null) return;
 
             if (brush.Type == BrushType.Image)
@@ -153,7 +158,7 @@ namespace Retouch_Photo2.Tools.Models
             if (isOutNodeDistance)
             {
                 Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
-                this.ViewModel.MezzanineLayer.TransformManager.Destination = transformerDestination;
+                this.ViewModel.MezzanineLayer.Transform.Destination = transformerDestination;
                 this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
                 foreach (ILayer child in this.ViewModel.Layers.RootLayers)

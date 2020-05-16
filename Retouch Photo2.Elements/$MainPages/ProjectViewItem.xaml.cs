@@ -108,8 +108,8 @@ namespace Retouch_Photo2.Elements.MainPages
         /// <returns> The calculated rect. </returns>
         public Rect GetVisualRect(UIElement visual)
         {
-            GeneralTransform transform = this.ImageEx.TransformToVisual(visual);
-            Point sourcePostion = transform.TransformPoint(new Point());
+            //Gets visual-postion in visual.
+            Point sourcePostion = this.ImageEx.TransformToVisual(visual).TransformPoint(new Point());//@VisualPostion
 
             return new Rect
             {

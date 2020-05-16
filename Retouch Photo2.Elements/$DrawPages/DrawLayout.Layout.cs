@@ -8,35 +8,9 @@ namespace Retouch_Photo2.Elements.DrawPages
     /// </summary>
     public sealed partial class DrawLayout : UserControl
     {
-
-        #region DependencyProperty
-
-
-        /// <summary> Gets or sets <see cref = "DeviceLayout" />'s DeviceLayout. </summary>
-        public DeviceLayout DeviceLayout
-        {
-            get { return (DeviceLayout)GetValue(DeviceLayoutProperty); }
-            set { SetValue(DeviceLayoutProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "DeviceLayout.DeviceLayout" /> dependency property. </summary>
-        public static readonly DependencyProperty DeviceLayoutProperty = DependencyProperty.Register(nameof(DeviceLayout), typeof(DeviceLayout), typeof(DeviceLayout), new PropertyMetadata(DeviceLayout.Default, (sender, e) =>
-        {
-            DrawLayout con = (DrawLayout)sender;
-
-            if (e.NewValue is DeviceLayout value)
-            {
-                con._vsDeviceLayout = value;
-                con.VisualState = con.VisualState;//State
-            }
-        }));
-
-
-        #endregion
-
-
+        
         //@VisualState
         bool _vsIsFullScreen;
-        DeviceLayout _vsDeviceLayout = DeviceLayout.Default;
         DeviceLayoutType _vsDeviceLayoutType = DeviceLayoutType.PC;
         PhoneLayoutType _vsPhoneType = PhoneLayoutType.Hided;
         public VisualState VisualState
@@ -45,7 +19,7 @@ namespace Retouch_Photo2.Elements.DrawPages
             {
                 if (this._vsIsFullScreen) return this.FullScreen;
 
-                DeviceLayoutType type = (this._vsDeviceLayout.IsAdaptive) ? this._vsDeviceLayoutType : this._vsDeviceLayout.FallBackType;
+                DeviceLayoutType type = this._vsDeviceLayoutType;
 
                 switch (type)
                 {

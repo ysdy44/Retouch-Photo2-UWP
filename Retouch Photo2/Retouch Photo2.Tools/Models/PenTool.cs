@@ -286,8 +286,8 @@ namespace Retouch_Photo2.Tools.Models
             CurveLayer curveLayer = new CurveLayer(canvasStartingPoint, canvasPoint)
             {
                 SelectMode = SelectMode.Selected,
-                TransformManager = new TransformManager(transformer),
-                StyleManager = this.SelectionViewModel.CurveStyle,
+                Transform = new Transform(transformer),
+                Style = this.SelectionViewModel.CurveStyle,
             };
 
             //Selection

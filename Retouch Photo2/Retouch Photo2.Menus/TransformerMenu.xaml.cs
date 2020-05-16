@@ -663,7 +663,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.SelectionTransformer = zeroTransformer * matrix;
                 this.SelectionViewModel.SetValue((Transformer) =>
                 {
-                    Transformer.TransformManager.Destination = zeroTransformer * matrix;
+                    Transformer.Transform.Destination = zeroTransformer * matrix;
                 });
 
                 this.ViewModel.Invalidate();

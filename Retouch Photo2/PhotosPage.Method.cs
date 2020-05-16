@@ -42,6 +42,7 @@ namespace Retouch_Photo2
             ImageLayer imageLayer = new ImageLayer(transformerSource, photocopier)
             {
                 SelectMode = SelectMode.Selected,
+                Transform = new Transform(transformerSource)
             };
 
             //Selection
@@ -68,7 +69,7 @@ namespace Retouch_Photo2
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                layer.StyleManager.FillBrush = imageBrush.Clone();
+                layer.Style.FillBrush = imageBrush.Clone();
                 this.SelectionViewModel.StyleLayer = layer;
             });
             this.SelectionViewModel.FillBrush = imageBrush;
@@ -83,7 +84,7 @@ namespace Retouch_Photo2
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                layer.StyleManager.StrokeBrush = imageBrush.Clone();
+                layer.Style.StrokeBrush = imageBrush.Clone();
                 this.SelectionViewModel.StyleLayer = layer;
             });
             this.SelectionViewModel.StrokeBrush = imageBrush;
@@ -135,12 +136,12 @@ namespace Retouch_Photo2
                 if (layer.Type == LayerType.Image)
                 {
 
-                    layer.TransformManager = new TransformManager
+                    layer.Transform = new Transform
                     {
                         Source = transformerSource,
-                        Destination = layer.TransformManager.Destination,
+                        Destination = layer.Transform.Destination,
                     };
-                    layer.StyleManager.FillBrush = new ImageBrush(transformerSource)
+                    layer.Style.FillBrush = new ImageBrush(transformerSource)
                     {
                         Photocopier = photo.ToPhotocopier()
                     };

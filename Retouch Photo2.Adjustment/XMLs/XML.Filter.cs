@@ -8,7 +8,7 @@ namespace Retouch_Photo2.Adjustments
     /// </summary>
     public static partial class XML
     {
-        
+
         /// <summary>
         /// Saves the entire <see cref="Filter"/> to a XElement.
         /// </summary>
@@ -17,16 +17,18 @@ namespace Retouch_Photo2.Adjustments
         /// <returns> The saved XElement. </returns>
         public static XElement SaveFilter(string elementName, Filter filter)
         {
-            return new XElement
+            XElement element = new XElement(elementName);
+            element.Add(new XAttribute("Name", filter.Name));
+
+            element.Add(new XElement
             (
-                elementName,
-                new XAttribute("Name", filter.Name),
-                (
-                    from a
-                    in filter.Adjustments
-                    select XML.SaveIAdjustment("Adjustment", a)
-                )
-            );
+                "Adjustments",
+                from adjustment
+                in filter.Adjustments
+                select XML.SaveIAdjustment("Adjustment", adjustment)
+            ));
+
+            return element;
         }
 
         /// <summary>
@@ -36,14 +38,20 @@ namespace Retouch_Photo2.Adjustments
         /// <returns> The loaded <see cref="Filter"/>. </returns>
         public static Filter LoadFilter(XElement element)
         {
-            return new Filter
+            Filter filter = new Filter();
+            if (element.Attribute("Name") is XAttribute name) filter.Name = name.Value;
+
+            if (element.Element("Adjustments") is XElement adjustments)
             {
-                Name = element.Attribute("Name").Value,
-                Adjustments =
-                   from a
-                   in element.Elements()
-                   select XML.LoadIAdjustment(a)
-            };
+                filter.Adjustments =
+                (
+                    from adjustment
+                    in adjustments.Elements()
+                    select XML.LoadIAdjustment(adjustment)
+                ).ToList();
+            }
+
+            return filter;
         }
 
     }

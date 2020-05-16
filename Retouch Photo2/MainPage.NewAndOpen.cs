@@ -34,6 +34,7 @@ namespace Retouch_Photo2
         /// <param name="pixels"> The bitmap size. </param>
         private void NewFromSize(BitmapSize pixels)
         {
+            this.LoadingControl.State = LoadingState.Loading;
             this.LoadingControl.IsActive = true;
 
             //Project
@@ -59,6 +60,7 @@ namespace Retouch_Photo2
             };
 
             this.LoadingControl.IsActive = false;
+            this.LoadingControl.State = LoadingState.None;
             this.Frame.Navigate(typeof(DrawPage), data);//Navigate
         }
 
@@ -68,30 +70,45 @@ namespace Retouch_Photo2
         /// <param name="projectViewItem"> The ProjectViewItem. </param>
         private async void OpenFromProjectViewItem(ProjectViewItem projectViewItem)
         {
+            this.LoadingControl.State = LoadingState.Loading;
             this.LoadingControl.IsActive = true;
 
             //FileUtil
+            string name = projectViewItem.Name;
+            if (name == null || name == string.Empty)
             {
-                string name = projectViewItem.Name;
-                if (name == null) return;
-                if (name == string.Empty) return;
-
-                await FileUtil.DeleteInTemporaryFolder();
-                await FileUtil.MoveAll(name);
-
-                //Load all photos. 
-                IEnumerable<Photo> photos = XML.LoadPhotosFile();
-                Photo.Instances.Clear();
-                foreach (Photo photo in photos)
-                {
-                    await photo.ConstructPhotoSource(this.ViewModel.CanvasDevice);
-                    Photo.Instances.Add(photo);
-                }
+                this.LoadingControl.IsActive = false;
+                this.LoadingControl.State = LoadingState.FileNull;
+                await Task.Delay(800);
+                this.LoadingControl.State = LoadingState.None;
+                return;
             }
+
+
+            await FileUtil.DeleteInTemporaryFolder();
+            bool isExists = await FileUtil.MoveAllAndReturn(name);
+            if (isExists == false)
+            {
+                this.LoadingControl.IsActive = false;
+                this.LoadingControl.State = LoadingState.FileCorrupt;
+                await Task.Delay(800);
+                this.LoadingControl.State = LoadingState.None;
+                return;
+            }
+
+
+            //Load all photos. 
+            IEnumerable<Photo> photos = XML.LoadPhotosFile();
+            Photo.Instances.Clear();
+            foreach (Photo photo in photos)
+            {
+                await photo.ConstructPhotoSource(this.ViewModel.CanvasDevice);
+                Photo.Instances.Add(photo);
+            }
+
 
             //Project
             {
-                string name = projectViewItem.Name;
                 Project project = XML.LoadProjectFile(name);
                 this.ViewModel.LoadFromProject(project);
             }
@@ -105,6 +122,7 @@ namespace Retouch_Photo2
             };
 
             this.LoadingControl.IsActive = false;
+            this.LoadingControl.State = LoadingState.None;
             this.Frame.Navigate(typeof(DrawPage), data);//Navigate   
         }
 
@@ -115,10 +133,12 @@ namespace Retouch_Photo2
         /// <param name="pixels"> The picker locationId. </param>
         private async Task NewFromPicture(PickerLocationId location)
         {
+            this.LoadingControl.State = LoadingState.Loading;
             this.LoadingControl.IsActive = true;
 
             //Photo
             StorageFile copyFile = await FileUtil.PickAndCopySingleImageFileAsync(location);
+            if (copyFile == null) return;
             Photo photo = await Photo.CreatePhotoFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
             Photo.DuplicateChecking(photo);
 
@@ -130,7 +150,10 @@ namespace Retouch_Photo2
 
             //ImageLayer 
             Photocopier photocopier = photo.ToPhotocopier();
-            ImageLayer imageLayer = new ImageLayer(transformerSource, photocopier);
+            ImageLayer imageLayer = new ImageLayer(transformerSource, photocopier)
+            {
+                Transform = new Transform(transformerSource)
+            };
 
             //Project
             {
@@ -154,6 +177,7 @@ namespace Retouch_Photo2
             };
 
             this.LoadingControl.IsActive = false;
+            this.LoadingControl.State = LoadingState.None;
             this.Frame.Navigate(typeof(DrawPage), data);//Navigate
         }
 

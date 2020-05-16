@@ -133,9 +133,10 @@ namespace Retouch_Photo2.Tools.Models
             bool isTransformer = this.TransformerTool.Started(startingPoint, point);//TransformerTool
 
             //Box
-            if (isTransformer)
+            if (isTransformer) this._isBox = false;
+            else
             {
-                this._isBox = false;
+                this._isBox = true;
 
                 Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
                 Vector2 pointA = Vector2.Transform(startingPoint, inverseMatrix);
@@ -143,9 +144,7 @@ namespace Retouch_Photo2.Tools.Models
                 this._boxCanvasRect = new TransformerRect(pointA, pointB);
 
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                return;
             }
-            else this._isBox = true;
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
@@ -182,8 +181,8 @@ namespace Retouch_Photo2.Tools.Models
                     this.BoxChoose(parentsChildren);//Box 
 
                     this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
-                    this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                 }
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             }
 
             this.TransformerTool.Complete(startingPoint, point); //TransformerTool

@@ -64,28 +64,22 @@ namespace Retouch_Photo2
             if (menu == null) return;
             UIElement button = menu.Expander.Button.Self;
 
-            if (menu.Type == MenuType.Layer)
-            {
-                this.LayersControl.IndicatorBorder.Child = button;
-            }
-            else
-            {
-                this.MenuHead.Add(button);
-            }
+            this.MenuHead.Add(button);
         }
 
         public void ConstructMenuLayout(IMenu menu)
         {
             if (menu == null) return;
             FrameworkElement layout = menu.Expander.Layout;
+            this.OverlayCanvas.Children.Add(layout);
 
-            
+
             //Move the menu to top.
             menu.Expander.Move += () =>
             {
                 int index = this.OverlayCanvas.Children.IndexOf(layout);
                 int count = this.OverlayCanvas.Children.Count;
-                this.OverlayCanvas.Children.Move((uint)index, (uint)count - 1);
+                this.OverlayCanvas.Children.Move((uint)index, (uint)count - 1); ;
             };
 
             //Disable all menus, except the current menu.
@@ -93,11 +87,12 @@ namespace Retouch_Photo2
             {
                 foreach (IMenu m in this.TipViewModel.Menus)
                 {
-                     m.Expander.Layout.IsHitTestVisible = false;
+                    m.Expander.Layout.IsHitTestVisible = false;
                 }
                 menu.Expander.Layout.IsHitTestVisible = true;
 
-                this.OverlayCanvas.Children.Add(layout);
+                menu.Expander.Move();
+                layout.Visibility = Visibility.Visible;
                 this.IsOverlayDismiss = true;
             };
 
@@ -109,7 +104,7 @@ namespace Retouch_Photo2
                     m.Expander.Layout.IsHitTestVisible = true;
                 }
 
-                this.OverlayCanvas.Children.Remove(layout);
+                layout.Visibility = Visibility.Collapsed;
                 this.IsOverlayDismiss = false;
             };
 

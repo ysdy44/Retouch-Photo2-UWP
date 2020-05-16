@@ -93,19 +93,25 @@ namespace Retouch_Photo2
             {
                 await photo.MoveFile(zipFolder);
             }
+        }
 
+
+        /// <summary>
+        /// Exit the current Project.
+        /// </summary>
+        private async Task Exit()
+        {
             //Clear Photos
-            Photo.Instances.Clear();            
+            Photo.Instances.Clear();
 
             //FileUtil
             await FileUtil.DeleteInTemporaryFolder();
-            
+
 
             //Clear
             this.SelectionViewModel.SetModeNone();
             this.ViewModel.Layers.RootLayers.Clear();
             this.ViewModel.Layers.RootControls.Clear();
         }
-
     }
 }

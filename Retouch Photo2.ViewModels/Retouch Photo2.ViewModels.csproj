@@ -128,6 +128,7 @@
     <Compile Include="SelectionViewModels\SelectionViewModel.SetMode.cs" />
     <Compile Include="SelectionViewModels\SelectionViewModel.SetValue.cs" />
     <Compile Include="Setting.cs" />
+    <Compile Include="SettingViewModels\SettingViewModel.Setting.cs" />
     <Compile Include="TipViewModels\TipViewModel.cs" />
     <Compile Include="TipViewModels\TipViewModel.Menu.cs" />
     <Compile Include="TipViewModels\TipViewModel.Tool.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="ViewModels\ViewModel.History.cs" />
     <Compile Include="XMLs\XML.Project.cs" />
     <Compile Include="XMLs\XML.Setting.cs" />
+    <Compile Include="XMLs\XML.ThemeFactory.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.ViewModels.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -180,10 +182,6 @@
     <ProjectReference Include="..\Retouch Photo2.Tools\Retouch Photo2.Tools.csproj">
       <Project>{3f4ae427-651f-4791-a176-678a00a93b1e}</Project>
       <Name>Retouch Photo2.Tools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch_Photo2.Strokes\Retouch_Photo2.Strokes.csproj">
-      <Project>{01d8ec32-95e9-4700-9c99-e0ffa246b2a4}</Project>
-      <Name>Retouch_Photo2.Strokes</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

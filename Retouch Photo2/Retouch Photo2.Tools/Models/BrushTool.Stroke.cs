@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Tools.Models
                         this.StrokeBrush = linearGradientBrush;
                         this.SelectionViewModel.SetValue((layer) =>
                         {
-                            layer.StyleManager.StrokeBrush = linearGradientBrush.Clone();
+                            layer.Style.StrokeBrush = linearGradientBrush.Clone();
                             this.SelectionViewModel.StyleLayer = layer;
                         });
 
@@ -62,8 +62,8 @@ namespace Retouch_Photo2.Tools.Models
                             this.StrokeBrush.CacheTransform();
                             this.SelectionViewModel.SetValue((layer) =>
                             {
-                                layer.StyleManager.StrokeBrush = this.StrokeBrush.Clone();
-                                layer.StyleManager.StrokeBrush.CacheTransform();
+                                layer.Style.StrokeBrush = this.StrokeBrush.Clone();
+                                layer.Style.StrokeBrush.CacheTransform();
                                 this.SelectionViewModel.StyleLayer = layer;
                             });
 
@@ -95,7 +95,7 @@ namespace Retouch_Photo2.Tools.Models
                         this.StrokeBrush.Controller(this._operateMode, canvasStartingPoint, canvasPoint);
                         this.SelectionViewModel.SetValue((layer) =>
                         {
-                            layer.StyleManager.StrokeBrush.Controller(this._operateMode, canvasStartingPoint, canvasPoint);
+                            layer.Style.StrokeBrush.Controller(this._operateMode, canvasStartingPoint, canvasPoint);
                             this.SelectionViewModel.StyleLayer = layer;
                         });
 
@@ -118,7 +118,7 @@ namespace Retouch_Photo2.Tools.Models
                         this.StrokeBrush = new NoneBrush();
                         this.SelectionViewModel.SetValue((layer) =>
                         {
-                            layer.StyleManager.StrokeBrush = new NoneBrush();
+                            layer.Style.StrokeBrush = new NoneBrush();
                             this.SelectionViewModel.StyleLayer = layer;
                         });
 
@@ -133,7 +133,7 @@ namespace Retouch_Photo2.Tools.Models
                         this.StrokeBrush = new ColorBrush(Colors.LightGray);
                         this.SelectionViewModel.SetValue((layer) =>
                         {
-                            layer.StyleManager.StrokeBrush = new ColorBrush(Colors.LightGray);
+                            layer.Style.StrokeBrush = new ColorBrush(Colors.LightGray);
                             this.SelectionViewModel.StyleLayer = layer;
                         });
 
@@ -153,7 +153,7 @@ namespace Retouch_Photo2.Tools.Models
                         this.StrokeBrush = linearGradientBrush;
                         this.SelectionViewModel.SetValue((layer) =>
                         {
-                            layer.StyleManager.StrokeBrush = linearGradientBrush.Clone();
+                            layer.Style.StrokeBrush = linearGradientBrush.Clone();
                             this.SelectionViewModel.StyleLayer = layer;
                         });
 
@@ -172,7 +172,7 @@ namespace Retouch_Photo2.Tools.Models
                         this.StrokeBrush = radialGradientBrush;
                         this.SelectionViewModel.SetValue((layer) =>
                         {
-                            layer.StyleManager.StrokeBrush = radialGradientBrush.Clone();
+                            layer.Style.StrokeBrush = radialGradientBrush.Clone();
                             this.SelectionViewModel.StyleLayer = layer;
                         });
 
@@ -191,7 +191,7 @@ namespace Retouch_Photo2.Tools.Models
                         this.StrokeBrush = ellipticalGradientBrush;
                         this.SelectionViewModel.SetValue((layer) =>
                         {
-                            layer.StyleManager.StrokeBrush = ellipticalGradientBrush.Clone();
+                            layer.Style.StrokeBrush = ellipticalGradientBrush.Clone();
                             this.SelectionViewModel.StyleLayer = layer;
                         });
 
@@ -243,7 +243,7 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                layer.StyleManager.StrokeBrush.Array = (CanvasGradientStop[])array.Clone();
+                layer.Style.StrokeBrush.Array = (CanvasGradientStop[])array.Clone();
                 this.SelectionViewModel.StyleLayer = layer;
             });
 
@@ -258,7 +258,7 @@ namespace Retouch_Photo2.Tools.Models
             this.StrokeBrush.Extend = extend;
             this.SelectionViewModel.SetValue((layer) =>
             {
-                layer.StyleManager.StrokeBrush.Extend = extend;
+                layer.Style.StrokeBrush.Extend = extend;
                 this.SelectionViewModel.StyleLayer = layer;
             });
 

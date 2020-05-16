@@ -16,7 +16,7 @@ namespace Retouch_Photo2.ViewModels
     public partial class SelectionViewModel : INotifyPropertyChanged
     {
 
-        /// <summary> Brush's IsFollowTransform. </summary>     
+        /// <summary> Style's IsFollowTransform. </summary>     
         public bool IsFollowTransform
         {
             get => this.isFollowTransform;
@@ -67,7 +67,7 @@ namespace Retouch_Photo2.ViewModels
                     this.FillBrush = new ColorBrush(color);
                     this.SetValue((layer) =>
                     {
-                        layer.StyleManager.FillBrush = new ColorBrush(color);
+                        layer.Style.FillBrush = new ColorBrush(color);
                         this.StyleLayer = layer;
                     });
                     break;
@@ -76,7 +76,7 @@ namespace Retouch_Photo2.ViewModels
                     this.StrokeBrush = new ColorBrush(color);
                     this.SetValue((layer) =>
                     {
-                        layer.StyleManager.StrokeBrush = new ColorBrush(color);
+                        layer.Style.StrokeBrush = new ColorBrush(color);
                         this.StyleLayer = layer;
                     });
                     break;
@@ -135,10 +135,10 @@ namespace Retouch_Photo2.ViewModels
         }
         private CanvasStrokeStyle strokeStyle = new CanvasStrokeStyle();
 
-        /// <summary> Sets style-manager. </summary>  
-        private void SetStyleManager(StyleManager styleManager)
+        /// <summary> Sets style. </summary>  
+        private void SetStyle(Style style)
         {
-            if (styleManager == null)
+            if (style == null)
             {
                 this.IsFollowTransform = true;
                 this.FillBrush = new NoneBrush();
@@ -148,40 +148,40 @@ namespace Retouch_Photo2.ViewModels
             }
             else
             {
-                this.IsFollowTransform = styleManager.IsFollowTransform;
-                this.FillBrush = styleManager.FillBrush;
-                this.StrokeBrush = styleManager.StrokeBrush;
-                this.StrokeWidth = styleManager.StrokeWidth;
-                this.StrokeStyle = styleManager.StrokeStyle;
+                this.IsFollowTransform = style.IsFollowTransform;
+                this.FillBrush = style.FillBrush;
+                this.StrokeBrush = style.StrokeBrush;
+                this.StrokeWidth = style.StrokeWidth;
+                this.StrokeStyle = style.StrokeStyle;
 
                 switch (this.FillOrStroke)
                 {
                     case FillOrStroke.Fill:
-                        if (styleManager.FillBrush.Type == BrushType.Color)
-                            this.Color = styleManager.FillBrush.Color;
+                        if (style.FillBrush.Type == BrushType.Color)
+                            this.Color = style.FillBrush.Color;
                         break;
                     case FillOrStroke.Stroke:
-                        if (styleManager.StrokeBrush.Type == BrushType.Color)
-                            this.Color = styleManager.StrokeBrush.Color;
+                        if (style.StrokeBrush.Type == BrushType.Color)
+                            this.Color = style.StrokeBrush.Color;
                         break;
                 }
             }
         }
                      
         /// <summary> Set mode. </summary>  
-        public void SetModeStyleManager()
+        public void SetModeStyle()
         {
             switch (this.SelectionMode)
             {
                 case ListViewSelectionMode.None:
-                    this.SetStyleManager(null);
+                    this.SetStyle(null);
                     break;
                 case ListViewSelectionMode.Single:
-                    this.SetStyleManager(this.Layer.StyleManager);
+                    this.SetStyle((Style)this.Layer.Style);
                     break;
                 case ListViewSelectionMode.Multiple:
                     ILayer firstLayer = this.Layers.First();
-                    this.SetStyleManager(firstLayer.StyleManager);
+                    this.SetStyle((Style)firstLayer.Style);
                     break;
             }
         }
@@ -191,7 +191,7 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary>
-        /// Sets the <see cref="StyleManager"/>,
+        /// Sets the <see cref="Style"/>,
         /// switch by <see cref="LayerType"/> to
         /// <see cref="SelectionViewModel.GeometryStyle"/>
         /// <see cref="SelectionViewModel.CurveStyle"/>
@@ -228,22 +228,21 @@ namespace Retouch_Photo2.ViewModels
         /// <summary>
         /// Gets the geometry style.
         /// </summary>
-        public StyleManager GeometryStyle
+        public Style GeometryStyle
         {
             get
             {
                 if (this.geometryStylelayer != null)
                 {
                     //CacheBrush
-                    Transformer transformer = this.geometryStylelayer.TransformManager.Destination;
-                    StyleManager styleManager = this.geometryStylelayer.StyleManager.Clone();
-                    styleManager.CacheBrush(transformer);
-                    return styleManager;
+                    Transformer transformer = this.geometryStylelayer.Transform.Destination;
+                    Style style = this.geometryStylelayer.Style.Clone();
+                    style.OneBrushPoints(transformer);
+                    return style;
                 }
 
-                return new StyleManager
+                return new Style
                 {
-                    IsFollowTransform = true,
                     FillBrush = new ColorBrush(Colors.LightGray),
                     StrokeBrush = new NoneBrush(),
                     StrokeWidth = 0,
@@ -256,22 +255,21 @@ namespace Retouch_Photo2.ViewModels
         /// <summary>
         /// Gets the curve style.
         /// </summary>
-        public StyleManager CurveStyle
+        public Style CurveStyle
         {
             get
             {
                 if (this.curveStyleLayer != null)
                 {
                     //CacheBrush
-                    Transformer transformer = this.curveStyleLayer.TransformManager.Destination;
-                    StyleManager styleManager = this.curveStyleLayer.StyleManager.Clone();
-                    styleManager.CacheBrush(transformer);
-                    return styleManager;
+                    Transformer transformer = this.curveStyleLayer.Transform.Destination;
+                    Style style = this.curveStyleLayer.Style.Clone();
+                    style.OneBrushPoints(transformer);
+                    return style;
                 }
 
-                return new StyleManager
+                return new Style
                 {
-                    IsFollowTransform = true,
                     FillBrush = new NoneBrush(),
                     StrokeBrush = new ColorBrush(Colors.Black),
                     StrokeWidth = 3,
@@ -284,22 +282,21 @@ namespace Retouch_Photo2.ViewModels
         /// <summary>
         /// Gets the text style.
         /// </summary>
-        public StyleManager TextStyle
+        public Style TextStyle
         {
             get
             {
                 if (this.textStyleLayer != null)
                 {
                     //CacheBrush
-                    Transformer transformer = this.textStyleLayer.TransformManager.Destination;
-                    StyleManager styleManager = this.textStyleLayer.StyleManager.Clone();
-                    styleManager.CacheBrush(transformer);
-                    return styleManager;
+                    Transformer transformer = this.textStyleLayer.Transform.Destination;
+                    Style style = this.textStyleLayer.Style.Clone();
+                    style.OneBrushPoints(transformer);
+                    return style;
                 }
 
-                return new StyleManager
+                return new Style
                 {
-                    IsFollowTransform = true,
                     FillBrush = new ColorBrush(Colors.Black),
                     StrokeBrush = new NoneBrush(),
                     StrokeWidth = 0,

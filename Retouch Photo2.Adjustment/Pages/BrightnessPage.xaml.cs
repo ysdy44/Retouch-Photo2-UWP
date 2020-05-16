@@ -28,26 +28,26 @@ namespace Retouch_Photo2.Adjustments.Pages
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.WhiteLight = (float)(value / 100);
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
             this.WhiteDarkSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.WhiteDark = (float)(value / 100);
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
 
             this.BlackLightSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.BlackLight = (float)(value / 100);
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
             this.BlackDarkSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.BlackDark = (float)(value / 100);
-                AdjustmentManager.Invalidate?.Invoke();
+                Filter.Invalidate?.Invoke();
             };
         }
 

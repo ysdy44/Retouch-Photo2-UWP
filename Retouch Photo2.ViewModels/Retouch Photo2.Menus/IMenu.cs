@@ -1,5 +1,4 @@
 ﻿using Retouch_Photo2.Elements;
-using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Menus
 {

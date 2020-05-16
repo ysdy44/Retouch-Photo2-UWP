@@ -40,7 +40,7 @@ namespace Retouch_Photo2.Tools.Models
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.TransformManager.IsCrop = false;
+                    layer.Transform.IsCrop = false;
                 });
 
                 this.SelectionViewModel.IsCrop = false;//Selection
@@ -51,11 +51,11 @@ namespace Retouch_Photo2.Tools.Models
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    if (layer.TransformManager.IsCrop)
+                    if (layer.Transform.IsCrop)
                     {
-                        Transformer cropTransformer = layer.TransformManager.CropDestination;
-                        layer.TransformManager.Destination = cropTransformer;
-                        layer.TransformManager.IsCrop = false;
+                        Transformer cropTransformer = layer.Transform.CropDestination;
+                        layer.Transform.Destination = cropTransformer;
+                        layer.Transform.IsCrop = false;
                     }
                 });
 
@@ -131,9 +131,9 @@ namespace Retouch_Photo2.Tools.Models
                     if (transformerMode != TransformerMode.None)
                     {
                         this._layer = layer;
-                        this._startingDestination = layer.TransformManager.Destination;
-                        this._startingIsCrop = layer.TransformManager.IsCrop;
-                        this._startingCropDestination = layer.TransformManager.CropDestination;
+                        this._startingDestination = layer.Transform.Destination;
+                        this._startingIsCrop = layer.Transform.IsCrop;
+                        this._startingCropDestination = layer.Transform.CropDestination;
                         this._transformerMode = transformerMode;
 
                         break;
@@ -175,18 +175,18 @@ namespace Retouch_Photo2.Tools.Models
             );
 
             //Crop
-            this._layer.TransformManager.IsCrop = true;
+            this._layer.Transform.IsCrop = true;
             if (isTranslation)
             {
-                this._layer.TransformManager.Destination = transformer;
+                this._layer.Transform.Destination = transformer;
                 if (this._startingIsCrop == false)
                 {
-                    this._layer.TransformManager.CropDestination = this._startingDestination;
+                    this._layer.Transform.CropDestination = this._startingDestination;
                 }
             }
             else
             {
-                this._layer.TransformManager.CropDestination = transformer;
+                this._layer.Transform.CropDestination = transformer;
             }
 
             this.SelectionViewModel.IsCrop = true;//Selection

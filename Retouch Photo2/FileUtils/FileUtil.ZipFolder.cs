@@ -97,9 +97,18 @@ namespace Retouch_Photo2
         /// Move all files to temporary folder.
         /// </summary>
         /// <param name="name"> The zip folder name. </param>
-        public static async Task MoveAll(string name)
+        /// <retrun> The exists. </retrun>
+        public static async Task<bool> MoveAllAndReturn(string name)
         {
             StorageFolder zipFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync($"{name}.photo2pk");
+            {
+                bool isZipFolderPhotosFileExists = await FileUtil.IsFileExists($"Photos.xml", zipFolder);
+                if (isZipFolderPhotosFileExists == false) return false;
+
+                bool isZipFolderProjectFileExists = await FileUtil.IsFileExists($"Project.xml", zipFolder);
+                if (isZipFolderProjectFileExists == false) return false;
+            }
+
 
             IReadOnlyList<StorageFile> files = await zipFolder.GetFilesAsync();
             foreach (var item in files)
@@ -107,14 +116,23 @@ namespace Retouch_Photo2
                 //Move to temporary folder
                 await item.CopyAsync(ApplicationData.Current.TemporaryFolder);
             }
+            return true;
         }
 
         /// <summary>
         /// Delete all files in zip folder and return zip folder.
+        /// If not exists, create a new zip folder.
         /// </summary>
         /// <param name="name"> The zip folder name. </param>
         public static async Task<StorageFolder> DeleteAllAndReturn(string name)
         {
+            bool isZipFolderExists = await FileUtil.IsFileExistsInLocalFolder($"{name}.photo2pk");
+
+            if (isZipFolderExists == false)
+            {
+                return await ApplicationData.Current.LocalFolder.CreateFolderAsync($"{name}.photo2pk");
+            }
+
             //Delete all in zip folder.
             StorageFolder zipFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync($"{name}.photo2pk");
 

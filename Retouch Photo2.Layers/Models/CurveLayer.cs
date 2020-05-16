@@ -53,8 +53,8 @@ namespace Retouch_Photo2.Layers.Models
                 if (this.IsRefactoringTransformer)
                 {
                     Transformer transformer = LayerCollection.RefactoringTransformer(this.Nodes);
-                    this.TransformManager.Source = transformer;
-                    this.TransformManager.Destination = transformer;
+                    this.Transform.Source = transformer;
+                    this.Transform.Destination = transformer;
 
                     this.IsRefactoringTransformer = false;
                 }

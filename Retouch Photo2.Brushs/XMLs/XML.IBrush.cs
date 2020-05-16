@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using Retouch_Photo2.Brushs.Models;
+using System.Xml.Linq;
 
 namespace Retouch_Photo2.Brushs
 {
@@ -32,14 +33,18 @@ namespace Retouch_Photo2.Brushs
         /// <returns> The loaded <see cref="IBrush"/>. </returns>
         public static IBrush LoadBrush(XElement element)
         {
-            string type = element.Attribute("Type").Value;
-
-            //Load
-            IBrush brush = XML.CreateBrush(type);
+            if (element.Attribute("Type") is XAttribute type2)
             {
-                brush.Load(element);
+                string type = type2.Value;
+
+                //Load
+                IBrush brush = XML.CreateBrush(type);
+                {
+                    brush.Load(element);
+                }
+                return brush;
             }
-            return brush;
+            else return new NoneBrush();
         }
 
     }

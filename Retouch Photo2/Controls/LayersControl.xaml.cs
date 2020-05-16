@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using System.Linq;
 using System.Threading.Tasks;
 using Retouch_Photo2.Elements;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Retouch_Photo2.Controls
 {
@@ -26,11 +27,6 @@ namespace Retouch_Photo2.Controls
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel ;
         TipViewModel TipViewModel => App.TipViewModel;
-
-
-        //@Content
-        /// <summary> IndicatorBorder. </summary>
-        public Border IndicatorBorder => this._IndicatorBorder;
 
 
         //LayerCollection
@@ -65,15 +61,12 @@ namespace Retouch_Photo2.Controls
 
         private void ShowLayerMenu()
         {
-            this.TipViewModel.ShowMenu(MenuType.Layer);
+            this.TipViewModel.ShowMenuLayout(MenuType.Layer);
         }
         private void ShowLayerMenu(ILayer layer)
         {
-            Point rootGridPosition = layer.Control.Self.TransformToVisual(this).TransformPoint(new Point());
-            Canvas.SetTop(this._IndicatorBorder, rootGridPosition.Y);
-
-            this.ShowLayerMenu();
+            this.TipViewModel.ShowMenuLayoutAt(MenuType.Layer, layer.Control.Self, FlyoutPlacementMode.Left);
         }
-        
+
     }
 }

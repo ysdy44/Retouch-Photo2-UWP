@@ -12,55 +12,42 @@ namespace Retouch_Photo2.Elements
     {
 
         /// <summary>
-        /// Gets visual-postion in windows.
-        /// </summary>
-        /// <param name="element"> The element. </param>
-        /// <returns> The calculated postion. </returns>
-        private Point GetVisualPostion(UIElement element) => element.TransformToVisual(Window.Current.Content).TransformPoint(new Point());
-
-        /// <summary>
         /// Gets flyout-postion X on canvas.
         /// </summary>
-        private double GetFlyoutPostionX()
+        private double GetFlyoutPostionX(double buttonPostionX, double buttonWidth, FlyoutPlacementMode placementMode)
         {
             double layoutWidth = this.Layout.ActualWidth;
             if (layoutWidth < 222) layoutWidth = 222;
 
-            Point buttonPostion = this.GetVisualPostion(this.Button.Self);
-            double buttonWidth = this.Button.Self.ActualWidth;
-
-            switch (this.PlacementMode)
+            switch (placementMode)
             {
                 case FlyoutPlacementMode.Top:
                 case FlyoutPlacementMode.Bottom:
-                    return buttonPostion.X + buttonWidth / 2 - layoutWidth / 2;
+                    return buttonPostionX + buttonWidth / 2 - layoutWidth / 2;
                 case FlyoutPlacementMode.Left:
-                    return buttonPostion.X - layoutWidth;
+                    return buttonPostionX - layoutWidth;
                 case FlyoutPlacementMode.Right:
-                    return buttonPostion.X + buttonWidth;
+                    return buttonPostionX + buttonWidth;
                 default: return 0;
             }
         }
         /// <summary>
         /// Gets flyout-postion Y on canvas.
         /// </summary>
-        private double GetFlyoutPostionY()
+        private double GetFlyoutPostionY(double buttonPostionY, double buttonHeight, FlyoutPlacementMode placementMode)
         {
             double layoutHeight = this.Layout.ActualHeight;
             if (layoutHeight < 50) layoutHeight = 50;
 
-            Point buttonPostion = this.GetVisualPostion(this.Button.Self);
-            double buttonHeight = this.Button.Self.ActualHeight;
-
-            switch (this.PlacementMode)
+            switch (placementMode)
             {
                 case FlyoutPlacementMode.Top:
-                    return buttonPostion.Y - layoutHeight;
+                    return buttonPostionY - layoutHeight;
                 case FlyoutPlacementMode.Bottom:
                     return buttonHeight;
                 case FlyoutPlacementMode.Left:
                 case FlyoutPlacementMode.Right:
-                    return buttonPostion.Y + buttonHeight / 2 - layoutHeight / 2;
+                    return buttonPostionY + buttonHeight / 2 - layoutHeight / 2;
                 default: return 0;
             }
         }
@@ -100,6 +87,29 @@ namespace Retouch_Photo2.Elements
             else if (postionY > (Window.Current.Bounds.Height - height)) postionY = Window.Current.Bounds.Height - height;
 
             return postionY;
+        }
+
+
+        private ExpanderState GetState(ExpanderState state)
+        {
+            switch (state)
+            {
+                case ExpanderState.Overlay: return ExpanderState.OverlayNotExpanded;
+                case ExpanderState.OverlayNotExpanded: return ExpanderState.Overlay;
+            }
+            return ExpanderState.Overlay;
+        }
+        private ExpanderState GetButtonState(ExpanderState state)
+        {
+            switch (state)
+            {
+                case ExpanderState.Hide: return ExpanderState.FlyoutShow;
+                case ExpanderState.FlyoutShow: return ExpanderState.Hide;
+
+                case ExpanderState.Overlay: return ExpanderState.OverlayNotExpanded;
+                case ExpanderState.OverlayNotExpanded: return ExpanderState.Overlay;
+            }
+            return ExpanderState.FlyoutShow;
         }
 
     }

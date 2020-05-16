@@ -96,6 +96,12 @@ namespace Retouch_Photo2
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             await this._lockOnNavigatedTo();
+
+            ProjectViewItem item = this.ProjectViewItems.FirstOrDefault(i=>i.Name==this.ViewModel.Name);
+            if (item!=null)
+            {
+                item.RefreshImageSource();
+            }
         }
         //The current page no longer becomes an active page
         protected override void OnNavigatedFrom(NavigationEventArgs e)

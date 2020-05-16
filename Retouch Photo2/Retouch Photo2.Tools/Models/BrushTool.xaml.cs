@@ -112,7 +112,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void OnNavigatedTo() => this.SelectionViewModel.SetModeStyleManager();
+        public void OnNavigatedTo() => this.SelectionViewModel.SetModeStyle();
         public void OnNavigatedFrom() { }
 
     }

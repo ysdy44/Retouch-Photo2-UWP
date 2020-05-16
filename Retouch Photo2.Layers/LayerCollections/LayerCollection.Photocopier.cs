@@ -22,14 +22,14 @@ namespace Retouch_Photo2.Layers
                 }
 
                 //Fill
-                if (child.StyleManager.FillBrush.Type == BrushType.Image)
+                if (child.Style.FillBrush.Type == BrushType.Image)
                 {
-                    yield return child.StyleManager.FillBrush.Photocopier;
+                    yield return child.Style.FillBrush.Photocopier;
                 }
                 //Stroke
-                if (child.StyleManager.StrokeBrush.Type == BrushType.Image)
+                if (child.Style.StrokeBrush.Type == BrushType.Image)
                 {
-                    yield return child.StyleManager.StrokeBrush.Photocopier;
+                    yield return child.Style.StrokeBrush.Photocopier;
                 }
             }
         }
