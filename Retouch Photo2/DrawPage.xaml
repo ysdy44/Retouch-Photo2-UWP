@@ -143,7 +143,12 @@
         </elementDialog:DialogBase>
         <elementDialog:DialogBase x:Name="ExportDialog">
             <elementDialog:DialogBase.CenterContent>
-                <elements:FileFormatComboBox x:Name="ExportComboBox"/>
+                <StackPanel>
+                    <TextBlock x:Name="FileFormatTextBlock" Text="File Format" Style="{StaticResource AppTextBlockStyle}"/>
+                    <elements:FileFormatComboBox x:Name="FileFormatComboBox"/>
+                    <TextBlock x:Name="QualityTextBlock" Text="Quality" Style="{StaticResource AppTextBlockStyle}"/>
+                    <elements:SilderPicker x:Name="QualityPicker" />
+                </StackPanel>
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>
 

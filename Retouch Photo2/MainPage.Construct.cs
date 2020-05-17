@@ -181,15 +181,25 @@ namespace Retouch_Photo2
 
 
         //RenameDialog
+        string _rename;
+        private void ConstructRenameDialog()
+        {
+            this.RenameDialog.CloseButton.Click += (sender, args) => this.HideRenameDialog();
+            this.RenameDialog.PrimaryButton.Click += async (sender, args) =>
+            {
+                await this.RenameProjectViewItem(this._rename, this.RenameTextBox.Name);
+            };
+        }
         private void ShowRenameDialog(ProjectViewItem item)
         {
             this.MainLayout.MainPageState = MainPageState.Dialog;
 
             this.RenameDialog.Show();
 
+            this._rename = item.Name;
             this.RenameTextBox.Text = item.Name;
-            this.RenameDialog.PrimaryButton.Click -= async (sender, args) => await this.RenameProjectViewItem(item);
-            this.RenameDialog.PrimaryButton.Click += async (sender, args) => await this.RenameProjectViewItem(item);
+            this.RenameTextBox.Focus(FocusState.Keyboard);
+            this.RenameTextBox.SelectAll();
         }
         private void HideRenameDialog()
         {

@@ -87,7 +87,7 @@ namespace Retouch_Photo2.Brushs
             //Buttons
             button.Content = text;
             button.Tag = icon;
-            Button.Click += (s, e) =>
+            button.Click += (s, e) =>
             {
                 this.FillOrStrokeChanged?.Invoke(this, fillOrStroke); //Delegate
                 this.Flyout.Hide();

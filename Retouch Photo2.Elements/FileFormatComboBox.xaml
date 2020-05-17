@@ -8,19 +8,19 @@
     d:DesignHeight="50"
     d:DesignWidth="200"
     >
-
     <UserControl.Resources>
         <!--Color-->
         <Color x:Key="JpegColor">#7ADB8E</Color>
         <Color x:Key="PngColor">#DF7BD3</Color>
         <Color x:Key="BmpColor">#9F00FF</Color>
         <Color x:Key="GifColor">#007CFF</Color>
-        <Color x:Key="TiffColor">#90C7C2</Color>         
+        <Color x:Key="TiffColor">#90C7C2</Color>
     </UserControl.Resources>
 
 
+
     <Grid>
-     
+
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
@@ -30,59 +30,39 @@
 
                 <!--Jpeg-->
                 <VisualState x:Name="Jpeg">
-                    <Storyboard>
-                        <ColorAnimation Storyboard.TargetName="JpegSolidColorBrush" Storyboard.TargetProperty="Color"
-                                     Duration="00:00:00.2" To="{StaticResource JpegColor}" />
-                    </Storyboard>
                     <VisualState.Setters>
-                        <Setter Target = "JpegTextBlock.Foreground" Value="White"/>
+                        <Setter Target = "JpegButton.IsEnabled" Value="False"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Png-->
                 <VisualState x:Name="Png">
-                    <Storyboard>
-                        <ColorAnimation Storyboard.TargetName="PngSolidColorBrush" Storyboard.TargetProperty="Color"
-                                     Duration="00:00:00.2" To="{StaticResource PngColor}" />
-                    </Storyboard>
                     <VisualState.Setters>
-                        <Setter Target = "PngTextBlock.Foreground" Value="White"/>
+                        <Setter Target = "PngButton.IsEnabled" Value="False"/>
                     </VisualState.Setters>
                 </VisualState>
-                
+
                 <!--Bmp-->
                 <VisualState x:Name="Bmp">
-                    <Storyboard>
-                        <ColorAnimation Storyboard.TargetName="BmpSolidColorBrush" Storyboard.TargetProperty="Color"
-                                     Duration="00:00:00.2" To="{StaticResource BmpColor}" />
-                    </Storyboard>
                     <VisualState.Setters>
-                        <Setter Target = "BmpTextBlock.Foreground" Value="White"/>
+                        <Setter Target = "BmpButton.IsEnabled" Value="False"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Gif-->
                 <VisualState x:Name="Gif">
-                    <Storyboard>
-                        <ColorAnimation Storyboard.TargetName="GifSolidColorBrush" Storyboard.TargetProperty="Color"
-                                     Duration="00:00:00.2" To="{StaticResource GifColor}" />
-                    </Storyboard>
                     <VisualState.Setters>
-                        <Setter Target = "GifTextBlock.Foreground" Value="White"/>
+                        <Setter Target = "GifButton.IsEnabled" Value="False"/>
                     </VisualState.Setters>
                 </VisualState>
-                
+
                 <!--Tiff-->
                 <VisualState x:Name="Tiff">
-                    <Storyboard>
-                        <ColorAnimation Storyboard.TargetName="TiffSolidColorBrush" Storyboard.TargetProperty="Color"
-                                     Duration="00:00:00.2" To="{StaticResource TiffColor}" />
-                    </Storyboard>
                     <VisualState.Setters>
-                        <Setter Target = "TiffTextBlock.Foreground" Value="White"/>
+                        <Setter Target = "TiffButton.IsEnabled" Value="False"/>
                     </VisualState.Setters>
                 </VisualState>
-                
+
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
@@ -94,51 +74,32 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <Border x:Name="JpegButton" Grid.Column="0" CornerRadius="5" Width="44" Height="44" BorderThickness="1" BorderBrush="{StaticResource JpegColor}">
-            <Border.Background>
-                <SolidColorBrush x:Name="JpegSolidColorBrush" Color="{ThemeResource AppBackgroundColor}"/>
-            </Border.Background>
-            <TextBlock x:Name="JpegTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource JpegColor}">
-                JPEG
-            </TextBlock>
-        </Border>
 
-        <Border x:Name="PngButton" Grid.Column="1" CornerRadius="5" Width="44" Height="44" BorderThickness="1" BorderBrush="{StaticResource PngColor}">
-            <Border.Background>
-                <SolidColorBrush x:Name="PngSolidColorBrush" Color="{ThemeResource AppBackgroundColor}"/>
-            </Border.Background>
-            <TextBlock x:Name="PngTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource PngColor}">
-                PNG
-            </TextBlock>
-        </Border>
+        <!--Jpeg-->
+        <Button x:Name="JpegButton" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
+            JPEG
+        </Button>
 
-        <Border x:Name="BmpButton" Grid.Column="2" CornerRadius="5" Width="44" Height="44" BorderThickness="1" BorderBrush="{StaticResource BmpColor}">
-            <Border.Background>
-                <SolidColorBrush x:Name="BmpSolidColorBrush" Color="{ThemeResource AppBackgroundColor}"/>
-            </Border.Background>
-            <TextBlock x:Name="BmpTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource BmpColor}">
-                BMP
-            </TextBlock>
-        </Border>
+        <!--Png-->
+        <Button x:Name="PngButton" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+            PNG
+        </Button>
 
-        <Border x:Name="GifButton" Grid.Column="3" CornerRadius="5" Width="44" Height="44" BorderThickness="1" BorderBrush="{StaticResource GifColor}">
-            <Border.Background>
-                <SolidColorBrush x:Name="GifSolidColorBrush" Color="{ThemeResource AppBackgroundColor}"/>
-            </Border.Background>
-            <TextBlock x:Name="GifTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource GifColor}">
-                GIF
-            </TextBlock>
-        </Border>
+        <!--Bmp-->
+        <Button x:Name="BmpButton" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+            BMP
+        </Button>
 
-        <Border x:Name="TiffButton" Grid.Column="4" CornerRadius="5" Width="44" Height="44" BorderThickness="1" BorderBrush="{StaticResource TiffColor}">
-            <Border.Background>
-                <SolidColorBrush x:Name="TiffSolidColorBrush" Color="{ThemeResource AppBackgroundColor}"/>
-            </Border.Background>
-            <TextBlock x:Name="TiffTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource TiffColor}">
-                TIFF
-            </TextBlock>
-        </Border>
+        <!--Gif-->
+        <Button x:Name="GifButton" Grid.Column="3" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+            GIF
+        </Button>
 
-    </Grid>   
-    
+        <!--Tiff-->
+        <Button x:Name="TiffButton" Grid.Column="4" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
+            TIFF
+        </Button>
+
+    </Grid>
+
 </UserControl>

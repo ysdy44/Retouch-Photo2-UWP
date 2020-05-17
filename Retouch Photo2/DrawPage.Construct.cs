@@ -35,6 +35,9 @@ namespace Retouch_Photo2
         //Export
         private void ConstructExportDialog()
         {
+            this.QualityPicker.Maximum = 1;
+            this.QualityPicker.Value = 1;
+
             this.ExportDialog.CloseButton.Click += (sender, args) => this.ExportDialog.Hide();
 
             this.ExportDialog.PrimaryButton.Click += async (_, __) =>

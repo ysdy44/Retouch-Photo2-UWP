@@ -106,12 +106,11 @@ namespace Retouch_Photo2
         /// <summary>
         /// Rename the ProjectViewItem.
         /// </summary>
-        /// <param name="item"> The ProjectViewItem. </param>
-        private async Task RenameProjectViewItem(ProjectViewItem item)
+        /// <param name="oldName"> The old name. </param>
+        /// <param name="newName"> The new name. </param>
+        private async Task RenameProjectViewItem(string oldName, string newName)
         {
-            //Same name.
-            string oldName = item.Name;
-            string newName = this.RenameTextBox.Text;
+            //Same name. 
             if (oldName == newName)
             {
                 this.RenameTipTextBlock.Visibility = Visibility.Visible;
@@ -127,9 +126,11 @@ namespace Retouch_Photo2
             }
 
             //Rename
+            ProjectViewItem item = this.ProjectViewItems.First(p=>p.Name==oldName);
             await FileUtil.RenameZipFolder(oldName, newName, item);
 
             this.HideRenameDialog();
+            this.MainLayout.MainPageState = MainPageState.Main;
         }
 
         /// <summary>

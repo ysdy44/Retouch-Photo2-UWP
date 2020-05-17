@@ -71,10 +71,23 @@ namespace Retouch_Photo2.Elements
         public FlyoutPlacementMode PlacementMode { get; set; } = FlyoutPlacementMode.Bottom;
         public FrameworkElement Layout { get; set; }
         public IExpanderButton Button { get; set; }
-        
 
+        bool _lockLoad = false;
         public void CalculatePostion(FrameworkElement placementTarget, FlyoutPlacementMode placementMode)
         {
+            //@Debug: 
+            // if unloaded, the height will < 70
+            // so it must re-Load and re-CalculatePostion
+            if (this._lockLoad == false && this.Layout.ActualHeight < 70)
+            {
+                this.Loaded += (s, e) =>
+                {
+                    this._lockLoad = true;
+                    this.CalculatePostion(placementTarget, placementMode);
+                };
+                return;
+            }
+
             //Gets visual-postion in windows.
             Point buttonPostion = placementTarget.TransformToVisual(Window.Current.Content).TransformPoint(new Point());//@VisualPostion
             double flyoutPostionX = this.GetFlyoutPostionX(buttonPostion.X, placementTarget.ActualWidth, placementMode);

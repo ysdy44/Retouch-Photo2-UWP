@@ -51,11 +51,11 @@ namespace Retouch_Photo2
             (
                 renderTarget: renderTarget,
 
-                fileChoices: this.ExportComboBox.FileChoices,
+                fileChoices: this.FileFormatComboBox.FileChoices,
                 suggestedFileName: this.ViewModel.Name,
 
-                fileFormat: this.ExportComboBox.FileFormat,
-                quality: 1.0f
+                fileFormat: this.FileFormatComboBox.FileFormat,
+                quality: this.QualityPicker.Value
             );
         }
 

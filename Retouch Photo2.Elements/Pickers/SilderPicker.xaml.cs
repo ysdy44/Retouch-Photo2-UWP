@@ -104,18 +104,23 @@ namespace Retouch_Photo2.Elements
         //@VisualState
         bool _vsIsEnabled = true;
         ClickMode _vsClickMode;
+        bool _vsIsTouch;
         public VisualState VisualState
         {
             get
             {
                 if (this._vsIsEnabled == false) return this.Disabled;
 
-                switch (this._vsClickMode)
+                if (this._vsIsTouch == false)
                 {
-                    case ClickMode.Release: return this.Normal;
-                    case ClickMode.Hover: return this.PointerOver;
-                    case ClickMode.Press: return this.Pressed;
+                    switch (this._vsClickMode)
+                    {
+                        case ClickMode.Release: return this.Normal;
+                        case ClickMode.Hover: return this.PointerOver;
+                        case ClickMode.Press: return this.Pressed;
+                    }
                 }
+                else return this.Pressed;
 
                 return this.Normal;
             }
@@ -192,6 +197,9 @@ namespace Retouch_Photo2.Elements
             this.RootGrid.ManipulationMode = ManipulationModes.All;
             this.RootGrid.ManipulationStarted += (sender, e) =>
             {
+                this._vsIsTouch = true;
+                this.VisualState = this.VisualState;//State
+
                 this.Position = e.Position.X;
 
                 this.ValueChangeStarted?.Invoke(this, this.Value);//Delegate
@@ -204,6 +212,9 @@ namespace Retouch_Photo2.Elements
             };
             this.RootGrid.ManipulationCompleted += (sender, e) =>
             {
+                this._vsIsTouch = false;
+                this.VisualState = this.VisualState;//State
+
                 this.ValueChangeCompleted?.Invoke(this, this.Value);//Delegate
             };
         }

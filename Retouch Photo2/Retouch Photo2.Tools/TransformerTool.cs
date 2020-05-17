@@ -33,11 +33,18 @@ namespace Retouch_Photo2.Tools
         TransformerMode _transformerMode = TransformerMode.None;
 
 
-        public bool Started(Vector2 startingPoint, Vector2 point)
+        public bool Started(Vector2 startingPoint, Vector2 point, bool disableTranslation)
         {
             if (this.Mode == ListViewSelectionMode.None) return false;
+
             this._transformerMode = this._getTransformerMode(startingPoint);
             if (this._transformerMode == TransformerMode.None) return false;
+            if (disableTranslation && this._transformerMode == TransformerMode.Translation)
+            {
+                this._transformerMode = TransformerMode.None;
+                return false;
+            }
+
 
             //Selection
             this._startingTransformer = this.Transformer;

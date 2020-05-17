@@ -1,4 +1,5 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using System.Numerics;
 
 namespace Retouch_Photo2.Tools
@@ -7,14 +8,15 @@ namespace Retouch_Photo2.Tools
     /// Represents a tool that can be operated. Method has bool type return value.
     /// </summary>
     public interface ITransformerTool
-    {       
+    {
 
         /// <summary>
         /// Occurs when the operation begins. 
         /// </summary>
         /// <param name="startingPoint"> The starting pointer. </param>
         /// <param name="point"> The pointer. </param>
-        bool Started(Vector2 startingPoint, Vector2 point);
+        /// <param name="disableTranslation"> Is disable <see cref="TransformerMode.Translation"/>?. </param>
+        bool Started(Vector2 startingPoint, Vector2 point, bool disableTranslation);
         /// <summary>
         /// Occurs when the input device changes position during operation.
         /// </summary>

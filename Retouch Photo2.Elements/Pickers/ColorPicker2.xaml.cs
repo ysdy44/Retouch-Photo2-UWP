@@ -219,7 +219,7 @@ namespace Retouch_Photo2.Elements
             //Buttons
             button.Content = text;
             button.Tag = icon;
-            Button.Click += (s, e) =>
+            button.Click += (s, e) =>
             {
                 this.Mode = mode;
                 this.Flyout.Hide();

@@ -53,9 +53,9 @@ namespace Retouch_Photo2
             this.ConstructPicturesControl();
             this.PicturesButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Pictures;
 
+            this.ConstructRenameDialog();
             this.RenameCloseButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Main;
             this.RenameButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Rename;
-            this.RenameDialog.CloseButton.Click += (sender, args) => this.HideRenameDialog();
 
             this.ConstructDeleteControl();
             this.DeleteButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Delete;

@@ -130,7 +130,7 @@ namespace Retouch_Photo2.Tools.Models
 
         public void Started(Vector2 startingPoint, Vector2 point)
         {
-            bool isTransformer = this.TransformerTool.Started(startingPoint, point);//TransformerTool
+            bool isTransformer = this.TransformerTool.Started(startingPoint, point, false);//TransformerTool
 
             //Box
             if (isTransformer) this._isBox = false;

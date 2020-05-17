@@ -38,7 +38,7 @@ namespace Retouch_Photo2.Tools
         /// <param name="point"> The pointer. </param>
         public void Started(Func<Transformer, ILayer> createLayer, Vector2 startingPoint, Vector2 point)
         {
-            if (this.TransformerTool.Started(startingPoint, point)) return;//TransformerTool
+            if (this.TransformerTool.Started(startingPoint, point, true)) return;//TransformerTool
 
             //Transformer
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
