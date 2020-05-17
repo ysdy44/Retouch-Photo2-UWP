@@ -22,27 +22,54 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-
-
-        //@Static
-        /// <summary> Navigate to <see cref="PhotosPage"/> </summary>
-        public static Action Select;
-        /// <summary> Navigate to <see cref="PhotosPage"/> </summary>
-        public static Action Replace;
-
+        
 
         //@Construct
         public ImageTool()
         {
             this.InitializeComponent();
             this.ConstructStrings();
-
-            this.SelectButton.Tapped += (s, e) => ImageTool.Select?.Invoke();
-            this.ReplaceButton.Tapped += (s, e) => ImageTool.Replace?.Invoke();
             this.ClearButton.Tapped += (s, e) => this.SelectionViewModel.Photocopier = new Photocopier();//Photocopier
+
+            //Select
+            this.SelectButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.SelectImage);
+            Retouch_Photo2.PhotosPage.SelectCallBack += (photo) =>
+            {
+                if (photo == null) return;
+
+                this.SelectionViewModel.Photocopier = photo.ToPhotocopier();//Photo
+            };
+
+            //Replace
+            this.ReplaceButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.ReplaceImage);
+            Retouch_Photo2.PhotosPage.ReplaceCallBack += (photo) =>
+            {
+                if (photo == null) return;
+                Photocopier photocopier = photo.ToPhotocopier();
+
+                //Transformer
+                Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    if (layer.Type == LayerType.Image)
+                    {
+                        ImageLayer imageLayer = (ImageLayer)layer;
+                        imageLayer.Photocopier = photocopier;
+                        imageLayer.Transform = new Transform
+                        {
+                            Source = transformerSource,
+                            Destination = layer.Transform.Destination,
+                        };
+
+                        this.SelectionViewModel.StyleLayer = layer;
+                    }
+                });
+            };
         }
 
-               
+
         /// <summary> Tip. </summary>
         public void TipSelect() => this.EaseStoryboard.Begin();//Storyboard
         
@@ -116,7 +143,8 @@ namespace Retouch_Photo2.Tools.Models
             this.ViewModel.MezzanineLayer = new ImageLayer(transformerSource, photocopier)
             {
                 SelectMode = SelectMode.Selected,
-                Transform = new Transform(transformerSource, transformerDestination)
+                Transform = new Transform(transformerSource, transformerDestination),
+                Style = this.SelectionViewModel.GeometryStyle
             };
             this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.ViewModel.MezzanineLayer);
 

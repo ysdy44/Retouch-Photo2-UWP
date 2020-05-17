@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Numerics;
 using Windows.Storage;
 using Windows.UI.Xaml;
+using Retouch_Photo2.Elements.MainPages;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -54,7 +55,8 @@ namespace Retouch_Photo2.ViewModels
 
         /// <summary> Retouch_Photo2's the current project name. </summary>
         public string Name = null;
-
+        /// <summary> Update the <see cref="ProjectViewItem.RefreshImageSource"/> by <see cref="ViewModel.Name"/>.  </summary>
+        public bool IsUpdateThumbnailByName = false;
 
         /// <summary> Retouch_Photo2's the only ILayers. </summary>
         public LayerCollection Layers { get; } = new LayerCollection();

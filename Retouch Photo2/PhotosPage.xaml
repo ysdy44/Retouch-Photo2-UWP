@@ -41,16 +41,16 @@
                     </VisualState.Setters>
                 </VisualState>
 
-                <!--FillToImage-->
-                <VisualState x:Name="FillToImage">
+                <!--FillImage-->
+                <VisualState x:Name="FillImage">
                     <VisualState.Setters>
-                        <Setter Target = "FillToImageButton.Visibility" Value="Visible"/>
+                        <Setter Target = "FillImageButton.Visibility" Value="Visible"/>
                     </VisualState.Setters>
                 </VisualState>
-                <!--StrokeToImage-->
-                <VisualState x:Name="StrokeToImage">
+                <!--StrokeImage-->
+                <VisualState x:Name="StrokeImage">
                     <VisualState.Setters>
-                        <Setter Target = "StrokeToImageButton.Visibility" Value="Visible"/>
+                        <Setter Target = "StrokeImageButton.Visibility" Value="Visible"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -122,8 +122,8 @@
 
                     <Button x:Name="AddImageLayerButton" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Stretch" BorderThickness="1" Style="{ThemeResource AccentButtonStyle}"/>
 
-                    <Button x:Name="FillToImageButton" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Stretch" BorderThickness="1" Style="{ThemeResource AccentButtonStyle}"/>
-                    <Button x:Name="StrokeToImageButton" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Stretch" BorderThickness="1" Style="{ThemeResource AccentButtonStyle}"/>
+                    <Button x:Name="FillImageButton" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Stretch" BorderThickness="1" Style="{ThemeResource AccentButtonStyle}"/>
+                    <Button x:Name="StrokeImageButton" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Stretch" BorderThickness="1" Style="{ThemeResource AccentButtonStyle}"/>
  
                     <Button x:Name="SelectImageButton" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Stretch" BorderThickness="1" Style="{ThemeResource AccentButtonStyle}"/>
                     <Button x:Name="ReplaceImageButton" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Stretch" BorderThickness="1" Style="{ThemeResource AccentButtonStyle}"/>

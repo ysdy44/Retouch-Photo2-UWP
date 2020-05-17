@@ -42,8 +42,8 @@ namespace Retouch_Photo2.Tools.Models
             };
 
             //BrushType
-            this.BrushTypeComboBox.FillTypeChanged += (s, brushType) => this.FillTypeChanged(brushType);
-            this.BrushTypeComboBox.StrokeTypeChanged += (s, brushType) => this.StrokeTypeChanged(brushType);
+            this.ConstructFillImage();
+            this.ConstructStrokeImage();
         }
 
 
@@ -97,47 +97,6 @@ namespace Retouch_Photo2.Tools.Models
                         break;
                 }
             };
-
-
-            this.ReplaceButton.Tapped += (s, e) =>
-            {
-                switch (this.FillOrStroke)
-                {
-                    case FillOrStroke.Fill:
-                        BrushTool.FillImage?.Invoke();
-                        break;
-                    case FillOrStroke.Stroke:
-                        BrushTool.StrokeImage?.Invoke();
-                        break;
-                }
-            };
-        }
-
-
-        //BrushType
-        private IBrush GetTypeBrush(IBrush brush, BrushType brushType)
-        {
-            Transformer transformer = this.SelectionViewModel.Transformer;
-
-            switch (brushType)
-            {
-                case BrushType.None: return new BrushBase();
-
-                case BrushType.Color: return BrushBase.ColorBrush(Colors.LightGray);
-
-                case BrushType.LinearGradient:
-                    return BrushBase.LinearGradientBrush(transformer, (brush.Stops == null) ? GreyWhiteMeshHelpher.GetGradientStopArray() : (CanvasGradientStop[])brush.Stops.Clone());
-
-                case BrushType.RadialGradient:
-                    return BrushBase.RadialGradientBrush(transformer, (brush.Stops == null) ? GreyWhiteMeshHelpher.GetGradientStopArray() : (CanvasGradientStop[])brush.Stops.Clone());
-
-                case BrushType.EllipticalGradient:
-                    return BrushBase.EllipticalGradientBrush(transformer, (brush.Stops == null) ? GreyWhiteMeshHelpher.GetGradientStopArray() : (CanvasGradientStop[])brush.Stops.Clone());
-
-                case BrushType.Image: return null;
-
-                default: return null;
-            }
         }
 
 
@@ -162,8 +121,7 @@ namespace Retouch_Photo2.Tools.Models
             this.BrushTypeTextBlock.Text = resource.GetString("/Tools/Brush_Type");
             this.BrushTextBlock.Text = resource.GetString("/Tools/Brush_Brush");
 
-            this.ReplaceTextBlock.Text = resource.GetString("/Tools/Brush_Image_Replace");
-            this.ExtendTextBlock.Text = resource.GetString("/Tools/Brush_Image_Extend");
+            this.ExtendTextBlock.Text = resource.GetString("/Tools/Brush_Extend");
         }
 
 
@@ -179,7 +137,7 @@ namespace Retouch_Photo2.Tools.Models
         readonly ToolButton _button = new ToolButton(new BrushIcon());
 
 
-        BrushOperateMode _operateMode = BrushOperateMode.None;
+        BrushHandleMode _operateMode = BrushHandleMode.None;
 
 
         public void Started(Vector2 startingPoint, Vector2 point)
@@ -221,7 +179,7 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             if (this.Mode == ListViewSelectionMode.None) return;
 
-            this._operateMode = BrushOperateMode.None;
+            this._operateMode = BrushHandleMode.None;
 
             switch (this.FillOrStroke)
             {

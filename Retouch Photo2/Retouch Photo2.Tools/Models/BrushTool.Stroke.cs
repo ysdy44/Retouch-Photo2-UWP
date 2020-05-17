@@ -1,6 +1,8 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using System;
 using System.Numerics;
@@ -17,9 +19,27 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         IBrush Stroke { get => this.SelectionViewModel.Stroke; set => this.SelectionViewModel.Stroke = value; }
 
-        //@Static
-        /// <summary> Navigate to <see cref="PhotosPage"/> </summary>
-        public static Action StrokeImage;
+
+        private void ConstructStrokeImage()
+        {
+            Retouch_Photo2.PhotosPage.StrokeImageCallBack += (photo) =>
+            {
+                this.StrokeTypeChanged(BrushType.Image, photo);
+                this.ShowControl.Invalidate();
+            };
+            this.BrushTypeComboBox.StrokeTypeChanged += (s, brushType) =>
+            {
+                if (brushType == BrushType.Image)
+                {
+                    Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.StrokeImage);
+                }
+                else
+                {
+                    this.StrokeTypeChanged(brushType);
+                    this.ShowControl.Invalidate();
+                }
+            };
+        }
 
 
 
@@ -32,7 +52,7 @@ namespace Retouch_Photo2.Tools.Models
             this._operateMode = this.Stroke.ContainsOperateMode(startingPoint, matrix);
 
             //InitializeController
-            if (this._operateMode == BrushOperateMode.None)
+            if (this._operateMode == BrushHandleMode.None)
             {
                 switch (this.Stroke.Type)
                 {
@@ -74,7 +94,7 @@ namespace Retouch_Photo2.Tools.Models
             switch (this._operateMode)
             {
                 //InitializeController
-                case BrushOperateMode.None:
+                case BrushHandleMode.None:
                     {
                         //Selection
                         this.Stroke.InitializeController(canvasStartingPoint, canvasPoint);
@@ -106,7 +126,7 @@ namespace Retouch_Photo2.Tools.Models
             if (this.Stroke == null) return;
 
             //History
-            IHistoryBase history = new IHistoryBase("Set stroke");
+            IHistoryBase history = new IHistoryBase("Set Stroke");
 
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
@@ -124,44 +144,41 @@ namespace Retouch_Photo2.Tools.Models
 
 
 
-        public void StrokeTypeChanged(BrushType brushType)
+        public void StrokeTypeChanged(BrushType brushType, Photo photo = null)
         {
             if (this.Stroke.Type == brushType) return;
 
-            switch (brushType)
+            //History
+            IHistoryBase history = new IHistoryBase("Set Stroke type");
+
+            bool _lock = false;
+
+            //Selection
+            this.SelectionViewModel.SetValue((layer) =>
             {
-                case BrushType.Image:
-                    BrushTool.StrokeImage?.Invoke();
-                    break;
+                //History
+                var previous = layer.Style.Stroke.Clone();
+                history.Undos.Push(() => layer.Style.Stroke = previous.Clone());
 
-                default:
-                    {
-                        //History
-                        IHistoryBase history = new IHistoryBase("Set stroke type");
-
-                        IBrush brush = this.GetTypeBrush(this.Stroke, brushType);
-                        if (brushType == BrushType.Color) this.SelectionViewModel.Color = brush.Color;
+                Transformer transformer = layer.Transform.Destination;
+                layer.Style.Stroke.TypeChange(brushType, transformer, photo);
+                this.SelectionViewModel.StyleLayer = layer;
 
 
-                        //Selection
-                        this.Stroke = brush;
-                        this.SelectionViewModel.SetValue((layer) =>
-                        {
-                            //History
-                            var previous = layer.Style.Stroke.Clone();
-                            history.Undos.Push(() => layer.Style.Stroke = previous.Clone());
+                if (_lock == false)
+                {
+                    _lock = true;
+                    this.Stroke = layer.Style.Stroke.Clone();
 
-                            layer.Style.Stroke = brush.Clone();
-                            this.SelectionViewModel.StyleLayer = layer;
-                        });
+                    if (this.Stroke.Type == BrushType.Color) this.SelectionViewModel.Color = this.Stroke.Color;
+                }
+            });
 
-                        //History
-                        this.ViewModel.Push(history);
 
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                    break;
-            }
+            //History
+            this.ViewModel.Push(history);
+
+            this.ViewModel.Invalidate();//Invalidate
         }
 
         public void StrokeShow()
@@ -181,11 +198,6 @@ namespace Retouch_Photo2.Tools.Models
                 case BrushType.EllipticalGradient:
                     this.StopsPicker.SetArray(this.Stroke.Stops);
                     this.StopsFlyout.ShowAt(this);//Flyout
-                    break;
-
-                case BrushType.Image:
-                    this.ExtendComboBox.Extend = this.Stroke.Extend;
-                    this.ImageFlyout.ShowAt(this);//Flyout
                     break;
             }
         }

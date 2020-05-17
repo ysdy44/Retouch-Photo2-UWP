@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Microsoft.Graphics.Canvas.Text;
+using Retouch_Photo2.Characters;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
@@ -37,7 +38,7 @@ namespace Retouch_Photo2.Layers.Models
 
             element.Add(new XElement("HorizontalAlignment", this.FontAlignment));
             element.Add(new XElement("FontStyle", this.FontStyle));
-            element.Add(new XElement("FontWeight", this.FontWeight));//TODO:?
+            element.Add(new XElement("FontWeight", this.FontWeight.ToWeightsString()));
         }
         public override void Load(XElement element)
         {

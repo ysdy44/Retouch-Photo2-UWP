@@ -18,9 +18,40 @@ namespace Retouch_Photo2.Brushs
 
         //@Group
         private EventHandler<CanvasEdgeBehavior> Group;
+        
 
         #region DependencyProperty
 
+
+        /// <summary> Gets or sets the fill or stroke. </summary>
+        public FillOrStroke FillOrStroke
+        {
+            set
+            {
+                this._vsFillOrStroke = value;
+                this.Invalidate();//Invalidate
+            }
+        }
+
+        /// <summary> Gets or sets the fill. </summary>
+        public IBrush Fill
+        {
+            set
+            {
+                this._vsFill = value;
+                this.Invalidate();//Invalidate
+            }
+        }
+
+        /// <summary> Gets or sets the stroke. </summary>
+        public IBrush Stroke
+        {
+            set
+            {
+                this._vsStroke = value;
+                this.Invalidate();//Invalidate
+            }
+        }
 
         /// <summary> Gets or sets the edge behavior. </summary>
         public CanvasEdgeBehavior Extend
@@ -41,6 +72,23 @@ namespace Retouch_Photo2.Brushs
 
 
         #endregion
+
+        //@VisualState
+        FillOrStroke _vsFillOrStroke;
+        IBrush _vsFill;
+        IBrush _vsStroke;
+        public void Invalidate()
+        {
+            switch (this._vsFillOrStroke)
+            {
+                case FillOrStroke.Fill:
+                    if (this._vsFill != null) this.Extend = this._vsFill.Extend;
+                    break;
+                case FillOrStroke.Stroke:
+                    if (this._vsStroke != null) this.Extend = this._vsStroke.Extend;
+                    break;
+            }
+        }
 
 
         //@Construct

@@ -3,6 +3,7 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Elements;
 using System.Numerics;
+using System.Xml.Linq;
 using Windows.UI;
 
 namespace Retouch_Photo2.Brushs
@@ -14,18 +15,17 @@ namespace Retouch_Photo2.Brushs
     {
 
         /// <summary> Gets of sets the type. </summary>
-        BrushType Type { get; set; }
+        BrushType Type { get; }
 
         /// <summary> Gets of sets the color. </summary>
         Color Color { get; set; }
 
-        /// <summary> Gets of sets the stops. </summary>
-        CanvasGradientStop[] Stops { get; set; }
-
-        /// <summary> Gets of sets the photocopier. </summary>
-        Photocopier Photocopier { get; set; }
         /// <summary> Gets of sets the extend. </summary>
         CanvasEdgeBehavior Extend { get; set; }
+        /// <summary> Gets of sets the stops. </summary>
+        CanvasGradientStop[] Stops { get; set; }
+        /// <summary> Gets of sets the photocopier. </summary>
+        Photocopier Photocopier { get; set; }
 
         /// <summary> Gets of sets the center point. </summary>
         Vector2 Center { get; set; }
@@ -33,8 +33,26 @@ namespace Retouch_Photo2.Brushs
         Vector2 XPoint { get; set; }
         /// <summary> Gets of sets the y-point. </summary>
         Vector2 YPoint { get; set; }
-
         
+
+        /// <summary>
+        /// Get own copy.
+        /// </summary>
+        /// <returns> The cloned <see cref="IBrush"/>. </returns>
+        IBrush Clone();
+
+        /// <summary>
+        /// Saves the entire <see cref="IBrush"/> to a XElement.
+        /// </summary>
+        /// <param name="element"> The destination XElement. </param>
+        void SaveWith(XElement element);
+        /// <summary>
+        /// Load the entire <see cref="IBrush"/> form a XElement.
+        /// </summary>
+        /// <param name="element"> The destination XElement. </param>
+        void Load(XElement element);
+
+
         /// <summary>
         /// Gets <see cref="ICanvasBrush"/>.
         /// </summary>
@@ -50,14 +68,14 @@ namespace Retouch_Photo2.Brushs
         /// <param name="point"> The input point. </param>
         /// <param name="matrix"> The matrix. </param>
         /// <returns> The operate-mode. </returns>
-        BrushOperateMode ContainsOperateMode(Vector2 point, Matrix3x2 matrix);
+        BrushHandleMode ContainsOperateMode(Vector2 point, Matrix3x2 matrix);
         /// <summary>
         /// It controls the transformation of brush.
         /// </summary>
         /// <param name="mode"> The mode. </param>
         /// <param name="startingPoint"> The starting point. </param>
         /// <param name="point"> The point. </param>
-        void Controller(BrushOperateMode mode, Vector2 startingPoint, Vector2 point);
+        void Controller(BrushHandleMode mode, Vector2 startingPoint, Vector2 point);
         /// <summary>
         /// It initialize and controls the transformation of brush.
         /// </summary>
@@ -65,6 +83,7 @@ namespace Retouch_Photo2.Brushs
         /// <param name="point"> The point. </param>
         void InitializeController(Vector2 startingPoint, Vector2 point);
         
+
         /// <summary>
         /// Draw stops and lines between all control points.
         /// </summary>
@@ -75,10 +94,13 @@ namespace Retouch_Photo2.Brushs
 
 
         /// <summary>
-        /// Get own copy.
+        /// Change the brush's type.
         /// </summary>
-        /// <returns> The cloned <see cref="IBrush"/>. </returns>
-        IBrush Clone();
+        /// <param name="type"> The new type. </param>
+        /// <param name="transformer"> The transformer. </param>
+        /// <param name="photo"> The photo. </param>
+        void TypeChange(BrushType type, Transformer transformer, Photo photo);
 
+        
     }
 }

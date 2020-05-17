@@ -56,7 +56,37 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.Invalidate();
             };
             this.RightTapped += (s, e) => this.ShowLayerMenu();
-            this.Holding += (s, e) => this.ShowLayerMenu();            
+            this.Holding += (s, e) => this.ShowLayerMenu();
+
+
+            Retouch_Photo2.PhotosPage.AddCallBack += (photo) =>
+            {
+                if (photo == null) return;
+
+                //Transformer
+                Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
+
+                //Layer
+                Photocopier photocopier = photo.ToPhotocopier();
+                ImageLayer imageLayer = new ImageLayer(transformerSource, photocopier)
+                {
+                    SelectMode = SelectMode.Selected,
+                    Transform = new Transform(transformerSource)
+                };
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.SelectMode = SelectMode.UnSelected;
+                });
+
+                //Mezzanine
+                this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(imageLayer);
+                this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+
+                this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+                this.ViewModel.Invalidate();//Invalidate
+            };
         }
 
         private void ShowLayerMenu()

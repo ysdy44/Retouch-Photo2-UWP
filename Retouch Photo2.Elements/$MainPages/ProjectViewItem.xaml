@@ -5,8 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"  
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     d:DesignHeight="200"
     d:DesignWidth="200"
     Width="140"
@@ -14,7 +13,7 @@
     mc:Ignorable="d"
     >
 
-
+    
     <Grid x:Name="_RootGrid" Background="Transparent">
     
         <!--VisualState-->
@@ -27,20 +26,19 @@
                 <!--UnSelected-->
                 <VisualState x:Name="UnSelected">
                     <VisualState.Setters >
-                        <Setter Target = "UnSelectedBorder.Visibility" Value="Visible"/>
+                        <Setter Target = "ImageEx.BorderBrush" Value="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+                        <Setter Target = "SelectedBorder.Visibility" Value="Visible"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Selected-->
                 <VisualState x:Name="Selected">
-                    <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_RootGrid" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppForeground}" />
-                        </ObjectAnimationUsingKeyFrames>
-                    </Storyboard>
                     <VisualState.Setters >
-                        <Setter Target = "UnSelectedBorder.Visibility" Value="Visible"/>
+                        <Setter Target = "_RootGrid.Background" Value="{ThemeResource AppForeground}"/>
+                        <Setter Target = "ImageEx.BorderBrush" Value="{ThemeResource SystemControlBackgroundAccentBrush}"/>
                         <Setter Target = "SelectedBorder.Visibility" Value="Visible"/>
+                        <Setter Target = "SelectedBorder.Background" Value="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+                        <Setter Target = "SelectedIcon.Visibility" Value="Visible"/>                   
                     </VisualState.Setters>
                 </VisualState>
 
@@ -55,45 +53,28 @@
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
 
+
         <controls:DropShadowPanel HorizontalAlignment="Center" BlurRadius="20" OffsetX="8" OffsetY="8" ShadowOpacity="0.8" Color="{ThemeResource AppStrokeColor}">
-            <Border CornerRadius="4" MaxWidth="200" Margin="6" Background="White">
-                <Grid>
-
-                    <!--Image-->
-                    <controls:ImageEx x:Name="ImageEx" Background="White" MinWidth="60" MinHeight="60"
-                            PlaceholderStretch="Uniform" PlaceholderSource="ms-appx:///Icons\LoadFaill.jpg" />
-
-                    <!--Selected-->
-                    <Border x:Name="UnSelectedBorder" Visibility="Collapsed" CornerRadius="2" BorderThickness="1" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}">
-                        <Border CornerRadius="16" Width="32" Height="32" Background="#44000000" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        </Border>
-                    </Border>
-                    <Border x:Name="SelectedBorder" Visibility="Collapsed" CornerRadius="2" BorderThickness="2" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}">
-
-                        <!--Visibility:Show-->
-                        <animations:Implicit.ShowAnimations>
-                            <animations:OpacityAnimation Duration="0:0:0.2" From="0.0" To="1.0"/>
-                        </animations:Implicit.ShowAnimations>
-
-                        <!--Visibility:Hide-->
-                        <animations:Implicit.HideAnimations>
-                            <animations:OpacityAnimation Duration="0:0:0.2" From="1.0" To="0.0"/>
-                        </animations:Implicit.HideAnimations>
-                        
-                        <Border CornerRadius="16" Width="32" Height="32" Background="{ThemeResource SystemControlBackgroundAccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <FontIcon Glyph="&#xE10B;" FontSize="18" FontFamily="Segoe UI Symbol" Foreground="White"/>
-                        </Border>
-                    </Border>
-
-                </Grid>
-            </Border>
+            <!--Image-->
+            <controls:ImageEx x:Name="ImageEx"       
+                                      CornerRadius="4" MinWidth="60" MinHeight="60" MaxWidth="200" Margin="6"                               
+                                      BorderThickness="2" BorderBrush="Transparent" Background="White"                             
+                                      PlaceholderStretch="Uniform" PlaceholderSource="ms-appx:///Icons\LoadFaill.jpg" />
         </controls:DropShadowPanel>
+
+
+        <!--Selected-->
+        <Border x:Name="SelectedBorder" Visibility="Collapsed" CornerRadius="16" Width="32" Height="32" Background="#44000000" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <FontIcon x:Name="SelectedIcon" Visibility="Collapsed" Glyph="&#xE10B;" FontSize="18" FontFamily="Segoe UI Symbol" Foreground="White"/>
+        </Border>
+
 
         <TextBlock Grid.Row="2" Text="{x:Bind UserControl.Name, Mode=OneWay}"
                    TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" 
                    Foreground="{ThemeResource AppText}" 
                    HorizontalAlignment="Center" VerticalAlignment="Center" />
 
+        
     </Grid>
 
 </UserControl>

@@ -98,10 +98,14 @@ namespace Retouch_Photo2
         {
             await this._lockOnNavigatedTo();
 
-            ProjectViewItem item = this.ProjectViewItems.FirstOrDefault(i=>i.Name==this.ViewModel.Name);
-            if (item!=null)
+            /// Occurs occuse after <see  cref="DrawPage.Frame.GoBack()"/>;
+            if (this.ViewModel.IsUpdateThumbnailByName)
             {
-                item.RefreshImageSource();
+                ProjectViewItem item = this.ProjectViewItems.FirstOrDefault(i => i.Name == this.ViewModel.Name);
+                if (item != null)
+                {
+                    item.RefreshImageSource();
+                }
             }
         }
         //The current page no longer becomes an active page

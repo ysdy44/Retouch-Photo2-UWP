@@ -106,11 +106,13 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Models\BrushBase222222.cs" />
-    <Compile Include="Models\BrushHandle.cs" />
+    <Compile Include="Models\BrushBase.SaveLoad.cs" />
+    <Compile Include="Models\BrushBase.TypeChange.cs" />
+    <Compile Include="Models\BrushBase.Construct.cs" />
+    <Compile Include="Models\BrushBase.Controller.cs" />
+    <Compile Include="Models\BrushBase.Draw.cs" />
+    <Compile Include="Models\BrushBase.ICanvasBrush.cs" />
     <Compile Include="Models\BrushHandleMode.cs" />
-    <Compile Include="Models\BrushHandle.EllipticalGradient.cs" />
-    <Compile Include="BrushOperateMode.cs" />
     <Compile Include="BrushTypes\BrushTypeComboBox.xaml.cs">
       <DependentUpon>BrushTypeComboBox.xaml</DependentUpon>
     </Compile>

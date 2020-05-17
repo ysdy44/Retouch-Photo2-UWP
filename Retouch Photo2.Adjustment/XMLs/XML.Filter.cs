@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Adjustments
         public static XElement SaveFilter(string elementName, Filter filter)
         {
             XElement element = new XElement(elementName);
-            element.Add(new XAttribute("Name", filter.Name));
+            if (filter.Name != string.Empty) element.Add(new XAttribute("Name", filter.Name));
 
             element.Add(new XElement
             (

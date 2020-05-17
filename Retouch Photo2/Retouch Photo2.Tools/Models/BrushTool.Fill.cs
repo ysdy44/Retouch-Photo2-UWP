@@ -1,6 +1,8 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using System;
 using System.Numerics;
@@ -17,9 +19,27 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         IBrush Fill { get => this.SelectionViewModel.Fill; set => this.SelectionViewModel.Fill = value; }
 
-        //@Static
-        /// <summary> Navigate to <see cref="PhotosPage"/> </summary>
-        public static Action FillImage;
+        
+        private void ConstructFillImage()
+        {
+            Retouch_Photo2.PhotosPage.FillImageCallBack += (photo) =>
+            {
+                this.FillTypeChanged(BrushType.Image, photo);
+                this.ShowControl.Invalidate();
+            };
+            this.BrushTypeComboBox.FillTypeChanged += (s, brushType) =>
+            {
+                if (brushType == BrushType.Image)
+                {
+                    Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.FillImage);
+                }
+                else
+                {
+                    this.FillTypeChanged(brushType);
+                    this.ShowControl.Invalidate();
+                }
+            };
+        }
 
 
 
@@ -32,7 +52,7 @@ namespace Retouch_Photo2.Tools.Models
             this._operateMode = this.Fill.ContainsOperateMode(startingPoint, matrix);
             
             //InitializeController
-            if (this._operateMode == BrushOperateMode.None)
+            if (this._operateMode == BrushHandleMode.None)
             {
                 switch (this.Fill.Type)
                 {
@@ -74,7 +94,7 @@ namespace Retouch_Photo2.Tools.Models
             switch (this._operateMode)
             {
                 //InitializeController
-                case BrushOperateMode.None:
+                case BrushHandleMode.None:
                     {
                         //Selection
                         this.Fill.InitializeController(canvasStartingPoint, canvasPoint);
@@ -124,44 +144,41 @@ namespace Retouch_Photo2.Tools.Models
 
 
 
-        public void FillTypeChanged(BrushType brushType)
+        public void FillTypeChanged(BrushType brushType, Photo photo = null)
         {
             if (this.Fill.Type == brushType) return;
 
-            switch (brushType)
+            //History
+            IHistoryBase history = new IHistoryBase("Set fill type");
+
+            bool _lock = false;
+
+            //Selection
+            this.SelectionViewModel.SetValue((layer) =>
             {
-                case BrushType.Image:
-                    BrushTool.FillImage?.Invoke();
-                    break;
+                //History
+                var previous = layer.Style.Fill.Clone();
+                history.Undos.Push(() => layer.Style.Fill = previous.Clone());
 
-                default:
-                    {
-                        //History
-                        IHistoryBase history = new IHistoryBase("Set fill type");
-
-                        IBrush brush = this.GetTypeBrush(this.Fill, brushType);
-                        if (brushType == BrushType.Color) this.SelectionViewModel.Color = brush.Color;
+                Transformer transformer = layer.Transform.Destination;
+                layer.Style.Fill.TypeChange(brushType, transformer, photo);
+                this.SelectionViewModel.StyleLayer = layer;
 
 
-                        //Selection
-                        this.Fill = brush;
-                        this.SelectionViewModel.SetValue((layer) =>
-                        {
-                            //History
-                            var previous = layer.Style.Fill.Clone();
-                            history.Undos.Push(() => layer.Style.Fill = previous.Clone());
+                if (_lock == false)
+                {
+                    _lock = true;
+                    this.Fill = layer.Style.Fill.Clone();
 
-                            layer.Style.Fill = brush.Clone();
-                            this.SelectionViewModel.StyleLayer = layer;
-                        });
+                    if (this.Fill.Type == BrushType.Color) this.SelectionViewModel.Color = this.Fill.Color;
+                }
+            });
 
-                        //History
-                        this.ViewModel.Push(history);
 
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                    break;
-            }
+            //History
+            this.ViewModel.Push(history);
+
+            this.ViewModel.Invalidate();//Invalidate
         }
 
         public void FillShow()
@@ -181,11 +198,6 @@ namespace Retouch_Photo2.Tools.Models
                 case BrushType.EllipticalGradient:
                     this.StopsPicker.SetArray(this.Fill.Stops);
                     this.StopsFlyout.ShowAt(this);//Flyout
-                    break;
-
-                case BrushType.Image:
-                    this.ExtendComboBox.Extend = this.Fill.Extend;
-                    this.ImageFlyout.ShowAt(this);//Flyout
                     break;
             }
         }

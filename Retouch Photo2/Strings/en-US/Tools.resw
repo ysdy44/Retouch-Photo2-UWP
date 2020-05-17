@@ -123,14 +123,11 @@
   <data name="Brush_Brush" xml:space="preserve">
     <value>Brush</value>
   </data>
-  <data name="Brush_FillOrStroke" xml:space="preserve">
-    <value>Fill or Stroke</value>
-  </data>
-  <data name="Brush_Image_Extend" xml:space="preserve">
+  <data name="Brush_Extend" xml:space="preserve">
     <value>Extend</value>
   </data>
-  <data name="Brush_Image_Replace" xml:space="preserve">
-    <value>Replac</value>
+  <data name="Brush_FillOrStroke" xml:space="preserve">
+    <value>Fill or Stroke</value>
   </data>
   <data name="Brush_Stop_Alpha" xml:space="preserve">
     <value>Alpha</value>

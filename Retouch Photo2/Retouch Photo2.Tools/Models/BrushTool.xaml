@@ -12,27 +12,10 @@
 
 
     <Page.Resources>
-
         <!--Flyout-->
         <Flyout x:Name="StopsFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <brushs:StopsPicker x:Name="StopsPicker" Width="320"/>
         </Flyout>
-        <Flyout x:Name="ImageFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel Padding="2"  MinWidth="300">
-
-                <!--Extend-->
-                <TextBlock x:Name="ExtendTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <brushs:ExtendComboBox x:Name="ExtendComboBox" MinWidth="150" MaxWidth="200" HorizontalAlignment="Left"/>
-               
-                <!--Replace-->
-                <TextBlock x:Name="ReplaceTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <Button x:Name="ReplaceButton" Style="{StaticResource AppCircleButtonStyle}">
-                    <FontIcon Glyph="&#xEB9F;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                </Button>
-                                
-            </StackPanel>
-        </Flyout>
-
     </Page.Resources>
 
 
@@ -51,8 +34,8 @@
             <TextBlock x:Name="BrushTypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <brushs:BrushTypeComboBox x:Name="BrushTypeComboBox" 
                  FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
-                 Fill="{x:Bind SelectionViewModel.Fill,Mode=OneWay}" 
-                 Stroke="{x:Bind SelectionViewModel.Stroke,Mode=OneWay}" />
+                 Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
+                 Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />
            
             <ContentControl Width="4"/>
 
@@ -60,9 +43,18 @@
             <TextBlock x:Name="BrushTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <brushs:ShowControl x:Name="ShowControl" 
                      FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
-                     Fill="{x:Bind SelectionViewModel.Fill,Mode=OneWay}" 
-                     Stroke="{x:Bind SelectionViewModel.Stroke,Mode=OneWay}" />
-            
+                     Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
+                     Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />
+
+            <ContentControl Width="4"/>
+
+            <!--Extend-->
+            <TextBlock x:Name="ExtendTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <brushs:ExtendComboBox x:Name="ExtendComboBox" 
+                     FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
+                     Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
+                     Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />
+
         </StackPanel>
     </ScrollViewer>
 

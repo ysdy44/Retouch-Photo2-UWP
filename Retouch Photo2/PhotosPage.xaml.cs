@@ -1,9 +1,13 @@
-﻿using Retouch_Photo2.Elements;
+﻿using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
+using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -19,13 +23,13 @@ namespace Retouch_Photo2
         None,
 
         /// <summary> Add a <see cref="ImageLayer"/>. </summary>
-        AddImageLayer,
+        AddImager,
 
-        /// <summary> Make <see cref="Brushs.Style.Fill"/> to <see cref="ImageBrush"/> in <see cref="BrushTool"/>. </summary>
-        FillToImage,
-        /// <summary> Make <see cref="Brushs.Style.Stroke"/> to <see cref="ImageBrush"/> in <see cref="BrushTool"/>. </summary>
-        StrokeToImage,
-        
+        /// <summary> Make <see cref="Brushs.Style.Fill"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
+        FillImage,
+        /// <summary> Make <see cref="Brushs.Style.Stroke"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
+        StrokeImage,
+
         /// <summary> Select a image in <see cref= "ImageTool" />. </summary>
         SelectImage,
         /// <summary> Replace a image in <see cref= "ImageTool" />. </summary>
@@ -40,12 +44,21 @@ namespace Retouch_Photo2
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        
+
+
+        //@Static
+        public static Action<Photo> AddCallBack;
+
+        public static Action<Photo> FillImageCallBack;
+        public static Action<Photo> StrokeImageCallBack;
+
+        public static Action<Photo> SelectCallBack;
+        public static Action<Photo> ReplaceCallBack;
+
 
         //@VisualState
         Photo _vsPhoto = null;
         PhotosPageMode _vsMode = PhotosPageMode.None;
-
         public VisualState VisualState
         {
             get
@@ -54,10 +67,10 @@ namespace Retouch_Photo2
                 {
                     case PhotosPageMode.None: return this.Normal;
 
-                    case PhotosPageMode.AddImageLayer: return this.AddImageLayer;
+                    case PhotosPageMode.AddImager: return this.AddImageLayer;
 
-                    case PhotosPageMode.FillToImage: return this.FillToImage;
-                    case PhotosPageMode.StrokeToImage: return this.StrokeToImage;
+                    case PhotosPageMode.FillImage: return this.FillImage;
+                    case PhotosPageMode.StrokeImage: return this.StrokeImage;
 
                     case PhotosPageMode.SelectImage: return this.SelectImage;
                     case PhotosPageMode.ReplaceImage: return this.ReplaceImage;
@@ -73,40 +86,54 @@ namespace Retouch_Photo2
         {
             this.InitializeComponent();
             this.ConstructStrings();
-
-            this.GridView.ItemsSource = Photo.Instances;
-            this.GridView.ItemClick += async (s, e) =>
-            {
-                if (e.ClickedItem is Photo photo)
-                {
-                    if (this._vsPhoto == photo)
-                    {
-                        this._vsPhoto = null;
-                        this.RadiusAnimaPanel.Visibility = Visibility.Collapsed;
-                        this.GridView.SelectionMode = ListViewSelectionMode.None;
-                        await Task.Delay(100);
-                        this.GridView.SelectionMode = ListViewSelectionMode.Single;
-                    }
-                    else
-                    {
-                        this._vsPhoto = photo;
-                        this.TextBlock.Text = $"{photo.Name}{photo.FileType}";
-                        this.RadiusAnimaPanel.Visibility = Visibility.Visible;
-                    }
-                }
-            };
+            this.ConstructGridView();
 
             this.BackButton.Tapped += (s, e) => this.Frame.GoBack();
             this.AddButton.Tapped += async (s, e) => await this.Pick();
 
 
-            this.AddImageLayerButton.Tapped += (s, e) => this.Add();
+            this.AddImageLayerButton.Tapped += (s, e) =>
+            {
+                //Photo
+                Photo photo = this._vsPhoto;
+                Retouch_Photo2.PhotosPage.AddCallBack?.Invoke(photo);
 
-            this.FillToImageButton.Tapped += (s, e) => this.Fill();
-            this.StrokeToImageButton.Tapped += (s, e) => this.Stroke();
+                this.Frame.GoBack();
+            };
 
-            this.SelectImageButton.Tapped += (s, e) => this.Select();
-            this.ReplaceImageButton.Tapped += (s, e) => this.Replace();
+            this.FillImageButton.Tapped += (s, e) =>
+            {
+                //Photo
+                Photo photo = this._vsPhoto;
+                Retouch_Photo2.PhotosPage.FillImageCallBack?.Invoke(photo);
+
+                this.Frame.GoBack();
+            };
+            this.StrokeImageButton.Tapped += (s, e) =>
+            {
+                //Photo
+                Photo photo = this._vsPhoto;
+                Retouch_Photo2.PhotosPage.StrokeImageCallBack?.Invoke(photo);
+
+                this.Frame.GoBack();
+            };
+
+            this.SelectImageButton.Tapped += (s, e) =>
+            {
+                //Photo
+                Photo photo = this._vsPhoto;
+                Retouch_Photo2.PhotosPage.SelectCallBack?.Invoke(photo);
+
+                this.Frame.GoBack();
+            };
+            this.ReplaceImageButton.Tapped += (s, e) =>
+            {
+                //Photo
+                Photo photo = this._vsPhoto;
+                Retouch_Photo2.PhotosPage.ReplaceCallBack?.Invoke(photo);
+
+                this.Frame.GoBack();
+            };
         }
 
         //The current page becomes the active page
@@ -128,7 +155,13 @@ namespace Retouch_Photo2
         {
             this._vsMode = PhotosPageMode.None;
         }
+    }
 
+    /// <summary> 
+    /// Retouch_Photo2's the only <see cref = "PhotosPage" />. 
+    /// </summary>
+    public sealed partial class PhotosPage : Page
+    {
 
         //Strings
         private void ConstructStrings()
@@ -137,13 +170,49 @@ namespace Retouch_Photo2
 
             this.TitleTextBlock.Text = resource.GetString("/$PhotosPage/Title");
 
-            this.AddImageLayerButton.Content = resource.GetString("/$PhotosPage/AddImageLayer");
+            this.AddImageLayerButton.Content = resource.GetString("/$PhotosPage/AddImage");
 
-            this.FillToImageButton.Content = resource.GetString("/$PhotosPage/FillToImage");
-            this.StrokeToImageButton.Content = resource.GetString("/$PhotosPage/StrokeToImage");
+            this.FillImageButton.Content = resource.GetString("/$PhotosPage/FillImage");
+            this.StrokeImageButton.Content = resource.GetString("/$PhotosPage/StrokeImage");
 
             this.SelectImageButton.Content = resource.GetString("/$PhotosPage/SelectImage");
             this.ReplaceImageButton.Content = resource.GetString("/$PhotosPage/ReplaceImage");
+        }
+
+        
+        private void ConstructGridView()
+        {
+            this.GridView.ItemsSource = Photo.Instances;
+            this.GridView.ItemClick += async (s, e) =>
+            {
+                if (e.ClickedItem is Photo photo)
+                {
+                    if (this._vsPhoto == photo)
+                    {
+                        this._vsPhoto = null;
+                        this.RadiusAnimaPanel.Visibility = Visibility.Collapsed;
+                        this.GridView.SelectionMode = ListViewSelectionMode.None;
+                        await Task.Delay(100);
+                        this.GridView.SelectionMode = ListViewSelectionMode.Single;
+                    }
+                    else
+                    {
+                        this._vsPhoto = photo;
+                        this.TextBlock.Text = $"{photo.Name}{photo.FileType}";
+                        this.RadiusAnimaPanel.Visibility = Visibility.Visible;
+                    }
+                }
+            };
+        }
+
+
+        private async Task Pick()
+        {
+            //Photo
+            StorageFile copyFile = await FileUtil.PickAndCopySingleImageFileAsync(PickerLocationId.Desktop);
+            if (copyFile == null) return;
+            Photo photo = await Photo.CreatePhotoFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
+            Photo.DuplicateChecking(photo);
         }
 
     }

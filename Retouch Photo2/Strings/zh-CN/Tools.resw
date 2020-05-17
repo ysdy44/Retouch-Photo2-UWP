@@ -123,14 +123,11 @@
   <data name="Brush_Brush" xml:space="preserve">
     <value>笔刷</value>
   </data>
-  <data name="Brush_FillOrStroke" xml:space="preserve">
-    <value>填充或描边</value>
-  </data>
-  <data name="Brush_Image_Extend" xml:space="preserve">
+  <data name="Brush_Extend" xml:space="preserve">
     <value>扩展</value>
   </data>
-  <data name="Brush_Image_Replace" xml:space="preserve">
-    <value>替换</value>
+  <data name="Brush_FillOrStroke" xml:space="preserve">
+    <value>填充或描边</value>
   </data>
   <data name="Brush_Stop_Alpha" xml:space="preserve">
     <value>Alpha</value>

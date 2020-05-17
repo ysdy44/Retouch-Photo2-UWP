@@ -224,7 +224,6 @@
     <Compile Include="DrawPage.Method.cs" />
     <Compile Include="DrawPage.Transition.cs" />
     <Compile Include="FileUtils\FileUtil.cs" />
-    <Compile Include="PhotosPage.Method.cs" />
     <Compile Include="MainPage.Construct.cs" />
     <Compile Include="MainPage.NewAndOpen.cs" />
     <Compile Include="MainPage.ProjectViewItems.cs" />
@@ -297,7 +296,6 @@
     <Compile Include="Retouch Photo2.Tools\Models\ViewTool.xaml.cs">
       <DependentUpon>ViewTool.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingPage.Construct.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

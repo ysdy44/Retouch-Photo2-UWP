@@ -37,10 +37,14 @@ namespace Retouch_Photo2
         TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
+        //@Static
+        /// <summary> Navigate to <see cref="PhotosPage"/> </summary>
+        public static Action<PhotosPageMode> FrameNavigatePhotosPage;
+
         //@Converter
         private FrameworkElement IconConverter(ITool tool) => tool.Icon;
         private Visibility BoolToVisibilityConverter(bool boolean) => boolean ? Visibility.Visible : Visibility.Collapsed;
-        
+
 
         //@Construct
         public DrawPage()
@@ -50,12 +54,13 @@ namespace Retouch_Photo2
             this.ConstructTransition();
             this.ConstructMenus();            
             this.Loaded += (s, e) => this._lockLoaded();
+            Retouch_Photo2.DrawPage.FrameNavigatePhotosPage += (mode) => this.Frame.Navigate(typeof(PhotosPage), mode);//Navigate   
 
             //Photos
             this.DrawLayout.RightAddButton.Tapped += (s, e) =>
             {
                 e.Handled = true;
-                this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.AddImageLayer);//Navigate   
+                this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.AddImager);//Navigate   
             };
             this.DrawLayout.IsFullScreenChanged += (isFullScreen) =>
             {
@@ -68,10 +73,6 @@ namespace Retouch_Photo2
 
                 this.ViewModel.CanvasTransformer.ReloadMatrix();
             };
-            Retouch_Photo2.Tools.Models.ImageTool.Select += () => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.SelectImage);//Navigate   
-            Retouch_Photo2.Tools.Models.ImageTool.Replace += () => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.ReplaceImage);//Navigate   
-            Retouch_Photo2.Tools.Models.BrushTool.FillImage += () => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.FillToImage);//Navigate   
-            Retouch_Photo2.Tools.Models.BrushTool.StrokeImage += () => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.StrokeToImage);//Navigate   
 
 
             //FlyoutTool
@@ -87,6 +88,7 @@ namespace Retouch_Photo2
             {
                 await this.Save();
                 await this.Exit();
+                this.ViewModel.IsUpdateThumbnailByName = true;
 
                 this.SettingViewModel.IsFullScreen = true;
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
@@ -96,6 +98,7 @@ namespace Retouch_Photo2
             {
                 this.HeadBarControl.DocumentFlyout.Hide();
                 await this.Exit();
+                this.ViewModel.IsUpdateThumbnailByName = false;
 
                 this.SettingViewModel.IsFullScreen = true;
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
