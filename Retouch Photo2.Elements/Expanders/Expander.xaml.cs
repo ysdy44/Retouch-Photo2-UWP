@@ -96,11 +96,11 @@ namespace Retouch_Photo2.Elements
                 this.State = this.GetButtonState(this.State);
             };
 
-            this.CloseButton.Tapped += (s, e) => this.State = ExpanderState.Hide;
-            this.StateButton.Tapped += (s, e) => this.State = this.GetState(this.State);
+            this.CloseButton.Click += (s, e) => this.State = ExpanderState.Hide;
+            this.StateButton.Click += (s, e) => this.State = this.GetState(this.State);
 
-            this.BackButton.Tapped += (s, e) => this.IsSecondPage = false;
-            if (this.Reset != null) this.ResetButton.Tapped += (s, e) => this.Reset();
+            this.BackButton.Click += (s, e) => this.IsSecondPage = false;
+            if (this.Reset != null) this.ResetButton.Click += (s, e) => this.Reset();
 
             /////////////////////////////////
 

@@ -48,20 +48,20 @@ namespace Retouch_Photo2
 
 
             this.ConstructAddDialog();
-            this.AddButton.Tapped += (s, e) => this.ShowAddDialog();
+            this.AddButton.Click += (s, e) => this.ShowAddDialog();
 
             this.ConstructPicturesControl();
-            this.PicturesButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Pictures;
+            this.PicturesButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Pictures;
 
-            this.RenameCloseButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Main;
-            this.RenameButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Rename;
+            this.RenameCloseButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Main;
+            this.RenameButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Rename;
             this.RenameDialog.CloseButton.Click += (sender, args) => this.HideRenameDialog();
 
             this.ConstructDeleteControl();
-            this.DeleteButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Delete;
+            this.DeleteButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Delete;
 
             this.ConstructDuplicateControl();
-            this.DuplicateButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Duplicate;
+            this.DuplicateButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Duplicate;
 
 
             #endregion

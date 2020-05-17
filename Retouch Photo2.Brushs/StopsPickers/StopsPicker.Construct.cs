@@ -152,7 +152,7 @@ namespace Retouch_Photo2.Brushs
         private void ConstructStop()
         {
             // Copy a stop on right
-            this.CopyButton.Tapped += (s, e) =>
+            this.CopyButton.Click += (s, e) =>
             {
                 if (this.array == null) return;
 
@@ -166,7 +166,7 @@ namespace Retouch_Photo2.Brushs
             };
 
             // Reserve all stops. 
-            this.ReserveButton.Tapped += (s, e) =>
+            this.ReserveButton.Click += (s, e) =>
             {
                 if (this.array == null) return;
 
@@ -178,7 +178,7 @@ namespace Retouch_Photo2.Brushs
             };
 
             // Remove current stop.
-            this.RemoveButton.Tapped += (s, e) =>
+            this.RemoveButton.Click += (s, e) =>
             {
                 if (this.array == null) return;
 

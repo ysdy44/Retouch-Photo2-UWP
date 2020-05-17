@@ -34,9 +34,9 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.MoreButton.Tapped += (s, e) => this.Flyout.ShowAt(this);
+            this.MoreButton.Click += (s, e) => this.Flyout.ShowAt(this);
 
-            this.RemoveButton.Tapped += (s, e) =>
+            this.RemoveButton.Click += (s, e) =>
             {
                 if (this.CurveLayer == null) return;
 
@@ -49,20 +49,20 @@ namespace Retouch_Photo2.Tools.Models
 
                 this.ViewModel.Invalidate();//Invalidate
             };
-            this.InsertButton.Tapped += (s, e) =>
+            this.InsertButton.Click += (s, e) =>
             {
                 if (this.CurveLayer == null) return;
                 NodeCollection.Interpolation(this.CurveLayer.Nodes);
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.SharpButton.Tapped += (s, e) =>
+            this.SharpButton.Click += (s, e) =>
             {
                 if (this.CurveLayer == null) return;
                 NodeCollection.SharpCheckedNodes(this.CurveLayer.Nodes);
                 this.ViewModel.Invalidate();//Invalidate
             };
-            this.SmoothButton.Tapped += (s, e) =>
+            this.SmoothButton.Click += (s, e) =>
             {
                 if (this.CurveLayer == null) return;
                 NodeCollection.SmoothCheckedNodes(this.CurveLayer.Nodes);

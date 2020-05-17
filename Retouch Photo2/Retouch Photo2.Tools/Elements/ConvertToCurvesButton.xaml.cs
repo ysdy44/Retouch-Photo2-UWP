@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Tools.Elements
         public ConvertToCurvesButton()
         {
             this.InitializeComponent();
-            this.Button.Tapped += (s, e) =>
+            this.Button.Click += (s, e) =>
             {
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
             

@@ -17,7 +17,7 @@ namespace Retouch_Photo2.Tools.Elements
         {
             this.InitializeComponent();
 
-            this.Button.Tapped += (s, e) =>
+            this.Button.Click += (s, e) =>
             {
                 if (MoreTransformButton.Flyout == null) return;
 

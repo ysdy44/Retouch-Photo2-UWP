@@ -137,7 +137,7 @@ namespace Retouch_Photo2.Blends
             //Buttons
             button.Content = text;
             button.Tag = icon;
-            button.Tapped += (s, e) => this.ModeChanged?.Invoke(this, mode);//Delegate
+            button.Click += (s, e) => this.ModeChanged?.Invoke(this, mode);//Delegate
 
             //Group
             this.Group += (s, e) => group(e);

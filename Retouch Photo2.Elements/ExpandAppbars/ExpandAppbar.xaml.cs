@@ -124,7 +124,7 @@ namespace Retouch_Photo2.Elements
                     this.Mode = ExpandAppbar.Arrange(index, this._elements.Count);
                 }
             };
-            this.MoreButton.Tapped += (s, e) => this.Flyout.ShowAt(this.MoreButton);
+            this.MoreButton.Click += (s, e) => this.Flyout.ShowAt(this.MoreButton);
         }
 
 

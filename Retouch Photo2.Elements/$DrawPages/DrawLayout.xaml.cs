@@ -65,7 +65,7 @@ namespace Retouch_Photo2.Elements.DrawPages
             Storyboard.SetTarget(this.WidthKeyFrames, this.RightBorder);
             Storyboard.SetTargetProperty(this.WidthKeyFrames, "(UIElement.Width)");
 
-            this.WidthButton.Tapped += (s, e) =>
+            this.WidthButton.Click += (s, e) =>
             {
                 if (this.RightBorder.ActualWidth < 100)
                 {

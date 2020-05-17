@@ -83,7 +83,7 @@ namespace Retouch_Photo2.Blends
             Color color = TagTypeHelper.TagConverter(tagType);
 
             radioButton.Background = new SolidColorBrush(color);
-            radioButton.Tapped += (s, e) =>
+            radioButton.Click += (s, e) =>
             {
                 this.TypeChanged?.Invoke(this, tagType); //Delegate
             };

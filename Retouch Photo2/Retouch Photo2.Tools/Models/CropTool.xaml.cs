@@ -35,7 +35,7 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.ResetButton.Tapped += (s, e) =>
+            this.ResetButton.Click += (s, e) =>
             {
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
@@ -46,7 +46,7 @@ namespace Retouch_Photo2.Tools.Models
                 this.SelectionViewModel.IsCrop = false;//Selection
                 this.ViewModel.Invalidate();//Invalidate
             };
-            this.FitButton.Tapped += (s, e) =>
+            this.FitButton.Click += (s, e) =>
             {
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>

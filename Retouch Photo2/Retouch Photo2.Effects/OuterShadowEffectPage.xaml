@@ -47,7 +47,7 @@
 
             <!--Color-->
             <TextBlock x:Name="ColorTextBlock" Grid.Column="1" Style="{StaticResource AppTextBlockStyle}"/>
-            <Border x:Name="ColorButton" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource AppCircleBorderStyle}">
+            <Border x:Name="ColorBorder" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource AppCircleBorderStyle}">
                 <Border.Background>
                     <SolidColorBrush x:Name="SolidColorBrush"/>
                 </Border.Background>

@@ -113,7 +113,7 @@ namespace Retouch_Photo2.Characters
                 Content = weight.Weight,
                 Style = this.ContentControlStyle
             };
-            button.Tapped += (s, e) => this.WeightChanged?.Invoke(this, weight);//Delegate
+            button.Click += (s, e) => this.WeightChanged?.Invoke(this, weight);//Delegate
 
             //Group
             this.Group += (s, e) => group(e);

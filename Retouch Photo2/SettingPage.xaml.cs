@@ -31,7 +31,7 @@ namespace Retouch_Photo2
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.BackButton.Tapped += (s, e) => this.Frame.GoBack();
+            this.BackButton.Click += (s, e) => this.Frame.GoBack();
 
             this.ConstructTheme();
 
@@ -39,7 +39,7 @@ namespace Retouch_Photo2
 
             this.ConstructMenuType();
 
-            this.LocalButton.Tapped += async (s, e) =>
+            this.LocalButton.Click += async (s, e) =>
             {
                 IStorageFolder folder = ApplicationData.Current.LocalFolder;
                 await Launcher.LaunchFolderAsync(folder);
@@ -121,9 +121,9 @@ namespace Retouch_Photo2
             };
 
 
-            this.LightRadioButton.Tapped += async (s, e) => await setTheme(ElementTheme.Light);
-            this.DarkRadioButton.Tapped += async (s, e) => await setTheme(ElementTheme.Dark);
-            this.DefaultRadioButton.Tapped += async (s, e) => await setTheme(ElementTheme.Default);
+            this.LightRadioButton.Click += async (s, e) => await setTheme(ElementTheme.Light);
+            this.DarkRadioButton.Click += async (s, e) => await setTheme(ElementTheme.Dark);
+            this.DefaultRadioButton.Click += async (s, e) => await setTheme(ElementTheme.Default);
         }
 
 
@@ -186,10 +186,10 @@ namespace Retouch_Photo2
             }
 
 
-            this.PhoneButton.Tapped += async (s, e) => await setType(DeviceLayoutType.Phone, false);
-            this.PadButton.Tapped += async (s, e) => await setType(DeviceLayoutType.Pad, false);
-            this.PCButton.Tapped += async (s, e) => await setType(DeviceLayoutType.PC, false);
-            this.AdaptiveButton.Tapped += async (s, e) => await setType(DeviceLayoutType.PC, true);
+            this.PhoneButton.Click += async (s, e) => await setType(DeviceLayoutType.Phone, false);
+            this.PadButton.Click += async (s, e) => await setType(DeviceLayoutType.Pad, false);
+            this.PCButton.Click += async (s, e) => await setType(DeviceLayoutType.PC, false);
+            this.AdaptiveButton.Click += async (s, e) => await setType(DeviceLayoutType.PC, true);
         }
 
 

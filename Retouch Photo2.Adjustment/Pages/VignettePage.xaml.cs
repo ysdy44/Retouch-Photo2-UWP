@@ -36,10 +36,10 @@ namespace Retouch_Photo2.Adjustments.Pages
                 this.Adjustment.Curve = (float)(value / 100);
                 Filter.Invalidate?.Invoke();
             };
-            this.ColorButton.Tapped += (s, e) =>
+            this.ColorBorder.Tapped += (s, e) =>
             {
                 if (this.Adjustment == null) return;
-                this.ColorFlyout.ShowAt(this.ColorButton);
+                this.ColorFlyout.ShowAt(this.ColorBorder);
                 this.ColorPicker.Color = this.Adjustment.Color;
             };
             this.ColorPicker.ColorChange += (s, value) =>

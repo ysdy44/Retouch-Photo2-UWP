@@ -184,14 +184,14 @@ namespace Retouch_Photo2.Menus.Models
                 this.VisualState = this.VisualState;//State
             };
 
-            this.AddButton.Tapped += (s, e) => this.AdjustmentPageFlyout.ShowAt(this.AddButton);
-            this.FiltersButton.Tapped += (s, e) =>
+            this.AddButton.Click += (s, e) => this.AdjustmentPageFlyout.ShowAt(this.AddButton);
+            this.FiltersButton.Click += (s, e) =>
             {
                 this.AdjustmentPageOrFilters = false;
                 this._Expander.IsSecondPage = true;
             };
         }
-        
+
 
         //@DataTemplate
         /// <summary> DataTemplate's EditButton Tapped. </summary>

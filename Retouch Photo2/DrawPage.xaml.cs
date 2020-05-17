@@ -1,28 +1,10 @@
-﻿using Retouch_Photo2.Menus;
-using Retouch_Photo2.Tools;
+﻿using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
-using System.Numerics;
-using System.Threading.Tasks;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.ViewModels;
-using System.Collections.Generic;
-using System.Numerics;
 using System;
-using System.Threading.Tasks;
-using Windows.Graphics.Imaging;
-using Windows.Storage;
-using Windows.Storage.Pickers;
+using System.Numerics;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.Storage.Streams;
-using System.Linq;
 using Windows.UI.Xaml.Navigation;
-using System.Xml.Linq;
-using System.IO;
 
 namespace Retouch_Photo2
 {
@@ -57,9 +39,8 @@ namespace Retouch_Photo2
             Retouch_Photo2.DrawPage.FrameNavigatePhotosPage += (mode) => this.Frame.Navigate(typeof(PhotosPage), mode);//Navigate   
 
             //Photos
-            this.DrawLayout.RightAddButton.Tapped += (s, e) =>
+            this.DrawLayout.RightAddButton.Click += (s, e) =>
             {
-                e.Handled = true;
                 this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.AddImager);//Navigate   
             };
             this.DrawLayout.IsFullScreenChanged += (isFullScreen) =>
@@ -84,7 +65,7 @@ namespace Retouch_Photo2
             #region Document
 
 
-            this.HeadBarControl.DocumentButton.Tapped += async (s, e) =>
+            this.HeadBarControl.DocumentButton.Click += async (s, e) =>
             {
                 await this.Save();
                 await this.Exit();
@@ -94,7 +75,7 @@ namespace Retouch_Photo2
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
                 this.Frame.GoBack();
             };
-            this.HeadBarControl.DocumentUnSaveButton.Tapped += async (s, e) =>
+            this.HeadBarControl.DocumentUnSaveButton.Click += async (s, e) =>
             {
                 this.HeadBarControl.DocumentFlyout.Hide();
                 await this.Exit();
@@ -125,13 +106,13 @@ namespace Retouch_Photo2
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };
-            //this.RedoButton.Tapped += (s, e) => { };
+            //this.RedoButton.Click += (s, e) => { };
 
             this.ConstructSetupDialog();
             this.HeadBarControl.SetupButton.Tapped += (s, e) => this.SetupDialog.Show();
 
 
-            this.UnFullScreenButton.Tapped += (s, e) => this.SettingViewModel.IsFullScreen = !this.SettingViewModel.IsFullScreen;
+            this.UnFullScreenButton.Click += (s, e) => this.SettingViewModel.IsFullScreen = !this.SettingViewModel.IsFullScreen;
             this.HeadBarControl.FullScreenButton.Tapped += (s, e) => this.SettingViewModel.IsFullScreen = !this.SettingViewModel.IsFullScreen;
 
 

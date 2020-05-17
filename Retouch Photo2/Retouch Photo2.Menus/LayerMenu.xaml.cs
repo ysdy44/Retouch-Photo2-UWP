@@ -165,7 +165,7 @@ namespace Retouch_Photo2.Menus.Models
         //Blend Mode
         private void ConstructBlendMode()
         {
-            this.BlendModeButton.Tapped += (s, e) =>
+            this.BlendModeButton.Click += (s, e) =>
             {
                 this.BlendModeComboBox.Mode = this.SelectionViewModel.BlendMode;
 
@@ -197,7 +197,7 @@ namespace Retouch_Photo2.Menus.Models
         //Visibility
         private void ConstructVisibility()
         {
-            this.VisibilityButton.Tapped += (s, e) =>
+            this.VisibilityButton.Click += (s, e) =>
             {
                 Visibility value = (this.SelectionViewModel.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
 
@@ -276,7 +276,7 @@ namespace Retouch_Photo2.Menus.Models
         {
 
             //Duplicate
-            this.DuplicateButton.Tapped += (s, e) =>
+            this.DuplicateButton.Click += (s, e) =>
             {
                 IList<ILayer> layers = this.ViewModel.Layers.GetAllSelectedLayers();
                 IEnumerable<ILayer> duplicateLayers = from i in layers select i.Clone(this.ViewModel.CanvasDevice);
@@ -288,7 +288,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
             //Remove
-            this.RemoveButton.Tapped += (s, e) =>
+            this.RemoveButton.Click += (s, e) =>
             {
                 this.ViewModel.Layers.RemoveAllSelectedLayers();
                 this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();

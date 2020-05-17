@@ -176,7 +176,7 @@ namespace Retouch_Photo2.Menus.Models
         private void ConstructTransform()
         {
 
-            this.FlipHorizontalButton.Tapped += (s, e) =>
+            this.FlipHorizontalButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(-1, 1, transformer.Center);
@@ -192,7 +192,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.FlipVerticalButton.Tapped += (s, e) =>
+            this.FlipVerticalButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(1, -1, transformer.Center);
@@ -208,7 +208,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.RotateLeftButton.Tapped += (s, e) =>
+            this.RotateLeftButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(FanKit.Math.PiOver2, transformer.Center);
@@ -224,7 +224,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.RotateRightButton.Tapped += (s, e) =>
+            this.RotateRightButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(-FanKit.Math.PiOver2, transformer.Center);
@@ -246,7 +246,7 @@ namespace Retouch_Photo2.Menus.Models
         private void ConstructArrange()
         {
 
-            this.MoveBackButton.Tapped += (s, e) =>
+            this.MoveBackButton.Click += (s, e) =>
             {
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
@@ -266,7 +266,7 @@ namespace Retouch_Photo2.Menus.Models
                 }
             };
 
-            this.BackOneButton.Tapped += (s, e) =>
+            this.BackOneButton.Click += (s, e) =>
             {
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
@@ -289,7 +289,7 @@ namespace Retouch_Photo2.Menus.Models
                 }
             };
 
-            this.ForwardOneButton.Tapped += (s, e) =>
+            this.ForwardOneButton.Click += (s, e) =>
             {
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
@@ -312,7 +312,7 @@ namespace Retouch_Photo2.Menus.Models
                 }
             };
 
-            this.MoveFrontButton.Tapped += (s, e) =>
+            this.MoveFrontButton.Click += (s, e) =>
             {
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
@@ -338,7 +338,7 @@ namespace Retouch_Photo2.Menus.Models
         private void ConstructHorizontally()
         {
 
-            this.LeftButton.Tapped += (s, e) =>
+            this.LeftButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0 - transformer.MinX, 0);
@@ -354,7 +354,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.CenterButton.Tapped += (s, e) =>
+            this.CenterButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width / 2 - transformer.Center.X, 0);
@@ -370,7 +370,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.RightButton.Tapped += (s, e) =>
+            this.RightButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width - transformer.MaxX, 0);
@@ -386,7 +386,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.HorizontallySymmetryButton.Tapped += (s, e) =>
+            this.HorizontallySymmetryButton.Click += (s, e) =>
             {
                 this._Expander.IsSecondPage = true;
             };
@@ -397,7 +397,7 @@ namespace Retouch_Photo2.Menus.Models
         private void ConstructVertically()
         {
 
-            this.TopButton.Tapped += (s, e) =>
+            this.TopButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, 0 - transformer.MinY);
@@ -413,7 +413,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.MiddleButton.Tapped += (s, e) =>
+            this.MiddleButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, this.ViewModel.CanvasTransformer.Height / 2 - transformer.Center.Y);
@@ -429,7 +429,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.BottomButton.Tapped += (s, e) =>
+            this.BottomButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, this.ViewModel.CanvasTransformer.Height - transformer.MaxY);
@@ -445,7 +445,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.VerticallySymmetryButton.Tapped += (s, e) =>
+            this.VerticallySymmetryButton.Click += (s, e) =>
             {
                 this._Expander.IsSecondPage = true;
             };

@@ -173,7 +173,7 @@ namespace Retouch_Photo2.Menus.Models
         //FontStyle
         private void ConstructFontStyle()
         {
-            this.BoldButton.Tapped += (s, e) =>
+            this.BoldButton.Click += (s, e) =>
             {
                 //Whether the judgment is small or large.
                 bool isBold = this.SelectionViewModel.FontWeight.Weight == FontWeights.Bold.Weight;
@@ -194,7 +194,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.ItalicButton.Tapped += (s, e) =>
+            this.ItalicButton.Click += (s, e) =>
             {
                 //Whether the judgment is Normal or Italic.
                 bool isNormal = this.SelectionViewModel.FontStyle == FontStyle.Normal;
@@ -215,7 +215,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.UnderLineButton.Tapped += (s, e) =>
+            this.UnderLineButton.Click += (s, e) =>
             {
             };
         }
@@ -224,7 +224,7 @@ namespace Retouch_Photo2.Menus.Models
         //FontWeight
         private void ConstructFontWeight()
         {
-            this.FontWeightButton.Tapped += (s, e) =>
+            this.FontWeightButton.Click += (s, e) =>
             {
                 this.CharacterState = CharacterState.FontWeight;
                 this._Expander.IsSecondPage = true;
@@ -256,7 +256,7 @@ namespace Retouch_Photo2.Menus.Models
             IOrderedEnumerable<string> fontFamilys = CanvasTextFormat.GetSystemFontFamilies(ApplicationLanguages.Languages).OrderBy(k => k);
             this.FontFamilyListView.ItemsSource = fontFamilys;
 
-            this.FontFamilyButton.Tapped += (s, e) =>
+            this.FontFamilyButton.Click += (s, e) =>
             {
                 this.CharacterState = CharacterState.FontFamily;
                 this._Expander.IsSecondPage = true;
@@ -293,7 +293,7 @@ namespace Retouch_Photo2.Menus.Models
             };
             this.FontSizeListView.ItemsSource = fontSizes;
 
-            this.FontSizeButton.Tapped += (s, e) =>
+            this.FontSizeButton.Click += (s, e) =>
             {
                 this.CharacterState = CharacterState.FontSize;
                 this._Expander.IsSecondPage = true;

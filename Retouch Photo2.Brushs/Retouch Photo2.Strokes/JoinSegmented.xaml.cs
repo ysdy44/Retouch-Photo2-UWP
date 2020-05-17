@@ -82,25 +82,25 @@ namespace Retouch_Photo2.Strokes
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.MiterToolTip.Content = resource.GetString("/Strokes/Join_Miter");
-            this.MiterButton.Tapped += (s, e) =>
+            this.MiterButton.Click += (s, e) =>
             {
                 this.JoinChanged?.Invoke(this, CanvasLineJoin.Miter);//Delegate
             };
 
             this.BevelToolTip.Content = resource.GetString("/Strokes/Join_Bevel");
-            this.BevelButton.Tapped += (s, e) =>
+            this.BevelButton.Click += (s, e) =>
             {
                 this.JoinChanged?.Invoke(this, CanvasLineJoin.Bevel);//Delegate
             };
 
             this.RoundToolTip.Content = resource.GetString("/Strokes/Join_Round");
-            this.RoundButton.Tapped += (s, e) =>
+            this.RoundButton.Click += (s, e) =>
             {
                 this.JoinChanged?.Invoke(this, CanvasLineJoin.Round);//Delegate
             };
 
             this.MiterOrBevelToolTip.Content = resource.GetString("/Strokes/Join_MiterOrBevel");
-            this.MiterOrBevelButton.Tapped += (s, e) =>
+            this.MiterOrBevelButton.Click += (s, e) =>
             {
                 this.JoinChanged?.Invoke(this, CanvasLineJoin.MiterOrBevel);//Delegate
             };

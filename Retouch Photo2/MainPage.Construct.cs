@@ -107,9 +107,9 @@ namespace Retouch_Photo2
         //InitialControl
         private void ConstructInitialControl()
         {
-            this.InitialAddButton.Tapped += (s, e) => this.ShowAddDialog();
-            this.InitialPhotoButton.Tapped += async (s, e) => await this.NewFromPicture(PickerLocationId.PicturesLibrary);
-            this.InitialDestopButton.Tapped += async (s, e) => await this.NewFromPicture(PickerLocationId.Desktop);
+            this.InitialAddButton.Click += (s, e) => this.ShowAddDialog();
+            this.InitialPhotoButton.Click += async (s, e) => await this.NewFromPicture(PickerLocationId.PicturesLibrary);
+            this.InitialDestopButton.Click += async (s, e) => await this.NewFromPicture(PickerLocationId.Desktop);
         }
 
 
@@ -125,14 +125,14 @@ namespace Retouch_Photo2
             };
 
             //Head
-            this.RefreshButton.Tapped += async (s, e) =>
+            this.RefreshButton.Click += async (s, e) =>
             {
                 await this.LoadAllProjectViewItems();
             };
-            this.SettingButton.Tapped += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
+            this.SettingButton.Click += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
 
             //Select
-            this.SelectAllButton.Tapped += (s, e) =>
+            this.SelectAllButton.Click += (s, e) =>
             {
                 bool isAnyUnSelected = this.ProjectViewItems.Any(p => p.SelectMode == SelectMode.UnSelected);
                 SelectMode mode = isAnyUnSelected ? SelectMode.Selected : SelectMode.UnSelected;
@@ -174,9 +174,9 @@ namespace Retouch_Photo2
         //PicturesControl
         private void ConstructPicturesControl()
         {
-            this.PicturesPhotoButton.Tapped += async (s, e) => await this.NewFromPicture(PickerLocationId.PicturesLibrary);
-            this.PicturesDestopButton.Tapped += async (s, e) => await this.NewFromPicture(PickerLocationId.Desktop);
-            this.PicturesCloseButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Main;
+            this.PicturesPhotoButton.Click += async (s, e) => await this.NewFromPicture(PickerLocationId.PicturesLibrary);
+            this.PicturesDestopButton.Click += async (s, e) => await this.NewFromPicture(PickerLocationId.Desktop);
+            this.PicturesCloseButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Main;
         }
 
 
@@ -205,8 +205,8 @@ namespace Retouch_Photo2
         private void ConstructDeleteControl()
         {
             //Delete
-            this.DeleteCloseButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Main;
-            this.DeletePrimaryButton.Tapped += async (s, e) =>
+            this.DeleteCloseButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Main;
+            this.DeletePrimaryButton.Click += async (s, e) =>
             {
                 this.LoadingControl.IsActive = true;
 
@@ -227,8 +227,8 @@ namespace Retouch_Photo2
         private void ConstructDuplicateControl()
         {
             //Duplicate
-            this.DuplicateCloseButton.Tapped += (s, e) => this.MainLayout.MainPageState = MainPageState.Main;
-            this.DuplicatePrimaryButton.Tapped += async (s, e) =>
+            this.DuplicateCloseButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Main;
+            this.DuplicatePrimaryButton.Click += async (s, e) =>
             {
                 this.LoadingControl.IsActive = true;
 

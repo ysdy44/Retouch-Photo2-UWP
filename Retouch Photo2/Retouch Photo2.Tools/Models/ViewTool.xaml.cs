@@ -130,7 +130,7 @@ namespace Retouch_Photo2.Tools.Models
             Storyboard.SetTarget(this.RadianKeyFrames, this);
             Storyboard.SetTargetProperty(this.RadianKeyFrames, "Radian");
             this.RadianStoryboard.Completed += (s, e) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-            this.RadianClearButton.Tapped += (s, e) =>
+            this.RadianClearButton.Click += (s, e) =>
             {
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
@@ -178,7 +178,7 @@ namespace Retouch_Photo2.Tools.Models
             Storyboard.SetTarget(this.ScaleKeyFrames, this);
             Storyboard.SetTargetProperty(this.ScaleKeyFrames, "Scale");
             this.ScaleStoryboard.Completed += (s, e) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-            this.ScaleClearButton.Tapped += (s, e) =>
+            this.ScaleClearButton.Click += (s, e) =>
             {
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 

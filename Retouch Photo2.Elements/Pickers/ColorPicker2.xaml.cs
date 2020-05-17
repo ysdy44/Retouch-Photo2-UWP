@@ -130,7 +130,7 @@ namespace Retouch_Photo2.Elements
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this.HeadGrid);
+            this.Button.Click += (s, e) => this.Flyout.ShowAt(this.HeadGrid);
             this.Button.SizeChanged += (s, e) => this.FlyoutStackPanel.Width = e.NewSize.Width;
 
             //Alpha
@@ -219,7 +219,7 @@ namespace Retouch_Photo2.Elements
             //Buttons
             button.Content = text;
             button.Tag = icon;
-            button.Tapped += (s, e) =>
+            Button.Click += (s, e) =>
             {
                 this.Mode = mode;
                 this.Flyout.Hide();

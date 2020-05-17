@@ -82,25 +82,25 @@ namespace Retouch_Photo2.Strokes
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.SolidToolTip.Content = resource.GetString("/Strokes/Dash_Solid");
-            this.SolidButton.Tapped += (s, e) =>
+            this.SolidButton.Click += (s, e) =>
             {
                 this.DashChanged?.Invoke(this, CanvasDashStyle.Solid);//Delegate
             };
 
             this.DashToolTip.Content = resource.GetString("/Strokes/Dash_Dash");
-            this.DashButton.Tapped += (s, e) =>
+            this.DashButton.Click += (s, e) =>
             {
                 this.DashChanged?.Invoke(this, CanvasDashStyle.Dash);//Delegate
             };
 
             this.DotToolTip.Content = resource.GetString("/Strokes/Dash_Dot");
-            this.DotButton.Tapped += (s, e) =>
+            this.DotButton.Click += (s, e) =>
             {
                 this.DashChanged?.Invoke(this, CanvasDashStyle.Dot);//Delegate
             };
 
             this.DashDotToolTip.Content = resource.GetString("/Strokes/Dash_DashDot");
-            this.DashDotButton.Tapped += (s, e) =>
+            this.DashDotButton.Click += (s, e) =>
             {
                 this.DashChanged?.Invoke(this, CanvasDashStyle.DashDot);//Delegate
             };

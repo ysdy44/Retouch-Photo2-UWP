@@ -92,9 +92,9 @@ namespace Retouch_Photo2.Effects.Models
             this.AnglePicker.ValueChangeCompleted += (s, value) => { };
             
 
-            this.ColorButton.Tapped += (s, e) =>
+            this.ColorBorder.Tapped += (s, e) =>
             {
-                this.ColorFlyout.ShowAt(this.ColorButton);
+                this.ColorFlyout.ShowAt(this.ColorBorder);
                 this.ColorPicker.Color = this.SolidColorBrush.Color;
             };
             this.ColorPicker.ColorChange += (s, value) =>

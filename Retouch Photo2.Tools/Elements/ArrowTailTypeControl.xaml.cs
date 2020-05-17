@@ -64,7 +64,7 @@ namespace Retouch_Photo2.Tools.Elements
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this);
+            this.Button.Click += (s, e) => this.Flyout.ShowAt(this);
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
 
@@ -76,7 +76,7 @@ namespace Retouch_Photo2.Tools.Elements
 
             this.NoneButton.Content = resource.GetString("/ToolElements/ArrowTail_None");
             this.NoneButton.Tag = new NoneIcon();
-            this.NoneButton.Tapped += (s, e) =>
+            this.NoneButton.Click += (s, e) =>
             {
                 this.ArrowTailTypeChanged?.Invoke(this, GeometryArrowTailType.None); //Delegate
                 this.Flyout.Hide();
@@ -84,7 +84,7 @@ namespace Retouch_Photo2.Tools.Elements
 
             this.ArrowButton.Content = resource.GetString("/ToolElements/ArrowTail_Arrow");
             this.ArrowButton.Tag = new ArrowIcon();
-            this.ArrowButton.Tapped += (s, e) =>
+            this.ArrowButton.Click += (s, e) =>
             {
                 this.ArrowTailTypeChanged?.Invoke(this, GeometryArrowTailType.Arrow); //Delegate
                 this.Flyout.Hide();

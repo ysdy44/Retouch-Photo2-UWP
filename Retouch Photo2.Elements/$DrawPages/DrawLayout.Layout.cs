@@ -93,12 +93,12 @@ namespace Retouch_Photo2.Elements.DrawPages
 
 
         /*
-        private void FullScreenButton_Tapped(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.FullScreen.Name, false);
-        private void PhoneButton_Tapped(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.Phone.Name, false);
-        private void PhoneShowLeftButton_Tapped(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.PhoneShowLeft.Name, false);
-        private void PhoneShowRightButton_Tapped(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.PhoneShowRight.Name, false);
-        private void PadButton_Tapped(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.Pad.Name, false);
-        private void PCButton_Tapped(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.PC.Name, false);
+        private void FullScreenButton.Click(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.FullScreen.Name, false);
+        private void PhoneButton.Click(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.Phone.Name, false);
+        private void PhoneShowLeftButton.Click(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.PhoneShowLeft.Name, false);
+        private void PhoneShowRightButton.Click(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.PhoneShowRight.Name, false);
+        private void PadButton.Click(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.Pad.Name, false);
+        private void PCButton.Click(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.PC.Name, false);
          */
     }
 }

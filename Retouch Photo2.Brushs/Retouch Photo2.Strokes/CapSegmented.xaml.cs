@@ -82,25 +82,25 @@ namespace Retouch_Photo2.Strokes
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.FlatToolTip.Content = resource.GetString("/Strokes/Cap_Flat");
-            this.FlatButton.Tapped += (s, e) =>
+            this.FlatButton.Click += (s, e) =>
             {
                 this.CapChanged?.Invoke(this, CanvasCapStyle.Flat);//Delegate
             };
 
             this.SquareToolTip.Content = resource.GetString("/Strokes/Cap_Square");
-            this.SquareButton.Tapped += (s, e) =>
+            this.SquareButton.Click += (s, e) =>
             {
                 this.CapChanged?.Invoke(this, CanvasCapStyle.Square);//Delegate
             };
 
             this.RoundToolTip.Content = resource.GetString("/Strokes/Cap_Round");
-            this.RoundButton.Tapped += (s, e) =>
+            this.RoundButton.Click += (s, e) =>
             {
                 this.CapChanged?.Invoke(this, CanvasCapStyle.Round);//Delegate
             };
 
             this.TriangleToolTip.Content = resource.GetString("/Strokes/Cap_Triangle");
-            this.TriangleButton.Tapped += (s, e) =>
+            this.TriangleButton.Click += (s, e) =>
             {
                 this.CapChanged?.Invoke(this, CanvasCapStyle.Triangle);//Delegate
             };

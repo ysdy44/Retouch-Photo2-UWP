@@ -29,10 +29,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ClearButton.Tapped += (s, e) => this.SelectionViewModel.Photocopier = new Photocopier();//Photocopier
+            this.ClearButton.Click += (s, e) => this.SelectionViewModel.Photocopier = new Photocopier();//Photocopier
 
             //Select
-            this.SelectButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.SelectImage);
+            this.SelectButton.Click += (s, e) => Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.SelectImage);
             Retouch_Photo2.PhotosPage.SelectCallBack += (photo) =>
             {
                 if (photo == null) return;
@@ -41,7 +41,7 @@ namespace Retouch_Photo2.Tools.Models
             };
 
             //Replace
-            this.ReplaceButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.ReplaceImage);
+            this.ReplaceButton.Click += (s, e) => Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.ReplaceImage);
             Retouch_Photo2.PhotosPage.ReplaceCallBack += (photo) =>
             {
                 if (photo == null) return;

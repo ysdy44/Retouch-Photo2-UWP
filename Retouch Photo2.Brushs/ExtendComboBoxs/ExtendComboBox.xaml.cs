@@ -96,7 +96,7 @@ namespace Retouch_Photo2.Brushs
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this);
+            this.Button.Click += (s, e) => this.Flyout.ShowAt(this);
         }
 
     }
@@ -137,7 +137,7 @@ namespace Retouch_Photo2.Brushs
             //Buttons
             button.Content = text;
             button.Tag = icon;
-            button.Tapped += (s, e) =>
+            Button.Click += (s, e) =>
             {
                 this.ExtendChanged?.Invoke(this, behavior); //Delegate
                 this.Flyout.Hide();

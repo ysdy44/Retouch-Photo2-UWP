@@ -107,7 +107,7 @@ namespace Retouch_Photo2.Menus.Models
         private void ConstructEdit()
         {
 
-            this.CutButton.Tapped += (s, e) =>
+            this.CutButton.Click += (s, e) =>
             {
                 //Selection
                 switch (this.SelectionViewModel.SelectionMode)
@@ -147,7 +147,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.CopyButton.Tapped += (s, e) =>
+            this.CopyButton.Click += (s, e) =>
             {
                 //Selection
                 switch (this.SelectionViewModel.SelectionMode)
@@ -181,7 +181,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.PasteButton.IsEnabled = (this.Layer != null || this.Layers != null);//PasteButton
             };
 
-            this.PasteButton.Tapped += (s, e) =>
+            this.PasteButton.Click += (s, e) =>
             {
                 if (this.Layer == null && this.Layers == null)//None
                 {
@@ -216,7 +216,7 @@ namespace Retouch_Photo2.Menus.Models
                 }
             };
 
-            this.ClearButton.Tapped += (s, e) =>
+            this.ClearButton.Click += (s, e) =>
             {
                 int count = this.ViewModel.Layers.RootLayers.Count;
                 if (count == 0) return;
@@ -234,7 +234,7 @@ namespace Retouch_Photo2.Menus.Models
         private void ConstructSelect()
         {
 
-            this.AllButton.Tapped += (s, e) =>
+            this.AllButton.Click += (s, e) =>
             {
                 int count = this.ViewModel.Layers.RootLayers.Count;
                 if (count == 0) return;
@@ -249,7 +249,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.DeselectButton.Tapped += (s, e) =>
+            this.DeselectButton.Click += (s, e) =>
             {
                 int count = this.ViewModel.Layers.RootLayers.Count;
                 if (count == 0) return;
@@ -271,7 +271,7 @@ namespace Retouch_Photo2.Menus.Models
         private void ConstructGroup()
         {
 
-            this.GroupButton.Tapped += (s, e) =>
+            this.GroupButton.Click += (s, e) =>
             {
                 this.ViewModel.Layers.GroupAllSelectedLayers();
                 this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
@@ -280,7 +280,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.UnGroupButton.Tapped += (s, e) =>
+            this.UnGroupButton.Click += (s, e) =>
             {
                 this.SelectionViewModel.SetValue((layer) =>
                 {

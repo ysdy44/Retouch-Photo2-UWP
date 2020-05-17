@@ -108,17 +108,17 @@ namespace Retouch_Photo2.Tools.Elements
         //EachMode
         private void ConstructEachMode()
         {
-            this.MirroredRadioButton.Tapped += (s, e) =>
+            this.MirroredRadioButton.Click += (s, e) =>
             {
                 this.EachLengthMode = EachControlPointLengthMode.Equal;
                 this.EachAngleMode = EachControlPointAngleMode.Asymmetric;
             };
-            this.DisconnectedRadioButton.Tapped += (s, e) =>
+            this.DisconnectedRadioButton.Click += (s, e) =>
             {
                 this.EachLengthMode = EachControlPointLengthMode.None;
                 this.EachAngleMode = EachControlPointAngleMode.None;
             };
-            this.AsymmetricRadioButton.Tapped += (s, e) =>
+            this.AsymmetricRadioButton.Click += (s, e) =>
             {
                 this.EachLengthMode = EachControlPointLengthMode.None;
                 this.EachAngleMode = EachControlPointAngleMode.Asymmetric;

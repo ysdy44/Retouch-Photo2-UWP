@@ -88,11 +88,11 @@ namespace Retouch_Photo2
             this.ConstructStrings();
             this.ConstructGridView();
 
-            this.BackButton.Tapped += (s, e) => this.Frame.GoBack();
-            this.AddButton.Tapped += async (s, e) => await this.Pick();
+            this.BackButton.Click += (s, e) => this.Frame.GoBack();
+            this.AddButton.Click += async (s, e) => await this.Pick();
 
 
-            this.AddImageLayerButton.Tapped += (s, e) =>
+            this.AddImageLayerButton.Click += (s, e) =>
             {
                 //Photo
                 Photo photo = this._vsPhoto;
@@ -101,7 +101,7 @@ namespace Retouch_Photo2
                 this.Frame.GoBack();
             };
 
-            this.FillImageButton.Tapped += (s, e) =>
+            this.FillImageButton.Click += (s, e) =>
             {
                 //Photo
                 Photo photo = this._vsPhoto;
@@ -109,7 +109,7 @@ namespace Retouch_Photo2
 
                 this.Frame.GoBack();
             };
-            this.StrokeImageButton.Tapped += (s, e) =>
+            this.StrokeImageButton.Click += (s, e) =>
             {
                 //Photo
                 Photo photo = this._vsPhoto;
@@ -118,7 +118,7 @@ namespace Retouch_Photo2
                 this.Frame.GoBack();
             };
 
-            this.SelectImageButton.Tapped += (s, e) =>
+            this.SelectImageButton.Click += (s, e) =>
             {
                 //Photo
                 Photo photo = this._vsPhoto;
@@ -126,7 +126,7 @@ namespace Retouch_Photo2
 
                 this.Frame.GoBack();
             };
-            this.ReplaceImageButton.Tapped += (s, e) =>
+            this.ReplaceImageButton.Click += (s, e) =>
             {
                 //Photo
                 Photo photo = this._vsPhoto;

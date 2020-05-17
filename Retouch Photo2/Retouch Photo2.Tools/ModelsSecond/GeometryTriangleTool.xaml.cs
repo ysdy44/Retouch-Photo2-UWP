@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructStrings();
             this.ConstructCenter();
 
-            this.MirrorButton.Tapped += (s, e) => this.CenterMirror();
+            this.MirrorButton.Click += (s, e) => this.CenterMirror();
         }
 
 

@@ -198,7 +198,7 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructMenu();
 
             this.Loaded += (s, e) => this._isLoaded = true;
-            this.RemoteButton.Tapped += (s, e) => this._Expander.IsSecondPage = true;
+            this.RemoteButton.Click += (s, e) => this._Expander.IsSecondPage = true;
             
             this.ConstructRemoteControl();
             this.ConstructIndicatorControl();

@@ -68,10 +68,10 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
 
 
-            this.AlphaButton.Tapped += (s, e) => this.State = GammaTransferPageState.Alpha;
-            this.RedButton.Tapped += (s, e) => this.State = GammaTransferPageState.Red;
-            this.GreenButton.Tapped += (s, e) => this.State = GammaTransferPageState.Green;
-            this.BlueButton.Tapped += (s, e) => this.State = GammaTransferPageState.Blue;
+            this.AlphaButton.Click += (s, e) => this.State = GammaTransferPageState.Alpha;
+            this.RedButton.Click += (s, e) => this.State = GammaTransferPageState.Red;
+            this.GreenButton.Click += (s, e) => this.State = GammaTransferPageState.Green;
+            this.BlueButton.Click += (s, e) => this.State = GammaTransferPageState.Blue;
 
 
             this.AlphaCheckBox.Toggled += (s, e) =>

@@ -51,11 +51,11 @@ namespace Retouch_Photo2.Tools
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.CharacterButton.Tapped += (s, e) =>
+            this.CharacterButton.Click += (s, e) =>
             {
                 this.TipViewModel.ShowMenuLayoutAt(MenuType.Character, this.CharacterButton);
             };
-            this.FullScreenButton.Tapped += (s, e) =>
+            this.FullScreenButton.Click += (s, e) =>
             {
                 this._vsIsFullScreen = !this._vsIsFullScreen;
                 this.VisualState = this.VisualState;//State
