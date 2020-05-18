@@ -52,7 +52,15 @@ namespace Retouch_Photo2.ViewModels
             float scale = this.CanvasTransformer.Scale;
             this.VectorBorderSnap.NodeRadius = FanKit.Math.NodeRadius / scale;
         }
+        public void BorderBorderSnapStarted(ILayer firstLayer)
+        {
+            this.BorderBorderSnap.Destinations = this.GetSnapDestinations(firstLayer);
 
+            //NodeRadius
+            float scale = this.CanvasTransformer.Scale;
+            this.BorderBorderSnap.NodeRadius = FanKit.Math.NodeRadius / scale;
+        }
+        
 
         private IEnumerable<TransformerBorder> GetSnapDestinations(Transformer transformer)
         {
