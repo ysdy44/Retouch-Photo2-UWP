@@ -8,15 +8,17 @@ using System.Numerics;
 namespace Retouch_Photo2.Tools
 {
     /// <summary>
-    /// <see cref="ITransformerTool"/>'s TransformerTool.
+    /// <see cref="IMoveTool"/>'s MoveTool.
     /// </summary>
-    public partial class TransformerTool : ITransformerTool
+    public partial class MoveTool : IMoveTool
     {
 
         public bool Clicke(Vector2 point)
         {
             //SelectedLayer
-            ILayer selectedLayer = this._getSelectedLayer(point);
+            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+            ILayer selectedLayer = this.GetSelectedLayer(canvasPoint);
 
             if (selectedLayer == null)
             {
@@ -174,18 +176,14 @@ namespace Retouch_Photo2.Tools
         #endregion
 
 
-        ILayer _getSelectedLayer(Vector2 point)
+        private ILayer GetSelectedLayer(Vector2 canvasPoint)
         {
-            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-            Vector2 canvasPoint = Vector2.Transform(point, matrix);
-
             //Select a layer of the same depth
-            ILayer _firstLayer = this.SelectionViewModel.GetFirstLayer();
-            IList<ILayer> _parentsChildren = this.ViewModel.Layers.GetParentsChildren(_firstLayer);
-            ILayer selectedLayer = _parentsChildren.FirstOrDefault((layer) => layer.FillContainsPoint(canvasPoint));
+            ILayer firstLayer = this.SelectionViewModel.GetFirstLayer();
+            IList<ILayer> parentsChildren = this.ViewModel.Layers.GetParentsChildren(firstLayer);
+            ILayer selectedLayer = parentsChildren.FirstOrDefault((layer) => layer.FillContainsPoint(canvasPoint));
             return selectedLayer;
         }
-
 
     }
 }

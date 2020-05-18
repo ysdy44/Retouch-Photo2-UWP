@@ -12,6 +12,16 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
+    public enum CursorMode
+    {
+        None,
+
+        Transformer,
+        Move,
+
+        BoxChoose
+    }
+
     /// <summary>
     /// <see cref="ITool"/>'s CursorTool.
     /// </summary>
@@ -23,6 +33,7 @@ namespace Retouch_Photo2.Tools.Models
         SettingViewModel SettingViewModel => App.SettingViewModel ;
         TipViewModel TipViewModel => App.TipViewModel;
 
+        IMoveTool MoveTool => this.TipViewModel.MoveTool;
         ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
         MarqueeCompositeMode MarqueeCompositeMode => this.SettingViewModel.CompositeMode;
 
@@ -36,46 +47,11 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        //Box
-        private void BoxChoose(IList<ILayer> layers)
-        {
-            foreach (ILayer layer in layers)
-            {
-                Transformer transformer = layer.GetActualDestinationWithRefactoringTransformer;
-                bool contained = transformer.Contained(this._boxCanvasRect);
-
-                switch (this.MarqueeCompositeMode)
-                {
-                    case MarqueeCompositeMode.New:
-                        layer.SelectMode = contained ?
-                            SelectMode.Selected :
-                            SelectMode.UnSelected;
-                        break;
-                    case MarqueeCompositeMode.Add:
-                        if (contained) layer.SelectMode = SelectMode.Selected;
-                        break;
-                    case MarqueeCompositeMode.Subtract:
-                        if (contained) layer.SelectMode = SelectMode.UnSelected;
-                        break;
-                    case MarqueeCompositeMode.Intersect:
-                        if (contained == false) layer.SelectMode = SelectMode.UnSelected;
-                        break;
-                }
-            }
-        }
-
-
-        public void OnNavigatedTo()
-        {
-            this._isBox = false;
-        }
-        public void OnNavigatedFrom()
-        {
-            this._isBox = false;
-        }
+        public void OnNavigatedTo() => this.CursorMode = CursorMode.None;
+        public void OnNavigatedFrom() => this.CursorMode = CursorMode.None;
 
     }
-    
+
     /// <summary>
     /// <see cref="ITool"/>'s CursorTool.
     /// </summary>
@@ -124,84 +100,135 @@ namespace Retouch_Photo2.Tools.Models
         readonly ToolButton _button = new ToolButton(new CursorIcon());
 
 
-        //Box
-        bool _isBox;
-        TransformerRect _boxCanvasRect;
+        CursorMode CursorMode;
+        TransformerRect BoxRect;
 
         public void Started(Vector2 startingPoint, Vector2 point)
         {
-            bool isTransformer = this.TransformerTool.Started(startingPoint, point, false);//TransformerTool
+            this.CursorMode = CursorMode.None;
 
-            //Box
-            if (isTransformer) this._isBox = false;
-            else
+            if (this.TransformerTool.Started(startingPoint, point))//TransformerTool
             {
-                this._isBox = true;
-
-                Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-                Vector2 pointA = Vector2.Transform(startingPoint, inverseMatrix);
-                Vector2 pointB = Vector2.Transform(point, inverseMatrix);
-                this._boxCanvasRect = new TransformerRect(pointA, pointB);
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            }
-        }
-        public void Delta(Vector2 startingPoint, Vector2 point)
-        {
-            //Box
-            if (this._isBox)
-            {
-                Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-                Vector2 pointA = Vector2.Transform(startingPoint, inverseMatrix);
-                Vector2 pointB = Vector2.Transform(point, inverseMatrix);
-                this._boxCanvasRect = new TransformerRect(pointA, pointB);
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.CursorMode = CursorMode.Transformer;
                 return;
             }
 
-            this.TransformerTool.Delta(startingPoint, point);//TransformerTool
+            if (this.MoveTool.Started(startingPoint, point))//MoveTool
+            {
+                this.CursorMode = CursorMode.Move;
+                return;
+            }
+
+            //Box
+            this.CursorMode = CursorMode.BoxChoose;
+
+            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+            Vector2 canavsStartingPoint = Vector2.Transform(startingPoint, inverseMatrix); 
+             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix); 
+            this.BoxRect = new TransformerRect(canavsStartingPoint, canvasPoint);
+
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+        }
+        public void Delta(Vector2 startingPoint, Vector2 point)
+        {
+            switch (this.CursorMode)
+            {
+                case CursorMode.Transformer:
+                    this.TransformerTool.Delta(startingPoint, point);//TransformerTool
+                    break;
+                case CursorMode.Move:
+                    this.MoveTool.Delta(startingPoint, point);//MoveTool
+                    break;
+                case CursorMode.BoxChoose:
+                    {
+                        Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+                        Vector2 canavsStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+                        Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+                        this.BoxRect = new TransformerRect(canavsStartingPoint, canvasPoint);
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
+                    break;
+            }
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
-            //Box
-            if (this._isBox)
+            CursorMode cursorMode = this.CursorMode;
+            this.CursorMode = CursorMode.None;
+
+            switch (cursorMode)
             {
-                this._isBox = false;
+                case CursorMode.Transformer:
+                    this.TransformerTool.Complete(startingPoint, point); //TransformerTool
+                    break;
+                case CursorMode.Move:
+                    this.MoveTool.Complete(startingPoint, point);//MoveTool
+                    break;
+                case CursorMode.BoxChoose:
+                    {
+                        if (isOutNodeDistance)
+                        {
+                            //BoxChoose
+                            ILayer layer = this.SelectionViewModel.GetFirstLayer();
+                            IList<ILayer> parentsChildren = this.ViewModel.Layers.GetParentsChildren(layer);
+                            this.BoxChoose(parentsChildren);
 
-                if (isOutNodeDistance)
-                {
-                    //Select a layer of the same depth
-                    bool isChildSingle = (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single
-                        && this.SelectionViewModel.Layer.Parents != null);
-                    IList<ILayer> parentsChildren = isChildSingle ?
-                        this.SelectionViewModel.Layer.Parents.Children :
-                        this.ViewModel.Layers.RootLayers;
-
-                    this.BoxChoose(parentsChildren);//Box 
-
-                    this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
-                }
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+                        }
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
+                    break;
             }
-
-            this.TransformerTool.Complete(startingPoint, point); //TransformerTool
         }
-        public void Clicke(Vector2 point) => this.TipViewModel.TransformerTool.Clicke(point);
+        public void Clicke(Vector2 point) => this.MoveTool.Clicke(point);
 
 
         public void Draw(CanvasDrawingSession drawingSession)
         {
-            //Box
-            if (this._isBox)
+            switch (this.CursorMode)
             {
-                Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                CanvasGeometry geometry = this._boxCanvasRect.ToRectangle(this.ViewModel.CanvasDevice, matrix);
-                drawingSession.DrawGeometryDodgerBlue(geometry);
-                return;
+                case CursorMode.None:
+                case CursorMode.Transformer:
+                    this.TransformerTool.Draw(drawingSession);//TransformerTool
+                    break;
+                case CursorMode.Move:
+                    this.MoveTool.Draw(drawingSession);//MoveTool
+                    break;
+                case CursorMode.BoxChoose:
+                    {
+                        Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+                        CanvasGeometry geometry = this.BoxRect.ToRectangle(this.ViewModel.CanvasDevice, matrix);
+                        drawingSession.DrawGeometryDodgerBlue(geometry);
+                    }
+                    break;
             }
+        }
 
-            this.TransformerTool.Draw(drawingSession);//TransformerTool
+        
+        //Box
+        private void BoxChoose(IList<ILayer> layers)
+        {
+            foreach (ILayer layer in layers)
+            {
+                Transformer transformer = layer.GetActualDestinationWithRefactoringTransformer;
+                bool contained = transformer.Contained(this.BoxRect);
+
+                switch (this.MarqueeCompositeMode)
+                {
+                    case MarqueeCompositeMode.New:
+                        layer.SelectMode = contained ? SelectMode.Selected : SelectMode.UnSelected;
+                        break;
+                    case MarqueeCompositeMode.Add:
+                        if (contained) layer.SelectMode = SelectMode.Selected;
+                        break;
+                    case MarqueeCompositeMode.Subtract:
+                        if (contained) layer.SelectMode = SelectMode.UnSelected;
+                        break;
+                    case MarqueeCompositeMode.Intersect:
+                        if (contained == false) layer.SelectMode = SelectMode.UnSelected;
+                        break;
+                }
+            }
         }
 
     }

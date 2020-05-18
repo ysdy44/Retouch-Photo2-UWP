@@ -8,7 +8,7 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public partial class SettingViewModel : INotifyPropertyChanged
     {
-               
+
         /// <summary> Scaling around the center. </summary>
         public bool IsCenter
         {

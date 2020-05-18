@@ -25,21 +25,20 @@ namespace Retouch_Photo2
         public static SelectionViewModel SelectionViewModel= new SelectionViewModel();
 
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.TipViewModel" />. </summary>
-        public static TipViewModel TipViewModel = new TipViewModel(new NoneTool(), new TransformerTool(), new CreateTool())
+        public static TipViewModel TipViewModel = new TipViewModel(new NoneTool(), new MoveTool(), new TransformerTool(), new CreateTool())
         {
             //Tool
             Tools = new List<ITool>
-            {
+            {               
+                
+                /*                
+                 new CursorTool(),                 
+                 new ViewTool(),
+                 new GeometryRectangleTool(),
+                 */
 
                 /*
-
-                new CursorTool(),
-                 new ViewTool(),
-                 new TextArtisticTool(),
-                 new TextFrameTool(),
-                 
-                                                  */
-                
+                 */
                  new CursorTool(),
                  null,
 
@@ -88,6 +87,7 @@ namespace Retouch_Photo2
                  new GeometryArrowTool(),
                  new GeometryCapsuleTool(),
                  new GeometryHeartTool(),
+                 
             },
 
             //Menu
@@ -112,6 +112,8 @@ namespace Retouch_Photo2
 
                 new LayerMenu(),
                 new ColorMenu(),
+                /*
+                 */
             },
         };
 

@@ -58,7 +58,11 @@ namespace Retouch_Photo2.ViewModels
                     return this.Layer.GetActualDestinationWithRefactoringTransformer;
 
                 case ListViewSelectionMode.Multiple:
-                    return LayerCollection.RefactoringTransformer(this.Layers);
+                    {
+                        IEnumerable<Transformer> transformers = from l in this.Layers select l.GetActualDestinationWithRefactoringTransformer;
+                        TransformerBorder border = new TransformerBorder(transformers);
+                        return border.ToTransformer();
+                    }
 
                 default:
                     return new Transformer();

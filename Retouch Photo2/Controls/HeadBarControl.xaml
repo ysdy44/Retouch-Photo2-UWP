@@ -143,12 +143,23 @@
 
                 <elements:ExpandAppBarSapce/>
 
-                <elements:ExpandAppbarToggleButton x:Name="_RulerButton" IsChecked="{x:Bind ViewModel.CanvasRulerVisible,Mode=TwoWay}">
+                <elements:ExpandAppbarToggleButton x:Name="_SnapButton" IsChecked="{x:Bind ViewModel.IsSnap, Mode=TwoWay}">
+                    <ToolTipService.ToolTip>
+                        <ToolTip x:Name="_SnapToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                    </ToolTipService.ToolTip>
+                    <elements:ExpandAppbarToggleButton.CenterContent>
+                        <FontIcon Glyph="&#xE12C;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                    </elements:ExpandAppbarToggleButton.CenterContent>
+                </elements:ExpandAppbarToggleButton>
+
+                <elements:ExpandAppBarSapce/>
+
+                <elements:ExpandAppbarToggleButton x:Name="_RulerButton" IsChecked="{x:Bind ViewModel.IsRuler, Mode=TwoWay}">
                     <ToolTipService.ToolTip>
                         <ToolTip x:Name="_RulerToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>
                     <elements:ExpandAppbarToggleButton.CenterContent>
-                        <FontIcon Glyph="&#xE80A;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        <FontIcon Glyph="&#xECC6;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                     </elements:ExpandAppbarToggleButton.CenterContent>
                 </elements:ExpandAppbarToggleButton>
 
@@ -165,7 +176,7 @@
 
                 <elements:ExpandAppBarSapce/>
 
-                <elements:ExpandAppbarRepeatButton x:Name="_TipButton" IsChecked="{x:Bind TipViewModel.IsOpen,Mode=TwoWay}">
+                <elements:ExpandAppbarRepeatButton x:Name="_TipButton" IsChecked="{x:Bind TipViewModel.IsOpen, Mode=TwoWay}">
                     <elements:ExpandAppbarRepeatButton.CenterContent>
                         <FontIcon Glyph="&#xE897;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                     </elements:ExpandAppbarRepeatButton.CenterContent>

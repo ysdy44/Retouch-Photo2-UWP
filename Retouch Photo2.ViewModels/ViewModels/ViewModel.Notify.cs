@@ -16,19 +16,32 @@ namespace Retouch_Photo2.ViewModels
         public Color AccentColor { get; set; }
 
 
-        /// <summary> Sets or Gets the on state of the ruler on the canvas. </summary>
-        public bool CanvasRulerVisible
+
+        /// <summary> Sets or Gets whether snaps a element to others's edge. </summary>
+        public bool IsSnap
         {
-            get => this.canvasRulerVisible;
+            get => this.isSnap;
+            set
+            {
+                this.isSnap = value;
+                this.OnPropertyChanged(nameof(this.IsSnap));//Notify 
+            }
+        }
+        private bool isSnap = true;
+
+        /// <summary> Sets or Gets the on state of the ruler on the canvas. </summary>
+        public bool IsRuler
+        {
+            get => this.isRuler;
             set
             {
                 this.Invalidate();//Invalidate
 
-                this.canvasRulerVisible = value;
-                this.OnPropertyChanged(nameof(this.CanvasRulerVisible));//Notify 
+                this.isRuler = value;
+                this.OnPropertyChanged(nameof(this.IsRuler));//Notify 
             }
         }
-        private bool canvasRulerVisible;
+        private bool isRuler;
         
         /// <summary> Sets or Gets the on state of the IsHitTestVisible on the canvas. </summary>
         public bool CanvasHitTestVisible

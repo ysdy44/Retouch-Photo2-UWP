@@ -96,12 +96,6 @@ namespace Retouch_Photo2.Controls
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             
-            if (this.ViewModel.MezzanineLayer != null)
-            {
-                drawingSession.DrawBound(this.SelectionViewModel.Transformer, matrix);
-                return;
-            }
-
             //Bound
             foreach (ILayer layer in this.ViewModel.Layers.RootLayers)
             {

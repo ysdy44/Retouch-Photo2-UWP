@@ -26,6 +26,9 @@ namespace Retouch_Photo2.Tools.Models
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
         FillOrStroke FillOrStroke { get => this.SelectionViewModel.FillOrStroke; set => this.SelectionViewModel.FillOrStroke = value; }
 
+        VectorBorderSnap Snap => this.ViewModel.VectorBorderSnap;
+        bool IsSnap => this.ViewModel.IsSnap;
+
 
         //@Construct
         public BrushTool()
@@ -137,13 +140,16 @@ namespace Retouch_Photo2.Tools.Models
         readonly ToolButton _button = new ToolButton(new BrushIcon());
 
 
-        BrushHandleMode _operateMode = BrushHandleMode.None;
+        BrushHandleMode OperateMode = BrushHandleMode.None;
 
 
         public void Started(Vector2 startingPoint, Vector2 point)
         {
             //Selection
             if (this.Mode == ListViewSelectionMode.None) return;
+
+            //Snap
+            if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(this.SelectionViewModel.Transformer);
 
             switch (this.FillOrStroke)
             {
@@ -162,13 +168,20 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             if (this.Mode == ListViewSelectionMode.None) return;
 
+            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+            Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+
+            //Snap
+            if (this.IsSnap) canvasPoint = this.Snap.Snap(canvasPoint);
+
             switch (this.FillOrStroke)
             {
                 case FillOrStroke.Fill:
-                    this.FillDelta(startingPoint, point);
+                    this.FillDelta(canvasStartingPoint, canvasPoint);
                     break;
                 case FillOrStroke.Stroke:
-                    this.StrokeDelta(startingPoint, point);
+                    this.StrokeDelta(canvasStartingPoint, canvasPoint);
                     break;
             }
 
@@ -179,21 +192,33 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             if (this.Mode == ListViewSelectionMode.None) return;
 
-            this._operateMode = BrushHandleMode.None;
+            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+            Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+
+            //Snap
+            if (this.IsSnap)
+            {
+                canvasPoint = this.Snap.Snap(canvasPoint);
+                this.Snap.Default();
+            }
 
             switch (this.FillOrStroke)
             {
                 case FillOrStroke.Fill:
-                    this.FillComplete(startingPoint, point);
+                    this.FillDelta(canvasStartingPoint, canvasPoint);
+                    this.FillComplete();
                     break;
                 case FillOrStroke.Stroke:
-                    this.StrokeComplete(startingPoint, point);
+                    this.StrokeDelta(canvasStartingPoint, canvasPoint);
+                    this.StrokeComplete();
                     break;
             }
 
+            this.OperateMode = BrushHandleMode.None;
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
-        public void Clicke(Vector2 point) => this.TipViewModel.TransformerTool.Clicke(point);
+        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
 
 
         public void Draw(CanvasDrawingSession drawingSession)
@@ -204,6 +229,9 @@ namespace Retouch_Photo2.Tools.Models
             //Draw
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             Color accentColor = this.ViewModel.AccentColor;
+
+            //Snapping
+            if (this.IsSnap) this.Snap.Draw(drawingSession, matrix);
 
             switch (this.FillOrStroke)
             {

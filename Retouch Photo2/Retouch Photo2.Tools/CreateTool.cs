@@ -5,6 +5,7 @@ using Retouch_Photo2.ViewModels;
 using System;
 using System.Numerics;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools
 {
@@ -19,7 +20,12 @@ namespace Retouch_Photo2.Tools
         SettingViewModel SettingViewModel => App.SettingViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
+        Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
+        ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
         ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
+
+        VectorBorderSnap Snap => this.ViewModel.VectorBorderSnap;
+        bool IsSnap => this.ViewModel.IsSnap;
         bool IsCenter => this.SettingViewModel.IsCenter;
         bool IsSquare => this.SettingViewModel.IsSquare;
 
@@ -38,101 +44,120 @@ namespace Retouch_Photo2.Tools
         /// <param name="point"> The pointer. </param>
         public void Started(Func<Transformer, ILayer> createLayer, Vector2 startingPoint, Vector2 point)
         {
-            if (this.TransformerTool.Started(startingPoint, point, true)) return;//TransformerTool
+            if (this.TransformerTool.Started(startingPoint, point)) return;//TransformerTool
 
             //Transformer
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-            Transformer transformer = new Transformer
-            (
-                 Vector2.Transform(startingPoint, inverseMatrix),
-                 Vector2.Transform(point, inverseMatrix),
-                 this.IsCenter,
-                 this.IsSquare
-            );
+            Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+
+            //Snap         
+            if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(this.SelectionViewModel.GetFirstLayer());
+
+            //Selection
+            Transformer transformer = new Transformer(canvasStartingPoint, canvasPoint, this.IsCenter, this.IsSquare);
+            this.Transformer = transformer;
+            this.SelectionViewModel.SetModeExtended();//Selection
+
+            //Mezzanine
+            this.ViewModel.MezzanineLayer = createLayer(transformer);
+            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.ViewModel.MezzanineLayer);
 
             //Text
             this.ViewModel.SetTextWidthHeight(transformer);
             this.ViewModel.TextVisibility = Visibility.Visible;
-
-            //Mezzanine
-            this.ViewModel.MezzanineLayer = createLayer(transformer);
-            this.ViewModel.MezzanineLayer.Style.CacheTransform();
-            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.ViewModel.MezzanineLayer);
-
-            //Selection
-            this.SelectionViewModel.Transformer = transformer;
-
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
+            if (this.Mode == ListViewSelectionMode.Extended)
+            {
+                Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+                Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+                Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+
+                //Snap
+                if (this.IsSnap) canvasPoint = this.Snap.Snap(canvasPoint);
+
+                //Selection
+                Transformer transformer = new Transformer(canvasStartingPoint, canvasPoint, this.IsCenter, this.IsSquare);
+                this.Transformer = transformer;
+
+                //Mezzanine
+                this.ViewModel.MezzanineLayer.Transform = new Transform(transformer);
+                this.ViewModel.MezzanineLayer.Style.DeliverBrushPoints(transformer);
+
+                this.ViewModel.SetTextWidthHeight(transformer);//Text
+                this.ViewModel.Invalidate();//Invalidate
+            }
+
             if (this.TransformerTool.Delta(startingPoint, point)) return;//TransformerTool
-
-            //Transformer
-            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-            Transformer transformer = new Transformer
-            (
-                 Vector2.Transform(startingPoint, inverseMatrix),
-                 Vector2.Transform(point, inverseMatrix),
-                 this.IsCenter,
-                 this.IsSquare
-            );
-
-            //Text
-            this.ViewModel.SetTextWidthHeight(transformer);
-
-            //Mezzanine
-            this.ViewModel.MezzanineLayer.Transform = new Transform(transformer);
-
-            //TransformBrush
-            this.ViewModel.MezzanineLayer.Style.DeliverBrushPoints(transformer);
-
-            //Selection
-            this.SelectionViewModel.Transformer = transformer;
-
-            this.ViewModel.Invalidate();//Invalidate
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
-            if (this.TransformerTool.Complete(startingPoint, point)) return;//TransformerTool
-
-            if (isOutNodeDistance)
+            if (this.Mode == ListViewSelectionMode.Extended)
             {
-                //Transformer
-                Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-                Transformer transformer = new Transformer
-                (
-                     Vector2.Transform(startingPoint, inverseMatrix),
-                     Vector2.Transform(point, inverseMatrix),
-                     this.IsCenter,
-                     this.IsSquare
-                );
-
-                //Text
-                this.ViewModel.TextVisibility = Visibility.Collapsed;
-
-                //Mezzanine
-                this.ViewModel.MezzanineLayer.Transform = new Transform(transformer); 
-
-                foreach (ILayer child in this.ViewModel.Layers.RootLayers)
+                if (isOutNodeDistance)
                 {
-                    child.SelectMode = SelectMode.UnSelected;
+                    Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+                    Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+                    Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+
+                    //Snap
+                    if (this.IsSnap)
+                    {
+                        canvasPoint = this.Snap.Snap(canvasPoint);
+                        this.Snap.Default();
+                    }
+
+                    //Transformer
+                    Transformer transformer = new Transformer(canvasStartingPoint, canvasPoint, this.IsCenter, this.IsSquare);
+                    this.Transformer = transformer;
+
+                    //Mezzanine
+                    this.SelectionViewModel.SetModeSingle(this.ViewModel.MezzanineLayer);//Selection
+                    this.ViewModel.MezzanineLayer.Transform = new Transform(transformer);
+                    this.ViewModel.MezzanineLayer.SelectMode = SelectMode.Selected;
+                    this.ViewModel.MezzanineLayer = null;
+
+                    this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
                 }
-                this.ViewModel.MezzanineLayer.SelectMode = SelectMode.Selected;
-                this.ViewModel.MezzanineLayer = null;
+                else this.ViewModel.Layers.RemoveMezzanineLayer(this.ViewModel.MezzanineLayer);//Mezzanine
 
-                this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+                this.ViewModel.TextVisibility = Visibility.Collapsed;//Text
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             }
-            else this.ViewModel.Layers.RemoveMezzanineLayer(this.ViewModel.MezzanineLayer);//Mezzanine
 
-            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
-
-            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            if (this.TransformerTool.Complete(startingPoint, point)) return;//TransformerTool
         }
+
 
         public void Draw(CanvasDrawingSession drawingSession)
         {
-            this.TransformerTool.Draw(drawingSession);//TransformerTool
+            switch (this.Mode)
+            {
+                case ListViewSelectionMode.None:
+                    break;
+                case ListViewSelectionMode.Single:
+                case ListViewSelectionMode.Multiple:
+                    this.TransformerTool.Draw(drawingSession); //TransformerTool
+                    break;
+                case ListViewSelectionMode.Extended:
+                    {
+                        //Transformer
+                        Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+                        drawingSession.DrawBound(this.Transformer, matrix, this.ViewModel.AccentColor);
+
+                        //Snapping
+                        if (this.IsSnap)
+                        {
+                            this.Snap.Draw(drawingSession, matrix);
+                            this.Snap.DrawNode2(drawingSession, matrix);
+                        }
+                    }
+                    break;
+            }           
         }
+
     }
 }

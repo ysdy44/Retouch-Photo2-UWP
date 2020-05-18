@@ -52,7 +52,8 @@ namespace Retouch_Photo2.Layers.Models
             {
                 if (this.IsRefactoringTransformer)
                 {
-                    Transformer transformer = LayerCollection.RefactoringTransformer(this.Nodes);
+                    TransformerBorder border = new TransformerBorder(this.Nodes);
+                    Transformer transformer = border.ToTransformer();
                     this.Transform.Source = transformer;
                     this.Transform.Destination = transformer;
 

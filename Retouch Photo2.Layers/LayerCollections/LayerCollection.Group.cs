@@ -54,7 +54,9 @@ namespace Retouch_Photo2.Layers
                 if (tempGrouplayers.Count == 0) return;
                 this._addLayersToGroupLayer(groupLayer, tempGrouplayers);
 
-                Transformer transformer = LayerCollection.RefactoringTransformer(tempGrouplayers);
+                IEnumerable<Transformer> transformers = from l in tempGrouplayers select l.GetActualDestinationWithRefactoringTransformer;
+                TransformerBorder border = new TransformerBorder(transformers);
+                Transformer transformer = border.ToTransformer();
                 groupLayer.Transform = new Transform(transformer);
             }
 

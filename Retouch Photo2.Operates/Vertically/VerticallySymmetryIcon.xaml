@@ -23,8 +23,8 @@
                 <VisualState x:Name="Disabled">
                     <VisualState.Setters>
                         <Setter Target = "Canvas.Opacity" Value="0.5"/>
-                        <Setter Target = "RedRectangle1.Fill" Value="Gray"/>
-                        <Setter Target = "RedRectangle2.Fill" Value="Gray"/>
+                        <Setter Target = "GreenRectangle1.Fill" Value="Gray"/>
+                        <Setter Target = "GreenRectangle2.Fill" Value="Gray"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -33,11 +33,11 @@
 
 
         <Canvas x:Name="Canvas" Width="40" Height="40" >
-        <Rectangle x:Name = "RedRectangle1" Canvas.Left="2.5" Canvas.Top="3.5" Width="35" Height="3" Fill="Red"/>
-        <Rectangle Canvas.Left="7" Canvas.Top="15" Width="25" Height="8" 
+            <Rectangle x:Name = "GreenRectangle1" Canvas.Left="2.5" Canvas.Top="3.5" Width="35" Height="3" Fill="LimeGreen"/>
+            <Rectangle Canvas.Left="7" Canvas.Top="15" Width="25" Height="8" 
                    RadiusX="2" RadiusY="2" Fill="Gray"/>
-        <Rectangle x:Name = "RedRectangle2" Canvas.Left="2.5" Canvas.Top="31.5" Width="35" Height="3" Fill="Red"/>
-    </Canvas>
+            <Rectangle x:Name = "GreenRectangle2" Canvas.Left="2.5" Canvas.Top="31.5" Width="35" Height="3" Fill="LimeGreen"/>
+        </Canvas>
 
     </Viewbox>
 

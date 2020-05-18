@@ -26,6 +26,10 @@ namespace Retouch_Photo2.Tools.Models
         CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
         NodeCollection Nodes => this.CurveLayer.Nodes;
 
+        VectorVectorSnap Snap => this.ViewModel.VectorVectorSnap;
+        bool IsSnap => this.ViewModel.IsSnap;
+
+
         //@Construct
         public PenTool()
         {
@@ -94,6 +98,9 @@ namespace Retouch_Photo2.Tools.Models
                     break;
                 case NodeCollectionMode.Add:
                     {
+                        //Snap
+                        if (this.IsSnap) this.ViewModel.VectorVectorSnapStarted(this.Nodes);
+
                         Node node = new Node
                         {
                             Point = canvasPoint,
@@ -133,6 +140,9 @@ namespace Retouch_Photo2.Tools.Models
                         break;
                     case NodeCollectionMode.Add:
                         {
+                            //Snap
+                            if (this.IsSnap) canvasPoint = this.Snap.Snap(canvasPoint);
+
                             Node node = new Node
                             {
                                 Point = canvasPoint,
@@ -162,26 +172,54 @@ namespace Retouch_Photo2.Tools.Models
                     this.PreviewComplete(canvasStartingPoint, canvasPoint, isOutNodeDistance);//PreviewNode
                 }
             }
-            else    if (this.Mode == NodeCollectionMode.Add)
+            else if (this.Mode == NodeCollectionMode.Add)
+            {
+                //Snap
+                if (this.IsSnap)
                 {
-                    Node node = new Node
-                    {
-                        Point = canvasPoint,
-                        LeftControlPoint = canvasPoint,
-                        RightControlPoint = canvasPoint,
-                        IsChecked = false,
-                        IsSmooth = false,
-                    };
-                    this.Nodes.Add(node);
+                    canvasPoint = this.Snap.Snap(canvasPoint);
+                    this.Snap.Default();
                 }
 
-                this.CurveLayer.IsRefactoringTransformer = true;//RefactoringTransformer
-                this.Mode = NodeCollectionMode.None;
+                Node node = new Node
+                {
+                    Point = canvasPoint,
+                    LeftControlPoint = canvasPoint,
+                    RightControlPoint = canvasPoint,
+                    IsChecked = false,
+                    IsSmooth = false,
+                };
+                this.Nodes.Add(node);
+            }
+
+            this.CurveLayer.IsRefactoringTransformer = true;//RefactoringTransformer
+            this.Mode = NodeCollectionMode.None;
 
             this.ViewModel.Invalidate();//Invalidate
         }
         public void Clicke(Vector2 point)
         {
+            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+
+            
+            if (this.Mode == NodeCollectionMode.Add)
+            {
+                Node node = new Node
+                {
+                    Point = canvasPoint,
+                    LeftControlPoint = canvasPoint,
+                    RightControlPoint = canvasPoint,
+                    IsChecked = false,
+                    IsSmooth = false,
+                };
+                this.Nodes.Add(node);
+            }
+
+            this.CurveLayer.IsRefactoringTransformer = true;//RefactoringTransformer
+            this.Mode = NodeCollectionMode.None;
+
+            this.ViewModel.Invalidate();//Invalidate
         }
 
 
@@ -197,7 +235,6 @@ namespace Retouch_Photo2.Tools.Models
             }
 
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-
             drawingSession.DrawNodeCollection(this.Nodes, matrix);
 
             switch (this.Mode)
@@ -211,6 +248,13 @@ namespace Retouch_Photo2.Tools.Models
                         drawingSession.DrawNode4(endPoint);
                     }
                     break;
+            }
+
+            //Snapping
+            if (this.IsSnap)
+            {
+                this.Snap.Draw(drawingSession, matrix);
+                this.Snap.DrawNode2(drawingSession, matrix);
             }
         }
 

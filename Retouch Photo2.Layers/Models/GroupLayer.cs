@@ -3,6 +3,7 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -38,7 +39,10 @@ namespace Retouch_Photo2.Layers.Models
             {
                 if (this.IsRefactoringTransformer)
                 {
-                    Transformer transformer = LayerCollection.RefactoringTransformer(this.Children);
+                    IEnumerable<Transformer> transformers = from l in this.Children select l.GetActualDestinationWithRefactoringTransformer;
+                    TransformerBorder border = new TransformerBorder(transformers);
+                    Transformer transformer = border.ToTransformer();
+
                     this.Transform.Source = transformer;
                     this.Transform.Destination = transformer;
 

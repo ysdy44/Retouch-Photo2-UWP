@@ -83,8 +83,8 @@ namespace Retouch_Photo2.Brushs
                         drawingSession.DrawLine(center, yPoint, Colors.White, 4);
 
                         //Line: accent
-                        drawingSession.DrawLine(center, xPoint, Colors.Red, 2);
-                        drawingSession.DrawLine(center, yPoint, Colors.LimeGreen, 2);
+                        drawingSession.DrawLine(center, xPoint, Colors.LimeGreen, 2); 
+                        drawingSession.DrawLine(center, yPoint, Colors.Red, 2);
 
                         //Circle: node
                         drawingSession.DrawNode2(center);

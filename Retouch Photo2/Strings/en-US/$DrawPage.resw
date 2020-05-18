@@ -141,29 +141,20 @@
   <data name="FullScreen" xml:space="preserve">
     <value>Full Screen</value>
   </data>
-  <data name="FullScreen_ToolTip" xml:space="preserve">
-    <value>Full Screen</value>
-  </data>
   <data name="Redo" xml:space="preserve">
     <value>Redo</value>
   </data>
-  <data name="Redo_ToolTip" xml:space="preserve">
-    <value>Redo</value>
-  </data>
   <data name="Ruler" xml:space="preserve">
-    <value>Ruler</value>
-  </data>
-  <data name="Ruler_ToolTip" xml:space="preserve">
     <value>Ruler</value>
   </data>
   <data name="Setup" xml:space="preserve">
     <value>Setup</value>
   </data>
   <data name="SetupDialog_Close" xml:space="preserve">
-    <value>OK</value>
+    <value>Cancel</value>
   </data>
   <data name="SetupDialog_Primary" xml:space="preserve">
-    <value>Cancel</value>
+    <value>OK</value>
   </data>
   <data name="SetupDialog_Title" xml:space="preserve">
     <value>Document Setup</value>
@@ -174,16 +165,13 @@
   <data name="SetupSizePicker_Width" xml:space="preserve">
     <value>Width</value>
   </data>
-  <data name="Setup_ToolTip" xml:space="preserve">
-    <value>Setup</value>
+  <data name="Snap" xml:space="preserve">
+    <value>Snapping</value>
   </data>
   <data name="Tip" xml:space="preserve">
     <value>Tip</value>
   </data>
   <data name="Undo" xml:space="preserve">
-    <value>Undo</value>
-  </data>
-  <data name="Undo_ToolTip" xml:space="preserve">
     <value>Undo</value>
   </data>
 </root>

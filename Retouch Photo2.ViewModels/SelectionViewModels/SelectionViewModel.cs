@@ -18,7 +18,7 @@ namespace Retouch_Photo2.ViewModels
         /// 0>None.
         /// 1>Single.
         /// 2>Multiple.
-        /// Temporary Transformer: Extended
+        /// MezzanineLayer > Extended
         /// </summary>
         public ListViewSelectionMode SelectionMode
         {

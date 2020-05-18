@@ -303,7 +303,7 @@ namespace Retouch_Photo2.Tools.Models
             if (isOutNodeDistance) this.ViewModel.CanvasTransformer.Move(point);
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
-        public void Clicke(Vector2 point) => this.TipViewModel.TransformerTool.Clicke(point);
+        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
 
         public void Draw(CanvasDrawingSession drawingSession) { }
                               

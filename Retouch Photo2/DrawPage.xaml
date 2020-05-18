@@ -70,18 +70,18 @@
         
         
         <elementDrawPages:DrawLayout x:Name="DrawLayout" 
-               CanvasHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}"
-               LeftIcon="{x:Bind IconConverter(TipViewModel.Tool),Mode=OneWay}"
-               Touchbar="{x:Bind TipViewModel.TouchbarControl,Mode=OneWay}"                                             
+               CanvasHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"
+               LeftIcon="{x:Bind IconConverter(TipViewModel.Tool), Mode=OneWay}"
+               Touchbar="{x:Bind TipViewModel.TouchbarControl, Mode=OneWay}"                                             
                DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
                IsFullScreen="{x:Bind SettingViewModel.IsFullScreen, Mode=OneWay}">
 
             <!--FootPage-->
             <elementDrawPages:DrawLayout.FootPage>
                 <controls:FootPageControl x:Name="FootPageControl"       
-                    Tool="{x:Bind TipViewModel.Tool,Mode=OneWay}"                         
-                    Type="{x:Bind SelectionViewModel.Type,Mode=OneWay}"                         
-                    Mode="{x:Bind SelectionViewModel.SelectionMode,Mode=OneWay}" />
+                    Tool="{x:Bind TipViewModel.Tool, Mode=OneWay}"                         
+                    Type="{x:Bind SelectionViewModel.Type, Mode=OneWay}"                         
+                    Mode="{x:Bind SelectionViewModel.SelectionMode, Mode=OneWay}" />
             </elementDrawPages:DrawLayout.FootPage>
 
             <!--RightIcon-->
@@ -113,7 +113,7 @@
 
 
         <!--Menu-->
-        <Canvas x:Name="OverlayCanvas" IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible,Mode=OneWay}"/>
+        <Canvas x:Name="OverlayCanvas" IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"/>
 
 
         <!--FullScreen-->

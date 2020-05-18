@@ -102,12 +102,14 @@ namespace Retouch_Photo2.Tools.Models
         readonly ToolButton _button = new ToolButton(new CropIcon());
 
 
-        ILayer _layer;
-        bool _startingIsCrop;
-        Transformer _startingDestination;
-        Transformer _startingCropDestination;
-        TransformerMode _transformerMode;
-        Transformer _startingActualDestination => this._startingIsCrop ? this._startingCropDestination : this._startingDestination;
+        ILayer Layer;
+        bool StartingIsCrop;
+        Transformer StartingDestination;
+        Transformer StartingCropDestination;
+
+        bool IsMove;
+        TransformerMode TransformerMode;
+        Transformer StartingActualDestination => this.StartingIsCrop ? this.StartingCropDestination : this.StartingDestination;
 
         public void Started(Vector2 startingPoint, Vector2 point)
         {
@@ -116,26 +118,20 @@ namespace Retouch_Photo2.Tools.Models
             {
                 if (layer.SelectMode.ToBool())
                 {
+                    Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+                    Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+                    
                     //Transformer
                     Transformer transformer = layer.GetActualDestinationWithRefactoringTransformer;
-                    Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                    bool dsabledRadian = false;
-                    TransformerMode transformerMode = Transformer.ContainsNodeMode
-                    (
-                         startingPoint,
-                         transformer,
-                         matrix,
-                         dsabledRadian
-                    );
+                    this.IsMove = transformer.FillContainsPoint(canvasStartingPoint);
+                    this.TransformerMode = Transformer.ContainsNodeMode(canvasStartingPoint, transformer, false);
 
-                    if (transformerMode != TransformerMode.None)
+                    if (this.TransformerMode != TransformerMode.None)
                     {
-                        this._layer = layer;
-                        this._startingDestination = layer.Transform.Destination;
-                        this._startingIsCrop = layer.Transform.IsCrop;
-                        this._startingCropDestination = layer.Transform.CropDestination;
-                        this._transformerMode = transformerMode;
-
+                        this.Layer = layer;
+                        this.StartingDestination = layer.Transform.Destination;
+                        this.StartingIsCrop = layer.Transform.IsCrop;
+                        this.StartingCropDestination = layer.Transform.CropDestination;
                         break;
                     }
                 }
@@ -145,61 +141,48 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
-            if (this._layer == null) return;
-            if (this._transformerMode == TransformerMode.None) return;
-
-            bool isTranslation = (this._transformerMode == TransformerMode.Translation);
+            if (this.Layer == null) return;
+            if (this.IsMove == false)
+                if (this.TransformerMode == TransformerMode.None)
+                    return;
+                       
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+            Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            //Transformer
-            Transformer startingDestination;
-            if (isTranslation)
-            {
-                startingDestination = this._startingDestination;
-            }
-            else
-            {
-                startingDestination = this._startingActualDestination;
-            }
-
-            Transformer transformer = Transformer.Controller
-            (
-                this._transformerMode,
-                startingPoint,
-                point,
-                startingDestination,
-                inverseMatrix,
-                this.IsRatio,
-                this.IsCenter,
-                this.IsStepFrequency
-            );
 
             //Crop
-            this._layer.Transform.IsCrop = true;
-            if (isTranslation)
+            this.Layer.Transform.IsCrop = true;
+            if (this.IsMove)
             {
-                this._layer.Transform.Destination = transformer;
-                if (this._startingIsCrop == false)
+                Vector2 canvasMove = canvasPoint - canvasStartingPoint;
+                this.Layer.Transform.Destination = Transformer.Add(this.StartingDestination, canvasMove);
+
+                if (this.StartingIsCrop == false)
                 {
-                    this._layer.Transform.CropDestination = this._startingDestination;
+                    this.Layer.Transform.CropDestination = this.StartingDestination;
                 }
             }
-            else
+            if (this.TransformerMode != TransformerMode.None)
             {
-                this._layer.Transform.CropDestination = transformer;
+                //Transformer
+                Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.StartingActualDestination, this.IsRatio, this.IsCenter, this.IsStepFrequency);
+
+                this.Layer.Transform.CropDestination = transformer;
             }
+
 
             this.SelectionViewModel.IsCrop = true;//Selection
             this.ViewModel.Invalidate();//Invalidate
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
-            this._layer = null;
-            this._transformerMode = TransformerMode.None;
+            this.Layer = null;
+            this.TransformerMode = TransformerMode.None;
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
-        public void Clicke(Vector2 point) => this.TipViewModel.TransformerTool.Clicke(point);
+        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
 
 
         public void Draw(CanvasDrawingSession drawingSession)

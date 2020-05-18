@@ -31,11 +31,11 @@ namespace Retouch_Photo2.Layers
 
         //@Construct
         /// <summary>
-        /// Constructs a <see cref = "Transform" />.
+        /// Initialize a <see cref = "Transform" />.
         /// </summary>
         public Transform() { }
         /// <summary>
-        /// Constructs a <see cref = "Transform" />.
+        /// Initialize a <see cref = "Transform" />.
         /// </summary>
         /// <param name="transformer"> The transformer. </param>
         public Transform(Transformer transformer)
@@ -44,7 +44,7 @@ namespace Retouch_Photo2.Layers
             this.Destination = transformer;
         }
         /// <summary>
-        /// Constructs a <see cref = "Transform" />.
+        /// Initialize a <see cref = "Transform" />.
         /// </summary>
         /// <param name="source"> The source transformer. </param>
         /// <param name="destination"> The destination transformer. </param>

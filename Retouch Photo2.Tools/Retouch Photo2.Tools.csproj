@@ -203,6 +203,7 @@
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
     <Compile Include="ICreateTool.cs" />
+    <Compile Include="IMoveTool.cs" />
     <Compile Include="ITool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ITransformerTool.cs" />

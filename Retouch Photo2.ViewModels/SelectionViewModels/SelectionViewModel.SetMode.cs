@@ -43,7 +43,7 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         public void SetModeNone()
         {
-            if (this.Layer!=null)
+            if (this.Layer != null)
             {
                 this.Layer.SelectMode = Retouch_Photo2.Layers.SelectMode.UnSelected;
             }
@@ -63,7 +63,7 @@ namespace Retouch_Photo2.ViewModels
             this.SelectionUnNone = false;
             this.SelectionSingle = false;
             
-            this.Transformer = new Transformer();
+            //this.Transformer = new Transformer();
             this.DisabledRadian = false;
 
             this.Layer = null;
@@ -98,6 +98,7 @@ namespace Retouch_Photo2.ViewModels
 
 
         //////////////////////////
+
 
         /// <summary>
         ///  Sets the mode to Single.
@@ -178,7 +179,9 @@ namespace Retouch_Photo2.ViewModels
             this.Layer = null;
             this.Layers = layers;
 
-            this.Transformer = LayerCollection.RefactoringTransformer(layers);
+            IEnumerable<Transformer> transformers = from l in layers select l.GetActualDestinationWithRefactoringTransformer;
+            TransformerBorder border = new TransformerBorder(transformers);
+            this.Transformer = border.ToTransformer();
             this.DisabledRadian = false;
 
             //////////////////////////
@@ -208,6 +211,19 @@ namespace Retouch_Photo2.ViewModels
             //////////////////////////
 
             this.SetIGeometryLayer(firstLayer);
+        }
+
+
+        //////////////////////////
+
+
+        /// <summary>
+        ///  Sets the mode to Extended.
+        /// </summary>
+        public void SetModeExtended()
+        {
+            this.SetModeNone();
+            this.SelectionMode = ListViewSelectionMode.Extended;
         }
 
     }

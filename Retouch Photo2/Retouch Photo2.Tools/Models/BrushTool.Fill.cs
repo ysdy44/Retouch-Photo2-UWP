@@ -49,10 +49,10 @@ namespace Retouch_Photo2.Tools.Models
 
             //Contains Operate Mode
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-            this._operateMode = this.Fill.ContainsOperateMode(startingPoint, matrix);
+            this.OperateMode = this.Fill.ContainsOperateMode(startingPoint, matrix);
             
             //InitializeController
-            if (this._operateMode == BrushHandleMode.None)
+            if (this.OperateMode == BrushHandleMode.None)
             {
                 switch (this.Fill.Type)
                 {
@@ -81,17 +81,12 @@ namespace Retouch_Photo2.Tools.Models
             });
         }
 
-        public void FillDelta(Vector2 startingPoint, Vector2 point)
+        public void FillDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             //Selection
             if (this.Fill == null) return;
 
-
-            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-            Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
-            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
-
-            switch (this._operateMode)
+            switch (this.OperateMode)
             {
                 //InitializeController
                 case BrushHandleMode.None:
@@ -110,18 +105,18 @@ namespace Retouch_Photo2.Tools.Models
                 default:
                     {
                         //Selection
-                        this.Fill.Controller(this._operateMode, canvasStartingPoint, canvasPoint);
+                        this.Fill.Controller(this.OperateMode, canvasStartingPoint, canvasPoint);
                         this.SelectionViewModel.SetValue((layer) =>
                         {
-                            layer.Style.Fill.Controller(this._operateMode, canvasStartingPoint, canvasPoint);
+                            layer.Style.Fill.Controller(this.OperateMode, canvasStartingPoint, canvasPoint);
                         });
                     }
                     break;
             }
         }
 
-        public void FillComplete(Vector2 startingPoint, Vector2 point)
-        {          
+        public void FillComplete()
+        {
             //Selection
             if (this.Fill == null) return;
 

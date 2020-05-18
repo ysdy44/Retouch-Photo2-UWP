@@ -131,6 +131,7 @@
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.Notify.cs" />
     <Compile Include="SettingViewModels\SettingViewModel.Layout.cs" />
+    <Compile Include="ViewModels\ViewModel.Snap.cs" />
     <Compile Include="ViewModels\ViewModel.Transformer.cs" />
     <Compile Include="ViewModels\ViewModel.History.cs" />
     <Compile Include="XMLs\XML.Project.cs" />

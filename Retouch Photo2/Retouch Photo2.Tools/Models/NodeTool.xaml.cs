@@ -25,6 +25,9 @@ namespace Retouch_Photo2.Tools.Models
         CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
         NodeCollection Nodes => this.CurveLayer.Nodes;
 
+        VectorVectorSnap Snap => this.ViewModel.VectorVectorSnap;
+        bool IsSnap => this.ViewModel.IsSnap;
+
         /// <summary> PenPage's Flyout. </summary>
         public PenModeControl PenFlyout => this._penFlyout;
 
@@ -41,7 +44,7 @@ namespace Retouch_Photo2.Tools.Models
                 if (this.CurveLayer == null) return;
 
                 bool isSuccessful = NodeCollection.RemoveCheckedNodes(this.CurveLayer.Nodes);
-                if (isSuccessful==false)
+                if (isSuccessful == false)
                 {
                     this.ViewModel.Layers.RemoveLayer(this.CurveLayer);
                     this.SelectionViewModel.SetMode(this.ViewModel.Layers);
@@ -122,8 +125,6 @@ namespace Retouch_Photo2.Tools.Models
         public void Started(Vector2 startingPoint, Vector2 point)
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-            Vector2 canvasPoint = Vector2.Transform(startingPoint, inverseMatrix);
 
             if (this.CurveLayer == null)
                 this.Mode = NodeCollectionMode.None;
@@ -135,7 +136,12 @@ namespace Retouch_Photo2.Tools.Models
                 case NodeCollectionMode.None:
                     break;
                 case NodeCollectionMode.Move:
-                    this.Nodes.CacheTransform(isOnlySelected: true);
+                    {
+                        //Snap
+                        if (this.IsSnap) this.ViewModel.VectorVectorSnapStarted(this.Nodes);
+
+                        this.Nodes.CacheTransform(isOnlySelected: true);
+                    }
                     break;
                 case NodeCollectionMode.MoveSingleNodePoint:
                     this.Nodes.SelectionOnlyOne(this.Nodes.Index);
@@ -148,7 +154,13 @@ namespace Retouch_Photo2.Tools.Models
                     this._oldNode = this.Nodes[this.Nodes.Index];
                     break;
                 case NodeCollectionMode.RectChoose:
-                    this._transformerRect = new TransformerRect(canvasPoint, canvasPoint);
+                    {
+                        Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+                        Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+                        Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+
+                        this._transformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
+                    }
                     break;
             }
 
@@ -157,18 +169,68 @@ namespace Retouch_Photo2.Tools.Models
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
             if (this.CurveLayer == null) return;
-        
+
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
+            switch (this.Mode)
+            {
+                case NodeCollectionMode.None:
+                    break;
+                case NodeCollectionMode.Move:
+                    {
+                        //Snap
+                        if (this.IsSnap) canvasPoint = this.Snap.Snap(canvasPoint);
+
+                        Vector2 vector = canvasPoint - canvasStartingPoint;
+                        this.Nodes.TransformAdd(vector, isOnlySelected: true);
+                        this.ViewModel.TextVisibility = Visibility.Visible;
+                        this.ViewModel.Text = canvasPoint.X.ToString();
+                    }
+                    break;
+                case NodeCollectionMode.MoveSingleNodePoint:
+                    this.Nodes[this.Nodes.Index] = this._oldNode.Move(canvasPoint);
+                    break;
+                case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
+                    this.Nodes[this.Nodes.Index] = this.PenFlyout.Controller(canvasPoint, this._oldNode, isLeftControlPoint: true);
+                    break;
+                case NodeCollectionMode.MoveSingleNodeRightControlPoint:
+                    this.Nodes[this.Nodes.Index] = this.PenFlyout.Controller(canvasPoint, this._oldNode, isLeftControlPoint: false);
+                    break;
+                case NodeCollectionMode.RectChoose:
+                    {
+                        TransformerRect transformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
+                        this._transformerRect = transformerRect;
+                        this.Nodes.RectChoose(transformerRect);
+                    }
+                    break;
+            }
+
+            this.ViewModel.Invalidate();//Invalidate
+        }
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
+        {
+            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+            Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+
+            if (this.CurveLayer == null) return;
+
+            if (isOutNodeDistance)
+            {
                 switch (this.Mode)
                 {
-                    case NodeCollectionMode.None:
-                        break;
                     case NodeCollectionMode.Move:
                         {
+                            //Snap
+                            if (this.IsSnap)
+                            {
+                                canvasPoint = this.Snap.Snap(canvasPoint);
+                                this.Snap.Default();
+                            }
+
                             Vector2 vector = canvasPoint - canvasStartingPoint;
                             this.Nodes.TransformAdd(vector, isOnlySelected: true);
                         }
@@ -183,51 +245,13 @@ namespace Retouch_Photo2.Tools.Models
                         this.Nodes[this.Nodes.Index] = this.PenFlyout.Controller(canvasPoint, this._oldNode, isLeftControlPoint: false);
                         break;
                     case NodeCollectionMode.RectChoose:
-                        {
-                            TransformerRect transformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
-                            this._transformerRect = transformerRect;
-                            this.Nodes.RectChoose(transformerRect);
-                        }
+                        this._transformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
                         break;
+                }
             }
 
-            this.ViewModel.Invalidate();//Invalidate
-        }
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
-        {
-            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-            Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
-            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
-
-            if (this.CurveLayer == null) return;
-            
-            if (isOutNodeDistance)
-                {
-                    switch (this.Mode)
-                    {
-                        case NodeCollectionMode.Move:
-                            {
-                                Vector2 vector = canvasPoint - canvasStartingPoint;
-                                this.Nodes.TransformAdd(vector, isOnlySelected: true);
-                            }
-                            break;
-                        case NodeCollectionMode.MoveSingleNodePoint:
-                            this.Nodes[this.Nodes.Index] = this._oldNode.Move(canvasPoint);
-                            break;
-                        case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
-                            this.Nodes[this.Nodes.Index] = this.PenFlyout.Controller(canvasPoint, this._oldNode, isLeftControlPoint: true);
-                            break;
-                        case NodeCollectionMode.MoveSingleNodeRightControlPoint:
-                            this.Nodes[this.Nodes.Index] = this.PenFlyout.Controller(canvasPoint, this._oldNode, isLeftControlPoint: false);
-                            break;
-                        case NodeCollectionMode.RectChoose:
-                            this._transformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
-                            break;
-                    }
-                }
-
-                this.CurveLayer.IsRefactoringTransformer = true;//RefactoringTransformer
-                this.Mode = NodeCollectionMode.None;
+            this.CurveLayer.IsRefactoringTransformer = true;//RefactoringTransformer
+            this.Mode = NodeCollectionMode.None;
 
             this.ViewModel.Invalidate();//Invalidate
         }
@@ -235,7 +259,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             if (this.CurveLayer == null)
             {
-                this.TipViewModel.TransformerTool.Clicke(point);
+                this.TipViewModel.MoveTool.Clicke(point);
             }
         }
 
@@ -257,6 +281,13 @@ namespace Retouch_Photo2.Tools.Models
                         drawingSession.DrawGeometryDodgerBlue(canvasGeometryTransform);
                     }
                     break;
+            }
+
+            //Snapping
+            if (this.IsSnap)
+            {
+                this.Snap.Draw(drawingSession, matrix);
+                this.Snap.DrawNode2(drawingSession, matrix);
             }
         }
 

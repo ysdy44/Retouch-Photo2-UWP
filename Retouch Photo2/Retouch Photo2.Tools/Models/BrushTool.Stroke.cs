@@ -49,10 +49,10 @@ namespace Retouch_Photo2.Tools.Models
 
             //Contains Operate Mode
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-            this._operateMode = this.Stroke.ContainsOperateMode(startingPoint, matrix);
+            this.OperateMode = this.Stroke.ContainsOperateMode(startingPoint, matrix);
 
             //InitializeController
-            if (this._operateMode == BrushHandleMode.None)
+            if (this.OperateMode == BrushHandleMode.None)
             {
                 switch (this.Stroke.Type)
                 {
@@ -81,17 +81,12 @@ namespace Retouch_Photo2.Tools.Models
             });
         }
 
-        public void StrokeDelta(Vector2 startingPoint, Vector2 point)
+        public void StrokeDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             //Selection
             if (this.Stroke == null) return;
 
-
-            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-            Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
-            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
-
-            switch (this._operateMode)
+            switch (this.OperateMode)
             {
                 //InitializeController
                 case BrushHandleMode.None:
@@ -102,7 +97,6 @@ namespace Retouch_Photo2.Tools.Models
                         {
                             layer.Style.Stroke.InitializeController(canvasStartingPoint, canvasPoint);
                         });
-                        this.ViewModel.Invalidate();//Invalidate
                     }
                     break;
 
@@ -110,17 +104,17 @@ namespace Retouch_Photo2.Tools.Models
                 default:
                     {
                         //Selection
-                        this.Stroke.Controller(this._operateMode, canvasStartingPoint, canvasPoint);
+                        this.Stroke.Controller(this.OperateMode, canvasStartingPoint, canvasPoint);
                         this.SelectionViewModel.SetValue((layer) =>
                         {
-                            layer.Style.Stroke.Controller(this._operateMode, canvasStartingPoint, canvasPoint);
+                            layer.Style.Stroke.Controller(this.OperateMode, canvasStartingPoint, canvasPoint);
                         });
                     }
                     break;
             }
         }
 
-        public void StrokeComplete(Vector2 startingPoint, Vector2 point)
+        public void StrokeComplete()
         {
             //Selection
             if (this.Stroke == null) return;
