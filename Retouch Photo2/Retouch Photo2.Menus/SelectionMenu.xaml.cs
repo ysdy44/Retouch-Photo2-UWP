@@ -5,6 +5,7 @@ using Retouch_Photo2.Selections.GroupIcons;
 using Retouch_Photo2.Selections.SelectIcons;
 using Retouch_Photo2.ViewModels;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
@@ -55,12 +56,15 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content = resource.GetString("/Menus/Selection");
-            this._Expander.Title = resource.GetString("/Menus/Selection");
-            
+            this._button.ToolTip.Content =
+            this._Expander.Title =
+            this._Expander.CurrentTitle = resource.GetString("/Menus/Selection");
+
             this.EditTextBlock.Text = resource.GetString("/Selections/Edit");
             this.CutButton.Content = resource.GetString("/Selections/Edit_Cut");
             this.CutButton.Tag = new CutIcon();
+            this.DuplicateButton.Content = resource.GetString("/Selections/Edit_Duplicate");
+            this.DuplicateButton.Tag = new DuplicateIcon();
             this.CopyButton.Content = resource.GetString("/Selections/Edit_Copy");
             this.CopyButton.Tag = new CopyIcon();
             this.PasteButton.Content = resource.GetString("/Selections/Edit_Paste");
@@ -144,6 +148,18 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
 
                 this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+                this.ViewModel.Invalidate();//Invalidate
+            };
+
+            this.DuplicateButton.Click += (s, e) =>
+            {
+                IList<ILayer> layers = this.ViewModel.Layers.GetAllSelectedLayers();
+                IEnumerable<ILayer> duplicateLayers = from i in layers select i.Clone(this.ViewModel.CanvasDevice);
+
+                this.ViewModel.Layers.MezzanineRangeOnFirstSelectedLayer(duplicateLayers.ToList());
+                this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+
+                this.SelectionViewModel.SetMode(this.ViewModel.Layers);
                 this.ViewModel.Invalidate();//Invalidate
             };
 

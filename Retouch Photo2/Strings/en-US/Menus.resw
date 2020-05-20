@@ -156,17 +156,14 @@
   <data name="Layer_BlendMode" xml:space="preserve">
     <value>Blend Mode</value>
   </data>
-  <data name="Layer_Duplicate" xml:space="preserve">
-    <value>Duplicate</value>
-  </data>
   <data name="Layer_Layers" xml:space="preserve">
     <value>Layers</value>
   </data>
+  <data name="Layer_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <data name="Layer_Opacity" xml:space="preserve">
     <value>Opacity</value>
-  </data>
-  <data name="Layer_Remove" xml:space="preserve">
-    <value>Remove</value>
   </data>
   <data name="Layer_TagType" xml:space="preserve">
     <value>Tag Type</value>

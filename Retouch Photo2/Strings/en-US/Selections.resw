@@ -126,6 +126,9 @@
   <data name="Edit_Copy" xml:space="preserve">
     <value>Copy</value>
   </data>
+  <data name="Edit_Duplicate" xml:space="preserve">
+    <value>Duplicate</value>
+  </data>
   <data name="Edit_Cut" xml:space="preserve">
     <value>Cut</value>
   </data>

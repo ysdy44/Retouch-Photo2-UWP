@@ -131,8 +131,9 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content = resource.GetString("/Menus/Effect");
-            this._Expander.Title = resource.GetString("/Menus/Effect");
+            this._button.ToolTip.Content = 
+            this._Expander.Title =
+            this._Expander.CurrentTitle = resource.GetString("/Menus/Effect");
         }
 
         //Menu
@@ -222,6 +223,7 @@ namespace Retouch_Photo2.Menus.Models
 
             this._Expander.IsSecondPage = true;
             this._Expander.ResetButtonVisibility = Visibility.Visible;
+            this._Expander.CurrentTitle = effect.Button.Text;
         }
     }
 }

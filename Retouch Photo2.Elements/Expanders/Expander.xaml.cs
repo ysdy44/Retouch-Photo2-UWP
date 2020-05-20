@@ -13,9 +13,10 @@ namespace Retouch_Photo2.Elements
     public partial class Expander : UserControl, IExpander
     {
         //@Content
-        public string Title { set => this.TitleTextBlock.Text = value; get => this.TitleTextBlock.Text; }
-        public UIElement MainPage { set => this.MainPageBorder.Child = value; get => this.MainPageBorder.Child; }
-        public UIElement SecondPage { set => this.SecondPageBorder.Child = value; get => this.SecondPageBorder.Child; }
+        public string Title { get; set; }
+        public string CurrentTitle { get => this.TitleTextBlock.Text; set => this.TitleTextBlock.Text = value; }
+        public UIElement MainPage { get => this.MainPageBorder.Child; set => this.MainPageBorder.Child = value; }
+        public UIElement SecondPage { get => this.SecondPageBorder.Child; set => this.SecondPageBorder.Child = value; }
         public bool IsSecondPage
         {
             get => this._vsIsSecondPage;
@@ -23,6 +24,9 @@ namespace Retouch_Photo2.Elements
             {
                 if (this._vsIsSecondPage != value)
                 {
+                    if (value) this.TitleShowStoryboard.Begin();//Storyboard
+                    else this.TitleFadeStoryboard.Begin();//Storyboard
+
                     this.HeightRectangle.VerticalAlignment = VerticalAlignment.Top;
                     if (value) this.HeightStoryboardMainToSecond.Begin();//Storyboard
                     else this.HeightStoryboardSecondToMain.Begin();//Storyboard
@@ -32,7 +36,7 @@ namespace Retouch_Photo2.Elements
                 this.VisualState = this.VisualState; //State
             }
         }
-        public Visibility ResetButtonVisibility { set => this.ResetButton.Visibility = value; get => this.ResetButton.Visibility; }
+        public Visibility ResetButtonVisibility { get => this.ResetButton.Visibility; set => this.ResetButton.Visibility = value; }
         public Action Reset { get; set; }
 
 
@@ -99,7 +103,11 @@ namespace Retouch_Photo2.Elements
             this.CloseButton.Click += (s, e) => this.State = ExpanderState.Hide;
             this.StateButton.Click += (s, e) => this.State = this.GetState(this.State);
 
-            this.BackButton.Click += (s, e) => this.IsSecondPage = false;
+            this.BackButton.Click += (s, e) =>
+            {
+                this.CurrentTitle = this.Title;
+                this.IsSecondPage = false;
+            };
             if (this.Reset != null) this.ResetButton.Click += (s, e) => this.Reset();
 
             /////////////////////////////////

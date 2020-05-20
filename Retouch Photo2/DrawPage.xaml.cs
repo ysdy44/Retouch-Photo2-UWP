@@ -22,6 +22,8 @@ namespace Retouch_Photo2
         //@Static
         /// <summary> Navigate to <see cref="PhotosPage"/> </summary>
         public static Action<PhotosPageMode> FrameNavigatePhotosPage;
+        /// <summary> Show <see cref="RenameDialog"/> </summary>
+        public static Action ShowRename;
 
         //@Converter
         private FrameworkElement IconConverter(ITool tool) => tool.Icon;
@@ -38,11 +40,9 @@ namespace Retouch_Photo2
             this.Loaded += (s, e) => this._lockLoaded();
             Retouch_Photo2.DrawPage.FrameNavigatePhotosPage += (mode) => this.Frame.Navigate(typeof(PhotosPage), mode);//Navigate   
 
-            //Photos
-            this.DrawLayout.RightAddButton.Click += (s, e) =>
-            {
-                this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.AddImager);//Navigate   
-            };
+
+            //DrawLayout
+            this.DrawLayout.RightAddButton.Click += (s, e) => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.AddImager);//Navigate   
             this.DrawLayout.IsFullScreenChanged += (isFullScreen) =>
             {
                 Vector2 offset = this.SettingViewModel.FullScreenOffset;
@@ -61,6 +61,11 @@ namespace Retouch_Photo2
             Retouch_Photo2.Tools.Elements.MoreTransformButton.Flyout = this.MoreTransformFlyout;
             Retouch_Photo2.Tools.Elements.MoreCreateButton.Flyout = this.MoreCreateFlyout;
             
+
+            //Rename
+            Retouch_Photo2.DrawPage.ShowRename += () => this.ShowRenameDialog();
+            this.ConstructRenameDialog();
+
 
             #region Document
 
@@ -94,7 +99,7 @@ namespace Retouch_Photo2
 
 
             this.ConstructExportDialog();
-            this.HeadBarControl.ExportButton.Tapped += (s, e) => this.ExportDialog.Show();
+            this.HeadBarControl.ExportButton.Tapped += (s, e) => this.ShowExportDialog();
 
             this.HeadBarControl.UndoButton.Tapped += (s, e) =>
             {
@@ -109,7 +114,7 @@ namespace Retouch_Photo2
             //this.RedoButton.Click += (s, e) => { };
 
             this.ConstructSetupDialog();
-            this.HeadBarControl.SetupButton.Tapped += (s, e) => this.SetupDialog.Show();
+            this.HeadBarControl.SetupButton.Tapped += (s, e) => this.ShowSetupDialog();
 
 
             this.UnFullScreenButton.Click += (s, e) => this.SettingViewModel.IsFullScreen = !this.SettingViewModel.IsFullScreen;

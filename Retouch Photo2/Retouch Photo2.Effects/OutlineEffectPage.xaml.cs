@@ -52,7 +52,7 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Text = resource.GetString("/Effects/Outline");
+            this.Button.Text = resource.GetString("/Effects/Outline");
 
             this.SizeTextBlock.Text = resource.GetString("/Effects/Outline_Size");
         }
@@ -60,9 +60,8 @@ namespace Retouch_Photo2.Effects.Models
         //@Content
         public EffectType Type => EffectType.Outline;
         public FrameworkElement Page => this;
-        public Control Button => this._button;
-        public ToggleSwitch ToggleSwitch => this._button.ToggleSwitch;
-        private EffectButton _button = new EffectButton
+        public ToggleSwitch ToggleSwitch => this.Button.ToggleSwitch;
+        public EffectButton Button { get; } = new EffectButton
         {
             Icon = new OutlineIcon()
         };

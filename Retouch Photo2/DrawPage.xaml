@@ -152,6 +152,12 @@
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>
 
+        <elementDialog:DialogBase x:Name="RenameDialog">
+            <elementDialog:DialogBase.CenterContent>
+                <TextBox x:Name="RenameTextBox" Margin="0" VerticalAlignment="Center" BorderThickness="0"/>
+            </elementDialog:DialogBase.CenterContent>
+        </elementDialog:DialogBase>
+
 
     </Grid>
 </Page>

@@ -198,8 +198,12 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructMenu();
 
             this.Loaded += (s, e) => this._isLoaded = true;
-            this.RemoteButton.Click += (s, e) => this._Expander.IsSecondPage = true;
-            
+            this.RemoteButton.Click += (s, e) =>
+            {
+                this._Expander.IsSecondPage = true;
+                this._Expander.CurrentTitle = (string)this.RemoteButton.Content;
+            };
+
             this.ConstructRemoteControl();
             this.ConstructIndicatorControl();
 
@@ -234,8 +238,9 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content = resource.GetString("/Menus/Transformer");
-            this._Expander.Title = resource.GetString("/Menus/Transformer");
+            this._button.ToolTip.Content =
+            this._Expander.Title =
+            this._Expander.CurrentTitle = resource.GetString("/Menus/Transformer");
 
             this.WidthTextBlock.Text = resource.GetString("/Menus/Transformer_Height");
             this.HeightTextBlock.Text = resource.GetString("/Menus/Transformer_Width");

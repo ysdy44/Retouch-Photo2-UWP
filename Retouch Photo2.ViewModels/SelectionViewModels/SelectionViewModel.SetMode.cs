@@ -72,6 +72,7 @@ namespace Retouch_Photo2.ViewModels
             //////////////////////////
 
             this.Type = LayerType.None;
+            this.LayerName = string.Empty;
             this.SetOpacity(1.0f);
             this.BlendMode = null;
             this.SetVisibility(Visibility.Collapsed);
@@ -130,6 +131,7 @@ namespace Retouch_Photo2.ViewModels
             //////////////////////////
 
             this.Type = layer.Type;
+            this.LayerName = layer.Name;
             this.SetOpacity(layer.Opacity);
             this.BlendMode = layer.BlendMode;
             this.SetVisibility(layer.Visibility);

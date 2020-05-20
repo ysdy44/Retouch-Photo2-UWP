@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
@@ -29,6 +30,10 @@ namespace Retouch_Photo2
             this.ExportDialog.Title = resource.GetString("/$DrawPage/ExportDialog_Title");
             this.ExportDialog.CloseButton.Content = resource.GetString("/$DrawPage/ExportDialog_Close");
             this.ExportDialog.PrimaryButton.Content = resource.GetString("/$DrawPage/ExportDialog_Primary");
+
+            this.RenameDialog.Title = resource.GetString("/$DrawPage/RenameDialog_Title");
+            this.RenameDialog.CloseButton.Content = resource.GetString("/$DrawPage/RenameDialog_Close");
+            this.RenameDialog.PrimaryButton.Content = resource.GetString("/$DrawPage/RenameDialog_Primary");
         }
 
 
@@ -56,6 +61,11 @@ namespace Retouch_Photo2
                 this.LoadingControl.State = LoadingState.None;
             };
         }
+        private void ShowExportDialog()
+        {
+
+            this.ExportDialog.Show();
+        }
 
 
         //Setup
@@ -75,7 +85,53 @@ namespace Retouch_Photo2
                 this.ViewModel.Invalidate();//Invalidate
             };
         }
-        
+        private void ShowSetupDialog()
+        {
+            float width = this.ViewModel.CanvasTransformer.Width;
+            float height = this.ViewModel.CanvasTransformer.Height;
+            this.SetupSizePicker.Width = width;
+            this.SetupSizePicker.Height = height;
+
+            this.SetupDialog.Show();
+        }
+
+
+        //Rename
+        private void ConstructRenameDialog()
+        {
+            this.RenameDialog.CloseButton.Click += (sender, args) => this.RenameDialog.Hide();
+
+            this.RenameDialog.PrimaryButton.Click += (_, __) =>
+            {
+                this.RenameDialog.Hide();
+                string name = this.RenameTextBox.Text;
+
+                //History
+                IHistoryBase history = new IHistoryBase("Set name");
+                this.ViewModel.Push(history);
+                
+                //Selection
+                this.SelectionViewModel.LayerName = name;
+                this.SelectionViewModel.SetValue((layer)=>
+                {
+                    if (layer.Name != name)
+                    {
+                        //History
+                        var previous = layer.Name;
+                        history.Undos.Push(() => layer.Name = previous);
+                        
+                        layer.Name = name;
+                    }
+                });
+            };
+        }
+        private void ShowRenameDialog()
+        {
+            this.RenameTextBox.Text = this.SelectionViewModel.LayerName; 
+
+            this.RenameDialog.Show();
+        }
+
 
         #region ColorPicker
 

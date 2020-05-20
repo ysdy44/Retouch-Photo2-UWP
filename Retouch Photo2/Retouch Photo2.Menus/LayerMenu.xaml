@@ -18,6 +18,14 @@
         <elements:Expander.MainPage>
             <StackPanel MinHeight="165" Padding="1,2">
 
+                <!--Name-->
+                <TextBlock x:Name="NameTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <Button x:Name="NameButton" Height="26" MinWidth="100" HorizontalAlignment="Left"
+                        Style="{StaticResource AppNumberButtonStyle}"
+                        IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
+                        Content="{x:Bind SelectionViewModel.LayerName, Mode=OneWay}"/>
+
+
                 <!--Opacity-->
                 <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <Border Style="{StaticResource AppRoundedBorderStyle}">
@@ -37,6 +45,7 @@
                     </Button.Tag>
                 </Button>
 
+                
                 <ContentControl Height="4"/>
 
 
@@ -67,20 +76,6 @@
 
                     </StackPanel>
                 </RelativePanel>
-
-                <Grid Padding="2,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="4"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Button x:Name="RemoveButton" Grid.Column="0" Grid.Row="0" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" />
-                    <Button x:Name="DuplicateButton" Grid.Column="2" Grid.Row="0" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" />
-
-                </Grid>
 
 
                 <!--Tag Type-->

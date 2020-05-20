@@ -13,10 +13,10 @@ namespace Retouch_Photo2.Effects
 
         /// <summary> Gets IEffect's page. </summary>
         FrameworkElement Page { get; }
-        /// <summary> Gets IEffect's button. </summary>
-        Control Button { get; }
         /// <summary> Gets button's ToggleSwitch. </summary>
         ToggleSwitch ToggleSwitch { get; }
+        /// <summary> Gets IEffect's button. </summary>
+        EffectButton Button { get; }
 
         /// <summary>
         /// Reset the <see cref="IEffectPage"/>'s value.

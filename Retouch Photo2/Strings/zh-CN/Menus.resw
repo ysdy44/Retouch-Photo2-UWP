@@ -153,20 +153,17 @@
   <data name="Layer" xml:space="preserve">
     <value>图层</value>
   </data>
+  <data name="Layer_Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
   <data name="Layer_BlendMode" xml:space="preserve">
     <value>混合模式</value>
-  </data>
-  <data name="Layer_Duplicate" xml:space="preserve">
-    <value>复制</value>
   </data>
   <data name="Layer_Layers" xml:space="preserve">
     <value>图层</value>
   </data>
   <data name="Layer_Opacity" xml:space="preserve">
     <value>不透明度</value>
-  </data>
-  <data name="Layer_Remove" xml:space="preserve">
-    <value>移除</value>
   </data>
   <data name="Layer_TagType" xml:space="preserve">
     <value>标签类型</value>

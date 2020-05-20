@@ -159,6 +159,15 @@
   <data name="SetupDialog_Title" xml:space="preserve">
     <value>Document Setup</value>
   </data>
+  <data name="RenameDialog_Close" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="RenameDialog_Primary" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="RenameDialog_Title" xml:space="preserve">
+    <value>Rename Layers</value>
+  </data>
   <data name="SetupSizePicker_Height" xml:space="preserve">
     <value>Height</value>
   </data>

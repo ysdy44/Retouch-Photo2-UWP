@@ -19,7 +19,9 @@ namespace Retouch_Photo2.Elements
         Action Overlaid { get; set; }
 
         /// <summary> Gets or sets the title. </summary>
-        String Title { get; set; }
+        string Title { get; set; }
+        /// <summary> Gets or sets the current title. </summary>
+        string CurrentTitle { get; set; }        
         /// <summary> Gets or sets the state. </summary>
         ExpanderState State { get; set; }        
         /// <summary> Gets IMenu's placement mode. </summary>

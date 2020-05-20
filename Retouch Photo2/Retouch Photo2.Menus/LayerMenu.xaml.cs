@@ -37,13 +37,13 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructStrings();
             this.ConstructMenu();
 
+            this.NameButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowRename?.Invoke();
             this.ConstructOpacity();
             this.ConstructBlendMode();
             this.ConstructVisibility();
             this.ConstructTagType();
 
             this.ConstructLayer();
-            this.ConstructLayers();
         }
 
     }
@@ -72,16 +72,17 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._Expander.Title = resource.GetString("/Menus/Layer");
+            this._button.ToolTip.Content =
+            this._Expander.Title =
+            this._Expander.CurrentTitle = resource.GetString("/Menus/Layer");
+
+            this.NameTextBlock.Text = resource.GetString("/Menus/Layer_Name");
 
             this.OpacityTextBlock.Text = resource.GetString("/Menus/Layer_Opacity");
 
             this.BlendModeTextBlock.Text = resource.GetString("/Menus/Layer_BlendMode");
 
             this.LayersTextBlock.Text = resource.GetString("/Menus/Layer_Layers");
-
-            this.RemoveButton.Content = resource.GetString("/Menus/Layer_Remove");
-            this.DuplicateButton.Content = resource.GetString("/Menus/Layer_Duplicate");
 
             this.TagTypeTextBlock.Text = resource.GetString("/Menus/Layer_TagType");
         }
@@ -170,6 +171,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.BlendModeComboBox.Mode = this.SelectionViewModel.BlendMode;
 
                 this._Expander.IsSecondPage = true;
+                this._Expander.CurrentTitle = this.BlendModeTextBlock.Text;
             };
             this.BlendModeComboBox.ModeChanged += (s, mode) =>
             {
@@ -270,34 +272,6 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
         }
-
-
-        private void ConstructLayers()
-        {
-
-            //Duplicate
-            this.DuplicateButton.Click += (s, e) =>
-            {
-                IList<ILayer> layers = this.ViewModel.Layers.GetAllSelectedLayers();
-                IEnumerable<ILayer> duplicateLayers = from i in layers select i.Clone(this.ViewModel.CanvasDevice);
-
-                this.ViewModel.Layers.MezzanineRangeOnFirstSelectedLayer(duplicateLayers.ToList());
-                this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
-
-                this.SelectionViewModel.SetMode(this.ViewModel.Layers);
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            //Remove
-            this.RemoveButton.Click += (s, e) =>
-            {
-                this.ViewModel.Layers.RemoveAllSelectedLayers();
-                this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
-
-                this.SelectionViewModel.SetMode(this.ViewModel.Layers);
-                this.ViewModel.Invalidate();//Invalidate
-            };
-
-        }
-
+        
     }
 }

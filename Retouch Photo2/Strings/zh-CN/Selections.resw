@@ -126,6 +126,9 @@
   <data name="Edit_Copy" xml:space="preserve">
     <value>复制</value>
   </data>
+  <data name="Edit_Duplicate" xml:space="preserve">
+    <value>副本</value>
+  </data>
   <data name="Edit_Cut" xml:space="preserve">
     <value>剪切</value>
   </data>

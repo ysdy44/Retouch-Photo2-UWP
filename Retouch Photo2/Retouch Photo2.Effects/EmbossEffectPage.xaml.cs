@@ -67,7 +67,7 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Text = resource.GetString("/Effects/Emboss");
+            this.Button.Text = resource.GetString("/Effects/Emboss");
 
             this.RadiusTextBlock.Text = resource.GetString("/Effects/Emboss_Radius");
             this.AngleTextBlock.Text = resource.GetString("/Effects/Emboss_Angle");
@@ -76,9 +76,8 @@ namespace Retouch_Photo2.Effects.Models
         //@Content
         public EffectType Type => EffectType.Emboss;
         public FrameworkElement Page => this;
-        public Control Button => this._button;
-        public ToggleSwitch ToggleSwitch => this._button.ToggleSwitch;
-        private EffectButton _button = new EffectButton
+        public ToggleSwitch ToggleSwitch => this.Button.ToggleSwitch;
+        public EffectButton Button { get; } = new EffectButton
         {
             Icon = new EmbossIcon()
         };

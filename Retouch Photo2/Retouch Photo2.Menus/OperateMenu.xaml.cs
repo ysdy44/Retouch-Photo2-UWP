@@ -85,9 +85,10 @@ namespace Retouch_Photo2.Menus.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this._button.ToolTip.Content = resource.GetString("/Menus/Operate");
-            this._Expander.Title = resource.GetString("/Menus/Operate");
+            
+            this._button.ToolTip.Content =
+            this._Expander.Title =
+            this._Expander.CurrentTitle = resource.GetString("/Menus/Operate");
 
             this.TransformTextBlock.Text = resource.GetString("/Operates/Transform");
             this.FlipHorizontalToolTip.Content = resource.GetString("/Operates/Transform_FlipHorizontal");

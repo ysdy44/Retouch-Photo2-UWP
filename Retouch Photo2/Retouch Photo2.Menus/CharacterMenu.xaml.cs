@@ -89,8 +89,9 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content = resource.GetString("/Menus/Character");
-            this._Expander.Title = resource.GetString("/Menus/Character");
+            this._button.ToolTip.Content = 
+            this._Expander.Title =
+            this._Expander.CurrentTitle = resource.GetString("/Menus/Character");
 
             this.FontAlignmentTextBlock.Text = resource.GetString("/Characters/FontAlignment");
                         
@@ -228,6 +229,7 @@ namespace Retouch_Photo2.Menus.Models
             {
                 this.CharacterState = CharacterState.FontWeight;
                 this._Expander.IsSecondPage = true;
+                this._Expander.CurrentTitle = this.FontWeightTextBlock.Text;
             };
 
             this.FontWeightControl.WeightChanged += (s, fontWeight) =>
@@ -260,6 +262,7 @@ namespace Retouch_Photo2.Menus.Models
             {
                 this.CharacterState = CharacterState.FontFamily;
                 this._Expander.IsSecondPage = true;
+                this._Expander.CurrentTitle = this.FontFamilyTextBlock.Text;
             };
             
             this.FontFamilyListView.ItemClick += (s, e) =>
@@ -297,6 +300,7 @@ namespace Retouch_Photo2.Menus.Models
             {
                 this.CharacterState = CharacterState.FontSize;
                 this._Expander.IsSecondPage = true;
+                this._Expander.CurrentTitle = this.FontSizeTextBlock.Text;
             };
             
             this.FontSizePicker.ValueChange += (s, value) => this.SetFontSize(value);

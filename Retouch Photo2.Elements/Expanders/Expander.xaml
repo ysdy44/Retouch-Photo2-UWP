@@ -44,6 +44,31 @@
         </MenuFlyout>
 
         <!--Storyboard-->
+        <Storyboard x:Name="TitleShowStoryboard">
+            <DoubleAnimation Storyboard.TargetName="BackButton" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2" >
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="TitleTransform" Storyboard.TargetProperty="X" From="-40" To="0" Duration="0:0:0.2" >
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="TitleFadeStoryboard">
+            <DoubleAnimation Storyboard.TargetName="BackButton" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2" >
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="TitleTransform" Storyboard.TargetProperty="X" From="0" To="-40" Duration="0:0:0.2">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        
         <Storyboard x:Name="WidthStoryboard222" >
             <DoubleAnimation x:Name="WidthKeyFrames222" To="222" Duration="0:0:0.1" EnableDependentAnimation ="True">
                 <DoubleAnimation.EasingFunction>
@@ -149,9 +174,6 @@
                 <VisualState x:Name="FlyoutShow">
                     <VisualState.Setters >
 
-                        <!--Title-->
-                        <Setter Target = "TitleTextBlock.Visibility" Value="Visible"/>
-
                         <!--Button-->
                         <Setter Target = "StateButton.Visibility" Value="Visible"/>
                         <Setter Target = "ResetButton.Visibility" Value="Collapsed"/>
@@ -166,9 +188,6 @@
                 <VisualState x:Name="FlyoutShowSecondPage">
                     <VisualState.Setters >
 
-                        <!--Button-->
-                        <Setter Target = "BackButton.Visibility" Value="Visible"/>
-
                         <!--Body-->
                         <Setter Target = "SecondPageBorder.Visibility" Value="Visible"/>
 
@@ -178,9 +197,6 @@
                 <!--OverlayNotExpanded-->
                 <VisualState x:Name="OverlayNotExpanded">
                     <VisualState.Setters >
-
-                        <!--Title-->
-                        <Setter Target = "TitleTextBlock.Visibility" Value="Visible"/>
 
                         <!--Button-->
                         <Setter Target = "CloseButton.Visibility" Value="Visible"/>
@@ -194,9 +210,6 @@
                 <!--Overlay-->
                 <VisualState x:Name="Overlay">
                     <VisualState.Setters >
-
-                        <!--Title-->
-                        <Setter Target = "TitleTextBlock.Visibility" Value="Visible"/>
 
                         <!--Button-->
                         <Setter Target = "CloseButton.Visibility" Value="Visible"/>
@@ -212,9 +225,6 @@
                 <!--OverlaySecondPage-->
                 <VisualState x:Name="OverlaySecondPage">
                     <VisualState.Setters >
-
-                        <!--Button-->
-                        <Setter Target = "BackButton.Visibility" Value="Visible"/>
 
                         <!--Body-->
                         <Setter Target = "SecondPageBorder.Visibility" Value="Visible"/>
@@ -252,38 +262,29 @@
                 <Grid x:Name="TitleGrid"
                           apiContractNotPresent5:Background="{ThemeResource AppBackground}"
                           apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
 
-                    <TextBlock x:Name="TitleTextBlock" Visibility="Collapsed" Grid.ColumnSpan="3" Margin="12,0,12,0" TextTrimming="CharacterEllipsis" FontSize="24" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                    <StackPanel x:Name="TitleStackPanel" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <StackPanel.RenderTransform>
+                            <TranslateTransform x:Name="TitleTransform" X="-40"/>
+                        </StackPanel.RenderTransform>
+                        <Button x:Name="BackButton" Opacity="0" Width="40" Style="{StaticResource ButtonStyle}">
+                            <FontIcon Glyph="&#xE830;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </Button>
+                        <TextBlock x:Name="TitleTextBlock" Margin="12,0,12,0" TextTrimming="CharacterEllipsis" FontSize="24" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                    </StackPanel>
 
-                    <Button x:Name="CloseButton" Visibility="Collapsed" Grid.Column="2" Style="{StaticResource ButtonStyle}">
-                        <FontIcon Glyph="&#xF78A;" FontSize="18" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                    </Button>
-
-                    <Button x:Name="StateButton" Visibility="Collapsed" Grid.Column="3" Style="{StaticResource ButtonStyle}">
-                        <FontIcon x:Name="StateIcon" Glyph="&#xE840;" FontWeight="Bold" FontSize="18" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                    </Button>
-
-                    <Button x:Name="BackButton" Visibility="Collapsed" Grid.Column="0" Style="{StaticResource ButtonStyle}">
-
-                        <!--Visibility:Show-->
-                        <animations:Implicit.ShowAnimations>
-                            <animations:TranslationAnimation Duration="0:0:0.4" From="25,0,0" To="0,0,0"/>
-                            <animations:OpacityAnimation Duration="0:0:0.5" From="0.0" To="1.0"/>
-                        </animations:Implicit.ShowAnimations>
-
-                        <FontIcon Glyph="&#xE830;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                    </Button>
-
-                    <Button x:Name="ResetButton" Visibility="Collapsed" Grid.Column="3" Style="{StaticResource ButtonStyle}">
-                        <FontIcon Glyph="&#xE149;" FontSize="18" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                    </Button>
-
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button x:Name="CloseButton" Width="40" Visibility="Collapsed" Style="{StaticResource ButtonStyle}">
+                            <FontIcon Glyph="&#xF78A;" FontSize="18" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                        </Button>
+                        <Button x:Name="StateButton" Width="40" Visibility="Collapsed" Style="{StaticResource ButtonStyle}">
+                            <FontIcon x:Name="StateIcon" Glyph="&#xE840;" FontWeight="Bold" FontSize="18" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                        </Button>
+                        <Button x:Name="ResetButton" Width="40" Visibility="Collapsed" Style="{StaticResource ButtonStyle}">
+                            <FontIcon Glyph="&#xE149;" FontSize="18" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                        </Button>
+                    </StackPanel>
+                    
                 </Grid>
 
 

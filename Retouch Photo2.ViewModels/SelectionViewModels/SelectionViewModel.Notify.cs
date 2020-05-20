@@ -31,6 +31,19 @@ namespace Retouch_Photo2.ViewModels
         private LayerType type = LayerType.None;
 
 
+        /// <summary> <see cref = "SelectionViewModel" />'s name. </summary>
+        public string LayerName
+        {
+            get => this.layerName;
+            set
+            {
+                this.layerName = value;
+                this.OnPropertyChanged(nameof(this.LayerName));//Notify 
+            }
+        }
+        private string layerName = string.Empty;
+        
+
         /// <summary> <see cref = "SelectionViewModel" />'s opacity. </summary>
         public float Opacity { get; set; } = 1.0f;
         /// <summary> Sets the <see cref = "SelectionViewModel.Opacity" />. </summary>

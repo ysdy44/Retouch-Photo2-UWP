@@ -106,6 +106,9 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="EditIcons\DuplicateIcon.xaml.cs">
+      <DependentUpon>DuplicateIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditIcons\ExtractIcon.xaml.cs">
       <DependentUpon>ExtractIcon.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="EditIcons\DuplicateIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditIcons\ExtractIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

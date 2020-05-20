@@ -618,8 +618,6 @@
                             CornerRadius="3" 
                             BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{TemplateBinding BorderBrush}"   
-                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
-                            VerticalAlignment="{TemplateBinding VerticalAlignment}" 
                             Background="{TemplateBinding Background}" >
 
                         <VisualStateManager.VisualStateGroups>

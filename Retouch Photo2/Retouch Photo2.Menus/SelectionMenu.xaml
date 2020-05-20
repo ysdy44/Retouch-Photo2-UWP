@@ -27,6 +27,7 @@
                     
                     <TextBlock x:Name="EditTextBlock" Text="Edit" Style="{StaticResource AppTextBlockStyle}"/>
                     <Button x:Name="CutButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="DuplicateButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
                     <Button x:Name="CopyButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
                     <Button x:Name="PasteButton" Padding="0" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
                     <Button x:Name="ClearButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>

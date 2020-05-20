@@ -52,7 +52,7 @@ namespace Retouch_Photo2.Tools
                 {
                     //History
                     var previous = layer.SelectMode;
-                    history.Undos.Push(() => layer.SelectMode = SelectMode.UnSelected);
+                    history.Undos.Push(() => layer.SelectMode = previous);
 
                     layer.SelectMode = SelectMode.UnSelected;
                 }
@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Tools
             {
                 //History
                 var previous = selectedLayer.SelectMode;
-                history.Undos.Push(() => selectedLayer.SelectMode = SelectMode.Selected);
+                history.Undos.Push(() => selectedLayer.SelectMode = previous);
 
                 selectedLayer.SelectMode = SelectMode.Selected;
             }
@@ -88,7 +88,7 @@ namespace Retouch_Photo2.Tools
                     {
                         //History
                         var previous = layer.SelectMode;
-                        history.Undos.Push(() => layer.SelectMode = SelectMode.UnSelected);
+                        history.Undos.Push(() => layer.SelectMode = previous);
 
                         layer.SelectMode = SelectMode.UnSelected;
                     }
@@ -111,7 +111,7 @@ namespace Retouch_Photo2.Tools
             {
                 //History
                 var previous = selectedLayer.SelectMode;
-                history.Undos.Push(() => selectedLayer.SelectMode = SelectMode.Selected);
+                history.Undos.Push(() => selectedLayer.SelectMode = previous);
 
                 selectedLayer.SelectMode = SelectMode.Selected;
             }
@@ -132,7 +132,7 @@ namespace Retouch_Photo2.Tools
             {
                 //History
                 var previous = selectedLayer.SelectMode;
-                history.Undos.Push(() => selectedLayer.SelectMode = SelectMode.UnSelected);
+                history.Undos.Push(() => selectedLayer.SelectMode = previous);
 
                 selectedLayer.SelectMode = SelectMode.UnSelected;
             }
@@ -158,7 +158,7 @@ namespace Retouch_Photo2.Tools
                     {
                         //History
                         var previous = layer.SelectMode;
-                        history.Undos.Push(() => layer.SelectMode = SelectMode.UnSelected);
+                        history.Undos.Push(() => layer.SelectMode = previous);
 
                         layer.SelectMode = SelectMode.UnSelected;
                     }

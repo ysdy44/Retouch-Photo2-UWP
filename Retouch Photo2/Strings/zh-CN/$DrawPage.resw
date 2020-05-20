@@ -168,6 +168,15 @@
   <data name="Setup_ToolTip" xml:space="preserve">
     <value>设定</value>
   </data>
+  <data name="RenameDialog_Close" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="RenameDialog_Primary" xml:space="preserve">
+    <value>重命名</value>
+  </data>
+  <data name="RenameDialog_Title" xml:space="preserve">
+    <value>重命名图层</value>
+  </data>
   <data name="Snap" xml:space="preserve">
     <value>吸附</value>
   </data>

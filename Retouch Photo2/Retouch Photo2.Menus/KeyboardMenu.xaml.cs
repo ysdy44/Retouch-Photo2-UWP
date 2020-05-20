@@ -20,9 +20,9 @@ namespace Retouch_Photo2.Menus.Models
         //Strings
         private void ConstructStrings()
         {
-            //ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this._Expander.Title = "Keyboard";//resource.GetString("/Menus/Keyboard");
+            this._button.ToolTip.Content =
+            this._Expander.Title =
+            this._Expander.CurrentTitle = "Keyboard";
         }
 
         //Menu

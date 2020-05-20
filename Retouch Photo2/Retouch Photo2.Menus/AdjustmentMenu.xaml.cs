@@ -189,6 +189,7 @@ namespace Retouch_Photo2.Menus.Models
             {
                 this.AdjustmentPageOrFilters = false;
                 this._Expander.IsSecondPage = true;
+                this._Expander.CurrentTitle = (string)this.FiltersButton.Content;
             };
         }
 
@@ -205,6 +206,7 @@ namespace Retouch_Photo2.Menus.Models
             this.AdjustmentPageOrFilters = true;
             this._Expander.IsSecondPage = true;
             this._Expander.ResetButtonVisibility = Visibility.Visible;
+            this._Expander.CurrentTitle = adjustment.Text;
 
             this.Adjustment = adjustment;
         }
@@ -255,8 +257,9 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content = resource.GetString("/Menus/Adjustment");
-            this._Expander.Title = resource.GetString("/Menus/Adjustment");
+            this._button.ToolTip.Content = 
+            this._Expander.Title = 
+            this._Expander.CurrentTitle = resource.GetString("/Menus/Adjustment");
 
             this.ZeroTextBlock.Text = resource.GetString("/Menus/Adjustment_ZeroTip");
             this.DisableTextBlock.Text = resource.GetString("/Menus/Adjustment_DisableTip");
