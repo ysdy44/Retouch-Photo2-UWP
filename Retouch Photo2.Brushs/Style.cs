@@ -41,8 +41,14 @@ namespace Retouch_Photo2.Brushs
         public CanvasStrokeStyle StartingStrokeStyle { get; private set; }
         /// <summary> Cache the <see cref="Style.StrokeStyle"/>. </summary>
         void CacheStrokeStyle() => this.StartingStrokeStyle = this.StrokeStyle.Clone();
-
-
+               
+        /// <summary> Gets or sets Style's transparency. </summary>
+        public IBrush Transparency = new BrushBase();
+        /// <summary> The cache of <see cref="Style.Transparency"/>. </summary>
+        public IBrush StartingTransparency { get; private set; }
+        /// <summary> Cache the <see cref="Style.Transparency"/>. </summary>
+        public void CacheTransparency() => this.StartingTransparency = this.Transparency.Clone();
+        
         //@Interface
         /// <summary>
         ///  Cache the style's transformer.
@@ -78,38 +84,6 @@ namespace Retouch_Photo2.Brushs
                 this.Fill.TransformAdd(vector);
                 this.Stroke.TransformAdd(vector);
             }
-        }
-
-
-        /// <summary>
-        /// Fill a geometry with style.
-        /// </summary>
-        /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="drawingSession"> The drawing-session. </param>
-        /// <param name="geometry"> The source geometry. </param>
-        /// <param name="canvasToVirtualMatrix"> The canvas-virtual-matrix. </param>
-        public void FillGeometry(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, CanvasGeometry geometry, Matrix3x2 canvasToVirtualMatrix)
-        {
-            if (this.Fill.Type == BrushType.None) return;
-
-            ICanvasBrush canvasBrush = this.Fill.GetICanvasBrush(resourceCreator, canvasToVirtualMatrix);
-            drawingSession.FillGeometry(geometry, canvasBrush);
-        }
-        /// <summary>
-        /// Draw a geometry with style.
-        /// </summary>
-        /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="drawingSession"> The drawing-session. </param>
-        /// <param name="geometry"> The source geometry. </param>
-        /// <param name="canvasToVirtualMatrix"> The canvas-virtual-matrix. </param>
-        public void DrawGeometry(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, CanvasGeometry geometry, Matrix3x2 canvasToVirtualMatrix)
-        {
-            if (this.Stroke.Type == BrushType.None) return;
-            if (this.StrokeWidth == 0) return;
-
-            ICanvasBrush canvasBrush = this.Stroke.GetICanvasBrush(resourceCreator, canvasToVirtualMatrix);
-            float strokeWidth = this.StrokeWidth * (canvasToVirtualMatrix.M11 + canvasToVirtualMatrix.M22) / 2;
-            drawingSession.DrawGeometry(geometry, canvasBrush, strokeWidth, this.StrokeStyle);
         }
 
 

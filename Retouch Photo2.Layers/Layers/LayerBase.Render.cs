@@ -1,9 +1,11 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
+using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Effects;
 using System.Collections.Generic;
 using System.Numerics;
@@ -23,9 +25,15 @@ namespace Retouch_Photo2.Layers
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
             {
+                //Stroke
                 CanvasGeometry geometry = this.CreateGeometry(resourceCreator, canvasToVirtualMatrix);
-                //Fill
-                this.Style.FillGeometry(resourceCreator, drawingSession, geometry, canvasToVirtualMatrix);
+               
+                // Fill a geometry with style.
+                if (this.Style.Fill.Type != BrushType.None)
+                {
+                    ICanvasBrush canvasBrush = this.Style.Fill.GetICanvasBrush(resourceCreator, canvasToVirtualMatrix);
+                    drawingSession.FillGeometry(geometry, canvasBrush);
+                }
 
 
                 //CanvasActiveLayer
@@ -43,8 +51,16 @@ namespace Retouch_Photo2.Layers
 
 
                 //Stroke
-                this.Style.DrawGeometry(resourceCreator, drawingSession, geometry, canvasToVirtualMatrix);
-
+                // Draw a geometry with style.
+                if (this.Style.Stroke.Type != BrushType.None)
+                {
+                    if (this.Style.StrokeWidth != 0)
+                    {
+                        ICanvasBrush canvasBrush = this.Style.Stroke.GetICanvasBrush(resourceCreator, canvasToVirtualMatrix);
+                        float strokeWidth = this.Style.StrokeWidth * (canvasToVirtualMatrix.M11 + canvasToVirtualMatrix.M22) / 2;
+                        drawingSession.DrawGeometry(geometry, canvasBrush, strokeWidth, this.Style.StrokeStyle);
+                    }
+                }
             }
 
             return command;

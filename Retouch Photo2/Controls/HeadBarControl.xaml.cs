@@ -93,20 +93,20 @@ namespace Retouch_Photo2.Controls
             this._DocumentButton.Content = resource.GetString("/$DrawPage/Document");
             this._DocumentUnSaveButton.Content = resource.GetString("/$DrawPage/DocumentUnSave");
 
+            this._ExportToolTip.Content =
             this._ExportButton.Text = resource.GetString("/$DrawPage/Export");
-            this._ExportToolTip.Content = resource.GetString("/$DrawPage/Export");
+            this._UndoToolTip.Content =
             this._UndoButton.Text = resource.GetString("/$DrawPage/Undo");
-            this._UndoToolTip.Content = resource.GetString("/$DrawPage/Undo");
-            //this._RedoButton.Text = resourceLoader.GetString("/$DrawPage/Redo");
             //this.RedoToolTip.Content = resourceLoader.GetString("/$DrawPage/Redo");
+            //this._RedoButton.Text =
+            this._SetupToolTip.Content =
             this._SetupButton.Text = resource.GetString("/$DrawPage/Setup");
-            this._SetupToolTip.Content = resource.GetString("/$DrawPage/Setup");
+            this._SnapToolTip.Content =
             this._SnapButton.Text = resource.GetString("/$DrawPage/Snap");
-            this._SnapToolTip.Content = resource.GetString("/$DrawPage/Snap");
+            this._RulerToolTip.Content =
             this._RulerButton.Text = resource.GetString("/$DrawPage/Ruler");
-            this._RulerToolTip.Content = resource.GetString("/$DrawPage/Ruler");
+            this._FullScreenToolTip.Content =
             this._FullScreenButton.Text = resource.GetString("/$DrawPage/FullScreen");
-            this._FullScreenToolTip.Content = resource.GetString("/$DrawPage/FullScreen");
             this._TipButton.Text = resource.GetString("/$DrawPage/Tip");
         }
     }

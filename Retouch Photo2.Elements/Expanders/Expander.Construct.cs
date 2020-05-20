@@ -89,12 +89,17 @@ namespace Retouch_Photo2.Elements
             Storyboard.SetTargetProperty(this.HeightKeyFramesMainToSecond, "(UIElement.Height)");
             Storyboard.SetTarget(this.HeightKeyFramesSecondToMain, this.HeightRectangle);
             Storyboard.SetTargetProperty(this.HeightKeyFramesSecondToMain, "(UIElement.Height)");
-
+            
+            this.HeightKeyFramesZeroToMain.Completed += (s, e) => this.HeightStretch();
+            this.HeightKeyFramesZeroToMain.Completed += (s, e) => this.HeightStretch();
+            this.HeightKeyFramesMainToSecond.Completed += (s, e) => this.HeightStretch();
+            this.HeightKeyFramesSecondToMain.Completed += (s, e) => this.HeightStretch();
+            
             this.HeightKeyFramesZeroToMain.From = 0;
             this.HeightKeyFramesZeroToSecond.From = 0;
             this.HeightKeyFramesMainToZero.To = 0;
             this.HeightKeyFramesSecondToZero.To = 0;
-
+            
             this.MainPageBorder.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
@@ -116,5 +121,12 @@ namespace Retouch_Photo2.Elements
                 this.HeightKeyFramesSecondToMain.From = height;
             };
         }
+
+        private void HeightStretch()
+        {
+            this.HeightRectangle.VerticalAlignment = VerticalAlignment.Stretch;
+            this.HeightRectangle.Height = double.NaN;
+        }
+
     }
 }

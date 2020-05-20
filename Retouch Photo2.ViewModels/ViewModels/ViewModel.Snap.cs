@@ -34,10 +34,12 @@ namespace Retouch_Photo2.ViewModels
 
             //NodeRadius
             float scale = this.CanvasTransformer.Scale;
-            this.VectorBorderSnap.NodeRadius = FanKit.Math.NodeRadius / scale;
+            this.VectorVectorSnap.NodeRadius = FanKit.Math.NodeRadius / scale;
         }
         public void VectorBorderSnapStarted(Transformer transformer)
         {
+            this.VectorBorderSnap.Destinations = this.GetSnapDestinations(transformer);
+
             //NodeRadius
             float scale = this.CanvasTransformer.Scale;
             this.VectorBorderSnap.NodeRadius = FanKit.Math.NodeRadius / scale;
@@ -59,8 +61,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 this.BorderBorderSnap.Destinations = this.GetSnapDestinations(firstLayer);
             }
-
-
+            
             //NodeRadius
             float scale = this.CanvasTransformer.Scale;
             this.BorderBorderSnap.NodeRadius = FanKit.Math.NodeRadius / scale;

@@ -64,7 +64,7 @@ namespace Retouch_Photo2.Menus.Models
 
             this._button.ToolTip.Content =
             this._Expander.Title =
-            this._Expander.CurrentTitle = "Style"; resource.GetString("/Menus/Style");
+            this._Expander.CurrentTitle = "Style"; //resource.GetString("/Menus/Style");
         }
 
         //Menu

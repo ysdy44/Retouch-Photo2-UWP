@@ -29,16 +29,12 @@ namespace Retouch_Photo2.Elements
                 switch (value)
                 {
                     case ExpanderState.Hide:
-                        this.HeightRectangle.VerticalAlignment = VerticalAlignment.Stretch;
-                        this.HeightRectangle.Height = double.NaN;
-
+                        this.HeightStretch();
                         this.Closed?.Invoke(); //Delegate
                         break;
 
                     case ExpanderState.FlyoutShow:
-                        this.HeightRectangle.VerticalAlignment = VerticalAlignment.Stretch;
-                        this.HeightRectangle.Height = double.NaN;
-
+                        this.HeightStretch();
                         if (this._vsState == ExpanderState.Hide) this.Opened?.Invoke(); //Delegate 
                         break;
 

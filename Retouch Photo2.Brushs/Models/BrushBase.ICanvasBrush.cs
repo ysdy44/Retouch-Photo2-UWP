@@ -67,26 +67,14 @@ namespace Retouch_Photo2.Brushs
 
                         Photo photo = Photo.FindFirstPhoto(photocopier);
                         CanvasBitmap bitmap = photo.Source;
-
-
+                                                
                         float canvasWidth = (float)bitmap.Size.Width;
                         float canvasHeight = (float)bitmap.Size.Height;
                         Vector2 canvasCenter = new Vector2(canvasWidth / 2, canvasHeight / 2);
-
-                        float radian = FanKit.Math.Pi + FanKit.Math.VectorToRadians(center - xPoint);
-                        float xScale = Vector2.Distance(xPoint, center) / canvasWidth * 2;
-                        float yScale = Vector2.Distance(yPoint, center) / canvasHeight * 2;
-
-                        Matrix3x2 matrix2 =
-                            Matrix3x2.CreateTranslation(-canvasCenter) *
-                            Matrix3x2.CreateScale(xScale, yScale) *
-                            Matrix3x2.CreateRotation(radian) *
-                            Matrix3x2.CreateTranslation(center);
-
-
+                        
                         return new CanvasImageBrush(resourceCreator, bitmap)
                         {
-                            Transform = matrix2,
+                            Transform = this.GetimageMatrix(center, xPoint, yPoint, canvasWidth, canvasHeight, canvasCenter),
                             ExtendX = this.Extend,
                             ExtendY = this.Extend,
                         };
@@ -94,6 +82,34 @@ namespace Retouch_Photo2.Brushs
                 default:
                     return null;
             }
+        }
+
+        private Matrix3x2 GetimageMatrix(Vector2 center, Vector2 xPoint, Vector2 yPoint, float canvasWidth, float canvasHeight, Vector2 canvasCenter)
+        {
+            float xScale = Vector2.Distance(xPoint, center) / canvasWidth * 2;
+            float yScale = Vector2.Distance(yPoint, center) / canvasHeight * 2;
+            float radian = 0;
+
+
+            if (yPoint.X == center.X && yPoint.Y < center.Y)
+            {
+                radian = -FanKit.Math.Pi;
+            }
+            else if (xPoint.X == center.X && xPoint.Y < center.Y)
+            {
+                radian = FanKit.Math.PiOver2 + FanKit.Math.Pi;
+            }
+            else
+            {
+                radian = FanKit.Math.Pi + FanKit.Math.VectorToRadians(center - xPoint);
+            }
+
+
+            return
+                 Matrix3x2.CreateTranslation(-canvasCenter) *
+                Matrix3x2.CreateScale(xScale, yScale) *
+                Matrix3x2.CreateRotation(radian) *
+                Matrix3x2.CreateTranslation(center);
         }
 
     }

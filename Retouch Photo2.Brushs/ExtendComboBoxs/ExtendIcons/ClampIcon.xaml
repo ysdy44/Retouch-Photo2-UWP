@@ -9,10 +9,6 @@
     d:DesignWidth="50"
     >
 
-    <Ellipse Width="24" Height="24" StrokeThickness="1" Stroke="{ThemeResource AppStroke}">
-        <Ellipse.Fill>
-            <SolidColorBrush Color="#00A5FF"/>
-        </Ellipse.Fill>
-    </Ellipse>
+    <FontIcon Glyph="&#x25CB;" FontSize="26" FontFamily="Segoe UI Symbol"/>
     
 </UserControl>
