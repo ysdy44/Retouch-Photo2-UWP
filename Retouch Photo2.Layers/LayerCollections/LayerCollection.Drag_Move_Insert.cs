@@ -90,7 +90,7 @@ namespace Retouch_Photo2.Layers
             int index = parentsChildren.IndexOf(destination);
             if (isBottomInsert) index++;
             if (index < 0) index = 0;
-            if (index > parentsChildren.Count) index = parentsChildren.Count;
+            if (index > parentsChildren.Count) index = parentsChildren.Count - 1;
 
             parentsChildren.Remove(source);
             parentsChildren.Insert(index, source);
@@ -123,7 +123,7 @@ namespace Retouch_Photo2.Layers
             int index = parentsChildren.IndexOf(destination);
             if (isBottomInsert) index++;
             if (index < 0) index = 0;
-            if (index > parentsChildren.Count) index = parentsChildren.Count;
+            if (index > parentsChildren.Count) index = parentsChildren.Count - 1;
 
             if (source != null)
             {

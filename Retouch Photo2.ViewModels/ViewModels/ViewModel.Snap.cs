@@ -38,15 +38,16 @@ namespace Retouch_Photo2.ViewModels
         }
         public void VectorBorderSnapStarted(Transformer transformer)
         {
-            this.VectorBorderSnap.Destinations = this.GetSnapDestinations(transformer);
-
             //NodeRadius
             float scale = this.CanvasTransformer.Scale;
             this.VectorBorderSnap.NodeRadius = FanKit.Math.NodeRadius / scale;
         }
         public void VectorBorderSnapStarted(ILayer firstLayer)
         {
-            this.VectorBorderSnap.Destinations = this.GetSnapDestinations(firstLayer);
+            if (firstLayer != null)
+            {
+                this.VectorBorderSnap.Destinations = this.GetSnapDestinations(firstLayer);
+            }
 
             //NodeRadius
             float scale = this.CanvasTransformer.Scale;
@@ -54,7 +55,11 @@ namespace Retouch_Photo2.ViewModels
         }
         public void BorderBorderSnapStarted(ILayer firstLayer)
         {
-            this.BorderBorderSnap.Destinations = this.GetSnapDestinations(firstLayer);
+            if (firstLayer != null)
+            {
+                this.BorderBorderSnap.Destinations = this.GetSnapDestinations(firstLayer);
+            }
+
 
             //NodeRadius
             float scale = this.CanvasTransformer.Scale;
@@ -73,6 +78,15 @@ namespace Retouch_Photo2.ViewModels
             float height = this.CanvasTransformer.Width;
             yield return new TransformerBorder(width, height);
 
+
+            //Parents
+            if (firstLayer.Parents != null)
+            {
+                Transformer transformer = firstLayer.Parents.Transform.Destination;
+                yield return new TransformerBorder(transformer);
+            }
+
+
             //Layers
             IList<ILayer> layers = this.LayerCollection.GetParentsChildren(firstLayer);
 
@@ -81,7 +95,6 @@ namespace Retouch_Photo2.ViewModels
                 if (layer.IsSelected == false)
                 {
                     Transformer transformer = layer.Transform.Destination;
-
                     yield return new TransformerBorder(transformer);
                 }
             }

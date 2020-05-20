@@ -19,13 +19,12 @@ namespace Retouch_Photo2.Adjustments
             XElement element = new XElement(elementName);
             element.Add(new XAttribute("Name", filterCategory.Name));
 
-            element.Add(new XElement
+            element.Add
             (
-                "Filters",
                 from filter
                 in filterCategory.Filters
                 select XML.SaveFilter("Filter", filter)
-            ));
+            );
 
             return element;
         }
@@ -39,16 +38,13 @@ namespace Retouch_Photo2.Adjustments
         {
             FilterCategory filterCategory = new FilterCategory();
             if (element.Attribute("Name") is XAttribute name) filterCategory.Name = name.Value;
-            
-            if (element.Element("Filters") is XElement filters)
-            {
-                filterCategory.Filters =
-                (
-                    from filter
-                    in filters.Elements()
-                    select XML.LoadFilter(filter)
-                ).ToList();
-            }
+
+            filterCategory.Filters =
+            (
+                from filter
+                in element.Elements()
+                select XML.LoadFilter(filter)
+            ).ToList();
 
             return filterCategory;
         }

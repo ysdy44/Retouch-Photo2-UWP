@@ -212,7 +212,7 @@ namespace Retouch_Photo2.Menus.Models
             this.RotateLeftButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
-                Matrix3x2 matrix = Matrix3x2.CreateRotation(FanKit.Math.PiOver2, transformer.Center);
+                Matrix3x2 matrix = Matrix3x2.CreateRotation(-FanKit.Math.PiOver2, transformer.Center);
 
                 //Selection
                 this.Transformer = transformer * matrix;
@@ -228,7 +228,7 @@ namespace Retouch_Photo2.Menus.Models
             this.RotateRightButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
-                Matrix3x2 matrix = Matrix3x2.CreateRotation(-FanKit.Math.PiOver2, transformer.Center);
+                Matrix3x2 matrix = Matrix3x2.CreateRotation(FanKit.Math.PiOver2, transformer.Center);
 
                 //Selection
                 this.Transformer = transformer * matrix;

@@ -26,9 +26,27 @@ namespace Retouch_Photo2.Layers
                 CanvasGeometry geometry = this.CreateGeometry(resourceCreator, canvasToVirtualMatrix);
                 //Fill
                 this.Style.FillGeometry(resourceCreator, drawingSession, geometry, canvasToVirtualMatrix);
+
+
+                //CanvasActiveLayer
+                if (this.Children.Count != 0)
+                {
+                    using (drawingSession.CreateLayer(1, geometry))
+                    {
+                        foreach (ILayer child in this.Children)
+                        {
+                            ICanvasImage childImage = child.GetRender(resourceCreator, previousImage, canvasToVirtualMatrix);
+                            drawingSession.DrawImage(childImage);
+                        }
+                    }
+                }
+
+
                 //Stroke
                 this.Style.DrawGeometry(resourceCreator, drawingSession, geometry, canvasToVirtualMatrix);
+
             }
+
             return command;
         }
 

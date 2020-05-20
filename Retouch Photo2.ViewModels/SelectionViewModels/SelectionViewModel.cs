@@ -14,6 +14,20 @@ namespace Retouch_Photo2.ViewModels
     {
 
         /// <summary>
+        ///  selection-count 
+        /// </summary>
+        public int SelectionCount
+        {
+            get => this.selectionCount;
+            private set
+            {
+                this.selectionCount = value;
+                this.OnPropertyChanged(nameof(this.SelectionCount));//Notify 
+            }
+        }
+        private int selectionCount;
+        
+        /// <summary>
         /// Gets selection-mode by count of checked layers. 
         /// 0>None.
         /// 1>Single.

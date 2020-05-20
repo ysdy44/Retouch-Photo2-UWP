@@ -20,13 +20,12 @@ namespace Retouch_Photo2.Adjustments
             XElement element = new XElement(elementName);
             if (filter.Name != string.Empty) element.Add(new XAttribute("Name", filter.Name));
 
-            element.Add(new XElement
+            element.Add
             (
-                "Adjustments",
                 from adjustment
                 in filter.Adjustments
                 select XML.SaveIAdjustment("Adjustment", adjustment)
-            ));
+            );
 
             return element;
         }
@@ -41,15 +40,12 @@ namespace Retouch_Photo2.Adjustments
             Filter filter = new Filter();
             if (element.Attribute("Name") is XAttribute name) filter.Name = name.Value;
 
-            if (element.Element("Adjustments") is XElement adjustments)
-            {
-                filter.Adjustments =
-                (
-                    from adjustment
-                    in adjustments.Elements()
-                    select XML.LoadIAdjustment(adjustment)
-                ).ToList();
-            }
+            filter.Adjustments =
+            (
+                from adjustment
+                in element.Elements()
+                select XML.LoadIAdjustment(adjustment)
+            ).ToList();
 
             return filter;
         }

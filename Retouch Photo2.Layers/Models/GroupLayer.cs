@@ -62,35 +62,7 @@ namespace Retouch_Photo2.Layers.Models
             return groupLayer;
         }
 
-
-        public override void CacheTransform()
-        {
-            base.CacheTransform();
-
-            foreach (ILayer child in this.Children)
-            {
-                child.CacheTransform();
-            }
-        }
-        public override void TransformMultiplies(Matrix3x2 matrix)
-        {
-            base.TransformMultiplies(matrix);
-
-            foreach (ILayer child in this.Children)
-            {
-                child.TransformMultiplies(matrix);
-            }
-        }
-        public override void TransformAdd(Vector2 vector)
-        {
-            base.TransformAdd(vector);
-
-            foreach (ILayer child in this.Children)
-            {
-                child.TransformAdd(vector);
-            }
-        }
-
+        
 
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
         {
