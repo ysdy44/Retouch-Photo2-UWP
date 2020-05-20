@@ -15,7 +15,6 @@ namespace Retouch_Photo2.Controls
         ViewModel ViewModel => App.ViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
 
         //@Content
@@ -32,6 +31,8 @@ namespace Retouch_Photo2.Controls
         public ExpandAppbarButton UndoButton => this._UndoButton;
         /// <summary> SetupButton. </summary>   
         public ExpandAppbarButton SetupButton => this._SetupButton;
+        /// <summary> RulerButton. </summary>   
+        public ExpandAppbarToggleButton RulerButton => this._RulerButton;
         /// <summary> FullScreenButton. </summary>   
         public ExpandAppbarButton FullScreenButton => this._FullScreenButton;
 

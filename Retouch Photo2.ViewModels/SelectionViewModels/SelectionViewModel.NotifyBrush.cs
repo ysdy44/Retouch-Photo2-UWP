@@ -191,7 +191,7 @@ namespace Retouch_Photo2.ViewModels
 
         /// <summary>
         /// Sets the <see cref="Style"/>,
-        /// switch by <see cref="LayerType"/> to
+        /// switch by <see cref="Retouch_Photo2.Layers.LayerType"/> to
         /// <see cref="SelectionViewModel.GeometryStyle"/>
         /// <see cref="SelectionViewModel.CurveStyle"/>
         /// <see cref="SelectionViewModel.TextStyle"/>

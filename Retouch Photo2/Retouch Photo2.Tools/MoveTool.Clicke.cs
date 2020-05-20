@@ -39,7 +39,7 @@ namespace Retouch_Photo2.Tools
 
         #region Clicke
 
-        ///TODO: <see cref="LayersControl.ItemClick"/> replace
+        //TODO: <see cref="LayersControl.ItemClick"/> replace
         public void ClickeNone()
         {
             //History
@@ -63,7 +63,7 @@ namespace Retouch_Photo2.Tools
 
             this.SelectionViewModel.SetModeNone();//Selection
 
-            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.Layers);
+            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
 
             this.ViewModel.Invalidate();//Invalidate     
         }
@@ -103,7 +103,7 @@ namespace Retouch_Photo2.Tools
 
             this.SelectionViewModel.SetModeSingle(selectedLayer);//Selection
 
-            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.Layers);
+            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
 
             this.ViewModel.Invalidate();//Invalidate     
         }
@@ -125,9 +125,9 @@ namespace Retouch_Photo2.Tools
             //History
             this.ViewModel.Push(history);
             
-            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+            this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
 
-            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.Layers);
+            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
 
             this.ViewModel.Invalidate();//Invalidate
         }
@@ -149,9 +149,9 @@ namespace Retouch_Photo2.Tools
             //History
             this.ViewModel.Push(history);
 
-            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+            this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
 
-            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.Layers);
+            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
 
             this.ViewModel.Invalidate();//Invalidate
         }
@@ -182,7 +182,7 @@ namespace Retouch_Photo2.Tools
 
             this.SelectionViewModel.SetModeSingle(selectedLayer);//Selection
 
-            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.Layers);
+            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
 
             this.ViewModel.Invalidate();//Invalidate
         }
@@ -195,7 +195,7 @@ namespace Retouch_Photo2.Tools
         {
             //Select a layer of the same depth
             ILayer firstLayer = this.SelectionViewModel.GetFirstLayer();
-            IList<ILayer> parentsChildren = this.ViewModel.Layers.GetParentsChildren(firstLayer);
+            IList<ILayer> parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(firstLayer);
             ILayer selectedLayer = parentsChildren.FirstOrDefault((layer) => layer.FillContainsPoint(canvasPoint));
             return selectedLayer;
         }

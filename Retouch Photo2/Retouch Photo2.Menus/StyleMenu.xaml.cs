@@ -35,7 +35,7 @@ namespace Retouch_Photo2.Menus.Models
 
             this.Button.Click += (s, e) =>
             {
-                this.ItemsControl.ItemsSource = sadasd(this.ViewModel.Layers.RootLayers,0);
+                this.ItemsControl.ItemsSource = sadasd(this.ViewModel.LayerCollection.RootLayers,0);
             };
         }
 

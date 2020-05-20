@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Tools
 
         MarqueeCompositeMode MarqueeCompositeMode => this.SettingViewModel.CompositeMode;
         BorderBorderSnap Snap => this.ViewModel.BorderBorderSnap;
-        bool IsSnap => this.ViewModel.IsSnap;
+        bool IsSnap => this.SettingViewModel.IsSnap;
 
 
         Transformer StartingTransformer;

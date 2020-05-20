@@ -252,13 +252,13 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
                     ILayer destination = this.SelectionViewModel.Layer;
-                    IList<ILayer> parentsChildren = this.ViewModel.Layers.GetParentsChildren(destination);
+                    IList<ILayer> parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(destination);
                     if (parentsChildren.Count < 2) return;
 
                     parentsChildren.Remove(destination);
                     parentsChildren.Add(destination);
 
-                    LayerCollection.ArrangeLayersControls(this.ViewModel.Layers);
+                    LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };
@@ -268,7 +268,7 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
                     ILayer destination = this.SelectionViewModel.Layer;
-                    IList<ILayer> parentsChildren = this.ViewModel.Layers.GetParentsChildren(destination);
+                    IList<ILayer> parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(destination);
                     if (parentsChildren.Count < 2) return;
 
                     int index = parentsChildren.IndexOf(destination);
@@ -280,7 +280,7 @@ namespace Retouch_Photo2.Menus.Models
                     parentsChildren.Remove(destination);
                     parentsChildren.Insert(index, destination);
 
-                    LayerCollection.ArrangeLayersControls(this.ViewModel.Layers);
+                    LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };
@@ -290,7 +290,7 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
                     ILayer destination = this.SelectionViewModel.Layer;                    
-                    IList<ILayer> parentsChildren = this.ViewModel.Layers.GetParentsChildren(destination);                    
+                    IList<ILayer> parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(destination);                    
                     if (parentsChildren.Count < 2) return;
 
                     int index = parentsChildren.IndexOf(destination);
@@ -302,7 +302,7 @@ namespace Retouch_Photo2.Menus.Models
                     parentsChildren.Remove(destination);
                     parentsChildren.Insert(index, destination);
 
-                    LayerCollection.ArrangeLayersControls(this.ViewModel.Layers);
+                    LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };
@@ -312,13 +312,13 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
                     ILayer destination = this.SelectionViewModel.Layer;
-                    IList<ILayer> parentsChildren = this.ViewModel.Layers.GetParentsChildren(destination);                    
+                    IList<ILayer> parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(destination);                    
                     if (parentsChildren.Count < 2) return;
 
                     parentsChildren.Remove(destination);
                     parentsChildren.Insert(0, destination);
 
-                    LayerCollection.ArrangeLayersControls(this.ViewModel.Layers);
+                    LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };

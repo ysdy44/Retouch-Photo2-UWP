@@ -74,7 +74,7 @@ namespace Retouch_Photo2.ViewModels
             yield return new TransformerBorder(width, height);
 
             //Layers
-            IList<ILayer> layers = this.Layers.GetParentsChildren(firstLayer);
+            IList<ILayer> layers = this.LayerCollection.GetParentsChildren(firstLayer);
 
             foreach (ILayer layer in layers)
             {

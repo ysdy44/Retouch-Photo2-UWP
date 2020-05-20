@@ -19,16 +19,16 @@ namespace Retouch_Photo2.ViewModels
     {
 
         /// <summary> <see cref = "SelectionViewModel" />'s layer type. </summary>
-        public LayerType Type
+        public LayerType LayerType
         {
-            get => this.type;
+            get => this.layerType;
             set
             {
-                this.type = value;
-                this.OnPropertyChanged(nameof(this.Type));//Notify 
+                this.layerType = value;
+                this.OnPropertyChanged(nameof(this.LayerType));//Notify 
             }
         }
-        private LayerType type = LayerType.None;
+        private LayerType layerType = LayerType.None;
 
 
         /// <summary> <see cref = "SelectionViewModel" />'s name. </summary>

@@ -22,12 +22,13 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
         FillOrStroke FillOrStroke { get => this.SelectionViewModel.FillOrStroke; set => this.SelectionViewModel.FillOrStroke = value; }
 
         VectorBorderSnap Snap => this.ViewModel.VectorBorderSnap;
-        bool IsSnap => this.ViewModel.IsSnap;
+        bool IsSnap => this.SettingViewModel.IsSnap;
 
 
         //@Construct

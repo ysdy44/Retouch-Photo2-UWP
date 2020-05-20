@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Tools
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
 
         VectorBorderSnap Snap => this.ViewModel.VectorBorderSnap;
-        bool IsSnap => this.ViewModel.IsSnap;
+        bool IsSnap => this.SettingViewModel.IsSnap;
         bool IsRatio => this.SettingViewModel.IsRatio;
         bool IsCenter => this.SettingViewModel.IsCenter;
         bool IsStepFrequency => this.SettingViewModel.IsStepFrequency;

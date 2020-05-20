@@ -22,12 +22,13 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
         CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
         NodeCollection Nodes => this.CurveLayer.Nodes;
 
         VectorVectorSnap Snap => this.ViewModel.VectorVectorSnap;
-        bool IsSnap => this.ViewModel.IsSnap;
+        bool IsSnap => this.SettingViewModel.IsSnap;
 
         /// <summary> PenPage's Flyout. </summary>
         public PenModeControl PenFlyout => this._penFlyout;
@@ -47,11 +48,11 @@ namespace Retouch_Photo2.Tools.Models
                 bool isSuccessful = NodeCollection.RemoveCheckedNodes(this.CurveLayer.Nodes);
                 if (isSuccessful == false)
                 {
-                    LayerCollection.RemoveLayer(this.ViewModel.Layers, this.CurveLayer);
+                    LayerCollection.RemoveLayer(this.ViewModel.LayerCollection, this.CurveLayer);
 
-                    this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+                    this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
 
-                    LayerCollection.ArrangeLayersControls(this.ViewModel.Layers);
+                    LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
 
                     this.ViewModel.Invalidate();//Invalidate
                 }

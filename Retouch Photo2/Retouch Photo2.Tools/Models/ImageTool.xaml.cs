@@ -147,7 +147,7 @@ namespace Retouch_Photo2.Tools.Models
                 Transform = new Transform(transformerSource, transformerDestination),
                 Style = this.SelectionViewModel.GeometryStyle
             };
-            LayerCollection.Mezzanine(this.ViewModel.Layers, this.MezzanineLayer);
+            LayerCollection.Mezzanine(this.ViewModel.LayerCollection, this.MezzanineLayer);
 
             this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
@@ -177,19 +177,19 @@ namespace Retouch_Photo2.Tools.Models
                 this.MezzanineLayer.Transform.Destination = transformerDestination;
                 this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
-                foreach (ILayer child in this.ViewModel.Layers.RootLayers)
+                foreach (ILayer child in this.ViewModel.LayerCollection.RootLayers)
                 {
                     child.IsSelected = false;
                 }
                 this.MezzanineLayer.IsSelected = true;
                 this.MezzanineLayer = null;
             }
-            else LayerCollection.RemoveMezzanineLayer(this.ViewModel.Layers, this.MezzanineLayer);//Mezzanine
+            else LayerCollection.RemoveMezzanineLayer(this.ViewModel.LayerCollection, this.MezzanineLayer);//Mezzanine
 
-            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+            this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
             
-            LayerCollection.ArrangeLayersControls(this.ViewModel.Layers);
-            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.Layers);
+            LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }

@@ -13,7 +13,8 @@ namespace Retouch_Photo2.Layers
 
         //@Content
         public FrameworkElement Self => this;
-        public string Text { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
+        public string Text { get => this.NameRun.Text; set => this.NameRun.Text = value; }
+        public string Type { get => this.TypeRun.Text; set => this.TypeRun.Text = value; }
         public object Icon { get => this.IconContentControl.Content; set => this.IconContentControl.Content = value; }
 
 

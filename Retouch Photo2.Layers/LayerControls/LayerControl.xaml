@@ -28,12 +28,7 @@
             <Setter Property="IsHitTestVisible" Value="False"/>
             <Setter Property="Visibility" Value="Collapsed"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="BlueViolet"/>
-            <Setter Property="Background">
-                <Setter.Value>
-                    <SolidColorBrush Opacity="0.4" Color="BlueViolet"/>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="BorderBrush" Value="Red"/>
         </Style>
 
     </UserControl.Resources>
@@ -45,6 +40,7 @@
             <ColumnDefinition Width="30"/>
             <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <!--Selected-->
@@ -56,10 +52,15 @@
         <ContentControl x:Name="IconContentControl" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <!--Text-->
-        <TextBlock x:Name="TextBlock" Grid.Column="3" Margin="8,0" VerticalAlignment="Center"/>
+        <TextBlock x:Name="TextBlock" Grid.Column="3" Margin="2,0" TextTrimming="WordEllipsis" VerticalAlignment="Center">
+            <Run x:Name="NameRun" />
+            (
+            <Run x:Name="TypeRun" />
+            )
+        </TextBlock>
 
         
-        <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Grid.Column="4" Orientation="Horizontal">
 
             <!--Visual-->
             <Button x:Name="VisualButton" Width="30" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
@@ -83,13 +84,31 @@
         </Rectangle>
 
         <!--Overlay-->
-        <Border x:Name="OverlayShowTopBorder" Grid.Column="0" Grid.ColumnSpan="4" Height="14.3" VerticalAlignment="Top" Style="{StaticResource OverlayStyle}">
+        <Border x:Name="OverlayShowTopBorder" Grid.Column="0" Grid.ColumnSpan="5" Height="14.3" VerticalAlignment="Top" Style="{StaticResource OverlayStyle}">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="#FFFF0000" Offset="0"/>
+                    <GradientStop Color="#00FF0000" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
             <FontIcon Glyph="&#x25B2;" FontSize="18" FontFamily="Segoe UI Symbol"/>
         </Border>
-        <Border x:Name="OverlayShowCenterBorder" Grid.Column="1" Grid.ColumnSpan="3" Height="21.4" VerticalAlignment="Center" Style="{StaticResource OverlayStyle}">
+        <Border x:Name="OverlayShowCenterBorder" Grid.Column="0" Grid.ColumnSpan="5" Height="21.4" VerticalAlignment="Center" Style="{StaticResource OverlayStyle}">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                    <GradientStop Color="#00FF0000" Offset="0"/>
+                    <GradientStop Color="#FFFF0000" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
             <FontIcon Glyph="&#x25B6;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
         </Border>
-        <Border x:Name="OverlayShowBottomBorder" Grid.Column="0" Grid.ColumnSpan="4" Height="14.3" VerticalAlignment="Bottom" Style="{StaticResource OverlayStyle}">
+        <Border x:Name="OverlayShowBottomBorder" Grid.Column="0" Grid.ColumnSpan="5" Height="14.3" VerticalAlignment="Bottom" Style="{StaticResource OverlayStyle}">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="#00FF0000" Offset="0"/>
+                    <GradientStop Color="#FFFF0000" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
             <FontIcon Glyph="&#x25BC;" FontSize="18" FontFamily="Segoe UI Symbol"/>
         </Border>
 

@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Layers
                         break;
                     case OverlayMode.Center:
                         {
-                            LayerCollection.Add(destination, source);
+                            LayerCollection.Add(layerCollection, destination, source);
                         }
                         break;
                     case OverlayMode.Bottom:
@@ -68,7 +68,7 @@ namespace Retouch_Photo2.Layers
                         LayerCollection.InsertRange(layerCollection, destination, selectedLayers, isBottomInsert: false);
                         break;
                     case OverlayMode.Center:
-                        LayerCollection.AddRange(destination, selectedLayers);
+                        LayerCollection.AddRange(layerCollection, destination, selectedLayers);
                         break;
                     case OverlayMode.Bottom:
                         LayerCollection.InsertRange(layerCollection, destination, selectedLayers, isBottomInsert: true);
@@ -127,6 +127,8 @@ namespace Retouch_Photo2.Layers
 
             if (source != null)
             {
+                IList<ILayer> sourceParentsChildren = layerCollection.GetParentsChildren(source);
+                sourceParentsChildren.Remove(source);
                 //Insert
                 parentsChildren.Insert(index, source);
             }
@@ -134,6 +136,9 @@ namespace Retouch_Photo2.Layers
             {
                 foreach (ILayer child in sources)
                 {
+                    IList<ILayer> childParentsChildren = layerCollection.GetParentsChildren(child);
+                    childParentsChildren.Remove(child);
+                    //Insert
                     parentsChildren.Insert(index, child);
                 }
             }

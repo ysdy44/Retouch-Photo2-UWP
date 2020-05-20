@@ -111,7 +111,7 @@ namespace Retouch_Photo2
             {
                 Project project = XML.LoadProjectFile(name);
                 this.ViewModel.LoadFromProject(project);
-                this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+                this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
             }
 
             //Transition

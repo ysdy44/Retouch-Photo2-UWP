@@ -150,7 +150,7 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="StackPanel" Storyboard.TargetProperty="HorizontalAlignment">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Stretch" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Visibility">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlockBorder" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Foreground">

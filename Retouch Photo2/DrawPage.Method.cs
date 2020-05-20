@@ -77,7 +77,7 @@ namespace Retouch_Photo2
                 Name = name,
                 Width = width,
                 Height = height,
-                Layers = this.ViewModel.Layers.RootLayers
+                Layers = this.ViewModel.LayerCollection.RootLayers
             };
             await Retouch_Photo2. XML.SaveProjectFile(zipFolder, project);
 
@@ -86,7 +86,7 @@ namespace Retouch_Photo2
             await FileUtil.SaveThumbnailFile(zipFolder, thumbnail);
 
             //Save photos file and Move photo file.
-            IEnumerable<Photocopier> savedPhotocopiers = LayerCollection.GetPhotocopiers(this.ViewModel.Layers);
+            IEnumerable<Photocopier> savedPhotocopiers = LayerCollection.GetPhotocopiers(this.ViewModel.LayerCollection);
             IEnumerable<Photo> savedPhotos = from photo in Photo.Instances where savedPhotocopiers.Any(p => photo.Equals(p)) select photo;
             await XML.SavePhotoFile(zipFolder, savedPhotos);
             foreach (Photo photo in savedPhotos)
@@ -110,8 +110,8 @@ namespace Retouch_Photo2
 
             //Clear
             this.SelectionViewModel.SetModeNone();
-            this.ViewModel.Layers.RootLayers.Clear();
-            this.ViewModel.Layers.RootControls.Clear();
+            this.ViewModel.LayerCollection.RootLayers.Clear();
+            this.ViewModel.LayerCollection.RootControls.Clear();
         }
     }
 }

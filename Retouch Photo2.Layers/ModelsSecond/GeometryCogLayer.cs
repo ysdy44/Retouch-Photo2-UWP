@@ -34,7 +34,7 @@ namespace Retouch_Photo2.Layers.Models
             base.Control = new LayerControl(this)
             {
                 Icon = new GeometryCogIcon(),
-                Text = this.ConstructStrings(),
+                Type = this.ConstructStrings(),
             };
         }
               

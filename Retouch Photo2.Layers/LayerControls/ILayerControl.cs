@@ -8,6 +8,7 @@ namespace Retouch_Photo2.Layers
         FrameworkElement Self { get; }
         Visibility Visibility { get; set; }
         string Text { get; set; }
+        string Type { get; set; }
         object Icon { get; set; }
 
         int ControlHeight { get; set; }

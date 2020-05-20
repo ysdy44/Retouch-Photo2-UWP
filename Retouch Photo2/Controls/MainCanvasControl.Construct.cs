@@ -70,7 +70,7 @@ namespace Retouch_Photo2.Controls
                             this._drawToolAndBound(sender, args.DrawingSession);
 
                             //Ruler
-                            if (this.ViewModel.IsRuler)
+                            if (this.SettingViewModel.IsRuler)
                             {
                                 args.DrawingSession.DrawRuler(this.ViewModel.CanvasTransformer);
                             }

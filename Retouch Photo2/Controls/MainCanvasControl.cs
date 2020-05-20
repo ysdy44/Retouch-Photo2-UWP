@@ -19,6 +19,7 @@ namespace Retouch_Photo2.Controls
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
         bool _isSingleStarted;
         Vector2 _singleStartingPoint;
@@ -76,9 +77,9 @@ namespace Retouch_Photo2.Controls
         {
             ICanvasImage previousImage = new ColorSourceEffect { Color = Colors.White };
 
-            for (int i = this.ViewModel.Layers.RootLayers.Count - 1; i >= 0; i--)
+            for (int i = this.ViewModel.LayerCollection.RootLayers.Count - 1; i >= 0; i--)
             {
-                ILayer currentLayer = this.ViewModel.Layers.RootLayers[i];
+                ILayer currentLayer = this.ViewModel.LayerCollection.RootLayers[i];
                 previousImage = LayerBase.Render(this.ViewModel.CanvasDevice, currentLayer, previousImage, canvasToVirtualMatrix);
             }
 
@@ -97,7 +98,7 @@ namespace Retouch_Photo2.Controls
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             
             //Bound
-            foreach (ILayer layer in this.ViewModel.Layers.RootLayers)
+            foreach (ILayer layer in this.ViewModel.LayerCollection.RootLayers)
             {
                 if (layer.IsSelected == true)
                 {

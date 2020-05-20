@@ -73,7 +73,7 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
-            this.Type = LayerType.None;
+            this.LayerType = LayerType.None;
             this.LayerName = string.Empty;
             this.SetOpacity(1.0f);
             this.BlendMode = null;
@@ -132,7 +132,7 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
-            this.Type = layer.Type;
+            this.LayerType = layer.Type;
             this.LayerName = layer.Name;
             this.SetOpacity(layer.Opacity);
             this.BlendMode = layer.BlendMode;
@@ -193,7 +193,7 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
-            this.Type = outermost == null ? LayerType.None : outermost.Type;
+            this.LayerType = outermost == null ? LayerType.None : outermost.Type;
             this.SetOpacity(outermost == null ? 1.0f : outermost.Opacity);
             this.BlendMode = outermost?.BlendMode;
             this.SetVisibility(outermost == null ? Visibility.Visible : outermost.Visibility);

@@ -80,7 +80,7 @@
             <elementDrawPages:DrawLayout.FootPage>
                 <controls:FootPageControl x:Name="FootPageControl"       
                     Tool="{x:Bind TipViewModel.Tool, Mode=OneWay}"                         
-                    Type="{x:Bind SelectionViewModel.Type, Mode=OneWay}"                         
+                    Type="{x:Bind SelectionViewModel.LayerType, Mode=OneWay}"                         
                     Mode="{x:Bind SelectionViewModel.SelectionMode, Mode=OneWay}" />
             </elementDrawPages:DrawLayout.FootPage>
 

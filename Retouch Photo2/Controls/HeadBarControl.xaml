@@ -143,7 +143,7 @@
 
                 <elements:ExpandAppBarSapce/>
 
-                <elements:ExpandAppbarToggleButton x:Name="_SnapButton" IsChecked="{x:Bind ViewModel.IsSnap, Mode=TwoWay}">
+                <elements:ExpandAppbarToggleButton x:Name="_SnapButton" IsChecked="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}">
                     <ToolTipService.ToolTip>
                         <ToolTip x:Name="_SnapToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>
@@ -166,7 +166,7 @@
 
                 <elements:ExpandAppBarSapce/>
 
-                <elements:ExpandAppbarToggleButton x:Name="_RulerButton" IsChecked="{x:Bind ViewModel.IsRuler, Mode=TwoWay}">
+                <elements:ExpandAppbarToggleButton x:Name="_RulerButton" IsChecked="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}">
                     <ToolTipService.ToolTip>
                         <ToolTip x:Name="_RulerToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>

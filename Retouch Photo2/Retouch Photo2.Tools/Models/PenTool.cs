@@ -22,12 +22,13 @@ namespace Retouch_Photo2.Tools.Models
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         GeometryTool GeometryTool = new GeometryTool();
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
         CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
         NodeCollection Nodes => this.CurveLayer.Nodes;
 
         VectorVectorSnap Snap => this.ViewModel.VectorVectorSnap;
-        bool IsSnap => this.ViewModel.IsSnap;
+        bool IsSnap => this.SettingViewModel.IsSnap;
 
 
         //@Construct
@@ -285,12 +286,12 @@ namespace Retouch_Photo2.Tools.Models
             if (this._hasPreviewTempLeftPoint)
             {
                 this._hasPreviewTempLeftPoint = false;
-                this.CreateLayer(this.ViewModel.Layers, this._previewLeft, canvasPoint);
+                this.CreateLayer(this.ViewModel.LayerCollection, this._previewLeft, canvasPoint);
             }
             else if (isOutNodeDistance)
             {
                 this._hasPreviewTempLeftPoint = false;
-                this.CreateLayer(this.ViewModel.Layers, canvasStartingPoint, canvasPoint);
+                this.CreateLayer(this.ViewModel.LayerCollection, canvasStartingPoint, canvasPoint);
             }
             else
             {
@@ -337,8 +338,8 @@ namespace Retouch_Photo2.Tools.Models
             this.SelectionViewModel.SetModeSingle(curveLayer);//Selection
 
             //Mezzanine
-            LayerCollection.Mezzanine(this.ViewModel.Layers, curveLayer);
-            LayerCollection.ArrangeLayersControls(this.ViewModel.Layers);
+            LayerCollection.Mezzanine(this.ViewModel.LayerCollection, curveLayer);
+            LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
 
             this.ViewModel.Invalidate();//Invalidate
         }

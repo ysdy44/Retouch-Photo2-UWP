@@ -34,21 +34,21 @@ namespace Retouch_Photo2.ViewModels
             this.CanvasTransformer.Height = project.Height;
             
             //Layers
-            this.Layers.RootLayers.Clear();
+            this.LayerCollection.RootLayers.Clear();
             if (project.Layers != null)
             {
                 foreach (ILayer layer in project.Layers)
                 {
                     if (layer != null)
                     {
-                        this.Layers.RootLayers.Add(layer);
+                        this.LayerCollection.RootLayers.Add(layer);
                     }
                 }
             }
 
             //Arrange
-            LayerCollection.ArrangeLayersControls(this.Layers);
-            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.Layers);
+            LayerCollection.ArrangeLayersControls(this.LayerCollection);
+            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.LayerCollection);
         }
 
 
@@ -57,12 +57,10 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Update the <see cref="ProjectViewItem.RefreshImageSource"/> by <see cref="ViewModel.Name"/>.  </summary>
         public bool IsUpdateThumbnailByName = false;
 
-        /// <summary> Retouch_Photo2's the only ILayers. </summary>
-        public LayerCollection Layers { get; } = new LayerCollection();
 
-
-        #region Invalidate
-
+        /// <summary> Retouch_Photo2's the only LayerCollection. </summary>
+        public LayerCollection LayerCollection { get; } = new LayerCollection();
+        
 
         /// <summary> Retouch_Photo2's the only <see cref = "Microsoft.Graphics.Canvas.UI.Xaml.CanvasDevice" />. </summary>
         public CanvasDevice CanvasDevice { get; } = new CanvasDevice();
@@ -75,10 +73,7 @@ namespace Retouch_Photo2.ViewModels
         public void Invalidate(InvalidateMode mode = InvalidateMode.None) => this.InvalidateAction?.Invoke(mode);
         /// <summary> <see cref = "Action" /> of the <see cref = "ViewModel.Invalidate" />. </summary>
         public Action<InvalidateMode> InvalidateAction { get; set; }
-
-
-        #endregion
-
+        
 
         //@Notify 
         /// <summary> Multicast event for property change notifications. </summary>

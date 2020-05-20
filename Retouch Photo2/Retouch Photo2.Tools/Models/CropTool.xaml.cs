@@ -69,7 +69,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             // The transformer may change after the layer is cropped.
             // So, reset the transformer.
-            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+            this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
         }
 
     }
@@ -115,7 +115,7 @@ namespace Retouch_Photo2.Tools.Models
         public void Started(Vector2 startingPoint, Vector2 point)
         {
             ILayer firstLayer = this.SelectionViewModel.GetFirstLayer();
-            IList<ILayer> parentsChildren = this.ViewModel.Layers.GetParentsChildren(firstLayer);
+            IList<ILayer> parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(firstLayer);
 
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
@@ -195,7 +195,7 @@ namespace Retouch_Photo2.Tools.Models
                     this.Draw(drawingSession, this.SelectionViewModel.Layer, matrix);
                     break;
                 case ListViewSelectionMode.Multiple:
-                    foreach (ILayer layer in this.ViewModel.Layers.RootLayers)
+                    foreach (ILayer layer in this.ViewModel.LayerCollection.RootLayers)
                     {
                         this.Draw(drawingSession, layer, matrix);
                     }

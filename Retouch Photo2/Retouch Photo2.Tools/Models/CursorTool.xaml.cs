@@ -164,12 +164,12 @@ namespace Retouch_Photo2.Tools.Models
                         {
                             //BoxChoose
                             ILayer layer = this.SelectionViewModel.GetFirstLayer();
-                            IList<ILayer> parentsChildren = this.ViewModel.Layers.GetParentsChildren(layer);
+                            IList<ILayer> parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(layer);
                             this.BoxChoose(parentsChildren);
 
-                            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+                            this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
 
-                            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.Layers);
+                            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
                             
                             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                         }

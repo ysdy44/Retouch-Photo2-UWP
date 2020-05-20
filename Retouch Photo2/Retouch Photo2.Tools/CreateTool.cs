@@ -17,15 +17,15 @@ namespace Retouch_Photo2.Tools
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
         ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
 
         VectorBorderSnap Snap => this.ViewModel.VectorBorderSnap;
-        bool IsSnap => this.ViewModel.IsSnap;
+        bool IsSnap => this.SettingViewModel.IsSnap;
         bool IsCenter => this.SettingViewModel.IsCenter;
         bool IsSquare => this.SettingViewModel.IsSquare;
 
@@ -63,7 +63,7 @@ namespace Retouch_Photo2.Tools
 
             //Mezzanine
             this.MezzanineLayer = createLayer(transformer);
-            LayerCollection.Mezzanine(this.ViewModel.Layers, this.MezzanineLayer);
+            LayerCollection.Mezzanine(this.ViewModel.LayerCollection, this.MezzanineLayer);
 
             //Text
             this.ViewModel.SetTextWidthHeight(transformer);
@@ -122,10 +122,10 @@ namespace Retouch_Photo2.Tools
                     this.MezzanineLayer.IsSelected = true;
                     this.MezzanineLayer = null;
                 }
-                else LayerCollection.RemoveMezzanineLayer(this.ViewModel.Layers, this.MezzanineLayer);//Mezzanine
+                else LayerCollection.RemoveMezzanineLayer(this.ViewModel.LayerCollection, this.MezzanineLayer);//Mezzanine
 
-                LayerCollection.ArrangeLayersControls(this.ViewModel.Layers);
-                LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.Layers);
+                LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
 
                 this.ViewModel.TextVisibility = Visibility.Collapsed;//Text
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate

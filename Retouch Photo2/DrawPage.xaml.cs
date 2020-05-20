@@ -108,9 +108,9 @@ namespace Retouch_Photo2
 
                 if (isUndo)
                 {
-                    this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection          
+                    this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection          
 
-                    LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.Layers);
+                    LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
 
                     this.ViewModel.Invalidate();//Invalidate
                 }
@@ -119,7 +119,8 @@ namespace Retouch_Photo2
 
             this.ConstructSetupDialog();
             this.HeadBarControl.SetupButton.Tapped += (s, e) => this.ShowSetupDialog();
-
+            
+            this.HeadBarControl.RulerButton.Tapped += (s, e) => this.ViewModel.Invalidate();//Invalidate
 
             this.UnFullScreenButton.Click += (s, e) => this.SettingViewModel.IsFullScreen = !this.SettingViewModel.IsFullScreen;
             this.HeadBarControl.FullScreenButton.Tapped += (s, e) => this.SettingViewModel.IsFullScreen = !this.SettingViewModel.IsFullScreen;

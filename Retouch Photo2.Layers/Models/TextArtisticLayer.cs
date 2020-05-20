@@ -52,7 +52,7 @@ namespace Retouch_Photo2.Layers.Models
             base.Control = new LayerControl(this)
             {
                 Icon = new TextArtisticIcon(),
-                Text = this.ConstructStrings(),
+                Type = this.ConstructStrings(),
             };
         }
 
