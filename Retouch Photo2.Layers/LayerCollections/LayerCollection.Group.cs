@@ -9,160 +9,104 @@ namespace Retouch_Photo2.Layers
     {
 
         /// <summary>
-        /// Un group a group layer
+        /// Remove a layer from a parents's children,
+        /// and insert to parents's parents's children
+        /// </summary>
+        /// <param name="layer"> The layer. </param>
+        public static bool ReleaseGroupLayer(LayerCollection layerCollection, ILayer child)
+        {
+            ILayer layer = child.Parents;
+            if (layer != null)
+            {
+                IList<ILayer> children = layerCollection.GetParentsChildren(child);
+                IList<ILayer> parentsChildren = layerCollection.GetParentsChildren(layer);
+                int index = parentsChildren.IndexOf(layer);
+                if (index < 0) index = 0;
+
+                children.Remove(child);
+                child.IsSelected = true;
+
+                parentsChildren.Insert(index, child);
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Un group all group layer
         /// </summary>
         /// <param name="groupLayer"> The group layer. </param>
-        public void UnGroupLayer(ILayer groupLayer)
+        public static void UnGroupAllSelectedLayer(LayerCollection layerCollection)
         {
-            ILayer parent = groupLayer.Parents;
-            IList<ILayer> parentChildren = this.GetParentsChildren(groupLayer);
+            //Layers
+            IEnumerable<ILayer> selectedLayers = LayerCollection.GetAllSelectedLayers(layerCollection);
+            ILayer outermost = LayerCollection.FindOutermost_SelectedLayer(selectedLayers);
+            if (outermost == null) return;
+            IList<ILayer> parentsChildren = layerCollection.GetParentsChildren(outermost);
+            int index = parentsChildren.IndexOf(outermost);
+            if (index < 0) index = 0;
 
-            int index = parentChildren.IndexOf(groupLayer);
 
-            foreach (ILayer child in groupLayer.Children)
+            do
             {
-                child.Parents = parent;
-                child.SelectMode = SelectMode.Selected;
-                parentChildren.Insert(index, child);
-            }
-            groupLayer.Children.Clear();
-            parentChildren.Remove(groupLayer);
+                ILayer groupLayer = selectedLayers.FirstOrDefault(l => l.Type == LayerType.Group);
+                if (groupLayer == null) break;
+
+                //Insert
+                foreach (ILayer child in groupLayer.Children)
+                {
+                    child.IsSelected = true;
+                    parentsChildren.Insert(index, child);
+                }
+                groupLayer.Children.Clear();
+
+                //Remove
+                {
+                    IList<ILayer> groupLayerParentsChildren = layerCollection.GetParentsChildren(groupLayer);
+                    groupLayerParentsChildren.Remove(groupLayer);
+                }
+
+            } while (selectedLayers.Any(l => l.Type == LayerType.Group) == false);
         }
 
 
         /// <summary>
         /// Group all selected layers.
         /// </summary>
-        public void GroupAllSelectedLayers()
+        public static void GroupAllSelectedLayers(LayerCollection layerCollection)
         {
             //Layers
-            ILayer parents = this._findOutermostSelectedLayerParents();
-            IList<ILayer> parentsChildren = (parents == null) ? this.RootLayers : parents.Children;
-
-            //Insert
-            ILayer insertIayer = parentsChildren .FirstOrDefault(e => e.SelectMode == SelectMode.Selected);
-            if (insertIayer == null) return;
-            int insertIndex = parentsChildren .IndexOf(insertIayer);
+            IEnumerable<ILayer> selectedLayers = LayerCollection.GetAllSelectedLayers(layerCollection);
+            ILayer outermost = LayerCollection.FindOutermost_SelectedLayer(selectedLayers);
+            if (outermost == null) return;
+            IList<ILayer> parentsChildren = layerCollection.GetParentsChildren(outermost);
+            int index = parentsChildren.IndexOf(outermost);
+            if (index < 0) index = 0;
 
             //GroupLayer
-            GroupLayer groupLayer = this._createGroupLayer(insertIayer);
-            groupLayer.Parents = parents;
-
-            //Temp
-            {
-                IList<ILayer> tempGrouplayers = this._createTempGrouplayers();
-                if (tempGrouplayers.Count == 0) return;
-                this._addLayersToGroupLayer(groupLayer, tempGrouplayers);
-
-                IEnumerable<Transformer> transformers = from l in tempGrouplayers select l.GetActualDestinationWithRefactoringTransformer;
-                TransformerBorder border = new TransformerBorder(transformers);
-                Transformer transformer = border.ToTransformer();
-                groupLayer.Transform = new Transform(transformer);
-            }
-
-            //Arrange
-            {
-                this._noneAllLayers(this.RootLayers);
-
-                parentsChildren .Insert(insertIndex, groupLayer);
-                groupLayer.SelectMode = SelectMode.Selected;
-                groupLayer.ExpandMode = ExpandMode.UnExpand;
-            }
-        }
-
-        private GroupLayer _createGroupLayer(ILayer insertIayer)
-        {
-            ILayer insertParents = insertIayer.Parents;
-
+            IEnumerable<Transformer> transformers = from l in selectedLayers select l.GetActualDestinationWithRefactoringTransformer;
+            TransformerBorder border = new TransformerBorder(transformers);
+            Transformer transformer = border.ToTransformer();
             GroupLayer groupLayer = new GroupLayer
             {
-                Parents = insertParents,
-            };  
-            groupLayer.Control.Text = "Group";
-            return groupLayer;
-        }
+                IsSelected = true,
+                IsExpand = false,
+                Transform = new Transform(transformer)
+            };
 
-        private IList<ILayer> _createTempGrouplayers()
-        {
-            IList<ILayer> tempGrouplayers = new List<ILayer>();
-
-            void _addTempGrouplayers(IList<ILayer> layers)
+            //Temp
+            foreach (ILayer child in selectedLayers)
             {
-                foreach (ILayer child in layers)
-                {
-                    if (child.SelectMode == SelectMode.Selected)
-                    {
-                        tempGrouplayers.Add(child);
-                    }
-                    else
-                    {
-                        //Recursive
-                        _addTempGrouplayers(child.Children);
-                    }
-                }
-            }
+                IList<ILayer> childParentsChildren = layerCollection.GetParentsChildren(child);
+                childParentsChildren.Remove(child);
 
-            //Recursive
-            _addTempGrouplayers(this.RootLayers);
-
-            return tempGrouplayers;
-        }
-
-        private void _addLayersToGroupLayer(ILayer groupLayer, IList<ILayer> tempGrouplayers)
-        {
-            for (int i = tempGrouplayers.Count - 1; i >= 0; i--)
-            {
-                ILayer child = tempGrouplayers[i];
-
-                child.SelectMode = SelectMode.None;
-                child.SelectMode = SelectMode.ParentsSelected;
-
-                LayerCollection.Disengage(child, this);
-                child.Parents = groupLayer;
-
+                child.IsSelected = false;
                 groupLayer.Children.Add(child);
             }
-        }
 
-        private ILayer _findOutermostSelectedLayerParents()
-        {
-            ILayer outermostGrouplayers = null;
-
-            void _findOutermostSelectedLayer(ILayer layer)
-            {
-                if (outermostGrouplayers == null)
-                {
-                    if (layer.SelectMode == SelectMode.Selected)
-                    {
-                        outermostGrouplayers = layer.Parents;
-                    }
-                    else
-                    {
-                        foreach (ILayer child in layer.Children)
-                        {
-                            //Recursive
-                            _findOutermostSelectedLayer(child);
-                        }
-                    }
-                }
-            }
-
-            foreach (ILayer child in this.RootLayers)
-            {
-                //Recursive
-                _findOutermostSelectedLayer(child);
-            }
-
-            return outermostGrouplayers;
-        }
-
-        private void _noneAllLayers(IList<ILayer> layers)
-        {
-            foreach (ILayer child in layers)
-            {
-                child.SelectMode = SelectMode.None;
-                this._noneAllLayers(child.Children);
-            }
+            //Insert
+            parentsChildren.Insert(index, groupLayer);
         }
 
 

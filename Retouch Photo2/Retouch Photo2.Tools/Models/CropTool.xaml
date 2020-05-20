@@ -29,9 +29,5 @@
             <FontIcon Glyph="&#xE9A6;" FontSize="22" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
         </Button>
 
-        <ContentControl Width="4"/>
-
-        <toolsElements:MoreCreateButton/>
-
     </StackPanel>
 </Page>

@@ -6,75 +6,37 @@ namespace Retouch_Photo2.Layers
     {
         
         /// <summary>
-        /// Mezzanine on the first selected layer.
+        /// Mezzanine a layer.
         /// </summary>
         /// <param name="mezzanineLayer"> The mezzanine layer. </param>
-        public void MezzanineOnFirstSelectedLayer(ILayer mezzanineLayer) => this._mezzanineOnFirstSelectedLayer(mezzanineLayer, null);
+        public static void Mezzanine(LayerCollection layerCollection, ILayer mezzanineLayer) => LayerCollection._mezzanine(layerCollection, mezzanineLayer, null);
         /// <summary>
-        /// Mezzanine range on first selected layer
+        /// Mezzanine layers.
         /// </summary>
         /// <param name="mezzanineLayers"> The mezzanine layers. </param>
-        public void MezzanineRangeOnFirstSelectedLayer(IList<ILayer> mezzanineLayers) => this._mezzanineOnFirstSelectedLayer(null, mezzanineLayers);
+        public static void MezzanineRange(LayerCollection layerCollection, IEnumerable<ILayer> mezzanineLayers) => LayerCollection._mezzanine(layerCollection, null, mezzanineLayers);
 
-        private void _mezzanineOnFirstSelectedLayer(ILayer mezzanineLayer, IList<ILayer> mezzanineLayers)
+        private static void _mezzanine(LayerCollection layerCollection, ILayer mezzanineLayer, IEnumerable<ILayer> mezzanineLayers)
         {
-            int firstIndex=-1; 
-            ILayer firstIParent = null;
+            //Layers
+            IEnumerable<ILayer> selectedLayers = LayerCollection.GetAllSelectedLayers(layerCollection);
+            ILayer outermost = LayerCollection.FindOutermost_SelectedLayer(selectedLayers);
+            //if (outermost == null) return; // If count = 0, it will be useless.
+            IList<ILayer> parentsChildren = layerCollection.GetParentsChildren(outermost);
+            int index = parentsChildren.IndexOf(outermost);
+            if (index < 0) index = 0;
 
-             ILayer firstSelectedLayer = null;
-            IList<ILayer> parentChildren = null;
-
-            void mezzanineOnFirstSelectedLayer(IList<ILayer> layers)
-            {
-                foreach (ILayer child in layers)
-                {
-                    if (child.SelectMode.ToBool())
-                    {
-                        firstSelectedLayer = child;
-                        parentChildren = layers;
-                        break;
-                    }
-                    else
-                    {
-                        //Recursive
-                       mezzanineOnFirstSelectedLayer( child.Children);
-                    }
-                }
-            }
-
-            //Recursive
-            mezzanineOnFirstSelectedLayer( this.RootLayers);
-
-
-
-            if (firstSelectedLayer == null || parentChildren == null)
-            {
-                firstIndex = 0;
-                firstIParent = null;
-                parentChildren = this.RootLayers;
-            }
-            else
-            {
-                firstIndex = parentChildren.IndexOf(firstSelectedLayer);
-                firstIndex--;
-                if (firstIndex < 0) firstIndex = 0;
-                if (firstIndex >= parentChildren.Count) firstIndex = parentChildren.Count - 1;
-
-                firstIParent = firstSelectedLayer.Parents;
-            }
-            
-                       
             if (mezzanineLayer!=null)
             {
-                mezzanineLayer.Parents = firstIParent;
-                parentChildren.Insert(firstIndex, mezzanineLayer);//Insert
+                mezzanineLayer.IsSelected = true;
+                parentsChildren.Insert(index, mezzanineLayer);//Insert
             }
             else if (mezzanineLayers != null)
             {
                 foreach (ILayer child in mezzanineLayers)
                 {
-                    child.Parents = firstIParent;
-                    parentChildren.Insert(firstIndex, child);//Insert
+                    child.IsSelected = true;
+                    parentsChildren.Insert(index, child);//Insert
                 }
             }
         }
@@ -83,11 +45,11 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Remove the mezzanine layer.
         /// </summary>
-        public void RemoveMezzanineLayer(ILayer mezzanineLayer)
+        public static void RemoveMezzanineLayer(LayerCollection layerCollection, ILayer mezzanineLayer)
         {
             if (mezzanineLayer == null) return;
      
-            IList<ILayer> parentsChildren = this.GetParentsChildren(mezzanineLayer);
+            IList<ILayer> parentsChildren = layerCollection.GetParentsChildren(mezzanineLayer);
 
             parentsChildren.Remove(mezzanineLayer);
         }

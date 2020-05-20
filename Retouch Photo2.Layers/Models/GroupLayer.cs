@@ -39,6 +39,7 @@ namespace Retouch_Photo2.Layers.Models
             {
                 if (this.IsRefactoringTransformer)
                 {
+                    //TransformerBorder
                     IEnumerable<Transformer> transformers = from l in this.Children select l.GetActualDestinationWithRefactoringTransformer;
                     TransformerBorder border = new TransformerBorder(transformers);
                     Transformer transformer = border.ToTransformer();

@@ -39,7 +39,7 @@ namespace Retouch_Photo2.Tools
 
         #region Clicke
 
-
+        ///TODO: <see cref="LayersControl.ItemClick"/> replace
         public void ClickeNone()
         {
             //History
@@ -48,13 +48,13 @@ namespace Retouch_Photo2.Tools
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
-                if (layer.SelectMode.ToBool())
+                if (layer.IsSelected == true)
                 {
                     //History
-                    var previous = layer.SelectMode;
-                    history.Undos.Push(() => layer.SelectMode = previous);
+                    var previous = layer.IsSelected;
+                    history.Undos.Push(() => layer.IsSelected = previous);
 
-                    layer.SelectMode = SelectMode.UnSelected;
+                    layer.IsSelected = false;
                 }
             });
 
@@ -62,6 +62,9 @@ namespace Retouch_Photo2.Tools
             this.ViewModel.Push(history);
 
             this.SelectionViewModel.SetModeNone();//Selection
+
+            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.Layers);
+
             this.ViewModel.Invalidate();//Invalidate     
         }
 
@@ -70,13 +73,13 @@ namespace Retouch_Photo2.Tools
             //History
             IHistoryBase history = new IHistoryBase("Set select mode");
 
-            if (selectedLayer.SelectMode.ToBool() == false)
+            if (selectedLayer.IsSelected == false)
             {
                 //History
-                var previous = selectedLayer.SelectMode;
-                history.Undos.Push(() => selectedLayer.SelectMode = previous);
+                var previous = selectedLayer.IsSelected;
+                history.Undos.Push(() => selectedLayer.IsSelected = previous);
 
-                selectedLayer.SelectMode = SelectMode.Selected;
+                selectedLayer.IsSelected = true;
             }
 
             //Selection
@@ -84,21 +87,24 @@ namespace Retouch_Photo2.Tools
             {
                 if (layer != selectedLayer)
                 {
-                    if (layer.SelectMode.ToBool())
+                    if (layer.IsSelected == true)
                     {
                         //History
-                        var previous = layer.SelectMode;
-                        history.Undos.Push(() => layer.SelectMode = previous);
+                        var previous = layer.IsSelected;
+                        history.Undos.Push(() => layer.IsSelected = previous);
 
-                        layer.SelectMode = SelectMode.UnSelected;
+                        layer.IsSelected = false;
                     }
                 }
             });
-            
+
             //History
             this.ViewModel.Push(history);
 
             this.SelectionViewModel.SetModeSingle(selectedLayer);//Selection
+
+            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.Layers);
+
             this.ViewModel.Invalidate();//Invalidate     
         }
 
@@ -107,19 +113,22 @@ namespace Retouch_Photo2.Tools
             //History
             IHistoryBase history = new IHistoryBase("Set select mode");
 
-            if (selectedLayer.SelectMode.ToBool() == false)
+            if (selectedLayer.IsSelected == false)
             {
                 //History
-                var previous = selectedLayer.SelectMode;
-                history.Undos.Push(() => selectedLayer.SelectMode = previous);
+                var previous = selectedLayer.IsSelected;
+                history.Undos.Push(() => selectedLayer.IsSelected = previous);
 
-                selectedLayer.SelectMode = SelectMode.Selected;
+                selectedLayer.IsSelected = true;
             }
 
             //History
             this.ViewModel.Push(history);
-
+            
             this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+
+            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.Layers);
+
             this.ViewModel.Invalidate();//Invalidate
         }
 
@@ -128,19 +137,22 @@ namespace Retouch_Photo2.Tools
             //History
             IHistoryBase history = new IHistoryBase("Set select mode");
 
-            if (selectedLayer.SelectMode != SelectMode.UnSelected)
+            if (selectedLayer.IsSelected == true)
             {
                 //History
-                var previous = selectedLayer.SelectMode;
-                history.Undos.Push(() => selectedLayer.SelectMode = previous);
+                var previous = selectedLayer.IsSelected;
+                history.Undos.Push(() => selectedLayer.IsSelected = previous);
 
-                selectedLayer.SelectMode = SelectMode.UnSelected;
+                selectedLayer.IsSelected = false;
             }
 
             //History
             this.ViewModel.Push(history);
 
             this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+
+            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.Layers);
+
             this.ViewModel.Invalidate();//Invalidate
         }
 
@@ -154,13 +166,13 @@ namespace Retouch_Photo2.Tools
             {
                 if (layer != selectedLayer)
                 {
-                    if (layer.SelectMode != SelectMode.UnSelected)
+                    if (layer.IsSelected == true)
                     {
                         //History
-                        var previous = layer.SelectMode;
-                        history.Undos.Push(() => layer.SelectMode = previous);
+                        var previous = layer.IsSelected;
+                        history.Undos.Push(() => layer.IsSelected = previous);
 
-                        layer.SelectMode = SelectMode.UnSelected;
+                        layer.IsSelected = false;
                     }
                 }
             });
@@ -169,6 +181,9 @@ namespace Retouch_Photo2.Tools
             this.ViewModel.Push(history);
 
             this.SelectionViewModel.SetModeSingle(selectedLayer);//Selection
+
+            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.Layers);
+
             this.ViewModel.Invalidate();//Invalidate
         }
 

@@ -17,6 +17,7 @@ using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Retouch_Photo2.Layers;
 
 namespace Retouch_Photo2.Menus.Models
 {
@@ -31,6 +32,26 @@ namespace Retouch_Photo2.Menus.Models
             this.InitializeComponent();
             this.ConstructStrings();
             this.ConstructMenu();
+
+            this.Button.Click += (s, e) =>
+            {
+                this.ItemsControl.ItemsSource = sadasd(this.ViewModel.Layers.RootLayers,0);
+            };
+        }
+
+        private IEnumerable<string> sadasd(IList<ILayer> layers, int depht)
+        {
+
+            foreach (var layer in layers)
+            {
+                yield return $"{depht}   {layer.Type}  {layer.Control.Self.Visibility}";
+
+
+                foreach (var child in sadasd( layer.Children, depht+1))
+                {
+                    yield return child;
+                }
+            }        
         }
     }
 
@@ -43,7 +64,7 @@ namespace Retouch_Photo2.Menus.Models
 
             this._button.ToolTip.Content =
             this._Expander.Title =
-            this._Expander.CurrentTitle = resource.GetString("/Menus/Style");
+            this._Expander.CurrentTitle = "Style"; resource.GetString("/Menus/Style");
         }
 
         //Menu

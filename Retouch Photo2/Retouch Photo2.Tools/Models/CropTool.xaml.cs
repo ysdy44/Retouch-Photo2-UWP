@@ -3,6 +3,7 @@ using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
+using System.Collections.Generic;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI;
@@ -19,7 +20,7 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel ;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
         ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
@@ -72,7 +73,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
     }
-    
+
     /// <summary>
     /// <see cref="ITool"/>'s CropTool.
     /// </summary>
@@ -113,28 +114,26 @@ namespace Retouch_Photo2.Tools.Models
 
         public void Started(Vector2 startingPoint, Vector2 point)
         {
-            //Selection
-            foreach (ILayer layer in this.ViewModel.Layers.RootLayers)
-            {
-                if (layer.SelectMode.ToBool())
-                {
-                    Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-                    Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
-                    
-                    //Transformer
-                    Transformer transformer = layer.GetActualDestinationWithRefactoringTransformer;
-                    this.IsMove = transformer.FillContainsPoint(canvasStartingPoint);
-                    this.TransformerMode = Transformer.ContainsNodeMode(canvasStartingPoint, transformer, false);
+            ILayer firstLayer = this.SelectionViewModel.GetFirstLayer();
+            IList<ILayer> parentsChildren = this.ViewModel.Layers.GetParentsChildren(firstLayer);
 
-                    if (this.TransformerMode != TransformerMode.None)
+
+            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+            Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+
+            switch (this.SelectionViewModel.SelectionMode)
+            {
+                case ListViewSelectionMode.None:
+                    break;
+                case ListViewSelectionMode.Single:
+                    this.Check(this.SelectionViewModel.Layer, canvasStartingPoint);
+                    break;
+                case ListViewSelectionMode.Multiple:
+                    foreach (ILayer layer in this.SelectionViewModel.Layers)
                     {
-                        this.Layer = layer;
-                        this.StartingDestination = layer.Transform.Destination;
-                        this.StartingIsCrop = layer.Transform.IsCrop;
-                        this.StartingCropDestination = layer.Transform.CropDestination;
-                        break;
+                        this.Check(layer, canvasStartingPoint);
                     }
-                }
+                    break;
             }
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
@@ -145,7 +144,7 @@ namespace Retouch_Photo2.Tools.Models
             if (this.IsMove == false)
                 if (this.TransformerMode == TransformerMode.None)
                     return;
-                       
+
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
@@ -153,7 +152,13 @@ namespace Retouch_Photo2.Tools.Models
 
             //Crop
             this.Layer.Transform.IsCrop = true;
-            if (this.IsMove)
+            if (this.TransformerMode != TransformerMode.None)
+            {
+                //Transformer
+                Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.StartingActualDestination, this.IsRatio, this.IsCenter, this.IsStepFrequency);
+                this.Layer.Transform.CropDestination = transformer;
+            }
+            else if (this.IsMove)
             {
                 Vector2 canvasMove = canvasPoint - canvasStartingPoint;
                 this.Layer.Transform.Destination = Transformer.Add(this.StartingDestination, canvasMove);
@@ -162,13 +167,6 @@ namespace Retouch_Photo2.Tools.Models
                 {
                     this.Layer.Transform.CropDestination = this.StartingDestination;
                 }
-            }
-            if (this.TransformerMode != TransformerMode.None)
-            {
-                //Transformer
-                Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.StartingActualDestination, this.IsRatio, this.IsCenter, this.IsStepFrequency);
-
-                this.Layer.Transform.CropDestination = transformer;
             }
 
 
@@ -189,13 +187,59 @@ namespace Retouch_Photo2.Tools.Models
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
-            foreach (ILayer layer in this.ViewModel.Layers.RootLayers)
+            switch (this.SelectionViewModel.SelectionMode)
             {
-                if (layer.SelectMode.ToBool())
+                case ListViewSelectionMode.None:
+                    break;
+                case ListViewSelectionMode.Single:
+                    this.Draw(drawingSession, this.SelectionViewModel.Layer, matrix);
+                    break;
+                case ListViewSelectionMode.Multiple:
+                    foreach (ILayer layer in this.ViewModel.Layers.RootLayers)
+                    {
+                        this.Draw(drawingSession, layer, matrix);
+                    }
+                    break;
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// <see cref="ITool"/>'s CropTool.
+    /// </summary>
+    public sealed partial class CropTool : Page, ITool
+    {
+
+        private bool Check(ILayer layer, Vector2 canvasStartingPoint)
+        {
+            if (layer.IsSelected == true)
+            {
+                //Transformer
+                Transformer transformer = layer.GetActualDestinationWithRefactoringTransformer;
+                this.IsMove = transformer.FillContainsPoint(canvasStartingPoint);
+                this.TransformerMode = Transformer.ContainsNodeMode(canvasStartingPoint, transformer, false);
+
+                if (this.IsMove || this.TransformerMode != TransformerMode.None)
                 {
-                    Transformer transformer = layer.GetActualDestinationWithRefactoringTransformer;
-                    drawingSession.DrawCrop(transformer, matrix, Colors.BlueViolet);
+                    this.Layer = layer;
+                    this.StartingDestination = layer.Transform.Destination;
+                    this.StartingIsCrop = layer.Transform.IsCrop;
+                    this.StartingCropDestination = layer.Transform.CropDestination;
+                    return true;
                 }
+            }
+
+            return false;
+        }
+
+
+        private void Draw(CanvasDrawingSession drawingSession, ILayer layer, Matrix3x2 matrix)
+        {
+            if (layer.IsSelected == true)
+            {
+                Transformer transformer = layer.GetActualDestinationWithRefactoringTransformer;
+                drawingSession.DrawCrop(transformer, matrix, Colors.BlueViolet);
             }
         }
 

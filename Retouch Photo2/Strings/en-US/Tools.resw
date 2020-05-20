@@ -159,9 +159,6 @@
   <data name="Cursor" xml:space="preserve">
     <value>Cursor Tool</value>
   </data>
-  <data name="Cursor_StepFrequency" xml:space="preserve">
-    <value>Step Frequency</value>
-  </data>
   <data name="Ellipse" xml:space="preserve">
     <value>Ellipse Tool</value>
   </data>

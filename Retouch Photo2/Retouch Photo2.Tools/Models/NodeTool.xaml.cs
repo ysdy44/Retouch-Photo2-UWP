@@ -1,6 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Elements;
 using Retouch_Photo2.Tools.Icons;
@@ -46,11 +47,14 @@ namespace Retouch_Photo2.Tools.Models
                 bool isSuccessful = NodeCollection.RemoveCheckedNodes(this.CurveLayer.Nodes);
                 if (isSuccessful == false)
                 {
-                    this.ViewModel.Layers.RemoveLayer(this.CurveLayer);
-                    this.SelectionViewModel.SetMode(this.ViewModel.Layers);
-                }
+                    LayerCollection.RemoveLayer(this.ViewModel.Layers, this.CurveLayer);
 
-                this.ViewModel.Invalidate();//Invalidate
+                    this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+
+                    LayerCollection.ArrangeLayersControls(this.ViewModel.Layers);
+
+                    this.ViewModel.Invalidate();//Invalidate
+                }
             };
             this.InsertButton.Click += (s, e) =>
             {

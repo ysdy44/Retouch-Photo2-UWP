@@ -12,15 +12,13 @@ namespace Retouch_Photo2.Layers
         /// Gets all photocopiers, which in ( layer and children )'s style manager.
         /// </summary>
         /// <returns> The yield photocopiers. </returns>
-        public IEnumerable<Photocopier> GetPhotocopiers() => this._getPhotocopiers(this.RootLayers);
-        private IEnumerable<Photocopier> _getPhotocopiers(IEnumerable<ILayer> layers)
+        public static IEnumerable<Photocopier> GetPhotocopiers(LayerCollection layerCollection) => LayerCollection._getPhotocopiers(layerCollection.RootLayers);
+        private static IEnumerable<Photocopier> _getPhotocopiers(IEnumerable<ILayer> layers)
         {
             foreach (ILayer child in layers)
             {
-                foreach (Photocopier photocopier in this._getPhotocopiers(child.Children))
-                {
+                foreach (Photocopier photocopier in LayerCollection._getPhotocopiers(child.Children))
                     yield return photocopier;
-                }
 
                 //ImageLayer
                 if (child.Type== LayerType.Image)

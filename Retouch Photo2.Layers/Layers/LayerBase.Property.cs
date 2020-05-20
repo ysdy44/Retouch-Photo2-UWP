@@ -58,24 +58,8 @@ namespace Retouch_Photo2.Layers
         public Transform Transform { get; set; } = new Transform();
         public Effect Effect { get; set; } = new Effect();
         public Filter Filter { get; set; } = new Filter();
-        
-        private ILayer parents;
-        public ILayer Parents
-        {
-            get => this.parents;
-            set
-            {
-                int depth = (value == null) ? 0 : value.Control.Depth + 1; //+1
 
-                this.Control.Depth = depth;
-                foreach (ILayer child in this.Children)
-                {
-                    child.Control.Depth = depth + 1; //+1
-                }
-
-                this.parents = value;
-            }
-        }
+        public ILayer Parents { get; set; } = null;
         public IList<ILayer> Children { get; set; } = new List<ILayer>();
 
 
@@ -97,11 +81,11 @@ namespace Retouch_Photo2.Layers
             this.Transform.CacheTransform();
 
             //RefactoringTransformer
-            if (this.parents != null)
+            if (this.Parents != null)
             {
-                if (this.parents.Type  == LayerType.Group)
+                if (this.Parents.Type == LayerType.Group)
                 {
-                    ILayer groupLayer =this.parents;
+                    ILayer groupLayer = this.Parents;
                     groupLayer.IsRefactoringTransformer = true;
                 }
             }
@@ -116,7 +100,7 @@ namespace Retouch_Photo2.Layers
             this.Style.TransformAdd(vector);
             this.Transform.TransformAdd(vector);
         }
-        
+
 
         //@Static
         /// <summary>

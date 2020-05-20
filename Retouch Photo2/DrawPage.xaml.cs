@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Tools;
+﻿using Retouch_Photo2.Layers;
+using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Numerics;
@@ -107,7 +108,10 @@ namespace Retouch_Photo2
 
                 if (isUndo)
                 {
-                    this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+                    this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection          
+
+                    LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.Layers);
+
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };

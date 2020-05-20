@@ -59,6 +59,7 @@ namespace Retouch_Photo2.ViewModels
 
                 case ListViewSelectionMode.Multiple:
                     {
+                        //TransformerBorder
                         IEnumerable<Transformer> transformers = from l in this.Layers select l.GetActualDestinationWithRefactoringTransformer;
                         TransformerBorder border = new TransformerBorder(transformers);
                         return border.ToTransformer();

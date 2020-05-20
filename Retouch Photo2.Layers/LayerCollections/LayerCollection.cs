@@ -16,9 +16,11 @@ namespace Retouch_Photo2.Layers
         /// <summary> Occurs when right-click input a layer. </summary>
         public static Action<ILayer> RightTapped;
         /// <summary> Occurs when a layer visibility changes. </summary>
-        public static Action<ILayer> VisualChanged;
-        /// <summary> Occurs when the layers has changed </summary>
-        public static Action SelectChanged;
+        public static Action<ILayer> VisibilityChanged;
+        /// <summary> Occurs when the Select has changed </summary>
+        public static Action<ILayer> IsSelectedChanged;
+        /// <summary> Occurs when the expaned has changed </summary>
+        public static Action<ILayer> IsExpandChanged;
 
         //Overlay
         /// <summary>
@@ -28,7 +30,7 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Occurs when drag items started.
         /// </summary>
-        public static Action<ILayer, SelectMode> DragItemsStarted;
+        public static Action<ILayer, bool> DragItemsStarted;
         /// <summary>
         /// Occurs when drag items delta.
         /// </summary>

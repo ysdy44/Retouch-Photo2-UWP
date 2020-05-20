@@ -29,6 +29,8 @@ namespace Retouch_Photo2.Tools
         bool IsCenter => this.SettingViewModel.IsCenter;
         bool IsSquare => this.SettingViewModel.IsSquare;
 
+        ILayer MezzanineLayer = null;
+
 
         /// <summary>
         /// Occurs when the operation begins. 
@@ -60,8 +62,8 @@ namespace Retouch_Photo2.Tools
             this.SelectionViewModel.SetModeExtended();//Selection
 
             //Mezzanine
-            this.ViewModel.MezzanineLayer = createLayer(transformer);
-            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.ViewModel.MezzanineLayer);
+            this.MezzanineLayer = createLayer(transformer);
+            LayerCollection.Mezzanine(this.ViewModel.Layers, this.MezzanineLayer);
 
             //Text
             this.ViewModel.SetTextWidthHeight(transformer);
@@ -84,8 +86,8 @@ namespace Retouch_Photo2.Tools
                 this.Transformer = transformer;
 
                 //Mezzanine
-                this.ViewModel.MezzanineLayer.Transform = new Transform(transformer);
-                this.ViewModel.MezzanineLayer.Style.DeliverBrushPoints(transformer);
+                this.MezzanineLayer.Transform = new Transform(transformer);
+                this.MezzanineLayer.Style.DeliverBrushPoints(transformer);
 
                 this.ViewModel.SetTextWidthHeight(transformer);//Text
                 this.ViewModel.Invalidate();//Invalidate
@@ -115,14 +117,15 @@ namespace Retouch_Photo2.Tools
                     this.Transformer = transformer;
 
                     //Mezzanine
-                    this.SelectionViewModel.SetModeSingle(this.ViewModel.MezzanineLayer);//Selection
-                    this.ViewModel.MezzanineLayer.Transform = new Transform(transformer);
-                    this.ViewModel.MezzanineLayer.SelectMode = SelectMode.Selected;
-                    this.ViewModel.MezzanineLayer = null;
-
-                    this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+                    this.SelectionViewModel.SetModeSingle(this.MezzanineLayer);//Selection
+                    this.MezzanineLayer.Transform = new Transform(transformer);
+                    this.MezzanineLayer.IsSelected = true;
+                    this.MezzanineLayer = null;
                 }
-                else this.ViewModel.Layers.RemoveMezzanineLayer(this.ViewModel.MezzanineLayer);//Mezzanine
+                else LayerCollection.RemoveMezzanineLayer(this.ViewModel.Layers, this.MezzanineLayer);//Mezzanine
+
+                LayerCollection.ArrangeLayersControls(this.ViewModel.Layers);
+                LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.Layers);
 
                 this.ViewModel.TextVisibility = Visibility.Collapsed;//Text
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate

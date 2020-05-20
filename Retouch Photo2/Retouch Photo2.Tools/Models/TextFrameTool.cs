@@ -64,7 +64,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new TextFrameLayer
             {
-                SelectMode = SelectMode.Selected,
+                IsSelected = true,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.TextStyle,
             };

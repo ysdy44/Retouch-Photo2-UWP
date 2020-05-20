@@ -23,7 +23,7 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="layerCollection"> The layer-collection. </param>
         public void SetMode(LayerCollection layerCollection)
         {
-            IList<ILayer> checkedLayers = layerCollection.GetAllSelectedLayers();
+            IEnumerable<ILayer> checkedLayers = LayerCollection.GetAllSelectedLayers(layerCollection);
             int count = checkedLayers.Count();
 
             if (count == 0)
@@ -31,7 +31,9 @@ namespace Retouch_Photo2.ViewModels
             else if (count == 1)
                 this._setModeSingle(checkedLayers.Single());//Single
             else if (count >= 2)
+            {
                 this._setModeMultiple(checkedLayers);//Multiple
+            }
         }
         
 
@@ -45,14 +47,14 @@ namespace Retouch_Photo2.ViewModels
         {
             if (this.Layer != null)
             {
-                this.Layer.SelectMode = Retouch_Photo2.Layers.SelectMode.UnSelected;
+                this.Layer.IsSelected = false;
             }
 
             if (this.Layers != null)
             {
                 foreach (ILayer child in this.Layers)
                 {
-                    child.SelectMode = Retouch_Photo2.Layers.SelectMode.UnSelected;
+                    child.IsSelected = false;
                 }
             }
             this._setModeNone();//None
@@ -111,7 +113,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 foreach (ILayer child in this.Layers)
                 {
-                    child.SelectMode = Retouch_Photo2.Layers.SelectMode.UnSelected;
+                    child.IsSelected = false;
                 }
             }
             this._setModeSingle(layer);//Single
@@ -164,16 +166,18 @@ namespace Retouch_Photo2.ViewModels
         ///  Sets the mode to Multiple.
         /// </summary>
         /// <param name="layer"> The multiple layer. </param>
+        /// <param name="outermost"> The outermost layer. </param>
         public void SetModeMultiple(IList<ILayer> layers)
         {
             if (this.Layer != null)
             {
-                this.Layer.SelectMode = Retouch_Photo2.Layers.SelectMode.UnSelected;
+                this.Layer.IsSelected = false;
             }
             this._setModeMultiple(layers);//Multiple
         }
-        private void _setModeMultiple(IList<ILayer> layers)
+        private void _setModeMultiple(IEnumerable<ILayer> layers)
         {
+            ILayer outermost = LayerCollection.FindOutermost_SelectedLayer(layers);
             this.SelectionMode = ListViewSelectionMode.Multiple;//Transformer     
             this.SelectionUnNone = true;
             this.SelectionSingle = false;
@@ -181,6 +185,7 @@ namespace Retouch_Photo2.ViewModels
             this.Layer = null;
             this.Layers = layers;
 
+            //TransformerBorder
             IEnumerable<Transformer> transformers = from l in layers select l.GetActualDestinationWithRefactoringTransformer;
             TransformerBorder border = new TransformerBorder(transformers);
             this.Transformer = border.ToTransformer();
@@ -188,31 +193,29 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
-            ILayer firstLayer = layers.First();
-
-            this.Type = firstLayer.Type;
-            this.SetOpacity(firstLayer.Opacity);
-            this.BlendMode = firstLayer.BlendMode;
-            this.SetVisibility(firstLayer.Visibility);
-            this.SetTagType(firstLayer.TagType);
+            this.Type = outermost == null ? LayerType.None : outermost.Type;
+            this.SetOpacity(outermost == null ? 1.0f : outermost.Opacity);
+            this.BlendMode = outermost?.BlendMode;
+            this.SetVisibility(outermost == null ? Visibility.Visible : outermost.Visibility);
+            this.SetTagType(outermost == null ? TagType.None : outermost.TagType);
 
             //////////////////////////
 
             this.IsCrop = layers.Any(layer => layer.Transform.IsCrop);
-            this.Effect = firstLayer.Effect;
+            this.Effect = outermost?.Effect;
             this.Filter = null;
-            this.SetStyle(firstLayer.Style);
+            this.SetStyle(outermost?.Style);
 
             //////////////////////////
 
             this.SetGroupLayer(layers);
-            this.SetImageLayer(firstLayer);
+            this.SetImageLayer(outermost);
             this.SetCurveLayer(null);
             this.SetFontLayer(null);
 
             //////////////////////////
 
-            this.SetIGeometryLayer(firstLayer);
+            this.SetIGeometryLayer(outermost);
         }
 
 

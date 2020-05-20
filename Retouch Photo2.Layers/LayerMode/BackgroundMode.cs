@@ -1,13 +1,10 @@
 ﻿namespace Retouch_Photo2.Layers
 {
     /// <summary> 
-    /// Select mode of <see cref="ILayer"/>.
+    /// background mode of <see cref="ILayer"/>.
     /// </summary>
-    public enum SelectMode
+    public enum BackgroundMode
     {
-        /// <summary> Normal. </summary>
-        None,
-
         /// <summary> Not selected. </summary>
         UnSelected,
         /// <summary> Selected. </summary>
@@ -17,6 +14,6 @@
         ParentsSelected,
         /// <summary> Child is selected. </summary>
         ChildSelected,
-        
+
     }
 }

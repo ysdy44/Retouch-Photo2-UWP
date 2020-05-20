@@ -99,7 +99,7 @@ namespace Retouch_Photo2.Controls
             //Bound
             foreach (ILayer layer in this.ViewModel.Layers.RootLayers)
             {
-                if (layer.SelectMode.ToBool())
+                if (layer.IsSelected == true)
                 {
                     layer.DrawBound(resourceCreator, drawingSession, matrix, this.ViewModel.AccentColor);
                 }

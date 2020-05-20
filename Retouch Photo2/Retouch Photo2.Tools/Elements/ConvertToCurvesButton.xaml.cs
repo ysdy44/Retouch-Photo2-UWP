@@ -40,7 +40,7 @@ namespace Retouch_Photo2.Tools.Elements
                     }
 
                     this.Replace(curveLayer, layer);
-                    curveLayer.SelectMode = SelectMode.Selected;
+                    curveLayer.IsSelected = true;
                 });
 
 
@@ -48,10 +48,10 @@ namespace Retouch_Photo2.Tools.Elements
                 this.TipViewModel.Tool = this.TipViewModel.Tools.First(t => t != null && t.Type == ToolType.Node);
                 this.TipViewModel.ToolGroupType(ToolType.Node);
 
-                //Selection      
-                this.SelectionViewModel.SetMode(this.ViewModel.Layers);             
+                LayerCollection.ArrangeLayersControls(this.ViewModel.Layers);
 
-                this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+                this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+
                 this.ViewModel.Invalidate();//Invalidate
             };
         }

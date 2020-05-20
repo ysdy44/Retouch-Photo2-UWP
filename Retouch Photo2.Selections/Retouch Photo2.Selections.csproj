@@ -127,6 +127,9 @@
     <Compile Include="EditIcons\PasteIcon.xaml.cs">
       <DependentUpon>PasteIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GroupIcons\ReleaseIcon.xaml.cs">
+      <DependentUpon>ReleaseIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GroupIcons\UnGroupIcon.xaml.cs">
       <DependentUpon>UnGroupIcon.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditIcons\PasteIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GroupIcons\ReleaseIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

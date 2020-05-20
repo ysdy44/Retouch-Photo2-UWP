@@ -159,9 +159,6 @@
   <data name="Cursor" xml:space="preserve">
     <value>光标工具</value>
   </data>
-  <data name="Cursor_StepFrequency" xml:space="preserve">
-    <value>步频</value>
-  </data>
   <data name="Ellipse" xml:space="preserve">
     <value>椭圆工具</value>
   </data>

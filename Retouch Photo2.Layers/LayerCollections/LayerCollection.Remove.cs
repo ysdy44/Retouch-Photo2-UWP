@@ -9,69 +9,52 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Remove a layer.
         /// </summary>      
-        public void RemoveLayer(ILayer removeLayer)
+        public static void RemoveLayer(LayerCollection layerCollection, ILayer removeLayer)
         {
-            IList<ILayer> parentsChildren = this.GetParentsChildren(removeLayer);
+            IList<ILayer> parentsChildren = layerCollection.GetParentsChildren(removeLayer);
 
-            this._removeLayer(removeLayer, parentsChildren);
+            parentsChildren.Remove(removeLayer);
         }
 
         /// <summary>
         /// Remove all selected layers.
         /// </summary>
-        public void RemoveAllSelectedLayers() => this._removeAllSelectedLayers(this.RootLayers);
+        public static void RemoveAllSelectedLayers(LayerCollection layerCollection) => LayerCollection._removeAllSelectedLayers(layerCollection, layerCollection.RootLayers);
 
 
-        private void _removeAllSelectedLayers(IList<ILayer> layers)
+        private static void _removeAllSelectedLayers(LayerCollection layerCollection, IList<ILayer> layers)
         {
             foreach (ILayer child in layers)
             {
                 //Recursive
-                if (child.SelectMode.ToBool())
-                    this._removeAllLayers(child.Children);
+                if (child.IsSelected == true)
+                    LayerCollection._removeAllLayers(layerCollection, child.Children);
                 //Recursive
                 else
-                    this._removeAllSelectedLayers(child.Children);
+                    LayerCollection._removeAllSelectedLayers(layerCollection, child.Children);
             }
 
             //Remove
             ILayer removeLayer = null;
             do
             {
-                this._removeLayer(removeLayer, layers);
+                layers.Remove(removeLayer);
 
-                removeLayer = layers.FirstOrDefault(layer => layer.SelectMode == SelectMode.Selected);
+                removeLayer = layers.FirstOrDefault(layer => layer.IsSelected == true);
             }
             while (removeLayer != null);
         }
 
-        private void _removeAllLayers(IList<ILayer> layers)
+        private static void _removeAllLayers(LayerCollection layerCollection, IList<ILayer> layers)
         {
             foreach (ILayer child in layers)
             {
                 //Recursive
-                this._removeAllLayers(child.Children);
+                LayerCollection._removeAllLayers(layerCollection, child.Children);
 
-                this.RootControls.Remove(child.Control.Self);
+                layerCollection.RootControls.Remove(child.Control.Self);
             }
             layers.Clear();
-        }
-
-        private void _removeLayer(ILayer removeLayer, IList<ILayer> layers)
-        {
-            if (removeLayer != null)
-            {
-                this.RootControls.Remove(removeLayer.Control.Self);
-                layers.Remove(removeLayer);
-
-                if (removeLayer.Parents != null)
-                {
-                    if (removeLayer.Parents.Children.Count == 0)
-                    {
-                        removeLayer.Parents.ExpandMode = ExpandMode.NoChildren;
-                    }
-                }
-            }
         }
         
 

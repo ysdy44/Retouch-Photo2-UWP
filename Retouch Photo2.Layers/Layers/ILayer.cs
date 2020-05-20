@@ -93,15 +93,11 @@ namespace Retouch_Photo2.Layers
         /// <summary> Gets or sets ILayer's overlay-mode. </summary>
         OverlayMode OverlayMode { get; set; }
 
-        /// <summary> Gets or sets ILayer's expand-mode. </summary>
-        ExpandMode ExpandMode { get; set; }
-        /// <summary> Changed the expand-mode. </summary>
-        void Expaned();
+        /// <summary> Gets or sets ILayer's expand. </summary>
+        bool IsExpand { get; set; }
 
-        /// <summary> Gets or sets ILayer's selected-mode. </summary>
-        SelectMode SelectMode { get; set; }
-        /// <summary> Changed the select-mode. </summary>
-        void Selected();
+        /// <summary> Gets or sets ILayer's selected. </summary>
+        bool IsSelected { get; set; }
 
 
         #endregion

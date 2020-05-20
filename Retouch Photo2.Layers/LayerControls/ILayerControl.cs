@@ -18,8 +18,10 @@ namespace Retouch_Photo2.Layers
         void SetTagType(TagType value);
 
         //Control
-        void SetExpandMode(ExpandMode value);
-        void SetSelectMode(SelectMode value);
         void SetOverlayMode(OverlayMode value);
+        void SetIsSelected(bool value);
+        void SetBackground(BackgroundMode value);
+        void SetIsExpand(bool value);
+        void SetChildrenZero(bool value);
     }
 }

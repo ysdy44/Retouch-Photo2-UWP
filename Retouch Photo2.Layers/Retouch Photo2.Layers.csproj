@@ -151,10 +151,11 @@
     <Compile Include="Icons\TextFrameIcon.xaml.cs">
       <DependentUpon>TextFrameIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LayerCollections\LayerCollection.FindOutermost.cs" />
     <Compile Include="LayerCollections\LayerCollection.Photocopier.cs" />
+    <Compile Include="LayerMode\BackgroundMode.cs" />
     <Compile Include="Layers\ITextLayer.cs" />
     <Compile Include="LayerCollections\LayerCollection.Add_Disengage.cs" />
-    <Compile Include="LayerCollections\LayerCollection.Arrange_Children_Expand.cs" />
     <Compile Include="LayerCollections\LayerCollection.ControlHeight.cs" />
     <Compile Include="LayerType.cs" />
     <Compile Include="ModelsSecond\GeometryArrowLayer.cs" />
@@ -200,10 +201,8 @@
     <Compile Include="LayerControls\LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LayerMode\ExpandMode.cs" />
-    <Compile Include="LayerMode\LayerExtensions.cs" />
+    <Compile Include="LayerExtensions.cs" />
     <Compile Include="LayerMode\OverlayMode.cs" />
-    <Compile Include="LayerMode\SelectMode.cs" />
     <Compile Include="Layers\LayerBase.Control.cs" />
     <Compile Include="Layers\LayerBase.Render.cs" />
     <Compile Include="Layers\LayerBase.Property.cs" />

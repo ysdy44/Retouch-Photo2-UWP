@@ -198,13 +198,13 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructMenu();
 
             this.Loaded += (s, e) => this._isLoaded = true;
-            this.RemoteButton.Click += (s, e) =>
+            this.PositionRemoteButton.Click += (s, e) =>
             {
                 this._Expander.IsSecondPage = true;
-                this._Expander.CurrentTitle = (string)this.RemoteButton.Content;
+                this._Expander.CurrentTitle = (string)this.PositionRemoteToolTip.Content;
             };
 
-            this.ConstructRemoteControl();
+            this.ConstructPositionRemoteControl();
             this.ConstructIndicatorControl();
 
             this.ConstructWidthHeight();
@@ -248,12 +248,13 @@ namespace Retouch_Photo2.Menus.Models
 
             this.RotateTextBlock.Text = resource.GetString("/Menus/Transformer_Rotate");
             this.SkewTextBlock.Text = resource.GetString("/Menus/Transformer_Skew");
+            this.StepFrequencyToolTip.Content = resource.GetString("/Menus/Transformer_StepFrequency");
 
             this.XTextBlock.Text = resource.GetString("/Menus/Transformer_X");
             this.YTextBlock.Text = resource.GetString("/Menus/Transformer_Y");
-
+            this.PositionRemoteToolTip.Content = resource.GetString("/Menus/Transformer_PositionRemote");
+           
             this.IndicatorToolTip.Content = resource.GetString("/Menus/Transformer_Indicator");
-            this.RemoteButton.Content = resource.GetString("/Menus/Transformer_Remote");
         }
 
         //ToolTip
@@ -266,12 +267,16 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.Expander.State == ExpanderState.Overlay)
                 {
                     this.RatioScalingToolTip.IsOpen = true;
+                    this.StepFrequencyToolTip.IsOpen = true;
+                    this.PositionRemoteToolTip.IsOpen = true;
                     this.IndicatorToolTip.IsOpen = true;
                 }
             };
             this._button.ToolTip.Closed += (s, e) =>
             {
                 this.RatioScalingToolTip.IsOpen = false;
+                this.StepFrequencyToolTip.IsOpen = false;
+                this.PositionRemoteToolTip.IsOpen = false;
                 this.IndicatorToolTip.IsOpen = false;
             };
         }
@@ -342,8 +347,10 @@ namespace Retouch_Photo2.Menus.Models
                             this.XPicker.IsEnabled = true;
                             this.YPicker.IsEnabled = true;
 
-                            this.RatioToggleControl.IsEnabled = true;//IsRatio
-                            this.IndicatorControl.Mode = this.IndicatorMode;//IndicatorMode
+                            this.RatioToggleControl.IsEnabled = true;
+                            this.StepFrequencyButton.IsEnabled = true;
+                            this.PositionRemoteButton.IsEnabled = true;
+                            this.IndicatorControl.Mode = this.IndicatorMode;
                         }
                     }
                     break;
@@ -384,8 +391,10 @@ namespace Retouch_Photo2.Menus.Models
                             this.XPicker.IsEnabled = true;
                             this.YPicker.IsEnabled = true;
 
-                            this.RatioToggleControl.IsEnabled = true;//IsRatio
-                            this.IndicatorControl.Mode = this.IndicatorMode;//IndicatorMode
+                            this.RatioToggleControl.IsEnabled = true;
+                            this.StepFrequencyButton.IsEnabled = true;
+                            this.PositionRemoteButton.IsEnabled = true;
+                            this.IndicatorControl.Mode = this.IndicatorMode;
                         }
                     }
                     break;
@@ -422,8 +431,10 @@ namespace Retouch_Photo2.Menus.Models
                             this.XPicker.IsEnabled = false;
                             this.YPicker.IsEnabled = false;
 
-                            this.RatioToggleControl.IsEnabled = false;//IsRatio
-                            this.IndicatorControl.Mode = IndicatorMode.None;//IndicatorMode
+                            this.RatioToggleControl.IsEnabled = false;
+                            this.StepFrequencyButton.IsEnabled = false;
+                            this.PositionRemoteButton.IsEnabled = false;
+                            this.IndicatorControl.Mode = IndicatorMode.None;
                         }
                     }
                     break;
@@ -434,10 +445,10 @@ namespace Retouch_Photo2.Menus.Models
 
 
         //RemoteControl
-        private void ConstructRemoteControl()
+        private void ConstructPositionRemoteControl()
         {
 
-            this.RemoteControl.Moved += (s, value) =>
+            this.PositionRemoteControl.Moved += (s, value) =>
             {
                 Transformer transformer = this.SelectionTransformer;
                 Vector2 vector = value;
@@ -452,7 +463,7 @@ namespace Retouch_Photo2.Menus.Models
 
                 this.ViewModel.Invalidate();//Invalidate
             };
-            this.RemoteControl.ValueChangeStarted += (s, value) =>
+            this.PositionRemoteControl.ValueChangeStarted += (s, value) =>
             {
                 //Selection
                 this.oldTransformer = this.SelectionTransformer;
@@ -463,7 +474,7 @@ namespace Retouch_Photo2.Menus.Models
 
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
             };
-            this.RemoteControl.ValueChangeDelta += (s, value) =>
+            this.PositionRemoteControl.ValueChangeDelta += (s, value) =>
             {
                 Vector2 vector =
                    (Math.Abs(value.X) > Math.Abs(value.Y)) ?
@@ -479,7 +490,7 @@ namespace Retouch_Photo2.Menus.Models
 
                 this.ViewModel.Invalidate();//Invalidate
             };
-            this.RemoteControl.ValueChangeCompleted += (s, value) => this.ViewModel.Invalidate(InvalidateMode.HD);
+            this.PositionRemoteControl.ValueChangeCompleted += (s, value) => this.ViewModel.Invalidate(InvalidateMode.HD);
 
 
 

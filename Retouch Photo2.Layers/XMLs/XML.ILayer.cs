@@ -30,6 +30,9 @@ namespace Retouch_Photo2.Layers
                 element.Add(new XAttribute("Visibility", layer.Visibility));
                 element.Add(new XAttribute("TagType", layer.TagType));
 
+                element.Add(new XAttribute("IsExpand", layer.IsExpand));
+                element.Add(new XAttribute("IsSelected", layer.IsSelected));
+
                 layer.SaveWith(element);
 
                 element.Add(Retouch_Photo2.Brushs.XML.SaveStyle("Style", layer.Style));
@@ -69,6 +72,9 @@ namespace Retouch_Photo2.Layers
                     if (element.Attribute("Visibility") is XAttribute visibility) layer.Visibility = XML.CreateVisibility(visibility.Value);
                     if (element.Attribute("TagType") is XAttribute tagType) layer.TagType = Retouch_Photo2.Blends.XML.CreateTagType(tagType.Value);
 
+                    if (element.Attribute("IsExpand") is XAttribute isExpand) layer.IsExpand = (bool)isExpand;
+                    if (element.Attribute("IsSelected") is XAttribute isSelected) layer.IsSelected = (bool)isSelected;
+                    
                     layer.Load(element);
 
                     if (element.Element("Style") is XElement style) layer.Style = Retouch_Photo2.Brushs.XML.LoadStyle(style);

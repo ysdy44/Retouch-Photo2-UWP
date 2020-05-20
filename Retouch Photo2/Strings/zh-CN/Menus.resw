@@ -192,8 +192,11 @@
   <data name="Transformer_RatioScaling" xml:space="preserve">
     <value>等比例缩放</value>
   </data>
-  <data name="Transformer_Remote" xml:space="preserve">
+  <data name="Transformer_PositionRemote" xml:space="preserve">
     <value>位置遥控</value>
+  </data>
+  <data name="Transformer_StepFrequency" xml:space="preserve">
+    <value>步频</value>
   </data>
   <data name="Transformer_Rotate" xml:space="preserve">
     <value>旋转</value>

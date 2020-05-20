@@ -13,15 +13,15 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Sets all layer controls height.
         /// </summary>
-        public void SetControlHeight(int controlHeight)
+        public static void SetControlHeight(LayerCollection layerCollection, int controlHeight)
         {
             LayerCollection.ControlsHeight = controlHeight;
 
             //Recursive
-            this._setControlHeight(this.RootLayers, controlHeight);
+            LayerCollection._setControlHeight(layerCollection.RootLayers, controlHeight);
         }
 
-        private void _setControlHeight(IList<ILayer> layers, int controlHeight)
+        private static void _setControlHeight(IEnumerable<ILayer> layers, int controlHeight)
         {
             foreach (ILayer child in layers)
             {
@@ -29,7 +29,7 @@ namespace Retouch_Photo2.Layers
                     child.Control.ControlHeight = controlHeight;
 
                 //Recursive
-                this._setControlHeight(child.Children, controlHeight);
+                LayerCollection._setControlHeight(child.Children, controlHeight);
             }
         }
         

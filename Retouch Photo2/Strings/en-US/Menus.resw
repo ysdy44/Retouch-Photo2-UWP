@@ -192,7 +192,10 @@
   <data name="Transformer_RatioScaling" xml:space="preserve">
     <value>Ratio Scaling</value>
   </data>
-  <data name="Transformer_Remote" xml:space="preserve">
+  <data name="Transformer_StepFrequency" xml:space="preserve">
+    <value>Step Frequency</value>
+  </data>
+  <data name="Transformer_PositionRemote" xml:space="preserve">
     <value>Position Remote</value>
   </data>
   <data name="Transformer_Rotate" xml:space="preserve">

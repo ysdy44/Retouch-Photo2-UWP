@@ -25,18 +25,19 @@
                 <!--Edit-->
                 <StackPanel Grid.Column="0">
                     
-                    <TextBlock x:Name="EditTextBlock" Text="Edit" Style="{StaticResource AppTextBlockStyle}"/>
-                    <Button x:Name="CutButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
-                    <Button x:Name="DuplicateButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
-                    <Button x:Name="CopyButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
-                    <Button x:Name="PasteButton" Padding="0" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
-                    <Button x:Name="ClearButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <TextBlock x:Name="EditTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <Button x:Name="CutButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="DuplicateButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="CopyButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="PasteButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="ClearButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
 
                     <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
 
-                    <TextBlock x:Name="GroupTextBlock" Text="Group" Style="{StaticResource AppTextBlockStyle}"/>
-                    <Button x:Name="GroupButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
-                    <Button x:Name="UnGroupButton" Padding="0" IsEnabled="{x:Bind SelectionViewModel.IsGroupLayer, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <TextBlock x:Name="GroupTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <Button x:Name="GroupButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="UnGroupButton" IsEnabled="{x:Bind SelectionViewModel.IsGroupLayer, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="ReleaseButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
 
                 </StackPanel>
 
@@ -45,9 +46,9 @@
                 <!--Select-->
                 <StackPanel Grid.Column="2">
 
-                    <TextBlock x:Name="SelectTextBlock" Text="Select" Style="{StaticResource AppTextBlockStyle}"/>
-                    <Button x:Name="AllButton" Padding="0" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
-                    <Button x:Name="DeselectButton" Padding="0" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
+                    <TextBlock x:Name="SelectTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <Button x:Name="AllButton" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="DeselectButton" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
                   
                     <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
 

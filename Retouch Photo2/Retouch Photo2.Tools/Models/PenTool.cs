@@ -329,22 +329,17 @@ namespace Retouch_Photo2.Tools.Models
             //Layer
             CurveLayer curveLayer = new CurveLayer(canvasStartingPoint, canvasPoint)
             {
-                SelectMode = SelectMode.Selected,
+                IsSelected = true,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.CurveStyle,
             };
-
-            //Selection
-            this.SelectionViewModel.SetValue((layer) =>
-            {
-                layer.SelectMode = SelectMode.UnSelected;
-            });
+            
+            this.SelectionViewModel.SetModeSingle(curveLayer);//Selection
 
             //Mezzanine
-            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(curveLayer);
-            this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+            LayerCollection.Mezzanine(this.ViewModel.Layers, curveLayer);
+            LayerCollection.ArrangeLayersControls(this.ViewModel.Layers);
 
-            this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
             this.ViewModel.Invalidate();//Invalidate
         }
 

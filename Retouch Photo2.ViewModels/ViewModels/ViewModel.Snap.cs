@@ -78,7 +78,7 @@ namespace Retouch_Photo2.ViewModels
 
             foreach (ILayer layer in layers)
             {
-                if (layer.SelectMode.ToBool() == false)
+                if (layer.IsSelected == false)
                 {
                     Transformer transformer = layer.Transform.Destination;
 

@@ -86,7 +86,7 @@ namespace Retouch_Photo2
             await FileUtil.SaveThumbnailFile(zipFolder, thumbnail);
 
             //Save photos file and Move photo file.
-            IEnumerable<Photocopier> savedPhotocopiers = this.ViewModel.Layers.GetPhotocopiers();
+            IEnumerable<Photocopier> savedPhotocopiers = LayerCollection.GetPhotocopiers(this.ViewModel.Layers);
             IEnumerable<Photo> savedPhotos = from photo in Photo.Instances where savedPhotocopiers.Any(p => photo.Equals(p)) select photo;
             await XML.SavePhotoFile(zipFolder, savedPhotos);
             foreach (Photo photo in savedPhotos)

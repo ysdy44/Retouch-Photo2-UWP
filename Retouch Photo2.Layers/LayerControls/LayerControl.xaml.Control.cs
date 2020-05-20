@@ -9,46 +9,12 @@ namespace Retouch_Photo2.Layers
     public partial class LayerControl : UserControl, ILayerControl
     {
 
-        public void SetExpandMode(ExpandMode value)
-        {
-            this.ExpanedButton.Visibility = (value == ExpandMode.NoChildren) ? Visibility.Collapsed : Visibility.Visible;
-            this.ExpanedFontIcon.Glyph = (value == ExpandMode.Expand) ? "\xE011" : "\xE014";
-        }
-        public void SetSelectMode(SelectMode value)
-        {
-            this.RootGrid.Background = this.GetBackground(value);
-
-            if (value.ToBool())
-            {
-                this.ManipulationMode = ManipulationModes.TranslateY;
-                this.IconContentControl.Foreground = this.CheckColor;
-                this.SelectedFontIcon.Glyph = "\xEC61";
-                this.TextBlock.Foreground =
-                    this.ExpanedFontIcon.Foreground =
-                    this.SelectedFontIcon.Foreground =
-                    this.VisualFontIcon.Foreground =
-                    this.CheckColor;
-            }
-            else
-            {
-                this.ManipulationMode = ManipulationModes.System;
-                this.IconContentControl.Foreground = this.HighlightColor;
-                this.SelectedFontIcon.Glyph = "\xECCA";
-                    this.TextBlock.Foreground =
-                    this.ExpanedFontIcon.Foreground =
-                    this.SelectedFontIcon.Foreground =
-                    this.VisualFontIcon.Foreground =
-                    this.UnCheckColor;
-            }
-        }
         public void SetOverlayMode(OverlayMode value)
         {
             this.OverlayShowTopBorder.Visibility = (value == OverlayMode.Top) ? Visibility.Visible : Visibility.Collapsed;
             this.OverlayShowCenterBorder.Visibility = (value == OverlayMode.Center) ? Visibility.Visible : Visibility.Collapsed;
             this.OverlayShowBottomBorder.Visibility = (value == OverlayMode.Bottom) ? Visibility.Visible : Visibility.Collapsed;
         }
-
-
         private OverlayMode GetOverlay(double y)
         {
             double height = this.ControlHeight;
@@ -67,16 +33,62 @@ namespace Retouch_Photo2.Layers
             return OverlayMode.None;
         }
 
-        private SolidColorBrush GetBackground(SelectMode newMode)
+
+        public void SetIsSelected(bool value)
         {
-            switch (newMode)
+            if (value == true)
             {
-                case SelectMode.UnSelected: return this.UnAccentColor;
-                case SelectMode.Selected: return this.AccentColor;
-                case SelectMode.ParentsSelected: return this.ThreeStateColor;
-                case SelectMode.ChildSelected: return this.FourStateColor;
+                this.ManipulationMode = ManipulationModes.TranslateY;
+                this.SelectedFontIcon.Glyph = "\xEC61";
             }
-            return this.UnAccentColor;
+            else
+            {
+                this.ManipulationMode = ManipulationModes.System;
+                this.SelectedFontIcon.Glyph = "\xECCA";
+            }
+        }
+
+
+        public void SetBackground(BackgroundMode value)
+        {
+            switch (value)
+            {
+                case BackgroundMode.UnSelected: this.RootGrid.Background = this.UnAccentColor; break;
+                case BackgroundMode.Selected: this.RootGrid.Background = this.AccentColor; break;
+                case BackgroundMode.ParentsSelected: this.RootGrid.Background = this.ThreeStateColor; break;
+                case BackgroundMode.ChildSelected: this.RootGrid.Background = this.FourStateColor; break;
+            }
+
+            if (value == BackgroundMode.Selected)
+            {
+                this.IconContentControl.Foreground = this.CheckColor;
+                this.TextBlock.Foreground =
+                    this.ExpanedFontIcon.Foreground =
+                    this.SelectedFontIcon.Foreground =
+                    this.VisualFontIcon.Foreground =
+                    this.CheckColor;
+            }
+            else
+            {
+                this.IconContentControl.Foreground = this.HighlightColor;
+                this.TextBlock.Foreground =
+                this.ExpanedFontIcon.Foreground =
+                this.SelectedFontIcon.Foreground =
+                this.VisualFontIcon.Foreground =
+                this.UnCheckColor;
+            }
+        }
+
+
+        public void SetIsExpand(bool value)
+        {
+            this.ExpanedFontIcon.Glyph = value ? "\xE011" : "\xE014";
+        }
+
+
+        public void SetChildrenZero(bool value)
+        {
+            this.ExpanedButton.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
         }
 
     }

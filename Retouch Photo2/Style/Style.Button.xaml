@@ -816,6 +816,8 @@
 
     <!--Button  Icon == Tag-->
     <Style x:Key="AppIconButton" TargetType="Button" BasedOn="{StaticResource IconButtonBase}">
+        <Setter Property="Height" Value="36"/>
+        <Setter Property="Padding" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">

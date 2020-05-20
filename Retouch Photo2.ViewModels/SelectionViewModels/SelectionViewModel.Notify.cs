@@ -42,7 +42,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private string layerName = string.Empty;
-        
+
 
         /// <summary> <see cref = "SelectionViewModel" />'s opacity. </summary>
         public float Opacity { get; set; } = 1.0f;
@@ -66,7 +66,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private BlendEffectMode? blendMode = null;
-        
+
 
         /// <summary> <see cref = "SelectionViewModel" />'s visibility. </summary>
         public Visibility Visibility { get; set; } = Visibility.Visible;
@@ -141,7 +141,7 @@ namespace Retouch_Photo2.ViewModels
             get => this.isGroupLayer;
             set
             {
-                this.isGroupLayer=value;
+                this.isGroupLayer = value;
                 this.OnPropertyChanged(nameof(this.IsGroupLayer));//Notify 
             }
         }
@@ -151,7 +151,7 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Sets GroupLayer. </summary>     
         private void SetGroupLayer(ILayer layer) => this.IsGroupLayer = layer.Type == LayerType.Group;
         /// <summary> Sets GroupLayer. </summary>     
-        private void SetGroupLayer(IList<ILayer> layers) => this.IsGroupLayer = layers.Any(layer => layer.Type == LayerType.Group);
+        private void SetGroupLayer(IEnumerable<ILayer> layers) => this.IsGroupLayer = layers.Any(layer => layer.Type == LayerType.Group);
 
 
         /// <summary> ImageLayer's Exist. </summary>      
@@ -191,13 +191,13 @@ namespace Retouch_Photo2.ViewModels
             }
         }
 
-        
+
         /// <summary> <see cref = "SelectionViewModel" />'s CurveLayer. </summary>
         public CurveLayer CurveLayer { get; set; }
         /// <summary> Sets CurveLayer. </summary>     
         private void SetCurveLayer(ILayer layer)
         {
-            if (layer==null)
+            if (layer == null)
             {
                 this.CurveLayer = null;
                 return;

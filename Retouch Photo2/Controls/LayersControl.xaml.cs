@@ -32,7 +32,7 @@ namespace Retouch_Photo2.Controls
         //LayerCollection
         ILayer DragSourceLayer;
         ILayer DragDestinationLayer;
-        SelectMode DragLayerSelectMode;
+        bool DragLayerIsSelected;
         OverlayMode DragLayerOverlayMode;
 
 
@@ -49,10 +49,13 @@ namespace Retouch_Photo2.Controls
             {
                 foreach (ILayer child in this.ViewModel.Layers.RootLayers)
                 {
-                    child.SelectMode = SelectMode.UnSelected;
+                    child.IsSelected = false;
                 }
 
                 this.SelectionViewModel.SetModeNone();//Selection
+
+                LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.Layers);
+
                 this.ViewModel.Invalidate();
             };
             this.RightTapped += (s, e) => this.ShowLayerMenu();
@@ -70,21 +73,23 @@ namespace Retouch_Photo2.Controls
                 Photocopier photocopier = photo.ToPhotocopier();
                 ImageLayer imageLayer = new ImageLayer(transformerSource, photocopier)
                 {
-                    SelectMode = SelectMode.Selected,
+                    IsSelected = true,
                     Transform = new Transform(transformerSource)
                 };
 
                 //Selection
                 this.SelectionViewModel.SetValue((layer) =>
                 {
-                    layer.SelectMode = SelectMode.UnSelected;
+                    layer.IsSelected = false;
                 });
 
                 //Mezzanine
-                this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(imageLayer);
-                this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+                LayerCollection.Mezzanine(this.ViewModel.Layers, imageLayer);
 
                 this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+
+                LayerCollection.ArrangeLayersControls(this.ViewModel.Layers);
+
                 this.ViewModel.Invalidate();//Invalidate
             };
         }

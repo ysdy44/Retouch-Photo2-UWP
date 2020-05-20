@@ -47,9 +47,8 @@ namespace Retouch_Photo2.ViewModels
             }
 
             //Arrange
-            this.Layers.ArrangeLayersControlsWithClearAndAdd();
-            this.Layers.ArrangeLayersParents();
-            this.Layers.ArrangeChildrenExpand();
+            LayerCollection.ArrangeLayersControls(this.Layers);
+            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.Layers);
         }
 
 
@@ -60,8 +59,6 @@ namespace Retouch_Photo2.ViewModels
 
         /// <summary> Retouch_Photo2's the only ILayers. </summary>
         public LayerCollection Layers { get; } = new LayerCollection();
-        /// <summary> Retouch_Photo2's the only Mezzanine Layer. </summary>
-        public ILayer MezzanineLayer = null;
 
 
         #region Invalidate

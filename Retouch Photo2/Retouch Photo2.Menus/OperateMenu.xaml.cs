@@ -252,17 +252,13 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
                     ILayer destination = this.SelectionViewModel.Layer;
-
-                    IList<ILayer> parentsChildren = (destination.Parents == null) ?
-                        this.ViewModel.Layers.RootLayers :
-                        destination.Parents.Children;
-
+                    IList<ILayer> parentsChildren = this.ViewModel.Layers.GetParentsChildren(destination);
                     if (parentsChildren.Count < 2) return;
 
                     parentsChildren.Remove(destination);
                     parentsChildren.Add(destination);
 
-                    this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+                    LayerCollection.ArrangeLayersControls(this.ViewModel.Layers);
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };
@@ -272,20 +268,19 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
                     ILayer destination = this.SelectionViewModel.Layer;
-
-                    IList<ILayer> parentsChildren = (destination.Parents == null) ?
-                        this.ViewModel.Layers.RootLayers :
-                        destination.Parents.Children;
-
+                    IList<ILayer> parentsChildren = this.ViewModel.Layers.GetParentsChildren(destination);
                     if (parentsChildren.Count < 2) return;
 
                     int index = parentsChildren.IndexOf(destination);
                     index++;
 
+                    if (index < 0) index = 0;
+                    if (index > parentsChildren.Count) index = parentsChildren.Count - 1;
+
                     parentsChildren.Remove(destination);
                     parentsChildren.Insert(index, destination);
 
-                    this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+                    LayerCollection.ArrangeLayersControls(this.ViewModel.Layers);
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };
@@ -294,21 +289,20 @@ namespace Retouch_Photo2.Menus.Models
             {
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
-                    ILayer destination = this.SelectionViewModel.Layer;
-
-                    IList<ILayer> parentsChildren = (destination.Parents == null) ?
-                        this.ViewModel.Layers.RootLayers :
-                        destination.Parents.Children;
-
+                    ILayer destination = this.SelectionViewModel.Layer;                    
+                    IList<ILayer> parentsChildren = this.ViewModel.Layers.GetParentsChildren(destination);                    
                     if (parentsChildren.Count < 2) return;
 
                     int index = parentsChildren.IndexOf(destination);
                     index--;
 
+                    if (index < 0) index = 0;
+                    if (index > parentsChildren.Count) index = parentsChildren.Count - 1;
+
                     parentsChildren.Remove(destination);
                     parentsChildren.Insert(index, destination);
 
-                    this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+                    LayerCollection.ArrangeLayersControls(this.ViewModel.Layers);
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };
@@ -318,17 +312,13 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
                     ILayer destination = this.SelectionViewModel.Layer;
-
-                    IList<ILayer> parentsChildren = (destination.Parents == null) ?
-                        this.ViewModel.Layers.RootLayers :
-                        destination.Parents.Children;
-
+                    IList<ILayer> parentsChildren = this.ViewModel.Layers.GetParentsChildren(destination);                    
                     if (parentsChildren.Count < 2) return;
 
                     parentsChildren.Remove(destination);
                     parentsChildren.Insert(0, destination);
 
-                    this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+                    LayerCollection.ArrangeLayersControls(this.ViewModel.Layers);
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };

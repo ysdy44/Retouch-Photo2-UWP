@@ -63,8 +63,6 @@ namespace Retouch_Photo2.Tools.Models
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this._button.ToolTip.Content = resource.GetString("/Tools/Cursor");
-
-            this.StepFrequencyToolTip.Content = resource.GetString("/Tools/Cursor_StepFrequency");
         }
 
         //ToolTip
@@ -74,15 +72,11 @@ namespace Retouch_Photo2.Tools.Models
             {
                 if (this.IsSelected)
                 {
-                    this.StepFrequencyToolTip.IsOpen = true;
-
                     this.ModeControl.IsOpen = true;
                 }
             };
             this._button.ToolTip.Closed += (s, e) =>
             {
-                this.StepFrequencyToolTip.IsOpen = false;
-
                 this.ModeControl.IsOpen = false;
             };
         }
@@ -174,8 +168,11 @@ namespace Retouch_Photo2.Tools.Models
                             this.BoxChoose(parentsChildren);
 
                             this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+
+                            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.Layers);
+                            
+                            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                         }
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                     }
                     break;
             }
@@ -216,16 +213,16 @@ namespace Retouch_Photo2.Tools.Models
                 switch (this.MarqueeCompositeMode)
                 {
                     case MarqueeCompositeMode.New:
-                        layer.SelectMode = contained ? SelectMode.Selected : SelectMode.UnSelected;
+                        layer.IsSelected = contained;
                         break;
                     case MarqueeCompositeMode.Add:
-                        if (contained) layer.SelectMode = SelectMode.Selected;
+                        if (contained) layer.IsSelected = true;
                         break;
                     case MarqueeCompositeMode.Subtract:
-                        if (contained) layer.SelectMode = SelectMode.UnSelected;
+                        if (contained) layer.IsSelected = false;
                         break;
                     case MarqueeCompositeMode.Intersect:
-                        if (contained == false) layer.SelectMode = SelectMode.UnSelected;
+                        if (contained == false) layer.IsSelected = false;
                         break;
                 }
             }

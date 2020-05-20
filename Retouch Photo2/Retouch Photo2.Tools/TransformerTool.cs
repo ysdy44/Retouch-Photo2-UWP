@@ -65,7 +65,7 @@ namespace Retouch_Photo2.Tools
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
             //Snap
-            if (this.IsSnap) canvasPoint = this.Snap.Snap(canvasPoint);
+            if (this.IsSnap && this.TransformerMode.IsScale()) canvasPoint = this.Snap.Snap(canvasPoint);
 
             //Selection
             Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.StartingTransformer, this.IsRatio, this.IsCenter, this.IsStepFrequency);
@@ -91,10 +91,10 @@ namespace Retouch_Photo2.Tools
             //Snap
             if (this.IsSnap)
             {
-                canvasPoint = this.Snap.Snap(canvasPoint);
+                if (this.TransformerMode.IsScale()) canvasPoint = this.Snap.Snap(canvasPoint);
                 this.Snap.Default();
             }
-            
+
             //History
             IHistoryBase history = new IHistoryBase("Transform");
 

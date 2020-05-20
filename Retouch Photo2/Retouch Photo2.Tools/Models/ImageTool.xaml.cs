@@ -22,7 +22,8 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        
+
+        ILayer MezzanineLayer = null;
 
         //@Construct
         public ImageTool()
@@ -140,13 +141,13 @@ namespace Retouch_Photo2.Tools.Models
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, photo.Width, photo.Height);
 
             //Mezzanine         
-            this.ViewModel.MezzanineLayer = new ImageLayer(transformerSource, photocopier)
+            this.MezzanineLayer = new ImageLayer(transformerSource, photocopier)
             {
-                SelectMode = SelectMode.Selected,
+                IsSelected = true,
                 Transform = new Transform(transformerSource, transformerDestination),
                 Style = this.SelectionViewModel.GeometryStyle
             };
-            this.ViewModel.Layers.MezzanineOnFirstSelectedLayer(this.ViewModel.MezzanineLayer);
+            LayerCollection.Mezzanine(this.ViewModel.Layers, this.MezzanineLayer);
 
             this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
@@ -155,7 +156,7 @@ namespace Retouch_Photo2.Tools.Models
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
             //ILayer
-            ILayer mezzanineLayer = this.ViewModel.MezzanineLayer;
+            ILayer mezzanineLayer = this.MezzanineLayer;
             if (mezzanineLayer == null) return;
 
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
@@ -168,26 +169,27 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
-            if (this.ViewModel.MezzanineLayer == null) return;
+            if (this.MezzanineLayer == null) return;
 
             if (isOutNodeDistance)
             {
                 Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
-                this.ViewModel.MezzanineLayer.Transform.Destination = transformerDestination;
+                this.MezzanineLayer.Transform.Destination = transformerDestination;
                 this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
                 foreach (ILayer child in this.ViewModel.Layers.RootLayers)
                 {
-                    child.SelectMode = SelectMode.UnSelected;
+                    child.IsSelected = false;
                 }
-                this.ViewModel.MezzanineLayer.SelectMode = SelectMode.Selected;
-                this.ViewModel.MezzanineLayer = null;
-
-                this.ViewModel.Layers.ArrangeLayersControlsWithClearAndAdd();
+                this.MezzanineLayer.IsSelected = true;
+                this.MezzanineLayer = null;
             }
-            else this.ViewModel.Layers.RemoveMezzanineLayer(this.ViewModel.MezzanineLayer);//Mezzanine
+            else LayerCollection.RemoveMezzanineLayer(this.ViewModel.Layers, this.MezzanineLayer);//Mezzanine
 
             this.SelectionViewModel.SetMode(this.ViewModel.Layers);//Selection
+            
+            LayerCollection.ArrangeLayersControls(this.ViewModel.Layers);
+            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.Layers);
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }

@@ -141,6 +141,9 @@
   <data name="Group_Group" xml:space="preserve">
     <value>Group</value>
   </data>
+  <data name="Group_Release" xml:space="preserve">
+    <value>释放</value>
+  </data>
   <data name="Group_UnGroup" xml:space="preserve">
     <value>UnGroup</value>
   </data>

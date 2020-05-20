@@ -4,20 +4,20 @@ namespace Retouch_Photo2.Layers
 {
     public partial class LayerCollection
     {
-        
+
         /// <summary>
         /// Gets all selected layers.
         /// </summary>
         /// <returns> The selected layers. </returns>
-        public IList<ILayer> GetAllSelectedLayers()
-        {
+        public static IEnumerable<ILayer> GetAllSelectedLayers(LayerCollection layerCollection) 
+         {
             IList<ILayer> addLayers = new List<ILayer>();
 
             void addLayer(IList<ILayer> layers)
             {
                 foreach (ILayer child in layers)
                 {
-                    if (child.SelectMode == SelectMode.Selected)
+                    if (child.IsSelected == true)
                     {
                         addLayers.Add(child);
                     }
@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Layers
             }
 
             //Recursive
-            addLayer(this.RootLayers);
+            addLayer(layerCollection.RootLayers);
 
             return addLayers;
         }
@@ -41,16 +41,16 @@ namespace Retouch_Photo2.Layers
         /// Select the current layer (hold **Shift** at the same time).
         /// </summary>
         /// <param name="currentLayer"> The current layer. </param>
-        public void ShiftSelectCurrentLayer(ILayer currentLayer)
+        public static void ShiftSelectCurrentLayer(LayerCollection layerCollection, ILayer currentLayer)
         {
-            IList<ILayer> parentsChildren = this.GetParentsChildren(currentLayer);
+            IList<ILayer> parentsChildren = layerCollection.GetParentsChildren(currentLayer);
 
             //Recursive
-            bool isFind = this._findShiftSelectedLayer(currentLayer, parentsChildren);
-            if (isFind) this._setShiftSelectedLayer(currentLayer, parentsChildren);
+            bool isFind = LayerCollection._findShiftSelectedLayer(currentLayer, parentsChildren);
+            if (isFind) LayerCollection._setShiftSelectedLayer(currentLayer, parentsChildren);
         }
         
-        private bool _findShiftSelectedLayer(ILayer currentLayer, IList<ILayer> layers)
+        private static bool _findShiftSelectedLayer(ILayer currentLayer, IEnumerable<ILayer> layers)
         {
             // Find self layer and selected layer.
             bool existSelectedLayer = false;
@@ -59,7 +59,7 @@ namespace Retouch_Photo2.Layers
             foreach (ILayer child in layers)
             {
                 if (existSelectedLayer == false)
-                    if (child.SelectMode == SelectMode.Selected || child.SelectMode == SelectMode.ChildSelected)
+                    if (child.IsSelected == true)
                         existSelectedLayer = true;
 
                 if (existSelfLayer == false)
@@ -70,7 +70,7 @@ namespace Retouch_Photo2.Layers
             return (existSelectedLayer && existSelfLayer);
         }
 
-        private void _setShiftSelectedLayer(ILayer currentLayer, IList<ILayer> layers)
+        private static void _setShiftSelectedLayer(ILayer currentLayer, IEnumerable<ILayer> layers)
         {
             // Find self layer and selected layer.
             bool existSelectedLayer = false;
@@ -82,11 +82,11 @@ namespace Retouch_Photo2.Layers
                     break;
 
                 if (existSelectedLayer || existSelfLayer)
-                    child.SelectMode = SelectMode.Selected;
+                    child.IsSelected = true;
 
 
                 if (existSelectedLayer == false)
-                    if (child.SelectMode == SelectMode.Selected || child.SelectMode == SelectMode.ChildSelected)
+                    if (child.IsSelected == true)
                         existSelectedLayer = true;
 
                 if (existSelfLayer == false)
@@ -94,7 +94,7 @@ namespace Retouch_Photo2.Layers
                         existSelfLayer = true;
             }
 
-            currentLayer.SelectMode = SelectMode.Selected;
+            currentLayer.IsSelected = true;
         }
                
 

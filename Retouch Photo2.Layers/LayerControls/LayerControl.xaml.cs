@@ -61,14 +61,6 @@ namespace Retouch_Photo2.Layers
 
             //LayerCollection
             {
-                this.Loaded += (s, e) =>
-                {
-                    if (layer.ExpandMode == ExpandMode.None)
-                        layer.ExpandMode = ExpandMode.NoChildren;
-                    if (layer.SelectMode == SelectMode.None)
-                        layer.SelectMode = SelectMode.UnSelected;
-                };
-
                 this.Tapped += (s, e) =>
                 {
                     LayerCollection.ItemClick?.Invoke(layer);//Delegate
@@ -81,7 +73,7 @@ namespace Retouch_Photo2.Layers
                 };
                 this.VisualButton.Tapped += (s, e) =>
                 {
-                    LayerCollection.VisualChanged?.Invoke(layer);//Delegate
+                    LayerCollection.VisibilityChanged?.Invoke(layer);//Delegate
                     e.Handled = true;
                 };
             }
@@ -90,13 +82,12 @@ namespace Retouch_Photo2.Layers
             {
                 this.ExpanedButton.Tapped += (s, e) =>
                 {
-                    layer.Expaned();
+                    LayerCollection.IsExpandChanged?.Invoke(layer);//Delegate   
                     e.Handled = true;
                 };
                 this.SelectedButton.Tapped += (s, e) =>
                 {
-                    layer.Selected(); 
-                    LayerCollection.SelectChanged?.Invoke();//Delegate   
+                    LayerCollection.IsSelectedChanged?.Invoke(layer);//Delegate   
                     e.Handled = true;
                 };
             }
@@ -106,7 +97,7 @@ namespace Retouch_Photo2.Layers
                 this.ManipulationStarted += (s, e) =>
                 {
                     LayerCollection.IsOverlay = true;
-                    LayerCollection.DragItemsStarted?.Invoke(layer, layer.SelectMode);//Delegate     
+                    LayerCollection.DragItemsStarted?.Invoke(layer, layer.IsSelected);//Delegate     
                 };
                 this.ManipulationCompleted += (s, e) =>
                 {
