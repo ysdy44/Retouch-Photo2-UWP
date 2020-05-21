@@ -13,51 +13,76 @@ namespace Retouch_Photo2.Effects
     {
         //GaussianBlur
         public bool GaussianBlur_IsOn;
-        public float GaussianBlur_Radius = 0;
+        public float GaussianBlur_Radius, StartingGaussianBlur_Radius = 0;
+        public void CacheGaussianBlur()
+        {
+            this.StartingGaussianBlur_Radius = this.GaussianBlur_Radius;
+        }
+
 
         //DirectionalBlur
         public bool DirectionalBlur_IsOn;
-        public float DirectionalBlur_Radius = 0;
-        public float DirectionalBlur_Angle = 0;
+        public float DirectionalBlur_Radius, StartingDirectionalBlur_Radius = 0;
+        public float DirectionalBlur_Angle, StartingDirectionalBlur_Angle = 0;
+        public void CacheDirectionalBlur()
+        {
+            this.StartingDirectionalBlur_Radius = this.DirectionalBlur_Radius;
+            this.StartingDirectionalBlur_Angle = this.DirectionalBlur_Angle;
+        }
+
 
         //Sharpen
         public bool Sharpen_IsOn;
-        public float Sharpen_Amount = 0;
+        public float Sharpen_Amount, StartingSharpen_Amount = 0;
+        public void CacheSharpen()
+        {
+            this.StartingSharpen_Amount = this.Sharpen_Amount;
+        }
 
         //OuterShadow
         public bool OuterShadow_IsOn;
-        public float OuterShadow_Radius = 0;
-        public float OuterShadow_Opacity = 0.5f;
-        public Color OuterShadow_Color = Colors.Black;
+        public float OuterShadow_Radius, StartingOuterShadow_Radius = 0;
+        public float OuterShadow_Opacity, StartingOuterShadow_Opacity = 0.5f;
+        public Color OuterShadow_Color, StartingOuterShadow_Color = Colors.Black;
 
-        private float OuterShadow_offset = 0;
+        public float outerShadow_Offset, StartingOuterShadow_Offset = 0;
         public float OuterShadow_Offset
         {
-            get => this.OuterShadow_offset;
+            get => this.outerShadow_Offset;
             set
             {
                 this.OuterShadow_Position = new Vector2((float)Math.Cos(this.OuterShadow_Angle), (float)Math.Sin(this.OuterShadow_Angle)) * value;
-                this.OuterShadow_offset = value;
+                this.outerShadow_Offset = value;
             }
         }
-        private float OuterShadow_angle = 0.78539816339744830961566084581988f;// 1/4 π
+        public float outerShadow_Angle, StartingOuterShadow_Angle = 0.78539816339744830961566084581988f;// 1/4 π
         public float OuterShadow_Angle
         {
-            get => this.OuterShadow_angle;
+            get => this.outerShadow_Angle;
             set
             {
                 this.OuterShadow_Position = new Vector2((float)Math.Cos(value), (float)Math.Sin(value)) * this.OuterShadow_Offset;
-                this.OuterShadow_angle = value;
+                this.outerShadow_Angle = value;
             }
         }
         Vector2 OuterShadow_Position = Vector2.Zero;
+        public void CacheOuterShadow()
+        {
+            this.StartingOuterShadow_Radius = this.OuterShadow_Radius;
+            this.StartingOuterShadow_Opacity = this.OuterShadow_Opacity;
+            this.StartingOuterShadow_Color = this.OuterShadow_Color;
+
+            this.StartingOuterShadow_Offset = this.OuterShadow_Offset;
+            this.StartingOuterShadow_Angle = this.OuterShadow_Angle;
+        }
+
 
         //Outline
         public bool Outline_IsOn;
-        private int Outline_size = 1;
+        public int outline_Size, StartingOutline_Size = 1;
         public int Outline_Size
         {
-            get => this.Outline_size;
+            get => this.outline_Size;
             set
             {
                 this.Outline_Mode = (value > 0) ? MorphologyEffectMode.Dilate : MorphologyEffectMode.Erode;
@@ -65,22 +90,38 @@ namespace Retouch_Photo2.Effects
                 int s = Math.Abs(value);
                 this.Outline_Height = this.Outline_Width = s > 90 ? 90 : s;
 
-                this.Outline_size = value;
+                this.outline_Size = value;
             }
         }
 
         public MorphologyEffectMode Outline_Mode { get; private set; }
         public int Outline_Width { get; private set; } = 1;
         public int Outline_Height { get; private set; } = 1;
+        public void CacheOutline()
+        {
+            this.StartingOutline_Size = this.Outline_Size;
+        }
+
 
         //Emboss
         public bool Emboss_IsOn;
-        public float Emboss_Radius = 1;
-        public float Emboss_Angle = 0;
+        public float Emboss_Radius, StartingEmboss_Radius = 1;
+        public float Emboss_Angle, StartingEmboss_Angle = 0;
+        public void CacheEmboss()
+        {
+            this.StartingEmboss_Radius = this.Emboss_Radius;
+            this.StartingEmboss_Angle = this.Emboss_Angle;
+        }
+
 
         //Straighten
         public bool Straighten_IsOn;
-        public float Straighten_Angle = 0;
+        public float Straighten_Angle, StartingStraighten_Angle = 0;
+        public void CacheStraighten()
+        {
+            this.StartingStraighten_Angle = this.Straighten_Angle;
+        }
+
 
         /// <summary>
         /// Get own copy.

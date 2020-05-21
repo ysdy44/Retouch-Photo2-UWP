@@ -48,8 +48,8 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// The root controls.
         /// </summary>
-        public ObservableCollection<UIElement> RootControls { get; private set; } = new ObservableCollection<UIElement>();
-
+        public ObservableCollection<LayerControl> RootControls { get; private set; } = new ObservableCollection<LayerControl>();
+    
 
         /// <summary>
         /// Get a layer parents children( or root layers when it has not parents).

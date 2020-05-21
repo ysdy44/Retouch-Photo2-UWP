@@ -52,15 +52,8 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //ShowControl
-        private bool _isStopsFlyoutShowed;
         private void ConstructShowControl()
         {
-            this.StopsFlyout.Opened += (s, e) => this._isStopsFlyoutShowed = true;
-            this.StopsFlyout.Closed += (s, e) =>
-            {
-                this._isStopsFlyoutShowed = false;
-                this.ShowControl.Invalidate();
-            };
             this.ShowControl.Tapped += (s, e) =>
             {
                 switch (this.FillOrStroke)
@@ -84,6 +77,42 @@ namespace Retouch_Photo2.Tools.Models
                         break;
                     case FillOrStroke.Stroke:
                         this.StrokeStopsChanged(array);
+                        break;
+                }
+            };
+            this.StopsPicker.StopsChangeStarted += (s, array) =>
+            {
+                switch (this.FillOrStroke)
+                {
+                    case FillOrStroke.Fill:
+                        this.FillStopsChangeStarted(array);
+                        break;
+                    case FillOrStroke.Stroke:
+                        this.StrokeStopsChangeStarted(array);
+                        break;
+                }
+            };
+            this.StopsPicker.StopsChangeDelta += (s, array) =>
+            {
+                switch (this.FillOrStroke)
+                {
+                    case FillOrStroke.Fill:
+                        this.FillStopsChangeDelta(array);
+                        break;
+                    case FillOrStroke.Stroke:
+                        this.StrokeStopsChangeDelta(array);
+                        break;
+                }
+            };
+            this.StopsPicker.StopsChangeCompleted += (s, array) =>
+            {
+                switch (this.FillOrStroke)
+                {
+                    case FillOrStroke.Fill:
+                        this.FillStopsChangeCompleted(array);
+                        break;
+                    case FillOrStroke.Stroke:
+                        this.StrokeStopsChangeCompleted(array);
                         break;
                 }
             };

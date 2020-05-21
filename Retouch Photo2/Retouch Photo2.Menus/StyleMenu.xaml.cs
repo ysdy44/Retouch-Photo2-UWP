@@ -44,7 +44,7 @@ namespace Retouch_Photo2.Menus.Models
 
             foreach (var layer in layers)
             {
-                yield return $"{depht}   {layer.Type}  {layer.Control.Self.Visibility}";
+                yield return $"{depht}   {layer.Type}  {layer.Control.Index}";
 
 
                 foreach (var child in sadasd( layer.Children, depht+1))

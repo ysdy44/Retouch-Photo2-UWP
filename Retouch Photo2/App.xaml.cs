@@ -44,7 +44,7 @@ namespace Retouch_Photo2
 
                  new ViewTool(),
                  new BrushTool(),
-                 new TransparencyTool(),
+                 //new TransparencyTool(),
                  null,
 
                  //Geometry0

@@ -6,14 +6,14 @@ namespace Retouch_Photo2.Layers
     public partial class LayerCollection
     {
 
-
+        static int Index = 0;
         /// <summary>
         /// Arrange all layers's control, depth, parents and expand.
         /// </summary>
         public static void ArrangeLayersControls(LayerCollection layerCollection)
         {
             layerCollection.RootControls.Clear();
-
+            LayerCollection.Index = 0;
             LayerCollection._arrangeLayersControls(layerCollection, layerCollection.RootLayers, 0, null, Visibility.Visible);
         }
         private static void _arrangeLayersControls(LayerCollection layerCollection, IList<ILayer> layers, int depth, ILayer parents,Visibility visibility)
@@ -22,6 +22,8 @@ namespace Retouch_Photo2.Layers
             {
                 //Depth
                 layer.Control.Depth = depth;
+                layer.Control.Index = LayerCollection.Index;
+                LayerCollection.Index++;
                 //Parents
                 layer.Parents = parents;
                 //IsExpand

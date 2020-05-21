@@ -33,21 +33,21 @@ namespace Retouch_Photo2.Brushs
         /// <summary> The cache of <see cref="Style.StrokeWidth"/>. </summary>
         public float StartingStrokeWidth { get; private set; }
         /// <summary> Cache the <see cref="Style.StrokeWidth"/>. </summary>
-        void CacheStrokeWidth() => this.StartingStrokeWidth = this.StrokeWidth;
+        public void CacheStrokeWidth() => this.StartingStrokeWidth = this.StrokeWidth;
         
         /// <summary> Gets or sets Style's stroke-style. </summary>
         public CanvasStrokeStyle StrokeStyle = new CanvasStrokeStyle();
         /// <summary> The cache of <see cref="Style.StrokeStyle"/>. </summary>
         public CanvasStrokeStyle StartingStrokeStyle { get; private set; }
         /// <summary> Cache the <see cref="Style.StrokeStyle"/>. </summary>
-        void CacheStrokeStyle() => this.StartingStrokeStyle = this.StrokeStyle.Clone();
+        public void CacheStrokeStyle() => this.StartingStrokeStyle = this.StrokeStyle.Clone();
                
         /// <summary> Gets or sets Style's transparency. </summary>
-        public IBrush Transparency = new BrushBase();
+        //public IBrush Transparency = new BrushBase();
         /// <summary> The cache of <see cref="Style.Transparency"/>. </summary>
-        public IBrush StartingTransparency { get; private set; }
+        //public IBrush StartingTransparency { get; private set; }
         /// <summary> Cache the <see cref="Style.Transparency"/>. </summary>
-        public void CacheTransparency() => this.StartingTransparency = this.Transparency.Clone();
+        //public void CacheTransparency() => this.StartingTransparency = this.Transparency.Clone();
         
         //@Interface
         /// <summary>

@@ -42,19 +42,19 @@ namespace Retouch_Photo2.Brushs
         /// Set the offset of the current stop.
         /// </summary>
         /// <param name="offset"> The source stop offset. </param>
-        public void SetOffset(float offset)
+        public bool SetOffset(float offset)
         {
-            if (this.array == null) return;
+            if (this.array == null) return false;
 
-            if (this.Manager.IsLeft) return;
-            if (this.Manager.IsRight) return;
+            if (this.Manager.IsLeft) return false;
+            if (this.Manager.IsRight) return false;
 
             int index = this.Manager.Index;
             int count = this.Manager.Count;
 
-            if (count == 0) return;
-            if (index < 0) return;
-            if (index >= count) return;
+            if (count == 0) return false;
+            if (index < 0) return false;
+            if (index >= count) return false;
 
             if (offset < 0) offset = 0;
             if (offset > 1) offset = 1;
@@ -68,17 +68,17 @@ namespace Retouch_Photo2.Brushs
             this.array[index + 1] = stop;
 
             this.CanvasControl.Invalidate();
-            return;
+            return true;
         }
         /// <summary>
         /// Set the color of the current stop.
         /// </summary>
         /// <param name="color"> The source stop color. </param>
-        public void SetColor(Color color)
+        public bool SetColor(Color color)
         {
             this.ColorEllipse.Color = color;
 
-            if (this.array == null) return;
+            if (this.array == null) return false;
 
             if (this.Manager.IsLeft)
             {
@@ -90,8 +90,7 @@ namespace Retouch_Photo2.Brushs
                 };
 
                 this.CanvasControl.Invalidate();
-                this.StopsChanged?.Invoke(this, this.array);//Delegate
-                return;
+                return true;
             }
 
             if (this.Manager.IsRight)
@@ -104,17 +103,16 @@ namespace Retouch_Photo2.Brushs
                 };
 
                 this.CanvasControl.Invalidate();
-                this.StopsChanged?.Invoke(this, this.array);//Delegate
-                return;
+                return true;
             }
 
             {
                 int index = this.Manager.Index;
                 int count = this.Manager.Count;
 
-                if (count == 0) return;
-                if (index < 0) return;
-                if (index >= count) return;
+                if (count == 0) return false;
+                if (index < 0) return false;
+                if (index >= count) return false;
 
                 CanvasGradientStop stop = new CanvasGradientStop
                 {
@@ -125,9 +123,10 @@ namespace Retouch_Photo2.Brushs
                 this.array[index + 1] = stop;
 
                 this.CanvasControl.Invalidate();
-                this.StopsChanged?.Invoke(this, this.array);//Delegate
-                return;
+                return true;
             }
+
+            return false;
         }
 
     }

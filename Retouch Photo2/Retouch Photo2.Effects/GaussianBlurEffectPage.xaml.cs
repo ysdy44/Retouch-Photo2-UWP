@@ -1,6 +1,7 @@
 ﻿using Retouch_Photo2.Effects.Icons;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
+using Retouch_Photo2.Historys;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -20,24 +21,8 @@ namespace Retouch_Photo2.Effects.Models
         {
             this.InitializeComponent();
             this.ConstructString();
-
-
-            //Radius
-            this.RadiusSlider.ValueChangeStarted += (s, value) => { };
-            this.RadiusSlider.ValueChangeDelta += (s, value) =>
-            {
-                float radius = (float)value;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    layer.Effect.GaussianBlur_Radius = radius;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.RadiusSlider.ValueChangeCompleted += (s, value) => { };
-            
+            this.ConstructButton();
+            this.ConstructSharpen_Amount();
         }
     }
 
@@ -59,7 +44,6 @@ namespace Retouch_Photo2.Effects.Models
         //@Content
         public EffectType Type => EffectType.GaussianBlur;
         public FrameworkElement Page => this;
-        public ToggleSwitch ToggleSwitch => this.Button.ToggleSwitch;
         public EffectButton Button { get; } = new EffectButton
         {
             Icon = new GaussianBlurIcon()
@@ -74,15 +58,107 @@ namespace Retouch_Photo2.Effects.Models
         {
             effect.GaussianBlur_Radius = 0;
         }
-        public void FollowEffect(Effect effect)
+        public void FollowEffect(Effect effect, bool isOnlyButton)
         {
-            this.RadiusSlider.Value = effect.GaussianBlur_Radius;
+            if (isOnlyButton==false)
+            {
+                this.RadiusSlider.Value = effect.GaussianBlur_Radius;
+            }
 
-            this.ToggleSwitch.IsOn = effect.GaussianBlur_IsOn;
+            this.Button.IsButtonTapped = false;
+            this.Button.ToggleSwitch.IsOn = effect.GaussianBlur_IsOn;
+            this.Button.IsButtonTapped = true;
         }
-        public void OverwritingEffect(Effect effect)
+
+    }
+    
+    /// <summary>
+    /// Page of <see cref = "Effect.GaussianBlur_IsOn"/>.
+    /// </summary>
+    public sealed partial class GaussianBlurEffectPage : Page, IEffectPage
+    {
+        private void ConstructButton()
         {
-            effect.GaussianBlur_IsOn = this.ToggleSwitch.IsOn;
+            this.Button.ToggleSwitch.Toggled += (s, e) =>
+            {
+                if (this.Button.IsButtonTapped == false) return;
+                bool isOn = this.Button.ToggleSwitch.IsOn;
+
+                //History
+                IHistoryBase history = new IHistoryBase("Set effect isOn");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    //History
+                    var previous = layer.Effect.GaussianBlur_IsOn;
+                    int index = layer.Control.Index;
+                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                    Effect.GaussianBlur_IsOn = previous);
+
+                    layer.Effect.GaussianBlur_IsOn = isOn;
+                });
+
+                //History
+                this.ViewModel.Push(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
         }
+
+
+        private void ConstructSharpen_Amount()
+        {
+            //History
+            IHistoryBase history = null;
+
+            //Radius
+            this.RadiusSlider.ValueChangeStarted += (s, value) =>
+            {
+                history = new IHistoryBase("Set effect value");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.Effect.CacheGaussianBlur();
+                });
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.RadiusSlider.ValueChangeDelta += (s, value) =>
+            {
+                float radius = (float)value;
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.Effect.GaussianBlur_Radius = radius;
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            this.RadiusSlider.ValueChangeCompleted += (s, value) =>
+            {
+                float radius = (float)value;
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    //History
+                    var previous = layer.Effect.StartingGaussianBlur_Radius;
+                    int index = layer.Control.Index;
+                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                    Effect.GaussianBlur_Radius = previous);
+
+                    layer.Effect.GaussianBlur_Radius = radius;
+                });
+
+                //History
+                this.ViewModel.Push(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
+            };
+        }
+
     }
 }

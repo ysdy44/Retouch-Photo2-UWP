@@ -12,18 +12,17 @@ namespace Retouch_Photo2.Effects
         public string Text { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
         /// <summary> EffectButton' ToggleSwitch. </summary>
         public ToggleSwitch ToggleSwitch => this._ToggleSwitch;
+        public bool IsButtonTapped = true;
 
 
         //@VisualState
-        bool _vsIsEnabled => this._ToggleSwitch.IsEnabled;
-        bool _vsIsOn => this._ToggleSwitch.IsOn;
+        bool _vsIsEnabled;
         ClickMode _vsClickMode;
         public VisualState VisualState
         {
             get
             {
                 if (this._vsIsEnabled == false) return this.Disabled;
-                if (this._vsIsOn == false) return this.NonDisabled;
 
                 switch (this._vsClickMode)
                 {
@@ -50,8 +49,11 @@ namespace Retouch_Photo2.Effects
         {
             this.InitializeComponent();
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
-            this._ToggleSwitch.IsEnabledChanged += (s, e) => this.VisualState = this.VisualState;//State
-            this._ToggleSwitch.Toggled += (s, e) => this.VisualState = this.VisualState;//State
+            this.IsEnabledChanged += (s, e) =>
+            {
+                this._vsIsEnabled = (bool)e.NewValue;
+                this.VisualState = this.VisualState;//State
+            };
 
             this.PointerEntered += (s, e) => this.ClickMode = ClickMode.Hover;
             this.PointerPressed += (s, e) => this.ClickMode = ClickMode.Press;

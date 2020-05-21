@@ -4,6 +4,7 @@ using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
+using Retouch_Photo2.ViewModels;
 using System;
 using System.Numerics;
 using Windows.UI.Xaml.Controls;
@@ -97,6 +98,7 @@ namespace Retouch_Photo2.Tools.Models
                         {
                             layer.Style.Stroke.InitializeController(canvasStartingPoint, canvasPoint);
                         });
+                        this.ViewModel.Invalidate();//Invalidate
                     }
                     break;
 
@@ -120,14 +122,16 @@ namespace Retouch_Photo2.Tools.Models
             if (this.Stroke == null) return;
 
             //History
-            IHistoryBase history = new IHistoryBase("Set Stroke");
+            IHistoryBase history = new IHistoryBase("Set stroke");
 
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
                 //History
-                var previous = layer.Style.Stroke.Clone();
-                history.Undos.Push(() => layer.Style.Stroke = previous.Clone());
+                var previous = layer.Style.Stroke.Clone(); ;
+                int index = layer.Control.Index;
+                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                Style.Stroke = previous.Clone());
 
                 this.SelectionViewModel.StyleLayer = layer;
             });
@@ -143,7 +147,7 @@ namespace Retouch_Photo2.Tools.Models
             if (this.Stroke.Type == brushType) return;
 
             //History
-            IHistoryBase history = new IHistoryBase("Set Stroke type");
+            IHistoryBase history = new IHistoryBase("Set stroke type");
 
             bool _lock = false;
 
@@ -151,8 +155,10 @@ namespace Retouch_Photo2.Tools.Models
             this.SelectionViewModel.SetValue((layer) =>
             {
                 //History
-                var previous = layer.Style.Stroke.Clone();
-                history.Undos.Push(() => layer.Style.Stroke = previous.Clone());
+                var previous = layer.Style.Stroke.Clone(); ;
+                int index = layer.Control.Index;
+                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                Style.Stroke = previous.Clone());
 
                 Transformer transformer = layer.Transform.Destination;
                 layer.Style.Stroke.TypeChange(brushType, transformer, photo);
@@ -200,31 +206,99 @@ namespace Retouch_Photo2.Tools.Models
 
         public void StrokeStopsChanged(CanvasGradientStop[] array)
         {
-            if (this._isStopsFlyoutShowed == false) return;
+            //History
+            IHistoryBase history = new IHistoryBase("Set stroke");
 
+            //Selection
+            this.Stroke.Stops = (CanvasGradientStop[])array.Clone();
+            this.SelectionViewModel.SetValue((layer) =>
+            {
+                //History
+                var previous = layer.Style.Stroke.Clone();
+                int index = layer.Control.Index;
+                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                Style.Stroke = previous.Clone());
+
+                layer.Style.Stroke.Stops = (CanvasGradientStop[])array.Clone();
+                this.SelectionViewModel.StyleLayer = layer;
+            });
+
+            //History
+            this.ViewModel.Push(history);
+
+            this.ViewModel.Invalidate();//Invalidate
+        }
+
+        //History
+        IHistoryBase historyStroke = null;
+        public void StrokeStopsChangeStarted(CanvasGradientStop[] array)
+        {
+            //History
+            this.historyStroke = new IHistoryBase("Set stroke");
+
+            //Selection
+            this.SelectionViewModel.SetValue((layer) =>
+            {
+                layer.Style.CacheStroke();
+            });
+
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+        }
+        public void StrokeStopsChangeDelta(CanvasGradientStop[] array)
+        {
+            //Selection
+            this.SelectionViewModel.SetValue((layer) =>
+            {
+                layer.Style.Stroke.Stops = (CanvasGradientStop[])array.Clone();
+            });
+
+            this.ViewModel.Invalidate();//Invalidate
+        }
+        public void StrokeStopsChangeCompleted(CanvasGradientStop[] array)
+        {
             this.Stroke.Stops = (CanvasGradientStop[])array.Clone();
 
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
+                //History
+                var previous = layer.Style.Stroke.Clone();
+                int index = layer.Control.Index;
+                this.historyStroke.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                Style.Stroke = previous.Clone());
+
                 layer.Style.Stroke.Stops = (CanvasGradientStop[])array.Clone();
                 this.SelectionViewModel.StyleLayer = layer;
             });
 
-            this.ViewModel.Invalidate();//Invalidate
+            //History
+            this.ViewModel.Push(this.historyStroke);
+
+            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
 
         public void StrokeExtendChanged(CanvasEdgeBehavior extend)
         {
-            this.ExtendComboBox.Extend = extend;
+            //History
+            IHistoryBase history = new IHistoryBase("Set stroke extend");
 
             //Selection
             this.Stroke.Extend = extend;
+            this.ExtendComboBox.Extend = extend;
             this.SelectionViewModel.SetValue((layer) =>
             {
+                //History
+                var previous = layer.Style.Stroke.Extend;
+                int index = layer.Control.Index;
+                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                Style.Stroke.Extend = previous);
+
                 layer.Style.Stroke.Extend = extend;
                 this.SelectionViewModel.StyleLayer = layer;
             });
+
+            //History
+            this.ViewModel.Push(history);
 
             this.ViewModel.Invalidate();//Invalidate
         }

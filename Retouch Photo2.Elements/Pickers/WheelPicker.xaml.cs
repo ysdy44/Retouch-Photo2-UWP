@@ -33,10 +33,22 @@ namespace Retouch_Photo2.Elements
 
 
         //@Delegate
-        /// <summary> Occurs when the color value changes. </summary>
-        public event ColorChangeHandler ColorChange = null;
-        /// <summary> Occurs when the hsv value changes. </summary>
-        public event HSVChangeHandler HSVChange = null;
+        /// <summary> Occurs when the color value changed. </summary>
+        public event ColorChangeHandler ColorChanged;
+        /// <summary> Occurs when the color change starts. </summary>
+        public event ColorChangeHandler ColorChangeStarted;
+        /// <summary> Occurs when color change. </summary>
+        public event ColorChangeHandler ColorChangeDelta;
+        /// <summary> Occurs when the color change is complete. </summary>
+        public event ColorChangeHandler ColorChangeCompleted;
+        /// <summary> Occurs when the hsv value changed. </summary>
+        public event HSVChangeHandler HSVChanged = null;
+        /// <summary> Occurs when the color change starts. </summary>
+        public event HSVChangeHandler HSVChangeStarted;
+        /// <summary> Occurs when color change. </summary>
+        public event HSVChangeHandler HSVChangeDelta;
+        /// <summary> Occurs when the color change is complete. </summary>
+        public event HSVChangeHandler HSVChangeCompleted;
 
 
         /// <summary> Gets picker's type name. </summary>
@@ -75,8 +87,8 @@ namespace Retouch_Photo2.Elements
             get => this.hsv;
             set
             {
-                this.ColorChange?.Invoke(this, HSV.HSVtoRGB(value));//Delegate
-                this.HSVChange?.Invoke(this, value);//Delegate
+                this.ColorChanged?.Invoke(this, HSV.HSVtoRGB(value));//Delegate
+                this.HSVChanged?.Invoke(this, value);//Delegate
 
                 //Palette  
                 this.HorizontalColor.Color = HSV.HSVtoRGB(value.H);
@@ -85,6 +97,53 @@ namespace Retouch_Photo2.Elements
                 this.hsv = value;
             }
         }
+        private HSV _HSVStarted
+        {
+            get => this.hsv;
+            set
+            {
+                this.ColorChangeStarted?.Invoke(this, HSV.HSVtoRGB(value));//Delegate
+                this.HSVChangeStarted?.Invoke(this, value);//Delegate
+
+                //Palette  
+                this.HorizontalColor.Color = HSV.HSVtoRGB(value.H);
+                this.UpdateThumb(value);
+
+                this.hsv = value;
+            }
+        }
+        private HSV _HSVDelta
+        {
+            get => this.hsv;
+            set
+            {
+                this.ColorChangeDelta?.Invoke(this, HSV.HSVtoRGB(value));//Delegate
+                this.HSVChangeDelta?.Invoke(this, value);//Delegate
+
+                //Palette  
+                this.HorizontalColor.Color = HSV.HSVtoRGB(value.H);
+                this.UpdateThumb(value);
+
+                this.hsv = value;
+            }
+        }
+        private HSV _HSVCompleted
+        {
+            get => this.hsv;
+            set
+            {
+                this.ColorChangeCompleted?.Invoke(this, HSV.HSVtoRGB(value));//Delegate
+                this.HSVChangeCompleted?.Invoke(this, value);//Delegate
+
+                //Palette  
+                this.HorizontalColor.Color = HSV.HSVtoRGB(value.H);
+                this.UpdateThumb(value);
+
+                this.hsv = value;
+            }
+        }
+
+
 
 
         #endregion
@@ -162,18 +221,21 @@ namespace Retouch_Photo2.Elements
                 this._isWheel = this._position.Length() + this._strokeWidth > this._radio && this._position.Length() - this._strokeWidth < this._radio;
                 this._isPalette = Math.Abs(this._position.X) < this._square && Math.Abs(this._position.Y) < this._square;
 
-                if (this._isWheel) this._HSV = new HSV(this.hsv.A, WheelSize.VectorToH(this._position), this.hsv.S, this.hsv.V);
-                if (this._isPalette) this._HSV = new HSV(this.hsv.A, this.hsv.H, WheelSize.VectorToS(this._position.X, this._square), WheelSize.VectorToV(this._position.Y, this._square));
+                if (this._isWheel) this._HSVStarted = new HSV(this.hsv.A, WheelSize.VectorToH(this._position), this.hsv.S, this.hsv.V);
+                if (this._isPalette) this._HSVStarted = new HSV(this.hsv.A, this.hsv.H, WheelSize.VectorToS(this._position.X, this._square), WheelSize.VectorToV(this._position.Y, this._square));
             };
             this.Canvas.ManipulationDelta += (s, e) =>
             {
                 this._position += e.Delta.Translation.ToVector2();
 
-                if (this._isWheel) this._HSV = new HSV(this.hsv.A, WheelSize.VectorToH(this._position), this.hsv.S, this.hsv.V);
-                if (this._isPalette) this._HSV = new HSV(this.hsv.A, this.hsv.H, WheelSize.VectorToS(this._position.X, this._square), WheelSize.VectorToV(this._position.Y, this._square));
+                if (this._isWheel) this._HSVDelta = new HSV(this.hsv.A, WheelSize.VectorToH(this._position), this.hsv.S, this.hsv.V);
+                if (this._isPalette) this._HSVDelta = new HSV(this.hsv.A, this.hsv.H, WheelSize.VectorToS(this._position.X, this._square), WheelSize.VectorToV(this._position.Y, this._square));
             };
             this.Canvas.ManipulationCompleted += (s, e) =>
             {
+                if (this._isWheel) this._HSVCompleted = new HSV(this.hsv.A, WheelSize.VectorToH(this._position), this.hsv.S, this.hsv.V);
+                if (this._isPalette) this._HSVCompleted = new HSV(this.hsv.A, this.hsv.H, WheelSize.VectorToS(this._position.X, this._square), WheelSize.VectorToV(this._position.Y, this._square));
+
                 this._isWheel = false;
                 this._isPalette = false;
             };

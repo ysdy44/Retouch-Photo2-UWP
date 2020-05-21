@@ -106,7 +106,9 @@ namespace Retouch_Photo2.Tools
 
                 //History
                 var previous = layer.Transform.StartingDestination;
-                history.Undos.Push(() => layer.Transform.Destination = previous);
+                int index = layer.Control.Index;
+                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                Transform.Destination = previous);
             });
 
             //History

@@ -52,7 +52,9 @@ namespace Retouch_Photo2.Tools
                 {
                     //History
                     var previous = layer.IsSelected;
-                    history.Undos.Push(() => layer.IsSelected = previous);
+                    int index = layer.Control.Index;
+                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                    IsSelected = previous);
 
                     layer.IsSelected = false;
                 }
@@ -77,7 +79,9 @@ namespace Retouch_Photo2.Tools
             {
                 //History
                 var previous = selectedLayer.IsSelected;
-                history.Undos.Push(() => selectedLayer.IsSelected = previous);
+                int index = selectedLayer.Control.Index;
+                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                IsSelected = previous);
 
                 selectedLayer.IsSelected = true;
             }
@@ -117,7 +121,9 @@ namespace Retouch_Photo2.Tools
             {
                 //History
                 var previous = selectedLayer.IsSelected;
-                history.Undos.Push(() => selectedLayer.IsSelected = previous);
+                int index = selectedLayer.Control.Index;
+                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                IsSelected = previous);
 
                 selectedLayer.IsSelected = true;
             }
@@ -141,7 +147,9 @@ namespace Retouch_Photo2.Tools
             {
                 //History
                 var previous = selectedLayer.IsSelected;
-                history.Undos.Push(() => selectedLayer.IsSelected = previous);
+                int index = selectedLayer.Control.Index;
+                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                IsSelected = previous);
 
                 selectedLayer.IsSelected = false;
             }
@@ -170,7 +178,9 @@ namespace Retouch_Photo2.Tools
                     {
                         //History
                         var previous = layer.IsSelected;
-                        history.Undos.Push(() => layer.IsSelected = previous);
+                        int index = layer.Control.Index;
+                        history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                        IsSelected = previous);
 
                         layer.IsSelected = false;
                     }

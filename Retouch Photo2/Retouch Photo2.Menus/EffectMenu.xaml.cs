@@ -1,6 +1,7 @@
 ﻿using Retouch_Photo2.Effects;
 using Retouch_Photo2.Effects.Models;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
@@ -66,10 +67,8 @@ namespace Retouch_Photo2.Menus.Models
             {
                 foreach (IEffectPage effect in con.Effects)
                 {
-                    effect.ToggleSwitch.IsEnabled = true;
-
-                    //IsOn
-                    effect.FollowEffect(value);
+                    effect.Button.IsEnabled = true;
+                    effect.FollowEffect(value, true);
                 }
 
                 con._Expander.IsSecondPage = false;
@@ -78,7 +77,7 @@ namespace Retouch_Photo2.Menus.Models
             {
                 foreach (IEffectPage effect in con.Effects)
                 {
-                    effect.ToggleSwitch.IsEnabled = false;
+                    effect.Button.IsEnabled = false;
                 }
  
                 con._Expander.IsSecondPage = false;
@@ -161,13 +160,11 @@ namespace Retouch_Photo2.Menus.Models
         //Effects
         private void ConstructEffects()
         {
-            foreach (IEffectPage effect in this.Effects)
+            foreach (IEffectPage effectPage in this.Effects)
             {
-                this.EffectsStackPanel.Children.Add(effect.Button);
+                this.EffectsStackPanel.Children.Add(effectPage.Button);
 
-                effect.ToggleSwitch.Toggled += (s, e) => this.Overwriting(effect);
-
-                effect.Button.Tapped += (s, e) => this.Navigate(effect);
+                effectPage.Button.Tapped += (s, e) => this.Navigate(effectPage);
             }
         }
 
@@ -187,43 +184,27 @@ namespace Retouch_Photo2.Menus.Models
 
             this.ViewModel.Invalidate();//Invalidate
         }
-
-        //Overwriting
-        public void Overwriting(IEffectPage effect)
-        {
-            if (effect == null) return;
-            if (effect.ToggleSwitch.IsEnabled == false) return;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layer) =>
-            {
-                Effect effect2 = layer.Effect;
-                effect.OverwritingEffect(effect2);
-            });
-            this.ViewModel.Invalidate();//Invalidate
-        }
+        
 
         //Navigate
-        public void Navigate(IEffectPage effect)
+        public void Navigate(IEffectPage effectPage)
         {
-            if (effect == null) return;
-            if (effect.ToggleSwitch.IsEnabled == false) return;
-            if (effect.ToggleSwitch.IsOn == false) return;
+            if (effectPage == null) return;
 
-            this.CurrentEffect = effect;
+            this.CurrentEffect = effectPage;
 
-            //Selection
-            this.SelectionViewModel.SetValue((layer) =>
-            {
-                Effect effect2 = layer.Effect;
-                effect.FollowEffect(effect2);
 
-                return;
-            });
+            //Layers
+            IEnumerable<ILayer> selectedLayers = LayerCollection.GetAllSelectedLayers(this.ViewModel.LayerCollection);
+            ILayer outermost = LayerCollection.FindOutermost_SelectedLayer(selectedLayers);
+
+            Effect effect2 = outermost.Effect;
+            effectPage.FollowEffect(effect2, false);
+
 
             this._Expander.IsSecondPage = true;
             this._Expander.ResetButtonVisibility = Visibility.Visible;
-            this._Expander.CurrentTitle = effect.Button.Text;
+            this._Expander.CurrentTitle = effectPage.Button.Text;
         }
     }
 }

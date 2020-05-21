@@ -63,8 +63,6 @@ namespace Retouch_Photo2.Tools.Models
                             Source = transformerSource,
                             Destination = layer.Transform.Destination,
                         };
-
-                        this.SelectionViewModel.StyleLayer = layer;
                     }
                 });
             };

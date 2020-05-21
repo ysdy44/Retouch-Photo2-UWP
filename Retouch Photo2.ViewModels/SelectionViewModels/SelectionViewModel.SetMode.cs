@@ -59,7 +59,6 @@ namespace Retouch_Photo2.ViewModels
         }
         private void _setModeNone()
         {
-            this.SelectionCount = 0;
             this.SelectionMode = ListViewSelectionMode.None;
             this.SelectionUnNone = false;
             this.SelectionSingle = false;
@@ -119,7 +118,6 @@ namespace Retouch_Photo2.ViewModels
         }
         private void _setModeSingle(ILayer layer)
         {
-            this.SelectionCount = 1;
             this.SelectionMode = ListViewSelectionMode.Single;
             this.SelectionUnNone = true;
             this.SelectionSingle = true;
@@ -177,7 +175,6 @@ namespace Retouch_Photo2.ViewModels
         }
         private void _setModeMultiple(IEnumerable<ILayer> layers)
         {
-            this.SelectionCount = layers.Count();
             ILayer outermost = LayerCollection.FindOutermost_SelectedLayer(layers);
             this.SelectionMode = ListViewSelectionMode.Multiple;//Transformer     
             this.SelectionUnNone = true;

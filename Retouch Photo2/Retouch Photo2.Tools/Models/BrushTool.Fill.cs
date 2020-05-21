@@ -4,6 +4,7 @@ using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
+using Retouch_Photo2.ViewModels;
 using System;
 using System.Numerics;
 using Windows.UI.Xaml.Controls;
@@ -127,8 +128,10 @@ namespace Retouch_Photo2.Tools.Models
             this.SelectionViewModel.SetValue((layer) =>
             {
                 //History
-                var previous = layer.Style.Fill.Clone();
-                history.Undos.Push(() => layer.Style.Fill = previous.Clone());
+                var previous = layer.Style.Fill.Clone(); ;
+                int index = layer.Control.Index;
+                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                Style.Fill = previous.Clone());
 
                 this.SelectionViewModel.StyleLayer = layer;
             });
@@ -152,8 +155,10 @@ namespace Retouch_Photo2.Tools.Models
             this.SelectionViewModel.SetValue((layer) =>
             {
                 //History
-                var previous = layer.Style.Fill.Clone();
-                history.Undos.Push(() => layer.Style.Fill = previous.Clone());
+                var previous = layer.Style.Fill.Clone(); ;
+                int index = layer.Control.Index;
+                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                Style.Fill = previous.Clone());
 
                 Transformer transformer = layer.Transform.Destination;
                 layer.Style.Fill.TypeChange(brushType, transformer, photo);
@@ -201,31 +206,99 @@ namespace Retouch_Photo2.Tools.Models
 
         public void FillStopsChanged(CanvasGradientStop[] array)
         {
-            if (this._isStopsFlyoutShowed == false) return;
+            //History
+            IHistoryBase history = new IHistoryBase("Set fill");
 
+            //Selection
+            this.Fill.Stops = (CanvasGradientStop[])array.Clone();
+            this.SelectionViewModel.SetValue((layer) =>
+            {
+                //History
+                var previous = layer.Style.Fill.Clone();
+                int index = layer.Control.Index;
+                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                Style.Fill = previous.Clone());
+
+                layer.Style.Fill.Stops = (CanvasGradientStop[])array.Clone();
+                this.SelectionViewModel.StyleLayer = layer;
+            });
+
+            //History
+            this.ViewModel.Push(history);
+
+            this.ViewModel.Invalidate();//Invalidate
+        }
+
+        //History
+        IHistoryBase historyFill = null;
+        public void FillStopsChangeStarted(CanvasGradientStop[] array)
+        {
+            //History
+            this.historyFill = new IHistoryBase("Set fill");
+
+            //Selection
+            this.SelectionViewModel.SetValue((layer) =>
+            {
+                layer.Style.CacheFill();
+            });
+
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+        }
+        public void FillStopsChangeDelta(CanvasGradientStop[] array)
+        {
+            //Selection
+            this.SelectionViewModel.SetValue((layer) =>
+            {
+                layer.Style.Fill.Stops = (CanvasGradientStop[])array.Clone();
+            });
+
+            this.ViewModel.Invalidate();//Invalidate
+        }
+        public void FillStopsChangeCompleted(CanvasGradientStop[] array)
+        {
             this.Fill.Stops = (CanvasGradientStop[])array.Clone();
 
             //Selection
             this.SelectionViewModel.SetValue((layer) =>
             {
+                //History
+                var previous = layer.Style.Fill.Clone();
+                int index = layer.Control.Index;
+                this.historyFill.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                Style.Fill = previous.Clone());
+
                 layer.Style.Fill.Stops = (CanvasGradientStop[])array.Clone();
                 this.SelectionViewModel.StyleLayer = layer;
             });
 
-            this.ViewModel.Invalidate();//Invalidate
+            //History
+            this.ViewModel.Push(this.historyFill);
+
+            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
 
         public void FillExtendChanged(CanvasEdgeBehavior extend)
         {
-            this.ExtendComboBox.Extend = extend;
+            //History
+            IHistoryBase history = new IHistoryBase("Set fill extend");
 
             //Selection
             this.Fill.Extend = extend;
+            this.ExtendComboBox.Extend = extend;
             this.SelectionViewModel.SetValue((layer) =>
             {
+                //History
+                var previous = layer.Style.Fill.Extend;
+                int index = layer.Control.Index;
+                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                Style.Fill.Extend = previous);
+
                 layer.Style.Fill.Extend = extend;
                 this.SelectionViewModel.StyleLayer = layer;
             });
+
+            //History
+            this.ViewModel.Push(history);
 
             this.ViewModel.Invalidate();//Invalidate
         } 

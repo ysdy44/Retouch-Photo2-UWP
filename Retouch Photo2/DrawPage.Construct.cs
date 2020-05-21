@@ -1,6 +1,7 @@
 ﻿using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
+using Retouch_Photo2.ViewModels;
 using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
@@ -118,7 +119,9 @@ namespace Retouch_Photo2
                     {
                         //History
                         var previous = layer.Name;
-                        history.Undos.Push(() => layer.Name = previous);
+                        int index = layer.Control.Index;
+                        history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                        Name = previous);
                         
                         layer.Name = name;
                     }
@@ -149,8 +152,18 @@ namespace Retouch_Photo2
         public static Action<FrameworkElement> StrokeColorShowAt;
 
 
-        //FillColor
+
         private void ConstructColorFlyout()
+        {
+            this.ConstructFillColorFlyout1();
+            this.ConstructFillColorFlyout2();
+            this.ConstructStrokeColorFlyout1();
+            this.ConstructStrokeColorFlyout2();
+        }
+
+
+        //FillColor
+        private void ConstructFillColorFlyout1()
         {
             DrawPage.FillColorShowAt += (FrameworkElement placementTarget) =>
             {
@@ -162,6 +175,98 @@ namespace Retouch_Photo2
                 }
                 this.FillColorFlyout.ShowAt(placementTarget);
             };
+
+
+            this.FillColorPicker.ColorChanged += (s, value) =>
+            {
+                //History
+                IHistoryBase history = new IHistoryBase("Set fill");
+
+                //Selection
+                switch (this.SelectionViewModel.FillOrStroke)
+                {
+                    case FillOrStroke.Fill:
+                        this.SelectionViewModel.Color = value;
+                        break;
+                }
+                this.SelectionViewModel.Fill = BrushBase.ColorBrush(value);
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    //History
+                    var previous = layer.Style.Fill.Clone();
+                    int index = layer.Control.Index;
+                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                    Style.Fill = previous.Clone());
+
+                    layer.Style.Fill = BrushBase.ColorBrush(value);
+                    this.SelectionViewModel.StyleLayer = layer;
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+        private void ConstructFillColorFlyout2()
+        {
+            //History
+            IHistoryBase history = null;
+
+
+            //Color
+            this.FillColorPicker.ColorChangeStarted += (s, value) =>
+            {
+                history = new IHistoryBase("Set fill");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.Style.CacheFill();
+                });
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.FillColorPicker.ColorChangeDelta += (s, value) =>
+            {
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.Style.Fill = BrushBase.ColorBrush(value);
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            this.FillColorPicker.ColorChangeCompleted += (s, value) =>
+            {
+                //Selection
+                switch (this.SelectionViewModel.FillOrStroke)
+                {
+                    case FillOrStroke.Fill:
+                        this.SelectionViewModel.Color = value;
+                        break;
+                }
+                this.SelectionViewModel.Fill = BrushBase.ColorBrush(value);
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    //History
+                    var previous = layer.Style.StartingFill;
+                    int index = layer.Control.Index;
+                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                    Style.Fill = previous.Clone());
+
+                    layer.Style.Fill = BrushBase.ColorBrush(value);
+                    this.SelectionViewModel.StyleLayer = layer;
+                });
+
+                //History
+                this.ViewModel.Push(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
+            };
+        }
+
+
+        //StrokeColor
+        private void ConstructStrokeColorFlyout1()
+        {
             DrawPage.StrokeColorShowAt += (FrameworkElement placementTarget) =>
             {
                 switch (this.SelectionViewModel.Stroke.Type)
@@ -173,22 +278,93 @@ namespace Retouch_Photo2
                 this.StrokeColorFlyout.ShowAt(placementTarget);
             };
 
-            this.FillColorPicker.ColorChange += (s, value) =>
-            {
-                //Selection
-                this.SelectionViewModel.SetColor(value, FillOrStroke.Fill);
 
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.StrokeColorPicker.ColorChange += (s, value) =>
+            this.StrokeColorPicker.ColorChanged += (s, value) =>
             {
+                //History
+                IHistoryBase history = new IHistoryBase("Set stroke");
+
                 //Selection
-                this.SelectionViewModel.SetColor(value, FillOrStroke.Stroke);
+                switch (this.SelectionViewModel.FillOrStroke)
+                {
+                    case FillOrStroke.Stroke:
+                        this.SelectionViewModel.Color = value;
+                        break;
+                }
+                this.SelectionViewModel.Stroke = BrushBase.ColorBrush(value);
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    //History
+                    var previous = layer.Style.Stroke.Clone();
+                    int index = layer.Control.Index;
+                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                    Style.Stroke = previous.Clone());
+
+                    layer.Style.Stroke = BrushBase.ColorBrush(value);
+                    this.SelectionViewModel.StyleLayer = layer;
+                });
 
                 this.ViewModel.Invalidate();//Invalidate
             };
         }
+        private void ConstructStrokeColorFlyout2()
+        {
+            //History
+            IHistoryBase history = null;
 
+
+            //Color
+            this.StrokeColorPicker.ColorChangeStarted += (s, value) =>
+            {
+                history = new IHistoryBase("Set stroke");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.Style.CacheStroke();
+                });
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.StrokeColorPicker.ColorChangeDelta += (s, value) =>
+            {
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.Style.Stroke = BrushBase.ColorBrush(value);
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            this.StrokeColorPicker.ColorChangeCompleted += (s, value) =>
+            {
+                //Selection
+                switch (this.SelectionViewModel.FillOrStroke)
+                {
+                    case FillOrStroke.Stroke:
+                        this.SelectionViewModel.Color = value;
+                        break;
+                }
+                this.SelectionViewModel.Stroke = BrushBase.ColorBrush(value);
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    //History
+                    var previous = layer.Style.StartingStroke;
+                    int index = layer.Control.Index;
+                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                    Style.Stroke = previous.Clone());
+
+                    layer.Style.Stroke = BrushBase.ColorBrush(value);
+                    this.SelectionViewModel.StyleLayer = layer;
+                });
+
+                //History
+                this.ViewModel.Push(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
+            };
+        }
+               
 
         #endregion
 

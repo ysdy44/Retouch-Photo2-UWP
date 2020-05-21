@@ -12,7 +12,9 @@ namespace Retouch_Photo2.Layers
     {
 
         //@Content
-        public FrameworkElement Self => this;
+        public ILayer Layer { get; private set; }
+
+        public LayerControl Self => this;
         public string Text { get => this.NameRun.Text; set => this.NameRun.Text = value; }
         public string Type { get => this.TypeRun.Text; set => this.TypeRun.Text = value; }
         public object Icon { get => this.IconContentControl.Content; set => this.IconContentControl.Content = value; }
@@ -25,7 +27,7 @@ namespace Retouch_Photo2.Layers
             set
             {
                 this.Height = value;
-                
+
                 //Overlay
                 {
                     double heightOver7 = value / 7;
@@ -52,13 +54,15 @@ namespace Retouch_Photo2.Layers
             }
         }
 
-        
+        public int Index{ get; set; }
+
         //@Construct
         public LayerControl(ILayer layer)
         {
             this.InitializeComponent();
-
+            
             this.ControlHeight = LayerCollection.ControlsHeight;
+            this.Layer = layer;
 
             //LayerCollection
             {

@@ -200,6 +200,8 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void Clicke(Vector2 point)
         {
+            if (this.CurveLayer == null) return;
+
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 

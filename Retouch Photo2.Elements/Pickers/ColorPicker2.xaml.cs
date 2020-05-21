@@ -15,10 +15,14 @@ namespace Retouch_Photo2.Elements
     public sealed partial class ColorPicker2 : UserControl
     {
         //@Delegate
-        /// <summary> Occurs when the color value changes. </summary>
-        public event ColorChangeHandler ColorChange;
-        /// <summary> Occurs when the alpha value changes. </summary>
-        public event AlphaChangeHandler AlphaChange;
+        /// <summary> Occurs when the color value changed. </summary>
+        public event ColorChangeHandler ColorChanged;
+        /// <summary> Occurs when the color change starts. </summary>
+        public event ColorChangeHandler ColorChangeStarted;
+        /// <summary> Occurs when color change. </summary>
+        public event ColorChangeHandler ColorChangeDelta;
+        /// <summary> Occurs when the color change is complete. </summary>
+        public event ColorChangeHandler ColorChangeCompleted;
 
 
         //@Group
@@ -55,15 +59,10 @@ namespace Retouch_Photo2.Elements
             {
                 if (value.A == this.Alpha)
                 {
-                    if (value.R == this.R)
-                        if (value.G == this.G)
-                            if (value.B == this.B)
-                                return;
+                    if (value.R == this.R) if (value.G == this.G) if (value.B == this.B) return;
                 }
-                else
-                {
-                    this.Alpha = value.A;
-                }
+                else  this.Alpha = value.A;
+                
 
                 this.ChangeColor?.Invoke(this, Color.FromArgb(255, value.R, value.G, value.B));
 
@@ -77,19 +76,52 @@ namespace Retouch_Photo2.Elements
         {
             set
             {
-                if (value.A == this.Alpha)
-                {
-                    if (value.R == this.R)
-                        if (value.G == this.G)
-                            if (value.B == this.B)
-                                return;
-                }
+                if (value.A == this.Alpha) if (value.R == this.R) if (value.G == this.G) if (value.B == this.B) return;
 
                 this.R = value.R;
                 this.G = value.G;
                 this.B = value.B;
 
-                this.ColorChange?.Invoke(this, Color.FromArgb(this.Alpha, value.R, value.G, value.B));//Delegate
+                this.ColorChanged?.Invoke(this, Color.FromArgb(this.Alpha, value.R, value.G, value.B));//Delegate
+            }
+        }
+        private Color _ColorStarted
+        {
+            set
+            {
+                //if (value.A == this.Alpha) if (value.R == this.R) if (value.G == this.G) if (value.B == this.B) return;
+
+                this.R = value.R;
+                this.G = value.G;
+                this.B = value.B;
+
+                this.ColorChangeStarted?.Invoke(this, Color.FromArgb(this.Alpha, value.R, value.G, value.B));//Delegate
+            }
+        }
+        private Color _ColorDelta
+        {
+            set
+            {
+                if (value.A == this.Alpha) if (value.R == this.R) if (value.G == this.G) if (value.B == this.B) return;
+
+                this.R = value.R;
+                this.G = value.G;
+                this.B = value.B;
+
+                this.ColorChangeDelta?.Invoke(this, Color.FromArgb(this.Alpha, value.R, value.G, value.B));//Delegate
+            }
+        }
+        private Color _ColorCompleted
+        {
+            set
+            {
+                //if (value.A == this.Alpha) if (value.R == this.R) if (value.G == this.G) if (value.B == this.B) return;
+
+                this.R = value.R;
+                this.G = value.G;
+                this.B = value.B;
+
+                this.ColorChangeCompleted?.Invoke(this, Color.FromArgb(this.Alpha, value.R, value.G, value.B));//Delegate
             }
         }
 
@@ -104,11 +136,19 @@ namespace Retouch_Photo2.Elements
 
         private byte _Alpha
         {
-            set
-            {
-                this.AlphaChange?.Invoke(this, value);//Delegate
-                this.ColorChange?.Invoke(this, Color.FromArgb(value, this.R, this.G, this.B)); //Delegate
-            }
+            set => this.ColorChanged?.Invoke(this, Color.FromArgb(value, this.R, this.G, this.B)); //Delegate
+        }
+        private byte _AlphaStarted
+        {
+            set => this.ColorChangeStarted?.Invoke(this, Color.FromArgb(value, this.R, this.G, this.B)); //Delegate
+        }
+        private byte _AlphaDelta
+        {
+            set => this.ColorChangeDelta?.Invoke(this, Color.FromArgb(value, this.R, this.G, this.B)); //Delegate
+        }
+        private byte _AlphaCompleted
+        {
+            set => this.ColorChangeCompleted?.Invoke(this, Color.FromArgb(value, this.R, this.G, this.B)); //Delegate
         }
 
         /// <summary> Gets or sets picker's red. </summary>
@@ -135,11 +175,14 @@ namespace Retouch_Photo2.Elements
 
             //Alpha
             this.Alpha = 255;
-            this.AlphaPicker.AlphaChange += (s, value) => this._Alpha = value;
+            this.AlphaPicker.AlphaChanged += (s, value) => this._Alpha = value;
+            this.AlphaPicker.AlphaChangeStarted += (s, value) => this._AlphaStarted = value;
+            this.AlphaPicker.AlphaChangeDelta += (s, value) => this._AlphaDelta = value;
+            this.AlphaPicker.AlphaChangeCompleted += (s, value) => this._AlphaCompleted = value;
 
             //Hex
             this.HexPicker.Color = this.Color;
-            this.HexPicker.ColorChange += (s, color) =>
+            this.HexPicker.ColorChanged += (s, color) =>
             {
                 this._Color = color;
 
@@ -149,7 +192,7 @@ namespace Retouch_Photo2.Elements
             };
             //Straw
             this.StrawPicker.Color = this.Color;
-            this.StrawPicker.ColorChange += (s, color) =>
+            this.StrawPicker.ColorChanged += (s, color) =>
             {
                 this._Color = color;
 
@@ -224,9 +267,30 @@ namespace Retouch_Photo2.Elements
                 this.Mode = mode;
                 this.Flyout.Hide();
             };
-            colorPicker.ColorChange += (s, value) =>
+            colorPicker.ColorChanged += (s, value) =>
             {
                 this._Color = value;
+
+                this.HexPicker.Color = value;
+                this.StrawPicker.Color = value;
+            };
+            colorPicker.ColorChangeStarted += (s, value) =>
+            {
+                this._ColorStarted = value;
+
+                this.HexPicker.Color = value;
+                this.StrawPicker.Color = value;
+            };
+            colorPicker.ColorChangeDelta += (s, value) =>
+            {
+                this._ColorDelta = value;
+
+                this.HexPicker.Color = value;
+                this.StrawPicker.Color = value;
+            };
+            colorPicker.ColorChangeCompleted += (s, value) =>
+            {
+                this._ColorCompleted = value;
 
                 this.HexPicker.Color = value;
                 this.StrawPicker.Color = value;

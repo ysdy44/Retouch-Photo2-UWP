@@ -14,8 +14,14 @@ namespace Retouch_Photo2.Brushs
     public sealed partial class StopsPicker : UserControl
     {
         //@Delegate
-        /// <summary> Occurs when the stops changes. </summary>
+        /// <summary> Occurs when the stops value changed. </summary>
         public event EventHandler<CanvasGradientStop[]> StopsChanged;
+        /// <summary> Occurs when the stops change starts. </summary>
+        public event EventHandler<CanvasGradientStop[]> StopsChangeStarted;
+        /// <summary> Occurs when stops change. </summary>
+        public event EventHandler<CanvasGradientStop[]> StopsChangeDelta;
+        /// <summary> Occurs when the stops change is complete. </summary>
+        public event EventHandler<CanvasGradientStop[]> StopsChangeCompleted;
 
         //Background
         CanvasRenderTarget GrayAndWhiteBackground;
@@ -54,7 +60,27 @@ namespace Retouch_Photo2.Brushs
 
 
             //Color      
-            this.ColorPicker.ColorChange += (s, color) => this.SetColor(color);
+            this.ColorPicker.ColorChanged += (s, color) =>
+            {
+                bool isSucces = this.SetColor(color);
+                if (isSucces) this.StopsChanged?.Invoke(this, this.array);//Delegate
+            };
+            this.ColorPicker.ColorChangeStarted += (s, color) =>
+            {
+                bool isSucces = this.SetColor(color);
+                if (isSucces) this.StopsChangeStarted?.Invoke(this, this.array);//Delegate
+            };
+            this.ColorPicker.ColorChangeDelta += (s, color) =>
+            {
+                bool isSucces = this.SetColor(color);
+                if (isSucces) this.StopsChangeDelta?.Invoke(this, this.array);//Delegate
+            };
+            this.ColorPicker.ColorChangeCompleted += (s, color) =>
+            {
+                bool isSucces = this.SetColor(color);
+                if (isSucces) this.StopsChangeCompleted?.Invoke(this, this.array);//Delegate
+            };
+
             this.ColorEllipse.Tapped += (s, e) =>
             {
                 if (this.array == null) return;
@@ -70,15 +96,17 @@ namespace Retouch_Photo2.Brushs
             //Offset         
             this.OffsetPicker.ValueChange += (s, value) =>
             {
-                float offset = value / 100.0f;
-                this.SetOffset(offset);
+                float offset = value / 100.0f;               
+                bool isSucces = this.SetOffset(offset);
+                if (isSucces) this.StopsChanged?.Invoke(this, this.array);//Delegate
             };
             //Alpha
             this.AlphaPicker.ValueChange += (s, value) =>
             {
                 Color color = this.ColorEllipse.Color;
                 color.A = (byte)value;
-                this.SetColor(color);
+                bool isSucces = this.SetColor(color);
+                if (isSucces) this.StopsChanged?.Invoke(this, this.array);//Delegate
             };
         }
     }

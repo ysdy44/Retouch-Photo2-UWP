@@ -42,7 +42,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                 this.ColorFlyout.ShowAt(this.ColorBorder);
                 this.ColorPicker.Color = this.Adjustment.Color;
             };
-            this.ColorPicker.ColorChange += (s, value) =>
+            //TODO
+            this.ColorPicker.ColorChanged += (s, value) =>
             {
                 this.SolidColorBrush.Color =
                 this.AmountRight.Color =

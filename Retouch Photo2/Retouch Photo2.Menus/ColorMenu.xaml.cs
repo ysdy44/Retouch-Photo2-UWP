@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
 using System;
 using Windows.ApplicationModel.Resources;
@@ -34,14 +35,196 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructStrings();
             this.ConstructMenu();
 
-            this.ColorPicker.ColorChange += (s, value) =>
-            {
-                //Color
-                this.SelectionViewModel.SetColor(value, this.SelectionViewModel.FillOrStroke);
+            this.ConstructColor1();
+            this.ConstructColor2();
+        }
 
-                this.ViewModel.Invalidate();//Invalidate
+
+
+        private void ConstructColor1()
+        {
+            this.ColorPicker.ColorChanged += (s, value) =>
+            {
+                switch (this.SelectionViewModel.FillOrStroke)
+                {
+                    case FillOrStroke.Fill:
+                        {
+                            //History
+                            IHistoryBase history = new IHistoryBase("Set fill");
+
+                            //Selection
+                            this.SelectionViewModel.Color = value;
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                //History
+                                var previous = layer.Style.Fill;
+                                int index = layer.Control.Index;
+                                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                                Style.Fill = previous.Clone());
+
+                                layer.Style.Fill = BrushBase.ColorBrush(value);
+                            });
+
+                            //History
+                            this.ViewModel.Push(history);
+
+                            this.ViewModel.Invalidate();//Invalidate
+                        }
+                        break;
+
+                    case FillOrStroke.Stroke:
+                        {
+                            //History
+                            IHistoryBase history = new IHistoryBase("Set stroke");
+
+                            //Selection
+                            this.SelectionViewModel.Color = value;
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                //History
+                                var previous = layer.Style.Stroke;
+                                int index = layer.Control.Index;
+                                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                                Style.Stroke = previous.Clone());
+
+                                layer.Style.Stroke = BrushBase.ColorBrush(value);
+                            });
+
+                            //History
+                            this.ViewModel.Push(history);
+
+                            this.ViewModel.Invalidate();//Invalidate
+                        }
+                        break;
+                }
             };
         }
+
+
+        private void ConstructColor2()
+        {
+            //History
+            IHistoryBase history = null;
+
+
+            //Color
+            this.ColorPicker.ColorChangeStarted += (s, value) =>
+            {
+                switch (this.SelectionViewModel.FillOrStroke)
+                {
+                    case FillOrStroke.Fill:
+                        {
+                            history = new IHistoryBase("Set fill");
+
+                            //Selection
+                            this.SelectionViewModel.Color = value;
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                layer.Style.CacheFill();
+                            });
+
+                            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                        }
+                        break;
+                    case FillOrStroke.Stroke:
+                        {
+                            history = new IHistoryBase("Set stroke");
+
+                            //Selection
+                            this.SelectionViewModel.Color = value;
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                layer.Style.CacheStroke();
+                            });
+
+                            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                        }
+                            break;
+                }
+            };
+            this.ColorPicker.ColorChangeDelta += (s, value) =>
+            {
+                switch (this.SelectionViewModel.FillOrStroke)
+                {
+                    case FillOrStroke.Fill:
+                        {
+                            //Selection
+                            this.SelectionViewModel.Color = value;
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                layer.Style.Fill = BrushBase.ColorBrush(value);
+                            });
+
+                            this.ViewModel.Invalidate();//Invalidate
+                        }
+                            break;
+                    case FillOrStroke.Stroke:
+                        {
+                            //Selection
+                            this.SelectionViewModel.Color = value;
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                layer.Style.Stroke = BrushBase.ColorBrush(value);
+                            });
+
+                            this.ViewModel.Invalidate();//Invalidate
+                        }
+                        break;
+                }
+            };
+            this.ColorPicker.ColorChangeCompleted += (s, value) =>
+            {
+                switch (this.SelectionViewModel.FillOrStroke)
+                {
+                    case FillOrStroke.Fill:
+                        {
+                            //Selection
+                            this.SelectionViewModel.Color = value;
+                            this.SelectionViewModel.Fill = BrushBase.ColorBrush(value);
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                //History
+                                var previous = layer.Style.StartingFill.Clone();
+                                int index = layer.Control.Index;
+                                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                                Style.Fill = previous.Clone());
+
+                                layer.Style.Fill = BrushBase.ColorBrush(value);
+                            });
+
+                            //History
+                            this.ViewModel.Push(history);
+
+                            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
+                        }
+                            break;
+                    case FillOrStroke.Stroke:
+                        {
+                            //Selection
+                            this.SelectionViewModel.Color = value;
+                            this.SelectionViewModel.Stroke = BrushBase.ColorBrush(value);
+                            this.SelectionViewModel.SetValue((layer) =>
+                            {
+                                //History
+                                var previous = layer.Style.StartingStroke.Clone();
+                                int index = layer.Control.Index;
+                                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                                Style.Stroke = previous.Clone());
+
+                                layer.Style.Stroke = BrushBase.ColorBrush(value);
+                            });
+
+                            //History
+                            this.ViewModel.Push(history);
+
+                            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
+                        }
+                        break;
+                }
+            };
+        }
+
+
     }
         
     /// <summary> 

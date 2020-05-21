@@ -1,5 +1,7 @@
 ﻿using Microsoft.Graphics.Canvas.Geometry;
+using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
@@ -13,6 +15,7 @@ namespace Retouch_Photo2.Menus.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SelectionViewModel SelectionViewModel => App.SelectionViewModel;
+        CanvasStrokeStyle StrokeStyle { get => this.SelectionViewModel.StrokeStyle; set => this.SelectionViewModel.StrokeStyle = value; }
 
         //@Converter
         private CanvasDashStyle DashConverter(CanvasStrokeStyle strokeStyle) => strokeStyle == null ? CanvasDashStyle.Solid : strokeStyle.DashStyle;
@@ -77,17 +80,28 @@ namespace Retouch_Photo2.Menus.Models
         public void ConstructDash()
         {
             this.DashSegmented.DashChanged += (s, dash) =>
-            {
+            {                        
+                //History
+                IHistoryBase history = new IHistoryBase("Set stroke style");
+
                 //Selection
+                CanvasStrokeStyle strokeStyle = this.StrokeStyle.Clone();
+                strokeStyle.DashStyle = dash;
+                this.StrokeStyle = strokeStyle;
                 this.SelectionViewModel.SetValue((layer) =>
-                {
+                {                              
+                    //History
+                    var previous = layer.Style.StrokeStyle.Clone();
+                    int index = layer.Control.Index;
+                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                    Style.StrokeStyle = previous.Clone());
+
                     layer.Style.StrokeStyle.DashStyle = dash;
                     this.SelectionViewModel.StyleLayer = layer;
                 });
-                CanvasStrokeStyle strokeStyle = this.SelectionViewModel.StrokeStyle;
-                strokeStyle.DashStyle = dash;
-                this.SelectionViewModel.StrokeStyle = null;
-                this.SelectionViewModel.StrokeStyle = strokeStyle;
+
+                //History
+                this.ViewModel.Push(history);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -96,9 +110,20 @@ namespace Retouch_Photo2.Menus.Models
 
         //Width
         public void ConstructWidth()
-        {
+        {                     
+            //History
+            IHistoryBase history = null;
+            
             this.WidthPicker.ValueChangeStarted += (s, value) =>
             {
+                history = new IHistoryBase("Set stroke width");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.Style.CacheStrokeWidth();
+                });
+
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
             };
             this.WidthPicker.ValueChangeDelta += (s, value) =>
@@ -109,7 +134,6 @@ namespace Retouch_Photo2.Menus.Models
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.Style.StrokeWidth = width;
-                    this.SelectionViewModel.StyleLayer = layer;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
@@ -118,7 +142,22 @@ namespace Retouch_Photo2.Menus.Models
             {
                 float width = (float)value;
 
+                //Selection
                 this.SelectionViewModel.StrokeWidth = width;
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    //History
+                    var previous = layer.Style.StartingStrokeWidth;
+                    int index = layer.Control.Index;
+                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                    Style.StrokeWidth = previous);
+
+                    layer.Style.StrokeWidth = width;
+                    this.SelectionViewModel.StyleLayer = layer;
+                });
+
+                //History
+                this.ViewModel.Push(history);
 
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             };
@@ -128,9 +167,20 @@ namespace Retouch_Photo2.Menus.Models
         //Offset
         public void ConstructOffset()
         {
+            //History
+            IHistoryBase history = null;
+
             this.OffsetPicker.Maximum = 10;
             this.OffsetPicker.ValueChangeStarted += (s, value) =>
             {
+                history = new IHistoryBase("Set stroke style");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    layer.Style.CacheStrokeStyle();
+                });
+
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
             };
             this.OffsetPicker.ValueChangeDelta += (s, value) =>
@@ -141,7 +191,6 @@ namespace Retouch_Photo2.Menus.Models
                 this.SelectionViewModel.SetValue((layer) =>
                 {
                     layer.Style.StrokeStyle.DashOffset = offset;
-                    this.SelectionViewModel.StyleLayer = layer;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
@@ -150,10 +199,24 @@ namespace Retouch_Photo2.Menus.Models
             {
                 float offset = (float)value;
 
-                CanvasStrokeStyle strokeStyle = this.SelectionViewModel.StrokeStyle;
+                //Selection
+                CanvasStrokeStyle strokeStyle = this.StrokeStyle.Clone();
                 strokeStyle.DashOffset = offset;
-                this.SelectionViewModel.StrokeStyle = null;
-                this.SelectionViewModel.StrokeStyle = strokeStyle;
+                this.StrokeStyle = strokeStyle;
+                this.SelectionViewModel.SetValue((layer) =>
+                {
+                    //History
+                    var previous = layer.Style.StartingStrokeStyle.Clone();
+                    int index = layer.Control.Index;
+                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                    Style.StrokeStyle = previous.Clone());
+
+                    layer.Style.StrokeStyle.DashOffset = offset;
+                    this.SelectionViewModel.StyleLayer = layer;
+                });
+
+                //History
+                this.ViewModel.Push(history);
 
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             };
@@ -162,23 +225,34 @@ namespace Retouch_Photo2.Menus.Models
 
         //Cap
         public void ConstructCap()
-        {
+        {       
             this.CapSegmented.CapChanged += (s, cap) =>
             {
+                //History
+                IHistoryBase history = new IHistoryBase("Set stroke style");
+
                 //Selection
+                CanvasStrokeStyle strokeStyle = this.StrokeStyle.Clone();
+                strokeStyle.DashCap = cap;
+                strokeStyle.StartCap = cap;
+                strokeStyle.EndCap = cap;
+                this.StrokeStyle = strokeStyle;
                 this.SelectionViewModel.SetValue((layer) =>
-                {
+                {                  
+                    //History
+                    var previous = layer.Style.StrokeStyle.Clone();
+                    int index = layer.Control.Index;
+                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                    Style.StrokeStyle = previous.Clone());
+
                     layer.Style.StrokeStyle.DashCap = cap;
                     layer.Style.StrokeStyle.StartCap = cap;
                     layer.Style.StrokeStyle.EndCap = cap;
                     this.SelectionViewModel.StyleLayer = layer;
                 });
-                CanvasStrokeStyle strokeStyle = this.SelectionViewModel.StrokeStyle;
-                strokeStyle.DashCap = cap;
-                strokeStyle.StartCap = cap;
-                strokeStyle.EndCap = cap;
-                this.SelectionViewModel.StrokeStyle = null;
-                this.SelectionViewModel.StrokeStyle = strokeStyle;
+
+                //History
+                this.ViewModel.Push(history);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -190,16 +264,24 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.JoinSegmented.JoinChanged += (s, join) =>
             {
+                //History
+                IHistoryBase history = new IHistoryBase("Set stroke style");
+
                 //Selection
+                CanvasStrokeStyle strokeStyle = this.StrokeStyle.Clone();
+                strokeStyle.LineJoin = join;
+                this.StrokeStyle = strokeStyle;
                 this.SelectionViewModel.SetValue((layer) =>
                 {
+                    //History
+                    var previous = layer.Style.StrokeStyle.Clone();
+                    int index = layer.Control.Index;
+                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                    Style.StrokeStyle = previous.Clone());
+
                     layer.Style.StrokeStyle.LineJoin = join;
                     this.SelectionViewModel.StyleLayer = layer;
                 });
-                CanvasStrokeStyle strokeStyle = this.SelectionViewModel.StrokeStyle;
-                strokeStyle.LineJoin = join;
-                this.SelectionViewModel.StrokeStyle = null;
-                this.SelectionViewModel.StrokeStyle = strokeStyle;
 
                 this.ViewModel.Invalidate();//Invalidate
             };

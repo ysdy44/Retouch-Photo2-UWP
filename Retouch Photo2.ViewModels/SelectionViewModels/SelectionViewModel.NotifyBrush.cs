@@ -55,33 +55,6 @@ namespace Retouch_Photo2.ViewModels
         }
         private Color color = Colors.LightGray;
 
-        /// <summary> Sets color (width fill and stroke). </summary>  
-        public void SetColor(Color color, FillOrStroke fillOrStroke)
-        {
-            if (this.FillOrStroke == fillOrStroke) this.Color = color;
-
-            switch (fillOrStroke)
-            {
-                case FillOrStroke.Fill:
-                    this.Fill = BrushBase.ColorBrush(color);
-                    this.SetValue((layer) =>
-                    {
-                        layer.Style.Fill = BrushBase.ColorBrush(color);
-                        this.StyleLayer = layer;
-                    });
-                    break;
-
-                case FillOrStroke.Stroke:
-                    this.Stroke = BrushBase.ColorBrush(color);
-                    this.SetValue((layer) =>
-                    {
-                        layer.Style.Stroke = BrushBase.ColorBrush(color);
-                        this.StyleLayer = layer;
-                    });
-                    break;
-            }
-        }
-
 
         //////////////////////////
 

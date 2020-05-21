@@ -34,7 +34,7 @@ namespace Retouch_Photo2.Layers
                     ICanvasBrush canvasBrush = this.Style.Fill.GetICanvasBrush(resourceCreator, canvasToVirtualMatrix);
                     drawingSession.FillGeometry(geometry, canvasBrush);
                 }
-
+                
 
                 //CanvasActiveLayer
                 if (this.Children.Count != 0)

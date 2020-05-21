@@ -87,6 +87,7 @@ namespace Retouch_Photo2.Brushs
                         this.Manager.Index = i;
                         CanvasGradientStop stop = this.Manager.Stops[i];
                         this.StopChanged(stop.Color, (int)(stop.Position * 100), true);//Delegate
+                        this.StopsChangeStarted?.Invoke(this, this.array);//Delegate
                         return;
                     }
                 }
@@ -97,6 +98,7 @@ namespace Retouch_Photo2.Brushs
                 {
                     this.Manager.IsLeft = true;
                     this.StopChanged(this.Manager.LeftColor, 0, false);//Delegate
+                    this.StopsChangeStarted?.Invoke(this, this.array);//Delegate
                     return;
                 }
 
@@ -106,6 +108,7 @@ namespace Retouch_Photo2.Brushs
                 {
                     this.Manager.IsRight = true;
                     this.StopChanged(this.Manager.RightColor, 100, false);//Delegate
+                    this.StopsChangeStarted?.Invoke(this, this.array);//Delegate
                     return;
                 }
 
@@ -122,6 +125,7 @@ namespace Retouch_Photo2.Brushs
                 this.SetArray(array);
 
                 this.StopChanged(addStop.Color, (int)(addStop.Position * 100), true);//Delegate
+                this.StopsChangeStarted?.Invoke(this, this.array);//Delegate
                 return;
             };
             this.CanvasOperator.Single_Delta += (point) =>
@@ -137,14 +141,14 @@ namespace Retouch_Photo2.Brushs
                 this.OffsetChanged(offset);
 
                 this.CanvasControl.Invalidate();
-                this.StopsChanged?.Invoke(this, this.array);//Delegate
+                this.StopsChangeDelta?.Invoke(this, this.array);//Delegate
             };
-            this.CanvasControl.PointerReleased += (s, e) =>
+            this.CanvasOperator.Single_Complete += (point) =>
             {
                 if (this.array == null) return;
 
                 this.CanvasControl.Invalidate();
-                this.StopsChanged?.Invoke(this, this.array);//Delegate
+                this.StopsChangeCompleted?.Invoke(this, this.array);//Delegate
             };
         }
 

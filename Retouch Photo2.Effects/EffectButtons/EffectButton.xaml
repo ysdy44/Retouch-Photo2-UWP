@@ -13,6 +13,7 @@
     d:DesignHeight="50"
     d:DesignWidth="200"
     mc:Ignorable="d"
+    IsEnabled="False"
     >
 
 
@@ -53,22 +54,6 @@
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
-
-
-                <VisualState x:Name="NonDisabled">
-                    <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Viewbox" Storyboard.TargetProperty="Opacity">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0.5" />
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Foreground">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource UnCheckColor}" />
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_ToggleSwitch" Storyboard.TargetProperty="IsEnabled">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="True" />
-                        </ObjectAnimationUsingKeyFrames>
-                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
-                    </Storyboard>
-                </VisualState>
                 
                 <VisualState x:Name="Disabled">
                     <Storyboard>
@@ -77,9 +62,6 @@
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource UnCheckColor}" />
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_ToggleSwitch" Storyboard.TargetProperty="IsEnabled">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="False" />
                         </ObjectAnimationUsingKeyFrames>
                         <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                     </Storyboard>
@@ -100,7 +82,7 @@
         <TextBlock x:Name="TextBlock" Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" FontWeight="Medium" Foreground="{StaticResource CheckColor}"/>
         
         <!--ToggleSwitch-->
-        <ToggleSwitch x:Name="_ToggleSwitch" Grid.Column="2" IsOn="False" IsEnabled="False">
+        <ToggleSwitch x:Name="_ToggleSwitch" Grid.Column="2" IsOn="False">
             <ToggleSwitch.Clip>
                 <RectangleGeometry Rect="0,0,50,50"/>
             </ToggleSwitch.Clip>

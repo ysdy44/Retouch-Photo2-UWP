@@ -5,7 +5,9 @@ namespace Retouch_Photo2.Layers
 {
     public interface ILayerControl
     {
-        FrameworkElement Self { get; }
+        ILayer Layer { get; }
+
+        LayerControl Self { get; }
         Visibility Visibility { get; set; }
         string Text { get; set; }
         string Type { get; set; }
@@ -13,6 +15,7 @@ namespace Retouch_Photo2.Layers
 
         int ControlHeight { get; set; }
         int Depth { get; set; }
+        int Index { get; set; }
 
         //Property
         void SetVisibility(Visibility value);

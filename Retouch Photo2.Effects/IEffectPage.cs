@@ -13,8 +13,6 @@ namespace Retouch_Photo2.Effects
 
         /// <summary> Gets IEffect's page. </summary>
         FrameworkElement Page { get; }
-        /// <summary> Gets button's ToggleSwitch. </summary>
-        ToggleSwitch ToggleSwitch { get; }
         /// <summary> Gets IEffect's button. </summary>
         EffectButton Button { get; }
 
@@ -31,11 +29,7 @@ namespace Retouch_Photo2.Effects
         /// <see cref="IEffectPage"/>'s value follows the <see cref="Effect"/>.
         /// </summary>
         /// <param name="effect"> The effect. </param>
-        void FollowEffect(Effect effect);
-        /// <summary>
-        /// Overwriting the <see cref="Effect"/> according to ToggleSwitch's IsOn
-        /// </summary>
-        /// <param name="effect"> The effect. </param>
-        void OverwritingEffect(Effect effect);
-    }    
+        /// <param name="isOnlyButton"> Only button follow. </param>
+        void FollowEffect(Effect effect, bool isOnlyButton);
+    }
 }

@@ -112,7 +112,7 @@
     <Compile Include="EffectButtons\EffectButton.xaml.cs">
       <DependentUpon>EffectButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IEffect.cs" />
+    <Compile Include="IEffectPage.cs" />
     <Compile Include="Effect.cs" />
     <Compile Include="Icons\DirectionalBlurIcon.xaml.cs">
       <DependentUpon>DirectionalBlurIcon.xaml</DependentUpon>

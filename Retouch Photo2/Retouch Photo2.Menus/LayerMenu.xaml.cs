@@ -150,7 +150,9 @@ namespace Retouch_Photo2.Menus.Models
                 {
                     //History
                     var previous = layer.StartingOpacity;
-                    history.Undos.Push(() => layer.Opacity = previous);
+                    int index = layer.Control.Index;
+                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                    Opacity = previous);
 
                     layer.Opacity = opacity;
                 });
@@ -184,7 +186,9 @@ namespace Retouch_Photo2.Menus.Models
                 {
                     //History
                     var previous = layer.BlendMode;
-                    history.Undos.Push(() => layer.BlendMode = previous);
+                    int index = layer.Control.Index;
+                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                    BlendMode = previous);
 
                     layer.BlendMode = mode;
                 });
@@ -212,7 +216,9 @@ namespace Retouch_Photo2.Menus.Models
                 {
                     //History
                     var previous = layer.Visibility;
-                    history.Undos.Push(() => layer.Visibility = previous);
+                    int index = layer.Control.Index;
+                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                    Visibility = previous);
 
                     layer.Visibility = value;
                 });
@@ -238,8 +244,10 @@ namespace Retouch_Photo2.Menus.Models
                 {
                     //History
                     var previous = layer.TagType;
-                    history.Undos.Push(() => layer.TagType = previous);
-
+                    int index = layer.Control.Index;
+                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                    TagType = previous);
+                    
                     layer.TagType = type;
                 });
 
