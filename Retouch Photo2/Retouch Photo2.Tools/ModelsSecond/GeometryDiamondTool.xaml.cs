@@ -20,7 +20,6 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@TouchBar  
@@ -93,11 +92,13 @@ namespace Retouch_Photo2.Tools.Models
             if (mid < 0.0f) mid = 0.0f;
             if (mid > 1.0f) mid = 1.0f;
 
-            this.SelectionViewModel.GeometryDiamondMid = mid;
+            this.ViewModel.GeometryDiamondMid = mid;
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 if (layer.Type == LayerType.GeometryDiamond)
                 {
                     GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
@@ -110,12 +111,14 @@ namespace Retouch_Photo2.Tools.Models
 
         private void MidMirror()
         {
-            float selectionMid = 1.0f - this.SelectionViewModel.GeometryDiamondMid;
-            this.SelectionViewModel.GeometryDiamondMid = selectionMid;
+            float selectionMid = 1.0f - this.ViewModel.GeometryDiamondMid;
+            this.ViewModel.GeometryDiamondMid = selectionMid;
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+                
                 if (layer.Type == LayerType.GeometryDiamond)
                 {
                     GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
@@ -171,9 +174,9 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryDiamondLayer
             {
-                Mid = this.SelectionViewModel.GeometryDiamondMid,
+                Mid = this.ViewModel.GeometryDiamondMid,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.ViewModel.GeometryStyle
             };
         }
 

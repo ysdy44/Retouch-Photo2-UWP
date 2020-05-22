@@ -6,9 +6,9 @@ using System.ComponentModel;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "SelectionViewModel" />. 
+    /// Retouch_Photo2's the only <see cref = "ViewModel" />. 
     /// </summary>
-    public partial class SelectionViewModel : INotifyPropertyChanged
+    public partial class ViewModel : INotifyPropertyChanged
     {
 
         /// <summary> Sets all IGeometryLayer. </summary>     

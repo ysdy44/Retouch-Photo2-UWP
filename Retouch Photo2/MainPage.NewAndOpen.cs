@@ -106,12 +106,20 @@ namespace Retouch_Photo2
                 Photo.Instances.Add(photo);
             }
 
+            //Load all layers. 
+            IEnumerable<ILayer> layers = XML.LoadLayersFile();
+            Layer.Instances.Clear();
+            foreach (ILayer layer in layers)
+            {
+                Layer.Instances.Add(layer);
+            }
+
 
             //Project
             {
                 Project project = XML.LoadProjectFile(name);
                 this.ViewModel.LoadFromProject(project);
-                this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
+                this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
             }
 
             //Transition
@@ -155,6 +163,8 @@ namespace Retouch_Photo2
             {
                 Transform = new Transform(transformerSource)
             };
+            Layer.Instances.Add(imageLayer);
+            Layerage imageLayerage = imageLayer.ToLayerage();
 
             //Project
             {
@@ -163,9 +173,9 @@ namespace Retouch_Photo2
                     Name = name,
                     Width = width,
                     Height = height,
-                    Layers = new List<ILayer>
+                    Layers = new List<Layerage>
                     {
-                         imageLayer
+                         imageLayerage
                     }
                 };
                 this.ViewModel.LoadFromProject(project);

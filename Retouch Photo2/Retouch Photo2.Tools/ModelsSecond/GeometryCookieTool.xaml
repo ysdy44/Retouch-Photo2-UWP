@@ -23,8 +23,8 @@
             <tools:TouchbarButton x:Name="InnerRadiusTouchbarButton">
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="InnerRadiusTouchbarSlider"
-                    Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryCookieInnerRadius),Mode=OneWay}"
-                    Value="{x:Bind InnerRadiusValueConverter(SelectionViewModel.GeometryCookieInnerRadius), Mode=OneWay}" 
+                    Number="{x:Bind InnerRadiusNumberConverter(ViewModel.GeometryCookieInnerRadius),Mode=OneWay}"
+                    Value="{x:Bind InnerRadiusValueConverter(ViewModel.GeometryCookieInnerRadius), Mode=OneWay}" 
                      />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>
@@ -35,8 +35,8 @@
             <tools:TouchbarButton x:Name="SweepAngleTouchbarButton">
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="SweepAngleTouchbarSlider"
-                    Number="{x:Bind SweepAngleNumberConverter(SelectionViewModel.GeometryCookieSweepAngle),Mode=OneWay}"
-                    Value="{x:Bind SweepAngleValueConverter(SelectionViewModel.GeometryCookieSweepAngle), Mode=OneWay}" 
+                    Number="{x:Bind SweepAngleNumberConverter(ViewModel.GeometryCookieSweepAngle),Mode=OneWay}"
+                    Value="{x:Bind SweepAngleValueConverter(ViewModel.GeometryCookieSweepAngle), Mode=OneWay}" 
                      />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>

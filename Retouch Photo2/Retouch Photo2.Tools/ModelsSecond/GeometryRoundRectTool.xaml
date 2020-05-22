@@ -23,8 +23,8 @@
             <tools:TouchbarButton x:Name="CornerTouchbarButton">
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="CornerTouchbarSlider" 
-                             Number="{x:Bind CornerNumberConverter(SelectionViewModel.GeometryRoundRectCorner),Mode=OneWay}"
-                             Value="{x:Bind CornerValueConverter(SelectionViewModel.GeometryRoundRectCorner),Mode=OneWay}"
+                             Number="{x:Bind CornerNumberConverter(ViewModel.GeometryRoundRectCorner),Mode=OneWay}"
+                             Value="{x:Bind CornerValueConverter(ViewModel.GeometryRoundRectCorner),Mode=OneWay}"
                              />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>

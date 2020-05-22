@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Numerics;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Layers
 {
@@ -12,15 +13,15 @@ namespace Retouch_Photo2.Layers
 
         //@Static
         /// <summary> Occurs when a layer receive interaction. </summary>
-        public static Action<ILayer> ItemClick;
+        public static Action<Layerage> ItemClick;
         /// <summary> Occurs when right-click input a layer. </summary>
-        public static Action<ILayer> RightTapped;
+        public static Action<Layerage> RightTapped;
         /// <summary> Occurs when a layer visibility changes. </summary>
-        public static Action<ILayer> VisibilityChanged;
+        public static Action<Layerage> VisibilityChanged;
         /// <summary> Occurs when the Select has changed </summary>
-        public static Action<ILayer> IsSelectedChanged;
+        public static Action<Layerage> IsSelectedChanged;
         /// <summary> Occurs when the expaned has changed </summary>
-        public static Action<ILayer> IsExpandChanged;
+        public static Action<Layerage> IsExpandChanged;
 
         //Overlay
         /// <summary>
@@ -30,11 +31,11 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Occurs when drag items started.
         /// </summary>
-        public static Action<ILayer, bool> DragItemsStarted;
+        public static Action<Layerage, ManipulationModes> DragItemsStarted;
         /// <summary>
         /// Occurs when drag items delta.
         /// </summary>
-        public static Action<ILayer, OverlayMode> DragItemsDelta;
+        public static Action<Layerage, OverlayMode> DragItemsDelta;
         /// <summary>
         /// Occurs when drag items is completed.
         /// </summary>
@@ -44,7 +45,7 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// The root layers.
         /// </summary>
-        public IList<ILayer> RootLayers { get; private set; } = new List<ILayer>();
+        public IList<Layerage> RootLayers { get; private set; } = new List<Layerage>();
         /// <summary>
         /// The root controls.
         /// </summary>
@@ -56,7 +57,7 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         /// <param name="layer"></param>
         /// <returns></returns>
-        public IList<ILayer> GetParentsChildren(ILayer layer)
+        public IList<Layerage> GetParentsChildren(Layerage layer)
         {
             if (layer == null) return this.RootLayers;
             if (layer.Parents == null) return this.RootLayers;

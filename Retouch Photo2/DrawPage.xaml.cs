@@ -18,7 +18,6 @@ namespace Retouch_Photo2
         ViewModel ViewModel => App.ViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel ;
         TipViewModel TipViewModel => App.TipViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Static
         /// <summary> Navigate to <see cref="PhotosPage"/> </summary>
@@ -104,11 +103,11 @@ namespace Retouch_Photo2
 
             this.HeadBarControl.UndoButton.Tapped += (s, e) =>
             {
-                bool isUndo = this.ViewModel.Undo();//History
+                bool isUndo = this.ViewModel.HistoryUndo();//History
 
                 if (isUndo)
                 {
-                    this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection          
+                    this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection          
                     LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                     LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
 

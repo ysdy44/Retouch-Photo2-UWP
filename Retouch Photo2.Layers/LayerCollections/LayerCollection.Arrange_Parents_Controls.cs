@@ -16,27 +16,28 @@ namespace Retouch_Photo2.Layers
             LayerCollection.Index = 0;
             LayerCollection._arrangeLayersControls(layerCollection, layerCollection.RootLayers, 0, null, Visibility.Visible);
         }
-        private static void _arrangeLayersControls(LayerCollection layerCollection, IList<ILayer> layers, int depth, ILayer parents,Visibility visibility)
+        private static void _arrangeLayersControls(LayerCollection layerCollection, IList<Layerage> layers, int depth, Layerage parents,Visibility visibility)
         {
-            foreach (ILayer layer in layers)
+            foreach (Layerage layerage in layers)
             {
+                ILayer layer = layerage.Self;
+                
                 //Depth
                 layer.Control.Depth = depth;
-                layer.Control.Index = LayerCollection.Index;
                 LayerCollection.Index++;
                 //Parents
-                layer.Parents = parents;
+                layerage.Parents = parents;
                 //IsExpand
                 layer.Control.Self.Visibility = visibility;
                 Visibility childVisibility = (layer.IsExpand && visibility == Visibility.Visible) ? Visibility.Visible : Visibility.Collapsed;
                 //IsExpand
-                bool isZero = layer.Children.Count == 0;
+                bool isZero = layerage.Children.Count == 0;
                 layer.Control.SetChildrenZero(isZero);
 
                 layerCollection.RootControls.Add(layer.Control.Self);
 
                 //Recursive
-                LayerCollection._arrangeLayersControls(layerCollection, layer.Children, depth + 1, layer, childVisibility);
+                LayerCollection._arrangeLayersControls(layerCollection, layerage.Children, depth + 1, layerage, childVisibility);
             }
         }
 
@@ -47,15 +48,15 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         public static void ArrangeLayersParents(LayerCollection layerCollection) 
         {
-            foreach (ILayer layer in layerCollection.RootLayers)
+            foreach (Layerage layer in layerCollection.RootLayers)
             {
                 layer.Parents = null;
                 LayerCollection._arrangeLayersParents(layer, layer.Children);
             }
         }
-        private static void _arrangeLayersParents(ILayer parents, IEnumerable<ILayer> layers)
+        private static void _arrangeLayersParents(Layerage parents, IEnumerable<Layerage> layers)
         {
-            foreach (ILayer layer in layers)
+            foreach (Layerage layer in layers)
             {
                 layer.Parents = parents;
                 LayerCollection._arrangeLayersParents(layer, layer.Children);
@@ -68,11 +69,11 @@ namespace Retouch_Photo2.Layers
         /// Arrange all layers's depth.
         /// </summary>
         public static void ArrangeLayersDepth(LayerCollection layerCollection) => LayerCollection._arrangeLayersDepth(layerCollection.RootLayers, 0);
-        private static void _arrangeLayersDepth(IEnumerable<ILayer> layers, int depth)
+        private static void _arrangeLayersDepth(IEnumerable<Layerage> layers, int depth)
         {
-            foreach (ILayer layer in layers)
+            foreach (Layerage layer in layers)
             {
-                layer.Control.Depth = depth;
+                layer.Self.Control.Depth = depth;
                 LayerCollection._arrangeLayersDepth(layer.Children, depth + 1);
             }
         }
@@ -84,12 +85,12 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         public static void ArrangeLayersBackgroundLayerCollection(LayerCollection layerCollection)
         {
-            foreach (ILayer layer in layerCollection.RootLayers)
+            foreach (Layerage layer in layerCollection.RootLayers)
             {
                 LayerCollection._arrangeLayersBackgroundNullParents(layer);
             }
         }
-        public static void ArrangeLayersBackgroundItemClick(ILayer layer)
+        public static void ArrangeLayersBackgroundItemClick(Layerage layer)
         {
             bool hasParentsSelected = LayerCollection._getLayersParentsIsSelected(layer);
             if (hasParentsSelected) return;
@@ -97,12 +98,12 @@ namespace Retouch_Photo2.Layers
         }
 
         //Judge Recursive
-        private static void _arrangeLayersBackgroundNullParents(ILayer layer)
+        private static void _arrangeLayersBackgroundNullParents(Layerage layer)
         {
-            if (layer.IsSelected)
+            if (layer.Self.IsSelected)
             {
-                layer.Control.SetBackground(BackgroundMode.Selected);
-                foreach (ILayer child in layer.Children)
+                layer.Self.Control.SetBackground(BackgroundMode.Selected);
+                foreach (Layerage child in layer.Children)
                 {
                     LayerCollection._arrangeLayersBackgroundHasParentsSelected(child);
                 }
@@ -116,50 +117,50 @@ namespace Retouch_Photo2.Layers
                     LayerCollection._arrangeLayersBackgroundIsNotSelected(layer);
             }
         }
-        private static void _arrangeLayersBackgroundWithoutParentsSelected(ILayer layer)
+        private static void _arrangeLayersBackgroundWithoutParentsSelected(Layerage layer)
         {
-            layer.Control.SetBackground(BackgroundMode.ChildSelected);
+            layer.Self.Control.SetBackground(BackgroundMode.ChildSelected);
 
-            foreach (ILayer child in layer.Children)
+            foreach (Layerage child in layer.Children)
             {
                 LayerCollection._arrangeLayersBackgroundNullParents(child);
             }
         }
 
         //Self Recursive
-        private static void _arrangeLayersBackgroundHasParentsSelected(ILayer layer)
+        private static void _arrangeLayersBackgroundHasParentsSelected(Layerage layer)
         {
-            layer.Control.SetBackground(BackgroundMode.ParentsSelected);
-            foreach (ILayer child in layer.Children)
+            layer.Self.Control.SetBackground(BackgroundMode.ParentsSelected);
+            foreach (Layerage child in layer.Children)
             {
                 LayerCollection._arrangeLayersBackgroundHasParentsSelected(child);
             }
         }
-        private static void _arrangeLayersBackgroundIsNotSelected(ILayer layer)
+        private static void _arrangeLayersBackgroundIsNotSelected(Layerage layer)
         {
-            layer.Control.SetBackground(BackgroundMode.UnSelected);
-            foreach (ILayer child in layer.Children)
+            layer.Self.Control.SetBackground(BackgroundMode.UnSelected);
+            foreach (Layerage child in layer.Children)
             {
                 LayerCollection._arrangeLayersBackgroundIsNotSelected(child);
             }
         }
 
 
-        private static bool _getLayersChildrenIsSelected(ILayer layer)
+        private static bool _getLayersChildrenIsSelected(Layerage layer)
         {
-            foreach (ILayer child in layer.Children)
+            foreach (Layerage child in layer.Children)
             {
-                if (child.IsSelected) return true;
+                if (child.Self.IsSelected) return true;
 
                 bool childrenIsSelected = LayerCollection._getLayersChildrenIsSelected(child);
                 if (childrenIsSelected == true) return true;
             }
             return false;
         }
-        private static bool _getLayersParentsIsSelected(ILayer layer)
+        private static bool _getLayersParentsIsSelected(Layerage layer)
         {
             if (layer.Parents == null) return false;
-            if (layer.Parents.IsSelected == true) return true;
+            if (layer.Parents.Self.IsSelected == true) return true;
 
             return LayerCollection._getLayersParentsIsSelected(layer.Parents);
         }
@@ -169,19 +170,19 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Arrange all layers's visibility.
         /// </summary>
-        public static void ArrangeLayersVisibility(ILayer layer)
+        public static void ArrangeLayersVisibility(Layerage layer)
         {
-            Visibility childVisibility = layer.IsExpand ? Visibility.Visible : Visibility.Collapsed;
+            Visibility childVisibility = layer.Self.IsExpand ? Visibility.Visible : Visibility.Collapsed;
             LayerCollection._arrangeLayersExpaned(layer.Children, childVisibility);
         }
-        private static void _arrangeLayersExpaned(IList<ILayer> layers, Visibility visibility)
+        private static void _arrangeLayersExpaned(IList<Layerage> layers, Visibility visibility)
         {
-            foreach (ILayer layer in layers)
+            foreach (Layerage layer in layers)
             {
-                layer.Control.Self.Visibility = visibility;
+                layer.Self.Control.Self.Visibility = visibility;
 
                 //Recursive
-                Visibility childVisibility = (layer.IsExpand && visibility == Visibility.Visible) ? Visibility.Visible : Visibility.Collapsed;
+                Visibility childVisibility = (layer.Self.IsExpand && visibility == Visibility.Visible) ? Visibility.Visible : Visibility.Collapsed;
                 LayerCollection._arrangeLayersExpaned(layer.Children, childVisibility);
             }
         }
@@ -192,12 +193,12 @@ namespace Retouch_Photo2.Layers
         /// Arrange all layers's "children is zero".
         /// </summary>
         public static void ArrangeLayersChildrenZero(LayerCollection layerCollection) => LayerCollection._arrangeLayersChildrenZero(layerCollection.RootLayers);
-        public static void _arrangeLayersChildrenZero(IEnumerable<ILayer> layers)
+        public static void _arrangeLayersChildrenZero(IEnumerable<Layerage> layers)
         {
-            foreach (ILayer child in layers)
+            foreach (Layerage child in layers)
             {
                 bool isZero = child.Children.Count == 0;
-                child.Control.SetChildrenZero(isZero);
+                child.Self.Control.SetChildrenZero(isZero);
 
                 LayerCollection._arrangeLayersChildrenZero(child.Children);
             }

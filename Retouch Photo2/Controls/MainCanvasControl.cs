@@ -18,7 +18,6 @@ namespace Retouch_Photo2.Controls
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
         bool _isSingleStarted;
@@ -79,8 +78,10 @@ namespace Retouch_Photo2.Controls
 
             for (int i = this.ViewModel.LayerCollection.RootLayers.Count - 1; i >= 0; i--)
             {
-                ILayer currentLayer = this.ViewModel.LayerCollection.RootLayers[i];
-                previousImage = LayerBase.Render(this.ViewModel.CanvasDevice, currentLayer, previousImage, canvasToVirtualMatrix);
+                Layerage currentLayer = this.ViewModel.LayerCollection.RootLayers[i];
+                ILayer currentLayer2 = currentLayer.Self;
+
+                previousImage = Layer.Render(this.ViewModel.CanvasDevice, currentLayer2, previousImage, canvasToVirtualMatrix, currentLayer.Children);
             }
 
             return previousImage;
@@ -98,11 +99,13 @@ namespace Retouch_Photo2.Controls
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             
             //Bound
-            foreach (ILayer layer in this.ViewModel.LayerCollection.RootLayers)
+            foreach (Layerage layerage in this.ViewModel.LayerCollection.RootLayers)
             {
+                ILayer layer = layerage.Self;
+
                 if (layer.IsSelected == true)
                 {
-                    layer.DrawBound(resourceCreator, drawingSession, matrix, this.ViewModel.AccentColor);
+                    layer.DrawBound(resourceCreator, drawingSession, matrix, layerage.Children, this.ViewModel.AccentColor);
                 }
             }
 

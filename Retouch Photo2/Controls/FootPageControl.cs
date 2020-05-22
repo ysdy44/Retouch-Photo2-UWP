@@ -15,7 +15,6 @@ namespace Retouch_Photo2.Controls
     {
         //@ViewModel
         TipViewModel TipViewModel => App.TipViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         
         //@VisualState
         bool _isLoaded;

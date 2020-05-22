@@ -37,14 +37,53 @@ namespace Retouch_Photo2.Menus.Models
             {
                 this.ItemsControl.ItemsSource = sadasd(this.ViewModel.LayerCollection.RootLayers,0);
             };
+            this.Button2.Click += (s, e) =>
+            {
+                this.ItemsControl.ItemsSource = asdsadasdsdsssss();
+            };
+
+            this.Coo.Click += (s, e) =>
+            {
+                List<Layerage> sdasd = new List<Layerage>();
+                foreach (var item in this.ViewModel.LayerCollection.RootLayers)
+                {
+                    sdasd.Add(item.Clone());
+                }
+                previous = sdasd;
+            };
+            this.Re.Click += (s, e) =>
+            {
+                this.ViewModel.LayerCollection.RootLayers.Clear();
+                foreach (var item in previous)
+                {
+                    this.ViewModel.LayerCollection.RootLayers.Add(item.Clone());
+                }
+
+                this.ViewModel.Text = previous.Count().ToString();
+                this.ViewModel.SetMode(this.ViewModel.LayerCollection);
+                LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+                this.ViewModel.Invalidate();
+            };
+        }
+        IEnumerable<Layerage> previous;
+
+        private IEnumerable<string> asdsadasdsdsssss()
+        {
+            foreach (var layer in Layer.Instances)
+            {
+                ILayer layer2 = layer;
+                yield return $"   {layer2.Id}";
+            }
         }
 
-        private IEnumerable<string> sadasd(IList<ILayer> layers, int depht)
+        private IEnumerable<string> sadasd(IList<Layerage> layers, int depht)
         {
 
             foreach (var layer in layers)
             {
-                yield return $"{depht}   {layer.Type}  {layer.Control.Index}";
+                ILayer layer2 = layer.Self;
+                yield return $"{depht}  {layer2.Id}";
 
 
                 foreach (var child in sadasd( layer.Children, depht+1))

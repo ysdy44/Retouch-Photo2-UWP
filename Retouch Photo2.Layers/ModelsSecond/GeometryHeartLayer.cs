@@ -10,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="ILayer"/>'s GeometryHeartLayer .
+    /// <see cref="Layer"/>'s GeometryHeartLayer .
     /// </summary>
-    public class GeometryHeartLayer : LayerBase, ILayer
+    public class GeometryHeartLayer : Layer, ILayer
     {
 
         //@Override     
@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryHeartLayer()
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(this.ToLayerage())
             {
                 Icon = new GeometryHeartIcon(),
                 Type = this.ConstructStrings(),
@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Layers.Models
                 Spread=this.Spread
             };
 
-            LayerBase.CopyWith(resourceCreator, HeartLayer, this);
+            Layer.CopyWith(resourceCreator, HeartLayer, this);
             return HeartLayer;
         }
         

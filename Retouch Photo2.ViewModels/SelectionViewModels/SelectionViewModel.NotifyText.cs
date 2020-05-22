@@ -7,9 +7,9 @@ using Windows.UI.Text;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "SelectionViewModel" />. 
+    /// Retouch_Photo2's the only <see cref = "ViewModel" />. 
     /// </summary>
-    public partial class SelectionViewModel : INotifyPropertyChanged, ITextLayer
+    public partial class ViewModel : INotifyPropertyChanged, ITextLayer
     {
       
         /// <summary> Gets or sets FontText. </summary>     
@@ -95,7 +95,7 @@ namespace Retouch_Photo2.ViewModels
             ITextLayer fextLayer = this.GetFontLayer(layer);
             if (fextLayer == null) return;
             
-            TextLayerBase.FontCopyWith(this, fextLayer);
+            TextLayer.FontCopyWith(this, fextLayer);
         }
         private ITextLayer GetFontLayer(ILayer layer)
         {

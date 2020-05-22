@@ -4,8 +4,8 @@ using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
-using System;
 using System.Numerics;
 using Windows.UI.Xaml.Controls;
 
@@ -18,9 +18,9 @@ namespace Retouch_Photo2.Tools.Models
     {
 
         //@ViewModel
-        IBrush Fill { get => this.SelectionViewModel.Fill; set => this.SelectionViewModel.Fill = value; }
+        IBrush Fill { get => this.ViewModel.Fill; set => this.ViewModel.Fill = value; }
 
-        
+
         private void ConstructFillImage()
         {
             Retouch_Photo2.PhotosPage.FillImageCallBack += (photo) =>
@@ -51,7 +51,7 @@ namespace Retouch_Photo2.Tools.Models
             //Contains Operate Mode
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             this.OperateMode = this.Fill.ContainsOperateMode(startingPoint, matrix);
-            
+
             //InitializeController
             if (this.OperateMode == BrushHandleMode.None)
             {
@@ -70,11 +70,13 @@ namespace Retouch_Photo2.Tools.Models
                         break;
                 }
             }
-            
+
             //Selection
             this.Fill.CacheTransform();
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 layer.Style.CacheFill();
 
                 layer.Style.Fill = this.Fill.Clone();
@@ -94,8 +96,9 @@ namespace Retouch_Photo2.Tools.Models
                     {
                         //Selection
                         this.Fill.InitializeController(canvasStartingPoint, canvasPoint);
-                        this.SelectionViewModel.SetValue((layer) =>
+                        this.ViewModel.SetValue((layerage) =>
                         {
+                            ILayer layer = layerage.Self;
                             layer.Style.Fill.InitializeController(canvasStartingPoint, canvasPoint);
                         });
                         this.ViewModel.Invalidate();//Invalidate
@@ -107,8 +110,9 @@ namespace Retouch_Photo2.Tools.Models
                     {
                         //Selection
                         this.Fill.Controller(this.OperateMode, canvasStartingPoint, canvasPoint);
-                        this.SelectionViewModel.SetValue((layer) =>
+                        this.ViewModel.SetValue((layerage) =>
                         {
+                            ILayer layer = layerage.Self;
                             layer.Style.Fill.Controller(this.OperateMode, canvasStartingPoint, canvasPoint);
                         });
                     }
@@ -122,22 +126,27 @@ namespace Retouch_Photo2.Tools.Models
             if (this.Fill == null) return;
 
             //History
-            IHistoryBase history = new IHistoryBase("Set fill");
-            
-            //Selection
-            this.SelectionViewModel.SetValue((layer) =>
-            {
-                //History
-                var previous = layer.Style.Fill.Clone(); ;
-                int index = layer.Control.Index;
-                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                Style.Fill = previous.Clone());
+            LayersPropertyHistory history = new LayersPropertyHistory("Set fill");
 
-                this.SelectionViewModel.StyleLayer = layer;
+            //Selection
+            this.ViewModel.SetValue((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+                //History
+                var previous = layer.Style.StartingFill.Clone();
+                history.UndoActions.Push(() =>
+                {
+                    ILayer layer2 = layerage.Self;
+
+                    layer2.Style.Fill = previous.Clone();
+                });
+
+                this.ViewModel.StyleLayerage = layerage;
             });
 
             //History
-            this.ViewModel.Push(history);
+            this.ViewModel.HistoryPush(history);
         }
 
 
@@ -147,36 +156,43 @@ namespace Retouch_Photo2.Tools.Models
             if (this.Fill.Type == brushType) return;
 
             //History
-            IHistoryBase history = new IHistoryBase("Set fill type");
+            LayersPropertyHistory history = new LayersPropertyHistory("Set fill type");
 
             bool _lock = false;
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 //History
                 var previous = layer.Style.Fill.Clone(); ;
-                int index = layer.Control.Index;
-                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                Style.Fill = previous.Clone());
+                history.UndoActions.Push(() =>
+                {
+                    ILayer layer2 = layerage.Self;
+
+                    layer2.Style.Fill = previous.Clone();
+                });
+
 
                 Transformer transformer = layer.Transform.Destination;
                 layer.Style.Fill.TypeChange(brushType, transformer, photo);
-                this.SelectionViewModel.StyleLayer = layer;
+                this.ViewModel.StyleLayerage = layerage;
 
 
+                // Set Fill Onces: lock
                 if (_lock == false)
                 {
                     _lock = true;
                     this.Fill = layer.Style.Fill.Clone();
 
-                    if (this.Fill.Type == BrushType.Color) this.SelectionViewModel.Color = this.Fill.Color;
+                    if (this.Fill.Type == BrushType.Color) this.ViewModel.Color = this.Fill.Color;
                 }
             });
 
 
             //History
-            this.ViewModel.Push(history);
+            this.ViewModel.HistoryPush(history);
 
             this.ViewModel.Invalidate();//Invalidate
         }
@@ -202,43 +218,51 @@ namespace Retouch_Photo2.Tools.Models
             }
         }
 
-                
+
 
         public void FillStopsChanged(CanvasGradientStop[] array)
         {
             //History
-            IHistoryBase history = new IHistoryBase("Set fill");
+            LayersPropertyHistory history = new LayersPropertyHistory("Set fill");
 
             //Selection
             this.Fill.Stops = (CanvasGradientStop[])array.Clone();
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 //History
                 var previous = layer.Style.Fill.Clone();
-                int index = layer.Control.Index;
-                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                Style.Fill = previous.Clone());
+                history.UndoActions.Push(() =>
+                {
+                    ILayer layer2 = layerage.Self;
+
+                    layer2.Style.Fill = previous.Clone();
+                });
+
 
                 layer.Style.Fill.Stops = (CanvasGradientStop[])array.Clone();
-                this.SelectionViewModel.StyleLayer = layer;
+                this.ViewModel.StyleLayerage = layerage;
             });
 
             //History
-            this.ViewModel.Push(history);
+            this.ViewModel.HistoryPush(history);
 
             this.ViewModel.Invalidate();//Invalidate
         }
 
         //History
-        IHistoryBase historyFill = null;
+        LayersPropertyHistory historyFill = null;
         public void FillStopsChangeStarted(CanvasGradientStop[] array)
         {
             //History
-            this.historyFill = new IHistoryBase("Set fill");
+            this.historyFill = new LayersPropertyHistory("Set fill");
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 layer.Style.CacheFill();
             });
 
@@ -247,8 +271,10 @@ namespace Retouch_Photo2.Tools.Models
         public void FillStopsChangeDelta(CanvasGradientStop[] array)
         {
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 layer.Style.Fill.Stops = (CanvasGradientStop[])array.Clone();
             });
 
@@ -259,20 +285,23 @@ namespace Retouch_Photo2.Tools.Models
             this.Fill.Stops = (CanvasGradientStop[])array.Clone();
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 //History
                 var previous = layer.Style.Fill.Clone();
-                int index = layer.Control.Index;
-                this.historyFill.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                Style.Fill = previous.Clone());
+                this.historyFill.UndoActions.Push(() =>
+                {
+                    layer.Style.Fill = previous.Clone();
+                });
 
                 layer.Style.Fill.Stops = (CanvasGradientStop[])array.Clone();
-                this.SelectionViewModel.StyleLayer = layer;
+                this.ViewModel.StyleLayerage = layerage;
             });
 
             //History
-            this.ViewModel.Push(this.historyFill);
+            this.ViewModel.HistoryPush(this.historyFill);
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
@@ -280,28 +309,33 @@ namespace Retouch_Photo2.Tools.Models
         public void FillExtendChanged(CanvasEdgeBehavior extend)
         {
             //History
-            IHistoryBase history = new IHistoryBase("Set fill extend");
+            LayersPropertyHistory history = new LayersPropertyHistory("Set fill extend");
 
             //Selection
             this.Fill.Extend = extend;
             this.ExtendComboBox.Extend = extend;
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 //History
                 var previous = layer.Style.Fill.Extend;
-                int index = layer.Control.Index;
-                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                Style.Fill.Extend = previous);
+                history.UndoActions.Push(() =>
+                {
+                    ILayer layer2 = layerage.Self;
+
+                    layer2.Style.Fill.Extend = previous;
+                });
 
                 layer.Style.Fill.Extend = extend;
-                this.SelectionViewModel.StyleLayer = layer;
+                this.ViewModel.StyleLayerage = layerage;
             });
 
             //History
-            this.ViewModel.Push(history);
+            this.ViewModel.HistoryPush(history);
 
             this.ViewModel.Invalidate();//Invalidate
-        } 
+        }
 
     }
 }

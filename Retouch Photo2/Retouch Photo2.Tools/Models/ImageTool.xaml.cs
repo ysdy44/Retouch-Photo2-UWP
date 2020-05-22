@@ -20,17 +20,16 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
-        ILayer MezzanineLayer = null;
+        Layerage MezzanineLayerage = null;
 
         //@Construct
         public ImageTool()
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ClearButton.Click += (s, e) => this.SelectionViewModel.Photocopier = new Photocopier();//Photocopier
+            this.ClearButton.Click += (s, e) => this.ViewModel.Photocopier = new Photocopier();//Photocopier
 
             //Select
             this.SelectButton.Click += (s, e) => Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.SelectImage);
@@ -38,7 +37,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 if (photo == null) return;
 
-                this.SelectionViewModel.Photocopier = photo.ToPhotocopier();//Photo
+                this.ViewModel.Photocopier = photo.ToPhotocopier();//Photo
             };
 
             //Replace
@@ -52,8 +51,10 @@ namespace Retouch_Photo2.Tools.Models
                 Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
 
                 //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     if (layer.Type == LayerType.Image)
                     {
                         ImageLayer imageLayer = (ImageLayer)layer;
@@ -71,7 +72,7 @@ namespace Retouch_Photo2.Tools.Models
 
         /// <summary> Tip. </summary>
         public void TipSelect() => this.EaseStoryboard.Begin();//Storyboard
-        
+
         private Transformer CreateTransformer(Vector2 startingPoint, Vector2 point, float sizeWidth, float sizeHeight)
         {
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
@@ -81,10 +82,10 @@ namespace Retouch_Photo2.Tools.Models
 
 
         public void OnNavigatedTo() { }
-        public void OnNavigatedFrom() { }        
+        public void OnNavigatedFrom() { }
 
     }
-    
+
     /// <summary>
     /// <see cref="ITool"/>'s ImageTool.
     /// </summary>
@@ -115,13 +116,12 @@ namespace Retouch_Photo2.Tools.Models
         readonly FrameworkElement _icon = new ImageIcon();
         readonly ToolButton _button = new ToolButton(new ImageIcon());
 
-
-        float _sizeWidth;
-        float _sizeHeight;
+        private float _sizeWidth;
+        private float _sizeHeight;
 
         public void Started(Vector2 startingPoint, Vector2 point)
         {
-            Photocopier photocopier = this.SelectionViewModel.Photocopier;
+            Photocopier photocopier = this.ViewModel.Photocopier;
             if (photocopier.FolderRelativeId == null) { this.TipSelect(); return; }
 
             Photo photo = Photo.FindFirstPhoto(photocopier);
@@ -131,7 +131,6 @@ namespace Retouch_Photo2.Tools.Models
                 return;
             }
 
-
             //Transformer
             this._sizeWidth = photo.Width;
             this._sizeHeight = photo.Height;
@@ -139,62 +138,73 @@ namespace Retouch_Photo2.Tools.Models
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, photo.Width, photo.Height);
 
             //Mezzanine         
-            this.MezzanineLayer = new ImageLayer(transformerSource, photocopier)
+            ImageLayer imageLayer = new ImageLayer(transformerSource, photocopier)
             {
                 IsSelected = true,
                 Transform = new Transform(transformerSource, transformerDestination),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.ViewModel.GeometryStyle
             };
-            LayerCollection.Mezzanine(this.ViewModel.LayerCollection, this.MezzanineLayer);
+            Layer.Instances.Add(imageLayer);
+            Layerage layerage = imageLayer.ToLayerage();
 
-            this.SelectionViewModel.Transformer = transformerDestination;//Selection
+
+            this.MezzanineLayerage = layerage;
+            LayerCollection.Mezzanine(this.ViewModel.LayerCollection, this.MezzanineLayerage);
+
+            this.ViewModel.Transformer = transformerDestination;//Selection
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
             //ILayer
-            ILayer mezzanineLayer = this.MezzanineLayer;
-            if (mezzanineLayer == null) return;
+            if (this.MezzanineLayerage == null) return;
+            ILayer mezzanineLayer = this.MezzanineLayerage.Self;
 
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
             mezzanineLayer.Transform.Destination = transformerDestination;
-                       
+
             //Selection
-            this.SelectionViewModel.Transformer = transformerDestination;//Selection
+            this.ViewModel.Transformer = transformerDestination;//Selection
 
             this.ViewModel.Invalidate();//Invalidate
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
-            if (this.MezzanineLayer == null) return;
+            if (this.MezzanineLayerage == null) return;
 
             if (isOutNodeDistance)
             {
+                if (this.MezzanineLayerage == null) return;
+                ILayer mezzanineLayer = this.MezzanineLayerage.Self;
+
                 Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
-                this.MezzanineLayer.Transform.Destination = transformerDestination;
-                this.SelectionViewModel.Transformer = transformerDestination;//Selection
+                mezzanineLayer.Transform.Destination = transformerDestination;
+                this.ViewModel.Transformer = transformerDestination;//Selection
 
-                foreach (ILayer child in this.ViewModel.LayerCollection.RootLayers)
+                foreach (Layerage child in this.ViewModel.LayerCollection.RootLayers)
                 {
-                    child.IsSelected = false;
-                }
-                this.MezzanineLayer.IsSelected = true;
-                this.MezzanineLayer = null;
-            }
-            else LayerCollection.RemoveMezzanineLayer(this.ViewModel.LayerCollection, this.MezzanineLayer);//Mezzanine
+                    ILayer child2 = child.Self;
 
-            this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
-            
+                    child2.IsSelected = false;
+                }
+
+                mezzanineLayer.IsSelected = true;
+                this.MezzanineLayerage = null;
+            }
+            else LayerCollection.RemoveMezzanineLayer(this.ViewModel.LayerCollection, this.MezzanineLayerage);//Mezzanine
+
+            this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
+
             LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
             LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
         public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
-        
+
 
         public void Draw(CanvasDrawingSession drawingSession) { }
-               
+
     }
 }

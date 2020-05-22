@@ -16,11 +16,11 @@ namespace Retouch_Photo2.Layers
     /// <summary>
     /// Represents a layer that can have render properties. Provides a rendering method.
     /// </summary>
-    public abstract partial class LayerBase
+    public abstract partial class Layer
     {
         
         //@Abstract
-        public virtual ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
+        public virtual ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children)
         {
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
@@ -37,13 +37,15 @@ namespace Retouch_Photo2.Layers
                 
 
                 //CanvasActiveLayer
-                if (this.Children.Count != 0)
+                if (children.Count != 0)
                 {
                     using (drawingSession.CreateLayer(1, geometry))
                     {
-                        foreach (ILayer child in this.Children)
+                        foreach (Layerage child in children)
                         {
-                            ICanvasImage childImage = child.GetRender(resourceCreator, previousImage, canvasToVirtualMatrix);
+                            ILayer child2 = child.Self;
+
+                            ICanvasImage childImage = child2.GetRender(resourceCreator, previousImage, canvasToVirtualMatrix, child.Children);
                             drawingSession.DrawImage(childImage);
                         }
                     }
@@ -66,7 +68,7 @@ namespace Retouch_Photo2.Layers
             return command;
         }
 
-        public virtual void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
+        public virtual void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, IList<Layerage> children, Windows.UI.Color accentColor)
         {
             CanvasGeometry geometry = this.CreateGeometry(resourceCreator, matrix);
             drawingSession.DrawGeometry(geometry, accentColor);
@@ -98,14 +100,15 @@ namespace Retouch_Photo2.Layers
         /// <param name="currentLayer"> The current layer. </param>
         /// <param name="previousImage"> Previous rendered images. </param>
         /// <param name="canvasToVirtualMatrix"> The canvas-to-virtual matrix. </param>
+        /// <param name="children"> The children layerage. </param>
         /// <returns> The rendered layer. </returns>
-        public static ICanvasImage Render(ICanvasResourceCreator resourceCreator, ILayer currentLayer, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
+        public static ICanvasImage Render(ICanvasResourceCreator resourceCreator, ILayer currentLayer, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children)
         {
             if (currentLayer.Visibility == Visibility.Collapsed) return previousImage;
             if (currentLayer.Opacity == 0) return previousImage;
 
             //Layer
-            ICanvasImage currentImage = currentLayer.GetRender(resourceCreator, previousImage, canvasToVirtualMatrix);
+            ICanvasImage currentImage = currentLayer.GetRender(resourceCreator, previousImage, canvasToVirtualMatrix, children);
 
             //Transform
             currentImage = Transform.Render(currentLayer.Transform, resourceCreator, currentImage, canvasToVirtualMatrix);

@@ -10,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="ILayer"/>'s CurveLayer .
+    /// <see cref="Layer"/>'s CurveLayer .
     /// </summary>
-    public class CurveLayer : LayerBase, ILayer
+    public class CurveLayer : Layer, ILayer
     {
 
         //@Override     
@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public CurveLayer()
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(this.ToLayerage())
             {
                 Icon = new CurveIcon(),
                 Type = this.ConstructStrings(),
@@ -88,7 +88,7 @@ namespace Retouch_Photo2.Layers.Models
                 Nodes = this.Nodes.Clone()
             };
 
-            LayerBase.CopyWith(resourceCreator, curveLayer, this);
+            Layer.CopyWith(resourceCreator, curveLayer, this);
             return curveLayer;
         }
 

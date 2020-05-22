@@ -42,7 +42,6 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@TouchBar
         internal GeometryCogMode TouchBarMode
@@ -128,11 +127,13 @@ namespace Retouch_Photo2.Tools.Models
             if (count < 4) count = 4;
             if (count > 36) count = 36;
 
-            this.SelectionViewModel.GeometryCogCount = count;
+            this.ViewModel.GeometryCogCount = count;
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 if (layer.Type == LayerType.GeometryCog)
                 {
                     GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
@@ -178,11 +179,13 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void InnerRadiusChange(float innerRadius)
         {
-            this.SelectionViewModel.GeometryCogInnerRadius = innerRadius;
+            this.ViewModel.GeometryCogInnerRadius = innerRadius;
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 if (layer.Type == LayerType.GeometryCog)
                 {
                     GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
@@ -228,11 +231,13 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void ToothChange(float tooth)
         {
-            this.SelectionViewModel.GeometryCogTooth = tooth;
+            this.ViewModel.GeometryCogTooth = tooth;
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 if (layer.Type == LayerType.GeometryCog)
                 {
                     GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
@@ -278,11 +283,13 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void NotchChange(float notch)
         {
-            this.SelectionViewModel.GeometryCogNotch = notch;
+            this.ViewModel.GeometryCogNotch = notch;
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 if (layer.Type == LayerType.GeometryCog)
                 {
                     GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
@@ -339,12 +346,12 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryCogLayer
             {
-                Count = this.SelectionViewModel.GeometryCogCount,
-                InnerRadius = this.SelectionViewModel.GeometryCogInnerRadius,
-                Tooth = this.SelectionViewModel.GeometryCogTooth,
-                Notch = this.SelectionViewModel.GeometryCogNotch,
+                Count = this.ViewModel.GeometryCogCount,
+                InnerRadius = this.ViewModel.GeometryCogInnerRadius,
+                Tooth = this.ViewModel.GeometryCogTooth,
+                Notch = this.ViewModel.GeometryCogNotch,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.ViewModel.GeometryStyle
             };
         }
 

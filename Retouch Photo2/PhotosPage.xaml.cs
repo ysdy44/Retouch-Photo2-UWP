@@ -43,7 +43,6 @@ namespace Retouch_Photo2
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
 
         //@Static

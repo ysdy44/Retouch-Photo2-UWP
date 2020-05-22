@@ -20,7 +20,6 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         
         //@TouchBar  
@@ -91,11 +90,13 @@ namespace Retouch_Photo2.Tools.Models
             if (spread < 0.0f) spread = 0.0f;
             if (spread > 1.0f) spread = 1.0f;
 
-            this.SelectionViewModel.GeometryHeartSpread = spread;
+            this.ViewModel.GeometryHeartSpread = spread;
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 if (layer.Type == LayerType.GeometryHeart)
                 {
                     GeometryHeartLayer geometryHeartLayer = (GeometryHeartLayer)layer;
@@ -149,9 +150,9 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryHeartLayer
             {
-                Spread = this.SelectionViewModel.GeometryHeartSpread,
+                Spread = this.ViewModel.GeometryHeartSpread,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.ViewModel.GeometryStyle
             };
         }
 

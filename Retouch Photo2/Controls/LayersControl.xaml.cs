@@ -24,14 +24,13 @@ namespace Retouch_Photo2.Controls
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel ;
         TipViewModel TipViewModel => App.TipViewModel;
 
 
         //LayerCollection
-        ILayer DragSourceLayer;
-        ILayer DragDestinationLayer;
+        Layerage DragSourceLayer;
+        Layerage DragDestinationLayer;
         bool DragLayerIsSelected;
         OverlayMode DragLayerOverlayMode;
 
@@ -47,15 +46,8 @@ namespace Retouch_Photo2.Controls
 
             this.Tapped += (s, e) =>
             {
-                foreach (ILayer child in this.ViewModel.LayerCollection.RootLayers)
-                {
-                    child.IsSelected = false;
-                }
-
-                this.SelectionViewModel.SetModeNone();//Selection
-
+                this.ViewModel.SetModeNone();//Selection
                 LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
-
                 this.ViewModel.Invalidate();
             };
             this.RightTapped += (s, e) => this.ShowLayerMenu();
@@ -65,6 +57,11 @@ namespace Retouch_Photo2.Controls
             Retouch_Photo2.PhotosPage.AddCallBack += (photo) =>
             {
                 if (photo == null) return;
+
+
+                //History
+                this.ViewModel.HistoryPushLayeragesHistory("Add layer");
+
 
                 //Transformer
                 Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
@@ -76,20 +73,22 @@ namespace Retouch_Photo2.Controls
                     IsSelected = true,
                     Transform = new Transform(transformerSource)
                 };
+                Layer.Instances.Add(imageLayer);
+                Layerage imageLayerage = imageLayer.ToLayerage();
 
                 //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     layer.IsSelected = false;
                 });
 
                 //Mezzanine
-                LayerCollection.Mezzanine(this.ViewModel.LayerCollection, imageLayer);
+                LayerCollection.Mezzanine(this.ViewModel.LayerCollection, imageLayerage);
 
-                this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
-
+                this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
                 LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
-
                 this.ViewModel.Invalidate();//Invalidate
             };
         }
@@ -98,8 +97,10 @@ namespace Retouch_Photo2.Controls
         {
             this.TipViewModel.ShowMenuLayout(MenuType.Layer);
         }
-        private void ShowLayerMenu(ILayer layer)
+        private void ShowLayerMenu(Layerage layerage)
         {
+            ILayer layer = layerage.Self;
+
             this.TipViewModel.ShowMenuLayoutAt(MenuType.Layer, layer.Control.Self, FlyoutPlacementMode.Left);
         }
 

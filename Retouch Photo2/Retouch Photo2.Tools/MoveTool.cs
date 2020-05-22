@@ -3,6 +3,8 @@ using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
+using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Windows.UI.Xaml.Controls;
 
@@ -16,18 +18,15 @@ namespace Retouch_Photo2.Tools
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
         
-        Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
-        ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
+        Transformer Transformer { get => this.ViewModel.Transformer; set => this.ViewModel.Transformer = value; }
+        ListViewSelectionMode Mode => this.ViewModel.SelectionMode;
 
         MarqueeCompositeMode MarqueeCompositeMode => this.SettingViewModel.CompositeMode;
         BorderBorderSnap Snap => this.ViewModel.BorderBorderSnap;
         bool IsSnap => this.SettingViewModel.IsSnap;
 
-
-        Transformer StartingTransformer;
             
         public bool Started(Vector2 startingPoint, Vector2 point)
         {
@@ -35,21 +34,17 @@ namespace Retouch_Photo2.Tools
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
-            bool isMove = this.GetIsClickLayer(canvasStartingPoint);
+            bool isMove = this.GetIsSelectedLayer(canvasStartingPoint);
             if (isMove == false) return false;
 
             //Snap
-            if (this.IsSnap) this.ViewModel.BorderBorderSnapStarted(this.SelectionViewModel.GetFirstLayer());
+            if (this.IsSnap) this.ViewModel.BorderBorderSnapStarted(this.ViewModel.GetFirstLayer());
 
             //Selection
-            this.StartingTransformer = this.Transformer;
             if (this.IsSnap) this.Snap.StartingSource = new TransformerBorder(this.Transformer);
-            this.SelectionViewModel.SetValue((layer) =>
-            {
-                layer.CacheTransform();
-            });
-            
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+
+            //Method
+            this.ViewModel.MethodTransformAddStarted();
             return true;
         }
 
@@ -65,16 +60,8 @@ namespace Retouch_Photo2.Tools
             //Snap
             if (this.IsSnap) canvasMove = this.Snap.Snap(canvasMove);
 
-            //Selection
-            Transformer transformer = Transformer.Add(this.StartingTransformer, canvasMove);
-            if (this.IsSnap) this.Snap.Source = new TransformerBorder(transformer);
-            this.SelectionViewModel.Transformer = transformer;
-            this.SelectionViewModel.SetValue((layer) =>
-            {
-                layer.TransformAdd(canvasMove);
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
+            //Method
+            this.ViewModel.MethodTransformAddDelta(canvasMove);
             return true;
         }
         public bool Complete(Vector2 startingPoint, Vector2 point)
@@ -93,29 +80,33 @@ namespace Retouch_Photo2.Tools
                 this.Snap.Default();
             }
 
-            //History
-            IHistoryBase history = new IHistoryBase("Move");
-
-            //Selection
-            Transformer transformer = Transformer.Add(this.StartingTransformer, canvasMove);
-            if (this.IsSnap) this.Snap.Source = new TransformerBorder(transformer);
-            this.SelectionViewModel.Transformer = transformer;
-            this.SelectionViewModel.SetValue((layer) =>
-            {
-                layer.TransformAdd(canvasMove);
-
-                //History
-                var previous = layer.Transform.StartingDestination;
-                int index = layer.Control.Index;
-                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                Transform.Destination = previous);
-            });
-
-            //History
-            this.ViewModel.Push(history);
-
-            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            //Method
+            this.ViewModel.MethodTransformAddComplete(canvasMove);
             return true;
+        }
+
+        public bool Clicke(Vector2 point)
+        {
+            //SelectedLayer
+            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+            Layerage selectedLayer = this.GetSelectedLayer(canvasPoint);
+
+            if (selectedLayer == null)
+            {
+                this.ViewModel.MethodSelectedNone();//Method
+                return false;
+            }
+
+            switch (this.MarqueeCompositeMode)
+            {
+                //Method
+                case MarqueeCompositeMode.New: this.ViewModel.MethodSelectedNew(selectedLayer); return true;
+                case MarqueeCompositeMode.Add: this.ViewModel.MethodSelectedAdd(selectedLayer); return true;
+                case MarqueeCompositeMode.Subtract: this.ViewModel.MethodSelectedSubtract(selectedLayer); return true;
+                case MarqueeCompositeMode.Intersect: this.ViewModel.MethodSelectedIntersect(selectedLayer); return true;
+                default: return false;
+            }
         }
 
 
@@ -125,14 +116,24 @@ namespace Retouch_Photo2.Tools
 
             //Transformer
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-            drawingSession.DrawBoundNodes(this.Transformer, matrix, this.ViewModel.AccentColor, this.SelectionViewModel.DisabledRadian);
+            drawingSession.DrawBoundNodes(this.Transformer, matrix, this.ViewModel.AccentColor, this.ViewModel.DisabledRadian);
 
             //Snapping
             if (this.IsSnap) this.Snap.Draw(drawingSession, matrix);
         }
 
 
-        private bool GetIsClickLayer(Vector2 canvasStartingPoint)
+
+        private Layerage GetSelectedLayer(Vector2 canvasPoint)
+        {
+            //Select a layer of the same depth
+            Layerage firstLayer = this.ViewModel.GetFirstLayer();
+            IList<Layerage> parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(firstLayer);
+            Layerage selectedLayer = parentsChildren.FirstOrDefault((layer) => layer.Self.FillContainsPoint(canvasPoint));
+            return selectedLayer;
+        }
+
+        private bool GetIsSelectedLayer(Vector2 canvasStartingPoint)
         {
             switch (this.Mode)
             {
@@ -147,16 +148,16 @@ namespace Retouch_Photo2.Tools
             }
 
             //SelectedLayer
-            ILayer selectedLayer = this.GetSelectedLayer(canvasStartingPoint);
+            Layerage selectedLayer = this.GetSelectedLayer(canvasStartingPoint);
 
             if (selectedLayer == null)
             {
-                this.ClickeNone();
+                this.ViewModel.MethodSelectedNone();//Method
                 return false;
             }
             else
             {
-                this.ClickeNew(selectedLayer);
+                this.ViewModel.MethodSelectedNew(selectedLayer);//Method
                 return true;
             }
         }

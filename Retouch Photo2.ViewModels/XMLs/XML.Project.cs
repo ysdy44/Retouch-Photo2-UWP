@@ -25,12 +25,13 @@ namespace Retouch_Photo2.ViewModels
                     "Root",
                     new XElement("Width", project.Width),
                     new XElement("Height", project.Height),
+
                     new XElement
                     (
-                         "Layers",
-                         from layer
+                         "Layerages",
+                         from layerage
                          in project.Layers
-                         select Retouch_Photo2.Layers.XML.SaveILayer("Layer", layer)
+                         select Retouch_Photo2.Layers.XML.SaveLayerage("Layerage", layerage)
                     )
                 )
             );
@@ -45,15 +46,16 @@ namespace Retouch_Photo2.ViewModels
         public static Project LoadProject(string name, XDocument document)
         {
             XElement root = document.Element("Root");
-            XElement rootLayers = root.Element("Layers");
+            XElement rootLayerages= root.Element("Layerages");
                        
             Project project =new Project
             {
-                Name = name,
+                Name = name,         
+         
                 Layers =
-                    from layer
-                    in rootLayers.Elements()
-                    select Retouch_Photo2.Layers.XML.LoadILayer(layer)
+                    from layerage
+                    in rootLayerages.Elements()
+                    select Retouch_Photo2.Layers.XML.LoadLayerage(layerage)
             };
 
             if (root.Element("Width") is XElement width) project.Width = (int)width;

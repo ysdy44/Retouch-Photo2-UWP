@@ -23,8 +23,8 @@
             <tools:TouchbarButton x:Name="ValueTouchbarButton">
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="ValueTouchbarSlider"
-                    Number="{x:Bind ValueNumberConverter(SelectionViewModel.GeometryArrowValue),Mode=OneWay}"
-                    Value="{x:Bind ValueValueConverter(SelectionViewModel.GeometryArrowValue), Mode=OneWay}" 
+                    Number="{x:Bind ValueNumberConverter(ViewModel.GeometryArrowValue),Mode=OneWay}"
+                    Value="{x:Bind ValueValueConverter(ViewModel.GeometryArrowValue), Mode=OneWay}" 
                      />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>
@@ -34,7 +34,7 @@
             <!--LeftTail-->
             <TextBlock x:Name="LeftTailTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <toolsElements:ArrowTailTypeControl x:Name="LeftArrowTailTypeControl"
-                 ArrowTailType="{x:Bind SelectionViewModel.GeometryArrowLeftTail, Mode=OneWay}"
+                 ArrowTailType="{x:Bind ViewModel.GeometryArrowLeftTail, Mode=OneWay}"
                 />
 
             <ContentControl Width="4"/>
@@ -42,7 +42,7 @@
             <!--RightTail-->
             <TextBlock x:Name="RightTailTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <toolsElements:ArrowTailTypeControl x:Name="RightArrowTailTypeControl"
-                 ArrowTailType="{x:Bind SelectionViewModel.GeometryArrowRightTail, Mode=OneWay}"
+                 ArrowTailType="{x:Bind ViewModel.GeometryArrowRightTail, Mode=OneWay}"
                 />
 
             <ContentControl Width="4"/>

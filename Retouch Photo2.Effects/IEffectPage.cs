@@ -15,16 +15,12 @@ namespace Retouch_Photo2.Effects
         FrameworkElement Page { get; }
         /// <summary> Gets IEffect's button. </summary>
         EffectButton Button { get; }
-
+        
         /// <summary>
-        /// Reset the <see cref="IEffectPage"/>'s value.
-        /// </summary>
-        void Reset();
-        /// <summary>
-        /// Reset the <see cref="Effect"/>'s data.
+        /// Reset the <see cref="Effect"/> and <see cref="IEffectPage"/>'s data.
         /// </summary>
         /// <param name="effect"> The effect. </param>
-        void ResetEffect(Effect effect);
+        void Reset();
         /// <summary>
         /// <see cref="IEffectPage"/>'s value follows the <see cref="Effect"/>.
         /// </summary>

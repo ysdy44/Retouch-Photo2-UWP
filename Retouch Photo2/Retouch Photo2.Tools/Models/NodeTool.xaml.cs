@@ -21,10 +21,10 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
-        CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
+        Layerage CurveLayerage => this.ViewModel.Layerage;
+        CurveLayer CurveLayer => this.ViewModel.CurveLayer;
         NodeCollection Nodes => this.CurveLayer.Nodes;
 
         VectorVectorSnap Snap => this.ViewModel.VectorVectorSnap;
@@ -43,17 +43,18 @@ namespace Retouch_Photo2.Tools.Models
 
             this.RemoveButton.Click += (s, e) =>
             {
+                //TODO
+                return;
                 if (this.CurveLayer == null) return;
 
                 bool isSuccessful = NodeCollection.RemoveCheckedNodes(this.CurveLayer.Nodes);
                 if (isSuccessful == false)
                 {
-                    LayerCollection.RemoveLayer(this.ViewModel.LayerCollection, this.CurveLayer);
 
-                    this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
+               //     LayerCollection.RemoveLayer(this.ViewModel.LayerCollection, this.CurveLayer);
 
+               this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
                     LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
-
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };
@@ -86,7 +87,7 @@ namespace Retouch_Photo2.Tools.Models
 
             //The NodeTool may change the current CurveLayer's transformer.
             Transformer transformer = this.CurveLayer.GetActualDestinationWithRefactoringTransformer;
-            this.SelectionViewModel.Transformer = transformer;
+            this.ViewModel.Transformer = transformer;
         }
 
     }

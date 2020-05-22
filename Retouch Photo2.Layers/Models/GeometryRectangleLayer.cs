@@ -10,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="ILayer"/>'s GeometryRectangleLayer .
+    /// <see cref="Layer"/>'s GeometryRectangleLayer .
     /// </summary>
-    public class GeometryRectangleLayer : LayerBase, ILayer
+    public class GeometryRectangleLayer : Layer, ILayer
     {
 
         //@Override     
@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Layers.Models
         /// <param name="element"> The source XElement. </param>
         public GeometryRectangleLayer()
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(this.ToLayerage())
             {
                 Icon = new GeometryRectangleIcon(),
                 Type = this.ConstructStrings(),
@@ -37,7 +37,7 @@ namespace Retouch_Photo2.Layers.Models
         {
             GeometryRectangleLayer rectangleLayer = new GeometryRectangleLayer();
 
-            LayerBase.CopyWith(resourceCreator, rectangleLayer, this);
+            Layer.CopyWith(resourceCreator, rectangleLayer, this);
             return rectangleLayer;
         }
 

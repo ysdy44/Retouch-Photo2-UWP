@@ -30,7 +30,6 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel ;
         TipViewModel TipViewModel => App.TipViewModel;
 
@@ -169,11 +168,11 @@ namespace Retouch_Photo2.Tools.Models
                         if (isOutNodeDistance)
                         {
                             //BoxChoose
-                            ILayer layer = this.SelectionViewModel.GetFirstLayer();
-                            IList<ILayer> parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(layer);
+                            Layerage layer = this.ViewModel.GetFirstLayer();
+                            IList<Layerage> parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(layer);
                             this.BoxChoose(parentsChildren);
 
-                            this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
+                            this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
 
                             LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
                             
@@ -209,10 +208,12 @@ namespace Retouch_Photo2.Tools.Models
 
         
         //Box
-        private void BoxChoose(IList<ILayer> layers)
+        private void BoxChoose(IList<Layerage> layerages)
         {
-            foreach (ILayer layer in layers)
+            foreach (Layerage layerage in layerages)
             {
+                ILayer layer = layerage.Self;
+
                 Transformer transformer = layer.GetActualDestinationWithRefactoringTransformer;
                 bool contained = transformer.Contained(this.BoxRect);
 

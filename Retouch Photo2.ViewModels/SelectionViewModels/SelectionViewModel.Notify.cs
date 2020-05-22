@@ -13,12 +13,12 @@ using Windows.UI.Xaml;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "SelectionViewModel" />. 
+    /// Retouch_Photo2's the only <see cref = "ViewModel" />. 
     /// </summary>
-    public partial class SelectionViewModel : INotifyPropertyChanged
+    public partial class ViewModel : INotifyPropertyChanged
     {
 
-        /// <summary> <see cref = "SelectionViewModel" />'s layer type. </summary>
+        /// <summary> <see cref = "ViewModel" />'s layer type. </summary>
         public LayerType LayerType
         {
             get => this.layerType;
@@ -31,7 +31,7 @@ namespace Retouch_Photo2.ViewModels
         private LayerType layerType = LayerType.None;
 
 
-        /// <summary> <see cref = "SelectionViewModel" />'s name. </summary>
+        /// <summary> <see cref = "ViewModel" />'s name. </summary>
         public string LayerName
         {
             get => this.layerName;
@@ -44,9 +44,9 @@ namespace Retouch_Photo2.ViewModels
         private string layerName = string.Empty;
 
 
-        /// <summary> <see cref = "SelectionViewModel" />'s opacity. </summary>
+        /// <summary> <see cref = "ViewModel" />'s opacity. </summary>
         public float Opacity { get; set; } = 1.0f;
-        /// <summary> Sets the <see cref = "SelectionViewModel.Opacity" />. </summary>
+        /// <summary> Sets the <see cref = "ViewModel.Opacity" />. </summary>
         public void SetOpacity(float value)
         {
             if (this.Opacity == value) return;
@@ -55,7 +55,7 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
-        /// <summary> <see cref = "SelectionViewModel" />'s blend-mode. </summary>
+        /// <summary> <see cref = "ViewModel" />'s blend-mode. </summary>
         public BlendEffectMode? BlendMode
         {
             get => this.blendMode;
@@ -68,9 +68,9 @@ namespace Retouch_Photo2.ViewModels
         private BlendEffectMode? blendMode = null;
 
 
-        /// <summary> <see cref = "SelectionViewModel" />'s visibility. </summary>
+        /// <summary> <see cref = "ViewModel" />'s visibility. </summary>
         public Visibility Visibility { get; set; } = Visibility.Visible;
-        /// <summary> Sets the <see cref = "SelectionViewModel.Visibility" />. </summary>
+        /// <summary> Sets the <see cref = "ViewModel.Visibility" />. </summary>
         public void SetVisibility(Visibility value)
         {
             if (this.Visibility == value) return;
@@ -79,9 +79,9 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
-        /// <summary> <see cref = "SelectionViewModel" />'s tag type. </summary>
+        /// <summary> <see cref = "ViewModel" />'s tag type. </summary>
         public TagType TagType { get; set; } = TagType.None;
-        /// <summary> Sets the <see cref = "SelectionViewModel.TagType" />. </summary>
+        /// <summary> Sets the <see cref = "ViewModel.TagType" />. </summary>
         public void SetTagType(TagType value)
         {
             if (this.TagType == value) return;
@@ -93,7 +93,7 @@ namespace Retouch_Photo2.ViewModels
         //////////////////////////
 
 
-        /// <summary> <see cref = "SelectionViewModel" />'s IsCrop. </summary>
+        /// <summary> <see cref = "ViewModel" />'s IsCrop. </summary>
         public bool IsCrop
         {
             get => this.isCrop;
@@ -106,7 +106,7 @@ namespace Retouch_Photo2.ViewModels
         private bool isCrop;
 
 
-        /// <summary> <see cref = "SelectionViewModel" />'s effect. </summary>
+        /// <summary> <see cref = "ViewModel" />'s effect. </summary>
         public Effect Effect
         {
             get => this.effect;
@@ -119,7 +119,7 @@ namespace Retouch_Photo2.ViewModels
         private Effect effect;
 
 
-        /// <summary> <see cref = "SelectionViewModel" />'s filter. </summary>
+        /// <summary> <see cref = "ViewModel" />'s filter. </summary>
         public Filter Filter
         {
             get => this.filter;
@@ -151,7 +151,7 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Sets GroupLayer. </summary>     
         private void SetGroupLayer(ILayer layer) => this.IsGroupLayer = layer.Type == LayerType.Group;
         /// <summary> Sets GroupLayer. </summary>     
-        private void SetGroupLayer(IEnumerable<ILayer> layers) => this.IsGroupLayer = layers.Any(layer => layer.Type == LayerType.Group);
+        private void SetGroupLayer(IEnumerable<Layerage> layerages) => this.IsGroupLayer = layerages.Any(layer => layer.Self.Type == LayerType.Group);
 
 
         /// <summary> ImageLayer's Exist. </summary>      
@@ -165,7 +165,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private bool isImageLayer;
-        /// <summary> <see cref = "SelectionViewModel" />'s Photocopier. </summary>
+        /// <summary> <see cref = "ViewModel" />'s Photocopier. </summary>
         public Photocopier Photocopier
         {
             get => this.photocopier;
@@ -192,7 +192,7 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
-        /// <summary> <see cref = "SelectionViewModel" />'s CurveLayer. </summary>
+        /// <summary> <see cref = "ViewModel" />'s CurveLayer. </summary>
         public CurveLayer CurveLayer { get; set; }
         /// <summary> Sets CurveLayer. </summary>     
         private void SetCurveLayer(ILayer layer)

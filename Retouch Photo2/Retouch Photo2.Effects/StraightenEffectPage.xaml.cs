@@ -4,6 +4,7 @@ using Windows.ApplicationModel.Resources;
 using Retouch_Photo2.Historys;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Retouch_Photo2.Layers;
 
 namespace Retouch_Photo2.Effects.Models
 {
@@ -14,7 +15,6 @@ namespace Retouch_Photo2.Effects.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Construct
         public StraightenEffectPage()
@@ -54,10 +54,28 @@ namespace Retouch_Photo2.Effects.Models
         public void Reset()
         {
             this.AnglePicker.Radians = 0;
-        }
-        public void ResetEffect(Effect effect)
-        {
-            effect.Straighten_Angle = 0;
+
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory("Set effect value");
+
+            //Selection
+            this.ViewModel.SetValue((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+                var previous = layer.Effect.Straighten_Angle;
+                history.UndoActions.Push(() =>
+                {
+                    ILayer layer2 = layerage.Self;
+
+                    layer2.Effect.Straighten_Angle = previous;
+                });
+
+                layer.Effect.Straighten_Angle = 0;
+            });
+
+            //History
+            this.ViewModel.HistoryPush(history);
         }
         public void FollowEffect(Effect effect, bool isOnlyButton)
         {
@@ -86,22 +104,27 @@ namespace Retouch_Photo2.Effects.Models
                 bool isOn = this.Button.ToggleSwitch.IsOn;
 
                 //History
-                IHistoryBase history = new IHistoryBase("Set effect isOn");
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect isOn");
 
                 //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     //History
                     var previous = layer.Effect.Straighten_IsOn;
-                    int index = layer.Control.Index;
-                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                    Effect.Straighten_IsOn = previous);
+                    history.UndoActions.Push(() =>
+                    {
+                        ILayer layer2 = layerage.Self;
+
+                        layer2.Effect.Straighten_IsOn = previous;
+                    });
 
                     layer.Effect.Straighten_IsOn = isOn;
                 });
 
                 //History
-                this.ViewModel.Push(history);
+                this.ViewModel.HistoryPush(history);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -111,16 +134,17 @@ namespace Retouch_Photo2.Effects.Models
         private void ConstructStraighten_Angle()
         {
             //History
-            IHistoryBase history = null;
+            LayersPropertyHistory history = null;
 
             //Angle
             this.AnglePicker.ValueChangeStarted += (s, value) =>
             {
-                history = new IHistoryBase("Set effect value");
+                history = new LayersPropertyHistory("Set effect value");
 
                 //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
                     layer.Effect.CacheStraighten();
                 });
 
@@ -131,8 +155,9 @@ namespace Retouch_Photo2.Effects.Models
                 float radians = (float)value;
 
                 //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
                     layer.Effect.Straighten_Angle = radians;
                 });
 
@@ -143,19 +168,24 @@ namespace Retouch_Photo2.Effects.Models
                 float radians = (float)value;
 
                 //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     //History
                     var previous = layer.Effect.StartingStraighten_Angle;
-                    int index = layer.Control.Index;
-                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                    Effect.Straighten_Angle = previous);
+                    history.UndoActions.Push(() =>
+                    {
+                        ILayer layer2 = layerage.Self;
+
+                        layer2.Effect.Straighten_Angle = previous;
+                    });
 
                     layer.Effect.Straighten_Angle = radians;
                 });
 
                 //History
-                this.ViewModel.Push(history);
+                this.ViewModel.HistoryPush(history);
 
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
             };

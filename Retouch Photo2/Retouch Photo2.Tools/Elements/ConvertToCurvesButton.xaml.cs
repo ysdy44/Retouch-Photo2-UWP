@@ -15,7 +15,6 @@ namespace Retouch_Photo2.Tools.Elements
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
                
         //@Construct
         public ConvertToCurvesButton()
@@ -23,23 +22,28 @@ namespace Retouch_Photo2.Tools.Elements
             this.InitializeComponent();
             this.Button.Click += (s, e) =>
             {
-                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
-            
+                if (this.ViewModel.SelectionMode == ListViewSelectionMode.None) return;
 
-                this.SelectionViewModel.SetValue((layer)=>
+                //History
+                this.ViewModel.HistoryPushLayeragesHistory("Convert to curves");
+
+                this.ViewModel.SetValue((layerage)=>
                 {
+                    ILayer layer2 = layerage.Self;
+
                     //Turn to curve layer
-                    ILayer curveLayer = this.GetCurveLayer(layer);
+                    Layer curveLayer = this.GetCurveLayer(layerage);
                     if (curveLayer == null) return;
+                    Layerage curveLayerage = curveLayer.ToLayerage();
 
                     //set image brush
-                    if (layer.Type == LayerType.Image)
+                    if (layer2.Type == LayerType.Image)
                     {
-                        ImageLayer imageLayer = (ImageLayer)layer;
+                        ImageLayer imageLayer = (ImageLayer)layer2;
                         curveLayer.Style.Fill = imageLayer.ToBrush();
                     }
 
-                    this.Replace(curveLayer, layer);
+                    this.Replace(curveLayerage, layerage);
                     curveLayer.IsSelected = true;
                 });
 
@@ -49,37 +53,38 @@ namespace Retouch_Photo2.Tools.Elements
                 this.TipViewModel.ToolGroupType(ToolType.Node);
 
                 LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
-
-                this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
-
+                this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
                 this.ViewModel.Invalidate();//Invalidate
             };
         }
 
 
         //Get curve layer
-        private ILayer GetCurveLayer(ILayer layer)
+        private Layer GetCurveLayer(Layerage layerage)
         {
+            ILayer layer = layerage.Self;
+            
             IEnumerable<IEnumerable<Node>> nodess = layer.ConvertToCurves();
             if (nodess == null) return null;
             
             if (nodess.Count() == 1)
             {
                 CurveLayer curveLayer = new CurveLayer(nodess.Single());
-                LayerBase.CopyWith(this.ViewModel.CanvasDevice, curveLayer, layer);
+                Layer.CopyWith(this.ViewModel.CanvasDevice, curveLayer, layer);
                 return curveLayer;
             }
 
             CurveMultiLayer curveMultiLayer = new CurveMultiLayer(nodess);
-            LayerBase.CopyWith(this.ViewModel.CanvasDevice, curveMultiLayer, layer);
+            Layer.CopyWith(this.ViewModel.CanvasDevice, curveMultiLayer, layer);
+            Layer.Instances.Add(curveMultiLayer);
             return curveMultiLayer;
         }
          
         
         //Replace curveLayer to layer
-        private void Replace(ILayer curveLayer, ILayer layer)
+        private void Replace(Layerage curveLayer, Layerage layer)
         {
-            IList<ILayer> parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(layer);
+            IList<Layerage> parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(layer);
             int index = parentsChildren.IndexOf(layer);
             parentsChildren[index] = curveLayer;
         }

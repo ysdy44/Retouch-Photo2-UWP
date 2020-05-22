@@ -13,16 +13,16 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "SelectionViewModel" />. 
+    /// Retouch_Photo2's the only <see cref = "ViewModel" />. 
     /// </summary>
-    public partial class SelectionViewModel : INotifyPropertyChanged
+    public partial class ViewModel : INotifyPropertyChanged
     {
         
         /// <summary>
         /// Sets all selection layer(s).
         /// </summary>
         /// <param name="action"> action </param>
-        public void SetValue(Action<ILayer> action)
+        public void SetValue(Action<Layerage> action)
         {
             switch (this.SelectionMode)
             {
@@ -30,11 +30,11 @@ namespace Retouch_Photo2.ViewModels
                     break;
 
                 case ListViewSelectionMode.Single:
-                    action(this.Layer);
+                    action(this.Layerage);
                     break;
 
                 case ListViewSelectionMode.Multiple:
-                    foreach (ILayer child in this.Layers)
+                    foreach (Layerage child in this.Layerages)
                     {
                         action(child);
                     }
@@ -55,12 +55,13 @@ namespace Retouch_Photo2.ViewModels
                     return new Transformer();
 
                 case ListViewSelectionMode.Single:
-                    return this.Layer.GetActualDestinationWithRefactoringTransformer;
+                    ILayer layer = this.Layerage.Self;
+                    return layer.GetActualDestinationWithRefactoringTransformer;
 
                 case ListViewSelectionMode.Multiple:
                     {
                         //TransformerBorder
-                        IEnumerable<Transformer> transformers = from l in this.Layers select l.GetActualDestinationWithRefactoringTransformer;
+                        IEnumerable<Transformer> transformers = from l in this.Layerages select l.Self.GetActualDestinationWithRefactoringTransformer;
                         TransformerBorder border = new TransformerBorder(transformers);
                         return border.ToTransformer();
                     }
@@ -78,13 +79,13 @@ namespace Retouch_Photo2.ViewModels
         /// Multiple: first layer;
         /// </summary>
         /// <returns> The selected layer. </returns>
-        public ILayer GetFirstLayer()
+        public Layerage GetFirstLayer()
         {
             switch (this.SelectionMode)
             {
                 case ListViewSelectionMode.None: return null;
-                case ListViewSelectionMode.Single: return this.Layer;
-                case ListViewSelectionMode.Multiple: return this.Layers.FirstOrDefault();
+                case ListViewSelectionMode.Single: return this.Layerage;
+                case ListViewSelectionMode.Multiple: return this.Layerages.FirstOrDefault();
                 default: return null;
             }
         }

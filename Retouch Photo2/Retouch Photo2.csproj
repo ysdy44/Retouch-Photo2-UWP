@@ -125,11 +125,11 @@
     <Compile Include="Retouch Photo2.Menus\StyleMenu.xaml.cs">
       <DependentUpon>StyleMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\MoveTool.Clicke.cs" />
     <Compile Include="Retouch Photo2.Tools\MoveTool.cs" />
     <Compile Include="Retouch Photo2.Tools\TransformerTool.cs" />
     <Compile Include="XMLs\XML.Bitmap.cs" />
     <Compile Include="XMLs\XML.FilterFile.cs" />
+    <Compile Include="XMLs\XML.LayersFile.cs" />
     <Compile Include="XMLs\XML.PhotosFile.cs" />
     <Compile Include="XMLs\XML.ProjectFile.cs" />
     <Compile Include="XMLs\XML.SettingFile.cs" />

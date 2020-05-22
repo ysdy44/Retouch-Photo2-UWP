@@ -23,8 +23,8 @@
             <tools:TouchbarButton x:Name="SweepAngleTouchbarButton">
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="SweepAngleTouchbarSlider"
-                    Number="{x:Bind SweepAngleNumberConverter(SelectionViewModel.GeometryPieSweepAngle),Mode=OneWay}"
-                    Value="{x:Bind SweepAngleValueConverter(SelectionViewModel.GeometryPieSweepAngle), Mode=OneWay}" 
+                    Number="{x:Bind SweepAngleNumberConverter(ViewModel.GeometryPieSweepAngle),Mode=OneWay}"
+                    Value="{x:Bind SweepAngleValueConverter(ViewModel.GeometryPieSweepAngle), Mode=OneWay}" 
                      />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>

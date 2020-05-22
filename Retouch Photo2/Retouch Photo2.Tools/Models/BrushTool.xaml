@@ -25,7 +25,7 @@
             <!--FillOrStroke-->
             <TextBlock x:Name="FillOrStrokeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <brushs:FillOrStrokeComboBox x:Name="FillOrStrokeComboBox"
-                 FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
+                 FillOrStroke="{x:Bind ViewModel.FillOrStroke, Mode=OneWay}"
                 />
            
             <ContentControl Width="4"/>
@@ -33,27 +33,27 @@
             <!--BrushType-->
             <TextBlock x:Name="BrushTypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <brushs:BrushTypeComboBox x:Name="BrushTypeComboBox" 
-                 FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
-                 Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
-                 Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />
+                 FillOrStroke="{x:Bind ViewModel.FillOrStroke, Mode=OneWay}"
+                 Fill="{x:Bind ViewModel.Fill, Mode=OneWay}" 
+                 Stroke="{x:Bind ViewModel.Stroke, Mode=OneWay}" />
            
             <ContentControl Width="4"/>
 
             <!--ShowControl-->
             <TextBlock x:Name="BrushTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <brushs:ShowControl x:Name="ShowControl" 
-                     FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
-                     Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
-                     Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />
+                     FillOrStroke="{x:Bind ViewModel.FillOrStroke, Mode=OneWay}"
+                     Fill="{x:Bind ViewModel.Fill, Mode=OneWay}" 
+                     Stroke="{x:Bind ViewModel.Stroke, Mode=OneWay}" />
 
             <ContentControl Width="4"/>
 
             <!--Extend-->
             <TextBlock x:Name="ExtendTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <brushs:ExtendComboBox x:Name="ExtendComboBox" 
-                     FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
-                     Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
-                     Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />
+                     FillOrStroke="{x:Bind ViewModel.FillOrStroke, Mode=OneWay}"
+                     Fill="{x:Bind ViewModel.Fill, Mode=OneWay}" 
+                     Stroke="{x:Bind ViewModel.Stroke, Mode=OneWay}" />
 
         </StackPanel>
     </ScrollViewer>

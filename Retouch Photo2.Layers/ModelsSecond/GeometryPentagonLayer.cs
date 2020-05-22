@@ -10,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="ILayer"/>'s GeometryPentagonLayer .
+    /// <see cref="Layer"/>'s GeometryPentagonLayer .
     /// </summary>
-    public class GeometryPentagonLayer : LayerBase, ILayer
+    public class GeometryPentagonLayer : Layer, ILayer
     {
 
         //@Override     
@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryPentagonLayer()
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(this.ToLayerage())
             {
                 Icon = new GeometryPentagonIcon(),
                 Type = this.ConstructStrings(),
@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Layers.Models
                 Points = this.Points,
             };
 
-            LayerBase.CopyWith(resourceCreator, PentagonLayer, this);
+            Layer.CopyWith(resourceCreator, PentagonLayer, this);
             return PentagonLayer;
         }
 

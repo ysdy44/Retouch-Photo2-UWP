@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.Layers
 {
-    public partial class LayerControl : UserControl, ILayerControl
+    public partial class LayerControl : UserControl
     {
 
         public void SetOverlayMode(OverlayMode value)

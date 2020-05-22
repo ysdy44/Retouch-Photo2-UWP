@@ -21,7 +21,6 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@TouchBar  
         internal bool TouchBarMode
@@ -92,11 +91,13 @@ namespace Retouch_Photo2.Tools.Models
             if (center < 0.0f) center = 0.0f;
             if (center > 1.0f) center = 1.0f;
 
-            this.SelectionViewModel.GeometryTriangleCenter = center;
+            this.ViewModel.GeometryTriangleCenter = center;
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 if (layer.Type == LayerType.GeometryTriangle)
                 {
                     GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
@@ -110,12 +111,14 @@ namespace Retouch_Photo2.Tools.Models
         //Mirror
         private void CenterMirror()
         {
-            float selectionCenter = 1.0f - this.SelectionViewModel.GeometryTriangleCenter;
-            this.SelectionViewModel.GeometryTriangleCenter = selectionCenter;
+            float selectionCenter = 1.0f - this.ViewModel.GeometryTriangleCenter;
+            this.ViewModel.GeometryTriangleCenter = selectionCenter;
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 if (layer.Type == LayerType.GeometryTriangle)
                 {
                     GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
@@ -171,9 +174,9 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryTriangleLayer
             {
-                Center = this.SelectionViewModel.GeometryTriangleCenter,
+                Center = this.ViewModel.GeometryTriangleCenter,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.ViewModel.GeometryStyle
             };
         }
 

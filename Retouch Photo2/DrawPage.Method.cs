@@ -13,6 +13,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.Storage.Streams;
 using System.Linq;
+using Retouch_Photo2.Menus;
 
 namespace Retouch_Photo2
 {
@@ -79,14 +80,19 @@ namespace Retouch_Photo2
                 Height = height,
                 Layers = this.ViewModel.LayerCollection.RootLayers
             };
-            await Retouch_Photo2. XML.SaveProjectFile(zipFolder, project);
+            await Retouch_Photo2.XML.SaveProjectFile(zipFolder, project);
 
             //Save thumbnail file.
             CanvasRenderTarget thumbnail = this.MainCanvasControl.RenderThumbnail(this.ViewModel.CanvasDevice, width, height);
             await FileUtil.SaveThumbnailFile(zipFolder, thumbnail);
+            
+            //Save layers file.
+            IEnumerable<Layerage> savedLayerages = LayerCollection.GetLayerages(this.ViewModel.LayerCollection.RootLayers);
+            IEnumerable<ILayer> savedLayers = from layer in Layer.Instances where savedLayerages.Any(p => layer.Equals(p)) select layer;
+            await XML.SaveLayerFile(zipFolder, savedLayers);
 
             //Save photos file and Move photo file.
-            IEnumerable<Photocopier> savedPhotocopiers = LayerCollection.GetPhotocopiers(this.ViewModel.LayerCollection);
+            IEnumerable<Photocopier> savedPhotocopiers = LayerCollection.GetPhotocopiers(savedLayerages);
             IEnumerable<Photo> savedPhotos = from photo in Photo.Instances where savedPhotocopiers.Any(p => photo.Equals(p)) select photo;
             await XML.SavePhotoFile(zipFolder, savedPhotos);
             foreach (Photo photo in savedPhotos)
@@ -101,8 +107,16 @@ namespace Retouch_Photo2
         /// </summary>
         private async Task Exit()
         {
-            //Clear Photos
+            foreach (IMenu menu in this.TipViewModel.Menus)
+            {
+                menu.Expander.State = ExpanderState.Hide;
+            }
+
+            //Clear photos
             Photo.Instances.Clear();
+
+            //Clear layers
+            Layer.Instances.Clear();
 
             //FileUtil
             await FileUtil.DeleteInTemporaryFolder();
@@ -110,7 +124,7 @@ namespace Retouch_Photo2
 
             //Clear
             this.ViewModel.Historys.Clear();
-            this.SelectionViewModel.SetModeNone();
+            this.ViewModel.SetModeNone();
             this.ViewModel.LayerCollection.RootLayers.Clear();
             this.ViewModel.LayerCollection.RootControls.Clear();
         }

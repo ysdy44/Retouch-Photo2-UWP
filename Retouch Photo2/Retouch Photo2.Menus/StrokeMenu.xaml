@@ -22,34 +22,34 @@
                 <!--Dash-->
                 <TextBlock x:Name="DashTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <strokes:DashSegmented x:Name="DashSegmented"
-                         Dash="{x:Bind DashConverter(SelectionViewModel.StrokeStyle), Mode=OneWay}"/>
+                         Dash="{x:Bind DashConverter(ViewModel.StrokeStyle), Mode=OneWay}"/>
 
 
                 <!--Width-->
                 <TextBlock x:Name="WidthTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <Border Style="{StaticResource AppRoundedBorderStyle}">
                     <elements:SilderPicker x:Name="WidthPicker"
-                             Value="{x:Bind SelectionViewModel.StrokeWidth, Mode=OneWay}"/>
+                             Value="{x:Bind ViewModel.StrokeWidth, Mode=OneWay}"/>
                 </Border>
                 
 
                 <!--Cap-->
                 <TextBlock x:Name="CapTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <strokes:CapSegmented x:Name="CapSegmented"
-                         Cap="{x:Bind CapConverter(SelectionViewModel.StrokeStyle), Mode=OneWay}"/>
+                         Cap="{x:Bind CapConverter(ViewModel.StrokeStyle), Mode=OneWay}"/>
 
 
                 <!--Join-->
                 <TextBlock x:Name="JoinTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <strokes:JoinSegmented x:Name="JoinSegmented"
-                         Join="{x:Bind JoinConverter(SelectionViewModel.StrokeStyle), Mode=OneWay}"/>
+                         Join="{x:Bind JoinConverter(ViewModel.StrokeStyle), Mode=OneWay}"/>
                 
                 
                 <!--Offset-->
                 <TextBlock x:Name="OffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <Border Style="{StaticResource AppRoundedBorderStyle}">
                     <elements:SilderPicker x:Name="OffsetPicker"
-                             Value="{x:Bind OffsetConverter(SelectionViewModel.StrokeStyle), Mode=OneWay}"/>
+                             Value="{x:Bind OffsetConverter(ViewModel.StrokeStyle), Mode=OneWay}"/>
                 </Border>
 
             </StackPanel>

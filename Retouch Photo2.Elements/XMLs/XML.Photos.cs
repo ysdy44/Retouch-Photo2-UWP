@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Elements
         /// <summary>
         /// Saves the entire <see cref="Photo"/>s to a XDocument.
         /// </summary>
-        /// <param name="project"> The source data. </param>
+        /// <param name="photos"> The source data. </param>
         /// <returns> The saved XDocument. </returns>
         public static XDocument SavePhotos(IEnumerable<Photo> photos)
         {

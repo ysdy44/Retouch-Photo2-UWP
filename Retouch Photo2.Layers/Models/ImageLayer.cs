@@ -13,9 +13,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="ILayer"/>'s ImageLayer .
+    /// <see cref="Layer"/>'s ImageLayer .
     /// </summary>
-    public class ImageLayer : LayerBase, ILayer
+    public class ImageLayer : Layer, ILayer
     {
 
         //@Override     
@@ -32,7 +32,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public ImageLayer()
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(this.ToLayerage())
             {
                 Icon = new ImageIcon(),
                 Type = this.ConstructStrings(),
@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Layers.Models
         /// <param name="photocopier"> The fill photocopier. </param>
         public ImageLayer(Transformer transformer, Photocopier photocopier)
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(this.ToLayerage())
             {
                 Icon = new ImageIcon(),
                 Type = this.ConstructStrings(),
@@ -61,7 +61,7 @@ namespace Retouch_Photo2.Layers.Models
                 Photocopier = this.Photocopier,
             };
 
-            LayerBase.CopyWith(resourceCreator, imageLayer, this);
+            Layer.CopyWith(resourceCreator, imageLayer, this);
             return imageLayer;
         }
 
@@ -75,7 +75,7 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
+        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children)
         {
             Photocopier photocopier = this.Photocopier;
             if (photocopier.Name == null) return null;
@@ -88,7 +88,7 @@ namespace Retouch_Photo2.Layers.Models
             {
                 TransformMatrix = matrix2 * canvasToVirtualMatrix,
                 Source = bitmap,
-                //TODO:  Enmu
+                //TODO:  Cubic
                 //InterpolationMode= CanvasImageInterpolation.Cubic
             };
         }

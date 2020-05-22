@@ -10,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="ILayer"/>'s GeometryTriangleLayer .
+    /// <see cref="Layer"/>'s GeometryTriangleLayer .
     /// </summary>
-    public class GeometryTriangleLayer : LayerBase, ILayer
+    public class GeometryTriangleLayer : Layer, ILayer
     {
 
         //@Override     
@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryTriangleLayer()
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(this.ToLayerage())
             {
                 Icon = new GeometryTriangleIcon(),
                 Type = this.ConstructStrings(),
@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Layers.Models
                 Center = this.Center,
             };
 
-            LayerBase.CopyWith(resourceCreator, TriangleLayer, this);
+            Layer.CopyWith(resourceCreator, TriangleLayer, this);
             return TriangleLayer;
         }
         

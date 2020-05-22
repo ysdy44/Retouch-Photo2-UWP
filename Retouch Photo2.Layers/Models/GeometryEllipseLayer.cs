@@ -9,9 +9,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="ILayer"/>'s GeometryEllipseLayer .
+    /// <see cref="Layer"/>'s GeometryEllipseLayer .
     /// </summary>
-    public class GeometryEllipseLayer : LayerBase, ILayer
+    public class GeometryEllipseLayer : Layer, ILayer
     {
 
         //@Override     
@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Layers.Models
         /// <param name="element"> The source XElement. </param>
         public GeometryEllipseLayer()
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(this.ToLayerage())
             {
                 Icon = new GeometryEllipseIcon(),
                 Type = this.ConstructStrings(),
@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Layers.Models
         {
             GeometryEllipseLayer ellipseLayer = new GeometryEllipseLayer();
 
-            LayerBase.CopyWith(resourceCreator, ellipseLayer, this);
+            Layer.CopyWith(resourceCreator, ellipseLayer, this);
             return ellipseLayer;
         }
 

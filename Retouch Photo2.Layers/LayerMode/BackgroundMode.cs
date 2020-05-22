@@ -1,7 +1,7 @@
 ﻿namespace Retouch_Photo2.Layers
 {
     /// <summary> 
-    /// background mode of <see cref="ILayer"/>.
+    /// background mode of <see cref="Layerage"/>.
     /// </summary>
     public enum BackgroundMode
     {

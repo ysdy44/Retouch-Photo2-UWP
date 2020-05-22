@@ -10,9 +10,9 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "SelectionViewModel" />. 
+    /// Retouch_Photo2's the only <see cref = "ViewModel" />. 
     /// </summary>
-    public partial class SelectionViewModel : INotifyPropertyChanged
+    public partial class ViewModel : INotifyPropertyChanged
     {
 
         /// <summary> Style's IsFollowTransform. </summary>     
@@ -149,11 +149,12 @@ namespace Retouch_Photo2.ViewModels
                     this.SetStyle(null);
                     break;
                 case ListViewSelectionMode.Single:
-                    this.SetStyle((Style)this.Layer.Style);
+                    ILayer layer = this.Layerage.Self;
+                    this.SetStyle(layer.Style);
                     break;
                 case ListViewSelectionMode.Multiple:
-                    ILayer firstLayer = this.Layers.First();
-                    this.SetStyle((Style)firstLayer.Style);
+                    ILayer layer2 = this.Layerages.First().Self;
+                    this.SetStyle(layer2.Style);
                     break;
             }
         }
@@ -165,32 +166,34 @@ namespace Retouch_Photo2.ViewModels
         /// <summary>
         /// Sets the <see cref="Style"/>,
         /// switch by <see cref="Retouch_Photo2.Layers.LayerType"/> to
-        /// <see cref="SelectionViewModel.GeometryStyle"/>
-        /// <see cref="SelectionViewModel.CurveStyle"/>
-        /// <see cref="SelectionViewModel.TextStyle"/>
+        /// <see cref="ViewModel.GeometryStyle"/>
+        /// <see cref="ViewModel.CurveStyle"/>
+        /// <see cref="ViewModel.TextStyle"/>
         /// </summary>
-        public ILayer StyleLayer
+        public Layerage StyleLayerage
         {
             set
-            {                
+            {
+                ILayer layer = value.Self;
+
                 //Switch
-                switch (value.Type)
+                switch (layer.Type)
                 {
                     case LayerType.Curve:
                     case LayerType.CurveMulti:
-                        if (value != curveStyleLayer)
-                            this.curveStyleLayer = value;
+                        if (value != curveStyleLayerage)
+                            this.curveStyleLayerage = value;
                         break;
 
                     case LayerType.TextFrame:
                     case LayerType.TextArtistic:
-                        if (value != textStyleLayer)
-                            this.textStyleLayer = value;
+                        if (value != textStyleLayerage)
+                            this.textStyleLayerage = value;
                         break;
 
                     default:
-                        if (value != geometryStylelayer)
-                            this.geometryStylelayer = value;
+                        if (value != geometryStyleLayerage)
+                            this.geometryStyleLayerage = value;
                         break;
                 }
             }
@@ -204,11 +207,13 @@ namespace Retouch_Photo2.ViewModels
         {
             get
             {
-                if (this.geometryStylelayer != null)
+                if (this.geometryStyleLayerage != null)
                 {
+                    ILayer layer = this.geometryStyleLayerage.Self;
+
                     //CacheBrush
-                    Transformer transformer = this.geometryStylelayer.Transform.Destination;
-                    Style style = this.geometryStylelayer.Style.Clone();
+                    Transformer transformer = layer.Transform.Destination;
+                    Style style = layer.Style.Clone();
                     style.OneBrushPoints(transformer);
                     return style;
                 }
@@ -222,7 +227,7 @@ namespace Retouch_Photo2.ViewModels
                 };
             }
         }
-        private ILayer geometryStylelayer;
+        private Layerage geometryStyleLayerage;
         
         /// <summary>
         /// Gets the curve style.
@@ -231,11 +236,13 @@ namespace Retouch_Photo2.ViewModels
         {
             get
             {
-                if (this.curveStyleLayer != null)
+                if (this.curveStyleLayerage != null)
                 {
+                    ILayer layer = this.curveStyleLayerage.Self;
+
                     //CacheBrush
-                    Transformer transformer = this.curveStyleLayer.Transform.Destination;
-                    Style style = this.curveStyleLayer.Style.Clone();
+                    Transformer transformer = layer.Transform.Destination;
+                    Style style = layer.Style.Clone();
                     style.OneBrushPoints(transformer);
                     return style;
                 }
@@ -249,7 +256,7 @@ namespace Retouch_Photo2.ViewModels
                 };
             }
         }
-        private ILayer curveStyleLayer;
+        private Layerage curveStyleLayerage;
         
         /// <summary>
         /// Gets the text style.
@@ -258,11 +265,13 @@ namespace Retouch_Photo2.ViewModels
         {
             get
             {
-                if (this.textStyleLayer != null)
+                if (this.textStyleLayerage != null)
                 {
+                    ILayer layer = this.textStyleLayerage.Self;
+
                     //CacheBrush
-                    Transformer transformer = this.textStyleLayer.Transform.Destination;
-                    Style style = this.textStyleLayer.Style.Clone();
+                    Transformer transformer = layer.Transform.Destination;
+                    Style style = layer.Style.Clone();
                     style.OneBrushPoints(transformer);
                     return style;
                 }
@@ -276,7 +285,7 @@ namespace Retouch_Photo2.ViewModels
                 };
             }
         }
-        private ILayer textStyleLayer;
+        private Layerage textStyleLayerage;
 
     }
 }

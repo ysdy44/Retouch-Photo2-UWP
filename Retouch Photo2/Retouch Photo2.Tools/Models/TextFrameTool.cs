@@ -18,7 +18,6 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
 
@@ -66,7 +65,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 IsSelected = true,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.TextStyle,
+                Style = this.ViewModel.TextStyle,
             };
         }
 

@@ -12,9 +12,9 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "SelectionViewModel" />. 
+    /// Retouch_Photo2's the only <see cref = "ViewModel" />. 
     /// </summary>
-    public partial class SelectionViewModel : INotifyPropertyChanged
+    public partial class ViewModel : INotifyPropertyChanged
     {
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="layerCollection"> The layer-collection. </param>
         public void SetMode(LayerCollection layerCollection)
         {
-            IEnumerable<ILayer> checkedLayers = LayerCollection.GetAllSelectedLayers(layerCollection);
+            IEnumerable<Layerage> checkedLayers = LayerCollection.GetAllSelectedLayers(layerCollection);
             int count = checkedLayers.Count();
 
             if (count == 0)
@@ -43,16 +43,19 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         public void SetModeNone()
         {
-            if (this.Layer != null)
+            if (this.Layerage != null)
             {
-                this.Layer.IsSelected = false;
+                if (this.Layerage.Self is ILayer layer)
+                {
+                    layer.IsSelected = false;
+                }
             }
 
-            if (this.Layers != null)
+            if (this.Layerages != null)
             {
-                foreach (ILayer child in this.Layers)
+                foreach (Layerage child in this.Layerages)
                 {
-                    child.IsSelected = false;
+                    child.Self.IsSelected = false;
                 }
             }
             this._setModeNone();//None
@@ -66,8 +69,8 @@ namespace Retouch_Photo2.ViewModels
             //this.Transformer = new Transformer();
             this.DisabledRadian = false;
 
-            this.Layer = null;
-            this.Layers = null;
+            this.Layerage = new Layerage();
+            this.Layerages = null;
 
             //////////////////////////
 
@@ -104,20 +107,22 @@ namespace Retouch_Photo2.ViewModels
         /// <summary>
         ///  Sets the mode to Single.
         /// </summary>
-        /// <param name="layer"> The single layer. </param>
-        public void SetModeSingle(ILayer layer)
+        /// <param name="layerage"> The single layer. </param>
+        public void SetModeSingle(Layerage layerage)
         {
-            if (this.Layers != null)
+            if (this.Layerages != null)
             {
-                foreach (ILayer child in this.Layers)
+                foreach (Layerage child in this.Layerages)
                 {
-                    child.IsSelected = false;
+                    child.Self.IsSelected = false;
                 }
             }
-            this._setModeSingle(layer);//Single
+            this._setModeSingle(layerage);//Single
         }
-        private void _setModeSingle(ILayer layer)
+        private void _setModeSingle(Layerage layerage)
         {
+            ILayer layer = layerage.Self;
+
             this.SelectionMode = ListViewSelectionMode.Single;
             this.SelectionUnNone = true;
             this.SelectionSingle = true;
@@ -125,8 +130,8 @@ namespace Retouch_Photo2.ViewModels
             this.Transformer = layer.GetActualDestinationWithRefactoringTransformer;
             this.DisabledRadian = false;
 
-            this.Layer = layer;
-            this.Layers = null;
+            this.Layerage = layerage;
+            this.Layerages = null;
 
             //////////////////////////
 
@@ -165,55 +170,57 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         /// <param name="layer"> The multiple layer. </param>
         /// <param name="outermost"> The outermost layer. </param>
-        public void SetModeMultiple(IList<ILayer> layers)
+        public void SetModeMultiple(IList<Layerage> layerages)
         {
-            if (this.Layer != null)
+            if (this.Layerage != null)
             {
-                this.Layer.IsSelected = false;
+                ILayer layer = this.Layerage.Self;
+                layer.IsSelected = false;
             }
-            this._setModeMultiple(layers);//Multiple
+            this._setModeMultiple(layerages);//Multiple
         }
-        private void _setModeMultiple(IEnumerable<ILayer> layers)
+        private void _setModeMultiple(IEnumerable<Layerage> layerages)
         {
-            ILayer outermost = LayerCollection.FindOutermost_SelectedLayer(layers);
+            Layerage outermost = LayerCollection.FindOutermost_SelectedLayer(layerages);
+            ILayer outermostLayer = outermost.Self;
             this.SelectionMode = ListViewSelectionMode.Multiple;//Transformer     
             this.SelectionUnNone = true;
             this.SelectionSingle = false;
 
-            this.Layer = null;
-            this.Layers = layers;
+            this.Layerage = new Layerage();
+            this.Layerages = layerages;
 
             //TransformerBorder
-            IEnumerable<Transformer> transformers = from l in layers select l.GetActualDestinationWithRefactoringTransformer;
+            IEnumerable<Transformer> transformers = from l in layerages select l.Self.GetActualDestinationWithRefactoringTransformer;
             TransformerBorder border = new TransformerBorder(transformers);
             this.Transformer = border.ToTransformer();
             this.DisabledRadian = false;
 
             //////////////////////////
 
-            this.LayerType = outermost == null ? LayerType.None : outermost.Type;
-            this.SetOpacity(outermost == null ? 1.0f : outermost.Opacity);
-            this.BlendMode = outermost?.BlendMode;
-            this.SetVisibility(outermost == null ? Visibility.Visible : outermost.Visibility);
-            this.SetTagType(outermost == null ? TagType.None : outermost.TagType);
+            this.LayerType = outermostLayer == null ? LayerType.None : outermostLayer.Type;
+            this.SetOpacity(outermostLayer == null ? 1.0f : outermostLayer.Opacity);
+            this.BlendMode = outermostLayer?.BlendMode;
+            this.SetVisibility(outermostLayer == null ? Visibility.Visible : outermostLayer.Visibility);
+            this.SetTagType(outermostLayer == null ? TagType.None : outermostLayer.TagType);
 
             //////////////////////////
 
-            this.IsCrop = layers.Any(layer => layer.Transform.IsCrop);
-            this.Effect = outermost?.Effect;
+            this.IsCrop = layerages.Any(layer => outermostLayer.Transform.IsCrop);
+            this.Effect = outermostLayer?.Effect;
             this.Filter = null;
-            this.SetStyle(outermost?.Style);
+            this.SetStyle(outermostLayer?.Style);
 
             //////////////////////////
 
-            this.SetGroupLayer(layers);
-            this.SetImageLayer(outermost);
+            this.SetGroupLayer(layerages);
+            this.SetImageLayer(outermostLayer);
             this.SetCurveLayer(null);
             this.SetFontLayer(null);
 
             //////////////////////////
 
-            this.SetIGeometryLayer(outermost);
+            this.SetIGeometryLayer(outermostLayer);
         }
 
 

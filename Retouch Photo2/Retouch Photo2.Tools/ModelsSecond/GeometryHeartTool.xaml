@@ -23,8 +23,8 @@
             <tools:TouchbarButton x:Name="SpreadTouchbarButton">
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="SpreadTouchbarSlider" 
-                             Number="{x:Bind SpreadNumberConverter(SelectionViewModel.GeometryHeartSpread),Mode=OneWay}"
-                             Value="{x:Bind SpreadValueConverter(SelectionViewModel.GeometryHeartSpread),Mode=OneWay}"
+                             Number="{x:Bind SpreadNumberConverter(ViewModel.GeometryHeartSpread),Mode=OneWay}"
+                             Value="{x:Bind SpreadValueConverter(ViewModel.GeometryHeartSpread),Mode=OneWay}"
                              />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>

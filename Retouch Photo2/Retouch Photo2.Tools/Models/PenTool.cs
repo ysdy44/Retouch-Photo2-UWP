@@ -19,12 +19,11 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         GeometryTool GeometryTool = new GeometryTool();
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
-        CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
+        CurveLayer CurveLayer => this.ViewModel.CurveLayer;
         NodeCollection Nodes => this.CurveLayer.Nodes;
 
         VectorVectorSnap Snap => this.ViewModel.VectorVectorSnap;
@@ -325,7 +324,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
         private void CreateLayer(LayerCollection layerCollection, Vector2 canvasStartingPoint, Vector2 canvasPoint)
-        {
+        {      
             //Transformer
             Transformer transformer = new Transformer(canvasPoint, canvasStartingPoint);
 
@@ -334,15 +333,16 @@ namespace Retouch_Photo2.Tools.Models
             {
                 IsSelected = true,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.CurveStyle,
+                Style = this.ViewModel.CurveStyle,
             };
+            Layer.Instances.Add(curveLayer);
+            Layerage curveLayerage = curveLayer.ToLayerage();
             
-            this.SelectionViewModel.SetModeSingle(curveLayer);//Selection
-
             //Mezzanine
-            LayerCollection.Mezzanine(this.ViewModel.LayerCollection, curveLayer);
-            LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+            LayerCollection.Mezzanine(this.ViewModel.LayerCollection, curveLayerage);
 
+            this.ViewModel.SetModeSingle(curveLayerage);//Selection
+            LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
             this.ViewModel.Invalidate();//Invalidate
         }
 

@@ -21,7 +21,7 @@
 
                 <!--Align-->
                 <TextBlock x:Name="FontAlignmentTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <characters:FontAlignmentSegmented x:Name="FontAlignmentSegmented" Alignment="{x:Bind SelectionViewModel.FontAlignment, Mode=OneWay}"/>
+                <characters:FontAlignmentSegmented x:Name="FontAlignmentSegmented" Alignment="{x:Bind ViewModel.FontAlignment, Mode=OneWay}"/>
 
 
                 <!--FontStyle-->
@@ -71,7 +71,7 @@
                 <!--FontFamily-->
                 <TextBlock x:Name="FontFamilyTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <Button x:Name="FontFamilyButton" Style="{StaticResource AppIconRoundedButtonStyle}"
-                        Content="{x:Bind SelectionViewModel.FontFamily,Mode=OneWay}">
+                        Content="{x:Bind ViewModel.FontFamily,Mode=OneWay}">
                     <Button.Tag>
                         <FontIcon Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                     </Button.Tag>
@@ -87,7 +87,7 @@
                     </Grid.ColumnDefinitions>
 
                     <hSVColorPickers:NumberPicker x:Name="FontSizePicker" Minimum="4" Maximum="1000" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                             Value="{x:Bind FontSizeConverter(SelectionViewModel.FontSize), Mode=OneWay}" />
+                             Value="{x:Bind FontSizeConverter(ViewModel.FontSize), Mode=OneWay}" />
 
                     <Button x:Name="FontSizeButton" Grid.Column="1" Style="{StaticResource AppRoundedButtonStyle}">
                         <FontIcon Margin="4,0" Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
@@ -126,7 +126,7 @@
 
                 <!--FontWeight-->
                 <ScrollViewer x:Name="FontWeightScrollViewer" Visibility="Collapsed">
-                    <characters:FontWeightComboBox x:Name="FontWeightControl" Weight="{x:Bind SelectionViewModel.FontWeight, Mode=OneWay}"/>
+                    <characters:FontWeightComboBox x:Name="FontWeightControl" Weight="{x:Bind ViewModel.FontWeight, Mode=OneWay}"/>
                 </ScrollViewer>
 
             </Grid>

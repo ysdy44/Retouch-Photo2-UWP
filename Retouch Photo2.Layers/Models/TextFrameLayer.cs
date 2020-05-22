@@ -5,9 +5,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="TextLayerBase"/>'s TextFrameLayer .
+    /// <see cref="TextLayer"/>'s TextFrameLayer .
     /// </summary>
-    public class TextFrameLayer : TextLayerBase, ILayer, ITextLayer
+    public class TextFrameLayer : TextLayer, ITextLayer, ILayer
     {
 
         //@Override     
@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public TextFrameLayer()
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(this.ToLayerage())
             {
                 Icon = new TextFrameIcon(),
                 Type = this.ConstructStrings(),
@@ -33,8 +33,8 @@ namespace Retouch_Photo2.Layers.Models
         {   
             TextFrameLayer textFrameLayer = new TextFrameLayer();
 
-            TextLayerBase.FontCopyWith(textFrameLayer, this);
-            LayerBase.CopyWith(resourceCreator, textFrameLayer, this);
+            TextLayer.FontCopyWith(textFrameLayer, this);
+            Layer.CopyWith(resourceCreator, textFrameLayer, this);
             return textFrameLayer;
         }
 

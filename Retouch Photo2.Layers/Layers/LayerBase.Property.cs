@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Layers
     /// <summary>
     /// Represents a layer that can have render properties. Provides a rendering method.
     /// </summary>
-    public abstract partial class LayerBase
+    public abstract partial class Layer
     {
 
         //@Abstract
@@ -59,9 +59,6 @@ namespace Retouch_Photo2.Layers
         public Effect Effect { get; set; } = new Effect();
         public Filter Filter { get; set; } = new Filter();
 
-        public ILayer Parents { get; set; } = null;
-        public IList<ILayer> Children { get; set; } = new List<ILayer>();
-
 
         public abstract ILayer Clone(ICanvasResourceCreator resourceCreator);
 
@@ -80,40 +77,30 @@ namespace Retouch_Photo2.Layers
             this.Style.CacheTransform();
             this.Transform.CacheTransform();
 
-            foreach (ILayer child in this.Children)
-            {
-                child.CacheTransform();
-            }
+            //            foreach (Layer child in this.Children)
+            //        {
+            //          child.CacheTransform();
+            //      }
 
             //RefactoringTransformer
-            if (this.Parents != null)
-            {
-                if (this.Parents.Type == LayerType.Group)
-                {
-                    ILayer groupLayer = this.Parents;
-                    groupLayer.IsRefactoringTransformer = true;
-                }
-            }
+            //      if (this.Parents != null)
+            //    {
+            //        if (this.Parents.Type == LayerType.Group)
+            //      {
+            //         Layer groupLayer = this.Parents;
+            //        groupLayer.IsRefactoringTransformer = true;
+            //    }
+            //    }
         }
         public virtual void TransformMultiplies(Matrix3x2 matrix)
         {
             this.Style.TransformMultiplies(matrix);
             this.Transform.TransformMultiplies(matrix);
-
-            foreach (ILayer child in this.Children)
-            {
-                child.TransformMultiplies(matrix);
-            }
         }
         public virtual void TransformAdd(Vector2 vector)
         {
             this.Style.TransformAdd(vector);
             this.Transform.TransformAdd(vector);
-
-            foreach (ILayer child in this.Children)
-            {
-                child.TransformAdd(vector);
-            }
         }
 
 
@@ -138,12 +125,6 @@ namespace Retouch_Photo2.Layers
             {
                 IAdjustment clone = adjustment.Clone();
                 destination.Filter.Adjustments.Add(clone);
-            }
-
-            foreach (ILayer layer in source.Children)
-            {
-                ILayer clone = layer.Clone(resourceCreator);
-                destination.Children.Add(clone);
             }
         }
 

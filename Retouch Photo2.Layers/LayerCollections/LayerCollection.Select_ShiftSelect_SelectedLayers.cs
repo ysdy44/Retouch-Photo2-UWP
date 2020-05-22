@@ -9,15 +9,17 @@ namespace Retouch_Photo2.Layers
         /// Gets all selected layers.
         /// </summary>
         /// <returns> The selected layers. </returns>
-        public static IEnumerable<ILayer> GetAllSelectedLayers(LayerCollection layerCollection) 
+        public static IEnumerable<Layerage> GetAllSelectedLayers(LayerCollection layerCollection) 
          {
-            IList<ILayer> addLayers = new List<ILayer>();
+            IList<Layerage> addLayers = new List<Layerage>();
 
-            void addLayer(IList<ILayer> layers)
+            void addLayer(IList<Layerage> layers)
             {
-                foreach (ILayer child in layers)
+                foreach (Layerage child in layers)
                 {
-                    if (child.IsSelected == true)
+                    ILayer child2 = child.Self;
+
+                    if (child2.IsSelected == true)
                     {
                         addLayers.Add(child);
                     }
@@ -41,60 +43,65 @@ namespace Retouch_Photo2.Layers
         /// Select the current layer (hold **Shift** at the same time).
         /// </summary>
         /// <param name="currentLayer"> The current layer. </param>
-        public static void ShiftSelectCurrentLayer(LayerCollection layerCollection, ILayer currentLayer)
+        public static void ShiftSelectCurrentLayer(LayerCollection layerCollection, Layerage currentLayer)
         {
-            IList<ILayer> parentsChildren = layerCollection.GetParentsChildren(currentLayer);
+            IList<Layerage> parentsChildren = layerCollection.GetParentsChildren(currentLayer);
 
             //Recursive
             bool isFind = LayerCollection._findShiftSelectedLayer(currentLayer, parentsChildren);
             if (isFind) LayerCollection._setShiftSelectedLayer(currentLayer, parentsChildren);
         }
         
-        private static bool _findShiftSelectedLayer(ILayer currentLayer, IEnumerable<ILayer> layers)
+        private static bool _findShiftSelectedLayer(Layerage currentLayer, IEnumerable<Layerage> layers)
         {
             // Find self layer and selected layer.
-            bool existSelectedLayer = false;
-            bool existSelfLayer = false;
+            bool existSelectedILayer = false;
+            bool existSelfILayer = false;
 
-            foreach (ILayer child in layers)
+            foreach (Layerage child in layers)
             {
-                if (existSelectedLayer == false)
-                    if (child.IsSelected == true)
-                        existSelectedLayer = true;
+                ILayer child2 = child.Self;
 
-                if (existSelfLayer == false)
+                if (existSelectedILayer == false)
+                    if (child2.IsSelected == true)
+                        existSelectedILayer = true;
+
+                if (existSelfILayer == false)
                     if (child == currentLayer)
-                        existSelfLayer = true;
+                        existSelfILayer = true;
             }
 
-            return (existSelectedLayer && existSelfLayer);
+            return (existSelectedILayer && existSelfILayer);
         }
 
-        private static void _setShiftSelectedLayer(ILayer currentLayer, IEnumerable<ILayer> layers)
+        private static void _setShiftSelectedLayer(Layerage currentLayer, IEnumerable<Layerage> layers)
         {
-            // Find self layer and selected layer.
-            bool existSelectedLayer = false;
-            bool existSelfLayer = false;
+            ILayer currentLayer2 = currentLayer.Self;
 
-            foreach (ILayer child in layers)
+            // Find self layer and selected layer.
+            bool existSelectedILayer = false;
+            bool existSelfILayer = false;
+
+            foreach (Layerage child in layers)
             {
-                if (existSelectedLayer && existSelfLayer)
+                ILayer child2 = child.Self;
+                if (existSelectedILayer && existSelfILayer)
                     break;
 
-                if (existSelectedLayer || existSelfLayer)
-                    child.IsSelected = true;
+                if (existSelectedILayer || existSelfILayer)
+                    child2.IsSelected = true;
 
 
-                if (existSelectedLayer == false)
-                    if (child.IsSelected == true)
-                        existSelectedLayer = true;
+                if (existSelectedILayer == false)
+                    if (child2.IsSelected == true)
+                        existSelectedILayer = true;
 
-                if (existSelfLayer == false)
+                if (existSelfILayer == false)
                     if (child == currentLayer)
-                        existSelfLayer = true;
+                        existSelfILayer = true;
             }
 
-            currentLayer.IsSelected = true;
+            currentLayer2.IsSelected = true;
         }
                
 

@@ -4,6 +4,7 @@ using Windows.ApplicationModel.Resources;
 using Retouch_Photo2.Historys;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Retouch_Photo2.Layers;
 
 namespace Retouch_Photo2.Effects.Models
 {
@@ -14,7 +15,6 @@ namespace Retouch_Photo2.Effects.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Construct
         public GaussianBlurEffectPage()
@@ -53,10 +53,28 @@ namespace Retouch_Photo2.Effects.Models
         public void Reset()
         {
             this.RadiusSlider.Value = 0;
-        }
-        public void ResetEffect(Effect effect)
-        {
-            effect.GaussianBlur_Radius = 0;
+
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory("Set effect value");
+
+            //Selection
+            this.ViewModel.SetValue((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+                var previous = layer.Effect.GaussianBlur_Radius;
+                history.UndoActions.Push(() =>
+                {
+                    ILayer layer2 = layerage.Self;
+
+                    layer2.Effect.GaussianBlur_Radius = previous;
+                });
+
+                layer.Effect.GaussianBlur_Radius = 0;
+            });
+
+            //History
+            this.ViewModel.HistoryPush(history);
         }
         public void FollowEffect(Effect effect, bool isOnlyButton)
         {
@@ -85,22 +103,27 @@ namespace Retouch_Photo2.Effects.Models
                 bool isOn = this.Button.ToggleSwitch.IsOn;
 
                 //History
-                IHistoryBase history = new IHistoryBase("Set effect isOn");
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect isOn");
 
                 //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     //History
                     var previous = layer.Effect.GaussianBlur_IsOn;
-                    int index = layer.Control.Index;
-                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                    Effect.GaussianBlur_IsOn = previous);
+                    history.UndoActions.Push(() =>
+                    {
+                        ILayer layer2 = layerage.Self;
+
+                        layer2.Effect.GaussianBlur_IsOn = previous;
+                    });
 
                     layer.Effect.GaussianBlur_IsOn = isOn;
                 });
 
                 //History
-                this.ViewModel.Push(history);
+                this.ViewModel.HistoryPush(history);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -110,16 +133,18 @@ namespace Retouch_Photo2.Effects.Models
         private void ConstructSharpen_Amount()
         {
             //History
-            IHistoryBase history = null;
+            LayersPropertyHistory history = null;
 
             //Radius
             this.RadiusSlider.ValueChangeStarted += (s, value) =>
             {
-                history = new IHistoryBase("Set effect value");
+                history = new LayersPropertyHistory("Set effect value");
 
                 //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     layer.Effect.CacheGaussianBlur();
                 });
 
@@ -130,8 +155,10 @@ namespace Retouch_Photo2.Effects.Models
                 float radius = (float)value;
 
                 //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     layer.Effect.GaussianBlur_Radius = radius;
                 });
 
@@ -142,19 +169,24 @@ namespace Retouch_Photo2.Effects.Models
                 float radius = (float)value;
 
                 //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     //History
                     var previous = layer.Effect.StartingGaussianBlur_Radius;
-                    int index = layer.Control.Index;
-                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                    Effect.GaussianBlur_Radius = previous);
+                    history.UndoActions.Push(() =>
+                    {
+                        ILayer layer2 = layerage.Self;
+
+                        layer2.Effect.GaussianBlur_Radius = previous;
+                    });
 
                     layer.Effect.GaussianBlur_Radius = radius;
                 });
 
                 //History
-                this.ViewModel.Push(history);
+                this.ViewModel.HistoryPush(history);
 
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
             };

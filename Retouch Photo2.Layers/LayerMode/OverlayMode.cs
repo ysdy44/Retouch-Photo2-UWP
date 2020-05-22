@@ -1,7 +1,7 @@
 ﻿namespace Retouch_Photo2.Layers
 {
     /// <summary> 
-    /// Overlay mode of <see cref="ILayer"/>.
+    /// Overlay mode of <see cref="Layerage"/>.
     /// </summary>
     public enum OverlayMode
     {      

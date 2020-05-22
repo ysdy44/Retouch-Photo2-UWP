@@ -33,7 +33,6 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@TouchBar
@@ -111,11 +110,13 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void ValueChange(float value)
         {
-            this.SelectionViewModel.GeometryArrowValue = value;
+            this.ViewModel.GeometryArrowValue = value;
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 if (layer.Type == LayerType.GeometryArrow)
                 {
                     GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
@@ -131,11 +132,13 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.LeftArrowTailTypeControl.ArrowTailTypeChanged += (s, tailType) =>
             {
-                this.SelectionViewModel.GeometryArrowLeftTail = tailType;
+                this.ViewModel.GeometryArrowLeftTail = tailType;
 
                 //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     if (layer.Type == LayerType.GeometryArrow)
                     {
                         GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
@@ -152,11 +155,13 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.RightArrowTailTypeControl.ArrowTailTypeChanged += (s, tailType) =>
             {
-                this.SelectionViewModel.GeometryArrowRightTail = tailType;
+                this.ViewModel.GeometryArrowRightTail = tailType;
 
                 //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     if (layer.Type == LayerType.GeometryArrow)
                     {
                         GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
@@ -215,10 +220,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryArrowLayer
             {
-                LeftTail = this.SelectionViewModel.GeometryArrowLeftTail,
-                RightTail = this.SelectionViewModel.GeometryArrowRightTail,
+                LeftTail = this.ViewModel.GeometryArrowLeftTail,
+                RightTail = this.ViewModel.GeometryArrowRightTail,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.ViewModel.GeometryStyle
             };
         }
 

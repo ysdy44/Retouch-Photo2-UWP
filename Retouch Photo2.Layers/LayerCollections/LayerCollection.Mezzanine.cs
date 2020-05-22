@@ -9,33 +9,33 @@ namespace Retouch_Photo2.Layers
         /// Mezzanine a layer.
         /// </summary>
         /// <param name="mezzanineLayer"> The mezzanine layer. </param>
-        public static void Mezzanine(LayerCollection layerCollection, ILayer mezzanineLayer) => LayerCollection._mezzanine(layerCollection, mezzanineLayer, null);
+        public static void Mezzanine(LayerCollection layerCollection, Layerage mezzanineLayer) => LayerCollection._mezzanine(layerCollection, mezzanineLayer, null);
         /// <summary>
         /// Mezzanine layers.
         /// </summary>
         /// <param name="mezzanineLayers"> The mezzanine layers. </param>
-        public static void MezzanineRange(LayerCollection layerCollection, IEnumerable<ILayer> mezzanineLayers) => LayerCollection._mezzanine(layerCollection, null, mezzanineLayers);
+        public static void MezzanineRange(LayerCollection layerCollection, IEnumerable<Layerage> mezzanineLayers) => LayerCollection._mezzanine(layerCollection, null, mezzanineLayers);
 
-        private static void _mezzanine(LayerCollection layerCollection, ILayer mezzanineLayer, IEnumerable<ILayer> mezzanineLayers)
+        private static void _mezzanine(LayerCollection layerCollection, Layerage mezzanineLayer, IEnumerable<Layerage> mezzanineLayers)
         {
             //Layers
-            IEnumerable<ILayer> selectedLayers = LayerCollection.GetAllSelectedLayers(layerCollection);
-            ILayer outermost = LayerCollection.FindOutermost_SelectedLayer(selectedLayers);
+            IEnumerable<Layerage> selectedLayers = LayerCollection.GetAllSelectedLayers(layerCollection);
+            Layerage outermost = LayerCollection.FindOutermost_SelectedLayer(selectedLayers);
             //if (outermost == null) return; // If count = 0, it will be useless.
-            IList<ILayer> parentsChildren = layerCollection.GetParentsChildren(outermost);
+            IList<Layerage> parentsChildren = layerCollection.GetParentsChildren(outermost);
             int index = parentsChildren.IndexOf(outermost);
             if (index < 0) index = 0;
 
             if (mezzanineLayer!=null)
             {
-                mezzanineLayer.IsSelected = true;
+                mezzanineLayer.Self.IsSelected = true;
                 parentsChildren.Insert(index, mezzanineLayer);//Insert
             }
             else if (mezzanineLayers != null)
             {
-                foreach (ILayer child in mezzanineLayers)
+                foreach (Layerage child in mezzanineLayers)
                 {
-                    child.IsSelected = true;
+                    child.Self.IsSelected = true;
                     parentsChildren.Insert(index, child);//Insert
                 }
             }
@@ -45,11 +45,11 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Remove the mezzanine layer.
         /// </summary>
-        public static void RemoveMezzanineLayer(LayerCollection layerCollection, ILayer mezzanineLayer)
+        public static void RemoveMezzanineLayer(LayerCollection layerCollection, Layerage mezzanineLayer)
         {
             if (mezzanineLayer == null) return;
      
-            IList<ILayer> parentsChildren = layerCollection.GetParentsChildren(mezzanineLayer);
+            IList<Layerage> parentsChildren = layerCollection.GetParentsChildren(mezzanineLayer);
 
             parentsChildren.Remove(mezzanineLayer);
         }

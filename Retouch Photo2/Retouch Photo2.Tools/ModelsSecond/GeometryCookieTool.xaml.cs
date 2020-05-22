@@ -36,7 +36,6 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@TouchBar  
         internal GeometryCookieMode TouchBarMode
@@ -118,11 +117,13 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void InnerRadiusChange(float innerRadius)
         {
-            this.SelectionViewModel.GeometryCookieInnerRadius = innerRadius;
+            this.ViewModel.GeometryCookieInnerRadius = innerRadius;
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 if (layer.Type == LayerType.GeometryCookie)
                 {
                     GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
@@ -168,11 +169,13 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void SweepAngleChange(float sweepAngle)
         {
-            this.SelectionViewModel.GeometryCookieSweepAngle = sweepAngle;
+            this.ViewModel.GeometryCookieSweepAngle = sweepAngle;
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 if (layer.Type == LayerType.GeometryCookie)
                 {
                     GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
@@ -227,10 +230,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryCookieLayer
             {
-                InnerRadius = this.SelectionViewModel.GeometryCookieInnerRadius,
-                SweepAngle = this.SelectionViewModel.GeometryCookieSweepAngle,
+                InnerRadius = this.ViewModel.GeometryCookieInnerRadius,
+                SweepAngle = this.ViewModel.GeometryCookieSweepAngle,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.ViewModel.GeometryStyle
             };
         }
 

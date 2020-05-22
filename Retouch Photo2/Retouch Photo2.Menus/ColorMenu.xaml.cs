@@ -19,7 +19,6 @@ namespace Retouch_Photo2.Menus.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
 
         //@Construct
@@ -28,8 +27,8 @@ namespace Retouch_Photo2.Menus.Models
             this.InitializeComponent();
             this._button.CenterContent = new ColorEllipse
              (
-                  dataContext: this.SelectionViewModel,
-                  path: nameof(this.SelectionViewModel.Color),
+                  dataContext: this.ViewModel,
+                  path: nameof(this.ViewModel.Color),
                   dp: ColorEllipse.ColorProperty
              );
             this.ConstructStrings();
@@ -45,188 +44,61 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.ColorPicker.ColorChanged += (s, value) =>
             {
-                switch (this.SelectionViewModel.FillOrStroke)
+                switch (this.ViewModel.FillOrStroke)
                 {
                     case FillOrStroke.Fill:
-                        {
-                            //History
-                            IHistoryBase history = new IHistoryBase("Set fill");
-
-                            //Selection
-                            this.SelectionViewModel.Color = value;
-                            this.SelectionViewModel.SetValue((layer) =>
-                            {
-                                //History
-                                var previous = layer.Style.Fill;
-                                int index = layer.Control.Index;
-                                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                                Style.Fill = previous.Clone());
-
-                                layer.Style.Fill = BrushBase.ColorBrush(value);
-                            });
-
-                            //History
-                            this.ViewModel.Push(history);
-
-                            this.ViewModel.Invalidate();//Invalidate
-                        }
+                        this.ViewModel.MethodFillColorChanged(value);
                         break;
-
                     case FillOrStroke.Stroke:
-                        {
-                            //History
-                            IHistoryBase history = new IHistoryBase("Set stroke");
-
-                            //Selection
-                            this.SelectionViewModel.Color = value;
-                            this.SelectionViewModel.SetValue((layer) =>
-                            {
-                                //History
-                                var previous = layer.Style.Stroke;
-                                int index = layer.Control.Index;
-                                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                                Style.Stroke = previous.Clone());
-
-                                layer.Style.Stroke = BrushBase.ColorBrush(value);
-                            });
-
-                            //History
-                            this.ViewModel.Push(history);
-
-                            this.ViewModel.Invalidate();//Invalidate
-                        }
+                        this.ViewModel.MethodStrokeColorChanged(value);
                         break;
                 }
             };
         }
 
-
         private void ConstructColor2()
         {
-            //History
-            IHistoryBase history = null;
-
-
             //Color
             this.ColorPicker.ColorChangeStarted += (s, value) =>
             {
-                switch (this.SelectionViewModel.FillOrStroke)
+                switch (this.ViewModel.FillOrStroke)
                 {
                     case FillOrStroke.Fill:
-                        {
-                            history = new IHistoryBase("Set fill");
-
-                            //Selection
-                            this.SelectionViewModel.Color = value;
-                            this.SelectionViewModel.SetValue((layer) =>
-                            {
-                                layer.Style.CacheFill();
-                            });
-
-                            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                        }
+                        this.ViewModel.MethodFillColorChangeStarted(value);
                         break;
                     case FillOrStroke.Stroke:
-                        {
-                            history = new IHistoryBase("Set stroke");
-
-                            //Selection
-                            this.SelectionViewModel.Color = value;
-                            this.SelectionViewModel.SetValue((layer) =>
-                            {
-                                layer.Style.CacheStroke();
-                            });
-
-                            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                        }
-                            break;
+                        this.ViewModel.MethodStrokeColorChangeStarted(value);
+                        break;
                 }
             };
             this.ColorPicker.ColorChangeDelta += (s, value) =>
             {
-                switch (this.SelectionViewModel.FillOrStroke)
+                switch (this.ViewModel.FillOrStroke)
                 {
                     case FillOrStroke.Fill:
-                        {
-                            //Selection
-                            this.SelectionViewModel.Color = value;
-                            this.SelectionViewModel.SetValue((layer) =>
-                            {
-                                layer.Style.Fill = BrushBase.ColorBrush(value);
-                            });
-
-                            this.ViewModel.Invalidate();//Invalidate
-                        }
-                            break;
+                        this.ViewModel.MethodFillColorChangeDelta(value);
+                        break;
                     case FillOrStroke.Stroke:
-                        {
-                            //Selection
-                            this.SelectionViewModel.Color = value;
-                            this.SelectionViewModel.SetValue((layer) =>
-                            {
-                                layer.Style.Stroke = BrushBase.ColorBrush(value);
-                            });
-
-                            this.ViewModel.Invalidate();//Invalidate
-                        }
+                        this.ViewModel.MethodStrokeColorChangeDelta(value);
                         break;
                 }
             };
             this.ColorPicker.ColorChangeCompleted += (s, value) =>
             {
-                switch (this.SelectionViewModel.FillOrStroke)
+                switch (this.ViewModel.FillOrStroke)
                 {
                     case FillOrStroke.Fill:
-                        {
-                            //Selection
-                            this.SelectionViewModel.Color = value;
-                            this.SelectionViewModel.Fill = BrushBase.ColorBrush(value);
-                            this.SelectionViewModel.SetValue((layer) =>
-                            {
-                                //History
-                                var previous = layer.Style.StartingFill.Clone();
-                                int index = layer.Control.Index;
-                                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                                Style.Fill = previous.Clone());
-
-                                layer.Style.Fill = BrushBase.ColorBrush(value);
-                            });
-
-                            //History
-                            this.ViewModel.Push(history);
-
-                            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
-                        }
-                            break;
+                        this.ViewModel.MethodFillColorChangeCompleted(value);
+                        break;
                     case FillOrStroke.Stroke:
-                        {
-                            //Selection
-                            this.SelectionViewModel.Color = value;
-                            this.SelectionViewModel.Stroke = BrushBase.ColorBrush(value);
-                            this.SelectionViewModel.SetValue((layer) =>
-                            {
-                                //History
-                                var previous = layer.Style.StartingStroke.Clone();
-                                int index = layer.Control.Index;
-                                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                                Style.Stroke = previous.Clone());
-
-                                layer.Style.Stroke = BrushBase.ColorBrush(value);
-                            });
-
-                            //History
-                            this.ViewModel.Push(history);
-
-                            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
-                        }
+                        this.ViewModel.MethodStrokeColorChangeCompleted(value);
                         break;
                 }
             };
         }
 
-
     }
-        
+
     /// <summary> 
     /// Retouch_Photo2's the only <see cref = "TransformerMenu" />. 
     /// </summary>
@@ -237,7 +109,7 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content = 
+            this._button.ToolTip.Content =
             this._Expander.Title =
             this._Expander.CurrentTitle = resource.GetString("/Menus/Color");
         }

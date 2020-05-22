@@ -10,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="ILayer"/>'s GeometryPieLayer .
+    /// <see cref="Layer"/>'s GeometryPieLayer .
     /// </summary>
-    public partial class GeometryPieLayer : LayerBase, ILayer
+    public partial class GeometryPieLayer : Layer, ILayer
     {
 
         //@Override     
@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryPieLayer()
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(this.ToLayerage())
             {
                 Icon = new GeometryPieIcon(),
                 Type = this.ConstructStrings(),
@@ -39,7 +39,7 @@ namespace Retouch_Photo2.Layers.Models
         {
             GeometryPieLayer PieLayer = new GeometryPieLayer();
 
-            LayerBase.CopyWith(resourceCreator, PieLayer, this);
+            Layer.CopyWith(resourceCreator, PieLayer, this);
             return PieLayer;
         }
 

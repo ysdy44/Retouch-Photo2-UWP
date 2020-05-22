@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System;
@@ -37,11 +38,10 @@ namespace Retouch_Photo2.Menus.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel ;
 
         bool IsRatio => this.SettingViewModel.IsRatio;
-        Transformer SelectionTransformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
+        Transformer SelectionTransformer { get => this.ViewModel.Transformer; set => this.ViewModel.Transformer = value; }
                
 
         //@VisualState
@@ -70,8 +70,11 @@ namespace Retouch_Photo2.Menus.Models
             }
             set => this.SetTransformerMenuState(value);
         }
-
         
+        bool _isLoaded;
+        IndicatorMode IndicatorMode = IndicatorMode.LeftTop;
+        
+
         #region DependencyProperty
 
 
@@ -168,29 +171,25 @@ namespace Retouch_Photo2.Menus.Models
 
         #endregion
 
-        bool _isLoaded;
-        Transformer oldTransformer;
-        IndicatorMode IndicatorMode = IndicatorMode.LeftTop;
-
 
         //@Construct
         public TransformerMenu()
         {
             this.InitializeComponent();
-            this.DataContext = this.SelectionViewModel;
+            this.DataContext = this.ViewModel;
             this.ConstructDataContext
             (
-                 path: nameof(this.SelectionViewModel.SelectionMode),
+                 path: nameof(this.ViewModel.SelectionMode),
                  dp: TransformerMenu.ModeProperty
             );
             this.ConstructDataContext
             (
-                 path: nameof(this.SelectionViewModel.DisabledRadian),
+                 path: nameof(this.ViewModel.DisabledRadian),
                  dp: TransformerMenu.DisabledRadianProperty
             );
             this.ConstructDataContext
             (
-                 path: nameof(this.SelectionViewModel.Transformer),
+                 path: nameof(this.ViewModel.Transformer),
                  dp: TransformerMenu.TransformerProperty
             );
             this.ConstructStrings();
@@ -198,18 +197,21 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructMenu();
 
             this.Loaded += (s, e) => this._isLoaded = true;
+
+            this.ConstructWidthHeight();
+            this.ConstructRadianSkew();
+            this.ConstructXY();
+
+
+            this.ConstructIndicatorControl();
+
+
+            this.ConstructPositionRemoteControl();
             this.PositionRemoteButton.Click += (s, e) =>
             {
                 this._Expander.IsSecondPage = true;
                 this._Expander.CurrentTitle = (string)this.PositionRemoteToolTip.Content;
             };
-
-            this.ConstructPositionRemoteControl();
-            this.ConstructIndicatorControl();
-
-            this.ConstructWidthHeight();
-            this.ConstructRadianSkew();
-            this.ConstructXY();
         }
 
     }
@@ -447,53 +449,15 @@ namespace Retouch_Photo2.Menus.Models
         //RemoteControl
         private void ConstructPositionRemoteControl()
         {
+            Vector2 remote(Vector2 value) =>
+                (Math.Abs(value.X) > Math.Abs(value.Y)) ?
+                new Vector2(value.X, 0) :
+                new Vector2(0, value.Y);
 
-            this.PositionRemoteControl.Moved += (s, value) =>
-            {
-                Transformer transformer = this.SelectionTransformer;
-                Vector2 vector = value;
-
-                //Selection
-                this.SelectionTransformer = transformer + vector;
-                this.SelectionViewModel.SetValue((Transformer) =>
-                {
-                    Transformer.CacheTransform();
-                    Transformer.TransformAdd(vector);
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.PositionRemoteControl.ValueChangeStarted += (s, value) =>
-            {
-                //Selection
-                this.oldTransformer = this.SelectionTransformer;
-                this.SelectionViewModel.SetValue((Transformer) =>
-                {
-                    Transformer.CacheTransform();
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.PositionRemoteControl.ValueChangeDelta += (s, value) =>
-            {
-                Vector2 vector =
-                   (Math.Abs(value.X) > Math.Abs(value.Y)) ?
-                   new Vector2(value.X, 0) :
-                   new Vector2(0, value.Y);
-
-                //Selection
-                this.SelectionTransformer = this.oldTransformer + vector;
-                this.SelectionViewModel.SetValue((Transformer) =>
-                {
-                    Transformer.TransformAdd(vector);
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.PositionRemoteControl.ValueChangeCompleted += (s, value) => this.ViewModel.Invalidate(InvalidateMode.HD);
-
-
-
+            this.PositionRemoteControl.Moved += (s, value) => this.ViewModel.MethodTransformAdd(value);//Method
+            this.PositionRemoteControl.ValueChangeStarted += (s, value) => this.ViewModel.MethodTransformAddStarted();//Method
+            this.PositionRemoteControl.ValueChangeDelta += (s, value) => this.ViewModel.MethodTransformAddDelta(remote(value));//Method
+            this.PositionRemoteControl.ValueChangeCompleted += (s, value) => this.ViewModel.MethodTransformAddComplete(remote(value));//Method
         }
 
 
@@ -521,7 +485,7 @@ namespace Retouch_Photo2.Menus.Models
 
                 this.IndicatorMode = mode;//IndicatorMode
 
-                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
+                if (this.ViewModel.SelectionMode == ListViewSelectionMode.None) return;
 
                 Transformer transformer = this.SelectionTransformer;
                 Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
@@ -553,16 +517,9 @@ namespace Retouch_Photo2.Menus.Models
                 Matrix3x2.CreateRotation(-canvasStartingRadian, vector) *
                 Matrix3x2.CreateScale(this.IsRatio ? scale : 1, scale, vector) *
                 Matrix3x2.CreateRotation(canvasStartingRadian, vector);
-
-                //Selection
-                this.SelectionTransformer = transformer * matrix;
-                this.SelectionViewModel.SetValue((Transformer) =>
-                {
-                    Transformer.CacheTransform();
-                    Transformer.TransformMultiplies(matrix);
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                
+                //Method
+                this.ViewModel.MethodTransformMultiplies(matrix);
             };
 
 
@@ -582,16 +539,9 @@ namespace Retouch_Photo2.Menus.Models
                 Matrix3x2.CreateRotation(-canvasStartingRadian, vector) *
                 Matrix3x2.CreateScale(scale, this.IsRatio ? scale : 1, vector) *
                 Matrix3x2.CreateRotation(canvasStartingRadian, vector);
-
-                //Selection
-                this.SelectionTransformer = transformer * matrix;
-                this.SelectionViewModel.SetValue((Transformer) =>
-                {
-                    Transformer.CacheTransform();
-                    Transformer.TransformMultiplies(matrix);
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                
+                //Method
+                this.ViewModel.MethodTransformMultiplies(matrix);
             };
 
         }
@@ -613,16 +563,9 @@ namespace Retouch_Photo2.Menus.Models
 
                 float radian = canvasRadian - canvasStartingRadian - FanKit.Math.PiOver2;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(radian, vector);
-
-                //Selection
-                this.SelectionTransformer = transformer * matrix;
-                this.SelectionViewModel.SetValue((Transformer) =>
-                {
-                    Transformer.CacheTransform();
-                    Transformer.TransformMultiplies(matrix);
-                });
-
-                this.ViewModel.Invalidate();
+                
+                //Method
+                this.ViewModel.MethodTransformMultiplies(matrix);
             };
 
             this.SPicker.Minimum = -90;
@@ -647,24 +590,18 @@ namespace Retouch_Photo2.Menus.Models
                     case IndicatorMode.LeftTop:
                     case IndicatorMode.Top:
                     case IndicatorMode.RightTop:
-                        {
                             postion = new Vector2(-horizontalHalf, 0);
                             center = transformer.CenterTop;
-                        }
                         break;
                     case IndicatorMode.LeftBottom:
                     case IndicatorMode.Bottom:
                     case IndicatorMode.RightBottom:
-                        {
                             postion = new Vector2(-horizontalHalf, -verticalHalf * 2);
                             center = transformer.CenterBottom;
-                        }
                         break;
                     default:
-                        {
                             postion = new Vector2(-horizontalHalf, -verticalHalf);
                             center = transformer.Center;
-                        }
                         break;
                 }
 
@@ -674,15 +611,9 @@ namespace Retouch_Photo2.Menus.Models
                 Matrix3x2.CreateRotation(radians) *
                 Matrix3x2.CreateTranslation(center);
                 Transformer zeroTransformer = new Transformer(horizontalHalf * 2, verticalHalf * 2, postion);
-
-                //Selection
-                this.SelectionTransformer = zeroTransformer * matrix;
-                this.SelectionViewModel.SetValue((Transformer) =>
-                {
-                    Transformer.Transform.Destination = zeroTransformer * matrix;
-                });
-
-                this.ViewModel.Invalidate();
+                
+                //Method
+                this.ViewModel.MethodTransformMultiplies(matrix);
             };
 
         }
@@ -700,15 +631,8 @@ namespace Retouch_Photo2.Menus.Models
                 Vector2 indicator = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
                 Vector2 vector = new Vector2(value - indicator.X, 0);
 
-                //Selection
-                this.SelectionTransformer = transformer + vector;
-                this.SelectionViewModel.SetValue((Transformer) =>
-                {
-                    Transformer.CacheTransform();
-                    Transformer.TransformAdd(vector);
-                });
-
-                this.ViewModel.Invalidate();
+                //Method
+                this.ViewModel.MethodTransformAdd(vector);
             };
 
             this.YPicker.Minimum = int.MinValue;
@@ -719,15 +643,8 @@ namespace Retouch_Photo2.Menus.Models
                 Vector2 indicator = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
                 Vector2 vector = new Vector2(0, value - indicator.Y);
 
-                //Selection
-                this.SelectionTransformer = transformer + vector;
-                this.SelectionViewModel.SetValue((Transformer) =>
-                {
-                    Transformer.CacheTransform();
-                    Transformer.TransformAdd(vector);
-                });
-
-                this.ViewModel.Invalidate();
+                //Method
+                this.ViewModel.MethodTransformAdd(vector);
             };
 
         }
@@ -825,4 +742,5 @@ namespace Retouch_Photo2.Menus.Models
         }
 
     }
+    
 }

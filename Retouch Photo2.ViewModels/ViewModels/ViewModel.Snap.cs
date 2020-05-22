@@ -44,7 +44,7 @@ namespace Retouch_Photo2.ViewModels
             float scale = this.CanvasTransformer.Scale;
             this.VectorBorderSnap.NodeRadius = FanKit.Math.NodeRadius / scale;
         }
-        public void VectorBorderSnapStarted(ILayer firstLayer)
+        public void VectorBorderSnapStarted(Layerage firstLayer)
         {
             if (firstLayer != null)
             {
@@ -55,7 +55,7 @@ namespace Retouch_Photo2.ViewModels
             float scale = this.CanvasTransformer.Scale;
             this.VectorBorderSnap.NodeRadius = FanKit.Math.NodeRadius / scale;
         }
-        public void BorderBorderSnapStarted(ILayer firstLayer)
+        public void BorderBorderSnapStarted(Layerage firstLayer)
         {
             if (firstLayer != null)
             {
@@ -72,7 +72,7 @@ namespace Retouch_Photo2.ViewModels
         {
             yield return new TransformerBorder(transformer);
         }
-        private IEnumerable<TransformerBorder> GetSnapDestinations(ILayer firstLayer)
+        private IEnumerable<TransformerBorder> GetSnapDestinations(Layerage firstLayer)
         {
             //CanvasTransformer
             float width = this.CanvasTransformer.Width;
@@ -83,19 +83,19 @@ namespace Retouch_Photo2.ViewModels
             //Parents
             if (firstLayer.Parents != null)
             {
-                Transformer transformer = firstLayer.Parents.Transform.Destination;
+                Transformer transformer = firstLayer.Parents.Self.Transform.Destination;
                 yield return new TransformerBorder(transformer);
             }
 
 
             //Layers
-            IList<ILayer> layers = this.LayerCollection.GetParentsChildren(firstLayer);
+            IList<Layerage> layers = this.LayerCollection.GetParentsChildren(firstLayer);
 
-            foreach (ILayer layer in layers)
+            foreach (Layerage layer in layers)
             {
-                if (layer.IsSelected == false)
+                if (layer.Self.IsSelected == false)
                 {
-                    Transformer transformer = layer.Transform.Destination;
+                    Transformer transformer = layer.Self.Transform.Destination;
                     yield return new TransformerBorder(transformer);
                 }
             }

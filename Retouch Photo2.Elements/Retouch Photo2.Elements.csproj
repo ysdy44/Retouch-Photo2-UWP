@@ -224,8 +224,8 @@
     <Compile Include="%24SettingPages\PhoneLayout.xaml.cs">
       <DependentUpon>PhoneLayout.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XMLs\XML.Photos.cs" />
     <Compile Include="XMLs\XML.ThemeFactory.cs" />
-    <Compile Include="XMLs\XML.Photo.cs" />
     <Compile Include="XMLs\XML.DeviceLayout.cs" />
     <Compile Include="XMLs\XML.Photocopier.cs" />
     <Compile Include="XMLs\XML.DeviceLayoutTypeFactory.cs" />

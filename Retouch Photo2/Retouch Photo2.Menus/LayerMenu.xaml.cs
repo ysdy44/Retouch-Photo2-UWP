@@ -24,7 +24,6 @@ namespace Retouch_Photo2.Menus.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Converter
         private bool VisibilityToBoolConverter(Visibility visibility) => visibility == Visibility.Visible;
@@ -118,8 +117,9 @@ namespace Retouch_Photo2.Menus.Models
             this.OpacitySlider.ValueChangeStarted += (s, value) =>
             {
                 //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
                     layer.CacheOpacity();
                 });
 
@@ -130,8 +130,9 @@ namespace Retouch_Photo2.Menus.Models
                 float opacity = (float)value;
 
                 //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
                     layer.Opacity = opacity;
                 });
 
@@ -142,23 +143,28 @@ namespace Retouch_Photo2.Menus.Models
                 float opacity = (float)value;
 
                 //History
-                IHistoryBase history = new IHistoryBase("Set opacity");
+                LayersPropertyHistory history = new LayersPropertyHistory("Set opacity");
 
                 //Selection
-                this.SelectionViewModel.Opacity = opacity;
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.Opacity = opacity;
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     //History
                     var previous = layer.StartingOpacity;
-                    int index = layer.Control.Index;
-                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                    Opacity = previous);
+                    history.UndoActions.Push(() =>
+                    {
+                        ILayer layer2 = layerage.Self;
+
+                        layer2.Opacity = previous;
+                    });
 
                     layer.Opacity = opacity;
                 });
 
                 //History
-                this.ViewModel.Push(history);
+                this.ViewModel.HistoryPush(history);
 
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             };
@@ -170,7 +176,7 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.BlendModeButton.Click += (s, e) =>
             {
-                this.BlendModeComboBox.Mode = this.SelectionViewModel.BlendMode;
+                this.BlendModeComboBox.Mode = this.ViewModel.BlendMode;
 
                 this._Expander.IsSecondPage = true;
                 this._Expander.CurrentTitle = this.BlendModeTextBlock.Text;
@@ -178,23 +184,28 @@ namespace Retouch_Photo2.Menus.Models
             this.BlendModeComboBox.ModeChanged += (s, mode) =>
             {
                 //History
-                IHistoryBase history = new IHistoryBase("Set blend mode");
+                LayersPropertyHistory history = new LayersPropertyHistory("Set blend mode");
 
                 //Selection
-                this.SelectionViewModel.BlendMode = mode;
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.BlendMode = mode;
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     //History
                     var previous = layer.BlendMode;
-                    int index = layer.Control.Index;
-                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                    BlendMode = previous);
+                    history.UndoActions.Push(() =>
+                    {
+                        ILayer layer2 = layerage.Self;
+
+                        layer2.BlendMode = previous;
+                    });
 
                     layer.BlendMode = mode;
                 });
 
                 //History
-                this.ViewModel.Push(history);
+                this.ViewModel.HistoryPush(history);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -205,26 +216,31 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.VisibilityButton.Click += (s, e) =>
             {
-                Visibility value = (this.SelectionViewModel.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
+                Visibility value = (this.ViewModel.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
 
                 //History
-                IHistoryBase history = new IHistoryBase("Set visibility");
+                LayersPropertyHistory history = new LayersPropertyHistory("Set visibility");
 
                 //Selection
-                this.SelectionViewModel.Visibility = value;
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.Visibility = value;
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     //History
                     var previous = layer.Visibility;
-                    int index = layer.Control.Index;
-                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                    Visibility = previous);
+                    history.UndoActions.Push(() =>
+                    {
+                        ILayer layer2 = layerage.Self;
+
+                        layer2.Visibility = previous;
+                    });
 
                     layer.Visibility = value;
                 });
 
                 //History
-                this.ViewModel.Push(history);
+                this.ViewModel.HistoryPush(history);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -236,23 +252,28 @@ namespace Retouch_Photo2.Menus.Models
             this.TagTypeControl.TypeChanged += (s, type) =>
             {
                 //History
-                IHistoryBase history = new IHistoryBase("Set tag type");
+                LayersPropertyHistory history = new LayersPropertyHistory("Set tag type");
 
                 //Selection
-                this.SelectionViewModel.TagType = type;
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.TagType = type;
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     //History
                     var previous = layer.TagType;
-                    int index = layer.Control.Index;
-                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                    TagType = previous);
-                    
+                    history.UndoActions.Push(() =>
+                    {
+                        ILayer layer2 = layerage.Self;
+
+                        layer2.TagType = previous;
+                    });
+
                     layer.TagType = type;
                 });
 
                 //History
-                this.ViewModel.Push(history);
+                this.ViewModel.HistoryPush(history);
             };
         }
 
@@ -268,12 +289,14 @@ namespace Retouch_Photo2.Menus.Models
             //Follow
             this.FollowToggleControl.Tapped += (s, e) =>
             {
-                bool value = (this.SelectionViewModel.IsFollowTransform) ? false : true;
+                bool value = (this.ViewModel.IsFollowTransform) ? false : true;
 
                 //Selection
-                this.SelectionViewModel.IsFollowTransform = value;
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.IsFollowTransform = value;
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     layer.Style.IsFollowTransform = value;
                 });
 

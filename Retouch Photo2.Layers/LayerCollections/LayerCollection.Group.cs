@@ -13,23 +13,23 @@ namespace Retouch_Photo2.Layers
         /// and insert to parents's parents's children
         /// </summary>
         /// <param name="layer"> The layer. </param>
-        public static bool ReleaseGroupLayer(LayerCollection layerCollection, ILayer child)
-        {
-            ILayer layer = child.Parents;
-            if (layer != null)
+        public static bool ReleaseGroupLayer(LayerCollection layerCollection, Layerage child)
+        {      
+            Layerage layerage = child.Parents;
+            if (layerage != null)
             {
-                IList<ILayer> children = layerCollection.GetParentsChildren(child);
-                IList<ILayer> parentsChildren = layerCollection.GetParentsChildren(layer);
-                int index = parentsChildren.IndexOf(layer);
+                IList<Layerage> children = layerCollection.GetParentsChildren(child);
+                IList<Layerage> parentsChildren = layerCollection.GetParentsChildren(layerage);
+                int index = parentsChildren.IndexOf(layerage);
                 if (index < 0) index = 0;
 
                 children.Remove(child);
-                child.IsSelected = true;
+                ILayer layer = child.Self;
+                layer.IsSelected = true;
 
                 parentsChildren.Insert(index, child);
                 return true;
             }
-
             return false;
         }
 
@@ -40,34 +40,36 @@ namespace Retouch_Photo2.Layers
         public static void UnGroupAllSelectedLayer(LayerCollection layerCollection)
         {
             //Layers
-            IEnumerable<ILayer> selectedLayers = LayerCollection.GetAllSelectedLayers(layerCollection);
-            ILayer outermost = LayerCollection.FindOutermost_SelectedLayer(selectedLayers);
+            IEnumerable<Layerage> selectedLayerages = LayerCollection.GetAllSelectedLayers(layerCollection);
+            Layerage outermost = LayerCollection.FindOutermost_SelectedLayer(selectedLayerages);
             if (outermost == null) return;
-            IList<ILayer> parentsChildren = layerCollection.GetParentsChildren(outermost);
+            IList<Layerage> parentsChildren = layerCollection.GetParentsChildren(outermost);
             int index = parentsChildren.IndexOf(outermost);
             if (index < 0) index = 0;
 
 
             do
             {
-                ILayer groupLayer = selectedLayers.FirstOrDefault(l => l.Type == LayerType.Group);
-                if (groupLayer == null) break;
+                Layerage groupLayerage = selectedLayerages.FirstOrDefault(l => l.Self.Type == LayerType.Group);
+                if (groupLayerage == null) break;
 
                 //Insert
-                foreach (ILayer child in groupLayer.Children)
+                foreach (Layerage layerage in groupLayerage.Children)
                 {
-                    child.IsSelected = true;
-                    parentsChildren.Insert(index, child);
+                    ILayer layer = layerage.Self;
+
+                    layer.IsSelected = true;
+                    parentsChildren.Insert(index, layerage);
                 }
-                groupLayer.Children.Clear();
+                groupLayerage.Children.Clear();
 
                 //Remove
                 {
-                    IList<ILayer> groupLayerParentsChildren = layerCollection.GetParentsChildren(groupLayer);
-                    groupLayerParentsChildren.Remove(groupLayer);
+                    IList<Layerage> groupLayerageParentsChildren = layerCollection.GetParentsChildren(groupLayerage);
+                    groupLayerageParentsChildren.Remove(groupLayerage);
                 }
 
-            } while (selectedLayers.Any(l => l.Type == LayerType.Group) == false);
+            } while (selectedLayerages.Any(l => l.Self.Type == LayerType.Group) == false);
         }
 
 
@@ -75,17 +77,17 @@ namespace Retouch_Photo2.Layers
         /// Group all selected layers.
         /// </summary>
         public static void GroupAllSelectedLayers(LayerCollection layerCollection)
-        {
+        {     
             //Layers
-            IEnumerable<ILayer> selectedLayers = LayerCollection.GetAllSelectedLayers(layerCollection);
-            ILayer outermost = LayerCollection.FindOutermost_SelectedLayer(selectedLayers);
+            IEnumerable<Layerage> selectedLayerages = LayerCollection.GetAllSelectedLayers(layerCollection);
+            Layerage outermost = LayerCollection.FindOutermost_SelectedLayer(selectedLayerages);
             if (outermost == null) return;
-            IList<ILayer> parentsChildren = layerCollection.GetParentsChildren(outermost);
+            IList<Layerage> parentsChildren = layerCollection.GetParentsChildren(outermost);
             int index = parentsChildren.IndexOf(outermost);
             if (index < 0) index = 0;
 
             //GroupLayer
-            IEnumerable<Transformer> transformers = from l in selectedLayers select l.GetActualDestinationWithRefactoringTransformer;
+            IEnumerable<Transformer> transformers = from l in selectedLayerages select l.Self.GetActualDestinationWithRefactoringTransformer;
             TransformerBorder border = new TransformerBorder(transformers);
             Transformer transformer = border.ToTransformer();
             GroupLayer groupLayer = new GroupLayer
@@ -94,19 +96,23 @@ namespace Retouch_Photo2.Layers
                 IsExpand = false,
                 Transform = new Transform(transformer)
             };
+            Layer.Instances.Add(groupLayer);
+            Layerage groupLayerage = groupLayer.ToLayerage();
 
             //Temp
-            foreach (ILayer child in selectedLayers)
+            foreach (Layerage child in selectedLayerages)
             {
-                IList<ILayer> childParentsChildren = layerCollection.GetParentsChildren(child);
-                childParentsChildren.Remove(child);
+                ILayer child2 = child.Self;
 
-                child.IsSelected = false;
-                groupLayer.Children.Add(child);
+                IList<Layerage> childParentsChildren = layerCollection.GetParentsChildren(child);
+                childParentsChildren.Remove(child);
+                child2.IsSelected = false;
+
+                groupLayerage.Children.Add(child);
             }
 
             //Insert
-            parentsChildren.Insert(index, groupLayer);
+            parentsChildren.Insert(index, groupLayerage);
         }
 
 

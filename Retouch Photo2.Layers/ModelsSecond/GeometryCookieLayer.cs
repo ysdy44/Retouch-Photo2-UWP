@@ -10,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="ILayer"/>'s GeometryCookieLayer .
+    /// <see cref="Layer"/>'s GeometryCookieLayer .
     /// </summary>
-    public partial class GeometryCookieLayer : LayerBase, ILayer
+    public partial class GeometryCookieLayer : Layer, ILayer
     {
 
         //@Override     
@@ -29,7 +29,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryCookieLayer()
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(this.ToLayerage())
             {
                 Icon = new GeometryCookieIcon(),
                 Type = this.ConstructStrings(),
@@ -41,7 +41,7 @@ namespace Retouch_Photo2.Layers.Models
         {
             GeometryCookieLayer cookieLayer = new GeometryCookieLayer();
 
-            LayerBase.CopyWith(resourceCreator, cookieLayer, this);
+            Layer.CopyWith(resourceCreator, cookieLayer, this);
             return cookieLayer;
         }
 

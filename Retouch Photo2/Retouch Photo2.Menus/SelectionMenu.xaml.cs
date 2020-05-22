@@ -10,19 +10,20 @@ using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus.Models
-{
+{            //TODO：
+             /*
     public class Clipboard
     {
         ViewModel ViewModel => App.ViewModel;
 
 
         /// <summary> The single copyed layer. </summary>
-        public ILayer CloneLayer => this.Layer?.Clone(this.ViewModel.CanvasDevice);
-        private ILayer Layer;
+        public Layerage CloneLayer => this.Layer?.Clone(this.ViewModel.CanvasDevice);
+        private Layerage Layer;
 
         /// <summary> The all copyed layers. </summary> 
-        public IEnumerable<ILayer> CloneLayers => this.Layers == null ? null : (from layer in this.Layers select layer.Clone(this.ViewModel.CanvasDevice));
-        private IEnumerable<ILayer> Layers;
+        public IEnumerable<Layerage> CloneLayers => this.Layers == null ? null : (from layer in this.Layers select layer.Clone(this.ViewModel.CanvasDevice));
+        private IEnumerable<Layerage> Layers;
 
 
         public ListViewSelectionMode SelectionMode { get; set; }
@@ -34,19 +35,21 @@ namespace Retouch_Photo2.Menus.Models
             this.Layers = null;
             this.SelectionMode = ListViewSelectionMode.None;
         }
-        public void SetModeSingle(ILayer layer)
+        public void SetModeSingle(Layerage layer)
         {
-            this.Layer = layer.Clone(this.ViewModel.CanvasDevice);
+            LayerBase layer2 = layer.Self;
+            this.Layer = layer2.Clone(this.ViewModel.CanvasDevice);
             this.Layers = null;
             this.SelectionMode = ListViewSelectionMode.Single;
         }
-        public void SetModeMultiple(IEnumerable<ILayer> layers)
+        public void SetModeMultiple(IEnumerable<Layerage> layers)
         {
             this.Layer = null;
             this.Layers = from layer in layers select layer.Clone(this.ViewModel.CanvasDevice);
             this.SelectionMode = ListViewSelectionMode.Multiple;
         }
     }
+              */
 
     /// <summary> 
     /// Retouch_Photo2's the only <see cref = "SelectionMenu" />. 
@@ -55,9 +58,8 @@ namespace Retouch_Photo2.Menus.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
-        Clipboard Clipboard = new Clipboard();
+     //   Clipboard Clipboard = new Clipboard();
 
         //@Construct
         public SelectionMenu()
@@ -139,21 +141,22 @@ namespace Retouch_Photo2.Menus.Models
         //Edit
         private void ConstructEdit()
         {
-
+            //TODO：
+            /*
             this.CutButton.Click += (s, e) =>
             {
                 //Selection
-                switch (this.SelectionViewModel.SelectionMode)
+                switch (this.ViewModel.SelectionMode)
                 {
                     case ListViewSelectionMode.None: this.Clipboard.SetModeNone(); break;
-                    case ListViewSelectionMode.Single: this.Clipboard.SetModeSingle(this.SelectionViewModel.Layer); break;
-                    case ListViewSelectionMode.Multiple: this.Clipboard.SetModeMultiple(this.SelectionViewModel.Layers); break;
+                    case ListViewSelectionMode.Single: this.Clipboard.SetModeSingle(this.ViewModel.Layer); break;
+                    case ListViewSelectionMode.Multiple: this.Clipboard.SetModeMultiple(this.ViewModel.Layers); break;
                 }
                 this.PasteButton.IsEnabled = this.Clipboard.CanPaste;//PasteButton
 
                 LayerCollection.RemoveAllSelectedLayers(this.ViewModel.LayerCollection);//Remove
 
-                this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
+                this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
 
                 LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                 LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
@@ -162,31 +165,34 @@ namespace Retouch_Photo2.Menus.Models
             };
 
             this.DuplicateButton.Click += (s, e) =>
-            {
+            {          
+                         
+
                 //Selection
-                switch (this.SelectionViewModel.SelectionMode)
+                switch (this.ViewModel.SelectionMode)
                 {
                     case ListViewSelectionMode.None: break;
-                    case ListViewSelectionMode.Single: LayerCollection.Mezzanine(this.ViewModel.LayerCollection, this.SelectionViewModel.Layer.Clone(this.ViewModel.CanvasDevice)); break;
-                    case ListViewSelectionMode.Multiple: LayerCollection.MezzanineRange(this.ViewModel.LayerCollection, from layer in this.SelectionViewModel.Layers select layer.Clone(this.ViewModel.CanvasDevice)); break;
+                    case ListViewSelectionMode.Single: LayerCollection.Mezzanine(this.ViewModel.LayerCollection, this.ViewModel.Layer.Clone(this.ViewModel.CanvasDevice)); break;
+                    case ListViewSelectionMode.Multiple: LayerCollection.MezzanineRange(this.ViewModel.LayerCollection, from layer in this.ViewModel.Layers select layer.Clone(this.ViewModel.CanvasDevice)); break;
                 }
                 
                 LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                 LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
 
-                this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);
+                this.ViewModel.SetMode(this.ViewModel.LayerCollection);
 
                 this.ViewModel.Invalidate();//Invalidate
+                          
             };
 
             this.CopyButton.Click += (s, e) =>
             {
                 //Selection
-                switch (this.SelectionViewModel.SelectionMode)
+                switch (this.ViewModel.SelectionMode)
                 {
                     case ListViewSelectionMode.None: this.Clipboard.SetModeNone(); break;
-                    case ListViewSelectionMode.Single: this.Clipboard.SetModeSingle(this.SelectionViewModel.Layer); break;
-                    case ListViewSelectionMode.Multiple: this.Clipboard.SetModeMultiple(this.SelectionViewModel.Layers); break;
+                    case ListViewSelectionMode.Single: this.Clipboard.SetModeSingle(this.ViewModel.Layer); break;
+                    case ListViewSelectionMode.Multiple: this.Clipboard.SetModeMultiple(this.ViewModel.Layers); break;
                 }
                 this.PasteButton.IsEnabled = this.Clipboard.CanPaste;//PasteButton
             };
@@ -201,7 +207,7 @@ namespace Retouch_Photo2.Menus.Models
                     case ListViewSelectionMode.Multiple: LayerCollection.MezzanineRange(this.ViewModel.LayerCollection, this.Clipboard.CloneLayers); break;
                 }
 
-                this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
+                this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
 
                 LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                 LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
@@ -213,7 +219,7 @@ namespace Retouch_Photo2.Menus.Models
             {
                 LayerCollection.RemoveAllSelectedLayers(this.ViewModel.LayerCollection);//Remove
 
-                this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
+                this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
 
                 LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                 LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
@@ -221,6 +227,8 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
+
+             */
         }
 
 
@@ -231,35 +239,33 @@ namespace Retouch_Photo2.Menus.Models
             this.AllButton.Click += (s, e) =>
             {
                 //Selection
-                this.SelectionViewModel.SetValue((layer)=>
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     layer.IsSelected = false;
                 });
-                foreach (ILayer layer in this.ViewModel.LayerCollection.RootLayers)
+                foreach (Layerage layer in this.ViewModel.LayerCollection.RootLayers)
                 {
-                    layer.IsSelected = true;
+                    layer.Self.IsSelected = true;
                 }
 
-                this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
-
+                this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
                 LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                 LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
-
                 this.ViewModel.Invalidate();//Invalidate
             };
 
             this.DeselectButton.Click += (s, e) =>
             {
                 //Selection
-                foreach (ILayer layer in this.ViewModel.LayerCollection.RootLayers)
+                foreach (Layerage layer in this.ViewModel.LayerCollection.RootLayers)
                 {
-                    layer.IsSelected = false;
+                    layer.Self.IsSelected = false;
                 }
 
-                this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
-
+                this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
                 LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
-
                 this.ViewModel.Invalidate();//Invalidate
             };
             
@@ -274,11 +280,9 @@ namespace Retouch_Photo2.Menus.Models
             {
                 LayerCollection.GroupAllSelectedLayers(this.ViewModel.LayerCollection);
 
-                this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);
-
+                this.ViewModel.SetMode(this.ViewModel.LayerCollection);
                 LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                 LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
-
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -286,27 +290,23 @@ namespace Retouch_Photo2.Menus.Models
             {
                 LayerCollection.UnGroupAllSelectedLayer(this.ViewModel.LayerCollection);
 
-                this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);
-
+                this.ViewModel.SetMode(this.ViewModel.LayerCollection);
                 LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                 LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
-
                 this.ViewModel.Invalidate();//Invalidate
             };
 
             this.ReleaseButton.Click += (s, e) =>
             {
                 //Selection
-                this.SelectionViewModel.SetValue((layer)=> 
+                this.ViewModel.SetValue((layerage) =>
                 {
-                    LayerCollection.ReleaseGroupLayer(this.ViewModel.LayerCollection, layer);
+                    LayerCollection.ReleaseGroupLayer(this.ViewModel.LayerCollection, layerage);
                 });
 
-                this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);
-                
+                this.ViewModel.SetMode(this.ViewModel.LayerCollection);
                 LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                 LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
-
                 this.ViewModel.Invalidate();//Invalidate
             };
         }

@@ -19,12 +19,11 @@ namespace Retouch_Photo2.Tools
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
-        Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
-        ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
+        Transformer Transformer { get => this.ViewModel.Transformer; set => this.ViewModel.Transformer = value; }
+        ListViewSelectionMode Mode => this.ViewModel.SelectionMode;
         ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
 
         VectorBorderSnap Snap => this.ViewModel.VectorBorderSnap;
@@ -32,7 +31,7 @@ namespace Retouch_Photo2.Tools
         bool IsCenter => this.SettingViewModel.IsCenter;
         bool IsSquare => this.SettingViewModel.IsSquare;
 
-        ILayer MezzanineLayer = null;
+        Layerage MezzanineLayer;
 
 
         /// <summary>
@@ -57,19 +56,24 @@ namespace Retouch_Photo2.Tools
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
             //Snap         
-            if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(this.SelectionViewModel.GetFirstLayer());
+            if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(this.ViewModel.GetFirstLayer());
 
             //Selection
             Transformer transformer = new Transformer(canvasStartingPoint, canvasPoint, this.IsCenter, this.IsSquare);
             this.Transformer = transformer;
-            this.SelectionViewModel.SetModeExtended();//Selection
-            
+            this.ViewModel.SetModeExtended();//Selection
+
+            //History
+            this.ViewModel.HistoryPushLayeragesHistory("Add layer");
+                       
             //Mezzanine
-            this.MezzanineLayer = createLayer(transformer);
+            ILayer layer= createLayer(transformer);
+            Layer.Instances.Add(layer);
+            this.MezzanineLayer = layer.ToLayerage();
             LayerCollection.Mezzanine(this.ViewModel.LayerCollection, this.MezzanineLayer);
 
             //Text
-            this.ViewModel.SetTextWidthHeight(transformer);
+            //this.ViewModel.SetTextWidthHeight(transformer);
             this.ViewModel.TextVisibility = Visibility.Visible;
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
@@ -89,10 +93,11 @@ namespace Retouch_Photo2.Tools
                 this.Transformer = transformer;
 
                 //Mezzanine
-                this.MezzanineLayer.Transform = new Transform(transformer);
-                this.MezzanineLayer.Style.DeliverBrushPoints(transformer);
+                ILayer mezzanineLayer = this.MezzanineLayer.Self;
+                mezzanineLayer.Transform = new Transform(transformer);
+                mezzanineLayer.Style.DeliverBrushPoints(transformer);
 
-            this.ViewModel.SetTextWidthHeight(transformer);//Text
+                //this.ViewModel.SetTextWidthHeight(transformer);//Text
                 this.ViewModel.Invalidate();//Invalidate
             }
 
@@ -120,42 +125,30 @@ namespace Retouch_Photo2.Tools
                     this.Transformer = transformer;
 
                     //Mezzanine
-                    this.SelectionViewModel.SetModeSingle(this.MezzanineLayer);//Selection
-                    this.MezzanineLayer.Transform = new Transform(transformer);
-                    this.MezzanineLayer.IsSelected = true;
+                    ILayer mezzanineLayer = this.MezzanineLayer.Self;
+                    mezzanineLayer.Transform = new Transform(transformer);
+                    mezzanineLayer.IsSelected = true;
 
                     //Selection
-                    this.SelectionViewModel.SetModeSingle(this.MezzanineLayer);
+                    this.ViewModel.SetModeSingle(this.MezzanineLayer);
                     LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                     LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
-
-
-                    //History
-                    IHistoryBase history = new IHistoryBase("Add layer");
-                    var previous = this.MezzanineLayer.Control.Index;
-                    history.Undos.Push(() =>
-                    {
-                        ILayer layer = this.ViewModel.LayerCollection.RootControls[previous].Layer;
-                        var parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(layer);
-                        parentsChildren.Remove(layer);
-                    });
-                    //History
-                    this.ViewModel.Push(history);
-
-
+                    
                     this.MezzanineLayer = null;
-                    this.ViewModel.TextVisibility = Visibility.Collapsed;//Text
+                    //this.ViewModel.TextVisibility = Visibility.Collapsed;//Text
                     this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                 }
+                /*
                 else
                 {
                     LayerCollection.RemoveMezzanineLayer(this.ViewModel.LayerCollection, this.MezzanineLayer);//Mezzanine
 
                     //Selection
-                    this.SelectionViewModel.SetModeNone();
+                    this.ViewModel.SetModeNone();
                     LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                     LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
                 }
+                 */
             }
 
             if (this.TransformerTool.Complete(startingPoint, point)) return;//TransformerTool

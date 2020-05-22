@@ -10,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="ILayer"/>'s GeometryDiamondLayer .
+    /// <see cref="Layer"/>'s GeometryDiamondLayer .
     /// </summary>
-    public class GeometryDiamondLayer : LayerBase, ILayer
+    public class GeometryDiamondLayer : Layer, ILayer
     {
 
         //@Override     
@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryDiamondLayer()
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(this.ToLayerage())
             {
                 Icon = new GeometryDiamondIcon(),
                 Type = this.ConstructStrings(),
@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Layers.Models
                 Mid = this.Mid
             };
 
-            LayerBase.CopyWith(resourceCreator, DiamondLayer, this);
+            Layer.CopyWith(resourceCreator, DiamondLayer, this);
             return DiamondLayer;
         }
         

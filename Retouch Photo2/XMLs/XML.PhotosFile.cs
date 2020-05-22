@@ -27,10 +27,19 @@ namespace Retouch_Photo2
         {
             //Create an XDocument object.
             string path = $"{ApplicationData.Current.TemporaryFolder.Path}/Photos.xml";
-            XDocument document = XDocument.Load(path);
 
-            IEnumerable<Photo> photos = Retouch_Photo2.Elements.XML.LoadPhotos(document);
-            return photos;
+            try
+            {
+                XDocument document = XDocument.Load(path);
+
+                IEnumerable<Photo> photos = Retouch_Photo2.Elements.XML.LoadPhotos(document);
+                return photos;
+            }
+            catch (Exception)
+            {
+                IEnumerable<Photo> photos = new List<Photo>();
+                return photos;
+            }
         }
 
 

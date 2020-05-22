@@ -12,19 +12,21 @@ namespace Retouch_Photo2.Layers
         /// <param name="source"> The source layer. </param>
         /// <param name="destinationOverlayMode"> The destination OverlayMode. </param>
         /// <param name="sourceIsSelected"> The source SelectMode. </param>
-        public static void DragComplete(LayerCollection layerCollection, ILayer destination, ILayer source, OverlayMode destinationOverlayMode, bool sourceIsSelected)
-        {
+        public static void DragComplete(LayerCollection layerCollection, Layerage destination, Layerage source, OverlayMode destinationOverlayMode, bool sourceIsSelected)
+        {     
             if (source == null) return;
             if (destination == null) return;
+            ILayer destination2 = destination.Self;
+            ILayer source2 = source.Self;
 
-            destination.OverlayMode = OverlayMode.None;
-            if (destination.IsSelected) return;
+            destination2.Control.OverlayMode = OverlayMode.None;
+            if (destination2.IsSelected) return;
             if (destinationOverlayMode == OverlayMode.None) return;
 
             if (source == destination) return;
 
 
-            bool isSelected = source.IsSelected;
+            bool isSelected = source2.IsSelected;
             if (isSelected == false)
             {
                 switch (destinationOverlayMode)
@@ -60,7 +62,7 @@ namespace Retouch_Photo2.Layers
             }
             else
             {
-                IEnumerable<ILayer> selectedLayers = LayerCollection.GetAllSelectedLayers(layerCollection);
+                IEnumerable<Layerage> selectedLayers = LayerCollection.GetAllSelectedLayers(layerCollection);
 
                 switch (destinationOverlayMode)
                 {
@@ -84,9 +86,9 @@ namespace Retouch_Photo2.Layers
         /// <param name="destination"> The destination layer. </param>
         /// <param name="source"> The source layer. </param>
         /// <param name="isBottomInsert"> Insert to the top or bottom. </param>
-        public static void Move(LayerCollection layerCollection, ILayer destination, ILayer source, bool isBottomInsert)
+        public static void Move(LayerCollection layerCollection, Layerage destination, Layerage source, bool isBottomInsert)
         {
-            IList<ILayer> parentsChildren = layerCollection.GetParentsChildren(destination);
+            IList<Layerage> parentsChildren = layerCollection.GetParentsChildren(destination);
             int index = parentsChildren.IndexOf(destination);
             if (isBottomInsert) index++;
             if (index < 0) index = 0;
@@ -106,7 +108,7 @@ namespace Retouch_Photo2.Layers
         /// <param name="destination"> The destination layer. </param>
         /// <param name="source"> The source layer. </param>
         /// <param name="isBottomInsert"> Insert to the top or bottom. </param>
-        public static void Insert(LayerCollection layerCollection, ILayer destination, ILayer source, bool isBottomInsert) => LayerCollection._insert(layerCollection, destination, source, null, isBottomInsert);
+        public static void Insert(LayerCollection layerCollection, Layerage destination, Layerage source, bool isBottomInsert) => LayerCollection._insert(layerCollection, destination, source, null, isBottomInsert);
 
         /// <summary>
         /// Insert some layers to the top of destination layer.
@@ -114,12 +116,12 @@ namespace Retouch_Photo2.Layers
         /// <param name="destination"> The destination layer. </param>
         /// <param name="sources"> The source layers. </param>
         /// <param name="isBottomInsert"> Insert to the top or bottom. </param>
-        public static void InsertRange(LayerCollection layerCollection, ILayer destination, IEnumerable<ILayer> sources, bool isBottomInsert) => LayerCollection._insert(layerCollection, destination, null, sources, isBottomInsert);
+        public static void InsertRange(LayerCollection layerCollection, Layerage destination, IEnumerable<Layerage> sources, bool isBottomInsert) => LayerCollection._insert(layerCollection, destination, null, sources, isBottomInsert);
 
 
-        private static void _insert(LayerCollection layerCollection, ILayer destination, ILayer source, IEnumerable<ILayer> sources, bool isBottomInsert)
+        private static void _insert(LayerCollection layerCollection, Layerage destination, Layerage source, IEnumerable<Layerage> sources, bool isBottomInsert)
         {
-            IList<ILayer> parentsChildren = layerCollection.GetParentsChildren(destination);
+            IList<Layerage> parentsChildren = layerCollection.GetParentsChildren(destination);
             int index = parentsChildren.IndexOf(destination);
             if (isBottomInsert) index++;
             if (index < 0) index = 0;
@@ -127,16 +129,16 @@ namespace Retouch_Photo2.Layers
 
             if (source != null)
             {
-                IList<ILayer> sourceParentsChildren = layerCollection.GetParentsChildren(source);
+                IList<Layerage> sourceParentsChildren = layerCollection.GetParentsChildren(source);
                 sourceParentsChildren.Remove(source);
                 //Insert
                 parentsChildren.Insert(index, source);
             }
             else if (sources != null)
             {
-                foreach (ILayer child in sources)
+                foreach (Layerage child in sources)
                 {
-                    IList<ILayer> childParentsChildren = layerCollection.GetParentsChildren(child);
+                    IList<Layerage> childParentsChildren = layerCollection.GetParentsChildren(child);
                     childParentsChildren.Remove(child);
                     //Insert
                     parentsChildren.Insert(index, child);

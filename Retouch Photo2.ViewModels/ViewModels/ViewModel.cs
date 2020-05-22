@@ -37,7 +37,7 @@ namespace Retouch_Photo2.ViewModels
             this.LayerCollection.RootLayers.Clear();
             if (project.Layers != null)
             {
-                foreach (ILayer layer in project.Layers)
+                foreach (Layerage layer in project.Layers)
                 {
                     if (layer != null)
                     {

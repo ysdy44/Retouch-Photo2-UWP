@@ -4,7 +4,7 @@ using Windows.UI.Text;
 namespace Retouch_Photo2.Layers
 {
     /// <summary>
-    /// <see cref="ILayer"/>'s ITextLayer .
+    /// <see cref="Layer"/>'s ITextLayer .
     /// </summary>
     public interface ITextLayer
     {

@@ -6,25 +6,11 @@ namespace Retouch_Photo2.Layers
     /// <summary>
     /// Represents a layer that can have render properties. Provides a rendering method.
     /// </summary>
-    public abstract partial class LayerBase 
+    public abstract partial class Layer 
     {
 
-        /// <summary> Gets or sets <see cref = "LayerBase" />'s control. </summary>
-        public ILayerControl Control { get; protected set; }
-        
-
-        /// <summary> Gets or sets <see cref = "LayerControl" />'s overlay show status. </summary>
-        public OverlayMode OverlayMode
-        {
-            get => this.overlayMode;
-            set
-            {
-                if (this.overlayMode == value) return;
-                this.Control.SetOverlayMode(value);
-                this.overlayMode = value;
-            }
-        }
-        private OverlayMode overlayMode;
+        /// <summary> Gets or sets <see cref = "Layer" />'s control. </summary>
+        public LayerControl Control { get; protected set; }
 
                
         public bool IsExpand

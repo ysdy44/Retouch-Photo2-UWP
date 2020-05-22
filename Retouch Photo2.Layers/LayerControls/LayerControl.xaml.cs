@@ -8,12 +8,10 @@ using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.Layers
 {
-    public partial class LayerControl : UserControl, ILayerControl
+    public partial class LayerControl : UserControl
     {
 
         //@Content
-        public ILayer Layer { get; private set; }
-
         public LayerControl Self => this;
         public string Text { get => this.NameRun.Text; set => this.NameRun.Text = value; }
         public string Type { get => this.TypeRun.Text; set => this.TypeRun.Text = value; }
@@ -54,31 +52,43 @@ namespace Retouch_Photo2.Layers
             }
         }
 
-        public int Index{ get; set; }
+        
+        /// <summary> Gets or sets <see cref = "LayerControl" />'s overlay show status. </summary>
+        public OverlayMode OverlayMode
+        {
+            get => this.overlayMode;
+            set
+            {
+                if (this.overlayMode == value) return;
+                this.SetOverlayMode(value);
+                this.overlayMode = value;
+            }
+        }
+        private OverlayMode overlayMode;
+
 
         //@Construct
-        public LayerControl(ILayer layer)
+        public LayerControl(Layerage layerage)
         {
             this.InitializeComponent();
             
             this.ControlHeight = LayerCollection.ControlsHeight;
-            this.Layer = layer;
 
             //LayerCollection
             {
                 this.Tapped += (s, e) =>
                 {
-                    LayerCollection.ItemClick?.Invoke(layer);//Delegate
+                  LayerCollection.ItemClick?.Invoke(layerage);//Delegate
                     e.Handled = true;
                 };
                 this.RightTapped += (s, e) =>
                 {
-                    LayerCollection.RightTapped?.Invoke(layer);//Delegate
+                      LayerCollection.RightTapped?.Invoke(layerage);//Delegate
                     e.Handled = true;
                 };
                 this.VisualButton.Tapped += (s, e) =>
                 {
-                    LayerCollection.VisibilityChanged?.Invoke(layer);//Delegate
+                    LayerCollection.VisibilityChanged?.Invoke(layerage);//Delegate
                     e.Handled = true;
                 };
             }
@@ -87,12 +97,12 @@ namespace Retouch_Photo2.Layers
             {
                 this.ExpanedButton.Tapped += (s, e) =>
                 {
-                    LayerCollection.IsExpandChanged?.Invoke(layer);//Delegate   
+                          LayerCollection.IsExpandChanged?.Invoke(layerage);//Delegate   
                     e.Handled = true;
                 };
                 this.SelectedButton.Tapped += (s, e) =>
                 {
-                    LayerCollection.IsSelectedChanged?.Invoke(layer);//Delegate   
+                     LayerCollection.IsSelectedChanged?.Invoke(layerage);//Delegate   
                     e.Handled = true;
                 };
             }
@@ -101,36 +111,36 @@ namespace Retouch_Photo2.Layers
             {
                 this.ManipulationStarted += (s, e) =>
                 {
-                    LayerCollection.IsOverlay = true;
-                    LayerCollection.DragItemsStarted?.Invoke(layer, layer.IsSelected);//Delegate     
+                      LayerCollection.IsOverlay = true;
+                  LayerCollection.DragItemsStarted?.Invoke(layerage, this.ManipulationMode);//Delegate     
                 };
                 this.ManipulationCompleted += (s, e) =>
                 {
                     if (LayerCollection.IsOverlay)
                     {
-                        LayerCollection.DragItemsCompleted?.Invoke();//Delegate
+                       LayerCollection.DragItemsCompleted?.Invoke();//Delegate
 
-                        LayerCollection.IsOverlay = false;
-                        layer.OverlayMode = OverlayMode.None;
+                             LayerCollection.IsOverlay = false;
+                           this.OverlayMode = OverlayMode.None;
                     }
                 };
             }
 
             //Pointer
             {
-                this.PointerMoved += (s, e) =>
-                {
-                    if (LayerCollection.IsOverlay)
-                    {
-                        Point position = e.GetCurrentPoint(this).Position;
-                        OverlayMode overlayMode = this.GetOverlay(position.Y);
+                 this.PointerMoved += (s, e) =>
+                 {
+                  if (LayerCollection.IsOverlay)
+                     {
+                     Point position = e.GetCurrentPoint(this).Position;
+                    OverlayMode overlayMode = this.GetOverlay(position.Y);
 
-                        layer.OverlayMode = overlayMode;
-                        LayerCollection.DragItemsDelta?.Invoke(layer, overlayMode);//Delegate
+                         this.OverlayMode = overlayMode;
+                   LayerCollection.DragItemsDelta?.Invoke(layerage, overlayMode);//Delegate
                     }
-                };
-                this.PointerExited += (s, e) => layer.OverlayMode = OverlayMode.None;
-                this.PointerReleased += (s, e) => layer.OverlayMode = OverlayMode.None;
+                 };
+                      this.PointerExited += (s, e) => this.OverlayMode = OverlayMode.None;
+                      this.PointerReleased += (s, e) => this.OverlayMode = OverlayMode.None;
             }
         }
 

@@ -18,7 +18,6 @@ namespace Retouch_Photo2.Menus.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         
         private IEffectPage currentEffect;
@@ -70,8 +69,6 @@ namespace Retouch_Photo2.Menus.Models
                     effect.Button.IsEnabled = true;
                     effect.FollowEffect(value, true);
                 }
-
-                con._Expander.IsSecondPage = false;
             }
             else
             {
@@ -79,8 +76,6 @@ namespace Retouch_Photo2.Menus.Models
                 {
                     effect.Button.IsEnabled = false;
                 }
- 
-                con._Expander.IsSecondPage = false;
             }
         }));
 
@@ -93,8 +88,8 @@ namespace Retouch_Photo2.Menus.Models
             this.InitializeComponent();
             this.ConstructDataContext
             (
-                 dataContext: this.SelectionViewModel,
-                 path: nameof(this.SelectionViewModel.Effect),
+                 dataContext: this.ViewModel,
+                 path: nameof(this.ViewModel.Effect),
                  dp: EffectMenu.EffectProperty
             );
             this.ConstructStrings();
@@ -174,12 +169,12 @@ namespace Retouch_Photo2.Menus.Models
             if (this.CurrentEffect == null) return;
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
                 Effect effect = layer.Effect;
 
                 this.CurrentEffect.Reset();
-                this.CurrentEffect.ResetEffect(effect);
             });
 
             this.ViewModel.Invalidate();//Invalidate
@@ -188,17 +183,18 @@ namespace Retouch_Photo2.Menus.Models
 
         //Navigate
         public void Navigate(IEffectPage effectPage)
-        {
+        {        
             if (effectPage == null) return;
 
             this.CurrentEffect = effectPage;
 
 
             //Layers
-            IEnumerable<ILayer> selectedLayers = LayerCollection.GetAllSelectedLayers(this.ViewModel.LayerCollection);
-            ILayer outermost = LayerCollection.FindOutermost_SelectedLayer(selectedLayers);
+            IEnumerable<Layerage> selectedLayers = LayerCollection.GetAllSelectedLayers(this.ViewModel.LayerCollection);
+            Layerage outermost = LayerCollection.FindOutermost_SelectedLayer(selectedLayers);
+            ILayer layer = outermost.Self;
 
-            Effect effect2 = outermost.Effect;
+            Effect effect2 = layer.Effect;
             effectPage.FollowEffect(effect2, false);
 
 

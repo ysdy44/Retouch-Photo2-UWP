@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Retouch_Photo2.Historys;
+using Retouch_Photo2.Layers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,20 +35,19 @@ namespace Retouch_Photo2.ViewModels
         private bool isUndoEnabled;
 
 
+        ////////////////////////////////////////
 
-        public bool Undo()
+        
+        public bool HistoryUndo()
         {
             int count = this.Historys.Count;
             if (count > 0)
             {
                 IHistory history = this.Historys.Last();
-                foreach (Action undo in history.Undos)
-                {
-                    undo();
-                }
+                history.Undo();
                 this.Historys.Remove(history);
 
-                this.VS();
+                this.HistoryVS();
                 return true;
             }
 
@@ -55,20 +55,41 @@ namespace Retouch_Photo2.ViewModels
             return false;
         }
 
-        public void Push(IHistory history)
-        {
-            if (history.Undos.Count == 0) return;
 
+        public void HistoryPush(IHistory history)
+        {
             this.Historys.Add(history);
             if (this.Historys.Count > this.HistorysLimit) this.Historys.RemoveAt(0);
 
             this.HistoryIndex = this.Historys.Count - 1;
 
-            this.VS();
+            this.HistoryVS();
+        }
+        public void HistoryPushLayeragesHistory(string title)
+        {
+            LayeragesHistory history = new LayeragesHistory(title);
+                       
+            foreach (var item in this.LayerCollection.RootLayers)
+            {
+                history.Layerages.Add(item.Clone());
+            }
+
+            history.UndoAction = () =>
+            {
+                this.LayerCollection.RootLayers.Clear();
+                foreach (Layerage layerage in history.Layerages)
+                {
+                    this.LayerCollection.RootLayers.Add(layerage.Clone());
+                }
+            };
+            this.HistoryPush(history);
         }
 
 
-        private void VS()
+        ////////////////////////////////////////
+
+
+        private void HistoryVS()
         {
             int count = this.Historys.Count;
             if (count < 1)
@@ -79,8 +100,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 this.IsUndoEnabled = true;
             }
-        }
-        
+        }        
 
     }
 }

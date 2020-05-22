@@ -23,8 +23,8 @@
             <tools:TouchbarButton x:Name="CenterTouchbarButton">
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="CenterTouchbarSlider" 
-                             Number="{x:Bind CenterNumberConverter(SelectionViewModel.GeometryTriangleCenter),Mode=OneWay}"
-                             Value="{x:Bind CenterValueConverter(SelectionViewModel.GeometryTriangleCenter),Mode=OneWay}"
+                             Number="{x:Bind CenterNumberConverter(ViewModel.GeometryTriangleCenter),Mode=OneWay}"
+                             Value="{x:Bind CenterValueConverter(ViewModel.GeometryTriangleCenter),Mode=OneWay}"
                              />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>

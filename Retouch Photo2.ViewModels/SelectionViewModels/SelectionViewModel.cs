@@ -8,9 +8,9 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "SelectionViewModel" />. 
+    /// Retouch_Photo2's the only <see cref = "ViewModel" />. 
     /// </summary>
-    public partial class SelectionViewModel : INotifyPropertyChanged
+    public partial class ViewModel : INotifyPropertyChanged
     {
 
         /// <summary>
@@ -58,14 +58,14 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private bool selectionSingle;
-        
 
-        /// <summary> The single checked layer. </summary>
-        public ILayer Layer { get; private set; }
-        
-        /// <summary> The all checked layers. </summary>
-        public IEnumerable<ILayer> Layers { get; private set; }
-        
+
+        /// <summary> The single checked layerage. </summary>
+        public Layerage Layerage { get; private set; }
+
+        /// <summary> The all checked layerages. </summary>
+        public IEnumerable<Layerage> Layerages { get; private set; }
+
 
         /// <summary> Transformer of selection layers. </summary>
         public Transformer Transformer
@@ -78,6 +78,8 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private Transformer transformer;
+        public Transformer StartingTransformer { get; private set; } 
+        public void CacheTransformer() => this.StartingTransformer = this.Transformer;
 
         /// <summary> Is disable rotate radian? Defult **false**. </summary>
         public bool DisabledRadian
@@ -91,14 +93,5 @@ namespace Retouch_Photo2.ViewModels
         }
         private bool disabledRadian;
         
-
-        //@Notify 
-        /// <summary> Multicast event for property change notifications. </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        /// <summary>
-        /// Notifies listeners that a property value has changed.
-        /// </summary>
-        /// <param name="propertyName"> Name of the property used to notify listeners. </param>
-        protected void OnPropertyChanged(string propertyName) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

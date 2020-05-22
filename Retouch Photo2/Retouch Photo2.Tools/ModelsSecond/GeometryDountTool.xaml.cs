@@ -21,7 +21,6 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@TouchBar  
         internal bool TouchBarMode
@@ -91,11 +90,13 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void HoleRadiusChange(float innerRadius)
         {
-            this.SelectionViewModel.GeometryDountHoleRadius = innerRadius;
+            this.ViewModel.GeometryDountHoleRadius = innerRadius;
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 if (layer.Type == LayerType.GeometryDount)
                 {
                     GeometryDountLayer geometryDountLayer = (GeometryDountLayer)layer;
@@ -149,9 +150,9 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryDountLayer
             {
-                HoleRadius = this.SelectionViewModel.GeometryDountHoleRadius,
+                HoleRadius = this.ViewModel.GeometryDountHoleRadius,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.ViewModel.GeometryStyle
             };
         }
 

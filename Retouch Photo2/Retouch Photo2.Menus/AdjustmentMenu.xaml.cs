@@ -2,6 +2,7 @@
 using Retouch_Photo2.Adjustments.Models;
 using Retouch_Photo2.Adjustments.Pages;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,6 @@ namespace Retouch_Photo2.Menus.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
 
         //@VisualState
@@ -134,8 +134,8 @@ namespace Retouch_Photo2.Menus.Models
             this.InitializeComponent();
             this.ConstructDataContext
             (
-                 dataContext: this.SelectionViewModel,
-                 path: nameof(this.SelectionViewModel.Filter),
+                 dataContext: this.ViewModel,
+                 path: nameof(this.ViewModel.Filter),
                  dp: AdjustmentMenu.FilterProperty
             );
             this.ConstructStrings();
@@ -216,8 +216,10 @@ namespace Retouch_Photo2.Menus.Models
             AdjustmentMenu.GetGridDataContext(sender, out IAdjustment adjustment);
 
             //Selection
-            this.SelectionViewModel.SetValue((Action<Layers.ILayer>)((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 layer.Filter.Adjustments.Remove(adjustment);//Remove
 
                 this._vsAdjustments = layer.Filter.Adjustments;
@@ -226,7 +228,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.InvalidateItemsControl();//Invalidate
                 this.ViewModel.Invalidate();//Invalidate   
                 return;
-            }));
+            });
         }
 
     }
@@ -300,8 +302,10 @@ namespace Retouch_Photo2.Menus.Models
                 if (e.ClickedItem is IAdjustmentPage item)
                 {
                     //Selection
-                    this.SelectionViewModel.SetValue((Action<Layers.ILayer>)((layer) =>
+                    this.ViewModel.SetValue((layerage) =>
                     {
+                        ILayer layer = layerage.Self;
+
                         IAdjustment _new = item.GetNewAdjustment();
                         layer.Filter.Adjustments.Add(_new);//Add
 
@@ -311,7 +315,7 @@ namespace Retouch_Photo2.Menus.Models
                         this.InvalidateItemsControl();//Invalidate
                         this.ViewModel.Invalidate();//Invalidate
                         return;
-                    }));
+                    });
                 }
             };
         }
@@ -325,8 +329,10 @@ namespace Retouch_Photo2.Menus.Models
                     IEnumerable<IAdjustment> clones = from a in filter.Adjustments select a.Clone();
 
                     //Selection
-                    this.SelectionViewModel.SetValue((layer) =>
+                    this.ViewModel.SetValue((layerage) =>
                     {
+                        ILayer layer = layerage.Self;
+
                         layer.Filter.Adjustments.Clear();//Clear
                         layer.Filter.Adjustments.AddRange(clones);//Add
 

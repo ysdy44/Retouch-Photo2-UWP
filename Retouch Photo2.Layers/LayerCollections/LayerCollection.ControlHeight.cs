@@ -21,17 +21,21 @@ namespace Retouch_Photo2.Layers
             LayerCollection._setControlHeight(layerCollection.RootLayers, controlHeight);
         }
 
-        private static void _setControlHeight(IEnumerable<ILayer> layers, int controlHeight)
-        {
-            foreach (ILayer child in layers)
+        private static void _setControlHeight(IEnumerable<Layerage> layerages, int controlHeight)
+        {        
+            foreach (Layerage layerage in layerages)
             {
-                if (child.Control.ControlHeight != controlHeight)
-                    child.Control.ControlHeight = controlHeight;
+                ILayer layer = layerage.Self;
+
+                if (layer.Control.ControlHeight != controlHeight)
+                {
+                    layer.Control.ControlHeight = controlHeight;
+                }
 
                 //Recursive
-                LayerCollection._setControlHeight(child.Children, controlHeight);
+                LayerCollection._setControlHeight(layerage.Children, controlHeight);
             }
         }
-        
+
     }
 }

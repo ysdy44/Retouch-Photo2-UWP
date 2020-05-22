@@ -18,6 +18,35 @@ namespace Retouch_Photo2.Layers
     public interface ILayer : ICacheTransform
     {
 
+        #region Instance
+
+
+        /// <summary> Gets or sets <see cref="ILayer"/>'s id. </summary>
+        string Id { get; set; }
+
+        /// <summary>
+        /// To <see cref="Layerage"/>.
+        /// </summary>
+        /// <returns> The producted layerage. </returns>
+        Layerage ToLayerage();
+
+        /// <summary>
+        /// Returns a boolean indicating whether the given <see cref="Layerage"/> is equal to this <see cref="ILayer"/> instance.
+        /// </summary>
+        /// <param name="other"> The <see cref="Layerage"/> to compare this instance to. </param>
+        /// <returns> True if the other <see cref="Layerage"/> is equal to this instance; False otherwise. </returns>
+        bool Equals(Layerage other);
+        /// <summary>
+        /// Returns a boolean indicating whether the given <see cref="Layer"/> is equal to this <see cref="ILayer"/> instance.
+        /// </summary>
+        /// <param name="other"> The <see cref="Layer"/> to compare this instance to. </param>
+        /// <returns> True if the other <see cref="Layer"/> is equal to this instance; False otherwise. </returns>
+        bool Equals(Layer other);
+
+
+        #endregion
+
+
         #region Property
 
 
@@ -55,12 +84,6 @@ namespace Retouch_Photo2.Layers
         Filter Filter { get; set; }
 
 
-        /// <summary> Gets or sets ILayer's children layers. </summary>
-        IList<ILayer> Children { get; set; }
-        /// <summary> Gets or sets ILayer's parent layer. </summary>
-        ILayer Parents { get; set; }
-
-
         /// <summary>
         /// Get own copy.
         /// </summary>
@@ -87,11 +110,8 @@ namespace Retouch_Photo2.Layers
 
 
         /// <summary> Gets or sets ILayer's control. </summary>
-        ILayerControl Control { get; }
+        LayerControl Control { get; }
 
-
-        /// <summary> Gets or sets ILayer's overlay-mode. </summary>
-        OverlayMode OverlayMode { get; set; }
 
         /// <summary> Gets or sets ILayer's expand. </summary>
         bool IsExpand { get; set; }
@@ -101,8 +121,8 @@ namespace Retouch_Photo2.Layers
 
 
         #endregion
-        
-        
+
+
         #region Render
 
 
@@ -112,8 +132,9 @@ namespace Retouch_Photo2.Layers
         /// <param name="resourceCreator"> The resource-creator. </param>
         /// <param name="previousImage"> Previous rendered images. </param>
         /// <param name="canvasToVirtualMatrix"> The canvas-to-virtual matrix. </param>
+        /// <param name="children"> The children layerage. </param>
         /// <returns> The rendered layer. </returns>
-        ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix);
+        ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children);
 
         /// <summary>
         /// Draw lines on bound.
@@ -122,9 +143,10 @@ namespace Retouch_Photo2.Layers
         /// <param name="drawingSession"> The drawing-session. </param>
         /// <param name="matrix"> The matrix. </param>
         /// <param name="accentColor"> The accent color. </param>
-        void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor);
-        
-      
+        /// <param name="children"> The children layerage. </param>
+        void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, IList<Layerage> children, Windows.UI.Color accentColor);
+
+
         /// <summary>
         /// Create a specific geometry.
         /// </summary>

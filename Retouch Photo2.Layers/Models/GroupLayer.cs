@@ -11,9 +11,9 @@ using Windows.UI.Xaml;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="ILayer"/>'s GroupLayer .
+    /// <see cref="Layer"/>'s GroupLayer .
     /// </summary>
-    public class GroupLayer : LayerBase, ILayer
+    public class GroupLayer : Layer, ILayer
     {
 
         //@Override     
@@ -25,67 +25,49 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GroupLayer()
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(this.ToLayerage())
             {
                 Icon = new GroupIcon(),
                 Type = this.ConstructStrings(),
             };
         }
         
-
-        public override Transformer GetActualDestinationWithRefactoringTransformer
-        {
-            get
-            {
-                if (this.IsRefactoringTransformer)
-                {
-                    //TransformerBorder
-                    IEnumerable<Transformer> transformers = from l in this.Children select l.GetActualDestinationWithRefactoringTransformer;
-                    TransformerBorder border = new TransformerBorder(transformers);
-                    Transformer transformer = border.ToTransformer();
-
-                    this.Transform.Source = transformer;
-                    this.Transform.Destination = transformer;
-
-                    this.IsRefactoringTransformer = false;
-                }
-
-                return base.GetActualDestinationWithRefactoringTransformer;
-            }
-        }
         
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GroupLayer groupLayer = new GroupLayer();
 
-            LayerBase.CopyWith(resourceCreator, groupLayer, this);
+            Layer.CopyWith(resourceCreator, groupLayer, this);
             return groupLayer;
         }
 
-        
 
-        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix)
+        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children)
         {
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
             {
-                foreach (ILayer child in this.Children)
+                foreach (Layerage child in children)
                 {
-                    if (child.Visibility == Visibility.Collapsed) continue;
-                    if (child.Opacity == 0) continue;
+                    ILayer child2 = child.Self; 
+
+                    if (child2.Visibility == Visibility.Collapsed) continue;
+                    if (child2.Opacity == 0) continue;
 
                     //GetRender
-                    ICanvasImage currentImage = child.GetRender(resourceCreator, previousImage, canvasToVirtualMatrix);
+                    ICanvasImage currentImage = child2.GetRender(resourceCreator, previousImage, canvasToVirtualMatrix, child.Children);
                     drawingSession.DrawImage(currentImage);
                 }
             }
             return command;
         }
-        public override void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
+        public override void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, IList<Layerage> children, Windows.UI.Color accentColor)
         {
-            foreach (ILayer child in this.Children)
+            foreach (Layerage child in children)
             {
-                Transformer transformer = child.GetActualDestinationWithRefactoringTransformer;
+                ILayer child2 = child.Self;
+
+                Transformer transformer = child2.GetActualDestinationWithRefactoringTransformer;
                 drawingSession.DrawBound(transformer, matrix);
             }
         }

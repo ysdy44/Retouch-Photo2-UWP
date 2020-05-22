@@ -1,5 +1,14 @@
-﻿using Retouch_Photo2.Layers;
+﻿using Retouch_Photo2.Historys;
+using Retouch_Photo2.Layers;
+using Retouch_Photo2.Tools;
 using Windows.UI.Xaml;
+using FanKit.Transformers;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Numerics;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Controls
@@ -14,15 +23,17 @@ namespace Retouch_Photo2.Controls
         {
             if (LayerCollection.ItemClick == null)
             {
-                LayerCollection.ItemClick += (layer) =>
+                LayerCollection.ItemClick += (layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     if (layer.IsSelected == true)
                     {
-                        this.ShowLayerMenu(layer);
+                        this.ShowLayerMenu(layerage);
                     }
                     else
                     {
-                        this.ItemClick(layer);
+                        this.ItemClick(layerage);
                     }
                 };
             }
@@ -33,13 +44,27 @@ namespace Retouch_Photo2.Controls
                     this.ShowLayerMenu(layer);
                 };
             }
-            
+
             if (LayerCollection.VisibilityChanged == null)
             {
-                LayerCollection.VisibilityChanged += (layer) =>
+                LayerCollection.VisibilityChanged += (layerage) =>
                 {
-                    Visibility value = (layer.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
+                    ILayer layer = layerage.Self;
 
+                    //History 
+                    LayersPropertyHistory history = new LayersPropertyHistory("Set visibility");
+                    var previous = layer.Visibility;
+                    history.UndoActions.Push(() =>
+                    {
+                        ILayer layer2 = layerage.Self;
+
+                        layer2.Visibility = previous;
+                    });
+
+                    //History
+                    this.ViewModel.HistoryPush(history);
+
+                    Visibility value = (layer.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
                     layer.Visibility = value;
 
                     this.ViewModel.Invalidate();//Invalidate
@@ -47,36 +72,34 @@ namespace Retouch_Photo2.Controls
             }
             if (LayerCollection.IsExpandChanged == null)
             {
-                LayerCollection.IsExpandChanged += (layer) =>
+                LayerCollection.IsExpandChanged += (layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     layer.IsExpand = !layer.IsExpand;
-                    LayerCollection.ArrangeLayersVisibility(layer);
 
-                    this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
-
-                    this.ViewModel.Invalidate();//Invalidate
+                    LayerCollection.ArrangeLayersVisibility(layerage);
                 };
             }
             if (LayerCollection.IsSelectedChanged == null)
-            {
-                LayerCollection.IsSelectedChanged += (layer) =>
-                {
-                    layer.IsSelected = !layer.IsSelected;
-
-                    this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
-
-                    LayerCollection.ArrangeLayersBackgroundItemClick(layer);
-
-                    this.ViewModel.Invalidate();//Invalidate
-                };
+            {                
+                LayerCollection.IsSelectedChanged +=(isSelected)=> this.ViewModel.MethodSelectedNot(isSelected);//Method
             }
-            
+
             if (LayerCollection.DragItemsStarted == null)
             {
-                LayerCollection.DragItemsStarted += (layer, isSelected) =>
+                LayerCollection.DragItemsStarted += (layer, manipulationMode) =>
                 {
                     this.DragSourceLayer = layer;
-                    this.DragLayerIsSelected = isSelected;
+
+                    if (manipulationMode == ManipulationModes.TranslateY)
+                    {
+                        this.DragLayerIsSelected = true;
+                    }
+                    else if (manipulationMode == ManipulationModes.System)
+                    {
+                        this.DragLayerIsSelected = false;
+                    }
                 };
             }
             if (LayerCollection.DragItemsDelta == null)
@@ -93,54 +116,39 @@ namespace Retouch_Photo2.Controls
                 {
                     LayerCollection.DragComplete(this.ViewModel.LayerCollection, this.DragDestinationLayer, this.DragSourceLayer, this.DragLayerOverlayMode, this.DragLayerIsSelected);
 
+                    this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
                     LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                     LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+                    this.ViewModel.Invalidate();//Invalidate
 
                     this.DragSourceLayer = null;
                     this.DragDestinationLayer = null;
-                    this.DragLayerIsSelected =  false;
+                    this.DragLayerIsSelected = false;
                     this.DragLayerOverlayMode = OverlayMode.None;
-
-                    this.ViewModel.Invalidate();//Invalidate
                 };
             }
         }
 
 
-        private void ItemClick(ILayer selectedLayer)
+        private void ItemClick(Layerage selectedLayerage)
         {
+            ILayer selectedLayer = selectedLayerage.Self;
+
             //Is it independent of other layers?
             bool isfreedom = this.SettingViewModel.KeyCtrl;
             //Is select successively?
             bool isLinear = this.SettingViewModel.KeyShift;
 
-            //Select a layer.
-            if (isfreedom)
-            {
-                selectedLayer.IsSelected = !selectedLayer.IsSelected;
-                LayerCollection.ArrangeLayersBackgroundItemClick(selectedLayer);
-            }
-            else if (isLinear) LayerCollection.ShiftSelectCurrentLayer(this.ViewModel.LayerCollection, selectedLayer);
-            else
-            {
-                //Selection
-                this.SelectionViewModel.SetValue((layer)=>
-                {
-                    if (layer!= selectedLayer)
-                    {
-                        layer.IsSelected = false;
-                    }
-                });
-                selectedLayer.IsSelected = true;
 
-                this.SelectionViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
-
-                LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
-
-                this.ViewModel.Invalidate();//Invalidate
-            }
+            if (isfreedom)                           
+                this.ViewModel.MethodSelectedNot(selectedLayerage);//Method
+            
+            else if (isLinear)       
+                LayerCollection.ShiftSelectCurrentLayer(this.ViewModel.LayerCollection, selectedLayerage);
+            
+            else this.ViewModel.MethodSelectedNew(selectedLayerage);  //Method
+            
 
         }
-
     }
 }

@@ -4,6 +4,7 @@ using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Retouch_Photo2.Historys;
 using Windows.UI.Xaml.Controls;
+using Retouch_Photo2.Layers;
 
 namespace Retouch_Photo2.Effects.Models
 {
@@ -14,7 +15,6 @@ namespace Retouch_Photo2.Effects.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Construct
         public SharpenEffectPage()
@@ -54,10 +54,28 @@ namespace Retouch_Photo2.Effects.Models
         public void Reset()
         {
             this.AmountSlider.Value = 0;
-        }
-        public void ResetEffect(Effect effect)
-        {
-            effect.Sharpen_Amount = 0;
+
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory("Set effect value");
+
+            //Selection
+            this.ViewModel.SetValue((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+                var previous = layer.Effect.Sharpen_Amount;
+                history.UndoActions.Push(() =>
+                {
+                    ILayer layer2 = layerage.Self;
+
+                    layer2.Effect.Sharpen_Amount = previous;
+                });
+
+                layer.Effect.Sharpen_Amount = 0;
+            });
+
+            //History
+            this.ViewModel.HistoryPush(history);
         }
         public void FollowEffect(Effect effect, bool isOnlyButton)
         {
@@ -86,22 +104,27 @@ namespace Retouch_Photo2.Effects.Models
                 bool isOn = this.Button.ToggleSwitch.IsOn;
 
                 //History
-                IHistoryBase history = new IHistoryBase("Set effect isOn");
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect isOn");
 
                 //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     //History
                     var previous = layer.Effect.Sharpen_IsOn;
-                    int index = layer.Control.Index;
-                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                    Effect.Sharpen_IsOn = previous);
+                    history.UndoActions.Push(() =>
+                    {
+                        ILayer layer2 = layerage.Self;
+
+                        layer2.Effect.Sharpen_IsOn = previous;
+                    });
 
                     layer.Effect.Sharpen_IsOn = isOn;
                 });
 
                 //History
-                this.ViewModel.Push(history);
+                this.ViewModel.HistoryPush(history);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -111,17 +134,19 @@ namespace Retouch_Photo2.Effects.Models
         private void ConstructSharpen_Amount()
         {
             //History
-            IHistoryBase history = null;
+            LayersPropertyHistory history = null;
 
             //Radius
             this.AmountSlider.Maximum = 10;
             this.AmountSlider.ValueChangeStarted += (s, value) =>
             {
-                history = new IHistoryBase("Set effect value");
+                history = new LayersPropertyHistory("Set effect value");
 
                 //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     layer.Effect.CacheSharpen();
                 });
 
@@ -132,8 +157,10 @@ namespace Retouch_Photo2.Effects.Models
                 float amount = (float)value;
 
                 //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     layer.Effect.Sharpen_Amount = amount;
                 });
 
@@ -144,19 +171,24 @@ namespace Retouch_Photo2.Effects.Models
                 float amount = (float)value;
 
                 //Selection
-                this.SelectionViewModel.SetValue((layer) =>
+                this.ViewModel.SetValue((layerage) =>
                 {
+                    ILayer layer = layerage.Self;
+
                     //History
                     var previous = layer.Effect.StartingSharpen_Amount;
-                    int index = layer.Control.Index;
-                    history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                    Effect.Sharpen_Amount = previous);
+                    history.UndoActions.Push(() =>
+                    {
+                        ILayer layer2 = layerage.Self;
+
+                        layer2.Effect.Sharpen_Amount = previous;
+                    });
 
                     layer.Effect.Sharpen_Amount = amount;
                 });
 
                 //History
-                this.ViewModel.Push(history);
+                this.ViewModel.HistoryPush(history);
 
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
             };

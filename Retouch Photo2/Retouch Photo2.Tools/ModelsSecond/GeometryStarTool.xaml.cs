@@ -1,7 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -36,7 +34,6 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        SelectionViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@TouchBar  
         internal GeometryStarMode TouchBarMode
@@ -119,11 +116,13 @@ namespace Retouch_Photo2.Tools.Models
             if (points < 3) points = 3;
             if (points > 36) points = 36;
 
-            this.SelectionViewModel.GeometryStarPoints = points;
+            this.ViewModel.GeometryStarPoints = points;
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 if (layer.Type == LayerType.GeometryStar)
                 {
                     GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
@@ -170,11 +169,13 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void InnerRadiusChange(float innerRadius)
         {
-            this.SelectionViewModel.GeometryStarInnerRadius = innerRadius;
+            this.ViewModel.GeometryStarInnerRadius = innerRadius;
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 if (layer.Type == LayerType.GeometryStar)
                 {
                     GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
@@ -229,10 +230,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryStarLayer
             {
-                Points = this.SelectionViewModel.GeometryStarPoints,
-                InnerRadius = this.SelectionViewModel.GeometryStarInnerRadius,
+                Points = this.ViewModel.GeometryStarPoints,
+                InnerRadius = this.ViewModel.GeometryStarInnerRadius,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.ViewModel.GeometryStyle
             };
         }
 

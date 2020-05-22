@@ -9,9 +9,9 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Remove a layer.
         /// </summary>      
-        public static void RemoveLayer(LayerCollection layerCollection, ILayer removeLayer)
+        public static void RemoveLayer(LayerCollection layerCollection, Layerage removeLayer)
         {
-            IList<ILayer> parentsChildren = layerCollection.GetParentsChildren(removeLayer);
+            IList<Layerage> parentsChildren = layerCollection.GetParentsChildren(removeLayer);
 
             parentsChildren.Remove(removeLayer);
         }
@@ -22,12 +22,14 @@ namespace Retouch_Photo2.Layers
         public static void RemoveAllSelectedLayers(LayerCollection layerCollection) => LayerCollection._removeAllSelectedLayers(layerCollection, layerCollection.RootLayers);
 
 
-        private static void _removeAllSelectedLayers(LayerCollection layerCollection, IList<ILayer> layers)
-        {
-            foreach (ILayer child in layers)
+        private static void _removeAllSelectedLayers(LayerCollection layerCollection, IList<Layerage> layerages)
+        {        
+            foreach (Layerage child in layerages)
             {
+                ILayer layer = child.Self;
+
                 //Recursive
-                if (child.IsSelected == true)
+                if (layer.IsSelected == true)
                     LayerCollection._removeAllLayers(layerCollection, child.Children);
                 //Recursive
                 else
@@ -35,28 +37,30 @@ namespace Retouch_Photo2.Layers
             }
 
             //Remove
-            ILayer removeLayer = null;
+            Layerage removeLayer = null;
             do
             {
-                layers.Remove(removeLayer);
+                layerages.Remove(removeLayer);
 
-                removeLayer = layers.FirstOrDefault(layer => layer.IsSelected == true);
+                removeLayer = layerages.FirstOrDefault(layerage => layerage.Self.IsSelected == true);
             }
             while (removeLayer != null);
         }
 
-        private static void _removeAllLayers(LayerCollection layerCollection, IList<ILayer> layers)
-        {
-            foreach (ILayer child in layers)
+        private static void _removeAllLayers(LayerCollection layerCollection, IList<Layerage> layerages)
+        {         
+            foreach (Layerage child in layerages)
             {
+                ILayer child2 = child.Self;
+
                 //Recursive
                 LayerCollection._removeAllLayers(layerCollection, child.Children);
 
-                layerCollection.RootControls.Remove(child.Control.Self);
+                layerCollection.RootControls.Remove(child2.Control.Self);
             }
-            layers.Clear();
+            layerages.Clear();
         }
-        
+
 
     }
 }

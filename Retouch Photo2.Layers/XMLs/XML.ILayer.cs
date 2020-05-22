@@ -23,6 +23,7 @@ namespace Retouch_Photo2.Layers
 
             //SaveWith
             {
+                element.Add(new XAttribute("Id", layer.Id));
                 element.Add(new XAttribute("Type", layer.Type));
                 element.Add(new XAttribute("Name", layer.Name));
                 element.Add(new XAttribute("Opacity", layer.Opacity));
@@ -39,14 +40,6 @@ namespace Retouch_Photo2.Layers
                 element.Add(Retouch_Photo2.Layers.XML.SaveTransform("Transform", layer.Transform));
                 element.Add(Retouch_Photo2.Effects.XML.SaveEffect("Effect", layer.Effect));
                 element.Add(Retouch_Photo2.Adjustments.XML.SaveFilter("Filter", layer.Filter));
-
-                element.Add(new XElement
-                (
-                    "Children",
-                    from child
-                    in layer.Children
-                    select XML.SaveILayer(elementName, child)
-                ));
             }
             return element;
         }
@@ -65,6 +58,7 @@ namespace Retouch_Photo2.Layers
                 //Load
                 ILayer layer = XML.CreateLayer(type);
                 {
+                    if (element.Attribute("Id") is XAttribute id) layer.Id = id.Value;
                     //if (element.Attribute("Type") is XAttribute type) layer.Type = type.Value;
                     if (element.Attribute("Name") is XAttribute name) layer.Name = name.Value;
                     if (element.Attribute("Opacity") is XAttribute opacity) layer.Opacity = (float)opacity;
@@ -81,16 +75,6 @@ namespace Retouch_Photo2.Layers
                     if (element.Element("Transform") is XElement transform) layer.Transform = Retouch_Photo2.Layers.XML.LoadTransform(transform);
                     if (element.Element("Effect") is XElement effect) layer.Effect = Retouch_Photo2.Effects.XML.LoadEffect(effect);
                     if (element.Element("Filter") is XElement filter) layer.Filter = Retouch_Photo2.Adjustments.XML.LoadFilter(filter);
-
-                    if (element.Element("Children") is XElement children)
-                    {
-                        layer.Children =
-                        (
-                            from child
-                            in children.Elements()
-                            select XML.LoadILayer(child)
-                        ).ToList();
-                    }
                 }
                 return layer;
             }

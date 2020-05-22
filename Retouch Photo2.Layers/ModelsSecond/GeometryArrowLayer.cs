@@ -10,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="ILayer"/>'s ArrowLayer .
+    /// <see cref="Layer"/>'s ArrowLayer .
     /// </summary>
-    public class GeometryArrowLayer : LayerBase, ILayer
+    public class GeometryArrowLayer : Layer, ILayer
     {
 
         //@Override
@@ -32,7 +32,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryArrowLayer()
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(this.ToLayerage())
             {
                 Icon = new GeometryArrowIcon(),
                 Type = this.ConstructStrings(),
@@ -52,7 +52,7 @@ namespace Retouch_Photo2.Layers.Models
                 RightTail = this.RightTail,
             };
 
-            LayerBase.CopyWith(resourceCreator, ArrowLayer, this);
+            Layer.CopyWith(resourceCreator, ArrowLayer, this);
             return ArrowLayer;
         }
         

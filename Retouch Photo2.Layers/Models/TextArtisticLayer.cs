@@ -6,9 +6,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="TextLayerBase"/>'s TextArtisticLayer .
+    /// <see cref="TextLayer"/>'s TextArtisticLayer .
     /// </summary>
-    public class TextArtisticLayer : TextLayerBase, ILayer, ITextLayer
+    public class TextArtisticLayer : TextLayer, ITextLayer, ILayer
     {
 
         //@Override     
@@ -49,7 +49,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public TextArtisticLayer()
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(this.ToLayerage())
             {
                 Icon = new TextArtisticIcon(),
                 Type = this.ConstructStrings(),
@@ -61,8 +61,8 @@ namespace Retouch_Photo2.Layers.Models
         {
             TextArtisticLayer artisticLayer = new TextArtisticLayer();
          
-            TextLayerBase.FontCopyWith(artisticLayer, this);
-            LayerBase.CopyWith(resourceCreator, artisticLayer, this);
+            TextLayer.FontCopyWith(artisticLayer, this);
+            Layer.CopyWith(resourceCreator, artisticLayer, this);
             return artisticLayer;
         }
 

@@ -4,8 +4,8 @@ using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
-using System;
 using System.Numerics;
 using Windows.UI.Xaml.Controls;
 
@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Tools.Models
     {
 
         //@ViewModel
-        IBrush Stroke { get => this.SelectionViewModel.Stroke; set => this.SelectionViewModel.Stroke = value; }
+        IBrush Stroke { get => this.ViewModel.Stroke; set => this.ViewModel.Stroke = value; }
 
 
         private void ConstructStrokeImage()
@@ -73,8 +73,10 @@ namespace Retouch_Photo2.Tools.Models
 
             //Selection
             this.Stroke.CacheTransform();
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 layer.Style.CacheStroke();
 
                 layer.Style.Stroke = this.Stroke.Clone();
@@ -94,8 +96,9 @@ namespace Retouch_Photo2.Tools.Models
                     {
                         //Selection
                         this.Stroke.InitializeController(canvasStartingPoint, canvasPoint);
-                        this.SelectionViewModel.SetValue((layer) =>
+                        this.ViewModel.SetValue((layerage) =>
                         {
+                            ILayer layer = layerage.Self;
                             layer.Style.Stroke.InitializeController(canvasStartingPoint, canvasPoint);
                         });
                         this.ViewModel.Invalidate();//Invalidate
@@ -107,8 +110,9 @@ namespace Retouch_Photo2.Tools.Models
                     {
                         //Selection
                         this.Stroke.Controller(this.OperateMode, canvasStartingPoint, canvasPoint);
-                        this.SelectionViewModel.SetValue((layer) =>
+                        this.ViewModel.SetValue((layerage) =>
                         {
+                            ILayer layer = layerage.Self;
                             layer.Style.Stroke.Controller(this.OperateMode, canvasStartingPoint, canvasPoint);
                         });
                     }
@@ -122,22 +126,27 @@ namespace Retouch_Photo2.Tools.Models
             if (this.Stroke == null) return;
 
             //History
-            IHistoryBase history = new IHistoryBase("Set stroke");
+            LayersPropertyHistory history = new LayersPropertyHistory("Set stroke");
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
-                //History
-                var previous = layer.Style.Stroke.Clone(); ;
-                int index = layer.Control.Index;
-                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                Style.Stroke = previous.Clone());
+                ILayer layer = layerage.Self;
 
-                this.SelectionViewModel.StyleLayer = layer;
+                //History
+                var previous = layer.Style.StartingStroke.Clone();
+                history.UndoActions.Push(() =>
+                {
+                    ILayer layer2 = layerage.Self;
+
+                    layer2.Style.Stroke = previous.Clone();
+                });
+
+                this.ViewModel.StyleLayerage = layerage;
             });
 
             //History
-            this.ViewModel.Push(history);
+            this.ViewModel.HistoryPush(history);
         }
 
 
@@ -147,36 +156,43 @@ namespace Retouch_Photo2.Tools.Models
             if (this.Stroke.Type == brushType) return;
 
             //History
-            IHistoryBase history = new IHistoryBase("Set stroke type");
+            LayersPropertyHistory history = new LayersPropertyHistory("Set stroke type");
 
             bool _lock = false;
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 //History
                 var previous = layer.Style.Stroke.Clone(); ;
-                int index = layer.Control.Index;
-                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                Style.Stroke = previous.Clone());
+                history.UndoActions.Push(() =>
+                {
+                    ILayer layer2 = layerage.Self;
+
+                    layer2.Style.Stroke = previous.Clone();
+                });
+
 
                 Transformer transformer = layer.Transform.Destination;
                 layer.Style.Stroke.TypeChange(brushType, transformer, photo);
-                this.SelectionViewModel.StyleLayer = layer;
+                this.ViewModel.StyleLayerage = layerage;
 
 
+                // Set Stroke Onces: lock
                 if (_lock == false)
                 {
                     _lock = true;
                     this.Stroke = layer.Style.Stroke.Clone();
 
-                    if (this.Stroke.Type == BrushType.Color) this.SelectionViewModel.Color = this.Stroke.Color;
+                    if (this.Stroke.Type == BrushType.Color) this.ViewModel.Color = this.Stroke.Color;
                 }
             });
 
 
             //History
-            this.ViewModel.Push(history);
+            this.ViewModel.HistoryPush(history);
 
             this.ViewModel.Invalidate();//Invalidate
         }
@@ -207,38 +223,46 @@ namespace Retouch_Photo2.Tools.Models
         public void StrokeStopsChanged(CanvasGradientStop[] array)
         {
             //History
-            IHistoryBase history = new IHistoryBase("Set stroke");
+            LayersPropertyHistory history = new LayersPropertyHistory("Set stroke");
 
             //Selection
             this.Stroke.Stops = (CanvasGradientStop[])array.Clone();
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 //History
                 var previous = layer.Style.Stroke.Clone();
-                int index = layer.Control.Index;
-                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                Style.Stroke = previous.Clone());
+                history.UndoActions.Push(() =>
+                {
+                    ILayer layer2 = layerage.Self;
+
+                    layer2.Style.Stroke = previous.Clone();
+                });
+
 
                 layer.Style.Stroke.Stops = (CanvasGradientStop[])array.Clone();
-                this.SelectionViewModel.StyleLayer = layer;
+                this.ViewModel.StyleLayerage = layerage;
             });
 
             //History
-            this.ViewModel.Push(history);
+            this.ViewModel.HistoryPush(history);
 
             this.ViewModel.Invalidate();//Invalidate
         }
 
         //History
-        IHistoryBase historyStroke = null;
+        LayersPropertyHistory historyStroke = null;
         public void StrokeStopsChangeStarted(CanvasGradientStop[] array)
         {
             //History
-            this.historyStroke = new IHistoryBase("Set stroke");
+            this.historyStroke = new LayersPropertyHistory("Set stroke");
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 layer.Style.CacheStroke();
             });
 
@@ -247,8 +271,10 @@ namespace Retouch_Photo2.Tools.Models
         public void StrokeStopsChangeDelta(CanvasGradientStop[] array)
         {
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 layer.Style.Stroke.Stops = (CanvasGradientStop[])array.Clone();
             });
 
@@ -259,20 +285,23 @@ namespace Retouch_Photo2.Tools.Models
             this.Stroke.Stops = (CanvasGradientStop[])array.Clone();
 
             //Selection
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 //History
                 var previous = layer.Style.Stroke.Clone();
-                int index = layer.Control.Index;
-                this.historyStroke.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                Style.Stroke = previous.Clone());
+                this.historyStroke.UndoActions.Push(() =>
+                {
+                    layer.Style.Stroke = previous.Clone();
+                });
 
                 layer.Style.Stroke.Stops = (CanvasGradientStop[])array.Clone();
-                this.SelectionViewModel.StyleLayer = layer;
+                this.ViewModel.StyleLayerage = layerage;
             });
 
             //History
-            this.ViewModel.Push(this.historyStroke);
+            this.ViewModel.HistoryPush(this.historyStroke);
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
@@ -280,25 +309,30 @@ namespace Retouch_Photo2.Tools.Models
         public void StrokeExtendChanged(CanvasEdgeBehavior extend)
         {
             //History
-            IHistoryBase history = new IHistoryBase("Set stroke extend");
+            LayersPropertyHistory history = new LayersPropertyHistory("Set stroke extend");
 
             //Selection
             this.Stroke.Extend = extend;
             this.ExtendComboBox.Extend = extend;
-            this.SelectionViewModel.SetValue((layer) =>
+            this.ViewModel.SetValue((layerage) =>
             {
+                ILayer layer = layerage.Self;
+
                 //History
                 var previous = layer.Style.Stroke.Extend;
-                int index = layer.Control.Index;
-                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
-                Style.Stroke.Extend = previous);
+                history.UndoActions.Push(() =>
+                {
+                    ILayer layer2 = layerage.Self;
+
+                    layer2.Style.Stroke.Extend = previous;
+                });
 
                 layer.Style.Stroke.Extend = extend;
-                this.SelectionViewModel.StyleLayer = layer;
+                this.ViewModel.StyleLayerage = layerage;
             });
 
             //History
-            this.ViewModel.Push(history);
+            this.ViewModel.HistoryPush(history);
 
             this.ViewModel.Invalidate();//Invalidate
         }

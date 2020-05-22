@@ -12,22 +12,24 @@ namespace Retouch_Photo2.Layers
         /// Find outermost layer
         /// in all selected layers.
         /// </summary>
-        public static ILayer FindOutermost_SelectedLayer(IEnumerable<ILayer> selecedLayers)
+        public static Layerage FindOutermost_SelectedLayer(IEnumerable<Layerage> selectedLayerages)
         {
             int index = int.MaxValue;
-            ILayer layer = null;
+            Layerage layerage = null;
 
-            foreach (ILayer selecedLayer in selecedLayers)
+            foreach (Layerage selecedLayerage in selectedLayerages)
             {
-                if (index > selecedLayer.Control.Depth)
+                ILayer selectedLayer = selecedLayerage.Self;
+
+                if (index > selectedLayer.Control.Depth)
                 {
-                    index = selecedLayer.Control.Depth;
-                    layer = selecedLayer;
+                    index = selectedLayer.Control.Depth;
+                    layerage = selecedLayerage;
                 }
             }
 
-            return layer;
+            return layerage;
         }
-               
+
     }
 }
