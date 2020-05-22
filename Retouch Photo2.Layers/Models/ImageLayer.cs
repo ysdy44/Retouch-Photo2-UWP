@@ -7,6 +7,7 @@ using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Xml.Linq;
 using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
@@ -62,6 +63,15 @@ namespace Retouch_Photo2.Layers.Models
 
             LayerBase.CopyWith(resourceCreator, imageLayer, this);
             return imageLayer;
+        }
+
+        public override void SaveWith(XElement element)
+        {
+            element.Add(Retouch_Photo2.Elements.XML.SavePhotocopier("Photocopier", this.Photocopier));
+        }
+        public override void Load(XElement element)
+        {
+            this.Photocopier = Retouch_Photo2.Elements.XML.LoadPhotocopier(element.Element("Photocopier"));
         }
 
 
