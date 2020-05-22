@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Operates;
 using Retouch_Photo2.ViewModels;
@@ -181,64 +182,29 @@ namespace Retouch_Photo2.Menus.Models
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(-1, 1, transformer.Center);
+                this.Transform(matrix, transformer);
 
-                //Selection
-                this.Transformer = transformer * matrix;
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    layer.CacheTransform();
-                    layer.TransformMultiplies(matrix);
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
             };
 
             this.FlipVerticalButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(1, -1, transformer.Center);
-
-                //Selection
-                this.Transformer = transformer * matrix;
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    layer.CacheTransform();
-                    layer.TransformMultiplies(matrix);
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.Transform(matrix, transformer);
             };
 
             this.RotateLeftButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(-FanKit.Math.PiOver2, transformer.Center);
-
-                //Selection
-                this.Transformer = transformer * matrix;
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    layer.CacheTransform();
-                    layer.TransformMultiplies(matrix);
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.Transform(matrix, transformer);
             };
 
             this.RotateRightButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(FanKit.Math.PiOver2, transformer.Center);
-
-                //Selection
-                this.Transformer = transformer * matrix;
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    layer.CacheTransform();
-                    layer.TransformMultiplies(matrix);
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.Transform(matrix, transformer);
             };
 
         }
@@ -333,48 +299,21 @@ namespace Retouch_Photo2.Menus.Models
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0 - transformer.MinX, 0);
-
-                //Selection
-                this.Transformer = transformer * matrix;
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    layer.CacheTransform();
-                    layer.TransformMultiplies(matrix);
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.Transform(matrix, transformer);
             };
 
             this.CenterButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width / 2 - transformer.Center.X, 0);
-
-                //Selection
-                this.Transformer = transformer * matrix;
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    layer.CacheTransform();
-                    layer.TransformMultiplies(matrix);
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.Transform(matrix, transformer);
             };
 
             this.RightButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width - transformer.MaxX, 0);
-
-                //Selection
-                this.Transformer = transformer * matrix;
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    layer.CacheTransform();
-                    layer.TransformMultiplies(matrix);
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.Transform(matrix, transformer);
             };
 
             this.HorizontallySymmetryButton.Click += (s, e) =>
@@ -392,48 +331,21 @@ namespace Retouch_Photo2.Menus.Models
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, 0 - transformer.MinY);
-
-                //Selection
-                this.Transformer = transformer * matrix;
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    layer.CacheTransform();
-                    layer.TransformMultiplies(matrix);
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.Transform(matrix, transformer);
             };
 
             this.MiddleButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, this.ViewModel.CanvasTransformer.Height / 2 - transformer.Center.Y);
-
-                //Selection
-                this.Transformer = transformer * matrix;
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    layer.CacheTransform();
-                    layer.TransformMultiplies(matrix);
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.Transform(matrix, transformer);
             };
 
             this.BottomButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, this.ViewModel.CanvasTransformer.Height - transformer.MaxY);
-
-                //Selection
-                this.Transformer = transformer * matrix;
-                this.SelectionViewModel.SetValue((layer) =>
-                {
-                    layer.CacheTransform();
-                    layer.TransformMultiplies(matrix);
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.Transform(matrix, transformer);
             };
 
             this.VerticallySymmetryButton.Click += (s, e) =>
@@ -442,6 +354,32 @@ namespace Retouch_Photo2.Menus.Models
             };
 
         }
+
+
+        private void Transform(Matrix3x2 matrix, Transformer startingTransformer)
+        {
+            //History
+            IHistoryBase history = new IHistoryBase("Transform");
+
+            //Selection
+            this.Transformer = startingTransformer * matrix;
+            this.SelectionViewModel.SetValue((layer) =>
+            {
+                layer.TransformMultiplies(matrix);
+
+                //History
+                var previous = layer.Transform.StartingDestination;
+                int index = layer.Control.Index;
+                history.Undos.Push(() => this.ViewModel.LayerCollection.RootControls[index].Layer.
+                Transform.Destination = previous);
+            });
+
+            //History
+            this.ViewModel.Push(history);
+
+            this.ViewModel.Invalidate();//Invalidate
+        }
+
 
     }
 }

@@ -1,8 +1,11 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -60,7 +63,7 @@ namespace Retouch_Photo2.Tools
             Transformer transformer = new Transformer(canvasStartingPoint, canvasPoint, this.IsCenter, this.IsSquare);
             this.Transformer = transformer;
             this.SelectionViewModel.SetModeExtended();//Selection
-
+            
             //Mezzanine
             this.MezzanineLayer = createLayer(transformer);
             LayerCollection.Mezzanine(this.ViewModel.LayerCollection, this.MezzanineLayer);
@@ -89,7 +92,7 @@ namespace Retouch_Photo2.Tools
                 this.MezzanineLayer.Transform = new Transform(transformer);
                 this.MezzanineLayer.Style.DeliverBrushPoints(transformer);
 
-                this.ViewModel.SetTextWidthHeight(transformer);//Text
+            this.ViewModel.SetTextWidthHeight(transformer);//Text
                 this.ViewModel.Invalidate();//Invalidate
             }
 
@@ -120,15 +123,39 @@ namespace Retouch_Photo2.Tools
                     this.SelectionViewModel.SetModeSingle(this.MezzanineLayer);//Selection
                     this.MezzanineLayer.Transform = new Transform(transformer);
                     this.MezzanineLayer.IsSelected = true;
+
+                    //Selection
+                    this.SelectionViewModel.SetModeSingle(this.MezzanineLayer);
+                    LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                    LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+
+
+                    //History
+                    IHistoryBase history = new IHistoryBase("Add layer");
+                    var previous = this.MezzanineLayer.Control.Index;
+                    history.Undos.Push(() =>
+                    {
+                        ILayer layer = this.ViewModel.LayerCollection.RootControls[previous].Layer;
+                        var parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(layer);
+                        parentsChildren.Remove(layer);
+                    });
+                    //History
+                    this.ViewModel.Push(history);
+
+
                     this.MezzanineLayer = null;
+                    this.ViewModel.TextVisibility = Visibility.Collapsed;//Text
+                    this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                 }
-                else LayerCollection.RemoveMezzanineLayer(this.ViewModel.LayerCollection, this.MezzanineLayer);//Mezzanine
+                else
+                {
+                    LayerCollection.RemoveMezzanineLayer(this.ViewModel.LayerCollection, this.MezzanineLayer);//Mezzanine
 
-                LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
-                LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
-
-                this.ViewModel.TextVisibility = Visibility.Collapsed;//Text
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    //Selection
+                    this.SelectionViewModel.SetModeNone();
+                    LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                    LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+                }
             }
 
             if (this.TransformerTool.Complete(startingPoint, point)) return;//TransformerTool

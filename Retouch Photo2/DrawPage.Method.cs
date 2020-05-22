@@ -109,6 +109,7 @@ namespace Retouch_Photo2
 
 
             //Clear
+            this.ViewModel.Historys.Clear();
             this.SelectionViewModel.SetModeNone();
             this.ViewModel.LayerCollection.RootLayers.Clear();
             this.ViewModel.LayerCollection.RootControls.Clear();
