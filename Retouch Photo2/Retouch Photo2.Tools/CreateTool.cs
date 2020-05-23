@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Tools
 
             //Mezzanine
             this.MezzanineLayer = layerage;
-            LayerageCollection.Mezzanine(this.ViewModel.LayerCollection, this.MezzanineLayer);
+            LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, this.MezzanineLayer);
 
             //Text
             this.ViewModel.SetTextWidthHeight(transformer);
@@ -135,8 +135,8 @@ namespace Retouch_Photo2.Tools
 
                     //Selection
                     this.ViewModel.SetModeSingle(this.MezzanineLayer);
-                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
-                    LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+                    LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerageCollection);
                     
                     this.MezzanineLayer = null;
                     this.ViewModel.TextVisibility = Visibility.Collapsed;//Text

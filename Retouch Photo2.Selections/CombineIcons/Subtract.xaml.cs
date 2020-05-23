@@ -1,9 +1,9 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Selections.Select2Icons
+namespace Retouch_Photo2.Selections.CombineIcons
 {
-    public sealed partial class FeatherEnabledIcon : UserControl
+    public sealed partial class SubtractIcon : UserControl
     {
         //@VisualState
         bool _vsIsEnabled => this.IsEnabled;
@@ -16,9 +16,9 @@ namespace Retouch_Photo2.Selections.Select2Icons
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
-
+        
         //@Construct
-        public FeatherEnabledIcon()
+        public SubtractIcon()
         {
             this.InitializeComponent();
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
@@ -30,5 +30,6 @@ namespace Retouch_Photo2.Selections.Select2Icons
                 }
             };
         }
+
     }
 }

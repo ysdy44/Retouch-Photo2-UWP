@@ -53,8 +53,8 @@ namespace Retouch_Photo2.Tools.Elements
                 this.TipViewModel.Tool = this.TipViewModel.Tools.First(t => t != null && t.Type == ToolType.Node);
                 this.TipViewModel.ToolGroupType(ToolType.Node);
 
-                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
-                this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
+                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+                this.ViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
                 this.ViewModel.Invalidate();//Invalidate
             };
         }
@@ -84,7 +84,7 @@ namespace Retouch_Photo2.Tools.Elements
         //Replace curveLayer to layer
         private void Replace(Layerage curveLayer, Layerage layer)
         {
-            IList<Layerage> parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(layer);
+            IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(layer);
             int index = parentsChildren.IndexOf(layer);
             parentsChildren[index] = curveLayer;
         }

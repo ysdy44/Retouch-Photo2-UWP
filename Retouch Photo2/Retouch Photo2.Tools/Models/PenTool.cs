@@ -287,12 +287,12 @@ namespace Retouch_Photo2.Tools.Models
             if (this._hasPreviewTempLeftPoint)
             {
                 this._hasPreviewTempLeftPoint = false;
-                this.CreateLayer(this.ViewModel.LayerCollection, this._previewLeft, canvasPoint);
+                this.CreateLayer(this.ViewModel.LayerageCollection, this._previewLeft, canvasPoint);
             }
             else if (isOutNodeDistance)
             {
                 this._hasPreviewTempLeftPoint = false;
-                this.CreateLayer(this.ViewModel.LayerCollection, canvasStartingPoint, canvasPoint);
+                this.CreateLayer(this.ViewModel.LayerageCollection, canvasStartingPoint, canvasPoint);
             }
             else
             {
@@ -340,10 +340,10 @@ namespace Retouch_Photo2.Tools.Models
             Layer.Instances.Add(curveLayer);
 
             //Mezzanine
-            LayerageCollection.Mezzanine(this.ViewModel.LayerCollection, curveLayerage);
+            LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, curveLayerage);
 
             this.ViewModel.SetModeSingle(curveLayerage);//Selection
-            LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+            LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
             this.ViewModel.Invalidate();//Invalidate
         }
 

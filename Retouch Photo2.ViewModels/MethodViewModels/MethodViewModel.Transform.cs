@@ -50,7 +50,7 @@ namespace Retouch_Photo2.ViewModels
         {
             //Selection
             this.CacheTransformer();
-            this.SetValue((layerage) =>
+            this.SetValueWithChildren((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -65,7 +65,7 @@ namespace Retouch_Photo2.ViewModels
             //Selection
             this.Transformer = transformer;
             Matrix3x2 matrix = Transformer.FindHomography(this.StartingTransformer, transformer);
-            this.SetValue((layerage) =>
+            this.SetValueWithChildren((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -83,7 +83,7 @@ namespace Retouch_Photo2.ViewModels
             //Selection
             this.Transformer = transformer;
             Matrix3x2 matrix = Transformer.FindHomography(this.StartingTransformer, transformer);
-            this.SetValue((layerage) =>
+            this.SetValueWithChildren((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -115,7 +115,7 @@ namespace Retouch_Photo2.ViewModels
             //Selection
             this.CacheTransformer();
             this.Transformer = Transformer.Add(this.StartingTransformer, vector);
-            this.SetValue((layerage) =>
+            this.SetValueWithChildren((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -143,7 +143,7 @@ namespace Retouch_Photo2.ViewModels
         {
             //Selection
             this.CacheTransformer();
-            this.SetValue((layerage) =>
+            this.SetValueWithChildren((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -158,7 +158,7 @@ namespace Retouch_Photo2.ViewModels
             //Selection
             Transformer transformer = Transformer.Add(this.StartingTransformer, vector);
             this.Transformer = transformer;
-            this.SetValue((layerage) =>
+            this.SetValueWithChildren((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -176,7 +176,7 @@ namespace Retouch_Photo2.ViewModels
             //Selection
             Transformer transformer = Transformer.Add(this.StartingTransformer, vector);
             this.Transformer = transformer;
-            this.SetValue((layerage) =>
+            this.SetValueWithChildren((layerage) =>
             {
                 ILayer layer = layerage.Self;
 

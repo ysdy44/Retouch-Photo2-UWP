@@ -93,11 +93,12 @@ namespace Retouch_Photo2.Effects.Models
         {
             if (isOnlyButton == false)
             {
-                this.RadiusSlider.Value = effect.GaussianBlur_Radius;
+                this.RadiusSlider.Value = effect.Emboss_Radius;
+                this.AnglePicker.Radians = effect.Emboss_Angle;
             }
 
             this.Button.IsButtonTapped = false;
-            this.Button.ToggleSwitch.IsOn = effect.GaussianBlur_IsOn;
+            this.Button.ToggleSwitch.IsOn = effect.Emboss_IsOn;
             this.Button.IsButtonTapped = true;
         }
     }

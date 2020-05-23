@@ -142,7 +142,7 @@
     <value>Group</value>
   </data>
   <data name="Group_Release" xml:space="preserve">
-    <value>释放</value>
+    <value>Release</value>
   </data>
   <data name="Group_UnGroup" xml:space="preserve">
     <value>UnGroup</value>
@@ -155,5 +155,26 @@
   </data>
   <data name="Select_Deselect" xml:space="preserve">
     <value>Deselect</value>
+  </data>
+  <data name="Combine" xml:space="preserve">
+    <value>Combine</value>
+  </data>
+  <data name="Combine_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Combine_Combine" xml:space="preserve">
+    <value>Combine</value>
+  </data>
+  <data name="Combine_Divide" xml:space="preserve">
+    <value>Divide</value>
+  </data>
+  <data name="Combine_Intersect" xml:space="preserve">
+    <value>Intersect</value>
+  </data>
+  <data name="Combine_Subtract" xml:space="preserve">
+    <value>Subtract</value>
+  </data>
+  <data name="Select_Invert" xml:space="preserve">
+    <value>Invert</value>
   </data>
 </root>

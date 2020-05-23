@@ -128,7 +128,7 @@ namespace Retouch_Photo2.Tools
         {
             //Select a layer of the same depth
             Layerage firstLayer = this.ViewModel.GetFirstLayer();
-            IList<Layerage> parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(firstLayer);
+            IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(firstLayer);
             Layerage selectedLayer = parentsChildren.FirstOrDefault((layer) => layer.Self.FillContainsPoint(canvasPoint));
             return selectedLayer;
         }

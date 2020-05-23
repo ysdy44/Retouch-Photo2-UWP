@@ -38,7 +38,7 @@ namespace Retouch_Photo2.ViewModels
                     break;
             }
             this.Fill = BrushBase.ColorBrush(value);
-            this.SetValue((layerage) =>
+            this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -66,7 +66,7 @@ namespace Retouch_Photo2.ViewModels
             this._historyMethodFillColor = new LayersPropertyHistory("Set fill");
 
             //Selection
-            this.SetValue((layerage) =>
+            this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
                 layer.Style.CacheFill();
@@ -78,7 +78,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodFillColorChangeDelta(Color value)
         {
             //Selection
-            this.SetValue((layerage) =>
+            this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -98,7 +98,7 @@ namespace Retouch_Photo2.ViewModels
                     break;
             }
             this.Fill = BrushBase.ColorBrush(value);
-            this.SetValue((layerage) =>
+            this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -140,7 +140,7 @@ namespace Retouch_Photo2.ViewModels
                     break;
             }
             this.Stroke = BrushBase.ColorBrush(value);
-            this.SetValue((layerage) =>
+            this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -168,7 +168,7 @@ namespace Retouch_Photo2.ViewModels
             this._historyMethodStrokeColor = new LayersPropertyHistory("Set stroke");
 
             //Selection
-            this.SetValue((layerage) =>
+            this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
                 layer.Style.CacheStroke();
@@ -180,7 +180,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodStrokeColorChangeDelta(Color value)
         {
             //Selection
-            this.SetValue((layerage) =>
+            this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -200,7 +200,7 @@ namespace Retouch_Photo2.ViewModels
                     break;
             }
             this.Stroke = BrushBase.ColorBrush(value);
-            this.SetValue((layerage) =>
+            this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 

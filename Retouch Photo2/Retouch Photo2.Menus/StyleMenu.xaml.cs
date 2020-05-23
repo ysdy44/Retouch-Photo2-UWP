@@ -35,7 +35,7 @@ namespace Retouch_Photo2.Menus.Models
 
             this.Button.Click += (s, e) =>
             {
-                this.ItemsControl.ItemsSource = sadasd(this.ViewModel.LayerCollection.RootLayerages,0);
+                this.ItemsControl.ItemsSource = sadasd(this.ViewModel.LayerageCollection.RootLayerages,0);
             };
             this.Button2.Click += (s, e) =>
             {
@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Menus.Models
             this.Coo.Click += (s, e) =>
             {
                 List<Layerage> sdasd = new List<Layerage>();
-                foreach (var item in this.ViewModel.LayerCollection.RootLayerages)
+                foreach (var item in this.ViewModel.LayerageCollection.RootLayerages)
                 {
                     sdasd.Add(item.Clone());
                 }
@@ -53,16 +53,16 @@ namespace Retouch_Photo2.Menus.Models
             };
             this.Re.Click += (s, e) =>
             {
-                this.ViewModel.LayerCollection.RootLayerages.Clear();
+                this.ViewModel.LayerageCollection.RootLayerages.Clear();
                 foreach (var item in previous)
                 {
-                    this.ViewModel.LayerCollection.RootLayerages.Add(item.Clone());
+                    this.ViewModel.LayerageCollection.RootLayerages.Add(item.Clone());
                 }
 
                 this.ViewModel.Text = previous.Count().ToString();
-                this.ViewModel.SetMode(this.ViewModel.LayerCollection);
-                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
-                LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+                this.ViewModel.SetMode(this.ViewModel.LayerageCollection);
+                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+                LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerageCollection);
                 this.ViewModel.Invalidate();
             };
         }

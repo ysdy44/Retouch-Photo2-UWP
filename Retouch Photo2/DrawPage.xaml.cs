@@ -107,9 +107,9 @@ namespace Retouch_Photo2
 
                 if (isUndo)
                 {
-                    this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection          
-                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
-                    LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+                    this.ViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection          
+                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+                    LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerageCollection);
 
                     this.ViewModel.Invalidate();//Invalidate
                 }

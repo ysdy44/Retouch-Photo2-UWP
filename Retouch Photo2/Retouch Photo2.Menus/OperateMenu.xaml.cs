@@ -217,13 +217,13 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.ViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
                     Layerage destination = this.ViewModel.Layerage;
-                    IList<Layerage> parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(destination);
+                    IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
                     if (parentsChildren.Count < 2) return;
 
                     parentsChildren.Remove(destination);
                     parentsChildren.Add(destination);
 
-                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };
@@ -233,7 +233,7 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.ViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
                     Layerage destination = this.ViewModel.Layerage;
-                    IList<Layerage> parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(destination);
+                    IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
                     if (parentsChildren.Count < 2) return;
 
                     int index = parentsChildren.IndexOf(destination);
@@ -245,7 +245,7 @@ namespace Retouch_Photo2.Menus.Models
                     parentsChildren.Remove(destination);
                     parentsChildren.Insert(index, destination);
 
-                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };
@@ -255,7 +255,7 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.ViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
                     Layerage destination = this.ViewModel.Layerage;                    
-                    IList<Layerage> parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(destination);                    
+                    IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);                    
                     if (parentsChildren.Count < 2) return;
 
                     int index = parentsChildren.IndexOf(destination);
@@ -267,7 +267,7 @@ namespace Retouch_Photo2.Menus.Models
                     parentsChildren.Remove(destination);
                     parentsChildren.Insert(index, destination);
 
-                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };
@@ -277,13 +277,13 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.ViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
                     Layerage destination = this.ViewModel.Layerage;
-                    IList<Layerage> parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(destination);                    
+                    IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);                    
                     if (parentsChildren.Count < 2) return;
 
                     parentsChildren.Remove(destination);
                     parentsChildren.Insert(0, destination);
 
-                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };

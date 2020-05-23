@@ -114,11 +114,11 @@ namespace Retouch_Photo2.Controls
             {
                 LayerageCollection.DragItemsCompleted += () =>
                 {
-                    LayerageCollection.DragComplete(this.ViewModel.LayerCollection, this.DragDestinationLayer, this.DragSourceLayer, this.DragLayerOverlayMode, this.DragLayerIsSelected);
+                    LayerageCollection.DragComplete(this.ViewModel.LayerageCollection, this.DragDestinationLayer, this.DragSourceLayer, this.DragLayerOverlayMode, this.DragLayerIsSelected);
 
-                    this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
-                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
-                    LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+                    this.ViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
+                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+                    LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerageCollection);
                     this.ViewModel.Invalidate();//Invalidate
 
                     this.DragSourceLayer = null;
@@ -144,7 +144,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.MethodSelectedNot(selectedLayerage);//Method
             
             else if (isLinear)       
-                LayerageCollection.ShiftSelectCurrentLayer(this.ViewModel.LayerCollection, selectedLayerage);
+                LayerageCollection.ShiftSelectCurrentLayer(this.ViewModel.LayerageCollection, selectedLayerage);
             
             else this.ViewModel.MethodSelectedNew(selectedLayerage);  //Method
             

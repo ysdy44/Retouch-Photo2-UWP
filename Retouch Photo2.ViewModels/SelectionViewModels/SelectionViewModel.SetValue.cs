@@ -17,9 +17,9 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
-        
+
         /// <summary>
-        /// Sets all selection layer(s).
+        /// Sets all selection layer(s))' value .
         /// </summary>
         /// <param name="action"> action </param>
         public void SetValue(Action<Layerage> action)
@@ -39,6 +39,74 @@ namespace Retouch_Photo2.ViewModels
                         action(child);
                     }
                     break;
+            }
+        }
+        /// <summary>
+        /// Sets all selection layer(s))' value  with children.
+        /// </summary>
+        /// <param name="action"> action </param>
+        public void SetValueWithChildren(Action<Layerage> action)
+        {
+            switch (this.SelectionMode)
+            {
+                case ListViewSelectionMode.None:
+                    break;
+
+                case ListViewSelectionMode.Single:
+                    this._setValueWithChildren(this.Layerage, action);
+                    break;
+
+                case ListViewSelectionMode.Multiple:
+                    foreach (Layerage child in this.Layerages)
+                    {
+                        this._setValueWithChildren(child, action);
+                    }
+                    break;
+            }
+        }
+        private void _setValueWithChildren(Layerage layerage, Action<Layerage> action)
+        {
+            action(layerage);
+            foreach (Layerage child in layerage.Children)
+            {
+                this._setValueWithChildren(child, action);
+            }
+        }
+        /// <summary>
+        /// Sets all selection layer(s)' value with children only group.
+        /// </summary>
+        /// <param name="action"> action </param>
+        public void SetValueWithChildrenOnlyGroup(Action<Layerage> action)
+        {
+            switch (this.SelectionMode)
+            {
+                case ListViewSelectionMode.None:
+                    break;
+
+                case ListViewSelectionMode.Single:
+                    this._setValueWithChildren(this.Layerage, action);
+                    break;
+
+                case ListViewSelectionMode.Multiple:
+                    foreach (Layerage child in this.Layerages)
+                    {
+                        this._setValueWithChildren(child, action);
+                    }
+                    break;
+            }
+        }
+        private void _setValueWithChildrenOnlyGroup(Layerage layerage, Action<Layerage> action)
+        {
+            action(layerage);
+
+            ILayer layer = layerage.Self;
+
+            if (layer.Type == LayerType.Group)
+            {
+                foreach (Layerage child in layerage.Children)
+                {
+                    this._setValueWithChildren(child, action);
+                }
             }
         }
 

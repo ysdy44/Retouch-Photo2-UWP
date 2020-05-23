@@ -41,13 +41,13 @@ namespace Retouch_Photo2.Controls
             this.InitializeComponent();
             //LayerCollection
             this.ConstructLayerCollection();
-            this.ItemsControl.ItemsSource = this.ViewModel.LayerCollection.RootControls;
+            this.ItemsControl.ItemsSource = this.ViewModel.LayerageCollection.RootControls;
 
 
             this.Tapped += (s, e) =>
             {
                 this.ViewModel.SetModeNone();//Selection
-                LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+                LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerageCollection);
                 this.ViewModel.Invalidate();
             };
             this.RightTapped += (s, e) => this.ShowLayerMenu();
@@ -87,10 +87,10 @@ namespace Retouch_Photo2.Controls
                 });
 
                 //Mezzanine
-                LayerageCollection.Mezzanine(this.ViewModel.LayerCollection, imageLayerage);
+                LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, imageLayerage);
 
-                this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
-                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                this.ViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
+                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
                 this.ViewModel.Invalidate();//Invalidate
             };
         }

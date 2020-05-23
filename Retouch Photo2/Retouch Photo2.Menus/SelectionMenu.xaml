@@ -22,9 +22,9 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <!--Edit-->
                 <StackPanel Grid.Column="0">
-                    
+
+                    <!--Edit-->
                     <TextBlock x:Name="EditTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                     <Button x:Name="CutButton" IsEnabled="{x:Bind ViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
                     <Button x:Name="DuplicateButton" IsEnabled="{x:Bind ViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
@@ -34,6 +34,7 @@
 
                     <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
 
+                    <!--Group-->
                     <TextBlock x:Name="GroupTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                     <Button x:Name="GroupButton" IsEnabled="{x:Bind ViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
                     <Button x:Name="UnGroupButton" IsEnabled="{x:Bind ViewModel.IsGroupLayer, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
@@ -43,14 +44,23 @@
 
                 <Rectangle Grid.Column="1" Margin="0" Style="{ThemeResource AppSeparatorRectangleHorizontalStyle}" />
 
-                <!--Select-->
                 <StackPanel Grid.Column="2">
 
+                    <!--Select-->
                     <TextBlock x:Name="SelectTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                     <Button x:Name="AllButton" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
                     <Button x:Name="DeselectButton" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
-                  
+                    <Button x:Name="InvertButton" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
+
                     <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
+
+                    <!--Combine-->
+                    <TextBlock x:Name="CombineTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <Button x:Name="AddButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="SubtractButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="IntersectButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="DivideButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="CombineButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
 
                 </StackPanel>
 

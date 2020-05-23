@@ -1,9 +1,9 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Selections.Select2Icons
+namespace Retouch_Photo2.Selections.CombineIcons
 {
-    public sealed partial class TransformEnabledIcon : UserControl
+    public sealed partial class AddIcon : UserControl
     {
         //@VisualState
         bool _vsIsEnabled => this.IsEnabled;
@@ -16,9 +16,9 @@ namespace Retouch_Photo2.Selections.Select2Icons
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
-
+        
         //@Construct
-        public TransformEnabledIcon()
+        public AddIcon()
         {
             this.InitializeComponent();
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
@@ -30,5 +30,6 @@ namespace Retouch_Photo2.Selections.Select2Icons
                 }
             };
         }
+
     }
 }

@@ -34,21 +34,21 @@ namespace Retouch_Photo2.ViewModels
             this.CanvasTransformer.Height = project.Height;
             
             //Layers
-            this.LayerCollection.RootLayerages.Clear();
+            this.LayerageCollection.RootLayerages.Clear();
             if (project.Layerages != null)
             {
                 foreach (Layerage layer in project.Layerages)
                 {
                     if (layer != null)
                     {
-                        this.LayerCollection.RootLayerages.Add(layer);
+                        this.LayerageCollection.RootLayerages.Add(layer);
                     }
                 }
             }
 
             //Arrange
-            LayerageCollection.ArrangeLayersControls(this.LayerCollection);
-            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerCollection);
+            LayerageCollection.ArrangeLayersControls(this.LayerageCollection);
+            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerageCollection);
         }
 
 
@@ -58,8 +58,8 @@ namespace Retouch_Photo2.ViewModels
         public bool IsUpdateThumbnailByName = false;
 
 
-        /// <summary> Retouch_Photo2's the only LayerCollection. </summary>
-        public LayerageCollection LayerCollection { get; } = new LayerageCollection();
+        /// <summary> Retouch_Photo2's the only LayerageCollection. </summary>
+        public LayerageCollection LayerageCollection { get; } = new LayerageCollection();
         
 
         /// <summary> Retouch_Photo2's the only <see cref = "Microsoft.Graphics.Canvas.UI.Xaml.CanvasDevice" />. </summary>

@@ -49,7 +49,7 @@ namespace Retouch_Photo2.ViewModels
             this.HistoryPush(history);
 
             this.SetModeNone();//Selection
-            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerCollection);
+            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerageCollection);
             this.Invalidate();//Invalidate     
         }
 
@@ -70,7 +70,7 @@ namespace Retouch_Photo2.ViewModels
             bool isSelected = !layer.IsSelected;
             layer.IsSelected = isSelected;
 
-            this.SetMode(this.LayerCollection);//Selection
+            this.SetMode(this.LayerageCollection);//Selection
             LayerageCollection.ArrangeLayersBackgroundItemClick(selectedLayerage);
             this.Invalidate();//Invalidate
         }
@@ -124,7 +124,7 @@ namespace Retouch_Photo2.ViewModels
             this.HistoryPush(history);
 
             this.SetModeSingle(selectedLayerage);//Selection
-            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerCollection);
+            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerageCollection);
             this.Invalidate();//Invalidate     
         }
 
@@ -152,8 +152,8 @@ namespace Retouch_Photo2.ViewModels
             //History
             this.HistoryPush(history);
 
-            this.SetMode(this.LayerCollection);//Selection
-            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerCollection);
+            this.SetMode(this.LayerageCollection);//Selection
+            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerageCollection);
             this.Invalidate();//Invalidate
         }
 
@@ -181,8 +181,8 @@ namespace Retouch_Photo2.ViewModels
             //History
             this.HistoryPush(history);
 
-            this.SetMode(this.LayerCollection);//Selection
-            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerCollection);
+            this.SetMode(this.LayerageCollection);//Selection
+            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerageCollection);
             this.Invalidate();//Invalidate
         }
 
@@ -221,7 +221,7 @@ namespace Retouch_Photo2.ViewModels
 
             this.SetModeSingle(selectedLayerage);//Selection
 
-            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerCollection);
+            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerageCollection);
 
             this.Invalidate();//Invalidate
         }

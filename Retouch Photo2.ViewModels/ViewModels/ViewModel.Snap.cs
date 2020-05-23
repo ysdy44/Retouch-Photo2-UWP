@@ -89,7 +89,7 @@ namespace Retouch_Photo2.ViewModels
 
 
             //Layers
-            IList<Layerage> layers = this.LayerCollection.GetParentsChildren(firstLayer);
+            IList<Layerage> layers = this.LayerageCollection.GetParentsChildren(firstLayer);
 
             foreach (Layerage layer in layers)
             {

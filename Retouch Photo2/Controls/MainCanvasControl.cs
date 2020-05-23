@@ -76,9 +76,9 @@ namespace Retouch_Photo2.Controls
         {
             ICanvasImage previousImage = new ColorSourceEffect { Color = Colors.White };
 
-            for (int i = this.ViewModel.LayerCollection.RootLayerages.Count - 1; i >= 0; i--)
+            for (int i = this.ViewModel.LayerageCollection.RootLayerages.Count - 1; i >= 0; i--)
             {
-                Layerage currentLayer = this.ViewModel.LayerCollection.RootLayerages[i];
+                Layerage currentLayer = this.ViewModel.LayerageCollection.RootLayerages[i];
                 ILayer currentLayer2 = currentLayer.Self;
 
                 previousImage = Layer.Render(this.ViewModel.CanvasDevice, currentLayer2, previousImage, canvasToVirtualMatrix, currentLayer.Children);
@@ -99,7 +99,7 @@ namespace Retouch_Photo2.Controls
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             
             //Bound
-            foreach (Layerage layerage in this.ViewModel.LayerCollection.RootLayerages)
+            foreach (Layerage layerage in this.ViewModel.LayerageCollection.RootLayerages)
             {
                 ILayer layer = layerage.Self;
 

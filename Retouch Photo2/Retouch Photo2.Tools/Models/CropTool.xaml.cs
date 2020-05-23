@@ -72,7 +72,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             // The transformer may change after the layer is cropped.
             // So, reset the transformer.
-            this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
+            this.ViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
         }
 
     }
@@ -118,7 +118,7 @@ namespace Retouch_Photo2.Tools.Models
         public void Started(Vector2 startingPoint, Vector2 point)
         {
             Layerage firstLayer = this.ViewModel.GetFirstLayer();
-            IList<Layerage> parentsChildren = this.ViewModel.LayerCollection.GetParentsChildren(firstLayer);
+            IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(firstLayer);
 
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();

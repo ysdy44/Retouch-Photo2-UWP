@@ -151,7 +151,7 @@ namespace Retouch_Photo2.Tools.Models
 
 
             this.MezzanineLayerage = imageLayerage;
-            LayerageCollection.Mezzanine(this.ViewModel.LayerCollection, this.MezzanineLayerage);
+            LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, this.MezzanineLayerage);
 
             this.ViewModel.Transformer = transformerDestination;//Selection
 
@@ -184,7 +184,7 @@ namespace Retouch_Photo2.Tools.Models
                 mezzanineLayer.Transform.Destination = transformerDestination;
                 this.ViewModel.Transformer = transformerDestination;//Selection
 
-                foreach (Layerage child in this.ViewModel.LayerCollection.RootLayerages)
+                foreach (Layerage child in this.ViewModel.LayerageCollection.RootLayerages)
                 {
                     ILayer child2 = child.Self;
 
@@ -194,12 +194,12 @@ namespace Retouch_Photo2.Tools.Models
                 mezzanineLayer.IsSelected = true;
                 this.MezzanineLayerage = null;
             }
-            else LayerageCollection.RemoveMezzanineLayer(this.ViewModel.LayerCollection, this.MezzanineLayerage);//Mezzanine
+            else LayerageCollection.RemoveMezzanineLayer(this.ViewModel.LayerageCollection, this.MezzanineLayerage);//Mezzanine
 
-            this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
+            this.ViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
 
-            LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
-            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+            LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerageCollection);
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
