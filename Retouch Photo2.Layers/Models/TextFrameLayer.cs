@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public TextFrameLayer()
         {
-            base.Control = new LayerControl(this.ToLayerage())
+            base.Control = new LayerControl
             {
                 Icon = new TextFrameIcon(),
                 Type = this.ConstructStrings(),

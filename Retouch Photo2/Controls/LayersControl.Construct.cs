@@ -21,9 +21,9 @@ namespace Retouch_Photo2.Controls
 
         private void ConstructLayerCollection()
         {
-            if (LayerCollection.ItemClick == null)
+            if (LayerageCollection.ItemClick == null)
             {
-                LayerCollection.ItemClick += (layerage) =>
+                LayerageCollection.ItemClick += (layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -37,17 +37,17 @@ namespace Retouch_Photo2.Controls
                     }
                 };
             }
-            if (LayerCollection.RightTapped == null)
+            if (LayerageCollection.RightTapped == null)
             {
-                LayerCollection.RightTapped += (layer) =>
+                LayerageCollection.RightTapped += (layer) =>
                 {
                     this.ShowLayerMenu(layer);
                 };
             }
 
-            if (LayerCollection.VisibilityChanged == null)
+            if (LayerageCollection.VisibilityChanged == null)
             {
-                LayerCollection.VisibilityChanged += (layerage) =>
+                LayerageCollection.VisibilityChanged += (layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -70,25 +70,25 @@ namespace Retouch_Photo2.Controls
                     this.ViewModel.Invalidate();//Invalidate
                 };
             }
-            if (LayerCollection.IsExpandChanged == null)
+            if (LayerageCollection.IsExpandChanged == null)
             {
-                LayerCollection.IsExpandChanged += (layerage) =>
+                LayerageCollection.IsExpandChanged += (layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
                     layer.IsExpand = !layer.IsExpand;
 
-                    LayerCollection.ArrangeLayersVisibility(layerage);
+                    LayerageCollection.ArrangeLayersVisibility(layerage);
                 };
             }
-            if (LayerCollection.IsSelectedChanged == null)
+            if (LayerageCollection.IsSelectedChanged == null)
             {                
-                LayerCollection.IsSelectedChanged +=(isSelected)=> this.ViewModel.MethodSelectedNot(isSelected);//Method
+                LayerageCollection.IsSelectedChanged +=(isSelected)=> this.ViewModel.MethodSelectedNot(isSelected);//Method
             }
 
-            if (LayerCollection.DragItemsStarted == null)
+            if (LayerageCollection.DragItemsStarted == null)
             {
-                LayerCollection.DragItemsStarted += (layer, manipulationMode) =>
+                LayerageCollection.DragItemsStarted += (layer, manipulationMode) =>
                 {
                     this.DragSourceLayer = layer;
 
@@ -102,23 +102,23 @@ namespace Retouch_Photo2.Controls
                     }
                 };
             }
-            if (LayerCollection.DragItemsDelta == null)
+            if (LayerageCollection.DragItemsDelta == null)
             {
-                LayerCollection.DragItemsDelta += (layer, overlayMode) =>
+                LayerageCollection.DragItemsDelta += (layer, overlayMode) =>
                 {
                     this.DragDestinationLayer = layer;
                     this.DragLayerOverlayMode = overlayMode;
                 };
             }
-            if (LayerCollection.DragItemsCompleted == null)
+            if (LayerageCollection.DragItemsCompleted == null)
             {
-                LayerCollection.DragItemsCompleted += () =>
+                LayerageCollection.DragItemsCompleted += () =>
                 {
-                    LayerCollection.DragComplete(this.ViewModel.LayerCollection, this.DragDestinationLayer, this.DragSourceLayer, this.DragLayerOverlayMode, this.DragLayerIsSelected);
+                    LayerageCollection.DragComplete(this.ViewModel.LayerCollection, this.DragDestinationLayer, this.DragSourceLayer, this.DragLayerOverlayMode, this.DragLayerIsSelected);
 
                     this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
-                    LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
-                    LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                    LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
                     this.ViewModel.Invalidate();//Invalidate
 
                     this.DragSourceLayer = null;
@@ -144,7 +144,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.MethodSelectedNot(selectedLayerage);//Method
             
             else if (isLinear)       
-                LayerCollection.ShiftSelectCurrentLayer(this.ViewModel.LayerCollection, selectedLayerage);
+                LayerageCollection.ShiftSelectCurrentLayer(this.ViewModel.LayerCollection, selectedLayerage);
             
             else this.ViewModel.MethodSelectedNew(selectedLayerage);  //Method
             

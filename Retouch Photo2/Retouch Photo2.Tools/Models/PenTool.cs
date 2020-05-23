@@ -323,7 +323,7 @@ namespace Retouch_Photo2.Tools.Models
             }
         }
 
-        private void CreateLayer(LayerCollection layerCollection, Vector2 canvasStartingPoint, Vector2 canvasPoint)
+        private void CreateLayer(LayerageCollection layerCollection, Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {      
             //Transformer
             Transformer transformer = new Transformer(canvasPoint, canvasStartingPoint);
@@ -335,14 +335,15 @@ namespace Retouch_Photo2.Tools.Models
                 Transform = new Transform(transformer),
                 Style = this.ViewModel.CurveStyle,
             };
-            Layer.Instances.Add(curveLayer);
             Layerage curveLayerage = curveLayer.ToLayerage();
-            
+            curveLayer.Control.ConstructLayerControl(curveLayerage);
+            Layer.Instances.Add(curveLayer);
+
             //Mezzanine
-            LayerCollection.Mezzanine(this.ViewModel.LayerCollection, curveLayerage);
+            LayerageCollection.Mezzanine(this.ViewModel.LayerCollection, curveLayerage);
 
             this.ViewModel.SetModeSingle(curveLayerage);//Selection
-            LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+            LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
             this.ViewModel.Invalidate();//Invalidate
         }
 

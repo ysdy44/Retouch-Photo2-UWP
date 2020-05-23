@@ -118,6 +118,7 @@ namespace Retouch_Photo2
             //Project
             {
                 Project project = XML.LoadProjectFile(name);
+                LayerageCollection.ConstructLayerControl(project.Layerages);
                 this.ViewModel.LoadFromProject(project);
                 this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
             }
@@ -159,12 +160,14 @@ namespace Retouch_Photo2
 
             //ImageLayer 
             Photocopier photocopier = photo.ToPhotocopier();
-            ImageLayer imageLayer = new ImageLayer(transformerSource, photocopier)
+            ImageLayer imageLayer = new ImageLayer
             {
-                Transform = new Transform(transformerSource)
+                Transform = new Transform(transformerSource),
+                Photocopier = photocopier,
             };
-            Layer.Instances.Add(imageLayer);
             Layerage imageLayerage = imageLayer.ToLayerage();
+            imageLayer.Control.ConstructLayerControl(imageLayerage);
+            Layer.Instances.Add(imageLayer);
 
             //Project
             {
@@ -173,7 +176,7 @@ namespace Retouch_Photo2
                     Name = name,
                     Width = width,
                     Height = height,
-                    Layers = new List<Layerage>
+                    Layerages = new List<Layerage>
                     {
                          imageLayerage
                     }

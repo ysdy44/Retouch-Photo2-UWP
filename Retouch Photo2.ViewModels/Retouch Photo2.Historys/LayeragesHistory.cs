@@ -9,7 +9,7 @@ namespace Retouch_Photo2.Historys
         public string Title { get; set; }
         public Action UndoAction { get; set; }
 
-        public IList<Layerage> Layerages { get; private set; } = new List<Layerage>();
+        public IList<Layerage> Layerages { get; set; } = new List<Layerage>();
 
         public void Undo()
         {

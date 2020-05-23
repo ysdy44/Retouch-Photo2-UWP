@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryRoundRectLayer()
         {
-            base.Control = new LayerControl(this.ToLayerage())
+            base.Control = new LayerControl
             {
                 Icon = new GeometryRoundRectIcon(),
                 Type = this.ConstructStrings(),

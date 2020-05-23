@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryPieLayer()
         {
-            base.Control = new LayerControl(this.ToLayerage())
+            base.Control = new LayerControl
             {
                 Icon = new GeometryPieIcon(),
                 Type = this.ConstructStrings(),

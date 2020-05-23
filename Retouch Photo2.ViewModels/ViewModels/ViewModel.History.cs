@@ -69,17 +69,17 @@ namespace Retouch_Photo2.ViewModels
         {
             LayeragesHistory history = new LayeragesHistory(title);
                        
-            foreach (var item in this.LayerCollection.RootLayers)
+            foreach (var item in this.LayerCollection.RootLayerages)
             {
                 history.Layerages.Add(item.Clone());
             }
 
             history.UndoAction = () =>
             {
-                this.LayerCollection.RootLayers.Clear();
+                this.LayerCollection.RootLayerages.Clear();
                 foreach (Layerage layerage in history.Layerages)
                 {
-                    this.LayerCollection.RootLayers.Add(layerage.Clone());
+                    this.LayerCollection.RootLayerages.Add(layerage.Clone());
                 }
             };
             this.HistoryPush(history);

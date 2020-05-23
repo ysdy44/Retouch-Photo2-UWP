@@ -190,8 +190,8 @@ namespace Retouch_Photo2.Menus.Models
 
 
             //Layers
-            IEnumerable<Layerage> selectedLayers = LayerCollection.GetAllSelectedLayers(this.ViewModel.LayerCollection);
-            Layerage outermost = LayerCollection.FindOutermost_SelectedLayer(selectedLayers);
+            IEnumerable<Layerage> selectedLayers = LayerageCollection.GetAllSelectedLayers(this.ViewModel.LayerCollection);
+            Layerage outermost = LayerageCollection.FindOutermost_SelectedLayer(selectedLayers);
             ILayer layer = outermost.Self;
 
             Effect effect2 = layer.Effect;

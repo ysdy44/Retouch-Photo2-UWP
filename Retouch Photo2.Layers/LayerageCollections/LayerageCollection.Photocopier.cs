@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Retouch_Photo2.Layers
 {
-    public partial class LayerCollection
+    public partial class LayerageCollection
     {
 
         /// <summary>
@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Layers
             {
                 ILayer child2 = child.Self;
 
-                foreach (Photocopier photocopier in LayerCollection.GetPhotocopiers(child.Children))
+                foreach (Photocopier photocopier in LayerageCollection.GetPhotocopiers(child.Children))
                 {
                     yield return photocopier;
                 }

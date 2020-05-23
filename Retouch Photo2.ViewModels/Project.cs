@@ -14,8 +14,8 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> <see cref = "Project" />'s width. </summary>
         public int Width { set; get; }
         /// <summary> <see cref = "Project" />'s height. </summary>
-        public int Height { set; get; }        
-        /// <summary> <see cref = "Project" />'s layers. </summary>
-        public IEnumerable<Layerage> Layers;
+        public int Height { set; get; }
+        /// <summary> <see cref = "Project" />'s layerages. </summary>
+        public IEnumerable<Layerage> Layerages;
     }
 }

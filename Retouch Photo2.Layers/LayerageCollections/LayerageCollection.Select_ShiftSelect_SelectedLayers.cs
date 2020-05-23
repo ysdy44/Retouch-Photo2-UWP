@@ -2,14 +2,14 @@
 
 namespace Retouch_Photo2.Layers
 {
-    public partial class LayerCollection
+    public partial class LayerageCollection
     {
 
         /// <summary>
         /// Gets all selected layers.
         /// </summary>
         /// <returns> The selected layers. </returns>
-        public static IEnumerable<Layerage> GetAllSelectedLayers(LayerCollection layerCollection) 
+        public static IEnumerable<Layerage> GetAllSelectedLayers(LayerageCollection layerageCollection) 
          {
             IList<Layerage> addLayers = new List<Layerage>();
 
@@ -30,7 +30,7 @@ namespace Retouch_Photo2.Layers
             }
 
             //Recursive
-            addLayer(layerCollection.RootLayers);
+            addLayer(layerageCollection.RootLayerages);
 
             return addLayers;
         }
@@ -43,13 +43,13 @@ namespace Retouch_Photo2.Layers
         /// Select the current layer (hold **Shift** at the same time).
         /// </summary>
         /// <param name="currentLayer"> The current layer. </param>
-        public static void ShiftSelectCurrentLayer(LayerCollection layerCollection, Layerage currentLayer)
+        public static void ShiftSelectCurrentLayer(LayerageCollection layerageCollection, Layerage currentLayer)
         {
-            IList<Layerage> parentsChildren = layerCollection.GetParentsChildren(currentLayer);
+            IList<Layerage> parentsChildren = layerageCollection.GetParentsChildren(currentLayer);
 
             //Recursive
-            bool isFind = LayerCollection._findShiftSelectedLayer(currentLayer, parentsChildren);
-            if (isFind) LayerCollection._setShiftSelectedLayer(currentLayer, parentsChildren);
+            bool isFind = LayerageCollection._findShiftSelectedLayer(currentLayer, parentsChildren);
+            if (isFind) LayerageCollection._setShiftSelectedLayer(currentLayer, parentsChildren);
         }
         
         private static bool _findShiftSelectedLayer(Layerage currentLayer, IEnumerable<Layerage> layers)

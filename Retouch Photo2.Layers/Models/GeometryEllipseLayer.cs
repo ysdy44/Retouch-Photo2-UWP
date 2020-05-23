@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Layers.Models
         /// <param name="element"> The source XElement. </param>
         public GeometryEllipseLayer()
         {
-            base.Control = new LayerControl(this.ToLayerage())
+            base.Control = new LayerControl
             {
                 Icon = new GeometryEllipseIcon(),
                 Type = this.ConstructStrings(),

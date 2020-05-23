@@ -32,7 +32,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public ImageLayer()
         {
-            base.Control = new LayerControl(this.ToLayerage())
+            base.Control = new LayerControl
             {
                 Icon = new ImageIcon(),
                 Type = this.ConstructStrings(),
@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Layers.Models
         /// <param name="photocopier"> The fill photocopier. </param>
         public ImageLayer(Transformer transformer, Photocopier photocopier)
         {
-            base.Control = new LayerControl(this.ToLayerage())
+            base.Control = new LayerControl
             {
                 Icon = new ImageIcon(),
                 Type = this.ConstructStrings(),

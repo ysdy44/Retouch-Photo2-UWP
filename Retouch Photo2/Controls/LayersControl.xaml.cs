@@ -47,7 +47,7 @@ namespace Retouch_Photo2.Controls
             this.Tapped += (s, e) =>
             {
                 this.ViewModel.SetModeNone();//Selection
-                LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+                LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
                 this.ViewModel.Invalidate();
             };
             this.RightTapped += (s, e) => this.ShowLayerMenu();
@@ -68,13 +68,15 @@ namespace Retouch_Photo2.Controls
 
                 //Layer
                 Photocopier photocopier = photo.ToPhotocopier();
-                ImageLayer imageLayer = new ImageLayer(transformerSource, photocopier)
+                ImageLayer imageLayer = new ImageLayer
                 {
+                    Photocopier = photocopier,
                     IsSelected = true,
                     Transform = new Transform(transformerSource)
                 };
-                Layer.Instances.Add(imageLayer);
                 Layerage imageLayerage = imageLayer.ToLayerage();
+                imageLayer.Control.ConstructLayerControl(imageLayerage);
+                Layer.Instances.Add(imageLayer);
 
                 //Selection
                 this.ViewModel.SetValue((layerage) =>
@@ -85,10 +87,10 @@ namespace Retouch_Photo2.Controls
                 });
 
                 //Mezzanine
-                LayerCollection.Mezzanine(this.ViewModel.LayerCollection, imageLayerage);
+                LayerageCollection.Mezzanine(this.ViewModel.LayerCollection, imageLayerage);
 
                 this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
-                LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                 this.ViewModel.Invalidate();//Invalidate
             };
         }

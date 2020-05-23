@@ -64,16 +64,20 @@ namespace Retouch_Photo2.Tools
             this.ViewModel.SetModeExtended();//Selection
 
             //History
-            this.ViewModel.HistoryPushLayeragesHistory("Add layer");
-                       
+         //   this.ViewModel.HistoryPushLayeragesHistory("Add layer");
+
             //Mezzanine
-            ILayer layer= createLayer(transformer);
+            ILayer layer = createLayer(transformer);
+            Layerage layerage = layer.ToLayerage();
+            layer.Control.ConstructLayerControl(layerage);
             Layer.Instances.Add(layer);
-            this.MezzanineLayer = layer.ToLayerage();
-            LayerCollection.Mezzanine(this.ViewModel.LayerCollection, this.MezzanineLayer);
+
+            //Mezzanine
+            this.MezzanineLayer = layerage;
+            LayerageCollection.Mezzanine(this.ViewModel.LayerCollection, this.MezzanineLayer);
 
             //Text
-            //this.ViewModel.SetTextWidthHeight(transformer);
+            this.ViewModel.SetTextWidthHeight(transformer);
             this.ViewModel.TextVisibility = Visibility.Visible;
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
@@ -97,7 +101,7 @@ namespace Retouch_Photo2.Tools
                 mezzanineLayer.Transform = new Transform(transformer);
                 mezzanineLayer.Style.DeliverBrushPoints(transformer);
 
-                //this.ViewModel.SetTextWidthHeight(transformer);//Text
+                this.ViewModel.SetTextWidthHeight(transformer);//Text
                 this.ViewModel.Invalidate();//Invalidate
             }
 
@@ -131,11 +135,11 @@ namespace Retouch_Photo2.Tools
 
                     //Selection
                     this.ViewModel.SetModeSingle(this.MezzanineLayer);
-                    LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
-                    LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                    LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
                     
                     this.MezzanineLayer = null;
-                    //this.ViewModel.TextVisibility = Visibility.Collapsed;//Text
+                    this.ViewModel.TextVisibility = Visibility.Collapsed;//Text
                     this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                 }
                 /*

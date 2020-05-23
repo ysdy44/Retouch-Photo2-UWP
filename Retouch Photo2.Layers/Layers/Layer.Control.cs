@@ -10,7 +10,7 @@ namespace Retouch_Photo2.Layers
     {
 
         /// <summary> Gets or sets <see cref = "Layer" />'s control. </summary>
-        public LayerControl Control { get; protected set; }
+        public LayerControl Control { get; protected set; } 
 
                
         public bool IsExpand

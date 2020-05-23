@@ -151,16 +151,16 @@
     <Compile Include="Icons\TextFrameIcon.xaml.cs">
       <DependentUpon>TextFrameIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LayerCollections\LayerCollection.Layerage.cs" />
+    <Compile Include="LayerageCollections\LayerageCollection.Layerage.cs" />
     <Compile Include="Layers\ILayer.cs" />
-    <Compile Include="Layers\Layerage.cs" />
-    <Compile Include="LayerCollections\LayerCollection.FindOutermost.cs" />
-    <Compile Include="LayerCollections\LayerCollection.Photocopier.cs" />
+    <Compile Include="Layerage.cs" />
+    <Compile Include="LayerageCollections\LayerageCollection.FindOutermost.cs" />
+    <Compile Include="LayerageCollections\LayerageCollection.Photocopier.cs" />
     <Compile Include="LayerMode\BackgroundMode.cs" />
     <Compile Include="Layers\ITextLayer.cs" />
-    <Compile Include="LayerCollections\LayerCollection.Add_Disengage.cs" />
-    <Compile Include="LayerCollections\LayerCollection.ControlHeight.cs" />
-    <Compile Include="Layers\LayerBase.Instance.cs" />
+    <Compile Include="LayerageCollections\LayerageCollection.Add_Disengage.cs" />
+    <Compile Include="LayerageCollections\LayerageCollection.ControlHeight.cs" />
+    <Compile Include="Layers\Layer.Instance.cs" />
     <Compile Include="LayerType.cs" />
     <Compile Include="ModelsSecond\GeometryArrowLayer.cs" />
     <Compile Include="ModelsSecond\GeometryCapsuleLayer.cs" />
@@ -192,24 +192,24 @@
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LayerCollections\LayerCollection.Mezzanine.cs" />
+    <Compile Include="LayerageCollections\LayerageCollection.Mezzanine.cs" />
     <Compile Include="LayerControls\LayerControl.xaml.Control.cs" />
-    <Compile Include="LayerCollections\LayerCollection.Arrange_Parents_Controls.cs" />
-    <Compile Include="LayerCollections\LayerCollection.cs" />
-    <Compile Include="LayerCollections\LayerCollection.Drag_Move_Insert.cs" />
-    <Compile Include="LayerCollections\LayerCollection.Group.cs" />
-    <Compile Include="LayerCollections\LayerCollection.Remove.cs" />
-    <Compile Include="LayerCollections\LayerCollection.Select_ShiftSelect_SelectedLayers.cs" />
+    <Compile Include="LayerageCollections\LayerageCollection.Arrange_Parents_Controls.cs" />
+    <Compile Include="LayerageCollections\LayerageCollection.cs" />
+    <Compile Include="LayerageCollections\LayerageCollection.Drag_Move_Insert.cs" />
+    <Compile Include="LayerageCollections\LayerageCollection.Group.cs" />
+    <Compile Include="LayerageCollections\LayerageCollection.Remove.cs" />
+    <Compile Include="LayerageCollections\LayerageCollection.Select_ShiftSelect_SelectedLayers.cs" />
     <Compile Include="LayerControls\LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="LayerExtensions.cs" />
     <Compile Include="LayerMode\OverlayMode.cs" />
-    <Compile Include="Layers\LayerBase.Control.cs" />
-    <Compile Include="Layers\LayerBase.Render.cs" />
-    <Compile Include="Layers\LayerBase.Property.cs" />
+    <Compile Include="Layers\Layer.Control.cs" />
+    <Compile Include="Layers\Layer.Render.cs" />
+    <Compile Include="Layers\Layer.Property.cs" />
     <Compile Include="Models\CurveMultiLayer.cs" />
-    <Compile Include="Layers\TextLayerBase.cs" />
+    <Compile Include="Layers\TextLayer.cs" />
     <Compile Include="Models\TextArtisticLayer.cs" />
     <Compile Include="Models\TextFrameLayer.cs" />
     <Compile Include="Transform.cs" />

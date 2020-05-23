@@ -223,7 +223,7 @@ namespace Retouch_Photo2.Menus.Models
                     parentsChildren.Remove(destination);
                     parentsChildren.Add(destination);
 
-                    LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };
@@ -245,7 +245,7 @@ namespace Retouch_Photo2.Menus.Models
                     parentsChildren.Remove(destination);
                     parentsChildren.Insert(index, destination);
 
-                    LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };
@@ -267,7 +267,7 @@ namespace Retouch_Photo2.Menus.Models
                     parentsChildren.Remove(destination);
                     parentsChildren.Insert(index, destination);
 
-                    LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };
@@ -283,7 +283,7 @@ namespace Retouch_Photo2.Menus.Models
                     parentsChildren.Remove(destination);
                     parentsChildren.Insert(0, destination);
 
-                    LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };

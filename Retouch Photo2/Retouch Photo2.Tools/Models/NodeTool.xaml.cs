@@ -54,7 +54,7 @@ namespace Retouch_Photo2.Tools.Models
                //     LayerCollection.RemoveLayer(this.ViewModel.LayerCollection, this.CurveLayer);
 
                this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
-                    LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };

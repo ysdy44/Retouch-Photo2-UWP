@@ -49,7 +49,7 @@ namespace Retouch_Photo2.ViewModels
             this.HistoryPush(history);
 
             this.SetModeNone();//Selection
-            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.LayerCollection);
+            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerCollection);
             this.Invalidate();//Invalidate     
         }
 
@@ -71,7 +71,7 @@ namespace Retouch_Photo2.ViewModels
             layer.IsSelected = isSelected;
 
             this.SetMode(this.LayerCollection);//Selection
-            LayerCollection.ArrangeLayersBackgroundItemClick(selectedLayerage);
+            LayerageCollection.ArrangeLayersBackgroundItemClick(selectedLayerage);
             this.Invalidate();//Invalidate
         }
 
@@ -124,7 +124,7 @@ namespace Retouch_Photo2.ViewModels
             this.HistoryPush(history);
 
             this.SetModeSingle(selectedLayerage);//Selection
-            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.LayerCollection);
+            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerCollection);
             this.Invalidate();//Invalidate     
         }
 
@@ -153,7 +153,7 @@ namespace Retouch_Photo2.ViewModels
             this.HistoryPush(history);
 
             this.SetMode(this.LayerCollection);//Selection
-            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.LayerCollection);
+            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerCollection);
             this.Invalidate();//Invalidate
         }
 
@@ -182,7 +182,7 @@ namespace Retouch_Photo2.ViewModels
             this.HistoryPush(history);
 
             this.SetMode(this.LayerCollection);//Selection
-            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.LayerCollection);
+            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerCollection);
             this.Invalidate();//Invalidate
         }
 
@@ -221,7 +221,7 @@ namespace Retouch_Photo2.ViewModels
 
             this.SetModeSingle(selectedLayerage);//Selection
 
-            LayerCollection.ArrangeLayersBackgroundLayerCollection(this.LayerCollection);
+            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerCollection);
 
             this.Invalidate();//Invalidate
         }

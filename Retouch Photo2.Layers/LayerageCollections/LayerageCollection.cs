@@ -8,15 +8,15 @@ using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Layers
 {
-    public partial class LayerCollection
+    public partial class LayerageCollection
     {
 
         //@Static
-        /// <summary> Occurs when a layer receive interaction. </summary>
+        /// <summary> Occurs when a layerage receive interaction. </summary>
         public static Action<Layerage> ItemClick;
-        /// <summary> Occurs when right-click input a layer. </summary>
+        /// <summary> Occurs when right-click input a layerage. </summary>
         public static Action<Layerage> RightTapped;
-        /// <summary> Occurs when a layer visibility changes. </summary>
+        /// <summary> Occurs when a layerage visibility changes. </summary>
         public static Action<Layerage> VisibilityChanged;
         /// <summary> Occurs when the Select has changed </summary>
         public static Action<Layerage> IsSelectedChanged;
@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Layers
 
         //Overlay
         /// <summary>
-        /// Gets drag layer overlay properties.
+        /// Gets drag layerage overlay properties.
         /// </summary>
         public static bool IsOverlay { get; internal set; }
         /// <summary>
@@ -43,25 +43,25 @@ namespace Retouch_Photo2.Layers
 
         //Root
         /// <summary>
-        /// The root layers.
+        /// The root layerages.
         /// </summary>
-        public IList<Layerage> RootLayers { get; private set; } = new List<Layerage>();
+        public IList<Layerage> RootLayerages { get; private set; } = new List<Layerage>();
         /// <summary>
         /// The root controls.
         /// </summary>
         public ObservableCollection<LayerControl> RootControls { get; private set; } = new ObservableCollection<LayerControl>();
-    
+
 
         /// <summary>
-        /// Get a layer parents children( or root layers when it has not parents).
+        /// Get a layerage parents children( or root layers when it has not parents).
         /// </summary>
-        /// <param name="layer"></param>
+        /// <param name="layerage"></param>
         /// <returns></returns>
-        public IList<Layerage> GetParentsChildren(Layerage layer)
+        public IList<Layerage> GetParentsChildren(Layerage layerage)
         {
-            if (layer == null) return this.RootLayers;
-            if (layer.Parents == null) return this.RootLayers;
-            return layer.Parents.Children;
+            if (layerage == null) return this.RootLayerages;
+            if (layerage.Parents == null) return this.RootLayerages;
+            return layerage.Parents.Children;
         }
 
     }

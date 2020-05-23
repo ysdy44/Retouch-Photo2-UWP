@@ -1,10 +1,6 @@
-﻿using Retouch_Photo2.Blends;
-using Windows.Foundation;
-using Windows.UI;
+﻿using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.Layers
 {
@@ -13,7 +9,7 @@ namespace Retouch_Photo2.Layers
 
         //@Content
         public LayerControl Self => this;
-        public string Text { get => this.NameRun.Text; set => this.NameRun.Text = value; }
+        public string Text { get => this.NameRun.Text; set=>this.NameRun.Text = value; }
         public string Type { get => this.TypeRun.Text; set => this.TypeRun.Text = value; }
         public object Icon { get => this.IconContentControl.Content; set => this.IconContentControl.Content = value; }
 
@@ -52,7 +48,7 @@ namespace Retouch_Photo2.Layers
             }
         }
 
-        
+
         /// <summary> Gets or sets <see cref = "LayerControl" />'s overlay show status. </summary>
         public OverlayMode OverlayMode
         {
@@ -67,28 +63,33 @@ namespace Retouch_Photo2.Layers
         private OverlayMode overlayMode;
 
 
+        Layerage layerage;
+        public void ConstructLayerControl(Layerage layerage)
+        {
+            this.layerage = layerage;
+        }
+
         //@Construct
-        public LayerControl(Layerage layerage)
+        public LayerControl()
         {
             this.InitializeComponent();
-            
-            this.ControlHeight = LayerCollection.ControlsHeight;
+            this.ControlHeight = LayerageCollection.ControlsHeight;
 
             //LayerCollection
             {
                 this.Tapped += (s, e) =>
                 {
-                  LayerCollection.ItemClick?.Invoke(layerage);//Delegate
+                    LayerageCollection.ItemClick?.Invoke(layerage);//Delegate
                     e.Handled = true;
                 };
                 this.RightTapped += (s, e) =>
                 {
-                      LayerCollection.RightTapped?.Invoke(layerage);//Delegate
+                    LayerageCollection.RightTapped?.Invoke(layerage);//Delegate
                     e.Handled = true;
                 };
                 this.VisualButton.Tapped += (s, e) =>
                 {
-                    LayerCollection.VisibilityChanged?.Invoke(layerage);//Delegate
+                    LayerageCollection.VisibilityChanged?.Invoke(layerage);//Delegate
                     e.Handled = true;
                 };
             }
@@ -97,12 +98,12 @@ namespace Retouch_Photo2.Layers
             {
                 this.ExpanedButton.Tapped += (s, e) =>
                 {
-                          LayerCollection.IsExpandChanged?.Invoke(layerage);//Delegate   
+                    LayerageCollection.IsExpandChanged?.Invoke(this.layerage);//Delegate   
                     e.Handled = true;
                 };
                 this.SelectedButton.Tapped += (s, e) =>
                 {
-                     LayerCollection.IsSelectedChanged?.Invoke(layerage);//Delegate   
+                    LayerageCollection.IsSelectedChanged?.Invoke(this.layerage);//Delegate   
                     e.Handled = true;
                 };
             }
@@ -111,56 +112,39 @@ namespace Retouch_Photo2.Layers
             {
                 this.ManipulationStarted += (s, e) =>
                 {
-                      LayerCollection.IsOverlay = true;
-                  LayerCollection.DragItemsStarted?.Invoke(layerage, this.ManipulationMode);//Delegate     
+                    LayerageCollection.IsOverlay = true;
+                    LayerageCollection.DragItemsStarted?.Invoke(this.layerage, this.ManipulationMode);//Delegate     
                 };
                 this.ManipulationCompleted += (s, e) =>
                 {
-                    if (LayerCollection.IsOverlay)
+                    if (LayerageCollection.IsOverlay)
                     {
-                       LayerCollection.DragItemsCompleted?.Invoke();//Delegate
+                        LayerageCollection.DragItemsCompleted?.Invoke();//Delegate
 
-                             LayerCollection.IsOverlay = false;
-                           this.OverlayMode = OverlayMode.None;
+                        LayerageCollection.IsOverlay = false;
+                        this.OverlayMode = OverlayMode.None;
                     }
                 };
             }
 
             //Pointer
             {
-                 this.PointerMoved += (s, e) =>
-                 {
-                  if (LayerCollection.IsOverlay)
-                     {
-                     Point position = e.GetCurrentPoint(this).Position;
-                    OverlayMode overlayMode = this.GetOverlay(position.Y);
+                this.PointerMoved += (s, e) =>
+                {
+                    if (LayerageCollection.IsOverlay)
+                    {
+                        Point position = e.GetCurrentPoint(this).Position;
+                        OverlayMode overlayMode = this.GetOverlay(position.Y);
 
-                         this.OverlayMode = overlayMode;
-                   LayerCollection.DragItemsDelta?.Invoke(layerage, overlayMode);//Delegate
+                        this.OverlayMode = overlayMode;
+                        LayerageCollection.DragItemsDelta?.Invoke(this.layerage, overlayMode);//Delegate
                     }
-                 };
-                      this.PointerExited += (s, e) => this.OverlayMode = OverlayMode.None;
-                      this.PointerReleased += (s, e) => this.OverlayMode = OverlayMode.None;
+                };
+                this.PointerExited += (s, e) => this.OverlayMode = OverlayMode.None;
+                this.PointerReleased += (s, e) => this.OverlayMode = OverlayMode.None;
             }
         }
 
-
-        public void SetVisibility(Visibility value)
-        {
-            switch (value)
-            {
-                case Visibility.Visible:
-                    this.VisualFontIcon.Opacity = 1.0;
-                    break;
-                case Visibility.Collapsed:
-                    this.VisualFontIcon.Opacity = 0.5;
-                    break;
-            }
-        }
-        public void SetTagType(TagType value)
-        {
-            this.TagColor.Color = TagTypeHelper.TagConverter(value);
-        }
 
     }
 }

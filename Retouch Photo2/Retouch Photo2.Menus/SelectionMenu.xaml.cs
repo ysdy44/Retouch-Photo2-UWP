@@ -245,27 +245,27 @@ namespace Retouch_Photo2.Menus.Models
 
                     layer.IsSelected = false;
                 });
-                foreach (Layerage layer in this.ViewModel.LayerCollection.RootLayers)
+                foreach (Layerage layer in this.ViewModel.LayerCollection.RootLayerages)
                 {
                     layer.Self.IsSelected = true;
                 }
 
                 this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
-                LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
-                LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
                 this.ViewModel.Invalidate();//Invalidate
             };
 
             this.DeselectButton.Click += (s, e) =>
             {
                 //Selection
-                foreach (Layerage layer in this.ViewModel.LayerCollection.RootLayers)
+                foreach (Layerage layer in this.ViewModel.LayerCollection.RootLayerages)
                 {
                     layer.Self.IsSelected = false;
                 }
 
                 this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
-                LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+                LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
                 this.ViewModel.Invalidate();//Invalidate
             };
             
@@ -278,21 +278,21 @@ namespace Retouch_Photo2.Menus.Models
 
             this.GroupButton.Click += (s, e) =>
             {
-                LayerCollection.GroupAllSelectedLayers(this.ViewModel.LayerCollection);
+                LayerageCollection.GroupAllSelectedLayers(this.ViewModel.LayerCollection);
 
                 this.ViewModel.SetMode(this.ViewModel.LayerCollection);
-                LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
-                LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
                 this.ViewModel.Invalidate();//Invalidate
             };
 
             this.UnGroupButton.Click += (s, e) =>
             {
-                LayerCollection.UnGroupAllSelectedLayer(this.ViewModel.LayerCollection);
+                LayerageCollection.UnGroupAllSelectedLayer(this.ViewModel.LayerCollection);
 
                 this.ViewModel.SetMode(this.ViewModel.LayerCollection);
-                LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
-                LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -301,12 +301,12 @@ namespace Retouch_Photo2.Menus.Models
                 //Selection
                 this.ViewModel.SetValue((layerage) =>
                 {
-                    LayerCollection.ReleaseGroupLayer(this.ViewModel.LayerCollection, layerage);
+                    LayerageCollection.ReleaseGroupLayer(this.ViewModel.LayerCollection, layerage);
                 });
 
                 this.ViewModel.SetMode(this.ViewModel.LayerCollection);
-                LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
-                LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
                 this.ViewModel.Invalidate();//Invalidate
             };
         }

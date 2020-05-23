@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Layers
 
         //@Abstract
         public abstract LayerType Type { get; }
-        public string Name { get => this.Control.Text; set => this.Control.Text = value; }
+        public string Name { get; set; }
         public BlendEffectMode? BlendMode { get; set; } = null;
 
         public float Opacity { get; set; } = 1.0f;

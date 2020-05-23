@@ -30,7 +30,7 @@ namespace Retouch_Photo2.ViewModels
                     (
                          "Layerages",
                          from layerage
-                         in project.Layers
+                         in project.Layerages
                          select Retouch_Photo2.Layers.XML.SaveLayerage("Layerage", layerage)
                     )
                 )
@@ -52,7 +52,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 Name = name,         
          
-                Layers =
+                Layerages =
                     from layerage
                     in rootLayerages.Elements()
                     select Retouch_Photo2.Layers.XML.LoadLayerage(layerage)

@@ -32,9 +32,10 @@ namespace Retouch_Photo2.Tools.Elements
                     ILayer layer2 = layerage.Self;
 
                     //Turn to curve layer
-                    Layer curveLayer = this.GetCurveLayer(layerage);
-                    if (curveLayer == null) return;
+                    ILayer curveLayer = this.GetCurveLayer(layerage);
                     Layerage curveLayerage = curveLayer.ToLayerage();
+                    curveLayer.Control.ConstructLayerControl(curveLayerage);
+                    Layer.Instances.Add(curveLayer);
 
                     //set image brush
                     if (layer2.Type == LayerType.Image)
@@ -52,7 +53,7 @@ namespace Retouch_Photo2.Tools.Elements
                 this.TipViewModel.Tool = this.TipViewModel.Tools.First(t => t != null && t.Type == ToolType.Node);
                 this.TipViewModel.ToolGroupType(ToolType.Node);
 
-                LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                 this.ViewModel.SetMode(this.ViewModel.LayerCollection);//Selection
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -60,7 +61,7 @@ namespace Retouch_Photo2.Tools.Elements
 
 
         //Get curve layer
-        private Layer GetCurveLayer(Layerage layerage)
+        private ILayer GetCurveLayer(Layerage layerage)
         {
             ILayer layer = layerage.Self;
             
@@ -76,7 +77,6 @@ namespace Retouch_Photo2.Tools.Elements
 
             CurveMultiLayer curveMultiLayer = new CurveMultiLayer(nodess);
             Layer.CopyWith(this.ViewModel.CanvasDevice, curveMultiLayer, layer);
-            Layer.Instances.Add(curveMultiLayer);
             return curveMultiLayer;
         }
          

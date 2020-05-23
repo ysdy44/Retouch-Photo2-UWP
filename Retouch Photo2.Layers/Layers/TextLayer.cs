@@ -11,7 +11,7 @@ using Windows.UI.Text;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="Layer"/>'s TextLayerBase .
+    /// <see cref="Layer"/>'s TextLayer.
     /// </summary>
     public abstract class TextLayer : Layer
     {

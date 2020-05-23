@@ -32,7 +32,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryArrowLayer()
         {
-            base.Control = new LayerControl(this.ToLayerage())
+            base.Control = new LayerControl
             {
                 Icon = new GeometryArrowIcon(),
                 Type = this.ConstructStrings(),

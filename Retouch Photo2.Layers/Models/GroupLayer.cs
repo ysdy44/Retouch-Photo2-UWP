@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GroupLayer()
         {
-            base.Control = new LayerControl(this.ToLayerage())
+            base.Control = new LayerControl
             {
                 Icon = new GroupIcon(),
                 Type = this.ConstructStrings(),

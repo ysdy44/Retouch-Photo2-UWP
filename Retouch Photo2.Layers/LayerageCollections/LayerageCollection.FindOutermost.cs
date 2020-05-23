@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace Retouch_Photo2.Layers
 {
-    public partial class LayerCollection
+    public partial class LayerageCollection
     {
 
         /// <summary>
-        /// Find outermost layer
+        /// Find outermost layerage
         /// in all selected layers.
         /// </summary>
         public static Layerage FindOutermost_SelectedLayer(IEnumerable<Layerage> selectedLayerages)

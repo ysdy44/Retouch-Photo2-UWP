@@ -43,28 +43,7 @@ namespace Retouch_Photo2.Layers
 
 
         static int IIIII;
-        public string Id
-        {
-            get
-            {
-                if (this.id == null)
-                {
-                    //  TimeSpan ts = DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0);
-                    //  this.id = Convert.ToInt64(ts.TotalSeconds).ToString();
-                   
-                    do
-                    {
-                        this.id = IIIII.ToString();
-                        IIIII++;
-
-                    } while (Layer.Instances.All(l => l.Id != this.id)==false);
-
-                }
-                return this.id;
-            }
-            set => this.id = value;
-        }
-        private string id = null;
+        public string Id { get; set; }
 
 
         /// <summary>
@@ -73,6 +52,12 @@ namespace Retouch_Photo2.Layers
         /// <returns> The producted layerage. </returns>
         public Layerage ToLayerage()
         {
+            do
+            {
+                this.Id = IIIII.ToString();
+                IIIII++;
+            } while (Layer.Instances.All(l => l.Id != this.Id) == false);
+
             return new Layerage
             {
                 Id = this.Id,

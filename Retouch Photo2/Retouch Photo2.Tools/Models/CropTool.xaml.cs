@@ -200,9 +200,9 @@ namespace Retouch_Photo2.Tools.Models
                     this.Draw(drawingSession, this.ViewModel.Layerage, matrix);
                     break;
                 case ListViewSelectionMode.Multiple:
-                    foreach (Layerage layer in this.ViewModel.LayerCollection.RootLayers)
+                    foreach (Layerage layerage in this.ViewModel.LayerCollection.RootLayerages)
                     {
-                        this.Draw(drawingSession, layer, matrix);
+                        this.Draw(drawingSession, layerage, matrix);
                     }
                     break;
             }

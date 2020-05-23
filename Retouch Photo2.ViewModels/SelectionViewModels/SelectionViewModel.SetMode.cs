@@ -21,9 +21,9 @@ namespace Retouch_Photo2.ViewModels
         ///  Sets the mode and notify all properties.
         /// </summary>
         /// <param name="layerCollection"> The layer-collection. </param>
-        public void SetMode(LayerCollection layerCollection)
+        public void SetMode(LayerageCollection layerCollection)
         {
-            IEnumerable<Layerage> checkedLayers = LayerCollection.GetAllSelectedLayers(layerCollection);
+            IEnumerable<Layerage> checkedLayers = LayerageCollection.GetAllSelectedLayers(layerCollection);
             int count = checkedLayers.Count();
 
             if (count == 0)
@@ -181,7 +181,7 @@ namespace Retouch_Photo2.ViewModels
         }
         private void _setModeMultiple(IEnumerable<Layerage> layerages)
         {
-            Layerage outermost = LayerCollection.FindOutermost_SelectedLayer(layerages);
+            Layerage outermost = LayerageCollection.FindOutermost_SelectedLayer(layerages);
             ILayer outermostLayer = outermost.Self;
             this.SelectionMode = ListViewSelectionMode.Multiple;//Transformer     
             this.SelectionUnNone = true;
@@ -223,7 +223,7 @@ namespace Retouch_Photo2.ViewModels
             this.SetIGeometryLayer(outermostLayer);
         }
 
-
+        
         //////////////////////////
 
 

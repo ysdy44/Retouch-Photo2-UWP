@@ -35,7 +35,7 @@ namespace Retouch_Photo2.Menus.Models
 
             this.Button.Click += (s, e) =>
             {
-                this.ItemsControl.ItemsSource = sadasd(this.ViewModel.LayerCollection.RootLayers,0);
+                this.ItemsControl.ItemsSource = sadasd(this.ViewModel.LayerCollection.RootLayerages,0);
             };
             this.Button2.Click += (s, e) =>
             {
@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Menus.Models
             this.Coo.Click += (s, e) =>
             {
                 List<Layerage> sdasd = new List<Layerage>();
-                foreach (var item in this.ViewModel.LayerCollection.RootLayers)
+                foreach (var item in this.ViewModel.LayerCollection.RootLayerages)
                 {
                     sdasd.Add(item.Clone());
                 }
@@ -53,16 +53,16 @@ namespace Retouch_Photo2.Menus.Models
             };
             this.Re.Click += (s, e) =>
             {
-                this.ViewModel.LayerCollection.RootLayers.Clear();
+                this.ViewModel.LayerCollection.RootLayerages.Clear();
                 foreach (var item in previous)
                 {
-                    this.ViewModel.LayerCollection.RootLayers.Add(item.Clone());
+                    this.ViewModel.LayerCollection.RootLayerages.Add(item.Clone());
                 }
 
                 this.ViewModel.Text = previous.Count().ToString();
                 this.ViewModel.SetMode(this.ViewModel.LayerCollection);
-                LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
-                LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
+                LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
                 this.ViewModel.Invalidate();
             };
         }

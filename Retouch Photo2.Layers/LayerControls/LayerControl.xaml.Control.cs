@@ -1,8 +1,7 @@
-﻿using Windows.UI;
+﻿using Retouch_Photo2.Blends;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.Layers
 {
@@ -89,6 +88,27 @@ namespace Retouch_Photo2.Layers
         public void SetChildrenZero(bool value)
         {
             this.ExpanedButton.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+
+
+
+
+        public void SetVisibility(Visibility value)
+        {
+            switch (value)
+            {
+                case Visibility.Visible:
+                    this.VisualFontIcon.Opacity = 1.0;
+                    break;
+                case Visibility.Collapsed:
+                    this.VisualFontIcon.Opacity = 0.5;
+                    break;
+            }
+        }
+        public void SetTagType(TagType value)
+        {
+            this.TagColor.Color = TagTypeHelper.TagConverter(value);
         }
 
     }
