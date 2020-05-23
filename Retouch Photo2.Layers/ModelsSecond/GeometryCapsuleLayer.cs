@@ -33,10 +33,10 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryCapsuleLayer CapsuleLayer = new GeometryCapsuleLayer();
+            GeometryCapsuleLayer capsuleLayer = new GeometryCapsuleLayer();
 
-            Layer.CopyWith(resourceCreator, CapsuleLayer, this);
-            return CapsuleLayer;
+            Layer.CopyWith(resourceCreator, capsuleLayer, this);
+            return capsuleLayer;
         }
 
 

@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryArrowLayer ArrowLayer = new GeometryArrowLayer
+            GeometryArrowLayer arrowLayer = new GeometryArrowLayer
             {
                 IsAbsolute = this.IsAbsolute,
                 Width = this.Width,
@@ -52,8 +52,8 @@ namespace Retouch_Photo2.Layers.Models
                 RightTail = this.RightTail,
             };
 
-            Layer.CopyWith(resourceCreator, ArrowLayer, this);
-            return ArrowLayer;
+            Layer.CopyWith(resourceCreator, arrowLayer, this);
+            return arrowLayer;
         }
         
         public override void SaveWith(XElement element)

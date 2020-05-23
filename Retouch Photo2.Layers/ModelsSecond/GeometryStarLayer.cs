@@ -38,14 +38,14 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryStarLayer StarLayer = new GeometryStarLayer
+            GeometryStarLayer starLayer = new GeometryStarLayer
             {
                 Points=this.Points,
                 InnerRadius= this.InnerRadius,
             };
 
-            Layer.CopyWith(resourceCreator, StarLayer, this);
-            return StarLayer;
+            Layer.CopyWith(resourceCreator, starLayer, this);
+            return starLayer;
         }
         
         public override void SaveWith(XElement element)

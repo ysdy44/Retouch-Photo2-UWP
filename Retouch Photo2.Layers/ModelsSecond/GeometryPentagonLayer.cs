@@ -37,13 +37,13 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryPentagonLayer PentagonLayer = new GeometryPentagonLayer
+            GeometryPentagonLayer pentagonLayer = new GeometryPentagonLayer
             {
                 Points = this.Points,
             };
 
-            Layer.CopyWith(resourceCreator, PentagonLayer, this);
-            return PentagonLayer;
+            Layer.CopyWith(resourceCreator, pentagonLayer, this);
+            return pentagonLayer;
         }
 
         public override void SaveWith(XElement element)

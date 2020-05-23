@@ -37,13 +37,13 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryHeartLayer HeartLayer = new GeometryHeartLayer
+            GeometryHeartLayer heartLayer = new GeometryHeartLayer
             {
-                Spread=this.Spread
+                Spread = this.Spread
             };
 
-            Layer.CopyWith(resourceCreator, HeartLayer, this);
-            return HeartLayer;
+            Layer.CopyWith(resourceCreator, heartLayer, this);
+            return heartLayer;
         }
         
         public override void SaveWith(XElement element)

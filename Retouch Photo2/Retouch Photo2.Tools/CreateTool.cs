@@ -64,7 +64,7 @@ namespace Retouch_Photo2.Tools
             this.ViewModel.SetModeExtended();//Selection
 
             //History
-         //   this.ViewModel.HistoryPushLayeragesHistory("Add layer");
+            this.ViewModel.HistoryPushLayeragesHistory("Add layer");
 
             //Mezzanine
             ILayer layer = createLayer(transformer);

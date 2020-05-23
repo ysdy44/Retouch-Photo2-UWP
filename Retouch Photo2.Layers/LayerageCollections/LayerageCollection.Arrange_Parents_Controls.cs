@@ -85,9 +85,9 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         public static void ArrangeLayersBackgroundLayerCollection(LayerageCollection layerageCollection)
         {
-            foreach (Layerage layer in layerageCollection.RootLayerages)
+            foreach (Layerage layerage in layerageCollection.RootLayerages)
             {
-                LayerageCollection._arrangeLayersBackgroundNullParents(layer);
+                LayerageCollection._arrangeLayersBackgroundNullParents(layerage);
             }
         }
         public static void ArrangeLayersBackgroundItemClick(Layerage layerage)

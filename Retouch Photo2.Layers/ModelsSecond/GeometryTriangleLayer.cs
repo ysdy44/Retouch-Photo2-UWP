@@ -37,13 +37,13 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryTriangleLayer TriangleLayer = new GeometryTriangleLayer
+            GeometryTriangleLayer triangleLayer = new GeometryTriangleLayer
             {
                 Center = this.Center,
             };
 
-            Layer.CopyWith(resourceCreator, TriangleLayer, this);
-            return TriangleLayer;
+            Layer.CopyWith(resourceCreator, triangleLayer, this);
+            return triangleLayer;
         }
         
         public override void SaveWith(XElement element)

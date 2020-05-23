@@ -100,13 +100,13 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            CurveMultiLayer CurveMultiLayer = new CurveMultiLayer
+            CurveMultiLayer curveMultiLayer = new CurveMultiLayer
             {
                 Nodess = (from nodes in this.Nodess select nodes.Clone()).ToList()
             };
 
-            Layer.CopyWith(resourceCreator, CurveMultiLayer, this);
-            return CurveMultiLayer;
+            Layer.CopyWith(resourceCreator, curveMultiLayer, this);
+            return curveMultiLayer;
         }
 
         public override void SaveWith(XElement element)

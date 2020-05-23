@@ -37,10 +37,10 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryDountLayer DountLayer = new GeometryDountLayer();
+            GeometryDountLayer dountLayer = new GeometryDountLayer();
 
-            Layer.CopyWith(resourceCreator, DountLayer, this);
-            return DountLayer;
+            Layer.CopyWith(resourceCreator, dountLayer, this);
+            return dountLayer;
         }
         
         public override void SaveWith(XElement element)

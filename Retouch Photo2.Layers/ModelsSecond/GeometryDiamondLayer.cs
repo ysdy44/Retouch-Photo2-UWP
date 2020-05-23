@@ -37,13 +37,13 @@ namespace Retouch_Photo2.Layers.Models
        
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryDiamondLayer DiamondLayer = new GeometryDiamondLayer
+            GeometryDiamondLayer diamondLayer = new GeometryDiamondLayer
             {
                 Mid = this.Mid
             };
 
-            Layer.CopyWith(resourceCreator, DiamondLayer, this);
-            return DiamondLayer;
+            Layer.CopyWith(resourceCreator, diamondLayer, this);
+            return diamondLayer;
         }
         
         public override void SaveWith(XElement element)

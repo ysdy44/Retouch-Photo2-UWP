@@ -38,13 +38,13 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryRoundRectLayer RoundRectLayer = new GeometryRoundRectLayer
+            GeometryRoundRectLayer roundRectLayer = new GeometryRoundRectLayer
             {
                 Corner=this.Corner
             };
 
-            Layer.CopyWith(resourceCreator, RoundRectLayer, this);
-            return RoundRectLayer;
+            Layer.CopyWith(resourceCreator, roundRectLayer, this);
+            return roundRectLayer;
         }
         
         public override void SaveWith(XElement element)

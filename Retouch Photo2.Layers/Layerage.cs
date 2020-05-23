@@ -16,19 +16,13 @@ namespace Retouch_Photo2.Layers
 
         public Layerage Clone()
         {
-            Layerage layerage = new Layerage
+            return new Layerage
             {
-                Id = this.Id
+                Id = this.Id,
+                //Bug! infinite loop! 
+                //Parents = this.Parents?.Clone(),
+                Children = (from child in this.Children select child.Clone()).ToList()
             };
-
-            if (this.Parents != null) Parents = this.Parents.Clone();
-
-            foreach (Layerage child in this.Children)
-            {
-                if (child != null) layerage.Children.Add(child.Clone());
-            }
-
-            return layerage;
         }
 
     }
