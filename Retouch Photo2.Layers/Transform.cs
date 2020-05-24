@@ -10,9 +10,9 @@ namespace Retouch_Photo2.Layers
     /// <summary>
     /// Represents a brush that provides an <see cref="Matrix3x2"/>.
     /// </summary>
-    public class Transform : ICacheTransform
+    public class Transform : ICacheTransform, IGetActualTransformer
     {
-        
+
         /// <summary> The destination transformer. </summary>
         public Transformer Destination { get; set; }
         /// <summary> The cache of <see cref="Transform.Destination"/>. </summary>
@@ -21,6 +21,9 @@ namespace Retouch_Photo2.Layers
 
         /// <summary> Is cropped? </summary>
         public bool IsCrop { get; set; }
+        /// <summary> The cache of <see cref="Transform.IsCrop"/>. </summary>
+        public bool StartingIsCrop { get; set; }
+
         /// <summary> The cropped destination transformer. </summary>
         public Transformer CropDestination { get; set; }
         /// <summary> The cache of <see cref="Transform.CropDestination"/>. </summary>
@@ -59,18 +62,31 @@ namespace Retouch_Photo2.Layers
             return new Transform
             {
                 Destination = this.Destination,
+                StartingDestination = this.StartingDestination,
+
 
                 IsCrop = this.IsCrop,
+                StartingIsCrop = this.StartingIsCrop,
+
                 CropDestination = this.CropDestination,
+                StartingCropDestination = this.StartingCropDestination,
             };
         }
 
 
-        //@Abstract
+        //@Abstract      
+        public Transformer GetActualTransformer() => this.IsCrop ? this.CropDestination : this.Destination;
+
+        public void CropTransformAdd(Vector2 vector)
+        {
+            this.CropDestination = this.StartingCropDestination + vector;
+        }
+
         public void CacheTransform()
         {
             this.StartingDestination = this.Destination;
-            this.StartingCropDestination = this.CropDestination;
+            this.StartingIsCrop = this.IsCrop;
+            this.StartingCropDestination = this.GetActualTransformer();
         }
         public void TransformMultiplies(Matrix3x2 matrix)
         {

@@ -93,19 +93,6 @@ namespace Retouch_Photo2.ViewModels
         //////////////////////////
 
 
-        /// <summary> <see cref = "ViewModel" />'s IsCrop. </summary>
-        public bool IsCrop
-        {
-            get => this.isCrop;
-            set
-            {
-                this.isCrop = value;
-                this.OnPropertyChanged(nameof(this.IsCrop));//Notify 
-            }
-        }
-        private bool isCrop;
-
-
         /// <summary> <see cref = "ViewModel" />'s effect. </summary>
         public Effect Effect
         {

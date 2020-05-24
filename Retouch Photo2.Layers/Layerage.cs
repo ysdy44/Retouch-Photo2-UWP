@@ -29,7 +29,7 @@ namespace Retouch_Photo2.Layers
         public Transformer GetActualTransformer()
         {
             ILayer layer = this.Self;
-            return layer.GetActualDestinationWithRefactoringTransformer(this);
+            return layer.GetActualTransformer(this);
         }
 
         /// <summary>

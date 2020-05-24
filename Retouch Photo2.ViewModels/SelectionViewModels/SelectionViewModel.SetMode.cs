@@ -75,7 +75,6 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
-            this.IsCrop = false;
             this.Effect = null;
             this.Filter = null;
             this.SetStyle(null);
@@ -129,7 +128,6 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
-            this.IsCrop = layer.Transform.IsCrop;
             this.Effect = layer.Effect;
             this.Filter = layer.Filter;
             this.SetStyle(layer.Style);
@@ -186,7 +184,6 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
-            this.IsCrop = layerages.Any(layer => outermostLayer.Transform.IsCrop);
             this.Effect = outermostLayer?.Effect;
             this.Filter = null;
             this.SetStyle(outermostLayer?.Style);

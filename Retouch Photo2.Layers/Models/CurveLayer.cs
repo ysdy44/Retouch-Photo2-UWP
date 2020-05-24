@@ -46,7 +46,7 @@ namespace Retouch_Photo2.Layers.Models
         public CurveLayer(Vector2 left, Vector2 right) : this() => this.Nodes = new NodeCollection(left, right);
 
 
-        public override Transformer GetActualDestinationWithRefactoringTransformer(Layerage layerage)
+        public override Transformer GetActualTransformer(Layerage layerage)
         {
             if (this.IsRefactoringTransformer)
             {

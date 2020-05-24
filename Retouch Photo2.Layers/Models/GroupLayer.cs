@@ -33,7 +33,7 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public override Transformer GetActualDestinationWithRefactoringTransformer(Layerage layerage)
+        public override Transformer GetActualTransformer(Layerage layerage)
         {
             if (this.IsRefactoringTransformer)
             {
@@ -46,7 +46,7 @@ namespace Retouch_Photo2.Layers.Models
                 return transformer;
             }
 
-            return this.Transform.Destination;
+            return this.Transform.GetActualTransformer();
         }
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)

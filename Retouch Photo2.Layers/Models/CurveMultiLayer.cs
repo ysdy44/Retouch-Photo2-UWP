@@ -54,7 +54,7 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public override Transformer GetActualDestinationWithRefactoringTransformer(Layerage layerage)
+        public override Transformer GetActualTransformer(Layerage layerage)
         {
             //TODO: GeometryCurveMultiLayer
             //   if (this.IsRefactoringTransformer)

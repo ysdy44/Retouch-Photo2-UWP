@@ -75,7 +75,7 @@ namespace Retouch_Photo2.Layers
         /// Gets ILayer's actually transformer.
         /// </summary>
         /// <param name="layerage"> The layerage. </param>
-        Transformer GetActualDestinationWithRefactoringTransformer(Layerage layerage);
+        Transformer GetActualTransformer(Layerage layerage);
 
         /// <summary> Gets or sets ILayer's style. </summary>
         Retouch_Photo2.Brushs.Style Style { get; set; }

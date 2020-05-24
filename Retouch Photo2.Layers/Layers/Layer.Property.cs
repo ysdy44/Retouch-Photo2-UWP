@@ -61,7 +61,7 @@ namespace Retouch_Photo2.Layers
         }
 
         public bool IsRefactoringTransformer { get; set; }
-        public virtual Transformer GetActualDestinationWithRefactoringTransformer(Layerage layerage) => this.Transform.IsCrop ? this.Transform.CropDestination : this.Transform.Destination;
+        public virtual Transformer GetActualTransformer(Layerage layerage) => this.Transform.GetActualTransformer();
 
         public Retouch_Photo2.Brushs.Style Style { get; set; } = new Retouch_Photo2.Brushs.Style();
         public Transform Transform { get; set; } = new Transform();
