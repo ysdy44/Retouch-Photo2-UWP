@@ -42,28 +42,43 @@ namespace Retouch_Photo2.Menus.Models
                 this.ItemsControl.ItemsSource = asdsadasdsdsssss();
             };
 
-            this.Coo.Click += (s, e) =>
-            {
-                List<Layerage> sdasd = new List<Layerage>();
-                foreach (var item in this.ViewModel.LayerageCollection.RootLayerages)
-                {
-                    sdasd.Add(item.Clone());
-                }
-                previous = sdasd;
-            };
+
+
+
             this.Re.Click += (s, e) =>
             {
-                this.ViewModel.LayerageCollection.RootLayerages.Clear();
-                foreach (var item in previous)
+                List<string> sadas = new List<string>();
+
+                if (this.ViewModel.Layerage != null)
                 {
-                    this.ViewModel.LayerageCollection.RootLayerages.Add(item.Clone());
+                    if (this.ViewModel.Layerage.Id != null)
+                    {
+                        ILayer layer2 = this.ViewModel.Layerage.Self;
+                        string sssss = $"   id:{layer2.Id} {this.ViewModel.Layerage.Parents == null}";
+
+                        sadas.Add(sssss);
+                    }
                 }
 
-                this.ViewModel.Text = previous.Count().ToString();
-                this.ViewModel.SetMode(this.ViewModel.LayerageCollection);
-                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
-                LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerageCollection);
-                this.ViewModel.Invalidate();
+                this.ItemsControl.ItemsSource = sadas;
+             
+            };
+            this.Coo.Click += (s, e) =>
+            {
+                List<string> sadas = new List<string>();
+
+                if (this.ViewModel.Layerages!=null)
+                {
+                    foreach (var item in this.ViewModel.Layerages)
+                    {
+                        ILayer layer2 = item.Self;
+                        string sssss = $"   id:{layer2.Id} {item.Parents== null}";
+
+                        sadas.Add(sssss);
+                    }
+                }
+
+                this.ItemsControl.ItemsSource = sadas;
             };
         }
         IEnumerable<Layerage> previous;
@@ -83,9 +98,17 @@ namespace Retouch_Photo2.Menus.Models
             foreach (var layer in layers)
             {
                 ILayer layer2 = layer.Self;
-                yield return $"{depht}  {layer2.Id}";
+                string sadas = $"de:{depht}  id:{layer2.Id} {layer2.IsSelected}";
 
-
+                if (layer.Parents!=null)
+                {
+                    sadas += $"  pa:{layer.Parents.Id}";
+                }
+                foreach (var sss in layer.Children)
+                {
+                    sadas += $"  {sss.Id}";
+                }
+                yield return sadas;
                 foreach (var child in sadasd( layer.Children, depht+1))
                 {
                     yield return child;

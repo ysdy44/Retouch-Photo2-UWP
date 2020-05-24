@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GeometryCapsuleLayer()
         {
-            base.Control = new LayerControl
+            base.Control = new LayerControl(this)
             {
                 Icon = new GeometryCapsuleIcon(),
                 Type = this.ConstructStrings(),

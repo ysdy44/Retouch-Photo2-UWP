@@ -101,6 +101,7 @@ namespace Retouch_Photo2.ViewModels
                     layer2.Transform.CropDestination = previous2;
                 });
 
+                layerage.RefactoringParentsTransformer();
                 layer.TransformMultiplies(matrix);
             });
 
@@ -198,6 +199,7 @@ namespace Retouch_Photo2.ViewModels
                     layer2.Transform.Destination = previous;
                 });
 
+                layerage.RefactoringParentsTransformer();
                 layer.TransformAdd(vector);
             });
 

@@ -12,9 +12,7 @@ namespace Retouch_Photo2.Layers
     /// </summary>
     public class Transform : ICacheTransform
     {
-
-        /// <summary> The source transformer. </summary>
-        public Transformer Source { get; set; }
+        
         /// <summary> The destination transformer. </summary>
         public Transformer Destination { get; set; }
         /// <summary> The cache of <see cref="Transform.Destination"/>. </summary>
@@ -40,7 +38,6 @@ namespace Retouch_Photo2.Layers
         /// <param name="transformer"> The transformer. </param>
         public Transform(Transformer transformer)
         {
-            this.Source = transformer;
             this.Destination = transformer;
         }
         /// <summary>
@@ -50,17 +47,9 @@ namespace Retouch_Photo2.Layers
         /// <param name="destination"> The destination transformer. </param>
         public Transform(Transformer source, Transformer destination)
         {
-            this.Source = source;
             this.Destination = destination;
         }
         
-
-        /// <summary>
-        /// Gets transformer-matrix's resulting matrix.
-        /// </summary>
-        /// <returns> The product matrix. </returns>
-        public Matrix3x2 GetMatrix() => Transformer.FindHomography(this.Source, this.Destination);
-
         /// <summary>
         /// Get own copy.
         /// </summary>
@@ -69,7 +58,6 @@ namespace Retouch_Photo2.Layers
         {
             return new Transform
             {
-                Source = this.Source,
                 Destination = this.Destination,
 
                 IsCrop = this.IsCrop,
@@ -94,8 +82,15 @@ namespace Retouch_Photo2.Layers
             this.Destination = this.StartingDestination + vector;
             this.CropDestination = this.StartingCropDestination + vector;
         }
-                       
 
+
+        //@Static
+        /// <summary>
+        /// Gets a specific rended-layer.
+        /// </summary>
+        /// <param name="filter"> The filter. </param>
+        /// <param name="image"> The source image. </param>
+        /// <returns> The rendered image. </returns>
         public static ICanvasImage Render(Transform transform, ICanvasResourceCreator resourceCreator, ICanvasImage image, Matrix3x2 matrix)
         {
             if (transform.IsCrop == false) return image;

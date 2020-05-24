@@ -62,19 +62,11 @@ namespace Retouch_Photo2.Brushs
                     }
                 case BrushType.Image:
                     {
-                        Photocopier photocopier = this.Photocopier;
-                        if (photocopier.Name == null) return null;
-
-                        Photo photo = Photo.FindFirstPhoto(photocopier);
-                        CanvasBitmap bitmap = photo.Source;
-                                                
-                        float canvasWidth = (float)bitmap.Size.Width;
-                        float canvasHeight = (float)bitmap.Size.Height;
-                        Vector2 canvasCenter = new Vector2(canvasWidth / 2, canvasHeight / 2);
+                        if (this.bitmap== null) return null;
                         
-                        return new CanvasImageBrush(resourceCreator, bitmap)
+                        return new CanvasImageBrush(resourceCreator, this.bitmap)
                         {
-                            Transform = this.GetimageMatrix(center, xPoint, yPoint, canvasWidth, canvasHeight, canvasCenter),
+                            Transform = this.GetimageMatrix(center, xPoint, yPoint, this.transformerRect),
                             ExtendX = this.Extend,
                             ExtendY = this.Extend,
                         };
@@ -84,10 +76,10 @@ namespace Retouch_Photo2.Brushs
             }
         }
 
-        private Matrix3x2 GetimageMatrix(Vector2 center, Vector2 xPoint, Vector2 yPoint, float canvasWidth, float canvasHeight, Vector2 canvasCenter)
+        private Matrix3x2 GetimageMatrix(Vector2 center, Vector2 xPoint, Vector2 yPoint, FanKit.Transformers.TransformerRect transformerRect)
         {
-            float xScale = Vector2.Distance(xPoint, center) / canvasWidth * 2;
-            float yScale = Vector2.Distance(yPoint, center) / canvasHeight * 2;
+            float xScale = Vector2.Distance(xPoint, center) / transformerRect.Width * 2;
+            float yScale = Vector2.Distance(yPoint, center) / transformerRect.Height * 2;
             float radian = 0;
 
 
@@ -106,7 +98,7 @@ namespace Retouch_Photo2.Brushs
 
 
             return
-                 Matrix3x2.CreateTranslation(-canvasCenter) *
+                 Matrix3x2.CreateTranslation(-transformerRect.Center) *
                 Matrix3x2.CreateScale(xScale, yScale) *
                 Matrix3x2.CreateRotation(radian) *
                 Matrix3x2.CreateTranslation(center);

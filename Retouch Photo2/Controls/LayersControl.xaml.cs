@@ -29,8 +29,8 @@ namespace Retouch_Photo2.Controls
 
 
         //LayerCollection
-        Layerage DragSourceLayer;
-        Layerage DragDestinationLayer;
+        Layerage DragSourceLayerage;
+        Layerage DragDestinationLayerage;
         bool DragLayerIsSelected;
         OverlayMode DragLayerOverlayMode;
 
@@ -75,7 +75,6 @@ namespace Retouch_Photo2.Controls
                     Transform = new Transform(transformerSource)
                 };
                 Layerage imageLayerage = imageLayer.ToLayerage();
-                imageLayer.Control.ConstructLayerControl(imageLayerage);
                 Layer.Instances.Add(imageLayer);
 
                 //Selection

@@ -32,32 +32,14 @@ namespace Retouch_Photo2.Layers
                 switch (destinationOverlayMode)
                 {
                     case OverlayMode.Top:
-                        {
-                            if (destination.Parents == source.Parents)
-                            {
-                                LayerageCollection.Move(layerageCollection, destination, source, isBottomInsert: false);
-                            }
-                            else
-                            {
-                                LayerageCollection.Insert(layerageCollection, destination, source, isBottomInsert: false);
-                            }
-                        }
+                        LayerageCollection.Insert(layerageCollection, destination, source, isBottomInsert: false);
                         break;
                     case OverlayMode.Center:
-                        {
-                            LayerageCollection.Add(layerageCollection, destination, source);
-                        }
+                        LayerageCollection.Add(layerageCollection, destination, source);
                         break;
                     case OverlayMode.Bottom:
-                        {
-                            if (destination.Parents == source.Parents)
-                                LayerageCollection.Move(layerageCollection, destination, source, isBottomInsert: true);
-                            else
-                            {
-                                LayerageCollection.Insert(layerageCollection, destination, source, isBottomInsert: true);
-                            }
-                            break;
-                        }
+                        LayerageCollection.Insert(layerageCollection, destination, source, isBottomInsert: true);
+                        break;
                 }
             }
             else
@@ -92,7 +74,7 @@ namespace Retouch_Photo2.Layers
             int index = parentsChildren.IndexOf(destination);
             if (isBottomInsert) index++;
             if (index < 0) index = 0;
-            if (index > parentsChildren.Count) index = parentsChildren.Count - 1;
+            if (index > parentsChildren.Count - 1) index = parentsChildren.Count - 1;
 
             parentsChildren.Remove(source);
             parentsChildren.Insert(index, source);
@@ -125,7 +107,7 @@ namespace Retouch_Photo2.Layers
             int index = parentsChildren.IndexOf(destination);
             if (isBottomInsert) index++;
             if (index < 0) index = 0;
-            if (index > parentsChildren.Count) index = parentsChildren.Count - 1;
+            if (index > parentsChildren.Count - 1) index = parentsChildren.Count - 1;
 
             if (source != null)
             {

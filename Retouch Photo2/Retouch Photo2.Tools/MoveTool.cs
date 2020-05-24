@@ -38,7 +38,7 @@ namespace Retouch_Photo2.Tools
             if (isMove == false) return false;
 
             //Snap
-            if (this.IsSnap) this.ViewModel.BorderBorderSnapStarted(this.ViewModel.GetFirstLayer());
+            if (this.IsSnap) this.ViewModel.BorderBorderSnapStarted(this.ViewModel.GetFirstSelectedLayerage());
 
             //Selection
             if (this.IsSnap) this.Snap.StartingSource = new TransformerBorder(this.Transformer);
@@ -90,13 +90,14 @@ namespace Retouch_Photo2.Tools
             //SelectedLayer
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
-            Layerage selectedLayer = this.GetSelectedLayer(canvasPoint);
+            Layerage selectedLayer = this.GetClickSelectedLayerage(canvasPoint);
 
             if (selectedLayer == null)
             {
                 this.ViewModel.MethodSelectedNone();//Method
                 return false;
             }
+
 
             switch (this.MarqueeCompositeMode)
             {
@@ -124,23 +125,20 @@ namespace Retouch_Photo2.Tools
 
 
 
-        private Layerage GetSelectedLayer(Vector2 canvasPoint)
+        private Layerage GetClickSelectedLayerage(Vector2 canvasPoint)
         {
             //Select a layer of the same depth
-            Layerage firstLayer = this.ViewModel.GetFirstLayer();
-            IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(firstLayer);
+            Layerage delectedLayerage = this.ViewModel.GetFirstSelectedLayerage();
+            IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(delectedLayerage);
 
-            foreach (Layerage child in parentsChildren)
+            bool childasdsad(Layerage child)
             {
                 ILayer child2 = child.Self;
 
-                if (child2.FillContainsPoint(child, canvasPoint))
-                {
-                    return child;
-                }
-            }
+                return child2.FillContainsPoint(child, canvasPoint);
+            };
 
-            return null;
+            return parentsChildren.LastOrDefault(layerage=> childasdsad(layerage));
         }
 
         private bool GetIsSelectedLayer(Vector2 canvasStartingPoint)
@@ -158,7 +156,7 @@ namespace Retouch_Photo2.Tools
             }
 
             //SelectedLayer
-            Layerage selectedLayer = this.GetSelectedLayer(canvasStartingPoint);
+            Layerage selectedLayer = this.GetClickSelectedLayerage(canvasStartingPoint);
 
             if (selectedLayer == null)
             {

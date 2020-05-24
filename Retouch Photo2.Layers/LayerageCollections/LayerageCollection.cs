@@ -13,15 +13,15 @@ namespace Retouch_Photo2.Layers
 
         //@Static
         /// <summary> Occurs when a layerage receive interaction. </summary>
-        public static Action<Layerage> ItemClick;
+        public static Action<ILayer> ItemClick;
         /// <summary> Occurs when right-click input a layerage. </summary>
-        public static Action<Layerage> RightTapped;
+        public static Action<ILayer> RightTapped;
         /// <summary> Occurs when a layerage visibility changes. </summary>
-        public static Action<Layerage> VisibilityChanged;
+        public static Action<ILayer> VisibilityChanged;
         /// <summary> Occurs when the Select has changed </summary>
-        public static Action<Layerage> IsSelectedChanged;
+        public static Action<ILayer> IsSelectedChanged;
         /// <summary> Occurs when the expaned has changed </summary>
-        public static Action<Layerage> IsExpandChanged;
+        public static Action<ILayer> IsExpandChanged;
 
         //Overlay
         /// <summary>
@@ -31,11 +31,11 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Occurs when drag items started.
         /// </summary>
-        public static Action<Layerage, ManipulationModes> DragItemsStarted;
+        public static Action<ILayer, ManipulationModes> DragItemsStarted;
         /// <summary>
         /// Occurs when drag items delta.
         /// </summary>
-        public static Action<Layerage, OverlayMode> DragItemsDelta;
+        public static Action<ILayer, OverlayMode> DragItemsDelta;
         /// <summary>
         /// Occurs when drag items is completed.
         /// </summary>

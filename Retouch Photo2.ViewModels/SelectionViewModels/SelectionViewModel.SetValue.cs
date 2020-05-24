@@ -67,9 +67,13 @@ namespace Retouch_Photo2.ViewModels
         private void _setValueWithChildren(Layerage layerage, Action<Layerage> action)
         {
             action(layerage);
-            foreach (Layerage child in layerage.Children)
+
+            if (layerage.Children.Count != 0)
             {
-                this._setValueWithChildren(child, action);
+                foreach (Layerage child in layerage.Children)
+                {
+                    this._setValueWithChildren(child, action);
+                }
             }
         }
         /// <summary>
@@ -137,19 +141,21 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary>
-        /// Get the selected layer.
+        /// Get the selected layerage.
         /// None: null;
         /// Single: layer;
         /// Multiple: first layer;
         /// </summary>
-        /// <returns> The selected layer. </returns>
-        public Layerage GetFirstLayer()
+        /// <returns> The selected layerage. </returns>
+        public Layerage GetFirstSelectedLayerage()
         {
             switch (this.SelectionMode)
             {
                 case ListViewSelectionMode.None: return null;
-                case ListViewSelectionMode.Single: return this.Layerage;
-                case ListViewSelectionMode.Multiple: return this.Layerages.FirstOrDefault();
+                case ListViewSelectionMode.Single:
+                    return this.Layerage;
+                case ListViewSelectionMode.Multiple:
+                    return this.Layerages.FirstOrDefault();
                 default: return null;
             }
         }

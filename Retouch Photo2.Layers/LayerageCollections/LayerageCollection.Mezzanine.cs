@@ -20,7 +20,7 @@ namespace Retouch_Photo2.Layers
         {
             //Layers
             IEnumerable<Layerage> selectedLayers = LayerageCollection.GetAllSelectedLayers(layerageCollection);
-            Layerage outermost = LayerageCollection.FindOutermost_SelectedLayer(selectedLayers);
+            Layerage outermost = LayerageCollection.FindOutermost_FromLayerages(selectedLayers);
             //if (outermost == null) return; // If count = 0, it will be useless.
             IList<Layerage> parentsChildren = layerageCollection.GetParentsChildren(outermost);
             int index = parentsChildren.IndexOf(outermost);

@@ -20,52 +20,68 @@ namespace Retouch_Photo2.Layers
     {
         
         //@Abstract
-        public virtual ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children)
+        public virtual ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children)
         {
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
             {
-                //Stroke
-                CanvasGeometry geometry = this.CreateGeometry(resourceCreator, canvasToVirtualMatrix);
-               
-                // Fill a geometry with style.
-                if (this.Style.Fill.Type != BrushType.None)
+                if (this.Transform.IsCrop)
                 {
-                    ICanvasBrush canvasBrush = this.Style.Fill.GetICanvasBrush(resourceCreator, canvasToVirtualMatrix);
-                    drawingSession.FillGeometry(geometry, canvasBrush);
-                }
-                
+                    CanvasGeometry geometryCrop = this.Transform.CropDestination.ToRectangle(resourceCreator, canvasToVirtualMatrix);
 
-                //CanvasActiveLayer
-                if (children.Count != 0)
-                {
-                    using (drawingSession.CreateLayer(1, geometry))
+                    using (drawingSession.CreateLayer(1, geometryCrop))
                     {
-                        foreach (Layerage child in children)
-                        {
-                            ILayer child2 = child.Self;
-
-                            ICanvasImage childImage = child2.GetRender(resourceCreator, previousImage, canvasToVirtualMatrix, child.Children);
-                            drawingSession.DrawImage(childImage);
-                        }
+                        this._render(resourceCreator, drawingSession, canvasToVirtualMatrix, children);
                     }
                 }
-
-
-                //Stroke
-                // Draw a geometry with style.
-                if (this.Style.Stroke.Type != BrushType.None)
+                else
                 {
-                    if (this.Style.StrokeWidth != 0)
-                    {
-                        ICanvasBrush canvasBrush = this.Style.Stroke.GetICanvasBrush(resourceCreator, canvasToVirtualMatrix);
-                        float strokeWidth = this.Style.StrokeWidth * (canvasToVirtualMatrix.M11 + canvasToVirtualMatrix.M22) / 2;
-                        drawingSession.DrawGeometry(geometry, canvasBrush, strokeWidth, this.Style.StrokeStyle);
-                    }
+                    this._render(resourceCreator, drawingSession, canvasToVirtualMatrix, children);
                 }
             }
 
             return command;
+        }
+        private void _render(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children)
+        {
+            //Stroke
+            CanvasGeometry geometry = this.CreateGeometry(resourceCreator, canvasToVirtualMatrix);
+
+            // Fill a geometry with style.
+            if (this.Style.Fill.Type != BrushType.None)
+            {
+                ICanvasBrush canvasBrush = this.Style.Fill.GetICanvasBrush(resourceCreator, canvasToVirtualMatrix);
+                drawingSession.FillGeometry(geometry, canvasBrush);
+            }
+
+
+            //CanvasActiveLayer
+            if (children.Count != 0)
+            {
+                using (drawingSession.CreateLayer(1, geometry))
+                {
+                    foreach (Layerage child in children)
+                    {
+                        ILayer child2 = child.Self;
+
+                        ICanvasImage childImage = child2.GetRender(resourceCreator, canvasToVirtualMatrix, child.Children);
+                        drawingSession.DrawImage(childImage);
+                    }
+                }
+            }
+
+
+            //Stroke
+            // Draw a geometry with style.
+            if (this.Style.Stroke.Type != BrushType.None)
+            {
+                if (this.Style.StrokeWidth != 0)
+                {
+                    ICanvasBrush canvasBrush = this.Style.Stroke.GetICanvasBrush(resourceCreator, canvasToVirtualMatrix);
+                    float strokeWidth = this.Style.StrokeWidth * (canvasToVirtualMatrix.M11 + canvasToVirtualMatrix.M22) / 2;
+                    drawingSession.DrawGeometry(geometry, canvasBrush, strokeWidth, this.Style.StrokeStyle);
+                }
+            }
         }
 
         public virtual void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, IList<Layerage> children, Windows.UI.Color accentColor)
@@ -86,8 +102,7 @@ namespace Retouch_Photo2.Layers
 
             Transformer transformer = layerage.GetActualTransformer();
 
-            bool isFillContainsPoint = transformer.FillContainsPoint(point);
-            return isFillContainsPoint;
+            return transformer.FillContainsPoint(point);
         }
 
 
@@ -108,16 +123,13 @@ namespace Retouch_Photo2.Layers
             if (currentLayer.Opacity == 0) return previousImage;
 
             //Layer
-            ICanvasImage currentImage = currentLayer.GetRender(resourceCreator, previousImage, canvasToVirtualMatrix, children);
-
-            //Transform
-            currentImage = Transform.Render(currentLayer.Transform, resourceCreator, currentImage, canvasToVirtualMatrix);
+            ICanvasImage currentImage = currentLayer.GetRender(resourceCreator, canvasToVirtualMatrix, children);
 
             //Effect
             currentImage = Effect.Render(currentLayer.Effect, currentImage);
 
             //Adjustment
-            currentImage = Filter.GetRender(currentLayer.Filter, currentImage);
+            currentImage = Filter.Render(currentLayer.Filter, currentImage);
 
             //Opacity
             if (currentLayer.Opacity < 1.0)

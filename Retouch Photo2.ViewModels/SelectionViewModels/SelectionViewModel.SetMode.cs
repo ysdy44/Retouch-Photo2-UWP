@@ -23,21 +23,21 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="layerCollection"> The layer-collection. </param>
         public void SetMode(LayerageCollection layerCollection)
         {
-            IEnumerable<Layerage> selectedLayers = LayerageCollection.GetAllSelectedLayers(layerCollection);
-            int count = selectedLayers.Count();
+            IEnumerable<Layerage> selectedLayersRecursive = LayerageCollection.GetAllSelectedLayersRecursive(layerCollection);
+            int count = selectedLayersRecursive.Count();
 
             if (count == 0)
             {
-                this._setModeNone();//None
+                this.SetModeNone();//None
             }
             else if (count == 1)
             {
-                Layerage outermost = LayerageCollection.FindOutermost_SelectedLayer(selectedLayers);
+                Layerage outermost = LayerageCollection.FindOutermost_FromLayerages(selectedLayersRecursive);
                 this.SetModeSingle(outermost);//Single
             }
             else if (count >= 2)
             {
-                this._setModeMultiple(selectedLayers);//Multiple
+                this.SetModeMultiple(selectedLayersRecursive);//Multiple
             }
         }
 
@@ -50,21 +50,6 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         public void SetModeNone()
         {
-            if (this.Layerage != null)
-            {
-                if (this.Layerage.Self is ILayer layer)
-                {
-                    layer.IsSelected = false;
-                }
-            }
-
-            if (this.Layerages != null)
-            {
-                foreach (Layerage child in this.Layerages)
-                {
-                    child.Self.IsSelected = false;
-                }
-            }
             this._setModeNone();//None
         }
         private void _setModeNone()
@@ -73,10 +58,10 @@ namespace Retouch_Photo2.ViewModels
             this.SelectionUnNone = false;
             this.SelectionSingle = false;
             
-            //this.Transformer = new Transformer();
+            this.Transformer = new Transformer();
             this.DisabledRadian = false;
 
-            this.Layerage = new Layerage();
+            this.Layerage = null;
             this.Layerages = null;
 
             //////////////////////////
@@ -116,7 +101,11 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         /// <param name="layerage"> The single layer. </param>
         public void SetModeSingle(Layerage layerage)
-        { 
+        {
+            this._setModeSingle(layerage);//None
+        }
+        public void _setModeSingle(Layerage layerage)
+        {
             ILayer layer = layerage.Self;
 
             this.SelectionMode = ListViewSelectionMode.Single;
@@ -166,24 +155,20 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         /// <param name="layer"> The multiple layer. </param>
         /// <param name="outermost"> The outermost layer. </param>
-        public void SetModeMultiple(IList<Layerage> layerages)
+        public void SetModeMultiple(IEnumerable<Layerage> layerages)
         {
-            if (this.Layerage != null)
-            {
-                ILayer layer = this.Layerage.Self;
-                layer.IsSelected = false;
-            }
             this._setModeMultiple(layerages);//Multiple
         }
         private void _setModeMultiple(IEnumerable<Layerage> layerages)
         {
-            Layerage outermost = LayerageCollection.FindOutermost_SelectedLayer(layerages);
+            Layerage outermost = LayerageCollection.FindOutermost_FromLayerages(layerages);
             ILayer outermostLayer = outermost.Self;
+
             this.SelectionMode = ListViewSelectionMode.Multiple;//Transformer     
             this.SelectionUnNone = true;
             this.SelectionSingle = false;
 
-            this.Layerage = new Layerage();
+            this.Layerage = null;
             this.Layerages = layerages;
 
             //TransformerBorder

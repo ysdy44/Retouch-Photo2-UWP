@@ -133,11 +133,10 @@ namespace Retouch_Photo2.Layers
         /// Gets a specific rended-layer.
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="previousImage"> Previous rendered images. </param>
         /// <param name="canvasToVirtualMatrix"> The canvas-to-virtual matrix. </param>
         /// <param name="children"> The children layerage. </param>
         /// <returns> The rendered layer. </returns>
-        ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children);
+        ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children);
 
         /// <summary>
         /// Draw lines on bound.

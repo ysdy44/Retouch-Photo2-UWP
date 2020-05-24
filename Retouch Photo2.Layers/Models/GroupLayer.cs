@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public GroupLayer()
         {
-            base.Control = new LayerControl
+            base.Control = new LayerControl(this)
             {
                 Icon = new GroupIcon(),
                 Type = this.ConstructStrings(),
@@ -37,17 +37,16 @@ namespace Retouch_Photo2.Layers.Models
         {
             if (this.IsRefactoringTransformer)
             {
+                this.IsRefactoringTransformer = false;
+
                 //TransformerBorder
                 TransformerBorder border = new TransformerBorder(layerage.Children);
                 Transformer transformer = border.ToTransformer();
-
-                this.Transform.Source = transformer;
                 this.Transform.Destination = transformer;
-
-                this.IsRefactoringTransformer = false;
+                return transformer;
             }
 
-            return this.Transform.IsCrop ? this.Transform.CropDestination : this.Transform.Destination;
+            return this.Transform.Destination;
         }
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
@@ -59,7 +58,7 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children)
+        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children)
         {
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
@@ -72,7 +71,7 @@ namespace Retouch_Photo2.Layers.Models
                     if (child2.Opacity == 0) continue;
 
                     //GetRender
-                    ICanvasImage currentImage = child2.GetRender(resourceCreator, previousImage, canvasToVirtualMatrix, child.Children);
+                    ICanvasImage currentImage = child2.GetRender(resourceCreator, canvasToVirtualMatrix, child.Children);
                     drawingSession.DrawImage(currentImage);
                 }
             }

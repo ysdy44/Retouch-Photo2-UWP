@@ -168,7 +168,7 @@ namespace Retouch_Photo2.Tools.Models
                         if (isOutNodeDistance)
                         {
                             //BoxChoose
-                            Layerage layer = this.ViewModel.GetFirstLayer();
+                            Layerage layer = this.ViewModel.GetFirstSelectedLayerage();
                             IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(layer);
                             this.BoxChoose(parentsChildren);
 

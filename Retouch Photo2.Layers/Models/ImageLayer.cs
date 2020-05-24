@@ -23,8 +23,30 @@ namespace Retouch_Photo2.Layers.Models
 
 
         /// <summary> <see cref = "ImageLayer" />'s photocopier. </summary>
-        public Photocopier Photocopier { get; set; }
+        public Photocopier Photocopier
+        {
+            get => this.photocopier;
+            set
+            {
+                this.photocopier = value;
 
+                Photocopier photocopier = this.Photocopier;
+                if (photocopier.Name == null) return;
+
+                Photo photo = Photo.FindFirstPhoto(photocopier);
+                CanvasBitmap bitmap = photo.Source;
+                this.bitmap = bitmap;
+
+                float canvasWidth = (float)bitmap.Size.Width;
+                float canvasHeight = (float)bitmap.Size.Height;
+
+                TransformerRect transformerRect = new TransformerRect(canvasWidth, canvasHeight, Vector2.Zero);
+                this.transformerRect = transformerRect;
+            }
+        }
+        private Photocopier photocopier;
+        private CanvasBitmap bitmap;
+        private TransformerRect transformerRect;
 
         //@Construct   
         /// <summary>
@@ -32,7 +54,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public ImageLayer()
         {
-            base.Control = new LayerControl
+            base.Control = new LayerControl(this)
             {
                 Icon = new ImageIcon(),
                 Type = this.ConstructStrings(),
@@ -45,7 +67,7 @@ namespace Retouch_Photo2.Layers.Models
         /// <param name="photocopier"> The fill photocopier. </param>
         public ImageLayer(Transformer transformer, Photocopier photocopier)
         {
-            base.Control = new LayerControl
+            base.Control = new LayerControl(this)
             {
                 Icon = new ImageIcon(),
                 Type = this.ConstructStrings(),
@@ -75,22 +97,34 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children)
+        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children)
         {
-            Photocopier photocopier = this.Photocopier;
-            if (photocopier.Name == null) return null;
+            if (this.bitmap == null) return null;
 
-            Photo photo = Photo.FindFirstPhoto(photocopier);
-            CanvasBitmap bitmap = photo.Source;
-
-            Matrix3x2 matrix2 = base.Transform.GetMatrix();
-            return new Transform2DEffect
+            Matrix3x2 matrix2 = Transformer.FindHomography(this.transformerRect, base.Transform.Destination);
+            Transform2DEffect effect = new Transform2DEffect
             {
                 TransformMatrix = matrix2 * canvasToVirtualMatrix,
-                Source = bitmap,
+                Source = this.bitmap,
                 //TODO:  Cubic
                 //InterpolationMode= CanvasImageInterpolation.Cubic
             };
+
+            if (this.Transform.IsCrop)
+            {
+                CanvasCommandList command = new CanvasCommandList(resourceCreator);
+                using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
+                {
+                    CanvasGeometry geometryCrop = this.Transform.CropDestination.ToRectangle(resourceCreator, canvasToVirtualMatrix);
+
+                    using (drawingSession.CreateLayer(1, geometryCrop))
+                    {
+                        drawingSession.DrawImage(effect);
+                    }
+                }
+                return command;
+            }
+            else return effect;
         }
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)

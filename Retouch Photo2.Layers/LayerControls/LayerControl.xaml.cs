@@ -62,15 +62,10 @@ namespace Retouch_Photo2.Layers
         }
         private OverlayMode overlayMode;
 
-
-        Layerage layerage;
-        public void ConstructLayerControl(Layerage layerage)
-        {
-            this.layerage = layerage;
-        }
+       
 
         //@Construct
-        public LayerControl()
+        public LayerControl(ILayer layer)
         {
             this.InitializeComponent();
             this.ControlHeight = LayerageCollection.ControlsHeight;
@@ -79,17 +74,17 @@ namespace Retouch_Photo2.Layers
             {
                 this.Tapped += (s, e) =>
                 {
-                    LayerageCollection.ItemClick?.Invoke(layerage);//Delegate
+                    LayerageCollection.ItemClick?.Invoke(layer);//Delegate
                     e.Handled = true;
                 };
                 this.RightTapped += (s, e) =>
                 {
-                    LayerageCollection.RightTapped?.Invoke(layerage);//Delegate
+                    LayerageCollection.RightTapped?.Invoke(layer);//Delegate
                     e.Handled = true;
                 };
                 this.VisualButton.Tapped += (s, e) =>
                 {
-                    LayerageCollection.VisibilityChanged?.Invoke(layerage);//Delegate
+                    LayerageCollection.VisibilityChanged?.Invoke(layer);//Delegate
                     e.Handled = true;
                 };
             }
@@ -98,12 +93,12 @@ namespace Retouch_Photo2.Layers
             {
                 this.ExpanedButton.Tapped += (s, e) =>
                 {
-                    LayerageCollection.IsExpandChanged?.Invoke(this.layerage);//Delegate   
+                    LayerageCollection.IsExpandChanged?.Invoke(layer);//Delegate   
                     e.Handled = true;
                 };
                 this.SelectedButton.Tapped += (s, e) =>
                 {
-                    LayerageCollection.IsSelectedChanged?.Invoke(this.layerage);//Delegate   
+                    LayerageCollection.IsSelectedChanged?.Invoke(layer);//Delegate   
                     e.Handled = true;
                 };
             }
@@ -113,7 +108,7 @@ namespace Retouch_Photo2.Layers
                 this.ManipulationStarted += (s, e) =>
                 {
                     LayerageCollection.IsOverlay = true;
-                    LayerageCollection.DragItemsStarted?.Invoke(this.layerage, this.ManipulationMode);//Delegate     
+                    LayerageCollection.DragItemsStarted?.Invoke(layer, this.ManipulationMode);//Delegate     
                 };
                 this.ManipulationCompleted += (s, e) =>
                 {
@@ -137,7 +132,7 @@ namespace Retouch_Photo2.Layers
                         OverlayMode overlayMode = this.GetOverlay(position.Y);
 
                         this.OverlayMode = overlayMode;
-                        LayerageCollection.DragItemsDelta?.Invoke(this.layerage, overlayMode);//Delegate
+                        LayerageCollection.DragItemsDelta?.Invoke(layer, overlayMode);//Delegate
                     }
                 };
                 this.PointerExited += (s, e) => this.OverlayMode = OverlayMode.None;

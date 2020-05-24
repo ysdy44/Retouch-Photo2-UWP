@@ -59,11 +59,6 @@ namespace Retouch_Photo2.Tools.Models
                     {
                         ImageLayer imageLayer = (ImageLayer)layer;
                         imageLayer.Photocopier = photocopier;
-                        imageLayer.Transform = new Transform
-                        {
-                            Source = transformerSource,
-                            Destination = layer.Transform.Destination,
-                        };
                     }
                 });
             };
@@ -146,7 +141,6 @@ namespace Retouch_Photo2.Tools.Models
                 Style = this.ViewModel.GeometryStyle
             };
             Layerage imageLayerage = imageLayer.ToLayerage();
-            imageLayer.Control.ConstructLayerControl(imageLayerage);
             Layer.Instances.Add(imageLayer);
 
 

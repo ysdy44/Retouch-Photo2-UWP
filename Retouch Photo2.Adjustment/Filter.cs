@@ -27,15 +27,15 @@ namespace Retouch_Photo2.Adjustments
         /// <summary>
         /// Gets a specific rended-layer.
         /// </summary>
-        /// <param name="manager"> The adjustment-manager. </param>
+        /// <param name="filter"> The filter. </param>
         /// <param name="image"> The source image. </param>
         /// <returns> The rendered image. </returns>
-        public static ICanvasImage GetRender(Filter manager, ICanvasImage image)
+        public static ICanvasImage Render(Filter filter, ICanvasImage image)
         {
-            if (manager.Adjustments.Count == 0) return image;
-            if (manager.Adjustments.Count == 1) return manager.Adjustments.Single().GetRender(image);
+            if (filter.Adjustments.Count == 0) return image;
+            if (filter.Adjustments.Count == 1) return filter.Adjustments.Single().GetRender(image);
 
-            foreach (IAdjustment adjustment in manager.Adjustments)
+            foreach (IAdjustment adjustment in filter.Adjustments)
             {
                 image = adjustment.GetRender(image);
             }

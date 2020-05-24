@@ -170,6 +170,12 @@ namespace Retouch_Photo2.Effects
         }
 
         //@Static
+        /// <summary>
+        /// Gets a specific rended-layer.
+        /// </summary>
+        /// <param name="effect"> The effect. </param>
+        /// <param name="image"> The source image. </param>
+        /// <returns> The rendered image. </returns>
         public static ICanvasImage Render(Effect effect, ICanvasImage image)
         {
             //GaussianBlur

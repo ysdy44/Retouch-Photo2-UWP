@@ -19,7 +19,6 @@ namespace Retouch_Photo2.Layers
             XElement element= new XElement
             (
                 elementName,
-                FanKit.Transformers.XML.SaveTransformer("Source", transform.Source),
                 FanKit.Transformers.XML.SaveTransformer("Destination", transform.Destination)
             );
 
@@ -45,7 +44,6 @@ namespace Retouch_Photo2.Layers
         {
             Transform transform = new Transform();
 
-            if (element.Element("Source") is XElement source) transform.Source = FanKit.Transformers.XML.LoadTransformer(source);
             if (element.Element("Destination") is XElement destination) transform.Destination = FanKit.Transformers.XML.LoadTransformer(destination);
 
             if (element.Element("IsCrop") is XElement isCrop) transform.IsCrop = (bool)isCrop;

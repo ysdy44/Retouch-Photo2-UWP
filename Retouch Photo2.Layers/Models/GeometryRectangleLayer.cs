@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Layers.Models
         /// <param name="element"> The source XElement. </param>
         public GeometryRectangleLayer()
         {
-            base.Control = new LayerControl
+            base.Control = new LayerControl(this)
             {
                 Icon = new GeometryRectangleIcon(),
                 Type = this.ConstructStrings(),

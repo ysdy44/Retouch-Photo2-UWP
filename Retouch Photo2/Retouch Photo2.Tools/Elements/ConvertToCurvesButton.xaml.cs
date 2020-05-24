@@ -34,7 +34,6 @@ namespace Retouch_Photo2.Tools.Elements
                     //Turn to curve layer
                     ILayer curveLayer = this.GetCurveLayer(layerage);
                     Layerage curveLayerage = curveLayer.ToLayerage();
-                    curveLayer.Control.ConstructLayerControl(curveLayerage);
                     Layer.Instances.Add(curveLayer);
 
                     //set image brush

@@ -9,10 +9,35 @@ namespace Retouch_Photo2.Layers
     {
 
         /// <summary>
+        /// Find layerage 
+        /// by ILayer.
+        /// in all selected layers.
+        /// </summary>
+        public Layerage FindLayerage_ByILayer(ILayer layer) => this._findLayerage_ByILayer(this.RootLayerages, layer);
+        private Layerage _findLayerage_ByILayer(IEnumerable<Layerage> layerages, ILayer layer)
+        {
+            foreach (Layerage child in layerages)
+            {
+                if (child.Id == layer.Id) return child;
+
+
+                if (child.Children.Count != 0)
+                {
+                    Layerage find = this._findLayerage_ByILayer(child.Children, layer);
+                    if (find != null) return find;
+                }
+            }
+
+            return null;
+        }
+
+
+
+        /// <summary>
         /// Find outermost layerage
         /// in all selected layers.
         /// </summary>
-        public static Layerage FindOutermost_SelectedLayer(IEnumerable<Layerage> selectedLayerages)
+        public static Layerage FindOutermost_FromLayerages(IEnumerable<Layerage> selectedLayerages)
         {
             int index = int.MaxValue;
             Layerage layerage = null;

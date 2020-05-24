@@ -1,4 +1,5 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Elements;
 using System.Numerics;
@@ -14,7 +15,31 @@ namespace Retouch_Photo2.Brushs
 
         public CanvasEdgeBehavior Extend { get; set; }
         public CanvasGradientStop[] Stops { get; set; }
-        public Photocopier Photocopier { get; set; }
+        public Photocopier Photocopier
+        {
+            get => this.photocopier;
+            set
+            {
+                this.photocopier = value;
+
+                Photocopier photocopier = this.Photocopier;
+                if (photocopier.Name == null) return;
+
+                Photo photo = Photo.FindFirstPhoto(photocopier);
+                CanvasBitmap bitmap = photo.Source;
+                this.bitmap = bitmap;
+
+                float canvasWidth = (float)bitmap.Size.Width;
+                float canvasHeight = (float)bitmap.Size.Height;
+
+                TransformerRect transformerRect = new TransformerRect(canvasWidth, canvasHeight, Vector2.Zero);
+                this.transformerRect = transformerRect;
+            }
+        }
+        private Photocopier photocopier;
+        private CanvasBitmap bitmap;
+        private TransformerRect transformerRect;
+
 
         public Vector2 Center { get; set; }
         Vector2 _startingCenter;

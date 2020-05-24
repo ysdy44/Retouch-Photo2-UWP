@@ -11,7 +11,7 @@ namespace Retouch_Photo2.Layers
         /// <returns> The selected layers. </returns>
         public static IEnumerable<Layerage> GetAllSelectedLayers(LayerageCollection layerageCollection) 
          {
-            IList<Layerage> addLayers = new List<Layerage>();
+            IList<Layerage> selectedLayers = new List<Layerage>();
 
             void addLayer(IList<Layerage> layers)
             {
@@ -21,7 +21,39 @@ namespace Retouch_Photo2.Layers
 
                     if (child2.IsSelected == true)
                     {
-                        addLayers.Add(child);
+                        selectedLayers.Add(child);
+                    }
+                    else
+                    {
+                        //Recursive
+                        addLayer(child.Children);
+                    }
+                }
+            }
+
+            //Recursive
+            addLayer(layerageCollection.RootLayerages);
+
+            return selectedLayers;
+        }
+      
+        /// <summary>
+        /// Gets all selected layers.
+        /// </summary>
+        /// <returns> The selected layers. </returns>
+        public static IEnumerable<Layerage> GetAllSelectedLayersRecursive(LayerageCollection layerageCollection)
+        {
+            IList<Layerage> selectedLayers = new List<Layerage>();
+
+            void addLayer(IList<Layerage> layers)
+            {
+                foreach (Layerage child in layers)
+                {
+                    ILayer child2 = child.Self;
+
+                    if (child2.IsSelected == true)
+                    {
+                        selectedLayers.Add(child);
                     }
 
                     //Recursive
@@ -32,7 +64,7 @@ namespace Retouch_Photo2.Layers
             //Recursive
             addLayer(layerageCollection.RootLayerages);
 
-            return addLayers;
+            return selectedLayers;
         }
 
 

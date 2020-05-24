@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         public CurveLayer()
         {
-            base.Control = new LayerControl
+            base.Control = new LayerControl(this)
             {
                 Icon = new CurveIcon(),
                 Type = this.ConstructStrings(),
@@ -50,12 +50,12 @@ namespace Retouch_Photo2.Layers.Models
         {
             if (this.IsRefactoringTransformer)
             {
+                this.IsRefactoringTransformer = false;
+
                 TransformerBorder border = new TransformerBorder(this.Nodes);
                 Transformer transformer = border.ToTransformer();
-                this.Transform.Source = transformer;
                 this.Transform.Destination = transformer;
-
-                this.IsRefactoringTransformer = false;
+                return this.Transform.IsCrop ? this.Transform.CropDestination : transformer;
             }
 
             return this.Transform.IsCrop ? this.Transform.CropDestination : this.Transform.Destination;

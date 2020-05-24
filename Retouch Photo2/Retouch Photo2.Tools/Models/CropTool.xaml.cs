@@ -117,7 +117,7 @@ namespace Retouch_Photo2.Tools.Models
 
         public void Started(Vector2 startingPoint, Vector2 point)
         {
-            Layerage firstLayer = this.ViewModel.GetFirstLayer();
+            Layerage firstLayer = this.ViewModel.GetFirstSelectedLayerage();
             IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(firstLayer);
 
 

@@ -13,21 +13,25 @@ namespace Retouch_Photo2.Layers
         /// and insert to parents's parents's children
         /// </summary>
         /// <param name="child"> The child. </param>
-        public static bool ReleaseGroupLayer(LayerageCollection layerageCollection, Layerage child)
-        {      
-            Layerage layerage = child.Parents;
-            if (layerage != null)
+        public static bool ReleaseGroupLayer(LayerageCollection layerageCollection, Layerage layerage)
+        {
+            Layerage parents = layerage.Parents;
+
+            if (parents != null)
             {
-                IList<Layerage> children = layerageCollection.GetParentsChildren(child);
+                ILayer parents2 = parents.Self;
+
+                IList<Layerage> parentsParentsChildren = layerageCollection.GetParentsChildren(parents);
                 IList<Layerage> parentsChildren = layerageCollection.GetParentsChildren(layerage);
-                int index = parentsChildren.IndexOf(layerage);
-                if (index < 0) index = 0;
+                int parentsIndex = parentsChildren.IndexOf(parents);
+                if (parentsIndex < 0) parentsIndex = 0;
+                if (parentsIndex > parentsParentsChildren.Count - 1) parentsIndex = parentsParentsChildren.Count - 1;
 
-                children.Remove(child);
-                ILayer layer = child.Self;
-                layer.IsSelected = true;
+                parentsChildren.Remove(layerage);
+                parentsParentsChildren.Insert(parentsIndex, layerage);
 
-                parentsChildren.Insert(index, child);
+                parents2.IsRefactoringTransformer = true;
+
                 return true;
             }
             return false;
@@ -40,7 +44,7 @@ namespace Retouch_Photo2.Layers
         {
             //Layers
             IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayers(layerageCollection);
-            Layerage outermost = LayerageCollection.FindOutermost_SelectedLayer(selectedLayerages);
+            Layerage outermost = LayerageCollection.FindOutermost_FromLayerages(selectedLayerages);
             if (outermost == null) return;
             IList<Layerage> parentsChildren = layerageCollection.GetParentsChildren(outermost);
             int index = parentsChildren.IndexOf(outermost);
@@ -51,6 +55,7 @@ namespace Retouch_Photo2.Layers
             {
                 Layerage groupLayerage = selectedLayerages.FirstOrDefault(l => l.Self.Type == LayerType.Group);
                 if (groupLayerage == null) break;
+                ILayer groupLayer = groupLayerage.Self;
 
                 //Insert
                 foreach (Layerage layerage in groupLayerage.Children)
@@ -61,6 +66,7 @@ namespace Retouch_Photo2.Layers
                     parentsChildren.Insert(index, layerage);
                 }
                 groupLayerage.Children.Clear();
+                groupLayer.IsRefactoringTransformer = true;
 
                 //Remove
                 {
@@ -79,7 +85,7 @@ namespace Retouch_Photo2.Layers
         {     
             //Layers
             IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayers(layerageCollection);
-            Layerage outermost = LayerageCollection.FindOutermost_SelectedLayer(selectedLayerages);
+            Layerage outermost = LayerageCollection.FindOutermost_FromLayerages(selectedLayerages);
             if (outermost == null) return;
             IList<Layerage> parentsChildren = layerageCollection.GetParentsChildren(outermost);
             int index = parentsChildren.IndexOf(outermost);
@@ -87,17 +93,13 @@ namespace Retouch_Photo2.Layers
 
 
             //GroupLayer
-            TransformerBorder border = new TransformerBorder(selectedLayerages);
-            Transformer transformer = border.ToTransformer();
-
             GroupLayer groupLayer = new GroupLayer
             {
                 IsSelected = true,
                 IsExpand = false,
-                Transform = new Transform(transformer)
+                IsRefactoringTransformer = true,
             };
             Layerage groupLayerage = groupLayer.ToLayerage();
-            groupLayer.Control.ConstructLayerControl(groupLayerage);
             Layer.Instances.Add(groupLayer);
 
 

@@ -159,7 +159,6 @@ namespace Retouch_Photo2.Menus.Models
 
                 ILayer clone = layer.Clone(this.ViewModel.CanvasDevice);
                 Layerage layerageClone = clone.ToLayerage();
-                clone.Control.ConstructLayerControl(layerageClone);
                 Layer.Instances.Add(clone);
 
                 return layerageClone;

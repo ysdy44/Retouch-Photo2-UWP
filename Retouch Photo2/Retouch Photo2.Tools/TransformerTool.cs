@@ -41,13 +41,12 @@ namespace Retouch_Photo2.Tools
             if (this.TransformerMode == TransformerMode.None) return false;
 
             //Snap
-            if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(this.ViewModel.GetFirstLayer());
+            if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(this.ViewModel.GetFirstSelectedLayerage());
 
             //Method
             this.ViewModel.MethodTransformMultipliesStarted();
             return true;
         }
-
         public bool Delta(Vector2 startingPoint, Vector2 point)
         {
             if (this.Mode == ListViewSelectionMode.None) return false;

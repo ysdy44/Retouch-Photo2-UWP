@@ -56,7 +56,7 @@ namespace Retouch_Photo2.Tools
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
             //Snap         
-            if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(this.ViewModel.GetFirstLayer());
+            if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(this.ViewModel.GetFirstSelectedLayerage());
 
             //Selection
             Transformer transformer = new Transformer(canvasStartingPoint, canvasPoint, this.IsCenter, this.IsSquare);
@@ -69,7 +69,6 @@ namespace Retouch_Photo2.Tools
             //Mezzanine
             ILayer layer = createLayer(transformer);
             Layerage layerage = layer.ToLayerage();
-            layer.Control.ConstructLayerControl(layerage);
             Layer.Instances.Add(layer);
 
             //Mezzanine
