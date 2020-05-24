@@ -54,22 +54,20 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public override Transformer GetActualDestinationWithRefactoringTransformer
+        public override Transformer GetActualDestinationWithRefactoringTransformer(Layerage layerage)
         {
-            get
-            {
-                //TODO: GeometryCurveMultiLayer
-                //   if (this.IsRefactoringTransformer)
-                //  {
-                //      Transformer transformer = LayerCollection.RefactoringTransformer(this.Nodes);
-                //        this.Transform.Source = transformer;
-                //       this.Transform.Destination = transformer;
-                //
-                //       this.IsRefactoringTransformer = false;
-                //   }
+            //TODO: GeometryCurveMultiLayer
+            //   if (this.IsRefactoringTransformer)
+            //  {
+            //      Transformer transformer = LayerCollection.RefactoringTransformer(this.Nodes);
+            //        this.Transform.Source = transformer;
+            //       this.Transform.Destination = transformer;
+            //
+            //       this.IsRefactoringTransformer = false;
+            //   }
 
-                return base.GetActualDestinationWithRefactoringTransformer;
-            }
+
+            return this.Transform.IsCrop ? this.Transform.CropDestination : this.Transform.Destination;
         }
 
         public override void CacheTransform()

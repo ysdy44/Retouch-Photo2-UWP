@@ -23,17 +23,24 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="layerCollection"> The layer-collection. </param>
         public void SetMode(LayerageCollection layerCollection)
         {
-            IEnumerable<Layerage> checkedLayers = LayerageCollection.GetAllSelectedLayers(layerCollection);
-            int count = checkedLayers.Count();
+            IEnumerable<Layerage> selectedLayers = LayerageCollection.GetAllSelectedLayers(layerCollection);
+            int count = selectedLayers.Count();
 
             if (count == 0)
+            {
                 this._setModeNone();//None
+            }
             else if (count == 1)
-                this._setModeSingle(checkedLayers.Single());//Single
+            {
+                Layerage outermost = LayerageCollection.FindOutermost_SelectedLayer(selectedLayers);
+                this.SetModeSingle(outermost);//Single
+            }
             else if (count >= 2)
-                this._setModeMultiple(checkedLayers);//Multiple
+            {
+                this._setModeMultiple(selectedLayers);//Multiple
+            }
         }
-        
+
 
         //////////////////////////
 
@@ -109,25 +116,14 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         /// <param name="layerage"> The single layer. </param>
         public void SetModeSingle(Layerage layerage)
-        {
-            if (this.Layerages != null)
-            {
-                foreach (Layerage child in this.Layerages)
-                {
-                    child.Self.IsSelected = false;
-                }
-            }
-            this._setModeSingle(layerage);//Single
-        }
-        private void _setModeSingle(Layerage layerage)
-        {
+        { 
             ILayer layer = layerage.Self;
 
             this.SelectionMode = ListViewSelectionMode.Single;
             this.SelectionUnNone = true;
             this.SelectionSingle = true;
 
-            this.Transformer = layer.GetActualDestinationWithRefactoringTransformer;
+            this.Transformer = layerage.GetActualTransformer();
             this.DisabledRadian = false;
 
             this.Layerage = layerage;
@@ -191,8 +187,7 @@ namespace Retouch_Photo2.ViewModels
             this.Layerages = layerages;
 
             //TransformerBorder
-            IEnumerable<Transformer> transformers = from l in layerages select l.Self.GetActualDestinationWithRefactoringTransformer;
-            TransformerBorder border = new TransformerBorder(transformers);
+            TransformerBorder border = new TransformerBorder(layerages);
             this.Transformer = border.ToTransformer();
             this.DisabledRadian = false;
 

@@ -123,16 +123,12 @@ namespace Retouch_Photo2.ViewModels
                     return new Transformer();
 
                 case ListViewSelectionMode.Single:
-                    ILayer layer = this.Layerage.Self;
-                    return layer.GetActualDestinationWithRefactoringTransformer;
+                    return this.Layerage.GetActualTransformer();
 
                 case ListViewSelectionMode.Multiple:
-                    {
-                        //TransformerBorder
-                        IEnumerable<Transformer> transformers = from l in this.Layerages select l.Self.GetActualDestinationWithRefactoringTransformer;
-                        TransformerBorder border = new TransformerBorder(transformers);
-                        return border.ToTransformer();
-                    }
+                    //TransformerBorder
+                    TransformerBorder border = new TransformerBorder(this.Layerages);
+                    return border.ToTransformer();
 
                 default:
                     return new Transformer();

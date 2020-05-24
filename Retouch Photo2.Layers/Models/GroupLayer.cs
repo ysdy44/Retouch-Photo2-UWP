@@ -31,8 +31,25 @@ namespace Retouch_Photo2.Layers.Models
                 Type = this.ConstructStrings(),
             };
         }
-        
-        
+
+
+        public override Transformer GetActualDestinationWithRefactoringTransformer(Layerage layerage)
+        {
+            if (this.IsRefactoringTransformer)
+            {
+                //TransformerBorder
+                TransformerBorder border = new TransformerBorder(layerage.Children);
+                Transformer transformer = border.ToTransformer();
+
+                this.Transform.Source = transformer;
+                this.Transform.Destination = transformer;
+
+                this.IsRefactoringTransformer = false;
+            }
+
+            return this.Transform.IsCrop ? this.Transform.CropDestination : this.Transform.Destination;
+        }
+
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
             GroupLayer groupLayer = new GroupLayer();
@@ -65,9 +82,7 @@ namespace Retouch_Photo2.Layers.Models
         {
             foreach (Layerage child in children)
             {
-                ILayer child2 = child.Self;
-
-                Transformer transformer = child2.GetActualDestinationWithRefactoringTransformer;
+                Transformer transformer = child.GetActualTransformer();
                 drawingSession.DrawBound(transformer, matrix);
             }
         }

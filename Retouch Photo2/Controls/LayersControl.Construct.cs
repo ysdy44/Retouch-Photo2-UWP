@@ -147,8 +147,7 @@ namespace Retouch_Photo2.Controls
                 LayerageCollection.ShiftSelectCurrentLayer(this.ViewModel.LayerageCollection, selectedLayerage);
             
             else this.ViewModel.MethodSelectedNew(selectedLayerage);  //Method
-            
-
         }
+
     }
 }

@@ -46,22 +46,19 @@ namespace Retouch_Photo2.Layers.Models
         public CurveLayer(Vector2 left, Vector2 right) : this() => this.Nodes = new NodeCollection(left, right);
 
 
-        public override Transformer GetActualDestinationWithRefactoringTransformer
+        public override Transformer GetActualDestinationWithRefactoringTransformer(Layerage layerage)
         {
-            get
+            if (this.IsRefactoringTransformer)
             {
-                if (this.IsRefactoringTransformer)
-                {
-                    TransformerBorder border = new TransformerBorder(this.Nodes);
-                    Transformer transformer = border.ToTransformer();
-                    this.Transform.Source = transformer;
-                    this.Transform.Destination = transformer;
+                TransformerBorder border = new TransformerBorder(this.Nodes);
+                Transformer transformer = border.ToTransformer();
+                this.Transform.Source = transformer;
+                this.Transform.Destination = transformer;
 
-                    this.IsRefactoringTransformer = false;
-                }
-
-                return base.GetActualDestinationWithRefactoringTransformer;
+                this.IsRefactoringTransformer = false;
             }
+
+            return this.Transform.IsCrop ? this.Transform.CropDestination : this.Transform.Destination;
         }
 
         public override void CacheTransform()

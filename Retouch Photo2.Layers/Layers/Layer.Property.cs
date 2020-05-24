@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Layers
 
         //@Abstract
         public abstract LayerType Type { get; }
-        public string Name { get; set; }
+        public string Name { get; set; } 
         public BlendEffectMode? BlendMode { get; set; } = null;
 
         public float Opacity { get; set; } = 1.0f;
@@ -52,7 +52,7 @@ namespace Retouch_Photo2.Layers
         }
 
         public bool IsRefactoringTransformer { get; set; }
-        public virtual Transformer GetActualDestinationWithRefactoringTransformer => this.Transform.IsCrop ? this.Transform.CropDestination : this.Transform.Destination;
+        public virtual Transformer GetActualDestinationWithRefactoringTransformer(Layerage layerage) => this.Transform.IsCrop ? this.Transform.CropDestination : this.Transform.Destination;
 
         public Retouch_Photo2.Brushs.Style Style { get; set; } = new Retouch_Photo2.Brushs.Style();
         public Transform Transform { get; set; } = new Transform();

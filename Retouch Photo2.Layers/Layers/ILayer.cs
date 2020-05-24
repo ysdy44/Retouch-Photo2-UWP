@@ -71,8 +71,11 @@ namespace Retouch_Photo2.Layers
 
         /// <summary> Gets or sets ILayer is need to refactoring transformer. </summary>
         bool IsRefactoringTransformer { get; set; }
-        /// <summary> Gets ILayer's actually transformer. </summary>
-        Transformer GetActualDestinationWithRefactoringTransformer { get; }
+        /// <summary>
+        /// Gets ILayer's actually transformer.
+        /// </summary>
+        /// <param name="layerage"> The layerage. </param>
+        Transformer GetActualDestinationWithRefactoringTransformer(Layerage layerage);
 
         /// <summary> Gets or sets ILayer's style. </summary>
         Retouch_Photo2.Brushs.Style Style { get; set; }
@@ -165,7 +168,7 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Returns whether the area filled by the layer contains the specified point.
         /// </summary>
-        bool FillContainsPoint(Vector2 point);
+        bool FillContainsPoint(Layerage layerage, Vector2 point);
 
 
         #endregion

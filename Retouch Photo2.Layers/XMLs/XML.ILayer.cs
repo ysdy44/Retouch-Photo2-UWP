@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Layers
             {
                 element.Add(new XAttribute("Id", layer.Id));
                 element.Add(new XAttribute("Type", layer.Type));
-                element.Add(new XAttribute("Name", layer.Name));
+                if (layer.Name != null) element.Add(new XAttribute("Name", layer.Name));
                 element.Add(new XAttribute("Opacity", layer.Opacity));
                 element.Add(new XAttribute("BlendMode", layer.BlendMode == null ? "None" : $"{layer.BlendMode}"));
                 element.Add(new XAttribute("Visibility", layer.Visibility));

@@ -214,7 +214,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 ILayer layer = layerage.Self;
 
-                Transformer transformer = layer.GetActualDestinationWithRefactoringTransformer;
+                Transformer transformer = layerage.GetActualTransformer();
                 bool contained = transformer.Contained(this.BoxRect);
 
                 switch (this.MarqueeCompositeMode)

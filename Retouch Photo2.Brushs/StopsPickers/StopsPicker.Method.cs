@@ -125,8 +125,6 @@ namespace Retouch_Photo2.Brushs
                 this.CanvasControl.Invalidate();
                 return true;
             }
-
-            return false;
         }
 
     }

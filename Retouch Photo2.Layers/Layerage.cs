@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using FanKit.Transformers;
 
 namespace Retouch_Photo2.Layers
 {
     /// <summary>
     /// ID of <see cref="Layerage"/>.
     /// </summary>
-    public class Layerage
+    public partial class Layerage : FanKit.Transformers.IGetActualTransformer
     {
         public ILayer Self => Layer.FindFirstLayer(this);
 
@@ -23,6 +24,30 @@ namespace Retouch_Photo2.Layers
                 //Parents = this.Parents?.Clone(),
                 Children = (from child in this.Children select child.Clone()).ToList()
             };
+        }
+
+        public Transformer GetActualTransformer()
+        {
+            ILayer layer = this.Self;
+            return layer.GetActualDestinationWithRefactoringTransformer(this);
+        }
+
+        /// <summary>
+        /// Open the <see cref="ILayer.IsRefactoringTransformer"/> with <see cref="Layerage.Parents"/>.
+        /// </summary>
+        public void RefactoringParentsTransformer()
+        {
+            //RefactoringTransformer
+            if (this.Parents != null)
+            {
+                ILayer layer = this.Parents.Self;
+
+                if (layer.Type == LayerType.Group)
+                {
+                    ILayer groupLayer = layer;
+                    groupLayer.IsRefactoringTransformer = true;
+                }
+            }
         }
 
     }

@@ -89,7 +89,7 @@ namespace Retouch_Photo2.ViewModels
                 var previous = selectedLayer.IsSelected;
                 history.UndoActions.Push(() =>
                 {
-                    ILayer selectedLayer2 = selectedLayerage.Self;
+                    ILayer selectedLayer2 = selectedLayer;
 
                     selectedLayer2.IsSelected = previous;
                 });
@@ -110,7 +110,7 @@ namespace Retouch_Photo2.ViewModels
                         var previous = layer.IsSelected;
                         history.UndoActions.Push(() =>
                         {
-                            ILayer layer2 = selectedLayerage.Self;
+                            ILayer layer2 = layerage.Self;
 
                             layer2.IsSelected = previous;
                         });

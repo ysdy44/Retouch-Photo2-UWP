@@ -87,8 +87,7 @@ namespace Retouch_Photo2.Layers
 
 
             //GroupLayer
-            IEnumerable<Transformer> transformers = from l in selectedLayerages select l.Self.GetActualDestinationWithRefactoringTransformer;
-            TransformerBorder border = new TransformerBorder(transformers);
+            TransformerBorder border = new TransformerBorder(selectedLayerages);
             Transformer transformer = border.ToTransformer();
 
             GroupLayer groupLayer = new GroupLayer

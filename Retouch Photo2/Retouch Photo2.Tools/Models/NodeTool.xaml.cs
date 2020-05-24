@@ -84,10 +84,10 @@ namespace Retouch_Photo2.Tools.Models
         public void OnNavigatedFrom()
         {
             if (this.CurveLayer == null) return;
-
+            //TODO: SVM.TR
             //The NodeTool may change the current CurveLayer's transformer.
-            Transformer transformer = this.CurveLayer.GetActualDestinationWithRefactoringTransformer;
-            this.ViewModel.Transformer = transformer;
+     //       Transformer transformer = this.CurveLayer.GetActualDestinationWithRefactoringTransformer;
+         //   this.ViewModel.Transformer = transformer;
         }
 
     }

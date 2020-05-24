@@ -216,22 +216,23 @@ namespace Retouch_Photo2.Tools.Models
     public sealed partial class CropTool : Page, ITool
     {
 
-        private bool Check(Layerage layer, Vector2 canvasStartingPoint)
+        private bool Check(Layerage  layerage, Vector2 canvasStartingPoint)
         {
-            ILayer layer2 = layer.Self;
-            if (layer2.IsSelected == true)
+            ILayer layer = layerage.Self;
+
+            if (layer.IsSelected == true)
             {
                 //Transformer
-                Transformer transformer = layer2.GetActualDestinationWithRefactoringTransformer;
+                Transformer transformer = layerage.GetActualTransformer();
                 this.IsMove = transformer.FillContainsPoint(canvasStartingPoint);
                 this.TransformerMode = Transformer.ContainsNodeMode(canvasStartingPoint, transformer, false);
 
                 if (this.IsMove || this.TransformerMode != TransformerMode.None)
                 {
-                    this.Layerage = layer;
-                    this.StartingDestination = layer2.Transform.Destination;
-                    this.StartingIsCrop = layer2.Transform.IsCrop;
-                    this.StartingCropDestination = layer2.Transform.CropDestination;
+                    this.Layerage = layerage;
+                    this.StartingDestination = layer.Transform.Destination;
+                    this.StartingIsCrop = layer.Transform.IsCrop;
+                    this.StartingCropDestination = layer.Transform.CropDestination;
                     return true;
                 }
             }
@@ -240,13 +241,13 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        private void Draw(CanvasDrawingSession drawingSession, Layerage layer, Matrix3x2 matrix)
+        private void Draw(CanvasDrawingSession drawingSession, Layerage layerage, Matrix3x2 matrix)
         {
-            ILayer layer2 = layer.Self;
+            ILayer layer = layerage.Self;
 
-            if (layer2.IsSelected == true)
+            if (layer.IsSelected == true)
             {
-                Transformer transformer = layer2.GetActualDestinationWithRefactoringTransformer;
+                Transformer transformer = layerage.GetActualTransformer();
                 drawingSession.DrawCrop(transformer, matrix, Colors.BlueViolet);
             }
         }
