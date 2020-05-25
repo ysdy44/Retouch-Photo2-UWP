@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -41,7 +42,7 @@ namespace Retouch_Photo2.Tools.Models
                 }
             }
         }
-               
+
         //@Converter
         private int CenterNumberConverter(float center) => (int)(center * 100.0f);
         private double CenterValueConverter(float center) => center * 100d;
@@ -52,95 +53,18 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructCenter();
-
-            this.MirrorButton.Click += (s, e) => this.CenterMirror();
+            this.ConstructCenter1();
+            this.ConstructCenter2();
+            this.ConstructMirror();
         }
 
-
-        //Center
-        private void ConstructCenter()
-        {
-            //Button
-            this.CenterTouchbarButton.Toggle += (s, value) =>
-            {
-                this.TouchBarMode = value;
-            };
-
-            //Number
-            this.CenterTouchbarSlider.Unit = "%";
-            this.CenterTouchbarSlider.NumberMinimum = 0;
-            this.CenterTouchbarSlider.NumberMaximum = 100;
-            this.CenterTouchbarSlider.NumberChange += (sender, number) =>
-            {
-                float center = number / 100.0f;
-                this.CenterChange(center);
-            };
-
-            //Value
-            this.CenterTouchbarSlider.Minimum = 0d;
-            this.CenterTouchbarSlider.Maximum = 100d;
-            this.CenterTouchbarSlider.ValueChangeStarted += (sender, value) => { };
-            this.CenterTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float center = (float)value / 100.0f;
-                this.CenterChange(center);
-            };
-            this.CenterTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
-        }
-        private void CenterChange(float center)
-        {
-            if (center < 0.0f) center = 0.0f;
-            if (center > 1.0f) center = 1.0f;
-
-            this.SelectionViewModel.GeometryTriangleCenter = center;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type == LayerType.GeometryTriangle)
-                {
-                    GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
-                    geometryTriangleLayer.Center = center;
-                }
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-
-        //Mirror
-        private void CenterMirror()
-        {
-            float selectionCenter = 1.0f - this.SelectionViewModel.GeometryTriangleCenter;
-            this.SelectionViewModel.GeometryTriangleCenter = selectionCenter;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type == LayerType.GeometryTriangle)
-                {
-                    GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
-                    float center = 1.0f - geometryTriangleLayer.Center;
-                    geometryTriangleLayer.Center = center;
-                }
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-
-               
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
             this.TouchBarMode = false;
         }
-
     }
-    
+
     /// <summary>
     /// <see cref="ITool"/>'s GeometryTriangleTool.
     /// </summary>
@@ -170,7 +94,7 @@ namespace Retouch_Photo2.Tools.Models
         public FrameworkElement Page => this;
 
         readonly FrameworkElement _icon = new GeometryTriangleIcon();
-        readonly Button _button = new Button { Tag = new GeometryTriangleIcon()};
+        readonly Button _button = new Button { Tag = new GeometryTriangleIcon() };
 
         private ILayer CreateLayer(Transformer transformer)
         {
@@ -189,6 +113,183 @@ namespace Retouch_Photo2.Tools.Models
         public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
 
         public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+
+    }
+
+    /// <summary>
+    /// <see cref="ITool"/>'s GeometryTriangleTool.
+    /// </summary>
+    public sealed partial class GeometryTriangleTool : Page, ITool
+    {
+
+        private void ConstructCenter1()
+        {
+            //Button
+            this.CenterTouchbarButton.Toggle += (s, value) =>
+            {
+                this.TouchBarMode = value;
+            };
+
+            //Number
+            this.CenterTouchbarSlider.Unit = "%";
+            this.CenterTouchbarSlider.NumberMinimum = 0;
+            this.CenterTouchbarSlider.NumberMaximum = 100;
+            this.CenterTouchbarSlider.ValueChanged += (sender, value) =>
+            {
+                float center = (float)value / 100.0f;
+                if (center < 0.0f) center = 0.0f;
+                if (center > 1.0f) center = 1.0f;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set triangle layer center");
+
+                //Selection
+                this.SelectionViewModel.GeometryTriangleCenter = center;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryTriangle)
+                    {
+                        GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
+
+                        var previous = geometryTriangleLayer.Center;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryTriangleLayer layer2 = geometryTriangleLayer;
+
+                            layer2.Center = previous;
+                        });
+
+                        geometryTriangleLayer.Center = center;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+        private void ConstructCenter2()
+        {
+            //History
+            LayersPropertyHistory history = null;
+
+            //Value
+            this.CenterTouchbarSlider.Minimum = 0d;
+            this.CenterTouchbarSlider.Maximum = 100d;
+            this.CenterTouchbarSlider.ValueChangeStarted += (sender, value) =>
+            {
+                history = new LayersPropertyHistory("Set triangle layer center");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryTriangle)
+                    {
+                        GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
+                        geometryTriangleLayer.CacheCenter();
+                    }
+                });
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.CenterTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            {
+                float center = (float)value / 100.0f;
+                if (center < 0.0f) center = 0.0f;
+                if (center > 1.0f) center = 1.0f;
+
+                //Selection
+                this.SelectionViewModel.GeometryTriangleCenter = center;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryTriangle)
+                    {
+                        GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
+                        geometryTriangleLayer.Center = center;
+                    }
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            this.CenterTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float center = (float)value / 100.0f;
+                if (center < 0.0f) center = 0.0f;
+                if (center > 1.0f) center = 1.0f;
+
+                //Selection
+                this.SelectionViewModel.GeometryTriangleCenter = center;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryTriangle)
+                    {
+                        GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
+
+                        var previous = geometryTriangleLayer.StartingCenter;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryTriangleLayer layer2 = geometryTriangleLayer;
+
+                            layer2.Center = previous;
+                        });
+
+                        geometryTriangleLayer.Center = center;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            };
+        }
+
+        private void ConstructMirror()
+        {
+            this.MirrorButton.Click += (s, e) =>
+            {
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set triangle layer center");
+
+                //Selection
+                float selectionCenter = 1.0f - this.SelectionViewModel.GeometryTriangleCenter;
+                this.SelectionViewModel.GeometryTriangleCenter = selectionCenter;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryTriangle)
+                    {
+                        GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
+
+                        var previous = geometryTriangleLayer.Center;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryTriangleLayer layer2 = geometryTriangleLayer;
+
+                            layer2.Center = previous;
+                        });
+
+                        float center = 1.0f - geometryTriangleLayer.Center;
+                        geometryTriangleLayer.Center = center;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
 
     }
 }

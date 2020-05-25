@@ -20,10 +20,22 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Content
         public int Count = 8;
+        public int StartingCount { get; private set; }
+        public void CacheCount() => this.StartingCount = this.Count;
+
         public float InnerRadius = 0.7f;
+        public float StartingInnerRadius { get; private set; }
+        public void CacheInnerRadius() => this.StartingInnerRadius = this.InnerRadius;
+
 
         public float Tooth = 0.3f;
+        public float StartingTooth { get; private set; }
+        public void CacheTooth() => this.StartingTooth = this.Tooth;
+
         public float Notch = 0.6f;
+        public float StartingNotch { get; private set; }
+        public void CacheNotch() => this.StartingNotch = this.Notch;
+    
 
         //@Construct
         /// <summary>

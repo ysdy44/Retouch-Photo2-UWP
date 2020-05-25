@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -53,69 +54,16 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructHoleRadius();
+
+            this.ConstructHoleRadius1();
+            this.ConstructHoleRadius2();
         }
-
-
-        //HoleRadius
-        private void ConstructHoleRadius()
-        {
-            //Button
-            this.HoleRadiusTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = true;
-                else
-                    this.TouchBarMode = false;
-            };
-
-            //Number
-            this.HoleRadiusTouchbarSlider.Unit = "%";
-            this.HoleRadiusTouchbarSlider.NumberMinimum = 0;
-            this.HoleRadiusTouchbarSlider.NumberMaximum = 100;
-            this.HoleRadiusTouchbarSlider.NumberChange += (sender, number) =>
-            {
-                float innerRadius = number / 100f;
-                this.HoleRadiusChange(innerRadius);
-            };
-
-            //Value
-            this.HoleRadiusTouchbarSlider.Minimum = 0d;
-            this.HoleRadiusTouchbarSlider.Maximum = 100d;
-            this.HoleRadiusTouchbarSlider.ValueChangeStarted += (sender, value) => { };
-            this.HoleRadiusTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float innerRadius = (float)(value / 100d);
-                this.HoleRadiusChange(innerRadius);
-            };
-            this.HoleRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
-        }
-        private void HoleRadiusChange(float innerRadius)
-        {
-            this.SelectionViewModel.GeometryDountHoleRadius = innerRadius;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type == LayerType.GeometryDount)
-                {
-                    GeometryDountLayer geometryDountLayer = (GeometryDountLayer)layer;
-                    geometryDountLayer.HoleRadius = innerRadius;
-                }
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-
 
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
             this.TouchBarMode = false;
         }
-
     }
 
     /// <summary>
@@ -165,6 +113,147 @@ namespace Retouch_Photo2.Tools.Models
         public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
 
         public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+
+    }
+
+    /// <summary>
+    /// <see cref="ITool"/>'s GeometryDountTool.
+    /// </summary>
+    public partial class GeometryDountTool : Page, ITool
+    {
+
+        //HoleRadius
+        private void ConstructHoleRadius1()
+        {
+            //Button
+            this.HoleRadiusTouchbarButton.Toggle += (s, value) =>
+            {
+                this.TouchBarMode = value;
+            };
+
+            //Number
+            this.HoleRadiusTouchbarSlider.Unit = "%";
+            this.HoleRadiusTouchbarSlider.NumberMinimum = 0;
+            this.HoleRadiusTouchbarSlider.NumberMaximum = 100;
+            this.HoleRadiusTouchbarSlider.ValueChanged += (sender, value) =>
+            {
+                float holeRadius = (float)value / 100.0f;
+                if (holeRadius < 0.0f) holeRadius = 0.0f;
+                if (holeRadius > 1.0f) holeRadius = 1.0f;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set dount layer HoleRadius");
+
+                //Selection
+                this.SelectionViewModel.GeometryDountHoleRadius = holeRadius;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryDount)
+                    {
+                        GeometryDountLayer geometryDountLayer = (GeometryDountLayer)layer;
+
+                        var previous = geometryDountLayer.HoleRadius;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryDountLayer layer2 = geometryDountLayer;
+
+                            layer2.HoleRadius = previous;
+                        });
+
+                        geometryDountLayer.HoleRadius = holeRadius;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+        private void ConstructHoleRadius2()
+        {
+            //History
+            LayersPropertyHistory history = null;
+
+            //Value
+            this.HoleRadiusTouchbarSlider.Unit = "%";
+            this.HoleRadiusTouchbarSlider.NumberMinimum = 0;
+            this.HoleRadiusTouchbarSlider.NumberMaximum = 100;
+            this.HoleRadiusTouchbarSlider.ValueChangeStarted += (sender, value) =>
+            {
+                history = new LayersPropertyHistory("Set dount layer hole radius");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryDount)
+                    {
+                        GeometryDountLayer geometryDountLayer = (GeometryDountLayer)layer;
+                        geometryDountLayer.CacheHoleRadius();
+                    }
+                });
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.HoleRadiusTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            {
+                float holeRadius = (float)value / 100.0f;
+                if (holeRadius < 0.0f) holeRadius = 0.0f;
+                if (holeRadius > 1.0f) holeRadius = 1.0f;
+
+                //Selection
+                this.SelectionViewModel.GeometryDountHoleRadius = holeRadius;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryDount)
+                    {
+                        GeometryDountLayer geometryDountLayer = (GeometryDountLayer)layer;
+                        geometryDountLayer.HoleRadius = holeRadius;
+                    }
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            this.HoleRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float holeRadius = (float)value / 100.0f;
+                if (holeRadius < 0.0f) holeRadius = 0.0f;
+                if (holeRadius > 1.0f) holeRadius = 1.0f;
+
+                //Selection
+                this.SelectionViewModel.GeometryDountHoleRadius = holeRadius;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryDount)
+                    {
+                        GeometryDountLayer geometryDountLayer = (GeometryDountLayer)layer;
+
+                        var previous = geometryDountLayer.StartingHoleRadius;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryDountLayer layer2 = geometryDountLayer;
+
+                            layer2.HoleRadius = previous;
+                        });
+
+                        geometryDountLayer.HoleRadius = holeRadius;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            };
+        }
 
     }
 }

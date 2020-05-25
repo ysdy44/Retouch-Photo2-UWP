@@ -155,9 +155,9 @@ namespace Retouch_Photo2.Tools.Models
             this.RadianTouchbarSlider.Unit = "º";
             this.RadianTouchbarSlider.NumberMinimum = ViewRadianConverter.MinNumber;
             this.RadianTouchbarSlider.NumberMaximum = ViewRadianConverter.MaxNumber;
-            this.RadianTouchbarSlider.NumberChange += (sender, number) =>
+            this.RadianTouchbarSlider.ValueChanged += (sender, value) =>
             {
-                float radian = ViewRadianConverter.NumberToRadian(number);
+                float radian = ViewRadianConverter.NumberToRadian((int)value);
                 this.ViewModel.SetCanvasTransformerRadian(radian);//CanvasTransformer
             };
 
@@ -203,9 +203,9 @@ namespace Retouch_Photo2.Tools.Models
             this.ScaleTouchbarSlider.Unit = "%";
             this.ScaleTouchbarSlider.NumberMinimum = ViewScaleConverter.MinNumber;
             this.ScaleTouchbarSlider.NumberMaximum = ViewScaleConverter.MaxNumber;
-            this.ScaleTouchbarSlider.NumberChange += (sender, number) =>
+            this.ScaleTouchbarSlider.ValueChanged += (sender, value) =>
             {
-                float scale = ViewScaleConverter.NumberToScale(number);
+                float scale = ViewScaleConverter.NumberToScale((int)value);
                 this.ViewModel.SetCanvasTransformerScale(scale);//CanvasTransformer
             };
 

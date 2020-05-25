@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -52,69 +53,16 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructPoints();
+
+            this.ConstructPoints1();
+            this.ConstructPoints2();
         }
-
-
-        //Points
-        private void ConstructPoints()
-        {
-            //Button
-            this.PointsTouchbarButton.Toggle += (s, value) =>
-            {
-                this.TouchBarMode = value;
-            };
-
-            //Number
-            this.PointsTouchbarSlider.Unit = "";
-            this.PointsTouchbarSlider.NumberMinimum = 0;
-            this.PointsTouchbarSlider.NumberMaximum = 100;
-            this.PointsTouchbarSlider.NumberChange += (sender, number) =>
-            {
-                int Points = number;
-                this.PointsChange(Points);
-            };
-
-            //Value
-            this.PointsTouchbarSlider.Minimum = 0d;
-            this.PointsTouchbarSlider.Maximum = 100d;
-            this.PointsTouchbarSlider.ValueChangeStarted += (sender, value) => { };
-            this.PointsTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                int Points = (int)value;
-                this.PointsChange(Points);
-            };
-            this.PointsTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
-        }
-        private void PointsChange(int points)
-        {
-            if (points < 3) points = 3;
-            if (points > 36) points = 36;
-
-            this.SelectionViewModel.GeometryPentagonPoints = points;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type == LayerType.GeometryPentagon)
-                {
-                    GeometryPentagonLayer geometryPentagonLayer = (GeometryPentagonLayer)layer;
-                    geometryPentagonLayer.Points = points;
-                }
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-
 
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
             this.TouchBarMode = false;
         }
-
     }
     
     /// <summary>
@@ -163,6 +111,144 @@ namespace Retouch_Photo2.Tools.Models
         public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
 
         public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+
+    }
+
+    /// <summary>
+    /// <see cref="ITool"/>'s GeometryPentagonTool.
+    /// </summary>
+    public sealed partial class GeometryPentagonTool : Page, ITool
+    {
+        //Points
+        private void ConstructPoints1()
+        {
+            //Button
+            this.PointsTouchbarButton.Toggle += (s, value) =>
+            {
+                this.TouchBarMode = value;
+            };
+
+            //Number
+            this.PointsTouchbarSlider.NumberMinimum = 3;
+            this.PointsTouchbarSlider.NumberMaximum = 36;
+            this.PointsTouchbarSlider.ValueChanged += (sender, value) =>
+            {
+                int points = (int)value;
+                if (points < 3) points = 3;
+                if (points > 36) points = 36;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set pentagon layer points");
+
+                //Selection
+                this.SelectionViewModel.GeometryPentagonPoints = points;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryPentagon)
+                    {
+                        GeometryPentagonLayer geometryPentagonLayer = (GeometryPentagonLayer)layer;
+
+                        var previous = geometryPentagonLayer.Points;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryPentagonLayer layer2 = geometryPentagonLayer;
+
+                            layer2.Points = previous;
+                        });
+
+                        geometryPentagonLayer.Points = points;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+        private void ConstructPoints2()
+        {
+            //History
+            LayersPropertyHistory history = null;
+
+            //Value
+            this.PointsTouchbarSlider.Minimum = 3d;
+            this.PointsTouchbarSlider.Maximum = 36d;
+            this.PointsTouchbarSlider.ValueChangeStarted += (sender, value) =>
+            {
+                history = new LayersPropertyHistory("Set pentagon layer points");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryPentagon)
+                    {
+                        GeometryPentagonLayer geometryPentagonLayer = (GeometryPentagonLayer)layer;
+                        geometryPentagonLayer.CachePoints();
+                    }
+                });
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.PointsTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            {
+                int points = (int)value;
+                if (points < 3) points = 3;
+                if (points > 36) points = 36;
+
+                //Selection
+                this.SelectionViewModel.GeometryPentagonPoints = points;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryPentagon)
+                    {
+                        GeometryPentagonLayer geometryPentagonLayer = (GeometryPentagonLayer)layer;
+                        geometryPentagonLayer.Points = points;
+                    }
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            this.PointsTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                int points = (int)value;
+                if (points < 3) points = 3;
+                if (points > 36) points = 36;
+
+                //Selection
+                this.SelectionViewModel.GeometryPentagonPoints = points;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryPentagon)
+                    {
+                        GeometryPentagonLayer geometryPentagonLayer = (GeometryPentagonLayer)layer;
+
+                        var previous = geometryPentagonLayer.StartingPoints;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryPentagonLayer layer2 = geometryPentagonLayer;
+
+                            layer2.Points = previous;
+                        });
+
+                        geometryPentagonLayer.Points = points;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            };
+        }
 
     }
 }

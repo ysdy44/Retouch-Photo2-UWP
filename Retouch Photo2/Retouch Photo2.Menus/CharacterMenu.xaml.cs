@@ -1,5 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas.Text;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
@@ -45,7 +46,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.FontSizeListView.Visibility = (value == CharacterState.FontSize) ? Visibility.Visible : Visibility.Collapsed;
                 this.FontWeightScrollViewer.Visibility = (value == CharacterState.FontWeight) ? Visibility.Visible : Visibility.Collapsed;
             }
-        } 
+        }
 
         #region DependencyProperty
 
@@ -61,7 +62,7 @@ namespace Retouch_Photo2.Menus.Models
 
 
         #endregion
-                     
+
 
         //@Construct
         public CharacterMenu()
@@ -89,19 +90,19 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content = 
+            this._button.ToolTip.Content =
             this._Expander.Title =
             this._Expander.CurrentTitle = resource.GetString("/Menus/Character");
 
             this.FontAlignmentTextBlock.Text = resource.GetString("/Characters/FontAlignment");
-                        
+
             this.FontStyleTextBlock.Text = resource.GetString("/Characters/FontStyle");
             this.BoldToolTip.Content = resource.GetString("/Characters/FontStyle_Bold");
             this.ItalicToolTip.Content = resource.GetString("/Characters/FontStyle_Italic");
             this.UnderLineToolTip.Content = resource.GetString("/Characters/FontStyle_UnderLine");
 
             this.FontWeightTextBlock.Text = resource.GetString("/Characters/FontWeight");
-            
+
             this.FontFamilyTextBlock.Text = resource.GetString("/Characters/FontFamily");
 
             this.FontSizeTextBlock.Text = resource.GetString("/Characters/FontSize");
@@ -112,7 +113,7 @@ namespace Retouch_Photo2.Menus.Models
         {
             this._button.ToolTip.Opened += (s, e) =>
             {
-                if (this._Expander.IsSecondPage==false)
+                if (this._Expander.IsSecondPage == false)
                 {
                     if (this.Expander.State == ExpanderState.Overlay)
                     {
@@ -149,26 +150,13 @@ namespace Retouch_Photo2.Menus.Models
     /// </summary>
     public sealed partial class CharacterMenu : UserControl, IMenu
     {
-        
-        //Align
+
+        //FontAlignment
         private void ConstructAlign()
         {
             this.FontAlignmentSegmented.AlignmentChanged += (s, fontAlignment) =>
             {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.TextArtistic || layer.Type == LayerType.TextFrame)
-                    {
-                        ITextLayer textLayer = (ITextLayer)layer;
-                        textLayer.FontAlignment = fontAlignment;
-                    }
-                });
-                this.SelectionViewModel.FontAlignment = fontAlignment;
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.SetFontAlignment(fontAlignment);
             };
         }
 
@@ -183,20 +171,7 @@ namespace Retouch_Photo2.Menus.Models
                 // isBold ? ""Normal"" : ""Bold""
                 FontWeight fontWeight = isBold ? FontWeights.Normal : FontWeights.Bold;
 
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.TextArtistic || layer.Type == LayerType.TextFrame)
-                    {
-                        ITextLayer textLayer = (ITextLayer)layer;
-                        textLayer.FontWeight = fontWeight;
-                    }
-                });
-                this.SelectionViewModel.FontWeight = fontWeight;
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.SetFontWeight(fontWeight);
             };
 
             this.ItalicButton.Click += (s, e) =>
@@ -206,20 +181,7 @@ namespace Retouch_Photo2.Menus.Models
                 // isNormal ? ""Italic"" : ""Normal""
                 FontStyle fontStyle = isNormal ? FontStyle.Italic : FontStyle.Normal;
 
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.TextArtistic || layer.Type == LayerType.TextFrame)
-                    {
-                        ITextLayer textLayer = (ITextLayer)layer;
-                        textLayer.FontStyle = fontStyle;
-                    }
-                });
-                this.SelectionViewModel.FontStyle = fontStyle;
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.SetFontStyle(fontStyle);
             };
 
             this.UnderLineButton.Click += (s, e) =>
@@ -238,24 +200,7 @@ namespace Retouch_Photo2.Menus.Models
                 this._Expander.CurrentTitle = this.FontWeightTextBlock.Text;
             };
 
-            this.FontWeightControl.WeightChanged += (s, fontWeight) =>
-            {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.TextArtistic || layer.Type == LayerType.TextFrame)
-                    {
-                        ITextLayer textLayer = (ITextLayer)layer;
-                        textLayer.FontWeight = fontWeight;
-                    }
-                });
-                this.SelectionViewModel.FontWeight = fontWeight;
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-
+            this.FontWeightControl.WeightChanged += (s, fontWeight) => this.SetFontWeight(fontWeight);
         }
 
 
@@ -272,25 +217,12 @@ namespace Retouch_Photo2.Menus.Models
                 this._Expander.IsSecondPage = true;
                 this._Expander.CurrentTitle = this.FontFamilyTextBlock.Text;
             };
-            
+
             this.FontFamilyListView.ItemClick += (s, e) =>
             {
                 if (e.ClickedItem is string value)
                 {
-                    //Selection
-                    this.SelectionViewModel.SetValue((layerage) =>
-                    {
-                        ILayer layer = layerage.Self;
-
-                        if (layer.Type == LayerType.TextArtistic || layer.Type == LayerType.TextFrame)
-                        {
-                            ITextLayer textLayer = (ITextLayer)layer;
-                            textLayer.FontFamily = value;
-                        }
-                    });
-                    this.SelectionViewModel.FontFamily = value;
-
-                    this.ViewModel.Invalidate();//Invalidate
+                    this.SetFontFamily(value);
                 }
             };
 
@@ -312,7 +244,7 @@ namespace Retouch_Photo2.Menus.Models
                 this._Expander.IsSecondPage = true;
                 this._Expander.CurrentTitle = this.FontSizeTextBlock.Text;
             };
-            
+
             this.FontSizePicker.ValueChange += (s, value) => this.SetFontSize(value);
             this.FontSizeListView.ItemClick += (s, e) =>
             {
@@ -324,16 +256,163 @@ namespace Retouch_Photo2.Menus.Models
                 }
             };
         }
-        private void SetFontSize(float value)
+
+    }
+
+    /// <summary> 
+    /// Retouch_Photo2's the only <see cref = "CharacterMenu" />. 
+    /// </summary>
+    public sealed partial class CharacterMenu : UserControl, IMenu
+    {
+
+        private void SetFontAlignment(CanvasHorizontalAlignment fontAlignment)
         {
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory("Set font alignment");
+
+            //Selection
+            this.SelectionViewModel.FontAlignment = fontAlignment;
+            this.SelectionViewModel.SetValue((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+                if (layer.Type.IsText())
+                {
+                    ITextLayer textLayer = (ITextLayer)layer;
+
+                    var previous = textLayer.FontAlignment;
+                    history.UndoActions.Push(() =>
+                    {
+                        ITextLayer layer2 = textLayer;
+
+                        layer2.FontAlignment = previous;
+                    });
+
+                    textLayer.FontAlignment = fontAlignment;
+                }
+            });
+
+            //History
+            this.ViewModel.HistoryPush(history);
+
+            this.ViewModel.Invalidate();//Invalidate
+        }
+
+
+        private void SetFontWeight(FontWeight fontWeight)
+        {
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory("Set font weight");
+
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
-                if (layer.Type == LayerType.TextArtistic || layer.Type == LayerType.TextFrame)
+                if (layer.Type.IsText())
                 {
                     ITextLayer textLayer = (ITextLayer)layer;
+
+                    var previous = textLayer.FontWeight;
+                    history.UndoActions.Push(() =>
+                    {
+                        ITextLayer layer2 = textLayer;
+
+                        layer2.FontWeight = previous;
+                    });
+
+                    textLayer.FontWeight = fontWeight;
+                }
+            });
+            this.SelectionViewModel.FontWeight = fontWeight;
+
+            this.ViewModel.Invalidate();//Invalidate
+        }
+
+
+        private void SetFontStyle(FontStyle fontStyle)
+        {
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory("Set font style");
+
+            //Selection
+            this.SelectionViewModel.SetValue((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+                if (layer.Type.IsText())
+                {
+                    ITextLayer textLayer = (ITextLayer)layer;
+
+                    var previous = textLayer.FontStyle;
+                    history.UndoActions.Push(() =>
+                    {
+                        ITextLayer layer2 = textLayer;
+
+                        layer2.FontStyle = previous;
+                    });
+
+                    textLayer.FontStyle = fontStyle;
+                }
+            });
+            this.SelectionViewModel.FontStyle = fontStyle;
+
+            this.ViewModel.Invalidate();//Invalidate
+        }
+
+
+        private void SetFontFamily(string fontFamily)
+        {  //History
+            LayersPropertyHistory history = new LayersPropertyHistory("Set font family");
+
+            //Selection
+            this.SelectionViewModel.SetValue((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+                if (layer.Type.IsText())
+                {
+                    ITextLayer textLayer = (ITextLayer)layer;
+
+                    var previous = textLayer.FontFamily;
+                    history.UndoActions.Push(() =>
+                    {
+                        ITextLayer layer2 = textLayer;
+
+                        layer2.FontFamily = previous;
+                    });
+
+                    textLayer.FontFamily = fontFamily;
+                }
+            });
+            this.SelectionViewModel.FontFamily = fontFamily;
+
+            this.ViewModel.Invalidate();//Invalidate
+        }
+
+
+        private void SetFontSize(float value)
+        {
+            //Selection
+            this.SelectionViewModel.SetValue((layerage) =>
+            {
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set font size");
+
+                ILayer layer = layerage.Self;
+
+                if (layer.Type.IsText())
+                {
+                    ITextLayer textLayer = (ITextLayer)layer;
+
+                    var previous = textLayer.FontSize;
+                    history.UndoActions.Push(() =>
+                    {
+                        ITextLayer layer2 = textLayer;
+
+                        layer2.FontSize = previous;
+                    });
+
                     textLayer.FontSize = value;
                 }
             });

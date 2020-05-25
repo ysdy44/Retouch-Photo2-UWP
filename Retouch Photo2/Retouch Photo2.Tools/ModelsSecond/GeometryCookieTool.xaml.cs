@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -79,122 +80,18 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructInnerRadius();
-            this.ConstructSweepAngle();
+
+            this.ConstructInnerRadius1();
+            this.ConstructInnerRadius2();
+            this.ConstructSweepAngle1();
+            this.ConstructSweepAngle2();
         }
-
-
-        //InnerRadius
-        private void ConstructInnerRadius()
-        {
-            //Button
-            this.InnerRadiusTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = GeometryCookieMode.InnerRadius;
-                else
-                    this.TouchBarMode = GeometryCookieMode.None;
-            };
-
-            //Number
-            this.InnerRadiusTouchbarSlider.Unit = "%";
-            this.InnerRadiusTouchbarSlider.NumberMinimum = 0;
-            this.InnerRadiusTouchbarSlider.NumberMaximum = 100;
-            this.InnerRadiusTouchbarSlider.NumberChange += (sender, number) =>
-            {
-                float innerRadius = number / 100f;
-                this.InnerRadiusChange(innerRadius);
-            };
-
-            //Value
-            this.InnerRadiusTouchbarSlider.Minimum = 0d;
-            this.InnerRadiusTouchbarSlider.Maximum = 100d;
-            this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) => { };
-            this.InnerRadiusTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float innerRadius = (float)(value / 100d);
-                this.InnerRadiusChange(innerRadius);
-            };
-            this.InnerRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
-        }
-        private void InnerRadiusChange(float innerRadius)
-        {
-            this.SelectionViewModel.GeometryCookieInnerRadius = innerRadius;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type == LayerType.GeometryCookie)
-                {
-                    GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
-                    geometryCookieLayer.InnerRadius = innerRadius;
-                }
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-
-        //SweepAngle
-        private void ConstructSweepAngle()
-        {
-            //Button
-            this.SweepAngleTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = GeometryCookieMode.SweepAngle;
-                else
-                    this.TouchBarMode = GeometryCookieMode.None;
-            };
-
-            //Number
-            this.SweepAngleTouchbarSlider.Unit = "º";
-            this.SweepAngleTouchbarSlider.NumberMinimum = 0;
-            this.SweepAngleTouchbarSlider.NumberMaximum = 360;
-            this.SweepAngleTouchbarSlider.NumberChange += (sender, number) =>
-            {
-                float sweepAngle = number / 180f * FanKit.Math.Pi;
-                this.SweepAngleChange(sweepAngle);
-            };
-
-            //Value
-            this.SweepAngleTouchbarSlider.Minimum = 0d;
-            this.SweepAngleTouchbarSlider.Maximum = 360d;
-            this.SweepAngleTouchbarSlider.ValueChangeStarted += (sender, value) => { };
-            this.SweepAngleTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
-                this.SweepAngleChange(sweepAngle);
-            };
-            this.SweepAngleTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
-        }
-        private void SweepAngleChange(float sweepAngle)
-        {
-            this.SelectionViewModel.GeometryCookieSweepAngle = sweepAngle;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type == LayerType.GeometryCookie)
-                {
-                    GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
-                    geometryCookieLayer.SweepAngle = sweepAngle;
-                }
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-     
-
+        
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
             this.TouchBarMode = GeometryCookieMode.None;
         }
-
     }
 
     /// <summary>
@@ -246,6 +143,280 @@ namespace Retouch_Photo2.Tools.Models
         public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
 
         public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+
+    }
+
+    /// <summary>
+    /// <see cref="ITool"/>'s GeometryCookieTool.
+    /// </summary>
+    public sealed partial class GeometryCookieTool : Page, ITool
+    {
+
+        //InnerRadius
+        private void ConstructInnerRadius1()
+        {
+            //Button
+            this.InnerRadiusTouchbarButton.Toggle += (s, value) =>
+            {
+                if (value)
+                    this.TouchBarMode = GeometryCookieMode.InnerRadius;
+                else
+                    this.TouchBarMode = GeometryCookieMode.None;
+            };
+
+            //Number
+            this.InnerRadiusTouchbarSlider.Unit = "%";
+            this.InnerRadiusTouchbarSlider.NumberMinimum = 0;
+            this.InnerRadiusTouchbarSlider.NumberMaximum = 100;
+            this.InnerRadiusTouchbarSlider.ValueChanged += (sender, value) =>
+            {
+                float innerRadius = (float)value / 100f;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set cookie layer inner radius");
+
+                //Selection
+                this.SelectionViewModel.GeometryCookieInnerRadius = innerRadius;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCookie)
+                    {
+                        GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
+
+                        var previous = geometryCookieLayer.InnerRadius;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryCookieLayer layer2 = geometryCookieLayer;
+
+                            layer2.InnerRadius = previous;
+                        });
+
+                        geometryCookieLayer.InnerRadius = innerRadius;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+        private void ConstructInnerRadius2()
+        {
+            //History
+            LayersPropertyHistory history = null;
+
+            //Value
+            this.InnerRadiusTouchbarSlider.Minimum = 0d;
+            this.InnerRadiusTouchbarSlider.Maximum = 100d;
+            this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) =>
+            {
+                //History
+                history = new LayersPropertyHistory("Set cookie layer inner radius");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCookie)
+                    {
+                        GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
+                        geometryCookieLayer.CacheInnerRadius();
+                    }
+                });
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.InnerRadiusTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            {
+                float innerRadius = (float)value / 100f;
+
+                //Selection
+                this.SelectionViewModel.GeometryCookieInnerRadius = innerRadius;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCookie)
+                    {
+                        GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
+                        geometryCookieLayer.InnerRadius = innerRadius;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            this.InnerRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float innerRadius = (float)value / 100f;
+
+                //Selection
+                this.SelectionViewModel.GeometryCookieInnerRadius = innerRadius;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCookie)
+                    {
+                        GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
+
+                        var previous = geometryCookieLayer.StartingInnerRadius;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryCookieLayer layer2 = geometryCookieLayer;
+
+                            layer2.InnerRadius = previous;
+                        });
+
+                        geometryCookieLayer.InnerRadius = innerRadius;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            };
+        }
+
+        //SweepAngle
+        private void ConstructSweepAngle1()
+        {
+            //Button
+            this.SweepAngleTouchbarButton.Toggle += (s, value) =>
+            {
+                if (value)
+                    this.TouchBarMode = GeometryCookieMode.SweepAngle;
+                else
+                    this.TouchBarMode = GeometryCookieMode.None;
+            };
+
+            //Number
+            this.SweepAngleTouchbarSlider.Unit = "º";
+            this.SweepAngleTouchbarSlider.NumberMinimum = 0;
+            this.SweepAngleTouchbarSlider.NumberMaximum = 360;
+            this.SweepAngleTouchbarSlider.ValueChanged += (sender, value) =>
+            {
+                float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set cookie layer sweep angle");
+
+                //Selection
+                this.SelectionViewModel.GeometryCookieSweepAngle = sweepAngle;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCookie)
+                    {
+                        GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
+
+                        var previous = geometryCookieLayer.SweepAngle;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryCookieLayer layer2 = geometryCookieLayer;
+
+                            layer2.SweepAngle = previous;
+                        });
+
+                        geometryCookieLayer.SweepAngle = sweepAngle;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+        private void ConstructSweepAngle2()
+        {
+            //History
+            LayersPropertyHistory history = null;
+
+            //Value
+            this.SweepAngleTouchbarSlider.Minimum = 0d;
+            this.SweepAngleTouchbarSlider.Maximum = 360d;
+            this.SweepAngleTouchbarSlider.ValueChangeStarted += (sender, value) =>
+            {
+                //History
+                history = new LayersPropertyHistory("Set cookie layer sweep angle");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCookie)
+                    {
+                        GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
+                        geometryCookieLayer.CacheSweepAngle();
+                    }
+                });
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.SweepAngleTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            {
+                float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
+
+                //Selection
+                this.SelectionViewModel.GeometryCookieSweepAngle = sweepAngle;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCookie)
+                    {
+                        GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
+                        geometryCookieLayer.SweepAngle = sweepAngle;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            this.SweepAngleTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
+
+                //Selection
+                this.SelectionViewModel.GeometryCookieSweepAngle = sweepAngle;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCookie)
+                    {
+                        GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
+
+                        var previous = geometryCookieLayer.StartingSweepAngle;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryCookieLayer layer2 = geometryCookieLayer;
+
+                            layer2.SweepAngle = previous;
+                        });
+
+                        geometryCookieLayer.SweepAngle = sweepAngle;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            };
+        }
 
     }
 }

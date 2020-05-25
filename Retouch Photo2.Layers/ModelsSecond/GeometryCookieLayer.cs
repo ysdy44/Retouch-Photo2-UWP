@@ -20,7 +20,12 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Content       
         public float InnerRadius = 0.5f;
+        public float StartingInnerRadius { get; private set; }
+        public void CacheInnerRadius() => this.StartingInnerRadius = this.InnerRadius;
+
         public float SweepAngle = FanKit.Math.Pi / 2f;
+        public float StartingSweepAngle { get; private set; }
+        public void CacheSweepAngle() => this.StartingSweepAngle = this.SweepAngle;
 
         //@Construct
         public GeometryCookieLayer(XElement element) : this() => this.Load(element);

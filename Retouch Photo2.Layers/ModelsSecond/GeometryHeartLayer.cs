@@ -20,6 +20,8 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Content
         public float Spread = 0.8f;
+        public float StartingSpread { get; private set; }
+        public void CacheSpread() => this.StartingSpread = this.Spread;
 
         //@Construct
         /// <summary>

@@ -19,7 +19,9 @@ namespace Retouch_Photo2.Layers.Models
         public override LayerType Type => LayerType.GeometryPie;
 
         //@Content       
-        public float SweepAngle = FanKit.Math.Pi / 2f;
+        public float SweepAngle = FanKit.Math.PiOver2;
+        public float StartingSweepAngle { get; private set; }
+        public void CacheSweepAngle() => this.StartingSweepAngle = this.SweepAngle;
 
         //@Construct
         /// <summary>

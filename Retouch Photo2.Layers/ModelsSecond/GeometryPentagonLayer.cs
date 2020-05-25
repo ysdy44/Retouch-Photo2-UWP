@@ -20,6 +20,8 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Content
         public int Points = 5;
+        public int StartingPoints { get; private set; }
+        public void CachePoints() => this.StartingPoints = this.Points;
 
         //@Construct
         /// <summary>

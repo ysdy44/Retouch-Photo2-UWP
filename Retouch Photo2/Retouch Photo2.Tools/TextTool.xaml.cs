@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
@@ -38,20 +39,7 @@ namespace Retouch_Photo2.Tools
                 if (this.TextBox.FocusState == FocusState.Unfocused) return;
                 string fontText = this.TextBox.Text;
 
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.TextArtistic || layer.Type == LayerType.TextFrame)
-                    {
-                        ITextLayer textLayer = (ITextLayer)layer;
-                        textLayer.FontText = fontText;
-                    }
-                });
-                this.SelectionViewModel.FontText = fontText;
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.SetFontText(fontText);
             };
 
             this.CharacterButton.Click += (s, e) =>
@@ -71,6 +59,47 @@ namespace Retouch_Photo2.Tools
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.TextBox.PlaceholderText = resource.GetString("/Tools/Text_PlaceholderText");
+        }
+
+    }
+
+    /// <summary>
+    /// <see cref="ITool"/>'s TextTool .
+    /// </summary>
+    public sealed partial class TextTool : UserControl
+    {
+
+        private void SetFontText(string fontText)
+        {
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory("Set font text");
+
+            //Selection
+            this.SelectionViewModel.FontText = fontText;
+            this.SelectionViewModel.SetValue((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+                if (layer.Type.IsText())
+                {
+                    ITextLayer textLayer = (ITextLayer)layer;
+                    
+                    var previous = textLayer.FontText;
+                    history.UndoActions.Push(() =>
+                    {
+                        ITextLayer layer2 = textLayer;
+
+                        layer2.FontText = previous;
+                    });
+
+                    textLayer.FontText = fontText;
+                }
+            });
+
+            //History
+            this.ViewModel.HistoryPush(history);
+
+            this.ViewModel.Invalidate();//Invalidate
         }
 
     }

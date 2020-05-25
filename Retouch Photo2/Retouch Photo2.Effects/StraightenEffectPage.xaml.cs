@@ -57,7 +57,7 @@ namespace Retouch_Photo2.Effects.Models
             this.AnglePicker.Radians = 0;
 
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set effect value");
+            LayersPropertyHistory history = new LayersPropertyHistory("Set effect straighten");
 
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>
@@ -105,7 +105,7 @@ namespace Retouch_Photo2.Effects.Models
                 bool isOn = this.Button.ToggleSwitch.IsOn;
 
                 //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect isOn");
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect straighten");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -140,7 +140,7 @@ namespace Retouch_Photo2.Effects.Models
             //Angle
             this.AnglePicker.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect value");
+                history = new LayersPropertyHistory("Set effect straighten");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>

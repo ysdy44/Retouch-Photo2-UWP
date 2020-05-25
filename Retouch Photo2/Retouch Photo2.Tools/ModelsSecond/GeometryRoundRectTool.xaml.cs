@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -52,68 +53,16 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructCorner();
+
+            this.ConstructCorner1();
+            this.ConstructCorner2();
         }
-
-
-        //Corner
-        private void ConstructCorner()
-        {
-            this.CornerTouchbarButton.Toggle += (s, value) =>
-            {
-                this.TouchBarMode = value;
-            };
-
-            //Number
-            this.CornerTouchbarSlider.Unit = "%";
-            this.CornerTouchbarSlider.NumberMinimum = 0;
-            this.CornerTouchbarSlider.NumberMaximum = 50;
-            this.CornerTouchbarSlider.NumberChange += (sender, number) =>
-            {
-                float corner = number / 100.0f;
-                this.CornerChange(corner);
-            };
-
-            //Value
-            this.CornerTouchbarSlider.Minimum = 0d;
-            this.CornerTouchbarSlider.Maximum = 50d;
-            this.CornerTouchbarSlider.ValueChangeStarted += (sender, value) => { };
-            this.CornerTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float corner = (float)value / 100.0f;
-                this.CornerChange(corner);
-            };
-            this.CornerTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
-        }
-        private void CornerChange(float corner)
-        {
-            if (corner < 0.0f) corner = 0.0f;
-            if (corner > 0.5f) corner = 0.5f;
-
-            this.SelectionViewModel.GeometryRoundRectCorner = corner;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type == LayerType.GeometryRoundRect)
-                {
-                    GeometryRoundRectLayer geometryRoundRectLayer = (GeometryRoundRectLayer)layer;
-                    geometryRoundRectLayer.Corner = corner;
-                }
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-
 
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
             this.TouchBarMode = false;
         }
-
     }
 
     /// <summary>
@@ -162,6 +111,145 @@ namespace Retouch_Photo2.Tools.Models
         public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
 
         public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+
+    }
+
+    /// <summary>
+    /// <see cref="ITool"/>'s GeometryRoundRectTool.
+    /// </summary>
+    public sealed partial class GeometryRoundRectTool : Page, ITool
+    {
+
+        private void ConstructCorner1()
+        {
+            //Button
+            this.CornerTouchbarButton.Toggle += (s, value) =>
+            {
+                this.TouchBarMode = value;
+            };
+
+            //Number
+            this.CornerTouchbarSlider.Unit = "%";
+            this.CornerTouchbarSlider.NumberMinimum = 0;
+            this.CornerTouchbarSlider.NumberMaximum = 50;
+            this.CornerTouchbarSlider.ValueChanged += (sender, value) =>
+            {
+                float corner = (float)value / 100.0f;
+                if (corner < 0.0f) corner = 0.0f;
+                if (corner > 0.5f) corner = 0.5f;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set round rect corner");
+
+                //Selection
+                this.SelectionViewModel.GeometryRoundRectCorner = corner;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryRoundRect)
+                    {
+                        GeometryRoundRectLayer geometryRoundRectLayer = (GeometryRoundRectLayer)layer;
+
+                        var previous = geometryRoundRectLayer.Corner;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryRoundRectLayer layer2 = geometryRoundRectLayer;
+
+                            layer2.Corner = previous;
+                        });
+
+                        geometryRoundRectLayer.Corner = corner;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+        private void ConstructCorner2()
+        {
+            //History
+            LayersPropertyHistory history = null;
+
+            //Value
+            this.CornerTouchbarSlider.Minimum = 0d;
+            this.CornerTouchbarSlider.Maximum = 50d;
+            this.CornerTouchbarSlider.ValueChangeStarted += (sender, value) =>
+            {
+                history = new LayersPropertyHistory("Set round rect corner");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryRoundRect)
+                    {
+                        GeometryRoundRectLayer geometryRoundRectLayer = (GeometryRoundRectLayer)layer;
+                        geometryRoundRectLayer.CacheCorner();
+                    }
+                });
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.CornerTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            {
+                float corner = (float)value / 100.0f;
+                if (corner < 0.0f) corner = 0.0f;
+                if (corner > 0.5f) corner = 0.5f;
+
+                //Selection
+                this.SelectionViewModel.GeometryRoundRectCorner = corner;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryRoundRect)
+                    {
+                        GeometryRoundRectLayer geometryRoundRectLayer = (GeometryRoundRectLayer)layer;
+                        geometryRoundRectLayer.Corner = corner;
+                    }
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            this.CornerTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float corner = (float)value / 100.0f;
+                if (corner < 0.0f) corner = 0.0f;
+                if (corner > 0.5f) corner = 0.5f;
+
+                //Selection
+                this.SelectionViewModel.GeometryRoundRectCorner = corner;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryRoundRect)
+                    {
+                        GeometryRoundRectLayer geometryRoundRectLayer = (GeometryRoundRectLayer)layer;
+
+                        var previous = geometryRoundRectLayer.StartingCorner;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryRoundRectLayer layer2 = geometryRoundRectLayer;
+
+                            layer2.Corner = previous;
+                        });
+
+                        geometryRoundRectLayer.Corner = corner;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            };
+        }
 
     }
 }

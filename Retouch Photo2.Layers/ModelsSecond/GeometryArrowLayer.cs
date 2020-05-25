@@ -21,7 +21,10 @@ namespace Retouch_Photo2.Layers.Models
         //@Content       
         public bool IsAbsolute = false;
         public float Width = 10;
+
         public float Value = 0.5f;
+        public float StartingValue { get; private set; }
+        public void CacheValue() => this.StartingValue = this.Value;
 
         public GeometryArrowTailType LeftTail = GeometryArrowTailType.None;
         public GeometryArrowTailType RightTail = GeometryArrowTailType.Arrow;

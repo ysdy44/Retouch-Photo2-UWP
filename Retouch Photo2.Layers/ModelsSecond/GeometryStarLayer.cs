@@ -20,7 +20,12 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Content       
         public int Points = 5;
+        public int StartingPoints { get; private set; }
+        public void CachePoints() => this.StartingPoints = this.Points;
+
         public float InnerRadius = 0.38f;
+        public float StartingInnerRadius { get; private set; }
+        public void CacheInnerRadius() => this.StartingInnerRadius = this.InnerRadius;
 
         //@Construct
         /// <summary>

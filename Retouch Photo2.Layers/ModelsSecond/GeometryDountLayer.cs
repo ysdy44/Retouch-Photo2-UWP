@@ -20,6 +20,8 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Content       
         public float HoleRadius = 0.5f;
+        public float StartingHoleRadius { get; private set; }
+        public void CacheHoleRadius() => this.StartingHoleRadius = this.HoleRadius;
 
         //@Construct
         /// <summary>

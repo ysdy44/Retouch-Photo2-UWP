@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -41,104 +42,27 @@ namespace Retouch_Photo2.Tools.Models
                 }
             }
         }
-
-
+        
         //@Converter
         private int MidNumberConverter(float mid) => (int)(mid * 100.0f);
         private double MidValueConverter(float mid) => mid * 100d;
-
-
+        
         //@Construct
         public GeometryDiamondTool()
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructMid();
 
-            this.MirrorButton.Click += (s, e) => this.MidMirror();
+            this.ConstructMid1();
+            this.ConstructMid2();
+            this.ConstructMirror();
         }
-
-
-        //Mid
-        private void ConstructMid()
-        {
-            //Button
-            this.MidTouchbarButton.Toggle += (s, value) =>
-            {
-                this.TouchBarMode = value;
-            };
-
-            //Number
-            this.MidTouchbarSlider.Unit = "%";
-            this.MidTouchbarSlider.NumberMinimum = 0;
-            this.MidTouchbarSlider.NumberMaximum = 100;
-            this.MidTouchbarSlider.NumberChange += (sender, number) =>
-            {
-                float mid = number / 100.0f;
-                this.MidChange(mid);
-            };
-
-            //Value
-            this.MidTouchbarSlider.Minimum = 0d;
-            this.MidTouchbarSlider.Maximum = 100d;
-            this.MidTouchbarSlider.ValueChangeStarted += (sender, value) => { };
-            this.MidTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float mid = (float)value / 100.0f;
-                this.MidChange(mid);
-            };
-            this.MidTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
-        }
-        private void MidChange(float mid)
-        {
-            if (mid < 0.0f) mid = 0.0f;
-            if (mid > 1.0f) mid = 1.0f;
-
-            this.SelectionViewModel.GeometryDiamondMid = mid;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type == LayerType.GeometryDiamond)
-                {
-                    GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
-                    geometryDiamondLayer.Mid = mid;
-                }
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-
-        private void MidMirror()
-        {
-            float selectionMid = 1.0f - this.SelectionViewModel.GeometryDiamondMid;
-            this.SelectionViewModel.GeometryDiamondMid = selectionMid;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-                
-                if (layer.Type == LayerType.GeometryDiamond)
-                {
-                    GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
-                    float mid = 1.0f - geometryDiamondLayer.Mid;
-                    geometryDiamondLayer.Mid = mid;
-                }
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-
-
+        
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
             this.TouchBarMode = false;
         }
-
     }
 
     /// <summary>
@@ -189,6 +113,184 @@ namespace Retouch_Photo2.Tools.Models
         public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
 
         public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+
+    }
+       
+    /// <summary>
+    /// <see cref="ITool"/>'s GeometryDiamondTool.
+    /// </summary>
+    public sealed partial class GeometryDiamondTool : Page, ITool
+    {
+
+        //Mid
+        private void ConstructMid1()
+        {
+            //Button
+            this.MidTouchbarButton.Toggle += (s, value) =>
+            {
+                this.TouchBarMode = value;
+            };
+
+            //Number
+            this.MidTouchbarSlider.Unit = "%";
+            this.MidTouchbarSlider.NumberMinimum = 0;
+            this.MidTouchbarSlider.NumberMaximum = 100;
+            this.MidTouchbarSlider.ValueChanged += (sender, value) =>
+            {
+                float mid = (float)value / 100.0f;
+                if (mid < 0.0f) mid = 0.0f;
+                if (mid > 1.0f) mid = 1.0f;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set diamond layer mid");
+
+                //Selection
+                this.SelectionViewModel.GeometryDiamondMid = mid;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryDiamond)
+                    {
+                        GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
+
+                        var previous = geometryDiamondLayer.Mid;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryDiamondLayer layer2 = geometryDiamondLayer;
+
+                            layer2.Mid = previous;
+                        });
+
+                        geometryDiamondLayer.Mid = mid;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+        private void ConstructMid2()
+        {
+            //History
+            LayersPropertyHistory history = null;
+
+            //Value
+            this.MidTouchbarSlider.Minimum = 0d;
+            this.MidTouchbarSlider.Maximum = 100d;
+            this.MidTouchbarSlider.ValueChangeStarted += (sender, value) =>
+            {
+                history = new LayersPropertyHistory("Set diamond layer mid");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryDiamond)
+                    {
+                        GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
+                        geometryDiamondLayer.CacheMid();
+                    }
+                });
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.MidTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            {
+                float mid = (float)value / 100.0f;
+                if (mid < 0.0f) mid = 0.0f;
+                if (mid > 1.0f) mid = 1.0f;
+
+                //Selection
+                this.SelectionViewModel.GeometryDiamondMid = mid;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryDiamond)
+                    {
+                        GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
+                        geometryDiamondLayer.Mid = mid;
+                    }
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            this.MidTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float mid = (float)value / 100.0f;
+                if (mid < 0.0f) mid = 0.0f;
+                if (mid > 1.0f) mid = 1.0f;
+
+                //Selection
+                this.SelectionViewModel.GeometryDiamondMid = mid;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryDiamond)
+                    {
+                        GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
+
+                        var previous = geometryDiamondLayer.StartingMid;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryDiamondLayer layer2 = geometryDiamondLayer;
+
+                            layer2.Mid = previous;
+                        });
+
+                        geometryDiamondLayer.Mid = mid;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            };
+        }
+
+        private void ConstructMirror()
+        {
+            this.MirrorButton.Click += (s, e) =>
+            {
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set diamond layer center");
+
+                //Selection
+                float selectionMid = 1.0f - this.SelectionViewModel.GeometryDiamondMid;
+                this.SelectionViewModel.GeometryDiamondMid = selectionMid;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryDiamond)
+                    {
+                        GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
+
+                        var previous = geometryDiamondLayer.Mid;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryDiamondLayer layer2 = geometryDiamondLayer;
+
+                            layer2.Mid = previous;
+                        });
+
+                        float center = 1.0f - geometryDiamondLayer.Mid;
+                        geometryDiamondLayer.Mid = center;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
 
     }
 }

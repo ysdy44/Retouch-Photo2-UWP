@@ -57,7 +57,7 @@ namespace Retouch_Photo2.Effects.Models
             this.AmountSlider.Value = 0;
 
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set effect value");
+            LayersPropertyHistory history = new LayersPropertyHistory("Set effect sharpen");
 
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>
@@ -105,7 +105,7 @@ namespace Retouch_Photo2.Effects.Models
                 bool isOn = this.Button.ToggleSwitch.IsOn;
 
                 //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect isOn");
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect sharpen");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -141,7 +141,7 @@ namespace Retouch_Photo2.Effects.Models
             this.AmountSlider.Maximum = 10;
             this.AmountSlider.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect value");
+                history = new LayersPropertyHistory("Set effect sharpen");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>

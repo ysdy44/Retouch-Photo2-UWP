@@ -20,6 +20,8 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Content
         public float Center = 0.5f;
+        public float StartingCenter { get; private set; }
+        public void CacheCenter() => this.StartingCenter = this.Center;
 
         //@Construct
         /// <summary>

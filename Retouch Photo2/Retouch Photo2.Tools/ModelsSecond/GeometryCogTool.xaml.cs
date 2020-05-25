@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -85,230 +86,25 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructCount();
-            this.ConstructInnerRadius();
-            this.ConstructTooth();
-            this.ConstructNotch();
-        }
 
+            this.ConstructCount1();
+            this.ConstructCount2();
 
-        //Count
-        private void ConstructCount()
-        {
-            //Button
-            this.CountTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = GeometryCogMode.Count;
-                else
-                    this.TouchBarMode = GeometryCogMode.None;
-            };
+            this.ConstructInnerRadius1();
+            this.ConstructInnerRadius2();
 
-            //Number
-            this.CountTouchbarSlider.NumberMinimum = 4;
-            this.CountTouchbarSlider.NumberMaximum = 36;
-            this.CountTouchbarSlider.NumberChange += (sender, number) =>
-            {
-                int Count = number;
-                this.CountChange(Count);
-            };
+            this.ConstructTooth1();
+            this.ConstructTooth2();
 
-            //Value
-            this.CountTouchbarSlider.Minimum = 4d;
-            this.CountTouchbarSlider.Maximum = 36d;
-            this.CountTouchbarSlider.ValueChangeStarted += (sender, value) => { };
-            this.CountTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                int Count = (int)value;
-                this.CountChange(Count);
-            };
-            this.CountTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
-        }
-        private void CountChange(int count)
-        {
-            if (count < 4) count = 4;
-            if (count > 36) count = 36;
-
-            this.SelectionViewModel.GeometryCogCount = count;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type == LayerType.GeometryCog)
-                {
-                    GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-                    geometryCogLayer.Count = count;
-                }
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
+            this.ConstructNotch1();
+            this.ConstructNotch2();
         }
         
-        //InnerRadius
-        private void ConstructInnerRadius()
-        {
-            //Button
-            this.InnerRadiusTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = GeometryCogMode.InnerRadius;
-                else
-                    this.TouchBarMode = GeometryCogMode.None;
-            };
-
-            //Number
-            this.InnerRadiusTouchbarSlider.Unit = "%";
-            this.InnerRadiusTouchbarSlider.NumberMinimum = 0;
-            this.InnerRadiusTouchbarSlider.NumberMaximum = 100;
-            this.InnerRadiusTouchbarSlider.NumberChange += (sender, number) =>
-            {
-                float innerRadius = number / 100f;
-                this.InnerRadiusChange(innerRadius);
-            };
-
-            //Value
-            this.InnerRadiusTouchbarSlider.Minimum = 0d;
-            this.InnerRadiusTouchbarSlider.Maximum = 100d;
-            this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) => { };
-            this.InnerRadiusTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float innerRadius = (float)(value / 100d);
-                this.InnerRadiusChange(innerRadius);
-            };
-            this.InnerRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
-        }
-        private void InnerRadiusChange(float innerRadius)
-        {
-            this.SelectionViewModel.GeometryCogInnerRadius = innerRadius;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type == LayerType.GeometryCog)
-                {
-                    GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-                    geometryCogLayer.InnerRadius = innerRadius;
-                }
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-        
-        //Tooth
-        private void ConstructTooth()
-        {
-            //Button
-            this.ToothTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = GeometryCogMode.Tooth;
-                else
-                    this.TouchBarMode = GeometryCogMode.None;
-            };
-
-            //Number
-            this.ToothTouchbarSlider.Unit = "%";
-            this.ToothTouchbarSlider.NumberMinimum = 0;
-            this.ToothTouchbarSlider.NumberMaximum = 50;
-            this.ToothTouchbarSlider.NumberChange += (sender, number) =>
-            {
-                float Tooth = number / 100f;
-                this.ToothChange(Tooth);
-            };
-
-            //Value
-            this.ToothTouchbarSlider.Minimum = 0d;
-            this.ToothTouchbarSlider.Maximum = 50d;
-            this.ToothTouchbarSlider.ValueChangeStarted += (sender, value) => { };
-            this.ToothTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float Tooth = (float)(value / 100d);
-                this.ToothChange(Tooth);
-            };
-            this.ToothTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
-        }
-        private void ToothChange(float tooth)
-        {
-            this.SelectionViewModel.GeometryCogTooth = tooth;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type == LayerType.GeometryCog)
-                {
-                    GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-                    geometryCogLayer.Tooth = tooth;
-                }
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-        
-        //Notch
-        private void ConstructNotch()
-        {
-            //Button
-            this.NotchTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = GeometryCogMode.Notch;
-                else
-                    this.TouchBarMode = GeometryCogMode.None;
-            };
-
-            //Number
-            this.NotchTouchbarSlider.Unit = "%";
-            this.NotchTouchbarSlider.NumberMinimum = 0;
-            this.NotchTouchbarSlider.NumberMaximum = 60;
-            this.NotchTouchbarSlider.NumberChange += (sender, number) =>
-            {
-                float Notch = number / 100f;
-                this.NotchChange(Notch);
-            };
-
-            //Value
-            this.NotchTouchbarSlider.Minimum = 0d;
-            this.NotchTouchbarSlider.Maximum = 50d;
-            this.NotchTouchbarSlider.ValueChangeStarted += (sender, value) => { };
-            this.NotchTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float Notch = (float)(value / 100d);
-                this.NotchChange(Notch);
-            };
-            this.NotchTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
-        }
-        private void NotchChange(float notch)
-        {
-            this.SelectionViewModel.GeometryCogNotch = notch;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type == LayerType.GeometryCog)
-                {
-                    GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-                    geometryCogLayer.Notch = notch;
-                }
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-
-
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
             this.TouchBarMode = GeometryCogMode.None;
         }
-
     }
     
     /// <summary>
@@ -364,6 +160,547 @@ namespace Retouch_Photo2.Tools.Models
         public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
 
         public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+
+    }
+
+    /// <summary>
+    /// <see cref="ITool"/>'s GeometryCogTool.
+    /// </summary>
+    public partial class GeometryCogTool : Page, ITool
+    {
+
+        //Count
+        private void ConstructCount1()
+        {
+            //Button
+            this.CountTouchbarButton.Toggle += (s, value) =>
+            {
+                if (value)
+                    this.TouchBarMode = GeometryCogMode.Count;
+                else
+                    this.TouchBarMode = GeometryCogMode.None;
+            };
+
+            //Number
+            this.CountTouchbarSlider.NumberMinimum = 4;
+            this.CountTouchbarSlider.NumberMaximum = 36;
+            this.CountTouchbarSlider.ValueChanged += (sender, value) =>
+            {
+                int count = (int)value;
+                if (count < 4) count = 4;
+                if (count > 36) count = 36;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set cog layer count");
+
+                //Selection
+                this.SelectionViewModel.GeometryCogCount = count;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCog)
+                    {
+                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+
+                        var previous = geometryCogLayer.Count;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryCogLayer layer2 = geometryCogLayer;
+
+                            layer2.Count = previous;
+                        });
+
+                        geometryCogLayer.Count = count;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+        private void ConstructCount2()
+        {
+            //History
+            LayersPropertyHistory history = null;
+
+            //Value
+            this.CountTouchbarSlider.Minimum = 4d;
+            this.CountTouchbarSlider.Maximum = 36d;
+            this.CountTouchbarSlider.ValueChangeStarted += (sender, value) =>
+            {
+                //History
+                history = new LayersPropertyHistory("Set cog layer count");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCog)
+                    {
+                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+                        geometryCogLayer.CacheCount();
+                    }
+                });
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.CountTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            {
+                int count = (int)value;
+                if (count < 4) count = 4;
+                if (count > 36) count = 36;
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCog)
+                    {
+                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+                        geometryCogLayer.Count = count;
+                    }
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            this.CountTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                int count = (int)value;
+                if (count < 4) count = 4;
+                if (count > 36) count = 36;
+
+                //Selection
+                this.SelectionViewModel.GeometryCogCount = count;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCog)
+                    {
+                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+
+                        var previous = geometryCogLayer.StartingCount;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryCogLayer layer2 = geometryCogLayer;
+
+                            layer2.Count = previous;
+                        });
+
+                        geometryCogLayer.Count = count;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate( InvalidateMode.HD);//Invalidate
+            };
+        }
+
+        //InnerRadius
+        private void ConstructInnerRadius1()
+        {
+            //Button
+            this.InnerRadiusTouchbarButton.Toggle += (s, value) =>
+            {
+                if (value)
+                    this.TouchBarMode = GeometryCogMode.InnerRadius;
+                else
+                    this.TouchBarMode = GeometryCogMode.None;
+            };
+
+            //Number
+            this.InnerRadiusTouchbarSlider.Unit = "%";
+            this.InnerRadiusTouchbarSlider.NumberMinimum = 0;
+            this.InnerRadiusTouchbarSlider.NumberMaximum = 100;
+            this.InnerRadiusTouchbarSlider.ValueChanged += (sender, value) =>
+            {
+                float innerRadius = (float)value / 100f;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set cog layer inner radius");
+
+                //Selection
+                this.SelectionViewModel.GeometryCogInnerRadius = innerRadius;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCog)
+                    {
+                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+
+                        var previous = geometryCogLayer.InnerRadius;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryCogLayer layer2 = geometryCogLayer;
+
+                            layer2.InnerRadius = previous;
+                        });
+
+                        geometryCogLayer.InnerRadius = innerRadius;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+        private void ConstructInnerRadius2()
+        {
+            //History
+            LayersPropertyHistory history = null;
+
+            //Value
+            this.InnerRadiusTouchbarSlider.Minimum = 0d;
+            this.InnerRadiusTouchbarSlider.Maximum = 100d;
+            this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) =>
+            {
+                //History
+                history = new LayersPropertyHistory("Set cog layer inner radius");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCog)
+                    {
+                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+                        geometryCogLayer.CacheInnerRadius();
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.InnerRadiusTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            {
+                float innerRadius = (float)value / 100f;
+
+                    //Selection
+                    this.SelectionViewModel.GeometryCogInnerRadius = innerRadius;
+                    this.SelectionViewModel.SetValue((layerage) =>
+                    {
+                        ILayer layer = layerage.Self;
+
+                        if (layer.Type == LayerType.GeometryCog)
+                        {
+                            GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+                            geometryCogLayer.InnerRadius = innerRadius;
+                        }
+                    });
+
+                    this.ViewModel.Invalidate();//Invalidate
+                };
+            this.InnerRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float innerRadius = (float)value / 100f;
+
+                //Selection
+                this.SelectionViewModel.GeometryCogInnerRadius = innerRadius;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCog)
+                    {
+                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+
+                        var previous = geometryCogLayer.StartingInnerRadius;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryCogLayer layer2 = geometryCogLayer;
+
+                            layer2.InnerRadius = previous;
+                        });
+
+                        geometryCogLayer.InnerRadius = innerRadius;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            };
+        }
+
+        //Tooth
+        private void ConstructTooth1()
+        {
+            //Button
+            this.ToothTouchbarButton.Toggle += (s, value) =>
+            {
+                if (value)
+                    this.TouchBarMode = GeometryCogMode.Tooth;
+                else
+                    this.TouchBarMode = GeometryCogMode.None;
+            };
+
+            //Number
+            this.ToothTouchbarSlider.Unit = "%";
+            this.ToothTouchbarSlider.NumberMinimum = 0;
+            this.ToothTouchbarSlider.NumberMaximum = 50;
+            this.ToothTouchbarSlider.ValueChanged += (sender, value) =>
+            {
+                float tooth = (float)value / 100f;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set cog layer tooth");
+
+                //Selection
+                this.SelectionViewModel.GeometryCogTooth = tooth;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCog)
+                    {
+                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+
+                        var previous = geometryCogLayer.Tooth;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryCogLayer layer2 = geometryCogLayer;
+
+                            layer2.Tooth = previous;
+                        });
+
+                        geometryCogLayer.Tooth = tooth;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+        private void ConstructTooth2()
+        {
+            //History
+            LayersPropertyHistory history = null;
+
+            //Value
+            this.ToothTouchbarSlider.Minimum = 0d;
+            this.ToothTouchbarSlider.Maximum = 50d;
+            this.ToothTouchbarSlider.ValueChangeStarted += (sender, value) =>
+            {
+                //History
+                history = new LayersPropertyHistory("Set cog layer tooth");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCog)
+                    {
+                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+                        geometryCogLayer.CacheTooth();
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.ToothTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            {
+                float tooth = (float)value / 100f;
+
+                //Selection
+                this.SelectionViewModel.GeometryCogTooth = tooth;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCog)
+                    {
+                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+                        geometryCogLayer.Tooth = tooth;
+                    }
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            this.ToothTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float tooth = (float)value / 100f;
+
+                //Selection
+                this.SelectionViewModel.GeometryCogTooth = tooth;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCog)
+                    {
+                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+
+                        var previous = geometryCogLayer.StartingTooth;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryCogLayer layer2 = geometryCogLayer;
+
+                            layer2.Tooth = previous;
+                        });
+
+                        geometryCogLayer.Tooth = tooth;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            };
+        }
+
+        //Notch
+        private void ConstructNotch1()
+        {
+            //Button
+            this.NotchTouchbarButton.Toggle += (s, value) =>
+            {
+                if (value)
+                    this.TouchBarMode = GeometryCogMode.Notch;
+                else
+                    this.TouchBarMode = GeometryCogMode.None;
+            };
+
+            //Number
+            this.NotchTouchbarSlider.Unit = "%";
+            this.NotchTouchbarSlider.NumberMinimum = 0;
+            this.NotchTouchbarSlider.NumberMaximum = 60;
+            this.NotchTouchbarSlider.ValueChanged += (sender, value) =>
+            {
+                float notch = (float)value / 100f;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set cog layer notch");
+
+                //Selection
+                this.SelectionViewModel.GeometryCogNotch = notch;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCog)
+                    {
+                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+
+                        var previous = geometryCogLayer.Notch;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryCogLayer layer2 = geometryCogLayer;
+
+                            layer2.Notch = previous;
+                        });
+
+                        geometryCogLayer.Notch = notch;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+        private void ConstructNotch2()
+        {
+            //History
+            LayersPropertyHistory history = null;
+
+            //Value
+            this.NotchTouchbarSlider.Minimum = 0d;
+            this.NotchTouchbarSlider.Maximum = 60d;
+            this.NotchTouchbarSlider.ValueChangeStarted += (sender, value) =>
+            {
+                //History
+                history = new LayersPropertyHistory("Set cog layer notch");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCog)
+                    {
+                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+                        geometryCogLayer.CacheNotch();
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.NotchTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            {
+                float notch = (float)value / 100f;
+
+                //Selection
+                this.SelectionViewModel.GeometryCogNotch = notch;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCog)
+                    {
+                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+                        geometryCogLayer.Notch = notch;
+                    }
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            this.NotchTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float notch = (float)value / 100f;
+
+                //Selection
+                this.SelectionViewModel.GeometryCogNotch = notch;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryCog)
+                    {
+                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+
+                        var previous = geometryCogLayer.StartingNotch;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryCogLayer layer2 = geometryCogLayer;
+
+                            layer2.Notch = previous;
+                        });
+
+                        geometryCogLayer.Notch = notch;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            };
+        }
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -71,117 +72,19 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructValue();
+
+            this.ConstructValue1();
+            this.ConstructValue2();
+
             this.ConstructLeftTail();
             this.ConstructRightTail();
         }
-
-
-        //Value
-        private void ConstructValue()
-        {
-            //Button
-            this.ValueTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = GeometryArrowMode.Value;
-                else
-                    this.TouchBarMode = GeometryArrowMode.None;
-            };
-
-            //Number
-            this.ValueTouchbarSlider.Unit = "%";
-            this.ValueTouchbarSlider.NumberMinimum = 0;
-            this.ValueTouchbarSlider.NumberMaximum = 100;
-            this.ValueTouchbarSlider.NumberChange += (sender, number) =>
-            {
-                float value2 = number / 100f;
-                this.ValueChange(value2);
-            };
-
-            //Value
-            this.ValueTouchbarSlider.Minimum = 0d;
-            this.ValueTouchbarSlider.Maximum = 100d;
-            this.ValueTouchbarSlider.ValueChangeStarted += (sender, value) => { };
-            this.ValueTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float value2 = (float)(value / 100d);
-                this.ValueChange(value2);
-            };
-            this.ValueTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
-        }
-        private void ValueChange(float value)
-        {
-            this.SelectionViewModel.GeometryArrowValue = value;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type == LayerType.GeometryArrow)
-                {
-                    GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
-                    geometryArrowLayer.Value = value;
-                }
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-
-        //LeftTail
-        private void ConstructLeftTail()
-        {
-            this.LeftArrowTailTypeControl.ArrowTailTypeChanged += (s, tailType) =>
-            {
-                this.SelectionViewModel.GeometryArrowLeftTail = tailType;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryArrow)
-                    {
-                        GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
-                        geometryArrowLayer.LeftTail = tailType;
-                    }
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-        }
-
-        //RightTail
-        private void ConstructRightTail()
-        {
-            this.RightArrowTailTypeControl.ArrowTailTypeChanged += (s, tailType) =>
-            {
-                this.SelectionViewModel.GeometryArrowRightTail = tailType;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryArrow)
-                    {
-                        GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
-                        geometryArrowLayer.RightTail = tailType;
-                    }
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-        }
-
 
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
             this.TouchBarMode = GeometryArrowMode.None;
-        }
-        
+        }        
     }
     
     /// <summary>
@@ -236,6 +139,223 @@ namespace Retouch_Photo2.Tools.Models
         public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
 
         public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+
+    }
+
+    /// <summary>
+    /// <see cref="ITool"/>'s GeometryArrowTool.
+    /// </summary>
+    public partial class GeometryArrowTool : Page, ITool
+    {
+
+        //Value
+        private void ConstructValue1()
+        {
+            //Button
+            this.ValueTouchbarButton.Toggle += (s, value) =>
+            {
+                if (value)
+                    this.TouchBarMode = GeometryArrowMode.Value;
+                else
+                    this.TouchBarMode = GeometryArrowMode.None;
+            };
+
+            //Number
+            this.ValueTouchbarSlider.Unit = "%";
+            this.ValueTouchbarSlider.NumberMinimum = 0;
+            this.ValueTouchbarSlider.NumberMaximum = 100;
+            this.ValueTouchbarSlider.ValueChanged += (sender, value) =>
+            {
+                float value2 = (float)value / 100.0f;
+                if (value2 < 0.0f) value2 = 0.0f;
+                if (value2 > 1.0f) value2 = 1.0f;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set arrow layer value");
+
+                //Selection
+                this.SelectionViewModel.GeometryArrowValue = value2;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryArrow)
+                    {
+                        GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
+
+                        var previous = geometryArrowLayer.Value;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryArrowLayer layer2 = geometryArrowLayer;
+
+                            layer2.Value = previous;
+                        });
+
+                        geometryArrowLayer.Value = value2;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+        private void ConstructValue2()
+        {
+            //History
+            LayersPropertyHistory history = null;
+
+            //Value
+            this.ValueTouchbarSlider.Minimum = 0d;
+            this.ValueTouchbarSlider.Maximum = 100d;
+            this.ValueTouchbarSlider.ValueChangeStarted += (sender, value) =>
+            {
+                history = new LayersPropertyHistory("Set arrow layer value");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryArrow)
+                    {
+                        GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
+                        geometryArrowLayer.CacheValue();
+                    }
+                });
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.ValueTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            {
+                float value2 = (float)value / 100.0f;
+                if (value2 < 0.0f) value2 = 0.0f;
+                if (value2 > 1.0f) value2 = 1.0f;
+
+                //Selection
+                this.SelectionViewModel.GeometryArrowValue = value2;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryArrow)
+                    {
+                        GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
+                        geometryArrowLayer.Value = value2;
+                    }
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            this.ValueTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float value2 = (float)value / 100.0f;
+                if (value2 < 0.0f) value2 = 0.0f;
+                if (value2 > 1.0f) value2 = 1.0f;
+
+                //Selection
+                this.SelectionViewModel.GeometryArrowValue = value2;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryArrow)
+                    {
+                        GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
+
+                        var previous = geometryArrowLayer.StartingValue;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryArrowLayer layer2 = geometryArrowLayer;
+
+                            layer2.Value = previous;
+                        });
+
+                        geometryArrowLayer.Value = value2;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            };
+        }
+               
+        //LeftTail
+        private void ConstructLeftTail()
+        {
+            this.LeftArrowTailTypeControl.ArrowTailTypeChanged += (s, tailType) =>
+            {
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set arrow layer left tail type");
+                
+                //Selection
+                this.SelectionViewModel.GeometryArrowLeftTail = tailType;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryArrow)
+                    {
+                        GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
+
+                        var previous = geometryArrowLayer.LeftTail;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryArrowLayer layer2 = geometryArrowLayer;
+
+                            layer2.LeftTail = previous;
+                        });
+
+                        geometryArrowLayer.LeftTail = tailType;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+
+        //RightTail
+        private void ConstructRightTail()
+        {
+            this.RightArrowTailTypeControl.ArrowTailTypeChanged += (s, tailType) =>
+            {
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set arrow layer right tail type");
+
+                //Selection
+                this.SelectionViewModel.GeometryArrowRightTail = tailType;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryArrow)
+                    {
+                        GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
+
+                        var previous = geometryArrowLayer.RightTail;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryArrowLayer layer2 = geometryArrowLayer;
+
+                            layer2.RightTail = previous;
+                        });
+
+                        geometryArrowLayer.RightTail = tailType;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
 
     }
 }

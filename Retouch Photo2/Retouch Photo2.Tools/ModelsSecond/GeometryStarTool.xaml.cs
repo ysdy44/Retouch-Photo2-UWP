@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -76,125 +77,18 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructPoints();
-            this.ConstructInnerRadius();
+
+            this.ConstructPoints1();
+            this.ConstructPoints2();
+            this.ConstructInnerRadius1();
+            this.ConstructInnerRadius2();
         }
-
-
-        //Points
-        private void ConstructPoints()
-        {
-            //Button
-            this.PointsTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = GeometryStarMode.Points;
-                else
-                    this.TouchBarMode = GeometryStarMode.None;
-            };
-
-            //Number
-            this.PointsTouchbarSlider.NumberMinimum = 3;
-            this.PointsTouchbarSlider.NumberMaximum = 36;
-            this.PointsTouchbarSlider.NumberChange += (sender, number) =>
-            {
-                int points = number;
-                this.PointsChange(points);
-            };
-
-            //Value
-            this.PointsTouchbarSlider.Minimum = 3d;
-            this.PointsTouchbarSlider.Maximum = 36d;
-            this.PointsTouchbarSlider.ValueChangeStarted += (sender, value) => { };
-            this.PointsTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                int points = (int)value;
-                this.PointsChange(points);
-            };
-            this.PointsTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
-        }
-        private void PointsChange(int points)
-        {
-            if (points < 3) points = 3;
-            if (points > 36) points = 36;
-
-            this.SelectionViewModel.GeometryStarPoints = points;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type == LayerType.GeometryStar)
-                {
-                    GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
-                    geometryStarLayer.Points = points;
-                }
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-
-
-        //InnerRadius
-        private void ConstructInnerRadius()
-        {
-            //Button
-            this.InnerRadiusTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = GeometryStarMode.InnerRadius;
-                else
-                    this.TouchBarMode = GeometryStarMode.None;
-            };
-
-            //Number
-            this.InnerRadiusTouchbarSlider.Unit = "%";
-            this.InnerRadiusTouchbarSlider.NumberMinimum = 0;
-            this.InnerRadiusTouchbarSlider.NumberMaximum = 100;
-            this.InnerRadiusTouchbarSlider.NumberChange += (sender, number) =>
-            {
-                float innerRadius = number / 100f;
-                this.InnerRadiusChange(innerRadius);
-            };
-
-            //Value
-            this.InnerRadiusTouchbarSlider.Minimum = 0d;
-            this.InnerRadiusTouchbarSlider.Maximum = 100d;
-            this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) => { };
-            this.InnerRadiusTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float innerRadius = (float)(value / 100d);
-                this.InnerRadiusChange(innerRadius);
-            };
-            this.InnerRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
-        }
-        private void InnerRadiusChange(float innerRadius)
-        {
-            this.SelectionViewModel.GeometryStarInnerRadius = innerRadius;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type == LayerType.GeometryStar)
-                {
-                    GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
-                    geometryStarLayer.InnerRadius = innerRadius;
-                }
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-
 
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
             this.TouchBarMode = GeometryStarMode.None;
         }
-
     }
 
     /// <summary>
@@ -246,6 +140,283 @@ namespace Retouch_Photo2.Tools.Models
         public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
 
         public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+
+    }
+
+    /// <summary>
+    /// <see cref="ITool"/>'s GeometryStarTool.
+    /// </summary>
+    public sealed partial class GeometryStarTool : Page, ITool
+    {
+
+        //Points
+        private void ConstructPoints1()
+        {
+            //Button
+            this.PointsTouchbarButton.Toggle += (s, value) =>
+            {
+                if (value)
+                    this.TouchBarMode = GeometryStarMode.Points;
+                else
+                    this.TouchBarMode = GeometryStarMode.None;
+            };
+
+            //Number
+            this.PointsTouchbarSlider.NumberMinimum = 3;
+            this.PointsTouchbarSlider.NumberMaximum = 36;
+            this.PointsTouchbarSlider.ValueChanged += (sender, value) =>
+            {
+                int points = (int)value;
+                if (points < 3) points = 3;
+                if (points > 36) points = 36;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set star layer points");
+
+                //Selection
+                this.SelectionViewModel.GeometryStarPoints = points;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryStar)
+                    {
+                        GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
+
+                        var previous = geometryStarLayer.Points;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryStarLayer layer2 = geometryStarLayer;
+
+                            layer2.Points = previous;
+                        });
+
+                        geometryStarLayer.Points = points;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+        private void ConstructPoints2()
+        {
+            //History
+            LayersPropertyHistory history = null;
+
+            //Value
+            this.PointsTouchbarSlider.Minimum = 3d;
+            this.PointsTouchbarSlider.Maximum = 36d;
+            this.PointsTouchbarSlider.ValueChangeStarted += (sender, value) =>
+            {
+                history = new LayersPropertyHistory("Set star layer points");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryStar)
+                    {
+                        GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
+                        geometryStarLayer.CachePoints();
+                    }
+                });
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.PointsTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            {
+                int points = (int)value;
+                if (points < 3) points = 3;
+                if (points > 36) points = 36;
+
+                //Selection
+                this.SelectionViewModel.GeometryStarPoints = points;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryStar)
+                    {
+                        GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
+                        geometryStarLayer.Points = points;
+                    }
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            this.PointsTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                int points = (int)value;
+                if (points < 3) points = 3;
+                if (points > 36) points = 36;
+
+                //Selection
+                this.SelectionViewModel.GeometryStarPoints = points;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryStar)
+                    {
+                        GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
+
+                        var previous = geometryStarLayer.StartingPoints;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryStarLayer layer2 = geometryStarLayer;
+
+                            layer2.Points = previous;
+                        });
+
+                        geometryStarLayer.Points = points;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            };
+        }
+
+        //InnerRadius
+        private void ConstructInnerRadius1()
+        {
+            //Button
+            this.InnerRadiusTouchbarButton.Toggle += (s, value) =>
+            {
+                if (value)
+                    this.TouchBarMode = GeometryStarMode.InnerRadius;
+                else
+                    this.TouchBarMode = GeometryStarMode.None;
+            };
+
+            //Number
+            this.InnerRadiusTouchbarSlider.Unit = "%";
+            this.InnerRadiusTouchbarSlider.NumberMinimum = 0;
+            this.InnerRadiusTouchbarSlider.NumberMaximum = 100;
+            this.InnerRadiusTouchbarSlider.ValueChanged += (sender, value) =>
+            {
+                float innerRadius = (float)value / 100.0f;
+                if (innerRadius < 0.0f) innerRadius = 0.0f;
+                if (innerRadius > 1.0f) innerRadius = 1.0f;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set star layer inner radius");
+
+                //Selection
+                this.SelectionViewModel.GeometryStarInnerRadius = innerRadius;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryStar)
+                    {
+                        GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
+
+                        var previous = geometryStarLayer.InnerRadius;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryStarLayer layer2 = geometryStarLayer;
+
+                            layer2.InnerRadius = previous;
+                        });
+
+                        geometryStarLayer.InnerRadius = innerRadius;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+        private void ConstructInnerRadius2()
+        {
+            //History
+            LayersPropertyHistory history = null;
+
+            //Value
+            this.InnerRadiusTouchbarSlider.Minimum = 0d;
+            this.InnerRadiusTouchbarSlider.Maximum = 100d;
+            this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) =>
+            {
+                history = new LayersPropertyHistory("Set star layer innerRadius");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryStar)
+                    {
+                        GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
+                        geometryStarLayer.CacheInnerRadius();
+                    }
+                });
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.InnerRadiusTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            {
+                float innerRadius = (float)value / 100.0f;
+                if (innerRadius < 0.0f) innerRadius = 0.0f;
+                if (innerRadius > 1.0f) innerRadius = 1.0f;
+
+                //Selection
+                this.SelectionViewModel.GeometryStarInnerRadius = innerRadius;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryStar)
+                    {
+                        GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
+                        geometryStarLayer.InnerRadius = innerRadius;
+                    }
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            this.InnerRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float innerRadius = (float)value / 100.0f;
+                if (innerRadius < 0.0f) innerRadius = 0.0f;
+                if (innerRadius > 1.0f) innerRadius = 1.0f;
+
+                //Selection
+                this.SelectionViewModel.GeometryStarInnerRadius = innerRadius;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryStar)
+                    {
+                        GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
+
+                        var previous = geometryStarLayer.StartingInnerRadius;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryStarLayer layer2 = geometryStarLayer;
+
+                            layer2.InnerRadius = previous;
+                        });
+
+                        geometryStarLayer.InnerRadius = innerRadius;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            };
+        }
 
     }
 }

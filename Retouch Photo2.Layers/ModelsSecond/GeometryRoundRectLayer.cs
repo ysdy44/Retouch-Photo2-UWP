@@ -21,6 +21,8 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Content
         public float Corner = 0.25f;
+        public float StartingCorner { get; private set; }
+        public void CacheCorner() => this.StartingCorner = this.Corner;
 
         //@Construct
         /// <summary>

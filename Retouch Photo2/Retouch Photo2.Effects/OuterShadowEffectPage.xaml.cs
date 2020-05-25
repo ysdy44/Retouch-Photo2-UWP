@@ -142,7 +142,7 @@ namespace Retouch_Photo2.Effects.Models
                 bool isOn = this.Button.ToggleSwitch.IsOn;
 
                 //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect isOn");
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect outer shadow");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -177,7 +177,7 @@ namespace Retouch_Photo2.Effects.Models
             //Radius
             this.RadiusSlider.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect value");
+                history = new LayersPropertyHistory("Set effect outer shadow");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -241,7 +241,7 @@ namespace Retouch_Photo2.Effects.Models
             this.OpacitySlider.Maximum = 1;
             this.OpacitySlider.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect value");
+                history = new LayersPropertyHistory("Set effect outer shadow");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -304,7 +304,7 @@ namespace Retouch_Photo2.Effects.Models
             //Radius
             this.OffsetSlider.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect value");
+                history = new LayersPropertyHistory("Set effect outer shadow");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -367,7 +367,7 @@ namespace Retouch_Photo2.Effects.Models
             //Angle
             this.AnglePicker.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect value");
+                history = new LayersPropertyHistory("Set effect outer shadow");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -432,7 +432,7 @@ namespace Retouch_Photo2.Effects.Models
             this.ColorPicker.ColorChanged += (s, value) =>
             {
                 //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect value");
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect outer shadow");
 
                 //Selection
                 this.SolidColorBrush.Color = value;
@@ -469,7 +469,7 @@ namespace Retouch_Photo2.Effects.Models
             //Color
             this.ColorPicker.ColorChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect value");
+                history = new LayersPropertyHistory("Set effect outer shadow");
 
                 //Selection
                 this.SolidColorBrush.Color = value;

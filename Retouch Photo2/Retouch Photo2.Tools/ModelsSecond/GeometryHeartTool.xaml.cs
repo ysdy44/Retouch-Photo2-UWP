@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -41,81 +42,26 @@ namespace Retouch_Photo2.Tools.Models
                 }
             }
         }
-
-
+        
         //@Converter
         private int SpreadNumberConverter(float spread) => (int)(spread * 100.0f);
         private double SpreadValueConverter(float spread) => spread * 100d;
-
-
+        
         //@Construct
         public GeometryHeartTool()
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructSpread();
+
+            this.ConstructSpread1();
+            this.ConstructSpread2();
         }
-
-
-        //Spead
-        private void ConstructSpread()
-        {
-            //Button
-            this.SpreadTouchbarButton.Toggle += (s, value) =>
-            {
-                this.TouchBarMode = value;
-            };
-
-            //Number
-            this.SpreadTouchbarSlider.Unit = "%";
-            this.SpreadTouchbarSlider.NumberMinimum = 0;
-            this.SpreadTouchbarSlider.NumberMaximum = 100;
-            this.SpreadTouchbarSlider.NumberChange += (sender, number) =>
-            {
-                float spread = number / 100.0f;
-                this.SpreadChange(spread);
-            };
-
-            //Value
-            this.SpreadTouchbarSlider.Minimum = 0d;
-            this.SpreadTouchbarSlider.Maximum = 100d;
-            this.SpreadTouchbarSlider.ValueChangeStarted += (sender, value) => { };
-            this.SpreadTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float spread = (float)value / 100.0f;
-                this.SpreadChange(spread);
-            };
-            this.SpreadTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
-        }
-        private void SpreadChange(float spread)
-        {
-            if (spread < 0.0f) spread = 0.0f;
-            if (spread > 1.0f) spread = 1.0f;
-
-            this.SelectionViewModel.GeometryHeartSpread = spread;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type == LayerType.GeometryHeart)
-                {
-                    GeometryHeartLayer geometryHeartLayer = (GeometryHeartLayer)layer;
-                    geometryHeartLayer.Spread = spread;
-                }
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-
 
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
             this.TouchBarMode = false;
-        }
-        
+        }        
     }
     
     /// <summary>
@@ -165,6 +111,145 @@ namespace Retouch_Photo2.Tools.Models
         public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
 
         public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+
+    }
+
+    /// <summary>
+    /// <see cref="ITool"/>'s GeometryHeartTool.
+    /// </summary>
+    public partial class GeometryHeartTool : Page, ITool
+    {
+        //Spead
+        private void ConstructSpread1()
+        {
+            //Button
+            this.SpreadTouchbarButton.Toggle += (s, value) =>
+            {
+                this.TouchBarMode = value;
+            };
+
+            //Number
+            this.SpreadTouchbarSlider.Unit = "%";
+            this.SpreadTouchbarSlider.NumberMinimum = 0;
+            this.SpreadTouchbarSlider.NumberMaximum = 100;
+            this.SpreadTouchbarSlider.ValueChanged += (sender, value) =>
+            {
+                float spread = (float)value / 100.0f;
+                if (spread < 0.0f) spread = 0.0f;
+                if (spread > 1.0f) spread = 1.0f;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set heart layer spread");
+
+                //Selection
+                this.SelectionViewModel.GeometryHeartSpread = spread;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryHeart)
+                    {
+                        GeometryHeartLayer geometryHeartLayer = (GeometryHeartLayer)layer;
+
+                        var previous = geometryHeartLayer.Spread;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryHeartLayer layer2 = geometryHeartLayer;
+
+                            layer2.Spread = previous;
+                        });
+
+                        geometryHeartLayer.Spread = spread;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+        private void ConstructSpread2()
+        {
+            //History
+            LayersPropertyHistory history = null;
+
+            //Value
+            this.SpreadTouchbarSlider.Minimum = 0d;
+            this.SpreadTouchbarSlider.Maximum = 100d;
+            this.SpreadTouchbarSlider.ValueChangeStarted += (sender, value) =>
+            {
+                history = new LayersPropertyHistory("Set heart layer spread");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryHeart)
+                    {
+                        GeometryHeartLayer geometryHeartLayer = (GeometryHeartLayer)layer;
+                        geometryHeartLayer.CacheSpread();
+                    }
+                });
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.SpreadTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            {
+                float spread = (float)value / 100.0f;
+                if (spread < 0.0f) spread = 0.0f;
+                if (spread > 1.0f) spread = 1.0f;
+
+                //Selection
+                this.SelectionViewModel.GeometryHeartSpread = spread;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryHeart)
+                    {
+                        GeometryHeartLayer geometryHeartLayer = (GeometryHeartLayer)layer;
+                        geometryHeartLayer.Spread = spread;
+                    }
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            this.SpreadTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float spread = (float)value / 100.0f;
+                if (spread < 0.0f) spread = 0.0f;
+                if (spread > 1.0f) spread = 1.0f;
+
+                //Selection
+                this.SelectionViewModel.GeometryHeartSpread = spread;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryHeart)
+                    {
+                        GeometryHeartLayer geometryHeartLayer = (GeometryHeartLayer)layer;
+
+                        var previous = geometryHeartLayer.StartingSpread;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryHeartLayer layer2 = geometryHeartLayer;
+
+                            layer2.Spread = previous;
+                        });
+
+                        geometryHeartLayer.Spread = spread;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            };
+        }
 
     }
 }

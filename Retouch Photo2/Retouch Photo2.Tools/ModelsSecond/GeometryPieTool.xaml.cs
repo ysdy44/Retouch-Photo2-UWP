@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -40,81 +41,26 @@ namespace Retouch_Photo2.Tools.Models
                 }
             }
         }
-
-
+        
         //@Converter
         private int SweepAngleNumberConverter(float sweepAngle) => (int)(sweepAngle / FanKit.Math.Pi * 180f);
         private double SweepAngleValueConverter(float sweepAngle) => sweepAngle / System.Math.PI * 180d;
-
-
+        
         //@Construct
         public GeometryPieTool()
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructSweepAngle();
+
+            this.ConstructSweepAngle1();
+            this.ConstructSweepAngle2();
         }
-
-
-        //SweepAngle
-        private void ConstructSweepAngle()
-        {
-            //Button
-            this.SweepAngleTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = true;
-                else
-                    this.TouchBarMode = false;
-            };
-
-            //Number
-            this.SweepAngleTouchbarSlider.Unit = "º";
-            this.SweepAngleTouchbarSlider.NumberMinimum = 0;
-            this.SweepAngleTouchbarSlider.NumberMaximum = 360;
-            this.SweepAngleTouchbarSlider.NumberChange += (sender, number) =>
-            {
-                float sweepAngle = number / 180f * FanKit.Math.Pi;
-                this.SweepAngleChange(sweepAngle);
-            };
-
-            //Value
-            this.SweepAngleTouchbarSlider.Minimum = 0d;
-            this.SweepAngleTouchbarSlider.Maximum = 360d;
-            this.SweepAngleTouchbarSlider.ValueChangeStarted += (sender, value) => { };
-            this.SweepAngleTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
-                this.SweepAngleChange(sweepAngle);
-            };
-            this.SweepAngleTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
-        }
-        private void SweepAngleChange(float sweepAngle)
-        {
-            this.SelectionViewModel.GeometryPieSweepAngle = sweepAngle;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type == LayerType.GeometryPie)
-                {
-                    GeometryPieLayer geometryPieLayer = (GeometryPieLayer)layer;
-                    geometryPieLayer.SweepAngle = sweepAngle;
-                }
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-
-
+        
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
             this.TouchBarMode = false;
         }
-
     }
     
     /// <summary>
@@ -164,6 +110,149 @@ namespace Retouch_Photo2.Tools.Models
         public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
 
         public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+
+    }
+
+    /// <summary>
+    /// <see cref="ITool"/>'s GeometryPieTool.
+    /// </summary>
+    public partial class GeometryPieTool : Page, ITool
+    {
+        //SweepAngle
+        private void ConstructSweepAngle1()
+        {
+            //Button
+            this.SweepAngleTouchbarButton.Toggle += (s, value) =>
+            {
+                if (value)
+                    this.TouchBarMode = true;
+                else
+                    this.TouchBarMode = false;
+            };
+
+            //Number
+            this.SweepAngleTouchbarSlider.Unit = "º";
+            this.SweepAngleTouchbarSlider.NumberMinimum = 0;
+            this.SweepAngleTouchbarSlider.NumberMaximum = 360;
+            this.SweepAngleTouchbarSlider.ValueChanged += (sender, value) =>
+            {
+                float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set pie layer sweep angle");
+
+                //Selection
+                this.SelectionViewModel.GeometryPieSweepAngle = sweepAngle;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryPie)
+                    {
+                        GeometryPieLayer geometryPieLayer = (GeometryPieLayer)layer;
+
+                        var previous = geometryPieLayer.SweepAngle;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryPieLayer layer2 = geometryPieLayer;
+
+                            layer2.SweepAngle = previous;
+                        });
+
+                        geometryPieLayer.SweepAngle = sweepAngle;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+        private void ConstructSweepAngle2()
+        {
+            //History
+            LayersPropertyHistory history = null;
+
+            //Value
+            this.SweepAngleTouchbarSlider.Minimum = 0d;
+            this.SweepAngleTouchbarSlider.Maximum = 360d;
+            this.SweepAngleTouchbarSlider.ValueChangeStarted += (sender, value) =>
+            {
+                //History
+                history = new LayersPropertyHistory("Set pie layer sweep angle");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryPie)
+                    {
+                        GeometryPieLayer geometryPieLayer = (GeometryPieLayer)layer;
+                        geometryPieLayer.CacheSweepAngle();
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.SweepAngleTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            {
+                float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
+
+                //Selection
+                this.SelectionViewModel.GeometryPieSweepAngle = sweepAngle;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryPie)
+                    {
+                        GeometryPieLayer geometryPieLayer = (GeometryPieLayer)layer;
+                        geometryPieLayer.SweepAngle = sweepAngle;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            this.SweepAngleTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
+
+                //Selection
+                this.SelectionViewModel.GeometryPieSweepAngle = sweepAngle;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Type == LayerType.GeometryPie)
+                    {
+                        GeometryPieLayer geometryPieLayer = (GeometryPieLayer)layer;
+
+                        var previous = geometryPieLayer.StartingSweepAngle;
+                        history.UndoActions.Push(() =>
+                        {
+                            GeometryPieLayer layer2 = geometryPieLayer;
+
+                            layer2.SweepAngle = previous;
+                        });
+
+                        geometryPieLayer.SweepAngle = sweepAngle;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            };
+        }
 
     }
 }

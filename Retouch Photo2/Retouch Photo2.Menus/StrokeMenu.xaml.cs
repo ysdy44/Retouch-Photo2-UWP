@@ -92,7 +92,7 @@ namespace Retouch_Photo2.Menus.Models
                 CanvasStrokeStyle strokeStyle = this.StrokeStyle.Clone();
                 strokeStyle.DashStyle = dash;
                 this.StrokeStyle = strokeStyle;
-                this.SelectionViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -128,7 +128,7 @@ namespace Retouch_Photo2.Menus.Models
                 history = new LayersPropertyHistory("Set stroke width");
 
                 //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -142,7 +142,7 @@ namespace Retouch_Photo2.Menus.Models
                 float width = (float)value;
 
                 //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -157,7 +157,7 @@ namespace Retouch_Photo2.Menus.Models
 
                 //Selection
                 this.SelectionViewModel.StrokeWidth = width;
-                this.SelectionViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -194,7 +194,7 @@ namespace Retouch_Photo2.Menus.Models
                 history = new LayersPropertyHistory("Set stroke style");
 
                 //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -208,7 +208,7 @@ namespace Retouch_Photo2.Menus.Models
                 float offset = (float)value;
 
                 //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -225,7 +225,7 @@ namespace Retouch_Photo2.Menus.Models
                 CanvasStrokeStyle strokeStyle = this.StrokeStyle.Clone();
                 strokeStyle.DashOffset = offset;
                 this.StrokeStyle = strokeStyle;
-                this.SelectionViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -264,7 +264,7 @@ namespace Retouch_Photo2.Menus.Models
                 strokeStyle.StartCap = cap;
                 strokeStyle.EndCap = cap;
                 this.StrokeStyle = strokeStyle;
-                this.SelectionViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -303,7 +303,7 @@ namespace Retouch_Photo2.Menus.Models
                 CanvasStrokeStyle strokeStyle = this.StrokeStyle.Clone();
                 strokeStyle.LineJoin = join;
                 this.StrokeStyle = strokeStyle;
-                this.SelectionViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 

@@ -18,8 +18,8 @@ namespace Retouch_Photo2.Tools
         public event TouchValueChangeHandler ValueChangeDelta;
         /// <summary> Occurs when the value change is complete. </summary>
         public event TouchValueChangeHandler ValueChangeCompleted;
-        /// <summary> Occurs when the value changes. </summary>
-        public event ValueChangeHandler NumberChange;
+        /// <summary> Occurs when the value changed. </summary>
+        public event TouchValueChangeHandler ValueChanged;
                  
 
         #region DependencyProperty
@@ -129,7 +129,7 @@ namespace Retouch_Photo2.Tools
         {
             this.InitializeComponent();
 
-            this.NumberPicker.ValueChange += (s, value) => this.NumberChange?.Invoke(this, value);//Delegate
+            this.NumberPicker.ValueChange += (s, value) => this.ValueChanged?.Invoke(this, value);//Delegate
 
             this.Loaded += (s, e) => this.Value = this.value;
             this.SizeChanged += (s, e) => this.Value = this.value;

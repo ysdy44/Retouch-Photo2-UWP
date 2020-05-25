@@ -20,6 +20,8 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Content
         public float Mid = 0.5f;
+        public float StartingMid { get; private set; }
+        public void CacheMid() => this.StartingMid = this.Mid;
 
         //@Construct
         /// <summary>
